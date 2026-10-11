@@ -232,6 +232,24 @@ def test_ai_models_e_complete_via_agente_fake():
             assert out["a"].json()["response_text"] == "OI"
 
 
+def test_sync_rejeita_placeholder_de_ia_lote_inteiro():
+    """Regressão: placeholder 'generating' (texto vazio) no lote dava 422 e
+    travava toda a sincronização. O app agora só envia role=user pendentes;
+    aqui prova-se que o lote contaminado é rejeitado e o limpo passa."""
+    with TestClient(server.app) as client:
+        csrf = login(client)
+        contaminado = [umsg(), {"id": "x-reply-1", "origin": "mobile", "role": "assistant",
+                                "text": "", "created_at": "2026-10-11T12:00:00.000Z",
+                                "conversation_id": "conv-ai"}]
+        r = client.post("/api/sync", json={"messages": contaminado},
+                        headers={"X-CSRF-Token": csrf})
+        assert r.status_code == 422
+        limpo = client.post("/api/sync", json={"messages": [umsg()]},
+                            headers={"X-CSRF-Token": csrf})
+        assert limpo.status_code == 503  # passou na validação; PC offline
+        assert limpo.json()["detail"].startswith("Computador desconectado")
+
+
 def test_stream_delta_roteado_para_fila():
     with TestClient(server.app) as client:
         login(client)

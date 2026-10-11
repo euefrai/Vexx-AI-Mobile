@@ -193,7 +193,10 @@ async function syncAndRefresh() {
   const confirmados = [];
   try {
     while (pcOnline) {
-      const remaining = (await allMessages()).filter(m => m.status !== 'synced').slice(0, 100);
+      // Só mensagens do usuário entram no lote: placeholders de IA
+      // (texto vazio/em geração) contaminavam o lote com 422 e nada
+      // sincronizava. Respostas da IA vêm por /api/messages ou /api/ai.
+      const remaining = (await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
       if (!remaining.length) break;
       const result = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: remaining.map(({ status, want_ai, ...rest }) => rest) }) });
       const confirmed = new Set(result.confirmed_ids || []);
