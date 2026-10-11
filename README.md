@@ -24,8 +24,7 @@ FUNCIONAL:
 AINDA NÃO IMPLEMENTADO:
 
 - Memória/skills nativas do Hermes Agent (o proxy é só inferência).
-- Streaming real da tela.
-- Controle remoto do computador (mouse/teclado/gestos).
+- Vídeo fluido/WebRTC (a tela ao vivo é polling ~2 fps).
 
 PENDÊNCIAS CONHECIDAS:
 
@@ -146,6 +145,13 @@ via polling a cada 12 s ou pelo botão **Verificar agora**. Só marca `synced` a
 confirmação de gravação no SQLite. Com o navegador totalmente fechado não há sync em
 segundo plano (limitação real de PWA). O cache do navegador não é criptografado nesta
 versão — não compartilhe o aparelho desbloqueado.
+
+## Tela ao vivo e controle (Meu PC)
+
+A aba Meu PC exibe a tela real (~2 fps) e envia toque/teclado de verdade
+(`GET /api/screen`, `POST /api/input`, ambos com login + CSRF). Controle
+exige `JULIA_REMOTE=1` no PC — sem isso, somente visualização. Detalhes,
+gestos e limites em `docs/REMOTO_ANYDESK.md`.
 
 ## Resposta da IA (Hermes Proxy local)
 

@@ -373,14 +373,109 @@ $('clearCache').addEventListener('click', async () => {
 });
 $('attachButton').addEventListener('click', () => showToast('Anexos: previstos para a próxima etapa'));
 $('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente PC online' : 'Aguardando o agente local do Windows'));
-$('keyboardButton').addEventListener('click', () => showToast('Controle remoto de teclado ainda não implementado'));
-$('refreshButton').addEventListener('click', () => showToast('Transmissão remota ainda não implementada'));
-$('touchMode').addEventListener('click', () => showToast('Controles remotos ainda não implementados'));
-$('remoteFrame').addEventListener('click', event => {
-  const bounds = event.currentTarget.getBoundingClientRect(); const pointer = $('remotePointer');
-  pointer.style.display = 'block'; pointer.style.left = (event.clientX - bounds.left) + 'px'; pointer.style.top = (event.clientY - bounds.top) + 'px';
-  showToast('Toque simulado — nenhum comando foi enviado');
+// ── Controle remoto real (tela ao vivo + mouse/teclado) ──
+let remoteEnabled = false;
+let screenBusy = false;
+let touchStart = null;
+let touchMoved = false;
+let longPressed = false;
+let longTimer = null;
+let lastMove = 0;
+const desktopAtivo = () => !$('page-desktop').hidden;
+async function pullScreen() {
+  if (!authenticated || !pcOnline || !desktopAtivo() || !navigator.onLine || screenBusy) return;
+  screenBusy = true;
+  try {
+    const r = await api('/api/screen?max_w=800&q=50');
+    $('screenImg').src = 'data:image/jpeg;base64,' + r.imagem;
+    remoteEnabled = r.remote_enabled === true;
+    $('screenLabel').textContent = 'AO VIVO · ' + (r.ms || 0) + 'ms';
+    $('screenNote').textContent = remoteEnabled
+      ? 'Controle ativo: toque = clique, segurar = botão direito, arrastar = mover.'
+      : 'Somente visualização. Para controlar, defina JULIA_REMOTE=1 no PC e reinicie o agente.';
+  } catch (err) {
+    $('screenLabel').textContent = 'TELA INDISPONÍVEL';
+  } finally { screenBusy = false; }
+}
+setInterval(pullScreen, 1500);
+async function sendInput(cmd) {
+  if (!remoteEnabled) { showToast('Controle desativado no PC (JULIA_REMOTE=1).'); return; }
+  try { await api('/api/input', { method: 'POST', body: JSON.stringify(cmd) }); }
+  catch (err) { showToast(err.message || 'Comando recusado'); }
+}
+function normPos(ev) {
+  const r = $('remoteFrame').getBoundingClientRect();
+  const t = ev.touches && ev.touches[0] ? ev.touches[0] : ev;
+  return { x: Math.min(1, Math.max(0, (t.clientX - r.left) / r.width)),
+           y: Math.min(1, Math.max(0, (t.clientY - r.top) / r.height)) };
+}
+function mostraPonteiro(p) {
+  const frame = $('remoteFrame').getBoundingClientRect();
+  const pointer = $('remotePointer');
+  pointer.style.display = 'block';
+  pointer.style.left = (p.x * frame.width) + 'px';
+  pointer.style.top = (p.y * frame.height) + 'px';
+}
+const frame = $('remoteFrame');
+frame.addEventListener('touchstart', ev => {
+  if (!desktopAtivo()) return;
+  ev.preventDefault();
+  const p = normPos(ev);
+  touchStart = p; touchMoved = false; longPressed = false;
+  mostraPonteiro(p);
+  clearTimeout(longTimer);
+  longTimer = setTimeout(() => {
+    longPressed = true;
+    sendInput({ kind: 'right', ...p });
+  }, 600);
+}, { passive: false });
+frame.addEventListener('touchmove', ev => {
+  if (!touchStart) return;
+  ev.preventDefault();
+  const p = normPos(ev);
+  mostraPonteiro(p);
+  const dx = (p.x - touchStart.x) * frame.getBoundingClientRect().width;
+  const dy = (p.y - touchStart.y) * frame.getBoundingClientRect().height;
+  if (Math.hypot(dx, dy) > 12) {
+    touchMoved = true;
+    clearTimeout(longTimer);
+    const agora = Date.now();
+    if (agora - lastMove > 90) { lastMove = agora; sendInput({ kind: 'move', ...p }); }
+  }
+}, { passive: false });
+frame.addEventListener('touchend', ev => {
+  if (!touchStart) return;
+  ev.preventDefault();
+  clearTimeout(longTimer);
+  const p = touchStart;
+  touchStart = null;
+  if (!touchMoved && !longPressed) sendInput({ kind: 'click', ...p });
 });
+frame.addEventListener('click', ev => {
+  if (!desktopAtivo() || ev.detail === 0) return; // toque já tratado acima
+  const p = normPos(ev);
+  mostraPonteiro(p);
+  sendInput({ kind: 'click', ...p });
+});
+$('keyboardButton').addEventListener('click', () => {
+  const campo = $('remoteKeys');
+  campo.value = '';
+  campo.focus();
+  showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado indisponível: controle desativado no PC.');
+});
+$('remoteKeys').addEventListener('input', ev => {
+  const v = ev.target.value;
+  if (v.length > (ev.target._last || '').length && v.length) {
+    sendInput({ kind: 'text', text: v.slice(ev.target._last ? ev.target._last.length : 0) });
+  }
+  ev.target._last = v;
+});
+$('remoteKeys').addEventListener('keydown', ev => {
+  if (ev.key === 'Enter') { sendInput({ kind: 'key', key: 'enter' }); ev.target.value = ''; ev.target._last = ''; }
+  else if (ev.key === 'Backspace' && !ev.target.value) sendInput({ kind: 'key', key: 'backspace' });
+});
+$('refreshButton').addEventListener('click', () => { pullScreen(); });
+$('touchMode').addEventListener('click', () => showToast('Modo toque: clique, segurar, arrastar.'));
 $('fullscreen').addEventListener('click', async () => {
   const element = $('remoteFrame');
   if (!document.fullscreenEnabled) { showToast('Tela cheia indisponível'); return; }

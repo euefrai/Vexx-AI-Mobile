@@ -3,3 +3,6 @@ uvicorn[standard]>=0.30,<1
 websockets>=14,<18
 argon2-cffi>=23.1,<26
 itsdangerous>=2.2,<3
+# Somente do agente no PC (captura de tela). O relay ignora se ausentes.
+mss>=9,<11
+pillow>=10,<13

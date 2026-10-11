@@ -104,6 +104,16 @@ class AIRequest(BaseModel):
     model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
 
 
+class InputBody(BaseModel):
+    kind: str = Field(pattern=r"^(move|click|double|right|scroll|key|text)$")
+    x: float | None = Field(default=None, ge=0.0, le=1.0)
+    y: float | None = Field(default=None, ge=0.0, le=1.0)
+    dx: int = Field(default=0, ge=-10, le=10)
+    dy: int = Field(default=0, ge=-10, le=10)
+    key: str = Field(default="", max_length=20)
+    text: str = Field(default="", max_length=200)
+
+
 # Single Render instance / single paired PC. All values intentionally volatile.
 class AgentRelay:
     def __init__(self):
@@ -243,6 +253,30 @@ async def ai_complete(request: Request, body: AIRequest):
         raise HTTPException(503, "Resposta da IA não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
             "model": result.get("model", "")}
+
+
+@app.get("/api/screen")
+async def screen(request: Request, max_w: int = 800, q: int = 55):
+    """Foto atual da tela do PC (JPEG base64). Exige login + CSRF."""
+    require_csrf(request)
+    result = await relay.exchange({"type": "screen",
+                                   "max_w": max(320, min(max_w, 960)),
+                                   "q": max(30, min(q, 80))}, timeout=20.0)
+    if result.get("type") != "screen":
+        raise HTTPException(503, result.get("error", "Tela indisponível"))
+    return {"imagem": result["imagem"], "largura": result.get("largura", 0),
+            "altura": result.get("altura", 0), "ms": result.get("ms", 0),
+            "remote_enabled": result.get("remote_enabled", False)}
+
+
+@app.post("/api/input")
+async def remote_input(request: Request, body: InputBody):
+    """Executa mouse/teclado no PC. Exige login + CSRF; agente exige JULIA_REMOTE=1."""
+    require_csrf(request)
+    result = await relay.exchange({"type": "input", "cmd": body.model_dump()}, timeout=15.0)
+    if result.get("type") != "input_done":
+        raise HTTPException(503, result.get("error", "Comando recusado"))
+    return {"ok": True, "kind": result.get("kind", "")}
 
 
 @app.get("/api/ai/models")

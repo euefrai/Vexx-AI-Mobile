@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import hermes_bridge
+import remoto
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed
 
@@ -280,6 +281,10 @@ def run():
                     exc)
     pause = 2
     log.info("SQLite local preparado: %s", database_path())
+    if remoto.entrada_ativada():
+        log.warning("CONTROLE REMOTO ATIVO (JULIA_REMOTE=1): cliques/teclas do celular serão executados. Comandos registrados no log.")
+    else:
+        log.info("Controle remoto desativado (somente visualização). Defina JULIA_REMOTE=1 para ativar.")
     cancelados: dict = {}
     while True:
         try:
@@ -322,6 +327,23 @@ def run():
                         if sessao is not None:
                             sessao.parar.set()
                         continue
+                    elif req.get("type") == "screen":
+                        try:
+                            img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
+                            reply = {"request_id": request_id, "type": "screen", **img,
+                                     "remote_enabled": remoto.entrada_ativada()}
+                        except remoto.RemotoErro as exc:
+                            reply = {"request_id": request_id, "type": "screen_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "input":
+                        try:
+                            cmd = remoto.validar_comando(req.get("cmd", {}))
+                            res = remoto.executar(cmd)
+                            log.info("remoto: %s executado", res["kind"])
+                            reply = {"request_id": request_id, "type": "input_done", **res}
+                        except remoto.RemotoErro as exc:
+                            reply = {"request_id": request_id, "type": "input_error",
+                                     "error": str(exc), "codigo": exc.codigo}
                     else:
                         continue
                     websocket.send(json.dumps(reply, ensure_ascii=False))
