@@ -1,0 +1,42 @@
+# Segredos e ambiente (nunca versionar valores reais; ver .env.example)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# SQLite e bancos locais (o banco definitivo vive no PC, nunca no repo)
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Node / build
+node_modules/
+dist/
+
+# Testes e cobertura
+.coverage
+coverage/
+.pytest_cache/
+htmlcov/
+
+# Logs e temporários
+*.log
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
