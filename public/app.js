@@ -18,6 +18,8 @@ let authenticated = false;
 let pcOnline = false;
 let busy = false;
 let toastTimer;
+let aiAbort = null;
+let modelsLoadedAt = 0;
 let activeConversation = localStorage.getItem('julia-active-conversation') || newId();
 localStorage.setItem('julia-active-conversation', activeConversation);
 
@@ -69,21 +71,43 @@ async function clearStorage() {
 function appendMessage(row) {
   const type = row.role === 'assistant' ? 'ai' : 'user';
   const wrapper = document.createElement('div');
-  wrapper.className = 'message ' + type;
+  wrapper.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
+  wrapper.dataset.mid = row.id;
   if (type === 'ai') {
     const icon = document.createElement('div'); icon.className = 'bubble-avatar'; icon.textContent = '✦'; wrapper.appendChild(icon);
   }
   const content = document.createElement('div'); content.className = 'message-content';
   if (type === 'ai') { const sender = document.createElement('div'); sender.className = 'sender'; sender.textContent = 'Júlia'; content.appendChild(sender); }
-  const bubble = document.createElement('div'); bubble.className = 'bubble'; bubble.textContent = row.text;
-  content.appendChild(bubble);
+  const bubble = document.createElement('div'); bubble.className = 'bubble';
+  if (row.status === 'generating') {
+    const t = document.createElement('span'); t.className = 'typing'; t.textContent = 'gerando resposta…'; bubble.appendChild(t);
+    const stop = document.createElement('button'); stop.type = 'button'; stop.className = 'stop-gen'; stop.dataset.stop = row.id;
+    stop.textContent = '■ Interromper'; content.appendChild(bubble); content.appendChild(stop);
+  } else {
+    bubble.textContent = row.text;
+    content.appendChild(bubble);
+  }
   if (type === 'user') {
     const ack = document.createElement('div');
     ack.className = 'message-ack ' + (row.status === 'synced' ? 'synced' : 'pending');
     ack.textContent = row.status === 'synced' ? '✓ Salva no computador' : '◷ Salva no celular · aguardando sincronização';
     content.appendChild(ack);
+  } else if (row.status === 'failed') {
+    const retry = document.createElement('div'); retry.className = 'message-retry';
+    retry.textContent = 'Toque para tentar de novo'; content.appendChild(retry);
+  } else if (row.model) {
+    const meta = document.createElement('div'); meta.className = 'message-ack synced'; meta.textContent = row.model;
+    content.appendChild(meta);
   }
   wrapper.appendChild(content); conversation.appendChild(wrapper);
+}
+function nearBottom(el) { return el.scrollHeight - el.scrollTop - el.clientHeight < 220; }
+function scrollChat() {
+  const page = $('page-chat');
+  if (nearBottom(conversation) || nearBottom(page)) {
+    conversation.scrollTop = conversation.scrollHeight;
+    page.scrollTop = page.scrollHeight;
+  }
 }
 async function renderMessages() {
   if (!db) return;
@@ -95,7 +119,7 @@ async function renderMessages() {
     welcome.textContent = '✦ Suas mensagens ficam neste aparelho e serão enviadas para o SQLite do computador assim que ele estiver online.';
     conversation.appendChild(welcome);
   } else rows.forEach(appendMessage);
-  const page = $('page-chat'); page.scrollTop = page.scrollHeight;
+  conversation.scrollTop = conversation.scrollHeight;
   const pendingCount = (await allMessages()).filter(m => m.status !== 'synced').length;
   $('pendingCount').textContent = `${pendingCount} pendente${pendingCount === 1 ? '' : 's'}`;
   $('syncCounter').textContent = String(pendingCount);
@@ -153,23 +177,30 @@ async function checkStatus() {
     const status = await api('/api/status');
     pcOnline = status.pc_online === true;
     updateConnection();
-    if (pcOnline) await syncAndRefresh();
+    if (pcOnline) {
+      const confirmados = await syncAndRefresh();
+      await loadModels(false);
+      for (const m of confirmados.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
+    }
   } catch (err) {
     pcOnline = false; updateConnection();
     if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
   }
 }
 async function syncAndRefresh() {
-  if (busy || !authenticated || !pcOnline || !db) return;
+  if (busy || !authenticated || !pcOnline || !db) return [];
   busy = true;
+  const confirmados = [];
   try {
     while (pcOnline) {
       const remaining = (await allMessages()).filter(m => m.status !== 'synced').slice(0, 100);
       if (!remaining.length) break;
-      const result = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: remaining.map(({ status, ...rest }) => rest) }) });
+      const result = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: remaining.map(({ status, want_ai, ...rest }) => rest) }) });
       const confirmed = new Set(result.confirmed_ids || []);
       if (!confirmed.size) break;
-      await storeMessages(remaining.filter(m => confirmed.has(m.id)).map(m => ({ ...m, status: 'synced' })));
+      const batch = remaining.filter(m => confirmed.has(m.id));
+      await storeMessages(batch.map(m => ({ ...m, status: 'synced' })));
+      confirmados.push(...batch);
     }
     const remote = await api('/api/messages');
     const local = new Map((await allMessages()).map(m => [m.id, m]));
@@ -180,23 +211,136 @@ async function syncAndRefresh() {
     }
     if (additions.length) await storeMessages(additions);
     await renderMessages();
+    return confirmados;
   } catch (err) {
     if (err.status === 503) pcOnline = false;
     if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
     updateConnection();
+    return confirmados;
   } finally { busy = false; }
 }
+function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
+async function loadModels(forcar) {
+  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: PC online' : 'IA: PC desconectado'; return; }
+  if (!forcar && Date.now() - modelsLoadedAt < 300000) return;
+  try {
+    const r = await api('/api/ai/models');
+    modelsLoadedAt = Date.now();
+    const sel = $('modelSelect');
+    const atual = modeloAtivo() || r.default || '';
+    sel.replaceChildren();
+    for (const id of r.models || []) {
+      const o = document.createElement('option'); o.value = id; o.textContent = id;
+      if (id === atual) o.selected = true;
+      sel.appendChild(o);
+    }
+    if (atual && ![...(r.models || [])].includes(atual)) {
+      const o = document.createElement('option'); o.value = atual; o.textContent = atual + ' (salvo)'; o.selected = true;
+      sel.appendChild(o);
+    }
+    if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
+    $('aiStatus').textContent = 'IA pronta · ' + (modeloAtivo() || r.default || '?');
+  } catch (err) {
+    $('aiStatus').textContent = 'IA: Hermes indisponível no PC';
+  }
+}
+async function requestAI(userRow) {
+  if (!authenticated || !pcOnline || !db || aiAbort) return;
+  const replyId = userRow.id + '-r1';
+  const ja = (await allMessages()).find(m => m.id === replyId);
+  if (ja && (ja.status === 'synced' || ja.status === 'generating')) return;
+  const placeholder = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile',
+    role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating',
+    model: modeloAtivo() };
+  try { await storeMessages([placeholder]); } catch (_) { return; }
+  await renderMessages();
+  const qs = new URLSearchParams({ message_id: userRow.id,
+    conversation_id: userRow.conversation_id, model: modeloAtivo() });
+  aiAbort = new AbortController();
+  let cur = '';
+  const bubble = () => conversation.querySelector('[data-mid="' + replyId + '"] .bubble');
+  try {
+    const res = await fetch('/api/ai/stream?' + qs.toString(), {
+      headers: { 'Accept': 'text/event-stream', 'X-CSRF-Token': csrf },
+      credentials: 'same-origin', signal: aiAbort.signal });
+    if (!res.ok || !res.body) throw new Error('IA indisponível (' + res.status + ')');
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let idx;
+      while ((idx = buf.indexOf('\n\n')) >= 0) {
+        const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
+        let tipo = '', dados = '{}';
+        for (const ln of evt.split('\n')) {
+          if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
+          else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
+        }
+        let d = {};
+        try { d = JSON.parse(dados); } catch (_) { continue; }
+        if (tipo === 'delta') {
+          cur += d.trecho || '';
+          const el = bubble();
+          if (el) el.textContent = cur;
+          if (nearBottom(conversation)) conversation.scrollTop = conversation.scrollHeight;
+        } else if (tipo === 'done') {
+          await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
+            origin: 'mobile', role: 'assistant', text: d.response_text || cur,
+            created_at: new Date().toISOString(), status: 'synced', model: d.model || modeloAtivo() }]);
+        } else if (tipo === 'cancelled') {
+          await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
+            origin: 'mobile', role: 'assistant', text: d.partial || cur,
+            created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+        } else if (tipo === 'error') {
+          throw new Error(d.error || 'IA indisponível');
+        }
+      }
+    }
+  } catch (err) {
+    const interrompida = aiAbort && aiAbort.signal.aborted;
+    await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
+      origin: 'mobile', role: 'assistant', text: cur,
+      created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+    showToast(interrompida ? 'Geração interrompida. Toque na resposta para retomar.' : ('IA falhou: ' + (err.message || 'tente de novo')));
+  } finally {
+    aiAbort = null;
+    await renderMessages();
+  }
+}
+function stopAI() { if (aiAbort) aiAbort.abort(); }
+conversation.addEventListener('click', event => {
+  const stop = event.target.closest('[data-stop]');
+  if (stop) { stopAI(); return; }
+  const falha = event.target.closest('.message.failed');
+  if (falha) {
+    const mid = falha.dataset.mid || '';
+    const uid = mid.endsWith('-r1') ? mid.slice(0, -3) : '';
+    allMessages().then(rows => {
+      const user = rows.find(m => m.id === uid);
+      if (user) requestAI(user);
+    });
+  }
+});
+$('modelSelect').addEventListener('change', event => {
+  localStorage.setItem('julia-model', event.target.value);
+  $('aiStatus').textContent = 'IA pronta · ' + event.target.value;
+});
 async function sendMessage(raw) {
   const value = raw.trim(); if (!value) return;
   if (!db) { showToast('Este navegador não permitiu salvar o cache local'); return; }
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
   const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user',
-    text: value, created_at: new Date().toISOString(), status: 'pending' };
+    text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
   try {
     // Only clear the composer after a complete IndexedDB transaction.
     await storeMessages([row]); messageInput.value = ''; await renderMessages();
-    if (pcOnline) syncAndRefresh();
-    else showToast('Mensagem salva neste celular. Sincronização pendente.');
+    if (pcOnline && authenticated) {
+      const confirmados = await syncAndRefresh();
+      if (confirmados.some(m => m.id === row.id)) requestAI({ ...row, status: 'synced' });
+    } else showToast('Mensagem salva neste celular. Sincronização pendente.');
     if (navigator.storage?.persist) navigator.storage.persist().catch(() => {});
   } catch (err) {
     showToast('Não foi possível salvar a mensagem: verifique o armazenamento');
@@ -235,7 +379,14 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) chec
 setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
 (async function init() {
   navigate('chat');
-  try { db = await openDb(); await renderMessages(); }
+  try {
+    db = await openDb();
+    // Recupera interrupções: geração morta com o app fechado vira retry.
+    const rows = await allMessages();
+    const presas = rows.filter(m => m.status === 'generating');
+    if (presas.length) await storeMessages(presas.map(m => ({ ...m, status: 'failed' })));
+    await renderMessages();
+  }
   catch (err) { showToast('Armazenamento local indisponível'); $('pendingCount').textContent = 'Cache indisponível'; }
   await restoreSession(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {

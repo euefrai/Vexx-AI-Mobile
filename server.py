@@ -98,11 +98,18 @@ class SyncBody(BaseModel):
     messages: list[Message] = Field(min_length=1, max_length=100)
 
 
+class AIRequest(BaseModel):
+    message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
+    conversation_id: str = Field(min_length=3, max_length=100)
+    model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
+
+
 # Single Render instance / single paired PC. All values intentionally volatile.
 class AgentRelay:
     def __init__(self):
         self.ws: WebSocket | None = None
         self.pending: dict[str, asyncio.Future] = {}
+        self.streams: dict[str, asyncio.Queue] = {}
         self.send_lock = asyncio.Lock()
 
     async def exchange(self, payload: dict, timeout: float = 12.0) -> dict:
@@ -127,6 +134,12 @@ class AgentRelay:
         for future in self.pending.values():
             if not future.done():
                 future.set_exception(HTTPException(503, "Agente desconectado"))
+        for fila in self.streams.values():
+            try:
+                fila.put_nowait({"type": "ai_error", "error": "Agente desconectado",
+                                 "codigo": "desconectado"})
+            except asyncio.QueueFull:
+                pass
 
 
 relay = AgentRelay()
@@ -217,6 +230,93 @@ async def messages(request: Request):
     return {"messages": result.get("messages", [])[:200]}
 
 
+@app.post("/api/ai")
+async def ai_complete(request: Request, body: AIRequest):
+    """Resposta completa (sem streaming). Idempotente por message_id no agente."""
+    require_csrf(request)
+    result = await relay.exchange({"type": "ai", "message_id": body.message_id,
+                                   "conversation_id": body.conversation_id,
+                                   "model": body.model}, timeout=180.0)
+    if result.get("type") != "ai_done" or "response_text" not in result:
+        if result.get("type") == "ai_error":
+            raise HTTPException(503, result.get("error", "IA indisponível"))
+        raise HTTPException(503, "Resposta da IA não recebida")
+    return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
+            "model": result.get("model", "")}
+
+
+@app.get("/api/ai/models")
+async def ai_models(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "ai_models"}, timeout=30.0)
+    if result.get("type") == "ai_error":
+        raise HTTPException(503, result.get("error", "Hermes indisponível"))
+    if result.get("type") != "ai_models":
+        raise HTTPException(503, "Modelos indisponíveis")
+    return {"models": result.get("models", [])[:500], "default": result.get("default", "")}
+
+
+@app.get("/api/ai/stream")
+async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
+                    model: str = ""):
+    """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
+    require_csrf(request)
+    if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
+        raise HTTPException(422, "Parâmetros inválidos")
+    from fastapi.responses import StreamingResponse
+
+    ws = relay.ws
+    if ws is None:
+        raise HTTPException(503, "Computador desconectado; mensagens continuam no celular")
+    stream_id = uuid.uuid4().hex
+    fila: asyncio.Queue = asyncio.Queue()
+    relay.streams[stream_id] = fila
+    payload = {"type": "ai_stream", "message_id": message_id,
+               "conversation_id": conversation_id, "model": model[:120]}
+
+    async def gerar():
+        concluido = False
+        try:
+            async with relay.send_lock:
+                if relay.ws is not ws:
+                    yield 'event: error\ndata: {"error": "Agente reconectando"}\n\n'
+                    return
+                await ws.send_json({**payload, "request_id": stream_id})
+            while True:
+                try:
+                    item = await asyncio.wait_for(fila.get(), timeout=180.0)
+                except asyncio.TimeoutError:
+                    yield 'event: error\ndata: {"error": "Tempo esgotado aguardando a IA"}\n\n'
+                    return
+                tipo = item.get("type")
+                if tipo == "ai_delta":
+                    yield f"event: delta\ndata: {json.dumps({'seq': item.get('seq', 0), 'trecho': item.get('trecho', '')}, ensure_ascii=False)}\n\n"
+                elif tipo == "ai_done":
+                    concluido = True
+                    yield f"event: done\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'response_text': item.get('response_text', ''), 'model': item.get('model', '')}, ensure_ascii=False)}\n\n"
+                    return
+                elif tipo == "ai_cancelled":
+                    concluido = True
+                    yield f"event: cancelled\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'partial': item.get('partial', '')}, ensure_ascii=False)}\n\n"
+                    return
+                else:
+                    concluido = True
+                    yield f"event: error\ndata: {json.dumps({'error': item.get('error', 'IA indisponível'), 'codigo': item.get('codigo', 'erro')}, ensure_ascii=False)}\n\n"
+                    return
+        finally:
+            relay.streams.pop(stream_id, None)
+            if not concluido and relay.ws is not None and relay.ws is ws:
+                try:
+                    async with relay.send_lock:
+                        await ws.send_json({"request_id": stream_id, "type": "ai_cancel",
+                                            "target": stream_id})
+                except (RuntimeError, OSError):
+                    pass
+
+    return StreamingResponse(gerar(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
 @app.websocket("/api/agent/ws")
 async def agent_ws(websocket: WebSocket):
     if not is_ready():
@@ -242,6 +342,16 @@ async def agent_ws(websocket: WebSocket):
             request_id = body.get("request_id") if isinstance(body, dict) else None
             if not isinstance(request_id, str):
                 continue
+            if isinstance(body, dict) and body.get("type") in (
+                    "ai_delta", "ai_done", "ai_error", "ai_cancelled"):
+                fila = relay.streams.get(request_id)
+                if fila is not None:
+                    try:
+                        fila.put_nowait(body)
+                    except asyncio.QueueFull:
+                        pass
+                    continue
+                # Sem stream ativa: ai_done/ai_error de POST /api/ai caem no pending.
             pending = relay.pending.get(request_id)
             if pending and not pending.done():
                 pending.set_result(body)

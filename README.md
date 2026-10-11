@@ -23,7 +23,7 @@ FUNCIONAL:
 
 AINDA NÃO IMPLEMENTADO:
 
-- Resposta real da IA da extensão (mensagens são guardadas/sincronizadas, sem resposta).
+- Memória/skills nativas do Hermes Agent (o proxy é só inferência).
 - Streaming real da tela.
 - Controle remoto do computador (mouse/teclado/gestos).
 
@@ -147,6 +147,20 @@ confirmação de gravação no SQLite. Com o navegador totalmente fechado não h
 segundo plano (limitação real de PWA). O cache do navegador não é criptografado nesta
 versão — não compartilhe o aparelho desbloqueado.
 
+## Resposta da IA (Hermes Proxy local)
+
+Com o PC online e o Hermes Proxy rodando (`hermes proxy start`, padrão
+`http://127.0.0.1:8645/v1`), cada mensagem sincronizada gera uma resposta real
+do modelo (`JULIA_AI_MODEL`, padrão `poolside/laguna-s-2.1:free`), exibida com
+streaming progressivo no celular e persistida no SQLite (`ai_requests` +
+mensagem `assistant`, idempotente por mensagem).
+
+- `GET /api/ai/models` lista os modelos reais do proxy para o seletor do app.
+- `POST /api/ai` devolve a resposta completa; `GET /api/ai/stream` faz SSE com
+  deltas; fechar a conexão cancela (parcial preservada, sem retry automático).
+- Sem Hermes: a mensagem fica guardada e o app oferece tentar de novo.
+- O celular nunca fala com o proxy; o proxy nunca recebe tokens do Render.
+
 ## Testes automatizados
 
 ```bash
@@ -158,11 +172,14 @@ node --check public/app.js
 9 testes: autenticação, CSRF/origem, brute-force (429 após 5 tentativas), validação de
 payloads (422), SQLite idempotente, texto adversarial (XSS/SQLi) armazenado com
 segurança, período offline, handshake do agente, ACK via WebSocket e sync duplicado
-concorrente. O CI (GitHub Actions) repete pytest + checagem do JS a cada push.
+concorrente. +9 de IA: bridge/SSRF/SSE, idempotência sem rechamada, auth e roteamento
+de stream no relay, e E2E com processos reais (relay + agente + Hermes falso).
+O CI (GitHub Actions) repete pytest + checagem do JS a cada push.
 
 ## Limitações atuais
 
-- Sem resposta da IA: exige bridge da extensão ou IA em nuvem (fases futuras).
+- Sem resposta da IA com PC offline ou Hermes parado: a mensagem fica guardada e
+  o app oferece tentar de novo (sem duplicar a inferência).
 - Controle remoto é simulação visual com avisos explícitos na interface.
 - Um PC pareado e um usuário; sem tela de cadastro.
 - Login depende do Render estar disponível; reabrir a PWA totalmente offline não
