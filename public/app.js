@@ -267,6 +267,12 @@ async function requestAI(userRow) {
     const reader = res.body.getReader();
     const dec = new TextDecoder();
     let buf = '';
+    let lastEvt = Date.now();
+    let travou = false;
+    const stall = setInterval(() => {
+      if (Date.now() - lastEvt > 75000 && aiAbort) { travou = true; aiAbort.abort(); }
+    }, 5000);
+    try {
     for (;;) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -279,6 +285,8 @@ async function requestAI(userRow) {
           if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
           else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
         }
+        if (!tipo) continue; // ping/keepalive
+        lastEvt = Date.now();
         let d = {};
         try { d = JSON.parse(dados); } catch (_) { continue; }
         if (tipo === 'delta') {
@@ -299,12 +307,15 @@ async function requestAI(userRow) {
         }
       }
     }
+    } finally { clearInterval(stall); }
   } catch (err) {
     const interrompida = aiAbort && aiAbort.signal.aborted;
     await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
       origin: 'mobile', role: 'assistant', text: cur,
       created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
-    showToast(interrompida ? 'Geração interrompida. Toque na resposta para retomar.' : ('IA falhou: ' + (err.message || 'tente de novo')));
+    showToast(travou ? 'IA sem resposta há 75s. Verifique o agente/Hermes e toque para retomar.'
+      : interrompida ? 'Geração interrompida. Toque na resposta para retomar.'
+      : ('IA falhou: ' + (err.message || 'tente de novo')));
   } finally {
     aiAbort = null;
     await renderMessages();

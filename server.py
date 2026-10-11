@@ -276,6 +276,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
 
     async def gerar():
         concluido = False
+        espera = 0.0
         try:
             async with relay.send_lock:
                 if relay.ws is not ws:
@@ -284,10 +285,14 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                 await ws.send_json({**payload, "request_id": stream_id})
             while True:
                 try:
-                    item = await asyncio.wait_for(fila.get(), timeout=180.0)
+                    item = await asyncio.wait_for(fila.get(), timeout=15.0)
                 except asyncio.TimeoutError:
-                    yield 'event: error\ndata: {"error": "Tempo esgotado aguardando a IA"}\n\n'
-                    return
+                    espera += 15.0
+                    if espera >= 180.0:
+                        yield 'event: error\ndata: {"error": "Tempo esgotado aguardando a IA"}\n\n'
+                        return
+                    yield ": ping\n\n"  # mantém SSE vivo através de proxies
+                    continue
                 tipo = item.get("type")
                 if tipo == "ai_delta":
                     yield f"event: delta\ndata: {json.dumps({'seq': item.get('seq', 0), 'trecho': item.get('trecho', '')}, ensure_ascii=False)}\n\n"

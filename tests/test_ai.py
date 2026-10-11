@@ -243,6 +243,10 @@ def test_stream_delta_roteado_para_fila():
                 ws.send_json({"request_id": "s1", "type": "ai_delta", "seq": 1, "trecho": "Olá"})
                 ws.send_json({"request_id": "s1", "type": "ai_done", "reply_id": "r",
                               "response_text": "Olá", "model": "m"})
+                for _ in range(100):
+                    if q.qsize() >= 2:
+                        break
+                    time.sleep(0.05)
                 assert q.get_nowait()["trecho"] == "Olá"
                 assert q.get_nowait()["type"] == "ai_done"
             finally:

@@ -201,23 +201,32 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
     try:
         prep = ai_preparar(db, payload, cfg)
         if "error" in prep or "replay" in prep or "busy" in prep:
-            with sessao.lock_envio:
-                websocket.send(json.dumps({"request_id": request_id, "type": "ai_error",
-                                           **{k: prep[k] for k in ("error", "codigo", "reply_id",
-                                                                   "response_text", "model", "busy")
-                                               if k in prep}},
-                                          ensure_ascii=False))
+            try:
+                with sessao.lock_envio:
+                    websocket.send(json.dumps({"request_id": request_id, "type": "ai_error",
+                                               **{k: prep[k] for k in ("error", "codigo", "reply_id",
+                                                                       "response_text", "model", "busy")
+                                                   if k in prep}},
+                                              ensure_ascii=False))
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
             return
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         ai_marcar(db, mid, conv, modelo, "processing")
         messages = [{"role": "system", "content": cfg["system"]},
                     *contexto_conversa(db, conv, cfg["context"])]
 
+        def enviar(obj):
+            try:
+                with sessao.lock_envio:
+                    websocket.send(json.dumps(obj, ensure_ascii=False))
+            except (ConnectionClosed, OSError, RuntimeError, ValueError) as exc:
+                raise hermes_bridge.BridgeErro(
+                    "Conexão com o relay caiu no meio da resposta.", "desconectado") from exc
+
         def emitir(seq, trecho):
-            with sessao.lock_envio:
-                websocket.send(json.dumps({"request_id": request_id, "type": "ai_delta",
-                                           "seq": seq, "trecho": trecho},
-                                          ensure_ascii=False))
+            enviar({"request_id": request_id, "type": "ai_delta",
+                    "seq": seq, "trecho": trecho})
 
         try:
             res = hermes_bridge.chat_stream(cfg["proxy"], modelo, messages, emitir,
@@ -225,27 +234,26 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                                             max_tokens=cfg["max_tokens"])
         except hermes_bridge.BridgeErro as exc:
             ai_marcar(db, mid, conv, modelo, "failed", error=str(exc))
-            with sessao.lock_envio:
-                websocket.send(json.dumps({"request_id": request_id, "type": "ai_error",
-                                           "error": str(exc), "codigo": exc.codigo},
-                                          ensure_ascii=False))
+            try:
+                enviar({"request_id": request_id, "type": "ai_error",
+                        "error": str(exc), "codigo": exc.codigo})
+            except hermes_bridge.BridgeErro:
+                pass  # relay fora do ar: celular verá timeout + retry
             return
         if res.get("cancelada"):
             ai_marcar(db, mid, conv, modelo, "cancelled",
                       reply_id=prep["reply_id"], response_text=res["texto"])
-            with sessao.lock_envio:
-                websocket.send(json.dumps({"request_id": request_id, "type": "ai_cancelled",
-                                           "reply_id": prep["reply_id"],
-                                           "partial": res["texto"]},
-                                          ensure_ascii=False))
+            try:
+                enviar({"request_id": request_id, "type": "ai_cancelled",
+                        "reply_id": prep["reply_id"], "partial": res["texto"]})
+            except hermes_bridge.BridgeErro:
+                pass
             return
         ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], res["texto"])
         log.info("IA %s (stream) em %ss (msg %s)", modelo, res["latencia_s"], mid)
-        with sessao.lock_envio:
-            websocket.send(json.dumps({"request_id": request_id, "type": "ai_done",
-                                       "reply_id": prep["reply_id"],
-                                       "response_text": res["texto"], "model": modelo},
-                                      ensure_ascii=False))
+        enviar({"request_id": request_id, "type": "ai_done",
+                "reply_id": prep["reply_id"],
+                "response_text": res["texto"], "model": modelo})
     finally:
         cancelados.pop(request_id, None)
         db.close()
