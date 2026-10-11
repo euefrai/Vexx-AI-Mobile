@@ -395,6 +395,11 @@ async function pullScreen() {
       : 'Somente visualização. Para controlar, defina JULIA_REMOTE=1 no PC e reinicie o agente.';
   } catch (err) {
     $('screenLabel').textContent = 'TELA INDISPONÍVEL';
+    $('screenNote').textContent = err.status === 404
+      ? 'Servidor desatualizado: aguarde o redeploy no Render ficar Live e recarregue o app.'
+      : err.status === 503
+      ? 'Agente sem suporte a tela: reinicie o pc_agent.py com o código novo.'
+      : 'Falha ao buscar a tela: ' + (err.message || 'tente Atualizar.');
   } finally { screenBusy = false; }
 }
 setInterval(pullScreen, 1500);
