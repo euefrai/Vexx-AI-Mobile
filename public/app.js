@@ -151,7 +151,10 @@ function inlineFmt(s) {
   s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
   s = s.replace(/!\[([^\]]{0,120})\]\(([^)\s]+)\)/g, (m, alt, url) => {
     const u = validUrl(url);
-    return u ? '<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + u + '" />' : esc(m);
+    if (!u) return esc(m);
+    const seed = alt.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 20) || 'julia';
+    return '<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + u + '" '
+      + 'onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/' + seed + '/800/500\'" />';
   });
   s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -160,13 +163,44 @@ function inlineFmt(s) {
   s = s.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
   return s;
 }
+function srcdocEsc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function sanitizeSvg(raw) {
+  let s = String(raw || '').slice(0, 30000);
+  s = s.replace(/<script[\s\S]*?<\/script\s*>/gi, '');
+  s = s.replace(/<\s*foreignobject[\s\S]*?<\s*\/\s*foreignobject\s*>/gi, '');
+  s = s.replace(/<\s*(iframe|object|embed|form|video|audio)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, '');
+  s = s.replace(/<\s*(iframe|object|embed|form|video|audio)\b[^>]*\/?>/gi, '');
+  s = s.replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '');
+  s = s.replace(/((?:href|xlink:href)\s*=\s*")\s*javascript:[^"]*"/gi, '$1#"');
+  s = s.replace(/((?:href|xlink:href)\s*=\s*')\s*javascript:[^']*'/gi, "$1#'");
+  return s.trim();
+}
 function renderMarkdown(text) {
   if (!text) return '';
   const blocks = [];
+  const widgets = [];
+  const svgs = [];
   let src = String(text).replace(/\r\n/g, '\n');
+  // Mini-apps executáveis: ```widget-html ... ``` → iframe isolado (sandbox, sem acesso ao app).
+  src = src.replace(/```widget-html\s*\n([\s\S]*?)(```|$)/g, (m, code) => {
+    const clean = code.replace(/\n$/, '');
+    if (clean.length > 24000) {
+      const i = blocks.push({ lang: 'html', code: clean }) - 1;
+      return ' CODE' + i + ' ';
+    }
+    const i = widgets.push(clean) - 1;
+    return ' WIDGET' + i + ' ';
+  });
+  // Desenhos vetoriais: ```svg ... ``` → SVG inline sanitizado.
+  src = src.replace(/```svg\s*\n([\s\S]*?)(```|$)/g, (m, code) => {
+    const i = svgs.push(code.replace(/\n$/, '')) - 1;
+    return ' SVG' + i + ' ';
+  });
   src = src.replace(/```(\w*)\n([\s\S]*?)(```|$)/g, (m, lang, code) => {
     const i = blocks.push({ lang: (lang || '').slice(0, 20), code: code.replace(/\n$/, '') }) - 1;
-    return '\u0000CODE' + i + '\u0000';
+    return ' CODE' + i + ' ';
   });
   let refsHtml = '';
   const refM = src.match(/\n((Fontes|Refer[eê]ncias|Sources)\s*:?[\s\S]*)$/i);
@@ -207,6 +241,24 @@ function renderMarkdown(text) {
       flushList(); flushBq(); flushTable();
       const b = blocks[Number(codePh[1])];
       html.push('<div class="codeblock"><span class="code-lang">' + esc(b.lang || 'code') + '</span><button class="code-copy" data-code="' + Number(codePh[1]) + '" type="button">Copiar</button><pre><code>' + esc(b.code) + '</code></pre></div>');
+      continue;
+    }
+    const wPh = ln.match(/ WIDGET(\d+) /);
+    if (wPh && widgets[Number(wPh[1])] !== undefined) {
+      flushList(); flushBq(); flushTable();
+      const wi = Number(wPh[1]);
+      const wcode = widgets[wi];
+      html.push('<div class="widget"><div class="widget-bar"><span>▶ Mini app interativo</span>'
+        + '<button class="widget-code-btn" data-widget="' + wi + '" type="button">Ver código</button></div>'
+        + '<iframe class="widget-frame" sandbox="allow-scripts" loading="lazy" title="Mini app da Júlia" srcdoc="' + srcdocEsc(wcode) + '"></iframe>'
+        + '<pre class="widget-code" data-widget-code="' + wi + '" hidden><code>' + esc(wcode) + '</code></pre></div>');
+      continue;
+    }
+    const svgPh = ln.match(/ SVG(\d+) /);
+    if (svgPh && svgs[Number(svgPh[1])] !== undefined) {
+      flushList(); flushBq(); flushTable();
+      const clean = sanitizeSvg(svgs[Number(svgPh[1])]);
+      html.push(clean ? '<div class="svg-art">' + clean + '</div>' : '<p>[desenho vazio]</p>');
       continue;
     }
     if (/^\|.*\|$/.test(t) && t.includes('|')) {
@@ -254,7 +306,10 @@ function appendMessage(row) {
     bubble.innerHTML = '<span class="typing">digitando <span class="typing-indicator"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></span></span>';
     content.appendChild(bubble);
   } else {
-    bubble.innerHTML = renderMarkdown(row.text) || '<p>…</p>';
+    bubble.innerHTML = renderMarkdown(row.text)
+      || (row.status === 'failed'
+        ? '<p>Sem resposta da IA desta vez — toque em <strong>Tentar novamente</strong> abaixo. 🔄</p>'
+        : '<p>…</p>');
     content.appendChild(bubble);
   }
   const meta = document.createElement('div'); meta.className = 'msg-meta';
@@ -548,7 +603,7 @@ async function requestAI(userRow) {
         let idx;
         while ((idx = buf.indexOf('\n\n')) >= 0) {
           const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
-          let tipo = '', dados = '{}';
+          let tipo = '', dados = '';
           for (const ln of evt.split('\n')) {
             if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
             else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
@@ -572,7 +627,17 @@ async function requestAI(userRow) {
       }
       if (!cur) {
         const check = (await allMessages()).find(m => m.id === replyId);
-        if (!check || check.status === 'generating') throw new Error('Resposta vazia da IA');
+        if (!check || check.status === 'generating') {
+          // Stream veio vazio: tenta a resposta completa uma vez antes de falhar.
+          try {
+            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({ message_id: userRow.id, conversation_id: userRow.conversation_id, model: modeloAtivo(), memory: memoryOn() ? 1 : 0 }) });
+            if (fb.response_text && fb.response_text.trim()) {
+              cur = fb.response_text;
+              const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
+              await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: cur, created_at: new Date().toISOString(), status: 'synced', model: fb.model || modeloAtivo(), latency_s: secs }]);
+            } else throw new Error('Resposta vazia da IA');
+          } catch (e2) { throw new Error('Resposta vazia da IA'); }
+        }
       }
     } finally { clearInterval(stall); }
   } catch (err) {
@@ -592,6 +657,16 @@ async function requestAI(userRow) {
 function stopAI() { if (aiAbort) aiAbort.abort(); }
 $('stopGen').addEventListener('click', stopAI);
 conversation.addEventListener('click', e => {
+  const wb = e.target.closest('.widget-code-btn');
+  if (wb) {
+    const wrap = wb.closest('.widget');
+    const pre = wrap ? wrap.querySelector('.widget-code') : null;
+    if (pre) {
+      pre.hidden = !pre.hidden;
+      wb.textContent = pre.hidden ? 'Ver código' : 'Ocultar código';
+    }
+    return;
+  }
   const cp = e.target.closest('.code-copy');
   if (cp) {
     const pre = cp.parentElement.querySelector('code');

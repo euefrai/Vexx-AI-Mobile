@@ -1305,6 +1305,21 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   background:var(--bg-elev-2);border:1px solid var(--line-strong);color:var(--purple);z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .scroll-fab[hidden]{display:none}
 
+/* Mini-apps executáveis + desenhos SVG */
+.widget{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;background:#0a0a12}
+.widget-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;
+  font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--purple);background:rgba(167,135,250,.07)}
+.widget-code-btn{font-size:10px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 9px}
+.widget-code-btn:hover{color:var(--text);border-color:var(--purple-2)}
+.widget-frame{width:100%;height:360px;border:0;display:block;background:#fff}
+.widget-code{margin:0;max-height:220px;overflow:auto;border-top:1px solid var(--line)}
+.widget-code[hidden]{display:none}
+.widget-code code{background:none!important}
+.svg-art{margin:8px 0;display:grid;place-items:center;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);border-radius:12px;padding:10px}
+.svg-art svg{max-width:100%;height:auto}
+.message.user .svg-art,.message.user .widget{filter:saturate(1.1)}
+
 /* Responsividade */
 @media(min-width:650px){
   body{
