@@ -67,6 +67,7 @@ O IndexedDB é o armazenamento offline do celular.
 - Backend: Python, FastAPI, Uvicorn, WebSockets, Argon2id, ItsDangerous.
 - Agente: Python (`websockets`), SQLite (WAL).
 - Frontend: HTML, CSS, JavaScript, PWA + IndexedDB. Sem frameworks, sem Firebase/Supabase.
+- UI/UX: Tema minimalista premium (fundo #0B0B0F, roxo neon #A78BFA). Mensagens com formatação de texto enriquecida (inline code, parágrafos, quebras). Animação de digitação. Layout clean sem textos explicativos redundantes.
 
 ## Instalação local
 

@@ -41,7 +41,7 @@ function openDb() {
   return new Promise((resolve, reject) => {
     if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponível neste navegador')); return; }
     const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => {
+    req.onupgraderequired = () => {
       const store = req.result.createObjectStore(STORE, { keyPath: 'id' });
       store.createIndex('created_at', 'created_at');
     };
@@ -68,6 +68,40 @@ async function clearStorage() {
   tx.objectStore(STORE).clear();
   await done;
 }
+
+/* Formatação de texto de forma segura (XSS-safe):
+   - Escapa HTML via textContent
+   - Inline code: `codigo` → <code>
+   - Parágrafos por dupla quebra de linha
+   - Quebras de linha simples → <br> */
+const ESCAPE_DIV = document.createElement('div');
+function escapeHtml(text) {
+  ESCAPE_DIV.textContent = text;
+  return ESCAPE_DIV.innerHTML;
+}
+function formatText(text) {
+  if (!text) return '';
+  const safe = escapeHtml(text);
+  // Inline code: `...` — processa antes de <br>
+  const withCode = safe.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Parágrafos por dupla quebra
+  const paragraphs = withCode.split(/\n{2,}/);
+  return paragraphs.map(p => {
+    return p.replace(/\n/g, '<br>').trim();
+  }).filter(p => p).map(p => `<p>${p}</p>`).join('');
+}
+
+/* Animação de digitação: dots pulsantes */
+function createTypingDots() {
+  const container = document.createElement('span');
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'typing-dot';
+    dot.textContent = '•';
+    container.appendChild(dot);
+  }
+  return container;
+}
 function appendMessage(row) {
   const type = row.role === 'assistant' ? 'ai' : 'user';
   const wrapper = document.createElement('div');
@@ -80,21 +114,23 @@ function appendMessage(row) {
   if (type === 'ai') { const sender = document.createElement('div'); sender.className = 'sender'; sender.textContent = 'Júlia'; content.appendChild(sender); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
-    const t = document.createElement('span'); t.className = 'typing'; t.textContent = 'gerando resposta…'; bubble.appendChild(t);
+    const t = document.createElement('span'); t.className = 'typing'; t.textContent = 'digitando ';
+    t.appendChild(createTypingDots());
+    bubble.appendChild(t);
     const stop = document.createElement('button'); stop.type = 'button'; stop.className = 'stop-gen'; stop.dataset.stop = row.id;
     stop.textContent = '■ Interromper'; content.appendChild(bubble); content.appendChild(stop);
   } else {
-    bubble.textContent = row.text;
+    bubble.innerHTML = formatText(row.text);
     content.appendChild(bubble);
   }
   if (type === 'user') {
     const ack = document.createElement('div');
     ack.className = 'message-ack ' + (row.status === 'synced' ? 'synced' : 'pending');
-    ack.textContent = row.status === 'synced' ? '✓ Salva no computador' : '◷ Salva no celular · aguardando sincronização';
+    ack.textContent = row.status === 'synced' ? '✓ Sincronizado' : '◷ Aguardando sincronização';
     content.appendChild(ack);
   } else if (row.status === 'failed') {
     const retry = document.createElement('div'); retry.className = 'message-retry';
-    retry.textContent = 'Toque para tentar de novo'; content.appendChild(retry);
+    retry.textContent = 'Tentar novamente'; content.appendChild(retry);
   } else if (row.model) {
     const meta = document.createElement('div'); meta.className = 'message-ack synced'; meta.textContent = row.model;
     content.appendChild(meta);
@@ -113,10 +149,10 @@ async function renderMessages() {
   if (!db) return;
   const rows = (await allMessages()).filter(m => m.conversation_id === activeConversation);
   conversation.replaceChildren();
-  const header = document.createElement('div'); header.className = 'chat-date'; header.textContent = 'HISTÓRICO DO CELULAR'; conversation.appendChild(header);
+  const header = document.createElement('div'); header.className = 'chat-date'; header.textContent = 'HOJE'; conversation.appendChild(header);
   if (!rows.length) {
     const welcome = document.createElement('div'); welcome.className = 'empty-chat';
-    welcome.textContent = '✦ Suas mensagens ficam neste aparelho e serão enviadas para o SQLite do computador assim que ele estiver online.';
+    welcome.textContent = '✦ Sua conversa começa aqui.';
     conversation.appendChild(welcome);
   } else rows.forEach(appendMessage);
   conversation.scrollTop = conversation.scrollHeight;
@@ -130,9 +166,10 @@ function updateConnection() {
   $('statusButton').classList.toggle('online', pcOnline && navigator.onLine);
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
+  $('deviceDetail').textContent = pcOnline ? 'Windows · Conectado' : 'Aguardando agente';
   $('syncStatusText').textContent = pcOnline
-    ? 'Computador disponível. Mensagens pendentes serão sincronizadas.'
-    : 'O computador está desconectado. Suas mensagens continuam no celular.';
+    ? 'PC disponível. Mensagens pendentes serão sincronizadas.'
+    : 'PC desconectado. Mensagens ficam no celular.';
 }
 async function api(endpoint, options = {}) {
   const headers = { 'Accept': 'application/json', ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...(csrf && options.method && options.method !== 'GET' ? { 'X-CSRF-Token': csrf } : {}) };
@@ -142,14 +179,18 @@ async function api(endpoint, options = {}) {
   return data;
 }
 async function restoreSession() {
-  if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; showToast('Prévia local: apenas armazenamento no celular'); return; }
+  if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; showToast('Prévia local'); return; }
   try {
     const session = await api('/api/session');
     csrf = session.csrf; authenticated = true; $('loginOverlay').hidden = true;
+    $('profileName').textContent = session.user;
+    $('profileTag').textContent = 'ONLINE';
   } catch (err) {
     authenticated = false;
     $('loginOverlay').hidden = false;
-    if (!navigator.onLine) $('loginError').textContent = 'Sem internet. Para desbloqueio offline completo, será necessário um PIN local (próxima etapa).';
+    $('profileName').textContent = 'Offline';
+    $('profileTag').textContent = 'OFFLINE';
+    if (!navigator.onLine) $('loginError').textContent = 'Sem internet. Faça login quando estiver online.';
   }
 }
 $('loginForm').addEventListener('submit', async event => {
@@ -160,16 +201,21 @@ $('loginForm').addEventListener('submit', async event => {
     const result = await api('/api/login', { method: 'POST', body: JSON.stringify(credentials) });
     $('loginPassword').value = ''; csrf = result.csrf; authenticated = true;
     $('loginOverlay').hidden = true;
+    $('profileName').textContent = result.user;
+    $('profileTag').textContent = 'ONLINE';
     await checkStatus();
-    showToast('Login realizado com sucesso');
+    showToast('Conectado');
   } catch (err) { $('loginError').textContent = err.message || 'Não foi possível entrar'; }
   finally { btn.disabled = false; }
 });
 $('logoutButton').addEventListener('click', async () => {
   try { await api('/api/logout', { method: 'POST' }); } catch (_) { /* session may be unavailable */ }
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
-  $('loginPassword').value = ''; updateConnection();
-  showToast('Sessão encerrada. Cache local mantido neste aparelho.');
+  $('loginPassword').value = '';
+  $('profileName').textContent = 'Offline';
+  $('profileTag').textContent = 'OFFLINE';
+  updateConnection();
+  showToast('Sessão encerrada');
 });
 async function checkStatus() {
   if (!authenticated || PREVIEW_MODE || !navigator.onLine) { pcOnline = false; updateConnection(); return; }
@@ -193,9 +239,6 @@ async function syncAndRefresh() {
   const confirmados = [];
   try {
     while (pcOnline) {
-      // Só mensagens do usuário entram no lote: placeholders de IA
-      // (texto vazio/em geração) contaminavam o lote com 422 e nada
-      // sincronizava. Respostas da IA vêm por /api/messages ou /api/ai.
       const remaining = (await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
       if (!remaining.length) break;
       const result = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: remaining.map(({ status, want_ai, ...rest }) => rest) }) });
@@ -206,7 +249,6 @@ async function syncAndRefresh() {
       confirmados.push(...batch);
     }
     const remote = await api('/api/messages');
-    const local = new Map((await allMessages()).map(m => [m.id, m]));
     const additions = [];
     for (const message of remote.messages || []) {
       if (!message || typeof message.id !== 'string' || typeof message.text !== 'string' || message.origin !== 'mobile') continue;
@@ -224,7 +266,7 @@ async function syncAndRefresh() {
 }
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
 async function loadModels(forcar) {
-  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: PC online' : 'IA: PC desconectado'; return; }
+  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return; }
   if (!forcar && Date.now() - modelsLoadedAt < 300000) return;
   try {
     const r = await api('/api/ai/models');
@@ -244,7 +286,7 @@ async function loadModels(forcar) {
     if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
     $('aiStatus').textContent = 'IA pronta · ' + (modeloAtivo() || r.default || '?');
   } catch (err) {
-    $('aiStatus').textContent = 'IA: Hermes indisponível no PC';
+    $('aiStatus').textContent = 'IA: Hermes indisponível';
   }
 }
 async function requestAI(userRow) {
@@ -295,7 +337,7 @@ async function requestAI(userRow) {
         if (tipo === 'delta') {
           cur += d.trecho || '';
           const el = bubble();
-          if (el) el.textContent = cur;
+          if (el) el.innerHTML = formatText(cur);
           if (nearBottom(conversation)) conversation.scrollTop = conversation.scrollHeight;
         } else if (tipo === 'done') {
           await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
@@ -316,8 +358,8 @@ async function requestAI(userRow) {
     await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
       origin: 'mobile', role: 'assistant', text: cur,
       created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
-    showToast(travou ? 'IA sem resposta há 75s. Verifique o agente/Hermes e toque para retomar.'
-      : interrompida ? 'Geração interrompida. Toque na resposta para retomar.'
+    showToast(travou ? 'IA sem resposta há 75s. Toque para retomar.'
+      : interrompida ? 'Interrompido. Toque para retomar.'
       : ('IA falhou: ' + (err.message || 'tente de novo')));
   } finally {
     aiAbort = null;
@@ -344,36 +386,35 @@ $('modelSelect').addEventListener('change', event => {
 });
 async function sendMessage(raw) {
   const value = raw.trim(); if (!value) return;
-  if (!db) { showToast('Este navegador não permitiu salvar o cache local'); return; }
+  if (!db) { showToast('Cache local indisponível'); return; }
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
   const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user',
     text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
   try {
-    // Only clear the composer after a complete IndexedDB transaction.
     await storeMessages([row]); messageInput.value = ''; await renderMessages();
     if (pcOnline && authenticated) {
       const confirmados = await syncAndRefresh();
       if (confirmados.some(m => m.id === row.id)) requestAI({ ...row, status: 'synced' });
-    } else showToast('Mensagem salva neste celular. Sincronização pendente.');
+    } else showToast('Salvo no celular');
     if (navigator.storage?.persist) navigator.storage.persist().catch(() => {});
   } catch (err) {
-    showToast('Não foi possível salvar a mensagem: verifique o armazenamento');
+    showToast('Não foi possível salvar');
   }
 }
 composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated) sendMessage(messageInput.value); });
 document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => sendMessage(b.dataset.message)));
 $('resetChat').addEventListener('click', async () => {
   activeConversation = newId(); localStorage.setItem('julia-active-conversation', activeConversation);
-  await renderMessages(); showToast('Nova conversa. As anteriores permanecem armazenadas.');
+  await renderMessages(); showToast('Nova conversa');
 });
-$('syncNow').addEventListener('click', async () => { await checkStatus(); showToast(pcOnline ? 'Sincronização conferida' : 'PC desligado ou sem conexão'); });
+$('syncNow').addEventListener('click', async () => { await checkStatus(); showToast(pcOnline ? 'Sincronizado' : 'PC desconectado'); });
 $('clearCache').addEventListener('click', async () => {
-  if (!window.confirm('Apagar TODO o cache de mensagens neste celular, inclusive mensagens ainda não sincronizadas? Essa ação não pode ser desfeita.')) return;
-  await clearStorage(); await renderMessages(); showToast('Cache local apagado');
+  if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
+  await clearStorage(); await renderMessages(); showToast('Cache apagado');
 });
-$('attachButton').addEventListener('click', () => showToast('Anexos: previstos para a próxima etapa'));
-$('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente PC online' : 'Aguardando o agente local do Windows'));
-// ── Controle remoto real (tela ao vivo + mouse/teclado) ──
+$('attachButton').addEventListener('click', () => showToast('Anexos em breve'));
+$('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente online' : 'Aguardando agente local'));
+// Controle remoto real (tela ao vivo + mouse/teclado)
 let remoteEnabled = false;
 let screenBusy = false;
 let touchStart = null;
@@ -391,15 +432,15 @@ async function pullScreen() {
     remoteEnabled = r.remote_enabled === true;
     $('screenLabel').textContent = 'AO VIVO · ' + (r.ms || 0) + 'ms';
     $('screenNote').textContent = remoteEnabled
-      ? 'Controle ativo: toque = clique, segurar = botão direito, arrastar = mover.'
-      : 'Somente visualização. Para controlar, defina JULIA_REMOTE=1 no PC e reinicie o agente.';
+      ? 'Toque = clique, segurar = direito, arrastar = mover.'
+      : 'Somente visualização. Ative JULIA_REMOTE=1 no PC.';
   } catch (err) {
     $('screenLabel').textContent = 'TELA INDISPONÍVEL';
     $('screenNote').textContent = err.status === 404
-      ? 'Servidor desatualizado: aguarde o redeploy no Render ficar Live e recarregue o app.'
+      ? 'Servidor desatualizado: aguarde o redeploy e recarregue.'
       : err.status === 503
-      ? 'Agente sem suporte a tela: reinicie o pc_agent.py com o código novo.'
-      : 'Falha ao buscar a tela: ' + (err.message || 'tente Atualizar.');
+      ? 'Agente sem suporte a tela: reinicie o agente.'
+      : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
   } finally { screenBusy = false; }
 }
 setInterval(pullScreen, 1500);
@@ -457,7 +498,7 @@ frame.addEventListener('touchend', ev => {
   if (!touchMoved && !longPressed) sendInput({ kind: 'click', ...p });
 });
 frame.addEventListener('click', ev => {
-  if (!desktopAtivo() || ev.detail === 0) return; // toque já tratado acima
+  if (!desktopAtivo() || ev.detail === 0) return;
   const p = normPos(ev);
   mostraPonteiro(p);
   sendInput({ kind: 'click', ...p });
@@ -466,7 +507,7 @@ $('keyboardButton').addEventListener('click', () => {
   const campo = $('remoteKeys');
   campo.value = '';
   campo.focus();
-  showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado indisponível: controle desativado no PC.');
+  showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado desativado.');
 });
 $('remoteKeys').addEventListener('input', ev => {
   const v = ev.target.value;
@@ -480,7 +521,7 @@ $('remoteKeys').addEventListener('keydown', ev => {
   else if (ev.key === 'Backspace' && !ev.target.value) sendInput({ kind: 'key', key: 'backspace' });
 });
 $('refreshButton').addEventListener('click', () => { pullScreen(); });
-$('touchMode').addEventListener('click', () => showToast('Modo toque: clique, segurar, arrastar.'));
+$('touchMode').addEventListener('click', () => showToast('Toque, segurar, arrastar.'));
 $('fullscreen').addEventListener('click', async () => {
   const element = $('remoteFrame');
   if (!document.fullscreenEnabled) { showToast('Tela cheia indisponível'); return; }
@@ -495,13 +536,12 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
   navigate('chat');
   try {
     db = await openDb();
-    // Recupera interrupções: geração morta com o app fechado vira retry.
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');
     if (presas.length) await storeMessages(presas.map(m => ({ ...m, status: 'failed' })));
     await renderMessages();
   }
-  catch (err) { showToast('Armazenamento local indisponível'); $('pendingCount').textContent = 'Cache indisponível'; }
+  catch (err) { showToast('Cache local indisponível'); $('pendingCount').textContent = 'Indisponível'; }
   await restoreSession(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
