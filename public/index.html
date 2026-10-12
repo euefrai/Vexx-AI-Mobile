@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0c0c16" />
-  <meta name="description" content="Protótipo mobile da Júlia — chat e acesso ao computador." />
-  <title>Júlia Mobile — Offline First</title>
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="description" content="Júlia Mobile — seu assistente pessoal." />
+  <title>Júlia Mobile</title>
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
@@ -29,72 +29,226 @@
     <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0m-11 3.7a5 5 0 0 1 8 0M12 20h.01"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
-    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.5 8a7 7 0 0 1 12.2-1L20 12M4 12l1.3 5A7 7 0 0 0 17.5 16"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.5 8a7 7 0 0 1 12.2-1L20 12M4 12l1.3 5A7 7 0 0 0 17.5 16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   </svg>
-  <div class="scene-glow one"></div><div class="scene-glow two"></div>
+
+  <div class="scene-glow one"></div>
+  <div class="scene-glow two"></div>
+
   <main class="app" id="app">
     <header class="app-header">
-      <div class="brand"><div class="brand-mark"><span>✦</span></div><div><strong>JÚLIA<span class="brand-dot">.</span></strong><small>MOBILE SPACE</small></div></div>
-      <button class="top-status" type="button" id="statusButton" title="Informação sobre a conexão"><span class="status-dot"></span> <span id="connectionLabel">Verificando...</span> <svg class="icon"><use href="#i-info"/></svg></button>
+      <div class="brand">
+        <div class="brand-mark"><span>✦</span></div>
+        <div><strong>JÚLIA<span class="brand-dot">.</span></strong><small>MOBILE</small></div>
+      </div>
+      <button class="top-status" type="button" id="statusButton" title="Status da conexão">
+        <span class="status-dot"></span>
+        <span id="connectionLabel">Verificando…</span>
+        <svg class="icon"><use href="#i-info"/></svg>
+      </button>
     </header>
 
     <section class="page active" id="page-chat" aria-label="Chat">
-      <div class="chat-intro"><div><p class="eyebrow">SEU ESPAÇO PARTICULAR</p><h1>Oi, que bom<br/>te ver por aqui <span class="wave">✳</span></h1><p class="intro-copy">Sua IA, do seu jeito. Onde você estiver.</p></div><div class="avatar-ring"><div class="avatar-portrait">J</div><span class="avatar-orbit">✦</span></div></div>
-      <div class="notice"><svg class="icon"><use href="#i-lock"/></svg><div><strong>Conversa independente</strong><span>Histórico exclusivo do celular. Seu PC guarda a memória definitiva.</span></div><span class="notice-mark">✧</span></div>
-      <div class="chat-topline"><h2>Conversa com a Júlia <span class="pending-badge" id="pendingCount">0 pendentes</span></h2><button class="subtle-button" id="resetChat" type="button"><svg class="icon"><use href="#i-plus"/></svg> Nova</button></div>
-      <div class="ai-statusbar"><span id="aiStatus" class="muted">IA: verificando…</span><label class="sr-only" for="modelSelect">Modelo de IA</label><select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select></div>
-      <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens do chat">
-        <div class="chat-date">CARREGANDO HISTÓRICO LOCAL...</div>
+      <div class="chat-intro">
+        <h1>Oi, que bom<br/>te ver por aqui <span class="wave">✳</span></h1>
+        <p class="intro-copy">Seu assistente, do seu jeito.</p>
       </div>
-      <div class="suggestions"><button class="suggestion" data-message="Como está meu PC?" type="button"><span>✧</span> Como está meu PC?</button><button class="suggestion" data-message="Quero acessar a tela" type="button"><span>↗</span> Acessar a tela</button></div>
+
+      <div class="notice">
+        <svg class="icon"><use href="#i-lock"/></svg>
+        <div><strong>Conversa no celular</strong><span>Histórico local. Sincroniza com o PC quando online.</span></div>
+      </div>
+
+      <div class="chat-topline">
+        <h2>Conversa <span class="pending-badge" id="pendingCount">0 pendentes</span></h2>
+        <button class="subtle-button" id="resetChat" type="button">
+          <svg class="icon"><use href="#i-plus"/></svg> Nova
+        </button>
+      </div>
+
+      <div class="ai-statusbar">
+        <span id="aiStatus" class="muted">IA: verificando…</span>
+        <label class="sr-only" for="modelSelect">Modelo</label>
+        <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
+      </div>
+
+      <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">
+        <div class="chat-date">CARREGANDO…</div>
+      </div>
+
+      <div class="suggestions">
+        <button class="suggestion" data-message="Como está meu PC?" type="button"><span>✧</span> Status do PC</button>
+        <button class="suggestion" data-message="Quero acessar a tela" type="button"><span>↗</span> Acessar PC</button>
+      </div>
     </section>
 
-    <section class="page" id="page-desktop" aria-label="Acesso ao computador" hidden>
-      <div class="section-header"><p class="eyebrow">SEU ESPAÇO DE TRABALHO</p><h1>Seu PC, pertinho<br/>de você<span class="brand-dot">.</span></h1><p class="intro-copy">Controle remoto pensado para a ponta dos dedos.</p></div>
-      <div class="device-card"><div class="device-icon"><svg class="icon"><use href="#i-monitor"/></svg></div><div class="device-name"><strong>Meu computador</strong><span>Windows · Agente local a conectar</span></div><span class="offline-pill" id="deviceStatus"><i></i> Offline</span></div>
-      <div class="screen-top"><span><span class="tiny-dot"></span> <span id="screenLabel">AGUARDANDO PC</span></span><button class="mini-tool" id="fullscreen" type="button" title="Expandir prévia"><svg class="icon"><use href="#i-maximize"/></svg></button></div>
-      <div class="remote-frame live" id="remoteFrame" role="img" aria-label="Tela ao vivo do computador"><img id="screenImg" alt="Tela do computador" /><div class="remote-pointer" id="remotePointer"></div></div>
-      <div class="screen-disclaimer"><svg class="icon"><use href="#i-info"/></svg> <span id="screenNote">Imagem real do PC quando conectado.</span></div>
-      <div class="control-actions"><button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button><button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button><button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button></div>
-      <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar no computador" placeholder="" />
-      <div class="access-card"><div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Controle protegido</strong><span>No sistema real, sessões remotas exigirão autenticação, pareamento e autorização.</span></div></div>
+    <section class="page" id="page-desktop" aria-label="PC" hidden>
+      <div class="section-header">
+        <p class="eyebrow">SEU PC</p>
+        <h1>Controle remoto<span class="brand-dot">.</span></h1>
+        <p class="intro-copy">Tela ao vivo e controle do seu computador.</p>
+      </div>
+
+      <div class="device-card">
+        <div class="device-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
+        <div class="device-name"><strong>Meu computador</strong><span id="deviceDetail">Aguardando conexão</span></div>
+        <span class="offline-pill" id="deviceStatus"><i></i> Offline</span>
+      </div>
+
+      <div class="screen-top">
+        <span><span class="tiny-dot"></span> <span id="screenLabel">AGUARDANDO PC</span></span>
+        <button class="mini-tool" id="fullscreen" type="button" title="Tela cheia"><svg class="icon"><use href="#i-maximize"/></svg></button>
+      </div>
+
+      <div class="remote-frame live" id="remoteFrame" role="img" aria-label="Tela do PC">
+        <img id="screenImg" alt="" />
+        <div class="remote-pointer" id="remotePointer"></div>
+      </div>
+
+      <div class="screen-disclaimer">
+        <svg class="icon"><use href="#i-info"/></svg>
+        <span id="screenNote">Aguardando conexão com o agente.</span>
+      </div>
+
+      <div class="control-actions">
+        <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
+        <button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
+        <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
+      </div>
+
+      <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar" placeholder="" />
+
+      <div class="access-card">
+        <div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+        <div><strong>Controle protegido</strong><span id="accessNote">Toque e teclado exigem JULIA_REMOTE=1 no PC.</span></div>
+      </div>
     </section>
 
     <section class="page" id="page-activity" aria-label="Atividades" hidden>
-      <div class="section-header"><p class="eyebrow">UM OLHAR EM TUDO</p><h1>Tudo sob<br/>controle<span class="brand-dot">.</span></h1><p class="intro-copy">Atividades e conexões, sem complicação.</p></div>
-      <div class="stat-grid"><div class="stat-card"><svg class="icon"><use href="#i-activity"/></svg><strong>0</strong><span>tarefas reais</span></div><div class="stat-card"><svg class="icon"><use href="#i-monitor"/></svg><strong>0</strong><span>PCs conectados</span></div></div>
+      <div class="section-header">
+        <p class="eyebrow">ATIVIDADES</p>
+        <h1>Tudo em <span class="brand-dot">.</span></h1>
+        <p class="intro-copy">Histórico de conexões e tarefas.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card"><svg class="icon"><use href="#i-activity"/></svg><strong>0</strong><span>tarefas</span></div>
+        <div class="stat-card"><svg class="icon"><use href="#i-monitor"/></svg><strong>0</strong><span>PCs online</span></div>
+      </div>
+
       <h2 class="section-caption">Linha do tempo</h2>
-      <div class="timeline"><div class="timeline-item"><div class="timeline-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div><div><strong>Protótipo pronto para explorar</strong><p>Design e navegação demonstrativos da Júlia Mobile.</p><small>Agora · ambiente local</small></div></div><div class="timeline-item"><div class="timeline-icon neutral"><svg class="icon"><use href="#i-wifi"/></svg></div><div><strong>Aguardando agente do computador</strong><p>O pareamento e a conexão real serão implementados no backend.</p><small>Pendente</small></div></div></div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div>
+          <div><strong>Pronto para explorar</strong><p>Design e navegação demonstrativos.</p><small>Agora · local</small></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon neutral"><svg class="icon"><use href="#i-wifi"/></svg></div>
+          <div><strong>Aguardando agente</strong><p>A conexão real será estabelecida quando o agente estiver online.</p><small>Pendente</small></div>
+        </div>
+      </div>
     </section>
 
     <section class="page" id="page-settings" aria-label="Ajustes" hidden>
-      <div class="section-header"><p class="eyebrow">TUDO DO SEU JEITO</p><h1>Meu cantinho<br/>de ajustes<span class="brand-dot">.</span></h1><p class="intro-copy">Privacidade em primeiro lugar, sempre.</p></div>
-      <div class="profile-card"><div class="profile-avatar">✦</div><div><strong>Perfil demonstrativo</strong><span>Autenticado pelo servidor quando conectado</span></div><span class="demo-tag">DEMO</span></div>
+      <div class="section-header">
+        <p class="eyebrow">AJUSTES</p>
+        <h1>Configurações<span class="brand-dot">.</span></h1>
+        <p class="intro-copy">Privacidade e preferências.</p>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-avatar">✦</div>
+        <div><strong>Perfil</strong><span id="profileName">Conecte-se para sincronizar</span></div>
+        <span class="demo-tag" id="profileTag">OFFLINE</span>
+      </div>
+
       <h2 class="section-caption">Sincronização</h2>
-      <div class="sync-card"><strong><span id="syncCounter">0</span> mensagens aguardando</strong><span id="syncStatusText">O computador está desconectado. Suas mensagens continuam no celular.</span><button id="syncNow" class="subtle-button" type="button">↻ Verificar agora</button></div>
+      <div class="sync-card">
+        <strong><span id="syncCounter">0</span> mensagens aguardando</strong>
+        <span id="syncStatusText">O PC está desconectado. Mensagens ficam no celular.</span>
+        <button id="syncNow" class="subtle-button" type="button">↻ Verificar</button>
+      </div>
+
       <h2 class="section-caption">Sistema</h2>
-      <div class="settings-list"><div class="settings-row"><div class="settings-icon"><svg class="icon"><use href="#i-lock"/></svg></div><div><strong>Histórico independente</strong><span>Conversas mobile no IndexedDB, com cópia no SQLite do PC.</span></div><span class="setting-soon">Ativo</span></div><div class="settings-row"><div class="settings-icon"><svg class="icon"><use href="#i-monitor"/></svg></div><div><strong>Vincular computador</strong><span>Login, pareamento e chave do dispositivo.</span></div><span class="setting-soon">Planejado</span></div><div class="settings-row"><div class="settings-icon"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Segurança remota</strong><span>Permissões e encerramento de sessão.</span></div><span class="setting-soon">Planejado</span></div></div>
-      <div class="settings-note">Júlia Mobile v0.2 · Cache e sincronização do SQLite disponíveis. IA e controle remoto ainda não integrados.<br/><button class="subtle-button danger-link" id="clearCache" type="button">Apagar cache local</button><button class="subtle-button" id="logoutButton" type="button">Sair da conta</button></div>
+      <div class="settings-list">
+        <div class="settings-row">
+          <div class="settings-icon"><svg class="icon"><use href="#i-lock"/></svg></div>
+          <div><strong>Histórico local</strong><span>IndexedDB. Cópia no PC quando online.</span></div>
+          <span class="setting-soon">Ativo</span>
+        </div>
+        <div class="settings-row">
+          <div class="settings-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
+          <div><strong>Conectar PC</strong><span>Pareamento e autorização.</span></div>
+          <span class="setting-soon">Planejado</span>
+        </div>
+        <div class="settings-row">
+          <div class="settings-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+          <div><strong>Segurança</strong><span>Sessão e permissões remotas.</span></div>
+          <span class="setting-soon">Planejado</span>
+        </div>
+      </div>
+
+      <div class="settings-note">
+        Júlia Mobile v0.2 · Offline first
+        <br/>
+        <button class="subtle-button danger-link" id="clearCache" type="button">Apagar cache</button>
+        <button class="subtle-button" id="logoutButton" type="button">Sair</button>
+      </div>
     </section>
 
     <div class="bottom-dock">
-      <form class="composer" id="composer" autocomplete="off"><button type="button" class="composer-plus" id="attachButton" title="Anexos em breve"><svg class="icon"><use href="#i-plus"/></svg></button><label class="sr-only" for="messageInput">Mensagem para a Júlia</label><input type="text" id="messageInput" placeholder="Converse com a Júlia..." maxlength="10000" /><button class="send-button" type="submit" aria-label="Enviar mensagem"><svg class="icon"><use href="#i-send"/></svg></button></form>
-      <nav class="bottom-nav" aria-label="Navegação principal"><button class="nav-item active" data-tab="chat" aria-current="page" type="button"><svg class="icon"><use href="#i-chat"/></svg><span>Chat</span></button><button class="nav-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg><span>Meu PC</span></button><button class="nav-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg><span>Atividades</span></button><button class="nav-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg><span>Ajustes</span></button></nav>
+      <form class="composer" id="composer" autocomplete="off">
+        <button type="button" class="composer-plus" id="attachButton" title="Anexar"><svg class="icon"><use href="#i-plus"/></svg></button>
+        <label class="sr-only" for="messageInput">Mensagem</label>
+        <input type="text" id="messageInput" placeholder="Mensagem…" maxlength="10000" />
+        <button class="send-button" type="submit" aria-label="Enviar">
+          <svg class="icon"><use href="#i-send"/></svg>
+        </button>
+      </form>
+
+      <nav class="bottom-nav" aria-label="Navegação">
+        <button class="nav-item active" data-tab="chat" aria-current="page" type="button">
+          <svg class="icon"><use href="#i-chat"/></svg>
+          <span>Chat</span>
+        </button>
+        <button class="nav-item" data-tab="desktop" type="button">
+          <svg class="icon"><use href="#i-monitor"/></svg>
+          <span>PC</span>
+        </button>
+        <button class="nav-item" data-tab="activity" type="button">
+          <svg class="icon"><use href="#i-activity"/></svg>
+          <span>Atividades</span>
+        </button>
+        <button class="nav-item" data-tab="settings" type="button">
+          <svg class="icon"><use href="#i-settings"/></svg>
+          <span>Ajustes</span>
+        </button>
+      </nav>
     </div>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <div class="login-overlay" id="loginOverlay" aria-label="Entrar na Júlia Mobile">
+
+    <div class="login-overlay" id="loginOverlay" aria-label="Login">
       <div class="login-card">
-        <div class="login-symbol">✦</div><p class="eyebrow">SEU ESPAÇO PRIVADO</p>
-        <h2>Bem-vindo à <span>Júlia.</span></h2><p>Conecte-se com o usuário e a senha configurados no Render.</p>
+        <div class="login-symbol">✦</div>
+        <p class="eyebrow">ACESSO</p>
+        <h2>Bem-vindo à <span>Júlia.</span></h2>
         <form id="loginForm" autocomplete="on">
-          <label for="loginUser">Usuário</label><input id="loginUser" autocomplete="username" name="username" required maxlength="80" />
-          <label for="loginPassword">Senha</label><input id="loginPassword" autocomplete="current-password" name="password" type="password" required maxlength="256" />
+          <label for="loginUser">Usuário</label>
+          <input id="loginUser" autocomplete="username" name="username" required maxlength="80" />
+          <label for="loginPassword">Senha</label>
+          <input id="loginPassword" autocomplete="current-password" name="password" type="password" required maxlength="256" />
           <div class="login-error" id="loginError" role="alert"></div>
-          <button id="loginButton" class="login-submit" type="submit">Entrar no meu espaço <span>↗</span></button>
-        </form><small>O histórico fica no seu celular e no computador. O Render não salva conversas.</small>
+          <button id="loginButton" class="login-submit" type="submit">
+            Entrar <span>↗</span>
+          </button>
+        </form>
+        <small>Histórico no celular e no PC. Nuvem sem conversas.</small>
       </div>
     </div>
   </main>
-  <script src="app.js" defer></script>
+
+  <script src="/app.js" defer></script>
 </body>
 </html>
