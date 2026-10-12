@@ -24,6 +24,7 @@ let modelsLoadedAt = 0;
 let rafPending = null;
 let rafText = '';
 let rafReplyId = '';
+let sessionsCache = [];
 let activeConversation = localStorage.getItem('julia-active-conversation') || newId();
 localStorage.setItem('julia-active-conversation', activeConversation);
 
