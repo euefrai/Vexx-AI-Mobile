@@ -6,13 +6,14 @@ import hmac
 import json
 import logging
 import os
+import re
 import secrets
 import time
 import uuid
 from pathlib import Path
 
 from argon2 import PasswordHasher, exceptions as argon_errors
-from fastapi import FastAPI, HTTPException, Request, Response, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, File, Form, HTTPException, Request, Response, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
@@ -102,6 +103,7 @@ class AIRequest(BaseModel):
     message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
     conversation_id: str = Field(min_length=3, max_length=100)
     model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
+    memory: int = Field(default=1, ge=0, le=1)
 
 
 class InputBody(BaseModel):
@@ -163,7 +165,7 @@ async def security_headers(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     response.headers["Cache-Control"] = "no-store" if request.url.path.startswith("/api/") else "no-cache"
     return response
 
@@ -232,12 +234,102 @@ async def sync_messages(request: Request, body: SyncBody):
 
 
 @app.get("/api/messages")
-async def messages(request: Request):
+async def messages(request: Request, conversation_id: str = ""):
     verify_session(request)
     result = await relay.exchange({"type": "list", "limit": 200})
     if result.get("type") != "history":
         raise HTTPException(503, "Histórico não disponível")
-    return {"messages": result.get("messages", [])[:200]}
+    msgs = result.get("messages", [])[:200]
+    if conversation_id:
+        msgs = [m for m in msgs if m.get("conversation_id") == conversation_id]
+    return {"messages": msgs}
+
+
+@app.get("/api/conversations")
+async def conversations(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "conversations", "limit": 100}, timeout=20.0)
+    if result.get("type") != "conversations":
+        raise HTTPException(503, "Sessões indisponíveis")
+    return {"conversations": result.get("conversations", [])[:100]}
+
+
+class DocAsk(BaseModel):
+    doc_id: str = Field(min_length=4, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+
+
+@app.post("/api/docs/upload")
+async def docs_upload(request: Request, file: UploadFile = File(...),
+                      conversation_id: str = Form(default="geral", max_length=100)):
+    """Recebe um documento (até 15MB) e encaminha ao PC para leitura."""
+    require_csrf(request)
+    raw = await file.read()
+    if len(raw) > 15 * 1024 * 1024:
+        raise HTTPException(413, "Arquivo grande demais (limite 15MB)")
+    if not raw:
+        raise HTTPException(422, "Arquivo vazio")
+    import base64 as _b64
+    conv = conversation_id if 3 <= len(conversation_id) <= 100 else "geral"
+    result = await relay.exchange(
+        {"type": "doc_upload", "name": (file.filename or "arquivo")[:120],
+         "conversation_id": conv,
+         "data_b64": _b64.b64encode(raw).decode("ascii")}, timeout=90.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(422, result.get("error", "Não consegui ler o arquivo"))
+    if result.get("type") != "doc_uploaded":
+        raise HTTPException(503, "PC não processou o documento")
+    return {k: result.get(k) for k in ("doc_id", "name", "ext", "chars", "chunks", "paginas_aprox")}
+
+
+@app.get("/api/docs")
+async def docs_list(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "doc_list", "limit": 50}, timeout=20.0)
+    if result.get("type") != "doc_list":
+        raise HTTPException(503, "Documentos indisponíveis")
+    return {"documents": result.get("documents", [])[:50]}
+
+
+@app.post("/api/docs/resumo")
+async def docs_resumo(request: Request, body: DocAsk):
+    require_csrf(request)
+    result = await relay.exchange({"type": "doc_resumo", "doc_id": body.doc_id}, timeout=180.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(503, result.get("error", "Falha ao resumir"))
+    if result.get("type") != "doc_resumo":
+        raise HTTPException(503, "Resumo não recebido")
+    return {"doc_id": result.get("doc_id"), "resumo": result.get("resumo", "")}
+
+
+@app.post("/api/docs/topicos")
+async def docs_topicos(request: Request, body: DocAsk):
+    require_csrf(request)
+    result = await relay.exchange({"type": "doc_topicos", "doc_id": body.doc_id}, timeout=180.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(503, result.get("error", "Falha ao extrair tópicos"))
+    if result.get("type") != "doc_topicos":
+        raise HTTPException(503, "Tópicos não recebidos")
+    return {"doc_id": result.get("doc_id"), "topicos": result.get("topicos", "")}
+
+
+@app.get("/api/memories")
+async def memories_list(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "mem_list"}, timeout=20.0)
+    if result.get("type") != "mem_list":
+        raise HTTPException(503, "Memória indisponível")
+    return {"memories": result.get("memories", [])[:100]}
+
+
+@app.delete("/api/memories/{key}")
+async def memories_forget(request: Request, key: str):
+    require_csrf(request)
+    if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
+        raise HTTPException(422, "Chave inválida")
+    result = await relay.exchange({"type": "mem_forget", "key": key}, timeout=20.0)
+    if result.get("type") != "mem_forgotten":
+        raise HTTPException(503, "Não foi possível esquecer")
+    return {"ok": True, "key": key}
 
 
 @app.post("/api/ai")
@@ -246,7 +338,7 @@ async def ai_complete(request: Request, body: AIRequest):
     require_csrf(request)
     result = await relay.exchange({"type": "ai", "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
-                                   "model": body.model}, timeout=180.0)
+                                   "model": body.model, "memory": body.memory}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise HTTPException(503, result.get("error", "IA indisponível"))
@@ -292,7 +384,7 @@ async def ai_models(request: Request):
 
 @app.get("/api/ai/stream")
 async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
-                    model: str = ""):
+                    model: str = "", memory: str = "1"):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     require_csrf(request)
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
@@ -306,7 +398,8 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     fila: asyncio.Queue = asyncio.Queue()
     relay.streams[stream_id] = fila
     payload = {"type": "ai_stream", "message_id": message_id,
-               "conversation_id": conversation_id, "model": model[:120]}
+               "conversation_id": conversation_id, "model": model[:120],
+               "memory": "1" if memory != "0" else "0"}
 
     async def gerar():
         concluido = False

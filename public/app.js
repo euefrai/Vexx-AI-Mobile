@@ -1,16 +1,14 @@
-/* Júlia Mobile v0.2: IndexedDB offline-first and safe acknowledgement-based sync.
-   Real AI conversation and remote desktop are NOT implemented yet.
-*/
+/* Julia Mobile v0.3: fullscreen chat + drawer + sessions + shared memory + rich markdown + fast streaming. */
 'use strict';
 const $ = id => document.getElementById(id);
-const navItems = [...document.querySelectorAll('.nav-item')];
-const pages = [...document.querySelectorAll('.page')];
 const composer = $('composer');
 const messageInput = $('messageInput');
 const conversation = $('conversation');
 const toast = $('toast');
-const DB_NAME = 'julia-mobile-cache-v1';
+const DB_NAME = 'julia-mobile-cache-v2';
+const DB_OLD = 'julia-mobile-cache-v1';
 const STORE = 'messages';
+const SESSIONS = 'sessions';
 const PREVIEW_MODE = location.protocol === 'file:';
 let db = null;
 let csrf = '';
@@ -19,214 +17,432 @@ let pcOnline = false;
 let busy = false;
 let toastTimer;
 let aiAbort = null;
+let aiStartT = 0;
+let aiFirstTokenT = 0;
+let genTimer = null;
 let modelsLoadedAt = 0;
+let rafPending = null;
+let rafText = '';
+let rafReplyId = '';
 let activeConversation = localStorage.getItem('julia-active-conversation') || newId();
 localStorage.setItem('julia-active-conversation', activeConversation);
 
 function newId() { return crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)); }
-function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3200); }
+function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3200); }
+function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function validUrl(u) { try { const p = new URL(String(u).trim(), location.href); return (p.protocol === 'http:' || p.protocol === 'https:' || p.protocol === 'data:') ? p.href : ''; } catch (_) { return ''; } }
+function fmtTime(iso) { try { const d = new Date(iso); return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); } catch (_) { return ''; } }
+
+/* ----- Drawer ----- */
+const drawer = $('drawer'), scrim = $('drawerScrim');
+function setDrawer(open) {
+  drawer.classList.toggle('open', open);
+  drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+  scrim.hidden = window.innerWidth >= 900 ? true : !open;
+}
+$('drawerOpen').addEventListener('click', () => setDrawer(true));
+$('drawerClose').addEventListener('click', () => setDrawer(false));
+scrim.addEventListener('click', () => setDrawer(false));
+
+/* ----- Nav ----- */
+const navItems = [...document.querySelectorAll('.drawer-item')];
+const pages = [...document.querySelectorAll('.page')];
 function navigate(tab) {
   const page = $('page-' + tab);
   if (!page) return;
   pages.forEach(p => { const on = p === page; p.hidden = !on; p.classList.toggle('active', on); });
-  navItems.forEach(n => { const on = n.dataset.tab === tab; n.classList.toggle('active', on); if (on) n.setAttribute('aria-current', 'page'); else n.removeAttribute('aria-current'); });
-  composer.style.display = tab === 'chat' ? 'flex' : 'none';
-  page.scrollTop = 0;
+  navItems.forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
+  const chat = tab === 'chat';
+  composer.style.display = chat ? 'flex' : 'none';
+  $('suggestions').style.display = chat ? 'flex' : 'none';
+  document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
+  if (tab === 'activity') renderTimeline();
+  if (tab === 'settings') loadMemories();
 }
-navItems.forEach(n => n.addEventListener('click', () => navigate(n.dataset.tab)));
+navItems.forEach(n => n.addEventListener('click', () => { navigate(n.dataset.tab); if (window.innerWidth < 900) setDrawer(false); }));
 
-function reqPromise(request) { return new Promise((resolve, reject) => { request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); }); }
-function transactionDone(tx) { return new Promise((resolve, reject) => { tx.oncomplete = resolve; tx.onerror = () => reject(tx.error); tx.onabort = () => reject(tx.error || Error('Transação cancelada')); }); }
+/* ----- IndexedDB ----- */
+function reqPromise(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
+function txDone(tx) { return new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || Error('cancelada')); }); }
 function openDb() {
   return new Promise((resolve, reject) => {
-    if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponível neste navegador')); return; }
+    if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponivel')); return; }
     const req = indexedDB.open(DB_NAME, 1);
-    req.onupgraderequired = () => {
-      const store = req.result.createObjectStore(STORE, { keyPath: 'id' });
-      store.createIndex('created_at', 'created_at');
+    req.onupgradeneeded = () => {
+      const m = req.result.createObjectStore(STORE, { keyPath: 'id' });
+      m.createIndex('created_at', 'created_at');
+      m.createIndex('conversation_id', 'conversation_id');
+      req.result.createObjectStore(SESSIONS, { keyPath: 'id' });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
 }
+async function migrateV1() {
+  try {
+    const old = await new Promise((res, rej) => { const r = indexedDB.open(DB_OLD, 1); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+    let rows = [];
+    try { rows = await reqPromise(old.transaction(STORE, 'readonly').objectStore(STORE).getAll()); } catch (_) {}
+    old.close();
+    if (rows && rows.length) {
+      const mine = await allMessages();
+      if (!mine.length) await storeMessages(rows.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: m.role, text: m.text, created_at: m.created_at, status: m.status === 'synced' ? 'synced' : 'pending', model: m.model || '' })));
+      const convs = [...new Set(rows.map(r => r.conversation_id))];
+      for (const c of convs) await ensureSession(c);
+    }
+  } catch (_) {}
+}
 async function allMessages() {
   if (!db) return [];
-  const tx = db.transaction(STORE, 'readonly');
-  const rows = await reqPromise(tx.objectStore(STORE).getAll());
+  const rows = await reqPromise(db.transaction(STORE, 'readonly').objectStore(STORE).getAll());
   return rows.sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
 }
-async function storeMessages(messages) {
-  if (!db) throw Error('Armazenamento indisponível');
+async function storeMessages(ms) {
+  if (!db) throw Error('Armazenamento indisponivel');
   const tx = db.transaction(STORE, 'readwrite');
-  const done = transactionDone(tx);
-  for (const msg of messages) tx.objectStore(STORE).put(msg);
+  const done = txDone(tx);
+  for (const m of ms) tx.objectStore(STORE).put(m);
+  await done;
+}
+async function deleteMessagesOf(conv) {
+  const tx = db.transaction(STORE, 'readwrite');
+  const done = txDone(tx);
+  const st = tx.objectStore(STORE);
+  const rows = await reqPromise(st.getAll());
+  for (const r of rows) if (r.conversation_id === conv) st.delete(r.id);
   await done;
 }
 async function clearStorage() {
-  const tx = db.transaction(STORE, 'readwrite');
-  const done = transactionDone(tx);
-  tx.objectStore(STORE).clear();
+  const tx = db.transaction([STORE, SESSIONS], 'readwrite');
+  const done = txDone(tx);
+  tx.objectStore(STORE).clear(); tx.objectStore(SESSIONS).clear();
   await done;
 }
-
-/* Formatação de texto de forma segura (XSS-safe):
-   - Escapa HTML via textContent
-   - Inline code: `codigo` → <code>
-   - Parágrafos por dupla quebra de linha
-   - Quebras de linha simples → <br> */
-const ESCAPE_DIV = document.createElement('div');
-function escapeHtml(text) {
-  ESCAPE_DIV.textContent = text;
-  return ESCAPE_DIV.innerHTML;
+async function allSessions() {
+  if (!db) return [];
+  const rows = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).getAll()).catch(() => []);
+  return rows.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 }
-function formatText(text) {
+async function putSession(s) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).put(s); await d; }
+async function delSession(id) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).delete(id); await d; }
+async function ensureSession(id, title) {
+  const cur = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).get(id)).catch(() => null);
+  if (cur) return cur;
+  const now = new Date().toISOString();
+  const s = { id, title: title || 'Nova conversa', created_at: now, updated_at: now };
+  await putSession(s);
+  return s;
+}
+async function touchSession(id, hint) {
+  const list = await allSessions();
+  const now = new Date().toISOString();
+  let s = list.find(x => x.id === id);
+  if (!s) s = { id, title: hint || 'Nova conversa', created_at: now, updated_at: now };
+  else { s.updated_at = now; if (s.title === 'Nova conversa' && hint) s.title = hint; }
+  await putSession(s);
+}
+function titleFrom(t) { return String(t || '').replace(/\s+/g, ' ').trim().slice(0, 44) || 'Nova conversa'; }
+
+/* ----- Markdown rico e seguro ----- */
+const ESC_DIV = document.createElement('div');
+function escapeHtml(t) { ESC_DIV.textContent = t; return ESC_DIV.innerHTML; }
+function inlineFmt(s) {
+  s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  s = s.replace(/!\[([^\]]{0,120})\]\(([^)\s]+)\)/g, (m, alt, url) => {
+    const u = validUrl(url);
+    return u ? '<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + u + '" />' : esc(m);
+  });
+  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  s = s.replace(/(^|[^*\w])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+  s = s.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+  return s;
+}
+function renderMarkdown(text) {
   if (!text) return '';
-  const safe = escapeHtml(text);
-  // Inline code: `...` — processa antes de <br>
-  const withCode = safe.replace(/`([^`]+)`/g, '<code>$1</code>');
-  // Parágrafos por dupla quebra
-  const paragraphs = withCode.split(/\n{2,}/);
-  return paragraphs.map(p => {
-    return p.replace(/\n/g, '<br>').trim();
-  }).filter(p => p).map(p => `<p>${p}</p>`).join('');
+  const blocks = [];
+  let src = String(text).replace(/\r\n/g, '\n');
+  src = src.replace(/```(\w*)\n([\s\S]*?)(```|$)/g, (m, lang, code) => {
+    const i = blocks.push({ lang: (lang || '').slice(0, 20), code: code.replace(/\n$/, '') }) - 1;
+    return '\u0000CODE' + i + '\u0000';
+  });
+  let refsHtml = '';
+  const refM = src.match(/\n((Fontes|Refer[eê]ncias|Sources)\s*:?[\s\S]*)$/i);
+  let refBody = '';
+  if (refM) { refBody = refM[1]; src = src.slice(0, refM.index); }
+  else {
+    const lines = src.split('\n');
+    const tail = lines.slice(-6).join('\n');
+    if (/https?:\/\//.test(tail) && /fonte|http|\[https/i.test(tail)) { /* deixa inline */ }
+  }
+  if (refBody) {
+    const items = escapeHtml(refBody).split('\n').map(l => l.trim()).filter(Boolean);
+    const lis = items.slice(1).map(l => {
+      const m = l.match(/(https?:\/\/[^\s<]+)/);
+      if (m) return '<a href="' + m[1] + '" target="_blank" rel="noopener noreferrer">' + l + '</a>';
+      return '<span>' + l + '</span>';
+    }).join('');
+    refsHtml = '<div class="refs"><strong>FONTES / REFERENCIAS</strong>' + (lis || '<span>' + (items[0] || '') + '</span>') + '</div>';
+  }
+  const html = [];
+  const lines = escapeHtml(src).split('\n');
+  let list = null, bq = [], table = [];
+  function flushList() { if (list) { html.push(list.tag === 'ol' ? '<ol>' + list.items.map(i => '<li>' + inlineFmt(i) + '</li>').join('') + '</ol>' : '<ul>' + list.items.map(i => '<li>' + inlineFmt(i) + '</li>').join('') + '</ul>'); list = null; } }
+  function flushBq() { if (bq.length) { html.push('<blockquote>' + bq.map(inlineFmt).join('<br>') + '</blockquote>'); bq = []; } }
+  function flushTable() {
+    if (table.length >= 2) {
+      const head = table[0].split('|').map(c => c.trim()).filter(c => c !== '');
+      const rows = table.slice(2).map(r => r.split('|').map(c => c.trim()).filter(c => c !== ''));
+      html.push('<div class="table-wrap"><table><thead><tr>' + head.map(c => '<th>' + inlineFmt(c) + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map(c => '<td>' + inlineFmt(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+    } else if (table.length) { table.forEach(t => html.push('<p>' + inlineFmt(t) + '</p>')); }
+    table = [];
+  }
+  for (const raw of lines) {
+    const ln = raw.trimEnd();
+    const t = ln.trim();
+    const codePh = ln.match(/ CODE(\d+) /);
+    if (codePh) {
+      flushList(); flushBq(); flushTable();
+      const b = blocks[Number(codePh[1])];
+      html.push('<div class="codeblock"><span class="code-lang">' + esc(b.lang || 'code') + '</span><button class="code-copy" data-code="' + Number(codePh[1]) + '" type="button">Copiar</button><pre><code>' + esc(b.code) + '</code></pre></div>');
+      continue;
+    }
+    if (/^\|.*\|$/.test(t) && t.includes('|')) {
+      if (/^\|?[\s:|-]+\|?[\s:|.-]*$/.test(t) && table.length === 1) { table.push(t); continue; }
+      if (table.length === 0) { flushList(); flushBq(); table.push(t); continue; }
+      table.push(t); continue;
+    } else if (table.length) flushTable();
+    if (/^(#{1,4})\s+(.+)/.test(t)) { flushList(); flushBq(); const m = t.match(/^(#{1,4})\s+(.+)/); html.push('<h3>' + inlineFmt(m[2]) + '</h3>'); continue; }
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(t)) { flushList(); flushBq(); html.push('<hr>'); continue; }
+    if (/^&gt;/.test(ln) || /^>/.test(t)) { flushList(); bq.push(t.replace(/^(&gt;|>)\s?/, '')); continue; }
+    else if (bq.length) flushBq();
+    const ol = t.match(/^(\d+)[.)]\s+(.+)/);
+    const ul = t.match(/^[-*•]\s+(.+)/);
+    if (ol) { if (!list || list.tag !== 'ol') { flushList(); list = { tag: 'ol', items: [] }; } list.items.push(ol[2]); continue; }
+    if (ul) { if (!list || list.tag !== 'ul') { flushList(); list = { tag: 'ul', items: [] }; } list.items.push(ul[1]); continue; }
+    if (list) flushList();
+    if (!t) { html.push(''); continue; }
+    const imgOnly = t.match(/^<img class="chat-img"[\s\S]*\/>$/);
+    if (imgOnly) { html.push(t); continue; }
+    html.push('<p>' + inlineFmt(t) + '</p>');
+  }
+  flushList(); flushBq(); flushTable();
+  // junta <p> seguidos sem vazio excessivo: mantem como estao
+  return html.filter((h, i) => !(h === '' && html[i - 1] === '')).join('') + refsHtml;
 }
 
-/* Animação de digitação: dots pulsantes */
-function createTypingDots() {
-  const container = document.createElement('span');
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('span');
-    dot.className = 'typing-dot';
-    dot.textContent = '•';
-    container.appendChild(dot);
-  }
-  return container;
+/* ----- Render ----- */
+function nearBottom(el) { return el.scrollHeight - el.scrollTop - el.clientHeight < 240; }
+function scrollChat(force) {
+  if (force || nearBottom(conversation)) conversation.scrollTop = conversation.scrollHeight;
 }
+conversation.addEventListener('scroll', () => { $('scrollFab').hidden = nearBottom(conversation); });
+$('scrollFab').addEventListener('click', () => { conversation.scrollTop = conversation.scrollHeight; });
+
 function appendMessage(row) {
   const type = row.role === 'assistant' ? 'ai' : 'user';
-  const wrapper = document.createElement('div');
-  wrapper.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
-  wrapper.dataset.mid = row.id;
-  if (type === 'ai') {
-    const icon = document.createElement('div'); icon.className = 'bubble-avatar'; icon.textContent = '✦'; wrapper.appendChild(icon);
-  }
+  const wrap = document.createElement('div');
+  wrap.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
+  wrap.dataset.mid = row.id;
+  if (type === 'ai') { const ic = document.createElement('div'); ic.className = 'bubble-avatar'; ic.textContent = '✦'; wrap.appendChild(ic); }
   const content = document.createElement('div'); content.className = 'message-content';
-  if (type === 'ai') { const sender = document.createElement('div'); sender.className = 'sender'; sender.textContent = 'Júlia'; content.appendChild(sender); }
+  if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Júlia'; content.appendChild(s); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
-    const t = document.createElement('span'); t.className = 'typing'; t.textContent = 'digitando ';
-    t.appendChild(createTypingDots());
-    bubble.appendChild(t);
-    const stop = document.createElement('button'); stop.type = 'button'; stop.className = 'stop-gen'; stop.dataset.stop = row.id;
-    stop.textContent = '■ Interromper'; content.appendChild(bubble); content.appendChild(stop);
+    bubble.innerHTML = '<span class="typing">digitando <span class="typing-indicator"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></span></span>';
+    content.appendChild(bubble);
   } else {
-    bubble.innerHTML = formatText(row.text);
+    bubble.innerHTML = renderMarkdown(row.text) || '<p>…</p>';
     content.appendChild(bubble);
   }
+  const meta = document.createElement('div'); meta.className = 'msg-meta';
+  const tm = document.createElement('span'); tm.className = 'msg-time'; tm.textContent = fmtTime(row.created_at);
+  meta.appendChild(tm);
   if (type === 'user') {
-    const ack = document.createElement('div');
+    const ack = document.createElement('span');
     ack.className = 'message-ack ' + (row.status === 'synced' ? 'synced' : 'pending');
-    ack.textContent = row.status === 'synced' ? '✓ Sincronizado' : '◷ Aguardando sincronização';
-    content.appendChild(ack);
-  } else if (row.status === 'failed') {
-    const retry = document.createElement('div'); retry.className = 'message-retry';
-    retry.textContent = 'Tentar novamente'; content.appendChild(retry);
-  } else if (row.model) {
-    const meta = document.createElement('div'); meta.className = 'message-ack synced'; meta.textContent = row.model;
-    content.appendChild(meta);
+    ack.textContent = row.status === 'synced' ? '✓ Sincronizado' : '◷ No celular';
+    meta.appendChild(ack);
+  } else {
+    if (row.model) { const b = document.createElement('span'); b.className = 'model-badge'; b.textContent = row.model; meta.appendChild(b); }
+    if (row.latency_s) { const l = document.createElement('span'); l.className = 'latency-tag'; l.textContent = row.latency_s + 's'; meta.appendChild(l); }
+    const cp = document.createElement('button'); cp.type = 'button'; cp.className = 'msg-copy'; cp.dataset.copy = row.id;
+    cp.innerHTML = '<svg class="icon"><use href="#i-copy"/></svg> Copiar';
+    meta.appendChild(cp);
+    if (row.status === 'failed') { const rt = document.createElement('button'); rt.type = 'button'; rt.className = 'message-retry'; rt.textContent = 'Tentar novamente'; meta.appendChild(rt); }
   }
-  wrapper.appendChild(content); conversation.appendChild(wrapper);
+  content.appendChild(meta);
+  wrap.appendChild(content);
+  conversation.appendChild(wrap);
 }
-function nearBottom(el) { return el.scrollHeight - el.scrollTop - el.clientHeight < 220; }
-function scrollChat() {
-  const page = $('page-chat');
-  if (nearBottom(conversation) || nearBottom(page)) {
-    conversation.scrollTop = conversation.scrollHeight;
-    page.scrollTop = page.scrollHeight;
-  }
+function paintStreaming(replyId, text) {
+  const el = conversation.querySelector('[data-mid="' + replyId + '"] .bubble');
+  if (el) el.innerHTML = renderMarkdown(text) || '<span class="typing">digitando …</span>';
+  scrollChat(false);
 }
+function schedulePaint(replyId, text) {
+  rafReplyId = replyId; rafText = text;
+  if (rafPending) return;
+  rafPending = requestAnimationFrame(() => { rafPending = null; paintStreaming(rafReplyId, rafText); });
+}
+
 async function renderMessages() {
   if (!db) return;
-  const rows = (await allMessages()).filter(m => m.conversation_id === activeConversation);
+  const all = await allMessages();
+  const rows = all.filter(m => m.conversation_id === activeConversation);
+  const stick = nearBottom(conversation);
   conversation.replaceChildren();
-  const header = document.createElement('div'); header.className = 'chat-date'; header.textContent = 'HOJE'; conversation.appendChild(header);
+  const header = document.createElement('div'); header.className = 'chat-date';
+  header.textContent = (sessionsCache.find(s => s.id === activeConversation)?.title || 'CONVERSA') + ' · HOJE';
+  conversation.appendChild(header);
   if (!rows.length) {
-    const welcome = document.createElement('div'); welcome.className = 'empty-chat';
-    welcome.textContent = '✦ Sua conversa começa aqui.';
-    conversation.appendChild(welcome);
+    const w = document.createElement('div'); w.className = 'empty-chat';
+    w.textContent = '✦ Sua conversa começa aqui. Peça pesquisa com fontes ou uma imagem.';
+    conversation.appendChild(w);
   } else rows.forEach(appendMessage);
-  conversation.scrollTop = conversation.scrollHeight;
-  const pendingCount = (await allMessages()).filter(m => m.status !== 'synced').length;
-  $('pendingCount').textContent = `${pendingCount} pendente${pendingCount === 1 ? '' : 's'}`;
-  $('syncCounter').textContent = String(pendingCount);
+  if (stick) conversation.scrollTop = conversation.scrollHeight;
+  const pending = all.filter(m => m.status !== 'synced').length;
+  $('pendingCount').textContent = pending + ' pendente' + (pending === 1 ? '' : 's');
+  $('syncCounter').textContent = String(pending);
+  $('statTasks').textContent = String(all.length);
+  $('statSessions').textContent = String(sessionsCache.length || new Set(all.map(m => m.conversation_id)).size || 1);
+  const cur = sessionsCache.find(s => s.id === activeConversation);
+  $('chatTitle').textContent = cur ? cur.title : 'Nova conversa';
+  $('chatSubtitle').textContent = rows.length + ' mensagens · memória compartilhada ' + (memoryOn() ? 'ativa' : 'pausada');
 }
+
+async function renderSessions(filter) {
+  const box = $('sessionList');
+  const q = (filter || '').toLowerCase();
+  const all = await allMessages();
+  const counts = {};
+  all.forEach(m => { counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
+  sessionsCache = await allSessions();
+  if (!sessionsCache.find(s => s.id === activeConversation)) await ensureSession(activeConversation);
+  sessionsCache = await allSessions();
+  $('sessionCount').textContent = String(sessionsCache.length);
+  box.replaceChildren();
+  sessionsCache.filter(s => !q || (s.title || '').toLowerCase().includes(q)).forEach(s => {
+    const b = document.createElement('div');
+    b.className = 'session-item' + (s.id === activeConversation ? ' active' : '');
+    b.setAttribute('role', 'option');
+    const t = document.createElement('button'); t.type = 'button'; t.style.cssText = 'flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer';
+    t.innerHTML = '<span class="t">' + esc(s.title || 'Nova conversa') + '</span><small>' + (counts[s.id] || 0) + ' msgs</small>';
+    t.addEventListener('click', async () => {
+      activeConversation = s.id;
+      localStorage.setItem('julia-active-conversation', activeConversation);
+      await renderSessions($('sessionSearch').value);
+      await renderMessages();
+      if (window.innerWidth < 900) setDrawer(false);
+    });
+    t.addEventListener('dblclick', async () => {
+      const nt = window.prompt('Renomear conversa:', s.title || '');
+      if (nt && nt.trim()) { s.title = nt.trim().slice(0, 60); s.updated_at = new Date().toISOString(); await putSession(s); await renderSessions($('sessionSearch').value); await renderMessages(); }
+    });
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'session-x'; x.title = 'Excluir sessão'; x.setAttribute('aria-label', 'Excluir ' + (s.title || 'sessão'));
+    x.innerHTML = '<svg class="icon"><use href="#i-trash"/></svg>';
+    x.addEventListener('click', async () => {
+      if (!window.confirm('Excluir esta conversa do celular' + (pcOnline ? ' (cópia do PC permanece)?' : '?'))) return;
+      await deleteMessagesOf(s.id);
+      await delSession(s.id);
+      if (activeConversation === s.id) { activeConversation = newId(); localStorage.setItem('julia-active-conversation', activeConversation); await ensureSession(activeConversation); }
+      await renderSessions($('sessionSearch').value);
+      await renderMessages();
+    });
+    b.appendChild(t); b.appendChild(x);
+    box.appendChild(b);
+  });
+}
+
+async function renderTimeline() {
+  const tl = $('timeline');
+  if (!tl) return;
+  const all = await allMessages();
+  tl.replaceChildren();
+  const items = all.slice(-6).reverse();
+  if (!items.length) {
+    tl.innerHTML = '<div class="timeline-item"><div class="timeline-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div><div><strong>Pronto para explorar</strong><p>Envie a primeira mensagem no chat.</p><small>Agora · local</small></div></div>';
+    return;
+  }
+  items.forEach(m => {
+    const d = document.createElement('div'); d.className = 'timeline-item';
+    d.innerHTML = '<div class="timeline-icon"><svg class="icon"><use href="#i-chat"/></svg></div><div><strong>' + esc((m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' + (m.status || '')) + '</strong><p>' + esc(String(m.text || '').slice(0, 120)) + '</p><small>' + esc(fmtTime(m.created_at)) + '</small></div>';
+    tl.appendChild(d);
+  });
+}
+
+/* ----- Conexão / API ----- */
+function memoryOn() { return $('memoryToggle').checked; }
+$('memoryToggle').addEventListener('change', e => { localStorage.setItem('julia-memory', e.target.checked ? '1' : '0'); showToast(e.target.checked ? 'Memória entre chats ativada' : 'Memória entre chats pausada'); renderMessages(); });
+if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = false;
+
 function updateConnection() {
-  const message = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
-  $('connectionLabel').textContent = message;
+  const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
+  $('connectionLabel').textContent = msg;
   $('statusButton').classList.toggle('online', pcOnline && navigator.onLine);
+  const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
   $('deviceDetail').textContent = pcOnline ? 'Windows · Conectado' : 'Aguardando agente';
-  $('syncStatusText').textContent = pcOnline
-    ? 'PC disponível. Mensagens pendentes serão sincronizadas.'
-    : 'PC desconectado. Mensagens ficam no celular.';
+  $('memoryStatus').textContent = memoryOn() ? 'Entre todos os chats' : 'Pausada neste aparelho';
+  $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.' : 'PC desconectado. Mensagens ficam no celular.';
 }
-async function api(endpoint, options = {}) {
-  const headers = { 'Accept': 'application/json', ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...(csrf && options.method && options.method !== 'GET' ? { 'X-CSRF-Token': csrf } : {}) };
-  const res = await fetch(endpoint, { ...options, headers: { ...headers, ...options.headers }, credentials: 'same-origin', cache: 'no-store' });
+async function api(endpoint, options) {
+  options = options || {};
+  const headers = { Accept: 'application/json' };
+  if (options.body) headers['Content-Type'] = 'application/json';
+  if (csrf && options.method && options.method !== 'GET') headers['X-CSRF-Token'] = csrf;
+  const res = await fetch(endpoint, { method: options.method || 'GET', body: options.body, headers: Object.assign(headers, options.headers || {}), credentials: 'same-origin', cache: 'no-store' });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : `Erro HTTP ${res.status}`); err.status = res.status; throw err; }
+  if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : 'Erro HTTP ' + res.status); err.status = res.status; throw err; }
   return data;
 }
 async function restoreSession() {
-  if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; showToast('Prévia local'); return; }
+  if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; return; }
   try {
-    const session = await api('/api/session');
-    csrf = session.csrf; authenticated = true; $('loginOverlay').hidden = true;
-    $('profileName').textContent = session.user;
-    $('profileTag').textContent = 'ONLINE';
-  } catch (err) {
-    authenticated = false;
-    $('loginOverlay').hidden = false;
-    $('profileName').textContent = 'Offline';
-    $('profileTag').textContent = 'OFFLINE';
-    if (!navigator.onLine) $('loginError').textContent = 'Sem internet. Faça login quando estiver online.';
+    const s = await api('/api/session');
+    csrf = s.csrf; authenticated = true; $('loginOverlay').hidden = true;
+    $('profileName').textContent = s.user; $('profileTag').textContent = 'ONLINE';
+  } catch (_) {
+    authenticated = false; $('loginOverlay').hidden = false;
+    $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
   }
 }
-$('loginForm').addEventListener('submit', async event => {
-  event.preventDefault();
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
   const btn = $('loginButton'); btn.disabled = true; $('loginError').textContent = '';
   try {
-    const credentials = { username: $('loginUser').value, password: $('loginPassword').value };
-    const result = await api('/api/login', { method: 'POST', body: JSON.stringify(credentials) });
-    $('loginPassword').value = ''; csrf = result.csrf; authenticated = true;
+    const r = await api('/api/login', { method: 'POST', body: JSON.stringify({ username: $('loginUser').value, password: $('loginPassword').value }) });
+    $('loginPassword').value = ''; csrf = r.csrf; authenticated = true;
     $('loginOverlay').hidden = true;
-    $('profileName').textContent = result.user;
-    $('profileTag').textContent = 'ONLINE';
-    await checkStatus();
-    showToast('Conectado');
+    $('profileName').textContent = r.user; $('profileTag').textContent = 'ONLINE';
+    await checkStatus(); showToast('Conectado');
   } catch (err) { $('loginError').textContent = err.message || 'Não foi possível entrar'; }
   finally { btn.disabled = false; }
 });
 $('logoutButton').addEventListener('click', async () => {
-  try { await api('/api/logout', { method: 'POST' }); } catch (_) { /* session may be unavailable */ }
+  try { await api('/api/logout', { method: 'POST' }); } catch (_) {}
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
-  $('loginPassword').value = '';
-  $('profileName').textContent = 'Offline';
-  $('profileTag').textContent = 'OFFLINE';
-  updateConnection();
-  showToast('Sessão encerrada');
+  $('loginPassword').value = ''; $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
+  updateConnection(); showToast('Sessão encerrada');
 });
+
 async function checkStatus() {
   if (!authenticated || PREVIEW_MODE || !navigator.onLine) { pcOnline = false; updateConnection(); return; }
   try {
-    const status = await api('/api/status');
-    pcOnline = status.pc_online === true;
+    const st = await api('/api/status');
+    pcOnline = st.pc_online === true;
     updateConnection();
     if (pcOnline) {
-      const confirmados = await syncAndRefresh();
+      const conf = await syncAndRefresh();
       await loadModels(false);
-      for (const m of confirmados.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
+      renderDocs();
+      for (const m of conf.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
+      // puxa respostas prontas de outras sessões? tenta IA para pendentes recentes
+      const all = await allMessages();
+      const pend = all.filter(m => m.role === 'user' && m.want_ai && !all.find(x => x.id === m.id + '-r1' && x.status === 'synced')).slice(-3);
+      for (const m of pend) { if (!aiAbort) await requestAI(m); }
     }
   } catch (err) {
     pcOnline = false; updateConnection();
@@ -236,192 +452,333 @@ async function checkStatus() {
 async function syncAndRefresh() {
   if (busy || !authenticated || !pcOnline || !db) return [];
   busy = true;
-  const confirmados = [];
+  const conf = [];
   try {
-    while (pcOnline) {
-      const remaining = (await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
-      if (!remaining.length) break;
-      const result = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: remaining.map(({ status, want_ai, ...rest }) => rest) }) });
-      const confirmed = new Set(result.confirmed_ids || []);
-      if (!confirmed.size) break;
-      const batch = remaining.filter(m => confirmed.has(m.id));
-      await storeMessages(batch.map(m => ({ ...m, status: 'synced' })));
-      confirmados.push(...batch);
+    for (let guard = 0; guard < 5 && pcOnline; guard++) {
+      const rem = (await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
+      if (!rem.length) break;
+      const clean = rem.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at }));
+      const r = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: clean }) });
+      const ok = new Set(r.confirmed_ids || []);
+      if (!ok.size) break;
+      const batch = rem.filter(m => ok.has(m.id));
+      await storeMessages(batch.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at, status: 'synced', want_ai: true })));
+      conf.push(...batch);
     }
     const remote = await api('/api/messages');
-    const additions = [];
-    for (const message of remote.messages || []) {
-      if (!message || typeof message.id !== 'string' || typeof message.text !== 'string' || message.origin !== 'mobile') continue;
-      additions.push({ ...message, status: 'synced' });
+    const adds = [];
+    for (const m of remote.messages || []) {
+      if (!m || typeof m.id !== 'string' || typeof m.text !== 'string' || m.origin !== 'mobile') continue;
+      adds.push({ id: m.id, conversation_id: m.conversation_id || activeConversation, origin: 'mobile', role: m.role === 'assistant' ? 'assistant' : 'user', text: m.text, created_at: m.created_at, status: 'synced', model: m.model || '' });
     }
-    if (additions.length) await storeMessages(additions);
+    if (adds.length) {
+      await storeMessages(adds);
+      const convs = [...new Set(adds.map(a => a.conversation_id))];
+      for (const c of convs) await touchSession(c);
+    }
+    await renderSessions($('sessionSearch').value);
     await renderMessages();
-    return confirmados;
+    return conf;
   } catch (err) {
     if (err.status === 503) pcOnline = false;
     if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
     updateConnection();
-    return confirmados;
+    return conf;
   } finally { busy = false; }
 }
+
+/* ----- Modelos ----- */
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
-async function loadModels(forcar) {
+async function loadModels(force) {
   if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return; }
-  if (!forcar && Date.now() - modelsLoadedAt < 300000) return;
+  if (!force && Date.now() - modelsLoadedAt < 300000) return;
   try {
     const r = await api('/api/ai/models');
     modelsLoadedAt = Date.now();
     const sel = $('modelSelect');
-    const atual = modeloAtivo() || r.default || '';
+    const cur = modeloAtivo() || r.default || '';
     sel.replaceChildren();
-    for (const id of r.models || []) {
-      const o = document.createElement('option'); o.value = id; o.textContent = id;
-      if (id === atual) o.selected = true;
-      sel.appendChild(o);
-    }
-    if (atual && ![...(r.models || [])].includes(atual)) {
-      const o = document.createElement('option'); o.value = atual; o.textContent = atual + ' (salvo)'; o.selected = true;
-      sel.appendChild(o);
-    }
+    for (const id of r.models || []) { const o = document.createElement('option'); o.value = id; o.textContent = id; if (id === cur) o.selected = true; sel.appendChild(o); }
+    if (cur && !(r.models || []).includes(cur)) { const o = document.createElement('option'); o.value = cur; o.textContent = cur + ' (salvo)'; o.selected = true; sel.appendChild(o); }
     if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
     $('aiStatus').textContent = 'IA pronta · ' + (modeloAtivo() || r.default || '?');
-  } catch (err) {
-    $('aiStatus').textContent = 'IA: Hermes indisponível';
-  }
+  } catch (_) { $('aiStatus').textContent = 'IA: Hermes indisponível'; }
+}
+$('modelSelect').addEventListener('change', e => { localStorage.setItem('julia-model', e.target.value); $('aiStatus').textContent = 'IA pronta · ' + e.target.value; });
+
+/* ----- IA com streaming rápido ----- */
+function setGenBar(on, label) {
+  $('genBar').hidden = !on;
+  if (label) $('genLabel').textContent = label;
+}
+function tickGen() {
+  const s = Math.floor((Date.now() - aiStartT) / 1000);
+  const ttft = aiFirstTokenT ? ' · 1º token ' + ((aiFirstTokenT - aiStartT) / 1000).toFixed(1) + 's' : '';
+  $('genLabel').textContent = 'Júlia está escrevendo… ' + s + 's' + ttft;
 }
 async function requestAI(userRow) {
   if (!authenticated || !pcOnline || !db || aiAbort) return;
   const replyId = userRow.id + '-r1';
-  const ja = (await allMessages()).find(m => m.id === replyId);
+  const rows = await allMessages();
+  const ja = rows.find(m => m.id === replyId);
   if (ja && (ja.status === 'synced' || ja.status === 'generating')) return;
-  const placeholder = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile',
-    role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating',
-    model: modeloAtivo() };
-  try { await storeMessages([placeholder]); } catch (_) { return; }
-  await renderMessages();
-  const qs = new URLSearchParams({ message_id: userRow.id,
-    conversation_id: userRow.conversation_id, model: modeloAtivo() });
+  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
+  try { await storeMessages([ph]); } catch (_) { return; }
+  if (userRow.conversation_id === activeConversation) await renderMessages();
+  aiStartT = Date.now(); aiFirstTokenT = 0;
+  setGenBar(true, 'Júlia está escrevendo… 0s');
+  clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
+  const qs = new URLSearchParams({ message_id: userRow.id, conversation_id: userRow.conversation_id, model: modeloAtivo(), memory: memoryOn() ? '1' : '0' });
   aiAbort = new AbortController();
   let cur = '';
-  const bubble = () => conversation.querySelector('[data-mid="' + replyId + '"] .bubble');
   try {
-    const res = await fetch('/api/ai/stream?' + qs.toString(), {
-      headers: { 'Accept': 'text/event-stream', 'X-CSRF-Token': csrf },
-      credentials: 'same-origin', signal: aiAbort.signal });
+    const res = await fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
     if (!res.ok || !res.body) throw new Error('IA indisponível (' + res.status + ')');
     const reader = res.body.getReader();
     const dec = new TextDecoder();
     let buf = '';
     let lastEvt = Date.now();
-    let travou = false;
-    const stall = setInterval(() => {
-      if (Date.now() - lastEvt > 75000 && aiAbort) { travou = true; aiAbort.abort(); }
-    }, 5000);
+    const stall = setInterval(() => { if (Date.now() - lastEvt > 75000 && aiAbort) aiAbort.abort(); }, 5000);
     try {
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      let idx;
-      while ((idx = buf.indexOf('\n\n')) >= 0) {
-        const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
-        let tipo = '', dados = '{}';
-        for (const ln of evt.split('\n')) {
-          if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
-          else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
-        }
-        if (!tipo) continue; // ping/keepalive
-        lastEvt = Date.now();
-        let d = {};
-        try { d = JSON.parse(dados); } catch (_) { continue; }
-        if (tipo === 'delta') {
-          cur += d.trecho || '';
-          const el = bubble();
-          if (el) el.innerHTML = formatText(cur);
-          if (nearBottom(conversation)) conversation.scrollTop = conversation.scrollHeight;
-        } else if (tipo === 'done') {
-          await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
-            origin: 'mobile', role: 'assistant', text: d.response_text || cur,
-            created_at: new Date().toISOString(), status: 'synced', model: d.model || modeloAtivo() }]);
-        } else if (tipo === 'cancelled') {
-          await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
-            origin: 'mobile', role: 'assistant', text: d.partial || cur,
-            created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
-        } else if (tipo === 'error') {
-          throw new Error(d.error || 'IA indisponível');
+      for (;;) {
+        const read = await reader.read();
+        if (read.done) break;
+        buf += dec.decode(read.value, { stream: true });
+        let idx;
+        while ((idx = buf.indexOf('\n\n')) >= 0) {
+          const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
+          let tipo = '', dados = '{}';
+          for (const ln of evt.split('\n')) {
+            if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
+            else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
+          }
+          if (!tipo) continue;
+          lastEvt = Date.now();
+          let d = {};
+          try { d = JSON.parse(dados); } catch (_) { continue; }
+          if (tipo === 'delta') {
+            if (!aiFirstTokenT) { aiFirstTokenT = Date.now(); tickGen(); }
+            cur += d.trecho || '';
+            schedulePaint(replyId, cur);
+          } else if (tipo === 'done') {
+            if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
+            const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
+            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.response_text || cur, created_at: new Date().toISOString(), status: 'synced', model: d.model || modeloAtivo(), latency_s: secs }]);
+          } else if (tipo === 'cancelled') {
+            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.partial || cur, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+          } else if (tipo === 'error') throw new Error(d.error || 'IA indisponível');
         }
       }
-    }
+      if (!cur) {
+        const check = (await allMessages()).find(m => m.id === replyId);
+        if (!check || check.status === 'generating') throw new Error('Resposta vazia da IA');
+      }
     } finally { clearInterval(stall); }
   } catch (err) {
-    const interrompida = aiAbort && aiAbort.signal.aborted;
-    await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
-      origin: 'mobile', role: 'assistant', text: cur,
-      created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
-    showToast(travou ? 'IA sem resposta há 75s. Toque para retomar.'
-      : interrompida ? 'Interrompido. Toque para retomar.'
-      : ('IA falhou: ' + (err.message || 'tente de novo')));
+    const inter = aiAbort && aiAbort.signal.aborted;
+    const kept = cur || ((await allMessages()).find(m => m.id === replyId) || {}).text || '';
+    await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: kept, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+    showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + (err.message || 'tente de novo'));
   } finally {
     aiAbort = null;
-    await renderMessages();
+    clearInterval(genTimer);
+    setGenBar(false);
+    if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
+    if (userRow.conversation_id === activeConversation) await renderMessages();
+    await renderSessions($('sessionSearch').value);
   }
 }
 function stopAI() { if (aiAbort) aiAbort.abort(); }
-conversation.addEventListener('click', event => {
-  const stop = event.target.closest('[data-stop]');
-  if (stop) { stopAI(); return; }
-  const falha = event.target.closest('.message.failed');
+$('stopGen').addEventListener('click', stopAI);
+conversation.addEventListener('click', e => {
+  const cp = e.target.closest('.code-copy');
+  if (cp) {
+    const pre = cp.parentElement.querySelector('code');
+    if (pre && navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(() => showToast('Código copiado')).catch(() => showToast('Não foi possível copiar'));
+    return;
+  }
+  const mc = e.target.closest('[data-copy]');
+  if (mc) {
+    const mid = mc.dataset.copy;
+    allMessages().then(rows => {
+      const r = rows.find(m => m.id === mid);
+      if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
+    });
+    return;
+  }
+  const falha = e.target.closest('.message.failed');
   if (falha) {
     const mid = falha.dataset.mid || '';
     const uid = mid.endsWith('-r1') ? mid.slice(0, -3) : '';
-    allMessages().then(rows => {
-      const user = rows.find(m => m.id === uid);
-      if (user) requestAI(user);
-    });
+    allMessages().then(rows => { const u = rows.find(m => m.id === uid); if (u) requestAI(u); });
   }
 });
-$('modelSelect').addEventListener('change', event => {
-  localStorage.setItem('julia-model', event.target.value);
-  $('aiStatus').textContent = 'IA pronta · ' + event.target.value;
-});
+
+/* ----- Envio ----- */
+function autoresize() { messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 140) + 'px'; }
+messageInput.addEventListener('input', () => { autoresize(); $('charCount').textContent = messageInput.value.length + ' / 10000'; });
+messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); composer.requestSubmit(); } });
 async function sendMessage(raw) {
-  const value = raw.trim(); if (!value) return;
+  const value = String(raw || '').trim();
+  if (!value) return;
   if (!db) { showToast('Cache local indisponível'); return; }
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
-  const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user',
-    text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
+  const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
   try {
-    await storeMessages([row]); messageInput.value = ''; await renderMessages();
+    await storeMessages([row]);
+    await touchSession(activeConversation, titleFrom(value));
+    messageInput.value = ''; autoresize(); $('charCount').textContent = '0 / 10000';
+    await renderSessions($('sessionSearch').value);
+    await renderMessages();
+    scrollChat(true);
     if (pcOnline && authenticated) {
-      const confirmados = await syncAndRefresh();
-      if (confirmados.some(m => m.id === row.id)) requestAI({ ...row, status: 'synced' });
+      const conf = await syncAndRefresh();
+      if (conf.some(m => m.id === row.id)) requestAI(Object.assign({}, row, { status: 'synced' }));
+      else {
+        const cur = await allMessages();
+        const synced = cur.find(m => m.id === row.id && m.status === 'synced');
+        if (synced) requestAI(synced);
+      }
     } else showToast('Salvo no celular');
-    if (navigator.storage?.persist) navigator.storage.persist().catch(() => {});
-  } catch (err) {
-    showToast('Não foi possível salvar');
-  }
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  } catch (_) { showToast('Não foi possível salvar'); }
 }
-composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated) sendMessage(messageInput.value); });
+composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value); else showToast('Faça login'); });
 document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => sendMessage(b.dataset.message)));
-$('resetChat').addEventListener('click', async () => {
-  activeConversation = newId(); localStorage.setItem('julia-active-conversation', activeConversation);
-  await renderMessages(); showToast('Nova conversa');
-});
+async function newChat() {
+  activeConversation = newId();
+  localStorage.setItem('julia-active-conversation', activeConversation);
+  await ensureSession(activeConversation);
+  await renderSessions($('sessionSearch').value);
+  await renderMessages();
+  navigate('chat');
+  messageInput.focus();
+  showToast('Nova conversa — memória compartilhada continua ativa');
+}
+$('newChatCta').addEventListener('click', newChat);
+$('newChatTop').addEventListener('click', newChat);
+$('sessionSearch').addEventListener('input', e => renderSessions(e.target.value));
 $('syncNow').addEventListener('click', async () => { await checkStatus(); showToast(pcOnline ? 'Sincronizado' : 'PC desconectado'); });
 $('clearCache').addEventListener('click', async () => {
   if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
-  await clearStorage(); await renderMessages(); showToast('Cache apagado');
+  await clearStorage();
+  activeConversation = newId();
+  localStorage.setItem('julia-active-conversation', activeConversation);
+  await ensureSession(activeConversation);
+  await renderSessions(''); await renderMessages(); showToast('Cache apagado');
 });
-$('attachButton').addEventListener('click', () => showToast('Anexos em breve'));
+$('attachButton').addEventListener('click', () => {
+  if (!authenticated && !PREVIEW_MODE) { showToast('Faça login'); return; }
+  if (!pcOnline) { showToast('PC desconectado — anexe quando online'); return; }
+  $('fileInput').click();
+});
+$('fileInput').addEventListener('change', async e => {
+  const f = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!f) return;
+  if (f.size > 15 * 1024 * 1024) { showToast('Arquivo maior que 15MB'); return; }
+  showToast('Lendo ' + f.name + '…');
+  try {
+    const fd = new FormData();
+    fd.append('file', f, f.name);
+    fd.append('conversation_id', activeConversation);
+    const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || ('Erro ' + res.status));
+    const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user', text: '📎 Anexei o documento "' + data.name + '" (' + data.chars + ' caracteres em ' + data.chunks + ' trechos).', created_at: new Date().toISOString(), status: 'pending', want_ai: false };
+    await storeMessages([row]);
+    await touchSession(activeConversation);
+    await syncAndRefresh();
+    await renderSessions($('sessionSearch').value);
+    await renderMessages();
+    await renderDocs();
+    scrollChat(true);
+    showToast('Documento lido. Peça resumo, tópicos ou pergunte sobre ele.');
+  } catch (err) { showToast('Falha no upload: ' + (err.message || '')); }
+});
+
+/* ----- Documentos ----- */
+async function renderDocs() {
+  const box = $('docList');
+  if (!box) return;
+  if (!authenticated || !pcOnline) {
+    box.innerHTML = '<div class="doc-empty">Documentos aparecem com o PC online.</div>';
+    $('docCount').textContent = '0';
+    return;
+  }
+  try {
+    const r = await api('/api/docs');
+    const docs = r.documents || [];
+    $('docCount').textContent = String(docs.length);
+    box.replaceChildren();
+    if (!docs.length) { box.innerHTML = '<div class="doc-empty">Nenhum ainda. Toque em + para anexar.</div>'; return; }
+    docs.slice(0, 20).forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'doc-item';
+      const t = document.createElement('div'); t.className = 't'; t.textContent = '📄 ' + d.name; t.title = d.name;
+      const s = document.createElement('small'); s.textContent = d.chars + ' chars · ' + (d.tem_resumo ? 'resumido' : 'novo');
+      const acts = document.createElement('div'); acts.className = 'doc-actions';
+      const b1 = document.createElement('button'); b1.type = 'button'; b1.textContent = 'Resumo';
+      const b2 = document.createElement('button'); b2.type = 'button'; b2.textContent = 'Tópicos';
+      b1.addEventListener('click', () => docAction(d.doc_id, d.name, 'resumo', b1, b2));
+      b2.addEventListener('click', () => docAction(d.doc_id, d.name, 'topicos', b1, b2));
+      acts.appendChild(b1); acts.appendChild(b2);
+      el.appendChild(t); el.appendChild(s); el.appendChild(acts);
+      box.appendChild(el);
+    });
+  } catch (_) { box.innerHTML = '<div class="doc-empty">PC offline.</div>'; }
+}
+async function docAction(docId, name, kind, b1, b2) {
+  b1.disabled = true; b2.disabled = true;
+  showToast(kind === 'resumo' ? 'Resumindo ' + name + '…' : 'Extraindo tópicos de ' + name + '…');
+  try {
+    const r = await api('/api/docs/' + kind, { method: 'POST', body: JSON.stringify({ doc_id: docId }) });
+    const txt = r.resumo || r.topicos || '';
+    if (!txt.trim()) throw new Error('resposta vazia');
+    const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'assistant',
+      text: (kind === 'resumo' ? '📄 Resumo de ' + name + '\n\n' : '📑 Tópicos de ' + name + '\n\n') + txt,
+      created_at: new Date().toISOString(), status: 'synced', model: modeloAtivo() };
+    await storeMessages([row]);
+    navigate('chat');
+    await renderMessages();
+    scrollChat(true);
+  } catch (err) { showToast('Falha: ' + (err.message || '')); }
+  finally { b1.disabled = false; b2.disabled = false; }
+}
+
+/* ----- Memória (ver + esquecer) ----- */
+async function loadMemories() {
+  const box = $('memoryList');
+  if (!box) return;
+  if (!authenticated || !pcOnline) { box.innerHTML = '<div class="doc-empty">Memória aparece com o PC online.</div>'; return; }
+  try {
+    const r = await api('/api/memories');
+    const ms = r.memories || [];
+    box.replaceChildren();
+    if (!ms.length) { box.innerHTML = '<div class="doc-empty">Nada guardado. Diga "lembre-se que…".</div>'; return; }
+    ms.forEach(m => {
+      const row = document.createElement('div'); row.className = 'memory-row';
+      const k = document.createElement('span'); k.className = 'k'; k.textContent = m.key;
+      const v = document.createElement('span'); v.className = 'v'; v.textContent = m.value; v.title = m.value;
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = '✕'; b.title = 'Esquecer ' + m.key;
+      b.addEventListener('click', async () => {
+        try {
+          const res = await fetch('/api/memories/' + encodeURIComponent(m.key), { method: 'DELETE', headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+          if (!res.ok) throw new Error();
+          await loadMemories();
+          showToast('Esquecido: ' + m.key);
+        } catch (_) { showToast('Falha ao esquecer'); }
+      });
+      row.appendChild(k); row.appendChild(v); row.appendChild(b);
+      box.appendChild(row);
+    });
+  } catch (_) { box.innerHTML = '<div class="doc-empty">PC offline.</div>'; }
+}
+$('memoryRefresh').addEventListener('click', loadMemories);
 $('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente online' : 'Aguardando agente local'));
-// Controle remoto real (tela ao vivo + mouse/teclado)
-let remoteEnabled = false;
-let screenBusy = false;
-let touchStart = null;
-let touchMoved = false;
-let longPressed = false;
-let longTimer = null;
-let lastMove = 0;
+
+/* ----- Remoto ----- */
+let remoteEnabled = false, screenBusy = false, touchStart = null, touchMoved = false, longPressed = false, longTimer = null, lastMove = 0;
 const desktopAtivo = () => !$('page-desktop').hidden;
 async function pullScreen() {
   if (!authenticated || !pcOnline || !desktopAtivo() || !navigator.onLine || screenBusy) return;
@@ -431,16 +788,10 @@ async function pullScreen() {
     $('screenImg').src = 'data:image/jpeg;base64,' + r.imagem;
     remoteEnabled = r.remote_enabled === true;
     $('screenLabel').textContent = 'AO VIVO · ' + (r.ms || 0) + 'ms';
-    $('screenNote').textContent = remoteEnabled
-      ? 'Toque = clique, segurar = direito, arrastar = mover.'
-      : 'Somente visualização. Ative JULIA_REMOTE=1 no PC.';
+    $('screenNote').textContent = remoteEnabled ? 'Toque = clique, segurar = direito, arrastar = mover.' : 'Somente visualização. Ative JULIA_REMOTE=1 no PC.';
   } catch (err) {
     $('screenLabel').textContent = 'TELA INDISPONÍVEL';
-    $('screenNote').textContent = err.status === 404
-      ? 'Servidor desatualizado: aguarde o redeploy e recarregue.'
-      : err.status === 503
-      ? 'Agente sem suporte a tela: reinicie o agente.'
-      : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
+    $('screenNote').textContent = err.status === 503 ? 'Agente sem suporte a tela: reinicie o agente.' : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
   } finally { screenBusy = false; }
 }
 setInterval(pullScreen, 1500);
@@ -452,15 +803,12 @@ async function sendInput(cmd) {
 function normPos(ev) {
   const r = $('remoteFrame').getBoundingClientRect();
   const t = ev.touches && ev.touches[0] ? ev.touches[0] : ev;
-  return { x: Math.min(1, Math.max(0, (t.clientX - r.left) / r.width)),
-           y: Math.min(1, Math.max(0, (t.clientY - r.top) / r.height)) };
+  return { x: Math.min(1, Math.max(0, (t.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (t.clientY - r.top) / r.height)) };
 }
 function mostraPonteiro(p) {
-  const frame = $('remoteFrame').getBoundingClientRect();
-  const pointer = $('remotePointer');
-  pointer.style.display = 'block';
-  pointer.style.left = (p.x * frame.width) + 'px';
-  pointer.style.top = (p.y * frame.height) + 'px';
+  const f = $('remoteFrame').getBoundingClientRect();
+  const el = $('remotePointer');
+  el.style.display = 'block'; el.style.left = (p.x * f.width) + 'px'; el.style.top = (p.y * f.height) + 'px';
 }
 const frame = $('remoteFrame');
 frame.addEventListener('touchstart', ev => {
@@ -468,64 +816,48 @@ frame.addEventListener('touchstart', ev => {
   ev.preventDefault();
   const p = normPos(ev);
   touchStart = p; touchMoved = false; longPressed = false;
-  mostraPonteiro(p);
-  clearTimeout(longTimer);
-  longTimer = setTimeout(() => {
-    longPressed = true;
-    sendInput({ kind: 'right', ...p });
-  }, 600);
+  mostraPonteiro(p); clearTimeout(longTimer);
+  longTimer = setTimeout(() => { longPressed = true; sendInput(Object.assign({ kind: 'right' }, p)); }, 600);
 }, { passive: false });
 frame.addEventListener('touchmove', ev => {
   if (!touchStart) return;
   ev.preventDefault();
   const p = normPos(ev);
   mostraPonteiro(p);
-  const dx = (p.x - touchStart.x) * frame.getBoundingClientRect().width;
-  const dy = (p.y - touchStart.y) * frame.getBoundingClientRect().height;
+  const rc = frame.getBoundingClientRect();
+  const dx = (p.x - touchStart.x) * rc.width, dy = (p.y - touchStart.y) * rc.height;
   if (Math.hypot(dx, dy) > 12) {
-    touchMoved = true;
-    clearTimeout(longTimer);
+    touchMoved = true; clearTimeout(longTimer);
     const agora = Date.now();
-    if (agora - lastMove > 90) { lastMove = agora; sendInput({ kind: 'move', ...p }); }
+    if (agora - lastMove > 90) { lastMove = agora; sendInput(Object.assign({ kind: 'move' }, p)); }
   }
 }, { passive: false });
 frame.addEventListener('touchend', ev => {
   if (!touchStart) return;
-  ev.preventDefault();
-  clearTimeout(longTimer);
-  const p = touchStart;
-  touchStart = null;
-  if (!touchMoved && !longPressed) sendInput({ kind: 'click', ...p });
+  ev.preventDefault(); clearTimeout(longTimer);
+  const p = touchStart; touchStart = null;
+  if (!touchMoved && !longPressed) sendInput(Object.assign({ kind: 'click' }, p));
 });
 frame.addEventListener('click', ev => {
   if (!desktopAtivo() || ev.detail === 0) return;
-  const p = normPos(ev);
-  mostraPonteiro(p);
-  sendInput({ kind: 'click', ...p });
+  const p = normPos(ev); mostraPonteiro(p); sendInput(Object.assign({ kind: 'click' }, p));
 });
-$('keyboardButton').addEventListener('click', () => {
-  const campo = $('remoteKeys');
-  campo.value = '';
-  campo.focus();
-  showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado desativado.');
-});
+$('keyboardButton').addEventListener('click', () => { const c = $('remoteKeys'); c.value = ''; c.focus(); showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado desativado.'); });
 $('remoteKeys').addEventListener('input', ev => {
   const v = ev.target.value;
-  if (v.length > (ev.target._last || '').length && v.length) {
-    sendInput({ kind: 'text', text: v.slice(ev.target._last ? ev.target._last.length : 0) });
-  }
+  if (v.length > (ev.target._last || '').length && v.length) sendInput({ kind: 'text', text: v.slice(ev.target._last ? ev.target._last.length : 0) });
   ev.target._last = v;
 });
 $('remoteKeys').addEventListener('keydown', ev => {
   if (ev.key === 'Enter') { sendInput({ kind: 'key', key: 'enter' }); ev.target.value = ''; ev.target._last = ''; }
   else if (ev.key === 'Backspace' && !ev.target.value) sendInput({ kind: 'key', key: 'backspace' });
 });
-$('refreshButton').addEventListener('click', () => { pullScreen(); });
+$('refreshButton').addEventListener('click', pullScreen);
 $('touchMode').addEventListener('click', () => showToast('Toque, segurar, arrastar.'));
 $('fullscreen').addEventListener('click', async () => {
-  const element = $('remoteFrame');
+  const el = $('remoteFrame');
   if (!document.fullscreenEnabled) { showToast('Tela cheia indisponível'); return; }
-  try { if (document.fullscreenElement) await document.exitFullscreen(); else await element.requestFullscreen(); }
+  try { if (document.fullscreenElement) await document.exitFullscreen(); else await el.requestFullscreen(); }
   catch (_) { showToast('Tela cheia não autorizada'); }
 });
 window.addEventListener('online', checkStatus);
@@ -534,16 +866,18 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) chec
 setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
 (async function init() {
   navigate('chat');
+  setDrawer(window.innerWidth >= 900);
   try {
     db = await openDb();
+    await migrateV1();
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');
-    if (presas.length) await storeMessages(presas.map(m => ({ ...m, status: 'failed' })));
+    if (presas.length) await storeMessages(presas.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: m.role, text: m.text, created_at: m.created_at, status: 'failed', model: m.model || '' })));
+    await ensureSession(activeConversation);
+    await renderSessions('');
     await renderMessages();
-  }
-  catch (err) { showToast('Cache local indisponível'); $('pendingCount').textContent = 'Indisponível'; }
+  } catch (_) { showToast('Cache local indisponível'); }
+  autoresize();
   await restoreSession(); await checkStatus(); updateConnection();
-  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-  }
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();

@@ -31,220 +31,244 @@
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.5 8a7 7 0 0 1 12.2-1L20 12M4 12l1.3 5A7 7 0 0 0 17.5 16"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m3 0-1 13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 7"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
   </svg>
 
   <div class="scene-glow one"></div>
   <div class="scene-glow two"></div>
+  <div class="drawer-scrim" id="drawerScrim" hidden></div>
 
-  <main class="app" id="app">
-    <header class="app-header">
-      <div class="brand">
-        <div class="brand-mark"><span>✦</span></div>
-        <div><strong>JÚLIA<span class="brand-dot">.</span></strong><small>MOBILE</small></div>
-      </div>
-      <button class="top-status" type="button" id="statusButton" title="Status da conexão">
-        <span class="status-dot"></span>
-        <span id="connectionLabel">Verificando…</span>
-        <svg class="icon"><use href="#i-info"/></svg>
-      </button>
-    </header>
-
-    <section class="page active" id="page-chat" aria-label="Chat">
-      <div class="chat-intro">
-        <h1>Oi, que bom<br/>te ver por aqui <span class="wave">✳</span></h1>
-        <p class="intro-copy">Seu assistente, do seu jeito.</p>
-      </div>
-
-      <div class="notice">
-        <svg class="icon"><use href="#i-lock"/></svg>
-        <div><strong>Conversa no celular</strong><span>Histórico local. Sincroniza com o PC quando online.</span></div>
-      </div>
-
-      <div class="chat-topline">
-        <h2>Conversa <span class="pending-badge" id="pendingCount">0 pendentes</span></h2>
-        <button class="subtle-button" id="resetChat" type="button">
-          <svg class="icon"><use href="#i-plus"/></svg> Nova
-        </button>
-      </div>
-
-      <div class="ai-statusbar">
-        <span id="aiStatus" class="muted">IA: verificando…</span>
-        <label class="sr-only" for="modelSelect">Modelo</label>
-        <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
-      </div>
-
-      <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">
-        <div class="chat-date">CARREGANDO…</div>
-      </div>
-
-      <div class="suggestions">
-        <button class="suggestion" data-message="Como está meu PC?" type="button"><span>✧</span> Status do PC</button>
-        <button class="suggestion" data-message="Quero acessar a tela" type="button"><span>↗</span> Acessar PC</button>
-      </div>
-    </section>
-
-    <section class="page" id="page-desktop" aria-label="PC" hidden>
-      <div class="section-header">
-        <p class="eyebrow">SEU PC</p>
-        <h1>Controle remoto<span class="brand-dot">.</span></h1>
-        <p class="intro-copy">Tela ao vivo e controle do seu computador.</p>
-      </div>
-
-      <div class="device-card">
-        <div class="device-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
-        <div class="device-name"><strong>Meu computador</strong><span id="deviceDetail">Aguardando conexão</span></div>
-        <span class="offline-pill" id="deviceStatus"><i></i> Offline</span>
-      </div>
-
-      <div class="screen-top">
-        <span><span class="tiny-dot"></span> <span id="screenLabel">AGUARDANDO PC</span></span>
-        <button class="mini-tool" id="fullscreen" type="button" title="Tela cheia"><svg class="icon"><use href="#i-maximize"/></svg></button>
-      </div>
-
-      <div class="remote-frame live" id="remoteFrame" role="img" aria-label="Tela do PC">
-        <img id="screenImg" alt="" />
-        <div class="remote-pointer" id="remotePointer"></div>
-      </div>
-
-      <div class="screen-disclaimer">
-        <svg class="icon"><use href="#i-info"/></svg>
-        <span id="screenNote">Aguardando conexão com o agente.</span>
-      </div>
-
-      <div class="control-actions">
-        <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
-        <button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
-        <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
-      </div>
-
-      <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar" placeholder="" />
-
-      <div class="access-card">
-        <div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
-        <div><strong>Controle protegido</strong><span id="accessNote">Toque e teclado exigem JULIA_REMOTE=1 no PC.</span></div>
-      </div>
-    </section>
-
-    <section class="page" id="page-activity" aria-label="Atividades" hidden>
-      <div class="section-header">
-        <p class="eyebrow">ATIVIDADES</p>
-        <h1>Tudo em <span class="brand-dot">.</span></h1>
-        <p class="intro-copy">Histórico de conexões e tarefas.</p>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card"><svg class="icon"><use href="#i-activity"/></svg><strong>0</strong><span>tarefas</span></div>
-        <div class="stat-card"><svg class="icon"><use href="#i-monitor"/></svg><strong>0</strong><span>PCs online</span></div>
-      </div>
-
-      <h2 class="section-caption">Linha do tempo</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div>
-          <div><strong>Pronto para explorar</strong><p>Design e navegação demonstrativos.</p><small>Agora · local</small></div>
+  <main class="app app-wide" id="app">
+    <!-- Drawer lateral expansível -->
+    <aside class="drawer" id="drawer" aria-label="Menu lateral" aria-hidden="true">
+      <div class="drawer-head">
+        <div class="brand">
+          <div class="brand-mark"><span>✦</span></div>
+          <div><strong>JÚLIA<span class="brand-dot">.</span></strong><small>MOBILE</small></div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-icon neutral"><svg class="icon"><use href="#i-wifi"/></svg></div>
-          <div><strong>Aguardando agente</strong><p>A conexão real será estabelecida quando o agente estiver online.</p><small>Pendente</small></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="page-settings" aria-label="Ajustes" hidden>
-      <div class="section-header">
-        <p class="eyebrow">AJUSTES</p>
-        <h1>Configurações<span class="brand-dot">.</span></h1>
-        <p class="intro-copy">Privacidade e preferências.</p>
+        <button class="icon-button" id="drawerClose" type="button" aria-label="Fechar menu"><svg class="icon"><use href="#i-close"/></svg></button>
       </div>
 
-      <div class="profile-card">
-        <div class="profile-avatar">✦</div>
-        <div><strong>Perfil</strong><span id="profileName">Conecte-se para sincronizar</span></div>
-        <span class="demo-tag" id="profileTag">OFFLINE</span>
+      <button class="new-chat-cta" id="newChatCta" type="button"><svg class="icon"><use href="#i-plus"/></svg> Novo chat</button>
+
+      <div class="drawer-search">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="sessionSearch" type="search" placeholder="Buscar conversas…" aria-label="Buscar conversas" autocomplete="off" />
       </div>
 
-      <h2 class="section-caption">Sincronização</h2>
-      <div class="sync-card">
-        <strong><span id="syncCounter">0</span> mensagens aguardando</strong>
-        <span id="syncStatusText">O PC está desconectado. Mensagens ficam no celular.</span>
-        <button id="syncNow" class="subtle-button" type="button">↻ Verificar</button>
-      </div>
+      <p class="drawer-caption">CONVERSAS <span id="sessionCount">0</span></p>
+      <div class="session-list" id="sessionList" role="listbox" aria-label="Sessões de chat"></div>
 
-      <h2 class="section-caption">Sistema</h2>
-      <div class="settings-list">
-        <div class="settings-row">
-          <div class="settings-icon"><svg class="icon"><use href="#i-lock"/></svg></div>
-          <div><strong>Histórico local</strong><span>IndexedDB. Cópia no PC quando online.</span></div>
-          <span class="setting-soon">Ativo</span>
-        </div>
-        <div class="settings-row">
-          <div class="settings-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
-          <div><strong>Conectar PC</strong><span>Pareamento e autorização.</span></div>
-          <span class="setting-soon">Planejado</span>
-        </div>
-        <div class="settings-row">
-          <div class="settings-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
-          <div><strong>Segurança</strong><span>Sessão e permissões remotas.</span></div>
-          <span class="setting-soon">Planejado</span>
-        </div>
-      </div>
-
-      <div class="settings-note">
-        Júlia Mobile v0.2 · Offline first
-        <br/>
-        <button class="subtle-button danger-link" id="clearCache" type="button">Apagar cache</button>
-        <button class="subtle-button" id="logoutButton" type="button">Sair</button>
-      </div>
-    </section>
-
-    <div class="bottom-dock">
-      <form class="composer" id="composer" autocomplete="off">
-        <button type="button" class="composer-plus" id="attachButton" title="Anexar"><svg class="icon"><use href="#i-plus"/></svg></button>
-        <label class="sr-only" for="messageInput">Mensagem</label>
-        <input type="text" id="messageInput" placeholder="Mensagem…" maxlength="10000" />
-        <button class="send-button" type="submit" aria-label="Enviar">
-          <svg class="icon"><use href="#i-send"/></svg>
-        </button>
-      </form>
-
-      <nav class="bottom-nav" aria-label="Navegação">
-        <button class="nav-item active" data-tab="chat" aria-current="page" type="button">
-          <svg class="icon"><use href="#i-chat"/></svg>
-          <span>Chat</span>
-        </button>
-        <button class="nav-item" data-tab="desktop" type="button">
-          <svg class="icon"><use href="#i-monitor"/></svg>
-          <span>PC</span>
-        </button>
-        <button class="nav-item" data-tab="activity" type="button">
-          <svg class="icon"><use href="#i-activity"/></svg>
-          <span>Atividades</span>
-        </button>
-        <button class="nav-item" data-tab="settings" type="button">
-          <svg class="icon"><use href="#i-settings"/></svg>
-          <span>Ajustes</span>
-        </button>
+      <p class="drawer-caption">NAVEGAR</p>
+      <nav class="drawer-nav" aria-label="Navegação">
+        <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Chat <span class="drawer-hint">foco total</span></button>
+        <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
+        <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
+        <button class="drawer-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg> Ajustes</button>
       </nav>
-    </div>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <p class="drawer-caption">DOCUMENTOS <span id="docCount">0</span></p>
+      <div class="doc-list" id="docList" aria-label="Documentos"></div>
 
-    <div class="login-overlay" id="loginOverlay" aria-label="Login">
-      <div class="login-card">
-        <div class="login-symbol">✦</div>
-        <p class="eyebrow">ACESSO</p>
-        <h2>Bem-vindo à <span>Júlia.</span></h2>
-        <form id="loginForm" autocomplete="on">
-          <label for="loginUser">Usuário</label>
-          <input id="loginUser" autocomplete="username" name="username" required maxlength="80" />
-          <label for="loginPassword">Senha</label>
-          <input id="loginPassword" autocomplete="current-password" name="password" type="password" required maxlength="256" />
-          <div class="login-error" id="loginError" role="alert"></div>
-          <button id="loginButton" class="login-submit" type="submit">
-            Entrar <span>↗</span>
+      <div class="drawer-foot">
+        <div class="memory-card">
+          <svg class="icon"><use href="#i-sparkle"/></svg>
+          <div><strong>Memória sincronizada</strong><span id="memoryStatus">Entre todos os chats</span></div>
+          <label class="switch" title="Memória entre chats"><input type="checkbox" id="memoryToggle" checked /><span></span></label>
+        </div>
+        <div class="drawer-model">
+          <label for="modelSelect">Modelo</label>
+          <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
+        </div>
+        <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
+      </div>
+    </aside>
+
+    <div class="main-col">
+      <header class="app-header">
+        <button class="icon-button menu-button" id="drawerOpen" type="button" aria-label="Abrir menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+        <div class="chat-title-wrap">
+          <strong id="chatTitle">Nova conversa</strong>
+          <small id="chatSubtitle">Toque para trocar de sessão no menu</small>
+        </div>
+        <button class="icon-button" id="newChatTop" type="button" title="Nova conversa" aria-label="Nova conversa"><svg class="icon"><use href="#i-plus"/></svg></button>
+        <button class="top-status" type="button" id="statusButton" title="Status da conexão">
+          <span class="status-dot"></span>
+          <span id="connectionLabel">Verificando…</span>
+        </button>
+      </header>
+
+      <section class="page active" id="page-chat" aria-label="Chat">
+        <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">
+          <div class="chat-date">CARREGANDO…</div>
+        </div>
+
+        <div class="scroll-fab" id="scrollFab" hidden><svg class="icon"><use href="#i-down"/></svg></div>
+
+        <div class="suggestions" id="suggestions">
+          <button class="suggestion" data-message="Pesquise as principais notícias de tecnologia de hoje e traga com fontes." type="button"><span>✧</span> Notícias com fontes</button>
+          <button class="suggestion" data-message="Me mostre uma imagem de um pôr do sol na praia." type="button"><span>↗</span> Mostrar imagem</button>
+          <button class="suggestion" data-message="O que você sabe sobre mim?" type="button"><span>≡</span> Minha memória</button>
+        </div>
+      </section>
+
+      <section class="page" id="page-desktop" aria-label="PC" hidden>
+        <div class="section-header">
+          <p class="eyebrow">SEU PC</p>
+          <h1>Controle remoto<span class="brand-dot">.</span></h1>
+          <p class="intro-copy">Tela ao vivo e controle do seu computador.</p>
+        </div>
+
+        <div class="device-card">
+          <div class="device-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
+          <div class="device-name"><strong>Meu computador</strong><span id="deviceDetail">Aguardando conexão</span></div>
+          <span class="offline-pill" id="deviceStatus"><i></i> Offline</span>
+        </div>
+
+        <div class="screen-top">
+          <span><span class="tiny-dot"></span> <span id="screenLabel">AGUARDANDO PC</span></span>
+          <button class="mini-tool" id="fullscreen" type="button" title="Tela cheia"><svg class="icon"><use href="#i-maximize"/></svg></button>
+        </div>
+
+        <div class="remote-frame live" id="remoteFrame" role="img" aria-label="Tela do PC">
+          <img id="screenImg" alt="" />
+          <div class="remote-pointer" id="remotePointer"></div>
+        </div>
+
+        <div class="screen-disclaimer">
+          <svg class="icon"><use href="#i-info"/></svg>
+          <span id="screenNote">Aguardando conexão com o agente.</span>
+        </div>
+
+        <div class="control-actions">
+          <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
+          <button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
+          <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
+        </div>
+
+        <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar" placeholder="" />
+
+        <div class="access-card">
+          <div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+          <div><strong>Controle protegido</strong><span id="accessNote">Toque e teclado exigem JULIA_REMOTE=1 no PC.</span></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-activity" aria-label="Atividades" hidden>
+        <div class="section-header">
+          <p class="eyebrow">ATIVIDADES</p>
+          <h1>Tudo em dia<span class="brand-dot">.</span></h1>
+          <p class="intro-copy">Histórico de conexões e tarefas.</p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card"><svg class="icon"><use href="#i-activity"/></svg><strong id="statTasks">0</strong><span>mensagens</span></div>
+          <div class="stat-card"><svg class="icon"><use href="#i-monitor"/></svg><strong id="statSessions">0</strong><span>sessões</span></div>
+        </div>
+
+        <h2 class="section-caption">Linha do tempo</h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="page" id="page-settings" aria-label="Ajustes" hidden>
+        <div class="section-header">
+          <p class="eyebrow">AJUSTES</p>
+          <h1>Configurações<span class="brand-dot">.</span></h1>
+          <p class="intro-copy">Privacidade e preferências.</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar">✦</div>
+          <div><strong>Perfil</strong><span id="profileName">Conecte-se para sincronizar</span></div>
+          <span class="demo-tag" id="profileTag">OFFLINE</span>
+        </div>
+
+        <h2 class="section-caption">Memória da Júlia</h2>
+        <div class="sync-card">
+          <strong>O que ela aprendeu sobre você</strong>
+          <span>Fatos extraídos das conversas. Toque no ✕ para esquecer.</span>
+          <div class="memory-list" id="memoryList"></div>
+          <button id="memoryRefresh" class="subtle-button" type="button">↻ Atualizar memória</button>
+        </div>
+
+        <h2 class="section-caption">Sincronização <span class="pending-badge" id="pendingCount">0 pendentes</span></h2>
+        <div class="sync-card">
+          <strong><span id="syncCounter">0</span> mensagens aguardando</strong>
+          <span id="syncStatusText">O PC está desconectado. Mensagens ficam no celular.</span>
+          <button id="syncNow" class="subtle-button" type="button">↻ Verificar agora</button>
+        </div>
+
+        <h2 class="section-caption">Sistema</h2>
+        <div class="settings-list">
+          <div class="settings-row">
+            <div class="settings-icon"><svg class="icon"><use href="#i-lock"/></svg></div>
+            <div><strong>Histórico local</strong><span>IndexedDB. Cópia no PC quando online.</span></div>
+            <span class="setting-soon">Ativo</span>
+          </div>
+          <div class="settings-row">
+            <div class="settings-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div>
+            <div><strong>Pesquisa web</strong><span>IA busca fontes quando você pedir.</span></div>
+            <span class="setting-soon">Ativo</span>
+          </div>
+          <div class="settings-row">
+            <div class="settings-icon"><svg class="icon"><use href="#i-image"/></svg></div>
+            <div><strong>Imagens no chat</strong><span>Markdown ![alt](url) renderiza.</span></div>
+            <span class="setting-soon">Ativo</span>
+          </div>
+        </div>
+
+        <div class="settings-note">
+          Júlia Mobile v0.3 · Chat fullscreen + sessões
+          <br/>
+          <button class="subtle-button danger-link" id="clearCache" type="button">Apagar cache</button>
+          <button class="subtle-button" id="logoutButton" type="button">Sair</button>
+        </div>
+      </section>
+
+      <div class="bottom-dock">
+        <div class="gen-bar" id="genBar" hidden>
+          <span class="gen-dots"><i></i><i></i><i></i></span>
+          <span id="genLabel">Júlia está escrevendo… 0s</span>
+          <button id="stopGen" type="button"><svg class="icon"><use href="#i-stop"/></svg> Interromper</button>
+        </div>
+        <form class="composer" id="composer" autocomplete="off">
+          <input type="file" id="fileInput" hidden accept=".pdf,.docx,.txt,.md,.markdown,.csv,.tsv,.xlsx,.html,.htm" />
+          <button type="button" class="composer-plus" id="attachButton" title="Anexar documento (PDF, DOCX, TXT, CSV, XLSX)"><svg class="icon"><use href="#i-plus"/></svg></button>
+          <label class="sr-only" for="messageInput">Mensagem</label>
+          <textarea id="messageInput" placeholder="Mensagem… (Enter envia)" maxlength="10000" rows="1"></textarea>
+          <button class="send-button" type="submit" aria-label="Enviar">
+            <svg class="icon"><use href="#i-send"/></svg>
           </button>
         </form>
-        <small>Histórico no celular e no PC. Nuvem sem conversas.</small>
+        <div class="composer-hint"><span id="charCount">0 / 10000</span><span>Dica: peça “pesquise + fontes” ou “mostre imagem de…”</span></div>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <div class="login-overlay" id="loginOverlay" aria-label="Login">
+        <div class="login-card">
+          <div class="login-symbol">✦</div>
+          <p class="eyebrow">ACESSO</p>
+          <h2>Bem-vindo à <span>Júlia.</span></h2>
+          <form id="loginForm" autocomplete="on">
+            <label for="loginUser">Usuário</label>
+            <input id="loginUser" autocomplete="username" name="username" required maxlength="80" />
+            <label for="loginPassword">Senha</label>
+            <input id="loginPassword" autocomplete="current-password" name="password" type="password" required maxlength="256" />
+            <div class="login-error" id="loginError" role="alert"></div>
+            <button id="loginButton" class="login-submit" type="submit">
+              Entrar <span>↗</span>
+            </button>
+          </form>
+          <small>Histórico no celular e no PC. Nuvem sem conversas.</small>
+        </div>
       </div>
     </div>
   </main>

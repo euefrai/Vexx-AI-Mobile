@@ -2,6 +2,7 @@
 import json
 import logging
 import os
+import re
 import sqlite3
 import threading
 import time
@@ -10,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
+import docs_agent
 import hermes_bridge
 import remoto
 from websockets.sync.client import connect
@@ -19,7 +21,10 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger("julia-pc")
 
 SYSTEM_PADRAO = ("Você é a Júlia, assistente pessoal do usuário. "
-                 "Responda em português, de forma direta e útil.")
+                 "Responda em português, de forma direta e útil. "
+                 "Use markdown leve: títulos curtos, listas, **negrito**, `código`, tabelas quando útil. "
+                 "Se navegar/pesquisar, cite ao final uma seção 'Fontes:' com os links usados. "
+                 "Se pedirem imagem, responda com ![descrição](https://...) em markdown além do texto.")
 
 
 def agora_iso() -> str:
@@ -51,6 +56,16 @@ def open_db(path: Path):
         created_at TEXT NOT NULL, updated_at TEXT NOT NULL
     )""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_created ON messages(origin, created_at)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_conv ON messages(origin, conversation_id, created_at)")
+    db.execute("""CREATE TABLE IF NOT EXISTS memories (
+        key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL
+    )""")
+    db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
+        source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL
+    )""")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_memfacts_key ON memory_facts(key, updated_at)")
+    docs_agent.criar_tabelas(db)
     db.commit()
     return db
 
@@ -95,9 +110,389 @@ def ai_config() -> dict:
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
         "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
         "system": os.environ.get("JULIA_SYSTEM_PROMPT", SYSTEM_PADRAO)[:2000],
-        "context": min(max(int(os.environ.get("JULIA_AI_CONTEXT", "20")), 1), 50),
-        "max_tokens": min(max(int(os.environ.get("JULIA_AI_MAX_TOKENS", "2000")), 1), 8000),
+        "context": min(max(int(os.environ.get("JULIA_AI_CONTEXT", "12")), 1), 50),
+        "max_tokens": min(max(int(os.environ.get("JULIA_AI_MAX_TOKENS", "1500")), 1), 8000),
+        "memoria_global": os.environ.get("JULIA_SHARED_MEMORY", "1") == "1",
+        "pesquisa_web": os.environ.get("JULIA_WEB_SEARCH", "1") == "1",
     }
+
+
+# ── Memória compartilhada entre sessões ──────────────────────────────
+def salvar_fatos(db, texto: str) -> None:
+    """Heurística simples: 'lembre-se que ...', 'meu nome é ...' etc viram memories."""
+    import re
+    if not isinstance(texto, str):
+        return
+    t = texto.strip()
+    padroes = [
+        (r"(?i)lembre-?se (?:que |de que |disso:?\s?)(.{3,300})", "fato"),
+        (r"(?i)(?:meu nome é|me chamo|sou o|sou a)\s+(.{2,80})", "nome"),
+        (r"(?i)(?:meu foco é|minha meta é|estou trabalhando (?:em|com))\s+(.{3,200})", "foco"),
+        (r"(?i)(?:prefiro|gosto de|não gosto de)\s+(.{3,200})", "preferencia"),
+    ]
+    achou = False
+    with db:
+        for rx, chave in padroes:
+            m = re.search(rx, t)
+            if m:
+                valor = re.sub(r"\s+", " ", m.group(1)).strip(" .;:")[:300]
+                if valor:
+                    db.execute("""INSERT INTO memories (key, value, updated_at)
+                        VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET
+                        value=excluded.value, updated_at=excluded.updated_at""",
+                        (chave, valor, agora_iso()))
+                    achou = True
+    if achou:
+        log.info("memória atualizada a partir da conversa")
+
+
+def ler_memorias(db) -> list:
+    try:
+        rows = db.execute("SELECT key, value FROM memories ORDER BY updated_at DESC LIMIT 20").fetchall()
+    except Exception:
+        return []
+    return [{"key": k, "value": v} for k, v in rows if v]
+
+
+def memoria_global(db, conversation_id: str, limite_outras: int = 8) -> list:
+    """Últimas mensagens de OUTRAS conversas + fatos salvos, para injetar no prompt."""
+    try:
+        rows = db.execute("""SELECT conversation_id, role, text FROM messages
+                             WHERE origin='mobile' AND conversation_id != ?
+                             ORDER BY created_at DESC, id DESC LIMIT ?""",
+                          (conversation_id, limite_outras)).fetchall()
+    except Exception:
+        rows = []
+    blocos = []
+    for conv, role, text in reversed(rows):
+        if role in ("user", "assistant") and text:
+            blocos.append(f"[{conv[-6:]}|{role}]: {(text or '')[:300]}")
+    fatos = ler_memorias(db)
+    if fatos:
+        blocos.append("FATOS SALVOS: " + "; ".join(f"{f['key']}={f['value'][:150]}" for f in fatos))
+    return blocos
+
+
+def guardar_fato(db, chave: str, valor: str, origem: str = "chat") -> None:
+    """Guarda fato aprendido: chave resumida + histórico para evolução."""
+    chave = re.sub(r"\s+", "_", (chave or "").strip().lower())[:60].strip("_") or "fato"
+    valor = (valor or "").strip()[:500]
+    if not valor:
+        return
+    with db:
+        db.execute("""INSERT INTO memories (key, value, updated_at)
+            VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET
+            value=excluded.value, updated_at=excluded.updated_at""",
+            (chave, valor, agora_iso()))
+        db.execute("""INSERT INTO memory_facts (key, value, source, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)""",
+            (chave, valor, origem, agora_iso(), agora_iso()))
+    log.info("memória aprendeu: %s", chave)
+
+
+def memorias_relevantes(db, pergunta: str, k: int = 8) -> list:
+    """Fatos ordenados por relevância (palavras em comum) + recência."""
+    try:
+        rows = db.execute("SELECT key, value, updated_at FROM memories").fetchall()
+    except Exception:
+        return []
+    toks_q = set(re.findall(r"[a-zà-ú0-9]{3,}", (pergunta or "").lower()))
+    scored = []
+    for chave, valor, upd in rows:
+        toks = set(re.findall(r"[a-zà-ú0-9]{3,}", f"{chave} {valor}".lower()))
+        inter = toks_q & toks if toks_q else set()
+        scored.append((len(inter) * 2 + (1 if chave in ("nome", "foco") else 0), upd or "", chave, valor))
+    scored.sort(key=lambda s: (s[0], s[1]), reverse=True)
+    if toks_q:
+        relevantes = [s for s in scored if s[0] > 0][:k] or scored[:2]
+    else:
+        relevantes = scored[:k]
+    return [{"key": c, "value": v} for _, _, c, v in relevantes]
+
+
+def interpretar_comando_memoria(db, texto: str):
+    """Comandos diretos de memória. Retorna resposta pronta ou None."""
+    t = (texto or "").strip().lower()
+    if re.search(r"o que (você|voce) (sabe|lembra|conhece) sobre mim", t) or \
+       re.search(r"(mostre|mostra|liste|lista).{0,20}mem[óo]ria", t) or \
+       t in ("o que você sabe?", "o que voce sabe?"):
+        fatos = ler_memorias(db)
+        if not fatos:
+            return ("Ainda não guardei nada sobre você. Me diga coisas como "
+                    "\"lembre-se que meu foco é X\" e eu aprendo. 🌱", "mem_vazia")
+        linhas = "\n".join(f"- **{f['key']}**: {f['value']}" for f in fatos)
+        return (f"O que sei sobre você até agora:\n\n{linhas}\n\n"
+                "Quer que eu esqueça algo? Diga \"esqueça <assunto>\".", "mem_listar")
+    m = re.search(r"(?:esqueça|esqueca|apague|remova|delete)\s+(?:o|a|os|as|de|do|da|que)?\s*(.{2,120})", t)
+    if m and ("esque" in t or "apag" in t or "remov" in t or "delet" in t):
+        alvo = m.group(1).strip(" .;:")[:120]
+        toks = set(re.findall(r"[a-zà-ú0-9]{3,}", alvo))
+        rows = db.execute("SELECT key, value FROM memories").fetchall()
+        melhor, melhor_n = None, 0
+        for chave, valor in rows:
+            n = len(toks & set(re.findall(r"[a-zà-ú0-9]{3,}", f"{chave} {valor}".lower())))
+            if n > melhor_n:
+                melhor, melhor_n = chave, n
+        if melhor and melhor_n > 0:
+            with db:
+                db.execute("DELETE FROM memories WHERE key=?", (melhor,))
+            return (f"Esqueci **{melhor}**. 🧹", "mem_esquecer")
+        return ("Não encontrei isso na minha memória. Diga \"o que você sabe sobre mim\" para ver a lista.", "mem_nada")
+    return None
+
+
+def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_resposta: str) -> None:
+    """Thread em 2º plano: pede ao LLM fatos novos (JSON) e guarda. Nunca bloqueia o chat."""
+    try:
+        if len(texto_usuario or "") < 20:
+            return
+        import json as _json
+        prompt = ("Extraia FATOS duradouros sobre o usuário desta conversa "
+                  "(nome, profissão, projetos, preferências, metas, contexto de vida). "
+                  "Ignore o assunto pontual da pergunta. Responda SÓ com JSON: "
+                  "[{\"key\": \"curta_em_snake\", \"value\": \"...\"}] ou [].\n\n"
+                  f"USUÁRIO: {(texto_usuario or '')[:1500]}\nASSISTENTE: {(texto_resposta or '')[:1500]}")
+        res = hermes_bridge.chat_complete(
+            cfg["proxy"], cfg["model"],
+            [{"role": "system", "content": "Você extrai fatos. Responda só JSON válido."},
+             {"role": "user", "content": prompt}], max_tokens=300)
+        try:
+            fatos = _json.loads(res["texto"].strip().strip("`").replace("json", "", 1).strip())
+        except Exception:
+            m = re.search(r"\[.*\]", res["texto"], re.S)
+            fatos = _json.loads(m.group(0)) if m else []
+        db = open_db(db_path)
+        try:
+            for f in fatos if isinstance(fatos, list) else []:
+                if isinstance(f, dict) and f.get("value"):
+                    guardar_fato(db, str(f.get("key", "fato"))[:60], str(f.get("value"))[:500], "llm")
+            n = db.execute("SELECT COUNT(*) FROM memory_facts").fetchone()[0]
+            if n > 60:
+                _consolidar_memorias(db, cfg)
+        finally:
+            db.close()
+    except Exception as exc:
+        log.warning("aprendizado em 2º plano falhou: %s", exc)
+
+
+def _consolidar_memorias(db, cfg: dict) -> None:
+    """Junta fatos antigos/duplicados num conjunto enxuto (evolução da memória)."""
+    try:
+        rows = db.execute("SELECT key, value FROM memory_facts ORDER BY created_at DESC LIMIT 60").fetchall()
+        bloco = "\n".join(f"- {k}: {v[:200]}" for k, v in rows)
+        res = hermes_bridge.chat_complete(
+            cfg["proxy"], cfg["model"],
+            [{"role": "system", "content": "Você consolida memórias. Responda só JSON válido."},
+             {"role": "user", "content": "Junte estes fatos, removendo duplicados e o que for passageiro. "
+              "Responda SÓ JSON: [{\"key\": \"...\", \"value\": \"...\"}] (máx 25 itens).\n\n" + bloco}],
+            max_tokens=1200)
+        import json as _json
+        try:
+            novos = _json.loads(res["texto"].strip().strip("`").replace("json", "", 1).strip())
+        except Exception:
+            return
+        if not isinstance(novos, list) or not novos:
+            return
+        with db:
+            db.execute("DELETE FROM memories")
+            db.execute("DELETE FROM memory_facts")
+            for f in novos[:25]:
+                if isinstance(f, dict) and f.get("value"):
+                    chave = re.sub(r"\s+", "_", str(f.get("key", "fato")).strip().lower())[:60] or "fato"
+                    db.execute("INSERT INTO memories (key, value, updated_at) VALUES (?, ?, ?)",
+                               (chave, str(f["value"])[:500], agora_iso()))
+        log.info("memória consolidada: %d fatos", len(novos))
+    except Exception as exc:
+        log.warning("consolidação falhou: %s", exc)
+
+
+def doc_mencionado(db, texto: str, conversation_id: str) -> str:
+    """Acha documento citado pelo nome ou o mais recente da conversa."""
+    t = (texto or "").lower()
+    try:
+        docs = docs_agent.listar_documentos(db, 50)
+    except Exception:
+        return ""
+    for d in docs:
+        nome = (d["name"] or "").lower()
+        base = re.sub(r"\.[a-z0-9]+$", "", nome)
+        if len(base) >= 4 and base in t:
+            return d["doc_id"]
+    if re.search(r"(documento|arquivo|pdf|texto|contrato|relat[óo]rio|planilha|resum)", t):
+        mesmos = [d for d in docs if d["conversation_id"] == conversation_id] or docs
+        if mesmos:
+            return mesmos[0]["doc_id"]
+    return ""
+
+
+def listar_conversas(db, limite: int = 100) -> list:
+    try:
+        rows = db.execute("""SELECT conversation_id, COUNT(*), MAX(created_at),
+                             substr(MAX(created_at || ' ' || text), 22, 80)
+                             FROM messages WHERE origin='mobile'
+                             GROUP BY conversation_id
+                             ORDER BY MAX(created_at) DESC LIMIT ?""",
+                          (min(max(int(limite), 1), 200),)).fetchall()
+    except Exception:
+        return []
+    return [{"conversation_id": c, "total": n, "ultima": u, "previa": (p or "")[:80]}
+            for c, n, u, p in rows]
+
+
+# ── Pesquisa web opcional (stdlib, sem dependências) ─────────────────
+TERMOS_PESQUISA = ("pesquise", "pesquisar", "busque", "buscar", "google",
+                   "últimas notícias", "ultimas noticias", "notícia", "noticia",
+                   "fontes", "referências", "referencias", "atualizado", "hoje",
+                   "preço", "preco", "clima", "placar", "resultado")
+
+
+def intencao_pesquisa(texto: str) -> bool:
+    t = (texto or "").lower()
+    return any(k in t for k in TERMOS_PESQUISA)
+
+
+def intencao_imagem(texto: str) -> str:
+    """Retorna o termo da imagem pedida ou ''."""
+    import re
+    t = texto or ""
+    m = re.search(r"(?i)(?:mostre|mostra|mande|envie|quero|gere?)?\s*(?:uma?|a)?\s*(?:imagem|foto|figura|picture|image)\s*(?:de|do|da|sobre)?\s*(.{2,80})", t)
+    if m:
+        termo = re.sub(r"[.?!]+$", "", m.group(1).strip())[:80]
+        if len(termo) >= 2 and "imagem" not in termo.lower():
+            return termo
+        return termo or "paisagem"
+    if re.search(r"(?i)\b(imagem|foto|figura)\b", t):
+        return "paisagem"
+    return ""
+
+
+_CACHE_PESQUISA: dict = {}
+
+
+def _baixar_resultados(base: str, q: str, timeout: float) -> str:
+    import urllib.parse
+    import urllib.request
+    url = base + urllib.parse.quote(q)
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Júlia Mobile)"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "ignore")
+
+
+def _extrair_resultados(pagina: str, max_resultados: int) -> list:
+    import urllib.parse
+    import html as ihtml
+    resultados = []
+    padroes = [
+        r'class="result__a"[^>]*href="([^"]+)"[^>]*>(.*?)</a>.*?(?:class="result__snippet"[^>]*>(.*?)</(?:a|div|td))?',
+        r'class="result-link"[^>]*href="([^"]+)"[^>]*>(.*?)</a>',
+    ]
+    for rx in padroes:
+        for m in re.finditer(rx, pagina, re.S):
+            try:
+                link, titulo = m.group(1), m.group(2)
+                trecho = m.group(3) if m.lastindex and m.lastindex >= 3 and m.group(3) else ""
+                titulo = ihtml.unescape(re.sub(r"<.*?>", "", titulo)).strip()[:160]
+                trecho = ihtml.unescape(re.sub(r"<.*?>", "", trecho or "")).strip()[:280]
+                if link.startswith("//"):
+                    link = "https:" + link
+                if link.startswith("/") and "uddg=" in link:
+                    link = urllib.parse.unquote(link.split("uddg=", 1)[1].split("&", 1)[0])
+                if link.startswith("http") and titulo and all(f["url"] != link[:500] for f in resultados):
+                    resultados.append({"titulo": titulo, "url": link[:500], "trecho": trecho})
+                if len(resultados) >= max_resultados:
+                    return resultados
+            except Exception:
+                continue
+        if resultados:
+            break
+    return resultados
+
+
+def pesquisa_web(consulta: str, max_resultados: int = 6, timeout: float = 8.0) -> list:
+    """Pesquisa em tempo real (DuckDuckGo via stdlib) com cache de 10 min.
+
+    Tenta o endpoint HTML e cai para o lite. Falha silenciosa → lista vazia
+    (offline-first: o chat nunca trava por causa da pesquisa).
+    """
+    q = (consulta or "").strip()[:200]
+    if not q:
+        return []
+    chave = q.lower()
+    agora = time.monotonic()
+    if chave in _CACHE_PESQUISA and agora - _CACHE_PESQUISA[chave][0] < 600:
+        return _CACHE_PESQUISA[chave][1]
+    for base in ("https://html.duckduckgo.com/html/?q=",
+                 "https://lite.duckduckgo.com/lite/?q="):
+        try:
+            pagina = _baixar_resultados(base, q, timeout)
+            resultados = _extrair_resultados(pagina, max_resultados)
+            if resultados:
+                _CACHE_PESQUISA[chave] = (agora, resultados)
+                return resultados
+        except Exception as exc:
+            log.warning("pesquisa %s falhou (%s)", base.split("//")[1].split("/")[0], type(exc).__name__)
+    return []
+
+
+def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
+    """Monta o prompt com contexto local + memória global + pesquisa. Retorna (messages, extras)."""
+    memoria_on = cfg.get("memoria_global", True)
+    historico = contexto_conversa(db, conversation_id, cfg["context"])
+    extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
+    partes_sistema = [cfg["system"]]
+    if memoria_on:
+        rel = memorias_relevantes(db, texto_usuario)
+        recentes = []
+        if not rel:
+            # sem pergunta específica: leva um resumo do que sabe (nome/foco primeiro)
+            rel = memorias_relevantes(db, "", k=4)
+        if rel:
+            extras["memoria_usada"] = True
+            partes_sistema.append("O QUE VOCÊ SABE SOBRE O USUÁRIO (use naturalmente, sem citar que é memória):\n" +
+                                  "\n".join(f"- {f['key']}: {f['value'][:200]}" for f in rel))
+        blocos = memoria_global(db, conversation_id, 6)
+        if blocos:
+            partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
+    # Documentos: se a pergunta cita um doc ou fala de documento, injeta trechos
+    doc_id = doc_mencionado(db, texto_usuario, conversation_id)
+    if doc_id:
+        extras["doc_id"] = doc_id
+        trechos = docs_agent.trechos_relevantes(db, texto_usuario, doc_id, k=4)
+        if trechos:
+            nome = trechos[0]["doc"]
+            partes_sistema.append(f"TRECHOS DO DOCUMENTO '{nome}' (responda com base neles e cite a fonte):\n" +
+                                  "\n---\n".join(t["trecho"][:1200] for t in trechos))
+    termo_img = intencao_imagem(texto_usuario)
+    if termo_img:
+        import urllib.parse
+        slug = urllib.parse.quote(termo_img.strip() or "paisagem")
+        partes_sistema.append(f"O usuário pediu uma IMAGEM sobre '{termo_img}'. "
+                              f"Além de descrever, inclua no final: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
+                              "para exibir a imagem no chat.")
+    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario):
+        hoje = datetime.now().strftime("%d/%m/%Y")
+        fontes = pesquisa_web(texto_usuario)
+        extras["fontes"] = fontes
+        if fontes:
+            bloco = "\n".join(f"- {f['titulo']}: {f['trecho']} ({f['url']})" for f in fontes)
+            partes_sistema.append(f"RESULTADOS DA PESQUISA WEB EM TEMPO REAL (hoje é {hoje}; "
+                                  "cite ao final em 'Fontes:' com os links):\n" + bloco)
+        else:
+            partes_sistema.append(f"O usuário pediu pesquisa em tempo real (hoje é {hoje}), "
+                                  "mas a busca falhou. Avise a data e responda com seu conhecimento, sem inventar links.")
+    messages = [{"role": "system", "content": "\n\n".join(partes_sistema)}] + historico
+    return messages, extras
+
+
+def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
+    if termo_img and "![" not in (texto or ""):
+        import urllib.parse
+        slug = urllib.parse.quote(termo_img.strip() or "paisagem")
+        texto = (texto or "") + f"\n\n![{termo_img}](https://loremflickr.com/800/500/{slug})"
+    if fontes and "Fontes:" not in (texto or ""):
+        linhas = "\n".join(f"- [{f['titulo']}]({f['url']})" for f in fontes)
+        texto = (texto or "") + "\n\nFontes:\n" + linhas
+    return texto
 
 
 def contexto_conversa(db, conversation_id: str, limite: int) -> list:
@@ -105,7 +500,7 @@ def contexto_conversa(db, conversation_id: str, limite: int) -> list:
                          WHERE origin=? AND conversation_id=?
                          ORDER BY created_at DESC, id DESC LIMIT ?""",
                       ("mobile", conversation_id, limite)).fetchall()
-    return [{"role": role, "content": (text or "")[:4000]}
+    return [{"role": role, "content": (text or "")[:2000]}
             for role, text in reversed(rows) if role in ("user", "assistant")]
 
 
@@ -154,9 +549,16 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     if not row:
         return {"error": "Mensagem do usuário não encontrada. Sincronize primeiro.",
                 "codigo": "sem_mensagem"}
+    try:
+        salvar_fatos(db, row[0])
+    except Exception:
+        pass
+    mem_flag = payload.get("memory", payload.get("memoria_global", None))
+    memoria_on = cfg.get("memoria_global", True) if mem_flag is None else (str(mem_flag) == "1")
     ai_marcar(db, mid, conv, modelo, "queued")
     return {"user_text": row[0], "model": modelo,
-            "reply_id": f"{mid}-r1", "conversation_id": conv}
+            "reply_id": f"{mid}-r1", "conversation_id": conv,
+            "memoria_global": memoria_on}
 
 
 def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto) -> None:
@@ -169,23 +571,39 @@ def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto) -> None:
               reply_id=reply_id, response_text=texto)
 
 
+def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto) -> dict:
+    """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
+    ai_marcar(db, mid, conv, modelo, "processing")
+    ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto)
+    return {"reply_id": reply_id, "response_text": texto, "model": modelo}
+
+
 def ai_completa(db, payload: dict, cfg: dict) -> dict:
     prep = ai_preparar(db, payload, cfg)
     if "error" in prep or "replay" in prep or "busy" in prep:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
+    cmd = interpretar_comando_memoria(db, prep.get("user_text", ""))
+    if cmd:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0])
     ai_marcar(db, mid, conv, modelo, "processing")
-    messages = [{"role": "system", "content": cfg["system"]},
-                *contexto_conversa(db, conv, cfg["context"])]
+    cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
+    messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""))
     try:
         res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages,
                                           max_tokens=cfg["max_tokens"])
     except hermes_bridge.BridgeErro as exc:
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc))
         return {"error": str(exc), "codigo": exc.codigo}
-    ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], res["texto"])
-    log.info("IA %s respondeu em %ss (msg %s)", modelo, res["latencia_s"], mid)
-    return {"reply_id": prep["reply_id"], "response_text": res["texto"],
+    texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+    ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto)
+    if len(prep.get("user_text", "")) >= 20:
+        threading.Thread(target=aprender_com_conversa,
+                         args=(database_path(), dict(cfg), prep["user_text"], texto),
+                         daemon=True).start()
+    log.info("IA %s respondeu em %ss (msg %s, memoria=%s, fontes=%d)", modelo, res["latencia_s"], mid,
+             extras["memoria_usada"], len(extras["fontes"]))
+    return {"reply_id": prep["reply_id"], "response_text": texto,
             "model": modelo, "truncada": res.get("truncada", False)}
 
 
@@ -213,9 +631,21 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
+        cmd = interpretar_comando_memoria(db, prep.get("user_text", ""))
+        if cmd:
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0])
+            try:
+                with sessao.lock_envio:
+                    websocket.send(json.dumps({"request_id": request_id, "type": "ai_done",
+                                               "reply_id": direta["reply_id"],
+                                               "response_text": direta["response_text"],
+                                               "model": modelo}, ensure_ascii=False))
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
+            return
         ai_marcar(db, mid, conv, modelo, "processing")
-        messages = [{"role": "system", "content": cfg["system"]},
-                    *contexto_conversa(db, conv, cfg["context"])]
+        cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
+        messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""))
 
         def enviar(obj):
             try:
@@ -250,11 +680,23 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except hermes_bridge.BridgeErro:
                 pass
             return
-        ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], res["texto"])
-        log.info("IA %s (stream) em %ss (msg %s)", modelo, res["latencia_s"], mid)
+        texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        if texto_final != res["texto"]:
+            # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
+            try:
+                emitir(res.get("seq", 9999) if isinstance(res.get("seq"), int) else 9999,
+                       texto_final[len(res["texto"]):])
+            except Exception:
+                pass
+        ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final)
+        if len(prep.get("user_text", "")) >= 20:
+            threading.Thread(target=aprender_com_conversa,
+                             args=(db_path, dict(cfg_eff), prep["user_text"], texto_final),
+                             daemon=True).start()
+        log.info("IA %s (stream) em %ss (msg %s, fontes=%d)", modelo, res["latencia_s"], mid, len(extras["fontes"]))
         enviar({"request_id": request_id, "type": "ai_done",
                 "reply_id": prep["reply_id"],
-                "response_text": res["texto"], "model": modelo})
+                "response_text": texto_final, "model": modelo})
     finally:
         cancelados.pop(request_id, None)
         db.close()
@@ -289,7 +731,7 @@ def run():
     while True:
         try:
             with connect(ws_url, additional_headers={"Authorization": "Bearer " + token},
-                         open_timeout=15, ping_interval=25, ping_timeout=20, max_size=2_000_000) as websocket:
+                          open_timeout=15, ping_interval=25, ping_timeout=20, max_size=25_000_000) as websocket:
                 log.info("Conectado ao relay. Nenhuma porta de entrada foi aberta no PC.")
                 pause = 2
                 for raw in websocket:
@@ -302,6 +744,53 @@ def run():
                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
                     elif req.get("type") == "list":
                         reply = {"request_id": request_id, "type": "history", "messages": list_messages(db, req.get("limit", 200))}
+                    elif req.get("type") == "conversations":
+                        reply = {"request_id": request_id, "type": "conversations",
+                                 "conversations": listar_conversas(db, req.get("limit", 100))}
+                    elif req.get("type") == "doc_upload":
+                        try:
+                            import base64 as _b64
+                            raw = _b64.b64decode(req.get("data_b64", ""), validate=True)
+                            meta = docs_agent.salvar_documento(
+                                db, req.get("name", "arquivo"),
+                                raw, req.get("conversation_id", "geral"))
+                            reply = {"request_id": request_id, "type": "doc_uploaded", **meta}
+                        except Exception as exc:
+                            codigo = getattr(exc, "codigo", "erro")
+                            reply = {"request_id": request_id, "type": "doc_error",
+                                     "error": str(exc)[:300], "codigo": codigo}
+                    elif req.get("type") == "doc_list":
+                        reply = {"request_id": request_id, "type": "doc_list",
+                                 "documents": docs_agent.listar_documentos(db, req.get("limit", 50))}
+                    elif req.get("type") == "doc_resumo":
+                        try:
+                            texto = docs_agent.resumir_documento(db, cfg, req.get("doc_id", ""))
+                            reply = {"request_id": request_id, "type": "doc_resumo",
+                                     "doc_id": req.get("doc_id", ""), "resumo": texto}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "doc_error",
+                                     "error": str(exc)[:300],
+                                     "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "doc_topicos":
+                        try:
+                            texto = docs_agent.topicos_documento(db, cfg, req.get("doc_id", ""))
+                            reply = {"request_id": request_id, "type": "doc_topicos",
+                                     "doc_id": req.get("doc_id", ""), "topicos": texto}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "doc_error",
+                                     "error": str(exc)[:300],
+                                     "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "mem_list":
+                        rows = db.execute("SELECT key, value, updated_at FROM memories "
+                                          "ORDER BY updated_at DESC LIMIT 100").fetchall()
+                        reply = {"request_id": request_id, "type": "mem_list",
+                                 "memories": [{"key": k, "value": v, "updated_at": u}
+                                              for k, v, u in rows]}
+                    elif req.get("type") == "mem_forget":
+                        with db:
+                            db.execute("DELETE FROM memories WHERE key=?", (req.get("key", ""),))
+                        reply = {"request_id": request_id, "type": "mem_forgotten",
+                                 "key": req.get("key", "")}
                     elif req.get("type") == "ai":
                         res = ai_completa(db, req, cfg)
                         reply = {"request_id": request_id, "type": "ai_done", **res}

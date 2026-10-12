@@ -6,3 +6,11 @@ itsdangerous>=2.2,<3
 # Somente do agente no PC (captura de tela). O relay ignora se ausentes.
 mss>=9,<11
 pillow>=10,<13
+# Somente do agente no PC (leitura de documentos). Opcionais: o agente avisa
+# o `pip install` certo quando um formato precisa da lib ausente.
+pypdf>=5,<8
+pypdfium2>=4,<6
+python-docx>=1.1,<2
+openpyxl>=3.1,<4
+pandas>=2,<4
+beautifulsoup4>=4.12,<5
