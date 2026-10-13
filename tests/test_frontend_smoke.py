@@ -124,6 +124,25 @@ def test_jdui_js_paridade():
         assert 'FAIL' not in r.stdout
 
 
+def test_sessoes_sem_fragmentacao():
+    """Regressão: cada mensagem virando um chat (id ativo só no localStorage).
+
+    O id da conversa ativa deve passar SEMPRE por setActiveConversation
+    (espelha no IndexedDB) e o boot deve retomar a sessão mais recente com
+    mensagens em vez de criar uma nova.
+    """
+    texto = APP_JS.read_text(encoding='utf-8')
+    assert 'function setActiveConversation' in texto
+    assert 'function resolveActiveConversation' in texto
+    assert 'function healSessions' in texto
+    assert texto.count('setActiveConversation(') >= 6  # def + 5 usos
+    for linha in texto.splitlines():
+        s = linha.strip()
+        if s.startswith('activeConversation = newId()'):
+            raise AssertionError('atribuição direta cria chats fantasmas: ' + s)
+    assert "openDb" in texto and ", 3)" in texto  # DB v3 tem store META
+
+
 def test_render_markdown_no_node():
     if NODE is None:
         pytest.skip('Node indisponível')

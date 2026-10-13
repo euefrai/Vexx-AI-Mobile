@@ -25,8 +25,9 @@ let rafPending = null;
 let rafText = '';
 let rafReplyId = '';
 let sessionsCache = [];
-let activeConversation = localStorage.getItem('julia-active-conversation') || newId();
-localStorage.setItem('julia-active-conversation', activeConversation);
+let activeConversation = null;
+try { activeConversation = localStorage.getItem('julia-active-conversation') || newId(); } catch (_) { activeConversation = newId(); }
+try { localStorage.setItem('julia-active-conversation', activeConversation); } catch (_) {}
 
 function newId() { return crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)); }
 function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3200); }
@@ -66,10 +67,11 @@ navItems.forEach(n => n.addEventListener('click', () => { navigate(n.dataset.tab
 function reqPromise(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
 function txDone(tx) { return new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || Error('cancelada')); }); }
 const UISTATE = 'ui_state';
+const META = 'meta';
 function openDb() {
   return new Promise((resolve, reject) => {
     if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponivel')); return; }
-    const req = indexedDB.open(DB_NAME, 2);
+    const req = indexedDB.open(DB_NAME, 3);
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains(STORE)) {
@@ -79,6 +81,7 @@ function openDb() {
       }
       if (!db.objectStoreNames.contains(SESSIONS)) db.createObjectStore(SESSIONS, { keyPath: 'id' });
       if (!db.objectStoreNames.contains(UISTATE)) db.createObjectStore(UISTATE, { keyPath: 'k' });
+      if (!db.objectStoreNames.contains(META)) db.createObjectStore(META, { keyPath: 'k' });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
@@ -195,6 +198,69 @@ async function allSessions() {
   return rows.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 }
 async function putSession(s) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).put(s); await d; }
+/* ----- Conversa ativa resiliente (localStorage pode ser limpo sem levar o IndexedDB) ----- */
+function lsGet(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
+async function metaGet(k) {
+  if (!db) return null;
+  try { const r = await reqPromise(db.transaction(META, 'readonly').objectStore(META).get(k)); return r ? r.v : null; }
+  catch (_) { return null; }
+}
+async function metaSet(k, v) {
+  if (!db) return;
+  try {
+    const tx = db.transaction(META, 'readwrite');
+    const d = txDone(tx);
+    tx.objectStore(META).put({ k, v });
+    await d;
+  } catch (_) {}
+}
+function setActiveConversation(id) {
+  activeConversation = id;
+  lsSet('julia-active-conversation', id);
+  metaSet('active-conversation', id);
+}
+async function resolveActiveConversation() {
+  // 1) localStorage, se ainda apontar para sessão existente
+  const sessions = await allSessions();
+  const ids = new Set(sessions.map(s => s.id));
+  const viaLs = lsGet('julia-active-conversation');
+  if (viaLs && ids.has(viaLs)) return viaLs;
+  // 2) espelho no IndexedDB
+  const viaMeta = await metaGet('active-conversation');
+  if (viaMeta && ids.has(viaMeta)) { lsSet('julia-active-conversation', viaMeta); return viaMeta; }
+  // 3) sessão mais recente COM mensagens (cura "cada abertura vira chat novo")
+  const all = await allMessages();
+  const withMsgs = new Set(all.map(m => m.conversation_id));
+  const ranked = sessions.filter(s => withMsgs.has(s.id))
+    .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
+  if (ranked.length) return ranked[0].id;
+  if (viaLs) return viaLs; // sessões vazias: mantém o id conhecido
+  if (viaMeta) return viaMeta;
+  // 4) último recurso: id novo
+  return newId();
+}
+async function healSessions() {
+  // titula sessões "Nova conversa" que já têm mensagens + apaga vazias órfãs
+  try {
+    const all = await allMessages();
+    const firstByConv = {};
+    all.forEach(m => {
+      if (m.role === 'user' && !firstByConv[m.conversation_id]) firstByConv[m.conversation_id] = m.text;
+    });
+    const sessions = await allSessions();
+    const counts = {};
+    all.forEach(m => { counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
+    for (const s of sessions) {
+      if (s.title === 'Nova conversa' && firstByConv[s.id]) {
+        s.title = titleFrom(firstByConv[s.id]); s.updated_at = new Date().toISOString();
+        await putSession(s);
+      } else if (!counts[s.id] && s.id !== activeConversation) {
+        await delSession(s.id);
+      }
+    }
+  } catch (_) {}
+}
 async function delSession(id) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).delete(id); await d; }
 async function ensureSession(id, title) {
   const cur = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).get(id)).catch(() => null);
@@ -501,15 +567,16 @@ async function renderSessions(filter) {
   sessionsCache = await allSessions();
   $('sessionCount').textContent = String(sessionsCache.length);
   box.replaceChildren();
-  sessionsCache.filter(s => !q || (s.title || '').toLowerCase().includes(q)).forEach(s => {
+  // Oculta sessões vazias (não é um chat de verdade ainda) — exceto a ativa.
+  sessionsCache.filter(s => (!q || (s.title || '').toLowerCase().includes(q))
+    && ((counts[s.id] || 0) > 0 || s.id === activeConversation)).forEach(s => {
     const b = document.createElement('div');
     b.className = 'session-item' + (s.id === activeConversation ? ' active' : '');
     b.setAttribute('role', 'option');
     const t = document.createElement('button'); t.type = 'button'; t.style.cssText = 'flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer';
     t.innerHTML = '<span class="t">' + esc(s.title || 'Nova conversa') + '</span><small>' + (counts[s.id] || 0) + ' msgs</small>';
     t.addEventListener('click', async () => {
-      activeConversation = s.id;
-      localStorage.setItem('julia-active-conversation', activeConversation);
+      setActiveConversation(s.id);
       await renderSessions($('sessionSearch').value);
       await renderMessages();
       if (window.innerWidth < 900) setDrawer(false);
@@ -524,7 +591,7 @@ async function renderSessions(filter) {
       if (!window.confirm('Excluir esta conversa do celular' + (pcOnline ? ' (cópia do PC permanece)?' : '?'))) return;
       await deleteMessagesOf(s.id);
       await delSession(s.id);
-      if (activeConversation === s.id) { activeConversation = newId(); localStorage.setItem('julia-active-conversation', activeConversation); await ensureSession(activeConversation); }
+      if (activeConversation === s.id) { setActiveConversation(newId()); await ensureSession(activeConversation); }
       await renderSessions($('sessionSearch').value);
       await renderMessages();
     });
@@ -856,8 +923,7 @@ async function sendMessage(raw) {
 composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value); else showToast('Faça login'); });
 document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => sendMessage(b.dataset.message)));
 async function newChat() {
-  activeConversation = newId();
-  localStorage.setItem('julia-active-conversation', activeConversation);
+  setActiveConversation(newId());
   await ensureSession(activeConversation);
   await renderSessions($('sessionSearch').value);
   await renderMessages();
@@ -872,8 +938,7 @@ $('syncNow').addEventListener('click', async () => { await checkStatus(); showTo
 $('clearCache').addEventListener('click', async () => {
   if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
   await clearStorage();
-  activeConversation = newId();
-  localStorage.setItem('julia-active-conversation', activeConversation);
+  setActiveConversation(newId());
   await ensureSession(activeConversation);
   await renderSessions(''); await renderMessages(); showToast('Cache apagado');
 });
@@ -1083,6 +1148,8 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');
     if (presas.length) await storeMessages(presas.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: m.role, text: m.text, created_at: m.created_at, status: 'failed', model: m.model || '' })));
+    setActiveConversation(await resolveActiveConversation());
+    await healSessions();
     await ensureSession(activeConversation);
     await renderSessions('');
     await renderMessages();
