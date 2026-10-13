@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 
 import docs_agent
 import hermes_bridge
+import jdui
 import remoto
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed
@@ -25,13 +26,14 @@ SYSTEM_PADRAO = ("Você é a Júlia, assistente pessoal do usuário. "
                  "Use markdown leve: títulos curtos, listas, **negrito**, `código`, tabelas quando útil. "
                  "Se navegar/pesquisar, cite ao final uma seção 'Fontes:' com os links usados. "
                  "Se pedirem imagem, responda com ![descrição](https://...) em markdown além do texto. "
-                 "RECURSOS VISUAIS (use quando pedirem desenho, diagrama, mapa, gráfico ou app): "
+                 "RECURSOS VISUAIS (use quando pedirem desenho, diagrama, mapa ou foto): "
                  "1) Desenho/diagrama/mapa/ícone: bloco ```svg com o SVG (formas, setas, textos, cores). "
-                 "2) Arte com caracteres (banner, mapa simples, diagrama): bloco de código. "
-                 "3) Mini app interativo (calculadora, quiz, lista de tarefas, cronômetro, conversor): "
-                 "bloco ```widget-html com HTML+CSS+JS autocontido — sem links externos, sem fetch, "
-                 "tudo inline, interface em português, botões grandes para celular. "
-                 "O código do widget fica oculto; só a interface aparece no chat.")
+                 "2) Arte com caracteres (banner, mapa simples): bloco de código. "
+                 "3) Para foto/ilustração: ![descrição](https://...) em markdown. "
+                 "INTERFACES INTERATIVAS (quiz, checklist, calculadora, cards, diagrama, tabela, formulário): "
+                 "NUNCA JavaScript, CSS ou código executável — descreva em blocos ```jdui "
+                 "(JSON {version:'julia-ui-message/v1',blocks:[{type:'ui',component,props}]}). "
+                 "Pergunta simples → só texto, sem interface.")
 
 
 def agora_iso() -> str:
@@ -73,6 +75,11 @@ def open_db(path: Path):
     )""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_memfacts_key ON memory_facts(key, updated_at)")
     docs_agent.criar_tabelas(db)
+    db.execute("""CREATE TABLE IF NOT EXISTS ui_state (
+        k TEXT PRIMARY KEY, message_id TEXT NOT NULL, slot TEXT NOT NULL,
+        state TEXT NOT NULL, updated_at TEXT NOT NULL
+    )""")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_uistate_msg ON ui_state(message_id)")
     db.commit()
     return db
 
@@ -441,27 +448,52 @@ def pesquisa_web(consulta: str, max_resultados: int = 6, timeout: float = 8.0) -
     return []
 
 
-WIDGET_TRIGGERS = ("calculadora", "quiz", "quizz", "questionário", "questionario",
-                   "lista de tarefas", "lista de compras", "cronômetro", "cronometro",
-                   "conversor", "conversão de", "conversao de", "jogo da velha",
-                   "jogo de adivinha", "forca", "tabuada", "sorteador", "sorteio",
-                   "timer", "contador", "enquete", "flashcard", "mini app", "miniapp",
-                   "funcione aqui no chat", "funcione no chat", "interativo")
+class JuliaPresentationEngine:
+    """Decide quando a resposta merece interface declarativa JDUI (sem JS do modelo)."""
+
+    REGRAS = [
+        (("quiz", "quizz", "questionário", "questionario", "teste de conhecimento",
+          "perguntas e respostas", "simulado"), "quiz"),
+        (("checklist", "check-list", "lista de tarefas", "rotina de estudos",
+          "plano de estudos", "hábitos"), "checklist"),
+        (("calculadora", "calcule meu imc", "índice de massa", "indice de massa",
+          "porcentagem", "juros compostos", "quanto rende"), "calculator"),
+        (("compare", "comparação", "comparacao", "diferenças entre", "diferencas entre",
+          "prós e contras", "pros e contras", "qual melhor"), "cards"),
+        (("diagrama", "fluxograma", "fluxo de", "arquitetura", "como funciona o",
+          "como se conecta", "etapas do", "mapa do sistema"), "diagram"),
+        (("em tabela", "tabela com", "liste em colunas", "cronograma"), "table"),
+        (("formulário", "formulario", "cadastro", "inscrição", "inscricao"), "form"),
+    ]
+
+    @classmethod
+    def sugerir(cls, texto: str) -> str:
+        t = (texto or "").lower()
+        for chaves, comp in cls.REGRAS:
+            if any(k in t for k in chaves):
+                return comp
+        return ""
+
+
+JDUI_CATALOGO = (
+    "INTERFACE DECLARATIVA (use quando pedida ou muito útil; texto simples prefere texto): "
+    "responda com texto normal + blocos ```jdui com JSON {version:'julia-ui-message/v1',"
+    "blocks:[{type:'text',content},{type:'ui',component,props}]}. Componentes: "
+    "quiz{title,questions[{q,options[2..6],answer(índice),explain}]}; "
+    "checklist{title,items[]}; calculator{kind:basic|imc|porcentagem|juros}; "
+    "cards{items[{title,desc,value,badge,url,action{chat}}]}; "
+    "diagram{direction:v|h,nodes[{id,label,desc}],edges[{from,to,label}]}; "
+    "table{columns[],rows[[]]}; form{title,fields[{name,label,type:text|number|select,options}],calc:imc|juros|porcentagem|soma}; "
+    "progress{label,value,max}; tabs{tabs[{title,markdown}]}; accordion{items[{title,markdown}]}. "
+    "REGRAS: JSON válido e pequeno (máx 6 blocos, 12 perguntas, 30 linhas); sem JavaScript, sem CSS, "
+    "sem perguntas de volta quando pedirem app; quiz/calculadora/checklist NUNCA em texto corrido."
+)
 
 
 def intencao_widget(texto: str) -> str:
-    """Detecta pedido de mini app interativo. Retorna o tema ou ''."""
-    t = (texto or "").lower()
-    for k in WIDGET_TRIGGERS:
-        if k in t:
-            return k
-    return ""
-
-
-WIDGET_EXEMPLO = ("<style>body{font-family:sans-serif;padding:12px;background:#fff;color:#111}"
-                  "button{font-size:18px;padding:12px;margin:4px;border-radius:8px}</style>"
-                  "<div id=tela style='font-size:28px;margin-bottom:8px'>0</div>"
-                  "<button onclick=\"tela.textContent+='1'\">1</button>")
+    """Legado: agora redireciona para o componente JDUI equivalente."""
+    comp = JuliaPresentationEngine.sugerir(texto)
+    return comp or ""
 
 
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
@@ -483,17 +515,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str)
         blocos = memoria_global(db, conversation_id, 6)
         if blocos:
             partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
-    # Mini app: imposição forte — modelo pequeno tende a perguntar de volta ou dar Python.
-    tema_widget = intencao_widget(texto_usuario)
-    if tema_widget:
+    # JDUI: impõe interface declarativa quando pedida ou muito útil.
+    comp_sugerido = JuliaPresentationEngine.sugerir(texto_usuario)
+    if comp_sugerido:
         partes_sistema.append(
-            "PEDIDO DE MINI APP INTERATIVO (tema: " + tema_widget + "). REGRAS OBRIGATÓRIAS: "
-            "1) Responda com UM bloco ```widget-html contendo o app PRONTO e FUNCIONAL "
-            "(HTML+CSS+JS 100% inline, sem rede, sem links externos, interface em português, "
-            "botões grandes para celular). "
-            "2) PROIBIDO fazer perguntas de volta, pedir os números, ou entregar código Python/terminal. "
-            "3) Depois do bloco, no máximo 2 linhas de texto. "
-            "Padrão a adaptar: " + WIDGET_EXEMPLO)
+            "PEDIDO DE INTERFACE INTERATIVA (componente: " + comp_sugerido + "). " + JDUI_CATALOGO)
     # Documentos: se a pergunta cita um doc ou fala de documento, injeta trechos
     doc_id = doc_mencionado(db, texto_usuario, conversation_id)
     if doc_id:
@@ -541,8 +567,13 @@ def contexto_conversa(db, conversation_id: str, limite: int) -> list:
                          WHERE origin=? AND conversation_id=?
                          ORDER BY created_at DESC, id DESC LIMIT ?""",
                       ("mobile", conversation_id, limite)).fetchall()
-    return [{"role": role, "content": (text or "")[:2000]}
-            for role, text in reversed(rows) if role in ("user", "assistant")]
+    limpos = []
+    for role, text in reversed(rows):
+        if role not in ("user", "assistant"):
+            continue
+        t = re.sub(r"```jdui[\s\S]*?(```|$)", "[interface]", text or "", flags=re.IGNORECASE)
+        limpos.append({"role": role, "content": t[:2000]})
+    return limpos
 
 
 def ai_estado(db, user_message_id: str):
@@ -637,6 +668,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc))
         return {"error": str(exc), "codigo": exc.codigo}
     texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+    texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
+    if erros_jdui:
+        log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
     ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto)
     if len(prep.get("user_text", "")) >= 20:
         threading.Thread(target=aprender_com_conversa,
@@ -722,6 +756,9 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
+        if erros_jdui:
+            log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
         if texto_final != res["texto"]:
             # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
             try:
@@ -821,6 +858,35 @@ def run():
                             reply = {"request_id": request_id, "type": "doc_error",
                                      "error": str(exc)[:300],
                                      "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "ui_state_save":
+                        salvos = 0
+                        with db:
+                            for s in req.get("states", [])[:300]:
+                                try:
+                                    k = str(s.get("k", ""))[:200]
+                                    if not (k and isinstance(s.get("state"), str)
+                                            and len(s["state"]) <= 8000):
+                                        continue
+                                    db.execute("""INSERT INTO ui_state
+                                        (k, message_id, slot, state, updated_at)
+                                        VALUES (?, ?, ?, ?, ?)
+                                        ON CONFLICT(k) DO UPDATE SET
+                                        state=excluded.state, updated_at=excluded.updated_at""",
+                                        (k, str(s.get("message_id", ""))[:100],
+                                         str(s.get("slot", ""))[:40], s["state"],
+                                         str(s.get("updated_at", agora_iso()))[:48]))
+                                    salvos += 1
+                                except Exception:
+                                    continue
+                        reply = {"request_id": request_id, "type": "ui_state_saved",
+                                 "saved": salvos}
+                    elif req.get("type") == "ui_state_list":
+                        rows = db.execute("SELECT k, message_id, slot, state, updated_at "
+                                          "FROM ui_state ORDER BY updated_at DESC LIMIT 500").fetchall()
+                        reply = {"request_id": request_id, "type": "ui_state_list",
+                                 "states": [{"k": k, "message_id": m, "slot": s,
+                                             "state": st, "updated_at": u}
+                                            for k, m, s, st, u in rows]}
                     elif req.get("type") == "mem_list":
                         rows = db.execute("SELECT key, value, updated_at FROM memories "
                                           "ORDER BY updated_at DESC LIMIT 100").fetchall()

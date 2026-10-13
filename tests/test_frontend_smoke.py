@@ -79,6 +79,51 @@ def test_app_js_sintaxe_e_regressoes():
     assert "dados = '{}'" not in texto
 
 
+HARNESS_JDUI = r"""
+const fs = require('fs');
+const src = fs.readFileSync(process.argv[2], 'utf8');
+global.location = { href: 'http://127.0.0.1:8123/' };
+global.window = {};
+global.document = { createElement: () => { throw new Error('sem DOM'); } };
+eval(src);
+const JDUI = global.window.JDUI;
+const t = (name, cond) => {
+  if (!cond) { console.error('FAIL ' + name); process.exitCode = 1; }
+  else console.log('ok ' + name);
+};
+t('componentes', JDUI.COMPONENTS.indexOf('quiz') >= 0 && JDUI.COMPONENTS.indexOf('calculator') >= 0);
+const quiz = { version: 'julia-ui-message/v1', blocks: [
+  { type: 'ui', component: 'quiz', props: { title: 'Py', questions: [
+    { q: '2+2?', options: ['3', '4'], answer: 1 }] } }] };
+const r1 = JDUI.validateMessage(quiz);
+t('quiz-valido', r1.ok === true);
+t('quiz-invalido', JDUI.validateMessage({ version: 'julia-ui-message/v1', blocks: [
+  { type: 'ui', component: 'quiz', props: { questions: [] } }] }).ok === false);
+t('desconhecido', JDUI.validateMessage({ version: 'julia-ui-message/v1', blocks: [
+  { type: 'ui', component: 'nave', props: {} }] }).ok === false);
+const fence = 'texto\n```jdui\n' + JSON.stringify(quiz) + '\n```\nfim';
+const ext = JDUI.extractBlocks(fence);
+t('extract-1', ext.length === 1 && ext[0].blocks[0].component === 'quiz');
+t('extract-parcial', JDUI.extractBlocks('```jdui\n{"version":').length === 0);
+t('calc-expr', JDUI.calcExpr('2+3*4') === 14 && JDUI.calcExpr('(10-4)/3') === 2);
+let jogou = false;
+try { JDUI.calcExpr('process.exit(1)'); } catch (_) { jogou = true; }
+t('calc-sem-eval', jogou);
+"""
+
+
+def test_jdui_js_paridade():
+    if NODE is None:
+        pytest.skip('Node indisponível')
+    with tempfile.TemporaryDirectory() as tmp:
+        harness = Path(tmp) / 'harness_jdui.cjs'
+        harness.write_text(HARNESS_JDUI, encoding='utf-8')
+        r = subprocess.run([NODE, str(harness), str(RAIZ / 'public' / 'jdui.js')],
+                           capture_output=True, text=True, timeout=60)
+        assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
+        assert 'FAIL' not in r.stdout
+
+
 def test_render_markdown_no_node():
     if NODE is None:
         pytest.skip('Node indisponível')

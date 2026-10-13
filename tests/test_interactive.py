@@ -13,22 +13,29 @@ def _db():
     return pc_agent.open_db(tmp)
 
 
-def test_intencao_widget():
-    assert pc_agent.intencao_widget('Crie uma calculadora que funcione aqui no chat') == 'calculadora'
-    assert pc_agent.intencao_widget('quero um quiz de matemática') == 'quiz'
-    assert pc_agent.intencao_widget('faz uma lista de tarefas interativa') == 'lista de tarefas'
-    assert pc_agent.intencao_widget('qual a capital do Peru?') == ''
+def test_presentation_engine():
+    E = pc_agent.JuliaPresentationEngine
+    assert E.sugerir('Crie uma calculadora que funcione aqui no chat') == 'calculator'
+    assert E.sugerir('quero um quiz de matemática com 6 perguntas') == 'quiz'
+    assert E.sugerir('monte minha rotina de estudos') == 'checklist'
+    assert E.sugerir('compare Python, Java e JavaScript') == 'cards'
+    assert E.sugerir('mostre um diagrama de como o app se conecta') == 'diagram'
+    assert E.sugerir('qual a capital do Peru?') == ''
+    assert E.sugerir('o que é uma variável?') == ''
+    # legado redireciona para JDUI
+    assert pc_agent.intencao_widget('crie uma calculadora simples') == 'calculator'
 
 
-def test_montar_injeta_diretiva_widget():
+def test_montar_injeta_diretiva_jdui():
     db = _db()
     cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 'BASE',
            'context': 5, 'max_tokens': 50, 'memoria_global': False, 'pesquisa_web': False}
     msgs, extras = pc_agent.ai_montar_mensagens(db, 'conv-w', cfg, 'crie uma calculadora simples')
     sistema = msgs[0]['content']
-    assert 'widget-html' in sistema and 'PROIBIDO' in sistema
+    assert '```jdui' in sistema and 'calculator' in sistema
+    assert 'widget-html' not in sistema  # modelo não deve gerar JS
     msgs2, _ = pc_agent.ai_montar_mensagens(db, 'conv-w', cfg, 'qual a capital do Peru?')
-    assert 'widget-html' not in msgs2[0]['content']
+    assert '```jdui' not in msgs2[0]['content']
     db.close()
 
 

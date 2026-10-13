@@ -65,19 +65,89 @@ navItems.forEach(n => n.addEventListener('click', () => { navigate(n.dataset.tab
 /* ----- IndexedDB ----- */
 function reqPromise(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
 function txDone(tx) { return new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || Error('cancelada')); }); }
+const UISTATE = 'ui_state';
 function openDb() {
   return new Promise((resolve, reject) => {
     if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponivel')); return; }
-    const req = indexedDB.open(DB_NAME, 1);
+    const req = indexedDB.open(DB_NAME, 2);
     req.onupgradeneeded = () => {
-      const m = req.result.createObjectStore(STORE, { keyPath: 'id' });
-      m.createIndex('created_at', 'created_at');
-      m.createIndex('conversation_id', 'conversation_id');
-      req.result.createObjectStore(SESSIONS, { keyPath: 'id' });
+      const db = req.result;
+      if (!db.objectStoreNames.contains(STORE)) {
+        const m = db.createObjectStore(STORE, { keyPath: 'id' });
+        m.createIndex('created_at', 'created_at');
+        m.createIndex('conversation_id', 'conversation_id');
+      }
+      if (!db.objectStoreNames.contains(SESSIONS)) db.createObjectStore(SESSIONS, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(UISTATE)) db.createObjectStore(UISTATE, { keyPath: 'k' });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
+}
+/* ----- Estado JDUI (offline-first) ----- */
+let jduiStateCache = {};
+let jduiDirty = {};
+let jduiSyncTimer = null;
+async function preloadJduiStates(msgIds) {
+  jduiStateCache = {};
+  if (!db || !msgIds || !msgIds.length) return;
+  const want = new Set(msgIds);
+  try {
+    const rows = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll());
+    rows.forEach(r => {
+      if (r && typeof r.k === 'string' && want.has(r.k.split('#')[0])) jduiStateCache[r.k] = r.state || {};
+    });
+  } catch (_) {}
+}
+function jduiCtx(row) {
+  return {
+    messageId: row.id,
+    markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
+    loadState: (key) => jduiStateCache[row.id + '#' + key],
+    saveState: (key, st) => {
+      const k = row.id + '#' + key;
+      jduiStateCache[k] = st;
+      jduiDirty[k] = { k, message_id: row.id, slot: key, state: st, updated_at: new Date().toISOString() };
+      persistJduiSoon();
+    },
+    onChat: (text) => sendMessage(text)
+  };
+}
+async function persistJduiSoon() {
+  if (!db) return;
+  try {
+    const tx = db.transaction(UISTATE, 'readwrite');
+    const done = txDone(tx);
+    const st = tx.objectStore(UISTATE);
+    Object.values(jduiDirty).forEach(r => st.put(r));
+    jduiDirty = {};
+    await done;
+  } catch (_) {}
+  clearTimeout(jduiSyncTimer);
+  jduiSyncTimer = setTimeout(syncJduiStates, 4000);
+}
+async function syncJduiStates() {
+  if (!authenticated || !pcOnline || !db) return;
+  try {
+    const rows = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll());
+    if (!rows.length) return;
+    await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
+    const remote = await api('/api/ui-state');
+    const tx = db.transaction(UISTATE, 'readwrite');
+    const done = txDone(tx);
+    const store = tx.objectStore(UISTATE);
+    for (const r of remote.states || []) {
+      try {
+        const have = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).get(r.k)).catch(() => null);
+        if (!have || (r.updated_at || '') >= (have.updated_at || '')) {
+          store.put(r);
+          jduiStateCache[r.k] = r.state || {};
+        }
+      } catch (_) {}
+    }
+    await done;
+    await renderMessages();
+  } catch (_) { /* offline: tenta na próxima */ }
 }
 async function migrateV1() {
   try {
@@ -185,12 +255,27 @@ function sanitizeSvg(raw) {
   s = s.replace(/((?:href|xlink:href)\s*=\s*')\s*javascript:[^']*'/gi, "$1#'");
   return s.trim();
 }
+let pendingJdui = [];
+function takeJduiSlots() { const s = pendingJdui; pendingJdui = []; return s; }
 function renderMarkdown(text) {
   if (!text) return '';
   const blocks = [];
+  pendingJdui = [];
   const widgets = [];
   const svgs = [];
   let src = String(text).replace(/\r\n/g, '\n');
+  // JDUI: fences fechados válidos viram slots (montados após innerHTML);
+  // fence aberto (stream) vira aviso amigável; inválido fechado some.
+  if (typeof JDUI !== 'undefined') {
+    src = src.replace(/```jdui\s*\n([\s\S]*?)(```|$)/gi, (m, body, close) => {
+      if (!close) return '\n[JDUI: montando interface…]\n';
+      try {
+        const r = JDUI.validateMessage(JSON.parse(body));
+        if (r.ok) return '\x00JDUI' + (pendingJdui.push(r.msg) - 1) + '\x00';
+      } catch (_) { /* cai no descarte */ }
+      return '';
+    });
+  }
   // Mini-apps executáveis: ```widget-html ... ``` → iframe isolado (sandbox, sem acesso ao app).
   src = src.replace(/```widget-html\s*\n([\s\S]*?)(```|$)/g, (m, code) => {
     const clean = code.replace(/\n$/, '');
@@ -269,6 +354,12 @@ function renderMarkdown(text) {
       html.push(clean ? '<div class="svg-art">' + clean + '</div>' : '<p>[desenho vazio]</p>');
       continue;
     }
+    const jPh = ln.match(/\x00JDUI(\d+)\x00/);
+    if (jPh && pendingJdui[Number(jPh[1])]) {
+      flushList(); flushBq(); flushTable();
+      html.push('<div class="jdui-slot" data-jdui="' + Number(jPh[1]) + '"></div>');
+      continue;
+    }
     if (/^\|.*\|$/.test(t) && t.includes('|')) {
       if (/^\|?[\s:|-]+\|?[\s:|.-]*$/.test(t) && table.length === 1) { table.push(t); continue; }
       if (table.length === 0) { flushList(); flushBq(); table.push(t); continue; }
@@ -320,6 +411,10 @@ function appendMessage(row) {
         : '<p>…</p>');
     content.appendChild(bubble);
   }
+  const jslots = takeJduiSlots();
+  if (jslots.length && typeof JDUI !== 'undefined') {
+    try { JDUI.mount(bubble, jslots, jduiCtx(row)); } catch (_) { /* fallback: só texto */ }
+  }
   const meta = document.createElement('div'); meta.className = 'msg-meta';
   const tm = document.createElement('span'); tm.className = 'msg-time'; tm.textContent = fmtTime(row.created_at);
   meta.appendChild(tm);
@@ -350,7 +445,17 @@ function appendMessage(row) {
 }
 function paintStreaming(replyId, text) {
   const el = conversation.querySelector('[data-mid="' + replyId + '"] .bubble');
-  if (el) el.innerHTML = renderMarkdown(text) || '<span class="typing">digitando …</span>';
+  if (!el) { takeJduiSlots(); return; }
+  el.innerHTML = renderMarkdown(text) || '<span class="typing">digitando …</span>';
+  const jslots = takeJduiSlots();
+  // Remonta componentes só quando surgem novos slots (evita reconstruir a cada delta).
+  if (jslots.length && jslots.length !== el._jduiN && typeof JDUI !== 'undefined') {
+    el._jduiN = jslots.length;
+    allMessages().then(rows => {
+      const row = rows.find(m => m.id === replyId);
+      if (row) { try { JDUI.mount(el, jslots, jduiCtx(row)); } catch (_) {} }
+    });
+  }
   scrollChat(false);
 }
 function schedulePaint(replyId, text) {
@@ -363,6 +468,7 @@ async function renderMessages() {
   if (!db) return;
   const all = await allMessages();
   const rows = all.filter(m => m.conversation_id === activeConversation);
+  await preloadJduiStates(rows.map(m => m.id));
   const stick = nearBottom(conversation);
   conversation.replaceChildren();
   const header = document.createElement('div'); header.className = 'chat-date';
@@ -550,6 +656,7 @@ async function syncAndRefresh() {
     }
     await renderSessions($('sessionSearch').value);
     await renderMessages();
+    syncJduiStates();
     return conf;
   } catch (err) {
     if (err.status === 503) pcOnline = false;

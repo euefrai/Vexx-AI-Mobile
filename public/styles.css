@@ -1305,6 +1305,85 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   background:var(--bg-elev-2);border:1px solid var(--line-strong);color:var(--purple);z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .scroll-fab[hidden]{display:none}
 
+/* JDUI 1.0 — componentes declarativos (herdam o design system) */
+.jdui-slot{margin:10px 0}
+.jdui-title{font-size:13.5px;font-weight:800;margin:2px 0 8px;letter-spacing:-.01em}
+.jdui-count{font-size:10.5px;color:var(--muted);margin:6px 0}
+.jdui-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.jdui-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0}
+.jdui-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--purple-2),var(--rose));transition:width .25s}
+.jdui-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:10px 16px;
+  border-radius:12px;background:linear-gradient(110deg,var(--purple) 0,var(--purple-3) 100%);
+  color:#fff;font-weight:750;font-size:13px;text-decoration:none}
+.jdui-btn.ghost{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text)}
+.jdui-nav{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.jdui-nav .jdui-btn{flex:1;min-width:130px}
+.jdui-q{font-size:14px;font-weight:650;line-height:1.5;margin:4px 0 8px}
+.jdui-opts{display:flex;flex-direction:column;gap:8px}
+.jdui-opt{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);
+  border-radius:12px;background:rgba(255,255,255,.03);font-size:13.5px;cursor:pointer;min-height:44px}
+.jdui-opt input{width:18px;height:18px;accent-color:var(--purple-2);flex-shrink:0}
+.jdui-opt.ok{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.08)}
+.jdui-opt.bad{border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.08)}
+.jdui-explain{font-size:12px;color:var(--muted);line-height:1.55;margin-top:8px;padding:8px 10px;
+  border-left:2px solid var(--purple-3);background:rgba(167,135,250,.05);border-radius:0 8px 8px 0}
+.jdui-score{font-size:34px;font-weight:850;text-align:center;color:var(--purple);margin:6px 0}
+.jdui-errs{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.jdui-err{font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+.jdui-items{display:flex;flex-direction:column;gap:8px}
+.jdui-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);
+  border-radius:12px;font-size:13.5px;min-height:44px;cursor:pointer}
+.jdui-item input{width:18px;height:18px;accent-color:var(--purple-2);flex-shrink:0}
+.jdui-item.done span{text-decoration:line-through;color:var(--soft)}
+.jdui-calc{border:1px solid var(--line-strong);border-radius:14px;padding:12px;background:#0a0a12}
+.jdui-disp{font-size:30px;font-weight:800;text-align:right;padding:12px;background:#000;border-radius:10px;margin-bottom:10px;overflow-x:auto;white-space:nowrap}
+.jdui-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.jdui-key{min-height:48px;border-radius:10px;background:rgba(255,255,255,.06);color:var(--text);font-size:17px;font-weight:700}
+.jdui-key.op{background:rgba(167,135,250,.16);color:var(--purple)}
+.jdui-key.eq{background:linear-gradient(110deg,var(--purple),var(--purple-3));color:#fff;grid-column:span 4}
+.jdui-field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:650;color:var(--muted);margin-bottom:10px}
+.jdui-field input,.jdui-field select{background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:12px;color:var(--text);font-size:14px;min-height:46px;width:100%}
+.jdui-result{font-size:13.5px;margin-top:10px;padding:10px 12px;background:rgba(167,135,250,.06);
+  border:1px solid var(--line-strong);border-radius:10px;line-height:1.5}
+.jdui-cards .jdui-cardgrid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:560px){.jdui-cards .jdui-cardgrid{grid-template-columns:1fr 1fr}}
+.jdui-card{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.025)}
+.jdui-cardtop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.jdui-cardtop strong{font-size:13.5px}
+.jdui-badge{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--purple);
+  background:var(--glow-purple);padding:3px 8px;border-radius:99px;flex-shrink:0}
+.jdui-value{font-size:22px;font-weight:850;color:var(--purple);margin:6px 0 2px}
+.jdui-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
+.jdui-cardacts{display:flex;gap:8px;margin-top:10px}
+.jdui-cardacts .jdui-btn{flex:1;min-height:40px;font-size:12px}
+.jdui-flow{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.jdui-diagram.horiz .jdui-flow{flex-direction:row;overflow-x:auto;align-items:center;padding-bottom:6px}
+.jdui-node{display:flex;align-items:center;gap:10px;text-align:left;width:100%;padding:11px 12px;
+  border:1px solid var(--line-strong);border-radius:12px;background:var(--bg-elev-2);color:var(--text);min-height:48px}
+.jdui-diagram.horiz .jdui-node{width:auto;min-width:130px;flex-shrink:0}
+.jdui-dot{width:9px;height:9px;border-radius:50%;background:var(--purple);flex-shrink:0}
+.jdui-node.st-ok .jdui-dot{background:#10b981}.jdui-node.st-warn .jdui-dot{background:#f59e0b}.jdui-node.st-err .jdui-dot{background:#f87171}
+.jdui-nodetx strong{display:block;font-size:13px}
+.jdui-nodetx small{display:block;font-size:11px;color:var(--muted);margin-top:2px;line-height:1.45}
+.jdui-conn{text-align:center;color:var(--purple);font-size:11px;padding:3px 0;font-weight:700}
+.jdui-diagram.horiz .jdui-conn{padding:0 8px}
+.jdui-scrollx{overflow-x:auto;margin:0 -2px;padding:0 2px}
+table.jdui-table{width:100%;min-width:280px;border-collapse:collapse;font-size:12.5px}
+table.jdui-table th,table.jdui-table td{border:1px solid var(--line);padding:8px;text-align:left}
+table.jdui-table th{background:var(--bg-elev);color:var(--purple);cursor:pointer;white-space:nowrap;user-select:none}
+.jdui-prog{margin:6px 0}
+.jdui-tabbar{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}
+.jdui-tab{flex:1;min-width:90px;padding:10px;border-radius:10px;border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}
+.jdui-tab.on{color:var(--text);border-color:var(--purple-2);background:var(--glow-purple)}
+.jdui-tabbody{font-size:13px;line-height:1.6}
+.jdui-accitem{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.jdui-accbtn{width:100%;text-align:left;padding:12px;font-size:13px;font-weight:700;color:var(--text);min-height:46px}
+.jdui-accbody{padding:0 12px 12px;font-size:12.5px;color:var(--muted);line-height:1.6}
+.jdui-accbody[hidden]{display:none}
+.jdui-fallback{font-size:11.5px;color:var(--soft);padding:8px;border:1px dashed var(--line);border-radius:8px}
+.jdui-mdhost p{margin:6px 0}.jdui-mdhost ul,.jdui-mdhost ol{margin:6px 0;padding-left:18px}
+
 /* Mini-apps executáveis + desenhos SVG */
 .widget{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;background:#0a0a12}
 .widget-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;

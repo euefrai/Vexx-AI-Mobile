@@ -312,6 +312,60 @@ async def docs_topicos(request: Request, body: DocAsk):
     return {"doc_id": result.get("doc_id"), "topicos": result.get("topicos", "")}
 
 
+class UiStateItem(BaseModel):
+    k: str = Field(min_length=3, max_length=200, pattern=r"^[\w#:.\-]{3,200}$")
+    message_id: str = Field(min_length=8, max_length=100)
+    slot: str = Field(min_length=1, max_length=40)
+    state: dict = Field(default_factory=dict)
+    updated_at: str = Field(min_length=10, max_length=48)
+
+
+class UiStateBody(BaseModel):
+    states: list[UiStateItem] = Field(min_length=1, max_length=300)
+
+
+@app.post("/api/ui-state")
+async def ui_state_save(request: Request, body: UiStateBody):
+    """Persiste estados de interfaces JDUI no SQLite do PC (idempotente por k)."""
+    require_csrf(request)
+    import json as _json
+    itens = []
+    for s in body.states:
+        try:
+            bruto = _json.dumps(s.state, ensure_ascii=False)
+        except (TypeError, ValueError):
+            continue
+        if len(bruto) > 8000:
+            continue
+        itens.append({"k": s.k, "message_id": s.message_id, "slot": s.slot,
+                      "state": bruto, "updated_at": s.updated_at})
+    if not itens:
+        raise HTTPException(422, "Nenhum estado válido")
+    result = await relay.exchange({"type": "ui_state_save", "states": itens}, timeout=20.0)
+    if result.get("type") != "ui_state_saved":
+        raise HTTPException(503, "PC não confirmou os estados")
+    return {"saved": result.get("saved", 0)}
+
+
+@app.get("/api/ui-state")
+async def ui_state_list(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "ui_state_list"}, timeout=20.0)
+    if result.get("type") != "ui_state_list":
+        raise HTTPException(503, "Estados indisponíveis")
+    import json as _json
+    out = []
+    for r in result.get("states", [])[:500]:
+        try:
+            out.append({"k": r["k"], "message_id": r.get("message_id", ""),
+                        "slot": r.get("slot", ""),
+                        "state": _json.loads(r.get("state", "{}")),
+                        "updated_at": r.get("updated_at", "")})
+        except (ValueError, KeyError, TypeError):
+            continue
+    return {"states": out}
+
+
 @app.get("/api/memories")
 async def memories_list(request: Request):
     verify_session(request)
