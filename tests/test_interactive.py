@@ -26,6 +26,40 @@ def test_presentation_engine():
     assert pc_agent.intencao_widget('crie uma calculadora simples') == 'calculator'
 
 
+def test_quiz_proibe_codigo_e_oferece_fonte():
+    db = _db()
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 'BASE',
+           'context': 5, 'max_tokens': 50, 'memoria_global': False, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(db, 'conv-q', cfg, 'crie um quiz de Python')
+    sistema = msgs[0]['content']
+    assert 'REGRA DURA DO QUIZ' in sistema
+    assert 'Quer ver o código-fonte' in sistema
+    db.close()
+
+
+def test_followup_codigo_injeta_ultimo_quiz():
+    import json as _json
+    db = _db()
+    quiz = {"version": "julia-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
+            {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]}
+    pc_agent.persist_messages(db, [
+        {'id': 'ucalculada01', 'origin': 'mobile', 'role': 'user', 'text': 'crie um quiz de Python',
+         'created_at': '2026-10-13T10:00:00.000Z', 'conversation_id': 'conv-c'},
+        {'id': 'acalculada01', 'origin': 'mobile', 'role': 'assistant',
+         'text': 'Aqui está:\n\n```jdui\n' + _json.dumps(quiz) + '\n```',
+         'created_at': '2026-10-13T10:01:00.000Z', 'conversation_id': 'conv-c'}])
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 'BASE',
+           'context': 5, 'max_tokens': 50, 'memoria_global': False, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(db, 'conv-c', cfg, 'sim, quero o código')
+    assert 'GERAR CÓDIGO-FONTE' in msgs[0]['content']
+    assert '2+2?' in msgs[0]['content']
+    # sem interface anterior: sem injeção
+    msgs2, _ = pc_agent.ai_montar_mensagens(db, 'conv-outra', cfg, 'sim, quero o código')
+    assert 'GERAR CÓDIGO-FONTE' not in msgs2[0]['content']
+    db.close()
+
+
 def test_montar_injeta_diretiva_jdui():
     db = _db()
     cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 'BASE',

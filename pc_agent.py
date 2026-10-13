@@ -496,6 +496,35 @@ def intencao_widget(texto: str) -> str:
     return comp or ""
 
 
+PEDIDO_CODIGO_RE = re.compile(
+    r"(?i)(quero|manda|mande|mostra|mostre|pode mostrar|me d[áa]|quero ver).{0,40}(c[óo]digo|fonte)"
+    r"|^(sim|quero|manda|pode ser|claro|ok|yes)\W*$")
+
+
+def ultimos_blocos_jdui(db, conversation_id: str, limite: int = 2) -> list:
+    """Últimos blocos JDUI válidos do assistente nesta conversa (p/ gerar código-fonte)."""
+    try:
+        rows = db.execute(
+            """SELECT text FROM messages WHERE origin='mobile' AND conversation_id=?
+               AND role='assistant' AND text LIKE '%```jdui%' ORDER BY created_at DESC LIMIT 5""",
+            (conversation_id,)).fetchall()
+    except Exception:
+        return []
+    out = []
+    for (txt,) in rows:
+        for corpo in jdui.extrair_fences(txt or ""):
+            try:
+                obj = json.loads(corpo)
+            except ValueError:
+                continue
+            ok, norm, _ = jdui.validar_mensagem(obj)
+            if ok:
+                out.append(norm)
+                if len(out) >= limite:
+                    return out
+    return out
+
+
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
     """Monta o prompt com contexto local + memória global + pesquisa. Retorna (messages, extras)."""
     memoria_on = cfg.get("memoria_global", True)
@@ -515,11 +544,30 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str)
         blocos = memoria_global(db, conversation_id, 6)
         if blocos:
             partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
+    # Follow-up de código: "quero o código" após uma interface → gera fonte (sem jdui).
+    if PEDIDO_CODIGO_RE.search(texto_usuario or ""):
+        blocos_prev = ultimos_blocos_jdui(db, conversation_id)
+        if blocos_prev:
+            partes_sistema.append(
+                "GERAR CÓDIGO-FONTE: o usuário pediu o código da interface anterior. "
+                "Gere o código-fonte equivalente em bloco de código "
+                "(Python para quiz/checklist/calculadora, usando os dados do JSON). "
+                "PROIBIDO usar ```jdui aqui — é código-fonte, não interface. "
+                "JSON da interface:\n" + json.dumps(blocos_prev[0], ensure_ascii=False)[:4000])
     # JDUI: impõe interface declarativa quando pedida ou muito útil.
     comp_sugerido = JuliaPresentationEngine.sugerir(texto_usuario)
     if comp_sugerido:
-        partes_sistema.append(
-            "PEDIDO DE INTERFACE INTERATIVA (componente: " + comp_sugerido + "). " + JDUI_CATALOGO)
+        diretiva = "PEDIDO DE INTERFACE INTERATIVA (componente: " + comp_sugerido + "). " + JDUI_CATALOGO
+        if comp_sugerido == "quiz":
+            diretiva += (" REGRA DURA DO QUIZ: responda com 1-2 linhas de apresentação + "
+                         "UM bloco ```jdui quiz com 5 perguntas (cada uma: q, options[4], answer, explain). "
+                         "PROIBIDO despejar código Python/terminal na resposta — a interface JÁ É o quiz jogável. "
+                         "Depois do bloco, termine com: 'Quer ver o código-fonte desse quiz em Python?' "
+                         "Só envie código se o usuário disser sim.")
+        elif comp_sugerido in ("calculator", "checklist"):
+            diretiva += (" PROIBIDO código Python/terminal ou perguntas de volta — "
+                         "a interface pronta JÁ É a entrega.")
+        partes_sistema.append(diretiva)
     # Documentos: se a pergunta cita um doc ou fala de documento, injeta trechos
     doc_id = doc_mencionado(db, texto_usuario, conversation_id)
     if doc_id:
