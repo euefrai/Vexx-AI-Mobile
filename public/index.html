@@ -197,9 +197,22 @@
         <h2 class="section-caption">Memória da Júlia</h2>
         <div class="sync-card">
           <strong>O que ela aprendeu sobre você</strong>
-          <span>Fatos extraídos das conversas. Toque no ✕ para esquecer.</span>
+          <span>Toque em ✎ para corrigir, ✕ para esquecer. Nada é guardado sem rastro.</span>
+          <div class="drawer-search">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <input id="memorySearch" type="search" placeholder="Buscar na memória…" aria-label="Buscar na memória" autocomplete="off" />
+          </div>
+          <div class="memory-list" id="memoryPending"></div>
           <div class="memory-list" id="memoryList"></div>
-          <button id="memoryRefresh" class="subtle-button" type="button">↻ Atualizar memória</button>
+          <div class="memory-foot">
+            <button id="memoryRefresh" class="subtle-button" type="button">↻ Atualizar</button>
+            <label class="mem-toggle" title="Aprendizado automático"><input type="checkbox" id="learningToggle" checked /> Aprender sozinha</label>
+          </div>
+        </div>
+
+        <h2 class="section-caption">Próximos eventos</h2>
+        <div class="sync-card">
+          <div class="memory-list" id="eventList"></div>
         </div>
 
         <h2 class="section-caption">Exportar conversa atual</h2>

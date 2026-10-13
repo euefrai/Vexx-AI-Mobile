@@ -61,6 +61,13 @@ def _ensure_owner_coluna(db, tabela: str) -> None:
         db.execute(f"ALTER TABLE {tabela} ADD COLUMN owner_id TEXT NOT NULL DEFAULT '{DONO_PADRAO}'")
 
 
+def _colunas(db, tabela: str) -> list:
+    try:
+        return [c[1] for c in db.execute(f"PRAGMA table_info({tabela})").fetchall()]
+    except Exception:
+        return []
+
+
 def _migrar_memories_por_dono(db) -> None:
     """memories passa de PK(key) para PK(owner_id, key), preservando dados locais."""
     sql = db.execute("SELECT sql FROM sqlite_master WHERE name='memories'").fetchone()
@@ -68,6 +75,10 @@ def _migrar_memories_por_dono(db) -> None:
         db.execute("""CREATE TABLE memories (
             owner_id TEXT NOT NULL DEFAULT 'local', key TEXT NOT NULL,
             value TEXT NOT NULL, updated_at TEXT NOT NULL,
+            tipo TEXT NOT NULL DEFAULT 'semantica', assunto TEXT NOT NULL DEFAULT '',
+            status TEXT NOT NULL DEFAULT 'confirmada',
+            origem_conv TEXT NOT NULL DEFAULT '', origem_msg TEXT NOT NULL DEFAULT '',
+            valido_ate TEXT NOT NULL DEFAULT '',
             PRIMARY KEY (owner_id, key)
         )""")
         return
@@ -83,6 +94,52 @@ def _migrar_memories_por_dono(db) -> None:
                   SELECT 'local', key, value, updated_at FROM memories_antiga""")
     db.execute("DROP TABLE memories_antiga")
     log.info("memories migrada para isolamento por dono")
+
+
+def _memoria_v41(db) -> None:
+    """Colunas tipadas + eventos + settings + FTS (idempotente, preserva dados)."""
+    for _col, _ddl in (("tipo", "TEXT NOT NULL DEFAULT 'semantica'"),
+                       ("assunto", "TEXT NOT NULL DEFAULT ''"),
+                       ("status", "TEXT NOT NULL DEFAULT 'confirmada'"),
+                       ("origem_conv", "TEXT NOT NULL DEFAULT ''"),
+                       ("origem_msg", "TEXT NOT NULL DEFAULT ''"),
+                       ("valido_ate", "TEXT NOT NULL DEFAULT ''")):
+        try:
+            if _col not in _colunas(db, "memories"):
+                db.execute(f"ALTER TABLE memories ADD COLUMN {_col} {_ddl}")
+        except Exception:
+            pass
+    db.execute("""CREATE TABLE IF NOT EXISTS memory_events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, owner_id TEXT NOT NULL DEFAULT 'local',
+        titulo TEXT NOT NULL, data_iso TEXT NOT NULL DEFAULT '', data_raw TEXT NOT NULL DEFAULT '',
+        assunto TEXT NOT NULL DEFAULT '', status TEXT NOT NULL DEFAULT 'ativo',
+        origem_conv TEXT NOT NULL DEFAULT '', origem_msg TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL, updated_at TEXT NOT NULL
+    )""")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_mevents_owner ON memory_events(owner_id, status, data_iso)")
+    db.execute("""CREATE TABLE IF NOT EXISTS memory_settings (
+        owner_id TEXT PRIMARY KEY, learning INT NOT NULL DEFAULT 1, updated_at TEXT NOT NULL
+    )""")
+    _criar_fts_memorias(db)
+
+
+def _criar_fts_memorias(db) -> None:
+    """Índice FTS5 para busca textual (opcional: sem ele, cai no overlap)."""
+    try:
+        db.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS memories_fts
+                      USING fts5(key, value, assunto, owner_id, tokenize='unicode61')""")
+    except Exception as exc:
+        log.warning("FTS5 indisponível (%s); busca usa overlap", type(exc).__name__)
+
+
+def _fts_sync(db, owner: str, chave: str, valor: str, assunto: str) -> None:
+    try:
+        db.execute("DELETE FROM memories_fts WHERE owner_id=? AND key=?", (owner, chave))
+        if valor:
+            db.execute("INSERT INTO memories_fts (key, value, assunto, owner_id) VALUES (?,?,?,?)",
+                       (chave, valor, assunto, owner))
+    except Exception:
+        pass
 
 
 def open_db(path: Path):
@@ -113,6 +170,7 @@ def open_db(path: Path):
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_conv ON messages(origin, conversation_id, created_at)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
     _migrar_memories_por_dono(db)
+    _memoria_v41(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
         source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
@@ -188,8 +246,10 @@ def ai_config() -> dict:
 
 # ── Memória compartilhada entre sessões ──────────────────────────────
 def salvar_fatos(db, texto: str, owner=DONO_PADRAO) -> None:
-    """Heurística simples: 'lembre-se que ...', 'meu nome é ...' etc viram memories."""
+    """Heurística de fundo (respeita 'desativar armazenamento'; explícito passa direto)."""
     owner = dono_valido(owner)
+    if not aprendizado_ativo(db, owner):
+        return
     import re
     if not isinstance(texto, str):
         return
@@ -216,13 +276,41 @@ def salvar_fatos(db, texto: str, owner=DONO_PADRAO) -> None:
         log.info("memória atualizada a partir da conversa")
 
 
-def ler_memorias(db, owner=DONO_PADRAO) -> list:
+def ler_memorias(db, owner=DONO_PADRAO, status: str = "confirmada") -> list:
     try:
-        rows = db.execute("SELECT key, value FROM memories WHERE owner_id=? "
-                          "ORDER BY updated_at DESC LIMIT 20", (dono_valido(owner),)).fetchall()
+        rows = db.execute("SELECT key, value, tipo, assunto, status, origem_conv, origem_msg, "
+                          "valido_ate, updated_at FROM memories WHERE owner_id=? AND status=? "
+                          "ORDER BY updated_at DESC LIMIT 40", (dono_valido(owner), status)).fetchall()
     except Exception:
         return []
-    return [{"key": k, "value": v} for k, v in rows if v]
+    return [{"key": k, "value": v, "tipo": t, "assunto": a, "status": s,
+             "origem_conv": oc, "origem_msg": om, "valido_ate": va, "updated_at": u}
+            for k, v, t, a, s, oc, om, va, u in rows if v]
+
+
+def buscar_fts(db, owner: str, consulta: str, limite: int = 10) -> set:
+    """Busca textual FTS5 (vazia se indisponível). Retorna chaves ranqueadas."""
+    try:
+        toks = [t for t in re.findall(r"[a-zà-ú0-9]{2,}", (consulta or "").lower()) if len(t) > 2][:8]
+        if not toks:
+            return set()
+        q = " OR ".join(f'"{t}"*' for t in toks)
+        rows = db.execute("SELECT key FROM memories_fts WHERE memories_fts MATCH ? "
+                          "AND owner_id=? LIMIT ?", (q, owner, limite)).fetchall()
+        return {r[0] for r in rows}
+    except Exception:
+        return set()
+
+
+def data_curta(iso: str) -> str:
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", (iso or "")[:10])
+    return f"{m.group(3)}/{m.group(2)}" if m else ""
+
+
+def proveniencia(f: dict) -> str:
+    """Selo de origem para o prompt: '(guardado em 12/10)'."""
+    d = data_curta(f.get("updated_at", ""))
+    return f" (guardado em {d})" if d else ""
 
 
 def memoria_global(db, conversation_id: str, limite_outras: int = 8, owner=DONO_PADRAO) -> list:
@@ -245,49 +333,143 @@ def memoria_global(db, conversation_id: str, limite_outras: int = 8, owner=DONO_
     return blocos
 
 
-def guardar_fato(db, chave: str, valor: str, origem: str = "chat", owner=DONO_PADRAO) -> None:
-    """Guarda fato aprendido: chave resumida + histórico para evolução."""
+TIPOS_MEMORIA = ("semantica", "temporal", "episodica", "trabalho")
+STATUS_MEMORIA = ("confirmada", "pendente", "contraditoria", "arquivada")
+
+SENSIVEIS = ("saude", "saúde", "doenca", "doença", "remedio", "remédio", "medicamento",
+             "exame", "hospital", "depressao", "depressão", "ansiedade", "terapia",
+             "salario", "salário", "cpf", "rg", "endereco", "endereço", "telefone",
+             "senha", "religiao", "religião", "gravidez", "cancer", "câncer", "hiv",
+             "soropositivo", "deficiencia", "deficiência", "processo judicial",
+             "divida", "dívida", "emprestimo", "empréstimo")
+
+
+def aprendizado_ativo(db, owner=DONO_PADRAO) -> bool:
+    """Toggle 'desativar armazenamento' (painel). Comandos explícitos passam direto."""
+    try:
+        row = db.execute("SELECT learning FROM memory_settings WHERE owner_id=?",
+                         (dono_valido(owner),)).fetchone()
+        return (row[0] if row else 1) != 0
+    except Exception:
+        return True
+
+
+def definir_aprendizado(db, owner, ativo: bool) -> None:
+    with db:
+        db.execute("""INSERT INTO memory_settings (owner_id, learning, updated_at)
+            VALUES (?, ?, ?) ON CONFLICT(owner_id) DO UPDATE SET
+            learning=excluded.learning, updated_at=excluded.updated_at""",
+            (dono_valido(owner), 1 if ativo else 0, agora_iso()))
+
+
+def registrar_memoria(db, owner, chave: str, valor: str, tipo: str = "semantica",
+                      assunto: str = "", status: str = "confirmada",
+                      origem_conv: str = "", origem_msg: str = "", valido_ate: str = "") -> str:
+    """Núcleo V4.1: salva fato tipado com proveniência; contradição preserva histórico."""
     owner = dono_valido(owner)
     chave = re.sub(r"\s+", "_", (chave or "").strip().lower())[:60].strip("_") or "fato"
     valor = (valor or "").strip()[:500]
     if not valor:
-        return
+        return ""
+    if tipo not in TIPOS_MEMORIA:
+        tipo = "semantica"
+    if status not in STATUS_MEMORIA:
+        status = "confirmada"
+    anterior = db.execute("SELECT value FROM memories WHERE owner_id=? AND key=?",
+                          (owner, chave)).fetchone()
     with db:
-        db.execute("""INSERT INTO memories (owner_id, key, value, updated_at)
-            VALUES (?, ?, ?, ?) ON CONFLICT(owner_id, key) DO UPDATE SET
-            value=excluded.value, updated_at=excluded.updated_at""",
-            (owner, chave, valor, agora_iso()))
+        db.execute("""INSERT INTO memories
+            (owner_id, key, value, updated_at, tipo, assunto, status, origem_conv, origem_msg, valido_ate)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(owner_id, key) DO UPDATE SET value=excluded.value,
+             updated_at=excluded.updated_at, tipo=excluded.tipo, assunto=excluded.assunto,
+             status=excluded.status, origem_conv=excluded.origem_conv,
+             origem_msg=excluded.origem_msg, valido_ate=excluded.valido_ate""",
+            (owner, chave, valor, agora_iso(), tipo, (assunto or "")[:80], status,
+             (origem_conv or "")[:100], (origem_msg or "")[:100], (valido_ate or "")[:20]))
+        if anterior and anterior[0] != valor:
+            db.execute("""INSERT INTO memory_facts (key, value, source, created_at, updated_at, owner_id)
+                VALUES (?, ?, 'substituida', ?, ?, ?)""",
+                (chave, anterior[0], agora_iso(), agora_iso(), owner))
         db.execute("""INSERT INTO memory_facts (key, value, source, created_at, updated_at, owner_id)
             VALUES (?, ?, ?, ?, ?, ?)""",
-            (chave, valor, origem, agora_iso(), agora_iso(), owner))
-    log.info("memória aprendeu: %s", chave)
+            (chave, valor, "chat" if status == "confirmada" else "proposta",
+             agora_iso(), agora_iso(), owner))
+        _fts_sync(db, owner, chave, valor, assunto or "")
+    if anterior and anterior[0] != valor:
+        log.info("memória corrigida: %s (antiga preservada no histórico)", chave)
+    else:
+        log.info("memória aprendeu: %s [%s]", chave, tipo)
+    return chave
+
+
+def guardar_fato(db, chave: str, valor: str, origem: str = "chat", owner=DONO_PADRAO) -> None:
+    """Compat: delega ao registro tipado V4.1."""
+    registrar_memoria(db, owner, chave, valor, origem_conv="", origem_msg="")
 
 
 def memorias_relevantes(db, pergunta: str, k: int = 8, owner=DONO_PADRAO) -> list:
-    """Fatos ordenados por relevância (palavras em comum) + recência."""
+    """Híbrido FTS5 + overlap + recência. Só confirmadas. Nunca inventa."""
+    owner = dono_valido(owner)
     try:
-        rows = db.execute("SELECT key, value, updated_at FROM memories WHERE owner_id=?",
-                          (dono_valido(owner),)).fetchall()
+        rows = db.execute("SELECT key, value, tipo, assunto, status, origem_conv, origem_msg, "
+                          "valido_ate, updated_at FROM memories "
+                          "WHERE owner_id=? AND status='confirmada'", (owner,)).fetchall()
     except Exception:
         return []
+    boost = buscar_fts(db, owner, pergunta)
     toks_q = set(re.findall(r"[a-zà-ú0-9]{3,}", (pergunta or "").lower()))
     scored = []
-    for chave, valor, upd in rows:
-        toks = set(re.findall(r"[a-zà-ú0-9]{3,}", f"{chave} {valor}".lower()))
+    for (chave, valor, tipo, assunto, status, oc, om, va, upd) in rows:
+        toks = set(re.findall(r"[a-zà-ú0-9]{3,}", f"{chave} {valor} {assunto}".lower()))
         inter = toks_q & toks if toks_q else set()
-        scored.append((len(inter) * 2 + (1 if chave in ("nome", "foco") else 0), upd or "", chave, valor))
+        nota = len(inter) * 2 + (1 if chave in ("nome", "foco") else 0)
+        if chave in boost:
+            nota += 3
+        scored.append((nota, upd or "", {"key": chave, "value": valor, "tipo": tipo,
+                                         "assunto": assunto, "origem_conv": oc,
+                                         "origem_msg": om, "updated_at": upd}))
     scored.sort(key=lambda s: (s[0], s[1]), reverse=True)
     if toks_q:
         relevantes = [s for s in scored if s[0] > 0][:k] or scored[:2]
     else:
         relevantes = scored[:k]
-    return [{"key": c, "value": v} for _, _, c, v in relevantes]
+    return [f for _, _, f in relevantes]
 
 
 def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
     """Comandos diretos de memória. Retorna resposta pronta ou None."""
     owner = dono_valido(owner)
     t = (texto or "").strip().lower()
+    if CONFIRM_RE.search(t) and pendencias(db, owner):
+        feito = confirmar_pendencia(db, owner)
+        if feito:
+            return (f"Guardado! ✅ **{feito['key']}**: {feito['value'][:200]}", "mem_confirmar")
+    m_nc = re.search(r"(?i)(?:não (?:guard|salv|anot)|descart|esquece(?:r| isso)|não quero)[a-z ]{0,30}$", t)
+    if m_nc and pendencias(db, owner):
+        feito = descartar_pendencia(db, owner)
+        if feito:
+            return (f"Tudo bem, descartei **{feito['key']}** — não guardei nada. 🧹", "mem_descartar")
+    if re.search(r"(pend[eê]ncia|pendente|aguardando confirma|para confirmar|confirma[rçã])", t):
+        pend = pendencias(db, owner)
+        if not pend:
+            return ("Nada aguardando confirmação. 🌱", "mem_pend_vazia")
+        linhas = "\n".join(f"- **{p['key']}**: {p['value'][:150]}" for p in pend)
+        return (f"Aguardando sua confirmação:\n\n{linhas}\n\n"
+                "Diga \"pode guardar\" para confirmar ou \"descarta\" para recusar.", "mem_pend_listar")
+    m_ev = re.search(r"(?i)(cancela(?:r|ndo)?|desmarca(?:r)?|conclu(?:ir|[ií])(?:da|do)?|marcar como feit)[a-z ]{0,20}(.+)", t)
+    if m_ev and ("cancel" in t or "desmarc" in t or "conclu" in t or "feit" in t):
+        alvo = (m_ev.group(2) or "").strip(" .;:")[:120]
+        feito = atualizar_evento(db, owner, alvo, "concluido" if "conclu" in t or "feit" in t else "cancelado")
+        if feito:
+            return (f"Pronto: **{feito}** atualizado. ✅", "mem_evento")
+        return ("Não encontrei esse evento nos próximos. Veja seus eventos perguntando \"meus eventos\".", "mem_evento_nada")
+    if re.search(r"(meus eventos|pr[óo]ximos eventos|minha agenda|compromissos)", t):
+        evs = proximos_eventos(db, owner)
+        if not evs:
+            return ("Nenhum evento futuro guardado. Me diga datas como \"minha prova é dia 20/11\". 📅", "mem_eventos_vazios")
+        linhas = "\n".join(f"- **{e['data_br']}** (faltam {e['faltam']} dias): {e['titulo'][:150]}" for e in evs)
+        return (f"Seus próximos eventos:\n\n{linhas}", "mem_eventos")
     if re.search(r"o que (você|voce) (sabe|lembra|conhece) sobre mim", t) or \
        re.search(r"(mostre|mostra|liste|lista).{0,20}mem[óo]ria", t) or \
        t in ("o que você sabe?", "o que voce sabe?"):
@@ -316,17 +498,300 @@ def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
     return None
 
 
+MESES_PT = {"janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4,
+            "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,
+            "outubro": 10, "novembro": 11, "dezembro": 12}
+DIAS_PT = {"segunda": 0, "terça": 1, "terca": 1, "quarta": 2, "quinta": 3,
+           "sexta": 4, "sábado": 5, "sabado": 5, "domingo": 6}
+
+CONFIRM_RE = re.compile(r"(?i)(pode guardar|pode salvar|pode anotar|confirma|confirmo|isso mesmo|est[áa] certo|correto|t[áa] certo|guarda (isso|a[ií])|salva (isso|a[ií]))")
+
+
+def parse_data(texto: str, hoje=None):
+    """Datas em PT-BR. Retorna (iso|None, raw, precisa_confirmacao).
+
+    Ano explícito ou data relativa = sem ambiguidade. Mês/dia sem ano =
+    sempre pede confirmação (nunca presume o ano).
+    """
+    from datetime import date as _date, timedelta as _td
+    hoje = hoje or _date.today()
+    t = (texto or "").lower()
+    m = re.search(r"\b(\d{1,2})[\/\.](\d{1,2})(?:[\/\.](\d{2,4}))?\b", t)
+    if m:
+        d, mo = int(m.group(1)), int(m.group(2))
+        ano = m.group(3)
+        if ano:
+            ano = int(ano) + (2000 if len(ano) == 2 and int(ano) < 50 else 0)
+            try:
+                return _date(ano, mo, d).isoformat(), m.group(0), False
+            except ValueError:
+                return None, m.group(0), True
+        try:
+            cand = _date(hoje.year, mo, d)
+        except ValueError:
+            return None, m.group(0), True
+        iso = cand.isoformat() if cand >= hoje else _date(hoje.year + 1, mo, d).isoformat()
+        return iso, m.group(0), True
+    m = re.search(r"(?:dia\s+)?(\d{1,2})\s+de\s+([a-zç]+)(?:\s+de\s+(\d{4}))?", t)
+    if m and m.group(2) in MESES_PT:
+        d, mo, ano = int(m.group(1)), MESES_PT[m.group(2)], m.group(3)
+        if ano:
+            try:
+                return _date(int(ano), mo, d).isoformat(), m.group(0), False
+            except ValueError:
+                return None, m.group(0), True
+        try:
+            cand = _date(hoje.year, mo, d)
+        except ValueError:
+            return None, m.group(0), True
+        iso = cand.isoformat() if cand >= hoje else _date(hoje.year + 1, mo, d).isoformat()
+        return iso, m.group(0), True
+    if "depois de amanh" in t:
+        return (hoje + _td(days=2)).isoformat(), "depois de amanhã", False
+    if "amanh" in t:
+        return (hoje + _td(days=1)).isoformat(), "amanhã", False
+    if "semana que vem" in t or "próxima semana" in t or "proxima semana" in t:
+        return (hoje + _td(days=7)).isoformat(), "semana que vem", False
+    if "mês que vem" in t or "mes que vem" in t:
+        mes = hoje.month % 12 + 1
+        ano = hoje.year + (1 if mes == 1 else 0)
+        try:
+            return _date(ano, mes, min(hoje.day, 28)).isoformat(), "mês que vem", False
+        except ValueError:
+            return None, "mês que vem", True
+    m = re.search(r"(segunda|terça|terca|quarta|quinta|sexta|sábado|sabado|domingo)(?:-feira)?", t)
+    if m:
+        alvo = DIAS_PT[m.group(1)]
+        delta = (alvo - hoje.weekday()) % 7 or 7
+        return (hoje + _td(days=delta)).isoformat(), m.group(0), False
+    return None, "", True
+
+
+def data_br(iso: str) -> str:
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", iso or "")
+    return f"{m.group(3)}/{m.group(2)}/{m.group(1)}" if m else (iso or "")
+
+
+def registrar_evento(db, owner, titulo: str, data_iso: str = "", data_raw: str = "",
+                     assunto: str = "", conv: str = "", msg: str = "", status: str = "ativo") -> int:
+    owner = dono_valido(owner)
+    titulo = (titulo or "").strip()[:200]
+    if not titulo:
+        return 0
+    with db:
+        ex = db.execute("SELECT id FROM memory_events WHERE owner_id=? AND titulo=? AND data_iso=?",
+                        (owner, titulo, data_iso or "")).fetchone()
+        if ex:
+            db.execute("UPDATE memory_events SET status=?, assunto=?, updated_at=? WHERE id=?",
+                       (status, (assunto or "")[:80], agora_iso(), ex[0]))
+            return ex[0]
+        cur = db.execute("""INSERT INTO memory_events
+            (owner_id, titulo, data_iso, data_raw, assunto, status, origem_conv, origem_msg,
+             created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            (owner, titulo, data_iso or "", (data_raw or "")[:120], (assunto or "")[:80],
+             status, (conv or "")[:100], (msg or "")[:100], agora_iso(), agora_iso()))
+        return cur.lastrowid or 0
+
+
+def proximos_eventos(db, owner, limite: int = 6, hoje=None) -> list:
+    from datetime import date as _date
+    owner = dono_valido(owner)
+    hoje = hoje or _date.today()
+    try:
+        rows = db.execute("""SELECT id, titulo, data_iso, assunto FROM memory_events
+                             WHERE owner_id=? AND status='ativo' AND data_iso>=?
+                             ORDER BY data_iso LIMIT ?""",
+                          (owner, (hoje.isoformat()), limite)).fetchall()
+    except Exception:
+        return []
+    out = []
+    for i, titulo, iso, assunto in rows:
+        try:
+            d = _date.fromisoformat(iso)
+            out.append({"id": i, "titulo": titulo, "data_iso": iso, "data_br": data_br(iso),
+                        "faltam": (d - hoje).days, "assunto": assunto})
+        except ValueError:
+            continue
+    return out
+
+
+def atualizar_evento(db, owner, ref: str, status: str = "cancelado") -> str:
+    """Cancela/conclui por id ou trecho do título. Retorna título ou ''."""
+    owner = dono_valido(owner)
+    try:
+        rows = db.execute("SELECT id, titulo FROM memory_events WHERE owner_id=? AND status='ativo'",
+                          (owner,)).fetchall()
+    except Exception:
+        return ""
+    alvo = None
+    if str(ref).isdigit():
+        alvo = next((r for r in rows if str(r[0]) == str(ref)), None)
+    if alvo is None:
+        toks = set(re.findall(r"[a-zà-ú0-9]{3,}", str(ref).lower()))
+        melhor, n = None, 0
+        for i, titulo in rows:
+            inter = len(toks & set(re.findall(r"[a-zà-ú0-9]{3,}", titulo.lower())))
+            if inter > n:
+                melhor, n = (i, titulo), inter
+        alvo = melhor
+    if alvo is None:
+        return ""
+    with db:
+        db.execute("UPDATE memory_events SET status=?, updated_at=? WHERE id=? AND owner_id=?",
+                   (status, agora_iso(), alvo[0], owner))
+    return alvo[1]
+
+
+def eh_sensivel(texto: str) -> bool:
+    t = (texto or "").lower()
+    if re.search(r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b", t):
+        return True  # padrão CPF
+    return any(s in t for s in SENSIVEIS)
+
+
+def extrair_candidatos(texto: str) -> list:
+    """Candidatos tipados (fato vs hipótese separados pelo chamador)."""
+    t = (texto or "").strip()
+    out = []
+    for rx, chave, tipo, assunto in [
+        (r"(?i)(?:meu nome é|me chamo|sou o|sou a)\s+(.{2,80})", "nome", "semantica", "identidade"),
+        (r"(?i)(?:meu foco é|minha meta é|estou trabalhando (?:em|com))\s+(.{3,200})", "foco", "trabalho", "objetivos"),
+        (r"(?i)(?:prefiro|gosto de|não gosto de)\s+(.{3,200})", "preferencia", "semantica", "gostos"),
+        (r"(?i)(?:lembre-?se (?:que |de que |disso:?\s?))(.{3,300})", "fato", "semantica", "geral"),
+        (r"(?i)(?:aniversário|aniversario) (?:é |eh |dia )?(.{2,60})", "aniversario", "temporal", "datas"),
+        (r"(?i)(?:minha prova|prova) (?:de \w+ )?(?:é|será|vai ser|dia) (.{2,80})", "prova", "temporal", "estudos"),
+        (r"(?i)(?:reunião|reuniao|consulta|compromisso|viagem|entrega|prazo)[^.]{0,10}(.{2,80})", "evento", "temporal", "agenda"),
+        (r"\b([A-ZÀ-Ú][a-zà-ú]{2,30}) é (?:meu|minha) ([a-zà-ú ]{2,40}?)(?:[.,;]| e |$)", "pessoa", "semantica", "pessoas"),
+    ]:
+        m = re.search(rx, t)
+        if not m:
+            continue
+        if chave == "pessoa":
+            nome = m.group(1).strip()
+            rel = m.group(2).strip()
+            out.append({"chave": "pessoa_" + nome.lower(), "valor": f"{nome} é meu/minha {rel}",
+                        "tipo": tipo, "assunto": assunto,
+                        "sensivel": eh_sensivel(t)})
+            continue
+        valor = re.sub(r"\s+", " ", m.group(1)).strip(" .;:")[:300]
+        if valor:
+            out.append({"chave": chave, "valor": valor, "tipo": tipo, "assunto": assunto,
+                        "sensivel": eh_sensivel(valor) or eh_sensivel(t)})
+    if not out and eh_sensivel(t) and re.search(
+            r"(?i)\b(eu|meu|minha|tomo|tenho|sou|fa[çc]o|estou|uso|tive|preciso)\b", t):
+        slug = "_".join(re.findall(r"[a-zà-ú]{4,}", t.lower())[:4])[:40] or "nota"
+        out.append({"chave": "sensivel_" + slug, "valor": t[:300], "tipo": "semantica",
+                    "assunto": "sensivel", "sensivel": True})
+    return out
+
+
+def pendencias(db, owner) -> list:
+    return ler_memorias(db, owner, status="pendente")
+
+
+def confirmar_pendencia(db, owner) -> dict:
+    """Confirma a pendência mais antiga. Retorna {} se não houver."""
+    owner = dono_valido(owner)
+    rows = db.execute("SELECT key, value, tipo, assunto, origem_conv, origem_msg FROM memories "
+                      "WHERE owner_id=? AND status='pendente' ORDER BY updated_at LIMIT 1",
+                      (owner,)).fetchone()
+    if not rows:
+        return {}
+    chave, valor, tipo, assunto, oc, om = rows
+    with db:
+        db.execute("UPDATE memories SET status='confirmada', updated_at=? "
+                   "WHERE owner_id=? AND key=?", (agora_iso(), owner, chave))
+        _fts_sync(db, owner, chave, valor, assunto)
+    if tipo == "temporal":
+        iso, _, _ = parse_data(valor)
+        if iso:
+            titulo = f"{chave} · {assunto}" if assunto else chave
+            registrar_evento(db, owner, titulo[:200], iso, valor[:120], assunto, oc, om)
+    return {"key": chave, "value": valor, "tipo": tipo}
+
+
+def descartar_pendencia(db, owner) -> dict:
+    owner = dono_valido(owner)
+    row = db.execute("SELECT key FROM memories WHERE owner_id=? AND status='pendente' "
+                     "ORDER BY updated_at LIMIT 1", (owner,)).fetchone()
+    if not row:
+        return {}
+    with db:
+        db.execute("DELETE FROM memories WHERE owner_id=? AND key=?", (owner, row[0]))
+        try:
+            db.execute("DELETE FROM memories_fts WHERE owner_id=? AND key=?", (owner, row[0]))
+        except Exception:
+            pass
+    return {"key": row[0]}
+
+
+def analisar_memoria(db, texto: str, owner, conv: str = "", msg_id: str = "") -> tuple:
+    """V4.1: extrai candidatos; sensível/temporal-ambíguo vira PROPOSTA + pergunta.
+
+    Retorna (salvos[], propostas[], pergunta|None). Explícito ('lembre-se',
+    'guarde') passa mesmo com aprendizado pausado.
+    """
+    owner = dono_valido(owner)
+    explicito = bool(re.search(r"(?i)(lembre-?se|guarde|guardar|anote|anotar|salve|salvar|registre)", texto or ""))
+    if not aprendizado_ativo(db, owner) and not explicito:
+        return [], [], None
+    salvos, propostas, pergunta = [], [], None
+    for c in extrair_candidatos(texto):
+        if c["tipo"] == "temporal":
+            iso, raw, confirma = parse_data(c["valor"])
+            rotulo = (data_br(iso) + " — " + c["valor"]) if iso else c["valor"]
+            if iso and not confirma:
+                chave = registrar_memoria(db, owner, c["chave"], rotulo, "temporal", c["assunto"],
+                                          "confirmada", conv, msg_id)
+                titulo = f"{c['chave']} · {c['assunto']}" if c["assunto"] else c["chave"]
+                registrar_evento(db, owner, titulo[:200], iso, c["valor"][:120],
+                                 c["assunto"], conv, msg_id)
+                if chave:
+                    salvos.append(chave)
+                continue
+            chave = registrar_memoria(db, owner, c["chave"], rotulo, "temporal", c["assunto"],
+                                      "pendente", conv, msg_id)
+            propostas.append(chave)
+            if confirma and iso and pergunta is None:
+                pergunta = (f"Posso guardar essa data para te ajudar? É {data_br(iso)}? "
+                            "Responda \"pode guardar\" para confirmar.")
+            elif pergunta is None:
+                pergunta = (f"Posso guardar \"{c['valor'][:100]}\"? "
+                            "Responda \"pode guardar\" para confirmar.")
+        elif c["sensivel"]:
+            chave = registrar_memoria(db, owner, c["chave"], c["valor"], c["tipo"], c["assunto"],
+                                      "pendente", conv, msg_id)
+            propostas.append(chave)
+            if pergunta is None:
+                pergunta = ("Isso parece sensível, então não guardei ainda. "
+                            "Posso guardar? Responda \"pode guardar\" para confirmar.")
+        else:
+            chave = registrar_memoria(db, owner, c["chave"], c["valor"], c["tipo"], c["assunto"],
+                                      "confirmada", conv, msg_id)
+            if chave:
+                salvos.append(chave)
+    return salvos, propostas, pergunta
+
+
 def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_resposta: str,
                           owner=DONO_PADRAO) -> None:
     """Thread em 2º plano: pede ao LLM fatos novos (JSON) e guarda. Nunca bloqueia o chat."""
     try:
         if len(texto_usuario or "") < 20:
             return
+        _db_chk = open_db(db_path)
+        try:
+            if not aprendizado_ativo(_db_chk, owner):
+                return
+        finally:
+            _db_chk.close()
         import json as _json
         prompt = ("Extraia FATOS duradouros sobre o usuário desta conversa "
                   "(nome, profissão, projetos, preferências, metas, contexto de vida). "
-                  "Ignore o assunto pontual da pergunta. Responda SÓ com JSON: "
-                  "[{\"key\": \"curta_em_snake\", \"value\": \"...\"}] ou [].\n\n"
+                  "NÃO extraia hipóteses, exemplos citados ou palpites — só o que o usuário "
+                  "afirmou sobre si. Responda SÓ com JSON: "
+                  "[{\"key\": \"curta_em_snake\", \"value\": \"...\", \"tipo\": \"semantica|temporal|episodica|trabalho\", "
+                  "\"assunto\": \"...\", \"sensivel\": false, \"confianca\": 0.0-1.0}] ou [].\n\n"
                   f"USUÁRIO: {(texto_usuario or '')[:1500]}\nASSISTENTE: {(texto_resposta or '')[:1500]}")
         res = hermes_bridge.chat_complete(
             cfg["proxy"], cfg["model"],
@@ -340,8 +805,20 @@ def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_re
         db = open_db(db_path)
         try:
             for f in fatos if isinstance(fatos, list) else []:
-                if isinstance(f, dict) and f.get("value"):
-                    guardar_fato(db, str(f.get("key", "fato"))[:60], str(f.get("value"))[:500], "llm", owner)
+                if not (isinstance(f, dict) and f.get("value")):
+                    continue
+                chave = str(f.get("key", "fato"))[:60]
+                valor = str(f.get("value"))[:500]
+                tipo = str(f.get("tipo", "semantica"))[:20]
+                assunto = str(f.get("assunto", ""))[:80]
+                try:
+                    conf = float(f.get("confianca", 0.8))
+                except (TypeError, ValueError):
+                    conf = 0.8
+                if f.get("sensivel") or eh_sensivel(valor) or conf < 0.6:
+                    registrar_memoria(db, owner, chave, valor, tipo, assunto, "pendente")
+                else:
+                    registrar_memoria(db, owner, chave, valor, tipo, assunto, "confirmada")
             n = db.execute("SELECT COUNT(*) FROM memory_facts WHERE owner_id=?",
                            (dono_valido(owner),)).fetchone()[0]
             if n > 60:
@@ -837,11 +1314,26 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
             rel = memorias_relevantes(db, "", k=4, owner=owner)
         if rel:
             extras["memoria_usada"] = True
-            partes_sistema.append("O QUE VOCÊ SABE SOBRE O USUÁRIO (use naturalmente, sem citar que é memória):\n" +
-                                  "\n".join(f"- {f['key']}: {f['value'][:200]}" for f in rel))
+            partes_sistema.append("O QUE VOCÊ SABE SOBRE O USUÁRIO (memórias confirmadas; "
+                                  "use naturalmente; o que não está aqui você NÃO sabe):\n" +
+                                  "\n".join(f"- {f['key']}: {f['value'][:200]}{proveniencia(f)}"
+                                            for f in rel))
         blocos = memoria_global(db, conversation_id, 6, owner)
         if blocos:
             partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
+        from datetime import date as _d
+        evs = proximos_eventos(db, owner)
+        if evs:
+            hoje_br = _d.today().strftime("%d/%m/%Y")
+            partes_sistema.append(
+                f"PRÓXIMOS EVENTOS (hoje é {hoje_br}; use para planos e contagens, sem inventar):\n" +
+                "\n".join(f"- {e['data_br']} (faltam {e['faltam']} dias): {e['titulo'][:150]}"
+                          for e in evs))
+        pend = pendencias(db, owner)[:2]
+        if pend:
+            partes_sistema.append(
+                "AGUARDANDO CONFIRMAÇÃO (não afirme que guardou; pergunte de forma natural):\n" +
+                "\n".join(f"- {p['value'][:150]}" for p in pend))
     # Follow-up de código: "quero o código" após uma interface → gera fonte (sem jdui).
     if PEDIDO_CODIGO_RE.search(texto_usuario or ""):
         blocos_prev = ultimos_blocos_jdui(db, conversation_id, owner=owner)
@@ -970,7 +1462,7 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
         return {"error": "Mensagem do usuário não encontrada. Sincronize primeiro.",
                 "codigo": "sem_mensagem"}
     try:
-        salvar_fatos(db, row[0], owner)
+        analisar_memoria(db, row[0], owner, conv, mid)
     except Exception:
         pass
     mem_flag = payload.get("memory", payload.get("memoria_global", None))
@@ -1330,8 +1822,43 @@ def run():
                         with db:
                             db.execute("DELETE FROM memories WHERE owner_id=? AND key=?",
                                        (dono, req.get("key", "")))
+                            try:
+                                db.execute("DELETE FROM memories_fts WHERE owner_id=? AND key=?",
+                                           (dono, req.get("key", "")))
+                            except Exception:
+                                pass
                         reply = {"request_id": request_id, "type": "mem_forgotten",
                                  "key": req.get("key", "")}
+                    elif req.get("type") == "mem_list_full":
+                        rows = db.execute("SELECT key, value, tipo, assunto, status, origem_conv, "
+                                          "origem_msg, valido_ate, updated_at FROM memories "
+                                          "WHERE owner_id=? ORDER BY status, updated_at DESC LIMIT 200",
+                                          (dono,)).fetchall()
+                        reply = {"request_id": request_id, "type": "mem_list_full",
+                                 "memories": [{"key": k, "value": v, "tipo": t, "assunto": a,
+                                               "status": s, "origem_conv": oc, "origem_msg": om,
+                                               "valido_ate": va, "updated_at": u}
+                                              for k, v, t, a, s, oc, om, va, u in rows]}
+                    elif req.get("type") == "mem_confirm":
+                        feito = confirmar_pendencia(db, dono)
+                        reply = {"request_id": request_id, "type": "mem_confirmed", **feito}
+                    elif req.get("type") == "mem_update":
+                        chave = re.sub(r"\s+", "_", str(req.get("key", "")).strip().lower())[:60]
+                        valor = str(req.get("value", "")).strip()[:500]
+                        if chave and valor:
+                            registrar_memoria(db, dono, chave, valor)
+                            reply = {"request_id": request_id, "type": "mem_updated", "key": chave}
+                        else:
+                            reply = {"request_id": request_id, "type": "mem_error",
+                                     "error": "Chave ou valor inválido"}
+                    elif req.get("type") == "mem_settings":
+                        if "learning" in req:
+                            definir_aprendizado(db, dono, str(req.get("learning")) == "1")
+                        reply = {"request_id": request_id, "type": "mem_settings",
+                                 "learning": aprendizado_ativo(db, dono)}
+                    elif req.get("type") == "event_list":
+                        reply = {"request_id": request_id, "type": "event_list",
+                                 "events": proximos_eventos(db, dono)}
                     elif req.get("type") == "ai":
                         res = ai_completa(db, req, cfg)
                         reply = {"request_id": request_id, "type": "ai_done", **res}

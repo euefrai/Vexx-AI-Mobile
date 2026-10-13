@@ -1210,35 +1210,118 @@ async function docAction(docId, name, kind, b1, b2) {
   finally { b1.disabled = false; b2.disabled = false; }
 }
 
-/* ----- Memória (ver + esquecer) ----- */
+/* ----- Memória (ver, buscar, corrigir, confirmar, desativar) ----- */
+let memoryCache = [];
 async function loadMemories() {
   const box = $('memoryList');
+  const pend = $('memoryPending');
   if (!box) return;
-  if (!authenticated || !pcOnline) { box.innerHTML = '<div class="doc-empty">Memória aparece com o PC online.</div>'; return; }
+  if (!authenticated || !pcOnline) {
+    box.innerHTML = '<div class="doc-empty">Memória aparece com o PC online.</div>';
+    if (pend) pend.replaceChildren();
+    return;
+  }
   try {
-    const r = await api('/api/memories');
-    const ms = r.memories || [];
-    box.replaceChildren();
-    if (!ms.length) { box.innerHTML = '<div class="doc-empty">Nada guardado. Diga "lembre-se que…".</div>'; return; }
-    ms.forEach(m => {
-      const row = document.createElement('div'); row.className = 'memory-row';
-      const k = document.createElement('span'); k.className = 'k'; k.textContent = m.key;
+    const [r, st] = await Promise.all([
+      api('/api/memories/full'),
+      api('/api/memory/settings').catch(() => ({ learning: true }))
+    ]);
+    memoryCache = r.memories || [];
+    $('learningToggle').checked = st.learning !== false;
+    paintMemories();
+    loadEvents();
+  } catch (_) { box.innerHTML = '<div class="doc-empty">PC offline.</div>'; }
+}
+function paintMemories() {
+  const box = $('memoryList');
+  const pend = $('memoryPending');
+  const q = ($('memorySearch').value || '').toLowerCase();
+  const pr = memoryCache.filter(m => m.status === 'pendente');
+  pend.replaceChildren();
+  if (pr.length) {
+    const cap = document.createElement('div'); cap.className = 'memory-sub'; cap.textContent = 'AGUARDANDO SUA CONFIRMAÇÃO';
+    pend.appendChild(cap);
+    pr.forEach(m => {
+      const row = document.createElement('div'); row.className = 'memory-row mem-pend';
       const v = document.createElement('span'); v.className = 'v'; v.textContent = m.value; v.title = m.value;
-      const b = document.createElement('button'); b.type = 'button'; b.textContent = '✕'; b.title = 'Esquecer ' + m.key;
-      b.addEventListener('click', async () => {
+      const ok = document.createElement('button'); ok.type = 'button'; ok.className = 'mem-ok'; ok.textContent = '✓';
+      ok.title = 'Confirmar e guardar';
+      ok.addEventListener('click', async () => {
         try {
-          const res = await fetch('/api/memories/' + encodeURIComponent(m.key), { method: 'DELETE', headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
-          if (!res.ok) throw new Error();
-          await loadMemories();
-          showToast('Esquecido: ' + m.key);
-        } catch (_) { showToast('Falha ao esquecer'); }
+          await api('/api/memories/confirm', { method: 'POST' });
+          await loadMemories(); showToast('Guardado!');
+        } catch (_) { showToast('Falha ao confirmar'); }
       });
-      row.appendChild(k); row.appendChild(v); row.appendChild(b);
+      const no = document.createElement('button'); no.type = 'button'; no.textContent = '✕'; no.title = 'Descartar';
+      no.addEventListener('click', async () => {
+        try {
+          await api('/api/memories/' + encodeURIComponent(m.key), { method: 'DELETE' });
+          await loadMemories(); showToast('Descartado');
+        } catch (_) { showToast('Falha ao descartar'); }
+      });
+      row.appendChild(v); row.appendChild(ok); row.appendChild(no);
+      pend.appendChild(row);
+    });
+  }
+  box.replaceChildren();
+  const ms = memoryCache.filter(m => m.status === 'confirmada'
+    && (!q || (m.key + ' ' + m.value + ' ' + (m.assunto || '')).toLowerCase().includes(q)));
+  if (!ms.length) { box.innerHTML = '<div class="doc-empty">' + (q ? 'Nada encontrado.' : 'Nada guardado. Diga "lembre-se que…".') + '</div>'; return; }
+  ms.forEach(m => {
+    const row = document.createElement('div'); row.className = 'memory-row';
+    const badge = document.createElement('span'); badge.className = 'mem-tipo ' + (m.tipo || '');
+    badge.textContent = m.tipo || 'fato';
+    const k = document.createElement('span'); k.className = 'k'; k.textContent = m.key;
+    const v = document.createElement('span'); v.className = 'v';
+    v.textContent = m.value + (m.updated_at ? ' · ' + fmtTime(m.updated_at) : '');
+    v.title = m.value + (m.assunto ? ' [' + m.assunto + ']' : '');
+    const fix = document.createElement('button'); fix.type = 'button'; fix.className = 'fix'; fix.textContent = '✎'; fix.title = 'Corrigir';
+    fix.addEventListener('click', async () => {
+      const nv = window.prompt('Corrigir "' + m.key + '":', m.value);
+      if (!nv || !nv.trim() || nv.trim() === m.value) return;
+      try {
+        await api('/api/memories/' + encodeURIComponent(m.key), { method: 'PUT', body: JSON.stringify({ value: nv.trim().slice(0, 500) }) });
+        await loadMemories(); showToast('Corrigido!');
+      } catch (_) { showToast('Falha ao corrigir'); }
+    });
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = '✕'; b.title = 'Esquecer ' + m.key;
+    b.addEventListener('click', async () => {
+      if (!window.confirm('Esquecer "' + m.key + '" para sempre?')) return;
+      try {
+        const res = await fetch('/api/memories/' + encodeURIComponent(m.key), { method: 'DELETE', headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+        if (!res.ok) throw new Error();
+        await loadMemories(); showToast('Esquecido: ' + m.key);
+      } catch (_) { showToast('Falha ao esquecer'); }
+    });
+    row.appendChild(badge); row.appendChild(k); row.appendChild(v); row.appendChild(fix); row.appendChild(b);
+    box.appendChild(row);
+  });
+}
+async function loadEvents() {
+  const box = $('eventList');
+  if (!box) return;
+  try {
+    const r = await api('/api/memory/events');
+    const evs = r.events || [];
+    box.replaceChildren();
+    if (!evs.length) { box.innerHTML = '<div class="doc-empty">Nenhum evento. Diga "minha prova é dia 20/11".</div>'; return; }
+    evs.forEach(e => {
+      const row = document.createElement('div'); row.className = 'memory-row';
+      const k = document.createElement('span'); k.className = 'k'; k.textContent = e.data_br;
+      const v = document.createElement('span'); v.className = 'v'; v.textContent = e.titulo + ' (faltam ' + e.faltam + ' dias)';
+      row.appendChild(k); row.appendChild(v);
       box.appendChild(row);
     });
   } catch (_) { box.innerHTML = '<div class="doc-empty">PC offline.</div>'; }
 }
 $('memoryRefresh').addEventListener('click', loadMemories);
+$('memorySearch').addEventListener('input', paintMemories);
+$('learningToggle').addEventListener('change', async e => {
+  try {
+    await api('/api/memory/settings', { method: 'POST', body: JSON.stringify({ learning: e.target.checked }) });
+    showToast(e.target.checked ? 'Aprendizado ativado' : 'Armazenamento pausado (explícitos valem)');
+  } catch (_) { showToast('Falha ao salvar'); loadMemories(); }
+});
 $('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente online' : 'Aguardando agente local'));
 
 /* ----- Remoto ----- */

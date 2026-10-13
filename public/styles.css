@@ -297,6 +297,17 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .memory-row .v{flex:1;min-width:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .memory-row button{color:var(--soft);font-size:13px;padding:2px 6px;border-radius:6px}
 .memory-row button:hover{color:#f87171}
+.memory-row .fix:hover{color:var(--purple)}
+.mem-tipo{font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--soft);
+  background:rgba(255,255,255,.06);padding:2px 6px;border-radius:99px;flex-shrink:0}
+.mem-tipo.temporal{color:#fbbf24}.mem-tipo.trabalho{color:#6ee7b7}.mem-tipo.episodica{color:#7dd3fc}
+.mem-pend{border-color:rgba(251,191,36,.4)!important;background:rgba(251,191,36,.05)}
+.mem-pend .mem-ok{color:#6ee7b7;font-weight:800}
+.mem-pend .mem-ok:hover{color:#6ee7b7}
+.memory-sub{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--soft);margin:6px 0 2px}
+.memory-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+.mem-toggle{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.mem-toggle input{width:16px;height:16px;accent-color:var(--purple-2)}
 
 /* Páginas — chat fullscreen */
 .page{

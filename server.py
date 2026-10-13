@@ -416,6 +416,76 @@ async def memories_forget(request: Request, key: str):
     return {"ok": True, "key": key}
 
 
+class MemUpdate(BaseModel):
+    value: str = Field(min_length=1, max_length=500)
+
+
+class MemSettings(BaseModel):
+    learning: bool
+
+
+@app.get("/api/memories/full")
+async def memories_full(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "mem_list_full", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
+    if result.get("type") != "mem_list_full":
+        raise HTTPException(503, "Memória indisponível")
+    return {"memories": result.get("memories", [])[:200]}
+
+
+@app.post("/api/memories/confirm")
+async def memories_confirm(request: Request):
+    require_csrf(request)
+    result = await relay.exchange({"type": "mem_confirm", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
+    if result.get("type") != "mem_confirmed":
+        raise HTTPException(503, "Nada para confirmar")
+    return result
+
+
+@app.put("/api/memories/{key}")
+async def memories_update(request: Request, key: str, body: MemUpdate):
+    require_csrf(request)
+    if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
+        raise HTTPException(422, "Chave inválida")
+    result = await relay.exchange({"type": "mem_update", "owner": sessao_usuario(request),
+                                   "key": key, "value": body.value}, timeout=20.0)
+    if result.get("type") != "mem_updated":
+        raise HTTPException(503, result.get("error", "Falha ao corrigir"))
+    return {"ok": True, "key": key}
+
+
+@app.get("/api/memory/settings")
+async def memory_settings_get(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "mem_settings", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
+    if result.get("type") != "mem_settings":
+        raise HTTPException(503, "Configuração indisponível")
+    return {"learning": result.get("learning", True)}
+
+
+@app.post("/api/memory/settings")
+async def memory_settings_set(request: Request, body: MemSettings):
+    require_csrf(request)
+    result = await relay.exchange({"type": "mem_settings", "owner": sessao_usuario(request),
+                                   "learning": "1" if body.learning else "0"}, timeout=20.0)
+    if result.get("type") != "mem_settings":
+        raise HTTPException(503, "Falha ao salvar")
+    return {"learning": result.get("learning", True)}
+
+
+@app.get("/api/memory/events")
+async def memory_events(request: Request):
+    verify_session(request)
+    result = await relay.exchange({"type": "event_list", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
+    if result.get("type") != "event_list":
+        raise HTTPException(503, "Eventos indisponíveis")
+    return {"events": result.get("events", [])[:20]}
+
+
 @app.post("/api/ai")
 async def ai_complete(request: Request, body: AIRequest):
     """Resposta completa (sem streaming). Idempotente por message_id no agente."""
