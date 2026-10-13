@@ -109,10 +109,13 @@ def test_relay_repasse_owner_e_isolamento():
             vistos = {}
 
             def agente():
-                for _ in range(3):
+                for _ in range(4):
                     req = ws.receive_json()
                     vistos[req['type']] = req.get('owner')
-                    if req['type'] == 'sync':
+                    if req['type'] == 'sess_revogados':
+                        ws.send_json({'request_id': req['request_id'],
+                                      'type': 'sess_revogados', 'sids': []})
+                    elif req['type'] == 'sync':
                         ws.send_json({'request_id': req['request_id'], 'type': 'ack', 'confirmed_ids': []})
                     elif req['type'] == 'list':
                         ws.send_json({'request_id': req['request_id'], 'type': 'history',
@@ -130,6 +133,7 @@ def test_relay_repasse_owner_e_isolamento():
             client.get('/api/memories', headers={'X-CSRF-Token': csrf})
             t.join(timeout=8)
             # relay sempre informa o dono autenticado; agente filtra por ele
-            assert vistos.get('sync') == 'efrai', vistos
-            assert vistos.get('list') == 'efrai', vistos
-            assert vistos.get('mem_list') == 'efrai', vistos
+            # (login legado = dono 'local')
+            assert vistos.get('sync') == 'local', vistos
+            assert vistos.get('list') == 'local', vistos
+            assert vistos.get('mem_list') == 'local', vistos

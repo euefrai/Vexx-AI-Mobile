@@ -166,8 +166,14 @@ def test_relay_memoria_nova_e_503_sem_pc():
             for fn, tipo, tipo_resp, corpo in casos:
                 t = _th.Thread(target=fn)
                 t.start()
-                req = ws.receive_json()
-                assert req['type'] == tipo and req.get('owner') == 'efrai'
+                for _ in range(3):
+                    req = ws.receive_json()
+                    if req['type'] == 'sess_revogados':
+                        ws.send_json({'request_id': req['request_id'],
+                                      'type': 'sess_revogados', 'sids': []})
+                        continue
+                    break
+                assert req['type'] == tipo and req.get('owner') == 'local'
                 ws.send_json({'request_id': req['request_id'], 'type': tipo_resp, **corpo})
                 t.join(timeout=8)
             assert out['f'].json() == {'memories': []}

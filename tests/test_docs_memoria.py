@@ -172,9 +172,12 @@ def test_relay_docs_e_memories():
         with client.websocket_connect('/api/agent/ws',
                                       headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
             handlers = {
-                'doc_upload': lambda r: {'type': 'doc_uploaded', 'doc_id': 'doc-abc123',
+                'sess_revogados': lambda r: {'type': 'sess_revogados', 'sids': []},
+                'doc_upload': lambda r: ({'type': 'doc_uploaded', 'doc_id': 'doc-abc123',
                                          'name': 'a.txt', 'ext': '.txt', 'chars': 10,
-                                         'chunks': 1, 'paginas_aprox': 1},
+                                         'chunks': 1, 'paginas_aprox': 1}
+                                        if r.get('owner') == 'local' else {'type': 'doc_error',
+                                                                          'error': 'dono?', 'codigo': 'x'}),
                 'doc_list': lambda r: {'type': 'doc_list', 'documents': []},
                 'doc_resumo': lambda r: {'type': 'doc_resumo', 'doc_id': r['doc_id'], 'resumo': 'RES'},
                 'mem_list': lambda r: {'type': 'mem_list',

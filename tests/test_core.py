@@ -73,7 +73,13 @@ def test_real_relay_ack_only_after_agent_message():
                 result['response'] = client.post('/api/sync', json={'messages': [msg()]}, headers={'X-CSRF-Token': csrf})
             thread = threading.Thread(target=submit)
             thread.start()
-            req = ws.receive_json()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req['type'] == 'sess_revogados':
+                    ws.send_json({'request_id': req['request_id'],
+                                  'type': 'sess_revogados', 'sids': []})
+                    continue
+                break
             assert req['type'] == 'sync'
             assert req['messages'][0]['id'] == 'message001'
             ws.send_json({'request_id': req['request_id'], 'type': 'ack', 'confirmed_ids': ['message001']})

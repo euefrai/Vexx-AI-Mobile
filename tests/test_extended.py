@@ -86,10 +86,20 @@ def test_concurrent_duplicate_sync_both_confirm_no_crash():
             threads = [threading.Thread(target=submit) for _ in range(2)]
             for t in threads:
                 t.start()
-            for _ in range(2):
+            acks = 0
+            for _ in range(4):
                 req = ws.receive_json()
+                if req["type"] == "sess_revogados":
+                    ws.send_json({"request_id": req["request_id"],
+                                  "type": "sess_revogados", "sids": []})
+                    continue
+                assert req["type"] == "sync"
                 ws.send_json({"request_id": req["request_id"], "type": "ack",
                               "confirmed_ids": ["message001"]})
+                acks += 1
+                if acks == 2:
+                    break
+            assert acks == 2
             for t in threads:
                 t.join(timeout=8)
             assert not any(t.is_alive() for t in threads)

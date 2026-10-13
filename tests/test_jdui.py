@@ -166,17 +166,27 @@ def test_relay_ui_state_via_agente_fake():
             def lista():
                 out['l'] = client.get('/api/ui-state')
 
+            def pega(tipo):
+                for _ in range(3):
+                    req = ws.receive_json()
+                    if req['type'] == 'sess_revogados':
+                        ws.send_json({'request_id': req['request_id'],
+                                      'type': 'sess_revogados', 'sids': []})
+                        continue
+                    assert req['type'] == tipo, req
+                    return req
+                raise AssertionError('sem ' + tipo)
+
             t = threading.Thread(target=salva)
             t.start()
-            req = ws.receive_json()
-            assert req['type'] == 'ui_state_save'
+            req = pega('ui_state_save')
             ws.send_json({'request_id': req['request_id'], 'type': 'ui_state_saved', 'saved': 1})
             t.join(timeout=8)
             assert out['s'].json() == {'saved': 1}
 
             t = threading.Thread(target=lista)
             t.start()
-            req = ws.receive_json()
+            req = pega('ui_state_list')
             ws.send_json({'request_id': req['request_id'], 'type': 'ui_state_list', 'states': []})
             t.join(timeout=8)
             assert out['l'].json() == {'states': []}
@@ -219,7 +229,13 @@ def test_relay_conversation_forget():
 
             t = _th.Thread(target=deleta)
             t.start()
-            req = ws.receive_json()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req['type'] == 'sess_revogados':
+                    ws.send_json({'request_id': req['request_id'],
+                                  'type': 'sess_revogados', 'sids': []})
+                    continue
+                break
             assert req['type'] == 'conv_forget' and req['conversation_id'] == 'conv-esquecer'
             ws.send_json({'request_id': req['request_id'], 'type': 'conv_forgotten', 'deleted': 3})
             t.join(timeout=8)

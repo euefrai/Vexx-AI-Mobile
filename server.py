@@ -48,8 +48,8 @@ def signer():
     return URLSafeTimedSerializer(secret, salt="julia-mobile-session-v1")
 
 
-def sessao_usuario(request: Request) -> str:
-    """Dono autenticado da sessão (base do isolamento multiusuário)."""
+def sessao_dados(request: Request) -> dict:
+    """Sessão autenticada: {uid, user, sid}. uid é o dono dos dados no PC."""
     token = request.cookies.get("julia_session")
     if not token:
         raise HTTPException(status_code=401, detail="Faça login")
@@ -57,9 +57,62 @@ def sessao_usuario(request: Request) -> str:
         data = signer().loads(token, max_age=SESSION_LIFETIME)
     except (BadSignature, SignatureExpired):
         raise HTTPException(status_code=401, detail="Sessão expirada") from None
-    if data.get("user") != config()["user"]:
+    if data.get("user") != config()["user"] and "uid" not in data:
         raise HTTPException(status_code=401, detail="Sessão inválida")
-    return str(data.get("user") or "")
+    return data
+
+
+def sessao_usuario(request: Request) -> str:
+    """Dono autenticado da sessão (base do isolamento multiusuário)."""
+    data = sessao_dados(request)
+    uid = str(data.get("uid") or "")
+    if uid:
+        return uid
+    return "local"  # sessão legada (só username): dono proprietário
+
+
+def emitir_sessao(response: Response, uid: str, nome: str, sid: str = "") -> dict:
+    token = signer().dumps({"user": config()["user"], "uid": uid,
+                            "nome": nome, "sid": sid or secrets.token_hex(8),
+                            "nonce": secrets.token_hex(16)})
+    response.set_cookie(
+        "julia_session", token, httponly=True, secure=config()["production"],
+        samesite="strict", max_age=SESSION_LIFETIME, path="/"
+    )
+    return {"authenticated": True, "csrf": csrf_value(token), "user": nome, "uid": uid}
+
+
+# Revogação server-side: lista de sids revogados no PC (TTL 60s; expiração
+# de 12h limita a janela quando o PC está offline — documentado).
+# `suportado=False` após 2 timeouts: agentes antigos sem sess_revogados não
+# sofrem stall a cada minuto.
+revogados = {"sids": set(), "ts": 0.0, "suportado": True, "falhas": 0}
+REVOGA_TTL = 60.0
+
+
+async def revogacao_ok(request: Request) -> str:
+    """uid autenticado + sessão não revogada. Levanta 401 caso contrário."""
+    data = sessao_dados(request)
+    uid = str(data.get("uid") or "") or "local"
+    sid = str(data.get("sid") or "")
+    if sid:
+        agora = time.monotonic()
+        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is not None and revogados["suportado"]:
+            try:
+                res = await relay.exchange({"type": "sess_revogados"}, timeout=5.0)
+                if res.get("type") == "sess_revogados":
+                    revogados["sids"] = set(res.get("sids", [])[:500])
+                    revogados["ts"] = agora
+                    revogados["falhas"] = 0
+                else:
+                    revogados["falhas"] += 1
+            except HTTPException:
+                revogados["falhas"] += 1
+            if revogados["falhas"] >= 2:
+                revogados["suportado"] = False
+        if sid in revogados["sids"]:
+            raise HTTPException(status_code=401, detail="Sessão revogada")
+    return uid
 
 
 def verify_session(request: Request) -> str:
@@ -182,45 +235,445 @@ def health():
     return {"status": "ok", "configured": is_ready()}
 
 
+def _limite_tentativas(request: Request, chave: str, teto: int, janela: float) -> None:
+    source = (request.client.host if request.client else "unknown") + ":" + chave
+    agora = time.monotonic()
+    tentativas = [t for t in login_failures.get(source, []) if agora - t < janela]
+    if len(tentativas) >= teto:
+        raise HTTPException(429, "Muitas tentativas; tente novamente mais tarde")
+    tentativas.append(agora)
+    login_failures[source] = tentativas
+
+
+def _limpa_tentativas(request: Request, chave: str) -> None:
+    login_failures.pop(((request.client.host if request.client else "unknown") + ":" + chave), None)
+
+
 @app.post("/api/login")
-def login(credentials: Credentials, request: Request, response: Response):
+async def login(credentials: Credentials, request: Request, response: Response):
     if not is_ready():
         raise HTTPException(503, "Configure as variáveis secretas no servidor")
-    source = request.client.host if request.client else "unknown"
-    now = time.monotonic()
-    attempts = [t for t in login_failures.get(source, []) if now - t < 300]
-    if len(attempts) >= 5:
-        raise HTTPException(429, "Muitas tentativas; tente novamente mais tarde")
+    _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
     cfg = config()
-    valid_user = hmac.compare_digest(credentials.username, cfg["user"])
-    try:
-        valid_password = ph.verify(cfg["password_hash"], credentials.password)
-    except (argon_errors.VerifyMismatchError, argon_errors.VerificationError, argon_errors.InvalidHashError):
-        valid_password = False
-    if not (valid_user and valid_password):
-        attempts.append(now)
-        login_failures[source] = attempts
+    if hmac.compare_digest(credentials.username, cfg["user"]):
+        try:
+            if ph.verify(cfg["password_hash"], credentials.password):
+                _limpa_tentativas(request, "login:" + credentials.username.strip().lower()[:40])
+                return emitir_sessao(response, "local", cfg["user"])
+        except (argon_errors.VerifyMismatchError, argon_errors.VerificationError,
+                argon_errors.InvalidHashError):
+            pass
         raise HTTPException(401, "Usuário ou senha inválidos")
-    login_failures.pop(source, None)
-    token = signer().dumps({"user": cfg["user"], "nonce": secrets.token_hex(16)})
-    response.set_cookie(
-        "julia_session", token, httponly=True, secure=cfg["production"],
-        samesite="strict", max_age=SESSION_LIFETIME, path="/"
-    )
-    return {"authenticated": True, "csrf": csrf_value(token), "user": cfg["user"]}
+    # Conta comum: verifica no PC (exige agente online; sem simulação).
+    if relay.ws is None:
+        raise HTTPException(401, "Usuário ou senha inválidos")
+    try:
+        result = await relay.exchange({"type": "auth_login", "username": credentials.username,
+                                       "password": credentials.password}, timeout=20.0)
+    except HTTPException:
+        raise HTTPException(401, "Usuário ou senha inválidos") from None
+    if result.get("type") == "auth_error" and result.get("codigo") == "pendente":
+        raise HTTPException(403, "Conta aguardando aprovação.")
+    if result.get("type") != "auth_ok":
+        raise HTTPException(401, "Usuário ou senha inválidos")
+    _limpa_tentativas(request, "login:" + credentials.username.strip().lower()[:40])
+    return emitir_sessao(response, result["uid"], result["display"],
+                         sid=result.get("sid", ""))
+
+
+class Registro(BaseModel):
+    display: str = Field(min_length=2, max_length=40)
+    username: str = Field(min_length=3, max_length=30)
+    password: str = Field(min_length=8, max_length=128)
+    invite: str = Field(default="", max_length=32)
+
+
+@app.get("/api/auth/config")
+async def auth_config(request: Request):
+    if relay.ws is None:
+        return {"modo": "fechado", "exigir_aprovacao": True, "agent_online": False}
+    try:
+        result = await relay.exchange({"type": "auth_config"}, timeout=10.0)
+    except HTTPException:
+        return {"modo": "fechado", "exigir_aprovacao": True, "agent_online": False}
+    if result.get("type") != "auth_config":
+        return {"modo": "fechado", "exigir_aprovacao": True, "agent_online": True}
+    return {"modo": result.get("modo", "convite"),
+            "exigir_aprovacao": result.get("exigir_aprovacao", True),
+            "agent_online": True}
+
+
+@app.post("/api/register")
+async def register(body: Registro, request: Request, response: Response):
+    _limite_tentativas(request, "register", 3, 3600)
+    if relay.ws is None:
+        raise HTTPException(503, "Cadastro indisponível: computador offline. Tente quando online.")
+    try:
+        result = await relay.exchange({"type": "auth_register", "display": body.display,
+                                       "username": body.username, "password": body.password,
+                                       "invite": body.invite}, timeout=20.0)
+    except HTTPException:
+        raise HTTPException(503, "Cadastro indisponível no momento.") from None
+    if result.get("type") == "auth_error":
+        codigo = result.get("codigo", "")
+        status = 409 if codigo == "duplicado" else 422 if codigo in (
+            "username_invalido", "senha_fraca", "nome_invalido", "convite_necessario",
+            "convite_invalido", "fechado") else 503
+        raise HTTPException(status, result.get("error", "Não foi possível cadastrar"))
+    if result.get("type") != "auth_registered":
+        raise HTTPException(503, "Cadastro indisponível no momento.")
+    if result.get("status") == "pendente" or not result.get("sid"):
+        return {"registered": True, "status": "pendente", "username": result.get("username", "")}
+    return emitir_sessao(response, result["uid"], result["display"], sid=result.get("sid", ""))
 
 
 @app.get("/api/session")
-def session(request: Request):
-    token = verify_session(request)
-    return {"authenticated": True, "csrf": csrf_value(token), "user": config()["user"]}
+async def session(request: Request):
+    data = sessao_dados(request)
+    uid = str(data.get("uid") or "") or "local"
+    nome = str(data.get("nome") or data.get("user") or config()["user"])
+    papel = "user"
+    if relay.ws is not None:
+        try:
+            result = await relay.exchange({"type": "auth_whoami", "sid": str(data.get("sid") or "")},
+                                          timeout=10.0)
+            if result.get("type") == "auth_user" and result.get("user"):
+                papel = result["user"].get("role", "user")
+                nome = result["user"].get("display", nome)
+                if result["user"].get("uid") != uid and uid != "local":
+                    raise HTTPException(status_code=401, detail="Sessão inválida")
+        except HTTPException as exc:
+            if exc.status_code == 401:
+                raise
+    token = request.cookies.get("julia_session", "")
+    return {"authenticated": True, "csrf": csrf_value(token), "user": nome,
+            "uid": uid, "role": papel}
 
 
 @app.post("/api/logout")
-def logout(request: Request, response: Response):
+async def logout(request: Request, response: Response):
     require_csrf(request)
+    try:
+        sid = str(sessao_dados(request).get("sid") or "")
+        if sid and relay.ws is not None:
+            await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
+    except HTTPException:
+        pass
     response.delete_cookie("julia_session", path="/")
     return {"ok": True}
+
+
+class TrocaSenha(BaseModel):
+    atual: str = Field(min_length=1, max_length=128)
+    nova: str = Field(min_length=8, max_length=128)
+
+
+@app.get("/api/account")
+async def account_me(request: Request):
+    data = sessao_dados(request)
+    uid = str(data.get("uid") or "") or "local"
+    if uid == "local":
+        return {"uid": "local", "username": config()["user"],
+                "display": config()["user"], "role": "admin", "local": True}
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "auth_whoami",
+                                   "sid": str(data.get("sid") or "")}, timeout=10.0)
+    if result.get("type") != "auth_user" or not result.get("user") or result["user"].get("uid") != dono:
+        raise HTTPException(status_code=401, detail="Sessão inválida")
+    return result["user"]
+
+
+@app.post("/api/account/password")
+async def account_password(request: Request, body: TrocaSenha):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    if dono == "local":
+        raise HTTPException(422, "A senha do proprietário se troca nas variáveis do servidor.")
+    result = await relay.exchange({"type": "account_password", "uid": dono,
+                                   "atual": body.atual, "nova": body.nova}, timeout=20.0)
+    if result.get("type") != "account_ok":
+        raise HTTPException(422 if result.get("type") == "op_error" else 503,
+                            result.get("error", "Falha ao trocar senha"))
+    return {"ok": True}
+
+
+class ExcluiConta(BaseModel):
+    password: str = Field(min_length=1, max_length=128)
+
+
+@app.post("/api/account/delete")
+async def account_delete(request: Request, body: ExcluiConta, response: Response):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    if dono == "local":
+        raise HTTPException(422, "A conta do proprietário não se exclui por aqui.")
+    result = await relay.exchange({"type": "account_delete", "uid": dono,
+                                   "password": body.password}, timeout=30.0)
+    if result.get("type") != "account_deleted":
+        raise HTTPException(422 if result.get("type") == "op_error" else 503,
+                            result.get("error", "Falha ao excluir"))
+    response.delete_cookie("julia_session", path="/")
+    return {"ok": True, "apagados": result.get("apagados", 0)}
+
+
+# ---------------------------------------------------------------------------
+# Admin HTTP endpoints — require admin session, proxy to PC agent via relay.
+# ---------------------------------------------------------------------------
+
+class AdminCreateUser(BaseModel):
+    display: str = Field(min_length=2, max_length=40)
+    username: str = Field(min_length=3, max_length=30)
+    password: str = Field(min_length=8, max_length=128)
+    role: str = Field(default="user")
+    limites: dict = Field(default_factory=dict)
+
+
+class AdminRoleBody(BaseModel):
+    uid: str
+    role: str
+
+
+class AdminStatusBody(BaseModel):
+    uid: str
+    status: str
+
+
+class AdminUidBody(BaseModel):
+    uid: str
+
+
+class AdminInviteCreate(BaseModel):
+    max_usos: int = Field(default=1, ge=1, le=999)
+    dias: int = Field(default=7, ge=1, le=365)
+    nota: str = Field(default="", max_length=200)
+
+
+class AdminRegDecide(BaseModel):
+    id: int
+    aprovar: bool
+
+
+class AdminConfigSet(BaseModel):
+    modo: str = Field(default="", max_length=20)
+    exigir_aprovacao: bool = False
+
+
+class AdminLimitsBody(BaseModel):
+    uid: str
+    max_ai_hora: int = Field(default=0, ge=0)
+    max_ia_simult: int = Field(default=0, ge=0)
+
+
+async def admin_uid(request: Request) -> str:
+    """Valida sessão + CSRF e retorna uid se o usuário for admin ativo."""
+    verify_session(request)
+    data = sessao_dados(request)
+    uid = str(data.get("uid") or "") or "local"
+    # Owner legado é sempre admin
+    if uid == "local":
+        return uid
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "auth_whoami", "sid": str(data.get("sid") or "")},
+                                  timeout=10.0)
+    if result.get("type") != "auth_user" or not result.get("user"):
+        raise HTTPException(401, "Sessão inválida")
+    user = result["user"]
+    if user.get("uid") != uid:
+        raise HTTPException(401, "Sessão inválida")
+    if user.get("role") != "admin" or user.get("status") != "ativo":
+        raise HTTPException(403, "Permissão de administrador necessária")
+    return uid
+
+
+@app.get("/api/admin/users")
+async def admin_users(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_users", "owner": uid}, timeout=20.0)
+    if result.get("type") != "admin_users":
+        raise HTTPException(503, result.get("error", "Indisponível"))
+    return result
+
+
+@app.post("/api/admin/users/create")
+async def admin_create_user(request: Request, body: AdminCreateUser):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({
+        "type": "admin_user_create", "owner": uid,
+        "username": body.username, "display": body.display,
+        "password": body.password, "role": body.role,
+        "limites": body.limites,
+    }, timeout=20.0)
+    if result.get("type") != "admin_user_created":
+        raise HTTPException(422, result.get("error", "Falha ao criar"))
+    return result
+
+
+@app.post("/api/admin/users/role")
+async def admin_set_role(request: Request, body: AdminRoleBody):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_user_role", "owner": uid,
+                                   "uid": body.uid, "role": body.role}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.post("/api/admin/users/status")
+async def admin_set_status(request: Request, body: AdminStatusBody):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_user_status", "owner": uid,
+                                   "uid": body.uid, "status": body.status}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.post("/api/admin/users/sessions")
+async def admin_revoke_sessions(request: Request, body: AdminUidBody):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_sess_revoke", "owner": uid,
+                                   "uid": body.uid}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.post("/api/admin/users/delete")
+async def admin_delete_user(request: Request, body: AdminUidBody):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_user_delete", "owner": uid,
+                                   "uid": body.uid}, timeout=30.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True, "apagados": result.get("apagados", 0)}
+
+
+@app.post("/api/admin/users/limits")
+async def admin_set_limits(request: Request, body: AdminLimitsBody):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_user_limits", "owner": uid,
+                                   "uid": body.uid,
+                                   "max_ai_hora": body.max_ai_hora,
+                                   "max_ia_simult": body.max_ia_simult}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.get("/api/admin/invites")
+async def admin_invites(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_invites", "owner": uid}, timeout=20.0)
+    if result.get("type") != "admin_invites":
+        raise HTTPException(503, "Indisponível")
+    return result
+
+
+@app.post("/api/admin/invites/create")
+async def admin_create_invite(request: Request, body: AdminInviteCreate):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({
+        "type": "admin_invite_create", "owner": uid,
+        "max_usos": body.max_usos, "dias": body.dias, "nota": body.nota,
+    }, timeout=20.0)
+    if result.get("type") != "admin_invite":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return result
+
+
+@app.post("/api/admin/invites/revoke")
+async def admin_revoke_invite(request: Request, body: AdminRegDecide):
+    uid = await admin_uid(request)
+    if body.id <= 0:
+        raise HTTPException(422, "ID inválido")
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_invite_revoke", "owner": uid,
+                                   "id": body.id}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.get("/api/admin/regs")
+async def admin_regs(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_regs", "owner": uid}, timeout=20.0)
+    if result.get("type") != "admin_regs":
+        raise HTTPException(503, "Indisponível")
+    return result
+
+
+@app.post("/api/admin/regs/decide")
+async def admin_decide_reg(request: Request, body: AdminRegDecide):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_reg_decide", "owner": uid,
+                                   "id": body.id, "aprovar": body.aprovar}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.get("/api/admin/config")
+async def admin_config_get(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "auth_config"}, timeout=10.0)
+    if result.get("type") != "auth_config":
+        raise HTTPException(503, result.get("error", "Indisponível"))
+    return result
+
+
+@app.post("/api/admin/config")
+async def admin_config_set(request: Request, body: AdminConfigSet):
+    uid = await admin_uid(request)
+    if body.modo and body.modo not in ("fechado", "convite", "aberto"):
+        raise HTTPException(422, "Modo inválido")
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_config_set", "owner": uid,
+                                   "modo": body.modo, "exigir_aprovacao": body.exigir_aprovacao}, timeout=20.0)
+    if result.get("type") != "admin_ok":
+        raise HTTPException(422, result.get("error", "Falha"))
+    return {"ok": True}
+
+
+@app.get("/api/admin/audit")
+async def admin_audit(request: Request, limite: int = 200):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "admin_audit", "owner": uid,
+                                   "limite": limite}, timeout=20.0)
+    if result.get("type") != "admin_audit":
+        raise HTTPException(503, "Indisponível")
+    return result
 
 
 @app.get("/api/status")
@@ -232,7 +685,8 @@ def status(request: Request):
 @app.post("/api/sync")
 async def sync_messages(request: Request, body: SyncBody):
     require_csrf(request)
-    result = await relay.exchange({"type": "sync", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "sync", "owner": dono,
                                    "messages": [m.model_dump() for m in body.messages]})
     if result.get("type") != "ack":
         raise HTTPException(503, "Confirmação do PC não recebida")
@@ -244,7 +698,8 @@ async def sync_messages(request: Request, body: SyncBody):
 @app.get("/api/messages")
 async def messages(request: Request, conversation_id: str = ""):
     verify_session(request)
-    result = await relay.exchange({"type": "list", "owner": sessao_usuario(request), "limit": 200})
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "list", "owner": dono, "limit": 200})
     if result.get("type") != "history":
         raise HTTPException(503, "Histórico não disponível")
     msgs = result.get("messages", [])[:200]
@@ -256,7 +711,8 @@ async def messages(request: Request, conversation_id: str = ""):
 @app.get("/api/conversations")
 async def conversations(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "conversations", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "conversations", "owner": dono,
                                    "limit": 100}, timeout=20.0)
     if result.get("type") != "conversations":
         raise HTTPException(503, "Sessões indisponíveis")
@@ -272,6 +728,7 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
                       conversation_id: str = Form(default="geral", max_length=100)):
     """Recebe um documento (até 15MB) e encaminha ao PC para leitura."""
     require_csrf(request)
+    dono = await revogacao_ok(request)
     raw = await file.read()
     if len(raw) > 15 * 1024 * 1024:
         raise HTTPException(413, "Arquivo grande demais (limite 15MB)")
@@ -280,7 +737,7 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
     import base64 as _b64
     conv = conversation_id if 3 <= len(conversation_id) <= 100 else "geral"
     result = await relay.exchange(
-        {"type": "doc_upload", "owner": sessao_usuario(request),
+        {"type": "doc_upload", "owner": dono,
          "name": (file.filename or "arquivo")[:120],
          "conversation_id": conv,
          "data_b64": _b64.b64encode(raw).decode("ascii")}, timeout=90.0)
@@ -294,7 +751,8 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
 @app.get("/api/docs")
 async def docs_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "doc_list", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_list", "owner": dono,
                                    "limit": 50}, timeout=20.0)
     if result.get("type") != "doc_list":
         raise HTTPException(503, "Documentos indisponíveis")
@@ -304,7 +762,8 @@ async def docs_list(request: Request):
 @app.post("/api/docs/resumo")
 async def docs_resumo(request: Request, body: DocAsk):
     require_csrf(request)
-    result = await relay.exchange({"type": "doc_resumo", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_resumo", "owner": dono,
                                    "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
         raise HTTPException(503, result.get("error", "Falha ao resumir"))
@@ -316,7 +775,8 @@ async def docs_resumo(request: Request, body: DocAsk):
 @app.post("/api/docs/topicos")
 async def docs_topicos(request: Request, body: DocAsk):
     require_csrf(request)
-    result = await relay.exchange({"type": "doc_topicos", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_topicos", "owner": dono,
                                    "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
         raise HTTPException(503, result.get("error", "Falha ao extrair tópicos"))
@@ -341,6 +801,7 @@ class UiStateBody(BaseModel):
 async def ui_state_save(request: Request, body: UiStateBody):
     """Persiste estados de interfaces JDUI no SQLite do PC (idempotente por k)."""
     require_csrf(request)
+    dono = await revogacao_ok(request)
     import json as _json
     itens = []
     for s in body.states:
@@ -354,7 +815,7 @@ async def ui_state_save(request: Request, body: UiStateBody):
                       "state": bruto, "updated_at": s.updated_at})
     if not itens:
         raise HTTPException(422, "Nenhum estado válido")
-    result = await relay.exchange({"type": "ui_state_save", "owner": sessao_usuario(request),
+    result = await relay.exchange({"type": "ui_state_save", "owner": dono,
                                    "states": itens}, timeout=20.0)
     if result.get("type") != "ui_state_saved":
         raise HTTPException(503, "PC não confirmou os estados")
@@ -364,7 +825,8 @@ async def ui_state_save(request: Request, body: UiStateBody):
 @app.get("/api/ui-state")
 async def ui_state_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "ui_state_list", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "ui_state_list", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "ui_state_list":
         raise HTTPException(503, "Estados indisponíveis")
@@ -385,9 +847,10 @@ async def ui_state_list(request: Request):
 async def conversation_forget(request: Request, conversation_id: str):
     """Apaga conversa do SQLite do PC (mensagens + pedidos de IA). Tombstone fica no celular."""
     require_csrf(request)
+    dono = await revogacao_ok(request)
     if not re.fullmatch(r"[A-Za-z0-9_-]{3,100}", conversation_id):
         raise HTTPException(422, "Conversa inválida")
-    result = await relay.exchange({"type": "conv_forget", "owner": sessao_usuario(request),
+    result = await relay.exchange({"type": "conv_forget", "owner": dono,
                                    "conversation_id": conversation_id}, timeout=20.0)
     if result.get("type") != "conv_forgotten":
         raise HTTPException(503, "PC não confirmou a exclusão")
@@ -397,7 +860,8 @@ async def conversation_forget(request: Request, conversation_id: str):
 @app.get("/api/memories")
 async def memories_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "mem_list", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "mem_list", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "mem_list":
         raise HTTPException(503, "Memória indisponível")
@@ -407,9 +871,10 @@ async def memories_list(request: Request):
 @app.delete("/api/memories/{key}")
 async def memories_forget(request: Request, key: str):
     require_csrf(request)
+    dono = await revogacao_ok(request)
     if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
         raise HTTPException(422, "Chave inválida")
-    result = await relay.exchange({"type": "mem_forget", "owner": sessao_usuario(request),
+    result = await relay.exchange({"type": "mem_forget", "owner": dono,
                                    "key": key}, timeout=20.0)
     if result.get("type") != "mem_forgotten":
         raise HTTPException(503, "Não foi possível esquecer")
@@ -427,7 +892,8 @@ class MemSettings(BaseModel):
 @app.get("/api/memories/full")
 async def memories_full(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "mem_list_full", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "mem_list_full", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "mem_list_full":
         raise HTTPException(503, "Memória indisponível")
@@ -437,7 +903,8 @@ async def memories_full(request: Request):
 @app.post("/api/memories/confirm")
 async def memories_confirm(request: Request):
     require_csrf(request)
-    result = await relay.exchange({"type": "mem_confirm", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "mem_confirm", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "mem_confirmed":
         raise HTTPException(503, "Nada para confirmar")
@@ -447,9 +914,10 @@ async def memories_confirm(request: Request):
 @app.put("/api/memories/{key}")
 async def memories_update(request: Request, key: str, body: MemUpdate):
     require_csrf(request)
+    dono = await revogacao_ok(request)
     if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
         raise HTTPException(422, "Chave inválida")
-    result = await relay.exchange({"type": "mem_update", "owner": sessao_usuario(request),
+    result = await relay.exchange({"type": "mem_update", "owner": dono,
                                    "key": key, "value": body.value}, timeout=20.0)
     if result.get("type") != "mem_updated":
         raise HTTPException(503, result.get("error", "Falha ao corrigir"))
@@ -459,7 +927,8 @@ async def memories_update(request: Request, key: str, body: MemUpdate):
 @app.get("/api/memory/settings")
 async def memory_settings_get(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "mem_settings", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "mem_settings", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "mem_settings":
         raise HTTPException(503, "Configuração indisponível")
@@ -469,7 +938,8 @@ async def memory_settings_get(request: Request):
 @app.post("/api/memory/settings")
 async def memory_settings_set(request: Request, body: MemSettings):
     require_csrf(request)
-    result = await relay.exchange({"type": "mem_settings", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "mem_settings", "owner": dono,
                                    "learning": "1" if body.learning else "0"}, timeout=20.0)
     if result.get("type") != "mem_settings":
         raise HTTPException(503, "Falha ao salvar")
@@ -479,7 +949,8 @@ async def memory_settings_set(request: Request, body: MemSettings):
 @app.get("/api/memory/events")
 async def memory_events(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "event_list", "owner": sessao_usuario(request)},
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "event_list", "owner": dono},
                                   timeout=20.0)
     if result.get("type") != "event_list":
         raise HTTPException(503, "Eventos indisponíveis")
@@ -490,7 +961,8 @@ async def memory_events(request: Request):
 async def ai_complete(request: Request, body: AIRequest):
     """Resposta completa (sem streaming). Idempotente por message_id no agente."""
     require_csrf(request)
-    result = await relay.exchange({"type": "ai", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "ai", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
                                    "model": body.model, "memory": body.memory}, timeout=180.0)
@@ -512,7 +984,8 @@ class AIContinue(BaseModel):
 async def ai_regenerate(request: Request, body: AIContinue):
     """Apaga resposta anterior (PC + idempotência) para gerar de novo."""
     require_csrf(request)
-    result = await relay.exchange({"type": "ai_reset", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "ai_reset", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id}, timeout=20.0)
     if result.get("type") == "ai_error":
@@ -526,7 +999,8 @@ async def ai_regenerate(request: Request, body: AIContinue):
 async def ai_continue(request: Request, body: AIContinue):
     """Continua a resposta anterior, anexando ao mesmo reply_id."""
     require_csrf(request)
-    result = await relay.exchange({"type": "ai_continue", "owner": sessao_usuario(request),
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "ai_continue", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
                                    "model": body.model}, timeout=180.0)
@@ -578,6 +1052,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     model: str = "", memory: str = "1"):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     require_csrf(request)
+    dono = await revogacao_ok(request)
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
         raise HTTPException(422, "Parâmetros inválidos")
     from fastapi.responses import StreamingResponse
@@ -588,7 +1063,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     stream_id = uuid.uuid4().hex
     fila: asyncio.Queue = asyncio.Queue()
     relay.streams[stream_id] = fila
-    payload = {"type": "ai_stream", "owner": sessao_usuario(request),
+    payload = {"type": "ai_stream", "owner": dono,
                "message_id": message_id,
                "conversation_id": conversation_id, "model": model[:120],
                "memory": "1" if memory != "0" else "0"}
@@ -659,6 +1134,8 @@ async def agent_ws(websocket: WebSocket):
         except RuntimeError:
             pass
     relay.ws = websocket
+    revogados["suportado"] = True
+    revogados["falhas"] = 0
     relay.fail_pending()
     try:
         while True:

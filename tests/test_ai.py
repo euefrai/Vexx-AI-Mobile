@@ -224,7 +224,14 @@ def test_ai_models_e_complete_via_agente_fake():
 
             t = threading.Thread(target=chama_ai)
             t.start()
-            req = ws.receive_json()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req["type"] == "sess_revogados":
+                    ws.send_json({"request_id": req["request_id"],
+                                  "type": "sess_revogados", "sids": []})
+                    continue
+                break
+            assert req["type"] == "ai"
             ws.send_json({"request_id": req["request_id"], "type": "ai_done",
                           "reply_id": "ai-user-001-r1", "response_text": "OI",
                           "model": "fake-model"})

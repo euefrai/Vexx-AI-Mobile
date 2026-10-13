@@ -547,25 +547,11 @@ function appendMessage(row) {
     ack.textContent = row.status === 'synced' ? '✓ Sincronizado' : '◷ No celular';
     meta.appendChild(ack);
   } else {
-    if (row.model) { const b = document.createElement('span'); b.className = 'model-badge'; b.textContent = row.model; meta.appendChild(b); }
-    if (row.latency_s) { const l = document.createElement('span'); l.className = 'latency-tag'; l.textContent = row.latency_s + 's'; meta.appendChild(l); }
-    const cp = document.createElement('button'); cp.type = 'button'; cp.className = 'msg-copy'; cp.dataset.copy = row.id;
-    cp.innerHTML = '<svg class="icon"><use href="#i-copy"/></svg> Copiar';
-    meta.appendChild(cp);
+    const mn = document.createElement('button'); mn.type = 'button'; mn.className = 'msg-menu-btn'; mn.dataset.menu = row.id;
+    mn.textContent = '···'; mn.setAttribute('aria-label', 'Ações da mensagem'); mn.setAttribute('aria-haspopup', 'true');
+    meta.appendChild(mn);
     if (row.status === 'failed') { const rt = document.createElement('button'); rt.type = 'button'; rt.className = 'message-retry'; rt.textContent = 'Tentar novamente'; meta.appendChild(rt); }
-    if (row.status === 'synced' && row.conversation_id === activeConversation) {
-      const uid = row.id.endsWith('-r1') ? row.id.slice(0, -3) : '';
-      if (uid) {
-        const rg = document.createElement('button'); rg.type = 'button'; rg.className = 'msg-copy'; rg.dataset.regen = uid;
-        rg.textContent = '⟳ Regenerar';
-        meta.appendChild(rg);
-        if (row.id === lastAssistantId) {
-          const ct = document.createElement('button'); ct.type = 'button'; ct.className = 'msg-copy'; ct.dataset.cont = uid;
-          ct.textContent = '» Continuar';
-          meta.appendChild(ct);
-        }
-      }
-    }
+
     // Rede de segurança: prometeu imagem mas não renderizou nenhuma.
     if (row.status !== 'generating' && !bubble.querySelector('img')
         && /\[?mostrando[^\n]{0,80}imagem|aqui est[áa][^\n]{0,80}imagem|exibindo[^\n]{0,80}imagem/i.test(row.text || '')) {
@@ -619,6 +605,8 @@ async function renderMessages() {
     lastAssistantId = idsAssist.length ? idsAssist[idsAssist.length - 1] : '';
     rows.forEach(appendMessage);
   }
+  const temTroca = rows.some(m => m.role === 'user');
+  if (!$('page-chat').hidden) $('suggestions').style.display = temTroca ? 'none' : 'flex';
   if (stick) conversation.scrollTop = conversation.scrollHeight;
   const pending = all.filter(m => m.status !== 'synced').length;
   $('pendingCount').textContent = pending + ' pendente' + (pending === 1 ? '' : 's');
@@ -740,7 +728,14 @@ if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = fa
 function updateConnection() {
   const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
   $('connectionLabel').textContent = msg;
-  $('statusButton').classList.toggle('online', pcOnline && navigator.onLine);
+  const on = pcOnline && navigator.onLine;
+  $('statusButton').classList.toggle('online', on);
+  document.querySelectorAll('#statusButton .status-dot, #popDot').forEach(d => {
+    d.style.background = on ? 'var(--rose)' : '';
+    d.style.boxShadow = on ? '0 0 0 3px var(--glow-rose)' : '';
+  });
+  $('popModel').textContent = modeloAtivo() || '—';
+  $('popSync').textContent = $('syncCounter').textContent + ' pendentes';
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
@@ -748,6 +743,15 @@ function updateConnection() {
   $('memoryStatus').textContent = memoryOn() ? 'Entre todos os chats' : 'Pausada neste aparelho';
   $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.' : 'PC desconectado. Mensagens ficam no celular.';
 }
+$('statusButton').addEventListener('click', e => {
+  e.stopPropagation();
+  $('statusPop').hidden = !$('statusPop').hidden;
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('#statusPop') && !e.target.closest('#statusButton')) $('statusPop').hidden = true;
+  const mp = e.target.closest('.msg-menu-pop');
+  if (!mp && !e.target.closest('[data-menu]')) document.querySelectorAll('.msg-menu-pop').forEach(p => p.remove());
+});
 async function api(endpoint, options) {
   options = options || {};
   const headers = { Accept: 'application/json' };
@@ -768,7 +772,16 @@ async function restoreSession() {
     authenticated = false; $('loginOverlay').hidden = false;
     $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
   }
+  await fetchAuthConfig();
 }
+$('passToggle').addEventListener('click', () => {
+  const inp = $('loginPassword');
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  $('passToggle').textContent = show ? '🙈' : '👁';
+  $('passToggle').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+  $('passToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
+});
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
   const btn = $('loginButton'); btn.disabled = true; $('loginError').textContent = '';
@@ -784,8 +797,101 @@ $('loginForm').addEventListener('submit', async e => {
 $('logoutButton').addEventListener('click', async () => {
   try { await api('/api/logout', { method: 'POST' }); } catch (_) {}
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
-  $('loginPassword').value = ''; $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
+  $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
+  $('loginError').textContent = ''; $('regError').textContent = '';
+  $('registerForm').hidden = true; $('loginForm').hidden = false; $('loginBack').hidden = true;
+  $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
   updateConnection(); showToast('Sessão encerrada');
+});
+
+/* ----- Auth config + register flow ----- */
+let authConfig = { modo: 'convite', exigir_aprovacao: true, agent_online: false };
+async function fetchAuthConfig() {
+  try { authConfig = await api('/api/auth/config'); }
+  catch (_) { authConfig = { modo: 'convite', exigir_aprovacao: true, agent_online: false }; }
+  const inviteWrap = $('regInviteWrap');
+  const showRegister = $('showRegister');
+  if (inviteWrap && showRegister) {
+    if (authConfig.modo === 'convite') {
+      inviteWrap.hidden = false;
+    } else {
+      inviteWrap.hidden = true;
+    }
+    if (authConfig.modo === 'fechado') {
+      showRegister.style.display = 'none';
+    } else {
+      showRegister.style.display = '';
+    }
+  }
+}
+$('showRegister').addEventListener('click', () => {
+  $('loginForm').hidden = true;
+  $('registerForm').hidden = false;
+  $('loginBack').hidden = false;
+  $('regError').textContent = '';
+});
+$('showLogin').addEventListener('click', () => {
+  $('registerForm').hidden = true;
+  $('loginForm').hidden = false;
+  $('loginBack').hidden = true;
+  $('regError').textContent = '';
+});
+$('regPassToggle').addEventListener('click', () => {
+  const inp = $('regPassword');
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  $('regPassToggle').textContent = show ? '🙈' : '👁';
+  $('regPassToggle').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+  $('regPassToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
+});
+$('registerForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('registerButton'); btn.disabled = true; $('regError').textContent = '';
+  const pw1 = $('regPassword').value; const pw2 = $('regPassword2').value;
+  if (pw1.length < 8) { $('regError').textContent = 'Senha precisa ter pelo menos 8 caracteres'; btn.disabled = false; return; }
+  if (pw1 !== pw2) { $('regError').textContent = 'Senhas não coincidem'; btn.disabled = false; return; }
+  try {
+    const r = await api('/api/register', { method: 'POST', body: JSON.stringify({
+      display: $('regDisplay').value, username: $('regUsername').value,
+      password: pw1, invite: $('regInvite') ? $('regInvite').value : ''
+    }) });
+    if (r.status === 'pendente' || r.status === 'aprovado' || r.message) {
+      showToast(r.message || 'Cadastro recebido! Aguarde aprovação.');
+    }
+    $('registerForm').hidden = true; $('loginForm').hidden = false; $('loginBack').hidden = true;
+    $('regDisplay').value = ''; $('regUsername').value = ''; $('regPassword').value = '';
+    $('regPassword2').value = ''; $('regInvite').value = '';
+    const cfg = authConfig || { exigir_aprovacao: true };
+    if (cfg.exigir_aprovacao) showToast('Cadastro enviado para aprovação');
+    else { csrf = r.csrf; authenticated = true; $('loginOverlay').hidden = true; $('profileName').textContent = r.user; $('profileTag').textContent = 'ONLINE'; await checkStatus(); }
+  } catch (err) { $('regError').textContent = err.message || 'Não foi possível cadastrar'; }
+  finally { btn.disabled = false; }
+});
+
+/* ----- Profile modal ----- */
+const profileModal = document.createElement('div');
+profileModal.id = 'profileModal';
+profileModal.className = 'drawer-scrim';
+profileModal.innerHTML = '<div class="login-card" style="max-width:380px"><div class="login-symbol">✦</div><p class="eyebrow">PERFIL</p><h2>Sua conta</h2><form id="profileForm"><label for="profDisplay">Nome de exibição</label><input id="profDisplay" name="display" maxlength="40" /><label for="profUsername">Usuário</label><input id="profUsername" readonly style="background:var(--surface-1);color:var(--text-2)" maxlength="30" /><div class="login-error" id="profileError" role="alert"></div><button id="profileSave" class="login-submit" type="submit">Salvar <span>✦</span></button></form><button id="profileClose" class="subtle-button" type="button">Fechar</button></div>';
+document.body.appendChild(profileModal);
+profileModal.hidden = true;
+$('profileName').parentElement.parentElement.addEventListener('click', () => {
+  if (authenticated && !PREVIEW_MODE) profileModal.hidden = false;
+});
+$('profileClose').addEventListener('click', () => { profileModal.hidden = true; });
+profileModal.addEventListener('click', e => { if (e.target === profileModal) profileModal.hidden = true; });
+$('profileForm').addEventListener('submit', async e => {
+  e.preventDefault(); $('profileError').textContent = '';
+  const btn = $('profileSave'); btn.disabled = true;
+  const novo = prompt('Digite a nova senha (mínimo 8 caracteres):');
+  if (!novo || novo.length < 8) { $('profileError').textContent = 'Senha inválida'; btn.disabled = false; return; }
+  const atual = prompt('Digite sua senha atual para confirmar:');
+  if (!atual) { $('profileError').textContent = 'Cancelado'; btn.disabled = false; return; }
+  try {
+    await api('/api/account/password', { method: 'POST', body: JSON.stringify({ atual, nova: novo }) });
+    showToast('Senha alterada'); profileModal.hidden = true;
+  } catch (err) { $('profileError').textContent = err.message || 'Falha'; }
+  finally { btn.disabled = false; }
 });
 
 async function checkStatus() {
@@ -963,6 +1069,31 @@ async function requestAI(userRow) {
 }
 function stopAI() { if (aiAbort) aiAbort.abort(); }
 $('stopGen').addEventListener('click', stopAI);
+function toggleMsgMenu(btn) {
+  const content = btn.closest('.message-content');
+  const wasOpen = content.querySelector('.msg-menu-pop');
+  document.querySelectorAll('.msg-menu-pop').forEach(p => p.remove());
+  if (wasOpen) return;
+  const mid = btn.dataset.menu || '';
+  const wrap = btn.closest('.message');
+  const failed = wrap && wrap.classList.contains('failed');
+  const isLast = mid === lastAssistantId;
+  const pop = document.createElement('div');
+  pop.className = 'msg-menu-pop';
+  pop.setAttribute('role', 'menu');
+  const item = (act, label) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.act = act; b.textContent = label;
+    b.setAttribute('role', 'menuitem');
+    pop.appendChild(b);
+  };
+  item('copy', 'Copiar');
+  if (!failed) {
+    item('regen', 'Regenerar resposta');
+    if (isLast) item('cont', 'Continuar resposta');
+  } else item('retry', 'Tentar novamente');
+  content.appendChild(pop);
+}
 async function regenerateReply(userId) {
   if (!db || aiAbort) { if (aiAbort) showToast('Aguarde a geração atual'); return; }
   if (!pcOnline || !authenticated) { showToast('PC desconectado — tente quando online'); return; }
@@ -1040,10 +1171,31 @@ conversation.addEventListener('click', e => {
     });
     return;
   }
-  const rg = e.target.closest('[data-regen]');
-  if (rg) { regenerateReply(rg.dataset.regen); return; }
-  const ct = e.target.closest('[data-cont]');
-  if (ct) { continueReply(ct.dataset.cont); return; }
+  const mn = e.target.closest('[data-menu]');
+  if (mn) { toggleMsgMenu(mn); return; }
+  const mi = e.target.closest('.msg-menu-pop button');
+  if (mi) {
+    const wrap = mi.closest('.message');
+    const mid = wrap ? wrap.dataset.mid : '';
+    document.querySelectorAll('.msg-menu-pop').forEach(p => p.remove());
+    if (!mid) return;
+    if (mi.dataset.act === 'copy') {
+      allMessages().then(rows => {
+        const r = rows.find(m => m.id === mid);
+        if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
+      });
+    } else if (mi.dataset.act === 'regen' || mi.dataset.act === 'cont' || mi.dataset.act === 'retry') {
+      const uid = mid.endsWith('-r1') ? mid.slice(0, -3) : '';
+      allMessages().then(rows => {
+        const u = rows.find(m => m.id === (uid || mid));
+        if (!u) return;
+        if (mi.dataset.act === 'regen') regenerateReply(u.id);
+        else if (mi.dataset.act === 'cont') continueReply(u.id);
+        else requestAI(u);
+      });
+    }
+    return;
+  }
   const falha = e.target.closest('.message.failed');
   if (falha) {
     const mid = falha.dataset.mid || '';
@@ -1054,7 +1206,11 @@ conversation.addEventListener('click', e => {
 
 /* ----- Envio ----- */
 function autoresize() { messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 140) + 'px'; }
-messageInput.addEventListener('input', () => { autoresize(); $('charCount').textContent = messageInput.value.length + ' / 10000'; });
+messageInput.addEventListener('input', () => {
+  autoresize();
+  const n = messageInput.value.length;
+  $('charCount').textContent = n > 9000 ? n + ' / 10000' : '';
+});
 messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); composer.requestSubmit(); } });
 async function sendMessage(raw) {
   const value = String(raw || '').trim();
@@ -1322,7 +1478,7 @@ $('learningToggle').addEventListener('change', async e => {
     showToast(e.target.checked ? 'Aprendizado ativado' : 'Armazenamento pausado (explícitos valem)');
   } catch (_) { showToast('Falha ao salvar'); loadMemories(); }
 });
-$('statusButton').addEventListener('click', () => showToast(pcOnline ? 'Agente online' : 'Aguardando agente local'));
+
 
 /* ----- Remoto ----- */
 let remoteEnabled = false, screenBusy = false, touchStart = null, touchMoved = false, longPressed = false, longTimer = null, lastMove = 0;
@@ -1428,6 +1584,6 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
     await renderMessages();
   } catch (_) { showToast('Cache local indisponível'); }
   autoresize();
-  await restoreSession(); await checkStatus(); updateConnection();
+  await restoreSession(); await fetchAuthConfig(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();

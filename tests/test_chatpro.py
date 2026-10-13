@@ -88,18 +88,29 @@ def test_relay_regenerate_continue():
                                        json={'message_id': 'pro-user-01', 'conversation_id': 'conv-pro'},
                                        headers={'X-CSRF-Token': csrf})
 
+            def pega(tipo):
+                for _ in range(3):
+                    req = ws.receive_json()
+                    if req['type'] == 'sess_revogados':
+                        ws.send_json({'request_id': req['request_id'],
+                                      'type': 'sess_revogados', 'sids': []})
+                        continue
+                    assert req['type'] == tipo, req
+                    return req
+                raise AssertionError('sem ' + tipo)
+
             t = threading.Thread(target=regen)
             t.start()
-            req = ws.receive_json()
-            assert req['type'] == 'ai_reset' and req['owner'] == 'efrai'
+            req = pega('ai_reset')
+            assert req['owner'] == 'local'
             ws.send_json({'request_id': req['request_id'], 'type': 'ai_reset_ok', 'reply_id': 'pro-user-01-r1'})
             t.join(timeout=8)
             assert out['r'].json() == {'ok': True, 'reply_id': 'pro-user-01-r1'}
 
             t = threading.Thread(target=cont)
             t.start()
-            req = ws.receive_json()
-            assert req['type'] == 'ai_continue' and req['owner'] == 'efrai'
+            req = pega('ai_continue')
+            assert req['owner'] == 'local'
             ws.send_json({'request_id': req['request_id'], 'type': 'ai_done', 'reply_id': 'pro-user-01-r1',
                           'response_text': 'completo', 'model': 'm'})
             t.join(timeout=8)

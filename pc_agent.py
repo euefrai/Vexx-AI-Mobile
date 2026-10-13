@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 import docs_agent
 import hermes_bridge
 import jdui
+import julia_auth
 import remoto
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed
@@ -171,6 +172,8 @@ def open_db(path: Path):
     db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
     _migrar_memories_por_dono(db)
     _memoria_v41(db)
+    julia_auth.criar_tabelas(db)
+    julia_auth.migrar_legado(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
         source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
@@ -1438,6 +1441,41 @@ def ai_marcar(db, user_message_id, conversation_id, model, state,
              response_text, error, agora_iso(), agora_iso(), dono_valido(owner)))
 
 
+def _apagar_todos_dados(db, owner: str) -> int:
+    """Apaga conta + todos os dados do dono. Retorna registros removidos."""
+    total = 0
+    with db:
+        for tabela, col in (("messages", "owner_id"), ("ai_requests", "owner_id"),
+                            ("memories", "owner_id"), ("memory_facts", "owner_id"),
+                            ("documents", "owner_id"), ("doc_chunks", "owner_id"),
+                            ("ui_state", "owner_id"), ("memory_events", "owner_id")):
+            try:
+                cur = db.execute(f"DELETE FROM {tabela} WHERE {col}=?", (owner,))
+                total += cur.rowcount or 0
+            except Exception:
+                continue
+        try:
+            db.execute("DELETE FROM memories_fts WHERE owner_id=?", (owner,))
+        except Exception:
+            pass
+        db.execute("DELETE FROM user_sessions WHERE uid=?", (owner,))
+        db.execute("DELETE FROM users WHERE uid=?", (owner,))
+    return total
+
+
+def dono_bloqueado(db, owner: str) -> bool:
+    """Conta bloqueada/inexistente não usa dados nem IA (verificação por RPC)."""
+    owner = dono_valido(owner)
+    try:
+        total = db.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+        if not total:
+            return False  # modo legado: conta única do .env, sem tabela de usuários
+        user = julia_auth.buscar_uid(db, owner)
+        return user is None or user.get("status") != "ativo"
+    except Exception:
+        return True
+
+
 def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     """Valida e aplica idempotência. Retorna {user_text, model, reply_id} ou {replay|busy|error}."""
     mid = payload.get("message_id", "")
@@ -1450,6 +1488,13 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     if not (isinstance(modelo, str) and 1 <= len(modelo) <= 120):
         return {"error": "Modelo inválido.", "codigo": "invalido"}
     owner = dono_valido(payload.get("owner"))
+    if dono_bloqueado(db, owner):
+        return {"error": "Conta indisponível.", "codigo": "bloqueada"}
+    lim = julia_auth.limites_usuario(db, owner)
+    if julia_auth.simultaneas_ia(db, owner) >= lim["max_ia_simult"]:
+        return {"error": "Muitas gerações ao mesmo tempo; aguarde.", "codigo": "limite"}
+    if julia_auth.uso_ia_hora(db, owner) >= lim["max_ai_hora"]:
+        return {"error": "Limite de uso da IA por hora atingido.", "codigo": "limite"}
     previo = ai_estado(db, mid, owner)
     if previo and previo["state"] == "completed":
         return {"replay": True, "reply_id": previo["reply_id"],
@@ -1723,7 +1768,240 @@ def run():
                     if not isinstance(request_id, str):
                         continue
                     dono = dono_valido(req.get("owner"))
-                    if req.get("type") == "sync":
+                    tipo = req.get("type")
+
+                    def _exige_admin():
+                        u = julia_auth.buscar_uid(db, dono)
+                        if not u or u.get("role") != "admin" or u.get("status") != "ativo":
+                            return None
+                        return u
+
+                    def _resp_ok(_tipo, **campos):
+                        return {"request_id": request_id, "type": _tipo, **campos}
+
+                    def _resp_erro(msg, codigo="erro"):
+                        return {"request_id": request_id, "type": "auth_error"
+                                if tipo in ("auth_login", "auth_register") else "op_error",
+                                "error": msg, "codigo": codigo}
+
+                    if tipo in ("sync", "list", "conversations", "doc_upload", "doc_list",
+                                "doc_resumo", "doc_topicos", "mem_list", "mem_list_full",
+                                "mem_forget", "mem_confirm", "mem_update", "ui_state_save",
+                                "ui_state_list", "conv_forget", "event_list", "ai", "ai_stream",
+                                "ai_reset", "ai_continue") and dono_bloqueado(db, dono):
+                        reply = _resp_erro("Conta indisponível.", "bloqueada")
+                    elif tipo == "auth_login":
+                        try:
+                            user = julia_auth.login_conta(db, req.get("username", ""),
+                                                          req.get("password", ""))
+                            sess = julia_auth.criar_sessao(db, user["uid"])
+                            reply = _resp_ok("auth_ok", uid=user["uid"], username=user["username"],
+                                             display=user["display"], role=user["role"],
+                                             sid=sess["sid"], expira_em=sess["expira_em"])
+                        except julia_auth.AuthErro as exc:
+                            reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "auth_register":
+                        try:
+                            reg = julia_auth.registrar(db, req.get("display", ""),
+                                                       req.get("username", ""),
+                                                       req.get("password", ""),
+                                                       req.get("invite", ""))
+                            out = {"uid": reg["uid"], "username": reg["username"],
+                                   "display": reg["display"], "status": reg["status"]}
+                            if reg["status"] == "ativo" and reg["uid"]:
+                                sess = julia_auth.criar_sessao(db, reg["uid"])
+                                out["sid"] = sess["sid"]
+                                out["expira_em"] = sess["expira_em"]
+                            reply = _resp_ok("auth_registered", **out)
+                        except julia_auth.AuthErro as exc:
+                            reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "auth_config":
+                        reply = _resp_ok("auth_config", modo=julia_auth.modo_cadastro(db),
+                                         exigir_aprovacao=julia_auth.config_get(
+                                             db, "exigir_aprovacao", "1") == "1")
+                    elif tipo == "auth_logout":
+                        julia_auth.revogar_sessao(db, req.get("sid", ""))
+                        reply = _resp_ok("auth_logged_out")
+                    elif tipo == "auth_whoami":
+                        user = julia_auth.sessao_valida(db, req.get("sid", ""))
+                        reply = _resp_ok("auth_user", user=user) if user else \
+                            _resp_erro("Sessão inválida.", "sessao")
+                    elif tipo == "account_password":
+                        if req.get("uid") != dono:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                julia_auth.trocar_senha(db, dono, req.get("atual", ""),
+                                                        req.get("nova", ""))
+                                reply = _resp_ok("account_ok")
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "account_delete":
+                        try:
+                            alvo = julia_auth.buscar_uid(db, dono)
+                            if not alvo or not julia_auth.confere_senha(
+                                    req.get("password", ""),
+                                    (julia_auth.buscar_usuario(db, alvo["username"]) or {}).get("hash", "")):
+                                raise julia_auth.AuthErro("Senha incorreta.", "senha")
+                            n_admin = db.execute("SELECT COUNT(*) FROM users WHERE role='admin' "
+                                                 "AND status='ativo'").fetchone()[0]
+                            if alvo["role"] == "admin" and n_admin <= 1:
+                                raise julia_auth.AuthErro(
+                                    "Último admin: transfira antes de excluir.", "ultimo_admin")
+                            total = _apagar_todos_dados(db, dono)
+                            julia_auth.auditar(db, dono, "conta_autoexcluida", alvo["username"],
+                                               f"registros={total}")
+                            reply = _resp_ok("account_deleted", apagados=total)
+                        except julia_auth.AuthErro as exc:
+                            reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_users":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            rows = db.execute("SELECT uid, username, display, role, status, "
+                                              "aprovado, created_at, last_seen FROM users "
+                                              "ORDER BY created_at").fetchall()
+                            pend = db.execute("SELECT COUNT(*) FROM reg_requests "
+                                              "WHERE status='pendente'").fetchone()[0]
+                            reply = _resp_ok("admin_users",
+                                             users=[{"uid": u, "username": n, "display": d,
+                                                     "role": r, "status": s, "aprovado": bool(a),
+                                                     "created_at": c, "last_seen": l}
+                                                    for u, n, d, r, s, a, c, l in rows],
+                                             pendentes=pend)
+                    elif tipo == "admin_user_create":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                papel = req.get("role", "user") if req.get("role") in ("admin", "user") else "user"
+                                user = julia_auth.criar_usuario(
+                                    db, req.get("username", ""), req.get("display", ""),
+                                    req.get("password", ""), papel=papel, criado_por=dono)
+                                reply = _resp_ok("admin_user_created", **user)
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_user_role":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                julia_auth.definir_papel(db, dono, req.get("uid", ""), req.get("role", ""))
+                                reply = _resp_ok("admin_ok")
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_user_status":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                julia_auth.definir_status(db, dono, req.get("uid", ""), req.get("status", ""))
+                                reply = _resp_ok("admin_ok")
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_user_delete":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                n = julia_auth.excluir_usuario(db, dono, req.get("uid", ""))
+                                reply = _resp_ok("admin_ok", apagados=n)
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_invite_create":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            conv = julia_auth.gerar_convite(db, dono, req.get("max_usos", 1),
+                                                           req.get("dias", 7), req.get("nota", ""))
+                            reply = _resp_ok("admin_invite", **conv)
+                    elif tipo == "admin_invites":
+                        adm = _exige_admin()
+                        reply = _resp_ok("admin_invites",
+                                         invites=julia_auth.listar_convites(db)) if adm else \
+                            _resp_erro("Sem permissão.", "permissao")
+                    elif tipo == "admin_invite_revoke":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            julia_auth.revogar_convite(db, dono, req.get("id", 0))
+                            reply = _resp_ok("admin_ok")
+                    elif tipo == "admin_regs":
+                        adm = _exige_admin()
+                        reply = _resp_ok("admin_regs",
+                                         pedidos=julia_auth.listar_pedidos(db)) if adm else \
+                            _resp_erro("Sem permissão.", "permissao")
+                    elif tipo == "admin_reg_decide":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                julia_auth.decidir_pedido(db, dono, req.get("id", 0),
+                                                          bool(req.get("aprovar")))
+                                reply = _resp_ok("admin_ok")
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "admin_config_set":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            modo = str(req.get("modo", ""))
+                            if modo and modo not in julia_auth.MODOS:
+                                reply = _resp_erro("Modo inválido.", "invalido")
+                            else:
+                                if modo:
+                                    julia_auth.config_set(db, "modo_cadastro", modo)
+                                if "exigir_aprovacao" in req:
+                                    julia_auth.config_set(
+                                        db, "exigir_aprovacao",
+                                        "1" if req.get("exigir_aprovacao") else "0")
+                                julia_auth.auditar(db, dono, "config_alterada", "",
+                                                   f"modo={modo or '-'}")
+                                reply = _resp_ok("admin_ok")
+                    elif tipo == "admin_audit":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            rows = db.execute("SELECT ts, ator, acao, alvo, detalhe FROM audit_log "
+                                              "ORDER BY id DESC LIMIT 200").fetchall()
+                            reply = _resp_ok("admin_audit",
+                                             eventos=[{"ts": t, "ator": a, "acao": c,
+                                                       "alvo": al, "detalhe": d}
+                                                      for t, a, c, al, d in rows])
+                    elif tipo == "admin_sess_revoke":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            with db:
+                                db.execute("UPDATE user_sessions SET revogada=1 WHERE uid=?",
+                                           (str(req.get("uid", "")),))
+                            julia_auth.auditar(db, dono, "sessoes_revogadas", str(req.get("uid", "")))
+                            reply = _resp_ok("admin_ok")
+                    elif tipo == "admin_user_limits":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                julia_auth.update_limits(db, dono, str(req.get("uid", "")),
+                                                        req.get("max_ai_hora", 0), req.get("max_ia_simult", 0))
+                                reply = _resp_ok("admin_ok")
+                            except julia_auth.AuthErro as exc:
+                                reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "sess_revogados":
+                        reply = _resp_ok("sess_revogados", sids=julia_auth.sids_revogados(db))
+                    elif req.get("type") == "sync":
                         confirmed_ids = persist_messages(db, req.get("messages", []), dono)
                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
                     elif req.get("type") == "list":

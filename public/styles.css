@@ -1,8 +1,41 @@
 /* Júlia Mobile — UI minimalista premium */
 :root{
   color-scheme:dark;
-  /* Paleta: preto profundo + roxo neon */
+  /* MINIMAL PREMIUM — tokens do design system (4.1.5) */
   --bg:#0b0b0f;
+  --surface-1:#101016; /* elevado */
+  --surface-2:#15151d; /* cartões */
+  --surface-3:#1b1b25; /* hover/ativo */
+  --border-subtle:rgba(255,255,255,.06);
+  --border-soft:rgba(255,255,255,.09);
+  --text-1:#f4f2fa;
+  --text-2:#a7a5bd; /* secundário */
+  --text-3:#6d6c85; /* terciário */
+  --accent:#a78bfa;
+  --accent-2:#8b5cf6;
+  --accent-dim:rgba(167,139,250,.12);
+  --danger:#f87171;
+  --ok:#34d399;
+  --warn:#fbbf24;
+  --radius-s:8px;
+  --radius-m:12px;
+  --radius-l:18px;
+  --radius-pill:999px;
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --font-s:12px;
+  --font-m:14px;
+  --font-l:16px;
+  --shadow-1:0 4px 16px rgba(0,0,0,.35);
+  --shadow-2:0 12px 40px rgba(0,0,0,.5);
+  --ease:cubic-bezier(.2,.7,.3,1);
+  --t-fast:150ms;
+  --t-med:220ms;
+  --z-pop:60;
+  --z-toast:100;
   --bg-elev:#0f0f15;
   --bg-elev-2:#14141c;
   --panel:#0f0f15;
@@ -146,7 +179,7 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   overflow:hidden;
 }
 .app-wide{width:min(100%,1024px)}
-.main-col{flex:1;min-width:0;display:flex;flex-direction:column;height:100dvh;min-height:100dvh}
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column;height:100dvh;min-height:100dvh;position:relative}
 .icon-button{
   width:38px;height:38px;display:grid;place-items:center;border-radius:12px;
   border:1px solid var(--line);color:var(--muted);background:var(--bg-elev-2);flex-shrink:0;
@@ -204,6 +237,10 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   letter-spacing:.2em;
   text-transform:uppercase;
 }
+.status-dot-btn{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
+  border:1px solid var(--border-subtle);background:var(--surface-1);flex-shrink:0;
+}
 .top-status{
   display:flex;
   align-items:center;
@@ -215,6 +252,16 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   background:var(--bg-elev-2);
   border:1px solid var(--line);
 }
+.status-pop{
+  position:absolute;top:60px;right:16px;z-index:var(--z-pop);min-width:230px;
+  background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-m);
+  box-shadow:var(--shadow-2);padding:var(--space-3) var(--space-4);
+}
+.status-pop[hidden]{display:none}
+.status-pop-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  font-size:var(--font-s);color:var(--text-2);padding:5px 0}
+.status-pop-row strong{color:var(--text-1);font-size:12.5px}
+.status-pop-row span:last-child{max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top-status.online .status-dot{
   background:var(--rose);
   box-shadow:0 0 0 3px var(--glow-rose);
@@ -931,12 +978,48 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   transition:opacity .15s;
 }
 .login-submit:disabled{opacity:.5}
+.pass-wrap{position:relative;display:flex;align-items:center}
+.pass-wrap input{flex:1;min-width:0;padding-right:46px!important}
+.pass-toggle{position:absolute;right:6px;width:36px;height:36px;border-radius:9px;color:var(--muted);font-size:15px}
+.pass-toggle:hover{color:var(--text)}
 .login-card small{
   display:block;
   font-size:9.5px;
   color:var(--soft);
   line-height:1.6;
   margin-top:20px;
+}
+.login-switch{
+  text-align:center;
+  margin:12px 0 6px;
+}
+.login-switch button{
+  color:var(--accent);
+  font-size:12px;
+  font-weight:600;
+  background:none;
+  padding:4px 8px;
+  border-radius:var(--radius-s);
+  transition:background .15s;
+}
+.login-switch button:hover{
+  background:rgba(167,139,250,.1);
+}
+.login-back{
+  text-align:center;
+  margin:14px 0 6px;
+}
+.login-back button{
+  color:var(--text-2);
+  font-size:12px;
+  font-weight:600;
+  background:none;
+  padding:4px 8px;
+  border-radius:var(--radius-s);
+  transition:background .15s;
+}
+.login-back button:hover{
+  background:rgba(255,255,255,.06);
 }
 
 /* Device/PC */
@@ -1289,6 +1372,25 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   border-radius:2px;
 }
 
+/* MINIMAL PREMIUM — chat fluido: IA sem caixa, usuário compacto */
+.message.ai{max-width:100%}
+.message.ai .bubble{background:none;border:0;padding:2px 0;font-size:14.5px;line-height:1.65}
+.bubble-avatar{width:22px;height:22px;border-radius:7px;font-size:11px;margin-bottom:1px}
+.sender{font-size:12px;margin-bottom:1px}
+.message.user{max-width:min(88%,560px)}
+.message.user .bubble{padding:9px 13px;border-radius:16px 16px 5px 16px;font-size:14px}
+.msg-meta{gap:6px}
+.msg-time{font-size:9px}
+.message-ack{font-size:9px}
+.msg-menu-btn{font-size:13px;color:var(--text-3);padding:2px 8px;border-radius:8px;letter-spacing:.1em}
+.msg-menu-btn:hover{color:var(--text-1);background:rgba(255,255,255,.05)}
+.message-content{position:relative}
+.msg-menu-pop{position:absolute;right:0;top:100%;z-index:var(--z-pop);min-width:180px;
+  background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-m);
+  box-shadow:var(--shadow-2);padding:6px;display:flex;flex-direction:column}
+.msg-menu-pop button{text-align:left;font-size:13px;font-weight:600;color:var(--text-1);
+  padding:10px 12px;border-radius:9px;min-height:42px}
+.msg-menu-pop button:hover{background:rgba(167,139,250,.1)}
 /* Chat fullscreen: bolhas mais largas + markdown rico */
 .message.user{max-width:min(85%,560px)}
 .message.ai{max-width:min(94%,720px)}
