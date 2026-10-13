@@ -73,6 +73,85 @@ def test_montar_injeta_diretiva_jdui():
     db.close()
 
 
+def test_sintetizar_jdui_converte_texto():
+    import json as _json
+    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
+            {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm'}
+    import hermes_bridge
+    real = hermes_bridge.chat_complete
+    try:
+        hermes_bridge.chat_complete = lambda *a, **k: {"texto": quiz_json, "latencia_s": 0.1}
+        fence = pc_agent.sintetizar_jdui(cfg, 'quiz', 'crie um quiz de Python básico',
+                                         'Pergunta 1: quanto é 2+2? a) 3 b) 4. '
+                                         'Pergunta 2: qual o tipo de []? a) list b) dict.')
+        assert fence.startswith('\n\n```jdui\n') and fence.endswith('\n```')
+        ok, norm, _ = __import__('jdui').validar_mensagem(
+            _json.loads(fence.split('```jdui\n', 1)[1].rsplit('\n```', 1)[0]))
+        assert ok
+        hermes_bridge.chat_complete = lambda *a, **k: {"texto": 'não-json', "latencia_s": 0.1}
+        assert pc_agent.sintetizar_jdui(cfg, 'quiz', 'q', 'texto longo o suficiente aqui ok') == ''
+        assert pc_agent.sintetizar_jdui(cfg, 'tabela', 'q', 'x' * 100) == ''
+        assert pc_agent.sintetizar_jdui(cfg, 'quiz', 'q', 'curto') == ''
+    finally:
+        hermes_bridge.chat_complete = real
+
+
+def test_ai_completa_sintetiza_quiz_sem_fence(monkeypatch):
+    import json as _json
+    db = _db()
+    pc_agent.persist_messages(db, [{
+        'id': 'quiz-user-01', 'origin': 'mobile', 'role': 'user',
+        'text': 'crie um quiz de Python com 2 perguntas',
+        'created_at': '2026-10-13T12:00:00.000Z', 'conversation_id': 'conv-qz'}])
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 's',
+           'context': 5, 'max_tokens': 500}
+    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
+            {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
+    chamadas = []
+
+    def fake_complete(*a, **k):
+        chamadas.append(1)
+        if len(chamadas) == 1:
+            return {"texto": "Aqui está o quiz em Python:\n```python\nprint('oi')\n```", "latencia_s": 0.5}
+        return {"texto": quiz_json, "latencia_s": 0.5}
+
+    monkeypatch.setattr('hermes_bridge.chat_complete', fake_complete)
+    monkeypatch.setattr('pc_agent.aprender_com_conversa', lambda *a, **k: None)
+    r = pc_agent.ai_completa(db, {'message_id': 'quiz-user-01', 'conversation_id': 'conv-qz'}, cfg)
+    assert len(chamadas) == 2  # resposta + síntese
+    assert '```jdui' in r['response_text'] and '```python' in r['response_text']
+    db.close()
+
+
+def test_ai_completa_nao_sintetiza_quando_ja_tem_fence(monkeypatch):
+    import json as _json
+    db = _db()
+    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
+            {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
+    pc_agent.persist_messages(db, [{
+        'id': 'quiz-user-02', 'origin': 'mobile', 'role': 'user',
+        'text': 'crie um quiz de Python com 2 perguntas',
+        'created_at': '2026-10-13T12:00:00.000Z', 'conversation_id': 'conv-qz'}])
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 's',
+           'context': 5, 'max_tokens': 500}
+    chamadas = []
+
+    def fake_complete(*a, **k):
+        chamadas.append(1)
+        return {"texto": 'Pronto!\n\n```jdui\n' + quiz_json + '\n```', "latencia_s": 0.5}
+
+    monkeypatch.setattr('hermes_bridge.chat_complete', fake_complete)
+    monkeypatch.setattr('pc_agent.aprender_com_conversa', lambda *a, **k: None)
+    r = pc_agent.ai_completa(db, {'message_id': 'quiz-user-02', 'conversation_id': 'conv-qz'}, cfg)
+    assert len(chamadas) == 1  # sem chamada extra
+    assert '```jdui' in r['response_text']
+    db.close()
+
+
 def test_imagem_garantida_no_texto():
     user = 'me mostre uma imagem do tom do desenho tom and jerry'
     termo = pc_agent.intencao_imagem(user)

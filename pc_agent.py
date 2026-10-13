@@ -525,6 +525,51 @@ def ultimos_blocos_jdui(db, conversation_id: str, limite: int = 2) -> list:
     return out
 
 
+JDUI_SINTETIZAR = {
+    "quiz": ("Converta o quiz abaixo para JSON JDUI. Responda SÓ com o JSON, sem cercas e sem texto: "
+             '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"quiz",'
+             '"props":{"title":"...","questions":[{"q":"...","options":["...","..."],"answer":0,"explain":"..."}]}}]}. '
+             "Regras: use as perguntas e opções do conteúdo (em código Python, a certa está no `if`); "
+             "máximo 6 perguntas, 4 opções cada, answer é o índice; explain curta."),
+    "checklist": ("Converta a lista abaixo para JSON JDUI. Responda SÓ com o JSON: "
+                  '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"checklist",'
+                  '"props":{"title":"...","items":["..."]}}]}. Máximo 20 itens curtos.'),
+    "calculator": ("O usuário quer uma calculadora. Responda SÓ com o JSON JDUI: "
+                   '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"calculator",'
+                   '"props":{"kind":"basic"}}]}. kind: basic (padrão), imc (peso/altura), '
+                   "porcentagem (valor/percentual) ou juros (capital/taxa/meses) conforme o pedido."),
+}
+
+
+def sintetizar_jdui(cfg: dict, componente: str, texto_usuario: str, texto_resposta: str) -> str:
+    """Último recurso: quando a IA não emitiu o fence, converte a resposta em JDUI.
+
+    Retorna o fence pronto (com \\n\\n) ou ''. Nunca levanta exceção.
+    """
+    prompt = JDUI_SINTETIZAR.get(componente or "")
+    if not prompt or len(texto_resposta or "") < 50:
+        return ""
+    try:
+        res = hermes_bridge.chat_complete(
+            cfg["proxy"], cfg["model"],
+            [{"role": "system", "content": "Você converte conteúdo para JSON. Responda SÓ JSON válido."},
+             {"role": "user", "content": prompt + "\n\nPEDIDO: " + (texto_usuario or "")[:400]
+              + "\n\nCONTEÚDO:\n" + (texto_resposta or "")[:6000]}],
+            max_tokens=1500)
+        corpo = (res.get("texto") or "").strip()
+        m = re.search(r"```(?:jdui|json)?\s*\n?([\s\S]*?)```", corpo)
+        if m:
+            corpo = m.group(1).strip()
+        obj = json.loads(corpo)
+        ok, norm, _ = jdui.validar_mensagem(obj)
+        if not ok:
+            return ""
+        return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+    except Exception as exc:
+        log.warning("síntese JDUI falhou (%s); mantendo só texto", type(exc).__name__)
+        return ""
+
+
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
     """Monta o prompt com contexto local + memória global + pesquisa. Retorna (messages, extras)."""
     memoria_on = cfg.get("memoria_global", True)
@@ -556,6 +601,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str)
                 "JSON da interface:\n" + json.dumps(blocos_prev[0], ensure_ascii=False)[:4000])
     # JDUI: impõe interface declarativa quando pedida ou muito útil.
     comp_sugerido = JuliaPresentationEngine.sugerir(texto_usuario)
+    extras["comp_sugerido"] = comp_sugerido or ""
     if comp_sugerido:
         diretiva = "PEDIDO DE INTERFACE INTERATIVA (componente: " + comp_sugerido + "). " + JDUI_CATALOGO
         if comp_sugerido == "quiz":
@@ -719,6 +765,11 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
+    if not blocos_jdui and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
+        fence = sintetizar_jdui(cfg_eff, extras["comp_sugerido"], prep.get("user_text", ""), texto)
+        if fence:
+            texto += fence
+            log.info("JDUI sintetizado para %s (%s)", mid, extras["comp_sugerido"])
     ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto)
     if len(prep.get("user_text", "")) >= 20:
         threading.Thread(target=aprender_com_conversa,
@@ -807,6 +858,11 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
+        if not blocos_jdui and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
+            fence = sintetizar_jdui(cfg_eff, extras["comp_sugerido"], prep.get("user_text", ""), texto_final)
+            if fence:
+                texto_final += fence  # o tail-emit abaixo entrega como deltas finais
+                log.info("JDUI sintetizado no stream %s (%s)", mid, extras["comp_sugerido"])
         if texto_final != res["texto"]:
             # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
             try:
