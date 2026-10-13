@@ -441,6 +441,29 @@ def pesquisa_web(consulta: str, max_resultados: int = 6, timeout: float = 8.0) -
     return []
 
 
+WIDGET_TRIGGERS = ("calculadora", "quiz", "quizz", "questionário", "questionario",
+                   "lista de tarefas", "lista de compras", "cronômetro", "cronometro",
+                   "conversor", "conversão de", "conversao de", "jogo da velha",
+                   "jogo de adivinha", "forca", "tabuada", "sorteador", "sorteio",
+                   "timer", "contador", "enquete", "flashcard", "mini app", "miniapp",
+                   "funcione aqui no chat", "funcione no chat", "interativo")
+
+
+def intencao_widget(texto: str) -> str:
+    """Detecta pedido de mini app interativo. Retorna o tema ou ''."""
+    t = (texto or "").lower()
+    for k in WIDGET_TRIGGERS:
+        if k in t:
+            return k
+    return ""
+
+
+WIDGET_EXEMPLO = ("<style>body{font-family:sans-serif;padding:12px;background:#fff;color:#111}"
+                  "button{font-size:18px;padding:12px;margin:4px;border-radius:8px}</style>"
+                  "<div id=tela style='font-size:28px;margin-bottom:8px'>0</div>"
+                  "<button onclick=\"tela.textContent+='1'\">1</button>")
+
+
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
     """Monta o prompt com contexto local + memória global + pesquisa. Retorna (messages, extras)."""
     memoria_on = cfg.get("memoria_global", True)
@@ -460,6 +483,17 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str)
         blocos = memoria_global(db, conversation_id, 6)
         if blocos:
             partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
+    # Mini app: imposição forte — modelo pequeno tende a perguntar de volta ou dar Python.
+    tema_widget = intencao_widget(texto_usuario)
+    if tema_widget:
+        partes_sistema.append(
+            "PEDIDO DE MINI APP INTERATIVO (tema: " + tema_widget + "). REGRAS OBRIGATÓRIAS: "
+            "1) Responda com UM bloco ```widget-html contendo o app PRONTO e FUNCIONAL "
+            "(HTML+CSS+JS 100% inline, sem rede, sem links externos, interface em português, "
+            "botões grandes para celular). "
+            "2) PROIBIDO fazer perguntas de volta, pedir os números, ou entregar código Python/terminal. "
+            "3) Depois do bloco, no máximo 2 linhas de texto. "
+            "Padrão a adaptar: " + WIDGET_EXEMPLO)
     # Documentos: se a pergunta cita um doc ou fala de documento, injeta trechos
     doc_id = doc_mencionado(db, texto_usuario, conversation_id)
     if doc_id:
