@@ -1395,13 +1395,43 @@ table.jdui-table th{background:var(--bg-elev);color:var(--purple);cursor:pointer
 .jdui-fallback{font-size:11.5px;color:var(--soft);padding:8px;border:1px dashed var(--line);border-radius:8px}
 .jdui-mdhost p{margin:6px 0}.jdui-mdhost ul,.jdui-mdhost ol{margin:6px 0;padding-left:18px}
 
-/* Dual-view Interface | Código */
-.jdui-duo{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden}
-.jdui-duo .jdui-tabbar{margin:0;padding:8px 8px 0;background:rgba(167,135,250,.05)}
-.jdui-duo .jdui-slot{padding:10px}
+/* Dual-view: interface corre fluida no chat; só código vai em caixa */
+.jdui-duo{margin:8px 0;border:0;background:none}
+.jdui-duo .jdui-tabbar{display:inline-flex;gap:2px;margin:0 0 10px;padding:3px;border-radius:99px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.jdui-duo .jdui-tab{flex:none;min-width:0;padding:7px 16px;border-radius:99px;border:0;background:transparent;
+  color:var(--muted);font-size:11px;font-weight:750;letter-spacing:.02em}
+.jdui-duo .jdui-tab.on{color:#fff;background:linear-gradient(110deg,var(--purple) 0,var(--purple-3) 100%);
+  box-shadow:0 2px 10px rgba(139,92,246,.35)}
+.jdui-duo .jdui-slot{padding:0;animation:jdui-in .3s ease}
 .jdui-duo .jdui-slot[hidden]{display:none}
-.jdui-duo .codeblock{margin:10px}
+.jdui-duo .codeblock{margin:4px 0 0}
 .jdui-duo .codeblock[hidden]{display:none}
+@keyframes jdui-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Quiz fluido com micro-interações */
+.jdui-quiz{animation:jdui-in .3s ease}
+.jdui-quiz .jdui-title{font-size:14.5px}
+.jdui-opt{transition:border-color .15s,background .15s,transform .1s}
+.jdui-opt:hover:not(.ok):not(.bad){border-color:var(--purple-2)}
+.jdui-opt:active{transform:scale(.99)}
+.jdui-opt input{accent-color:var(--purple-2)}
+.jdui-opt.ok{border-color:rgba(16,185,129,.55);background:rgba(16,185,129,.1);
+  box-shadow:0 0 0 1px rgba(16,185,129,.25)}
+.jdui-opt.bad{border-color:rgba(248,113,113,.55);background:rgba(248,113,113,.1);
+  box-shadow:0 0 0 1px rgba(248,113,113,.25)}
+.jdui-btn{box-shadow:0 4px 14px rgba(139,92,246,.25);transition:transform .1s,box-shadow .15s}
+.jdui-btn:active{transform:scale(.98)}
+.jdui-btn.ghost{box-shadow:none}
+.jdui-check .jdui-item{transition:border-color .15s,background .15s}
+.jdui-check .jdui-item:hover{border-color:var(--purple-2)}
+.jdui-card{transition:border-color .15s,transform .15s}
+.jdui-node{transition:border-color .15s,background .15s}
+.jdui-node:hover{border-color:var(--purple-2)}
+.jdui-tab{transition:all .15s}
+.jdui-accbtn{transition:background .15s}
+.jdui-accbtn:hover{background:rgba(167,135,250,.06)}
+.jdui-key{transition:transform .08s,background .12s}
+.jdui-key:active{transform:scale(.95)}
 
 /* Mini-apps executáveis + desenhos SVG */
 .widget{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;background:#0a0a12}
