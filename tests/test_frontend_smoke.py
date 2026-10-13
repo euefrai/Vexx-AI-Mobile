@@ -26,6 +26,10 @@ global.document = { createElement: () => {
   let v = '';
   return { set textContent(x) { v = escText(x); }, get innerHTML() { return v; } };
 } };
+const jduiSrc = fs.readFileSync(process.argv[3], 'utf8');
+global.window = {};
+eval(jduiSrc);
+global.JDUI = global.window.JDUI;
 const start = src.indexOf('/* ----- Markdown');
 const end = src.indexOf('/* ----- Render');
 if (start < 0 || end < 0 || end < start) { console.error('markers missing'); process.exit(2); }
@@ -61,6 +65,22 @@ t('img-loremflickr-intacto', hr.includes('src="https://loremflickr.com/800/500/t
 t('code-url-sem-link', renderMarkdown('rode `https://x.com/a` ai').includes('<code>https://x.com/a</code>'));
 const mdDot = renderMarkdown('veja https://x.com/a.');
 t('url-ponto-final', mdDot.includes('href="https://x.com/a"') && mdDot.includes('</a>.'));
+// quiz client-side a partir de código Python (padrão dos prints)
+const codeQuiz = '# Pergunta 1\nprint("1. Quanto é 2+2?")\nprint("a) 3  b) 4")\nresp = input()\nif resp == "b":\n    print("ok")';
+const qc = JDUI.quizFromCode(codeQuiz);
+t('quiz-from-code', !!qc && qc.blocks[0].props.questions[0].answer === 1);
+t('quiz-from-code-null', JDUI.quizFromCode('print("oi")') === null);
+const txtQuiz = 'Pergunta 1: Quanto é 2+2?\na) 3\nb) 4\nResposta: b\n\nPergunta 2: Tipo de []?\na) list\nb) dict\nResposta: a';
+const qt = JDUI.quizFromText(txtQuiz);
+t('quiz-from-text', !!qt && qt.blocks[0].props.questions.length === 2);
+t('quiz-from-text-ruido', JDUI.quizFromText('oi, tudo bem? me conta uma piada') === null);
+// dual-view: código de quiz vira Interface|Código, e backend-quiz evita duplicar
+const mdDuo = renderMarkdown('Rode no terminal:\n```python\n' + codeQuiz + '\n```');
+takeJduiSlots();
+t('dual-view', mdDuo.includes('jdui-duo') && mdDuo.includes('data-duo="ui"') && mdDuo.includes('data-duo="code"'));
+const mdPlain = renderMarkdown('Exemplo:\n```python\nprint("oi")\n```');
+takeJduiSlots();
+t('codigo-comum-sem-duo', !mdPlain.includes('jdui-duo') && mdPlain.includes('codeblock'));
 t('code-block', renderMarkdown('ex:\n```python\nprint("oi")\n```').includes('<pre><code>'));
 t('xss-escaped', renderMarkdown('<img src=x onerror=evil()>').includes('&lt;img'));
 t('table', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<table>'));
@@ -154,7 +174,7 @@ def test_render_markdown_no_node():
     with tempfile.TemporaryDirectory() as tmp:
         harness = Path(tmp) / 'harness.cjs'
         harness.write_text(HARNESS, encoding='utf-8')
-        r = subprocess.run([NODE, str(harness), str(APP_JS)],
+        r = subprocess.run([NODE, str(harness), str(APP_JS), str(RAIZ / 'public' / 'jdui.js')],
                            capture_output=True, text=True, timeout=60)
         assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
         assert 'FAIL' not in r.stdout

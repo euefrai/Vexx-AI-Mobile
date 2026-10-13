@@ -1384,6 +1384,14 @@ table.jdui-table th{background:var(--bg-elev);color:var(--purple);cursor:pointer
 .jdui-fallback{font-size:11.5px;color:var(--soft);padding:8px;border:1px dashed var(--line);border-radius:8px}
 .jdui-mdhost p{margin:6px 0}.jdui-mdhost ul,.jdui-mdhost ol{margin:6px 0;padding-left:18px}
 
+/* Dual-view Interface | Código */
+.jdui-duo{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden}
+.jdui-duo .jdui-tabbar{margin:0;padding:8px 8px 0;background:rgba(167,135,250,.05)}
+.jdui-duo .jdui-slot{padding:10px}
+.jdui-duo .jdui-slot[hidden]{display:none}
+.jdui-duo .codeblock{margin:10px}
+.jdui-duo .codeblock[hidden]{display:none}
+
 /* Mini-apps executáveis + desenhos SVG */
 .widget{margin:8px 0;border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;background:#0a0a12}
 .widget-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;

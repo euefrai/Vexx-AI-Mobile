@@ -338,11 +338,13 @@ function sanitizeSvg(raw) {
   return s.trim();
 }
 let pendingJdui = [];
+let duoEmitted = false;
 function takeJduiSlots() { const s = pendingJdui; pendingJdui = []; return s; }
 function renderMarkdown(text) {
   if (!text) return '';
   const blocks = [];
   pendingJdui = [];
+  duoEmitted = false;
   const widgets = [];
   const svgs = [];
   let src = String(text).replace(/\r\n/g, '\n');
@@ -414,8 +416,25 @@ function renderMarkdown(text) {
     const codePh = ln.match(/ CODE(\d+) /);
     if (codePh) {
       flushList(); flushBq(); flushTable();
-      const b = blocks[Number(codePh[1])];
-      html.push('<div class="codeblock"><span class="code-lang">' + esc(b.lang || 'code') + '</span><button class="code-copy" data-code="' + Number(codePh[1]) + '" type="button">Copiar</button><pre><code>' + esc(b.code) + '</code></pre></div>');
+      const bn = Number(codePh[1]);
+      const b = blocks[bn];
+      let duoQi = -1;
+      if (typeof JDUI !== 'undefined' && JDUI.quizFromCode && (b.lang === '' || /^(py|python)$/i.test(b.lang || ''))) {
+        const hasQuiz = pendingJdui.some(function (m) { return (m.blocks || []).some(function (x) { return x.component === 'quiz'; }); });
+        if (!hasQuiz) {
+          try {
+            const qm = JDUI.quizFromCode(b.code);
+            if (qm) { duoQi = pendingJdui.push(qm) - 1; duoEmitted = true; }
+          } catch (_) {}
+        }
+      }
+      if (duoQi >= 0) {
+        html.push('<div class="jdui-duo"><div class="jdui-tabbar"><button class="jdui-tab on" data-duo="ui" type="button">Interface</button><button class="jdui-tab" data-duo="code" type="button">C&#243;digo</button></div>'
+          + '<div class="jdui-slot" data-jdui="' + duoQi + '"></div>'
+          + '<div class="codeblock" hidden><span class="code-lang">' + esc(b.lang || 'code') + '</span><button class="code-copy" data-code="' + bn + '" type="button">Copiar</button><pre><code>' + esc(b.code) + '</code></pre></div></div>');
+      } else {
+        html.push('<div class="codeblock"><span class="code-lang">' + esc(b.lang || 'code') + '</span><button class="code-copy" data-code="' + bn + '" type="button">Copiar</button><pre><code>' + esc(b.code) + '</code></pre></div>');
+      }
       continue;
     }
     const wPh = ln.match(/ WIDGET(\d+) /);
@@ -462,6 +481,19 @@ function renderMarkdown(text) {
     html.push('<p>' + inlineFmt(t) + '</p>');
   }
   flushList(); flushBq(); flushTable();
+  if (typeof JDUI !== 'undefined' && JDUI.quizFromText && !duoEmitted) {
+    const hasQuiz = pendingJdui.some(function (m) { return (m.blocks || []).some(function (x) { return x.component === 'quiz'; }); });
+    if (!hasQuiz) {
+      try {
+        const semCodigo = String(text).replace(/```[\s\S]*?(```|$)/g, ' ');
+        const qm = JDUI.quizFromText(semCodigo);
+        if (qm) {
+          const qi = pendingJdui.push(qm) - 1;
+          html.push('<div class="jdui-slot" data-jdui="' + qi + '"></div>');
+        }
+      } catch (_) {}
+    }
+  }
   // junta <p> seguidos sem vazio excessivo: mantem como estao
   return html.filter((h, i) => !(h === '' && html[i - 1] === '')).join('') + refsHtml;
 }
@@ -872,6 +904,19 @@ async function requestAI(userRow) {
 function stopAI() { if (aiAbort) aiAbort.abort(); }
 $('stopGen').addEventListener('click', stopAI);
 conversation.addEventListener('click', e => {
+  const duo = e.target.closest('[data-duo]');
+  if (duo) {
+    const wrap = duo.closest('.jdui-duo');
+    if (wrap) {
+      const showCode = duo.dataset.duo === 'code';
+      wrap.querySelectorAll('[data-duo]').forEach(b => b.classList.toggle('on', b === duo));
+      const slot = wrap.querySelector('.jdui-slot');
+      const code = wrap.querySelector('.codeblock');
+      if (slot) slot.hidden = showCode;
+      if (code) code.hidden = !showCode;
+    }
+    return;
+  }
   const wb = e.target.closest('.widget-code-btn');
   if (wb) {
     const wrap = wb.closest('.widget');

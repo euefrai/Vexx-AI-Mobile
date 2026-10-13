@@ -227,6 +227,97 @@
     return Math.round(v * 1e10) / 1e10;
   }
 
+  /* ----- Síntese client-side: código/texto com cara de quiz vira interface ----- */
+  function _qlimpa(s) {
+    s = String(s == null ? '' : s).replace(/\\n/g, ' ').replace(/\s+/g, ' ').trim();
+    s = s.replace(/^["']|["']$/g, '').trim();
+    return s.slice(0, 120);
+  }
+  function _qIdx(letras, letra) { return letras.indexOf(String(letra || '').toLowerCase()); }
+  function _qInline(t) {
+    const out = [];
+    const re = /\b([a-dA-D])[.)]\s*(.+?)(?=\s*\b[a-dA-D][.)]\s*|\s*$)/g;
+    let m;
+    while ((m = re.exec(t))) out.push([m[1].toLowerCase(), _qlimpa(m[2])]);
+    return out;
+  }
+  function _quizMsg(qs) {
+    if (!qs || !qs.length) return null;
+    const r = validateMessage({
+      version: VERSION,
+      blocks: [{ type: 'ui', component: 'quiz', props: { title: 'Quiz interativo', questions: qs.slice(0, 6) } }]
+    });
+    return r.ok ? r.msg : null;
+  }
+  function _prints(regiao) {
+    const out = [];
+    let m;
+    const re1 = /print\(\s*"((?:[^"\\]|\\.)*)"\s*\)/g;
+    while ((m = re1.exec(regiao))) out.push(m[1]);
+    if (!out.length) {
+      const re2 = /print\(\s*'((?:[^'\\]|\\.)*)'\s*\)/g;
+      while ((m = re2.exec(regiao))) out.push(m[1]);
+    }
+    return out.map(p => p.replace(/\\n/g, ' ').replace(/\\"/g, '"'));
+  }
+  function quizFromCode(texto) {
+    const partes = String(texto || '').split(/#\s*[Pp]ergunta\s*\d+/);
+    if (partes.length < 2) return null;
+    const qs = [];
+    for (let k = 1; k < partes.length && qs.length < 6; k++) {
+      const seg = partes[k];
+      const corte = seg.search(/\bresposta\s*=\s*input|\binput\s*\(|if\s+\w+\s*==/);
+      const regiao = corte >= 0 ? seg.slice(0, corte) : seg;
+      const lista = _prints(regiao);
+      let q = '', pares = [];
+      lista.forEach(p => {
+        if (!q) {
+          const mq = p.match(/^\s*\d+[.)]\s*([\s\S]+)/);
+          const cand = _qlimpa(mq ? mq[1] : p);
+          if (cand.length >= 8 && cand.indexOf('===') < 0) { q = cand; return; }
+        }
+        _qInline(p).forEach(pr => pares.push(pr));
+      });
+      if (pares.length < 2) pares = _qInline(lista.join(' '));
+      const letras = pares.map(p => p[0]);
+      const textos = pares.map(p => (p[1] || '').slice(0, 120)).slice(0, 6);
+      const ma = seg.match(/if\s+\w+\s*==\s*["']([a-dA-D])["']/);
+      const ans = ma ? _qIdx(letras, ma[1]) : -1;
+      if (q && textos.length >= 2 && ans >= 0 && ans < textos.length)
+        qs.push({ q: q.slice(0, 300), options: textos, answer: ans, explain: '' });
+    }
+    return _quizMsg(qs);
+  }
+  function quizFromText(texto) {
+    const t = String(texto || '');
+    if (!/pergunta\s*\d+/i.test(t)) return null;
+    const partes = t.split(/^\s*(?:\*\*?)?\s*pergunta\s*\d+\s*[:.\-]?\s*(?:\*\*?)?/gim);
+    if (partes.length < 2) return null;
+    const qs = [];
+    for (let k = 1; k < partes.length && qs.length < 6; k++) {
+      const seg = partes[k].trim();
+      if (/print\s*\(/.test(seg) && /input\s*\(/.test(seg)) continue; // é código: outro parser
+      const corpo = seg.replace(/```[\s\S]*?(```|$)/g, ' ');
+      let pares = [];
+      corpo.split('\n').forEach(linha => {
+        const m = linha.match(/^\s*([a-dA-D])[.)]\s*(.+?)\s*$/);
+        if (m && _qlimpa(m[2]).length >= 1) pares.push([m[1].toLowerCase(), _qlimpa(m[2])]);
+      });
+      if (pares.length < 2) pares = _qInline(' ' + corpo).filter(p => p[1]).map(p => [p[0], p[1]]);
+      const mq = seg.match(/\b[a-dA-D][.)]\s/);
+      const qpart = (mq ? seg.slice(0, mq.index) : seg).replace(/```[\s\S]*?(```|$)/g, ' ');
+      const q = _qlimpa(qpart.replace(/^[\s*#:\-–—]+/, '')).slice(0, 300);
+      const letras = pares.map(p => p[0]);
+      const textos = pares.map(p => p[1]).slice(0, 6);
+      const m = seg.match(/(?:resposta\s*(?:certa|correta)?|certa|gabarito)\s*[:\-]?\s*\(?([a-dA-D])\)?/i);
+      const ans = m ? _qIdx(letras, m[1]) : -1;
+      if (q && textos.length >= 2 && ans >= 0 && ans < textos.length)
+        qs.push({ q, options: textos, answer: ans, explain: '' });
+    }
+    if (qs.length < 2) return null; // anti-ruído: texto precisa de 2+ questões
+    return _quizMsg(qs);
+  }
+
   /* ----- Renderers ----- */
   function bar(pct) {
     const w = el('div', 'jdui-bar'); w.setAttribute('role', 'progressbar');
@@ -680,6 +771,7 @@
 
   window.JDUI = {
     version: VERSION,
-    validateMessage, extractBlocks, mount, OPS, calcExpr, COMPONENTS: Object.keys(V)
+    validateMessage, extractBlocks, mount, OPS, calcExpr,
+    quizFromCode, quizFromText, COMPONENTS: Object.keys(V)
   };
 })();
