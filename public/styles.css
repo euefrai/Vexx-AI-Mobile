@@ -255,6 +255,17 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .session-item small{display:block;font-size:10px;color:var(--soft)}
 .session-x{color:var(--soft);padding:4px;border-radius:8px;flex-shrink:0}
 .session-x:hover{color:#f87171}
+.session-tools{display:flex;gap:2px;flex-shrink:0}
+.session-tool{color:var(--soft);padding:4px 5px;border-radius:8px;font-size:12px;flex-shrink:0}
+.session-tool:hover{color:var(--text)}
+.session-tool.on{color:var(--purple)}
+.session-item.archived{opacity:.65}
+.drawer-caprow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.drawer-caprow .drawer-caption{margin:4px 2px 0}
+.mini-toggle{font-size:13px;padding:5px 9px;border-radius:9px;border:1px solid var(--line);color:var(--soft)}
+.mini-toggle[aria-pressed="true"]{color:var(--purple);border-color:var(--purple-2);background:var(--glow-purple)}
+.export-row{display:flex;gap:8px}
+.export-row .subtle-button{flex:1;justify-content:center}
 .drawer-nav{display:flex;flex-direction:column;gap:6px}
 .drawer-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:650;border:1px solid transparent;width:100%;text-align:left}
 .drawer-item.active,.drawer-item:hover{color:var(--text);background:var(--glow-purple);border-color:var(--line)}

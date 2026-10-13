@@ -339,7 +339,16 @@ function sanitizeSvg(raw) {
 }
 let pendingJdui = [];
 let duoEmitted = false;
+let lastAssistantId = '';
+let showArchived = false;
 function takeJduiSlots() { const s = pendingJdui; pendingJdui = []; return s; }
+async function delMessage(id) {
+  if (!db) return;
+  const tx = db.transaction(STORE, 'readwrite');
+  const done = txDone(tx);
+  tx.objectStore(STORE).delete(id);
+  await done;
+}
 function renderMarkdown(text) {
   if (!text) return '';
   const blocks = [];
@@ -544,6 +553,19 @@ function appendMessage(row) {
     cp.innerHTML = '<svg class="icon"><use href="#i-copy"/></svg> Copiar';
     meta.appendChild(cp);
     if (row.status === 'failed') { const rt = document.createElement('button'); rt.type = 'button'; rt.className = 'message-retry'; rt.textContent = 'Tentar novamente'; meta.appendChild(rt); }
+    if (row.status === 'synced' && row.conversation_id === activeConversation) {
+      const uid = row.id.endsWith('-r1') ? row.id.slice(0, -3) : '';
+      if (uid) {
+        const rg = document.createElement('button'); rg.type = 'button'; rg.className = 'msg-copy'; rg.dataset.regen = uid;
+        rg.textContent = '⟳ Regenerar';
+        meta.appendChild(rg);
+        if (row.id === lastAssistantId) {
+          const ct = document.createElement('button'); ct.type = 'button'; ct.className = 'msg-copy'; ct.dataset.cont = uid;
+          ct.textContent = '» Continuar';
+          meta.appendChild(ct);
+        }
+      }
+    }
     // Rede de segurança: prometeu imagem mas não renderizou nenhuma.
     if (row.status !== 'generating' && !bubble.querySelector('img')
         && /\[?mostrando[^\n]{0,80}imagem|aqui est[áa][^\n]{0,80}imagem|exibindo[^\n]{0,80}imagem/i.test(row.text || '')) {
@@ -592,7 +614,11 @@ async function renderMessages() {
     const w = document.createElement('div'); w.className = 'empty-chat';
     w.textContent = '✦ Sua conversa começa aqui. Peça pesquisa com fontes ou uma imagem.';
     conversation.appendChild(w);
-  } else rows.forEach(appendMessage);
+  } else {
+    const idsAssist = rows.filter(m => m.role === 'assistant' && m.status === 'synced').map(m => m.id);
+    lastAssistantId = idsAssist.length ? idsAssist[idsAssist.length - 1] : '';
+    rows.forEach(appendMessage);
+  }
   if (stick) conversation.scrollTop = conversation.scrollHeight;
   const pending = all.filter(m => m.status !== 'synced').length;
   $('pendingCount').textContent = pending + ' pendente' + (pending === 1 ? '' : 's');
@@ -614,15 +640,23 @@ async function renderSessions(filter) {
   if (!sessionsCache.find(s => s.id === activeConversation)) await ensureSession(activeConversation);
   sessionsCache = await allSessions();
   box.replaceChildren();
-  // Oculta excluídas e sessões vazias (não é um chat de verdade ainda) — exceto a ativa.
-  sessionsCache.filter(s => !isDeleted(s.id)
-    && (!q || (s.title || '').toLowerCase().includes(q))
-    && ((counts[s.id] || 0) > 0 || s.id === activeConversation)).forEach(s => {
+  // Texto das mensagens por conversa (busca no histórico).
+  const hay = {};
+  all.forEach(m => {
+    if (isDeleted(m.conversation_id)) return;
+    hay[m.conversation_id] = ((hay[m.conversation_id] || '') + ' ' + String(m.text || '')).toLowerCase().slice(-20000);
+  });
+  const matchQ = s => !q || (s.title || '').toLowerCase().includes(q) || (hay[s.id] || '').includes(q);
+  // Fixadas primeiro; arquivadas só com o filtro 📦.
+  sessionsCache.filter(s => !isDeleted(s.id) && (!s.archived || showArchived) && matchQ(s)
+    && ((counts[s.id] || 0) > 0 || s.id === activeConversation))
+    .sort((a, b) => ((b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)) || (b.updated_at || '').localeCompare(a.updated_at || ''))
+    .forEach(s => {
     const b = document.createElement('div');
-    b.className = 'session-item' + (s.id === activeConversation ? ' active' : '');
+    b.className = 'session-item' + (s.id === activeConversation ? ' active' : '') + (s.archived ? ' archived' : '');
     b.setAttribute('role', 'option');
     const t = document.createElement('button'); t.type = 'button'; t.style.cssText = 'flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer';
-    t.innerHTML = '<span class="t">' + esc(s.title || 'Nova conversa') + '</span><small>' + (counts[s.id] || 0) + ' msgs</small>';
+    t.innerHTML = '<span class="t">' + (s.pinned ? '📌 ' : '') + esc(s.title || 'Nova conversa') + '</span><small>' + (counts[s.id] || 0) + ' msgs</small>';
     t.addEventListener('click', async () => {
       setActiveConversation(s.id);
       await renderSessions($('sessionSearch').value);
@@ -649,11 +683,37 @@ async function renderSessions(filter) {
       await renderMessages();
       showToast('Conversa excluída');
     });
-    b.appendChild(t); b.appendChild(x);
+    const tools = document.createElement('div'); tools.className = 'session-tools';
+    const pin = document.createElement('button'); pin.type = 'button';
+    pin.className = 'session-tool' + (s.pinned ? ' on' : ''); pin.textContent = '📌'; pin.title = 'Fixar';
+    pin.setAttribute('aria-label', 'Fixar ' + (s.title || 'conversa'));
+    pin.addEventListener('click', async () => {
+      s.pinned = !s.pinned; s.updated_at = new Date().toISOString();
+      await putSession(s);
+      await renderSessions($('sessionSearch').value);
+    });
+    const arch = document.createElement('button'); arch.type = 'button'; arch.className = 'session-tool';
+    arch.textContent = '📦'; arch.title = s.archived ? 'Desarquivar' : 'Arquivar';
+    arch.setAttribute('aria-label', 'Arquivar ' + (s.title || 'conversa'));
+    arch.addEventListener('click', async () => {
+      s.archived = !s.archived; s.updated_at = new Date().toISOString();
+      await putSession(s);
+      if (s.archived && s.id === activeConversation) { setActiveConversation(newId()); await ensureSession(activeConversation); await renderMessages(); }
+      await renderSessions($('sessionSearch').value);
+      await renderMessages();
+      showToast(s.archived ? 'Arquivada (toque em 📦 para ver)' : 'Desarquivada');
+    });
+    tools.appendChild(pin); tools.appendChild(arch); tools.appendChild(x);
+    b.appendChild(t); b.appendChild(tools);
     box.appendChild(b);
   });
   $('sessionCount').textContent = String(box.children.length);
 }
+$('archivedToggle').addEventListener('click', () => {
+  showArchived = !showArchived;
+  $('archivedToggle').setAttribute('aria-pressed', showArchived ? 'true' : 'false');
+  renderSessions($('sessionSearch').value);
+});
 
 async function renderTimeline() {
   const tl = $('timeline');
@@ -903,6 +963,33 @@ async function requestAI(userRow) {
 }
 function stopAI() { if (aiAbort) aiAbort.abort(); }
 $('stopGen').addEventListener('click', stopAI);
+async function regenerateReply(userId) {
+  if (!db || aiAbort) { if (aiAbort) showToast('Aguarde a geração atual'); return; }
+  if (!pcOnline || !authenticated) { showToast('PC desconectado — tente quando online'); return; }
+  const rows = await allMessages();
+  const user = rows.find(m => m.id === userId);
+  if (!user) return;
+  try {
+    await api('/api/ai/regenerate', { method: 'POST', body: JSON.stringify({ message_id: userId, conversation_id: user.conversation_id }) });
+  } catch (err) { showToast('Falha ao reiniciar: ' + (err.message || '')); return; }
+  await delMessage(userId + '-r1');
+  if (user.conversation_id === activeConversation) await renderMessages();
+  requestAI(user);
+}
+async function continueReply(userId) {
+  if (!db || aiAbort) { if (aiAbort) showToast('Aguarde a geração atual'); return; }
+  if (!pcOnline || !authenticated) { showToast('PC desconectado — tente quando online'); return; }
+  const rows = await allMessages();
+  const user = rows.find(m => m.id === userId);
+  if (!user) return;
+  setGenBar(true, 'Continuando…');
+  try {
+    const r = await api('/api/ai/continue', { method: 'POST', body: JSON.stringify({ message_id: userId, conversation_id: user.conversation_id, model: modeloAtivo() }) });
+    await storeMessages([{ id: r.reply_id || (userId + '-r1'), conversation_id: user.conversation_id, origin: 'mobile', role: 'assistant', text: r.response_text, created_at: new Date().toISOString(), status: 'synced', model: r.model || modeloAtivo() }]);
+    if (user.conversation_id === activeConversation) { await renderMessages(); scrollChat(true); }
+  } catch (err) { showToast('Falha ao continuar: ' + (err.message || '')); }
+  finally { setGenBar(false); }
+}
 conversation.addEventListener('click', e => {
   const duo = e.target.closest('[data-duo]');
   if (duo) {
@@ -953,6 +1040,10 @@ conversation.addEventListener('click', e => {
     });
     return;
   }
+  const rg = e.target.closest('[data-regen]');
+  if (rg) { regenerateReply(rg.dataset.regen); return; }
+  const ct = e.target.closest('[data-cont]');
+  if (ct) { continueReply(ct.dataset.cont); return; }
   const falha = e.target.closest('.message.failed');
   if (falha) {
     const mid = falha.dataset.mid || '';
@@ -1005,6 +1096,34 @@ $('newChatCta').addEventListener('click', newChat);
 $('newChatTop').addEventListener('click', newChat);
 $('sessionSearch').addEventListener('input', e => renderSessions(e.target.value));
 $('syncNow').addEventListener('click', async () => { await checkStatus(); showToast(pcOnline ? 'Sincronizado' : 'PC desconectado'); });
+function downloadFile(name, mime, text) {
+  const blob = new Blob([text], { type: mime + ';charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+async function exportConversation(fmt) {
+  if (!db) { showToast('Cache indisponível'); return; }
+  const rows = (await allMessages()).filter(m => m.conversation_id === activeConversation);
+  const s = (await allSessions()).find(x => x.id === activeConversation);
+  const title = (s && s.title ? s.title : 'conversa').replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'conversa';
+  if (!rows.length) { showToast('Nada para exportar'); return; }
+  if (fmt === 'json') {
+    downloadFile(title + '.json', 'application/json', JSON.stringify({ title, exported_at: new Date().toISOString(), messages: rows }, null, 2));
+  } else {
+    let md = '# ' + title + '\n\n_Exportado da Júlia Mobile em ' + new Date().toLocaleString('pt-BR') + '_\n\n';
+    rows.forEach(m => {
+      md += (m.role === 'assistant' ? '## ✦ Júlia' : '## Você') + ' · ' + fmtTime(m.created_at) + '\n\n' + String(m.text || '') + '\n\n---\n\n';
+    });
+    downloadFile(title + '.md', 'text/markdown', md);
+  }
+  showToast('Exportado: ' + title);
+}
+$('exportMd').addEventListener('click', () => exportConversation('md'));
+$('exportJson').addEventListener('click', () => exportConversation('json'));
 $('clearCache').addEventListener('click', async () => {
   if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
   await clearStorage();

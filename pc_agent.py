@@ -44,6 +44,47 @@ def database_path() -> Path:
     return Path(os.environ.get("JULIA_SQLITE_PATH", str(Path.home() / ".julia-mobile" / "memory.sqlite3")))
 
 
+DONO_PADRAO = "local"
+
+
+def dono_valido(v) -> str:
+    """Sanitiza o dono vindo do relay (autenticado). Padrão: 'local'."""
+    s = str(v or "").strip().lower()[:40]
+    if re.fullmatch(r"[a-z0-9_-]{1,40}", s):
+        return s
+    return DONO_PADRAO
+
+
+def _ensure_owner_coluna(db, tabela: str) -> None:
+    cols = [c[1] for c in db.execute(f"PRAGMA table_info({tabela})").fetchall()]
+    if "owner_id" not in cols:
+        db.execute(f"ALTER TABLE {tabela} ADD COLUMN owner_id TEXT NOT NULL DEFAULT '{DONO_PADRAO}'")
+
+
+def _migrar_memories_por_dono(db) -> None:
+    """memories passa de PK(key) para PK(owner_id, key), preservando dados locais."""
+    sql = db.execute("SELECT sql FROM sqlite_master WHERE name='memories'").fetchone()
+    if not sql or not sql[0]:
+        db.execute("""CREATE TABLE memories (
+            owner_id TEXT NOT NULL DEFAULT 'local', key TEXT NOT NULL,
+            value TEXT NOT NULL, updated_at TEXT NOT NULL,
+            PRIMARY KEY (owner_id, key)
+        )""")
+        return
+    if "owner_id" in sql[0]:
+        return
+    db.execute("ALTER TABLE memories RENAME TO memories_antiga")
+    db.execute("""CREATE TABLE memories (
+        owner_id TEXT NOT NULL DEFAULT 'local', key TEXT NOT NULL,
+        value TEXT NOT NULL, updated_at TEXT NOT NULL,
+        PRIMARY KEY (owner_id, key)
+    )""")
+    db.execute("""INSERT INTO memories (owner_id, key, value, updated_at)
+                  SELECT 'local', key, value, updated_at FROM memories_antiga""")
+    db.execute("DROP TABLE memories_antiga")
+    log.info("memories migrada para isolamento por dono")
+
+
 def open_db(path: Path):
     path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(path)
@@ -52,39 +93,51 @@ def open_db(path: Path):
     db.execute("""CREATE TABLE IF NOT EXISTS messages (
         id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
         origin TEXT NOT NULL, role TEXT NOT NULL, text TEXT NOT NULL,
-        created_at TEXT NOT NULL, received_at TEXT NOT NULL
+        created_at TEXT NOT NULL, received_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
     try:
         db.execute("ALTER TABLE messages ADD COLUMN model TEXT")
     except sqlite3.OperationalError:
         pass  # coluna já existe (migração idempotente)
+    _ensure_owner_coluna(db, "messages")
     db.execute("""CREATE TABLE IF NOT EXISTS ai_requests (
         user_message_id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
         model TEXT NOT NULL, state TEXT NOT NULL,
         reply_id TEXT, response_text TEXT, error TEXT,
-        created_at TEXT NOT NULL, updated_at TEXT NOT NULL
+        created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
+    _ensure_owner_coluna(db, "ai_requests")
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_created ON messages(origin, created_at)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_conv ON messages(origin, conversation_id, created_at)")
-    db.execute("""CREATE TABLE IF NOT EXISTS memories (
-        key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL
-    )""")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
+    _migrar_memories_por_dono(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
-        source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL
+        source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
+    _ensure_owner_coluna(db, "memory_facts")
     db.execute("CREATE INDEX IF NOT EXISTS idx_memfacts_key ON memory_facts(key, updated_at)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_memfacts_owner ON memory_facts(owner_id, updated_at)")
     docs_agent.criar_tabelas(db)
+    for _tabela in ("documents", "doc_chunks"):
+        _ensure_owner_coluna(db, _tabela)
+    db.execute("CREATE INDEX IF NOT EXISTS idx_docs_owner ON documents(owner_id, created_at)")
     db.execute("""CREATE TABLE IF NOT EXISTS ui_state (
         k TEXT PRIMARY KEY, message_id TEXT NOT NULL, slot TEXT NOT NULL,
-        state TEXT NOT NULL, updated_at TEXT NOT NULL
+        state TEXT NOT NULL, updated_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
+    _ensure_owner_coluna(db, "ui_state")
     db.execute("CREATE INDEX IF NOT EXISTS idx_uistate_msg ON ui_state(message_id)")
     db.commit()
     return db
 
 
-def persist_messages(db, rows):
+def persist_messages(db, rows, owner=DONO_PADRAO):
+    owner = dono_valido(owner)
     confirmed = []
     with db:
         for m in rows:
@@ -102,19 +155,21 @@ def persist_messages(db, rows):
                     m.get("origin") == "mobile" and m.get("role") in ("user", "assistant")):
                 continue
             db.execute("""INSERT OR IGNORE INTO messages
-                (id, conversation_id, origin, role, text, created_at, received_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                (id, conversation_id, origin, role, text, created_at, received_at, owner_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
                 (mid, conv, "mobile", m["role"], txt, created,
-                 datetime.now(timezone.utc).isoformat()))
+                 datetime.now(timezone.utc).isoformat(), owner))
             confirmed.append(mid)
     return confirmed
 
 
-def list_messages(db, limit=200):
+def list_messages(db, limit=200, owner=DONO_PADRAO):
+    owner = dono_valido(owner)
     rows = db.execute("""SELECT id, conversation_id, origin, role, text, created_at,
                                 COALESCE(model, '')
-                         FROM messages WHERE origin=? ORDER BY created_at DESC, id DESC LIMIT ?""",
-                      ("mobile", min(max(int(limit), 1), 200))).fetchall()
+                         FROM messages WHERE origin=? AND owner_id=?
+                         ORDER BY created_at DESC, id DESC LIMIT ?""",
+                      ("mobile", owner, min(max(int(limit), 1), 200))).fetchall()
     cols = ["id", "conversation_id", "origin", "role", "text", "created_at", "model"]
     return [dict(zip(cols, row)) for row in reversed(rows)]
 
@@ -132,8 +187,9 @@ def ai_config() -> dict:
 
 
 # ── Memória compartilhada entre sessões ──────────────────────────────
-def salvar_fatos(db, texto: str) -> None:
+def salvar_fatos(db, texto: str, owner=DONO_PADRAO) -> None:
     """Heurística simples: 'lembre-se que ...', 'meu nome é ...' etc viram memories."""
+    owner = dono_valido(owner)
     import re
     if not isinstance(texto, str):
         return
@@ -151,63 +207,67 @@ def salvar_fatos(db, texto: str) -> None:
             if m:
                 valor = re.sub(r"\s+", " ", m.group(1)).strip(" .;:")[:300]
                 if valor:
-                    db.execute("""INSERT INTO memories (key, value, updated_at)
-                        VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET
+                    db.execute("""INSERT INTO memories (owner_id, key, value, updated_at)
+                        VALUES (?, ?, ?, ?) ON CONFLICT(owner_id, key) DO UPDATE SET
                         value=excluded.value, updated_at=excluded.updated_at""",
-                        (chave, valor, agora_iso()))
+                        (owner, chave, valor, agora_iso()))
                     achou = True
     if achou:
         log.info("memória atualizada a partir da conversa")
 
 
-def ler_memorias(db) -> list:
+def ler_memorias(db, owner=DONO_PADRAO) -> list:
     try:
-        rows = db.execute("SELECT key, value FROM memories ORDER BY updated_at DESC LIMIT 20").fetchall()
+        rows = db.execute("SELECT key, value FROM memories WHERE owner_id=? "
+                          "ORDER BY updated_at DESC LIMIT 20", (dono_valido(owner),)).fetchall()
     except Exception:
         return []
     return [{"key": k, "value": v} for k, v in rows if v]
 
 
-def memoria_global(db, conversation_id: str, limite_outras: int = 8) -> list:
+def memoria_global(db, conversation_id: str, limite_outras: int = 8, owner=DONO_PADRAO) -> list:
     """Últimas mensagens de OUTRAS conversas + fatos salvos, para injetar no prompt."""
+    owner = dono_valido(owner)
     try:
         rows = db.execute("""SELECT conversation_id, role, text FROM messages
-                             WHERE origin='mobile' AND conversation_id != ?
+                             WHERE origin='mobile' AND owner_id=? AND conversation_id != ?
                              ORDER BY created_at DESC, id DESC LIMIT ?""",
-                          (conversation_id, limite_outras)).fetchall()
+                          (owner, conversation_id, limite_outras)).fetchall()
     except Exception:
         rows = []
     blocos = []
     for conv, role, text in reversed(rows):
         if role in ("user", "assistant") and text:
             blocos.append(f"[{conv[-6:]}|{role}]: {(text or '')[:300]}")
-    fatos = ler_memorias(db)
+    fatos = ler_memorias(db, owner)
     if fatos:
         blocos.append("FATOS SALVOS: " + "; ".join(f"{f['key']}={f['value'][:150]}" for f in fatos))
     return blocos
 
 
-def guardar_fato(db, chave: str, valor: str, origem: str = "chat") -> None:
+def guardar_fato(db, chave: str, valor: str, origem: str = "chat", owner=DONO_PADRAO) -> None:
     """Guarda fato aprendido: chave resumida + histórico para evolução."""
+    owner = dono_valido(owner)
     chave = re.sub(r"\s+", "_", (chave or "").strip().lower())[:60].strip("_") or "fato"
     valor = (valor or "").strip()[:500]
     if not valor:
         return
     with db:
-        db.execute("""INSERT INTO memories (key, value, updated_at)
-            VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET
+        db.execute("""INSERT INTO memories (owner_id, key, value, updated_at)
+            VALUES (?, ?, ?, ?) ON CONFLICT(owner_id, key) DO UPDATE SET
             value=excluded.value, updated_at=excluded.updated_at""",
-            (chave, valor, agora_iso()))
-        db.execute("""INSERT INTO memory_facts (key, value, source, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?)""",
-            (chave, valor, origem, agora_iso(), agora_iso()))
+            (owner, chave, valor, agora_iso()))
+        db.execute("""INSERT INTO memory_facts (key, value, source, created_at, updated_at, owner_id)
+            VALUES (?, ?, ?, ?, ?, ?)""",
+            (chave, valor, origem, agora_iso(), agora_iso(), owner))
     log.info("memória aprendeu: %s", chave)
 
 
-def memorias_relevantes(db, pergunta: str, k: int = 8) -> list:
+def memorias_relevantes(db, pergunta: str, k: int = 8, owner=DONO_PADRAO) -> list:
     """Fatos ordenados por relevância (palavras em comum) + recência."""
     try:
-        rows = db.execute("SELECT key, value, updated_at FROM memories").fetchall()
+        rows = db.execute("SELECT key, value, updated_at FROM memories WHERE owner_id=?",
+                          (dono_valido(owner),)).fetchall()
     except Exception:
         return []
     toks_q = set(re.findall(r"[a-zà-ú0-9]{3,}", (pergunta or "").lower()))
@@ -224,13 +284,14 @@ def memorias_relevantes(db, pergunta: str, k: int = 8) -> list:
     return [{"key": c, "value": v} for _, _, c, v in relevantes]
 
 
-def interpretar_comando_memoria(db, texto: str):
+def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
     """Comandos diretos de memória. Retorna resposta pronta ou None."""
+    owner = dono_valido(owner)
     t = (texto or "").strip().lower()
     if re.search(r"o que (você|voce) (sabe|lembra|conhece) sobre mim", t) or \
        re.search(r"(mostre|mostra|liste|lista).{0,20}mem[óo]ria", t) or \
        t in ("o que você sabe?", "o que voce sabe?"):
-        fatos = ler_memorias(db)
+        fatos = ler_memorias(db, owner)
         if not fatos:
             return ("Ainda não guardei nada sobre você. Me diga coisas como "
                     "\"lembre-se que meu foco é X\" e eu aprendo. 🌱", "mem_vazia")
@@ -241,7 +302,7 @@ def interpretar_comando_memoria(db, texto: str):
     if m and ("esque" in t or "apag" in t or "remov" in t or "delet" in t):
         alvo = m.group(1).strip(" .;:")[:120]
         toks = set(re.findall(r"[a-zà-ú0-9]{3,}", alvo))
-        rows = db.execute("SELECT key, value FROM memories").fetchall()
+        rows = db.execute("SELECT key, value FROM memories WHERE owner_id=?", (owner,)).fetchall()
         melhor, melhor_n = None, 0
         for chave, valor in rows:
             n = len(toks & set(re.findall(r"[a-zà-ú0-9]{3,}", f"{chave} {valor}".lower())))
@@ -249,13 +310,14 @@ def interpretar_comando_memoria(db, texto: str):
                 melhor, melhor_n = chave, n
         if melhor and melhor_n > 0:
             with db:
-                db.execute("DELETE FROM memories WHERE key=?", (melhor,))
+                db.execute("DELETE FROM memories WHERE owner_id=? AND key=?", (owner, melhor))
             return (f"Esqueci **{melhor}**. 🧹", "mem_esquecer")
         return ("Não encontrei isso na minha memória. Diga \"o que você sabe sobre mim\" para ver a lista.", "mem_nada")
     return None
 
 
-def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_resposta: str) -> None:
+def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_resposta: str,
+                          owner=DONO_PADRAO) -> None:
     """Thread em 2º plano: pede ao LLM fatos novos (JSON) e guarda. Nunca bloqueia o chat."""
     try:
         if len(texto_usuario or "") < 20:
@@ -279,20 +341,23 @@ def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_re
         try:
             for f in fatos if isinstance(fatos, list) else []:
                 if isinstance(f, dict) and f.get("value"):
-                    guardar_fato(db, str(f.get("key", "fato"))[:60], str(f.get("value"))[:500], "llm")
-            n = db.execute("SELECT COUNT(*) FROM memory_facts").fetchone()[0]
+                    guardar_fato(db, str(f.get("key", "fato"))[:60], str(f.get("value"))[:500], "llm", owner)
+            n = db.execute("SELECT COUNT(*) FROM memory_facts WHERE owner_id=?",
+                           (dono_valido(owner),)).fetchone()[0]
             if n > 60:
-                _consolidar_memorias(db, cfg)
+                _consolidar_memorias(db, cfg, owner)
         finally:
             db.close()
     except Exception as exc:
         log.warning("aprendizado em 2º plano falhou: %s", exc)
 
 
-def _consolidar_memorias(db, cfg: dict) -> None:
+def _consolidar_memorias(db, cfg: dict, owner=DONO_PADRAO) -> None:
     """Junta fatos antigos/duplicados num conjunto enxuto (evolução da memória)."""
+    owner = dono_valido(owner)
     try:
-        rows = db.execute("SELECT key, value FROM memory_facts ORDER BY created_at DESC LIMIT 60").fetchall()
+        rows = db.execute("SELECT key, value FROM memory_facts WHERE owner_id=? "
+                          "ORDER BY created_at DESC LIMIT 60", (owner,)).fetchall()
         bloco = "\n".join(f"- {k}: {v[:200]}" for k, v in rows)
         res = hermes_bridge.chat_complete(
             cfg["proxy"], cfg["model"],
@@ -308,23 +373,23 @@ def _consolidar_memorias(db, cfg: dict) -> None:
         if not isinstance(novos, list) or not novos:
             return
         with db:
-            db.execute("DELETE FROM memories")
-            db.execute("DELETE FROM memory_facts")
+            db.execute("DELETE FROM memories WHERE owner_id=?", (owner,))
+            db.execute("DELETE FROM memory_facts WHERE owner_id=?", (owner,))
             for f in novos[:25]:
                 if isinstance(f, dict) and f.get("value"):
                     chave = re.sub(r"\s+", "_", str(f.get("key", "fato")).strip().lower())[:60] or "fato"
-                    db.execute("INSERT INTO memories (key, value, updated_at) VALUES (?, ?, ?)",
-                               (chave, str(f["value"])[:500], agora_iso()))
+                    db.execute("INSERT INTO memories (owner_id, key, value, updated_at) VALUES (?, ?, ?, ?)",
+                               (owner, chave, str(f["value"])[:500], agora_iso()))
         log.info("memória consolidada: %d fatos", len(novos))
     except Exception as exc:
         log.warning("consolidação falhou: %s", exc)
 
 
-def doc_mencionado(db, texto: str, conversation_id: str) -> str:
+def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> str:
     """Acha documento citado pelo nome ou o mais recente da conversa."""
     t = (texto or "").lower()
     try:
-        docs = docs_agent.listar_documentos(db, 50)
+        docs = docs_agent.listar_documentos(db, 50, owner)
     except Exception:
         return ""
     for d in docs:
@@ -339,14 +404,14 @@ def doc_mencionado(db, texto: str, conversation_id: str) -> str:
     return ""
 
 
-def listar_conversas(db, limite: int = 100) -> list:
+def listar_conversas(db, limite: int = 100, owner=DONO_PADRAO) -> list:
     try:
         rows = db.execute("""SELECT conversation_id, COUNT(*), MAX(created_at),
                              substr(MAX(created_at || ' ' || text), 22, 80)
-                             FROM messages WHERE origin='mobile'
+                             FROM messages WHERE origin='mobile' AND owner_id=?
                              GROUP BY conversation_id
                              ORDER BY MAX(created_at) DESC LIMIT ?""",
-                          (min(max(int(limite), 1), 200),)).fetchall()
+                          (dono_valido(owner), min(max(int(limite), 1), 200))).fetchall()
     except Exception:
         return []
     return [{"conversation_id": c, "total": n, "ultima": u, "previa": (p or "")[:80]}
@@ -501,13 +566,13 @@ PEDIDO_CODIGO_RE = re.compile(
     r"|^(sim|quero|manda|pode ser|claro|ok|yes)\W*$")
 
 
-def ultimos_blocos_jdui(db, conversation_id: str, limite: int = 2) -> list:
+def ultimos_blocos_jdui(db, conversation_id: str, limite: int = 2, owner=DONO_PADRAO) -> list:
     """Últimos blocos JDUI válidos do assistente nesta conversa (p/ gerar código-fonte)."""
     try:
         rows = db.execute(
-            """SELECT text FROM messages WHERE origin='mobile' AND conversation_id=?
+            """SELECT text FROM messages WHERE origin='mobile' AND owner_id=? AND conversation_id=?
                AND role='assistant' AND text LIKE '%```jdui%' ORDER BY created_at DESC LIMIT 5""",
-            (conversation_id,)).fetchall()
+            (dono_valido(owner), conversation_id)).fetchall()
     except Exception:
         return []
     out = []
@@ -735,28 +800,51 @@ def _sintetizar_jdui_llm(cfg: dict, componente: str, texto_usuario: str, texto_r
         return ""
 
 
-def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str) -> tuple:
+REGRAS_CONFIANCA = (
+    "CONFIABILIDADE: distinga (a) o que o usuário disse, (b) MEMÓRIA salva, "
+    "(c) RESULTADO DE PESQUISA com data, (d) seu conhecimento geral, (e) palpite. "
+    "Se não souber, admita ('não sei' / 'não encontrei'). "
+    "NUNCA invente: links, fontes, preços, datas, eventos, estatísticas ou memórias. "
+    "Sem resultado de ferramenta, diga que respondeu pelo conhecimento geral."
+)
+
+ORCAMENTO_CHARS = 12000
+
+
+def aplicar_orcamento(historico: list, teto: int = ORCAMENTO_CHARS) -> list:
+    """Corta as mensagens MAIS ANTIGAS até caber no teto (as recentes valem mais)."""
+    total, mantidas = 0, []
+    for m in reversed(historico):
+        total += len(m.get("content", ""))
+        if total > teto and mantidas:
+            break
+        mantidas.append(m)
+    return list(reversed(mantidas))
+
+
+def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
+                        owner=DONO_PADRAO) -> tuple:
     """Monta o prompt com contexto local + memória global + pesquisa. Retorna (messages, extras)."""
+    owner = dono_valido(owner)
     memoria_on = cfg.get("memoria_global", True)
-    historico = contexto_conversa(db, conversation_id, cfg["context"])
+    historico = aplicar_orcamento(contexto_conversa(db, conversation_id, cfg["context"], owner))
     extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
-    partes_sistema = [cfg["system"]]
+    partes_sistema = [cfg["system"], REGRAS_CONFIANCA]
     if memoria_on:
-        rel = memorias_relevantes(db, texto_usuario)
-        recentes = []
+        rel = memorias_relevantes(db, texto_usuario, owner=owner)
         if not rel:
             # sem pergunta específica: leva um resumo do que sabe (nome/foco primeiro)
-            rel = memorias_relevantes(db, "", k=4)
+            rel = memorias_relevantes(db, "", k=4, owner=owner)
         if rel:
             extras["memoria_usada"] = True
             partes_sistema.append("O QUE VOCÊ SABE SOBRE O USUÁRIO (use naturalmente, sem citar que é memória):\n" +
                                   "\n".join(f"- {f['key']}: {f['value'][:200]}" for f in rel))
-        blocos = memoria_global(db, conversation_id, 6)
+        blocos = memoria_global(db, conversation_id, 6, owner)
         if blocos:
             partes_sistema.append("CONTEXTO RECENTE DE OUTRAS CONVERSAS (só se for relevante):\n" + "\n".join(blocos[-6:]))
     # Follow-up de código: "quero o código" após uma interface → gera fonte (sem jdui).
     if PEDIDO_CODIGO_RE.search(texto_usuario or ""):
-        blocos_prev = ultimos_blocos_jdui(db, conversation_id)
+        blocos_prev = ultimos_blocos_jdui(db, conversation_id, owner=owner)
         if blocos_prev:
             partes_sistema.append(
                 "GERAR CÓDIGO-FONTE: o usuário pediu o código da interface anterior. "
@@ -780,10 +868,10 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str)
                          "a interface pronta JÁ É a entrega.")
         partes_sistema.append(diretiva)
     # Documentos: se a pergunta cita um doc ou fala de documento, injeta trechos
-    doc_id = doc_mencionado(db, texto_usuario, conversation_id)
+    doc_id = doc_mencionado(db, texto_usuario, conversation_id, owner)
     if doc_id:
         extras["doc_id"] = doc_id
-        trechos = docs_agent.trechos_relevantes(db, texto_usuario, doc_id, k=4)
+        trechos = docs_agent.trechos_relevantes(db, texto_usuario, doc_id, k=4, owner=owner)
         if trechos:
             nome = trechos[0]["doc"]
             partes_sistema.append(f"TRECHOS DO DOCUMENTO '{nome}' (responda com base neles e cite a fonte):\n" +
@@ -821,11 +909,11 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
     return texto
 
 
-def contexto_conversa(db, conversation_id: str, limite: int) -> list:
+def contexto_conversa(db, conversation_id: str, limite: int, owner=DONO_PADRAO) -> list:
     rows = db.execute("""SELECT role, text FROM messages
-                         WHERE origin=? AND conversation_id=?
+                         WHERE origin=? AND owner_id=? AND conversation_id=?
                          ORDER BY created_at DESC, id DESC LIMIT ?""",
-                      ("mobile", conversation_id, limite)).fetchall()
+                      ("mobile", dono_valido(owner), conversation_id, limite)).fetchall()
     limpos = []
     for role, text in reversed(rows):
         if role not in ("user", "assistant"):
@@ -835,9 +923,9 @@ def contexto_conversa(db, conversation_id: str, limite: int) -> list:
     return limpos
 
 
-def ai_estado(db, user_message_id: str):
+def ai_estado(db, user_message_id: str, owner=DONO_PADRAO):
     row = db.execute("SELECT state, reply_id, response_text, error, model FROM ai_requests "
-                     "WHERE user_message_id=?", (user_message_id,)).fetchone()
+                     "WHERE user_message_id=? AND owner_id=?", (user_message_id, dono_valido(owner),)).fetchone()
     if not row:
         return None
     return {"state": row[0], "reply_id": row[1], "response_text": row[2],
@@ -845,17 +933,17 @@ def ai_estado(db, user_message_id: str):
 
 
 def ai_marcar(db, user_message_id, conversation_id, model, state,
-              reply_id=None, response_text=None, error=None):
+              reply_id=None, response_text=None, error=None, owner=DONO_PADRAO):
     with db:
         db.execute("""INSERT INTO ai_requests
             (user_message_id, conversation_id, model, state, reply_id,
-             response_text, error, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+             response_text, error, created_at, updated_at, owner_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(user_message_id) DO UPDATE SET state=excluded.state,
              reply_id=excluded.reply_id, response_text=excluded.response_text,
              error=excluded.error, updated_at=excluded.updated_at""",
             (user_message_id, conversation_id, model, state, reply_id,
-             response_text, error, agora_iso(), agora_iso()))
+             response_text, error, agora_iso(), agora_iso(), dono_valido(owner)))
 
 
 def ai_preparar(db, payload: dict, cfg: dict) -> dict:
@@ -869,43 +957,97 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     modelo = payload.get("model") or cfg["model"]
     if not (isinstance(modelo, str) and 1 <= len(modelo) <= 120):
         return {"error": "Modelo inválido.", "codigo": "invalido"}
-    previo = ai_estado(db, mid)
+    owner = dono_valido(payload.get("owner"))
+    previo = ai_estado(db, mid, owner)
     if previo and previo["state"] == "completed":
         return {"replay": True, "reply_id": previo["reply_id"],
                 "response_text": previo["response_text"], "model": previo["model"]}
     if previo and previo["state"] == "processing":
         return {"busy": True}
     row = db.execute("SELECT text FROM messages WHERE id=? AND origin='mobile' "
-                     "AND role='user' AND conversation_id=?", (mid, conv)).fetchone()
+                     "AND owner_id=? AND role='user' AND conversation_id=?", (mid, owner, conv)).fetchone()
     if not row:
         return {"error": "Mensagem do usuário não encontrada. Sincronize primeiro.",
                 "codigo": "sem_mensagem"}
     try:
-        salvar_fatos(db, row[0])
+        salvar_fatos(db, row[0], owner)
     except Exception:
         pass
     mem_flag = payload.get("memory", payload.get("memoria_global", None))
     memoria_on = cfg.get("memoria_global", True) if mem_flag is None else (str(mem_flag) == "1")
-    ai_marcar(db, mid, conv, modelo, "queued")
+    ai_marcar(db, mid, conv, modelo, "queued", owner=owner)
     return {"user_text": row[0], "model": modelo,
             "reply_id": f"{mid}-r1", "conversation_id": conv,
-            "memoria_global": memoria_on}
+            "memoria_global": memoria_on, "owner": owner}
 
 
-def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto) -> None:
+def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> None:
+    owner = dono_valido(owner)
     with db:
         db.execute("""INSERT OR IGNORE INTO messages
-            (id, conversation_id, origin, role, text, created_at, received_at, model)
-            VALUES (?, ?, 'mobile', 'assistant', ?, ?, ?, ?)""",
-            (reply_id, conv, texto, agora_iso(), agora_iso(), modelo))
+            (id, conversation_id, origin, role, text, created_at, received_at, model, owner_id)
+            VALUES (?, ?, 'mobile', 'assistant', ?, ?, ?, ?, ?)""",
+            (reply_id, conv, texto, agora_iso(), agora_iso(), modelo, owner))
+        db.execute("""UPDATE messages SET text=?, received_at=? WHERE id=?
+                      AND origin='mobile' AND owner_id=?""",
+                   (texto, agora_iso(), reply_id, owner))
     ai_marcar(db, mid, conv, modelo, "completed",
-              reply_id=reply_id, response_text=texto)
+              reply_id=reply_id, response_text=texto, owner=owner)
 
 
-def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto) -> dict:
+def ai_resetar(db, payload: dict) -> dict:
+    """Regenerar: apaga pedido anterior + resposta para recomputar do zero."""
+    owner = dono_valido(payload.get("owner"))
+    mid = payload.get("message_id", "")
+    conv = payload.get("conversation_id", "")
+    if not (isinstance(mid, str) and 8 <= len(mid) <= 100):
+        return {"error": "message_id inválido.", "codigo": "invalido"}
+    row = db.execute("SELECT 1 FROM messages WHERE id=? AND origin='mobile' AND owner_id=? "
+                     "AND role='user' AND conversation_id=?", (mid, owner, conv)).fetchone()
+    if not row:
+        return {"error": "Mensagem não encontrada.", "codigo": "sem_mensagem"}
+    with db:
+        db.execute("DELETE FROM ai_requests WHERE user_message_id=? AND owner_id=?", (mid, owner))
+        db.execute("DELETE FROM messages WHERE id=? AND origin='mobile' AND owner_id=?",
+                   (f"{mid}-r1", owner))
+    return {"ok": True, "reply_id": f"{mid}-r1"}
+
+
+def ai_continuar(db, payload: dict, cfg: dict) -> dict:
+    """Continuar: gera a continuação e ANEXA à mesma resposta (mesmo reply_id)."""
+    owner = dono_valido(payload.get("owner"))
+    mid = payload.get("message_id", "")
+    conv = payload.get("conversation_id", "")
+    if not (isinstance(mid, str) and 8 <= len(mid) <= 100):
+        return {"error": "message_id inválido.", "codigo": "invalido"}
+    est = ai_estado(db, mid, owner)
+    if not est or not (est.get("response_text") or "").strip():
+        return {"error": "Nada para continuar.", "codigo": "sem_resposta"}
+    modelo = payload.get("model") or est.get("model") or cfg["model"]
+    cfg_eff = dict(cfg, memoria_global=True)
+    historico = contexto_conversa(db, conv, min(cfg["context"], 8), owner)
+    messages = ([{"role": "system", "content": cfg["system"]}] + historico
+                + [{"role": "assistant", "content": (est["response_text"] or "")[-4000:]},
+                   {"role": "user", "content": "Continue exatamente de onde parou, sem repetir o que já disse."}])
+    ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
+    try:
+        res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages, max_tokens=cfg["max_tokens"])
+    except hermes_bridge.BridgeErro as exc:
+        ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
+        return {"error": str(exc), "codigo": exc.codigo}
+    trecho = (res.get("texto") or "").strip()
+    if not trecho:
+        return {"error": "Modelo não continuou.", "codigo": "vazia"}
+    anterior = (est["response_text"] or "").rstrip()
+    combinado = anterior + ("" if anterior.endswith((" ", "\n")) else " ") + trecho
+    ai_guardar_resposta(db, mid, conv, modelo, est["reply_id"] or f"{mid}-r1", combinado, owner)
+    return {"reply_id": est["reply_id"], "response_text": combinado, "model": modelo}
+
+
+def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
-    ai_marcar(db, mid, conv, modelo, "processing")
-    ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto)
+    ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
+    ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner)
     return {"reply_id": reply_id, "response_text": texto, "model": modelo}
 
 
@@ -914,17 +1056,18 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     if "error" in prep or "replay" in prep or "busy" in prep:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
-    cmd = interpretar_comando_memoria(db, prep.get("user_text", ""))
+    owner = prep.get("owner", DONO_PADRAO)
+    cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
-        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0])
-    ai_marcar(db, mid, conv, modelo, "processing")
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
+    ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
     cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
-    messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""))
+    messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""), owner)
     try:
         res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages,
                                           max_tokens=cfg["max_tokens"])
     except hermes_bridge.BridgeErro as exc:
-        ai_marcar(db, mid, conv, modelo, "failed", error=str(exc))
+        ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
     texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
@@ -935,10 +1078,10 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("JDUI sintetizado para %s (%s)", mid, extras["comp_sugerido"])
-    ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto)
+    ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto, owner)
     if len(prep.get("user_text", "")) >= 20:
         threading.Thread(target=aprender_com_conversa,
-                         args=(database_path(), dict(cfg), prep["user_text"], texto),
+                         args=(database_path(), dict(cfg), prep["user_text"], texto, owner),
                          daemon=True).start()
     log.info("IA %s respondeu em %ss (msg %s, memoria=%s, fontes=%d)", modelo, res["latencia_s"], mid,
              extras["memoria_usada"], len(extras["fontes"]))
@@ -970,9 +1113,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
-        cmd = interpretar_comando_memoria(db, prep.get("user_text", ""))
+        owner = prep.get("owner", DONO_PADRAO)
+        cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
         if cmd:
-            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0])
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
             try:
                 with sessao.lock_envio:
                     websocket.send(json.dumps({"request_id": request_id, "type": "ai_done",
@@ -982,9 +1126,9 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
-        ai_marcar(db, mid, conv, modelo, "processing")
+        ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
         cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
-        messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""))
+        messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""), owner)
 
         def enviar(obj):
             try:
@@ -1003,7 +1147,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                                             deve_parar=sessao.parar.is_set,
                                             max_tokens=cfg["max_tokens"])
         except hermes_bridge.BridgeErro as exc:
-            ai_marcar(db, mid, conv, modelo, "failed", error=str(exc))
+            ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
             try:
                 enviar({"request_id": request_id, "type": "ai_error",
                         "error": str(exc), "codigo": exc.codigo})
@@ -1012,7 +1156,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             return
         if res.get("cancelada"):
             ai_marcar(db, mid, conv, modelo, "cancelled",
-                      reply_id=prep["reply_id"], response_text=res["texto"])
+                      reply_id=prep["reply_id"], response_text=res["texto"], owner=owner)
             try:
                 enviar({"request_id": request_id, "type": "ai_cancelled",
                         "reply_id": prep["reply_id"], "partial": res["texto"]})
@@ -1035,10 +1179,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                        texto_final[len(res["texto"]):])
             except Exception:
                 pass
-        ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final)
+        ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final, owner)
         if len(prep.get("user_text", "")) >= 20:
             threading.Thread(target=aprender_com_conversa,
-                             args=(db_path, dict(cfg_eff), prep["user_text"], texto_final),
+                             args=(db_path, dict(cfg_eff), prep["user_text"], texto_final, owner),
                              daemon=True).start()
         log.info("IA %s (stream) em %ss (msg %s, fontes=%d)", modelo, res["latencia_s"], mid, len(extras["fontes"]))
         enviar({"request_id": request_id, "type": "ai_done",
@@ -1086,21 +1230,23 @@ def run():
                     request_id = req.get("request_id")
                     if not isinstance(request_id, str):
                         continue
+                    dono = dono_valido(req.get("owner"))
                     if req.get("type") == "sync":
-                        confirmed_ids = persist_messages(db, req.get("messages", []))
+                        confirmed_ids = persist_messages(db, req.get("messages", []), dono)
                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
                     elif req.get("type") == "list":
-                        reply = {"request_id": request_id, "type": "history", "messages": list_messages(db, req.get("limit", 200))}
+                        reply = {"request_id": request_id, "type": "history",
+                                 "messages": list_messages(db, req.get("limit", 200), dono)}
                     elif req.get("type") == "conversations":
                         reply = {"request_id": request_id, "type": "conversations",
-                                 "conversations": listar_conversas(db, req.get("limit", 100))}
+                                 "conversations": listar_conversas(db, req.get("limit", 100), dono)}
                     elif req.get("type") == "doc_upload":
                         try:
                             import base64 as _b64
                             raw = _b64.b64decode(req.get("data_b64", ""), validate=True)
                             meta = docs_agent.salvar_documento(
                                 db, req.get("name", "arquivo"),
-                                raw, req.get("conversation_id", "geral"))
+                                raw, req.get("conversation_id", "geral"), dono)
                             reply = {"request_id": request_id, "type": "doc_uploaded", **meta}
                         except Exception as exc:
                             codigo = getattr(exc, "codigo", "erro")
@@ -1108,10 +1254,10 @@ def run():
                                      "error": str(exc)[:300], "codigo": codigo}
                     elif req.get("type") == "doc_list":
                         reply = {"request_id": request_id, "type": "doc_list",
-                                 "documents": docs_agent.listar_documentos(db, req.get("limit", 50))}
+                                 "documents": docs_agent.listar_documentos(db, req.get("limit", 50), dono)}
                     elif req.get("type") == "doc_resumo":
                         try:
-                            texto = docs_agent.resumir_documento(db, cfg, req.get("doc_id", ""))
+                            texto = docs_agent.resumir_documento(db, cfg, req.get("doc_id", ""), dono)
                             reply = {"request_id": request_id, "type": "doc_resumo",
                                      "doc_id": req.get("doc_id", ""), "resumo": texto}
                         except Exception as exc:
@@ -1120,7 +1266,7 @@ def run():
                                      "codigo": getattr(exc, "codigo", "erro")}
                     elif req.get("type") == "doc_topicos":
                         try:
-                            texto = docs_agent.topicos_documento(db, cfg, req.get("doc_id", ""))
+                            texto = docs_agent.topicos_documento(db, cfg, req.get("doc_id", ""), dono)
                             reply = {"request_id": request_id, "type": "doc_topicos",
                                      "doc_id": req.get("doc_id", ""), "topicos": texto}
                         except Exception as exc:
@@ -1136,14 +1282,18 @@ def run():
                                     if not (k and isinstance(s.get("state"), str)
                                             and len(s["state"]) <= 8000):
                                         continue
+                                    ex = db.execute("SELECT owner_id FROM ui_state WHERE k=?",
+                                                    (k,)).fetchone()
+                                    if ex and ex[0] != dono:
+                                        continue  # chave de outro dono: não toca
                                     db.execute("""INSERT INTO ui_state
-                                        (k, message_id, slot, state, updated_at)
-                                        VALUES (?, ?, ?, ?, ?)
+                                        (k, message_id, slot, state, updated_at, owner_id)
+                                        VALUES (?, ?, ?, ?, ?, ?)
                                         ON CONFLICT(k) DO UPDATE SET
                                         state=excluded.state, updated_at=excluded.updated_at""",
                                         (k, str(s.get("message_id", ""))[:100],
                                          str(s.get("slot", ""))[:40], s["state"],
-                                         str(s.get("updated_at", agora_iso()))[:48]))
+                                         str(s.get("updated_at", agora_iso()))[:48], dono))
                                     salvos += 1
                                 except Exception:
                                     continue
@@ -1151,7 +1301,8 @@ def run():
                                  "saved": salvos}
                     elif req.get("type") == "ui_state_list":
                         rows = db.execute("SELECT k, message_id, slot, state, updated_at "
-                                          "FROM ui_state ORDER BY updated_at DESC LIMIT 500").fetchall()
+                                          "FROM ui_state WHERE owner_id=? "
+                                          "ORDER BY updated_at DESC LIMIT 500", (dono,)).fetchall()
                         reply = {"request_id": request_id, "type": "ui_state_list",
                                  "states": [{"k": k, "message_id": m, "slot": s,
                                              "state": st, "updated_at": u}
@@ -1162,27 +1313,38 @@ def run():
                         if isinstance(conv, str) and 3 <= len(conv) <= 100:
                             with db:
                                 cur = db.execute("DELETE FROM messages WHERE origin='mobile' "
-                                                 "AND conversation_id=?", (conv,))
+                                                 "AND owner_id=? AND conversation_id=?", (dono, conv))
                                 n = cur.rowcount or 0
-                                db.execute("DELETE FROM ai_requests WHERE conversation_id=?",
-                                           (conv,))
+                                db.execute("DELETE FROM ai_requests WHERE owner_id=? AND conversation_id=?",
+                                           (dono, conv))
                         log.info("conversa esquecida no PC: %s (%d msgs)", conv, n)
                         reply = {"request_id": request_id, "type": "conv_forgotten",
                                  "deleted": n}
                     elif req.get("type") == "mem_list":
-                        rows = db.execute("SELECT key, value, updated_at FROM memories "
-                                          "ORDER BY updated_at DESC LIMIT 100").fetchall()
+                        rows = db.execute("SELECT key, value, updated_at FROM memories WHERE owner_id=? "
+                                          "ORDER BY updated_at DESC LIMIT 100", (dono,)).fetchall()
                         reply = {"request_id": request_id, "type": "mem_list",
                                  "memories": [{"key": k, "value": v, "updated_at": u}
                                               for k, v, u in rows]}
                     elif req.get("type") == "mem_forget":
                         with db:
-                            db.execute("DELETE FROM memories WHERE key=?", (req.get("key", ""),))
+                            db.execute("DELETE FROM memories WHERE owner_id=? AND key=?",
+                                       (dono, req.get("key", "")))
                         reply = {"request_id": request_id, "type": "mem_forgotten",
                                  "key": req.get("key", "")}
                     elif req.get("type") == "ai":
                         res = ai_completa(db, req, cfg)
                         reply = {"request_id": request_id, "type": "ai_done", **res}
+                    elif req.get("type") == "ai_reset":
+                        res = ai_resetar(db, req)
+                        reply = {"request_id": request_id,
+                                 **({"type": "ai_reset_ok", **res} if "ok" in res
+                                    else {"type": "ai_error", **res})}
+                    elif req.get("type") == "ai_continue":
+                        res = ai_continuar(db, req, cfg)
+                        reply = {"request_id": request_id,
+                                 **({"type": "ai_done", **res} if "response_text" in res
+                                    else {"type": "ai_error", **res})}
                     elif req.get("type") == "ai_models":
                         try:
                             reply = {"request_id": request_id, "type": "ai_models",

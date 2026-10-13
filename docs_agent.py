@@ -42,15 +42,19 @@ def docs_dir() -> Path:
     return Path(base) if base else (Path.home() / ".julia-mobile" / "docs")
 
 
+DONO_PADRAO = "local"
+
+
 def criar_tabelas(db) -> None:
     db.execute("""CREATE TABLE IF NOT EXISTS documents (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, ext TEXT NOT NULL,
         size INTEGER NOT NULL, chars INTEGER NOT NULL, chunks INTEGER NOT NULL,
         summary TEXT, topics TEXT, conversation_id TEXT NOT NULL,
-        created_at TEXT NOT NULL
+        created_at TEXT NOT NULL, owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
     db.execute("""CREATE TABLE IF NOT EXISTS doc_chunks (
         doc_id TEXT NOT NULL, idx INTEGER NOT NULL, text TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local',
         PRIMARY KEY (doc_id, idx)
     )""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_docs_conv ON documents(conversation_id, created_at)")
@@ -231,8 +235,9 @@ def dividir_chunks(texto: str) -> list:
 
 
 # ── Persistência ──────────────────────────────────────────────────────
-def salvar_documento(db, nome: str, raw: bytes, conversation_id: str) -> dict:
+def salvar_documento(db, nome: str, raw: bytes, conversation_id: str, owner=DONO_PADRAO) -> dict:
     import uuid
+    owner = (str(owner or "").strip().lower() or DONO_PADRAO)[:40]
     if not isinstance(raw, (bytes, bytearray)) or not raw:
         raise DocErro("Arquivo vazio.", "vazio")
     if len(raw) > MAX_BYTES:
@@ -246,12 +251,12 @@ def salvar_documento(db, nome: str, raw: bytes, conversation_id: str) -> dict:
     chunks = dividir_chunks(texto)
     with db:
         db.execute("""INSERT INTO documents
-            (id, name, ext, size, chars, chunks, conversation_id, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-            (doc_id, base, ext, len(raw), len(texto), len(chunks), conversation_id, agora_iso()))
+            (id, name, ext, size, chars, chunks, conversation_id, created_at, owner_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (doc_id, base, ext, len(raw), len(texto), len(chunks), conversation_id, agora_iso(), owner))
         for idx, ch in enumerate(chunks):
-            db.execute("INSERT INTO doc_chunks (doc_id, idx, text) VALUES (?, ?, ?)",
-                       (doc_id, idx, ch))
+            db.execute("INSERT INTO doc_chunks (doc_id, idx, text, owner_id) VALUES (?, ?, ?, ?)",
+                       (doc_id, idx, ch, owner))
     try:
         pasta = docs_dir()
         pasta.mkdir(parents=True, exist_ok=True)
@@ -263,33 +268,33 @@ def salvar_documento(db, nome: str, raw: bytes, conversation_id: str) -> dict:
             "chunks": len(chunks), "paginas_aprox": max(1, len(texto) // 3000)}
 
 
-def listar_documentos(db, limite: int = 50) -> list:
+def listar_documentos(db, limite: int = 50, owner=DONO_PADRAO) -> list:
     rows = db.execute("""SELECT id, name, ext, size, chars, chunks,
                                 summary IS NOT NULL, conversation_id, created_at
-                         FROM documents ORDER BY created_at DESC LIMIT ?""",
-                      (min(max(int(limite), 1), 200),)).fetchall()
+                         FROM documents WHERE owner_id=? ORDER BY created_at DESC LIMIT ?""",
+                      (owner, min(max(int(limite), 1), 200))).fetchall()
     return [{"doc_id": i, "name": n, "ext": e, "size": s, "chars": c,
              "chunks": k, "tem_resumo": bool(r), "conversation_id": cv,
              "created_at": ca} for i, n, e, s, c, k, r, cv, ca in rows]
 
 
-def obter_texto(db, doc_id: str, limite: int = 60000) -> str:
-    rows = db.execute("SELECT text FROM doc_chunks WHERE doc_id=? ORDER BY idx",
-                      (doc_id,)).fetchall()
+def obter_texto(db, doc_id: str, limite: int = 60000, owner=DONO_PADRAO) -> str:
+    rows = db.execute("SELECT text FROM doc_chunks WHERE doc_id=? AND owner_id=? ORDER BY idx",
+                      (doc_id, owner)).fetchall()
     return "".join(t for (t,) in rows)[:limite]
 
 
-def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4) -> list:
+def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DONO_PADRAO) -> list:
     """Recupera os chunks com maior sobreposição de palavras com a pergunta."""
     toks_q = _tokens(pergunta)
     if not toks_q:
         return []
     if doc_id:
-        rows = db.execute("SELECT doc_id, idx, text FROM doc_chunks WHERE doc_id=?",
-                          (doc_id,)).fetchall()
+        rows = db.execute("SELECT doc_id, idx, text FROM doc_chunks WHERE doc_id=? AND owner_id=?",
+                          (doc_id, owner)).fetchall()
     else:
-        rows = db.execute("SELECT doc_id, idx, text FROM doc_chunks").fetchall()
-    nomes = {r[0]: r[1] for r in db.execute("SELECT id, name FROM documents").fetchall()}
+        rows = db.execute("SELECT doc_id, idx, text FROM doc_chunks WHERE owner_id=?", (owner,)).fetchall()
+    nomes = {r[0]: r[1] for r in db.execute("SELECT id, name FROM documents WHERE owner_id=?", (owner,)).fetchall()}
     scored = []
     for did, idx, txt in rows:
         toks = _tokens(txt)
@@ -312,13 +317,14 @@ def _llm(cfg: dict, sistema: str, usuario: str, max_tokens: int = 800) -> str:
     return res["texto"]
 
 
-def resumir_documento(db, cfg: dict, doc_id: str) -> str:
-    row = db.execute("SELECT summary, name FROM documents WHERE id=?", (doc_id,)).fetchone()
+def resumir_documento(db, cfg: dict, doc_id: str, owner=DONO_PADRAO) -> str:
+    row = db.execute("SELECT summary, name FROM documents WHERE id=? AND owner_id=?",
+                     (doc_id, owner)).fetchone()
     if not row:
         raise DocErro("Documento não encontrado.", "nao_encontrado")
     if row[0]:
         return row[0]
-    texto = obter_texto(db, doc_id)
+    texto = obter_texto(db, doc_id, owner=owner)
     if not texto.strip():
         raise DocErro("Documento sem texto.", "vazio")
     chunks = dividir_chunks(texto)
@@ -342,17 +348,18 @@ def resumir_documento(db, cfg: dict, doc_id: str) -> str:
         final = _llm(cfg, "Junte os resumos parciais num resumo único, organizado com títulos e bullets.",
                       "\n\n---\n\n".join(parciais)[:15000], max_tokens=1000)
     with db:
-        db.execute("UPDATE documents SET summary=? WHERE id=?", (final, doc_id))
+        db.execute("UPDATE documents SET summary=? WHERE id=? AND owner_id=?", (final, doc_id, owner))
     return final
 
 
-def topicos_documento(db, cfg: dict, doc_id: str) -> str:
-    row = db.execute("SELECT topics, name FROM documents WHERE id=?", (doc_id,)).fetchone()
+def topicos_documento(db, cfg: dict, doc_id: str, owner=DONO_PADRAO) -> str:
+    row = db.execute("SELECT topics, name FROM documents WHERE id=? AND owner_id=?",
+                     (doc_id, owner)).fetchone()
     if not row:
         raise DocErro("Documento não encontrado.", "nao_encontrado")
     if row[0]:
         return row[0]
-    texto = obter_texto(db, doc_id, 30000)
+    texto = obter_texto(db, doc_id, 30000, owner)
     try:
         final = _llm(cfg, "Extraia do documento: 1) tópicos principais (bullets), "
                            "2) palavras-chave, 3) datas/números importantes, "
@@ -361,5 +368,5 @@ def topicos_documento(db, cfg: dict, doc_id: str) -> str:
     except Exception as exc:
         raise DocErro(f"A IA falhou: {exc}.", "ia_falhou") from None
     with db:
-        db.execute("UPDATE documents SET topics=? WHERE id=?", (final, doc_id))
+        db.execute("UPDATE documents SET topics=? WHERE id=? AND owner_id=?", (final, doc_id, owner))
     return final

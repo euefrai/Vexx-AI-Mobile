@@ -63,7 +63,10 @@
         <input id="sessionSearch" type="search" placeholder="Buscar conversas…" aria-label="Buscar conversas" autocomplete="off" />
       </div>
 
-      <p class="drawer-caption">CONVERSAS <span id="sessionCount">0</span></p>
+      <div class="drawer-caprow">
+        <p class="drawer-caption">CONVERSAS <span id="sessionCount">0</span></p>
+        <button class="mini-toggle" id="archivedToggle" type="button" aria-pressed="false" title="Mostrar arquivadas">📦</button>
+      </div>
       <div class="session-list" id="sessionList" role="listbox" aria-label="Sessões de chat"></div>
 
       <p class="drawer-caption">NAVEGAR</p>
@@ -197,6 +200,16 @@
           <span>Fatos extraídos das conversas. Toque no ✕ para esquecer.</span>
           <div class="memory-list" id="memoryList"></div>
           <button id="memoryRefresh" class="subtle-button" type="button">↻ Atualizar memória</button>
+        </div>
+
+        <h2 class="section-caption">Exportar conversa atual</h2>
+        <div class="sync-card">
+          <strong>Leve com você</strong>
+          <span>Arquivo gerado no celular, sem servidor.</span>
+          <div class="export-row">
+            <button id="exportMd" class="subtle-button" type="button">⬇ Markdown</button>
+            <button id="exportJson" class="subtle-button" type="button">⬇ JSON</button>
+          </div>
         </div>
 
         <h2 class="section-caption">Sincronização <span class="pending-badge" id="pendingCount">0 pendentes</span></h2>

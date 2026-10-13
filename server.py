@@ -48,7 +48,8 @@ def signer():
     return URLSafeTimedSerializer(secret, salt="julia-mobile-session-v1")
 
 
-def verify_session(request: Request) -> str:
+def sessao_usuario(request: Request) -> str:
+    """Dono autenticado da sessão (base do isolamento multiusuário)."""
     token = request.cookies.get("julia_session")
     if not token:
         raise HTTPException(status_code=401, detail="Faça login")
@@ -58,7 +59,13 @@ def verify_session(request: Request) -> str:
         raise HTTPException(status_code=401, detail="Sessão expirada") from None
     if data.get("user") != config()["user"]:
         raise HTTPException(status_code=401, detail="Sessão inválida")
-    return token
+    return str(data.get("user") or "")
+
+
+def verify_session(request: Request) -> str:
+    sessao_usuario(request)
+    token = request.cookies.get("julia_session")
+    return token or ""
 
 
 def csrf_value(token: str) -> str:
@@ -225,7 +232,8 @@ def status(request: Request):
 @app.post("/api/sync")
 async def sync_messages(request: Request, body: SyncBody):
     require_csrf(request)
-    result = await relay.exchange({"type": "sync", "messages": [m.model_dump() for m in body.messages]})
+    result = await relay.exchange({"type": "sync", "owner": sessao_usuario(request),
+                                   "messages": [m.model_dump() for m in body.messages]})
     if result.get("type") != "ack":
         raise HTTPException(503, "Confirmação do PC não recebida")
     confirmed = set(result.get("confirmed_ids", []))
@@ -236,7 +244,7 @@ async def sync_messages(request: Request, body: SyncBody):
 @app.get("/api/messages")
 async def messages(request: Request, conversation_id: str = ""):
     verify_session(request)
-    result = await relay.exchange({"type": "list", "limit": 200})
+    result = await relay.exchange({"type": "list", "owner": sessao_usuario(request), "limit": 200})
     if result.get("type") != "history":
         raise HTTPException(503, "Histórico não disponível")
     msgs = result.get("messages", [])[:200]
@@ -248,7 +256,8 @@ async def messages(request: Request, conversation_id: str = ""):
 @app.get("/api/conversations")
 async def conversations(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "conversations", "limit": 100}, timeout=20.0)
+    result = await relay.exchange({"type": "conversations", "owner": sessao_usuario(request),
+                                   "limit": 100}, timeout=20.0)
     if result.get("type") != "conversations":
         raise HTTPException(503, "Sessões indisponíveis")
     return {"conversations": result.get("conversations", [])[:100]}
@@ -271,7 +280,8 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
     import base64 as _b64
     conv = conversation_id if 3 <= len(conversation_id) <= 100 else "geral"
     result = await relay.exchange(
-        {"type": "doc_upload", "name": (file.filename or "arquivo")[:120],
+        {"type": "doc_upload", "owner": sessao_usuario(request),
+         "name": (file.filename or "arquivo")[:120],
          "conversation_id": conv,
          "data_b64": _b64.b64encode(raw).decode("ascii")}, timeout=90.0)
     if result.get("type") == "doc_error":
@@ -284,7 +294,8 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
 @app.get("/api/docs")
 async def docs_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "doc_list", "limit": 50}, timeout=20.0)
+    result = await relay.exchange({"type": "doc_list", "owner": sessao_usuario(request),
+                                   "limit": 50}, timeout=20.0)
     if result.get("type") != "doc_list":
         raise HTTPException(503, "Documentos indisponíveis")
     return {"documents": result.get("documents", [])[:50]}
@@ -293,7 +304,8 @@ async def docs_list(request: Request):
 @app.post("/api/docs/resumo")
 async def docs_resumo(request: Request, body: DocAsk):
     require_csrf(request)
-    result = await relay.exchange({"type": "doc_resumo", "doc_id": body.doc_id}, timeout=180.0)
+    result = await relay.exchange({"type": "doc_resumo", "owner": sessao_usuario(request),
+                                   "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
         raise HTTPException(503, result.get("error", "Falha ao resumir"))
     if result.get("type") != "doc_resumo":
@@ -304,7 +316,8 @@ async def docs_resumo(request: Request, body: DocAsk):
 @app.post("/api/docs/topicos")
 async def docs_topicos(request: Request, body: DocAsk):
     require_csrf(request)
-    result = await relay.exchange({"type": "doc_topicos", "doc_id": body.doc_id}, timeout=180.0)
+    result = await relay.exchange({"type": "doc_topicos", "owner": sessao_usuario(request),
+                                   "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
         raise HTTPException(503, result.get("error", "Falha ao extrair tópicos"))
     if result.get("type") != "doc_topicos":
@@ -341,7 +354,8 @@ async def ui_state_save(request: Request, body: UiStateBody):
                       "state": bruto, "updated_at": s.updated_at})
     if not itens:
         raise HTTPException(422, "Nenhum estado válido")
-    result = await relay.exchange({"type": "ui_state_save", "states": itens}, timeout=20.0)
+    result = await relay.exchange({"type": "ui_state_save", "owner": sessao_usuario(request),
+                                   "states": itens}, timeout=20.0)
     if result.get("type") != "ui_state_saved":
         raise HTTPException(503, "PC não confirmou os estados")
     return {"saved": result.get("saved", 0)}
@@ -350,7 +364,8 @@ async def ui_state_save(request: Request, body: UiStateBody):
 @app.get("/api/ui-state")
 async def ui_state_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "ui_state_list"}, timeout=20.0)
+    result = await relay.exchange({"type": "ui_state_list", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
     if result.get("type") != "ui_state_list":
         raise HTTPException(503, "Estados indisponíveis")
     import json as _json
@@ -372,7 +387,8 @@ async def conversation_forget(request: Request, conversation_id: str):
     require_csrf(request)
     if not re.fullmatch(r"[A-Za-z0-9_-]{3,100}", conversation_id):
         raise HTTPException(422, "Conversa inválida")
-    result = await relay.exchange({"type": "conv_forget", "conversation_id": conversation_id}, timeout=20.0)
+    result = await relay.exchange({"type": "conv_forget", "owner": sessao_usuario(request),
+                                   "conversation_id": conversation_id}, timeout=20.0)
     if result.get("type") != "conv_forgotten":
         raise HTTPException(503, "PC não confirmou a exclusão")
     return {"ok": True, "deleted": result.get("deleted", 0)}
@@ -381,7 +397,8 @@ async def conversation_forget(request: Request, conversation_id: str):
 @app.get("/api/memories")
 async def memories_list(request: Request):
     verify_session(request)
-    result = await relay.exchange({"type": "mem_list"}, timeout=20.0)
+    result = await relay.exchange({"type": "mem_list", "owner": sessao_usuario(request)},
+                                  timeout=20.0)
     if result.get("type") != "mem_list":
         raise HTTPException(503, "Memória indisponível")
     return {"memories": result.get("memories", [])[:100]}
@@ -392,7 +409,8 @@ async def memories_forget(request: Request, key: str):
     require_csrf(request)
     if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
         raise HTTPException(422, "Chave inválida")
-    result = await relay.exchange({"type": "mem_forget", "key": key}, timeout=20.0)
+    result = await relay.exchange({"type": "mem_forget", "owner": sessao_usuario(request),
+                                   "key": key}, timeout=20.0)
     if result.get("type") != "mem_forgotten":
         raise HTTPException(503, "Não foi possível esquecer")
     return {"ok": True, "key": key}
@@ -402,13 +420,50 @@ async def memories_forget(request: Request, key: str):
 async def ai_complete(request: Request, body: AIRequest):
     """Resposta completa (sem streaming). Idempotente por message_id no agente."""
     require_csrf(request)
-    result = await relay.exchange({"type": "ai", "message_id": body.message_id,
+    result = await relay.exchange({"type": "ai", "owner": sessao_usuario(request),
+                                   "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
                                    "model": body.model, "memory": body.memory}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise HTTPException(503, result.get("error", "IA indisponível"))
         raise HTTPException(503, "Resposta da IA não recebida")
+    return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
+            "model": result.get("model", "")}
+
+
+class AIContinue(BaseModel):
+    message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
+    conversation_id: str = Field(min_length=3, max_length=100)
+    model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
+
+
+@app.post("/api/ai/regenerate")
+async def ai_regenerate(request: Request, body: AIContinue):
+    """Apaga resposta anterior (PC + idempotência) para gerar de novo."""
+    require_csrf(request)
+    result = await relay.exchange({"type": "ai_reset", "owner": sessao_usuario(request),
+                                   "message_id": body.message_id,
+                                   "conversation_id": body.conversation_id}, timeout=20.0)
+    if result.get("type") == "ai_error":
+        raise HTTPException(503, result.get("error", "Falha ao reiniciar"))
+    if result.get("type") != "ai_reset_ok":
+        raise HTTPException(503, "PC não confirmou")
+    return {"ok": True, "reply_id": result.get("reply_id")}
+
+
+@app.post("/api/ai/continue")
+async def ai_continue(request: Request, body: AIContinue):
+    """Continua a resposta anterior, anexando ao mesmo reply_id."""
+    require_csrf(request)
+    result = await relay.exchange({"type": "ai_continue", "owner": sessao_usuario(request),
+                                   "message_id": body.message_id,
+                                   "conversation_id": body.conversation_id,
+                                   "model": body.model}, timeout=180.0)
+    if result.get("type") == "ai_error":
+        raise HTTPException(503, result.get("error", "Falha ao continuar"))
+    if result.get("type") != "ai_done" or "response_text" not in result:
+        raise HTTPException(503, "Continuação não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
             "model": result.get("model", "")}
 
@@ -463,7 +518,8 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     stream_id = uuid.uuid4().hex
     fila: asyncio.Queue = asyncio.Queue()
     relay.streams[stream_id] = fila
-    payload = {"type": "ai_stream", "message_id": message_id,
+    payload = {"type": "ai_stream", "owner": sessao_usuario(request),
+               "message_id": message_id,
                "conversation_id": conversation_id, "model": model[:120],
                "memory": "1" if memory != "0" else "0"}
 
