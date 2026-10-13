@@ -189,6 +189,49 @@ def test_relay_ui_state_via_agente_fake():
             assert sem_auth.status_code in (401, 403)
 
 
+def test_conv_forget_no_agente(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'fg.sqlite3')
+    pc_agent.persist_messages(db, [
+        {'id': 'fg-user-01', 'origin': 'mobile', 'role': 'user', 'text': 'oi',
+         'created_at': '2026-10-13T10:00:00.000Z', 'conversation_id': 'conv-esquecer'},
+        {'id': 'fg-user-02', 'origin': 'mobile', 'role': 'user', 'text': 'outra',
+         'created_at': '2026-10-13T10:01:00.000Z', 'conversation_id': 'conv-fica'}])
+    with db:
+        cur = db.execute("DELETE FROM messages WHERE origin='mobile' AND conversation_id=?",
+                         ('conv-esquecer',))
+        assert cur.rowcount == 1
+    restam = [m['conversation_id'] for m in pc_agent.list_messages(db)]
+    assert restam == ['conv-fica']
+    db.close()
+
+
+def test_relay_conversation_forget():
+    import threading as _th
+    with TestClient(server.app) as client:
+        csrf = _login(client)
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            out = {}
+
+            def deleta():
+                out['d'] = client.delete('/api/conversations/conv-esquecer',
+                                         headers={'X-CSRF-Token': csrf})
+
+            t = _th.Thread(target=deleta)
+            t.start()
+            req = ws.receive_json()
+            assert req['type'] == 'conv_forget' and req['conversation_id'] == 'conv-esquecer'
+            ws.send_json({'request_id': req['request_id'], 'type': 'conv_forgotten', 'deleted': 3})
+            t.join(timeout=8)
+            assert out['d'].json() == {'ok': True, 'deleted': 3}
+            ruim = client.delete('/api/conversations/!!!', headers={'X-CSRF-Token': csrf})
+            assert ruim.status_code == 422
+            curto = client.delete('/api/conversations/ab', headers={'X-CSRF-Token': csrf})
+            assert curto.status_code == 422
+            sem = client.delete('/api/conversations/conv-esquecer')
+            assert sem.status_code in (401, 403)
+
+
 def test_xss_em_strings_nao_executa():
     msg = {"version": "julia-ui-message/v1", "blocks": [
         {"type": "ui", "component": "cards", "props": {"items": [

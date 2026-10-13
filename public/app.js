@@ -215,14 +215,29 @@ async function metaSet(k, v) {
     await d;
   } catch (_) {}
 }
+/* ----- Tombstones: conversa excluída não ressuscita no próximo sync ----- */
+let deletedConvs = new Set();
+async function loadTombstones() {
+  deletedConvs = new Set();
+  if (!db) return;
+  try {
+    const rows = await reqPromise(db.transaction(META, 'readonly').objectStore(META).getAll());
+    rows.forEach(r => { if (r && typeof r.k === 'string' && r.k.indexOf('deleted:') === 0) deletedConvs.add(r.k.slice(8)); });
+  } catch (_) {}
+}
+const isDeleted = (id) => deletedConvs.has(id);
+async function tombstone(convId) {
+  deletedConvs.add(convId);
+  await metaSet('deleted:' + convId, new Date().toISOString());
+}
 function setActiveConversation(id) {
   activeConversation = id;
   lsSet('julia-active-conversation', id);
   metaSet('active-conversation', id);
 }
 async function resolveActiveConversation() {
-  // 1) localStorage, se ainda apontar para sessão existente
-  const sessions = await allSessions();
+  // 1) localStorage, se ainda apontar para sessão existente (e não excluída)
+  const sessions = (await allSessions()).filter(s => !isDeleted(s.id));
   const ids = new Set(sessions.map(s => s.id));
   const viaLs = lsGet('julia-active-conversation');
   if (viaLs && ids.has(viaLs)) return viaLs;
@@ -230,7 +245,7 @@ async function resolveActiveConversation() {
   const viaMeta = await metaGet('active-conversation');
   if (viaMeta && ids.has(viaMeta)) { lsSet('julia-active-conversation', viaMeta); return viaMeta; }
   // 3) sessão mais recente COM mensagens (cura "cada abertura vira chat novo")
-  const all = await allMessages();
+  const all = (await allMessages()).filter(m => !isDeleted(m.conversation_id));
   const withMsgs = new Set(all.map(m => m.conversation_id));
   const ranked = sessions.filter(s => withMsgs.has(s.id))
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
@@ -252,6 +267,7 @@ async function healSessions() {
     const counts = {};
     all.forEach(m => { counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
     for (const s of sessions) {
+      if (isDeleted(s.id)) continue;
       if (s.title === 'Nova conversa' && firstByConv[s.id]) {
         s.title = titleFrom(firstByConv[s.id]); s.updated_at = new Date().toISOString();
         await putSession(s);
@@ -561,14 +577,14 @@ async function renderSessions(filter) {
   const q = (filter || '').toLowerCase();
   const all = await allMessages();
   const counts = {};
-  all.forEach(m => { counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
+  all.forEach(m => { if (!isDeleted(m.conversation_id)) counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
   sessionsCache = await allSessions();
   if (!sessionsCache.find(s => s.id === activeConversation)) await ensureSession(activeConversation);
   sessionsCache = await allSessions();
-  $('sessionCount').textContent = String(sessionsCache.length);
   box.replaceChildren();
-  // Oculta sessões vazias (não é um chat de verdade ainda) — exceto a ativa.
-  sessionsCache.filter(s => (!q || (s.title || '').toLowerCase().includes(q))
+  // Oculta excluídas e sessões vazias (não é um chat de verdade ainda) — exceto a ativa.
+  sessionsCache.filter(s => !isDeleted(s.id)
+    && (!q || (s.title || '').toLowerCase().includes(q))
     && ((counts[s.id] || 0) > 0 || s.id === activeConversation)).forEach(s => {
     const b = document.createElement('div');
     b.className = 'session-item' + (s.id === activeConversation ? ' active' : '');
@@ -588,16 +604,23 @@ async function renderSessions(filter) {
     const x = document.createElement('button'); x.type = 'button'; x.className = 'session-x'; x.title = 'Excluir sessão'; x.setAttribute('aria-label', 'Excluir ' + (s.title || 'sessão'));
     x.innerHTML = '<svg class="icon"><use href="#i-trash"/></svg>';
     x.addEventListener('click', async () => {
-      if (!window.confirm('Excluir esta conversa do celular' + (pcOnline ? ' (cópia do PC permanece)?' : '?'))) return;
+      if (!window.confirm('Excluir esta conversa de verdade (celular e PC)?')) return;
       await deleteMessagesOf(s.id);
       await delSession(s.id);
+      await tombstone(s.id);
+      if (pcOnline && authenticated) {
+        try { await api('/api/conversations/' + encodeURIComponent(s.id), { method: 'DELETE' }); }
+        catch (_) { /* tombstone local já garante; PC limpa no próximo sync online */ }
+      }
       if (activeConversation === s.id) { setActiveConversation(newId()); await ensureSession(activeConversation); }
       await renderSessions($('sessionSearch').value);
       await renderMessages();
+      showToast('Conversa excluída');
     });
     b.appendChild(t); b.appendChild(x);
     box.appendChild(b);
   });
+  $('sessionCount').textContent = String(box.children.length);
 }
 
 async function renderTimeline() {
@@ -605,7 +628,7 @@ async function renderTimeline() {
   if (!tl) return;
   const all = await allMessages();
   tl.replaceChildren();
-  const items = all.slice(-6).reverse();
+  const items = all.filter(m => !isDeleted(m.conversation_id)).slice(-6).reverse();
   if (!items.length) {
     tl.innerHTML = '<div class="timeline-item"><div class="timeline-icon"><svg class="icon"><use href="#i-sparkle"/></svg></div><div><strong>Pronto para explorar</strong><p>Envie a primeira mensagem no chat.</p><small>Agora · local</small></div></div>';
     return;
@@ -714,7 +737,9 @@ async function syncAndRefresh() {
     const adds = [];
     for (const m of remote.messages || []) {
       if (!m || typeof m.id !== 'string' || typeof m.text !== 'string' || m.origin !== 'mobile') continue;
-      adds.push({ id: m.id, conversation_id: m.conversation_id || activeConversation, origin: 'mobile', role: m.role === 'assistant' ? 'assistant' : 'user', text: m.text, created_at: m.created_at, status: 'synced', model: m.model || '' });
+      const cid = m.conversation_id || activeConversation;
+      if (isDeleted(cid)) continue; // excluída: não ressuscita
+      adds.push({ id: m.id, conversation_id: cid, origin: 'mobile', role: m.role === 'assistant' ? 'assistant' : 'user', text: m.text, created_at: m.created_at, status: 'synced', model: m.model || '' });
     }
     if (adds.length) {
       await storeMessages(adds);
@@ -1144,6 +1169,7 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
   setDrawer(window.innerWidth >= 900);
   try {
     db = await openDb();
+    await loadTombstones();
     await migrateV1();
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');

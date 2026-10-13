@@ -1156,6 +1156,19 @@ def run():
                                  "states": [{"k": k, "message_id": m, "slot": s,
                                              "state": st, "updated_at": u}
                                             for k, m, s, st, u in rows]}
+                    elif req.get("type") == "conv_forget":
+                        conv = req.get("conversation_id", "")
+                        n = 0
+                        if isinstance(conv, str) and 3 <= len(conv) <= 100:
+                            with db:
+                                cur = db.execute("DELETE FROM messages WHERE origin='mobile' "
+                                                 "AND conversation_id=?", (conv,))
+                                n = cur.rowcount or 0
+                                db.execute("DELETE FROM ai_requests WHERE conversation_id=?",
+                                           (conv,))
+                        log.info("conversa esquecida no PC: %s (%d msgs)", conv, n)
+                        reply = {"request_id": request_id, "type": "conv_forgotten",
+                                 "deleted": n}
                     elif req.get("type") == "mem_list":
                         rows = db.execute("SELECT key, value, updated_at FROM memories "
                                           "ORDER BY updated_at DESC LIMIT 100").fetchall()

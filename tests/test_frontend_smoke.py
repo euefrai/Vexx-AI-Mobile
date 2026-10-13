@@ -140,7 +140,12 @@ def test_sessoes_sem_fragmentacao():
         s = linha.strip()
         if s.startswith('activeConversation = newId()'):
             raise AssertionError('atribuição direta cria chats fantasmas: ' + s)
-    assert "openDb" in texto and ", 3)" in texto  # DB v3 tem store META
+    assert "openDb" in texto and ", 3)" in texto  # DB v3 tem stores META/UISTATE
+    # Excluída não ressuscita: tombstone filtra merge, listas, contas e resolve.
+    for fn in ('loadTombstones', 'tombstone(', 'isDeleted(', "deleted:'"):
+        assert fn in texto, fn
+    assert 'conv_forget' in (RAIZ / 'pc_agent.py').read_text(encoding='utf-8')
+    assert 'conv_forget' in (RAIZ / 'server.py').read_text(encoding='utf-8')
 
 
 def test_render_markdown_no_node():

@@ -366,6 +366,18 @@ async def ui_state_list(request: Request):
     return {"states": out}
 
 
+@app.delete("/api/conversations/{conversation_id}")
+async def conversation_forget(request: Request, conversation_id: str):
+    """Apaga conversa do SQLite do PC (mensagens + pedidos de IA). Tombstone fica no celular."""
+    require_csrf(request)
+    if not re.fullmatch(r"[A-Za-z0-9_-]{3,100}", conversation_id):
+        raise HTTPException(422, "Conversa inválida")
+    result = await relay.exchange({"type": "conv_forget", "conversation_id": conversation_id}, timeout=20.0)
+    if result.get("type") != "conv_forgotten":
+        raise HTTPException(503, "PC não confirmou a exclusão")
+    return {"ok": True, "deleted": result.get("deleted", 0)}
+
+
 @app.get("/api/memories")
 async def memories_list(request: Request):
     verify_session(request)
