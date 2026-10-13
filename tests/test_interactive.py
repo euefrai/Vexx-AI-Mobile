@@ -152,6 +152,93 @@ def test_ai_completa_nao_sintetiza_quando_ja_tem_fence(monkeypatch):
     db.close()
 
 
+QUIZ_CODIGO = '''
+def quiz_python():
+    print("=== QUIZ DE PYTHON ===\\n")
+    pontuacao = 0
+
+    # Pergunta 1
+    print("1. Qual é o resultado de 5 // 2?")
+    print("a) 2.5  b) 2  c) 3  d) 2.0")
+    resp = input("Sua resposta: ").strip().lower()
+    if resp == "b":
+        pontuacao += 1
+
+    # Pergunta 2
+    print("2. Qual define lista vazia?")
+    print("a) []")
+    print("b) {}")
+    print("c) ()")
+    print("d) x")
+    resp = input("Sua resposta: ").strip().lower()
+    if resp == 'c':
+        pontuacao += 1
+'''
+
+QUIZ_TEXTO = '''Quiz de Python
+Pergunta 1: Qual será a saída de print(2 + 3 * 4)?
+a) 20
+b) 14
+c) 12
+d) 10
+Resposta: b
+
+Pergunta 2: Como se define uma função?
+a) function f():
+b) def f():
+Resposta correta: b
+'''
+
+
+def _valida_fence(fence, componente):
+    import json as _json
+    assert fence.startswith('\n\n```jdui\n') and fence.endswith('\n```')
+    obj = _json.loads(fence.split('```jdui\n', 1)[1].rsplit('\n```', 1)[0])
+    import jdui as _j
+    ok, norm, _ = _j.validar_mensagem(obj)
+    assert ok and norm['blocks'][0]['component'] == componente
+    return norm
+
+
+def test_extracao_deterministica_quiz_codigo():
+    fence = pc_agent.extrair_quiz_codigo(QUIZ_CODIGO)
+    norm = _valida_fence(fence, 'quiz')
+    qs = norm['blocks'][0]['props']['questions']
+    assert len(qs) == 2
+    assert qs[0]['answer'] == 1 and qs[0]['options'][1] == '2'
+    assert qs[1]['answer'] == 2 and len(qs[1]['options']) == 4
+
+
+def test_extracao_deterministica_quiz_texto():
+    fence = pc_agent.extrair_quiz_texto(QUIZ_TEXTO)
+    norm = _valida_fence(fence, 'quiz')
+    qs = norm['blocks'][0]['props']['questions']
+    assert len(qs) == 2
+    assert qs[0]['answer'] == 1
+    assert qs[1]['answer'] == 1 and qs[1]['options'] == ['function f():', 'def f():']
+    # código não contamina o parser de texto
+    assert pc_agent.extrair_quiz_texto(QUIZ_CODIGO) == ''
+
+
+def test_sintese_sem_llm_quando_deterministico():
+    import hermes_bridge
+    chamadas = []
+    real = hermes_bridge.chat_complete
+    try:
+        hermes_bridge.chat_complete = lambda *a, **k: (chamadas.append(1), {"texto": "x"})[1]
+        assert pc_agent.sintetizar_calculadora('crie uma calculadora de IMC').count('imc') >= 1
+        assert 'basic' in pc_agent.sintetizar_calculadora('calculadora simples')
+        fence = pc_agent.sintetizar_jdui({}, 'quiz', 'crie um quiz', QUIZ_CODIGO)
+        assert fence.startswith('\n\n```jdui\n')
+        assert chamadas == []  # zero chamadas LLM no caminho determinístico
+        itens = pc_agent.extrair_checklist('- Estudar Python\ntexto solto sem bullet')
+        assert itens == ''
+        ok = pc_agent.extrair_checklist('- Estudar Python\n- Fazer exercícios\n- Revisar')
+        assert 'Estudar Python' in ok
+    finally:
+        hermes_bridge.chat_complete = real
+
+
 def test_imagem_garantida_no_texto():
     user = 'me mostre uma imagem do tom do desenho tom and jerry'
     termo = pc_agent.intencao_imagem(user)

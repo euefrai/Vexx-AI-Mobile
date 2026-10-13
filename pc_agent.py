@@ -541,7 +541,172 @@ JDUI_SINTETIZAR = {
 }
 
 
+def _limpa_opcao(s: str) -> str:
+    s = re.sub(r"\s+", " ", (s or "").replace("\\n", " ").strip(" \t\"'")).strip()
+    return s[:120]
+
+
+def _indice_resposta(letras: list, letra) -> int:
+    try:
+        return letras.index((letra or "").lower())
+    except ValueError:
+        return -1
+
+
+def _opcoes_inline(t: str) -> list:
+    """Opções 'a) x  b) y' na mesma linha. Retorna [(letra, texto)]."""
+    return [(l.lower(), _limpa_opcao(x))
+            for l, x in re.findall(r"\b([a-dA-D])[.)]\s*(.+?)(?=\s*\b[a-dA-D][.)]\s*|\s*$)", t)]
+
+
+def _fence_quiz(questions: list) -> str:
+    ok, norm, _ = jdui.validar_mensagem(
+        {"version": jdui.VERSION, "blocks": [
+            {"type": "ui", "component": "quiz",
+             "props": {"title": "Quiz", "questions": questions[:6]}}]})
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
+def extrair_quiz_codigo(texto: str) -> str:
+    """Quiz em código Python terminal (print pergunta/opções + if resposta)."""
+    segmentos = re.split(r"#\s*[Pp]ergunta\s*\d+", texto or "")
+    questions = []
+    for seg in segmentos[1:]:
+        prints = re.findall(r'print\(\s*"((?:[^"\\]|\\.)*)"\s*\)', seg)
+        if not prints:
+            prints = re.findall(r"print\(\s*'((?:[^'\\]|\\.)*)'\s*\)", seg)
+        corte = re.search(r"\bresposta\s*=\s*input|\binput\s*\(|if\s+\w+\s*==", seg)
+        regiao = seg[:corte.start()] if corte else seg
+        prints_reg = re.findall(r'print\(\s*"((?:[^"\\]|\\.)*)"\s*\)', regiao) or \
+            re.findall(r"print\(\s*'((?:[^'\\]|\\.)*)'\s*\)", regiao)
+        q, pares = "", []
+        for p in prints_reg:
+            p = p.replace("\\n", " ").replace('\\"', '"')
+            if not q:
+                m = re.match(r"\s*\d+[.)]\s*(.+)", p, re.S)
+                cand = _limpa_opcao(m.group(1) if m else p)
+                if len(cand) >= 8 and "===" not in cand:
+                    q = cand
+                    continue
+            pares.extend(_opcoes_inline(p))
+        if len(pares) < 2:  # opções podem estar no mesmo print da pergunta
+            juntos = " ".join(prints_reg)
+            pares = _opcoes_inline(juntos)
+        letras = [l for l, _ in pares]
+        textos = [_limpa_opcao(t) or t.strip() for _, t in pares][:6]
+        m = re.search(r'if\s+\w+\s*==\s*["\']([a-dA-D])["\']', seg)
+        ans = _indice_resposta(letras, m.group(1) if m else "")
+        if q and len(textos) >= 2 and 0 <= ans < len(textos):
+            questions.append({"q": q[:300], "options": textos,
+                              "answer": ans, "explain": ""})
+        if len(questions) >= 6:
+            break
+    return _fence_quiz(questions) if questions else ""
+
+
+def extrair_quiz_texto(texto: str) -> str:
+    """Quiz em texto corrido (Pergunta N + a) b) c) d) + Resposta: x)."""
+    partes = re.split(r"(?im)^\s*(?:\*\*?)?\s*pergunta\s*\d+\s*[:.\-]?\s*(?:\*\*?)?", texto or "")
+    questions = []
+    for seg in partes[1:]:
+        seg = seg.strip()
+        if "print(" in seg and "input(" in seg:
+            continue  # código Python: trabalho do extrair_quiz_codigo
+        corpo = re.sub(r"(?s)```.*?```", " ", seg)
+        pares = []
+        for linha in corpo.split("\n"):
+            m = re.match(r"\s*([a-dA-D])[.)]\s*(.+?)\s*$", linha)
+            if m and len(_limpa_opcao(m.group(2))) >= 1:
+                pares.append((m.group(1).lower(), _limpa_opcao(m.group(2))))
+        if len(pares) < 2:
+            pares = [(l, t) for l, t in _opcoes_inline(" " + corpo) if t]
+        # pergunta = texto antes da primeira opção (sem code fence)
+        mq = re.search(r"\b[a-dA-D][.)]\s", seg)
+        qpart = re.sub(r"(?s)```.*?```", " ", seg[:mq.start()] if mq else seg)
+        q = _limpa_opcao(re.sub(r"^[\s*#:\-–—]+", "", qpart))[:300]
+        letras = [l for l, _ in pares]
+        textos = [t for _, t in pares][:6]
+        m = re.search(r"(?i)(?:resposta\s*(?:certa|correta)?|certa|gabarito)\s*[:\-]?\s*\(?([a-dA-D])\)?",
+                      seg)
+        ans = _indice_resposta(letras, m.group(1) if m else "")
+        if q and len(textos) >= 2 and 0 <= ans < len(textos):
+            questions.append({"q": q, "options": textos, "answer": ans, "explain": ""})
+        if len(questions) >= 6:
+            break
+    return _fence_quiz(questions) if questions else ""
+
+
+def sintetizar_calculadora(texto_usuario: str) -> str:
+    """Calculadora não precisa de LLM: o kind sai do pedido. 100% confiável."""
+    t = (texto_usuario or "").lower()
+    if any(k in t for k in ("imc", "massa corporal", "peso", "altura")):
+        kind = "imc"
+    elif any(k in t for k in ("porcent", "%", "desconto", "aumento", "taxa")):
+        kind = "porcentagem"
+    elif any(k in t for k in ("juros", "montante", "rende", "compost")):
+        kind = "juros"
+    else:
+        kind = "basic"
+    ok, norm, _ = jdui.validar_mensagem(
+        {"version": jdui.VERSION, "blocks": [
+            {"type": "ui", "component": "calculator", "props": {"kind": kind}}]})
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
+def extrair_checklist(texto_resposta: str) -> str:
+    """Itens em bullets da resposta viram checklist (sem LLM)."""
+    itens = []
+    for linha in (texto_resposta or "").split("\n"):
+        if re.match(r"\s*([a-dA-D])[.)]\s", linha):
+            continue  # opção de quiz, não item
+        m = re.match(r"\s*(?:[-*•‣]|(?:\d+[.)]))\s+(.{3,120}?)\s*$", linha)
+        if m:
+            txt = _limpa_opcao(m.group(1))
+            if txt and txt not in itens:
+                itens.append(txt)
+        if len(itens) >= 20:
+            break
+    if len(itens) < 2:
+        return ""
+    ok, norm, _ = jdui.validar_mensagem(
+        {"version": jdui.VERSION, "blocks": [
+            {"type": "ui", "component": "checklist",
+             "props": {"title": "Checklist", "items": itens}}]})
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
 def sintetizar_jdui(cfg: dict, componente: str, texto_usuario: str, texto_resposta: str) -> str:
+    """Garante a interface quando a IA não emitiu o fence.
+
+    Ordem: determinístico (grátis, instantâneo) → conversão via LLM.
+    Retorna o fence pronto ou ''. Nunca levanta exceção.
+    """
+    try:
+        if componente == "calculator":
+            fence = sintetizar_calculadora(texto_usuario)
+            if fence:
+                return fence
+        elif componente == "quiz":
+            fence = extrair_quiz_codigo(texto_resposta) or extrair_quiz_texto(texto_resposta)
+            if fence:
+                log.info("quiz extraído deterministicamente")
+                return fence
+        elif componente == "checklist":
+            fence = extrair_checklist(texto_resposta)
+            if fence:
+                return fence
+    except Exception as exc:
+        log.warning("extração determinística falhou (%s)", type(exc).__name__)
+    return _sintetizar_jdui_llm(cfg, componente, texto_usuario, texto_resposta)
+
+
+def _sintetizar_jdui_llm(cfg: dict, componente: str, texto_usuario: str, texto_resposta: str) -> str:
     """Último recurso: quando a IA não emitiu o fence, converte a resposta em JDUI.
 
     Retorna o fence pronto (com \\n\\n) ou ''. Nunca levanta exceção.
