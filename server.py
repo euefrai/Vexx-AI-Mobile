@@ -235,6 +235,13 @@ def health():
     return {"status": "ok", "configured": is_ready()}
 
 
+@app.get("/api/diag")
+def diag():
+    """Diagnóstico público SEM dados sensíveis: o relay vê o agente?"""
+    return {"pc_online": relay.ws is not None,
+            "commit": os.environ.get("RENDER_GIT_COMMIT", "local")[:12]}
+
+
 def _limite_tentativas(request: Request, chave: str, teto: int, janela: float) -> None:
     source = (request.client.host if request.client else "unknown") + ":" + chave
     agora = time.monotonic()
