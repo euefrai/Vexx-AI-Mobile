@@ -56,6 +56,13 @@
         <button class="icon-button" id="drawerClose" type="button" aria-label="Fechar menu"><svg class="icon"><use href="#i-close"/></svg></button>
       </div>
 
+      <div class="drawer-profile" id="drawerProfile">
+        <div class="profile-avatar">✦</div>
+        <div><strong>Conta</strong><small></small></div>
+        <button class="session-tool" id="drawerLogout" type="button" title="Sair" aria-label="Sair">⏻</button>
+      </div>
+
+      <p class="drawer-caption">PRINCIPAL</p>
       <button class="new-chat-cta" id="newChatCta" type="button"><svg class="icon"><use href="#i-plus"/></svg> Novo chat</button>
 
       <div class="drawer-search">
@@ -69,12 +76,17 @@
       </div>
       <div class="session-list" id="sessionList" role="listbox" aria-label="Sessões de chat"></div>
 
-      <p class="drawer-caption">NAVEGAR</p>
+      <p class="drawer-caption">RECURSOS</p>
       <nav class="drawer-nav" aria-label="Navegação">
         <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Chat <span class="drawer-hint">foco total</span></button>
         <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
         <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
-        <button class="drawer-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg> Ajustes</button>
+        <button class="drawer-item" data-tab="settings" data-scroll="memory" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Memória</button>
+      </nav>
+
+      <p class="drawer-caption">CONTA</p>
+      <nav class="drawer-nav" aria-label="Conta">
+        <button class="drawer-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg> Ajustes e conta</button>
       </nav>
 
       <p class="drawer-caption">DOCUMENTOS <span id="docCount">0</span></p>
@@ -192,13 +204,34 @@
           <p class="intro-copy">Privacidade e preferências.</p>
         </div>
 
-        <div class="profile-card">
-          <div class="profile-avatar">✦</div>
-          <div><strong>Perfil</strong><span id="profileName">Conecte-se para sincronizar</span></div>
+        <div class="profile-card" id="profileCard">
+          <div class="profile-avatar" id="profileAvatar">✦</div>
+          <div><strong id="profileName">Conecte-se para sincronizar</strong><span id="profileUser">@—</span></div>
           <span class="demo-tag" id="profileTag">OFFLINE</span>
         </div>
 
-        <h2 class="section-caption">Memória da Júlia</h2>
+        <h2 class="section-caption">Conta</h2>
+        <div class="sync-card">
+          <strong>Senha e dados</strong>
+          <span>Troque a senha ou apague a conta (apaga tudo, sem volta).</span>
+          <div class="export-row">
+            <button id="changePwBtn" class="subtle-button" type="button">Trocar senha</button>
+            <button id="deleteAccountBtn" class="subtle-button danger-link" type="button">Excluir conta</button>
+          </div>
+          <div id="changePwForm" hidden>
+            <label class="fld" for="pwAtual">Senha atual</label>
+            <input id="pwAtual" type="password" autocomplete="current-password" maxlength="128" />
+            <label class="fld" for="pwNova">Nova senha (8+ caracteres)</label>
+            <input id="pwNova" type="password" autocomplete="new-password" maxlength="128" />
+            <div class="login-error" id="pwError" role="alert"></div>
+            <div class="export-row">
+              <button id="pwSave" class="subtle-button" type="button">Salvar</button>
+              <button id="pwCancel" class="subtle-button" type="button">Cancelar</button>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-caption" id="memoryTitle">Memória da Júlia</h2>
         <div class="sync-card">
           <strong>O que ela aprendeu sobre você</strong>
           <span>Toque em ✎ para corrigir, ✕ para esquecer. Nada é guardado sem rastro.</span>

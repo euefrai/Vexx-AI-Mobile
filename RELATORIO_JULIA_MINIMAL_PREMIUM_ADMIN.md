@@ -1,217 +1,63 @@
-# RELATÓRIO JÚLIA MOBILE 4.1.5 — MINIMAL PREMIUM + AUTH + ADMIN
+# RELATÓRIO 4.1.5 — Minimal Premium UI + Multiuser Auth + Admin Control Center
 
-## 1. Arquivos Modificados
+Data: 2026-10-14. Sem push, sem deploy. Suítes executadas de verdade
+(júlia-mobile: **102 passed**; Studio/spot: **30 passed**).
 
-### Projeto A — Júlia Mobile
-| Arquivo | Alterações |
-|---------|-----------|
-| `julia_auth.py` | + `update_limits(db, ator_uid, alvo_uid, max_ai_hora, max_ia_simult)` para limites por usuário |
-| `julia_auth.py` | + `revogar_sessoes(db, ator_uid, alvo_uid)` — revoga todas as sessões de um usuário |
-| `server.py` | + 9 endpoints admin (`/api/julia/admin/*`) para o relay forwardar ao agente |
-| `pc_agent.py` | + `admin_user_limits` — handler WebSocket para limite de IA |
-| `public/index.html` | + Tela de cadastro (login-switch, campos, convite dinâmico) |
-| `public/app.js` | + Fluxo auth (login/register, IndexedDB session, interceptors, menu conta) |
-| `public/styles.css` | + Minimal premium (tokens, cards, mobile, loading, login-switch) |
+## 1. Arquivos modificados
+- Júlia: `julia_auth.py` (novas funções + correções), `pc_agent.py`
+  (ownership, limites, handlers auth/admin), `server.py` (sessão uid,
+  revogação, conta, admin), `public/{app.js,index.html,styles.css}`
+  (minimal UI, cadastro, perfil, sidebar, cache por conta).
+- Studio: `studio/controle.py` (rotas admin, bootstrap, XSS, polling),
+  `studio/integracoes/julia_mobile.py` (métodos admin, ator studio-local).
 
-### Projeto B — Fajulto Studio
-| Arquivo | Alterações |
-|---------|-----------|
-| `studio/integracoes/julia_mobile.py` | + 12 métodos admin na `GerenciadorJuliaMobile` |
-| `studio/controle.py` | + 17 endpoints API, HTML admin card, JS admin, CSS admin |
+## 2. Arquivos criados
+- Júlia: `tests/test_auth.py` (16), docs atualizadas
+  (`JULIA_AUTH_SYSTEM`, `JULIA_ADMIN_PANEL`, `JULIA_MULTIUSER_SECURITY`,
+  `JULIA_MINIMAL_PREMIUM`, `JULIA_UI_PROGRESS`).
+- Studio: `studio/testes/test_julia_admin_53.py` (5).
 
-## 2. Arquivos Criados
+## 3–4. UX/UI e chat
+FUNCIONAL: tokens, header só com menu/título/novo chat, status em popover,
+IA sem caixa, ações no menu `···` (Copiar/Regenerar/Continuar/Tentar),
+composer sem contador fixo, sugestões só em chat vazio, login com
+mostrar/ocultar senha, sidebar PRINCIPAL/RECURSOS/CONTA.
+AUSENTE (sem botão falso): editar/compartilhar/avaliar mensagens, Estudos,
+Comunidade, KaTeX.
 
-| Arquivo | Propósito |
-|---------|-----------|
-| `docs/JULIA_MINIMAL_PREMIUM.md` | Design system minimal premium |
-| `docs/JULIA_AUTH_SYSTEM.md` | Arquitetura de autenticação multiusuário |
-| `docs/JULIA_ADMIN_PANEL.md` | Painel admin no Fajulto Studio |
-| `docs/JULIA_MULTIUSER_SECURITY.md` | Documento de segurança multiusuário |
-| `docs/JULIA_UI_PROGRESS.md` | Progresso da UI por fase |
-| `RELATORIO_JULIA_MINIMAL_PREMIUM_ADMIN.md` | Este relatório |
+## 5–6. Cadastro e autenticação
+FUNCIONAL: registro real (validação 2 lados, modos fechado/convite/aberto,
+convite hash+atômico+expiração), login unificado (legado + contas),
+sessões `sid` 12h revogáveis, logout com revogação, troca/exclusão de conta,
+rate limit, limites de IA por usuário, bloqueio com efeito real (dados+IA).
+PARCIAL: revogação no relay com TTL 60s (janela documentada); agentes
+antigos sem `sess_revogados` não travam (fallback após 2 timeouts).
 
-## 3. Melhorias de UX/UI
+## 7–8. Painel e integração
+FUNCIONAL: 18 rotas, card com tabs (visão/usuários/convites/pendentes/logs/
+config), bootstrap do proprietário (sem senha padrão), ator `studio-local`,
+XSS escapado, polling 15s só visível. Reutiliza `julia_auth` (stdlib).
 
-| Item | Status |
-|------|--------|
-| Minimal premium (preto, grafite, roxo, violeta) | FUNCIONAL |
-| Header minimal (menu, título truncado, novo chat) | FUNCIONAL |
-| Área de mensagens (tipografia 16px, Markdown, code) | FUNCIONAL |
-| Actions discretas (copy, regenerate, etc. em menu) | FUNCIONAL |
-| Composer flutuante (anexar, expandir, enviar, parar) | FUNCIONAL |
-| Safe-area Android respeitado | FUNCIONAL |
-| Animações 120-240ms | FUNCIONAL |
-| prefers-reduced-motion | FUNCIONAL |
-| Cards apenas para dados estruturados | FUNCIONAL |
+## 9. Migrações
+`owner_id` em 8 tabelas + `users/sessions/invites/reg_requests/audit/config`;
+legado (`local`/usernames) preservado e dobrado para `local`. Sem perda.
 
-## 4. Mudanças no Chat
+## 10–11. Isolamento e segurança
+FUNCIONAL: owner da sessão (nunca do cliente — schemas sem campo),
+enforcement por RPC + checagem de papel em 2 camadas (relay e agente),
+último-admin travado, testes 16–21 do spec passando.
 
-| Item | Status |
-|------|--------|
-| Removida poluição visual (indicadores técnicos fixos) | FUNCIONAL |
-| Modelo visível apenas no popover | FUNCIONAL |
-| Ações rápidas em menu contextual | FUNCIONAL |
-| Status PC/modelo em popover/configurações | FUNCIONAL |
-| Sem saltos de layout | FUNCIONAL |
+## 12–13. Performance e testes
+102 passed (júlia) + 30 (Studio spot incl. regressão `test_julia_mobile_52`).
+Sem frameworks novos. 1 warning benigno de teardown (pré-existente).
 
-## 5. Sistema de Cadastro
+## 14–16. Reprovados, limitações, pendências
+- Reprovados: 0. Corrigidos no ciclo: formato hash scrypt, ator self-guard,
+  config inválida silenciosa, XSS painel, polling 3s, `.work/` no repo.
+- Limitações: sem aparelho físico (UX validada por código); multi-conta no
+  mesmo aparelho exige relogar (reload isolador); Render hiberna (Free);
+  `screen/input` seguem nível-dispositivo.
+- Pendências: testes A–H manuais em navegador real; V4.2 Learning Engine.
 
-| Item | Status |
-|------|--------|
-| Formulário: display, username, senha, confirmar | FUNCIONAL |
-| Código de convite (dinâmico, só quando necessário) | FUNCIONAL |
-| Validação frontend + backend | FUNCIONAL |
-| Username único verificado | FUNCIONAL |
-| Argon2id hash | FUNCIONAL |
-| Rate limiting (5/15min) | FUNCIONAL |
-| Modos: fechado, convite (padrão), aberto | FUNCIONAL |
-| Aprovação prévia configurável | FUNCIONAL |
-
-## 6. Sistema de Autenticação
-
-| Item | Status |
-|------|--------|
-| Registro persistente no SQLite local | FUNCIONAL |
-| Login autenticado | FUNCIONAL |
-| Sessões vinculadas a usuários | FUNCIONAL |
-| Sessões com expiração (24h) | FUNCIONAL |
-| Revogação server-side | FUNCIONAL |
-| Logout real (revogação de sid) | FUNCIONAL |
-| Bloqueio de usuário | FUNCIONAL |
-| Identificadores internos estáveis (u-<hex>) | FUNCIONAL |
-| owner_id do auth, nunca do cliente | FUNCIONAL |
-| Isolamento entre usuários | FUNCIONAL |
-
-## 7. Painel Administrativo
-
-| Item | Status |
-|------|--------|
-| Card no Fajulto Studio (tabs: overview/usuários/convites/pendentes/logs/config) | FUNCIONAL |
-| Visão geral (counts, estado agente, modo cadastro) | FUNCIONAL |
-| Gerenciar usuários (tabela, role/status inline, sessões, excluir) | FUNCIONAL |
-| Criar usuário (admin, credencial inicial) | FUNCIONAL |
-| Convites (criar, revogar, listar) | FUNCIONAL |
-| Cadastros pendentes (aprovar/recusar) | FUNCIONAL |
-| Configuração (modo cadastro, exigir aprovação) | FUNCIONAL |
-| Logs administrativos (audit_log) | FUNCIONAL |
-| Limites de uso por usuário | FUNCIONAL |
-
-## 8. Integração com controle.py
-
-| Item | Status |
-|------|--------|
-| `GerenciadorJuliaMobile` como serviço admin | FUNCIONAL |
-| `_import_julia_auth()` — importa dinamicamente | FUNCIONAL |
-| `_open_admin_db()` — conexão + criar_tabelas + migrar | FUNCIONAL |
-| 17 endpoints REST em `do_POST` | FUNCIONAL |
-| HTML + JS + CSS no PAGINA template | FUNCIONAL |
-| Auto-refresh a cada 3s | FUNCIONAL |
-
-## 9. Migrações SQLite
-
-| Item | Status |
-|------|--------|
-| Tabela `users` (uid, username, display, hash, role, status, limites) | FUNCIONAL |
-| Tabela `user_sessions` (sid, uid, expira_em, revogada) | FUNCIONAL |
-| Tabela `reg_requests` (pedidos pendentes) | FUNCIONAL |
-| Tabela `invites` (code_hash, usos, revogado) | FUNCIONAL |
-| Tabela `audit_log` (ts, ator, acao, alvo, detalhe) | FUNCIONAL |
-| Tabela `app_config` (modo_cadastro, exigir_aprovacao) | FUNCIONAL |
-| Tabela `user_limits` (max_ai_hora, max_ia_simult) | FUNCIONAL |
-| Migração legada (owner_id → DONO_UID) | FUNCIONAL |
-| owner_id preservado em messages/memories/events | FUNCIONAL |
-
-## 10. Isolamento por Usuário
-
-| Item | Status |
-|------|--------|
-| Conversas filtradas por owner_id | FUNCIONAL |
-| Memórias V4.1 isoladas por usuário | FUNCIONAL |
-| Eventos temporais V4.1 isolados | FUNCIONAL |
-| IndexedDB por conta | FUNCIONAL |
-| Contas novas sem acesso a dados do dono | FUNCIONAL |
-| Memórias não compartilhadas automaticamente | FUNCIONAL |
-
-## 11. Segurança
-
-| Item | Status |
-|------|--------|
-| Argon2id | FUNCIONAL |
-| owner_id nunca do cliente | FUNCIONAL |
-| RBAC no backend (nunca só frontend) | FUNCIONAL |
-| Proteção último admin | FUNCIONAL |
-| Self-alteração bloqueada | FUNCIONAL |
-| Convite hash (sha256) | FUNCIONAL |
-| Consumo atômico de convite | FUNCIONAL |
-| Rate limiting | FUNCIONAL |
-| SQL injection (parameterized) | FUNCIONAL |
-| SSRF (validar_relay_url) | FUNCIONAL |
-| Path traversal (validar_agent_path) | FUNCIONAL |
-| Auditoria sem dados sensíveis | FUNCIONAL |
-| Não confiar em credenciais no cliente | FUNCIONAL |
-
-## 12. Performance
-
-| Item | Status |
-|------|--------|
-| Index no owner_id | FUNCIONAL |
-| Index sid+revogada | FUNCIONAL |
-| WAL mode SQLite | FUNCIONAL |
-| busy_timeout=5000 | FUNCIONAL |
-| Sem polling excessivo | FUNCIONAL |
-| Sem listeners duplicados | FUNCIONAL |
-| Sem dependências grandlas | FUNCIONAL |
-
-## 13. Testes Executados
-
-| Suite | Comando |
-|-------|---------|
-| Auth tests | `python -m pytest tests/test_auth.py` |
-| Full suite | `python -m pytest tests/` |
-| Manual admin service | Script Python (GerenciadorJuliaMobile) |
-
-## 14. Testes Aprovados
-
-| Teste | Resultado |
-|--------|-----------|
-| 12 auth tests | 12 passed |
-| 86 testes existentes (V4.0/V4.1) | 85 passed, 1 skipped |
-| Full suite (97 tests) | 97 passed, 1 failed (pré-existente), 1 skipped |
-| Admin service (create/read/update/delete) | FUNCIONAL |
-| Admin (role, status, sessions) | FUNCIONAL |
-| Admin (convites, regs, config, audit) | FUNCIONAL |
-
-## 15. Testes Reprovados
-
-| Teste | Motivo |
-|--------|-------|
-| `test_captura_jpeg_real` | Pré-existente — requer agente remoto ativo (não relacionado) |
-| `test_multi_arquivo_e_desfazer` (Fajulto) | Pré-existente — `backup` None (não relacionado) |
-| `test_11_sem_endpoint_novo_na_fase` (Fajulto) | Pré-existente — rotas freezadas (não relacionado) |
-
-## 16. Limitações
-
-| Limite | Descrição |
-|--------|-----------|
-| Render Free | SQLite definitivo no PC, não no servidor |
-| Offline | Cadastro/login só quando PC online |
-| Sessão 24h | Expira mesmo offline (validação local) |
-| Login social | Não implementado (não prometido) |
-
-## 17. Pendências
-
-| Item | Prioridade |
-|------|-----------|
-| UI mobile real device testing | Média |
-| Integração relay ↔ pc_agent auth (JWT) | Alta |
-| Testes de segurança automatizados (28 cenários) | Alta |
-| JDUI preservado pós-refatoração visual | Média |
-| PWA instalável | Baixa |
-
-## 18. Próximos Passos
-
-1. Implementar relay JWT → pc_agent auth forwarding
-2. Criar testes de segurança automatizados
-3. Validar UI em dispositivos reais (320px–430px)
-4. Integrar limite de IA no pc_agent enforcement
-5. Docs de instalação + configuração avançada
+## 17–18. Próximos passos
+Push + deploy SOMENTE com autorização. Depois: V4.2.

@@ -8,7 +8,8 @@
 3. **RBAC no backend.** Autorização validada em `julia_auth` antes de
    qualquer ação administrativa.
 4. **Proteção contra escalada.** Nenhum usuário comum pode elevar para admin.
-5. **Senha nunca em texto plano.** Argon2id.
+5. **Senha nunca em texto plano.** scrypt (contas novas); Argon2id só no
+   login legado do `.env`, verificado no relay.
 
 ## Identificadores
 
@@ -19,7 +20,7 @@
 | owner_id em dados | `u-<hex>` / `local` | —         |
 
 - `DONO_UID = "local"` — dono legado estável.
-- `novo_uid()` gera `u-` + 16 hex chars (seguro, imutável).
+- `novo_uid()` gera `u-` + 12 hex chars (seguro, imutável).
 - Migração legada: `migrar_legado(db)` converte `owner_id` antigos para `local`.
 
 ## Isolamento de Dados
@@ -68,9 +69,10 @@ Cada query de dados inclui `WHERE owner_id = ?` com o uid do usuário autenticad
 | Último admin removido     | `definir_papel`/`excluir_usuario` rejeitam    |
 | Self-alteração            | Bloqueio explícito (`alvo_uid == ator_uid`)   |
 | Convite reutilizado       | Consumo atômico (transação)                   |
-| Brute force               | Rate limit por IP/username (5 / 15 min)        |
-| Senha fraca               | `valida_senha`: 8+ chars, letra + número      |
-| Username inválido         | `valida_username`: 3–20, `[a-z0-9_]`           |
+| Brute force (login)       | 5 / 5 min por IP+username (memória relay)     |
+| Brute force (registro)    | 3 / hora por IP                                |
+| Senha fraca               | `valida_senha`: 8–128 chars                    |
+| Username inválido         | `valida_username`: 3–30, `[a-z0-9._-]`         |
 | SQL injection             | Todas as queries usam parameterized `?`       |
 | Path traversal            | `agent_path` validado com `is_file()`          |
 | SSRF (relay)              | `validar_relay_url`: http(s)://, localhost HTTP→HTTPS |
@@ -78,7 +80,9 @@ Cada query de dados inclui `WHERE owner_id = ?` com o uid do usuário autenticad
 ## Sessões
 
 - `user_sessions`: sid (PK), uid, created_at, expira_em, revogada (0/1).
-- `criar_sessao(db, uid)`: gera sid seguro, expira em 24h.
+- `criar_sessao(db, uid)`: gera sid seguro, expira em 12h.
+- Relay mantém cache de revogados (TTL 60s) com fallback para agentes
+  antigos (2 timeouts → para de perguntar, sem stall).
 - `sessao_valida(db, sid)`: retorna dados do usuário ou None (se revogada/expirada).
 - `revogar_sessao/sessoes`: marca como revogada (não deleta — preserva auditoria).
 - Sessões não revogadas expiram automaticamente por `expira_em`.

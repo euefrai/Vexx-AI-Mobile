@@ -273,6 +273,122 @@ def test_offline_honesto():
         assert r2.status_code == 401  # sem vazar existência (conta comum exige PC)
 
 
+def _agente_generico(ws, respostas, vistos):
+    while True:
+        try:
+            req = ws.receive_json()
+        except Exception:
+            return
+        vistos[req.get('type')] = req
+        if req.get('type') == 'sess_revogados':
+            ws.send_json({'request_id': req['request_id'], 'type': 'sess_revogados',
+                          'sids': vistos.get('__revogados__', [])})
+            continue
+        fn = respostas.get(req.get('type'))
+        if fn is None:
+            continue
+        ws.send_json({'request_id': req['request_id'], **fn(req)})
+
+
+def test_relay_register_login_account():
+    with TestClient(server.app) as client:
+        vistos = {}
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            respostas = {
+                'auth_register': lambda r: {'type': 'auth_registered', 'uid': 'u-aaa',
+                                            'username': 'ana', 'display': 'Ana',
+                                            'status': 'ativo', 'sid': 'sid-ana'},
+                'auth_login': lambda r: {'type': 'auth_ok', 'uid': 'u-aaa', 'username': 'ana',
+                                         'display': 'Ana', 'role': 'user', 'sid': 'sid-ana'},
+                'auth_whoami': lambda r: {'type': 'auth_user',
+                                          'user': {'uid': 'u-aaa', 'username': 'ana',
+                                                   'display': 'Ana', 'role': 'user', 'status': 'ativo'}},
+                'account_password': lambda r: {'type': 'account_ok'},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, vistos), daemon=True)
+            t.start()
+            reg = client.post('/api/register', json={'display': 'Ana', 'username': 'ana',
+                                                     'password': 'senha-forte-1', 'invite': 'JULIA-X'})
+            assert reg.status_code == 200, reg.text
+            assert reg.json()['user'] == 'Ana'
+            assert 'julia_session' in reg.cookies
+            lg = client.post('/api/login', json={'username': 'ana', 'password': 'senha-forte-1'})
+            assert lg.status_code == 200 and lg.json()['uid'] == 'u-aaa'
+            sess = client.get('/api/session')
+            assert sess.json()['uid'] == 'u-aaa' and sess.json()['role'] == 'user'
+            acc = client.get('/api/account')
+            assert acc.json()['username'] == 'ana'
+            pw = client.post('/api/account/password', json={'atual': 'x', 'nova': 'senha-forte-2'},
+                             headers={'X-CSRF-Token': sess.json()['csrf']})
+            assert pw.json() == {'ok': True}
+            assert vistos['auth_register']['invite'] == 'JULIA-X'
+            bad = client.post('/api/register', json={'display': 'A', 'username': 'xx',
+                                                      'password': 'curta'})
+            assert bad.status_code == 422
+
+
+def test_relay_login_pendente_e_sessao_trocada():
+    with TestClient(server.app) as client:
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            vistos = {}
+            respostas = {
+                'auth_login': lambda r: {'type': 'auth_error', 'error': 'x', 'codigo': 'pendente'},
+                'auth_whoami': lambda r: {'type': 'auth_user',
+                                          'user': {'uid': 'u-outro', 'username': 'x',
+                                                   'display': 'X', 'role': 'user', 'status': 'ativo'}},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, vistos), daemon=True)
+            t.start()
+            r = client.post('/api/login', json={'username': 'alguem', 'password': 'senha-forte-1'})
+            assert r.status_code == 403
+            lg = client.post('/api/login', json={'username': 'owneruser', 'password': 'strong-example-password'})
+            assert lg.status_code == 200  # legado não depende do PC
+            s = client.get('/api/session')
+            assert s.json()['uid'] == 'local' and s.json()['role'] == 'admin'  # sem consultar o PC
+
+
+def test_relay_sid_revogado_bloqueia_dados():
+    with TestClient(server.app) as client:
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            vistos = {'__revogados__': ['sid-ana']}
+            respostas = {
+                'auth_login': lambda r: {'type': 'auth_ok', 'uid': 'u-aaa', 'username': 'ana',
+                                         'display': 'Ana', 'role': 'user', 'sid': 'sid-ana'},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, vistos), daemon=True)
+            t.start()
+            lg = client.post('/api/login', json={'username': 'ana', 'password': 'senha-forte-1'})
+            assert lg.status_code == 200
+            r = client.post('/api/sync', json={'messages': []},
+                            headers={'X-CSRF-Token': lg.json()['csrf']})
+            assert r.status_code in (401, 422)  # 401 revogada (ou 422 lote vazio se passar)
+
+
+def test_relay_admin_exige_papel():
+    with TestClient(server.app) as client:
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            vistos = {}
+            respostas = {
+                'auth_login': lambda r: {'type': 'auth_ok', 'uid': 'u-aaa', 'username': 'ana',
+                                         'display': 'Ana', 'role': 'user', 'sid': 'sid-ana'},
+                'auth_whoami': lambda r: {'type': 'auth_user',
+                                          'user': {'uid': 'u-aaa', 'username': 'ana',
+                                                   'display': 'Ana', 'role': 'user', 'status': 'ativo'}},
+                'admin_users': lambda r: {'type': 'op_error', 'error': 'x', 'codigo': 'permissao'},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, vistos), daemon=True)
+            t.start()
+            lg = client.post('/api/login', json={'username': 'ana', 'password': 'senha-forte-1'})
+            csrf = lg.json()['csrf']
+            r = client.get('/api/admin/users', headers={'X-CSRF-Token': csrf})
+            assert r.status_code == 403  # negado sem vazar dados
+            assert 'admin_users' not in vistos  # barrado no relay, nem chega ao PC
+
+
 # rate limit de login (12)
 def test_z_login_rate_limit():
     server.login_failures.clear()

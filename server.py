@@ -332,19 +332,22 @@ async def session(request: Request):
     data = sessao_dados(request)
     uid = str(data.get("uid") or "") or "local"
     nome = str(data.get("nome") or data.get("user") or config()["user"])
-    papel = "user"
-    if relay.ws is not None:
-        try:
-            result = await relay.exchange({"type": "auth_whoami", "sid": str(data.get("sid") or "")},
-                                          timeout=10.0)
-            if result.get("type") == "auth_user" and result.get("user"):
-                papel = result["user"].get("role", "user")
-                nome = result["user"].get("display", nome)
-                if result["user"].get("uid") != uid and uid != "local":
-                    raise HTTPException(status_code=401, detail="Sessão inválida")
-        except HTTPException as exc:
-            if exc.status_code == 401:
-                raise
+    if uid == "local":
+        papel = "admin"  # proprietário legado: sem depender do PC
+    else:
+        papel = "user"
+        if relay.ws is not None:
+            try:
+                result = await relay.exchange({"type": "auth_whoami", "sid": str(data.get("sid") or "")},
+                                              timeout=10.0)
+                if result.get("type") == "auth_user" and result.get("user"):
+                    if result["user"].get("uid") != uid:
+                        raise HTTPException(status_code=401, detail="Sessão inválida")
+                    papel = result["user"].get("role", "user")
+                    nome = result["user"].get("display", nome)
+            except HTTPException as exc:
+                if exc.status_code == 401:
+                    raise
     token = request.cookies.get("julia_session", "")
     return {"authenticated": True, "csrf": csrf_value(token), "user": nome,
             "uid": uid, "role": papel}

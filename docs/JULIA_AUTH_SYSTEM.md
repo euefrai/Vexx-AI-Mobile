@@ -1,87 +1,61 @@
-# JÚLIA MOBILE 4.1.5 — Sistema de Autenticação
+# JÚLIA MOBILE 4.1.5 — Sistema de Autenticação (real, verificado no código)
 
 ## Arquitetura
 
 ```
-Navegador (IndexedDB Cache) ◄─── HTTPS Relay (Render) ◄─── PC Agente (SQLite)
-       │                               │                          │
-       │ login/register                │                      julia_auth.py
-       │                               │                      (definitivo)
-       └──────────► token JWT          └──────────► identidade verificada
+Navegador (IndexedDB por conta) ◄──HTTPS──► Relay Render (SEM banco)
+        login/register/conta  │                    │  cookie assinado (itsdangerous)
+                              │                    │  + CSRF + revogação (TTL 60s)
+                              ▼                    ▼
+                        PC Agent (SQLite definitivo: julia_auth.py)
 ```
 
-### Princípios
+## Princípios
 
-- **SQLite definitivo no PC** — não há banco no Render Free.
-- **Identidade autenticada e verificável** — o relay encaminha a identidade
-  estabelecida pelo sistema de auth, nunca um `owner_id` enviado livremente.
-- **Sessões com expiração** — tokens JWT com TTL, revogáveis server-side.
-- **Logout real** — revogação de sid no SQLite.
-- **Modo offline** — cadastros/logins só conseguem concluir quando o PC
-  está disponível. Usuários previamente autenticados continuam com acesso
-  enquanto suas sessões são válidas.
+- **SQLite definitivo no PC** — nada de usuários no Render Free.
+- **Identidade verificada, nunca `owner_id` do cliente** — schemas do relay
+  (`SyncBody`, `AIRequest`, `AIContinue`) NÃO têm campo owner; o dono sai
+  sempre da sessão assinada (`sessao_dados` → `revogacao_ok`).
+- **Sessões com expiração (12h)** — cookie HttpOnly/SameSite=strict + `sid`
+  rastreável; revogação server-side com cache de 60s no relay.
+- **Logout real** — revoga o `sid` no SQLite (best-effort) + limpa cookie.
+- **Offline honesto** — cadastro e login de contas novas exigem o PC online
+  (503/401 claros, sem simulação). Sessão válida continua lendo o cache local.
 
-## Entidades SQLite (via `julia_auth.py`)
+## Entidades SQLite (`julia_auth.py`, só stdlib)
 
-| Tabela              | Propósito                          |
-|---------------------|------------------------------------|
-| `users`             | Contas (uid, username, display, hash, role, status, limites) |
-| `user_sessions`     | Sessões (sid, uid, expira_em, revogada) |
-| `reg_requests`      | Pedidos de registro pendentes      |
-| `invites`           | Convites (code_hash, usos, revogado) |
-| `audit_log`         | Log de auditoria                   |
-| `app_config`        | Configurações (modo_cadastro, etc) |
-| `messages`          | Mensagens (owner_id migrado)       |
-| `memories`          | Memórias (owner_id migrado)        |
-| `memory_facts`      | Facts (owner_id migrado)            |
+`users` (uid `local` p/ dono legado, `u-hex` demais; username UNIQUE; hash
+**scrypt**; role; status; limites), `user_sessions` (sid, expira_em, revogada),
+`reg_requests`, `invites` (**só hash** do código), `audit_log` (sem segredos),
+`app_config` (modo_cadastro, exigir_aprovacao).
 
-## Credenciais
+## Credenciais (reais)
 
-- Hash: **Argon2id** (`argon2-cffi`).
-- Política de senha: mínimo 8 chars, 1 letra, 1 número.
-- `valida_username`: 3–20 chars, `[a-z0-9_]`.
-- `valida_display`: 1–40 chars, trim.
+- Contas novas: **scrypt** (`n=16384,r=8,p=1`, salt 16B) — stdlib, sem Argon2.
+- Dono legado: Argon2id do `.env`, verificado no relay (inalterado).
+- Política: senha 8–128 chars; username 3–30 `[a-z0-9._-]`; display 2–40.
+- Mensagens de login genéricas (não vaza existência); `TimingSafe` via compare.
 
-## Fluxos
+## Fluxos (reais)
 
-### Login
-1. Navegador envia `{username, password}` ao relay.
-2. Relay encaminha ao PC Agente.
-3. Agente resolve → `julia_auth.login_conta(db, username, senha)`.
-4. Se válido, cria sessão → `julia_auth.criar_sessao(db, uid)`.
-5. Retorna `{ok, sid, uid, display, role, expira_em}`.
-6. Relay devolve JWT ao browser.
+- **Login**: legado (env) → sessão `local`/admin; senão `auth_login` no PC →
+  sessão `{uid, user, sid}`. Pendente → 403 específico. Bloqueado → 401 genérico.
+- **Registro**: modo do PC (`fechado` recusa; `convite` exige código com consumo
+  atômico; `aberto` cria ou deixa `pendente`). Ativo → auto-login com sessão.
+  Nunca cria admin (papel sempre `user`).
+- **Sessão**: `/api/session` retorna uid/role/display; legada não consulta o PC.
+- **Troca de senha / exclusão**: com senha atual; exclusão apaga TODOS os dados
+  do dono (transação) e derruba a sessão; último admin trava.
+- **Revogação**: `sess_revogados` (TTL 60s) + expiração 12h + fallback para
+  agentes antigos (2 timeouts → desliga refresh, sem stall).
 
-### Registro
-1. Browser envia formulário + código de convite (se modo=convite).
-2. Relay encaminha ao agente → `julia_auth.registrar(db, ...)`.
-3. Se `exigir_aprovacao`: cria `reg_requests` pendente, usuário aguarda.
-4. Se aprovado automaticamente: cria conta e sessão.
+## Rate limiting (real)
 
-### Refresh de Sessão
-1. Browser envia sid (ou JWT).
-2. Agente → `julia_auth.sessao_valida(db, sid)`.
-3. Se revogada ou expirada: 401.
+- Login: 5 tentativas / 5 min por IP+username (memória do relay).
+- Registro: 3 / hora por IP. Convites: espaço 2^72 + limite por IP.
 
-### Logout
-1. Browser chama `/api/julia/logout`.
-2. Agente → `julia_auth.revogar_sessao(db, sid)`.
+## Limites de uso (aplicados no agente)
 
-## Modos de Cadastro (admin configurável)
-
-| Modo     | Descrição                                      |
-|----------|------------------------------------------------|
-| `fechado`  | Só admin cria contas (via painel).            |
-| `convite`  | Usuário precisa de código válido (padrão).    |
-| `aberto`   | Auto-cadastro; admin pode exigir aprovação.   |
-
-## Rate Limiting (brute-force protection)
-
-- Em memória por IP/username: 5 tentativas / 15 min.
-- Bloqueio progressivo após falhas consecutivas.
-
-## Limitações Offline
-
-- Cadastro/login só funcionam quando o PC Agente está online.
-- Sessões expiram mesmo offline (validação local por timestamp).
-- Mensagens enfileiradas no IndexedDB até reconexão.
+`max_ai_hora` (padrão 120) e `max_ia_simult` (padrão 3) por usuário, verificados
+em `ai_preparar`; excedente retorna `codigo=limite`. Bloqueados não usam IA nem
+dados (checagem central por RPC).

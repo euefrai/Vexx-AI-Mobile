@@ -60,9 +60,15 @@ Fajulto Studio (browser) ──HTTP──► controle.py (do_POST)
 - Botões: revogar sessões, excluir (com confirmação).
 - Proteção: não permite excluir/rebaixar o último admin ativo.
 
+### Bootstrap do proprietário
+- Rota `/api/controle/julia/admin/bootstrap` + formulário "Vincular proprietário"
+  (visível só enquanto `vinculado=false`): username do Render + nome + senha.
+- Sem senha padrão; senha nunca retorna na resposta; auditoria registra o vínculo.
+- Repetir atualiza a credencial sem duplicar a conta.
+
 ### Criar Usuário
 - Formulário via `prompt()`: exibição, username, senha, papel.
-- Credencial inicial gerada pelo admin (hash Argon2id).
+- Credencial inicial definida pelo admin (hash **scrypt**, nunca texto puro).
 
 ### Convites
 - Lista: ID, código (oculto — mostra ●), usos, expira, ativo.
@@ -80,7 +86,12 @@ Fajulto Studio (browser) ──HTTP──► controle.py (do_POST)
 
 ## Segurança
 
-- Acesso localhost-only (Fajulto Studio roda localmente).
+- Acesso localhost-only (Fajulto Studio roda localmente); esse é o modelo de
+  autorização do painel, consistente com os demais botões destrutivos do
+  controle (matar PID etc.). Ator registrado como `studio-local`.
+- Interpolação do frontend escapada (`escA`) — display names não executam HTML.
+- Operador nunca é `local`: travas de auto-operação funcionam ao mirar a
+  conta do proprietário.
 - Autorização validada no backend (`julia_auth.definir_papel`,
   `excluir_usuario`, etc. rejeitam ações não autorizadas).
 - Todos os eventos admin auditados (`julia_auth.auditar`).

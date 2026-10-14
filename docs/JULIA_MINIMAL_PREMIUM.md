@@ -2,16 +2,11 @@
 
 ## Identidade Visual
 
-| Token          | Valor         |
-|----------------|---------------|
-| preto          | `#000000`     |
-| grafite        | `#121212`     |
-| roxo           | `#5e4ae3`     |
-| violeta suave  | `#7a6fb8`     |
-| superfície     | `#1e1e1e`     |
-| borda          | `rgba(255,255,255,0.08)` |
-| texto primário  | `#ffffff`     |
-| texto secundário| `#999999`     |
+Tokens reais em `:root` (`public/styles.css`): `--bg #0b0b0f`,
+`--surface-1 #101016`, `--surface-2 #15151d`, `--accent #a78bfa`,
+`--text-1 #f4f2fa`, `--text-2 #a7a5bd`, `--text-3 #6d6c85`,
+`--border-subtle rgba(255,255,255,.06)`, raios 8/12/18px, `z-pop 60`,
+transições 150/220ms com `--ease`, `prefers-reduced-motion` herdado.
 
 ## Princípios
 
@@ -71,6 +66,6 @@
 - Botão interromper quando gerando
 
 ### Ações Contextuais
-- Copiar, regenerar, continuar, editar, compartilhar, avaliar
-- Ações secundárias em menus contextuais
-- Acesso por toque no mobile (sem hover)
+- Implementadas no menu `···` por mensagem: Copiar, Regenerar, Continuar
+  (última resposta), Tentar novamente (falha). Sem hover: toque abre o menu.
+- Editar/compartilhar/avaliar: AUSENTES (sem botão decorativo).

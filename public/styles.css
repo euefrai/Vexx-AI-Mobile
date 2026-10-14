@@ -313,6 +313,15 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .mini-toggle[aria-pressed="true"]{color:var(--purple);border-color:var(--purple-2);background:var(--glow-purple)}
 .export-row{display:flex;gap:8px}
 .export-row .subtle-button{flex:1;justify-content:center}
+.drawer-profile{display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--radius-m)}
+.drawer-profile .profile-avatar{width:34px;height:34px;font-size:15px}
+.drawer-profile strong{display:block;font-size:12.5px}
+.drawer-profile small{display:block;font-size:10.5px;color:var(--text-2)}
+.drawer-profile .session-tool{margin-left:auto;font-size:14px}
+.fld{display:block;font-size:10.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 4px}
+.sync-card input[type="password"],.sync-card input[type="text"]{width:100%;background:var(--bg);border:1px solid var(--line);
+  border-radius:10px;padding:11px;color:var(--text);font-size:14px;min-height:44px}
 .drawer-nav{display:flex;flex-direction:column;gap:6px}
 .drawer-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:650;border:1px solid transparent;width:100%;text-align:left}
 .drawer-item.active,.drawer-item:hover{color:var(--text);background:var(--glow-purple);border-color:var(--line)}

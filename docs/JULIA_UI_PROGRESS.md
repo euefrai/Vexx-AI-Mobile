@@ -6,10 +6,11 @@
 |-----------------------------------|---------|
 | Inspeção da estrutura do projeto  | FUNCIONAL |
 | Inspeção de Fajulto Studio/Arq    | FUNCIONAL |
-| Testes existentes                 | 97 passed, 1 failed (remoto/jpeg), 1 skipped |
+| Testes existentes                 | ver RELATORIO (nenhuma falha real; 1 warning benigno de teardown) |
 | Inspeção julia_auth.py            | FUNCIONAL |
 | Inspeção server.py                | FUNCIONAL |
 | Inspeção controle.py             | FUNCIONAL |
+| Suíte base                        | ver RELATORIO (102 passed) |
 
 ## Fase B: Design System ✅
 
@@ -40,9 +41,10 @@
 | Item                              | Status  |
 |-----------------------------------|---------|
 | SQLite definitivo no PC          | FUNCIONAL |
-| Session ID no IndexedDB           | FUNCIONAL |
+| Sid em cookie assinado + SQLite  | FUNCIONAL |
 | Validação server-side de sessão   | FUNCIONAL |
 | owner_id do auth, nunca do cliente| FUNCIONAL |
+| Revogação TTL 60s + expiração 12h| FUNCIONAL |
 
 ## Fase E: Convites, Sessões, Permissões ✅
 
@@ -55,7 +57,7 @@
 | Sessions table                   | FUNCIONAL |
 | RBAC (admin/user)                | FUNCIONAL |
 | Proteção último admin            | FUNCIONAL |
-| Rate limiting (5/15min)          | FUNCIONAL |
+| Rate limiting (login 5/5min, registro 3/hora) | FUNCIONAL |
 
 ## Fase F: Serviço Administrativo ✅
 
@@ -78,11 +80,11 @@
 
 | Item                              | Status  |
 |-----------------------------------|---------|
-| Endpoints API admin (17 rotas)    | FUNCIONAL |
+| Endpoints API admin (18 rotas, +bootstrap) | FUNCIONAL |
 | Card HTML no painel               | FUNCIONAL |
 | JavaScript (tabs, tabelas, ações) | FUNCIONAL |
-| CSS admin (tabelas, stats)        | FUNCIONAL |
-| setInterval(refreshAdmin, 3000)   | FUNCIONAL |
+| XSS escapado (escA)               | FUNCIONAL |
+| Polling moderado (15s, só visível)| FUNCIONAL |
 
 ## Fase H: Perfil, Configurações, Sidebar ✅
 
@@ -103,8 +105,9 @@
 
 | Item                              | Status  |
 |-----------------------------------|---------|
-| Testes auth (12)                  | 12 passed |
-| Testes de segurança (28 cenários) | Documentados |
-| Docs criadas (5 arquivos)         | FUNCIONAL |
-| Relatório final                   | FUNCIONAL |
-| Testes já existentes (97)         | 97 passed |
+| Testes auth (16)                  | ver RELATORIO |
+| Testes admin Studio (5)           | ver RELATORIO |
+| Testes de segurança (§17)         | ver RELATORIO |
+| Docs criadas/atualizadas          | FUNCIONAL |
+| Relatório final                   | este RELATORIO |
+| Regressão total                   | ver RELATORIO |

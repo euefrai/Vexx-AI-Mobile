@@ -61,7 +61,15 @@ function navigate(tab) {
   if (tab === 'activity') renderTimeline();
   if (tab === 'settings') loadMemories();
 }
-navItems.forEach(n => n.addEventListener('click', () => { navigate(n.dataset.tab); if (window.innerWidth < 900) setDrawer(false); }));
+navItems.forEach(n => n.addEventListener('click', () => {
+  navigate(n.dataset.tab);
+  if (n.dataset.scroll === 'memory') {
+    const t = $('memoryTitle');
+    if (t) setTimeout(() => t.scrollIntoView({ block: 'start' }), 60);
+  }
+  if (window.innerWidth < 900) setDrawer(false);
+}));
+$('drawerLogout').addEventListener('click', () => $('logoutButton').click());
 
 /* ----- IndexedDB ----- */
 function reqPromise(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
@@ -98,7 +106,8 @@ async function preloadJduiStates(msgIds) {
   try {
     const rows = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll());
     rows.forEach(r => {
-      if (r && typeof r.k === 'string' && want.has(r.k.split('#')[0])) jduiStateCache[r.k] = r.state || {};
+      if (r && typeof r.k === 'string' && want.has(r.k.split('#')[0])
+          && (r.owner || 'local') === currentUid) jduiStateCache[r.k] = r.state || {};
     });
   } catch (_) {}
 }
@@ -110,7 +119,7 @@ function jduiCtx(row) {
     saveState: (key, st) => {
       const k = row.id + '#' + key;
       jduiStateCache[k] = st;
-      jduiDirty[k] = { k, message_id: row.id, slot: key, state: st, updated_at: new Date().toISOString() };
+      jduiDirty[k] = { k, message_id: row.id, slot: key, state: st, updated_at: new Date().toISOString(), owner: currentUid };
       persistJduiSoon();
     },
     onChat: (text) => sendMessage(text)
@@ -132,7 +141,8 @@ async function persistJduiSoon() {
 async function syncJduiStates() {
   if (!authenticated || !pcOnline || !db) return;
   try {
-    const rows = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll());
+    const rows = (await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll()))
+      .filter(r => (r.owner || 'local') === currentUid);
     if (!rows.length) return;
     await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
     const remote = await api('/api/ui-state');
@@ -143,7 +153,7 @@ async function syncJduiStates() {
       try {
         const have = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).get(r.k)).catch(() => null);
         if (!have || (r.updated_at || '') >= (have.updated_at || '')) {
-          store.put(r);
+          store.put(Object.assign({}, r, { owner: currentUid }));
           jduiStateCache[r.k] = r.state || {};
         }
       } catch (_) {}
@@ -175,7 +185,8 @@ async function storeMessages(ms) {
   if (!db) throw Error('Armazenamento indisponivel');
   const tx = db.transaction(STORE, 'readwrite');
   const done = txDone(tx);
-  for (const m of ms) tx.objectStore(STORE).put(m);
+  const st = tx.objectStore(STORE);
+  for (const m of ms) st.put(m.owner ? m : Object.assign({}, m, { owner: currentUid }));
   await done;
 }
 async function deleteMessagesOf(conv) {
@@ -197,7 +208,16 @@ async function allSessions() {
   const rows = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).getAll()).catch(() => []);
   return rows.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 }
-async function putSession(s) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).put(s); await d; }
+async function putSession(s) {
+  const tx = db.transaction(SESSIONS, 'readwrite');
+  const d = txDone(tx);
+  tx.objectStore(SESSIONS).put(s.owner ? s : Object.assign({}, s, { owner: currentUid }));
+  await d;
+}
+async function ownSessions() {
+  const all = await allSessions();
+  return all.filter(s => (s.owner || 'local') === currentUid);
+}
 /* ----- Conversa ativa resiliente (localStorage pode ser limpo sem levar o IndexedDB) ----- */
 function lsGet(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
 function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
@@ -237,7 +257,7 @@ function setActiveConversation(id) {
 }
 async function resolveActiveConversation() {
   // 1) localStorage, se ainda apontar para sessão existente (e não excluída)
-  const sessions = (await allSessions()).filter(s => !isDeleted(s.id));
+  const sessions = (await ownSessions()).filter(s => !isDeleted(s.id));
   const ids = new Set(sessions.map(s => s.id));
   const viaLs = lsGet('julia-active-conversation');
   if (viaLs && ids.has(viaLs)) return viaLs;
@@ -245,7 +265,7 @@ async function resolveActiveConversation() {
   const viaMeta = await metaGet('active-conversation');
   if (viaMeta && ids.has(viaMeta)) { lsSet('julia-active-conversation', viaMeta); return viaMeta; }
   // 3) sessão mais recente COM mensagens (cura "cada abertura vira chat novo")
-  const all = (await allMessages()).filter(m => !isDeleted(m.conversation_id));
+  const all = ownRows(await allMessages()).filter(m => !isDeleted(m.conversation_id));
   const withMsgs = new Set(all.map(m => m.conversation_id));
   const ranked = sessions.filter(s => withMsgs.has(s.id))
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
@@ -258,12 +278,12 @@ async function resolveActiveConversation() {
 async function healSessions() {
   // titula sessões "Nova conversa" que já têm mensagens + apaga vazias órfãs
   try {
-    const all = await allMessages();
+    const all = ownRows(await allMessages());
     const firstByConv = {};
     all.forEach(m => {
       if (m.role === 'user' && !firstByConv[m.conversation_id]) firstByConv[m.conversation_id] = m.text;
     });
-    const sessions = await allSessions();
+    const sessions = await ownSessions();
     const counts = {};
     all.forEach(m => { counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
     for (const s of sessions) {
@@ -287,7 +307,7 @@ async function ensureSession(id, title) {
   return s;
 }
 async function touchSession(id, hint) {
-  const list = await allSessions();
+  const list = await ownSessions();
   const now = new Date().toISOString();
   let s = list.find(x => x.id === id);
   if (!s) s = { id, title: hint || 'Nova conversa', created_at: now, updated_at: now };
@@ -588,7 +608,7 @@ function schedulePaint(replyId, text) {
 
 async function renderMessages() {
   if (!db) return;
-  const all = await allMessages();
+  const all = ownRows(await allMessages());
   const rows = all.filter(m => m.conversation_id === activeConversation);
   await preloadJduiStates(rows.map(m => m.id));
   const stick = nearBottom(conversation);
@@ -621,7 +641,7 @@ async function renderMessages() {
 async function renderSessions(filter) {
   const box = $('sessionList');
   const q = (filter || '').toLowerCase();
-  const all = await allMessages();
+  const all = ownRows(await allMessages());
   const counts = {};
   all.forEach(m => { if (!isDeleted(m.conversation_id)) counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
   sessionsCache = await allSessions();
@@ -706,7 +726,7 @@ $('archivedToggle').addEventListener('click', () => {
 async function renderTimeline() {
   const tl = $('timeline');
   if (!tl) return;
-  const all = await allMessages();
+  const all = ownRows(await allMessages());
   tl.replaceChildren();
   const items = all.filter(m => !isDeleted(m.conversation_id)).slice(-6).reverse();
   if (!items.length) {
@@ -762,15 +782,58 @@ async function api(endpoint, options) {
   if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : 'Erro HTTP ' + res.status); err.status = res.status; throw err; }
   return data;
 }
+let currentUid = 'local';
+let currentRole = 'user';
+try { currentUid = localStorage.getItem('julia-uid') || 'local'; } catch (_) {}
+function pintarPerfil(display, username, role, online) {
+  $('profileName').textContent = display || 'Conta';
+  $('profileUser').textContent = username ? '@' + username : '@—';
+  $('profileAvatar').textContent = (display || '?').trim().charAt(0).toUpperCase() || '✦';
+  $('profileTag').textContent = online ? (role === 'admin' ? 'ADMIN' : 'ONLINE') : 'OFFLINE';
+  const dp = $('drawerProfile');
+  if (dp) {
+    dp.querySelector('strong').textContent = display || 'Conta';
+    dp.querySelector('small').textContent = username ? '@' + username : '';
+    dp.querySelector('.profile-avatar').textContent = $('profileAvatar').textContent;
+  }
+}
+function aplicarSessao(s) {
+  // Troca de conta: recarrega para isolar caches (nunca mistura dados).
+  const uid = s.uid || 'local';
+  if (lsGet('julia-uid') && lsGet('julia-uid') !== uid) {
+    lsSet('julia-uid', uid);
+    location.reload();
+    return false;
+  }
+  lsSet('julia-uid', uid);
+  currentUid = uid;
+  currentRole = s.role || 'user';
+  pintarPerfil(s.user, s.username || '', currentRole, true);
+  atualizarPerfilConta();
+  return true;
+}
+async function atualizarPerfilConta() {
+  if (!authenticated || PREVIEW_MODE || !navigator.onLine) return;
+  try {
+    const u = await api('/api/account');
+    if (u && u.uid) {
+      currentRole = u.role || currentRole;
+      pintarPerfil(u.display || u.username, u.username || '', currentRole, true);
+    }
+  } catch (_) {}
+}
+function ownRows(rows) {
+  return (rows || []).filter(m => (m.owner || 'local') === currentUid);
+}
 async function restoreSession() {
   if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; return; }
   try {
     const s = await api('/api/session');
     csrf = s.csrf; authenticated = true; $('loginOverlay').hidden = true;
-    $('profileName').textContent = s.user; $('profileTag').textContent = 'ONLINE';
+    if (aplicarSessao(s) === false) return;
   } catch (_) {
     authenticated = false; $('loginOverlay').hidden = false;
-    $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
+    pintarPerfil('Offline', '', 'user', false);
   }
   await fetchAuthConfig();
 }
@@ -789,7 +852,7 @@ $('loginForm').addEventListener('submit', async e => {
     const r = await api('/api/login', { method: 'POST', body: JSON.stringify({ username: $('loginUser').value, password: $('loginPassword').value }) });
     $('loginPassword').value = ''; csrf = r.csrf; authenticated = true;
     $('loginOverlay').hidden = true;
-    $('profileName').textContent = r.user; $('profileTag').textContent = 'ONLINE';
+    if (aplicarSessao(r) === false) return;
     await checkStatus(); showToast('Conectado');
   } catch (err) { $('loginError').textContent = err.message || 'Não foi possível entrar'; }
   finally { btn.disabled = false; }
@@ -800,7 +863,7 @@ $('logoutButton').addEventListener('click', async () => {
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
   $('loginError').textContent = ''; $('regError').textContent = '';
   $('registerForm').hidden = true; $('loginForm').hidden = false; $('loginBack').hidden = true;
-  $('profileName').textContent = 'Offline'; $('profileTag').textContent = 'OFFLINE';
+  pintarPerfil('Offline', '', 'user', false);
   updateConnection(); showToast('Sessão encerrada');
 });
 
@@ -855,43 +918,54 @@ $('registerForm').addEventListener('submit', async e => {
       display: $('regDisplay').value, username: $('regUsername').value,
       password: pw1, invite: $('regInvite') ? $('regInvite').value : ''
     }) });
-    if (r.status === 'pendente' || r.status === 'aprovado' || r.message) {
-      showToast(r.message || 'Cadastro recebido! Aguarde aprovação.');
-    }
-    $('registerForm').hidden = true; $('loginForm').hidden = false; $('loginBack').hidden = true;
     $('regDisplay').value = ''; $('regUsername').value = ''; $('regPassword').value = '';
-    $('regPassword2').value = ''; $('regInvite').value = '';
-    const cfg = authConfig || { exigir_aprovacao: true };
-    if (cfg.exigir_aprovacao) showToast('Cadastro enviado para aprovação');
-    else { csrf = r.csrf; authenticated = true; $('loginOverlay').hidden = true; $('profileName').textContent = r.user; $('profileTag').textContent = 'ONLINE'; await checkStatus(); }
+    $('regPassword2').value = ''; if ($('regInvite')) $('regInvite').value = '';
+    if (r.status === 'pendente' || !r.csrf) {
+      $('registerForm').hidden = true; $('loginForm').hidden = false; $('loginBack').hidden = true;
+      showToast('Cadastro recebido! Aguarde aprovação para entrar.');
+      return;
+    }
+    csrf = r.csrf; authenticated = true;
+    $('loginOverlay').hidden = true;
+    if (aplicarSessao(r) === false) return;
+    showToast('Conta criada. Bem-vindo!');
+    await checkStatus();
   } catch (err) { $('regError').textContent = err.message || 'Não foi possível cadastrar'; }
   finally { btn.disabled = false; }
 });
 
-/* ----- Profile modal ----- */
-const profileModal = document.createElement('div');
-profileModal.id = 'profileModal';
-profileModal.className = 'drawer-scrim';
-profileModal.innerHTML = '<div class="login-card" style="max-width:380px"><div class="login-symbol">✦</div><p class="eyebrow">PERFIL</p><h2>Sua conta</h2><form id="profileForm"><label for="profDisplay">Nome de exibição</label><input id="profDisplay" name="display" maxlength="40" /><label for="profUsername">Usuário</label><input id="profUsername" readonly style="background:var(--surface-1);color:var(--text-2)" maxlength="30" /><div class="login-error" id="profileError" role="alert"></div><button id="profileSave" class="login-submit" type="submit">Salvar <span>✦</span></button></form><button id="profileClose" class="subtle-button" type="button">Fechar</button></div>';
-document.body.appendChild(profileModal);
-profileModal.hidden = true;
-$('profileName').parentElement.parentElement.addEventListener('click', () => {
-  if (authenticated && !PREVIEW_MODE) profileModal.hidden = false;
+/* ----- Conta: trocar senha + excluir (formulário inline, sem prompt) ----- */
+$('changePwBtn').addEventListener('click', () => {
+  if (currentUid === 'local') { showToast('Conta do proprietário: troque nas variáveis do servidor'); return; }
+  if (!pcOnline) { showToast('PC offline — tente quando online'); return; }
+  $('changePwForm').hidden = !$('changePwForm').hidden;
+  $('pwError').textContent = '';
 });
-$('profileClose').addEventListener('click', () => { profileModal.hidden = true; });
-profileModal.addEventListener('click', e => { if (e.target === profileModal) profileModal.hidden = true; });
-$('profileForm').addEventListener('submit', async e => {
-  e.preventDefault(); $('profileError').textContent = '';
-  const btn = $('profileSave'); btn.disabled = true;
-  const novo = prompt('Digite a nova senha (mínimo 8 caracteres):');
-  if (!novo || novo.length < 8) { $('profileError').textContent = 'Senha inválida'; btn.disabled = false; return; }
-  const atual = prompt('Digite sua senha atual para confirmar:');
-  if (!atual) { $('profileError').textContent = 'Cancelado'; btn.disabled = false; return; }
+$('pwCancel').addEventListener('click', () => {
+  $('changePwForm').hidden = true; $('pwAtual').value = ''; $('pwNova').value = ''; $('pwError').textContent = '';
+});
+$('pwSave').addEventListener('click', async () => {
+  const nova = $('pwNova').value;
+  if (nova.length < 8) { $('pwError').textContent = 'Nova senha: mínimo 8 caracteres'; return; }
+  $('pwError').textContent = '';
   try {
-    await api('/api/account/password', { method: 'POST', body: JSON.stringify({ atual, nova: novo }) });
-    showToast('Senha alterada'); profileModal.hidden = true;
-  } catch (err) { $('profileError').textContent = err.message || 'Falha'; }
-  finally { btn.disabled = false; }
+    await api('/api/account/password', { method: 'POST', body: JSON.stringify({ atual: $('pwAtual').value, nova }) });
+    $('changePwForm').hidden = true; $('pwAtual').value = ''; $('pwNova').value = '';
+    showToast('Senha alterada');
+  } catch (err) { $('pwError').textContent = err.message || 'Falha'; }
+});
+$('deleteAccountBtn').addEventListener('click', async () => {
+  if (currentUid === 'local') { showToast('A conta do proprietário não se exclui por aqui'); return; }
+  if (!pcOnline) { showToast('PC offline — tente quando online'); return; }
+  if (!window.confirm('Excluir sua conta E todos os seus dados (conversas, memórias, documentos)? Sem volta!')) return;
+  const senha = window.prompt('Digite sua senha para confirmar:');
+  if (!senha) return;
+  try {
+    await api('/api/account/delete', { method: 'POST', body: JSON.stringify({ password: senha }) });
+    showToast('Conta excluída');
+    try { await api('/api/logout', { method: 'POST' }); } catch (_) {}
+    location.reload();
+  } catch (err) { showToast(err.message || 'Falha ao excluir'); }
 });
 
 async function checkStatus() {
@@ -906,7 +980,7 @@ async function checkStatus() {
       renderDocs();
       for (const m of conf.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
       // puxa respostas prontas de outras sessões? tenta IA para pendentes recentes
-      const all = await allMessages();
+      const all = ownRows(await allMessages());
       const pend = all.filter(m => m.role === 'user' && m.want_ai && !all.find(x => x.id === m.id + '-r1' && x.status === 'synced')).slice(-3);
       for (const m of pend) { if (!aiAbort) await requestAI(m); }
     }
@@ -921,7 +995,7 @@ async function syncAndRefresh() {
   const conf = [];
   try {
     for (let guard = 0; guard < 5 && pcOnline; guard++) {
-      const rem = (await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
+      const rem = ownRows(await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
       if (!rem.length) break;
       const clean = rem.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at }));
       const r = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: clean }) });
@@ -1263,8 +1337,8 @@ function downloadFile(name, mime, text) {
 }
 async function exportConversation(fmt) {
   if (!db) { showToast('Cache indisponível'); return; }
-  const rows = (await allMessages()).filter(m => m.conversation_id === activeConversation);
-  const s = (await allSessions()).find(x => x.id === activeConversation);
+  const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
+  const s = (await ownSessions()).find(x => x.id === activeConversation);
   const title = (s && s.title ? s.title : 'conversa').replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'conversa';
   if (!rows.length) { showToast('Nada para exportar'); return; }
   if (fmt === 'json') {
