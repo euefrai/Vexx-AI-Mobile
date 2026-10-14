@@ -13,10 +13,10 @@ import server
 
 
 def setup_module():
-    os.environ['JULIA_USERNAME'] = 'efrai'
-    os.environ['JULIA_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
-    os.environ['JULIA_SESSION_SECRET'] = 'a' * 64
-    os.environ['JULIA_AGENT_TOKEN'] = 'b' * 64
+    os.environ['fajulto_USERNAME'] = 'efrai'
+    os.environ['fajulto_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['fajulto_SESSION_SECRET'] = 'a' * 64
+    os.environ['fajulto_AGENT_TOKEN'] = 'b' * 64
     server.login_failures.clear()
 
 
@@ -88,7 +88,7 @@ def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
                                    'owner': 'bob'}, cfg)
     assert r2.get('codigo') == 'sem_mensagem'
     # com contas existindo, desconhecido é barrado na porta
-    import julia_auth as _ja
+    import fajulto_auth as _ja
     _ja.criar_usuario(db, 'carol', 'Carol', 'senha-forte-1', criado_por='t')
     r3 = pc_agent.ai_completa(db, {'message_id': 'r-user-001', 'conversation_id': 'conv-a',
                                    'owner': 'dave'}, cfg)
@@ -99,7 +99,7 @@ def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
 def test_dono_legado_vale_mesmo_com_usuarios(tmp_path):
     from pathlib import Path as _P
     import tempfile as _t
-    import julia_auth as _ja
+    import fajulto_auth as _ja
     db = pc_agent.open_db(_P(_t.mkdtemp()) / 'leg.sqlite3')
     pc_agent.guardar_fato(db, 'nome', 'Amigo', owner='u-abc123')
     # sem contas: legado vale, desconhecido passa mas nada vaza (leituras filtram)
@@ -131,7 +131,7 @@ def test_relay_repasse_owner_e_isolamento():
     with TestClient(server.app) as client:
         csrf = login(client)
         with client.websocket_connect('/api/agent/ws',
-                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+                                      headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
             vistos = {}
 
             def agente():

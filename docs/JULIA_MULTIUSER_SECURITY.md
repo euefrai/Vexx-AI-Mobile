@@ -5,7 +5,7 @@
 1. **Nunca confiar em `owner_id` do cliente.** A identidade é estabelecida
    pelo sistema de autenticação (sid → uid) e propagada pelo relay.
 2. **Isolamento entre usuários.** Cada query de dados filtra por `owner_id`.
-3. **RBAC no backend.** Autorização validada em `julia_auth` antes de
+3. **RBAC no backend.** Autorização validada em `fajulto_auth` antes de
    qualquer ação administrativa.
 4. **Proteção contra escalada.** Nenhum usuário comum pode elevar para admin.
 5. **Senha nunca em texto plano.** scrypt (contas novas); Argon2id só no

@@ -1,6 +1,6 @@
 # JDUI — Exemplos válidos (também usados como fixtures dos testes)
 
-Envelope de todos: `{"version": "julia-ui-message/v1", "blocks": [...]}`.
+Envelope de todos: `{"version": "fajulto-ui-message/v1", "blocks": [...]}`.
 No chat, cada envelope vai dentro de um fence:
 
     ```jdui
@@ -10,7 +10,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Quiz
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "text", "content": "Teste seus conhecimentos:"},
   {"type": "ui", "component": "quiz", "props": {"title": "Python básico", "questions": [
     {"q": "Quanto é 2 + 2?", "options": ["3", "4", "5"], "answer": 1, "explain": "Soma simples."},
@@ -22,7 +22,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Checklist
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "checklist", "props": {"title": "Rotina de estudos", "items": [
     "Ler capítulo 1", {"label": "Fazer exercícios", "checked": true}
   ]}}
@@ -32,7 +32,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Calculadora (basic | imc | porcentagem | juros)
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "text", "content": "Calcule aqui mesmo:"},
   {"type": "ui", "component": "calculator", "props": {"kind": "imc", "title": "Calculadora de IMC"}}
 ]}
@@ -41,7 +41,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Cards (comparação)
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "cards", "props": {"title": "Python × JavaScript", "items": [
     {"title": "Python", "desc": "Simples e legível", "value": "9.5", "badge": "recomendada",
      "url": "https://python.org", "action": {"chat": "Detalhe as vantagens de Python"}},
@@ -53,7 +53,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Diagrama
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "diagram", "props": {"title": "Conexão com o Hermes",
     "direction": "v",
     "nodes": [
@@ -73,7 +73,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Tabela
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "table", "props": {"title": "Comparativo",
     "columns": ["Linguagem", "Nota"],
     "rows": [["Python", "9.5"], ["JavaScript", "9.0"], ["Java", "8.5"]] }}
@@ -83,7 +83,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Formulário com cálculo
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "form", "props": {"title": "Calcule seu IMC", "calc": "imc",
     "submit": "Calcular",
     "fields": [
@@ -96,7 +96,7 @@ No chat, cada envelope vai dentro de um fence:
 ## Progresso, abas, sanfona
 
 ```json
-{"version": "julia-ui-message/v1", "blocks": [
+{"version": "fajulto-ui-message/v1", "blocks": [
   {"type": "ui", "component": "progress", "props": {"label": "Curso", "value": 30, "max": 100}},
   {"type": "ui", "component": "tabs", "props": {"tabs": [
     {"title": "Resumo", "markdown": "Texto **curto**."}, {"title": "Detalhes", "markdown": "Mais texto."}

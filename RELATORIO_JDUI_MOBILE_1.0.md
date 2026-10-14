@@ -1,4 +1,4 @@
-# RELATÓRIO JDUI MOBILE 1.0 — Julia Dynamic UI Engine
+# RELATÓRIO JDUI MOBILE 1.0 — fajulto Dynamic UI Engine
 
 Data: 2026-10-13. Regras respeitadas: sem push, sem deploy, sem tocar em
 Brave/Fajulto/VERY/Hermes, sem Supabase/Firebase, sem quebrar login/SQLite/
@@ -9,8 +9,8 @@ IndexedDB/sync. E2E real excluído da rotina (lento) e declarado abaixo.
 - `public/jdui.js` — registry, renderers, ações, OPS (frontend).
 - `tests/test_jdui.py` (9), `tests/test_interactive.py` (3, +2 steering),
   `tests/test_frontend_smoke.py` (+1 paridade JDUI).
-- `docs/JDUI_AUDIT.md`, `docs/JULIA_DYNAMIC_UI_ENGINE.md`,
-  `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`, `docs/JDUI_PROGRESS.md`.
+- `docs/JDUI_AUDIT.md`, `docs/fajulto_DYNAMIC_UI_ENGINE.md`,
+  `docs/fajulto_DYNAMIC_UI_EXAMPLES.md`, `docs/JDUI_PROGRESS.md`.
 
 ## 2. Arquivos modificados
 - `pc_agent.py` — PresentationEngine, catálogo, normalizar (2 caminhos),

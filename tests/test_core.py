@@ -13,16 +13,16 @@ import server
 
 
 def setup_module():
-    os.environ['JULIA_USERNAME'] = 'efrai'
-    os.environ['JULIA_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
-    os.environ['JULIA_SESSION_SECRET'] = 'a' * 64
-    os.environ['JULIA_AGENT_TOKEN'] = 'b' * 64
+    os.environ['fajulto_USERNAME'] = 'efrai'
+    os.environ['fajulto_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['fajulto_SESSION_SECRET'] = 'a' * 64
+    os.environ['fajulto_AGENT_TOKEN'] = 'b' * 64
 
 
 def authenticate(client):
     r = client.post('/api/login', json={'username': 'efrai', 'password': 'strong-example-password'})
     assert r.status_code == 200, r.text
-    assert r.cookies.get('julia_session')
+    assert r.cookies.get('fajulto_session')
     assert 'httponly' in r.headers.get('set-cookie', '').lower()
     return r.json()['csrf']
 
@@ -66,7 +66,7 @@ def test_no_persistence_on_render_and_auth_required():
 def test_real_relay_ack_only_after_agent_message():
     with TestClient(server.app) as client:
         csrf = authenticate(client)
-        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
             assert client.get('/api/status').json()['pc_online'] is True
             result = {}
             def submit():
@@ -113,7 +113,7 @@ def test_diag_publico_sem_auth_e_status_com_idade():
         csrf = authenticate(client)
         st = client.get('/api/status')
         assert st.json()['pc_online'] is False and st.json()['agente_ha'] == -1
-        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
             assert client.get('/api/status').json()['pc_online'] is True
             assert client.get('/api/diag').json()['pc_online'] is True
 
@@ -123,7 +123,7 @@ def test_bloqueio_vira_403_explicavel_nao_503():
     Agora o relay traduz codigo=bloqueada em 403 com mensagem clara."""
     with TestClient(server.app) as client:
         csrf = authenticate(client)
-        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
             result = {}
 
             def submit():

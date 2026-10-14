@@ -114,6 +114,8 @@ async function preloadJduiStates(msgIds) {
 function jduiCtx(row) {
   return {
     messageId: row.id,
+    api: (endpoint, options) => api(endpoint, options),
+    online: () => authenticated && pcOnline && navigator.onLine,
     markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
     loadState: (key) => jduiStateCache[row.id + '#' + key],
     saveState: (key, st) => {

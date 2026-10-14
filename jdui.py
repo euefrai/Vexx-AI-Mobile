@@ -1,4 +1,4 @@
-"""JDUI 1.0 — contrato declarativo `julia-ui-message/v1`.
+"""JDUI 1.0 — contrato declarativo `fajulto-ui-message/v1`.
 
 A IA descreve interfaces em blocos ```jdui (JSON). NENHUM JavaScript do modelo
 é executado: o frontend renderiza apenas componentes do registry, com funções
@@ -7,15 +7,15 @@ fallback seguro (nunca travam o chat).
 
 Este módulo (stdlib only) faz extração + validação + normalização no PC.
 O frontend possui o espelho de validação/render em `public/jdui.js`; ambos
-são testados contra os mesmos payloads de `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`.
+são testados contra os mesmos payloads de `docs/fajulto_DYNAMIC_UI_EXAMPLES.md`.
 """
 import json
 import logging
 import re
 
-log = logging.getLogger("julia-jdui")
+log = logging.getLogger("fajulto-jdui")
 
-VERSION = "julia-ui-message/v1"
+VERSION = "fajulto-ui-message/v1"
 FENCE_RE = re.compile(r"```jdui\s*\n([\s\S]*?)(?:```|$)", re.IGNORECASE)
 MAX_BLOCOS_MSG = 6
 MAX_JSON_BYTES = 24000
@@ -196,16 +196,23 @@ def _v_accordion(p: dict) -> dict:
                       for a in itens if isinstance(a, dict) and _str(a.get("title"))]}
 
 
+def _v_exam(p: dict) -> dict:
+    aid = _str(p.get("assessment_id"), 64)
+    if not re.fullmatch(r"[A-Za-z0-9_-]{2,64}", aid):
+        raise JduiErro("exam.assessment_id inválido")
+    return {"assessment_id": aid, "title": _str(p.get("title"), 160)}
+
+
 VALIDADORES = {
     "quiz": _v_quiz, "checklist": _v_checklist, "calculator": _v_calculator,
     "cards": _v_cards, "diagram": _v_diagram, "table": _v_table,
     "form": _v_form, "progress": _v_progress, "tabs": _v_tabs,
-    "accordion": _v_accordion,
+    "accordion": _v_accordion, "exam": _v_exam,
 }
 
 
 def validar_mensagem(obj) -> tuple:
-    """Valida envelope julia-ui-message/v1. Retorna (ok, normalizado|None, erros[])."""
+    """Valida envelope fajulto-ui-message/v1. Retorna (ok, normalizado|None, erros[])."""
     erros = []
     if not isinstance(obj, dict):
         return False, None, ["envelope deve ser objeto"]

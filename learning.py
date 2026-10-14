@@ -1,4 +1,4 @@
-"""JuliaLearningEngine — dados (FASE 2, V4.2).
+"""fajultoLearningEngine — dados (FASE 2, V4.2).
 
 Tabelas, validação e algoritmo de repetição espaçada. Stdlib pura.
 Tudo com owner_id (isolamento) e IDs client-side estáveis (idempotência:
@@ -179,6 +179,148 @@ def proxima_revisao(facilidade: float, intervalo_d: int, acertou: bool, hoje=Non
         intervalo = max(1, round(intervalo_d * fac))
     hoje = hoje or date.today()
     return round(fac, 2), intervalo, (hoje + timedelta(days=intervalo)).isoformat()
+
+
+# ── Operações (tentativas, respostas, importação) ───────────────────
+def novo_id(prefixo: str = "id") -> str:
+    import secrets as _s
+    return f"{prefixo}-{_s.token_hex(6)}"
+
+
+def criar_assessment(db, owner: str, titulo: str, assunto: str, questões: list,
+                     origem: str = "ia", assessment_id: str = "") -> dict:
+    """Valida e persiste prova + questões. Idempotente por id."""
+    if not isinstance(questões, list) or not (1 <= len(questões) <= 30):
+        raise LearnErro("questões: 1..30", "questoes")
+    norm = [validar_questao(q) for q in questões]
+    aid = (assessment_id or "")[:64] or novo_id("av")
+    with db:
+        db.execute("INSERT OR IGNORE INTO assessments (id, owner_id, titulo, assunto, origem, created_at)"
+                   " VALUES (?,?,?,?,?,?,?)",
+                   (aid, owner, str(titulo or "")[:160], str(assunto or "")[:120],
+                    str(origem or "ia")[:20], agora_iso()))
+        for i, q in enumerate(norm):
+            qid = q["id"] or f"{aid}-q{i}"
+            db.execute("INSERT OR IGNORE INTO questions (id, assessment_id, owner_id, enunciado, tipo,"
+                       " opcoes, gabarito, explicacao, dificuldade, assunto, ordem)"
+                       " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                       (qid, aid, owner, q["enunciado"], q["tipo"],
+                        json.dumps(q["opcoes"], ensure_ascii=False), q["gabarito"],
+                        q["explicacao"], q.get("dificuldade", "media"), q.get("assunto", ""),
+                        i))
+    return {"id": aid, "total": len(norm)}
+
+
+def obter_assessment(db, owner: str, assessment_id: str, com_gabarito: bool = False) -> dict:
+    row = db.execute("SELECT id, titulo, assunto, origem FROM assessments "
+                     "WHERE id=? AND owner_id=?", (assessment_id, owner)).fetchone()
+    if not row:
+        raise LearnErro("avaliação não encontrada", "ausente")
+    qs = db.execute("SELECT id, enunciado, tipo, opcoes, gabarito, explicacao, dificuldade, assunto"
+                    " FROM questions WHERE assessment_id=? AND owner_id=? ORDER BY ordem",
+                    (assessment_id, owner)).fetchall()
+    out = []
+    for qid, en, tipo, ops, gab, exp, dif, ass in qs:
+        item = {"id": qid, "enunciado": en, "tipo": tipo,
+                "opcoes": json.loads(ops or "[]"), "dificuldade": dif, "assunto": ass}
+        if com_gabarito:
+            item["gabarito"] = gab
+            item["explicacao"] = exp
+        out.append(item)
+    return {"id": row[0], "titulo": row[1], "assunto": row[2], "origem": row[3], "questions": out}
+
+
+def iniciar_tentativa(db, owner: str, assessment_id: str, attempt_id: str = "") -> dict:
+    row = db.execute("SELECT id FROM assessments WHERE id=? AND owner_id=?",
+                     (assessment_id, owner)).fetchone()
+    if not row:
+        raise LearnErro("avaliação não encontrada", "ausente")
+    aid = (attempt_id or "")[:64] or novo_id("att")
+    with db:
+        db.execute("INSERT OR IGNORE INTO attempts (id, assessment_id, owner_id, iniciada_em)"
+                   " VALUES (?,?,?,?)", (aid, assessment_id, owner, agora_iso()))
+    return {"id": aid, "assessment_id": assessment_id}
+
+
+def responder(db, owner: str, attempt_id: str, question_id: str, resposta) -> dict:
+    att = db.execute("SELECT assessment_id, finalizada_em FROM attempts "
+                     "WHERE id=? AND owner_id=?", (attempt_id, owner)).fetchone()
+    if not att:
+        raise LearnErro("tentativa não encontrada", "ausente")
+    if att[1]:
+        raise LearnErro("tentativa já finalizada", "finalizada")
+    q = db.execute("SELECT enunciado, tipo, opcoes, gabarito, explicacao FROM questions "
+                   "WHERE id=? AND assessment_id=? AND owner_id=?",
+                   (question_id, att[0], owner)).fetchone()
+    if not q:
+        raise LearnErro("questão não encontrada", "ausente")
+    questao = {"tipo": q[1], "gabarito": q[3]}
+    if q[1] == "discursiva":
+        with db:
+            db.execute("INSERT OR REPLACE INTO answers (attempt_id, question_id, owner_id,"
+                       " resposta, correta, corrigida_em) VALUES (?,?,?,?,?,?)",
+                       (attempt_id, question_id, owner, str(resposta or "")[:2000],
+                        -1, agora_iso()))
+        return {"correta": None, "avaliacao": "assistida",
+                "aviso": "Discursiva: avaliação assistida por IA, não gabarito final."}
+    certa = corrigir_objetiva(questao, resposta)
+    with db:
+        db.execute("INSERT OR REPLACE INTO answers (attempt_id, question_id, owner_id,"
+                   " resposta, correta, corrigida_em) VALUES (?,?,?,?,?,?)",
+                   (attempt_id, question_id, owner, str(resposta or "")[:500],
+                    1 if certa else 0, agora_iso()))
+    return {"correta": bool(certa)}
+
+
+def finalizar_tentativa(db, owner: str, attempt_id: str) -> dict:
+    att = db.execute("SELECT assessment_id FROM attempts WHERE id=? AND owner_id=?",
+                     (attempt_id, owner)).fetchone()
+    if not att:
+        raise LearnErro("tentativa não encontrada", "ausente")
+    rows = db.execute("SELECT q.id, q.tipo, q.gabarito, q.explicacao, a.resposta, a.correta,"
+                      " q.enunciado, q.opcoes FROM answers a JOIN questions q ON q.id=a.question_id "
+                      "WHERE a.attempt_id=? AND a.owner_id=?", (attempt_id, owner)).fetchall()
+    certas = sum(1 for r in rows if r[5] == 1)
+    total = sum(1 for r in rows if r[5] in (0, 1))
+    pendentes = sum(1 for r in rows if r[5] == -1)
+    nota = round(certas / total, 3) if total else 0.0
+    with db:
+        db.execute("UPDATE attempts SET finalizada_em=?, nota=?, total=? WHERE id=? AND owner_id=?",
+                   (agora_iso(), nota, total, attempt_id, owner))
+        db.execute("INSERT INTO study_events (owner_id, tipo, ref_id, detalhe, ts) VALUES (?,?,?,?,?)",
+                   (owner, "prova_finalizada", attempt_id,
+                    f"{certas}/{total}" + (f" +{pendentes} discursiva(s)" if pendentes else ""),
+                    agora_iso()))
+    def _texto_opcao(r):
+        try:
+            ops = json.loads(r[7] or "[]")
+            return ops[int(r[2])] if r[2].lstrip("-").isdigit() and 0 <= int(r[2]) < len(ops) else r[2]
+        except (ValueError, IndexError, TypeError):
+            return r[2]
+    erradas = [{"question_id": r[0], "enunciado": r[6], "sua": r[4], "gabarito": r[2],
+                "gabarito_texto": _texto_opcao(r), "explicacao": r[3]}
+               for r in rows if r[5] == 0]
+    return {"id": attempt_id, "nota": nota, "certas": certas, "total": total,
+            "pendentes_avaliacao": pendentes, "erradas": erradas[:10]}
+
+
+def historico_avulso(db, owner: str, titulo: str, assunto: str, certas: int,
+                     total: int) -> dict:
+    """Registra resultado de quiz inline (autodeclarado, origem marcada)."""
+    aid = novo_id("av")
+    with db:
+        db.execute("INSERT INTO assessments (id, owner_id, titulo, assunto, origem, created_at)"
+                   " VALUES (?,?,?,?,?,?)",
+                   (aid, owner, str(titulo or "Quiz")[:160], str(assunto or "")[:120],
+                    "quiz-inline", agora_iso()))
+        tid = novo_id("att")
+        db.execute("INSERT INTO attempts (id, assessment_id, owner_id, iniciada_em,"
+                   " finalizada_em, nota, total) VALUES (?,?,?,?,?,?,?)",
+                   (tid, aid, owner, agora_iso(), agora_iso(),
+                    round((certas or 0) / max(total or 1, 1), 3), int(total or 0)))
+        db.execute("INSERT INTO study_events (owner_id, tipo, ref_id, detalhe, ts) VALUES (?,?,?,?,?)",
+                   (owner, "quiz_inline", tid, f"{certas}/{total}", agora_iso()))
+    return {"assessment_id": aid, "attempt_id": tid}
 
 
 # ── Estatísticas (só dados reais; vazio útil sem dados) ───────────────

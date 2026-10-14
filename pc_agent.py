@@ -14,14 +14,14 @@ from urllib.parse import urlparse
 import docs_agent
 import hermes_bridge
 import jdui
-import julia_auth
+import fajulto_auth
 import learning
 import remoto
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger("julia-pc")
+log = logging.getLogger("fajulto-pc")
 
 SYSTEM_PADRAO = ("Você é a Júlia, assistente pessoal do usuário. "
                  "Responda em português, de forma direta e útil. "
@@ -34,7 +34,7 @@ SYSTEM_PADRAO = ("Você é a Júlia, assistente pessoal do usuário. "
                  "3) Para foto/ilustração: ![descrição](https://...) em markdown. "
                  "INTERFACES INTERATIVAS (quiz, checklist, calculadora, cards, diagrama, tabela, formulário): "
                  "NUNCA JavaScript, CSS ou código executável — descreva em blocos ```jdui "
-                 "(JSON {version:'julia-ui-message/v1',blocks:[{type:'ui',component,props}]}). "
+                 "(JSON {version:'fajulto-ui-message/v1',blocks:[{type:'ui',component,props}]}). "
                  "Pergunta simples → só texto, sem interface.")
 
 
@@ -43,7 +43,7 @@ def agora_iso() -> str:
 
 
 def database_path() -> Path:
-    return Path(os.environ.get("JULIA_SQLITE_PATH", str(Path.home() / ".julia-mobile" / "memory.sqlite3")))
+    return Path(os.environ.get("fajulto_SQLITE_PATH", str(Path.home() / ".fajulto-mobile" / "memory.sqlite3")))
 
 
 DONO_PADRAO = "local"
@@ -173,8 +173,8 @@ def open_db(path: Path):
     db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
     _migrar_memories_por_dono(db)
     _memoria_v41(db)
-    julia_auth.criar_tabelas(db)
-    julia_auth.migrar_legado(db)
+    fajulto_auth.criar_tabelas(db)
+    fajulto_auth.migrar_legado(db)
     learning.criar_tabelas(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
@@ -240,12 +240,12 @@ def list_messages(db, limit=200, owner=DONO_PADRAO):
 def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
-        "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
-        "system": os.environ.get("JULIA_SYSTEM_PROMPT", SYSTEM_PADRAO)[:2000],
-        "context": min(max(int(os.environ.get("JULIA_AI_CONTEXT", "12")), 1), 50),
-        "max_tokens": min(max(int(os.environ.get("JULIA_AI_MAX_TOKENS", "1500")), 1), 8000),
-        "memoria_global": os.environ.get("JULIA_SHARED_MEMORY", "1") == "1",
-        "pesquisa_web": os.environ.get("JULIA_WEB_SEARCH", "1") == "1",
+        "model": os.environ.get("fajulto_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
+        "system": os.environ.get("fajulto_SYSTEM_PROMPT", SYSTEM_PADRAO)[:2000],
+        "context": min(max(int(os.environ.get("fajulto_AI_CONTEXT", "12")), 1), 50),
+        "max_tokens": min(max(int(os.environ.get("fajulto_AI_MAX_TOKENS", "1500")), 1), 8000),
+        "memoria_global": os.environ.get("fajulto_SHARED_MEMORY", "1") == "1",
+        "pesquisa_web": os.environ.get("fajulto_WEB_SEARCH", "1") == "1",
     }
 
 
@@ -995,7 +995,7 @@ def pesquisa_web(consulta: str, max_resultados: int = 6, timeout: float = 8.0) -
     return []
 
 
-class JuliaPresentationEngine:
+class fajultoPresentationEngine:
     """Decide quando a resposta merece interface declarativa JDUI (sem JS do modelo)."""
 
     REGRAS = [
@@ -1024,7 +1024,7 @@ class JuliaPresentationEngine:
 
 JDUI_CATALOGO = (
     "INTERFACE DECLARATIVA (use quando pedida ou muito útil; texto simples prefere texto): "
-    "responda com texto normal + blocos ```jdui com JSON {version:'julia-ui-message/v1',"
+    "responda com texto normal + blocos ```jdui com JSON {version:'fajulto-ui-message/v1',"
     "blocks:[{type:'text',content},{type:'ui',component,props}]}. Componentes: "
     "quiz{title,questions[{q,options[2..6],answer(índice),explain}]}; "
     "checklist{title,items[]}; calculator{kind:basic|imc|porcentagem|juros}; "
@@ -1039,7 +1039,7 @@ JDUI_CATALOGO = (
 
 def intencao_widget(texto: str) -> str:
     """Legado: agora redireciona para o componente JDUI equivalente."""
-    comp = JuliaPresentationEngine.sugerir(texto)
+    comp = fajultoPresentationEngine.sugerir(texto)
     return comp or ""
 
 
@@ -1074,15 +1074,15 @@ def ultimos_blocos_jdui(db, conversation_id: str, limite: int = 2, owner=DONO_PA
 
 JDUI_SINTETIZAR = {
     "quiz": ("Converta o quiz abaixo para JSON JDUI. Responda SÓ com o JSON, sem cercas e sem texto: "
-             '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"quiz",'
+             '{"version":"fajulto-ui-message/v1","blocks":[{"type":"ui","component":"quiz",'
              '"props":{"title":"...","questions":[{"q":"...","options":["...","..."],"answer":0,"explain":"..."}]}}]}. '
              "Regras: use as perguntas e opções do conteúdo (em código Python, a certa está no `if`); "
              "máximo 6 perguntas, 4 opções cada, answer é o índice; explain curta."),
     "checklist": ("Converta a lista abaixo para JSON JDUI. Responda SÓ com o JSON: "
-                  '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"checklist",'
+                  '{"version":"fajulto-ui-message/v1","blocks":[{"type":"ui","component":"checklist",'
                   '"props":{"title":"...","items":["..."]}}]}. Máximo 20 itens curtos.'),
     "calculator": ("O usuário quer uma calculadora. Responda SÓ com o JSON JDUI: "
-                   '{"version":"julia-ui-message/v1","blocks":[{"type":"ui","component":"calculator",'
+                   '{"version":"fajulto-ui-message/v1","blocks":[{"type":"ui","component":"calculator",'
                    '"props":{"kind":"basic"}}]}. kind: basic (padrão), imc (peso/altura), '
                    "porcentagem (valor/percentual) ou juros (capital/taxa/meses) conforme o pedido."),
 }
@@ -1350,7 +1350,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                 "PROIBIDO usar ```jdui aqui — é código-fonte, não interface. "
                 "JSON da interface:\n" + json.dumps(blocos_prev[0], ensure_ascii=False)[:4000])
     # JDUI: impõe interface declarativa quando pedida ou muito útil.
-    comp_sugerido = JuliaPresentationEngine.sugerir(texto_usuario)
+    comp_sugerido = fajultoPresentationEngine.sugerir(texto_usuario)
     extras["comp_sugerido"] = comp_sugerido or ""
     if comp_sugerido:
         diretiva = "PEDIDO DE INTERFACE INTERATIVA (componente: " + comp_sugerido + "). " + JDUI_CATALOGO
@@ -1475,9 +1475,9 @@ def dono_bloqueado(db, owner: str) -> bool:
     """
     owner = dono_valido(owner)
     try:
-        user = julia_auth.buscar_uid(db, owner)
+        user = fajulto_auth.buscar_uid(db, owner)
         if user is not None:
-            return julia_auth.status_efetivo(db, owner) != "ativo"
+            return fajulto_auth.status_efetivo(db, owner) != "ativo"
         if owner == "local":
             return False
         total = db.execute("SELECT COUNT(*) FROM users").fetchone()[0]
@@ -1500,10 +1500,10 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     owner = dono_valido(payload.get("owner"))
     if dono_bloqueado(db, owner):
         return {"error": "Conta indisponível.", "codigo": "bloqueada"}
-    lim = julia_auth.limites_usuario(db, owner)
-    if julia_auth.simultaneas_ia(db, owner) >= lim["max_ia_simult"]:
+    lim = fajulto_auth.limites_usuario(db, owner)
+    if fajulto_auth.simultaneas_ia(db, owner) >= lim["max_ia_simult"]:
         return {"error": "Muitas gerações ao mesmo tempo; aguarde.", "codigo": "limite"}
-    if julia_auth.uso_ia_hora(db, owner) >= lim["max_ai_hora"]:
+    if fajulto_auth.uso_ia_hora(db, owner) >= lim["max_ai_hora"]:
         return {"error": "Limite de uso da IA por hora atingido.", "codigo": "limite"}
     previo = ai_estado(db, mid, owner)
     if previo and previo["state"] == "completed":
@@ -1591,6 +1591,61 @@ def ai_continuar(db, payload: dict, cfg: dict) -> dict:
     return {"reply_id": est["reply_id"], "response_text": combinado, "model": modelo}
 
 
+PROVA_TRIGGERS = ("prova", "simulado", "avalia", "discursiva", "valendo nota",
+                  "teste final", "exame")
+
+
+def intencao_prova(texto: str) -> bool:
+    t = (texto or "").lower()
+    return any(k in t for k in PROVA_TRIGGERS)
+
+
+def sintetizar_prova(db, cfg: dict, owner: str, texto_usuario: str) -> str:
+    """Gera prova formal via LLM e guarda como assessment. Retorna fence exam ou ''."""
+    m = re.search(r"(\d{1,2})\s*(quest|pergunt|itens|items)", texto_usuario or "")
+    n = min(max(int(m.group(1)) if m else 5, 1), 10)
+    prompt = ("Crie uma avaliação com %d questões em JSON (SÓ o JSON, sem cercas): "
+              "[{\"enunciado\": \"...\", \"tipo\": \"multipla|vf|curta|discursiva\", "
+              "\"opcoes\": [\"...\"], \"gabarito\": <índice ou texto ou critérios>, "
+              "\"explicacao\": \"...\", \"dificuldade\": \"facil|media|dificil\", \"assunto\": \"...\"}]. "
+              "multipla/vf: gabarito é o ÍNDICE (número); curta: texto exato; "
+              "discursiva: gabarito com critérios de correção (30+ chars). "
+              "Assunto: %s" % (n, (texto_usuario or "")[:300]))
+    try:
+        res = hermes_bridge.chat_complete(
+            cfg["proxy"], cfg["model"],
+            [{"role": "system", "content": "Você gera avaliações. Responda SÓ JSON válido."},
+             {"role": "user", "content": prompt}], max_tokens=2000)
+        corpo = (res.get("texto") or "").strip()
+        m2 = re.search(r"```(?:json)?\s*\n?([\s\S]*?)```", corpo)
+        if m2:
+            corpo = m2.group(1).strip()
+        obj = json.loads(corpo)
+        lista = obj if isinstance(obj, list) else obj.get("questions", [])
+        validas = []
+        for q in lista if isinstance(lista, list) else []:
+            try:
+                validas.append(learning.validar_questao(q if isinstance(q, dict) else {}))
+            except learning.LearnErro:
+                continue
+        if len(validas) < 2:
+            return ""
+        titulo = re.sub(r"\s+", " ", (texto_usuario or "Prova")).strip()[:80] or "Prova"
+        av = learning.criar_assessment(db, owner, titulo, validas[0].get("assunto", ""),
+                                       validas, origem="ia")
+        fence = {"version": jdui.VERSION, "blocks": [
+            {"type": "text", "content": f"Prova pronta: **{titulo}** ({len(validas)} questões). Boa prova! 📝"},
+            {"type": "ui", "component": "exam",
+             "props": {"assessment_id": av["id"], "title": titulo}}]}
+        ok, norm, _ = jdui.validar_mensagem(fence)
+        if not ok:
+            return ""
+        return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+    except Exception as exc:
+        log.warning("síntese de prova falhou (%s)", type(exc).__name__)
+        return ""
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -1620,7 +1675,12 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
-    if not blocos_jdui and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
+    if not blocos_jdui and intencao_prova(prep.get("user_text", "")):
+        fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
+        if fence:
+            texto += fence
+            log.info("prova sintetizada para %s", mid)
+    if not blocos_jdui and "```jdui" not in texto and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
         fence = sintetizar_jdui(cfg_eff, extras["comp_sugerido"], prep.get("user_text", ""), texto)
         if fence:
             texto += fence
@@ -1722,7 +1782,12 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
-        if not blocos_jdui and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
+        if not blocos_jdui and intencao_prova(prep.get("user_text", "")):
+            fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
+            if fence:
+                texto_final += fence
+                log.info("prova sintetizada no stream %s", mid)
+        if not blocos_jdui and "```jdui" not in texto_final and extras.get("comp_sugerido") in JDUI_SINTETIZAR:
             fence = sintetizar_jdui(cfg_eff, extras["comp_sugerido"], prep.get("user_text", ""), texto_final)
             if fence:
                 texto_final += fence  # o tail-emit abaixo entrega como deltas finais
@@ -1749,13 +1814,13 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
 
 
 def run():
-    relay_url = os.environ.get("JULIA_RELAY_URL", "").strip().rstrip("/")
-    token = os.environ.get("JULIA_AGENT_TOKEN", "")
+    relay_url = os.environ.get("fajulto_RELAY_URL", "").strip().rstrip("/")
+    token = os.environ.get("fajulto_AGENT_TOKEN", "")
     if not relay_url or not token:
-        raise SystemExit("Configure JULIA_RELAY_URL e JULIA_AGENT_TOKEN")
+        raise SystemExit("Configure fajulto_RELAY_URL e fajulto_AGENT_TOKEN")
     parsed = urlparse(relay_url)
     if parsed.scheme not in ("https", "http") or not parsed.netloc:
-        raise SystemExit("JULIA_RELAY_URL inválida")
+        raise SystemExit("fajulto_RELAY_URL inválida")
     if parsed.scheme == "http" and parsed.hostname not in ("127.0.0.1", "localhost"):
         raise SystemExit("O agente exige HTTPS fora de localhost")
     ws_url = f"{'wss' if parsed.scheme == 'https' else 'ws'}://{parsed.netloc}/api/agent/ws"
@@ -1770,9 +1835,9 @@ def run():
     pause = 2
     log.info("SQLite local preparado: %s", database_path())
     if remoto.entrada_ativada():
-        log.warning("CONTROLE REMOTO ATIVO (JULIA_REMOTE=1): cliques/teclas do celular serão executados. Comandos registrados no log.")
+        log.warning("CONTROLE REMOTO ATIVO (fajulto_REMOTE=1): cliques/teclas do celular serão executados. Comandos registrados no log.")
     else:
-        log.info("Controle remoto desativado (somente visualização). Defina JULIA_REMOTE=1 para ativar.")
+        log.info("Controle remoto desativado (somente visualização). Defina fajulto_REMOTE=1 para ativar.")
     cancelados: dict = {}
     while True:
         try:
@@ -1789,7 +1854,7 @@ def run():
                     tipo = req.get("type")
 
                     def _exige_admin():
-                        u = julia_auth.buscar_uid(db, dono)
+                        u = fajulto_auth.buscar_uid(db, dono)
                         if not u or u.get("role") != "admin" or u.get("status") != "ativo":
                             return None
                         return u
@@ -1810,38 +1875,38 @@ def run():
                         reply = _resp_erro("Conta indisponível.", "bloqueada")
                     elif tipo == "auth_login":
                         try:
-                            user = julia_auth.login_conta(db, req.get("username", ""),
+                            user = fajulto_auth.login_conta(db, req.get("username", ""),
                                                           req.get("password", ""))
-                            sess = julia_auth.criar_sessao(db, user["uid"])
+                            sess = fajulto_auth.criar_sessao(db, user["uid"])
                             reply = _resp_ok("auth_ok", uid=user["uid"], username=user["username"],
                                              display=user["display"], role=user["role"],
                                              sid=sess["sid"], expira_em=sess["expira_em"])
-                        except julia_auth.AuthErro as exc:
+                        except fajulto_auth.AuthErro as exc:
                             reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "auth_register":
                         try:
-                            reg = julia_auth.registrar(db, req.get("display", ""),
+                            reg = fajulto_auth.registrar(db, req.get("display", ""),
                                                        req.get("username", ""),
                                                        req.get("password", ""),
                                                        req.get("invite", ""))
                             out = {"uid": reg["uid"], "username": reg["username"],
                                    "display": reg["display"], "status": reg["status"]}
                             if reg["status"] == "ativo" and reg["uid"]:
-                                sess = julia_auth.criar_sessao(db, reg["uid"])
+                                sess = fajulto_auth.criar_sessao(db, reg["uid"])
                                 out["sid"] = sess["sid"]
                                 out["expira_em"] = sess["expira_em"]
                             reply = _resp_ok("auth_registered", **out)
-                        except julia_auth.AuthErro as exc:
+                        except fajulto_auth.AuthErro as exc:
                             reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "auth_config":
-                        reply = _resp_ok("auth_config", modo=julia_auth.modo_cadastro(db),
-                                         exigir_aprovacao=julia_auth.config_get(
+                        reply = _resp_ok("auth_config", modo=fajulto_auth.modo_cadastro(db),
+                                         exigir_aprovacao=fajulto_auth.config_get(
                                              db, "exigir_aprovacao", "1") == "1")
                     elif tipo == "auth_logout":
-                        julia_auth.revogar_sessao(db, req.get("sid", ""))
+                        fajulto_auth.revogar_sessao(db, req.get("sid", ""))
                         reply = _resp_ok("auth_logged_out")
                     elif tipo == "auth_whoami":
-                        user = julia_auth.sessao_valida(db, req.get("sid", ""))
+                        user = fajulto_auth.sessao_valida(db, req.get("sid", ""))
                         reply = _resp_ok("auth_user", user=user) if user else \
                             _resp_erro("Sessão inválida.", "sessao")
                     elif tipo == "account_password":
@@ -1849,28 +1914,28 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.trocar_senha(db, dono, req.get("atual", ""),
+                                fajulto_auth.trocar_senha(db, dono, req.get("atual", ""),
                                                         req.get("nova", ""))
                                 reply = _resp_ok("account_ok")
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "account_delete":
                         try:
-                            alvo = julia_auth.buscar_uid(db, dono)
-                            if not alvo or not julia_auth.confere_senha(
+                            alvo = fajulto_auth.buscar_uid(db, dono)
+                            if not alvo or not fajulto_auth.confere_senha(
                                     req.get("password", ""),
-                                    (julia_auth.buscar_usuario(db, alvo["username"]) or {}).get("hash", "")):
-                                raise julia_auth.AuthErro("Senha incorreta.", "senha")
+                                    (fajulto_auth.buscar_usuario(db, alvo["username"]) or {}).get("hash", "")):
+                                raise fajulto_auth.AuthErro("Senha incorreta.", "senha")
                             n_admin = db.execute("SELECT COUNT(*) FROM users WHERE role='admin' "
                                                  "AND status='ativo'").fetchone()[0]
                             if alvo["role"] == "admin" and n_admin <= 1:
-                                raise julia_auth.AuthErro(
+                                raise fajulto_auth.AuthErro(
                                     "Último admin: transfira antes de excluir.", "ultimo_admin")
                             total = _apagar_todos_dados(db, dono)
-                            julia_auth.auditar(db, dono, "conta_autoexcluida", alvo["username"],
+                            fajulto_auth.auditar(db, dono, "conta_autoexcluida", alvo["username"],
                                                f"registros={total}")
                             reply = _resp_ok("account_deleted", apagados=total)
-                        except julia_auth.AuthErro as exc:
+                        except fajulto_auth.AuthErro as exc:
                             reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_users":
                         adm = _exige_admin()
@@ -1895,11 +1960,11 @@ def run():
                         else:
                             try:
                                 papel = req.get("role", "user") if req.get("role") in ("admin", "user") else "user"
-                                user = julia_auth.criar_usuario(
+                                user = fajulto_auth.criar_usuario(
                                     db, req.get("username", ""), req.get("display", ""),
                                     req.get("password", ""), papel=papel, criado_por=dono)
                                 reply = _resp_ok("admin_user_created", **user)
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_user_role":
                         adm = _exige_admin()
@@ -1907,9 +1972,9 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.definir_papel(db, dono, req.get("uid", ""), req.get("role", ""))
+                                fajulto_auth.definir_papel(db, dono, req.get("uid", ""), req.get("role", ""))
                                 reply = _resp_ok("admin_ok")
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_user_status":
                         adm = _exige_admin()
@@ -1917,10 +1982,10 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.definir_status(db, dono, req.get("uid", ""),
+                                fajulto_auth.definir_status(db, dono, req.get("uid", ""),
                                                           req.get("status", ""), req.get("dias", 0))
                                 reply = _resp_ok("admin_ok")
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_user_delete":
                         adm = _exige_admin()
@@ -1928,34 +1993,34 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                n = julia_auth.excluir_usuario(db, dono, req.get("uid", ""))
+                                n = fajulto_auth.excluir_usuario(db, dono, req.get("uid", ""))
                                 reply = _resp_ok("admin_ok", apagados=n)
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_invite_create":
                         adm = _exige_admin()
                         if not adm:
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
-                            conv = julia_auth.gerar_convite(db, dono, req.get("max_usos", 1),
+                            conv = fajulto_auth.gerar_convite(db, dono, req.get("max_usos", 1),
                                                            req.get("dias", 7), req.get("nota", ""))
                             reply = _resp_ok("admin_invite", **conv)
                     elif tipo == "admin_invites":
                         adm = _exige_admin()
                         reply = _resp_ok("admin_invites",
-                                         invites=julia_auth.listar_convites(db)) if adm else \
+                                         invites=fajulto_auth.listar_convites(db)) if adm else \
                             _resp_erro("Sem permissão.", "permissao")
                     elif tipo == "admin_invite_revoke":
                         adm = _exige_admin()
                         if not adm:
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
-                            julia_auth.revogar_convite(db, dono, req.get("id", 0))
+                            fajulto_auth.revogar_convite(db, dono, req.get("id", 0))
                             reply = _resp_ok("admin_ok")
                     elif tipo == "admin_regs":
                         adm = _exige_admin()
                         reply = _resp_ok("admin_regs",
-                                         pedidos=julia_auth.listar_pedidos(db)) if adm else \
+                                         pedidos=fajulto_auth.listar_pedidos(db)) if adm else \
                             _resp_erro("Sem permissão.", "permissao")
                     elif tipo == "admin_reg_decide":
                         adm = _exige_admin()
@@ -1963,10 +2028,10 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.decidir_pedido(db, dono, req.get("id", 0),
+                                fajulto_auth.decidir_pedido(db, dono, req.get("id", 0),
                                                           bool(req.get("aprovar")))
                                 reply = _resp_ok("admin_ok")
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "admin_config_set":
                         adm = _exige_admin()
@@ -1974,16 +2039,16 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             modo = str(req.get("modo", ""))
-                            if modo and modo not in julia_auth.MODOS:
+                            if modo and modo not in fajulto_auth.MODOS:
                                 reply = _resp_erro("Modo inválido.", "invalido")
                             else:
                                 if modo:
-                                    julia_auth.config_set(db, "modo_cadastro", modo)
+                                    fajulto_auth.config_set(db, "modo_cadastro", modo)
                                 if "exigir_aprovacao" in req:
-                                    julia_auth.config_set(
+                                    fajulto_auth.config_set(
                                         db, "exigir_aprovacao",
                                         "1" if req.get("exigir_aprovacao") else "0")
-                                julia_auth.auditar(db, dono, "config_alterada", "",
+                                fajulto_auth.auditar(db, dono, "config_alterada", "",
                                                    f"modo={modo or '-'}")
                                 reply = _resp_ok("admin_ok")
                     elif tipo == "admin_audit":
@@ -2005,7 +2070,7 @@ def run():
                             with db:
                                 db.execute("UPDATE user_sessions SET revogada=1 WHERE uid=?",
                                            (str(req.get("uid", "")),))
-                            julia_auth.auditar(db, dono, "sessoes_revogadas", str(req.get("uid", "")))
+                            fajulto_auth.auditar(db, dono, "sessoes_revogadas", str(req.get("uid", "")))
                             reply = _resp_ok("admin_ok")
                     elif tipo == "admin_user_limits":
                         adm = _exige_admin()
@@ -2013,14 +2078,14 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.update_limits(db, dono, str(req.get("uid", "")),
+                                fajulto_auth.update_limits(db, dono, str(req.get("uid", "")),
                                                         req.get("max_ai_hora", 0), req.get("max_ia_simult", 0),
                                                         req.get("remote_ok", None))
                                 reply = _resp_ok("admin_ok")
-                            except julia_auth.AuthErro as exc:
+                            except fajulto_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "sess_revogados":
-                        reply = _resp_ok("sess_revogados", sids=julia_auth.sids_revogados(db))
+                        reply = _resp_ok("sess_revogados", sids=fajulto_auth.sids_revogados(db))
                     elif req.get("type") == "sync":
                         confirmed_ids = persist_messages(db, req.get("messages", []), dono)
                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
@@ -2063,6 +2128,56 @@ def run():
                             reply = {"request_id": request_id, "type": "doc_error",
                                      "error": str(exc)[:300],
                                      "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "learn_get":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_assessment",
+                                     **learning.obter_assessment(
+                                         db, dono, str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_attempt":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_attempt",
+                                     **learning.iniciar_tentativa(
+                                         db, dono, str(req.get("assessment_id", ""))[:64],
+                                         str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_answer":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_answer",
+                                     **learning.responder(
+                                         db, dono, str(req.get("attempt_id", ""))[:64],
+                                         str(req.get("question_id", ""))[:64],
+                                         str(req.get("resposta", ""))[:2000])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_finish":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_result",
+                                     **learning.finalizar_tentativa(
+                                         db, dono, str(req.get("attempt_id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_avulso":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_avulso_ok",
+                                     **learning.historico_avulso(
+                                         db, dono, str(req.get("titulo", ""))[:160],
+                                         str(req.get("assunto", ""))[:120],
+                                         int(req.get("certas", 0) or 0),
+                                         int(req.get("total", 0) or 0))}
+                        except (learning.LearnErro, TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "learn_stats":
+                        reply = {"request_id": request_id, "type": "learn_stats",
+                                 "resumo": learning.resumo_progresso(db, dono),
+                                 "por_assunto": learning.desempenho_por_assunto(db, dono)}
                     elif req.get("type") == "ui_state_save":
                         salvos = 0
                         with db:
@@ -2202,7 +2317,7 @@ def run():
                             reply = {"request_id": request_id, "type": "screen_error",
                                      "error": str(exc), "codigo": exc.codigo}
                     elif req.get("type") == "input":
-                        if not julia_auth.pode_remoto(db, dono):
+                        if not fajulto_auth.pode_remoto(db, dono):
                             reply = {"request_id": request_id, "type": "input_error",
                                      "error": "Sem autorização para controlar o PC.",
                                      "codigo": "sem_permissao"}

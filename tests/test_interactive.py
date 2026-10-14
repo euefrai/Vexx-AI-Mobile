@@ -14,7 +14,7 @@ def _db():
 
 
 def test_presentation_engine():
-    E = pc_agent.JuliaPresentationEngine
+    E = pc_agent.fajultoPresentationEngine
     assert E.sugerir('Crie uma calculadora que funcione aqui no chat') == 'calculator'
     assert E.sugerir('quero um quiz de matemática com 6 perguntas') == 'quiz'
     assert E.sugerir('monte minha rotina de estudos') == 'checklist'
@@ -40,7 +40,7 @@ def test_quiz_proibe_codigo_e_oferece_fonte():
 def test_followup_codigo_injeta_ultimo_quiz():
     import json as _json
     db = _db()
-    quiz = {"version": "julia-ui-message/v1", "blocks": [
+    quiz = {"version": "fajulto-ui-message/v1", "blocks": [
         {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
             {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]}
     pc_agent.persist_messages(db, [
@@ -75,7 +75,7 @@ def test_montar_injeta_diretiva_jdui():
 
 def test_sintetizar_jdui_converte_texto():
     import json as _json
-    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+    quiz_json = _json.dumps({"version": "fajulto-ui-message/v1", "blocks": [
         {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
             {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
     cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm'}
@@ -107,7 +107,7 @@ def test_ai_completa_sintetiza_quiz_sem_fence(monkeypatch):
         'created_at': '2026-10-13T12:00:00.000Z', 'conversation_id': 'conv-qz'}])
     cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 's',
            'context': 5, 'max_tokens': 500}
-    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+    quiz_json = _json.dumps({"version": "fajulto-ui-message/v1", "blocks": [
         {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
             {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
     chamadas = []
@@ -129,7 +129,7 @@ def test_ai_completa_sintetiza_quiz_sem_fence(monkeypatch):
 def test_ai_completa_nao_sintetiza_quando_ja_tem_fence(monkeypatch):
     import json as _json
     db = _db()
-    quiz_json = _json.dumps({"version": "julia-ui-message/v1", "blocks": [
+    quiz_json = _json.dumps({"version": "fajulto-ui-message/v1", "blocks": [
         {"type": "ui", "component": "quiz", "props": {"title": "Py", "questions": [
             {"q": "2+2?", "options": ["3", "4"], "answer": 1}]}}]})
     pc_agent.persist_messages(db, [{

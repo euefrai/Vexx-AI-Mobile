@@ -17,10 +17,10 @@ import server
 
 
 def setup_module():
-    os.environ['JULIA_USERNAME'] = 'efrai'
-    os.environ['JULIA_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
-    os.environ['JULIA_SESSION_SECRET'] = 'a' * 64
-    os.environ['JULIA_AGENT_TOKEN'] = 'b' * 64
+    os.environ['fajulto_USERNAME'] = 'efrai'
+    os.environ['fajulto_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['fajulto_SESSION_SECRET'] = 'a' * 64
+    os.environ['fajulto_AGENT_TOKEN'] = 'b' * 64
     server.login_failures.clear()
 
 
@@ -170,7 +170,7 @@ def test_relay_docs_e_memories():
     with TestClient(server.app) as client:
         csrf = login(client)
         with client.websocket_connect('/api/agent/ws',
-                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+                                      headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
             handlers = {
                 'sess_revogados': lambda r: {'type': 'sess_revogados', 'sids': []},
                 'doc_upload': lambda r: ({'type': 'doc_uploaded', 'doc_id': 'doc-abc123',

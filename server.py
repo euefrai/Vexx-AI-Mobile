@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from pydantic import BaseModel, Field
 
-log = logging.getLogger("julia-mobile")
+log = logging.getLogger("fajulto-mobile")
 ROOT = Path(__file__).resolve().parent
 app = FastAPI(title="Júlia Mobile Relay", docs_url=None, redoc_url=None, openapi_url=None)
 ph = PasswordHasher()
@@ -28,11 +28,11 @@ SESSION_LIFETIME = 12 * 60 * 60
 
 def config():
     return {
-        "user": os.environ.get("JULIA_USERNAME", ""),
-        "password_hash": os.environ.get("JULIA_PASSWORD_HASH", ""),
-        "agent_token": os.environ.get("JULIA_AGENT_TOKEN", ""),
-        "session_secret": os.environ.get("JULIA_SESSION_SECRET", ""),
-        "production": os.environ.get("JULIA_ENV") == "production",
+        "user": os.environ.get("fajulto_USERNAME", ""),
+        "password_hash": os.environ.get("fajulto_PASSWORD_HASH", ""),
+        "agent_token": os.environ.get("fajulto_AGENT_TOKEN", ""),
+        "session_secret": os.environ.get("fajulto_SESSION_SECRET", ""),
+        "production": os.environ.get("fajulto_ENV") == "production",
     }
 
 
@@ -45,12 +45,12 @@ def signer():
     secret = config()["session_secret"]
     if not secret:
         raise HTTPException(503, "Servidor ainda não configurado")
-    return URLSafeTimedSerializer(secret, salt="julia-mobile-session-v1")
+    return URLSafeTimedSerializer(secret, salt="fajulto-mobile-session-v1")
 
 
 def sessao_dados(request: Request) -> dict:
     """Sessão autenticada: {uid, user, sid}. uid é o dono dos dados no PC."""
-    token = request.cookies.get("julia_session")
+    token = request.cookies.get("fajulto_session")
     if not token:
         raise HTTPException(status_code=401, detail="Faça login")
     try:
@@ -76,7 +76,7 @@ def emitir_sessao(response: Response, uid: str, nome: str, sid: str = "") -> dic
                             "nome": nome, "sid": sid or secrets.token_hex(8),
                             "nonce": secrets.token_hex(16)})
     response.set_cookie(
-        "julia_session", token, httponly=True, secure=config()["production"],
+        "fajulto_session", token, httponly=True, secure=config()["production"],
         samesite="strict", max_age=SESSION_LIFETIME, path="/"
     )
     return {"authenticated": True, "csrf": csrf_value(token), "user": nome, "uid": uid}
@@ -117,7 +117,7 @@ async def revogacao_ok(request: Request) -> str:
 
 def verify_session(request: Request) -> str:
     sessao_usuario(request)
-    token = request.cookies.get("julia_session")
+    token = request.cookies.get("fajulto_session")
     return token or ""
 
 
@@ -379,7 +379,7 @@ async def session(request: Request):
             except HTTPException as exc:
                 if exc.status_code == 401:
                     raise
-    token = request.cookies.get("julia_session", "")
+    token = request.cookies.get("fajulto_session", "")
     return {"authenticated": True, "csrf": csrf_value(token), "user": nome,
             "uid": uid, "role": papel}
 
@@ -393,7 +393,7 @@ async def logout(request: Request, response: Response):
             await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
     except HTTPException:
         pass
-    response.delete_cookie("julia_session", path="/")
+    response.delete_cookie("fajulto_session", path="/")
     return {"ok": True}
 
 
@@ -448,7 +448,7 @@ async def account_delete(request: Request, body: ExcluiConta, response: Response
     if result.get("type") != "account_deleted":
         raise HTTPException(422 if result.get("type") == "op_error" else 503,
                             result.get("error", "Falha ao excluir"))
-    response.delete_cookie("julia_session", path="/")
+    response.delete_cookie("fajulto_session", path="/")
     return {"ok": True, "apagados": result.get("apagados", 0)}
 
 
@@ -1072,7 +1072,7 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
 
 @app.post("/api/input")
 async def remote_input(request: Request, body: InputBody):
-    """Executa mouse/teclado no PC. Exige login + CSRF + grant remoto (além de JULIA_REMOTE=1)."""
+    """Executa mouse/teclado no PC. Exige login + CSRF + grant remoto (além de fajulto_REMOTE=1)."""
     require_csrf(request)
     dono = await revogacao_ok(request)
     result = await relay.exchange({"type": "input", "owner": dono,

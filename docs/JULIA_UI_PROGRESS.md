@@ -7,7 +7,7 @@
 | Inspeção da estrutura do projeto  | FUNCIONAL |
 | Inspeção de Fajulto Studio/Arq    | FUNCIONAL |
 | Testes existentes                 | ver RELATORIO (nenhuma falha real; 1 warning benigno de teardown) |
-| Inspeção julia_auth.py            | FUNCIONAL |
+| Inspeção fajulto_auth.py            | FUNCIONAL |
 | Inspeção server.py                | FUNCIONAL |
 | Inspeção controle.py             | FUNCIONAL |
 | Suíte base                        | ver RELATORIO (102 passed) |

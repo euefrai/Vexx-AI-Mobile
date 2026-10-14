@@ -7,51 +7,51 @@ O painel administrativo está integrado ao **Fajulto Studio**
 como um **card adicional** na página principal.
 
 A lógica reside em:
-`studio/integracoes/julia_mobile.py` → classe `GerenciadorJuliaMobile`.
+`studio/integracoes/fajulto_mobile.py` → classe `GerenciadorfajultoMobile`.
 
 ## Arquitetura de Integração
 
 ```
 Fajulto Studio (browser) ──HTTP──► controle.py (do_POST)
                                     │
-                                    ├─ /api/controle/julia/admin/*
+                                    ├─ /api/controle/fajulto/admin/*
                                     │
-                                    └─ _julia() ──► GerenciadorJuliaMobile
+                                    └─ _fajulto() ──► GerenciadorfajultoMobile
                                                        │
                                                        ├─ _open_admin_db()
-                                                       │     └─ import julia_auth
+                                                       │     └─ import fajulto_auth
                                                        │     └─ sqlite3.connect(sqlite_path)
                                                        │     └─ criar_tabelas() + migrar_legado()
                                                        │
-                                                       └─ chamadas julia_auth.* (reutilizáveis)
+                                                       └─ chamadas fajulto_auth.* (reutilizáveis)
 ```
 
 ## Endpoints de API
 
 | Rota                                        | Método | Ação                                  |
 |---------------------------------------------|--------|---------------------------------------|
-| `/api/controle/julia/admin/status`          | GET    | Visão geral (counts, estado, modo)    |
-| `/api/controle/julia/admin/users`           | GET    | Lista de usuários                     |
-| `/api/controle/julia/admin/users/create`    | POST   | Criar usuário (admin)                 |
-| `/api/controle/julia/admin/users/role`      | POST   | Alterar papel                         |
-| `/api/controle/julia/admin/users/status`    | POST   | Bloquear/desbloquear                  |
-| `/api/controle/julia/admin/users/sessions`  | POST   | Revogar todas as sessões              |
-| `/api/controle/julia/admin/users/limits`    | POST   | Atualizar limites                     |
-| `/api/controle/julia/admin/users/delete`    | POST   | Excluir conta                         |
-| `/api/controle/julia/admin/invites`         | GET    | Listar convites                       |
-| `/api/controle/julia/admin/invites/create`  | POST   | Gerar novo convite                    |
-| `/api/controle/julia/admin/invites/revoke`  | POST   | Revogar convite                       |
-| `/api/controle/julia/admin/regs`            | GET    | Listar pedidos pendentes              |
-| `/api/controle/julia/admin/regs/decide`     | POST   | Aprovar/recusar                       |
-| `/api/controle/julia/admin/config`          | GET    | Obter config de cadastro              |
-| `/api/controle/julia/admin/config/set`      | POST   | Alterar modo / exigir aprovação       |
-| `/api/controle/julia/admin/audit`           | POST   | Últimos eventos de auditoria          |
+| `/api/controle/fajulto/admin/status`          | GET    | Visão geral (counts, estado, modo)    |
+| `/api/controle/fajulto/admin/users`           | GET    | Lista de usuários                     |
+| `/api/controle/fajulto/admin/users/create`    | POST   | Criar usuário (admin)                 |
+| `/api/controle/fajulto/admin/users/role`      | POST   | Alterar papel                         |
+| `/api/controle/fajulto/admin/users/status`    | POST   | Bloquear/desbloquear                  |
+| `/api/controle/fajulto/admin/users/sessions`  | POST   | Revogar todas as sessões              |
+| `/api/controle/fajulto/admin/users/limits`    | POST   | Atualizar limites                     |
+| `/api/controle/fajulto/admin/users/delete`    | POST   | Excluir conta                         |
+| `/api/controle/fajulto/admin/invites`         | GET    | Listar convites                       |
+| `/api/controle/fajulto/admin/invites/create`  | POST   | Gerar novo convite                    |
+| `/api/controle/fajulto/admin/invites/revoke`  | POST   | Revogar convite                       |
+| `/api/controle/fajulto/admin/regs`            | GET    | Listar pedidos pendentes              |
+| `/api/controle/fajulto/admin/regs/decide`     | POST   | Aprovar/recusar                       |
+| `/api/controle/fajulto/admin/config`          | GET    | Obter config de cadastro              |
+| `/api/controle/fajulto/admin/config/set`      | POST   | Alterar modo / exigir aprovação       |
+| `/api/controle/fajulto/admin/audit`           | POST   | Últimos eventos de auditoria          |
 
 ## Componentes do Painel
 
 ### Visão Geral
 - Total / ativos / bloqueados / pendentes / admins / convites ativos.
-- Estado do agente (online/offline via `GerenciadorJuliaMobile.status()`).
+- Estado do agente (online/offline via `GerenciadorfajultoMobile.status()`).
 - Modo de cadastro + checkbox "exigir aprovação".
 
 ### Gerenciar Usuários
@@ -61,7 +61,7 @@ Fajulto Studio (browser) ──HTTP──► controle.py (do_POST)
 - Proteção: não permite excluir/rebaixar o último admin ativo.
 
 ### Bootstrap do proprietário
-- Rota `/api/controle/julia/admin/bootstrap` + formulário "Vincular proprietário"
+- Rota `/api/controle/fajulto/admin/bootstrap` + formulário "Vincular proprietário"
   (visível só enquanto `vinculado=false`): username do Render + nome + senha.
 - Sem senha padrão; senha nunca retorna na resposta; auditoria registra o vínculo.
 - Repetir atualiza a credencial sem duplicar a conta.
@@ -92,8 +92,8 @@ Fajulto Studio (browser) ──HTTP──► controle.py (do_POST)
 - Interpolação do frontend escapada (`escA`) — display names não executam HTML.
 - Operador nunca é `local`: travas de auto-operação funcionam ao mirar a
   conta do proprietário.
-- Autorização validada no backend (`julia_auth.definir_papel`,
+- Autorização validada no backend (`fajulto_auth.definir_papel`,
   `excluir_usuario`, etc. rejeitam ações não autorizadas).
-- Todos os eventos admin auditados (`julia_auth.auditar`).
+- Todos os eventos admin auditados (`fajulto_auth.auditar`).
 - Códigos de convite armazenados como hash (`code_hash`).
 - `criar_usuario` nunca atribui papel `admin` via registro público.

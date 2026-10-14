@@ -22,10 +22,10 @@ Proxy real: `http://127.0.0.1:8645/v1` — `GET /v1/models` (422 ids),
 
 ## Resultados reais (não simulados)
 
-- Inferência real: `OK_JULIA` e `JULIA_OK` via laguna-s-2.1:free; SSE real
+- Inferência real: `OK_fajulto` e `fajulto_OK` via laguna-s-2.1:free; SSE real
   (chunks `choices[].delta.content`, `[DONE]`).
 - Cadeia completa real (relay + agente + Hermes): sync → models(422) →
-  resposta `JULIA_OK` → SQLite (`assistant` + `model`) → `ai_requests=completed`.
+  resposta `fajulto_OK` → SQLite (`assistant` + `model`) → `ai_requests=completed`.
 - E2E em suíte com processos reais e Hermes falso: non-stream idempotente (sem
   2ª chamada), stream com 2 deltas + done, SQLite íntegro.
 - Bugs corrigidos: duplo `/v1` no bridge; roteamento que engolia `ai_done` sem

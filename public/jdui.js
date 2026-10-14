@@ -1,10 +1,10 @@
-/* JDUI 1.0 — Julia Dynamic UI Engine (frontend).
-   Renderiza blocos declarativos `julia-ui-message/v1` com componentes NATIVOS.
+/* JDUI 1.0 — fajulto Dynamic UI Engine (frontend).
+   Renderiza blocos declarativos `fajulto-ui-message/v1` com componentes NATIVOS.
    Nenhum JavaScript do modelo é executado: só funções deste registry.
    Espelho da validação em `jdui.py` (backend). */
 'use strict';
 (function () {
-  const VERSION = 'julia-ui-message/v1';
+  const VERSION = 'fajulto-ui-message/v1';
   const MAX_STR = 2000;
 
   function S(v, lim) {
@@ -128,6 +128,11 @@
     progress(p) {
       const max = N(p.max, 100) || 100;
       return { label: S(p.label, 120), value: Math.min(Math.max(N(p.value), 0), max), max };
+    },
+    exam(p) {
+      const aid = S(p.assessment_id, 64);
+      if (!/^[A-Za-z0-9_-]{2,64}$/.test(aid)) throw new JduiErro('exam.assessment_id');
+      return { assessment_id: aid, title: S(p.title, 160) };
     },
     tabs(p) {
       const abas = reqList(p, 'tabs', 2, 6, 'tabs 2..6');
@@ -390,6 +395,15 @@
     }
     function paintResult() {
       const s = score();
+      if (!st.historico_enviado && ctx.api && (!ctx.online || ctx.online())) {
+        st.historico_enviado = true;
+        save(st);
+        ctx.api('/api/learn/avulso', { method: 'POST', body: JSON.stringify({
+          titulo: props.title || 'Quiz', certas: s, total: qs.length }) }).catch(() => {
+          st.historico_enviado = false;
+          try { save(st); } catch (_) {}
+        });
+      }
       count.textContent = 'Resultado: ' + s + '/' + qs.length;
       pg.firstChild.style.width = '100%';
       area.replaceChildren();
@@ -416,6 +430,149 @@
     }
     paint();
     root.appendChild(box);
+  };
+
+  R.exam = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    box.appendChild(el('div', 'jdui-title', props.title || 'Prova'));
+    const info = el('div', 'jdui-count', 'Carregando prova…');
+    box.appendChild(info);
+    root.appendChild(box);
+    if (!ctx.api || (ctx.online && !ctx.online())) {
+      info.textContent = 'Conecte-se para carregar a prova.';
+      const b = el('button', 'jdui-btn ghost', 'Tentar de novo');
+      b.addEventListener('click', () => { root.replaceChildren(); R.exam(root, props, st, save, ctx); });
+      box.appendChild(b);
+      return;
+    }
+    st.att = st.att || null;
+    st.idx = st.idx || 0;
+    st.feitas = st.feitas || {};
+    let qs = [];
+    let total = 0;
+    async function carregar() {
+      try {
+        const r = await ctx.api('/api/learn/assessments/' + encodeURIComponent(props.assessment_id));
+        qs = r.questions || [];
+        total = qs.length;
+        if (!st.att) {
+          const t = await ctx.api('/api/learn/attempts', { method: 'POST', body: JSON.stringify({ assessment_id: props.assessment_id }) });
+          st.att = t.id;
+          save(st);
+        }
+        paint();
+      } catch (_) {
+        info.textContent = 'Não consegui carregar. Toque para tentar de novo.';
+        info.style.cursor = 'pointer';
+        info.addEventListener('click', carregar, { once: true });
+      }
+    }
+    function paint() {
+      box.querySelectorAll('.jdui-dyn').forEach(e => e.remove());
+      const area = el('div', 'jdui-area jdui-dyn');
+      const nav = el('div', 'jdui-nav jdui-dyn');
+      const i = Math.min(st.idx, total - 1);
+      const q = qs[i];
+      if (!q) { info.textContent = 'Prova vazia.'; return; }
+      info.textContent = 'Questão ' + (i + 1) + ' de ' + total;
+      const pg = bar(Object.keys(st.feitas).length / total * 100);
+      pg.classList.add('jdui-dyn');
+      box.insertBefore(pg, area);
+      area.appendChild(el('div', 'jdui-q', q.enunciado));
+      if (q.tipo === 'discursiva') {
+        const ta = document.createElement('textarea');
+        ta.className = 'jdui-ta';
+        ta.placeholder = 'Sua resposta…';
+        ta.value = st.feitas[q.id] && st.feitas[q.id].texto ? st.feitas[q.id].texto : '';
+        area.appendChild(ta);
+        const b = el('button', 'jdui-btn', 'Enviar para avaliação');
+        b.addEventListener('click', async () => {
+          if (!ta.value.trim()) return;
+          b.disabled = true;
+          try {
+            await ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: ta.value }) });
+            st.feitas[q.id] = { texto: ta.value, pendente: true };
+            save(st); paint();
+          } catch (_) { b.disabled = false; }
+        });
+        nav.appendChild(b);
+      } else {
+        const opts = el('div', 'jdui-opts');
+        (q.opcoes || []).forEach((txt, oi) => {
+          const feito = st.feitas[q.id];
+          const lab = el('label', 'jdui-opt' + (feito ? (feito.certa ? ' ok' : ' bad') : ''));
+          const inp = document.createElement('input');
+          inp.type = 'radio';
+          inp.name = 'ex' + i + '_' + props.assessment_id.slice(-4);
+          inp.disabled = !!feito;
+          inp.checked = feito && feito.escolha === oi;
+          inp.setAttribute('aria-label', txt);
+          inp.addEventListener('change', async () => {
+            if (st.feitas[q.id]) return;
+            lab.classList.add('wait');
+            try {
+              const r = await ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: oi }) });
+              st.feitas[q.id] = { escolha: oi, certa: !!r.correta };
+              save(st); paint();
+            } catch (_) { lab.classList.remove('wait'); }
+          });
+          lab.appendChild(inp);
+          lab.appendChild(el('span', '', txt));
+          opts.appendChild(lab);
+        });
+        area.appendChild(opts);
+      }
+      box.appendChild(area);
+      if (i > 0) {
+        const b = el('button', 'jdui-btn ghost', '← Anterior');
+        b.addEventListener('click', () => { st.idx = i - 1; save(st); paint(); });
+        nav.appendChild(b);
+      }
+      if (i < total - 1) {
+        const b = el('button', 'jdui-btn', 'Próxima →');
+        b.addEventListener('click', () => { st.idx = i + 1; save(st); paint(); });
+        nav.appendChild(b);
+      } else {
+        const b = el('button', 'jdui-btn', 'Finalizar prova');
+        b.addEventListener('click', async () => {
+          b.disabled = true;
+          try {
+            const r = await ctx.api('/api/learn/finish', { method: 'POST', body: JSON.stringify({ attempt_id: st.att }) });
+            st.fim = r;
+            save(st);
+            paintFim(r);
+          } catch (_) { b.disabled = false; }
+        });
+        nav.appendChild(b);
+      }
+      box.appendChild(nav);
+    }
+    function paintFim(r) {
+      box.querySelectorAll('.jdui-dyn').forEach(e => e.remove());
+      info.textContent = 'Resultado: ' + r.certas + '/' + r.total;
+      const area = el('div', 'jdui-area jdui-dyn');
+      area.appendChild(el('div', 'jdui-score', r.certas + '/' + r.total));
+      if (r.pendentes_avaliacao) area.appendChild(el('div', 'jdui-q', r.pendentes_avaliacao + ' discursiva(s) aguardando avaliação.'));
+      (r.erradas || []).slice(0, 8).forEach(o => {
+        area.appendChild(el('div', 'jdui-err', '✗ ' + o.enunciado + ' → certa: ' + (o.gabarito_texto || o.gabarito)));
+      });
+      const nav = el('div', 'jdui-nav jdui-dyn');
+      const rb = el('button', 'jdui-btn ghost', '↻ Nova tentativa');
+      rb.addEventListener('click', async () => {
+        try {
+          const t = await ctx.api('/api/learn/attempts', { method: 'POST', body: JSON.stringify({ assessment_id: props.assessment_id }) });
+          st.att = t.id; st.idx = 0; st.feitas = {}; delete st.fim;
+          save(st); paint();
+        } catch (_) {}
+      });
+      nav.appendChild(rb);
+      box.appendChild(area); box.appendChild(nav);
+    }
+    if (st.fim) {
+      carregar().then(() => paintFim(st.fim));
+    } else {
+      carregar();
+    }
   };
 
   R.checklist = function (root, props, st, save) {

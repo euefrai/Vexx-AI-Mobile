@@ -3,7 +3,7 @@
 Unidade usa um servidor HTTP OpenAI-compatible falso (stdlib). Integração usa
 processos reais: uvicorn (server.py) + pc_agent.py de verdade, com o falso só
 na fronteira Hermes. Inferência no proxy real foi validada manualmente
-(laguna-s-2.1:free respondeu 'OK_JULIA' + SSE) para não gastar quota em testes.
+(laguna-s-2.1:free respondeu 'OK_fajulto' + SSE) para não gastar quota em testes.
 """
 import json
 import os
@@ -74,10 +74,10 @@ def sobe_fake():
 
 
 def setup_module():
-    os.environ["JULIA_USERNAME"] = "efrai"
-    os.environ["JULIA_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
-    os.environ["JULIA_SESSION_SECRET"] = "a" * 64
-    os.environ["JULIA_AGENT_TOKEN"] = "b" * 64
+    os.environ["fajulto_USERNAME"] = "efrai"
+    os.environ["fajulto_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
+    os.environ["fajulto_SESSION_SECRET"] = "a" * 64
+    os.environ["fajulto_AGENT_TOKEN"] = "b" * 64
     server.login_failures.clear()
 
 
@@ -202,7 +202,7 @@ def test_ai_models_e_complete_via_agente_fake():
     with TestClient(server.app) as client:
         csrf = login(client)
         with client.websocket_connect("/api/agent/ws",
-                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+                                      headers={"Authorization": "Bearer " + os.environ["fajulto_AGENT_TOKEN"]}) as ws:
             out = {}
 
             def chama_models():
@@ -261,7 +261,7 @@ def test_stream_delta_roteado_para_fila():
     with TestClient(server.app) as client:
         login(client)
         with client.websocket_connect("/api/agent/ws",
-                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+                                      headers={"Authorization": "Bearer " + os.environ["fajulto_AGENT_TOKEN"]}) as ws:
             q = server.asyncio.Queue()
             server.relay.streams["s1"] = q
             try:
@@ -284,14 +284,14 @@ def test_e2e_ai_completo_com_processos_reais():
     base = f"http://127.0.0.1:{fake.server_port}/v1"
     with tempfile.TemporaryDirectory() as tmp:
         env = dict(os.environ)
-        env["JULIA_USERNAME"] = "efrai"
-        env["JULIA_PASSWORD_HASH"] = os.environ["JULIA_PASSWORD_HASH"]
-        env["JULIA_SESSION_SECRET"] = "a" * 64
-        env["JULIA_AGENT_TOKEN"] = "b" * 64
-        env["JULIA_RELAY_URL"] = "http://127.0.0.1:8941"
-        env["JULIA_SQLITE_PATH"] = str(Path(tmp) / "ai.sqlite3")
+        env["fajulto_USERNAME"] = "efrai"
+        env["fajulto_PASSWORD_HASH"] = os.environ["fajulto_PASSWORD_HASH"]
+        env["fajulto_SESSION_SECRET"] = "a" * 64
+        env["fajulto_AGENT_TOKEN"] = "b" * 64
+        env["fajulto_RELAY_URL"] = "http://127.0.0.1:8941"
+        env["fajulto_SQLITE_PATH"] = str(Path(tmp) / "ai.sqlite3")
         env["HERMES_PROXY_URL"] = base
-        env["JULIA_AI_MODEL"] = "fake-model"
+        env["fajulto_AI_MODEL"] = "fake-model"
         raiz = str(Path(__file__).resolve().parents[1])
         srv = subprocess.Popen([sys.executable, "-m", "uvicorn", "server:app",
                                 "--host", "127.0.0.1", "--port", "8941"],
@@ -330,7 +330,7 @@ def test_e2e_ai_completo_com_processos_reais():
                                       "conversation_id": "conv-ai"}, csrf)
                 assert r2["response_text"] == "RESPOSTA_FAKE"  # replay idempotente
                 assert len(FakeHermes.chamadas) == n_antes + 1  # sem rechamada
-                con = sqlite3.connect(env["JULIA_SQLITE_PATH"])
+                con = sqlite3.connect(env["fajulto_SQLITE_PATH"])
                 rows = con.execute("SELECT id, role, text FROM messages ORDER BY created_at").fetchall()
                 con.close()
                 assert ("ai-user-001-r1", "assistant", "RESPOSTA_FAKE") in rows

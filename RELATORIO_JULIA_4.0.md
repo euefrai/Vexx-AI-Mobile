@@ -24,7 +24,7 @@ Data: 2026-10-13. Sem push, sem deploy (regra). `pytest -k "not e2e"`: **77 pass
 
 ## Arquivos
 Criados: docs/{ARCHITECTURE,ROADMAP,PROGRESS}, tests/{test_isolamento,
-test_chatpro,test_avaliacao}, RELATORIO_JULIA_4.0.md.
+test_chatpro,test_avaliacao}, RELATORIO_fajulto_4.0.md.
 Modificados: pc_agent.py (owner end-to-end, reset/continue, orçamento,
 grounding), server.py (owner em 14 RPCs, 2 endpoints), docs_agent.py (owner),
 public/{app.js,index.html,styles.css} (arquivo/fix/export/busca/regen/continue).

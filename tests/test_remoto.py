@@ -15,10 +15,10 @@ import server
 
 def setup_module():
     from argon2 import PasswordHasher
-    os.environ["JULIA_USERNAME"] = "efrai"
-    os.environ["JULIA_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
-    os.environ["JULIA_SESSION_SECRET"] = "a" * 64
-    os.environ["JULIA_AGENT_TOKEN"] = "b" * 64
+    os.environ["fajulto_USERNAME"] = "efrai"
+    os.environ["fajulto_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
+    os.environ["fajulto_SESSION_SECRET"] = "a" * 64
+    os.environ["fajulto_AGENT_TOKEN"] = "b" * 64
     server.login_failures.clear()
 
 
@@ -44,7 +44,7 @@ def test_validacao_comandos():
 
 
 def test_entrada_desativada_por_padrao(monkeypatch):
-    monkeypatch.delenv("JULIA_REMOTE", raising=False)
+    monkeypatch.delenv("fajulto_REMOTE", raising=False)
     assert remoto.entrada_ativada() is False
     with pytest.raises(remoto.RemotoErro) as exc:
         remoto.executar({"kind": "move", "x": 0.1, "y": 0.1})
@@ -52,7 +52,7 @@ def test_entrada_desativada_por_padrao(monkeypatch):
 
 
 def test_ritmo_barra_rajada(monkeypatch):
-    monkeypatch.setenv("JULIA_REMOTE", "1")
+    monkeypatch.setenv("fajulto_REMOTE", "1")
     monkeypatch.setattr(remoto, "tamanho_tela", lambda: (100, 100))
     calls = []
     monkeypatch.setattr("ctypes.windll.user32.SetCursorPos",
@@ -92,7 +92,7 @@ def test_screen_input_via_agente_fake():
     with TestClient(server.app) as client:
         csrf = _login(client)
         with client.websocket_connect("/api/agent/ws",
-                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+                                      headers={"Authorization": "Bearer " + os.environ["fajulto_AGENT_TOKEN"]}) as ws:
             out = {}
 
             def tela():

@@ -1,18 +1,18 @@
 services:
   - type: web
-    name: julia-mobile-relay
+    name: fajulto-mobile-relay
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT --proxy-headers
     envVars:
-      - key: JULIA_ENV
+      - key: fajulto_ENV
         value: production
-      - key: JULIA_USERNAME
+      - key: fajulto_USERNAME
         sync: false
-      - key: JULIA_PASSWORD_HASH
+      - key: fajulto_PASSWORD_HASH
         sync: false
-      - key: JULIA_AGENT_TOKEN
+      - key: fajulto_AGENT_TOKEN
         sync: false
-      - key: JULIA_SESSION_SECRET
+      - key: fajulto_SESSION_SECRET
         generateValue: true

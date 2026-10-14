@@ -11,7 +11,7 @@
 - [x] Contexto orçado (12k chars, recentes primeiro) + REGRAS_CONFIANCA sempre
       no system + resultados rotulados (memória/docs/pesquisa com data).
 - [x] 8 testes de avaliação conversacional. Suíte: **77 passed**.
-- [x] Relatório abaixo em RELATORIO_JULIA_4.0.md.
+- [x] Relatório abaixo em RELATORIO_fajulto_4.0.md.
 
 ## Decisões
 - Dono padrão `'local'`; migração via `ADD COLUMN` idempotente (não reescreve banco).
@@ -31,7 +31,7 @@
 - [x] Painel: busca, badges, corrigir, pendências confirmar/descartar, toggle
       aprendizado, eventos. Endpoints com owner + testes.
 - [x] 9 testes de fluxo do spec. Suíte: **86 passed**.
-- [x] Relatório em RELATORIO_JULIA_4.1.md.
+- [x] Relatório em RELATORIO_fajulto_4.1.md.
 
 ## Decisões V4.1
 - Proposta (não salvamento) para sensível e data ambígua; confirmação explícita
