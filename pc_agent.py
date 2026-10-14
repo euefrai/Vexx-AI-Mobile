@@ -15,6 +15,7 @@ import docs_agent
 import hermes_bridge
 import jdui
 import julia_auth
+import learning
 import remoto
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
@@ -174,6 +175,7 @@ def open_db(path: Path):
     _memoria_v41(db)
     julia_auth.criar_tabelas(db)
     julia_auth.migrar_legado(db)
+    learning.criar_tabelas(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
         source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
