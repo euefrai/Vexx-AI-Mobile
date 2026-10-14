@@ -1,11 +1,11 @@
-# Júlia Mobile — Assistente pessoal offline-first
+# Vexx AI — Assistente pessoal offline-first
 
 Chat mobile com arquitetura offline-first, sincronização SQLite, comunicação com
 agente desktop e futura integração com IA e controle remoto.
 
 ## Objetivo
 
-Permitir conversar pelo celular com a Júlia: as mensagens ficam salvas no aparelho
+Permitir conversar pelo celular com o Vexx AI: as mensagens ficam salvas no aparelho
 (IndexedDB), sincronizam com o SQLite do computador quando ele está online e o
 servidor no Render atua apenas como interface, autenticação e intermediação segura —
 sem banco de dados na nuvem.
@@ -195,7 +195,7 @@ O CI (GitHub Actions) repete pytest + checagem do JS a cada push.
 
 ## Roadmap
 
-1. Bridge extensão Júlia → agente (respostas, memória, roteamento `mobile`/`extension`).
+1. Bridge extensão Vexx AI → agente (respostas, memória, roteamento `mobile`/`extension`).
 2. Fallback de IA em nuvem com PC desligado (chave só no backend).
 3. Controle remoto real (WebRTC, STUN/TURN, consentimento).
 4. Criptografia local, PIN offline, backup e monitoramento da PWA.

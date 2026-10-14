@@ -1,4 +1,4 @@
-"""Júlia Mobile relay: authentication + ephemeral WebSocket RPC only.
+"""Vexx AI relay: authentication + ephemeral WebSocket RPC only.
 No chat history or SQLite file is stored on Render.
 """
 import asyncio
@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field
 
 log = logging.getLogger("JULIA-mobile")
 ROOT = Path(__file__).resolve().parent
-app = FastAPI(title="Júlia Mobile Relay", docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI(title="Vexx AI Relay", docs_url=None, redoc_url=None, openapi_url=None)
 ph = PasswordHasher()
 SESSION_LIFETIME = 12 * 60 * 60
 

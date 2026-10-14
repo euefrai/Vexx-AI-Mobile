@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 import docs_agent
 import hermes_bridge
 import jdui
-import JULIA_auth
+import julia_auth as JULIA_auth
 import learning
 import remoto
 from websockets.sync.client import connect
@@ -23,7 +23,7 @@ from websockets.exceptions import ConnectionClosed, InvalidStatus
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("JULIA-pc")
 
-SYSTEM_PADRAO = ("Você é a Júlia, assistente pessoal do usuário. "
+SYSTEM_PADRAO = ("Você é o Vexx AI, assistente pessoal do usuário. "
                  "Responda em português, de forma direta e útil. "
                  "Use markdown leve: títulos curtos, listas, **negrito**, `código`, tabelas quando útil. "
                  "Se navegar/pesquisar, cite ao final uma seção 'Fontes:' com os links usados. "
@@ -934,7 +934,7 @@ def _baixar_resultados(base: str, q: str, timeout: float) -> str:
     import urllib.parse
     import urllib.request
     url = base + urllib.parse.quote(q)
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Júlia Mobile)"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Vexx AI)"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read().decode("utf-8", "ignore")
 
