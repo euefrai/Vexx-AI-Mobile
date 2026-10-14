@@ -71,6 +71,8 @@ Cada query de dados inclui `WHERE owner_id = ?` com o uid do usuário autenticad
 | Convite reutilizado       | Consumo atômico (transação)                   |
 | Brute force (login)       | 5 / 5 min por IP+username (memória relay)     |
 | Brute force (registro)    | 3 / hora por IP                                |
+| Tela do PC (ver)          | Livre p/ qualquer conta ativa (só observar)    |
+| Controle do PC (input)    | Grant explícito `remote_ok` (dono sempre pode)|
 | Senha fraca               | `valida_senha`: 8–128 chars                    |
 | Username inválido         | `valida_username`: 3–30, `[a-z0-9._-]`         |
 | SQL injection             | Todas as queries usam parameterized `?`       |

@@ -2191,19 +2191,14 @@ def run():
                             sessao.parar.set()
                         continue
                     elif req.get("type") == "screen":
-                        if not julia_auth.pode_remoto(db, dono):
+                        # Ver a tela é livre (só observar); controlar exige grant.
+                        try:
+                            img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
+                            reply = {"request_id": request_id, "type": "screen", **img,
+                                     "remote_enabled": remoto.entrada_ativada()}
+                        except remoto.RemotoErro as exc:
                             reply = {"request_id": request_id, "type": "screen_error",
-                                     "error": "Sem autorização para ver a tela.",
-                                     "codigo": "sem_permissao"}
-                            log.warning("remoto negado (tela) para %s", dono)
-                        else:
-                            try:
-                                img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
-                                reply = {"request_id": request_id, "type": "screen", **img,
-                                         "remote_enabled": remoto.entrada_ativada()}
-                            except remoto.RemotoErro as exc:
-                                reply = {"request_id": request_id, "type": "screen_error",
-                                         "error": str(exc), "codigo": exc.codigo}
+                                     "error": str(exc), "codigo": exc.codigo}
                     elif req.get("type") == "input":
                         if not julia_auth.pode_remoto(db, dono):
                             reply = {"request_id": request_id, "type": "input_error",
