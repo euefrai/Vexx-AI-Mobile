@@ -17,7 +17,7 @@ import jdui
 import julia_auth
 import remoto
 from websockets.sync.client import connect
-from websockets.exceptions import ConnectionClosed
+from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("julia-pc")
@@ -2192,12 +2192,21 @@ def run():
                     else:
                         continue
                     websocket.send(json.dumps(reply, ensure_ascii=False))
+        except InvalidStatus as exc:
+            # HTTP 403 no handshake = bloqueio anti-robô/rate-limit na borda
+            # (Cloudflare), NÃO problema no agente. Martelar piora: espera longa.
+            status = getattr(exc.response, "status_code", "?") if getattr(exc, "response", None) else "?"
+            pause = min(1800, max(pause * 2, 120))
+            log.warning("Relay recusou o handshake (HTTP %s). Provável bloqueio temporário "
+                        "anti-robô/rate-limit na borda — NÃO é erro de token. "
+                        "Aguardando %ss antes de tentar (não force reconexões).",
+                        status, pause)
         except (ConnectionClosed, ConnectionError, OSError, TimeoutError, ValueError) as exc:
             log.warning("Conexão interrompida (%s). Reconectando em %ss", type(exc).__name__, pause)
+            pause = min(60, pause * 2)
         except KeyboardInterrupt:
             break
         time.sleep(pause)
-        pause = min(60, pause * 2)
     db.close()
 
 
