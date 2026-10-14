@@ -144,6 +144,20 @@ def test_jdui_js_paridade():
         assert 'FAIL' not in r.stdout
 
 
+def test_html_sem_classes_escapadas():
+    """Regressão: `class=\\"` literal quebra todo o CSS (login fora do overlay)."""
+    html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
+    assert '\\"' not in html
+    for cls in ('login-overlay', 'login-card', 'drawer', 'composer', 'conversation',
+                'session-list', 'memory-list', 'status-pop'):
+        assert f'class="{cls}"' in html, cls
+    # msg-menu-pop é criado dinamicamente pelo JS
+    assert 'msg-menu-pop' in (RAIZ / 'public' / 'app.js').read_text(encoding='utf-8')
+    for eid in ('loginOverlay', 'loginForm', 'registerForm', 'conversation', 'composer',
+                'sessionList', 'drawer', 'statusPop'):
+        assert f'id="{eid}"' in html, eid
+
+
 def test_sessoes_sem_fragmentacao():
     """Regressão: cada mensagem virando um chat (id ativo só no localStorage).
 
