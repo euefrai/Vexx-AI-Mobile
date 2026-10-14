@@ -200,6 +200,23 @@ O CI (GitHub Actions) repete pytest + checagem do JS a cada push.
 3. Controle remoto real (WebRTC, STUN/TURN, consentimento).
 4. Criptografia local, PIN offline, backup e monitoramento da PWA.
 
+## Modo direto via Tailscale (recomendado — sem Render, sem Cloudflare)
+
+Se o relay na nuvem der dor de cabeça (bloqueio anti-robô, hibernação),
+rode tudo em casa numa rede privada:
+
+1. Instale o **Tailscale** no PC e no celular (plano pessoal gratuito) com a
+   mesma conta, e ative o HTTPS dele no PC (`tailscale cert`).
+2. No PC, inicie o relay ouvindo a rede: `iniciar-servidor.bat 0.0.0.0`
+   (libere a porta 8000 no firewall do Windows se pedir).
+3. No PC, aponte o agente para ele mesmo:
+   `set JULIA_RELAY_URL=http://127.0.0.1:8000` + `iniciar-agente.bat`.
+4. No celular (com Tailscale ativo), abra
+   `https://SEU-PC.sua-rede.ts.net:8000` — PWA completa, mesmo app.
+
+Só funciona com o PC ligado (honesto: sem PC não há IA nem banco).
+O modo Render continua disponível como alternativa.
+
 ## Deploy no Render (preparação)
 
 1. Conecte este repositório (privado) via **New → Blueprint** (`render.yaml`) ou Web
