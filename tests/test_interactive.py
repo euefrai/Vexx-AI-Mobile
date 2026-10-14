@@ -239,6 +239,59 @@ def test_sintese_sem_llm_quando_deterministico():
         hermes_bridge.chat_complete = real
 
 
+def test_envios_concorrentes_serializados():
+    """Regressão: threads de stream + loop principal não entrelaçam frames."""
+    import json as _json
+    import threading as _th
+    import time as _time
+
+    class SockFalhaSeConcorrente:
+        def __init__(self):
+            self.dentro = False
+            self.lock = _th.Lock()
+            self.recebidos = []
+            self.violacoes = 0
+
+        def send(self, texto):
+            with self.lock:
+                if self.dentro:
+                    self.violacoes += 1
+                self.dentro = True
+            _time.sleep(0.002)  # alarga a janela de corrida
+            _json.loads(texto)  # frame íntegro: JSON válido
+            with self.lock:
+                self.recebidos.append(texto)
+                self.dentro = False
+
+    sock = SockFalhaSeConcorrente()
+    erros = []
+
+    def worker(n):
+        try:
+            for i in range(25):
+                pc_agent.enviar_ws(sock, {"request_id": f"r{n}", "type": "ai_delta",
+                                          "seq": i, "trecho": "olá"})
+        except Exception as exc:  # noqa: BLE001
+            erros.append(exc)
+
+    ts = [_th.Thread(target=worker, args=(n,)) for n in range(4)]
+    # loop principal intercalado
+    def principal():
+        try:
+            for i in range(25):
+                with pc_agent.ENVIO_LOCK:
+                    sock.send(_json.dumps({"request_id": "main", "type": "ack"}))
+        except Exception as exc:  # noqa: BLE001
+            erros.append(exc)
+
+    ts.append(_th.Thread(target=principal))
+    [t.start() for t in ts]
+    [t.join(timeout=30) for t in ts]
+    assert not erros
+    assert sock.violacoes == 0
+    assert len(sock.recebidos) == 125
+
+
 def test_imagem_garantida_no_texto():
     user = 'me mostre uma imagem do tom do desenho tom and jerry'
     termo = pc_agent.intencao_imagem(user)

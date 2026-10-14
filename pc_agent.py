@@ -1626,10 +1626,22 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
             "model": modelo, "truncada": res.get("truncada", False)}
 
 
+# TODOS os envios no WebSocket passam por este lock global. O cliente
+# websockets síncrono NÃO é thread-safe: streams paralelas + loop principal
+# enviando juntos corrompem frames e derrubam a conexão (1006).
+ENVIO_LOCK = threading.Lock()
+
+
+def enviar_ws(websocket, obj) -> None:
+    """Envio serializado (único ponto de escrita no socket)."""
+    with ENVIO_LOCK:
+        websocket.send(json.dumps(obj, ensure_ascii=False))
+
+
 class SessaoStream:
     def __init__(self):
         self.parar = threading.Event()
-        self.lock_envio = threading.Lock()
+        self.lock_envio = ENVIO_LOCK  # compat: aponta para o lock global
 
 
 def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
@@ -1640,12 +1652,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         prep = ai_preparar(db, payload, cfg)
         if "error" in prep or "replay" in prep or "busy" in prep:
             try:
-                with sessao.lock_envio:
-                    websocket.send(json.dumps({"request_id": request_id, "type": "ai_error",
-                                               **{k: prep[k] for k in ("error", "codigo", "reply_id",
-                                                                       "response_text", "model", "busy")
-                                                   if k in prep}},
-                                              ensure_ascii=False))
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
+                                      **{k: prep[k] for k in ("error", "codigo", "reply_id",
+                                                              "response_text", "model", "busy")
+                                          if k in prep}})
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
@@ -1655,11 +1665,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         if cmd:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
             try:
-                with sessao.lock_envio:
-                    websocket.send(json.dumps({"request_id": request_id, "type": "ai_done",
-                                               "reply_id": direta["reply_id"],
-                                               "response_text": direta["response_text"],
-                                               "model": modelo}, ensure_ascii=False))
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                      "reply_id": direta["reply_id"],
+                                      "response_text": direta["response_text"],
+                                      "model": modelo})
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
@@ -1669,8 +1678,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
 
         def enviar(obj):
             try:
-                with sessao.lock_envio:
-                    websocket.send(json.dumps(obj, ensure_ascii=False))
+                enviar_ws(websocket, obj)
             except (ConnectionClosed, OSError, RuntimeError, ValueError) as exc:
                 raise hermes_bridge.BridgeErro(
                     "Conexão com o relay caiu no meio da resposta.", "desconectado") from exc
@@ -2191,7 +2199,8 @@ def run():
                                      "error": str(exc), "codigo": exc.codigo}
                     else:
                         continue
-                    websocket.send(json.dumps(reply, ensure_ascii=False))
+                    with ENVIO_LOCK:
+                        websocket.send(json.dumps(reply, ensure_ascii=False))
         except InvalidStatus as exc:
             # HTTP 403 no handshake = bloqueio anti-robô/rate-limit na borda
             # (Cloudflare), NÃO problema no agente. Martelar piora: espera longa.
