@@ -12,10 +12,10 @@ import server
 
 
 def setup_module():
-    os.environ["FAJULTO_USERNAME"] = "efrai"
-    os.environ["FAJULTO_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
-    os.environ["FAJULTO_SESSION_SECRET"] = "a" * 64
-    os.environ["FAJULTO_AGENT_TOKEN"] = "b" * 64
+    os.environ["JULIA_USERNAME"] = "efrai"
+    os.environ["JULIA_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
+    os.environ["JULIA_SESSION_SECRET"] = "a" * 64
+    os.environ["JULIA_AGENT_TOKEN"] = "b" * 64
     server.login_failures.clear()
 
 
@@ -76,7 +76,7 @@ def test_concurrent_duplicate_sync_both_confirm_no_crash():
     with TestClient(server.app) as client:
         csrf = authenticate(client)
         with client.websocket_connect("/api/agent/ws",
-                                      headers={"Authorization": "Bearer " + os.environ["FAJULTO_AGENT_TOKEN"]}) as ws:
+                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
             results = []
 
             def submit():

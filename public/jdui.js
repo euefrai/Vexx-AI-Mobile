@@ -1,10 +1,10 @@
-/* JDUI 1.0 — FAJULTO Dynamic UI Engine (frontend).
-   Renderiza blocos declarativos `FAJULTO-ui-message/v1` com componentes NATIVOS.
+/* JDUI 1.0 — JULIA Dynamic UI Engine (frontend).
+   Renderiza blocos declarativos `JULIA-ui-message/v1` com componentes NATIVOS.
    Nenhum JavaScript do modelo é executado: só funções deste registry.
    Espelho da validação em `jdui.py` (backend). */
 'use strict';
 (function () {
-  const VERSION = 'FAJULTO-ui-message/v1';
+  const VERSION = 'JULIA-ui-message/v1';
   const MAX_STR = 2000;
 
   function S(v, lim) {

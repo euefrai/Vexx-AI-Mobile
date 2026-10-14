@@ -20,7 +20,7 @@ Celular/PWA ──HTTPS/WSS──▶ Render (FastAPI, SEM banco)
   `doc_chunks`, `ui_state`. Migração idempotente (`ADD COLUMN` + índice).
 - **Toda query do agente filtra por `owner`**; todo handler valida ownership.
   Teste de isolamento: usuário B não lê/nem apaga nada de A (cobertura em pytest).
-- Conta única hoje (`FAJULTO_USERNAME`); cadastro multi-conta é V4.6. A fundação
+- Conta única hoje (`JULIA_USERNAME`); cadastro multi-conta é V4.6. A fundação
   (colunas + enforcement + testes) entra na V4.0 sem mudar comportamento local.
 
 ## Contexto e grounding

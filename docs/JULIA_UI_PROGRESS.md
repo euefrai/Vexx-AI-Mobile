@@ -5,9 +5,9 @@
 | Item                              | Status  |
 |-----------------------------------|---------|
 | Inspeção da estrutura do projeto  | FUNCIONAL |
-| Inspeção de FAJULTO Studio/Arq    | FUNCIONAL |
+| Inspeção de JULIA Studio/Arq    | FUNCIONAL |
 | Testes existentes                 | ver RELATORIO (nenhuma falha real; 1 warning benigno de teardown) |
-| Inspeção FAJULTO_auth.py            | FUNCIONAL |
+| Inspeção JULIA_auth.py            | FUNCIONAL |
 | Inspeção server.py                | FUNCIONAL |
 | Inspeção controle.py             | FUNCIONAL |
 | Suíte base                        | ver RELATORIO (102 passed) |

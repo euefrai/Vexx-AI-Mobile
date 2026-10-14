@@ -4,7 +4,7 @@ Somente Windows. Captura tenta mss, depois PIL ImageGrab (dependências
 opcionais — o relay nunca importa este módulo). Entrada usa ctypes (stdlib).
 
 SEGURANÇA:
-- Entrada (mouse/teclado) exige FAJULTO_REMOTE=1 no ambiente do agente.
+- Entrada (mouse/teclado) exige JULIA_REMOTE=1 no ambiente do agente.
   Sem isso, tudo é recusado com codigo "desativado" (modo só-visualização).
 - Comandos validados (tipos, faixas, tamanhos) + rate limit em memória.
 - Nenhuma execução de terminal/arquivos — só eventos de mouse/teclado.
@@ -40,7 +40,7 @@ class RemotoErro(ValueError):
 
 def entrada_ativada() -> bool:
     import os
-    return os.environ.get("FAJULTO_REMOTE", "") == "1"
+    return os.environ.get("JULIA_REMOTE", "") == "1"
 
 
 def _limpar_janela():
@@ -181,7 +181,7 @@ def _digitar_unicode(texto: str) -> None:
 def executar(valido: dict) -> dict:
     """Executa evento validado. Exige entrada ativada + ritmo. Só Windows."""
     if not entrada_ativada():
-        raise RemotoErro("Controle desativado no PC (FAJULTO_REMOTE=1 para ativar).",
+        raise RemotoErro("Controle desativado no PC (JULIA_REMOTE=1 para ativar).",
                          "desativado")
     if sys.platform != "win32":
         raise RemotoErro("Entrada só no Windows.", "plataforma")

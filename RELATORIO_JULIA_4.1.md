@@ -29,8 +29,8 @@ Data: 2026-10-13. Sem push, sem deploy. `pytest -k "not e2e"`: **86 passed**.
 
 ## Arquivos
 Modificados: pc_agent.py (núcleo V4.1), server.py (6 endpoints),
-public/{app.js,index.html,styles.css} (painel), docs/FAJULTO_MOBILE_PROGRESS.md.
-Criados: tests/test_memoria41.py (9), RELATORIO_FAJULTO_4.1.md.
+public/{app.js,index.html,styles.css} (painel), docs/JULIA_MOBILE_PROGRESS.md.
+Criados: tests/test_memoria41.py (9), RELATORIO_JULIA_4.1.md.
 
 ## Próximo (V4.2)
 Learning Engine sobre esta base: planos, flashcards, simulados, desempenho.

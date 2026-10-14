@@ -4,18 +4,18 @@ Data: 2026-10-14. Sem push, sem deploy. Suítes executadas de verdade
 (júlia-mobile: **102 passed**; Studio/spot: **30 passed**).
 
 ## 1. Arquivos modificados
-- Júlia: `FAJULTO_auth.py` (novas funções + correções), `pc_agent.py`
+- Júlia: `JULIA_auth.py` (novas funções + correções), `pc_agent.py`
   (ownership, limites, handlers auth/admin), `server.py` (sessão uid,
   revogação, conta, admin), `public/{app.js,index.html,styles.css}`
   (minimal UI, cadastro, perfil, sidebar, cache por conta).
 - Studio: `studio/controle.py` (rotas admin, bootstrap, XSS, polling),
-  `studio/integracoes/FAJULTO_mobile.py` (métodos admin, ator studio-local).
+  `studio/integracoes/JULIA_mobile.py` (métodos admin, ator studio-local).
 
 ## 2. Arquivos criados
 - Júlia: `tests/test_auth.py` (16), docs atualizadas
-  (`FAJULTO_AUTH_SYSTEM`, `FAJULTO_ADMIN_PANEL`, `FAJULTO_MULTIUSER_SECURITY`,
-  `FAJULTO_MINIMAL_PREMIUM`, `FAJULTO_UI_PROGRESS`).
-- Studio: `studio/testes/test_FAJULTO_admin_53.py` (5).
+  (`JULIA_AUTH_SYSTEM`, `JULIA_ADMIN_PANEL`, `JULIA_MULTIUSER_SECURITY`,
+  `JULIA_MINIMAL_PREMIUM`, `JULIA_UI_PROGRESS`).
+- Studio: `studio/testes/test_JULIA_admin_53.py` (5).
 
 ## 3–4. UX/UI e chat
 FUNCIONAL: tokens, header só com menu/título/novo chat, status em popover,
@@ -36,7 +36,7 @@ antigos sem `sess_revogados` não travam (fallback após 2 timeouts).
 ## 7–8. Painel e integração
 FUNCIONAL: 18 rotas, card com tabs (visão/usuários/convites/pendentes/logs/
 config), bootstrap do proprietário (sem senha padrão), ator `studio-local`,
-XSS escapado, polling 15s só visível. Reutiliza `FAJULTO_auth` (stdlib).
+XSS escapado, polling 15s só visível. Reutiliza `JULIA_auth` (stdlib).
 
 ## 9. Migrações
 `owner_id` em 8 tabelas + `users/sessions/invites/reg_requests/audit/config`;
@@ -48,7 +48,7 @@ enforcement por RPC + checagem de papel em 2 camadas (relay e agente),
 último-admin travado, testes 16–21 do spec passando.
 
 ## 12–13. Performance e testes
-102 passed (júlia) + 30 (Studio spot incl. regressão `test_FAJULTO_mobile_52`).
+102 passed (júlia) + 30 (Studio spot incl. regressão `test_JULIA_mobile_52`).
 Sem frameworks novos. 1 warning benigno de teardown (pré-existente).
 
 ## 14–16. Reprovados, limitações, pendências

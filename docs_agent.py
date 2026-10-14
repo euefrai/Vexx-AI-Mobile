@@ -15,7 +15,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-log = logging.getLogger("FAJULTO-docs")
+log = logging.getLogger("JULIA-docs")
 
 MAX_BYTES = 15 * 1024 * 1024
 MAX_TEXTO_DOC = 200_000
@@ -38,8 +38,8 @@ def agora_iso() -> str:
 
 
 def docs_dir() -> Path:
-    base = os.environ.get("FAJULTO_DOCS_PATH", "")
-    return Path(base) if base else (Path.home() / ".FAJULTO-mobile" / "docs")
+    base = os.environ.get("JULIA_DOCS_PATH", "")
+    return Path(base) if base else (Path.home() / ".JULIA-mobile" / "docs")
 
 
 DONO_PADRAO = "local"

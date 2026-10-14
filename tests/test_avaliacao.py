@@ -59,7 +59,7 @@ def test_t3_nada_inventado_sem_memoria():
 
 def test_t4_quiz_renderizavel():
     import json as _json
-    quiz = {"version": "FAJULTO-ui-message/v1", "blocks": [
+    quiz = {"version": "JULIA-ui-message/v1", "blocks": [
         {"type": "ui", "component": "quiz", "props": {"title": "CF", "questions": [
             {"q": "Artigo 5?", "options": ["Direitos", "Deveres"], "answer": 0, "explain": "Caput."}]}}]}
     texto = 'Aqui vai:\n\n```jdui\n' + _json.dumps(quiz) + '\n```'

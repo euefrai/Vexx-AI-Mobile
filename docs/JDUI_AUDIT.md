@@ -6,12 +6,12 @@ Nada aqui é presumido: cada item foi verificado no código ou nos testes.
 ## 1. Estrutura real
 
 ```
-FAJULTO-mobile-v0.2/
+JULIA-mobile-v0.2/
 ├── server.py              # Relay FastAPI (Render). Sem banco. Auth + WS efêmero.
 ├── pc_agent.py            # Agente do PC. SQLite durável + Hermes + streaming.
 ├── hermes_bridge.py       # Cliente OpenAI-compatible do Hermes Proxy local.
 ├── docs_agent.py          # Upload/leitura/resumo/tópicos de documentos.
-├── remoto.py              # Tela ao vivo + mouse/teclado (FAJULTO_REMOTE=1).
+├── remoto.py              # Tela ao vivo + mouse/teclado (JULIA_REMOTE=1).
 ├── public/
 │   ├── index.html         # Chat fullscreen + drawer lateral.
 │   ├── app.js             # ~970 linhas. IndexedDB, SSE, markdown, widgets.
@@ -25,7 +25,7 @@ FAJULTO-mobile-v0.2/
 ## 2. Frontend (real)
 
 - Chat fullscreen + drawer (sessões, documentos, PC, atividades, ajustes). Sem framework.
-- IndexedDB `FAJULTO-mobile-cache-v2`: stores `messages` e `sessions`. Migração da v1 OK.
+- IndexedDB `JULIA-mobile-cache-v2`: stores `messages` e `sessions`. Migração da v1 OK.
 - Streaming SSE com `requestAnimationFrame` (throttle) + barra de geração + POST fallback.
 - Renderer markdown próprio, XSS-safe (escapa antes de inserir tags): code blocks com
   copiar, tabelas, listas, quotes, links segurados (`http/https` + `noopener`),
@@ -46,7 +46,7 @@ FAJULTO-mobile-v0.2/
 
 ## 4. Agente Python (real, testado)
 
-- SQLite WAL em `FAJULTO_SQLITE_PATH`: `messages`, `ai_requests` (máquina de estados
+- SQLite WAL em `JULIA_SQLITE_PATH`: `messages`, `ai_requests` (máquina de estados
   queued→processing→completed/failed/cancelled, idempotente por mensagem),
   `memories`, `memory_facts`, `documents`, `doc_chunks`. **Ausente: `ui_state`.**
 - Hermes via `hermes_bridge` (loopback-only, anti-SSRF). Modelo padrão

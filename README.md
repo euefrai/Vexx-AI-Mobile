@@ -78,7 +78,7 @@ pip install -r requirements.txt
 ```
 
 No Windows há atalhos: `iniciar-servidor.bat` (relay local) e `iniciar-agente.bat`
-(agente do PC; exige `FAJULTO_AGENT_TOKEN`). Modelo de variáveis em `.env.example` —
+(agente do PC; exige `JULIA_AGENT_TOKEN`). Modelo de variáveis em `.env.example` —
 copie para `.env` local e nunca commite valores reais.
 
 ## Configuração do backend
@@ -97,11 +97,11 @@ python -c "import secrets; print(secrets.token_urlsafe(48))"
 
 | Variável | Conteúdo |
 |---|---|
-| `FAJULTO_ENV` | `production` no Render |
-| `FAJULTO_USERNAME` | Nome de usuário escolhido |
-| `FAJULTO_PASSWORD_HASH` | Hash Argon2id gerado acima |
-| `FAJULTO_AGENT_TOKEN` | Segredo forte; **o mesmo no PC** |
-| `FAJULTO_SESSION_SECRET` | Outro segredo forte (somente Render) |
+| `JULIA_ENV` | `production` no Render |
+| `JULIA_USERNAME` | Nome de usuário escolhido |
+| `JULIA_PASSWORD_HASH` | Hash Argon2id gerado acima |
+| `JULIA_AGENT_TOKEN` | Segredo forte; **o mesmo no PC** |
+| `JULIA_SESSION_SECRET` | Outro segredo forte (somente Render) |
 
 Servidor local:
 
@@ -115,9 +115,9 @@ ela aparece como *pendente*.
 ## Agente no computador (PowerShell)
 
 ```powershell
-$env:FAJULTO_RELAY_URL="https://SEU-SERVICO.onrender.com"
-$env:FAJULTO_AGENT_TOKEN="MESMO-SEGREDO-DO-RENDER"
-$env:FAJULTO_SQLITE_PATH="$env:USERPROFILE\Documents\FAJULTOMobile\memory.sqlite3"
+$env:JULIA_RELAY_URL="https://SEU-SERVICO.onrender.com"
+$env:JULIA_AGENT_TOKEN="MESMO-SEGREDO-DO-RENDER"
+$env:JULIA_SQLITE_PATH="$env:USERPROFILE\Documents\JULIAMobile\memory.sqlite3"
 python pc_agent.py
 ```
 
@@ -128,7 +128,7 @@ Quando aparecer **Conectado ao relay**, reabra o app ou toque em
 
 ## SQLite
 
-Banco próprio do Mobile (`FAJULTO_SQLITE_PATH`), criado automaticamente com WAL,
+Banco próprio do Mobile (`JULIA_SQLITE_PATH`), criado automaticamente com WAL,
 `busy_timeout`, índice `(origin, created_at)` e `INSERT OR IGNORE` (idempotente).
 Históricos mobile/externos são filtráveis por `origin`. Ainda será necessário o
 bridge com a memória real da extensão — nada é gravado no SQLite dela hoje.
@@ -151,14 +151,14 @@ versão — não compartilhe o aparelho desbloqueado.
 
 A aba Meu PC exibe a tela real (~2 fps) e envia toque/teclado de verdade
 (`GET /api/screen`, `POST /api/input`, ambos com login + CSRF). Controle
-exige `FAJULTO_REMOTE=1` no PC — sem isso, somente visualização. Detalhes,
+exige `JULIA_REMOTE=1` no PC — sem isso, somente visualização. Detalhes,
 gestos e limites em `docs/REMOTO_ANYDESK.md`.
 
 ## Resposta da IA (Hermes Proxy local)
 
 Com o PC online e o Hermes Proxy rodando (`hermes proxy start`, padrão
 `http://127.0.0.1:8645/v1`), cada mensagem sincronizada gera uma resposta real
-do modelo (`FAJULTO_AI_MODEL`, padrão `poolside/laguna-s-2.1:free`), exibida com
+do modelo (`JULIA_AI_MODEL`, padrão `poolside/laguna-s-2.1:free`), exibida com
 streaming progressivo no celular e persistida no SQLite (`ai_requests` +
 mensagem `assistant`, idempotente por mensagem).
 
@@ -210,7 +210,7 @@ rode tudo em casa numa rede privada:
 2. No PC, inicie o relay ouvindo a rede: `iniciar-servidor.bat 0.0.0.0`
    (libere a porta 8000 no firewall do Windows se pedir).
 3. No PC, aponte o agente para ele mesmo:
-   `set FAJULTO_RELAY_URL=http://127.0.0.1:8000` + `iniciar-agente.bat`.
+   `set JULIA_RELAY_URL=http://127.0.0.1:8000` + `iniciar-agente.bat`.
 4. No celular (com Tailscale ativo), abra
    `https://SEU-PC.sua-rede.ts.net:8000` — PWA completa, mesmo app.
 
@@ -222,7 +222,7 @@ O modo Render continua disponível como alternativa.
 1. Conecte este repositório (privado) via **New → Blueprint** (`render.yaml`) ou Web
    Service com build `pip install -r requirements.txt` e start
    `uvicorn server:app --host 0.0.0.0 --port $PORT --proxy-headers`.
-2. Configure os 4 segredos no Environment. `FAJULTO_SESSION_SECRET` nunca vai para o PC.
+2. Configure os 4 segredos no Environment. `JULIA_SESSION_SECRET` nunca vai para o PC.
 3. Serviço deve ser **Web Service** (HTTP+WebSocket), não Static Site.
 4. Deploy real ainda não executado: validar WSS, hibernação do plano Free e health
    checks em produção após a primeira publicação.

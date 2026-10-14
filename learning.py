@@ -1,4 +1,4 @@
-"""FAJULTOLearningEngine — dados (FASE 2, V4.2).
+"""JULIALearningEngine — dados (FASE 2, V4.2).
 
 Tabelas, validação e algoritmo de repetição espaçada. Stdlib pura.
 Tudo com owner_id (isolamento) e IDs client-side estáveis (idempotência:

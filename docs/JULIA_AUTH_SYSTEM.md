@@ -7,7 +7,7 @@ Navegador (IndexedDB por conta) ◄──HTTPS──► Relay Render (SEM banco)
         login/register/conta  │                    │  cookie assinado (itsdangerous)
                               │                    │  + CSRF + revogação (TTL 60s)
                               ▼                    ▼
-                        PC Agent (SQLite definitivo: FAJULTO_auth.py)
+                        PC Agent (SQLite definitivo: JULIA_auth.py)
 ```
 
 ## Princípios
@@ -22,7 +22,7 @@ Navegador (IndexedDB por conta) ◄──HTTPS──► Relay Render (SEM banco)
 - **Offline honesto** — cadastro e login de contas novas exigem o PC online
   (503/401 claros, sem simulação). Sessão válida continua lendo o cache local.
 
-## Entidades SQLite (`FAJULTO_auth.py`, só stdlib)
+## Entidades SQLite (`JULIA_auth.py`, só stdlib)
 
 `users` (uid `local` p/ dono legado, `u-hex` demais; username UNIQUE; hash
 **scrypt**; role; status; limites), `user_sessions` (sid, expira_em, revogada),

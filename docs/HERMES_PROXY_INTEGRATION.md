@@ -20,7 +20,7 @@ CELULAR → HTTPS/WSS → RENDER (sem banco) → WSS autenticado → PC_AGENT
   tabela `messages` (coluna `model`, migração idempotente). Tipos WS:
   `ai` (completa), `ai_stream` (worker thread + lock de envio),
   `ai_cancel`, `ai_models`. Contexto = últimas N mensagens da conversa
-  (`FAJULTO_AI_CONTEXT`, padrão 20) + `FAJULTO_SYSTEM_PROMPT`.
+  (`JULIA_AI_CONTEXT`, padrão 20) + `JULIA_SYSTEM_PROMPT`.
 - `server.py`: `POST /api/ai` (completa, idempotente), `GET /api/ai/stream`
   (SSE: delta/done/cancelled/error; fechar cancela), `GET /api/ai/models`
   (lista real para o seletor). Relay sem armazenamento.
@@ -32,10 +32,10 @@ CELULAR → HTTPS/WSS → RENDER (sem banco) → WSS autenticado → PC_AGENT
 
 ```powershell
 $env:HERMES_PROXY_URL="http://127.0.0.1:8645/v1"
-$env:FAJULTO_AI_MODEL="poolside/laguna-s-2.1:free"
-$env:FAJULTO_SYSTEM_PROMPT="Você é a Júlia, ..."   # opcional
-$env:FAJULTO_AI_CONTEXT="20"                        # 1–50
-$env:FAJULTO_AI_MAX_TOKENS="2000"                   # 1–8000
+$env:JULIA_AI_MODEL="poolside/laguna-s-2.1:free"
+$env:JULIA_SYSTEM_PROMPT="Você é a Júlia, ..."   # opcional
+$env:JULIA_AI_CONTEXT="20"                        # 1–50
+$env:JULIA_AI_MAX_TOKENS="2000"                   # 1–8000
 python pc_agent.py
 ```
 
@@ -63,7 +63,7 @@ Antes: `hermes proxy start`. Conferir: `GET /v1/models` (422 modelos em
 
 `pytest -q tests` (18): unidade de SSE/SSRF/erros, idempotência sem rechamada,
 auth/validação/roteamento no relay e E2E com processos reais (relay + agente +
-Hermes falso). Proxy real validado manualmente (modelos + `OK_FAJULTO`/`FAJULTO_OK`
+Hermes falso). Proxy real validado manualmente (modelos + `OK_JULIA`/`JULIA_OK`
 via `laguna-s-2.1:free`, SSE incluso) para não gastar quota na suíte.
 
 ## Limitações da Opção A

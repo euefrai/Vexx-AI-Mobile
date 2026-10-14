@@ -1,4 +1,4 @@
-# FAJULTO DYNAMIC UI ENGINE — JDUI 1.0
+# JULIA DYNAMIC UI ENGINE — JDUI 1.0
 
 Interfaces declarativas geradas pela IA dentro do chat. A IA **descreve**;
 o frontend **renderiza com componentes nativos**. Nenhum JavaScript do modelo
@@ -17,11 +17,11 @@ Modelo (Hermes) → texto + fences ```jdui (JSON)
 O Render continua sem banco. O protocolo de mensagens **não mudou**:
 fences viajam dentro do texto (offline-first preservado).
 
-## 2. Schema `FAJULTO-ui-message/v1`
+## 2. Schema `JULIA-ui-message/v1`
 
 ```json
 {
-  "version": "FAJULTO-ui-message/v1",
+  "version": "JULIA-ui-message/v1",
   "blocks": [
     { "type": "text", "content": "Veja:" },
     { "type": "ui", "component": "quiz", "props": { "title": "…", "questions": [] } }
@@ -63,7 +63,7 @@ mas o modelo não é mais instruído a usá-lo.
 - Ações locais nunca chamam IA. Ações de chat usam `ctx.onChat` (mensagem
   autenticada normal). Sem ações externas além de links `https` explícitos.
 
-## 5. PresentationEngine (`pc_agent.FAJULTOPresentationEngine`)
+## 5. PresentationEngine (`pc_agent.JULIAPresentationEngine`)
 
 Intenção → componente: quiz, checklist, calculator, cards, diagram, table,
 form. Pergunta simples → **só texto**. Catálogo compacto injetado só quando há
@@ -102,6 +102,6 @@ URLs validadas, tamanhos/profundidade limitados, auth+CSRF nos endpoints,
 
 1. Validador em `jdui.py` (`_v_novo` + registro em `VALIDADORES`).
 2. Espelho em `jdui.js` (`V.novo` + `R.novo` + `COMPONENTS`).
-3. Exemplo em `docs/FAJULTO_DYNAMIC_UI_EXAMPLES.md`.
+3. Exemplo em `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`.
 4. Testes nos dois lados com o mesmo payload.
 5. CSS em `styles.css` herdando as variáveis do tema.

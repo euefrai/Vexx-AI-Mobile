@@ -1,4 +1,4 @@
-"""JDUI 1.0 — contrato declarativo `FAJULTO-ui-message/v1`.
+"""JDUI 1.0 — contrato declarativo `JULIA-ui-message/v1`.
 
 A IA descreve interfaces em blocos ```jdui (JSON). NENHUM JavaScript do modelo
 é executado: o frontend renderiza apenas componentes do registry, com funções
@@ -7,15 +7,15 @@ fallback seguro (nunca travam o chat).
 
 Este módulo (stdlib only) faz extração + validação + normalização no PC.
 O frontend possui o espelho de validação/render em `public/jdui.js`; ambos
-são testados contra os mesmos payloads de `docs/FAJULTO_DYNAMIC_UI_EXAMPLES.md`.
+são testados contra os mesmos payloads de `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`.
 """
 import json
 import logging
 import re
 
-log = logging.getLogger("FAJULTO-jdui")
+log = logging.getLogger("JULIA-jdui")
 
-VERSION = "FAJULTO-ui-message/v1"
+VERSION = "JULIA-ui-message/v1"
 FENCE_RE = re.compile(r"```jdui\s*\n([\s\S]*?)(?:```|$)", re.IGNORECASE)
 MAX_BLOCOS_MSG = 6
 MAX_JSON_BYTES = 24000
@@ -212,7 +212,7 @@ VALIDADORES = {
 
 
 def validar_mensagem(obj) -> tuple:
-    """Valida envelope FAJULTO-ui-message/v1. Retorna (ok, normalizado|None, erros[])."""
+    """Valida envelope JULIA-ui-message/v1. Retorna (ok, normalizado|None, erros[])."""
     erros = []
     if not isinstance(obj, dict):
         return False, None, ["envelope deve ser objeto"]
