@@ -1759,7 +1759,7 @@ def run():
     while True:
         try:
             with connect(ws_url, additional_headers={"Authorization": "Bearer " + token},
-                          open_timeout=15, ping_interval=25, ping_timeout=20, max_size=25_000_000) as websocket:
+                          open_timeout=20, ping_interval=20, ping_timeout=20, max_size=25_000_000) as websocket:
                 log.info("Conectado ao relay. Nenhuma porta de entrada foi aberta no PC.")
                 pause = 2
                 for raw in websocket:
@@ -2202,7 +2202,16 @@ def run():
                         "Aguardando %ss antes de tentar (não force reconexões).",
                         status, pause)
         except (ConnectionClosed, ConnectionError, OSError, TimeoutError, ValueError) as exc:
-            log.warning("Conexão interrompida (%s). Reconectando em %ss", type(exc).__name__, pause)
+            motivo = ""
+            try:
+                codigo = getattr(exc, "code", None)
+                razao = getattr(exc, "reason", "")
+                if codigo:
+                    motivo = f" (código {codigo}: {razao})"
+            except Exception:
+                pass
+            log.warning("Conexão interrompida (%s%s). Reconectando em %ss",
+                        type(exc).__name__, motivo, pause)
             pause = min(60, pause * 2)
         except KeyboardInterrupt:
             break
