@@ -101,6 +101,22 @@ def test_agent_auth_rejected():
             raise AssertionError('Unauthorized websocket should close')
 
 
+def test_diag_publico_sem_auth_e_status_com_idade():
+    import json as _json
+    with TestClient(server.app) as client:
+        d = client.get('/api/diag')
+        assert d.status_code == 200
+        corpo = d.json()
+        assert corpo['pc_online'] is False and corpo['agente_ha'] == -1
+        assert isinstance(corpo.get('commit'), str)
+        csrf = authenticate(client)
+        st = client.get('/api/status')
+        assert st.json()['pc_online'] is False and st.json()['agente_ha'] == -1
+        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            assert client.get('/api/status').json()['pc_online'] is True
+            assert client.get('/api/diag').json()['pc_online'] is True
+
+
 def test_wrong_origin_rejected():
     with TestClient(server.app) as client:
         csrf = authenticate(client)

@@ -755,13 +755,23 @@ function updateConnection() {
     d.style.boxShadow = on ? '0 0 0 3px var(--glow-rose)' : '';
   });
   $('popModel').textContent = modeloAtivo() || '—';
-  $('popSync').textContent = $('syncCounter').textContent + ' pendentes';
+  $('popSync').textContent = $('syncCounter').textContent + ' pendentes'
+    + (relayHa != null && relayHa >= 0 ? ' · agente há ' + relayHa + 's' : '');
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
   $('deviceDetail').textContent = pcOnline ? 'Windows · Conectado' : 'Aguardando agente';
   $('memoryStatus').textContent = memoryOn() ? 'Entre todos os chats' : 'Pausada neste aparelho';
-  $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.' : 'PC desconectado. Mensagens ficam no celular.';
+  $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
+    : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
+}
+let relayHa = null;
+let lastSyncErr = '';
+function marcaErroSync(msg) {
+  try {
+    lastSyncErr = 'Última falha ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+      + ' — ' + String(msg || 'sem resposta').slice(0, 90);
+  } catch (_) { lastSyncErr = String(msg || '').slice(0, 90); }
 }
 $('statusButton').addEventListener('click', e => {
   e.stopPropagation();
@@ -973,6 +983,11 @@ async function checkStatus() {
   try {
     const st = await api('/api/status');
     pcOnline = st.pc_online === true;
+    if (typeof st.agente_ha === 'number') relayHa = st.agente_ha;
+    try {
+      const dg = await api('/api/diag');
+      if (typeof dg.agente_ha === 'number') relayHa = dg.agente_ha;
+    } catch (_) { /* diag é auxiliar; status já vale */ }
     updateConnection();
     if (pcOnline) {
       const conf = await syncAndRefresh();
@@ -985,8 +1000,10 @@ async function checkStatus() {
       for (const m of pend) { if (!aiAbort) await requestAI(m); }
     }
   } catch (err) {
-    pcOnline = false; updateConnection();
+    pcOnline = false;
     if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
+    else marcaErroSync(err.status ? 'HTTP ' + err.status : 'rede?');
+    updateConnection();
   }
 }
 async function syncAndRefresh() {
@@ -1025,6 +1042,7 @@ async function syncAndRefresh() {
   } catch (err) {
     if (err.status === 503) pcOnline = false;
     if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
+    if (err.status && err.status !== 401) marcaErroSync('HTTP ' + err.status + ': ' + (err.message || ''));
     updateConnection();
     return conf;
   } finally { busy = false; }

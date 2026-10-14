@@ -180,9 +180,15 @@ class InputBody(BaseModel):
 class AgentRelay:
     def __init__(self):
         self.ws: WebSocket | None = None
+        self.ws_desde: float | None = None
         self.pending: dict[str, asyncio.Future] = {}
         self.streams: dict[str, asyncio.Queue] = {}
         self.send_lock = asyncio.Lock()
+
+    def ha(self) -> int:
+        if self.ws is None or not self.ws_desde:
+            return -1
+        return max(0, int(time.monotonic() - self.ws_desde))
 
     async def exchange(self, payload: dict, timeout: float = 12.0) -> dict:
         ws = self.ws
@@ -238,7 +244,7 @@ def health():
 @app.get("/api/diag")
 def diag():
     """Diagnóstico público SEM dados sensíveis: o relay vê o agente?"""
-    return {"pc_online": relay.ws is not None,
+    return {"pc_online": relay.ws is not None, "agente_ha": relay.ha(),
             "commit": os.environ.get("RENDER_GIT_COMMIT", "local")[:12]}
 
 
@@ -689,7 +695,8 @@ async def admin_audit(request: Request, limite: int = 200):
 @app.get("/api/status")
 def status(request: Request):
     verify_session(request)
-    return {"pc_online": relay.ws is not None, "messages_stored_on": "computer"}
+    return {"pc_online": relay.ws is not None, "agente_ha": relay.ha(),
+            "messages_stored_on": "computer"}
 
 
 @app.post("/api/sync")
@@ -1144,6 +1151,7 @@ async def agent_ws(websocket: WebSocket):
         except RuntimeError:
             pass
     relay.ws = websocket
+    relay.ws_desde = time.monotonic()
     revogados["suportado"] = True
     revogados["falhas"] = 0
     relay.fail_pending()
@@ -1171,6 +1179,7 @@ async def agent_ws(websocket: WebSocket):
     finally:
         if relay.ws is websocket:
             relay.ws = None
+            relay.ws_desde = None
             relay.fail_pending()
 
 
