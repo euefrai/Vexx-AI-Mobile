@@ -1475,7 +1475,7 @@ def dono_bloqueado(db, owner: str) -> bool:
     try:
         user = julia_auth.buscar_uid(db, owner)
         if user is not None:
-            return user.get("status") != "ativo"
+            return julia_auth.status_efetivo(db, owner) != "ativo"
         if owner == "local":
             return False
         total = db.execute("SELECT COUNT(*) FROM users").fetchone()[0]
@@ -1915,7 +1915,8 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             try:
-                                julia_auth.definir_status(db, dono, req.get("uid", ""), req.get("status", ""))
+                                julia_auth.definir_status(db, dono, req.get("uid", ""),
+                                                          req.get("status", ""), req.get("dias", 0))
                                 reply = _resp_ok("admin_ok")
                             except julia_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
@@ -2011,7 +2012,8 @@ def run():
                         else:
                             try:
                                 julia_auth.update_limits(db, dono, str(req.get("uid", "")),
-                                                        req.get("max_ai_hora", 0), req.get("max_ia_simult", 0))
+                                                        req.get("max_ai_hora", 0), req.get("max_ia_simult", 0),
+                                                        req.get("remote_ok", None))
                                 reply = _resp_ok("admin_ok")
                             except julia_auth.AuthErro as exc:
                                 reply = _resp_erro(str(exc), exc.codigo)
@@ -2189,22 +2191,34 @@ def run():
                             sessao.parar.set()
                         continue
                     elif req.get("type") == "screen":
-                        try:
-                            img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
-                            reply = {"request_id": request_id, "type": "screen", **img,
-                                     "remote_enabled": remoto.entrada_ativada()}
-                        except remoto.RemotoErro as exc:
+                        if not julia_auth.pode_remoto(db, dono):
                             reply = {"request_id": request_id, "type": "screen_error",
-                                     "error": str(exc), "codigo": exc.codigo}
+                                     "error": "Sem autorização para ver a tela.",
+                                     "codigo": "sem_permissao"}
+                            log.warning("remoto negado (tela) para %s", dono)
+                        else:
+                            try:
+                                img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
+                                reply = {"request_id": request_id, "type": "screen", **img,
+                                         "remote_enabled": remoto.entrada_ativada()}
+                            except remoto.RemotoErro as exc:
+                                reply = {"request_id": request_id, "type": "screen_error",
+                                         "error": str(exc), "codigo": exc.codigo}
                     elif req.get("type") == "input":
-                        try:
-                            cmd = remoto.validar_comando(req.get("cmd", {}))
-                            res = remoto.executar(cmd)
-                            log.info("remoto: %s executado", res["kind"])
-                            reply = {"request_id": request_id, "type": "input_done", **res}
-                        except remoto.RemotoErro as exc:
+                        if not julia_auth.pode_remoto(db, dono):
                             reply = {"request_id": request_id, "type": "input_error",
-                                     "error": str(exc), "codigo": exc.codigo}
+                                     "error": "Sem autorização para controlar o PC.",
+                                     "codigo": "sem_permissao"}
+                            log.warning("remoto negado (input) para %s", dono)
+                        else:
+                            try:
+                                cmd = remoto.validar_comando(req.get("cmd", {}))
+                                res = remoto.executar(cmd)
+                                log.info("remoto: %s executado", res["kind"])
+                                reply = {"request_id": request_id, "type": "input_done", **res}
+                            except remoto.RemotoErro as exc:
+                                reply = {"request_id": request_id, "type": "input_error",
+                                         "error": str(exc), "codigo": exc.codigo}
                     else:
                         continue
                     with ENVIO_LOCK:

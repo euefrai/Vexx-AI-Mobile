@@ -72,6 +72,14 @@ def criar_tabelas(db) -> None:
     db.execute("""CREATE TABLE IF NOT EXISTS app_config (
         k TEXT PRIMARY KEY, v TEXT NOT NULL
     )""")
+    for _col, _ddl in (("remote_ok", "INT NOT NULL DEFAULT 0"),
+                       ("bloqueado_ate", "TEXT NOT NULL DEFAULT ''")):
+        try:
+            cols = [c[1] for c in db.execute("PRAGMA table_info(users)").fetchall()]
+            if _col not in cols:
+                db.execute(f"ALTER TABLE users ADD COLUMN {_col} {_ddl}")
+        except Exception:
+            pass
     db.commit()
 
 
@@ -178,11 +186,41 @@ def buscar_usuario(db, username: str):
 
 
 def buscar_uid(db, uid: str):
-    row = db.execute("SELECT uid, username, display, role, status FROM users WHERE uid=?",
-                     (uid,)).fetchone()
+    try:
+        row = db.execute("SELECT uid, username, display, role, status, remote_ok, bloqueado_ate "
+                         "FROM users WHERE uid=?", (uid,)).fetchone()
+    except Exception:
+        row = db.execute("SELECT uid, username, display, role, status FROM users WHERE uid=?",
+                         (uid,)).fetchone()
+        if not row:
+            return None
+        return {"uid": row[0], "username": row[1], "display": row[2], "role": row[3],
+                "status": row[4], "remote_ok": False, "bloqueado_ate": ""}
     if not row:
         return None
-    return {"uid": row[0], "username": row[1], "display": row[2], "role": row[3], "status": row[4]}
+    return {"uid": row[0], "username": row[1], "display": row[2], "role": row[3],
+            "status": row[4], "remote_ok": bool(row[5]), "bloqueado_ate": row[6] or ""}
+
+
+def status_efetivo(db, uid: str) -> str:
+    """'ativo' ou 'bloqueado', com auto-levantamento de suspensão vencida."""
+    try:
+        row = db.execute("SELECT status, bloqueado_ate FROM users WHERE uid=?", (uid,)).fetchone()
+    except Exception:
+        return "ativo"
+    if not row:
+        return "ativo"
+    status, ate = row[0], (row[1] or "") if len(row) > 1 else ""
+    if status == "bloqueado" and ate:
+        try:
+            if datetime.now(timezone.utc) >= datetime.fromisoformat(ate):
+                with db:
+                    db.execute("UPDATE users SET status='ativo', bloqueado_ate='' WHERE uid=?", (uid,))
+                auditar(db, "sistema", "suspensao_vencida", uid)
+                return "ativo"
+        except (ValueError, TypeError):
+            pass
+    return status or "ativo"
 
 
 def criar_usuario(db, username: str, display: str, senha: str, *, papel="user",
@@ -244,9 +282,9 @@ def login_conta(db, username: str, senha: str) -> dict:
             if pend[0] == "pendente":
                 raise AuthErro("Conta aguardando aprovação.", "pendente")
         raise AuthErro("Usuário ou senha inválidos.", "credenciais")
-    if user["status"] == "bloqueado":
+    if status_efetivo(db, user["uid"]) == "bloqueado":
         raise AuthErro("Usuário ou senha inválidos.", "credenciais")
-    if not user["aprovado"] or user["status"] != "ativo":
+    if not user["aprovado"] or status_efetivo(db, user["uid"]) != "ativo":
         raise AuthErro("Conta aguardando aprovação.", "pendente")
     with db:
         db.execute("UPDATE users SET last_seen=? WHERE uid=?", (agora_iso(), user["uid"]))
@@ -282,7 +320,8 @@ def definir_papel(db, ator_uid: str, alvo_uid: str, papel: str) -> None:
     auditar(db, ator_uid, "papel_alterado", alvo["username"], f"papel={papel}")
 
 
-def definir_status(db, ator_uid: str, alvo_uid: str, status: str) -> None:
+def definir_status(db, ator_uid: str, alvo_uid: str, status: str, dias: int = 0) -> None:
+    """Bloqueio definitivo (dias=0) ou suspensão temporária (dias 1..365, auto-levanta)."""
     if status not in ("ativo", "bloqueado"):
         raise AuthErro("Status inválido.", "status_invalido")
     if alvo_uid == ator_uid:
@@ -290,10 +329,20 @@ def definir_status(db, ator_uid: str, alvo_uid: str, status: str) -> None:
     alvo = buscar_uid(db, alvo_uid)
     if not alvo:
         raise AuthErro("Conta não encontrada.", "ausente")
+    ate = ""
+    if status == "bloqueado" and dias:
+        try:
+            dias = min(max(int(dias), 1), 365)
+        except (TypeError, ValueError):
+            raise AuthErro("Duração inválida.", "invalido") from None
+        from datetime import timedelta
+        ate = (datetime.now(timezone.utc) + timedelta(days=dias)).isoformat()
     with db:
-        db.execute("UPDATE users SET status=? WHERE uid=?", (status, alvo_uid))
-        db.execute("UPDATE user_sessions SET revogada=1 WHERE uid=?", (alvo_uid,))
-    auditar(db, ator_uid, "bloqueado" if status == "bloqueado" else "desbloqueado", alvo["username"])
+        db.execute("UPDATE users SET status=?, bloqueado_ate=? WHERE uid=?", (status, ate, alvo_uid))
+        if status == "bloqueado":
+            db.execute("UPDATE user_sessions SET revogada=1 WHERE uid=?", (alvo_uid,))
+    auditar(db, ator_uid, "bloqueado" if status == "bloqueado" else "desbloqueado",
+            alvo["username"], f"ate={ate}" if ate else "")
 
 
 def excluir_usuario(db, ator_uid: str, alvo_uid: str) -> int:
@@ -356,7 +405,7 @@ def sessao_valida(db, sid: str):
     except (ValueError, TypeError):
         return None
     user = buscar_uid(db, row[0])
-    if not user or user["status"] != "ativo":
+    if not user or status_efetivo(db, row[0]) != "ativo":
         return None
     return user
 
@@ -512,16 +561,51 @@ def limites_usuario(db, uid: str) -> dict:
     return {"max_ai_hora": row[0] or 120, "max_ia_simult": row[1] or 3}
 
 
-def update_limits(db, ator_uid: str, alvo_uid: str, max_ai_hora: int, max_ia_simult: int) -> None:
+def update_limits(db, ator_uid: str, alvo_uid: str, max_ai_hora: int, max_ia_simult: int,
+                  remote_ok=None) -> None:
+    """Limites de IA + autorização explícita de controle remoto (grant do admin).
+
+    Zero/ausente preserva o valor atual (nunca grava NULL: coluna é NOT NULL).
+    """
     if not buscar_uid(db, alvo_uid):
         raise AuthErro("Conta não encontrada.", "ausente")
-    max_ai_hora = max(0, int(max_ai_hora))
-    max_ia_simult = max(0, int(max_ia_simult))
+    atual = limites_usuario(db, alvo_uid)
+    try:
+        max_ai_hora = int(max_ai_hora or 0)
+    except (TypeError, ValueError):
+        max_ai_hora = 0
+    try:
+        max_ia_simult = int(max_ia_simult or 0)
+    except (TypeError, ValueError):
+        max_ia_simult = 0
+    if max_ai_hora <= 0:
+        max_ai_hora = atual["max_ai_hora"]
+    if max_ia_simult <= 0:
+        max_ia_simult = atual["max_ia_simult"]
     with db:
         db.execute("UPDATE users SET max_ai_hora=?, max_ia_simult=? WHERE uid=?",
-                   (max_ai_hora or None, max_ia_simult or None, alvo_uid))
+                   (max_ai_hora, max_ia_simult, alvo_uid))
+        if remote_ok is not None:
+            ligado = remote_ok is True or str(remote_ok).strip().lower() in ("1", "true", "sim")
+            db.execute("UPDATE users SET remote_ok=? WHERE uid=?",
+                       (1 if ligado else 0, alvo_uid))
     auditar(db, ator_uid, "limites_alterados", alvo_uid,
-            f"max_ai_hora={max_ai_hora}, max_ia_simult={max_ia_simult}")
+            f"max_ai_hora={max_ai_hora}, max_ia_simult={max_ia_simult}, remote_ok={remote_ok}")
+
+
+def pode_remoto(db, owner: str) -> bool:
+    """Controle remoto/tela: dono local sempre; contas só com grant explícito."""
+    if dono_valido_local(owner):
+        return True
+    try:
+        user = buscar_uid(db, owner)
+        return bool(user) and user.get("status") == "ativo" and bool(user.get("remote_ok"))
+    except Exception:
+        return False
+
+
+def dono_valido_local(owner) -> bool:
+    return (str(owner or "").strip().lower() or "local") == "local"
 
 
 def uso_ia_hora(db, uid: str) -> int:

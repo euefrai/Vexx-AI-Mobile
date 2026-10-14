@@ -367,6 +367,49 @@ def test_relay_sid_revogado_bloqueia_dados():
             assert r.status_code in (401, 422)  # 401 revogada (ou 422 lote vazio se passar)
 
 
+def test_relay_remoto_negado_vira_403():
+    with TestClient(server.app) as client:
+        csrf = _login_legacy(client)
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            out = {}
+
+            def tela():
+                out['t'] = client.get('/api/screen?max_w=800&q=50', headers={'X-CSRF-Token': csrf})
+
+            def tecla():
+                out['k'] = client.post('/api/input', json={'kind': 'key', 'key': 'enter'},
+                                       headers={'X-CSRF-Token': csrf})
+
+            t = threading.Thread(target=tela)
+            t.start()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req['type'] == 'sess_revogados':
+                    ws.send_json({'request_id': req['request_id'], 'type': 'sess_revogados', 'sids': []})
+                    continue
+                break
+            assert req['type'] == 'screen' and req.get('owner') == 'local'
+            ws.send_json({'request_id': req['request_id'], 'type': 'screen_error',
+                          'error': 'Sem autorização para ver a tela.', 'codigo': 'sem_permissao'})
+            t.join(timeout=8)
+            assert out['t'].status_code == 403
+
+            t = threading.Thread(target=tecla)
+            t.start()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req['type'] == 'sess_revogados':
+                    ws.send_json({'request_id': req['request_id'], 'type': 'sess_revogados', 'sids': []})
+                    continue
+                break
+            assert req['type'] == 'input'
+            ws.send_json({'request_id': req['request_id'], 'type': 'input_error',
+                          'error': 'Sem autorização para controlar o PC.', 'codigo': 'sem_permissao'})
+            t.join(timeout=8)
+            assert out['k'].status_code == 403
+
+
 def test_relay_admin_exige_papel():
     with TestClient(server.app) as client:
         with client.websocket_connect('/api/agent/ws',
@@ -387,6 +430,57 @@ def test_relay_admin_exige_papel():
             r = client.get('/api/admin/users', headers={'X-CSRF-Token': csrf})
             assert r.status_code == 403  # negado sem vazar dados
             assert 'admin_users' not in vistos  # barrado no relay, nem chega ao PC
+
+
+def test_remoto_exige_grant_explicito():
+    db = _db()
+    import julia_auth as _ja
+    _ja.criar_usuario(db, 'visit', 'Visita', 'senha-forte-1', criado_por='t')
+    visitante = _ja.buscar_usuario(db, 'visit')['uid']
+    assert _ja.pode_remoto(db, 'local') is True  # dono do PC
+    assert _ja.pode_remoto(db, visitante) is False
+    _ja.update_limits(db, 'local', visitante, 0, 0, True)
+    assert _ja.pode_remoto(db, visitante) is True
+    _ja.update_limits(db, 'local', visitante, 0, 0, False)
+    assert _ja.pode_remoto(db, visitante) is False
+    # limites numéricos preservados ao mexer só no remoto
+    _ja.update_limits(db, 'local', visitante, 50, 2, None)
+    assert _ja.limites_usuario(db, visitante)['max_ai_hora'] == 50
+    _ja.update_limits(db, 'local', visitante, 0, 0, True)
+    assert _ja.limites_usuario(db, visitante)['max_ai_hora'] == 50
+    # bloqueado perde remoto mesmo com grant
+    _ja.definir_status(db, 'local', visitante, 'bloqueado')
+    assert _ja.pode_remoto(db, visitante) is False
+    db.close()
+
+
+def test_suspensao_temporaria_auto_levanta():
+    db = _db()
+    import julia_auth as _ja
+    _ja.criar_usuario(db, 'temp', 'Temp', 'senha-forte-1', criado_por='t')
+    uid = _ja.buscar_usuario(db, 'temp')['uid']
+    _ja.definir_status(db, 'local', uid, 'bloqueado', dias=1)
+    row = _ja.buscar_uid(db, uid)
+    assert row['status'] == 'bloqueado' and row['bloqueado_ate'] != ''
+    assert _ja.status_efetivo(db, uid) == 'bloqueado'
+    try:
+        _ja.login_conta(db, 'temp', 'senha-forte-1')
+        raise AssertionError('suspenso não entra')
+    except _ja.AuthErro as exc:
+        assert exc.codigo == 'credenciais'
+    # simula vencimento
+    db.execute("UPDATE users SET bloqueado_ate='2000-01-01T00:00:00+00:00' WHERE uid=?", (uid,))
+    db.commit()
+    assert _ja.status_efetivo(db, uid) == 'ativo'
+    assert _ja.login_conta(db, 'temp', 'senha-forte-1')['uid'] == uid
+    assert _ja.buscar_uid(db, uid)['bloqueado_ate'] == ''
+    # dias inválidos
+    try:
+        _ja.definir_status(db, 'local', uid, 'bloqueado', dias='xx')
+        raise AssertionError('dias inválidos')
+    except _ja.AuthErro as exc:
+        assert exc.codigo == 'invalido'
+    db.close()
 
 
 # rate limit de login (12)

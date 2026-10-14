@@ -472,6 +472,7 @@ class AdminRoleBody(BaseModel):
 class AdminStatusBody(BaseModel):
     uid: str
     status: str
+    dias: int = Field(default=0, ge=0, le=365)
 
 
 class AdminUidBody(BaseModel):
@@ -498,6 +499,7 @@ class AdminLimitsBody(BaseModel):
     uid: str
     max_ai_hora: int = Field(default=0, ge=0)
     max_ia_simult: int = Field(default=0, ge=0)
+    remote_ok: bool | None = None
 
 
 async def admin_uid(request: Request) -> str:
@@ -567,7 +569,8 @@ async def admin_set_status(request: Request, body: AdminStatusBody):
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
     result = await relay.exchange({"type": "admin_user_status", "owner": uid,
-                                   "uid": body.uid, "status": body.status}, timeout=20.0)
+                                   "uid": body.uid, "status": body.status,
+                                   "dias": body.dias}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
     return {"ok": True}
@@ -605,7 +608,8 @@ async def admin_set_limits(request: Request, body: AdminLimitsBody):
     result = await relay.exchange({"type": "admin_user_limits", "owner": uid,
                                    "uid": body.uid,
                                    "max_ai_hora": body.max_ai_hora,
-                                   "max_ia_simult": body.max_ia_simult}, timeout=20.0)
+                                   "max_ia_simult": body.max_ia_simult,
+                                   "remote_ok": body.remote_ok}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
     return {"ok": True}
@@ -1051,12 +1055,15 @@ async def ai_continue(request: Request, body: AIContinue):
 
 @app.get("/api/screen")
 async def screen(request: Request, max_w: int = 800, q: int = 55):
-    """Foto atual da tela do PC (JPEG base64). Exige login + CSRF."""
+    """Foto atual da tela do PC (JPEG base64). Exige login + CSRF + grant remoto."""
     require_csrf(request)
-    result = await relay.exchange({"type": "screen",
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "screen", "owner": dono,
                                    "max_w": max(320, min(max_w, 960)),
                                    "q": max(30, min(q, 80))}, timeout=20.0)
     if result.get("type") != "screen":
+        if result.get("codigo") == "sem_permissao":
+            raise HTTPException(403, result.get("error", "Sem autorização."))
         raise HTTPException(503, result.get("error", "Tela indisponível"))
     return {"imagem": result["imagem"], "largura": result.get("largura", 0),
             "altura": result.get("altura", 0), "ms": result.get("ms", 0),
@@ -1065,10 +1072,14 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
 
 @app.post("/api/input")
 async def remote_input(request: Request, body: InputBody):
-    """Executa mouse/teclado no PC. Exige login + CSRF; agente exige JULIA_REMOTE=1."""
+    """Executa mouse/teclado no PC. Exige login + CSRF + grant remoto (além de JULIA_REMOTE=1)."""
     require_csrf(request)
-    result = await relay.exchange({"type": "input", "cmd": body.model_dump()}, timeout=15.0)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "input", "owner": dono,
+                                   "cmd": body.model_dump()}, timeout=15.0)
     if result.get("type") != "input_done":
+        if result.get("codigo") == "sem_permissao":
+            raise HTTPException(403, result.get("error", "Sem autorização."))
         raise HTTPException(503, result.get("error", "Comando recusado"))
     return {"ok": True, "kind": result.get("kind", "")}
 

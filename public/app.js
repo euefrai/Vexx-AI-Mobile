@@ -1586,7 +1586,8 @@ async function pullScreen() {
     $('screenNote').textContent = remoteEnabled ? 'Toque = clique, segurar = direito, arrastar = mover.' : 'Somente visualização. Ative JULIA_REMOTE=1 no PC.';
   } catch (err) {
     $('screenLabel').textContent = 'TELA INDISPONÍVEL';
-    $('screenNote').textContent = err.status === 503 ? 'Agente sem suporte a tela: reinicie o agente.' : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
+    $('screenNote').textContent = err.status === 403 ? 'Sem autorização. Peça acesso ao administrador.'
+      : err.status === 503 ? 'Agente sem suporte a tela: reinicie o agente.' : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
   } finally { screenBusy = false; }
 }
 setInterval(pullScreen, 1500);
