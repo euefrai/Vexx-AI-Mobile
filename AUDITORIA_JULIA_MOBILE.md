@@ -43,7 +43,7 @@ de deploy real está marcado como não validado.
 - **AUSENTE** — resposta da IA: mensagens são armazenadas/sincronizadas, sem geração de
   resposta. README declara isso abertamente.
 - **AUSENTE** — integração com a extensão Júlia: nenhum endpoint/contrato existe;
-  `fajulto_SQLITE_PATH` é banco próprio do Mobile, não o da extensão.
+  `FAJULTO_SQLITE_PATH` é banco próprio do Mobile, não o da extensão.
 - **BLOQUEADA** — deploy real no Render (sem acesso): `render.yaml` e config
   (host/porta, HTTPS/WSS, sem persistência) validados só por inspeção + equivalência local.
 - **BLOQUEADA** — PWA com navegador totalmente fechado: nenhuma sincronização em
@@ -53,7 +53,7 @@ de deploy real está marcado como não validado.
 
 - Hash Argon2id, `compare_digest` em usuário e token do agente. OK.
 - Sessão stateless assinada (12 h); **sem revogação server-side** (trocar
-  `fajulto_SESSION_SECRET` invalida tudo) — limitação documentada.
+  `FAJULTO_SESSION_SECRET` invalida tudo) — limitação documentada.
 - Rate limit de login: 5 tentativas/5 min por IP → 429 (testado). Em memória:
   reinício do Render zera contadores — documentado; reforço via WAF sugerido no código.
 - XSS: frontend só usa `textContent`; payload `<script>` armazenado literalmente sem

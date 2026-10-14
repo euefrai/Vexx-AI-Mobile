@@ -1,18 +1,18 @@
 services:
   - type: web
-    name: fajulto-mobile-relay
+    name: FAJULTO-mobile-relay
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT --proxy-headers
     envVars:
-      - key: fajulto_ENV
+      - key: FAJULTO_ENV
         value: production
-      - key: fajulto_USERNAME
+      - key: FAJULTO_USERNAME
         sync: false
-      - key: fajulto_PASSWORD_HASH
+      - key: FAJULTO_PASSWORD_HASH
         sync: false
-      - key: fajulto_AGENT_TOKEN
+      - key: FAJULTO_AGENT_TOKEN
         sync: false
-      - key: fajulto_SESSION_SECRET
+      - key: FAJULTO_SESSION_SECRET
         generateValue: true

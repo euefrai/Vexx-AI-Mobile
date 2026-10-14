@@ -14,7 +14,7 @@
 - CSS JDUI em `styles.css`. Smoke Node com paridade (`test_frontend_smoke.py`).
 
 ## ETAPA 6 — PresentationEngine ✅
-- `pc_agent.fajultoPresentationEngine` + `JDUI_CATALOGO` compacto por intenção.
+- `pc_agent.FAJULTOPresentationEngine` + `JDUI_CATALOGO` compacto por intenção.
 - `jdui.normalizar` nos caminhos completo e stream; fences fora do contexto.
 - System prompt ensina JDUI e proíbe JS do modelo.
 

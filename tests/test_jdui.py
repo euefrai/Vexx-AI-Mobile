@@ -15,10 +15,10 @@ from fastapi.testclient import TestClient
 
 
 def _login(client):
-    os.environ['fajulto_USERNAME'] = 'efrai'
-    os.environ['fajulto_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
-    os.environ['fajulto_SESSION_SECRET'] = 'a' * 64
-    os.environ['fajulto_AGENT_TOKEN'] = 'b' * 64
+    os.environ['FAJULTO_USERNAME'] = 'efrai'
+    os.environ['FAJULTO_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['FAJULTO_SESSION_SECRET'] = 'a' * 64
+    os.environ['FAJULTO_AGENT_TOKEN'] = 'b' * 64
     server.login_failures.clear()
     r = client.post('/api/login', json={'username': 'efrai', 'password': 'strong-example-password'})
     assert r.status_code == 200, r.text
@@ -26,7 +26,7 @@ def _login(client):
 
 
 def quiz_ok():
-    return {"version": "fajulto-ui-message/v1", "blocks": [
+    return {"version": "FAJULTO-ui-message/v1", "blocks": [
         {"type": "text", "content": "Teste seus conhecimentos:"},
         {"type": "ui", "component": "quiz", "props": {
             "title": "Python",
@@ -42,7 +42,7 @@ def test_valido_quiz():
 
 
 def test_todos_componentes_validos():
-    msg = {"version": "fajulto-ui-message/v1", "blocks": [
+    msg = {"version": "FAJULTO-ui-message/v1", "blocks": [
         {"type": "ui", "component": "checklist",
          "props": {"title": "Estudos", "items": ["Ler cap.1", {"label": "Exercícios", "checked": True}]}},
         {"type": "ui", "component": "calculator", "props": {"kind": "imc"}},
@@ -72,7 +72,7 @@ def test_todos_componentes_validos():
 
 
 def test_invalidos():
-    base = {"version": "fajulto-ui-message/v1", "blocks": []}
+    base = {"version": "FAJULTO-ui-message/v1", "blocks": []}
     assert jdui.validar_mensagem({"version": "x", "blocks": []})[0] is False
     assert jdui.validar_mensagem(dict(base, blocks=[]))[0] is False
     # componente desconhecido → fallback (rejeitado, erro registrado)
@@ -105,7 +105,7 @@ def test_invalidos():
 
 
 def test_limites_e_profundidade():
-    grande = {"version": "fajulto-ui-message/v1",
+    grande = {"version": "FAJULTO-ui-message/v1",
               "blocks": [{"type": "text", "content": "x"}] * 30}
     ok, norm, erros = jdui.validar_mensagem(grande)
     assert ok and len(norm['blocks']) == 8 and any('teto' in e for e in erros)
@@ -130,7 +130,7 @@ def test_normalizar_mantem_valido_remove_invalido():
 
 
 def test_normalizar_preserva_stream_parcial():
-    texto = "Gerando...\n\n```jdui\n{\"version\": \"fajulto-ui-message/v1\", \"blocks\": ["
+    texto = "Gerando...\n\n```jdui\n{\"version\": \"FAJULTO-ui-message/v1\", \"blocks\": ["
     limpo, blocos, _ = jdui.normalizar(texto)
     assert blocos == [] and '```jdui' in limpo
 
@@ -153,7 +153,7 @@ def test_relay_ui_state_via_agente_fake():
     with TestClient(server.app) as client:
         csrf = _login(client)
         with client.websocket_connect('/api/agent/ws',
-                                      headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
+                                      headers={'Authorization': 'Bearer ' + os.environ['FAJULTO_AGENT_TOKEN']}) as ws:
             out = {}
 
             def salva():
@@ -220,7 +220,7 @@ def test_relay_conversation_forget():
     with TestClient(server.app) as client:
         csrf = _login(client)
         with client.websocket_connect('/api/agent/ws',
-                                      headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
+                                      headers={'Authorization': 'Bearer ' + os.environ['FAJULTO_AGENT_TOKEN']}) as ws:
             out = {}
 
             def deleta():
@@ -249,7 +249,7 @@ def test_relay_conversation_forget():
 
 
 def test_xss_em_strings_nao_executa():
-    msg = {"version": "fajulto-ui-message/v1", "blocks": [
+    msg = {"version": "FAJULTO-ui-message/v1", "blocks": [
         {"type": "ui", "component": "cards", "props": {"items": [
             {"title": "<script>alert(1)</script>", "desc": "<img src=x onerror=y>"}]}}]}
     ok, norm, _ = jdui.validar_mensagem(msg)

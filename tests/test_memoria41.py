@@ -124,10 +124,10 @@ def test_relay_memoria_nova_e_503_sem_pc():
     from argon2 import PasswordHasher
     from fastapi.testclient import TestClient
     import server
-    os.environ['fajulto_USERNAME'] = 'efrai'
-    os.environ['fajulto_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
-    os.environ['fajulto_SESSION_SECRET'] = 'a' * 64
-    os.environ['fajulto_AGENT_TOKEN'] = 'b' * 64
+    os.environ['FAJULTO_USERNAME'] = 'efrai'
+    os.environ['FAJULTO_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['FAJULTO_SESSION_SECRET'] = 'a' * 64
+    os.environ['FAJULTO_AGENT_TOKEN'] = 'b' * 64
     server.login_failures.clear()
     with TestClient(server.app) as client:
         r = client.post('/api/login', json={'username': 'efrai', 'password': 'strong-example-password'})
@@ -136,7 +136,7 @@ def test_relay_memoria_nova_e_503_sem_pc():
         apagado = client.delete('/api/memories/nome', headers={'X-CSRF-Token': csrf})
         assert apagado.status_code == 503
         with client.websocket_connect('/api/agent/ws',
-                                      headers={'Authorization': 'Bearer ' + os.environ['fajulto_AGENT_TOKEN']}) as ws:
+                                      headers={'Authorization': 'Bearer ' + os.environ['FAJULTO_AGENT_TOKEN']}) as ws:
             out = {}
 
             def full():

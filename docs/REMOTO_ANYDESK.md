@@ -7,7 +7,7 @@ confiável sobre o WSS já existente.
 ## Como ativa
 
 ```powershell
-$env:fajulto_REMOTE="1"   # sem isso: somente visualização
+$env:FAJULTO_REMOTE="1"   # sem isso: somente visualização
 python pc_agent.py
 ```
 
@@ -29,7 +29,7 @@ tudo exige login + CSRF, validado no relay e de novo no agente.
 
 ## Segurança
 
-- Padrão **desativado** (`fajulto_REMOTE` ausente = `input` recusado com
+- Padrão **desativado** (`FAJULTO_REMOTE` ausente = `input` recusado com
   `desativado`, e o app avisa na tela).
 - Coordenadas normalizadas 0..1 com clamp; texto até 200 chars; teclas por
   allowlist; rate limit (1/50ms, 120/min).

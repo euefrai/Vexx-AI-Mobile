@@ -1,4 +1,4 @@
-# fajulto LEARNING — Schema (V4.2 FASE 2)
+# FAJULTO LEARNING — Schema (V4.2 FASE 2)
 
 Módulo `learning.py` (stdlib). Tudo com `owner_id`; IDs client-side estáveis
 (reenvio = `INSERT OR IGNORE`, nunca duplica).

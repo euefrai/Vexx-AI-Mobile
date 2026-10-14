@@ -1,7 +1,7 @@
-"""fajulto_auth — contas, convites, sessões, papéis, limites e auditoria.
+"""FAJULTO_auth — contas, convites, sessões, papéis, limites e auditoria.
 
 Serviço reutilizável (stdlib pura: sqlite3/hashlib/secrets/hmac) para o
-agente do PC e para o painel do Fajulto Studio. NUNCA importar fastapi aqui.
+agente do PC e para o painel do FAJULTO Studio. NUNCA importar fastapi aqui.
 
 Modelo:
 - users: uid PK ('owner' p/ proprietário legado, 'u-<hex>' demais),
@@ -433,7 +433,7 @@ def sids_revogados(db, limite: int = 500) -> list:
 
 # ── Convites ──────────────────────────────────────────────────────────
 def gerar_convite(db, criado_por: str, max_usos: int = 1, dias: int = 7, nota: str = "") -> dict:
-    codigo = "fajulto-" + secrets.token_urlsafe(9).upper().replace("-", "")[:12]
+    codigo = "FAJULTO-" + secrets.token_urlsafe(9).upper().replace("-", "")[:12]
     digest = hashlib.sha256(codigo.encode()).hexdigest()
     from datetime import timedelta
     exp = (datetime.now(timezone.utc) + timedelta(days=max(1, min(dias, 90)))).isoformat()

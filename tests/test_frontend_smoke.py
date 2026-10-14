@@ -112,14 +112,14 @@ const t = (name, cond) => {
   else console.log('ok ' + name);
 };
 t('componentes', JDUI.COMPONENTS.indexOf('quiz') >= 0 && JDUI.COMPONENTS.indexOf('calculator') >= 0);
-const quiz = { version: 'fajulto-ui-message/v1', blocks: [
+const quiz = { version: 'FAJULTO-ui-message/v1', blocks: [
   { type: 'ui', component: 'quiz', props: { title: 'Py', questions: [
     { q: '2+2?', options: ['3', '4'], answer: 1 }] } }] };
 const r1 = JDUI.validateMessage(quiz);
 t('quiz-valido', r1.ok === true);
-t('quiz-invalido', JDUI.validateMessage({ version: 'fajulto-ui-message/v1', blocks: [
+t('quiz-invalido', JDUI.validateMessage({ version: 'FAJULTO-ui-message/v1', blocks: [
   { type: 'ui', component: 'quiz', props: { questions: [] } }] }).ok === false);
-t('desconhecido', JDUI.validateMessage({ version: 'fajulto-ui-message/v1', blocks: [
+t('desconhecido', JDUI.validateMessage({ version: 'FAJULTO-ui-message/v1', blocks: [
   { type: 'ui', component: 'nave', props: {} }] }).ok === false);
 const fence = 'texto\n```jdui\n' + JSON.stringify(quiz) + '\n```\nfim';
 const ext = JDUI.extractBlocks(fence);
