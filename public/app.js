@@ -666,7 +666,7 @@ async function renderSessions(filter) {
     b.className = 'session-item' + (s.id === activeConversation ? ' active' : '') + (s.archived ? ' archived' : '');
     b.setAttribute('role', 'option');
     const t = document.createElement('button'); t.type = 'button'; t.style.cssText = 'flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer';
-    t.innerHTML = '<span class="t">' + (s.pinned ? '📌 ' : '') + esc(s.title || 'Nova conversa') + '</span><small>' + (counts[s.id] || 0) + ' msgs</small>';
+    t.innerHTML = '<span class="t">' + (s.pinned ? '<svg class="icon session-pin" aria-hidden="true"><use href="#i-pin"/></svg>' : '') + '<span class="session-title">' + esc(s.title || 'Nova conversa') + '</span></span><small>' + (counts[s.id] || 0) + ' msgs</small>';
     t.addEventListener('click', async () => {
       setActiveConversation(s.id);
       await renderSessions($('sessionSearch').value);
@@ -695,23 +695,27 @@ async function renderSessions(filter) {
     });
     const tools = document.createElement('div'); tools.className = 'session-tools';
     const pin = document.createElement('button'); pin.type = 'button';
-    pin.className = 'session-tool' + (s.pinned ? ' on' : ''); pin.textContent = '📌'; pin.title = 'Fixar';
-    pin.setAttribute('aria-label', 'Fixar ' + (s.title || 'conversa'));
+    pin.className = 'session-tool' + (s.pinned ? ' on' : '');
+    pin.innerHTML = '<svg class="icon"><use href="#i-pin"/></svg>';
+    pin.title = s.pinned ? 'Desafixar' : 'Fixar';
+    pin.setAttribute('aria-pressed', s.pinned ? 'true' : 'false');
+    pin.setAttribute('aria-label', (s.pinned ? 'Desafixar ' : 'Fixar ') + (s.title || 'conversa'));
     pin.addEventListener('click', async () => {
       s.pinned = !s.pinned; s.updated_at = new Date().toISOString();
       await putSession(s);
       await renderSessions($('sessionSearch').value);
     });
     const arch = document.createElement('button'); arch.type = 'button'; arch.className = 'session-tool';
-    arch.textContent = '📦'; arch.title = s.archived ? 'Desarquivar' : 'Arquivar';
-    arch.setAttribute('aria-label', 'Arquivar ' + (s.title || 'conversa'));
+    arch.innerHTML = '<svg class="icon"><use href="#i-archive"/></svg>';
+    arch.title = s.archived ? 'Desarquivar' : 'Arquivar';
+    arch.setAttribute('aria-label', (s.archived ? 'Desarquivar ' : 'Arquivar ') + (s.title || 'conversa'));
     arch.addEventListener('click', async () => {
       s.archived = !s.archived; s.updated_at = new Date().toISOString();
       await putSession(s);
       if (s.archived && s.id === activeConversation) { setActiveConversation(newId()); await ensureSession(activeConversation); await renderMessages(); }
       await renderSessions($('sessionSearch').value);
       await renderMessages();
-      showToast(s.archived ? 'Arquivada (toque em 📦 para ver)' : 'Desarquivada');
+      showToast(s.archived ? 'Conversa arquivada' : 'Conversa desarquivada');
     });
     tools.appendChild(pin); tools.appendChild(arch); tools.appendChild(x);
     b.appendChild(t); b.appendChild(tools);
@@ -722,6 +726,8 @@ async function renderSessions(filter) {
 $('archivedToggle').addEventListener('click', () => {
   showArchived = !showArchived;
   $('archivedToggle').setAttribute('aria-pressed', showArchived ? 'true' : 'false');
+  $('archivedToggle').setAttribute('aria-label', showArchived ? 'Ocultar conversas arquivadas' : 'Mostrar conversas arquivadas');
+  $('archivedToggle').title = showArchived ? 'Ocultar conversas arquivadas' : 'Mostrar conversas arquivadas';
   renderSessions($('sessionSearch').value);
 });
 
@@ -853,7 +859,7 @@ $('passToggle').addEventListener('click', () => {
   const inp = $('loginPassword');
   const show = inp.type === 'password';
   inp.type = show ? 'text' : 'password';
-  $('passToggle').textContent = show ? '🙈' : '👁';
+  $('passToggle').innerHTML = '<svg class="icon"><use href="#' + (show ? 'i-eye-off' : 'i-eye') + '"/></svg>';
   $('passToggle').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
   $('passToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
 });
@@ -915,7 +921,7 @@ $('regPassToggle').addEventListener('click', () => {
   const inp = $('regPassword');
   const show = inp.type === 'password';
   inp.type = show ? 'text' : 'password';
-  $('regPassToggle').textContent = show ? '🙈' : '👁';
+  $('regPassToggle').innerHTML = '<svg class="icon"><use href="#' + (show ? 'i-eye-off' : 'i-eye') + '"/></svg>';
   $('regPassToggle').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
   $('regPassToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
 });

@@ -10,7 +10,7 @@
   --border-soft:rgba(255,255,255,.09);
   --text-1:#f4f2fa;
   --text-2:#a7a5bd; /* secundário */
-  --text-3:#6d6c85; /* terciário */
+  --text-3:#85839c; /* terciário */
   --accent:#a78bfa;
   --accent-2:#8b5cf6;
   --accent-dim:rgba(167,139,250,.12);
@@ -41,8 +41,8 @@
   --panel:#0f0f15;
   --panel-2:#14141c;
   --text:#f8f7ff;
-  --muted:#7a7991;
-  --soft:#5a5972;
+  --muted:#85839c;
+  --soft:#85839c;
   --purple:#a78bfa;
   --purple-2:#8b5cf6;
   --purple-3:#7c3aed;
@@ -58,6 +58,7 @@
   --radius-xs:8px;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;min-height:100%;background:var(--bg)}
 body{
   font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
@@ -298,18 +299,22 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .session-item{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:10px;border:1px solid var(--line);
   background:var(--bg-elev);color:var(--text);font-size:12.5px;text-align:left;width:100%}
 .session-item.active{border-color:var(--purple-2);background:var(--glow-purple)}
-.session-item .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.session-item .t{display:flex;align-items:center;gap:5px;flex:1;min-width:0}
+.session-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.session-pin{width:13px!important;height:13px!important;flex-shrink:0;color:var(--purple)}
 .session-item small{display:block;font-size:10px;color:var(--soft)}
 .session-x{color:var(--soft);padding:4px;border-radius:8px;flex-shrink:0}
 .session-x:hover{color:#f87171}
 .session-tools{display:flex;gap:2px;flex-shrink:0}
-.session-tool{color:var(--soft);padding:4px 5px;border-radius:8px;font-size:12px;flex-shrink:0}
+.session-tool{width:28px;height:28px;display:grid;place-items:center;color:var(--soft);padding:0;border-radius:8px;flex-shrink:0}
+.session-tool svg.icon{width:15px;height:15px}
 .session-tool:hover{color:var(--text)}
 .session-tool.on{color:var(--purple)}
 .session-item.archived{opacity:.65}
 .drawer-caprow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .drawer-caprow .drawer-caption{margin:4px 2px 0}
-.mini-toggle{font-size:13px;padding:5px 9px;border-radius:9px;border:1px solid var(--line);color:var(--soft)}
+.mini-toggle{width:34px;height:32px;display:grid;place-items:center;padding:0;border-radius:9px;border:1px solid var(--line);color:var(--soft)}
+.mini-toggle svg.icon{width:16px;height:16px}
 .mini-toggle[aria-pressed="true"]{color:var(--purple);border-color:var(--purple-2);background:var(--glow-purple)}
 .export-row{display:flex;gap:8px}
 .export-row .subtle-button{flex:1;justify-content:center}
@@ -989,7 +994,8 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .login-submit:disabled{opacity:.5}
 .pass-wrap{position:relative;display:flex;align-items:center}
 .pass-wrap input{flex:1;min-width:0;padding-right:46px!important}
-.pass-toggle{position:absolute;right:6px;width:36px;height:36px;border-radius:9px;color:var(--muted);font-size:15px}
+.pass-toggle{position:absolute;right:6px;width:36px;height:36px;display:grid;place-items:center;border-radius:9px;color:var(--muted)}
+.pass-toggle svg.icon{width:17px;height:17px}
 .pass-toggle:hover{color:var(--text)}
 .login-card small{
   display:block;

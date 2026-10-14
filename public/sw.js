@@ -1,4 +1,4 @@
-const VERSION = 'JULIA-shell-v0.6.1';
+const VERSION = 'VEXX-shell-v0.6.2';
 const SHELL = ['/', '/index.html', '/styles.css', '/app.js', '/jdui.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png'];
 self.addEventListener('install', evt => {
   evt.waitUntil(caches.open(VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
