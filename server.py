@@ -241,6 +241,16 @@ def health():
     return {"status": "ok", "configured": is_ready()}
 
 
+def erro_relay(result: dict, padrao_msg: str, padrao_status: int = 503) -> HTTPException:
+    """Traduz erro do agente: conta bloqueada/pendente vira 403 explicável,
+    nunca 503 de 'conectividade' (que mascarou o problema real)."""
+    detalhe = result.get("error", padrao_msg) if isinstance(result, dict) else padrao_msg
+    codigo = result.get("codigo", "") if isinstance(result, dict) else ""
+    if codigo in ("bloqueada", "pendente"):
+        return HTTPException(403, detalhe or "Conta indisponível. Fale com o administrador.")
+    return HTTPException(padrao_status, detalhe)
+
+
 INSTANCE_ID = secrets.token_hex(4)
 
 
@@ -713,6 +723,8 @@ async def sync_messages(request: Request, body: SyncBody):
     dono = await revogacao_ok(request)
     result = await relay.exchange({"type": "sync", "owner": dono,
                                    "messages": [m.model_dump() for m in body.messages]})
+    if result.get("type") == "op_error":
+        raise erro_relay(result, "Confirmação do PC não recebida")
     if result.get("type") != "ack":
         raise HTTPException(503, "Confirmação do PC não recebida")
     confirmed = set(result.get("confirmed_ids", []))
@@ -993,7 +1005,7 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "model": body.model, "memory": body.memory}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
-            raise HTTPException(503, result.get("error", "IA indisponível"))
+            raise erro_relay(result, "IA indisponível")
         raise HTTPException(503, "Resposta da IA não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
             "model": result.get("model", "")}
@@ -1014,7 +1026,7 @@ async def ai_regenerate(request: Request, body: AIContinue):
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id}, timeout=20.0)
     if result.get("type") == "ai_error":
-        raise HTTPException(503, result.get("error", "Falha ao reiniciar"))
+        raise erro_relay(result, "Falha ao reiniciar")
     if result.get("type") != "ai_reset_ok":
         raise HTTPException(503, "PC não confirmou")
     return {"ok": True, "reply_id": result.get("reply_id")}
@@ -1030,7 +1042,7 @@ async def ai_continue(request: Request, body: AIContinue):
                                    "conversation_id": body.conversation_id,
                                    "model": body.model}, timeout=180.0)
     if result.get("type") == "ai_error":
-        raise HTTPException(503, result.get("error", "Falha ao continuar"))
+        raise erro_relay(result, "Falha ao continuar")
     if result.get("type") != "ai_done" or "response_text" not in result:
         raise HTTPException(503, "Continuação não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],

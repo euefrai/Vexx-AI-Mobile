@@ -87,6 +87,32 @@ def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
     r2 = pc_agent.ai_completa(db, {'message_id': 'r-user-001', 'conversation_id': 'conv-a',
                                    'owner': 'bob'}, cfg)
     assert r2.get('codigo') == 'sem_mensagem'
+    # com contas existindo, desconhecido é barrado na porta
+    import julia_auth as _ja
+    _ja.criar_usuario(db, 'carol', 'Carol', 'senha-forte-1', criado_por='t')
+    r3 = pc_agent.ai_completa(db, {'message_id': 'r-user-001', 'conversation_id': 'conv-a',
+                                   'owner': 'dave'}, cfg)
+    assert r3.get('codigo') == 'bloqueada'
+    db.close()
+
+
+def test_dono_legado_vale_mesmo_com_usuarios(tmp_path):
+    from pathlib import Path as _P
+    import tempfile as _t
+    import julia_auth as _ja
+    db = pc_agent.open_db(_P(_t.mkdtemp()) / 'leg.sqlite3')
+    pc_agent.guardar_fato(db, 'nome', 'Amigo', owner='u-abc123')
+    # sem contas: legado vale, desconhecido passa mas nada vaza (leituras filtram)
+    assert pc_agent.dono_bloqueado(db, 'local') is False
+    assert pc_agent.dono_bloqueado(db, 'u-xyz') is False
+    _ja.criar_usuario(db, 'carol', 'Carol', 'senha-forte-1', criado_por='t')
+    # com contas: desconhecido barra, legado continua valendo
+    assert pc_agent.dono_bloqueado(db, 'local') is False
+    assert pc_agent.dono_bloqueado(db, 'u-xyz') is True
+    # linha local bloqueada pelo admin: bloqueia de verdade
+    _ja.vincular_proprietario(db, 'dono', 'Dono', 'senha-forte-1')
+    _ja.definir_status(db, 'u-abc123', 'local', 'bloqueado')
+    assert pc_agent.dono_bloqueado(db, 'local') is True
     db.close()
 
 

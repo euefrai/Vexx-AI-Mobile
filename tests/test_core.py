@@ -118,6 +118,28 @@ def test_diag_publico_sem_auth_e_status_com_idade():
             assert client.get('/api/diag').json()['pc_online'] is True
 
 
+def test_bloqueio_vira_403_explicavel_nao_503():
+    """Regressão do apagão: conta bloqueada gerava 503 'conectividade'.
+    Agora o relay traduz codigo=bloqueada em 403 com mensagem clara."""
+    with TestClient(server.app) as client:
+        csrf = authenticate(client)
+        with client.websocket_connect('/api/agent/ws', headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            result = {}
+
+            def submit():
+                result['response'] = client.post('/api/sync', json={'messages': [msg()]}, headers={'X-CSRF-Token': csrf})
+
+            thread = threading.Thread(target=submit)
+            thread.start()
+            req = ws.receive_json()
+            assert req['type'] == 'sync'
+            ws.send_json({'request_id': req['request_id'], 'type': 'op_error',
+                          'error': 'Conta indisponível.', 'codigo': 'bloqueada'})
+            thread.join(timeout=6)
+            assert result['response'].status_code == 403, result['response'].text
+            assert 'Conta indispon' in result['response'].json()['detail']
+
+
 def test_wrong_origin_rejected():
     with TestClient(server.app) as client:
         csrf = authenticate(client)

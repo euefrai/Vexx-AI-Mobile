@@ -1464,14 +1464,22 @@ def _apagar_todos_dados(db, owner: str) -> int:
 
 
 def dono_bloqueado(db, owner: str) -> bool:
-    """Conta bloqueada/inexistente não usa dados nem IA (verificação por RPC)."""
+    """Conta bloqueada/inexistente não usa dados nem IA (verificação por RPC).
+
+    - 'local' (dono legado, autenticado via .env no relay — nunca vem do
+      cliente): vale sempre, salvo linha bloqueada explícita.
+    - u-*: exige linha ativa; sem tabela de contas (modo legado puro),
+      permite mas nada vaza (todas as leituras filtram por dono).
+    """
     owner = dono_valido(owner)
     try:
-        total = db.execute("SELECT COUNT(*) FROM users").fetchone()[0]
-        if not total:
-            return False  # modo legado: conta única do .env, sem tabela de usuários
         user = julia_auth.buscar_uid(db, owner)
-        return user is None or user.get("status") != "ativo"
+        if user is not None:
+            return user.get("status") != "ativo"
+        if owner == "local":
+            return False
+        total = db.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+        return bool(total)
     except Exception:
         return True
 
