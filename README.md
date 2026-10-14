@@ -17,13 +17,16 @@ FUNCIONAL:
 - Chat mobile com cache offline (IndexedDB) e status por mensagem.
 - Sincronização idempotente com o SQLite do computador (sem duplicatas em retry).
 - Banco SQLite durável no PC (WAL, transações, filtro por origem).
+- Memória pessoal local com fatos confirmados, histórico de conversa pesquisável,
+  correção/remoção e isolamento por usuário.
+- Tabelas visuais, cartões e checklists para planilhas, roadmaps e planos práticos.
 - Autenticação com usuário/senha (Argon2id), sessão HttpOnly + CSRF.
 - Comunicação segura com o agente desktop (WSS de saída, sem abrir portas).
 - PWA instalável com shell cacheado.
 
 AINDA NÃO IMPLEMENTADO:
 
-- Memória/skills nativas do Hermes Agent (o proxy é só inferência).
+- Memória/skills nativas do Hermes Agent (a memória do Vexx fica no SQLite local).
 - Vídeo fluido/WebRTC (a tela ao vivo é polling ~2 fps).
 
 PENDÊNCIAS CONHECIDAS:
@@ -61,6 +64,18 @@ Celular/PWA  →  IndexedDB local (mensagem pendente)
 
 O computador é a fonte definitiva dos dados. O Render não guarda conversas.
 O IndexedDB é o armazenamento offline do celular.
+
+### Memória e apresentação
+
+O agente local conserva as mensagens sincronizadas no SQLite e procura falas
+anteriores do próprio usuário por relevância, além de fatos confirmados na memória.
+Consultas sem correspondência não recebem fatos aleatórios; dados sensíveis e
+datas ambíguas aguardam confirmação. A memória automática é seletiva, portanto
+isso não significa que cada detalhe seja convertido em um fato permanente.
+
+Pedidos de planilha, roadmap e treino podem ser apresentados com os componentes
+visuais nativos do chat (tabela ou cartões), sem executar código fornecido pelo
+modelo. A memória e o histórico continuam no computador pareado, não no Render.
 
 ## Tecnologias
 

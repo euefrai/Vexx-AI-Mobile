@@ -118,6 +118,63 @@ def test_busca_fts_ou_overlap(tmp_path):
     db.close()
 
 
+def test_historico_busca_falas_antigas_sem_vazar_outros_assuntos():
+    db = _db()
+    pc_agent.persist_messages(db, [
+        {'id': 'hist-user-0001', 'origin': 'mobile', 'role': 'user',
+         'text': 'Meu projeto de aplicativo se chama Aurora e usa SQLite.',
+         'created_at': '2026-10-01T10:00:00.000Z', 'conversation_id': 'conversa-antiga'},
+        {'id': 'hist-user-0002', 'origin': 'mobile', 'role': 'user',
+         'text': 'Minha receita favorita é bolo de cenoura.',
+         'created_at': '2026-10-02T10:00:00.000Z', 'conversation_id': 'outra-conversa'},
+    ])
+    pc_agent.registrar_memoria(db, 'local', 'nome', 'Marina', 'semantica',
+                              'perfil', 'confirmada')
+    cfg = {'proxy': 'x', 'model': 'm', 'system': 'S', 'context': 5, 'max_tokens': 50,
+           'memoria_global': True, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(db, 'conversa-atual', cfg, 'O que já falei do SQLite?')
+    sistema = msgs[0]['content']
+    assert 'Aurora' in sistema
+    assert 'bolo de cenoura' not in sistema
+    msgs_sem_match, _ = pc_agent.ai_montar_mensagens(
+        db, 'conversa-atual', cfg, 'Qual é a capital do Peru?')
+    assert 'FALAS RELEVANTES' not in msgs_sem_match[0]['content']
+    assert 'Marina' not in msgs_sem_match[0]['content']
+    db.close()
+
+
+def test_listagem_memoria_filtra_assunto_solicitado():
+    db = _db()
+    pc_agent.registrar_memoria(db, 'local', 'projeto_app', 'Projeto Aurora em Python',
+                              'trabalho', 'projetos', 'confirmada')
+    pc_agent.registrar_memoria(db, 'local', 'preferencia', 'Prefiro respostas curtas',
+                              'semantica', 'preferencias', 'confirmada')
+    resposta, codigo = pc_agent.interpretar_comando_memoria(
+        db, 'Liste só o que você sabe sobre meus projetos')
+    assert codigo == 'mem_listar'
+    assert resposta.startswith('- **')
+    assert 'Projeto Aurora' in resposta
+    assert 'respostas curtas' not in resposta
+    db.close()
+
+
+def test_contexto_de_eventos_e_pendencias_so_aparece_se_relevante():
+    db = _db()
+    pc_agent.registrar_evento(db, 'local', 'Prova de matemática', '2027-01-10')
+    pc_agent.registrar_memoria(db, 'local', 'alergia', 'Alergia a amendoim',
+                              'semantica', 'saude', 'pendente')
+    cfg = {'proxy': 'x', 'model': 'm', 'system': 'S', 'context': 5, 'max_tokens': 50,
+           'memoria_global': True, 'pesquisa_web': False}
+    sem_contexto, _ = pc_agent.ai_montar_mensagens(
+        db, 'conv-atual', cfg, 'Qual a capital do Peru?')
+    assert 'PRÓXIMOS EVENTOS' not in sem_contexto[0]['content']
+    assert 'AGUARDANDO CONFIRMAÇÃO' not in sem_contexto[0]['content']
+    com_contexto, _ = pc_agent.ai_montar_mensagens(
+        db, 'conv-atual', cfg, 'Quando é minha prova de matemática?')
+    assert 'Prova de matemática' in com_contexto[0]['content']
+    db.close()
+
+
 def test_relay_memoria_nova_e_503_sem_pc():
     import os
     import threading as _th

@@ -20,6 +20,9 @@ def test_presentation_engine():
     assert E.sugerir('monte minha rotina de estudos') == 'checklist'
     assert E.sugerir('compare Python, Java e JavaScript') == 'cards'
     assert E.sugerir('mostre um diagrama de como o app se conecta') == 'diagram'
+    assert E.sugerir('crie uma planilha de despesas') == 'table'
+    assert E.sugerir('monte um roadmap para lançar meu app') == 'cards'
+    assert E.sugerir('me passe um treino de musculação') == 'table'
     assert E.sugerir('qual a capital do Peru?') == ''
     assert E.sugerir('o que é uma variável?') == ''
     # legado redireciona para JDUI
@@ -70,6 +73,22 @@ def test_montar_injeta_diretiva_jdui():
     assert 'widget-html' not in sistema  # modelo não deve gerar JS
     msgs2, _ = pc_agent.ai_montar_mensagens(db, 'conv-w', cfg, 'qual a capital do Peru?')
     assert '```jdui' not in msgs2[0]['content']
+    db.close()
+
+
+def test_planilha_roadmap_e_treino_recebem_apresentacao_visual():
+    db = _db()
+    cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 'BASE',
+           'context': 5, 'max_tokens': 50, 'memoria_global': False, 'pesquisa_web': False}
+    for pedido, componente in (
+            ('crie uma planilha de despesas', 'table'),
+            ('monte um roadmap do meu projeto', 'cards'),
+            ('me passe um treino para a semana', 'table')):
+        msgs, extras = pc_agent.ai_montar_mensagens(db, 'conv-visual', cfg, pedido)
+        assert extras['comp_sugerido'] == componente
+        assert f'componente: {componente}' in msgs[0]['content']
+    assert 'table' in pc_agent.JDUI_SINTETIZAR
+    assert 'cards' in pc_agent.JDUI_SINTETIZAR
     db.close()
 
 

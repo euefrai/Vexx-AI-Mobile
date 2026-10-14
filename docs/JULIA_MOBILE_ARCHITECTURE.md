@@ -25,11 +25,19 @@ Celular/PWA ──HTTPS/WSS──▶ Render (FastAPI, SEM banco)
 
 ## Contexto e grounding
 
-Montagem por prioridade com orçamento de caracteres (~12k no system+histórico):
-`system` → memórias relevantes (com origem) → trechos de docs → pesquisa
-(rotulada com data) → histórico recente (fences viram `[interface]`).
+Montagem por prioridade com orçamento de caracteres (~12k no histórico):
+`system` → fatos confirmados e falas do usuário recuperadas por relevância →
+trechos de docs → pesquisa (rotulada com data) → histórico da conversa atual
+(fences viram `[interface]`). A busca histórica percorre mensagens anteriores
+do mesmo dono; fala antiga só entra no prompt quando compartilha termos com o
+pedido. Não há fallback para fatos sem relação.
 Respostas de ferramenta vão rotuladas (`RESULTADO DE PESQUISA EM ...`);
 regra explícita: admitir desconhecimento, nunca inventar links/datas/preços.
+
+O SQLite mantém o histórico completo já sincronizado, mas o aprendizado de fatos
+é seletivo: informações sensíveis e datas ambíguas esperam confirmação. Tabelas,
+cartões e checklists são renderizados pelo catálogo JDUI validado, não por código
+executável gerado pelo modelo.
 
 ## Offline-first (preservado)
 
