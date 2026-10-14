@@ -241,11 +241,19 @@ def health():
     return {"status": "ok", "configured": is_ready()}
 
 
+INSTANCE_ID = secrets.token_hex(4)
+
+
 @app.get("/api/diag")
 def diag():
-    """Diagnóstico público SEM dados sensíveis: o relay vê o agente?"""
+    """Diagnóstico público SEM dados sensíveis: o relay vê o agente?
+
+    `instance` destingue instâncias (dreno de deploy): respostas iguais
+    vêm do mesmo processo; diferentes = split-brain entre instâncias.
+    """
     return {"pc_online": relay.ws is not None, "agente_ha": relay.ha(),
-            "commit": os.environ.get("RENDER_GIT_COMMIT", "local")[:12]}
+            "commit": os.environ.get("RENDER_GIT_COMMIT", "local")[:12],
+            "instance": INSTANCE_ID}
 
 
 def _limite_tentativas(request: Request, chave: str, teto: int, janela: float) -> None:

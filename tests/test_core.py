@@ -109,6 +109,7 @@ def test_diag_publico_sem_auth_e_status_com_idade():
         corpo = d.json()
         assert corpo['pc_online'] is False and corpo['agente_ha'] == -1
         assert isinstance(corpo.get('commit'), str)
+        assert isinstance(corpo.get('instance'), str) and len(corpo['instance']) == 8
         csrf = authenticate(client)
         st = client.get('/api/status')
         assert st.json()['pc_online'] is False and st.json()['agente_ha'] == -1
