@@ -81,6 +81,14 @@ def criar_tabelas(db) -> None:
         relacao TEXT NOT NULL DEFAULT 'cita', status TEXT NOT NULL DEFAULT 'recuperada',
         original TEXT NOT NULL DEFAULT '')""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_jobs_owner ON research_jobs(owner_id, criado_em)")
+    for _col, _ddl in (("investigacoes", "TEXT NOT NULL DEFAULT '[]'"),
+                       ("auditoria", "TEXT NOT NULL DEFAULT '{}'")):
+        try:
+            cols = [c[1] for c in db.execute("PRAGMA table_info(research_jobs)").fetchall()]
+            if _col not in cols:
+                db.execute(f"ALTER TABLE research_jobs ADD COLUMN {_col} {_ddl}")
+        except Exception:
+            pass
     db.execute("CREATE INDEX IF NOT EXISTS idx_events_job ON research_events(job_id, seq)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_ev_job ON evidence(job_id, status)")
     db.commit()
@@ -163,8 +171,10 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
                 "status": row[6], "orcamento": json.loads(row[7] or "{}"),
                 "usados": json.loads(row[8] or "{}"), "achados": json.loads(row[9] or "[]"),
                 "pendencias": json.loads(row[10] or "[]"), "erros": json.loads(row[11] or "[]"),
-                "criado_em": row[12], "atualizado_em": row[13]}
-    except (TypeError, ValueError) as exc:
+                "criado_em": row[12], "atualizado_em": row[13],
+                "investigacoes": json.loads(row[14] or "[]"),
+                "auditoria": json.loads(row[15] or "{}")}
+    except (TypeError, ValueError, IndexError) as exc:
         raise AgentErro("pesquisa corrompida", "corrompida") from exc
 
 
@@ -174,15 +184,18 @@ def salvar_job(db, job: dict) -> None:
         plano_limpo.append({k: v for k, v in s.items() if not k.startswith("_")})
     with db:
         db.execute("UPDATE research_jobs SET plano=?, plano_versao=?, status=?, orcamento=?,"
-                   " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?"
-                   " WHERE id=? AND owner_id=?",
+                   " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?,"
+                   " investigacoes=?, auditoria=? WHERE id=? AND owner_id=?",
                    (json.dumps(plano_limpo, ensure_ascii=False)[:60000], job["plano_versao"],
                     job["status"], json.dumps(job["orcamento"], ensure_ascii=False),
                     json.dumps(job["usados"], ensure_ascii=False),
                     json.dumps(job["achados"], ensure_ascii=False)[:60000],
                     json.dumps(job["pendencias"], ensure_ascii=False)[:20000],
                     json.dumps(job["erros"], ensure_ascii=False)[:20000],
-                    agora_iso(), job["id"], job["owner"]))
+                    agora_iso(),
+                    json.dumps(job.get("investigacoes", []), ensure_ascii=False)[:20000],
+                    json.dumps(job.get("auditoria", {}), ensure_ascii=False)[:8000],
+                    job["id"], job["owner"]))
 
 
 def listar_jobs(db, owner: str, limite: int = 20) -> list:
@@ -711,13 +724,57 @@ def _lacunas(job: dict) -> list:
     return sorted(subs_busca - com_evid)
 
 
+def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
+    """Contradiction Agent: pares com negação assimétrica → investiga dimensão."""
+    import evidence_graph as _eg
+    invs = []
+    tops = [research._tokens_topico(e.get("titulo", "") + " " + e.get("trecho", ""))
+            for e in evidencias or []]
+    for i in range(len(evidencias or [])):
+        for j in range(i + 1, len(evidencias or [])):
+            if not (tops[i] & tops[j]):
+                continue
+            ti = (evidencias[i].get("trecho", "") or "").lower()
+            tj = (evidencias[j].get("trecho", "") or "").lower()
+            ni = any(n in ti for n in research.NEGACOES)
+            nj = any(n in tj for n in research.NEGACOES)
+            if ni == nj:
+                continue
+            ci = {"texto": evidencias[i]["trecho"][:400],
+                  "condicoes": {"comparado_a": "", "metrica": "",
+                                "quantidades": _eg.extrair_quantidades(ti),
+                                "datas": _eg._RX_DATA.findall(ti)[:3]}}
+            cj = {"texto": evidencias[j]["trecho"][:400],
+                  "condicoes": {"comparado_a": "", "metrica": "",
+                                "quantidades": _eg.extrair_quantidades(tj),
+                                "datas": _eg._RX_DATA.findall(tj)[:3]}}
+            inv = _eg.investigar_divergencia(ci, cj, evidencias[i]["id"], evidencias[j]["id"])
+            inv.update({"entre": [evidencias[i]["id"], evidencias[j]["id"]]})
+            invs.append(inv)
+            try:
+                na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])
+                nb = _eg.no_id("evidence", job["id"], evidencias[j]["id"])
+                _eg.ligar(db, job["owner"], job["id"], na, nb, "CONTRADICTS",
+                          "contradicao", inv["tipo"])
+            except Exception:
+                pass
+            emitir(db, job["id"], job["owner"], "contradiction", "contradiction_investigated",
+                   "alerta" if inv["tipo"] == "valor_divergente" else "ok",
+                   f"Divergência {inv['tipo']}: {inv['explicacao'][:140]}", {})
+    return invs
+
+
 def _resumo(db, job: dict) -> dict:
     evs = _evidencias_job(db, job)
+    invs = job.get("investigacoes") or []
+    aud = job.get("auditoria") or {}
     return {"id": job["id"], "status": job["status"], "modo": job["modo"],
             "objetivo": job["objetivo"], "plano_versao": job["plano_versao"],
             "etapas": [{"id": s["id"], "tipo": s["tipo"], "status": s.get("status", "pendente")}
                        for s in job["plano"]],
             "evidencias": len(evs), "achados": job["achados"],
+            "investigacoes": len(invs),
+            "auditoria_ok": aud.get("ok") if aud else None,
             "pendencias": job["pendencias"], "erros": job["erros"],
             "usados": job["usados"], "orcamento": job["orcamento"]}
 

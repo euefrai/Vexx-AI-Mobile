@@ -11,6 +11,7 @@ const STORE = 'messages';
 const SESSIONS = 'sessions';
 const PREVIEW_MODE = location.protocol === 'file:';
 let db = null;
+let workspace = null;
 let csrf = '';
 let authenticated = false;
 let pcOnline = false;
@@ -55,13 +56,18 @@ function navigate(tab) {
   pages.forEach(p => { const on = p === page; p.hidden = !on; p.classList.toggle('active', on); });
   navItems.forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
   const chat = tab === 'chat';
+  document.querySelector('.bottom-dock').hidden = !chat;
+  $('chatOptions').hidden = !chat;
   composer.style.display = chat ? 'flex' : 'none';
+  if (tab === 'documents') renderDocs();
+  if (!chat) { $('chatTitle').textContent = {desktop:'Meu PC',activity:'Atividades',estudos:'Estudos',settings:'Ajustes e conta',documents:'Documentos'}[tab] || 'Vexx AI'; $('chatSubtitle').textContent = 'Seu espaço pessoal'; }
   $('suggestions').style.display = chat ? 'flex' : 'none';
   document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
   if (tab === 'activity') renderTimeline();
   if (tab === 'estudos') renderEstudos();
   if (tab === 'settings') { loadMemories(); paintSavedItems(); }
   if (tab === 'chat' || tab === 'estudos') learnSyncOutbox();
+  if (tab === 'chat' && db) renderMessages();
 }
 navItems.forEach(n => n.addEventListener('click', () => {
   navigate(n.dataset.tab);
@@ -214,13 +220,22 @@ async function clearStorage() {
 async function allSessions() {
   if (!db) return [];
   const rows = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).getAll()).catch(() => []);
-  return rows.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
+  if (workspace) await workspace.load();
+  const mine = rows.filter(s => (s.owner || 'local') === currentUid);
+  const ids = new Set(mine.map(s => s.id));
+  if (workspace) workspace.list('chat').forEach(r => {
+    if (!ids.has(r.id)) mine.push(Object.assign({owner: currentUid, created_at: r.updated_at}, r));
+  });
+  return mine.map(s => workspace ? workspace.overlay(s) : s).filter(s => !s.deleted)
+    .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 }
 async function putSession(s) {
   const tx = db.transaction(SESSIONS, 'readwrite');
   const d = txDone(tx);
-  tx.objectStore(SESSIONS).put(s.owner ? s : Object.assign({}, s, { owner: currentUid }));
+  const row = s.owner ? s : Object.assign({}, s, { owner: currentUid });
+  tx.objectStore(SESSIONS).put(row);
   await d;
+  if (workspace) await workspace.trackSession(row);
 }
 async function ownSessions() {
   const all = await allSessions();
@@ -268,7 +283,7 @@ async function loadTombstones() {
     rows.forEach(r => { if (r && typeof r.k === 'string' && r.k.indexOf('deleted:') === 0) deletedConvs.add(r.k.slice(8)); });
   } catch (_) {}
 }
-const isDeleted = (id) => deletedConvs.has(id);
+const isDeleted = (id) => deletedConvs.has(id) || !!(workspace && workspace.get('chat', id)?.deleted);
 async function tombstone(convId) {
   deletedConvs.add(convId);
   await metaSet('deleted:' + convId, new Date().toISOString());
@@ -293,8 +308,7 @@ async function resolveActiveConversation() {
   const ranked = sessions.filter(s => withMsgs.has(s.id))
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
   if (ranked.length) return ranked[0].id;
-  if (viaLs) return viaLs; // sessões vazias: mantém o id conhecido
-  if (viaMeta) return viaMeta;
+  if (sessions.length) return sessions[0].id;
   // 4) último recurso: id novo
   return newId();
 }
@@ -314,8 +328,7 @@ async function healSessions() {
       if (s.title === 'Nova conversa' && firstByConv[s.id]) {
         s.title = titleFrom(firstByConv[s.id]); s.updated_at = new Date().toISOString();
         await putSession(s);
-      } else if (!counts[s.id] && s.id !== activeConversation) {
-        await delSession(s.id);
+
       }
     }
   } catch (_) {}
@@ -323,7 +336,7 @@ async function healSessions() {
 async function delSession(id) { const tx = db.transaction(SESSIONS, 'readwrite'); const d = txDone(tx); tx.objectStore(SESSIONS).delete(id); await d; }
 async function ensureSession(id, title) {
   const cur = await reqPromise(db.transaction(SESSIONS, 'readonly').objectStore(SESSIONS).get(id)).catch(() => null);
-  if (cur) return cur;
+  if (cur && (cur.owner || 'local') === currentUid) return workspace ? workspace.overlay(cur) : cur;
   const now = new Date().toISOString();
   const s = { id, title: title || 'Nova conversa', created_at: now, updated_at: now };
   await putSession(s);
@@ -658,12 +671,13 @@ async function renderMessages() {
   await preloadJduiStates(rows.map(m => m.id));
   const stick = nearBottom(conversation);
   conversation.replaceChildren();
+  conversation.classList.toggle('is-empty', rows.length === 0);
   const header = document.createElement('div'); header.className = 'chat-date';
   header.textContent = (sessionsCache.find(s => s.id === activeConversation)?.title || 'CONVERSA') + ' · HOJE';
   conversation.appendChild(header);
   if (!rows.length) {
     const w = document.createElement('div'); w.className = 'empty-chat';
-    w.textContent = '✦ Sua conversa começa aqui. Peça pesquisa com fontes ou uma imagem.';
+    w.innerHTML = '<span class="welcome-mark" aria-hidden="true">v.</span><p>Seu espaço para pensar e criar.</p><h1>O que vamos fazer hoje?</h1><small>Converse, estude ou organize suas ideias em projetos.</small>';
     conversation.appendChild(w);
   } else {
     const idsAssist = rows.filter(m => m.role === 'assistant' && m.status === 'synced').map(m => m.id);
@@ -680,92 +694,10 @@ async function renderMessages() {
   $('statSessions').textContent = String(sessionsCache.length || new Set(all.map(m => m.conversation_id)).size || 1);
   const cur = sessionsCache.find(s => s.id === activeConversation);
   $('chatTitle').textContent = cur ? cur.title : 'Nova conversa';
-  $('chatSubtitle').textContent = rows.length + ' mensagens · memória compartilhada ' + (memoryOn() ? 'ativa' : 'pausada');
+  const project = cur && workspace && workspace.get('project', cur.project_id);
+  $('chatSubtitle').textContent = (project ? project.title : 'Sem projeto') + (cur?.archived ? ' · Arquivada' : '') + (rows.length ? ' · ' + rows.length + ' mensagens' : '');
 }
 
-async function renderSessions(filter) {
-  const box = $('sessionList');
-  const q = (filter || '').toLowerCase();
-  const all = ownRows(await allMessages());
-  const counts = {};
-  all.forEach(m => { if (!isDeleted(m.conversation_id)) counts[m.conversation_id] = (counts[m.conversation_id] || 0) + 1; });
-  sessionsCache = await allSessions();
-  if (!sessionsCache.find(s => s.id === activeConversation)) await ensureSession(activeConversation);
-  sessionsCache = await allSessions();
-  box.replaceChildren();
-  // Texto das mensagens por conversa (busca no histórico).
-  const hay = {};
-  all.forEach(m => {
-    if (isDeleted(m.conversation_id)) return;
-    hay[m.conversation_id] = ((hay[m.conversation_id] || '') + ' ' + String(m.text || '')).toLowerCase().slice(-20000);
-  });
-  const matchQ = s => !q || (s.title || '').toLowerCase().includes(q) || (hay[s.id] || '').includes(q);
-  // Fixadas primeiro; arquivadas só com o filtro 📦.
-  sessionsCache.filter(s => !isDeleted(s.id) && (!s.archived || showArchived) && matchQ(s)
-    && ((counts[s.id] || 0) > 0 || s.id === activeConversation))
-    .sort((a, b) => ((b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)) || (b.updated_at || '').localeCompare(a.updated_at || ''))
-    .forEach(s => {
-    const b = document.createElement('div');
-    b.className = 'session-item' + (s.id === activeConversation ? ' active' : '') + (s.archived ? ' archived' : '');
-    b.setAttribute('role', 'option');
-    const t = document.createElement('button'); t.type = 'button'; t.style.cssText = 'flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:0;cursor:pointer';
-    t.innerHTML = '<span class="t">' + (s.pinned ? '<svg class="icon session-pin" aria-hidden="true"><use href="#i-pin"/></svg>' : '') + '<span class="session-title">' + esc(s.title || 'Nova conversa') + '</span></span><small>' + (counts[s.id] || 0) + ' msgs</small>';
-    t.addEventListener('click', async () => {
-      setActiveConversation(s.id);
-      await renderSessions($('sessionSearch').value);
-      await renderMessages();
-      if (window.innerWidth < 900) setDrawer(false);
-    });
-    t.addEventListener('dblclick', async () => {
-      const nt = window.prompt('Renomear conversa:', s.title || '');
-      if (nt && nt.trim()) { s.title = nt.trim().slice(0, 60); s.updated_at = new Date().toISOString(); await putSession(s); await renderSessions($('sessionSearch').value); await renderMessages(); }
-    });
-    const x = document.createElement('button'); x.type = 'button'; x.className = 'session-x'; x.title = 'Excluir sessão'; x.setAttribute('aria-label', 'Excluir ' + (s.title || 'sessão'));
-    x.innerHTML = '<svg class="icon"><use href="#i-trash"/></svg>';
-    x.addEventListener('click', async () => {
-      if (!window.confirm('Excluir esta conversa de verdade (celular e PC)?')) return;
-      await deleteMessagesOf(s.id);
-      await delSession(s.id);
-      await tombstone(s.id);
-      if (pcOnline && authenticated) {
-        try { await api('/api/conversations/' + encodeURIComponent(s.id), { method: 'DELETE' }); }
-        catch (_) { /* tombstone local já garante; PC limpa no próximo sync online */ }
-      }
-      if (activeConversation === s.id) { setActiveConversation(newId()); await ensureSession(activeConversation); }
-      await renderSessions($('sessionSearch').value);
-      await renderMessages();
-      showToast('Conversa excluída');
-    });
-    const tools = document.createElement('div'); tools.className = 'session-tools';
-    const pin = document.createElement('button'); pin.type = 'button';
-    pin.className = 'session-tool' + (s.pinned ? ' on' : '');
-    pin.innerHTML = '<svg class="icon"><use href="#i-pin"/></svg>';
-    pin.title = s.pinned ? 'Desafixar' : 'Fixar';
-    pin.setAttribute('aria-pressed', s.pinned ? 'true' : 'false');
-    pin.setAttribute('aria-label', (s.pinned ? 'Desafixar ' : 'Fixar ') + (s.title || 'conversa'));
-    pin.addEventListener('click', async () => {
-      s.pinned = !s.pinned; s.updated_at = new Date().toISOString();
-      await putSession(s);
-      await renderSessions($('sessionSearch').value);
-    });
-    const arch = document.createElement('button'); arch.type = 'button'; arch.className = 'session-tool';
-    arch.innerHTML = '<svg class="icon"><use href="#i-archive"/></svg>';
-    arch.title = s.archived ? 'Desarquivar' : 'Arquivar';
-    arch.setAttribute('aria-label', (s.archived ? 'Desarquivar ' : 'Arquivar ') + (s.title || 'conversa'));
-    arch.addEventListener('click', async () => {
-      s.archived = !s.archived; s.updated_at = new Date().toISOString();
-      await putSession(s);
-      if (s.archived && s.id === activeConversation) { setActiveConversation(newId()); await ensureSession(activeConversation); await renderMessages(); }
-      await renderSessions($('sessionSearch').value);
-      await renderMessages();
-      showToast(s.archived ? 'Conversa arquivada' : 'Conversa desarquivada');
-    });
-    tools.appendChild(pin); tools.appendChild(arch); tools.appendChild(x);
-    b.appendChild(t); b.appendChild(tools);
-    box.appendChild(b);
-  });
-  $('sessionCount').textContent = String(box.children.length);
-}
 $('archivedToggle').addEventListener('click', () => {
   showArchived = !showArchived;
   $('archivedToggle').setAttribute('aria-pressed', showArchived ? 'true' : 'false');
@@ -1058,6 +990,9 @@ if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = fa
 function updateConnection() {
   const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
   $('connectionLabel').textContent = msg;
+  $('connectionShort').textContent = pcOnline && navigator.onLine ? 'PC conectado' : 'Offline';
+  $('statusButton').setAttribute('aria-label', 'Conexão: ' + msg);
+  if (!pcOnline) $('aiStatus').textContent = 'PC desconectado';
   const on = pcOnline && navigator.onLine;
   $('statusButton').classList.toggle('online', on);
   document.querySelectorAll('#statusButton .status-dot, #popDot').forEach(d => {
@@ -1071,7 +1006,7 @@ function updateConnection() {
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
   $('deviceDetail').textContent = pcOnline ? 'Windows · Conectado' : 'Aguardando agente';
-  $('memoryStatus').textContent = memoryOn() ? 'Entre todos os chats' : 'Pausada neste aparelho';
+  $('memoryStatus').textContent = memoryOn() ? 'Ativada neste aparelho' : 'Pausada neste aparelho';
   $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
     : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
 }
@@ -1348,6 +1283,7 @@ async function syncAndRefresh() {
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     syncJduiStates();
+    if (workspace) await workspace.sync();
     return conf;
   } catch (err) {
     if (err.status === 503) pcOnline = false;
@@ -1673,7 +1609,7 @@ messageInput.addEventListener('input', () => {
   const n = messageInput.value.length;
   $('charCount').textContent = n > 9000 ? n + ' / 10000' : '';
 });
-messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); composer.requestSubmit(); } });
+messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && !window.matchMedia('(pointer: coarse)').matches) { e.preventDefault(); composer.requestSubmit(); } });
 async function sendMessage(raw) {
   const value = String(raw || '').trim();
   if (!value) return;
@@ -1700,15 +1636,19 @@ async function sendMessage(raw) {
   } catch (_) { showToast('Não foi possível salvar'); }
 }
 composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value); else showToast('Faça login'); });
-document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => sendMessage(b.dataset.message)));
-async function newChat() {
+document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => { messageInput.value = b.dataset.message; autoresize(); messageInput.focus(); }));
+async function newChat(projectId = '') {
+  if (!db) { showToast('Armazenamento local indisponível'); return; }
+  if (typeof projectId !== 'string') projectId = '';
   setActiveConversation(newId());
-  await ensureSession(activeConversation);
+  const session = await ensureSession(activeConversation);
+  if (projectId) { session.project_id = projectId; await putSession(session); openProjects.add(projectId); }
   await renderSessions($('sessionSearch').value);
   await renderMessages();
   navigate('chat');
   messageInput.focus();
-  showToast('Nova conversa — memória compartilhada continua ativa');
+  if (window.innerWidth < 900) setDrawer(false);
+  showToast(projectId ? 'Conversa criada no projeto' : 'Nova conversa');
 }
 $('newChatCta').addEventListener('click', newChat);
 $('newChatTop').addEventListener('click', newChat);
@@ -2243,13 +2183,26 @@ $('fullscreen').addEventListener('click', async () => {
 window.addEventListener('online', checkStatus);
 window.addEventListener('offline', () => { pcOnline = false; updateConnection(); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkStatus(); });
+workspace = VexxWorkspace.create({
+  getDb: () => db, getUid: () => currentUid,
+  canSync: () => !!db && authenticated && pcOnline && navigator.onLine && !PREVIEW_MODE,
+  api, onStatus: text => { $('workspaceStatus').textContent = text; },
+  onSync: async () => {
+    if (isDeleted(activeConversation)) { setActiveConversation(newId()); await ensureSession(activeConversation); }
+    await renderSessions($('sessionSearch').value);
+    if (!$('page-chat').hidden) await renderMessages();
+  }
+});
+bindOrganizer();
 setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
 (async function init() {
   navigate('chat');
   setDrawer(window.innerWidth >= 900);
   try {
     db = await openDb();
+    await workspace.load();
     await loadTombstones();
+    for (const s of await ownSessions()) await workspace.trackSession(s);
     await migrateV1();
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');

@@ -346,3 +346,52 @@ def auditar_resposta(texto: str, claims: list, vereditos: dict, fontes: list) ->
             "sem_evidencia_suficiente": sem_evidencia,
             "etapa_semantica": "BLOQUEADA",
             "ok": not fantasmas and not sem_evidencia}
+
+
+# ── Memória do grafo (perguntas sobre a investigação) ──────────────
+def _no_claim_por_texto(db, owner: str, job_id: str, texto: str):
+    for n in nos_do_job(db, owner, job_id, "claim"):
+        if n.get("texto", "") == texto:
+            return n
+    return None
+
+
+def fontes_que_sustentam(db, owner: str, job_id: str, claim_texto: str = "") -> list:
+    """Evidências ligadas por SUPPORTS/PARTIALLY à conclusão (ou à última)."""
+    claims = nos_do_job(db, owner, job_id, "claim")
+    alvos = [c for c in claims if not claim_texto or c.get("texto", "") == claim_texto]
+    if not alvos and claims:
+        alvos = claims[:1]
+    out = []
+    for c in alvos:
+        for e in arestas_do_job(db, owner, job_id):
+            if e["dst"] == c["id"] and e["tipo"] in ("SUPPORTS", "PARTIALLY_SUPPORTS"):
+                out.append({"claim": c.get("texto", "")[:200], "evidence_node": e["src"],
+                            "tipo": e["tipo"], "metodo": e["metodo"]})
+    return out
+
+
+def contradicoes_do_job(db, owner: str, job_id: str) -> list:
+    return [e for e in arestas_do_job(db, owner, job_id) if e["tipo"] == "CONTRADICTS"]
+
+
+def estudos_originais(db, owner: str, job_id: str) -> list:
+    """Documentos sem DERIVED_FROM/DUPLICATES entrando (raízes)."""
+    derivados = {e["dst"] for e in arestas_do_job(db, owner, job_id)
+                 if e["tipo"] in ("DERIVED_FROM", "DUPLICATES")}
+    return [n for n in nos_do_job(db, owner, job_id, "document") if n["id"] not in derivados]
+
+
+def diff_pesquisas(db, owner: str, job_nova: str, job_antiga: str) -> dict:
+    """O que mudou: por URL canônica, hash do documento."""
+    def mapa(jid):
+        m = {}
+        for n in nos_do_job(db, owner, jid, "document"):
+            url = canonical_url(n.get("url", ""))
+            if url:
+                m[url] = n.get("hash", "")
+        return m
+    nova, antiga = mapa(job_nova), mapa(job_antiga)
+    return {"novas": sorted(set(nova) - set(antiga)),
+            "removidas": sorted(set(antiga) - set(nova)),
+            "alteradas": sorted(u for u in set(nova) & set(antiga) if nova[u] != antiga[u])}

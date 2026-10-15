@@ -2193,6 +2193,71 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
             return f"A pesquisa sobre **{job['objetivo']}** ainda não tem fontes lidas."
         return ("Fontes de **%s**:\n" % job["objetivo"] + "\n".join(
             f"- [{e['titulo']}]({e['url']}) ({e['dominio']})" for e in evs))[:2000]
+    if any(k in t for k in ("de onde veio essa conclusão", "de onde vieram",
+                            "de onde saiu essa conclusão")):
+        job = _ultimo_job(db, owner, ("concluida",))
+        if job is None:
+            return "Sem conclusão registrada ainda. 🔍"
+        sup = evgraph.fontes_que_sustentam(db, owner, job["id"])[:5]
+        if not sup:
+            return ("A última conclusão ainda não tem sustentação registrada "
+                    "(verificação léxica não encontrou suporte). 🔍")
+        linhas = [f"Conclusão sustentada por {len(sup)} evidência(s):"]
+        for s in sup:
+            linhas.append(f"- {s['tipo']} ({s['metodo']}): {s['claim'][:120]}")
+        return "\n".join(linhas)[:2000]
+    if any(k in t for k in ("quais fontes confirmaram", "fontes confirmaram",
+                            "fontes que confirmam")):
+        job = _ultimo_job(db, owner, ("concluida",))
+        if job is None:
+            return "Sem conclusão registrada ainda. 🔍"
+        sup = evgraph.fontes_que_sustentam(db, owner, job["id"])[:8]
+        if not sup:
+            return "Nenhuma fonte com sustentação registrada na última pesquisa. 🔍"
+        evs = {e["id"]: e for e in research_agents.listar_evidencias(db, owner, job["id"])}
+        linhas = ["Fontes que sustentam a conclusão:"]
+        for s in sup:
+            node = next((n for n in evgraph.nos_do_job(db, owner, job["id"], "evidence")
+                         if n["id"] == s["evidence_node"]), {})
+            ev = evs.get(node.get("evidence_id", ""), {})
+            if ev.get("url"):
+                linhas.append(f"- [{ev['titulo']}]({ev['url']}) ({s['tipo']})")
+        return "\n".join(linhas)[:2000] if len(linhas) > 1 else \
+            "Sustentação sem fonte recuperada (inconsistência registrada). 🔍"
+    if any(k in t for k in ("alguma fonte contradiz", "fonte contradiz", "há contradiç",
+                            "ha contrad", "contradiz essa informação")):
+        job = _ultimo_job(db, owner, ("concluida",))
+        if job is None:
+            return "Sem conclusão registrada ainda. 🔍"
+        invs = (research_agents.carregar_job(db, owner, job["id"]).get("investigacoes") or [])
+        cont = evgraph.contradicoes_do_job(db, owner, job["id"])
+        if not invs and not cont:
+            return "Nenhuma contradição registrada na última pesquisa. 🔍"
+        linhas = ["Divergências registradas:"]
+        for i in invs[:5]:
+            linhas.append(f"- {i.get('tipo')}: {i.get('explicacao', '')[:160]}")
+        return "\n".join(linhas)[:2000]
+    if any(k in t for k in ("o que mudou desde", "o que mudou na última",
+                            "mudou desde a última")):
+        jobs = [j for j in research_agents.listar_jobs(db, owner, 10)
+                if j["status"] == "concluida"][:2]
+        if len(jobs) < 2:
+            return "Preciso de duas pesquisas concluídas para comparar. 🔍"
+        d = evgraph.diff_pesquisas(db, owner, jobs[0]["id"], jobs[1]["id"])
+        return (f"Desde **{jobs[1]['objetivo'][:60]}** até **{jobs[0]['objetivo'][:60]}**:\n"
+                f"- novas: {len(d['novas'])}; removidas: {len(d['removidas'])}; "
+                f"alteradas: {len(d['alteradas'])}."
+                + (" Novos: " + ", ".join(d["novas"][:3]) if d["novas"] else ""))[:2000]
+    if any(k in t for k in ("mostre o estudo original", "mostra o estudo original",
+                            "fonte original", "estudo primário", "estudo primario")):
+        job = _ultimo_job(db, owner, ("concluida",))
+        if job is None:
+            return "Sem conclusão registrada ainda. 🔍"
+        origens = evgraph.estudos_originais(db, owner, job["id"])[:5]
+        if not origens:
+            return "Não identifiquei estudo original (só derivados). 🔍"
+        return "Possíveis originais:\n" + "\n".join(
+            f"- [{o.get('titulo', o.get('url', ''))}]({o.get('url', '')})" for o in origens)[:2000]
     if any(k in t for k in ("continue aquela pesquisa", "retome a pesquisa",
                             "continuar a pesquisa", "continua a pesquisa")):
         job = _ultimo_job(db, owner, ("interrompida", "cancelada", "falhou"))

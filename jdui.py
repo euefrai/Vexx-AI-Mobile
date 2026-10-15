@@ -314,6 +314,36 @@ def _v_compare(p: dict) -> dict:
             "columns": [_str(cols[0], 40), _str(cols[1], 40)], "rows": norm}
 
 
+def _v_evidencegraph(p: dict) -> dict:
+    """Grafo de evidências: nós (claim|source|evidence) + arestas tipadas."""
+    nos = p.get("nodes")
+    if not isinstance(nos, list) or not (1 <= len(nos) <= 30):
+        raise JduiErro("evidencegraph.nodes: 1..30 obrigatórios")
+    kinds = ("claim", "source", "evidence")
+    norm_n, ids = [], set()
+    for n in nos:
+        if not isinstance(n, dict) or not _str(n.get("id"), 40):
+            raise JduiErro("evidencegraph.node sem id")
+        nid = _str(n.get("id"), 40)
+        kind = str(n.get("kind", "evidence")).lower()
+        if kind not in kinds:
+            raise JduiErro("evidencegraph.kind: claim|source|evidence")
+        ids.add(nid)
+        norm_n.append({"id": nid, "label": _str(n.get("label"), 80), "kind": kind,
+                       "estado": _str(n.get("estado"), 40), "detalhe": _str(n.get("detalhe"), 200)})
+    norm_e = []
+    for e in p.get("edges") or []:
+        if not isinstance(e, dict):
+            continue
+        f, t = _str(e.get("from"), 40), _str(e.get("to"), 40)
+        tipo = str(e.get("label", "")).upper()
+        if f in ids and t in ids and len(norm_e) < 60 and tipo in (
+                "SUPPORTS", "PARTIALLY_SUPPORTS", "CONTRADICTS", "MENTIONS",
+                "DERIVED_FROM", "DUPLICATES", "REQUIRES_VERIFICATION"):
+            norm_e.append({"from": f, "to": t, "label": tipo})
+    return {"title": _str(p.get("title"), 160), "nodes": norm_n, "edges": norm_e}
+
+
 CALCULATOR_KINDS = ("basic", "imc", "porcentagem", "juros", "conversor")
 
 
@@ -349,7 +379,7 @@ VALIDADORES = {
     "accordion": _v_accordion, "exam": _v_exam, "studyplan": _v_studyplan,
     "flashcards": _v_flashcards, "studyprogress": _v_progresso,
     "lesson": _v_lesson, "chart": _v_chart, "dashboard": _v_dashboard,
-    "compare": _v_compare,
+    "compare": _v_compare, "evidencegraph": _v_evidencegraph,
 }
 
 

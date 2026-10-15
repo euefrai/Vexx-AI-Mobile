@@ -113,7 +113,8 @@ def test_verificador_estados():
     ra.registrar_evidencia(db, job, f, "Estudo com 10000 pessoas mostra que o café é seguro em doses normais.")
     v = ra.agente_verificador(db, job, ra.listar_evidencias(db, "u-x", job["id"]))
     assert v and v[0]["estado"] in ("SUPPORTED", "PARTIALLY_SUPPORTED")
-    assert all(set(x) == {"afirmacao", "estado", "cobertura_lexica"} for x in v)
+    assert all(set(x) == {"afirmacao", "estado", "cobertura_lexica", "metodo"} for x in v)
+    assert all(x["metodo"] for x in v)  # método sempre registrado (§6)
     # contradição marcada vence cobertura
     evs = ra.listar_evidencias(db, "u-x", job["id"])
     ra.marcar_evidencia(db, job, evs[0]["id"], "contradiz")

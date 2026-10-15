@@ -114,6 +114,7 @@ async function openOrganizer(kind, record) {
   $('organizeDialog').showModal(); $('organizeName').focus(); $('organizeName').select();
 }
 
+function bindOrganizer() {
 $('newProject').addEventListener('click', () => openOrganizer('project'));
 $('chatOptions').addEventListener('click', async () => {
   const s = (await allSessions()).find(s => s.id === activeConversation);
@@ -166,3 +167,4 @@ $('organizeDelete').addEventListener('click', async () => {
   } catch (err) { $('organizeError').textContent = err.message || 'Não foi possível excluir.'; }
   finally { button.disabled = false; }
 });
+}
