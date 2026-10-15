@@ -18,6 +18,7 @@ let pcOnline = false;
 let busy = false;
 let toastTimer;
 let aiAbort = null;
+const aiRequests = new Set();
 let aiStartT = 0;
 let aiFirstTokenT = 0;
 let genTimer = null;
@@ -1476,11 +1477,18 @@ function aiLocalContext(text) {
 async function requestAI(userRow) {
   if (!authenticated || !pcOnline || !db || aiAbort) return;
   const replyId = userRow.id + '-r1';
-  const rows = await allMessages();
+  if (aiRequests.has(replyId)) return;
+  aiRequests.add(replyId);
+  let rows;
+  try { rows = await allMessages(); }
+  catch (err) { aiRequests.delete(replyId); throw err; }
   const ja = rows.find(m => m.id === replyId);
-  if (ja && (ja.status === 'synced' || ja.status === 'generating')) return;
+  if (ja && (ja.status === 'synced' || ja.status === 'generating')) {
+    aiRequests.delete(replyId);
+    return;
+  }
   const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
-  try { await storeMessages([ph]); } catch (_) { return; }
+  try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
   if (userRow.conversation_id === activeConversation) await renderMessages();
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Júlia está escrevendo… 0s');
@@ -1556,6 +1564,7 @@ async function requestAI(userRow) {
     await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: kept, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
     showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + (err.message || 'tente de novo'));
   } finally {
+    aiRequests.delete(replyId);
     aiAbort = null;
     clearInterval(genTimer);
     setGenBar(false);
@@ -1747,18 +1756,13 @@ async function sendMessage(raw) {
     await storeMessages([row]);
     await touchSession(activeConversation, titleFrom(value));
     messageInput.value = ''; autoresize(); $('charCount').textContent = '0 / 10000';
+    if (pcOnline && authenticated) {
+      requestAI(row).catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
+      syncAndRefresh();
+    } else showToast('Salvo no celular');
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     scrollChat(true);
-    if (pcOnline && authenticated) {
-      const conf = await syncAndRefresh();
-      if (conf.some(m => m.id === row.id)) requestAI(Object.assign({}, row, { status: 'synced' }));
-      else {
-        const cur = await allMessages();
-        const synced = cur.find(m => m.id === row.id && m.status === 'synced');
-        if (synced) requestAI(synced);
-      }
-    } else showToast('Salvo no celular');
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
   } catch (_) { showToast('Não foi possível salvar'); }
 }

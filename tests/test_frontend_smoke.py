@@ -268,6 +268,18 @@ def test_streaming_sem_sucesso_vazio():
     assert 'chat_stream_fb' in (RAIZ / 'hermes_bridge.py').read_text(encoding='utf-8')
 
 
+def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
+    js = APP_JS.read_text(encoding="utf-8")
+    inicio = js.index("async function sendMessage(raw)")
+    fim = js.index("\ncomposer.addEventListener('submit'", inicio)
+    envio = js[inicio:fim]
+    assert "requestAI(row).catch" in envio
+    assert "syncAndRefresh();" in envio
+    assert "await syncAndRefresh()" not in envio
+    assert envio.index("requestAI(row).catch") < envio.index("syncAndRefresh();")
+    assert "text: userRow.text" in js  # IA persiste o texto piggyback no PC
+
+
 def test_estudos_ligado_e_com_cache_offline():
     html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
     js = APP_JS.read_text(encoding='utf-8')
