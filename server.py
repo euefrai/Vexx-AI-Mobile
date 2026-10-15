@@ -25,6 +25,54 @@ ROOT = Path(__file__).resolve().parent
 app = FastAPI(title="Vexx AI Relay", docs_url=None, redoc_url=None, openapi_url=None)
 ph = PasswordHasher()
 SESSION_LIFETIME = 12 * 60 * 60
+DOC_UPLOAD_MAX_BYTES = 15 * 1024 * 1024
+DOC_UPLOAD_REQUEST_MAX_BYTES = DOC_UPLOAD_MAX_BYTES + 1024 * 1024
+
+
+class DocumentUploadBodyLimit:
+    """Bound actual multipart request bytes before Starlette spools uploaded files."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http" or scope.get("path") != "/api/docs/upload":
+            await self.app(scope, receive, send)
+            return
+        headers = {key.lower(): value for key, value in scope.get("headers", [])}
+        length = headers.get(b"content-length")
+        if length:
+            try:
+                if int(length) > DOC_UPLOAD_REQUEST_MAX_BYTES:
+                    response = JSONResponse(
+                        {"detail": "Pedido de upload excede o limite permitido."}, status_code=413)
+                    await response(scope, receive, send)
+                    return
+            except ValueError:
+                response = JSONResponse({"detail": "Content-Length inválido."}, status_code=400)
+                await response(scope, receive, send)
+                return
+        total = 0
+
+        async def receive_limited():
+            nonlocal total
+            message = await receive()
+            if message["type"] == "http.request":
+                total += len(message.get("body", b""))
+                if total > DOC_UPLOAD_REQUEST_MAX_BYTES:
+                    raise HTTPException(413, "Pedido de upload excede o limite permitido.")
+            return message
+
+        try:
+            await self.app(scope, receive_limited, send)
+        except HTTPException as exc:
+            if exc.status_code != 413:
+                raise
+            response = JSONResponse({"detail": exc.detail}, status_code=413)
+            await response(scope, receive, send)
+
+
+app.add_middleware(DocumentUploadBodyLimit)
 
 
 def config():
@@ -849,15 +897,36 @@ class DocAsk(BaseModel):
     doc_id: str = Field(min_length=4, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
 
 
+class DocSearch(BaseModel):
+    query: str = Field(min_length=1, max_length=500)
+    doc_id: str = Field(default="", max_length=64, pattern=r"^(|[a-zA-Z0-9_-]+)$")
+    limit: int = Field(default=5, ge=1, le=20)
+
+
+class DocCompare(BaseModel):
+    query: str = Field(min_length=1, max_length=500)
+    doc_ids: list[str] = Field(min_length=1, max_length=20)
+
+
 @app.post("/api/docs/upload")
 async def docs_upload(request: Request, file: UploadFile = File(...),
                       conversation_id: str = Form(default="geral", max_length=100)):
     """Recebe um documento (até 15MB) e encaminha ao PC para leitura."""
     require_csrf(request)
     dono = await revogacao_ok(request)
-    raw = await file.read()
-    if len(raw) > 15 * 1024 * 1024:
-        raise HTTPException(413, "Arquivo grande demais (limite 15MB)")
+    limite = DOC_UPLOAD_MAX_BYTES
+    recebido = bytearray()
+    try:
+        while len(recebido) <= limite:
+            parte = await file.read(min(64 * 1024, limite - len(recebido) + 1))
+            if not parte:
+                break
+            recebido.extend(parte)
+        if len(recebido) > limite:
+            raise HTTPException(413, "Arquivo grande demais (limite 15MB)")
+    finally:
+        await file.close()
+    raw = bytes(recebido)
     if not raw:
         raise HTTPException(422, "Arquivo vazio")
     import base64 as _b64
@@ -871,7 +940,9 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
         raise HTTPException(422, result.get("error", "Não consegui ler o arquivo"))
     if result.get("type") != "doc_uploaded":
         raise HTTPException(503, "PC não processou o documento")
-    return {k: result.get(k) for k in ("doc_id", "name", "ext", "chars", "chunks", "paginas_aprox")}
+    return {k: result.get(k) for k in (
+        "doc_id", "name", "title", "ext", "chars", "chunks", "paginas_aprox",
+        "sections", "table_hints", "content_hash", "version")}
 
 
 @app.get("/api/docs")
@@ -883,6 +954,49 @@ async def docs_list(request: Request):
     if result.get("type") != "doc_list":
         raise HTTPException(503, "Documentos indisponíveis")
     return {"documents": result.get("documents", [])[:50]}
+
+
+@app.post("/api/docs/search")
+async def docs_search(request: Request, body: DocSearch):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_search", "owner": dono,
+                                   "query": body.query, "doc_id": body.doc_id,
+                                   "limit": body.limit}, timeout=30.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(404 if result.get("codigo") == "nao_encontrado" else 422,
+                            result.get("error", "Falha na busca documental"))
+    if result.get("type") != "doc_search":
+        raise HTTPException(503, "Busca documental indisponível")
+    return {"results": result.get("results", [])}
+
+
+@app.post("/api/docs/compare")
+async def docs_compare(request: Request, body: DocCompare):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_compare", "owner": dono,
+                                   "query": body.query, "doc_ids": body.doc_ids}, timeout=30.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(422, result.get("error", "Falha ao comparar documentos"))
+    if result.get("type") != "doc_compare":
+        raise HTTPException(503, "Comparação documental indisponível")
+    return {k: v for k, v in result.items() if k != "type"}
+
+
+@app.delete("/api/docs/{doc_id}")
+async def docs_delete(request: Request, doc_id: str):
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{4,64}", doc_id):
+        raise HTTPException(422, "Identificador de documento inválido")
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "doc_delete", "owner": dono,
+                                   "doc_id": doc_id}, timeout=30.0)
+    if result.get("type") == "doc_error":
+        raise HTTPException(404, result.get("error", "Documento não encontrado"))
+    if result.get("type") != "doc_deleted":
+        raise HTTPException(503, "Exclusão documental indisponível")
+    return {"ok": True, "doc_id": doc_id}
 
 
 @app.post("/api/docs/resumo")
@@ -1630,6 +1744,51 @@ async def research_evidence(request: Request, job_id: str):
     if result.get("type") != "research_evidence":
         raise _research_erro(result)
     return {"evidencias": result.get("evidencias", [])}
+
+
+@app.get("/api/research/hypotheses")
+async def research_hypotheses(request: Request, job_id: str):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(job_id) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "research_job_hypotheses", "owner": dono,
+                                   "job_id": job_id}, timeout=20.0)
+    if result.get("type") != "research_hypotheses":
+        raise _research_erro(result)
+    return {"hypotheses": result.get("hypotheses", [])}
+
+
+@app.get("/api/research/report")
+async def research_report(request: Request, job_id: str,
+                          report_type: str = "executive_summary"):
+    from research_reports import REPORT_TYPES
+
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(job_id) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    if report_type not in REPORT_TYPES:
+        raise HTTPException(422, "Tipo de relatório inválido")
+    result = await relay.exchange({"type": "research_job_report", "owner": dono,
+                                   "job_id": job_id, "report_type": report_type},
+                                  timeout=20.0)
+    if result.get("type") != "research_report":
+        raise _research_erro(result)
+    return {k: v for k, v in result.items() if k != "type"}
+
+
+@app.delete("/api/research/{job_id}")
+async def research_delete(request: Request, job_id: str):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{2,64}", job_id):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "research_job_delete", "owner": dono,
+                                   "job_id": job_id}, timeout=20.0)
+    if result.get("type") != "research_deleted":
+        raise _research_erro(result)
+    return {"ok": True, "job_id": job_id}
 
 
 class ResearchInterveneIn(BaseModel):

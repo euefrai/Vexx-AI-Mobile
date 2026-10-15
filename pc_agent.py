@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import re
+import shlex
 import sqlite3
 import threading
 import time
@@ -2308,10 +2309,74 @@ def _cmd_intervencao(db, owner: str, t: str):
     return ""
 
 
+def _cmd_analisar_tabular(db, texto: str, owner: str, conv: str) -> str:
+    if not re.match(r"(?is)^\s*analisar\s+tabular(?:\s|$)", texto or ""):
+        return ""
+    try:
+        tokens = shlex.split(texto)
+    except ValueError:
+        return "Não consegui interpretar as aspas. Use aspas em valores de coluna com espaços."
+    if len(tokens) < 3 or tokens[0].lower() != "analisar" or tokens[1].lower() != "tabular":
+        return "Informe `analisar tabular chart` ou `analisar tabular compare`."
+    mode = tokens[2].lower()
+    if mode not in ("chart", "compare"):
+        return "O tipo deve ser `chart` ou `compare`."
+    values = {}
+    for token in tokens[3:]:
+        if "=" not in token:
+            return f"Parâmetro inválido: {token!r}. Use nome=valor."
+        key, value = token.split("=", 1)
+        key = key.lower().strip()
+        if key not in {"job", "doc", "x", "y", "series", "group", "value",
+                       "baseline", "unit", "period", "methodology", "title"}:
+            return f"Parâmetro não suportado: {key!r}."
+        if not value or key in values:
+            return f"Parâmetro {key!r} está vazio ou repetido."
+        values[key] = value
+    if not values.get("job") or not values.get("doc"):
+        return "Informe job=<id> e doc=<id> para limitar a análise à pesquisa e ao documento corretos."
+    try:
+        job = research_agents.carregar_job(db, owner, values["job"])
+        if job["conv"] != conv:
+            return "Esse job não pertence à conversa atual; não associei o documento a outra pesquisa."
+        columns = {
+            key: values[key] for key in (
+                "x", "y", "series", "group", "value", "baseline", "unit",
+                "period", "methodology", "title",
+            ) if key in values
+        }
+        result = research_agents.analisar_documento_estruturado(
+            db, owner, job["id"], values["doc"],
+            method="chart_series" if mode == "chart" else "differences",
+            columns=columns,
+        )
+    except research_agents.AgentErro as exc:
+        return f"Não foi possível analisar o documento: {exc}."
+    except (ValueError, TypeError) as exc:
+        return f"Não foi possível validar a análise tabular: {exc}."
+    block = result["visualization"]
+    message = {
+        "version": jdui.VERSION,
+        "blocks": [
+            {"type": "text", "content":
+             f"Análise determinística concluída com os dados reais de **{result['document_name']}**. "
+             "Isto descreve os dados fornecidos; não estabelece causalidade ou diagnóstico."},
+            *block.get("blocks", []),
+        ],
+    }
+    valid, normalized, errors = jdui.validar_mensagem(message)
+    if not valid or normalized is None:
+        return f"A análise foi calculada, mas a visualização não passou a validação JDUI: {errors}."
+    return "\n\n```jdui\n" + json.dumps(normalized, ensure_ascii=False) + "\n```"
+
+
 def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
     mesmo com o Hermes bloqueado). Retorna texto ou ''."""
     t = (texto or "").lower()
+    tabular = _cmd_analisar_tabular(db, texto or "", owner, conv)
+    if tabular:
+        return tabular
     _cmd = _cmd_intervencao(db, owner, t)
     if _cmd:
         return _cmd
@@ -3096,6 +3161,42 @@ def rjob_evidence(db, req: dict, dono: str) -> dict:
                            for e in evs][:100]}
 
 
+def rjob_report(db, req: dict, dono: str) -> dict:
+    try:
+        report = research_agents.gerar_relatorio(
+            db, dono, str(req.get("job_id", ""))[:64],
+            str(req.get("report_type", "executive_summary"))[:40],
+        )
+        return {"type": "research_report", **report}
+    except (research_agents.AgentErro, ValueError) as exc:
+        return {"type": "learn_error", "error": str(exc),
+                "codigo": getattr(exc, "codigo", "report")}
+
+
+def rjob_hypotheses(db, req: dict, dono: str) -> dict:
+    try:
+        job = research_agents.carregar_job(db, dono, str(req.get("job_id", ""))[:64])
+        items = research_agents.hypothesis_engine.HypothesisStore(db).list_for_job(
+            dono, job["id"])
+        return {"type": "research_hypotheses",
+                "hypotheses": [vars(item) for item in items]}
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+
+
+def rjob_delete(db, req: dict, dono: str) -> dict:
+    job_id = str(req.get("job_id", ""))[:64]
+    with JOBS_BG_LOCK:
+        if job_id in JOBS_BG:
+            return {"type": "learn_error", "error": "Pesquisa em andamento.",
+                    "codigo": "ocupado"}
+    try:
+        return {"type": "research_deleted",
+                **research_agents.excluir_job(db, dono, job_id)}
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+
+
 def run():
     relay_url = os.environ.get("JULIA_RELAY_URL", "").strip().rstrip("/")
     token = os.environ.get("JULIA_AGENT_TOKEN", "")
@@ -3151,7 +3252,8 @@ def run():
                                 "error": msg, "codigo": codigo}
 
                     if tipo in ("sync", "list", "conversations", "workspace_sync", "doc_upload", "doc_list",
-                                "doc_resumo", "doc_topicos", "mem_list", "mem_list_full",
+                                "doc_resumo", "doc_topicos", "doc_search", "doc_compare", "doc_delete",
+                                "mem_list", "mem_list_full",
                                 "mem_forget", "mem_confirm", "mem_update", "ui_state_save",
                                 "ui_state_list", "conv_forget", "event_list", "ai", "ai_stream",
                                 "ai_reset", "ai_continue") and dono_bloqueado(db, dono):
@@ -3388,7 +3490,10 @@ def run():
                     elif req.get("type") == "doc_upload":
                         try:
                             import base64 as _b64
-                            raw = _b64.b64decode(req.get("data_b64", ""), validate=True)
+                            data_b64 = req.get("data_b64", "")
+                            if not isinstance(data_b64, str) or len(data_b64) > ((docs_agent.MAX_BYTES + 2) // 3) * 4:
+                                raise docs_agent.DocErro("Arquivo grande demais (limite 15MB).", "grande")
+                            raw = _b64.b64decode(data_b64, validate=True)
                             meta = docs_agent.salvar_documento(
                                 db, req.get("name", "arquivo"),
                                 raw, req.get("conversation_id", "geral"), dono)
@@ -3400,6 +3505,38 @@ def run():
                     elif req.get("type") == "doc_list":
                         reply = {"request_id": request_id, "type": "doc_list",
                                  "documents": docs_agent.listar_documentos(db, req.get("limit", 50), dono)}
+                    elif req.get("type") == "doc_search":
+                        try:
+                            doc_id = str(req.get("doc_id", ""))[:64]
+                            if doc_id and not db.execute(
+                                    "SELECT 1 FROM documents WHERE id=? AND owner_id=?", (doc_id, dono)).fetchone():
+                                raise docs_agent.DocErro("Documento não encontrado.", "nao_encontrado")
+                            reply = {"request_id": request_id, "type": "doc_search",
+                                     "results": docs_agent.trechos_relevantes(
+                                         db, str(req.get("query", ""))[:500], doc_id,
+                                         k=min(int(req.get("limit", 5)), 20), owner=dono)}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "doc_error",
+                                     "error": str(exc)[:300],
+                                     "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "doc_compare":
+                        try:
+                            reply = {"request_id": request_id, "type": "doc_compare",
+                                     **docs_agent.comparar_documentos(
+                                         db, str(req.get("query", ""))[:500],
+                                         req.get("doc_ids", []), owner=dono)}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "doc_error",
+                                     "error": str(exc)[:300],
+                                     "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "doc_delete":
+                        deleted = docs_agent.excluir_documento(
+                            db, str(req.get("doc_id", ""))[:64], dono)
+                        reply = {"request_id": request_id,
+                                 "type": "doc_deleted" if deleted else "doc_error",
+                                 "doc_id": str(req.get("doc_id", ""))[:64],
+                                 **({} if deleted else {"error": "Documento não encontrado.",
+                                                       "codigo": "nao_encontrado"})}
                     elif req.get("type") == "doc_resumo":
                         try:
                             texto = docs_agent.resumir_documento(db, cfg, req.get("doc_id", ""), dono)
@@ -3612,6 +3749,12 @@ def run():
                         reply = {"request_id": request_id, **rjob_list(db, dono)}
                     elif req.get("type") == "research_job_evidence":
                         reply = {"request_id": request_id, **rjob_evidence(db, req, dono)}
+                    elif req.get("type") == "research_job_report":
+                        reply = {"request_id": request_id, **rjob_report(db, req, dono)}
+                    elif req.get("type") == "research_job_hypotheses":
+                        reply = {"request_id": request_id, **rjob_hypotheses(db, req, dono)}
+                    elif req.get("type") == "research_job_delete":
+                        reply = {"request_id": request_id, **rjob_delete(db, req, dono)}
                     elif req.get("type") == "research_job_intervene":
                         reply = {"request_id": request_id, **rjob_intervene(db, req, dono)}
                     elif req.get("type") == "research_job_pause":

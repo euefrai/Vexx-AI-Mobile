@@ -66,15 +66,29 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Perfis futuros (professora/pesquisadora/…) entram aqui quando houver LLM (dependem de inferência).
 - Relatório em RELATORIO_JULIA_4.7.md (esta entrega cobre V4.6.1 + V4.7).
 
-## V4.8 — DEEP RESEARCH PRO (futuro)
-- Síntese e verificação semântica com LLM real (BLOQUEADAS sem provedor); fila de prioridades; segundo provedor ao vivo.
+## V4.8 — DEEP RESEARCH PRO (implementada; limitações registradas)
+- Inteligência documental: extração delimitada, proveniência, chunks com localização,
+  índice FTS5 com fallback lexical, comparação entre documentos e exclusão por dono.
+- Pesquisa acadêmica opcional por OpenAlex/Crossref, com metadados atribuídos à fonte;
+  não afirma leitura de texto integral quando só há resumo.
+- Análise estruturada determinística, hipóteses/checkpoints owner-scoped e relatórios
+  Markdown com citações verificadas; JDUI é gerada apenas de dados reais.
+- Orchestrator, SSE, contexto/memória delimitados, relatórios persistidos e comando
+  conversacional para análise tabular integrados. Hermes sem inferência real, OCR e
+  exportação PDF permanecem BLOQUEADOS/AUSENTES; suíte global tem falha intermitente
+  de limpeza de logs de E2E no Windows. Ver [RELATORIO_JULIA_4.8.md](../RELATORIO_JULIA_4.8.md).
 
-## V4.9 — RESEARCH QUALITY LAB (futuro)
-- Benchmarks ampliados + revisão humana; E2E com LLM; aparelho físico.
+## V4.9 — RESEARCH QUALITY LAB 3.0 (futuro)
+- Benchmarks ampliados + revisão humana; E2E com LLM disponível; aparelho físico.
 
-## V4.10 — COMUNIDADE/MULTI-CONTA (adiada)
+## V5.x — CONTINUIDADE COGNITIVA (futuro)
+- Continuidade de contexto, memória avançada, personalidade e planejamento,
+  após a conclusão e avaliação da V4.8/V4.9.
+
+## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
-  interfaces), biblioteca, moderação. Só após V4.0 de isolamento.
+  interfaces), biblioteca e moderação. Continua adiada até autorização e
+  conclusão dos requisitos de isolamento.
 
 ## Explicitamente FORA
 - Fórmulas KaTeX (sem parser próprio confiável; reavaliar com lib leve).

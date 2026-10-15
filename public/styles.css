@@ -1629,6 +1629,9 @@ table.jdui-table td input{width:100%;min-width:90px;background:var(--bg);border:
 .jdui-legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
 .jdui-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 .jdui-source{font-size:10.5px;color:var(--muted);margin-top:6px}
+.jdui-provenance{font-size:11px;color:var(--muted);margin-top:8px}
+.jdui-provenance ul{margin:4px 0 0;padding-left:18px}
+.jdui-provenance a{color:var(--accent,#5b5bd6);overflow-wrap:anywhere}
 .jdui-dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 @media(max-width:360px){.jdui-dashgrid{grid-template-columns:1fr}}
 .jdui-metric{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.025)}

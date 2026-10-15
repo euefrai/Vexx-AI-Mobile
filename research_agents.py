@@ -19,7 +19,13 @@ import time
 import urllib.parse
 from datetime import datetime, timezone
 
+import academic_research
+import continuous_research
+import hypothesis_engine
 import research
+import research_reports
+import research_visualizations
+import structured_analysis
 
 MODOS = {
     "rapida": {"buscas": 2, "paginas": 3, "timeout_s": 30, "subs": 1, "profundidade": 1},
@@ -84,7 +90,8 @@ def criar_tabelas(db) -> None:
     db.execute("CREATE INDEX IF NOT EXISTS idx_jobs_owner ON research_jobs(owner_id, criado_em)")
     for _col, _ddl in (("investigacoes", "TEXT NOT NULL DEFAULT '[]'"),
                        ("auditoria", "TEXT NOT NULL DEFAULT '{}'"),
-                       ("ajustes", "TEXT NOT NULL DEFAULT '{}'")):
+                       ("ajustes", "TEXT NOT NULL DEFAULT '{}'"),
+                       ("structured_analysis", "TEXT NOT NULL DEFAULT '[]'")):
         try:
             cols = [c[1] for c in db.execute("PRAGMA table_info(research_jobs)").fetchall()]
             if _col not in cols:
@@ -93,6 +100,8 @@ def criar_tabelas(db) -> None:
             pass
     db.execute("CREATE INDEX IF NOT EXISTS idx_events_job ON research_events(job_id, seq)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_ev_job ON evidence(job_id, status)")
+    hypothesis_engine.HypothesisStore(db).initialize()
+    continuous_research.ResearchContextStore(db).initialize()
     db.commit()
 
 
@@ -165,7 +174,7 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
     row = db.execute("SELECT id, conv, modo, objetivo, plano, plano_versao, status, orcamento,"
                      " usados, achados, pendencias, erros, criado_em, atualizado_em,"
                      " COALESCE(investigacoes, '[]'), COALESCE(auditoria, '{}'),"
-                     " COALESCE(ajustes, '{}')"
+                     " COALESCE(ajustes, '{}'), COALESCE(structured_analysis, '[]')"
                      " FROM research_jobs WHERE id=? AND owner_id=?", (job_id, owner)).fetchone()
     if not row:
         raise AgentErro("pesquisa não encontrada", "ausente")
@@ -178,7 +187,8 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
                 "criado_em": row[12], "atualizado_em": row[13],
                 "investigacoes": json.loads(row[14] or "[]"),
                 "auditoria": json.loads(row[15] or "{}"),
-                "ajustes": json.loads(row[16] or "{}")}
+                "ajustes": json.loads(row[16] or "{}"),
+                "structured_analysis": json.loads(row[17] or "[]")}
     except (TypeError, ValueError, IndexError) as exc:
         raise AgentErro("pesquisa corrompida", "corrompida") from exc
 
@@ -190,7 +200,8 @@ def salvar_job(db, job: dict) -> None:
     with db:
         db.execute("UPDATE research_jobs SET plano=?, plano_versao=?, status=?, orcamento=?,"
                    " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?,"
-                   " investigacoes=?, auditoria=?, ajustes=? WHERE id=? AND owner_id=?",
+                   " investigacoes=?, auditoria=?, ajustes=?, structured_analysis=?"
+                   " WHERE id=? AND owner_id=?",
                    (json.dumps(plano_limpo, ensure_ascii=False)[:60000], job["plano_versao"],
                     job["status"], json.dumps(job["orcamento"], ensure_ascii=False),
                     json.dumps(job["usados"], ensure_ascii=False),
@@ -201,6 +212,7 @@ def salvar_job(db, job: dict) -> None:
                     json.dumps(job.get("investigacoes", []), ensure_ascii=False)[:20000],
                     json.dumps(job.get("auditoria", {}), ensure_ascii=False)[:8000],
                     json.dumps(job.get("ajustes", {}), ensure_ascii=False)[:8000],
+                    json.dumps(job.get("structured_analysis", []), ensure_ascii=False)[:60000],
                     job["id"], job["owner"]))
 
 
@@ -220,30 +232,54 @@ def job_ativo(db, owner: str):
 
 # ── Planejador (determinístico; replaneja sem repetir concluídas) ────
 def montar_plano(db, job: dict) -> dict:
-    """Etapas por subpergunta: busca → ler → analisar; depois verificar →
-    sintetizar → auditar. Idempotente: preserva feitas."""
+    """Etapas com dependências explícitas; preservar etapas e resultados feitos."""
     subs = research.dividir_subconsultas(job["objetivo"],
                                          job["orcamento"].get("subs", 3)) or [job["objetivo"][:120]]
     feitas = { (s.get("tipo"), s.get("alvo")) for s in job["plano"] if s.get("status") == "feita" }
     plano, n = [], 0
-    for sub in subs:
+    for sub_index, sub in enumerate(subs):
+        ids = {}
         for tipo in ("busca", "ler", "analisar"):
             n += 1
             chave = (tipo, sub)
-            plano.append({"id": f"p{n}", "tipo": tipo, "alvo": sub,
-                          "status": "feita" if chave in feitas else "pendente",
-                          "tentativas": 0})
+            prioridade = {"busca": 10, "ler": 30, "analisar": 50}[tipo] + sub_index
+            etapa = {"id": f"p{n}", "tipo": tipo, "alvo": sub,
+                     "status": "feita" if chave in feitas else "pendente",
+                     "tentativas": 0, "prioridade": prioridade,
+                     "dependencias": [ids["busca"]] if tipo == "ler" else (
+                         [ids["ler"]] if tipo == "analisar" else []),
+                     "regra_parada": "etapa concluída ou orçamento/timeout atingido"}
+            if chave in feitas:
+                etapa["reutilizar_resultado"] = True
+            plano.append(etapa)
+            ids[tipo] = etapa["id"]
+    analizar_ids = [s["id"] for s in plano if s["tipo"] == "analisar"]
     for tipo in ("verificar", "sintetizar", "auditar"):
         n += 1
         chave = (tipo, "")
+        dependencias = {
+            "verificar": analizar_ids,
+            "sintetizar": [f"p{n - 1}"],
+            "auditar": [f"p{n - 1}"],
+        }
+        if tipo == "sintetizar":
+            verificar = next((s["id"] for s in plano if s["tipo"] == "verificar"), "")
+            dependencias[tipo] = [verificar] if verificar else []
+        elif tipo == "auditar":
+            sintetizar = next((s["id"] for s in plano if s["tipo"] == "sintetizar"), "")
+            dependencias[tipo] = [sintetizar] if sintetizar else []
         plano.append({"id": f"p{n}", "tipo": tipo, "alvo": "",
-                      "status": "feita" if chave in feitas else "pendente", "tentativas": 0})
+                      "status": "feita" if chave in feitas else "pendente", "tentativas": 0,
+                      "prioridade": 100,
+                      "dependencias": dependencias[tipo],
+                      "regra_parada": "etapa concluída ou orçamento/timeout atingido"})
     job["plano"] = plano
     job["plano_versao"] += 1
     salvar_job(db, job)
     emitir(db, job["id"], job["owner"], "orchestrator", "plan_created", "ok",
            f"Plano v{job['plano_versao']}: {len(subs)} frentes, {len(plano)} etapas.",
-           {"subs": subs})
+           {"subs": subs, "dependencies": True, "max_replans": 1})
+    _save_context_checkpoint(db, job, "Executar o primeiro passo pendente do plano.")
     return job
 
 
@@ -259,9 +295,20 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
             alvo = str(q)[:120]
             if ("busca", alvo) in feitas or alvo in feitos_fu:
                 continue
-            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": "busca",
-                                 "alvo": alvo, "status": "pendente", "tentativas": 0,
-                                 "motivo": "lacuna de investigação"})
+            search_id = f"p{len(job['plano']) + 1}"
+            read_id = f"p{len(job['plano']) + 2}"
+            for etapa_id, tipo, deps in (
+                (search_id, "busca", []),
+                (read_id, "ler", [search_id]),
+                (f"p{len(job['plano']) + 3}", "analisar", [read_id]),
+            ):
+                job["plano"].append({
+                    "id": etapa_id, "tipo": tipo, "alvo": alvo,
+                    "status": "pendente", "tentativas": 0, "prioridade": 25,
+                    "dependencias": deps,
+                    "replan_reason": "follow_up gerado por divergência registrada",
+                    "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+                })
             feitas.add(("busca", alvo))
             feitos_fu.add(alvo)
             novas += 1
@@ -272,11 +319,18 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         alvo = str(lac)[:120]
         if ("busca", alvo) in feitas:
             continue
-        job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": "busca",
-                             "alvo": alvo, "status": "pendente", "tentativas": 0})
+        busca_id = f"p{len(job['plano']) + 1}"
+        job["plano"].append({
+            "id": busca_id, "tipo": "busca", "alvo": alvo, "status": "pendente",
+            "tentativas": 0, "prioridade": 25, "dependencias": [],
+            "replan_reason": "etapa de leitura sem evidência armazenada",
+            "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        })
         for s in job["plano"]:
             if s.get("tipo") == "ler" and s.get("alvo") == alvo and s.get("status") == "feita":
                 s["status"] = "pendente"  # relê com os novos achados
+                s["dependencias"] = [busca_id]
+                s["replan_reason"] = "releitura após busca por lacuna"
         feitas.add(("busca", alvo))
         novas += 1
     if novas:
@@ -284,7 +338,9 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         job["plano_versao"] += 1
         salvar_job(db, job)
         emitir(db, job["id"], job["owner"], "orchestrator", "plan_updated", "ok",
-               f"Replanejamento v{job['plano_versao']}: +{novas} buscas.", {})
+               f"Replanejamento v{job['plano_versao']}: +{novas} buscas.",
+               {"reason": "lacunas de evidência", "max_replans": 1,
+                "new_steps": novas})
     return job
 
 
@@ -358,7 +414,7 @@ def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str 
            "trecho": (trecho or "")[:2000],
            "localizacao": (fonte.get("localizacao") or "")[:120],
            "afirmacao": (afirmacao or "")[:500], "relacao": relacao[:20], "status": status,
-           "original": json.dumps(fonte, ensure_ascii=False)[:8000]}
+           "original": json.dumps(fonte, ensure_ascii=False)[:12000]}
     with db:
         db.execute("INSERT INTO evidence (id, job_id, owner_id, fonte_id, url, titulo, dominio,"
                    " acessado_em, publicado_em, trecho, localizacao, afirmacao, relacao,"
@@ -373,15 +429,33 @@ def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str 
 
 def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
     sql = ("SELECT id, fonte_id, url, titulo, dominio, acessado_em, publicado_em, trecho,"
-           " afirmacao, relacao, status FROM evidence WHERE job_id=? AND owner_id=?")
+           " afirmacao, relacao, status, original FROM evidence WHERE job_id=? AND owner_id=?")
     args = [job_id, owner]
     if status:
         sql += " AND status=?"
         args.append(status)
     rows = db.execute(sql + " ORDER BY id", args).fetchall()
-    return [{"id": r[0], "fonte_id": r[1], "url": r[2], "titulo": r[3], "dominio": r[4],
-             "acessado_em": r[5], "publicado_em": r[6] or "", "trecho": r[7],
-             "afirmacao": r[8], "relacao": r[9], "status": r[10]} for r in rows]
+    evidencias = []
+    for r in rows:
+        ev = {"id": r[0], "fonte_id": r[1], "url": r[2], "titulo": r[3], "dominio": r[4],
+              "acessado_em": r[5], "publicado_em": r[6] or "", "trecho": r[7],
+              "afirmacao": r[8], "relacao": r[9], "status": r[10]}
+        try:
+            metadata = json.loads(r[11] or "{}")
+        except (TypeError, ValueError):
+            metadata = {}
+        for key in ("doi", "authors", "year", "journal", "repository", "abstract",
+                    "landing_url", "pdf_url", "license", "review_status", "provider",
+                    "provider_url", "source_url", "fetched_at", "abstract_untrusted",
+                    "abstract_kind", "provider_metadata_untrusted", "content_scope",
+                    "full_text_fetched",
+                    "citation_count", "citation_count_kind", "doc_id", "chunk_id",
+                    "section", "page", "content_hash", "version", "source",
+                    "table_hint"):
+            if key in metadata:
+                ev[key] = metadata[key]
+        evidencias.append(ev)
+    return evidencias
 
 
 def marcar_evidencia(db, job: dict, evidencia_id: str, status: str, afirmacao: str = "") -> None:
@@ -411,12 +485,24 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
     variacao = " ".join(w for w in base.split() if len(w) > 4 and w not in ("sobre", "para"))
     consultas = [base] + ([variacao] if variacao and variacao != base else [])
     achados, falhas = [], []
+    buscas_realizadas = 0
     for q in consultas[:2]:
         if q in vistas:
             continue
         vistas.add(q)
+        buscas_realizadas += 1
         t0 = time.monotonic()
-        encontrados, info = buscar_com_fallback(provedores, q, 6)
+        academic = [p for p in provedores if getattr(p, "academic_search", False)]
+        general = [p for p in provedores if p not in academic]
+        academic_terms = ("artigo", "artigos", "paper", "papers", "estudo", "estudos",
+                          "study", "studies", "research", "academic", "scientific",
+                          "publication", "publications", "journal", "scholar",
+                          "literatura", "cientific", "científic", "doi", "openalex", "crossref")
+        if academic and any(term in q.lower() for term in academic_terms):
+            providers_for_query = academic + general
+        else:
+            providers_for_query = general + academic
+        encontrados, info = buscar_com_fallback(providers_for_query, q, 6)
         provs = job["usados"].setdefault("provedores", {})
         pm = provs.setdefault(info["provedor"] or "nenhum", {"ok": 0, "falhas": 0, "ms": 0})
         pm["ms"] += int((time.monotonic() - t0) * 1000)
@@ -431,7 +517,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
         for a in encontrados:
             if a["url"] not in {x["url"] for x in achados}:
                 achados.append(a)
-    job["usados"]["buscas"] = job["usados"].get("buscas", 0) + len(consultas[:2])
+    job["usados"]["buscas"] = job["usados"].get("buscas", 0) + buscas_realizadas
     prios = (job.get("ajustes") or {}).get("prioridades", [])
     if prios:
         achados.sort(key=lambda a: 0 if any(p in (a.get("url", "") or "").lower()
@@ -451,6 +537,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     from concurrent.futures import ThreadPoolExecutor
 
     def _ler(a):
+        if a.get("metadata_source") == "academic_provider":
+            return {"titulo": a.get("titulo") or a.get("title") or "",
+                    "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                    "final": a.get("landing_url") or a.get("url", ""),
+                    "full_text_fetched": False}
         if recuperar_fn is not None:
             rec = recuperar_fn(a["url"])
             return {"titulo": rec.get("titulo") or a["titulo"],
@@ -482,14 +573,37 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             emitir(db, job["id"], job["owner"], "analyst", "source_opened",
                    "vazia", f"Sem texto: {a['url'][:60]}.", {})
             continue
-        fonte = {"id": a.get("id", ""), "url": a["url"], "titulo": rec.get("titulo") or a["titulo"],
-                 "dominio": research._dominio(a["url"]), "acessado_em": research.agora_iso()}
+        academic = a.get("metadata_source") == "academic_provider"
+        fonte = {"id": a.get("id", ""), "url": a["url"],
+                 "titulo": rec.get("titulo") or a.get("titulo", ""),
+                 "dominio": research._dominio(a["url"]),
+                 "acessado_em": (a.get("fetched_at") if academic else None)
+                 or research.agora_iso()}
+        if academic:
+            for key in ("doi", "authors", "year", "journal", "repository", "abstract",
+                        "landing_url", "pdf_url", "license", "review_status", "provider",
+                        "provider_url", "source_url", "fetched_at", "abstract_untrusted",
+                        "abstract_kind", "provider_metadata_untrusted", "content_scope",
+                        "full_text_fetched",
+                        "citation_count", "citation_count_kind"):
+                if key in a:
+                    fonte[key] = a[key]
+            fonte["full_text_fetched"] = False
+            fonte["publicado_em"] = str(a.get("year") or "")
         ev = registrar_evidencia(db, job, fonte, texto[:1500] or a.get("trecho", ""))
+        if academic:
+            ev.update({key: value for key, value in fonte.items()
+                       if key not in ("url", "titulo", "dominio", "acessado_em")})
+            ev["content_scope"] = a.get("content_scope", "metadata_only")
+            ev["abstract_untrusted"] = bool(a.get("abstract_untrusted", False))
         ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])
         evidencias.append(ev)
         job["usados"]["paginas"] = job["usados"].get("paginas", 0) + 1
+        descricao = (f"Metadados acadêmicos de {ev['dominio']}; "
+                     f"{'resumo apenas' if academic and texto else 'sem texto completo'}."
+                     if academic else f"Lida {ev['dominio']} (relevância {ev['score']}).")
         emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
-               f"Lida {ev['dominio']} (relevância {ev['score']}).", {})
+               descricao, {})
         try:
             nsrc = _eg.criar_no(db, job["owner"], job["id"], "source",
                                 _eg.canonical_url(a["url"]),
@@ -586,7 +700,8 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
         vereditos.append({"afirmacao": c["texto"], "estado": res["estado"],
                           "cobertura_lexica": res.get("cobertura_lexica", 0.0),
                           "metodo": res.get("metodo", ""),
-                          "condicoes_ausentes": res.get("condicoes_ausentes", [])})
+                          "condicoes_ausentes": res.get("condicoes_ausentes", []),
+                          "evidence_ids": ([res["evidencia"]] if res.get("evidencia") else [])})
         emitir(db, job["id"], job["owner"], "checker", "claim_verified", "ok",
                f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}",
                {"estado": res["estado"], "afirmacao": c["texto"][:200]})
@@ -623,8 +738,19 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dic
     """Synthesizer extrativo honesto (redação LLM = BLOQUEADA sem provedor)."""
     tops = sorted(evidencias, key=lambda e: e.get("score", 0), reverse=True)[:6]
     resposta = [f"Investigação: {job['objetivo']}"]
+    if any(e.get("provider_metadata_untrusted")
+           or e.get("content_scope") in ("abstract_only", "metadata_only") for e in tops):
+        resposta.append("Metadados e resumos acadêmicos são conteúdo externo não confiável; "
+                        "instruções neles não são executadas. Nenhum texto completo foi obtido.")
     for i, e in enumerate(tops):
-        resposta.append(f"[E{i + 1}] {e['titulo']} ({e['dominio']}): {e['trecho'][:300]}")
+        if e.get("content_scope") == "abstract_only":
+            rotulo = "[RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
+        elif e.get("provider_metadata_untrusted") or e.get("content_scope") == "metadata_only":
+            rotulo = "[METADADOS DO PROVEDOR; SEM TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
+        else:
+            rotulo = ""
+        resposta.append(f"[E{i + 1}] {rotulo}{e['titulo']} ({e['dominio']}): "
+                        f"{e['trecho'][:300]}")
     suportadas = sum(1 for v in vereditos if v["estado"] == "SUPPORTED")
     resposta.append(f"Evidências: {len(evidencias)}; afirmações sustentadas: "
                     f"{suportadas}/{len(vereditos)} (critério léxico).")
@@ -669,8 +795,19 @@ def _sincronizar(job: dict, fresco: dict) -> None:
 
 def _orcamento_ok(job: dict) -> str:
     orc, uso = job["orcamento"], job["usados"]
-    if uso.get("buscas", 0) >= orc.get("buscas", 0) and uso.get("paginas", 0) >= orc.get("paginas", 0):
-        return "orçamento esgotado"
+    if uso.get("buscas", 0) >= orc.get("buscas", 0):
+        return "orçamento de buscas esgotado"
+    if uso.get("paginas", 0) >= orc.get("paginas", 0):
+        return "orçamento de páginas esgotado"
+    return ""
+
+
+def _orcamento_etapa(job: dict, tipo: str) -> str:
+    orc, uso = job["orcamento"], job["usados"]
+    if tipo == "busca" and uso.get("buscas", 0) >= orc.get("buscas", 0):
+        return "orçamento de buscas esgotado"
+    if tipo == "ler" and uso.get("paginas", 0) >= orc.get("paginas", 0):
+        return "orçamento de páginas esgotado"
     return ""
 
 
@@ -699,11 +836,25 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     salvar_job(db, job)
     if not job["plano"]:
         montar_plano(db, job)
+    state = _restore_context_checkpoint(db, job)
+    local_context = _lookup_local_context(db, job)
+    if local_context:
+        state = {**state, **local_context}
+    _save_context_checkpoint(db, job)
     t0 = t0 or time.monotonic()
     timeout = job["orcamento"].get("timeout_s", 120)
-    vistas, todas_evid, vereditos = set(), [], []
+    vistas = set()
+    todas_evid = []
+    vereditos = []
+    for step in job["plano"]:
+        todas_evid.extend(step.get("_evidencias", []))
+        if step.get("_vereditos"):
+            vereditos = step["_vereditos"]
+    todas_evid.extend(_evidencias_job(db, job))
+    # Deduplicate restored in-memory and durable evidence records.
+    todas_evid = list({item["id"]: item for item in todas_evid if item.get("id")}.values())
     try:
-        for etapa in job["plano"]:
+        for etapa in sorted(job["plano"], key=lambda step: step.get("prioridade", 50)):
             _sincronizar(job, carregar_job(db, owner, job_id))
             if job["status"] == "cancelada":
                 return _resumo(db, job)
@@ -716,6 +867,13 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                     return _resumo(db, job)
             if etapa.get("status") in ("feita", "removida"):
                 continue
+            prerequisite_states = {s["id"]: s.get("status") for s in job["plano"]}
+            if any(prerequisite_states.get(dep) not in ("feita", "falhou", "removida")
+                   for dep in etapa.get("dependencias", [])):
+                job["pendencias"].append(
+                    f"{etapa['id']}: aguardando dependências explícitas concluírem"
+                )
+                continue
             if deve_parar is not None and deve_parar():
                 job["status"] = "interrompida"
                 salvar_job(db, job)
@@ -725,7 +883,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             if time.monotonic() - t0 > timeout:
                 job["pendencias"].append("tempo esgotado antes de " + etapa["id"])
                 break
-            msg = _orcamento_ok(job)
+            msg = _orcamento_etapa(job, etapa["tipo"])
             if msg and etapa["tipo"] in ("busca", "ler"):
                 job["pendencias"].append(f"{etapa['id']}: {msg}")
                 continue
@@ -749,11 +907,20 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                     analisar_independencia_job(db, job, base_ev)
                     vereditos = agente_verificador(db, job, base_ev)
                     job["achados"] = [{"afirmacao": v["afirmacao"], "estado": v["estado"],
-                                       "metodo": v.get("metodo", "")} for v in vereditos]
+                                       "metodo": v.get("metodo", ""),
+                                       "evidence_ids": v.get("evidence_ids", [])}
+                                      for v in vereditos]
                     job["investigacoes"] = investigar_contradicoes_job(db, job, base_ev)
+                    etapa["_vereditos"] = vereditos
+                    _persist_hypotheses(db, job, vereditos)
+                    emitir(db, job["id"], owner, "analyst", "hypotheses_updated", "ok",
+                           f"{len(hypothesis_engine.HypothesisStore(db).list_for_job(owner, job_id))} "
+                           "hipótese(s) aberta(s) para investigação.",
+                           {"status": "open", "diagnosis": False})
                 elif etapa["tipo"] == "sintetizar":
                     etapa["_sintese"] = agente_sintetizador(
                         db, job, todas_evid or _evidencias_job(db, job), vereditos)
+                    job["sintese"] = etapa["_sintese"]
                 elif etapa["tipo"] == "auditar":
                     sint = next((s.get("_sintese") for s in job["plano"]
                                  if s.get("_sintese")), {"texto": "", "llm": False})
@@ -773,6 +940,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 emitir(db, job["id"], owner, "orchestrator", "step_started", "falha",
                        f"Etapa {etapa['id']} falhou ({getattr(exc, 'codigo', '?')}).", {})
             salvar_job(db, job)
+            _save_context_checkpoint(db, job)
         lacunas = _lacunas(job)
         if lacunas and not _orcamento_ok(job) and job["plano"] and \
                 job["usados"].get("replans", 0) < 1 and \
@@ -787,6 +955,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         if job["status"] == "interrompida" and not job["pendencias"]:
             job["pendencias"].append("sem evidências suficientes")
         salvar_job(db, job)
+        _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         emitir(db, job["id"], owner, "orchestrator", "research_completed", "ok",
                f"Pesquisa {job['status']}: {len(todas_evid or _evidencias_job(db, job))} evidências.",
                {})
@@ -801,7 +970,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
 
 
 def _achados_etapa(job: dict, etapa: dict) -> list:
-    for s in job["plano"]:
+    for s in reversed(job["plano"]):
         if s.get("tipo") == "busca" and s.get("alvo") == etapa["alvo"] and "_achados" in s:
             return s["_achados"]
     return []
@@ -809,6 +978,526 @@ def _achados_etapa(job: dict, etapa: dict) -> list:
 
 def _evidencias_job(db, job: dict) -> list:
     return listar_evidencias(db, job["owner"], job["id"])
+
+
+def _save_context_checkpoint(db, job: dict, next_action: str = "") -> int:
+    """Persist execution context independently of the compact jobs row."""
+    evs = _evidencias_job(db, job)
+    results = {}
+    plan = []
+    for step in job.get("plano", []):
+        plan.append({key: value for key, value in step.items() if not key.startswith("_")})
+        step_results = {}
+        for key in ("_achados", "_evidencias", "_sintese", "_auditoria", "_vereditos"):
+            if key in step:
+                step_results[key[1:]] = step[key]
+        if step_results:
+            results[step.get("id", "")] = step_results
+    pending = [step["id"] for step in job.get("plano", [])
+               if step.get("status") == "pendente"]
+    if not next_action:
+        next_step = min(
+            (step for step in job.get("plano", []) if step.get("status") == "pendente"),
+            key=lambda step: step.get("prioridade", 50),
+            default=None,
+        )
+        next_action = (f"Executar {next_step['id']} ({next_step['tipo']})"
+                       if next_step else "Nenhuma etapa pendente; revisar evidências e limitações")
+    state = {
+        "objective": job.get("objetivo", ""),
+        "restrictions": job.get("ajustes", {}).get("restricoes", []),
+        "plan": plan,
+        "sources": [{"id": item["id"], "title": item.get("titulo", ""),
+                     "url": item.get("url", "")} for item in evs],
+        "document_chunks": [
+            {"doc_id": item.get("doc_id"), "chunk_id": item.get("chunk_id"),
+             "section": item.get("section"), "page": item.get("page"),
+             "content_hash": item.get("content_hash"), "evidence_id": item["id"]}
+            for item in evs if item.get("doc_id")
+        ],
+        "evidence": evs,
+        "contradictions": job.get("investigacoes", []),
+        "hypotheses": [vars(item) for item in hypothesis_engine.HypothesisStore(db)
+                       .list_for_job(job["owner"], job["id"])],
+        "decisions": job.get("ajustes", {}).get("memory_context", []),
+        "results": {"steps": results, "claims": job.get("achados", []),
+                    "synthesis": job.get("sintese", {}),
+                    "structured_analysis": job.get("structured_analysis", [])},
+        "pending_steps": pending,
+        "next_action": next_action,
+    }
+    sequence = continuous_research.ResearchContextStore(db).save(
+        job["owner"], job["id"], state)
+    emitir(db, job["id"], job["owner"], "orchestrator", "context_checkpoint_saved", "ok",
+           f"Contexto persistido (checkpoint {sequence}).",
+           {"sequence": sequence, "context_version": continuous_research.CONTEXT_VERSION})
+    return sequence
+
+
+def _restore_context_checkpoint(db, job: dict) -> dict:
+    restored = continuous_research.ResearchContextStore(db).restore_latest(
+        job["owner"], job["id"])
+    if not restored:
+        return {}
+    state = restored.get("state", {})
+    if state.get("objective") != job.get("objetivo"):
+        return {}
+    results = (state.get("results") or {}).get("steps", {})
+    by_id = {step.get("id"): step for step in job.get("plano", [])}
+    for step_id, step_results in results.items():
+        step = by_id.get(step_id)
+        if step is None:
+            continue
+        for key, value in step_results.items():
+            if key in ("achados", "evidencias", "sintese", "auditoria", "vereditos"):
+                step["_" + key] = value
+    job["achados"] = (state.get("results") or {}).get("claims", job.get("achados", []))
+    job["sintese"] = (state.get("results") or {}).get("synthesis", job.get("sintese", {}))
+    job["structured_analysis"] = (state.get("results") or {}).get(
+        "structured_analysis", job.get("structured_analysis", []))
+    job["investigacoes"] = state.get("contradictions", job.get("investigacoes", []))
+    return state
+
+
+def _lookup_local_context(db, job: dict) -> dict:
+    """Use owner-scoped saved memory and document chunks as context, not as diagnoses."""
+    if job["usados"].get("local_context_checked"):
+        return {}
+    memory_context = []
+    try:
+        import pc_agent
+        for item in pc_agent.memorias_relevantes(db, job["objetivo"], k=5,
+                                                 owner=job["owner"]):
+            value = str(item.get("value", ""))
+            if item.get("assunto") != "sensivel" and not pc_agent.eh_sensivel(value):
+                memory_context.append({"key": str(item.get("key", ""))[:120],
+                                       "value": value[:300]})
+    except Exception:
+        memory_context = []
+    job.setdefault("ajustes", {})["memory_context"] = memory_context
+
+    document_chunks = []
+    try:
+        import docs_agent
+        chunks = docs_agent.trechos_relevantes(db, job["objetivo"], k=4,
+                                               owner=job["owner"])
+    except Exception:
+        chunks = []
+    for chunk in chunks:
+        try:
+            doc_id = str(chunk.get("doc_id", ""))[:64]
+            chunk_id = str(chunk.get("chunk_id", ""))[:100]
+            if not doc_id or not chunk_id:
+                continue
+            source_key = f"doc:{doc_id}:{chunk_id}"
+            exists = db.execute(
+                "SELECT 1 FROM evidence WHERE owner_id=? AND job_id=? AND fonte_id=? LIMIT 1",
+                (job["owner"], job["id"], source_key),
+            ).fetchone()
+            if exists:
+                continue
+            locator = f"chunk-{int(chunk.get('idx', 0))}"
+            source = {
+                "id": source_key,
+                "url": f"document://{doc_id}#{locator}",
+                "titulo": str(chunk.get("doc", doc_id))[:160],
+                "dominio": "documento local",
+                "acessado_em": agora_iso(),
+                "doc_id": doc_id,
+                "chunk_id": chunk_id,
+                "section": str(chunk.get("section") or "")[:160],
+                "page": chunk.get("page"),
+                "content_hash": str(chunk.get("content_hash") or "")[:128],
+                "version": chunk.get("version"),
+                "source": str(chunk.get("source") or "")[:200],
+                "table_hint": bool(chunk.get("table_hint")),
+            }
+            evidence = registrar_evidencia(
+                db, job, source, str(chunk.get("trecho") or "")[:1500],
+                afirmacao="Trecho recuperado lexicalmente; não confirma uma afirmação.",
+                relacao="contexto_documento",
+            )
+            evidence["doc_id"] = doc_id
+            evidence["chunk_id"] = chunk_id
+            document_chunks.append({
+                "doc_id": doc_id, "chunk_id": chunk_id,
+                "section": source["section"], "page": source["page"],
+                "content_hash": source["content_hash"], "evidence_id": evidence["id"],
+            })
+        except Exception:
+            continue
+    job["usados"]["local_context_checked"] = True
+    salvar_job(db, job)
+    if memory_context:
+        emitir(db, job["id"], job["owner"], "orchestrator", "memory_context_retrieved", "ok",
+               f"{len(memory_context)} memória(s) relevantes recuperadas para contexto local.",
+               {"count": len(memory_context), "evidence": False})
+    if document_chunks:
+        emitir(db, job["id"], job["owner"], "analyst", "document_context_retrieved", "ok",
+               f"{len(document_chunks)} trecho(s) documental(is) recuperados lexicalmente.",
+               {"count": len(document_chunks), "evidence_ids": [
+                   item["evidence_id"] for item in document_chunks]})
+    return {"memory_context": memory_context, "document_chunks": document_chunks}
+
+
+def _persist_hypotheses(db, job: dict, vereditos: list) -> list:
+    store = hypothesis_engine.HypothesisStore(db)
+    for verdict in vereditos:
+        statement = f"Investigar se: {verdict['afirmacao'][:1000]}"
+        identifier = hashlib.sha256(statement.encode("utf-8")).hexdigest()[:20]
+        missing = [str(item)[:1200] for item in verdict.get("condicoes_ausentes", [])[:10]
+                   if str(item).strip()]
+        if not verdict.get("evidence_ids"):
+            missing.append("Nenhuma evidência específica foi atribuída pelo verificador.")
+        store.save(hypothesis_engine.Hypothesis(
+            hypothesis_id=identifier,
+            owner_id=job["owner"],
+            job_id=job["id"],
+            statement=statement,
+            status="open",
+            evidence_ids=tuple(verdict.get("evidence_ids", [])[:20]),
+            missing_evidence=tuple(missing[:20]),
+            next_steps=("Revisar as evidências armazenadas e buscar validação independente.",),
+            result_summary=(
+                f"Resultado do verificador determinístico: {verdict.get('estado', 'UNVERIFIED')} "
+                f"({verdict.get('metodo') or 'método não informado'}). "
+                "Não é diagnóstico nem conclusão causal."
+            ),
+        ))
+    for index, investigation in enumerate(job.get("investigacoes") or []):
+        statement = ("Investigar divergência registrada: "
+                     + str(investigation.get("explicacao", investigation.get("tipo", "")))[:900])
+        identifier = hashlib.sha256(f"{index}:{statement}".encode("utf-8")).hexdigest()[:20]
+        store.save(hypothesis_engine.Hypothesis(
+            hypothesis_id=identifier,
+            owner_id=job["owner"],
+            job_id=job["id"],
+            statement=statement,
+            status="open",
+            evidence_ids=tuple(investigation.get("entre", [])[:20]),
+            missing_evidence=("Metodologia, período e condições comparáveis",),
+            next_steps=tuple(str(step)[:1200] for step in
+                             (investigation.get("follow_up") or [])[:10]),
+            result_summary="Divergência lexical/quantitativa detectada; causa não determinada.",
+        ))
+    return store.list_for_job(job["owner"], job["id"])
+
+
+def gerar_relatorio(db, owner: str, job_id: str,
+                    report_type: str = "executive_summary") -> dict:
+    """Build a report only from persisted evidence and validated evidence references."""
+    job = carregar_job(db, owner, job_id)
+    evidencias = listar_evidencias(db, owner, job_id)
+    sources = [
+        research_reports.ReportSource(
+            source_id=item["id"], title=item["titulo"] or item["id"],
+            url=item["url"], source_type="documento" if item.get("doc_id") else "web",
+            access_note=f"Acessado em {item['acessado_em']}" if item.get("acessado_em") else None,
+        )
+        for item in evidencias if item.get("url")
+    ]
+    valid_ids = {source.source_id for source in sources}
+    tabular_findings = []
+    for item in job.get("structured_analysis", [])[-5:]:
+        if not isinstance(item, dict) or not item.get("document_id"):
+            continue
+        analysis_result = item.get("analysis")
+        if not isinstance(analysis_result, dict):
+            continue
+        provenance = analysis_result.get("provenance")
+        data = analysis_result.get("data")
+        if not isinstance(provenance, dict) or not isinstance(data, dict):
+            continue
+        document_id = str(item["document_id"])
+        content_hash = str(item.get("content_hash") or "")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", document_id) or not re.fullmatch(
+            r"[0-9a-f]{64}", content_hash
+        ):
+            continue
+        source_id = f"structured:{document_id}:{item.get('method')}"
+        if source_id not in valid_ids:
+            valid_ids.add(source_id)
+            sources.append(research_reports.ReportSource(
+                source_id=source_id,
+                title=str(item.get("document_name") or document_id)[:160],
+                url=f"document://{document_id}#{content_hash}",
+                source_type="documento tabular",
+                access_note=(
+                    f"content hash {content_hash}; versão {item.get('version')}; "
+                    f"método {provenance.get('method') or item.get('method')}; "
+                    f"período {provenance.get('period') or 'não informado'}; "
+                    f"metodologia {provenance.get('methodology') or 'não informada'}"
+                )[:240],
+            ))
+        citation = (source_id,)
+        if item.get("method") == "chart_series":
+            series_items = data.get("series")
+            if isinstance(series_items, list):
+                for series in series_items[:6]:
+                    if not isinstance(series, dict) or series.get("status") != "ok":
+                        continue
+                    points = series.get("points")
+                    if not isinstance(points, list):
+                        continue
+                    observed = [
+                        f"{point.get('x')}={point.get('y')}"
+                        for point in points[:24] if isinstance(point, dict)
+                    ]
+                    if observed:
+                        unit = str(series.get("unit") or "")
+                        tabular_findings.append(research_reports.ReportPoint(
+                            text=(f"{item.get('document_name')}: série "
+                                  f"{series.get('name') or '(única)'} — "
+                                  + "; ".join(observed) + (f" {unit}" if unit else ""))[:1200],
+                            source_ids=citation,
+                        ))
+        elif item.get("method") == "differences":
+            groups = data.get("groups")
+            if isinstance(groups, list):
+                for group in groups[:13]:
+                    if not isinstance(group, dict) or group.get("status") != "ok":
+                        continue
+                    unit = str(group.get("unit") or "")
+                    label = group.get("group")
+                    tabular_findings.append(research_reports.ReportPoint(
+                        text=(f"{item.get('document_name')}: grupo {label}, média "
+                              f"{group.get('value')}{(' ' + unit) if unit else ''}")[:1200],
+                        source_ids=citation,
+                    ))
+    evidence_points = [
+        research_reports.ReportPoint(
+            text=(item.get("trecho") or "")[:1200],
+            source_ids=(item["id"],) if item["id"] in valid_ids else (),
+        )
+        for item in evidencias if item.get("trecho")
+    ]
+    findings = [
+        research_reports.ReportPoint(
+            text=f"{claim.get('estado', 'UNVERIFIED')}: {claim.get('afirmacao', '')[:800]}",
+            source_ids=tuple(eid for eid in claim.get("evidence_ids", []) if eid in valid_ids),
+        )
+        for claim in job.get("achados", [])
+        if claim.get("evidence_ids") and any(eid in valid_ids for eid in claim["evidence_ids"])
+    ]
+    divergences = []
+    for item in job.get("investigacoes", []):
+        refs = tuple(eid for eid in item.get("entre", []) if eid in valid_ids)
+        if refs:
+            divergences.append(research_reports.ReportPoint(
+                text=str(item.get("explicacao") or item.get("tipo") or "Divergência registrada")[:800],
+                source_ids=refs,
+            ))
+    limitations = [
+        "Verificação lexical determinística; não estabelece causalidade ou diagnóstico.",
+        "A redação generativa por LLM não foi executada.",
+    ]
+    if not evidencias:
+        limitations.append("Nenhuma evidência foi armazenada para este job.")
+    if job.get("ajustes", {}).get("memory_context"):
+        limitations.append(
+            "Memória local do proprietário foi consultada apenas como contexto, não como evidência citável."
+        )
+    hypotheses = hypothesis_engine.HypothesisStore(db).list_for_job(owner, job_id)
+    next_questions = [step for hypothesis in hypotheses
+                      for step in hypothesis.missing_evidence + hypothesis.next_steps][:20]
+    markdown = research_reports.build_research_report(
+        report_type=report_type, objective=job["objetivo"],
+        scope=f"Job {job_id}; status {job['status']}; modo {job['modo']}.",
+        methodology="Pesquisa determinística; os achados e citações abaixo vêm dos registros armazenados.",
+        findings=findings + tabular_findings, evidence=evidence_points, divergences=divergences,
+        limitations=limitations, next_questions=next_questions, sources=sources,
+    )
+    return {"job_id": job_id, "report_type": report_type, "markdown": markdown,
+            "source_count": len(sources), "evidence_count": len(evidencias)}
+
+
+def analisar_documento_estruturado(
+    db,
+    owner: str,
+    job_id: str,
+    doc_id: str,
+    *,
+    method: str,
+    columns: dict,
+) -> dict:
+    """Analyze owner-scoped saved CSV/JSON data with an explicit column mapping."""
+    import docs_agent
+
+    job = carregar_job(db, owner, job_id)
+    document = db.execute(
+        "SELECT name, ext, extracted_meta, content_hash, version, conversation_id "
+        "FROM documents WHERE id=? AND owner_id=?",
+        (doc_id, owner),
+    ).fetchone()
+    if document is None:
+        raise AgentErro("documento não encontrado", "ausente")
+    name, extension, raw_metadata, content_hash, version, document_conv = document
+    if document_conv != job["conv"]:
+        raise AgentErro("documento não pertence à conversa deste job", "ausente")
+    if extension not in (".csv", ".tsv", ".json"):
+        raise AgentErro("análise estruturada aceita somente CSV, TSV ou JSON", "formato")
+    try:
+        metadata = json.loads(raw_metadata or "{}")
+        if metadata.get("truncated"):
+            raise structured_analysis.AnalysisError(
+                "extração documental truncada; não é seguro analisar apenas um subconjunto"
+            )
+        docs_root = docs_agent.docs_dir().resolve()
+        raw_path = (docs_root / f"{doc_id}{extension}").resolve()
+        if docs_root not in raw_path.parents or not raw_path.is_file():
+            raise structured_analysis.AnalysisError(
+                "arquivo tabular original não está disponível no armazenamento local"
+            )
+        raw_bytes = raw_path.read_bytes()
+        stored_size = db.execute(
+            "SELECT size FROM documents WHERE id=? AND owner_id=?", (doc_id, owner)
+        ).fetchone()[0]
+        if len(raw_bytes) != stored_size:
+            raise structured_analysis.AnalysisError(
+                "arquivo original diverge do tamanho registrado; reenvie o documento"
+            )
+        extracted_text = docs_agent.extrair_texto(extension, raw_bytes, name)
+        if hashlib.sha256(extracted_text.encode("utf-8")).hexdigest() != content_hash:
+            raise structured_analysis.AnalysisError(
+                "arquivo original não corresponde à proveniência registrada; reenvie o documento"
+            )
+        if not isinstance(columns, dict):
+            raise structured_analysis.AnalysisError("mapeamento de colunas deve ser um objeto")
+        allowed_columns = {
+            "title": 160, "period": 120, "methodology": 240, "x": 200, "y": 200,
+            "series": 200, "unit": 200, "chart_title": 120, "chart_type": 20,
+            "group": 200, "value": 200, "baseline": 120, "baseline_label": 120,
+        }
+        unsupported = set(columns) - set(allowed_columns)
+        if unsupported:
+            raise structured_analysis.AnalysisError(
+                f"mapeamento contém parâmetro não suportado: "
+                f"{sorted(str(key) for key in unsupported)[0]}"
+            )
+        columns = {
+            key: str(value)[:limit]
+            for key, limit in allowed_columns.items()
+            if (value := columns.get(key)) is not None
+        }
+        title = str(columns.get("title") or name)[:160]
+        locator = f"document {doc_id}, content hash {content_hash}, version {version}"
+        dataset_source = f"document:{doc_id}:{content_hash or version}"
+        dataset_metadata = {
+            "period": str(columns.get("period") or "")[:120],
+            "methodology": str(columns.get("methodology") or "deterministic tabular analysis"),
+        }
+        if extension in (".csv", ".tsv"):
+            dataset = structured_analysis.load_csv(
+                raw_bytes, source=dataset_source, metadata=dataset_metadata,
+                delimiter="\t" if extension == ".tsv" else ",")
+        else:
+            dataset = structured_analysis.load_json(
+                raw_bytes, source=dataset_source, metadata=dataset_metadata)
+
+        selected_method = str(method or "").strip()
+        unit = str(columns.get("unit") or "").strip()
+        if not unit:
+            raise structured_analysis.AnalysisError(
+                "informe unit=<coluna> ou unit=none explicitamente"
+            )
+        unit_column = None if unit.lower() == "none" else unit
+        if selected_method == "chart_series":
+            x = str(columns.get("x") or "")
+            y = str(columns.get("y") or "")
+            series = str(columns.get("series") or "")
+            if not x or not y:
+                raise structured_analysis.AnalysisError(
+                    "informe explicitamente as colunas x e y para o gráfico"
+                )
+            result = structured_analysis.chart_series(
+                dataset, x, y, series_column=series or None, unit_column=unit_column,
+            )
+            visual = research_visualizations.chart_message(
+                result, title=str(columns.get("chart_title") or name)[:120],
+                source_title=title, source_url=f"document://{doc_id}",
+                locator=locator, chart_type=str(columns.get("chart_type") or "bar"),
+            )
+        elif selected_method == "differences":
+            group = str(columns.get("group") or "")
+            value = str(columns.get("value") or "")
+            baseline = columns.get("baseline")
+            if not group or not value or baseline is None:
+                raise structured_analysis.AnalysisError(
+                    "informe explicitamente as colunas group/value e o baseline da comparação"
+                )
+            result = structured_analysis.differences(
+                dataset, group, value, baseline, unit_column=unit_column,
+            )
+            visual = research_visualizations.compare_message(
+                result, title=str(columns.get("chart_title") or name)[:120],
+                baseline_label=str(columns.get("baseline_label") or baseline)[:120],
+                source_title=title, source_url=f"document://{doc_id}", locator=locator,
+            )
+        else:
+            raise structured_analysis.AnalysisError(
+                "método deve ser chart_series ou differences"
+            )
+    except (structured_analysis.AnalysisError, ValueError, OSError) as exc:
+        raise AgentErro(str(exc), "structured_analysis") from exc
+    output = {
+        "method": selected_method,
+        "job_id": job_id,
+        "document_id": doc_id,
+        "document_name": name,
+        "extension": extension,
+        "content_hash": content_hash,
+        "version": version,
+        "columns": columns,
+        "analysis": result,
+        "visualization": visual,
+        "locator": locator,
+    }
+    if len(json.dumps(output, ensure_ascii=False, allow_nan=False)) > 50_000:
+        raise AgentErro(
+            "resultado ultrapassa o limite seguro de persistência do job; reduza os dados",
+            "limite",
+        )
+    _persist_structured_result(db, owner, output)
+    return output
+
+
+def _persist_structured_result(db, owner: str, result: dict) -> None:
+    job_id = result.get("job_id")
+    if not job_id:
+        return
+    job = carregar_job(db, owner, job_id)
+    records = job.get("structured_analysis", [])
+    records = [
+        item for item in records
+        if (item.get("document_id"), item.get("method"))
+        != (result.get("document_id"), result.get("method"))
+    ]
+    records.append(result)
+    records = records[-20:]
+    while records and len(json.dumps(records, ensure_ascii=False)) > 50_000:
+        records.pop(0)
+    job["structured_analysis"] = records
+    salvar_job(db, job)
+    _save_context_checkpoint(db, job)
+    emitir(db, job_id, owner, "analyst", "structured_analysis_completed", "ok",
+           f"Análise determinística {result['method']} concluída para {result['document_name']}.",
+           {"document_id": result["document_id"], "method": result["method"],
+            "source_id": result["analysis"]["provenance"]["source"]})
+
+
+def excluir_job(db, owner: str, job_id: str) -> dict:
+    job = carregar_job(db, owner, job_id)
+    if job["status"] in ("em_andamento", "pausada"):
+        raise AgentErro("pesquisa em andamento; cancele antes de excluir", "ocupado")
+    with db:
+        db.execute("DELETE FROM eg_edges WHERE owner_id=? AND job_id=?", (owner, job_id))
+        db.execute("DELETE FROM eg_nodes WHERE owner_id=? AND job_id=?", (owner, job_id))
+        db.execute("DELETE FROM evidence WHERE owner_id=? AND job_id=?", (owner, job_id))
+        db.execute("DELETE FROM research_events WHERE owner_id=? AND job_id=?", (owner, job_id))
+        db.execute("DELETE FROM research_jobs WHERE owner_id=? AND id=?", (owner, job_id))
+    hypothesis_engine.HypothesisStore(db).delete_for_job(owner, job_id)
+    continuous_research.ResearchContextStore(db).delete_for_job(owner, job_id)
+    return {"job_id": job_id, "deleted": True}
 
 
 def _lacunas(job: dict) -> list:
@@ -888,12 +1577,23 @@ def _resumo(db, job: dict) -> dict:
     evs = _evidencias_job(db, job)
     invs = job.get("investigacoes") or []
     aud = job.get("auditoria") or {}
+    hypotheses = hypothesis_engine.HypothesisStore(db).list_for_job(job["owner"], job["id"])
+    next_step = min((s for s in job["plano"] if s.get("status") == "pendente"),
+                    key=lambda step: step.get("prioridade", 50), default=None)
     return {"id": job["id"], "status": job["status"], "modo": job["modo"],
             "objetivo": job["objetivo"], "plano_versao": job["plano_versao"],
-            "etapas": [{"id": s["id"], "tipo": s["tipo"], "status": s.get("status", "pendente")}
+            "etapas": [{"id": s["id"], "tipo": s["tipo"], "status": s.get("status", "pendente"),
+                        "dependencias": s.get("dependencias", []),
+                        "prioridade": s.get("prioridade", 50),
+                        "priority_reason": s.get("priority_reason", ""),
+                        "replan_reason": s.get("replan_reason", ""),
+                        "regra_parada": s.get("regra_parada", "")}
                        for s in job["plano"]],
             "evidencias": len(evs), "achados": job["achados"],
             "investigacoes": len(invs),
+            "hipoteses": [vars(item) for item in hypotheses],
+            "proxima_acao": (f"Executar {next_step['id']} ({next_step['tipo']})"
+                             if next_step else "Revisar resultados e limitações"),
             "auditoria_ok": aud.get("ok") if aud else None,
             "pendencias": job["pendencias"], "erros": job["erros"],
             "usados": job["usados"], "orcamento": job["orcamento"]}
@@ -943,9 +1643,19 @@ def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
             raise AgentErro("texto curto demais", "texto")
         if op == "adicionar_metrica":
             aj["metricas"].append(texto)
-        for tipo in ("busca", "ler"):
-            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": tipo,
-                                 "alvo": texto, "status": "pendente", "tentativas": 0})
+        search_id = f"p{len(job['plano']) + 1}"
+        read_id = f"p{len(job['plano']) + 2}"
+        for etapa_id, tipo, deps, prioridade in (
+            (search_id, "busca", [], 10),
+            (read_id, "ler", [search_id], 30),
+            (f"p{len(job['plano']) + 3}", "analisar", [read_id], 50),
+        ):
+            job["plano"].append({
+                "id": etapa_id, "tipo": tipo, "alvo": texto, "status": "pendente",
+                "tentativas": 0, "prioridade": prioridade, "dependencias": deps,
+                "replan_reason": f"intervenção manual: {op}",
+                "regra_parada": "orçamento e timeout originais",
+            })
             adicionadas.append(tipo + ":" + texto)
     elif op in ("escopo_remove", "parar_topico"):
         texto = str(params.get("texto", ""))[:120].lower()
@@ -961,6 +1671,10 @@ def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
         if len(dom) < 3:
             raise AgentErro("domínio curto demais", "dominio")
         aj["prioridades"].insert(0, dom)
+        for step in job["plano"]:
+            if step.get("tipo") == "busca" and step.get("status") == "pendente":
+                step["prioridade"] = 1
+                step["priority_reason"] = f"prioridade solicitada para {dom}"
         adicionadas.append("prioridade:" + dom)
     elif op == "investigar_divergencia":
         invs = job.get("investigacoes") or []
@@ -971,9 +1685,21 @@ def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
         if not (0 <= idx < len(invs)):
             raise AgentErro("divergência inexistente", "indice")
         for q in invs[idx].get("follow_up", [])[:3]:
-            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": "busca",
-                                 "alvo": str(q)[:120], "status": "pendente", "tentativas": 0})
-            adicionadas.append("busca:" + str(q)[:60])
+            alvo = str(q)[:120]
+            search_id = f"p{len(job['plano']) + 1}"
+            read_id = f"p{len(job['plano']) + 2}"
+            for etapa_id, tipo, deps, priority in (
+                (search_id, "busca", [], 10),
+                (read_id, "ler", [search_id], 30),
+                (f"p{len(job['plano']) + 3}", "analisar", [read_id], 50),
+            ):
+                job["plano"].append({
+                    "id": etapa_id, "tipo": tipo, "alvo": alvo, "status": "pendente",
+                    "tentativas": 0, "prioridade": priority, "dependencias": deps,
+                    "replan_reason": "intervenção manual: investigar divergência",
+                    "regra_parada": "máximo de três follow-ups e orçamento/timeout originais",
+                })
+                adicionadas.append(tipo + ":" + alvo[:60])
     for ev in listar_evidencias(db, owner, job_id):
         if any(r in (ev.get("url", "") or "").lower() or r in (ev.get("titulo", "") or "").lower()
                for r in aj["restricoes"]):
@@ -1042,10 +1768,26 @@ def provedores_reais():
     import os as _os
     if PROVS_FABRICA is not None:
         return PROVS_FABRICA()
-    return [ProvedorDDG(), ProvedorSearXNG(_os.environ.get("JULIA_SEARXNG_URL", ""))]
+    providers = [ProvedorDDG(), ProvedorSearXNG(_os.environ.get("JULIA_SEARXNG_URL", ""))]
+    if _os.environ.get("JULIA_ACADEMIC_RESEARCH", "").strip().lower() in (
+            "1", "true", "yes", "on"):
+        providers.append(ProvedorAcademico(_os.environ.get("JULIA_RESEARCH_MAILTO", "")))
+    return providers
 
 
 def recuperar_real():
     if RECUPERAR_FABRICA is not None:
         return RECUPERAR_FABRICA()
     return None
+
+
+class ProvedorAcademico(ProvedorBusca):
+    """Optional keyless academic fallback; enabled by JULIA_ACADEMIC_RESEARCH=1."""
+    nome = "academic"
+    academic_search = True
+
+    def __init__(self, mailto: str = ""):
+        self.provider = academic_research.AcademicResearchProvider(mailto=mailto)
+
+    def buscar(self, consulta: str, limite: int = 6) -> list:
+        return self.provider.buscar(consulta, limite)

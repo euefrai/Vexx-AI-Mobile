@@ -69,6 +69,35 @@ def test_dashboard_compare_conversor():
     assert jdui.validar_mensagem(_bloco("calculator", {"kind": "nuclear"}))[0] is False
 
 
+def test_jdui_preserva_proveniencia_de_graficos_e_comparacoes():
+    source = {"id": "doc-1", "title": "Manual", "url": "https://example.test/manual",
+              "locator": "p. 4, seção 2", "period": "2025",
+              "methodology": "manual review"}
+    ok, norm, _ = jdui.validar_mensagem(_bloco("chart", dict(CHART, sources=[source])))
+    normalized_source = norm["blocks"][0]["props"]["sources"][0]
+    assert ok and normalized_source["id"] == source["id"]
+    assert normalized_source["period"] == "2025"
+    assert normalized_source["methodology"] == "manual review"
+
+    compare = {
+        "columns": ["A", "B"],
+        "rows": [{"label": "Recurso", "a": "presente", "b": "não localizado"}],
+        "sources": [dict(source, url="javascript:alert(1)")],
+    }
+    ok, norm, _ = jdui.validar_mensagem(_bloco("compare", compare))
+    assert ok and norm["blocks"][0]["props"]["sources"][0]["url"] == ""
+    assert jdui.validar_mensagem(
+        _bloco("chart", dict(CHART, sources=[source, dict(source)])))[0] is False
+    for unsafe_url in ("javascript:alert(1)", "http://", "https://user:pass@example.test/"):
+        compare = {
+            "columns": ["A", "B"],
+            "rows": [{"label": "Recurso", "a": "present", "b": "not found"}],
+            "sources": [dict(source, url=unsafe_url)],
+        }
+        ok, norm, _ = jdui.validar_mensagem(_bloco("compare", compare))
+        assert ok and norm["blocks"][0]["props"]["sources"][0]["url"] == ""
+
+
 def test_update_of_permitido_e_imutavel():
     ok, norm, _ = jdui.validar_mensagem(_bloco("chart", CHART, update_of="msg-abc_123"))
     assert ok and norm.get("update_of") == "msg-abc_123"
@@ -127,6 +156,7 @@ global.document = {
   createElement: tag => new Element(tag),
   createElementNS: (ns, tag) => new Element(tag)
 };
+global.location = { href: 'https://app.example.test/' };
 global.window = {};
 eval(fs.readFileSync(process.argv[2], 'utf8'));
 const JDUI = global.window.JDUI;
@@ -138,6 +168,13 @@ const V = 'JULIA-ui-message/v1';
 const chart = { version: V, blocks: [{ type: 'ui', component: 'chart', props: {
   type: 'bar', title: 'N', labels: ['A', 'B'], series: [{ label: 's', values: [1, 2] }], source: 't' } }] };
 t('chart-valido', JDUI.validateMessage(chart).ok === true);
+t('chart-proveniencia', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'chart',
+  props: { type: 'bar', series: [{ label: 's', values: [1] }],
+    sources: [{ id: 'doc-1', title: 'Manual', url: 'https://example.test/manual', locator: 'p. 4' }] } }] }).ok === true);
+t('provenance-no-credentials', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'chart',
+  props: { type: 'bar', series: [{ label: 's', values: [1] }],
+    sources: [{ id: 'doc-2', title: 'Unsafe link', url: 'https://user:pass@example.test/' }] } }] })
+  .msg.blocks[0].props.sources[0].url === '');
 t('chart-nan', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'chart',
   props: { type: 'bar', series: [{ label: 's', values: [NaN] }] } }] }).ok === false);
 t('chart-pie2', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'chart',
@@ -161,6 +198,9 @@ function mount(component, props) {
   JDUI.mount(root, [{ blocks: [{ type: 'ui', component, props }] }], {});
   return root;
 }
+const provenanceRoot = mount('chart', { type: 'bar', series: [{ label: 's', values: [1] }],
+  sources: [{ id: 'doc-1', title: 'Manual', period: '2025', methodology: 'review' }] });
+t('provenance-rendered', provenanceRoot.textContent.includes('Manual — 2025 · review'));
 const croot = mount('chart', chart.blocks[0].props);
 t('chart-render-svg', JSON.stringify(croot).includes('svg') || (function () {
   let found = false;

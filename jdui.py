@@ -12,6 +12,7 @@ são testados contra os mesmos payloads de `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`.
 import json
 import logging
 import re
+from urllib.parse import urlsplit
 
 log = logging.getLogger("JULIA-jdui")
 
@@ -38,7 +39,44 @@ def _num(v, padrao=0.0) -> float:
 
 def _url(u) -> str:
     u = _str(u, 500)
-    return u if re.match(r"^https?://", u) else ""
+    if not re.match(r"^https?://", u, re.IGNORECASE) or any(ord(char) < 32 for char in u):
+        return ""
+    try:
+        parsed = urlsplit(u)
+        if parsed.scheme.lower() not in ("http", "https") or not parsed.hostname:
+            return ""
+        if parsed.username is not None or parsed.password is not None:
+            return ""
+        parsed.port
+    except ValueError:
+        return ""
+    return u
+
+
+def _provenance(value) -> list:
+    if value is None:
+        return []
+    if not isinstance(value, list) or len(value) > 20:
+        raise JduiErro("sources deve ser uma lista com até 20 referências")
+    sources, ids = [], set()
+    for item in value:
+        if not isinstance(item, dict):
+            raise JduiErro("source inválida")
+        source_id = _str(item.get("id"), 100)
+        title = _str(item.get("title"), 160)
+        if not source_id or not title or source_id in ids:
+            raise JduiErro("source exige id e título únicos")
+        ids.add(source_id)
+        sources.append({
+            "id": source_id,
+            "title": title,
+            "url": _url(item.get("url")),
+            "locator": _str(item.get("locator"), 120),
+            "period": _str(item.get("period"), 100),
+            "methodology": _str(item.get("methodology"), 200),
+            "analysis_method": _str(item.get("analysis_method"), 80),
+        })
+    return sources
 
 
 def _profundidade(obj, nivel=0):
@@ -270,7 +308,8 @@ def _v_chart(p: dict) -> dict:
             raise JduiErro("chart.labels deve acompanhar os valores")
     return {"type": tipo, "title": _str(p.get("title"), 160), "labels": labels,
             "series": norm, "source": _str(p.get("source"), 160),
-            "x_label": _str(p.get("x_label"), 60), "y_label": _str(p.get("y_label"), 60)}
+            "x_label": _str(p.get("x_label"), 60), "y_label": _str(p.get("y_label"), 60),
+            "sources": _provenance(p.get("sources"))}
 
 
 def _v_dashboard(p: dict) -> dict:
@@ -291,7 +330,7 @@ def _v_dashboard(p: dict) -> dict:
         if len(chart["series"]) > 3:
             raise JduiErro("dashboard.chart: máx 3 séries")
     return {"title": _str(p.get("title"), 160), "metrics": norm_m, "chart": chart,
-            "source": _str(p.get("source"), 160)}
+            "source": _str(p.get("source"), 160), "sources": _provenance(p.get("sources"))}
 
 
 def _v_compare(p: dict) -> dict:
@@ -311,7 +350,8 @@ def _v_compare(p: dict) -> dict:
         norm.append({"label": _str(r.get("label"), 80), "a": _str(r.get("a"), 120),
                      "b": _str(r.get("b"), 120), "melhor": melhor})
     return {"title": _str(p.get("title"), 160),
-            "columns": [_str(cols[0], 40), _str(cols[1], 40)], "rows": norm}
+            "columns": [_str(cols[0], 40), _str(cols[1], 40)], "rows": norm,
+            "sources": _provenance(p.get("sources"))}
 
 
 def _v_evidencegraph(p: dict) -> dict:

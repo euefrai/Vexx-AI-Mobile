@@ -1,10 +1,12 @@
 """V4.5 FASE 2-7: orchestrator, agentes, evidências, verificação (determinístico)."""
+import json
 import sys
 import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pc_agent
+import docs_agent
 import research
 import research_agents as ra
 
@@ -55,15 +57,154 @@ def test_modo_e_job():
     db.close()
 
 
+def test_owner_scoped_tabular_chat_creates_real_chart_and_comparison(monkeypatch, tmp_path):
+    monkeypatch.setattr(docs_agent, "docs_dir", lambda: tmp_path / "docs")
+    db = _db()
+    try:
+        job = ra.criar_job(db, "u-x", "measurements by team", conv="c1")
+        uploaded = docs_agent.salvar_documento(
+            db, "measurements.csv",
+            b"month,team,amount,unit\nJan,A,10,W\nFeb,A,20,W\n"
+            b"Jan,B,20,W\nFeb,B,30,W\n",
+            "c1", "u-x",
+        )
+        chart = pc_agent.cmd_pesquisa(
+            db,
+            f'analisar tabular chart job={job["id"]} doc={uploaded["doc_id"]} '
+            'x=month y=amount series=team unit=unit period=2026-Q1 '
+            'methodology="meter readings"',
+            "u-x", "c1",
+        )
+        assert "```jdui" in chart
+        chart_message = json.loads(chart.split("```jdui\n", 1)[1].split("\n```", 1)[0])
+        chart_props = chart_message["blocks"][1]["props"]
+        assert chart_props["labels"] == ["Jan", "Feb"]
+        assert chart_props["series"] == [
+            {"label": "A", "values": [10.0, 20.0]},
+            {"label": "B", "values": [20.0, 30.0]},
+        ]
+        assert chart_props["sources"][0]["id"].startswith("document:")
+        assert chart_props["sources"][0]["period"] == "2026-Q1"
+        assert chart_props["sources"][0]["methodology"] == "meter readings"
+
+        comparison = pc_agent.cmd_pesquisa(
+            db,
+            f"analisar tabular compare job={job['id']} doc={uploaded['doc_id']} "
+            "group=team value=amount baseline=A unit=unit",
+            "u-x", "c1",
+        )
+        assert "```jdui" in comparison
+        compare_message = json.loads(
+            comparison.split("```jdui\n", 1)[1].split("\n```", 1)[0]
+        )
+        assert compare_message["blocks"][1]["component"] == "compare"
+        assert compare_message["blocks"][1]["props"]["rows"][0]["b"] == "25 W"
+        saved = ra.carregar_job(db, "u-x", job["id"])["structured_analysis"]
+        assert len(saved) == 2
+        assert {item["method"] for item in saved} == {"chart_series", "differences"}
+        assert all(item["document_id"] == uploaded["doc_id"] for item in saved)
+        assert all(item["analysis"]["provenance"]["source"].startswith("document:")
+                   for item in saved)
+        checkpoint = ra.continuous_research.ResearchContextStore(db).restore_latest(
+            "u-x", job["id"]
+        )
+        assert checkpoint["state"]["results"]["structured_analysis"] == saved
+        report = ra.gerar_relatorio(db, "u-x", job["id"])
+        assert "Jan=10\\.0" in report["markdown"]
+        assert f"document://{uploaded['doc_id']}#{uploaded['content_hash']}" in report["markdown"]
+    finally:
+        db.close()
+
+
+def test_tabular_chat_requires_explicit_units_owner_and_conversation(monkeypatch, tmp_path):
+    monkeypatch.setattr(docs_agent, "docs_dir", lambda: tmp_path / "docs")
+    db = _db()
+    try:
+        job = ra.criar_job(db, "u-x", "measurements by team", conv="c1")
+        uploaded = docs_agent.salvar_documento(
+            db, "measurements.csv",
+            b"month,team,amount\nJan,A,10\nFeb,A,20\nJan,B,20\nFeb,B,30\n",
+            "c1", "u-x",
+        )
+        missing_unit = pc_agent.cmd_pesquisa(
+            db, f"analisar tabular chart job={job['id']} doc={uploaded['doc_id']} x=month y=amount",
+            "u-x", "c1",
+        )
+        assert "unit=<coluna> ou unit=none" in missing_unit
+        assert not any(
+            event["tipo"] == "structured_analysis_completed"
+            for event in ra.eventos_desde(db, "u-x", job["id"])
+        )
+        wrong_owner = pc_agent.cmd_pesquisa(
+            db,
+            f"analisar tabular chart job={job['id']} doc={uploaded['doc_id']} "
+            "x=month y=amount unit=none",
+            "u-y", "c1",
+        )
+        assert "pesquisa não encontrada" in wrong_owner
+        wrong_conversation = pc_agent.cmd_pesquisa(
+            db,
+            f"analisar tabular chart job={job['id']} doc={uploaded['doc_id']} "
+            "x=month y=amount unit=none",
+            "u-x", "c2",
+        )
+        assert "não pertence à conversa atual" in wrong_conversation
+        other_conversation_doc = docs_agent.salvar_documento(
+            db, "other.csv", b"month,amount\nJan,5\nFeb,6\n", "c2", "u-x",
+        )
+        mismatched_document = pc_agent.cmd_pesquisa(
+            db,
+            f"analisar tabular chart job={job['id']} "
+            f"doc={other_conversation_doc['doc_id']} x=month y=amount unit=none",
+            "u-x", "c1",
+        )
+        assert "documento não pertence à conversa deste job" in mismatched_document
+    finally:
+        db.close()
+
+
+def test_tabular_analysis_rejects_changed_original_without_persisting(monkeypatch, tmp_path):
+    monkeypatch.setattr(docs_agent, "docs_dir", lambda: tmp_path / "docs")
+    db = _db()
+    try:
+        job = ra.criar_job(db, "u-x", "measurements by month", conv="c1")
+        uploaded = docs_agent.salvar_documento(
+            db, "measurements.csv", b"month,amount,unit\nJan,10,W\nFeb,20,W\n",
+            "c1", "u-x",
+        )
+        original = docs_agent.docs_dir() / f"{uploaded['doc_id']}.csv"
+        original.write_bytes(b"month,amount,unit\nJan,11,W\nFeb,20,W\n")
+        response = pc_agent.cmd_pesquisa(
+            db,
+            f"analisar tabular chart job={job['id']} doc={uploaded['doc_id']} "
+            "x=month y=amount unit=unit",
+            "u-x", "c1",
+        )
+        assert "não corresponde à proveniência registrada" in response
+        assert ra.carregar_job(db, "u-x", job["id"])["structured_analysis"] == []
+        assert not any(
+            event["tipo"] == "structured_analysis_completed"
+            for event in ra.eventos_desde(db, "u-x", job["id"])
+        )
+    finally:
+        db.close()
+
+
 def test_plano_e_eventos():
     db = _db()
     job = ra.criar_job(db, "u-x", "café e chá", manual="pro")
     ra.montar_plano(db, job)
     tipos = [s["tipo"] for s in job["plano"]]
     assert tipos[:3] == ["busca", "ler", "analisar"] and tipos[-3:] == ["verificar", "sintetizar", "auditar"]
+    assert job["plano"][1]["dependencias"] == [job["plano"][0]["id"]]
+    assert job["plano"][2]["dependencias"] == [job["plano"][1]["id"]]
+    assert all(step["regra_parada"] and isinstance(step["prioridade"], int)
+               for step in job["plano"])
     evs = ra.eventos_desde(db, "u-x", job["id"])
-    assert [e["tipo"] for e in evs] == ["research_created", "plan_created"]
-    assert [e["seq"] for e in evs] == [1, 2]
+    assert [e["tipo"] for e in evs] == [
+        "research_created", "plan_created", "context_checkpoint_saved"
+    ]
+    assert [e["seq"] for e in evs] == [1, 2, 3]
     assert ra.eventos_desde(db, "u-x", job["id"], apos_seq=1)[0]["tipo"] == "plan_created"
     assert ra.eventos_desde(db, "u-y", job["id"]) == []
     db.close()
@@ -184,6 +325,107 @@ def test_replan_sem_loop():
     r = ra.executar(db, job["id"], "u-x", [prov], rec)
     assert r["status"] in ("concluida", "interrompida")
     assert job_versoes(db, job["id"]) <= 3  # plano inicial + 1 replan no máximo
+    db.close()
+
+
+def test_research_context_hypotheses_and_report_use_stored_records():
+    import docs_agent
+    import continuous_research
+    import hypothesis_engine
+
+    db = _db()
+    objective = "retention policy period"
+    doc = docs_agent.salvar_documento(
+        db, "policy.txt",
+        b"The retention policy period is 30 days. Exceptions require approval.",
+        "research-context", owner="u-x",
+    )
+    pc_agent.registrar_memoria(db, "u-x", "retention",
+                               "Check policy review date", "trabalho", "research")
+    job = ra.criar_job(db, "u-x", objective, manual="rapida")
+    result = ra.executar(db, job["id"], "u-x", [FakeProv({})])
+
+    assert result["evidencias"] >= 1
+    stored = ra.listar_evidencias(db, "u-x", job["id"])
+    document_evidence = next(item for item in stored if item.get("doc_id") == doc["doc_id"])
+    assert document_evidence["url"].startswith(f"document://{doc['doc_id']}#")
+    hypotheses = hypothesis_engine.HypothesisStore(db).list_for_job("u-x", job["id"])
+    assert hypotheses and all(item.status == "open" for item in hypotheses)
+    assert all("diagnóstico" in item.result_summary for item in hypotheses)
+
+    checkpoint = continuous_research.ResearchContextStore(db).restore_latest("u-x", job["id"])
+    assert checkpoint and checkpoint["state"]["evidence"]
+    assert checkpoint["state"]["document_chunks"][0]["doc_id"] == doc["doc_id"]
+    assert checkpoint["state"]["decisions"][0]["value"] == "Check policy review date"
+    assert checkpoint["state"]["next_action"]
+    event_types = {event["tipo"] for event in ra.eventos_desde(db, "u-x", job["id"])}
+    assert "memory_context_retrieved" in event_types
+    assert "document_context_retrieved" in event_types
+
+    report = ra.gerar_relatorio(db, "u-x", job["id"])
+    assert report["source_count"] >= 1
+    assert "[S1]" in report["markdown"]
+    assert f"document://{doc['doc_id']}#" in report["markdown"]
+    assert "não estabelece causalidade ou diagnóstico" in report["markdown"]
+    assert "Memória local do proprietário" in report["markdown"]
+    try:
+        ra.gerar_relatorio(db, "u-y", job["id"])
+        raise AssertionError("another owner must not read the report")
+    except ra.AgentErro as exc:
+        assert exc.codigo == "ausente"
+    db.close()
+
+
+def test_checkpoint_restores_completed_search_results_for_resume():
+    db = _db()
+    job = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
+    ra.montar_plano(db, job)
+    search = next(step for step in job["plano"] if step["tipo"] == "busca")
+    search["_achados"] = [dict(CAFE[0])]
+    search["status"] = "feita"
+    job["status"] = "interrompida"
+    ra.salvar_job(db, job)
+    ra._save_context_checkpoint(db, job)
+    db_path = Path(db.execute("PRAGMA database_list").fetchone()[2])
+    db.close()
+    db = pc_agent.open_db(db_path)
+
+    provider = FakeProv({})
+    result = ra.executar(
+        db, job["id"], "u-x", [provider],
+        lambda url: {"titulo": "Café", "texto": CAFE[0]["trecho"], "final": url},
+    )
+    assert result["evidencias"] >= 1
+    assert provider.chamadas == []
+    db.close()
+
+
+def test_job_deletion_cleans_only_owner_scoped_research_records():
+    import hypothesis_engine
+    import continuous_research
+
+    db = _db()
+    owner_job = ra.criar_job(db, "u-x", "owner research")
+    other_owner_job = ra.criar_job(db, "u-y", "other research")
+    other_job = ra.criar_job(db, "u-x", "another research")
+    hypothesis_engine.HypothesisStore(db).save(
+        hypothesis_engine.Hypothesis("h1", "u-x", owner_job["id"], "Possibility")
+    )
+    continuous_research.ResearchContextStore(db).save(
+        "u-x", owner_job["id"], {"objective": owner_job["objetivo"]}
+    )
+    try:
+        ra.excluir_job(db, "u-y", owner_job["id"])
+        raise AssertionError("another owner must not delete the job")
+    except ra.AgentErro as exc:
+        assert exc.codigo == "ausente"
+
+    assert ra.excluir_job(db, "u-x", owner_job["id"])["deleted"] is True
+    assert hypothesis_engine.HypothesisStore(db).list_for_job("u-x", owner_job["id"]) == []
+    assert continuous_research.ResearchContextStore(db).restore_latest(
+        "u-x", owner_job["id"]) is None
+    assert ra.carregar_job(db, "u-y", other_owner_job["id"])["id"] == other_owner_job["id"]
+    assert ra.carregar_job(db, "u-x", other_job["id"])["id"] == other_job["id"]
     db.close()
 
 
@@ -356,14 +598,21 @@ def test_intervencao_estruturada():
     viva = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
     ra.montar_plano(db, viva)
     out = ra.intervir(db, "u-x", viva["id"], "escopo_add", {"texto": "chá verde"})
-    assert out["plano_versao"] == 3 and len(out["adicionadas"]) == 2  # v2 do montar +1
+    assert out["plano_versao"] == 3 and len(out["adicionadas"]) == 3
+    extra = ra.carregar_job(db, "u-x", viva["id"])["plano"][-3:]
+    assert extra[1]["dependencias"] == [extra[0]["id"]]
+    assert extra[2]["dependencias"] == [extra[1]["id"]]
+    assert all(step["replan_reason"] and step["regra_parada"] for step in extra)
     rel = ra.intervir(db, "u-x", viva["id"], "escopo_remove", {"texto": "chá verde"})
     assert rel["removidas"]  # pendentes removidas
     job2 = ra.carregar_job(db, "u-x", viva["id"])
     assert all(s["status"] in ("pendente", "removida") for s in job2["plano"])
     pri = ra.intervir(db, "u-x", viva["id"], "priorizar_dominio", {"dominio": "exemplo.com"})
     assert pri["adicionadas"] == ["prioridade:exemplo.com"]
-    assert ra.carregar_job(db, "u-x", viva["id"])["ajustes"]["prioridades"] == ["exemplo.com"]
+    priority_job = ra.carregar_job(db, "u-x", viva["id"])
+    assert priority_job["ajustes"]["prioridades"] == ["exemplo.com"]
+    assert next(step for step in priority_job["plano"]
+                if step["tipo"] == "busca" and step["status"] == "pendente")["prioridade"] == 1
     met = ra.intervir(db, "u-x", viva["id"], "adicionar_metrica", {"texto": "preço"})
     assert "preço" in ra.carregar_job(db, "u-x", viva["id"])["ajustes"]["metricas"]
     try:
@@ -456,6 +705,14 @@ def test_relay_research_endpoints(tmp_path):
                     "evidencias": [{"id": "e1", "titulo": "T",
                                     "url": "http://e/x", "dominio": "e",
                                     "status": "recuperada"}]}
+        if t == "research_job_report":
+            return {"type": "research_report", "job_id": rid,
+                    "markdown": "# Executive Summary", "source_count": 1}
+        if t == "research_job_hypotheses":
+            return {"type": "research_hypotheses",
+                    "hypotheses": [{"hypothesis_id": "h1", "status": "open"}]}
+        if t == "research_job_delete":
+            return {"type": "research_deleted", "job_id": rid, "deleted": True}
         return {"type": "learn_error", "error": "?", "codigo": "erro"}
 
     with TestClient(server.app) as client:
@@ -464,7 +721,8 @@ def test_relay_research_endpoints(tmp_path):
             vistos = {}
             rr = {k: fake_start for k in ("research_job_start", "research_job_status",
                                           "research_job_cancel", "research_jobs_list",
-                                          "research_job_evidence")}
+                                          "research_job_evidence", "research_job_report",
+                                          "research_job_hypotheses", "research_job_delete")}
             t = _t.Thread(target=_agente_generico, args=(ws, rr, vistos), daemon=True)
             t.start()
             csrf = _login_legacy(client)
@@ -480,6 +738,13 @@ def test_relay_research_endpoints(tmp_path):
             assert client.get("/api/research/jobs", headers=h).json() == {"jobs": [{"id": "rj-1"}]}
             assert client.get("/api/research/evidence?job_id=rj-1", headers=h).json()[
                 "evidencias"][0]["url"] == "http://e/x"
+            assert client.get("/api/research/report?job_id=rj-1", headers=h).json()[
+                "markdown"] == "# Executive Summary"
+            assert client.get("/api/research/report?job_id=rj-1&report_type=unknown",
+                              headers=h).status_code == 422
+            assert client.get("/api/research/hypotheses?job_id=rj-1", headers=h).json()[
+                "hypotheses"][0]["status"] == "open"
+            assert client.delete("/api/research/rj-1", headers=h).json()["ok"] is True
             assert client.post("/api/research/start", json={"objetivo": "oi"}, headers=h).status_code == 422
             assert client.get("/api/research/status?job_id=x", headers=h).status_code == 422
 

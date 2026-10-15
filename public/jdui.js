@@ -16,8 +16,52 @@
   function URL_OK(u) {
     u = S(u, 500);
     if (!/^https?:\/\//.test(u)) return '';
-    try { const p = new URL(u, location.href); return (p.protocol === 'http:' || p.protocol === 'https:') ? p.href : ''; }
+    try {
+      const p = new URL(u, location.href);
+      return (p.protocol === 'http:' || p.protocol === 'https:') && p.hostname &&
+        !p.username && !p.password ? p.href : '';
+    }
     catch (_) { return ''; }
+  }
+  function PROVENANCE(value) {
+    if (value === undefined || value === null) return [];
+    if (!Array.isArray(value) || value.length > 20) throw new JduiErro('sources até 20 referências');
+    const ids = Object.create(null);
+    return value.map(source => {
+      if (!source || typeof source !== 'object') throw new JduiErro('source inválida');
+      const id = S(source.id, 100), title = S(source.title, 160);
+      if (!id || !title || ids[id]) throw new JduiErro('source exige id e título únicos');
+      ids[id] = true;
+      return {
+        id, title, url: URL_OK(source.url), locator: S(source.locator, 120),
+        period: S(source.period, 100), methodology: S(source.methodology, 200),
+        analysis_method: S(source.analysis_method, 80)
+      };
+    });
+  }
+  function renderProvenance(root, sources) {
+    if (!Array.isArray(sources) || !sources.length) return;
+    const box = el('div', 'jdui-provenance');
+    box.appendChild(el('span', '', 'Referências:'));
+    const list = document.createElement('ul');
+    sources.forEach(source => {
+      const item = document.createElement('li');
+      const details = [source.locator, source.period, source.methodology,
+        source.analysis_method ? 'analysis: ' + source.analysis_method : ''].filter(Boolean);
+      const label = source.title + (details.length ? ' — ' + details.join(' · ') : '');
+      if (source.url) {
+        const link = el('a', '', label);
+        link.href = source.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        item.appendChild(link);
+      } else {
+        item.appendChild(el('span', '', label));
+      }
+      list.appendChild(item);
+    });
+    box.appendChild(list);
+    root.appendChild(box);
   }
   function el(tag, cls, text) {
     const e = document.createElement(tag);
@@ -192,7 +236,8 @@
       }
       return {
         type: tipo, title: S(p.title, 160), labels, series,
-        source: S(p.source, 160), x_label: S(p.x_label, 60), y_label: S(p.y_label, 60)
+        source: S(p.source, 160), x_label: S(p.x_label, 60), y_label: S(p.y_label, 60),
+        sources: PROVENANCE(p.sources)
       };
     },
     dashboard(p) {
@@ -208,7 +253,8 @@
         chart = V.chart(p.chart);
         if (chart.series.length > 3) throw new JduiErro('dashboard.chart: máx 3 séries');
       }
-      return { title: S(p.title, 160), metrics, chart, source: S(p.source, 160) };
+      return { title: S(p.title, 160), metrics, chart, source: S(p.source, 160),
+        sources: PROVENANCE(p.sources) };
     },
     compare(p) {
       const cols = p.columns;
@@ -225,7 +271,8 @@
           const win = String(r.melhor || '').toLowerCase();
           if (['', 'a', 'b', '='].indexOf(win) < 0) throw new JduiErro('compare.melhor');
           return { label: S(r.label, 80), a: S(r.a, 120), b: S(r.b, 120), melhor: win };
-        })
+        }),
+        sources: PROVENANCE(p.sources)
       };
     },
     evidencegraph(p) {
@@ -1571,6 +1618,7 @@
       if (props.x_label) svg.appendChild(svgText(W - P.r, H - 8, String(props.x_label).slice(0, 12), 'end', 9));
     }
     if (props.source) box.appendChild(el('div', 'jdui-source', 'Fonte: ' + props.source));
+    renderProvenance(box, props.sources);
     root.appendChild(box);
   };
 
@@ -1588,6 +1636,7 @@
     box.appendChild(grid);
     if (props.chart) R.chart(box, props.chart);
     if (props.source) box.appendChild(el('div', 'jdui-source', 'Fonte: ' + props.source));
+    renderProvenance(box, props.sources);
     root.appendChild(box);
   };
 
@@ -1613,6 +1662,7 @@
     });
     holder.appendChild(t);
     box.appendChild(holder);
+    renderProvenance(box, props.sources);
     root.appendChild(box);
   };
 
