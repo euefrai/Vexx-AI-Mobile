@@ -285,6 +285,9 @@ def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     assert "(!pcOnline && !options.immediate)" in pedido
     assert "const streamRequest = fetch(" in pedido
     assert pedido.index("const streamRequest = fetch(") < pedido.index("options.onStarted()")
+    assert "d.codigo !== 'sem_mensagem'" in pedido
+    assert "syncResult.confirmed_ids || []" in pedido
+    assert "await api('/api/ai', { method: 'POST'" in pedido
     preflight = pedido[:pedido.index("const streamRequest = fetch(")]
     assert "messageById(replyId)" in preflight and "await allMessages()" not in preflight
     assert "await renderMessages()" not in preflight

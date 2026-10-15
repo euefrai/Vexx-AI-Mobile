@@ -1618,7 +1618,35 @@ async function runAIRequest(userRow, options, timing) {
             await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.response_text || cur, created_at: new Date().toISOString(), status: 'synced', model: d.model || modeloAtivo(), latency_s: secs }]);
           } else if (tipo === 'cancelled') {
             await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.partial || cur, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
-          } else if (tipo === 'error') throw new Error(d.error || 'IA indisponível');
+          } else if (tipo === 'error') {
+            if (d.codigo !== 'sem_mensagem') throw new Error(d.error || 'IA indisponível');
+            const syncResult = await api('/api/sync', { method: 'POST', body: JSON.stringify({
+              messages: [{
+                id: userRow.id, conversation_id: userRow.conversation_id,
+                origin: 'mobile', role: 'user', text: userRow.text || '',
+                created_at: userRow.created_at || ''
+              }]
+            }) });
+            if (!(syncResult.confirmed_ids || []).includes(userRow.id)) {
+              throw new Error('A mensagem não foi confirmada pelo computador.');
+            }
+            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({
+              message_id: userRow.id, conversation_id: userRow.conversation_id,
+              model: modeloAtivo(), memory: memoryOn() ? 1 : 0,
+              text: userRow.text || '', created_at: userRow.created_at || '', ...ctx
+            }) });
+            if (!fb.response_text || !fb.response_text.trim()) {
+              throw new Error('Resposta vazia da IA');
+            }
+            cur = fb.response_text;
+            const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
+            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
+              origin: 'mobile', role: 'assistant', text: cur,
+              created_at: new Date().toISOString(), status: 'synced',
+              model: fb.model || modeloAtivo(), latency_s: secs }]);
+            console.warn('[chat-timing] sincronização de compatibilidade antes do retry da IA',
+              userRow.id.slice(-8));
+          }
         }
       }
       if (!cur) {
