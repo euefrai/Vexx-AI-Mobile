@@ -14,9 +14,7 @@ import json
 import os
 import shutil
 import sqlite3
-import subprocess
 import sys
-import tempfile
 import threading
 import time
 import urllib.request
@@ -26,8 +24,10 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from argon2 import PasswordHasher
 from fastapi.testclient import TestClient
+from e2e_processes import LoggedProcess, available_loopback_port
 import hermes_bridge
 import pc_agent
 import server
@@ -76,9 +76,18 @@ class FakeHermes(BaseHTTPRequestHandler):
 
 def sobe_fake():
     srv = ThreadingHTTPServer(("127.0.0.1", 0), FakeHermes)
-    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    srv._serve_thread = threading.Thread(target=srv.serve_forever, daemon=True)
+    srv._serve_thread.start()
     FakeHermes.chamadas = []
     return srv
+
+
+def encerra_fake(srv):
+    srv.shutdown()
+    srv.server_close()
+    srv._serve_thread.join(timeout=5)
+    if srv._serve_thread.is_alive():
+        raise RuntimeError("fake Hermes server thread did not stop")
 
 
 def setup_module():
@@ -128,8 +137,7 @@ def test_bridge_models_e_complete_no_fake():
             assert exc.codigo == "modelo-nao-encontrado"
         assert FakeHermes.chamadas and FakeHermes.chamadas[0]["max_tokens"] >= 1
     finally:
-        srv.shutdown()
-        srv.server_close()
+        encerra_fake(srv)
 
 
 def test_bridge_stream_deltas_e_cancel():
@@ -149,8 +157,7 @@ def test_bridge_stream_deltas_e_cancel():
                                        deve_parar=lambda: True)
         assert r2.get("cancelada") is True
     finally:
-        srv.shutdown()
-        srv.server_close()
+        encerra_fake(srv)
 
 
 def test_bridge_stream_emite_delta_antes_do_fim_da_resposta():
@@ -177,7 +184,8 @@ def test_bridge_stream_emite_delta_antes_do_fim_da_resposta():
             self.wfile.flush()
 
     srv = ThreadingHTTPServer(("127.0.0.1", 0), StreamSSELento)
-    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    serve_thread = threading.Thread(target=srv.serve_forever, daemon=True)
+    serve_thread.start()
     tempos_delta = []
     inicio = time.monotonic()
     try:
@@ -192,6 +200,9 @@ def test_bridge_stream_emite_delta_antes_do_fim_da_resposta():
     finally:
         srv.shutdown()
         srv.server_close()
+        serve_thread.join(timeout=5)
+        if serve_thread.is_alive():
+            raise RuntimeError("streaming fake server thread did not stop")
 
 
 def test_sse_fragmentado_e_done():
@@ -478,7 +489,7 @@ def _aguardar_servico(url, cond, timeout, log_path, nome):
 
 
 @pytest.mark.e2e_real
-def test_e2e_ai_completo_com_processos_reais():
+def test_e2e_ai_completo_com_processos_reais(tmp_path):
     if shutil.which(sys.executable) is None:
         pytest.skip("interpretador indisponível")
     import importlib.util
@@ -486,38 +497,44 @@ def test_e2e_ai_completo_com_processos_reais():
         pytest.skip("uvicorn ausente: e2e exige relay real")
     fake = sobe_fake()
     base = f"http://127.0.0.1:{fake.server_port}/v1"
-    with tempfile.TemporaryDirectory() as tmp:
+    porta = available_loopback_port()
+    try:
         env = dict(os.environ)
         env["JULIA_USERNAME"] = "efrai"
         env["JULIA_PASSWORD_HASH"] = os.environ["JULIA_PASSWORD_HASH"]
         env["JULIA_SESSION_SECRET"] = "a" * 64
         env["JULIA_AGENT_TOKEN"] = "b" * 64
-        env["JULIA_RELAY_URL"] = "http://127.0.0.1:8941"
-        env["JULIA_SQLITE_PATH"] = str(Path(tmp) / "ai.sqlite3")
+        env["JULIA_RELAY_URL"] = f"http://127.0.0.1:{porta}"
+        env["JULIA_SQLITE_PATH"] = str(tmp_path / "ai.sqlite3")
         env["HERMES_PROXY_URL"] = base
         env["JULIA_AI_MODEL"] = "fake-model"
         raiz = str(Path(__file__).resolve().parents[1])
-        fsrv = open(Path(tmp) / "relay.log", "w", encoding="utf-8", errors="replace")
-        srv = subprocess.Popen([sys.executable, "-m", "uvicorn", "server:app",
-                                "--host", "127.0.0.1", "--port", "8941"],
-                               cwd=raiz, env=env, stdout=fsrv,
-                               stderr=subprocess.STDOUT)
-        try:
-            _aguardar_servico("http://127.0.0.1:8941/api/diag", lambda c: True,
-                              30.0, Path(tmp) / "relay.log", "relay")
-            fagt = open(Path(tmp) / "agent.log", "w", encoding="utf-8", errors="replace")
-            agt = subprocess.Popen([sys.executable, "pc_agent.py"], cwd=raiz, env=env,
-                                   stdout=fagt, stderr=subprocess.STDOUT)
-            try:
-                _aguardar_servico("http://127.0.0.1:8941/api/diag",
-                                  lambda c: c.get("pc_online") is True,
-                                  30.0, Path(tmp) / "agent.log", "agente")
+        relay_log = tmp_path / "relay.log"
+        agent_log = tmp_path / "agent.log"
+        with LoggedProcess(
+            [sys.executable, "-m", "uvicorn", "server:app",
+             "--host", "127.0.0.1", "--port", str(porta)],
+            relay_log, cwd=raiz, env=env,
+        ):
+            _aguardar_servico(
+                f"http://127.0.0.1:{porta}/api/diag", lambda c: True,
+                30.0, relay_log, "relay",
+            )
+            with LoggedProcess(
+                [sys.executable, "pc_agent.py"],
+                agent_log, cwd=raiz, env=env,
+            ):
+                _aguardar_servico(
+                    f"http://127.0.0.1:{porta}/api/diag",
+                    lambda c: c.get("pc_online") is True,
+                    30.0, agent_log, "agente",
+                )
                 cj = http.cookiejar.CookieJar()
                 op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 
                 def call(path, data=None, csrf=None):
                     req = urllib.request.Request(
-                        "http://127.0.0.1:8941" + path,
+                        f"http://127.0.0.1:{porta}" + path,
                         data=json.dumps(data).encode() if data is not None else None,
                         headers={"Content-Type": "application/json"})
                     if csrf:
@@ -539,14 +556,20 @@ def test_e2e_ai_completo_com_processos_reais():
                 assert r2["response_text"] == "RESPOSTA_FAKE"  # replay idempotente
                 assert len(FakeHermes.chamadas) == n_antes + 1  # sem rechamada
                 con = sqlite3.connect(env["JULIA_SQLITE_PATH"])
-                rows = con.execute("SELECT id, role, text FROM messages ORDER BY created_at").fetchall()
-                con.close()
+                try:
+                    rows = con.execute(
+                        "SELECT id, role, text FROM messages ORDER BY created_at"
+                    ).fetchall()
+                finally:
+                    con.close()
                 assert ("ai-user-001-r1", "assistant", "RESPOSTA_FAKE") in rows
-                # Stream SSE real
                 req = urllib.request.Request(
-                    "http://127.0.0.1:8941/api/ai/stream?message_id=ai-user-002&conversation_id=conv-ai",
+                    f"http://127.0.0.1:{porta}/api/ai/stream"
+                    "?message_id=ai-user-002&conversation_id=conv-ai",
                     headers={"X-CSRF-Token": csrf})
-                assert call("/api/sync", {"messages": [umsg("ai-user-002")]}, csrf)["confirmed_ids"] == ["ai-user-002"]
+                assert call(
+                    "/api/sync", {"messages": [umsg("ai-user-002")]}, csrf
+                )["confirmed_ids"] == ["ai-user-002"]
                 with op.open(req, timeout=60) as r:
                     raw = b""
                     while True:
@@ -559,20 +582,17 @@ def test_e2e_ai_completo_com_processos_reais():
                         if any("event: done" in p or "event: error" in p
                                or "event: cancelled" in p for p in completos):
                             break
-                    eventos = [p for p in raw.decode("utf-8").split("\n\n") if p.strip()]
+                    eventos = [
+                        p for p in raw.decode("utf-8").split("\n\n") if p.strip()
+                    ]
                 deltas = [e for e in eventos if "event: delta" in e]
                 assert len(deltas) == 2, eventos
-                assert any("event: done" in e and "Olá, sou a Júlia." in e for e in eventos), eventos
-            finally:
-                agt.terminate()
-                agt.wait(timeout=15)
-                fagt.close()
-        finally:
-            srv.terminate()
-            srv.wait(timeout=15)
-            fsrv.close()
-    fake.shutdown()
-    fake.server_close()
+                assert any(
+                    "event: done" in e and "Olá, sou a Júlia." in e
+                    for e in eventos
+                ), eventos
+    finally:
+        encerra_fake(fake)
 
 
 # ── FASE 3 (V4.3.1): fallback, erros e circuit breaker ──────────────
@@ -723,8 +743,7 @@ def test_stream_vazio_nunca_e_sucesso():
             assert exc.codigo == "vazia"
     finally:
         FakeHermes.stream_deltas = orig
-        glyph.shutdown()
-        glyph.server_close()
+        encerra_fake(glyph)
 
 
 def test_fallbacks_config_e_modelos_tentativa(monkeypatch):

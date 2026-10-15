@@ -78,8 +78,14 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   exportação PDF permanecem BLOQUEADOS/AUSENTES; suíte global tem falha intermitente
   de limpeza de logs de E2E no Windows. Ver [RELATORIO_JULIA_4.8.md](../RELATORIO_JULIA_4.8.md).
 
-## V4.9 — RESEARCH QUALITY LAB 3.0 (futuro)
-- Benchmarks ampliados + revisão humana; E2E com LLM disponível; aparelho físico.
+## V4.9 — RESEARCH QUALITY LAB 3.0 (parcial; fundação reproduzível)
+- Dataset local sintético versionado + recuperação real do pipeline documental;
+  métricas P@K/Recall@K/MRR/NDCG, citações por etapa e checkpoints 10/25/50.
+- Hardening dos E2Es Windows; três execuções passaram com 312 testes cada,
+  excluindo um teste afetado por edição local não commitada de UI. Avaliação
+  factual/citações semântica com revisão independente, dashboard administrativo,
+  qualidade web/modos e medições de CPU/RAM/tokens continuam pendentes.
+- Hermes real permanece BLOQUEADO; ver `RELATORIO_JULIA_4.9.md`.
 
 ## V5.x — CONTINUIDADE COGNITIVA (futuro)
 - Continuidade de contexto, memória avançada, personalidade e planejamento,
