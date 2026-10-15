@@ -1475,7 +1475,7 @@ function aiLocalContext(text) {
   return context;
 }
 async function requestAI(userRow) {
-  if (!authenticated || !pcOnline || !db || aiAbort) return;
+  if (!authenticated || !pcOnline || !db || aiAbort || aiRequests.size) return;
   const replyId = userRow.id + '-r1';
   if (aiRequests.has(replyId)) return;
   aiRequests.add(replyId);
@@ -1489,7 +1489,12 @@ async function requestAI(userRow) {
   }
   const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
-  if (userRow.conversation_id === activeConversation) await renderMessages();
+  try {
+    if (userRow.conversation_id === activeConversation) await renderMessages();
+  } catch (err) {
+    aiRequests.delete(replyId);
+    throw err;
+  }
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Júlia está escrevendo… 0s');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
