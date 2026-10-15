@@ -63,7 +63,7 @@
 
       <div class="drawer-profile" id="drawerProfile">
         <div class="profile-avatar">✦</div>
-        <div><strong>Conta</strong><small></small></div>
+        <button class="drawer-item profile-settings" data-tab="settings" type="button" aria-label="Ajustes e conta"><span><strong>Conta</strong><small></small></span><svg class="icon"><use href="#i-settings"/></svg></button>
         <button class="session-tool" id="drawerLogout" type="button" title="Sair" aria-label="Sair">⏻</button>
       </div>
 
@@ -81,7 +81,7 @@
       </div>
       <div id="projectList" class="project-list" aria-label="Projetos"></div>
       <div class="drawer-caprow">
-        <p class="drawer-caption">CONVERSAS <span id="sessionCount">0</span></p>
+        <p class="drawer-caption">Sem projeto <span id="sessionCount">0</span></p>
         <button class="mini-toggle" id="archivedToggle" type="button" aria-pressed="false" aria-label="Mostrar conversas arquivadas" title="Mostrar conversas arquivadas"><svg class="icon"><use href="#i-archive"/></svg></button>
       </div>
       <div class="session-list" id="sessionList" aria-label="Conversas sem projeto"></div>
@@ -89,20 +89,17 @@
 
       <p class="drawer-caption">Seu espaço</p>
       <nav class="drawer-nav" aria-label="Navegação">
-        <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Conversa</button>
         <button class="drawer-item" data-tab="documents" type="button"><svg class="icon"><use href="#i-archive"/></svg> Documentos <span class="drawer-hint" id="docCount">0</span></button>
         <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
-        <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
         <button class="drawer-item" data-tab="estudos" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Meus Estudos</button>
         <button class="drawer-item" data-tab="settings" data-scroll="memory" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Memória</button>
       </nav>
 
-      <nav class="drawer-nav" aria-label="Conta">
-        <button class="drawer-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg> Ajustes e conta</button>
-      </nav>
 
       <div class="drawer-foot">
         <details class="drawer-connection"><summary>Conexão e memória</summary>
+        <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
+
         <div class="memory-card">
           <svg class="icon"><use href="#i-sparkle"/></svg>
           <div><strong>Memória entre conversas</strong><span id="memoryStatus">Ativada neste aparelho</span></div>
@@ -214,7 +211,7 @@
 
         <div class="access-card">
           <div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
-          <div><strong>Controle protegido</strong><span id="accessNote">Toque e teclado exigem JULIA_REMOTE=1 no PC.</span></div>
+          <div><strong>Controle protegido</strong><span id="accessNote">Ative o controle remoto no agente do computador para usar toque e teclado.</span></div>
         </div>
       </section>
 
@@ -402,6 +399,7 @@
       </section>
 
       <div class="bottom-dock">
+        <div id="uploadStatus" class="upload-status" role="status" hidden></div>
         <div class="gen-bar" id="genBar" hidden>
           <span class="gen-dots"><i></i><i></i><i></i></span>
           <span id="genLabel">Vexx AI está escrevendo… 0s</span>
@@ -416,7 +414,7 @@
             <svg class="icon"><use href="#i-send"/></svg>
           </button>
         </form>
-        <div class="composer-hint"><span id="charCount"></span></div>
+        <div class="composer-hint"><span id="charCount"></span><span class="keyboard-hint">Enter para enviar · Shift + Enter para nova linha</span></div>
       </div>
 
       <div class="toast" id="toast" role="status" aria-live="polite"></div>

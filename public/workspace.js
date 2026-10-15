@@ -93,7 +93,11 @@
     return {load, change, trackSession, sync,
       get: (kind, id) => cache.get(kind + ':' + id),
       list: kind => [...cache.values()].filter(r => r.kind === kind && !r.deleted),
-      overlay: s => Object.assign({}, s, cache.get('chat:' + s.id) || {})};
+      overlay: s => {
+        const meta = cache.get('chat:' + s.id);
+        return Object.assign({}, s, meta || {}, {updated_at:
+          meta && meta.updated_at > (s.updated_at || '') ? meta.updated_at : s.updated_at});
+      }};
   }
   global.VexxWorkspace = {create, newer};
 })(typeof window === 'undefined' ? globalThis : window);

@@ -40,13 +40,36 @@ function fmtTime(iso) { try { const d = new Date(iso); return d.toLocaleTimeStri
 /* ----- Drawer ----- */
 const drawer = $('drawer'), scrim = $('drawerScrim');
 function setDrawer(open) {
+  const desktop = window.innerWidth >= 900;
+  open = desktop || open;
   drawer.classList.toggle('open', open);
   drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-  scrim.hidden = window.innerWidth >= 900 ? true : !open;
+  drawer.inert = !open;
+  document.querySelector('.main-col').inert = open && !desktop;
+  $('drawerOpen').setAttribute('aria-expanded', String(open));
+  scrim.hidden = desktop || !open;
 }
-$('drawerOpen').addEventListener('click', () => setDrawer(true));
-$('drawerClose').addEventListener('click', () => setDrawer(false));
-scrim.addEventListener('click', () => setDrawer(false));
+$('drawerOpen').addEventListener('click', () => { setDrawer(true); $('drawerClose').focus(); });
+function closeDrawer() { setDrawer(false); if (window.innerWidth < 900) $('drawerOpen').focus(); }
+$('drawerClose').addEventListener('click', closeDrawer);
+scrim.addEventListener('click', closeDrawer);
+window.matchMedia('(min-width:900px)').addEventListener('change', e => setDrawer(e.matches));
+document.addEventListener('keydown', e => {
+  if (window.innerWidth >= 900 || !drawer.classList.contains('open') || $('organizeDialog').open) return;
+  if (e.key === 'Escape') { e.preventDefault(); closeDrawer(); }
+  if (e.key === 'Tab') {
+    const items = [...drawer.querySelectorAll('button,input,select,summary')].filter(el => !el.disabled && el.getClientRects().length);
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+function fitViewport() {
+  document.documentElement.style.setProperty('--app-height', Math.round(window.visualViewport?.height || window.innerHeight) + 'px');
+}
+window.visualViewport?.addEventListener('resize', fitViewport);
+window.addEventListener('resize', fitViewport);
+fitViewport();
 
 /* ----- Nav ----- */
 const navItems = [...document.querySelectorAll('.drawer-item')];
@@ -318,7 +341,7 @@ async function resolveActiveConversation() {
   return newId();
 }
 async function healSessions() {
-  // titula sessões "Nova conversa" que já têm mensagens + apaga vazias órfãs
+  // Keep intentionally empty chats (including projects); only infer missing titles.
   try {
     const all = ownRows(await allMessages());
     const firstByConv = {};
@@ -347,12 +370,12 @@ async function ensureSession(id, title) {
   await putSession(s);
   return s;
 }
-async function touchSession(id, hint) {
+async function touchSession(id, hint, activityAt) {
   const list = await ownSessions();
-  const now = new Date().toISOString();
+  const now = activityAt || new Date().toISOString();
   let s = list.find(x => x.id === id);
   if (!s) s = { id, title: hint || 'Nova conversa', created_at: now, updated_at: now };
-  else { s.updated_at = now; if (s.title === 'Nova conversa' && hint) s.title = hint; }
+  else { s.updated_at = now > (s.updated_at || '') ? now : s.updated_at; if (s.title === 'Nova conversa' && hint) s.title = hint; }
   await putSession(s);
 }
 function titleFrom(t) { return String(t || '').replace(/\s+/g, ' ').trim().slice(0, 44) || 'Nova conversa'; }
@@ -514,7 +537,7 @@ function renderMarkdown(text) {
       const wcode = widgets[wi];
       html.push('<div class="widget"><div class="widget-bar"><span>▶ Mini app interativo</span>'
         + '<button class="widget-code-btn" data-widget="' + wi + '" type="button">Ver código</button></div>'
-        + '<iframe class="widget-frame" sandbox="allow-scripts" loading="lazy" title="Mini app da Júlia" srcdoc="' + srcdocEsc(wcode) + '"></iframe>'
+        + '<iframe class="widget-frame" sandbox="allow-scripts" loading="lazy" title="Mini app do Vexx" srcdoc="' + srcdocEsc(wcode) + '"></iframe>'
         + '<pre class="widget-code" data-widget-code="' + wi + '" hidden><code>' + esc(wcode) + '</code></pre></div>');
       continue;
     }
@@ -581,9 +604,9 @@ function appendMessage(row) {
   const wrap = document.createElement('div');
   wrap.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
   wrap.dataset.mid = row.id;
-  if (type === 'ai') { const ic = document.createElement('div'); ic.className = 'bubble-avatar'; ic.textContent = '✦'; wrap.appendChild(ic); }
+  if (type === 'ai') { const ic = document.createElement('div'); ic.className = 'bubble-avatar'; ic.textContent = 'v.'; ic.setAttribute('aria-hidden', 'true'); wrap.appendChild(ic); }
   const content = document.createElement('div'); content.className = 'message-content';
-  if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Júlia'; content.appendChild(s); }
+  if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
     bubble.innerHTML = '<span class="typing">digitando <span class="typing-indicator"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></span></span>';
@@ -678,7 +701,8 @@ async function renderMessages() {
   conversation.replaceChildren();
   conversation.classList.toggle('is-empty', rows.length === 0);
   const header = document.createElement('div'); header.className = 'chat-date';
-  header.textContent = (sessionsCache.find(s => s.id === activeConversation)?.title || 'CONVERSA') + ' · HOJE';
+  const date = rows.length ? new Date(rows[0].created_at) : new Date();
+  header.textContent = date.toLocaleDateString('pt-BR', {day:'numeric', month:'long'});
   conversation.appendChild(header);
   if (!rows.length) {
     const w = document.createElement('div'); w.className = 'empty-chat';
@@ -698,6 +722,7 @@ async function renderMessages() {
   $('statTasks').textContent = String(all.length);
   $('statSessions').textContent = String(sessionsCache.length || new Set(all.map(m => m.conversation_id)).size || 1);
   const cur = sessionsCache.find(s => s.id === activeConversation);
+  if ($('page-chat').hidden) return;
   $('chatTitle').textContent = cur ? cur.title : 'Nova conversa';
   const project = cur && workspace && workspace.get('project', cur.project_id);
   $('chatSubtitle').textContent = (project ? project.title : 'Sem projeto') + (cur?.archived ? ' · Arquivada' : '') + (rows.length ? ' · ' + rows.length + ' mensagens' : '');
@@ -1408,7 +1433,11 @@ async function syncAndRefresh() {
     if (adds.length) {
       await storeMessages(adds);
       const convs = [...new Set(adds.map(a => a.conversation_id))];
-      for (const c of convs) await touchSession(c);
+      for (const c of convs) {
+        const rows = adds.filter(m => m.conversation_id === c).sort((a,b) => a.created_at.localeCompare(b.created_at));
+        const first = rows.find(m => m.role === 'user');
+        await touchSession(c, first ? titleFrom(first.text) : undefined, rows[rows.length - 1]?.created_at);
+      }
     }
     await renderSessions($('sessionSearch').value);
     await renderMessages();
@@ -1451,7 +1480,7 @@ function setGenBar(on, label) {
 function tickGen() {
   const s = Math.floor((Date.now() - aiStartT) / 1000);
   const ttft = aiFirstTokenT ? ' · 1º token ' + ((aiFirstTokenT - aiStartT) / 1000).toFixed(1) + 's' : '';
-  $('genLabel').textContent = 'Júlia está escrevendo… ' + s + 's' + ttft;
+  $('genLabel').textContent = 'Vexx está escrevendo… ' + s + 's' + ttft;
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
 function aiLocalContext(text) {
@@ -1494,7 +1523,7 @@ async function requestAI(userRow, options = {}) {
   const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
   aiStartT = Date.now(); aiFirstTokenT = 0;
-  setGenBar(true, 'Júlia está escrevendo… 0s');
+  setGenBar(true, 'Vexx está escrevendo… 0s');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
   const ctx = aiLocalContext(userRow.text || '');
   const qs = new URLSearchParams(Object.assign({
@@ -1763,7 +1792,7 @@ async function sendMessage(raw) {
   try {
     await storeMessages([row]);
     await touchSession(activeConversation, titleFrom(value));
-    messageInput.value = ''; autoresize(); $('charCount').textContent = '0 / 10000';
+    messageInput.value = ''; autoresize(); $('charCount').textContent = '';
     if (authenticated && navigator.onLine) {
       requestAI(row, { immediate: true, onStarted: syncAndRefresh })
         .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
@@ -1785,8 +1814,8 @@ async function newChat(projectId = '') {
   await renderSessions($('sessionSearch').value);
   await renderMessages();
   navigate('chat');
-  messageInput.focus();
   if (window.innerWidth < 900) setDrawer(false);
+  messageInput.focus();
   showToast(projectId ? 'Conversa criada no projeto' : 'Nova conversa');
 }
 $('newChatCta').addEventListener('click', newChat);
@@ -1935,17 +1964,20 @@ $('fileInput').addEventListener('change', async e => {
   e.target.value = '';
   if (!f) return;
   if (f.size > 15 * 1024 * 1024) { showToast('Arquivo maior que 15MB'); return; }
-  showToast('Lendo ' + f.name + '…');
+  const uploadConversation = activeConversation;
+  $('attachButton').disabled = true;
+  $('uploadStatus').hidden = false;
+  $('uploadStatus').textContent = 'Enviando e lendo ' + f.name + '…';
   try {
     const fd = new FormData();
     fd.append('file', f, f.name);
-    fd.append('conversation_id', activeConversation);
+    fd.append('conversation_id', uploadConversation);
     const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.detail || ('Erro ' + res.status));
-    const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user', text: '📎 Anexei o documento "' + data.name + '" (' + data.chars + ' caracteres em ' + data.chunks + ' trechos).', created_at: new Date().toISOString(), status: 'pending', want_ai: false };
+    const row = { id: newId(), conversation_id: uploadConversation, origin: 'mobile', role: 'user', text: '📎 Anexei o documento "' + data.name + '" (' + data.chars + ' caracteres em ' + data.chunks + ' trechos).', created_at: new Date().toISOString(), status: 'pending', want_ai: false };
     await storeMessages([row]);
-    await touchSession(activeConversation);
+    await touchSession(uploadConversation, titleFrom(f.name));
     await syncAndRefresh();
     await renderSessions($('sessionSearch').value);
     await renderMessages();
@@ -1953,6 +1985,7 @@ $('fileInput').addEventListener('change', async e => {
     scrollChat(true);
     showToast('Documento lido. Peça resumo, tópicos ou pergunte sobre ele.');
   } catch (err) { showToast('Falha no upload: ' + (err.message || '')); }
+  finally { $('attachButton').disabled = false; $('uploadStatus').hidden = true; }
 });
 
 /* ----- Documentos ----- */
@@ -1969,7 +2002,7 @@ async function renderDocs() {
     const docs = r.documents || [];
     $('docCount').textContent = String(docs.length);
     box.replaceChildren();
-    if (!docs.length) { box.innerHTML = '<div class="doc-empty">Nenhum ainda. Toque em + para anexar.</div>'; return; }
+    if (!docs.length) { box.innerHTML = '<div class="doc-empty">Nenhum documento ainda. Abra uma conversa e use o botão + para anexar.</div>'; return; }
     docs.slice(0, 20).forEach(d => {
       const el = document.createElement('div');
       el.className = 'doc-item';

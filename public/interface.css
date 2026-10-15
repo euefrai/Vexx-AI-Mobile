@@ -22,7 +22,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .app,.app-wide {width:100%;height:var(--app-height);min-height:0;max-height:var(--app-height);margin:0;
   padding:0;border:0;border-radius:0;box-shadow:none;background:var(--bg);overflow:hidden;isolation:isolate}
 .main-col {height:100%;min-height:0;min-width:0;overflow:hidden}
-.drawer {width:268px;height:100%;min-height:0;padding:20px 14px 12px;gap:8px;background:#111113;
+.drawer {width:268px;height:100%;min-height:0;padding:16px 14px 12px;gap:5px;background:#111113;
   overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border-right:1px solid var(--line)}
 .drawer-head {min-height:40px;margin-bottom:8px}
 .brand {gap:10px}
@@ -38,6 +38,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   background:transparent;border-radius:0;gap:10px;flex-shrink:0}
 .drawer-profile strong {font-size:13px;font-weight:500}
 .drawer-profile small {font-size:12px}
+.drawer-profile .profile-settings {flex:1;min-width:0;width:auto;padding:2px;gap:8px;justify-content:space-between;color:var(--text);background:none}
+.profile-settings span {min-width:0;text-align:left}
+.profile-settings strong,.profile-settings small {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .profile-avatar,.drawer-profile .profile-avatar {background:var(--surface-3);border-radius:50%;box-shadow:none;color:var(--text)}
 .new-chat-cta {background:var(--surface-2);border:1px solid var(--line-strong);border-radius:10px;
   font-size:14px;font-weight:500;justify-content:flex-start;padding:11px 12px;flex-shrink:0}
@@ -82,7 +85,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .drawer-model {padding:6px;font-size:12px}
 .model-select {max-width:180px;background:var(--surface-2);font-size:12px;min-height:32px;border:1px solid var(--line);border-radius:7px}
 .drawer-status {font-size:12px;padding:7px 6px}
-.workspace-status {font-size:11px;color:var(--muted);margin:4px 8px;line-height:1.5}
+.workspace-status {font-size:11px;color:var(--muted);margin:2px 8px;line-height:1.5}
 .app-header {height:auto;min-height:64px;flex-shrink:0;padding:10px 24px;padding-top:calc(10px + var(--safe-top));
   border-bottom:1px solid var(--line);background:var(--bg);gap:8px}
 .chat-title-wrap strong {font-size:14px;font-weight:500}
@@ -139,6 +142,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .send-button {color:var(--bg);background:var(--text)}
 #messageInput:not(:placeholder-shown)+.send-button,.send-button:hover {color:var(--bg);background:var(--purple)}
 .composer-hint {font-size:11px;min-height:16px;justify-content:center;margin:8px 0 0;color:var(--muted)}
+.upload-status {font-size:13px;color:var(--text-2);padding:8px 4px 12px;overflow-wrap:anywhere}
 .gen-bar {border:0;background:transparent;font-size:13px;padding:4px 0 12px;margin:0}
 #stopGen {min-height:36px;font-size:12px}
 .scroll-fab {right:24px;bottom:12px;width:40px;height:40px;background:var(--surface-2);border:1px solid var(--line-strong);color:var(--text);border-radius:50%}
@@ -212,3 +216,4 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:360px){.app-header{padding-left:8px;padding-right:8px}.conversation{padding:20px 16px}.suggestion{padding:9px}.organize-dialog{padding:18px}.dialog-actions{gap:5px}.empty-chat h1{font-size:24px}}
 @media(max-height:650px){.drawer{gap:4px;padding-top:10px}.drawer-head{margin:0}.sidebar-library{min-height:130px}.conversation.is-empty{padding-top:12px;padding-bottom:12px}.empty-chat{padding:8px}.empty-chat .welcome-mark{font-size:32px;margin-bottom:8px}.suggestions{padding-bottom:8px}.login-overlay{align-items:flex-start}.login-card{margin:auto}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.project-toggle svg{transition:none}}
+@media(pointer:coarse){.keyboard-hint{display:none}}

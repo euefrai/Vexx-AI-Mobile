@@ -1839,7 +1839,8 @@ def _apagar_todos_dados(db, owner: str) -> int:
         for tabela, col in (("messages", "owner_id"), ("ai_requests", "owner_id"),
                             ("memories", "owner_id"), ("memory_facts", "owner_id"),
                             ("documents", "owner_id"), ("doc_chunks", "owner_id"),
-                            ("ui_state", "owner_id"), ("memory_events", "owner_id")):
+                            ("ui_state", "owner_id"), ("memory_events", "owner_id"),
+                            ("workspace_records", "owner_id")):
             try:
                 cur = db.execute(f"DELETE FROM {tabela} WHERE {col}=?", (owner,))
                 total += cur.rowcount or 0

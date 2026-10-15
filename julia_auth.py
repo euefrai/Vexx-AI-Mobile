@@ -363,7 +363,7 @@ def excluir_usuario(db, ator_uid: str, alvo_uid: str) -> int:
                             ("memories", "owner_id"), ("memory_facts", "owner_id"),
                             ("documents", "owner_id"), ("doc_chunks", "owner_id"),
                             ("ui_state", "owner_id"), ("memory_events", "owner_id"),
-                            ("memories_fts", "owner_id")):
+                            ("memories_fts", "owner_id"), ("workspace_records", "owner_id")):
             try:
                 cur = db.execute(f"DELETE FROM {tabela} WHERE {col}=?", (alvo_uid,))
                 total += cur.rowcount or 0

@@ -2,6 +2,7 @@
 let openProjects = new Set();
 let organizedTarget = null;
 let libraryRenderVersion = 0;
+let libraryActiveId = null;
 
 function libraryIcon(name) {
   return '<svg class="icon" aria-hidden="true"><use href="#i-' + name + '"/></svg>';
@@ -20,6 +21,11 @@ async function renderSessions(filter) {
   }
   if (version !== libraryRenderVersion) return;
   sessionsCache = sessions;
+  if (libraryActiveId !== activeConversation) {
+    const active = sessions.find(s => s.id === activeConversation);
+    if (active?.project_id) openProjects.add(active.project_id);
+    libraryActiveId = activeConversation;
+  }
   const hay = new Map();
   all.forEach(m => hay.set(m.conversation_id,
     ((hay.get(m.conversation_id) || '') + ' ' + m.text).toLowerCase().slice(-20000)));
@@ -68,7 +74,7 @@ async function renderSessions(filter) {
     toggle.innerHTML = libraryIcon('arrow') + '<span></span><small></small>';
     toggle.querySelector('span').textContent = p.title;
     toggle.querySelector('small').textContent = String(children.length);
-    toggle.setAttribute('aria-label', p.title + ', ' + children.length + ' conversas');
+    toggle.setAttribute('aria-label', p.title + ', ' + children.length + (children.length === 1 ? ' conversa' : ' conversas'));
     toggle.addEventListener('click', () => {
       openProjects.has(p.id) ? openProjects.delete(p.id) : openProjects.add(p.id);
       renderSessions($('sessionSearch').value);
