@@ -135,6 +135,26 @@ def test_lesson_valido_e_invalido():
     assert jdui.validar_mensagem(ruim)[0] is False
 
 
+def test_evidencegraph_valido_e_limites():
+    base = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "evidencegraph",
+         "props": {"title": "Grafo",
+                   "nodes": [{"id": "c1", "label": "Café faz bem", "kind": "claim",
+                              "estado": "UNVERIFIED"},
+                             {"id": "e1", "label": "Estudo", "kind": "evidence",
+                              "detalhe": "trecho"}],
+                   "edges": [{"from": "e1", "to": "c1", "label": "MENTIONS"},
+                             {"from": "e1", "to": "zz", "label": "MENTIONS"}]}}]}
+    ok, norm, _ = jdui.validar_mensagem(base)
+    assert ok
+    props = norm["blocks"][0]["props"]
+    assert len(props["edges"]) == 1  # aresta p/ nó inexistente é descartada
+    ruim = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "evidencegraph",
+         "props": {"nodes": [{"id": "x", "label": "X", "kind": "nave"}]}}]}
+    assert jdui.validar_mensagem(ruim)[0] is False
+
+
 def test_limites_e_profundidade():
     grande = {"version": "JULIA-ui-message/v1",
               "blocks": [{"type": "text", "content": "x"}] * 30}

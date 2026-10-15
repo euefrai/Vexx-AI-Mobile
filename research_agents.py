@@ -389,7 +389,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
     base = etapa["alvo"]
     variacao = " ".join(w for w in base.split() if len(w) > 4 and w not in ("sobre", "para"))
     consultas = [base] + ([variacao] if variacao and variacao != base else [])
-    achados = []
+    achados, falhas = [], []
     for q in consultas[:2]:
         if q in vistas:
             continue
@@ -398,10 +398,16 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
         emitir(db, job["id"], job["owner"], "search", "search_completed", "ok",
                f"Busca '{q[:60]}': {len(encontrados)} achados.",
                {"provedor": info["provedor"], "falhas": info["erros"]})
+        falhas.extend(info["erros"])
         for a in encontrados:
             if a["url"] not in {x["url"] for x in achados}:
                 achados.append(a)
     job["usados"]["buscas"] = job["usados"].get("buscas", 0) + len(consultas[:2])
+    if not achados:
+        job["erros"].append(f"busca '{base[:60]}': sem resultados" +
+                            (f" ({len(falhas)} falhas de provedor)" if falhas else ""))
+        emitir(db, job["id"], job["owner"], "search", "search_completed", "alerta",
+               f"Busca '{base[:60]}' sem resultados.", {})
     return achados
 
 
@@ -527,7 +533,8 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
             pass
         vereditos.append({"afirmacao": c["texto"], "estado": res["estado"],
                           "cobertura_lexica": res.get("cobertura_lexica", 0.0),
-                          "metodo": res.get("metodo", "")})
+                          "metodo": res.get("metodo", ""),
+                          "condicoes_ausentes": res.get("condicoes_ausentes", [])})
         emitir(db, job["id"], job["owner"], "checker", "claim_verified", "ok",
                f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}", {})
     emitir(db, job["id"], job["owner"], "checker", "claim_verification_completed", "ok",
@@ -736,6 +743,30 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                 continue
             ti = (evidencias[i].get("trecho", "") or "").lower()
             tj = (evidencias[j].get("trecho", "") or "").lower()
+            qi = _eg.extrair_quantidades(ti)
+            qj = _eg.extrair_quantidades(tj)
+            mesmos = [a for a in qi for b in qj
+                      if (a.get("unidade") or "") == (b.get("unidade") or "")
+                      and a.get("unidade") and a["valor"] != b["valor"]]
+            if mesmos:
+                a, b = mesmos[0], [x for x in qj if x.get("unidade") == mesmos[0].get("unidade")
+                                   and x["valor"] != mesmos[0]["valor"]][0]
+                inv = {"tipo": "valor_divergente", "status": "em_aberto",
+                       "explicacao": f"Mesma unidade, valores distintos ({a['valor']} × {b['valor']}). "
+                                     "Verificar metodologia, data e condições.",
+                       "follow_up": ["metodologia medição", "data atualização dado"],
+                       "entre": [evidencias[i]["id"], evidencias[j]["id"]]}
+                invs.append(inv)
+                try:
+                    na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])
+                    nb = _eg.no_id("evidence", job["id"], evidencias[j]["id"])
+                    _eg.ligar(db, job["owner"], job["id"], na, nb, "CONTRADICTS",
+                              "contradicao", inv["tipo"])
+                except Exception:
+                    pass
+                emitir(db, job["id"], job["owner"], "contradiction", "contradiction_investigated",
+                       "alerta", f"Divergência valor_divergente: valores distintos.", {})
+                continue
             ni = any(n in ti for n in research.NEGACOES)
             nj = any(n in tj for n in research.NEGACOES)
             if ni == nj:

@@ -180,9 +180,20 @@ def extrair_afirmacoes_v2(texto: str, teto: int = 12) -> list:
             continue
         if not (re.search(r"\d", s) or re.search(r"\b[A-ZÀ-Ú][a-zà-ú]{3,}\b", s)):
             continue
-        partes = re.split(r"\s+e\s+|\s+além disso,?\s+|;\s*", s)
-        for parte in partes:
+        grupos, atual = [], ""
+        for parte in re.split(r"\s+e\s+|\s+além disso,?\s+|;\s*", s):
             parte = parte.strip()
+            if not parte:
+                continue
+            if atual and len(parte) < 40:
+                atual = atual + " e " + parte
+            else:
+                if atual:
+                    grupos.append(atual)
+                atual = parte
+        if atual:
+            grupos.append(atual)
+        for parte in grupos:
             if len(parte) < 40:
                 continue
             cond = {"comparado_a": "", "metrica": "", "quantidades": extrair_quantidades(parte),
@@ -298,7 +309,9 @@ def verificar_claim(claim: dict, evidencias: list) -> dict:
             for x in eqs:
                 if x["valor"] == q["valor"] and (x["unidade"] or "") == (q["unidade"] or ""):
                     return {"estado": "SUPPORTED", "metodo": "quantidade-exata",
-                            "evidencia": e.get("id", ""), "cobertura_lexica": 1.0}
+                            "evidencia": e.get("id", ""), "cobertura_lexica": 1.0,
+                            "condicoes_ausentes": _faltas({"texto": claim["texto"],
+                                                           "condicoes": cond})}
     neg = any("não " in (e.get("trecho", "") or "").lower() or "nunca " in
               (e.get("trecho", "") or "").lower() for e in evidencias or [])
     if evidencias and not neg:
@@ -306,18 +319,24 @@ def verificar_claim(claim: dict, evidencias: list) -> dict:
         cov = _cob(claim["texto"], [e.get("trecho", "") for e in evidencias])
         if cov >= 0.25:
             return {"estado": "PARTIALLY_SUPPORTED", "metodo": "lexico-provisorio",
-                    "evidencia": "", "cobertura_lexica": cov}
+                    "evidencia": "", "cobertura_lexica": cov,
+                    "condicoes_ausentes": _faltas(claim)}
     if not evidencias:
         return {"estado": "INSUFFICIENT_EVIDENCE", "metodo": "sem-evidencia",
                 "evidencia": "", "cobertura_lexica": 0.0}
+    return {"estado": "UNVERIFIED", "metodo": "lexico-provisorio",
+            "evidencia": "", "cobertura_lexica": 0.0,
+            "condicoes_ausentes": _faltas(claim)}
+
+
+def _faltas(claim: dict) -> list:
+    cond = claim.get("condicoes", {}) or {}
     faltas = []
     if not cond.get("comparado_a") and re.search(r"(?i)\b(mais|menos|melhor|pior)\b", claim["texto"]):
         faltas.append("comparado ausente")
-    if cqs and not cond.get("datas"):
+    if cond.get("quantidades") and not cond.get("datas"):
         faltas.append("data ausente p/ quantidade")
-    return {"estado": "UNVERIFIED", "metodo": "lexico-provisorio",
-            "evidencia": "", "cobertura_lexica": 0.0,
-            "condicoes_ausentes": faltas}
+    return faltas
 
 
 # ── Auditor 2.0 ─────────────────────────────────────────────────────

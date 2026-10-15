@@ -1890,6 +1890,20 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     row = db.execute("SELECT text FROM messages WHERE id=? AND origin='mobile' "
                      "AND owner_id=? AND role='user' AND conversation_id=?", (mid, owner, conv)).fetchone()
     if not row:
+        # Anti-corrida sync→IA: o pedido traz o texto; persiste (mesmas regras
+        # do /api/sync, INSERT OR IGNORE) e segue. Sem texto válido, aí sim falha.
+        texto_pb = payload.get("text", "")
+        criado_pb = payload.get("created_at", "") or agora_iso()
+        if isinstance(texto_pb, str) and 1 <= len(texto_pb) <= 10000:
+            persist_messages(db, [{"id": mid, "conversation_id": conv, "origin": "mobile",
+                                   "role": "user", "text": texto_pb,
+                                   "created_at": criado_pb[:48]}], owner)
+            row = db.execute("SELECT text FROM messages WHERE id=? AND origin='mobile' "
+                             "AND owner_id=? AND role='user' AND conversation_id=?",
+                             (mid, owner, conv)).fetchone()
+            if row:
+                log.info("IA com piggyback (msg %s não estava no PC)", mid)
+    if not row:
         return {"error": "Mensagem do usuário não encontrada. Sincronize primeiro.",
                 "codigo": "sem_mensagem"}
     try:
@@ -2307,6 +2321,54 @@ def fence_de_evidencias(db, owner: str, conv: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
+def fence_de_grafo(db, owner: str) -> str:
+    """Grafo claim→evidência→fonte da última pesquisa (nós reais, sem invenção)."""
+    job = _ultimo_job(db, owner, ("concluida",))
+    if job is None:
+        return ""
+    estados = {}
+    try:
+        for a in research_agents.carregar_job(db, owner, job["id"]).get("achados", []):
+            estados[(a.get("afirmacao") or "")[:200]] = a.get("estado", "")
+    except research_agents.AgentErro:
+        pass
+    nodes = []
+    idmap = {}
+    for c in evgraph.nos_do_job(db, owner, job["id"], "claim")[:8]:
+        nid = "c" + c["id"][:12]
+        idmap[c["id"]] = nid
+        nodes.append({"id": nid, "label": (c.get("texto") or "")[:60],
+                      "kind": "claim", "estado": estados.get((c.get("texto") or "")[:200], ""),
+                      "detalhe": ""})
+    evs = {e["id"]: e for e in research_agents.listar_evidencias(db, owner, job["id"])}
+    for c in evgraph.nos_do_job(db, owner, job["id"], "evidence")[:12]:
+        nid = "e" + c["id"][:12]
+        idmap[c["id"]] = nid
+        ev = evs.get(c.get("evidence_id", ""), {})
+        nodes.append({"id": nid, "label": (c.get("titulo") or "")[:60],
+                      "kind": "evidence", "estado": ev.get("status", ""),
+                      "detalhe": (ev.get("trecho", "") or "")[:200]})
+    for s in evgraph.nos_do_job(db, owner, job["id"], "source")[:10]:
+        nid = "s" + s["id"][:12]
+        idmap[s["id"]] = nid
+        nodes.append({"id": nid, "label": (s.get("dominio") or s.get("url", ""))[:60],
+                      "kind": "source", "estado": "",
+                      "detalhe": (s.get("url", "") or "")[:200]})
+    if not nodes:
+        return ""
+    edges = [{"from": idmap[e["src"]], "to": idmap[e["dst"]], "label": e["tipo"]}
+             for e in evgraph.arestas_do_job(db, owner, job["id"])
+             if e["src"] in idmap and e["dst"] in idmap][:60]
+    fence = {"version": jdui.VERSION, "blocks": [
+        {"type": "text", "content": "Mapa das evidências (toque nos nós)."},
+        {"type": "ui", "component": "evidencegraph",
+         "props": {"title": "Grafo de evidências", "nodes": nodes, "edges": edges}}]}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
 TRANSFORM_VERBOS = ("transforma", "transforme", "converter em", "converta em",
                     "mostre em", "mostra em", "em forma de", "visualize")
 TRANSFORM_FORMATOS = (("gráfico", "grafico"), ("tabela",), ("dashboard", "painel"),
@@ -2436,6 +2498,12 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("evidências sintetizadas para %s", mid)
+    elif "grafo de evid" in (prep.get("user_text", "") or "").lower() or \
+            "mapa de evid" in (prep.get("user_text", "") or "").lower():
+        fence = fence_de_grafo(db, owner)
+        if fence:
+            texto += fence
+            log.info("grafo de evidências sintetizado para %s", mid)
     elif not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
         fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
         if fence:

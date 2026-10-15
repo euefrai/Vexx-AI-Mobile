@@ -227,6 +227,27 @@
           return { label: S(r.label, 80), a: S(r.a, 120), b: S(r.b, 120), melhor: win };
         })
       };
+    },
+    evidencegraph(p) {
+      const ns = p.nodes;
+      if (!Array.isArray(ns) || !ns.length || ns.length > 30) throw new JduiErro('evidencegraph.nodes 1..30');
+      const kinds = ['claim', 'source', 'evidence'];
+      const ids = {};
+      const nodes = ns.map(n => {
+        if (!n || typeof n !== 'object' || !S(n.id, 40)) throw new JduiErro('evidencegraph.node');
+        const kind = String(n.kind || 'evidence').toLowerCase();
+        if (kinds.indexOf(kind) < 0) throw new JduiErro('evidencegraph.kind');
+        ids[S(n.id, 40)] = 1;
+        return { id: S(n.id, 40), label: S(n.label, 80), kind, estado: S(n.estado, 40), detalhe: S(n.detalhe, 200) };
+      });
+      const tipos = ['SUPPORTS', 'PARTIALLY_SUPPORTS', 'CONTRADICTS', 'MENTIONS', 'DERIVED_FROM', 'DUPLICATES', 'REQUIRES_VERIFICATION'];
+      const edges = [];
+      (Array.isArray(p.edges) ? p.edges : []).forEach(e => {
+        if (!e || typeof e !== 'object') return;
+        const f = S(e.from, 40), t = S(e.to, 40), lb = String(e.label || '').toUpperCase();
+        if (ids[f] && ids[t] && edges.length < 60 && tipos.indexOf(lb) >= 0) edges.push({ from: f, to: t, label: lb });
+      });
+      return { title: S(p.title, 160), nodes, edges };
     }
   };
 
@@ -1592,6 +1613,86 @@
     });
     holder.appendChild(t);
     box.appendChild(holder);
+    root.appendChild(box);
+  };
+
+  R.evidencegraph = function (root, props, st, save) {
+    st.zoom = Math.min(2, Math.max(0.6, parseFloat(st.zoom) || 1));
+    st.filtro = st.filtro || 'all';
+    st.sel = st.sel || null;
+    const box = el('div', 'jdui-quiz');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const barra = el('div', 'jdui-actions');
+    const menos = el('button', 'jdui-btn ghost', '−');
+    const mais = el('button', 'jdui-btn ghost', '+');
+    menos.type = 'button'; mais.type = 'button';
+    menos.setAttribute('aria-label', 'Reduzir grafo');
+    mais.setAttribute('aria-label', 'Ampliar grafo');
+    menos.addEventListener('click', () => { st.zoom = Math.max(0.6, st.zoom - 0.2); save(st); paint(); });
+    mais.addEventListener('click', () => { st.zoom = Math.min(2, st.zoom + 0.2); save(st); paint(); });
+    barra.appendChild(menos); barra.appendChild(mais);
+    ['all', 'claim', 'source', 'evidence'].forEach(k => {
+      const f = el('button', 'jdui-btn ghost', k === 'all' ? 'Tudo' : k);
+      f.type = 'button';
+      if (st.filtro === k) f.style.borderColor = 'var(--purple-2)';
+      f.addEventListener('click', () => { st.filtro = k; st.sel = null; save(st); paint(); });
+      barra.appendChild(f);
+    });
+    box.appendChild(barra);
+    const host = el('div', 'jdui-chart');
+    box.appendChild(host);
+    const detalhe = el('div', 'jdui-q', 'Toque em um nó para ver detalhes.');
+    box.appendChild(detalhe);
+    const CORES = { claim: '#a78bfa', source: '#5b5bd6', evidence: '#34d399' };
+    const camadas = { claim: 0, evidence: 1, source: 2 };
+    function visiveis() {
+      return props.nodes.filter(n => st.filtro === 'all' || n.kind === st.filtro);
+    }
+    function paint() {
+      host.replaceChildren();
+      const nos = visiveis().slice(0, 30);
+      const ids = {};
+      nos.forEach(n => { ids[n.id] = 1; });
+      const W = 360, H = Math.max(140, 40 + 3 * 56);
+      const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': props.title || 'Grafo de evidências' });
+      const porCamada = [[], [], []];
+      nos.forEach(n => porCamada[camadas[n.kind]].push(n));
+      const pos = {};
+      porCamada.forEach((grupo, c) => {
+        grupo.forEach((n, i) => {
+          pos[n.id] = [(i + 1) * (W / (grupo.length + 1)), 34 + c * 56];
+        });
+      });
+      (props.edges || []).forEach(e => {
+        if (!pos[e.from] || !pos[e.to]) return;
+        const cor = e.label === 'CONTRADICTS' ? '#f87171' : e.label === 'SUPPORTS' ? '#34d399' : 'currentColor';
+        const ln = dica(svgEl('line', {
+          x1: pos[e.from][0], y1: pos[e.from][1], x2: pos[e.to][0], y2: pos[e.to][1],
+          stroke: cor, 'stroke-width': e.label === 'CONTRADICTS' ? 2 : 1, opacity: '.6'
+        }), e.label);
+        svg.appendChild(ln);
+      });
+      nos.forEach(n => {
+        const g = svgEl('g', { style: 'cursor:pointer', 'aria-label': n.label });
+        const c = dica(svgEl('circle', {
+          cx: pos[n.id][0], cy: pos[n.id][1], r: st.sel === n.id ? 13 : 10,
+          fill: CORES[n.kind] || '#888', opacity: st.sel === n.id ? '1' : '.85'
+        }), n.kind + ': ' + n.label + (n.estado ? ' (' + n.estado + ')' : ''));
+        g.appendChild(c);
+        const tx = svgText(pos[n.id][0], pos[n.id][1] + 24, (n.label || '').slice(0, 14), 'middle', 9);
+        g.appendChild(tx);
+        g.addEventListener('click', () => {
+          st.sel = st.sel === n.id ? null : n.id; save(st); paint();
+          detalhe.textContent = st.sel
+            ? (n.kind + ' · ' + n.label + (n.estado ? ' · ' + n.estado : '') + (n.detalhe ? ' — ' + n.detalhe : ''))
+            : 'Toque em um nó para ver detalhes.';
+        });
+        svg.appendChild(g);
+      });
+      svg.style.fontSize = (st.zoom * 100) + '%';
+      host.appendChild(svg);
+    }
+    paint();
     root.appendChild(box);
   };
 

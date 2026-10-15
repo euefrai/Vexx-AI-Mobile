@@ -1363,7 +1363,8 @@ async function requestAI(userRow) {
   const ctx = aiLocalContext(userRow.text || '');
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
-    model: modeloAtivo(), memory: memoryOn() ? '1' : '0'
+    model: modeloAtivo(), memory: memoryOn() ? '1' : '0',
+    text: userRow.text || '', created_at: userRow.created_at || ''
   }, ctx));
   aiAbort = new AbortController();
   let cur = '';
@@ -1412,7 +1413,8 @@ async function requestAI(userRow) {
           try {
             const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({
               message_id: userRow.id, conversation_id: userRow.conversation_id,
-              model: modeloAtivo(), memory: memoryOn() ? 1 : 0, ...ctx
+              model: modeloAtivo(), memory: memoryOn() ? 1 : 0,
+              text: userRow.text || '', created_at: userRow.created_at || '', ...ctx
             }) });
             if (fb.response_text && fb.response_text.trim()) {
               cur = fb.response_text;

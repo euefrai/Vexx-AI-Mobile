@@ -113,7 +113,7 @@ def test_verificador_estados():
     ra.registrar_evidencia(db, job, f, "Estudo com 10000 pessoas mostra que o café é seguro em doses normais.")
     v = ra.agente_verificador(db, job, ra.listar_evidencias(db, "u-x", job["id"]))
     assert v and v[0]["estado"] in ("SUPPORTED", "PARTIALLY_SUPPORTED")
-    assert all(set(x) == {"afirmacao", "estado", "cobertura_lexica", "metodo"} for x in v)
+    assert all({"afirmacao", "estado", "cobertura_lexica", "metodo"} <= set(x) for x in v)
     assert all(x["metodo"] for x in v)  # método sempre registrado (§6)
     # contradição marcada vence cobertura
     evs = ra.listar_evidencias(db, "u-x", job["id"])
@@ -291,6 +291,33 @@ def test_cmd_pesquisa_memoria(monkeypatch):
     resp = pc_agent.ai_completa(db, {"message_id": mid, "conversation_id": "conv-09",
                                        "owner": "u-x"}, cfg)
     assert "http://exemplo.com/cafe" in resp.get("response_text", "")
+    db.close()
+
+
+def test_memoria_do_grafo():
+    import evidence_graph as _eg
+    db = _db()
+    prov = FakeProv({"*": CAFE})
+    rec = lambda u: {"titulo": "T", "texto": CAFE[0]["trecho"], "final": u}  # noqa: E731
+    job = ra.criar_job(db, "u-x", "café faz bem?", conv="cm")
+    ra.executar(db, job["id"], "u-x", [prov], rec)
+    assert "sustentada" in pc_agent.cmd_pesquisa(db, "de onde veio essa conclusão?", "u-x", "cm")
+    conf = pc_agent.cmd_pesquisa(db, "quais fontes confirmaram isso?", "u-x", "cm")
+    assert "exemplo.com" in conf or "Nenhuma fonte" in conf
+    assert "contradição" in pc_agent.cmd_pesquisa(
+        db, "alguma fonte contradiz essa informação?", "u-x", "cm").lower() \
+        or "Nenhuma" in pc_agent.cmd_pesquisa(
+            db, "alguma fonte contradiz essa informação?", "u-x", "cm")
+    assert pc_agent.cmd_pesquisa(db, "de onde veio essa conclusão?", "u-y", "cm") == \
+        "Sem conclusão registrada ainda. 🔍"
+    assert "duas pesquisas" in pc_agent.cmd_pesquisa(
+        db, "o que mudou desde a última pesquisa?", "u-x", "cm")
+    assert "Não identifiquei" in pc_agent.cmd_pesquisa(
+        db, "mostre o estudo original", "u-x", "cm") \
+        or "Possíveis originais" in pc_agent.cmd_pesquisa(
+            db, "mostre o estudo original", "u-x", "cm")
+    assert _eg.diff_pesquisas(db, "u-x", job["id"], job["id"]) == {
+        "novas": [], "removidas": [], "alteradas": []}
     db.close()
 
 

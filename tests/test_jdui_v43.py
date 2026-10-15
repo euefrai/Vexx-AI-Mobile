@@ -199,6 +199,20 @@ const unk = JDUI.validateMessage({ version: V, blocks: [
 t('componente-desconhecido', unk.ok === false);
 const emptyChart = mount('chart', { type: 'bar', series: [] });
 t('chart-sem-dados', emptyChart.textContent.includes('Sem dados'));
+const egOk = JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'evidencegraph',
+  props: { title: 'G', nodes: [{ id: 'c1', label: 'Café faz bem', kind: 'claim', estado: 'UNVERIFIED' },
+    { id: 'e1', label: 'Estudo', kind: 'evidence' }, { id: 's1', label: 'exemplo.com', kind: 'source' }],
+    edges: [{ from: 'e1', to: 'c1', label: 'MENTIONS' }] } }] });
+t('eg-valido', egOk.ok === true);
+t('eg-kind-ruim', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'evidencegraph',
+  props: { nodes: [{ id: 'x', label: 'X', kind: 'nave' }] } }] }).ok === false);
+t('eg-nos-demais', JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component: 'evidencegraph',
+  props: { nodes: Array.from({ length: 31 }, (_, i) => ({ id: 'n' + i, label: 'L' })) } }] }).ok === false);
+const egroot = mount('evidencegraph', egOk.msg.blocks[0].props);
+t('eg-render', egroot.textContent.includes('Café faz bem'));
+const egUp = JDUI.validateMessage({ version: V, update_of: 'm2', blocks: [
+  { type: 'ui', component: 'evidencegraph', props: { nodes: [{ id: 'a', label: 'A' }] } }] });
+t('update-eg-ok', egUp.ok === true && egUp.msg.update_of === 'm2');
 """
 
 

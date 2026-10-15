@@ -170,6 +170,10 @@ class AIRequest(BaseModel):
     city: str = Field(default="", max_length=100)
     latitude: float | None = Field(default=None, ge=-90, le=90)
     longitude: float | None = Field(default=None, ge=-180, le=180)
+    # Piggyback anti-corrida: a mensagem vai junto; o agente persiste
+    # (INSERT OR IGNORE, mesmas regras do /api/sync) antes de responder.
+    text: str = Field(default="", max_length=10000)
+    created_at: str = Field(default="", max_length=48)
 
 
 class ExportMessage(BaseModel):
@@ -1083,7 +1087,8 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "model": body.model, "memory": body.memory,
                                    "local_time": body.local_time, "timezone": body.timezone,
                                    "city": body.city, "latitude": body.latitude,
-                                   "longitude": body.longitude}, timeout=180.0)
+                                   "longitude": body.longitude, "text": body.text,
+                                   "created_at": body.created_at}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -1635,11 +1640,14 @@ async def ai_models(request: Request):
 async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
                     model: str = "", memory: str = "1", local_time: str = "",
                     timezone: str = "", city: str = "",
-                    latitude: float | None = None, longitude: float | None = None):
+                    latitude: float | None = None, longitude: float | None = None,
+                    text: str = "", created_at: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     require_csrf(request)
     dono = await revogacao_ok(request)
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
+        raise HTTPException(422, "Parâmetros inválidos")
+    if len(text) > 10000 or len(created_at) > 48:
         raise HTTPException(422, "Parâmetros inválidos")
     from fastapi.responses import StreamingResponse
 
@@ -1660,7 +1668,8 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                "conversation_id": conversation_id, "model": model[:120],
                "memory": "1" if memory != "0" else "0",
                "local_time": local_time, "timezone": timezone, "city": city,
-               "latitude": latitude, "longitude": longitude}
+               "latitude": latitude, "longitude": longitude,
+               "text": text, "created_at": created_at}
 
     async def gerar():
         concluido = False

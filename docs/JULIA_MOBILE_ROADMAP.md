@@ -52,12 +52,20 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Quality Lab com métricas + casos; LLM-real = skip BLOQUEADO.
 - Relatório em RELATORIO_JULIA_4.5.md.
 
-## V4.6 — AGENTES
+
+
+## V4.6 — EVIDENCE INTELLIGENCE ✅ (2026-10-16)
+- Grafo de evidências (SQLite, IDs estáveis), claims v2 com condições, verificação 2.0 com método registrado.
+- Independência de fontes, contradições por dimensão, auditor 2.0, 16 benchmarks congelados.
+- Componente evidencegraph + memória do grafo (5 perguntas sem LLM). Verificação semântica: BLOQUEADA.
+- Relatório em RELATORIO_JULIA_4.6.md.
+
+## V4.7 — AGENTES
 - Perfis (professora/pesquisadora/organizadora/criativa/analista) como
   system prompts + ferramentas autorizadas compartilhadas; fila e limites de
   consumo do Hermes; aprovação para ações sensíveis.
 
-## V4.7 — COMUNIDADE/MULTI-CONTA
+## V4.8 — COMUNIDADE/MULTI-CONTA
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca, moderação. Só após V4.0 de isolamento.
 
