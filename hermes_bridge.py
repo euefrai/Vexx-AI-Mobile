@@ -202,7 +202,7 @@ def chat_stream(base: str, model: str, messages: list, on_delta,
                 if time.monotonic() - inicio_leitura > timeout:
                     raise BridgeErro("Timeout aguardando o modelo.", "timeout")
                 try:
-                    bloco = r.read(4096)
+                    bloco = r.read1(4096)
                 except TimeoutError:
                     continue
                 if not bloco:

@@ -153,6 +153,47 @@ def test_bridge_stream_deltas_e_cancel():
         srv.server_close()
 
 
+def test_bridge_stream_emite_delta_antes_do_fim_da_resposta():
+    class StreamSSELento(BaseHTTPRequestHandler):
+        protocol_version = "HTTP/1.1"
+
+        def log_message(self, *args):
+            pass
+
+        def do_POST(self):
+            self.rfile.read(int(self.headers.get("Content-Length", 0)))
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.send_header("Transfer-Encoding", "chunked")
+            self.end_headers()
+            for texto in ("um", "dois", "três"):
+                corpo = json.dumps(
+                    {"choices": [{"delta": {"content": texto}}]}).encode()
+                evento = b"data: " + corpo + b"\n\n"
+                self.wfile.write(f"{len(evento):X}\r\n".encode() + evento + b"\r\n")
+                self.wfile.flush()
+                time.sleep(0.3)
+            self.wfile.write(b"0\r\n\r\n")
+            self.wfile.flush()
+
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), StreamSSELento)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    tempos_delta = []
+    inicio = time.monotonic()
+    try:
+        resultado = hermes_bridge.chat_stream(
+            f"http://127.0.0.1:{srv.server_port}/v1", "fake-model", [],
+            on_delta=lambda seq, trecho: tempos_delta.append(time.monotonic() - inicio),
+            timeout=5.0)
+        duracao = time.monotonic() - inicio
+        assert resultado["texto"] == "umdoistrês"
+        assert len(tempos_delta) == 3
+        assert tempos_delta[0] < duracao - 0.2
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+
 def test_sse_fragmentado_e_done():
     ac = hermes_bridge.AcumuladorSSE()
     assert ac.alimentar(b'data: {"choices": [{"delta": {"cont') == []
