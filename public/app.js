@@ -196,6 +196,10 @@ async function allMessages() {
   const rows = await reqPromise(db.transaction(STORE, 'readonly').objectStore(STORE).getAll());
   return rows.sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
 }
+async function messageById(id) {
+  if (!db) return null;
+  return reqPromise(db.transaction(STORE, 'readonly').objectStore(STORE).get(id));
+}
 async function storeMessages(ms) {
   if (!db) throw Error('Armazenamento indisponivel');
   const tx = db.transaction(STORE, 'readwrite');
@@ -1474,27 +1478,21 @@ function aiLocalContext(text) {
   } catch (_) {}
   return context;
 }
-async function requestAI(userRow) {
-  if (!authenticated || !pcOnline || !db || aiAbort || aiRequests.size) return;
+async function requestAI(userRow, options = {}) {
+  if (!authenticated || (!pcOnline && !options.immediate) || !navigator.onLine
+      || !db || aiAbort || aiRequests.size) return;
   const replyId = userRow.id + '-r1';
   if (aiRequests.has(replyId)) return;
   aiRequests.add(replyId);
-  let rows;
-  try { rows = await allMessages(); }
+  let existingReply;
+  try { existingReply = await messageById(replyId); }
   catch (err) { aiRequests.delete(replyId); throw err; }
-  const ja = rows.find(m => m.id === replyId);
-  if (ja && (ja.status === 'synced' || ja.status === 'generating')) {
+  if (existingReply && (existingReply.status === 'synced' || existingReply.status === 'generating')) {
     aiRequests.delete(replyId);
     return;
   }
   const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
-  try {
-    if (userRow.conversation_id === activeConversation) await renderMessages();
-  } catch (err) {
-    aiRequests.delete(replyId);
-    throw err;
-  }
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Júlia está escrevendo… 0s');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
@@ -1507,7 +1505,12 @@ async function requestAI(userRow) {
   aiAbort = new AbortController();
   let cur = '';
   try {
-    const res = await fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
+    const streamRequest = fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
+    if (typeof options.onStarted === 'function') options.onStarted();
+    if (userRow.conversation_id === activeConversation) {
+      renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
+    }
+    const res = await streamRequest;
     if (!res.ok || !res.body) throw new Error('IA indisponível (' + res.status + ')');
     const reader = res.body.getReader();
     const dec = new TextDecoder();
@@ -1761,9 +1764,9 @@ async function sendMessage(raw) {
     await storeMessages([row]);
     await touchSession(activeConversation, titleFrom(value));
     messageInput.value = ''; autoresize(); $('charCount').textContent = '0 / 10000';
-    if (pcOnline && authenticated) {
-      requestAI(row).catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
-      syncAndRefresh();
+    if (authenticated && navigator.onLine) {
+      requestAI(row, { immediate: true, onStarted: syncAndRefresh })
+        .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
     } else showToast('Salvo no celular');
     await renderSessions($('sessionSearch').value);
     await renderMessages();
