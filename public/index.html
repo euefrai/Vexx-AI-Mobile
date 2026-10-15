@@ -130,7 +130,23 @@
       </div>
 
       <section class="page active" id="page-chat" aria-label="Chat">
+        <div class="research-bar" id="researchBar" hidden>
+          <span class="tiny-dot"></span><span id="researchLabel">Pesquisando…</span>
+          <button class="mini-tool" id="researchToggle" type="button" aria-expanded="false">Detalhes</button>
+          <button class="mini-tool" id="researchCancel" type="button">Cancelar</button>
+        </div>
+        <div class="research-panel" id="researchPanel" hidden aria-label="Atividade da pesquisa">
+          <h2 class="section-caption">Atividade da pesquisa</h2>
+          <div class="timeline" id="researchSteps"></div>
+          <h2 class="section-caption">Fontes consultadas</h2>
+          <div class="timeline" id="researchSources"></div>
+          <div class="export-row">
+            <button id="researchResult" class="subtle-button" type="button">Ver resultado no chat</button>
+          </div>
+        </div>
         <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">
+          <div class="chat-date">CARREGANDO…</div>
+        </div>
           <div class="chat-date">CARREGANDO…</div>
         </div>
 

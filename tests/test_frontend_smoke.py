@@ -300,6 +300,20 @@ def test_jdui_v43_fiacao():
         assert regra in css, regra  # responsivo 320–768 sem CSS novo pesado
 
 
+def test_live_research_fiacao():
+    html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
+    js = APP_JS.read_text(encoding='utf-8')
+    for eid in ('researchBar', 'researchLabel', 'researchToggle', 'researchCancel',
+                'researchPanel', 'researchSteps', 'researchSources', 'researchResult'):
+        assert f'id="{eid}"' in html, eid
+        assert eid in js, eid
+    for sym in ('researchAttach', 'researchPoll', 'researchCarregaFontes',
+                '/api/research/status', '/api/research/cancel', '/api/research/evidence'):
+        assert sym in js, sym
+    css = (RAIZ / 'public' / 'styles.css').read_text(encoding='utf-8')
+    assert '.research-bar' in css and '.research-panel' in css
+
+
 def test_sessoes_sem_fragmentacao():
     """Regressão: cada mensagem virando um chat (id ativo só no localStorage).
 

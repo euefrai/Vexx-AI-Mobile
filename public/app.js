@@ -598,6 +598,11 @@ function appendMessage(row) {
       if (resto.length) JDUI.mount(bubble, resto, jduiCtx(row));
     } catch (_) { /* fallback: só texto */ }
   }
+  if (type === 'ai' && row.status !== 'generating') {
+    // V4.5: resposta anuncia pesquisa agêntica → anexa o painel live (id real).
+    const mj = /\(id (rj-[0-9a-f]+)\)/.exec(row.text || '');
+    if (mj) { try { researchAttach(mj[1]); } catch (_) {} }
+  }
   const meta = document.createElement('div'); meta.className = 'msg-meta';
   const tm = document.createElement('span'); tm.className = 'msg-time'; tm.textContent = fmtTime(row.created_at);
   meta.appendChild(tm);
@@ -934,6 +939,115 @@ async function renderEstudos() {
     estudosItem('i-chat', e.enunciado || '',
       'Sua resposta: ' + (e.sua_resposta || '—'), e.assunto || null)));
 }
+/* ----- Live Research V4.5: telemetria real via polling (eventos do backend) ----- */
+let researchJob = null;
+const RESEARCH_FIM = ['concluida', 'cancelada', 'falhou', 'interrompida'];
+function researchFase(ev) {
+  const a = ev.agente || '', t = ev.tipo || '';
+  if (a === 'search') return 'Pesquisando fontes…';
+  if (a === 'analyst') return 'Analisando documentos…';
+  if (a === 'checker' || a === 'auditor') return 'Verificando informações…';
+  if (a === 'synthesizer') return 'Montando resposta…';
+  if (t === 'plan_created' || t === 'plan_updated') return 'Planejando pesquisa…';
+  return 'Pesquisando…';
+}
+function researchAttach(jobId) {
+  if (!jobId || (researchJob && researchJob.id === jobId)) return;
+  window._researchLast = jobId;
+  researchJob = { id: jobId, seq: 0, vistos: new Set(), inicio: Date.now(), timer: null };
+  $('researchBar').hidden = false;
+  $('researchPanel').hidden = true;
+  $('researchToggle').setAttribute('aria-expanded', 'false');
+  $('researchSteps').replaceChildren();
+  $('researchSources').replaceChildren();
+  $('researchLabel').textContent = 'Pesquisando…';
+  researchPoll();
+}
+function researchStop() {
+  if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
+  researchJob = null;
+}
+function researchItem(icon, title, desc) {
+  return '<div class="timeline-icon"><svg class="icon"><use href="#' + icon + '"/></svg></div>'
+    + '<div><strong>' + esc(title) + '</strong>'
+    + (desc ? '<p>' + esc(desc) + '</p>' : '') + '</div>';
+}
+async function researchPoll() {
+  if (!researchJob) return;
+  if (Date.now() - researchJob.inicio > 10 * 60 * 1000) { researchStop(); return; }
+  try {
+    const r = await api('/api/research/status?job_id=' + encodeURIComponent(researchJob.id)
+      + '&apos_seq=' + researchJob.seq);
+    const evs = (r.eventos || []).filter(e => !researchJob.vistos.has(e.seq));
+    evs.forEach(e => {
+      researchJob.vistos.add(e.seq);
+      researchJob.seq = Math.max(researchJob.seq, e.seq);
+      const d = document.createElement('div');
+      d.className = 'timeline-item';
+      d.innerHTML = researchItem('i-sparkle', researchFase(e), e.descricao || '');
+      const box = $('researchSteps');
+      box.appendChild(d);
+      while (box.children.length > 30) box.firstChild.remove();
+    });
+    const s = r.resumo || {};
+    const feitas = (s.etapas || []).filter(e => e.status === 'feita').length;
+    const total = (s.etapas || []).length;
+    if (RESEARCH_FIM.indexOf(s.status) >= 0) {
+      $('researchLabel').textContent = s.status === 'concluida'
+        ? 'Pesquisa concluída: ' + (s.evidencias || 0) + ' evidências.'
+        : 'Pesquisa ' + s.status + '.';
+      researchCarregaFontes();
+      researchStop();
+      return;
+    }
+    const ultimo = evs.length ? evs[evs.length - 1] : null;
+    $('researchLabel').textContent = (ultimo ? researchFase(ultimo) : 'Pesquisando…')
+      + (total ? ' (' + feitas + '/' + total + ')' : '');
+  } catch (_) { /* PC offline: tenta de novo em 5s */ }
+  if (researchJob) researchJob.timer = setTimeout(researchPoll, 2000);
+}
+async function researchCarregaFontes() {
+  if (!$('researchPanel') || $('researchPanel').hidden) return;
+  try {
+    const r = await api('/api/research/evidence?job_id=' + encodeURIComponent(
+      (researchJob && researchJob.id) || window._researchLast || ''));
+    const box = $('researchSources');
+    box.replaceChildren();
+    (r.evidencias || []).slice(0, 20).forEach(e => {
+      const d = document.createElement('div');
+      d.className = 'timeline-item';
+      const ic = '<div class="timeline-icon"><svg class="icon"><use href="#i-chat"/></svg></div>';
+      const a = document.createElement('a');
+      a.href = e.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = e.titulo || e.dominio || e.url;
+      const wrap = document.createElement('div');
+      const st = document.createElement('strong');
+      st.appendChild(a);
+      wrap.appendChild(st);
+      const sm = document.createElement('small');
+      sm.textContent = (e.dominio || '') + ' · ' + (e.status || '');
+      wrap.appendChild(sm);
+      d.innerHTML = ic;
+      d.appendChild(wrap);
+      box.appendChild(d);
+    });
+  } catch (_) {}
+}
+$('researchToggle').addEventListener('click', () => {
+  const p = $('researchPanel');
+  p.hidden = !p.hidden;
+  $('researchToggle').setAttribute('aria-expanded', p.hidden ? 'false' : 'true');
+  if (!p.hidden) researchCarregaFontes();
+});
+$('researchCancel').addEventListener('click', async () => {
+  if (!researchJob) return;
+  try {
+    await api('/api/research/cancel', { method: 'POST', body: JSON.stringify({ job_id: researchJob.id }) });
+  } catch (_) {}
+  $('researchLabel').textContent = 'Pesquisa cancelada.';
+  researchStop();
+});
+$('researchResult').addEventListener('click', () => sendMessage('Mostra o resultado da pesquisa'));
 $('estudosRefresh').addEventListener('click', () => { renderEstudos(); learnSyncOutbox(); });
 
 /* ----- Conexão / API ----- */

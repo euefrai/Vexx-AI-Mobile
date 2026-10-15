@@ -1641,3 +1641,11 @@ table.jdui-table td input{width:100%;min-width:90px;background:var(--bg);border:
 .jdui-cmp td.win{background:rgba(16,185,129,.08)}
 .jdui-accbody details{margin:4px 0}
 .jdui-field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);margin-top:6px}
+
+/* V4.5 Live Research: barra compacta + painel expansível (só quando relevante) */
+.research-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12.5px;color:var(--muted)}
+.research-bar .tiny-dot{width:8px;height:8px;border-radius:99px;background:var(--purple-2);box-shadow:0 0 0 3px var(--glow-rose);animation:jdui-in .5s ease}
+.research-bar .mini-tool{margin-left:auto}
+.research-bar #researchCancel{margin-left:0}
+.research-panel{padding:2px 12px 12px}
+.research-panel .timeline{margin-top:4px}

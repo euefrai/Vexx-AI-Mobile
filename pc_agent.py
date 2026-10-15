@@ -20,6 +20,8 @@ import julia_auth as JULIA_auth
 import learning
 import remoto
 import research
+import research_agents
+import workspace_store
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
@@ -180,6 +182,8 @@ def open_db(path: Path):
     JULIA_auth.migrar_legado(db)
     learning.criar_tabelas(db)
     research.criar_tabelas(db)
+    research_agents.criar_tabelas(db)
+    workspace_store.create_tables(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
         source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
@@ -1650,7 +1654,10 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         extras["fontes"] = []
         tbaixo = (texto_usuario or "").lower()
         run_reuso = None
-        if any(k in tbaixo for k in ("essas fontes", "nessas fontes", "dessa pesquisa",
+        if _JOB_START_RE.search(texto_usuario or "") or "inicie uma pesquisa sobre" in tbaixo:
+            # Comando de job agêntico: o worker cobre; sem busca síncrona dupla.
+            extras["research_cmd"] = True
+        elif any(k in tbaixo for k in ("essas fontes", "nessas fontes", "dessa pesquisa",
                                      "desta pesquisa", "nessa pesquisa", "fontes acima")):
             run_reuso = research.ultima_run(db, owner, conversation_id)
         try:
@@ -1660,7 +1667,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                 partes_sistema.append(
                     research.bloco_grounding(run_reuso["fontes"], hoje)
                     + " (pesquisa anterior desta conversa; não busque de novo)")
-            elif intencao_pesquisa_aprofundada(texto_usuario):
+            elif not extras.get("research_cmd") and intencao_pesquisa_aprofundada(texto_usuario):
                 run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
                 fontes = run.get("fontes", [])
                 extras["fontes"] = fontes
@@ -1674,7 +1681,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                             f"DIVERGÊNCIA ENTRE {d['entre'][0]} e {d['entre'][1]}: {d['motivo']}.")
                 else:
                     partes_sistema.append(research.bloco_falha(hoje))
-            else:
+            elif not extras.get("research_cmd"):
                 rap = research.pesquisa_rapida(db, owner, consulta)
                 fontes = rap.get("fontes", [])
                 extras["fontes"] = fontes
@@ -2138,6 +2145,101 @@ def sintetizar_grafico_evolucao(db, owner: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
+_JOB_START_RE = re.compile(
+    r"(?i)pesquis[ae] (?:a fundo|profunda) (?:sobre )?(.{3,200}?)[.?!]*$")
+
+
+def _ultimo_job(db, owner: str, estados: tuple = ()) -> dict | None:
+    for j in research_agents.listar_jobs(db, owner, 10):
+        if not estados or j["status"] in estados:
+            try:
+                return research_agents.carregar_job(db, owner, j["id"])
+            except research_agents.AgentErro:
+                continue
+    return None
+
+
+def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
+    """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
+    mesmo com o Hermes bloqueado). Retorna texto ou ''."""
+    t = (texto or "").lower()
+    if any(k in t for k in ("mostra o resultado da pesquisa", "mostrar resultado",
+                            "resultado da pesquisa", "e aí a pesquisa", "e ai a pesquisa")):
+        job = _ultimo_job(db, owner, ("concluida",))
+        if job is None:
+            ativo = _ultimo_job(db, owner, ("em_andamento", "criada"))
+            if ativo is not None:
+                return ("Sua pesquisa ainda está em andamento. Acompanhe no painel "
+                        "acima ou aguarde concluir. 🔍")
+            return ("Você ainda não tem pesquisa concluída. Peça 'pesquisa profunda "
+                    "sobre X' para começar. 🔍")
+        evs = research_agents.listar_evidencias(db, owner, job["id"])[:6]
+        linhas = [f"Resultado da pesquisa sobre **{job['objetivo']}** ({job['status']}):",
+                   f"{len(evs)} evidências analisadas."]
+        for e in evs:
+            linhas.append(f"- [{e['titulo']}]({e['url']}): {(e['trecho'] or '')[:160]}")
+        for a in (research_agents._resumo(db, job).get("achados") or [])[:5]:
+            linhas.append(f"- {a['estado']}: {(a['afirmacao'] or '')[:140]}")
+        return "\n".join(linhas)[:2000]
+    if any(k in t for k in ("quais fontes", "que fontes", "fontes você encontrou",
+                            "fontes encontr")):
+        job = _ultimo_job(db, owner, ())
+        if job is None:
+            return "Ainda não há pesquisa registrada para você. 🔍"
+        evs = research_agents.listar_evidencias(db, owner, job["id"])[:10]
+        if not evs:
+            return f"A pesquisa sobre **{job['objetivo']}** ainda não tem fontes lidas."
+        return ("Fontes de **%s**:\n" % job["objetivo"] + "\n".join(
+            f"- [{e['titulo']}]({e['url']}) ({e['dominio']})" for e in evs))[:2000]
+    if any(k in t for k in ("continue aquela pesquisa", "retome a pesquisa",
+                            "continuar a pesquisa", "continua a pesquisa")):
+        job = _ultimo_job(db, owner, ("interrompida", "cancelada", "falhou"))
+        if job is None:
+            ativo = _ultimo_job(db, owner, ("em_andamento", "criada"))
+            if ativo is not None:
+                return "Sua pesquisa já está em andamento — acompanhe no painel. 🔍"
+            return "Não encontrei pesquisa interrompida para retomar. 🔍"
+        job["status"] = "em_andamento"
+        research_agents.salvar_job(db, job)
+        if iniciar_job_bg(database_path(), job["id"], owner):
+            return (f"Pesquisa sobre **{job['objetivo']}** retomada de onde parou "
+                    f"(id {job['id']}). Acompanhe no painel. 🔍")
+        job["status"] = "interrompida"
+        research_agents.salvar_job(db, job)
+        return "Já há outra pesquisa em andamento; conclua ou cancele antes. 🔍"
+    m = _JOB_START_RE.search(texto or "")
+    if m or "inicie uma pesquisa sobre" in t:
+        objetivo = (m.group(1).strip() if m else texto)[:200]
+        req = {"objetivo": objetivo, "conv": conv or "", "modo": ""}
+        resp = rjob_start(db, req, owner)
+        if resp.get("type") != "research_job":
+            return "Não consegui iniciar: " + resp.get("error", "tente de novo") + " 🔍"
+        return (f"Pesquisa profunda iniciada sobre **{objetivo}**. "
+                f"Acompanhe ao vivo no painel acima (id {resp['job_id']}). 🔍")
+    return ""
+
+
+def fence_de_evidencias(db, owner: str, conv: str) -> str:
+    """Cards das fontes da última pesquisa (links reais, sem números inventados)."""
+    job = _ultimo_job(db, owner, ())
+    if job is None:
+        return ""
+    evs = research_agents.listar_evidencias(db, owner, job["id"])[:8]
+    if not evs:
+        return ""
+    itens = [{"title": e["titulo"][:80] or e["dominio"], "desc": (e["trecho"] or "")[:200],
+              "badge": e["status"], "url": e["url"]} for e in evs if e["url"].startswith("http")]
+    if not itens:
+        return ""
+    fence = {"version": jdui.VERSION, "blocks": [
+        {"type": "text", "content": f"Evidências da pesquisa sobre **{job['objetivo']}**:"},
+        {"type": "ui", "component": "cards", "props": {"title": "Fontes", "items": itens}}]}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
 TRANSFORM_VERBOS = ("transforma", "transforme", "converter em", "converta em",
                     "mostre em", "mostra em", "em forma de", "visualize")
 TRANSFORM_FORMATOS = (("gráfico", "grafico"), ("tabela",), ("dashboard", "painel"),
@@ -2233,6 +2335,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
+    rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
+    if rp:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
     resposta_tempo = _resposta_temporal_direta(
         prep.get("user_text", ""), prep.get("contexto_local", {}))
     if resposta_tempo:
@@ -2258,6 +2363,12 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("transform de pesquisa sintetizado para %s", mid)
+    elif "mostre as evid" in (prep.get("user_text", "") or "").lower() or \
+            "mostra as evid" in (prep.get("user_text", "") or "").lower():
+        fence = fence_de_evidencias(db, owner, conv)
+        if fence:
+            texto += fence
+            log.info("evidências sintetizadas para %s", mid)
     elif not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
         fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
         if fence:
@@ -2332,6 +2443,17 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
         if cmd:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
+            try:
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                      "reply_id": direta["reply_id"],
+                                      "response_text": direta["response_text"],
+                                      "model": modelo})
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
+            return
+        rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
+        if rp:
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
             try:
                 enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
                                       "reply_id": direta["reply_id"],
@@ -2447,6 +2569,130 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         db.close()
 
 
+# ── Research jobs em background (V4.5 FASE 8: live telemetry real) ───
+JOBS_BG: dict = {}
+JOBS_BG_LOCK = threading.Lock()
+MAX_JOBS_SIMULTANEOS = 2
+
+
+def _db_job(path):
+    return open_db(Path(path))
+
+
+def iniciar_job_bg(db_path, job_id: str, owner: str) -> bool:
+    """Dispara worker em thread (1 por dono, teto global anti-monopólio)."""
+    with JOBS_BG_LOCK:
+        if any(v.get("owner") == owner for v in JOBS_BG.values()):
+            return False
+        if len(JOBS_BG) >= MAX_JOBS_SIMULTANEOS:
+            return False
+        parar = threading.Event()
+        cfg = ai_config()
+        t = threading.Thread(target=_job_worker,
+                             args=(str(db_path), job_id, owner, cfg, parar),
+                             daemon=True)
+        JOBS_BG[job_id] = {"owner": owner, "parar": parar, "thread": t}
+        t.start()
+        return True
+
+
+def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar) -> None:
+    db = open_db(Path(db_path))
+    try:
+        db.execute("UPDATE research_jobs SET status='em_andamento' WHERE id=? AND owner_id=?",
+                   (job_id, owner))
+        db.commit()
+        research_agents.executar(db, job_id, owner, research_agents.provedores_reais(),
+                                 research_agents.recuperar_real(),
+                                 deve_parar=parar.is_set)
+    except Exception as exc:
+        try:
+            job = research_agents.carregar_job(db, owner, job_id)
+            job["status"] = "falhou"
+            job["erros"].append(f"worker: {type(exc).__name__}"[:200])
+            research_agents.salvar_job(db, job)
+            research_agents.emitir(db, job_id, owner, "orchestrator", "research_failed",
+                                   "falha", f"Worker falhou ({type(exc).__name__}).", {})
+        except Exception:
+            pass
+    finally:
+        with JOBS_BG_LOCK:
+            JOBS_BG.pop(job_id, None)
+        try:
+            db.close()
+        except Exception:
+            pass
+
+
+def rjob_start(db, req: dict, dono: str) -> dict:
+    """Cria job + plano + dispara worker. 1 ativa por dono (409 honesto)."""
+    if research_agents.job_ativo(db, dono) or \
+            any(v.get("owner") == dono for v in JOBS_BG.values()):
+        return {"type": "learn_error", "error": "Já há pesquisa em andamento.",
+                "codigo": "ocupado"}
+    try:
+        job = research_agents.criar_job(db, dono, str(req.get("objetivo", ""))[:500],
+                                        str(req.get("conv", ""))[:100],
+                                        manual=str(req.get("modo", ""))[:20])
+        research_agents.montar_plano(db, job)
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+    job["status"] = "em_andamento"
+    research_agents.salvar_job(db, job)
+    if not iniciar_job_bg(database_path(), job["id"], dono):
+        job["status"] = "criada"
+        research_agents.salvar_job(db, job)
+        return {"type": "learn_error", "error": "Já há pesquisa em andamento.",
+                "codigo": "ocupado"}
+    return {"type": "research_job", "job_id": job["id"], "modo": job["modo"],
+            "etapas": len(job["plano"])}
+
+
+def rjob_status(db, req: dict, dono: str) -> dict:
+    try:
+        job = research_agents.carregar_job(db, dono, str(req.get("job_id", ""))[:64])
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+    try:
+        apos = int(req.get("apos_seq", 0) or 0)
+    except (TypeError, ValueError):
+        apos = 0
+    evs = research_agents.eventos_desde(db, dono, job["id"], apos)
+    with JOBS_BG_LOCK:
+        viva = job["id"] in JOBS_BG
+    resumo = research_agents._resumo(db, job)
+    resumo["viva"] = viva
+    return {"type": "research_status", "resumo": resumo, "eventos": evs}
+
+
+def rjob_cancel(db, req: dict, dono: str) -> dict:
+    try:
+        job = research_agents.carregar_job(db, dono, str(req.get("job_id", ""))[:64])
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+    with JOBS_BG_LOCK:
+        slot = JOBS_BG.get(job["id"])
+        if slot is not None:
+            slot["parar"].set()
+    return {"type": "research_cancelled",
+            **research_agents.cancelar(db, dono, job["id"])}
+
+
+def rjob_list(db, dono: str) -> dict:
+    return {"type": "research_jobs", "jobs": research_agents.listar_jobs(db, dono)}
+
+
+def rjob_evidence(db, req: dict, dono: str) -> dict:
+    try:
+        job = research_agents.carregar_job(db, dono, str(req.get("job_id", ""))[:64])
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+    evs = research_agents.listar_evidencias(db, dono, job["id"])
+    return {"type": "research_evidence",
+            "evidencias": [{k: e[k] for k in ("id", "titulo", "url", "dominio", "status")}
+                           for e in evs][:100]}
+
+
 def run():
     relay_url = os.environ.get("JULIA_RELAY_URL", "").strip().rstrip("/")
     token = os.environ.get("JULIA_AGENT_TOKEN", "")
@@ -2501,7 +2747,7 @@ def run():
                                 if tipo in ("auth_login", "auth_register") else "op_error",
                                 "error": msg, "codigo": codigo}
 
-                    if tipo in ("sync", "list", "conversations", "doc_upload", "doc_list",
+                    if tipo in ("sync", "list", "conversations", "workspace_sync", "doc_upload", "doc_list",
                                 "doc_resumo", "doc_topicos", "mem_list", "mem_list_full",
                                 "mem_forget", "mem_confirm", "mem_update", "ui_state_save",
                                 "ui_state_list", "conv_forget", "event_list", "ai", "ai_stream",
@@ -2726,6 +2972,13 @@ def run():
                     elif req.get("type") == "list":
                         reply = {"request_id": request_id, "type": "history",
                                  "messages": list_messages(db, req.get("limit", 200), dono)}
+                    elif req.get("type") == "workspace_sync":
+                        try:
+                            workspace_store.merge_records(db, req.get("records", []), dono)
+                            reply = {"request_id": request_id, "type": "workspace_synced",
+                                     "records": workspace_store.list_records(db, dono)}
+                        except ValueError:
+                            reply = _resp_erro("Organização inválida.", "invalid_workspace")
                     elif req.get("type") == "conversations":
                         reply = {"request_id": request_id, "type": "conversations",
                                  "conversations": listar_conversas(db, req.get("limit", 100), dono)}
@@ -2762,7 +3015,8 @@ def run():
                             reply = {"request_id": request_id, "type": "doc_error",
                                      "error": str(exc)[:300],
                                      "codigo": getattr(exc, "codigo", "erro")}
-                    elif (req.get("type") or "").startswith("learn_") and dono_bloqueado(db, dono):
+                    elif (req.get("type") or "").startswith(("learn_", "research_")) \
+                            and dono_bloqueado(db, dono):
                         reply = {"request_id": request_id, "type": "learn_error",
                                  "error": "Conta indisponível.", "codigo": "bloqueada"}
                     elif req.get("type") == "learn_get":
@@ -2944,6 +3198,16 @@ def run():
                         except (TypeError, ValueError) as exc:
                             reply = {"request_id": request_id, "type": "learn_error",
                                      "error": str(exc), "codigo": "erro"}
+                    elif req.get("type") == "research_job_start":
+                        reply = {"request_id": request_id, **rjob_start(db, req, dono)}
+                    elif req.get("type") == "research_job_status":
+                        reply = {"request_id": request_id, **rjob_status(db, req, dono)}
+                    elif req.get("type") == "research_job_cancel":
+                        reply = {"request_id": request_id, **rjob_cancel(db, req, dono)}
+                    elif req.get("type") == "research_jobs_list":
+                        reply = {"request_id": request_id, **rjob_list(db, dono)}
+                    elif req.get("type") == "research_job_evidence":
+                        reply = {"request_id": request_id, **rjob_evidence(db, req, dono)}
                     elif req.get("type") == "ui_state_save":
                         salvos = 0
                         with db:

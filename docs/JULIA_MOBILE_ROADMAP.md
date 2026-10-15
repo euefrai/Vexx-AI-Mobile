@@ -28,11 +28,13 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   (nunca série inventada); dashboards; `since` incremental no ui-state.
 
 ## V4.4 — PESQUISA E CONFIABILIDADE ✅ (2026-10-16)
+
 - Inference reliability: códigos 402/422, `tentar_modelos` (preferencial +
   fallbacks explícitos, backoff, para em auth, erro original com 1 modelo),
   `chat_stream_fb` (troca só antes do 1º delta), circuit breaker por base,
   `JULIA_AI_FALLBACKS`. E2E determinístico. Hermes real: inferência bloqueada
   no provedor (ver JULIA_INFERENCE_RELIABILITY.md); quota zero em testes.
+
 - Research Engine (`research.py`): buscar DDG (html+lite, parsers 2026) →
   recuperar páginas → extrair → divergências → runs persistidos; SSRF
   bloqueado em cada redirect; teto 2 MB/10 s/só-texto; cache SQLite por dono;
@@ -42,12 +44,20 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   markdown). Status "pesquisando…" ao vivo: AUSENTE (stream é canônico).
   Docs + RELATORIO_JULIA_4.4.md. Suíte: ver relatório.
 
-## V4.5 — AGENTES
+## V4.5 — DEEP RESEARCH AGENTS & LIVE RESEARCH ✅ (2026-10-16)
+- `research_agents.py`: orchestrator, planner, 7 papéis, evidence store,
+  verificação determinística, síntese extrativa + auditoria.
+- Jobs em background (1/dono, teto 2), 5 rotas relay, painel live Minimal
+  Premium com polling, comandos de memória sem LLM, fence de evidências.
+- Quality Lab com métricas + casos; LLM-real = skip BLOQUEADO.
+- Relatório em RELATORIO_JULIA_4.5.md.
+
+## V4.6 — AGENTES
 - Perfis (professora/pesquisadora/organizadora/criativa/analista) como
   system prompts + ferramentas autorizadas compartilhadas; fila e limites de
   consumo do Hermes; aprovação para ações sensíveis.
 
-## V4.6 — COMUNIDADE/MULTI-CONTA
+## V4.7 — COMUNIDADE/MULTI-CONTA
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca, moderação. Só após V4.0 de isolamento.
 

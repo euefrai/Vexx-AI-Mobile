@@ -18,6 +18,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from pydantic import BaseModel, Field
+from workspace_store import WorkspaceBatch
 
 log = logging.getLogger("JULIA-mobile")
 ROOT = Path(__file__).resolve().parent
@@ -809,6 +810,19 @@ async def messages(request: Request, conversation_id: str = ""):
     return {"messages": msgs}
 
 
+@app.post("/api/workspace/sync")
+async def workspace_sync(request: Request, body: WorkspaceBatch):
+    require_csrf(request)
+    owner = await revogacao_ok(request)
+    result = await relay.exchange({"type": "workspace_sync", "owner": owner,
+                                   "records": [r.model_dump() for r in body.records]}, timeout=20.0)
+    if result.get("type") == "op_error":
+        raise erro_relay(result, "Não foi possível sincronizar os projetos")
+    if result.get("type") != "workspace_synced":
+        raise HTTPException(503, "O PC não confirmou a organização dos chats")
+    return {"records": result.get("records", [])}
+
+
 @app.get("/api/conversations")
 async def conversations(request: Request):
     verify_session(request)
@@ -1517,6 +1531,93 @@ async def learn_history(request: Request, limite: int = 50):
     if result.get("type") != "learn_history":
         raise _learn_erro(result)
     return {"tentativas": result.get("tentativas", [])}
+
+
+class ResearchStartIn(BaseModel):
+    objetivo: str = Field(min_length=3, max_length=500)
+    conv: str = Field(default="", max_length=100)
+    modo: str = Field(default="", max_length=20)
+
+
+class ResearchJobIn(BaseModel):
+    job_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+
+
+def _research_erro(result: dict) -> HTTPException:
+    codigo = result.get("codigo", "erro")
+    if codigo == "bloqueada":
+        return erro_relay(result, "Conta indisponível.")
+    if codigo == "ausente":
+        raise HTTPException(404, result.get("error", "Pesquisa não encontrada"))
+    if codigo == "ocupado":
+        raise HTTPException(409, result.get("error", "Pesquisa em andamento"))
+    return HTTPException(503, result.get("error", "Pesquisa indisponível"))
+
+
+@app.post("/api/research/start")
+async def research_start(request: Request, body: ResearchStartIn):
+    """Inicia pesquisa agêntica em background (1 ativa por dono)."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "research_job_start", "owner": dono,
+                                   "objetivo": body.objetivo, "conv": body.conv,
+                                   "modo": body.modo}, timeout=20.0)
+    if result.get("type") != "research_job":
+        raise _research_erro(result)
+    return {"job_id": result["job_id"], "modo": result.get("modo", ""),
+            "etapas": result.get("etapas", 0)}
+
+
+@app.get("/api/research/status")
+async def research_status(request: Request, job_id: str, apos_seq: int = 0):
+    """Estado + eventos desde apos_seq (polling; dedupe por seq no cliente)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(job_id) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "research_job_status", "owner": dono,
+                                   "job_id": job_id, "apos_seq": apos_seq}, timeout=20.0)
+    if result.get("type") != "research_status":
+        raise _research_erro(result)
+    return {"resumo": result.get("resumo", {}), "eventos": result.get("eventos", [])}
+
+
+@app.post("/api/research/cancel")
+async def research_cancel(request: Request, body: ResearchJobIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "research_job_cancel", "owner": dono,
+                                   "job_id": body.job_id}, timeout=20.0)
+    if result.get("type") != "research_cancelled":
+        raise _research_erro(result)
+    result.pop("type", None)
+    return result
+
+
+@app.get("/api/research/jobs")
+async def research_jobs(request: Request):
+    """Histórico de pesquisas do dono (memória de investigações)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "research_jobs_list", "owner": dono},
+                                  timeout=20.0)
+    if result.get("type") != "research_jobs":
+        raise _research_erro(result)
+    return {"jobs": result.get("jobs", [])}
+
+
+@app.get("/api/research/evidence")
+async def research_evidence(request: Request, job_id: str):
+    """Evidências do job (links reais para o painel)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(job_id) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "research_job_evidence", "owner": dono,
+                                   "job_id": job_id}, timeout=20.0)
+    if result.get("type") != "research_evidence":
+        raise _research_erro(result)
+    return {"evidencias": result.get("evidencias", [])}
 
 
 @app.get("/api/ai/models")
