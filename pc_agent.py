@@ -104,6 +104,65 @@ def _migrar_memories_por_dono(db) -> None:
     log.info("memories migrada para isolamento por dono")
 
 
+def _migrar_ai_requests_por_dono(db) -> None:
+    """ai_requests passa de PK(user_message_id) global para PK(owner_id,
+    user_message_id): sem isso, um dono sobrescreve o estado de IA do outro
+    (busy/replay vazam entre contas). Preserva dados existentes."""
+    sql = db.execute("SELECT sql FROM sqlite_master WHERE name='ai_requests'").fetchone()
+    if not sql or not sql[0]:
+        return
+    if "PRIMARY KEY (owner_id, user_message_id)" in sql[0]:
+        return
+    db.execute("ALTER TABLE ai_requests RENAME TO ai_requests_antiga")
+    db.execute("""CREATE TABLE ai_requests (
+        user_message_id TEXT NOT NULL, conversation_id TEXT NOT NULL,
+        model TEXT NOT NULL, state TEXT NOT NULL,
+        reply_id TEXT, response_text TEXT, error TEXT,
+        created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local',
+        PRIMARY KEY (owner_id, user_message_id)
+    )""")
+    db.execute("""INSERT OR IGNORE INTO ai_requests
+        (user_message_id, conversation_id, model, state, reply_id,
+         response_text, error, created_at, updated_at, owner_id)
+        SELECT user_message_id, conversation_id, model, state, reply_id,
+         response_text, error, created_at, updated_at, owner_id
+        FROM ai_requests_antiga""")
+    db.execute("DROP TABLE ai_requests_antiga")
+    log.info("ai_requests migrada para PK por dono")
+
+
+def _migrar_messages_por_dono(db) -> None:
+    """messages passa de PK(id) global para PK(owner_id, id): sem isso, dois
+    donos não podem ter a mesma mensagem (INSERT OR IGNORE descarta a do
+    segundo) e o histórico vaza entre contas. Preserva colunas e dados."""
+    sql = db.execute("SELECT sql FROM sqlite_master WHERE name='messages'").fetchone()
+    if not sql or not sql[0]:
+        return
+    if "PRIMARY KEY (owner_id, id)" in sql[0]:
+        return
+    pragma = db.execute("PRAGMA table_info(messages)").fetchall()
+    defs, nomes = [], []
+    for cid, nome, tipo, nn, dflt, pk in pragma:
+        nomes.append(nome)
+        pedaco = f"{nome} {tipo or 'TEXT'}"
+        if nn and nome != "id":
+            pedaco += " NOT NULL"
+        if dflt is not None:
+            pedaco += f" DEFAULT {dflt}"
+        defs.append(pedaco)
+    defs.append("PRIMARY KEY (owner_id, id)")
+    db.execute("ALTER TABLE messages RENAME TO messages_antiga")
+    db.execute(f"CREATE TABLE messages ({', '.join(defs)})")
+    cols = ", ".join(nomes)
+    db.execute(f"INSERT OR IGNORE INTO messages ({cols}) SELECT {cols} FROM messages_antiga")
+    db.execute("DROP TABLE messages_antiga")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_created ON messages(origin, created_at)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_conv ON messages(origin, conversation_id, created_at)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
+    log.info("messages migrada para PK por dono")
+
+
 def _memoria_v41(db) -> None:
     """Colunas tipadas + eventos + settings + FTS (idempotente, preserva dados)."""
     for _col, _ddl in (("tipo", "TEXT NOT NULL DEFAULT 'semantica'"),
@@ -156,24 +215,28 @@ def open_db(path: Path):
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("""CREATE TABLE IF NOT EXISTS messages (
-        id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
+        id TEXT NOT NULL, conversation_id TEXT NOT NULL,
         origin TEXT NOT NULL, role TEXT NOT NULL, text TEXT NOT NULL,
         created_at TEXT NOT NULL, received_at TEXT NOT NULL,
-        owner_id TEXT NOT NULL DEFAULT 'local'
+        owner_id TEXT NOT NULL DEFAULT 'local',
+        PRIMARY KEY (owner_id, id)
     )""")
     try:
         db.execute("ALTER TABLE messages ADD COLUMN model TEXT")
     except sqlite3.OperationalError:
         pass  # coluna já existe (migração idempotente)
     _ensure_owner_coluna(db, "messages")
+    _migrar_messages_por_dono(db)
     db.execute("""CREATE TABLE IF NOT EXISTS ai_requests (
-        user_message_id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
+        user_message_id TEXT NOT NULL, conversation_id TEXT NOT NULL,
         model TEXT NOT NULL, state TEXT NOT NULL,
         reply_id TEXT, response_text TEXT, error TEXT,
         created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
-        owner_id TEXT NOT NULL DEFAULT 'local'
+        owner_id TEXT NOT NULL DEFAULT 'local',
+        PRIMARY KEY (owner_id, user_message_id)
     )""")
     _ensure_owner_coluna(db, "ai_requests")
+    _migrar_ai_requests_por_dono(db)
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_created ON messages(origin, created_at)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_mobile_messages_conv ON messages(origin, conversation_id, created_at)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_messages_owner ON messages(owner_id, origin, created_at)")
@@ -1743,7 +1806,7 @@ def ai_marcar(db, user_message_id, conversation_id, model, state,
             (user_message_id, conversation_id, model, state, reply_id,
              response_text, error, created_at, updated_at, owner_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(user_message_id) DO UPDATE SET state=excluded.state,
+            ON CONFLICT(owner_id, user_message_id) DO UPDATE SET state=excluded.state,
              reply_id=excluded.reply_id, response_text=excluded.response_text,
              error=excluded.error, updated_at=excluded.updated_at""",
             (user_message_id, conversation_id, model, state, reply_id,

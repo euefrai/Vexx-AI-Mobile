@@ -51,3 +51,24 @@ mascaradas.
 - Conversão de unidades não implementada (inconclusivo honesto).
 - Datas de publicação raramente disponíveis (só acesso afirmado).
 - E2E com LLM + aparelho físico: pendentes.
+
+## 6. Correção pós-V4.6 — primeira tentativa de IA (16/10/2026)
+
+Sintoma: toda mensagem falhava de primeira com "mensagem não encontrada,
+sincronize" e só respondia após retries. Causas encontradas e corrigidas:
+
+1. Corrida sync→IA: o auto-disparo para pendentes não exigia confirmação do
+   PC, e qualquer falha silenciosa de confirmação gerava `sem_mensagem`.
+   Correção em duas camadas: (a) pedido de IA leva o texto junto
+   (`text`/`created_at` em `/api/ai` e `/api/ai/stream`); o agente persiste
+   (INSERT OR IGNORE, mesmas regras do sync, dono da sessão) antes de
+   responder — atômico, funciona de primeira; (b) auto-disparo só para
+   mensagens com `status === 'synced'`.
+2. `ai_requests` com PK global: um dono sobrescrevia o estado de IA do
+   outro (busy/replay vazavam). Migração para PK `(owner_id,
+   user_message_id)` com dados preservados.
+3. `messages` com PK global em `id`: segundo dono com mesmo id tinha a
+   linha descartada (INSERT OR IGNORE) e caía em `sem_mensagem`.
+   Migração para PK `(owner_id, id)` (colunas e índices preservados).
+
+Suíte após a correção: 225 passed, 0 failed, 2 skipped (LLM real).

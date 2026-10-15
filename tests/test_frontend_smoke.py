@@ -285,6 +285,9 @@ def test_estudos_ligado_e_com_cache_offline():
     for sym in ('learnOutbox', 'learnEnqueue', 'learnSyncOutbox', 'queueLearn'):
         assert sym in js, sym
     assert 'ctx.queueLearn' in (RAIZ / 'public' / 'jdui.js').read_text(encoding='utf-8')
+    # anti-corrida sync→IA: texto acompanha o pedido; pendentes só sincronizados
+    assert 'text: userRow.text' in js and 'created_at: userRow.created_at' in js
+    assert "m.status === 'synced'" in js
 
 
 def test_jdui_v43_fiacao():

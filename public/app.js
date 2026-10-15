@@ -1241,7 +1241,7 @@ async function checkStatus() {
       for (const m of conf.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
       // puxa respostas prontas de outras sessões? tenta IA para pendentes recentes
       const all = ownRows(await allMessages());
-      const pend = all.filter(m => m.role === 'user' && m.want_ai && !all.find(x => x.id === m.id + '-r1' && x.status === 'synced')).slice(-3);
+      const pend = all.filter(m => m.role === 'user' && m.want_ai && m.status === 'synced' && !all.find(x => x.id === m.id + '-r1' && x.status === 'synced')).slice(-3);
       for (const m of pend) { if (!aiAbort) await requestAI(m); }
     }
   } catch (err) {

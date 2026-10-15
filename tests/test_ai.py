@@ -191,7 +191,100 @@ def test_agente_ai_idempotente_sem_rechamada(tmp_path, monkeypatch):
     db.close()
 
 
+def test_ai_preparar_piggyback_primeira_tentativa(tmp_path):
+    """Corrida sync→IA: sem a linha no PC, o texto do pedido persiste e segue."""
+    db = pc_agent.open_db(tmp_path / "piggy.sqlite3")
+    base = {"message_id": "pg-user-001", "conversation_id": "conv-pg", "owner": "u-x"}
+    r = pc_agent.ai_preparar(db, dict(base), {"model": "m", "context": 5, "max_tokens": 10})
+    assert r["codigo"] == "sem_mensagem"  # sem texto: continua falhando
+    r = pc_agent.ai_preparar(db, dict(base, text="olá, Júlia",
+                                      created_at="2026-10-16T10:00:00.000Z"),
+                             {"model": "m", "context": 5, "max_tokens": 10})
+    assert r["user_text"] == "olá, Júlia" and r["reply_id"] == "pg-user-001-r1"
+    row = db.execute("SELECT role, text FROM messages WHERE id='pg-user-001'").fetchone()
+    assert row == ("user", "olá, Júlia")  # persistida com as regras do sync
+    vazio = dict(base, message_id="pg-user-002", text="")
+    assert pc_agent.ai_preparar(db, vazio,  # texto vazio não salva
+                                {"model": "m", "context": 5, "max_tokens": 10})["codigo"] == "sem_mensagem"
+    # isolamento: piggyback de outro dono não lê nem escreve fora
+    r = pc_agent.ai_preparar(db, dict(base, text="outro", owner="u-y"),
+                             {"model": "m", "context": 5, "max_tokens": 10})
+    assert r["user_text"] == "outro"
+    assert db.execute("SELECT COUNT(*) FROM messages WHERE owner_id='u-y'").fetchone()[0] == 1
+    assert db.execute("SELECT COUNT(*) FROM messages WHERE id='pg-user-001'").fetchone()[0] == 2
+    db.close()
+
+
+def test_migracao_pk_por_dono_preserva_dados(tmp_path):
+    import sqlite3 as _sq
+    caminho = tmp_path / "legado.sqlite3"
+    con = _sq.connect(caminho)
+    con.execute("""CREATE TABLE messages (
+        id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
+        origin TEXT NOT NULL, role TEXT NOT NULL, text TEXT NOT NULL,
+        created_at TEXT NOT NULL, received_at TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local')""")
+    con.execute("INSERT INTO messages VALUES ('m1abcdef','c','mobile','user','oi','2026-10-01T10:00:00','t','local')")
+    con.execute("""CREATE TABLE ai_requests (
+        user_message_id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL,
+        model TEXT NOT NULL, state TEXT NOT NULL, reply_id TEXT,
+        response_text TEXT, error TEXT, created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL, owner_id TEXT NOT NULL DEFAULT 'local')""")
+    con.execute("INSERT INTO ai_requests VALUES ('m1abcdef','c','m','completed','m1abcdef-r1','R','','t','t','local')")
+    con.commit()
+    con.close()
+    db = pc_agent.open_db(caminho)  # migra
+    assert db.execute("SELECT text FROM messages WHERE id='m1abcdef'").fetchone()[0] == "oi"
+    assert db.execute("SELECT response_text FROM ai_requests WHERE user_message_id='m1abcdef'").fetchone()[0] == "R"
+    sql = db.execute("SELECT sql FROM sqlite_master WHERE name='messages'").fetchone()[0]
+    assert "PRIMARY KEY (owner_id, id)" in sql
+    # agora o mesmo id serve a outro dono sem colidir
+    assert pc_agent.persist_messages(db, [{"id": "m1abcdef", "conversation_id": "conv-leg",
+                                           "origin": "mobile", "role": "user", "text": "outro",
+                                           "created_at": "2026-10-16T10:00:00.000Z"}], "u-z") == ["m1abcdef"]
+    assert db.execute("SELECT COUNT(*) FROM messages WHERE id='m1abcdef'").fetchone()[0] == 2
+    assert pc_agent.ai_preparar(db, {"message_id": "m1abcdef", "conversation_id": "conv-leg",
+                                     "owner": "u-z", "text": "outro"},
+                                {"model": "m", "context": 5, "max_tokens": 10})["user_text"] == "outro"
+    db.close()
+
+
 # ── Unidade: relay (auth, validação, roteamento de stream) ─────────────
+def test_ai_piggyback_text_atravessa_relay():
+    """O texto acompanha o pedido de IA até o agente (anti-corrida sync→IA)."""
+    with TestClient(server.app) as client:
+        csrf = login(client)
+        with client.websocket_connect("/api/agent/ws",
+                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            out = {}
+
+            def chama_ai():
+                out["a"] = client.post("/api/ai", json={"message_id": "pg-relay-001",
+                                                       "conversation_id": "conv-pg",
+                                                       "text": "olá relay",
+                                                       "created_at": "2026-10-16T10:00:00.000Z"},
+                                       headers={"X-CSRF-Token": csrf})
+
+            t = threading.Thread(target=chama_ai)
+            t.start()
+            for _ in range(3):
+                req = ws.receive_json()
+                if req["type"] == "sess_revogados":
+                    ws.send_json({"request_id": req["request_id"],
+                                  "type": "sess_revogados", "sids": []})
+                    continue
+                break
+            assert req["type"] == "ai"
+            assert req.get("text") == "olá relay"  # piggyback presente
+            assert req.get("owner") == "local"  # dono da sessão, nunca do cliente
+            assert "text" not in str(req.get("model", ""))  # sem mistura
+            ws.send_json({"request_id": req["request_id"], "type": "ai_done",
+                          "reply_id": "pg-relay-001-r1", "response_text": "OI",
+                          "model": "fake-model"})
+            t.join(timeout=8)
+            assert out["a"].json()["response_text"] == "OI"
+
+
 def test_ai_exige_auth_e_valida_modelo():
     with TestClient(server.app) as client:
         assert client.post("/api/ai", json={"message_id": "ai-user-001",
@@ -284,6 +377,40 @@ def test_stream_delta_roteado_para_fila():
                 assert q.get_nowait()["type"] == "ai_done"
             finally:
                 server.relay.streams.pop("s1", None)
+
+
+def test_stream_encaminha_texto_piggyback():
+    with TestClient(server.app) as client:
+        csrf = login(client)
+        with client.websocket_connect("/api/agent/ws",
+                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            out = {}
+
+            def chama_stream():
+                try:
+                    with client.stream("GET", "/api/ai/stream?message_id=pg-stream-001"
+                                            "&conversation_id=conv-pg&text=ola+stream",
+                                       headers={"X-CSRF-Token": csrf}) as r:
+                        out["status"] = r.status_code
+                        for _ in r.iter_bytes():
+                            break
+                except Exception as exc:
+                    out["err"] = type(exc).__name__
+
+            t = threading.Thread(target=chama_stream)
+            t.start()
+            for _ in range(60):
+                req = ws.receive_json()
+                if req.get("type") == "sess_revogados":
+                    ws.send_json({"request_id": req["request_id"],
+                                  "type": "sess_revogados", "sids": []})
+                    continue
+                break
+            assert req["type"] == "ai_stream"
+            assert req.get("text") == "ola stream"  # piggyback no stream
+            ws.send_json({"request_id": req["request_id"], "type": "ai_error",
+                          "error": "x", "codigo": "indisponivel"})
+            t.join(timeout=10)
 
 
 # ── Integração: processos reais (relay + agente + Hermes falso) ────────
