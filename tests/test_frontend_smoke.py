@@ -84,6 +84,8 @@ t('codigo-comum-sem-duo', !mdPlain.includes('jdui-duo') && mdPlain.includes('cod
 t('code-block', renderMarkdown('ex:\n```python\nprint("oi")\n```').includes('<pre><code>'));
 t('xss-escaped', renderMarkdown('<img src=x onerror=evil()>').includes('&lt;img'));
 t('table', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<table>'));
+t('heading-levels', renderMarkdown('# Título\n## Seção\n### Detalhe').includes('<h2>Título</h2><h3>Seção</h3><h4>Detalhe</h4>'));
+t('responsive-table-wrapper', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<div class="table-wrap"><table>'));
 """
 
 
@@ -243,6 +245,18 @@ def test_html_sem_classes_escapadas():
     for eid in ('loginOverlay', 'loginForm', 'registerForm', 'conversation', 'composer',
                 'sessionList', 'drawer', 'statusPop'):
         assert f'id="{eid}"' in html, eid
+
+
+def test_estilos_legiveis_para_markdown_no_chat():
+    css = (RAIZ / 'public' / 'interface.css').read_text(encoding='utf-8')
+    for regra in (
+        '.message.ai .bubble h2',
+        '.bubble blockquote',
+        '.bubble .codeblock pre code',
+        '.table-wrap',
+        '.bubble tbody tr:nth-child(even)',
+    ):
+        assert regra in css, regra
 
 
 def test_acoes_de_historico_arquivos_e_contexto_local_ligadas():

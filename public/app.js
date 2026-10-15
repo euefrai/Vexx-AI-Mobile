@@ -561,7 +561,13 @@ function renderMarkdown(text) {
       if (table.length === 0) { flushList(); flushBq(); table.push(t); continue; }
       table.push(t); continue;
     } else if (table.length) flushTable();
-    if (/^(#{1,4})\s+(.+)/.test(t)) { flushList(); flushBq(); const m = t.match(/^(#{1,4})\s+(.+)/); html.push('<h3>' + inlineFmt(m[2]) + '</h3>'); continue; }
+    const heading = t.match(/^(#{1,4})\s+(.+)/);
+    if (heading) {
+      flushList(); flushBq();
+      const tag = heading[1].length === 1 ? 'h2' : heading[1].length === 2 ? 'h3' : 'h4';
+      html.push('<' + tag + '>' + inlineFmt(heading[2]) + '</' + tag + '>');
+      continue;
+    }
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(t)) { flushList(); flushBq(); html.push('<hr>'); continue; }
     if (/^&gt;/.test(ln) || /^>/.test(t)) { flushList(); bq.push(t.replace(/^(&gt;|>)\s?/, '')); continue; }
     else if (bq.length) flushBq();
