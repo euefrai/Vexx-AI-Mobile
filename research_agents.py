@@ -152,7 +152,8 @@ def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
 
 def carregar_job(db, owner: str, job_id: str) -> dict:
     row = db.execute("SELECT id, conv, modo, objetivo, plano, plano_versao, status, orcamento,"
-                     " usados, achados, pendencias, erros, criado_em, atualizado_em"
+                     " usados, achados, pendencias, erros, criado_em, atualizado_em,"
+                     " COALESCE(investigacoes, '[]'), COALESCE(auditoria, '{}')"
                      " FROM research_jobs WHERE id=? AND owner_id=?", (job_id, owner)).fetchone()
     if not row:
         raise AgentErro("pesquisa não encontrada", "ausente")
@@ -635,17 +636,27 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 elif etapa["tipo"] == "analisar":
                     etapa["_n"] = len(todas_evid)
                 elif etapa["tipo"] == "verificar":
-                    vereditos = agente_verificador(db, job, todas_evid or _evidencias_job(db, job))
-                    job["achados"] = [{"afirmacao": v["afirmacao"], "estado": v["estado"]}
-                                      for v in vereditos]
+                    base_ev = todas_evid or _evidencias_job(db, job)
+                    analisar_independencia_job(db, job, base_ev)
+                    vereditos = agente_verificador(db, job, base_ev)
+                    job["achados"] = [{"afirmacao": v["afirmacao"], "estado": v["estado"],
+                                       "metodo": v.get("metodo", "")} for v in vereditos]
+                    job["investigacoes"] = investigar_contradicoes_job(db, job, base_ev)
                 elif etapa["tipo"] == "sintetizar":
                     etapa["_sintese"] = agente_sintetizador(
                         db, job, todas_evid or _evidencias_job(db, job), vereditos)
                 elif etapa["tipo"] == "auditar":
                     sint = next((s.get("_sintese") for s in job["plano"]
                                  if s.get("_sintese")), {"texto": "", "llm": False})
+                    emitir(db, job["id"], owner, "auditor", "audit_started", "ok",
+                           "Auditoria final da resposta.", {})
                     etapa["_auditoria"] = agente_auditor(
                         db, job, sint, todas_evid or _evidencias_job(db, job))
+                    job["auditoria"] = dict(etapa["_auditoria"])
+                    emitir(db, job["id"], owner, "auditor", "audit_completed",
+                           "ok" if etapa["_auditoria"].get("ok") else "alerta",
+                           f"Auditoria: {len(etapa['_auditoria'].get('problemas', []))} problemas.",
+                           {})
                 etapa["status"] = "feita"
             except (AgentErro, research.ResearchErro) as exc:
                 etapa["status"] = "falhou"
