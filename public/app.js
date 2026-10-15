@@ -59,6 +59,7 @@ function navigate(tab) {
   $('suggestions').style.display = chat ? 'flex' : 'none';
   document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
   if (tab === 'activity') renderTimeline();
+  if (tab === 'estudos') renderEstudos();
   if (tab === 'settings') { loadMemories(); paintSavedItems(); }
 }
 navItems.forEach(n => n.addEventListener('click', () => {
@@ -765,6 +766,99 @@ async function renderTimeline() {
     tl.appendChild(d);
   });
 }
+
+/* ----- Meus Estudos (V4.2): progresso, planos e revisoes, com cache offline ----- */
+function learnKey(name) { return 'learn:' + currentUid + ':' + name; }
+async function learnCachePut(name, data) {
+  if (!db) return;
+  try {
+    const tx = db.transaction(META, 'readwrite');
+    const done = txDone(tx);
+    tx.objectStore(META).put({ k: learnKey(name), v: { at: new Date().toISOString(), data } });
+    await done;
+  } catch (_) {}
+}
+async function learnCacheGet(name) {
+  if (!db) return null;
+  try {
+    const rows = await reqPromise(db.transaction(META, 'readonly').objectStore(META).getAll());
+    const hit = (rows || []).find(r => r && r.k === learnKey(name));
+    return hit ? hit.v : null;
+  } catch (_) { return null; }
+}
+async function learnData(name, url, online) {
+  if (online) {
+    try {
+      const data = await api(url);
+      await learnCachePut(name, data);
+      return { data, cached: false, at: null };
+    } catch (_) {}
+  }
+  const hit = await learnCacheGet(name);
+  return { data: hit ? hit.data : null, cached: true, at: hit ? hit.at : null };
+}
+function estudosItem(icon, title, desc, small) {
+  return '<div class="timeline-icon"><svg class="icon"><use href="#' + icon + '"/></svg></div>'
+    + '<div><strong>' + esc(title) + '</strong>'
+    + (desc ? '<p>' + esc(desc) + '</p>' : '')
+    + (small ? '<small>' + esc(small) + '</small>' : '') + '</div>';
+}
+function estudosLista(id, rows) {
+  const box = $(id);
+  if (!box) return;
+  box.replaceChildren();
+  rows.forEach(html => {
+    const d = document.createElement('div');
+    d.className = 'timeline-item';
+    d.innerHTML = html;
+    box.appendChild(d);
+  });
+}
+async function renderEstudos() {
+  if (!$('estudosGrid') || !$('page-estudos')) return;
+  const online = navigator.onLine && authenticated && pcOnline && !PREVIEW_MODE;
+  const [stats, plans, due, mistakes, rec] = await Promise.all([
+    learnData('stats', '/api/learn/stats', online),
+    learnData('plans', '/api/learn/plans', online),
+    learnData('due', '/api/learn/cards/due?limite=20', online),
+    learnData('mistakes', '/api/learn/mistakes?limite=10', online),
+    learnData('recommend', '/api/learn/recommend', online),
+  ]);
+  const aviso = $('estudosAviso');
+  const at = [stats, plans, due, mistakes, rec].map(x => x.at).filter(Boolean).sort().pop();
+  if (aviso) {
+    const semDados = !stats.data && !plans.data;
+    aviso.hidden = !semDados && !stats.cached;
+    aviso.textContent = semDados
+      ? 'Sem dados ainda — faça um quiz no chat para começar.'
+      : 'Offline — mostrando dados salvos' + (at ? ' em ' + esc(at.slice(0, 16).replace('T', ' ')) : '') + '.';
+  }
+  const r = (stats.data && stats.data.resumo) || {};
+  $('estProvas').textContent = r.concluidas || 0;
+  $('estAcertos').textContent = (r.acertos || 0) + '/' + (r.respostas || 0);
+  $('estItens').textContent = (r.itens_feitos || 0) + '/' + (r.itens_plano || 0);
+  $('estDue').textContent = r.revisoes_pendentes || 0;
+  estudosLista('estudosAssuntos', ((stats.data && stats.data.por_assunto) || []).map(p =>
+    estudosItem('i-activity', (p.assunto || 'geral') + ' — ' + Math.round((p.taxa || 0) * 100) + '%',
+      (p.acertos || 0) + ' acertos em ' + (p.total || 0) + ' respostas', null)));
+  const recs = (rec.data && rec.data.recomendacoes) || [];
+  estudosLista('estudosRecs', recs.length ? recs.map(x =>
+    estudosItem('i-sparkle', x.detalhe || x.tipo, 'Base: dados reais do seu estudo', null))
+    : [estudosItem('i-sparkle', 'Nada a recomendar ainda',
+      (rec.data && rec.data.aviso) || 'Responda quizzes para receber sugestões.', null)]);
+  estudosLista('estudosPlanos', ((plans.data && plans.data.planos) || []).map(p =>
+    estudosItem('i-chat', p.titulo + ' — ' + (p.feitos || 0) + '/' + (p.total || 0),
+      (p.assunto ? p.assunto + ' · ' : '') + (p.prazo_iso ? 'até ' + p.prazo_iso : 'sem prazo'), null)));
+  estudosLista('estudosDue', ((due.data && due.data.cards) || []).slice(0, 20).map(c =>
+    '<div class="timeline-icon"><svg class="icon"><use href="#i-refresh"/></svg></div>'
+    + '<div><details><summary><strong>' + esc(c.frente || '') + '</strong>'
+    + (c.assunto ? ' <small>' + esc(c.assunto) + '</small>' : '') + '</summary><p>'
+    + esc(c.verso || '') + '</p></details></div>'));
+  estudosLista('estudosErros', ((mistakes.data && mistakes.data.erradas) || []).map(e =>
+    estudosItem('i-chat', e.enunciado || '',
+      'Sua resposta: ' + (e.sua_resposta || '—'), e.assunto || null)));
+}
+$('estudosRefresh').addEventListener('click', () => renderEstudos());
 
 /* ----- Conexão / API ----- */
 function memoryOn() { return $('memoryToggle').checked; }

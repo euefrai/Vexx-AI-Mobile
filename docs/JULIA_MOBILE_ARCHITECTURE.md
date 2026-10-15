@@ -58,6 +58,12 @@ leitura/escrita local + IA indisponível (mensagem clara, sem simulação).
   Cidade e coordenadas aproximadas (arredondadas a duas casas) só são incluídas
   quando o usuário ativa o recurso e pergunta sobre um lugar. Não há geolocalização
   contínua nem obtenção automática em segundo plano.
+- O agente valida a data/hora e o fuso antes de usá-los, calcula o dia local e
+  usa essa referência para eventos e prazos. Perguntas diretas como hora atual,
+  data de hoje/amanhã e datas em alguns dias recebem resposta determinística,
+  sem passar pelo modelo; perguntas ambíguas ou sobre outro fuso ficam com a IA,
+  instruída a não inventar quando faltarem dados. Horários de eventos externos
+  e outras informações em tempo real ainda exigem fonte atualizada.
 
 ## Limites assumidos
 

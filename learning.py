@@ -579,6 +579,48 @@ def questoes_erradas(db, owner: str, limite: int = 20) -> list:
              "tipo": r[3], "sua_resposta": r[4], "em": r[5]} for r in rows]
 
 
+def criar_reforco(db, owner: str, limite: int = 10) -> dict:
+    """Simulado de reforço com as questões que o dono errou (dados reais).
+
+    Reutiliza enunciado/gabarito/explicação originais — nunca reescreve nem
+    inventa questões. Origem marcada como 'reforco'. Sem erros recentes:
+    LearnErro 'sem_dados' (o chat informa, em vez de inventar).
+    """
+    erradas = questoes_erradas(db, owner, limite)
+    if not erradas:
+        raise LearnErro("sem erros recentes para reforçar", "sem_dados")
+    ids = [e["question_id"] for e in erradas]
+    qs = []
+    for qid in ids:
+        row = db.execute("SELECT enunciado, tipo, opcoes, gabarito, explicacao, dificuldade, assunto"
+                         " FROM questions WHERE id=? AND owner_id=?", (qid, owner)).fetchone()
+        if not row:
+            continue
+        try:
+            ops = json.loads(row[2] or "[]")
+        except (TypeError, ValueError):
+            ops = []
+        q = {"id": f"{qid}-r", "enunciado": row[0], "tipo": row[1], "opcoes": ops,
+             "explicacao": row[4], "dificuldade": row[5] or "media", "assunto": row[6] or ""}
+        if row[1] in ("multipla", "vf"):
+            try:
+                q["gabarito"] = int(row[3])
+            except (TypeError, ValueError):
+                continue  # gabarito corrompido: pula, não inventa
+        else:
+            q["gabarito"] = row[3]
+        try:
+            validar_questao(q)
+        except LearnErro:
+            continue
+        qs.append(q)
+    if not qs:
+        raise LearnErro("sem erros recentes para reforçar", "sem_dados")
+    assuntos = sorted({q["assunto"] for q in qs if q["assunto"]})
+    return criar_assessment(db, owner, "Reforço: " + (", ".join(assuntos[:3]) or "geral"),
+                           assuntos[0] if assuntos else "", qs, origem="reforco")
+
+
 # ── Aprendizado adaptativo (regras transparentes, §9) ─────────────
 def recomendar(db, owner: str, hoje=None) -> dict:
     """Recomendações determinísticas a partir de dados reais.

@@ -104,6 +104,25 @@ def test_invalidos():
     assert ok and norm['blocks'][0]['props']['items'][0]['url'] == ''
 
 
+def test_componentes_educacionais():
+    base = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "exam", "props": {"assessment_id": "av-1", "title": "P1"}},
+        {"type": "ui", "component": "studyplan", "props": {"plan_id": "pl-1"}},
+        {"type": "ui", "component": "flashcards", "props": {"assunto": "mat"}},
+        {"type": "ui", "component": "studyprogress", "props": {}},
+    ]}
+    ok, norm, erros = jdui.validar_mensagem(base)
+    assert ok, erros
+    comps = [b["component"] for b in norm["blocks"]]
+    assert comps == ["exam", "studyplan", "flashcards", "studyprogress"]
+    # ids inválidos caem (sem vazar nada)
+    ruim = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "studyplan", "props": {"plan_id": "../../etc"}},
+        {"type": "ui", "component": "exam", "props": {"assessment_id": "x"}}]}
+    ok, _, erros = jdui.validar_mensagem(ruim)
+    assert ok is False and len(erros) == 2
+
+
 def test_limites_e_profundidade():
     grande = {"version": "JULIA-ui-message/v1",
               "blocks": [{"type": "text", "content": "x"}] * 30}

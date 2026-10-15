@@ -141,6 +141,17 @@
     accordion(p) {
       const itens = reqList(p, 'items', 1, 10, 'accordion 1..10');
       return { items: itens.filter(a => a && a.title).map(a => ({ title: S(a.title, 120), markdown: S(a.markdown, 3000) })) };
+    },
+    studyplan(p) {
+      const pid = S(p.plan_id, 64);
+      if (!/^[A-Za-z0-9_-]{2,64}$/.test(pid)) throw new JduiErro('studyplan.plan_id');
+      return { plan_id: pid };
+    },
+    flashcards(p) {
+      return { assunto: S(p.assunto, 120) };
+    },
+    studyprogress(p) {
+      return {};
     }
   };
 
@@ -1004,6 +1015,210 @@
       item.appendChild(b); item.appendChild(body); box.appendChild(item);
     });
     root.appendChild(box);
+  };
+
+  function precisaConexao(ctx) {
+    return !ctx.api || (ctx.online && !ctx.online());
+  }
+  function botaoTentar(root, info, recarregar) {
+    const b = el('button', 'jdui-btn ghost', 'Tentar de novo');
+    b.type = 'button';
+    b.addEventListener('click', () => { root.replaceChildren(); recarregar(); });
+    root.appendChild(b);
+  }
+
+  R.studyplan = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    const info = el('div', 'jdui-count', 'Carregando plano…');
+    box.appendChild(info);
+    root.appendChild(box);
+    function montar() {
+      const b2 = el('div', 'jdui-quiz');
+      const i2 = el('div', 'jdui-count', 'Carregando plano…');
+      b2.appendChild(i2);
+      root.replaceChildren(b2);
+      carregar(b2, i2);
+    }
+    if (precisaConexao(ctx)) {
+      info.textContent = 'Conecte-se para ver o plano.';
+      botaoTentar(root, info, montar);
+      return;
+    }
+    carregar(box, info);
+    async function carregar(bx, inf) {
+      let plano;
+      try {
+        plano = await ctx.api('/api/learn/plans/' + encodeURIComponent(props.plan_id));
+      } catch (_) {
+        inf.textContent = 'Não consegui carregar. Toque para tentar de novo.';
+        inf.style.cursor = 'pointer';
+        inf.addEventListener('click', montar, { once: true });
+        return;
+      }
+      const itens = plano.itens || [];
+      const feitos = itens.filter(i => i.feito).length;
+      bx.replaceChildren();
+      bx.appendChild(el('div', 'jdui-title', plano.titulo || 'Plano de estudos'));
+      bx.appendChild(el('div', 'jdui-count', 'Progresso: ' + feitos + '/' + itens.length));
+      bx.appendChild(bar(itens.length ? feitos / itens.length * 100 : 0));
+      const list = el('div', 'jdui-items');
+      itens.forEach(it => {
+        const lab = el('label', 'jdui-opt' + (it.feito ? ' ok' : ''));
+        const inp = document.createElement('input');
+        inp.type = 'checkbox';
+        inp.checked = !!it.feito;
+        inp.setAttribute('aria-label', it.titulo);
+        inp.addEventListener('change', async () => {
+          inp.disabled = true;
+          try {
+            await ctx.api('/api/learn/plans/item', {
+              method: 'POST',
+              body: JSON.stringify({ plan_id: props.plan_id, item_id: it.id, feito: inp.checked })
+            });
+            it.feito = inp.checked;
+            lab.classList.toggle('ok', inp.checked);
+            const f2 = itens.filter(x => x.feito).length;
+            bx.querySelector('.jdui-count').textContent = 'Progresso: ' + f2 + '/' + itens.length;
+            const pg = bx.querySelector('.jdui-bar');
+            if (pg && pg.firstChild) pg.firstChild.style.width = (itens.length ? f2 / itens.length * 100 : 0) + '%';
+          } catch (_) { inp.checked = it.feito; }
+          inp.disabled = false;
+        });
+        lab.appendChild(inp);
+        lab.appendChild(el('span', '', it.titulo));
+        list.appendChild(lab);
+      });
+      bx.appendChild(list);
+    }
+  };
+
+  R.flashcards = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    const info = el('div', 'jdui-count', 'Carregando cartões…');
+    box.appendChild(info);
+    root.appendChild(box);
+    function montar() {
+      const b2 = el('div', 'jdui-quiz');
+      const i2 = el('div', 'jdui-count', 'Carregando cartões…');
+      b2.appendChild(i2);
+      root.replaceChildren(b2);
+      carregar(b2, i2);
+    }
+    if (precisaConexao(ctx)) {
+      info.textContent = 'Conecte-se para revisar os cartões.';
+      botaoTentar(root, info, montar);
+      return;
+    }
+    carregar(box, info);
+    async function carregar(bx, inf) {
+      let todos;
+      try {
+        const r = await ctx.api('/api/learn/cards/due?limite=50');
+        todos = (r.cards || []).filter(c => !props.assunto || c.assunto === props.assunto);
+      } catch (_) {
+        inf.textContent = 'Não consegui carregar. Toque para tentar de novo.';
+        inf.style.cursor = 'pointer';
+        inf.addEventListener('click', montar, { once: true });
+        return;
+      }
+      let i = 0;
+      let virado = false;
+      paint();
+      function paint() {
+        bx.replaceChildren();
+        if (i >= todos.length) {
+          bx.appendChild(el('div', 'jdui-title', 'Revisão em dia 🎉'));
+          bx.appendChild(el('div', 'jdui-q', 'Nenhum cartão vencendo. Volte amanhã.'));
+          return;
+        }
+        const c = todos[i];
+        bx.appendChild(el('div', 'jdui-title', 'Cartão ' + (i + 1) + ' de ' + todos.length));
+        if (c.assunto) bx.appendChild(el('div', 'jdui-count', c.assunto));
+        bx.appendChild(el('div', 'jdui-q', virado ? c.verso : c.frente));
+        const nav = el('div', 'jdui-nav');
+        if (!virado) {
+          const b = el('button', 'jdui-btn', 'Mostrar resposta');
+          b.addEventListener('click', () => { virado = true; paint(); });
+          nav.appendChild(b);
+        } else {
+          const ok = el('button', 'jdui-btn', 'Acertei ✓');
+          ok.addEventListener('click', () => avaliar(true));
+          const no = el('button', 'jdui-btn ghost', 'Errei ✗');
+          no.addEventListener('click', () => avaliar(false));
+          nav.appendChild(ok); nav.appendChild(no);
+        }
+        bx.appendChild(nav);
+      }
+      async function avaliar(acertou) {
+        try {
+          await ctx.api('/api/learn/cards/review', {
+            method: 'POST',
+            body: JSON.stringify({ flashcard_id: todos[i].id, acertou })
+          });
+        } catch (_) { /* segue local mesmo offline de escrita: o cartão volta ao recarregar */ }
+        i += 1; virado = false; paint();
+      }
+    }
+  };
+
+  R.studyprogress = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    const info = el('div', 'jdui-count', 'Carregando progresso…');
+    box.appendChild(el('div', 'jdui-title', 'Meu progresso 📊'));
+    box.appendChild(info);
+    root.appendChild(box);
+    function montar() {
+      const b2 = el('div', 'jdui-quiz');
+      b2.appendChild(el('div', 'jdui-title', 'Meu progresso 📊'));
+      const i2 = el('div', 'jdui-count', 'Carregando progresso…');
+      b2.appendChild(i2);
+      root.replaceChildren(b2);
+      carregar(b2, i2);
+    }
+    if (precisaConexao(ctx)) {
+      info.textContent = 'Conecte-se para ver o progresso.';
+      botaoTentar(root, info, montar);
+      return;
+    }
+    carregar(box, info);
+    async function carregar(bx, inf) {
+      let stats, rec;
+      try {
+        stats = await ctx.api('/api/learn/stats');
+        try { rec = await ctx.api('/api/learn/recommend'); } catch (_) { rec = null; }
+      } catch (_) {
+        inf.textContent = 'Não consegui carregar. Toque para tentar de novo.';
+        inf.style.cursor = 'pointer';
+        inf.addEventListener('click', montar, { once: true });
+        return;
+      }
+      const r = stats.resumo || {};
+      bx.replaceChildren();
+      bx.appendChild(el('div', 'jdui-title', 'Meu progresso 📊'));
+      if (!r.concluidas && !r.itens_feitos && !(stats.por_assunto || []).length) {
+        bx.appendChild(el('div', 'jdui-q', 'Sem dados ainda — faça um quiz para começar. 📚'));
+        return;
+      }
+      const linhas = [
+        ['Provas concluídas', r.concluidas || 0, Math.max(r.avaliacoes || 0, 1)],
+        ['Acertos', r.acertos || 0, Math.max(r.respostas || 0, 1)],
+        ['Itens do plano', r.itens_feitos || 0, Math.max(r.itens_plano || 0, 1)]
+      ];
+      linhas.forEach(l => {
+        bx.appendChild(el('div', 'jdui-count', l[0] + ': ' + l[1] + '/' + l[2]));
+        bx.appendChild(bar(l[2] ? l[1] / l[2] * 100 : 0));
+      });
+      (stats.por_assunto || []).forEach(p => {
+        bx.appendChild(el('div', 'jdui-count', (p.assunto || 'geral') + ': ' + Math.round((p.taxa || 0) * 100) + '%'));
+        bx.appendChild(bar((p.taxa || 0) * 100));
+      });
+      if (r.revisoes_pendentes) {
+        bx.appendChild(el('div', 'jdui-q', (r.revisoes_pendentes || 0) + ' cartão(ões) vencendo — revise hoje.'));
+      }
+      ((rec && rec.recomendacoes) || []).forEach(x => {
+        bx.appendChild(el('div', 'jdui-err', '→ ' + (x.detalhe || x.tipo)));
+      });
+    }
   };
 
   /* ----- Mount + dispatcher ----- */

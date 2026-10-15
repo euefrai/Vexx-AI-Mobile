@@ -7,8 +7,9 @@ import sqlite3
 import threading
 import time
 import unicodedata
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -358,14 +359,32 @@ def _tokens_memoria(texto: str) -> set:
 
 
 def _contexto_local_seguro(payload: dict) -> dict:
-    """Aceita contexto explícito do aparelho sem usar localização fora do pedido."""
+    """Valida o relógio e a localização explícitos do aparelho."""
     contexto = {}
     instante = str(payload.get("local_time", ""))[:48]
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})?", instante):
-        contexto["local_time"] = instante
+    try:
+        if not re.fullmatch(
+                r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})",
+                instante):
+            raise ValueError("timestamp sem fuso ou malformado")
+        instante_local = datetime.fromisoformat(instante.replace("Z", "+00:00"))
+        if instante_local.utcoffset() is None:
+            raise ValueError("timestamp sem deslocamento UTC")
+        contexto["current_at"] = instante_local
+        contexto["local_time"] = instante_local.isoformat(timespec="seconds")
+    except ValueError:
+        instante_local = None
     zona = str(payload.get("timezone", ""))[:80]
-    if re.fullmatch(r"[A-Za-z0-9_+.-]+(?:/[A-Za-z0-9_+.-]+){0,4}", zona):
+    try:
+        if not re.fullmatch(r"[A-Za-z0-9_+.-]+(?:/[A-Za-z0-9_+.-]+){0,4}", zona):
+            raise ValueError("fuso malformado")
+        timezone_local = ZoneInfo(zona)
         contexto["timezone"] = zona
+        if instante_local is not None:
+            contexto["current_at"] = instante_local.astimezone(timezone_local)
+            contexto["local_time"] = contexto["current_at"].isoformat(timespec="seconds")
+    except (ValueError, ZoneInfoNotFoundError):
+        contexto.pop("timezone", None)
     cidade = re.sub(r"[\r\n<>]", " ", str(payload.get("city", ""))).strip()[:100]
     if cidade:
         contexto["city"] = cidade
@@ -379,17 +398,89 @@ def _contexto_local_seguro(payload: dict) -> dict:
     return contexto
 
 
+def _data_local(contexto_local: dict | None):
+    instante = (contexto_local or {}).get("current_at")
+    return instante.date() if isinstance(instante, datetime) else None
+
+
+def _normalizar_temporal(texto: str) -> str:
+    sem_acentos = "".join(
+        c for c in unicodedata.normalize("NFKD", (texto or "").lower())
+        if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", sem_acentos).strip()
+
+
+def _resposta_temporal_direta(texto: str, contexto_local: dict) -> str | None:
+    """Responde consultas inequívocas do relógio/calendário sem chamar o LLM."""
+    instante = contexto_local.get("current_at")
+    if not isinstance(instante, datetime):
+        return None
+    pedido = _normalizar_temporal(texto)
+    local = contexto_local.get("timezone", "")
+    if not local:
+        offset = instante.strftime("%z")
+        local = "UTC" if offset in ("+0000", "-0000") else (
+            f"UTC{offset[:3]}:{offset[3:]}" if offset else "")
+    sufixo = f" ({local})" if local else ""
+    hora_re = r"\b(que horas (sao|e)|qual (e )?a hora|hora atual|horario atual)\b"
+    pergunta_hora = re.search(hora_re, pedido)
+    local_especifico = re.search(r"\b(em|no|na|de)\s+(?!minha\b|meu\b)[a-z]", pedido)
+    if pergunta_hora and not local_especifico:
+        if re.search(r"\b(data|dia|hoje)\b", pedido):
+            dias = ("segunda-feira", "terça-feira", "quarta-feira", "quinta-feira",
+                    "sexta-feira", "sábado", "domingo")
+            return (f"Hoje é {dias[instante.weekday()]}, {instante:%d/%m/%Y}; "
+                    f"agora são {instante:%H:%M}{sufixo}.")
+        return f"São {instante:%H:%M}{sufixo}."
+    if pergunta_hora:
+        return None
+
+    dias = ("segunda-feira", "terça-feira", "quarta-feira", "quinta-feira",
+            "sexta-feira", "sábado", "domingo")
+    dia_pedido = re.search(r"\b(amanha|ontem|hoje|daqui a (\d{1,4}) dias?)\b", pedido)
+    pergunta_data = re.search(
+        r"\b(data|dia|calendario)\b.*\b(hoje|amanha|ontem|daqui a \d{1,4} dias?)\b|"
+        r"\b(que dia (e|sera|vai ser)|qual (e )?a data)\b.*"
+        r"\b(hoje|amanha|ontem|daqui a \d{1,4} dias?)\b", pedido)
+    if not dia_pedido or not pergunta_data:
+        if re.search(r"\b(que dia e hoje|qual dia da semana e hoje|dia da semana hoje)\b", pedido):
+            return f"Hoje é {dias[instante.weekday()]}{sufixo}."
+        return None
+    termo = dia_pedido.group(1)
+    delta = -1 if termo == "ontem" else 1 if termo == "amanha" else 0
+    if termo.startswith("daqui a "):
+        delta = int(dia_pedido.group(2))
+    alvo = instante.date() + timedelta(days=delta)
+    return f"{dias[alvo.weekday()]}, {alvo:%d/%m/%Y}{sufixo}."
+
+
 def _instrucoes_contexto_local(contexto_local: dict | None) -> list[str]:
-    if not contexto_local:
-        return []
     instrucoes = []
-    hora = contexto_local.get("local_time", "")
-    zona = contexto_local.get("timezone", "")
-    if hora or zona:
+    contexto_local = contexto_local or {}
+    instante = contexto_local.get("current_at")
+    if isinstance(instante, datetime):
+        hora = contexto_local.get("local_time", "")
+        zona = contexto_local.get("timezone", "")
+        dias = ("segunda-feira", "terça-feira", "quarta-feira", "quinta-feira",
+                "sexta-feira", "sábado", "domingo")
+        data_dia = f"{dias[instante.weekday()]}, {instante:%d/%m/%Y}"
         instrucoes.append(
-            "DATA E HORA INFORMADAS PELO APARELHO PARA ESTA MENSAGEM "
-            "(use como referência atual; não estime pela sua memória): " +
-            (f"{hora} " if hora else "") + (f"fuso IANA {zona}" if zona else ""))
+            "FONTE AUTORITATIVA DE DATA/HORA PARA ESTA MENSAGEM: relógio do aparelho "
+            "(use estes valores, não sua memória nem o relógio do computador): " +
+            f"instante local {hora}; data e dia local {data_dia}; " +
+            (f"fuso IANA {zona}" if zona else "") +
+            ". Para hoje/amanhã/ontem, dias da semana, prazos e contagens, "
+            "calcule a partir desta data local; confira o calendário e não estime. "
+            "Não confunda a data atual com fatos externos que exigem pesquisa. "
+            "Se faltar fuso ou houver ambiguidade, diga isso e pergunte; nunca invente.")
+    else:
+        instrucoes.append(
+            "DATA E HORA: não foi recebido um relógio local válido para esta mensagem. "
+            "Não invente nem deduza a data, hora ou dia da semana atuais; se a resposta "
+            "depender disso, informe a limitação e peça o fuso ou a data.")
+    zona = contexto_local.get("timezone", "")
+    if zona and not isinstance(instante, datetime):
+        instrucoes.append(f"O fuso informado pelo aparelho é {zona}, mas sem data/hora confiável.")
     cidade = contexto_local.get("city", "")
     coords = contexto_local.get("coordinates")
     if cidade or coords:
@@ -1468,20 +1559,29 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                           f'{item["text"]}' for item in lembrancas))
         from datetime import date as _d
         termos_pedido = _tokens_memoria(texto_usuario)
-        evs = [e for e in proximos_eventos(db, owner)
+        hoje_local = _data_local(contexto_local) or _d.today()
+        evs = [e for e in proximos_eventos(db, owner, hoje=hoje_local)
                if termos_pedido & _tokens_memoria(f"{e['titulo']} {e['assunto']}")]
         if evs:
-            hoje_br = _d.today().strftime("%d/%m/%Y")
+            hoje_br = hoje_local.strftime("%d/%m/%Y")
             partes_sistema.append(
-                f"PRÓXIMOS EVENTOS (hoje é {hoje_br}; use para planos e contagens, sem inventar):\n" +
-                "\n".join(f"- {e['data_br']} (faltam {e['faltam']} dias): {e['titulo'][:150]}"
-                          for e in evs))
+                f"PRÓXIMOS EVENTOS (data local de referência: {hoje_br}; "
+                "use para planos e contagens, sem inventar):\n" +
+                "\n".join(
+                    f"- {e['data_br']} "
+                    f"({'falta 1 dia' if e['faltam'] == 1 else 'faltam ' + str(e['faltam']) + ' dias'}): "
+                    f"{e['titulo'][:150]}" for e in evs))
         pend = [p for p in pendencias(db, owner)
                 if termos_pedido & _tokens_memoria(p["value"])][:2]
         if pend:
             partes_sistema.append(
                 "AGUARDANDO CONFIRMAÇÃO (não afirme que guardou; pergunte de forma natural):\n" +
                 "\n".join(f"- {p['value'][:150]}" for p in pend))
+        if termos_pedido & ESTUDO_TERMOS:
+            linha = linha_desempenho(db, owner)
+            if linha:
+                extras["memoria_usada"] = True
+                partes_sistema.append(linha)
     # Follow-up de código: "quero o código" após uma interface → gera fonte (sem jdui).
     if PEDIDO_CODIGO_RE.search(texto_usuario or ""):
         blocos_prev = ultimos_blocos_jdui(db, conversation_id, owner=owner)
@@ -1532,7 +1632,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                               f"Além de descrever, inclua no final: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
                               "para exibir a imagem no chat.")
     if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario):
-        hoje = datetime.now().strftime("%d/%m/%Y")
+        hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         fontes = pesquisa_web(texto_usuario)
         extras["fontes"] = fontes
         if fontes:
@@ -1672,6 +1772,38 @@ def resposta_input(db, req: dict, dono: str, request_id: str) -> dict:
     except remoto.RemotoErro as exc:
         return {"request_id": request_id, "type": "input_error",
                 "error": str(exc), "codigo": exc.codigo}
+
+
+ESTUDO_TERMOS = frozenset((
+    "prova", "quiz", "estudo", "estudar", "assunto", "errei", "erros", "erradas",
+    "plano", "revisao", "revisão", "flashcard", "nota", "desempenho", "progresso",
+    "simulado", "questao", "questão", "questões", "aprender", "aula", "reforco", "reforço",
+))
+
+
+def linha_desempenho(db, owner: str) -> str:
+    """Resumo real de estudo para o prompt (V4.2 §8/§9).
+
+    Só números registrados; sem dados → '' (o modelo diz que não há dados).
+    """
+    try:
+        res = learning.resumo_progresso(db, owner)
+        perf = learning.desempenho_por_assunto(db, owner)
+    except Exception:
+        return ""
+    if not res.get("respostas") and not res.get("itens_plano"):
+        return ""
+    partes = [f"provas concluídas {res['concluidas']}, acertos {res['acertos']}/{res['respostas']}"]
+    if perf:
+        partes.append("por assunto: " + "; ".join(
+            f"{p['assunto']} {p['taxa']:.0%} ({p['acertos']}/{p['total']})" for p in perf[:6]))
+    if res.get("revisoes_pendentes"):
+        partes.append(f"{res['revisoes_pendentes']} cartões vencendo")
+    if res.get("itens_plano"):
+        partes.append(f"plano: {res['itens_feitos']}/{res['itens_plano']} itens feitos")
+    return ("DESEMPENHO REAL DO USUÁRIO (use estes números; não invente outros; "
+            "se perguntarem o que não está aqui, diga que ainda não há dados):\n- "
+            + "\n- ".join(partes))
 
 
 def ai_preparar(db, payload: dict, cfg: dict) -> dict:
@@ -1837,6 +1969,46 @@ def sintetizar_prova(db, cfg: dict, owner: str, texto_usuario: str) -> str:
         return ""
 
 
+REFORCO_TRIGGERS = ("errei", "errada", "errado", "reforço", "reforco")
+
+
+def intencao_reforco(texto: str) -> bool:
+    """'faz outro simulado só com o que errei' — reforço sobre erros reais."""
+    t = (texto or "").lower()
+    return intencao_prova(texto) and any(k in t for k in REFORCO_TRIGGERS)
+
+
+def sintetizar_reforco(db, owner: str, texto_usuario: str) -> str:
+    """Monta simulado SÓ com questões que o dono errou (determinístico, sem LLM).
+
+    Retorna fence exam ou '' (sem erros recentes: o chamador informa com texto).
+    """
+    try:
+        m = re.search(r"(\d{1,2})\s*(quest|pergunt|itens|items)", texto_usuario or "")
+        n = min(max(int(m.group(1)) if m else 10, 1), 20)
+        ref = learning.criar_reforco(db, owner, n)
+        av = learning.obter_assessment(db, owner, ref["id"])
+        titulo = "Reforço (%d %s)" % (len(av["questions"]),
+                                      "questão" if len(av["questions"]) == 1 else "questões")
+        fence = {"version": jdui.VERSION, "blocks": [
+            {"type": "text", "content": f"Montei um reforço com o que você errou: **{titulo}**. Bora recuperar! 💪"},
+            {"type": "ui", "component": "exam",
+             "props": {"assessment_id": ref["id"], "title": titulo}}]}
+        ok, norm, _ = jdui.validar_mensagem(fence)
+        if not ok:
+            return ""
+        return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+    except learning.LearnErro as exc:
+        if exc.codigo == "sem_dados":
+            return ("\n\nNão encontrei questões erradas recentes suas para montar o reforço. "
+                    "Faça um quiz ou prova primeiro — aí eu monto um simulado só com o que errou. 📚")
+        log.warning("reforço falhou (%s)", type(exc).__name__)
+        return ""
+    except Exception as exc:
+        log.warning("reforço falhou (%s)", type(exc).__name__)
+        return ""
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -1853,6 +2025,11 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
+    resposta_tempo = _resposta_temporal_direta(
+        prep.get("user_text", ""), prep.get("contexto_local", {}))
+    if resposta_tempo:
+        return ai_resposta_direta(
+            db, mid, conv, modelo, prep["reply_id"], resposta_tempo, owner)
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
     cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
     messages, extras = ai_montar_mensagens(
@@ -1868,7 +2045,12 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
-    if not blocos_jdui and intencao_prova(prep.get("user_text", "")):
+    if not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
+        fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
+        if fence:
+            texto += fence
+            log.info("reforço sintetizado para %s", mid)
+    elif not blocos_jdui and intencao_prova(prep.get("user_text", "")):
         fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
         if fence:
             texto += fence
@@ -1935,6 +2117,19 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
+        resposta_tempo = _resposta_temporal_direta(
+            prep.get("user_text", ""), prep.get("contexto_local", {}))
+        if resposta_tempo:
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"],
+                                        resposta_tempo, owner)
+            try:
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                      "reply_id": direta["reply_id"],
+                                      "response_text": direta["response_text"],
+                                      "model": modelo})
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
+            return
         ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
         cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
         messages, extras = ai_montar_mensagens(
@@ -1977,7 +2172,12 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
-        if not blocos_jdui and intencao_prova(prep.get("user_text", "")):
+        if not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
+            fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
+            if fence:
+                texto_final += fence
+                log.info("reforço sintetizado no stream %s", mid)
+        elif not blocos_jdui and intencao_prova(prep.get("user_text", "")):
             fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
             if fence:
                 texto_final += fence

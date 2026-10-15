@@ -85,6 +85,7 @@
         <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Chat <span class="drawer-hint">foco total</span></button>
         <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
         <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
+        <button class="drawer-item" data-tab="estudos" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Meus Estudos</button>
         <button class="drawer-item" data-tab="settings" data-scroll="memory" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Memória</button>
       </nav>
 
@@ -199,6 +200,42 @@
 
         <h2 class="section-caption">Linha do tempo</h2>
         <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="page" id="page-estudos" aria-label="Meus Estudos" hidden>
+        <div class="section-header">
+          <p class="eyebrow">ESTUDOS</p>
+          <h1>Meus Estudos<span class="brand-dot">.</span></h1>
+          <p class="intro-copy">Planos, revisões e progresso — peça no chat que a Júlia monta.</p>
+        </div>
+
+        <div class="stat-grid" id="estudosGrid">
+          <div class="stat-card"><svg class="icon"><use href="#i-activity"/></svg><strong id="estProvas">0</strong><span>provas concluídas</span></div>
+          <div class="stat-card"><svg class="icon"><use href="#i-sparkle"/></svg><strong id="estAcertos">0</strong><span>acertos</span></div>
+          <div class="stat-card"><svg class="icon"><use href="#i-chat"/></svg><strong id="estItens">0/0</strong><span>itens do plano</span></div>
+          <div class="stat-card"><svg class="icon"><use href="#i-refresh"/></svg><strong id="estDue">0</strong><span>cartões vencendo</span></div>
+        </div>
+
+        <p class="drawer-caption" id="estudosAviso" hidden></p>
+
+        <h2 class="section-caption">Desempenho por assunto</h2>
+        <div class="timeline" id="estudosAssuntos"></div>
+
+        <h2 class="section-caption">Recomendações</h2>
+        <div class="timeline" id="estudosRecs"></div>
+
+        <h2 class="section-caption">Planos</h2>
+        <div class="timeline" id="estudosPlanos"></div>
+
+        <h2 class="section-caption">Revisar agora</h2>
+        <div class="timeline" id="estudosDue"></div>
+
+        <h2 class="section-caption">Errei recentemente</h2>
+        <div class="timeline" id="estudosErros"></div>
+
+        <div class="export-row">
+          <button id="estudosRefresh" class="subtle-button" type="button">Atualizar</button>
+        </div>
       </section>
 
       <section class="page" id="page-settings" aria-label="Ajustes" hidden>

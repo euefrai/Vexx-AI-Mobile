@@ -7,6 +7,9 @@ python-multipart>=0.0.18,<1
 # Somente do agente no PC (captura de tela). O relay ignora se ausentes.
 mss>=9,<11
 pillow>=10,<13
+# Somente do agente no PC (fusos IANA no Windows, que não tem base tzdata).
+# Sem isso, o relógio local do aparelho é rejeitado no próprio hospedeiro.
+tzdata>=2024.1
 # Somente do agente no PC (leitura de documentos). Opcionais: o agente avisa
 # o `pip install` certo quando um formato precisa da lib ausente.
 pypdf>=5,<8

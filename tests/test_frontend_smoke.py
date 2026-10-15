@@ -260,6 +260,21 @@ def test_acoes_de_historico_arquivos_e_contexto_local_ligadas():
     assert "item('save', 'Salvar item neste aparelho')" in js
 
 
+def test_estudos_ligado_e_com_cache_offline():
+    html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
+    js = APP_JS.read_text(encoding='utf-8')
+    assert 'data-tab="estudos"' in html and 'id="page-estudos"' in html
+    for eid in ('estudosGrid', 'estProvas', 'estAcertos', 'estItens', 'estDue',
+                'estudosAviso', 'estudosAssuntos', 'estudosRecs', 'estudosPlanos',
+                'estudosDue', 'estudosErros', 'estudosRefresh'):
+        assert f'id="{eid}"' in html, eid
+        assert eid in js, eid
+    assert "if (tab === 'estudos') renderEstudos();" in js
+    assert '/api/learn/stats' in js and '/api/learn/plans' in js
+    assert '/api/learn/cards/due' in js and '/api/learn/mistakes' in js
+    assert 'learnCacheGet' in js and 'Offline' in js  # fallback offline real
+
+
 def test_sessoes_sem_fragmentacao():
     """Regressão: cada mensagem virando um chat (id ativo só no localStorage).
 

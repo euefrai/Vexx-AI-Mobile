@@ -226,3 +226,79 @@ def test_sinalizar_e_erradas(tmp_path):
     assert len(err) == 1 and err[0]['question_id'] == 'q1' and err[0]['assunto'] == 'mat'
     assert learning.questoes_erradas(db, 'u-y') == []
     db.close()
+
+
+def test_criar_reforco_das_erradas(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnreforco.sqlite3')
+    try:
+        learning.criar_reforco(db, 'u-x')
+        raise AssertionError('sem erros deveria falhar')
+    except learning.LearnErro as exc:
+        assert exc.codigo == 'sem_dados'
+    learning.criar_assessment(db, 'u-x', 'P', 'mat', [
+        {"id": "q1", "enunciado": "Quanto é 2+2?", "tipo": "multipla",
+         "opcoes": ["3", "4"], "gabarito": 1, "explicacao": "Soma."},
+        {"id": "q2", "enunciado": "Quanto é 3+3?", "tipo": "multipla",
+         "opcoes": ["5", "6"], "gabarito": 1, "explicacao": "Soma."}], assessment_id='av-r')
+    att = learning.iniciar_tentativa(db, 'u-x', 'av-r', 'att-r')['id']
+    learning.responder(db, 'u-x', att, 'q1', '0')  # errou
+    learning.responder(db, 'u-x', att, 'q2', '1')  # acertou
+    learning.finalizar_tentativa(db, 'u-x', att)
+    ref = learning.criar_reforco(db, 'u-x')
+    av = learning.obter_assessment(db, 'u-x', ref['id'], com_gabarito=True)
+    assert len(av['questions']) == 1  # só a errada
+    assert av['questions'][0]['enunciado'] == 'Quanto é 2+2?'
+    assert av['questions'][0]['gabarito'] == '1'  # gabarito original preservado
+    row = db.execute("SELECT origem FROM assessments WHERE id=?", (ref['id'],)).fetchone()
+    assert row[0] == 'reforco'
+    try:
+        learning.criar_reforco(db, 'u-y')
+        raise AssertionError('outro dono não tem erros')
+    except learning.LearnErro as exc:
+        assert exc.codigo == 'sem_dados'
+    db.close()
+
+
+def test_reforco_intencao_e_fence(tmp_path):
+    assert pc_agent.intencao_reforco("faz outro simulado só com o que eu errei ontem")
+    assert pc_agent.intencao_reforco("crie um simulado de reforço do que errei")
+    assert not pc_agent.intencao_reforco("cria uma prova de matemática")
+    assert not pc_agent.intencao_reforco("me ensina python")
+    db = pc_agent.open_db(tmp_path / 'learnrefchat.sqlite3')
+    sem = pc_agent.sintetizar_reforco(db, 'u-x', "simulado com o que errei")
+    assert "```jdui" not in sem and "erradas" in sem  # informa, não inventa
+    learning.criar_assessment(db, 'u-x', 'P', 'mat', [
+        {"id": "q1", "enunciado": "Quanto é 2+2?", "tipo": "multipla",
+         "opcoes": ["3", "4"], "gabarito": 1}], assessment_id='av-rc')
+    att = learning.iniciar_tentativa(db, 'u-x', 'av-rc', 'att-rc')['id']
+    learning.responder(db, 'u-x', att, 'q1', '0')
+    learning.finalizar_tentativa(db, 'u-x', att)
+    fence = pc_agent.sintetizar_reforco(db, 'u-x', "outro simulado com o que errei")
+    assert '"component": "exam"' in fence
+    import json as _json
+    bloco = _json.loads(fence.split("```jdui\n")[1].split("\n```")[0])
+    aid = bloco["blocks"][1]["props"]["assessment_id"]
+    row = db.execute("SELECT origem FROM assessments WHERE id=?", (aid,)).fetchone()
+    assert row[0] == 'reforco'
+    db.close()
+
+
+def test_desempenho_real_entra_no_prompt(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnprompt.sqlite3')
+    cfg = {'proxy': 'x', 'model': 'm', 'system': 'S', 'context': 5, 'max_tokens': 50,
+           'memoria_global': True, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(db, 'conv', cfg, 'Em que assuntos estou errando mais?', 'u-x')
+    assert 'DESEMPENHO REAL' not in msgs[0]['content']  # sem dados: nada inventado
+    db.execute("INSERT INTO questions (id, assessment_id, owner_id, enunciado, assunto) VALUES "
+               "('q1','a','u-x','E1','mat'), ('q2','a','u-x','E2','mat'), ('q3','a','u-x','E3','mat')")
+    db.execute("INSERT INTO answers (attempt_id, question_id, owner_id, resposta, correta) VALUES "
+               "('t','q1','u-x','0',0), ('t','q2','u-x','0',0), ('t','q3','u-x','1',1)")
+    db.commit()
+    msgs, _ = pc_agent.ai_montar_mensagens(db, 'conv', cfg, 'Em que assuntos estou errando mais?', 'u-x')
+    sistema = msgs[0]['content']
+    assert 'DESEMPENHO REAL' in sistema and 'mat 33% (1/3)' in sistema
+    msgs2, _ = pc_agent.ai_montar_mensagens(db, 'conv', cfg, 'Qual a capital do Peru?', 'u-x')
+    assert 'DESEMPENHO REAL' not in msgs2[0]['content']  # fora de contexto de estudo
+    msgs3, _ = pc_agent.ai_montar_mensagens(db, 'conv', cfg, 'Em que assuntos estou errando mais?', 'u-y')
+    assert 'DESEMPENHO REAL' not in msgs3[0]['content']  # outro dono: nada vaza
+    db.close()

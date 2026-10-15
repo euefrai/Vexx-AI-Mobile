@@ -203,11 +203,27 @@ def _v_exam(p: dict) -> dict:
     return {"assessment_id": aid, "title": _str(p.get("title"), 160)}
 
 
+def _v_studyplan(p: dict) -> dict:
+    pid = _str(p.get("plan_id"), 64)
+    if not re.fullmatch(r"[A-Za-z0-9_-]{2,64}", pid):
+        raise JduiErro("studyplan.plan_id inválido")
+    return {"plan_id": pid}
+
+
+def _v_flashcards(p: dict) -> dict:
+    return {"assunto": _str(p.get("assunto"), 120)}
+
+
+def _v_progresso(p: dict) -> dict:
+    return {}
+
+
 VALIDADORES = {
     "quiz": _v_quiz, "checklist": _v_checklist, "calculator": _v_calculator,
     "cards": _v_cards, "diagram": _v_diagram, "table": _v_table,
     "form": _v_form, "progress": _v_progress, "tabs": _v_tabs,
-    "accordion": _v_accordion, "exam": _v_exam,
+    "accordion": _v_accordion, "exam": _v_exam, "studyplan": _v_studyplan,
+    "flashcards": _v_flashcards, "studyprogress": _v_progresso,
 }
 
 

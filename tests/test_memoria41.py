@@ -107,6 +107,89 @@ def test_contexto_local_validado_e_injetado_so_quando_enviado():
     db.close()
 
 
+def test_respostas_basicas_de_calendario_sao_deterministicas():
+    contexto = pc_agent._contexto_local_seguro({
+        'local_time': '2026-10-14T21:24:13-03:00',
+        'timezone': 'America/Sao_Paulo',
+    })
+    assert contexto['current_at'].isoformat() == '2026-10-14T21:24:13-03:00'
+    assert pc_agent._resposta_temporal_direta('Que horas são agora?', contexto) == (
+        'São 21:24 (America/Sao_Paulo).')
+    assert pc_agent._resposta_temporal_direta('Que dia é hoje?', contexto) == (
+        'quarta-feira, 14/10/2026 (America/Sao_Paulo).')
+    assert pc_agent._resposta_temporal_direta('Qual a data de amanhã?', contexto) == (
+        'quinta-feira, 15/10/2026 (America/Sao_Paulo).')
+    assert pc_agent._resposta_temporal_direta('Que dia será daqui a 10 dias?', contexto) == (
+        'sábado, 24/10/2026 (America/Sao_Paulo).')
+    assert pc_agent._resposta_temporal_direta('Que horas são em Tóquio?', contexto) is None
+    assert pc_agent._resposta_temporal_direta(
+        'Que horas são?', {'timezone': 'America/Sao_Paulo'}) is None
+
+
+def test_contexto_temporal_rejeita_datas_e_fusos_invalidos():
+    assert pc_agent._contexto_local_seguro({
+        'local_time': '2026-02-30T12:00:00-03:00',
+        'timezone': 'America/Sao_Paulo',
+    }).get('current_at') is None
+    assert pc_agent._contexto_local_seguro({
+        'local_time': '2026-10-14T21:24:13',
+        'timezone': 'America/Sao_Paulo',
+    }).get('current_at') is None
+    contexto = pc_agent._contexto_local_seguro({
+        'local_time': '2026-10-14T21:24:13-03:00',
+        'timezone': 'Fuso/Inventado',
+    })
+    assert contexto['current_at'].isoformat() == '2026-10-14T21:24:13-03:00'
+    assert 'timezone' not in contexto
+
+
+def test_ai_completa_responde_hora_sem_chamar_modelo(monkeypatch):
+    db = _db()
+    contexto = pc_agent._contexto_local_seguro({
+        'local_time': '2026-10-14T21:24:13-03:00',
+        'timezone': 'America/Sao_Paulo',
+    })
+    monkeypatch.setattr(pc_agent, 'ai_preparar', lambda *_: {
+        'conversation_id': 'conv-clock', 'model': 'modelo', 'owner': 'local',
+        'reply_id': 'user-clock-r1', 'user_text': 'Que horas são agora?',
+        'contexto_local': contexto,
+    })
+    monkeypatch.setattr(pc_agent, 'interpretar_comando_memoria', lambda *_: None)
+    respostas = []
+    monkeypatch.setattr(pc_agent, 'ai_resposta_direta',
+                        lambda *args: respostas.append(args) or {
+                            'response_text': args[5], 'reply_id': args[4], 'model': args[3]})
+
+    def no_model(*_args, **_kwargs):
+        raise AssertionError('A resposta local de hora não deve chamar o modelo.')
+
+    monkeypatch.setattr(pc_agent.hermes_bridge, 'chat_complete', no_model)
+    result = pc_agent.ai_completa(
+        db, {'message_id': 'user-clock', 'conversation_id': 'conv-clock'}, {})
+
+    assert result['response_text'] == 'São 21:24 (America/Sao_Paulo).'
+    assert len(respostas) == 1
+    db.close()
+
+
+def test_contagem_de_eventos_usa_data_local_do_aparelho():
+    db = _db()
+    pc_agent.registrar_evento(db, 'local', 'Prova de matemática', '2026-10-15',
+                              assunto='estudos')
+    contexto = pc_agent._contexto_local_seguro({
+        'local_time': '2026-10-14T23:55:00-03:00',
+        'timezone': 'America/Sao_Paulo',
+    })
+    cfg = {'proxy': 'x', 'model': 'm', 'system': 'S', 'context': 5,
+           'max_tokens': 50, 'memoria_global': True, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(
+        db, 'conv-tempo', cfg, 'Quando é minha prova de matemática?',
+        contexto_local=contexto)
+    assert 'data local de referência: 14/10/2026' in msgs[0]['content']
+    assert '15/10/2026 (falta 1 dia): Prova de matemática' in msgs[0]['content']
+    db.close()
+
+
 def test_sensivel_vira_proposta_e_toggle_bloqueia():
     db = _db()
     salvos, props, pergunta = pc_agent.analisar_memoria(db, 'tomo remédio X para ansiedade toda manhã', 'local')
