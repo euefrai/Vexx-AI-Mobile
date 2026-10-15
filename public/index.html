@@ -145,11 +145,18 @@
         </div>
         <div class="research-panel" id="researchPanel" hidden aria-label="Atividade da pesquisa">
           <h2 class="section-caption">Atividade da pesquisa</h2>
+          <div class="export-row" id="researchFilters" role="group" aria-label="Filtrar atividades">
+            <button class="subtle-button" data-filtro="all" type="button">Tudo</button>
+            <button class="subtle-button" data-filtro="search" type="button">Buscas</button>
+            <button class="subtle-button" data-filtro="source" type="button">Fontes</button>
+            <button class="subtle-button" data-filtro="erros" type="button">Erros</button>
+          </div>
           <div class="timeline" id="researchSteps"></div>
           <h2 class="section-caption">Fontes consultadas</h2>
           <div class="timeline" id="researchSources"></div>
           <div class="export-row">
             <button id="researchResult" class="subtle-button" type="button">Ver resultado no chat</button>
+            <button id="researchPause" class="subtle-button" type="button">Pausar</button>
           </div>
         </div>
         <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">

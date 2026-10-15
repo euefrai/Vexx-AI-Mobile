@@ -29,7 +29,8 @@ MODOS = {
                       "profundidade": 3},
 }
 
-STATUS_JOB = ("criada", "em_andamento", "concluida", "interrompida", "falhou", "cancelada")
+STATUS_JOB = ("criada", "em_andamento", "pausada", "concluida", "interrompida",
+              "falhou", "cancelada")
 STATUS_EVIDENCIA = ("recuperada", "encontrada", "inacessivel", "nao_sustenta",
                     "contradiz", "parcial")
 ESTADOS_CLAIM = ("SUPPORTED", "PARTIALLY_SUPPORTED", "CONTRADICTED", "UNVERIFIED",
@@ -82,7 +83,8 @@ def criar_tabelas(db) -> None:
         original TEXT NOT NULL DEFAULT '')""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_jobs_owner ON research_jobs(owner_id, criado_em)")
     for _col, _ddl in (("investigacoes", "TEXT NOT NULL DEFAULT '[]'"),
-                       ("auditoria", "TEXT NOT NULL DEFAULT '{}'")):
+                       ("auditoria", "TEXT NOT NULL DEFAULT '{}'"),
+                       ("ajustes", "TEXT NOT NULL DEFAULT '{}'")):
         try:
             cols = [c[1] for c in db.execute("PRAGMA table_info(research_jobs)").fetchall()]
             if _col not in cols:
@@ -145,7 +147,8 @@ def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
     job = {"id": _nid("rj"), "owner": owner, "conv": conv or "", "modo": modo,
            "objetivo": objetivo, "plano": [], "plano_versao": 1, "status": "criada",
            "orcamento": dict(MODOS[modo]), "usados": {"buscas": 0, "paginas": 0},
-           "achados": [], "pendencias": [], "erros": []}
+           "achados": [], "pendencias": [], "erros": [], "investigacoes": [],
+           "auditoria": {}, "ajustes": {"restricoes": [], "prioridades": [], "metricas": []}}
     with db:
         db.execute("INSERT INTO research_jobs (id, owner_id, conv, modo, objetivo, plano,"
                    " plano_versao, status, orcamento, usados, achados, pendencias, erros,"
@@ -161,7 +164,8 @@ def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
 def carregar_job(db, owner: str, job_id: str) -> dict:
     row = db.execute("SELECT id, conv, modo, objetivo, plano, plano_versao, status, orcamento,"
                      " usados, achados, pendencias, erros, criado_em, atualizado_em,"
-                     " COALESCE(investigacoes, '[]'), COALESCE(auditoria, '{}')"
+                     " COALESCE(investigacoes, '[]'), COALESCE(auditoria, '{}'),"
+                     " COALESCE(ajustes, '{}')"
                      " FROM research_jobs WHERE id=? AND owner_id=?", (job_id, owner)).fetchone()
     if not row:
         raise AgentErro("pesquisa não encontrada", "ausente")
@@ -173,7 +177,8 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
                 "pendencias": json.loads(row[10] or "[]"), "erros": json.loads(row[11] or "[]"),
                 "criado_em": row[12], "atualizado_em": row[13],
                 "investigacoes": json.loads(row[14] or "[]"),
-                "auditoria": json.loads(row[15] or "{}")}
+                "auditoria": json.loads(row[15] or "{}"),
+                "ajustes": json.loads(row[16] or "{}")}
     except (TypeError, ValueError, IndexError) as exc:
         raise AgentErro("pesquisa corrompida", "corrompida") from exc
 
@@ -185,7 +190,7 @@ def salvar_job(db, job: dict) -> None:
     with db:
         db.execute("UPDATE research_jobs SET plano=?, plano_versao=?, status=?, orcamento=?,"
                    " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?,"
-                   " investigacoes=?, auditoria=? WHERE id=? AND owner_id=?",
+                   " investigacoes=?, auditoria=?, ajustes=? WHERE id=? AND owner_id=?",
                    (json.dumps(plano_limpo, ensure_ascii=False)[:60000], job["plano_versao"],
                     job["status"], json.dumps(job["orcamento"], ensure_ascii=False),
                     json.dumps(job["usados"], ensure_ascii=False),
@@ -195,6 +200,7 @@ def salvar_job(db, job: dict) -> None:
                     agora_iso(),
                     json.dumps(job.get("investigacoes", []), ensure_ascii=False)[:20000],
                     json.dumps(job.get("auditoria", {}), ensure_ascii=False)[:8000],
+                    json.dumps(job.get("ajustes", {}), ensure_ascii=False)[:8000],
                     job["id"], job["owner"]))
 
 
@@ -247,6 +253,21 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         return job
     feitas = {(s.get("tipo"), s.get("alvo")) for s in job["plano"] if s.get("status") != "pendente"}
     novas = 0
+    feitos_fu = set(job["usados"].get("follow_ups", []))
+    for inv in job.get("investigacoes") or []:
+        for q in (inv.get("follow_up") or [])[:2]:
+            alvo = str(q)[:120]
+            if ("busca", alvo) in feitas or alvo in feitos_fu:
+                continue
+            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": "busca",
+                                 "alvo": alvo, "status": "pendente", "tentativas": 0,
+                                 "motivo": "lacuna de investigação"})
+            feitas.add(("busca", alvo))
+            feitos_fu.add(alvo)
+            novas += 1
+            emitir(db, job["id"], job["owner"], "orchestrator", "step_started", "ok",
+                   f"Busca motivada por lacuna: {alvo[:80]}", {})
+    job["usados"]["follow_ups"] = sorted(feitos_fu)
     for lac in (lacunas or [])[:4]:
         alvo = str(lac)[:120]
         if ("busca", alvo) in feitas:
@@ -394,7 +415,15 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
         if q in vistas:
             continue
         vistas.add(q)
+        t0 = time.monotonic()
         encontrados, info = buscar_com_fallback(provedores, q, 6)
+        provs = job["usados"].setdefault("provedores", {})
+        pm = provs.setdefault(info["provedor"] or "nenhum", {"ok": 0, "falhas": 0, "ms": 0})
+        pm["ms"] += int((time.monotonic() - t0) * 1000)
+        if encontrados:
+            pm["ok"] += 1
+        else:
+            pm["falhas"] += 1
         emitir(db, job["id"], job["owner"], "search", "search_completed", "ok",
                f"Busca '{q[:60]}': {len(encontrados)} achados.",
                {"provedor": info["provedor"], "falhas": info["erros"]})
@@ -403,6 +432,10 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
             if a["url"] not in {x["url"] for x in achados}:
                 achados.append(a)
     job["usados"]["buscas"] = job["usados"].get("buscas", 0) + len(consultas[:2])
+    prios = (job.get("ajustes") or {}).get("prioridades", [])
+    if prios:
+        achados.sort(key=lambda a: 0 if any(p in (a.get("url", "") or "").lower()
+                                            for p in prios) else 1)
     if not achados:
         job["erros"].append(f"busca '{base[:60]}': sem resultados" +
                             (f" ({len(falhas)} falhas de provedor)" if falhas else ""))
@@ -452,7 +485,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
                           "ingestao", "trecho extraído deste documento")
                 emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
-                       f"Evidência ligada ao documento ({ev['dominio']}).", {})
+                       f"Evidência ligada ao documento ({ev['dominio']}).",
+                       {"evidencia_id": ev["id"], "dominio": ev["dominio"],
+                        "trecho": ev["trecho"][:300], "url": ev["url"][:200]})
             except Exception:
                 pass
         except research.ResearchErro as exc:
@@ -536,7 +571,8 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
                           "metodo": res.get("metodo", ""),
                           "condicoes_ausentes": res.get("condicoes_ausentes", [])})
         emitir(db, job["id"], job["owner"], "checker", "claim_verified", "ok",
-               f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}", {})
+               f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}",
+               {"estado": res["estado"], "afirmacao": c["texto"][:200]})
     emitir(db, job["id"], job["owner"], "checker", "claim_verification_completed", "ok",
            f"{len(vereditos)} afirmações avaliadas.", {})
     return vereditos
@@ -597,6 +633,23 @@ def agente_auditor(db, job: dict, sintese: dict, evidencias: list) -> dict:
 
 
 # ── Orchestrator ────────────────────────────────────────────────────
+def _sincronizar(job: dict, fresco: dict) -> None:
+    """Adota plano/status/ajustes persistidos (intervenção, pausa, cancelamento)
+    preservando transientes em memória (_achados da etapa atual)."""
+    mem = {s["id"]: s for s in job["plano"]}
+    for s in fresco["plano"]:
+        if s["id"] in mem and mem[s["id"]].get("status") == "pendente":
+            mem[s["id"]]["status"] = s.get("status", "pendente")
+    for s in fresco["plano"]:
+        if s["id"] not in mem:
+            job["plano"].append(s)
+    job["ajustes"] = fresco.get("ajustes", job.get("ajustes", {}))
+    if fresco.get("status") in ("cancelada", "pausada", "em_andamento", "criada"):
+        job["status"] = fresco["status"]
+    job["usados"]["replans"] = max(job["usados"].get("replans", 0),
+                                   fresco.get("usados", {}).get("replans", 0))
+
+
 def _orcamento_ok(job: dict) -> str:
     orc, uso = job["orcamento"], job["usados"]
     if uso.get("buscas", 0) >= orc.get("buscas", 0) and uso.get("paginas", 0) >= orc.get("paginas", 0):
@@ -614,6 +667,15 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     job = carregar_job(db, owner, job_id)
     if job["status"] in ("concluida", "cancelada"):
         return _resumo(db, job)
+    while job["status"] == "pausada":
+        if deve_parar is not None and deve_parar():
+            job["status"] = "interrompida"
+            salvar_job(db, job)
+            return _resumo(db, job)
+        time.sleep(1.0)
+        job = carregar_job(db, owner, job_id)
+        if job["status"] in ("concluida", "cancelada"):
+            return _resumo(db, job)
     if job["status"] not in ("em_andamento", "criada", "interrompida"):
         raise AgentErro("pesquisa em estado final", "estado")
     job["status"] = "em_andamento"
@@ -625,7 +687,17 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     vistas, todas_evid, vereditos = set(), [], []
     try:
         for etapa in job["plano"]:
-            if etapa.get("status") == "feita":
+            _sincronizar(job, carregar_job(db, owner, job_id))
+            if job["status"] == "cancelada":
+                return _resumo(db, job)
+            while job["status"] == "pausada":
+                time.sleep(1.0)
+                if deve_parar is not None and deve_parar():
+                    break
+                _sincronizar(job, carregar_job(db, owner, job_id))
+                if job["status"] in ("cancelada", "concluida"):
+                    return _resumo(db, job)
+            if etapa.get("status") in ("feita", "removida"):
                 continue
             if deve_parar is not None and deve_parar():
                 job["status"] = "interrompida"
@@ -819,6 +891,86 @@ def cancelar(db, owner: str, job_id: str) -> dict:
     emitir(db, job["id"], owner, "orchestrator", "research_cancelled", "ok",
            "Cancelada; resultados parciais preservados.", {})
     return _resumo(db, job)
+
+
+def pausar(db, owner: str, job_id: str, pausar: bool = True) -> dict:
+    job = carregar_job(db, owner, job_id)
+    if job["status"] not in ("em_andamento", "pausada"):
+        raise AgentErro("só pausa job em andamento", "estado")
+    job["status"] = "pausada" if pausar else "em_andamento"
+    salvar_job(db, job)
+    emitir(db, job["id"], owner, "orchestrator",
+           "research_cancelled" if pausar else "step_started",
+           "ok", "Pausada pelo usuário." if pausar else "Retomada pelo usuário.", {})
+    return _resumo(db, job)
+
+
+OPS_INTERVENCAO = ("escopo_add", "escopo_remove", "priorizar_dominio",
+                   "investigar_divergencia", "parar_topico", "adicionar_metrica")
+
+
+def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
+    """Alteração estruturada do plano (sem LLM): nova versão, feitas preservadas,
+    incompatíveis invalidadas e listadas."""
+    params = params or {}
+    if op not in OPS_INTERVENCAO:
+        raise AgentErro("operação inválida", "op")
+    job = carregar_job(db, owner, job_id)
+    if job["status"] in ("concluida", "cancelada", "falhou"):
+        raise AgentErro("pesquisa em estado final", "estado")
+    aj = job.get("ajustes") or {"restricoes": [], "prioridades": [], "metricas": []}
+    adicionadas, removidas, invalidadas = [], [], []
+    if op in ("escopo_add", "adicionar_metrica"):
+        texto = str(params.get("texto", ""))[:120]
+        if len(texto) < 3:
+            raise AgentErro("texto curto demais", "texto")
+        if op == "adicionar_metrica":
+            aj["metricas"].append(texto)
+        for tipo in ("busca", "ler"):
+            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": tipo,
+                                 "alvo": texto, "status": "pendente", "tentativas": 0})
+            adicionadas.append(tipo + ":" + texto)
+    elif op in ("escopo_remove", "parar_topico"):
+        texto = str(params.get("texto", ""))[:120].lower()
+        if len(texto) < 3:
+            raise AgentErro("texto curto demais", "texto")
+        aj["restricoes"].append(texto)
+        for s in job["plano"]:
+            if s.get("status") == "pendente" and texto in (s.get("alvo", "") or "").lower():
+                s["status"] = "removida"
+                removidas.append(s["id"])
+    elif op == "priorizar_dominio":
+        dom = str(params.get("dominio", ""))[:120].lower()
+        if len(dom) < 3:
+            raise AgentErro("domínio curto demais", "dominio")
+        aj["prioridades"].insert(0, dom)
+        adicionadas.append("prioridade:" + dom)
+    elif op == "investigar_divergencia":
+        invs = job.get("investigacoes") or []
+        try:
+            idx = int(params.get("indice", 0))
+        except (TypeError, ValueError):
+            raise AgentErro("índice inválido", "indice") from None
+        if not (0 <= idx < len(invs)):
+            raise AgentErro("divergência inexistente", "indice")
+        for q in invs[idx].get("follow_up", [])[:3]:
+            job["plano"].append({"id": f"p{len(job['plano']) + 1}", "tipo": "busca",
+                                 "alvo": str(q)[:120], "status": "pendente", "tentativas": 0})
+            adicionadas.append("busca:" + str(q)[:60])
+    for ev in listar_evidencias(db, owner, job_id):
+        if any(r in (ev.get("url", "") or "").lower() or r in (ev.get("titulo", "") or "").lower()
+               for r in aj["restricoes"]):
+            invalidadas.append(ev["id"])
+    job["ajustes"] = aj
+    job["plano_versao"] += 1
+    if job["status"] in ("interrompida", "pausada"):
+        job["status"] = "em_andamento"
+    salvar_job(db, job)
+    emitir(db, job["id"], owner, "orchestrator", "plan_updated", "ok",
+           f"Intervenção {op} → plano v{job['plano_versao']}: +{len(adicionadas)}/-{len(removidas)}.",
+           {"op": op})
+    return {"job_id": job_id, "plano_versao": job["plano_versao"], "adicionadas": adicionadas,
+            "removidas": removidas, "invalidadas": invalidadas, "status": job["status"]}
 
 
 def _segundos(ini: str, fim: str) -> float:

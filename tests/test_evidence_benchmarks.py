@@ -57,9 +57,9 @@ def test_b1_primaria_correta():
     evs = ra.listar_evidencias(db, "u-x", job["id"])
     assert len(evs) == 1
     v = ra.agente_verificador(db, job, evs)
-    assert any(x["estado"] == "SUPPORTED" and x["metodo"] == "quantidade-exata" for x in v)
+    assert any(x["estado"] == "SUPPORTED" and x["metodo"] == "quantidade+contexto" for x in v)
     sup = [e for e in eg.arestas_do_job(db, "u-x", job["id"]) if e["tipo"] == "SUPPORTS"]
-    assert sup and all(e["metodo"] == "quantidade-exata" for e in sup)
+    assert sup and all(e["metodo"] == "quantidade+contexto" for e in sup)
     db.close()
 
 

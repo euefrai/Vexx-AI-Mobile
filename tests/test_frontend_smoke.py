@@ -307,12 +307,18 @@ def test_live_research_fiacao():
     html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
     js = APP_JS.read_text(encoding='utf-8')
     for eid in ('researchBar', 'researchLabel', 'researchToggle', 'researchCancel',
-                'researchPanel', 'researchSteps', 'researchSources', 'researchResult'):
+                'researchPanel', 'researchSteps', 'researchSources', 'researchResult',
+                'researchPause'):
         assert f'id="{eid}"' in html, eid
         assert eid in js, eid
+    assert 'id="researchFilters"' in html
     for sym in ('researchAttach', 'researchPoll', 'researchCarregaFontes',
-                '/api/research/status', '/api/research/cancel', '/api/research/evidence'):
+                '/api/research/status', '/api/research/cancel', '/api/research/evidence',
+                'researchPollSSE', 'researchPollHTTP', 'researchRecebe', 'researchFilters',
+                'researchAplicaFiltro', '/api/research/stream',
+                '/api/research/pause', 'researchPause'):
         assert sym in js, sym
+    # intervene é via chat (cmd_pesquisa), coberto nos testes de API
     css = (RAIZ / 'public' / 'styles.css').read_text(encoding='utf-8')
     assert '.research-bar' in css and '.research-panel' in css
 

@@ -875,12 +875,25 @@ async function renderEstudos() {
 let researchJob = null;
 const RESEARCH_FIM = ['concluida', 'cancelada', 'falhou', 'interrompida'];
 function researchFase(ev) {
-  const a = ev.agente || '', t = ev.tipo || '';
+  const a = ev.agente || '', t = ev.tipo || '', s = ev.status || '';
+  if (t === 'research_created' || t === 'plan_created') return 'Planejando…';
+  if (t === 'plan_updated') return 'Replanejando…';
+  if (t === 'research_completed') return 'Finalizado.';
+  if (t === 'research_cancelled') return 'Interrompido.';
+  if (t === 'research_failed') return 'Falhou.';
+  if (t === 'source_opened') return s === 'falha' ? 'Fonte inacessível.' : 'Abrindo fontes…';
+  if (t === 'extraction_completed' || t === 'evidence_registered' || t === 'evidence_linked') return 'Extraindo conteúdo…';
+  if (t === 'source_dependency_detected') return 'Analisando fontes…';
+  if (t === 'claim_identified') return 'Identificando afirmações…';
+  if (t === 'claim_verified' || t === 'claim_verification_completed') return 'Verificando evidências…';
+  if (t === 'contradiction_investigated') return 'Analisando contradições…';
+  if (t === 'audit_started') return 'Auditando conclusões…';
+  if (t === 'audit_completed') return 'Auditoria pronta.';
   if (a === 'search') return 'Pesquisando fontes…';
   if (a === 'analyst') return 'Analisando documentos…';
   if (a === 'checker' || a === 'auditor') return 'Verificando informações…';
-  if (a === 'synthesizer') return 'Montando resposta…';
-  if (t === 'plan_created' || t === 'plan_updated') return 'Planejando pesquisa…';
+  if (a === 'contradiction') return 'Analisando contradições…';
+  if (a === 'synthesizer') return 'Gerando resposta…';
   return 'Pesquisando…';
 }
 function researchAttach(jobId) {
@@ -892,6 +905,8 @@ function researchAttach(jobId) {
   $('researchToggle').setAttribute('aria-expanded', 'false');
   $('researchSteps').replaceChildren();
   $('researchSources').replaceChildren();
+  researchFiltroAtual = 'all';
+  researchAplicaFiltro();
   $('researchLabel').textContent = 'Pesquisando…';
   researchPoll();
 }
@@ -907,36 +922,135 @@ function researchItem(icon, title, desc) {
 async function researchPoll() {
   if (!researchJob) return;
   if (Date.now() - researchJob.inicio > 10 * 60 * 1000) { researchStop(); return; }
+  // V4.7: SSE push em tempo real; qualquer falha cai no polling (fallback).
   try {
-    const r = await api('/api/research/status?job_id=' + encodeURIComponent(researchJob.id)
-      + '&apos_seq=' + researchJob.seq);
-    const evs = (r.eventos || []).filter(e => !researchJob.vistos.has(e.seq));
-    evs.forEach(e => {
-      researchJob.vistos.add(e.seq);
-      researchJob.seq = Math.max(researchJob.seq, e.seq);
-      const d = document.createElement('div');
-      d.className = 'timeline-item';
-      d.innerHTML = researchItem('i-sparkle', researchFase(e), e.descricao || '');
-      const box = $('researchSteps');
-      box.appendChild(d);
-      while (box.children.length > 30) box.firstChild.remove();
-    });
-    const s = r.resumo || {};
+    await researchPollSSE();
+  } catch (_) {
+    await researchPollHTTP();
+  }
+  if (researchJob) researchJob.timer = setTimeout(researchPoll, 2000);
+}
+async function researchPollSSE() {
+  const res = await fetch('/api/research/stream?job_id=' + encodeURIComponent(researchJob.id)
+    + '&apos_seq=' + researchJob.seq,
+    { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+  if (!res.ok || !res.body) throw new Error('SSE indisponível (' + res.status + ')');
+  const reader = res.body.getReader();
+  const dec = new TextDecoder();
+  let buf = '';
+  for (;;) {
+    if (!researchJob) { try { await reader.cancel(); } catch (_) {} return; }
+    const read = await reader.read();
+    if (read.done) return;
+    buf += dec.decode(read.value, { stream: true });
+    let idx;
+    while ((idx = buf.indexOf('\n\n')) >= 0) {
+      const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
+      let tipo = '', dados = '';
+      for (const ln of evt.split('\n')) {
+        if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
+        else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
+      }
+      if (tipo !== 'research' || !researchJob) continue;
+      let ev = null;
+      try { ev = JSON.parse(dados); } catch (_) { continue; }
+      if (ev && typeof ev.seq === 'number') researchRecebe(ev);
+      if (ev && (ev.tipo === 'research_completed' || ev.tipo === 'research_failed'
+        || ev.tipo === 'research_cancelled')) {
+        try { await reader.cancel(); } catch (_) {}
+        researchFinal(ev);
+        return;
+      }
+    }
+  }
+}
+async function researchPollHTTP() {
+  const r = await api('/api/research/status?job_id=' + encodeURIComponent(researchJob.id)
+    + '&apos_seq=' + researchJob.seq);
+  (r.eventos || []).forEach(ev => researchRecebe(ev));
+  const s = r.resumo || {};
+  researchPintaResumo(s);
+  if (RESEARCH_FIM.indexOf(s.status) >= 0) {
+    $('researchLabel').textContent = s.status === 'concluida'
+      ? 'Pesquisa concluída: ' + (s.evidencias || 0) + ' evidências.'
+      : 'Pesquisa ' + s.status + '.';
+    researchCarregaFontes();
+    researchStop();
+  }
+}
+function researchRecebe(ev) {
+  if (!researchJob || researchJob.vistos.has(ev.seq)) return;
+  researchJob.vistos.add(ev.seq);
+  researchJob.seq = Math.max(researchJob.seq, ev.seq);
+  const d = document.createElement('div');
+  d.className = 'timeline-item';
+  d.dataset.agente = ev.agente || '';
+  d.dataset.tipo = ev.tipo || '';
+  d.dataset.status = ev.status || '';
+  d.innerHTML = researchItem('i-sparkle', researchFase(ev), ev.descricao || '');
+  if (ev.meta && (ev.meta.trecho || ev.meta.url)) {
+    const det = document.createElement('details');
+    const sum = document.createElement('summary');
+    sum.textContent = 'Ver evidência';
+    det.appendChild(sum);
+    if (ev.meta.trecho) {
+      const p = document.createElement('p');
+      p.textContent = String(ev.meta.trecho).slice(0, 300);
+      det.appendChild(p);
+    }
+    if (ev.meta.url) {
+      const a = document.createElement('a');
+      a.href = ev.meta.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = 'Abrir fonte ↗';
+      det.appendChild(a);
+    }
+    d.appendChild(det);
+  }
+  const box = $('researchSteps');
+  box.appendChild(d);
+  while (box.children.length > 30) box.firstChild.remove();
+  researchAplicaFiltro();
+  researchPintaResumo(null, ev);
+}
+let researchFiltroAtual = 'all';
+function researchAplicaFiltro() {
+  const box = $('researchSteps');
+  if (!box) return;
+  Array.prototype.forEach.call(box.children, el => {
+    const a = el.dataset.agente || '', t = el.dataset.tipo || '', s = el.dataset.status || '';
+    let mostra = researchFiltroAtual === 'all';
+    if (researchFiltroAtual === 'search') mostra = a === 'search' || a === 'orchestrator';
+    else if (researchFiltroAtual === 'source') mostra = a === 'analyst' || t === 'evidence_linked' || t === 'source_opened';
+    else if (researchFiltroAtual === 'erros') mostra = s === 'falha' || s === 'alerta';
+    el.style.display = mostra ? '' : 'none';
+  });
+}
+document.querySelectorAll('#researchFilters button').forEach(b => b.addEventListener('click', () => {
+  researchFiltroAtual = b.dataset.filtro || 'all';
+  researchAplicaFiltro();
+}));
+function researchPintaResumo(s, ultimo) {
+  s = s || null;
+  if (s) {
     const feitas = (s.etapas || []).filter(e => e.status === 'feita').length;
     const total = (s.etapas || []).length;
-    if (RESEARCH_FIM.indexOf(s.status) >= 0) {
-      $('researchLabel').textContent = s.status === 'concluida'
-        ? 'Pesquisa concluída: ' + (s.evidencias || 0) + ' evidências.'
-        : 'Pesquisa ' + s.status + '.';
+    $('researchLabel').textContent = 'Pesquisando…' + (total ? ' (' + feitas + '/' + total + ')' : '');
+    return;
+  }
+  if (ultimo) $('researchLabel').textContent = researchFase(ultimo);
+}
+function researchFinal(ev) {
+  if (!researchJob) return;
+  const id = researchJob.id;
+  api('/api/research/status?job_id=' + encodeURIComponent(id) + '&apos_seq=0')
+    .then(r => researchPintaResumo(r.resumo || {}))
+    .catch(() => {})
+    .finally(() => {
+      const s = $('researchLabel');
+      if (s && /Pesquisand/.test(s.textContent)) s.textContent = 'Pesquisa concluída. Ver detalhes.';
       researchCarregaFontes();
       researchStop();
-      return;
-    }
-    const ultimo = evs.length ? evs[evs.length - 1] : null;
-    $('researchLabel').textContent = (ultimo ? researchFase(ultimo) : 'Pesquisando…')
-      + (total ? ' (' + feitas + '/' + total + ')' : '');
-  } catch (_) { /* PC offline: tenta de novo em 5s */ }
-  if (researchJob) researchJob.timer = setTimeout(researchPoll, 2000);
+    });
 }
 async function researchCarregaFontes() {
   if (!$('researchPanel') || $('researchPanel').hidden) return;
@@ -980,6 +1094,17 @@ $('researchCancel').addEventListener('click', async () => {
   researchStop();
 });
 $('researchResult').addEventListener('click', () => sendMessage('Mostra o resultado da pesquisa'));
+$('researchPause').addEventListener('click', async () => {
+  const id = (researchJob && researchJob.id) || window._researchLast;
+  if (!id) return;
+  const pausada = $('researchPause').textContent === 'Retomar';
+  try {
+    await api('/api/research/pause', { method: 'POST', body: JSON.stringify({ job_id: id, pausar: !pausada }) });
+    $('researchPause').textContent = pausada ? 'Pausar' : 'Retomar';
+    $('researchLabel').textContent = pausada ? 'Pesquisa retomada.' : 'Pesquisa pausada.';
+    if (window._researchLast === id || (researchJob && researchJob.id === id)) researchPoll();
+  } catch (_) {}
+});
 $('estudosRefresh').addEventListener('click', () => { renderEstudos(); learnSyncOutbox(); });
 
 /* ----- Conexão / API ----- */

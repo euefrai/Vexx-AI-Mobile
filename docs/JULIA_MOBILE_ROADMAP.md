@@ -60,12 +60,19 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Componente evidencegraph + memória do grafo (5 perguntas sem LLM). Verificação semântica: BLOQUEADA.
 - Relatório em RELATORIO_JULIA_4.6.md.
 
-## V4.7 — AGENTES
-- Perfis (professora/pesquisadora/organizadora/criativa/analista) como
-  system prompts + ferramentas autorizadas compartilhadas; fila e limites de
-  consumo do Hermes; aprovação para ações sensíveis.
+## V4.7 — LIVE RESEARCH 2.0 + AGENTES INTERATIVOS ✅ (2026-10-16)
+- SSE push real + polling fallback; painel com fases, filtros, evidências expansíveis.
+- Intervenção estruturada (6 ops), pausa/retomada, follow-ups adaptativos, checkpoints 2.0.
+- Perfis futuros (professora/pesquisadora/…) entram aqui quando houver LLM (dependem de inferência).
+- Relatório em RELATORIO_JULIA_4.7.md (esta entrega cobre V4.6.1 + V4.7).
 
-## V4.8 — COMUNIDADE/MULTI-CONTA
+## V4.8 — DEEP RESEARCH PRO (futuro)
+- Síntese e verificação semântica com LLM real (BLOQUEADAS sem provedor); fila de prioridades; segundo provedor ao vivo.
+
+## V4.9 — RESEARCH QUALITY LAB (futuro)
+- Benchmarks ampliados + revisão humana; E2E com LLM; aparelho físico.
+
+## V4.10 — COMUNIDADE/MULTI-CONTA (adiada)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca, moderação. Só após V4.0 de isolamento.
 

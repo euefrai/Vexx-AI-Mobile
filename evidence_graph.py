@@ -299,19 +299,45 @@ def investigar_divergencia(claim_a: dict, claim_b: dict, fonte_a: str, fonte_b: 
 
 
 # ── Verificação 2.0 ─────────────────────────────────────────────────
+def _tokens_conteudo(texto: str) -> set:
+    stop = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
+            "este", "qual", "quais", "onde", "quando", "porque", "pode", "ser",
+            "são", "com", "dos", "das", "uma", "que", "não", "sim", "foi",
+            "sua", "seu", "por", "nos", "nas", "dos"}
+    return {t for t in re.findall(r"[a-zà-ú]{4,}", (texto or "").lower()) if t not in stop}
+
+
 def verificar_claim(claim: dict, evidencias: list) -> dict:
-    """Regras determinísticas válidas; o resto fica UNVERIFIED (nunca similaridade)."""
+    """SUPPORTS exige: quantidade exata (unidade compatível) + entidade/
+    propriedade em comum + datas e base de comparação compatíveis.
+
+    Número igual sozinho NÃO sustenta (ex.: 'TDP 65 W' ≠ 'consumo máximo').
+    """
+    import units as _u
     cond = claim.get("condicoes", {}) or {}
     cqs = cond.get("quantidades", [])
+    toks_claim = _tokens_conteudo(claim["texto"])
     for e in evidencias or []:
-        eqs = extrair_quantidades(e.get("trecho", ""))
+        trecho = e.get("trecho", "") or ""
+        eqs = extrair_quantidades(trecho)
         for q in cqs:
             for x in eqs:
-                if x["valor"] == q["valor"] and (x["unidade"] or "") == (q["unidade"] or ""):
-                    return {"estado": "SUPPORTED", "metodo": "quantidade-exata",
-                            "evidencia": e.get("id", ""), "cobertura_lexica": 1.0,
-                            "condicoes_ausentes": _faltas({"texto": claim["texto"],
-                                                           "condicoes": cond})}
+                if not _u.compativeis({"unidade": q.get("unidade", "")},
+                                      {"unidade": x.get("unidade", "")}):
+                    continue
+                if not _u.iguais({"valor": q.get("valor"), "unidade": q.get("unidade", "")},
+                                 {"valor": x.get("valor"), "unidade": x.get("unidade", "")}):
+                    continue
+                if len(toks_claim & _tokens_conteudo(trecho)) < 2:
+                    continue  # mesma medida, entidade/propriedade distinta
+                if not _datas_compativeis(cond.get("datas", []), trecho):
+                    continue
+                if not _comparado_compativel(cond.get("comparado_a", ""), trecho):
+                    continue
+                return {"estado": "SUPPORTED", "metodo": "quantidade+contexto",
+                        "evidencia": e.get("id", ""), "cobertura_lexica": 1.0,
+                        "condicoes_ausentes": _faltas({"texto": claim["texto"],
+                                                       "condicoes": cond})}
     neg = any("não " in (e.get("trecho", "") or "").lower() or "nunca " in
               (e.get("trecho", "") or "").lower() for e in evidencias or [])
     if evidencias and not neg:
@@ -327,6 +353,22 @@ def verificar_claim(claim: dict, evidencias: list) -> dict:
     return {"estado": "UNVERIFIED", "metodo": "lexico-provisorio",
             "evidencia": "", "cobertura_lexica": 0.0,
             "condicoes_ausentes": _faltas(claim)}
+
+
+def _datas_compativeis(datas_claim: list, trecho: str) -> bool:
+    """Data na afirmação exige a mesma data no trecho; sem data, sem exigência."""
+    if not datas_claim:
+        return True
+    t = (trecho or "").lower()
+    return any(str(d).lower() in t for d in datas_claim)
+
+
+def _comparado_compativel(comparado: str, trecho: str) -> bool:
+    """Base de comparação citada exige menção no trecho."""
+    toks = {t for t in re.findall(r"[a-zà-ú]{4,}", (comparado or "").lower())}
+    if not toks:
+        return True
+    return len(toks & _tokens_conteudo(trecho)) >= 1
 
 
 def _faltas(claim: dict) -> list:

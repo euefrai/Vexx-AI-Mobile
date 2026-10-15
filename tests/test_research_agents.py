@@ -337,6 +337,93 @@ def test_comando_job_nao_duplica_busca(monkeypatch):
     db.close()
 
 
+def test_intervencao_estruturada():
+    db = _db()
+    prov = FakeProv({"*": CAFE})
+    rec = lambda u: {"titulo": "T", "texto": CAFE[0]["trecho"], "final": u}  # noqa: E731
+    job = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
+    ra.executar(db, job["id"], "u-x", [prov], rec)
+    try:
+        ra.intervir(db, "u-x", job["id"], "teleporte", {})
+        raise AssertionError("op inválida deveria falhar")
+    except ra.AgentErro as exc:
+        assert exc.codigo == "op"
+    try:
+        ra.intervir(db, "u-x", job["id"], "escopo_add", {"texto": "chá"})
+        raise AssertionError("estado final deveria falhar")
+    except ra.AgentErro as exc:
+        assert exc.codigo == "estado"
+    viva = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
+    ra.montar_plano(db, viva)
+    out = ra.intervir(db, "u-x", viva["id"], "escopo_add", {"texto": "chá verde"})
+    assert out["plano_versao"] == 3 and len(out["adicionadas"]) == 2  # v2 do montar +1
+    rel = ra.intervir(db, "u-x", viva["id"], "escopo_remove", {"texto": "chá verde"})
+    assert rel["removidas"]  # pendentes removidas
+    job2 = ra.carregar_job(db, "u-x", viva["id"])
+    assert all(s["status"] in ("pendente", "removida") for s in job2["plano"])
+    pri = ra.intervir(db, "u-x", viva["id"], "priorizar_dominio", {"dominio": "exemplo.com"})
+    assert pri["adicionadas"] == ["prioridade:exemplo.com"]
+    assert ra.carregar_job(db, "u-x", viva["id"])["ajustes"]["prioridades"] == ["exemplo.com"]
+    met = ra.intervir(db, "u-x", viva["id"], "adicionar_metrica", {"texto": "preço"})
+    assert "preço" in ra.carregar_job(db, "u-x", viva["id"])["ajustes"]["metricas"]
+    try:
+        ra.intervir(db, "u-y", viva["id"], "escopo_add", {"texto": "x"})
+        raise AssertionError("outro dono não intervém")
+    except ra.AgentErro as exc:
+        assert exc.codigo == "ausente"
+    # chat: "ignore produtos usados" e "investigue essa divergência"
+    viva2 = ra.carregar_job(db, "u-x", viva["id"])
+    viva2["status"] = "em_andamento"
+    ra.salvar_job(db, viva2)
+    assert "Plano v" in pc_agent.cmd_pesquisa(db, "ignore produtos usados", "u-x", "c1")
+    # pausar/retomar
+    job3 = ra.criar_job(db, "u-x", "mate?", manual="rapida")
+    job3["status"] = "em_andamento"
+    ra.salvar_job(db, job3)
+    assert ra.pausar(db, "u-x", job3["id"], True)["status"] == "pausada"
+    assert ra.pausar(db, "u-x", job3["id"], False)["status"] == "em_andamento"
+    try:
+        ra.pausar(db, "u-x", job["id"], True)  # concluída: falha
+        raise AssertionError("pausar concluída deveria falhar")
+    except ra.AgentErro:
+        pass
+    db.close()
+
+
+def test_pausa_segura_worker():
+    import threading as _t
+    db_path = Path(tempfile.mkdtemp()) / "pausa.sqlite3"
+    db = pc_agent.open_db(db_path)
+    job = ra.criar_job(db, "u-x", "café faz bem mesmo?", manual="pro")
+    job["status"] = "em_andamento"
+    ra.salvar_job(db, job)
+    ra.pausar(db, "u-x", job["id"], True)
+    jid = job["id"]
+    db.close()
+    fim = {}
+
+    def roda():
+        d = pc_agent.open_db(db_path)
+        try:
+            fim["r"] = ra.executar(d, jid, "u-x", [FakeProv({"*": CAFE})],
+                                   lambda u: {"titulo": "T", "texto": CAFE[0]["trecho"],
+                                              "final": u})
+        finally:
+            d.close()
+
+    t = _t.Thread(target=roda, daemon=True)
+    t.start()
+    _t.Event().wait(1.5)
+    assert t.is_alive()  # pausada: worker espera, não avança nem morre
+    d = pc_agent.open_db(db_path)
+    ra.pausar(d, "u-x", jid, False)
+    d.close()
+    t.join(timeout=30)
+    assert fim["r"]["status"] in ("concluida", "interrompida")
+    db = pc_agent.open_db(db_path)
+    db.close()
+
+
 def test_relay_research_endpoints(tmp_path):
     import threading as _t
     from fastapi.testclient import TestClient
@@ -395,3 +482,116 @@ def test_relay_research_endpoints(tmp_path):
                 "evidencias"][0]["url"] == "http://e/x"
             assert client.post("/api/research/start", json={"objetivo": "oi"}, headers=h).status_code == 422
             assert client.get("/api/research/status?job_id=x", headers=h).status_code == 422
+
+
+def test_sse_entrega_ordenada_com_replay_e_fechamento():
+    import threading as _t
+    from fastapi.testclient import TestClient
+    import server
+    from argon2 import PasswordHasher
+    import os as _os
+    _os.environ["JULIA_USERNAME"] = "owneruser"
+    _os.environ["JULIA_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
+    _os.environ["JULIA_SESSION_SECRET"] = "a" * 64
+    _os.environ["JULIA_AGENT_TOKEN"] = "b" * 64
+    server.login_failures.clear()
+    from test_auth import _agente_generico, _login_legacy
+
+    def fake(req):
+        if req.get("type") == "research_job_status":
+            return {"type": "research_status",
+                    "resumo": {"id": "rj-9", "status": "em_andamento"},
+                    "eventos": [{"seq": 1, "tipo": "research_created"},
+                                {"seq": 2, "tipo": "plan_created"}]}
+        if req.get("type") == "research_job_intervene":
+            return {"type": "research_intervened", "job_id": "rj-9", "plano_versao": 3,
+                    "adicionadas": [], "removidas": [], "invalidadas": [], "status": "em_andamento"}
+        if req.get("type") == "research_job_pause":
+            return {"type": "research_paused", "id": "rj-9", "status": "pausada"}
+        return {"type": "learn_error", "error": "?", "codigo": "erro"}
+
+    with TestClient(server.app) as client:
+        with client.websocket_connect("/api/agent/ws",
+                                      headers={"Authorization": "Bearer " + _os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            rr = {"research_job_status": fake, "research_job_intervene": fake,
+                  "research_job_pause": fake}
+            vistos = {}
+
+
+            def agente_com_push():
+                atendidos = 0
+                while True:
+                    try:
+                        req = ws.receive_json()
+                    except Exception:
+                        return
+                    t = req.get("type")
+                    vistos[t] = req
+                    if t == "sess_revogados":
+                        ws.send_json({"request_id": req["request_id"],
+                                      "type": "sess_revogados", "sids": []})
+                        continue
+                    fn = rr.get(t)
+                    if fn is None:
+                        continue
+                    ws.send_json({"request_id": req["request_id"], **fn(req)})
+                    if t == "research_job_status":
+                        atendidos += 1
+                        if atendidos == 1:
+                            # TestClient entrega SSE só ao concluir: fecha com completed.
+                            for seq, tipo in ((3, "search_completed"), (4, "search_completed"),
+                                               (5, "research_completed")):
+                                ws.send_json({"request_id": f"p{seq}",
+                                              "type": "research_event_push",
+                                              "job_id": "rj-9", "owner": "local",
+                                              "event": {"seq": seq, "tipo": tipo}})
+
+            t = _t.Thread(target=agente_com_push, daemon=True)
+            t.start()
+            csrf = _login_legacy(client)
+            h = {"X-CSRF-Token": csrf}
+            r = client.post("/api/research/intervene",
+                            json={"job_id": "rj-9", "op": "escopo_add",
+                                  "params": {"texto": "preço"}}, headers=h)
+            assert r.json()["plano_versao"] == 3
+            r = client.post("/api/research/pause", json={"job_id": "rj-9", "pausar": True},
+                            headers=h)
+            assert r.json()["status"] == "pausada"
+            assert client.post("/api/research/intervene",
+                               json={"job_id": "rj-9", "op": "x", "params": {}},
+                               headers=h).status_code in (422, 503)
+            recebidos = {}
+
+            def abre_sse():
+                try:
+                    with client.stream("GET", "/api/research/stream?job_id=rj-9&apos_seq=2",
+                                       headers=h) as r:
+                        recebidos["status"] = r.status_code
+                        buf = ""
+                        for chunk in r.iter_bytes():
+                            buf += chunk.decode("utf-8", "ignore")
+                            while "\n\n" in buf:
+                                evt, buf = buf.split("\n\n", 1)
+                                if "event: research" in evt:
+                                    recebidos.setdefault("evs", []).append(evt)
+                                if len(recebidos.get("evs", [])) >= 3:
+                                    return
+                except Exception as exc:
+                    recebidos["err"] = type(exc).__name__
+
+            s = _t.Thread(target=abre_sse, daemon=True)
+            s.start()
+            import time as _time
+            _time.sleep(2.0)  # SSE aberta (backlog vazio p/ apos_seq=2)
+            recebidos["subs"] = [(v["job_id"], v["owner"])
+                                    for v in server.relay.research_subs.values()]
+            try:
+                _poll = client.get("/api/research/status?job_id=rj-9&apos_seq=0",
+                                   headers=h, timeout=10)
+                recebidos["poll"] = _poll.status_code
+            except Exception as exc:
+                recebidos["poll"] = type(exc).__name__
+            s.join(timeout=15)
+            evs = recebidos.get("evs", [])
+            assert len(evs) == 3, {"recebidos": recebidos, "vistos": sorted(vistos)}
+            assert '"seq": 3' in evs[0] and '"seq": 4' in evs[1] and '"seq": 5' in evs[2]

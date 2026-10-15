@@ -2238,10 +2238,63 @@ def _ultimo_job(db, owner: str, estados: tuple = ()) -> dict | None:
     return None
 
 
+def _cmd_intervencao(db, owner: str, t: str):
+    """Mudança de instrução sem reiniciar (conjunto estruturado, sem LLM)."""
+    job = _ultimo_job(db, owner, ("em_andamento", "pausada", "interrompida"))
+    if job is None:
+        return ""
+    jid = job["id"]
+
+    def _aplica(op, params):
+        try:
+            out = research_agents.intervir(db, owner, jid, op, params)
+        except research_agents.AgentErro as exc:
+            return "Não consegui alterar: " + str(exc) + " 🔍"
+        detalhe = []
+        if out["adicionadas"]:
+            detalhe.append("novas: " + ", ".join(out["adicionadas"][:3]))
+        if out["removidas"]:
+            detalhe.append("removidas: " + ", ".join(out["removidas"][:3]))
+        if out["invalidadas"]:
+            detalhe.append(f"{len(out['invalidadas'])} resultado(s) anterior(es) conflitam "
+                           "com o novo critério (preservados, marcados).")
+        return (f"Plano v{out['plano_versao']} atualizado ({op}). "
+                + (" ".join(detalhe) if detalhe else "Sem alterações necessárias.") + " 🔍")
+
+    m = re.search(r"(?i)pesquise apenas (.+)|só (.+?)(?:\.|$)|somente (.+?)(?:\.|$)", t)
+    if m:
+        alvo = next((g for g in m.groups() if g), "").strip()[:120]
+        if len(alvo) >= 3:
+            return _aplica("escopo_add", {"texto": alvo})
+    m = re.search(r"(?i)priorize (.+?)(?:\.|$)", t)
+    if m and len(m.group(1).strip()) >= 3:
+        alvo = m.group(1).strip()[:120]
+        if re.fullmatch(r"[a-z0-9.-]+\.[a-z]{2,}", alvo):
+            return _aplica("priorizar_dominio", {"dominio": alvo})
+        return _aplica("escopo_add", {"texto": alvo})
+    m = re.search(r"(?i)ignore (.+?)(?:\.|$)", t)
+    if m and len(m.group(1).strip()) >= 3:
+        return _aplica("escopo_remove", {"texto": m.group(1).strip()[:120]})
+    if re.search(r"(?i)investigue (melhor )?essa diverg", t):
+        return _aplica("investigar_divergencia", {"indice": 0})
+    m = re.search(r"(?i)(?:não precisa mais pesquisar|pare de pesquisar|não pesquise mais) (.+?)(?:\.|$)", t)
+    if m and len(m.group(1).strip()) >= 3:
+        return _aplica("parar_topico", {"texto": m.group(1).strip()[:120]})
+    m = re.search(r"(?i)adicione (.+?) à comparação|adicione (.+?) a comparacao", t)
+    if m:
+        alvo = next((g for g in m.groups() if g), "").strip()[:120]
+        if len(alvo) >= 3:
+            return _aplica("adicionar_metrica", {"texto": alvo})
+    return ""
+
+
 def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
     mesmo com o Hermes bloqueado). Retorna texto ou ''."""
     t = (texto or "").lower()
+    _cmd = _cmd_intervencao(db, owner, t)
+    if _cmd:
+        return _cmd
     if any(k in t for k in ("mostra o resultado da pesquisa", "mostrar resultado",
                             "resultado da pesquisa", "e aí a pesquisa", "e ai a pesquisa")):
         job = _ultimo_job(db, owner, ("concluida",))
@@ -2777,7 +2830,7 @@ def _db_job(path):
     return open_db(Path(path))
 
 
-def iniciar_job_bg(db_path, job_id: str, owner: str) -> bool:
+def iniciar_job_bg(db_path, job_id: str, owner: str, websocket=None) -> bool:
     """Dispara worker em thread (1 por dono, teto global anti-monopólio)."""
     with JOBS_BG_LOCK:
         if any(v.get("owner") == owner for v in JOBS_BG.values()):
@@ -2785,21 +2838,72 @@ def iniciar_job_bg(db_path, job_id: str, owner: str) -> bool:
         if len(JOBS_BG) >= MAX_JOBS_SIMULTANEOS:
             return False
         parar = threading.Event()
+        pronto = threading.Event()
         cfg = ai_config()
         t = threading.Thread(target=_job_worker,
-                             args=(str(db_path), job_id, owner, cfg, parar),
+                             args=(str(db_path), job_id, owner, cfg, parar, pronto,
+                                   websocket),
                              daemon=True)
-        JOBS_BG[job_id] = {"owner": owner, "parar": parar, "thread": t}
+        JOBS_BG[job_id] = {"owner": owner, "parar": parar, "pronto": pronto, "thread": t}
         t.start()
         return True
 
 
-def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar) -> None:
+def _job_tailer(db_path: str, job_id: str, owner: str, websocket, parar, pronto) -> None:
+    """Encaminha eventos novos ao relay (push real; polling continua valendo)."""
+    import sqlite3 as _sq
+    ultimo = 0
+    try:
+        db = _sq.connect(db_path)
+        while not parar.is_set():
+            try:
+                rows = db.execute("SELECT seq, ts, agente, tipo, status, descricao, meta"
+                                  " FROM research_events WHERE job_id=? AND owner_id=?"
+                                  " AND seq>? ORDER BY seq LIMIT 50",
+                                  (job_id, owner, ultimo)).fetchall()
+            except Exception:
+                break
+            for seq, ts, agente, tipo, status, descricao, meta in rows:
+                ultimo = max(ultimo, seq)
+                try:
+                    enviar_ws(websocket, {"type": "research_event_push", "job_id": job_id,
+                                          "owner": owner,
+                                          "event": {"seq": seq, "ts": ts, "agente": agente,
+                                                    "tipo": tipo, "status": status,
+                                                    "descricao": descricao,
+                                                    "meta": __import__("json").loads(meta or "{}")}})
+                except Exception:
+                    return  # relay caiu: polling cobre
+            try:
+                row = db.execute("SELECT status FROM research_jobs WHERE id=? AND owner_id=?",
+                                 (job_id, owner)).fetchone()
+            except Exception:
+                break
+            if row and row[0] in ("concluida", "cancelada", "falhou"):
+                break
+            parar.wait(1.0)
+    except Exception:
+        pass
+    finally:
+        try:
+            db.close()
+        except Exception:
+            pass
+
+
+def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
+                websocket=None) -> None:
     db = open_db(Path(db_path))
+    cauda = None
     try:
         db.execute("UPDATE research_jobs SET status='em_andamento' WHERE id=? AND owner_id=?",
                    (job_id, owner))
         db.commit()
+        if websocket is not None:
+            cauda = threading.Thread(target=_job_tailer,
+                                     args=(db_path, job_id, owner, websocket, parar, pronto),
+                                     daemon=True)
+            cauda.start()
         research_agents.executar(db, job_id, owner, research_agents.provedores_reais(),
                                  research_agents.recuperar_real(),
                                  deve_parar=parar.is_set)
@@ -2822,7 +2926,7 @@ def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar) -> None
             pass
 
 
-def rjob_start(db, req: dict, dono: str) -> dict:
+def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
     """Cria job + plano + dispara worker. 1 ativa por dono (409 honesto)."""
     if research_agents.job_ativo(db, dono) or \
             any(v.get("owner") == dono for v in JOBS_BG.values()):
@@ -2837,7 +2941,7 @@ def rjob_start(db, req: dict, dono: str) -> dict:
         return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
     job["status"] = "em_andamento"
     research_agents.salvar_job(db, job)
-    if not iniciar_job_bg(database_path(), job["id"], dono):
+    if not iniciar_job_bg(database_path(), job["id"], dono, websocket):
         job["status"] = "criada"
         research_agents.salvar_job(db, job)
         return {"type": "learn_error", "error": "Já há pesquisa em andamento.",
@@ -2878,6 +2982,25 @@ def rjob_cancel(db, req: dict, dono: str) -> dict:
 
 def rjob_list(db, dono: str) -> dict:
     return {"type": "research_jobs", "jobs": research_agents.listar_jobs(db, dono)}
+
+
+def rjob_intervene(db, req: dict, dono: str) -> dict:
+    try:
+        out = research_agents.intervir(db, dono, str(req.get("job_id", ""))[:64],
+                                       str(req.get("op", ""))[:30],
+                                       req.get("params", {}) if isinstance(req.get("params"), dict) else {})
+        return {"type": "research_intervened", **out}
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
+
+
+def rjob_pause(db, req: dict, dono: str) -> dict:
+    try:
+        pausar = str(req.get("pausar", "1")).lower() not in ("0", "false", "nao", "não")
+        return {"type": "research_paused",
+                **research_agents.pausar(db, dono, str(req.get("job_id", ""))[:64], pausar)}
+    except research_agents.AgentErro as exc:
+        return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
 
 
 def rjob_evidence(db, req: dict, dono: str) -> dict:
@@ -3397,7 +3520,8 @@ def run():
                             reply = {"request_id": request_id, "type": "learn_error",
                                      "error": str(exc), "codigo": "erro"}
                     elif req.get("type") == "research_job_start":
-                        reply = {"request_id": request_id, **rjob_start(db, req, dono)}
+                        reply = {"request_id": request_id,
+                                 **rjob_start(db, req, dono, websocket)}
                     elif req.get("type") == "research_job_status":
                         reply = {"request_id": request_id, **rjob_status(db, req, dono)}
                     elif req.get("type") == "research_job_cancel":
@@ -3406,6 +3530,10 @@ def run():
                         reply = {"request_id": request_id, **rjob_list(db, dono)}
                     elif req.get("type") == "research_job_evidence":
                         reply = {"request_id": request_id, **rjob_evidence(db, req, dono)}
+                    elif req.get("type") == "research_job_intervene":
+                        reply = {"request_id": request_id, **rjob_intervene(db, req, dono)}
+                    elif req.get("type") == "research_job_pause":
+                        reply = {"request_id": request_id, **rjob_pause(db, req, dono)}
                     elif req.get("type") == "ui_state_save":
                         salvos = 0
                         with db:

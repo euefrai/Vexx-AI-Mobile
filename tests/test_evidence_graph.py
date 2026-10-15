@@ -72,7 +72,7 @@ def test_verificacao_quantidade_exata_e_provisoria():
              "condicoes": {"comparado_a": "", "metrica": "",
                            "quantidades": [{"valor": 65.0, "unidade": "W"}], "datas": []}}
     r = eg.verificar_claim(claim, [{"id": "e1", "trecho": "medimos consumo de 65 W em jogos"}])
-    assert r["estado"] == "SUPPORTED" and r["metodo"] == "quantidade-exata"
+    assert r["estado"] == "SUPPORTED" and r["metodo"] == "quantidade+contexto"
     r2 = eg.verificar_claim(claim, [{"id": "e1", "trecho": "o aparelho é econômico e silencioso"}])
     assert r2["estado"] in ("PARTIALLY_SUPPORTED", "UNVERIFIED")  # nunca SUPPORTED por léxico
     assert r2["estado"] != "SUPPORTED"

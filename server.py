@@ -205,6 +205,8 @@ class AgentRelay:
         self.pending: dict[str, asyncio.Future] = {}
         self.streams: dict[str, asyncio.Queue] = {}
         self.send_lock = asyncio.Lock()
+        # Live research: sub_id -> {job_id, owner, fila}. Teto anti-abuso.
+        self.research_subs: dict[str, dict] = {}
 
     def ha(self) -> int:
         if self.ws is None or not self.ws_desde:
@@ -237,6 +239,11 @@ class AgentRelay:
             try:
                 fila.put_nowait({"type": "ai_error", "error": "Agente desconectado",
                                  "codigo": "desconectado"})
+            except asyncio.QueueFull:
+                pass
+        for sub in self.research_subs.values():
+            try:
+                sub["fila"].put_nowait({"seq": -1, "tipo": "relay_desconectado"})
             except asyncio.QueueFull:
                 pass
 
@@ -1625,6 +1632,107 @@ async def research_evidence(request: Request, job_id: str):
     return {"evidencias": result.get("evidencias", [])}
 
 
+class ResearchInterveneIn(BaseModel):
+    job_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    op: str = Field(min_length=3, max_length=30, pattern=r"^[a-z_]+$")
+    params: dict = Field(default={})
+
+
+class ResearchPauseIn(BaseModel):
+    job_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    pausar: bool = True
+
+
+@app.post("/api/research/intervene")
+async def research_intervene(request: Request, body: ResearchInterveneIn):
+    """Alteração estruturada do plano (sem LLM; feita preservada)."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "research_job_intervene", "owner": dono,
+                                   "job_id": body.job_id, "op": body.op,
+                                   "params": body.params}, timeout=20.0)
+    if result.get("type") != "research_intervened":
+        raise _research_erro(result)
+    result.pop("type", None)
+    return result
+
+
+@app.post("/api/research/pause")
+async def research_pause(request: Request, body: ResearchPauseIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "research_job_pause", "owner": dono,
+                                   "job_id": body.job_id,
+                                   "pausar": "1" if body.pausar else "0"}, timeout=20.0)
+    if result.get("type") != "research_paused":
+        raise _research_erro(result)
+    result.pop("type", None)
+    return result
+
+
+@app.get("/api/research/stream")
+async def research_stream(request: Request, job_id: str, apos_seq: int = 0):
+    """SSE de telemetria real: backlog autoritativo + push ao vivo.
+
+    Polling continua válido como fallback (mesmo contrato, mesmos seqs).
+    """
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(job_id) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    if relay.ws is None:
+        raise HTTPException(503, "Computador desconectado; use o painel com polling")
+    if len(relay.research_subs) >= 20:
+        raise HTTPException(429, "Muitos acompanhamentos; tente de novo")
+    from fastapi.responses import StreamingResponse
+    fila: asyncio.Queue = asyncio.Queue(maxsize=200)
+    sub_id = uuid.uuid4().hex
+    relay.research_subs[sub_id] = {"job_id": job_id, "owner": dono, "fila": fila,
+                                   "perdidos": 0}
+    backlog = await relay.exchange({"type": "research_job_status", "owner": dono,
+                                    "job_id": job_id, "apos_seq": apos_seq}, timeout=20.0)
+    if backlog.get("type") != "research_status":
+        relay.research_subs.pop(sub_id, None)
+        raise _research_erro(backlog)
+
+    async def gerar():
+        vistos = apos_seq
+        try:
+            for ev in backlog.get("eventos", []):
+                if isinstance(ev.get("seq"), int) and ev["seq"] > vistos:
+                    vistos = ev["seq"]
+                    yield ("event: research\n"
+                           f"data: {json.dumps(ev, ensure_ascii=False)}\n\n")
+            espera = 0.0
+            while True:
+                try:
+                    ev = await asyncio.wait_for(fila.get(), timeout=15.0)
+                except asyncio.TimeoutError:
+                    espera += 15.0
+                    if espera >= 360.0:
+                        return
+                    yield ": ping\n\n"
+                    continue
+                if not isinstance(ev, dict):
+                    continue
+                if ev.get("seq", 0) == -1:
+                    yield ("event: error\n"
+                           f"data: {json.dumps({'error': 'Agente desconectado'}, ensure_ascii=False)}\n\n")
+                    return
+                if isinstance(ev.get("seq"), int) and ev["seq"] > vistos:
+                    vistos = ev["seq"]
+                    yield ("event: research\n"
+                           f"data: {json.dumps(ev, ensure_ascii=False)}\n\n")
+                if ev.get("tipo") in ("research_completed", "research_failed",
+                                      "research_cancelled"):
+                    return
+        finally:
+            relay.research_subs.pop(sub_id, None)
+
+    return StreamingResponse(gerar(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
 @app.get("/api/ai/models")
 async def ai_models(request: Request):
     verify_session(request)
@@ -1757,6 +1865,20 @@ async def agent_ws(websocket: WebSocket):
                         pass
                     continue
                 # Sem stream ativa: ai_done/ai_error de POST /api/ai caem no pending.
+            if isinstance(body, dict) and body.get("type") == "research_event_push":
+                job_id, owner = str(body.get("job_id", "")), str(body.get("owner", ""))
+                ev = body.get("event") if isinstance(body.get("event"), dict) else None
+                job_id, owner = str(body.get("job_id", "")), str(body.get("owner", ""))
+                ev = body.get("event") if isinstance(body.get("event"), dict) else None
+                if job_id and ev and isinstance(ev.get("seq"), int):
+                    for sub in list(relay.research_subs.values()):
+                        if sub["job_id"] != job_id or sub["owner"] != owner:
+                            continue  # isolamento: só o dono recebe
+                        try:
+                            sub["fila"].put_nowait(ev)
+                        except asyncio.QueueFull:
+                            sub["perdidos"] = sub.get("perdidos", 0) + 1
+                continue
             pending = relay.pending.get(request_id)
             if pending and not pending.done():
                 pending.set_result(body)
