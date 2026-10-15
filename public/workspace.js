@@ -5,7 +5,7 @@
   const newer = (a, b) => !b || a.updated_at > b.updated_at ||
     (a.updated_at === b.updated_at && a.change_id > b.change_id);
   function create(options) {
-    let owner = null, cache = new Map(), loading = null, syncing = false, timer;
+    let owner = null, cache = new Map(), loading = null, syncing = null, timer;
     const prefix = uid => 'workspace:' + uid + ':';
     const request = req => new Promise((resolve, reject) => {
       req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error);
@@ -49,7 +49,7 @@
     async function change(kind, id, patch) {
       await load();
       const current = cache.get(kind + ':' + id);
-      const latest = Math.max(Date.now(), ...[...cache.values()].map(r => Date.parse(r.updated_at) + 1));
+      const latest = [...cache.values()].reduce((time, r) => Math.max(time, (Date.parse(r.updated_at) || 0) + 1), Date.now());
       const r = Object.assign({kind, id, title: 'Nova conversa', project_id: '', pinned: false,
         archived: false, deleted: false}, current, patch, {
         updated_at: new Date(latest).toISOString(), change_id: crypto.randomUUID()
@@ -69,9 +69,13 @@
         pinned: !!s.pinned, archived: !!s.archived};
       if (!old || Object.keys(patch).some(k => old[k] !== patch[k])) await change('chat', s.id, patch);
     }
-    async function sync() {
-      if (syncing || !options.canSync()) return;
-      syncing = true;
+    function sync() {
+      if (syncing) return syncing;
+      if (!options.canSync()) return Promise.resolve(false);
+      syncing = performSync().finally(() => { syncing = null; });
+      return syncing;
+    }
+    async function performSync() {
       const uid = options.getUid();
       try {
         // Reload to include writes made by another tab before this sync.
@@ -86,9 +90,11 @@
         }
         options.onStatus('Projetos sincronizados com o PC');
         await options.onSync();
+        return true;
       } catch (_) {
         options.onStatus('Organização salva aqui · sincronização pendente');
-      } finally { syncing = false; }
+        return false;
+      }
     }
     return {load, change, trackSession, sync,
       get: (kind, id) => cache.get(kind + ':' + id),

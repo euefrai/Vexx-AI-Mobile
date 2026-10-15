@@ -257,13 +257,13 @@ async function allSessions() {
   return mine.map(s => workspace ? workspace.overlay(s) : s).filter(s => !s.deleted)
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 }
-async function putSession(s) {
+async function putSession(s, track = true) {
   const tx = db.transaction(SESSIONS, 'readwrite');
   const d = txDone(tx);
   const row = s.owner ? s : Object.assign({}, s, { owner: currentUid });
   tx.objectStore(SESSIONS).put(row);
   await d;
-  if (workspace) await workspace.trackSession(row);
+  if (workspace && track) await workspace.trackSession(row);
 }
 async function ownSessions() {
   const all = await allSessions();
@@ -370,13 +370,13 @@ async function ensureSession(id, title) {
   await putSession(s);
   return s;
 }
-async function touchSession(id, hint, activityAt) {
+async function touchSession(id, hint, activityAt, track = true) {
   const list = await ownSessions();
   const now = activityAt || new Date().toISOString();
   let s = list.find(x => x.id === id);
-  if (!s) s = { id, title: hint || 'Nova conversa', created_at: now, updated_at: now };
+  if (!s) s = { id, title: hint || 'Nova conversa', created_at: now, updated_at: now, inferred: !!activityAt };
   else { s.updated_at = now > (s.updated_at || '') ? now : s.updated_at; if (s.title === 'Nova conversa' && hint) s.title = hint; }
-  await putSession(s);
+  await putSession(s, track);
 }
 function titleFrom(t) { return String(t || '').replace(/\s+/g, ' ').trim().slice(0, 44) || 'Nova conversa'; }
 
@@ -1411,6 +1411,9 @@ async function syncAndRefresh() {
   busy = true;
   const conf = [];
   try {
+    // Resolve names and project membership before importing message-only history.
+    // Otherwise a fresh device could publish an inferred title over a real edit.
+    const workspaceReady = workspace ? await workspace.sync() : false;
     for (let guard = 0; guard < 5 && pcOnline; guard++) {
       const rem = ownRows(await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
       if (!rem.length) break;
@@ -1436,13 +1439,12 @@ async function syncAndRefresh() {
       for (const c of convs) {
         const rows = adds.filter(m => m.conversation_id === c).sort((a,b) => a.created_at.localeCompare(b.created_at));
         const first = rows.find(m => m.role === 'user');
-        await touchSession(c, first ? titleFrom(first.text) : undefined, rows[rows.length - 1]?.created_at);
+        await touchSession(c, first ? titleFrom(first.text) : undefined, rows[rows.length - 1]?.created_at, workspaceReady);
       }
     }
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     syncJduiStates();
-    if (workspace) await workspace.sync();
     return conf;
   } catch (err) {
     if (err.status === 503) pcOnline = false;
@@ -2374,7 +2376,9 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
     db = await openDb();
     await workspace.load();
     await loadTombstones();
-    for (const s of await ownSessions()) await workspace.trackSession(s);
+    for (const s of await ownSessions()) {
+      if (!s.inferred || workspace.get('chat', s.id)) await workspace.trackSession(s);
+    }
     await migrateV1();
     const rows = await allMessages();
     const presas = rows.filter(m => m.status === 'generating');

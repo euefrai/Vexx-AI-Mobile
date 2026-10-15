@@ -59,6 +59,22 @@ def test_retries_are_idempotent_ties_converge_and_invalid_batch_is_atomic():
     db.close()
 
 
+def test_offline_chat_deletion_is_durable_and_does_not_delete_other_accounts(tmp_path):
+    import pc_agent
+    db = pc_agent.open_db(tmp_path / "deleted.sqlite3")
+    for owner in ("alice", "bob"):
+        pc_agent.persist_messages(db, [dict(id=owner + "-message-one", conversation_id="chat-one",
+            origin="mobile", role="user", text="private", created_at="2026-10-15T12:00:00.000Z")], owner)
+    original = record(id="chat-one", kind="chat", title="Conversa")
+    workspace.merge_records(db, [original], "alice")
+    deleted = dict(original, deleted=True, updated_at="2026-10-15T12:01:00.000Z")
+    workspace.merge_records(db, [deleted, original], "alice")
+    assert pc_agent.list_messages(db, owner="alice") == []
+    assert len(pc_agent.list_messages(db, owner="bob")) == 1
+    assert workspace.list_records(db, "alice")[0]["deleted"] is True
+    db.close()
+
+
 def test_relay_requires_session_csrf_and_uses_authenticated_owner(monkeypatch):
     monkeypatch.setenv("JULIA_SESSION_SECRET", "workspace-tests-only-" * 4)
     monkeypatch.setenv("JULIA_USERNAME", "preview")

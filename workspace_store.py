@@ -59,7 +59,7 @@ def merge_records(db, records, owner):
     with db:
         for record in batch.records:
             data = record.model_dump()
-            db.execute("""INSERT INTO workspace_records
+            cursor = db.execute("""INSERT INTO workspace_records
                 (owner_id, kind, id, payload, updated_at, change_id) VALUES (?,?,?,?,?,?)
                 ON CONFLICT(owner_id,kind,id) DO UPDATE SET
                     payload=excluded.payload, updated_at=excluded.updated_at,
@@ -68,6 +68,17 @@ def merge_records(db, records, owner):
                       (workspace_records.updated_at, workspace_records.change_id)""",
                 (owner, record.kind, record.id, json.dumps(data, ensure_ascii=False),
                  record.updated_at, record.change_id))
+            if cursor.rowcount and record.kind == "chat" and record.deleted:
+                tables = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+                if "messages" in tables:
+                    if "ui_state" in tables:
+                        db.execute("""DELETE FROM ui_state WHERE owner_id=? AND message_id IN
+                            (SELECT id FROM messages WHERE owner_id=? AND conversation_id=? AND origin='mobile')""",
+                            (owner, owner, record.id))
+                    db.execute("DELETE FROM messages WHERE owner_id=? AND conversation_id=? AND origin='mobile'",
+                               (owner, record.id))
+                if "ai_requests" in tables:
+                    db.execute("DELETE FROM ai_requests WHERE owner_id=? AND conversation_id=?", (owner, record.id))
 
 
 def list_records(db, owner):
