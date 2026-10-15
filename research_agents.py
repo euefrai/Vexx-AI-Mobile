@@ -394,6 +394,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
 def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
                     teto_paginas: int = 3) -> list:
     """Source Analyst: abre, extrai, pontua relevância, registra evidências."""
+    import evidence_graph as _eg
     evidencias = []
     for a in achados[:teto_paginas]:
         try:
@@ -416,6 +417,24 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             job["usados"]["paginas"] = job["usados"].get("paginas", 0) + 1
             emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
                    f"Lida {ev['dominio']} (relevância {ev['score']}).", {})
+            try:
+                nsrc = _eg.criar_no(db, job["owner"], job["id"], "source",
+                                    _eg.canonical_url(a["url"]),
+                                    {"url": a["url"][:500], "dominio": ev["dominio"]})
+                ndoc = _eg.criar_no(db, job["owner"], job["id"], "document",
+                                    _eg.hash_conteudo(texto[:1500]),
+                                    {"titulo": ev["titulo"], "url": a["url"][:500],
+                                     "hash": _eg.hash_conteudo(texto[:1500])})
+                nev = _eg.criar_no(db, job["owner"], job["id"], "evidence", ev["id"],
+                                   {"evidence_id": ev["id"], "titulo": ev["titulo"]})
+                _eg.ligar(db, job["owner"], job["id"], ndoc, nsrc, "DERIVED_FROM",
+                          "ingestao", "documento veio desta fonte")
+                _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
+                          "ingestao", "trecho extraído deste documento")
+                emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
+                       f"Evidência ligada ao documento ({ev['dominio']}).", {})
+            except Exception:
+                pass
         except research.ResearchErro as exc:
             emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                    f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
@@ -449,28 +468,81 @@ def cobertura(afirmacao: str, trechos: list) -> float:
 
 
 def agente_verificador(db, job: dict, evidencias: list) -> list:
-    """Fact Checker determinístico: afirmação × evidências → estado."""
-    texto_base = " ".join(e.get("trecho", "") for e in evidencias)
-    claims = extrair_afirmacoes(job["objetivo"] + ". " + texto_base)
+    """Fact Checker 2.0: claims v2 × evidências (regras válidas; resto UNVERIFIED).
+
+    Mantém chaves {afirmacao, estado, cobertura_lexica} + metodo/relacoes.
+    """
+    import evidence_graph as _eg
+    base = job["objetivo"] + ". " + " ".join(e.get("trecho", "") for e in evidencias)
+    claims = _eg.extrair_afirmacoes_v2(base)
+    if not claims and evidencias:
+        claims = [{"texto": job["objetivo"], "condicoes": {"comparado_a": "", "metrica": "",
+                                                           "quantidades": [], "datas": []}}]
     vereditos = []
     for c in claims[:12]:
-        trechos = [e["trecho"] for e in evidencias]
-        cov = cobertura(c, trechos)
+        emitir(db, job["id"], job["owner"], "checker", "claim_identified", "ok",
+               f"Afirmação: {c['texto'][:90]}", {})
         contrad = [e["id"] for e in evidencias if e.get("status") == "contradiz"]
         if contrad:
-            estado = "CONTRADICTED"
-        elif cov >= 0.5:
-            estado = "SUPPORTED"
-        elif cov >= 0.25:
-            estado = "PARTIALLY_SUPPORTED"
-        elif not evidencias:
-            estado = "INSUFFICIENT_EVIDENCE"
+            res = {"estado": "CONTRADICTED", "metodo": "evidencia-contradiz",
+                   "evidencia": contrad[0], "cobertura_lexica": 0.0}
         else:
-            estado = "UNVERIFIED"
-        vereditos.append({"afirmacao": c, "estado": estado, "cobertura_lexica": cov})
+            res = _eg.verificar_claim(c, [{"id": e["id"], "trecho": e["trecho"]} for e in evidencias])
+        try:
+            ncl = _eg.criar_no(db, job["owner"], job["id"], "claim", c["texto"][:200],
+                               {"texto": c["texto"][:500], "condicoes": c["condicoes"]})
+            for e in evidencias:
+                nev = _eg.no_id("evidence", job["id"], e["id"])
+                if res["estado"] == "SUPPORTED" and res.get("evidencia") == e["id"]:
+                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "SUPPORTS",
+                              res["metodo"], "quantidade exata no trecho")
+                elif res["estado"] == "CONTRADICTED" and e["id"] in contrad:
+                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "CONTRADICTS",
+                              "evidencia-contradiz", "fonte marcada como contraditória")
+                elif res["estado"] == "PARTIALLY_SUPPORTED" and \
+                        _relevancia(c["texto"], e.get("trecho", "")) >= 0.25:
+                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "PARTIALLY_SUPPORTS",
+                              res["metodo"], "cobertura parcial")
+                elif _relevancia(c["texto"], e.get("trecho", "")) > 0:
+                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "MENTIONS",
+                              "lexico", "citação contextual")
+                else:
+                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "REQUIRES_VERIFICATION",
+                              "sem-cobertura", "sem relação lexical detectada")
+        except Exception:
+            pass
+        vereditos.append({"afirmacao": c["texto"], "estado": res["estado"],
+                          "cobertura_lexica": res.get("cobertura_lexica", 0.0),
+                          "metodo": res.get("metodo", "")})
         emitir(db, job["id"], job["owner"], "checker", "claim_verified", "ok",
-               f"{estado} (cobertura {cov}): {c[:90]}", {})
+               f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}", {})
+    emitir(db, job["id"], job["owner"], "checker", "claim_verification_completed", "ok",
+           f"{len(vereditos)} afirmações avaliadas.", {})
     return vereditos
+
+
+def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
+    """Source Independence: pares de documentos → laudo + arestas."""
+    import evidence_graph as _eg
+    docs = [{"url": e.get("url", ""), "texto": e.get("trecho", ""), "id": e.get("id", "")}
+            for e in evidencias or []]
+    laudos = []
+    for i in range(len(docs)):
+        for j in range(i + 1, len(docs)):
+            laudo = _eg.analisar_independencia(docs[i], docs[j])
+            laudo.update({"a": docs[i]["id"], "b": docs[j]["id"]})
+            laudos.append(laudo)
+            try:
+                na = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[i]["texto"][:1500]))
+                nb = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[j]["texto"][:1500]))
+                _eg.ligar(db, job["owner"], job["id"], na, nb, laudo["relacao"],
+                          "independencia", laudo["motivo"][:200])
+            except Exception:
+                pass
+            if laudo["relacao"] in ("DUPLICATES", "DERIVED_FROM"):
+                emitir(db, job["id"], job["owner"], "analyst", "source_dependency_detected",
+                       "alerta", f"{laudo['relacao']}: {laudo['motivo'][:120]}", {})
+    return laudos
 
 
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dict:

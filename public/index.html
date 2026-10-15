@@ -9,6 +9,7 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/interface.css" />
 </head>
 <body>
   <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +55,8 @@
     <aside class="drawer" id="drawer" aria-label="Menu lateral" aria-hidden="true">
       <div class="drawer-head">
         <div class="brand">
-          <div class="brand-mark"><span>✦</span></div>
-          <div><strong>VEXX AI<span class="brand-dot">.</span></strong><small>ASSISTENTE</small></div>
+          <div class="brand-mark"><span>v.</span></div>
+          <div><strong>Vexx <span class="brand-ai">AI</span></strong><small>Seu espaço pessoal</small></div>
         </div>
         <button class="icon-button" id="drawerClose" type="button" aria-label="Fechar menu"><svg class="icon"><use href="#i-close"/></svg></button>
       </div>
@@ -66,41 +67,44 @@
         <button class="session-tool" id="drawerLogout" type="button" title="Sair" aria-label="Sair">⏻</button>
       </div>
 
-      <p class="drawer-caption">PRINCIPAL</p>
-      <button class="new-chat-cta" id="newChatCta" type="button"><svg class="icon"><use href="#i-plus"/></svg> Novo chat</button>
+      <button class="new-chat-cta" id="newChatCta" type="button"><svg class="icon"><use href="#i-plus"/></svg> Nova conversa</button>
 
       <div class="drawer-search">
         <svg class="icon"><use href="#i-search"/></svg>
         <input id="sessionSearch" type="search" placeholder="Buscar conversas…" aria-label="Buscar conversas" autocomplete="off" />
       </div>
 
+      <div class="sidebar-library">
+      <div class="drawer-caprow">
+        <p class="drawer-caption">Projetos</p>
+        <button class="mini-toggle" id="newProject" type="button" aria-label="Criar projeto"><svg class="icon"><use href="#i-plus"/></svg></button>
+      </div>
+      <div id="projectList" class="project-list" aria-label="Projetos"></div>
       <div class="drawer-caprow">
         <p class="drawer-caption">CONVERSAS <span id="sessionCount">0</span></p>
         <button class="mini-toggle" id="archivedToggle" type="button" aria-pressed="false" aria-label="Mostrar conversas arquivadas" title="Mostrar conversas arquivadas"><svg class="icon"><use href="#i-archive"/></svg></button>
       </div>
-      <div class="session-list" id="sessionList" role="listbox" aria-label="Sessões de chat"></div>
+      <div class="session-list" id="sessionList" aria-label="Conversas sem projeto"></div>
+      </div>
 
-      <p class="drawer-caption">RECURSOS</p>
+      <p class="drawer-caption">Seu espaço</p>
       <nav class="drawer-nav" aria-label="Navegação">
-        <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Chat <span class="drawer-hint">foco total</span></button>
+        <button class="drawer-item active" data-tab="chat" type="button"><svg class="icon"><use href="#i-chat"/></svg> Conversa</button>
+        <button class="drawer-item" data-tab="documents" type="button"><svg class="icon"><use href="#i-archive"/></svg> Documentos <span class="drawer-hint" id="docCount">0</span></button>
         <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
         <button class="drawer-item" data-tab="activity" type="button"><svg class="icon"><use href="#i-activity"/></svg> Atividades</button>
         <button class="drawer-item" data-tab="estudos" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Meus Estudos</button>
         <button class="drawer-item" data-tab="settings" data-scroll="memory" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Memória</button>
       </nav>
 
-      <p class="drawer-caption">CONTA</p>
       <nav class="drawer-nav" aria-label="Conta">
         <button class="drawer-item" data-tab="settings" type="button"><svg class="icon"><use href="#i-settings"/></svg> Ajustes e conta</button>
       </nav>
 
-      <p class="drawer-caption">DOCUMENTOS <span id="docCount">0</span></p>
-      <div class="doc-list" id="docList" aria-label="Documentos"></div>
-
       <div class="drawer-foot">
         <div class="memory-card">
           <svg class="icon"><use href="#i-sparkle"/></svg>
-          <div><strong>Memória sincronizada</strong><span id="memoryStatus">Entre todos os chats</span></div>
+          <div><strong>Memória entre conversas</strong><span id="memoryStatus">Ativada neste aparelho</span></div>
           <label class="switch" title="Memória entre chats"><input type="checkbox" id="memoryToggle" checked /><span></span></label>
         </div>
         <div class="drawer-model">
@@ -108,19 +112,21 @@
           <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
         </div>
         <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
+        <p id="workspaceStatus" class="workspace-status" role="status">Projetos salvos neste aparelho</p>
       </div>
     </aside>
 
     <div class="main-col">
       <header class="app-header">
-        <button class="icon-button menu-button" id="drawerOpen" type="button" aria-label="Abrir menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+        <button class="icon-button menu-button" id="drawerOpen" type="button" aria-label="Abrir menu" aria-controls="drawer" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
         <div class="chat-title-wrap">
           <strong id="chatTitle">Nova conversa</strong>
-          <small id="chatSubtitle">Toque para trocar de sessão no menu</small>
+          <small id="chatSubtitle">Seu espaço para pensar e criar</small>
         </div>
         <button class="icon-button" id="newChatTop" type="button" title="Nova conversa" aria-label="Nova conversa"><svg class="icon"><use href="#i-plus"/></svg></button>
+        <button class="icon-button" id="chatOptions" type="button" aria-label="Opções da conversa">···</button>
         <button class="status-dot-btn" type="button" id="statusButton" title="Status" aria-label="Status da conexão" aria-haspopup="true">
-          <span class="status-dot"></span>
+          <span class="status-dot"></span><span id="connectionShort">Conexão</span>
         </button>
       </header>
       <div class="status-pop" id="statusPop" hidden role="status" aria-label="Detalhes de status">
@@ -147,17 +153,18 @@
         <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="Mensagens">
           <div class="chat-date">CARREGANDO…</div>
         </div>
-          <div class="chat-date">CARREGANDO…</div>
-        </div>
-
-        <div class="scroll-fab" id="scrollFab" hidden><svg class="icon"><use href="#i-down"/></svg></div>
+        <button class="scroll-fab" id="scrollFab" type="button" aria-label="Ir para a última mensagem" hidden><svg class="icon"><use href="#i-down"/></svg></button>
 
         <div class="suggestions" id="suggestions">
-          <button class="suggestion" data-message="Pesquise as principais notícias de tecnologia de hoje e traga com fontes." type="button"><span>✧</span> Notícias com fontes</button>
-          <button class="suggestion" data-message="Me mostre uma imagem de um pôr do sol na praia." type="button"><span>↗</span> Mostrar imagem</button>
-          <button class="suggestion" data-message="O que você sabe sobre mim?" type="button"><span>≡</span> Minha memória</button>
-          <button class="suggestion" data-message="Crie uma calculadora simples que funcione aqui no chat." type="button"><span>▣</span> Calculadora</button>
+          <button class="suggestion" data-message="Me ajude a organizar uma ideia." type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Organizar uma ideia</button>
+          <button class="suggestion" data-message="Quero montar um plano de estudos." type="button"><svg class="icon"><use href="#i-edit"/></svg> Estudar um assunto</button>
+          <button class="suggestion" data-message="Pesquise este assunto e traga as fontes: " type="button"><svg class="icon"><use href="#i-search"/></svg> Pesquisar com fontes</button>
         </div>
+      </section>
+
+      <section class="page" id="page-documents" aria-label="Documentos" hidden>
+        <div class="section-header"><p class="eyebrow">SEU ESPAÇO</p><h1>Documentos</h1><p class="intro-copy">Consulte os arquivos anexados e continue trabalhando com eles nas conversas.</p></div>
+        <div class="doc-list" id="docList" aria-label="Documentos anexados"></div>
       </section>
 
       <section class="page" id="page-desktop" aria-label="PC" hidden>
@@ -395,7 +402,7 @@
           <input type="file" id="fileInput" hidden accept=".pdf,.docx,.txt,.md,.markdown,.csv,.tsv,.xlsx,.html,.htm" />
           <button type="button" class="composer-plus" id="attachButton" title="Anexar documento (PDF, DOCX, TXT, CSV, XLSX)"><svg class="icon"><use href="#i-plus"/></svg></button>
           <label class="sr-only" for="messageInput">Mensagem</label>
-          <textarea id="messageInput" placeholder="Mensagem… (Enter envia)" maxlength="10000" rows="1"></textarea>
+          <textarea id="messageInput" placeholder="Pergunte, explore ou crie algo…" maxlength="10000" rows="1"></textarea>
           <button class="send-button" type="submit" aria-label="Enviar">
             <svg class="icon"><use href="#i-send"/></svg>
           </button>
@@ -407,7 +414,7 @@
 
       <div class="login-overlay" id="loginOverlay" aria-label="Login">
         <div class="login-card">
-          <div class="login-symbol">✦</div>
+          <div class="login-symbol">v.</div>
           <p class="eyebrow">ACESSO</p>
           <h2>Bem-vindo ao <span>Vexx AI.</span></h2>
           <!-- LOGIN FORM -->
@@ -427,7 +434,7 @@
           <div class="login-switch">
             <button type="button" id="showRegister">Não tem uma conta? Criar conta</button>
           </div>
-          <small>Histórico no celular e no PC. Nuvem sem conversas.</small>
+          <small>Seu histórico fica neste aparelho e no PC conectado.</small>
           <!-- REGISTER FORM (hidden by default) -->
           <form id="registerForm" autocomplete="on" hidden>
             <p class="eyebrow">CADASTRO</p>
@@ -459,6 +466,18 @@
     </div>
   </main>
 
+  <dialog id="organizeDialog" class="organize-dialog" aria-labelledby="organizeTitle">
+    <form id="organizeForm">
+      <div class="dialog-heading"><h2 id="organizeTitle">Organizar conversa</h2><button class="icon-button" id="organizeClose" type="button" aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button></div>
+      <p id="organizeDescription" class="dialog-description"></p>
+      <label for="organizeName">Nome</label><input id="organizeName" required maxlength="80" autocomplete="off" />
+      <div id="organizeDestination"><label for="organizeProject">Projeto</label><select id="organizeProject"></select></div>
+      <div id="organizeChatActions" class="dialog-switches"><label><input id="organizePinned" type="checkbox" /> Fixar conversa</label><label><input id="organizeArchived" type="checkbox" /> Arquivar conversa</label></div>
+      <p id="organizeError" class="login-error" role="alert"></p>
+      <div class="dialog-actions"><button id="organizeDelete" class="subtle-button danger-link" type="button">Excluir conversa</button><button id="organizeCancel" class="subtle-button" type="button">Cancelar</button><button id="organizeSave" class="primary-button" type="submit">Salvar</button></div>
+    </form>
+  </dialog>
+  <script src="/workspace.js" defer></script>
   <script src="/jdui.js" defer></script>
   <script src="/app.js" defer></script>
 </body>

@@ -21,6 +21,7 @@ import learning
 import remoto
 import research
 import research_agents
+import evidence_graph as evgraph
 import workspace_store
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
@@ -183,6 +184,7 @@ def open_db(path: Path):
     learning.criar_tabelas(db)
     research.criar_tabelas(db)
     research_agents.criar_tabelas(db)
+    evgraph.criar_tabelas(db)
     workspace_store.create_tables(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
