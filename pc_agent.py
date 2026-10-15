@@ -7,6 +7,7 @@ import sqlite3
 import threading
 import time
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -28,6 +29,24 @@ from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("JULIA-pc")
+
+# Síntese de UI em paralelo com a geração principal (conexão própria por
+# thread; SQLite não compartilha conexão entre threads).
+_SINT_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="juliarsint")
+
+
+def _sintetizar_isolado(fn, owner: str, *args):
+    db = open_db(database_path())
+    try:
+        return fn(db, *args)
+    except Exception as exc:
+        log.warning("síntese paralela falhou (%s)", type(exc).__name__)
+        return ""
+    finally:
+        try:
+            db.close()
+        except Exception:
+            pass
 
 SYSTEM_PADRAO = ("Você é o Vexx AI, assistente pessoal do usuário. "
                  "Responda em português, de forma direta e útil. "
@@ -2743,12 +2762,26 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             enviar({"request_id": request_id, "type": "ai_delta",
                     "seq": seq, "trecho": trecho})
 
+        # Síntese de prova/aula roda EM PARALELO com o stream (usa só o pedido;
+        # o resultado é coletado no fim). Ganho: total ≈ max(stream, síntese).
+        fut_sintese, quer_aula = None, False
+        _tu = prep.get("user_text", "")
+        if intencao_prova(_tu) and not intencao_reforco(_tu) and not intencao_aula(_tu) \
+                and not intencao_grafico_evolucao(_tu) and not intencao_transformar_pesquisa(_tu):
+            fut_sintese = _SINT_POOL.submit(_sintetizar_isolado, sintetizar_prova,
+                                            owner, cfg_eff, owner, _tu)
+        elif intencao_aula(_tu) and not intencao_reforco(_tu):
+            quer_aula = True
+            fut_sintese = _SINT_POOL.submit(_sintetizar_isolado, sintetizar_aula,
+                                            owner, cfg_eff, owner, _tu)
         try:
             res = hermes_bridge.chat_stream_fb(
                 cfg["proxy"], modelos_tentativa(cfg, modelo), messages, emitir,
                 deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
             modelo = res.get("model_usado", modelo)
         except hermes_bridge.BridgeErro as exc:
+            if fut_sintese is not None:
+                fut_sintese.cancel()
             ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
             try:
                 enviar({"request_id": request_id, "type": "ai_error",
@@ -2757,6 +2790,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass  # relay fora do ar: celular verá timeout + retry
             return
         if res.get("cancelada"):
+            if fut_sintese is not None:
+                fut_sintese.cancel()
             ai_marcar(db, mid, conv, modelo, "cancelled",
                       reply_id=prep["reply_id"], response_text=res["texto"], owner=owner)
             try:
@@ -2769,6 +2804,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
+        if blocos_jdui and fut_sintese is not None:
+            fut_sintese.cancel()  # modelo já entregou interface: dispensa a síntese
         if not blocos_jdui and intencao_transformar_pesquisa(prep.get("user_text", "")):
             fence = fence_de_pesquisa(db, owner, conv, prep.get("user_text", ""))
             if fence:
@@ -2780,7 +2817,14 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 texto_final += fence
                 log.info("reforço sintetizado no stream %s", mid)
         elif not blocos_jdui and intencao_aula(prep.get("user_text", "")):
-            fence = sintetizar_aula(db, cfg_eff, owner, prep.get("user_text", ""))
+            fence = ""
+            if fut_sintese is not None and quer_aula:
+                try:
+                    fence = fut_sintese.result(timeout=120) or ""
+                except Exception:
+                    fence = ""
+            if not fence:
+                fence = sintetizar_aula(db, cfg_eff, owner, prep.get("user_text", ""))
             if fence:
                 texto_final += fence
                 log.info("aula sintetizada no stream %s", mid)
@@ -2790,7 +2834,14 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 texto_final += fence
                 log.info("gráfico de evolução sintetizado no stream %s", mid)
         elif not blocos_jdui and intencao_prova(prep.get("user_text", "")):
-            fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
+            fence = ""
+            if fut_sintese is not None and not quer_aula:
+                try:
+                    fence = fut_sintese.result(timeout=120) or ""
+                except Exception:
+                    fence = ""
+            if not fence:
+                fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
             if fence:
                 texto_final += fence
                 log.info("prova sintetizada no stream %s", mid)

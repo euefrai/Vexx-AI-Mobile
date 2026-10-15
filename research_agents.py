@@ -446,53 +446,70 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
 
 def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
                     teto_paginas: int = 3) -> list:
-    """Source Analyst: abre, extrai, pontua relevância, registra evidências."""
+    """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
     import evidence_graph as _eg
-    evidencias = []
-    for a in achados[:teto_paginas]:
-        try:
-            if recuperar_fn is not None:
-                rec = recuperar_fn(a["url"])
-            else:
-                final, pagina = research.baixar(a["url"], timeout=8.0)
-                titulo, texto = research.extrair_texto_html(pagina)
-                rec = {"titulo": titulo or a["titulo"], "texto": texto, "final": final}
-            texto = (rec.get("texto") or "").strip()
-            if not texto and not a.get("trecho"):
-                emitir(db, job["id"], job["owner"], "analyst", "source_opened",
-                       "vazia", f"Sem texto: {a['url'][:60]}.", {})
-                continue
-            fonte = {"id": a.get("id", ""), "url": a["url"], "titulo": rec.get("titulo") or a["titulo"],
-                     "dominio": research._dominio(a["url"]), "acessado_em": research.agora_iso()}
-            ev = registrar_evidencia(db, job, fonte, texto[:1500] or a.get("trecho", ""))
-            ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])
-            evidencias.append(ev)
-            job["usados"]["paginas"] = job["usados"].get("paginas", 0) + 1
-            emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
-                   f"Lida {ev['dominio']} (relevância {ev['score']}).", {})
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _ler(a):
+        if recuperar_fn is not None:
+            rec = recuperar_fn(a["url"])
+            return {"titulo": rec.get("titulo") or a["titulo"],
+                    "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", "")}
+        final, pagina = research.baixar(a["url"], timeout=8.0)
+        titulo, texto = research.extrair_texto_html(pagina)
+        return {"titulo": titulo or a["titulo"], "texto": texto.strip(), "final": final}
+
+    alvos = achados[:teto_paginas]
+    baixados: dict = {}
+    with ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer") as pool:
+        futs = {pool.submit(_ler, a): a for a in alvos}
+        for fut, a in futs.items():
             try:
-                nsrc = _eg.criar_no(db, job["owner"], job["id"], "source",
-                                    _eg.canonical_url(a["url"]),
-                                    {"url": a["url"][:500], "dominio": ev["dominio"]})
-                ndoc = _eg.criar_no(db, job["owner"], job["id"], "document",
-                                    _eg.hash_conteudo(texto[:1500]),
-                                    {"titulo": ev["titulo"], "url": a["url"][:500],
-                                     "hash": _eg.hash_conteudo(texto[:1500])})
-                nev = _eg.criar_no(db, job["owner"], job["id"], "evidence", ev["id"],
-                                   {"evidence_id": ev["id"], "titulo": ev["titulo"]})
-                _eg.ligar(db, job["owner"], job["id"], ndoc, nsrc, "DERIVED_FROM",
-                          "ingestao", "documento veio desta fonte")
-                _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
-                          "ingestao", "trecho extraído deste documento")
-                emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
-                       f"Evidência ligada ao documento ({ev['dominio']}).",
-                       {"evidencia_id": ev["id"], "dominio": ev["dominio"],
-                        "trecho": ev["trecho"][:300], "url": ev["url"][:200]})
-            except Exception:
-                pass
-        except research.ResearchErro as exc:
-            emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
-                   f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+                baixados[a["url"]] = fut.result()
+            except research.ResearchErro as exc:
+                emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                       f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+            except Exception as exc:
+                emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                       f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+    evidencias = []
+    for a in alvos:
+        rec = baixados.get(a["url"])
+        if rec is None:
+            continue
+        texto = rec["texto"]
+        if not texto and not a.get("trecho"):
+            emitir(db, job["id"], job["owner"], "analyst", "source_opened",
+                   "vazia", f"Sem texto: {a['url'][:60]}.", {})
+            continue
+        fonte = {"id": a.get("id", ""), "url": a["url"], "titulo": rec.get("titulo") or a["titulo"],
+                 "dominio": research._dominio(a["url"]), "acessado_em": research.agora_iso()}
+        ev = registrar_evidencia(db, job, fonte, texto[:1500] or a.get("trecho", ""))
+        ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])
+        evidencias.append(ev)
+        job["usados"]["paginas"] = job["usados"].get("paginas", 0) + 1
+        emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
+               f"Lida {ev['dominio']} (relevância {ev['score']}).", {})
+        try:
+            nsrc = _eg.criar_no(db, job["owner"], job["id"], "source",
+                                _eg.canonical_url(a["url"]),
+                                {"url": a["url"][:500], "dominio": ev["dominio"]})
+            ndoc = _eg.criar_no(db, job["owner"], job["id"], "document",
+                                _eg.hash_conteudo(texto[:1500]),
+                                {"titulo": ev["titulo"], "url": a["url"][:500],
+                                 "hash": _eg.hash_conteudo(texto[:1500])})
+            nev = _eg.criar_no(db, job["owner"], job["id"], "evidence", ev["id"],
+                               {"evidence_id": ev["id"], "titulo": ev["titulo"]})
+            _eg.ligar(db, job["owner"], job["id"], ndoc, nsrc, "DERIVED_FROM",
+                      "ingestao", "documento veio desta fonte")
+            _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
+                      "ingestao", "trecho extraído deste documento")
+            emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
+                   f"Evidência ligada ao documento ({ev['dominio']}).",
+                   {"evidencia_id": ev["id"], "dominio": ev["dominio"],
+                    "trecho": ev["trecho"][:300], "url": ev["url"][:200]})
+        except Exception:
+            pass
     return sorted(evidencias, key=lambda e: e.get("score", 0), reverse=True)
 
 

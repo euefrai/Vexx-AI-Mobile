@@ -278,9 +278,23 @@ def _numerar(fontes: list) -> list:
     return fontes
 
 
+def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float):
+    """Recupera 1 página; retorna rec ou None (vazia); levanta ResearchErro."""
+    if recuperar_fn is not None:
+        rec = recuperar_fn(a["url"])
+    else:
+        final, pagina = baixar(a["url"], timeout=timeout_pagina)
+        titulo, texto = extrair_texto_html(pagina)
+        rec = {"titulo": titulo or a["titulo"], "texto": texto, "final": final}
+    if not (rec.get("texto") or "").strip() and not a.get("trecho"):
+        return None
+    return rec
+
+
 def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=None,
                     max_fontes: int = 3, ttl: int = TTL_RAPIDA, timeout_pagina: float = 6.0) -> dict:
-    """1 busca + até N páginas. Falha de rede → fontes vazias (nunca inventa)."""
+    """1 busca + até N páginas em paralelo (ordem preservada)."""
+    from concurrent.futures import ThreadPoolExecutor
     buscar_fn = buscar_fn or (lambda q: buscar_ddg(q) or buscar_ddg(q, base=DDG_LITE))
     salvos = cache_get(db, owner, "ddg", consulta)
     if salvos is not None:
@@ -294,27 +308,29 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     except Exception as exc:
         return {"fontes": [], "etapas": [f"busca indisponível ({type(exc).__name__})"],
                 "divergencias": [], "de_cache": False, "erro": "provedor_indisponivel"}
+    recs: dict = {}
+    with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
+        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina): a
+                for a in achados}
+        for fut, a in futs.items():
+            try:
+                recs[a["url"]] = fut.result()
+            except ResearchErro as exc:
+                etapas.append(f"página ignorada ({exc.codigo}): {a['url'][:60]}")
+            except Exception as exc:
+                etapas.append(f"página ignorada ({type(exc).__name__}): {a['url'][:60]}")
     for a in achados:
         if len(fontes) >= max_fontes:
             break
-        try:
-            if recuperar_fn is not None:
-                rec = recuperar_fn(a["url"])
-            else:
-                final, pagina = baixar(a["url"], timeout=timeout_pagina)
-                titulo, texto = extrair_texto_html(pagina)
-                rec = {"titulo": titulo or a["titulo"], "texto": texto, "final": final}
-            if not (rec.get("texto") or "").strip() and not a.get("trecho"):
-                continue
-            fontes.append({"titulo": (rec.get("titulo") or a["titulo"])[:160],
-                           "url": a["url"][:500],
-                           "dominio": _dominio(a["url"]),
-                           "acessado_em": agora_iso(),
-                           "trecho": ((rec.get("texto") or "")[:600] or a.get("trecho", ""))[:600],
-                           "tipo": "pagina", "status": "ok"})
-        except ResearchErro as exc:
-            etapas.append(f"página ignorada ({exc.codigo}): {a['url'][:60]}")
+        rec = recs.get(a["url"])
+        if rec is None:
             continue
+        fontes.append({"titulo": (rec.get("titulo") or a["titulo"])[:160],
+                       "url": a["url"][:500],
+                       "dominio": _dominio(a["url"]),
+                       "acessado_em": agora_iso(),
+                       "trecho": ((rec.get("texto") or "")[:600] or a.get("trecho", ""))[:600],
+                       "tipo": "pagina", "status": "ok"})
     saida = {"fontes": _numerar(fontes),
              "etapas": etapas + [f"{len(fontes)} fontes lidas"],
              "divergencias": detectar_divergencias(fontes),
