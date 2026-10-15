@@ -1964,6 +1964,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     continue
                 tipo = item.get("type")
                 if tipo == "ai_delta":
+                    espera = 0.0  # timeout measures inactivity, not accumulated pauses
                     if not first_delta_logged:
                         first_delta_logged = True
                         now = time.monotonic()

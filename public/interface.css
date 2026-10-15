@@ -175,6 +175,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .composer-hint {font-size:11px;min-height:16px;justify-content:center;margin:8px 0 0;color:var(--muted)}
 .upload-status {font-size:13px;color:var(--text-2);padding:8px 4px 12px;overflow-wrap:anywhere}
 .gen-bar {border:0;background:transparent;font-size:13px;padding:4px 0 12px;margin:0}
+.stream-placeholder {color:var(--muted);letter-spacing:3px}
+.citation {display:inline-block;font-size:.8em;padding:0 5px;border-radius:5px;background:var(--surface-3);text-decoration:none}
+.refs {border-top:1px solid var(--line);padding-top:14px;margin-top:22px;font-size:12px;overflow-wrap:anywhere}
+.reference-item {margin:8px 0;color:var(--muted)}
+.image-unavailable {min-height:44px;border:1px dashed var(--line-strong);color:var(--muted)}
+.jdui-slot {min-width:0;max-width:100%;overflow-wrap:anywhere}
+.jdui-chart,.jdui-cmp {max-width:100%;overflow-x:auto}
+.jdui-actions {flex-wrap:wrap}
+.jdui-btn[aria-pressed="true"] {border-color:var(--purple);background:var(--surface-3)}
+.jdui-chart [role="button"]:focus-visible {outline:2px solid var(--purple);outline-offset:3px}
+@media(max-width:899px){.jdui-btn{min-height:44px}.jdui-field input,.jdui-field select{font-size:16px}}
 #stopGen {min-height:36px;font-size:12px}
 .scroll-fab {right:24px;bottom:12px;width:40px;height:40px;background:var(--surface-2);border:1px solid var(--line-strong);color:var(--text);border-radius:50%}
 .research-bar {padding:10px 24px;font-size:13px;flex-wrap:wrap}

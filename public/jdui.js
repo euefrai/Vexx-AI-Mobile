@@ -1449,13 +1449,13 @@
         return;
       }
       const linhas = [
-        ['Provas concluídas', r.concluidas || 0, Math.max(r.avaliacoes || 0, 1)],
-        ['Acertos', r.acertos || 0, Math.max(r.respostas || 0, 1)],
-        ['Itens do plano', r.itens_feitos || 0, Math.max(r.itens_plano || 0, 1)]
+        ['Provas concluídas', r.concluidas || 0, r.avaliacoes || 0],
+        ['Acertos', r.acertos || 0, r.respostas || 0],
+        ['Itens do plano', r.itens_feitos || 0, r.itens_plano || 0]
       ];
       linhas.forEach(l => {
-        bx.appendChild(el('div', 'jdui-count', l[0] + ': ' + l[1] + '/' + l[2]));
-        bx.appendChild(bar(l[2] ? l[1] / l[2] * 100 : 0));
+        bx.appendChild(el('div', 'jdui-count', l[0] + ': ' + (l[2] ? l[1] + '/' + l[2] : 'Sem dados ainda')));
+        if (l[2]) bx.appendChild(bar(l[1] / l[2] * 100));
       });
       (stats.por_assunto || []).forEach(p => {
         bx.appendChild(el('div', 'jdui-count', (p.assunto || 'geral') + ': ' + Math.round((p.taxa || 0) * 100) + '%'));
@@ -1682,10 +1682,16 @@
     mais.addEventListener('click', () => { st.zoom = Math.min(2, st.zoom + 0.2); save(st); paint(); });
     barra.appendChild(menos); barra.appendChild(mais);
     ['all', 'claim', 'source', 'evidence'].forEach(k => {
-      const f = el('button', 'jdui-btn ghost', k === 'all' ? 'Tudo' : k);
+      const f = el('button', 'jdui-btn ghost', {all:'Tudo',claim:'Afirmações',source:'Fontes',evidence:'Evidências'}[k]);
       f.type = 'button';
-      if (st.filtro === k) f.style.borderColor = 'var(--purple-2)';
-      f.addEventListener('click', () => { st.filtro = k; st.sel = null; save(st); paint(); });
+      f.dataset.filter = k;
+      f.setAttribute('aria-pressed', String(st.filtro === k));
+      f.addEventListener('click', () => {
+        st.filtro = k; st.sel = null; save(st);
+        barra.querySelectorAll('[data-filter]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === k)));
+        detalhe.textContent = 'Toque em um nó para ver detalhes.';
+        paint();
+      });
       barra.appendChild(f);
     });
     box.appendChild(barra);
@@ -1723,7 +1729,8 @@
         svg.appendChild(ln);
       });
       nos.forEach(n => {
-        const g = svgEl('g', { style: 'cursor:pointer', 'aria-label': n.label });
+        const g = svgEl('g', { style: 'cursor:pointer', 'aria-label': n.label,
+          role: 'button', tabindex: '0', 'aria-pressed': String(st.sel === n.id) });
         const c = dica(svgEl('circle', {
           cx: pos[n.id][0], cy: pos[n.id][1], r: st.sel === n.id ? 13 : 10,
           fill: CORES[n.kind] || '#888', opacity: st.sel === n.id ? '1' : '.85'
@@ -1731,15 +1738,17 @@
         g.appendChild(c);
         const tx = svgText(pos[n.id][0], pos[n.id][1] + 24, (n.label || '').slice(0, 14), 'middle', 9);
         g.appendChild(tx);
-        g.addEventListener('click', () => {
+        const selectNode = () => {
           st.sel = st.sel === n.id ? null : n.id; save(st); paint();
           detalhe.textContent = st.sel
             ? (n.kind + ' · ' + n.label + (n.estado ? ' · ' + n.estado : '') + (n.detalhe ? ' — ' + n.detalhe : ''))
             : 'Toque em um nó para ver detalhes.';
-        });
+        };
+        g.addEventListener('click', selectNode);
+        g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectNode(); } });
         svg.appendChild(g);
       });
-      svg.style.fontSize = (st.zoom * 100) + '%';
+      svg.setAttribute('viewBox', [W * (1 - 1 / st.zoom) / 2, H * (1 - 1 / st.zoom) / 2, W / st.zoom, H / st.zoom].join(' '));
       host.appendChild(svg);
     }
     paint();

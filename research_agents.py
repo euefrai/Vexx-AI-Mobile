@@ -954,11 +954,12 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             ("concluida" if todas_evid else "interrompida")
         if job["status"] == "interrompida" and not job["pendencias"]:
             job["pendencias"].append("sem evidências suficientes")
-        salvar_job(db, job)
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         emitir(db, job["id"], owner, "orchestrator", "research_completed", "ok",
                f"Pesquisa {job['status']}: {len(todas_evid or _evidencias_job(db, job))} evidências.",
                {})
+        # Pollers may stop on the terminal state: publish it only after its event.
+        salvar_job(db, job)
         return _resumo(db, job)
     except Exception as exc:
         job["status"] = "falhou"

@@ -28,6 +28,8 @@ let modelsLoadedAt = 0;
 let rafPending = null;
 let rafText = '';
 let rafReplyId = '';
+let streamDraft = null;
+let messagesRenderVersion = 0;
 let sessionsCache = [];
 let activeConversation = null;
 try { activeConversation = localStorage.getItem('julia-active-conversation') || newId(); } catch (_) { activeConversation = newId(); }
@@ -167,31 +169,34 @@ function jduiCtx(row) {
 }
 async function persistJduiSoon() {
   if (!db) return;
+  const pending = { ...jduiDirty };
   try {
     const tx = db.transaction(UISTATE, 'readwrite');
     const done = txDone(tx);
     const st = tx.objectStore(UISTATE);
-    Object.values(jduiDirty).forEach(r => st.put(r));
-    jduiDirty = {};
+    Object.values(pending).forEach(r => st.put(r));
     await done;
+    Object.keys(pending).forEach(k => { if (jduiDirty[k] === pending[k]) delete jduiDirty[k]; });
   } catch (_) {}
   clearTimeout(jduiSyncTimer);
   jduiSyncTimer = setTimeout(syncJduiStates, 4000);
 }
 async function syncJduiStates() {
   if (!authenticated || !pcOnline || !db) return;
+  const owner = currentUid;
   try {
     const rows = (await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll()))
       .filter(r => (r.owner || 'local') === currentUid);
     if (!rows.length) return;
     await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
     const remote = await api('/api/ui-state');
+    if (owner !== currentUid || !authenticated) return;
     const tx = db.transaction(UISTATE, 'readwrite');
     const done = txDone(tx);
     const store = tx.objectStore(UISTATE);
     for (const r of remote.states || []) {
       try {
-        const have = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).get(r.k)).catch(() => null);
+        const have = await reqPromise(store.get(r.k));
         if (!have || (r.updated_at || '') >= (have.updated_at || '')) {
           store.put(Object.assign({}, r, { owner: currentUid }));
           jduiStateCache[r.k] = r.state || {};
@@ -199,7 +204,7 @@ async function syncJduiStates() {
       } catch (_) {}
     }
     await done;
-    await renderMessages();
+    if (!aiAbort) await renderMessages();
   } catch (_) { /* offline: tenta na próxima */ }
 }
 async function migrateV1() {
@@ -385,16 +390,19 @@ function titleFrom(t) { return String(t || '').replace(/\s+/g, ' ').trim().slice
 /* ----- Markdown rico e seguro ----- */
 const ESC_DIV = document.createElement('div');
 function escapeHtml(t) { ESC_DIV.textContent = t; return ESC_DIV.innerHTML; }
-function inlineFmt(s) {
-  s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+function inlineFmt(s, sources = {}) {
+  const tokens = [];
+  const keep = html => '\u0001INLINE' + (tokens.push(html) - 1) + '\u0001';
+  s = s.replace(/`([^`\n]+)`/g, (_, code) => keep('<code>' + code + '</code>'));
   s = s.replace(/!\[([^\]]{0,120})\]\(([^)\s]+)\)/g, (m, alt, url) => {
     const u = validUrl(url);
     if (!u) return esc(m);
-    const seed = alt.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 20) || 'julia';
-    return '<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + u + '" '
-      + 'onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/' + seed + '/800/500\'" />';
+    return keep('<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" '
+      + 'onerror="this.onerror=null;this.classList.add(\'image-unavailable\')" />');
   });
-  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
+  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>'));
+  s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
+    ? keep('<a class="citation" href="' + esc(sources[id.toUpperCase()]) + '" target="_blank" rel="noopener noreferrer" aria-label="Fonte ' + id.toUpperCase() + '">' + m + '</a>') : m);
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
   s = s.replace(/(^|[^*\w])\*([^*\n]+)\*/g, '$1<em>$2</em>');
@@ -407,7 +415,7 @@ function inlineFmt(s) {
     if (!u) return m;
     return pre + '<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + u + '</a>' + suf;
   });
-  return s;
+  return s.replace(/\u0001INLINE(\d+)\u0001/g, (_, n) => tokens[Number(n)] || '');
 }
 function srcdocEsc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -447,12 +455,12 @@ function renderMarkdown(text) {
   // fence aberto (stream) vira aviso amigável; inválido fechado some.
   if (typeof JDUI !== 'undefined') {
     src = src.replace(/```jdui\s*\n([\s\S]*?)(```|$)/gi, (m, body, close) => {
-      if (!close) return '\n[JDUI: montando interface…]\n';
+      if (!close) return '\nPreparando conteúdo interativo…\n';
       try {
         const r = JDUI.validateMessage(JSON.parse(body));
         if (r.ok) return '\x00JDUI' + (pendingJdui.push(r.msg) - 1) + '\x00';
       } catch (_) { /* cai no descarte */ }
-      return '';
+      return '\nNão foi possível apresentar este conteúdo interativo.\n';
     });
   }
   // Mini-apps executáveis: ```widget-html ... ``` → iframe isolado (sandbox, sem acesso ao app).
@@ -474,8 +482,10 @@ function renderMarkdown(text) {
     const i = blocks.push({ lang: (lang || '').slice(0, 20), code: code.replace(/\n$/, '') }) - 1;
     return ' CODE' + i + ' ';
   });
+  const sources = {};
+  const formatInline = value => inlineFmt(value, sources);
   let refsHtml = '';
-  const refM = src.match(/\n((Fontes|Refer[eê]ncias|Sources)\s*:?[\s\S]*)$/i);
+  const refM = src.match(/\n(?:#{1,6}\s*)?((Fontes|Refer[eê]ncias|Sources)\s*:?[\s\S]*)$/i);
   let refBody = '';
   if (refM) { refBody = refM[1]; src = src.slice(0, refM.index); }
   else {
@@ -484,25 +494,28 @@ function renderMarkdown(text) {
     if (/https?:\/\//.test(tail) && /fonte|http|\[https/i.test(tail)) { /* deixa inline */ }
   }
   if (refBody) {
+    refBody.split('\n').forEach(line => {
+      const id = line.match(/\[(S\d+)\]/i), url = line.match(/https?:\/\/[^\s<>\)]+/);
+      if (id && url) sources[id[1].toUpperCase()] = validUrl(url[0].replace(/[.,;]+$/, ''));
+    });
     const items = escapeHtml(refBody).split('\n').map(l => l.trim()).filter(Boolean);
     const lis = items.slice(1).map(l => {
-      const m = l.match(/(https?:\/\/[^\s<]+)/);
-      if (m) return '<a href="' + m[1] + '" target="_blank" rel="noopener noreferrer">' + l + '</a>';
-      return '<span>' + l + '</span>';
+      return '<div class="reference-item">' + formatInline(l.replace(/^[-*]\s+/, '')) + '</div>';
     }).join('');
-    refsHtml = '<div class="refs"><strong>FONTES / REFERENCIAS</strong>' + (lis || '<span>' + (items[0] || '') + '</span>') + '</div>';
+    refsHtml = '<div class="refs"><strong>Fontes e referências</strong>' + (lis || '<span>' + (items[0] || '') + '</span>') + '</div>';
   }
   const html = [];
   const lines = escapeHtml(src).split('\n');
   let list = null, bq = [], table = [];
-  function flushList() { if (list) { html.push(list.tag === 'ol' ? '<ol>' + list.items.map(i => '<li>' + inlineFmt(i) + '</li>').join('') + '</ol>' : '<ul>' + list.items.map(i => '<li>' + inlineFmt(i) + '</li>').join('') + '</ul>'); list = null; } }
-  function flushBq() { if (bq.length) { html.push('<blockquote>' + bq.map(inlineFmt).join('<br>') + '</blockquote>'); bq = []; } }
+  function flushList() { if (list) { html.push(list.tag === 'ol' ? '<ol>' + list.items.map(i => '<li>' + formatInline(i) + '</li>').join('') + '</ol>' : '<ul>' + list.items.map(i => '<li>' + formatInline(i) + '</li>').join('') + '</ul>'); list = null; } }
+  function flushBq() { if (bq.length) { html.push('<blockquote>' + bq.map(formatInline).join('<br>') + '</blockquote>'); bq = []; } }
   function flushTable() {
     if (table.length >= 2) {
-      const head = table[0].split('|').map(c => c.trim()).filter(c => c !== '');
-      const rows = table.slice(2).map(r => r.split('|').map(c => c.trim()).filter(c => c !== ''));
-      html.push('<div class="table-wrap"><table><thead><tr>' + head.map(c => '<th>' + inlineFmt(c) + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map(c => '<td>' + inlineFmt(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
-    } else if (table.length) { table.forEach(t => html.push('<p>' + inlineFmt(t) + '</p>')); }
+      const cells = line => line.trim().replace(/^\|/, '').replace(/\|$/, '').split(/(?<!\\)\|/).map(c => c.trim().replace(/\\\|/g, '|'));
+      const head = cells(table[0]);
+      const rows = table.slice(2).map(cells);
+      html.push('<div class="table-wrap"><table><thead><tr>' + head.map(c => '<th>' + formatInline(c) + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map(c => '<td>' + formatInline(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+    } else if (table.length) { table.forEach(t => html.push('<p>' + formatInline(t) + '</p>')); }
     table = [];
   }
   for (const raw of lines) {
@@ -537,9 +550,9 @@ function renderMarkdown(text) {
       flushList(); flushBq(); flushTable();
       const wi = Number(wPh[1]);
       const wcode = widgets[wi];
-      html.push('<div class="widget"><div class="widget-bar"><span>▶ Mini app interativo</span>'
+      html.push('<div class="widget"><div class="widget-bar"><span>Prévia HTML · scripts desativados</span>'
         + '<button class="widget-code-btn" data-widget="' + wi + '" type="button">Ver código</button></div>'
-        + '<iframe class="widget-frame" sandbox="allow-scripts" loading="lazy" title="Mini app do Vexx" srcdoc="' + srcdocEsc(wcode) + '"></iframe>'
+        + '<iframe class="widget-frame" sandbox="" loading="lazy" title="Prévia HTML do Vexx" srcdoc="' + srcdocEsc('<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; img-src https: data:; style-src &#39;unsafe-inline&#39;">' + wcode) + '"></iframe>'
         + '<pre class="widget-code" data-widget-code="' + wi + '" hidden><code>' + esc(wcode) + '</code></pre></div>');
       continue;
     }
@@ -565,7 +578,7 @@ function renderMarkdown(text) {
     if (heading) {
       flushList(); flushBq();
       const tag = heading[1].length === 1 ? 'h2' : heading[1].length === 2 ? 'h3' : 'h4';
-      html.push('<' + tag + '>' + inlineFmt(heading[2]) + '</' + tag + '>');
+      html.push('<' + tag + '>' + formatInline(heading[2]) + '</' + tag + '>');
       continue;
     }
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(t)) { flushList(); flushBq(); html.push('<hr>'); continue; }
@@ -579,7 +592,7 @@ function renderMarkdown(text) {
     if (!t) { html.push(''); continue; }
     const imgOnly = t.match(/^<img class="chat-img"[\s\S]*\/>$/);
     if (imgOnly) { html.push(t); continue; }
-    html.push('<p>' + inlineFmt(t) + '</p>');
+    html.push('<p>' + formatInline(t) + '</p>');
   }
   flushList(); flushBq(); flushTable();
   if (typeof JDUI !== 'undefined' && JDUI.quizFromText && !duoEmitted) {
@@ -608,6 +621,9 @@ conversation.addEventListener('scroll', () => { $('scrollFab').hidden = nearBott
 $('scrollFab').addEventListener('click', () => { conversation.scrollTop = conversation.scrollHeight; });
 
 function appendMessage(row) {
+  if (streamDraft && streamDraft.id === row.id && streamDraft.owner === currentUid) {
+    row = { ...row, text: streamDraft.text || row.text };
+  }
   const type = row.role === 'assistant' ? 'ai' : 'user';
   const wrap = document.createElement('div');
   wrap.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
@@ -617,7 +633,7 @@ function appendMessage(row) {
   if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
-    bubble.innerHTML = '<span class="typing">digitando <span class="typing-indicator"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></span></span>';
+    bubble.innerHTML = renderMarkdown(row.text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
     content.appendChild(bubble);
   } else {
     bubble.innerHTML = renderMarkdown(row.text)
@@ -682,19 +698,29 @@ function appendMessage(row) {
 function paintStreaming(replyId, text) {
   const el = conversation.querySelector('[data-mid="' + replyId + '"] .bubble');
   if (!el) { takeJduiSlots(); return; }
-  el.innerHTML = renderMarkdown(text) || '<span class="typing">digitando …</span>';
+  if (!el._streamProse) {
+    el._streamProse = document.createElement('div');
+    el._streamComponents = document.createElement('div');
+    el.replaceChildren(el._streamProse, el._streamComponents);
+  }
+  el._streamProse.innerHTML = renderMarkdown(text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
   const jslots = takeJduiSlots();
-  // Remonta componentes só quando surgem novos slots (evita reconstruir a cada delta).
-  if (jslots.length && jslots.length !== el._jduiN && typeof JDUI !== 'undefined') {
-    el._jduiN = jslots.length;
+  const signature = JSON.stringify(jslots);
+  // Keep mounted controls and their focus while only the surrounding prose changes.
+  if (signature !== el._jduiSignature && typeof JDUI !== 'undefined') {
+    el._jduiSignature = signature;
+    el._streamComponents.replaceChildren();
     allMessages().then(rows => {
       const row = rows.find(m => m.id === replyId);
-      if (row) { try { JDUI.mount(el, jslots, jduiCtx(row)); } catch (_) {} }
+      if (row && el.isConnected && el._jduiSignature === signature) {
+        try { JDUI.mount(el._streamComponents, jslots, jduiCtx(row)); } catch (_) {}
+      }
     });
   }
   scrollChat(false);
 }
 function schedulePaint(replyId, text) {
+  streamDraft = {id:replyId, text, owner:currentUid};
   rafReplyId = replyId; rafText = text;
   if (rafPending) return;
   rafPending = requestAnimationFrame(() => { rafPending = null; paintStreaming(rafReplyId, rafText); });
@@ -702,9 +728,11 @@ function schedulePaint(replyId, text) {
 
 async function renderMessages() {
   if (!db) return;
+  const version = ++messagesRenderVersion, selected = activeConversation, owner = currentUid;
   const all = ownRows(await allMessages());
   const rows = all.filter(m => m.conversation_id === activeConversation);
   await preloadJduiStates(rows.map(m => m.id));
+  if (version !== messagesRenderVersion || selected !== activeConversation || owner !== currentUid) return;
   const stick = nearBottom(conversation);
   conversation.replaceChildren();
   conversation.classList.toggle('is-empty', rows.length === 0);
@@ -724,7 +752,7 @@ async function renderMessages() {
   const temTroca = rows.some(m => m.role === 'user');
   if (!$('page-chat').hidden) $('suggestions').style.display = temTroca ? 'none' : 'flex';
   if (stick) conversation.scrollTop = conversation.scrollHeight;
-  const pending = all.filter(m => m.status !== 'synced').length;
+  const pending = all.filter(m => m.role === 'user' && m.status === 'pending').length;
   $('pendingCount').textContent = pending + ' pendente' + (pending === 1 ? '' : 's');
   $('syncCounter').textContent = String(pending);
   $('statTasks').textContent = String(all.length);
@@ -886,7 +914,7 @@ async function renderEstudos() {
   }
   const r = (stats.data && stats.data.resumo) || {};
   $('estProvas').textContent = r.concluidas || 0;
-  $('estAcertos').textContent = (r.acertos || 0) + '/' + (r.respostas || 0);
+  $('estAcertos').textContent = r.respostas ? (r.acertos || 0) + '/' + r.respostas : 'Sem respostas';
   $('estItens').textContent = (r.itens_feitos || 0) + '/' + (r.itens_plano || 0);
   $('estDue').textContent = r.revisoes_pendentes || 0;
   estudosLista('estudosAssuntos', ((stats.data && stats.data.por_assunto) || []).map(p =>
@@ -1195,7 +1223,7 @@ async function api(endpoint, options) {
   const headers = { Accept: 'application/json' };
   if (options.body) headers['Content-Type'] = 'application/json';
   if (csrf && options.method && options.method !== 'GET') headers['X-CSRF-Token'] = csrf;
-  const res = await fetch(endpoint, { method: options.method || 'GET', body: options.body, headers: Object.assign(headers, options.headers || {}), credentials: 'same-origin', cache: 'no-store' });
+  const res = await fetch(endpoint, { method: options.method || 'GET', body: options.body, headers: Object.assign(headers, options.headers || {}), credentials: 'same-origin', cache: 'no-store', signal: options.signal });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : 'Erro HTTP ' + res.status); err.status = res.status; throw err; }
   return data;
@@ -1276,6 +1304,7 @@ $('loginForm').addEventListener('submit', async e => {
   finally { btn.disabled = false; }
 });
 $('logoutButton').addEventListener('click', async () => {
+  stopAI();
   try { await api('/api/logout', { method: 'POST' }); } catch (_) {}
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
@@ -1404,7 +1433,7 @@ async function checkStatus() {
       for (const m of conf.filter(m => m.want_ai && m.role === 'user')) requestAI(m);
       // puxa respostas prontas de outras sessões? tenta IA para pendentes recentes
       const all = ownRows(await allMessages());
-      const pend = all.filter(m => m.role === 'user' && m.want_ai && m.status === 'synced' && !all.find(x => x.id === m.id + '-r1' && x.status === 'synced')).slice(-3);
+      const pend = all.filter(m => m.role === 'user' && m.want_ai && m.status === 'synced' && !all.find(x => x.id === m.id + '-r1')).slice(-3);
       for (const m of pend) { if (!aiAbort) await requestAI(m); }
     }
   } catch (err) {
@@ -1451,7 +1480,7 @@ async function syncAndRefresh() {
       }
     }
     await renderSessions($('sessionSearch').value);
-    await renderMessages();
+    if (!aiAbort) await renderMessages();
     syncJduiStates();
     return conf;
   } catch (err) {
@@ -1488,9 +1517,7 @@ function setGenBar(on, label) {
   if (label) $('genLabel').textContent = label;
 }
 function tickGen() {
-  const s = Math.floor((Date.now() - aiStartT) / 1000);
-  const ttft = aiFirstTokenT ? ' · 1º token ' + ((aiFirstTokenT - aiStartT) / 1000).toFixed(1) + 's' : '';
-  $('genLabel').textContent = 'Vexx está escrevendo… ' + s + 's' + ttft;
+  $('genLabel').textContent = aiFirstTokenT ? 'Respondendo…' : 'Preparando resposta…';
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
 function aiLocalContext(text) {
@@ -1522,6 +1549,7 @@ function requestAI(userRow, options = {}) {
     return Promise.resolve();
   }
   const replyId = userRow.id + '-r1';
+  options = { ...options, owner: currentUid };
   if (aiRequests.has(replyId)) return Promise.resolve();
   aiRequests.add(replyId);
   const timing = {
@@ -1554,7 +1582,7 @@ function pumpAIQueue() {
 async function runAIRequest(userRow, options, timing) {
   const replyId = userRow.id + '-r1';
   timing.workerStartedAt = performance.now();
-  if (!authenticated || !navigator.onLine || !db) {
+  if (!authenticated || !navigator.onLine || !db || options.owner !== currentUid) {
     aiRequests.delete(replyId);
     return;
   }
@@ -1565,10 +1593,10 @@ async function runAIRequest(userRow, options, timing) {
     aiRequests.delete(replyId);
     return;
   }
-  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: '', created_at: new Date().toISOString(), status: 'generating', model: modeloAtivo() };
+  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: existingReply?.text || '', created_at: existingReply?.created_at || new Date().toISOString(), status: 'generating', model: modeloAtivo(), owner: options.owner };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
   aiStartT = Date.now(); aiFirstTokenT = 0;
-  setGenBar(true, 'Vexx está escrevendo… 0s');
+  setGenBar(true, 'Preparando resposta…');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
   const ctx = aiLocalContext(userRow.text || '');
   const qs = new URLSearchParams(Object.assign({
@@ -1578,10 +1606,18 @@ async function runAIRequest(userRow, options, timing) {
   }, ctx));
   aiAbort = new AbortController();
   let cur = '';
+  let terminal = false, lastSeq = -1, savedAt = 0;
+  const saveReply = (text, status, extra = {}) => storeMessages([{ ...ph, text, status, ...extra }]);
+  function finalText(d) {
+    if (d.reply_id && d.reply_id !== replyId) throw new Error('Identificador de resposta inconsistente');
+    const text = d.response_text || cur;
+    if (typeof text !== 'string' || !text.trim()) throw new Error('Resposta vazia da IA');
+    return text;
+  }
   try {
     timing.requestStartedAt = performance.now();
     const streamRequest = fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
-    if (typeof options.onStarted === 'function') options.onStarted();
+    if (typeof options.onStarted === 'function') Promise.resolve(options.onStarted()).catch(() => {});
     if (userRow.conversation_id === activeConversation) {
       renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
     }
@@ -1594,23 +1630,30 @@ async function runAIRequest(userRow, options, timing) {
     let lastEvt = Date.now();
     const stall = setInterval(() => { if (Date.now() - lastEvt > 75000 && aiAbort) aiAbort.abort(); }, 5000);
     try {
-      for (;;) {
+      stream: for (;;) {
         const read = await reader.read();
         if (read.done) break;
         buf += dec.decode(read.value, { stream: true });
-        let idx;
-        while ((idx = buf.indexOf('\n\n')) >= 0) {
-          const evt = buf.slice(0, idx); buf = buf.slice(idx + 2);
+        lastEvt = Date.now(); // SSE comments are keepalives too.
+        let boundary;
+        while ((boundary = /\r?\n\r?\n/.exec(buf))) {
+          const idx = boundary.index;
+          const evt = buf.slice(0, idx); buf = buf.slice(idx + boundary[0].length);
           let tipo = '', dados = '';
-          for (const ln of evt.split('\n')) {
+          for (const ln of evt.split(/\r?\n/)) {
             if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
-            else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
+            else if (ln.startsWith('data:')) dados += (dados ? '\n' : '') + ln.slice(5).trim();
           }
           if (!tipo) continue;
           lastEvt = Date.now();
           let d = {};
           try { d = JSON.parse(dados); } catch (_) { continue; }
           if (tipo === 'delta') {
+            if (Number.isInteger(d.seq) && d.seq > 0) {
+              if (d.seq <= lastSeq) continue;
+              if (lastSeq > 0 && d.seq !== lastSeq + 1) throw new Error('Conexão interrompida entre trechos da resposta');
+              lastSeq = d.seq;
+            }
             if (!aiFirstTokenT) {
               aiFirstTokenT = Date.now();
               timing.firstDeltaAt = performance.now();
@@ -1618,15 +1661,22 @@ async function runAIRequest(userRow, options, timing) {
             }
             cur += d.trecho || '';
             schedulePaint(replyId, cur);
+            if (Date.now() - savedAt >= 1000) {
+              await saveReply(cur, 'generating'); savedAt = Date.now();
+            }
           } else if (tipo === 'done') {
             if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
-            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.response_text || cur, created_at: new Date().toISOString(), status: 'synced', model: d.model || modeloAtivo(), latency_s: secs }]);
+            cur = finalText(d);
+            await saveReply(cur, 'synced', {model: d.model || ph.model, latency_s: secs});
+            terminal = true; break stream;
           } else if (tipo === 'cancelled') {
-            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: d.partial || cur, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+            cur = d.partial || cur;
+            await saveReply(cur, 'failed');
+            terminal = true; break stream;
           } else if (tipo === 'error') {
             if (d.codigo !== 'sem_mensagem') throw new Error(d.error || 'IA indisponível');
-            const syncResult = await api('/api/sync', { method: 'POST', body: JSON.stringify({
+            const syncResult = await api('/api/sync', { method: 'POST', signal: aiAbort.signal, body: JSON.stringify({
               messages: [{
                 id: userRow.id, conversation_id: userRow.conversation_id,
                 origin: 'mobile', role: 'user', text: userRow.text || '',
@@ -1636,7 +1686,7 @@ async function runAIRequest(userRow, options, timing) {
             if (!(syncResult.confirmed_ids || []).includes(userRow.id)) {
               throw new Error('A mensagem não foi confirmada pelo computador.');
             }
-            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({
+            const fb = await api('/api/ai', { method: 'POST', signal: aiAbort.signal, body: JSON.stringify({
               message_id: userRow.id, conversation_id: userRow.conversation_id,
               model: modeloAtivo(), memory: memoryOn() ? 1 : 0,
               text: userRow.text || '', created_at: userRow.created_at || '', ...ctx
@@ -1644,40 +1694,39 @@ async function runAIRequest(userRow, options, timing) {
             if (!fb.response_text || !fb.response_text.trim()) {
               throw new Error('Resposta vazia da IA');
             }
-            cur = fb.response_text;
+            cur = finalText(fb);
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
-            await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id,
-              origin: 'mobile', role: 'assistant', text: cur,
-              created_at: new Date().toISOString(), status: 'synced',
-              model: fb.model || modeloAtivo(), latency_s: secs }]);
+            await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
             console.warn('[chat-timing] sincronização de compatibilidade antes do retry da IA',
               userRow.id.slice(-8));
+            terminal = true; break stream;
           }
         }
       }
-      if (!cur) {
+      if (!terminal && cur) throw new Error('Conexão encerrada antes de concluir. O texto parcial foi salvo.');
+      if (!terminal && !cur) {
         const check = (await allMessages()).find(m => m.id === replyId);
         if (!check || check.status === 'generating') {
           // Stream veio vazio: tenta a resposta completa uma vez antes de falhar.
           try {
-            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({
+            const fb = await api('/api/ai', { method: 'POST', signal: aiAbort.signal, body: JSON.stringify({
               message_id: userRow.id, conversation_id: userRow.conversation_id,
               model: modeloAtivo(), memory: memoryOn() ? 1 : 0,
               text: userRow.text || '', created_at: userRow.created_at || '', ...ctx
             }) });
             if (fb.response_text && fb.response_text.trim()) {
-              cur = fb.response_text;
+              cur = finalText(fb);
               const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
-              await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: cur, created_at: new Date().toISOString(), status: 'synced', model: fb.model || modeloAtivo(), latency_s: secs }]);
+              await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
             } else throw new Error('Resposta vazia da IA');
           } catch (e2) { throw new Error('Resposta vazia da IA'); }
         }
       }
-    } finally { clearInterval(stall); }
+    } finally { clearInterval(stall); await reader.cancel().catch(() => {}); }
   } catch (err) {
     const inter = aiAbort && aiAbort.signal.aborted;
     const kept = cur || ((await allMessages()).find(m => m.id === replyId) || {}).text || '';
-    await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: kept, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
+    await saveReply(kept, 'failed');
     showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + (err.message || 'tente de novo'));
   } finally {
     timing.finishedAt = performance.now();
@@ -1692,6 +1741,7 @@ async function runAIRequest(userRow, options, timing) {
     }));
     aiRequests.delete(replyId);
     aiAbort = null;
+    streamDraft = null;
     clearInterval(genTimer);
     setGenBar(false);
     if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }

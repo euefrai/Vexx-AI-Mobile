@@ -1946,7 +1946,16 @@ def linha_desempenho(db, owner: str) -> str:
             + "\n- ".join(partes))
 
 
+_AI_PREPARE_LOCK = threading.RLock()
+
+
 def ai_preparar(db, payload: dict, cfg: dict) -> dict:
+    # The websocket worker and SSE threads must not claim the same message twice.
+    with _AI_PREPARE_LOCK:
+        return _ai_preparar(db, payload, cfg)
+
+
+def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
     """Valida e aplica idempotência. Retorna {user_text, model, reply_id} ou {replay|busy|error}."""
     mid = payload.get("message_id", "")
     conv = payload.get("conversation_id", "")
@@ -1960,17 +1969,21 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     owner = dono_valido(payload.get("owner"))
     if dono_bloqueado(db, owner):
         return {"error": "Conta indisponível.", "codigo": "bloqueada"}
+    identity = db.execute("SELECT conversation_id, role FROM messages WHERE id=? "
+                          "AND origin='mobile' AND owner_id=?", (mid, owner)).fetchone()
+    if identity and identity != (conv, "user"):
+        return {"error": "Identificador da mensagem pertence a outra conversa ou papel.", "codigo": "invalido"}
+    previo = ai_estado(db, mid, owner)
+    if previo and previo["state"] == "completed":
+        return {"replay": True, "reply_id": previo["reply_id"],
+                "response_text": previo["response_text"], "model": previo["model"]}
+    if previo and previo["state"] in ("queued", "processing"):
+        return {"busy": True}
     lim = JULIA_auth.limites_usuario(db, owner)
     if JULIA_auth.simultaneas_ia(db, owner) >= lim["max_ia_simult"]:
         return {"error": "Muitas gerações ao mesmo tempo; aguarde.", "codigo": "limite"}
     if JULIA_auth.uso_ia_hora(db, owner) >= lim["max_ai_hora"]:
         return {"error": "Limite de uso da IA por hora atingido.", "codigo": "limite"}
-    previo = ai_estado(db, mid, owner)
-    if previo and previo["state"] == "completed":
-        return {"replay": True, "reply_id": previo["reply_id"],
-                "response_text": previo["response_text"], "model": previo["model"]}
-    if previo and previo["state"] == "processing":
-        return {"busy": True}
     row = db.execute("SELECT text FROM messages WHERE id=? AND origin='mobile' "
                      "AND owner_id=? AND role='user' AND conversation_id=?", (mid, owner, conv)).fetchone()
     if not row:
@@ -2764,13 +2777,17 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
     """Roda em thread: deltas saem pelo lock; a thread principal só recebe."""
     worker_started = time.monotonic()
     db = open_db(db_path)
+    claimed = False
     try:
         prep_started = time.monotonic()
         prep = ai_preparar(db, payload, cfg)
         prep_finished = time.monotonic()
         if "error" in prep or "replay" in prep or "busy" in prep:
             try:
-                enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
+                enviar_ws(websocket, {"request_id": request_id,
+                                      "type": "ai_done" if prep.get("replay") else "ai_error",
+                                      **({"codigo": "ocupado", "error": "Resposta em andamento. Aguarde a sincronização."}
+                                         if prep.get("busy") else {}),
                                       **{k: prep[k] for k in ("error", "codigo", "reply_id",
                                                               "response_text", "model", "busy")
                                           if k in prep}})
@@ -2779,6 +2796,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             return
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         owner = prep.get("owner", DONO_PADRAO)
+        claimed = True
         cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
         if cmd:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
@@ -2830,8 +2848,17 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                     "Conexão com o relay caiu no meio da resposta.", "desconectado") from exc
 
         first_delta_at = [0.0]
+        last_delta_seq = [0]
+        partial_chunks = []
+        partial_saved_at = [0.0]
 
         def emitir(seq, trecho):
+            last_delta_seq[0] = seq
+            partial_chunks.append(trecho)
+            if time.monotonic() - partial_saved_at[0] >= 1.0:
+                ai_marcar(db, mid, conv, modelo, "processing", reply_id=prep["reply_id"],
+                          response_text="".join(partial_chunks), owner=owner)
+                partial_saved_at[0] = time.monotonic()
             if not first_delta_at[0]:
                 first_delta_at[0] = time.monotonic()
                 log.info(
@@ -2871,7 +2898,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 if first_delta_at[0] else -1, exc.codigo)
             if fut_sintese is not None:
                 fut_sintese.cancel()
-            ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
+            ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner,
+                      reply_id=prep["reply_id"], response_text="".join(partial_chunks))
             try:
                 enviar({"request_id": request_id, "type": "ai_error",
                         "error": str(exc), "codigo": exc.codigo})
@@ -2942,7 +2970,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         if texto_final != res["texto"]:
             # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
             try:
-                emitir(res.get("seq", 9999) if isinstance(res.get("seq"), int) else 9999,
+                emitir(last_delta_seq[0] + 1,
                        texto_final[len(res["texto"]):])
             except Exception:
                 pass
@@ -2962,6 +2990,19 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         enviar({"request_id": request_id, "type": "ai_done",
                 "reply_id": prep["reply_id"],
                 "response_text": texto_final, "model": modelo})
+    except Exception:
+        log.exception("Falha inesperada no stream %s", request_id)
+        if claimed:
+            state = ai_estado(db, mid, owner)
+            if state and state["state"] != "completed":
+                ai_marcar(db, mid, conv, modelo, "failed", owner=owner,
+                          reply_id=prep["reply_id"], response_text=state.get("response_text") or "",
+                          error="Geração interrompida. Tente novamente.")
+        try:
+            enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
+                                  "codigo": "interno", "error": "Geração interrompida. Tente novamente."})
+        except (ConnectionClosed, OSError, RuntimeError, ValueError):
+            pass
     finally:
         cancelados.pop(request_id, None)
         db.close()
@@ -3197,6 +3238,14 @@ def rjob_delete(db, req: dict, dono: str) -> dict:
         return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
 
 
+def recover_interrupted_ai(db):
+    """Only on agent process startup; preserve partial text for interrupted work."""
+    with db:
+        db.execute("UPDATE ai_requests SET state='failed', error=?, updated_at=? "
+                   "WHERE state IN ('queued','processing')",
+                   ("Agente reiniciado durante a geração. Tente novamente.", agora_iso()))
+
+
 def run():
     relay_url = os.environ.get("JULIA_RELAY_URL", "").strip().rstrip("/")
     token = os.environ.get("JULIA_AGENT_TOKEN", "")
@@ -3209,6 +3258,7 @@ def run():
         raise SystemExit("O agente exige HTTPS fora de localhost")
     ws_url = f"{'wss' if parsed.scheme == 'https' else 'ws'}://{parsed.netloc}/api/agent/ws"
     db = open_db(database_path())
+    recover_interrupted_ai(db)
     cfg = ai_config()
     try:
         modelos = hermes_bridge.listar_modelos(cfg["proxy"])

@@ -49,7 +49,7 @@ const t = (name, cond) => {
   else console.log('ok ' + name);
 };
 const hw = renderMarkdown('texto\n```widget-html\n<button onclick="x()">oi</button>\n```\nfim');
-t('widget-iframe', hw.includes('<iframe') && hw.includes('sandbox="allow-scripts"'));
+t('widget-iframe-sem-execucao', hw.includes('<iframe') && hw.includes('sandbox=""') && !hw.includes('allow-scripts'));
 t('widget-toggle', hw.includes('Ver c'));
 t('widget-no-naked-button', !hw.includes('<button onclick'));
 const hs = renderMarkdown('veja:\n```svg\n<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><rect width="100" height="50" fill="red" onclick="evil()"/><script>alert(1)</script></svg>\n```');
@@ -84,6 +84,12 @@ t('codigo-comum-sem-duo', !mdPlain.includes('jdui-duo') && mdPlain.includes('cod
 t('code-block', renderMarkdown('ex:\n```python\nprint("oi")\n```').includes('<pre><code>'));
 t('xss-escaped', renderMarkdown('<img src=x onerror=evil()>').includes('&lt;img'));
 t('table', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<table>'));
+t('table-empty-cell', renderMarkdown('| a | b | c |\n|---|---|---|\n| 1 | | 3 |').includes('<td>1</td><td></td><td>3</td>'));
+t('code-emphasis-literal', renderMarkdown('`**literal**`').includes('<code>**literal**</code>'));
+t('no-fake-image', !renderMarkdown('![teste](https://example.com/a.png)').includes('picsum'));
+const sources = renderMarkdown('Afirmação [S1]. Sem fonte [S2].\n\n## Fontes\n- [S1] [Documento](https://example.com/prova)');
+t('real-citation', sources.includes('class="citation" href="https://example.com/prova"') && sources.includes('Sem fonte [S2]'));
+t('source-url-not-markdown', !sources.includes('href="https://example.com/prova)'));
 t('heading-levels', renderMarkdown('# Título\n## Seção\n### Detalhe').includes('<h2>Título</h2><h3>Seção</h3><h4>Detalhe</h4>'));
 t('responsive-table-wrapper', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<div class="table-wrap"><table>'));
 """
