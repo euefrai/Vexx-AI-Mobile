@@ -1315,19 +1315,26 @@ $('logoutButton').addEventListener('click', async () => {
 });
 
 /* ----- Auth config + register flow ----- */
-let authConfig = { modo: 'convite', exigir_aprovacao: true, agent_online: false };
+let authConfig = { modo: 'fechado', exigir_aprovacao: true, agent_online: false };
 async function fetchAuthConfig() {
   try { authConfig = await api('/api/auth/config'); }
-  catch (_) { authConfig = { modo: 'convite', exigir_aprovacao: true, agent_online: false }; }
+  catch (_) { authConfig = { modo: 'fechado', exigir_aprovacao: true, agent_online: false }; }
   const inviteWrap = $('regInviteWrap');
   const showRegister = $('showRegister');
-  if (inviteWrap && showRegister) {
+  const availability = $('registerAvailability');
+  if (inviteWrap && showRegister && availability) {
     if (authConfig.modo === 'convite') {
       inviteWrap.hidden = false;
     } else {
       inviteWrap.hidden = true;
     }
-    if (authConfig.modo === 'fechado') {
+    const offline = authConfig.agent_online !== true;
+    showRegister.hidden = authConfig.modo === 'fechado' && !offline;
+    availability.hidden = !offline;
+    availability.textContent = offline
+      ? 'Conecte o computador com o agente JULIA para criar contas e entrar com elas.'
+      : '';
+    if (authConfig.modo === 'fechado' && !offline) {
       showRegister.style.display = 'none';
     } else {
       showRegister.style.display = '';

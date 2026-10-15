@@ -20,7 +20,8 @@ Navegador (IndexedDB por conta) ◄──HTTPS──► Relay Render (SEM banco)
   rastreável; revogação server-side com cache de 60s no relay.
 - **Logout real** — revoga o `sid` no SQLite (best-effort) + limpa cookie.
 - **Offline honesto** — cadastro e login de contas novas exigem o PC online
-  (503/401 claros, sem simulação). Sessão válida continua lendo o cache local.
+  (503 explicativo, sem simulação); tentativas durante indisponibilidade não
+  consomem o limite de cadastro/login. Sessão válida continua lendo o cache local.
 
 ## Entidades SQLite (`JULIA_auth.py`, só stdlib)
 
@@ -43,6 +44,12 @@ Navegador (IndexedDB por conta) ◄──HTTPS──► Relay Render (SEM banco)
 - **Registro**: modo do PC (`fechado` recusa; `convite` exige código com consumo
   atômico; `aberto` cria ou deixa `pendente`). Ativo → auto-login com sessão.
   Nunca cria admin (papel sempre `user`).
+- **Cadastro aberto imediato**: `modo_cadastro=aberto` e
+  `exigir_aprovacao=0` persistem o usuário no SQLite e iniciam sessão na mesma
+  resposta. O PC/agente precisa permanecer conectado para cadastrar e autenticar
+  contas comuns.
+- **Senhas**: somente hashes com salt são persistidos; senhas existentes não
+  podem ser recuperadas em texto puro.
 - **Sessão**: `/api/session` retorna uid/role/display; legada não consulta o PC.
 - **Troca de senha / exclusão**: com senha atual; exclusão apaga TODOS os dados
   do dono (transação) e derruba a sessão; último admin trava.

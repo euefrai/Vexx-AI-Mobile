@@ -249,7 +249,7 @@ def test_html_sem_classes_escapadas():
     # msg-menu-pop é criado dinamicamente pelo JS
     assert 'msg-menu-pop' in (RAIZ / 'public' / 'app.js').read_text(encoding='utf-8')
     for eid in ('loginOverlay', 'loginForm', 'registerForm', 'conversation', 'composer',
-                'sessionList', 'drawer', 'statusPop'):
+                'sessionList', 'drawer', 'statusPop', 'registerAvailability'):
         assert f'id="{eid}"' in html, eid
 
 

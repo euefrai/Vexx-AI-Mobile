@@ -264,13 +264,18 @@ def test_migracao_e_restart(tmp_path):
 
 # 25 — PC offline: honestidade
 def test_offline_honesto():
+    server.login_failures.clear()
     with TestClient(server.app) as client:
-        r = client.post('/api/register',
-                        json={'display': 'Off', 'username': 'offline1', 'password': 'senha-forte-1'})
-        assert r.status_code == 503
+        for attempt in range(4):
+            r = client.post('/api/register',
+                            json={'display': 'Offline', 'username': f'offline{attempt}',
+                                  'password': 'senha-forte-1'})
+            assert r.status_code == 503
+        assert not any(key.endswith(':register') for key in server.login_failures)
         csrf = _login_legacy(client)
         r2 = client.post('/api/login', json={'username': 'naoexiste', 'password': 'x'})
-        assert r2.status_code == 401  # sem vazar existência (conta comum exige PC)
+        assert r2.status_code == 503  # conta do PC exige agente conectado
+        assert not any(key.endswith(':login:naoexiste') for key in server.login_failures)
 
 
 def _agente_generico(ws, respostas, vistos):
@@ -326,6 +331,87 @@ def test_relay_register_login_account():
             bad = client.post('/api/register', json={'display': 'A', 'username': 'xx',
                                                       'password': 'curta'})
             assert bad.status_code == 422
+
+
+def test_registro_e_login_persistidos_pelo_sqlite_real(tmp_path):
+    db_path = tmp_path / 'cadastro.sqlite3'
+    db = pc_agent.open_db(db_path)
+    JULIA_auth.config_set(db, 'modo_cadastro', 'aberto')
+    JULIA_auth.config_set(db, 'exigir_aprovacao', '0')
+    db.close()
+    erros = []
+
+    def agente_persistente(ws):
+        store = pc_agent.open_db(db_path)
+        try:
+            while True:
+                try:
+                    req = ws.receive_json()
+                except Exception:
+                    return
+                tipo = req.get('type')
+                resposta = {'request_id': req['request_id']}
+                try:
+                    if tipo == 'auth_register':
+                        reg = JULIA_auth.registrar(
+                            store, req.get('display', ''), req.get('username', ''),
+                            req.get('password', ''), req.get('invite', ''))
+                        resposta.update(type='auth_registered', **reg)
+                        if reg['status'] == 'ativo':
+                            resposta.update(JULIA_auth.criar_sessao(store, reg['uid']))
+                    elif tipo == 'auth_login':
+                        user = JULIA_auth.login_conta(
+                            store, req.get('username', ''), req.get('password', ''))
+                        sessao = JULIA_auth.criar_sessao(store, user['uid'])
+                        resposta.update(type='auth_ok', **user, **sessao)
+                    elif tipo == 'auth_whoami':
+                        user = JULIA_auth.sessao_valida(store, req.get('sid', ''))
+                        resposta.update(type='auth_user', user=user)
+                    else:
+                        return
+                except JULIA_auth.AuthErro as exc:
+                    resposta.update(type='auth_error', error=str(exc), codigo=exc.codigo)
+                ws.send_json(resposta)
+        except Exception as exc:
+            erros.append(exc)
+        finally:
+            store.close()
+
+    with TestClient(server.app) as client:
+        with client.websocket_connect(
+                '/api/agent/ws',
+                headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            worker = threading.Thread(target=agente_persistente, args=(ws,), daemon=True)
+            worker.start()
+            reg = client.post('/api/register', json={
+                'display': 'Conta Real', 'username': 'contareal',
+                'password': 'senha-forte-123'})
+            assert reg.status_code == 200, reg.text
+            account = reg.json()
+            assert account['authenticated'] is True
+            assert account['user'] == 'Conta Real'
+            uid = account['uid']
+            client.cookies.clear()
+
+            login_response = client.post('/api/login', json={
+                'username': 'contareal', 'password': 'senha-forte-123'})
+            assert login_response.status_code == 200, login_response.text
+            assert login_response.json()['uid'] == uid
+            session = client.get('/api/session')
+            assert session.status_code == 200, session.text
+            assert session.json()['uid'] == uid
+            assert session.json()['user'] == 'Conta Real'
+
+        worker.join(timeout=5)
+        assert not worker.is_alive()
+    assert not erros, repr(erros)
+    db = pc_agent.open_db(db_path)
+    try:
+        user = JULIA_auth.buscar_usuario(db, 'contareal')
+        assert user is not None and user['uid'] == uid
+        assert JULIA_auth.confere_senha('senha-forte-123', user['hash'])
+    finally:
+        db.close()
 
 
 def test_relay_login_pendente_e_sessao_trocada():
@@ -487,7 +573,18 @@ def test_suspensao_temporaria_auto_levanta():
 def test_z_login_rate_limit():
     server.login_failures.clear()
     with TestClient(server.app) as client:
-        codes = [client.post('/api/login', json={'username': 'rl-user', 'password': 'x'}).status_code
-                 for _ in range(6)]
-        assert codes == [401, 401, 401, 401, 401, 429], codes
+        with client.websocket_connect(
+                '/api/agent/ws',
+                headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            worker = threading.Thread(
+                target=_agente_generico,
+                args=(ws, {'auth_login': lambda req: {
+                    'type': 'auth_error', 'error': 'invalid', 'codigo': 'credenciais'}}, {}),
+                daemon=True)
+            worker.start()
+            codes = [client.post('/api/login', json={'username': 'rl-user', 'password': 'x'}).status_code
+                     for _ in range(6)]
+            assert codes == [401, 401, 401, 401, 401, 429], codes
+        worker.join(timeout=5)
+        assert not worker.is_alive()
     server.login_failures.clear()

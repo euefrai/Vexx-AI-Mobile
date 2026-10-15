@@ -113,7 +113,23 @@ def test_z_brute_force_lockout_after_five_failures():
     # MUST stay last: it intentionally trips the in-memory IP rate limiter.
     server.login_failures.clear()
     with TestClient(server.app) as client:
-        codes = [client.post("/api/login",
-                             json={"username": "efrai", "password": "wrong"}).status_code
-                 for _ in range(6)]
-        assert codes == [401, 401, 401, 401, 401, 429], codes
+        with client.websocket_connect(
+                "/api/agent/ws",
+                headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            def reject_common_users():
+                while True:
+                    try:
+                        req = ws.receive_json()
+                    except Exception:
+                        return
+                    ws.send_json({"request_id": req["request_id"], "type": "auth_error",
+                                  "error": "invalid", "codigo": "credenciais"})
+
+            worker = threading.Thread(target=reject_common_users, daemon=True)
+            worker.start()
+            codes = [client.post("/api/login",
+                                 json={"username": "ordinary-user", "password": "wrong"}).status_code
+                     for _ in range(6)]
+            assert codes == [401, 401, 401, 401, 401, 429], codes
+        worker.join(timeout=5)
+        assert not worker.is_alive()

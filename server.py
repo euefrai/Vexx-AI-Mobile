@@ -360,9 +360,9 @@ def _limpa_tentativas(request: Request, chave: str) -> None:
 async def login(credentials: Credentials, request: Request, response: Response):
     if not is_ready():
         raise HTTPException(503, "Configure as variáveis secretas no servidor")
-    _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
     cfg = config()
     if hmac.compare_digest(credentials.username, cfg["user"]):
+        _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
         try:
             if ph.verify(cfg["password_hash"], credentials.password):
                 _limpa_tentativas(request, "login:" + credentials.username.strip().lower()[:40])
@@ -373,7 +373,8 @@ async def login(credentials: Credentials, request: Request, response: Response):
         raise HTTPException(401, "Usuário ou senha inválidos")
     # Conta comum: verifica no PC (exige agente online; sem simulação).
     if relay.ws is None:
-        raise HTTPException(401, "Usuário ou senha inválidos")
+        raise HTTPException(503, "Login de contas do PC indisponível: conecte o computador.")
+    _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
     try:
         result = await relay.exchange({"type": "auth_login", "username": credentials.username,
                                        "password": credentials.password}, timeout=20.0)
@@ -412,9 +413,9 @@ async def auth_config(request: Request):
 
 @app.post("/api/register")
 async def register(body: Registro, request: Request, response: Response):
-    _limite_tentativas(request, "register", 3, 3600)
     if relay.ws is None:
         raise HTTPException(503, "Cadastro indisponível: computador offline. Tente quando online.")
+    _limite_tentativas(request, "register", 3, 3600)
     try:
         result = await relay.exchange({"type": "auth_register", "display": body.display,
                                        "username": body.username, "password": body.password,
