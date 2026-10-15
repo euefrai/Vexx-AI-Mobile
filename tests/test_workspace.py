@@ -20,6 +20,9 @@ def test_chat_layout_keeps_composer_inside_column_and_ids_are_unique():
         assert page.find(id=element_id).find_parent(class_="main-col"), element_id
     ids = [element["id"] for element in page.select("[id]")]
     assert len(ids) == len(set(ids))
+    # A backdrop outside the isolated app covers even the drawer's higher z-index.
+    assert page.find(id="drawerScrim").parent is page.find(id="drawer").parent
+    assert page.find(id="drawerScrim").parent is page.find(id="app")
     # New mandatory modules must remain available when the PWA loses its network.
     sw = (public / "sw.js").read_text(encoding="utf-8")
     for asset in ("workspace.js", "organize.js", "interface.css"):

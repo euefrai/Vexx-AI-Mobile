@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="theme-color" content="#161618" />
   <meta name="description" content="Vexx AI — seu assistente pessoal." />
   <title>Vexx AI</title>
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -48,9 +48,10 @@
 
   <div class="scene-glow one"></div>
   <div class="scene-glow two"></div>
-  <div class="drawer-scrim" id="drawerScrim" hidden></div>
 
   <main class="app app-wide" id="app">
+    <!-- Keep the backdrop beside the drawer inside the app's stacking context. -->
+    <div class="drawer-scrim" id="drawerScrim" hidden aria-hidden="true"></div>
     <!-- Drawer lateral expansível -->
     <aside class="drawer" id="drawer" aria-label="Menu lateral" aria-hidden="true">
       <div class="drawer-head">
@@ -283,7 +284,7 @@
         <h2 class="section-caption">Conta</h2>
         <div class="sync-card">
           <strong>Senha e dados</strong>
-          <span>Troque a senha ou apague a conta (apaga tudo, sem volta).</span>
+          <span>Gerencie sua senha. A exclusão da conta apaga seus dados permanentemente.</span>
           <div class="export-row">
             <button id="changePwBtn" class="subtle-button" type="button">Trocar senha</button>
             <button id="deleteAccountBtn" class="subtle-button danger-link" type="button">Excluir conta</button>
@@ -303,8 +304,8 @@
 
         <h2 class="section-caption" id="memoryTitle">Memória do Vexx AI</h2>
         <div class="sync-card">
-          <strong>O que ela aprendeu sobre você</strong>
-          <span>Toque em ✎ para corrigir, ✕ para esquecer. Nada é guardado sem rastro.</span>
+          <strong>O que o Vexx lembra sobre você</strong>
+          <span>Revise as memórias. Use ✎ para editar ou ✕ para remover uma informação.</span>
           <div class="drawer-search">
             <svg class="icon"><use href="#i-search"/></svg>
             <input id="memorySearch" type="search" placeholder="Buscar na memória…" aria-label="Buscar na memória" autocomplete="off" />
@@ -337,7 +338,7 @@
         <h2 class="section-caption">Exportar conversa atual</h2>
         <div class="sync-card">
           <strong>Leve com você</strong>
-          <span>TXT/CSV/Markdown são gerados no celular; Excel usa o relay autenticado sem armazenar o arquivo.</span>
+          <span>Salve uma cópia desta conversa no formato que preferir.</span>
           <div class="export-row">
             <button id="exportMd" class="subtle-button" type="button">⬇ Markdown</button>
             <button id="exportJson" class="subtle-button" type="button">⬇ JSON</button>
@@ -385,13 +386,13 @@
           </div>
           <div class="settings-row">
             <div class="settings-icon"><svg class="icon"><use href="#i-image"/></svg></div>
-            <div><strong>Imagens no chat</strong><span>Markdown ![alt](url) renderiza.</span></div>
+            <div><strong>Imagens no chat</strong><span>Veja imagens diretamente nas respostas.</span></div>
             <span class="setting-soon">Ativo</span>
           </div>
         </div>
 
         <div class="settings-note">
-          Vexx AI · Chat fullscreen + sessões
+          Vexx AI · Suas conversas e projetos
           <br/>
           <button class="subtle-button danger-link" id="clearCache" type="button">Apagar cache</button>
           <button class="subtle-button" id="logoutButton" type="button">Sair</button>

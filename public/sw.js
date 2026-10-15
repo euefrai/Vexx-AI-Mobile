@@ -1,4 +1,4 @@
-const VERSION = 'VEXX-shell-v0.7-projects';
+const VERSION = 'VEXX-shell-v0.8-mobile-drawer';
 const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/workspace.js', '/organize.js', '/jdui.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png'];
 self.addEventListener('install', evt => {
   evt.waitUntil(caches.open(VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
