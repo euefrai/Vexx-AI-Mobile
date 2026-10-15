@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR"><meta charset="utf-8"><title>Workspace persistence checks</title>
+<style>body{font:16px system-ui;max-width:850px;margin:40px auto;padding:20px}li{margin:10px 0}.fail{color:#b00020}</style>
+<h1>Workspace: IndexedDB e sincronização</h1><p id="summary" role="status">Executando…</p><ol id="results"></ol>
+<!-- Serve this file beside an unmodified copy of public/workspace.js. -->
+<script src="workspace.js"></script>
+<script>
+(async () => {
+  const dbName = 'vexx-workspace-test-' + crypto.randomUUID();
+  let db, uid = 'alice', online = false, calls = 0, remote = [], pass = 0;
+  const display = (label, ok) => {
+    const li = document.createElement('li'); li.textContent = (ok ? 'PASS: ' : 'FAIL: ') + label;
+    if (!ok) li.className = 'fail'; document.getElementById('results').append(li);
+    if (!ok) throw Error(label); pass++;
+  };
+  try {
+    db = await new Promise((resolve,reject) => { const r=indexedDB.open(dbName,1);
+      r.onupgradeneeded=()=>r.result.createObjectStore('meta',{keyPath:'k'});
+      r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);
+    });
+    const options = {getDb:()=>db,getUid:()=>uid,canSync:()=>online,onStatus:()=>{},onSync:async()=>{},
+      api:async(path, options)=>{
+        calls++;
+        for(const record of JSON.parse(options.body).records){
+          const i=remote.findIndex(r=>r.kind===record.kind&&r.id===record.id);
+          if(i<0)remote.push(record);else if(VexxWorkspace.newer(record,remote[i]))remote[i]=record;
+        }
+        return {records:structuredClone(remote)};
+      }};
+    const client=VexxWorkspace.create(options);
+    await client.change('project','project-one',{title:'  Meu   projeto  '});
+    await client.change('chat','chat-one',{title:'Primeiro',project_id:'project-one'});
+    await client.change('chat','chat-two',{title:'Segundo',project_id:'project-one'});
+    await client.sync();
+    display('cria um projeto com duas conversas sem rede',calls===0&&client.list('chat').length===2);
+    const reopened=VexxWorkspace.create(options);await reopened.load();
+    display('recupera projetos e chats em nova instância',reopened.get('project','project-one').title==='Meu projeto'&&reopened.list('chat').length===2);
+    await reopened.change('project','project-one',{title:'Projeto renomeado'});
+    await reopened.change('chat','chat-one',{project_id:'',title:'Fora do projeto'});
+    display('mover para Sem projeto preserva o segundo chat',reopened.get('chat','chat-one').project_id===''&&reopened.get('chat','chat-two').project_id==='project-one');
+    uid='bob';await reopened.load();
+    display('outra conta não lê projetos de Alice',reopened.list('project').length===0&&reopened.list('chat').length===0);
+    uid='alice';await reopened.load();online=true;
+    const before=calls;await Promise.all([reopened.sync(),reopened.sync()]);
+    display('sincronizações concorrentes compartilham a mesma requisição',calls===before+1);
+    display('reconexão publica alterações feitas offline',remote.find(r=>r.id==='project-one').title==='Projeto renomeado'&&remote.find(r=>r.id==='chat-one').project_id==='');
+    let release;
+    const delayed=VexxWorkspace.create({...options,api:()=>new Promise(resolve=>{release=resolve;})});
+    await delayed.load();const pending=delayed.sync();
+    while(!release)await new Promise(resolve=>setTimeout(resolve,5));
+    const stale=structuredClone(remote);
+    await delayed.change('chat','chat-two',{title:'Editado durante a sincronização'});
+    release({records:stale});await pending;
+    display('resposta atrasada não desfaz edição local',delayed.get('chat','chat-two').title==='Editado durante a sincronização');
+    online=false;
+    await delayed.change('chat','chat-one',{deleted:true});
+    const final=VexxWorkspace.create(options);await final.load();
+    display('conversa excluída não reaparece ao reabrir',final.list('chat').length===1&&final.get('chat','chat-one').deleted);
+    document.getElementById('summary').textContent=pass+' verificações passaram';
+  }catch(error){document.getElementById('summary').textContent='Falha: '+error.message;}
+  finally{online=false;if(db)db.close();indexedDB.deleteDatabase(dbName);}
+})();
+</script></html>

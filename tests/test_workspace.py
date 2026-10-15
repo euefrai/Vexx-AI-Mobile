@@ -12,6 +12,21 @@ import workspace_store as workspace
 import server
 
 
+def test_chat_layout_keeps_composer_inside_column_and_ids_are_unique():
+    from bs4 import BeautifulSoup
+    public = Path(__file__).resolve().parents[1] / "public"
+    page = BeautifulSoup((public / "index.html").read_text(encoding="utf-8"), "html.parser")
+    for element_id in ("conversation", "suggestions", "composer", "loginOverlay"):
+        assert page.find(id=element_id).find_parent(class_="main-col"), element_id
+    ids = [element["id"] for element in page.select("[id]")]
+    assert len(ids) == len(set(ids))
+    # New mandatory modules must remain available when the PWA loses its network.
+    sw = (public / "sw.js").read_text(encoding="utf-8")
+    for asset in ("workspace.js", "organize.js", "interface.css"):
+        assert "'/" + asset + "'" in sw
+        assert (public / asset).is_file()
+
+
 def record(id="project-one", kind="project", title="Estudos", **extra):
     return dict(id=id, kind=kind, title=title, updated_at="2026-10-15T12:00:00.000Z",
                 change_id="change-one", **extra)
