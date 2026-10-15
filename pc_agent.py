@@ -2697,9 +2697,12 @@ class SessaoStream:
 def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                      websocket, sessao: SessaoStream, cancelados: dict) -> None:
     """Roda em thread: deltas saem pelo lock; a thread principal só recebe."""
+    worker_started = time.monotonic()
     db = open_db(db_path)
     try:
+        prep_started = time.monotonic()
         prep = ai_preparar(db, payload, cfg)
+        prep_finished = time.monotonic()
         if "error" in prep or "replay" in prep or "busy" in prep:
             try:
                 enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
@@ -2748,9 +2751,11 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             return
         ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
         cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
+        context_started = time.monotonic()
         messages, extras = ai_montar_mensagens(
             db, conv, cfg_eff, prep.get("user_text", ""), owner,
             prep.get("contexto_local"))
+        context_finished = time.monotonic()
 
         def enviar(obj):
             try:
@@ -2759,7 +2764,16 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 raise hermes_bridge.BridgeErro(
                     "Conexão com o relay caiu no meio da resposta.", "desconectado") from exc
 
+        first_delta_at = [0.0]
+
         def emitir(seq, trecho):
+            if not first_delta_at[0]:
+                first_delta_at[0] = time.monotonic()
+                log.info(
+                    "AI_AGENT_TTFT msg=%s prep_ms=%d context_ms=%d first_delta_ms=%d",
+                    mid[-8:], round((prep_finished - prep_started) * 1000),
+                    round((context_finished - context_started) * 1000),
+                    round((first_delta_at[0] - worker_started) * 1000))
             enviar({"request_id": request_id, "type": "ai_delta",
                     "seq": seq, "trecho": trecho})
 
@@ -2775,12 +2789,21 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             quer_aula = True
             fut_sintese = _SINT_POOL.submit(_sintetizar_isolado, sintetizar_aula,
                                             owner, cfg_eff, owner, _tu)
+        provider_started = time.monotonic()
         try:
             res = hermes_bridge.chat_stream_fb(
                 cfg["proxy"], modelos_tentativa(cfg, modelo), messages, emitir,
                 deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
             modelo = res.get("model_usado", modelo)
         except hermes_bridge.BridgeErro as exc:
+            log.warning(
+                "AI_AGENT_ERROR msg=%s prep_ms=%d context_ms=%d provider_ms=%d "
+                "first_delta_ms=%d code=%s",
+                mid[-8:], round((prep_finished - prep_started) * 1000),
+                round((context_finished - context_started) * 1000),
+                round((time.monotonic() - provider_started) * 1000),
+                round((first_delta_at[0] - provider_started) * 1000)
+                if first_delta_at[0] else -1, exc.codigo)
             if fut_sintese is not None:
                 fut_sintese.cancel()
             ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
@@ -2863,7 +2886,14 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             threading.Thread(target=aprender_com_conversa,
                              args=(db_path, dict(cfg_eff), prep["user_text"], texto_final, owner),
                              daemon=True).start()
-        log.info("IA %s (stream) em %ss (msg %s, fontes=%d)", modelo, res["latencia_s"], mid, len(extras["fontes"]))
+        log.info(
+            "AI_AGENT_DONE msg=%s model=%s prep_ms=%d context_ms=%d provider_ms=%d "
+            "first_delta_ms=%d total_ms=%d sources=%d",
+            mid[-8:], modelo, round((prep_finished - prep_started) * 1000),
+            round((context_finished - context_started) * 1000),
+            round((time.monotonic() - provider_started) * 1000),
+            round((first_delta_at[0] - provider_started) * 1000) if first_delta_at[0] else -1,
+            round((time.monotonic() - worker_started) * 1000), len(extras["fontes"]))
         enviar({"request_id": request_id, "type": "ai_done",
                 "reply_id": prep["reply_id"],
                 "response_text": texto_final, "model": modelo})

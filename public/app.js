@@ -19,6 +19,8 @@ let busy = false;
 let toastTimer;
 let aiAbort = null;
 const aiRequests = new Set();
+const aiQueue = [];
+let aiQueueRunning = false;
 let aiStartT = 0;
 let aiFirstTokenT = 0;
 let genTimer = null;
@@ -1509,12 +1511,47 @@ function aiLocalContext(text) {
   } catch (_) {}
   return context;
 }
-async function requestAI(userRow, options = {}) {
-  if (!authenticated || (!pcOnline && !options.immediate) || !navigator.onLine
-      || !db || aiAbort || aiRequests.size) return;
+function requestAI(userRow, options = {}) {
+  if (!authenticated || (!pcOnline && !options.immediate) || !navigator.onLine || !db) {
+    return Promise.resolve();
+  }
   const replyId = userRow.id + '-r1';
-  if (aiRequests.has(replyId)) return;
+  if (aiRequests.has(replyId)) return Promise.resolve();
   aiRequests.add(replyId);
+  const timing = {
+    queuedAt: performance.now(),
+    workerStartedAt: 0,
+    sentAt: options.sentAt,
+    storedAt: options.storedAt,
+    requestStartedAt: 0,
+    responseHeadersAt: 0,
+    firstDeltaAt: 0,
+    finishedAt: 0
+  };
+  return new Promise((resolve, reject) => {
+    aiQueue.push({ userRow, options, timing, resolve, reject });
+    pumpAIQueue();
+  });
+}
+function pumpAIQueue() {
+  if (aiQueueRunning) return;
+  const item = aiQueue.shift();
+  if (!item) return;
+  aiQueueRunning = true;
+  runAIRequest(item.userRow, item.options, item.timing)
+    .then(item.resolve, item.reject)
+    .finally(() => {
+      aiQueueRunning = false;
+      pumpAIQueue();
+    });
+}
+async function runAIRequest(userRow, options, timing) {
+  const replyId = userRow.id + '-r1';
+  timing.workerStartedAt = performance.now();
+  if (!authenticated || !navigator.onLine || !db) {
+    aiRequests.delete(replyId);
+    return;
+  }
   let existingReply;
   try { existingReply = await messageById(replyId); }
   catch (err) { aiRequests.delete(replyId); throw err; }
@@ -1536,12 +1573,14 @@ async function requestAI(userRow, options = {}) {
   aiAbort = new AbortController();
   let cur = '';
   try {
+    timing.requestStartedAt = performance.now();
     const streamRequest = fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
     if (typeof options.onStarted === 'function') options.onStarted();
     if (userRow.conversation_id === activeConversation) {
       renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
     }
     const res = await streamRequest;
+    timing.responseHeadersAt = performance.now();
     if (!res.ok || !res.body) throw new Error('IA indisponível (' + res.status + ')');
     const reader = res.body.getReader();
     const dec = new TextDecoder();
@@ -1566,7 +1605,11 @@ async function requestAI(userRow, options = {}) {
           let d = {};
           try { d = JSON.parse(dados); } catch (_) { continue; }
           if (tipo === 'delta') {
-            if (!aiFirstTokenT) { aiFirstTokenT = Date.now(); tickGen(); }
+            if (!aiFirstTokenT) {
+              aiFirstTokenT = Date.now();
+              timing.firstDeltaAt = performance.now();
+              tickGen();
+            }
             cur += d.trecho || '';
             schedulePaint(replyId, cur);
           } else if (tipo === 'done') {
@@ -1603,6 +1646,16 @@ async function requestAI(userRow, options = {}) {
     await storeMessages([{ id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: kept, created_at: new Date().toISOString(), status: 'failed', model: modeloAtivo() }]);
     showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + (err.message || 'tente de novo'));
   } finally {
+    timing.finishedAt = performance.now();
+    console.info('[chat-timing]', JSON.stringify({
+      message_id: userRow.id.slice(-8),
+      local_save_ms: timing.sentAt && timing.storedAt ? Math.round(timing.storedAt - timing.sentAt) : null,
+      queue_wait_ms: timing.workerStartedAt ? Math.round(timing.workerStartedAt - timing.queuedAt) : null,
+      preflight_ms: timing.requestStartedAt && timing.workerStartedAt ? Math.round(timing.requestStartedAt - timing.workerStartedAt) : null,
+      response_headers_ms: timing.requestStartedAt && timing.responseHeadersAt ? Math.round(timing.responseHeadersAt - timing.requestStartedAt) : null,
+      first_delta_ms: timing.requestStartedAt && timing.firstDeltaAt ? Math.round(timing.firstDeltaAt - timing.requestStartedAt) : null,
+      total_ms: timing.sentAt ? Math.round(timing.finishedAt - timing.sentAt) : null
+    }));
     aiRequests.delete(replyId);
     aiAbort = null;
     clearInterval(genTimer);
@@ -1790,15 +1843,17 @@ async function sendMessage(raw) {
   if (!value) return;
   if (!db) { showToast('Cache local indisponível'); return; }
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
+  const sentAt = performance.now();
   const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
   try {
     await storeMessages([row]);
-    await touchSession(activeConversation, titleFrom(value));
-    messageInput.value = ''; autoresize(); $('charCount').textContent = '';
+    const storedAt = performance.now();
     if (authenticated && navigator.onLine) {
-      requestAI(row, { immediate: true, onStarted: syncAndRefresh })
+      requestAI(row, { immediate: true, onStarted: syncAndRefresh, sentAt, storedAt })
         .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
     } else showToast('Salvo no celular');
+    await touchSession(activeConversation, titleFrom(value));
+    messageInput.value = ''; autoresize(); $('charCount').textContent = '';
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     scrollChat(true);

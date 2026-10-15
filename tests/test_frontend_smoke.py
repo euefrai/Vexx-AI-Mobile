@@ -273,10 +273,13 @@ def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     inicio = js.index("async function sendMessage(raw)")
     fim = js.index("\ncomposer.addEventListener('submit'", inicio)
     envio = js[inicio:fim]
-    assert "requestAI(row, { immediate: true, onStarted: syncAndRefresh })" in envio
+    assert "requestAI(row, { immediate: true, onStarted: syncAndRefresh, sentAt, storedAt })" in envio
+    assert envio.index("await storeMessages([row])") < envio.index("requestAI(row,")
+    assert envio.index("requestAI(row,") < envio.index("await touchSession(")
     assert "await syncAndRefresh()" not in envio
     assert "text: userRow.text" in js  # IA persiste o texto piggyback no PC
-    ai_inicio = js.index("async function requestAI(userRow, options = {})")
+    assert "const aiQueue = []" in js and "aiQueue.push(" in js and "pumpAIQueue()" in js
+    ai_inicio = js.index("function requestAI(userRow, options = {})")
     ai_fim = js.index("\nfunction stopAI()", ai_inicio)
     pedido = js[ai_inicio:ai_fim]
     assert "(!pcOnline && !options.immediate)" in pedido
@@ -285,6 +288,7 @@ def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     preflight = pedido[:pedido.index("const streamRequest = fetch(")]
     assert "messageById(replyId)" in preflight and "await allMessages()" not in preflight
     assert "await renderMessages()" not in preflight
+    assert "'[chat-timing]'" in pedido
 
 
 def test_estudos_ligado_e_com_cache_offline():

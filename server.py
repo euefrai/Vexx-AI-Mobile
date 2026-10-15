@@ -1751,8 +1751,10 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     latitude: float | None = None, longitude: float | None = None,
                     text: str = "", created_at: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
+    request_started = time.monotonic()
     require_csrf(request)
     dono = await revogacao_ok(request)
+    auth_completed = time.monotonic()
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
         raise HTTPException(422, "Parâmetros inválidos")
     if len(text) > 10000 or len(created_at) > 48:
@@ -1782,12 +1784,15 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     async def gerar():
         concluido = False
         espera = 0.0
+        forwarded_at = 0.0
+        first_delta_logged = False
         try:
             async with relay.send_lock:
                 if relay.ws is not ws:
                     yield 'event: error\ndata: {"error": "Agente reconectando"}\n\n'
                     return
                 await ws.send_json({**payload, "request_id": stream_id})
+                forwarded_at = time.monotonic()
             while True:
                 try:
                     item = await asyncio.wait_for(fila.get(), timeout=15.0)
@@ -1800,9 +1805,20 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     continue
                 tipo = item.get("type")
                 if tipo == "ai_delta":
+                    if not first_delta_logged:
+                        first_delta_logged = True
+                        now = time.monotonic()
+                        log.info(
+                            "AI_RELAY_STAGE msg=%s auth_ms=%d forward_ms=%d first_delta_ms=%d",
+                            message_id[-8:], round((auth_completed - request_started) * 1000),
+                            round((forwarded_at - auth_completed) * 1000),
+                            round((now - request_started) * 1000))
                     yield f"event: delta\ndata: {json.dumps({'seq': item.get('seq', 0), 'trecho': item.get('trecho', '')}, ensure_ascii=False)}\n\n"
                 elif tipo == "ai_done":
                     concluido = True
+                    log.info("AI_RELAY_DONE msg=%s total_ms=%d",
+                             message_id[-8:],
+                             round((time.monotonic() - request_started) * 1000))
                     yield f"event: done\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'response_text': item.get('response_text', ''), 'model': item.get('model', '')}, ensure_ascii=False)}\n\n"
                     return
                 elif tipo == "ai_cancelled":
@@ -1811,6 +1827,10 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     return
                 else:
                     concluido = True
+                    log.info("AI_RELAY_ERROR msg=%s total_ms=%d code=%s",
+                             message_id[-8:],
+                             round((time.monotonic() - request_started) * 1000),
+                             str(item.get("codigo", "erro"))[:40])
                     yield f"event: error\ndata: {json.dumps({'error': item.get('error', 'IA indisponível'), 'codigo': item.get('codigo', 'erro')}, ensure_ascii=False)}\n\n"
                     return
         finally:
