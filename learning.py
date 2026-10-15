@@ -74,6 +74,18 @@ def criar_tabelas(db) -> None:
         id INTEGER PRIMARY KEY AUTOINCREMENT, owner_id TEXT NOT NULL DEFAULT 'local',
         tipo TEXT NOT NULL, ref_id TEXT NOT NULL DEFAULT '',
         detalhe TEXT NOT NULL DEFAULT '', ts TEXT NOT NULL)""")
+    db.execute("""CREATE TABLE IF NOT EXISTS lessons (
+        id TEXT PRIMARY KEY, owner_id TEXT NOT NULL DEFAULT 'local',
+        assunto TEXT NOT NULL DEFAULT '', objetivo TEXT NOT NULL DEFAULT '',
+        nivel TEXT NOT NULL DEFAULT 'basico', resumo TEXT NOT NULL DEFAULT '',
+        estado TEXT NOT NULL DEFAULT 'criada', origem TEXT NOT NULL DEFAULT 'ia',
+        versao INT NOT NULL DEFAULT 1, created_at TEXT NOT NULL)""")
+    db.execute("""CREATE TABLE IF NOT EXISTS lesson_sections (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, lesson_id TEXT NOT NULL,
+        owner_id TEXT NOT NULL DEFAULT 'local', ordem INT NOT NULL DEFAULT 0,
+        titulo TEXT NOT NULL, explicacao TEXT NOT NULL DEFAULT '',
+        exemplo TEXT NOT NULL DEFAULT '', exercicio TEXT NOT NULL DEFAULT '',
+        feito INT NOT NULL DEFAULT 0, feito_em TEXT NOT NULL DEFAULT '')""")
     for _tabela, _col in (("learning_plans", "owner_id"), ("plan_items", "owner_id"),
                           ("assessments", "owner_id"), ("questions", "owner_id"),
                           ("attempts", "owner_id"), ("answers", "owner_id"),
@@ -96,6 +108,7 @@ def criar_tabelas(db) -> None:
     db.execute("CREATE INDEX IF NOT EXISTS idx_att_ass ON attempts(assessment_id, finalizada_em)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_rev_due ON reviews(owner_id, proxima_iso)")
     db.execute("CREATE INDEX IF NOT EXISTS idx_items_plan ON plan_items(plan_id, ordem)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_lesson_sec ON lesson_sections(lesson_id, ordem)")
     db.commit()
 
 
@@ -656,3 +669,118 @@ def recomendar(db, owner: str, hoje=None) -> dict:
         return {"recomendacoes": [], "motivo": "sem_dados",
                 "aviso": "Ainda não há respostas suficientes para recomendar."}
     return {"recomendacoes": recs[:5], "motivo": "dados_reais"}
+
+
+# ── Aulas canônicas (§3 V4.2.1) ───────────────────────────────────
+NIVEIS_AULA = ("iniciante", "basico", "intermediario", "avancado")
+ESTADOS_AULA = ("criada", "em_andamento", "concluida")
+
+
+def validar_aula(a: dict) -> dict:
+    """Schema validado de aula (o que a IA gera passa por aqui, sem exceção)."""
+    if not isinstance(a, dict):
+        raise LearnErro("aula deve ser objeto", "formato")
+    assunto = _txt(a.get("assunto"), 160)
+    if len(assunto) < 3:
+        raise LearnErro("aula exige assunto", "assunto")
+    nivel = str(a.get("nivel", "basico")).lower()
+    if nivel not in NIVEIS_AULA:
+        raise LearnErro("nível inválido", "nivel")
+    secoes = a.get("secoes")
+    if not isinstance(secoes, list) or not (1 <= len(secoes) <= 12):
+        raise LearnErro("secoes: 1..12 obrigatórias", "secoes")
+    norm = []
+    for i, s in enumerate(secoes):
+        if not isinstance(s, dict):
+            raise LearnErro(f"seção {i} inválida", "secoes")
+        titulo, exp = _txt(s.get("titulo"), 160), _txt(s.get("explicacao"), 2000)
+        if len(titulo) < 3 or len(exp) < 20:
+            raise LearnErro(f"seção {i} incompleta (título + explicação 20+)", "secoes")
+        norm.append({"titulo": titulo, "explicacao": exp,
+                     "exemplo": _txt(s.get("exemplo"), 1000),
+                     "exercicio": _txt(s.get("exercicio"), 1000)})
+    return {"id": _txt(a.get("id"), 64) or None, "assunto": assunto,
+            "objetivo": _txt(a.get("objetivo"), 500), "nivel": nivel,
+            "secoes": norm, "resumo": _txt(a.get("resumo"), 1000)}
+
+
+def criar_aula(db, owner: str, aula: dict, origem: str = "ia", lesson_id: str = "") -> dict:
+    norm = validar_aula(aula)
+    lid = (lesson_id or "")[:64] or norm["id"] or novo_id("aula")
+    with db:
+        db.execute("INSERT OR IGNORE INTO lessons (id, owner_id, assunto, objetivo, nivel,"
+                   " resumo, estado, origem, versao, created_at)"
+                   " VALUES (?,?,?,?,?,?,?,?,?,?)",
+                   (lid, owner, norm["assunto"], norm["objetivo"], norm["nivel"],
+                    norm["resumo"], "criada", str(origem or "ia")[:20], 1, agora_iso()))
+        for i, s in enumerate(norm["secoes"]):
+            db.execute("INSERT INTO lesson_sections (lesson_id, owner_id, ordem, titulo,"
+                       " explicacao, exemplo, exercicio)"
+                       " SELECT ?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM lesson_sections"
+                       " WHERE lesson_id=? AND owner_id=? AND ordem=?)",
+                       (lid, owner, i, s["titulo"], s["explicacao"], s["exemplo"], s["exercicio"],
+                        lid, owner, i))
+    return {"id": lid, "secoes": len(norm["secoes"])}
+
+
+def obter_aula(db, owner: str, lesson_id: str) -> dict:
+    row = db.execute("SELECT id, assunto, objetivo, nivel, resumo, estado, origem, versao"
+                     " FROM lessons WHERE id=? AND owner_id=?", (lesson_id, owner)).fetchone()
+    if not row:
+        raise LearnErro("aula não encontrada", "ausente")
+    secs = db.execute("SELECT ordem, titulo, explicacao, exemplo, exercicio, feito, feito_em"
+                      " FROM lesson_sections WHERE lesson_id=? AND owner_id=? ORDER BY ordem",
+                      (lesson_id, owner)).fetchall()
+    lista = [{"ordem": s[0], "titulo": s[1], "explicacao": s[2], "exemplo": s[3],
+              "exercicio": s[4], "feito": bool(s[5]), "feito_em": s[6]} for s in secs]
+    feitos = sum(1 for s in lista if s["feito"])
+    return {"id": row[0], "assunto": row[1], "objetivo": row[2], "nivel": row[3],
+            "resumo": row[4], "estado": row[5], "origem": row[6], "versao": row[7],
+            "secoes": lista,
+            "progresso": {"feitas": feitos, "total": len(lista),
+                          "taxa": round(feitos / len(lista), 3) if lista else 0.0}}
+
+
+def listar_aulas(db, owner: str) -> list:
+    rows = db.execute("SELECT id, assunto, nivel, estado, created_at FROM lessons "
+                      "WHERE owner_id=? ORDER BY created_at DESC LIMIT 50", (owner,)).fetchall()
+    out = []
+    for lid, assunto, nivel, estado, criado in rows:
+        n = db.execute("SELECT COUNT(*), SUM(feito) FROM lesson_sections "
+                       "WHERE lesson_id=? AND owner_id=?", (lid, owner)).fetchone()
+        out.append({"id": lid, "assunto": assunto, "nivel": nivel, "estado": estado,
+                    "feitas": n[1] or 0, "total": n[0] or 0})
+    return out
+
+
+def concluir_secao(db, owner: str, lesson_id: str, ordem: int) -> dict:
+    row = db.execute("SELECT id FROM lesson_sections WHERE lesson_id=? AND owner_id=? AND ordem=?",
+                     (lesson_id, owner, int(ordem))).fetchone()
+    if not row:
+        raise LearnErro("seção não encontrada", "ausente")
+    with db:
+        db.execute("UPDATE lesson_sections SET feito=1, feito_em=? WHERE id=?",
+                   (agora_iso(), row[0]))
+        total = db.execute("SELECT COUNT(*) FROM lesson_sections WHERE lesson_id=? AND owner_id=?",
+                           (lesson_id, owner)).fetchone()[0]
+        feitas = db.execute("SELECT COUNT(*) FROM lesson_sections WHERE lesson_id=? AND owner_id=?"
+                            " AND feito=1", (lesson_id, owner)).fetchone()[0]
+        estado = "concluida" if feitas >= total else "em_andamento"
+        db.execute("UPDATE lessons SET estado=? WHERE id=? AND owner_id=?",
+                   (estado, lesson_id, owner))
+        db.execute("INSERT INTO study_events (owner_id, tipo, ref_id, detalhe, ts) VALUES (?,?,?,?,?)",
+                   (owner, "aula_concluida" if estado == "concluida" else "secao_concluida",
+                    lesson_id, str(ordem), agora_iso()))
+    aula = obter_aula(db, owner, lesson_id)
+    return {"estado": aula["estado"], "progresso": aula["progresso"]}
+
+
+def historico_tentativas(db, owner: str, limite: int = 50) -> list:
+    """Tentativas finalizadas do dono (base factual de gráficos de evolução)."""
+    rows = db.execute("SELECT t.id, t.nota, t.total, t.finalizada_em, g.titulo, g.assunto"
+                      " FROM attempts t JOIN assessments g ON g.id=t.assessment_id"
+                      " WHERE t.owner_id=? AND t.finalizada_em!=''"
+                      " ORDER BY t.finalizada_em DESC LIMIT ?",
+                      (owner, max(1, min(int(limite or 50), 200)))).fetchall()
+    return [{"attempt_id": r[0], "nota": r[1], "total": r[2], "em": r[3],
+             "titulo": r[4], "assunto": r[5] or ""} for r in rows]

@@ -1200,6 +1200,11 @@ class JULIAPresentationEngine:
     REGRAS = [
         (("planilha", "em formato de planilha", "organize em tabela",
           "monte uma tabela", "tabela com"), "table"),
+        (("tabela comparativa", "comparar lado a lado", "compare em tabela",
+          "versus em tabela"), "compare"),
+        (("gráfico", "grafico", "evolução", "evolucao", "em barras", "em pizza",
+          "distribuição dos", "distribuicao dos", "histograma"), "chart"),
+        (("dashboard", "painel de", "painel com métricas", "visão geral com números"), "dashboard"),
         (("roadmap", "roteiro de projeto", "plano de ação por etapas",
           "mapa de etapas"), "cards"),
         (("treino", "treinamento", "ficha de treino", "rotina de exercícios",
@@ -1209,7 +1214,8 @@ class JULIAPresentationEngine:
         (("checklist", "check-list", "lista de tarefas", "rotina de estudos",
           "plano de estudos", "hábitos"), "checklist"),
         (("calculadora", "calcule meu imc", "índice de massa", "indice de massa",
-          "porcentagem", "juros compostos", "quanto rende"), "calculator"),
+          "porcentagem", "juros compostos", "quanto rende", "converter",
+          "conversor", "quanto é em"), "calculator"),
         (("compare", "comparação", "comparacao", "diferenças entre", "diferencas entre",
           "prós e contras", "pros e contras", "qual melhor"), "cards"),
         (("diagrama", "fluxograma", "fluxo de", "arquitetura", "como funciona o",
@@ -1232,13 +1238,19 @@ JDUI_CATALOGO = (
     "responda com texto normal + blocos ```jdui com JSON {version:'JULIA-ui-message/v1',"
     "blocks:[{type:'text',content},{type:'ui',component,props}]}. Componentes: "
     "quiz{title,questions[{q,options[2..6],answer(índice),explain}]}; "
-    "checklist{title,items[]}; calculator{kind:basic|imc|porcentagem|juros}; "
+    "checklist{title,items[]}; calculator{kind:basic|imc|porcentagem|juros|conversor}; "
     "cards{items[{title,desc,value,badge,url,action{chat}}]}; "
     "diagram{direction:v|h,nodes[{id,label,desc}],edges[{from,to,label}]}; "
-    "table{columns[],rows[[]]}; form{title,fields[{name,label,type:text|number|select,options}],calc:imc|juros|porcentagem|soma}; "
+    "table{columns[],rows[[]]}; compare{columns[2],rows[{label,a,b,melhor:a|b|=}]}; "
+    "chart{type:line|bar|pie|area|scatter,title,labels[],series[{label,values[]}],source}; "
+    "dashboard{title,metrics[{label,value,hint}],chart?,source}; "
+    "form{title,fields[{name,label,type:text|number|select,options}],calc:imc|juros|porcentagem|soma}; "
     "progress{label,value,max}; tabs{tabs[{title,markdown}]}; accordion{items[{title,markdown}]}. "
     "REGRAS: JSON válido e pequeno (máx 6 blocos, 12 perguntas, 30 linhas); sem JavaScript, sem CSS, "
-    "sem perguntas de volta quando pedirem app; quiz/calculadora/checklist NUNCA em texto corrido."
+    "sem perguntas de volta quando pedirem app; quiz/calculadora/checklist NUNCA em texto corrido. "
+    "GRÁFICOS SÓ com números dados pelo usuário ou já exibidos na conversa — nunca invente séries. "
+    "ATUALIZAÇÃO (update_of:id-da-mensagem): só chart|table|dashboard|compare|diagram|checklist|cards|tabs|accordion|form|calculator; "
+    "NUNCA exam|quiz|studyprogress (resultado imutável)."
 )
 
 
@@ -1971,7 +1983,6 @@ def sintetizar_prova(db, cfg: dict, owner: str, texto_usuario: str) -> str:
 
 REFORCO_TRIGGERS = ("errei", "errada", "errado", "reforço", "reforco")
 
-
 def intencao_reforco(texto: str) -> bool:
     """'faz outro simulado só com o que errei' — reforço sobre erros reais."""
     t = (texto or "").lower()
@@ -2007,6 +2018,90 @@ def sintetizar_reforco(db, owner: str, texto_usuario: str) -> str:
     except Exception as exc:
         log.warning("reforço falhou (%s)", type(exc).__name__)
         return ""
+
+
+AULA_TRIGGERS = ("aula", "me ensina", "me ensine", "curso sobre", "curso de", "licao", "lição")
+
+
+def intencao_aula(texto: str) -> bool:
+    """Pedido explícito de aula persistida (não confundir com explicação avulsa)."""
+    t = (texto or "").lower()
+    return any(k in t for k in AULA_TRIGGERS)
+
+
+def sintetizar_aula(db, cfg: dict, owner: str, texto_usuario: str) -> str:
+    """Gera aula canônica via LLM, valida contra o schema e persiste.
+
+    Falha de geração/validação → '' (o chat responde em texto normalmente).
+    Markdown comum nunca vira aula: só fence `lesson` com id persistido.
+    """
+    prompt = ("Crie uma aula em JSON (SÓ o JSON, sem cercas): "
+              "{\"assunto\": \"...\", \"objetivo\": \"...\", "
+              "\"nivel\": \"iniciante|basico|intermediario|avancado\", "
+              "\"secoes\": [{\"titulo\": \"...\", \"explicacao\": \"...\" (2+ parágrafos), "
+              "\"exemplo\": \"...\", \"exercicio\": \"...\"}] (3 a 6 seções, progressivas), "
+              "\"resumo\": \"...\"}. "
+              "Assunto pedido: %s" % ((texto_usuario or "")[:300]))
+    try:
+        res = hermes_bridge.chat_complete(
+            cfg["proxy"], cfg["model"],
+            [{"role": "system", "content": "Você cria aulas. Responda SÓ JSON válido."},
+             {"role": "user", "content": prompt}], max_tokens=3000)
+        corpo = (res.get("texto") or "").strip()
+        m2 = re.search(r"```(?:json)?\s*\n?([\s\S]*?)```", corpo)
+        if m2:
+            corpo = m2.group(1).strip()
+        obj = json.loads(corpo)
+        if not isinstance(obj, dict):
+            return ""
+        aula = learning.criar_aula(db, owner, obj, origem="ia")
+        titulo = "Aula: %s" % (obj.get("assunto", "")[:80] or "nova aula")
+        fence = {"version": jdui.VERSION, "blocks": [
+            {"type": "text", "content": f"Preparei uma aula para você: **{titulo}**. Bons estudos! 📖"},
+            {"type": "ui", "component": "lesson",
+             "props": {"lesson_id": aula["id"], "title": titulo}}]}
+        ok, norm, _ = jdui.validar_mensagem(fence)
+        if not ok:
+            return ""
+        return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+    except Exception as exc:
+        log.warning("síntese de aula falhou (%s)", type(exc).__name__)
+        return ""
+
+
+GRAFICO_TRIGGERS = ("gráfico", "grafico", "evolução", "evolucao", "em barras", "em pizza")
+EVOLUCAO_TRIGGERS = ("simulado", "prova", "desempenho", "nota", "progresso", "tentativa",
+                     "evolução", "evolucao")
+
+
+def intencao_grafico_evolucao(texto: str) -> bool:
+    """'mostre a evolução dos meus simulados' — gráfico sobre dados reais."""
+    t = (texto or "").lower()
+    return any(k in t for k in GRAFICO_TRIGGERS) and any(k in t for k in EVOLUCAO_TRIGGERS)
+
+
+def sintetizar_grafico_evolucao(db, owner: str) -> str:
+    """Monta gráfico line dos simulados a partir do histórico real (sem LLM).
+
+    Sem tentativas: texto honesto. Números saem do SQLite, o modelo só explica.
+    """
+    hist = learning.historico_tentativas(db, owner, 20)
+    if not hist:
+        return ("\n\nVocê ainda não tem simulados concluídos para mostrar em gráfico. "
+                "Faça uma prova primeiro — aí eu desenho sua evolução. 📈")
+    cron = list(reversed(hist))
+    labels = [(h["em"] or "")[5:10].replace("-", "/") or f"T{i + 1}" for i, h in enumerate(cron)]
+    valores = [round((h["nota"] or 0) * 100, 1) for h in cron]
+    fence = {"version": jdui.VERSION, "blocks": [
+        {"type": "text", "content": "Sua evolução nos simulados: 📈"},
+        {"type": "ui", "component": "chart",
+         "props": {"type": "line", "title": "Evolução dos simulados",
+                   "labels": labels, "series": [{"label": "nota %", "values": valores}],
+                   "source": "seu histórico de provas", "y_label": "%"}}]}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
@@ -2050,6 +2145,16 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("reforço sintetizado para %s", mid)
+    elif not blocos_jdui and intencao_aula(prep.get("user_text", "")):
+        fence = sintetizar_aula(db, cfg_eff, owner, prep.get("user_text", ""))
+        if fence:
+            texto += fence
+            log.info("aula sintetizada para %s", mid)
+    elif not blocos_jdui and intencao_grafico_evolucao(prep.get("user_text", "")):
+        fence = sintetizar_grafico_evolucao(db, owner)
+        if fence:
+            texto += fence
+            log.info("gráfico de evolução sintetizado para %s", mid)
     elif not blocos_jdui and intencao_prova(prep.get("user_text", "")):
         fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
         if fence:
@@ -2177,6 +2282,16 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             if fence:
                 texto_final += fence
                 log.info("reforço sintetizado no stream %s", mid)
+        elif not blocos_jdui and intencao_aula(prep.get("user_text", "")):
+            fence = sintetizar_aula(db, cfg_eff, owner, prep.get("user_text", ""))
+            if fence:
+                texto_final += fence
+                log.info("aula sintetizada no stream %s", mid)
+        elif not blocos_jdui and intencao_grafico_evolucao(prep.get("user_text", "")):
+            fence = sintetizar_grafico_evolucao(db, owner)
+            if fence:
+                texto_final += fence
+                log.info("gráfico de evolução sintetizado no stream %s", mid)
         elif not blocos_jdui and intencao_prova(prep.get("user_text", "")):
             fence = sintetizar_prova(db, cfg_eff, owner, prep.get("user_text", ""))
             if fence:
@@ -2664,6 +2779,44 @@ def run():
                             reply = {"request_id": request_id, "type": "learn_mistakes",
                                      "erradas": learning.questoes_erradas(
                                          db, dono, int(req.get("limite", 20) or 20))}
+                        except (TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": "erro"}
+                    elif req.get("type") == "learn_lesson_create":
+                        try:
+                            aula = req.get("aula", {})
+                            reply = {"request_id": request_id, "type": "learn_lesson",
+                                     **learning.criar_aula(
+                                         db, dono, aula if isinstance(aula, dict) else {},
+                                         str(req.get("origem", "ia"))[:20],
+                                         str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_lesson_get":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_lesson_full",
+                                     **learning.obter_aula(db, dono, str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_lessons":
+                        reply = {"request_id": request_id, "type": "learn_lessons",
+                                 "aulas": learning.listar_aulas(db, dono)}
+                    elif req.get("type") == "learn_lesson_section":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_lesson_progress",
+                                     **learning.concluir_secao(
+                                         db, dono, str(req.get("lesson_id", ""))[:64],
+                                         int(req.get("ordem", 0) or 0))}
+                        except (learning.LearnErro, TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "learn_history":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_history",
+                                     "tentativas": learning.historico_tentativas(
+                                         db, dono, int(req.get("limite", 50) or 50))}
                         except (TypeError, ValueError) as exc:
                             reply = {"request_id": request_id, "type": "learn_error",
                                      "error": str(exc), "codigo": "erro"}

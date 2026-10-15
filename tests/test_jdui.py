@@ -123,6 +123,18 @@ def test_componentes_educacionais():
     assert ok is False and len(erros) == 2
 
 
+def test_lesson_valido_e_invalido():
+    base = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "lesson",
+         "props": {"lesson_id": "aula-1", "title": "Aula: OOP"}}]}
+    ok, norm, erros = jdui.validar_mensagem(base)
+    assert ok, erros
+    assert norm["blocks"][0]["props"] == {"lesson_id": "aula-1", "title": "Aula: OOP"}
+    ruim = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "ui", "component": "lesson", "props": {"lesson_id": "x"}}]}
+    assert jdui.validar_mensagem(ruim)[0] is False
+
+
 def test_limites_e_profundidade():
     grande = {"version": "JULIA-ui-message/v1",
               "blocks": [{"type": "text", "content": "x"}] * 30}

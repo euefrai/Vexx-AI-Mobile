@@ -273,6 +273,23 @@ def test_estudos_ligado_e_com_cache_offline():
     assert '/api/learn/stats' in js and '/api/learn/plans' in js
     assert '/api/learn/cards/due' in js and '/api/learn/mistakes' in js
     assert 'learnCacheGet' in js and 'Offline' in js  # fallback offline real
+    # fila offline educacional (V4.2.1 §4): outbox idempotente + correção no servidor
+    for sym in ('learnOutbox', 'learnEnqueue', 'learnSyncOutbox', 'queueLearn'):
+        assert sym in js, sym
+    assert 'ctx.queueLearn' in (RAIZ / 'public' / 'jdui.js').read_text(encoding='utf-8')
+
+
+def test_jdui_v43_fiacao():
+    js = (RAIZ / 'public' / 'jdui.js').read_text(encoding='utf-8')
+    app = APP_JS.read_text(encoding='utf-8')
+    css = (RAIZ / 'public' / 'styles.css').read_text(encoding='utf-8')
+    for comp in ('R.chart', 'R.dashboard', 'R.compare', 'R.lesson',
+                 'OPS.conversao', 'update_of', 'precisaConexao'):
+        assert comp in js, comp
+    assert 'update_of' in app and 'update-of' not in app  # patch in-place, sem gambiarra
+    for regra in ('.jdui-chart svg', '.jdui-dashgrid', '@media(max-width:360px)',
+                  '.jdui-cmp', '.jdui-metric'):
+        assert regra in css, regra  # responsivo 320–768 sem CSS novo pesado
 
 
 def test_sessoes_sem_fragmentacao():

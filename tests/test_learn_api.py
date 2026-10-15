@@ -98,7 +98,9 @@ def _agente_learn(ws, db_path, vistos, usuarios):
         elif tipo in ("learn_plan_create", "learn_plan_get", "learn_plan_item",
                       "learn_plan_update", "learn_plans", "learn_cards_create",
                       "learn_cards_due", "learn_cards_review", "learn_recommend",
-                      "learn_flag", "learn_mistakes"):
+                      "learn_flag", "learn_mistakes", "learn_lesson_create",
+                      "learn_lesson_get", "learn_lessons", "learn_lesson_section",
+                      "learn_history"):
             try:
                 ws.send_json({"request_id": rid, **_learn_op(db, req)})
             except learning.LearnErro as exc:
@@ -142,6 +144,21 @@ def _learn_op(db, req):
     if tipo == "learn_mistakes":
         return {"type": "learn_mistakes",
                 "erradas": learning.questoes_erradas(db, dono, int(req.get("limite", 20)))}
+    if tipo == "learn_lesson_create":
+        return {"type": "learn_lesson",
+                **learning.criar_aula(db, dono, req.get("aula", {}), req.get("origem", "ia"),
+                                      req.get("id", ""))}
+    if tipo == "learn_lesson_get":
+        return {"type": "learn_lesson_full", **learning.obter_aula(db, dono, req.get("id", ""))}
+    if tipo == "learn_lessons":
+        return {"type": "learn_lessons", "aulas": learning.listar_aulas(db, dono)}
+    if tipo == "learn_lesson_section":
+        return {"type": "learn_lesson_progress",
+                **learning.concluir_secao(db, dono, req.get("lesson_id", ""),
+                                          int(req.get("ordem", 0)))}
+    if tipo == "learn_history":
+        return {"type": "learn_history",
+                "tentativas": learning.historico_tentativas(db, dono, int(req.get("limite", 50)))}
     raise learning.LearnErro("operação desconhecida", "tipo")
 
 
@@ -335,3 +352,72 @@ def test_cards_recommend_flag_api(tmp_path):
             assert r.json() == {"ok": True, "question_id": "q1"}
             assert client.post("/api/learn/flag", json={"question_id": "q1", "motivo": "x"},
                                headers=h).status_code == 422
+
+
+def test_aulas_e_historico_api(tmp_path):
+    with TestClient(server.app) as client:
+        with client.websocket_connect("/api/agent/ws",
+                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            vistos = {}
+            t = threading.Thread(target=_agente_learn,
+                                 args=(ws, tmp_path / "learnaulaapi.sqlite3", vistos, {"ana": "u-aaa"}),
+                                 daemon=True)
+            t.start()
+            csrf = _login_comum(client)
+            h = {"X-CSRF-Token": csrf}
+            aula = {"assunto": "OOP", "objetivo": "Classes", "nivel": "basico",
+                    "secoes": [{"titulo": "Classes",
+                                "explicacao": "Uma classe é o molde de objetos em Python."}],
+                    "resumo": "Classe molda."}
+            r = client.post("/api/learn/lessons", json={"aula": aula}, headers=h)
+            assert r.status_code == 200, r.text
+            lid = r.json()["id"]
+            assert vistos["learn_lesson_create"]["owner"] == "u-aaa"
+            r = client.get(f"/api/learn/lessons/{lid}", headers=h)
+            assert r.json()["progresso"] == {"feitas": 0, "total": 1, "taxa": 0.0}
+            r = client.post("/api/learn/lessons/section",
+                            json={"lesson_id": lid, "ordem": 0}, headers=h)
+            assert r.json() == {"estado": "concluida",
+                                "progresso": {"feitas": 1, "total": 1, "taxa": 1.0}}
+            assert client.get("/api/learn/lessons", headers=h).json()["aulas"][0]["id"] == lid
+            assert client.get("/api/learn/history", headers=h).json() == {"tentativas": []}
+            att = client.post("/api/learn/attempts", json={"assessment_id": "av-mat"},
+                              headers=h).json()["id"]
+            client.post("/api/learn/answer",
+                        json={"attempt_id": att, "question_id": "q1", "resposta": "1"}, headers=h)
+            client.post("/api/learn/answer",
+                        json={"attempt_id": att, "question_id": "q2", "resposta": "0"}, headers=h)
+            client.post("/api/learn/finish", json={"attempt_id": att}, headers=h)
+            hist = client.get("/api/learn/history", headers=h).json()["tentativas"]
+            assert len(hist) == 1 and hist[0]["nota"] == 1.0 and hist[0]["total"] == 2
+            assert client.post("/api/learn/lessons", json={"aula": {"assunto": "x"}},
+                               headers=h).status_code in (503, 422)
+
+
+def test_resposta_idempotente_ultima_vale(tmp_path):
+    """Reenvio (fila offline) não duplica: mesma (attempt, questão) = 1 linha."""
+    import sqlite3 as _sq
+    db_path = tmp_path / "learnidem.sqlite3"
+    with TestClient(server.app) as client:
+        with client.websocket_connect("/api/agent/ws",
+                                      headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+            vistos = {}
+            t = threading.Thread(target=_agente_learn,
+                                 args=(ws, db_path, vistos, {"ana": "u-aaa"}),
+                                 daemon=True)
+            t.start()
+            csrf = _login_comum(client)
+            h = {"X-CSRF-Token": csrf}
+            att = client.post("/api/learn/attempts", json={"assessment_id": "av-mat"},
+                              headers=h).json()["id"]
+            assert client.post("/api/learn/answer",
+                               json={"attempt_id": att, "question_id": "q1", "resposta": "0"},
+                               headers=h).json() == {"correta": False}
+            assert client.post("/api/learn/answer",
+                               json={"attempt_id": att, "question_id": "q1", "resposta": "1"},
+                               headers=h).json() == {"correta": True}
+    con = _sq.connect(db_path)
+    n = con.execute("SELECT COUNT(*) FROM answers WHERE attempt_id=? AND question_id='q1'",
+                    (att,)).fetchone()[0]
+    con.close()
+    assert n == 1  # reenvio substitui, nunca duplica

@@ -58,7 +58,7 @@
     },
     calculator(p) {
       const kind = (S(p.kind, 40).toLowerCase() || 'basic');
-      if (['basic', 'imc', 'porcentagem', 'juros'].indexOf(kind) < 0) throw new JduiErro('calculator.kind');
+      if (['basic', 'imc', 'porcentagem', 'juros', 'conversor'].indexOf(kind) < 0) throw new JduiErro('calculator.kind');
       return { kind, title: S(p.title, 120) };
     },
     cards(p) {
@@ -82,7 +82,8 @@
       const nodes = nos.map(n => {
         if (!n || typeof n !== 'object' || !S(n.id, 40)) throw new JduiErro('diagram.node');
         const id = S(n.id, 40); ids[id] = 1;
-        return { id, label: S(n.label, 120), desc: S(n.desc, 300), status: S(n.status, 20) };
+        return { id, label: S(n.label, 120), desc: S(n.desc, 300), status: S(n.status, 20),
+                 icon: S(n.icon, 12), group: S(n.group, 60) };
       });
       const edges = [];
       (Array.isArray(p.edges) ? p.edges : []).forEach(e => {
@@ -152,6 +153,80 @@
     },
     studyprogress(p) {
       return {};
+    },
+    lesson(p) {
+      const lid = S(p.lesson_id, 64);
+      if (!/^[A-Za-z0-9_-]{2,64}$/.test(lid)) throw new JduiErro('lesson.lesson_id');
+      return { lesson_id: lid, title: S(p.title, 160) };
+    },
+    chart(p) {
+      const tipos = ['line', 'bar', 'pie', 'area', 'scatter'];
+      const tipo = String(p.type || 'bar').toLowerCase();
+      if (tipos.indexOf(tipo) < 0) throw new JduiErro('chart.type');
+      const ss = p.series;
+      if (!Array.isArray(ss) || ss.length < 1 || ss.length > 6) throw new JduiErro('chart.series 1..6');
+      if (tipo === 'pie' && ss.length !== 1) throw new JduiErro('chart pie: 1 série');
+      const fin = v => {
+        const f = parseFloat(v);
+        if (!Number.isFinite(f) || Math.abs(f) > 1e12) throw new JduiErro('chart: valor inválido');
+        return f;
+      };
+      const series = ss.map(s => {
+        if (!s || typeof s !== 'object') throw new JduiErro('chart.serie');
+        const vals = s.values;
+        if (!Array.isArray(vals) || !vals.length || vals.length > 24) throw new JduiErro('chart.values 1..24');
+        if (tipo === 'scatter') {
+          return {
+            label: S(s.label, 60),
+            values: vals.map(v => {
+              if (!Array.isArray(v) || v.length !== 2) throw new JduiErro('chart scatter: pares [x,y]');
+              return [fin(v[0]), fin(v[1])];
+            })
+          };
+        }
+        return { label: S(s.label, 60), values: vals.map(fin) };
+      });
+      const labels = Array.isArray(p.labels) ? p.labels.map(l => S(l, 40)).slice(0, 24) : [];
+      if (labels.length && tipo !== 'scatter' && labels.length !== series[0].values.length) {
+        throw new JduiErro('chart.labels acompanha valores');
+      }
+      return {
+        type: tipo, title: S(p.title, 160), labels, series,
+        source: S(p.source, 160), x_label: S(p.x_label, 60), y_label: S(p.y_label, 60)
+      };
+    },
+    dashboard(p) {
+      const ms = p.metrics;
+      if (!Array.isArray(ms) || !ms.length || ms.length > 8) throw new JduiErro('dashboard.metrics 1..8');
+      const metrics = ms.map(m => {
+        if (!m || typeof m !== 'object' || !S(m.label, 60)) throw new JduiErro('dashboard.metric');
+        return { label: S(m.label, 60), value: S(m.value, 40), hint: S(m.hint, 120) };
+      });
+      let chart = null;
+      if (p.chart !== undefined && p.chart !== null) {
+        if (typeof p.chart !== 'object') throw new JduiErro('dashboard.chart');
+        chart = V.chart(p.chart);
+        if (chart.series.length > 3) throw new JduiErro('dashboard.chart: máx 3 séries');
+      }
+      return { title: S(p.title, 160), metrics, chart, source: S(p.source, 160) };
+    },
+    compare(p) {
+      const cols = p.columns;
+      if (!Array.isArray(cols) || cols.length !== 2 || !S(cols[0], 40) || !S(cols[1], 40)) {
+        throw new JduiErro('compare.columns: 2 rótulos');
+      }
+      const rs = p.rows;
+      if (!Array.isArray(rs) || !rs.length || rs.length > 12) throw new JduiErro('compare.rows 1..12');
+      return {
+        title: S(p.title, 160),
+        columns: [S(cols[0], 40), S(cols[1], 40)],
+        rows: rs.map(r => {
+          if (!r || typeof r !== 'object' || !S(r.label, 80)) throw new JduiErro('compare.row');
+          const win = String(r.melhor || '').toLowerCase();
+          if (['', 'a', 'b', '='].indexOf(win) < 0) throw new JduiErro('compare.melhor');
+          return { label: S(r.label, 80), a: S(r.a, 120), b: S(r.b, 120), melhor: win };
+        })
+      };
     }
   };
 
@@ -177,7 +252,19 @@
       erros.push('type');
     });
     if (!norm.length) return { ok: false, msg: null, erros: erros.length ? erros : ['vazio'] };
-    return { ok: true, msg: { version: VERSION, blocks: norm }, erros };
+    const msg = { version: VERSION, blocks: norm };
+    if (obj.update_of !== undefined && obj.update_of !== null && obj.update_of !== '') {
+      if (typeof obj.update_of !== 'string' || !/^[A-Za-z0-9_-]{2,100}$/.test(obj.update_of)) {
+        erros.push('update_of inválido');
+      } else {
+        const proibidos = ['exam', 'quiz', 'studyprogress'];
+        const comps = norm.filter(b => b.type === 'ui').map(b => b.component);
+        const ruim = comps.filter(c => proibidos.indexOf(c) >= 0);
+        if (ruim.length) erros.push(ruim[0] + ' não aceita atualização (resultado imutável)');
+        else msg.update_of = obj.update_of;
+      }
+    }
+    return { ok: true, msg, erros };
   }
 
   function extractBlocks(text) {
@@ -216,7 +303,24 @@
       if (!(capital >= 0 && meses >= 0)) return null;
       const m = capital * Math.pow(1 + taxa / 100, meses);
       return { montante: Math.round(m * 100) / 100, juros: Math.round((m - capital) * 100) / 100 };
-    }
+    },
+    conversao(valor, de, para) {
+      // Tabela local fixa (comprimento, massa, temperatura). Sem rede, sem eval.
+      const T = {
+        'km->mi': v => v * 0.621371, 'mi->km': v => v * 1.60934,
+        'm->km': v => v / 1000, 'km->m': v => v * 1000,
+        'kg->lb': v => v * 2.20462, 'lb->kg': v => v * 0.453592,
+        'g->kg': v => v / 1000, 'kg->g': v => v * 1000,
+        'C->F': v => v * 9 / 5 + 32, 'F->C': v => (v - 32) * 5 / 9,
+        'min->h': v => v / 60, 'h->min': v => v * 60
+      };
+      if (typeof valor !== 'number' || !Number.isFinite(valor)) return null;
+      if (de === para) return { valor };
+      const fn = T[de + '->' + para];
+      if (!fn) return null; // fora do catálogo: renderer explica a limitação
+      return { valor: Math.round(fn(valor) * 10000) / 10000 };
+    },
+    UNIDADES: ['km', 'mi', 'm', 'kg', 'lb', 'g', 'C', 'F', 'min', 'h']
   };
   function fmt(n) {
     if (typeof n !== 'number' || !Number.isFinite(n)) return '—';
@@ -409,8 +513,12 @@
       if (!st.historico_enviado && ctx.api && (!ctx.online || ctx.online())) {
         st.historico_enviado = true;
         save(st);
-        ctx.api('/api/learn/avulso', { method: 'POST', body: JSON.stringify({
-          titulo: props.title || 'Quiz', certas: s, total: qs.length }) }).catch(() => {
+        const send = ctx.queueLearn
+          ? ctx.queueLearn('/api/learn/avulso', {
+            titulo: props.title || 'Quiz', certas: s, total: qs.length })
+          : ctx.api('/api/learn/avulso', { method: 'POST', body: JSON.stringify({
+            titulo: props.title || 'Quiz', certas: s, total: qs.length }) });
+        send.catch(() => {
           st.historico_enviado = false;
           try { save(st); } catch (_) {}
         });
@@ -501,7 +609,10 @@
           if (!ta.value.trim()) return;
           b.disabled = true;
           try {
-            await ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: ta.value }) });
+            const send = ctx.queueLearn
+              ? ctx.queueLearn('/api/learn/answer', { attempt_id: st.att, question_id: q.id, resposta: ta.value })
+              : ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: ta.value }) });
+            await send;
             st.feitas[q.id] = { texto: ta.value, pendente: true };
             save(st); paint();
           } catch (_) { b.disabled = false; }
@@ -511,7 +622,7 @@
         const opts = el('div', 'jdui-opts');
         (q.opcoes || []).forEach((txt, oi) => {
           const feito = st.feitas[q.id];
-          const lab = el('label', 'jdui-opt' + (feito ? (feito.certa ? ' ok' : ' bad') : ''));
+          const lab = el('label', 'jdui-opt' + (feito ? (feito.certa ? ' ok' : (feito.certa === false ? ' bad' : '')) : ''));
           const inp = document.createElement('input');
           inp.type = 'radio';
           inp.name = 'ex' + i + '_' + props.assessment_id.slice(-4);
@@ -522,8 +633,13 @@
             if (st.feitas[q.id]) return;
             lab.classList.add('wait');
             try {
-              const r = await ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: oi }) });
-              st.feitas[q.id] = { escolha: oi, certa: !!r.correta };
+              const send = ctx.queueLearn
+                ? ctx.queueLearn('/api/learn/answer', { attempt_id: st.att, question_id: q.id, resposta: oi })
+                : ctx.api('/api/learn/answer', { method: 'POST', body: JSON.stringify({ attempt_id: st.att, question_id: q.id, resposta: oi }) });
+              const r = await send;
+              st.feitas[q.id] = r && r.queued
+                ? { escolha: oi, certa: null, pendente: true }
+                : { escolha: oi, certa: !!r.correta };
               save(st); paint();
             } catch (_) { lab.classList.remove('wait'); }
           });
@@ -643,6 +759,42 @@
   R.calculator = function (root, props, st, save) {
     const box = el('div', 'jdui-calc');
     box.appendChild(el('div', 'jdui-title', props.title || 'Calculadora'));
+    if (props.kind === 'conversor') {
+      st.conv = st.conv || {};
+      const lab = el('label', 'jdui-field', 'Valor');
+      const inp = document.createElement('input');
+      inp.type = 'number'; inp.inputMode = 'decimal';
+      inp.value = typeof st.conv.valor === 'string' ? st.conv.valor.slice(0, 40) : '';
+      inp.setAttribute('aria-label', 'Valor a converter');
+      inp.addEventListener('input', () => { st.conv.valor = inp.value.slice(0, 40); save(st); });
+      lab.appendChild(inp); box.appendChild(lab);
+      const sels = {};
+      [['de', 'De'], ['para', 'Para']].forEach(([k, titulo]) => {
+        const l = el('label', 'jdui-field', titulo);
+        const sel = document.createElement('select');
+        OPS.UNIDADES.forEach(u => {
+          const o = document.createElement('option');
+          o.value = u; o.textContent = u;
+          sel.appendChild(o);
+        });
+        sel.value = st.conv[k] || (k === 'de' ? 'km' : 'mi');
+        sel.addEventListener('change', () => { st.conv[k] = sel.value; save(st); });
+        l.appendChild(sel); box.appendChild(l); sels[k] = sel;
+      });
+      const out = el('div', 'jdui-result', st.conv.resultado || 'Escolha as unidades e toque em Converter.');
+      const go = el('button', 'jdui-btn', 'Converter');
+      go.addEventListener('click', () => {
+        const v = parseFloat(String(inp.value).replace(',', '.'));
+        const r = OPS.conversao(v, sels.de.value, sels.para.value);
+        out.textContent = r
+          ? fmt(v) + ' ' + sels.de.value + ' = ' + fmt(r.valor) + ' ' + sels.para.value
+          : 'Conversão fora do catálogo (comprimento, massa, temperatura e tempo).';
+        st.conv.resultado = out.textContent; save(st);
+      });
+      box.appendChild(go); box.appendChild(out);
+      root.appendChild(box);
+      return;
+    }
     if (props.kind === 'basic') {
       const disp = el('div', 'jdui-disp', '0');
       disp.setAttribute('aria-live', 'polite');
@@ -747,30 +899,50 @@
     root.appendChild(box);
   };
 
-  R.diagram = function (root, props) {
+  R.diagram = function (root, props, st, save) {
+    st = st || {};
     const box = el('div', 'jdui-diagram' + (props.direction === 'h' ? ' horiz' : ''));
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const barra = el('div', 'jdui-actions');
+    const menos = el('button', 'jdui-btn ghost', '−');
+    const mais = el('button', 'jdui-btn ghost', '+');
+    menos.type = 'button'; mais.type = 'button';
+    menos.setAttribute('aria-label', 'Reduzir diagrama');
+    mais.setAttribute('aria-label', 'Ampliar diagrama');
+    st.zoom = Math.min(2, Math.max(0.6, parseFloat(st.zoom) || 1));
+    const aplicaZoom = () => { flow.style.fontSize = (st.zoom * 100) + '%'; };
+    menos.addEventListener('click', () => { st.zoom = Math.max(0.6, st.zoom - 0.2); save(st); aplicaZoom(); });
+    mais.addEventListener('click', () => { st.zoom = Math.min(2, st.zoom + 0.2); save(st); aplicaZoom(); });
+    barra.appendChild(menos); barra.appendChild(mais);
+    box.appendChild(barra);
     const flow = el('div', 'jdui-flow'); box.appendChild(flow);
     const byId = {};
     props.nodes.forEach(n => { byId[n.id] = n; });
+    let grupoAtual = null;
     props.nodes.forEach((n, i) => {
-      const node = el('button', 'jdui-node' + (n.status ? ' st-' + n.status.replace(/[^a-z]/g, '') : ''));
+      if (n.group && n.group !== grupoAtual) {
+        grupoAtual = n.group;
+        flow.appendChild(el('div', 'jdui-count', grupoAtual));
+      }
+      const node = el('button', 'jdui-node' + (n.status ? ' st-' + n.status.replace(/[^a-z]/g, '') : '')
+        + (st.sel === n.id ? ' open' : ''));
       node.type = 'button';
-      node.setAttribute('aria-expanded', 'false');
+      node.setAttribute('aria-expanded', st.sel === n.id ? 'true' : 'false');
       node.appendChild(el('span', 'jdui-dot'));
       const tx = el('span', 'jdui-nodetx');
-      tx.appendChild(el('strong', '', n.label));
+      tx.appendChild(el('strong', '', (n.icon ? n.icon + ' ' : '') + n.label));
       node.appendChild(tx);
-      if (n.desc) {
-        const full = n.desc;
-        const sm = el('small', '', full.slice(0, 60) + (full.length > 60 ? '…' : ''));
-        tx.appendChild(sm);
-        node.addEventListener('click', () => {
-          const open = node.classList.toggle('open');
-          node.setAttribute('aria-expanded', open ? 'true' : 'false');
-          sm.textContent = open ? full : (full.slice(0, 60) + (full.length > 60 ? '…' : ''));
-        });
-      }
+      const full = n.desc || '';
+      const sm = el('small', '', full ? full.slice(0, 60) + (full.length > 60 ? '…' : '') : 'Toque para detalhes');
+      tx.appendChild(sm);
+      node.addEventListener('click', () => {
+        st.sel = st.sel === n.id ? null : n.id;
+        save(st);
+        const open = st.sel === n.id;
+        node.classList.toggle('open', open);
+        node.setAttribute('aria-expanded', open ? 'true' : 'false');
+        sm.textContent = open && full ? full : (full ? full.slice(0, 60) + (full.length > 60 ? '…' : '') : 'Toque para detalhes');
+      });
       flow.appendChild(node);
       if (i < props.nodes.length - 1) {
         const edge = (props.edges || []).find(e => e.from === n.id && byId[e.to]);
@@ -778,6 +950,7 @@
         flow.appendChild(c);
       }
     });
+    aplicaZoom();
     root.appendChild(box);
   };
 
@@ -816,9 +989,17 @@
     const thead = document.createElement('thead');
     const hr = document.createElement('tr');
     let sortCol = -1, sortAsc = true;
+    const filtro = document.createElement('input');
+    filtro.type = 'search'; filtro.maxLength = 80; filtro.placeholder = 'Filtrar linhas…';
+    filtro.setAttribute('aria-label', 'Filtrar linhas da tabela');
+    filtro.value = typeof st.filtro === 'string' ? st.filtro : '';
+    filtro.addEventListener('input', () => { st.filtro = filtro.value.slice(0, 80); save(st); paint(); });
+    box.appendChild(filtro);
     const tbody = document.createElement('tbody');
     function rows() {
       let rs = st.rows.map((row, index) => ({ row, index }));
+      const f = (st.filtro || '').toLowerCase();
+      if (f) rs = rs.filter(o => o.row.some(c => String(c).toLowerCase().indexOf(f) >= 0));
       if (sortCol >= 0) {
         rs.sort((a, b) => {
           const x = a.row[sortCol] || '', y = b.row[sortCol] || '';
@@ -1218,6 +1399,316 @@
       ((rec && rec.recomendacoes) || []).forEach(x => {
         bx.appendChild(el('div', 'jdui-err', '→ ' + (x.detalhe || x.tipo)));
       });
+    }
+  };
+
+  /* ----- V4.3: gráficos SVG puros (sem libs, sem eval, dados validados) ----- */
+  const PALETA = ['#a78bfa', '#7c6cf0', '#5b5bd6', '#c4b5fd', '#8b7cf6', '#6d6df2'];
+  function svgEl(tag, attrs) {
+    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function svgText(x, y, s, anchor, size) {
+    const t = svgEl('text', { x, y, 'text-anchor': anchor || 'middle', 'font-size': size || 9, fill: 'currentColor', opacity: '.75' });
+    t.textContent = String(s);
+    return t;
+  }
+  function fmtTick(v) {
+    if (typeof v !== 'number' || !Number.isFinite(v)) return '—';
+    const a = Math.abs(v);
+    if (a >= 1e9) return (v / 1e9).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'B';
+    if (a >= 1e6) return (v / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'M';
+    if (a >= 1e3) return (v / 1e3).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'k';
+    return (Math.round(v * 100) / 100).toLocaleString('pt-BR');
+  }
+  function dica(elm, texto) {
+    const t = svgEl('title', {});
+    t.textContent = texto;
+    elm.appendChild(t);
+    return elm;
+  }
+
+  R.chart = function (root, props) {
+    const box = el('div', 'jdui-quiz');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const series = props.series || [];
+    if (!series.length || !series[0].values.length) {
+      box.appendChild(el('div', 'jdui-q', 'Sem dados para o gráfico.'));
+      root.appendChild(box);
+      return;
+    }
+    const W = 360, H = 220, P = { l: 40, r: 8, t: 10, b: 34 };
+    const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': props.title || 'Gráfico' });
+    const holder = el('div', 'jdui-chart');
+    holder.appendChild(svg);
+    box.appendChild(holder);
+    const leg = el('div', 'jdui-legend');
+    series.forEach((s, i) => {
+      const sp = el('span', '', s.label || ('Série ' + (i + 1)));
+      const dot = el('i', '');
+      dot.style.background = PALETA[i % PALETA.length];
+      sp.insertBefore(dot, sp.firstChild);
+      leg.appendChild(sp);
+    });
+    box.appendChild(leg);
+    if (props.type === 'pie') {
+      const vals = series[0].values;
+      const total = vals.reduce((a, b) => a + b, 0) || 1;
+      const cx = W / 2, cy = H / 2 - 6, R0 = 62, R1 = 88;
+      let ang = -Math.PI / 2;
+      vals.forEach((v, i) => {
+        const frac = Math.max(v, 0) / total;
+        const a2 = ang + frac * Math.PI * 2;
+        const grande = frac > 0.5 ? 1 : 0;
+        const x1 = cx + R1 * Math.cos(ang), y1 = cy + R1 * Math.sin(ang);
+        const x2 = cx + R1 * Math.cos(a2), y2 = cy + R1 * Math.sin(a2);
+        const x3 = cx + R0 * Math.cos(a2), y3 = cy + R0 * Math.sin(a2);
+        const x4 = cx + R0 * Math.cos(ang), y4 = cy + R0 * Math.sin(ang);
+        const fatia = dica(svgEl('path', {
+          d: 'M' + x1 + ',' + y1 + ' A' + R1 + ',' + R1 + ' 0 ' + grande + ' 1 ' + x2 + ',' + y2 +
+            ' L' + x3 + ',' + y3 + ' A' + R0 + ',' + R0 + ' 0 ' + grande + ' 0 ' + x4 + ',' + y4 + ' Z',
+          fill: PALETA[i % PALETA.length], opacity: '.9'
+        }), (props.labels[i] || ('Item ' + (i + 1))) + ': ' + fmtTick(v) + ' (' + Math.round(frac * 100) + '%)');
+        svg.appendChild(fatia);
+        if (frac >= 0.08) svg.appendChild(svgText(cx + 76 * Math.cos((ang + a2) / 2), cy + 76 * Math.sin((ang + a2) / 2), Math.round(frac * 100) + '%', 'middle', 9));
+        ang = a2;
+      });
+    } else {
+      let xs, ys, cartesiano = props.type !== 'scatter';
+      if (cartesiano) {
+        const n = series[0].values.length;
+        xs = series.map((s, i) => s.values.map((_, j) => j));
+        let mn = Infinity, mx = -Infinity;
+        series.forEach(s => s.values.forEach(v => { if (v < mn) mn = v; if (v > mx) mx = v; }));
+        if (mn === mx) { mn -= 1; mx += 1; }
+        if (mn > 0) mn = 0;
+        ys = { mn, mx, n };
+      } else {
+        let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+        series.forEach(s => s.values.forEach(p => {
+          if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0];
+          if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1];
+        }));
+        if (x0 === x1) { x0 -= 1; x1 += 1; }
+        if (y0 === y1) { y0 -= 1; y1 += 1; }
+        ys = { mn: y0, mx: y1 };
+        xs = { mn: x0, mx: x1 };
+      }
+      const X = v => P.l + (v - (cartesiano ? 0 : xs.mn)) / ((cartesiano ? ys.n - 1 : xs.mx - xs.mn) || 1) * (W - P.l - P.r);
+      const Y = v => P.t + (1 - (v - ys.mn) / ((ys.mx - ys.mn) || 1)) * (H - P.t - P.b);
+      for (let g = 0; g <= 3; g++) {
+        const v = ys.mn + (ys.mx - ys.mn) * g / 3;
+        svg.appendChild(svgEl('line', { x1: P.l, y1: Y(v), x2: W - P.r, y2: Y(v), stroke: 'currentColor', opacity: '.15' }));
+        svg.appendChild(svgText(P.l - 4, Y(v) + 3, fmtTick(v), 'end', 9));
+      }
+      const rotulos = props.labels || [];
+      const n = cartesiano ? series[0].values.length : 0;
+      if (cartesiano) {
+        for (let j = 0; j < n; j++) {
+          if (rotulos[j]) svg.appendChild(svgText(X(j), H - 8, String(rotulos[j]).slice(0, 10), 'middle', 9));
+        }
+      }
+      if (props.type === 'bar') {
+        const grupo = (W - P.l - P.r) / n;
+        const larg = Math.min(grupo / (series.length + 1), 26);
+        series.forEach((s, i) => {
+          s.values.forEach((v, j) => {
+            const x = X(j) - grupo / 2 + i * larg + (grupo - series.length * larg) / 2;
+            const barra = dica(svgEl('rect', {
+              x, y: Math.min(Y(v), Y(0)), width: larg, height: Math.abs(Y(v) - Y(0)),
+              rx: 2, fill: PALETA[i % PALETA.length], opacity: '.9'
+            }), (s.label ? s.label + ': ' : '') + fmtTick(v) + (rotulos[j] ? ' (' + rotulos[j] + ')' : ''));
+            svg.appendChild(barra);
+          });
+        });
+      } else {
+        series.forEach((s, i) => {
+          const pts = cartesiano ? s.values.map((v, j) => [X(j), Y(v)]) : s.values.map(p => [X(p[0]), Y(p[1])]);
+          const cor = PALETA[i % PALETA.length];
+          if (props.type === 'area' && cartesiano) {
+            svg.appendChild(svgEl('path', {
+              d: 'M' + pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' L') +
+                ' L' + pts[pts.length - 1][0].toFixed(1) + ',' + Y(0).toFixed(1) +
+                ' L' + pts[0][0].toFixed(1) + ',' + Y(0).toFixed(1) + ' Z',
+              fill: cor, opacity: '.22'
+            }));
+          }
+          if (props.type !== 'scatter') {
+            svg.appendChild(svgEl('polyline', {
+              points: pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' '),
+              fill: 'none', stroke: cor, 'stroke-width': 2
+            }));
+          }
+          pts.forEach((p, j) => {
+            const c = dica(svgEl('circle', { cx: p[0], cy: p[1], r: props.type === 'scatter' ? 4 : 3, fill: cor }), (s.label ? s.label + ': ' : '') + fmtTick(cartesiano ? s.values[j] : s.values[j][1]));
+            svg.appendChild(c);
+          });
+        });
+      }
+      if (props.y_label) svg.appendChild(svgText(8, P.t + 4, String(props.y_label).slice(0, 12), 'start', 9));
+      if (props.x_label) svg.appendChild(svgText(W - P.r, H - 8, String(props.x_label).slice(0, 12), 'end', 9));
+    }
+    if (props.source) box.appendChild(el('div', 'jdui-source', 'Fonte: ' + props.source));
+    root.appendChild(box);
+  };
+
+  R.dashboard = function (root, props) {
+    const box = el('div', 'jdui-quiz');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const grid = el('div', 'jdui-dashgrid');
+    props.metrics.forEach(m => {
+      const card = el('div', 'jdui-metric');
+      card.appendChild(el('span', '', m.label));
+      card.appendChild(el('strong', '', m.value || '—'));
+      if (m.hint) card.appendChild(el('small', '', m.hint));
+      grid.appendChild(card);
+    });
+    box.appendChild(grid);
+    if (props.chart) R.chart(box, props.chart);
+    if (props.source) box.appendChild(el('div', 'jdui-source', 'Fonte: ' + props.source));
+    root.appendChild(box);
+  };
+
+  R.compare = function (root, props) {
+    const box = el('div', 'jdui-quiz');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const holder = el('div', 'jdui-chart');
+    const t = document.createElement('table');
+    t.className = 'jdui-cmp';
+    const head = document.createElement('tr');
+    head.appendChild(el('th', '', ''));
+    props.columns.forEach(c => head.appendChild(el('th', '', c)));
+    t.appendChild(head);
+    props.rows.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.appendChild(el('th', '', r.label));
+      const ca = el('td', r.melhor === 'a' ? 'win' : '', r.a || '—');
+      const cb = el('td', r.melhor === 'b' ? 'win' : '', r.b || '—');
+      if (r.melhor === 'a') ca.setAttribute('aria-label', r.a + ' (destaque)');
+      if (r.melhor === 'b') cb.setAttribute('aria-label', r.b + ' (destaque)');
+      tr.appendChild(ca); tr.appendChild(cb);
+      t.appendChild(tr);
+    });
+    holder.appendChild(t);
+    box.appendChild(holder);
+    root.appendChild(box);
+  };
+
+  R.lesson = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    const info = el('div', 'jdui-count', 'Carregando aula…');
+    box.appendChild(el('div', 'jdui-title', props.title || 'Aula'));
+    box.appendChild(info);
+    root.appendChild(box);
+    st.open = st.open || {};
+    function montar() {
+      const b2 = el('div', 'jdui-quiz');
+      b2.appendChild(el('div', 'jdui-title', props.title || 'Aula'));
+      const i2 = el('div', 'jdui-count', 'Carregando aula…');
+      b2.appendChild(i2);
+      root.replaceChildren(b2);
+      carregar(b2, i2);
+    }
+    if (precisaConexao(ctx)) {
+      info.textContent = 'Conecte-se para ver a aula.';
+      botaoTentar(root, info, montar);
+      return;
+    }
+    carregar(box, info);
+    async function carregar(bx, inf) {
+      let aula;
+      try {
+        aula = await ctx.api('/api/learn/lessons/' + encodeURIComponent(props.lesson_id));
+      } catch (_) {
+        inf.textContent = 'Não consegui carregar. Toque para tentar de novo.';
+        inf.style.cursor = 'pointer';
+        inf.addEventListener('click', montar, { once: true });
+        return;
+      }
+      const secs = aula.secoes || [];
+      const feitas = secs.filter(s => s.feito).length;
+      bx.replaceChildren();
+      bx.appendChild(el('div', 'jdui-title', props.title || aula.assunto || 'Aula'));
+      if (aula.objetivo) bx.appendChild(el('div', 'jdui-q', aula.objetivo));
+      bx.appendChild(el('div', 'jdui-count', 'Progresso: ' + feitas + '/' + secs.length
+        + (aula.nivel ? ' · ' + aula.nivel : '')));
+      bx.appendChild(bar(secs.length ? feitas / secs.length * 100 : 0));
+      const acc = el('div', 'jdui-acc');
+      secs.forEach((s, i) => {
+        const item = el('div', 'jdui-accitem');
+        const b = el('button', 'jdui-accbtn', (s.feito ? '✓ ' : '') + (i + 1) + '. ' + s.titulo);
+        b.setAttribute('aria-expanded', st.open[i] ? 'true' : 'false');
+        const body = el('div', 'jdui-accbody');
+        if (!st.open[i]) body.hidden = true;
+        else montasecao(body, s, i);
+        b.addEventListener('click', () => {
+          st.open[i] = !st.open[i]; save(st);
+          body.hidden = !st.open[i];
+          b.setAttribute('aria-expanded', st.open[i] ? 'true' : 'false');
+          if (st.open[i] && !body.hasChildNodes()) montasecao(body, s, i);
+        });
+        item.appendChild(b); item.appendChild(body); acc.appendChild(item);
+      });
+      bx.appendChild(acc);
+      if (aula.resumo) {
+        const r = el('div', 'jdui-q', 'Resumo: ' + aula.resumo);
+        bx.appendChild(r);
+      }
+      function montasecao(body, s, i) {
+        body.replaceChildren();
+        const host = el('div', 'jdui-mdhost');
+        host.innerHTML = ctx.markdown ? ctx.markdown(s.explicacao || '') : '';
+        body.appendChild(host);
+        if (s.exemplo) body.appendChild(el('div', 'jdui-q', 'Exemplo: ' + s.exemplo));
+        if (s.exercicio) body.appendChild(el('div', 'jdui-q', 'Exercício: ' + s.exercicio));
+        const nav = el('div', 'jdui-nav');
+        if (!s.feito) {
+          const ok = el('button', 'jdui-btn ghost', 'Marcar como concluída');
+          ok.addEventListener('click', async () => {
+            ok.disabled = true;
+            try {
+              await ctx.api('/api/learn/lessons/section', {
+                method: 'POST',
+                body: JSON.stringify({ lesson_id: props.lesson_id, ordem: i })
+              });
+              s.feito = true; save(st); paint();
+            } catch (_) { ok.disabled = false; }
+          });
+          nav.appendChild(ok);
+        }
+        if (ctx.onChat) {
+          const e = el('button', 'jdui-btn ghost', 'Explicar mais');
+          e.addEventListener('click', () => ctx.onChat(
+            'Explique mais sobre "' + s.titulo + '" da aula'
+            + (aula.assunto ? ' "' + aula.assunto + '"' : '') + '.'));
+          nav.appendChild(e);
+        }
+        body.appendChild(nav);
+      }
+      function paint() {
+        const f2 = secs.filter(x => x.feito).length;
+        bx.querySelector('.jdui-count').textContent = 'Progresso: ' + f2 + '/' + secs.length
+          + (aula.nivel ? ' · ' + aula.nivel : '');
+        const pg = bx.querySelector('.jdui-bar');
+        if (pg && pg.firstChild) pg.firstChild.style.width = (secs.length ? f2 / secs.length * 100 : 0) + '%';
+        acc.replaceChildren();
+        secs.forEach((s, i) => {
+          const item = el('div', 'jdui-accitem');
+          const b = el('button', 'jdui-accbtn', (s.feito ? '✓ ' : '') + (i + 1) + '. ' + s.titulo);
+          b.setAttribute('aria-expanded', st.open[i] ? 'true' : 'false');
+          const body = el('div', 'jdui-accbody');
+          if (!st.open[i]) body.hidden = true;
+          else montasecao(body, s, i);
+          b.addEventListener('click', () => {
+            st.open[i] = !st.open[i]; save(st);
+            body.hidden = !st.open[i];
+            b.setAttribute('aria-expanded', st.open[i] ? 'true' : 'false');
+            if (st.open[i] && !body.hasChildNodes()) montasecao(body, s, i);
+          });
+          item.appendChild(b); item.appendChild(body); acc.appendChild(item);
+        });
+      }
     }
   };
 

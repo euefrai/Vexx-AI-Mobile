@@ -2,11 +2,17 @@
 
 Unidade usa um servidor HTTP OpenAI-compatible falso (stdlib). Integração usa
 processos reais: uvicorn (server.py) + pc_agent.py de verdade, com o falso só
-na fronteira Hermes. Inferência no proxy real foi validada manualmente
-(laguna-s-2.1:free respondeu 'OK_JULIA' + SSE) para não gastar quota em testes.
+na fronteira Hermes (marcador `e2e_real`; pula sem uvicorn; readiness com
+polling e log dos filhos em falha).
+Status Hermes real em 15/10/2026: proxy em 127.0.0.1:8645 lista modelos
+(`/v1/models` OK), mas a inferência falhou — `laguna-s-2.1:free` devolveu
+resposta vazia e outros slugs deram "modelo não encontrado no proxy".
+Inferência real: BLOQUEADA no provedor; sem quota gasta em testes.
 """
+import http.cookiejar
 import json
 import os
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -16,6 +22,8 @@ import time
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from argon2 import PasswordHasher
@@ -279,7 +287,35 @@ def test_stream_delta_roteado_para_fila():
 
 
 # ── Integração: processos reais (relay + agente + Hermes falso) ────────
+def _aguardar_servico(url, cond, timeout, log_path, nome):
+    """Polling de readiness (nunca sleep fixo): sobe quando pronto ou falha
+    mostrando a causa + cauda do log do filho (antes era URLError opaco)."""
+    inicio = time.monotonic()
+    ultimo = None
+    while time.monotonic() - inicio < timeout:
+        try:
+            with urllib.request.urlopen(url, timeout=3) as r:
+                if cond(json.loads(r.read().decode() or "{}")):
+                    return
+                ultimo = "resposta sem pronto"
+        except Exception as exc:
+            ultimo = exc
+        time.sleep(0.5)
+    cauda = ""
+    try:
+        cauda = Path(log_path).read_text(encoding="utf-8", errors="replace")[-3000:]
+    except OSError:
+        pass
+    raise AssertionError(f"{nome} não ficou pronto em {url} ({ultimo}); log:\n{cauda}")
+
+
+@pytest.mark.e2e_real
 def test_e2e_ai_completo_com_processos_reais():
+    if shutil.which(sys.executable) is None:
+        pytest.skip("interpretador indisponível")
+    import importlib.util
+    if importlib.util.find_spec("uvicorn") is None:
+        pytest.skip("uvicorn ausente: e2e exige relay real")
     fake = sobe_fake()
     base = f"http://127.0.0.1:{fake.server_port}/v1"
     with tempfile.TemporaryDirectory() as tmp:
@@ -293,17 +329,21 @@ def test_e2e_ai_completo_com_processos_reais():
         env["HERMES_PROXY_URL"] = base
         env["JULIA_AI_MODEL"] = "fake-model"
         raiz = str(Path(__file__).resolve().parents[1])
+        fsrv = open(Path(tmp) / "relay.log", "w", encoding="utf-8", errors="replace")
         srv = subprocess.Popen([sys.executable, "-m", "uvicorn", "server:app",
                                 "--host", "127.0.0.1", "--port", "8941"],
-                               cwd=raiz, env=env, stdout=subprocess.DEVNULL,
+                               cwd=raiz, env=env, stdout=fsrv,
                                stderr=subprocess.STDOUT)
         try:
-            time.sleep(6)
+            _aguardar_servico("http://127.0.0.1:8941/api/diag", lambda c: True,
+                              30.0, Path(tmp) / "relay.log", "relay")
+            fagt = open(Path(tmp) / "agent.log", "w", encoding="utf-8", errors="replace")
             agt = subprocess.Popen([sys.executable, "pc_agent.py"], cwd=raiz, env=env,
-                                   stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                                   stdout=fagt, stderr=subprocess.STDOUT)
             try:
-                time.sleep(4)
-                import http.cookiejar
+                _aguardar_servico("http://127.0.0.1:8941/api/diag",
+                                  lambda c: c.get("pc_online") is True,
+                                  30.0, Path(tmp) / "agent.log", "agente")
                 cj = http.cookiejar.CookieJar()
                 op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 
@@ -358,8 +398,10 @@ def test_e2e_ai_completo_com_processos_reais():
             finally:
                 agt.terminate()
                 agt.wait(timeout=15)
+                fagt.close()
         finally:
             srv.terminate()
             srv.wait(timeout=15)
+            fsrv.close()
     fake.shutdown()
     fake.server_close()

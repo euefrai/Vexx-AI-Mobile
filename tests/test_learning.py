@@ -302,3 +302,47 @@ def test_desempenho_real_entra_no_prompt(tmp_path):
     msgs3, _ = pc_agent.ai_montar_mensagens(db, 'conv', cfg, 'Em que assuntos estou errando mais?', 'u-y')
     assert 'DESEMPENHO REAL' not in msgs3[0]['content']  # outro dono: nada vaza
     db.close()
+
+
+def test_aula_canonica_crud_e_progresso(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnaula.sqlite3')
+    base = {"assunto": "Orientação a objetos", "objetivo": "Criar classes", "nivel": "basico",
+            "secoes": [
+                {"titulo": "Classes", "explicacao": "Uma classe é o molde de objetos em Python, com atributos e métodos.",
+                 "exemplo": "class Cachorro: pass", "exercicio": "Crie a classe Gato."},
+                {"titulo": "Objetos", "explicacao": "Objetos são instâncias criadas a partir da classe definida antes.",
+                 "exemplo": "rex = Cachorro()", "exercicio": "Instancie dois objetos."}],
+            "resumo": "Classe molda, objeto instancia."}
+    a = learning.criar_aula(db, 'u-x', dict(base), lesson_id='aula-1')
+    assert a == {"id": "aula-1", "secoes": 2}
+    a2 = learning.criar_aula(db, 'u-x', dict(base), lesson_id='aula-1')
+    assert a2["id"] == "aula-1"  # idempotente
+    assert db.execute("SELECT COUNT(*) FROM lesson_sections WHERE lesson_id='aula-1'").fetchone()[0] == 2
+    full = learning.obter_aula(db, 'u-x', 'aula-1')
+    assert full["estado"] == "criada" and full["origem"] == "ia" and full["versao"] == 1
+    assert full["progresso"] == {"feitas": 0, "total": 2, "taxa": 0.0}
+    assert learning.listar_aulas(db, 'u-x')[0]["id"] == "aula-1"
+    assert learning.listar_aulas(db, 'u-y') == []
+    p = learning.concluir_secao(db, 'u-x', 'aula-1', 0)
+    assert p == {"estado": "em_andamento", "progresso": {"feitas": 1, "total": 2, "taxa": 0.5}}
+    p = learning.concluir_secao(db, 'u-x', 'aula-1', 1)
+    assert p["estado"] == "concluida"
+    try:
+        learning.obter_aula(db, 'u-y', 'aula-1')
+        raise AssertionError("outro dono não lê aula")
+    except learning.LearnErro as exc:
+        assert exc.codigo == "ausente"
+    for ruim in ({"assunto": "x", "secoes": []},
+                 {"assunto": "Python", "secoes": [{"titulo": "T"}]},
+                 {"assunto": "Python", "nivel": "mestre",
+                  "secoes": [{"titulo": "T", "explicacao": "explicação longa o suficiente aqui"}]}):
+        try:
+            learning.validar_aula(ruim)
+            raise AssertionError("aula inválida deveria falhar")
+        except learning.LearnErro:
+            pass
+    assert pc_agent.intencao_aula("me ensina orientação a objetos em Python")
+    assert pc_agent.intencao_aula("cria uma aula sobre fotossíntese")
+    assert not pc_agent.intencao_aula("cria uma prova de matemática")
+    assert not pc_agent.intencao_aula("que horas são?")
+    db.close()

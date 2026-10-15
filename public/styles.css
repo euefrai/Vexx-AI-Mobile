@@ -1621,3 +1621,23 @@ table.jdui-table td input{width:100%;min-width:90px;background:var(--bg);border:
     transition-duration:.001ms!important
   }
 }
+
+/* V4.3 Advanced JDUI: gráficos, dashboards, comparações (dark roxo, discreto) */
+.jdui-chart{overflow-x:auto;margin:6px 0}
+.jdui-chart svg{width:100%;min-width:260px;height:auto;display:block}
+.jdui-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.jdui-legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.jdui-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.jdui-source{font-size:10.5px;color:var(--muted);margin-top:6px}
+.jdui-dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:360px){.jdui-dashgrid{grid-template-columns:1fr}}
+.jdui-metric{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.025)}
+.jdui-metric strong{display:block;font-size:16px;letter-spacing:-.01em}
+.jdui-metric span{font-size:11px;color:var(--muted)}
+.jdui-metric small{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
+.jdui-cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0}
+.jdui-cmp th,.jdui-cmp td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.jdui-cmp th{background:var(--bg-elev);color:var(--purple)}
+.jdui-cmp td.win{background:rgba(16,185,129,.08)}
+.jdui-accbody details{margin:4px 0}
+.jdui-field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);margin-top:6px}

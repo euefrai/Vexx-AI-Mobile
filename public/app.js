@@ -61,6 +61,7 @@ function navigate(tab) {
   if (tab === 'activity') renderTimeline();
   if (tab === 'estudos') renderEstudos();
   if (tab === 'settings') { loadMemories(); paintSavedItems(); }
+  if (tab === 'chat' || tab === 'estudos') learnSyncOutbox();
 }
 navItems.forEach(n => n.addEventListener('click', () => {
   navigate(n.dataset.tab);
@@ -118,6 +119,7 @@ function jduiCtx(row) {
   return {
     messageId: row.id,
     api: (endpoint, options) => api(endpoint, options),
+    queueLearn: (endpoint, body) => queueLearn(endpoint, body),
     download: (name, mime, text) => downloadFile(name, mime, text),
     online: () => authenticated && pcOnline && navigator.onLine,
     markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
@@ -577,7 +579,24 @@ function appendMessage(row) {
   }
   const jslots = takeJduiSlots();
   if (jslots.length && typeof JDUI !== 'undefined') {
-    try { JDUI.mount(bubble, jslots, jduiCtx(row)); } catch (_) { /* fallback: só texto */ }
+    try {
+      // V4.3 §12: patch in-place — blocos com update_of remontam a bolha alvo
+      // com o ctx da mensagem ORIGINAL (estado preservado pelas mesmas chaves).
+      const resto = [];
+      jslots.forEach(slot => {
+        const alvo = slot && slot.update_of;
+        const elAlvo = (typeof alvo === 'string' && alvo)
+          ? conversation.querySelector('[data-mid="' + alvo + '"] .bubble') : null;
+        if (elAlvo) {
+          elAlvo.querySelectorAll('.jdui-slot').forEach(s => s.remove());
+          allMessages().then(rows => {
+            const alvoRow = rows.find(m => m.id === alvo);
+            if (alvoRow) { try { JDUI.mount(elAlvo, [slot], jduiCtx(alvoRow)); } catch (_) {} }
+          });
+        } else resto.push(slot);
+      });
+      if (resto.length) JDUI.mount(bubble, resto, jduiCtx(row));
+    } catch (_) { /* fallback: só texto */ }
   }
   const meta = document.createElement('div'); meta.className = 'msg-meta';
   const tm = document.createElement('span'); tm.className = 'msg-time'; tm.textContent = fmtTime(row.created_at);
@@ -767,6 +786,63 @@ async function renderTimeline() {
   });
 }
 
+/* ----- Fila offline educacional (V4.2.1 §4): outbox idempotente no SAVED ----- */
+function learnOutboxKey(row) { return row && row.kind === 'learn-outbox'; }
+async function learnOutbox() {
+  if (!db) return [];
+  const rows = await reqPromise(db.transaction(SAVED, 'readonly').objectStore(SAVED).getAll());
+  return rows.filter(r => learnOutboxKey(r) && (r.owner || 'local') === currentUid)
+    .sort((a, b) => (a.ts || '').localeCompare(b.ts || ''));
+}
+async function learnEnqueue(endpoint, body) {
+  if (!db) throw Error('Armazenamento local indisponível');
+  const row = { id: 'outbox-' + newId(), kind: 'learn-outbox', endpoint, body,
+    ts: new Date().toISOString(), owner: currentUid, tries: 0 };
+  const tx = db.transaction(SAVED, 'readwrite');
+  const done = txDone(tx);
+  tx.objectStore(SAVED).put(row);
+  await done;
+  return row;
+}
+async function learnOutboxDrop(id) {
+  if (!db) return;
+  const tx = db.transaction(SAVED, 'readwrite');
+  const done = txDone(tx);
+  tx.objectStore(SAVED).delete(id);
+  await done;
+}
+async function learnSyncOutbox() {
+  // Servidor corrige e valida; cliente nunca confia em pontuação local.
+  // Conflito (tentativa finalizada/ausente → 404/409): descarta com registro.
+  const pend = await learnOutbox();
+  if (!pend.length || !navigator.onLine || !authenticated || !pcOnline) return { sent: 0, kept: pend.length };
+  let sent = 0;
+  for (const item of pend) {
+    try {
+      await api(item.endpoint, { method: 'POST', body: JSON.stringify(item.body) });
+      await learnOutboxDrop(item.id);
+      sent++;
+    } catch (e) {
+      if (e && (e.status === 404 || e.status === 409 || e.status === 422)) {
+        await learnOutboxDrop(item.id); // conflito: não reenvia
+      } else break; // rede/PC: mantém o resto para a próxima
+    }
+  }
+  return { sent, kept: (await learnOutbox()).length };
+}
+async function queueLearn(endpoint, body) {
+  // Tenta online; sem conexão, enfileira (resposta com ts do aparelho).
+  try {
+    return await api(endpoint, { method: 'POST', body: JSON.stringify(body) });
+  } catch (e) {
+    if (!navigator.onLine || !pcOnline || (e && e.status >= 500)) {
+      await learnEnqueue(endpoint, body);
+      learnSyncOutbox();
+      return { queued: true };
+    }
+    throw e;
+  }
+}
 /* ----- Meus Estudos (V4.2): progresso, planos e revisoes, com cache offline ----- */
 function learnKey(name) { return 'learn:' + currentUid + ':' + name; }
 async function learnCachePut(name, data) {
@@ -858,7 +934,7 @@ async function renderEstudos() {
     estudosItem('i-chat', e.enunciado || '',
       'Sua resposta: ' + (e.sua_resposta || '—'), e.assunto || null)));
 }
-$('estudosRefresh').addEventListener('click', () => renderEstudos());
+$('estudosRefresh').addEventListener('click', () => { renderEstudos(); learnSyncOutbox(); });
 
 /* ----- Conexão / API ----- */
 function memoryOn() { return $('memoryToggle').checked; }

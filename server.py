@@ -1447,6 +1447,78 @@ async def learn_mistakes(request: Request, limite: int = 20):
     return {"erradas": result.get("erradas", [])}
 
 
+class LearnLessonIn(BaseModel):
+    aula: dict
+    origem: str = Field(default="ia", max_length=20)
+    id: str = Field(default="", max_length=64, pattern=r"^[a-zA-Z0-9_-]*$")
+
+
+class LearnLessonSectionIn(BaseModel):
+    lesson_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    ordem: int = Field(ge=0, le=50)
+
+
+@app.post("/api/learn/lessons")
+async def learn_lesson_create(request: Request, body: LearnLessonIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_lesson_create", "owner": dono,
+                                   "aula": body.aula, "origem": body.origem,
+                                   "id": body.id}, timeout=20.0)
+    if result.get("type") != "learn_lesson":
+        raise _learn_erro(result)
+    return {"id": result["id"], "secoes": result.get("secoes", 0)}
+
+
+@app.get("/api/learn/lessons")
+async def learn_lessons(request: Request):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_lessons", "owner": dono}, timeout=20.0)
+    if result.get("type") != "learn_lessons":
+        raise _learn_erro(result)
+    return {"aulas": result.get("aulas", [])}
+
+
+@app.get("/api/learn/lessons/{lid}")
+async def learn_lesson_get(request: Request, lid: str):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(lid) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "learn_lesson_get", "owner": dono, "id": lid},
+                                  timeout=20.0)
+    if result.get("type") != "learn_lesson_full":
+        raise _learn_erro(result)
+    result.pop("request_id", None)
+    result.pop("type", None)
+    return result
+
+
+@app.post("/api/learn/lessons/section")
+async def learn_lesson_section(request: Request, body: LearnLessonSectionIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_lesson_section", "owner": dono,
+                                   "lesson_id": body.lesson_id, "ordem": body.ordem},
+                                  timeout=20.0)
+    if result.get("type") != "learn_lesson_progress":
+        raise _learn_erro(result)
+    return {"estado": result.get("estado", ""), "progresso": result.get("progresso", {})}
+
+
+@app.get("/api/learn/history")
+async def learn_history(request: Request, limite: int = 50):
+    """Tentativas finalizadas do dono (séries factuais p/ gráficos de evolução)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_history", "owner": dono,
+                                   "limite": max(1, min(limite, 200))}, timeout=20.0)
+    if result.get("type") != "learn_history":
+        raise _learn_erro(result)
+    return {"tentativas": result.get("tentativas", [])}
+
+
 @app.get("/api/ai/models")
 async def ai_models(request: Request):
     verify_session(request)
