@@ -19,6 +19,7 @@ import jdui
 import julia_auth as JULIA_auth
 import learning
 import remoto
+import research
 from websockets.sync.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
@@ -178,6 +179,7 @@ def open_db(path: Path):
     JULIA_auth.criar_tabelas(db)
     JULIA_auth.migrar_legado(db)
     learning.criar_tabelas(db)
+    research.criar_tabelas(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, value TEXT NOT NULL,
         source TEXT NOT NULL DEFAULT 'chat', created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
@@ -243,12 +245,40 @@ def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
         "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
+        "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
         "system": os.environ.get("JULIA_SYSTEM_PROMPT", SYSTEM_PADRAO)[:2000],
         "context": min(max(int(os.environ.get("JULIA_AI_CONTEXT", "12")), 1), 50),
         "max_tokens": min(max(int(os.environ.get("JULIA_AI_MAX_TOKENS", "1500")), 1), 8000),
         "memoria_global": os.environ.get("JULIA_SHARED_MEMORY", "1") == "1",
         "pesquisa_web": os.environ.get("JULIA_WEB_SEARCH", "1") == "1",
     }
+
+
+def _lista_fallbacks(valor: str) -> list:
+    """Modelos alternativos explícitos (máx 4; slugs validados, sem varredura)."""
+    out = []
+    for parte in (valor or "").split(","):
+        slug = parte.strip()[:120]
+        if slug and re.fullmatch(r"[A-Za-z0-9_~.][A-Za-z0-9_~.:/-]*", slug) and slug not in out:
+            out.append(slug)
+    return out[:4]
+
+
+def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
+    """[preferido, *fallbacks] sem duplicar (lista pequena e explícita)."""
+    fila = [preferido or cfg.get("model", "")]
+    for fb in cfg.get("fallbacks", []) or []:
+        if fb and fb not in fila:
+            fila.append(fb)
+    return [m for m in fila if m][:5]
+
+
+def gerar_texto(cfg: dict, messages: list, preferido: str = "",
+                max_tokens: int = 0, timeout: float = 60.0) -> dict:
+    """Chamada LLM com fallback (leitura sem efeitos; mesma reply_id fora daqui)."""
+    return hermes_bridge.tentar_modelos(
+        cfg["proxy"], modelos_tentativa(cfg, preferido), messages,
+        timeout_por_tentativa=timeout, max_tokens=max_tokens or cfg["max_tokens"])
 
 
 # ── Memória compartilhada entre sessões ──────────────────────────────
@@ -997,8 +1027,7 @@ def aprender_com_conversa(db_path: Path, cfg: dict, texto_usuario: str, texto_re
                   "[{\"key\": \"curta_em_snake\", \"value\": \"...\", \"tipo\": \"semantica|temporal|episodica|trabalho\", "
                   "\"assunto\": \"...\", \"sensivel\": false, \"confianca\": 0.0-1.0}] ou [].\n\n"
                   f"USUÁRIO: {(texto_usuario or '')[:1500]}\nASSISTENTE: {(texto_resposta or '')[:1500]}")
-        res = hermes_bridge.chat_complete(
-            cfg["proxy"], cfg["model"],
+        res = gerar_texto(cfg,
             [{"role": "system", "content": "Você extrai fatos. Responda só JSON válido."},
              {"role": "user", "content": prompt}], max_tokens=300)
         try:
@@ -1040,8 +1069,7 @@ def _consolidar_memorias(db, cfg: dict, owner=DONO_PADRAO) -> None:
         rows = db.execute("SELECT key, value FROM memory_facts WHERE owner_id=? "
                           "ORDER BY created_at DESC LIMIT 60", (owner,)).fetchall()
         bloco = "\n".join(f"- {k}: {v[:200]}" for k, v in rows)
-        res = hermes_bridge.chat_complete(
-            cfg["proxy"], cfg["model"],
+        res = gerar_texto(cfg,
             [{"role": "system", "content": "Você consolida memórias. Responda só JSON válido."},
              {"role": "user", "content": "Junte estes fatos, removendo duplicados e o que for passageiro. "
               "Responda SÓ JSON: [{\"key\": \"...\", \"value\": \"...\"}] (máx 25 itens).\n\n" + bloco}],
@@ -1111,6 +1139,44 @@ def intencao_pesquisa(texto: str) -> bool:
     return any(k in t for k in TERMOS_PESQUISA)
 
 
+APROFUNDADA_TRIGGERS = ("a fundo", "aprofundada", "aprofundado", "relatório completo",
+                        "relatorio completo", "dossiê", "dossie", "verifique se",
+                        "é verdade", "e verdade", "checar fatos", "comparar fontes")
+
+
+def intencao_pesquisa_aprofundada(texto: str) -> bool:
+    t = (texto or "").lower()
+    return any(k in t for k in APROFUNDADA_TRIGGERS)
+
+
+_MEMORIA_GATILHOS = ("aquela prova", "aquele trabalho", "aquela materia", "aquela matéria",
+                     "te falei", "como te falei", "minha prova", "meu trabalho", "minha meta")
+
+
+def termos_memoria_pesquisa(db, owner: str, texto: str) -> str:
+    """Só TERMOS de tópico da memória (nunca valores/dados pessoais).
+
+    Ex.: 'pesquisa para aquela prova' + memória 'Prova de biologia dia 20'
+    → 'biologia'. A consulta externa nunca recebe a memória inteira.
+    """
+    t = (texto or "").lower()
+    if not any(g in t for g in _MEMORIA_GATILHOS):
+        return ""
+    try:
+        rel = memorias_relevantes(db, texto, owner=owner)
+    except Exception:
+        return ""
+    stop = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
+            "este", "qual", "quais", "onde", "quando", "porque", "pode", "ser",
+            "são", "minha", "meu", "te", "foi", "tem", "dia", "prova", "trabalho"}
+    toks = []
+    for f in rel[:4]:
+        for w in re.findall(r"[a-zà-ú]{5,}", str(f.get("value", "")).lower()):
+            if w not in stop and w not in toks:
+                toks.append(w)
+    return " ".join(toks[:8])
+
+
 def intencao_imagem(texto: str) -> str:
     """Retorna o termo da imagem pedida ou ''."""
     import re
@@ -1124,74 +1190,6 @@ def intencao_imagem(texto: str) -> str:
     if re.search(r"(?i)\b(imagem|foto|figura)\b", t):
         return "paisagem"
     return ""
-
-
-_CACHE_PESQUISA: dict = {}
-
-
-def _baixar_resultados(base: str, q: str, timeout: float) -> str:
-    import urllib.parse
-    import urllib.request
-    url = base + urllib.parse.quote(q)
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Vexx AI)"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "ignore")
-
-
-def _extrair_resultados(pagina: str, max_resultados: int) -> list:
-    import urllib.parse
-    import html as ihtml
-    resultados = []
-    padroes = [
-        r'class="result__a"[^>]*href="([^"]+)"[^>]*>(.*?)</a>.*?(?:class="result__snippet"[^>]*>(.*?)</(?:a|div|td))?',
-        r'class="result-link"[^>]*href="([^"]+)"[^>]*>(.*?)</a>',
-    ]
-    for rx in padroes:
-        for m in re.finditer(rx, pagina, re.S):
-            try:
-                link, titulo = m.group(1), m.group(2)
-                trecho = m.group(3) if m.lastindex and m.lastindex >= 3 and m.group(3) else ""
-                titulo = ihtml.unescape(re.sub(r"<.*?>", "", titulo)).strip()[:160]
-                trecho = ihtml.unescape(re.sub(r"<.*?>", "", trecho or "")).strip()[:280]
-                if link.startswith("//"):
-                    link = "https:" + link
-                if link.startswith("/") and "uddg=" in link:
-                    link = urllib.parse.unquote(link.split("uddg=", 1)[1].split("&", 1)[0])
-                if link.startswith("http") and titulo and all(f["url"] != link[:500] for f in resultados):
-                    resultados.append({"titulo": titulo, "url": link[:500], "trecho": trecho})
-                if len(resultados) >= max_resultados:
-                    return resultados
-            except Exception:
-                continue
-        if resultados:
-            break
-    return resultados
-
-
-def pesquisa_web(consulta: str, max_resultados: int = 6, timeout: float = 8.0) -> list:
-    """Pesquisa em tempo real (DuckDuckGo via stdlib) com cache de 10 min.
-
-    Tenta o endpoint HTML e cai para o lite. Falha silenciosa → lista vazia
-    (offline-first: o chat nunca trava por causa da pesquisa).
-    """
-    q = (consulta or "").strip()[:200]
-    if not q:
-        return []
-    chave = q.lower()
-    agora = time.monotonic()
-    if chave in _CACHE_PESQUISA and agora - _CACHE_PESQUISA[chave][0] < 600:
-        return _CACHE_PESQUISA[chave][1]
-    for base in ("https://html.duckduckgo.com/html/?q=",
-                 "https://lite.duckduckgo.com/lite/?q="):
-        try:
-            pagina = _baixar_resultados(base, q, timeout)
-            resultados = _extrair_resultados(pagina, max_resultados)
-            if resultados:
-                _CACHE_PESQUISA[chave] = (agora, resultados)
-                return resultados
-        except Exception as exc:
-            log.warning("pesquisa %s falhou (%s)", base.split("//")[1].split("/")[0], type(exc).__name__)
-    return []
 
 
 class JULIAPresentationEngine:
@@ -1489,8 +1487,7 @@ def _sintetizar_jdui_llm(cfg: dict, componente: str, texto_usuario: str, texto_r
     if not prompt or len(texto_resposta or "") < 50:
         return ""
     try:
-        res = hermes_bridge.chat_complete(
-            cfg["proxy"], cfg["model"],
+        res = gerar_texto(cfg,
             [{"role": "system", "content": "Você converte conteúdo para JSON. Responda SÓ JSON válido."},
              {"role": "user", "content": prompt + "\n\nPEDIDO: " + (texto_usuario or "")[:400]
               + "\n\nCONTEÚDO:\n" + (texto_resposta or "")[:6000]}],
@@ -1645,15 +1642,51 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                               "para exibir a imagem no chat.")
     if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario):
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
-        fontes = pesquisa_web(texto_usuario)
-        extras["fontes"] = fontes
-        if fontes:
-            bloco = "\n".join(f"- {f['titulo']}: {f['trecho']} ({f['url']})" for f in fontes)
-            partes_sistema.append(f"RESULTADOS DA PESQUISA WEB EM TEMPO REAL (hoje é {hoje}; "
-                                  "cite ao final em 'Fontes:' com os links):\n" + bloco)
-        else:
-            partes_sistema.append(f"O usuário pediu pesquisa em tempo real (hoje é {hoje}), "
-                                  "mas a busca falhou. Avise a data e responda com seu conhecimento, sem inventar links.")
+        consulta = (texto_usuario or "")[:200]
+        termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
+        if termos_mem:
+            consulta = f"{consulta} {termos_mem}"[:200]
+            extras["memoria_usada"] = True
+        extras["fontes"] = []
+        tbaixo = (texto_usuario or "").lower()
+        run_reuso = None
+        if any(k in tbaixo for k in ("essas fontes", "nessas fontes", "dessa pesquisa",
+                                     "desta pesquisa", "nessa pesquisa", "fontes acima")):
+            run_reuso = research.ultima_run(db, owner, conversation_id)
+        try:
+            if run_reuso and run_reuso.get("fontes"):
+                extras["fontes"] = run_reuso["fontes"]
+                extras["research_run"] = run_reuso["id"]
+                partes_sistema.append(
+                    research.bloco_grounding(run_reuso["fontes"], hoje)
+                    + " (pesquisa anterior desta conversa; não busque de novo)")
+            elif intencao_pesquisa_aprofundada(texto_usuario):
+                run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
+                fontes = run.get("fontes", [])
+                extras["fontes"] = fontes
+                extras["research_run"] = run.get("run_id", "")
+                if fontes:
+                    partes_sistema.append(
+                        research.bloco_grounding(fontes, hoje)
+                        + f"\nPassos reais: {'; '.join(run.get('etapas', [])[:6])}")
+                    for d in run.get("divergencias", [])[:3]:
+                        partes_sistema.append(
+                            f"DIVERGÊNCIA ENTRE {d['entre'][0]} e {d['entre'][1]}: {d['motivo']}.")
+                else:
+                    partes_sistema.append(research.bloco_falha(hoje))
+            else:
+                rap = research.pesquisa_rapida(db, owner, consulta)
+                fontes = rap.get("fontes", [])
+                extras["fontes"] = fontes
+                if fontes:
+                    partes_sistema.append(
+                        research.bloco_grounding(fontes, hoje)
+                        + (" (cache local)" if rap.get("de_cache") else ""))
+                else:
+                    partes_sistema.append(research.bloco_falha(hoje))
+        except Exception as exc:
+            log.warning("research falhou (%s)", type(exc).__name__)
+            partes_sistema.append(research.bloco_falha(hoje))
     messages = [{"role": "system", "content": "\n\n".join(partes_sistema)}] + historico
     return messages, extras
 
@@ -1664,7 +1697,9 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
         slug = urllib.parse.quote(termo_img.strip() or "paisagem")
         texto = (texto or "") + f"\n\n![{termo_img}](https://loremflickr.com/800/500/{slug})"
     if fontes and "Fontes:" not in (texto or ""):
-        linhas = "\n".join(f"- [{f['titulo']}]({f['url']})" for f in fontes)
+        linhas = "\n".join(
+            f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"
+            for f in fontes)
         texto = (texto or "") + "\n\nFontes:\n" + linhas
     return texto
 
@@ -1913,10 +1948,11 @@ def ai_continuar(db, payload: dict, cfg: dict) -> dict:
                    {"role": "user", "content": "Continue exatamente de onde parou, sem repetir o que já disse."}])
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
     try:
-        res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages, max_tokens=cfg["max_tokens"])
+        res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
+    modelo = res.get("model_usado", modelo)
     trecho = (res.get("texto") or "").strip()
     if not trecho:
         return {"error": "Modelo não continuou.", "codigo": "vazia"}
@@ -1947,8 +1983,7 @@ def sintetizar_prova(db, cfg: dict, owner: str, texto_usuario: str) -> str:
               "discursiva: gabarito com critérios de correção (30+ chars). "
               "Assunto: %s" % (n, (texto_usuario or "")[:300]))
     try:
-        res = hermes_bridge.chat_complete(
-            cfg["proxy"], cfg["model"],
+        res = gerar_texto(cfg,
             [{"role": "system", "content": "Você gera avaliações. Responda SÓ JSON válido."},
              {"role": "user", "content": prompt}], max_tokens=2000)
         corpo = (res.get("texto") or "").strip()
@@ -2043,8 +2078,7 @@ def sintetizar_aula(db, cfg: dict, owner: str, texto_usuario: str) -> str:
               "\"resumo\": \"...\"}. "
               "Assunto pedido: %s" % ((texto_usuario or "")[:300]))
     try:
-        res = hermes_bridge.chat_complete(
-            cfg["proxy"], cfg["model"],
+        res = gerar_texto(cfg,
             [{"role": "system", "content": "Você cria aulas. Responda SÓ JSON válido."},
              {"role": "user", "content": prompt}], max_tokens=3000)
         corpo = (res.get("texto") or "").strip()
@@ -2104,6 +2138,85 @@ def sintetizar_grafico_evolucao(db, owner: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
+TRANSFORM_VERBOS = ("transforma", "transforme", "converter em", "converta em",
+                    "mostre em", "mostra em", "em forma de", "visualize")
+TRANSFORM_FORMATOS = (("gráfico", "grafico"), ("tabela",), ("dashboard", "painel"),
+                      ("cards", "cartões", "cartoes"))
+
+
+def intencao_transformar_pesquisa(texto: str) -> str:
+    """'transforma esses dados em gráfico' → formato, ou ''."""
+    t = (texto or "").lower()
+    if not any(v in t for v in TRANSFORM_VERBOS):
+        return ""
+    for grupo in TRANSFORM_FORMATOS:
+        if any(k in t for k in grupo):
+            return grupo[0]
+    return ""
+
+
+def fence_de_pesquisa(db, owner: str, conv: str, texto_usuario: str) -> str:
+    """Transforma a ÚLTIMA pesquisa da conversa em interface (dados reais).
+
+    Sem run/fontes: texto honesto (pesquise antes). Sem números para gráfico:
+    texto honesto (não inventa valores).
+    """
+    run = research.ultima_run(db, owner, conv)
+    if not run or not run.get("fontes"):
+        return ("\n\nAinda não há pesquisa nesta conversa para transformar. "
+                "Peça primeiro a pesquisa (ex.: 'pesquise sobre X') — aí eu monto o visual. 🔍")
+    formato = intencao_transformar_pesquisa(texto_usuario)
+    fontes = run["fontes"]
+    dominios = sorted({f.get("dominio", "") for f in fontes if f.get("dominio")})
+    origem = "pesquisa: " + (", ".join(dominios[:3]) or "web")
+    blocos = [{"type": "text", "content": "Visual montado com os dados pesquisados. 📊"}]
+    if formato == "gráfico":
+        fatos = research.extrair_fatos_numericos(fontes, 10)
+        if len(fatos) < 2:
+            return ("\n\nOs trechos pesquisados não trazem números suficientes para um gráfico "
+                    "confiável — e eu não vou inventar valores. Quer uma tabela com as fontes? 📊")
+        unidade = fatos[0]["unidade"]
+        mesmos = [f for f in fatos if f["unidade"] == unidade][:10] or fatos[:10]
+        blocos.append({"type": "ui", "component": "chart",
+                       "props": {"type": "bar", "title": "Dados da pesquisa",
+                                 "labels": [f["rotulo"][-24:] or "item" for f in mesmos],
+                                 "series": [{"label": unidade or "valores",
+                                             "values": [f["valor"] for f in mesmos]}],
+                                 "source": origem}})
+    elif formato == "tabela":
+        linhas = [[f.get("titulo", "")[:60], (f.get("trecho", "") or "")[:120]] for f in fontes[:10]]
+        blocos.append({"type": "ui", "component": "table",
+                       "props": {"title": "Fontes pesquisadas",
+                                 "columns": ["Fonte", "Resumo"], "rows": linhas}})
+    elif formato == "dashboard":
+        fatos = research.extrair_fatos_numericos(fontes, 10)
+        dash = {"title": "Painel da pesquisa",
+                "metrics": [{"label": "Fontes", "value": str(len(fontes)),
+                             "hint": "; ".join(dominios[:3])},
+                            {"label": "Divergências", "value": str(len(run.get("divergencias", []))),
+                             "hint": "trechos em conflito"}],
+                "chart": None, "source": origem}
+        if len(fatos) >= 2:
+            dash["chart"] = {"type": "bar", "title": "Números citados",
+                             "labels": [f["rotulo"][-24:] or "item" for f in fatos[:8]],
+                             "series": [{"label": fatos[0]["unidade"] or "valores",
+                                         "values": [f["valor"] for f in fatos[:8]]}],
+                             "source": origem}
+        blocos.append({"type": "ui", "component": "dashboard", "props": dash})
+    else:  # cards
+        itens = [{"title": f.get("titulo", "")[:80], "desc": (f.get("trecho", "") or "")[:200],
+                  "badge": f.get("dominio", "")[:30],
+                  "action": {"chat": f"Detalhe a fonte {f.get('id', '')} sobre {run.get('consulta', '')[:60]}"}}
+                 for f in fontes[:8]]
+        blocos.append({"type": "ui", "component": "cards",
+                       "props": {"title": "Fontes pesquisadas", "items": itens}})
+    fence = {"version": jdui.VERSION, "blocks": blocos}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -2131,16 +2244,21 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         db, conv, cfg_eff, prep.get("user_text", ""), owner,
         prep.get("contexto_local"))
     try:
-        res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages,
-                                          max_tokens=cfg["max_tokens"])
+        res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
+    modelo = res.get("model_usado", modelo)
     texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
-    if not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
+    if not blocos_jdui and intencao_transformar_pesquisa(prep.get("user_text", "")):
+        fence = fence_de_pesquisa(db, owner, conv, prep.get("user_text", ""))
+        if fence:
+            texto += fence
+            log.info("transform de pesquisa sintetizado para %s", mid)
+    elif not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
         fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
         if fence:
             texto += fence
@@ -2253,9 +2371,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                     "seq": seq, "trecho": trecho})
 
         try:
-            res = hermes_bridge.chat_stream(cfg["proxy"], modelo, messages, emitir,
-                                            deve_parar=sessao.parar.is_set,
-                                            max_tokens=cfg["max_tokens"])
+            res = hermes_bridge.chat_stream_fb(
+                cfg["proxy"], modelos_tentativa(cfg, modelo), messages, emitir,
+                deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
+            modelo = res.get("model_usado", modelo)
         except hermes_bridge.BridgeErro as exc:
             ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
             try:
@@ -2277,7 +2396,12 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
-        if not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
+        if not blocos_jdui and intencao_transformar_pesquisa(prep.get("user_text", "")):
+            fence = fence_de_pesquisa(db, owner, conv, prep.get("user_text", ""))
+            if fence:
+                texto_final += fence
+                log.info("transform de pesquisa sintetizado no stream %s", mid)
+        elif not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
             fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
             if fence:
                 texto_final += fence

@@ -62,6 +62,12 @@ def _mapear_http(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
     if exc.code in (404, 410):
         return BridgeErro(f"Modelo '{model}' não encontrado no proxy. Liste /v1/models e troque.",
                           "modelo-nao-encontrado", detalhe)
+    if exc.code == 402:
+        return BridgeErro("Cota da assinatura esgotada (402). Verifique 'hermes proxy status'.",
+                          "quota", detalhe)
+    if exc.code == 422:
+        return BridgeErro("Pedido rejeitado pelo provedor (422: parâmetros ou contexto).",
+                          "pedido", detalhe)
     if exc.code == 429:
         return BridgeErro("Provedor com limite excedido (429). Aguarde e tente de novo.",
                           "rate_limit", detalhe)
@@ -220,3 +226,140 @@ def chat_stream(base: str, model: str, messages: list, on_delta,
     return {"texto": texto[:MAX_TEXTO],
             "truncada": len(texto) > MAX_TEXTO,
             "latencia_s": round(time.monotonic() - inicio, 2)}
+
+
+# ── Fallback inteligente + circuit breaker (V4.3.1 FASE 3) ──────────
+# Lista PEQUENA e explícita (nunca varre centenas de modelos). Chamadas LLM
+# são só leitura: repetir em outro modelo não duplica ação externa.
+MAX_TENTATIVAS_MODELO = 5
+_CIRCUITO = {}  # base -> {"falhas": int, "aberto_ate": float}
+_CIRCUITO_FALHAS = 4
+_CIRCUITO_PAUSA = 120.0
+
+
+def _circuito_aberto(base: str) -> bool:
+    est = _CIRCUITO.get(base)
+    if not est:
+        return False
+    ate = est.get("aberto_ate", 0.0)
+    if not ate:
+        return False  # nunca abriu: mantém a contagem de falhas
+    if time.monotonic() >= ate:
+        _CIRCUITO.pop(base, None)
+        return False
+    return True
+
+
+def _circuito_registrar(base: str, ok: bool) -> None:
+    if ok:
+        _CIRCUITO.pop(base, None)
+        return
+    est = _CIRCUITO.get(base, {"falhas": 0, "aberto_ate": 0.0})
+    est["falhas"] += 1
+    if est["falhas"] >= _CIRCUITO_FALHAS:
+        est["aberto_ate"] = time.monotonic() + _CIRCUITO_PAUSA
+    _CIRCUITO[base] = est
+
+
+def tentar_modelos(base: str, modelos: list, messages: list,
+                   timeout_por_tentativa: float = 60.0,
+                   max_tokens: int = 2000) -> dict:
+    """Tenta modelos em ordem até a primeira resposta não vazia.
+
+    Para em `auth` (credencial vale para todos). Backoff 1s/2s/4s entre
+    tentativas (sem martelar). Contexto (messages) idêntico em todas.
+    """
+    fila = [m for m in (modelos or []) if isinstance(m, str) and m][:MAX_TENTATIVAS_MODELO]
+    if not fila:
+        raise BridgeErro("Nenhum modelo configurado.", "sem_modelo")
+    if _circuito_aberto(base):
+        raise BridgeErro("Provedor em pausa após falhas repetidas. Tente em 2 minutos.",
+                         "circuito_aberto")
+    tentativas = []
+    for i, modelo in enumerate(fila):
+        if i:
+            time.sleep(min(2 ** (i - 1), 4))
+        inicio = time.monotonic()
+        try:
+            res = chat_complete(base, modelo, messages,
+                                timeout=timeout_por_tentativa, max_tokens=max_tokens)
+            _circuito_registrar(base, True)
+            res["model_usado"] = modelo
+            res["tentativas"] = tentativas
+            return res
+        except BridgeErro as exc:
+            tentativas.append({"model": modelo, "codigo": exc.codigo,
+                               "latencia_s": round(time.monotonic() - inicio, 2)})
+            _circuito_registrar(base, False)
+            if exc.codigo == "auth":
+                raise BridgeErro(str(exc) + " (fallback interrompido: vale para todos).",
+                                 "auth", exc.detalhe) from None
+            if len(fila) == 1:
+                raise  # modelo único: erro original transparente (sem reembalar)
+            if i == len(fila) - 1:
+                raise BridgeErro(
+                    f"Nenhum modelo respondeu ({len(fila)} tentativas; "
+                    f"último: {exc.codigo}). " + _conselho_final(tentativas),
+                    "todos_falharam", exc.detalhe) from None
+    raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")
+
+
+def _conselho_final(tentativas: list) -> str:
+    codigos = {t.get("codigo") for t in tentativas}
+    if "quota" in codigos:
+        return "Verifique a cota em 'hermes proxy status'."
+    if "rate_limit" in codigos:
+        return "Aguarde 1–2 minutos antes de tentar."
+    if codigos <= {"modelo-nao-encontrado"}:
+        return "Liste /v1/models e ajuste JULIA_AI_MODEL/JULIA_AI_FALLBACKS."
+    if "vazia" in codigos:
+        return "O provedor respondeu vazio; tente outro modelo ou mais tarde."
+    return "Verifique 'hermes proxy status' e a rede."
+
+
+def chat_stream_fb(base: str, modelos: list, messages: list, on_delta,
+                   deve_parar=None, timeout: float = 180.0,
+                   max_tokens: int = 2000) -> dict:
+    """Stream com fallback SÓ antes do primeiro delta.
+
+    Depois do primeiro trecho, erro propaga (trocar de modelo no meio
+    duplicaria/embaralharia a resposta). Mesma reply_id em todas.
+    """
+    fila = [m for m in (modelos or []) if isinstance(m, str) and m][:MAX_TENTATIVAS_MODELO]
+    if not fila:
+        raise BridgeErro("Nenhum modelo configurado.", "sem_modelo")
+    if _circuito_aberto(base):
+        raise BridgeErro("Provedor em pausa após falhas repetidas. Tente em 2 minutos.",
+                         "circuito_aberto")
+    tentativas = []
+    for i, modelo in enumerate(fila):
+        if i:
+            time.sleep(min(2 ** (i - 1), 4))
+        inicio = time.monotonic()
+        n_deltas = [0]
+
+        def _emit(seq, trecho, _n=n_deltas):
+            _n[0] += 1
+            return on_delta(seq, trecho)
+
+        try:
+            res = chat_stream(base, modelo, messages, _emit, deve_parar,
+                              timeout, max_tokens)
+            _circuito_registrar(base, True)
+            res["model_usado"] = modelo
+            res["tentativas"] = tentativas
+            return res
+        except BridgeErro as exc:
+            tentativas.append({"model": modelo, "codigo": exc.codigo,
+                               "latencia_s": round(time.monotonic() - inicio, 2)})
+            _circuito_registrar(base, False)
+            if n_deltas[0] > 0 or exc.codigo == "auth":
+                raise  # meio do stream ou auth: sem troca silenciosa
+            if len(fila) == 1:
+                raise  # modelo único: erro original transparente
+            if i == len(fila) - 1:
+                raise BridgeErro(
+                    f"Nenhum modelo respondeu ({len(fila)} tentativas; "
+                    f"último: {exc.codigo}). " + _conselho_final(tentativas),
+                    "todos_falharam", exc.detalhe) from None
+    raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")

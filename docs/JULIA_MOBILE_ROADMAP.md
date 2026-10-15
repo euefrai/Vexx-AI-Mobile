@@ -27,9 +27,20 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Atualizar interface sem perder estado; `chart` SVG a partir de dados reais
   (nunca série inventada); dashboards; `since` incremental no ui-state.
 
-## V4.4 — PESQUISA E CONFIABILIDADE
-- Provedores intercambiáveis, extração de página, comparação de fontes,
-  citação discreta, "pesquisado agora" vs "conhecimento do modelo" explícito.
+## V4.4 — PESQUISA E CONFIABILIDADE ✅ (2026-10-16)
+- Inference reliability: códigos 402/422, `tentar_modelos` (preferencial +
+  fallbacks explícitos, backoff, para em auth, erro original com 1 modelo),
+  `chat_stream_fb` (troca só antes do 1º delta), circuit breaker por base,
+  `JULIA_AI_FALLBACKS`. E2E determinístico. Hermes real: inferência bloqueada
+  no provedor (ver JULIA_INFERENCE_RELIABILITY.md); quota zero em testes.
+- Research Engine (`research.py`): buscar DDG (html+lite, parsers 2026) →
+  recuperar páginas → extrair → divergências → runs persistidos; SSRF
+  bloqueado em cada redirect; teto 2 MB/10 s/só-texto; cache SQLite por dono;
+  citações [S1] validadas; grounding com wrapper anti-instrução; memória só
+  como termos de tópico; transforms determinísticos (gráfico/tabela/dashboard/
+  cards) sobre runs; reuso "com essas fontes". Sem frontend novo (links
+  markdown). Status "pesquisando…" ao vivo: AUSENTE (stream é canônico).
+  Docs + RELATORIO_JULIA_4.4.md. Suíte: ver relatório.
 
 ## V4.5 — AGENTES
 - Perfis (professora/pesquisadora/organizadora/criativa/analista) como

@@ -69,8 +69,11 @@ def test_t4_quiz_renderizavel():
 
 
 def test_t5_sem_pesquisa_declara_limitacao(monkeypatch):
+    import research
     db = _db()
-    monkeypatch.setattr(pc_agent, 'pesquisa_web', lambda *a, **k: [])
+    monkeypatch.setattr(research, 'pesquisa_rapida',
+                        lambda *a, **k: {"fontes": [], "etapas": [], "divergencias": [],
+                                         "de_cache": False, "erro": "provedor_indisponivel"})
     msgs, extras = pc_agent.ai_montar_mensagens(db, 'conv-a', _cfg(), 'pesquise o preço do dólar hoje')
     assert extras['fontes'] == []
     assert 'sem inventar links' in msgs[0]['content']

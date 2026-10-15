@@ -260,6 +260,14 @@ def test_acoes_de_historico_arquivos_e_contexto_local_ligadas():
     assert "item('save', 'Salvar item neste aparelho')" in js
 
 
+def test_streaming_sem_sucesso_vazio():
+    js = APP_JS.read_text(encoding="utf-8")
+    assert "throw new Error('Resposta vazia da IA')" in js
+    assert "tipo === 'error'" in js or 'tipo === "error"' in js
+    assert 'tentar_modelos' in (RAIZ / 'pc_agent.py').read_text(encoding='utf-8')
+    assert 'chat_stream_fb' in (RAIZ / 'hermes_bridge.py').read_text(encoding='utf-8')
+
+
 def test_estudos_ligado_e_com_cache_offline():
     html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
     js = APP_JS.read_text(encoding='utf-8')

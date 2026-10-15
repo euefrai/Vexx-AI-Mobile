@@ -405,3 +405,174 @@ def test_e2e_ai_completo_com_processos_reais():
             fsrv.close()
     fake.shutdown()
     fake.server_close()
+
+
+# ── FASE 3 (V4.3.1): fallback, erros e circuit breaker ──────────────
+def test_bridge_mapeia_quota_e_pedido(monkeypatch):
+    import urllib.error
+
+    def falso_402(*a, **k):
+        raise urllib.error.HTTPError("http://x", 402, "limite", {}, None)
+
+    def falso_422(*a, **k):
+        raise urllib.error.HTTPError("http://x", 422, "ruim", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", falso_402)
+    try:
+        hermes_bridge.chat_complete("http://127.0.0.1:8645/v1", "m", [])
+        raise AssertionError("402 deveria falhar")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "quota"
+    monkeypatch.setattr(urllib.request, "urlopen", falso_422)
+    try:
+        hermes_bridge.chat_complete("http://127.0.0.1:8645/v1", "m", [])
+        raise AssertionError("422 deveria falhar")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "pedido"
+
+
+def test_tentar_modelos_usa_proximo_e_registra(monkeypatch):
+    hermes_bridge._CIRCUITO.clear()
+    chamadas = []
+
+    def falso(base, modelo, messages, timeout=60.0, max_tokens=2000):
+        chamadas.append(modelo)
+        if modelo == "ruim-vazio":
+            raise hermes_bridge.BridgeErro("vazia", "vazia")
+        return {"texto": "OK", "latencia_s": 0.1}
+
+    monkeypatch.setattr(hermes_bridge, "chat_complete", falso)
+    monkeypatch.setattr(hermes_bridge.time, "sleep", lambda s: None)
+    res = hermes_bridge.tentar_modelos("http://127.0.0.1:1/v1", ["ruim-vazio", "bom"],
+                                       [{"role": "user", "content": "oi"}])
+    assert res["model_usado"] == "bom" and res["texto"] == "OK"
+    assert [t["model"] for t in res["tentativas"]] == ["ruim-vazio"]
+    assert res["tentativas"][0]["codigo"] == "vazia"
+    assert chamadas == ["ruim-vazio", "bom"]
+    assert "http://127.0.0.1:1/v1" not in hermes_bridge._CIRCUITO  # sucesso limpa
+
+
+def test_tentar_modelos_para_em_auth_e_falha_total(monkeypatch):
+    hermes_bridge._CIRCUITO.clear()
+    chamadas = []
+
+    def falso_auth(base, modelo, messages, timeout=60.0, max_tokens=2000):
+        chamadas.append(modelo)
+        raise hermes_bridge.BridgeErro("negado", "auth")
+
+    monkeypatch.setattr(hermes_bridge, "chat_complete", falso_auth)
+    try:
+        hermes_bridge.tentar_modelos("http://127.0.0.1:2/v1", ["a", "b"], [])
+        raise AssertionError("auth deveria parar")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "auth" and chamadas == ["a"]
+
+    def falso_404(base, modelo, messages, timeout=60.0, max_tokens=2000):
+        raise hermes_bridge.BridgeErro("nf", "modelo-nao-encontrado")
+
+    monkeypatch.setattr(hermes_bridge, "chat_complete", falso_404)
+    monkeypatch.setattr(hermes_bridge.time, "sleep", lambda s: None)
+    try:
+        hermes_bridge.tentar_modelos("http://127.0.0.1:3/v1", ["a", "b"], [])
+        raise AssertionError("tudo 404 deveria falhar")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "todos_falharam" and "JULIA_AI_MODEL" in str(exc)
+
+
+def test_circuito_abre_apos_falhas_repetidas(monkeypatch):
+    hermes_bridge._CIRCUITO.clear()
+    chamadas = []
+
+    def falso(base, modelo, messages, timeout=60.0, max_tokens=2000):
+        chamadas.append(modelo)
+        raise hermes_bridge.BridgeErro("x", "provedor")
+
+    monkeypatch.setattr(hermes_bridge, "chat_complete", falso)
+    monkeypatch.setattr(hermes_bridge.time, "sleep", lambda s: None)
+    base = "http://127.0.0.1:4/v1"
+    for _ in range(4):
+        try:
+            hermes_bridge.tentar_modelos(base, ["a"], [])
+        except hermes_bridge.BridgeErro:
+            pass
+    antes = len(chamadas)
+    try:
+        hermes_bridge.tentar_modelos(base, ["a"], [])
+        raise AssertionError("circuito deveria estar aberto")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "circuito_aberto" and len(chamadas) == antes
+    hermes_bridge._CIRCUITO.clear()
+
+
+def test_stream_fb_troca_antes_do_primeiro_delta(monkeypatch):
+    hermes_bridge._CIRCUITO.clear()
+
+    def falso(base, modelo, messages, on_delta, deve_parar=None,
+              timeout=180.0, max_tokens=2000):
+        if modelo == "morto":
+            raise hermes_bridge.BridgeErro("caiu", "indisponivel")
+        on_delta(1, "oi")
+        return {"texto": "oi", "latencia_s": 0.1}
+
+    monkeypatch.setattr(hermes_bridge, "chat_stream", falso)
+    monkeypatch.setattr(hermes_bridge.time, "sleep", lambda s: None)
+    got = []
+    res = hermes_bridge.chat_stream_fb("http://127.0.0.1:5/v1", ["morto", "vivo"], [],
+                                       lambda s, t: got.append(t))
+    assert res["model_usado"] == "vivo" and got == ["oi"]
+
+
+def test_stream_fb_nao_troca_no_meio(monkeypatch):
+    hermes_bridge._CIRCUITO.clear()
+
+    def falso(base, modelo, messages, on_delta, deve_parar=None,
+              timeout=180.0, max_tokens=2000):
+        on_delta(1, "metade ")
+        raise hermes_bridge.BridgeErro("caiu no meio", "indisponivel")
+
+    monkeypatch.setattr(hermes_bridge, "chat_stream", falso)
+    got = []
+    try:
+        hermes_bridge.chat_stream_fb("http://127.0.0.1:6/v1", ["a", "b"], [],
+                                     lambda s, t: got.append(t))
+        raise AssertionError("erro no meio deve propagar")
+    except hermes_bridge.BridgeErro as exc:
+        assert exc.codigo == "indisponivel" and got == ["metade "]
+    hermes_bridge._CIRCUITO.clear()
+
+
+def test_stream_vazio_nunca_e_sucesso():
+    # chat_stream real contra fake sem deltas: erro, jamais done vazio.
+    glyph = sobe_fake()
+    base = f"http://127.0.0.1:{glyph.server_port}/v1"
+    orig = FakeHermes.stream_deltas
+    FakeHermes.stream_deltas = []
+    try:
+        try:
+            hermes_bridge.chat_stream(base, "fake-model", [], lambda s, t: None, timeout=10.0)
+            raise AssertionError("stream vazio deveria falhar")
+        except hermes_bridge.BridgeErro as exc:
+            assert exc.codigo == "vazia"
+    finally:
+        FakeHermes.stream_deltas = orig
+        glyph.shutdown()
+        glyph.server_close()
+
+
+def test_fallbacks_config_e_modelos_tentativa(monkeypatch):
+    assert pc_agent._lista_fallbacks("a, b,, a, " + "x" * 200) == ["a", "b", "x" * 120]
+    assert pc_agent._lista_fallbacks("x, rm -rf;, a") == ["x", "a"]
+    assert pc_agent._lista_fallbacks("") == []
+    cfg = {"model": "pref", "fallbacks": ["fb1", "pref", "fb2"], "max_tokens": 10,
+           "proxy": "http://127.0.0.1:7/v1"}
+    assert pc_agent.modelos_tentativa(cfg, "") == ["pref", "fb1", "fb2"]
+    assert pc_agent.modelos_tentativa(cfg, "outro") == ["outro", "fb1", "pref", "fb2"]
+    vistos = {}
+
+    def falso_tentar(base, modelos, messages, timeout_por_tentativa=60.0, max_tokens=2000):
+        vistos["modelos"] = modelos
+        return {"texto": "R", "model_usado": "fb1", "latencia_s": 0.1}
+
+    monkeypatch.setattr(hermes_bridge, "tentar_modelos", falso_tentar)
+    res = pc_agent.gerar_texto(cfg, [{"role": "user", "content": "oi"}], preferido="outro")
+    assert vistos["modelos"] == ["outro", "fb1", "pref", "fb2"] and res["model_usado"] == "fb1"
