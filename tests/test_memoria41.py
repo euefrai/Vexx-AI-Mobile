@@ -81,6 +81,32 @@ def test_joao_pessoa_e_plano_por_dificuldade():
     db.close()
 
 
+def test_contexto_local_validado_e_injetado_so_quando_enviado():
+    db = _db()
+    payload = {
+        'local_time': '2026-11-20T09:15:30-03:00',
+        'timezone': 'America/Recife',
+        'city': 'Recife, PE',
+        'latitude': -8.05428,
+        'longitude': -34.88126,
+    }
+    ctx = pc_agent._contexto_local_seguro(payload)
+    assert ctx['local_time'] == payload['local_time']
+    assert ctx['timezone'] == 'America/Recife'
+    assert ctx['coordinates'] == (-8.05, -34.88)
+    assert pc_agent._contexto_local_seguro({
+        'local_time': 'hora inventada', 'timezone': 'UTC<script>'
+    }) == {}
+    cfg = {'proxy': 'x', 'model': 'm', 'system': 'S', 'context': 5,
+           'max_tokens': 50, 'memoria_global': False, 'pesquisa_web': False}
+    msgs, _ = pc_agent.ai_montar_mensagens(
+        db, 'conv-local', cfg, 'Que horas são em Recife?', contexto_local=ctx)
+    assert '2026-11-20T09:15:30-03:00' in msgs[0]['content']
+    assert 'fuso IANA America/Recife' in msgs[0]['content']
+    assert 'coordenadas arredondadas: -8.05, -34.88' in msgs[0]['content']
+    db.close()
+
+
 def test_sensivel_vira_proposta_e_toggle_bloqueia():
     db = _db()
     salvos, props, pergunta = pc_agent.analisar_memoria(db, 'tomo remédio X para ansiedade toda manhã', 'local')

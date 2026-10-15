@@ -1474,6 +1474,11 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   border-radius:12px;font-size:13.5px;min-height:44px;cursor:pointer}
 .jdui-item input{width:18px;height:18px;accent-color:var(--purple-2);flex-shrink:0}
 .jdui-item.done span{text-decoration:line-through;color:var(--soft)}
+.jdui-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.jdui-actions input{flex:1;min-width:150px;background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;color:var(--text);font-size:13px;min-height:42px}
+.jdui-actions .jdui-btn{min-height:40px;padding:8px 12px;font-size:12px}
+.jdui-actions .jdui-btn:disabled{opacity:.45;cursor:not-allowed}
 .jdui-calc{border:1px solid var(--line-strong);border-radius:14px;padding:12px;background:#0a0a12}
 .jdui-disp{font-size:30px;font-weight:800;text-align:right;padding:12px;background:#000;border-radius:10px;margin-bottom:10px;overflow-x:auto;white-space:nowrap}
 .jdui-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -1511,6 +1516,8 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 table.jdui-table{width:100%;min-width:280px;border-collapse:collapse;font-size:12.5px}
 table.jdui-table th,table.jdui-table td{border:1px solid var(--line);padding:8px;text-align:left}
 table.jdui-table th{background:var(--bg-elev);color:var(--purple);cursor:pointer;white-space:nowrap;user-select:none}
+table.jdui-table td input{width:100%;min-width:90px;background:var(--bg);border:1px solid var(--line);
+  border-radius:6px;padding:6px;color:var(--text);font:inherit}
 .jdui-prog{margin:6px 0}
 .jdui-tabbar{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}
 .jdui-tab{flex:1;min-width:90px;padding:10px;border-radius:10px;border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}

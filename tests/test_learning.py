@@ -104,3 +104,125 @@ def test_stats_reais_por_assunto(tmp_path):
     assert perf["mat"]["taxa"] == 0.5 and perf["port"]["taxa"] == 1.0
     assert learning.desempenho_por_assunto(db, 'u-y') == []
     db.close()
+
+
+def test_criar_assessment_idempotente_e_fluxo(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnfluxo.sqlite3')
+    qs = [{"id": "q1", "enunciado": "Quanto é 2+2?", "tipo": "multipla",
+           "opcoes": ["3", "4"], "gabarito": 1, "assunto": "mat"},
+          {"id": "q2", "enunciado": "Disserte sobre soma", "tipo": "discursiva",
+           "gabarito": "Citar parcelas, total e exemplo como critérios."}]
+    r1 = learning.criar_assessment(db, 'u-x', 'P1', 'mat', qs, assessment_id='av-1')
+    r2 = learning.criar_assessment(db, 'u-x', 'P1', 'mat', qs, assessment_id='av-1')
+    assert (r1, r2) == ({"id": "av-1", "total": 2}, {"id": "av-1", "total": 2})
+    assert db.execute("SELECT COUNT(*) FROM questions WHERE assessment_id='av-1'").fetchone()[0] == 2
+    pub = learning.obter_assessment(db, 'u-x', 'av-1')
+    assert all('gabarito' not in q for q in pub['questions'])  # sem gabarito p/ o aluno
+    full = learning.obter_assessment(db, 'u-x', 'av-1', com_gabarito=True)
+    assert full['questions'][0]['gabarito'] == '1'
+    try:
+        learning.obter_assessment(db, 'u-y', 'av-1')
+        raise AssertionError('outro dono não lê')
+    except learning.LearnErro as exc:
+        assert exc.codigo == 'ausente'
+    att = learning.iniciar_tentativa(db, 'u-x', 'av-1', 'att-1')['id']
+    assert learning.responder(db, 'u-x', att, 'q1', 'b') == {"correta": True}
+    d = learning.responder(db, 'u-x', att, 'q2', 'texto livre')
+    assert d['correta'] is None and d['avaliacao'] == 'assistida'
+    fim = learning.finalizar_tentativa(db, 'u-x', att)
+    assert (fim['certas'], fim['total'], fim['pendentes_avaliacao']) == (1, 1, 1)
+    try:
+        learning.responder(db, 'u-x', att, 'q1', 'a')
+        raise AssertionError('finalizada não aceita resposta')
+    except learning.LearnErro as exc:
+        assert exc.codigo == 'finalizada'
+    db.close()
+
+
+def test_planos_crud_e_atualizacao_preserva_feitos(tmp_path):
+    from datetime import date
+    db = pc_agent.open_db(tmp_path / 'learnplanos.sqlite3')
+    itens = [{"titulo": "Frações", "tipo": "conteudo"}, {"titulo": "Quiz 1", "tipo": "quiz"}]
+    p = learning.criar_plano(db, 'u-x', 'Mat até nov', 'Passar', 'mat',
+                             prazo_iso='2026-11-30', min_dia=30, itens=itens, plan_id='pl-1')
+    assert p == {"id": "pl-1", "itens": 2}
+    pl = learning.obter_plano(db, 'u-x', 'pl-1')
+    assert pl['progresso'] == {"feitos": 0, "total": 2, "taxa": 0.0}
+    assert learning.listar_planos(db, 'u-x')[0]['total'] == 2
+    assert learning.listar_planos(db, 'u-y') == []
+    prog = learning.concluir_item(db, 'u-x', 'pl-1', pl['itens'][0]['id'])
+    assert prog == {"feitos": 1, "total": 2, "taxa": 0.5}
+    # atualização compatível preserva concluído (match por título)
+    novo = learning.atualizar_plano(db, 'u-x', 'pl-1',
+                                   {"min_dia": 45, "itens": [{"titulo": "Frações"}, {"titulo": "Geometria"}]})
+    assert novo['min_dia'] == 45 and novo['progresso'] == {"feitos": 1, "total": 2, "taxa": 0.5}
+    try:
+        learning.obter_plano(db, 'u-y', 'pl-1')
+        raise AssertionError('outro dono não lê plano')
+    except learning.LearnErro as exc:
+        assert exc.codigo == 'ausente'
+    try:
+        learning.criar_plano(db, 'u-x', 'X', itens=[])
+        raise AssertionError('plano sem itens deveria falhar')
+    except learning.LearnErro:
+        pass
+    db.close()
+
+
+def test_flashcards_revisao_e_pendentes(tmp_path):
+    from datetime import date, timedelta
+    db = pc_agent.open_db(tmp_path / 'learncards.sqlite3')
+    hoje = date.today()
+    r = learning.criar_flashcards(db, 'u-x', [
+        {"id": "fc-1", "frente": "2+2?", "verso": "4", "assunto": "mat"},
+        {"frente": "Capital do BR?", "verso": "Brasília"}])
+    assert r['total'] == 2 and r['ids'][0] == 'fc-1'
+    assert len(learning.revisoes_pendentes(db, 'u-x', hoje=hoje)) == 2
+    assert learning.revisoes_pendentes(db, 'u-y', hoje=hoje) == []
+    out = learning.revisar_flashcard(db, 'u-x', 'fc-1', True, hoje=hoje)
+    assert (out['intervalo_d'], out['proxima_iso']) == (1, (hoje + timedelta(days=1)).isoformat())
+    assert len(learning.revisoes_pendentes(db, 'u-x', hoje=hoje)) == 1
+    out = learning.revisar_flashcard(db, 'u-x', 'fc-1', False, hoje=hoje)
+    assert (out['intervalo_d'], out['proxima_iso']) == (1, (hoje + timedelta(days=1)).isoformat())
+    assert learning.resumo_progresso(db, 'u-x')['revisoes_pendentes'] >= 1
+    db.close()
+
+
+def test_recomendar_regras_e_sem_dados(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnrec.sqlite3')
+    vazio = learning.recomendar(db, 'u-x')
+    assert vazio == {"recomendacoes": [], "motivo": "sem_dados",
+                     "aviso": "Ainda não há respostas suficientes para recomendar."}
+    db.execute("INSERT INTO questions (id, assessment_id, owner_id, enunciado, assunto) VALUES "
+               "('q1','a','u-x','E1','mat'), ('q2','a','u-x','E2','mat'), ('q3','a','u-x','E3','mat'),"
+               " ('q4','a','u-x','E4','port'), ('q5','a','u-x','E5','port'), ('q6','a','u-x','E6','port')")
+    db.execute("INSERT INTO answers (attempt_id, question_id, owner_id, resposta, correta) VALUES "
+               "('t','q1','u-x','0',0), ('t','q2','u-x','0',0), ('t','q3','u-x','1',1),"
+               " ('t','q4','u-x','1',1), ('t','q5','u-x','1',1), ('t','q6','u-x','1',1)")
+    db.commit()
+    rec = learning.recomendar(db, 'u-x')
+    assert rec['motivo'] == 'dados_reais'
+    tipos = {x['tipo']: x for x in rec['recomendacoes']}
+    assert tipos['revisar']['assunto'] == 'mat'  # 1/3 < 60%
+    assert tipos['avancar']['assunto'] == 'port'  # 3/3
+    assert all('base' in x for x in rec['recomendacoes'])
+    assert learning.recomendar(db, 'u-y')['motivo'] == 'sem_dados'  # isolamento
+    db.close()
+
+
+def test_sinalizar_e_erradas(tmp_path):
+    db = pc_agent.open_db(tmp_path / 'learnflag.sqlite3')
+    learning.criar_assessment(db, 'u-x', 'P', 'mat', [
+        {"id": "q1", "enunciado": "Quanto é 2+2?", "tipo": "multipla",
+         "opcoes": ["3", "4"], "gabarito": 1}], assessment_id='av-f')
+    att = learning.iniciar_tentativa(db, 'u-x', 'av-f', 'att-f')['id']
+    learning.responder(db, 'u-x', att, 'q1', '0')
+    learning.finalizar_tentativa(db, 'u-x', att)
+    assert learning.sinalizar_questao(db, 'u-x', 'q1', 'gabarito parece trocado') == {"ok": True, "question_id": "q1"}
+    ev = db.execute("SELECT tipo FROM study_events WHERE owner_id='u-x'").fetchall()
+    tipos = {e[0] for e in ev}
+    assert 'questao_sinalizada' in tipos and 'prova_finalizada' in tipos  # história preservada
+    err = learning.questoes_erradas(db, 'u-x')
+    assert len(err) == 1 and err[0]['question_id'] == 'q1' and err[0]['assunto'] == 'mat'
+    assert learning.questoes_erradas(db, 'u-y') == []
+    db.close()

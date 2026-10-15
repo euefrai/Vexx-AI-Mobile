@@ -19,7 +19,14 @@ FUNCIONAL:
 - Banco SQLite durável no PC (WAL, transações, filtro por origem).
 - Memória pessoal local com fatos confirmados, histórico de conversa pesquisável,
   correção/remoção e isolamento por usuário.
-- Tabelas visuais, cartões e checklists para planilhas, roadmaps e planos práticos.
+- Tabelas editáveis e exportáveis em CSV, cartões, checklists e formulários
+  interativos com estado salvo no aparelho para planilhas, roadmaps e planos práticos.
+- Biblioteca local de respostas salvas e exportação da conversa em Markdown, JSON,
+  TXT, CSV e XLSX; impressão do navegador permite salvar em PDF.
+- Busca no histórico deste aparelho, compartilhamento pelo menu nativo do sistema
+  quando disponível e contexto de data/hora/fuso em cada pedido à IA.
+- Cidade/local aproximado opcionais: GPS desligado por padrão, solicitado por ação
+  explícita e enviado somente quando a pergunta tratar de lugares.
 - Autenticação com usuário/senha (Argon2id), sessão HttpOnly + CSRF.
 - Comunicação segura com o agente desktop (WSS de saída, sem abrir portas).
 - PWA instalável com shell cacheado.

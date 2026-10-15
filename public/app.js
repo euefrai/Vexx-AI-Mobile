@@ -59,7 +59,7 @@ function navigate(tab) {
   $('suggestions').style.display = chat ? 'flex' : 'none';
   document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
   if (tab === 'activity') renderTimeline();
-  if (tab === 'settings') loadMemories();
+  if (tab === 'settings') { loadMemories(); paintSavedItems(); }
 }
 navItems.forEach(n => n.addEventListener('click', () => {
   navigate(n.dataset.tab);
@@ -76,10 +76,11 @@ function reqPromise(r) { return new Promise((res, rej) => { r.onsuccess = () => 
 function txDone(tx) { return new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || Error('cancelada')); }); }
 const UISTATE = 'ui_state';
 const META = 'meta';
+const SAVED = 'saved_items';
 function openDb() {
   return new Promise((resolve, reject) => {
     if (!('indexedDB' in window)) { reject(Error('IndexedDB indisponivel')); return; }
-    const req = indexedDB.open(DB_NAME, 3);
+    const req = indexedDB.open(DB_NAME, 4);
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains(STORE)) {
@@ -90,6 +91,7 @@ function openDb() {
       if (!db.objectStoreNames.contains(SESSIONS)) db.createObjectStore(SESSIONS, { keyPath: 'id' });
       if (!db.objectStoreNames.contains(UISTATE)) db.createObjectStore(UISTATE, { keyPath: 'k' });
       if (!db.objectStoreNames.contains(META)) db.createObjectStore(META, { keyPath: 'k' });
+      if (!db.objectStoreNames.contains(SAVED)) db.createObjectStore(SAVED, { keyPath: 'id' });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
@@ -115,6 +117,7 @@ function jduiCtx(row) {
   return {
     messageId: row.id,
     api: (endpoint, options) => api(endpoint, options),
+    download: (name, mime, text) => downloadFile(name, mime, text),
     online: () => authenticated && pcOnline && navigator.onLine,
     markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
     loadState: (key) => jduiStateCache[row.id + '#' + key],
@@ -200,9 +203,9 @@ async function deleteMessagesOf(conv) {
   await done;
 }
 async function clearStorage() {
-  const tx = db.transaction([STORE, SESSIONS], 'readwrite');
+  const tx = db.transaction([STORE, SESSIONS, SAVED], 'readwrite');
   const done = txDone(tx);
-  tx.objectStore(STORE).clear(); tx.objectStore(SESSIONS).clear();
+  tx.objectStore(STORE).clear(); tx.objectStore(SESSIONS).clear(); tx.objectStore(SAVED).clear();
   await done;
 }
 async function allSessions() {
@@ -219,6 +222,21 @@ async function putSession(s) {
 async function ownSessions() {
   const all = await allSessions();
   return all.filter(s => (s.owner || 'local') === currentUid);
+}
+async function savedItems() {
+  if (!db) return [];
+  const rows = await reqPromise(db.transaction(SAVED, 'readonly').objectStore(SAVED).getAll());
+  return rows.filter(r => (r.owner || 'local') === currentUid)
+    .sort((a, b) => (b.saved_at || '').localeCompare(a.saved_at || ''));
+}
+async function saveItem(item) {
+  if (!db) throw Error('Armazenamento local indisponível');
+  const row = Object.assign({ id: newId(), saved_at: new Date().toISOString(), owner: currentUid }, item);
+  const tx = db.transaction(SAVED, 'readwrite');
+  const done = txDone(tx);
+  tx.objectStore(SAVED).put(row);
+  await done;
+  return row;
 }
 /* ----- Conversa ativa resiliente (localStorage pode ser limpo sem levar o IndexedDB) ----- */
 function lsGet(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
@@ -1085,6 +1103,31 @@ function tickGen() {
   const ttft = aiFirstTokenT ? ' · 1º token ' + ((aiFirstTokenT - aiStartT) / 1000).toFixed(1) + 's' : '';
   $('genLabel').textContent = 'Júlia está escrevendo… ' + s + 's' + ttft;
 }
+function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
+function aiLocalContext(text) {
+  let timezone = '';
+  try { timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (_) {}
+  const now = new Date();
+  const offset = -now.getTimezoneOffset();
+  const sign = offset >= 0 ? '+' : '-';
+  const offsetText = sign + String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0') +
+    ':' + String(Math.abs(offset) % 60).padStart(2, '0');
+  const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+    .toISOString().slice(0, 19) + offsetText;
+  const context = { local_time: localTime, timezone };
+  const placeQuestion = /\b(perto|pr[oó]xim[oa]s?|na minha cidade|onde estou|localiza[cç][aã]o|clima|tempo em|previs[aã]o|restaurante|farm[aá]cia|hospital|loja|tr[aâ]nsito|endere[cç]o|pontos tur[ií]sticos|lugares)\b/i.test(text || '');
+  if (!placeQuestion || !$('locationEnabled') || !$('locationEnabled').checked) return context;
+  const city = String($('contextCity').value || '').trim().slice(0, 100);
+  if (city) context.city = city;
+  try {
+    const saved = JSON.parse(localStorage.getItem(localContextKey('location')) || 'null');
+    if (saved && Number.isFinite(saved.latitude) && Number.isFinite(saved.longitude)) {
+      context.latitude = saved.latitude;
+      context.longitude = saved.longitude;
+    }
+  } catch (_) {}
+  return context;
+}
 async function requestAI(userRow) {
   if (!authenticated || !pcOnline || !db || aiAbort) return;
   const replyId = userRow.id + '-r1';
@@ -1097,7 +1140,11 @@ async function requestAI(userRow) {
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Júlia está escrevendo… 0s');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
-  const qs = new URLSearchParams({ message_id: userRow.id, conversation_id: userRow.conversation_id, model: modeloAtivo(), memory: memoryOn() ? '1' : '0' });
+  const ctx = aiLocalContext(userRow.text || '');
+  const qs = new URLSearchParams(Object.assign({
+    message_id: userRow.id, conversation_id: userRow.conversation_id,
+    model: modeloAtivo(), memory: memoryOn() ? '1' : '0'
+  }, ctx));
   aiAbort = new AbortController();
   let cur = '';
   try {
@@ -1143,7 +1190,10 @@ async function requestAI(userRow) {
         if (!check || check.status === 'generating') {
           // Stream veio vazio: tenta a resposta completa uma vez antes de falhar.
           try {
-            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({ message_id: userRow.id, conversation_id: userRow.conversation_id, model: modeloAtivo(), memory: memoryOn() ? 1 : 0 }) });
+            const fb = await api('/api/ai', { method: 'POST', body: JSON.stringify({
+              message_id: userRow.id, conversation_id: userRow.conversation_id,
+              model: modeloAtivo(), memory: memoryOn() ? 1 : 0, ...ctx
+            }) });
             if (fb.response_text && fb.response_text.trim()) {
               cur = fb.response_text;
               const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
@@ -1189,6 +1239,10 @@ function toggleMsgMenu(btn) {
   };
   item('copy', 'Copiar');
   if (!failed) {
+    item('save', 'Salvar item neste aparelho');
+    item('share', 'Compartilhar resposta');
+    item('download', 'Baixar resposta em TXT');
+    item('print', 'Imprimir / salvar resposta em PDF');
     item('regen', 'Regenerar resposta');
     if (isLast) item('cont', 'Continuar resposta');
   } else item('retry', 'Tentar novamente');
@@ -1215,7 +1269,10 @@ async function continueReply(userId) {
   if (!user) return;
   setGenBar(true, 'Continuando…');
   try {
-    const r = await api('/api/ai/continue', { method: 'POST', body: JSON.stringify({ message_id: userId, conversation_id: user.conversation_id, model: modeloAtivo() }) });
+    const r = await api('/api/ai/continue', { method: 'POST', body: JSON.stringify({
+      message_id: userId, conversation_id: user.conversation_id, model: modeloAtivo(),
+      ...aiLocalContext(user.text || '')
+    }) });
     await storeMessages([{ id: r.reply_id || (userId + '-r1'), conversation_id: user.conversation_id, origin: 'mobile', role: 'assistant', text: r.response_text, created_at: new Date().toISOString(), status: 'synced', model: r.model || modeloAtivo() }]);
     if (user.conversation_id === activeConversation) { await renderMessages(); scrollChat(true); }
   } catch (err) { showToast('Falha ao continuar: ' + (err.message || '')); }
@@ -1283,6 +1340,27 @@ conversation.addEventListener('click', e => {
       allMessages().then(rows => {
         const r = rows.find(m => m.id === mid);
         if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
+      });
+    } else if (mi.dataset.act === 'save' || mi.dataset.act === 'share'
+        || mi.dataset.act === 'download' || mi.dataset.act === 'print') {
+      const printWindow = mi.dataset.act === 'print' ? window.open('', '_blank') : null;
+      allMessages().then(async rows => {
+        const row = rows.find(m => m.id === mid);
+        if (!row) { if (printWindow) printWindow.close(); return; }
+        const title = String(row.text || '').split(/\r?\n/, 1)[0].replace(/^#+\s*/, '').slice(0, 80) || 'Resposta da Júlia';
+        if (mi.dataset.act === 'save') {
+          try {
+            await saveItem({ title, text: row.text || '', message_id: row.id, conversation_id: row.conversation_id });
+            showToast('Resposta salva neste aparelho.');
+          } catch (_) { showToast('Não foi possível salvar a resposta.'); }
+        } else if (mi.dataset.act === 'share') await shareText(title, row.text || '', true);
+        else if (mi.dataset.act === 'download') {
+          const filename = title.replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'resposta-julia';
+          downloadFile(filename + '.txt', 'text/plain', row.text || '');
+          showToast('Resposta baixada em TXT.');
+        } else {
+          openPrintWindow(title, '<article><strong>Júlia</strong><pre>' + esc(row.text || '') + '</pre></article>', printWindow);
+        }
       });
     } else if (mi.dataset.act === 'regen' || mi.dataset.act === 'cont' || mi.dataset.act === 'retry') {
       const uid = mid.endsWith('-r1') ? mid.slice(0, -3) : '';
@@ -1354,12 +1432,30 @@ $('sessionSearch').addEventListener('input', e => renderSessions(e.target.value)
 $('syncNow').addEventListener('click', async () => { await checkStatus(); showToast(pcOnline ? 'Sincronizado' : 'PC desconectado'); });
 function downloadFile(name, mime, text) {
   const blob = new Blob([text], { type: mime + ';charset=utf-8' });
+  downloadBlob(name, blob);
+}
+function downloadBlob(name, blob) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = name;
   document.body.appendChild(a);
   a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+async function shareText(title, text, allowShare) {
+  const payload = String(text || '');
+  if (allowShare && navigator.share) {
+    try { await navigator.share({ title, text: payload }); return; }
+    catch (err) {
+      if (err && err.name === 'AbortError') return;
+    }
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    showToast('Compartilhamento indisponível neste navegador.');
+    return;
+  }
+  try { await navigator.clipboard.writeText(payload); showToast('Copiado para compartilhar.'); }
+  catch (_) { showToast('Não foi possível copiar.'); }
 }
 async function exportConversation(fmt) {
   if (!db) { showToast('Cache indisponível'); return; }
@@ -1369,6 +1465,20 @@ async function exportConversation(fmt) {
   if (!rows.length) { showToast('Nada para exportar'); return; }
   if (fmt === 'json') {
     downloadFile(title + '.json', 'application/json', JSON.stringify({ title, exported_at: new Date().toISOString(), messages: rows }, null, 2));
+  } else if (fmt === 'txt') {
+    const text = rows.map(m => (m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' +
+      fmtTime(m.created_at) + '\n' + String(m.text || '')).join('\n\n');
+    downloadFile(title + '.txt', 'text/plain', text);
+  } else if (fmt === 'csv') {
+    const quote = value => {
+      let text = String(value == null ? '' : value);
+      if (/^[=+\-@]/.test(text)) text = "'" + text;
+      return '"' + text.replace(/"/g, '""') + '"';
+    };
+    const csv = [['Autor', 'Data e hora', 'Mensagem'], ...rows.map(m => [
+      m.role === 'assistant' ? 'Júlia' : 'Você', m.created_at || '', m.text || ''
+    ])].map(row => row.map(quote).join(',')).join('\r\n');
+    downloadFile(title + '.csv', 'text/csv', '\uFEFF' + csv);
   } else {
     let md = '# ' + title + '\n\n_Exportado da Júlia Mobile em ' + new Date().toLocaleString('pt-BR') + '_\n\n';
     rows.forEach(m => {
@@ -1378,11 +1488,76 @@ async function exportConversation(fmt) {
   }
   showToast('Exportado: ' + title);
 }
+async function exportXlsx() {
+  if (!db) { showToast('Cache indisponível'); return; }
+  const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
+  const session = (await ownSessions()).find(s => s.id === activeConversation);
+  if (!rows.length) { showToast('Nada para exportar'); return; }
+  if (rows.length > 500) { showToast('Esta conversa excede o limite de 500 mensagens para Excel.'); return; }
+  try {
+    const response = await fetch('/api/export/xlsx', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        title: (session && session.title) || 'Conversa',
+        messages: rows.map(m => ({
+          role: m.role, text: String(m.text || '').slice(0, 10000), created_at: m.created_at || ''
+        }))
+      })
+    });
+    if (!response.ok) throw new Error('Exportação indisponível (' + response.status + ')');
+    downloadBlob('conversa.xlsx', await response.blob());
+    showToast('Planilha Excel exportada.');
+  } catch (err) { showToast(err.message || 'Falha ao exportar Excel.'); }
+}
+function openPrintWindow(title, contentHtml, printWindow) {
+  printWindow = printWindow || window.open('', '_blank');
+  if (!printWindow) { showToast('Permita a abertura de uma janela para imprimir ou salvar em PDF.'); return; }
+  printWindow.document.open();
+  printWindow.document.write('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>' +
+    esc(title) + '</title><style>' +
+    'body{font:15px system-ui,sans-serif;max-width:850px;margin:32px auto;color:#172033}h1{font-size:24px}' +
+    'article{border:1px solid #d9deea;border-radius:12px;padding:14px;margin:12px 0;break-inside:avoid}' +
+    'strong{color:#5145cd}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:0}' +
+    '@media print{body{margin:0 auto}article{border-color:#bbb}}</style><h1>' +
+    esc(title) + '</h1>' + contentHtml + '</html>');
+  printWindow.document.close();
+  printWindow.focus();
+  setTimeout(() => printWindow.print(), 250);
+}
+async function printConversation(printWindow) {
+  if (!db) { if (printWindow) printWindow.close(); showToast('Cache indisponível'); return; }
+  const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
+  if (!rows.length) { if (printWindow) printWindow.close(); showToast('Nada para imprimir'); return; }
+  const session = (await ownSessions()).find(s => s.id === activeConversation);
+  const cards = rows.map(m => '<article><strong>' + esc(m.role === 'assistant' ? 'Júlia' : 'Você') +
+    ' · ' + esc(fmtTime(m.created_at)) + '</strong><pre>' + esc(m.text || '') + '</pre></article>').join('');
+  openPrintWindow((session && session.title) || 'Conversa', cards, printWindow);
+}
 $('exportMd').addEventListener('click', () => exportConversation('md'));
 $('exportJson').addEventListener('click', () => exportConversation('json'));
+$('exportTxt').addEventListener('click', () => exportConversation('txt'));
+$('exportCsv').addEventListener('click', () => exportConversation('csv'));
+$('exportXlsx').addEventListener('click', exportXlsx);
+$('exportPdf').addEventListener('click', () => printConversation(window.open('', '_blank')));
+$('shareConversation').addEventListener('click', async () => {
+  if (!db) { showToast('Cache indisponível'); return; }
+  const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
+  if (!rows.length) { showToast('Nada para compartilhar'); return; }
+  const text = rows.map(m => (m.role === 'assistant' ? 'Júlia' : 'Você') + ': ' + (m.text || '')).join('\n\n');
+  const session = (await ownSessions()).find(s => s.id === activeConversation);
+  await shareText((session && session.title) || 'Conversa com Júlia', text, true);
+});
 $('clearCache').addEventListener('click', async () => {
   if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
   await clearStorage();
+  ['city', 'location', 'enabled'].forEach(key => {
+    try { localStorage.removeItem(localContextKey(key)); } catch (_) {}
+  });
+  $('contextCity').value = '';
+  $('locationEnabled').checked = false;
+  $('locationStatus').textContent = 'Localização e dados locais apagados.';
   setActiveConversation(newId());
   await ensureSession(activeConversation);
   await renderSessions(''); await renderMessages(); showToast('Cache apagado');
@@ -1553,6 +1728,70 @@ function paintMemories() {
     box.appendChild(row);
   });
 }
+async function searchHistory() {
+  const box = $('historyResults');
+  if (!box) return;
+  const query = String($('historySearch').value || '').trim().toLocaleLowerCase('pt-BR');
+  box.replaceChildren();
+  if (query.length < 2) return;
+  if (!db) { box.textContent = 'Histórico local indisponível.'; return; }
+  const all = ownRows(await allMessages());
+  const matches = all.filter(m => String(m.text || '').toLocaleLowerCase('pt-BR').includes(query))
+    .slice(-50).reverse();
+  if (!matches.length) {
+    const empty = document.createElement('div'); empty.className = 'doc-empty';
+    empty.textContent = 'Nenhuma mensagem encontrada no histórico deste aparelho.';
+    box.appendChild(empty);
+    return;
+  }
+  const titles = new Map((await ownSessions()).map(s => [s.id, s.title || 'Conversa']));
+  matches.forEach(m => {
+    const row = document.createElement('button'); row.type = 'button'; row.className = 'history-result';
+    const head = document.createElement('strong');
+    head.textContent = (titles.get(m.conversation_id) || 'Conversa') + ' · ' +
+      (m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' + fmtTime(m.created_at);
+    const excerpt = document.createElement('span');
+    const text = String(m.text || '').replace(/\s+/g, ' ');
+    const at = text.toLocaleLowerCase('pt-BR').indexOf(query);
+    excerpt.textContent = text.slice(Math.max(0, at - 55), Math.min(text.length, at + query.length + 100));
+    row.append(head, excerpt);
+    row.addEventListener('click', async () => {
+      setActiveConversation(m.conversation_id);
+      await renderSessions($('sessionSearch').value);
+      await renderMessages();
+      navigate('chat');
+      const target = [...conversation.querySelectorAll('.message')].find(el => el.dataset.mid === m.id);
+      if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'center' }); target.classList.add('search-hit'); }
+    });
+    box.appendChild(row);
+  });
+}
+async function paintSavedItems() {
+  const box = $('savedItems');
+  if (!box) return;
+  box.replaceChildren();
+  const items = await savedItems();
+  if (!items.length) {
+    const empty = document.createElement('div'); empty.className = 'doc-empty';
+    empty.textContent = 'Nenhum item salvo neste aparelho.';
+    box.appendChild(empty);
+    return;
+  }
+  items.forEach(item => {
+    const row = document.createElement('div'); row.className = 'saved-item';
+    const title = document.createElement('strong'); title.textContent = item.title || 'Item salvo';
+    const body = document.createElement('span'); body.textContent = String(item.text || '').slice(0, 180);
+    const actions = document.createElement('div'); actions.className = 'export-row';
+    const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'subtle-button'; copy.textContent = 'Copiar';
+    copy.addEventListener('click', () => shareText(item.title || 'Item salvo', item.text || '', false));
+    const del = document.createElement('button'); del.type = 'button'; del.className = 'subtle-button danger-link'; del.textContent = 'Apagar';
+    del.addEventListener('click', async () => {
+      const tx = db.transaction(SAVED, 'readwrite'); const done = txDone(tx);
+      tx.objectStore(SAVED).delete(item.id); await done; await paintSavedItems();
+    });
+    actions.append(copy, del); row.append(title, body, actions); box.appendChild(row);
+  });
+}
 async function loadEvents() {
   const box = $('eventList');
   if (!box) return;
@@ -1572,6 +1811,59 @@ async function loadEvents() {
 }
 $('memoryRefresh').addEventListener('click', loadMemories);
 $('memorySearch').addEventListener('input', paintMemories);
+$('historySearch').addEventListener('input', searchHistory);
+$('historySearch').addEventListener('search', searchHistory);
+$('contextCity').value = lsGet(localContextKey('city')) || '';
+$('locationEnabled').checked = lsGet(localContextKey('enabled')) === 'true';
+$('locationStatus').textContent = $('locationEnabled').checked
+  ? 'Ativado: localização enviada apenas em perguntas sobre lugares.'
+  : 'Desligado: nenhuma localização será enviada.';
+$('contextCity').addEventListener('input', e => {
+  try { localStorage.setItem(localContextKey('city'), String(e.target.value || '').slice(0, 100)); } catch (_) {}
+});
+$('locationEnabled').addEventListener('change', e => {
+  try { localStorage.setItem(localContextKey('enabled'), e.target.checked ? 'true' : 'false'); } catch (_) {}
+  $('locationStatus').textContent = e.target.checked
+    ? 'Ativado: localização enviada apenas em perguntas sobre lugares.'
+    : 'Desligado: nenhuma localização será enviada.';
+});
+$('useCurrentLocation').addEventListener('click', () => {
+  const status = $('locationStatus');
+  if (!navigator.geolocation) { status.textContent = 'Este aparelho não oferece localização pelo navegador.'; return; }
+  status.textContent = 'Aguardando permissão de localização…';
+  navigator.geolocation.getCurrentPosition(position => {
+    const coarse = {
+      latitude: Math.round(position.coords.latitude * 100) / 100,
+      longitude: Math.round(position.coords.longitude * 100) / 100
+    };
+    try {
+      localStorage.setItem(localContextKey('location'), JSON.stringify(coarse));
+      status.textContent = 'Local aproximado salvo neste aparelho. Ative a opção acima para usá-lo em perguntas sobre lugares.';
+    } catch (_) { status.textContent = 'Não foi possível salvar o local neste aparelho.'; }
+  }, error => {
+    status.textContent = error.code === error.PERMISSION_DENIED
+      ? 'Permissão negada. Você pode informar uma cidade manualmente.'
+      : 'Não foi possível obter o local. Você pode informar uma cidade manualmente.';
+  }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+});
+$('clearLocation').addEventListener('click', () => {
+  ['location', 'city'].forEach(key => {
+    try { localStorage.removeItem(localContextKey(key)); } catch (_) {}
+  });
+  $('contextCity').value = '';
+  $('locationEnabled').checked = false;
+  try { localStorage.setItem(localContextKey('enabled'), 'false'); } catch (_) {}
+  $('locationStatus').textContent = 'Localização apagada e desativada.';
+});
+function updateDeviceTimeStatus() {
+  try {
+    const now = new Date();
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'fuso desconhecido';
+    $('deviceTimeStatus').textContent = 'Agora: ' + now.toLocaleString('pt-BR') + ' · ' + zone;
+  } catch (_) { $('deviceTimeStatus').textContent = ''; }
+}
+updateDeviceTimeStatus();
+setInterval(updateDeviceTimeStatus, 60000);
 $('learningToggle').addEventListener('change', async e => {
   try {
     await api('/api/memory/settings', { method: 'POST', body: JSON.stringify({ learning: e.target.checked }) });

@@ -131,6 +131,81 @@ try { JDUI.calcExpr('process.exit(1)'); } catch (_) { jogou = true; }
 t('calc-sem-eval', jogou);
 """
 
+HARNESS_JDUI_STATE = r"""
+const fs = require('fs');
+class Element {
+  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.style = {}; this.attrs = {}; this._text = ''; }
+  appendChild(child) { this.children.push(child); return child; }
+  append(...children) { children.forEach(c => this.appendChild(c)); }
+  replaceChildren(...children) { this.children = []; this._text = ''; this.append(...children); }
+  addEventListener(name, fn) { this.events[name] = fn; }
+  setAttribute(name, value) { this.attrs[name] = value; }
+  focus() {}
+  click() { if (this.events.click) this.events.click({ target: this }); }
+  get firstChild() { return this.children[0]; }
+  get textContent() { return this._text + this.children.map(c => c.textContent || '').join(''); }
+  set textContent(value) { this._text = String(value); this.children = []; }
+}
+global.document = { createElement: tag => new Element(tag) };
+global.window = {};
+eval(fs.readFileSync(process.argv[2], 'utf8'));
+const JDUI = global.window.JDUI;
+const states = {};
+const ctx = {
+  loadState: key => states[key],
+  saveState: (key, value) => { states[key] = JSON.parse(JSON.stringify(value)); }
+};
+function find(root, test) {
+  if (test(root)) return root;
+  for (const child of root.children) { const hit = find(child, test); if (hit) return hit; }
+  return null;
+}
+function mount(component, props) {
+  const root = new Element('main');
+  JDUI.mount(root, [{ blocks: [{ type: 'ui', component, props }] }], ctx);
+  return root;
+}
+function assert(name, condition) {
+  if (!condition) throw new Error('FAIL ' + name);
+  console.log('ok ' + name);
+}
+let checklist = mount('checklist', { title: 'Plano', items: [{ label: 'Ler', checked: false }] });
+find(checklist, e => e.tag === 'input' && e.attrs['aria-label'] === 'Nova tarefa').value = 'Revisar';
+find(checklist, e => e.tag === 'button' && e.textContent === 'Adicionar').click();
+assert('checklist-add-persisted', states['0:0:checklist'].items.length === 2);
+checklist = mount('checklist', { title: 'Plano', items: [{ label: 'Ler', checked: false }] });
+assert('checklist-remount', find(checklist, e => e.textContent === 'Revisar') !== null);
+find(checklist, e => e.tag === 'button' && e.textContent === 'Reiniciar').click();
+assert('checklist-reset', states['0:0:checklist'].items.length === 1);
+
+let table = mount('table', { title: 'Custos', columns: ['Item', 'Valor'], rows: [['Café', '10']] });
+find(table, e => e.tag === 'button' && e.textContent === 'Editar tabela').click();
+const cell = find(table, e => e.tag === 'input' && e.attrs['aria-label'] === 'Item, linha 1');
+cell.value = 'Almoço'; cell.events.input();
+assert('table-edit-persisted', states['0:0:table'].rows[0][0] === 'Almoço');
+find(table, e => e.tag === 'button' && e.textContent === 'Adicionar linha').click();
+assert('table-add-row', states['0:0:table'].rows.length === 2);
+table = mount('table', { title: 'Custos', columns: ['Item', 'Valor'], rows: [['Café', '10']] });
+assert('table-remount', find(table, e => e.tag === 'input' && e.value === 'Almoço') !== null);
+find(table, e => e.tag === 'button' && e.textContent === 'Restaurar original').click();
+assert('table-reset', states['0:0:table'].rows[0][0] === 'Café');
+
+let form = mount('form', { title: 'Dados', fields: [{ name: 'nome', label: 'Nome', type: 'text' }] });
+let field = find(form, e => e.tag === 'input' && e.name === 'nome');
+field.value = 'Júlia'; field.events.input();
+form = mount('form', { title: 'Dados', fields: [{ name: 'nome', label: 'Nome', type: 'text' }] });
+assert('form-remount', find(form, e => e.tag === 'input' && e.value === 'Júlia') !== null);
+
+let calc = mount('calculator', { title: 'Conta', kind: 'basic' });
+find(calc, e => e.tag === 'button' && e.textContent === '1').click();
+find(calc, e => e.tag === 'button' && e.textContent === '+').click();
+find(calc, e => e.tag === 'button' && e.textContent === '2').click();
+find(calc, e => e.tag === 'button' && e.textContent === '=').click();
+assert('calculator-result-persisted', states['0:0:calculator'].expression === '3');
+calc = mount('calculator', { title: 'Conta', kind: 'basic' });
+assert('calculator-remount', find(calc, e => e.className === 'jdui-disp').textContent === '3');
+"""
+
 
 def test_jdui_js_paridade():
     if NODE is None:
@@ -138,6 +213,18 @@ def test_jdui_js_paridade():
     with tempfile.TemporaryDirectory() as tmp:
         harness = Path(tmp) / 'harness_jdui.cjs'
         harness.write_text(HARNESS_JDUI, encoding='utf-8')
+        r = subprocess.run([NODE, str(harness), str(RAIZ / 'public' / 'jdui.js')],
+                           capture_output=True, text=True, timeout=60)
+        assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
+        assert 'FAIL' not in r.stdout
+
+
+def test_jdui_interacoes_persistem():
+    if NODE is None:
+        pytest.skip('Node indisponível')
+    with tempfile.TemporaryDirectory() as tmp:
+        harness = Path(tmp) / 'harness_jdui_state.cjs'
+        harness.write_text(HARNESS_JDUI_STATE, encoding='utf-8')
         r = subprocess.run([NODE, str(harness), str(RAIZ / 'public' / 'jdui.js')],
                            capture_output=True, text=True, timeout=60)
         assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
@@ -158,6 +245,21 @@ def test_html_sem_classes_escapadas():
         assert f'id="{eid}"' in html, eid
 
 
+def test_acoes_de_historico_arquivos_e_contexto_local_ligadas():
+    html = (RAIZ / 'public' / 'index.html').read_text(encoding='utf-8')
+    js = APP_JS.read_text(encoding='utf-8')
+    for eid in ('historySearch', 'historyResults', 'savedItems', 'exportTxt',
+                'exportCsv', 'exportXlsx', 'exportPdf', 'shareConversation',
+                'contextCity', 'locationEnabled', 'useCurrentLocation', 'clearLocation',
+                'deviceTimeStatus'):
+        assert f'id="{eid}"' in html, eid
+        assert f"$('{eid}')" in js, eid
+    assert '/api/export/xlsx' in js
+    assert 'navigator.geolocation.getCurrentPosition' in js
+    assert 'local_time: localTime' in js and 'timezone' in js
+    assert "item('save', 'Salvar item neste aparelho')" in js
+
+
 def test_sessoes_sem_fragmentacao():
     """Regressão: cada mensagem virando um chat (id ativo só no localStorage).
 
@@ -174,7 +276,7 @@ def test_sessoes_sem_fragmentacao():
         s = linha.strip()
         if s.startswith('activeConversation = newId()'):
             raise AssertionError('atribuição direta cria chats fantasmas: ' + s)
-    assert "openDb" in texto and ", 3)" in texto  # DB v3 tem stores META/UISTATE
+    assert "openDb" in texto and ", 4)" in texto  # DB v4 inclui a biblioteca local de itens salvos
     # Excluída não ressuscita: tombstone filtra merge, listas, contas e resolve.
     for fn in ('loadTombstones', 'tombstone(', 'isDeleted(', "deleted:'"):
         assert fn in texto, fn

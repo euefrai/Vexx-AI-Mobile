@@ -245,10 +245,22 @@
           </div>
           <div class="memory-list" id="memoryPending"></div>
           <div class="memory-list" id="memoryList"></div>
+          <div class="drawer-search">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <input id="historySearch" type="search" placeholder="Buscar nas conversas antigas…" aria-label="Buscar nas conversas antigas" autocomplete="off" />
+          </div>
+          <div class="memory-list" id="historyResults"></div>
           <div class="memory-foot">
             <button id="memoryRefresh" class="subtle-button" type="button">↻ Atualizar</button>
             <label class="mem-toggle" title="Aprendizado automático"><input type="checkbox" id="learningToggle" checked /> Aprender sozinha</label>
           </div>
+        </div>
+
+        <h2 class="section-caption">Itens salvos neste aparelho</h2>
+        <div class="sync-card">
+          <strong>Respostas e materiais guardados</strong>
+          <span>Ficam neste aparelho até você exportar ou apagar o cache.</span>
+          <div class="memory-list" id="savedItems"></div>
         </div>
 
         <h2 class="section-caption">Próximos eventos</h2>
@@ -259,11 +271,31 @@
         <h2 class="section-caption">Exportar conversa atual</h2>
         <div class="sync-card">
           <strong>Leve com você</strong>
-          <span>Arquivo gerado no celular, sem servidor.</span>
+          <span>TXT/CSV/Markdown são gerados no celular; Excel usa o relay autenticado sem armazenar o arquivo.</span>
           <div class="export-row">
             <button id="exportMd" class="subtle-button" type="button">⬇ Markdown</button>
             <button id="exportJson" class="subtle-button" type="button">⬇ JSON</button>
+            <button id="exportTxt" class="subtle-button" type="button">⬇ TXT</button>
+            <button id="exportCsv" class="subtle-button" type="button">⬇ CSV</button>
+            <button id="exportXlsx" class="subtle-button" type="button">⬇ Excel</button>
+            <button id="exportPdf" class="subtle-button" type="button">Imprimir / PDF</button>
+            <button id="shareConversation" class="subtle-button" type="button">Compartilhar</button>
           </div>
+        </div>
+
+        <h2 class="section-caption">Data, hora e local</h2>
+        <div class="sync-card">
+          <strong>Contexto só quando você conversa</strong>
+          <span>A data, hora local e fuso do aparelho são enviados com cada pedido à IA. Localização é opcional, nunca rastreada em segundo plano, e só é enviada em perguntas locais.</span>
+          <span id="deviceTimeStatus" role="status"></span>
+          <label class="fld" for="contextCity">Cidade ou região (opcional)</label>
+          <input id="contextCity" type="text" maxlength="100" autocomplete="address-level2" placeholder="Ex.: Recife, PE" />
+          <label class="mem-toggle"><input type="checkbox" id="locationEnabled" /> Usar meu local em perguntas sobre lugares</label>
+          <div class="export-row">
+            <button id="useCurrentLocation" class="subtle-button" type="button">Definir localização atual</button>
+            <button id="clearLocation" class="subtle-button" type="button">Apagar localização</button>
+          </div>
+          <span id="locationStatus" role="status">Localização desligada.</span>
         </div>
 
         <h2 class="section-caption">Sincronização <span class="pending-badge" id="pendingCount">0 pendentes</span></h2>

@@ -88,6 +88,48 @@ def test_relay_exige_auth_e_valida():
                            headers={"X-CSRF-Token": csrf}).status_code == 422
 
 
+def test_gate_agente_nega_sem_grant(tmp_path):
+    """V4.2 §2: conta comum sem grant não vê tela nem controla (sem vazar imagem)."""
+    import julia_auth as _ja
+
+    import pc_agent
+    db = pc_agent.open_db(tmp_path / "gate_nega.sqlite3")
+    _ja.criar_usuario(db, "visit", "Visita", "senha-forte-1", criado_por="t")
+    uid = _ja.buscar_usuario(db, "visit")["uid"]
+    r = pc_agent.resposta_screen(db, {"max_w": 800, "q": 50}, uid, "r1")
+    assert r["type"] == "screen_error" and r["codigo"] == "sem_permissao"
+    assert "imagem" not in r and r["request_id"] == "r1"
+    r = pc_agent.resposta_input(db, {"cmd": {"kind": "click", "x": 0.5, "y": 0.5}}, uid, "r2")
+    assert r["type"] == "input_error" and r["codigo"] == "sem_permissao"
+    db.close()
+
+
+def test_gate_agente_permite_grant_e_local(tmp_path, monkeypatch):
+    """Grant explícito libera; dono local sempre; bloqueio revoga mesmo com grant."""
+    import julia_auth as _ja
+
+    import pc_agent
+    monkeypatch.setattr(remoto, "capturar",
+                        lambda *a, **k: {"imagem": "x", "largura": 1, "altura": 1, "ms": 0})
+    monkeypatch.setattr(remoto, "executar", lambda cmd: {"ok": True, "kind": cmd["kind"]})
+    db = pc_agent.open_db(tmp_path / "gate_ok.sqlite3")
+    _ja.criar_usuario(db, "visit", "Visita", "senha-forte-1", criado_por="t")
+    uid = _ja.buscar_usuario(db, "visit")["uid"]
+    assert pc_agent.resposta_screen(db, {}, "local", "r1")["type"] == "screen"
+    _ja.update_limits(db, "local", uid, 0, 0, True)
+    assert pc_agent.resposta_screen(db, {}, uid, "r2")["type"] == "screen"
+    r = pc_agent.resposta_input(db, {"cmd": {"kind": "click", "x": 0.5, "y": 0.5}}, uid, "r3")
+    assert r["type"] == "input_done" and r["kind"] == "click"
+    _ja.update_limits(db, "local", uid, 0, 0, False)
+    assert pc_agent.resposta_screen(db, {}, uid, "r4")["codigo"] == "sem_permissao"
+    _ja.update_limits(db, "local", uid, 0, 0, True)
+    _ja.definir_status(db, "local", uid, "bloqueado")
+    assert pc_agent.resposta_screen(db, {}, uid, "r5")["codigo"] == "sem_permissao"
+    assert pc_agent.resposta_input(
+        db, {"cmd": {"kind": "click", "x": 0.5, "y": 0.5}}, uid, "r6")["codigo"] == "sem_permissao"
+    db.close()
+
+
 def test_screen_input_via_agente_fake():
     with TestClient(server.app) as client:
         csrf = _login(client)

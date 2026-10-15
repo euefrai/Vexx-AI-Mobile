@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import JULIA_auth
+import julia_auth as JULIA_auth
 import pc_agent
 import server
 from argon2 import PasswordHasher
@@ -434,7 +434,7 @@ def test_relay_admin_exige_papel():
 
 def test_remoto_exige_grant_explicito():
     db = _db()
-    import JULIA_auth as _ja
+    import julia_auth as _ja
     _ja.criar_usuario(db, 'visit', 'Visita', 'senha-forte-1', criado_por='t')
     visitante = _ja.buscar_usuario(db, 'visit')['uid']
     assert _ja.pode_remoto(db, 'local') is True  # dono do PC
@@ -456,7 +456,7 @@ def test_remoto_exige_grant_explicito():
 
 def test_suspensao_temporaria_auto_levanta():
     db = _db()
-    import JULIA_auth as _ja
+    import julia_auth as _ja
     _ja.criar_usuario(db, 'temp', 'Temp', 'senha-forte-1', criado_por='t')
     uid = _ja.buscar_usuario(db, 'temp')['uid']
     _ja.definir_status(db, 'local', uid, 'bloqueado', dias=1)

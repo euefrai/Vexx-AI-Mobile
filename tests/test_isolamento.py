@@ -88,7 +88,7 @@ def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
                                    'owner': 'bob'}, cfg)
     assert r2.get('codigo') == 'sem_mensagem'
     # com contas existindo, desconhecido é barrado na porta
-    import JULIA_auth as _ja
+    import julia_auth as _ja
     _ja.criar_usuario(db, 'carol', 'Carol', 'senha-forte-1', criado_por='t')
     r3 = pc_agent.ai_completa(db, {'message_id': 'r-user-001', 'conversation_id': 'conv-a',
                                    'owner': 'dave'}, cfg)
@@ -99,7 +99,7 @@ def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
 def test_dono_legado_vale_mesmo_com_usuarios(tmp_path):
     from pathlib import Path as _P
     import tempfile as _t
-    import JULIA_auth as _ja
+    import julia_auth as _ja
     db = pc_agent.open_db(_P(_t.mkdtemp()) / 'leg.sqlite3')
     pc_agent.guardar_fato(db, 'nome', 'Amigo', owner='u-abc123')
     # sem contas: legado vale, desconhecido passa mas nada vaza (leituras filtram)

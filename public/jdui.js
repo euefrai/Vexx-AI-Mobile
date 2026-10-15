@@ -576,23 +576,51 @@
   };
 
   R.checklist = function (root, props, st, save) {
-    st.checked = Array.isArray(st.checked) ? st.checked : props.items.map(i => !!i.checked);
+    if (!Array.isArray(st.items)) {
+      st.items = props.items.map((item, i) => ({
+        label: item.label,
+        checked: Array.isArray(st.checked) ? !!st.checked[i] : !!item.checked
+      }));
+    }
+    st.items = st.items.filter(i => i && typeof i.label === 'string')
+      .slice(0, 30).map(i => ({ label: i.label.slice(0, 200), checked: !!i.checked }));
     const box = el('div', 'jdui-check');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const pg = bar(0); box.appendChild(pg);
     const info = el('div', 'jdui-count'); box.appendChild(info);
     const list = el('div', 'jdui-items'); box.appendChild(list);
+    const controls = el('div', 'jdui-actions');
+    const newTask = document.createElement('input');
+    newTask.type = 'text'; newTask.maxLength = 200; newTask.placeholder = 'Adicionar tarefa';
+    newTask.setAttribute('aria-label', 'Nova tarefa');
+    const add = el('button', 'jdui-btn ghost', 'Adicionar');
+    add.type = 'button';
+    add.addEventListener('click', () => {
+      const label = String(newTask.value || '').trim().slice(0, 200);
+      if (!label || st.items.length >= 30) return;
+      st.items.push({ label, checked: false }); newTask.value = ''; save(st); paint();
+    });
+    newTask.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); add.click(); }
+    });
+    const reset = el('button', 'jdui-btn ghost', 'Reiniciar');
+    reset.type = 'button';
+    reset.addEventListener('click', () => {
+      st.items = props.items.map(i => ({ label: i.label, checked: !!i.checked }));
+      save(st); paint();
+    });
+    controls.append(newTask, add, reset); box.appendChild(controls);
     function paint() {
-      const n = st.checked.filter(Boolean).length;
-      pg.firstChild.style.width = (props.items.length ? n / props.items.length * 100 : 0) + '%';
-      info.textContent = n + ' de ' + props.items.length + ' concluídas';
+      const n = st.items.filter(i => i.checked).length;
+      pg.firstChild.style.width = (st.items.length ? n / st.items.length * 100 : 0) + '%';
+      info.textContent = n + ' de ' + st.items.length + ' concluídas';
       list.replaceChildren();
-      props.items.forEach((it, i) => {
-        const lab = el('label', 'jdui-item' + (st.checked[i] ? ' done' : ''));
+      st.items.forEach((it, i) => {
+        const lab = el('label', 'jdui-item' + (it.checked ? ' done' : ''));
         const c = document.createElement('input');
-        c.type = 'checkbox'; c.checked = !!st.checked[i];
+        c.type = 'checkbox'; c.checked = it.checked;
         c.setAttribute('aria-label', it.label);
-        c.addEventListener('change', () => { st.checked[i] = c.checked; save(st); paint(); });
+        c.addEventListener('change', () => { st.items[i].checked = c.checked; save(st); paint(); });
         lab.appendChild(c); lab.appendChild(el('span', '', it.label));
         list.appendChild(lab);
       });
@@ -601,14 +629,15 @@
     root.appendChild(box);
   };
 
-  R.calculator = function (root, props) {
+  R.calculator = function (root, props, st, save) {
     const box = el('div', 'jdui-calc');
     box.appendChild(el('div', 'jdui-title', props.title || 'Calculadora'));
     if (props.kind === 'basic') {
       const disp = el('div', 'jdui-disp', '0');
       disp.setAttribute('aria-live', 'polite');
       box.appendChild(disp);
-      let cur = '';
+      let cur = typeof st.expression === 'string' ? st.expression.slice(0, 120) : '';
+      disp.textContent = cur || '0';
       const grid = el('div', 'jdui-grid');
       ['C', '⌫', '%', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '0', '.', '(', ')'].forEach(k => {
         const b = el('button', 'jdui-key' + ('/*÷-+= '.indexOf(k) >= 0 || k === 'C' ? ' op' : ''), k);
@@ -616,8 +645,9 @@
         b.addEventListener('click', () => {
           if (k === 'C') cur = '';
           else if (k === '⌫') cur = cur.slice(0, -1);
-          else cur += k;
+          else if (cur.length < 120) cur += k;
           disp.textContent = cur || '0';
+          st.expression = cur; save(st);
         });
         grid.appendChild(b);
       });
@@ -626,6 +656,7 @@
       eq.addEventListener('click', () => {
         try { const v = calcExpr(cur); disp.textContent = fmt(v); cur = String(v); }
         catch (_) { disp.textContent = 'Erro'; cur = ''; }
+        st.expression = cur; save(st);
       });
       grid.appendChild(eq);
       box.appendChild(grid);
@@ -640,9 +671,13 @@
         const lab = el('label', 'jdui-field', f[1]);
         const inp = document.createElement('input');
         inp.type = 'number'; inp.inputMode = 'decimal'; inp.name = f[0];
+        inp.value = st.values && typeof st.values[f[0]] === 'string' ? st.values[f[0]].slice(0, 40) : '';
+        inp.addEventListener('input', () => {
+          st.values = st.values || {}; st.values[f[0]] = inp.value.slice(0, 40); save(st);
+        });
         lab.appendChild(inp); box.appendChild(lab); inputs[f[0]] = inp;
       });
-      const out = el('div', 'jdui-result', 'Preencha e toque em Calcular.');
+      const out = el('div', 'jdui-result', st.result || 'Preencha e toque em Calcular.');
       const go = el('button', 'jdui-btn', 'Calcular');
       go.addEventListener('click', () => {
         const g = n => parseFloat(String(inputs[n] ? inputs[n].value : '').replace(',', '.'));
@@ -663,6 +698,9 @@
         out.appendChild(el('span', '', pre));
         if (bold) out.appendChild(el('strong', '', bold));
         if (pos) out.appendChild(el('span', '', pos));
+        st.values = st.values || {};
+        Object.keys(inputs).forEach(name => { st.values[name] = inputs[name].value.slice(0, 40); });
+        st.result = out.textContent; save(st);
       });
       box.appendChild(go); box.appendChild(out);
     }
@@ -732,9 +770,35 @@
     root.appendChild(box);
   };
 
-  R.table = function (root, props) {
+  R.table = function (root, props, st, save) {
     const box = el('div', 'jdui-tablewrap');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    if (!Array.isArray(st.rows)) st.rows = props.rows.map(row => row.slice());
+    st.rows = st.rows.slice(0, 30).map(row =>
+      Array.isArray(row) ? row.slice(0, props.columns.length).map(c => String(c).slice(0, 200)) : []);
+    st.editing = !!st.editing;
+    const controls = el('div', 'jdui-actions');
+    const edit = el('button', 'jdui-btn ghost', st.editing ? 'Concluir edição' : 'Editar tabela');
+    edit.type = 'button';
+    const addRow = el('button', 'jdui-btn ghost', 'Adicionar linha');
+    addRow.type = 'button';
+    const reset = el('button', 'jdui-btn ghost', 'Restaurar original');
+    reset.type = 'button';
+    const exportCsv = el('button', 'jdui-btn ghost', 'Baixar CSV');
+    exportCsv.type = 'button';
+    exportCsv.addEventListener('click', () => {
+      if (!ctx.download) return;
+      const quote = value => {
+        let text = String(value == null ? '' : value);
+        if (/^[=+\-@]/.test(text)) text = "'" + text;
+        return '"' + text.replace(/"/g, '""') + '"';
+      };
+      const csv = [props.columns, ...st.rows].map(row => row.map(quote).join(',')).join('\r\n');
+      const filename = (props.title || 'tabela').replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'tabela';
+      ctx.download(filename + '.csv', 'text/csv', '\uFEFF' + csv);
+    });
+    controls.append(edit, addRow, reset, exportCsv);
+    box.appendChild(controls);
     const wrap = el('div', 'jdui-scrollx');
     const t = document.createElement('table');
     t.className = 'jdui-table';
@@ -743,10 +807,10 @@
     let sortCol = -1, sortAsc = true;
     const tbody = document.createElement('tbody');
     function rows() {
-      let rs = props.rows.slice();
+      let rs = st.rows.map((row, index) => ({ row, index }));
       if (sortCol >= 0) {
         rs.sort((a, b) => {
-          const x = a[sortCol] || '', y = b[sortCol] || '';
+          const x = a.row[sortCol] || '', y = b.row[sortCol] || '';
           const nx = parseFloat(String(x).replace(',', '.')), ny = parseFloat(String(y).replace(',', '.'));
           const c = (!isNaN(nx) && !isNaN(ny)) ? nx - ny : String(x).localeCompare(String(y), 'pt-BR');
           return sortAsc ? c : -c;
@@ -756,14 +820,37 @@
     }
     function paint() {
       tbody.replaceChildren();
-      rows().forEach(r => {
+      rows().forEach(item => {
         const tr = document.createElement('tr');
-        r.forEach(c => tr.appendChild(el('td', '', c)));
+        item.row.forEach((value, column) => {
+          const td = document.createElement('td');
+          if (st.editing) {
+            const input = document.createElement('input');
+            input.type = 'text'; input.maxLength = 200; input.value = value;
+            input.setAttribute('aria-label', props.columns[column] + ', linha ' + (item.index + 1));
+            input.addEventListener('input', () => {
+              st.rows[item.index][column] = input.value.slice(0, 200); save(st);
+            });
+            td.appendChild(input);
+          } else td.textContent = value;
+          tr.appendChild(td);
+        });
+        if (st.editing) {
+          const remove = el('button', 'jdui-btn ghost', 'Remover');
+          remove.type = 'button';
+          remove.addEventListener('click', () => { st.rows.splice(item.index, 1); save(st); paint(); });
+          const td = document.createElement('td'); td.appendChild(remove); tr.appendChild(td);
+        }
         tbody.appendChild(tr);
       });
       Array.prototype.forEach.call(hr.children, (th, i) => {
-        th.textContent = props.columns[i] + (i === sortCol ? (sortAsc ? ' ▲' : ' ▼') : '');
+        if (i < props.columns.length) th.textContent = props.columns[i] + (i === sortCol ? (sortAsc ? ' ▲' : ' ▼') : '');
       });
+      edit.textContent = st.editing ? 'Concluir edição' : 'Editar tabela';
+      addRow.disabled = !st.editing || st.rows.length >= 30;
+      reset.disabled = !st.editing;
+      actionHead.textContent = st.editing ? 'Ações' : '';
+      actionHead.hidden = !st.editing;
     }
     props.columns.forEach((c, i) => {
       const th = el('th', '', c);
@@ -774,16 +861,29 @@
       });
       hr.appendChild(th);
     });
+    const actionHead = document.createElement('th');
+    actionHead.hidden = true;
+    hr.appendChild(actionHead);
+    edit.addEventListener('click', () => { st.editing = !st.editing; save(st); paint(); });
+    addRow.addEventListener('click', () => {
+      if (!st.editing || st.rows.length >= 30) return;
+      st.rows.push(props.columns.map(() => '')); save(st); paint();
+    });
+    reset.addEventListener('click', () => {
+      if (!st.editing) return;
+      st.rows = props.rows.map(row => row.slice()); save(st); paint();
+    });
     thead.appendChild(hr); t.appendChild(thead); t.appendChild(tbody);
     wrap.appendChild(t); box.appendChild(wrap);
     paint();
     root.appendChild(box);
   };
 
-  R.form = function (root, props) {
+  R.form = function (root, props, st, save) {
     const box = el('div', 'jdui-form');
     box.appendChild(el('div', 'jdui-title', props.title || 'Formulário'));
     const vals = {};
+    st.values = st.values && typeof st.values === 'object' ? st.values : {};
     props.fields.forEach(f => {
       const lab = el('label', 'jdui-field', f.label + (f.required ? ' *' : ''));
       let inp;
@@ -796,9 +896,15 @@
         if (f.type === 'number') inp.inputMode = 'decimal';
       }
       inp.name = f.name;
+      if (typeof st.values[f.name] === 'string' || typeof st.values[f.name] === 'number') {
+        inp.value = String(st.values[f.name]).slice(0, 200);
+      }
+      const saveValue = () => { st.values[f.name] = String(inp.value || '').slice(0, 200); save(st); };
+      inp.addEventListener('input', saveValue);
+      inp.addEventListener('change', saveValue);
       lab.appendChild(inp); box.appendChild(lab); vals[f.name] = inp;
     });
-    const out = el('div', 'jdui-result', '');
+    const out = el('div', 'jdui-result', st.result || '');
     const go = el('button', 'jdui-btn', props.submit || 'Calcular');
     function g(name) {
       const i = vals[name];
@@ -841,6 +947,9 @@
         }
       }
       out.textContent = txt;
+      st.values = st.values || {};
+      Object.keys(vals).forEach(name => { st.values[name] = String(vals[name].value || '').slice(0, 200); });
+      st.result = txt; save(st);
     });
     box.appendChild(go); box.appendChild(out);
     root.appendChild(box);

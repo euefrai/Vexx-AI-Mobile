@@ -45,6 +45,20 @@ IndexedDB é escrita primeira; sync idempotente (`INSERT OR IGNORE` + ACK);
 tombstones para exclusão; `ui_state` com merge newer-wins. PC desligado =
 leitura/escrita local + IA indisponível (mensagem clara, sem simulação).
 
+## Histórico, materiais e contexto do aparelho
+
+- A busca rápida do painel percorre mensagens locais do dono ativo; mensagens
+  antigas ainda não sincronizadas com o PC não aparecem na busca do agente.
+- Respostas salvas e estados de tabelas, formulários, calculadoras e checklists
+  ficam no IndexedDB deste aparelho e são removidos ao apagar o cache.
+- Exportações em Markdown, JSON, TXT e CSV são geradas no aparelho; o XLSX é
+  montado pelo relay autenticado com no máximo 500 mensagens, sem armazenar a
+  planilha. PDF usa a janela de impressão do navegador (Salvar como PDF).
+- Cada pedido envia a hora local em ISO 8601 e o fuso IANA do dispositivo.
+  Cidade e coordenadas aproximadas (arredondadas a duas casas) só são incluídas
+  quando o usuário ativa o recurso e pergunta sobre um lugar. Não há geolocalização
+  contínua nem obtenção automática em segundo plano.
+
 ## Limites assumidos
 
 - 1 PC pareado, 1 agente WS por vez; sem fila de tarefas (V4.5).

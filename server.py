@@ -164,6 +164,22 @@ class AIRequest(BaseModel):
     conversation_id: str = Field(min_length=3, max_length=100)
     model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
     memory: int = Field(default=1, ge=0, le=1)
+    local_time: str = Field(default="", max_length=48)
+    timezone: str = Field(default="", max_length=80)
+    city: str = Field(default="", max_length=100)
+    latitude: float | None = Field(default=None, ge=-90, le=90)
+    longitude: float | None = Field(default=None, ge=-180, le=180)
+
+
+class ExportMessage(BaseModel):
+    role: str = Field(pattern=r"^(user|assistant)$")
+    text: str = Field(max_length=10000)
+    created_at: str = Field(default="", max_length=48)
+
+
+class XlsxExport(BaseModel):
+    title: str = Field(default="Conversa", max_length=100)
+    messages: list[ExportMessage] = Field(min_length=1, max_length=500)
 
 
 class InputBody(BaseModel):
@@ -721,6 +737,50 @@ def status(request: Request):
             "messages_stored_on": "computer"}
 
 
+@app.post("/api/export/xlsx")
+async def export_xlsx(request: Request, body: XlsxExport):
+    """Gera planilha de uma conversa já carregada no dispositivo autenticado."""
+    require_csrf(request)
+    await revogacao_ok(request)
+    from io import BytesIO
+
+    from openpyxl import Workbook
+    from openpyxl.styles import Alignment, Font, PatternFill
+
+    def cell_text(value: str) -> str:
+        text = str(value or "")
+        return "'" + text if text.startswith(("=", "+", "-", "@")) else text
+
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Conversa"
+    sheet.append(["Conversa", cell_text(body.title)])
+    sheet.append(["Autor", "Data e hora", "Mensagem"])
+    for cell in sheet[2]:
+        cell.font = Font(bold=True, color="FFFFFF")
+        cell.fill = PatternFill("solid", fgColor="4F46E5")
+    for message in body.messages:
+        sheet.append([
+            "Júlia" if message.role == "assistant" else "Você",
+            cell_text(message.created_at),
+            cell_text(message.text),
+        ])
+    sheet.freeze_panes = "A3"
+    sheet.auto_filter.ref = f"A2:C{sheet.max_row}"
+    sheet.column_dimensions["A"].width = 18
+    sheet.column_dimensions["B"].width = 25
+    sheet.column_dimensions["C"].width = 80
+    for row in sheet.iter_rows(min_row=3, min_col=3, max_col=3):
+        row[0].alignment = Alignment(wrap_text=True, vertical="top")
+    output = BytesIO()
+    workbook.save(output)
+    return Response(
+        content=output.getvalue(),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": 'attachment; filename="conversa.xlsx"'},
+    )
+
+
 @app.post("/api/sync")
 async def sync_messages(request: Request, body: SyncBody):
     require_csrf(request)
@@ -1006,7 +1066,10 @@ async def ai_complete(request: Request, body: AIRequest):
     result = await relay.exchange({"type": "ai", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
-                                   "model": body.model, "memory": body.memory}, timeout=180.0)
+                                   "model": body.model, "memory": body.memory,
+                                   "local_time": body.local_time, "timezone": body.timezone,
+                                   "city": body.city, "latitude": body.latitude,
+                                   "longitude": body.longitude}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -1019,6 +1082,11 @@ class AIContinue(BaseModel):
     message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
     conversation_id: str = Field(min_length=3, max_length=100)
     model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
+    local_time: str = Field(default="", max_length=48)
+    timezone: str = Field(default="", max_length=80)
+    city: str = Field(default="", max_length=100)
+    latitude: float | None = Field(default=None, ge=-90, le=90)
+    longitude: float | None = Field(default=None, ge=-180, le=180)
 
 
 @app.post("/api/ai/regenerate")
@@ -1044,7 +1112,10 @@ async def ai_continue(request: Request, body: AIContinue):
     result = await relay.exchange({"type": "ai_continue", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
-                                   "model": body.model}, timeout=180.0)
+                                   "model": body.model,
+                                   "local_time": body.local_time, "timezone": body.timezone,
+                                   "city": body.city, "latitude": body.latitude,
+                                   "longitude": body.longitude}, timeout=180.0)
     if result.get("type") == "ai_error":
         raise erro_relay(result, "Falha ao continuar")
     if result.get("type") != "ai_done" or "response_text" not in result:
@@ -1084,6 +1155,298 @@ async def remote_input(request: Request, body: InputBody):
     return {"ok": True, "kind": result.get("kind", "")}
 
 
+class LearnAttemptIn(BaseModel):
+    assessment_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+
+
+class LearnAnswerIn(BaseModel):
+    attempt_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    question_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    resposta: str = Field(min_length=1, max_length=2000)
+
+
+class LearnFinishIn(BaseModel):
+    attempt_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+
+
+class LearnAvulsoIn(BaseModel):
+    titulo: str = Field(default="Quiz", max_length=160)
+    assunto: str = Field(default="", max_length=120)
+    certas: int = Field(ge=0, le=1000)
+    total: int = Field(ge=1, le=1000)
+
+
+def _learn_erro(result: dict) -> HTTPException:
+    """learn_error do agente vira HTTP: bloqueada→403, ausente→404, resto→503."""
+    codigo = result.get("codigo", "erro")
+    if codigo == "bloqueada":
+        return erro_relay(result, "Conta indisponível.")
+    if codigo in ("ausente", "finalizada"):
+        raise HTTPException(404 if codigo == "ausente" else 409,
+                            result.get("error", "Não encontrado"))
+    return HTTPException(503, result.get("error", "Aprendizado indisponível"))
+
+
+@app.get("/api/learn/assessments/{aid}")
+async def learn_assessment(request: Request, aid: str):
+    """Prova sem gabarito (o gabarito só aparece na correção)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(aid) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "learn_get", "owner": dono, "id": aid},
+                                  timeout=20.0)
+    if result.get("type") != "learn_assessment":
+        raise _learn_erro(result)
+    return {"id": result["id"], "titulo": result.get("titulo", ""),
+            "assunto": result.get("assunto", ""), "origem": result.get("origem", ""),
+            "questions": result.get("questions", [])}
+
+
+@app.post("/api/learn/attempts")
+async def learn_attempt(request: Request, body: LearnAttemptIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_attempt", "owner": dono,
+                                   "assessment_id": body.assessment_id}, timeout=20.0)
+    if result.get("type") != "learn_attempt":
+        raise _learn_erro(result)
+    return {"id": result["id"], "assessment_id": result.get("assessment_id", "")}
+
+
+@app.post("/api/learn/answer")
+async def learn_answer(request: Request, body: LearnAnswerIn):
+    """Correção objetiva determinística no PC; discursiva = avaliação assistida."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_answer", "owner": dono,
+                                   "attempt_id": body.attempt_id,
+                                   "question_id": body.question_id,
+                                   "resposta": body.resposta}, timeout=20.0)
+    if result.get("type") != "learn_answer":
+        raise _learn_erro(result)
+    saida = {"correta": result.get("correta")}
+    if "avaliacao" in result:
+        saida["avaliacao"] = result["avaliacao"]
+        saida["aviso"] = result.get("aviso", "")
+    return saida
+
+
+@app.post("/api/learn/finish")
+async def learn_finish(request: Request, body: LearnFinishIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_finish", "owner": dono,
+                                   "attempt_id": body.attempt_id}, timeout=20.0)
+    if result.get("type") != "learn_result":
+        raise _learn_erro(result)
+    return {"id": result["id"], "nota": result.get("nota", 0.0),
+            "certas": result.get("certas", 0), "total": result.get("total", 0),
+            "pendentes_avaliacao": result.get("pendentes_avaliacao", 0),
+            "erradas": result.get("erradas", [])[:10]}
+
+
+@app.post("/api/learn/avulso")
+async def learn_avulso(request: Request, body: LearnAvulsoIn):
+    """Registra resultado de quiz inline (JDUI quiz). Origem marcada como quiz-inline."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_avulso", "owner": dono,
+                                   "titulo": body.titulo, "assunto": body.assunto,
+                                   "certas": body.certas, "total": body.total},
+                                  timeout=20.0)
+    if result.get("type") != "learn_avulso_ok":
+        raise _learn_erro(result)
+    return {"ok": True, "assessment_id": result.get("assessment_id", ""),
+            "attempt_id": result.get("attempt_id", "")}
+
+
+@app.get("/api/learn/stats")
+async def learn_stats(request: Request):
+    """Resumo + desempenho por assunto (só dados reais; vazio útil sem dados)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_stats", "owner": dono}, timeout=20.0)
+    if result.get("type") != "learn_stats":
+        raise _learn_erro(result)
+    return {"resumo": result.get("resumo", {}), "por_assunto": result.get("por_assunto", [])}
+
+
+class LearnPlanIn(BaseModel):
+    titulo: str = Field(min_length=3, max_length=160)
+    objetivo: str = Field(default="", max_length=500)
+    assunto: str = Field(default="", max_length=120)
+    prazo_iso: str = Field(default="", max_length=32)
+    min_dia: int = Field(default=30, ge=5, le=480)
+    itens: list = Field(default=[], min_length=1, max_length=50)
+    id: str = Field(default="", max_length=64, pattern=r"^[a-zA-Z0-9_-]*$")
+
+
+class LearnPlanItemIn(BaseModel):
+    plan_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    item_id: int = Field(ge=1)
+    feito: bool = True
+
+
+class LearnPlanUpdateIn(BaseModel):
+    plan_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    mudancas: dict = Field(default={})
+
+
+class LearnCardsIn(BaseModel):
+    cards: list = Field(min_length=1, max_length=100)
+
+
+class LearnReviewIn(BaseModel):
+    flashcard_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    acertou: bool = True
+
+
+class LearnFlagIn(BaseModel):
+    question_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
+    motivo: str = Field(min_length=5, max_length=500)
+
+
+@app.post("/api/learn/plans")
+async def learn_plan_create(request: Request, body: LearnPlanIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_plan_create", "owner": dono,
+                                   "titulo": body.titulo, "objetivo": body.objetivo,
+                                   "assunto": body.assunto, "prazo_iso": body.prazo_iso,
+                                   "min_dia": body.min_dia, "itens": body.itens,
+                                   "id": body.id}, timeout=20.0)
+    if result.get("type") != "learn_plan":
+        raise _learn_erro(result)
+    return {"id": result["id"], "itens": result.get("itens", 0)}
+
+
+@app.get("/api/learn/plans")
+async def learn_plans(request: Request):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_plans", "owner": dono}, timeout=20.0)
+    if result.get("type") != "learn_plans":
+        raise _learn_erro(result)
+    return {"planos": result.get("planos", [])}
+
+
+@app.get("/api/learn/plans/{pid}")
+async def learn_plan_get(request: Request, pid: str):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not (2 <= len(pid) <= 64):
+        raise HTTPException(422, "Identificador inválido")
+    result = await relay.exchange({"type": "learn_plan_get", "owner": dono, "id": pid},
+                                  timeout=20.0)
+    if result.get("type") != "learn_plan_full":
+        raise _learn_erro(result)
+    result.pop("request_id", None)
+    result.pop("type", None)
+    return result
+
+
+@app.post("/api/learn/plans/item")
+async def learn_plan_item(request: Request, body: LearnPlanItemIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_plan_item", "owner": dono,
+                                   "plan_id": body.plan_id, "item_id": body.item_id,
+                                   "feito": "1" if body.feito else "0"}, timeout=20.0)
+    if result.get("type") != "learn_plan_progress":
+        raise _learn_erro(result)
+    return {"progresso": result.get("progresso", {})}
+
+
+@app.post("/api/learn/plans/update")
+async def learn_plan_update(request: Request, body: LearnPlanUpdateIn):
+    """Atualização compatível: concluídos preservados (match por título)."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_plan_update", "owner": dono,
+                                   "plan_id": body.plan_id, "mudancas": body.mudancas},
+                                  timeout=20.0)
+    if result.get("type") != "learn_plan_full":
+        raise _learn_erro(result)
+    result.pop("request_id", None)
+    result.pop("type", None)
+    return result
+
+
+@app.post("/api/learn/cards")
+async def learn_cards_create(request: Request, body: LearnCardsIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_cards_create", "owner": dono,
+                                   "cards": body.cards}, timeout=20.0)
+    if result.get("type") != "learn_cards":
+        raise _learn_erro(result)
+    return {"ids": result.get("ids", []), "total": result.get("total", 0)}
+
+
+@app.get("/api/learn/cards/due")
+async def learn_cards_due(request: Request, limite: int = 50):
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_cards_due", "owner": dono,
+                                   "limite": max(1, min(limite, 200))}, timeout=20.0)
+    if result.get("type") != "learn_cards_due":
+        raise _learn_erro(result)
+    return {"cards": result.get("cards", [])}
+
+
+@app.post("/api/learn/cards/review")
+async def learn_cards_review(request: Request, body: LearnReviewIn):
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_cards_review", "owner": dono,
+                                   "flashcard_id": body.flashcard_id,
+                                   "acertou": "1" if body.acertou else "0"}, timeout=20.0)
+    if result.get("type") != "learn_cards_review":
+        raise _learn_erro(result)
+    return {"id": result.get("id", ""), "acertou": result.get("acertou", True),
+            "intervalo_d": result.get("intervalo_d", 1),
+            "proxima_iso": result.get("proxima_iso", "")}
+
+
+@app.get("/api/learn/recommend")
+async def learn_recommend(request: Request):
+    """Recomendações determinísticas; sem dados → lista vazia com motivo."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_recommend", "owner": dono}, timeout=20.0)
+    if result.get("type") != "learn_recommend":
+        raise _learn_erro(result)
+    return {"recomendacoes": result.get("recomendacoes", []),
+            "motivo": result.get("motivo", "sem_dados"),
+            "aviso": result.get("aviso", "")}
+
+
+@app.post("/api/learn/flag")
+async def learn_flag(request: Request, body: LearnFlagIn):
+    """Sinaliza gabarito duvidoso (registra; não reescreve o histórico)."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_flag", "owner": dono,
+                                   "question_id": body.question_id,
+                                   "motivo": body.motivo}, timeout=20.0)
+    if result.get("type") != "learn_flag_ok":
+        raise _learn_erro(result)
+    return {"ok": True, "question_id": result.get("question_id", "")}
+
+
+@app.get("/api/learn/mistakes")
+async def learn_mistakes(request: Request, limite: int = 20):
+    """Erros recentes do dono (base p/ refazer e simulados de reforço)."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "learn_mistakes", "owner": dono,
+                                   "limite": max(1, min(limite, 100))}, timeout=20.0)
+    if result.get("type") != "learn_mistakes":
+        raise _learn_erro(result)
+    return {"erradas": result.get("erradas", [])}
+
+
 @app.get("/api/ai/models")
 async def ai_models(request: Request):
     verify_session(request)
@@ -1097,7 +1460,9 @@ async def ai_models(request: Request):
 
 @app.get("/api/ai/stream")
 async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
-                    model: str = "", memory: str = "1"):
+                    model: str = "", memory: str = "1", local_time: str = "",
+                    timezone: str = "", city: str = "",
+                    latitude: float | None = None, longitude: float | None = None):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     require_csrf(request)
     dono = await revogacao_ok(request)
@@ -1108,13 +1473,21 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     ws = relay.ws
     if ws is None:
         raise HTTPException(503, "Computador desconectado; mensagens continuam no celular")
+    if len(local_time) > 48 or len(timezone) > 80 or len(city) > 100:
+        raise HTTPException(422, "Contexto local inválido")
+    if latitude is not None and not -90 <= latitude <= 90:
+        raise HTTPException(422, "Latitude inválida")
+    if longitude is not None and not -180 <= longitude <= 180:
+        raise HTTPException(422, "Longitude inválida")
     stream_id = uuid.uuid4().hex
     fila: asyncio.Queue = asyncio.Queue()
     relay.streams[stream_id] = fila
     payload = {"type": "ai_stream", "owner": dono,
                "message_id": message_id,
                "conversation_id": conversation_id, "model": model[:120],
-               "memory": "1" if memory != "0" else "0"}
+               "memory": "1" if memory != "0" else "0",
+               "local_time": local_time, "timezone": timezone, "city": city,
+               "latitude": latitude, "longitude": longitude}
 
     async def gerar():
         concluido = False

@@ -357,6 +357,51 @@ def _tokens_memoria(texto: str) -> set:
     return tokens | {t[:-1] for t in tokens if len(t) > 4 and t.endswith("s")}
 
 
+def _contexto_local_seguro(payload: dict) -> dict:
+    """Aceita contexto explícito do aparelho sem usar localização fora do pedido."""
+    contexto = {}
+    instante = str(payload.get("local_time", ""))[:48]
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})?", instante):
+        contexto["local_time"] = instante
+    zona = str(payload.get("timezone", ""))[:80]
+    if re.fullmatch(r"[A-Za-z0-9_+.-]+(?:/[A-Za-z0-9_+.-]+){0,4}", zona):
+        contexto["timezone"] = zona
+    cidade = re.sub(r"[\r\n<>]", " ", str(payload.get("city", ""))).strip()[:100]
+    if cidade:
+        contexto["city"] = cidade
+    try:
+        lat = float(payload["latitude"])
+        lon = float(payload["longitude"])
+        if -90 <= lat <= 90 and -180 <= lon <= 180:
+            contexto["coordinates"] = (round(lat, 2), round(lon, 2))
+    except (KeyError, TypeError, ValueError):
+        pass
+    return contexto
+
+
+def _instrucoes_contexto_local(contexto_local: dict | None) -> list[str]:
+    if not contexto_local:
+        return []
+    instrucoes = []
+    hora = contexto_local.get("local_time", "")
+    zona = contexto_local.get("timezone", "")
+    if hora or zona:
+        instrucoes.append(
+            "DATA E HORA INFORMADAS PELO APARELHO PARA ESTA MENSAGEM "
+            "(use como referência atual; não estime pela sua memória): " +
+            (f"{hora} " if hora else "") + (f"fuso IANA {zona}" if zona else ""))
+    cidade = contexto_local.get("city", "")
+    coords = contexto_local.get("coordinates")
+    if cidade or coords:
+        local = f"região escolhida pelo usuário: {cidade}" if cidade else "local aproximado do aparelho"
+        if coords:
+            local += f"; coordenadas arredondadas: {coords[0]}, {coords[1]}"
+        instrucoes.append(
+            "LOCALIZAÇÃO COMPARTILHADA PELO USUÁRIO SÓ PARA ESTA PERGUNTA: " +
+            local + ". Não deduza endereço exato nem afirme que há rastreamento contínuo.")
+    return instrucoes
+
+
 def lembrancas_relevantes(db, pergunta: str, conversation_id: str,
                            k: int = 4, owner=DONO_PADRAO) -> list:
     """Recupera falas antigas do próprio usuário por assunto, sem presumir fatos."""
@@ -1397,13 +1442,14 @@ def aplicar_orcamento(historico: list, teto: int = ORCAMENTO_CHARS) -> list:
 
 
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
-                        owner=DONO_PADRAO) -> tuple:
+                        owner=DONO_PADRAO, contexto_local: dict | None = None) -> tuple:
     """Monta o prompt com contexto local + memória relevante + pesquisa."""
     owner = dono_valido(owner)
     memoria_on = cfg.get("memoria_global", True)
     historico = aplicar_orcamento(contexto_conversa(db, conversation_id, cfg["context"], owner))
     extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
     partes_sistema = [cfg["system"], REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO]
+    partes_sistema.extend(_instrucoes_contexto_local(contexto_local))
     if memoria_on:
         rel = memorias_relevantes(db, texto_usuario, owner=owner)
         if rel:
@@ -1591,6 +1637,43 @@ def dono_bloqueado(db, owner: str) -> bool:
         return True
 
 
+def resposta_screen(db, req: dict, dono: str, request_id: str) -> dict:
+    """Foto da tela: observar E controlar exigem grant explícito (V4.2 §2).
+
+    Conta comum sem ``remote_ok`` recebe ``sem_permissao`` (o relay traduz
+    para 403) — nunca a imagem. Dono 'local' sempre autorizado.
+    """
+    if not JULIA_auth.pode_remoto(db, dono):
+        log.warning("remoto negado (screen) para %s", dono)
+        return {"request_id": request_id, "type": "screen_error",
+                "error": "Sem autorização para ver a tela.",
+                "codigo": "sem_permissao"}
+    try:
+        img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
+        return {"request_id": request_id, "type": "screen", **img,
+                "remote_enabled": remoto.entrada_ativada()}
+    except remoto.RemotoErro as exc:
+        return {"request_id": request_id, "type": "screen_error",
+                "error": str(exc), "codigo": exc.codigo}
+
+
+def resposta_input(db, req: dict, dono: str, request_id: str) -> dict:
+    """Mouse/teclado: exige o mesmo grant explícito da tela (V4.2 §2)."""
+    if not JULIA_auth.pode_remoto(db, dono):
+        log.warning("remoto negado (input) para %s", dono)
+        return {"request_id": request_id, "type": "input_error",
+                "error": "Sem autorização para controlar o PC.",
+                "codigo": "sem_permissao"}
+    try:
+        cmd = remoto.validar_comando(req.get("cmd", {}))
+        res = remoto.executar(cmd)
+        log.info("remoto: %s executado", res["kind"])
+        return {"request_id": request_id, "type": "input_done", **res}
+    except remoto.RemotoErro as exc:
+        return {"request_id": request_id, "type": "input_error",
+                "error": str(exc), "codigo": exc.codigo}
+
+
 def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     """Valida e aplica idempotência. Retorna {user_text, model, reply_id} ou {replay|busy|error}."""
     mid = payload.get("message_id", "")
@@ -1630,7 +1713,8 @@ def ai_preparar(db, payload: dict, cfg: dict) -> dict:
     ai_marcar(db, mid, conv, modelo, "queued", owner=owner)
     return {"user_text": row[0], "model": modelo,
             "reply_id": f"{mid}-r1", "conversation_id": conv,
-            "memoria_global": memoria_on, "owner": owner}
+            "memoria_global": memoria_on, "owner": owner,
+            "contexto_local": _contexto_local_seguro(payload)}
 
 
 def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> None:
@@ -1678,7 +1762,9 @@ def ai_continuar(db, payload: dict, cfg: dict) -> dict:
     modelo = payload.get("model") or est.get("model") or cfg["model"]
     cfg_eff = dict(cfg, memoria_global=True)
     historico = contexto_conversa(db, conv, min(cfg["context"], 8), owner)
-    messages = ([{"role": "system", "content": cfg["system"]}] + historico
+    contexto_local = _contexto_local_seguro(payload)
+    sistema = "\n".join([cfg["system"], *_instrucoes_contexto_local(contexto_local)])
+    messages = ([{"role": "system", "content": sistema}] + historico
                 + [{"role": "assistant", "content": (est["response_text"] or "")[-4000:]},
                    {"role": "user", "content": "Continue exatamente de onde parou, sem repetir o que já disse."}])
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -1769,7 +1855,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
     cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
-    messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""), owner)
+    messages, extras = ai_montar_mensagens(
+        db, conv, cfg_eff, prep.get("user_text", ""), owner,
+        prep.get("contexto_local"))
     try:
         res = hermes_bridge.chat_complete(cfg["proxy"], modelo, messages,
                                           max_tokens=cfg["max_tokens"])
@@ -1849,7 +1937,9 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             return
         ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
         cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
-        messages, extras = ai_montar_mensagens(db, conv, cfg_eff, prep.get("user_text", ""), owner)
+        messages, extras = ai_montar_mensagens(
+            db, conv, cfg_eff, prep.get("user_text", ""), owner,
+            prep.get("contexto_local"))
 
         def enviar(obj):
             try:
@@ -2233,6 +2323,9 @@ def run():
                             reply = {"request_id": request_id, "type": "doc_error",
                                      "error": str(exc)[:300],
                                      "codigo": getattr(exc, "codigo", "erro")}
+                    elif (req.get("type") or "").startswith("learn_") and dono_bloqueado(db, dono):
+                        reply = {"request_id": request_id, "type": "learn_error",
+                                 "error": "Conta indisponível.", "codigo": "bloqueada"}
                     elif req.get("type") == "learn_get":
                         try:
                             reply = {"request_id": request_id, "type": "learn_assessment",
@@ -2283,6 +2376,97 @@ def run():
                         reply = {"request_id": request_id, "type": "learn_stats",
                                  "resumo": learning.resumo_progresso(db, dono),
                                  "por_assunto": learning.desempenho_por_assunto(db, dono)}
+                    elif req.get("type") == "learn_plan_create":
+                        try:
+                            itens = req.get("itens", [])
+                            reply = {"request_id": request_id, "type": "learn_plan",
+                                     **learning.criar_plano(
+                                         db, dono, str(req.get("titulo", ""))[:160],
+                                         str(req.get("objetivo", ""))[:500],
+                                         str(req.get("assunto", ""))[:120],
+                                         str(req.get("prazo_iso", ""))[:32],
+                                         req.get("min_dia", 30),
+                                         itens if isinstance(itens, list) else [],
+                                         str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_plan_get":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_plan_full",
+                                     **learning.obter_plano(db, dono, str(req.get("id", ""))[:64])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_plan_item":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_plan_progress",
+                                     "progresso": learning.concluir_item(
+                                         db, dono, str(req.get("plan_id", ""))[:64],
+                                         int(req.get("item_id", 0) or 0),
+                                         str(req.get("feito", "1")).lower() not in ("0", "false", "nao", "não"))}
+                        except (learning.LearnErro, TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": getattr(exc, "codigo", "erro")}
+                    elif req.get("type") == "learn_plan_update":
+                        try:
+                            mud = req.get("mudancas", {})
+                            reply = {"request_id": request_id, "type": "learn_plan_full",
+                                     **learning.atualizar_plano(
+                                         db, dono, str(req.get("plan_id", ""))[:64],
+                                         mud if isinstance(mud, dict) else {})}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_plans":
+                        reply = {"request_id": request_id, "type": "learn_plans",
+                                 "planos": learning.listar_planos(db, dono)}
+                    elif req.get("type") == "learn_cards_create":
+                        try:
+                            cards = req.get("cards", [])
+                            reply = {"request_id": request_id, "type": "learn_cards",
+                                     **learning.criar_flashcards(
+                                         db, dono, cards if isinstance(cards, list) else [])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_cards_due":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_cards_due",
+                                     "cards": learning.revisoes_pendentes(
+                                         db, dono, limite=int(req.get("limite", 50) or 50))}
+                        except (TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": "erro"}
+                    elif req.get("type") == "learn_cards_review":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_cards_review",
+                                     **learning.revisar_flashcard(
+                                         db, dono, str(req.get("flashcard_id", ""))[:64],
+                                         str(req.get("acertou", "1")).lower() in ("1", "true", "sim"))}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_recommend":
+                        reply = {"request_id": request_id, "type": "learn_recommend",
+                                 **learning.recomendar(db, dono)}
+                    elif req.get("type") == "learn_flag":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_flag_ok",
+                                     **learning.sinalizar_questao(
+                                         db, dono, str(req.get("question_id", ""))[:64],
+                                         str(req.get("motivo", ""))[:500])}
+                        except learning.LearnErro as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "learn_mistakes":
+                        try:
+                            reply = {"request_id": request_id, "type": "learn_mistakes",
+                                     "erradas": learning.questoes_erradas(
+                                         db, dono, int(req.get("limite", 20) or 20))}
+                        except (TypeError, ValueError) as exc:
+                            reply = {"request_id": request_id, "type": "learn_error",
+                                     "error": str(exc), "codigo": "erro"}
                     elif req.get("type") == "ui_state_save":
                         salvos = 0
                         with db:
@@ -2413,29 +2597,9 @@ def run():
                             sessao.parar.set()
                         continue
                     elif req.get("type") == "screen":
-                        # Ver a tela é livre (só observar); controlar exige grant.
-                        try:
-                            img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
-                            reply = {"request_id": request_id, "type": "screen", **img,
-                                     "remote_enabled": remoto.entrada_ativada()}
-                        except remoto.RemotoErro as exc:
-                            reply = {"request_id": request_id, "type": "screen_error",
-                                     "error": str(exc), "codigo": exc.codigo}
+                        reply = resposta_screen(db, req, dono, request_id)
                     elif req.get("type") == "input":
-                        if not JULIA_auth.pode_remoto(db, dono):
-                            reply = {"request_id": request_id, "type": "input_error",
-                                     "error": "Sem autorização para controlar o PC.",
-                                     "codigo": "sem_permissao"}
-                            log.warning("remoto negado (input) para %s", dono)
-                        else:
-                            try:
-                                cmd = remoto.validar_comando(req.get("cmd", {}))
-                                res = remoto.executar(cmd)
-                                log.info("remoto: %s executado", res["kind"])
-                                reply = {"request_id": request_id, "type": "input_done", **res}
-                            except remoto.RemotoErro as exc:
-                                reply = {"request_id": request_id, "type": "input_error",
-                                         "error": str(exc), "codigo": exc.codigo}
+                        reply = resposta_input(db, req, dono, request_id)
                     else:
                         continue
                     with ENVIO_LOCK:
