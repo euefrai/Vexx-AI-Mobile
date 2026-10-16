@@ -1,18 +1,21 @@
-# Long-context and checkpoint evaluation
+# JÚLIA Long-Context Evaluation (V4.9)
 
-The frozen benchmark includes 10-, 25-, and 50-step persistence scenarios.
-`run_checkpoint_benchmark` writes each successive state using the production
-`ResearchContextStore`, closes SQLite, reopens it, restores the latest
-checkpoint, and measures exact set coverage for the objective, restrictions,
-decisions, evidence IDs, and pending steps.
+## Cenários 10/25/50
 
-Current sample run: 85 checkpoint writes across three scenarios; every listed
-state item was restored in the local fixture. This tests serialization,
-owner/job-scoped persistence and restart restoration only. It does not model
-network disconnections, corrections, source replacement, re-planning
-decisions, or real operations performed by the Orchestrator.
+`checkpoint_scenarios` no dataset: N checkpoints sequenciais por job, depois
+close→reopen→restore e comparação campo a campo (objetivo, restrições,
+decisões, evidências, pendências) + detecção de ids de operação duplicados.
 
-Duplicate execution is not measured: generated fixture step IDs are not a
-production operation ledger. The lab marks that metric unavailable. Semantic
-summaries/compaction and LLM continuity are separately blocked without real
-inference; deterministic checkpoints remain the authoritative persisted state.
+## Retomada real (§6)
+
+`test_retomada_longa_preserva_estado_e_nao_duplica` interrompe um `executar`
+de verdade no meio (modo investigativa) e retoma: mesmos ids de evidência
+(sem duplicatas), achados preservados, sequência de eventos ordenada e sem
+repetição.
+
+## Limites honestos
+
+- Sem LLM não há compactação semântica (`semantic_compaction:
+  unavailable_without_llm`); continuidade = registros estruturados, não resumo.
+- Resumo (`_resumo`) é auxiliar de exibição, nunca fonte de retomada.
+- Retomada perfeita não prometida: medida por retenção (achados + eventos).

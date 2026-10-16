@@ -23,6 +23,7 @@ import learning
 import remoto
 import research
 import research_agents
+import shopping
 import evidence_graph as evgraph
 import workspace_store
 from websockets.sync.client import connect
@@ -267,6 +268,7 @@ def open_db(path: Path):
     learning.criar_tabelas(db)
     research.criar_tabelas(db)
     research_agents.criar_tabelas(db)
+    shopping.criar_tabelas(db)
     evgraph.criar_tabelas(db)
     workspace_store.create_tables(db)
     db.execute("""CREATE TABLE IF NOT EXISTS memory_facts (
@@ -1309,6 +1311,8 @@ class JULIAPresentationEngine:
           "como se conecta", "etapas do", "mapa do sistema"), "diagram"),
         (("em tabela", "tabela com", "liste em colunas", "cronograma"), "table"),
         (("formulário", "formulario", "cadastro", "inscrição", "inscricao"), "form"),
+        (("grade de produtos", "cards de produto", "cartões de produto",
+          "galeria de produtos", "vitrine de produtos"), "productgrid"),
     ]
 
     @classmethod
@@ -1332,7 +1336,12 @@ JDUI_CATALOGO = (
     "chart{type:line|bar|pie|area|scatter,title,labels[],series[{label,values[]}],source}; "
     "dashboard{title,metrics[{label,value,hint}],chart?,source}; "
     "form{title,fields[{name,label,type:text|number|select,options}],calc:imc|juros|porcentagem|soma}; "
-    "progress{label,value,max}; tabs{tabs[{title,markdown}]}; accordion{items[{title,markdown}]}. "
+    "progress{label,value,max}; tabs{tabs[{title,markdown}]}; accordion{items[{title,markdown}]}; "
+    "productcard{produto{nome,marca,modelo,imagem,preco,loja,url,specs,avaliacao,disponibilidade,verificado_em}}; "
+    "productgrid{title,items[1..6 produtos]}; productcompare{title,items[2..4 produtos]}; "
+    "productdetails{produto}; productgallery{title,imagens[{url,legenda}]}. "
+    "PRODUTOS À VENDA (preço/loja/foto): NUNCA monte productcard/productgrid/productcompare/productdetails/productgallery "
+    "com seu conhecimento — esses cards vêm da ferramenta de pesquisa com dados verificados. "
     "REGRAS: JSON válido e pequeno (máx 6 blocos, 12 perguntas, 30 linhas); sem JavaScript, sem CSS, "
     "sem perguntas de volta quando pedirem app; quiz/calculadora/checklist NUNCA em texto corrido. "
     "GRÁFICOS SÓ com números dados pelo usuário ou já exibidos na conversa — nunca invente séries. "
@@ -1616,6 +1625,18 @@ REGRAS_ESCOPO_FORMATO = (
     "Prefira a interface visual solicitada à descrição em texto repetitiva."
 )
 
+REGRAS_SHOPPING = (
+    "SHOPPING (pesquisa de produtos): só cite preços, imagens, lojas, links, "
+    "avaliações e especificações vindos do RESULTADO DE PESQUISA DE PRODUTOS "
+    "desta conversa. NUNCA invente produto, preço, foto, desconto, estoque ou "
+    "avaliação. Sem dado verificado, escreva 'Preço não confirmado'. "
+    "Nunca afirme 'menor preço da internet'. Diferencie RAM física de RAM "
+    "virtual/expansível. Respeite orçamento e requisitos; exceções só com "
+    "explicação. Cards visuais vêm da ferramenta: NÃO emita blocos jdui "
+    "productcard/productgrid/productcompare/productdetails/productgallery — "
+    "descreva em texto e os cards serão anexados."
+)
+
 ORCAMENTO_CHARS = 12000
 
 
@@ -1637,7 +1658,8 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     memoria_on = cfg.get("memoria_global", True)
     historico = aplicar_orcamento(contexto_conversa(db, conversation_id, cfg["context"], owner))
     extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
-    partes_sistema = [cfg["system"], REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO]
+    partes_sistema = [cfg["system"], REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO,
+                       REGRAS_SHOPPING]
     partes_sistema.extend(_instrucoes_contexto_local(contexto_local))
     if memoria_on:
         rel = memorias_relevantes(db, texto_usuario, owner=owner)
@@ -1729,7 +1751,13 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         partes_sistema.append(f"O usuário pediu uma IMAGEM sobre '{termo_img}'. "
                               f"Além de descrever, inclua no final: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
                               "para exibir a imagem no chat.")
-    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario):
+    # V4.9.1: pedido de produto → o worker faz a busca shopping dedicada
+    # (com cards verificados); a pesquisa genérica síncrona é pulada aqui
+    # para não duplicar carga no Render Free.
+    eh_shop = shopping.detectar_intencao(texto_usuario) \
+        and not shopping.eh_followup(texto_usuario)
+    extras["shop"] = eh_shop
+    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) and not eh_shop:
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         consulta = (texto_usuario or "")[:200]
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
@@ -1841,6 +1869,7 @@ def _apagar_todos_dados(db, owner: str) -> int:
                             ("memories", "owner_id"), ("memory_facts", "owner_id"),
                             ("documents", "owner_id"), ("doc_chunks", "owner_id"),
                             ("ui_state", "owner_id"), ("memory_events", "owner_id"),
+                            ("shopping_consultas", "owner_id"),
                             ("workspace_records", "owner_id")):
             try:
                 cur = db.execute(f"DELETE FROM {tabela} WHERE {col}=?", (owner,))
@@ -2383,6 +2412,50 @@ def _cmd_analisar_tabular(db, texto: str, owner: str, conv: str) -> str:
     return "\n\n```jdui\n" + json.dumps(normalized, ensure_ascii=False) + "\n```"
 
 
+def cmd_qualidade(db, texto: str, owner: str) -> str:
+    """Painel admin de qualidade com dados reais (nunca fictícios)."""
+    t = (texto or "").lower()
+    if "qualidade da pesquisa" not in t and "painel de qualidade" not in t:
+        return ""
+    if owner != "local":
+        try:
+            u = JULIA_auth.buscar_uid(db, owner)
+        except Exception:
+            u = None
+        if not u or u.get("role") != "admin" or u.get("status") != "ativo":
+            return ("O painel de qualidade é restrito ao administrador. "
+                    "Peça a quem administra este PC. 🔒")
+    import research_quality_lab
+    runs = research_quality_lab.list_reports(db, owner)
+    if not runs:
+        return ("Ainda não há avaliações armazenadas. Rode uma avaliação "
+                "em /api/admin/quality/run e peça de novo. 📊")
+    ultimo = runs[0]
+    resumo = ultimo.get("summary", {}) or {}
+    metricas = [
+        {"label": "Precisão", "value": str(resumo.get("precision_at_k", "—")),
+         "hint": f"P@{resumo.get('k', '?')}"},
+        {"label": "Recall", "value": str(resumo.get("recall_at_k", "—")), "hint": "cobertura"},
+        {"label": "MRR", "value": str(resumo.get("mrr_at_k", "—")), "hint": "primeiro acerto"},
+        {"label": "NDCG", "value": str(resumo.get("ndcg_at_k", "—")), "hint": "ordenação"},
+        {"label": "Consultas", "value": str(resumo.get("query_count", "?")), "hint": "avaliadas"},
+        {"label": "Dataset", "value": f"{ultimo.get('dataset_id', '?')} {ultimo.get('dataset_version', '')}".strip(),
+         "hint": ultimo.get("dataset_sha256", "")[:12]},
+    ]
+    message = {"version": "JULIA-ui-message/v1", "blocks": [
+        {"type": "text", "content": f"Qualidade medida em {ultimo.get('created_at', '?')} "
+         f"({len(runs)} avaliações guardadas). Números reais do benchmark congelado."},
+        {"type": "ui", "component": "dashboard",
+         "props": {"title": "Quality Lab — último run",
+                   "metrics": metricas, "chart": None,
+                   "source": f"benchmark {ultimo.get('dataset_id', '?')}",
+                   "sources": []}}]}
+    valid, normalized, errors = jdui.validar_mensagem(message)
+    if not valid or normalized is None:
+        return f"Dados calculados, mas o painel não validou: {errors}."
+    return "\n\n```jdui\n" + json.dumps(normalized, ensure_ascii=False) + "\n```"
+
+
 def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
     mesmo com o Hermes bloqueado). Retorna texto ou ''."""
@@ -2681,6 +2754,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
     if rp:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
+    rq = cmd_qualidade(db, prep.get("user_text", ""), owner)
+    if rq:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rq, owner)
     resposta_tempo = _resposta_temporal_direta(
         prep.get("user_text", ""), prep.get("contexto_local", {}))
     if resposta_tempo:
@@ -2819,6 +2895,21 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
+        # V4.9.1: follow-ups de shopping reusam a última consulta (sem LLM/rede).
+        if shopping.eh_followup(prep.get("user_text", "")):
+            fup = shopping.responder_followup(db, owner, conv, prep.get("user_text", ""))
+            if fup:
+                texto_fup = fup["texto"] + (fup.get("fence") or "")
+                direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"],
+                                            texto_fup, owner)
+                try:
+                    enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                          "reply_id": direta["reply_id"],
+                                          "response_text": direta["response_text"],
+                                          "model": modelo})
+                except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                    pass
+                return
         resposta_tempo = _resposta_temporal_direta(
             prep.get("user_text", ""), prep.get("contexto_local", {}))
         if resposta_tempo:
@@ -2882,6 +2973,45 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             fut_sintese = _SINT_POOL.submit(_sintetizar_isolado, sintetizar_aula,
                                             owner, cfg_eff, owner, _tu)
         provider_started = time.monotonic()
+        # V4.9.1 Shopping Intelligence: busca real ANTES do LLM (operações
+        # reais emitidas como progresso; cards determinísticos no fim).
+        shop_res = None
+        if extras.get("shop"):
+            if sessao.parar.is_set():
+                ai_marcar(db, mid, conv, modelo, "cancelled",
+                          reply_id=prep["reply_id"], response_text="", owner=owner)
+                try:
+                    enviar({"request_id": request_id, "type": "ai_cancelled",
+                            "reply_id": prep["reply_id"], "partial": ""})
+                except hermes_bridge.BridgeErro:
+                    pass
+                return
+
+            def _prog_shop(fase, detalhe=""):
+                try:
+                    emitir(last_delta_seq[0] + 1, f"🔎 {fase}… {detalhe}\n".strip() + "\n")
+                except Exception:
+                    pass
+
+            try:
+                shop_res = shopping.pesquisar(db, owner, prep.get("user_text", ""),
+                                              conv, progresso=_prog_shop)
+            except Exception as exc:
+                log.warning("shopping falhou (%s)", type(exc).__name__)
+                shop_res = None
+            if shop_res and shop_res.get("produtos"):
+                try:
+                    bloco = shopping.bloco_para_llm(shop_res)
+                    messages.append({"role": "system", "content": bloco})
+                    for f in shop_res.get("fontes", [])[:8]:
+                        extras["fontes"].append({"id": f.get("id", ""),
+                                                 "titulo": f.get("titulo", ""),
+                                                 "url": f.get("url", "")})
+                except Exception as exc:
+                    log.warning("shopping grounding falhou (%s)", type(exc).__name__)
+            elif shop_res is not None:
+                messages.append({"role": "system",
+                                 "content": shopping.bloco_para_llm(shop_res)})
         try:
             res = hermes_bridge.chat_stream_fb(
                 cfg["proxy"], modelos_tentativa(cfg, modelo), messages, emitir,
@@ -2918,6 +3048,25 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        if shop_res is not None:
+            # Cards verdadeiros vêm da ferramenta: remove qualquer fence de
+            # produto do modelo (risco de dados inventados) e anexa o nosso.
+            texto_final = shopping.remover_fences_produto(texto_final)
+            fence_shop = ""
+            if shop_res.get("produtos"):
+                crit = shop_res.get("criterios", {}) or {}
+                if crit.get("comparacao") and len(shop_res["produtos"]) >= 2:
+                    fence_shop = shopping.fence_comparacao(
+                        shop_res["produtos"][:4], shop_res.get("fontes", []))
+                else:
+                    fence_shop = shopping.fence_resultado(shop_res)
+            else:
+                fence_shop = ""
+                nota = shopping.resumo_texto(shop_res)
+                if nota and nota not in texto_final:
+                    texto_final = (texto_final or "") + "\n\n" + nota
+            if fence_shop and "```jdui" not in texto_final:
+                texto_final = (texto_final or "") + fence_shop
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -3507,6 +3656,34 @@ def run():
                                            (str(req.get("uid", "")),))
                             JULIA_auth.auditar(db, dono, "sessoes_revogadas", str(req.get("uid", "")))
                             reply = _resp_ok("admin_ok")
+                    elif tipo == "quality_run":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            try:
+                                import tempfile
+                                import research_quality_lab
+                                with tempfile.TemporaryDirectory(prefix="julia-quality-") as tmp:
+                                    base = Path(tmp) / "run"
+                                    rep = research_quality_lab.run_document_retrieval_benchmark(
+                                        Path("benchmarks") / "research_quality_v1.json", base)
+                                rid = research_quality_lab.store_report(db, dono, rep)
+                                JULIA_auth.auditar(db, dono, "quality_run", rid)
+                                reply = _resp_ok("quality_run", run_id=rid,
+                                                 summary=rep.get("summary", {}),
+                                                 dataset=rep.get("dataset", {}))
+                            except Exception as exc:
+                                reply = _resp_erro(f"Benchmark falhou: {type(exc).__name__}.",
+                                                   "benchmark")
+                    elif tipo == "quality_runs":
+                        adm = _exige_admin()
+                        if not adm:
+                            reply = _resp_erro("Sem permissão.", "permissao")
+                        else:
+                            import research_quality_lab
+                            reply = _resp_ok("quality_runs",
+                                             runs=research_quality_lab.list_reports(db, dono))
                     elif tipo == "admin_user_limits":
                         adm = _exige_admin()
                         if not adm:

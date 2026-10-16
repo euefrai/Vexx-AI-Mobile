@@ -692,6 +692,29 @@ async def admin_set_limits(request: Request, body: AdminLimitsBody):
     return {"ok": True}
 
 
+@app.post("/api/admin/quality/run")
+async def admin_quality_run(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "quality_run", "owner": uid}, timeout=120.0)
+    if result.get("type") != "quality_run":
+        raise HTTPException(503, result.get("error", "Benchmark indisponível"))
+    return {"run_id": result.get("run_id"), "summary": result.get("summary", {}),
+            "dataset": result.get("dataset", {})}
+
+
+@app.get("/api/admin/quality/runs")
+async def admin_quality_runs(request: Request):
+    uid = await admin_uid(request)
+    if relay.ws is None:
+        raise HTTPException(503, "Computador offline.")
+    result = await relay.exchange({"type": "quality_runs", "owner": uid}, timeout=20.0)
+    if result.get("type") != "quality_runs":
+        raise HTTPException(503, result.get("error", "Indisponível"))
+    return {"runs": result.get("runs", [])}
+
+
 @app.get("/api/admin/invites")
 async def admin_invites(request: Request):
     uid = await admin_uid(request)

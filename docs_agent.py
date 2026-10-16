@@ -378,7 +378,10 @@ def _extrair_html(raw: bytes) -> str:
         body = re.sub(r"\n{3,}", "\n\n", sopa.get_text("\n", strip=True))
         return (f"# {title}\n\n" if title else "") + body
     except ImportError:
-        txt = re.sub(r"(?is)<(script|style|nav|footer|header|iframe|object|embed|form|template|svg|canvas)\b[^>]*>.*?</\1\s*>", " ", texto)
+        # script/style sem fechar valem até EOF (raw text); demais tags exigem
+        # fechamento para não devorar o documento em HTML malformado.
+        txt = re.sub(r"(?is)<(script|style)\b[^>]*>(?:.*?</\1\s*>|.*$)", " ", texto)
+        txt = re.sub(r"(?is)<(nav|footer|header|iframe|object|embed|form|template|svg|canvas)\b[^>]*>.*?</\1\s*>", " ", txt)
         title = re.search(r"(?is)<title\b[^>]*>(.*?)</title\s*>", txt)
         headings = re.sub(r"(?is)<h([1-6])\b[^>]*>(.*?)</h\1\s*>",
                           lambda m: "\n" + "#" * int(m.group(1)) + " " + re.sub(r"<[^>]+>", " ", m.group(2)), txt)
@@ -504,8 +507,11 @@ def _chunk_records(texto: str, doc_id: str, source: str, version: int = DOC_VERS
                 atual = f"{atual}\n{paragraph}".strip()
         if atual:
             blocos.append(atual)
+        prefixo = (region_section.strip() + "\n") if region_section.strip() else ""
         prev = ""
-        for body in blocos:
+        for pos, body in enumerate(blocos):
+            if pos == 0 and prefixo and not body.startswith(region_section.strip()):
+                body = (prefixo + body)[:TAM_CHUNK]
             overlap = min(OVERLAP, len(prev)) if prev else 0
             full = (prev[-overlap:] if overlap else "") + body
             if len(full) > TAM_CHUNK:

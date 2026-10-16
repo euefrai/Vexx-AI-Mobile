@@ -187,8 +187,7 @@ async function syncJduiStates() {
   try {
     const rows = (await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll()))
       .filter(r => (r.owner || 'local') === currentUid);
-    if (!rows.length) return;
-    await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
+    if (rows.length) await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
     const remote = await api('/api/ui-state');
     if (owner !== currentUid || !authenticated) return;
     const tx = db.transaction(UISTATE, 'readwrite');
@@ -749,7 +748,7 @@ async function renderMessages() {
     lastAssistantId = idsAssist.length ? idsAssist[idsAssist.length - 1] : '';
     rows.forEach(appendMessage);
   }
-  const temTroca = rows.some(m => m.role === 'user');
+  const temTroca = rows.length > 0;
   if (!$('page-chat').hidden) $('suggestions').style.display = temTroca ? 'none' : 'flex';
   if (stick) conversation.scrollTop = conversation.scrollHeight;
   const pending = all.filter(m => m.role === 'user' && m.status === 'pending').length;
@@ -761,7 +760,7 @@ async function renderMessages() {
   if ($('page-chat').hidden) return;
   $('chatTitle').textContent = cur ? cur.title : 'Nova conversa';
   const project = cur && workspace && workspace.get('project', cur.project_id);
-  $('chatSubtitle').textContent = (project ? project.title : 'Sem projeto') + (cur?.archived ? ' · Arquivada' : '') + (rows.length ? ' · ' + rows.length + ' mensagens' : '');
+  $('chatSubtitle').textContent = (project ? project.title : 'Sem projeto') + (cur?.archived ? ' · Arquivada' : '') + (rows.length ? ' · ' + rows.length + (rows.length === 1 ? ' mensagem' : ' mensagens') : '');
 }
 
 $('archivedToggle').addEventListener('click', () => {
@@ -914,8 +913,8 @@ async function renderEstudos() {
   }
   const r = (stats.data && stats.data.resumo) || {};
   $('estProvas').textContent = r.concluidas || 0;
-  $('estAcertos').textContent = r.respostas ? (r.acertos || 0) + '/' + r.respostas : 'Sem respostas';
-  $('estItens').textContent = (r.itens_feitos || 0) + '/' + (r.itens_plano || 0);
+  $('estAcertos').textContent = r.respostas ? (r.acertos || 0) + '/' + r.respostas : '—';
+  $('estItens').textContent = r.itens_plano ? (r.itens_feitos || 0) + '/' + r.itens_plano : '—';
   $('estDue').textContent = r.revisoes_pendentes || 0;
   estudosLista('estudosAssuntos', ((stats.data && stats.data.por_assunto) || []).map(p =>
     estudosItem('i-activity', (p.assunto || 'geral') + ' — ' + Math.round((p.taxa || 0) * 100) + '%',
@@ -1943,8 +1942,10 @@ async function sendMessage(raw) {
       requestAI(row, { immediate: true, onStarted: syncAndRefresh, sentAt, storedAt })
         .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
     } else showToast('Salvo no celular');
-    await touchSession(activeConversation, titleFrom(value));
-    messageInput.value = ''; autoresize(); $('charCount').textContent = '';
+    await touchSession(row.conversation_id, titleFrom(value));
+    if (activeConversation === row.conversation_id && messageInput.value.trim() === value) {
+      messageInput.value = ''; autoresize(); $('charCount').textContent = '';
+    }
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     scrollChat(true);
@@ -2527,8 +2528,8 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
     }
     await migrateV1();
     const rows = await allMessages();
-    const presas = rows.filter(m => m.status === 'generating');
-    if (presas.length) await storeMessages(presas.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: m.role, text: m.text, created_at: m.created_at, status: 'failed', model: m.model || '' })));
+    const presas = ownRows(rows).filter(m => m.status === 'generating');
+    if (presas.length) await storeMessages(presas.map(m => ({ ...m, status: 'failed' })));
     setActiveConversation(await resolveActiveConversation());
     await healSessions();
     await ensureSession(activeConversation);

@@ -1632,6 +1632,35 @@ table.jdui-table td input{width:100%;min-width:90px;background:var(--bg);border:
 .jdui-provenance{font-size:11px;color:var(--muted);margin-top:8px}
 .jdui-provenance ul{margin:4px 0 0;padding-left:18px}
 .jdui-provenance a{color:var(--accent,#5b5bd6);overflow-wrap:anywhere}
+
+/* V4.9.1 Shopping Intelligence: cards de produto (Minimal Premium) */
+.jdui-pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.025)}
+.jdui-pmedia{background:#14141c;display:flex;align-items:center;justify-content:center;min-height:120px}
+.jdui-pmedia.grande{min-height:180px}
+.jdui-pimg{width:100%;max-height:240px;object-fit:contain;cursor:zoom-in;background:#14141c}
+.jdui-pmedia.grande .jdui-pimg{max-height:320px}
+.jdui-pimg.ph{display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--muted);font-size:12px;cursor:default}
+.jdui-pbody{padding:12px;display:flex;flex-direction:column;gap:6px}
+.jdui-pnome{font-size:14px;line-height:1.35}
+.jdui-pmarca{font-size:11.5px;color:var(--muted)}
+.jdui-ppreco{font-size:18px;font-weight:700;color:var(--purple);letter-spacing:-.01em}
+.jdui-ploja{font-size:11px;color:var(--muted)}
+.jdui-paval{font-size:12px;color:#fbbf24}
+.jdui-pdisp{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);align-self:flex-start}
+.jdui-pdisp.em_estoque{color:#34d399;border-color:rgba(52,211,153,.4)}
+.jdui-pdisp.sem_estoque{color:#f87171;border-color:rgba(248,113,113,.4)}
+.jdui-pdisp.estoque_limitado,.jdui-pdisp.pre_venda{color:#fbbf24;border-color:rgba(251,191,36,.4)}
+.jdui-pchips{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;color:var(--muted)}
+.jdui-pchip{border:1px solid var(--line);border-radius:99px;padding:3px 9px;background:rgba(255,255,255,.02)}
+a.jdui-pchip.link{color:var(--accent,#5b5bd6)}
+.jdui-pthumbs{display:flex;gap:6px;overflow-x:auto;padding:2px}
+.jdui-pthumb{border:1px solid var(--line);border-radius:10px;padding:0;background:none;min-width:56px;min-height:56px;cursor:pointer}
+.jdui-pthumb.sel{border-color:var(--purple)}
+.jdui-pthumb img{width:52px;height:52px;object-fit:cover;border-radius:8px;display:block}
+.jdui-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:9999;padding:16px}
+.jdui-lightbox img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:12px}
+.jdui-cards select.jdui-btn.ghost{appearance:auto;padding:8px 10px}
+@media(min-width:560px){.jdui-pcard.mini .jdui-pmedia{min-height:140px}}
 .jdui-dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 @media(max-width:360px){.jdui-dashgrid{grid-template-columns:1fr}}
 .jdui-metric{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.025)}

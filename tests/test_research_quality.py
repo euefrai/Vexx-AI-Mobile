@@ -160,3 +160,39 @@ def test_checkpoint_retencao():
 @pytest.mark.e2e_real
 def test_llm_real_bloqueado_declarado():
     pytest.skip("Inferência Hermes real bloqueada no provedor; síntese LLM marcada BLOQUEADA.")
+
+
+def test_retomada_longa_preserva_estado_e_nao_duplica():
+    db = _db()
+    docs = [{"titulo": f"Doc {i}", "url": f"http://exemplo.com/{i}",
+             "trecho": f"Estudo {i} sobre cafe e rendimento de 5 por cento em 2024."}
+            for i in range(8)]
+
+    class ProvLongo:
+        nome = "longo"
+
+        def buscar(self, consulta, limite=6):
+            return [dict(d) for d in docs[:limite]]
+
+    rec = lambda u: {"titulo": "T",  # noqa: E731
+                     "texto": next(d for d in docs if d["url"] == u)["trecho"] * 20,
+                     "final": u}
+    job = ra.criar_job(db, "u-x", "cafe rendimento e saude?", manual="investigativa")
+    chamadas = {"n": 0}
+
+    def para_cedo():
+        chamadas["n"] += 1
+        return chamadas["n"] > 3
+
+    r1 = ra.executar(db, job["id"], "u-x", [ProvLongo()], rec, deve_parar=para_cedo)
+    assert r1["status"] == "interrompida"
+    ev1 = sorted(e["id"] for e in ra.listar_evidencias(db, "u-x", job["id"]))
+    plano1 = [(s["id"], s["status"]) for s in ra.carregar_job(db, "u-x", job["id"])["plano"]]
+    r2 = ra.executar(db, job["id"], "u-x", [ProvLongo()], rec)
+    assert r2["status"] in ("concluida", "interrompida")
+    ev2 = sorted(e["id"] for e in ra.listar_evidencias(db, "u-x", job["id"]))
+    assert len(ev2) == len(set(ev2))  # sem duplicatas
+    assert set(ev1) <= set(ev2)  # nada perdido na retomada
+    seqs = [e["seq"] for e in ra.eventos_desde(db, "u-x", job["id"])]
+    assert seqs == sorted(seqs) and len(set(seqs)) == len(seqs)
+    db.close()

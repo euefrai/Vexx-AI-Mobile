@@ -61,6 +61,24 @@ def test_txt_csv_html(tmp_path):
     db.close()
 
 
+def test_html_sem_bs4_usa_fallback_stdlib(tmp_path, monkeypatch):
+    import builtins
+    real_import = builtins.__import__
+
+    def sem_bs4(name, *args, **kwargs):
+        if name == "bs4":
+            raise ImportError("bs4 bloqueado no teste")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", sem_bs4)
+    fechado = b"<html><head><title>T</title></head><body><h1>Titulo</h1><script>x()</script><p>Corpo.</p></body></html>"
+    txt = docs_agent.extrair_texto(".html", fechado, "a.html")
+    assert "Titulo" in txt and "x()" not in txt
+    aberto = b"<html><body><h1>Titulo</h1><p>Corpo aqui.</p><script>x()"
+    txt2 = docs_agent.extrair_texto(".html", aberto, "b.html")
+    assert "Titulo" in txt2 and "Corpo aqui" in txt2 and "x()" not in txt2
+
+
 def test_docx_xlsx(tmp_path):
     docx = pytest.importorskip('docx')
     oxl = pytest.importorskip('openpyxl')

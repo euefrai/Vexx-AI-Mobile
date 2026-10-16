@@ -139,7 +139,7 @@ def test_grafico_evolucao_dados_reais(tmp_path):
 HARNESS_V43 = r"""
 const fs = require('fs');
 class Element {
-  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.style = {}; this.attrs = {}; this._text = ''; }
+  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.style = {}; this.attrs = {}; this.dataset = {}; this._text = ''; }
   appendChild(child) { this.children.push(child); return child; }
   append(...children) { children.forEach(c => this.appendChild(c)); }
   replaceChildren(...children) { this.children = []; this._text = ''; this.append(...children); }

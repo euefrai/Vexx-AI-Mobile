@@ -665,6 +665,8 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
         claims = [{"texto": job["objetivo"], "condicoes": {"comparado_a": "", "metrica": "",
                                                            "quantidades": [], "datas": []}}]
     vereditos = []
+    nos_lote = []
+    arestas_lote = []
     for c in claims[:12]:
         emitir(db, job["id"], job["owner"], "checker", "claim_identified", "ok",
                f"Afirmação: {c['texto'][:90]}", {})
@@ -674,29 +676,27 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
                    "evidencia": contrad[0], "cobertura_lexica": 0.0}
         else:
             res = _eg.verificar_claim(c, [{"id": e["id"], "trecho": e["trecho"]} for e in evidencias])
-        try:
-            ncl = _eg.criar_no(db, job["owner"], job["id"], "claim", c["texto"][:200],
-                               {"texto": c["texto"][:500], "condicoes": c["condicoes"]})
-            for e in evidencias:
-                nev = _eg.no_id("evidence", job["id"], e["id"])
-                if res["estado"] == "SUPPORTED" and res.get("evidencia") == e["id"]:
-                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "SUPPORTS",
-                              res["metodo"], "quantidade exata no trecho")
-                elif res["estado"] == "CONTRADICTED" and e["id"] in contrad:
-                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "CONTRADICTS",
-                              "evidencia-contradiz", "fonte marcada como contraditória")
-                elif res["estado"] == "PARTIALLY_SUPPORTED" and \
-                        _relevancia(c["texto"], e.get("trecho", "")) >= 0.25:
-                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "PARTIALLY_SUPPORTS",
-                              res["metodo"], "cobertura parcial")
-                elif _relevancia(c["texto"], e.get("trecho", "")) > 0:
-                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "MENTIONS",
-                              "lexico", "citação contextual")
-                else:
-                    _eg.ligar(db, job["owner"], job["id"], nev, ncl, "REQUIRES_VERIFICATION",
-                              "sem-cobertura", "sem relação lexical detectada")
-        except Exception:
-            pass
+        ncl = _eg.no_id("claim", job["id"], c["texto"][:200])
+        nos_lote.append(("claim", c["texto"][:200],
+                         {"texto": c["texto"][:500], "condicoes": c["condicoes"]}))
+        for e in evidencias:
+            nev = _eg.no_id("evidence", job["id"], e["id"])
+            if res["estado"] == "SUPPORTED" and res.get("evidencia") == e["id"]:
+                arestas_lote.append((nev, ncl, "SUPPORTS",
+                                     res["metodo"], "quantidade exata no trecho"))
+            elif res["estado"] == "CONTRADICTED" and e["id"] in contrad:
+                arestas_lote.append((nev, ncl, "CONTRADICTS",
+                                     "evidencia-contradiz", "fonte marcada como contraditória"))
+            elif res["estado"] == "PARTIALLY_SUPPORTED" and \
+                    _relevancia(c["texto"], e.get("trecho", "")) >= 0.25:
+                arestas_lote.append((nev, ncl, "PARTIALLY_SUPPORTS",
+                                     res["metodo"], "cobertura parcial"))
+            elif _relevancia(c["texto"], e.get("trecho", "")) > 0:
+                arestas_lote.append((nev, ncl, "MENTIONS",
+                                     "lexico", "citação contextual"))
+            else:
+                arestas_lote.append((nev, ncl, "REQUIRES_VERIFICATION",
+                                     "sem-cobertura", "sem relação lexical detectada"))
         vereditos.append({"afirmacao": c["texto"], "estado": res["estado"],
                           "cobertura_lexica": res.get("cobertura_lexica", 0.0),
                           "metodo": res.get("metodo", ""),
@@ -705,6 +705,12 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
         emitir(db, job["id"], job["owner"], "checker", "claim_verified", "ok",
                f"{res['estado']} ({res.get('metodo', '?')}): {c['texto'][:90]}",
                {"estado": res["estado"], "afirmacao": c["texto"][:200]})
+    try:
+        _eg.criar_nos_lote(db, job["owner"], job["id"], nos_lote)
+        _eg.ligar_lote(db, job["owner"], job["id"], arestas_lote)
+    except Exception as exc:
+        emitir(db, job["id"], job["owner"], "checker", "claim_verified", "alerta",
+               f"Grafo parcial ({type(exc).__name__}); vereditos preservados.", {})
     emitir(db, job["id"], job["owner"], "checker", "claim_verification_completed", "ok",
            f"{len(vereditos)} afirmações avaliadas.", {})
     return vereditos
@@ -716,21 +722,23 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
     docs = [{"url": e.get("url", ""), "texto": e.get("trecho", ""), "id": e.get("id", "")}
             for e in evidencias or []]
     laudos = []
+    arestas = []
     for i in range(len(docs)):
         for j in range(i + 1, len(docs)):
             laudo = _eg.analisar_independencia(docs[i], docs[j])
             laudo.update({"a": docs[i]["id"], "b": docs[j]["id"]})
             laudos.append(laudo)
-            try:
-                na = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[i]["texto"][:1500]))
-                nb = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[j]["texto"][:1500]))
-                _eg.ligar(db, job["owner"], job["id"], na, nb, laudo["relacao"],
-                          "independencia", laudo["motivo"][:200])
-            except Exception:
-                pass
-            if laudo["relacao"] in ("DUPLICATES", "DERIVED_FROM"):
-                emitir(db, job["id"], job["owner"], "analyst", "source_dependency_detected",
-                       "alerta", f"{laudo['relacao']}: {laudo['motivo'][:120]}", {})
+            na = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[i]["texto"][:1500]))
+            nb = _eg.no_id("document", job["id"], _eg.hash_conteudo(docs[j]["texto"][:1500]))
+            arestas.append((na, nb, laudo["relacao"], "independencia", laudo["motivo"][:200]))
+    try:
+        _eg.ligar_lote(db, job["owner"], job["id"], arestas)
+    except Exception:
+        pass
+    for laudo in laudos:
+        if laudo["relacao"] in ("DUPLICATES", "DERIVED_FROM"):
+            emitir(db, job["id"], job["owner"], "analyst", "source_dependency_detected",
+                   "alerta", f"{laudo['relacao']}: {laudo['motivo'][:120]}", {})
     return laudos
 
 

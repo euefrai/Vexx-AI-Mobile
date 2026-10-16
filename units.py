@@ -15,9 +15,14 @@ _TABELA = {
     "frequencia": {"hz": 1.0, "khz": 1000.0, "mhz": 1000000.0, "ghz": 1000000000.0},
     "comprimento": {"mm": 0.001, "cm": 0.01, "m": 1.0, "km": 1000.0,
                     "pol": 0.0254, "ft": 0.3048, "mi": 1609.34},
+    "volume": {"ml": 0.001, "l": 1.0, "litro": 1.0, "litros": 1.0},
     "massa": {"mg": 1e-06, "g": 0.001, "kg": 1.0, "lb": 0.453592},
     "tempo": {"s": 1.0, "min": 60.0, "h": 3600.0, "dia": 86400.0, "dias": 86400.0},
     "porcentagem": {"%": 1.0, "por cento": 1.0},
+    "multiplicador": {"mil": 1000.0, "milhão": 1000000.0, "milhões": 1000000.0,
+                      "milhao": 1000000.0, "milhoes": 1000000.0,
+                      "bilhão": 1000000000.0, "bilhões": 1000000000.0,
+                      "bilhao": 1000000000.0, "bilhoes": 1000000000.0},
 }
 _ALIAS = {"watts": "w", "watt": "w", "quilowatts": "kw", "bytes": "b",
           "segundos": "s", "segundo": "s", "minutos": "min", "horas": "h",
@@ -29,6 +34,21 @@ class UnidadeErro(ValueError):
     def __init__(self, mensagem, codigo="unidade"):
         super().__init__(mensagem)
         self.codigo = codigo
+
+
+def todas_unidades() -> list:
+    """Todas as formas conhecidas, maior primeiro (para alternância regex)."""
+    formas = set(_ALIAS) | set(_ALIAS.values())
+    for fatores in _TABELA.values():
+        formas.update(fatores)
+    formas.update(("%", "por cento", "c", "f", "°c", "°f"))
+    formas.discard("ano")
+    return sorted(formas, key=len, reverse=True)
+
+
+def pattern_unidades() -> str:
+    import re as _re
+    return "(?:" + "|".join(_re.escape(u) for u in todas_unidades()) + ")"
 
 
 def normalizar_unidade(u: str) -> str:

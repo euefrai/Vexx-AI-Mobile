@@ -35,6 +35,8 @@ DATASET_CATEGORIES = (
     "temporal_research",
     "adversarial_research",
     "long_horizon_research",
+    "academic_research",
+    "document_format",
 )
 
 
@@ -419,6 +421,15 @@ def run_document_retrieval_benchmark(
             query["metrics"]
             for case in case_results for query in case["queries"]
         ]
+        import tracemalloc
+        tracemalloc.start()
+        try:
+            _probe = [docs_agent.trechos_relevantes(
+                db, case["queries"][0]["text"], k=k, owner=owner)
+                for case in dataset["cases"][:3]]
+        finally:
+            _, peak_bytes = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
         summary = {
             key: _mean([float(row[key]) for row in results])
             for key in (
@@ -501,6 +512,7 @@ def run_document_retrieval_benchmark(
                 "retrieval_mean": round(sum(query_times) / len(query_times), 3)
                 if query_times else None,
                 "retrieval_max": round(max(query_times), 3) if query_times else None,
+                "peak_python_kb": round(peak_bytes / 1024, 1),
             },
             "retrieval_metrics": summary,
             "by_category": by_category,
@@ -513,7 +525,7 @@ def run_document_retrieval_benchmark(
                 "web search quality",
                 "source independence beyond curated fixture labels",
                 "LLM generation quality",
-                "CPU and process-wide RAM",
+                "CPU time and process-wide RSS (peak Python KB is measured)",
                 "token consumption",
                 "real-world factual accuracy",
             ],
@@ -616,3 +628,369 @@ def run_checkpoint_benchmark(
         },
         "scenarios": scenarios,
     }
+
+
+def store_report(db, owner: str, report: dict[str, Any]) -> str:
+    """Persist a benchmark report for the admin dashboard (real data only)."""
+    import secrets
+
+    if not isinstance(report, dict) or not report:
+        raise QualityLabError("report must be a non-empty object")
+    dataset = report.get("dataset", {}) if isinstance(report.get("dataset"), dict) else {}
+    run_id = "qr-" + secrets.token_hex(6)
+    db.execute(
+        """CREATE TABLE IF NOT EXISTS quality_runs (
+            id TEXT PRIMARY KEY, owner_id TEXT NOT NULL DEFAULT 'local',
+            dataset_id TEXT NOT NULL DEFAULT '', dataset_version TEXT NOT NULL DEFAULT '',
+            dataset_sha256 TEXT NOT NULL DEFAULT '', summary TEXT NOT NULL DEFAULT '{}',
+            created_at TEXT NOT NULL)"""
+    )
+    db.execute(
+        "CREATE INDEX IF NOT EXISTS idx_quality_owner ON quality_runs(owner_id, created_at)"
+    )
+    with db:
+        db.execute(
+            "INSERT INTO quality_runs (id, owner_id, dataset_id, dataset_version,"
+            " dataset_sha256, summary, created_at) VALUES (?,?,?,?,?,?,?)",
+            (run_id, owner, str(dataset.get("dataset_id", ""))[:120],
+             str(dataset.get("version", ""))[:40], str(dataset.get("sha256", ""))[:64],
+             json.dumps(report, ensure_ascii=False)[:200000],
+             time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime())),
+        )
+    return run_id
+
+
+def list_reports(db, owner: str, limite: int = 20) -> list[dict[str, Any]]:
+    """Latest stored reports (owner-scoped; summaries only, never recomputed)."""
+    try:
+        rows = db.execute(
+            "SELECT id, dataset_id, dataset_version, dataset_sha256, summary, created_at"
+            " FROM quality_runs WHERE owner_id=? ORDER BY created_at DESC LIMIT ?",
+            (owner, max(1, min(int(limite or 20), 100))),
+        ).fetchall()
+    except Exception:
+        return []
+    out = []
+    for run_id, ds_id, ds_ver, digest, summary, ts in rows:
+        try:
+            full = json.loads(summary or "{}")
+        except ValueError:
+            continue
+        out.append({
+            "id": run_id, "dataset_id": ds_id, "dataset_version": ds_ver,
+            "dataset_sha256": digest, "created_at": ts,
+            "summary": full.get("summary", {}) if isinstance(full, dict) else {},
+            "counts": full.get("counts", {}) if isinstance(full, dict) else {},
+        })
+    return out
+
+
+def run_memory_retrieval_benchmark(
+    dataset_path: str | Path,
+    work_dir: str | Path,
+    *,
+    k: int = 5,
+    owner: str = "quality-lab-memory",
+) -> dict[str, Any]:
+    """Seed memory facts, then score memorias_relevantes against graded keys."""
+    dataset, digest = load_dataset(dataset_path)
+    root = Path(work_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    database_path = root / "benchmark.sqlite3"
+    if database_path.exists():
+        raise QualityLabError("benchmark database path must be fresh")
+    db = None
+    try:
+        db = pc_agent.open_db(database_path)
+        started = time.perf_counter()
+        for fact in dataset.get("memory_facts", []):
+            pc_agent.guardar_fato(db, str(fact.get("key", "")), str(fact.get("value", "")),
+                                  owner=owner)
+        query_results = []
+        query_times = []
+        for case in dataset.get("memory_cases", []):
+            before = time.perf_counter()
+            hits = pc_agent.memorias_relevantes(db, case["query"], k=k, owner=owner)
+            elapsed_ms = (time.perf_counter() - before) * 1000
+            query_times.append(elapsed_ms)
+            retrieved_ids = [hit["key"] for hit in hits
+                             if isinstance(hit, dict) and hit.get("key")]
+            expected = case.get("expected_keys", [])
+            relevance = {key: 3 for key in expected}
+            query_results.append({
+                "query": case["query"],
+                "metrics": retrieval_metrics(retrieved_ids, relevance, k),
+                "retrieved_key_ids": retrieved_ids,
+                "elapsed_ms": round(elapsed_ms, 3),
+            })
+        results = [row["metrics"] for row in query_results]
+        summary = {key: _mean([float(row[key]) for row in results]) for key in (
+            "precision_at_k", "recall_at_k", "mrr_at_k",
+            "ndcg_at_k", "duplicate_rate_at_k")}
+        summary["query_count"] = len(query_results)
+        summary["mean_query_ms"] = round(sum(query_times) / len(query_times), 3
+                                         ) if query_times else None
+        summary["total_ms"] = round((time.perf_counter() - started) * 1000, 3)
+        return {
+            "dataset": {"dataset_id": dataset["dataset_id"], "version": dataset["version"],
+                        "sha256": digest, "truth_basis": dataset["truth_basis"]},
+            "summary": summary, "queries": query_results,
+        }
+    finally:
+        if db is not None:
+            db.close()
+
+
+def run_graph_retrieval_benchmark(
+    dataset_path: str | Path,
+    work_dir: str | Path,
+    *,
+    k: int = 5,
+    owner: str = "quality-lab-graph",
+) -> dict[str, Any]:
+    """Seed evidence rows, then score the lexical graph ranker."""
+    import evidence_graph
+    dataset, digest = load_dataset(dataset_path)
+    root = Path(work_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    database_path = root / "benchmark.sqlite3"
+    if database_path.exists():
+        raise QualityLabError("benchmark database path must be fresh")
+    db = pc_agent.open_db(database_path)
+    try:
+        job_id = "bench-graph"
+        started = time.perf_counter()
+        with db:
+            for ev in dataset.get("graph_evidence", []):
+                db.execute(
+                    "INSERT INTO evidence (id, job_id, owner_id, url, titulo, trecho)"
+                    " VALUES (?,?,?,?,?,?)",
+                    (ev["id"], job_id, owner, ev.get("url", ""), ev.get("titulo", ""),
+                     ev.get("trecho", "")))
+        query_results = []
+        query_times = []
+        for case in dataset.get("graph_cases", []):
+            before = time.perf_counter()
+            ranked = evidence_graph.rank_evidencias(db, owner, job_id, case["query"], k)
+            elapsed_ms = (time.perf_counter() - before) * 1000
+            query_times.append(elapsed_ms)
+            retrieved_ids = [row["id"] for row in ranked]
+            relevance = {doc: 3 for doc in case.get("expected_ids", [])}
+            query_results.append({
+                "query": case["query"],
+                "metrics": retrieval_metrics(retrieved_ids, relevance, k),
+                "retrieved_evidence_ids": retrieved_ids,
+                "elapsed_ms": round(elapsed_ms, 3),
+            })
+        results = [row["metrics"] for row in query_results]
+        summary = {key: _mean([float(row[key]) for row in results]) for key in (
+            "precision_at_k", "recall_at_k", "mrr_at_k",
+            "ndcg_at_k", "duplicate_rate_at_k")}
+        summary["query_count"] = len(query_results)
+        summary["mean_query_ms"] = round(sum(query_times) / len(query_times), 3
+                                         ) if query_times else None
+        summary["total_ms"] = round((time.perf_counter() - started) * 1000, 3)
+        return {
+            "dataset": {"dataset_id": dataset["dataset_id"], "version": dataset["version"],
+                        "sha256": digest, "truth_basis": dataset["truth_basis"]},
+            "summary": summary, "queries": query_results,
+        }
+    finally:
+        db.close()
+
+
+def run_factual_verification_benchmark(
+    dataset_path: str | Path,
+) -> dict[str, Any]:
+    """Score verificar_claim on frozen labeled pairs (deterministic only)."""
+    import evidence_graph
+    dataset, digest = load_dataset(dataset_path)
+    pairs = dataset.get("factual_pairs", [])
+    if not pairs:
+        raise QualityLabError("dataset has no factual_pairs")
+    expected, predicted, rows = [], [], []
+    started = time.perf_counter()
+    for pair in pairs:
+        claim = {"texto": pair.get("claim_text", ""),
+                 "condicoes": {"comparado_a": "", "metrica": "",
+                               "quantidades": evidence_graph.extrair_quantidades(
+                                   pair.get("claim_text", "")),
+                               "datas": []}}
+        trecho = pair.get("trecho", "")
+        if trecho:
+            result = evidence_graph.verificar_claim(
+                claim, [{"id": "frozen", "trecho": trecho}])
+            label = result["estado"]
+        else:
+            label = "INSUFFICIENT_EVIDENCE"
+        expected.append(pair["expected_label"])
+        predicted.append(label)
+        rows.append({"id": pair.get("id", ""), "expected": pair["expected_label"],
+                     "predicted": label,
+                     "match": pair["expected_label"] == label})
+    classification = classification_metrics(expected, predicted)
+    return {
+        "dataset": {"dataset_id": dataset["dataset_id"], "version": dataset["version"],
+                    "sha256": digest, "truth_basis": dataset["truth_basis"]},
+        "classification": classification, "pairs": rows,
+        "total_ms": round((time.perf_counter() - started) * 1000, 3),
+    }
+
+
+def _pdf_minimo(texto: str) -> bytes:
+    """PDF mínimo válido com uma página de texto (fixture local, sem libs)."""
+    corpo = f"BT /F1 12 Tf 50 750 Td ({texto}) Tj ET".encode("latin-1", "ignore")
+    partes, offsets, base = [], [], 0
+    objs = [
+        b"<< /Type /Catalog /Pages 2 0 R >>",
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] "
+        b"/Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>",
+        b"<< /Length %d >>\nstream\n" % len(corpo) + corpo + b"\nendstream",
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    ]
+    out = [b"%PDF-1.4\n"]
+    for i, obj in enumerate(objs, start=1):
+        offsets.append(sum(len(p) for p in out))
+        out.append(f"{i} 0 obj\n".encode() + obj + b"\nendobj\n")
+    xref_pos = sum(len(p) for p in out)
+    out.append(f"xref\n0 {len(objs) + 1}\n0000000000 65535 f \n".encode())
+    for off in offsets:
+        out.append(f"{off:010d} 00000 n \n".encode())
+    out.append(f"trailer\n<< /Size {len(objs) + 1} /Root 1 0 R >>\n"
+               f"startxref\n{xref_pos}\n%%EOF\n".encode())
+    return b"".join(out)
+
+
+def run_format_benchmark(
+    work_dir: str | Path,
+    *,
+    owner: str = "quality-lab-format",
+) -> dict[str, Any]:
+    """Gera fixtures PDF/DOCX/XLSX/HTML/JSON/CSV/MD/TXT e mede extração+busca."""
+    import io
+    root = Path(work_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    database_path = root / "benchmark.sqlite3"
+    if database_path.exists():
+        raise QualityLabError("benchmark database path must be fresh")
+    marca = "ZIRCONIO-42"
+    arquivos = {
+        "relatorio.pdf": _pdf_minimo(f"Relatorio {marca} com conclusoes."),
+        "contrato.json": ('{"title": "Contrato", "parte": "%s Ltda", '
+                          '"valor": 1000}' % marca).encode("utf-8"),
+        "tabela.csv": f"item,valor\ncaneta,{marca}-5\n".encode("utf-8"),
+        "pagina.html": (f"<html><head><title>T</title></head><body><h1>{marca}</h1>"
+                        f"<p>Texto com a marca.</p></body></html>").encode("utf-8"),
+        "nota.md": f"# {marca}\n\nAnotacao simples.\n".encode("utf-8"),
+        "texto.txt": f"Texto puro com {marca} embutido.\n".encode("utf-8"),
+    }
+    try:
+        from docx import Document as _Docx
+
+        buf = io.BytesIO()
+        doc = _Docx()
+        doc.add_paragraph(f"Contrato {marca} assinado.")
+        doc.save(buf)
+        arquivos["contrato.docx"] = buf.getvalue()
+        docx_ok = True
+    except ImportError:
+        docx_ok = False
+    try:
+        from openpyxl import Workbook as _Wb
+
+        buf = io.BytesIO()
+        wb = _Wb()
+        ws = wb.active
+        ws.append(["item", "valor"])
+        ws.append(["caneta", f"{marca}-5"])
+        wb.save(buf)
+        arquivos["planilha.xlsx"] = buf.getvalue()
+        xlsx_ok = True
+    except ImportError:
+        xlsx_ok = False
+    db = None
+    try:
+        db = pc_agent.open_db(database_path)
+        started = time.perf_counter()
+        resultados = []
+        for nome, raw in arquivos.items():
+            before = time.perf_counter()
+            saved = docs_agent.salvar_documento(db, nome, raw, "quality-lab", owner=owner)
+            texto = docs_agent.obter_texto(db, saved["doc_id"], owner=owner)
+            hits = docs_agent.trechos_relevantes(db, marca.lower(), saved["doc_id"], owner=owner)
+            resultados.append({
+                "arquivo": nome, "doc_id": saved["doc_id"],
+                "marca_encontrada": marca in texto,
+                "hits": len(hits),
+                "elapsed_ms": round((time.perf_counter() - before) * 1000, 3),
+            })
+        total_ms = round((time.perf_counter() - started) * 1000, 3)
+        return {"formatos": sorted(arquivos),
+                "docx_gerado": docx_ok, "xlsx_gerado": xlsx_ok,
+                "resultados": resultados,
+                "total_ms": total_ms,
+                "todos_extraidos": all(r["marca_encontrada"] for r in resultados),
+                "todos_buscaveis": all(r["hits"] >= 1 for r in resultados)}
+    finally:
+        if db is not None:
+            db.close()
+
+
+class FrozenProvider:
+    """Deterministic synthetic provider for mode comparison (documented)."""
+
+    nome = "frozen"
+
+    def __init__(self, documentos):
+        self._docs = documentos
+
+    def buscar(self, consulta: str, limite: int = 6):
+        return [dict(titulo=d["titulo"], url=d["url"], trecho=d["trecho"])
+                for d in self._docs[:limite]]
+
+
+def run_mode_comparison_benchmark(
+    work_dir: str | Path,
+    *,
+    owner: str = "quality-lab-modes",
+) -> dict[str, Any]:
+    """Same frozen corpus across rapida/pro/profunda/investigativa.
+
+    Measures evidences, searches, pages and latency per mode. Synthetic
+    provider; compares budgets, not real-world quality.
+    """
+    import research_agents
+    docs = [
+        {"titulo": f"Doc {i}", "url": f"http://exemplo.com/{i}",
+         "trecho": f"Estudo {i} sobre cafe e rendimento de 5 por cento em 2024.",
+         "texto": f"Estudo {i} sobre cafe e rendimento. " * 20}
+        for i in range(8)
+    ]
+
+    def recuperar(url: str):
+        doc = next(d for d in docs if d["url"] == url)
+        return {"titulo": doc["titulo"], "texto": doc["texto"], "final": url}
+
+    root = Path(work_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    modos = {}
+    for modo in ("rapida", "pro", "profunda", "investigativa"):
+        db = None
+        try:
+            db = pc_agent.open_db(root / f"modes-{modo}.sqlite3")
+            job = research_agents.criar_job(db, owner, "cafe faz bem?", manual=modo)
+            started = time.perf_counter()
+            resumo = research_agents.executar(db, job["id"], owner, [FrozenProvider(docs)],
+                                             recuperar)
+            modos[modo] = {
+                "status": resumo["status"],
+                "evidencias": resumo["evidencias"],
+                "buscas": resumo["usados"].get("buscas", 0),
+                "paginas": resumo["usados"].get("paginas", 0),
+                "total_ms": round((time.perf_counter() - started) * 1000, 3),
+            }
+        finally:
+            if db is not None:
+                db.close()
+    return {"modos": modos, "provider": "frozen-synthetic"}

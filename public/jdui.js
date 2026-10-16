@@ -295,6 +295,69 @@
         if (ids[f] && ids[t] && edges.length < 60 && tipos.indexOf(lb) >= 0) edges.push({ from: f, to: t, label: lb });
       });
       return { title: S(p.title, 160), nodes, edges };
+    },
+    _produto(o) {
+      if (!o || typeof o !== 'object') throw new JduiErro('produto');
+      let pv = o.preco_valor !== undefined && o.preco_valor !== null ? parseFloat(o.preco_valor) : null;
+      if (pv !== null && !(pv > 0 && pv < 1e9)) pv = null;
+      let av = o.avaliacao !== undefined && o.avaliacao !== null ? parseFloat(o.avaliacao) : null;
+      if (av !== null && !(av >= 0 && av <= 5)) av = null;
+      let nv = o.n_avaliacoes !== undefined && o.n_avaliacoes !== null ? parseInt(o.n_avaliacoes, 10) : null;
+      if (nv !== null && !(nv >= 0 && nv < 1e7)) nv = null;
+      const disp = String(o.disponibilidade || 'desconhecida').toLowerCase();
+      const specs = {};
+      if (o.specs && typeof o.specs === 'object' && !Array.isArray(o.specs)) {
+        Object.keys(o.specs).slice(0, 12).forEach(k => {
+          const v = o.specs[k];
+          if (S(k, 40) && (typeof v === 'string' || typeof v === 'number')) specs[S(k, 40)] = S(v, 120);
+        });
+      }
+      const ofertas = (Array.isArray(o.ofertas) ? o.ofertas : []).slice(0, 6).map(item => {
+        if (!item || typeof item !== 'object') return null;
+        return { loja: S(item.loja, 80), preco: S(item.preco, 40), url: URL_OK(item.url) };
+      }).filter(Boolean);
+      return {
+        nome: S(o.nome || o.name, 160), marca: S(o.marca || o.brand, 80),
+        modelo: S(o.modelo || o.model, 80), variante: S(o.variante, 80),
+        imagem: URL_OK(o.imagem || o.image), preco: S(o.preco, 40), preco_valor: pv,
+        moeda: (S(o.moeda, 3).toUpperCase() || 'BRL'), loja: S(o.loja || o.store, 80),
+        url: URL_OK(o.url), specs, avaliacao: av, n_avaliacoes: nv,
+        disponibilidade: ['em_estoque', 'sem_estoque', 'estoque_limitado', 'pre_venda'].indexOf(disp) >= 0 ? disp : 'desconhecida',
+        verificado_em: S(o.verificado_em, 48), ofertas
+      };
+    },
+    _produtoObrigatorio(o) {
+      const prod = V._produto(o && typeof o.produto === 'object' ? o.produto : o);
+      if (!prod.nome) throw new JduiErro('produto.nome obrigatório');
+      return prod;
+    },
+    productcard(p) {
+      const o = (p.produto && typeof p.produto === 'object') ? p.produto : p;
+      return { produto: V._produtoObrigatorio(o), sources: PROVENANCE(p.sources) };
+    },
+    productgrid(p) {
+      const itens = reqList(p, 'items', 1, 6, 'productgrid.items 1..6');
+      return { title: S(p.title, 160), items: itens.map(V._produtoObrigatorio), sources: PROVENANCE(p.sources) };
+    },
+    productcompare(p) {
+      const itens = reqList(p, 'items', 2, 4, 'productcompare.items 2..4');
+      return { title: S(p.title, 160), items: itens.map(V._produtoObrigatorio), sources: PROVENANCE(p.sources) };
+    },
+    productdetails(p) {
+      if (!p.produto || typeof p.produto !== 'object') throw new JduiErro('productdetails.produto');
+      return { produto: V._produtoObrigatorio(p.produto), sources: PROVENANCE(p.sources) };
+    },
+    productgallery(p) {
+      const imgs = p.imagens || p.images;
+      if (!Array.isArray(imgs) || !imgs.length || imgs.length > 8) throw new JduiErro('productgallery.imagens 1..8');
+      const out = imgs.map(img => {
+        const u = typeof img === 'string' ? img : (img && (img.url || img.src));
+        const legenda = img && typeof img === 'object' ? (img.legenda || img.caption) : '';
+        const ok = URL_OK(u);
+        return ok ? { url: ok, legenda: S(legenda, 120) } : null;
+      }).filter(Boolean);
+      if (!out.length) throw new JduiErro('productgallery sem imagem válida');
+      return { title: S(p.title, 160), imagens: out, sources: PROVENANCE(p.sources) };
     }
   };
 
@@ -1710,7 +1773,7 @@
       const ids = {};
       nos.forEach(n => { ids[n.id] = 1; });
       const W = 360, H = Math.max(140, 40 + 3 * 56);
-      const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': props.title || 'Grafo de evidências' });
+      const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': props.title || 'Grafo de evidências' });
       const porCamada = [[], [], []];
       nos.forEach(n => porCamada[camadas[n.kind]].push(n));
       const pos = {};
@@ -1752,6 +1815,293 @@
       host.appendChild(svg);
     }
     paint();
+    root.appendChild(box);
+  };
+
+  /* ----- Produtos (V4.9.1 Shopping Intelligence; só dados verificados) ----- */
+  const DISP_LABEL = {
+    em_estoque: 'Em estoque', sem_estoque: 'Sem estoque',
+    estoque_limitado: 'Estoque limitado', pre_venda: 'Pré-venda',
+    desconhecida: 'Disponibilidade não informada'
+  };
+  function productImg(url, alt) {
+    if (url) {
+      const img = document.createElement('img');
+      img.className = 'jdui-pimg';
+      img.src = url;
+      img.alt = alt || 'Foto do produto';
+      img.loading = 'lazy';
+      img.referrerPolicy = 'no-referrer';
+      img.addEventListener('error', () => {
+        const ph = el('div', 'jdui-pimg ph', 'Sem foto');
+        if (img.parentNode) img.parentNode.replaceChild(ph, img);
+      });
+      img.addEventListener('click', () => abrirLightbox(url, alt));
+      return img;
+    }
+    return el('div', 'jdui-pimg ph', 'Sem foto');
+  }
+  function abrirLightbox(url, alt) {
+    try {
+      const ov = el('div', 'jdui-lightbox');
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-label', alt || 'Foto ampliada');
+      const img = document.createElement('img');
+      img.src = url; img.alt = alt || 'Foto ampliada';
+      img.referrerPolicy = 'no-referrer';
+      const fechar = el('button', 'jdui-btn', 'Fechar');
+      fechar.type = 'button';
+      ov.appendChild(img); ov.appendChild(fechar);
+      const sair = () => { if (ov.parentNode) ov.parentNode.removeChild(ov); };
+      fechar.addEventListener('click', ev => { ev.stopPropagation(); sair(); });
+      ov.addEventListener('click', sair);
+      document.body.appendChild(ov);
+    } catch (_) { /* sem lightbox: a imagem continua visível no card */ }
+  }
+  function productStars(av, n) {
+    if (av === null || av === undefined) return 'Avaliação não informada';
+    const cheias = Math.round(av);
+    return '★'.repeat(Math.min(5, cheias)) + '☆'.repeat(Math.max(0, 5 - Math.min(5, cheias))) +
+      ' ' + Number(av).toFixed(1) + (n ? ' (' + n + ')' : '');
+  }
+  function productSpecsChips(box, specs, teto) {
+    const keys = Object.keys(specs || {}).slice(0, teto || 4);
+    if (!keys.length) return;
+    const wrap = el('div', 'jdui-pchips');
+    keys.forEach(k => wrap.appendChild(el('span', 'jdui-pchip', k + ': ' + specs[k])));
+    box.appendChild(wrap);
+  }
+  function productCardEl(prod, ctx, mini) {
+    const card = el('div', 'jdui-pcard' + (mini ? ' mini' : ''));
+    const moldura = el('div', 'jdui-pmedia');
+    moldura.appendChild(productImg(prod.imagem, prod.nome));
+    card.appendChild(moldura);
+    const corpo = el('div', 'jdui-pbody');
+    corpo.appendChild(el('strong', 'jdui-pnome', prod.nome));
+    const marca = [prod.marca, prod.modelo].filter(Boolean).join(' · ');
+    if (marca) corpo.appendChild(el('div', 'jdui-pmarca', marca));
+    corpo.appendChild(el('div', 'jdui-ppreco', prod.preco || 'Preço não confirmado'));
+    const loja = prod.loja + (prod.verificado_em ? ' · verificado em ' + prod.verificado_em : '');
+    if (prod.loja || prod.verificado_em) corpo.appendChild(el('div', 'jdui-ploja', loja));
+    corpo.appendChild(el('div', 'jdui-paval', productStars(prod.avaliacao, prod.n_avaliacoes)));
+    corpo.appendChild(el('span', 'jdui-pdisp ' + (prod.disponibilidade || 'desconhecida'),
+      DISP_LABEL[prod.disponibilidade] || DISP_LABEL.desconhecida));
+    if (!mini) productSpecsChips(corpo, prod.specs, 4);
+    const acts = el('div', 'jdui-cardacts');
+    if (prod.url) {
+      const a = el('a', 'jdui-btn', 'Abrir oferta ↗');
+      a.href = prod.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      acts.appendChild(a);
+    }
+    if (ctx && ctx.onChat) {
+      const cmp = el('button', 'jdui-btn ghost', 'Comparar');
+      cmp.type = 'button';
+      cmp.addEventListener('click', () => ctx.onChat('Compare ' + prod.nome + ' com as outras opções'));
+      acts.appendChild(cmp);
+    }
+    if (acts.children.length) corpo.appendChild(acts);
+    card.appendChild(corpo);
+    return card;
+  }
+  function productSpecsTable(prod) {
+    const keys = Object.keys(prod.specs || {});
+    if (!keys.length) return null;
+    const holder = el('div', 'jdui-scrollx');
+    const t = document.createElement('table');
+    t.className = 'jdui-table';
+    keys.forEach(k => {
+      const tr = document.createElement('tr');
+      tr.appendChild(el('th', '', k));
+      tr.appendChild(el('td', '', prod.specs[k]));
+      t.appendChild(tr);
+    });
+    holder.appendChild(t);
+    return holder;
+  }
+  function productOfertas(box, prod) {
+    if (!Array.isArray(prod.ofertas) || !prod.ofertas.length) return;
+    const det = el('div', 'jdui-pchips');
+    det.appendChild(el('span', '', 'Outras lojas:'));
+    prod.ofertas.slice(0, 6).forEach(o => {
+      if (o.url) {
+        const a = el('a', 'jdui-pchip link', (o.loja || 'Loja') + ' · ' + (o.preco || 'preço não confirmado'));
+        a.href = o.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        det.appendChild(a);
+      } else {
+        det.appendChild(el('span', 'jdui-pchip', (o.loja || 'Loja') + ' · ' + (o.preco || 'preço não confirmado')));
+      }
+    });
+    box.appendChild(det);
+  }
+
+  R.productcard = function (root, props, st, save, ctx) {
+    st = st || {};
+    const box = el('div', 'jdui-cards');
+    box.appendChild(productCardEl(props.produto, ctx, false));
+    const card = box.firstChild;
+    const corpo = card.lastChild;
+    const specsFull = productSpecsTable(props.produto);
+    if (specsFull) {
+      specsFull.style.display = st.detalhes ? '' : 'none';
+      corpo.appendChild(specsFull);
+      const tgl = el('button', 'jdui-btn ghost', st.detalhes ? 'Ocultar especificações' : 'Ver especificações');
+      tgl.type = 'button';
+      tgl.addEventListener('click', () => {
+        st.detalhes = !st.detalhes; save(st);
+        specsFull.style.display = st.detalhes ? '' : 'none';
+        tgl.textContent = st.detalhes ? 'Ocultar especificações' : 'Ver especificações';
+      });
+      corpo.appendChild(tgl);
+    }
+    productOfertas(corpo, props.produto);
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.productgrid = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    st.ordem = st.ordem || 'preco';
+    const barra = el('div', 'jdui-actions');
+    const rotulo = el('span', '', 'Ordenar:');
+    barra.appendChild(rotulo);
+    const sel = document.createElement('select');
+    sel.className = 'jdui-btn ghost';
+    sel.setAttribute('aria-label', 'Ordenar produtos');
+    [['preco', 'Menor preço'], ['avaliacao', 'Melhor avaliação'], ['nome', 'Nome A–Z']].forEach(([v, lb]) => {
+      const op = document.createElement('option');
+      op.value = v; op.textContent = lb;
+      if (st.ordem === v) op.selected = true;
+      sel.appendChild(op);
+    });
+    barra.appendChild(sel);
+    box.appendChild(barra);
+    const grid = el('div', 'jdui-cardgrid');
+    box.appendChild(grid);
+    function pinta() {
+      grid.replaceChildren();
+      const itens = props.items.slice();
+      if (st.ordem === 'preco') itens.sort((a, b) => {
+        const pa = a.preco_valor, pb = b.preco_valor;
+        if (pa === null && pb === null) return 0;
+        if (pa === null) return 1;
+        if (pb === null) return -1;
+        return pa - pb;
+      });
+      else if (st.ordem === 'avaliacao') itens.sort((a, b) => (b.avaliacao || -1) - (a.avaliacao || -1));
+      else itens.sort((a, b) => String(a.nome).localeCompare(String(b.nome)));
+      itens.forEach(p => grid.appendChild(productCardEl(p, ctx, true)));
+    }
+    sel.addEventListener('change', () => { st.ordem = sel.value; save(st); pinta(); });
+    pinta();
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.productcompare = function (root, props, st, save, ctx) {
+    const box = el('div', 'jdui-quiz');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const itens = props.items;
+    const precos = itens.map(p => p.preco_valor).filter(v => v !== null && v !== undefined);
+    const menor = precos.length ? Math.min.apply(null, precos) : null;
+    const linhas = [
+      { label: 'Preço', vals: itens.map(p => p.preco || 'Preço não confirmado'),
+        win: itens.map(p => p.preco_valor !== null && p.preco_valor === menor) },
+      { label: 'Loja', vals: itens.map(p => p.loja || '—') },
+      { label: 'Avaliação', vals: itens.map(p => productStars(p.avaliacao, p.n_avaliacoes)) },
+      { label: 'Disponibilidade', vals: itens.map(p => DISP_LABEL[p.disponibilidade] || DISP_LABEL.desconhecida) }
+    ];
+    const chaves = [];
+    itens.forEach(p => Object.keys(p.specs || {}).forEach(k => { if (chaves.indexOf(k) < 0) chaves.push(k); }));
+    chaves.slice(0, 8).forEach(k => {
+      linhas.push({ label: k, vals: itens.map(p => (p.specs && p.specs[k]) || '—') });
+    });
+    const holder = el('div', 'jdui-chart');
+    const t = document.createElement('table');
+    t.className = 'jdui-cmp';
+    const head = document.createElement('tr');
+    head.appendChild(el('th', '', ''));
+    itens.forEach(p => head.appendChild(el('th', '', (p.nome || '').slice(0, 40))));
+    t.appendChild(head);
+    linhas.forEach(l => {
+      const tr = document.createElement('tr');
+      tr.appendChild(el('th', '', l.label));
+      l.vals.forEach((v, i) => {
+        tr.appendChild(el('td', l.win && l.win[i] ? 'win' : '', v || '—'));
+      });
+      t.appendChild(tr);
+    });
+    holder.appendChild(t);
+    box.appendChild(holder);
+    const acts = el('div', 'jdui-cardacts');
+    itens.forEach(p => {
+      if (!p.url) return;
+      const a = el('a', 'jdui-btn ghost', 'Abrir: ' + (p.nome || '').slice(0, 24) + ' ↗');
+      a.href = p.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      acts.appendChild(a);
+    });
+    if (acts.children.length) box.appendChild(acts);
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.productdetails = function (root, props, st, save, ctx) {
+    st = st || {};
+    const box = el('div', 'jdui-cards');
+    const prod = props.produto;
+    box.appendChild(productCardEl(prod, ctx, false));
+    const corpo = box.firstChild.lastChild;
+    const specs = productSpecsTable(prod);
+    if (specs) {
+      corpo.appendChild(el('div', 'jdui-count', 'Especificações'));
+      corpo.appendChild(specs);
+    }
+    productOfertas(corpo, prod);
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.productgallery = function (root, props, st, save) {
+    st.idx = Math.min(Math.max(parseInt(st.idx, 10) || 0, 0), props.imagens.length - 1);
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const moldura = el('div', 'jdui-pmedia grande');
+    box.appendChild(moldura);
+    const faixa = el('div', 'jdui-pthumbs');
+    box.appendChild(faixa);
+    function pinta() {
+      moldura.replaceChildren();
+      const atual = props.imagens[st.idx];
+      moldura.appendChild(productImg(atual.url, atual.legenda || props.title));
+      if (atual.legenda) moldura.appendChild(el('div', 'jdui-ploja', atual.legenda));
+      faixa.replaceChildren();
+      props.imagens.forEach((img, i) => {
+        const mini = el('button', 'jdui-pthumb' + (i === st.idx ? ' sel' : ''));
+        mini.type = 'button';
+        mini.setAttribute('aria-label', 'Foto ' + (i + 1));
+        const t = document.createElement('img');
+        t.src = img.url; t.alt = img.legenda || ('Foto ' + (i + 1));
+        t.loading = 'lazy'; t.referrerPolicy = 'no-referrer';
+        t.addEventListener('error', () => { mini.style.display = 'none'; });
+        mini.appendChild(t);
+        mini.addEventListener('click', () => { st.idx = i; save(st); pinta(); });
+        faixa.appendChild(mini);
+      });
+    }
+    const nav = el('div', 'jdui-actions');
+    const ant = el('button', 'jdui-btn ghost', '‹ Anterior');
+    const prox = el('button', 'jdui-btn ghost', 'Próxima ›');
+    ant.type = 'button'; prox.type = 'button';
+    ant.addEventListener('click', () => {
+      st.idx = (st.idx - 1 + props.imagens.length) % props.imagens.length; save(st); pinta();
+    });
+    prox.addEventListener('click', () => {
+      st.idx = (st.idx + 1) % props.imagens.length; save(st); pinta();
+    });
+    nav.appendChild(ant); nav.appendChild(prox);
+    box.appendChild(nav);
+    pinta();
+    renderProvenance(box, props.sources);
     root.appendChild(box);
   };
 

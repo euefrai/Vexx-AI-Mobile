@@ -394,6 +394,142 @@ def _v_calculator(p: dict) -> dict:
     return {"kind": kind, "title": _str(p.get("title"), 120)}
 
 
+# ── Produtos (V4.9.1 Shopping Intelligence; dados reais de ferramenta) ──
+DISPONIBILIDADE = ("em_estoque", "sem_estoque", "estoque_limitado",
+                   "pre_venda", "desconhecida")
+
+
+def _v_oferta(o) -> dict:
+    if not isinstance(o, dict):
+        raise JduiErro("oferta inválida")
+    pv = o.get("preco_valor", o.get("preco"))
+    try:
+        pv = float(pv) if pv is not None else None
+    except (TypeError, ValueError):
+        pv = None
+    if pv is not None and not (0 < pv < 1e9):
+        pv = None
+    av = o.get("avaliacao")
+    try:
+        av = float(av) if av is not None else None
+    except (TypeError, ValueError):
+        av = None
+    if av is not None and not (0 <= av <= 5):
+        av = None
+    try:
+        nv = o.get("n_avaliacoes")
+        nv = int(nv) if nv is not None else None
+    except (TypeError, ValueError):
+        nv = None
+    if nv is not None and not (0 <= nv < 10_000_000):
+        nv = None
+    disp = str(o.get("disponibilidade", "desconhecida")).lower()
+    if disp not in DISPONIBILIDADE:
+        disp = "desconhecida"
+    specs = o.get("specs") or {}
+    if not isinstance(specs, dict):
+        raise JduiErro("produto.specs deve ser objeto")
+    norm_specs = {}
+    for k, v in list(specs.items())[:12]:
+        if _str(k, 40) and isinstance(v, (str, int, float)):
+            norm_specs[_str(k, 40)] = _str(v, 120)
+    ofertas = []
+    for item in (o.get("ofertas") or [])[:6]:
+        if not isinstance(item, dict):
+            continue
+        ofertas.append({"loja": _str(item.get("loja"), 80),
+                        "preco": _str(item.get("preco"), 40),
+                        "url": _url(item.get("url"))})
+    return {
+        "nome": _str(o.get("nome") or o.get("name"), 160),
+        "marca": _str(o.get("marca") or o.get("brand"), 80),
+        "modelo": _str(o.get("modelo") or o.get("model"), 80),
+        "variante": _str(o.get("variante"), 80),
+        "imagem": _url(o.get("imagem") or o.get("image")),
+        "preco": _str(o.get("preco"), 40),
+        "preco_valor": pv,
+        "moeda": _str(o.get("moeda"), 3).upper() or "BRL",
+        "loja": _str(o.get("loja") or o.get("store"), 80),
+        "url": _url(o.get("url")),
+        "specs": norm_specs,
+        "avaliacao": av,
+        "n_avaliacoes": nv,
+        "disponibilidade": disp,
+        "verificado_em": _str(o.get("verificado_em"), 48),
+        "ofertas": ofertas,
+    }
+
+
+def _v_produto_obrigatorio(p: dict) -> dict:
+    prod = _v_oferta(p.get("produto") if isinstance(p.get("produto"), dict) else p)
+    if not prod["nome"]:
+        raise JduiErro("produto.nome obrigatório")
+    return prod
+
+
+def _v_productcard(p: dict) -> dict:
+    prod = p.get("produto") if isinstance(p.get("produto"), dict) else p
+    if not isinstance(prod, dict):
+        raise JduiErro("productcard.produto obrigatório")
+    return {"produto": _v_produto_obrigatorio(prod),
+            "sources": _provenance(p.get("sources"))}
+
+
+def _v_productgrid(p: dict) -> dict:
+    itens = p.get("items")
+    if not isinstance(itens, list) or not (1 <= len(itens) <= 6):
+        raise JduiErro("productgrid.items: 1..6 obrigatórios")
+    out = []
+    for item in itens:
+        if not isinstance(item, dict):
+            raise JduiErro("productgrid.item inválido")
+        out.append(_v_produto_obrigatorio(item))
+    return {"title": _str(p.get("title"), 160), "items": out,
+            "sources": _provenance(p.get("sources"))}
+
+
+def _v_productcompare(p: dict) -> dict:
+    itens = p.get("items")
+    if not isinstance(itens, list) or not (2 <= len(itens) <= 4):
+        raise JduiErro("productcompare.items: 2..4 obrigatórios")
+    out = []
+    for item in itens:
+        if not isinstance(item, dict):
+            raise JduiErro("productcompare.item inválido")
+        out.append(_v_produto_obrigatorio(item))
+    return {"title": _str(p.get("title"), 160), "items": out,
+            "sources": _provenance(p.get("sources"))}
+
+
+def _v_productdetails(p: dict) -> dict:
+    prod = p.get("produto") if isinstance(p.get("produto"), dict) else None
+    if not isinstance(prod, dict):
+        raise JduiErro("productdetails.produto obrigatório")
+    return {"produto": _v_produto_obrigatorio(prod),
+            "sources": _provenance(p.get("sources"))}
+
+
+def _v_productgallery(p: dict) -> dict:
+    imgs = p.get("imagens") or p.get("images")
+    if not isinstance(imgs, list) or not (1 <= len(imgs) <= 8):
+        raise JduiErro("productgallery.imagens: 1..8 obrigatórias")
+    out = []
+    for img in imgs:
+        if isinstance(img, str):
+            u, legenda = img, ""
+        elif isinstance(img, dict):
+            u, legenda = img.get("url") or img.get("src"), img.get("legenda") or img.get("caption")
+        else:
+            continue
+        u = _url(u)
+        if u:
+            out.append({"url": u, "legenda": _str(legenda, 120)})
+    if not out:
+        raise JduiErro("productgallery sem imagem válida")
+    return {"title": _str(p.get("title"), 160), "imagens": out,
+            "sources": _provenance(p.get("sources"))}
+
+
 # Componentes com resultado imutável: nunca aceitam patch in-place.
 PATCH_PROIBIDO = frozenset(("exam", "quiz", "studyprogress"))
 PATCH_ID_RE = r"[A-Za-z0-9_-]{2,100}"
@@ -420,6 +556,9 @@ VALIDADORES = {
     "flashcards": _v_flashcards, "studyprogress": _v_progresso,
     "lesson": _v_lesson, "chart": _v_chart, "dashboard": _v_dashboard,
     "compare": _v_compare, "evidencegraph": _v_evidencegraph,
+    "productcard": _v_productcard, "productgrid": _v_productgrid,
+    "productcompare": _v_productcompare, "productdetails": _v_productdetails,
+    "productgallery": _v_productgallery,
 }
 
 

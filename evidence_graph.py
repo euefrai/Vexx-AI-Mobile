@@ -12,6 +12,7 @@ UNVERIFIED até inferência real (BLOQUEADA hoje).
 import hashlib
 import json
 import re
+import sqlite3
 import urllib.parse
 from datetime import datetime, timezone
 
@@ -78,6 +79,38 @@ def ligar(db, owner: str, job_id: str, src: str, dst: str, tipo: str,
                    (owner, job_id, src, dst, tipo, metodo[:40], nota[:300], agora_iso()))
 
 
+def criar_nos_lote(db, owner: str, job_id: str, itens: list) -> list:
+    """Insere nós em UMA transação (perf: N commits no Windows custam ms cada)."""
+    nids = []
+    for kind, chave, dados in itens:
+        if kind not in KINDS_NO:
+            raise GraphErro("kind inválido", "kind")
+        nids.append(no_id(kind, job_id, chave))
+    agora = agora_iso()
+    with db:
+        db.executemany(
+            "INSERT OR IGNORE INTO eg_nodes (id, owner_id, job_id, kind, dados, criado_em)"
+            " VALUES (?,?,?,?,?,?)",
+            [(nid, owner, job_id, kind, json.dumps(dados, ensure_ascii=False)[:8000], agora)
+             for nid, (kind, chave, dados) in zip(nids, itens)])
+    return nids
+
+
+def ligar_lote(db, owner: str, job_id: str, arestas: list) -> int:
+    """Arestas em UMA transação. Retorna quantas foram enviadas (OR IGNORE)."""
+    for src, dst, tipo, metodo, nota in arestas:
+        if tipo not in TIPOS_RELACAO:
+            raise GraphErro("relação inválida", "relacao")
+    agora = agora_iso()
+    with db:
+        db.executemany(
+            "INSERT OR IGNORE INTO eg_edges (owner_id, job_id, src, dst, tipo, metodo,"
+            " nota, criado_em) VALUES (?,?,?,?,?,?,?,?)",
+            [(owner, job_id, src, dst, tipo, (metodo or "")[:40], (nota or "")[:300], agora)
+             for src, dst, tipo, metodo, nota in arestas])
+    return len(arestas)
+
+
 def nos_do_job(db, owner: str, job_id: str, kind: str = "") -> list:
     sql = "SELECT id, kind, dados FROM eg_nodes WHERE owner_id=? AND job_id=?"
     args = [owner, job_id]
@@ -135,9 +168,14 @@ def contexto_trecho(texto: str, trecho: str, janela: int = 120) -> str:
 
 
 # ── Claims v2 (texto + condições) ───────────────────────────────────
-_RX_QTD = re.compile(
-    r"(\d{1,3}(?:[.\s]\d{3})*(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s*(%|por cento|milh[õo]es?|"
-    r"bilh[õo]es?|mil\b|R\$|US\$|km\/h|km|kg|W|kW|anos?|dias?|°C|GB|MB)?", re.IGNORECASE)
+def _rx_qtd():
+    import units as _u
+    return re.compile(
+        r"(\d{1,3}(?:[.\s]\d{3})*(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s*"
+        r"(" + _u.pattern_unidades() + r")?(?![a-zà-ú])", re.IGNORECASE)
+
+
+_RX_QTD = _rx_qtd()
 _RX_COMP = re.compile(r"\b(mais|menos|maior|menor|melhor|pior|superior|inferior|rápido|lento|"
                       r"eficiente|caro|barato)\b\s+(\w+(?:\s+\w+){0,3}?)\s+(?:que|do que|em relação a|vs\.?|comparado a)\s+"
                       r"([\w\s]{2,40}?)(?:[.,;]|$)", re.IGNORECASE)
@@ -435,7 +473,6 @@ def fontes_que_sustentam(db, owner: str, job_id: str, claim_texto: str = "") -> 
 def contradicoes_do_job(db, owner: str, job_id: str) -> list:
     return [e for e in arestas_do_job(db, owner, job_id) if e["tipo"] == "CONTRADICTS"]
 
-
 def estudos_originais(db, owner: str, job_id: str) -> list:
     """Documentos sem DERIVED_FROM/DUPLICATES entrando (raízes)."""
     derivados = {e["dst"] for e in arestas_do_job(db, owner, job_id)
@@ -456,3 +493,26 @@ def diff_pesquisas(db, owner: str, job_nova: str, job_antiga: str) -> dict:
     return {"novas": sorted(set(nova) - set(antiga)),
             "removidas": sorted(set(antiga) - set(nova)),
             "alteradas": sorted(u for u in set(nova) & set(antiga) if nova[u] != antiga[u])}
+
+
+def rank_evidencias(db, owner: str, job_id: str, consulta: str, limite: int = 10) -> list:
+    """Baseline lexical honesto: overlap de tokens consulta×(título+trecho).
+
+    Documentado como baseline, não como ranqueamento semântico.
+    """
+    import sqlite3
+    toks_q = {t for t in __import__("re").findall(r"[a-zà-ú0-9]{3,}", (consulta or "").lower())}
+    try:
+        rows = db.execute("SELECT id, titulo, url, trecho FROM evidence "
+                          "WHERE job_id=? AND owner_id=?", (job_id, owner)).fetchall()
+    except sqlite3.Error:
+        return []
+    scored = []
+    for eid, titulo, url, trecho in rows:
+        toks = {t for t in __import__("re").findall(
+            r"[a-zà-ú0-9]{3,}", f"{titulo or ''} {trecho or ''}".lower())}
+        inter = toks_q & toks if toks_q else set()
+        scored.append((len(inter), eid, titulo, url))
+    scored.sort(key=lambda s: (-s[0], s[1]))
+    return [{"id": eid, "titulo": titulo, "url": url, "overlap": n}
+            for n, eid, titulo, url in scored[:max(1, min(int(limite or 10), 50))]]

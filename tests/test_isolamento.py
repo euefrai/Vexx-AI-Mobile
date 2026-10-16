@@ -135,7 +135,7 @@ def test_relay_repasse_owner_e_isolamento():
             vistos = {}
 
             def agente():
-                for _ in range(4):
+                while True:
                     req = ws.receive_json()
                     vistos[req['type']] = req.get('owner')
                     if req['type'] == 'sess_revogados':
@@ -150,6 +150,7 @@ def test_relay_repasse_owner_e_isolamento():
                                                     'created_at': '2026-10-13T10:00:00Z'}]})
                     elif req['type'] == 'mem_list':
                         ws.send_json({'request_id': req['request_id'], 'type': 'mem_list', 'memories': []})
+                        break  # Last requested operation; revocation RPC may be cached.
 
             t = threading.Thread(target=agente, daemon=True)
             t.start()
@@ -158,6 +159,7 @@ def test_relay_repasse_owner_e_isolamento():
             client.get('/api/messages', headers={'X-CSRF-Token': csrf})
             client.get('/api/memories', headers={'X-CSRF-Token': csrf})
             t.join(timeout=8)
+            assert not t.is_alive(), 'agente de teste não concluiu as operações'
             # relay sempre informa o dono autenticado; agente filtra por ele
             # (login legado = dono 'local')
             assert vistos.get('sync') == 'local', vistos

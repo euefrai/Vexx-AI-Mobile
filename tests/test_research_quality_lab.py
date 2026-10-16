@@ -1,11 +1,24 @@
 import json
+import os
 import sys
+import tempfile
+import threading
 from pathlib import Path
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import research_quality_lab as lab
+
+
+def setup_module():
+    from argon2 import PasswordHasher
+    os.environ['JULIA_USERNAME'] = 'owneruser'
+    os.environ['JULIA_PASSWORD_HASH'] = PasswordHasher().hash('strong-example-password')
+    os.environ['JULIA_SESSION_SECRET'] = 'a' * 64
+    os.environ['JULIA_AGENT_TOKEN'] = 'b' * 64
+    import server
+    server.login_failures.clear()
 
 
 DATASET = Path(__file__).resolve().parents[1] / "benchmarks" / "research_quality_v1.json"
@@ -192,3 +205,179 @@ def test_runner_measures_persisted_checkpoint_restore_after_reopen(tmp_path):
             value["recall"] == 1.0
             for value in scenario["metrics"]["state"].values()
         )
+
+
+def test_cli_store_db_persiste_relatorio(tmp_path):
+    import sqlite3
+    import subprocess
+    import sys
+    destino = tmp_path / "quality.sqlite3"
+    saida = tmp_path / "relatorio.json"
+    r = subprocess.run(
+        [sys.executable, "run_research_quality_lab.py", "--store-db", str(destino),
+         "--output", str(saida)],
+        cwd=str(Path(__file__).resolve().parents[1]),
+        capture_output=True, text=True, timeout=300,
+    )
+    assert r.returncode == 0, r.stderr[-2000:]
+    assert saida.exists() and json.loads(saida.read_text(encoding="utf-8"))["dataset"]
+    con = sqlite3.connect(destino)
+    try:
+        rows = con.execute("SELECT id, owner_id, dataset_id FROM quality_runs").fetchall()
+    finally:
+        con.close()
+    assert len(rows) == 1 and rows[0][1] == "quality-lab-cli" and rows[0][2]
+
+
+DATASET_V2 = Path(__file__).resolve().parents[1] / "benchmarks" / "research_quality_v2.json"
+
+
+def test_dataset_v2_versionado_e_valido():
+    dataset, digest = lab.load_dataset(DATASET_V2)
+    assert dataset["version"] == "2.0.0"
+    assert len(digest) == 64
+    assert len(dataset["documents"]) >= 10
+    assert len(dataset.get("factual_pairs", [])) >= 5
+    assert len(dataset.get("memory_cases", [])) >= 2
+    assert dataset.get("graph_cases") and dataset.get("graph_evidence")
+
+
+def test_memory_retrieval_benchmark(tmp_path):
+    rep = lab.run_memory_retrieval_benchmark(DATASET_V2, tmp_path / "mem")
+    assert rep["summary"]["query_count"] == 3
+    assert rep["summary"]["recall_at_k"] == 1.0
+    assert all(q["metrics"]["mrr_at_k"] == 1.0 for q in rep["queries"])
+    assert rep["summary"]["total_ms"] >= 0
+
+
+def test_graph_retrieval_benchmark(tmp_path):
+    rep = lab.run_graph_retrieval_benchmark(DATASET_V2, tmp_path / "graph")
+    assert rep["summary"]["query_count"] == 1
+    assert rep["summary"]["recall_at_k"] == 1.0
+    got = rep["queries"][0]["retrieved_evidence_ids"]
+    assert set(got) >= {"ev-photon", "ev-reprint"}
+
+
+def test_factual_verification_benchmark():
+    rep = lab.run_factual_verification_benchmark(DATASET_V2)
+    assert rep["classification"]["count"] == 6
+    assert rep["classification"]["accuracy"] == 1.0
+    assert all(r["match"] for r in rep["pairs"])
+
+
+def test_format_benchmark_formatos_reais(tmp_path):
+    rep = lab.run_format_benchmark(tmp_path / "fmt")
+    assert rep["docx_gerado"] and rep["xlsx_gerado"]
+    assert rep["todos_extraidos"], rep["resultados"]
+    assert rep["todos_buscaveis"], rep["resultados"]
+    nomes = {r["arquivo"] for r in rep["resultados"]}
+    assert {"relatorio.pdf", "contrato.docx", "planilha.xlsx", "pagina.html",
+            "contrato.json", "tabela.csv", "nota.md", "texto.txt"} <= nomes
+
+
+def _mem_db(tmp_path, nome="quality.sqlite3"):
+    import pc_agent
+    return pc_agent.open_db(Path(tempfile.mkdtemp()) / nome)
+
+
+def test_quality_runs_persistidos_por_dono(tmp_path):
+    db = _mem_db(tmp_path)
+    rep = {"dataset": {"dataset_id": "d", "version": "1", "sha256": "abc"},
+           "summary": {"precision_at_k": 0.5, "query_count": 4}}
+    rid = lab.store_report(db, "local", rep)
+    assert rid.startswith("qr-")
+    runs = lab.list_reports(db, "local")
+    assert len(runs) == 1 and runs[0]["id"] == rid
+    assert runs[0]["summary"]["precision_at_k"] == 0.5
+    assert runs[0]["dataset_sha256"] == "abc"
+    assert lab.list_reports(db, "u-outro") == []  # isolamento
+    try:
+        lab.store_report(db, "local", {})
+        raise AssertionError("relatório vazio deveria falhar")
+    except lab.QualityLabError:
+        pass
+
+
+def test_admin_quality_endpoints_exigem_papel():
+    import server
+    from fastapi.testclient import TestClient
+    from test_auth import _agente_generico
+    with TestClient(server.app) as client:
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            respostas = {
+                'auth_login': lambda r: {'type': 'auth_ok', 'uid': 'u-aaa', 'username': 'ana',
+                                         'display': 'Ana', 'role': 'user', 'sid': 'sid-ana'},
+                'auth_whoami': lambda r: {'type': 'auth_user',
+                                          'user': {'uid': 'u-aaa', 'username': 'ana',
+                                                   'display': 'Ana', 'role': 'user', 'status': 'ativo'}},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, {}), daemon=True)
+            t.start()
+            lg = client.post('/api/login', json={'username': 'ana', 'password': 'senha-forte-1'})
+            csrf = lg.json()['csrf']
+            r = client.get('/api/admin/quality/runs', headers={'X-CSRF-Token': csrf})
+            assert r.status_code == 403  # comum barrado no relay
+            r = client.post('/api/admin/quality/run', headers={'X-CSRF-Token': csrf})
+            assert r.status_code == 403
+
+
+def test_admin_quality_run_e_runs_pelo_agente_fake():
+    import server
+    from fastapi.testclient import TestClient
+    from test_auth import _agente_generico, _login_legacy
+    with TestClient(server.app) as client:
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            respostas = {
+                'quality_run': lambda r: {'type': 'quality_run', 'run_id': 'qr-1',
+                                          'summary': {'precision_at_k': 0.75, 'query_count': 8},
+                                          'dataset': {'dataset_id': 'd', 'version': '1',
+                                                      'sha256': 'abc'}},
+                'quality_runs': lambda r: {'type': 'quality_runs',
+                                           'runs': [{'id': 'qr-1', 'summary': {'precision_at_k': 0.75}}]},
+            }
+            t = threading.Thread(target=_agente_generico, args=(ws, respostas, {}), daemon=True)
+            t.start()
+            csrf = _login_legacy(client)  # dono local = admin
+            r = client.post('/api/admin/quality/run', headers={'X-CSRF-Token': csrf})
+            assert r.status_code == 200, r.text
+            assert r.json()["run_id"] == "qr-1"
+            assert r.json()["summary"]["precision_at_k"] == 0.75
+            r = client.get('/api/admin/quality/runs', headers={'X-CSRF-Token': csrf})
+            assert r.json()["runs"][0]["id"] == "qr-1"
+
+
+def test_cmd_qualidade_admin_e_negacoes(tmp_path):
+    import pc_agent
+    db = _mem_db(tmp_path)
+    assert pc_agent.cmd_qualidade(db, "qual o clima?", "local") == ""
+    assert "avaliações armazenadas" in pc_agent.cmd_qualidade(db, "mostre a qualidade da pesquisa",
+                                                              "local")
+    import julia_auth as _ja
+    _ja.config_set(db, 'modo_cadastro', 'aberto')
+    assert "restrito ao administrador" in pc_agent.cmd_qualidade(
+        db, "qualidade da pesquisa", "u-zzz")
+    rid = lab.store_report(db, "local", {"dataset": {"dataset_id": "d", "version": "1",
+                                                     "sha256": "abc"},
+                                         "summary": {"precision_at_k": 1.0, "recall_at_k": 0.5,
+                                                     "mrr_at_k": 1.0, "ndcg_at_k": 0.9,
+                                                     "query_count": 8, "k": 5}})
+    out = pc_agent.cmd_qualidade(db, "painel de qualidade", "local")
+    assert "```jdui" in out and '"component": "dashboard"' in out
+    assert "1.0" in out and "qr-" not in out  # números reais, sem IDs internos
+    db.close()
+
+
+def test_mode_comparison_ordena_orcamentos(tmp_path):
+    rep = lab.run_mode_comparison_benchmark(tmp_path / "modes")
+    assert set(rep["modos"]) == {"rapida", "pro", "profunda", "investigativa"}
+    assert rep["provider"] == "frozen-synthetic"
+    evs = [rep["modos"][m]["evidencias"] for m in ("rapida", "pro", "profunda", "investigativa")]
+    assert evs == sorted(evs)
+    assert all(rep["modos"][m]["status"] == "concluida" for m in rep["modos"])
+
+
+def test_doc_benchmark_mede_pico_python(tmp_path):
+    rep = lab.run_document_retrieval_benchmark(DATASET, tmp_path / "mem")
+    assert rep["timing_ms"]["peak_python_kb"] > 0
