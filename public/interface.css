@@ -281,3 +281,16 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .m3-expanded .m3-stage { height: min(65vh, 600px); }
 .model3d :focus-visible { outline: 2px solid #b6c2ff; outline-offset: 3px; }
 @media(max-width: 480px) { .model3d { padding: 10px; } .m3-stage { height: 260px; } .m3-tools button { flex: 1 0 28%; } }
+/* V5.4: compact primary actions, contextual secondary operations. */
+.model3d:has(.m3-lesson) .m3-stage { height: 350px; }
+.m3-secondary { flex: 1 0 100%; }
+.m3-secondary summary { cursor: pointer; padding: 12px; border-radius: 8px; color: #c7cee4; }
+.m3-secondary-actions, .m3-lesson-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.m3-secondary-actions label, .m3-lesson label { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.m3-lesson { border-top: 1px solid #353b50; margin-top: 12px; padding-top: 10px; }
+.m3-lesson select, .m3-secondary select { min-height: 44px; max-width: 100%; background: #202534; color: #e1e5f7; border: 1px solid #454d69; border-radius: 8px; font-size: 16px; padding: 6px; }
+.m3-details > small { display: block; margin-top: 8px; color: #aeb7cf; }
+.m3-details { max-height: 220px; overflow-y: auto; overscroll-behavior: contain; }
+.m3-lesson-controls button { flex: 1; }
+.model3d button:disabled { opacity: .45; cursor: default; }
+@media(max-width: 480px) { .model3d:has(.m3-lesson) .m3-stage { height: 320px; } .m3-tools:has(.m3-secondary) > button:not([hidden]) { flex: 1 0 20%; font-size: .8rem; padding: 6px; } }

@@ -3144,18 +3144,51 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
     return ""
 
 
-def cmd_model3d(db, texto, owner, conv):
+def cmd_model3d(db, texto, owner, conv, scene_state=''):
     """Referências 3D restritas ao dono e à conversa; sem LLM/rede/controle remoto."""
     request = model3d.request(texto)
     if not request:
         return None
     previous = None
     if request['action'] != 'create':
-        for message in ultimos_blocos_jdui(db, conv, limite=5, owner=owner):
-            previous = next((b['props'] for b in message['blocks']
-                             if b.get('component') == 'model3d'), None)
+        hint = {}
+        if scene_state:
+            try:
+                if not isinstance(scene_state,str) or len(scene_state)>4000: raise ValueError()
+                hint=json.loads(scene_state)
+                if not isinstance(hint,dict) or set(hint)-{'messageId','scene','interaction','rotation','distance'} or not isinstance(hint.get('messageId'),str): raise ValueError()
+            except (ValueError,TypeError):
+                return 'Referência 3D inválida; abra novamente a cena desejada.'
+        rows=db.execute("SELECT id,text FROM messages WHERE owner_id=? AND conversation_id=? AND role='assistant' AND origin='mobile' ORDER BY created_at DESC LIMIT 50",(dono_valido(owner),conv)).fetchall()
+        for message_id, text in rows:
+            if hint and message_id!=hint['messageId']: continue
+            for raw in jdui.extrair_fences(text):
+                try:
+                    ok,message,_=jdui.validar_mensagem(json.loads(raw))
+                    if ok: previous=next((b['props'] for b in message['blocks'] if b.get('component')=='model3d'),None)
+                except ValueError: continue
+                if previous: break
             if previous:
+                if previous.get('education'):
+                    try:
+                        state=hint
+                        if not state:
+                            row=db.execute("SELECT state FROM ui_state WHERE owner_id=? AND message_id=? AND slot LIKE '%:model3d' ORDER BY updated_at DESC LIMIT 1",(dono_valido(owner),message_id)).fetchone()
+                            state=json.loads(row[0]) if row else {}
+                        if state.get('scene')==previous['id']:
+                            previous['interaction']=model3d.validate_interaction(state.get('interaction',{}),[o['id'] for o in previous['objects']],len(previous['steps']))
+                            if 'rotation' in state:
+                                rotation=state['rotation']
+                                if not isinstance(rotation,list) or len(rotation)!=3 or any(type(n) not in (int,float) for n in rotation): raise ValueError()
+                                previous['rotation']=[(n*180/3.141592653589793)%360 for n in rotation]
+                            if 'distance' in state: previous['camera']={'distance':state['distance']}
+                            previous=model3d.validate(previous)
+                        elif hint: raise ValueError()
+                    except (ValueError,TypeError,AttributeError):
+                        return 'Estado 3D inválido; restaure a cena antes de continuar.'
                 break
+        if hint and previous is None:
+            return 'Cena 3D indisponível nesta conversa; nenhuma alteração foi aplicada.'
     result = model3d.respond(texto, previous)
     if not result:
         return None
@@ -3182,7 +3215,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
     owner = prep.get("owner", DONO_PADRAO)
-    model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv)
+    model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
     if model_response:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
@@ -3340,7 +3373,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         owner = prep.get("owner", DONO_PADRAO)
         claimed = True
-        model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv)
+        model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
         if model_response:
             direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
             enviar_ws(websocket, {"request_id": request_id, "type": "ai_done", **direct})

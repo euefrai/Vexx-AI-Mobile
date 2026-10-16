@@ -126,8 +126,11 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Medições e limites: [JULIA_3D_PERFORMANCE.md](JULIA_3D_PERFORMANCE.md).
 - Entrega e QA: [RELATORIO_JULIA_5.3.md](../RELATORIO_JULIA_5.3.md).
 
-## V5.4 — Interactive 3D Intelligence (futuro)
-- Inteligência 3D interativa sobre a fundação da V5.3.
+## V5.4 — Interactive 3D Intelligence
+- Partes selecionáveis, operações validadas, etapas educativas e três cenas procedurais.
+- Estado local imediato nos comandos, snapshots isolados e reuso de canvas.
+- Contrato: [JULIA_3D_INTERACTIONS.md](JULIA_3D_INTERACTIONS.md); cenas: [JULIA_3D_EDUCATION.md](JULIA_3D_EDUCATION.md).
+- Evidências, testes e limites: [RELATORIO_JULIA_5.4.md](../RELATORIO_JULIA_5.4.md).
 
 ## V5.5 — 3D Optimization & Integration (futuro)
 - Otimização e integração final do 3D ao chat e ao JDUI.

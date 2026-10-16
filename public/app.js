@@ -150,10 +150,11 @@ async function preloadJduiStates(msgIds) {
   } catch (_) {}
 }
 function jduiCtx(row) {
+  const contextOwner = currentUid;
   return {
     messageId: row.id,
     conversationId: row.conversation_id,
-    ownerId: currentUid,
+    ownerId: contextOwner,
     api: (endpoint, options) => api(endpoint, options),
     queueLearn: (endpoint, body) => queueLearn(endpoint, body),
     download: (name, mime, text) => downloadFile(name, mime, text),
@@ -161,6 +162,7 @@ function jduiCtx(row) {
     markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
     loadState: (key) => jduiStateCache[row.id + '#' + key],
     saveState: (key, st) => {
+      if (currentUid !== contextOwner) return;
       const k = row.id + '#' + key;
       jduiStateCache[k] = st;
       jduiDirty[k] = { k, message_id: row.id, slot: key, state: st, updated_at: new Date().toISOString(), owner: currentUid };
@@ -630,7 +632,7 @@ function appendMessage(row) {
   wrap.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
   wrap.dataset.mid = row.id;
   wrap._renderOwner = currentUid;
-  wrap._renderSignature = JSON.stringify([row.text, row.status, row.model, row.created_at]);
+  wrap._renderSignature = JSON.stringify([row.text, row.status, row.model]);
   if (type === 'ai') { const ic = document.createElement('div'); ic.className = 'bubble-avatar'; ic.textContent = 'v.'; ic.setAttribute('aria-hidden', 'true'); wrap.appendChild(ic); }
   const content = document.createElement('div'); content.className = 'message-content';
   if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
@@ -756,7 +758,12 @@ async function renderMessages() {
     lastAssistantId = idsAssist.length ? idsAssist[idsAssist.length - 1] : '';
     rows.forEach(row => {
       const node = retained3d.get(row.id);
-      if (node && node._renderSignature === JSON.stringify([row.text, row.status, row.model, row.created_at])) conversation.appendChild(node);
+      if (node && node._renderSignature === JSON.stringify([row.text, row.status, row.model])) {
+        // The authoritative timestamp arrives after SSE; it does not change the scene.
+        const time = node.querySelector('.msg-time');
+        if (time) time.textContent = fmtTime(row.created_at);
+        conversation.appendChild(node);
+      }
       else appendMessage(row);
     });
   }
@@ -1655,6 +1662,8 @@ async function runAIRequest(userRow, options, timing) {
   setGenBar(true, 'Preparando resposta…');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
   const ctx = aiLocalContext(userRow.text || '');
+  const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
+  if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
     model: modeloAtivo(), memory: memoryOn() ? '1' : '0',

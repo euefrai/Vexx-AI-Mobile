@@ -209,6 +209,7 @@ class SyncBody(BaseModel):
 
 
 class AIRequest(BaseModel):
+    scene_state: str = Field(default="", max_length=4000)
     message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
     conversation_id: str = Field(min_length=3, max_length=100)
     model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
@@ -1233,7 +1234,7 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "local_time": body.local_time, "timezone": body.timezone,
                                    "city": body.city, "latitude": body.latitude,
                                    "longitude": body.longitude, "text": body.text,
-                                   "created_at": body.created_at}, timeout=180.0)
+                                   "created_at": body.created_at, "scene_state": body.scene_state}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -1938,7 +1939,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     model: str = "", memory: str = "1", local_time: str = "",
                     timezone: str = "", city: str = "",
                     latitude: float | None = None, longitude: float | None = None,
-                    text: str = "", created_at: str = ""):
+                    text: str = "", created_at: str = "", scene_state: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     request_started = time.monotonic()
     require_csrf(request)
@@ -1946,7 +1947,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     auth_completed = time.monotonic()
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
         raise HTTPException(422, "Parâmetros inválidos")
-    if len(text) > 10000 or len(created_at) > 48:
+    if len(text) > 10000 or len(created_at) > 48 or len(scene_state)>4000:
         raise HTTPException(422, "Parâmetros inválidos")
     from fastapi.responses import StreamingResponse
 
@@ -1968,7 +1969,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                "memory": "1" if memory != "0" else "0",
                "local_time": local_time, "timezone": timezone, "city": city,
                "latitude": latitude, "longitude": longitude,
-               "text": text, "created_at": created_at}
+               "text": text, "created_at": created_at, "scene_state": scene_state}
 
     async def gerar():
         concluido = False

@@ -1,0 +1,36 @@
+{
+  "cleanup": {
+    "draws": 727,
+    "created": 20,
+    "deleted": 20
+  },
+  "errors": [],
+  "expectedAuth": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "restored": {
+    "messageId": "de230399-9856-40b9-bb13-95a26c9ca8a8-r1",
+    "scene": "edu-computer",
+    "interaction": {
+      "selected": "ram",
+      "hidden": [
+        "ram"
+      ],
+      "isolated": "",
+      "exploded": true,
+      "transparent": [],
+      "view": "free",
+      "focus": "",
+      "step": 0,
+      "speed": 1,
+      "lessonPlaying": false
+    },
+    "rotation": [
+      0.4363323129985824,
+      0.4363323129985824,
+      0
+    ],
+    "distance": 6
+  },
+  "checks": "raycast, keyboard focus, real pixels, opacity, hide/reveal, isolate, focus, explode, views, steps, speed, pause, reset, canvas/buffer reuse, touch, reduced motion, offscreen, disposal, authenticated SSE, immediate state, IndexedDB reload"
+}
