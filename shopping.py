@@ -475,6 +475,7 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         dom = _dominio(url_final or url)
         loja = dom[4:] if dom.startswith("www.") else dom
     agora = agora_iso()
+    specs = extraido.get("specs") if isinstance(extraido.get("specs"), dict) else {}
     return {
         "id": chave_dedupe({"nome": extraido.get("nome", ""),
                              "marca": extraido.get("marca", ""),
@@ -497,7 +498,8 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         "disponibilidade": disp,
         "avaliacao": extraido.get("avaliacao"),
         "n_avaliacoes": extraido.get("n_avaliacoes"),
-        "specs": {},
+        "specs": {str(k)[:40]: str(v)[:120]
+                  for k, v in list(specs.items())[:12]},
         "verificado_em": agora,
         "fonte_titulo": (titulo_fonte or "")[:160],
     }
@@ -574,6 +576,10 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                 motivos.append(f"RAM física abaixo do pedido ({ram[0]}GB)")
             elif ram is not None and ram[0] == 0 and specs["ram_fisica_gb"] > 0:
                 motivos.append("só informa RAM virtual/expansível")
+        if specs.get("flag_novo"):
+            cond = str((p.get("specs", {}) or {}).get("Condicao", "")).lower()
+            if cond == "usado":
+                motivos.append("usado (pedido: somente novos)")
         if specs.get("armazenamento_gb"):
             txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
             m = re.search(r"(\d{2,4})\s?gb", txt)
@@ -661,6 +667,204 @@ def consulta_em_cache(db, owner: str, consulta: str) -> dict | None:
         return None
 
 
+# ── Provedores de busca (V4.9.1.1: cadeia com fallback) ────────────────
+# Ordem: API oficial e estruturada primeiro (sem chave, sem scraping),
+# depois busca web genérica. Nenhum provedor é contornado: bloqueio/
+# CAPTCHA/bot-wall vira falha registrada + fallback, nunca bypass.
+# - Mercado Livre (api.mercadolibre.com/sites/MLB): JSON oficial, preço,
+#   foto, link, loja/vendedor, condição e estoque reais.
+# - DuckDuckGo HTML / Lite (research.buscar_ddg): links p/ extração JSON-LD.
+
+MLB_SEARCH_URL = "https://api.mercadolibre.com/sites/MLB/search"
+MLB_TIMEOUT = 8.0
+
+
+def _get_json(url: str, timeout: float) -> dict:
+    """GET JSON com a mesma disciplina SSRF de `research.baixar` (só texto
+    vira JSON aqui): URL validada, redirects revalidados um a um, teto de
+    tamanho e tempo. Bloqueio do provedor vira ResearchErro, nunca bypass."""
+    import urllib.error
+    import urllib.parse as _up
+    atual = research.url_segura(url)
+    for _ in range(research.MAX_REDIRECTS + 1):
+        try:
+            resp = research._abrir(atual, timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code in (301, 302, 303, 307, 308):
+                loc = exc.headers.get("Location", "")
+                if not loc:
+                    raise research.ResearchErro("Redirect sem destino.", "redirect")
+                atual = research.url_segura(_up.urljoin(atual, loc))
+                continue
+            raise research.ResearchErro(f"Provedor HTTP {exc.code}.", "http")
+        except (OSError, TimeoutError, ValueError) as exc:
+            raise research.ResearchErro(
+                f"Falha de rede ({type(exc).__name__}).", "rede") from None
+        with resp:
+            if getattr(resp, "status", 200) >= 400:
+                raise research.ResearchErro(
+                    f"Provedor HTTP {resp.status}.", "http")
+            try:
+                ctype = (resp.headers.get_content_type()
+                         if hasattr(resp.headers, "get_content_type")
+                         else str(resp.headers.get("Content-Type", "")).split(";")[0])
+            except Exception:
+                ctype = ""
+            if "json" not in (ctype or "").lower():
+                raise research.ResearchErro("Provedor sem JSON.", "tipo_bloqueado")
+            try:
+                total = int(resp.headers.get("Content-Length") or 0)
+            except (TypeError, ValueError):
+                total = 0
+            if total > 512 * 1024:
+                raise research.ResearchErro("Resposta grande demais.", "tamanho")
+            raw = resp.read(512 * 1024 + 1)
+            if len(raw) > 512 * 1024:
+                raise research.ResearchErro("Resposta grande demais.", "tamanho")
+            try:
+                obj = json.loads(raw.decode("utf-8", errors="ignore"))
+            except (ValueError, TypeError) as exc:
+                raise research.ResearchErro("JSON inválido.", "formato") from None
+            if not isinstance(obj, dict):
+                raise research.ResearchErro("JSON inesperado.", "formato")
+            return obj
+    raise research.ResearchErro("Redirects demais.", "redirect")
+
+
+def buscar_mlb(consulta: str, limite: int = 10,
+               timeout: float = MLB_TIMEOUT) -> list:
+    """Busca oficial no Mercado Livre (sem chave). Levanta ResearchErro."""
+    import urllib.parse as _up
+    q = (consulta or "").strip()[:120]
+    if not q:
+        return []
+    dados = _get_json(
+        MLB_SEARCH_URL + "?" + _up.urlencode(
+            {"q": q, "limit": min(max(int(limite), 1), 20)}),
+        timeout=timeout)
+    out = []
+    for item in (dados.get("results") or [])[:limite]:
+        if not isinstance(item, dict):
+            continue
+        link = str(item.get("permalink", ""))[:500]
+        titulo = _limpa(item.get("title"), 160)
+        if not link.startswith("http") or not titulo:
+            continue
+        out.append({"titulo": titulo, "url": link,
+                     "trecho": f"{titulo} — {formatar_preco(item.get('price'), str(item.get('currency_id') or 'BRL'))}",
+                     "origem": "mlb", "mlb": item})
+    if not out:
+        raise research.ResearchErro("Provedor sem resultados.", "vazio")
+    return out
+
+
+def produto_de_mlb(item: dict) -> dict | None:
+    """Converte item da API oficial em extraído (preço/foto/loja reais)."""
+    if not isinstance(item, dict):
+        return None
+    nome = _limpa(item.get("title"), 160)
+    link = str(item.get("permalink", ""))[:500]
+    if not nome or not link.startswith("http"):
+        return None
+    marca, condicao = "", str(item.get("condition", "")).lower()
+    for at in (item.get("attributes") or []):
+        if not isinstance(at, dict):
+            continue
+        aid = str(at.get("id", "")).upper()
+        if aid in ("BRAND", "MARCA") and not marca:
+            marca = _limpa(at.get("value_name"), 80)
+    pv = normalizar_preco(item.get("price"), str(item.get("currency_id") or "BRL"))
+    try:
+        estoque = int(item.get("available_quantity", -1))
+    except (TypeError, ValueError):
+        estoque = -1
+    vendedor = item.get("seller") if isinstance(item.get("seller"), dict) else {}
+    nick = _limpa(vendedor.get("nickname"), 40)
+    img = _primeira_imagem(item.get("thumbnail"))
+    specs = {}
+    if condicao == "new":
+        specs["Condicao"] = "Novo"
+    elif condicao == "used":
+        specs["Condicao"] = "Usado"
+    return {
+        "nome": nome, "marca": marca, "modelo": "", "variante": "",
+        "imagem": img, "descricao": "",
+        "avaliacao": None, "n_avaliacoes": None,
+        "condicao_mlb": condicao,
+        "specs": specs,
+        "ofertas_ld": [{
+            "preco": pv[0] if pv else None,
+            "moeda": pv[1] if pv else "BRL",
+            "preco_confirmado": bool(pv),
+            "disponibilidade": "em_estoque" if estoque > 0 else (
+                "sem_estoque" if estoque == 0 else "desconhecida"),
+            "url_oferta": link,
+            "loja": "Mercado Livre" + (f" · {nick}" if nick else ""),
+            "valido_ate": "",
+        }],
+    }
+
+
+def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
+    """DDG HTML → Lite. Retorna (achados, etapas). Nunca levanta."""
+    etapas = []
+    for base_nome, base in (("ddg", research.DDG_HTML), ("ddg-lite", research.DDG_LITE)):
+        try:
+            achados = research.buscar_ddg(consulta, base=base,
+                                          max_resultados=max_resultados) or []
+        except Exception as exc:
+            etapas.append(f"{base_nome}: falhou ({type(exc).__name__})")
+            continue
+        if achados:
+            etapas.append(f"{base_nome}: {len(achados)} resultados")
+            return achados, etapas
+        etapas.append(f"{base_nome}: sem resultados (bloqueio?)")
+    return [], etapas
+
+
+def buscar_com_fallback(consulta: str, buscar_fn=None,
+                        limite_mlb: int = 10) -> tuple:
+    """Cadeia mlb → ddg → lite. Retorna (achados, etapas). Nunca levanta."""
+    if buscar_fn is not None:
+        try:
+            return list(buscar_fn(consulta) or [])[:12], ["injetado (teste)"]
+        except Exception as exc:
+            return [], [f"injetado falhou ({type(exc).__name__})"]
+    etapas: list = []
+    try:
+        achados = buscar_mlb(consulta, limite=limite_mlb)
+        etapas.append(f"mlb: {len(achados)} ofertas (API oficial)")
+        return achados, etapas
+    except Exception as exc:
+        etapas.append(f"mlb: falhou ({type(exc).__name__})")
+    ddg, detapas = buscar_ddg_chain(consulta)
+    etapas.extend(detapas)
+    return ddg, etapas
+
+
+def diagnosticar_provedores(timeout: float = 6.0) -> list:
+    """Sonda cada provedor com consulta mínima. Sem bypass; só registra."""
+    diag = []
+    try:
+        n = len(buscar_mlb("celular", limite=1, timeout=timeout))
+        diag.append({"provedor": "mlb", "ok": True,
+                     "detalhe": f"API oficial respondeu ({n} item)"})
+    except Exception as exc:
+        diag.append({"provedor": "mlb", "ok": False,
+                     "detalhe": f"{type(exc).__name__}: {exc}"})
+    for base_nome, base in (("ddg", research.DDG_HTML), ("ddg-lite", research.DDG_LITE)):
+        try:
+            achados = research.buscar_ddg("celular comprar", base=base,
+                                          max_resultados=1, timeout=timeout)
+            diag.append({"provedor": base_nome, "ok": bool(achados),
+                         "detalhe": f"{len(achados)} resultado(s)" if achados
+                         else "página sem resultados (bot-wall?)"})
+        except Exception as exc:
+            diag.append({"provedor": base_nome, "ok": False,
+                         "detalhe": f"{type(exc).__name__}: {exc}"})
+    return diag
+
+
 # ── Busca orquestrada (reusa Research Engine; sem loja única) ──────────
 
 def _consultas_produto(criterios: dict, texto: str) -> list:
@@ -741,29 +945,40 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         return em_cache
 
     consultas = _consultas_produto(criterios, texto)
-    buscar = buscar_fn or (lambda q: research.buscar_ddg(q, max_resultados=6)
-                           or research.buscar_ddg(q, base=research.DDG_LITE,
-                                                 max_resultados=6))
-    achados, vistas = [], set()
+    achados, vistas, etapas_prov = [], set(), []
     for q in consultas:
-        try:
-            for a in buscar(q)[:6]:
-                if a.get("url") and a["url"] not in vistas:
-                    vistas.add(a["url"])
-                    achados.append(a)
-        except Exception as exc:
-            log.warning("shopping: busca falhou (%s)", type(exc).__name__)
+        parcial, detapas = buscar_com_fallback(q, buscar_fn=buscar_fn)
+        etapas_prov.extend(f"{q[:40]}: {e}" for e in detapas)
+        for a in parcial[:12]:
+            if a.get("url") and a["url"] not in vistas:
+                vistas.add(a["url"])
+                achados.append(a)
     if not achados:
         resultado = {"produtos": [], "fontes": [], "criterios": criterios,
                      "total_bruto": 0, "excluidos": [], "de_cache": False,
-                     "verificado_em": agora_iso(), "erro": "provedor_indisponivel"}
+                     "verificado_em": agora_iso(), "erro": "provedor_indisponivel",
+                     "etapas_provedores": etapas_prov[:8]}
         salvar_consulta(db, owner, conv, consulta, criterios, resultado)
         return resultado
 
     _prog("identificando", f"{len(achados)} anúncios candidatos")
-    alvos = achados[:teto_paginas]
-    _prog("consultando", f"{len(alvos)} páginas")
+    # Itens da API oficial já vêm estruturados: montagem direta, sem
+    # visita a página. Demais URLs passam pela extração JSON-LD/OG.
     brutos: list = []
+    paginas = []
+    for a in achados[:teto_paginas + 4]:
+        if a.get("origem") == "mlb" and isinstance(a.get("mlb"), dict):
+            try:
+                extraido = produto_de_mlb(a["mlb"])
+                if extraido:
+                    brutos.append(montar_produto(
+                        extraido, a["url"], a["url"], "Mercado Livre (API oficial)"))
+                    continue
+            except Exception as exc:
+                log.info("shopping: item mlb ignorado (%s)", type(exc).__name__)
+        paginas.append(a)
+    alvos = paginas[:teto_paginas]
+    _prog("consultando", f"{len(alvos)} páginas")
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliashop") as pool:
         futs = {pool.submit(_recuperar_ofertas, a["url"], a.get("titulo", ""),
                             baixar_fn): a for a in alvos}
@@ -783,7 +998,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
               for i, a in enumerate(achados[:8])]
     resultado = {"produtos": produtos, "fontes": fontes, "criterios": criterios,
                  "total_bruto": len(brutos), "excluidos": fora[:6],
-                 "de_cache": False, "verificado_em": agora_iso()}
+                 "de_cache": False, "verificado_em": agora_iso(),
+                 "etapas_provedores": etapas_prov[:8]}
     salvar_consulta(db, owner, conv, consulta, criterios, resultado)
     return resultado
 

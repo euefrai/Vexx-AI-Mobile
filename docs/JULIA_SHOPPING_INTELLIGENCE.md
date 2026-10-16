@@ -14,8 +14,15 @@ JDUI (`productcard`/`productgrid`/`productcompare`/`productdetails`/`productgall
    (`até R$`, `entre X e Y`), marcas e specs. **RAM física vs virtual**:
    `RAM Plus/virtual/expansível` é classificada como virtual e nunca conta
    como física.
-3. **Buscar**: 2 consultas DDG (principal + faixa de preço), até 6 URLs únicas.
-   Sem chave, sem loja única.
+3. **Buscar (V4.9.1.1: cadeia `buscar_com_fallback`)**: por consulta,
+   tenta nesta ordem, com timeout e registro de etapas, sem contornar
+   bloqueios:
+   - `mlb`: API oficial do Mercado Livre (`/sites/MLB/search`, sem chave) —
+     ofertas com preço, foto, link, loja/vendedor, condição e estoque reais;
+     itens montados direto, sem visitar página.
+   - `ddg` → `ddg-lite`: `research.buscar_ddg` (links p/ extração JSON-LD).
+   Falha de um provedor (HTTP 403, bot-wall, rede) vira etapa registrada +
+   próximo da cadeia. `diagnosticar_provedores()` sonda os três.
 4. **Extrair** (só dados estruturados): JSON-LD `Product`/`Offer`/`AggregateOffer`
    primeiro; OpenGraph (`og:title/image`, `product:price`) como fallback.
    Página sem dado estruturado vira **fonte** (link), nunca produto.
@@ -58,7 +65,8 @@ JDUI (`productcard`/`productgrid`/`productcompare`/`productdetails`/`productgall
 
 "mostra só os mais baratos" (ordena), "compare os dois primeiros"
 (`productcompare`), "qual tem mais memória" (RAM física primeiro),
-"outras lojas" (reapresenta ofertas). Sem consulta anterior → `None`
+"outras lojas" (reapresenta ofertas), "quero apenas modelos novos"
+(exclui usados com motivo). Sem consulta anterior → `None`
 (fluxo normal).
 
 ## Limites conhecidos

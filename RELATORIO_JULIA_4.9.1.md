@@ -61,6 +61,35 @@ O sistema, por desenho, responde vazio honesto nesse caso em vez de
 inventar — comportamento testado. Revalidar o E2E ao vivo quando o
 provedor responder com resultados.
 
+## V4.9.1.1 — Shopping Search Reliability (adendo)
+
+Auditoria: working tree limpo; alterações legítimas da V4.9.1 preservadas;
+identidade/modelos/Fajulto intocados.
+
+Causa da indisponibilidade (sondagem real deste ambiente):
+- `api.mercadolibre.com` → HTTP 403 (bot-wall por IP, com 2 UAs).
+- `html.duckduckgo.com` / `lite.duckduckgo.com` → HTTP 202 (~14KB sem
+  `result__a`: bot-wall, sem resultados).
+- Rede geral OK; Wikidata/Wikipedia/OpenAlex respondem 200 (sem preços —
+  descartados como provedores de oferta).
+
+Implementado (sem contornar proteções):
+- Cadeia `buscar_com_fallback`: MLB oficial → DDG → DDG Lite, com timeout
+  (8s), etapas registradas em `resultado["etapas_provedores"]`, dedupe,
+  cache e limites existentes mantidos. Itens MLB montam direto da API
+  (preço/foto/loja/condição/estoque reais); demais URLs passam por
+  JSON-LD/OG. Novo filtro "somente novos" (condição MLB).
+- `_get_json` com a mesma disciplina SSRF do Research (validação,
+  redirects revalidados, teto 512KB, só JSON).
+- Testes separados: 8 unitários com fixtures (marcadas como fixture) +
+  `test_e2e_pipeline_local_http_real` (HTTP real via loopback: fetch,
+  extração JSON-LD, montagem, filtro, fence `productcard` validado —
+  **passa**) + `test_e2e_provedores_live_ou_bloqueado` (`e2e_real`).
+- Resultado ao vivo aqui: **BLOQUEADO** — `mlb=HTTP 403, ddg/lite=página
+  sem resultados`. Fallback honesto mantido (resposta vazia explicativa,
+  sem invenção). Revalidar onde a rede permitir; nenhum CAPTCHA foi
+  contornado e nenhuma loja/API foi declarada sem verificação.
+
 ## Roadmap (atualizado em `docs/JULIA_MOBILE_ROADMAP.md`)
 
 - **V4.9.1 — Shopping Intelligence** (este relatório).

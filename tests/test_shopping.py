@@ -450,6 +450,184 @@ def test_e2e_pesquisa_produto_real():
     assert shopping.ultima_consulta(db, "e2e", "conv-e2e") is not None
 
 
+# ── V4.9.1.1 Provedores: MLB oficial + fallback ───────────────────────
+
+MLB_FIXTURE_ITEM = {
+    "id": "MLB-123", "title": "Smartphone Samsung Galaxy A15 8GB RAM 256GB",
+    "price": 1299.0, "currency_id": "BRL", "available_quantity": 10,
+    "condition": "new",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_123-I.jpg",
+    "permalink": "https://produto.mercadolivre.com.br/MLB-123-fone",
+    "seller": {"id": 1, "nickname": "LOJA OFICIAL"},
+    "attributes": [{"id": "BRAND", "name": "Marca", "value_name": "Samsung"}],
+}
+
+
+def test_mlb_mapeamento_fixture():
+    ext = shopping.produto_de_mlb(MLB_FIXTURE_ITEM)
+    assert ext and ext["nome"].startswith("Smartphone Samsung")
+    assert ext["marca"] == "Samsung"
+    assert ext["ofertas_ld"][0]["preco"] == 1299.0
+    assert ext["ofertas_ld"][0]["disponibilidade"] == "em_estoque"
+    assert "Mercado Livre" in ext["ofertas_ld"][0]["loja"]
+    p = shopping.montar_produto(ext, ext["ofertas_ld"][0]["url_oferta"],
+                                ext["ofertas_ld"][0]["url_oferta"], "MLB")
+    assert p["preco_confirmado"] and p["preco_texto"] == "R$ 1.299,00"
+    assert p["imagem"].startswith("https://")
+    assert p["specs"].get("Condicao") == "Novo"
+
+
+def test_mlb_mapeamento_invalido():
+    assert shopping.produto_de_mlb({}) is None
+    assert shopping.produto_de_mlb({"title": "x"}) is None
+    assert shopping.produto_de_mlb(None) is None
+    sem_estoque = dict(MLB_FIXTURE_ITEM, available_quantity=0)
+    assert shopping.produto_de_mlb(sem_estoque)["ofertas_ld"][0][
+        "disponibilidade"] == "sem_estoque"
+
+
+def test_mlb_sem_preco_nao_confirmado():
+    item = dict(MLB_FIXTURE_ITEM, price=None)
+    ext = shopping.produto_de_mlb(item)
+    assert ext["ofertas_ld"][0]["preco"] is None
+    p = shopping.montar_produto(ext, "https://x.com/p", "https://x.com/p", "MLB")
+    assert p["preco_texto"] == "Preço não confirmado"
+
+
+def test_chain_fallback_mlb_para_ddg(monkeypatch):
+    def _mlb_falha(q, limite=10, timeout=8.0):
+        raise research.ResearchErro("Provedor HTTP 403.", "http")
+
+    monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+    monkeypatch.setattr(
+        research, "buscar_ddg",
+        lambda q, base=research.DDG_HTML, max_resultados=6, timeout=8.0:
+        [{"titulo": "T", "url": "https://loja.com/p", "trecho": "x"}])
+    achados, etapas = shopping.buscar_com_fallback("celular")
+    assert len(achados) == 1 and achados[0]["url"] == "https://loja.com/p"
+    assert any("mlb: falhou" in e for e in etapas)
+    assert any("ddg" in e for e in etapas)
+
+
+def test_chain_tudo_falha_honesto():
+    achados, etapas = shopping.buscar_com_fallback(
+        "celular", buscar_fn=lambda q: (_ for _ in ()).throw(OSError("rede")))
+    assert achados == [] and etapas
+
+
+def test_pesquisar_mlb_sem_visitar_pagina():
+    db = _db()
+    achado = {"titulo": MLB_FIXTURE_ITEM["title"],
+              "url": MLB_FIXTURE_ITEM["permalink"], "trecho": "x",
+              "origem": "mlb", "mlb": MLB_FIXTURE_ITEM}
+
+    def _baixar_nunca(url):
+        raise AssertionError("MLB não visita página")
+
+    res = shopping.pesquisar(db, "ana", "celular samsung", "conv-mlb",
+                             buscar_fn=lambda q: [achado],
+                             baixar_fn=_baixar_nunca)
+    assert len(res["produtos"]) == 1
+    assert res["produtos"][0]["preco"] == 1299.0
+    assert "Mercado Livre" in res["produtos"][0]["loja"]
+
+
+def test_filtro_somente_novos():
+    novo = _produto_base(specs={"Condicao": "Novo"})
+    usado = _produto_base(nome="Usado X", specs={"Condicao": "Usado"})
+    dentro, fora = shopping.aplicar_filtros(
+        [novo, usado], {"orcamento": {}, "specs": {"flag_novo": True}})
+    assert [p["nome"] for p in dentro] == [_produto_base()["nome"]]
+    assert "somente novos" in fora[0]["excluido_por"]
+
+
+@pytest.mark.e2e_real
+def test_diagnosticar_estrutura():
+    diag = shopping.diagnosticar_provedores(timeout=6.0)
+    assert {d["provedor"] for d in diag} == {"mlb", "ddg", "ddg-lite"}
+    assert all(set(d) == {"provedor", "ok", "detalhe"} for d in diag)
+
+
+# ── E2E pipeline local (HTTP real via loopback + parsing/validacao reais) ─
+
+PAGINA_FIXTURE = ('<html><head><title>Oferta Relâmpago Fone Z</title>'
+                  '<script type="application/ld+json">'
+                  '{"@context":"https://schema.org","@type":"Product",'
+                  '"name":"Fone Bluetooth Z 64GB",'
+                  '"brand":{"@type":"Brand","name":"MarcaZ"},'
+                  '"image":"https://cdn.exemplo.com/z.jpg",'
+                  '"offers":{"@type":"Offer","price":"299,90",'
+                  '"priceCurrency":"BRL",'
+                  '"availability":"https://schema.org/InStock",'
+                  '"url":"https://loja.exemplo.com/z"},'
+                  '"aggregateRating":{"@type":"AggregateRating",'
+                  '"ratingValue":"4.2","reviewCount":"37"}}'
+                  '</script></head><body><h1>Fone Z</h1></body></html>')
+
+
+def test_e2e_pipeline_local_http_real():
+    import threading
+    import urllib.request
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    import jdui as _jdui
+
+    class _H(BaseHTTPRequestHandler):
+        def do_GET(self):
+            corpo = PAGINA_FIXTURE.encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(corpo)))
+            self.end_headers()
+            self.wfile.write(corpo)
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), _H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        url = f"http://127.0.0.1:{srv.server_port}/fone-z"
+        with urllib.request.urlopen(url, timeout=10) as r:
+            pagina = r.read().decode("utf-8")
+        assert "<script" in pagina  # fetch HTTP real funcionou
+        exts = shopping.extrair_ofertas_jsonld(pagina)
+        assert len(exts) == 1 and exts[0]["ofertas_ld"][0]["preco"] == 299.9
+        p = shopping.montar_produto(exts[0], url, url, "Loja Exemplo")
+        assert p["preco_confirmado"] and p["imagem"].startswith("https://")
+        dentro, fora = shopping.aplicar_filtros(
+            [p], {"orcamento": {"max": 500.0}, "specs": {}})
+        assert len(dentro) == 1 and not fora
+        fence = shopping.fence_resultado(
+            {"produtos": dentro, "fontes": [], "criterios": {},
+             "total_bruto": 1, "excluidos": [], "de_cache": False,
+             "verificado_em": "x"})
+        assert "productcard" in fence
+        corpo = fence.split("```jdui", 1)[1].rsplit("```", 1)[0]
+        ok, norm, errs = _jdui.validar_mensagem(json.loads(corpo))
+        assert ok, errs
+        assert norm["blocks"][0]["props"]["produto"]["preco"] == "R$ 299,90"
+    finally:
+        srv.shutdown()
+
+
+# ── E2E ao vivo (provedores reais; BLOQUEADO se todos falharem) ──────────
+
+@pytest.mark.e2e_real
+def test_e2e_provedores_live_ou_bloqueado():
+    diag = shopping.diagnosticar_provedores(timeout=8.0)
+    vivos = [d for d in diag if d["ok"]]
+    if not vivos:
+        pytest.skip("BLOQUEADO: mlb=%s ddg=%s lite=%s" % tuple(
+            d["detalhe"][:60] for d in diag))
+    db = _db()
+    res = shopping.pesquisar(db, "e2e", "fone bluetooth", "conv-live")
+    assert res["produtos"], "provedor vivo mas sem produtos (verificar mapeamento)"
+    p = res["produtos"][0]
+    assert p["preco_confirmado"] and p["url"].startswith("http")
+    fence = shopping.fence_resultado(res)
+    assert "product" in fence
+
+
 # ── Harness Node: validação + render dos 5 componentes de produto ──────
 
 HARNESS_SHOP = r"""
