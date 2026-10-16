@@ -212,12 +212,12 @@ def _extrair_specs(texto: str) -> dict:
 def extrair_criterios(texto: str) -> dict:
     """Categoria, orçamento, marcas e specs obrigatórias do pedido."""
     t = _sem_acentos(texto or "")
+    marcas = [m for m in _MARCAS if m in t]
     categoria = ""
     for c in sorted(CATEGORIAS, key=len, reverse=True):
-        if c in t:
+        if c in t and c not in marcas:
             categoria = c
             break
-    marcas = [m for m in _MARCAS if m in t]
     orc = _extrair_orcamento(texto or "")
     specs = _extrair_specs(texto or "")
     comparacao = bool(re.search(r"compar|versus|\bvs\b|diferen|qual melhor|prós e contras|pros e contras", t))

@@ -18,6 +18,7 @@ from urllib.parse import urlparse
 import docs_agent
 from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
 import hermes_bridge
+import intent
 import jdui
 import julia_auth as JULIA_auth
 import learning
@@ -1887,13 +1888,33 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         partes_sistema.append(f"O usuário pediu uma IMAGEM sobre '{termo_img}'. "
                               f"Além de descrever, inclua no final: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
                               "para exibir a imagem no chat.")
+    # V5.1: Intent Engine — estrutura validada guia roteamento, formato
+    # e validação. `ultimos_resultados` resolve follow-ups ("os dois primeiros").
+    try:
+        _ult_shop = shopping.ultima_consulta(db, owner, conversation_id)
+        _ult_res = None if _ult_shop else research.ultima_run(db, owner, conversation_id)
+        _ctx_intent = {"ultimos_resultados":
+                       "shopping" if _ult_shop else ("research" if _ult_res else None)}
+        intencao = intent.analisar(texto_usuario, _ctx_intent)
+    except Exception:
+        intencao = intent.analisar(texto_usuario)
+    extras["intent"] = intencao
+    extras["ferramentas_usadas"] = []
+    extras["podem_pesquisar"] = intencao.get("podem_pesquisar", True)
+    _fmt = (intencao.get("restricoes", {}) or {}).get("formato", {}) or {}
+    if isinstance(_fmt.get("max_linhas"), int):
+        partes_sistema.append(
+            f"FORMATO OBRIGATÓRIO: responda em no máximo {_fmt['max_linhas']} "
+            "linhas curtas, sem enrolação.")
     # V4.9.1: pedido de produto → o worker faz a busca shopping dedicada
     # (com cards verificados); a pesquisa genérica síncrona é pulada aqui
     # para não duplicar carga no Render Free.
     eh_shop = shopping.detectar_intencao(texto_usuario) \
-        and not shopping.eh_followup(texto_usuario)
+        and not shopping.eh_followup(texto_usuario) \
+        and extras["podem_pesquisar"]
     extras["shop"] = eh_shop
-    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) and not eh_shop:
+    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) \
+            and not eh_shop and extras["podem_pesquisar"]:
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         consulta = (texto_usuario or "")[:200]
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
@@ -1943,6 +1964,8 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         except Exception as exc:
             log.warning("research falhou (%s)", type(exc).__name__)
             partes_sistema.append(research.bloco_falha(hoje))
+        if extras.get("fontes"):
+            extras["ferramentas_usadas"].append("research")
     messages = [{"role": "system", "content": "\n\n".join(partes_sistema)}] + historico
     return messages, extras
 
@@ -2593,6 +2616,27 @@ def cmd_qualidade(db, texto: str, owner: str) -> str:
     return "\n\n```jdui\n" + json.dumps(normalized, ensure_ascii=False) + "\n```"
 
 
+def _filtrar_usados_restricao(shop_res: dict, intencao: dict) -> dict:
+    """V5.1: se o pedido proíbe usados, move-os para `excluidos` com motivo."""
+    try:
+        proib = " ".join(((intencao or {}).get("restricoes", {}) or {}).get("proibidas", []))
+        if not re.search(r"\busados?\b|segunda m|second hand", proib.lower()):
+            return shop_res
+        novos = [p for p in shop_res.get("produtos", [])
+                 if str(((p.get("specs", {}) or {}).get("Condicao", ""))).lower() != "usado"]
+        usados = [p for p in shop_res.get("produtos", [])
+                  if str(((p.get("specs", {}) or {}).get("Condicao", ""))).lower() == "usado"]
+        if usados and novos:
+            for u in usados:
+                u["excluido_por"] = "usado (pedido: somente novos)"
+            shop_res["excluidos"] = (shop_res.get("excluidos", []) + usados)[:6]
+            shop_res["produtos"] = novos[:6]
+            log.info("shopping: %d usados filtrados (restrição)", len(usados))
+    except Exception as exc:
+        log.warning("shopping filtro-usados falhou (%s)", type(exc).__name__)
+    return shop_res
+
+
 # ── Continuidade determinística entre conversas (V5.0; sem LLM) ──────
 _CONTINUAR_RE = re.compile(
     r"(continuar|continue|retomar|retome|voltando|onde param|onde parei|"
@@ -3051,6 +3095,14 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("JDUI sintetizado para %s (%s)", mid, extras["comp_sugerido"])
+    try:
+        for _v in (intent.validar(
+                extras.get("intent") or {}, texto,
+                {"ferramentas_usadas": extras.get("ferramentas_usadas", []),
+                 "produtos": []}) or {}).get("violacoes", []):
+            log.warning("INTENT_VALIDATE %s: %s", mid, _v)
+    except Exception as exc:
+        log.warning("validador falhou (%s)", type(exc).__name__)
     ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto, owner)
     if len(prep.get("user_text", "")) >= 20:
         threading.Thread(target=aprender_com_conversa,
@@ -3252,9 +3304,15 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             try:
                 shop_res = shopping.pesquisar(db, owner, prep.get("user_text", ""),
                                               conv, progresso=_prog_shop)
+                extras["ferramentas_usadas"].append("shopping")
             except Exception as exc:
                 log.warning("shopping falhou (%s)", type(exc).__name__)
                 shop_res = None
+            if shop_res and shop_res.get("produtos"):
+                # V5.1: recuperação — proibição explícita de usados filtra
+                # antes do LLM e dos cards (sem fingir que não existiam).
+                shop_res = _filtrar_usados_restricao(
+                    shop_res, extras.get("intent") or {})
             if shop_res and shop_res.get("produtos"):
                 try:
                     bloco = shopping.bloco_para_llm(shop_res)
@@ -3381,6 +3439,16 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                        texto_final[len(res["texto"]):])
             except Exception:
                 pass
+        # V5.1: validador de relevância (determinístico; sem regeneração).
+        try:
+            _val = intent.validar(
+                extras.get("intent") or {}, texto_final,
+                {"ferramentas_usadas": extras.get("ferramentas_usadas", []),
+                 "produtos": (shop_res or {}).get("produtos", [])})
+            for _v in _val.get("violacoes", []):
+                log.warning("INTENT_VALIDATE %s: %s", mid, _v)
+        except Exception as exc:
+            log.warning("validador falhou (%s)", type(exc).__name__)
         ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final, owner)
         if len(prep.get("user_text", "")) >= 20:
             threading.Thread(target=aprender_com_conversa,

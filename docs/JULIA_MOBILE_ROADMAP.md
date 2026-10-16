@@ -105,9 +105,13 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   anti-exemplo), orcamento de 1500 chars, Project Memory e continuidade
   deterministica (projetos, onde paramos, nota de corte, restart).
 
-## V5.1 - INTENT & UNDERSTANDING ENGINE (futuro)
-- Intencao e entendimento profundo do pedido (desambiguacao, slots,
-  follow-ups e roteamento entre motores).
+## V5.1 - INTENT & UNDERSTANDING ENGINE (entregue; ver RELATORIO_JULIA_5.1.md)
+- Intent Engine 2.0 (intent.py): estrutura validada, 2+ evidencias p/
+  ferramenta externa, follow-ups com contexto, formato como modificador.
+- Instruction following: proibicoes/obrigatorias/formato, skip de pesquisa,
+  validador deterministico + recuperacao segura (usados).
+- Benchmark versionado: 124 casos PT-BR, 100% acuracia, roteamento 124x89
+  vs legado.
 
 ## V5.2 - ADVANCED VISUAL JDUI (futuro)
 - JDUI visual avancado sobre a base da V4.9.1 (mais componentes, animacoes
