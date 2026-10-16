@@ -366,9 +366,15 @@ def test_ai_models_e_complete_via_agente_fake():
             req = ws.receive_json()
             assert req["type"] == "ai_models"
             ws.send_json({"request_id": req["request_id"], "type": "ai_models",
-                          "models": ["fake-model"], "default": "fake-model"})
+                          "models": ["fake-model"], "default": "fake-model",
+                          "providers": [{"id": "openai", "label": "OpenAI",
+                                         "configured": True, "key_env": "X",
+                                         "extra": 1}]})
             t.join(timeout=8)
-            assert out["m"].json() == {"models": ["fake-model"], "default": "fake-model"}
+            assert out["m"].json() == {
+                "models": ["fake-model"], "default": "fake-model",
+                "providers": [{"id": "openai", "label": "OpenAI",
+                               "configured": True}]}
 
             def chama_ai():
                 out["a"] = client.post("/api/ai", json={"message_id": "ai-user-001",

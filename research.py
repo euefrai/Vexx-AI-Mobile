@@ -134,7 +134,8 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
                 raise ResearchErro(f"Página HTTP {resp.status}.", "http")
             ctype = (resp.headers.get_content_type() if hasattr(resp.headers, "get_content_type")
                      else str(resp.headers.get("Content-Type", "")).split(";")[0]).lower()
-            if ctype and not ctype.startswith("text/"):
+            if ctype and not (ctype.startswith("text/") or ctype in (
+                    "application/json", "application/ld+json") or ctype.endswith("+json")):
                 raise ResearchErro(f"Conteúdo não textual ({ctype}).", "tipo_bloqueado")
             try:
                 total = int(resp.headers.get("Content-Length") or 0)

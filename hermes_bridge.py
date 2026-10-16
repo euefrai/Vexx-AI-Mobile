@@ -43,12 +43,40 @@ def proxy_url(valor: str = "") -> str:
     return url
 
 
-def _req(url: str, corpo: dict, timeout: float):
-    # Bearer arbitrário exigido pelo formato; o proxy troca pelo real.
+def _req(url: str, corpo: dict, timeout: float, api_key: str = "",
+         extras: dict | None = None):
+    # Sem chave (proxy local): bearer arbitrário — o proxy troca pelo real.
+    headers = {"Content-Type": "application/json",
+               "Authorization": ("Bearer " + api_key) if api_key else "Bearer local"}
+    if extras:
+        headers.update(extras)
     data = json.dumps(corpo, ensure_ascii=False).encode("utf-8")
-    return urllib.request.Request(url, data=data,
-                                  headers={"Content-Type": "application/json",
-                                           "Authorization": "Bearer local"})
+    return urllib.request.Request(url, data=data, headers=headers)
+
+
+def base_publica(url: str, hosts: tuple) -> str:
+    """Base HTTPS de provedor direto. Só hosts da allowlist do provedor;
+    https obrigatório; sem credenciais, query ou fragmento."""
+    base = (url or "").strip().rstrip("/")
+    try:
+        parte = urllib.parse.urlsplit(base)
+    except ValueError as exc:
+        raise BridgeErro(f"URL do provedor inválida: {exc}.", "url_invalida") from None
+    if parte.scheme != "https" or not parte.hostname:
+        raise BridgeErro("Provedor direto exige https://host.", "url_invalida")
+    if parte.hostname.lower() not in tuple(h.lower() for h in hosts):
+        raise BridgeErro(f"Host '{parte.hostname}' fora da lista do provedor.",
+                         "url_bloqueada")
+    if parte.username or parte.password or parte.query or parte.fragment:
+        raise BridgeErro("URL do provedor não aceita credenciais/parâmetros.",
+                         "url_invalida")
+    return base
+
+
+def _base(base: str, api_key: str = "", hosts: tuple = ()) -> str:
+    if api_key:
+        return base_publica(base, hosts)
+    return proxy_url(base)
 
 
 def _mapear_http(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
@@ -77,10 +105,14 @@ def _mapear_http(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
     return BridgeErro(f"Falha HTTP {exc.code}.", "http", detalhe)
 
 
-def listar_modelos(base: str, timeout: float = 10.0) -> list:
-    url = proxy_url(base)
+def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
+                   hosts: tuple = ()) -> list:
+    url = _base(base, api_key, hosts)
+    req = urllib.request.Request(
+        url + "/models",
+        headers={"Authorization": ("Bearer " + api_key) if api_key else "Bearer local"})
     try:
-        with urllib.request.urlopen(url + "/models", timeout=timeout) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             dados = json.loads(r.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
         raise _mapear_http(exc, "") from None
@@ -152,13 +184,14 @@ class AcumuladorSSE:
 
 
 def chat_complete(base: str, model: str, messages: list,
-                  timeout: float = 120.0, max_tokens: int = 2000) -> dict:
-    url = proxy_url(base)
+                  timeout: float = 120.0, max_tokens: int = 2000,
+                  api_key: str = "", hosts: tuple = ()) -> dict:
+    url = _base(base, api_key, hosts)
     inicio = time.monotonic()
     try:
         req = _req(url + "/chat/completions",
                    {"model": model, "messages": messages, "max_tokens": max_tokens},
-                   timeout)
+                   timeout, api_key)
         with urllib.request.urlopen(req, timeout=timeout) as r:
             dados = json.loads(r.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
@@ -178,16 +211,17 @@ def chat_complete(base: str, model: str, messages: list,
 
 def chat_stream(base: str, model: str, messages: list, on_delta,
                 deve_parar=None, timeout: float = 180.0,
-                max_tokens: int = 2000) -> dict:
+                max_tokens: int = 2000, api_key: str = "",
+                hosts: tuple = ()) -> dict:
     """Lê SSE chamando on_delta(seq, trecho). Retorna texto final.
 
     `deve_parar` é um callable sem args (cancelamento cooperativo).
     """
-    url = proxy_url(base)
+    url = _base(base, api_key, hosts)
     inicio = time.monotonic()
     req = _req(url + "/chat/completions",
                {"model": model, "messages": messages,
-                "max_tokens": max_tokens, "stream": True}, timeout)
+                "max_tokens": max_tokens, "stream": True}, timeout, api_key)
     req.add_header("Accept", "text/event-stream")
     acum = AcumuladorSSE()
     partes = []

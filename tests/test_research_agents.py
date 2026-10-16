@@ -228,6 +228,38 @@ def test_provedores_fallback():
         assert exc.codigo == "indisponivel"
 
 
+def test_searxng_instancia_propria_via_loopback(monkeypatch):
+    """Instância autorizada (JULIA_SEARXNG_URL): JSON /search real via HTTP."""
+    import json as _json
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    monkeypatch.setattr(research, "_ips_globais", lambda host: None)
+
+    class _H(BaseHTTPRequestHandler):
+        def do_GET(self):
+            corpo = _json.dumps({"results": [
+                {"title": "Fonte Local", "url": "https://exemplo.com/a",
+                 "content": "trecho local"}]}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(corpo)))
+            self.end_headers()
+            self.wfile.write(corpo)
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), _H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        sx = ra.ProvedorSearXNG(f"http://127.0.0.1:{srv.server_port}")
+        achados, info = ra.buscar_com_fallback([sx], "tema")
+        assert len(achados) == 1 and info["provedor"] == "searxng"
+        assert achados[0]["url"] == "https://exemplo.com/a"
+    finally:
+        srv.shutdown()
+
+
 def test_evidencias():
     db = _db()
     job = ra.criar_job(db, "u-x", "café?")
