@@ -79,8 +79,12 @@ existentes foram executados separadamente: **5 passed, 5 skipped** (dois testes
 LLM já marcados como bloqueados no projeto; três dependentes de DDG/lojas, rede
 sem resultados ou HTTP 403). Não foram removidos testes nem marcadores.
 
-A suíte completa final está sendo concluída; atualizar esta seção com a saída
-efetiva antes da entrega.
+**Suíte completa executada: 488 passed, 5 skipped, duas advertências, 160,66 s.**
+Os cinco skips são os mesmos bloqueios externos descritos acima. Após os últimos
+limites do schema, o foco final passou com 57 testes. A QA Chrome foi repetida
+após o ajuste de enquadramento e passou; screenshots mobile foram revisados.
+`git diff --check` passou. As advertências existentes são depreciações de mss
+e timeout do TestClient; não houve falha mascarada.
 
 ## Trabalho concorrente e rastreabilidade
 
@@ -91,7 +95,11 @@ modelos em `pc_agent.py`, `server.py`, `public/app.js`, `public/index.html`,
 preservadas e não fazem parte da implementação 3D. Uma suíte intermediária
 capturou o arquivo em transição e teve 10 falhas NameError por providers ainda
 não importado; depois houve uma falha de contrato do catálogo enquanto o teste
-correspondente era atualizado. A validação final usa o checkout atualizado.
+correspondente era atualizado. A validação final usa o checkout atualizado. O HEAD avançou externamente para
+`4f968eb` durante esta execução, incluindo trabalho 3D e de provedores. Não foi
+criado commit nem executado push/deploy por esta rodada do assistente. Edições
+concorrentes adicionais em research.py, tests/test_research_agents.py e
+docs/JULIA_PROVIDERS.md também foram preservadas.
 
 ## Limitações
 

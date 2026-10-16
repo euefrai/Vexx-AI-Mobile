@@ -61,7 +61,7 @@ contrato e mantém seus fallbacks. Campos desconhecidos são rejeitados, não ex
 
 Não existem campos src, url, HTML, callback, shader ou script. O texto é inserido
 com textContent. Não se executa código do LLM. O teto de fences do JDUI permanece
-em 24 KB. Para GLB, a única URL é constante e local, sem fetch Python; o leitor
+em 24 KB; cada cena model3d tem teto adicional de 20 KB. Para GLB, a única URL é constante e local, sem fetch Python; o leitor
 limita a resposta a 64 KiB antes do parse e rejeita URI, imagens e extensões.
 
 ## Catálogo e direitos

@@ -39,7 +39,7 @@ q=0 e q=0.5. Não há compressão dinâmica no backend nem interferência no SSE
   oculto, requestAnimationFrame deixa de ser agendado.
 - Reduced motion inicia pausado. Animação explícita continua disponível.
 
-Na amostra de 1.009 ms com CPU throttling **4×**, uma esfera gerou **30 chamadas
+Na amostra de 1.013 ms com CPU throttling **4×**, uma esfera gerou **31 chamadas
 de desenho**. É uma amostra curta de cena simples na GPU integrada do desktop,
 não uma promessa de FPS para qualquer celular. A GPU não foi desacelerada pela
 configuração de CPU do DevTools. A interação por toque foi exercida por eventos
@@ -57,9 +57,9 @@ Snapshots CDP desta execução:
 
 | Momento | Heap JavaScript usado | Listeners reportados |
 |---|---:|---:|
-| Um visualizador inicial | 6.231.188 bytes | 68 |
-| Depois da sequência, antes de GC | 7.302.188 bytes | 282 |
-| Depois de descarte e GC explícito | 4.197.632 bytes | 34 |
+| Um visualizador inicial | 4.821.860 bytes | 68 |
+| Depois da sequência, antes de GC | 7.283.324 bytes | 282 |
+| Depois de descarte e GC explícito | 4.200.888 bytes | 34 |
 
 Os números abrangem a página de QA, não apenas o componente. GC explícito é
 instrumentação de teste, não rotina de produção. Contar buffers e snapshots de heap
