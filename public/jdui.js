@@ -1901,6 +1901,7 @@
     }
     if (acts.children.length) corpo.appendChild(acts);
     card.appendChild(corpo);
+    card._corpo = corpo;
     return card;
   }
   function productSpecsTable(prod) {
@@ -1937,9 +1938,9 @@
   R.productcard = function (root, props, st, save, ctx) {
     st = st || {};
     const box = el('div', 'jdui-cards');
-    box.appendChild(productCardEl(props.produto, ctx, false));
-    const card = box.firstChild;
-    const corpo = card.lastChild;
+    const card = productCardEl(props.produto, ctx, false);
+    box.appendChild(card);
+    const corpo = card._corpo;
     const specsFull = productSpecsTable(props.produto);
     if (specsFull) {
       specsFull.style.display = st.detalhes ? '' : 'none';
@@ -2049,8 +2050,9 @@
     st = st || {};
     const box = el('div', 'jdui-cards');
     const prod = props.produto;
-    box.appendChild(productCardEl(prod, ctx, false));
-    const corpo = box.firstChild.lastChild;
+    const card = productCardEl(prod, ctx, false);
+    box.appendChild(card);
+    const corpo = card._corpo;
     const specs = productSpecsTable(prod);
     if (specs) {
       corpo.appendChild(el('div', 'jdui-count', 'Especificações'));

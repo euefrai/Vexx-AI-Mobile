@@ -16,6 +16,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import docs_agent
+from assistant_identity import system_with_identity
 import hermes_bridge
 import jdui
 import julia_auth as JULIA_auth
@@ -50,7 +51,7 @@ def _sintetizar_isolado(fn, owner: str, *args):
         except Exception:
             pass
 
-SYSTEM_PADRAO = ("Você é o Vexx AI, assistente pessoal do usuário. "
+SYSTEM_PADRAO = ("Você é o assistente pessoal do usuário no Vexx AI. "
                  "Responda em português, de forma direta e útil. "
                  "Use markdown leve: títulos curtos, listas, **negrito**, `código`, tabelas quando útil. "
                  "Se navegar/pesquisar, cite ao final uma seção 'Fontes:' com os links usados. "
@@ -337,7 +338,8 @@ def ai_config() -> dict:
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
         "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
         "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
-        "system": os.environ.get("JULIA_SYSTEM_PROMPT", SYSTEM_PADRAO)[:2000],
+        "system": system_with_identity((os.environ.get("JULIA_SYSTEM_PROMPT", "").strip()
+                                        or SYSTEM_PADRAO)[:2000]),
         "context": min(max(int(os.environ.get("JULIA_AI_CONTEXT", "12")), 1), 50),
         "max_tokens": min(max(int(os.environ.get("JULIA_AI_MAX_TOKENS", "1500")), 1), 8000),
         "memoria_global": os.environ.get("JULIA_SHARED_MEMORY", "1") == "1",
@@ -1658,7 +1660,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     memoria_on = cfg.get("memoria_global", True)
     historico = aplicar_orcamento(contexto_conversa(db, conversation_id, cfg["context"], owner))
     extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
-    partes_sistema = [cfg["system"], REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO,
+    partes_sistema = [system_with_identity(cfg["system"]), REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO,
                        REGRAS_SHOPPING]
     partes_sistema.extend(_instrucoes_contexto_local(contexto_local))
     if memoria_on:
@@ -2091,7 +2093,7 @@ def ai_continuar(db, payload: dict, cfg: dict) -> dict:
     cfg_eff = dict(cfg, memoria_global=True)
     historico = contexto_conversa(db, conv, min(cfg["context"], 8), owner)
     contexto_local = _contexto_local_seguro(payload)
-    sistema = "\n".join([cfg["system"], *_instrucoes_contexto_local(contexto_local)])
+    sistema = "\n".join([system_with_identity(cfg["system"]), *_instrucoes_contexto_local(contexto_local)])
     messages = ([{"role": "system", "content": sistema}] + historico
                 + [{"role": "assistant", "content": (est["response_text"] or "")[-4000:]},
                    {"role": "user", "content": "Continue exatamente de onde parou, sem repetir o que já disse."}])

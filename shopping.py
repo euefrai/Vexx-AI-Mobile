@@ -91,16 +91,18 @@ def _sem_acentos(texto: str) -> str:
 def detectar_intencao(texto: str) -> bool:
     """True se o usuário pede pesquisa/compra/comparação de produtos."""
     t = _sem_acentos(texto or "")
-    tem_verbo = any(v in t for v in _sem_acentos(" ".join(_VERBOS_COMPRA)).split("  ") ) \
-        or any(v in t for v in (
-            "pesquis", "busc", "encontr", "procur", "recomend", "compar",
-            "comprar", "compra", "oferta", "preco", "promocao", "mais barato",
-            "menor preco", "onde comprar", "vale a pena", "custo-beneficio",
-            "custo beneficio", "qual celular", "qual notebook",
-            "quero um", "quero uma"))
+    tem_verbo = any(v in t for v in (
+        "pesquis", "busc", "encontr", "procur", "recomend", "compar",
+        "comprar", "compra", "oferta", "preco", "promocao", "mais barato",
+        "menor preco", "onde comprar", "vale a pena", "custo-beneficio",
+        "custo beneficio", "qual celular", "qual notebook",
+        "quero um", "quero uma", "qual tem mais", "qual o melhor",
+        "o melhor celular", "o melhor notebook"))
     if not tem_verbo:
         return False
     tem_produto = ("produto" in t or "modelo" in t or "marca" in t or "loja" in t
+                   or bool(re.search(r"\b(ram|memoria|bateria|armazenamento|polegadas|"
+                                     r"processador|gb|ssd|5g|nfc)\b", t))
                    or any(c in t for c in CATEGORIAS))
     return bool(tem_produto)
 
@@ -152,12 +154,15 @@ def _extrair_ram(texto: str) -> dict:
     """Diferencia RAM FÍSICA de RAM VIRTUAL (ex.: '+8GB RAM Plus' é virtual)."""
     t = (texto or "").lower()
     out = {}
-    for m in re.finditer(r"(\d{1,2})\s?gb\s?(?:de\s?)?ram", t):
-        janela = t[max(0, m.start() - 40):m.end() + 40]
-        virtual = bool(re.search(r"virtual|plus\s?ram|ram\s?plus|expans|estendida|extendida", janela))
+    for m in re.finditer(r"(\d{1,2})\s?gb\s?(?:de\s?)?ram|ram\s?(?:de\s?)?(\d{1,2})\s?gb", t):
+        num = m.group(1) or m.group(2)
+        apos = t[m.end():m.end() + 15]
+        antes = t[max(0, m.start() - 20):m.start()]
+        virtual = bool(re.search(r"^\s*(plus|virtual|expans|estendida|extendida)\b", apos)
+                       or re.search(r"\b(virtual|expansivel|estendida|extendida|plus)\s*(de\s*)?$", antes))
         try:
-            v = int(m.group(1))
-        except ValueError:
+            v = int(num)
+        except (TypeError, ValueError):
             continue
         if virtual:
             out["ram_virtual_gb"] = max(out.get("ram_virtual_gb", 0), v)
@@ -1029,7 +1034,7 @@ def responder_followup(db, owner: str, conv: str, texto: str) -> dict | None:
         alvos = prods[:2]
         if len(alvos) < 2:
             return None
-        linhas_txt = [f"**{a['nome']}** ({a['preco_texto']}) vs "
+        linhas_txt = [f"**{alvos[0]['nome']}** ({alvos[0]['preco_texto']}) vs "
                        f"**{alvos[1]['nome']}** ({alvos[1]['preco_texto']})"]
         return {"texto": "\n".join(linhas_txt),
                 "fence": fence_comparacao(alvos),
