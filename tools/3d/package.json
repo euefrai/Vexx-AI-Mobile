@@ -1,0 +1,1 @@
+{"private":true,"scripts":{"build":"esbuild engine.js --bundle --minify --format=esm --outfile=../../public/vendor/three-engine.js && node compress.cjs"},"devDependencies":{"esbuild":"0.25.10","three":"0.180.0"}}

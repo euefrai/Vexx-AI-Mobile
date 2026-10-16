@@ -13,11 +13,12 @@ import re
 import unicodedata
 
 import shopping
+import model3d
 
 INTENCOES = (    "conversa", "shopping", "pesquisa", "pesquisa_profunda",
     "estudo_prova", "estudo_aula", "estudo_reforco",
     "memoria", "calculo", "codigo", "imagem", "identidade",
-    "projeto", "jdui", "pc_controle",
+    "projeto", "jdui", "pc_controle", "model3d",
 )
 
 FERRAMENTAS_VALIDAS = (
@@ -52,12 +53,12 @@ _CLS_SHOPPING = (
               r"mais barat\w*|barat\w*|\boferta\b|promocao|quero (um|uma)|"
               r"qual |pesquisa de|busca de)"),
     ("substantivo", _PROD),
-    ("preco", r"(r\$\s?\d|reais|\bbrl\b|ate r?\$?\s?\d|orcamento|mil\b)"),
+    ("preco", r"(r\$\s?\d|reais|\bbrl\b|ate r?\$?\s?\d|orcamento|mil\b|\bpreco\b)"),
     ("spec", r"(\d+\s?gb|\bram\b|\bssd\b|polegadas|\bpol\b|mah|\b5g\b|"
              r"\bnfc\b|[0-9]{2,3}hz|aro \d|octa|snapdragon|ryzen|\bi[3579]\b)"),
     ("condicao", r"(apenas (novos?|novas?|usados?)|\bnovos?\b|\busados?\b|"
                  r"lacrado|seminovo)"),
-    ("midia", r"(fotos|imagens|com foto)"),
+    ("midia", r"(fotos|imagens|com foto|\bfoto\b|\blink\b)"),
 )
 
 
@@ -268,6 +269,7 @@ def _ferramentas(intencao: str, secundarias: list, formato: dict,
         "identidade": ["deterministico"],
         "projeto": ["deterministico", "memory", "llm"],
         "jdui": ["jdui", "llm"],
+        "model3d": ["deterministico", "jdui"],
         "pc_controle": ["pc_controle"],
         "conversa": ["llm"],
     }
@@ -297,6 +299,10 @@ def analisar(texto: str, contexto: dict | None = None) -> dict:
         if not t:
             return _vazio()
         intencao, evidencias, secundarias = _detectar_principal(t)
+        request_3d = model3d.request(texto)
+        if request_3d and (request_3d['action'] == 'create' or
+                           (contexto or {}).get('ultimos_resultados') == 'model3d'):
+            intencao, evidencias, secundarias = 'model3d', ['pedido:3d', 'visualização:local'], []
         restricoes = _extrair_restricoes(t)
         referencias = _extrair_referencias(t)
         ultimo = ((contexto or {}).get("ultimos_resultados") or "") if contexto else ""

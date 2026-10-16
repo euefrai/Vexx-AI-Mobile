@@ -152,6 +152,8 @@ async function preloadJduiStates(msgIds) {
 function jduiCtx(row) {
   return {
     messageId: row.id,
+    conversationId: row.conversation_id,
+    ownerId: currentUid,
     api: (endpoint, options) => api(endpoint, options),
     queueLearn: (endpoint, body) => queueLearn(endpoint, body),
     download: (name, mime, text) => downloadFile(name, mime, text),
@@ -627,6 +629,8 @@ function appendMessage(row) {
   const wrap = document.createElement('div');
   wrap.className = 'message ' + type + (row.status === 'failed' ? ' failed' : '');
   wrap.dataset.mid = row.id;
+  wrap._renderOwner = currentUid;
+  wrap._renderSignature = JSON.stringify([row.text, row.status, row.model, row.created_at]);
   if (type === 'ai') { const ic = document.createElement('div'); ic.className = 'bubble-avatar'; ic.textContent = 'v.'; ic.setAttribute('aria-hidden', 'true'); wrap.appendChild(ic); }
   const content = document.createElement('div'); content.className = 'message-content';
   if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
@@ -733,6 +737,10 @@ async function renderMessages() {
   await preloadJduiStates(rows.map(m => m.id));
   if (version !== messagesRenderVersion || selected !== activeConversation || owner !== currentUid) return;
   const stick = nearBottom(conversation);
+  // Preserve unchanged 3D surfaces during sync; rebuilding them interrupts GPU loads and interaction.
+  const retained3d = new Map(Array.from(conversation.querySelectorAll('.message'))
+    .filter(node => node._renderOwner === currentUid && node.querySelector('.model3d'))
+    .map(node => [node.dataset.mid, node]));
   conversation.replaceChildren();
   conversation.classList.toggle('is-empty', rows.length === 0);
   const header = document.createElement('div'); header.className = 'chat-date';
@@ -746,7 +754,11 @@ async function renderMessages() {
   } else {
     const idsAssist = rows.filter(m => m.role === 'assistant' && m.status === 'synced').map(m => m.id);
     lastAssistantId = idsAssist.length ? idsAssist[idsAssist.length - 1] : '';
-    rows.forEach(appendMessage);
+    rows.forEach(row => {
+      const node = retained3d.get(row.id);
+      if (node && node._renderSignature === JSON.stringify([row.text, row.status, row.model, row.created_at])) conversation.appendChild(node);
+      else appendMessage(row);
+    });
   }
   const temTroca = rows.length > 0;
   if (!$('page-chat').hidden) $('suggestions').style.display = temTroca ? 'none' : 'flex';
@@ -1500,21 +1512,59 @@ async function syncAndRefresh() {
 
 /* ----- Modelos ----- */
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
+let modelCatalog = { models: [], providers: [] };
+function providerLabel(pid) {
+  const p = (modelCatalog.providers || []).find(x => x.id === pid);
+  return p ? p.label : pid;
+}
+function isConfigured(pid) {
+  if (pid === 'hermes') return true;
+  const p = (modelCatalog.providers || []).find(x => x.id === pid);
+  return !!(p && p.configured);
+}
+function providerOf(id) {
+  const i = String(id || '').indexOf('/');
+  return i > 0 ? id.slice(0, i) : 'hermes';
+}
+function fillModels(filter) {
+  const sel = $('modelSelect');
+  const cur = modeloAtivo() || modelCatalog.default || '';
+  sel.replaceChildren();
+  const q = (filter || '').trim().toLowerCase();
+  const groups = {};
+  for (const id of modelCatalog.models || []) {
+    if (q && id.toLowerCase().indexOf(q) < 0 && providerLabel(providerOf(id)).toLowerCase().indexOf(q) < 0) continue;
+    (groups[providerOf(id)] = groups[providerOf(id)] || []).push(id);
+  }
+  const order = Object.keys(groups).sort((a, b) => isConfigured(b) - isConfigured(a));
+  for (const pid of order) {
+    const g = document.createElement('optgroup');
+    g.label = providerLabel(pid) + (isConfigured(pid) ? '' : ' · sem chave');
+    for (const id of groups[pid]) {
+      const o = document.createElement('option');
+      o.value = id; o.textContent = id;
+      if (!isConfigured(pid)) { o.disabled = true; o.textContent += ' (sem chave)'; }
+      if (id === cur) o.selected = true;
+      g.appendChild(o);
+    }
+    sel.appendChild(g);
+  }
+  if (cur && !(modelCatalog.models || []).includes(cur)) { const o = document.createElement('option'); o.value = cur; o.textContent = cur + ' (salvo)'; o.selected = true; sel.appendChild(o); }
+  return cur;
+}
 async function loadModels(force) {
   if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return; }
   if (!force && Date.now() - modelsLoadedAt < 300000) return;
   try {
     const r = await api('/api/ai/models');
     modelsLoadedAt = Date.now();
-    const sel = $('modelSelect');
-    const cur = modeloAtivo() || r.default || '';
-    sel.replaceChildren();
-    for (const id of r.models || []) { const o = document.createElement('option'); o.value = id; o.textContent = id; if (id === cur) o.selected = true; sel.appendChild(o); }
-    if (cur && !(r.models || []).includes(cur)) { const o = document.createElement('option'); o.value = cur; o.textContent = cur + ' (salvo)'; o.selected = true; sel.appendChild(o); }
+    modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '' };
+    const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
     $('aiStatus').textContent = 'IA pronta · ' + (modeloAtivo() || r.default || '?');
   } catch (_) { $('aiStatus').textContent = 'IA: Hermes indisponível'; }
 }
+$('modelSearch') && $('modelSearch').addEventListener('input', e => { fillModels(e.target.value); });
 $('modelSelect').addEventListener('change', e => { localStorage.setItem('julia-model', e.target.value); $('aiStatus').textContent = 'IA pronta · ' + e.target.value; });
 
 /* ----- IA com streaming rápido ----- */

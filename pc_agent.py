@@ -16,10 +16,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import docs_agent
+import model3d
 from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
 import hermes_bridge
 import intent
 import jdui
+import providers
 import julia_auth as JULIA_auth
 import learning
 import remoto
@@ -369,10 +371,30 @@ def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
 
 def gerar_texto(cfg: dict, messages: list, preferido: str = "",
                 max_tokens: int = 0, timeout: float = 60.0) -> dict:
-    """Chamada LLM com fallback (leitura sem efeitos; mesma reply_id fora daqui)."""
+    """Chamada LLM com fallback (leitura sem efeitos; mesma reply_id fora daqui).
+
+    Modelos "provedor/modelo" roteiam para providers.py; IDs simples usam o
+    Hermes (legado)."""
+    fila = modelos_tentativa(cfg, preferido)
+    if any(providers.dividir(m)[0] != "hermes" for m in fila):
+        return providers.tentar_modelos(
+            fila, messages, timeout_por_tentativa=timeout,
+            max_tokens=max_tokens or cfg["max_tokens"])
     return hermes_bridge.tentar_modelos(
-        cfg["proxy"], modelos_tentativa(cfg, preferido), messages,
+        cfg["proxy"], fila, messages,
         timeout_por_tentativa=timeout, max_tokens=max_tokens or cfg["max_tokens"])
+
+
+def gerar_stream(cfg: dict, modelos: list, messages: list, emitir,
+                 deve_parar=None, max_tokens: int = 0) -> dict:
+    """Stream com fallback; roteia multi-provedor quando houver prefixo."""
+    if any(providers.dividir(m)[0] != "hermes" for m in modelos):
+        return providers.chat_stream_fb(
+            modelos, messages, emitir, deve_parar,
+            max_tokens=max_tokens or cfg["max_tokens"])
+    return hermes_bridge.chat_stream_fb(
+        cfg["proxy"], modelos, messages, emitir,
+        deve_parar=deve_parar, max_tokens=max_tokens or cfg["max_tokens"])
 
 
 # ── Memória compartilhada entre sessões ──────────────────────────────
@@ -3122,6 +3144,31 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
     return ""
 
 
+def cmd_model3d(db, texto, owner, conv):
+    """Referências 3D restritas ao dono e à conversa; sem LLM/rede/controle remoto."""
+    request = model3d.request(texto)
+    if not request:
+        return None
+    previous = None
+    if request['action'] != 'create':
+        for message in ultimos_blocos_jdui(db, conv, limite=5, owner=owner):
+            previous = next((b['props'] for b in message['blocks']
+                             if b.get('component') == 'model3d'), None)
+            if previous:
+                break
+    result = model3d.respond(texto, previous)
+    if not result:
+        return None
+    text, props = result
+    if props:
+        ok, normalized, errors = jdui.validar_mensagem({'version': jdui.VERSION,
+            'blocks': [{'type': 'ui', 'component': 'model3d', 'props': props}]})
+        if not ok:
+            return 'Não foi possível preparar uma visualização 3D válida.'
+        text += '\n\n```jdui\n' + json.dumps(normalized, ensure_ascii=False) + '\n```'
+    return text
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -3135,6 +3182,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
     owner = prep.get("owner", DONO_PADRAO)
+    model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv)
+    if model_response:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
@@ -3290,6 +3340,11 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         owner = prep.get("owner", DONO_PADRAO)
         claimed = True
+        model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv)
+        if model_response:
+            direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
+            enviar_ws(websocket, {"request_id": request_id, "type": "ai_done", **direct})
+            return
         cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
         if cmd:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
@@ -3460,9 +3515,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 messages.append({"role": "system",
                                  "content": shopping.bloco_para_llm(shop_res)})
         try:
-            res = hermes_bridge.chat_stream_fb(
-                cfg["proxy"], modelos_tentativa(cfg, modelo), messages, emitir,
-                deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
+            res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages, emitir,
+                               deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
             modelo = res.get("model_usado", modelo)
         except hermes_bridge.BridgeErro as exc:
             log.warning(
@@ -4576,9 +4630,11 @@ def run():
                                     else {"type": "ai_error", **res})}
                     elif req.get("type") == "ai_models":
                         try:
+                            cat = providers.listar_tudo(cfg["proxy"])
                             reply = {"request_id": request_id, "type": "ai_models",
-                                     "models": hermes_bridge.listar_modelos(cfg["proxy"]),
-                                     "default": cfg["model"]}
+                                     "models": cat["models"][:500],
+                                     "default": cat["default"],
+                                     "providers": cat["providers"]}
                         except hermes_bridge.BridgeErro as exc:
                             reply = {"request_id": request_id, "type": "ai_error",
                                      "error": str(exc), "codigo": exc.codigo}

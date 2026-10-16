@@ -119,14 +119,17 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   (tabela->grafico, pesquisa->visual, fontes com status), QA visual real
   em Chrome headless. Sem 3D.
 
-## V5.3 - 3D ENGINE FOUNDATION (futuro)
-- Base para interfaces 3D interativas, condicionada a orçamento de RAM/CPU
-  do Render Free e dispositivos modestos.
+## V5.3 — 3D Engine Foundation
+- JDUI model3d validado, quatro primitivas, combinações limitadas e GLB local CC0.
+- Three.js sob demanda, controles reais, referências conversacionais isoladas,
+  fallback 2D, um contexto ativo e descarte explícito. Render serve apenas assets.
+- Medições e limites: [JULIA_3D_PERFORMANCE.md](JULIA_3D_PERFORMANCE.md).
+- Entrega e QA: [RELATORIO_JULIA_5.3.md](../RELATORIO_JULIA_5.3.md).
 
-## V5.4 - INTERACTIVE 3D INTELLIGENCE (futuro)
+## V5.4 — Interactive 3D Intelligence (futuro)
 - Inteligência 3D interativa sobre a fundação da V5.3.
 
-## V5.5 - 3D OPTIMIZATION & INTEGRATION (futuro)
+## V5.5 — 3D Optimization & Integration (futuro)
 - Otimização e integração final do 3D ao chat e ao JDUI.
 ## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,

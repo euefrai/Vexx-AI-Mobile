@@ -78,6 +78,7 @@
     return v;
   }
   const V = {
+    model3d(p) { return window.validateModel3D(p); },
     quiz(p) {
       const qs = reqList(p, 'questions', 1, 12, 'quiz.questions 1..12');
       return {
@@ -2413,6 +2414,39 @@
   };
 
   /* ----- Mount + dispatcher ----- */
+  let model3dDesired = '';
+  R.model3d = function (root, props, state, save, ctx) {
+    const p = window.validateModel3D(props);
+    const activationKey = ctx?.ownerId && ctx?.messageId ? `${ctx.ownerId}/${ctx.conversationId}/${ctx.messageId}/${p.id}` : '';
+    root.classList.add('model3d');
+    root.appendChild(el('h3', '', p.title));
+    root.appendChild(el('p', 'm3-description', p.description));
+    const preview = el('img', 'm3-preview');
+    preview.src = '/models/preview.svg'; preview.alt = 'Ilustração 2D de sólidos geométricos';
+    root.appendChild(preview);
+    const status = el('p', 'm3-status', 'Visualização 3D disponível sob demanda.');
+    status.setAttribute('role', 'status'); root.appendChild(status);
+    const start = el('button', 'jdui-btn', 'Explorar em 3D');
+    start.type = 'button'; root.appendChild(start);
+    let pending = false;
+    start.addEventListener('click', async () => {
+      if (pending) return;
+      model3dDesired = activationKey;
+      pending = true; start.disabled = true; status.textContent = 'Carregando motor 3D…';
+      try {
+        const engine = await import('/model3d-viewer.js');
+        if (!root.isConnected) return;
+        await engine.mount(root, p, state, s => { state = s; save(s); }, preview, status, start, ctx);
+      } catch (_) { status.textContent = '3D indisponível neste navegador. O preview 2D e o texto continuam disponíveis.'; }
+      finally { pending = false; start.disabled = false; }
+    });
+    queueMicrotask(() => {
+      if (!root.isConnected) return;
+      if (activationKey && activationKey === model3dDesired) start.click();
+      else window.dispatchEvent(new CustomEvent('vexx3d:mounted', {detail:{root, p, ctx, start}}));
+    });
+  };
+
   function mount(root, slots, ctx) {
     ctx = ctx || {};
     (slots || []).forEach((msg, si) => {

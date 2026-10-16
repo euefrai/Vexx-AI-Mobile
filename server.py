@@ -14,7 +14,7 @@ from pathlib import Path
 
 from argon2 import PasswordHasher, exceptions as argon_errors
 from fastapi import FastAPI, File, Form, HTTPException, Request, Response, UploadFile, WebSocket, WebSocketDisconnect
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from pydantic import BaseModel, Field
@@ -1924,7 +1924,13 @@ async def ai_models(request: Request):
         raise HTTPException(503, result.get("error", "Hermes indisponível"))
     if result.get("type") != "ai_models":
         raise HTTPException(503, "Modelos indisponíveis")
-    return {"models": result.get("models", [])[:500], "default": result.get("default", "")}
+    # providers: só [{id,label,configured}] — chaves nunca saem do PC.
+    provs = result.get("providers", [])
+    if not isinstance(provs, list):
+        provs = []
+    return {"models": result.get("models", [])[:500], "default": result.get("default", ""),
+            "providers": [{k: p.get(k) for k in ("id", "label", "configured")}
+                          for p in provs if isinstance(p, dict)][:20]}
 
 
 @app.get("/api/ai/stream")
@@ -2093,6 +2099,27 @@ async def agent_ws(websocket: WebSocket):
             relay.ws = None
             relay.ws_desde = None
             relay.fail_pending()
+
+
+@app.get('/vendor/three-engine.js')
+async def three_engine_asset(request: Request):
+    # Precompressed at build time: no per-request compression and no SSE buffering.
+    accepts_gzip = False
+    for entry in request.headers.get('accept-encoding', '').lower().split(','):
+        parts = [part.strip() for part in entry.split(';')]
+        if parts[0] != 'gzip':
+            continue
+        quality = next((part[2:] for part in parts[1:] if part.startswith('q=')), '1')
+        try:
+            accepts_gzip = 0 < float(quality) <= 1
+        except ValueError:
+            accepts_gzip = False
+        break
+    base = ROOT / 'public' / 'vendor' / 'three-engine.js'
+    compressed = base.with_suffix('.js.gz')
+    use_gzip = accepts_gzip and compressed.is_file()
+    return FileResponse(compressed if use_gzip else base, media_type='text/javascript',
+                        headers={'Vary':'Accept-Encoding', **({'Content-Encoding':'gzip'} if use_gzip else {})})
 
 
 app.mount("/", StaticFiles(directory=str(ROOT / "public"), html=True), name="mobile-static")

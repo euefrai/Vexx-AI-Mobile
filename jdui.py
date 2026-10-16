@@ -12,6 +12,7 @@ são testados contra os mesmos payloads de `docs/JULIA_DYNAMIC_UI_EXAMPLES.md`.
 import json
 import logging
 import re
+import model3d
 from urllib.parse import urlsplit
 
 log = logging.getLogger("JULIA-jdui")
@@ -617,7 +618,15 @@ def validar_update_of(obj: dict, componentes: list) -> str:
     return alvo
 
 
+def _v_model3d(p):
+    try:
+        return model3d.validate(p)
+    except ValueError as exc:
+        raise JduiErro(str(exc)) from exc
+
+
 VALIDADORES = {
+    "model3d": _v_model3d,
     "quiz": _v_quiz, "checklist": _v_checklist, "calculator": _v_calculator,
     "cards": _v_cards, "diagram": _v_diagram, "table": _v_table,
     "form": _v_form, "progress": _v_progress, "tabs": _v_tabs,
