@@ -439,9 +439,103 @@ def test_e2e_pesquisa_produto_real():
         res = shopping.pesquisar(db, "e2e", "fone bluetooth comprar", "conv-e2e")
     except Exception as exc:
         pytest.skip(f"rede indisponível: {type(exc).__name__}")
+    if res.get("erro") == "provedor_indisponivel" and not res.get("fontes"):
+        pytest.skip("DDG com bot-wall neste ambiente (página sem resultados); "
+                    "pipeline verificada com mocks + fixtures JSON-LD reais")
     assert isinstance(res["produtos"], list)
     for p in res["produtos"]:
         assert p["nome"] and p["url"].startswith("http")
         if p["imagem"]:
             assert p["imagem"].startswith("https://")
     assert shopping.ultima_consulta(db, "e2e", "conv-e2e") is not None
+
+
+# ── Harness Node: validação + render dos 5 componentes de produto ──────
+
+HARNESS_SHOP = r"""
+const fs = require('fs');
+class Element {
+  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.style = {}; this.attrs = {}; this.dataset = {}; this._text = ''; }
+  appendChild(child) { this.children.push(child); return child; }
+  append(...children) { children.forEach(c => this.appendChild(c)); }
+  replaceChildren(...children) { this.children = []; this._text = ''; this.append(...children); }
+  addEventListener(name, fn) { this.events[name] = fn; }
+  setAttribute(name, value) { this.attrs[name] = value; }
+  querySelectorAll() { return []; }
+  querySelector() { return null; }
+  get textContent() { return this._text + this.children.map(c => c.textContent || '').join(''); }
+  set textContent(value) { this._text = String(value); this.children = []; }
+}
+global.document = { createElement: tag => new Element(tag),
+  createElementNS: (ns, tag) => new Element(tag) };
+global.location = { href: 'https://app.example.test/' };
+global.window = {};
+eval(fs.readFileSync(process.argv[2], 'utf8'));
+const JDUI = global.window.JDUI;
+const t = (name, cond) => {
+  if (!cond) { console.error('FAIL ' + name); process.exitCode = 1; }
+  else console.log('ok ' + name);
+};
+const V = 'JULIA-ui-message/v1';
+const P = { nome: 'Galaxy A15', marca: 'Samsung',
+  imagem: 'https://cdn.example.test/a15.jpg', preco: 'R$ 1.299,99',
+  preco_valor: 1299.99, loja: 'Loja X', url: 'https://loja.example.test/a15',
+  specs: { RAM: '8 GB' }, avaliacao: 4.6, n_avaliacoes: 210,
+  disponibilidade: 'em_estoque', verificado_em: '15/10/2026' };
+const Q = Object.assign({}, P, { nome: 'Moto G04', preco: 'R$ 800,00', preco_valor: 800 });
+t('card-valido', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productcard', props: { produto: P } }] }).ok === true);
+t('grid-valido', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productgrid', props: { items: [P, Q] } }] }).ok === true);
+t('grid-teto-6', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productgrid',
+    props: { items: [P, P, P, P, P, P, P] } }] }).ok === false);
+t('compare-valido', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productcompare', props: { items: [P, Q] } }] }).ok === true);
+t('compare-min-2', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productcompare', props: { items: [P] } }] }).ok === false);
+t('details-valido', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productdetails', props: { produto: P } }] }).ok === true);
+t('gallery-valida', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productgallery',
+    props: { imagens: [{ url: 'https://cdn.example.test/a.jpg', legenda: 'Frente' }] } }] }).ok === true);
+t('produto-xss-url', JDUI.validateMessage({ version: V, blocks: [
+  { type: 'ui', component: 'productcard',
+    props: { produto: Object.assign({}, P, { imagem: 'javascript:alert(1)' }) } }] })
+  .msg.blocks[0].props.produto.imagem === '');
+function mount(component, props) {
+  const root = new Element('main');
+  JDUI.mount(root, [{ blocks: [{ type: 'ui', component, props }] }], {});
+  return root;
+}
+const card = mount('productcard', { produto: P });
+t('card-render', card.textContent.includes('Galaxy A15') && card.textContent.includes('R$ 1.299,99'));
+const grid = mount('productgrid', { title: 'G', items: [P, Q] });
+t('grid-render-ordena', grid.textContent.includes('Ordenar') && grid.textContent.includes('Moto G04'));
+const cmp = mount('productcompare', { items: [P, Q] });
+t('compare-render', cmp.textContent.includes('Preço') && cmp.textContent.includes('R$ 800,00'));
+const det = mount('productdetails', { produto: P });
+t('details-render', det.textContent.includes('Especificações'));
+const gal = mount('productgallery', { imagens: [
+  { url: 'https://cdn.example.test/a.jpg' }, { url: 'https://cdn.example.test/b.jpg' }] });
+t('gallery-render', gal.textContent.includes('Próxima'));
+const semFoto = mount('productcard', { produto: Object.assign({}, P, { imagem: '' }) });
+t('card-sem-foto', semFoto.textContent.includes('Sem foto'));
+"""
+
+
+def test_jdui_produtos_no_node():
+    import shutil as _sh
+    import subprocess as _sp
+    node = _sh.which("node")
+    if node is None:
+        pytest.skip("Node indisponível")
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as tmp:
+        harness = Path(tmp) / "harness_shop.cjs"
+        harness.write_text(HARNESS_SHOP, encoding="utf-8")
+        raiz = Path(__file__).resolve().parents[1]
+        r = _sp.run([node, str(harness), str(raiz / "public" / "jdui.js")],
+                     capture_output=True, text=True, timeout=60)
+        assert r.returncode == 0, "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr
+        assert "FAIL" not in r.stdout

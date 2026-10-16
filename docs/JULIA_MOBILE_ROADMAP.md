@@ -87,10 +87,32 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   qualidade web/modos e medições de CPU/RAM/tokens continuam pendentes.
 - Hermes real permanece BLOQUEADO; ver `RELATORIO_JULIA_4.9.md`.
 
-## V5.x — CONTINUIDADE COGNITIVA (futuro)
-- Continuidade de contexto, memória avançada, personalidade e planejamento,
-  após a conclusão e avaliação da V4.8/V4.9.
+## V4.9.1 - SHOPPING INTELLIGENCE (entregue; ver RELATORIO_JULIA_4.9.1.md)
+- Pesquisa visual de produtos no chat: intencao, criterios (orcamento BRL,
+  marcas, RAM fisica vs virtual), busca DDG dupla, extracao JSON-LD/OpenGraph,
+  dedupe multi-loja, filtros com motivos, comparacao deterministica e
+  persistencia por dono (preco guardado = historico com verificado_em).
+- JDUI real: productcard/productgrid/productcompare/productdetails/
+  productgallery (fotos lazy, ordenar, comparar, ofertas, fontes).
+- Regras: nunca inventar produto/preco/imagem/avaliacao; sem dado -> "Preco
+  nao confirmado"; sem "menor preco da internet". E2E ao vivo pendente de
+  provedor sem bot-wall.
 
+## V5.0 - ADVANCED MEMORY & LUCCAS TRAWMAN IDENTITY (futuro)
+- Continuidade de contexto, memoria avancada e identidade do Luccas Trawman,
+  apos a conclusao e avaliacao da V4.8/V4.9/V4.9.1.
+
+## V5.1 - INTENT & UNDERSTANDING ENGINE (futuro)
+- Intencao e entendimento profundo do pedido (desambiguacao, slots,
+  follow-ups e roteamento entre motores).
+
+## V5.2 - ADVANCED VISUAL JDUI (futuro)
+- JDUI visual avancado sobre a base da V4.9.1 (mais componentes, animacoes
+  leves e composicao para mobile modesto).
+
+## V5.3-V5.5 - INTERACTIVE 3D (futuro)
+- Interfaces 3D interativas, condicionadas a orcamento de RAM/CPU do
+  Render Free e dispositivos modestos.
 ## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca e moderação. Continua adiada até autorização e

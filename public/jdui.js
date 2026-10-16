@@ -2017,7 +2017,7 @@
     chaves.slice(0, 8).forEach(k => {
       linhas.push({ label: k, vals: itens.map(p => (p.specs && p.specs[k]) || '—') });
     });
-    const holder = el('div', 'jdui-chart');
+    const holder = el('div', 'jdui-scrollx');
     const t = document.createElement('table');
     t.className = 'jdui-cmp';
     const head = document.createElement('tr');
