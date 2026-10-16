@@ -129,7 +129,9 @@ def _detectar_principal(t: str) -> tuple:
          r"em (forma de |formato de )?(tabela|planilha|grafico|quadro)|"
          r"grafico de (barras|pizza|linhas)|grade de produtos|"
          r"cards de produto|checklist|diagrama|fluxograma|"
-         r"tabela comparativa|compar\w* lado a lado", peso=2)
+         r"tabela comparativa|compar\w* lado a lado|"
+         r"\broadmap\b|\broteiro\b|mostre as fontes|quais as fontes|"
+         r"lista de fontes|fontes da pesquisa", peso=2)
     if not cands:
         return "conversa", [], []
     # Roteamento externo (pesquisa web, compra) exige 2+ evidências;

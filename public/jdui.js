@@ -358,6 +358,56 @@
       }).filter(Boolean);
       if (!out.length) throw new JduiErro('productgallery sem imagem válida');
       return { title: S(p.title, 160), imagens: out, sources: PROVENANCE(p.sources) };
+    },
+    sources(p) {
+      const itens = reqList(p, 'items', 1, 10, 'sources.items 1..10');
+      const sts = ['encontrada', 'aberta', 'utilizada'];
+      return {
+        title: S(p.title, 160),
+        items: itens.map(f => {
+          if (!f || typeof f !== 'object' || !S(f.titulo || f.title)) throw new JduiErro('sources.item');
+          const st = String(f.status || 'encontrada').toLowerCase();
+          return {
+            titulo: S(f.titulo || f.title, 160), url: URL_OK(f.url),
+            dominio: S(f.dominio, 120), data: S(f.data, 48),
+            trecho: S(f.trecho, 300),
+            status: sts.indexOf(st) >= 0 ? st : 'encontrada'
+          };
+        }),
+        sources: PROVENANCE(p.sources)
+      };
+    },
+    video(p) {
+      const u = URL_OK(p.url);
+      if (!u) throw new JduiErro('video.url obrigatória');
+      let host = '';
+      try { host = new URL(u, location.href).hostname.toLowerCase(); }
+      catch (_) { throw new JduiErro('video.url inválida'); }
+      const oks = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be', 'vimeo.com', 'player.vimeo.com'];
+      if (oks.indexOf(host) < 0) throw new JduiErro('video: somente YouTube/Vimeo');
+      return {
+        titulo: S(p.titulo || p.title, 160), url: u,
+        thumb: URL_OK(p.thumb || p.thumbnail), duracao: S(p.duracao, 20),
+        fonte: S(p.fonte, 80), sources: PROVENANCE(p.sources)
+      };
+    },
+    roadmap(p) {
+      const etapas = p.stages || p.etapas;
+      if (!Array.isArray(etapas) || !etapas.length || etapas.length > 12) throw new JduiErro('roadmap.stages 1..12');
+      const sts = ['todo', 'doing', 'done'];
+      return {
+        title: S(p.title, 160),
+        stages: etapas.map(e => {
+          if (!e || typeof e !== 'object' || !S(e.id) || !S(e.title)) throw new JduiErro('roadmap.etapa');
+          const st = String(e.status || 'todo').toLowerCase();
+          return {
+            id: S(e.id, 40), title: S(e.title, 120), desc: S(e.desc, 500),
+            status: sts.indexOf(st) >= 0 ? st : 'todo',
+            data: S(e.data, 48), marco: !!e.marco
+          };
+        }),
+        sources: PROVENANCE(p.sources)
+      };
     }
   };
 
@@ -1085,7 +1135,7 @@
     root.appendChild(box);
   };
 
-  R.table = function (root, props, st, save) {
+  R.table = function (root, props, st, save, ctx) {
     const box = el('div', 'jdui-tablewrap');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     if (!Array.isArray(st.rows)) st.rows = props.rows.map(row => row.slice());
@@ -1143,7 +1193,11 @@
     }
     function paint() {
       tbody.replaceChildren();
-      rows().forEach(item => {
+      const todos = rows();
+      const PER = 12;
+      const totalP = Math.max(1, Math.ceil(todos.length / PER));
+      st.page = Math.min(Math.max(parseInt(st.page, 10) || 0, 0), totalP - 1);
+      todos.slice(st.page * PER, st.page * PER + PER).forEach(item => {
         const tr = document.createElement('tr');
         item.row.forEach((value, column) => {
           const td = document.createElement('td');
@@ -1174,13 +1228,33 @@
       reset.disabled = !st.editing;
       actionHead.textContent = st.editing ? 'Ações' : '';
       actionHead.hidden = !st.editing;
+      pager.replaceChildren();
+      if (totalP > 1) {
+        const ant = el('button', 'jdui-btn ghost', '‹ Anterior');
+        const prox = el('button', 'jdui-btn ghost', 'Próxima ›');
+        ant.type = 'button'; prox.type = 'button';
+        ant.disabled = st.page <= 0; prox.disabled = st.page >= totalP - 1;
+        ant.setAttribute('aria-label', 'Página anterior da tabela');
+        prox.setAttribute('aria-label', 'Próxima página da tabela');
+        ant.addEventListener('click', () => { st.page = Math.max(0, st.page - 1); save(st); paint(); });
+        prox.addEventListener('click', () => { st.page = Math.min(totalP - 1, st.page + 1); save(st); paint(); });
+        pager.appendChild(ant);
+        pager.appendChild(el('span', 'jdui-count', 'Página ' + (st.page + 1) + ' de ' + totalP + ' · ' + todos.length + ' linhas'));
+        pager.appendChild(prox);
+      }
     }
     props.columns.forEach((c, i) => {
       const th = el('th', '', c);
       th.setAttribute('role', 'button');
-      th.addEventListener('click', () => {
+      th.tabIndex = 0;
+      th.setAttribute('aria-label', 'Ordenar por ' + c);
+      const alternar = () => {
         if (sortCol === i) sortAsc = !sortAsc; else { sortCol = i; sortAsc = true; }
         paint();
+      };
+      th.addEventListener('click', alternar);
+      th.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); alternar(); }
       });
       hr.appendChild(th);
     });
@@ -1198,6 +1272,8 @@
     });
     thead.appendChild(hr); t.appendChild(thead); t.appendChild(tbody);
     wrap.appendChild(t); box.appendChild(wrap);
+    const pager = el('div', 'jdui-actions');
+    box.appendChild(pager);
     paint();
     root.appendChild(box);
   };
@@ -2103,6 +2179,118 @@
     nav.appendChild(ant); nav.appendChild(prox);
     box.appendChild(nav);
     pinta();
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.sources = function (root, props) {
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const ROT = { encontrada: 'Encontrada', aberta: 'Aberta', utilizada: 'Utilizada' };
+    props.items.forEach(f => {
+      const card = el('div', 'jdui-srccard');
+      const top = el('div', 'jdui-cardtop');
+      top.appendChild(el('strong', '', f.titulo));
+      top.appendChild(el('span', 'jdui-badge st-' + f.status, ROT[f.status] || f.status));
+      card.appendChild(top);
+      const meta = [f.dominio, f.data].filter(Boolean).join(' · ');
+      if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
+      if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
+      if (f.url) {
+        const a = el('a', 'jdui-btn ghost', 'Abrir fonte ↗');
+        a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        const acts = el('div', 'jdui-cardacts');
+        acts.appendChild(a);
+        card.appendChild(acts);
+      }
+      box.appendChild(card);
+    });
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.video = function (root, props) {
+    const box = el('div', 'jdui-cards');
+    const card = el('div', 'jdui-pcard');
+    const moldura = el('div', 'jdui-pmedia');
+    if (props.thumb) {
+      const img = document.createElement('img');
+      img.className = 'jdui-pimg';
+      img.src = props.thumb;
+      img.alt = props.titulo || 'Prévia do vídeo';
+      img.loading = 'lazy';
+      img.referrerPolicy = 'no-referrer';
+      img.addEventListener('error', () => {
+        if (img.parentNode) img.parentNode.replaceChild(el('div', 'jdui-pimg ph', 'Vídeo'), img);
+      });
+      moldura.appendChild(img);
+    } else {
+      moldura.appendChild(el('div', 'jdui-pimg ph', '▶ Vídeo'));
+    }
+    const play = el('span', 'jdui-play', '▶');
+    play.setAttribute('aria-hidden', 'true');
+    moldura.appendChild(play);
+    card.appendChild(moldura);
+    const corpo = el('div', 'jdui-pbody');
+    if (props.titulo) corpo.appendChild(el('strong', 'jdui-pnome', props.titulo));
+    const meta = [props.fonte, props.duracao].filter(Boolean).join(' · ');
+    if (meta) corpo.appendChild(el('div', 'jdui-ploja', meta + ' · abre no site de origem'));
+    const a = el('a', 'jdui-btn', 'Assistir ↗');
+    a.href = props.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    const acts = el('div', 'jdui-cardacts');
+    acts.appendChild(a);
+    corpo.appendChild(acts);
+    card.appendChild(corpo);
+    box.appendChild(card);
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.roadmap = function (root, props, st, save) {
+    st.open = (st.open && typeof st.open === 'object') ? st.open : {};
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const feitos = props.stages.filter(e => e.status === 'done').length;
+    const pct = Math.round(feitos / props.stages.length * 100);
+    const barra = el('div', 'jdui-prog');
+    const trilho = el('div', 'jdui-progtrilho');
+    const fill = el('div', 'jdui-progfill');
+    fill.style.width = pct + '%';
+    fill.setAttribute('role', 'progressbar');
+    fill.setAttribute('aria-valuenow', String(pct));
+    fill.setAttribute('aria-valuemin', '0');
+    fill.setAttribute('aria-valuemax', '100');
+    fill.setAttribute('aria-label', 'Progresso do roteiro');
+    trilho.appendChild(fill);
+    barra.appendChild(trilho);
+    barra.appendChild(el('span', 'jdui-count', pct + '% · ' + feitos + '/' + props.stages.length));
+    box.appendChild(barra);
+    const DOT = { todo: '○', doing: '◐', done: '●' };
+    const ROT = { todo: 'A fazer', doing: 'Em andamento', done: 'Concluída' };
+    props.stages.forEach(e => {
+      const node = el('button', 'jdui-node st-' + e.status + (st.open[e.id] ? ' open' : ''));
+      node.type = 'button';
+      node.setAttribute('aria-expanded', st.open[e.id] ? 'true' : 'false');
+      node.appendChild(el('span', 'jdui-dot', DOT[e.status] || '○'));
+      const tx = el('span', 'jdui-nodetx');
+      tx.appendChild(el('strong', '', (e.marco ? '◆ ' : '') + e.title));
+      const sub = [ROT[e.status] || e.status, e.data].filter(Boolean).join(' · ');
+      const sm = el('small', '', sub);
+      tx.appendChild(sm);
+      node.appendChild(tx);
+      const det = el('div', 'jdui-q');
+      det.style.display = st.open[e.id] && e.desc ? '' : 'none';
+      if (e.desc) det.textContent = e.desc;
+      node.addEventListener('click', () => {
+        st.open[e.id] = !st.open[e.id]; save(st);
+        const open = !!st.open[e.id];
+        node.classList.toggle('open', open);
+        node.setAttribute('aria-expanded', open ? 'true' : 'false');
+        det.style.display = open && e.desc ? '' : 'none';
+      });
+      box.appendChild(node);
+      if (e.desc) box.appendChild(det);
+    });
     renderProvenance(box, props.sources);
     root.appendChild(box);
   };

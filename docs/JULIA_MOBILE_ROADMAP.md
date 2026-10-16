@@ -113,13 +113,21 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Benchmark versionado: 124 casos PT-BR, 100% acuracia, roteamento 124x89
   vs legado.
 
-## V5.2 - ADVANCED VISUAL JDUI (futuro)
-- JDUI visual avancado sobre a base da V4.9.1 (mais componentes, animacoes
-  leves e composicao para mobile modesto).
+## V5.2 - ADVANCED VISUAL JDUI (entregue; ver RELATORIO_JULIA_5.2.md)
+- 3 novos componentes (sources, video link-card, roadmap so-leitura),
+  tabela com CSV/teclado/paginacao, Visual Response Engine deterministico
+  (tabela->grafico, pesquisa->visual, fontes com status), QA visual real
+  em Chrome headless. Sem 3D.
 
-## V5.3-V5.5 - INTERACTIVE 3D (futuro)
-- Interfaces 3D interativas, condicionadas a orcamento de RAM/CPU do
-  Render Free e dispositivos modestos.
+## V5.3 - 3D ENGINE FOUNDATION (futuro)
+- Base para interfaces 3D interativas, condicionada a orçamento de RAM/CPU
+  do Render Free e dispositivos modestos.
+
+## V5.4 - INTERACTIVE 3D INTELLIGENCE (futuro)
+- Inteligência 3D interativa sobre a fundação da V5.3.
+
+## V5.5 - 3D OPTIMIZATION & INTEGRATION (futuro)
+- Otimização e integração final do 3D ao chat e ao JDUI.
 ## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca e moderação. Continua adiada até autorização e

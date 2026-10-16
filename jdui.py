@@ -530,6 +530,75 @@ def _v_productgallery(p: dict) -> dict:
             "sources": _provenance(p.get("sources"))}
 
 
+STATUS_FONTE = ("encontrada", "aberta", "utilizada")
+
+
+def _v_sources(p: dict) -> dict:
+    itens = p.get("items")
+    if not isinstance(itens, list) or not (1 <= len(itens) <= 10):
+        raise JduiErro("sources.items: 1..10 obrigatórios")
+    out = []
+    for f in itens:
+        if not isinstance(f, dict) or not _str(f.get("titulo") or f.get("title")):
+            raise JduiErro("sources.item sem titulo")
+        url = _url(f.get("url"))
+        status = str(f.get("status", "encontrada")).lower()
+        if status not in STATUS_FONTE:
+            status = "encontrada"
+        out.append({"titulo": _str(f.get("titulo") or f.get("title"), 160),
+                    "url": url,
+                    "dominio": _str(f.get("dominio"), 120),
+                    "data": _str(f.get("data"), 48),
+                    "trecho": _str(f.get("trecho"), 300),
+                    "status": status})
+    return {"title": _str(p.get("title"), 160), "items": out,
+            "sources": _provenance(p.get("sources"))}
+
+
+DOMINIOS_VIDEO = ("youtube.com", "www.youtube.com", "m.youtube.com",
+                  "youtu.be", "vimeo.com", "player.vimeo.com")
+
+
+def _v_video(p: dict) -> dict:
+    url = _url(p.get("url"))
+    if not url:
+        raise JduiErro("video.url obrigatória")
+    try:
+        host = (urlsplit(url).hostname or "").lower()
+    except ValueError:
+        raise JduiErro("video.url inválida")
+    if host not in DOMINIOS_VIDEO:
+        raise JduiErro("video: somente YouTube/Vimeo")
+    return {"titulo": _str(p.get("titulo") or p.get("title"), 160),
+            "url": url,
+            "thumb": _url(p.get("thumb") or p.get("thumbnail")),
+            "duracao": _str(p.get("duracao"), 20),
+            "fonte": _str(p.get("fonte"), 80),
+            "sources": _provenance(p.get("sources"))}
+
+
+STATUS_ETAPA = ("todo", "doing", "done")
+
+
+def _v_roadmap(p: dict) -> dict:
+    etapas = p.get("stages") or p.get("etapas")
+    if not isinstance(etapas, list) or not (1 <= len(etapas) <= 12):
+        raise JduiErro("roadmap.stages: 1..12 obrigatórias")
+    out = []
+    for e in etapas:
+        if not isinstance(e, dict) or not _str(e.get("id")) or not _str(e.get("title")):
+            raise JduiErro("roadmap.etapa exige id e title")
+        status = str(e.get("status", "todo")).lower()
+        if status not in STATUS_ETAPA:
+            status = "todo"
+        out.append({"id": _str(e.get("id"), 40), "title": _str(e.get("title"), 120),
+                    "desc": _str(e.get("desc"), 500), "status": status,
+                    "data": _str(e.get("data"), 48),
+                    "marco": bool(e.get("marco"))})
+    return {"title": _str(p.get("title"), 160), "stages": out,
+            "sources": _provenance(p.get("sources"))}
+
+
 # Componentes com resultado imutável: nunca aceitam patch in-place.
 PATCH_PROIBIDO = frozenset(("exam", "quiz", "studyprogress"))
 PATCH_ID_RE = r"[A-Za-z0-9_-]{2,100}"
@@ -559,6 +628,7 @@ VALIDADORES = {
     "productcard": _v_productcard, "productgrid": _v_productgrid,
     "productcompare": _v_productcompare, "productdetails": _v_productdetails,
     "productgallery": _v_productgallery,
+    "sources": _v_sources, "video": _v_video, "roadmap": _v_roadmap,
 }
 
 

@@ -1661,6 +1661,22 @@ a.jdui-pchip.link{color:var(--accent,#5b5bd6)}
 .jdui-lightbox img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:12px}
 .jdui-cards select.jdui-btn.ghost{appearance:auto;padding:8px 10px}
 @media(min-width:560px){.jdui-pcard.mini .jdui-pmedia{min-height:140px}}
+
+/* V5.2 Advanced Visual JDUI: fontes, vídeo, roadmap */
+.jdui-srccard{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.025);display:flex;flex-direction:column;gap:6px}
+.jdui-badge.st-encontrada{color:var(--muted)}
+.jdui-badge.st-aberta{color:#fbbf24}
+.jdui-badge.st-utilizada{color:#34d399}
+.jdui-pmedia{position:relative}
+.jdui-play{position:absolute;right:10px;bottom:8px;font-size:18px;color:#fff;background:rgba(0,0,0,.55);border-radius:99px;padding:4px 10px;pointer-events:none}
+.jdui-prog{display:flex;align-items:center;gap:10px;margin:8px 0}
+.jdui-progtrilho{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.jdui-progfill{height:100%;background:var(--purple);border-radius:99px;transition:width .3s ease}
+.jdui-node.st-todo .jdui-dot{background:var(--muted)}
+.jdui-node.st-doing .jdui-dot{background:#fbbf24}
+.jdui-node.st-done .jdui-dot{background:#34d399}
+.jdui-node .jdui-q{margin:0 0 6px}
+button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards select:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
 .jdui-dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 @media(max-width:360px){.jdui-dashgrid{grid-template-columns:1fr}}
 .jdui-metric{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.025)}

@@ -1434,6 +1434,10 @@ class JULIAPresentationEngine:
         (("formulário", "formulario", "cadastro", "inscrição", "inscricao"), "form"),
         (("grade de produtos", "cards de produto", "cartões de produto",
           "galeria de produtos", "vitrine de produtos"), "productgrid"),
+        (("mostre as fontes", "mostra as fontes", "quais as fontes",
+          "lista de fontes", "fontes da pesquisa"), "sources"),
+        (("roteiro do projeto", "roadmap do", "monte um roadmap",
+          "etapas do projeto", "cronograma do projeto"), "roadmap"),
     ]
 
     @classmethod
@@ -1460,13 +1464,16 @@ JDUI_CATALOGO = (
     "progress{label,value,max}; tabs{tabs[{title,markdown}]}; accordion{items[{title,markdown}]}; "
     "productcard{produto{nome,marca,modelo,imagem,preco,loja,url,specs,avaliacao,disponibilidade,verificado_em}}; "
     "productgrid{title,items[1..6 produtos]}; productcompare{title,items[2..4 produtos]}; "
-    "productdetails{produto}; productgallery{title,imagens[{url,legenda}]}. "
+    "productdetails{produto}; productgallery{title,imagens[{url,legenda}]}; "
+    "sources{title,items[{titulo,url,dominio,data,trecho,status:encontrada|aberta|utilizada}]}; "
+    "video{titulo,url(somente YouTube/Vimeo),thumb,duracao,fonte}; "
+    "roadmap{title,stages[{id,title,desc,status:todo|doing|done,data,marco}]}. "
     "PRODUTOS À VENDA (preço/loja/foto): NUNCA monte productcard/productgrid/productcompare/productdetails/productgallery "
     "com seu conhecimento — esses cards vêm da ferramenta de pesquisa com dados verificados. "
     "REGRAS: JSON válido e pequeno (máx 6 blocos, 12 perguntas, 30 linhas); sem JavaScript, sem CSS, "
     "sem perguntas de volta quando pedirem app; quiz/calculadora/checklist NUNCA em texto corrido. "
     "GRÁFICOS SÓ com números dados pelo usuário ou já exibidos na conversa — nunca invente séries. "
-    "ATUALIZAÇÃO (update_of:id-da-mensagem): só chart|table|dashboard|compare|diagram|checklist|cards|tabs|accordion|form|calculator; "
+    "ATUALIZAÇÃO (update_of:id-da-mensagem): só chart|table|dashboard|compare|diagram|checklist|cards|tabs|accordion|form|calculator|sources|roadmap|productgrid; "
     "NUNCA exam|quiz|studyprogress (resultado imutável)."
 )
 
@@ -1529,6 +1536,11 @@ JDUI_SINTETIZAR = {
               '{"version":"JULIA-ui-message/v1","blocks":[{"type":"ui","component":"cards",'
               '"props":{"title":"...","items":[{"title":"...","desc":"...","value":"...","badge":"..."}]}}]}. '
               "Use 1 a 8 cartões e não invente datas nem fatos."),
+    "roadmap": ("Converta o plano/projeto abaixo em roteiro JDUI. Responda SÓ com JSON válido: "
+               '{"version":"JULIA-ui-message/v1","blocks":[{"type":"ui","component":"roadmap",'
+               '"props":{"title":"...","stages":[{"id":"s1","title":"...","desc":"...","status":"todo"}]}}]}. '
+               "Use 1 a 12 etapas em ordem, status todo|doing|done SOMENTE com base no conteúdo "
+               "(sem progresso fictício; sem data inventada; marco:true só para marcos citados)."),
 }
 
 
@@ -2876,6 +2888,100 @@ def fence_de_evidencias(db, owner: str, conv: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
+def fence_de_fontes(db, owner: str) -> str:
+    """Componente `sources` da última pesquisa (status honestos, links reais)."""
+    job = _ultimo_job(db, owner, ())
+    if job is None:
+        return ""
+    evs = research_agents.listar_evidencias(db, owner, job["id"])[:10]
+    if not evs:
+        return ""
+    itens = []
+    for e in evs:
+        url = e.get("url", "")
+        if not url.startswith("http"):
+            continue
+        trecho = (e.get("trecho", "") or "")
+        itens.append({"titulo": (e.get("titulo", "") or e.get("dominio", ""))[:160],
+                      "url": url[:500],
+                      "dominio": (e.get("dominio", "") or "")[:120],
+                      "data": (e.get("acessado_em", "") or "")[:10],
+                      "trecho": trecho[:300],
+                      "status": "utilizada" if (e.get("afirmacao") or "") else (
+                          "aberta" if trecho else "encontrada")})
+    if not itens:
+        return ""
+    fence = {"version": jdui.VERSION, "blocks": [
+        {"type": "ui", "component": "sources",
+         "props": {"title": f"Fontes sobre {(job.get('objetivo') or '')[:80]}",
+                   "items": itens}}]}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
+def _num_celula(s: str):
+    """Número em célula PT-BR/US ('R$ 1.234,56', '12%', '1,234.5') ou None."""
+    t = re.sub(r"[R$\s%]", "", str(s or "").strip())
+    if not t or not re.fullmatch(r"[+-]?[\d.,]+", t):
+        return None
+    try:
+        if "." in t and "," in t:
+            # O último separador é o decimal (1.234,56 | 1,234.5).
+            if t.rfind(".") > t.rfind(","):
+                return float(t.replace(",", ""))
+            return float(t.replace(".", "").replace(",", "."))
+        if "," in t:
+            return float(t.replace(",", "."))
+        if re.fullmatch(r"\d+\.\d{1,2}", t):
+            return float(t)
+        return float(t.replace(".", "").replace(",", ""))
+    except ValueError:
+        return None
+
+
+def fence_tabela_para_grafico(db, owner: str, conv: str) -> str:
+    """'Transforme em gráfico': última tabela da conversa com coluna numérica
+    vira chart. Sem números → texto honesto (nunca inventa valores)."""
+    blocos = ultimos_blocos_jdui(db, conv, limite=3, owner=owner)
+    tabela = None
+    for b in blocos:
+        for blk in b.get("blocks", []):
+            if blk.get("component") == "table":
+                tabela = blk.get("props", {})
+                break
+        if tabela:
+            break
+    if not tabela or not tabela.get("columns") or not tabela.get("rows"):
+        return ("\n\nNão encontrei tabela anterior com dados nesta conversa para "
+                "transformar em gráfico. 📊")
+    cols, linhas = tabela["columns"], tabela["rows"]
+    numericas = []
+    for i in range(1, len(cols)):
+        vals = [_num_celula(r[i] if i < len(r) else "") for r in linhas]
+        if sum(1 for v in vals if v is not None) >= 2:
+            numericas.append((i, vals))
+    if not numericas:
+        return ("\n\nA última tabela não tem coluna numérica com pelo menos 2 "
+                "valores — e eu não vou inventar números. 📊")
+    rotulos = [(r[0] if r else "")[:24] or f"Linha {k + 1}"
+               for k, r in enumerate(linhas)][:24]
+    series = []
+    for i, vals in numericas[:3]:
+        series.append({"label": cols[i][:60],
+                       "values": [(v if v is not None else 0.0) for v in vals[:24]]})
+    fence = {"version": jdui.VERSION, "blocks": [
+        {"type": "ui", "component": "chart",
+         "props": {"type": "bar", "title": (tabela.get("title") or "Gráfico")[:160],
+                   "labels": rotulos, "series": series,
+                   "source": "tabela anterior da conversa"}}]}
+    ok, norm, _ = jdui.validar_mensagem(fence)
+    if not ok:
+        return ""
+    return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
+
+
 def fence_de_grafo(db, owner: str) -> str:
     """Grafo claim→evidência→fonte da última pesquisa (nós reais, sem invenção)."""
     job = _ultimo_job(db, owner, ("concluida",))
@@ -3003,6 +3109,19 @@ def fence_de_pesquisa(db, owner: str, conv: str, texto_usuario: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
+def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) -> str:
+    """V5.2 Visual Response Engine: 'transforme/mostre X em Y' reusa dados
+    anteriores sem nova pesquisa. Retorna fence/texto ou ''."""
+    formato = intencao_transformar_pesquisa(texto_usuario)
+    if formato == "gráfico":
+        grafico = fence_tabela_para_grafico(db, owner, conv)
+        if "```jdui" in grafico:
+            return grafico
+    if formato:
+        return fence_de_pesquisa(db, owner, conv, texto_usuario)
+    return ""
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
@@ -3061,16 +3180,23 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
     if not blocos_jdui and intencao_transformar_pesquisa(prep.get("user_text", "")):
-        fence = fence_de_pesquisa(db, owner, conv, prep.get("user_text", ""))
+        fence = fence_transformacao_visual(db, owner, conv, prep.get("user_text", ""))
         if fence:
             texto += fence
-            log.info("transform de pesquisa sintetizado para %s", mid)
+            log.info("transform visual sintetizado para %s", mid)
     elif "mostre as evid" in (prep.get("user_text", "") or "").lower() or \
             "mostra as evid" in (prep.get("user_text", "") or "").lower():
         fence = fence_de_evidencias(db, owner, conv)
         if fence:
             texto += fence
             log.info("evidências sintetizadas para %s", mid)
+    elif "mostre as fontes" in (prep.get("user_text", "") or "").lower() or \
+            "mostra as fontes" in (prep.get("user_text", "") or "").lower() or \
+            "quais as fontes" in (prep.get("user_text", "") or "").lower():
+        fence = fence_de_fontes(db, owner)
+        if fence:
+            texto += fence
+            log.info("fontes sintetizadas para %s", mid)
     elif "grafo de evid" in (prep.get("user_text", "") or "").lower() or \
             "mapa de evid" in (prep.get("user_text", "") or "").lower():
         fence = fence_de_grafo(db, owner)
@@ -3411,10 +3537,17 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         if blocos_jdui and fut_sintese is not None:
             fut_sintese.cancel()  # modelo já entregou interface: dispensa a síntese
         if not blocos_jdui and intencao_transformar_pesquisa(prep.get("user_text", "")):
-            fence = fence_de_pesquisa(db, owner, conv, prep.get("user_text", ""))
+            fence = fence_transformacao_visual(db, owner, conv, prep.get("user_text", ""))
             if fence:
                 texto_final += fence
-                log.info("transform de pesquisa sintetizado no stream %s", mid)
+                log.info("transform visual sintetizado no stream %s", mid)
+        elif "mostre as fontes" in (prep.get("user_text", "") or "").lower() or \
+                "mostra as fontes" in (prep.get("user_text", "") or "").lower() or \
+                "quais as fontes" in (prep.get("user_text", "") or "").lower():
+            fence = fence_de_fontes(db, owner)
+            if fence:
+                texto_final += fence
+                log.info("fontes sintetizadas no stream %s", mid)
         elif not blocos_jdui and intencao_reforco(prep.get("user_text", "")):
             fence = sintetizar_reforco(db, owner, prep.get("user_text", ""))
             if fence:
