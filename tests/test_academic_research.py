@@ -293,7 +293,7 @@ def test_optional_orchestrator_dispatch_never_fetches_academic_full_text(monkeyp
     monkeypatch.setenv("JULIA_RESEARCH_MAILTO", "research@example.org")
 
     providers = ra.provedores_reais()
-    assert [p.nome for p in providers] == ["ddg", "searxng", "academic"]
+    assert [p.nome for p in providers] == ["ddg", "searxng", "wikipedia", "academic"]
     db = pc_agent.open_db(Path(":memory:"))
     try:
         job = ra.criar_job(db, "researcher", "artigos científicos sobre fotossíntese",
@@ -325,9 +325,9 @@ def test_optional_orchestrator_dispatch_never_fetches_academic_full_text(monkeyp
 
 def test_academic_capability_is_disabled_unless_explicitly_enabled(monkeypatch):
     monkeypatch.delenv("JULIA_ACADEMIC_RESEARCH", raising=False)
-    assert [p.nome for p in ra.provedores_reais()] == ["ddg", "searxng"]
+    assert [p.nome for p in ra.provedores_reais()] == ["ddg", "searxng", "wikipedia"]
     monkeypatch.setenv("JULIA_ACADEMIC_RESEARCH", "true")
-    assert [p.nome for p in ra.provedores_reais()] == ["ddg", "searxng", "academic"]
+    assert [p.nome for p in ra.provedores_reais()] == ["ddg", "searxng", "wikipedia", "academic"]
 
 
 def test_crossref_serializes_concurrent_provider_calls():

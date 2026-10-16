@@ -162,13 +162,14 @@ class _TextoHTML(HTMLParser):
         self.partes = []
 
     def handle_starttag(self, tag, attrs):
-        if tag in ("script", "style", "noscript"):
+        if tag in ("script", "style", "noscript", "nav", "header", "footer", "aside"):
             self._pular += 1
         if tag == "title":
             self._no_titulo = True
 
     def handle_endtag(self, tag):
-        if tag in ("script", "style", "noscript") and self._pular:
+        if tag in ("script", "style", "noscript", "nav", "header", "footer", "aside") \
+                and self._pular:
             self._pular -= 1
         if tag == "title":
             self._no_titulo = False
@@ -234,6 +235,146 @@ def buscar_ddg(consulta: str, base: str = DDG_HTML, max_resultados: int = 6,
     return out
 
 
+# ── Provedores enciclopédicos oficiais (V5.0.1; sem chave, JSON) ─────
+# Wikipedia/OpenAlex NÃO substituem busca geral nem preços: resultados vêm
+# marcados com tipo/origem e o chamador nunca os apresenta como outra coisa.
+WIKI_OPENSEARCH = ("https://pt.wikipedia.org/w/api.php?action=opensearch&"
+                   "search={q}&limit={n}&namespace=0&format=json")
+_CIRCUITO_TTL = 300.0
+_circuito: dict = {}
+
+
+def _circuito_fechado(nome: str) -> bool:
+    ts = _circuito.get(nome, 0.0)
+    if time.monotonic() - ts < _CIRCUITO_TTL:
+        return True
+    _circuito.pop(nome, None)
+    return False
+
+
+def _circuito_falha(nome: str) -> None:
+    _circuito[nome] = time.monotonic()
+
+
+def _circuito_ok(nome: str) -> None:
+    _circuito.pop(nome, None)
+
+
+def _baixar_json(url: str, timeout: float = 8.0, abrir=None) -> dict:
+    """GET JSON com a disciplina SSRF de `baixar` (só JSON; teto 512KB)."""
+    atual = url_segura(url)
+    for _ in range(MAX_REDIRECTS + 1):
+        try:
+            resp = (abrir or _abrir)(atual, timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code in (301, 302, 303, 307, 308):
+                loc = exc.headers.get("Location", "")
+                if not loc:
+                    raise ResearchErro("Redirect sem destino.", "redirect")
+                atual = url_segura(urllib.parse.urljoin(atual, loc))
+                continue
+            raise ResearchErro(f"Provedor HTTP {exc.code}.", "http")
+        except (OSError, TimeoutError, ValueError) as exc:
+            raise ResearchErro(f"Falha de rede ({type(exc).__name__}).", "rede") from None
+        with resp:
+            if getattr(resp, "status", 200) >= 400:
+                raise ResearchErro(f"Provedor HTTP {resp.status}.", "http")
+            try:
+                ctype = (resp.headers.get_content_type()
+                         if hasattr(resp.headers, "get_content_type")
+                         else str(resp.headers.get("Content-Type", "")).split(";")[0])
+            except Exception:
+                ctype = ""
+            if "json" not in (ctype or "").lower():
+                raise ResearchErro("Provedor sem JSON.", "tipo_bloqueado")
+            raw = resp.read(512 * 1024 + 1)
+            if len(raw) > 512 * 1024:
+                raise ResearchErro("Resposta grande demais.", "tamanho")
+            try:
+                obj = json.loads(raw.decode("utf-8", errors="ignore"))
+            except (ValueError, TypeError) as exc:
+                raise ResearchErro("JSON inválido.", "formato") from None
+            return obj
+    raise ResearchErro("Redirects demais.", "redirect")
+
+
+def buscar_wikipedia(consulta: str, max_resultados: int = 4,
+                     timeout: float = 8.0, abrir=None) -> list:
+    """Opensearch oficial da Wikipédia (enciclopédia; nunca preços)."""
+    q = (consulta or "").strip()[:120]
+    if not q:
+        return []
+    dados = _baixar_json(
+        WIKI_OPENSEARCH.format(q=urllib.parse.quote(q), n=min(max(1, int(max_resultados)), 10)),
+        timeout=timeout, abrir=abrir)
+    titulos = dados[1] if isinstance(dados, list) and len(dados) > 1 else []
+    descs = dados[2] if isinstance(dados, list) and len(dados) > 2 else []
+    links = dados[3] if isinstance(dados, list) and len(dados) > 3 else []
+    out = []
+    for i, titulo in enumerate(titulos):
+        link = links[i] if i < len(links) else ""
+        desc = descs[i] if i < len(descs) else ""
+        titulo = str(titulo or "").strip()[:160]
+        if link.startswith("http") and titulo:
+            out.append({"titulo": titulo, "url": link[:500],
+                        "trecho": str(desc or "").strip()[:280],
+                        "origem": "wikipedia", "tipo": "enciclopedia"})
+        if len(out) >= max_resultados:
+            break
+    return out
+
+
+def buscar_com_fallback(consulta: str, max_resultados: int = 6,
+                        timeout: float = 8.0) -> tuple:
+    """Cadeia ddg → ddg-lite → wikipedia. Retorna (achados, info).
+
+    `info` = {"provedor", "erros":[{provedor,codigo}], "etapas":[str]}.
+    Vazio silencioso (bot-wall) TAMBÉM alterna — não só exceção.
+    Circuit breaker por provedor (5min), sem cache negativo permanente.
+    """
+    q = (consulta or "").strip()[:200]
+    erros, etapas = [], []
+    cadeia = [("ddg", DDG_HTML), ("ddg-lite", DDG_LITE), ("wikipedia", "")]
+    for nome, base in cadeia:
+        if _circuito_fechado(nome):
+            etapas.append(f"{nome}: em espera (falha recente)")
+            continue
+        try:
+            if nome == "wikipedia":
+                achados = buscar_wikipedia(q, max_resultados, timeout)
+            else:
+                achados = buscar_ddg(q, base=base, max_resultados=max_resultados,
+                                     timeout=timeout) or []
+            for a in achados:
+                a.setdefault("origem", nome)
+            if achados:
+                _circuito_ok(nome)
+                etapas.append(f"{nome}: {len(achados)} resultados")
+                return achados, {"provedor": nome, "erros": erros, "etapas": etapas}
+            etapas.append(f"{nome}: sem resultados (bloqueio?)")
+        except Exception as exc:
+            codigo = getattr(exc, "codigo", type(exc).__name__)
+            erros.append({"provedor": nome, "codigo": codigo})
+            etapas.append(f"{nome}: falhou ({codigo})")
+            _circuito_falha(nome)
+    return [], {"provedor": "", "erros": erros, "etapas": etapas}
+
+
+def resumo_deterministico(fontes: list, consulta: str) -> str:
+    """Digest sem LLM: fontes + trechos reais, com limite declarado."""
+    if not fontes:
+        return ("Pesquisei agora, mas nenhum provedor retornou fontes "
+                "utilizáveis. Tente reformular ou mais tarde. 🔍")
+    linhas = [f"Encontrei **{len(fontes)}** fonte(s) sobre **{(consulta or '')[:80]}**:"]
+    for f in fontes[:6]:
+        trecho = (f.get("trecho", "") or "")[:220]
+        linhas.append(f"- [{f.get('titulo', f.get('url', ''))}]({f.get('url', '')})"
+                       + (f" — {trecho}" if trecho else ""))
+    linhas.append("\n_Sem inferência no momento: acima vão fontes e trechos "
+                   "verificados, sem síntese automática._")
+    return "\n".join(linhas)
+
+
 # ── Orquestração ────────────────────────────────────────────────────
 def normalizar_consulta(texto: str) -> str:
     return re.sub(r"\s+", " ", (texto or "").strip().lower())[:200]
@@ -293,9 +434,14 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float):
 
 def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=None,
                     max_fontes: int = 3, ttl: int = TTL_RAPIDA, timeout_pagina: float = 6.0) -> dict:
-    """1 busca + até N páginas em paralelo (ordem preservada)."""
+    """1 busca (cadeia ddg→lite→wikipedia por padrão) + até N páginas."""
     from concurrent.futures import ThreadPoolExecutor
-    buscar_fn = buscar_fn or (lambda q: buscar_ddg(q) or buscar_ddg(q, base=DDG_LITE))
+    if buscar_fn is None:
+        def buscar_fn(q, _m=6):
+            achados, info = buscar_com_fallback(q, max_resultados=_m)
+            buscar_fn.etapas = info["etapas"]
+            return achados
+        buscar_fn.etapas = []
     salvos = cache_get(db, owner, "ddg", consulta)
     if salvos is not None:
         salvos = dict(salvos)
@@ -330,9 +476,11 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                        "dominio": _dominio(a["url"]),
                        "acessado_em": agora_iso(),
                        "trecho": ((rec.get("texto") or "")[:600] or a.get("trecho", ""))[:600],
-                       "tipo": "pagina", "status": "ok"})
+                       "tipo": a.get("tipo", "pagina"), "status": "ok",
+                       "origem": a.get("origem", "")})
+    prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
-             "etapas": etapas + [f"{len(fontes)} fontes lidas"],
+             "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes lidas"],
              "divergencias": detectar_divergencias(fontes),
              "de_cache": False}
     if fontes:

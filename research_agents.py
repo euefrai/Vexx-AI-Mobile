@@ -387,16 +387,29 @@ class ProvedorSearXNG(ProvedorBusca):
         return out
 
 
+class ProvedorWikipedia(ProvedorBusca):
+    """Enciclopédia oficial (opensearch, sem chave). Tipo honestamente marcado;
+    nunca usar como preço/oferta."""
+    nome = "wikipedia"
+
+    def buscar(self, consulta: str, limite: int = 6) -> list:
+        return research.buscar_wikipedia(consulta, max_resultados=limite)
+
+
 def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6) -> tuple:
-    """Tenta provedores em ordem; registra falhas; nunca inventa resultado."""
+    """Tenta provedores em ordem; vazio silencioso TAMBÉM alterna (bot-wall
+    não para a cadeia); registra falhas; nunca inventa resultado."""
     erros = []
     for p in provedores or []:
         try:
             achados = p.buscar(consulta, limite) or []
-            return achados, {"provedor": p.nome, "erros": erros}
         except Exception as exc:
             erros.append({"provedor": getattr(p, "nome", "?"),
                           "codigo": getattr(exc, "codigo", type(exc).__name__)})
+            continue
+        if achados:
+            return achados, {"provedor": p.nome, "erros": erros}
+        erros.append({"provedor": getattr(p, "nome", "?"), "codigo": "vazio"})
     return [], {"provedor": "", "erros": erros}
 
 
@@ -1777,7 +1790,8 @@ def provedores_reais():
     import os as _os
     if PROVS_FABRICA is not None:
         return PROVS_FABRICA()
-    providers = [ProvedorDDG(), ProvedorSearXNG(_os.environ.get("JULIA_SEARXNG_URL", ""))]
+    providers = [ProvedorDDG(), ProvedorSearXNG(_os.environ.get("JULIA_SEARXNG_URL", "")),
+                 ProvedorWikipedia()]
     if _os.environ.get("JULIA_ACADEMIC_RESEARCH", "").strip().lower() in (
             "1", "true", "yes", "on"):
         providers.append(ProvedorAcademico(_os.environ.get("JULIA_RESEARCH_MAILTO", "")))

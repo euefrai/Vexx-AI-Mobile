@@ -3044,6 +3044,13 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
+        if extras.get("fontes"):
+            digest = research.resumo_deterministico(
+                extras["fontes"], prep.get("user_text", ""))
+            ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], digest, owner)
+            log.info("IA sem inferência: digest determinístico (%s)", mid)
+            return {"reply_id": prep["reply_id"], "response_text": digest,
+                    "model": modelo, "digest": True}
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
     modelo = res.get("model_usado", modelo)
@@ -3342,6 +3349,21 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 if first_delta_at[0] else -1, exc.codigo)
             if fut_sintese is not None:
                 fut_sintese.cancel()
+            if extras.get("fontes"):
+                # V5.0.1: sem inferência, mas com fontes reais → digest
+                # determinístico em vez de erro vazio.
+                digest = research.resumo_deterministico(
+                    extras["fontes"], prep.get("user_text", ""))
+                ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"],
+                                    digest, owner)
+                try:
+                    emitir(last_delta_seq[0] + 1, digest)
+                    enviar({"request_id": request_id, "type": "ai_done",
+                            "reply_id": prep["reply_id"],
+                            "response_text": digest, "model": modelo})
+                except hermes_bridge.BridgeErro:
+                    pass
+                return
             ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner,
                       reply_id=prep["reply_id"], response_text="".join(partial_chunks))
             try:
