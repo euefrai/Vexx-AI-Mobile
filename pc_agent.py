@@ -16,7 +16,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import docs_agent
-from assistant_identity import system_with_identity
+from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
 import hermes_bridge
 import jdui
 import julia_auth as JULIA_auth
@@ -690,6 +690,8 @@ def registrar_memoria(db, owner, chave: str, valor: str, tipo: str = "semantica"
         status = "confirmada"
     anterior = db.execute("SELECT value FROM memories WHERE owner_id=? AND key=?",
                           (owner, chave)).fetchone()
+    if anterior and (anterior[0] or "").strip() == valor:
+        return chave  # V5.0: valor idêntico — sem churn nem duplicata no histórico
     with db:
         db.execute("""INSERT INTO memories
             (owner_id, key, value, updated_at, tipo, assunto, status, origem_conv, origem_msg, valido_ate)
@@ -748,6 +750,41 @@ def memorias_relevantes(db, pergunta: str, k: int = 8, owner=DONO_PADRAO) -> lis
     else:
         relevantes = scored[:k]
     return [f for _, _, f in relevantes]
+
+
+# ── Identidade determinística (V5.0: funciona mesmo sem LLM) ──────────
+NOMES_ALHEIOS = ("julia", "cortana", "siri", "alexa", "chatgpt", "gpt",
+                 "gemini", "copilot", "bixby", "vexx")
+_SAUDACOES_VOCATIVO = ("oi", "ola", "opa", "eai", "bom dia", "boa tarde",
+                       "boa noite", "obrigado", "obrigada", "valeu")
+
+
+def cmd_identidade(texto: str):
+    """Respostas de identidade sem LLM. Retorna (texto, codigo) ou None."""
+    t = _normalizar_temporal(texto or "")
+    if not t:
+        return None
+    if "nome completo" in t:
+        return (f"Meu nome completo é {OFFICIAL_NAME} — pode me chamar de "
+                f"{CONVERSATION_NAME}. 😊", "id_nome_completo")
+    if re.search(r"(qual (e |eh )?(o seu|seu|teu|o teu) nome|como (voce|vc) se chama|"
+                 r"se apresente|quem e voce|voce e quem|seu nome por favor)", t):
+        return (f"Sou o {CONVERSATION_NAME}! Em que posso ajudar? 😊", "id_nome")
+    if re.search(r"(voce e (humano|uma pessoa|real|de verdade)|tem sentimentos|"
+                 r"voce sente (alguma coisa|nada)|voce tem (corpo|vida))", t):
+        return ("Sou uma IA — não sou humano nem tenho sentimentos reais, "
+                "mas estou aqui para ajudar! 😊", "id_natureza")
+    if len(t) <= 30:
+        nucleo = t.strip(" ,.!?")
+        for saud in _SAUDACOES_VOCATIVO:
+            if nucleo.startswith(saud + " "):
+                nucleo = nucleo[len(saud):].strip(" ,.!?")
+                break
+            if nucleo == saud:
+                return None  # só saudação, sem nome: segue o fluxo normal
+        if nucleo in NOMES_ALHEIOS:
+            return (f"Pode me chamar de {CONVERSATION_NAME}! 😊", "id_correcao")
+    return None
 
 
 def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
@@ -993,6 +1030,11 @@ def extrair_candidatos(texto: str) -> list:
         m = re.search(rx, t)
         if not m:
             continue
+        # V5.0: exemplo/hipótese não é fato — "suponha que meu nome seja X"
+        # nunca vira memória.
+        antes = t[max(0, m.start() - 30):m.start()].lower()
+        if re.search(r"(exemplo|suponha|supor|imagine|hipot|e se\b|finge|faz de conta|digamos)", antes):
+            continue
         if chave == "pessoa":
             nome = m.group(1).strip()
             rel = m.group(2).strip()
@@ -1012,9 +1054,85 @@ def extrair_candidatos(texto: str) -> list:
     return out
 
 
+# ── Project Memory + orçamento de contexto (V5.0) ─────────────────────
+ORCAMENTO_MEMORIA_CHARS = 1500
+ORCAMENTO_PROJETO_CHARS = 800
+
+
+def _ultimas_de_conv(db, conv: str, owner: str, n: int = 2) -> list:
+    try:
+        rows = db.execute(
+            """SELECT role, text FROM messages WHERE origin='mobile' AND owner_id=?
+               AND conversation_id=? ORDER BY created_at DESC, id DESC LIMIT ?""",
+            (dono_valido(owner), conv, max(1, min(int(n), 4)))).fetchall()
+    except Exception:
+        return []
+    return [(r, (t or "")[:300]) for r, t in reversed(rows) if (t or "").strip()]
+
+
+def _projetos_relevantes(db, texto: str, owner: str) -> list:
+    """[(score, updated_at, projeto)]. Só projetos ativos; por sobreposição de tokens."""
+    try:
+        recs = workspace_store.list_records(db, dono_valido(owner))
+    except Exception:
+        return []
+    projetos = [r for r in recs if isinstance(r, dict) and r.get("kind") == "project"
+                and not r.get("archived") and not r.get("deleted")]
+    toks = _tokens_memoria(texto)
+    if not toks or not projetos:
+        return []
+
+    def _radicais(s: str) -> set:
+        sem = "".join(c for c in unicodedata.normalize(
+            "NFKD", (s or "").lower()) if not unicodedata.combining(c))
+        return {w[:5] for w in re.findall(r"[a-z0-9]{5,}", sem)}
+    rad_q = _radicais(texto)
+    scored = []
+    for p in projetos:
+        titulo = p.get("title", "")
+        inter = toks & _tokens_memoria(titulo)
+        rad = (rad_q & _radicais(titulo)) if not inter else set()
+        nota = len(inter) * 2 + len(rad)
+        if nota:
+            scored.append((nota, str(p.get("updated_at", "")), p))
+    scored.sort(key=lambda s: (s[0], s[1]), reverse=True)
+    return scored
+
+
+def _trechos_projeto(db, owner: str, projeto: dict, teto_chats: int = 3) -> list:
+    try:
+        recs = workspace_store.list_records(db, dono_valido(owner))
+    except Exception:
+        return []
+    pid = projeto.get("id", "")
+    chats = [r for r in recs if isinstance(r, dict) and r.get("kind") == "chat"
+             and r.get("project_id") == pid and not r.get("deleted")]
+    trechos = []
+    for c in chats[:teto_chats]:
+        for role, txt in _ultimas_de_conv(db, c.get("id", ""), owner):
+            trechos.append(f"[{c.get('id', '')[-6:]}|{role}]: {txt[:200]}")
+            if len(trechos) >= 4:
+                return trechos
+    return trechos
+
+
+def bloco_projetos(db, texto: str, conv: str, owner: str) -> str:
+    """Project Memory p/ o prompt: projetos relevantes + trechos reais ligados."""
+    scored = _projetos_relevantes(db, texto, owner)
+    if not scored:
+        return ""
+    linhas = []
+    for _, _, p in scored[:2]:
+        trechos = _trechos_projeto(db, owner, p)
+        linhas.append(f"- **{(p.get('title') or '')[:60]}**" +
+                      (": " + " ".join(trechos[:3]) if trechos else " (sem mensagens ligadas)"))
+    return ("PROJETOS RELACIONADOS (trechos reais de conversas ligadas; "
+            "não invente peças, valores ou estado):\n" + "\n".join(linhas)
+            )[:ORCAMENTO_PROJETO_CHARS]
+
+
 def pendencias(db, owner) -> list:
     return ler_memorias(db, owner, status="pendente")
-
 
 def confirmar_pendencia(db, owner) -> dict:
     """Confirma a pendência mais antiga. Retorna {} se não houver."""
@@ -1667,10 +1785,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         rel = memorias_relevantes(db, texto_usuario, owner=owner)
         if rel:
             extras["memoria_usada"] = True
+            bloco_mem = ("\n".join(f"- {f['key']}: {f['value'][:200]}{proveniencia(f)}"
+                                   for f in rel))[:ORCAMENTO_MEMORIA_CHARS]
             partes_sistema.append("O QUE VOCÊ SABE SOBRE O USUÁRIO (memórias confirmadas; "
                                   "use naturalmente; o que não está aqui você NÃO sabe):\n" +
-                                  "\n".join(f"- {f['key']}: {f['value'][:200]}{proveniencia(f)}"
-                                            for f in rel))
+                                  bloco_mem)
         lembrancas = lembrancas_relevantes(db, texto_usuario, conversation_id, owner=owner)
         if lembrancas:
             partes_sistema.append(
@@ -1699,6 +1818,21 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
             partes_sistema.append(
                 "AGUARDANDO CONFIRMAÇÃO (não afirme que guardou; pergunte de forma natural):\n" +
                 "\n".join(f"- {p['value'][:150]}" for p in pend))
+        bloco_proj = bloco_projetos(db, texto_usuario, conversation_id, owner)
+        if bloco_proj:
+            extras["memoria_usada"] = True
+            partes_sistema.append(bloco_proj)
+        try:
+            total_conv = db.execute(
+                "SELECT COUNT(*) FROM messages WHERE origin='mobile' AND owner_id=? "
+                "AND conversation_id=?", (owner, conversation_id)).fetchone()[0]
+        except Exception:
+            total_conv = len(historico)
+        if total_conv > len(historico):
+            partes_sistema.append(
+                f"CONTINUIDADE: esta conversa tem {total_conv} mensagens; acima vão as "
+                f"{len(historico)} recentes. O restante antigo foi cortado do contexto — "
+                "não invente seu conteúdo; use memórias e projetos acima.")
         if termos_pedido & ESTUDO_TERMOS:
             linha = linha_desempenho(db, owner)
             if linha:
@@ -2035,15 +2169,16 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
         return {"error": "Mensagem do usuário não encontrada. Sincronize primeiro.",
                 "codigo": "sem_mensagem"}
     try:
-        analisar_memoria(db, row[0], owner, conv, mid)
+        salvos, propostas, pergunta = analisar_memoria(db, row[0], owner, conv, mid)
     except Exception:
-        pass
+        salvos, propostas, pergunta = [], [], None
     mem_flag = payload.get("memory", payload.get("memoria_global", None))
     memoria_on = cfg.get("memoria_global", True) if mem_flag is None else (str(mem_flag) == "1")
     ai_marcar(db, mid, conv, modelo, "queued", owner=owner)
     return {"user_text": row[0], "model": modelo,
             "reply_id": f"{mid}-r1", "conversation_id": conv,
             "memoria_global": memoria_on, "owner": owner,
+            "pergunta_memoria": pergunta or "",
             "contexto_local": _contexto_local_seguro(payload)}
 
 
@@ -2458,6 +2593,93 @@ def cmd_qualidade(db, texto: str, owner: str) -> str:
     return "\n\n```jdui\n" + json.dumps(normalized, ensure_ascii=False) + "\n```"
 
 
+# ── Continuidade determinística entre conversas (V5.0; sem LLM) ──────
+_CONTINUAR_RE = re.compile(
+    r"(continuar|continue|retomar|retome|voltando|onde param|onde parei|"
+    r"estavamos fazendo|continuacao|aquele projeto|esse projeto|\bo projeto\b)")
+
+
+def _resumo_projeto(db, owner: str, projeto: dict) -> str:
+    titulo = (projeto.get("title") or "Projeto")[:60]
+    linhas = [f"**{titulo}** — retomando de onde parou:"]
+    trechos = _trechos_projeto(db, owner, projeto)
+    linhas.extend(f"- {t}" for t in trechos[:3])
+    pend = pendencias(db, owner)[:2]
+    if pend:
+        linhas.append("Aguardando sua confirmação: " +
+                      "; ".join(f"**{p['key']}**" for p in pend))
+    try:
+        job = _ultimo_job(db, owner, ())
+    except Exception:
+        job = None
+    if job:
+        linhas.append(f"Última pesquisa: **{(job.get('objetivo') or '')[:60]}** "
+                       f"({job.get('status', '')})")
+    linhas.append("Me diga o próximo passo. 👊")
+    return "\n".join(linhas)[:1500]
+
+
+def _resumo_onde_paramos(db, owner: str, conv: str) -> str:
+    linhas = []
+    pend = pendencias(db, owner)[:2]
+    if pend:
+        linhas.append("Aguardando confirmação: " +
+                      "; ".join(f"**{p['key']}**: {(p['value'] or '')[:100]}" for p in pend))
+    try:
+        job = _ultimo_job(db, owner, ())
+    except Exception:
+        job = None
+    if job:
+        linhas.append(f"Pesquisa: **{(job.get('objetivo') or '')[:60]}** ({job.get('status', '')})")
+    try:
+        shop = shopping.ultima_consulta(db, owner, conv)
+    except Exception:
+        shop = None
+    if shop and (shop.get("resultado", {}) or {}).get("produtos"):
+        n = len(shop["resultado"]["produtos"])
+        linhas.append(f"Compras: **{(shop.get('consulta') or '')[:60]}** ({n} opções guardadas)")
+    try:
+        foco = db.execute("SELECT value FROM memories WHERE owner_id=? AND key='foco' "
+                          "AND status='confirmada'", (dono_valido(owner),)).fetchone()
+    except Exception:
+        foco = None
+    if foco and foco[0]:
+        linhas.append(f"Seu foco: {(foco[0] or '')[:150]}")
+    if not linhas:
+        return ("Nada em andamento por aqui. Me diga o que retomar "
+                "(ex.: um projeto, uma pesquisa ou uma compra). 🌱")
+    return "Onde paramos:\n\n" + "\n".join(f"- {l}" for l in linhas)
+
+
+def cmd_projeto(db, texto: str, owner: str, conv: str) -> str:
+    """Continuação de projetos/tarefas sem LLM. Retorna texto ou ''."""
+    t = _normalizar_temporal(texto or "")
+    if not t or not _CONTINUAR_RE.search(t):
+        return ""
+    if "onde param" in t or "estavamos fazendo" in t or "onde parei" in t:
+        return _resumo_onde_paramos(db, owner, conv)
+    scored = _projetos_relevantes(db, texto, owner)
+    if len(scored) >= 2 and scored[0][0] == scored[1][0]:
+        titulos = "; ".join(f"**{((p or {}).get('title') or '')[:50]}**"
+                            for _, _, p in scored[:3])
+        return (f"Encontrei mais de um projeto parecido: {titulos}. "
+                "Qual deles retomamos?")
+    if scored:
+        return _resumo_projeto(db, owner, scored[0][2])
+    try:
+        recs = workspace_store.list_records(db, dono_valido(owner))
+    except Exception:
+        recs = []
+    titulos = [(r.get("title") or "")[:50] for r in recs if isinstance(r, dict)
+               and r.get("kind") == "project" and not r.get("archived")
+               and not r.get("deleted")][:4]
+    if titulos:
+        return ("Não identifiquei qual projeto continuar. Seus projetos: " +
+                "; ".join(f"**{x}**" for x in titulos) + ". Qual retomamos?")
+    return ("Não encontrei nenhum projeto guardado. Me diga o que retomar "
+            "(ex.: 'vamos montar o PC para jogos').")
+
+
 def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
     mesmo com o Hermes bloqueado). Retorna texto ou ''."""
@@ -2756,9 +2978,15 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
     if rp:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
+    cp = cmd_projeto(db, prep.get("user_text", ""), owner, conv)
+    if cp:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cp, owner)
     rq = cmd_qualidade(db, prep.get("user_text", ""), owner)
     if rq:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rq, owner)
+    cmd_id = cmd_identidade(prep.get("user_text", ""))
+    if cmd_id:
+        return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd_id[0], owner)
     resposta_tempo = _resposta_temporal_direta(
         prep.get("user_text", ""), prep.get("contexto_local", {}))
     if resposta_tempo:
@@ -2776,6 +3004,8 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return {"error": str(exc), "codigo": exc.codigo}
     modelo = res.get("model_usado", modelo)
     texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+    if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto or ""):
+        texto = (texto or "") + "\n\n" + prep["pergunta_memoria"]
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -2897,8 +3127,19 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
-        # V4.9.1: follow-ups de shopping reusam a última consulta (sem LLM/rede).
-        if shopping.eh_followup(prep.get("user_text", "")):
+        # V5.0: continuidade de projetos/tarefas (determinístico, sem LLM).
+        cp = cmd_projeto(db, prep.get("user_text", ""), owner, conv)
+        if cp:
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cp, owner)
+            try:
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                      "reply_id": direta["reply_id"],
+                                      "response_text": direta["response_text"],
+                                      "model": modelo})
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
+            return
+        # V4.9.1: follow-ups de shopping reusam a última consulta (sem LLM/rede).        if shopping.eh_followup(prep.get("user_text", "")):
             fup = shopping.responder_followup(db, owner, conv, prep.get("user_text", ""))
             if fup:
                 texto_fup = fup["texto"] + (fup.get("fence") or "")
@@ -2912,6 +3153,19 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 except (ConnectionClosed, OSError, RuntimeError, ValueError):
                     pass
                 return
+        # V5.0: identidade determinística (nome/correção; funciona sem LLM).
+        cmd_id = cmd_identidade(prep.get("user_text", ""))
+        if cmd_id:
+            direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"],
+                                        cmd_id[0], owner)
+            try:
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                      "reply_id": direta["reply_id"],
+                                      "response_text": direta["response_text"],
+                                      "model": modelo})
+            except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                pass
+            return
         resposta_tempo = _resposta_temporal_direta(
             prep.get("user_text", ""), prep.get("contexto_local", {}))
         if resposta_tempo:
@@ -3050,6 +3304,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto_final or ""):
+            texto_final = (texto_final or "") + "\n\n" + prep["pergunta_memoria"]
         if shop_res is not None:
             # Cards verdadeiros vêm da ferramenta: remove qualquer fence de
             # produto do modelo (risco de dados inventados) e anexa o nosso.

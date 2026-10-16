@@ -98,9 +98,12 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   nao confirmado"; sem "menor preco da internet". E2E ao vivo pendente de
   provedor sem bot-wall.
 
-## V5.0 - ADVANCED MEMORY & LUCCAS TRAWMAN IDENTITY (futuro)
-- Continuidade de contexto, memoria avancada e identidade do Luccas Trawman,
-  apos a conclusao e avaliacao da V4.8/V4.9/V4.9.1.
+## V5.0 - ADVANCED MEMORY & LUCCAS TRAWMAN IDENTITY (entregue; ver RELATORIO_JULIA_5.0.md)
+- Identidade Lucas deterministica (nome, nome completo, natureza IA,
+  correcao educada) nos fluxos stream e completo, sem LLM.
+- Memoria com confirmacao visivel no chat, higiene (no-op, historico,
+  anti-exemplo), orcamento de 1500 chars, Project Memory e continuidade
+  deterministica (projetos, onde paramos, nota de corte, restart).
 
 ## V5.1 - INTENT & UNDERSTANDING ENGINE (futuro)
 - Intencao e entendimento profundo do pedido (desambiguacao, slots,
