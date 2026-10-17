@@ -2451,6 +2451,12 @@
     const activationKey = ctx?.ownerId && ctx?.messageId ? `${ctx.ownerId}/${ctx.conversationId}/${ctx.messageId}/${p.id}` : '';
     root.classList.add('model3d');
     root.appendChild(el('h3', '', p.title));
+    const chips = el('div', 'm3-chips');
+    const PRECISAO = {exato: 'Modelo exato', aproximado: 'Modelo aproximado',
+                      conceitual: 'Modelo conceitual', educativo: 'Modelo educativo'};
+    chips.appendChild(el('span', 'm3-chip', PRECISAO[p.precision] || 'Modelo'));
+    if (p.education) chips.appendChild(el('span', 'm3-chip m3-chip-muted', 'Cena educativa'));
+    root.appendChild(chips);
     root.appendChild(el('p', 'm3-description', p.description));
     const preview = el('img', 'm3-preview');
     preview.src = '/models/preview.svg'; preview.alt = 'Ilustração 2D de sólidos geométricos';

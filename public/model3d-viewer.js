@@ -145,6 +145,11 @@ export async function mount(root, props, saved, save, preview, status, start, ct
         details.append(element('p','',item.description || 'Sem descrição adicional.'));
         p.annotations.filter(a => a.objectId === item.id).forEach(a => details.append(element('p','',a.text)));
         if(item.related?.length)details.append(element('small','','Relações: '+item.related.map(id=>p.objects.find(o=>o.id===id)?.label || id).join(', ')));
+        const marcas=[];
+        if(item.role==='structural')marcas.push('Estrutural');else if(item.role==='optional')marcas.push('Opcional');
+        if(item.group==='internal')marcas.push('Interna');else if(item.group==='external')marcas.push('Externa');
+        if(item.order>0)marcas.push('Montagem #'+item.order);
+        if(marcas.length)details.append(element('small','',marcas.join(' · ')));
       }
     }
     details.append(element('small','',p.source));
@@ -253,7 +258,8 @@ export async function mount(root, props, saved, save, preview, status, start, ct
     ground.rotation.x = -Math.PI/2; ground.position.y = placed.min.y - .02; ground.receiveShadow = true; scene.add(ground);
     if(p.education){
       education=attachEducation({props:p,saved,content,group,camera,reduced,menu,panel:box,changed:()=>{
-        selected=education.state.selected;detailsOpen=true;updateDetails();persist();draw();status.textContent='Ajuste aplicado à cena 3D.';
+        selected=education.state.selected;detailsOpen=true;updateDetails();persist();draw();
+        status.textContent=education?.hint || 'Ajuste aplicado à cena 3D.';
       }});
       selected=education.state.selected;
     }

@@ -8,6 +8,10 @@ import unicodedata
 KINDS = ('cube', 'sphere', 'cylinder', 'pyramid')
 MODEL_ID = 'demo-cube'
 VIEWS = ('free', 'front', 'back', 'side', 'top')
+# V5.6: fontes novas só com prefixo editorial fixo; texto livre não passa.
+_FONTE_EXTRA = re.compile(
+    r"^(Catálogo local V5\.6|Aproximado por referências públicas|Modelo conceitual educativo)"
+    r" — [A-Za-z0-9À-ÖØ-öø-ÿ .,;:()\[\]'/+\-%°·]{1,180}$")
 
 
 def validate_interaction(state, ids, count):
@@ -65,9 +69,9 @@ def validate(p):
             raise ValueError('model3d: booleano inválido')
         return v
 
-    obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction')
+    obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction precision')
     education = p.get('education', '')
-    if education not in ('','computer','geometry','solar') or (not education and any(k in p for k in ('steps','interaction'))):
+    if education not in ('','computer','geometry','solar','device') or (not education and any(k in p for k in ('steps','interaction'))):
         raise ValueError('Cena educativa inválida')
     if type(p.get('version')) not in (int, float) or p['version'] != 1:
         raise ValueError('model3d: versão inválida')
@@ -82,7 +86,7 @@ def validate(p):
         raise ValueError('model3d: use 1..8 primitivas ou um modelo autorizado')
     items, ids = [], set()
     for item in objects:
-        obj(item, 'id kind position rotation scale label description' + (' dimensions color category related metadata' if education else ''))
+        obj(item, 'id kind position rotation scale label description' + (' dimensions color category related metadata role group order' if education else ''))
         iid = ident(item.get('id'))
         if iid in ids or item.get('kind') not in KINDS:
             raise ValueError('model3d: objeto inválido ou duplicado')
@@ -100,9 +104,19 @@ def validate(p):
             category = item.get('category','component')
             if category not in ('component','face','edge','vertex','body'):
                 raise ValueError('Categoria inválida')
+            role = item.get('role','functional')
+            if role not in ('structural','functional','optional'):
+                raise ValueError('Papel da parte inválido')
+            group = item.get('group','')
+            if group not in ('','internal','external'):
+                raise ValueError('Grupo da parte inválido')
+            order = item.get('order',0)
+            if type(order) is not int or not 0 <= order <= 32:
+                raise ValueError('Ordem de montagem inválida')
             items[-1].update(dimensions=vector(item.get('dimensions',[1,1,1]),.015,3),
                              color=part_color.lower(),category=category,related=item.get('related',[]),
-                             metadata={'conceptual':boolean(meta.get('conceptual',True)), 'note':string(meta.get('note',''),200)})
+                             metadata={'conceptual':boolean(meta.get('conceptual',True)), 'note':string(meta.get('note',''),200)},
+                             role=role,group=group,order=order)
     if model:
         ids.add(MODEL_ID)
     if education:
@@ -123,16 +137,24 @@ def validate(p):
     lighting = p.get('lighting', 'soft')
     if lighting not in ('soft', 'studio'):
         raise ValueError('model3d: iluminação inválida')
+    default_precision = ('exato' if model else 'educativo' if education in ('computer','geometry','solar')
+                         else 'aproximado' if education == 'device' else 'exato')
+    precision = p.get('precision', default_precision)
+    if precision not in ('exato','aproximado','conceitual','educativo'):
+        raise ValueError('model3d: precisão inválida')
     source = 'Vexx AI — cubo GLB local original (CC0)' if model else 'Geometria procedural local'
-    if 'source' in p and p['source'] != source:
+    if 'source' in p and p['source'] != source and (model or not isinstance(p['source'],str)
+            or not _FONTE_EXTRA.fullmatch(p['source'])):
         raise ValueError('model3d: fonte inválida')
     result = dict(id=ident(p.get('id')), version=1, title=string(p.get('title', 'Objeto 3D'), 120),
                 description=string(p.get('description', 'Objeto tridimensional interativo.'), 500),
                 objects=items, model=model, color=color.lower(), scale=number(p.get('scale', 1), .25, 2),
                 rotation=vector(p.get('rotation', [15, 25, 0]), -360, 360),
                 camera={'distance': number(camera.get('distance', 6), 3, 12)}, lighting=lighting,
+                precision=precision,
                 annotations=notes, autoRotate=boolean(p.get('autoRotate', False)),
-                details=boolean(p.get('details', False)), source=source)
+                details=boolean(p.get('details', False)),
+                source=p.get('source', source))
     if education:
         steps = p.get('steps',[])
         if not isinstance(steps,list) or len(steps)>8:
@@ -168,9 +190,27 @@ def request(text):
         return {'action':'interact','op':'view','target':views[t]}
     if t in simple:
         return {'action':'interact','op':simple[t],'target':''}
-    match = re.fullmatch(r'(destaque|selecione|isole|oculte|revele|foque|explique) (?:o |a |os |as )?(.+)',t)
+    # V5.6: grupos internos/externos e conexões entre partes.
+    match = re.fullmatch(r'(?:me )?(?:mostre|exiba|veja|quero ver|deixe|oculte|esconda) (?:so|apenas|somente) (?:as |os )?(?:pecas?|partes?) (internas|externas)', t)
     if match:
-        return {'action':'interact','op':{'destaque':'select','selecione':'select','isole':'isolate','oculte':'hide','revele':'show','foque':'focus','explique':'explain'}[match[1]],'target':match[2]}
+        return {'action':'interact','op':'onlyGroup','group':'internal' if match[1]=='internas' else 'external'}
+    match = re.fullmatch(r'(?:me )?(?:oculte|esconda) (?:as |os )?(?:pecas?|partes?) (internas|externas)', t)
+    if match:
+        return {'action':'interact','op':'onlyGroup','group':'external' if match[1]=='internas' else 'internal'}
+    match = re.fullmatch(r'(?:me )?(?:mostre|exiba|veja) (?:as )?conexoes(?: (?:de|do|da) (.+))?', t)
+    if match:
+        return {'action':'interact','op':'connect','target':match[1] or ''}
+    match = re.fullmatch(r'(?:me )?(?:mostre|exiba|veja) como (?:isso|ele|ela|o objeto|a peca) se conecta', t)
+    if match:
+        return {'action':'interact','op':'connect','target':''}
+    # V5.6: "deixe só X" / "mostre apenas X" isolam a parte; pedidos de cena 3D seguem para criação.
+    match = re.fullmatch(r'(?:me )?(?:deixe|mostre|exiba|quero ver) (?:so|apenas|somente) (?:o |a |os |as )?(.+)', t)
+    if match and not re.search(r'\b(3d|tridimensional|girando)\b', t) \
+            and not re.search(r'\b(cubo|esfera|cilindro|piramide)s?\b', t):
+        return {'action':'interact','op':'isolate','target':match[1]}
+    match = re.fullmatch(r'(destaque|selecione|isole|oculte|esconda|revele|foque|explique) (?:o |a |os |as )?(.+)',t)
+    if match:
+        return {'action':'interact','op':{'destaque':'select','selecione':'select','isole':'isolate','oculte':'hide','esconda':'hide','revele':'show','foque':'focus','explique':'explain'}[match[1]],'target':match[2]}
     match = re.fullmatch(r'deixe (?:o |a )?(.+) transparente',t)
     if match:
         return {'action':'interact','op':'transparent','target':match[1]}
@@ -256,12 +296,22 @@ def interact(props, request):
         return 'Essa cena não possui partes educativas ou operações avançadas. Peça um computador simplificado ou um cubo didático em 3D.', None
     s, op = props['interaction'], request['op']
     norm = lambda t: ''.join(c for c in unicodedata.normalize('NFKD',t.lower()) if not unicodedata.combining(c)).replace('-',' ')
-    target = norm(request['target'])
+    target = norm(request.get('target') or '')
     aliases = {'memoria ram':'ram','placa mae':'motherboard','processador':'cpu','placa de video':'gpu'}
     target = aliases.get(target,target)
     part = next((o for o in props['objects'] if target in (norm(o['id']),norm(o['label']))),None)
     if op in ('select','isolate','hide','show','focus','explain','transparent'):
         if not part:
+            if op == 'explain' and target in ('como funciona','como isso funciona','como ele funciona',
+                                              'como ela funciona','como o objeto funciona','como a peca funciona'):
+                destacada = next((o for o in props['objects'] if o['id']==s['selected']),None)
+                text = props.get('description') or 'Cena educativa sem descrição adicional.'
+                if destacada:
+                    text += ' Em destaque: ' + destacada['label'] + ' — ' + destacada['description']
+                else:
+                    text += ' Selecione uma parte para ler os detalhes dela.'
+                props['details'] = True
+                return text, validate(props)
             return 'Não encontrei essa parte na cena ativa. Use um dos nomes exibidos em Partes; não posso inferir componentes inexistentes.', None
         key = part['id']; s['selected'] = key
         if op == 'isolate': s['isolated'] = key
@@ -273,6 +323,34 @@ def interact(props, request):
             if op != 'isolate': s['isolated'] = ''
         props['details'] = True
         text = part['label'] + ': ' + part['description'] if op == 'explain' else 'Ajuste visual preparado para ' + part['label'] + '.'
+    elif op == 'onlyGroup':
+        grupo = request.get('group')
+        if grupo not in ('internal','external'):
+            return 'Grupo de peças não suportado.', None
+        oposto = 'external' if grupo == 'internal' else 'internal'
+        classificadas = [o for o in props['objects'] if o.get('group') in ('internal','external')]
+        if not any(o.get('group') == grupo for o in classificadas):
+            return 'Esta cena não classifica peças como internas ou externas.', None
+        ocultar = [o['id'] for o in props['objects'] if o.get('group') == oposto]
+        s.update(hidden=ocultar, isolated='', focus='')
+        visiveis = len(classificadas) - len(ocultar)
+        rotulo = 'internas' if grupo == 'internal' else 'externas'
+        text = (f'Exibindo apenas as peças {rotulo} ({visiveis} de {len(classificadas)} classificadas).'
+                if ocultar else f'Todas as peças classificadas já são {rotulo}.')
+    elif op == 'connect':
+        if not part and s['selected']:
+            part = next((o for o in props['objects'] if o['id']==s['selected']),None)
+        if not part:
+            if target:
+                return 'Não encontrei essa parte na cena ativa. Use um dos nomes exibidos em Partes; não posso inferir componentes inexistentes.', None
+            return 'Selecione uma parte (por exemplo: "destaque a RAM") para ver as conexões dela.', None
+        s['selected'] = part['id']
+        rotulos = []
+        for rid in part.get('related',[]):
+            rotulos.append(next((o['label'] for o in props['objects'] if o['id']==rid), rid))
+        text = (part['label'] + ' se conecta a: ' + ', '.join(rotulos) + '.'
+                if rotulos else 'Nenhuma conexão registrada para ' + part['label'] + ' nesta cena.')
+        props['details'] = True
     elif op in ('explode','assemble'):
         if len(props['objects']) < 2:
             return 'A cena precisa de pelo menos duas partes para separar peças.',None

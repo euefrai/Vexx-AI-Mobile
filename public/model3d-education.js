@@ -4,7 +4,7 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
   const ids=props.objects.map(o=>o.id), meshes=new Map(), initial=new Map(), transitions=new Map();
   content.traverse(o=>{if(o.isMesh){meshes.set(o.userData.objectId,o);initial.set(o.userData.objectId,o.position.clone());}});
   const validate=v=>window.validateModel3DInteraction(v,ids,props.steps.length);
-  let state=validate(props.interaction), elapsed=0, orbitTime=0;
+  let state=validate(props.interaction), elapsed=0, orbitTime=0, hint='';
   try {if(saved?.scene===props.id && saved.interaction) state=validate(saved.interaction);} catch (_) { /* stale remote state is not a command */ }
   if(reduced.matches) state.lessonPlaying=false;
   const buttons=[];
@@ -19,6 +19,14 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
   button('Revelar tudo',()=>{state.hidden=[];state.isolated='';state.transparent=[];commit();});
   button('Transparência',()=>{state.transparent=state.transparent.includes(state.selected)?state.transparent.filter(k=>k!==state.selected):[...state.transparent,state.selected];commit();},true);
   button('Focar',()=>{state.focus=state.selected;state.hidden=state.hidden.filter(k=>k!==state.selected);commit();},true);
+  // V5.6: grupos internos/externos e conexões entre partes.
+  const temGrupos=props.objects.some(o=>o.group==='internal'||o.group==='external');
+  const soInternas=button('Ver só internas',()=>{state.hidden=ids.filter(id=>props.objects.find(o=>o.id===id)?.group==='external');state.isolated='';state.focus='';commit('Exibindo apenas as peças internas.');});
+  const soExternas=button('Ver só externas',()=>{state.hidden=ids.filter(id=>props.objects.find(o=>o.id===id)?.group==='internal');state.isolated='';state.focus='';commit('Exibindo apenas as peças externas.');});
+  soInternas.disabled=!temGrupos;soExternas.disabled=!temGrupos;
+  button('Ver conexões',()=>{const p0=props.objects.find(o=>o.id===state.selected);if(!p0)return;
+    const rot=(p0.related||[]).map(r=>props.objects.find(o=>o.id===r)?.label||r);
+    commit(rot.length?p0.label+' se conecta a: '+rot.join(', ')+'.':'Nenhuma conexão registrada para '+p0.label+' nesta cena.');},true);
   const explode=button('Separar peças',()=>{state.exploded=!state.exploded;commit();});
   explode.disabled=ids.length<2;
   const lesson=document.createElement('section');lesson.className='m3-lesson';panel.append(lesson);
@@ -51,18 +59,19 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
     return target;
   }
   function apply(smooth=true){
+    const relacionadas=new Set(props.objects.find(o=>o.id===state.selected)?.related||[]);
     for(const [id,m] of meshes){
       m.visible=!state.hidden.includes(id) && (!state.isolated || id===state.isolated);
       m.material.transparent=state.transparent.includes(id);m.material.opacity=m.material.transparent ? .25 : 1;
       m.material.depthWrite=!m.material.transparent;m.material.needsUpdate=true;
-      m.material.emissive?.setHex(id===state.selected?0x393958:0);
+      m.material.emissive?.setHex(id===state.selected?0x393958:relacionadas.has(id)?0x1c2545:0);
       const target=targetPosition(id);
       if(smooth && !reduced.matches)transitions.set(id,{from:m.position.clone(),target,t:0});
       else {m.position.copy(target);transitions.delete(id);}
     }
     refresh();
   }
-  function commit(){state=validate(state);apply();changed();}
+  function commit(status){state=validate(state);hint=status||'';apply();changed();}
   function go(index,keepPlaying=false){
     if(index<0 || index>=props.steps.length)return;
     state.step=index;state.lessonPlaying=keepPlaying;elapsed=0;
@@ -71,6 +80,7 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
   apply(false);
   return {
     get state(){return structuredClone(state);},
+    get hint(){return hint;},
     get animating(){return transitions.size>0 || state.lessonPlaying;},
     get viewRotation(){return views[state.view];},
     select(id){if(!ids.includes(id))return;state.selected=id;state.hidden=state.hidden.filter(k=>k!==id);state.isolated='';commit();},

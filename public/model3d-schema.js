@@ -20,9 +20,9 @@ window.validateModel3D = function (p) {
   const id = v => { if (typeof v !== 'string' || !/^[a-zA-Z0-9_-]{1,40}$/.test(v)) fail(); return v; };
   const bool = v => { if (typeof v !== 'boolean') fail(); return v; };
   const get = (v, k, d) => v[k] === undefined ? d : v[k];
-  obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction');
+  obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction precision');
   const education = get(p,'education','');
-  if (!['','computer','geometry','solar'].includes(education) || (!education && ('steps' in p || 'interaction' in p))) fail();
+  if (!['','computer','geometry','solar','device'].includes(education) || (!education && ('steps' in p || 'interaction' in p))) fail();
   if (p.version !== 1) fail();
   const color = get(p, 'color', '#8b9cf7');
   if (typeof color !== 'string' || !/^#[a-fA-F0-9]{6}$/.test(color)) fail();
@@ -31,7 +31,7 @@ window.validateModel3D = function (p) {
   const raw = get(p, 'objects', []), ids = new Set();
   if (!Array.isArray(raw) || raw.length < (model ? 0 : 1) || raw.length > (education ? 32 : 8) || (model && (raw.length || education))) fail();
   const objects = raw.map(o => {
-    obj(o, 'id kind position rotation scale label description' + (education ? ' dimensions color category related metadata' : ''));
+    obj(o, 'id kind position rotation scale label description' + (education ? ' dimensions color category related metadata role group order' : ''));
     const key = id(o.id);
     if (ids.has(key) || !['cube', 'sphere', 'cylinder', 'pyramid'].includes(o.kind)) fail();
     ids.add(key);
@@ -40,9 +40,12 @@ window.validateModel3D = function (p) {
       label:str(get(o, 'label', o.kind),100), description:str(get(o, 'description', ''),500)};
     if (education) {
       const meta=obj(get(o,'metadata',{}),'conceptual note'), partColor=get(o,'color',color), category=get(o,'category','component');
+      const role=get(o,'role','functional'), group=get(o,'group',''), order=get(o,'order',0);
       if (typeof partColor!=='string' || !/^#[a-fA-F0-9]{6}$/.test(partColor) || !['component','face','edge','vertex','body'].includes(category)) fail();
+      if (!['structural','functional','optional'].includes(role) || !['','internal','external'].includes(group) || !Number.isInteger(order) || order<0 || order>32) fail();
       Object.assign(item,{dimensions:vec(get(o,'dimensions',[1,1,1]),.015,3),color:partColor.toLowerCase(),category,
-        related:get(o,'related',[]),metadata:{conceptual:bool(get(meta,'conceptual',true)),note:str(get(meta,'note',''),200)}});
+        related:get(o,'related',[]),metadata:{conceptual:bool(get(meta,'conceptual',true)),note:str(get(meta,'note',''),200)},
+        role,group,order});
     }
     return item;
   });
@@ -56,13 +59,18 @@ window.validateModel3D = function (p) {
   });
   const camera = obj(get(p, 'camera', {}), 'distance'), lighting = get(p, 'lighting', 'soft');
   if (!['soft', 'studio'].includes(lighting)) fail();
+  const defaultPrecision = model ? 'exato' : (education==='computer'||education==='geometry'||education==='solar') ? 'educativo' : education==='device' ? 'aproximado' : 'exato';
+  const precision = get(p, 'precision', defaultPrecision);
+  if (!['exato','aproximado','conceitual','educativo'].includes(precision)) fail();
   const source = model ? 'Vexx AI — cubo GLB local original (CC0)' : 'Geometria procedural local';
-  if (p.source !== undefined && p.source !== source) fail();
+  if (p.source !== undefined && p.source !== source && (model || !(typeof p.source==='string' &&
+      /^(Catálogo local V5\.6|Aproximado por referências públicas|Modelo conceitual educativo) — [A-Za-z0-9À-ÖØ-öø-ÿ .,;:()\[\]'\/+\-%°·]{1,180}$/.test(p.source)))) fail();
   const result = {id:id(p.id), version:1, title:str(get(p, 'title', 'Objeto 3D'),120),
     description:str(get(p, 'description', 'Objeto tridimensional interativo.'),500), objects, model,
     color:color.toLowerCase(), scale:num(get(p, 'scale',1),.25,2), rotation:vec(get(p, 'rotation',[15,25,0]),-360,360),
-    camera:{distance:num(get(camera, 'distance',6),3,12)}, lighting, annotations,
-    autoRotate:bool(get(p, 'autoRotate',false)), details:bool(get(p, 'details',false)), source};
+    camera:{distance:num(get(camera, 'distance',6),3,12)}, lighting, precision, annotations,
+    autoRotate:bool(get(p, 'autoRotate',false)), details:bool(get(p, 'details',false)),
+    source:p.source === undefined ? source : p.source};
   if (education) {
     const steps=get(p,'steps',[]);
     if (!Array.isArray(steps) || steps.length>8) fail();
