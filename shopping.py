@@ -1365,6 +1365,10 @@ def _jdui_produto(p: dict) -> dict:
         "n_avaliacoes": p.get("n_avaliacoes"),
         "disponibilidade": p.get("disponibilidade", "desconhecida"),
         "verificado_em": _data_br_curta(p.get("verificado_em", "")),
+        "link_veredito": (p.get("link_veredito") or "")[:24],
+        "link_motivo": (p.get("link_motivo") or "")[:120],
+        "item_de_listagem": bool(p.get("item_de_listagem")),
+        "imagem_veredito": (p.get("imagem_veredito") or "")[:24],
         "ofertas": [{
             "loja": (o.get("loja", "") or "")[:80],
             "preco": o.get("preco_texto", PRECO_NAO_CONFIRMADO)[:40],

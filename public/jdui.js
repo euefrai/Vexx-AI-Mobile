@@ -77,6 +77,7 @@
     if (!Array.isArray(v) || v.length < a || v.length > b) throw new JduiErro(msg);
     return v;
   }
+  const VER_LINK = ['verificado', 'parcial', 'reprovado', 'nao_verificado'];
   const V = {
     model3d(p) { return window.validateModel3D(p); },
     quiz(p) {
@@ -317,6 +318,8 @@
         if (!item || typeof item !== 'object') return null;
         return { loja: S(item.loja, 80), preco: S(item.preco, 40), url: URL_OK(item.url) };
       }).filter(Boolean);
+      const lv = String(o.link_veredito || '').toLowerCase();
+      const iv = String(o.imagem_veredito || '').toLowerCase();
       return {
         nome: S(o.nome || o.name, 160), marca: S(o.marca || o.brand, 80),
         modelo: S(o.modelo || o.model, 80), variante: S(o.variante, 80),
@@ -324,7 +327,11 @@
         moeda: (S(o.moeda, 3).toUpperCase() || 'BRL'), loja: S(o.loja || o.store, 80),
         url: URL_OK(o.url), specs, avaliacao: av, n_avaliacoes: nv,
         disponibilidade: ['em_estoque', 'sem_estoque', 'estoque_limitado', 'pre_venda'].indexOf(disp) >= 0 ? disp : 'desconhecida',
-        verificado_em: S(o.verificado_em, 48), ofertas
+        verificado_em: S(o.verificado_em, 48), ofertas,
+        link_veredito: VER_LINK.indexOf(lv) >= 0 ? lv : '',
+        link_motivo: S(o.link_motivo, 120),
+        item_de_listagem: o.item_de_listagem === true,
+        imagem_veredito: VER_LINK.indexOf(iv) >= 0 ? iv : ''
       };
     },
     _produtoObrigatorio(o) {
@@ -1948,6 +1955,27 @@
     keys.forEach(k => wrap.appendChild(el('span', 'jdui-pchip', k + ': ' + specs[k])));
     box.appendChild(wrap);
   }
+  /* V5.5: selo honesto de verificação do link (nunca "ok" sem verificação). */
+  const SELO_LINK = {
+    verificado: ['ok', '✓ Link verificado'],
+    parcial: ['aviso', 'Verificação parcial'],
+    reprovado: ['ruim', 'Link reprovado'],
+    nao_verificado: ['aviso', 'Link não verificado']
+  };
+  function productSelo(prod) {
+    let classe = '', texto = '';
+    if (prod.item_de_listagem) {
+      classe = 'aviso';
+      texto = 'Link de listagem (item não aberto)';
+    } else {
+      const s = SELO_LINK[prod.link_veredito];
+      if (!s) return null;
+      classe = s[0]; texto = s[1];
+    }
+    const selo = el('span', 'jdui-pver ' + classe, texto);
+    if (prod.link_motivo) selo.setAttribute('title', prod.link_motivo);
+    return selo;
+  }
   function productCardEl(prod, ctx, mini) {
     const card = el('div', 'jdui-pcard' + (mini ? ' mini' : ''));
     const moldura = el('div', 'jdui-pmedia');
@@ -1960,13 +1988,16 @@
     corpo.appendChild(el('div', 'jdui-ppreco', prod.preco || 'Preço não confirmado'));
     const loja = prod.loja + (prod.verificado_em ? ' · verificado em ' + prod.verificado_em : '');
     if (prod.loja || prod.verificado_em) corpo.appendChild(el('div', 'jdui-ploja', loja));
+    const selo = productSelo(prod);
+    if (selo) corpo.appendChild(selo);
     corpo.appendChild(el('div', 'jdui-paval', productStars(prod.avaliacao, prod.n_avaliacoes)));
     corpo.appendChild(el('span', 'jdui-pdisp ' + (prod.disponibilidade || 'desconhecida'),
       DISP_LABEL[prod.disponibilidade] || DISP_LABEL.desconhecida));
     if (!mini) productSpecsChips(corpo, prod.specs, 4);
     const acts = el('div', 'jdui-cardacts');
     if (prod.url) {
-      const a = el('a', 'jdui-btn', 'Abrir oferta ↗');
+      const a = el('a', 'jdui-btn',
+        prod.link_veredito === 'reprovado' ? 'Abrir link ↗' : 'Abrir oferta ↗');
       a.href = prod.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
       acts.appendChild(a);
     }

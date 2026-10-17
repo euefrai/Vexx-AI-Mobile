@@ -398,6 +398,13 @@ def _v_calculator(p: dict) -> dict:
 # ── Produtos (V4.9.1 Shopping Intelligence; dados reais de ferramenta) ──
 DISPONIBILIDADE = ("em_estoque", "sem_estoque", "estoque_limitado",
                    "pre_venda", "desconhecida")
+VEREDITOS_LINK = ("verificado", "parcial", "reprovado", "nao_verificado")
+
+
+def _veredito_link(v) -> str:
+    """V5.5: estado verificado do link/imagem (fora do enum → vazio, sem inventar)."""
+    v = str(v or "").lower()
+    return v if v in VEREDITOS_LINK else ""
 
 
 def _v_oferta(o) -> dict:
@@ -458,6 +465,10 @@ def _v_oferta(o) -> dict:
         "disponibilidade": disp,
         "verificado_em": _str(o.get("verificado_em"), 48),
         "ofertas": ofertas,
+        "link_veredito": _veredito_link(o.get("link_veredito")),
+        "link_motivo": _str(o.get("link_motivo"), 120),
+        "item_de_listagem": bool(o.get("item_de_listagem")),
+        "imagem_veredito": _veredito_link(o.get("imagem_veredito")),
     }
 
 
