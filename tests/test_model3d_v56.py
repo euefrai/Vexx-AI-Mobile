@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+import jdui
 import model3d
 from model3d_education import scene
 
@@ -79,8 +80,10 @@ def test_v56_fontes_controladas():
 
 
 def test_v56_paridade_py_js_schema_novo():
+    import model3d_catalog as cat
     validos = [cena_grupos(), model3d.validate(scene('geometry')),
                model3d.validate(dict(props_primitivo(), precision='conceitual'))]
+    validos.extend(model3d.validate(cat.cena(key)) for key in cat._FABRICAS)
     invalidos = []
     for patch in ({'role': 'x'}, {'group': 'interna'}, {'order': 33}, {'order': True}, {'order': '1'},
                   {'precision': 'talvez'}, {'source': 'Inventada'},
@@ -177,3 +180,125 @@ def test_v56_comandos_antigos_intactos():
         assert model3d.respond(texto) is None
     texto, q = model3d.respond('Mostre um dragão em 3D')
     assert q is None and 'Não tenho um modelo' in texto
+
+
+# --- FASE 6: catálogo local de dispositivos aproximados ---
+
+def test_v56_catalogo_local_completo_e_honesto():
+    import model3d_catalog as cat
+    for chave in cat._FABRICAS:
+        s = model3d.validate(cat.cena(chave))
+        assert s['id'].startswith('dev-') and s['education'] == 'device'
+        assert s['precision'] == 'aproximado'
+        assert s['source'].startswith('Catálogo local V5.6 — ')
+        assert 1 <= len(s['objects']) <= 32 and len(s['steps']) >= 3
+        assert len(json.dumps(s, ensure_ascii=False, separators=(',', ':')).encode('utf-8')) <= 20000
+        ids = [o['id'] for o in s['objects']]
+        assert len(ids) == len(set(ids))
+        for o in s['objects']:
+            assert o['role'] in ('structural', 'functional', 'optional')
+            assert o['group'] in ('', 'internal', 'external')
+            assert 0 <= o['order'] <= 32
+        assert 'aproximada' in s['description'].lower() or 'aproximado' in s['description'].lower()
+
+
+def test_v56_cenas_com_grupos_internos_e_externos():
+    import model3d_catalog as cat
+    for chave in ('xbox', 'gabinete', 'celular', 'motor_v8', 'controle'):
+        s = model3d.validate(cat.cena(chave))
+        grupos = {o['group'] for o in s['objects']}
+        assert 'internal' in grupos and 'external' in grupos, chave
+        texto, q = model3d.respond('Mostre apenas as peças internas', s)
+        assert q is not None and set(q['interaction']['hidden']) == {
+            o['id'] for o in s['objects'] if o['group'] == 'external'}, chave
+
+
+def test_v56_pedidos_de_dispositivo_viram_cena_aproximada():
+    casos = (('me mostre um Xbox Series S em 3D', 'dev-console-branco', 'xbox series s'),
+             ('cria um modelo 3D de um controle', 'dev-controle', 'controle'),
+             ('quero ver um celular em 3D', 'dev-celular', 'celular'),
+             ('me mostre um motor V8 em 3D', 'dev-motor-v8', 'motor v8'),
+             ('mostre um gabinete gamer em 3D', 'dev-gabinete', 'gabinete gamer'),
+             ('me mostra um monitor em 3D', 'dev-monitor', 'monitor'),
+             ('mostre uma mesa gamer em 3D', 'dev-mesa', 'mesa gamer'),
+             ('crie um modelo 3D de suporte de celular', 'dev-suporte-celular', 'suporte celular'),
+             ('me mostre um headset em 3D', 'dev-headset', 'headset'),
+             ('me mostra um PS2 em 3D', 'dev-console-escuro', 'ps2'))
+    for texto, cena_id, assunto in casos:
+        req = model3d.request(texto)
+        assert req['action'] == 'create' and req.get('device'), texto
+        assert req.get('topic') == assunto, texto
+        resposta, p = model3d.respond(texto)
+        assert p is not None and p['id'] == cena_id, texto
+        assert p['education'] == 'device' and 'aproximada' in resposta, texto
+    # Sem verbo, sem captura.
+    assert model3d.request('xbox 3d') is None
+
+
+def test_v56_notebook_e_placa_mae_na_rota_de_computador():
+    for texto, cena_id in (('quero ver um notebook em 3D', 'dev-notebook'),
+                           ('me mostre uma placa-mãe em 3D', 'dev-placa-mae')):
+        _, p = model3d.respond(texto)
+        assert p['id'] == cena_id and p['education'] == 'computer', texto
+        assert p['precision'] == 'aproximado' and len(p['objects']) >= 9, texto
+    _, classico = model3d.respond('Mostre um computador em 3D')
+    assert classico['id'] == 'edu-computer'
+
+
+def test_v56_interacao_conversacional_no_dispositivo():
+    _, xbox = model3d.respond('me mostre um xbox series s em 3D')
+    texto, q = model3d.respond('Destaque o corpo', xbox)
+    assert q['interaction']['selected'] == 'corpo'
+    texto, q = model3d.respond('Mostre como isso se conecta', q)
+    assert q['interaction']['selected'] == 'corpo'
+    assert 'Corpo se conecta a:' in texto
+    texto, q = model3d.respond('Explique a ventoinha', q)
+    assert 'ventoinha interna' in texto.lower()
+    texto, q = model3d.respond('Separe as peças', q)
+    assert q['interaction']['exploded']
+
+
+# --- FASE 6/9: fluxo durável no pc_agent, sem LLM ---
+
+def unpack(texto):
+    return json.loads(jdui.extrair_fences(texto)[0])['blocks'][0]['props']
+
+
+def test_v56_fluxo_de_dispositivo_continuacoes_e_isolamento(tmp_path, monkeypatch):
+    import pc_agent
+    db = pc_agent.open_db(tmp_path / 'v56.sqlite3')
+    monkeypatch.setattr(pc_agent, 'gerar_texto',
+                        lambda *a, **k: pytest.fail('Pedidos 3D não podem usar LLM'))
+    pedido = dict(conversation_id='conv-v56', owner='u-alice', model='test')
+    first = pc_agent.ai_completa(db, dict(pedido, message_id='v56-user-01',
+                                          text='me mostre um Xbox Series S em 3D'), {'model': 'test'})
+    props = unpack(first['response_text'])
+    assert props['id'] == 'dev-console-branco'
+    assert props['education'] == 'device' and props['precision'] == 'aproximado'
+    second = pc_agent.ai_completa(db, dict(pedido, message_id='v56-user-02',
+                                           text='mostre apenas as peças internas'), {'model': 'test'})
+    p2 = unpack(second['response_text'])
+    assert set(p2['interaction']['hidden']) == {
+        o['id'] for o in p2['objects'] if o['group'] == 'external'}
+    third = pc_agent.ai_completa(db, dict(pedido, message_id='v56-user-03',
+                                          text='isso não está em 3D, reconstrua em 3D'), {'model': 'test'})
+    p3 = unpack(third['response_text'])
+    assert p3['id'] == 'dev-console-branco' and p3['autoRotate']
+    # Resposta anterior foi texto: o pedido de dispositivo é reaproveitado na reconstrução.
+    pc_agent.persist_messages(db, [
+        dict(id='v56b-user-01', conversation_id='conv-v56b', origin='mobile', role='user',
+             text='me mostre um gabinete gamer em 3D', created_at='2026-10-17T12:00:00.000Z'),
+        dict(id='v56b-a01', conversation_id='conv-v56b', origin='mobile', role='assistant',
+             text='Desenho em texto que não é 3D.', created_at='2026-10-17T12:00:02.000Z')], 'u-alice')
+    out = pc_agent.ai_completa(db, {'message_id': 'v56b-user-02', 'conversation_id': 'conv-v56b',
+                                    'text': 'isso não está em 3D, reconstrua em 3D', 'owner': 'u-alice'},
+                               {'model': 'test'})
+    assert unpack(out['response_text'])['id'] == 'dev-gabinete'
+    # Sem referência acessível, comandos curtos não capturam ações de outros recursos.
+    alheio = pc_agent.cmd_model3d(db, 'Amplie.', 'u-bob', 'conv-v56')
+    assert alheio is None
+    assert pc_agent.cmd_model3d(db, 'Amplie.', 'u-alice', 'outra-conversa') is None
+    proprio = unpack(pc_agent.cmd_model3d(db, 'Amplie.', 'u-alice', 'conv-v56'))
+    assert proprio['id'] == p3['id']
+    assert proprio['camera']['distance'] < p3['camera']['distance']
+    db.close()

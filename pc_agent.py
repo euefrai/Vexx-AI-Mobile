@@ -3328,7 +3328,8 @@ def cmd_model3d(db, texto, owner, conv, scene_state=''):
                 (dono_valido(owner), conv)).fetchall():
             anterior = model3d.request(utext or '')
             if anterior and anterior.get('action') == 'create' and (
-                    anterior.get('education') or anterior.get('kinds') or anterior.get('model')):
+                    anterior.get('education') or anterior.get('kinds') or anterior.get('model')
+                    or anterior.get('device')):
                 request, texto = anterior, utext
                 break
         if request['action'] != 'create':

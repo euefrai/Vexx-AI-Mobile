@@ -5,6 +5,8 @@ import math
 import re
 import unicodedata
 
+import model3d_catalog
+
 KINDS = ('cube', 'sphere', 'cylinder', 'pyramid')
 MODEL_ID = 'demo-cube'
 VIEWS = ('free', 'front', 'back', 'side', 'top')
@@ -237,7 +239,13 @@ def request(text):
                      r'recri\w*|de verdade|realista)\b', t):
             return {'action': 'rebuild'}
         if verbs:
-            return {'action': 'create', 'kinds': kinds, 'model': model, 'animate': 'girando' in t}
+            # V5.6: dispositivo do catálogo local (aproximado) ou assunto para pesquisa.
+            device = model3d_catalog.resolver(t)
+            if device:
+                return {'action': 'create', 'device': device,
+                        'topic': model3d_catalog.assunto(t) or device}
+            return {'action': 'create', 'kinds': kinds, 'model': model, 'animate': 'girando' in t,
+                    'topic': model3d_catalog.assunto(t)}
     return None
 
 
@@ -246,8 +254,18 @@ def respond(text, previous=None):
     if not req:
         return None
     if req['action'] == 'create':
+        if req.get('device'):
+            return ('Representação aproximada e educativa preparada a partir do catálogo local V5.6. '
+                    'Abra o 3D para explorar as partes, as conexões e o modo separado.'
+                    ), validate(model3d_catalog.cena(req['device']))
         if req.get('education'):
             from model3d_education import scene
+            if req['education'] == 'computer':
+                sub = model3d_catalog.cena_para_computador(text)
+                if sub:
+                    return ('Representação aproximada e educativa preparada a partir do catálogo local V5.6. '
+                            'Abra o 3D para explorar as partes, as conexões e o modo separado.'
+                            ), validate(sub)
             return 'Cena educativa preparada. Abra o 3D para explorar as partes.', validate(scene(req['education']))
         if not req['kinds']:
             return 'Nesta versão posso mostrar cubo, esfera, cilindro e pirâmide em 3D. Não tenho um modelo autorizado desse objeto.', None
