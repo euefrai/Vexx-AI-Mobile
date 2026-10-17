@@ -156,8 +156,13 @@ def weather(text, context, now):
            f'Umidade: {humidity:g}% · vento: {wind:g} km/h.']
     t=norm(text);forecast=bool(re.search(r'amanha|previsao|proximos|semana|vai chover',t))
     if forecast:
-        daily=data['daily'];target=(now.astimezone(zone)+timedelta(days=1 if 'amanha' in t else 0)).date()
+        local_day=now.astimezone(zone).date()
+        offset=2 if 'depois de amanha' in t else 1 if 'amanha' in t else 0
+        daily=data['daily'];target=local_day+timedelta(days=offset)
         count=7 if re.search(r'semana|proximos|7 dias',t) else 1
+        if 'fim de semana' in t:
+            target=local_day+timedelta(days=0 if local_day.weekday()==6 else (5-local_day.weekday())%7)
+            count=1 if target.weekday()==6 else 2
         rows=[]
         for i,date in enumerate(daily['time']):
             if date<target.isoformat():continue
@@ -167,6 +172,7 @@ def weather(text, context, now):
             rows.append(f"| {datetime.fromisoformat(date):%d/%m} | {lo:g}–{hi:g} °C | {rain} | {condition(daily['weather_code'][i])} |")
             if len(rows)>=count:break
         if rows:lines.extend(['**Previsão** (probabilidades, não garantia):','| Dia | Mín.–máx. | Chance de chuva | Condição |\n|---|---|---|---|\n'+'\n'.join(rows)])
+        if len(rows)<count:lines.append('A fonte não disponibilizou todos os dias solicitados nesta consulta.')
     fetched=datetime.fromisoformat(data['_fetched_at']).astimezone(zone)
     lines.append(f'Dado válido para {observed:%d/%m/%Y às %H:%M} ({safe(data["timezone"])}); consultado às {fetched:%H:%M}.')
     lines.append('[Fonte: Open-Meteo](https://open-meteo.com/) · condições estimadas por modelos meteorológicos; cache de até 5 minutos.')

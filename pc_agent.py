@@ -31,6 +31,7 @@ import research
 import research_agents
 import shopping
 import live_data
+import conversation_followups
 import evidence_graph as evgraph
 import workspace_store
 from websockets.sync.client import connect
@@ -3243,6 +3244,13 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
 
 def cmd_dados_atuais(db, texto, owner, conv, contexto):
     """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
+    anterior = conversation_followups.last_answer(db, dono_valido(owner), conv)
+    continuacao = conversation_followups.weather_request(texto, anterior)
+    if continuacao:
+        return live_data.respond(continuacao, contexto)
+    produto = conversation_followups.product_reply(db, dono_valido(owner), conv, texto, anterior)
+    if produto:
+        return produto
     req = live_data.request(texto)
     if not req:
         if len(texto)>100 or not re.fullmatch(r"[\wÀ-ÿ ,.'-]+[.!]?",texto.strip()) or live_data.norm(texto.strip()) in ('obrigado','obrigada','ok','valeu','nao','não'):

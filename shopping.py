@@ -735,10 +735,10 @@ def salvar_consulta(db, owner: str, conv: str, consulta: str,
                     agora_iso(),
                     datetime.fromtimestamp(time.time() + TTL_CONSULTA,
                                            timezone.utc).isoformat()))
-        db.execute("DELETE FROM shopping_consultas WHERE id NOT IN "
+        db.execute("DELETE FROM shopping_consultas WHERE owner_id=? AND conv=? AND id NOT IN "
                    "(SELECT id FROM shopping_consultas WHERE owner_id=? AND conv=?"
                    " ORDER BY criado_em DESC LIMIT ?)",
-                   (owner, conv or "", MAX_CONSULTAS_POR_CONV))
+                   (owner, conv or "", owner, conv or "", MAX_CONSULTAS_POR_CONV))
     return sid
 
 
@@ -1139,10 +1139,21 @@ def _resumo_verificacao(produtos: list) -> dict:
 
 def pesquisar(db, owner: str, texto: str, conv: str = "",
               buscar_fn=None, baixar_fn=None,
-              progresso=None, teto_paginas: int = MAX_PAGINAS) -> dict:
+              progresso=None, teto_paginas: int = MAX_PAGINAS,
+              criterios_base: dict | None = None, usar_cache: bool = True) -> dict:
     """Pipeline completo. `progresso(fase, detalhe)` emite eventos reais."""
     from concurrent.futures import ThreadPoolExecutor
     criterios = extrair_criterios(texto)
+    if criterios_base is not None:
+        # Explicit follow-up edits override only the fields the user supplied.
+        import copy
+        base = copy.deepcopy(criterios_base)
+        for key in ('orcamento','specs'):
+            base[key] = {**base.get(key,{}), **criterios.get(key,{})}
+        for key in ('categoria','marcas'):
+            if criterios.get(key):base[key]=criterios[key]
+        base['texto'] = texto[:200]
+        criterios = base
     consulta = (criterios.get("categoria", "") + " " +
                 " ".join(criterios.get("marcas", []))).strip() or (texto or "")[:80]
 
@@ -1154,7 +1165,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             pass
 
     _prog("buscando", consulta)
-    em_cache = consulta_em_cache(db, owner, consulta)
+    em_cache = consulta_em_cache(db, owner, consulta) if usar_cache else None
     if em_cache is not None:
         return em_cache
 
