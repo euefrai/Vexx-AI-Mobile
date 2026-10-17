@@ -1,7 +1,7 @@
 # Relatório Júlia V5.5 — Research Intelligence 3.0
 
 Data: 17/10/2026 · Commits locais `b97493e`, `549a34f`, `c050d4d`, `75f5168`,
-`79517e1` · **Sem push/deploy**
+`79517e1`, `8c58bff` · **Sem push/deploy**
 
 ## Pedido
 
@@ -96,11 +96,40 @@ contornar proteções de sites** (CAPTCHA/bot-wall).
   - `até R$ 3000` é **teto de preço, não pedido de data** (não gera mais
     lacuna falsa de "datas").
 
+### 6. Correção pós-docs do smoke real (commit `8c58bff`)
+
+O smoke ao vivo pós-entrega achou 2 buscas que o índice já marcava como
+`ok` mas devolviam **lixo real** ("preço do fone bluetooth" → carros/SP,
+tarifas de metrô, CEAGESP). Diagnóstico com probes isolados: é flaky do
+índice geral para certos formatos de frase — nenhuma regra de "consertar a
+query" é confiável no lado do provedor. Correção no orquestrador, com
+testes congelados novos (6 em `test_search_core_v55.py`):
+
+- **Correspondência sem genéricos** (`_termos_correspondencia`/`_util_para_pedido`):
+  `preço`, `até`, `valor`, `melhor`, `reais`, `quanto custa`, `comprar`… não
+  provam correspondência ("preço" ⊂ "preços", "até" em "Entrega em até 2h")
+  e saem do cálculo; consulta 100% genérica não julga correspondência.
+- **Provedor com lixo não encerra a busca**: se os resultados do provedor
+  não contêm nenhum termo distintivo do pedido, o lixo **fica registrado**
+  (achados/etapas, honesto) mas a busca **segue para o próximo provedor** em
+  vez de encerrar como `ok`.
+- **Consulta enxuta na recuperação**: em `sem_correspondencia` com ≥ 2
+  termos distintivos, a recuperação tenta a forma sem genéricos, com números
+  e nomes intactos ("preço fone bluetooth até R$ 500" → "fone bluetooth
+  500"). A recuperação **não "conserta"** correspondência: o estado final é
+  recalculado sobre o resultado mesclado (recuperação de lixo continua
+  `sem_correspondencia`).
+- Efeito real medido (17/10/2026): "preço fone bluetooth até R$ 500" →
+  antes `ok` com 100% de lixo; agora lixo registrado + recuperação enxuta →
+  Shopee/KaBuM/Amazon/ML reais, e no shopping → **4 produtos KaBuM
+  `verificado`** dentro do orçamento em ~2,2 s. A query que já funcionava
+  ("fone bluetooth até R$ 500") segue no caminho rápido (~0,5 s).
+
 ## Prova executada
 
-- **Suíte completa: `601 passed, 4 skipped`** (~2 min 52 s) com
+- **Suíte completa: `607 passed, 4 skipped`** (~3 min 03 s) com
   `.venv\Scripts\python.exe -m pytest -q tests` — eram 528/4 antes do V5.5;
-  **+73 testes novos, nenhum removido**: search core 22, source_check 17,
+  **+79 testes novos, nenhum removido**: search core 28, source_check 17,
   shopping 15, research 11, jdui 5, evidence_graph +3.
 - `node --check` ok em `public/jdui.js` e `public/app.js`; node harness
   validando o selo/render do card sem "FAIL".
@@ -110,6 +139,11 @@ contornar proteções de sites** (CAPTCHA/bot-wall).
     visível no painel.
   - "notebook 16gb ram até R$ 3000" → 7,3 s, 1 alternativa próxima com
     **link verificado** e diferenças explícitas.
+  - Pós-docs (`8c58bff`): "preço fone bluetooth até R$ 500" e "preço do fone
+    bluetooth" → lixo era marcado `ok`; agora lixo registrado + provedor
+    trocado + recuperação enxuta → resultados reais
+    (Shopee/KaBuM/Amazon/ML e guias) com estado honesto em ~2,2 s; no
+    shopping → **4 produtos KaBuM `verificado`** dentro do orçamento.
 - **Auditoria de provedores ao vivo (17/10/2026)**: respondem — Bing HTML +
   RSS, Marginalia, Wikipédia opensearch, Stack Exchange, HN Algolia, PubMed,
   Open Library, Banco Mundial, BCB, Commons. Bloqueados no ambiente — DDG

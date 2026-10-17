@@ -89,7 +89,10 @@ duplicatas:
 | fallback (todos)     | bing → marginalia → wikipedia          |
 
 Os limites vêm do orçamento (`max_provedores`) e a busca alterna provedor
-quando um falha, é bloqueado ou volta vazio (até 3 tentativas por consulta).
+quando um falha, é bloqueado, volta vazio **ou devolve resultados que não
+correspondem ao pedido** (índice geral com lixo de outra busca): o provedor
+devolveu dados, o lixo fica registrado nos achados/etapas, mas a busca segue
+para o próximo provedor em vez de encerrar (até 3 tentativas por consulta).
 
 ## 5. Dedupe canônico (`canonizar_url`/`deduplicar`)
 
@@ -112,9 +115,15 @@ Pontuação por achado (resumo):
 - −1,5 para páginas dos próprios provedores (bing.com, google.com, ddg.org…);
 - −1,0 sem trecho.
 
-`correspondencia` = fração dos termos do pedido presentes nos 8 melhores;
-≤ 0,15 → estado `sem_correspondencia` (resultados existem, mas não
-respondem ao pedido — nunca "ok" falso).
+`correspondencia` = fração dos **termos distintivos** do pedido presentes nos
+8 melhores (`_termos_correspondencia`): genéricos de loja/busca — `preço`,
+`até`, `valor`, `melhor`, `barato`, `reais`, `quanto custa`, `comprar`… —
+ficam de fora porque não provam nada ("preço" ⊂ "preços", "até" dentro de
+"Entrega em até 2h"). ≤ 0,15 → estado `sem_correspondencia` (resultados
+existem, mas não respondem ao pedido — nunca "ok" falso). O mesmo critério
+(`_util_para_pedido`) decide se um achado "conta" para a busca continuar;
+consulta 100% genérica (sem termos distintivos) não permite julgar
+correspondência: nada é descartado.
 
 ## 7. Lacunas (`detectar_lacunas`)
 
@@ -142,10 +151,22 @@ pedido** (máx. 2, deduplicadas):
 - independência → `"<pedido> comparativo"`
 - acadêmica → `"<pedido> estudo artigo"`
 
+Além das lacunas: quando o estado é `sem_correspondencia` e o pedido tem
+≥ 2 termos distintivos, a **consulta enxuta** entra em primeiro lugar na
+recuperação — os mesmos termos do pedido sem os genéricos ("preço fone
+bluetooth até R$ 500" → "fone bluetooth 500"). Nada é acrescentado nem
+removido do pedido; números e nomes ficam intactos. Motivo real (17/10/2026):
+índices gerais devolvem lixo para certos formatos de consulta comercial
+("preço do fone bluetooth" → carros/SP, tarifas de metrô); a forma enxuta
+devolve exatamente o esperado.
+
 `pesquisar_com_recuperacao` roda **uma única** rodada extra quando há
 recuperação pendente; `limite_primeira` (8 s no fluxo rápido) adia quando a
 primeira rodada já consumiu o tempo — com motivo declarado
-(`recuperacao_adiada`), nunca silencioso.
+(`recuperacao_adiada`), nunca silencioso. A rodada extra **não "conserta"**
+correspondência que não existe: o estado final é recalculado sobre o
+resultado mesclado (se tudo continuou sem correspondência, o estado final é
+`sem_correspondencia`, não `ok`).
 
 No fluxo de agentes, as consultas de recuperação viram **novas frentes** no
 replanejamento (busca + leitura + análise), uma rodada extra, orçamento

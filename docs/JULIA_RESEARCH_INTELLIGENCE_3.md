@@ -121,6 +121,11 @@ Resumo do contrato público:
 - `detectar_lacunas(consulta, achados, classes, info)` e
   `_consultas_recuperacao(...)` → o que o pedido exige e as fontes não
   cobrem, com consultas complementares que preservam o pedido.
+- `_termos_correspondencia`/`_util_para_pedido`/`_correspondencia` →
+  correspondência sem genéricos de loja ("preço", "até", "melhor"…); provedor
+  que devolve só lixo não encerra a busca (lixo fica registrado, tenta o
+  próximo provedor) e `sem_correspondencia` acrescenta a **consulta enxuta**
+  (termos distintivos do pedido, números intactos) à recuperação.
 - `pesquisar(...)` → resultado com `achados`, `etapas`, `estado` +
   `estado_texto`, `provedores {usados, falhas, vazios, consultados}`,
   `classes`, `lacunas`, `consultas`, `recuperacao`, `descartes`,
@@ -271,10 +276,10 @@ Detalhes em [JULIA_SOURCE_VALIDATION.md](JULIA_SOURCE_VALIDATION.md).
 
 ## Testes
 
-Suíte completa: **601 passed, 4 skipped** (~2 min 52 s).
-Novos testes V5.5 (73):
+Suíte completa: **607 passed, 4 skipped** (~3 min 03 s).
+Novos testes V5.5 (79):
 
-- `tests/test_search_core_v55.py` — 22 (fixtures congelados de provedores,
+- `tests/test_search_core_v55.py` — 28 (fixtures congelados de provedores,
   orquestrador, recuperação, extração; sem rede).
 - `tests/test_source_check.py` — 17 (vereditos de link/imagem, SSRF,
   listagem × produto, formatos de imagem).
