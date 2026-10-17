@@ -174,14 +174,30 @@ def request(text):
     match = re.fullmatch(r'deixe (?:o |a )?(.+) transparente',t)
     if match:
         return {'action':'interact','op':'transparent','target':match[1]}
-    if re.search(r'\b(3d|tridimensional|girando)\b', t) and re.search(r'\b(mostr\w*|crie|exiba|quero|visualiz\w*)\b', t):
-        education = 'computer' if re.search(r'computador|placa-mae',t) else 'solar' if 'sistema solar' in t else 'geometry' if 'cubo' in t and re.search(r'didatico|faces|arestas|vertices|dimensoes',t) else ''
-        if education:
-            return {'action':'create','education':education}
+    if re.search(r'\b(3d|tridimensional|girando)\b', t):
+        verbs = re.search(
+            r"\b(mostr\w*|cri\w*|exib\w*|quer\w*|visualiz\w*|vizualiz\w*|faz\w*|faca|mont\w*|"
+            r"constru\w*|reconstru\w*|refac\w*|refaz\w*|recri\w*|gerar\w*|gere|"
+            r"desenh\w*|renderiz\w*|modela\w*)\b", t)
+        education = ('computer' if re.search(
+            r'computador|\bpc\b|\bdesktop\b|\bnotebook\b|\blaptop\b|\bcpu\b|processador|placa[- ]?mae', t)
+            else 'solar' if 'sistema solar' in t
+            else 'geometry' if 'cubo' in t and re.search(r'didatico|faces|arestas|vertices|dimensoes', t)
+            else '')
         kinds = [kind for word, kind in [('cubo', 'cube'), ('esfera', 'sphere'), ('cilindro', 'cylinder'), ('piramide', 'pyramid')]
                  if re.search(r'\b' + word + r's?\b', t)]
-        return {'action': 'create', 'kinds': kinds, 'model': MODEL_ID if 'glb' in t and 'cubo' in t else '',
-                'animate': 'girando' in t}
+        model = MODEL_ID if 'glb' in t and 'cubo' in t else ''
+        if verbs and education:
+            return {'action':'create','education':education}
+        if verbs and (kinds or model):
+            return {'action': 'create', 'kinds': kinds, 'model': model, 'animate': 'girando' in t}
+        # V5.4.1: continuações ("isso não está em 3D, reconstrua em 3D") não
+        # podem cair no LLM nem virar arte ASCII: reconstroem a cena real.
+        if re.search(r'\b(nao (esta|ta|e|ficou|ficava|parece)|reconstru\w*|refac\w*|refaz\w*|'
+                     r'recri\w*|de verdade|realista)\b', t):
+            return {'action': 'rebuild'}
+        if verbs:
+            return {'action': 'create', 'kinds': kinds, 'model': model, 'animate': 'girando' in t}
     return None
 
 
@@ -204,6 +220,12 @@ def respond(text, previous=None):
                                         'position': [(i - (len(req['kinds']) - 1) / 2) * 1.8, 0, 0],
                                         'description': 'Primitiva geométrica: ' + labels[kind].lower() + '.'})
         return 'Arraste para girar, use o zoom e selecione um objeto para ver seus detalhes.', validate(props)
+    if req['action'] == 'rebuild':
+        if previous is None:
+            return None  # cmd_model3d decide o que reconstruir (pedido anterior)
+        props = copy.deepcopy(validate(previous))
+        props['autoRotate'] = True
+        return 'Cena reconstruída em 3D. Arraste para girar e toque nas partes para explorar.', validate(props)
     if previous is None:
         return None  # Sem referência 3D: não captura ações de PC/arquivos.
     props = copy.deepcopy(validate(previous))

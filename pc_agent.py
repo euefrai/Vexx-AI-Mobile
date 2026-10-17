@@ -1940,6 +1940,12 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         partes_sistema.append(
             f"FORMATO OBRIGATÓRIO: responda em no máximo {_fmt['max_linhas']} "
             "linhas curtas, sem enrolação.")
+    if intencao.get("intencao") == "model3d":
+        partes_sistema.append(
+            "PEDIDO 3D: o visualizador 3D é o único canal para conteúdo tridimensional. "
+            "NUNCA represente objetos 3D com arte ASCII, desenhos de caracteres ou blocos "
+            "de código. Se não houver uma cena 3D válida na conversa, diga a limitação "
+            "claramente e sugira pedir a cena novamente (ex.: \"mostre um computador em 3D\").")
     # V4.9.1: pedido de produto → o worker faz a busca shopping dedicada
     # (com cards verificados); a pesquisa genérica síncrona é pulada aqui
     # para não duplicar carga no Render Free.
@@ -3210,6 +3216,22 @@ def cmd_model3d(db, texto, owner, conv, scene_state=''):
                 break
         if hint and previous is None:
             return 'Cena 3D indisponível nesta conversa; nenhuma alteração foi aplicada.'
+    if request['action'] == 'rebuild' and previous is None:
+        # V5.4.1: sem cena persistida ("isso não está em 3D, reconstrua em 3D"),
+        # recria a última cena 3D pedida pelo usuário em vez de deixar o LLM
+        # responder com texto/arte ASCII. Sem pedido 3D anterior, limitação honesta.
+        for (utext,) in db.execute(
+                "SELECT text FROM messages WHERE owner_id=? AND conversation_id=? "
+                "AND role='user' ORDER BY created_at DESC LIMIT 40",
+                (dono_valido(owner), conv)).fetchall():
+            anterior = model3d.request(utext or '')
+            if anterior and anterior.get('action') == 'create' and (
+                    anterior.get('education') or anterior.get('kinds') or anterior.get('model')):
+                request, texto = anterior, utext
+                break
+        if request['action'] != 'create':
+            return ('Ainda não há uma cena 3D nesta conversa para reconstruir. '
+                    'Peça, por exemplo: "mostre um computador em 3D" ou "crie um cubo em 3D".')
     result = model3d.respond(texto, previous)
     if not result:
         return None

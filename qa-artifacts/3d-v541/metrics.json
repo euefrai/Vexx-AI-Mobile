@@ -1,0 +1,29 @@
+{
+  "cards": 3,
+  "draws": 12,
+  "rotationDelta": 0.81,
+  "distance": {
+    "antes": 6,
+    "depois": 6.6000000000000005
+  },
+  "restaurado": {
+    "scene": "edu-computer",
+    "interaction": {
+      "selected": "cpu",
+      "hidden": [],
+      "isolated": "",
+      "exploded": false,
+      "transparent": [],
+      "view": "free",
+      "focus": "",
+      "step": 0,
+      "speed": 1,
+      "lessonPlaying": false
+    }
+  },
+  "errors": [],
+  "expectedAuth": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "checks": "pedido exato -> cena edu-computer, continuação exata -> rebuild, variação correção, sem ASCII/bloco de código, WebGL2 real com draws, arrasto gira, scroll amplia, seleção de parte, reload restaura, mobile sem overflow, LLM indisponível (preview)"
+}

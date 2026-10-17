@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+import intent
 import jdui
 import model3d
 from model3d_education import scene
@@ -103,4 +104,90 @@ def test_context_owner_conversation_and_latest_unsynced_state(tmp_path,monkeypat
                ('u-alice:test',latest,'0:0:model3d',json.dumps(state),'2026-10-16T20:00:00Z','u-alice'))
     db.commit()
     assert unpack(pc_agent.cmd_model3d(db,'Vista frontal','u-alice','edu-conv'))['interaction']['exploded']
+    db.close()
+
+
+# --- V5.4.1: pedidos naturais, continuações "reconstrua em 3D" e anti-ASCII ---
+
+def test_v541_pedidos_naturais_reconhecem_a_cena_de_computador():
+    for texto in ('Lucas, mostre um computador em 3D.', 'mostre um computador em 3D',
+                  'crie um PC tridimensional', 'monte um computador em 3D, por favor',
+                  'faz um desktop 3d', 'quero ver um notebook em 3D',
+                  'desenhe um computador 3D para mim'):
+        req = model3d.request(texto)
+        assert req == {'action': 'create', 'education': 'computer'}, texto
+        props = model3d.respond(texto)[1]
+        assert props['education'] == 'computer' and props['objects'], texto
+    cubo = model3d.respond('quero ver um cubo 3D')[1]
+    assert [o['kind'] for o in cubo['objects']] == ['cube']
+
+
+def test_v541_continuacoes_reconstroem_a_cena_existente():
+    for texto in ('Isso não está em 3D, reconstrua em 3D, por favor.',
+                  'Isso não é 3D, faça em 3D de verdade.',
+                  'não ficou em 3D, refaça em 3D',
+                  'reconstrua em 3D'):
+        assert model3d.request(texto) == {'action': 'rebuild'}, texto
+        assert intent.analisar(texto)['intencao'] == 'model3d', texto
+    original = scene('computer')
+    texto, novo = model3d.respond('Isso não está em 3D, reconstrua em 3D, por favor.', original)
+    assert novo and novo['education'] == 'computer' and novo['autoRotate']
+    assert novo['objects'] == model3d.validate(original)['objects']
+
+
+def test_v541_fluxo_pedido_continuacao_e_pc_sem_llm(tmp_path, monkeypatch):
+    db = pc_agent.open_db(tmp_path / 'v541.sqlite3')
+    monkeypatch.setattr(pc_agent, 'gerar_texto',
+                        lambda *a, **k: pytest.fail('Pedidos 3D não podem usar LLM'))
+    pedido = dict(conversation_id='conv-541', owner='u-alice', model='test')
+    first = pc_agent.ai_completa(db, dict(pedido, message_id='v541-user-01',
+                                          text='Lucas, mostre um computador em 3D.'), {'model': 'test'})
+    assert unpack(first['response_text'])['education'] == 'computer'
+    second = pc_agent.ai_completa(db, dict(pedido, message_id='v541-user-02',
+                                           text='Isso não está em 3D, reconstrua em 3D, por favor.'), {'model': 'test'})
+    nova = unpack(second['response_text'])
+    assert nova['education'] == 'computer' and nova['autoRotate']
+    third = pc_agent.ai_completa(db, dict(pedido, message_id='v541-user-03',
+                                          text='Isso não é 3D, faça em 3D de verdade.'), {'model': 'test'})
+    assert unpack(third['response_text'])['education'] == 'computer'
+    pc = pc_agent.ai_completa(db, dict(pedido, message_id='v541-user-04',
+                                       text='crie um PC tridimensional'), {'model': 'test'})
+    assert unpack(pc['response_text'])['education'] == 'computer'
+    # Nenhuma resposta pode conter arte ASCII ou código representando a cena.
+    for resposta in (first, second, third, pc):
+        texto = resposta['response_text']
+        assert '```' in texto and texto.count('```') == 2  # apenas o fence jdui
+        assert not any(ch in texto for ch in '┌└├╔╚█▓▒░║═╠╣')
+    db.close()
+
+
+def test_v541_reconstruir_recria_pedido_quando_a_resposta_foi_texto(tmp_path, monkeypatch):
+    db = pc_agent.open_db(tmp_path / 'v541b.sqlite3')
+    monkeypatch.setattr(pc_agent, 'gerar_texto',
+                        lambda *a, **k: pytest.fail('Reconstrução 3D não pode usar LLM'))
+    pc_agent.persist_messages(db, [
+        dict(id='v541b-user-01', conversation_id='conv-541b', origin='mobile', role='user',
+             text='Lucas, mostre um computador em 3D.', created_at='2026-10-16T12:00:00.000Z'),
+        dict(id='v541b-a100-r1', conversation_id='conv-541b', origin='mobile', role='assistant',
+             text='Desenho em texto que não é 3D.', created_at='2026-10-16T12:00:02.000Z')], 'u-alice')
+    out = pc_agent.ai_completa(db, {'message_id': 'v541b-user-02', 'conversation_id': 'conv-541b',
+                                    'text': 'Isso não está em 3D, reconstrua em 3D, por favor.',
+                                    'owner': 'u-alice'}, {'model': 'test'})
+    assert unpack(out['response_text'])['education'] == 'computer'
+    db.close()
+
+
+def test_v541_reconstruir_sem_referencia_e_honesto(tmp_path, monkeypatch):
+    db = pc_agent.open_db(tmp_path / 'v541c.sqlite3')
+    monkeypatch.setattr(pc_agent, 'gerar_texto',
+                        lambda *a, **k: pytest.fail('Sem cena, nada de LLM/ASCII'))
+    out = pc_agent.ai_completa(db, {'message_id': 'v541c-user-01', 'conversation_id': 'conv-541c',
+                                    'text': 'Isso não está em 3D, reconstrua em 3D, por favor.',
+                                    'owner': 'u-alice'}, {'model': 'test'})
+    texto = out['response_text']
+    assert '```jdui' not in texto
+    assert 'reconstruir' in texto and '3D' in texto
+    for owner, conv in (('u-bob', 'conv-541c'), ('u-alice', 'outra-conv')):
+        alheio = pc_agent.cmd_model3d(db, 'reconstrua em 3D', owner, conv)
+        assert alheio and '```jdui' not in alheio
     db.close()

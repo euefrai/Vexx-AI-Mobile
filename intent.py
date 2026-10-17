@@ -300,7 +300,7 @@ def analisar(texto: str, contexto: dict | None = None) -> dict:
             return _vazio()
         intencao, evidencias, secundarias = _detectar_principal(t)
         request_3d = model3d.request(texto)
-        if request_3d and (request_3d['action'] == 'create' or
+        if request_3d and (request_3d['action'] in ('create', 'rebuild') or
                            (contexto or {}).get('ultimos_resultados') == 'model3d'):
             intencao, evidencias, secundarias = 'model3d', ['pedido:3d', 'visualização:local'], []
         restricoes = _extrair_restricoes(t)
