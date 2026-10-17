@@ -77,7 +77,7 @@ export async function mount(root, props, saved, save, preview, status, start, ct
   canvas.setAttribute('aria-label', p.description + ' Setas giram; mais e menos ajustam o zoom.');
   stage.append(canvas); box.append(stage, tools, details); root.append(box);
   const group = new T.Group(), content = new T.Group(); group.add(content); scene.add(group);
-  const camera = new T.PerspectiveCamera(40,1,.1,100);
+  const camera = new T.PerspectiveCamera(38,1,.1,100);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const defaultView = {rotation:p.rotation.map(radians), distance:p.camera.distance, playing:p.autoRotate && !reduced.matches};
   let rotation = defaultView.rotation.slice(), distance = defaultView.distance, playing = defaultView.playing;
@@ -121,10 +121,11 @@ export async function mount(root, props, saved, save, preview, status, start, ct
     group.rotation.set(...(education?.viewRotation || rotation)); camera.position.set(0,0,distance); camera.lookAt(0,0,0);
     education?.focusCamera(distance);
     const animating=playing || education?.animating;
+    if (animating) renderer.shadowMap.needsUpdate = true;
     if (!animating || now-lastPaint >= 32) {renderer.render(scene,camera); lastPaint = now;}
     if (animating && !frame) frame = requestAnimationFrame(paint);
   }
-  function draw() {if (!dead && !frame) frame = requestAnimationFrame(paint);}
+  function draw() {if (renderer) renderer.shadowMap.needsUpdate = true; if (!dead && !frame) frame = requestAnimationFrame(paint);}
   function button(label, fn) {
     const b = element('button','jdui-btn',label); b.type = 'button';
     listen(b,'click',fn); tools.append(b); return b;
@@ -208,22 +209,34 @@ export async function mount(root, props, saved, save, preview, status, start, ct
   removalObserver.observe(document.body,{childList:true,subtree:true});
   try {
     renderer = new T.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'low-power'});
-    scene.add(new T.HemisphereLight(0xffffff,0x343449,p.lighting === 'studio' ? 2.5 : 2));
-    const light = new T.DirectionalLight(0xffffff,2); light.position.set(3,5,4); scene.add(light);
+    renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false;
+    scene.add(new T.HemisphereLight(0xdfe6ff,0x2a2d3d,p.lighting === 'studio' ? 2.2 : 1.9));
+    const light = new T.DirectionalLight(0xffffff,p.lighting === 'studio' ? 2.6 : 2.15); light.position.set(3.4,5.2,3.8); light.castShadow = true;
+    light.shadow.mapSize.set(512,512); light.shadow.camera.near = 1; light.shadow.camera.far = 20;
+    light.shadow.camera.left = -5; light.shadow.camera.right = 5; light.shadow.camera.top = 5; light.shadow.camera.bottom = -5;
+    light.shadow.bias = -.0004; light.shadow.normalBias = .02; scene.add(light);
+    const rim = new T.DirectionalLight(0xbcc8ff,p.lighting === 'studio' ? .85 : .6); rim.position.set(-4,2.2,-3.4); scene.add(rim);
+    const edgeMaterial = new T.LineBasicMaterial({color:0x0b0e18,transparent:true,opacity:.3,depthWrite:false});
+    function attachEdges(mesh, geometry) {
+      const lines = new T.LineSegments(new T.EdgesGeometry(geometry), edgeMaterial);
+      lines.userData.objectId = mesh.userData.objectId; lines.raycast = () => {}; mesh.add(lines);
+    }
     if (p.model) {
       status.textContent = 'Carregando modelo local…';
       const glb = await loadLocalModel(abort.signal,n => {status.textContent = `Carregando modelo: ${n} bytes recebidos…`;});
       if (dead || !root.isConnected) {disposeTree(glb); controller.dispose(); return;}
-      glb.traverse(o => {if (o.isMesh) {o.userData.objectId = 'demo-cube'; o.material.color.set(p.color);}}); content.add(glb);
+      glb.traverse(o => {if (o.isMesh) {o.userData.objectId = 'demo-cube'; o.material.color.set(p.color); o.material.roughness = .5; o.material.metalness = .1; o.castShadow = true; attachEdges(o, o.geometry);}}); content.add(glb);
     } else {
       const geometries=new Map();
       for (const item of p.objects) {
         let geometry=geometries.get(item.kind);
         if(!geometry){geometry = item.kind === 'cube' ? new T.BoxGeometry(...(p.education?[1,1,1]:[1.3,1.3,1.3])) : item.kind === 'sphere' ? new T.SphereGeometry(p.education ? .5 : .8,20,12) : item.kind === 'cylinder' ? new T.CylinderGeometry(.65,.65,1.5,20) : new T.ConeGeometry(.95,1.5,4);geometries.set(item.kind,geometry);}
-        const mesh = new T.Mesh(geometry,new T.MeshStandardMaterial({color:item.color || p.color,roughness:.6,metalness:.05}));
+        const mesh = new T.Mesh(geometry,new T.MeshStandardMaterial({color:item.color || p.color,roughness:.52,metalness:.08}));
         mesh.position.set(...item.position); mesh.rotation.set(...item.rotation.map(radians)); mesh.scale.setScalar(item.scale);
         if(item.dimensions)mesh.scale.multiply(new T.Vector3(...item.dimensions));
-        mesh.userData.objectId = item.id; content.add(mesh);
+        mesh.userData.objectId = item.id; mesh.castShadow = true; content.add(mesh);
+        if(item.kind === 'cube') attachEdges(mesh, geometry);
       }
     }
     const bounds = new T.Box3().setFromObject(content), center = bounds.getCenter(new T.Vector3()), extent = bounds.getSize(new T.Vector3());
@@ -233,8 +246,11 @@ export async function mount(root, props, saved, save, preview, status, start, ct
       center.set(0,0,0);extent.set(radius*2,radius*2,radius*2);
     }
     // Fit the diagonal so a rotated cube is not clipped in the initial camera view.
-    const fit = p.education==='solar' ? 3/Math.max(extent.x,.1) : 2.5/Math.max(extent.length(),.1);
+    const fit = p.education==='solar' ? 3/Math.max(extent.x,.1) : 2.45/Math.max(extent.length(),.1);
     content.position.copy(center).multiplyScalar(-fit*p.scale); content.scale.setScalar(fit*p.scale);
+    const placed = new T.Box3().setFromObject(content);
+    const ground = new T.Mesh(new T.CircleGeometry(9,48), new T.ShadowMaterial({opacity:.3}));
+    ground.rotation.x = -Math.PI/2; ground.position.y = placed.min.y - .02; ground.receiveShadow = true; scene.add(ground);
     if(p.education){
       education=attachEducation({props:p,saved,content,group,camera,reduced,menu,panel:box,changed:()=>{
         selected=education.state.selected;detailsOpen=true;updateDetails();persist();draw();status.textContent='Ajuste aplicado à cena 3D.';

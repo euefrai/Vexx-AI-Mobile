@@ -268,7 +268,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .model3d [hidden] { display: none !important; }
 .m3-description, .m3-status { font-size: .85rem; color: var(--muted, #b0b4c4); }
 .m3-preview { width: 100%; max-height: 220px; object-fit: contain; border-radius: 12px; }
-.m3-stage { width: 100%; height: 300px; background: radial-gradient(ellipse, #2a2e41, #161821); border-radius: 14px; overflow: hidden; }
+.m3-stage { width: 100%; height: 300px; background: radial-gradient(120% 90% at 50% 10%, #333a52 0%, #1d2130 55%, #14161f 100%); border: 1px solid #3a4158; border-radius: 14px; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,.05); }
+.m3-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.m3-chip { display: inline-block; padding: 3px 10px; border: 1px solid #4a5270; border-radius: 999px; font-size: .72rem; letter-spacing: .02em; color: #cdd5ee; background: #232838; }
+.m3-chip-muted { border-color: #3a4158; color: #aeb7cf; background: transparent; }
+.m3-source { font-size: .75rem; color: #97a0ba; margin-top: 4px; }
 .m3-canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 .m3-canvas:active { cursor: grabbing; }
 .m3-tools { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 12px; }
