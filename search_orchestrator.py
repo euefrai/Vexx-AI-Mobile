@@ -8,7 +8,8 @@ Responsabilidades (nada mais):
    relacionados, decomposição) — SEM alterar números, marcas, orçamento,
    condições ou entidades do pedido.
 4. Buscar com orçamento (nº de consultas/provedores e tempo), alternando
-   provedor quando um falha, é bloqueado ou volta vazio.
+   provedor quando um falha, é bloqueado, volta vazio ou devolve
+   resultados que não correspondem ao pedido (índice geral com lixo).
 5. Deduplicar por URL canônica e ranquear por correspondência real.
 6. Detectar lacunas (o que o pedido exige e as fontes não cobrem) e
    sugerir/executar buscas complementares limitadas.
@@ -107,6 +108,19 @@ _ESTOPO = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
            "pesquise", "busque", "procure", "encontre", "veja", "me", "diga"}
 _GENERICOS = {"comprar", "oferta", "promo", "promoção", "promocao", "preço",
               "preco", "valor", "melhor", "barato", "brasil", "site", "site:"}
+# Palavras que NÃO provam correspondência: aparecem em qualquer página de
+# loja/busca ("preço", "até", "melhor"…) e por isso não podem ser usadas
+# para afirmar que um resultado responde ao pedido (relevância de índice
+# geral costuma voltar lixo quando só esses termos "batem").
+_GENERICOS_CORRESPONDENCIA = {
+    "comprar", "compr", "compra", "compre", "oferta", "ofertas", "promo",
+    "promoção", "promocao", "preço", "preco", "preços", "precos", "valor",
+    "valores", "melhor", "melhores", "barato", "barata", "brasil", "site",
+    "site:", "até", "ate", "hoje", "reais", "quanto", "custa", "custam",
+    "onde", "encontrar", "encontre", "loja", "lojas", "vale", "pena",
+    "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar",
+    "pesquisar", "buscar", "procurar", "queria", "preciso",
+}
 
 
 def _sem_acentos(texto: str) -> str:
@@ -117,6 +131,35 @@ def _sem_acentos(texto: str) -> str:
 def _termos(texto: str, minimo: int = 3) -> list:
     return [t for t in re.findall(r"[0-9a-zà-ú][0-9a-zà-ú\-\+\.]*", (texto or "").lower())
             if len(t) >= minimo and t not in _ESTOPO]
+
+
+def _termos_correspondencia(consulta: str) -> list:
+    """Termos do pedido que provam correspondência (sem genéricos de loja)."""
+    return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
+
+
+def _util_para_pedido(a: dict, termos: list) -> bool:
+    """O achado responde ao pedido? (menciona algum termo não-genérico).
+
+    Sem termos aproveitáveis no pedido, todo achado conta como útil —
+    não há como distinguir correspondência melhor.
+    """
+    if not termos:
+        return True
+    texto = ((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
+    return any(t in texto for t in termos)
+
+
+def _correspondencia(achados: list, termos: list) -> float:
+    """Fração dos termos (não-genéricos) presentes nos melhores achados."""
+    topo = (achados or [])[:8]
+    if not topo:
+        return 0.0
+    if not termos:
+        return 1.0
+    juntos = " ".join(((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
+                      for a in topo)
+    return round(sum(1 for t in termos if t in juntos) / len(termos), 3)
 
 
 def classificar(consulta: str) -> dict:
@@ -478,8 +521,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     usados = {}
     consultas_feitas = 0
     provedor_indice = 0
+    termos_c = _termos_correspondencia(consulta)
+
+    def _uteis() -> int:
+        return sum(1 for a in achados if _util_para_pedido(a, termos_c))
+
     for i, q in enumerate(consultas):
-        if achados and len(achados) >= int(orc["min_resultados"]) and i > 0:
+        if _uteis() >= int(orc["min_resultados"]) and i > 0:
             break
         if time.monotonic() - t0 > float(orc["timeout_total"]):
             etapas.append("orçamento de tempo esgotado")
@@ -499,6 +547,15 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 etapas.append(f"{nome}: {len(achados_novos)} resultados "
                               f"({q[:40]})")
                 achados.extend(achados_novos)
+                if achados_novos and termos_c and not any(
+                        _util_para_pedido(a, termos_c) for a in achados_novos):
+                    # resultados existem, mas nenhum responde ao pedido:
+                    # segue para o próximo provedor em vez de encerrar aqui
+                    etapas.append(f"{nome}: sem correspondência com o pedido; "
+                                  f"tentando outro provedor ({q[:40]})")
+                    provedor_indice += 1
+                    tentativa_provedor += 1
+                    continue
                 provedor_indice += 1
                 break
             except sp.ErroProvedor as exc:
@@ -517,25 +574,24 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 provedor_indice += 1
                 tentativa_provedor += 1
                 continue
-        if provedor_indice >= len(nomes) and len(achados) >= int(orc["min_resultados"]):
+        if provedor_indice >= len(nomes) and _uteis() >= int(orc["min_resultados"]):
             break
 
     unicos, descartes = deduplicar(achados)
     ranqueados = ranquear(unicos, consulta, info["classes"], info)
     # correspondência: fração dos termos do pedido presentes nos melhores
-    termos = _termos(consulta)
-    topo = ranqueados[:8]
-    if termos and topo:
-        juntos = " ".join(((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
-                          for a in topo)
-        presentes = sum(1 for t in termos if t in juntos)
-        correspondencia = round(presentes / len(termos), 3)
-    elif topo:
-        correspondencia = 1.0
-    else:
-        correspondencia = 0.0
+    # (só termos que provam correspondência; genéricos de loja não contam)
+    correspondencia = _correspondencia(ranqueados, termos_c)
     lacunas = detectar_lacunas(consulta, ranqueados, info["classes"], info)
     estado = _estado_final(ranqueados, falhas, vazios, consultas_feitas, correspondencia)
+    recuperacao = _consultas_recuperacao(consulta, info["classes"], info, lacunas)
+    if estado == "sem_correspondencia" and len(termos_c) >= 2:
+        # consulta enxuta: todos os termos distintivos do pedido, sem os
+        # genéricos que fazem índices gerais devolverem lixo; nada é
+        # acrescentado nem removido do pedido (números e nomes intactos)
+        enxuta = " ".join(termos_c)[:200]
+        if enxuta.lower() != (consulta or "").strip().lower() and enxuta not in recuperacao:
+            recuperacao.insert(0, enxuta)
     return {
         "achados": ranqueados[:max(6, max_resultados * 2)],
         "etapas": etapas,
@@ -546,7 +602,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         "classes": info["classes"],
         "lacunas": lacunas,
         "consultas": consultas[:consultas_feitas],
-        "recuperacao": _consultas_recuperacao(consulta, info["classes"], info, lacunas),
+        "recuperacao": recuperacao,
         "descartes": descartes[:20],
         "correspondencia": correspondencia,
         "segundos": round(time.monotonic() - t0, 2),
@@ -584,16 +640,23 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
     # merge honesto: marca a rodada de recuperação nas etapas
     res["etapas"] = (res.get("etapas", []) + ["— recuperação por lacuna —"]
                      + extra.get("etapas", []))
-    res["achados"] = ranquear(
+    merged = ranquear(
         deduplicar(res.get("achados", []) + extra.get("achados", []))[0],
         consulta, res.get("classes", []), {"temporal": False})
+    res["achados"] = merged
     res["descartes"] = (res.get("descartes", []) + extra.get("descartes", []))[:20]
     res["lacunas"] = extra.get("lacunas", res.get("lacunas", []))
-    res["estado"] = extra.get("estado") if not res.get("achados") else (
-        "ok" if len(res["achados"]) >= 2 else "parcial")
+    # estado/correspondência recalculados sobre o resultado final (honesto:
+    # a rodada de recuperação não "conserta" correspondência que não existe)
+    termos_c = _termos_correspondencia(consulta)
+    res["correspondencia"] = _correspondencia(merged, termos_c)
+    if not merged:
+        res["estado"] = extra.get("estado", res.get("estado", "sem_resultados"))
+    elif res["correspondencia"] <= 0.15 and termos_c:
+        res["estado"] = "sem_correspondencia"
+    else:
+        res["estado"] = "ok" if len(merged) >= 2 else "parcial"
     res["estado_texto"] = CODIGO_TEXTO.get(res["estado"], "")
-    res["correspondencia"] = max(res.get("correspondencia", 0.0),
-                                 extra.get("correspondencia", 0.0))
     res["segundos"] = round(res.get("segundos", 0.0) + extra.get("segundos", 0.0), 2)
     res["recuperou"] = True
     return res

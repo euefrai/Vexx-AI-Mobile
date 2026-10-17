@@ -274,6 +274,105 @@ def test_pesquisar_sem_correspondencia_nao_finge(monkeypatch):
     assert res["estado"] == "sem_correspondencia"
 
 
+# ── Correspondência sem genéricos + resgate de provedor (junk do índice) ──
+
+JUNK_BING = {"titulo": "Receita de bolo", "url": "https://cozinha.example/b",
+             "trecho": "modo de preparo", "origem": "bing", "tipo": "pagina"}
+
+
+def test_termos_correspondencia_ignoram_genericos_de_loja():
+    # genéricos ("preço", "até", "R$") não provam correspondência
+    assert orch._termos_correspondencia("preço fone bluetooth até R$ 500") == \
+        ["fone", "bluetooth", "500"]
+    assert orch._termos_correspondencia("qual o melhor preço?") == []
+    termos = orch._termos_correspondencia("preço fone bluetooth até R$ 500")
+    generico = {"titulo": "Entrega em até 2h — compare preços, ganhe cashback",
+                "trecho": "Melhor preço, ofertas e promoções em São Paulo"}
+    real = {"titulo": "Fone Bluetooth JBL por R$ 500",
+            "trecho": "Fone de ouvido bluetooth com preço verificado"}
+    assert orch._util_para_pedido(generico, termos) is False
+    assert orch._util_para_pedido(real, termos) is True
+    assert orch._util_para_pedido(generico, []) is True  # sem termos: indefinível
+
+
+def test_pesquisar_junk_nao_encerra_e_tenta_proximo_provedor(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        if nome == "bing":
+            return [dict(JUNK_BING)]
+        return [dict(a) for a in ACHADOS_OK]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("consumo da placa a em jogos",
+                         provedores=["bing", "marginalia"], orcamento=_orcamento_1())
+    assert res["estado"] == "ok" and res["correspondencia"] >= 0.5
+    assert res["provedores"]["usados"] == {"bing": 1, "marginalia": 1}
+    assert any("sem correspondência com o pedido" in e for e in res["etapas"])
+    urls = [a["url"] for a in res["achados"]]
+    assert "https://cozinha.example/b" in urls  # lixo registrado, nunca apagado
+    assert all(a["url"] in urls for a in ACHADOS_OK)
+
+
+def test_pesquisar_junk_em_todos_os_provedores_vira_sem_correspondencia(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [dict(JUNK_BING, origem=nome, url=f"https://cozinha.example/{nome}")]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("consumo da placa a em jogos",
+                         provedores=["bing", "marginalia"], orcamento=_orcamento_1())
+    assert res["estado"] == "sem_correspondencia"
+    assert res["provedores"]["usados"] == {"bing": 1, "marginalia": 1}
+    assert res["achados"]  # nada é apagado; só não se finge correspondência
+
+
+def test_recuperacao_tambem_junk_nao_vira_ok(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [dict(JUNK_BING)]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar_com_recuperacao("quanto custa a placa a?",
+                                         max_resultados=4, orcamento=_orcamento_1())
+    assert res["recuperou"] is True
+    assert res["estado"] == "sem_correspondencia"  # recuperação não "conserta"
+
+
+def test_sem_correspondencia_declara_consulta_enxuta(monkeypatch):
+    monkeypatch.setattr(sp, "buscar", lambda nome, consulta, limite=6, timeout=10.0:
+                        [dict(JUNK_BING, origem=nome)])
+    res = orch.pesquisar("preço fone bluetooth até R$ 500", provedores=["bing"],
+                         orcamento=_orcamento_1())
+    assert res["estado"] == "sem_correspondencia"
+    # enxuta = só os termos distintivos do pedido, sem genéricos; número intacto
+    assert res["recuperacao"][0] == "fone bluetooth 500"
+
+
+def test_recuperacao_enxuta_acha_o_que_o_indice_devolveu_como_lixo(monkeypatch):
+    chamadas = []
+    REAIS = [
+        {"titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF",
+         "url": "https://kabum.example/fones",
+         "trecho": "fone de ouvido bluetooth por R$ 500", "tipo": "pagina"},
+        {"titulo": "Fone Bluetooth JBL por R$ 500",
+         "url": "https://loja.example/fone",
+         "trecho": "fone bluetooth 500 reais com garantia", "tipo": "pagina"},
+    ]
+
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        chamadas.append(consulta)
+        if "preço" in consulta.lower():
+            return [dict(JUNK_BING, origem=nome, url=f"https://cozinha.example/{nome}")]
+        return [dict(a, origem=nome) for a in REAIS]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar_com_recuperacao("preço fone bluetooth até R$ 500",
+                                         max_resultados=6, orcamento=_orcamento_1())
+    assert "fone bluetooth 500" in chamadas  # rodada de recuperação usou a enxuta
+    assert res["recuperou"] is True and res["estado"] == "ok"
+    assert res["correspondencia"] >= 0.5
+    urls = [a["url"] for a in res["achados"]]
+    assert all(a["url"] in urls for a in REAIS)  # resultado real entra
+    assert "https://cozinha.example/bing" in urls  # e o lixo segue registrado
+
+
 # ── Recuperação por lacuna (uma rodada, honesta) ─────────────────────
 
 R1 = {"titulo": "Fonte um sobre a placa a", "url": "https://f1.example/a",
