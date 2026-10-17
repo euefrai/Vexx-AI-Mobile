@@ -57,7 +57,9 @@ t('svg-inline', hs.includes('<svg') && hs.includes('<rect'));
 t('svg-no-script', !hs.includes('<script'));
 t('svg-no-onclick', !hs.includes('onclick'));
 const hi = renderMarkdown('olha ![gato fofo](https://example.com/gato.jpg) aqui');
-t('img-render', hi.includes('class="chat-img"') && hi.includes('onerror='));
+t('img-render', hi.includes('class="chat-img"') && hi.includes('referrerpolicy="no-referrer"') && !hi.includes('onerror'));
+const hx = renderMarkdown('![a" onerror="alert(1)](https://example.com/x.png)');
+t('img-alt-escape', hx.includes('alt="a&quot; onerror=&quot;alert(1)"') && !hx.includes('onerror="'));
 t('img-src-intacto', hi.includes('src="https://example.com/gato.jpg"') && !hi.includes('src="<a'));
 const mdReal = '[Mostrando uma imagem de Tom e Jerry]\n\n![tom do desenho tom and jerry](https://loremflickr.com/800/500/tom%20do%20desenho%20tom%20and%20jerry)';
 const hr = renderMarkdown(mdReal);
@@ -403,3 +405,17 @@ def test_render_markdown_no_node():
                            capture_output=True, text=True, timeout=60)
         assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
         assert 'FAIL' not in r.stdout
+
+
+def test_chat_imagens_csp_e_scroll_ancorado():
+    """Regressão (print do usuário): o CSP do app bloqueia onerror inline,
+    então imagem que falha vira aviso clicável via listener de captura; e o
+    scroll só acompanha o fim quando o usuário está no fim (sem 'puxões')."""
+    js = APP_JS.read_text(encoding='utf-8')
+    assert 'onerror=' not in js
+    assert 'referrerpolicy="no-referrer"' in js
+    assert 'imagemChatFalhou' in js and 'marcarImagensChat' in js and 'ancorarAltura' in js
+    assert "conversation.addEventListener('error'" in js
+    assert 'chatStick' in js and js.count('chatStick') >= 5
+    css = (RAIZ / 'public' / 'styles.css').read_text(encoding='utf-8')
+    assert '.image-unavailable' in css

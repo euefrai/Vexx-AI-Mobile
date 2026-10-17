@@ -400,8 +400,7 @@ function inlineFmt(s, sources = {}) {
   s = s.replace(/!\[([^\]]{0,120})\]\(([^)\s]+)\)/g, (m, alt, url) => {
     const u = validUrl(url);
     if (!u) return esc(m);
-    return keep('<img class="chat-img" loading="lazy" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" '
-      + 'onerror="this.onerror=null;this.classList.add(\'image-unavailable\')" />');
+    return keep('<img class="chat-img" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" />');
   });
   s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>'));
   s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
@@ -616,12 +615,71 @@ function renderMarkdown(text) {
 }
 
 /* ----- Render ----- */
-function nearBottom(el) { return el.scrollHeight - el.scrollTop - el.clientHeight < 240; }
+let chatStick = true;   // só acompanha o fim se o usuário está no fim
+let lastScrollTop = 0;
+function nearBottom(el) { return el.scrollHeight - el.scrollTop - el.clientHeight < 120; }
 function scrollChat(force) {
-  if (force || nearBottom(conversation)) conversation.scrollTop = conversation.scrollHeight;
+  if (force) chatStick = true;
+  if (chatStick) conversation.scrollTop = conversation.scrollHeight;
 }
-conversation.addEventListener('scroll', () => { $('scrollFab').hidden = nearBottom(conversation); });
-$('scrollFab').addEventListener('click', () => { conversation.scrollTop = conversation.scrollHeight; });
+conversation.addEventListener('scroll', () => {
+  const st = conversation.scrollTop;
+  if (st < lastScrollTop - 2) chatStick = false;   // rolagem para cima desarma
+  else if (conversation.scrollHeight - st - conversation.clientHeight < 24) chatStick = true;
+  lastScrollTop = st;
+  $('scrollFab').hidden = nearBottom(conversation);
+});
+$('scrollFab').addEventListener('click', () => scrollChat(true));
+// Imagens do chat: o CSP do app bloqueia onerror inline, então o fallback é
+// um listener de captura (error nao borbulha). Falha vira aviso clicavel e
+// mudanças de altura fora da tela são compensadas para o texto não "pular".
+function marcarImagensChat(raiz) {
+  if (!raiz || !raiz.querySelectorAll) return;
+  raiz.querySelectorAll('img.chat-img').forEach(img => {
+    if (!img.dataset.ciAltura) img.dataset.ciAltura = String(Math.round(img.getBoundingClientRect().height));
+  });
+}
+function ancorarAltura(antes, depois) {
+  const delta = depois.height - antes.height;
+  if (!delta) return;
+  if (chatStick) { conversation.scrollTop = conversation.scrollHeight; return; }
+  const caixa = conversation.getBoundingClientRect();
+  if (depois.bottom <= caixa.top + 4) conversation.scrollTop += delta;
+}
+function imagemChatFalhou(img) {
+  if (img.dataset.ciFalhou === '1') return;
+  if (/^http:\/\//i.test(img.src) && img.dataset.ciHttps !== '1') {
+    img.dataset.ciHttps = '1';   // CSP permite só https: tenta o upgrade antes de desistir
+    img.src = img.src.replace(/^http:\/\//i, 'https://');
+    return;
+  }
+  img.dataset.ciFalhou = '1';
+  const antes = img.getBoundingClientRect();
+  const chip = document.createElement('span');
+  chip.className = 'image-unavailable';
+  chip.append('🖼️ imagem indisponível');
+  if (/^https?:/i.test(img.src)) {
+    chip.append(' — ');
+    const a = document.createElement('a');
+    a.href = img.src; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.textContent = 'abrir link';
+    chip.appendChild(a);
+  }
+  img.replaceWith(chip);
+  ancorarAltura(antes, chip.getBoundingClientRect());
+}
+conversation.addEventListener('error', e => {
+  const img = e.target;
+  if (img && img.tagName === 'IMG' && img.classList.contains('chat-img') && img.isConnected) imagemChatFalhou(img);
+}, true);
+conversation.addEventListener('load', e => {
+  const img = e.target;
+  if (!img || img.tagName !== 'IMG' || !img.classList.contains('chat-img')) return;
+  const depois = img.getBoundingClientRect();
+  const antes = { height: Number(img.dataset.ciAltura || '0') };
+  img.dataset.ciAltura = String(Math.round(depois.height));
+  ancorarAltura(antes, depois);
+}, true);
 
 function appendMessage(row) {
   if (streamDraft && streamDraft.id === row.id && streamDraft.owner === currentUid) {
@@ -647,6 +705,7 @@ function appendMessage(row) {
         : '<p>…</p>');
     content.appendChild(bubble);
   }
+  marcarImagensChat(bubble);
   const jslots = takeJduiSlots();
   if (jslots.length && typeof JDUI !== 'undefined') {
     try {
@@ -709,6 +768,7 @@ function paintStreaming(replyId, text) {
     el.replaceChildren(el._streamProse, el._streamComponents);
   }
   el._streamProse.innerHTML = renderMarkdown(text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
+  marcarImagensChat(el._streamProse);
   const jslots = takeJduiSlots();
   const signature = JSON.stringify(jslots);
   // Keep mounted controls and their focus while only the surrounding prose changes.

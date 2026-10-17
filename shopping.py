@@ -1237,6 +1237,24 @@ def eh_followup(texto: str) -> bool:
                 ("compar" in t and "os dois" in t))
 
 
+_FOLLOWUP_FOTOS = re.compile(
+    r"(\btem fotos?\b|\bver as (fotos?|imagens?)\b|\bquero (ver )?(as )?(fotos?|imagens?)\b|"
+    r"\bmostra(r)? (as )?(fotos?|imagens?)\b|"
+    r"\bmanda(r)? (as |uma )?(fotos?|imagens?)\b|"
+    r"\b(fotos?|imagens?) (deles|delas|desses|dessas)\b|"
+    r"\b(fotos?|imagens?) (dos?|das?) (produtos?|modelos?|itens|resultados|opções|opcoes)\b)",
+    re.IGNORECASE)
+
+
+def quer_fotos(texto: str) -> bool:
+    """Pedido de fotos ligado a produtos de uma consulta anterior.
+
+    Nunca dispara busca nova: o worker reusa a última consulta
+    (determinístico, com cards e imagens verificadas); sem consulta
+    anterior, o fluxo normal segue (LLM/imagem)."""
+    return bool(_FOLLOWUP_FOTOS.search(texto or ""))
+
+
 def responder_followup(db, owner: str, conv: str, texto: str) -> dict | None:
     """Retorna {texto, fence} ou None (sem consulta anterior)."""
     ultima = ultima_consulta(db, owner, conv)
@@ -1267,6 +1285,9 @@ def responder_followup(db, owner: str, conv: str, texto: str) -> dict | None:
     elif re.search(r"mais mem|mais ram", t):
         ordenados.sort(key=lambda p: -((_ram_do_produto(p) or (0, 0))[0]))
         cab = "Por memória RAM (física primeiro):"
+    elif re.search(r"fotos?|imagens?", t):
+        ordenados.sort(key=lambda p: (not p.get("imagem"),))  # com foto primeiro
+        cab = "Opções guardadas da última pesquisa (com foto primeiro):"
     else:
         cab = "Opções guardadas da última pesquisa:"
     linhas = [cab] + [f"- **{p['nome']}** — {p['preco_texto']} ({p.get('loja', '')})"

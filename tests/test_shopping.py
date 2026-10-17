@@ -400,6 +400,13 @@ def test_followups_reusam_consulta():
     r2 = shopping.responder_followup(db, "ana", "c1", "compare os dois primeiros")
     assert r2 and "productcompare" in r2["fence"]
     assert shopping.responder_followup(db, "ana", "sem-historico", "os mais baratos") is None
+    # Pedido de fotos: reusa a consulta (sem busca nova) e mostra cards com imagem.
+    assert shopping.quer_fotos("tem fotos deles?")
+    assert shopping.quer_fotos("me mostra as imagens")
+    assert not shopping.quer_fotos("quero comprar um celular")
+    r3 = shopping.responder_followup(db, "ana", "c1", "tem fotos deles?")
+    assert r3 and "productgrid" in r3["fence"] and '"imagem"' in r3["fence"]
+    assert "com foto primeiro" in r3["texto"]
 
 
 def test_apagar_dados_inclui_shopping():

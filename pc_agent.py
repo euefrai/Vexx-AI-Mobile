@@ -3412,7 +3412,10 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
-        # V4.9.1: follow-ups de shopping reusam a última consulta (sem LLM/rede).        if shopping.eh_followup(prep.get("user_text", "")):
+        # V4.9.1: follow-ups de shopping (inclui "tem fotos?") reusam a
+        # última consulta — sem LLM/rede; as imagens vêm dos cards verificados.
+        if shopping.eh_followup(prep.get("user_text", "")) or \
+                shopping.quer_fotos(prep.get("user_text", "")):
             fup = shopping.responder_followup(db, owner, conv, prep.get("user_text", ""))
             if fup:
                 texto_fup = fup["texto"] + (fup.get("fence") or "")
