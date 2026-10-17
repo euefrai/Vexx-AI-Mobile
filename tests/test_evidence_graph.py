@@ -135,3 +135,54 @@ def test_auditor_20():
                              {"O café rende 5% em testes.": {"estado": "SUPPORTED"}},
                              [{"id": "E1"}])
     assert ok["ok"] is True
+
+
+def _q(valor, unidade):
+    return {"texto": "x", "condicoes": {"quantidades": [{"valor": valor, "unidade": unidade}],
+                                        "datas": [], "comparado_a": "", "metrica": ""}}
+
+
+def test_v55_divergencia_converte_unidades_reais():
+    # W × kW com valores diferentes: mesma dimensão (conversão real) → divergência
+    r = eg.investigar_divergencia(_q(65.0, "W"), _q(0.095, "kW"), "S1", "S2")
+    assert r["tipo"] == "valor_divergente" and r["status"] == "em_aberto"
+    assert "65" in r["explicacao"] and "0.095" in r["explicacao"]
+    assert "dimensão" in r["explicacao"] and r["follow_up"]
+    # 65 W == 0,065 kW: sem divergência inventada
+    assert eg.investigar_divergencia(_q(65.0, "W"), _q(0.065, "kW"), "S1", "S2")["tipo"] \
+        == "inconclusivo"
+    # armazenamento gb × tb
+    r2 = eg.investigar_divergencia(_q(512.0, "gb"), _q(0.6, "tb"), "S1", "S2")
+    assert r2["tipo"] == "valor_divergente" and "512" in r2["explicacao"]
+    # dimensões incompatíveis continuam unidade_ou_metrica (nunca converte)
+    r3 = eg.investigar_divergencia(_q(65.0, "W"), _q(10.0, "h"), "S1", "S2")
+    assert r3["tipo"] == "unidade_ou_metrica"
+    # unidade desconhecida dos dois lados: mesmo rótulo, comparação legada preservada
+    r4 = eg.investigar_divergencia(_q(10.0, "xpto"), _q(20.0, "xpto"), "S1", "S2")
+    assert r4["tipo"] == "valor_divergente" and "Mesma unidade" in r4["explicacao"]
+
+
+def test_v55_fonte_desatualizada_deterministica():
+    assert eg.fonte_desatualizada({"publicado_em": "2019-03-01"}, ano_ref=2026) is True
+    assert eg.fonte_desatualizada({"publicado_em": "2025-01-10"}, ano_ref=2026) is False
+    assert eg.fonte_desatualizada({"year": 2024}, ano_ref=2026) is False  # limite exato
+    assert eg.fonte_desatualizada({"year": 2023}, ano_ref=2026) is True
+    assert eg.fonte_desatualizada({}) is False  # sem data: não acusa
+    assert eg.fonte_desatualizada({"publicado_em": "sem data"}) is False
+    assert eg.fonte_desatualizada({"publicado_em": "2020"}, ano_ref=2026,
+                                  idade_max_anos=10) is False
+
+
+def test_v55_auditor_lista_fontes_desatualizadas_sem_mudar_ok():
+    import datetime as _dt
+    ano_atual = _dt.datetime.now(_dt.timezone.utc).year
+    rep = eg.auditar_resposta(
+        "Veja [E1].",
+        [{"texto": "O café rende 5% em testes."}],
+        {"O café rende 5% em testes.": {"estado": "SUPPORTED"}},
+        [{"id": "E1", "publicado_em": "2017-05-01"},
+         {"id": "E2", "year": ano_atual}, {"id": "E3"}])
+    assert rep["fontes_desatualizadas"] == ["E1"]
+    assert rep["ok"] is True  # informativo: não bloqueia sozinho
+    ruim = eg.auditar_resposta("Veja [E9].", [], {}, [{"id": "E1", "publicado_em": "2010"}])
+    assert ruim["fontes_desatualizadas"] == ["E1"] and ruim["ok"] is False

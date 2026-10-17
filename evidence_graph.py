@@ -300,9 +300,9 @@ UNIDADES_CONVERSIVEIS = {"W", "kW", "km", "m", "kg", "g", "C", "F", "%"}
 def _mesma_medida(qa: dict, qb: dict) -> bool:
     ua, ub = (qa.get("unidade") or ""), (qb.get("unidade") or "")
     if ua == ub:
-        return True
-    pares = ({"W", "kW"}, {"km", "m"}, {"kg", "g"}, {"C", "F"})
-    return any({ua, ub} == p for p in pares)
+        return True  # inclui ambas vazias: sem unidade declarada, não é divergência de medida
+    import units as _u
+    return _u.compativeis({"unidade": ua}, {"unidade": ub})
 
 
 def investigar_divergencia(claim_a: dict, claim_b: dict, fonte_a: str, fonte_b: str) -> dict:
@@ -316,11 +316,29 @@ def investigar_divergencia(claim_a: dict, claim_b: dict, fonte_a: str, fonte_b: 
                 "explicacao": f"Medidas distintas ({qa[0].get('unidade')} × {qb[0].get('unidade')}): "
                               "podem não falar da mesma coisa.",
                 "follow_up": [f"{qa[0].get('unidade')} vs {qb[0].get('unidade')} metodologia medição"]}
-    if qa and qb and qa[0].get("unidade") == qb[0].get("unidade") and qa[0]["valor"] != qb[0]["valor"]:
-        return {"tipo": "valor_divergente", "status": "em_aberto",
-                "explicacao": f"Mesma unidade, valores distintos ({qa[0]['valor']} × {qb[0]['valor']}). "
-                              "Verificar metodologia, data e condições.",
-                "follow_up": ["metodologia medição", "data atualização dado"]}
+    if qa and qb:
+        import units as _u
+        qa0, qb0 = qa[0], qb[0]
+        ua, ub = (qa0.get("unidade") or ""), (qb0.get("unidade") or "")
+        qa_n = {"valor": qa0.get("valor"), "unidade": ua}
+        qb_n = {"valor": qb0.get("valor"), "unidade": ub}
+        converteis = _u.compativeis(qa_n, qb_n)  # mesma dimensão, ambas conhecidas
+        if ua == ub or converteis:
+            if converteis:
+                divergentes = not _u.iguais(qa_n, qb_n)  # 65 W == 0,065 kW: sem falsa divergência
+            else:
+                divergentes = qa0.get("valor") != qb0.get("valor")  # legado (unidade vazia/igual)
+            if divergentes:
+                if ua == ub:
+                    explicacao = (f"Mesma unidade, valores distintos ({qa0['valor']} × {qb0['valor']}). "
+                                  "Verificar metodologia, data e condições.")
+                else:
+                    explicacao = (f"Mesma dimensão, valores distintos ({qa0['valor']} {ua} × "
+                                  f"{qb0['valor']} {ub}). "
+                                  "Verificar metodologia, data e condições.")
+                return {"tipo": "valor_divergente", "status": "em_aberto",
+                        "explicacao": explicacao,
+                        "follow_up": ["metodologia medição", "data atualização dado"]}
     if da != db and (da or db):
         return {"tipo": "data_divergente", "status": "em_aberto",
                 "explicacao": "Datas distintas: a mais recente pode atualizar a anterior.",
@@ -424,6 +442,22 @@ SUPERLATIVOS = ("sempre", "nunca", "todos", "todas", "garante", "garantido",
                 "com certeza", "impossível", "ninguém", "jamais")
 
 
+def _ano_de_fonte(ev: dict):
+    """Ano declarado na fonte (publicado_em ou year); None quando desconhecido."""
+    texto = str((ev or {}).get("publicado_em") or (ev or {}).get("year") or "")
+    m = re.search(r"(?:19|20)\d{2}", texto)
+    return int(m.group(0)) if m else None
+
+
+def fonte_desatualizada(ev: dict, ano_ref: int = None, idade_max_anos: int = 2) -> bool:
+    """True só com data conhecida E antiga; sem data declarada, NÃO acusa."""
+    ano = _ano_de_fonte(ev)
+    if ano is None:
+        return False
+    ref = int(ano_ref) if ano_ref else datetime.now(timezone.utc).year
+    return (ref - ano) > int(idade_max_anos)
+
+
 def auditar_resposta(texto: str, claims: list, vereditos: dict, fontes: list) -> dict:
     """Relatório de auditoria: afirmações × evidências × generalizações × lacunas."""
     ids = {f.get("id") for f in fontes or []}
@@ -439,10 +473,13 @@ def auditar_resposta(texto: str, claims: list, vereditos: dict, fontes: list) ->
     sem_evidencia = [c["texto"][:140] for c in claims or []
                      if vereditos.get(c.get("texto", ""), {}).get("estado")
                      in ("UNVERIFIED", "INSUFFICIENT_EVIDENCE")]
+    desatualizadas = [f.get("id", "") for f in fontes or []
+                      if f.get("id") and fonte_desatualizada(f)]
     return {"afirmacoes": len(claims or []),
             "citacoes_fantasma": fantasmas,
             "generalizacoes_excessivas": generalizacoes,
             "sem_evidencia_suficiente": sem_evidencia,
+            "fontes_desatualizadas": sorted(desatualizadas),
             "etapa_semantica": "BLOQUEADA",
             "ok": not fantasmas and not sem_evidencia}
 

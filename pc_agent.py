@@ -3926,7 +3926,9 @@ def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
                                      args=(db_path, job_id, owner, websocket, parar, pronto),
                                      daemon=True)
             cauda.start()
-        research_agents.executar(db, job_id, owner, research_agents.provedores_reais(),
+        research_agents.executar(db, job_id, owner,
+                                 research_agents.provedores_reais(
+                                     orquestrado=bool(cfg.get("pesquisa_web", True))),
                                  research_agents.recuperar_real(),
                                  deve_parar=parar.is_set)
     except Exception as exc:

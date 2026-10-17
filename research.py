@@ -666,6 +666,7 @@ def _buscar_orquestrado(consulta: str, max_resultados: int = 6,
                          vazio=(nome in vazios), erro=cod_falha)
     info = {"estado": res.get("estado", ""), "estado_texto": res.get("estado_texto", ""),
             "provedores": prov, "lacunas": list(res.get("lacunas", [])),
+            "recuperacao": list(res.get("recuperacao", [])),
             "consultas": list(res.get("consultas", [])),
             "descartes": list(res.get("descartes", [])),
             "correspondencia": res.get("correspondencia", 0.0),

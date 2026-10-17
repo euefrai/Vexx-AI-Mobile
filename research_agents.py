@@ -319,6 +319,28 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         alvo = str(lac)[:120]
         if ("busca", alvo) in feitas:
             continue
+        nova_frente = alvo not in {s.get("alvo") for s in job["plano"]
+                                    if s.get("tipo") == "busca"}
+        if nova_frente:
+            # Lacuna que ainda não é frente do plano (ex.: consulta
+            # complementar do orquestrador): cria busca + leitura + análise.
+            busca_id = f"p{len(job['plano']) + 1}"
+            read_id = f"p{len(job['plano']) + 2}"
+            an_id = f"p{len(job['plano']) + 3}"
+            for etapa_id, tipo, deps in (
+                (busca_id, "busca", []),
+                (read_id, "ler", [busca_id]),
+                (an_id, "analisar", [read_id]),
+            ):
+                job["plano"].append({
+                    "id": etapa_id, "tipo": tipo, "alvo": alvo, "status": "pendente",
+                    "tentativas": 0, "prioridade": 25, "dependencias": deps,
+                    "replan_reason": "consulta complementar por lacuna real de busca",
+                    "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+                })
+            feitas.add(("busca", alvo))
+            novas += 1
+            continue
         busca_id = f"p{len(job['plano']) + 1}"
         job["plano"].append({
             "id": busca_id, "tipo": "busca", "alvo": alvo, "status": "pendente",
@@ -396,9 +418,40 @@ class ProvedorWikipedia(ProvedorBusca):
         return research.buscar_wikipedia(consulta, max_resultados=limite)
 
 
+class ProvedorOrquestrado(ProvedorBusca):
+    """Busca web real V5.5 (multi-provedor do Research Engine) para os agentes.
+
+    Entra por ÚLTIMO na cadeia (não muda a ordem legada ddg → searxng →
+    wikipedia). Não abre páginas: devolve achados ranqueados e guarda o
+    `info` da busca (estado honesto, lacunas, consultas de recuperação) para
+    o orquestrador decidir o replanejamento por lacuna. Nunca contorna
+    bloqueio; vazio/bloqueado viram erro registrado.
+    """
+    nome = "web"
+
+    def __init__(self, orcamento: dict = None):
+        self.orcamento = dict(orcamento) if orcamento else None
+        self.info: dict = {}
+
+    def buscar(self, consulta: str, limite: int = 6) -> list:
+        achados, info = research._buscar_orquestrado(
+            consulta, max_resultados=limite, orcamento=self.orcamento)
+        self.info = dict(info or {})
+        if achados:
+            return achados
+        estado = self.info.get("estado", "")
+        if estado in ("bloqueado", "rede", "indisponivel"):
+            raise research.ResearchErro(f"Busca web indisponível ({estado}).", estado)
+        return []
+
+
 def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6) -> tuple:
     """Tenta provedores em ordem; vazio silencioso TAMBÉM alterna (bot-wall
-    não para a cadeia); registra falhas; nunca inventa resultado."""
+    não para a cadeia); registra falhas; nunca inventa resultado.
+
+    Provedor que guarda diagnóstico (`info`, ex.: ProvedorOrquestrado)
+    devolve `detalhe` junto — estados/lacunas reais da busca.
+    """
     erros = []
     for p in provedores or []:
         try:
@@ -408,7 +461,11 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6) -> tup
                           "codigo": getattr(exc, "codigo", type(exc).__name__)})
             continue
         if achados:
-            return achados, {"provedor": p.nome, "erros": erros}
+            out = {"provedor": p.nome, "erros": erros}
+            detalhe = getattr(p, "info", None)
+            if isinstance(detalhe, dict) and detalhe:
+                out["detalhe"] = dict(detalhe)
+            return achados, out
         erros.append({"provedor": getattr(p, "nome", "?"), "codigo": "vazio"})
     return [], {"provedor": "", "erros": erros}
 
@@ -516,6 +573,16 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
         else:
             providers_for_query = general + academic
         encontrados, info = buscar_com_fallback(providers_for_query, q, 6)
+        detalhe = info.get("detalhe") or {}
+        if detalhe:
+            rec = [str(x)[:160] for x in (detalhe.get("recuperacao") or []) if str(x).strip()]
+            if rec:
+                atuais = job["usados"].setdefault("recuperacao_busca", [])
+                job["usados"]["recuperacao_busca"] = sorted(set(atuais) | set(rec))[:4]
+            lac = [str(x)[:160] for x in (detalhe.get("lacunas") or []) if str(x).strip()]
+            if lac:
+                atuais = job["usados"].setdefault("lacunas_busca", [])
+                job["usados"]["lacunas_busca"] = sorted(set(atuais) | set(lac))[:4]
         provs = job["usados"].setdefault("provedores", {})
         pm = provs.setdefault(info["provedor"] or "nenhum", {"ok": 0, "falhas": 0, "ms": 0})
         pm["ms"] += int((time.monotonic() - t0) * 1000)
@@ -525,7 +592,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
             pm["falhas"] += 1
         emitir(db, job["id"], job["owner"], "search", "search_completed", "ok",
                f"Busca '{q[:60]}': {len(encontrados)} achados.",
-               {"provedor": info["provedor"], "falhas": info["erros"]})
+               {"provedor": info["provedor"], "falhas": info["erros"],
+                "estado": detalhe.get("estado", "")})
         falhas.extend(info["erros"])
         for a in encontrados:
             if a["url"] not in {x["url"] for x in achados}:
@@ -1528,7 +1596,13 @@ def _lacunas(job: dict) -> list:
     for s in job["plano"]:
         if s.get("tipo") == "ler" and s.get("_evidencias"):
             com_evid.add(s.get("alvo"))
-    return sorted(subs_busca - com_evid)
+    lacunas = sorted(subs_busca - com_evid)
+    # Lacunas de BUSCA reais (orquestrador): consultas complementares que o
+    # pedido ainda não cobriu entram como novas buscas no replanejamento.
+    for q in (job["usados"].get("recuperacao_busca") or []):
+        if q and q not in subs_busca and q not in lacunas:
+            lacunas.append(q)
+    return lacunas
 
 
 def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
@@ -1786,7 +1860,13 @@ PROVS_FABRICA = None
 RECUPERAR_FABRICA = None
 
 
-def provedores_reais():
+def provedores_reais(orquestrado: bool = False):
+    """Provedores reais dos agentes.
+
+    Ordem legada preservada (ddg → searxng → wikipedia [→ academic]);
+    `orquestrado=True` (liga em produção com `JULIA_WEB_SEARCH`) acrescenta
+    a busca web multi-provedor V5.5 como ÚLTIMO provedor.
+    """
     import os as _os
     if PROVS_FABRICA is not None:
         return PROVS_FABRICA()
@@ -1795,6 +1875,8 @@ def provedores_reais():
     if _os.environ.get("JULIA_ACADEMIC_RESEARCH", "").strip().lower() in (
             "1", "true", "yes", "on"):
         providers.append(ProvedorAcademico(_os.environ.get("JULIA_RESEARCH_MAILTO", "")))
+    if orquestrado:
+        providers.append(ProvedorOrquestrado())
     return providers
 
 
