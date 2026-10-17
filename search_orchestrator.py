@@ -54,8 +54,9 @@ RX_ENCICLOPEDIA = re.compile(
     r"\b(o que (é|e)|quem (foi|é|e)|definição|definicao|significado|"
     r"história de|historia de|biografia|origem|conceito)\b", re.I)
 RX_PRODUTO = re.compile(
-    r"\b(preço|preco|comprar|compr|onde encontrar|oferta|promoção|promocao|"
-    r"mais barato|barato|loja|modelo|marca|vale a pena|custo-?benefício)\b", re.I)
+    r"\b(preço|preco|quanto custa|quanto custam|custa quanto|comprar|compr|"
+    r"onde encontrar|oferta|promoção|promocao|mais barato|barato|loja|modelo|"
+    r"marca|vale a pena|custo-?benefício)\b", re.I)
 RX_COMPARACAO = re.compile(
     r"\b(comparar|comparação|comparacao|versus|\bvs\b|diferença|diferenca|"
     r"melhor entre|qual melhor|prós e contras|pros e contras)\b", re.I)
@@ -213,13 +214,17 @@ _RX_TRACKING = re.compile(
 
 
 def canonizar_url(url: str) -> str:
-    """URL canônica para dedupe (sem rastreio, host minúsculo, sem barra final)."""
+    """URL canônica para dedupe (sem rastreio, host minúsculo, sem barra final).
+
+    Retorna "" quando não é URL http(s) com host: resultado sem URL
+    utilizável não é fonte (não pode ser aberto nem verificado).
+    """
     try:
         p = urllib.parse.urlsplit((url or "").strip())
     except ValueError:
-        return (url or "")[:500]
-    if not p.scheme or not p.hostname:
-        return (url or "")[:500]
+        return ""
+    if p.scheme.lower() not in ("http", "https") or not p.hostname:
+        return ""
     host = p.hostname.lower()
     if host.startswith("www."):
         host = host[4:]
@@ -319,7 +324,10 @@ def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
 RX_PEDE_NUMERO = re.compile(
     r"\b(quanto|quantos|quantas|preço|preco|valor|custo|taxa|total|número|"
     r"numero|porcentagem|percentual|estatística|estatistica)\b", re.I)
-RX_PEDE_DATA = re.compile(r"\b(quando|que ano|data|prazo|desde|até|ate|vigência)\b", re.I)
+RX_PEDE_DATA = re.compile(
+    r"\b(quando|que ano|data|prazo|desde|vigência|vigencia)\b|"
+    r"\bat[ée]\s+(?:o\s+ano\s+(?:de\s+)?|os\s+anos\s+)?(?:19|20)\d{2}\b|"
+    r"\bat[ée]\s+hoje\b", re.I)  # "até R$ 3000" é teto de preço, não data
 RX_PEDE_DEFINICAO = re.compile(r"\b(o que é|o que e|quem é|quem e|define|significado)\b", re.I)
 
 
