@@ -1,0 +1,31 @@
+{
+  "provedores": [
+    "openai",
+    "gemini",
+    "anthropic",
+    "deepseek",
+    "groq",
+    "mistral",
+    "openrouter"
+  ],
+  "groqInicial": {
+    "id": "groq",
+    "chip": "Sem chave",
+    "temRemover": false
+  },
+  "depoisSalvar": {
+    "chip": "Chave recusada no PC",
+    "fonte": "Salva neste PC — troque ou remova aqui.",
+    "entrada": "",
+    "segredosLimpos": true
+  },
+  "chamadasProviders": [
+    200,
+    200
+  ],
+  "errors": [],
+  "esperados": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "checks": "menu na interface, 7 provedores com status, chave salva só no PC (campo limpo, sem localStorage), remover restaura o estado e nenhuma resposta ecoa a chave"
+}

@@ -2,10 +2,45 @@
 
 Tudo abaixo é configurado **no PC**: variáveis de ambiente **ou** um arquivo
 `.env` na raiz do projeto (carregado automaticamente na inicialização do
-agente e do relay; o `.env` **nunca sobrescreve** variável de ambiente já
-definida, e valores entram expandindo `%USERPROFILE%` e afins). Nada disso
-vai para o Render, para o app ou para logs — chaves não aparecem nem em
-mensagens de erro.
+agente e do relay). Regras do `.env` (V5.4.3):
+
+- Chave de **provedor** no `.env` (inclusive as salvas pelo app) **vence** a
+  variável de sistema: é assim que salvar/trocar/remover pela interface vale
+  de verdade, mesmo com um `setx` antigo no PC. Remova no app para a variável
+  do sistema voltar a valer.
+- Qualquer **outra** variável segue “sistema manda” (o `.env` só preenche o
+  que estiver vazio/ausente).
+- Valores entram expandindo `%USERPROFILE%` e afins. Nada disso vai para o
+  Render, para o app ou para logs — chaves não aparecem nem em mensagens de
+  erro. (Avançado: `JULIA_ENV_FILE` aponta o `.env` para outro caminho —
+  usado nos testes/E2E com arquivo descartável.)
+
+## Gerenciar chaves direto na interface (V5.4.3)
+
+No app: menu (☰) → **Provedores de IA** (ou toque em *Conexão* no topo →
+linha **Provedores**). Cada provedor mostra o estado real:
+
+| Estado | Significado |
+|---|---|
+| **Sem chave** | não há chave no PC; cole uma e salve |
+| **Chave OK** | chave presente e aceita na última listagem ao vivo |
+| **Chave recusada no PC** | o provedor respondeu 401/403 — troque a chave |
+
+Como funciona (sem mentir):
+
+- A chave é enviada pelo relay autenticado **só como transporte** (sem
+  persistência, sem log) e gravada pelo agente no `.env` local do PC —
+  o servidor e o aplicativo **nunca guardam nem mostram de volta** (a
+  resposta não devolve a chave nem fragmento; o campo é limpo após salvar).
+- **Efeito imediato**: o agente aplica a chave em memória; toque no seletor
+  em *Atualizar* para ver os modelos reais do provedor. Não precisa reiniciar.
+- **Origem** aparece na linha: *Salva neste PC* (editável aqui, tem
+  **Remover**) ou *Definida fora do app* (variável do sistema; salvar aqui
+  passa a ter prioridade).
+- Depois de salvar, escolha o modelo (`provedor/modelo`) no seletor — a
+  próxima mensagem já usa o provedor novo.
+- Validações: só provedores conhecidos; chave ASCII de 8 a 400 caracteres
+  (sem espaços/quebras de linha — nada de injeção no `.env`).
 
 ## Provedores de IA (inferência)
 
@@ -24,6 +59,11 @@ prefixo continua no Hermes (proxy local `http://127.0.0.1:8645/v1`).
 | OpenRouter | `OPENROUTER_API_KEY` | vários (prefixo do site) |
 
 ### Como ativar uma chave (de verdade)
+
+**Jeito fácil (no app):** menu (☰) → **Provedores de IA** → cole → *Salvar*
+(veja a seção acima). 
+
+**Pelo PC (alternativa):**
 
 ```powershell
 setx OPENAI_API_KEY "sua-chave"   # ou outro provedor; sem aspas extras

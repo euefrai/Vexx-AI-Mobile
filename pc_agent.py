@@ -2130,6 +2130,71 @@ def dono_bloqueado(db, owner: str) -> bool:
         return True
 
 
+# ── Gerenciamento de chaves de provedores (interface) ─────────────────
+# A chave chega pelo relay autenticado, é gravada SÓ no .env local do PC e
+# nunca volta (nem fragmento) em resposta, log ou mensagem de erro.
+_ORIGINAIS_PROVEDOR: dict = {}
+
+
+def _validar_chave_provedor(provider: str, valor: str):
+    """(nome, chave) validados ou dict de erro. Chave: ASCII imprimível."""
+    nome = str(provider or "").strip().lower()
+    d = providers.definicao(nome)
+    if d is None or nome == "hermes" or not d.get("key_env"):
+        return {"error": "Provedor desconhecido ou sem chave gerenciável.",
+                "codigo": "provedor"}
+    chave = str(valor or "").strip()
+    if not 8 <= len(chave) <= 400:
+        return {"error": "Chave com tamanho inválido (8 a 400 caracteres).",
+                "codigo": "chave"}
+    if any(ord(c) < 33 or ord(c) > 126 for c in chave):
+        return {"error": "Chave com caracteres inválidos.", "codigo": "chave"}
+    return nome, chave
+
+
+def definir_chave_provedor(req: dict) -> dict:
+    """Grava a chave no .env local e aplica em memória (efeito imediato)."""
+    res = _validar_chave_provedor(req.get("provider", ""), req.get("key", ""))
+    if isinstance(res, dict):
+        return res
+    nome, chave = res
+    env = providers.definicao(nome)["key_env"]
+    try:
+        env_local.salvar_chave(env, chave)
+    except (OSError, ValueError):
+        return {"error": "Não consegui gravar a chave no PC.", "codigo": "arquivo"}
+    if env not in _ORIGINAIS_PROVEDOR:
+        _ORIGINAIS_PROVEDOR[env] = os.environ.get(env)
+    os.environ[env] = chave
+    log.info("chave do provedor %s salva no .env local (%s)", nome, env)
+    return {"ok": True, "provider": nome, "configured": True, "source": "arquivo"}
+
+
+def remover_chave_provedor(req: dict) -> dict:
+    """Remove a chave do .env local; restaura o valor de sistema, se havia."""
+    nome = str(req.get("provider", "")).strip().lower()
+    d = providers.definicao(nome)
+    if d is None or nome == "hermes" or not d.get("key_env"):
+        return {"error": "Provedor desconhecido ou sem chave gerenciável.",
+                "codigo": "provedor"}
+    env = d["key_env"]
+    try:
+        env_local.remover_chave(env)
+    except OSError:
+        return {"error": "Não consegui gravar a chave no PC.", "codigo": "arquivo"}
+    if env in _ORIGINAIS_PROVEDOR:
+        original = _ORIGINAIS_PROVEDOR.pop(env)
+        if original is None:
+            os.environ.pop(env, None)
+        else:
+            os.environ[env] = original
+    else:
+        os.environ.pop(env, None)
+    log.info("chave do provedor %s removida do .env local (%s)", nome, env)
+    return {"ok": True, "provider": nome, "configured": bool(providers.chave(nome)),
+            "source": providers.chave_origem(nome)}
+
+
 def resposta_screen(db, req: dict, dono: str, request_id: str) -> dict:
     """Foto da tela: observar E controlar exigem grant explícito (V4.2 §2).
 
@@ -4075,7 +4140,7 @@ def run():
                                 "mem_list", "mem_list_full",
                                 "mem_forget", "mem_confirm", "mem_update", "ui_state_save",
                                 "ui_state_list", "conv_forget", "event_list", "ai", "ai_stream",
-                                "ai_reset", "ai_continue") and dono_bloqueado(db, dono):
+                                "ai_reset", "ai_continue", "provider_key") and dono_bloqueado(db, dono):
                         reply = _resp_erro("Conta indisponível.", "bloqueada")
                     elif tipo == "auth_login":
                         try:
@@ -4712,6 +4777,17 @@ def run():
                         res = ai_continuar(db, req, cfg)
                         reply = {"request_id": request_id,
                                  **({"type": "ai_done", **res} if "response_text" in res
+                                    else {"type": "ai_error", **res})}
+                    elif req.get("type") == "provider_key":
+                        acao = str(req.get("action") or "set").strip().lower()
+                        if acao == "set":
+                            res = definir_chave_provedor(req)
+                        elif acao == "del":
+                            res = remover_chave_provedor(req)
+                        else:
+                            res = {"error": "Ação inválida.", "codigo": "acao"}
+                        reply = {"request_id": request_id,
+                                 **({"type": "provider_key_ok", **res} if "ok" in res
                                     else {"type": "ai_error", **res})}
                     elif req.get("type") == "ai_models":
                         try:

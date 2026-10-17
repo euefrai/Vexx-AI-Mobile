@@ -24,6 +24,9 @@ def main():
                    JULIA_PASSWORD_HASH=PasswordHasher().hash("preview-only-2026"),
                    JULIA_AGENT_TOKEN=secrets.token_hex(32), JULIA_SESSION_SECRET=secrets.token_hex(32),
                    JULIA_SQLITE_PATH=str(Path(directory) / "preview.sqlite3"),
+                   # Chaves salvas pela interface caem neste .env descartável
+                   # (nunca no .env real do repositório).
+                   JULIA_ENV_FILE=str(Path(directory) / "preview.env"),
                    JULIA_RELAY_URL="http://127.0.0.1:8770", JULIA_ENV="development",
                    JULIA_REMOTE="0", HERMES_PROXY_URL="http://127.0.0.1:9/v1")
         import pc_agent

@@ -1672,6 +1672,130 @@ $('popModelRow') && $('popModelRow').addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeModelo(); }
 });
 
+/* ----- Provedores de IA: chaves ficam SÓ no PC (nunca aqui no app) ----- */
+function providerChipInfo(p) {
+  if (!p.configured) return { texto: 'Sem chave', classe: '' };
+  if (p.auth_error) return { texto: 'Chave recusada no PC', classe: 'warn' };
+  return { texto: 'Chave OK', classe: 'ok' };
+}
+function providerSourceHint(p) {
+  if (p.source === 'arquivo') return 'Salva neste PC — troque ou remova aqui.';
+  if (p.source === 'sistema') return 'Definida fora do app (variável do sistema). Salvar aqui passa a valer.';
+  return '';
+}
+function providersError(msg) {
+  const erro = $('providersError');
+  if (!erro) { showToast(msg); return; }
+  erro.textContent = msg;
+  erro.hidden = false;
+}
+function renderProviders() {
+  const alvo = $('providersList');
+  if (!alvo) return;
+  alvo.replaceChildren();
+  const provs = (modelCatalog.providers || []).filter(p => p && p.id !== 'hermes');
+  if (!provs.length) {
+    const vazio = document.createElement('p');
+    vazio.className = 'provider-vazio';
+    vazio.textContent = 'Sem resposta do PC agora. Use "Atualizar lista de modelos".';
+    alvo.appendChild(vazio);
+    return;
+  }
+  for (const p of provs) {
+    const row = document.createElement('div');
+    row.className = 'provider-row';
+    row.dataset.provider = p.id;
+    const top = document.createElement('div');
+    top.className = 'provider-top';
+    const nome = document.createElement('strong');
+    nome.textContent = p.label || p.id;
+    const chipInfo = providerChipInfo(p);
+    const chip = document.createElement('span');
+    chip.className = 'provider-chip' + (chipInfo.classe ? ' ' + chipInfo.classe : '');
+    chip.textContent = chipInfo.texto;
+    top.append(nome, chip);
+    row.appendChild(top);
+    const dica = providerSourceHint(p);
+    if (dica) {
+      const fonte = document.createElement('span');
+      fonte.className = 'provider-source';
+      fonte.textContent = dica;
+      row.appendChild(fonte);
+    }
+    const form = document.createElement('div');
+    form.className = 'provider-form';
+    const entrada = document.createElement('input');
+    entrada.type = 'password';
+    entrada.autocomplete = 'off';
+    entrada.spellcheck = false;
+    entrada.placeholder = p.configured ? 'Trocar a chave…' : 'Colar a chave…';
+    entrada.setAttribute('aria-label', 'Chave de ' + (p.label || p.id));
+    const salvar = document.createElement('button');
+    salvar.type = 'button';
+    salvar.className = 'subtle-button';
+    salvar.textContent = 'Salvar';
+    salvar.addEventListener('click', () => salvarChaveProvedor(p.id, entrada, salvar));
+    form.append(entrada, salvar);
+    row.appendChild(form);
+    if (p.source === 'arquivo') {
+      const remover = document.createElement('button');
+      remover.type = 'button';
+      remover.className = 'provider-remove';
+      remover.textContent = 'Remover chave deste PC';
+      remover.addEventListener('click', () => removerChaveProvedor(p.id, remover));
+      row.appendChild(remover);
+    }
+    alvo.appendChild(row);
+  }
+}
+async function salvarChaveProvedor(pid, entrada, botao) {
+  const valor = String(entrada.value || '').trim();
+  if (valor.length < 8) { providersError('Cole a chave completa do provedor (mínimo 8 caracteres).'); entrada.focus(); return; }
+  botao.disabled = true;
+  try {
+    await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'set', key: valor }) });
+    entrada.value = ''; /* a chave nunca fica guardada na tela */
+    showToast('Chave salva só neste PC');
+    await loadModels(true);
+    renderProviders();
+  } catch (e) {
+    providersError((e && e.message) || 'Não consegui salvar a chave');
+  } finally { botao.disabled = false; }
+}
+async function removerChaveProvedor(pid, botao) {
+  botao.disabled = true;
+  try {
+    await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'del' }) });
+    showToast('Chave removida deste PC');
+    await loadModels(true);
+    renderProviders();
+  } catch (e) {
+    providersError((e && e.message) || 'Não consegui remover a chave');
+  } finally { botao.disabled = false; }
+}
+async function abrirProvedores() {
+  const d = $('providersDialog');
+  if (!d) return;
+  renderProviders();
+  if (!d.open) d.showModal();
+  if (await loadModels(false)) renderProviders();
+}
+$('providersOpen') && $('providersOpen').addEventListener('click', () => abrirProvedores());
+$('popProvidersRow') && $('popProvidersRow').addEventListener('click', () => { $('statusPop').hidden = true; abrirProvedores(); });
+$('popProvidersRow') && $('popProvidersRow').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirProvedores(); }
+});
+$('providersClose') && $('providersClose').addEventListener('click', () => $('providersDialog').close());
+$('providersDialog') && $('providersDialog').addEventListener('click', e => { if (e.target === $('providersDialog')) $('providersDialog').close(); });
+$('providersRefresh') && $('providersRefresh').addEventListener('click', async () => {
+  const b = $('providersRefresh');
+  b.disabled = true;
+  const ok = await loadModels(true);
+  b.disabled = false;
+  renderProviders();
+  showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
+});
+
 /* ----- IA com streaming rápido ----- */
 function setGenBar(on, label) {
   $('genBar').hidden = !on;

@@ -169,7 +169,10 @@ def test_gerar_texto_troca_de_modelo_por_mensagem_e_proxy(monkeypatch):
     assert k1.get("proxy") == "http://127.0.0.1:9999/v1"
 
 
-def test_env_local_carrega_sem_sobrescrever(tmp_path, monkeypatch):
+def test_env_local_provedor_manda_e_o_resto_fica_no_sistema(tmp_path, monkeypatch):
+    """V5.4.3: chave de PROVEDOR salva no .env vence a variável antiga do PC
+    (é assim que salvar pela interface tem efeito após reiniciar); qualquer
+    outra variável continua 'sistema manda'."""
     import env_local
     (tmp_path / ".env").write_text(
         "# comentário\nOPENAI_API_KEY=chave-do-arquivo\nJULIA_TESTE_ENV_LOCAL=1\n",
@@ -178,9 +181,9 @@ def test_env_local_carrega_sem_sobrescrever(tmp_path, monkeypatch):
     monkeypatch.delenv("JULIA_TESTE_ENV_LOCAL", raising=False)
     n = env_local.carregar_env_local(tmp_path)
     import os
-    assert n == 1
-    assert os.environ["OPENAI_API_KEY"] == "valor-do-sistema"  # sistema manda
-    assert os.environ["JULIA_TESTE_ENV_LOCAL"] == "1"
+    assert n == 2
+    assert os.environ["OPENAI_API_KEY"] == "chave-do-arquivo"  # provedor: arquivo manda
+    assert os.environ["JULIA_TESTE_ENV_LOCAL"] == "1"  # demais: sistema manda
 
 
 def test_frontend_troca_a_qualquer_momento():

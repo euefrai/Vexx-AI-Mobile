@@ -1292,6 +1292,35 @@ async def ai_continue(request: Request, body: AIContinue):
             "model": result.get("model", "")}
 
 
+class ProviderKey(BaseModel):
+    provider: str = Field(min_length=1, max_length=40, pattern=r"^[a-z][a-z0-9_-]*$")
+    action: str = Field(default="set", pattern=r"^(set|del)$")
+    key: str = ""
+
+
+@app.post("/api/providers")
+async def provider_key(request: Request, body: ProviderKey):
+    """Salva/remove chave de provedor externo NO PC (o relay só transporta).
+
+    Sem persistência e sem log do valor; a resposta final NUNCA inclui a
+    chave (nem fragmento). O PC grava no .env local e aplica na hora."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    chave = body.key.strip() if body.action == "set" else ""
+    if body.action == "set" and not 8 <= len(chave) <= 400:
+        raise HTTPException(422, "Chave com tamanho inválido (8 a 400 caracteres)")
+    result = await relay.exchange({"type": "provider_key", "owner": dono,
+                                   "provider": body.provider, "action": body.action,
+                                   "key": chave}, timeout=20.0)
+    if result.get("type") == "ai_error":
+        raise erro_relay(result, "Não foi possível salvar a chave")
+    if result.get("type") != "provider_key_ok":
+        raise HTTPException(503, "PC não confirmou")
+    return {"ok": True, "provider": result.get("provider", body.provider),
+            "configured": bool(result.get("configured")),
+            "source": result.get("source", "")}
+
+
 @app.get("/api/screen")
 async def screen(request: Request, max_w: int = 800, q: int = 55):
     """Foto atual da tela do PC (JPEG base64). Exige login + CSRF + grant remoto."""
@@ -1938,7 +1967,7 @@ async def ai_models(request: Request):
     return {"models": result.get("models", [])[:500], "default": result.get("default", ""),
             "items": [{k: i.get(k) for k in ("id", "provider")}
                       for i in itens if isinstance(i, dict)][:500],
-            "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error")
+            "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error", "source")
                            if p.get(k) is not None}
                           for p in provs if isinstance(p, dict)][:20]}
 

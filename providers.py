@@ -18,6 +18,7 @@ import time
 import urllib.error
 import urllib.request
 
+import env_local
 import hermes_bridge
 from hermes_bridge import BridgeErro
 
@@ -75,6 +76,11 @@ PROVIDERS = {
 }
 
 ANTHROPIC_VERSION = "2023-06-01"
+
+# Variáveis de ambiente das chaves (espelho de env_local.PROVIDER_KEY_ENVS;
+# um teste garante que os dois conjuntos são idênticos).
+PROVIDER_KEY_ENVS = frozenset(
+    d["key_env"] for d in PROVIDERS.values() if d.get("key_env"))
 
 # Erros de chamada DIRETA recebem a cara do provedor: nada de mensagem de
 # "hermes proxy" quando o problema é a chave do OpenAI/Gemini/etc. Nenhum
@@ -134,6 +140,23 @@ def chave(nome: str) -> str:
     return (os.environ.get(d["key_env"], "") or "").strip()
 
 
+def chave_origem(nome: str) -> str:
+    """Onde a chave está definida: 'arquivo' (.env local, salva pelo app),
+    'sistema' (variável do PC) ou '' (sem chave). Nunca expõe o valor."""
+    d = definicao(nome)
+    if not d or not d.get("key_env"):
+        return ""
+    atual = chave(nome)
+    if not atual:
+        return ""
+    try:
+        if env_local.valores_do_arquivo().get(d["key_env"]) == atual:
+            return "arquivo"
+    except Exception:
+        pass
+    return "sistema"
+
+
 def configurados() -> list:
     """Provedores utilizáveis agora: hermes sempre + quem tem chave."""
     out = ["hermes"]
@@ -172,6 +195,9 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     for nome, d in PROVIDERS.items():
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
+        origem = chave_origem(nome) if conf else ""
+        if origem:
+            prov["source"] = origem  # 'arquivo' (salva no app) ou 'sistema'
         provs.append(prov)
         if nome == "hermes":
             try:
