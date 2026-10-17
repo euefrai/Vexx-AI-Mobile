@@ -189,6 +189,22 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
             raw = resp.read(max_bytes + 1)
             if len(raw) > max_bytes:
                 raise ResearchErro("Documento grande demais.", "tamanho")
+            # Some official RSS feeds return gzip even for Accept-Encoding: identity.
+            # Bound the decoded payload too, rather than expanding a compressed bomb.
+            encoding = str(resp.headers.get('Content-Encoding', '')).lower().strip()
+            if encoding == 'gzip':
+                import gzip
+                import io
+                import zlib
+                try:
+                    with gzip.GzipFile(fileobj=io.BytesIO(raw)) as compressed:
+                        raw = compressed.read(max_bytes + 1)
+                except (OSError, EOFError, zlib.error) as exc:
+                    raise ResearchErro('Resposta gzip inválida.', 'formato') from exc
+                if len(raw)>max_bytes:
+                    raise ResearchErro('Documento descompactado grande demais.', 'tamanho')
+            elif encoding not in ('', 'identity'):
+                raise ResearchErro('Compressão de resposta não suportada.', 'formato')
             charset = "utf-8"
             try:
                 charset = resp.headers.get_content_charset() or "utf-8"

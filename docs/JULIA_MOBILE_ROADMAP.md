@@ -151,6 +151,12 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   [V5_5_PROGRESS.md](V5_5_PROGRESS.md) e
   [RELATORIO_JULIA_5.5.md](../RELATORIO_JULIA_5.5.md).
 
+## Integração pontual — Dados atuais (17/10/2026)
+- Clima/previsão Open-Meteo, relógio por fuso/cidade e notícias via feeds reais, antes do LLM.
+- Localização autorizada, continuidade da pergunta de cidade, cache, fontes, datas e fallback honesto.
+- QA Chrome real e regressão: [RELATORIO_DADOS_ATUAIS.md](../RELATORIO_DADOS_ATUAIS.md).
+- Uso, custo e limites: [DADOS_ATUAIS.md](DADOS_ATUAIS.md).
+
 ## V5.6+ — 3D Optimization & Integration (futuro, sem trabalho iniciado)
 - Otimização e integração final do 3D ao chat e ao JDUI (slot que era
   "V5.5 — 3D" foi reatribuído: o V5.5 passou a ser Research Intelligence 3.0).

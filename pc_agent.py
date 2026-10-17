@@ -30,6 +30,7 @@ import remoto
 import research
 import research_agents
 import shopping
+import live_data
 import evidence_graph as evgraph
 import workspace_store
 from websockets.sync.client import connect
@@ -3240,6 +3241,30 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
     return ""
 
 
+def cmd_dados_atuais(db, texto, owner, conv, contexto):
+    """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
+    req = live_data.request(texto)
+    if not req:
+        if len(texto)>100 or not re.fullmatch(r"[\wÀ-ÿ ,.'-]+[.!]?",texto.strip()) or live_data.norm(texto.strip()) in ('obrigado','obrigada','ok','valeu','nao','não'):
+            return None
+        row = db.execute("SELECT id,text FROM messages WHERE owner_id=? AND conversation_id=? AND role='assistant' ORDER BY created_at DESC,id DESC LIMIT 1",(dono_valido(owner),conv)).fetchone()
+        if not row or row[1] != live_data.LOCATION_PROMPT:
+            return None
+        original = db.execute("SELECT text FROM messages WHERE id=? AND owner_id=? AND conversation_id=? AND role='user'",(row[0].removesuffix('-r1'),dono_valido(owner),conv)).fetchone()
+        pedido = original[0].rstrip(' .?!') if original else 'Qual o clima agora'
+        return live_data.respond(pedido+' em '+texto.strip(), contexto)
+    if req['kind']=='clock' and not live_data.place_from(texto):
+        resposta = _resposta_temporal_direta(texto, contexto)
+        if resposta:
+            return resposta
+        # No place is inferred from UTC. The existing clock stays the source when available.
+        if contexto.get('current_at'):
+            instante=contexto['current_at']
+            return f"Data local: {instante:%d/%m/%Y}; horário: {instante:%H:%M} ({contexto.get('timezone',instante.strftime('%z'))})."
+        return 'Não recebi o relógio/fuso do aparelho. Informe uma cidade, por exemplo: “que horas são em Salvador, Bahia?”.'
+    return live_data.respond(texto, contexto)
+
+
 def cmd_model3d(db, texto, owner, conv, scene_state=''):
     """Referências 3D restritas ao dono e à conversa; sem LLM/rede/controle remoto."""
     request = model3d.request(texto)
@@ -3327,6 +3352,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
     owner = prep.get("owner", DONO_PADRAO)
+    atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}))
+    if atual:
+        return ai_resposta_direta(db, mid, conv, modelo, prep['reply_id'], atual, owner)
     model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
     if model_response:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
@@ -3485,6 +3513,15 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         owner = prep.get("owner", DONO_PADRAO)
         claimed = True
+        atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}))
+        if atual:
+            if sessao.parar.is_set():
+                ai_marcar(db, mid, conv, modelo, 'cancelled', reply_id=prep['reply_id'], response_text='', owner=owner)
+                enviar_ws(websocket, {'request_id':request_id,'type':'ai_cancelled','reply_id':prep['reply_id'],'partial':''})
+                return
+            direct = ai_resposta_direta(db, mid, conv, modelo, prep['reply_id'], atual, owner)
+            enviar_ws(websocket, {'request_id':request_id,'type':'ai_done',**direct})
+            return
         model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
         if model_response:
             direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)

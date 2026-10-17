@@ -1816,7 +1816,7 @@ function aiLocalContext(text) {
   const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
     .toISOString().slice(0, 19) + offsetText;
   const context = { local_time: localTime, timezone };
-  const placeQuestion = /\b(perto|pr[oó]xim[oa]s?|na minha cidade|onde estou|localiza[cç][aã]o|clima|tempo em|previs[aã]o|restaurante|farm[aá]cia|hospital|loja|tr[aâ]nsito|endere[cç]o|pontos tur[ií]sticos|lugares)\b/i.test(text || '');
+  const placeQuestion = /\b(perto|pr[oó]xim[oa]s?|na minha cidade|onde estou|localiza[cç][aã]o|clima|tempo (em|agora|hoje)|como (est[aá]|t[aá]) o tempo|temperatura|chover|chovendo|previs[aã]o|restaurante|farm[aá]cia|hospital|loja|tr[aâ]nsito|endere[cç]o|pontos tur[ií]sticos|lugares)\b/i.test(text || '');
   if (!placeQuestion || !$('locationEnabled') || !$('locationEnabled').checked) return context;
   const city = String($('contextCity').value || '').trim().slice(0, 100);
   if (city) context.city = city;
