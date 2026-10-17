@@ -1988,23 +1988,23 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                 extras["research_run"] = run.get("run_id", "")
                 if fontes:
                     partes_sistema.append(
-                        research.bloco_grounding(fontes, hoje)
+                        research.bloco_grounding(fontes, hoje, run)
                         + f"\nPassos reais: {'; '.join(run.get('etapas', [])[:6])}")
                     for d in run.get("divergencias", [])[:3]:
                         partes_sistema.append(
                             f"DIVERGÊNCIA ENTRE {d['entre'][0]} e {d['entre'][1]}: {d['motivo']}.")
                 else:
-                    partes_sistema.append(research.bloco_falha(hoje))
+                    partes_sistema.append(research.bloco_falha(hoje, run.get("estado", "")))
             elif not extras.get("research_cmd"):
                 rap = research.pesquisa_rapida(db, owner, consulta)
                 fontes = rap.get("fontes", [])
                 extras["fontes"] = fontes
                 if fontes:
                     partes_sistema.append(
-                        research.bloco_grounding(fontes, hoje)
+                        research.bloco_grounding(fontes, hoje, rap)
                         + (" (cache local)" if rap.get("de_cache") else ""))
                 else:
-                    partes_sistema.append(research.bloco_falha(hoje))
+                    partes_sistema.append(research.bloco_falha(hoje, rap.get("estado", "")))
         except Exception as exc:
             log.warning("research falhou (%s)", type(exc).__name__)
             partes_sistema.append(research.bloco_falha(hoje))
