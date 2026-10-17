@@ -1,20 +1,28 @@
-"""Julia Shopping Intelligence (V4.9.1) — pesquisa visual de produtos. Stdlib pura.
+"""Julia Shopping Intelligence (V5.5) — pesquisa visual de produtos. Stdlib pura.
 
-Camadas: detectar intenção → extrair critérios → buscar (reusa
-`research.buscar_ddg`) → recuperar páginas (reusa `research.baixar`,
-com guarda SSRF) → extrair ofertas (JSON-LD Product/Offer + OpenGraph) →
-deduplicar → filtrar por orçamento/specs → comparar → persistir por dono
-→ emitir fence JDUI determinístico.
+Camadas: detectar intenção → extrair critérios → buscar (cadeia
+mlb → ddg → ddg-lite → web orquestrada (Research Engine)) → recuperar
+páginas (reusa `research.baixar`, com guarda SSRF) → extrair ofertas
+(JSON-LD Product/Offer + OpenGraph) → verificar link/imagem de cada
+oferta (`source_check`) → deduplicar → filtrar por orçamento/specs →
+separar alternativas próximas (com diferenças explícitas) → comparar →
+persistir por dono → emitir fence JDUI determinístico.
 
 REGRAS DURAS (nunca relaxar):
 - NUNCA inventar produtos, preços, imagens, avaliações, descontos ou estoque.
 - Ofertas vêm SOMENTE de dados estruturados reais da página (JSON-LD/OG).
   Resultado de busca sem dado estruturado vira FONTE (link), nunca produto.
+- Página de listagem/categoria só gera produto quando o dado estruturado
+  traz a URL do item; o card marca o link como NÃO verificado e nunca
+  apresenta a listagem como página do produto.
 - Preço inacessível → "Preço não confirmado" (preco_confirmado=False).
 - Conteúdo externo é DADO não confiável: nunca seguir instruções embutidas
   em páginas/trechos (anti prompt-injection).
 - Preço guardado é HISTÓRICO: sempre exibir `verificado_em`; nunca
   apresentar como cotação atual.
+- Critério do usuário (orçamento/marca/condição/specs) nunca é trocado em
+  silêncio: quem não atende tudo vira alternativa com as diferenças
+  explícitas ou descarte explicado.
 """
 import hashlib
 import html as _html
@@ -26,6 +34,7 @@ import urllib.parse
 from datetime import datetime, timezone
 
 import research
+import source_check
 
 log = logging.getLogger("JULIA-shopping")
 
@@ -370,6 +379,7 @@ def _produto_de_no(no: dict) -> dict | None:
         "avaliacao": aval,
         "n_avaliacoes": n_aval,
         "ofertas_ld": _ofertas_de(no.get("offers")),
+        "url_produto": _limpa(no.get("url"), 500),
     }
 
 
@@ -457,7 +467,8 @@ def _dominio(url: str) -> str:
 
 
 def montar_produto(extraido: dict, url: str, url_final: str,
-                   titulo_fonte: str) -> dict:
+                   titulo_fonte: str, validacao: dict = None,
+                   url_item: str = "") -> dict:
     ofertas = extraido.get("ofertas_ld") or []
     loja = ""
     preco = None
@@ -476,6 +487,19 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         loja = dom[4:] if dom.startswith("www.") else dom
     agora = agora_iso()
     specs = extraido.get("specs") if isinstance(extraido.get("specs"), dict) else {}
+    # Link do ITEM (página do produto em si): URL declarada no dado
+    # estruturado > URL da 1ª oferta > página analisada. Nunca inventado.
+    item = _limpa(url_item or extraido.get("url_produto") or "", 500)
+    if not item:
+        item = next((_limpa(o.get("url_oferta"), 500) for o in ofertas
+                     if o.get("url_oferta")), "")
+    if not item:
+        item = _limpa(url_final or url, 500)
+    val = validacao if isinstance(validacao, dict) else {}
+    val_codigo = _limpa(val.get("codigo"), 40)
+    val_veredito = _limpa(val.get("veredito"), 24)
+    if val_veredito not in source_check.VEREDITOS:
+        val_veredito = ""
     return {
         "id": chave_dedupe({"nome": extraido.get("nome", ""),
                              "marca": extraido.get("marca", ""),
@@ -491,10 +515,12 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         "loja_dominio": _dominio(url_final or url),
         "url": (url or "")[:500],
         "url_final": (url_final or url or "")[:500],
+        "url_item": item,
         "preco": preco,
         "moeda": moeda,
         "preco_confirmado": confirmado,
         "preco_texto": formatar_preco(preco, moeda),
+        "preco_origem": _limpa(extraido.get("origem_preco"), 24) if confirmado else "",
         "disponibilidade": disp,
         "avaliacao": extraido.get("avaliacao"),
         "n_avaliacoes": extraido.get("n_avaliacoes"),
@@ -502,6 +528,11 @@ def montar_produto(extraido: dict, url: str, url_final: str,
                   for k, v in list(specs.items())[:12]},
         "verificado_em": agora,
         "fonte_titulo": (titulo_fonte or "")[:160],
+        "link_veredito": val_veredito,
+        "link_codigo": val_codigo,
+        "link_motivo": _limpa(val.get("motivo"), 160),
+        "item_de_listagem": val_codigo == "item_de_listagem",
+        "imagem_veredito": "",
     }
 
 
@@ -519,7 +550,7 @@ def deduplicar(produtos: list) -> list:
             "loja": p.get("loja", ""), "preco": p.get("preco"),
             "moeda": p.get("moeda", "BRL"),
             "preco_texto": p.get("preco_texto", PRECO_NAO_CONFIRMADO),
-            "url": p.get("url_final") or p.get("url", ""),
+            "url": p.get("url_item") or p.get("url_final") or p.get("url", ""),
             "disponibilidade": p.get("disponibilidade", "desconhecida"),
             "verificado_em": p.get("verificado_em", ""),
         })
@@ -528,7 +559,9 @@ def deduplicar(produtos: list) -> list:
         if p.get("preco") is not None and (
                 dest.get("preco") is None or p["preco"] < dest["preco"]):
             for k in ("preco", "moeda", "preco_texto", "loja", "url_final",
-                      "disponibilidade", "verificado_em"):
+                      "disponibilidade", "verificado_em", "url_item",
+                      "preco_origem", "link_veredito", "link_codigo",
+                      "link_motivo", "item_de_listagem"):
                 dest[k] = p.get(k)
             dest["preco_confirmado"] = True
     for p in por_chave.values():
@@ -558,41 +591,115 @@ def _ram_do_produto(p: dict) -> tuple | None:
 
 
 def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
-    """(dentro, fora_com_motivo). Fora do orçamento/specs vem explicado."""
+    """(dentro, fora_com_motivo). Fora do orçamento/specs vem explicado.
+
+    Cada produto fora carrega `excluido_codigos` (ex.: preco_acima, usado)
+    para a etapa de alternativas não depender de texto.
+    """
     dentro, fora = [], []
     orc = criterios.get("orcamento", {}) or {}
     specs = criterios.get("specs", {}) or {}
     for p in produtos:
-        motivos = []
+        motivos, codigos = [], []
         if orc.get("max") is not None and p.get("preco") is not None \
                 and p["preco"] > orc["max"]:
             motivos.append(f"acima do orçamento ({p['preco_texto']})")
+            codigos.append("preco_acima")
         if orc.get("min") is not None and p.get("preco") is not None \
                 and p["preco"] < orc["min"]:
             motivos.append(f"abaixo da faixa ({p['preco_texto']})")
+            codigos.append("preco_abaixo")
         if specs.get("ram_fisica_gb"):
             ram = _ram_do_produto(p)
             if ram is not None and ram[0] < specs["ram_fisica_gb"] and ram[0] > 0:
                 motivos.append(f"RAM física abaixo do pedido ({ram[0]}GB)")
+                codigos.append("ram_abaixa")
             elif ram is not None and ram[0] == 0 and specs["ram_fisica_gb"] > 0:
                 motivos.append("só informa RAM virtual/expansível")
+                codigos.append("ram_virtual")
         if specs.get("flag_novo"):
             cond = str((p.get("specs", {}) or {}).get("Condicao", "")).lower()
             if cond == "usado":
                 motivos.append("usado (pedido: somente novos)")
+                codigos.append("usado")
         if specs.get("armazenamento_gb"):
             txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
             m = re.search(r"(\d{2,4})\s?gb", txt)
             if m and int(m.group(1)) < specs["armazenamento_gb"]:
                 motivos.append("armazenamento abaixo do pedido")
+                codigos.append("armazenamento_abaixa")
         if motivos:
             p["excluido_por"] = "; ".join(motivos)
+            p["excluido_codigos"] = codigos
             fora.append(p)
         else:
             dentro.append(p)
     dentro.sort(key=lambda p: (not p.get("preco_confirmado"),
                                p.get("preco") is None, p.get("preco") or 0))
     return dentro, fora
+
+
+def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
+                         tolerancia_preco: float = 0.25) -> list:
+    """'Quase atende' → alternativa com diferenças explícitas; resto, descarte.
+
+    Nunca esconde a diferença: preço acima do teto (até +25%), RAM ou
+    armazenamento abaixo do pedido, RAM só virtual, usado quando pediu
+    novo — cada uma vira texto claro em `diferencas`. Muito acima do
+    orçamento ou produto de outra faixa (abaixo do mínimo) é descarte.
+    """
+    orc = criterios.get("orcamento", {}) or {}
+    specs = criterios.get("specs", {}) or {}
+    alts = []
+    for p in fora or []:
+        codigos = set(p.get("excluido_codigos") or [])
+        difs: list = []
+        distancias: list = []
+        if "preco_acima" in codigos:
+            teto = orc.get("max")
+            if not teto or p.get("preco") is None:
+                continue
+            excesso = (p["preco"] - float(teto)) / float(teto)
+            if excesso > tolerancia_preco:
+                continue
+            difs.append(f"{p.get('preco_texto', PRECO_NAO_CONFIRMADO)} — "
+                        f"{excesso * 100:.0f}% acima do teto "
+                        f"({formatar_preco(float(teto))})")
+            distancias.append(excesso)
+        if "ram_abaixa" in codigos or "ram_virtual" in codigos:
+            ram = _ram_do_produto(p)
+            pedido = specs.get("ram_fisica_gb") or 0
+            if ram and ram[0] and pedido:
+                difs.append(f"RAM {ram[0]}GB (pedido: {pedido}GB)")
+                distancias.append(max(0.0, (pedido - ram[0]) / float(pedido)))
+            else:
+                difs.append(f"RAM física não confirmada (pedido: {pedido}GB)"
+                            if pedido else "RAM não confirmada")
+                distancias.append(0.6)
+        if "armazenamento_abaixa" in codigos:
+            pedido = specs.get("armazenamento_gb") or 0
+            txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
+            m = re.search(r"(\d{2,4})\s?gb", txt)
+            if m and pedido:
+                difs.append(f"armazenamento {int(m.group(1))}GB (pedido: {pedido}GB)")
+                distancias.append(max(0.0, 1 - int(m.group(1)) / float(pedido)))
+            else:
+                difs.append("armazenamento abaixo do pedido")
+                distancias.append(0.6)
+        if "usado" in codigos:
+            difs.append("condição: usado (pedido: somente novos)")
+            distancias.append(0.5)
+        if not difs:
+            continue
+        alt = dict(p)
+        alt["diferencas"] = " · ".join(difs)
+        alt["diferencas_lista"] = difs
+        alt["distancia"] = round(min(distancias), 3)
+        alts.append(alt)
+    alts.sort(key=lambda a: (a.get("distancia", 1.0),
+                             a.get("preco_confirmado") is False,
+                             a.get("preco") or 0))
+    return alts[:maximo]
 
 
 # ── Persistência (por dono; preço guardado = histórico) ─────────────────
@@ -792,6 +899,8 @@ def produto_de_mlb(item: dict) -> dict | None:
         "avaliacao": None, "n_avaliacoes": None,
         "condicao_mlb": condicao,
         "specs": specs,
+        "origem_preco": "mlb",
+        "url_produto": link,
         "ofertas_ld": [{
             "preco": pv[0] if pv else None,
             "moeda": pv[1] if pv else "BRL",
@@ -822,9 +931,33 @@ def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
     return [], etapas
 
 
+def buscar_web_v55(consulta: str, max_resultados: int = 10) -> tuple:
+    """Etapa web do Research Engine V5.5: orquestrador multi-provedor real.
+
+    Roda por ÚLTIMO na cadeia (não muda a ordem mlb → ddg → ddg-lite dos
+    diagnósticos legados). Nunca levanta: bloqueio/vazio viram etapa.
+    Retorna (achados, etapas).
+    """
+    try:
+        achados, info = research._buscar_orquestrado(consulta, max_resultados=max_resultados)
+    except Exception as exc:
+        return [], [f"web: falhou ({type(exc).__name__})"]
+    estado = (info or {}).get("estado", "") or "?"
+    if not achados:
+        return [], [f"web: sem resultados ({estado})"]
+    usados = ((info or {}).get("provedores", {}) or {}).get("usados", {}) or {}
+    nomes = "+".join(sorted(usados)[:3]) or "orquestrado"
+    return achados, [f"web: {len(achados)} resultados ({nomes}, {estado})"]
+
+
 def buscar_com_fallback(consulta: str, buscar_fn=None,
                         limite_mlb: int = 10) -> tuple:
-    """Cadeia mlb → ddg → lite. Retorna (achados, etapas). Nunca levanta."""
+    """Cadeia mlb → ddg → lite → web (orquestrador). Retorna (achados, etapas).
+
+    Nunca levanta. A etapa `web` roda por último e só quando as anteriores
+    não trouxeram nada; ela é a mesma busca multi-provedor do Research
+    Engine (Bing/Marginalia/Wikipedia/...), sem bypass de bloqueio.
+    """
     if buscar_fn is not None:
         try:
             return list(buscar_fn(consulta) or [])[:12], ["injetado (teste)"]
@@ -839,7 +972,11 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
         etapas.append(f"mlb: falhou ({type(exc).__name__})")
     ddg, detapas = buscar_ddg_chain(consulta)
     etapas.extend(detapas)
-    return ddg, etapas
+    if ddg:
+        return ddg, etapas
+    achados, wetapas = buscar_web_v55(consulta)
+    etapas.extend(wetapas)
+    return achados, etapas
 
 
 def diagnosticar_provedores(timeout: float = 6.0) -> list:
@@ -887,8 +1024,16 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     return consultas[:2]
 
 
-def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None) -> list:
-    """Extrai produtos estruturados de 1 página. [] se não houver dado."""
+def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
+                       consulta: str = "") -> list:
+    """Extrai produtos estruturados de 1 página, com verificação honesta.
+
+    V5.5: a página baixada é avaliada por `source_check.avaliar_pagina`
+    (sem novo download). Produto de página de listagem/categoria só entra
+    quando o dado estruturado traz a URL do item — e o card marca o link
+    como NÃO verificado (a página do item não foi aberta). Página sem
+    sinais de produto nunca vira card (vira fonte).
+    """
     try:
         if baixar_fn is not None:
             rec = baixar_fn(url)
@@ -904,23 +1049,92 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None) -> list:
     except Exception as exc:
         log.info("shopping: página ignorada (%s): %s", type(exc).__name__, url[:80])
         return []
+    try:
+        aval = source_check.avaliar_pagina(
+            pagina, final, consulta=consulta or titulo,
+            esperado={"tipo": "produto"})
+    except Exception:
+        aval = {}
+    listagem = aval.get("codigo") == "listagem_nao_produto"
     saidas = []
     try:
         for ext in extrair_ofertas_jsonld(pagina):
+            ext["origem_preco"] = "jsonld"
+            url_item = ext.get("url_produto") or ""
+            if listagem and not url_item:
+                continue  # listagem sem link próprio do item → fonte, não produto
+            if listagem:
+                val = {"veredito": "nao_verificado", "codigo": "item_de_listagem",
+                       "motivo": "item extraído de listagem; página do item não aberta"}
+            else:
+                val = aval
             try:
-                saidas.append(montar_produto(ext, url, final, titulo))
+                saidas.append(montar_produto(ext, url, final, titulo,
+                                             validacao=val, url_item=url_item))
             except Exception:
                 continue
-        if not saidas:
+        if not saidas and not listagem:
             og = extrair_opengraph(pagina)
-            if og.get("nome"):
+            if og.get("nome") and aval.get("veredito") in ("verificado", "parcial"):
+                if og["ofertas_ld"][0].get("preco_confirmado"):
+                    og["origem_preco"] = "opengraph"
                 try:
-                    saidas.append(montar_produto(og, url, final, titulo))
+                    saidas.append(montar_produto(og, url, final, titulo,
+                                                 validacao=aval))
                 except Exception:
                     pass
     except Exception:
         return []
     return saidas
+
+
+def verificar_imagens(produtos: list, maximo: int = 3, timeout: float = 5.0,
+                      abrir=None, workers: int = 3) -> list:
+    """Valida até `maximo` imagens (formato real, dimensões, tamanho).
+
+    Reprovar (conteúdo não-imagem, pixel de rastreador) limpa a imagem para
+    o card mostrar "sem foto" em vez de imagem quebrada. Não verificado
+    (rede/bloqueio) mantém a imagem e fica registrado. Nunca inventa.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    alvos = [p for p in (produtos or [])
+             if re.match(r"^https?://", (p.get("imagem") or "").strip(), re.I)]
+    alvos = alvos[:max(0, int(maximo))]
+    if not alvos:
+        return produtos or []
+    with ThreadPoolExecutor(max_workers=max(1, min(workers, len(alvos))),
+                            thread_name_prefix="juliaimg") as pool:
+        futs = [(p, pool.submit(source_check.validar_imagem, (p.get("imagem") or "").strip(),
+                                timeout=timeout, abrir=abrir))
+                for p in alvos]
+        for p, fut in futs:
+            try:
+                res = fut.result()
+            except Exception:
+                continue
+            if not isinstance(res, dict):
+                continue
+            p["imagem_veredito"] = res.get("veredito", "") or ""
+            if res.get("veredito") == "reprovado":
+                p["imagem_motivo"] = _limpa(res.get("motivo"), 120)
+                p["imagem"] = ""
+    return produtos or []
+
+
+def _resumo_verificacao(produtos: list) -> dict:
+    """Contagem honesta de vereditos (link e imagem) dos produtos exibidos."""
+    links = {v: 0 for v in source_check.VEREDITOS}
+    imagens = {v: 0 for v in source_check.VEREDITOS}
+    for p in produtos or []:
+        v = p.get("link_veredito") or ""
+        if v in links:
+            links[v] += 1
+        iv = p.get("imagem_veredito") or ""
+        if iv in imagens:
+            imagens[iv] += 1
+    links["total"] = sum(links[v] for v in source_check.VEREDITOS)
+    imagens["total"] = sum(imagens[v] for v in source_check.VEREDITOS)
+    return {"links": links, "imagens": imagens}
 
 
 def pesquisar(db, owner: str, texto: str, conv: str = "",
@@ -952,6 +1166,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         for a in parcial[:12]:
             if a.get("url") and a["url"] not in vistas:
                 vistas.add(a["url"])
+                if "_consulta" not in a:
+                    a["_consulta"] = q
                 achados.append(a)
     if not achados:
         resultado = {"produtos": [], "fontes": [], "criterios": criterios,
@@ -981,7 +1197,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     _prog("consultando", f"{len(alvos)} páginas")
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliashop") as pool:
         futs = {pool.submit(_recuperar_ofertas, a["url"], a.get("titulo", ""),
-                            baixar_fn): a for a in alvos}
+                            baixar_fn, a.get("_consulta", "")): a for a in alvos}
         for fut, a in futs.items():
             try:
                 brutos.extend(fut.result())
@@ -992,12 +1208,21 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     _prog("validando", f"{len(dedup)} modelos únicos")
     dentro, fora = aplicar_filtros(dedup, criterios)
     produtos = dentro[:MAX_PRODUTOS]
-    _prog("organizando", f"{len(produtos)} recomendações")
+    alternativas = separar_alternativas(fora, criterios)
+    ids_alt = {a.get("id") for a in alternativas}
+    duros = [p for p in fora if p.get("id") not in ids_alt]
+    if baixar_fn is None and produtos:
+        _prog("verificando", "imagens reais dos produtos")
+        verificar_imagens(produtos)
+    _prog("organizando", f"{len(produtos)} recomendações"
+          + (f", {len(alternativas)} alternativas" if alternativas else ""))
     fontes = [{"id": f"S{i + 1}", "titulo": (a.get("titulo") or "")[:160],
                "url": a.get("url", "")[:500]}
               for i, a in enumerate(achados[:8])]
-    resultado = {"produtos": produtos, "fontes": fontes, "criterios": criterios,
-                 "total_bruto": len(brutos), "excluidos": fora[:6],
+    resultado = {"produtos": produtos, "alternativas": alternativas,
+                 "fontes": fontes, "criterios": criterios,
+                 "total_bruto": len(brutos), "excluidos": duros[:6],
+                 "verificacao": _resumo_verificacao(produtos + alternativas),
                  "de_cache": False, "verificado_em": agora_iso(),
                  "etapas_provedores": etapas_prov[:8]}
     salvar_consulta(db, owner, conv, consulta, criterios, resultado)
@@ -1053,15 +1278,41 @@ def comparar(produtos: list) -> list:
 
 # ── Grounding para o LLM (texto; cards vão no fence determinístico) ───
 
+def _link_do_produto(p: dict) -> str:
+    return p.get("url_item") or p.get("url_final") or p.get("url", "") or ""
+
+
+def _selo_verificacao(p: dict) -> str:
+    """Rótulo curto e honesto do estado do link (nunca "ok" sem verificação)."""
+    if p.get("item_de_listagem"):
+        return "link do item veio de listagem (página do item NÃO aberta)"
+    v = p.get("link_veredito") or ""
+    return {"verificado": "página verificada",
+            "parcial": "verificação parcial",
+            "reprovado": "link REPROVADO — não indicar como página de compra",
+            "nao_verificado": "link não verificado"}.get(v, "link não verificado")
+
+
 def bloco_para_llm(resultado: dict) -> str:
     """Bloco system com ofertas verificadas. Sem dado → ordem de honestidade."""
     prods = (resultado or {}).get("produtos", [])
+    alts = (resultado or {}).get("alternativas", []) or []
     if not prods:
-        return ("RESULTADO DE PESQUISA DE PRODUTOS (executada agora): nenhuma "
-                "página trouxe dados estruturados verificáveis (preço/imagem). "
-                "Diga com honestidade que não encontrou ofertas confirmadas e "
-                "peça um modelo mais específico. PROIBIDO inventar produtos, "
-                "preços, lojas, fotos, avaliações ou links.")
+        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (executada agora): nenhuma "
+                  "oferta atende a TODOS os critérios com dados estruturados "
+                  "verificáveis (preço/imagem)."]
+        if alts:
+            linhas.append("OPÇÕES PRÓXIMAS (NÃO atendem a tudo; cite SEMPRE as "
+                          "diferenças e nunca como se atendessem):")
+            for a in alts[:3]:
+                linhas.append(
+                    f"- {a.get('nome', '')[:120]} | {a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
+                    f" | loja: {a.get('loja', '')} | {_link_do_produto(a)}"
+                    f" | diferenças: {a.get('diferencas', '')}")
+        linhas.append("Diga com honestidade o que faltou e peça um modelo mais "
+                      "específico. PROIBIDO inventar produtos, preços, lojas, "
+                      "fotos, avaliações ou links.")
+        return "\n".join(linhas)
     linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (dados verificados agora; "
                "só cite ESTES produtos/preços/lojas/links; os cards visuais "
                "serão anexados pela ferramenta):"]
@@ -1070,10 +1321,19 @@ def bloco_para_llm(resultado: dict) -> str:
                           list((p.get("specs", {}) or {}).items())[:6])
         linhas.append(
             f"- [{i + 1}] {p.get('nome', '')} | {p.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
-            f" | loja: {p.get('loja', '')} | {p.get('url_final') or p.get('url', '')}"
+            f" | loja: {p.get('loja', '')} | link: {_link_do_produto(p)}"
+            f" | {_selo_verificacao(p)}"
             f" | aval: {p.get('avaliacao') if p.get('avaliacao') is not None else 'não informada'}"
             f" | disp: {p.get('disponibilidade', '')}"
             + (f" | specs: {specs}" if specs else ""))
+    if alts:
+        linhas.append("OPÇÕES PRÓXIMAS DO PEDIDO (NÃO atendem a todos os critérios; "
+                       "cite SEMPRE as diferenças, nunca como se atendessem):")
+        for a in alts[:3]:
+            linhas.append(
+                f"- {a.get('nome', '')[:120]} | {a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
+                f" | loja: {a.get('loja', '')} | {_link_do_produto(a)}"
+                f" | diferenças: {a.get('diferencas', '')}")
     for ex in (resultado or {}).get("excluidos", [])[:3]:
         linhas.append(f"- EXCLUÍDO (explique se citar): {ex.get('nome', '')[:80]}"
                        f" ({ex.get('excluido_por', '')})")
@@ -1098,7 +1358,7 @@ def _jdui_produto(p: dict) -> dict:
         "preco_valor": p.get("preco"),
         "moeda": p.get("moeda", "BRL")[:3],
         "loja": p.get("loja", "")[:80],
-        "url": (p.get("url_final") or p.get("url", ""))[:500],
+        "url": _link_do_produto(p)[:500],
         "specs": {str(k)[:40]: str(v)[:120]
                   for k, v in list((p.get("specs", {}) or {}).items())[:12]},
         "avaliacao": p.get("avaliacao"),
@@ -1174,19 +1434,40 @@ def fence_comparacao(produtos: list, fontes: list | None = None) -> str:
 def resumo_texto(resultado: dict) -> str:
     """Texto Markdown do chat (cards vão no fence; sem JSON bruto)."""
     prods = (resultado or {}).get("produtos", [])
+    alts = (resultado or {}).get("alternativas", []) or []
     crit = (resultado or {}).get("criterios", {}) or {}
     if not prods:
         if (resultado or {}).get("erro") == "provedor_indisponivel":
             return ("Não consegui consultar ofertas agora (provedor indisponível). "
                     "Tente de novo em instantes. 🔍")
+        if alts:
+            linhas = [f"Encontrei {len(alts)} opção(ões), mas **nenhuma atende a "
+                      "todos os critérios**. Próximas do pedido (com as diferenças):"]
+            for a in alts[:3]:
+                linhas.append(f"- **{a.get('nome', '')[:80]}** — "
+                               f"{a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
+                               f" · {a.get('loja', '')}"
+                               f"\n  _diferenças: {a.get('diferencas', '')}_")
+            return "\n".join(linhas)
         return ("Pesquisei anúncios, mas nenhuma página trouxe dados estruturados "
                 "confiáveis (preço/imagem) para montar cards. Me diga um modelo "
                 "específico que eu aprofundo a busca. 🔍")
     cat = crit.get("categoria") or "produtos"
-    linhas = [f"Encontrei **{len(prods)}** {cat} com dados verificados:"]
+    todos_ok = all(p.get("link_veredito") == "verificado" for p in prods)
+    cabeca = (f"Encontrei **{len(prods)}** {cat} com dados verificados:"
+              if todos_ok else
+              f"Encontrei **{len(prods)}** {cat} com dados estruturados reais:")
+    linhas = [cabeca]
     for p in prods:
+        marca = ""
+        if p.get("item_de_listagem") or p.get("link_veredito") in ("nao_verificado", "reprovado"):
+            marca = " · _link não verificado_"
         linhas.append(f"- **{p['nome']}** — {p.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
-                       f" · {p.get('loja', '')}")
+                       f" · {p.get('loja', '')}{marca}")
+    for a in alts[:3]:
+        linhas.append(f"- _Próxima do pedido_: **{a.get('nome', '')[:60]}** — "
+                       f"{a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
+                       f" _({a.get('diferencas', '')})_")
     for ex in (resultado or {}).get("excluidos", [])[:3]:
         linhas.append(f"- _{ex.get('nome', '')[:60]}_: fora ({ex.get('excluido_por', '')})")
     if (resultado or {}).get("de_cache"):
