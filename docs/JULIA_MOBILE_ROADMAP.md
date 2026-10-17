@@ -132,8 +132,29 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - Contrato: [JULIA_3D_INTERACTIONS.md](JULIA_3D_INTERACTIONS.md); cenas: [JULIA_3D_EDUCATION.md](JULIA_3D_EDUCATION.md).
 - Evidências, testes e limites: [RELATORIO_JULIA_5.4.md](../RELATORIO_JULIA_5.4.md).
 
-## V5.5 — 3D Optimization & Integration (futuro)
-- Otimização e integração final do 3D ao chat e ao JDUI.
+## V5.5 — RESEARCH INTELLIGENCE 3.0 (em entrega; commits locais)
+- Busca orquestrada multi-provedor real (11 provedores API/feed oficial, sem
+  chave e sem bypass): estados honestos (ok/parcial/sem_resultados/
+  sem_correspondencia/bloqueado/rede/indisponivel), dedupe canônico,
+  lacunas do pedido com recuperação limitada a uma rodada.
+- Leitura de páginas determinística (`web_extract.py`) com trafilatura/
+  extruct opcionais; ranqueamento por correspondência real.
+- Shopping verificado: link/imagem com veredito honesto (`source_check.py`),
+  etapa web por último na cadeia, alternativas próximas com diferenças
+  explícitas, `url_item` e selo no card do JDUI.
+- Agentes: provedor "web" por último, lacunas de busca viram novas frentes
+  (busca+ler+analisar, uma rodada), divergência com conversão de unidades,
+  fontes desatualizadas informativas.
+- Docs: [JULIA_RESEARCH_INTELLIGENCE_3.md](JULIA_RESEARCH_INTELLIGENCE_3.md),
+  [JULIA_ADAPTIVE_SEARCH.md](JULIA_ADAPTIVE_SEARCH.md),
+  [JULIA_SOURCE_VALIDATION.md](JULIA_SOURCE_VALIDATION.md),
+  [V5_5_PROGRESS.md](V5_5_PROGRESS.md) e
+  [RELATORIO_JULIA_5.5.md](../RELATORIO_JULIA_5.5.md).
+
+## V5.6+ — 3D Optimization & Integration (futuro, sem trabalho iniciado)
+- Otimização e integração final do 3D ao chat e ao JDUI (slot que era
+  "V5.5 — 3D" foi reatribuído: o V5.5 passou a ser Research Intelligence 3.0).
+
 ## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,
   interfaces), biblioteca e moderação. Continua adiada até autorização e
