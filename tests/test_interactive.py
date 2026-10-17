@@ -318,6 +318,23 @@ def test_imagem_garantida_no_texto():
     modelo_falante = '[Mostrando uma imagem de Tom e Jerry]\n\nAqui está ela!'
     final = pc_agent.anexar_fontes(modelo_falante, [], termo)
     assert '![tom do desenho tom and jerry](https://loremflickr.com/800/500/' in final
-    # Se o modelo já trouxe markdown, não duplica.
-    com_img = 'veja ![gato](https://x.com/g.jpg)'
-    assert pc_agent.anexar_fontes(com_img, [], termo) == com_img
+    # Imagens primeiro: a imagem abre a resposta e o texto fica abaixo.
+    assert final.startswith('![tom do desenho tom and jerry]')
+    assert final.endswith('Aqui está ela!')
+    # Modelo trouxe a imagem no meio: ela sobe para o topo, sem duplicar.
+    com_img = 'veja ![gato](https://x.com/g.jpg) que fofo'
+    subiu = pc_agent.anexar_fontes(com_img, [], termo)
+    assert subiu.startswith('![gato](https://x.com/g.jpg)')
+    assert subiu.count('![') == 1 and 'que fofo' in subiu
+    # Já no topo: permanece intacto.
+    ja_top = '![gato](https://x.com/g.jpg)\n\ntexto abaixo'
+    assert pc_agent.anexar_fontes(ja_top, [], termo) == ja_top
+
+
+def test_imagens_primeiro_visual_abre_mensagem():
+    fence = '```jdui\n{"version":"1","blocks":[]}\n```'
+    out = pc_agent.imagens_primeiro(fence, 'Resumo com outras informações.')
+    assert out.startswith('```jdui') and out.endswith('Resumo com outras informações.')
+    assert pc_agent.imagens_primeiro('', 'só texto') == 'só texto'
+    assert pc_agent.imagens_primeiro(fence, '') == fence
+    assert pc_agent.imagens_primeiro(fence, '   ') == fence

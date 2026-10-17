@@ -1920,8 +1920,8 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         import urllib.parse
         slug = urllib.parse.quote(termo_img.strip() or "paisagem")
         partes_sistema.append(f"O usuário pediu uma IMAGEM sobre '{termo_img}'. "
-                              f"Além de descrever, inclua no final: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
-                              "para exibir a imagem no chat.")
+                              f"Comece a resposta com a imagem: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
+                              "na primeira linha, e escreva a descrição abaixo dela.")
     # V5.1: Intent Engine — estrutura validada guia roteamento, formato
     # e validação. `ultimos_resultados` resolve follow-ups ("os dois primeiros").
     try:
@@ -2004,11 +2004,32 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     return messages, extras
 
 
+_IMG_MD = re.compile(r"!\[([^\]\n]{0,160})\]\((https?://[^)\s]+|data:[^)\s]+)\)")
+
+
+def imagens_primeiro(fence: str, texto: str) -> str:
+    """Imagens primeiro: o visual (cards/galeria) abre a mensagem e o texto
+    fica abaixo. Sem fence, o texto segue intacto."""
+    corpo = (texto or "").strip()
+    if not fence:
+        return texto or ""
+    return fence + (("\n\n" + corpo) if corpo else "")
+
+
 def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
-    if termo_img and "![" not in (texto or ""):
+    texto = texto or ""
+    if termo_img:
         import urllib.parse
-        slug = urllib.parse.quote(termo_img.strip() or "paisagem")
-        texto = (texto or "") + f"\n\n![{termo_img}](https://loremflickr.com/800/500/{slug})"
+        m = _IMG_MD.search(texto)
+        if m and m.start() > 0:
+            # Imagens primeiro: o modelo deixou a imagem no meio/fim do texto
+            # — ela sobe para a primeira linha, sem duplicar.
+            resto = (texto[:m.start()] + texto[m.end():]).strip()
+            texto = m.group(0) + (("\n\n" + resto) if resto else "")
+        elif not m:
+            slug = urllib.parse.quote(termo_img.strip() or "paisagem")
+            # Imagens primeiro: imagem garantida abrindo a resposta.
+            texto = f"![{termo_img}](https://loremflickr.com/800/500/{slug})\n\n" + texto
     if fontes and "Fontes:" not in (texto or ""):
         linhas = "\n".join(
             f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"
@@ -3418,7 +3439,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 shopping.quer_fotos(prep.get("user_text", "")):
             fup = shopping.responder_followup(db, owner, conv, prep.get("user_text", ""))
             if fup:
-                texto_fup = fup["texto"] + (fup.get("fence") or "")
+                # Imagens primeiro: os cards visuais abrem; o texto vem abaixo.
+                texto_fup = imagens_primeiro(fup.get("fence"), fup["texto"])
                 direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"],
                                             texto_fup, owner)
                 try:
@@ -3620,7 +3642,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 if nota and nota not in texto_final:
                     texto_final = (texto_final or "") + "\n\n" + nota
             if fence_shop and "```jdui" not in texto_final:
-                texto_final = (texto_final or "") + fence_shop
+                # Imagens primeiro: cards com as fotos reais abrem a mensagem.
+                texto_final = imagens_primeiro(fence_shop, texto_final)
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
