@@ -17,6 +17,8 @@ from urllib.parse import urlparse
 
 import docs_agent
 import model3d
+import env_local
+env_local.carregar_env_local()  # .env local do PC (nunca sobrescreve o sistema)
 from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
 import hermes_bridge
 import intent
@@ -379,7 +381,8 @@ def gerar_texto(cfg: dict, messages: list, preferido: str = "",
     if any(providers.dividir(m)[0] != "hermes" for m in fila):
         return providers.tentar_modelos(
             fila, messages, timeout_por_tentativa=timeout,
-            max_tokens=max_tokens or cfg["max_tokens"])
+            max_tokens=max_tokens or cfg["max_tokens"],
+            proxy=cfg.get("proxy") or "")
     return hermes_bridge.tentar_modelos(
         cfg["proxy"], fila, messages,
         timeout_por_tentativa=timeout, max_tokens=max_tokens or cfg["max_tokens"])
@@ -391,7 +394,8 @@ def gerar_stream(cfg: dict, modelos: list, messages: list, emitir,
     if any(providers.dividir(m)[0] != "hermes" for m in modelos):
         return providers.chat_stream_fb(
             modelos, messages, emitir, deve_parar,
-            max_tokens=max_tokens or cfg["max_tokens"])
+            max_tokens=max_tokens or cfg["max_tokens"],
+            proxy=cfg.get("proxy") or "")
     return hermes_bridge.chat_stream_fb(
         cfg["proxy"], modelos, messages, emitir,
         deve_parar=deve_parar, max_tokens=max_tokens or cfg["max_tokens"])

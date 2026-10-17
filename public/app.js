@@ -1584,14 +1584,23 @@ function providerLabel(pid) {
   const p = (modelCatalog.providers || []).find(x => x.id === pid);
   return p ? p.label : pid;
 }
+function providerFlag(pid, campo) {
+  const p = (modelCatalog.providers || []).find(x => x.id === pid);
+  return !!(p && p[campo]);
+}
 function isConfigured(pid) {
   if (pid === 'hermes') return true;
-  const p = (modelCatalog.providers || []).find(x => x.id === pid);
-  return !!(p && p.configured);
+  return providerFlag(pid, 'configured') && !providerFlag(pid, 'auth_error');
 }
 function providerOf(id) {
+  const mapa = modelCatalog.itemProvider || {};
+  if (mapa[id]) return mapa[id];
   const i = String(id || '').indexOf('/');
-  return i > 0 ? id.slice(0, i) : 'hermes';
+  if (i > 0) {
+    const pref = id.slice(0, i).toLowerCase();
+    if ((modelCatalog.providers || []).some(p => p.id === pref)) return pref;
+  }
+  return 'hermes';
 }
 function fillModels(filter) {
   const sel = $('modelSelect');
@@ -1606,11 +1615,13 @@ function fillModels(filter) {
   const order = Object.keys(groups).sort((a, b) => isConfigured(b) - isConfigured(a));
   for (const pid of order) {
     const g = document.createElement('optgroup');
-    g.label = providerLabel(pid) + (isConfigured(pid) ? '' : ' · sem chave');
+    const pronto = isConfigured(pid);
+    const recusada = !pronto && providerFlag(pid, 'auth_error');
+    g.label = providerLabel(pid) + (pronto ? '' : (recusada ? ' · chave recusada no PC' : ' · sem chave'));
     for (const id of groups[pid]) {
       const o = document.createElement('option');
       o.value = id; o.textContent = id;
-      if (!isConfigured(pid)) { o.disabled = true; o.textContent += ' (sem chave)'; }
+      if (!pronto) { o.disabled = true; o.textContent += recusada ? ' (chave recusada — atualize no PC)' : ' (sem chave)'; }
       if (id === cur) o.selected = true;
       g.appendChild(o);
     }
@@ -1620,19 +1631,46 @@ function fillModels(filter) {
   return cur;
 }
 async function loadModels(force) {
-  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return; }
-  if (!force && Date.now() - modelsLoadedAt < 300000) return;
+  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return false; }
+  if (!force && Date.now() - modelsLoadedAt < 300000) return true;
   try {
     const r = await api('/api/ai/models');
     modelsLoadedAt = Date.now();
-    modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '' };
+    modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
+      itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])) };
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
-    $('aiStatus').textContent = 'IA pronta · ' + (modeloAtivo() || r.default || '?');
-  } catch (_) { $('aiStatus').textContent = 'IA: Hermes indisponível'; }
+    const escolhido = modeloAtivo() || r.default || '?';
+    const pid = providerOf(escolhido);
+    const aviso = (pid !== 'hermes' && !isConfigured(pid))
+      ? (providerFlag(pid, 'auth_error') ? ' · chave recusada no PC' : ' · sem chave no PC') : '';
+    $('aiStatus').textContent = 'IA pronta · ' + escolhido + aviso;
+    return true;
+  } catch (_) { $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
 }
 $('modelSearch') && $('modelSearch').addEventListener('input', e => { fillModels(e.target.value); });
 $('modelSelect').addEventListener('change', e => { localStorage.setItem('julia-model', e.target.value); $('aiStatus').textContent = 'IA pronta · ' + e.target.value; });
+$('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
+  const b = $('modelRefresh');
+  b.disabled = true;
+  const ok = await loadModels(true);
+  b.disabled = false;
+  showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
+});
+function abrirSeletorDeModelo() {
+  setDrawer(true);
+  const det = document.querySelector('.drawer-connection');
+  if (det) det.open = true;
+  const alvo = $('modelSelect') || $('modelSearch');
+  if (alvo) {
+    if (alvo.scrollIntoView) alvo.scrollIntoView({ block: 'nearest' });
+    try { alvo.focus({ preventScroll: true }); } catch (_) { alvo.focus(); }
+  }
+}
+$('popModelRow') && $('popModelRow').addEventListener('click', () => { $('statusPop').hidden = true; abrirSeletorDeModelo(); });
+$('popModelRow') && $('popModelRow').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeModelo(); }
+});
 
 /* ----- IA com streaming rápido ----- */
 function setGenBar(on, label) {
@@ -1850,9 +1888,10 @@ async function runAIRequest(userRow, options, timing) {
     } finally { clearInterval(stall); await reader.cancel().catch(() => {}); }
   } catch (err) {
     const inter = aiAbort && aiAbort.signal.aborted;
+    const motivo = (err && err.message) ? err.message : 'tente de novo';
     const kept = cur || ((await allMessages()).find(m => m.id === replyId) || {}).text || '';
-    await saveReply(kept, 'failed');
-    showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + (err.message || 'tente de novo'));
+    await saveReply(kept || (inter ? '' : 'Não consegui responder: ' + motivo), 'failed');
+    showToast(inter ? 'Interrompido. Toque para retomar.' : 'IA falhou: ' + motivo);
   } finally {
     timing.finishedAt = performance.now();
     console.info('[chat-timing]', JSON.stringify({

@@ -1,0 +1,53 @@
+{
+  "picker": {
+    "grupos": [
+      {
+        "rotulo": "OpenAI · chave recusada no PC",
+        "opcoes": 3,
+        "desabilitadas": 3
+      },
+      {
+        "rotulo": "Google Gemini · sem chave",
+        "opcoes": 3,
+        "desabilitadas": 3
+      },
+      {
+        "rotulo": "Anthropic · sem chave",
+        "opcoes": 2,
+        "desabilitadas": 2
+      },
+      {
+        "rotulo": "DeepSeek · sem chave",
+        "opcoes": 2,
+        "desabilitadas": 2
+      },
+      {
+        "rotulo": "Groq · sem chave",
+        "opcoes": 2,
+        "desabilitadas": 2
+      },
+      {
+        "rotulo": "Mistral · sem chave",
+        "opcoes": 2,
+        "desabilitadas": 2
+      },
+      {
+        "rotulo": "OpenRouter · sem chave",
+        "opcoes": 4,
+        "desabilitadas": 4
+      }
+    ],
+    "openai": {
+      "rotulo": "OpenAI · chave recusada no PC",
+      "opcoes": 3,
+      "desabilitadas": 3
+    }
+  },
+  "primeiroErro": "Não consegui responder: OpenAI recusou a chave (HTTP 401/403). Atualize OPENAI_API_KEY no PC e reinicie o agente.",
+  "segundoErro": "Não consegui responder: Provedor Google Gemini sem chave (GEMINI_API_KEY).",
+  "errors": [],
+  "esperados": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "checks": "seletor honesto (chave recusada desabilitada), atualizar real, atalho status->modelo, OpenAI 401 real com motivo honesto, troca para Gemini na mesma conversa sem recomeçar"
+}

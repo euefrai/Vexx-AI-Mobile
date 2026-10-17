@@ -20,6 +20,9 @@ from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from pydantic import BaseModel, Field
 from workspace_store import WorkspaceBatch
 
+import env_local
+env_local.carregar_env_local()  # .env local do PC (nunca sobrescreve o sistema)
+
 log = logging.getLogger("JULIA-mobile")
 ROOT = Path(__file__).resolve().parent
 app = FastAPI(title="Vexx AI Relay", docs_url=None, redoc_url=None, openapi_url=None)
@@ -1925,12 +1928,18 @@ async def ai_models(request: Request):
         raise HTTPException(503, result.get("error", "Hermes indisponível"))
     if result.get("type") != "ai_models":
         raise HTTPException(503, "Modelos indisponíveis")
-    # providers: só [{id,label,configured}] — chaves nunca saem do PC.
+    # providers/items: só metadados — chaves nunca saem do PC.
     provs = result.get("providers", [])
     if not isinstance(provs, list):
         provs = []
+    itens = result.get("items", [])
+    if not isinstance(itens, list):
+        itens = []
     return {"models": result.get("models", [])[:500], "default": result.get("default", ""),
-            "providers": [{k: p.get(k) for k in ("id", "label", "configured")}
+            "items": [{k: i.get(k) for k in ("id", "provider")}
+                      for i in itens if isinstance(i, dict)][:500],
+            "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error")
+                           if p.get(k) is not None}
                           for p in provs if isinstance(p, dict)][:20]}
 
 

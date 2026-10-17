@@ -13,6 +13,7 @@ use os IDs do console).
 import json
 import logging
 import os
+import re
 import time
 import urllib.error
 import urllib.request
@@ -75,6 +76,51 @@ PROVIDERS = {
 
 ANTHROPIC_VERSION = "2023-06-01"
 
+# Erros de chamada DIRETA recebem a cara do provedor: nada de mensagem de
+# "hermes proxy" quando o problema é a chave do OpenAI/Gemini/etc. Nenhum
+# fragmento de chave aparece em mensagem ou detalhe.
+_FRAGMENTO_CHAVE = re.compile(r"(?:sk|key|api)[-_][A-Za-z0-9_\-]{8,}")
+
+
+def _limpar_detalhe(texto: str) -> str:
+    return _FRAGMENTO_CHAVE.sub("***", str(texto or ""))[:200]
+
+
+def _remapear(exc: BridgeErro, nome: str, model: str) -> BridgeErro:
+    d = definicao(nome)
+    if d is None or nome == "hermes":
+        return exc
+    env = d.get("key_env") or ""
+    codigo = exc.codigo
+    if codigo == "auth":
+        msg = (f"{d['label']} recusou a chave (HTTP 401/403). "
+               f"Atualize {env} no PC e reinicie o agente.")
+    elif codigo == "modelo-nao-encontrado":
+        msg = f"Modelo '{model}' não encontrado em {d['label']}."
+    elif codigo == "quota":
+        msg = f"{d['label']} sem cota/saldo (HTTP 402)."
+    elif codigo == "rate_limit":
+        msg = f"{d['label']} com limite excedido (HTTP 429). Aguarde 1–2 minutos."
+    elif codigo == "pedido":
+        msg = f"{d['label']} recusou o pedido (HTTP 422)."
+    elif codigo == "provedor":
+        msg = f"{d['label']} falhou no provedor. Tente de novo."
+    elif codigo in ("indisponivel", "timeout"):
+        msg = f"Sem resposta de {d['label']} (rede). Verifique a conexão do PC."
+    elif codigo == "http":
+        msg = f"Falha HTTP ao falar com {d['label']}."
+    else:
+        return exc
+    return BridgeErro(msg, codigo, _limpar_detalhe(exc.detalhe))
+
+
+def _chamar(fn, prov: str, model_id: str, *args, **kwargs):
+    """Chamada direta + erro remapeado (mantém código/cancelamento originais)."""
+    try:
+        return fn(*args, **kwargs)
+    except BridgeErro as exc:
+        raise _remapear(exc, prov, model_id) from None
+
 
 def definicao(nome: str) -> dict | None:
     return PROVIDERS.get(str(nome or "").lower())
@@ -108,14 +154,16 @@ def dividir(modelo: str) -> tuple:
     return "hermes", texto
 
 
-def _modelos_vivos_openai(nome: str, d: dict, timeout: float = 8.0) -> list | None:
+def _modelos_vivos_openai(nome: str, d: dict, timeout: float = 8.0) -> tuple:
+    """(ids|None, codigo_de_erro). 'auth' significa chave recusada — o
+    seletor desabilita o provedor em vez de deixar escolher o que não roda."""
     try:
         ids = hermes_bridge.listar_modelos(d["base"], timeout=timeout,
                                            api_key=chave(nome), hosts=d["hosts"])
     except BridgeErro as exc:
         log.warning("provedor %s: listagem falhou (%s)", nome, exc.codigo)
-        return None
-    return [i for i in ids if isinstance(i, str) and i][:200]
+        return None, exc.codigo
+    return ([i for i in ids if isinstance(i, str) and i][:200] or None), ""
 
 
 def listar_tudo(proxy_cfg: str = "") -> dict:
@@ -123,7 +171,8 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     itens, provs = [], []
     for nome, d in PROVIDERS.items():
         conf = True if nome == "hermes" else bool(chave(nome))
-        provs.append({"id": nome, "label": d["label"], "configured": conf})
+        prov = {"id": nome, "label": d["label"], "configured": conf}
+        provs.append(prov)
         if nome == "hermes":
             try:
                 for mid in hermes_bridge.listar_modelos(proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL):
@@ -137,11 +186,17 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                 itens.append({"id": f"{nome}/{mid}", "provider": nome,
                               "label": d["label"], "needs_key": True})
             continue
-        vivos = _modelos_vivos_openai(nome, d) if d["api"] == "openai" else None
+        vivos, erro = (None, "")
+        if d["api"] == "openai":
+            vivos, erro = _modelos_vivos_openai(nome, d)
+        auth_ruim = erro in ("auth", "sem_chave")
+        if auth_ruim:
+            prov["auth_error"] = True
         for mid in (vivos if vivos else d["modelos"]):
             itens.append({"id": f"{nome}/{mid}", "provider": nome,
                           "label": d["label"],
-                          **({} if vivos else {"curated": True})})
+                          **({} if vivos else {"curated": True}),
+                          **({"auth_error": True} if auth_ruim else {})})
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": hermes_bridge.DEFAULT_MODEL, "providers": provs}
 
@@ -168,13 +223,14 @@ def _para_anthropic(messages: list) -> tuple:
 
 
 def chat_complete(prov: str, model_id: str, messages: list,
-                  timeout: float = 60.0, max_tokens: int = 2000) -> dict:
+                  timeout: float = 60.0, max_tokens: int = 2000,
+                  proxy: str = "") -> dict:
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
     if prov == "hermes":
         return hermes_bridge.chat_complete(
-            hermes_bridge.DEFAULT_PROXY_URL, model_id, messages,
+            proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages,
             timeout=timeout, max_tokens=max_tokens)
     key = chave(prov)
     if not key:
@@ -182,10 +238,10 @@ def chat_complete(prov: str, model_id: str, messages: list,
                          "sem_chave")
     if d["api"] == "anthropic":
         return _anthropic_complete(d, key, model_id, messages, timeout, max_tokens)
-    return hermes_bridge.chat_complete(
-        d["base"], model_id, _para_openai(messages),
-        timeout=timeout, max_tokens=max_tokens,
-        api_key=key, hosts=d["hosts"])
+    return _chamar(hermes_bridge.chat_complete, prov, model_id,
+                   d["base"], model_id, _para_openai(messages),
+                   timeout=timeout, max_tokens=max_tokens,
+                   api_key=key, hosts=d["hosts"])
 
 
 def _anthropic_complete(d: dict, key: str, model_id: str, messages: list,
@@ -223,14 +279,16 @@ def _mapear_anthropic(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
     except Exception:
         detalhe = ""
     if exc.code in (401, 403):
-        return BridgeErro("Anthropic recusou a chave (401/403).", "auth", detalhe)
+        return BridgeErro("Anthropic recusou a chave (HTTP 401/403). "
+                          "Atualize ANTHROPIC_API_KEY no PC e reinicie o agente.",
+                          "auth", _limpar_detalhe(detalhe))
     if exc.code == 404:
-        return BridgeErro(f"Modelo '{model}' não encontrado na Anthropic.", "modelo-nao-encontrado", detalhe)
+        return BridgeErro(f"Modelo '{model}' não encontrado na Anthropic.", "modelo-nao-encontrado", _limpar_detalhe(detalhe))
     if exc.code == 429:
-        return BridgeErro("Anthropic com limite excedido (429).", "rate_limit", detalhe)
+        return BridgeErro("Anthropic com limite excedido (429). Aguarde 1–2 minutos.", "rate_limit", _limpar_detalhe(detalhe))
     if 500 <= exc.code < 600:
-        return BridgeErro(f"Anthropic falhou (HTTP {exc.code}).", "provedor", detalhe)
-    return BridgeErro(f"Falha HTTP {exc.code}.", "http", detalhe)
+        return BridgeErro(f"Anthropic falhou (HTTP {exc.code}). Tente de novo.", "provedor", _limpar_detalhe(detalhe))
+    return BridgeErro(f"Falha HTTP {exc.code} na Anthropic.", "http", _limpar_detalhe(detalhe))
 
 
 def _extrair_anthropic(dados: dict) -> str:
@@ -245,13 +303,13 @@ def _extrair_anthropic(dados: dict) -> str:
 
 def chat_stream(prov: str, model_id: str, messages: list, on_delta,
                 deve_parar=None, timeout: float = 180.0,
-                max_tokens: int = 2000) -> dict:
+                max_tokens: int = 2000, proxy: str = "") -> dict:
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
     if prov == "hermes":
         return hermes_bridge.chat_stream(
-            hermes_bridge.DEFAULT_PROXY_URL, model_id, messages, on_delta,
+            proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages, on_delta,
             deve_parar, timeout, max_tokens)
     key = chave(prov)
     if not key:
@@ -260,9 +318,10 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     if d["api"] == "anthropic":
         return _anthropic_stream(d, key, model_id, messages, on_delta,
                                  deve_parar, timeout, max_tokens)
-    return hermes_bridge.chat_stream(
-        d["base"], model_id, _para_openai(messages), on_delta,
-        deve_parar, timeout, max_tokens, api_key=key, hosts=d["hosts"])
+    return _chamar(hermes_bridge.chat_stream, prov, model_id,
+                   d["base"], model_id, _para_openai(messages), on_delta,
+                   deve_parar, timeout, max_tokens,
+                   api_key=key, hosts=d["hosts"])
 
 
 def _anthropic_stream(d: dict, key: str, model_id: str, messages: list, on_delta,
@@ -332,7 +391,7 @@ def _anthropic_stream(d: dict, key: str, model_id: str, messages: list, on_delta
 # ── Fallback entre modelos/provedores (mesma semântica do bridge) ─────
 
 def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float = 60.0,
-                   max_tokens: int = 2000) -> dict:
+                   max_tokens: int = 2000, proxy: str = "") -> dict:
     fila = [m for m in (modelos or []) if isinstance(m, str) and m][:5]
     if not fila:
         raise BridgeErro("Nenhum modelo configurado.", "sem_modelo")
@@ -344,7 +403,8 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
         try:
             prov, mid = dividir(modelo)
             res = chat_complete(prov, mid, messages,
-                                timeout=timeout_por_tentativa, max_tokens=max_tokens)
+                                timeout=timeout_por_tentativa, max_tokens=max_tokens,
+                                proxy=proxy)
             res["model_usado"] = modelo
             res["tentativas"] = tentativas
             return res
@@ -352,8 +412,13 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             if exc.codigo in ("auth", "sem_chave"):
-                raise BridgeErro(str(exc) + " (fallback interrompido).",
-                                 "auth", exc.detalhe) from None
+                # Credencial vale para todos os modelos do MESMO provedor.
+                # Se ainda há candidato de OUTRO provedor, seguimos a fila.
+                restantes = fila[i + 1:]
+                if not any(dividir(r)[0] != dividir(modelo)[0] for r in restantes):
+                    raise BridgeErro(str(exc) + " (fallback interrompido).",
+                                     "auth", exc.detalhe) from None
+                continue
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:
@@ -365,7 +430,7 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
 
 def chat_stream_fb(modelos: list, messages: list, on_delta,
                    deve_parar=None, timeout: float = 180.0,
-                   max_tokens: int = 2000) -> dict:
+                   max_tokens: int = 2000, proxy: str = "") -> dict:
     fila = [m for m in (modelos or []) if isinstance(m, str) and m][:5]
     if not fila:
         raise BridgeErro("Nenhum modelo configurado.", "sem_modelo")
@@ -383,15 +448,20 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
         try:
             prov, mid = dividir(modelo)
             res = chat_stream(prov, mid, messages, _emit, deve_parar,
-                              timeout, max_tokens)
+                              timeout, max_tokens, proxy=proxy)
             res["model_usado"] = modelo
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
-            if n_deltas[0] > 0 or exc.codigo in ("auth", "sem_chave"):
+            if n_deltas[0] > 0:
                 raise
+            if exc.codigo in ("auth", "sem_chave"):
+                restantes = fila[i + 1:]
+                if not any(dividir(r)[0] != dividir(modelo)[0] for r in restantes):
+                    raise
+                continue
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:

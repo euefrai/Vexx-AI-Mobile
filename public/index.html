@@ -110,6 +110,7 @@
           <label for="modelSelect">Modelo</label>
           <input id="modelSearch" class="model-search" type="search" placeholder="Pesquisar modelo ou provedor…" aria-label="Pesquisar modelo" autocomplete="off" />
           <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
+          <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
         </div>
         <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
         </details>
@@ -132,7 +133,7 @@
       </header>
       <div class="status-pop" id="statusPop" hidden role="status" aria-label="Detalhes de status">
         <div class="status-pop-row"><span class="status-dot" id="popDot"></span><strong id="connectionLabel">Verificando…</strong></div>
-        <div class="status-pop-row"><span>Modelo</span><span id="popModel">—</span></div>
+        <div class="status-pop-row" id="popModelRow" role="button" tabindex="0" title="Trocar o modelo que responde"><span>Modelo</span><span id="popModel">—</span></div>
         <div class="status-pop-row"><span>Sincronização</span><span id="popSync">—</span></div>
       </div>
 

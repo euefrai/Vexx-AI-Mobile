@@ -367,12 +367,15 @@ def test_ai_models_e_complete_via_agente_fake():
             assert req["type"] == "ai_models"
             ws.send_json({"request_id": req["request_id"], "type": "ai_models",
                           "models": ["fake-model"], "default": "fake-model",
+                          "items": [{"id": "openai/gpt-4o-mini", "provider": "openai",
+                                     "label": "OpenAI", "extra": 1}],
                           "providers": [{"id": "openai", "label": "OpenAI",
                                          "configured": True, "key_env": "X",
                                          "extra": 1}]})
             t.join(timeout=8)
             assert out["m"].json() == {
                 "models": ["fake-model"], "default": "fake-model",
+                "items": [{"id": "openai/gpt-4o-mini", "provider": "openai"}],
                 "providers": [{"id": "openai", "label": "OpenAI",
                                "configured": True}]}
 
