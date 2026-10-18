@@ -343,6 +343,82 @@ Correção (nunca placeholder em nenhuma camada):
   `test_frontend_smoke.py` (`img-loremflickr-removida`) atualizados.
 - Suíte completa: 735 passed / 4 skipped (sem regressões).
 
+### Etapa 2 — auditoria da pesquisa comercial (mapa e problemas confirmados)
+
+Pipeline mapeado (sem novos provedores): `extrair_criterios` →
+`_consultas_produto` → busca com fallback (MLB → DDG → web) →
+`_recuperar_ofertas` (JSON-LD/OG + `source_check`) → `aplicar_filtros` →
+`separar_alternativas` → `deduplicar` → `verificar_imagens` → fence JDUI →
+`resumo_texto`/`bloco_para_llm`.
+
+Problemas confirmados com evidência objetiva:
+
+1. **A busca descartava a referência pedida.** `_consultas_produto` montava
+   só categoria + marcas + specs: "celular galaxy s24 até R$ 3000" virava
+   `['celular comprar oferta', 'celular preço até 3000']`; "tênis adidas
+   pro model 2.0" virava `['tenis comprar oferta', ...]` — modelo e marca
+   caíam fora. Os resultados genéricos dos prints do usuário vêm daí.
+2. **Sem checagem de versão/edição.** "iPhone 15 Pro" aceitava o padrão;
+   "AirPods Pro" aceitava "AirPods 3"; "Adidas Pro Model" aceitava
+   Superstar.
+3. **Sem checagem de modelo.** "Galaxy S24" aceitava S23; "iPhone 15"
+   aceitava "iPhone 14"; "RTX 4060" aceitava "RTX 3060".
+4. **"Pro Max" contaminava o orçamento.** `_extrair_orcamento` casava o
+   "max" da edição e transformava o "256GB" seguinte em teto (R$ 256) —
+   todo produto real virava "acima do orçamento".
+5. **Milhar sem separador era truncado.** "R$ 7000" → 700 (regex exigia
+   grupos de milhar com ponto).
+6. **Marcas esportivas ausentes da lista** (adidas/nike/mizuno): pedido com
+   essas marcas não filtrava outra marca.
+
+### Incremento 1 — identidade do produto + busca com referência (concluído)
+
+`shopping.py`:
+
+- `_tiers_no_texto`/`_tiers_expandidos`: versão/edição (pro, pro max, plus,
+  ultra, mini, lite, max). "pro" como contração de "para o" em pt-BR
+  ("notebook pro meu filho") NÃO vira versão (guarda de palavras); "no max"
+  de orçamento não vira edição.
+- `_tokens_modelo`/`_numeros_familia`/`_conflito_modelo`/
+  `_modelo_mencionado`: modelo "irmão" com número diferente (s23 ≠ s24,
+  rtx3060 ≠ rtx4060) e família divergente (iphone 14 ≠ 15) são rejeitados
+  com motivo. Anúncio que NÃO indica o modelo pedido não é promovido a
+  correspondência: vira alternativa explícita ("modelo não indicado").
+  Sem token no anúncio, nenhum conflito numérico é inventado; anúncio que
+  cita o pedido nunca é rejeitado por número extra.
+- `aplicar_filtros`: códigos novos `versao_diferente`, `modelo_diferente`,
+  `modelo_nao_confirmado`; `separar_alternativas` explica cada um como
+  diferença ("versão pro max (pedido: pro)", "modelo s23 (pedido: s24)").
+- `_consultas_produto` + `_termo_referencia`: a referência pedida entra nas
+  consultas ("Adidas pro model 2.0 comprar oferta"); orçamento não duplica
+  ("s24 comprar oferta" + "s24 preço até 3000"); frases de pedido
+  (me mostre/preço/imagem/link) e conectivos não poluem a busca; sem
+  referência, mantém o formato anterior.
+- `_extrair_orcamento`: "pro max" neutralizado; capacidade/medida
+  (GB/TB/mAh/Hz/mm/pol) nunca vira teto; "R$ 7000" não é mais truncado.
+- `_MARCAS`: + adidas, nike, mizuno.
+
+Avaliação (conjunto comercial NOVO e separado do congelado,
+`benchmarks/shopping_v4_v1.json`, só fixtures locais, sem lojas reais):
+
+- **antes** (shopping.py do commit `6c8de06`): 20/39 aprovados (51,3%).
+- **depois**: 55/55 (100%) — o nº de subchecagens cresce quando a rejeição
+  correta acontece (códigos + diferenças da alternativa).
+- Reprodução: `python tools/bench_shopping_v4.py` (não grava por padrão;
+  `--salvar` grava artefato). Artefatos:
+  `qa-artifacts/v57/bench-shopping-v4-antes.json` e
+  `qa-artifacts/v57/bench-shopping-v4-2026-10-18.json`.
+- Testes: `tests/test_shopping_fase4.py` (25 casos, inclui controles
+  negativos: contração "pro", pedido sem modelo, capacidade ≠ orçamento).
+- Benchmark congelado `pesquisa_v57_v1` segue **34/34** (inalterado;
+  os casos congelados não passam pela extração nova por contrato).
+
+Pendências declaradas desta etapa: família de GPU cruzada (pedir "rtx 4060"
+e aceitar "gtx 1650" não é detectado — sem falso positivo pelo caminho
+atual); chips Apple ("M2" × "M3") ficam fora dos tokens (evita colisão com
+m²/genérico); "airpods max 3000" é tratado como orçamento (ambíguo por
+natureza; documentado).
+
 ## FASE 7 — JDUI (incremento 1 concluído)
 
 1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.

@@ -1,0 +1,28 @@
+{
+ "quando": "2026-10-18T02:44:17",
+ "benchmark": "shopping-v4-v1",
+ "casos": 39,
+ "aprovados": 20,
+ "taxa": 0.5128,
+ "falhas": [
+  "[identidade] pro × padrão (rejeita) (dentro=True, esperado=False)",
+  "[identidade] pro max × pro (rejeita) — códigos (códigos=['preco_acima'], esperados=['versao_diferente'])",
+  "[identidade] pro max × pro (rejeita) — alternativa (diferenças='')",
+  "[identidade] adidas pro model × superstar (rejeita) (dentro=True, esperado=False)",
+  "[identidade] s24 × s23 (rejeita) (dentro=True, esperado=False)",
+  "[identidade] iphone 15 × iphone 14 (rejeita) (dentro=True, esperado=False)",
+  "[identidade] modelo não indicado no anúncio (alternativa explícita) (dentro=True, esperado=False)",
+  "[identidade] rtx 4060 × rtx 3060 (rejeita) (dentro=True, esperado=False)",
+  "[identidade] airpods pro × airpods 3 (rejeita) (dentro=True, esperado=False)",
+  "[identidade] pedido adidas × anúncio nike (marca) (dentro=True, esperado=False)",
+  "[orcamento] iphone 15 pro max 256gb (orcamento={'max': 256.0}, esperado min=None max=None)",
+  "[orcamento] celular até 512gb de armazenamento (orcamento={'max': 512.0}, esperado min=None max=None)",
+  "[orcamento] iphone 15 pro max por R$ 7000 (orcamento={'max': 700.0}, esperado min=None max=None)",
+  "[orcamento] quero gastar até uns R$ 7000 (orcamento={'max': 700.0}, esperado min=None max=7000.0)",
+  "[consultas] celular galaxy s24 até R$ 3000 (consultas=['celular comprar oferta', 'celular preço até 3000'])",
+  "[consultas] Adidas pro model 2.0 me mostre o preço, imagem e link — 1ª limpa (1ª='Adidas pro model 2.0 me mostre o preço, imagem e link comprar oferta')",
+  "[consultas] notebook lenovo ideapad 3i 8gb 512gb (consultas=['notebook lenovo 8GB RAM 512GB comprar oferta', 'melhor notebook lenovo 8GB RAM 512GB comprar Brasil'])",
+  "[consultas] tênis adidas pro model 2.0 (consultas=['tenis comprar oferta', 'melhor tenis comprar Brasil'])",
+  "[consultas] Só me mostra tênis que dá pra usar em quadra de cimento (consultas=['tenis comprar oferta', 'melhor tenis comprar Brasil'])"
+ ]
+}
