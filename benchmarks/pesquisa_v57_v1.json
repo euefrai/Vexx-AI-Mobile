@@ -157,5 +157,22 @@
      "itens": [{"titulo": "Freio ABS: como funciona", "url": "https://a.example/y",
                 "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina"}],
      "ganho_real": false, "dominios_novos": [], "temas_novos": []}
+  ],
+  "indice": [
+    {"caso": "pagina_de_resultados_e_indice",
+     "item": {"titulo": "Resultados para freio ABS",
+              "url": "https://m.example/search?q=abs", "trecho": "",
+              "origem": "bing", "tipo": "pagina"},
+     "esperado": true},
+    {"caso": "pagina_de_conteudo_nao_e_indice",
+     "item": {"titulo": "Freio ABS: guia completo",
+              "url": "https://n.example/guia", "trecho": "",
+              "origem": "bing", "tipo": "pagina"},
+     "esperado": false},
+    {"caso": "caminho_de_categoria_e_indice",
+     "item": {"titulo": "Notícias de carros",
+              "url": "https://m.example/categoria/carros", "trecho": "",
+              "origem": "bing", "tipo": "pagina"},
+     "esperado": true}
   ]
 }

@@ -170,6 +170,11 @@ def rodar(dados: dict = None, real: bool = False, salvar: bool = True) -> dict:
              and g["dominios_novos"] == c["dominios_novos"]
              and g["temas_novos"] == c["temas_novos"])
 
+    # índice geral: detecção conservadora (sinaliza e demove, nunca apaga)
+    for c in dados.get("indice", []):
+        caso("indice", c["caso"],
+             orch._pagina_de_indice(c["item"]) == c["esperado"])
+
     total = sum(g["total"] for g in grupos.values())
     aprovados = sum(g["aprovados"] for g in grupos.values())
     relatorio = {

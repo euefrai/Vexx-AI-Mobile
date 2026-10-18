@@ -371,6 +371,31 @@ def _dominio(url: str) -> str:
         return ""
 
 
+RX_INDICE_TITULO = re.compile(
+    r"^\s*(resultados?( de busca| da busca| para)|p[áa]gina de resultados|"
+    r"busca por |busca - |search results|listagem de|[íi]ndice de|"
+    r"category:|categoria:)", re.I)
+RX_INDICE_CAMINHO = re.compile(
+    r"^/(search|busca|resultados?|categoria|category|tags?|[íi]ndice|"
+    r"indice|directory)(/|$)", re.I)
+
+
+def _pagina_de_indice(a: dict) -> bool:
+    """Página de índice/listagem geral — não é conteúdo do assunto.
+
+    V5.7 (FASE 2): quando a 1ª rodada traz só índices, o resultado é
+    reclassificado: a página é sinalizada e demovida (nunca apagada) e a
+    recuperação pede o assunto direto (fontes primárias).
+    """
+    if RX_INDICE_TITULO.search((a.get("titulo") or "").strip()):
+        return True
+    try:
+        caminho = urllib.parse.urlsplit(a.get("url") or "").path or "/"
+    except ValueError:
+        return False
+    return bool(RX_INDICE_CAMINHO.search(caminho))
+
+
 def deduplicar(achados: list) -> tuple:
     """Agrupa por URL canônica e sinaliza republicações. (únicos, descartes).
 
@@ -447,13 +472,15 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
     trecho = (a.get("trecho") or "").lower()
     url = (a.get("url") or "").lower()
     termos = _termos(consulta)
+    pagina_de_indice = _pagina_de_indice(a)  # V5.7: índice geral não é conteúdo
     pontos = 0.0
     for t in termos:
         if t in titulo:
             pontos += 3.0
         if t in trecho:
             pontos += 1.5
-        if t in url:
+        # URL de índice ecoa a busca (?q=…) — não vale ponto de conteúdo
+        if t in url and not pagina_de_indice:
             pontos += 1.0
     if not termos:
         pontos += 1.0
@@ -474,6 +501,11 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
         pontos += 2.5
     if sp.CLASSE_LIVRO in classes and tipo == "livro":
         pontos += 2.0
+    # V5.7: página de índice/listagem geral não é conteúdo do assunto —
+    # sinalizada e demovida (nunca apagada); fontes primárias sobem.
+    if pagina_de_indice:
+        a["pagina_de_indice"] = True
+        pontos -= 2.0
     alvo = _ano_alvo(consulta, info)
     if alvo is not None:
         ano = re.search(r"\b(20\d{2})\b", titulo + " " + trecho)
@@ -770,15 +802,28 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
 
     unicos, descartes = deduplicar(achados)
     ranqueados = ranquear(unicos, consulta, info["classes"], info)
+    # V5.7: rodada dominada por páginas de índice geral → o resultado é
+    # reclassificado (páginas sinalizadas/demovidas, nunca apagadas) e a
+    # recuperação pede o assunto direto (fontes primárias não alcançadas).
+    indice_geral = [a.get("url") for a in ranqueados if a.get("pagina_de_indice")]
+    so_indice = bool(ranqueados) and all(
+        a.get("pagina_de_indice") for a in ranqueados[:5])
+    if so_indice:
+        etapas.append(f"1ª rodada só com páginas de índice geral "
+                      f"({len(indice_geral)} sinalizada(s)); fontes primárias "
+                      f"não alcançadas")
     # correspondência: fração dos termos do pedido presentes nos melhores
     # (só termos que provam correspondência; genéricos de loja não contam)
     correspondencia = _correspondencia(ranqueados, termos_c)
     lacunas = detectar_lacunas(consulta, ranqueados, info["classes"], info)
+    if so_indice:
+        lacunas.append("primeira rodada só com páginas de índice geral")
     estado = _estado_final(ranqueados, falhas, vazios, consultas_feitas, correspondencia)
     recuperacao = _consultas_recuperacao(consulta, info["classes"], info, lacunas)
     # V5.7: enxuta também quando a correspondência é fraca (não só quando é
-    # nula) — cobre o caso em que só um termo funcional ("funciona") casou.
-    if correspondencia < 0.5 and len(termos_c) >= 2:
+    # nula) ou quando a rodada foi só de índices — cobre o caso em que só um
+    # termo funcional ("funciona") casou.
+    if (correspondencia < 0.5 or so_indice) and len(termos_c) >= 2:
         # consulta enxuta: todos os termos distintivos do pedido, sem os
         # genéricos que fazem índices gerais devolverem lixo; nada é
         # acrescentado nem removido do pedido (números e nomes intactos)
@@ -795,6 +840,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         "classes": info["classes"],
         "temporal": bool(info.get("temporal")),
         "desatualizados": [a.get("url") for a in ranqueados if a.get("desatualizado")],
+        "indice_geral": indice_geral,
         "lacunas": lacunas,
         "consultas": consultas[:consultas_feitas],
         "recuperacao": recuperacao,
@@ -844,6 +890,7 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
         {"temporal": bool(res.get("temporal"))})
     res["achados"] = merged
     res["desatualizados"] = [a.get("url") for a in merged if a.get("desatualizado")]
+    res["indice_geral"] = [a.get("url") for a in merged if a.get("pagina_de_indice")]
     res["descartes"] = (res.get("descartes", []) + extra.get("descartes", []))[:20]
     res["lacunas"] = extra.get("lacunas", res.get("lacunas", []))
     # estado/correspondência recalculados sobre o resultado final (honesto:

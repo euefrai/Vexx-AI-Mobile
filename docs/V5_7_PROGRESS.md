@@ -140,6 +140,25 @@ Nada é apagado; junk continua em `achados`. Consultas com 1 única rodada
 Testes: 4 casos novos em `tests/test_search_orchestrator_v57.py`; benchmark
 ganhou o grupo `ganho` (2 casos).
 
+### Incremento 6 — índice geral reclassificado + recuperação dirigida (concluído)
+
+Último item declarado da FASE 2. Detecção conservadora de página de
+índice/listagem (`_pagina_de_indice`): título ("Resultados para…",
+"Índice de…", "Busca…", "Category/Categoria:") ou caminho
+(`/search`, `/busca`, `/resultados`, `/categoria|category`, `/tag(s)`,
+`/indice|índice`, `/directory`). Regras:
+
+1. A página de índice é **sinalizada** (`pagina_de_indice`) e **demovida**
+   (−2; termos ecoados na querystring não valem ponto de conteúdo) —
+   nunca apagada; resultado expõe `indice_geral: [urls]`.
+2. Se a rodada inteira (topo) for só índices: etapa honesta "1ª rodada só
+   com páginas de índice geral (N sinalizada(s)); fontes primárias não
+   alcançadas", lacuna correspondente e a recuperação pede o assunto
+   direto (enxuta) — fontes primárias continuam vindo primeiro pela
+   cadeia congelada de provedores por classe (sem reordenação).
+
+Testes: 2 casos novos; benchmark ganhou o grupo `indice` (3 casos).
+
 ## FASE 7 — JDUI (incremento 1 concluído)
 
 1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.
@@ -219,15 +238,16 @@ penalidade.
 
 ## FASE 9 — Benchmark independente (concluído)
 
-`benchmarks/pesquisa_v57_v1.json` (fixtures congeladas, 31 casos) +
+`benchmarks/pesquisa_v57_v1.json` (fixtures congeladas, 34 casos) +
 `tools/bench_pesquisa_v57.py` (runner determinístico, provedores injetados,
 sem rede) + `tests/test_bench_pesquisa_v57.py` (wrapper pytest que exige
 aprovação total). Grupos: reformulação (8), termos de correspondência (4),
 fluxo junk→reformulação na mesma fonte (1), republicações (2), marca/specs
 de shopping (5), specs pareadas (2), links do card (5), conteúdo
-desatualizado em consulta temporal (2), ganho real de informação (2).
+desatualizado em consulta temporal (2), ganho real de informação (2),
+índice geral (3).
 
-Resultado 2026-10-18 (offline): **31/31, taxa global 1.0** (inclui os grupos
+Resultado 2026-10-18 (offline): **34/34, taxa global 1.0** (inclui os grupos
 `desatualizado`, 2 casos); artefato
 `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (o de 2026-10-17 fica
 como histórico, 27 casos). Sondas reais no mesmo
@@ -241,11 +261,11 @@ Como comparar antes/depois: o baseline "antes" está na FASE 1 acima
 
 ### Próximos incrementos planejados (FASE 2)
 
-- Fontes primárias e reclassificação por assunto quando a primeira rodada
-  tem só índice geral.
-
-(Conteúdo desatualizado — incremento 3; P6 — incremento 4; parada por ganho
-real de informação — incremento 5.)
+Nenhum item da lista declarada restante — todos implementados nos
+incrementos 1–6 (reformulação, correspondência, republicações,
+desatualizado, P6, parada por ganho, índice geral). Candidato futuro (não
+prometido): preferência de fontes primárias por classe além da cadeia
+congelada de provedores.
 
 ## Evidências (comandos)
 
@@ -256,7 +276,7 @@ real de informação — incremento 5.)
   salvas em `%TEMP%\opencode\bing2_*.xml` para inspeção.
 - Após o incremento 1: `test_search_orchestrator_v57.py` 7/7 verde e
   `pesquisar_com_recuperacao` real com correspondência 1.0 (saída acima).
-- FASE 9 (benchmark): `python tools/bench_pesquisa_v57.py` (offline 31/31;
+- FASE 9 (benchmark): `python tools/bench_pesquisa_v57.py` (offline 34/34;
   `--real` acrescenta sondas de rede) e `pytest -q tests/test_bench_pesquisa_v57.py`.
 - FASE 5 (trecho): `pytest -q tests/test_web_extract_v57.py` 4/4; prova real
   no mesmo probe da Wikipédia (trecho do corpo do artigo).

@@ -78,7 +78,7 @@ Testes: `tests/test_pc_agent_fontes_v57.py`.
 - Suíte JDUI (`test_jdui*.py`): 34/34.
 - Smoke de frontend (`test_frontend_smoke.py`): 14/14 (Markdown, autolink,
   citações, imagens, XSS, tabelas, dual-view).
-- Regressão completa: 700 passed / 4 skipped.
+- Regressão completa: 712 passed / 4 skipped.
 
 ## 7. Pendências honestas
 

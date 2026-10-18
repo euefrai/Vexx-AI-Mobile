@@ -38,7 +38,7 @@ Problemas reproduzidos com evidência (tabela completa em
 
 Baseline da área: 266 passed / 4 skipped; suíte completa V5.6: 670/4.
 
-### Fase 2 — Precisão da busca (FUNCIONAL; pendências declaradas)
+### Fase 2 — Precisão da busca (FUNCIONAL; lista declarada concluída)
 
 - Reformulação conservadora: `consulta_conteudo()` remove só moldura de
   pergunta/artigos; `""` se nada distintivo. Retry na mesma fonte (1x),
@@ -57,8 +57,12 @@ Baseline da área: 266 passed / 4 skipped; suíte completa V5.6: 670/4.
 - Parada por ganho real (incremento 5): consulta que repetiu domínio/tema
   não dispara a próxima (`parada por ganho zero`); ganho da recuperação é
   medido e declarado (`ganho_informacao` + etapa com/sem ganho novo).
-- Pendência declarada (não fingida): fontes primárias/reclassificação por
-  assunto quando a rodada traz só índice geral. Detalhes:
+- Índice geral (incremento 6, fecha a lista): página de índice/listagem é
+  sinalizada (`pagina_de_indice`) e demovida (−2, nunca apagada; resultado
+  expõe `indice_geral`); rodada só de índices gera etapa honesta, lacuna e
+  recuperação dirigida — fontes primárias por classe seguem primeiro pela
+  cadeia congelada. **Lista declarada da FASE 2 concluída** (incrementos
+  1–6). Detalhes:
   [JULIA_RESEARCH_ACCURACY.md](docs/JULIA_RESEARCH_ACCURACY.md).
 
 ### Fase 3 — Provedores e diagnóstico (FUNCIONAL herdado + registro)
@@ -127,7 +131,7 @@ contrato nesta versão; P6 (honestidade de erro) resolvido no incremento 4.
 
 `benchmarks/pesquisa_v57_v1.json` (fixtures congeladas) +
 `tools/bench_pesquisa_v57.py` (determinístico, provedores injetados, sem
-rede) + `tests/test_bench_pesquisa_v57.py`. **31/31, taxa global 1.0**;
+rede) + `tests/test_bench_pesquisa_v57.py`. **34/34, taxa global 1.0**;
 sondas reais no artefato
 `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (freio ABS:
 correspondência 1.0, top3 real, etapa reformulada).
@@ -148,9 +152,10 @@ correspondência 1.0, top3 real, etapa reformulada).
 | Shopping Lenovo: marcas no resultado | Asus/Dell misturados | só Lenovo; Asus/Dell como alternativas explícitas |
 | Specs capturadas ("8gb 512gb") | só `flag_novo` | RAM 8GB + armazenamento 512GB |
 | Trecho Wikipédia ABS | referências ("Consultado em…") | corpo do artigo |
-| Benchmark congelado | não existia | 31/31 (taxa 1.0) |
+| Benchmark congelado | não existia | 34/34 (taxa 1.0) |
 | Parada por ganho zero | não existia (só quantidade) | consulta redundante não roda; `ganho_informacao` declarado na recuperação |
-| Suíte completa | 670 passed / 4 skipped (V5.6) | **710 passed / 4 skipped** (V5.7) |
+| Rodada só de índices | aceita como `ok` | índices sinalizados/demovidos; lacuna + recuperação dirigida |
+| Suíte completa | 670 passed / 4 skipped (V5.6) | **712 passed / 4 skipped** (V5.7) |
 
 ## Contratos preservados
 
@@ -175,7 +180,8 @@ e Fajulto Studio intocados; nenhum push.
 
 ## Próximos passos sugeridos
 
-1. Fontes primárias e reclassificação por assunto quando a rodada traz só
-   índice geral.
-2. Estender o benchmark com casos de E2E real opcional e histórico de taxas
+1. Estender o benchmark com casos de E2E real opcional e histórico de taxas
    por versão.
+2. Candidatos (não prometidos): preferência de fontes primárias por classe
+   além da cadeia congelada de provedores; mobile físico e leitor de tela
+   reais (herdado da V5.6).

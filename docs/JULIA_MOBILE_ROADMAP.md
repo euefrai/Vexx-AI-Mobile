@@ -189,7 +189,7 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - JDUI: autolink com rótulo curto (`rotuloUrl`), bloco "Fontes:" anexado por
   estrutura (não por substring), cartões de fonte clicáveis.
 - Benchmark independente: `benchmarks/pesquisa_v57_v1.json` +
-  `tools/bench_pesquisa_v57.py` (27/27 offline; `--real` grava sonda),
+  `tools/bench_pesquisa_v57.py` (34/34 offline; `--real` grava sonda),
   artefatos em `qa-artifacts/v57/`.
 - Docs: [JULIA_RESEARCH_ACCURACY.md](JULIA_RESEARCH_ACCURACY.md),
   [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),

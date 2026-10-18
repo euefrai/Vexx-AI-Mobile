@@ -273,3 +273,49 @@ def test_recuperacao_com_ganho_novo_e_declarada(monkeypatch):
     assert res["ganho_informacao"]["ganho_real"] is True
     assert res["ganho_informacao"]["dominios_novos"] == ["n.example"]
     assert any("recuperação com ganho novo" in e for e in res["etapas"])
+
+
+# ── Índice geral: reclassificação e recuperação dirigida ─────────────
+
+def test_paginas_de_indice_sao_sinalizadas_e_demovidas(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [
+            {"titulo": "Resultados para freio ABS",
+             "url": "https://m.example/search?q=freio+abs",
+             "trecho": "freio abs resultados", "origem": "bing",
+             "tipo": "pagina"},
+            {"titulo": "Freio ABS: como funciona",
+             "url": "https://n.example/guia",
+             "trecho": "freio abs sistema", "origem": "bing",
+             "tipo": "pagina"},
+        ]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("freio ABS", provedores=["bing"], orcamento=ORC)
+    por_url = {a["url"]: a for a in res["achados"]}
+    assert por_url["https://m.example/search?q=freio+abs"].get("pagina_de_indice") is True
+    assert por_url["https://n.example/guia"].get("pagina_de_indice") is None
+    assert res["achados"][0]["url"] == "https://n.example/guia"  # conteúdo vence
+    assert res["indice_geral"] == ["https://m.example/search?q=freio+abs"]
+    assert len(res["achados"]) == 2  # demovida, nunca apagada
+
+
+def test_rodada_so_com_indices_gera_lacuna_e_consulta_de_recuperacao(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [
+            {"titulo": "Resultados para freio ABS",
+             "url": "https://m.example/search?q=freio",
+             "trecho": "freio abs resultados", "origem": "bing",
+             "tipo": "pagina"},
+            {"titulo": "Índice de conteúdos de freios",
+             "url": "https://m.example/indice",
+             "trecho": "freio abs índice", "origem": "bing",
+             "tipo": "pagina"},
+        ]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("como funciona o freio ABS",
+                         provedores=["bing"], orcamento=ORC)
+    assert any("índice geral" in lac for lac in res["lacunas"])
+    assert any("freio abs" in q for q in res["recuperacao"])
+    assert any("só com páginas de índice" in e for e in res["etapas"])

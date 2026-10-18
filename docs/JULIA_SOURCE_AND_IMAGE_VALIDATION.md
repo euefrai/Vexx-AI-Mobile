@@ -92,8 +92,8 @@ não simula verificação.
   (8 casos); trio de shopping: 66 passed.
 - `tests/test_source_check*.py` — vereditos/códigos (baseline V5.5).
 - `tests/test_web_extract_v57.py` — trecho não vem de referências.
-- Benchmark `tools/bench_pesquisa_v57.py`, grupos `produtos` e `links`
-  (10 casos) — 27/27 global.
+- Benchmark `tools/bench_pesquisa_v57.py`, grupos `produtos`, `specs` e
+  `links` (12 casos) — 34/34 global.
 - Prova real do shopping (2026-10-17): pedido Lenovo → produtos Lenovo com
   link `verificado`/`url_item`; Asus e Dell como alternativas explícitas com
   "pedido: lenovo".

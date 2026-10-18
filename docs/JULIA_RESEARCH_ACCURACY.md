@@ -61,6 +61,13 @@ Contratos preservados: a consulta original é sempre a primeira tentativa;
 - Junk lexical (dicionários de "funciona") é demovido pelo ranqueamento,
   nunca removido (os contratos congelados V5.5 exigem que ele permaneça em
   `achados` — apenas no fim).
+- **Índice geral** (incremento 6): página de índice/listagem (`/search`,
+  `/busca`, `/categoria`, "Resultados para…", "Índice de…") é sinalizada
+  (`pagina_de_indice`) e demovida (−2; termos ecoados na query string não
+  valem ponto de conteúdo). Rodada inteira só de índices: etapa honesta
+  ("fontes primárias não alcançadas"), lacuna e recuperação pedindo o
+  assunto direto; as fontes primárias por classe continuam vindo primeiro
+  pela cadeia congelada de provedores (sem reordenação).
 
 ## 4. Duplicatas e republicações
 
@@ -121,16 +128,16 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
 
 - Benchmark independente offline com fixtures congeladas:
   `benchmarks/pesquisa_v57_v1.json` + `python tools/bench_pesquisa_v57.py`
-  → **31/31, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
+  → **34/34, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
   junk→retry 1, republicações 2, produtos 5, specs 2, links 5,
-  desatualizado 2, ganho 2).
+  desatualizado 2, ganho 2, índice 3).
 - Sonda real (2026-10-17), `como funciona o freio ABS`:
   - antes: 6/6 dicionários de "funciona", `correspondencia 0.333`, `estado ok`;
   - depois: `correspondencia 1.0`, topo com artigos reais de freio ABS,
     etapa `bing (consulta reformulada 'freio ABS')` registrada.
 - Artefato: `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (o de
   2026-10-17 fica como histórico, 27 casos).
-- Regressão completa: 710 passed / 4 skipped (`pytest -q tests`).
+- Regressão completa: 712 passed / 4 skipped (`pytest -q tests`).
 
 ## 9. Limites e bloqueios (sem bypass)
 
@@ -141,9 +148,10 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   honesto (`bloqueado`/`reprovado`/`parcial`).
 - Resultados de busca variam entre execuções: o benchmark determinístico
   injeta provedores; as sondas reais são **registro**, não assert.
-- Pendência declarada: fontes primárias/reclassificação por assunto quando
-  a primeira rodada traz só índice geral. Desatualizado temporal (§7), P6 e
-  parada por ganho de informação (§6) **corrigidos** nos incrementos 3–5.
+- Lista declarada da FASE 2 **concluída** nos incrementos 1–6 (reformulação,
+  correspondência, republicações, desatualizado temporal §7, P6, parada por
+  ganho §6, índice geral §3). Candidato futuro (não prometido): preferência
+  de fontes primárias por classe além da cadeia congelada de provedores.
 
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),
