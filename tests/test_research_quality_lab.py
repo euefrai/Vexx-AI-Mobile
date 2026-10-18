@@ -29,7 +29,9 @@ def test_frozen_dataset_is_versioned_and_fixture_scoped():
     assert dataset["version"] == "1.0.0"
     assert dataset["truth_basis"] == "synthetic_local_fixture"
     assert digest == (
-        "e29379d7b805d25a3a5bea69ab3f9ea11f101cec13cc86c30fa44c221a4d489b"
+        # Digest canônico (LF): load_dataset normaliza CRLF→LF, então o
+        # mesmo valor vale no Windows (autocrlf) e no Linux/CI.
+        "9942a2587743a883debd407da68be0d884475561aab8d95959b3fe84a05ad314"
     )
     assert len(dataset["documents"]) >= 8
     assert {case["category"] for case in dataset["cases"]} >= {

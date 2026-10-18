@@ -390,7 +390,12 @@ _circuito: dict = {}
 
 
 def _circuito_fechado(nome: str) -> bool:
-    ts = _circuito.get(nome, 0.0)
+    ts = _circuito.get(nome)
+    if ts is None:
+        # Sem entrada = provedor saudável. (Antes: default 0.0 + monotonic
+        # pequeno — uptime < 300s, ex. runner CI ou servidor recém-erguido —
+        # marcava todo provedor como "em espera" logo após o boot.)
+        return False
     if time.monotonic() - ts < _CIRCUITO_TTL:
         return True
     _circuito.pop(nome, None)

@@ -51,6 +51,15 @@ def test_entrada_desativada_por_padrao(monkeypatch):
     assert exc.value.codigo == "desativado"
 
 
+# ── Windows-only de verdade: remoto usa ctypes.windll (entrada/captura) — no
+# Linux/macOS essas APIs nem existem, então o skip é plataforma, não falha. ──
+_windows_only = pytest.mark.skipif(
+    sys.platform != "win32",
+    reason="remoto usa ctypes.windll/SetCursorPos e captura via mss só no "
+           "Windows (remoto.py: 'Entrada/Captura só no Windows')")
+
+
+@_windows_only
 def test_ritmo_barra_rajada(monkeypatch):
     monkeypatch.setenv("JULIA_REMOTE", "1")
     monkeypatch.setattr(remoto, "tamanho_tela", lambda: (100, 100))
@@ -64,6 +73,7 @@ def test_ritmo_barra_rajada(monkeypatch):
     assert exc.value.codigo == "ritmo"
 
 
+@_windows_only
 def test_captura_jpeg_real():
     img = remoto.capturar(640, 50)
     raw = base64.b64decode(img["imagem"])

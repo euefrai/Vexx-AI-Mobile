@@ -107,7 +107,10 @@ def load_dataset(path: str | Path) -> tuple[dict[str, Any], str]:
                 or not isinstance(scenario.get("objective"), str)
                 or not scenario["objective"].strip()):
             raise QualityLabError(f"checkpoint scenario {scenario['id']!r} is invalid")
-    return dataset, hashlib.sha256(raw).hexdigest()
+    # Digest canônico: CRLF→LF antes do hash. O mesmo conteúdo congelado
+    # no git produz o mesmo digest no Windows (core.autocrlf=true, working
+    # tree CRLF) e no Linux/CI (LF) — sem depender do checkout local.
+    return dataset, hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
 
 
 def retrieval_metrics(
