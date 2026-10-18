@@ -97,6 +97,37 @@ def _sem_acentos(texto: str) -> str:
                    if not unicodedata.combining(c))
 
 
+def _marca_no_texto(marca: str, alvo: str) -> bool:
+    """Marca como palavra (não substring dentro de outra palavra)."""
+    return bool(re.search(r"(?<![0-9a-z])" + re.escape(marca) + r"(?![0-9a-z])",
+                          alvo or ""))
+
+
+_RX_MARCAS_CONHECIDAS = re.compile(
+    r"(?<![0-9a-z])(" + "|".join(re.escape(_sem_acentos(m))
+                                 for m in sorted(_MARCAS, key=len, reverse=True))
+    + r")(?![0-9a-z])")
+
+
+def _marca_conhecida(alvo: str) -> str:
+    """Marca conhecida citada no anúncio — PRIMEIRA ocorrência (nome do
+    produto vem antes de acessórios/GPU: "Dell Alienware ... NVIDIA")."""
+    m = _RX_MARCAS_CONHECIDAS.search(alvo or "")
+    return m.group(1) if m else ""
+
+
+def _armazenamento_aparente(txt: str) -> int | None:
+    """Maior valor em GB do anúncio (≥64); RAM pequena ("16GB") não engana."""
+    vals = []
+    for m in re.finditer(r"\b(\d{2,4})\s?gb\b", (txt or "").lower()):
+        try:
+            vals.append(int(m.group(1)))
+        except ValueError:
+            pass
+    vals = [v for v in vals if v >= 64]
+    return max(vals) if vals else None
+
+
 def detectar_intencao(texto: str) -> bool:
     """True se o usuário pede pesquisa/compra/comparação de produtos."""
     t = _sem_acentos(texto or "")
@@ -229,6 +260,16 @@ def extrair_criterios(texto: str) -> dict:
             break
     orc = _extrair_orcamento(texto or "")
     specs = _extrair_specs(texto or "")
+    if categoria in ("notebook", "celular", "tablet") and \
+            ("ram_fisica_gb" not in specs or "armazenamento_gb" not in specs):
+        # V5.7: par "8gb 512gb" (sem as palavras ram/ssd) é o formato típico
+        # de anúncio de notebook/celular; só nesses casos e com faixas sãs.
+        par = re.search(r"\b(\d{1,2})\s?gb\b[^\d]{0,24}?\b(\d{3,4})\s?gb\b", t)
+        if par:
+            ram, arm = int(par.group(1)), int(par.group(2))
+            if 2 <= ram <= 64 and 64 <= arm <= 8192:
+                specs.setdefault("ram_fisica_gb", ram)
+                specs.setdefault("armazenamento_gb", arm)
     comparacao = bool(re.search(r"compar|versus|\bvs\b|diferen|qual melhor|prós e contras|pros e contras", t))
     return {"categoria": categoria, "orcamento": orc, "marcas": marcas,
             "specs": specs, "comparacao": comparacao,
@@ -599,6 +640,8 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
     dentro, fora = [], []
     orc = criterios.get("orcamento", {}) or {}
     specs = criterios.get("specs", {}) or {}
+    marcas_pedido = [_sem_acentos(str(m)) for m in (criterios.get("marcas") or [])
+                     if str(m).strip()]
     for p in produtos:
         motivos, codigos = [], []
         if orc.get("max") is not None and p.get("preco") is not None \
@@ -609,6 +652,22 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                 and p["preco"] < orc["min"]:
             motivos.append(f"abaixo da faixa ({p['preco_texto']})")
             codigos.append("preco_abaixo")
+        if marcas_pedido:
+            # V5.7: marca pedida é critério obrigatório — nunca misturar
+            # marcas diferentes como se fossem o pedido (marca do anúncio
+            # ou menção clara no nome; sem isso, é "não confirmada").
+            alvo = _sem_acentos((p.get("marca") or "") + " " + (p.get("nome") or ""))
+            if not any(_marca_no_texto(m, alvo) for m in marcas_pedido):
+                conhecida = (_marca_conhecida(_sem_acentos(p.get("marca") or ""))
+                             or _marca_conhecida(_sem_acentos(p.get("nome") or "")))
+                if conhecida:
+                    motivos.append("marca diferente do pedido "
+                                   f"({conhecida}; pedido: {', '.join(marcas_pedido)})")
+                    codigos.append("marca_diferente")
+                else:
+                    motivos.append("marca não confirmada no anúncio "
+                                   f"(pedido: {', '.join(marcas_pedido)})")
+                    codigos.append("marca_nao_confirmada")
         if specs.get("ram_fisica_gb"):
             ram = _ram_do_produto(p)
             if ram is not None and ram[0] < specs["ram_fisica_gb"] and ram[0] > 0:
@@ -624,8 +683,8 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                 codigos.append("usado")
         if specs.get("armazenamento_gb"):
             txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
-            m = re.search(r"(\d{2,4})\s?gb", txt)
-            if m and int(m.group(1)) < specs["armazenamento_gb"]:
+            ap = _armazenamento_aparente(txt)
+            if ap is not None and ap < specs["armazenamento_gb"]:
                 motivos.append("armazenamento abaixo do pedido")
                 codigos.append("armazenamento_abaixa")
         if motivos:
@@ -655,6 +714,20 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
         codigos = set(p.get("excluido_codigos") or [])
         difs: list = []
         distancias: list = []
+        if "marca_diferente" in codigos or "marca_nao_confirmada" in codigos:
+            # outra marca entra como ALTERNATIVA explícita, nunca como se
+            # fosse o pedido (V5.7)
+            pedido = ", ".join(_sem_acentos(str(m))
+                               for m in (criterios.get("marcas") or []))
+            if "marca_diferente" in codigos:
+                achada = (_marca_conhecida(_sem_acentos(p.get("marca") or ""))
+                          or _marca_conhecida(_sem_acentos(p.get("nome") or "")))
+                difs.append(f"outra marca: {achada or 'não confirmada'} "
+                            f"(pedido: {pedido})")
+                distancias.append(0.55)
+            else:
+                difs.append(f"marca não confirmada no anúncio (pedido: {pedido})")
+                distancias.append(0.7)
         if "preco_acima" in codigos:
             teto = orc.get("max")
             if not teto or p.get("preco") is None:
@@ -679,10 +752,10 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
         if "armazenamento_abaixa" in codigos:
             pedido = specs.get("armazenamento_gb") or 0
             txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
-            m = re.search(r"(\d{2,4})\s?gb", txt)
-            if m and pedido:
-                difs.append(f"armazenamento {int(m.group(1))}GB (pedido: {pedido}GB)")
-                distancias.append(max(0.0, 1 - int(m.group(1)) / float(pedido)))
+            ap = _armazenamento_aparente(txt)
+            if ap is not None and pedido:
+                difs.append(f"armazenamento {ap}GB (pedido: {pedido}GB)")
+                distancias.append(max(0.0, 1 - ap / float(pedido)))
             else:
                 difs.append("armazenamento abaixo do pedido")
                 distancias.append(0.6)

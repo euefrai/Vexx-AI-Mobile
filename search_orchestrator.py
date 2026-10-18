@@ -105,7 +105,16 @@ _ESTOPO = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
            "este", "qual", "quais", "onde", "quando", "porque", "pode", "ser",
            "são", "sao", "the", "and", "com", "dos", "das", "uma", "que",
            "não", "nao", "por", "favor", "quero", "preciso", "gostaria",
-           "pesquise", "busque", "procure", "encontre", "veja", "me", "diga"}
+           "pesquise", "busque", "procure", "encontre", "veja", "me", "diga",
+           # verbos/funcionais de pergunta: aparecem em qualquer página sobre a
+           # palavra ("funciona", "faz") e por isso NÃO provam correspondência
+           # temática (V5.7: "como funciona X" devolvia dicionários como "ok").
+           "funciona", "funcionam", "funcionar", "funcionava", "funcionavam",
+           "faz", "fazem", "fazer", "fez", "fizeram", "fica", "ficam", "ficar",
+           "tem", "têm", "ter", "existe", "existem", "serve", "servem",
+           "significa", "significam", "usar", "usa", "usam", "dá", "dar",
+           "vai", "vão", "vao", "era", "eram", "foi", "foram", "seria",
+           "será", "sera", "acontece", "aconteceu", "aconteceram"}
 _GENERICOS = {"comprar", "oferta", "promo", "promoção", "promocao", "preço",
               "preco", "valor", "melhor", "barato", "brasil", "site", "site:"}
 # Palavras que NÃO provam correspondência: aparecem em qualquer página de
@@ -247,6 +256,57 @@ def termos_para_provedor(consulta: str, classe: str) -> str:
     for pt, en in TECNICO_EN.items():
         t = re.sub(r"\b" + re.escape(pt) + r"\b", en, t, flags=re.I)
     return t[:180]
+
+
+# V5.7 — reformulação conservadora: remove APENAS a moldura de pergunta
+# ("como funciona", "o que é", "quanto custa"…) e artigos iniciais, mantendo
+# íntegros nomes, números, modelos e marcas. Usada para tentar a MESMA fonte
+# com a consulta de conteúdo quando a consulta original volta sem relação
+# (ex.: índice devolve dicionários de "funciona" para "como funciona X").
+_SCAFFOLD_PERGUNTA = (
+    "me explique como", "me explique", "explique como", "explique", "explica",
+    "para que serve", "pra que serve", "para que servem", "o que significa",
+    "o que são", "o que sao", "o que é", "o que e", "o que fazem", "o que faz",
+    "como funcionam", "como funciona", "como fazer", "como faz", "como usar",
+    "como usam", "como montar", "como configurar", "como instalar",
+    "como resolver", "como consertar", "quem foram", "quem foi", "quem é",
+    "quem e", "quem eram", "quem são", "quem sao", "qual é", "qual e",
+    "qual o preço de", "qual o preco de", "qual o", "qual a", "qual foi",
+    "quais são", "quais sao", "quais foram", "quando foi", "quando aconteceu",
+    "quando ocorreu", "onde fica", "onde ficam", "onde encontrar",
+    "onde comprar", "onde achar", "por que", "porque", "pq", "quanto custam",
+    "quanto custa",
+)
+
+
+def consulta_conteudo(consulta: str) -> str:
+    """Consulta sem a moldura de pergunta; "" quando não há o que reformular.
+
+    Determinística e conservadora: só remove prefixos de pergunta conhecidos
+    e artigos iniciais. Se o que sobra não tem termo distintivo (fora dos
+    genéricos de loja/estopo), devolve "" — nunca inventa consulta.
+    """
+    t = re.sub(r"\s+", " ", (consulta or "").strip()).rstrip("?!.:;")
+    if not t:
+        return ""
+    baixo = _sem_acentos(t).lower()
+    for prefixo in _SCAFFOLD_PERGUNTA:
+        pa = _sem_acentos(prefixo).lower()
+        if baixo == pa:
+            return ""
+        if baixo.startswith(pa + " "):
+            t = t[len(prefixo):].strip()
+            break
+    t = re.sub(r"^(?:de|do|da|dos|das|no|na|nos|nas|um|uma|uns|umas|o|a|os|as)\s+",
+               "", t, flags=re.I)
+    t = re.sub(r"\s+(?:o|a|os|as|um|uma)$", "", t.strip(), flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip()
+    if not t or _sem_acentos(t).lower() == _sem_acentos(consulta).lower():
+        return ""
+    distintivos = [x for x in _termos(t) if x not in _GENERICOS_CORRESPONDENCIA]
+    if not distintivos:
+        return ""
+    return t[:200]
 
 
 # ── URL canônica, dedupe e ranking ─────────────────────────────────
@@ -526,6 +586,29 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     def _uteis() -> int:
         return sum(1 for a in achados if _util_para_pedido(a, termos_c))
 
+    def _retry_com_conteudo(nome: str, q_atual: str) -> bool:
+        """Mesma fonte, consulta reformulada (pergunta → conteúdo); 1x por fonte.
+
+        True só quando a reformulada trouxe resultado que responde ao pedido.
+        """
+        alt = consulta_conteudo(q_atual)
+        if not alt or alt.lower() == (q_atual or "").strip().lower():
+            return False
+        q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
+                                      and nome in ("stackexchange", "hn") else "")
+        try:
+            novos = sp.buscar(nome, q_prov,
+                              limite=max(2, min(int(orc["max_por_provedor"]),
+                                                max_resultados)),
+                              timeout=timeout)
+        except Exception:
+            return False
+        usados[nome] = usados.get(nome, 0) + 1
+        etapas.append(f"{nome} (consulta reformulada '{alt[:40]}'): "
+                      f"{len(novos)} resultados")
+        achados.extend(novos)
+        return bool(novos) and any(_util_para_pedido(a, termos_c) for a in novos)
+
     for i, q in enumerate(consultas):
         if _uteis() >= int(orc["min_resultados"]) and i > 0:
             break
@@ -550,7 +633,12 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 if achados_novos and termos_c and not any(
                         _util_para_pedido(a, termos_c) for a in achados_novos):
                     # resultados existem, mas nenhum responde ao pedido:
-                    # segue para o próximo provedor em vez de encerrar aqui
+                    # 1º tenta a MESMA fonte com a consulta reformulada
+                    # (ex.: "como funciona o freio ABS" → "freio ABS");
+                    if _retry_com_conteudo(nome, q):
+                        provedor_indice += 1
+                        break
+                    # 2º segue para o próximo provedor em vez de encerrar aqui
                     etapas.append(f"{nome}: sem correspondência com o pedido; "
                                   f"tentando outro provedor ({q[:40]})")
                     provedor_indice += 1
@@ -560,6 +648,12 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 break
             except sp.ErroProvedor as exc:
                 if exc.codigo in ("vazio", "sem_resultados"):
+                    # vazio: 1 tentativa com a consulta reformulada antes de
+                    # registrar "sem resultados" (Wikipedia devolve nada para
+                    # "o que é X" mas acha o verbete para "X")
+                    if _retry_com_conteudo(nome, q):
+                        provedor_indice += 1
+                        break
                     vazios.append(nome)
                     etapas.append(f"{nome}: sem resultados ({q[:40]})")
                 else:
@@ -585,7 +679,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     lacunas = detectar_lacunas(consulta, ranqueados, info["classes"], info)
     estado = _estado_final(ranqueados, falhas, vazios, consultas_feitas, correspondencia)
     recuperacao = _consultas_recuperacao(consulta, info["classes"], info, lacunas)
-    if estado == "sem_correspondencia" and len(termos_c) >= 2:
+    # V5.7: enxuta também quando a correspondência é fraca (não só quando é
+    # nula) — cobre o caso em que só um termo funcional ("funciona") casou.
+    if correspondencia < 0.5 and len(termos_c) >= 2:
         # consulta enxuta: todos os termos distintivos do pedido, sem os
         # genéricos que fazem índices gerais devolverem lixo; nada é
         # acrescentado nem removido do pedido (números e nomes intactos)
@@ -621,7 +717,9 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
                     orcamento=orcamento)
     precisa = (res.get("estado") in ("sem_resultados", "sem_correspondencia", "bloqueado")
                or len(res.get("achados", [])) < 3
-               or bool(res.get("lacunas")))
+               or bool(res.get("lacunas"))
+               # V5.7: correspondência fraca também investiga (nunca fingir ok)
+               or float(res.get("correspondencia", 1.0)) < 0.5)
     if not precisa or not res.get("recuperacao"):
         res["recuperou"] = False
         return res

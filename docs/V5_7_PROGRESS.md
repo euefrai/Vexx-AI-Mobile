@@ -1,0 +1,141 @@
+# V5.7 — Pesquisa: Precisão e Resultados Inteligentes — Progresso e contexto
+
+Objetivo: elevar a qualidade real das pesquisas (precisão, cobertura, links
+exatos, imagens corretas, interpretação de conteúdo, respostas visuais),
+reutilizando Search Orchestrator V5.5, Research Agents, Evidence Graph,
+Shopping, Intent Engine, JDUI, memória, SSE e Document Intelligence.
+Sem deploy/push, sem mudar identidade/modelo/credenciais do Lucas, sem tocar
+na extensão da Júlia ou no Fajulto Studio, sem contornar CAPTCHA/bot-wall,
+sem GitHub Intelligence, sem inventar fontes/preços/imagens/testes.
+
+## FASE 1 — Auditoria real (concluída)
+
+Estado de partida: `HEAD 4854496` (V5.6), árvore limpa exceto
+`qa-artifacts/followups/failure.png` (staged pelo usuário; intocado).
+Baseline da área de pesquisa: `266 passed, 4 skipped` (subconjunto
+search/research/shopping/source/web/intent/evidence/structured/academic/units);
+baseline completo V5.6: 670 passed, 4 skipped.
+
+Método: leitura de código (subagente de exploração com linha exata) + sondas
+reais de rede executadas contra os módulos (`search_orchestrator`,
+`search_providers`, `shopping`, `source_check`, `research`) com orçamentos
+curtos. Nada foi alterado antes das reproduções.
+
+### Problemas reproduzidos (com evidência)
+
+| # | Problema | Evidência real | Causa raiz |
+|---|---|---|---|
+| P1 | Consulta em forma de pergunta recebe lixo lexical e é declarada "ok" | `pesquisar('como funciona o freio ABS')` → 6/6 resultados de dicionário sobre a palavra "funciona"; `correspondencia 0.333`; `estado ok`; `consultados: bing` — Wikipedia (escolhida) nunca consultada; `pesquisa_rapida` entregava 3 páginas de dicionário como "fontes lidas e utilizáveis" | `_ESTOPO` sem verbos de pergunta ("funciona" contava como termo de correspondência); `_util_para_pedido` aprova por qualquer termo; early-stop após o 1º provedor; recuperação enxuta só disparava com `correspondencia ≤ 0.15` |
+| P2 | Shopping pode misturar variantes e expor página de loja como "produto" | `buscar_web_v55('notebook lenovo ideapad 3i 8gb 512gb')` → Magalu/Casas Bahia/KaBuM **categorias** + "Gemini Notebook" (rel. 10.3); em `shopping.pesquisar`, `criterios.marcas=['lenovo']` mas produtos Asus Vivobook e Dell Alienware aparecem; `marca` extraída como "KaBuM!" | Filtro por marca não descarta marca desconhecida/errada; relevância de índice geral fraca; card JDUI tem fallback para a URL da página analisada (`shopping.py:1292-1293`/`1372`, `jdui.js:1998-2001`) — `url_item` só quando existe |
+| P3 | ~~Mojibake nos títulos do Bing~~ **descartado** | `repr`/`unicode_escape` mostram `\xe7\xe3` íntegros e nenhum `U+FFFD`; o "�" era só o console do Windows | Artefato da auditoria, não do produto |
+| P4 | Bloqueios de loja confirmados | MLB API → `ResearchErro 403`; Magalu → 403 bot-wall; KaBuM listagem → `reprovado/sem_sinais_produto`; Wikipedia ABS → `parcial` (termos) | Esperado/sem bypass; validação honesta funcionando |
+| P5 | Sinônimos pt-PT × pt-BR derrubam veredito | `validar_link(pt.wikipedia.org/wiki/Freio_ABS, termos=['ABS','freio'])` → `parcial: não menciona "freio"` (artigo usa "travagem") | Checagem de termos por substring, sem equivalência de variante |
+| P6 | Erro interno mascarado como indisponibilidade | chamada com assinatura errada (sonda) → `erro: provedor_indisponivel`, `etapas: ["busca indisponível (TypeError)"]` | `except Exception` genérico vira `codigo` igual a provedor; melhoria de honestidade (baixo impacto) |
+
+### Também confirmado no código (subagente de exploração)
+
+- `anexar_fontes` decide por substring `"Fontes:" not in texto`
+  (`pc_agent.py:2046-2050`) → risco de duplicar ou omitir o bloco.
+- `run_reuso` de "essas fontes" não confere o tópico da run anterior
+  (`pc_agent.py:1977-1986`).
+- `imagem_veredito` chega ao JDUI (`jdui.js:334`) mas não é renderizado no
+  card (`jdui.js:1979-2014`).
+- `source_check` só é consumido pelo shopping; a pesquisa geral não gera
+  veredito de link/imagem.
+- SSE de pesquisa corta em 360 s (`server.py:1927-1929`) vs. modo
+  investigativa 300 s + replan.
+- Autolink imprime URL crua (`app.js:413-419`).
+
+## FASE 2 — Search Orchestrator 4.0 (em andamento)
+
+### Incremento 1 — reformulação de pergunta e correspondência honesta (concluído)
+
+Mudanças em `search_orchestrator.py`:
+
+1. `_ESTOPO` ganhou verbos/funcionais de pergunta ("funciona", "faz", "serve",
+   "significa", "existe", "foi", "era"…) — não provam correspondência temática.
+2. `consulta_conteudo()` (nova): remove apenas a moldura de pergunta
+   ("como funciona", "o que é", "quanto custa"…) e artigos iniciais; devolve
+   `""` quando não sobra termo distintivo — nunca inventa consulta.
+3. `pesquisar()`: quando um provedor devolve resultados sem correspondência
+   (ou vazio), tenta **a mesma fonte** uma vez com a consulta reformulada
+   antes de trocar de provedor (etapa registrada: `nome (consulta reformulada '…')`).
+4. `pesquisar()`: consulta enxuta passa a ser declarada também com
+   `correspondencia < 0.5` (antes só `≤ 0.15`).
+5. `pesquisar_com_recuperacao()`: `correspondencia < 0.5` também dispara a
+   rodada de recuperação (investigar em vez de fingir ok).
+
+Testes: `tests/test_search_orchestrator_v57.py` (7 casos, sem rede) cobrindo
+stopword de pergunta, reformulação conservadora, retry na mesma fonte,
+provedor vazio reformulado, enxuta declarada e recuperação melhorando
+correspondência fraca. Suíte focada da área: verde (ver seção de evidências).
+
+Prova antes/depois (rede real, 2026-10-17):
+
+- Antes: `pesquisar_com_recuperacao('como funciona o freio ABS')` →
+  `correspondencia 0.333`, `estado ok`, top-8 = dicionários de "funciona";
+  `etapas: ["bing: 6 resultados (como funciona o freio ABS)"]`.
+- Depois: `correspondencia 1.0`, `estado ok`, topo = Moura (sistema de freios),
+  Kalatec, **Wikipédia — Freio**, Dicio/Freio, Justos; lixo antigo rebaixado
+  ao fim (nunca apagado); `etapas` inclui
+  `bing (consulta reformulada 'freio ABS'): 6 resultados`.
+
+Contratos preservados: consulta original continua a primeira tentativa;
+nenhum resultado é apagado (apenas rebaixado/descartado por dedupe);
+`variantes` não mudou; estados continuam no vocabulário V5.5.
+
+## FASE 4 — Links, produtos e imagens (incremento 1 concluído)
+
+Prioridade da missão ("corrigir links errados e produtos misturados").
+Mudanças em `shopping.py`:
+
+1. `aplicar_filtros`: marca pedida agora é critério obrigatório — produto de
+   outra marca vira `marca_diferente` (alternativa explícita "outra marca: X,
+   pedido: Y"); sem marca confirmável vira `marca_nao_confirmada`. Nunca
+   aparece como se fosse o pedido.
+2. `separar_alternativas`: os dois códigos de marca entram como alternativa
+   com a diferença escrita; nunca escondida.
+3. `extrair_criterios`: par "8gb 512gb" (formato típico de anúncio de
+   notebook/celular) passa a virar `ram_fisica_gb`/`armazenamento_gb` — só
+   nessas categorias e com faixas sãs (RAM 2–64, armazenamento 64–8192).
+4. `_marca_conhecida`: marca do anúncio pela primeira ocorrência (marca do
+   anúncio, senão nome) — "Dell Alienware … NVIDIA RTX" é Dell, não Nvidia.
+5. `_armazenamento_aparente`: maior valor em GB ≥ 64 — "16GB RAM + SSD 512GB"
+   não vira "armazenamento 16GB" (era o valor da RAM).
+
+Evidência real (rede, 2026-10-17), pedido "notebook lenovo ideapad 3i 8gb 512gb":
+
+- Antes: produtos = Asus Vivobook + Lenovo IdeaPad Slim 3 + Dell Alienware +
+  Lenovo LOQ (marcas misturadas); `criterios.specs` só `flag_novo`.
+- Depois: produtos = **Lenovo IdeaPad Slim 3 e Lenovo LOQ** (link `verificado`,
+  `url_item`); alternativas = Asus ("outra marca: asus (pedido: lenovo)") e
+  Dell ("outra marca: dell"); `specs` = RAM 8GB + armazenamento 512GB.
+- Card JDUI já usa `_link_do_produto` (url_item > url_final > url) e carrega
+  `link_veredito`/`imagem_veredito`/`item_de_listagem` — coberto por teste.
+
+Limitação honesta documentada: `marca` do anúncio às vezes vem do vendedor
+("KaBuM!"); por isso a marca é confirmada também pelo nome do produto, e o
+selo de link já distingue verificado / parcial / REPROVADO / não verificado.
+
+Testes novos: `tests/test_shopping_v57.py` (8 casos, sem rede).
+
+### Próximos incrementos planejados (FASE 2)
+
+- Fontes primárias e reclassificação por assunto quando a primeira rodada
+  tem só índice geral.
+- Duplicatas e republicações além de URL canônica (título quase igual entre
+  domínios distintos).
+- Conteúdo desatualizado em consultas temporais (usar `pubDate`/ano com
+  honestidade).
+- Critérios de parada por ganho real de informação (novos domínios/temas
+  cobertos), não só quantidade.
+
+## Evidências (comandos)
+
+- Suíte da área (baseline e regressões): `pytest -q tests` (filtro
+  search/research/shopping/source/web/intent/evidence/structured/…).
+- Sondas reais usadas na auditoria: scripts temporários em
+  `%TEMP%\opencode\v57_probe*.py` (introspecção + rede); páginas do Bing RSS
+  salvas em `%TEMP%\opencode\bing2_*.xml` para inspeção.
+- Após o incremento 1: `test_search_orchestrator_v57.py` 7/7 verde e
+  `pesquisar_com_recuperacao` real com correspondência 1.0 (saída acima).
