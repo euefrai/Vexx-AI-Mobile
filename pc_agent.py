@@ -1924,11 +1924,13 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                                   "\n---\n".join(t["trecho"][:1200] for t in trechos))
     termo_img = intencao_imagem(texto_usuario)
     if termo_img:
-        import urllib.parse
-        slug = urllib.parse.quote(termo_img.strip() or "paisagem")
-        partes_sistema.append(f"O usuário pediu uma IMAGEM sobre '{termo_img}'. "
-                              f"Comece a resposta com a imagem: ![{{descricao}}](https://loremflickr.com/800/500/{slug}) "
-                              "na primeira linha, e escreva a descrição abaixo dela.")
+        partes_sistema.append(
+            f"O usuário pediu/mencionou uma imagem ('{termo_img[:80]}'). Você NÃO tem "
+            "busca de imagens: NÃO invente URL de imagem, NÃO use serviço de placeholder "
+            "(loremflickr etc.) e NÃO prometa mostrar fotos. Se ele pediu para ver uma "
+            "imagem, diga em 1 linha que não consegue exibir imagens avulsas e siga "
+            "ajudando por texto; produtos aparecem com imagens reais verificadas nos "
+            "cards da pesquisa de produtos.")
     # V5.1: Intent Engine — estrutura validada guia roteamento, formato
     # e validação. `ultimos_resultados` resolve follow-ups ("os dois primeiros").
     try:
@@ -2018,6 +2020,12 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
 
 
 _IMG_MD = re.compile(r"!\[([^\]\n]{0,160})\]\((https?://[^)\s]+|data:[^)\s]+)\)")
+# V5.7 F4: imagem de placeholder (loremflickr) é falsa e instável no chat —
+# nunca entra no texto final e é removida se vier do modelo ou de contexto
+# antigo (o modelo imita imagens de mensagens anteriores da conversa).
+_RX_IMG_PLACEHOLDER = re.compile(
+    r"!\[[^\]\n]{0,160}\]\(\s*https?://(?:www\.)?loremflickr\.com/[^)\s]*\s*\)\s*",
+    re.I)
 
 
 def imagens_primeiro(fence: str, texto: str) -> str:
@@ -2054,18 +2062,16 @@ def _ja_tem_fontes_markdown(texto: str) -> bool:
 
 def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
     texto = texto or ""
+    # V5.7 F4: placeholder nunca entra no texto final (imagem fake + instável).
+    if "loremflickr.com" in texto.lower():
+        texto = _RX_IMG_PLACEHOLDER.sub("", texto).strip()
     if termo_img:
-        import urllib.parse
         m = _IMG_MD.search(texto)
         if m and m.start() > 0:
-            # Imagens primeiro: o modelo deixou a imagem no meio/fim do texto
-            # — ela sobe para a primeira linha, sem duplicar.
+            # Imagens primeiro: o modelo deixou uma imagem real no meio/fim do
+            # texto — ela sobe para a primeira linha, sem duplicar.
             resto = (texto[:m.start()] + texto[m.end():]).strip()
             texto = m.group(0) + (("\n\n" + resto) if resto else "")
-        elif not m:
-            slug = urllib.parse.quote(termo_img.strip() or "paisagem")
-            # Imagens primeiro: imagem garantida abrindo a resposta.
-            texto = f"![{termo_img}](https://loremflickr.com/800/500/{slug})\n\n" + texto
     if fontes and not _ja_tem_fontes_markdown(texto):
         linhas = "\n".join(
             f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"

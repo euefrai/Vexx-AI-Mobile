@@ -311,17 +311,22 @@ def test_envios_concorrentes_serializados():
     assert len(sock.recebidos) == 125
 
 
-def test_imagem_garantida_no_texto():
+def test_imagem_pedida_sem_placeholder_no_texto():
+    """V5.7 F4: pedido de imagem não gera placeholder (loremflickr) — bug do
+    chat que piscava com 'imagem indisponível' + link instável."""
     user = 'me mostre uma imagem do tom do desenho tom and jerry'
     termo = pc_agent.intencao_imagem(user)
     assert termo
     modelo_falante = '[Mostrando uma imagem de Tom e Jerry]\n\nAqui está ela!'
     final = pc_agent.anexar_fontes(modelo_falante, [], termo)
-    assert '![tom do desenho tom and jerry](https://loremflickr.com/800/500/' in final
-    # Imagens primeiro: a imagem abre a resposta e o texto fica abaixo.
-    assert final.startswith('![tom do desenho tom and jerry]')
+    # Nunca insere imagem de placeholder; o texto honesto segue intacto.
+    assert 'loremflickr' not in final and '![' not in final
     assert final.endswith('Aqui está ela!')
-    # Modelo trouxe a imagem no meio: ela sobe para o topo, sem duplicar.
+    # Placeholder vindo do modelo/contexto antigo é removido do texto.
+    com_fake = 'veja ![tom](https://loremflickr.com/800/500/tom) que fofo'
+    limpo = pc_agent.anexar_fontes(com_fake, [], termo)
+    assert 'loremflickr' not in limpo and limpo == 'veja que fofo'
+    # Imagem real do modelo sobe para o topo, sem duplicar.
     com_img = 'veja ![gato](https://x.com/g.jpg) que fofo'
     subiu = pc_agent.anexar_fontes(com_img, [], termo)
     assert subiu.startswith('![gato](https://x.com/g.jpg)')

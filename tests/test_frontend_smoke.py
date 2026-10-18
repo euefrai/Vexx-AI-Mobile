@@ -63,7 +63,7 @@ t('img-alt-escape', hx.includes('alt="a&quot; onerror=&quot;alert(1)"') && !hx.i
 t('img-src-intacto', hi.includes('src="https://example.com/gato.jpg"') && !hi.includes('src="<a'));
 const mdReal = '[Mostrando uma imagem de Tom e Jerry]\n\n![tom do desenho tom and jerry](https://loremflickr.com/800/500/tom%20do%20desenho%20tom%20and%20jerry)';
 const hr = renderMarkdown(mdReal);
-t('img-loremflickr-intacto', hr.includes('src="https://loremflickr.com/800/500/tom%20do%20desenho%20tom%20and%20jerry"'));
+t('img-loremflickr-removida', !hr.includes('loremflickr') && !hr.includes('<img'));
 t('code-url-sem-link', renderMarkdown('rode `https://x.com/a` ai').includes('<code>https://x.com/a</code>'));
 const mdDot = renderMarkdown('veja https://x.com/a.');
 t('url-ponto-final', mdDot.includes('href="https://x.com/a"') && mdDot.includes('</a>.'));

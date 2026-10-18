@@ -307,6 +307,42 @@ utilizável — não é sucesso, e permanece registrado assim.
    benchmark congelado 34/34. Medição contínua agora legível em
    `diagnosticar()`/`metricas_provedores()` (memória do processo).
 
+## FASE 4 (V5.7) — Product Research Accuracy — em andamento
+
+Missão: precisão da pesquisa de produtos (identidade, URLs, preços, imagens,
+ofertas, filtros, evidências e JDUI). Sem novos provedores, sem serviços
+externos, sem redesign; contratos congelados preservados; nunca inventar
+preço/disponibilidade/imagem/evidência.
+
+### Etapa 1 — auditoria + incidente reportado pelo usuário (imagem placeholder)
+
+Confirmado em produção (prints do usuário): resposta com duas imagens
+`loremflickr.com` quebradas → chip "🖼️ imagem indisponível — abrir link"
+piscando (a repintura do streaming recria o HTML a cada chunk) e pulando o
+scroll do chat.
+
+Causa (dupla):
+
+1. `pc_agent.py` — a diretiva de `intencao_imagem` mandava o modelo "colar o
+   comando de imagem" com URL placeholder, e `anexar_fontes` inseria a imagem
+   fake no texto quando o modelo não a incluía.
+2. `public/app.js` — `renderMarkdown` renderizava a URL loremflickr como
+   `<img>`; quando falhava, `imagemChatFalhou` trocava por chip com link +
+   botão de retry (alimentando um novo ciclo de render).
+
+Correção (nunca placeholder em nenhuma camada):
+
+- `pc_agent.py`: diretiva de imagem agora é honesta (pede imagem real ou
+  admite ausência; proibido placeholder); `_RX_IMG_PLACEHOLDER` remove o
+  placeholder se vier do modelo/contexto antigo — e nunca o insere.
+- `public/app.js`: `renderMarkdown` ignora imagens `loremflickr.com`
+  (inclusive em mensagens antigas já salvas); o botão "imagem não apareceu —
+  gerar de novo" e o handler `data-img-retry` foram removidos. O chip
+  "imagem indisponível" permanece só para imagens reais que quebrarem.
+- Testes: `test_interactive.py` (contrato novo: nunca placeholder) e
+  `test_frontend_smoke.py` (`img-loremflickr-removida`) atualizados.
+- Suíte completa: 735 passed / 4 skipped (sem regressões).
+
 ## FASE 7 — JDUI (incremento 1 concluído)
 
 1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.

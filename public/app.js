@@ -408,6 +408,10 @@ function inlineFmt(s, sources = {}) {
   s = s.replace(/!\[([^\]]{0,120})\]\(([^)\s]+)\)/g, (m, alt, url) => {
     const u = validUrl(url);
     if (!u) return esc(m);
+    // V5.7 F4: serviço de placeholder (loremflickr) é imagem falsa
+    // e instável no chat (pisca entre falha e recarga e derruba o
+    // scroll) — não renderiza.
+    if (/^(?:www\.)?loremflickr\.com$/i.test(new URL(u).hostname)) return '';
     return keep('<img class="chat-img" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" />');
   });
   s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>'));
@@ -753,15 +757,6 @@ function appendMessage(row) {
     mn.textContent = '···'; mn.setAttribute('aria-label', 'Ações da mensagem'); mn.setAttribute('aria-haspopup', 'true');
     meta.appendChild(mn);
     if (row.status === 'failed') { const rt = document.createElement('button'); rt.type = 'button'; rt.className = 'message-retry'; rt.textContent = 'Tentar novamente'; meta.appendChild(rt); }
-
-    // Rede de segurança: prometeu imagem mas não renderizou nenhuma.
-    if (row.status !== 'generating' && !bubble.querySelector('img')
-        && /\[?mostrando[^\n]{0,80}imagem|aqui est[áa][^\n]{0,80}imagem|exibindo[^\n]{0,80}imagem/i.test(row.text || '')) {
-      const rb = document.createElement('button'); rb.type = 'button'; rb.className = 'message-retry';
-      rb.textContent = '🖼️ A imagem não apareceu — gerar de novo';
-      rb.dataset.imgRetry = row.id;
-      content.appendChild(rb);
-    }
   }
   content.appendChild(meta);
   wrap.appendChild(content);
@@ -2142,17 +2137,6 @@ conversation.addEventListener('click', e => {
     allMessages().then(rows => {
       const r = rows.find(m => m.id === mid);
       if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
-    });
-    return;
-  }
-  const ir = e.target.closest('[data-img-retry]');
-  if (ir) {
-    const mid = ir.dataset.imgRetry || '';
-    const uid = mid.endsWith('-r1') ? mid.slice(0, -3) : '';
-    allMessages().then(rows => {
-      const u = rows.find(m => m.id === uid);
-      const tema = u ? u.text.replace(/\s+/g, ' ').trim().slice(0, 120) : 'pedida';
-      sendMessage('Você disse que mostraria uma imagem sobre "' + tema + '" mas ela não apareceu. Responda agora SÓ com esta linha e nada mais: ![imagem](https://loremflickr.com/800/500/tema)');
     });
     return;
   }
