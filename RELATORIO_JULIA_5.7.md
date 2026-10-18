@@ -143,7 +143,7 @@ correspondência 1.0, top3 real, etapa reformulada).
 `docs/JULIA_RESEARCH_RESULTS_JDUI.md`, `docs/V5_7_PROGRESS.md`
 (log por incremento) e este relatório; roadmap atualizado com a seção V5.7.
 
-### Fase 3 — Provedores e confiabilidade de recuperação (frente nova, em andamento)
+### Fase 3 — Provedores e confiabilidade de recuperação (concluída; pendências declaradas)
 
 Continuação da V5.7 sobre a FASE 2 concluída, após auditoria de 2026-10-18:
 11 provedores oficiais/keyless + DDG HTML/Lite, SearXNG opcional
@@ -235,11 +235,14 @@ e Fajulto Studio intocados; nenhum push.
   (estado neutro, nunca "confirmado").
 - Não medido nesta versão: latência/custo de produção antes/depois, mobile
   físico e leitor de tela reais (pendência herdada da V5.6).
-- FASE 3 (em andamento): ddg/ddg-lite responderam `rede` na sonda de
-  2026-10-18 (antes, CAPTCHA) — registrado como está, sem bypass; a marca
-  `origem_declarada` ainda não é exibida na JDUI (disponível para agentes);
+- FASE 3: ddg/ddg-lite responderam `rede` na sonda de 2026-10-18 (antes,
+  CAPTCHA) — registrado como está, sem bypass; a marca `origem_declarada`
+  agora é exibida no cartão de fontes da JDUI ("original declarado: X");
   trafilatura/extruct não instalados (gates opcionais no código, sem
-  justificativa de dependência por ora).- P6 **corrigido** (incremento 4): erro interno tem código próprio
+  justificativa de dependência por ora); métricas acumuladas vivem na
+  memória do processo (persistência entre reinícios fora de escopo,
+  declarado).
+- P6 **corrigido** (incremento 4 da FASE 2): erro interno tem código próprio
   (`erro_interno`) e causa na etapa; provedor indisponível de verdade
   continua `provedor_indisponivel`.
 

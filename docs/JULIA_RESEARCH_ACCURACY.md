@@ -189,7 +189,8 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   correspondência, republicações, desatualizado temporal §7, P6, parada por
   ganho §6, índice geral §3). Candidato futuro (não prometido): preferência
   de fontes primárias por classe além da cadeia congelada de provedores.
-- FASE 3 (nova frente) **em andamento**: incrementos 1–6 concluídos (§9 e
+- FASE 3 (nova frente) **concluída com pendências declaradas**: incrementos
+  1–6 (§9 e
   §4.3); pendência declarada: notícia que só cita estudo publicado em outro
   lugar (títulos diferentes) e avaliação de trafilatura/extruct só com
   ganho comprovado.

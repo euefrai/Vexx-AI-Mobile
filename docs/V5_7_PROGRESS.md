@@ -159,7 +159,7 @@ ganhou o grupo `ganho` (2 casos).
 
 Testes: 2 casos novos; benchmark ganhou o grupo `indice` (3 casos).
 
-## FASE 3 — Providers & Retrieval Reliability (em andamento)
+## FASE 3 — Providers & Retrieval Reliability (concluída; pendências declaradas)
 
 ### Auditoria e baseline (2026-10-18)
 
