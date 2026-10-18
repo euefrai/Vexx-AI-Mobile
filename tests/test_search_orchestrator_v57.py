@@ -119,3 +119,26 @@ def test_recuperacao_com_enxuta_melhora_correspondencia_fraca(monkeypatch):
     assert res["correspondencia"] >= 0.5
     urls = [a["url"] for a in res["achados"]]
     assert "https://m.example/abs" in urls
+
+
+# ── Republicações: mesmo título em domínios distintos ────────────────
+
+def test_republicacao_mesmo_titulo_entre_dominios_e_registrada():
+    titulo = "Governo anuncia novo pacote de incentivos para carros elétricos no país"
+    a = {"titulo": titulo, "url": "https://portal-a.example/n/pacote",
+         "trecho": "primeira versão do texto"}
+    b = {"titulo": titulo, "url": "https://portal-b.example/2026/pacote",
+         "trecho": "replica"}
+    c = {"titulo": "Análise: carros elétricos mudam o mercado em 2026",
+         "url": "https://portal-c.example/analise", "trecho": "análise"}
+    unicos, descartes = orch.deduplicar([a, b, c])
+    assert [u["url"] for u in unicos] == [a["url"], c["url"]]
+    assert unicos[0]["republicacoes"] == [b["url"]]
+    assert any("republicação de" in d["motivo"] for d in descartes)
+
+
+def test_titulos_curtos_nao_sao_tratados_como_republicacao():
+    a = {"titulo": "Freio ABS", "url": "https://x.example/a", "trecho": ""}
+    b = {"titulo": "Freio ABS", "url": "https://y.example/b", "trecho": ""}
+    unicos, _ = orch.deduplicar([a, b])
+    assert len(unicos) == 2

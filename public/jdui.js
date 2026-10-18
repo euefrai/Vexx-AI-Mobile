@@ -1976,6 +1976,21 @@
     if (prod.link_motivo) selo.setAttribute('title', prod.link_motivo);
     return selo;
   }
+  /* V5.7: honestidade da imagem — foto só é "confirmada" quando verificada;
+     parcial/não verificada/reprovada sempre sinalizada, sem inventar foto. */
+  function productImgSelo(prod) {
+    const v = (prod.imagem_veredito || '').trim();
+    if (!v || v === 'verificado') return null;
+    if (v === 'reprovado') {
+      const s = el('span', 'jdui-pver ruim', 'Sem foto confirmada');
+      s.setAttribute('title', prod.imagem_motivo || 'Imagem reprovada na verificação');
+      return s;
+    }
+    const texto = v === 'parcial' ? 'Imagem não confirmada' : 'Imagem não verificada';
+    const s = el('span', 'jdui-pver aviso', texto);
+    if (prod.imagem_motivo) s.setAttribute('title', prod.imagem_motivo);
+    return s;
+  }
   function productCardEl(prod, ctx, mini) {
     const card = el('div', 'jdui-pcard' + (mini ? ' mini' : ''));
     const moldura = el('div', 'jdui-pmedia');
@@ -1990,6 +2005,8 @@
     if (prod.loja || prod.verificado_em) corpo.appendChild(el('div', 'jdui-ploja', loja));
     const selo = productSelo(prod);
     if (selo) corpo.appendChild(selo);
+    const imgSelo = productImgSelo(prod);
+    if (imgSelo) corpo.appendChild(imgSelo);
     corpo.appendChild(el('div', 'jdui-paval', productStars(prod.avaliacao, prod.n_avaliacoes)));
     corpo.appendChild(el('span', 'jdui-pdisp ' + (prod.disponibilidade || 'desconhecida'),
       DISP_LABEL[prod.disponibilidade] || DISP_LABEL.desconhecida));

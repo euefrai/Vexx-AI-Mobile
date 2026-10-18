@@ -84,6 +84,30 @@ Contratos preservados: consulta original continua a primeira tentativa;
 nenhum resultado é apagado (apenas rebaixado/descartado por dedupe);
 `variantes` não mudou; estados continuam no vocabulário V5.5.
 
+### Incremento 2 — duplicatas e republicações (concluído)
+
+`deduplicar()` agora, além da URL canônica, sinaliza **republicações**:
+título praticamente idêntico (Jaccard ≥ 0.9, ≥ 4 termos) entre URLs
+distintas → a versão posterior vira descarte com motivo
+(`republicação de <url>`) e a mantida ganha `republicacoes: [urls]`.
+Títulos curtos (< 4 termos) nunca entram na regra. Nada é apagado:
+tudo fica em `descartes` com a origem (base para o Evidence Graph).
+Testes: 2 casos novos em `tests/test_search_orchestrator_v57.py`.
+
+## FASE 7 — JDUI (incremento 1 concluído)
+
+1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.
+   `verificado` não ganha selo; `parcial` → "Imagem não confirmada";
+   `nao_verificado` → "Imagem não verificada"; `reprovado` (imagem foi
+   removida pelo shopping) → "Sem foto confirmada" com o motivo no
+   `title`. Nunca apresentar foto não verificada como confirmada.
+2. `public/app.js` — `rotuloUrl`: autolink de texto passa a exibir
+   host + caminho curto (ex.: `moura.com.br/blog/sistema-de-freios`) com
+   `title` contendo a URL completa; o `href` continua a URL inteira.
+   Fim das URLs cruas gigantes quebrando o layout do chat.
+3. Verificação: `node --check` nos dois arquivos + suíte JDUI
+   (`test_jdui*.py`) 34/34 verde.
+
 ## FASE 4 — Links, produtos e imagens (incremento 1 concluído)
 
 Prioridade da missão ("corrigir links errados e produtos misturados").
@@ -123,8 +147,6 @@ Testes novos: `tests/test_shopping_v57.py` (8 casos, sem rede).
 
 - Fontes primárias e reclassificação por assunto quando a primeira rodada
   tem só índice geral.
-- Duplicatas e republicações além de URL canônica (título quase igual entre
-  domínios distintos).
 - Conteúdo desatualizado em consultas temporais (usar `pubDate`/ano com
   honestidade).
 - Critérios de parada por ganho real de informação (novos domínios/temas

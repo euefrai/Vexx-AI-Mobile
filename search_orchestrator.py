@@ -347,7 +347,12 @@ def _dominio(url: str) -> str:
 
 
 def deduplicar(achados: list) -> tuple:
-    """Agrupa por URL canônica. Retorna (únicos, descartes)."""
+    """Agrupa por URL canônica e sinaliza republicações. (únicos, descartes).
+
+    V5.7: título praticamente idêntico (Jaccard >= 0.9, >= 4 termos) entre
+    URLs distintas é registrado como republicação — a versão posterior é
+    descartada com motivo e a mantida ganha `republicacoes` (nunca apagado).
+    """
     vistos, unicos, descartes = {}, [], []
     for a in achados or []:
         url = (a.get("url") or "").strip()
@@ -365,7 +370,27 @@ def deduplicar(achados: list) -> tuple:
         a["url_canonica"] = chave
         vistos[chave] = a
         unicos.append(a)
-    return unicos, descartes
+
+    # V5.7 — republicações: mesmo texto/título em domínios distintos
+    vistos_titulo = []
+    finais = []
+    for a in unicos:
+        tokens = set(_termos(a.get("titulo") or ""))
+        if len(tokens) >= 4:
+            dono = None
+            for conj, item in vistos_titulo:
+                uniao = len(tokens | conj)
+                if uniao and (len(tokens & conj) / uniao) >= 0.9:
+                    dono = item
+                    break
+            if dono is not None:
+                dono.setdefault("republicacoes", []).append((a.get("url") or "")[:200])
+                descartes.append({"url": (a.get("url") or "")[:200],
+                                  "motivo": f"republicação de {(dono.get('url') or '')[:120]}"})
+                continue
+            vistos_titulo.append((tokens, a))
+        finais.append(a)
+    return finais, descartes
 
 
 def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> float:

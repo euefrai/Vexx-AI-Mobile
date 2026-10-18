@@ -39,6 +39,14 @@ function newId() { return crypto.randomUUID ? crypto.randomUUID() : (Date.now().
 function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3200); }
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 function validUrl(u) { try { const p = new URL(String(u).trim(), location.href); return (p.protocol === 'http:' || p.protocol === 'https:' || p.protocol === 'data:') ? p.href : ''; } catch (_) { return ''; } }
+function rotuloUrl(u) {
+  try {
+    const p = new URL(String(u));
+    const caminho = (p.pathname || '').replace(/\/$/, '');
+    const curto = caminho.length > 32 ? caminho.slice(0, 29) + '...' : caminho;
+    return p.hostname.replace(/^www\./, '') + curto;
+  } catch (_) { return String(u).length > 44 ? String(u).slice(0, 41) + '...' : String(u); }
+}
 function fmtTime(iso) { try { const d = new Date(iso); return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); } catch (_) { return ''; } }
 
 /* ----- Drawer ----- */
@@ -415,7 +423,7 @@ function inlineFmt(s, sources = {}) {
     let u = url, suf = '';
     if (e) { u = url.slice(0, -e[0].length); suf = e[0]; }
     if (!u) return m;
-    return pre + '<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + u + '</a>' + suf;
+    return pre + '<a href="' + u + '" title="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(rotuloUrl(u)) + '</a>' + suf;
   });
   return s.replace(/\u0001INLINE(\d+)\u0001/g, (_, n) => tokens[Number(n)] || '');
 }
