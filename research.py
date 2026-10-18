@@ -597,6 +597,17 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
         trecho = (a.get("trecho") or "")[:600]
     lida = bool(rec.get("lida", bool(texto.strip())))
     metas = rec.get("metadados") if isinstance(rec.get("metadados"), dict) else {}
+    canonica = (metas.get("canonica") or "").strip()[:500]
+    dominio = _dominio(rec.get("final") or a.get("url", ""))
+    dom_canonica = _dominio(canonica)
+    # rel=canonical declarado pela própria página apontando para OUTRO domínio:
+    # sinal de origem (agregador/cópia declara o original) — declarado, nunca
+    # verificado por nós; sem troca de link e sem promoção automática.
+    origem_declarada = ""
+    if dom_canonica and dominio and dom_canonica != dominio \
+            and not dom_canonica.endswith("." + dominio) \
+            and not dominio.endswith("." + dom_canonica):
+        origem_declarada = dom_canonica
     return {"titulo": (rec.get("titulo") or a.get("titulo") or "")[:160],
             "url": (a.get("url") or "")[:500],
             "dominio": _dominio(a.get("url", "")),
@@ -607,7 +618,8 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
             "origem": a.get("origem", ""),
             "publicado_em": (metas.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
             "extrator": rec.get("extrator", ""),
-            "canonica": (metas.get("canonica") or "")[:500]}
+            "canonica": canonica,
+            "origem_declarada": origem_declarada}
 
 
 # Orçamento padrão da busca síncrona (Render Free): poucas consultas e
@@ -858,6 +870,8 @@ def bloco_grounding(fontes: list, hoje_br: str, info: dict = None) -> str:
             marcas.append("página NÃO lida; trecho do índice de busca")
         if f.get("publicado_em"):
             marcas.append(f"publicado em {f['publicado_em']}")
+        if f.get("origem_declarada"):
+            marcas.append(f"página declara a origem em {f['origem_declarada']}")
         sufixo = f" [{'; '.join(marcas)}]" if marcas else ""
         linhas.append(f"[{f.get('id', '?')}] {f.get('titulo', '')}{sufixo} — {f.get('trecho', '')[:400]} "
                       f"({f.get('url', '')}, acesso {hoje_br})")

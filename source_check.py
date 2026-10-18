@@ -370,6 +370,13 @@ def avaliar_pagina(pagina: str, url_final: str = "", *, consulta: str = "",
     out.update({"titulo": (ext.get("titulo") or metas.get("titulo") or "")[:160],
                 "canonica": (metas.get("canonica") or "")[:500],
                 "trecho": (ext.get("trecho_usado") or (ext.get("texto") or "")[:400])[:400]})
+    # rel=canonical apontando para OUTRO domínio: origem declarada pela página
+    # (agregador/cópia declara o original). Declarado, não verificado aqui.
+    dom_can = _dominio(out["canonica"])
+    if dom_can and out["dominio"] and dom_can != out["dominio"] \
+            and not dom_can.endswith("." + out["dominio"]) \
+            and not out["dominio"].endswith("." + dom_can):
+        out["origem_declarada"] = dom_can
     sinais = classificar_sinais(pagina, url_final)
     out["sinais"] = sinais
 

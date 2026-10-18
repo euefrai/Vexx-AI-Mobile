@@ -64,8 +64,12 @@ def _traduzir(exc: Exception) -> ErroProvedor:
     mapa = {"ssrf": "bloqueado", "tipo_bloqueado": "tipo", "redirect": "http",
             "http": "http", "rede": "rede", "tamanho": "tamanho", "formato": "formato",
             "vazio": "vazio", "timeout": "rede", "URLError": "rede",
-            "socket.timeout": "rede", "HTTPError": "http", "ResearchErro": "erro"}
-    return ErroProvedor(str(exc)[:200], mapa.get(codigo, codigo or "erro"))
+            "socket.timeout": "rede", "HTTPError": "http", "ResearchErro": "erro",
+            "OSError": "rede", "TimeoutError": "rede", "ConnectionError": "rede"}
+    traduzido = mapa.get(codigo)
+    if not traduzido and isinstance(exc, OSError):  # DNS/reset/pipe: rede ampla
+        traduzido = "rede"
+    return ErroProvedor(str(exc)[:200], traduzido or codigo or "erro")
 
 
 def _verificar_bloqueio(pagina: str) -> None:
@@ -428,6 +432,41 @@ PROVEDORES: dict = {
 }
 
 
+# ── Métricas por provedor (V5.7 F3) ────────────────────────────────
+_METRICAS: dict = {}
+
+
+def _metrica(nome: str, t0: float, *, resultados: int = 0, erro: str = "") -> None:
+    m = _METRICAS.setdefault(nome, {"chamadas": 0, "ok": 0, "vazio": 0,
+                                    "resultados": 0, "erros": {}, "ms_total": 0.0})
+    m["chamadas"] += 1
+    m["ms_total"] += max(0.0, (time.monotonic() - t0) * 1000.0)
+    if erro:
+        m["erros"][erro] = m["erros"].get(erro, 0) + 1
+    elif resultados:
+        m["ok"] += 1
+        m["resultados"] += int(resultados)
+    else:
+        m["vazio"] += 1
+
+
+def metricas() -> dict:
+    """Métricas cumulativas por provedor (desde o início do processo)."""
+    out = {}
+    for nome in sorted(_METRICAS):
+        m = _METRICAS[nome]
+        out[nome] = {"chamadas": m["chamadas"], "ok": m["ok"], "vazio": m["vazio"],
+                     "resultados": m["resultados"], "erros": dict(m["erros"]),
+                     "ms_medio": round(m["ms_total"] / m["chamadas"], 1)
+                     if m["chamadas"] else 0.0}
+    return out
+
+
+def _reset_metricas() -> None:
+    """Zera métricas (bateria de testes / medição antes-depois)."""
+    _METRICAS.clear()
+
+
 def disponiveis(classes=None) -> list:
     """Nomes de provedores (filtrados por classe de assunto, se pedido)."""
     nomes = []
@@ -439,21 +478,29 @@ def disponiveis(classes=None) -> list:
 
 
 def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> list:
-    """Executa um provedor; levanta ErroProvedor com código honesto."""
+    """Executa um provedor; levanta ErroProvedor com código honesto.
+
+    Cada execução alimenta as métricas cumulativas (`metricas()`).
+    """
     meta = PROVEDORES.get(nome)
     if not meta:
         raise ErroProvedor(f"Provedor desconhecido: {nome}", "indisponivel")
+    t0 = time.monotonic()
     try:
         achados = meta["fn"](consulta, limite=limite, timeout=timeout) or []
-    except ErroProvedor:
+    except ErroProvedor as exc:
+        _metrica(nome, t0, erro=exc.codigo or "erro")
         raise
     except Exception as exc:
-        raise _traduzir(exc)
+        trad = _traduzir(exc)
+        _metrica(nome, t0, erro=trad.codigo or "erro")
+        raise trad
     for a in achados:
         a.setdefault("origem", nome)
         a.setdefault("tipo", meta["tipo"])
         a.setdefault("trecho", "")
         a.setdefault("meta", {})
+    _metrica(nome, t0, resultados=len(achados))
     return achados
 
 

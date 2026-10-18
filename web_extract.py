@@ -428,7 +428,7 @@ def _url_absoluta(url: str, base: str) -> str:
         return ""
 
 
-# ── Links e tabelas ────────────────────────────────────────────────
+# ── Links, imagens e tabelas ───────────────────────────────────────
 def extrair_links(pagina: str, base_url: str = "", *, limite: int = 30,
                   dominio_base: str = "") -> list:
     """Links reais do documento: {url, texto, interno}. Sem javascript/mailto."""
@@ -448,6 +448,62 @@ def extrair_links(pagina: str, base_url: str = "", *, limite: int = 30,
         host = (urllib.parse.urlsplit(url).hostname or "").lower()
         out.append({"url": url, "texto": texto,
                     "interno": bool(dom_base and host.endswith(dom_base.lower()))})
+        if len(out) >= limite:
+            break
+    return out
+
+
+def _ld_imagem(valor) -> list:
+    """URLs de imagens declaradas em JSON-LD (string, lista ou objeto)."""
+    out = []
+    if isinstance(valor, str):
+        if valor.strip():
+            out.append(valor.strip())
+    elif isinstance(valor, dict):
+        u = valor.get("url") or valor.get("contentUrl") or valor.get("thumbnailUrl")
+        if isinstance(u, str) and u.strip():
+            out.append(u.strip())
+        for k in ("image", "imageObject"):
+            if k in valor:
+                out.extend(_ld_imagem(valor[k]))
+    elif isinstance(valor, list):
+        for v in valor:
+            out.extend(_ld_imagem(v))
+    return out
+
+
+_RX_IMG = re.compile(r"<img\s[^>]*?src=[\"']([^\"']+)[\"']", re.IGNORECASE)
+
+
+def extrair_imagens(pagina: str, base_url: str = "", *, limite: int = 10) -> list:
+    """Imagens referenciadas pelo documento: urls absolutas, dedup, sem `data:`.
+
+    Prioridade: JSON-LD (`image`/`imageObject`/`thumbnailUrl`) → `og:image`/
+    `twitter:image` → `<img src>`. Sem inferência: só o que o HTML declara.
+    """
+    urls = []
+    for obj in _ld_por_tipo(_ldjson_objs(pagina), _ARTIGO_TIPOS, teto=6):
+        for k in ("image", "imageObject", "thumbnailUrl"):
+            if k in obj:
+                urls.extend(_ld_imagem(obj[k]))
+    for m in _RX_META.finditer(pagina or ""):
+        k = (m.group(1) or m.group(4) or "").strip().lower()
+        v = (m.group(2) if m.group(2) is not None else m.group(3)) or ""
+        if v and k in ("og:image", "og:image:url", "og:image:secure_url",
+                       "twitter:image", "twitter:image:src"):
+            urls.append(v)
+    for m in _RX_IMG.finditer(pagina or ""):
+        urls.append(m.group(1))
+    out, vistos = [], set()
+    for u in urls:
+        u = (u or "").strip()
+        if not u or u.lower().startswith(("data:", "javascript:", "about:")):
+            continue
+        u = _url_absoluta(u, base_url)
+        if not u.startswith("http") or u in vistos:
+            continue
+        vistos.add(u)
+        out.append(u)
         if len(out) >= limite:
             break
     return out
@@ -548,9 +604,9 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
                    *, teto: int = TETO_TEXTO, usar_trafilatura: bool = True) -> dict:
     """Extração completa e honesta de uma página HTML já baixada.
 
-    Retorna {titulo, texto, secoes, paragrafos, metadados, links, tabelas,
-    trecho_usado, extrator, ilegivel, tamanho_html}. Campos vazios quando o
-    documento não os tem — nada é preenchido por aparência.
+    Retorna {titulo, texto, secoes, paragrafos, metadados, links, imagens,
+    tabelas, trecho_usado, extrator, ilegivel, tamanho_html}. Campos vazios
+    quando o documento não os tem — nada é preenchido por aparência.
     """
     html_txt = (pagina or "")[:MAX_HTML]
     metas = extrair_metadados(html_txt, base_url)
@@ -582,6 +638,7 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         "secoes": secs,
         "metadados": metas,
         "links": extrair_links(html_txt, base_url),
+        "imagens": extrair_imagens(html_txt, base_url),
         "tabelas": extrair_tabelas(html_txt),
         "trecho_usado": melhor_trecho(texto_art, consulta, 400),
         "extrator": extrator,

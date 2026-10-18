@@ -1,0 +1,207 @@
+{
+ "em": "2026-10-18",
+ "consulta": "freio abs",
+ "provedores": [
+  {
+   "provedor": "bing",
+   "estado": "ok",
+   "resultados": 2,
+   "segundos": 0.56,
+   "exemplo": "Freio ABS: o que é, como funciona e como saber se o seu carro tem"
+  },
+  {
+   "provedor": "stackexchange",
+   "estado": "ok",
+   "resultados": 1,
+   "segundos": 1.13,
+   "exemplo": "Liberar Input ao clicar em Select"
+  },
+  {
+   "provedor": "pubmed",
+   "estado": "vazio",
+   "resultados": 0,
+   "segundos": 0.61,
+   "detalhe": "PubMed sem resultados."
+  },
+  {
+   "provedor": "bcb",
+   "estado": "vazio",
+   "resultados": 0,
+   "segundos": 0.0,
+   "detalhe": "BCB: nenhuma série conhecida para esta consulta."
+  },
+  {
+   "provedor": "worldbank",
+   "estado": "ok",
+   "resultados": 2,
+   "segundos": 0.92,
+   "exemplo": "Poverty Headcount ($1.90 a day)"
+  },
+  {
+   "provedor": "wikipedia",
+   "estado": "ok",
+   "resultados": 2,
+   "segundos": 0.67,
+   "exemplo": "Freio abs"
+  },
+  {
+   "provedor": "bing-news",
+   "estado": "vazio",
+   "resultados": 0,
+   "segundos": 0.61,
+   "detalhe": "Bing sem resultados utilizáveis."
+  },
+  {
+   "provedor": "openlibrary",
+   "estado": "ok",
+   "resultados": 2,
+   "segundos": 1.27,
+   "exemplo": "Commercial vehicle braking systems"
+  },
+  {
+   "provedor": "commons",
+   "estado": "ok",
+   "resultados": 2,
+   "segundos": 1.03,
+   "exemplo": "Anti-lock braking system diagram.jpg"
+  },
+  {
+   "provedor": "hn",
+   "estado": "vazio",
+   "resultados": 0,
+   "segundos": 0.79,
+   "detalhe": "HN sem resultados."
+  },
+  {
+   "provedor": "marginalia",
+   "estado": "vazio",
+   "resultados": 0,
+   "segundos": 1.17,
+   "detalhe": "Marginalia sem resultados (índice pequeno)."
+  }
+ ],
+ "ddg": [
+  {
+   "nome": "ddg",
+   "estado": "rede",
+   "detalhe": "Falha de rede (URLError)."
+  },
+  {
+   "nome": "ddg-lite",
+   "estado": "rede",
+   "detalhe": "Falha de rede (URLError)."
+  }
+ ],
+ "academico": [
+  {
+   "provedor": "openalex",
+   "estado": "ok",
+   "resultados": 2
+  },
+  {
+   "provedor": "crossref",
+   "estado": "ok",
+   "resultados": 2
+  }
+ ],
+ "metricas_search_providers": {
+  "bcb": {
+   "chamadas": 1,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 1
+   },
+   "ms_medio": 0.0
+  },
+  "bing": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 2,
+   "erros": {},
+   "ms_medio": 561.7
+  },
+  "bing-news": {
+   "chamadas": 1,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 1
+   },
+   "ms_medio": 612.5
+  },
+  "commons": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 2,
+   "erros": {},
+   "ms_medio": 1033.2
+  },
+  "hn": {
+   "chamadas": 1,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 1
+   },
+   "ms_medio": 785.9
+  },
+  "marginalia": {
+   "chamadas": 1,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 1
+   },
+   "ms_medio": 1165.1
+  },
+  "openlibrary": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 2,
+   "erros": {},
+   "ms_medio": 1266.4
+  },
+  "pubmed": {
+   "chamadas": 1,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 1
+   },
+   "ms_medio": 612.8
+  },
+  "stackexchange": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 1,
+   "erros": {},
+   "ms_medio": 1125.4
+  },
+  "wikipedia": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 2,
+   "erros": {},
+   "ms_medio": 667.6
+  },
+  "worldbank": {
+   "chamadas": 1,
+   "ok": 1,
+   "vazio": 0,
+   "resultados": 2,
+   "erros": {},
+   "ms_medio": 922.3
+  }
+ }
+}

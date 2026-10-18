@@ -139,9 +139,35 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   2026-10-17 fica como histórico, 27 casos).
 - Regressão completa: 712 passed / 4 skipped (`pytest -q tests`).
 
-## 9. Limites e bloqueios (sem bypass)
+## 9. Provedores: métricas e origem declarada (FASE 3)
 
-- Bloqueios externos observados: DDG (CAPTCHA), Mercado Livre API (403),
+- **Métricas por provedor** (`search_providers.metricas()`): chamadas, ok,
+  vazio, resultados, erros por código e latência média, acumuladas no
+  dispatcher `buscar` — sem I/O e sem mudar o comportamento da busca;
+  `_reset_metricas()` serve a testes e à medição antes/depois.
+- **Classificação honesta de erro**: 403/429 → `bloqueado` (sem bypass);
+  4xx restante e 5xx → `http`; timeout/DNS/reset/URLError → `rede`;
+  202 sem corpo → provedor respondeu e `vazio` fica registrado (nunca
+  sucesso). Falha interna mantém o tipo observado (`TypeError` etc.),
+  nunca vira código falso.
+- **Origem declarada**: quando o `rel=canonical` da página aberta aponta
+  para **outro domínio**, a fonte ganha `origem_declarada` (declarado pela
+  página; não verificado por nós; o link nunca é trocado) e o grounding do
+  Lucas mostra "página declara a origem em X". Mesma origem/subdomínio não
+  marca; consulta sem canônica não muda nada.
+- **Imagens referenciadas**: `web_extract.extrair_imagens` devolve as URLs
+  que o documento declara (JSON-LD → og/twitter → `<img>`), absolutas e
+  sem duplicatas; `extrair_pagina` expõe `imagens`.
+- **Sonda E2E real** (2026-10-18, `freio abs`, fontes permitidas):
+  bing/stackexchange/worldbank/wikipedia/openlibrary/commons ok;
+  pubmed/bing-news/hn/marginalia/bcb responderam sem resultado utilizável
+  (`vazio`); ddg e ddg-lite `rede` neste host; OpenAlex/Crossref ok.
+  Artefato: `qa-artifacts/v57/fase3-provedores-2026-10-18.json`.
+
+## 10. Limites e bloqueios (sem bypass)
+
+- Bloqueios externos observados: DDG — CAPTCHA (2026-10-17) e `rede`
+  (URLError neste host, 2026-10-18); Mercado Livre API (403),
   Magalu (403 bot-wall), KaBuM listagem (reprovado/sem sinais de produto),
   Amazon BR (503), Mojeek/Brave/Startpage/Yahoo/searx.be (indisponíveis),
   Semantic Scholar (429). Nada foi contornado; cada bloqueio vira estado
@@ -152,6 +178,9 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   correspondência, republicações, desatualizado temporal §7, P6, parada por
   ganho §6, índice geral §3). Candidato futuro (não prometido): preferência
   de fontes primárias por classe além da cadeia congelada de provedores.
+- FASE 3 (nova frente) **em andamento**: incrementos 1–3 concluídos (§9);
+  pendências declaradas no relatório (exibição na JDUI, medição contínua de
+  latência, avaliação de trafilatura/extruct).
 
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),

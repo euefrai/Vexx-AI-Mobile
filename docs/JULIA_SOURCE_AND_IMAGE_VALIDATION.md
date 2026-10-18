@@ -70,6 +70,18 @@ referência/bibliografia (`Consultado em`, `Cópia arquivada`, `ISBN`, `doi:`,
 `«»`, `↑`) são descontadas em `melhor_trecho` — o trecho mostrado é conteúdo
 do corpo do artigo, não citação.
 
+**FASE 3 (V5.7)**: a leitura agora extrai as **imagens referenciadas**
+(`web_extract.extrair_imagens`: JSON-LD `image`/`imageObject`/`thumbnailUrl`
+→ `og:image`/`twitter:image` → `<img src>`; URLs absolutas, `data:` fora,
+dedup, teto) e expõe em `extrair_pagina()["imagens"]`. Obtidas do documento,
+nunca inventadas.
+
+**Origem declarada**: quando o `rel=canonical` da página aberta aponta para
+outro domínio, `research._fonte_de` marca `origem_declarada` e
+`source_check.avaliar_pagina` devolve o mesmo sinal. É declaração da própria
+página (agregador/cópia aponta o original) — **não é verificação nossa**,
+não troca o link e não promove veredito.
+
 ## 4. Bloqueios externos observados (2026-10-17) — sem bypass
 
 | Fonte | Resultado real | Registro honesto |
@@ -91,9 +103,16 @@ não simula verificação.
 - `tests/test_shopping_v57.py` — marca obrigatória, specs pareadas, selos
   (8 casos); trio de shopping: 66 passed.
 - `tests/test_source_check*.py` — vereditos/códigos (baseline V5.5).
-- `tests/test_web_extract_v57.py` — trecho não vem de referências.
+- `tests/test_web_extract_v57.py` — trecho não vem de referências; imagens
+  referenciadas (og/JSON-LD/`<img>`, dedup, `data:` fora) — FASE 3.
+- `tests/test_fontes_origem_v57.py` — origem declarada (canônica externa,
+  mesmo domínio silencia, grounding, veredito) — FASE 3.
+- `tests/test_providers_v57.py` — métricas por provedor e classificação
+  HTTP 202/403/429/5xx/timeout/vazio — FASE 3.
 - Benchmark `tools/bench_pesquisa_v57.py`, grupos `produtos`, `specs` e
   `links` (12 casos) — 34/34 global.
+- Sonda real de provedores (2026-10-18): `qa-artifacts/v57/`
+  `fase3-provedores-2026-10-18.json` (8 provedores ok, 5 vazio, ddg rede).
 - Prova real do shopping (2026-10-17): pedido Lenovo → produtos Lenovo com
   link `verificado`/`url_item`; Asus e Dell como alternativas explícitas com
   "pedido: lenovo".

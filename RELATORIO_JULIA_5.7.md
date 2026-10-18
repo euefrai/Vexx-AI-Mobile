@@ -143,6 +143,44 @@ correspondência 1.0, top3 real, etapa reformulada).
 `docs/JULIA_RESEARCH_RESULTS_JDUI.md`, `docs/V5_7_PROGRESS.md`
 (log por incremento) e este relatório; roadmap atualizado com a seção V5.7.
 
+### Fase 3 — Provedores e confiabilidade de recuperação (frente nova, em andamento)
+
+Continuação da V5.7 sobre a FASE 2 concluída, após auditoria de 2026-10-18:
+11 provedores oficiais/keyless + DDG HTML/Lite, SearXNG opcional
+(`JULIA_SEARXNG_URL`; sem instância autorizada aqui → indisponível
+declarado), OpenAlex + Crossref no caminho acadêmico, circuito de 5 min por
+provedor, retry 429 com backoff no acadêmico, cache com TTL, dedupe
+canônico/republicações e registro de status por provedor — tudo **já
+existente e preservado** (nada recriado). Incrementos concluídos:
+
+1. **Métricas por provedor** (`search_providers.metricas()`): chamadas, ok,
+   vazio, resultados, erros por código e latência média, alimentadas no
+   dispatcher `buscar`; classificação de rede ampliada
+   (`OSError`/timeout/reset → `rede`); testes de HTTP 202/403/429/5xx,
+   timeout e página vazia.
+2. **Imagens referenciadas** na extração (`web_extract.extrair_imagens`:
+   JSON-LD → og/twitter → `<img src>`, absolutas, dedup, `data:` fora),
+   expostas em `extrair_pagina()["imagens"]`.
+3. **Origem declarada** pela página: `rel=canonical` para outro domínio vira
+   `origem_declarada` na fonte, marca no grounding do Lucas e sinal no
+   veredito de página — declarado, nunca verificado; o link não é trocado.
+
+Suíte completa com os incrementos: **727 passed / 4 skipped** (722 dos
+incrementos 1–2 + 5 do incremento 3); benchmark congelado re-verificado
+offline **34/34**.
+
+Sonda E2E real dos provedores (2026-10-18) em `qa-artifacts/v57/`
+`fase3-provedores-2026-10-18.json`: bing/stackexchange/worldbank/wikipedia/
+openlibrary/commons ok, OpenAlex/Crossref ok; pubmed/bing-news/hn/marginalia/
+bcb responderam `vazio`; ddg/ddg-lite `rede` neste host — nada contornado.
+
+Pendências honestas desta frente: exibição da origem declarada na JDUI;
+medição de latência por provedor em uso contínuo; avaliação de
+trafilatura/extruct/crawl4ai (licenças livres — Apache-2.0/MIT —, mas
+dependências não se justificam por ora: o extrator atual já cobre título,
+texto, seções, metadados, JSON-LD, canônica, links, tabelas e agora imagens;
+os gates opcionais permanecem no código para quem instalar).
+
 ## Métricas (antes → depois)
 
 | Medida | Antes | Depois |
@@ -156,6 +194,10 @@ correspondência 1.0, top3 real, etapa reformulada).
 | Parada por ganho zero | não existia (só quantidade) | consulta redundante não roda; `ganho_informacao` declarado na recuperação |
 | Rodada só de índices | aceita como `ok` | índices sinalizados/demovidos; lacuna + recuperação dirigida |
 | Suíte completa | 670 passed / 4 skipped (V5.6) | **712 passed / 4 skipped** (V5.7) |
+| Métricas por provedor (FASE 3) | só último status + contagem da rodada | `metricas()`: chamadas/ok/vazio/erros/ms por provedor |
+| Imagens referenciadas (FASE 3) | não extraídas | `extrair_pagina["imagens"]` (JSON-LD/og/`<img>`, dedup) |
+| Origem declarada (FASE 3) | não sinalizada | `origem_declarada` + marca no grounding |
+| Suíte completa (FASE 3, inc. 1–3) | 712 passed / 4 skipped | **727 passed / 4 skipped** |
 
 ## Contratos preservados
 
@@ -174,7 +216,12 @@ e Fajulto Studio intocados; nenhum push.
 - Selo de imagem cobre até 3 produtos por busca; os demais ficam sem selo
   (estado neutro, nunca "confirmado").
 - Não medido nesta versão: latência/custo de produção antes/depois, mobile
-  físico e leitor de tela reais (pendência herdada da V5.6).- P6 **corrigido** (incremento 4): erro interno tem código próprio
+  físico e leitor de tela reais (pendência herdada da V5.6).
+- FASE 3 (em andamento): ddg/ddg-lite responderam `rede` na sonda de
+  2026-10-18 (antes, CAPTCHA) — registrado como está, sem bypass; a marca
+  `origem_declarada` ainda não é exibida na JDUI (disponível para agentes);
+  trafilatura/extruct não instalados (gates opcionais no código, sem
+  justificativa de dependência por ora).- P6 **corrigido** (incremento 4): erro interno tem código próprio
   (`erro_interno`) e causa na etapa; provedor indisponível de verdade
   continua `provedor_indisponivel`.
 
@@ -185,3 +232,6 @@ e Fajulto Studio intocados; nenhum push.
 2. Candidatos (não prometidos): preferência de fontes primárias por classe
    além da cadeia congelada de provedores; mobile físico e leitor de tela
    reais (herdado da V5.6).
+3. FASE 3 (continuação): exibir a origem declarada na JDUI; aproveitar as
+   métricas por provedor para medição contínua de latência/taxa de falha;
+   decidir sobre trafilatura/extruct apenas com ganho comprovado em E2E.

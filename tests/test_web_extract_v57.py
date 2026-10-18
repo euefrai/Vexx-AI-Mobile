@@ -44,3 +44,42 @@ def test_penalidade_citacoes_e_limitada():
     assert web_extract._penalidade_citacoes(pedaco) > web_extract._penalidade_citacoes(
         "mencionado em uma referência: Consultado em 2020.")
     assert web_extract._penalidade_citacoes("texto normal sem citações") == 0.0
+
+
+# ── FASE 3: imagens referenciadas ──────────────────────────────────
+def test_imagens_og_jsonld_e_img_relativo():
+    html = (
+        '<html><head>'
+        '<meta property="og:image" content="https://cdn.example/foto.jpg">'
+        '<meta name="twitter:image" content="/social.png">'
+        '<script type="application/ld+json">'
+        '{"@type":"Product","name":"Placa","image":'
+        '["https://cdn.example/placa-1.jpg",'
+        ' {"@type":"ImageObject","contentUrl":"https://cdn.example/placa-2.jpg"}]}'
+        '</script></head><body>'
+        '<img src="foto-interna.jpg"><img src="https://cdn.example/foto.jpg">'
+        '</body></html>')
+    imgs = web_extract.extrair_imagens(html, "https://loja.example/pagina")
+    assert imgs[0] == "https://cdn.example/placa-1.jpg"  # JSON-LD primeiro
+    assert "https://cdn.example/placa-2.jpg" in imgs
+    assert "https://cdn.example/foto.jpg" in imgs
+    assert "https://loja.example/social.png" in imgs
+    assert "https://loja.example/foto-interna.jpg" in imgs
+    assert imgs.count("https://cdn.example/foto.jpg") == 1  # dedup
+
+
+def test_imagens_ignoram_data_uri_e_so_http():
+    html = ('<img src="data:image/png;base64,AAA">'
+            '<img src="javascript:void(0)">'
+            '<img src="espaco.jpg">')
+    assert web_extract.extrair_imagens(html, "https://x.example/a") == [
+        "https://x.example/espaco.jpg"]
+
+
+def test_extrair_pagina_expoe_imagens():
+    html = ('<html><head><title>Nota</title>'
+            '<meta property="og:image" content="https://cdn.example/capa.jpg">'
+            '</head><body><p>Texto do artigo com conteúdo suficiente para '
+            'não ser ilegível nesta extração de teste.</p></body></html>')
+    out = web_extract.extrair_pagina(html, "https://nota.example/n/1")
+    assert out["imagens"] == ["https://cdn.example/capa.jpg"]

@@ -46,7 +46,7 @@ curtos. Nada foi alterado antes das reproduções.
   investigativa 300 s + replan.
 - Autolink imprime URL crua (`app.js:413-419`).
 
-## FASE 2 — Search Orchestrator 4.0 (em andamento)
+## FASE 2 — Search Orchestrator 4.0 (concluída — incrementos 1–6)
 
 ### Incremento 1 — reformulação de pergunta e correspondência honesta (concluído)
 
@@ -158,6 +158,115 @@ ganhou o grupo `ganho` (2 casos).
    cadeia congelada de provedores por classe (sem reordenação).
 
 Testes: 2 casos novos; benchmark ganhou o grupo `indice` (3 casos).
+
+## FASE 3 — Providers & Retrieval Reliability (em andamento)
+
+### Auditoria e baseline (2026-10-18)
+
+- HEAD `b51a823`, árvore limpa; suíte 712 passed / 4 skipped; benchmark
+  congelado 34/34. Baseline re-verificado por subconjunto (search/providers:
+  52 passed).
+- Mapa dos módulos: `search_providers.py` (11 provedores oficiais/keyless +
+  dispatcher `buscar` + `disponiveis` + `diagnosticar`), `research.py`
+  (HTTP/SSRF `baixar`, DDG HTML/Lite, circuito 300 s, `registrar_status`/
+  `status_provedor`, cache TTL, `buscar_web_v55`), `search_orchestrator.py`
+  (cadeia por classe, ranking, recuperação), `web_extract.py` (artigo,
+  metadados, JSON-LD, canônica, links, tabelas + gates opcionais
+  trafilatura/extruct), `source_check.py` (vereditos de página/imagem/loja),
+  `academic_research.py` (OpenAlex + Crossref, `_RateGate`, retry 429 com
+  backoff), `research_agents.py` (ProvedorDDG, ProvedorSearXNG via
+  `JULIA_SEARXNG_URL`, cadeia legada ddg → searxng → wikipedia [→ academic]).
+- **Já existente e verificado no código** (não recriar): fallback entre
+  provedores; circuito por provedor (5 min, `research._circuito`); retry de
+  consulta reformulada; cache de páginas com TTL; dedupe canônico +
+  republicações; registro de status por provedor; classificação de erros
+  (`rede`/`bloqueado`/`http`/`formato`/`tipo`/`tamanho`/`vazio`); SearXNG
+  opcional (sem instância autorizada aqui → indisponível declarado);
+  OpenAlex/Crossref no caminho acadêmico (nunca como oferta comercial).
+- **Lacunas reais identificadas (incrementos desta fase)**:
+  1. Métricas cumulativas por provedor (hoje só último status + contagem
+     da rodada) — chamadas/ok/vazio/erros por código/latência.
+  2. Cobertura de testes de classificação HTTP (202/403/429/5xx/timeout/
+     página vazia) no caminho de provedores.
+  3. Extração web: **imagens referenciadas** não são extraídas (nem
+     jsonld/og/img) — campo inexistente em `web_extract`.
+  4. Descoberta de fonte primária (fabricante vs loja; estudo original vs
+     notícia; produto vs categoria) — parcial (shopping já prefere
+     `url_item` e sela listagem); falta sinal para busca geral.
+  5. E2E externo de provedores re-sondado + métricas antes/depois.
+
+### Incremento 1 — métricas por provedor + classificação HTTP (concluído)
+
+- `search_providers.py`: métricas cumulativas por provedor no dispatcher
+  `buscar` (`_METRICAS`): chamadas, ok, vazio, resultados, erros por código
+  e latência média; acessores `metricas()`/`_reset_metricas()` (aditivo, não
+  muda `buscar`/`diagnosticar`).
+- `_traduzir`: classificação ampliada (OSError/TimeoutError/ConnectionError
+  → `rede`) sem alterar códigos existentes.
+- Testes: `tests/test_providers_v57.py` — métricas (ok/vazio/erro/latência),
+  classificação HTTP 403/429 → `bloqueado`, 5xx → `http`, timeout → `rede`,
+  202 com corpo vazio → resposta vazia honesta, provedor desconhecido.
+
+### Incremento 2 — imagens referenciadas na extração (concluído)
+
+- `web_extract.py`: `extrair_imagens()` — JSON-LD (`image`/`imageObject`),
+  `og:image`/`twitter:image` e `<img src>` (absolutizadas, sem `data:`,
+  dedup, teto); `extrair_pagina()` passa a expor `imagens: [urls]`
+  (aditivo).
+- Testes: `tests/test_web_extract_v57.py` — og, jsonld, img relativo,
+  dedup e rejeição de `data:`.
+
+### Incremento 3 — origem declarada pela página (concluído)
+
+- `research._fonte_de`: nova marca `origem_declarada` — quando o
+  `rel=canonical` da página lida aponta para **outro domínio** (agregador/
+  cópia declara o original). Vem da própria página: declarado, nunca
+  verificado e nunca usado para trocar o link; mesma origem/subdomínio não
+  gera marca.
+- `research.bloco_grounding`: com a marca, a fonte ganha no bloco do Lucas
+  "página declara a origem em X" (evidência, não promoção).
+- `source_check.avaliar_pagina`: mesmo sinal no veredito (`origem_declarada`),
+  aditivo e só quando divergente.
+- Testes: `tests/test_fontes_origem_v57.py` — canônica externa marca;
+  mesmo domínio/subdomínio/vazio silencia; usa a URL final da recuperação;
+  marca no grounding; veredito com e sem divergência.
+
+### Sonda E2E real de provedores (2026-10-18)
+
+Artefato: `qa-artifacts/v57/fase3-provedores-2026-10-18.json`.
+Método: `sp.diagnosticar("freio abs", timeout=8)` + `research.buscar_ddg`
+(ddg e ddg-lite) + `OpenAlexWorksProvider` / `CrossrefWorksProvider`
+(rede real, fontes permitidas, sem bypass).
+
+| Provedor | Estado | Resultados |
+|---|---|---|
+| bing | ok | 2 |
+| stackexchange | ok | 1 |
+| worldbank | ok | 2 |
+| wikipedia | ok | 2 |
+| openlibrary | ok | 2 |
+| commons | ok | 2 |
+| pubmed / bing-news / hn / marginalia / bcb | vazio (responderam; nada utilizável para a consulta) | 0 |
+| ddg / ddg-lite | rede (URLError neste host) | — |
+| openalex (acadêmico) | ok | 2 |
+| crossref (acadêmico) | ok | 2 |
+
+Métricas reais do dispatcher: 11 chamadas, 6 ok, 5 vazio, nenhum bloqueio;
+latências 0,0–1033 ms. "Vazio" = o provedor respondeu e não trouxe resultado
+utilizável — não é sucesso, e permanece registrado assim.
+
+### Status das lacunas da auditoria
+
+1. Métricas por provedor — **resolvido** (incremento 1).
+2. Testes HTTP 202/403/429/5xx/timeout/vazio — **resolvido** (incremento 1).
+3. Imagens referenciadas — **resolvido** (incremento 2).
+4. Fonte primária — **parcialmente resolvido**: sinal de origem declarada
+   (incremento 3) + preferência por página de produto da FASE 4 (shopping);
+   sem reordenação da cadeia congelada.
+5. E2E externo — **resolvido** (tabela acima). "Antes/depois" de latência
+   não é atribuível a estes incrementos (camadas passivas: métricas e
+   campos aditivos); a mudança de comportamento continua coberta pelo
+   benchmark congelado 34/34.
 
 ## FASE 7 — JDUI (incremento 1 concluído)
 
@@ -280,3 +389,9 @@ congelada de provedores.
   `--real` acrescenta sondas de rede) e `pytest -q tests/test_bench_pesquisa_v57.py`.
 - FASE 5 (trecho): `pytest -q tests/test_web_extract_v57.py` 4/4; prova real
   no mesmo probe da Wikipédia (trecho do corpo do artigo).
+- FASE 3 (incrementos 1–3): `pytest -q tests/test_providers_v57.py` 7/7,
+  `tests/test_fontes_origem_v57.py` 5/5 e `tests/test_web_extract_v57.py`
+  (trecho + imagens) verde; sonda real de provedores em
+  `qa-artifacts/v57/fase3-provedores-2026-10-18.json`; suíte completa
+  **727 passed / 4 skipped** (722 com métricas + imagens, mais 5 de origem
+  declarada); benchmark congelado re-verificado offline **34/34**.
