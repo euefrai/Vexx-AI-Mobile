@@ -208,3 +208,88 @@ def test_consultas_fallback_quando_so_pedido():
     c = shopping.extrair_criterios(txt)
     qs = shopping._consultas_produto(c, txt)
     assert qs and all(q.strip() for q in qs)
+
+
+# ── Preços: faixa/múltiplas ofertas → menor + "a partir de" ──────────
+
+def _extraido(nome, ofertas):
+    return {"nome": nome, "marca": "", "modelo": "", "variante": "",
+            "imagem": "", "descricao": "", "avaliacao": None,
+            "n_avaliacoes": None, "ofertas_ld": ofertas}
+
+
+def _oferta(preco, loja="", moeda="BRL", disp="em_estoque", alto=None):
+    o = {"preco": preco, "moeda": moeda, "preco_confirmado": preco is not None,
+         "disponibilidade": disp, "url_oferta": "", "loja": loja,
+         "valido_ate": ""}
+    if alto is not None:
+        o["preco_alto"] = alto
+    return o
+
+
+def test_oferta_unica_continua_preco_exato():
+    ext = _extraido("Fone X", [_oferta(199.9, loja="Loja A")])
+    p = shopping.montar_produto(ext, "https://loja.com/p",
+                                "https://loja.com/p", "Loja")
+    assert p["preco"] == 199.9 and p["preco_texto"] == "R$ 199,90"
+    assert p["preco_a_partir_de"] is False
+
+
+def test_multiplas_ofertas_distintas_usam_menor_com_a_partir_de():
+    ext = _extraido("Fone X", [_oferta(299.9, loja="Loja A"),
+                               _oferta(249.9, loja="Loja B",
+                                       disp="estoque_limitado")])
+    p = shopping.montar_produto(ext, "https://loja.com/p",
+                                "https://loja.com/p", "Loja")
+    assert p["preco"] == 249.9
+    assert p["preco_texto"] == "a partir de R$ 249,90"
+    assert p["preco_a_partir_de"] is True
+    assert p["loja"] == "Loja A"  # loja: 1ª com loja (como antes)
+    assert p["disponibilidade"] == "estoque_limitado"  # do preço exibido
+
+
+def test_ofertas_de_mesmo_preco_nao_viram_faixa():
+    ext = _extraido("Fone X", [_oferta(199.9, loja="A"), _oferta(199.9, loja="B")])
+    p = shopping.montar_produto(ext, "https://x.com/p", "https://x.com/p", "X")
+    assert p["preco_texto"] == "R$ 199,90"
+    assert p["preco_a_partir_de"] is False
+
+
+def test_aggregate_offer_lowprice_vira_a_partir_de():
+    pagina = ('<script type="application/ld+json">'
+              '{"@type":"Product","name":"Fone Faixa",'
+              '"offers":{"@type":"AggregateOffer","lowPrice":"199.90",'
+              '"highPrice":"249.90","priceCurrency":"BRL"}}</script>')
+    prods = shopping.extrair_ofertas_jsonld(pagina)
+    assert prods and prods[0]["ofertas_ld"][0]["preco"] == 199.9
+    assert prods[0]["ofertas_ld"][0]["preco_alto"] == 249.9
+    p = shopping.montar_produto(prods[0], "https://loja.com/p",
+                                "https://loja.com/p", "Loja")
+    assert p["preco"] == 199.9 and p["preco_a_partir_de"] is True
+    assert p["preco_texto"] == "a partir de R$ 199,90"
+
+
+def test_aggregate_offer_sem_preco_nao_inventa():
+    pagina = ('<script type="application/ld+json">'
+              '{"@type":"Product","name":"Fone Z",'
+              '"offers":{"@type":"AggregateOffer","priceCurrency":"BRL"}}'
+              '</script>')
+    prods = shopping.extrair_ofertas_jsonld(pagina)
+    p = shopping.montar_produto(prods[0], "https://l.com/p",
+                                "https://l.com/p", "L")
+    assert p["preco"] is None and not p["preco_confirmado"]
+    assert p["preco_texto"] == shopping.PRECO_NAO_CONFIRMADO
+    assert p["preco_a_partir_de"] is False
+
+
+def test_dedupe_mantem_flag_da_oferta_mais_barata():
+    a = shopping.montar_produto(_extraido("Fone X", [_oferta(299.9, loja="A")]),
+                                "https://a.com/p", "https://a.com/p", "A")
+    b = shopping.montar_produto(_extraido("Fone X", [_oferta(199.9, loja="B"),
+                                                     _oferta(219.9, loja="B")]),
+                                "https://b.com/p", "https://b.com/p", "B")
+    unicos = shopping.deduplicar([a, b])
+    assert len(unicos) == 1
+    assert unicos[0]["preco"] == 199.9
+    assert unicos[0]["preco_a_partir_de"] is True
+    assert unicos[0]["preco_texto"] == "a partir de R$ 199,90"

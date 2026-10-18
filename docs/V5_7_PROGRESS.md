@@ -401,7 +401,8 @@ Problemas confirmados com evidência objetiva:
 Avaliação (conjunto comercial NOVO e separado do congelado,
 `benchmarks/shopping_v4_v1.json`, só fixtures locais, sem lojas reais):
 
-- **antes** (shopping.py do commit `6c8de06`): 20/39 aprovados (51,3%).
+- **antes** (shopping.py do commit `6c8de06`): 20/39 aprovados (51,3%)
+  — conjunto da época; ver Incremento 2 para os totais atuais.
 - **depois**: 55/55 (100%) — o nº de subchecagens cresce quando a rejeição
   correta acontece (códigos + diferenças da alternativa).
 - Reprodução: `python tools/bench_shopping_v4.py` (não grava por padrão;
@@ -418,6 +419,37 @@ e aceitar "gtx 1650" não é detectado — sem falso positivo pelo caminho
 atual); chips Apple ("M2" × "M3") ficam fora dos tokens (evita colisão com
 m²/genérico); "airpods max 3000" é tratado como orçamento (ambíguo por
 natureza; documentado).
+
+### Incremento 2 — preço honesto: faixa e múltiplas ofertas (concluído)
+
+Problema confirmado na auditoria: `_ofertas_de` ignorava
+`AggregateOffer.lowPrice/highPrice` quando não havia ofertas aninhadas
+(o produto ficava sem nenhum preço), e com N ofertas `montar_produto`
+adotava a PRIMEIRA — o preço de UMA variante era apresentado como se
+fosse o preço único do produto.
+
+Correção (`shopping.py`):
+
+- `_ofertas_de`: `AggregateOffer` sem ofertas aninhadas usa
+  `lowPrice`/`highPrice`; o menor vira preço e o teto fica em
+  `preco_alto`. Sem números válidos → nenhuma oferta (nunca inventa;
+  preço ausente ≠ zero).
+- `montar_produto`: com múltiplas ofertas/faixa, expõe o MENOR preço em
+  `preco` (filtros e ordenação seguem usando o mínimo) e o texto vira
+  "a partir de R$ X" com `preco_a_partir_de: true`; a disponibilidade
+  passa a ser a do preço exibido. Oferta única e ofertas de mesmo preço
+  permanecem exatas — nenhuma mudança de comportamento nesses casos.
+- `deduplicar`: o qualificador acompanha a oferta mais barata.
+- Camadas de exibição (resumo, bloco do LLM, fence JDUI) herdam
+  `preco_texto` — sem mudança de schema.
+
+Evidência: benchmark comercial ampliado com a seção `precos` (59
+verificações no total): **antes** (código de `6c8de06`) 22/43 (51,2%) →
+**depois** 59/59 (100%). Testes novos em `tests/test_shopping_fase4.py`
+(6 casos, total 31 no arquivo): oferta única exata; múltiplas distintas →
+menor + "a partir de"; mesmo preço → exato; lowPrice/highPrice → faixa;
+AggregateOffer sem preço não inventa; dedupe mantém o qualificador.
+Benchmark congelado `pesquisa_v57_v1` segue **34/34**.
 
 ## FASE 7 — JDUI (incremento 1 concluído)
 

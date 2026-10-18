@@ -1,9 +1,9 @@
 {
- "quando": "2026-10-18T02:44:17",
+ "quando": "2026-10-18T02:51:04",
  "benchmark": "shopping-v4-v1",
- "casos": 39,
- "aprovados": 20,
- "taxa": 0.5128,
+ "casos": 43,
+ "aprovados": 22,
+ "taxa": 0.5116,
  "falhas": [
   "[identidade] pro × padrão (rejeita) (dentro=True, esperado=False)",
   "[identidade] pro max × pro (rejeita) — códigos (códigos=['preco_acima'], esperados=['versao_diferente'])",
@@ -23,6 +23,8 @@
   "[consultas] Adidas pro model 2.0 me mostre o preço, imagem e link — 1ª limpa (1ª='Adidas pro model 2.0 me mostre o preço, imagem e link comprar oferta')",
   "[consultas] notebook lenovo ideapad 3i 8gb 512gb (consultas=['notebook lenovo 8GB RAM 512GB comprar oferta', 'melhor notebook lenovo 8GB RAM 512GB comprar Brasil'])",
   "[consultas] tênis adidas pro model 2.0 (consultas=['tenis comprar oferta', 'melhor tenis comprar Brasil'])",
-  "[consultas] Só me mostra tênis que dá pra usar em quadra de cimento (consultas=['tenis comprar oferta', 'melhor tenis comprar Brasil'])"
+  "[consultas] Só me mostra tênis que dá pra usar em quadra de cimento (consultas=['tenis comprar oferta', 'melhor tenis comprar Brasil'])",
+  "[precos] faixa lowPrice/highPrice → menor com a partir de (preco=199.9, a_partir_de=None, texto='R$ 199,90')",
+  "[precos] ofertas distintas → menor com a partir de (preco=299.9, a_partir_de=None, texto='R$ 299,90')"
  ]
 }

@@ -89,6 +89,18 @@ def rodar() -> dict:
                  all(t.lower() not in primeira for t in ausentes),
                  f"(1ª={qs[0] if qs else ''!r})")
 
+    for c in dados.get("precos", []):
+        ext = {"nome": c.get("nome", "Produto X"), "marca": "", "modelo": "",
+               "variante": "", "imagem": "", "descricao": "", "avaliacao": None,
+               "n_avaliacoes": None, "ofertas_ld": c["ofertas"]}
+        p = shopping.montar_produto(ext, "https://loja.exemplo/p",
+                                    "https://loja.exemplo/p", "Loja")
+        ok = p["preco"] == c["preco_min"] and \
+            bool(p.get("preco_a_partir_de")) is bool(c["a_partir_de"])
+        caso("precos", c["caso"], ok,
+             f"(preco={p['preco']}, a_partir_de={p.get('preco_a_partir_de')}, "
+             f"texto={p['preco_texto']!r})")
+
     return {"quando": datetime.now().isoformat(timespec="seconds"),
             "benchmark": dados.get("versao", "?"),
             "casos": total_ok["total"], "aprovados": total_ok["aprovados"],

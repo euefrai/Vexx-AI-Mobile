@@ -78,5 +78,19 @@
     {"texto": "tênis adidas pro model 2.0", "contem": ["adidas"]},
     {"texto": "Só me mostra tênis que dá pra usar em quadra de cimento",
      "contem": ["tênis"], "nao_primeira": ["mostra"]}
+  ],
+  "precos": [
+    {"caso": "faixa lowPrice/highPrice → menor com a partir de",
+     "ofertas": [{"preco": 199.9, "preco_alto": 249.9, "loja": "A"}],
+     "preco_min": 199.9, "a_partir_de": true},
+    {"caso": "ofertas distintas → menor com a partir de",
+     "ofertas": [{"preco": 299.9, "loja": "A"}, {"preco": 249.9, "loja": "B"}],
+     "preco_min": 249.9, "a_partir_de": true},
+    {"caso": "oferta única → preço exato",
+     "ofertas": [{"preco": 199.9, "loja": "A"}],
+     "preco_min": 199.9, "a_partir_de": false},
+    {"caso": "mesmo preço em lojas distintas → exato",
+     "ofertas": [{"preco": 199.9, "loja": "A"}, {"preco": 199.9, "loja": "B"}],
+     "preco_min": 199.9, "a_partir_de": false}
   ]
 }

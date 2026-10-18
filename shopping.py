@@ -518,6 +518,17 @@ def _primeira_imagem(img) -> str:
     return u if re.match(r"^https?://", u, re.IGNORECASE) else ""
 
 
+_DISPONIBILIDADES = {"InStock": "em_estoque", "OutOfStock": "sem_estoque",
+                     "LimitedAvailability": "estoque_limitado",
+                     "PreOrder": "pre_venda"}
+
+
+def _disp_normalizada(bruta) -> str:
+    d = str(bruta or "")
+    d = d.rsplit("/", 1)[-1] if "/" in d else d
+    return _DISPONIBILIDADES.get(d, "desconhecida")
+
+
 def _ofertas_de(ofertas) -> list:
     if isinstance(ofertas, dict):
         ofertas = [ofertas]
@@ -531,20 +542,37 @@ def _ofertas_de(ofertas) -> list:
         itens = o.get("offers", []) if tipo == "AggregateOffer" else [o]
         if isinstance(itens, dict):
             itens = [itens]
+        if tipo == "AggregateOffer" and not itens:
+            # Faixa (lowPrice/highPrice) sem ofertas aninhadas: o MENOR vira
+            # preço e o teto fica marcado — nunca apresentar um só número
+            # como se fosse o preço único. Sem números → nenhuma oferta.
+            lp = normalizar_preco(o.get("lowPrice"),
+                                  str(o.get("priceCurrency") or ""))
+            hp = normalizar_preco(o.get("highPrice"),
+                                  str(o.get("priceCurrency") or ""))
+            base = lp or hp
+            if base:
+                out.append({
+                    "preco": base[0],
+                    "moeda": base[1],
+                    "preco_confirmado": True,
+                    "preco_alto": hp[0] if (hp and hp[0] != base[0]) else None,
+                    "disponibilidade": _disp_normalizada(o.get("availability")),
+                    "url_oferta": _limpa(o.get("url"), 500),
+                    "loja": _nome_marca(o.get("seller")),
+                    "valido_ate": _limpa(o.get("priceValidUntil"), 20),
+                })
+            continue
         for it in itens:
             if not isinstance(it, dict):
                 continue
             pv = normalizar_preco(it.get("price"), str(it.get("priceCurrency") or ""))
-            disp = str(it.get("availability", ""))
-            disp = disp.rsplit("/", 1)[-1] if "/" in disp else disp
             vendedor = it.get("seller")
             out.append({
                 "preco": pv[0] if pv else None,
                 "moeda": pv[1] if pv else "BRL",
                 "preco_confirmado": bool(pv),
-                "disponibilidade": {"InStock": "em_estoque", "OutOfStock": "sem_estoque",
-                                    "LimitedAvailability": "estoque_limitado",
-                                    "PreOrder": "pre_venda"}.get(disp, "desconhecida"),
+                "disponibilidade": _disp_normalizada(it.get("availability")),
                 "url_oferta": _limpa(it.get("url"), 500),
                 "loja": _nome_marca(vendedor),
                 "valido_ate": _limpa(it.get("priceValidUntil"), 20),
@@ -672,17 +700,27 @@ def montar_produto(extraido: dict, url: str, url_final: str,
                    url_item: str = "") -> dict:
     ofertas = extraido.get("ofertas_ld") or []
     loja = ""
+    for o in ofertas:
+        if not loja and o.get("loja"):
+            loja = o["loja"]
+    # FASE 4: várias ofertas/faixa → menor preço com "a partir de"
+    # (o preço de UMA variante nunca é apresentado como preço único).
+    confirmadas = [o for o in ofertas if o.get("preco") is not None]
     preco = None
     moeda = "BRL"
     confirmado = False
     disp = "desconhecida"
-    for o in ofertas:
-        if not loja and o.get("loja"):
-            loja = o["loja"]
-        if o.get("preco") is not None and preco is None:
-            preco, moeda = o["preco"], o.get("moeda", "BRL")
-            confirmado = True
-            disp = o.get("disponibilidade", "desconhecida")
+    faixa = False
+    if confirmadas:
+        precos = sorted({round(float(o["preco"]), 2) for o in confirmadas})
+        preco = precos[0]
+        dono = next(o for o in confirmadas
+                    if round(float(o["preco"]), 2) == preco)
+        moeda = dono.get("moeda", "BRL")
+        disp = dono.get("disponibilidade", "desconhecida")
+        confirmado = True
+        faixa = len(precos) > 1 or any(
+            o.get("preco_alto") is not None for o in confirmadas)
     if not loja:
         dom = _dominio(url_final or url)
         loja = dom[4:] if dom.startswith("www.") else dom
@@ -720,7 +758,10 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         "preco": preco,
         "moeda": moeda,
         "preco_confirmado": confirmado,
-        "preco_texto": formatar_preco(preco, moeda),
+        "preco_a_partir_de": bool(confirmado and faixa),
+        "preco_texto": (f"a partir de {formatar_preco(preco, moeda)}"
+                        if (confirmado and faixa)
+                        else formatar_preco(preco, moeda)),
         "preco_origem": _limpa(extraido.get("origem_preco"), 24) if confirmado else "",
         "disponibilidade": disp,
         "avaliacao": extraido.get("avaliacao"),
@@ -759,7 +800,8 @@ def deduplicar(produtos: list) -> list:
             dest["imagem"] = p["imagem"]
         if p.get("preco") is not None and (
                 dest.get("preco") is None or p["preco"] < dest["preco"]):
-            for k in ("preco", "moeda", "preco_texto", "loja", "url_final",
+            for k in ("preco", "moeda", "preco_texto", "preco_a_partir_de",
+                      "loja", "url_final",
                       "disponibilidade", "verificado_em", "url_item",
                       "preco_origem", "link_veredito", "link_codigo",
                       "link_motivo", "item_de_listagem"):
