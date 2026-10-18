@@ -29,11 +29,14 @@ q=0 e q=0.5. Não há compressão dinâmica no backend nem interferência no SSE
 ## Renderização
 
 - Um contexto/visualizador ativo; abrir outro descarta o anterior.
-- GPU em low-power, sem sombras, pós-processamento, texturas ou antialiasing.
+- GPU em low-power, sem pós-processamento, texturas ou antialiasing. Sombras
+  suaves estáticas chegaram na V5.6 (mapa 512, atualização só quando a cena se
+  move; ver deltas V5.6 abaixo).
 - Pixel ratio limitado a 1,5 e largura de framebuffer a 900 pixels; altura lógica
   até 640, escala geométrica e câmera limitadas pelo schema.
 - Esfera com 20×12 segmentos, cilindro com 20, pirâmide com quatro lados.
-- No máximo oito objetos procedurais; GLB até 64 KiB, com catálogo de um arquivo.
+- Primitivas de demonstração limitadas a oito objetos; cenas educativas e de
+  dispositivo até 32 peças (V5.6); GLB até 64 KiB, com catálogo de um arquivo.
 - Sem animação, desenho somente por interação/redimensionamento.
 - Animação limita desenhos a aproximadamente 30 Hz. Fora da tela ou com documento
   oculto, requestAnimationFrame deixa de ser agendado.
@@ -83,3 +86,36 @@ mostra login; isso foi registrado, sem contornar a segurança para liberar 3D.
 Android/iOS físicos, Safari, WebGL1-only, leitor de tela real, bateria, limite
 de memória sob pressão, rede móvel com latência/perda e ensaio prolongado.
 Nenhuma afirmação de “performance excelente” ou certificação mobile é feita.
+
+## V5.6 — deltas de desempenho e acabamento
+
+O polish da V5.6 adicionou sombras suaves (PCF, mapa 512, `shadow.autoUpdate =
+false` com atualização só a cada desenho/animação), tone mapping ACES, contornos
+por `EdgesGeometry` com `raycast` desativado e fov 38. Nada disso cria segundo
+contexto ou segundo render loop: o desenho continua sob demanda e a pausa fora
+da tela ou com documento oculto segue valendo (QA V5.4 e V5.6 verdes).
+
+Limites do schema mantidos e testados: primitivas ≤ 8 objetos; cena educativa ou
+de dispositivo ≤ 32 peças, ≤ 8 etapas e ≤ 8 relações por peça; cenas do catálogo
+com ≤ 7.139 bytes cada; mensagem `model3d` ≤ 20 KB.
+
+Medições locais de 2026-10-17 (mesmo Chrome real + ANGLE / Intel UHD, servidor de
+preview, runner `tools/3d/qa-perf.cjs`):
+
+| Cena | JSON | Montar + abrir (ms) |
+|---|---:|---:|
+| Console branco aproximado | 5.047 bytes | 304 (primeira; inclui import do motor) |
+| Motor V8 | 6.247 bytes | 101 |
+| Gabinete gamer | 4.945 bytes | 62 |
+
+No QA V5.6 (`qa-artifacts/3d-v56/metrics.json`), o fluxo completo criou **33
+buffers GL e deletou os 33**, com centenas de chamadas de desenho reais e zero
+erros de console; a cena de catálogo foi montada, teve grupos alternados,
+conexões consultadas, explodida e descartada, e a cena de pesquisa usou o mesmo
+caminho de montagem.
+
+Motor Three reconstruído na V5.6: **574.582 bytes** crus e **146.978 bytes** no
+gzip pré-gerado (o teste trava o orçamento abaixo de 150.000 bytes gzip).
+
+O que os números não provam: desempenho em Android/iOS modestos, bateria e
+latência de rede móvel continuam pendências abertas da V5.3 (seção acima).

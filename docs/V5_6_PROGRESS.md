@@ -20,7 +20,7 @@ sem assets de terceiros e sem APIs pagas.
 | 8. JDUI | parcial | chips de fidelidade (Modelo aproximado/conceitual/educativo) e fonte controlada; ações rápidas extras pendentes de revisão |
 | 9. Roteamento conversacional | concluída (novos comandos) | continuações e reconstrução preservadas; dispositivos entram por verbos 3D; isolamento por dono/conversa coberto por teste |
 | 10. Testes + QA real | parcial | 78 testes 3D verdes (21 na V5.6); suíte completa em `qa-artifacts/3d-research-tests.txt`; QA Chrome/WebGL `tools/3d/qa-v56.cjs` verde (cena de catálogo com grupos/conexões e pixels reais, cena de pesquisa com fonte visível, chat de dispositivo, continuação por grupo, reload, mobile) + regressão `qa-v54.cjs` verde; artefatos em `qa-artifacts/3d-v56/` |
-| 11. Desempenho | parcial | sem novos assets públicos; sombras estáticas; limites de 20 KB/32 peças/8 etapas seguem; passada final pendente |
+| 11. Desempenho | concluída | sem novos assets públicos; sombras estáticas (PCF 512, atualização sob movimento); budgets ≤32 peças/8 etapas/20 KB por cena e gzip < 150000 mantidos; medições V5.6 em `docs/JULIA_3D_PERFORMANCE.md` (304/101/62 ms para montar+abrir; 33/33 buffers; runner `tools/3d/qa-perf.cjs`) |
 | 12. Entrega | pendente | docs `JULIA_3D_VISUAL_POLISH`/`MODEL_GENERATION`/`ASSEMBLY_FOUNDATION`, `RELATORIO_JULIA_5.6.md` e roadmap |
 
 ## Contratos preservados
