@@ -230,6 +230,35 @@ def test_mistura_removida_e_valida_so_valida_vira_card():
     assert removida == [] and len(valida) == 1
 
 
+def test_item_de_categoria_com_url_da_oferta_nunca_herda_verificado():
+    """Auditoria de descoberta 2026-10-18 (caso KaBuM): categoria/lista com
+    HTTP 200, JSON-LD Products SEM url própria, mas com offers.url apontando
+    para as páginas de produto (não abertas). O item não pode nascer
+    "verificado" só porque a página ABERTA pareceu de produto — o link do
+    card aponta para OUTRA página, nunca aberta."""
+    itens = ",".join(
+        '{"@type":"Product","name":"Notebook %d",'
+        '"offers":{"@type":"Offer","price":"%d999.00","priceCurrency":"BRL",'
+        '"url":"https://lojax.com.br/produto/notebook-%d"}}' % (i, i, i)
+        for i in (1, 2, 3))
+    precos = " ".join("R$ %d99,00" % (i + 10) for i in range(8))  # >6 preços
+    pagina = ('<html><head><title>Notebooks — Loja X</title>'
+              '<script type="application/ld+json">[' + itens + ']</script>'
+              '</head><body><h1>Notebooks</h1>' + precos +
+              '<button>Adicionar ao carrinho</button></body></html>')
+    saidas = shopping._recuperar_ofertas(
+        "https://lojax.com.br/esporte/notebooks", "Notebooks",
+        baixar_fn=_baixar_da(pagina), consulta="notebook")
+    assert len(saidas) == 3
+    for p in saidas:
+        assert p["link_veredito"] == "nao_verificado"
+        assert p["link_codigo"] == "item_nao_aberto"
+        assert p["url_item"].startswith("https://lojax.com.br/produto/notebook-")
+        assert shopping._tier(p) == "parcial"
+    # O preço real do dado estruturado continua (nem inventado, nem apagado).
+    assert saidas[0]["preco"] is not None
+
+
 # ── Preços e estoque ──────────────────────────────────────────────────
 
 def test_preco_ausente_nao_vira_preco_confirmado():

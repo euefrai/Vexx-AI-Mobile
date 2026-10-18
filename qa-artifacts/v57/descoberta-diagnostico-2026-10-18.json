@@ -1,0 +1,2132 @@
+{
+ "topicos": [
+  {
+   "nome": "tenis",
+   "texto": "me mostre tenis para jogar basquete",
+   "consultas": [
+    "tenis jogar basquete comprar oferta",
+    "melhor tenis jogar basquete comprar Brasil"
+   ],
+   "segundos": 6.6,
+   "etapas": [
+    "tenis jogar basquete comprar oferta: mlb: falhou (ResearchErro)",
+    "tenis jogar basquete comprar oferta: ddg: sem resultados (bloqueio?)",
+    "tenis jogar basquete comprar oferta: ddg-lite: 6 resultados",
+    "melhor tenis jogar basquete comprar Bras: mlb: falhou (ResearchErro)",
+    "melhor tenis jogar basquete comprar Bras: ddg: sem resultados (bloqueio?)",
+    "melhor tenis jogar basquete comprar Bras: ddg-lite: sem resultados (bloqueio?)",
+    "melhor tenis jogar basquete comprar Bras: web: 12 resultados (bing, ok)"
+   ],
+   "n_produtos": 0,
+   "n_alternativas": 0,
+   "n_encontrados": 2,
+   "encontrados": [
+    {
+     "nome": "Tênis de Basquete em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/T%C3%AAnis/Basquete",
+     "loja_dominio": "shopee.com.br",
+     "motivo_codigo": "sem_dados",
+     "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+     "origem_encontro": "busca"
+    },
+    {
+     "nome": "Tênis de Basquete para Jogar Melhor | Netshoes",
+     "url": "https://www.netshoes.com.br/basquete/tenis",
+     "loja_dominio": "www.netshoes.com.br",
+     "motivo_codigo": "bloqueio",
+     "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+     "origem_encontro": "busca"
+    }
+   ],
+   "erro": "",
+   "n_achados": 18,
+   "auditoria": [
+    {
+     "titulo": "Tênis de Basquete em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/T%C3%AAnis/Basquete",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (basquete, tenis)"
+      ]
+     ],
+     "termos": [
+      "basquete",
+      "tenis"
+     ],
+     "casados": [
+      "basquete",
+      "tenis"
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Tênis de basquete com desconto - Nike - Ofertas e Preços",
+     "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete/ofertas/emoferta",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "url_de_listagem",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "Tênis de Basquete para Jogar Melhor | Netshoes",
+     "url": "https://www.netshoes.com.br/basquete/tenis",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (basquete, tenis)"
+      ]
+     ],
+     "termos": [
+      "basquete",
+      "tenis"
+     ],
+     "casados": [
+      "basquete",
+      "tenis"
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "Tênis de Basquete - Centauro",
+     "url": "https://www.centauro.com.br/nav/categorias/calcados/esportes/basquete",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "url_de_listagem",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "ofertas de tenis basquete - Centauro",
+     "url": "https://www.centauro.com.br/busca/tenis-basquete",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "url_de_listagem",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "Tenis De Basquete em promoção na Netshoes!",
+     "url": "https://www.netshoes.com.br/busca/tenis-de-basquete",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "url_de_listagem",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "tenis jogar basquete comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "caminho_nao_produto",
+       "REJEITA"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "REJEITA (nenhum termo do tema no título/trecho)"
+      ]
+     ],
+     "termos": [
+      "basquete",
+      "tenis"
+     ],
+     "casados": [],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Tenis - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/tenis",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Tênis e Sneakers | adidas Brasil",
+     "url": "https://www.adidas.com.br/tenis",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+     "url": "https://www.wtennis.com.br/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Centauro Loja de Esportes",
+     "url": "https://www.centauro.com.br/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Loja de Tênis Online - Centauro",
+     "url": "https://www.centauro.com.br/nav/produto/tenis",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "titulo_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+     "url": "https://www.netshoes.com.br/busca/tenis",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "url_de_listagem",
+       "REJEITA"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor tenis jogar basquete comprar Brasil",
+     "motivo": ""
+    }
+   ],
+   "rejeicoes_por_regra": {
+    "url_de_listagem": 5,
+    "caminho_nao_produto": 1,
+    "host/caminho": 3,
+    "segmentos+marker": 4,
+    "relevancia": 1,
+    "host_lista": 1,
+    "titulo_lista": 1
+   }
+  },
+  {
+   "nome": "notebook",
+   "texto": "me mostre notebook para trabalhar e estudar",
+   "consultas": [
+    "notebook trabalhar estudar comprar oferta",
+    "melhor notebook trabalhar estudar comprar Brasil"
+   ],
+   "segundos": 9.5,
+   "etapas": [
+    "notebook trabalhar estudar comprar ofert: mlb: falhou (ResearchErro)",
+    "notebook trabalhar estudar comprar ofert: ddg: sem resultados (bloqueio?)",
+    "notebook trabalhar estudar comprar ofert: ddg-lite: sem resultados (bloqueio?)",
+    "notebook trabalhar estudar comprar ofert: web: 6 resultados (bing, ok)",
+    "melhor notebook trabalhar estudar compra: mlb: falhou (ResearchErro)",
+    "melhor notebook trabalhar estudar compra: ddg: sem resultados (bloqueio?)",
+    "melhor notebook trabalhar estudar compra: ddg-lite: sem resultados (bloqueio?)",
+    "melhor notebook trabalhar estudar compra: web: 12 resultados (bing, ok)"
+   ],
+   "n_produtos": 4,
+   "n_alternativas": 0,
+   "n_encontrados": 1,
+   "encontrados": [
+    {
+     "nome": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+     "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+     "loja_dominio": "www.magazineluiza.com.br",
+     "motivo_codigo": "bloqueio",
+     "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+     "origem_encontro": "busca"
+    }
+   ],
+   "erro": "",
+   "n_achados": 12,
+   "auditoria": [
+    {
+     "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+     "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (notebook)"
+      ]
+     ],
+     "termos": [
+      "estudar",
+      "notebook",
+      "trabalhar"
+     ],
+     "casados": [
+      "notebook"
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": "bloqueio"
+    },
+    {
+     "titulo": "KaBuM!: Notebooks em promoção",
+     "url": "https://www.kabum.com.br/computadores/notebooks",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "titulo_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": ""
+    },
+    {
+     "titulo": "Gemini Notebook | AI Research Tool & Thinking Partner",
+     "url": "https://notebook.google/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": "listagem"
+    },
+    {
+     "titulo": "Gemini Notebook",
+     "url": "https://notebook.google.com/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": "listagem"
+    },
+    {
+     "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+     "url": "https://notebook.google/?hl=pt-BR",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": "listagem"
+    },
+    {
+     "titulo": "Notebook - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/notebook",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "notebook trabalhar estudar comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "caminho_nao_produto",
+       "REJEITA"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "REJEITA (nenhum termo do tema no título/trecho)"
+      ]
+     ],
+     "termos": [
+      "estudar",
+      "notebook",
+      "trabalhar"
+     ],
+     "casados": [],
+     "destino": "alem_do_limite",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+     "motivo": ""
+    }
+   ],
+   "rejeicoes_por_regra": {
+    "titulo_lista": 1,
+    "host/caminho": 4,
+    "host_lista": 1,
+    "caminho_nao_produto": 1,
+    "segmentos+marker": 3,
+    "relevancia": 1
+   }
+  },
+  {
+   "nome": "fone",
+   "texto": "me mostre fone bluetooth para academia",
+   "consultas": [
+    "fone bluetooth academia comprar oferta",
+    "melhor fone bluetooth academia comprar Brasil"
+   ],
+   "segundos": 9.9,
+   "etapas": [
+    "fone bluetooth academia comprar oferta: mlb: falhou (ResearchErro)",
+    "fone bluetooth academia comprar oferta: ddg: sem resultados (bloqueio?)",
+    "fone bluetooth academia comprar oferta: ddg-lite: sem resultados (bloqueio?)",
+    "fone bluetooth academia comprar oferta: web: 6 resultados (bing, ok)",
+    "melhor fone bluetooth academia comprar B: mlb: falhou (ResearchErro)",
+    "melhor fone bluetooth academia comprar B: ddg: sem resultados (bloqueio?)",
+    "melhor fone bluetooth academia comprar B: ddg-lite: sem resultados (bloqueio?)",
+    "melhor fone bluetooth academia comprar B: web: 13 resultados (bing+marginalia, ok)"
+   ],
+   "n_produtos": 4,
+   "n_alternativas": 0,
+   "n_encontrados": 2,
+   "encontrados": [
+    {
+     "nome": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+     "loja_dominio": "shopee.com.br",
+     "motivo_codigo": "sem_dados",
+     "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+     "origem_encontro": "busca"
+    },
+    {
+     "nome": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+     "loja_dominio": "shopee.com.br",
+     "motivo_codigo": "sem_dados",
+     "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+     "origem_encontro": "busca"
+    }
+   ],
+   "erro": "",
+   "n_achados": 12,
+   "auditoria": [
+    {
+     "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (bluetooth, fone)"
+      ]
+     ],
+     "termos": [
+      "academia",
+      "bluetooth",
+      "fone"
+     ],
+     "casados": [
+      "bluetooth",
+      "fone"
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+     "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "titulo_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": ""
+    },
+    {
+     "titulo": "Fones de Ouvido - Amazon.com.br",
+     "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (bluetooth, fone)"
+      ]
+     ],
+     "termos": [
+      "academia",
+      "bluetooth",
+      "fone"
+     ],
+     "casados": [
+      "bluetooth",
+      "fone"
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": "http"
+    },
+    {
+     "titulo": "Fone de ouvido - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+     "veredito": "passaria como referência",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "passa (fone)"
+      ]
+     ],
+     "termos": [
+      "academia",
+      "bluetooth",
+      "fone"
+     ],
+     "casados": [
+      "fone"
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Fones - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fones",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host_lista",
+       "REJEITA"
+      ]
+     ],
+     "destino": "tentada",
+     "consulta": "fone bluetooth academia comprar oferta",
+     "motivo": "sem_dados"
+    },
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "caminho_nao_produto",
+       "REJEITA"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "host/caminho",
+       "REJEITA (home/raiz)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "fora_do_teto",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "relevancia",
+       "REJEITA (nenhum termo do tema no título/trecho)"
+      ]
+     ],
+     "termos": [
+      "academia",
+      "bluetooth",
+      "fone"
+     ],
+     "casados": [],
+     "destino": "alem_do_limite",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "veredito": "rejeitado",
+     "regras": [
+      [
+       "url_segura",
+       "passa"
+      ],
+      [
+       "segmentos+marker",
+       "REJEITA (1 segmento sem marcador)"
+      ]
+     ],
+     "destino": "alem_do_limite",
+     "consulta": "melhor fone bluetooth academia comprar Brasil",
+     "motivo": ""
+    }
+   ],
+   "rejeicoes_por_regra": {
+    "titulo_lista": 1,
+    "host_lista": 2,
+    "caminho_nao_produto": 1,
+    "host/caminho": 1,
+    "segmentos+marker": 3,
+    "relevancia": 1
+   }
+  }
+ ],
+ "provedores": [
+  {
+   "em": "13:39:03",
+   "topico": "sondagem",
+   "provedor": "mlb",
+   "consulta": "celular",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:04",
+   "topico": "tenis",
+   "provedor": "mlb",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:06",
+   "topico": "tenis",
+   "provedor": "ddg-chain",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "estado": "ok",
+   "n": 6,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: 6 resultados"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:05.177722+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 6,
+     "bloqueado": false,
+     "vazio": false,
+     "erro": "",
+     "em": "2026-10-18T16:39:06.052587+00:00"
+    },
+    "wikipedia": {}
+   },
+   "itens": [
+    {
+     "titulo": "Tênis de Basquete em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/T%C3%AAnis/Basquete"
+    },
+    {
+     "titulo": "Tênis de basquete com desconto - Nike - Ofertas e Preços",
+     "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete/ofertas/emoferta"
+    },
+    {
+     "titulo": "Tênis de Basquete para Jogar Melhor | Netshoes",
+     "url": "https://www.netshoes.com.br/basquete/tenis"
+    },
+    {
+     "titulo": "Tênis de Basquete - Centauro",
+     "url": "https://www.centauro.com.br/nav/categorias/calcados/esportes/basquete"
+    },
+    {
+     "titulo": "ofertas de tenis basquete - Centauro",
+     "url": "https://www.centauro.com.br/busca/tenis-basquete"
+    },
+    {
+     "titulo": "Tenis De Basquete em promoção na Netshoes!",
+     "url": "https://www.netshoes.com.br/busca/tenis-de-basquete"
+    }
+   ]
+  },
+  {
+   "em": "13:39:06",
+   "topico": "tenis",
+   "provedor": "mlb",
+   "consulta": "melhor tenis jogar basquete comprar Brasil",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:07",
+   "topico": "tenis",
+   "provedor": "ddg-chain",
+   "consulta": "melhor tenis jogar basquete comprar Brasil",
+   "estado": "vazio/bloqueio",
+   "n": 0,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: sem resultados (bloqueio?)"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:06.840209+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:07.246768+00:00"
+    },
+    "wikipedia": {}
+   },
+   "itens": []
+  },
+  {
+   "em": "13:39:09",
+   "topico": "tenis",
+   "provedor": "web-orquestrado",
+   "consulta": "melhor tenis jogar basquete comprar Brasil",
+   "estado": "ok",
+   "n": 12,
+   "etapas": [
+    "web: 12 resultados (bing, ok)"
+   ],
+   "itens": [
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tenis - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis e Sneakers | adidas Brasil",
+     "url": "https://www.adidas.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+     "url": "https://www.wtennis.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Centauro Loja de Esportes",
+     "url": "https://www.centauro.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Loja de Tênis Online - Centauro",
+     "url": "https://www.centauro.com.br/nav/produto/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+     "url": "https://www.netshoes.com.br/busca/tenis",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "em": "13:39:20",
+   "topico": "notebook",
+   "provedor": "mlb",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:21",
+   "topico": "notebook",
+   "provedor": "ddg-chain",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "estado": "vazio/bloqueio",
+   "n": 0,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: sem resultados (bloqueio?)"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:21.238728+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:21.525893+00:00"
+    },
+    "wikipedia": {
+     "resultados": 0,
+     "bloqueado": false,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:20.209583+00:00"
+    }
+   },
+   "itens": []
+  },
+  {
+   "em": "13:39:22",
+   "topico": "notebook",
+   "provedor": "web-orquestrado",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "estado": "ok",
+   "n": 6,
+   "etapas": [
+    "web: 6 resultados (bing, ok)"
+   ],
+   "itens": [
+    {
+     "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+     "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "KaBuM!: Notebooks em promoção",
+     "url": "https://www.kabum.com.br/computadores/notebooks",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook | AI Research Tool & Thinking Partner",
+     "url": "https://notebook.google/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook",
+     "url": "https://notebook.google.com/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+     "url": "https://notebook.google/?hl=pt-BR",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Notebook - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/notebook",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "em": "13:39:22",
+   "topico": "notebook",
+   "provedor": "mlb",
+   "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:23",
+   "topico": "notebook",
+   "provedor": "ddg-chain",
+   "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+   "estado": "vazio/bloqueio",
+   "n": 0,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: sem resultados (bloqueio?)"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:22.841739+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:23.148592+00:00"
+    },
+    "wikipedia": {
+     "resultados": 0,
+     "bloqueado": false,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:20.209583+00:00"
+    }
+   },
+   "itens": []
+  },
+  {
+   "em": "13:39:25",
+   "topico": "notebook",
+   "provedor": "web-orquestrado",
+   "consulta": "melhor notebook trabalhar estudar comprar Brasil",
+   "estado": "ok",
+   "n": 12,
+   "etapas": [
+    "web: 12 resultados (bing, ok)"
+   ],
+   "itens": [
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+     "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "KaBuM!: Notebooks em promoção",
+     "url": "https://www.kabum.com.br/computadores/notebooks",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook | AI Research Tool & Thinking Partner",
+     "url": "https://notebook.google/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook",
+     "url": "https://notebook.google.com/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+     "url": "https://notebook.google/?hl=pt-BR",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Notebook - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/notebook",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "em": "13:39:33",
+   "topico": "fone",
+   "provedor": "mlb",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:33",
+   "topico": "fone",
+   "provedor": "ddg-chain",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "estado": "vazio/bloqueio",
+   "n": 0,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: sem resultados (bloqueio?)"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:33.405357+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:33.712039+00:00"
+    },
+    "wikipedia": {
+     "resultados": 0,
+     "bloqueado": false,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:25.122508+00:00"
+    }
+   },
+   "itens": []
+  },
+  {
+   "em": "13:39:34",
+   "topico": "fone",
+   "provedor": "web-orquestrado",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "estado": "ok",
+   "n": 6,
+   "etapas": [
+    "web: 6 resultados (bing, ok)"
+   ],
+   "itens": [
+    {
+     "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+     "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones de Ouvido - Amazon.com.br",
+     "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fone de ouvido - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fones",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "em": "13:39:34",
+   "topico": "fone",
+   "provedor": "mlb",
+   "consulta": "melhor fone bluetooth academia comprar Brasil",
+   "estado": "falha (ResearchErro; codigo=http)",
+   "n": 0
+  },
+  {
+   "em": "13:39:35",
+   "topico": "fone",
+   "provedor": "ddg-chain",
+   "consulta": "melhor fone bluetooth academia comprar Brasil",
+   "estado": "vazio/bloqueio",
+   "n": 0,
+   "etapas": [
+    "ddg: sem resultados (bloqueio?)",
+    "ddg-lite: sem resultados (bloqueio?)"
+   ],
+   "status": {
+    "ddg": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:35.133960+00:00"
+    },
+    "ddg-lite": {
+     "resultados": 0,
+     "bloqueado": true,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:35.447290+00:00"
+    },
+    "wikipedia": {
+     "resultados": 0,
+     "bloqueado": false,
+     "vazio": true,
+     "erro": "",
+     "em": "2026-10-18T16:39:25.122508+00:00"
+    }
+   },
+   "itens": []
+  },
+  {
+   "em": "13:39:38",
+   "topico": "fone",
+   "provedor": "web-orquestrado",
+   "consulta": "melhor fone bluetooth academia comprar Brasil",
+   "estado": "ok",
+   "n": 13,
+   "etapas": [
+    "web: 13 resultados (bing+marginalia, ok)"
+   ],
+   "itens": [
+    {
+     "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones de Ouvido - Amazon.com.br",
+     "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fones",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fone de ouvido - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+     "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+     "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+     "origem": "bing"
+    }
+   ]
+  }
+ ],
+ "alvos": [
+  {
+   "em": "13:39:10",
+   "topico": "tenis",
+   "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete/ofertas/emoferta",
+   "titulo": "Tênis de basquete com desconto - Nike - Ofertas e Preços",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 0.6
+  },
+  {
+   "em": "13:39:10",
+   "topico": "tenis",
+   "url": "https://www.netshoes.com.br/basquete/tenis",
+   "titulo": "Tênis de Basquete para Jogar Melhor | Netshoes",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 0.6
+  },
+  {
+   "em": "13:39:10",
+   "topico": "tenis",
+   "url": "https://www.centauro.com.br/busca/tenis-basquete",
+   "titulo": "ofertas de tenis basquete - Centauro",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 0.4
+  },
+  {
+   "em": "13:39:10",
+   "topico": "tenis",
+   "url": "https://www.centauro.com.br/nav/categorias/calcados/esportes/basquete",
+   "titulo": "Tênis de Basquete - Centauro",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 0.5
+  },
+  {
+   "em": "13:39:10",
+   "topico": "tenis",
+   "url": "https://www.netshoes.com.br/busca/tenis-de-basquete",
+   "titulo": "Tenis De Basquete em promoção na Netshoes!",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 0.2
+  },
+  {
+   "em": "13:39:11",
+   "topico": "tenis",
+   "url": "https://shopee.com.br/list/T%C3%AAnis/Basquete",
+   "titulo": "Tênis de Basquete em Oferta | Shopee 2026",
+   "consulta": "tenis jogar basquete comprar oferta",
+   "produtos": 0,
+   "segundos": 1.6
+  },
+  {
+   "em": "13:39:25",
+   "topico": "notebook",
+   "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+   "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 0,
+   "segundos": 0.4
+  },
+  {
+   "em": "13:39:26",
+   "topico": "notebook",
+   "url": "https://notebook.google.com/",
+   "titulo": "Gemini Notebook",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 0,
+   "segundos": 0.9
+  },
+  {
+   "em": "13:39:27",
+   "topico": "notebook",
+   "url": "https://www.kabum.com.br/computadores/notebooks",
+   "titulo": "KaBuM!: Notebooks em promoção",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 4,
+   "segundos": 1.9
+  },
+  {
+   "em": "13:39:27",
+   "topico": "notebook",
+   "url": "https://notebook.google/",
+   "titulo": "Gemini Notebook | AI Research Tool & Thinking Partner",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 0,
+   "segundos": 2.0
+  },
+  {
+   "em": "13:39:27",
+   "topico": "notebook",
+   "url": "https://notebook.google/?hl=pt-BR",
+   "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 0,
+   "segundos": 0.9
+  },
+  {
+   "em": "13:39:27",
+   "topico": "notebook",
+   "url": "https://lista.mercadolivre.com.br/notebook",
+   "titulo": "Notebook - Mercado Livre",
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "produtos": 0,
+   "segundos": 0.7
+  },
+  {
+   "em": "13:39:38",
+   "topico": "fone",
+   "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+   "titulo": "Fones de Ouvido - Amazon.com.br",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 0,
+   "segundos": 0.6
+  },
+  {
+   "em": "13:39:39",
+   "topico": "fone",
+   "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+   "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 4,
+   "segundos": 1.5
+  },
+  {
+   "em": "13:39:39",
+   "topico": "fone",
+   "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+   "titulo": "Fone de ouvido - Mercado Livre",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 0,
+   "segundos": 1.1
+  },
+  {
+   "em": "13:39:39",
+   "topico": "fone",
+   "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+   "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 0,
+   "segundos": 1.7
+  },
+  {
+   "em": "13:39:40",
+   "topico": "fone",
+   "url": "https://lista.mercadolivre.com.br/fones",
+   "titulo": "Fones - Mercado Livre",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 0,
+   "segundos": 0.8
+  },
+  {
+   "em": "13:39:40",
+   "topico": "fone",
+   "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+   "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+   "consulta": "fone bluetooth academia comprar oferta",
+   "produtos": 0,
+   "segundos": 1.1
+  }
+ ],
+ "sondagem": [
+  {
+   "provedor": "mlb",
+   "ok": false,
+   "detalhe": "ResearchErro: Provedor HTTP 403."
+  },
+  {
+   "provedor": "ddg",
+   "ok": false,
+   "detalhe": "página sem resultados (bot-wall?)"
+  },
+  {
+   "provedor": "ddg-lite",
+   "ok": true,
+   "detalhe": "1 resultado(s)"
+  }
+ ],
+ "variantes": [
+  {
+   "consulta": "tenis jogar basquete comprar oferta",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 0,
+   "exemplos": [],
+   "itens": [
+    {
+     "titulo": "Tenis - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Centauro Loja de Esportes",
+     "url": "https://www.centauro.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Loja de Tênis Online - Centauro",
+     "url": "https://www.centauro.com.br/nav/produto/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis e Sneakers | adidas Brasil",
+     "url": "https://www.adidas.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+     "url": "https://www.wtennis.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+     "url": "https://www.netshoes.com.br/busca/tenis",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "consulta": "melhor tenis jogar basquete comprar Brasil",
+   "n": 14,
+   "estado": "ok",
+   "especificos": 0,
+   "exemplos": [],
+   "itens": [
+    {
+     "titulo": "Entrar | Melhor Envio",
+     "url": "https://melhorenvio.com.br/login",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor Envio",
+     "url": "https://melhorenvio.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor (significado e definição) - Dicio, Dicionário Online de Português",
+     "url": "https://www.dicio.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Significado de melhor - Dicionário Priberam da Língua Portuguesa",
+     "url": "https://dicionario.priberam.org/melhor",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Significado e Sinônimo - escreva.ai",
+     "url": "https://escreva.ai/palavra/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Melhor - Dicionário inFormal",
+     "url": "https://www.dicionarioinformal.com.br/melhor/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tenis - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis e Sneakers | adidas Brasil",
+     "url": "https://www.adidas.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+     "url": "https://www.wtennis.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Centauro Loja de Esportes",
+     "url": "https://www.centauro.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Loja de Tênis Online - Centauro",
+     "url": "https://www.centauro.com.br/nav/produto/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+     "url": "https://www.netshoes.com.br/busca/tenis",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "consulta": "tenis para jogar basquete",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 0,
+   "exemplos": [],
+   "itens": [
+    {
+     "titulo": "Tenis - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Loja de Tênis Online - Centauro",
+     "url": "https://www.centauro.com.br/nav/produto/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis e Sneakers | adidas Brasil",
+     "url": "https://www.adidas.com.br/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+     "url": "https://www.wtennis.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Centauro Loja de Esportes",
+     "url": "https://www.centauro.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+     "url": "https://www.netshoes.com.br/busca/tenis",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "consulta": "comprar tenis de basquete barato",
+   "n": 15,
+   "estado": "ok",
+   "especificos": 2,
+   "exemplos": [
+    [
+     "Tênis de Basquete para Jogar Melhor | Netshoes",
+     "https://www.netshoes.com.br/basquete/tenis"
+    ],
+    [
+     "Tênis Basquete - Dunk",
+     "https://dunk.com.br/nba1/tenis-basquete/"
+    ]
+   ],
+   "itens": [
+    {
+     "titulo": "Tênis de Basquete - Centauro",
+     "url": "https://www.centauro.com.br/nav/categorias/calcados/esportes/basquete",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de basquete - Nike - Ofertas e Preços",
+     "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Basquete para Jogar Melhor | Netshoes",
+     "url": "https://www.netshoes.com.br/basquete/tenis",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis Basquete - Dunk",
+     "url": "https://dunk.com.br/nba1/tenis-basquete/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Comprar - Mercado Livre",
+     "url": "https://lista.mercadolivre.com.br/comprar",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Basquete - adidas Brasil",
+     "url": "https://www.adidas.com.br/calcados-basquete",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Tênis de Basquete",
+     "url": "https://www.wtennis.com.br/tenis-basquete",
+     "origem": "bing"
+    },
+    {
+     "titulo": "PuxaPena — Compare preços no ML, Shopee e Amazon de uma vez",
+     "url": "https://puxapena.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Mercado Livre Brasil - Frete Grátis no mesmo dia",
+     "url": "https://www.mercadolivre.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "OLX - O Maior Site de Compra e Venda do Brasil",
+     "url": "https://www.olx.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Shopee Brasil | Na Shopee Compensa Mais | Frete Grátis e Cupons",
+     "url": "https://shopee.com.br/",
+     "origem": "bing"
+    },
+    {
+     "titulo": "Magazine Luiza | Ofertas, Cupons, Frete Rápido e Até 21x",
+     "url": "https://www.magazineluiza.com.br/",
+     "origem": "bing"
+    }
+   ]
+  },
+  {
+   "consulta": "notebook trabalhar estudar comprar oferta",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 1,
+   "exemplos": [
+    [
+     "notebook: samsung, acer, dell, macbook, lenovo | magalu",
+     "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+    ]
+   ]
+  },
+  {
+   "consulta": "notebook comprar oferta",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 1,
+   "exemplos": [
+    [
+     "notebook: samsung, acer, dell, macbook, lenovo | magalu",
+     "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+    ]
+   ]
+  },
+  {
+   "consulta": "notebook bom e barato",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 1,
+   "exemplos": [
+    [
+     "notebook: samsung, acer, dell, macbook, lenovo | magalu",
+     "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+    ]
+   ]
+  },
+  {
+   "consulta": "fone bluetooth para academia comprar oferta",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 3,
+   "exemplos": [
+    [
+     "fone de ouvido bluetooth em oferta | shopee 2026",
+     "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth"
+    ],
+    [
+     "fones de ouvido - amazon.com.br",
+     "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011"
+    ],
+    [
+     "linha dente de tubarao em oferta | shopee 2026",
+     "https://shopee.com.br/list/Fone%20de%20ouvido"
+    ]
+   ]
+  },
+  {
+   "consulta": "fone de ouvido bluetooth comprar",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 3,
+   "exemplos": [
+    [
+     "fone de ouvido bluetooth em oferta | shopee 2026",
+     "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth"
+    ],
+    [
+     "fones de ouvido - amazon.com.br",
+     "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011"
+    ],
+    [
+     "linha dente de tubarao em oferta | shopee 2026",
+     "https://shopee.com.br/list/Fone%20de%20ouvido"
+    ]
+   ]
+  },
+  {
+   "consulta": "fones bluetooth esportivos",
+   "n": 6,
+   "estado": "ok",
+   "especificos": 1,
+   "exemplos": [
+    [
+     "fones de ouvido - amazon.com.br",
+     "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011"
+    ]
+   ]
+  }
+ ],
+ "metricas": {
+  "bing": {
+   "chamadas": 29,
+   "ok": 29,
+   "vazio": 0,
+   "resultados": 174,
+   "erros": {},
+   "ms_medio": 451.1,
+   "ultimo_status": {
+    "resultados": 6,
+    "bloqueado": false,
+    "vazio": false,
+    "erro": "",
+    "em": "2026-10-18T16:39:45.539661+00:00"
+   }
+  },
+  "ddg": {
+   "ultimo_status": {
+    "resultados": 0,
+    "bloqueado": true,
+    "vazio": true,
+    "erro": "",
+    "em": "2026-10-18T16:39:35.133960+00:00"
+   }
+  },
+  "ddg-lite": {
+   "ultimo_status": {
+    "resultados": 0,
+    "bloqueado": true,
+    "vazio": true,
+    "erro": "",
+    "em": "2026-10-18T16:39:35.447290+00:00"
+   }
+  },
+  "marginalia": {
+   "chamadas": 6,
+   "ok": 3,
+   "vazio": 0,
+   "resultados": 10,
+   "erros": {
+    "vazio": 3
+   },
+   "ms_medio": 958.4,
+   "ultimo_status": {
+    "resultados": 1,
+    "bloqueado": false,
+    "vazio": false,
+    "erro": "",
+    "em": "2026-10-18T16:39:38.036484+00:00"
+   }
+  },
+  "wikipedia": {
+   "chamadas": 6,
+   "ok": 0,
+   "vazio": 0,
+   "resultados": 0,
+   "erros": {
+    "vazio": 6
+   },
+   "ms_medio": 504.2,
+   "ultimo_status": {
+    "resultados": 0,
+    "bloqueado": false,
+    "vazio": true,
+    "erro": "",
+    "em": "2026-10-18T16:39:38.036504+00:00"
+   }
+  }
+ }
+}

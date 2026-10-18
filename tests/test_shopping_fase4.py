@@ -327,6 +327,9 @@ def test_url_de_listagem_pega_raiz_e_busca():
     assert not source_check.url_de_listagem("https://loja.com/produto/x")
     # /catalogo é caminho de produto em muitas lojas — não rebaixar
     assert not source_check.url_de_listagem("https://loja.com/catalogo/notebook-x")
+    # /list (Shopee) é listagem dinâmica; "lista-de-presentes" não é
+    assert source_check.url_de_listagem("https://loja.com/list/tenis")
+    assert not source_check.url_de_listagem("https://loja.com/produto/list-de-presentes")
     assert not source_check.url_de_listagem("")
 
 

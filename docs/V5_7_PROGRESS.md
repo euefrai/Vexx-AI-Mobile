@@ -755,3 +755,78 @@ modelo específico" (exigência que o usuário não tinha como satisfazer).
   As referências aparecem quando existe página específica com identidade —
   coberto por testes determinísticos (`test_shopping_generic_v57.py`).
 
+## Auditoria de descoberta (concluída, 2026-10-18)
+
+Nova rodada só sobre a descoberta, com os provedores existentes (sem novo
+provedor, sem contorno de bloqueio). Instrumentação real registrada em
+`qa-artifacts/v57/descoberta-diagnostico-2026-10-18.json` (consultas
+enviadas + resultados brutos por provedor, sem dados sensíveis).
+
+### Resultado por provedor (rede atual, consultas dos 3 temas)
+
+- `mlb` (API oficial): HTTP **403** em todas as chamadas — falha do provedor,
+  tratada como bloqueio (sem contorno).
+- `ddg` (html): bot-wall/CAPTCHA detectado (`status bloqueado=True`) —
+  recusa do provedor, não "sem resultados".
+- `ddg-lite`: **intermitente** — bloqueado na maioria das consultas, mas
+  respondeu 6 resultados em uma delas (de onde saíram candidatos Shopee/
+  Nike/Netshoes).
+- `web` (orquestrador Bing/Marginalia): responde sempre (~450ms); para as
+  consultas genéricas devolveu só home/categoria/busca das lojas (nenhuma
+  página específica de produto) + junk (dicionários etc.).
+- Downloads das lojas: Centauro/Adidas/Netshoes/Nike/WTennis → 403;
+  Mercado Livre/Shopee/Google → 200 sem dados estruturados de produto;
+  **KaBuM → 200 com JSON-LD de itens reais** (notebook/fone).
+
+### Defeitos reproduzidos e corrigidos
+
+1. **Item de listagem herdava "verificado" (confiabilidade — caso KaBuM).**
+   Categoria KaBuM é validada como página de produto; os itens do JSON-LD
+   não repetem a URL no nó (`url_produto` vazio) e a URL real do produto só
+   aparece em `offers.url`. O item saía `verificado`/`confirmada` **sem a
+   página do item nunca ter sido aberta**. Correção em `_recuperar_ofertas`:
+   o link declarado (inclusive `offers.url`) fora da página aberta vira
+   `nao_verificado`/`item_nao_aberto` (selo "página do item não foi aberta").
+2. **`/list/` (Shopee) tratado como página específica.** Virou referência
+   não verificada, incluindo um título junk ("Linha Dente De Tubarão")
+   resgatado por trecho. Correção em `source_check.url_de_listagem`:
+   `/list`, `/lista`, `/listagem` são listagem dinâmica — nunca referência
+   nem link de item.
+3. **Orçamento de páginas gasto em home/busca.** Os 6 primeiros candidatos
+   na ordem do provedor eram baixados; seis homes/buscas à frente deixavam
+   uma página específica fora do teto — sem tentativa e sem referência
+   (descoberta perdida em silêncio). Correção: `_prioridade_descarga`
+   ordena (estável) o download — específica primeiro; nenhuma validação
+   muda, só a ordem.
+
+### Verificado sem defeito (falsos negativos descartados)
+
+- Variantes de reformulação ("tenis para jogar basquete", "comprar tenis de
+  basquete barato", etc.): nenhuma descobriu página específica de produto
+  que as consultas atuais não trouxessem — a limitação é do índice, não da
+  formulação. Consultas mantidas.
+- Filtros de identidade/relevância: todas as rejeições auditadas eram
+  corretas (home, busca/categoria, dicionário, login, lista.*). Nenhum
+  candidato com cara de página específica foi rejeitado.
+
+### Validação
+
+- Suíte completa: **833 passed / 4 skipped** (+3 testes: 1 confiabilidade
+  KaBuM, 1 referência `/list/`, 1 priorização do teto; +1 asserção em
+  `test_shopping_fase4.py`).
+- Benchmarks congelados: `shopping_v4` **59/59**, `pesquisa_v57` **34/34**.
+- Reverificação ao vivo pós-correção: itens KaBuM (notebook/fone) saem
+  `parcial` + `item_nao_aberto` com preço do dado estruturado da listagem;
+  pipeline do tênis segue honesto (0 ofertas; referências só com identidade).
+
+### Limitações registradas (auditoria)
+
+- Zero referências para o tênis nesta rede é resultado **correto** no
+  estado atual: Bing não devolve página específica de produto para a
+  consulta genérica e as lojas bloqueiam (403). Sem simulação de sucesso.
+- Resultado positivo real disponível: itens KaBuM (notebook/fone) como
+  ofertas **parciais** (links + preços de dado estruturado, página do item
+  declarada como não aberta).
+- `ddg-lite` é intermitente: quando responde, amplia a descoberta (foi dele
+  a referência Netshoes na primeira rodada); nada garante disponibilidade.
+

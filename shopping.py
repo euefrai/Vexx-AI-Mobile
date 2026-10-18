@@ -1576,14 +1576,24 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
                     continue  # listagem sem link próprio do item → fonte
                 val = {"veredito": "nao_verificado", "codigo": "item_de_listagem",
                        "motivo": "item extraído de listagem; página do item não aberta"}
-            elif url_item and not _mesmo_recurso(url_item, final):
-                # O veredito vale para a página ABERTA; o link do card aponta
-                # para outra página (não aberta) → nunca marcar como verificado.
-                val = {"veredito": "nao_verificado", "codigo": "item_nao_aberto",
-                       "motivo": "link do item declarado na página analisada; "
-                                 "a página do item não foi aberta"}
             else:
-                val = aval
+                # O veredito vale para a página ABERTA: se o card declara link
+                # para OUTRA página, nunca sai verificado. V5.7 (auditoria de
+                # descoberta 2026-10-18, caso KaBuM): além de `url_produto`,
+                # olhar a URL da própria oferta (`offers.url`) — item de
+                # categoria cujo JSON-LD não repete a URL do produto no nó
+                # herdava o veredito da listagem e saía como "confirmada"
+                # sem nunca abrir a página do item.
+                declarada = url_item or next(
+                    (o.get("url_oferta") or ""
+                     for o in (ext.get("ofertas_ld") or [])
+                     if o.get("url_oferta")), "")
+                if declarada and not _mesmo_recurso(declarada, final):
+                    val = {"veredito": "nao_verificado", "codigo": "item_nao_aberto",
+                           "motivo": "link do item declarado na página analisada; "
+                                     "a página do item não foi aberta"}
+                else:
+                    val = aval
             try:
                 saidas.append(montar_produto(ext, url, final, titulo,
                                              validacao=val, url_item=url_item))
@@ -1742,6 +1752,35 @@ def _referencias_de_busca(alvos: list, brutos: list,
     return refs
 
 
+def _prioridade_descarga(a: dict) -> int:
+    """Ordem de download em `pesquisar`: 0 = página com cara de item/produto;
+    1 = home/busca/listagem/catálogo/login.
+
+    Só ORDENA (estável) o orçamento de páginas — nenhuma validação muda: as
+    mesmas páginas continuam sendo abertas e verificadas pelo mesmo código.
+    A diferença é gastar o teto primeiro com quem tem cara de página
+    específica: antes, seis homes/buscas à frente podiam deixar uma página
+    de produto fora do teto, sem tentativa e sem referência (descoberta
+    perdida em silêncio).
+    """
+    try:
+        url = str((a or {}).get("url") or "").strip()
+        partes = urllib.parse.urlsplit(url)
+        host = (partes.hostname or "").lower()
+        caminho = partes.path or ""
+        if not host or not caminho.strip("/"):
+            return 1
+        if source_check.url_de_listagem(url) or _RX_REF_HOST_LISTA.match(host) \
+                or _RX_REF_NAO_PRODUTO.search(caminho):
+            return 1
+        if _RX_REF_URL_PRODUTO.search(caminho):
+            return 0
+        segmentos = [s for s in caminho.split("/") if s]
+        return 0 if len(segmentos) >= 2 else 1
+    except Exception:
+        return 1
+
+
 def verificar_imagens(produtos: list, maximo: int = 3, timeout: float = 5.0,
                       abrir=None, workers: int = 3) -> list:
     """Valida até `maximo` imagens (formato real, dimensões, tamanho).
@@ -1877,6 +1916,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             except Exception as exc:
                 log.info("shopping: item mlb ignorado (%s)", type(exc).__name__)
         paginas.append(a)
+    paginas.sort(key=_prioridade_descarga)  # estável: específica primeiro
     alvos = paginas[:teto_paginas]
     _prog("consultando", f"{len(alvos)} páginas")
     relatorio: list = []

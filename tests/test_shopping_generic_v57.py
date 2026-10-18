@@ -312,3 +312,46 @@ def test_referencias_persistem_na_consulta_salva():
     salva = shopping.ultima_consulta(db, "ana", "c11")
     assert salva is not None
     assert len(salva["resultado"].get("encontrados", [])) == 1
+
+
+def test_listagem_com_caminho_list_nao_vira_referencia():
+    """Auditoria de descoberta 2026-10-18: `/list/` (Shopee) é listagem
+    dinâmica — não é página específica de produto e nunca vira referência,
+    mesmo com bloqueio/sem-dados na abertura."""
+    db = _db()
+    cand = {"titulo": "Tênis de Basquete em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/T%C3%AAnis/Basquete"}
+    res = shopping.pesquisar(db, "ana", _CONSULTA_GENERICA, "c12",
+                             buscar_fn=lambda q: [dict(cand)],
+                             baixar_fn=_bloqueada)
+    assert res["produtos"] == [] and res["encontrados"] == []
+
+
+def test_pagina_especifica_nao_fica_fora_do_teto_por_paginas_genericas():
+    """Orçamento de páginas: seis homes/buscas à frente não podem consumir o
+    teto inteiro quando há página específica de produto na fila — antes ela
+    ficava sem tentativa E sem referência (descoberta perdida em silêncio).
+    A ordenação só muda a ORDEM de download; nenhuma validação é afrouxada."""
+    db = _db()
+    genericas = (
+        [{"titulo": f"Loja {i} — Tênis", "url": f"https://loja{i}.com.br/"}
+         for i in (1, 3, 5)]
+        + [{"titulo": f"Busca: tênis {i}", "url": f"https://loja{i}.com.br/busca/tenis"}
+           for i in (2, 4, 6)])
+    especifica = {"titulo": "Tênis de Basquete Pro X — Loja Sete",
+                  "url": "https://loja7.com.br/produto/tenis-basquete-pro-x",
+                  "trecho": "tênis de basquete com amortecimento"}
+    tentadas = []
+
+    def _baixar(url):
+        tentadas.append(url)
+        _bloqueada(url)
+
+    res = shopping.pesquisar(
+        db, "ana", _CONSULTA_GENERICA, "c13",
+        buscar_fn=lambda q: [dict(c) for c in genericas + [especifica]],
+        baixar_fn=_baixar)
+    assert especifica["url"] in tentadas
+    refs = res["encontrados"]
+    assert len(refs) == 1 and refs[0]["url"] == especifica["url"]
+    assert refs[0]["motivo_codigo"] == "bloqueio"

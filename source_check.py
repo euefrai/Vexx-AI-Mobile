@@ -256,7 +256,7 @@ def classificar_sinais(pagina: str, url_final: str = "") -> dict:
 
 _RX_URL_BUSCA_RAIZ = re.compile(
     r"/(busca|buscar|search|pesquisa|pesquisar|categoria|category|"
-    r"resultados?)(/|\?|$|s)", re.I)
+    r"resultados?|lists?|lista|listas|listagem)(/|\?|$|s)", re.I)
 
 
 def url_de_listagem(url: str) -> bool:
@@ -264,7 +264,9 @@ def url_de_listagem(url: str) -> bool:
 
     Usada só para NUNCA tratar home/listagem como página do item — nunca
     aprova nada sozinha. `/catalogo`, `/colecao` etc. ficam de fora de
-    propósito (lojas também usam esses caminhos para produtos)."""
+    propósito (lojas também usam esses caminhos para produtos). `/list`
+    (Shopee) entrou na auditoria de descoberta de 2026-10-18: é listagem
+    dinâmica, nunca página de item."""
     try:
         partes = urllib.parse.urlsplit(url or "")
     except ValueError:

@@ -137,3 +137,30 @@ afrouxar nenhuma garantia do hotfix acima:
   objetiva (bloqueio do site/ausência de dados estruturados).
 
 Regressão: `tests/test_shopping_generic_v57.py` (13 testes).
+
+## V5.7 — Auditoria de descoberta (2026-10-18)
+
+Três correções enxutas após auditoria instrumentada da descoberta (relatório
+em `qa-artifacts/v57/descoberta-diagnostico-2026-10-18.json`), todas
+reproduzidas antes/depois com testes determinísticos:
+
+- **`/list` é listagem** (`source_check.url_de_listagem`): `/list`, `/lista`,
+  `/listagem` (ex.: Shopee `/list/Tênis/Basquete`) nunca viram referência
+  nem link de item — são listagem dinâmica, como busca/categoria.
+- **Item declarado fora da página aberta nunca sai verificado**
+  (`_recuperar_ofertas`): além de `url_produto`, a checagem cobre a URL da
+  própria oferta (`offers.url`). Item de categoria cujo JSON-LD aponta para
+  a página do produto (caso KaBuM) vira `nao_verificado`/`item_nao_aberto` e
+  nível **parcial** — antes herdava o veredito da listagem e saía como
+  "oferta confirmada" sem a página do item ter sido aberta. Preço/links do
+  dado estruturado continuam (nada inventado nem apagado).
+- **Orçamento de páginas ordenado** (`_prioridade_descarga` em `pesquisar`):
+  download estável com página com cara de item/produto primeiro; home/busca/
+  listagem/login depois. Só a ORDEM muda — nenhuma validação é afrouxada;
+  evita gastar o teto inteiro em homes/buscas e perder uma página específica
+  em silêncio.
+
+Verificação ao vivo: KaBuM (notebook/fone) responde 200 e seus itens saem
+`parcial`/`item_nao_aberto`; provedores da rede (ML API, DDG) seguem
+bloqueados e não são contornados; consultas genéricas mantidas (variantes
+não descobriam nada além — limitação do índice, não da formulação).
