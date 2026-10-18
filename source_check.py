@@ -130,6 +130,37 @@ _RX_ANUNCIO = re.compile(
     r"leilão|leilao|à venda por|publicado (há|em))\b", re.I)
 _RX_PRECO_VISIVEL = re.compile(r"R\$\s?\d{1,3}(?:\.\d{3})*(?:,\d{2})?")
 
+# V5.7 hotfix: sinais fortes de "produto fora do catálogo" em página HTTP 200
+# (soft 404). Roda sobre o TEXTO VISÍVEL normalizado (sem acento, minúsculo) —
+# nunca sobre <script>/<template>/atributos, para não bater em string de
+# template de SPA. "Esgotado"/"sem estoque"/"fora de estoque" NÃO entram:
+# são out-of-stock (o produto existe) — conceito diferente de removido.
+_RX_BLOQUEIO_PAGINA = re.compile(
+    r"(complete o captcha|resolva o captcha|"
+    r"confirme que voce (e|eh) humano|verifique que voce (e|eh) humano|"
+    r"verify (that )?you are (a )?human|checking your browser|just a moment|"
+    r"unusual traffic|are you a robot|enable (java ?script )?and cookies)")
+_RX_REMOVIDO = re.compile(
+    r"(produto|an[uú]ncio|item|oferta|p[aá]gina)\s+(?:foi\s+|j[aá]\s+foi\s+)?"
+    r"(?:removid[oa]s?|exclu[ií]d[oa]s?|desativad[oa]s?|inativad[oa]s?|"
+    r"finalizad[oa]s?|expirad[oa]s?|inexistente|indispon[ií]vel)"
+    r"|(produto|an[uú]ncio|item|oferta)\s+n[aã]o\s+(?:foi\s+)?"
+    r"(?:encontrad[oa]s?|existe|est[aá]\s+dispon[ií]vel)"
+    r"|n[aã]o\s+est[aá]\s+mais\s+(?:dispon[ií]vel|a\s+venda|no\s+ar)"
+    r"|(?:saiu\s+do\s+ar|p[aá]gina\s+n[aã]o\s+encontrada)"
+    r"|(product|listing|item|offer)\s+(?:was\s+|has\s+been\s+)?"
+    r"(?:removed|deleted|unavailable|expired|not\s+found)"
+    r"|no\s+longer\s+available", re.I)
+
+
+def _texto_visivel(html: str, teto: int = 40000) -> str:
+    """Aproximação do texto visível: remove script/style/template/noscript e
+    tags — para procurar frases na página sem bater em código/atributos."""
+    limpo = re.sub(r"<(script|style|template|noscript)\b[^>]*>.*?</\1\s*>",
+                   " ", html or "", flags=re.I | re.S)
+    limpo = re.sub(r"<[^>]{0,600}>", " ", limpo)
+    return limpo[:teto]
+
 
 def classificar_sinais(pagina: str, url_final: str = "") -> dict:
     """Sinais determinísticos de produto × listagem × anúncio, com evidências.
@@ -202,12 +233,24 @@ def classificar_sinais(pagina: str, url_final: str = "") -> dict:
     anuncio = bool(_RX_ANUNCIO.search(baixo[:20000]))
     if anuncio:
         evidencias.append("indícios de anúncio/classificado")
+    pagina_str = _sem_acentos(_texto_visivel(html))
+    achado_removido = _RX_REMOVIDO.search(pagina_str)
+    removido = bool(achado_removido)
+    frase_removido = " ".join(achado_removido.group(0).split())[:60] if removido else ""
+    if removido:
+        evidencias.append("página diz que o produto não existe mais: "
+                          f"“{frase_removido}”")
+    bloqueio = bool(_RX_BLOQUEIO_PAGINA.search(pagina_str))
+    if bloqueio:
+        evidencias.append("página de proteção anti-bot (CAPTCHA/verificação)")
     tem_dado_produto = bool(prods) or og_produto or preco_meta
     return {"eh_produto": bool(pontos_p >= 3 and pontos_p > pontos_l
                                and tem_dado_produto),
             "eh_listagem": pontos_l >= 3 and pontos_l >= pontos_p,
             "pontos_produto": pontos_p, "pontos_listagem": pontos_l,
             "precos_visiveis": n_precos, "anuncio": anuncio,
+            "removido": removido, "removido_frase": frase_removido,
+            "bloqueio": bloqueio,
             "evidencias": evidencias[:8]}
 
 
@@ -413,10 +456,27 @@ def avaliar_pagina(pagina: str, url_final: str = "", *, consulta: str = "",
                     "motivo": f"abriu em {out['dominio']}, esperado {dom_esperado}",
                     "segundos": round(time.monotonic() - t0, 2)})
         return out
+    if sinais.get("bloqueio") and tipo != "json":
+        # Página de CAPTCHA/verificação anti-bot servida com HTTP 200: não dá
+        # para confirmar NADA — "não verificado (proteção)", nunca "quebrado".
+        out.update({"codigo": "bloqueio_pagina", "veredito": "nao_verificado",
+                    "motivo": ("página pediu verificação anti-bot (CAPTCHA); "
+                               "sem bypass — não foi possível confirmar o conteúdo"),
+                    "segundos": round(time.monotonic() - t0, 2)})
+        return out
     if tipo == "produto":
         if sinais.get("eh_listagem"):
             out.update({"codigo": "listagem_nao_produto", "veredito": "reprovado",
                         "motivo": "link abre listagem/categoria, não página do produto",
+                        "segundos": round(time.monotonic() - t0, 2)})
+            return out
+        if sinais.get("removido"):
+            # HTTP 200 de "produto não encontrado/removido/indisponível" é
+            # soft 404: nunca vira oferta válida, mesmo com JSON-LD residual.
+            frase = str(sinais.get("removido_frase") or "")[:60]
+            out.update({"codigo": "produto_removido", "veredito": "reprovado",
+                        "motivo": ("página diz que o produto foi removido/indisponível"
+                                   + (f" (“{frase}”)" if frase else "")),
                         "segundos": round(time.monotonic() - t0, 2)})
             return out
         if not sinais.get("eh_produto"):

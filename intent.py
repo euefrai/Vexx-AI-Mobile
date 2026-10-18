@@ -323,6 +323,18 @@ def analisar(texto: str, contexto: dict | None = None) -> dict:
                 re.search(r"(python|codigo|funcao|\bsql\b|javascript)", t):
             intencao = "codigo"
             evidencias = ["variacao+codigo"]
+        if intencao == "conversa":
+            # V5.7: pedido explícito de produto ("me mostre tenis para jogar
+            # basquete") ficava sem rota — sem busca real, sem evidência,
+            # resposta inventada pelo modelo. Com verbo de pedido + categoria/
+            # marca/spec, roteia para shopping (busca real + cards).
+            try:
+                if shopping.detectar_intencao(texto or ""):
+                    intencao = "shopping"
+                    evidencias = ["pedido_produto"]
+                    secundarias = []
+            except Exception:
+                pass
         if intencao == "projeto" and re.match(
                 r"^(isso mesmo|isso|sim|ok|certo|pode ser)[,. ]", t) and not re.search(
                 r"(projeto|site|tcc|computador|\bpc\b|pesquisa|tarefa|trabalho)", t):
@@ -378,6 +390,19 @@ _ACAO_ALEGADA_RE = (
 
 _CLAIM_VAGO_RE = r"(menor pre[cç]o da internet|melhor (produto|oferta) (do|da) (mercado|internet))"
 
+# V5.7: preço no texto (R$ 1.600, "1.600-1.800" de tabela, "299,90"),
+# contexto comercial e aviso de não verificação — usados por `validar`.
+_RX_PRECO_ALEGADO = re.compile(
+    r"r\$\s?\d"
+    r"|\b\d{1,3}(?:\.\d{3})+(?:\s?(?:-|–|a|—)\s?\d{1,3}(?:\.\d{3})*)?\b"
+    r"|\b\d{2,5}[.,]\d{2}\b")
+_RX_CONTEXTO_COMERCIAL = re.compile(
+    r"(pre[cç]o|pre[cç]os|reais|comprar|loja|ofertas?|custa|custam|barat\w*)")
+_RX_JA_AVISOU = re.compile(
+    r"(nao verifiquei|sem verifica|nao foram verificad|nao esta(o)? verificad|"
+    r"podem ter mudado|nao confirmad|nao sao precos atuais|"
+    r"confirme (antes|na loja|o valor))")
+
 
 def validar(intent: dict, resposta: str,
             evidencias: dict | None = None) -> dict:
@@ -428,6 +453,18 @@ def validar(intent: dict, resposta: str,
     if re.search(_CLAIM_VAGO_RE, texto):
         violacoes.append({"codigo": "afirmacao_inverificavel",
                           "detalhe": "superlativo absoluto sem cobertura"})
+
+    # V5.7: preço/produto citado como informação de compra sem NENHUMA
+    # verificação real (nem busca executada, nem oferta verificada). Típico
+    # de resposta "conversa" que inventa tabela de preços, ou de busca que
+    # voltou vazia e o modelo insistiu em citar valores.
+    tem_busca_verificada = "shopping" in usadas and bool(ev.get("produtos") or [])
+    if (not tem_busca_verificada and _RX_PRECO_ALEGADO.search(texto)
+            and not _RX_JA_AVISOU.search(texto)
+            and (_RX_CONTEXTO_COMERCIAL.search(texto)
+                 or any(c in texto for c in shopping.CATEGORIAS))):
+        violacoes.append({"codigo": "verificacao_alegada_sem_evidencia",
+                          "detalhe": "cita preços de produto sem busca verificada"})
 
     if (intent or {}).get("intencao") == "shopping" and ev.get("produtos") == []:
         if "```jdui" in (resposta or "") and "product" in (resposta or ""):

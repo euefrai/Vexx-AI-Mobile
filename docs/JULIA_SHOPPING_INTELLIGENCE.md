@@ -76,3 +76,36 @@ JDUI (`productcard`/`productgrid`/`productcompare`/`productdetails`/`productgall
 - Lojas com CAPTCHA/bloqueio: página ignorada, nunca contornada.
 - Imagens: hotlink com `loading=lazy` + `referrerpolicy=no-referrer` +
   fallback "Sem foto"; lightbox local em JS registrado (sem JS do modelo).
+
+## V5.7 — Confiabilidade comercial (hotfix 2026-10-18)
+
+Regras de integridade endurecidas após o incidente "me mostre tenis para
+jogar basquete" (resposta com produtos/preços inventados, sem busca):
+
+- **Detecção**: verbos de pedido de produto ("me mostre", "quero ver"…)
+  disparam o shopping mesmo sem verbo de compra explícito; `intent.analisar`
+  tem fallback conversa→shopping (`pedido_produto`). Consultas
+  **explicativas/temáticas sobre produtos** ("como escolher um tênis de
+  corrida") continuam fora.
+- **Card só da ferramenta**: fence de produto emitido pelo modelo é
+  removido **sempre** — com ou sem busca executada, stream ou não-stream.
+- **Página removida ≠ oferta**: HTTP 200 com frase de produto
+  indisponível/removido/anúncio finalizado → veredito `produto_removido`,
+  página inteira ignorada (JSON-LD residual não vira card).
+- **CAPTCHA/bot-wall**: veredito `bloqueio_pagina` (`nao_verificado`) —
+  nunca confundido com link quebrado; nunca contornado.
+- **Cache declarado**: `JULIA_SHOPPING_TTL` (segundos; padrão 6h) e o
+  bloco de grounding informa reuso + `verificado_em` das duas pontas.
+- **Imagens**: foto verificada para todos os cards exibidos (até
+  `MAX_PRODUTOS`=6); motivo da reprovação(`imagem_motivo`) aparece no card
+  (backend `jdui.py` + frontend `public/jdui.js`, com teste de paridade).
+- **Alegação sem evidência**: preço/disponibilidade afirmados sem
+  ferramenta verificada geram violação
+  `verificacao_alegada_sem_evidencia` + nota honesta na própria resposta
+  ("Não verifiquei estes valores em lojas…"). Frases que já avisam que não
+  houve verificação não disparam.
+- **Estoque desconhecido**: disponibilidade ausente normaliza para
+  `desconhecida`; nunca vira "Em estoque" por omissão.
+
+Regressão determinística: `tests/test_shopping_reliability_v57.py` (38
+testes, inclui harness Node do `public/jdui.js`).

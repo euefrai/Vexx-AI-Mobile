@@ -469,6 +469,7 @@ def _v_oferta(o) -> dict:
         "link_motivo": _str(o.get("link_motivo"), 120),
         "item_de_listagem": bool(o.get("item_de_listagem")),
         "imagem_veredito": _veredito_link(o.get("imagem_veredito")),
+        "imagem_motivo": _str(o.get("imagem_motivo"), 120),
     }
 
 

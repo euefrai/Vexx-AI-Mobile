@@ -633,3 +633,81 @@ congelada de provedores.
   de provedores em `qa-artifacts/v57/fase3-provedores-2026-10-18.json`;
   suíte completa **735 passed / 4 skipped**; benchmark congelado
   re-verificado offline **34/34**.
+
+## HOTFIX — Confiabilidade comercial (concluída, 2026-10-18)
+
+Incidente: consulta real **"me mostre tenis para jogar basquete"** respondeu
+com produtos/preços/lojas **inventados** (tabela Markdown "Preço Estimado
+(R$)"), sem cards JDUI e sem nenhuma busca comercial executada
+(`CONSULTAS SHOPPING SALVAS: 0`). Reprodução real: relay + agente + modelo
+(`%TEMP%\opencode\vexx-e2e\antes.json`, `agent.log` sem linha de shopping).
+
+### Causa raiz (reproduzida, não presumida)
+
+1. **Roteamento**: o pedido não caía no shopping (`shopping.detectar_intencao`
+   → `False`; `intent.analisar` → conversa/llm). O modelo respondeu de
+   conhecimento parametrizado — de onde vieram os itens/preços inventados.
+2. **Fence do modelo**: fence de produto emitido pelo LLM só era removido
+   quando havia resultado da ferramenta; sem busca, passava direto.
+3. **Páginas "produto removido"** (HTTP 200 dizendo que o anúncio
+   acabou/indisponível) podiam virar oferta por JSON-LD residual.
+4. **Bot-wall/CAPTCHA** entravam como página comum (não distinguia de link
+   quebrado).
+5. **Cache** de consulta era servido sem declarar reuso/data no grounding.
+6. **Imagens**: só uma parte dos cards exibidos tinha a foto verificada;
+   o motivo (quando reprovada) não chegava ao card.
+7. **Alegação comercial sem busca**: resposta alegando preço/disponibilidade
+   sem nenhuma verificação executada não gerava aviso na própria resposta.
+
+### Correções
+
+- `shopping.detectar_intencao`: verbos de pedido de produto ("me mostre",
+  "quero ver", "busque"…) + `_RX_EXPLICATIVO_PRODUTO`; fallback
+  conversa→shopping em `intent.analisar` (evidência `["pedido_produto"]`).
+- `pc_agent`: helpers únicos `_shopping_executar`/`_shopping_aplicar`/
+  `_validar_resposta` usados pelos **dois** caminhos (stream e não-stream);
+  fence de produto do modelo removido **sempre** (card só da ferramenta);
+  validação roda antes do tail-emit no stream.
+- `source_check`: `produto_removido` (frases "produto indisponível/removido/
+  anúncio finalizado" no texto visível, ignora `<script>`) e
+  `bloqueio_pagina` (CAPTCHA/bot-wall → `nao_verificado`, sem bypass);
+  `_recuperar_ofertas` ignora página de produto removido.
+- Cache: `JULIA_SHOPPING_TTL` (segundos; padrão 6h); `bloco_para_llm`
+  declara reuso + `verificado_em` dos dois lados.
+- Imagens: verificação até `MAX_PRODUTOS` (6); `imagem_motivo` no card
+  (paridade `jdui.py` ↔ `public/jdui.js`).
+- `intent.validar`: violação `verificacao_alegada_sem_evidencia` (preço/
+  disponibilidade alegados sem ferramenta verificada; não dispara com aviso
+  explícito "não verifiquei"); `_validar_resposta` anexa nota honesta
+  determinística à resposta.
+- `montar_produto`: disponibilidade ausente/vazia normaliza para
+  `desconhecida` (nunca vira "em estoque" por omissão).
+
+### Validação
+
+- `tests/test_shopping_reliability_v57.py` (novo): **38 testes** — cobre os
+  25 cenários do incidente (removido/esgotado/CAPTCHA/404/redirect, cache,
+  imagens, roteamento, claims, polling, service worker) + harness Node do
+  `public/jdui.js`.
+- Suíte completa: **816 passed / 4 skipped** (baseline 778/4; +38 novos,
+  zero regressões). Benchmarks congelados re-verificados: `pesquisa_v57`
+  **34/34** e `shopping_v4` **59/59**.
+- E2E real (relay+agente+modelo, `%TEMP%\opencode\vexx-e2e\depois.json`):
+  shopping **executou** (5 páginas avaliadas; bot-walls desta rede →
+  `bloqueado`, sem bypass; `CONSULTAS SHOPPING SALVAS: 1`); resposta **sem
+  produto/preço inventado** + nota honesta de indisponibilidade de dados
+  estruturados; sem fence porque nada foi verificado.
+- Validação visual real: fence gerado pelo pipeline (rede em stub, mesmo
+  modo dos benchmarks) renderizado pelo `public/jdui.js` de produção em
+  Chrome headless → card completo (foto, preço R$ 499,90, selo "Link
+  verificado", avaliação, "Em estoque", CTA) —
+  `qa-artifacts/v57/hotfix-jdui-card-2026-10-18.png` +
+  `hotfix-fence-exemplo-2026-10-18.json`.
+
+### Limitações registradas
+
+- Lojas brasileiras (Centauro/Adidas/Netshoes/WTennis) bloquearam esta rede
+  (403/bot-wall) durante o E2E — tratado honestamente, sem contorno.
+- Deploy (Render) não verificável desta máquina (sem URL remota configurada);
+  procedimento de verificação fica documentado no relatório do hotfix.
+

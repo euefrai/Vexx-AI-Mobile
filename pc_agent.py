@@ -2799,6 +2799,98 @@ def _filtrar_usados_restricao(shop_res: dict, intencao: dict) -> dict:
     return shop_res
 
 
+def _shopping_executar(db, owner: str, conv: str, user_text: str, extras: dict,
+                       messages: list, progresso=None) -> dict | None:
+    """V5.7: busca de produtos do pedido + grounding real no prompt.
+
+    Compartilhado entre o caminho com streaming e o fallback sem streaming —
+    antes o fallback (/api/ai) nunca buscava e o modelo respondia de memória
+    com produtos/preços inventados.
+    """
+    if not extras.get("shop"):
+        return None
+    shop_res = None
+    try:
+        shop_res = shopping.pesquisar(db, owner, user_text, conv,
+                                      progresso=progresso)
+        extras["ferramentas_usadas"].append("shopping")
+    except Exception as exc:
+        log.warning("shopping falhou (%s)", type(exc).__name__)
+        shop_res = None
+    if shop_res and shop_res.get("produtos"):
+        # V5.1: restrição explícita de usados filtra antes do LLM e dos cards.
+        shop_res = _filtrar_usados_restricao(shop_res, extras.get("intent") or {})
+    if shop_res and shop_res.get("produtos"):
+        try:
+            messages.append({"role": "system",
+                             "content": shopping.bloco_para_llm(shop_res)})
+            for f in shop_res.get("fontes", [])[:8]:
+                extras["fontes"].append({"id": f.get("id", ""),
+                                         "titulo": f.get("titulo", ""),
+                                         "url": f.get("url", "")})
+        except Exception as exc:
+            log.warning("shopping grounding falhou (%s)", type(exc).__name__)
+    elif shop_res is not None:
+        messages.append({"role": "system",
+                         "content": shopping.bloco_para_llm(shop_res)})
+    return shop_res
+
+
+def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
+    """Cards/nota reais no texto final + bane fence de produto do MODELO.
+
+    V5.7: fences de produto emitidos pelo modelo nunca entram — card de
+    produto só vem da ferramenta (dados verificados); roda mesmo quando a
+    busca não executou (antes só era chamado com `shop_res` não-nulo).
+    """
+    texto = shopping.remover_fences_produto(texto or "")
+    if shop_res is None:
+        return texto
+    fence_shop = ""
+    if shop_res.get("produtos"):
+        crit = shop_res.get("criterios", {}) or {}
+        if crit.get("comparacao") and len(shop_res["produtos"]) >= 2:
+            fence_shop = shopping.fence_comparacao(
+                shop_res["produtos"][:4], shop_res.get("fontes", []))
+        else:
+            fence_shop = shopping.fence_resultado(shop_res)
+    else:
+        nota = shopping.resumo_texto(shop_res)
+        if nota and nota not in texto:
+            texto = (texto or "") + "\n\n" + nota
+    if fence_shop and "```jdui" not in texto:
+        # Imagens primeiro: cards com as fotos reais abrem a mensagem.
+        texto = imagens_primeiro(fence_shop, texto)
+    return texto
+
+
+def _validar_resposta(intencao: dict, texto: str, *, usadas: list, produtos: list,
+                      mid: str) -> str:
+    """V5.7: validador determinístico + nota honesta aplicada ao texto.
+
+    Alegação comercial sem busca verificada (`verificacao_alegada_sem_
+    evidencia`) não passa silenciosa: além do log, um aviso curto entra na
+    própria resposta. Demais violações continuam apenas logadas.
+    """
+    try:
+        _val = intent.validar(intencao or {}, texto, {
+            "ferramentas_usadas": list(usadas or []),
+            "produtos": list(produtos or [])})
+    except Exception as exc:
+        log.warning("validador falhou (%s)", type(exc).__name__)
+        return texto
+    viol = _val.get("violacoes", []) or []
+    for _v in viol:
+        log.warning("INTENT_VALIDATE %s: %s", mid, _v)
+    if any(v.get("codigo") == "verificacao_alegada_sem_evidencia" for v in viol) \
+            and "Não verifiquei estes valores em lojas" not in (texto or ""):
+        return (texto or "").rstrip() + (
+            "\n\n_Não verifiquei estes valores em lojas agora: são do meu "
+            "conhecimento geral e podem estar desatualizados — confirme na "
+            "loja antes de comprar._")
+    return texto
+
+
 # ── Continuidade determinística entre conversas (V5.0; sem LLM) ──────
 _CONTINUAR_RE = re.compile(
     r"(continuar|continue|retomar|retome|voltando|onde param|onde parei|"
@@ -3442,6 +3534,10 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     messages, extras = ai_montar_mensagens(
         db, conv, cfg_eff, prep.get("user_text", ""), owner,
         prep.get("contexto_local"))
+    # V5.7: o fallback sem streaming também executa a busca de produtos
+    # (antes respondia de memória com preços/produtos inventados).
+    shop_res = _shopping_executar(db, owner, conv, prep.get("user_text", ""),
+                                  extras, messages)
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
@@ -3458,6 +3554,8 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
     if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto or ""):
         texto = (texto or "") + "\n\n" + prep["pergunta_memoria"]
+    # V5.7: cards reais (ou nota honesta) + banimento de fence de produto do modelo.
+    texto = _shopping_aplicar(texto, shop_res)
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -3510,14 +3608,11 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         if fence:
             texto += fence
             log.info("JDUI sintetizado para %s (%s)", mid, extras["comp_sugerido"])
-    try:
-        for _v in (intent.validar(
-                extras.get("intent") or {}, texto,
-                {"ferramentas_usadas": extras.get("ferramentas_usadas", []),
-                 "produtos": []}) or {}).get("violacoes", []):
-            log.warning("INTENT_VALIDATE %s: %s", mid, _v)
-    except Exception as exc:
-        log.warning("validador falhou (%s)", type(exc).__name__)
+    # V5.1/V5.7: validador determinístico + nota honesta no próprio texto.
+    texto = _validar_resposta(
+        extras.get("intent") or {}, texto,
+        usadas=extras.get("ferramentas_usadas", []),
+        produtos=(shop_res or {}).get("produtos", []), mid=mid)
     ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto, owner)
     if len(prep.get("user_text", "")) >= 20:
         threading.Thread(target=aprender_com_conversa,
@@ -3735,31 +3830,9 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 except Exception:
                     pass
 
-            try:
-                shop_res = shopping.pesquisar(db, owner, prep.get("user_text", ""),
-                                              conv, progresso=_prog_shop)
-                extras["ferramentas_usadas"].append("shopping")
-            except Exception as exc:
-                log.warning("shopping falhou (%s)", type(exc).__name__)
-                shop_res = None
-            if shop_res and shop_res.get("produtos"):
-                # V5.1: recuperação — proibição explícita de usados filtra
-                # antes do LLM e dos cards (sem fingir que não existiam).
-                shop_res = _filtrar_usados_restricao(
-                    shop_res, extras.get("intent") or {})
-            if shop_res and shop_res.get("produtos"):
-                try:
-                    bloco = shopping.bloco_para_llm(shop_res)
-                    messages.append({"role": "system", "content": bloco})
-                    for f in shop_res.get("fontes", [])[:8]:
-                        extras["fontes"].append({"id": f.get("id", ""),
-                                                 "titulo": f.get("titulo", ""),
-                                                 "url": f.get("url", "")})
-                except Exception as exc:
-                    log.warning("shopping grounding falhou (%s)", type(exc).__name__)
-            elif shop_res is not None:
-                messages.append({"role": "system",
-                                 "content": shopping.bloco_para_llm(shop_res)})
+            shop_res = _shopping_executar(db, owner, conv,
+                                          prep.get("user_text", ""), extras,
+                                          messages, progresso=_prog_shop)
         try:
             res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages, emitir,
                                deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
@@ -3812,26 +3885,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
         if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto_final or ""):
             texto_final = (texto_final or "") + "\n\n" + prep["pergunta_memoria"]
-        if shop_res is not None:
-            # Cards verdadeiros vêm da ferramenta: remove qualquer fence de
-            # produto do modelo (risco de dados inventados) e anexa o nosso.
-            texto_final = shopping.remover_fences_produto(texto_final)
-            fence_shop = ""
-            if shop_res.get("produtos"):
-                crit = shop_res.get("criterios", {}) or {}
-                if crit.get("comparacao") and len(shop_res["produtos"]) >= 2:
-                    fence_shop = shopping.fence_comparacao(
-                        shop_res["produtos"][:4], shop_res.get("fontes", []))
-                else:
-                    fence_shop = shopping.fence_resultado(shop_res)
-            else:
-                fence_shop = ""
-                nota = shopping.resumo_texto(shop_res)
-                if nota and nota not in texto_final:
-                    texto_final = (texto_final or "") + "\n\n" + nota
-            if fence_shop and "```jdui" not in texto_final:
-                # Imagens primeiro: cards com as fotos reais abrem a mensagem.
-                texto_final = imagens_primeiro(fence_shop, texto_final)
+        texto_final = _shopping_aplicar(texto_final, shop_res)
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -3888,6 +3942,12 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             if fence:
                 texto_final += fence  # o tail-emit abaixo entrega como deltas finais
                 log.info("JDUI sintetizado no stream %s (%s)", mid, extras["comp_sugerido"])
+        # V5.1/V5.7: validador de relevância (determinístico; sem regeneração)
+        # ANTES do tail-emit — a nota honesta precisa entrar no stream.
+        texto_final = _validar_resposta(
+            extras.get("intent") or {}, texto_final,
+            usadas=extras.get("ferramentas_usadas", []),
+            produtos=(shop_res or {}).get("produtos", []), mid=mid)
         if texto_final != res["texto"]:
             # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
             try:
@@ -3895,16 +3955,6 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                        texto_final[len(res["texto"]):])
             except Exception:
                 pass
-        # V5.1: validador de relevância (determinístico; sem regeneração).
-        try:
-            _val = intent.validar(
-                extras.get("intent") or {}, texto_final,
-                {"ferramentas_usadas": extras.get("ferramentas_usadas", []),
-                 "produtos": (shop_res or {}).get("produtos", [])})
-            for _v in _val.get("violacoes", []):
-                log.warning("INTENT_VALIDATE %s: %s", mid, _v)
-        except Exception as exc:
-            log.warning("validador falhou (%s)", type(exc).__name__)
         ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final, owner)
         if len(prep.get("user_text", "")) >= 20:
             threading.Thread(target=aprender_com_conversa,

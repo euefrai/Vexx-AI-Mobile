@@ -331,7 +331,8 @@
         link_veredito: VER_LINK.indexOf(lv) >= 0 ? lv : '',
         link_motivo: S(o.link_motivo, 120),
         item_de_listagem: o.item_de_listagem === true,
-        imagem_veredito: VER_LINK.indexOf(iv) >= 0 ? iv : ''
+        imagem_veredito: VER_LINK.indexOf(iv) >= 0 ? iv : '',
+        imagem_motivo: S(o.imagem_motivo, 120)
       };
     },
     _produtoObrigatorio(o) {

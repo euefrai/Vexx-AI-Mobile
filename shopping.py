@@ -28,6 +28,7 @@ import hashlib
 import html as _html
 import json
 import logging
+import os
 import re
 import time
 import urllib.parse
@@ -38,7 +39,17 @@ import source_check
 
 log = logging.getLogger("JULIA-shopping")
 
-TTL_CONSULTA = 6 * 3600
+
+def _ttl_consulta() -> int:
+    """TTL do cache de consulta, em segundos (JULIA_SHOPPING_TTL; padrão 6h)."""
+    try:
+        valor = int(os.environ.get("JULIA_SHOPPING_TTL", "") or 0)
+    except ValueError:
+        valor = 0
+    return valor if valor > 0 else 6 * 3600
+
+
+TTL_CONSULTA = _ttl_consulta()
 MAX_CONSULTAS_POR_CONV = 20
 MAX_PAGINAS = 6
 MAX_PRODUTOS = 6
@@ -128,17 +139,34 @@ def _armazenamento_aparente(txt: str) -> int | None:
     return max(vals) if vals else None
 
 
+# V5.7: verbos de PEDIDO de produto ("me mostre tenis para basquete") que
+# não eram reconhecidos — o pedido nunca virava busca e o modelo respondia
+# de memória. Não substituem os verbos fortes: complementam.
+_VERBOS_PEDIDO_PRODUTO = (
+    "mostre", "mostra", "manda", "mande", "envia", "envie", "indica",
+    "indique", "preciso de", "preciso dum", "quero ver", "queria ver",
+    "me traga", "me traz", "traz um", "traz uma", "traga um", "traga uma",
+)
+# Pedido explicativo sobre um produto não é busca de oferta.
+_RX_EXPLICATIVO_PRODUTO = re.compile(
+    r"(como funciona|o que (e|eh)\b|para que serve|me explique|explique|"
+    r"o que faz|como se usa|como usar)")
+
+
 def detectar_intencao(texto: str) -> bool:
     """True se o usuário pede pesquisa/compra/comparação de produtos."""
     t = _sem_acentos(texto or "")
-    tem_verbo = any(v in t for v in (
+    tem_verbo_forte = any(v in t for v in (
         "pesquis", "busc", "encontr", "procur", "recomend", "compar",
         "comprar", "compra", "oferta", "preco", "promocao", "mais barato",
         "menor preco", "onde comprar", "vale a pena", "custo-beneficio",
         "custo beneficio", "qual celular", "qual notebook",
         "quero um", "quero uma", "qual tem mais", "qual o melhor",
         "o melhor celular", "o melhor notebook"))
-    if not tem_verbo:
+    tem_pedido = any(v in t for v in _VERBOS_PEDIDO_PRODUTO)
+    if not (tem_verbo_forte or tem_pedido):
+        return False
+    if tem_pedido and not tem_verbo_forte and _RX_EXPLICATIVO_PRODUTO.search(t):
         return False
     tem_produto = ("produto" in t or "modelo" in t or "marca" in t or "loja" in t
                    or bool(re.search(r"\b(ram|memoria|bateria|armazenamento|polegadas|"
@@ -717,7 +745,7 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         dono = next(o for o in confirmadas
                     if round(float(o["preco"]), 2) == preco)
         moeda = dono.get("moeda", "BRL")
-        disp = dono.get("disponibilidade", "desconhecida")
+        disp = dono.get("disponibilidade") or "desconhecida"
         confirmado = True
         faixa = len(precos) > 1 or any(
             o.get("preco_alto") is not None for o in confirmadas)
@@ -1459,6 +1487,13 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
     except Exception:
         aval = {}
     listagem = aval.get("codigo") == "listagem_nao_produto"
+    if aval.get("codigo") == "produto_removido":
+        # HTTP 200 dizendo que o produto não existe mais: página ignorada
+        # por inteiro (nem JSON-LD residual vira card) — soft 404 é fonte,
+        # nunca oferta.
+        log.info("shopping: página de produto removido/indisponível: %s (%s)",
+                 url[:80], str(aval.get("motivo") or "")[:80])
+        return []
     saidas = []
     try:
         for ext in extrair_ofertas_jsonld(pagina):
@@ -1651,7 +1686,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     duros = [p for p in fora if p.get("id") not in ids_alt]
     if baixar_fn is None and produtos:
         _prog("verificando", "imagens reais dos produtos")
-        verificar_imagens(produtos)
+        # V5.7: valida a imagem de TODOS os cards exibidos (até MAX_PRODUTOS).
+        verificar_imagens(produtos, maximo=MAX_PRODUTOS)
     _prog("organizando", f"{len(produtos)} recomendações"
           + (f", {len(alternativas)} alternativas" if alternativas else ""))
     fontes = [{"id": f"S{i + 1}", "titulo": (a.get("titulo") or "")[:160],
@@ -1738,8 +1774,18 @@ def bloco_para_llm(resultado: dict) -> str:
     """Bloco system com ofertas verificadas. Sem dado → ordem de honestidade."""
     prods = (resultado or {}).get("produtos", [])
     alts = (resultado or {}).get("alternativas", []) or []
+    de_cache = bool((resultado or {}).get("de_cache"))
+    quando = _data_br_curta((resultado or {}).get("verificado_em", ""))
+    # V5.7: cache é histórico — o bloco declara a idade e proíbe apresentar
+    # como "verificado agora" (preço/link podem ter mudado desde a consulta).
+    if de_cache:
+        estado = ("consulta reaproveitada do cache local — verificação original em "
+                  + (quando or "data desconhecida")
+                  + "; cite essa data e nunca como verificação de agora")
+    else:
+        estado = "executada agora"
     if not prods:
-        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (executada agora): nenhuma "
+        linhas = [f"RESULTADO DE PESQUISA DE PRODUTOS ({estado}): nenhuma "
                   "oferta atende a TODOS os critérios com dados estruturados "
                   "verificáveis (preço/imagem)."]
         if alts:
@@ -1754,9 +1800,17 @@ def bloco_para_llm(resultado: dict) -> str:
                       "específico. PROIBIDO inventar produtos, preços, lojas, "
                       "fotos, avaliações ou links.")
         return "\n".join(linhas)
-    linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (dados verificados agora; "
-               "só cite ESTES produtos/preços/lojas/links; os cards visuais "
-               "serão anexados pela ferramenta):"]
+    if de_cache:
+        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (consulta reaproveitada do "
+                  "cache local — verificação original em "
+                  + (quando or "data desconhecida")
+                  + "; cite essa data e nunca como verificação de agora; só cite "
+                  "ESTES produtos/preços/lojas/links; os cards visuais serão "
+                  "anexados pela ferramenta):"]
+    else:
+        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (dados verificados agora; "
+                  "só cite ESTES produtos/preços/lojas/links; os cards visuais "
+                  "serão anexados pela ferramenta):"]
     for i, p in enumerate(prods[:6]):
         specs = ", ".join(f"{k}={v}" for k, v in
                           list((p.get("specs", {}) or {}).items())[:6])
@@ -1810,6 +1864,7 @@ def _jdui_produto(p: dict) -> dict:
         "link_motivo": (p.get("link_motivo") or "")[:120],
         "item_de_listagem": bool(p.get("item_de_listagem")),
         "imagem_veredito": (p.get("imagem_veredito") or "")[:24],
+        "imagem_motivo": (p.get("imagem_motivo") or "")[:120],
         "ofertas": [{
             "loja": (o.get("loja", "") or "")[:80],
             "preco": o.get("preco_texto", PRECO_NAO_CONFIRMADO)[:40],
