@@ -721,9 +721,16 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         achados = buscar_fn(consulta)[:6]
         etapas.append(f"busca: {len(achados)} resultados")
     except Exception as exc:
-        codigo = getattr(exc, "codigo", type(exc).__name__)
-        return {"fontes": [], "etapas": [f"busca indisponível ({codigo})"],
-                "divergencias": [], "de_cache": False, "erro": "provedor_indisponivel",
+        codigo = getattr(exc, "codigo", "")
+        if codigo:
+            # falha real de provedor/rede: a busca ficou indisponível
+            erro, etapa = "provedor_indisponivel", f"busca indisponível ({codigo})"
+        else:
+            # V5.7: erro interno (bug/assinatura) nunca é mascarado como
+            # "provedor indisponível" — a causa real fica registrada.
+            erro, etapa = "erro_interno", f"erro interno na busca ({type(exc).__name__})"
+        return {"fontes": [], "etapas": [etapa],
+                "divergencias": [], "de_cache": False, "erro": erro,
                 "estado": "indisponivel", "estado_texto": ESTADO_TEXTO["indisponivel"],
                 "provedores": {}, "lacunas": [], "consultas": [], "descartes": [],
                 "correspondencia": 0.0}

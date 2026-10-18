@@ -24,6 +24,7 @@ import unicodedata
 import urllib.parse
 
 import search_providers as sp
+import evidence_graph as eg  # V5.7: regra única de fonte desatualizada
 
 # ── Classes de assunto ─────────────────────────────────────────────
 RX_TECNICO = re.compile(
@@ -393,6 +394,30 @@ def deduplicar(achados: list) -> tuple:
     return finais, descartes
 
 
+RX_ANO_CITADO = re.compile(r"\b(?:19|20)\d{2}\b")
+
+
+def _ano_do_item(a: dict):
+    """Ano declarado pelo item: pubDate (data) primeiro; senão ano no título."""
+    for campo in ("data", "titulo"):
+        m = RX_ANO_CITADO.search(a.get(campo) or "")
+        if m:
+            return int(m.group(0))
+    return None
+
+
+def _ano_alvo(consulta: str, info: dict):
+    """Ano de referência do pedido: ano explícito na consulta ou, em consulta
+    temporal sem ano, o ano corrente. Sem pedido temporal: None (nada muda)."""
+    m = RX_ANO_CITADO.search(consulta or "")
+    if m:
+        return int(m.group(0))
+    if (info or {}).get("temporal"):
+        import datetime as _dt
+        return _dt.date.today().year
+    return None
+
+
 def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> float:
     titulo = (a.get("titulo") or "").lower()
     trecho = (a.get("trecho") or "").lower()
@@ -425,13 +450,24 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
         pontos += 2.5
     if sp.CLASSE_LIVRO in classes and tipo == "livro":
         pontos += 2.0
-    if info.get("temporal"):
+    alvo = _ano_alvo(consulta, info)
+    if alvo is not None:
         ano = re.search(r"\b(20\d{2})\b", titulo + " " + trecho)
         if ano:
             try:
                 pontos += max(0, min(3.0, (int(ano.group(1)) - 2015) * 0.3))
             except ValueError:
                 pass
+        # V5.7: conteúdo desatualizado é sinalizado e levemente rebaixado
+        # (nunca escondido). Regra única do evidence_graph: sem data
+        # conhecida, NÃO acusa.
+        ano_item = _ano_do_item(a)
+        if ano_item is not None:
+            a["ano"] = ano_item
+            velho = eg.fonte_desatualizada({"year": ano_item}, ano_ref=alvo)
+            a["desatualizado"] = bool(velho)
+            if velho:
+                pontos -= min(4.5, (alvo - ano_item) * 1.5)
     host = _dominio(a.get("url", ""))
     if host in ("bing.com", "news.bing.com", "google.com", "news.google.com",
                 "duckduckgo.com", "marginalia.nu", "old-search.marginalia.nu",
@@ -721,6 +757,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         "provedores": {"usados": usados, "falhas": falhas, "vazios": vazios,
                        "consultados": nomes[: max(1, provedor_indice)]},
         "classes": info["classes"],
+        "temporal": bool(info.get("temporal")),
+        "desatualizados": [a.get("url") for a in ranqueados if a.get("desatualizado")],
         "lacunas": lacunas,
         "consultas": consultas[:consultas_feitas],
         "recuperacao": recuperacao,
@@ -765,8 +803,10 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
                      + extra.get("etapas", []))
     merged = ranquear(
         deduplicar(res.get("achados", []) + extra.get("achados", []))[0],
-        consulta, res.get("classes", []), {"temporal": False})
+        consulta, res.get("classes", []),
+        {"temporal": bool(res.get("temporal"))})
     res["achados"] = merged
+    res["desatualizados"] = [a.get("url") for a in merged if a.get("desatualizado")]
     res["descartes"] = (res.get("descartes", []) + extra.get("descartes", []))[:20]
     res["lacunas"] = extra.get("lacunas", res.get("lacunas", []))
     # estado/correspondência recalculados sobre o resultado final (honesto:

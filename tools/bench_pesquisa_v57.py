@@ -140,6 +140,25 @@ def rodar(dados: dict = None, real: bool = False, salvar: bool = True) -> dict:
             selo = shopping._selo_verificacao(p)
             caso("links", c["caso"], c["selo_contem"] in selo)
 
+    # conteúdo desatualizado em consulta temporal (sem data: nunca acusa)
+    for c in dados.get("desatualizado", []):
+        itens = [dict(x) for x in c["itens"]]
+        info = {"temporal": c.get("temporal", False)}
+        ranking = orch.ranquear(itens, c["consulta"], [], info)
+        por_url = {a["url"]: a for a in ranking}
+        ok = True
+        for url, acao in c["esperado"].items():
+            campo = por_url.get(url, {}).get("desatualizado", "ausente")
+            if acao == "desatualizado":
+                ok = ok and campo is True
+            elif acao == "atual":
+                ok = ok and campo is False
+            else:  # neutro: sem flag alguma
+                ok = ok and campo == "ausente"
+        if c.get("primeiro"):
+            ok = ok and bool(ranking) and ranking[0]["url"] == c["primeiro"]
+        caso("desatualizado", c["consulta"], ok)
+
     total = sum(g["total"] for g in grupos.values())
     aprovados = sum(g["aprovados"] for g in grupos.values())
     relatorio = {

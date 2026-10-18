@@ -80,6 +80,7 @@ Contratos preservados: a consulta original é sempre a primeira tentativa;
 faz **uma** rodada adicional com a consulta enxuta, soma os achados e
 recalcula correspondência; devolve `recuperou` e as `etapas` completas.
 Não declara `ok` por quantidade — estado depende de correspondência real.
+O recorte temporal (seção 7) é preservado no re-rank da recuperação.
 
 ## 6. Critérios de parada (estado honesto)
 
@@ -89,20 +90,37 @@ reformulado por provedor. **Ganho real de informação** (novos domínios/temas
 cobertos por consulta adicional) ainda **não** foi implementado — declarado
 como próximo incremento, não fingido.
 
-## 7. Medição (V5.7)
+## 7. Conteúdo desatualizado e erros honestos (V5.7)
+
+- **Desatualizado**: quando a consulta tem recorte temporal (ano explícito
+  ou classe temporal), cada item com **ano conhecido** (pubDate/`data`
+  primeiro; senão ano no título) ganha `ano` + `desatualizado`, usando a
+  regra única do `evidence_graph` — ano ≤ alvo−2, e **sem data conhecida
+  NÃO acusa**. O item velho é apenas rebaixado (penalidade ≤ 4.5), nunca
+  apagado; o relatório da busca expõe `temporal` e `desatualizados: [urls]`.
+  Consulta sem recorte temporal não muda nada.
+- **Erro interno ≠ provedor**: `pesquisa_rapida` não rotula mais qualquer
+  exceção como `provedor_indisponivel`. Exceção de provedor/rede (com
+  `codigo`) continua `provedor_indisponivel`; bug interno (sem `codigo`)
+  vira `erro_interno` com a causa real na etapa
+  (`erro interno na busca (TypeError)`). P6 da auditoria: corrigido.
+
+## 8. Medição (V5.7)
 
 - Benchmark independente offline com fixtures congeladas:
   `benchmarks/pesquisa_v57_v1.json` + `python tools/bench_pesquisa_v57.py`
-  → **27/27, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
-  junk→retry 1, republicações 2, produtos 5, specs 2, links 5).
+  → **29/29, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
+  junk→retry 1, republicações 2, produtos 5, specs 2, links 5,
+  desatualizado 2).
 - Sonda real (2026-10-17), `como funciona o freio ABS`:
   - antes: 6/6 dicionários de "funciona", `correspondencia 0.333`, `estado ok`;
   - depois: `correspondencia 1.0`, topo com artigos reais de freio ABS,
     etapa `bing (consulta reformulada 'freio ABS')` registrada.
-- Artefato: `qa-artifacts/v57/bench-pesquisa-v57-2026-10-17.json`.
-- Regressão completa: 700 passed / 4 skipped (`pytest -q tests`).
+- Artefato: `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (o de
+  2026-10-17 fica como histórico, 27 casos).
+- Regressão completa: 706 passed / 4 skipped (`pytest -q tests`).
 
-## 8. Limites e bloqueios (sem bypass)
+## 9. Limites e bloqueios (sem bypass)
 
 - Bloqueios externos observados: DDG (CAPTCHA), Mercado Livre API (403),
   Magalu (403 bot-wall), KaBuM listagem (reprovado/sem sinais de produto),
@@ -111,9 +129,9 @@ como próximo incremento, não fingido.
   honesto (`bloqueado`/`reprovado`/`parcial`).
 - Resultados de busca variam entre execuções: o benchmark determinístico
   injeta provedores; as sondas reais são **registro**, não assert.
-- Pendências declaradas: fontes primárias/reclassificação por assunto,
-  detecção de conteúdo desatualizado em consultas temporais, parada por
-  ganho de informação (seção 6).
+- Pendências declaradas: fontes primárias/reclassificação por assunto e
+  parada por ganho real de informação (seção 6). Desatualizado temporal
+  (seção 7) e P6 **corrigidos** nos incrementos 3–4.
 
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),

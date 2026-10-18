@@ -33,7 +33,8 @@ Problemas reproduzidos com evidência (tabela completa em
 - **P4** bloqueios de loja confirmados (MLB 403, Magalu 403 bot-wall, KaBuM
   listagem `sem_sinais_produto`) — regra: sem bypass, veredito honesto;
 - **P5** sinônimos pt-PT×pt-BR derrubavam veredito de página (parcial);
-- **P6** erro interno mascarado como `provedor_indisponivel` (registrado).
+- **P6** erro interno mascarado como `provedor_indisponivel` (corrigido —
+  incremento 4: exceção sem `codigo` vira `erro_interno` com causa real).
 
 Baseline da área: 266 passed / 4 skipped; suíte completa V5.6: 670/4.
 
@@ -49,9 +50,13 @@ Baseline da área: 266 passed / 4 skipped; suíte completa V5.6: 670/4.
   `republicacoes`.
 - **Prova real**: `como funciona o freio ABS` → 0.333/dicionários **antes** →
   1.0 com artigos reais **depois**, etapa `consult. reformulada` no relatório.
-- Pendências declaradas (não fingidas): fontes primárias/reclassificação,
-  conteúdo desatualizado em consultas temporais, parada por ganho real de
-  informação. Detalhes: [JULIA_RESEARCH_ACCURACY.md](docs/JULIA_RESEARCH_ACCURACY.md).
+- Conteúdo desatualizado (incremento 3): em consulta com recorte temporal,
+  item com ano conhecido ganha `ano` + `desatualizado` (regra única do
+  `evidence_graph`: ano ≤ alvo−2; **sem data não acusa**); rebaixado, nunca
+  apagado. Resultado expõe `temporal` e `desatualizados: [urls]`.
+- Pendências declaradas (não fingidas): fontes primárias/reclassificação e
+  parada por ganho real de informação. Detalhes:
+  [JULIA_RESEARCH_ACCURACY.md](docs/JULIA_RESEARCH_ACCURACY.md).
 
 ### Fase 3 — Provedores e diagnóstico (FUNCIONAL herdado + registro)
 
@@ -59,8 +64,8 @@ Cadeia multi-provedor V5.5 preservada (ordem não alterada). Bloqueios
 externos registrados sem contorno: DDG CAPTCHA, Mercado Livre API 403,
 Magalu 403, Amazon BR 503, Mojeek/Brave/Startpage/Yahoo/searx.be
 indisponíveis, Semantic Scholar 429 — cada um vira estado honesto
-(`bloqueado`/`indisponivel`). Pendência P6 registrada (erro interno não
-deveria virar `provedor_indisponivel`).
+(`bloqueado`/`indisponivel`). P6 corrigido no incremento 4 (erro interno
+ganhou código próprio, sem mascarar causa).
 
 ### Fase 4 — Links, produtos e imagens (FUNCIONAL incremental)
 
@@ -113,8 +118,7 @@ evidência não há "confirmado".
 
 Infra de streaming/jobs existente (pc_agent + server) coberta pelos E2E
 verdes desta data (`test_e2e_processes` no conjunto acima). Sem mudança de
-contrato nesta versão; pendência de honestidade P6 registrada como candidata
-a incremento.
+contrato nesta versão; P6 (honestidade de erro) resolvido no incremento 4.
 
 ### Fase 9 — Benchmark independente (concluída)
 
@@ -122,7 +126,7 @@ a incremento.
 `tools/bench_pesquisa_v57.py` (determinístico, provedores injetados, sem
 rede) + `tests/test_bench_pesquisa_v57.py`. **27/27, taxa global 1.0**;
 sondas reais no artefato
-`qa-artifacts/v57/bench-pesquisa-v57-2026-10-17.json` (freio ABS:
+`qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (freio ABS:
 correspondência 1.0, top3 real, etapa reformulada).
 
 ### Fase 10 — Documentação (concluída)
@@ -141,8 +145,8 @@ correspondência 1.0, top3 real, etapa reformulada).
 | Shopping Lenovo: marcas no resultado | Asus/Dell misturados | só Lenovo; Asus/Dell como alternativas explícitas |
 | Specs capturadas ("8gb 512gb") | só `flag_novo` | RAM 8GB + armazenamento 512GB |
 | Trecho Wikipédia ABS | referências ("Consultado em…") | corpo do artigo |
-| Benchmark congelado | não existia | 27/27 (taxa 1.0) |
-| Suíte completa | 670 passed / 4 skipped (V5.6) | **700 passed / 4 skipped** (V5.7) |
+| Benchmark congelado | não existia | 29/29 (taxa 1.0) |
+| Suíte completa | 670 passed / 4 skipped (V5.6) | **706 passed / 4 skipped** (V5.7) |
 
 ## Contratos preservados
 
@@ -162,16 +166,15 @@ e Fajulto Studio intocados; nenhum push.
   (estado neutro, nunca "confirmado").
 - Não medido nesta versão: latência/custo de produção antes/depois, mobile
   físico e leitor de tela reais (pendência herdada da V5.6), ganho real de
-  informação como critério de parada.
-- P6 (erro interno mascarado como `provedor_indisponivel`) segue registrado.
+  informação como critério de parada.- P6 **corrigido** (incremento 4): erro interno tem código próprio
+  (`erro_interno`) e causa na etapa; provedor indisponível de verdade
+  continua `provedor_indisponivel`.
 
 ## Próximos passos sugeridos
 
 1. Parada por ganho de informação (novos domínios/temas) em vez de só
    quantidade.
 2. Fontes primárias e reclassificação por assunto quando a rodada traz só
-   índice geral; detecção de conteúdo desatualizado em consultas temporais.
-3. Corrigir P6 (código de erro interno próprio) em incremento pequeno com
-   teste.
-4. Estender o benchmark com casos de E2E real opcional e histórico de taxas
+   índice geral.
+3. Estender o benchmark com casos de E2E real opcional e histórico de taxas
    por versão.

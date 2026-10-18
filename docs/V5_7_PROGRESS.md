@@ -94,6 +94,31 @@ Títulos curtos (< 4 termos) nunca entram na regra. Nada é apagado:
 tudo fica em `descartes` com a origem (base para o Evidence Graph).
 Testes: 2 casos novos em `tests/test_search_orchestrator_v57.py`.
 
+### Incremento 3 — conteúdo desatualizado em consultas temporais (concluído)
+
+Quando a consulta tem recorte temporal (ano explícito, ex.: "eleições 2026",
+ou classe temporal do intent), cada item com **ano conhecido** ganha
+`ano` + `desatualizado`; a regra é a **única** do `evidence_graph`
+(`fonte_desatualizada`: ano ≤ alvo−2, **sem data conhecida NÃO acusa**) e o
+item velho é apenas rebaixado (penalidade ≤ 4.5), nunca apagado. O relatório
+da busca ganha `temporal` e `desatualizados: [urls]`; a rodada de
+recuperação preserva o recorte temporal no re-rank. Consulta sem recorte
+temporal não muda nada.
+
+Testes: 3 casos novos (sinalização + ordem, sem data não acusa, consulta
+sem recorte não marca). Benchmark ganhou o grupo `desatualizado` (2 casos).
+
+### Incremento 4 — erro interno nunca mascarado (P6, concluído)
+
+`pesquisa_rapida` rotulava qualquer exceção da busca como
+`erro: provedor_indisponivel` — um bug interno (ex.: `TypeError`) parecia
+problema de provedor. Agora: exceção com `codigo` (provedor/rede) continua
+`provedor_indisponivel`; exceção sem `codigo` vira `erro_interno` com a
+causa real na etapa (`erro interno na busca (TypeError)`). Estado segue
+`indisponivel` (a busca realmente não aconteceu).
+
+Testes: `tests/test_research_v57.py` (3 casos).
+
 ## FASE 7 — JDUI (incremento 1 concluído)
 
 1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.
@@ -173,15 +198,18 @@ penalidade.
 
 ## FASE 9 — Benchmark independente (concluído)
 
-`benchmarks/pesquisa_v57_v1.json` (fixtures congeladas, 27 casos) +
+`benchmarks/pesquisa_v57_v1.json` (fixtures congeladas, 29 casos) +
 `tools/bench_pesquisa_v57.py` (runner determinístico, provedores injetados,
 sem rede) + `tests/test_bench_pesquisa_v57.py` (wrapper pytest que exige
 aprovação total). Grupos: reformulação (8), termos de correspondência (4),
 fluxo junk→reformulação na mesma fonte (1), republicações (2), marca/specs
-de shopping (5), specs pareadas (2), links do card (5).
+de shopping (5), specs pareadas (2), links do card (5), conteúdo
+desatualizado em consulta temporal (2).
 
-Resultado 2026-10-17 (offline): **27/27, taxa global 1.0**; artefato
-`qa-artifacts/v57/bench-pesquisa-v57-2026-10-17.json`. Sondas reais no mesmo
+Resultado 2026-10-18 (offline): **29/29, taxa global 1.0** (inclui o grupo
+`desatualizado`, 2 casos); artefato
+`qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (o de 2026-10-17 fica
+como histórico, 27 casos). Sondas reais no mesmo
 artefato: `como funciona o freio ABS` → `correspondencia 1.0`, `estado ok`,
 top3 = bemotors/deltafiat/karhub (artigos de freio ABS), etapas com
 `bing (consulta reformulada 'freio ABS'): 6 resultados`.
@@ -194,10 +222,11 @@ Como comparar antes/depois: o baseline "antes" está na FASE 1 acima
 
 - Fontes primárias e reclassificação por assunto quando a primeira rodada
   tem só índice geral.
-- Conteúdo desatualizado em consultas temporais (usar `pubDate`/ano com
-  honestidade).
 - Critérios de parada por ganho real de informação (novos domínios/temas
   cobertos), não só quantidade.
+
+(Conteúdo desatualizado — antigo item desta lista — está no incremento 3
+acima; P6 no incremento 4.)
 
 ## Evidências (comandos)
 
@@ -208,7 +237,7 @@ Como comparar antes/depois: o baseline "antes" está na FASE 1 acima
   salvas em `%TEMP%\opencode\bing2_*.xml` para inspeção.
 - Após o incremento 1: `test_search_orchestrator_v57.py` 7/7 verde e
   `pesquisar_com_recuperacao` real com correspondência 1.0 (saída acima).
-- FASE 9 (benchmark): `python tools/bench_pesquisa_v57.py` (offline 27/27;
+- FASE 9 (benchmark): `python tools/bench_pesquisa_v57.py` (offline 29/29;
   `--real` acrescenta sondas de rede) e `pytest -q tests/test_bench_pesquisa_v57.py`.
 - FASE 5 (trecho): `pytest -q tests/test_web_extract_v57.py` 4/4; prova real
   no mesmo probe da Wikipédia (trecho do corpo do artigo).

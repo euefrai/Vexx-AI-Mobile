@@ -111,5 +111,36 @@
      "produto": {"link_veredito": "reprovado"}, "selo_contem": "REPROVADO"},
     {"caso": "selo_nao_verificado",
      "produto": {}, "selo_contem": "não verificado"}
+  ],
+  "desatualizado": [
+    {
+      "consulta": "eleições 2026",
+      "temporal": false,
+      "itens": [
+        {"titulo": "Eleições 2026: calendário oficial", "url": "https://t.example/novo",
+         "trecho": "calendário do pleito", "data": "Fri, 10 Jan 2026 00:00:00 GMT",
+         "origem": "bing", "tipo": "noticia"},
+        {"titulo": "Eleições 2018: retrospecto do pleito", "url": "https://t.example/velho",
+         "trecho": "como foi a eleição", "data": "Mon, 01 Jan 2018 00:00:00 GMT",
+         "origem": "bing", "tipo": "noticia"},
+        {"titulo": "Como votar nas eleições", "url": "https://t.example/sem-data",
+         "trecho": "passo a passo", "origem": "bing", "tipo": "pagina"}
+      ],
+      "esperado": {"https://t.example/velho": "desatualizado",
+                   "https://t.example/novo": "atual",
+                   "https://t.example/sem-data": "neutro"},
+      "primeiro": "https://t.example/novo"
+    },
+    {
+      "consulta": "freio ABS",
+      "temporal": false,
+      "itens": [
+        {"titulo": "Freio ABS: o que é", "url": "https://f.example/a",
+         "trecho": "sistema de freios", "data": "Mon, 01 Jan 2015 00:00:00 GMT",
+         "origem": "bing", "tipo": "pagina"}
+      ],
+      "esperado": {"https://f.example/a": "neutro"},
+      "primeiro": ""
+    }
   ]
 }

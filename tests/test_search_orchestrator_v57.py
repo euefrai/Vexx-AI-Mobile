@@ -142,3 +142,52 @@ def test_titulos_curtos_nao_sao_tratados_como_republicacao():
     b = {"titulo": "Freio ABS", "url": "https://y.example/b", "trecho": ""}
     unicos, _ = orch.deduplicar([a, b])
     assert len(unicos) == 2
+
+
+# ── Conteúdo desatualizado em consultas temporais (V5.7) ─────────────
+
+def test_conteudo_desatualizado_e_sinalizado_nao_apagado(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [
+            {"titulo": "Eleições 2026: calendário oficial",
+             "url": "https://t.example/novo", "trecho": "calendário do pleito",
+             "data": "Fri, 10 Jan 2026 00:00:00 GMT", "origem": "bing",
+             "tipo": "noticia"},
+            {"titulo": "Eleições 2018: como foi o pleito",
+             "url": "https://t.example/velho", "trecho": "retrospecto do pleito",
+             "data": "Mon, 01 Jan 2018 00:00:00 GMT", "origem": "bing",
+             "tipo": "noticia"},
+        ]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("eleições 2026", provedores=["bing"], orcamento=ORC)
+    por_url = {a["url"]: a for a in res["achados"]}
+    assert por_url["https://t.example/velho"].get("desatualizado") is True
+    assert por_url["https://t.example/velho"].get("ano") == 2018
+    assert por_url["https://t.example/novo"].get("desatualizado") is False
+    assert "https://t.example/velho" in res["desatualizados"]
+    assert len(res["achados"]) == 2  # rebaixado, nunca apagado
+    assert res["achados"][0]["url"] == "https://t.example/novo"
+
+
+def test_sem_data_conhecida_nao_acusa_desatualizado(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [{"titulo": "Como votar nas eleições", "url": "https://s.example/a",
+                 "trecho": "passo a passo", "origem": "bing", "tipo": "pagina"}]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("eleições 2026", provedores=["bing"], orcamento=ORC)
+    assert res["achados"][0].get("desatualizado") is None
+    assert res["desatualizados"] == []
+
+
+def test_consulta_sem_recorte_temporal_nao_marca_nada(monkeypatch):
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        return [{"titulo": "Freio ABS: o que é", "url": "https://f.example/a",
+                 "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina",
+                 "data": "Mon, 01 Jan 2015 00:00:00 GMT"}]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    res = orch.pesquisar("freio ABS", provedores=["bing"], orcamento=ORC)
+    assert res["achados"][0].get("desatualizado") is None
+    assert res["desatualizados"] == []
