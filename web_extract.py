@@ -474,6 +474,16 @@ def extrair_tabelas(pagina: str, limite: int = 5, linhas: int = 40) -> list:
 
 
 # ── Trecho usado (proveniência) e legibilidade ─────────────────────
+_REFS_RX = re.compile(
+    r"consultado em|c[oó]pia arquivada|acesso em|dispon[ií]vel em|recuperado em|"
+    r"arquivad[oa]|isbn|doi\s*:|\u2191|[\u00ab\u00bb]", re.I)
+
+
+def _penalidade_citacoes(pedaco: str) -> float:
+    """Referências/bibliografia não são conteúdo: descontam do trecho (V5.7)."""
+    return min(30.0, len(_REFS_RX.findall(pedaco)) * 3.0)
+
+
 def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     """Trecho literal que melhor cobre os termos da consulta (sem gerar texto)."""
     texto = _normalizar(texto)
@@ -490,6 +500,7 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         pontos = sum(len(t) for t in termos if t in baixo)
         frases = pedaco.count(". ") + (1 if pedaco.endswith(".") else 0)
         pontos += frases * 3
+        pontos -= _penalidade_citacoes(pedaco)
         if pontos > melhor_pontos:
             melhor, melhor_pontos = pedaco, pontos
     return (melhor or texto[:janela]).strip()

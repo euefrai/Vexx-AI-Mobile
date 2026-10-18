@@ -1,0 +1,115 @@
+{
+  "versao": "v57-v1",
+  "criado_em": "2026-10-17",
+  "nota": "Fixtures congeladas do benchmark da pesquisa V5.7. Nenhuma rede: os casos rodam contra as funcoes reais com provedores injetados. Baseline 'antes' registrado em docs/V5_7_PROGRESS.md (auditoria fase 1).",
+  "reformulacao": [
+    {"entrada": "como funciona o freio ABS", "esperado": "freio ABS"},
+    {"entrada": "o que é fotossíntese", "esperado": "fotossíntese"},
+    {"entrada": "quanto custa a placa a?", "esperado": "placa"},
+    {"entrada": "como funciona o motor 1.0 de 3 cilindros", "esperado": "motor 1.0 de 3 cilindros"},
+    {"entrada": "freio ABS", "esperado": ""},
+    {"entrada": "qual o melhor preço?", "esperado": ""},
+    {"entrada": "notebook lenovo ideapad 3i", "esperado": ""},
+    {"entrada": "como funciona", "esperado": ""}
+  ],
+  "correspondencia": [
+    {"consulta": "como funciona o freio ABS", "termos": ["freio", "abs"]},
+    {"consulta": "o que faz um sensor de chuva", "termos": ["sensor", "chuva"]},
+    {"consulta": "preço fone bluetooth até R$ 500", "termos": ["fone", "bluetooth", "500"]},
+    {"consulta": "qual o melhor preço?", "termos": []}
+  ],
+  "fluxo_junk": [
+    {
+      "consulta": "como funciona o freio ABS",
+      "junk": {"titulo": "Funciona - Dicionário Online", "url": "https://dicio.example/funciona", "trecho": "conjugação do verbo funciona"},
+      "reais": [
+        {"titulo": "Freio ABS: o que é e como funciona", "url": "https://auto.example/abs", "trecho": "sistema de freio ABS com sensor de rotação"},
+        {"titulo": "Freio ABS — Wikipédia", "url": "https://pt.wikipedia.org/wiki/Freio_ABS", "trecho": "freio antibloqueio"}
+      ],
+      "esperado": {"correspondencia_min": 0.5, "estado_em": ["ok", "parcial"],
+                   "url_real_presente": "https://auto.example/abs", "etapa_contem": "consulta reformulada"}
+    }
+  ],
+  "republicacao": [
+    {
+      "itens": [
+        {"titulo": "Governo anuncia novo pacote de incentivos para carros elétricos no país", "url": "https://portal-a.example/n/pacote", "trecho": "primeira versão"},
+        {"titulo": "Governo anuncia novo pacote de incentivos para carros elétricos no país", "url": "https://portal-b.example/2026/pacote", "trecho": "replica"},
+        {"titulo": "Análise: carros elétricos mudam o mercado em 2026", "url": "https://portal-c.example/analise", "trecho": "análise"}
+      ],
+      "esperado_unicos": ["https://portal-a.example/n/pacote", "https://portal-c.example/analise"],
+      "esperado_republicacoes": ["https://portal-b.example/2026/pacote"],
+      "esperado_descarte_contem": "republicação de"
+    },
+    {
+      "itens": [
+        {"titulo": "Freio ABS", "url": "https://x.example/a", "trecho": ""},
+        {"titulo": "Freio ABS", "url": "https://y.example/b", "trecho": ""}
+      ],
+      "esperado_unicos": ["https://x.example/a", "https://y.example/b"],
+      "esperado_republicacoes": [],
+      "esperado_descarte_contem": ""
+    }
+  ],
+  "produtos": [
+    {
+      "caso": "marca_diferente",
+      "produto": {"nome": "Notebook Asus Vivobook Go 15 16GB 512GB", "marca": "Loja Asus", "preco": 3600.0, "preco_texto": "R$ 3.600,00"},
+      "criterios": {"orcamento": {}, "specs": {}, "marcas": ["lenovo"]},
+      "dentro": false,
+      "codigos": ["marca_diferente"],
+      "alternativa_contem": "outra marca: asus"
+    },
+    {
+      "caso": "marca_no_nome_mesmo_com_loja_errada",
+      "produto": {"nome": "Notebook Lenovo IdeaPad Slim 3 8GB 512GB", "marca": "KaBuM!", "preco": 3500.0, "preco_texto": "R$ 3.500,00"},
+      "criterios": {"orcamento": {}, "specs": {}, "marcas": ["lenovo"]},
+      "dentro": true,
+      "codigos": [],
+      "alternativa_contem": ""
+    },
+    {
+      "caso": "marca_nao_confirmada",
+      "produto": {"nome": "Notebook 15.6 polegadas 8GB 512GB", "marca": "KaBuM!", "preco": 3000.0, "preco_texto": "R$ 3.000,00"},
+      "criterios": {"orcamento": {}, "specs": {}, "marcas": ["lenovo"]},
+      "dentro": false,
+      "codigos": ["marca_nao_confirmada"],
+      "alternativa_contem": "marca não confirmada"
+    },
+    {
+      "caso": "ram_pequena_nao_e_armazenamento",
+      "produto": {"nome": "Notebook Lenovo LOQ 16GB RAM SSD 512GB", "marca": "Lenovo", "preco": 5000.0, "preco_texto": "R$ 5.000,00"},
+      "criterios": {"orcamento": {}, "specs": {"armazenamento_gb": 512}, "marcas": ["lenovo"]},
+      "dentro": true,
+      "codigos": [],
+      "alternativa_contem": ""
+    },
+    {
+      "caso": "armazenamento_menor_fica_fora_com_diferenca",
+      "produto": {"nome": "Notebook Lenovo IdeaPad 8GB RAM SSD 256GB", "marca": "Lenovo", "preco": 3000.0, "preco_texto": "R$ 3.000,00"},
+      "criterios": {"orcamento": {}, "specs": {"armazenamento_gb": 512}, "marcas": ["lenovo"]},
+      "dentro": false,
+      "codigos": ["armazenamento_abaixa"],
+      "alternativa_contem": "armazenamento 256GB"
+    }
+  ],
+  "specs": [
+    {"texto": "notebook lenovo ideapad 3i 8gb 512gb", "categoria": "notebook",
+     "ram": 8, "armazenamento": 512},
+    {"texto": "fone bluetooth 8gb 512gb", "categoria": "fone", "ram": null, "armazenamento": null}
+  ],
+  "links": [
+    {"caso": "url_item_vence_listagem",
+     "produto": {"url": "https://loja.example/c/notebooks", "url_item": "https://loja.example/produto/9"},
+     "esperado": "https://loja.example/produto/9"},
+    {"caso": "sem_url_item_cai_para_pagina",
+     "produto": {"url": "https://loja.example/c/notebooks", "url_item": ""},
+     "esperado": "https://loja.example/c/notebooks"},
+    {"caso": "selo_listagem",
+     "produto": {"item_de_listagem": true}, "selo_contem": "listagem"},
+    {"caso": "selo_reprovado",
+     "produto": {"link_veredito": "reprovado"}, "selo_contem": "REPROVADO"},
+    {"caso": "selo_nao_verificado",
+     "produto": {}, "selo_contem": "não verificado"}
+  ]
+}

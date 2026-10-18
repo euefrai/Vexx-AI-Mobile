@@ -143,6 +143,46 @@ selo de link já distingue verificado / parcial / REPROVADO / não verificado.
 
 Testes novos: `tests/test_shopping_v57.py` (8 casos, sem rede).
 
+## FASE 5 — Leitura e trechos (incremento 1 concluído)
+
+Problema real reproduzido (2026-10-17): em artigos com seção de referências
+(pt.wikipedia.org/wiki/Freio_ABS), o `trecho_usado` exibido vinha de
+"Consultado em … Cópia arquivada …" — citações mencionam o tema em frases
+curtas e ganhavam o ranking de palavras-chave do `melhor_trecho`.
+
+Correção em `web_extract.py`:
+
+1. `_penalidade_citacoes()` (nova): janelas com marcadores de referência
+   (consultado em, cópia arquivada, acesso em, ISBN, doi:, `«»`, `↑`)
+   perdem pontos no `melhor_trecho` (3 por marcador, teto 30) — referência
+   não é conteúdo.
+2. Após a correção, a mesma página real passa a entregar trecho do corpo
+   ("as rodas estarão travadas. Dessa maneira, o ABS irá reduzir
+   significativamente as chances de derrapagem…").
+
+Testes: `tests/test_web_extract_v57.py` (4 casos, sem rede) — trecho não vem
+de referências, fallback sem termos, escolha por termo preservada e teto da
+penalidade.
+
+## FASE 9 — Benchmark independente (concluído)
+
+`benchmarks/pesquisa_v57_v1.json` (fixtures congeladas, 27 casos) +
+`tools/bench_pesquisa_v57.py` (runner determinístico, provedores injetados,
+sem rede) + `tests/test_bench_pesquisa_v57.py` (wrapper pytest que exige
+aprovação total). Grupos: reformulação (8), termos de correspondência (4),
+fluxo junk→reformulação na mesma fonte (1), republicações (2), marca/specs
+de shopping (5), specs pareadas (2), links do card (5).
+
+Resultado 2026-10-17 (offline): **27/27, taxa global 1.0**; artefato
+`qa-artifacts/v57/bench-pesquisa-v57-2026-10-17.json`. Sondas reais no mesmo
+artefato: `como funciona o freio ABS` → `correspondencia 1.0`, `estado ok`,
+top3 = bemotors/deltafiat/karhub (artigos de freio ABS), etapas com
+`bing (consulta reformulada 'freio ABS'): 6 resultados`.
+
+Como comparar antes/depois: o baseline "antes" está na FASE 1 acima
+(6/6 dicionário, correspondência 0.333) e a reprodução é
+`python tools/bench_pesquisa_v57.py --real` no commit anterior vs. atual.
+
 ### Próximos incrementos planejados (FASE 2)
 
 - Fontes primárias e reclassificação por assunto quando a primeira rodada
@@ -161,3 +201,7 @@ Testes novos: `tests/test_shopping_v57.py` (8 casos, sem rede).
   salvas em `%TEMP%\opencode\bing2_*.xml` para inspeção.
 - Após o incremento 1: `test_search_orchestrator_v57.py` 7/7 verde e
   `pesquisar_com_recuperacao` real com correspondência 1.0 (saída acima).
+- FASE 9 (benchmark): `python tools/bench_pesquisa_v57.py` (offline 27/27;
+  `--real` acrescenta sondas de rede) e `pytest -q tests/test_bench_pesquisa_v57.py`.
+- FASE 5 (trecho): `pytest -q tests/test_web_extract_v57.py` 4/4; prova real
+  no mesmo probe da Wikipédia (trecho do corpo do artigo).

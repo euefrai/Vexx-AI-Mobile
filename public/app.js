@@ -39,14 +39,6 @@ function newId() { return crypto.randomUUID ? crypto.randomUUID() : (Date.now().
 function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3200); }
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 function validUrl(u) { try { const p = new URL(String(u).trim(), location.href); return (p.protocol === 'http:' || p.protocol === 'https:' || p.protocol === 'data:') ? p.href : ''; } catch (_) { return ''; } }
-function rotuloUrl(u) {
-  try {
-    const p = new URL(String(u));
-    const caminho = (p.pathname || '').replace(/\/$/, '');
-    const curto = caminho.length > 32 ? caminho.slice(0, 29) + '...' : caminho;
-    return p.hostname.replace(/^www\./, '') + curto;
-  } catch (_) { return String(u).length > 44 ? String(u).slice(0, 41) + '...' : String(u); }
-}
 function fmtTime(iso) { try { const d = new Date(iso); return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); } catch (_) { return ''; } }
 
 /* ----- Drawer ----- */
@@ -401,6 +393,14 @@ function titleFrom(t) { return String(t || '').replace(/\s+/g, ' ').trim().slice
 /* ----- Markdown rico e seguro ----- */
 const ESC_DIV = document.createElement('div');
 function escapeHtml(t) { ESC_DIV.textContent = t; return ESC_DIV.innerHTML; }
+function rotuloUrl(u) {
+  try {
+    const p = new URL(String(u));
+    const caminho = (p.pathname || '').replace(/\/$/, '');
+    const curto = caminho.length > 32 ? caminho.slice(0, 29) + '...' : caminho;
+    return p.hostname.replace(/^www\./, '') + curto;
+  } catch (_) { return String(u).length > 44 ? String(u).slice(0, 41) + '...' : String(u); }
+}
 function inlineFmt(s, sources = {}) {
   const tokens = [];
   const keep = html => '\u0001INLINE' + (tokens.push(html) - 1) + '\u0001';
