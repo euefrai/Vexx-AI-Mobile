@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 
 import docs_agent
 import model3d
+import model3d_research
 import env_local
 env_local.carregar_env_local()  # .env local do PC (nunca sobrescreve o sistema)
 from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
@@ -3273,8 +3274,10 @@ def cmd_dados_atuais(db, texto, owner, conv, contexto):
     return live_data.respond(texto, contexto)
 
 
-def cmd_model3d(db, texto, owner, conv, scene_state=''):
-    """Referências 3D restritas ao dono e à conversa; sem LLM/rede/controle remoto."""
+def cmd_model3d(db, texto, owner, conv, scene_state='', pesquisa_web=False):
+    """Referências 3D restritas ao dono e à conversa; sem LLM/controle remoto.
+
+    Rede só na geração aproximada opcional (`pesquisa_web`), fora do catálogo."""
     request = model3d.request(texto)
     if not request:
         return None
@@ -3339,6 +3342,22 @@ def cmd_model3d(db, texto, owner, conv, scene_state=''):
     if not result:
         return None
     text, props = result
+    if props is None and pesquisa_web and request.get('action') == 'create' and request.get('topic'):
+        # V5.6: assunto fora do catálogo → aproximação rotulada vinda de fontes públicas.
+        try:
+            aproximado = model3d_research.gerar(request['topic'])
+        except Exception:
+            aproximado = None
+        if aproximado:
+            if aproximado.get('precision') == 'aproximado':
+                text = ('Preparei um modelo aproximado a partir de referências públicas; as proporções vêm '
+                        'de medidas citadas nas fontes e podem conter imprecisões. Não é CAD nem modelo '
+                        'oficial. Abra o 3D para explorar as partes.')
+            else:
+                text = ('Preparei um modelo conceitual: as fontes consultadas não confirmaram medidas, então '
+                        'a forma é genérica e educativa. Não é CAD nem modelo oficial. Abra o 3D para '
+                        'explorar as partes.')
+            props = aproximado
     if props:
         ok, normalized, errors = jdui.validar_mensagem({'version': jdui.VERSION,
             'blocks': [{'type': 'ui', 'component': 'model3d', 'props': props}]})
@@ -3364,7 +3383,8 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}))
     if atual:
         return ai_resposta_direta(db, mid, conv, modelo, prep['reply_id'], atual, owner)
-    model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
+    model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''),
+                                 pesquisa_web=bool(cfg.get("pesquisa_web", True)))
     if model_response:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
@@ -3531,7 +3551,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             direct = ai_resposta_direta(db, mid, conv, modelo, prep['reply_id'], atual, owner)
             enviar_ws(websocket, {'request_id':request_id,'type':'ai_done',**direct})
             return
-        model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''))
+        model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''),
+                                     pesquisa_web=bool(cfg.get("pesquisa_web", True)))
         if model_response:
             direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
             enviar_ws(websocket, {"request_id": request_id, "type": "ai_done", **direct})

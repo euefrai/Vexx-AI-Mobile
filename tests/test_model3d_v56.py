@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 import jdui
 import model3d
+import model3d_research
 from model3d_education import scene
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -301,4 +302,112 @@ def test_v56_fluxo_de_dispositivo_continuacoes_e_isolamento(tmp_path, monkeypatc
     proprio = unpack(pc_agent.cmd_model3d(db, 'Amplie.', 'u-alice', 'conv-v56'))
     assert proprio['id'] == p3['id']
     assert proprio['camera']['distance'] < p3['camera']['distance']
+    db.close()
+
+
+# --- FASE 4/5/6.4: geração aproximada por pesquisa pública ---
+
+def buscar_com_medidas(consulta, limite):
+    return [
+        {'titulo': 'Aspirador robô X1 32,5 x 32,5 x 9,7 cm',
+         'url': 'https://exemplo.com/ficha', 'trecho': 'Dimensões: 32,5 x 32,5 x 9,7 cm.'},
+        {'titulo': 'Review', 'url': 'https://www.review.net/a', 'trecho': 'Bateria de 5200 mAh.'},
+    ]
+
+
+def test_v56_pesquisa_medidas_viram_aproximado_rotulado():
+    model3d_research.limpar_cache()
+    s = model3d_research.gerar('aspirador de robo', buscar=buscar_com_medidas)
+    validado = model3d.validate(s)
+    assert validado['id'].startswith('aprox-') and validado['education'] == 'device'
+    assert validado['precision'] == 'aproximado'
+    assert validado['source'].startswith('Aproximado por referências públicas — ')
+    assert 'exemplo.com' in validado['source'] and 'review.net' in validado['source']
+    corpo = next(o for o in validado['objects'] if o['id'] == 'corpo')
+    # Listagens de disco vêm como L×P×A: a menor medida vira altura.
+    assert corpo['dimensions'][1] == min(corpo['dimensions'])
+    assert corpo['dimensions'][0] == pytest.approx(2.4)
+    assert len(validado['steps']) >= 3
+    assert 'não é cad' in validado['description'].lower()
+    ok, _n, erros = jdui.validar_mensagem({'version': jdui.VERSION, 'blocks': [
+        {'type': 'ui', 'component': 'model3d', 'props': s}]})
+    assert ok and not erros
+    assert len(json.dumps(s, ensure_ascii=False, separators=(',', ':')).encode('utf-8')) <= 20000
+
+
+def test_v56_pesquisa_sem_medidas_vira_conceitual():
+    model3d_research.limpar_cache()
+
+    def sem_medida(consulta, limite):
+        return [{'titulo': 'TV 55 polegadas', 'url': 'https://loja.com.br/tv', 'trecho': 'Smart TV 4K.'}]
+
+    s = model3d_research.gerar('tv', buscar=sem_medida)
+    assert s['precision'] == 'conceitual'
+    assert s['source'].startswith('Modelo conceitual educativo — ')
+    assert 'não confirmaram medidas' in s['description']
+    assert model3d.validate(s)['education'] == 'device'
+
+
+def test_v56_pesquisa_sem_fontes_ou_rede_fora_e_limite_honesto():
+    model3d_research.limpar_cache()
+    assert model3d_research.gerar('liquidificador', buscar=lambda c, l: []) is None
+    model3d_research.limpar_cache()
+
+    def explode(consulta, limite):
+        raise RuntimeError('rede fora')
+
+    assert model3d_research.gerar('liquidificador', buscar=explode) is None
+    chamadas = []
+
+    def conta(consulta, limite):
+        chamadas.append(consulta)
+        return []
+
+    # Sem template defensável não há busca: evita scraping inútil.
+    assert model3d_research.gerar('dragão', buscar=conta) is None
+    assert chamadas == []
+
+
+def test_v56_pesquisa_cache_unidades_mm_e_polegadas():
+    model3d_research.limpar_cache()
+    chamadas = {'n': 0}
+
+    def conta(consulta, limite):
+        chamadas['n'] += 1
+        return [{'titulo': 'Furadeira 430 x 320 x 90 mm', 'url': 'https://a.org/x', 'trecho': ''}]
+
+    s1 = model3d_research.gerar('furadeira', buscar=conta)
+    s2 = model3d_research.gerar('furadeira', buscar=conta)
+    assert chamadas['n'] == 1 and s2 == s1
+    corpo = next(o for o in s1['objects'] if o['id'] == 'corpo')
+    assert corpo['dimensions'][0] == pytest.approx(2.4)
+    assert corpo['dimensions'][1] == pytest.approx(320 / 430 * 2.4, abs=0.01)
+    model3d_research.limpar_cache()
+
+    def polegadas(consulta, limite):
+        return [{'titulo': '', 'url': 'https://b.net/y', 'trecho': 'Geladeira pequena 12 x 8 x 4 polegadas'}]
+
+    s3 = model3d_research.gerar('geladeira pequena', buscar=polegadas)
+    dims = next(o for o in s3['objects'] if o['id'] == 'corpo')['dimensions']
+    assert dims == pytest.approx([2.4, 1.6, 0.8], abs=0.01)
+
+
+def test_v56_pesquisa_no_fluxo_do_pc_agent_sem_llm(tmp_path, monkeypatch):
+    import pc_agent
+    model3d_research.limpar_cache()
+    monkeypatch.setattr(model3d_research, '_buscar_padrao', buscar_com_medidas)
+    monkeypatch.setattr(pc_agent, 'gerar_texto',
+                        lambda *a, **k: pytest.fail('Geração 3D não pode usar LLM'))
+    db = pc_agent.open_db(tmp_path / 'v56r.sqlite3')
+    out = pc_agent.ai_completa(db, {'message_id': 'v56r-user-01', 'conversation_id': 'conv-v56r',
+                                    'owner': 'u-alice', 'text': 'me mostre um aspirador de robô em 3D'},
+                               {'model': 'test'})
+    props = unpack(out['response_text'])
+    assert props['id'].startswith('aprox-') and props['precision'] == 'aproximado'
+    assert 'modelo aproximado' in out['response_text']
+    # Web desligada (padrão do canal direto): sem fonte, só a limitação honesta.
+    sem_pesquisa = pc_agent.cmd_model3d(db, 'me mostre um liquidificador em 3D', 'u-alice', 'conv-v56r2')
+    assert sem_pesquisa and '```jdui' not in sem_pesquisa
+    # Outro dono não herda a cena aproximada.
+    assert pc_agent.cmd_model3d(db, 'Amplie.', 'u-bob', 'conv-v56r') is None
     db.close()
