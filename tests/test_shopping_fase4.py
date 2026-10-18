@@ -10,6 +10,7 @@ Regras testadas (sem rede; tudo local):
 - a busca inclui a referência pedida (modelo), sem descartá-la.
 """
 
+import source_check
 import shopping
 
 
@@ -314,3 +315,127 @@ def test_resumo_verificacao_conta_codigos_de_descarte():
 def test_resumo_verificacao_retrocompativel_sem_listas():
     r = shopping._resumo_verificacao([])
     assert set(r) == {"links", "imagens"}  # sem listas, saída antiga intacta
+
+
+# ── URLs: home/categoria e link do item não aberto ─────────────────────
+
+def test_url_de_listagem_pega_raiz_e_busca():
+    assert source_check.url_de_listagem("https://loja.com")
+    assert source_check.url_de_listagem("https://loja.com/")
+    assert source_check.url_de_listagem("https://loja.com/busca?q=x")
+    assert source_check.url_de_listagem("https://loja.com/categoria/notebooks")
+    assert not source_check.url_de_listagem("https://loja.com/produto/x")
+    # /catalogo é caminho de produto em muitas lojas — não rebaixar
+    assert not source_check.url_de_listagem("https://loja.com/catalogo/notebook-x")
+    assert not source_check.url_de_listagem("")
+
+
+def _baixar(mapa):
+    def _fn(url):
+        return {"final": url, "texto": mapa.get(url, "<html></html>")}
+    return _fn
+
+
+_PAGINA_HOME = (
+    '<html><head><title>Loja Certa — ofertas</title></head><body>'
+    + "".join(f"<div>Produto K R$ 1.0{i:02d},00</div>" for i in range(7))
+    + '<script type="application/ld+json">'
+    '{"@type":"Product","name":"Notebook A 16GB",'
+    '"url":"https://loja.com/produto/a",'
+    '"offers":{"@type":"Offer","price":"999.00","priceCurrency":"BRL"}}'
+    '</script></body></html>')
+
+
+def test_home_com_carrossel_vira_listagem():
+    aval = source_check.avaliar_pagina(_PAGINA_HOME, "https://loja.com/",
+                                       esperado={"tipo": "produto"})
+    assert aval["codigo"] == "listagem_nao_produto"
+    assert aval["sinais"]["eh_listagem"] is True
+
+
+def test_home_com_carrossel_so_entra_com_url_do_item():
+    fn = _baixar({"https://loja.com/": _PAGINA_HOME})
+    saidas = shopping._recuperar_ofertas("https://loja.com/", "Home",
+                                         baixar_fn=fn, consulta="notebook")
+    assert [p["nome"] for p in saidas] == ["Notebook A 16GB"]
+    p = saidas[0]
+    assert p["item_de_listagem"] is True
+    assert p["link_veredito"] == "nao_verificado"
+    assert p["url_item"] == "https://loja.com/produto/a"
+
+
+def test_home_sem_url_do_item_nao_vira_card():
+    pagina = _PAGINA_HOME.replace('"url":"https://loja.com/produto/a",', "")
+    fn = _baixar({"https://loja.com/": pagina})
+    assert shopping._recuperar_ofertas("https://loja.com/", "Home",
+                                       baixar_fn=fn, consulta="notebook") == []
+
+
+def test_mesmo_recurso_normaliza_variacoes():
+    assert shopping._mesmo_recurso("https://www.loja.com/produto/x/",
+                                   "https://loja.com/produto/x?utm=1")
+    assert not shopping._mesmo_recurso("https://loja.com/produto/x",
+                                       "https://loja.com/produto/y")
+    assert not shopping._mesmo_recurso("", "https://loja.com/produto/x")
+
+
+def test_item_declarado_em_outra_pagina_nao_marca_verificado():
+    pagina = ('<html><head><title>Notebook B — Oferta</title>'
+              '<meta property="og:type" content="product">'
+              '<script type="application/ld+json">'
+              '{"@type":"Product","name":"Notebook B 16GB RAM",'
+              '"url":"https://outroloja.com/produto/b",'
+              '"offers":{"@type":"Offer","price":"3499.00","priceCurrency":"BRL"}}'
+              '</script></head><body><h1>Notebook B</h1>'
+              '<button>Adicionar ao carrinho</button></body></html>')
+    fn = _baixar({"https://agregador.com/oferta/1": pagina})
+    saidas = shopping._recuperar_ofertas("https://agregador.com/oferta/1", "T",
+                                         baixar_fn=fn, consulta="notebook")
+    assert len(saidas) == 1
+    p = saidas[0]
+    assert p["link_veredito"] == "nao_verificado"
+    assert p["link_codigo"] == "item_nao_aberto"
+    assert p["item_de_listagem"] is False
+    assert p["url_item"] == "https://outroloja.com/produto/b"
+    assert "não foi aberta" in p["link_motivo"]
+
+
+def test_montar_prefere_link_de_item_a_home_declarada():
+    ex = {"nome": "X", "marca": "", "modelo": "", "variante": "", "imagem": "",
+          "descricao": "", "avaliacao": None, "n_avaliacoes": None,
+          "url_produto": "https://loja.com/",
+          "ofertas_ld": [{"preco": 100.0, "moeda": "BRL", "preco_confirmado": True,
+                          "disponibilidade": "em_estoque",
+                          "url_oferta": "https://loja.com/produto/x",
+                          "loja": "", "valido_ate": ""}]}
+    p = shopping.montar_produto(ex, "https://loja.com/", "https://loja.com/", "t")
+    assert p["url_item"] == "https://loja.com/produto/x"
+    # sem alternativa melhor, a URL declarada é mantida (nunca inventa)
+    ex2 = {**ex, "ofertas_ld": []}
+    p2 = shopping.montar_produto(ex2, "https://loja.com/", "https://loja.com/", "t")
+    assert p2["url_item"] == "https://loja.com/"
+
+
+def test_selo_explica_item_nao_aberto():
+    p = _p("N", link_veredito="nao_verificado", link_codigo="item_nao_aberto")
+    assert "não foi aberto" in shopping._selo_verificacao(p)
+
+
+# ── Hardening: JSON-LD patológico não derruba a extração ──────────────
+
+def test_jsonld_profundo_demais_nao_derruba_extracao():
+    fundo = "[" * 5000 + "]" * 5000
+    pagina = ('<script type="application/ld+json">'
+              '{"@type":"Product","name":"P","lixo":' + fundo + '}</script>')
+    assert shopping.extrair_ofertas_jsonld(pagina) == []
+
+
+def test_pagina_com_jsonld_profundo_avalia_sem_quebrar():
+    fundo = "[" * 5000 + "]" * 5000
+    pagina = ('<html><head><title>P</title></head><body><h1>P</h1>'
+              '<script type="application/ld+json">'
+              '{"@type":"Product","name":"P","lixo":' + fundo + '}</script>'
+              '</body></html>')
+    aval = source_check.avaliar_pagina(pagina, "https://loja.com/produto/x",
+                                       esperado={"tipo": "produto"})
+    assert aval["veredito"] in source_check.VEREDITOS

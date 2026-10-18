@@ -180,6 +180,11 @@ def classificar_sinais(pagina: str, url_final: str = "") -> dict:
     if _RX_URL_LISTA.search(caminho):
         pontos_l += 3
         evidencias.append("URL de busca/categoria")
+    if url_final and caminho in ("", "/"):
+        # FASE 4: raiz do site é capa/home — nunca página de produto.
+        # Guarda para URL desconhecida: só vale quando a URL foi informada.
+        pontos_l += 3
+        evidencias.append("URL raiz do site (capa, não página de produto)")
     if _RX_TXT_LISTA.search(html):
         pontos_l += 2
         evidencias.append("texto de listagem")
@@ -204,6 +209,27 @@ def classificar_sinais(pagina: str, url_final: str = "") -> dict:
             "pontos_produto": pontos_p, "pontos_listagem": pontos_l,
             "precos_visiveis": n_precos, "anuncio": anuncio,
             "evidencias": evidencias[:8]}
+
+
+_RX_URL_BUSCA_RAIZ = re.compile(
+    r"/(busca|buscar|search|pesquisa|pesquisar|categoria|category|"
+    r"resultados?)(/|\?|$|s)", re.I)
+
+
+def url_de_listagem(url: str) -> bool:
+    """URL com cara de home/busca/categoria? (heurística conservadora)
+
+    Usada só para NUNCA tratar home/listagem como página do item — nunca
+    aprova nada sozinha. `/catalogo`, `/colecao` etc. ficam de fora de
+    propósito (lojas também usam esses caminhos para produtos)."""
+    try:
+        partes = urllib.parse.urlsplit(url or "")
+    except ValueError:
+        return False
+    if not partes.netloc:
+        return False
+    caminho = partes.path or ""
+    return caminho in ("", "/") or bool(_RX_URL_BUSCA_RAIZ.search(caminho))
 
 
 # ── Imagens: formato real e dimensões (sem PIL) ────────────────────

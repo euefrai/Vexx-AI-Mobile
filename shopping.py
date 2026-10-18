@@ -636,11 +636,11 @@ def extrair_ofertas_jsonld(pagina: str) -> list:
     for m in _RX_LDJSON.finditer(pagina or ""):
         try:
             obj = json.loads(m.group(1))
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, RecursionError):
             continue
         try:
             out.extend(_nos_produto(obj))
-        except (AttributeError, TypeError):
+        except (AttributeError, TypeError, RecursionError):
             continue
         if len(out) >= 4:
             break
@@ -728,12 +728,19 @@ def montar_produto(extraido: dict, url: str, url_final: str,
     specs = extraido.get("specs") if isinstance(extraido.get("specs"), dict) else {}
     # Link do ITEM (página do produto em si): URL declarada no dado
     # estruturado > URL da 1ª oferta > página analisada. Nunca inventado.
-    item = _limpa(url_item or extraido.get("url_produto") or "", 500)
-    if not item:
-        item = next((_limpa(o.get("url_oferta"), 500) for o in ofertas
-                     if o.get("url_oferta")), "")
-    if not item:
-        item = _limpa(url_final or url, 500)
+    # FASE 4: home/busca declarada não vence um link de produto real; se
+    # for o único dado, é mantida mesmo assim (não inventamos outro).
+    candidatos = []
+    for cand in (url_item or extraido.get("url_produto") or "",
+                 *[o.get("url_oferta") for o in ofertas],
+                 url_final or url):
+        cand = _limpa(cand, 500)
+        if cand:
+            candidatos.append(cand)
+    item = next((c for c in candidatos
+                 if not source_check.url_de_listagem(c)), "")
+    if not item and candidatos:
+        item = candidatos[0]
     val = validacao if isinstance(validacao, dict) else {}
     val_codigo = _limpa(val.get("codigo"), 40)
     val_veredito = _limpa(val.get("veredito"), 24)
@@ -1400,6 +1407,26 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     return final[:2]
 
 
+def _mesmo_recurso(a: str, b: str) -> bool:
+    """As duas URLs apontam para o mesmo recurso? (host+caminho normalizados)
+
+    Ignora www., barra final, query e âncora — diferenças que não mudam a
+    página. Esquema é ignorado de propósito (http→https é o mesmo recurso).
+    """
+    def _norm(u: str) -> str:
+        try:
+            p = urllib.parse.urlsplit((u or "").strip())
+        except ValueError:
+            return ""
+        host = (p.hostname or "").lower()
+        if host.startswith("www."):
+            host = host[4:]
+        caminho = re.sub(r"/+", "/", p.path or "/").rstrip("/") or "/"
+        return f"{host}{caminho}" if host else ""
+    na, nb = _norm(a), _norm(b)
+    return bool(na) and na == nb
+
+
 def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
                        consulta: str = "") -> list:
     """Extrai produtos estruturados de 1 página, com verificação honesta.
@@ -1437,11 +1464,17 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
         for ext in extrair_ofertas_jsonld(pagina):
             ext["origem_preco"] = "jsonld"
             url_item = ext.get("url_produto") or ""
-            if listagem and not url_item:
-                continue  # listagem sem link próprio do item → fonte, não produto
             if listagem:
+                if not url_item or source_check.url_de_listagem(url_item):
+                    continue  # listagem sem link próprio do item → fonte
                 val = {"veredito": "nao_verificado", "codigo": "item_de_listagem",
                        "motivo": "item extraído de listagem; página do item não aberta"}
+            elif url_item and not _mesmo_recurso(url_item, final):
+                # O veredito vale para a página ABERTA; o link do card aponta
+                # para outra página (não aberta) → nunca marcar como verificado.
+                val = {"veredito": "nao_verificado", "codigo": "item_nao_aberto",
+                       "motivo": "link do item declarado na página analisada; "
+                                 "a página do item não foi aberta"}
             else:
                 val = aval
             try:
@@ -1692,6 +1725,8 @@ def _selo_verificacao(p: dict) -> str:
     """Rótulo curto e honesto do estado do link (nunca "ok" sem verificação)."""
     if p.get("item_de_listagem"):
         return "link do item veio de listagem (página do item NÃO aberta)"
+    if p.get("link_codigo") == "item_nao_aberto":
+        return "link do item não foi aberto (declarado em outra página)"
     v = p.get("link_veredito") or ""
     return {"verificado": "página verificada",
             "parcial": "verificação parcial",

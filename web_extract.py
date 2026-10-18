@@ -314,7 +314,7 @@ def _ldjson_objs(pagina: str) -> list:
             continue
         try:
             obj = json.loads(bruto)
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, RecursionError):
             continue
         objs.append(obj)
     return objs
@@ -341,7 +341,10 @@ def _ld_por_tipo(objs: list, tipos: set, teto: int = 8) -> list:
                 _anda(i)
 
     for obj in objs or []:
-        _anda(obj)
+        try:
+            _anda(obj)
+        except RecursionError:
+            continue
     # dedupe por identidade (id/url/headline)
     vistos, unicos = set(), []
     for o in out:
