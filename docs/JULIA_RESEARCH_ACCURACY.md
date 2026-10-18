@@ -80,15 +80,27 @@ Contratos preservados: a consulta original é sempre a primeira tentativa;
 faz **uma** rodada adicional com a consulta enxuta, soma os achados e
 recalcula correspondência; devolve `recuperou` e as `etapas` completas.
 Não declara `ok` por quantidade — estado depende de correspondência real.
-O recorte temporal (seção 7) é preservado no re-rank da recuperação.
+O ganho da rodada é **medido e declarado** (§6): `ganho_informacao` com
+`dominios_novos`/`temas_novos`/`ganho_real` e etapa
+`recuperação com/sem ganho novo` — nunca fingir melhora só porque a rodada
+rodou. O recorte temporal (seção 7) é preservado no re-rank da recuperação.
 
 ## 6. Critérios de parada (estado honesto)
 
-Hoje o orçamento é explícito: `max_consultas`, `max_provedores`,
-`min_resultados`, `timeout_total`, `max_por_provedor`, mais 1 retry
-reformulado por provedor. **Ganho real de informação** (novos domínios/temas
-cobertos por consulta adicional) ainda **não** foi implementado — declarado
-como próximo incremento, não fingido.
+Orçamento explícito: `max_consultas`, `max_provedores`, `min_resultados`,
+`timeout_total`, `max_por_provedor`, mais 1 retry reformulado por provedor.
+**Ganho real de informação** implementado (incremento 5), em dois pontos:
+
+1. **Cadeia de consultas**: com resultado útil já obtido, se a consulta
+   anterior não trouxe domínio nem tema novo, a próxima consulta não roda
+   (etapa `parada por ganho zero: …`) — evita gastar orçamento repetindo o
+   mesmo quadro.
+2. **Recuperação**: o ganho da rodada extra é medido
+   (`ganho_informacao.ganho_real`) e declarado nas etapas; ganho zero não
+   vira discurso de melhora.
+
+Medida = domínio novo (novos hosts) e tema novo (termos não-genéricos do
+pedido cobertos a mais) — quantidade de resultados não conta como ganho.
 
 ## 7. Conteúdo desatualizado e erros honestos (V5.7)
 
@@ -109,16 +121,16 @@ como próximo incremento, não fingido.
 
 - Benchmark independente offline com fixtures congeladas:
   `benchmarks/pesquisa_v57_v1.json` + `python tools/bench_pesquisa_v57.py`
-  → **29/29, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
+  → **31/31, taxa global 1.0** (reformulação 8, correspondência 4, fluxo
   junk→retry 1, republicações 2, produtos 5, specs 2, links 5,
-  desatualizado 2).
+  desatualizado 2, ganho 2).
 - Sonda real (2026-10-17), `como funciona o freio ABS`:
   - antes: 6/6 dicionários de "funciona", `correspondencia 0.333`, `estado ok`;
   - depois: `correspondencia 1.0`, topo com artigos reais de freio ABS,
     etapa `bing (consulta reformulada 'freio ABS')` registrada.
 - Artefato: `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (o de
   2026-10-17 fica como histórico, 27 casos).
-- Regressão completa: 706 passed / 4 skipped (`pytest -q tests`).
+- Regressão completa: 710 passed / 4 skipped (`pytest -q tests`).
 
 ## 9. Limites e bloqueios (sem bypass)
 
@@ -129,9 +141,9 @@ como próximo incremento, não fingido.
   honesto (`bloqueado`/`reprovado`/`parcial`).
 - Resultados de busca variam entre execuções: o benchmark determinístico
   injeta provedores; as sondas reais são **registro**, não assert.
-- Pendências declaradas: fontes primárias/reclassificação por assunto e
-  parada por ganho real de informação (seção 6). Desatualizado temporal
-  (seção 7) e P6 **corrigidos** nos incrementos 3–4.
+- Pendência declarada: fontes primárias/reclassificação por assunto quando
+  a primeira rodada traz só índice geral. Desatualizado temporal (§7), P6 e
+  parada por ganho de informação (§6) **corrigidos** nos incrementos 3–5.
 
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),

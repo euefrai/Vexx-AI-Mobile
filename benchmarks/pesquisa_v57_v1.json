@@ -142,5 +142,20 @@
       "esperado": {"https://f.example/a": "neutro"},
       "primeiro": ""
     }
+  ],
+  "ganho": [
+    {"caso": "rodada_inicial_conta_como_ganho",
+     "consulta": "freio ABS",
+     "antes_dominios": [], "antes_temas": [],
+     "itens": [{"titulo": "Freio ABS: como funciona", "url": "https://a.example/x",
+                "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina"}],
+     "ganho_real": true, "dominios_novos": ["a.example"],
+     "temas_novos": ["abs", "freio"]},
+    {"caso": "repeticao_de_dominio_e_tema_nao_e_ganho",
+     "consulta": "freio ABS",
+     "antes_dominios": ["a.example"], "antes_temas": ["abs", "freio"],
+     "itens": [{"titulo": "Freio ABS: como funciona", "url": "https://a.example/y",
+                "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina"}],
+     "ganho_real": false, "dominios_novos": [], "temas_novos": []}
   ]
 }

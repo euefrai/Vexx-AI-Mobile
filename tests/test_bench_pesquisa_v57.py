@@ -24,5 +24,6 @@ def test_bench_pesquisa_v57_offline_tudo_aprovado():
     assert rel["falhas"] == []
     assert rel["metricas"]["taxa_global"] == 1.0
     for grupo in ("reformulacao", "correspondencia", "fluxo_junk",
-                  "republicacao", "produtos", "specs", "links", "desatualizado"):
+                  "republicacao", "produtos", "specs", "links", "desatualizado",
+                  "ganho"):
         assert rel["grupos"][grupo]["aprovados"] == rel["grupos"][grupo]["total"], grupo

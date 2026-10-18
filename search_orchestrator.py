@@ -172,6 +172,30 @@ def _correspondencia(achados: list, termos: list) -> float:
     return round(sum(1 for t in termos if t in juntos) / len(termos), 3)
 
 
+def _temas_cobertos(achados: list, consulta: str) -> set:
+    """Termos do pedido (não-genéricos) cobertos por algum achado."""
+    termos = _termos_correspondencia(consulta)
+    texto = " ".join(((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
+                     for a in achados or [])
+    return {t for t in termos if t in texto}
+
+
+def _retrato(achados: list, consulta: str) -> dict:
+    """Retrato do que já foi coberto: domínios distintos e temas do pedido."""
+    dominios = {_dominio(a.get("url", "")) for a in achados or []} - {""}
+    return {"dominios": dominios, "temas": _temas_cobertos(achados, consulta)}
+
+
+def _ganho_informacao(antes: dict, achados: list, consulta: str) -> dict:
+    """Ganho real de informação desde o retrato `antes` (não é quantidade:
+    é domínio novo e tema do pedido coberto a mais)."""
+    agora = _retrato(achados, consulta)
+    novos_dominios = sorted(agora["dominios"] - set(antes.get("dominios") or ()))
+    novos_temas = sorted(agora["temas"] - set(antes.get("temas") or ()))
+    return {"dominios_novos": novos_dominios, "temas_novos": novos_temas,
+            "ganho_real": bool(novos_dominios or novos_temas)}
+
+
 def classificar(consulta: str) -> dict:
     """Assunto(s) da consulta. Só regras determinísticas explícitas."""
     t = consulta or ""
@@ -643,6 +667,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     consultas_feitas = 0
     provedor_indice = 0
     termos_c = _termos_correspondencia(consulta)
+    ultimo_ganho = True  # ganho da consulta anterior (parada por ganho zero)
 
     def _uteis() -> int:
         return sum(1 for a in achados if _util_para_pedido(a, termos_c))
@@ -673,10 +698,17 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     for i, q in enumerate(consultas):
         if _uteis() >= int(orc["min_resultados"]) and i > 0:
             break
+        if i > 0 and not ultimo_ganho and _uteis() >= 1:
+            # V5.7: parada por ganho real — a consulta anterior não trouxe
+            # domínio nem tema novo; insistir só gastaria orçamento.
+            etapas.append("parada por ganho zero: consulta anterior sem "
+                          "domínio nem tema novo")
+            break
         if time.monotonic() - t0 > float(orc["timeout_total"]):
             etapas.append("orçamento de tempo esgotado")
             break
         consultas_feitas += 1
+        retrato_antes = _retrato(achados, consulta)
         tentativa_provedor = 0
         while tentativa_provedor < 3 and provedor_indice < len(nomes):
             nome = nomes[provedor_indice]
@@ -729,6 +761,10 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 provedor_indice += 1
                 tentativa_provedor += 1
                 continue
+        # V5.7: ganho real da consulta (domínios/temas novos) alimenta a
+        # parada por ganho zero na próxima volta
+        ultimo_ganho = _ganho_informacao(retrato_antes, achados,
+                                         consulta)["ganho_real"]
         if provedor_indice >= len(nomes) and _uteis() >= int(orc["min_resultados"]):
             break
 
@@ -796,6 +832,7 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
     orc2["max_consultas"] = max(1, int(orc2.get("max_consultas", 4)) - len(res["consultas"]))
     if orc2["max_consultas"] < 1:
         orc2["max_consultas"] = 1
+    retrato_1 = _retrato(res.get("achados", []), consulta)
     extra = pesquisar(consulta, max_resultados=max_resultados, timeout=timeout,
                       orcamento=orc2, extra_queries=res["recuperacao"])
     # merge honesto: marca a rodada de recuperação nas etapas
@@ -820,6 +857,17 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
     else:
         res["estado"] = "ok" if len(merged) >= 2 else "parcial"
     res["estado_texto"] = CODIGO_TEXTO.get(res["estado"], "")
+    # V5.7: ganho real da recuperação é medido e declarado — nunca fingir
+    # melhora só porque a rodada rodou (quantidade ≠ informação nova)
+    ganho = _ganho_informacao(retrato_1, merged, consulta)
+    res["ganho_informacao"] = ganho
+    if ganho["ganho_real"]:
+        res["etapas"].append(
+            f"recuperação com ganho novo: {len(ganho['dominios_novos'])} domínio(s), "
+            f"{len(ganho['temas_novos'])} tema(s) além da 1ª rodada")
+    else:
+        res["etapas"].append("recuperação sem ganho novo: nenhum domínio/tema "
+                             "além da 1ª rodada")
     res["segundos"] = round(res.get("segundos", 0.0) + extra.get("segundos", 0.0), 2)
     res["recuperou"] = True
     return res

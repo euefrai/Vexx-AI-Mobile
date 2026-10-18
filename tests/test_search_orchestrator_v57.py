@@ -191,3 +191,85 @@ def test_consulta_sem_recorte_temporal_nao_marca_nada(monkeypatch):
     res = orch.pesquisar("freio ABS", provedores=["bing"], orcamento=ORC)
     assert res["achados"][0].get("desatualizado") is None
     assert res["desatualizados"] == []
+
+
+# ── Ganho real de informação (parada honesta, não por quantidade) ────
+
+def test_ganho_informacao_conta_dominio_e_tema_novos():
+    itens = [{"titulo": "Freio ABS: como funciona", "url": "https://a.example/x",
+              "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina"}]
+    g = orch._ganho_informacao({"dominios": set(), "temas": set()},
+                               itens, "freio ABS")
+    assert g["ganho_real"] is True
+    assert g["dominios_novos"] == ["a.example"]
+    assert g["temas_novos"] == ["abs", "freio"]
+    repetido = orch._ganho_informacao(orch._retrato(itens, "freio ABS"),
+                                      itens, "freio ABS")
+    assert repetido["ganho_real"] is False
+    assert repetido["dominios_novos"] == [] and repetido["temas_novos"] == []
+
+
+def test_parada_por_ganho_zero_evita_consulta_redundante(monkeypatch):
+    chamadas = []
+
+    def _buscar(nome, consulta, limite=6, timeout=10.0):
+        chamadas.append((nome, consulta))
+        return [{"titulo": "Freio ABS: explicação",
+                 "url": f"https://m.example/{len(chamadas)}",
+                 "trecho": "sistema de freios abs", "origem": nome,
+                 "tipo": "pagina"}]
+
+    monkeypatch.setattr(sp, "buscar", _buscar)
+    orc = {"max_consultas": 4, "max_provedores": 3, "min_resultados": 3,
+           "timeout_total": 5.0, "max_por_provedor": 4}
+    res = orch.pesquisar("freio ABS", provedores=["bing", "marginalia", "wikipedia"],
+                         orcamento=orc,
+                         extra_queries=["freio ABS sistema", "freio ABS valores"])
+    # a 2ª consulta repetiu domínio e tema: a 3ª nem roda
+    assert len(chamadas) == 2
+    assert len(res["consultas"]) == 2
+    assert any("parada por ganho zero" in e for e in res["etapas"])
+    assert len(res["achados"]) == 2  # nada é apagado, só se para de insistir
+
+
+def _recuperacao_falsa(base_achado, extra_achado):
+    base = {"achados": [dict(base_achado)], "etapas": ["bing: 1 resultados"],
+            "estado": "parcial", "estado_texto": "parcial", "provedores": {},
+            "classes": [], "temporal": False, "desatualizados": [],
+            "lacunas": ["valores"], "consultas": ["freio ABS"],
+            "recuperacao": ["freio ABS valores"], "descartes": [],
+            "correspondencia": 0.4, "segundos": 0.1}
+    extra = {"achados": [dict(extra_achado)], "etapas": ["bing: 1 resultados"],
+             "descartes": [], "lacunas": [], "segundos": 0.1}
+    chamadas = []
+
+    def falso(consulta, **kw):
+        chamadas.append(consulta)
+        return dict(base) if len(chamadas) == 1 else dict(extra)
+
+    return falso
+
+
+def test_recuperacao_sem_ganho_novo_e_declarada(monkeypatch):
+    item = {"titulo": "Freio ABS funciona", "url": "https://m.example/a",
+            "trecho": "freio abs", "origem": "bing", "tipo": "pagina"}
+    monkeypatch.setattr(orch, "pesquisar",
+                        _recuperacao_falsa(item, dict(item, url="https://m.example/b")))
+    res = orch.pesquisar_com_recuperacao("freio ABS")
+    assert res["recuperou"] is True
+    assert res["ganho_informacao"]["ganho_real"] is False
+    assert res["ganho_informacao"]["dominios_novos"] == []
+    assert any("recuperação sem ganho novo" in e for e in res["etapas"])
+
+
+def test_recuperacao_com_ganho_novo_e_declarada(monkeypatch):
+    item = {"titulo": "Freio ABS funciona", "url": "https://m.example/a",
+            "trecho": "freio abs", "origem": "bing", "tipo": "pagina"}
+    novo = {"titulo": "Freio ABS: guia novo", "url": "https://n.example/c",
+            "trecho": "freio abs", "origem": "bing", "tipo": "pagina"}
+    monkeypatch.setattr(orch, "pesquisar", _recuperacao_falsa(item, novo))
+    res = orch.pesquisar_com_recuperacao("freio ABS")
+    assert res["recuperou"] is True
+    assert res["ganho_informacao"]["ganho_real"] is True
+    assert res["ganho_informacao"]["dominios_novos"] == ["n.example"]
+    assert any("recuperação com ganho novo" in e for e in res["etapas"])

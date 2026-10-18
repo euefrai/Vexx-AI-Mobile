@@ -159,6 +159,17 @@ def rodar(dados: dict = None, real: bool = False, salvar: bool = True) -> dict:
             ok = ok and bool(ranking) and ranking[0]["url"] == c["primeiro"]
         caso("desatualizado", c["consulta"], ok)
 
+    # ganho real de informação: domínio/tema novo conta, repetição não
+    for c in dados.get("ganho", []):
+        itens = [dict(x) for x in c["itens"]]
+        antes = {"dominios": set(c.get("antes_dominios", [])),
+                 "temas": set(c.get("antes_temas", []))}
+        g = orch._ganho_informacao(antes, itens, c["consulta"])
+        caso("ganho", c["caso"],
+             g["ganho_real"] == c["ganho_real"]
+             and g["dominios_novos"] == c["dominios_novos"]
+             and g["temas_novos"] == c["temas_novos"])
+
     total = sum(g["total"] for g in grupos.values())
     aprovados = sum(g["aprovados"] for g in grupos.values())
     relatorio = {

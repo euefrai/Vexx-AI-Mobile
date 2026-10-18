@@ -54,8 +54,11 @@ Baseline da área: 266 passed / 4 skipped; suíte completa V5.6: 670/4.
   item com ano conhecido ganha `ano` + `desatualizado` (regra única do
   `evidence_graph`: ano ≤ alvo−2; **sem data não acusa**); rebaixado, nunca
   apagado. Resultado expõe `temporal` e `desatualizados: [urls]`.
-- Pendências declaradas (não fingidas): fontes primárias/reclassificação e
-  parada por ganho real de informação. Detalhes:
+- Parada por ganho real (incremento 5): consulta que repetiu domínio/tema
+  não dispara a próxima (`parada por ganho zero`); ganho da recuperação é
+  medido e declarado (`ganho_informacao` + etapa com/sem ganho novo).
+- Pendência declarada (não fingida): fontes primárias/reclassificação por
+  assunto quando a rodada traz só índice geral. Detalhes:
   [JULIA_RESEARCH_ACCURACY.md](docs/JULIA_RESEARCH_ACCURACY.md).
 
 ### Fase 3 — Provedores e diagnóstico (FUNCIONAL herdado + registro)
@@ -124,7 +127,7 @@ contrato nesta versão; P6 (honestidade de erro) resolvido no incremento 4.
 
 `benchmarks/pesquisa_v57_v1.json` (fixtures congeladas) +
 `tools/bench_pesquisa_v57.py` (determinístico, provedores injetados, sem
-rede) + `tests/test_bench_pesquisa_v57.py`. **27/27, taxa global 1.0**;
+rede) + `tests/test_bench_pesquisa_v57.py`. **31/31, taxa global 1.0**;
 sondas reais no artefato
 `qa-artifacts/v57/bench-pesquisa-v57-2026-10-18.json` (freio ABS:
 correspondência 1.0, top3 real, etapa reformulada).
@@ -145,8 +148,9 @@ correspondência 1.0, top3 real, etapa reformulada).
 | Shopping Lenovo: marcas no resultado | Asus/Dell misturados | só Lenovo; Asus/Dell como alternativas explícitas |
 | Specs capturadas ("8gb 512gb") | só `flag_novo` | RAM 8GB + armazenamento 512GB |
 | Trecho Wikipédia ABS | referências ("Consultado em…") | corpo do artigo |
-| Benchmark congelado | não existia | 29/29 (taxa 1.0) |
-| Suíte completa | 670 passed / 4 skipped (V5.6) | **706 passed / 4 skipped** (V5.7) |
+| Benchmark congelado | não existia | 31/31 (taxa 1.0) |
+| Parada por ganho zero | não existia (só quantidade) | consulta redundante não roda; `ganho_informacao` declarado na recuperação |
+| Suíte completa | 670 passed / 4 skipped (V5.6) | **710 passed / 4 skipped** (V5.7) |
 
 ## Contratos preservados
 
@@ -165,16 +169,13 @@ e Fajulto Studio intocados; nenhum push.
 - Selo de imagem cobre até 3 produtos por busca; os demais ficam sem selo
   (estado neutro, nunca "confirmado").
 - Não medido nesta versão: latência/custo de produção antes/depois, mobile
-  físico e leitor de tela reais (pendência herdada da V5.6), ganho real de
-  informação como critério de parada.- P6 **corrigido** (incremento 4): erro interno tem código próprio
+  físico e leitor de tela reais (pendência herdada da V5.6).- P6 **corrigido** (incremento 4): erro interno tem código próprio
   (`erro_interno`) e causa na etapa; provedor indisponível de verdade
   continua `provedor_indisponivel`.
 
 ## Próximos passos sugeridos
 
-1. Parada por ganho de informação (novos domínios/temas) em vez de só
-   quantidade.
-2. Fontes primárias e reclassificação por assunto quando a rodada traz só
+1. Fontes primárias e reclassificação por assunto quando a rodada traz só
    índice geral.
-3. Estender o benchmark com casos de E2E real opcional e histórico de taxas
+2. Estender o benchmark com casos de E2E real opcional e histórico de taxas
    por versão.
