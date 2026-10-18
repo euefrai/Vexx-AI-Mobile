@@ -195,6 +195,46 @@ os gates opcionais permanecem no código para quem instalar); persistência
 das métricas entre reinícios (hoje memória do processo — declarado, sem
 novo dashboard nesta fase).
 
+### Fase 4 (V5.7) — Product Research Accuracy (concluída)
+
+Precisão da pesquisa de produtos (identidade, URLs, preços, filtros,
+métricas), sem novos provedores/serviços, sem redesign e sem inventar
+preço/disponibilidade/imagem/evidência. Incrementos:
+
+1. **Identidade do produto + busca com referência**: versão/edição
+   divergente (`versao_diferente`: pro × pro max), modelo irmão
+   (`modelo_diferente`: s23 para pedido s24) e família divergente
+   rejeitados com motivo; anúncio sem o modelo pedido vira alternativa
+   explícita (`modelo_nao_confirmado`); a referência do usuário entra nas
+   consultas; orçamento não confunde "pro max"/capacidade com teto e
+   "R$ 7000" não é truncado; marcas adidas/nike/mizuno.
+2. **Preço honesto**: `AggregateOffer.lowPrice/highPrice` vira preço com
+   teto marcado; múltiplas ofertas → menor com "a partir de R$ X"
+   (`preco_a_partir_de`) em vez da primeira/variante; oferta única e mesmo
+   preço permanecem exatos; o qualificador acompanha o dedupe; as camadas
+   de exibição (resumo, LLM, fence JDUI) herdam `preco_texto` sem mudança
+   de schema.
+3. **Métricas**: `descartes_por_codigo` e `alternativas_por_codigo` no
+   resumo de verificação (aditivo; sem dashboard/persistência nova).
+4. **URLs**: raiz do site conta como sinal de listagem; `url_de_listagem()`
+   nunca trata home/busca como página do item; item cujo link declarado é
+   outra página (não aberta) vira `nao_verificado`/`item_nao_aberto`;
+   `montar_produto` prefere link de produto real a home declarada;
+   hardening de JSON-LD profundo (RecursionError) na extração.
+
+Medição: benchmark comercial separado `benchmarks/shopping_v4_v1.json` +
+`tools/bench_shopping_v4.py` — **antes 22/43 (51,2%) → depois 59/59
+(100%)**; artefatos em `qa-artifacts/v57/bench-shopping-v4-*.json`.
+Testes reais: `tests/test_shopping_fase4.py` (43 casos). Benchmark
+congelado `pesquisa_v57_v1` intocado em **34/34**.
+
+Suíte completa com os incrementos: **778 passed / 4 skipped**; benchmark
+congelado re-verificado offline **34/34**.
+
+Pendências declaradas:
+família de GPU cruzada (rtx × gtx) e chips Apple (M2/M3) fora dos tokens;
+"airpods max 3000" tratado como orçamento (ambíguo por natureza).
+
 ## Métricas (antes → depois)
 
 | Medida | Antes | Depois |
@@ -216,6 +256,13 @@ novo dashboard nesta fase).
 | Republicação com data (FASE 3) | primeira vista vence | base = versão mais antiga quando ambas têm data; sem data, primeira vista |
 | Suíte completa (FASE 3, inc. 1–3) | 712 passed / 4 skipped | **727 passed / 4 skipped** |
 | Suíte completa (FASE 3, inc. 1–6) | 712 passed / 4 skipped | **735 passed / 4 skipped** |
+| Shopping: identidade (versão/modelo) | sem checagem (`pro max` aceito para `pro`; s23 para s24) | `versao_diferente`/`modelo_diferente`/`modelo_nao_confirmado` com motivo e alternativa explícita |
+| Shopping: busca | referência do usuário descartada da consulta | referência nas consultas; moldura de pedido fora; orçamento completo |
+| Shopping: preço com várias ofertas | preço da primeira oferta/variante | menor preço com "a partir de" (`preco_a_partir_de`) e faixa `lowPrice/highPrice` |
+| Shopping: URLs | home/listagem podia passar como página do produto | raiz = listagem; item não aberto vira `nao_verificado`/`item_nao_aberto`; hardening JSON-LD |
+| Benchmark comercial (FASE 4) | não existia (código `6c8de06`: 22/43) | `bench_shopping_v4.py`: **59/59** (taxa 1.0) |
+| Suíte completa (FASE 4, inc. 1) | 735 passed / 4 skipped | **760 passed / 4 skipped** |
+| Suíte completa (FASE 4, inc. 1–4) | 760 passed / 4 skipped | **778 passed / 4 skipped** |
 
 ## Contratos preservados
 

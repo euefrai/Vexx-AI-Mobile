@@ -195,6 +195,53 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   lugar (títulos diferentes) e avaliação de trafilatura/extruct só com
   ganho comprovado.
 
+## 11. Pesquisa de produtos (FASE 4) — identidade, preço e URLs
+
+FASE 4 (V5.7) — Product Research Accuracy: sem novos provedores/serviços,
+sem scraping que contorne restrições, sem inventar dado. Contratos
+congelados preservados (ordem da cadeia, estados V5.5, junk em `achados`,
+`variantes`, paridade JDUI, SSRF/multiusuário/limites, `search_report`).
+
+- **Identidade (inc. 1)**: versão/edição diferente do pedido
+  (`versao_diferente`: pro × pro max), modelo irmão (`modelo_diferente`:
+  s23 para pedido s24) e família divergente rejeitados com motivo e
+  código; anúncio sem o modelo pedido vira alternativa explícita
+  (`modelo_nao_confirmado`) — nunca correspondência exata; "pro" de pt-BR
+  ("para o") não é versão; um anúncio que cita o pedido nunca é rejeitado
+  por número extra.
+- **Busca com referência (inc. 1)**: a referência do usuário
+  (`_termo_referencia`) entra nas consultas; moldura de pedido
+  ("me mostre", "preço", "link"…) e conectivos saem; orçamento não
+  duplica nem vira token; fallback para o formato antigo quando só há
+  palavras de pedido.
+- **Orçamento (inc. 1)**: "pro max" neutralizado (edição, não teto);
+  capacidade/unidade (GB/TB/mAh/Hz/mm/pol) nunca vira orçamento;
+  "R$ 7000" parseado completo; marcas adidas/nike/mizuno.
+- **Preço honesto (inc. 2)**: `AggregateOffer.lowPrice/highPrice` sem
+  ofertas aninhadas vira preço (o menor) com teto marcado; múltiplas
+  ofertas → menor com "a partir de R$ X" (`preco_a_partir_de`),
+  disponibilidade do preço exibido; oferta única e mesmo preço seguem
+  exatos; `deduplicar` carrega o qualificador; preço ausente ≠ zero.
+- **Métricas (inc. 3)**: `_resumo_verificacao` ganha
+  `descartes_por_codigo`/`alternativas_por_codigo` (aditivo; sem dashboard
+  nem persistência nova).
+- **URLs (inc. 4)**: raiz do site conta como listagem em
+  `classificar_sinais`; `url_de_listagem()` evita tratar home/busca como
+  página do item; item cuja URL declarada é outra página (não aberta) vira
+  `nao_verificado`/`item_nao_aberto` (o veredito nunca se aplica a página
+  não aberta); `montar_produto` prefere link de produto real a home
+  declarada; hardening de JSON-LD profundo (RecursionError) na extração.
+
+Medição: benchmark comercial separado e reproduzível
+`benchmarks/shopping_v4_v1.json` + `tools/bench_shopping_v4.py` —
+**antes 22/43 (51,2%) → depois 59/59 (100%)**; artefatos em
+`qa-artifacts/v57/bench-shopping-v4-*.json`. Testes reais:
+`tests/test_shopping_fase4.py` (43 casos). Benchmark congelado
+`pesquisa_v57_v1` segue **34/34**. Pendências declaradas: família de GPU
+cruzada (rtx × gtx) e chips Apple (M2/M3) fora dos tokens (evita colisão
+com m²); "airpods max 3000" tratado como orçamento (ambíguo por
+natureza).
+
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),
 [JULIA_RESEARCH_RESULTS_JDUI.md](JULIA_RESEARCH_RESULTS_JDUI.md) e

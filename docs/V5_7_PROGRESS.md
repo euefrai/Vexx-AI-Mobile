@@ -307,7 +307,7 @@ utilizável — não é sucesso, e permanece registrado assim.
    benchmark congelado 34/34. Medição contínua agora legível em
    `diagnosticar()`/`metricas_provedores()` (memória do processo).
 
-## FASE 4 (V5.7) — Product Research Accuracy — em andamento
+## FASE 4 (V5.7) — Product Research Accuracy — concluída (incrementos 1–4)
 
 Missão: precisão da pesquisa de produtos (identidade, URLs, preços, imagens,
 ofertas, filtros, evidências e JDUI). Sem novos provedores, sem serviços
@@ -462,6 +462,48 @@ apenas `links`/`imagens`; sem dashboard e sem persistência nova — os
 números vivem no `resultado` já salvo por consulta. Testes novos em
 `tests/test_shopping_fase4.py` (33 no arquivo): contagem por código e
 saída antiga intacta.
+
+### Incremento 4 — URLs: home/categoria, link do item e hardening (concluído)
+
+Auditoria: a raiz do site não contava como sinal de listagem
+(`_RX_URL_LISTA` cobre /busca, /categoria… mas não "/"), então uma home
+com carrossel JSON-LD podia passar como "página de produto" — e o link do
+card (URL do item declarada no dado estruturado) podia ficar marcado
+"verificado" sem ter sido aberto.
+
+Correções:
+
+- `source_check.classificar_sinais`: URL raiz ("/" ou sem caminho, com URL
+  informada) soma sinal de listagem — home/capa nunca é página de produto;
+  loja de um só produto na raiz continua passando (sinais de produto mais
+  fortes vencem). URL desconhecida (sem URL) não recebe o sinal.
+- `source_check.url_de_listagem()`: heurística conservadora (raiz ou
+  busca/categoria/resultados) usada apenas para NUNCA tratar home/listagem
+  como página do item; `/catalogo`, `/colecao` etc. ficam de fora de
+  propósito (são caminhos de produto em muitas lojas).
+- `_recuperar_ofertas`: item de listagem cuja URL declarada é home/busca é
+  descartado (vira fonte); item de página normal cuja URL declarada aponta
+  para OUTRA página (não aberta) vira `nao_verificado`/`item_nao_aberto` —
+  o veredito nunca se aplica a uma página que não foi aberta.
+- `montar_produto`: home/busca declarada não vence um link de produto real
+  (cai para URL da oferta → página analisada); se for o único dado, é
+  mantida — nunca inventamos outro link.
+- `_selo_verificacao`: explica o caso novo ao LLM ("link do item não foi
+  aberto (declarado em outra página)").
+- Hardening: JSON-LD absurdamente aninhado (RecursionError) não derruba
+  `extrair_ofertas_jsonld`/`_ldjson_objs`/`_ld_por_tipo` — o bloco vira
+  ignorado; sem limite novo de ofertas de propósito (um teto poderia
+  esconder o menor preço real — a memória já é limitada pelo tamanho
+  máximo de página existente).
+
+JDUI: auditoria de paridade confirmou que `_jdui_produto` (fence),
+`jdui.py` (`_v_oferta`) e `public/jdui.js` usam exatamente o mesmo conjunto
+de campos; o caso novo reusa `link_veredito`/`link_motivo` (selo "Link não
+verificado" + motivo no título) sem mudança de schema.
+
+Evidência: 10 testes novos (`tests/test_shopping_fase4.py`, 43 no
+arquivo); benchmarks congelado **34/34** e comercial **59/59**
+inalterados.
 
 ## FASE 7 — JDUI (incremento 1 concluído)
 
