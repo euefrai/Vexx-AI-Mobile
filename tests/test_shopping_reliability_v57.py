@@ -294,8 +294,17 @@ def test_bloco_declara_reuso_de_cache_com_data():
 
 def test_bloco_fresco_nao_declara_reuso():
     bloco = shopping.bloco_para_llm(_resultado_1produto(de_cache=False))
-    assert "dados verificados agora" in bloco
+    assert "dados coletados agora" in bloco
+    assert "nível de verificação" in bloco
     assert "cache local" not in bloco
+
+
+def test_bloco_fresco_nao_superestima_verificacao():
+    # V5.7 (descoberta): produto sem link verificado/preço confirmado não pode
+    # ser apresentado como "dados verificados" — o nível real é declarado.
+    bloco = shopping.bloco_para_llm(_resultado_1produto(de_cache=False))
+    assert "nível: oferta parcialmente verificada" in bloco
+    assert "dados verificados agora" not in bloco
 
 
 def test_resumo_texto_avisa_consulta_anterior():

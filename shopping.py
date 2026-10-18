@@ -5,7 +5,9 @@ mlb → ddg → ddg-lite → web orquestrada (Research Engine)) → recuperar
 páginas (reusa `research.baixar`, com guarda SSRF) → extrair ofertas
 (JSON-LD Product/Offer + OpenGraph) → verificar link/imagem de cada
 oferta (`source_check`) → deduplicar → filtrar por orçamento/specs →
-separar alternativas próximas (com diferenças explícitas) → comparar →
+separar alternativas próximas (com diferenças explícitas) → recolher
+referências não verificadas (páginas específicas achadas que não viraram
+oferta — só nome/URL/motivo, nunca dado presumido) → comparar →
 persistir por dono → emitir fence JDUI determinístico.
 
 REGRAS DURAS (nunca relaxar):
@@ -23,6 +25,12 @@ REGRAS DURAS (nunca relaxar):
 - Critério do usuário (orçamento/marca/condição/specs) nunca é trocado em
   silêncio: quem não atende tudo vira alternativa com as diferenças
   explícitas ou descarte explicado.
+- Filtros EXPLÍCITOS (orçamento/marca/specs declaradas) são obrigatórios;
+  categoria e uso ("para jogar basquete") são contexto desejável — nunca
+  requisito por si só.
+- Referência não verificada é LINK útil com motivo declarado (bloqueio/
+  sem-dados): nunca preço, foto, estoque ou veredito — nunca tratada como
+  oferta; página removida/soft-404 não vira referência.
 """
 import hashlib
 import html as _html
@@ -53,6 +61,7 @@ TTL_CONSULTA = _ttl_consulta()
 MAX_CONSULTAS_POR_CONV = 20
 MAX_PAGINAS = 6
 MAX_PRODUTOS = 6
+MAX_REFERENCIAS = 4
 
 PRECO_NAO_CONFIRMADO = "Preço não confirmado"
 
@@ -462,6 +471,50 @@ def extrair_criterios(texto: str) -> dict:
     return {"categoria": categoria, "orcamento": orc, "marcas": marcas,
             "specs": specs, "comparacao": comparacao,
             "texto": (texto or "")[:200]}
+
+
+# Specs que o usuário DECLAROU (viram exclusão dura em `aplicar_filtros`);
+# o restante (flags aspiracionais como "gamer") é atributo desejável.
+_SPECS_DURAS = ("ram_fisica_gb", "armazenamento_gb", "tela_pol", "bateria_mah",
+                "flag_novo", "tiers", "modelos", "familias")
+
+
+def filtros_explicitos(criterios: dict) -> dict:
+    """Filtros pedidos EXPLICITAMENTE pelo usuário (obrigatórios na busca).
+
+    Categoria e termos de uso ("para jogar basquete") são contexto desejável
+    — nunca viram requisito por si sós. Usado no grounding para o modelo
+    nunca exigir do usuário algo que ele não pediu.
+    """
+    c = criterios if isinstance(criterios, dict) else {}
+    orc = c.get("orcamento") or {}
+    specs = c.get("specs") or {}
+    out: dict = {}
+    if orc.get("max") is not None:
+        out["preco_max"] = orc["max"]
+    if orc.get("min") is not None:
+        out["preco_min"] = orc["min"]
+    marcas = [str(m) for m in (c.get("marcas") or []) if str(m).strip()]
+    if marcas:
+        out["marcas"] = marcas
+    duros = {k: specs[k] for k in _SPECS_DURAS
+             if specs.get(k) not in (None, "", [], {})}
+    if duros:
+        out["specs"] = duros
+    return out
+
+
+def atributos_desejaveis(criterios: dict) -> dict:
+    """Atributos considerados na busca que NÃO são obrigatórios por si sós."""
+    c = criterios if isinstance(criterios, dict) else {}
+    out: dict = {}
+    if c.get("categoria"):
+        out["categoria"] = str(c["categoria"])
+    outros = {k: v for k, v in (c.get("specs") or {}).items()
+              if k not in _SPECS_DURAS}
+    if outros:
+        out["specs"] = outros
+    return out
 
 
 # ── Preços ────────────────────────────────────────────────────────────
@@ -1456,7 +1509,7 @@ def _mesmo_recurso(a: str, b: str) -> bool:
 
 
 def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
-                       consulta: str = "") -> list:
+                       consulta: str = "", relatorio: list | None = None) -> list:
     """Extrai produtos estruturados de 1 página, com verificação honesta.
 
     V5.5: a página baixada é avaliada por `source_check.avaliar_pagina`
@@ -1464,20 +1517,37 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
     quando o dado estruturado traz a URL do item — e o card marca o link
     como NÃO verificado (a página do item não foi aberta). Página sem
     sinais de produto nunca vira card (vira fonte).
+
+    V5.7 (descoberta): com `relatorio` (lista), registra o motivo de a
+    página NÃO ter virado oferta — {"url", "codigo", "motivo"} — para as
+    referências não verificadas. Não altera o resultado retornado.
     """
+    def _reg(codigo: str, motivo: str = "") -> None:
+        if relatorio is not None:
+            try:
+                relatorio.append({"url": url, "codigo": codigo,
+                                  "motivo": _limpa(motivo, 160)})
+            except Exception:
+                pass
+
     try:
         if baixar_fn is not None:
             rec = baixar_fn(url)
             final = rec.get("final", url) if isinstance(rec, dict) else url
             pagina = rec.get("texto", "") if isinstance(rec, dict) else ""
             if not pagina or "<" not in pagina:
+                _reg("vazio", "página sem conteúdo")
                 return []
         else:
             final, pagina = research.baixar(url, timeout=6.0)
     except research.ResearchErro as exc:
+        _reg("bloqueio" if exc.codigo == "bloqueado" else
+             ("rede" if exc.codigo in ("rede", "timeout") else exc.codigo),
+             str(exc))
         log.info("shopping: página ignorada (%s): %s", exc.codigo, url[:80])
         return []
     except Exception as exc:
+        _reg("nao_aberta", type(exc).__name__)
         log.info("shopping: página ignorada (%s): %s", type(exc).__name__, url[:80])
         return []
     try:
@@ -1487,10 +1557,12 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
     except Exception:
         aval = {}
     listagem = aval.get("codigo") == "listagem_nao_produto"
+    bloqueio = aval.get("codigo") == "bloqueio_pagina"
     if aval.get("codigo") == "produto_removido":
         # HTTP 200 dizendo que o produto não existe mais: página ignorada
         # por inteiro (nem JSON-LD residual vira card) — soft 404 é fonte,
-        # nunca oferta.
+        # nunca oferta… e nunca vira "referência útil" tampouco.
+        _reg("produto_removido", str(aval.get("motivo") or ""))
         log.info("shopping: página de produto removido/indisponível: %s (%s)",
                  url[:80], str(aval.get("motivo") or "")[:80])
         return []
@@ -1528,8 +1600,146 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
                 except Exception:
                     pass
     except Exception:
+        _reg("nao_aberta", "falha ao extrair dados da página")
         return []
+    if not saidas:
+        if bloqueio:
+            _reg("bloqueio", "bot-wall/CAPTCHA na página (sem contorno)")
+        elif listagem:
+            _reg("listagem", "listagem/catálogo (item sem URL própria)")
+        else:
+            _reg("sem_dados", "página sem dados estruturados de produto")
     return saidas
+
+
+# ── Referências não verificadas (descoberta genérica — V5.7) ─────────
+# Página achada na busca que NÃO virou oferta (bloqueio/sem dados) pode ser
+# apresentada como referência útil, SEMPRE marcada como não verificada — só
+# com evidência de identidade (URL de página específica, fora de home/busca/
+# categoria/blog/login; título com o tema). Nunca ganha preço, foto, estoque
+# ou veredito: é link, não oferta. Bloqueio 403/CAPTCHA nunca é contornado.
+
+_RX_REF_URL_PRODUTO = re.compile(
+    r"/(?:produto|produtos|dp|pd|item|anuncio|anúncio|oferta|shop|product|"
+    r"comprar|buy)(?:/|\?|$)", re.I)
+_RX_REF_NAO_PRODUTO = re.compile(
+    r"/(?:author|autor|blog|blogs|tag|tags|forum|forums|wiki|noticias|news|"
+    r"login|entrar|conta|cadastro|sobre|contact)(?:/|$)", re.I)
+_RX_REF_HOST_LISTA = re.compile(r"^(?:lista|busca|search|categoria)\.", re.I)
+_RX_REF_TITULO_LISTA = re.compile(
+    r"(loja (de|online)|as melhores|os melhores|melhores |guia |"
+    r"como escolher|ofertas|promo[cç][aã]o|resultados|cat[aá]logo|categoria|"
+    r"departamento|todos os |tipos de|cole[cç][aã]o)", re.I)
+_TERMOS_REF_IGNORADOS = {
+    "para", "com", "sem", "jogar", "usar", "usado", "comprar", "oferta",
+    "ofertas", "melhor", "melhores", "brasil", "preco", "quero", "barato",
+    "barata", "onde", "link", "links", "produto", "produtos"}
+
+
+def _termos_busca(*textos: str) -> set:
+    """Termos significativos (len ≥ 4) para casar tema da busca e título."""
+    out: set = set()
+    for texto in textos:
+        for t in re.findall(r"[a-z0-9]{4,}",
+                            _sem_acentos(str(texto or "")).lower()):
+            if t not in _TERMOS_REF_IGNORADOS:
+                out.add(t)
+    return out
+
+
+def _ref_de_busca(cand: dict, motivo: dict, consulta: str,
+                  criterios: dict) -> dict | None:
+    """Referência não verificada de 1 resultado de busca — ou None.
+
+    Conservador de propósito: a URL precisa ter cara de página específica de
+    produto (marcador de produto no caminho OU ≥2 segmentos de caminho), host/
+    caminho não podem ser de home/busca/categoria/blog/autor/login, o título
+    não pode ser de listagem e precisa compartilhar termo com o tema
+    pesquisado. Nada além de nome/URL/domínio/motivo é preservado.
+    """
+    url = str((cand or {}).get("url") or "").strip()
+    titulo = _limpa((cand or {}).get("titulo"), 160)
+    if not url or not titulo:
+        return None
+    codigo = str((motivo or {}).get("codigo") or "")
+    texto_motivo = {
+        "bloqueio": "site bloqueou o acesso automático (403/CAPTCHA); página "
+                    "não verificada — bloqueio não contornado",
+        "rede": "não deu para abrir a página agora (falha de rede); "
+                "não verificada",
+        "sem_dados": "página abriu, mas não expôs dados estruturados de "
+                     "produto; não verificada",
+    }.get(codigo)
+    if not texto_motivo:
+        return None
+    try:
+        research.url_segura(url)
+        partes = urllib.parse.urlsplit(url)
+    except Exception:
+        return None
+    host = (partes.hostname or "").lower()
+    caminho = partes.path or ""
+    if not host or not caminho.strip("/"):
+        return None
+    if source_check.url_de_listagem(url) or _RX_REF_HOST_LISTA.match(host) \
+            or _RX_REF_NAO_PRODUTO.search(caminho):
+        return None
+    segmentos = [s for s in caminho.split("/") if s]
+    if len(segmentos) < 2 and not _RX_REF_URL_PRODUTO.search(caminho):
+        return None
+    if _RX_REF_TITULO_LISTA.search(_sem_acentos(titulo)):
+        return None
+    termos = _termos_busca(criterios.get("categoria") or "",
+                           " ".join(criterios.get("marcas") or []),
+                           _termo_referencia(consulta or ""))
+    alvo = _sem_acentos(titulo + " " + str(cand.get("trecho") or "")).lower()
+    if termos and not any(t in alvo for t in termos):
+        return None
+    return {"nome": titulo,
+            "url": url[:500],
+            "loja_dominio": _dominio(url),
+            "motivo_codigo": codigo,
+            "motivo": texto_motivo,
+            "origem_encontro": "busca"}
+
+
+def _referencias_de_busca(alvos: list, brutos: list,
+                          relatorio: list, criterios: dict, consulta: str,
+                          maximo: int = MAX_REFERENCIAS) -> list:
+    """Referências não verificadas dos candidatos que NÃO viraram oferta.
+
+    Deduplica contra os cards (mesmo recurso) e entre si — nada de conteúdo
+    repetido. Só motivos de bloqueio/rede/sem-dados entram (página removida,
+    listagem e home ficam de fora).
+    """
+    urls_produto = []
+    for p in brutos or []:
+        for u in ((p or {}).get("url"), (p or {}).get("url_final"),
+                  (p or {}).get("url_item")):
+            if u:
+                urls_produto.append(str(u))
+    por_url: dict = {}
+    for r in relatorio or []:
+        u = str((r or {}).get("url") or "")
+        if u and u not in por_url:
+            por_url[u] = r
+    refs: list = []
+    for a in alvos or []:
+        url = str((a or {}).get("url") or "").strip()
+        if not url or url not in por_url:
+            continue
+        if any(_mesmo_recurso(url, u) for u in urls_produto):
+            continue  # já é card/oferta — referência seria conteúdo duplicado
+        ref = _ref_de_busca(a, por_url[url], a.get("_consulta") or consulta,
+                            criterios)
+        if not ref:
+            continue
+        if any(_mesmo_recurso(ref["url"], rr["url"]) for rr in refs):
+            continue
+        refs.append(ref)
+        if len(refs) >= max(0, int(maximo)):
+            break
+    return refs
 
 
 def verificar_imagens(produtos: list, maximo: int = 3, timeout: float = 5.0,
@@ -1645,6 +1855,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     if not achados:
         resultado = {"produtos": [], "fontes": [], "criterios": criterios,
                      "total_bruto": 0, "excluidos": [], "de_cache": False,
+                     "encontrados": [],
                      "verificado_em": agora_iso(), "erro": "provedor_indisponivel",
                      "etapas_provedores": etapas_prov[:8]}
         salvar_consulta(db, owner, conv, consulta, criterios, resultado)
@@ -1668,9 +1879,11 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         paginas.append(a)
     alvos = paginas[:teto_paginas]
     _prog("consultando", f"{len(alvos)} páginas")
+    relatorio: list = []
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliashop") as pool:
         futs = {pool.submit(_recuperar_ofertas, a["url"], a.get("titulo", ""),
-                            baixar_fn, a.get("_consulta", "")): a for a in alvos}
+                            baixar_fn, a.get("_consulta", ""), relatorio): a
+                for a in alvos}
         for fut, a in futs.items():
             try:
                 brutos.extend(fut.result())
@@ -1684,16 +1897,24 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     alternativas = separar_alternativas(fora, criterios)
     ids_alt = {a.get("id") for a in alternativas}
     duros = [p for p in fora if p.get("id") not in ids_alt]
+    # Referências não verificadas: páginas específicas achadas na busca que
+    # NÃO viraram oferta (bloqueio/sem-dados) — link útil com motivo, jamais
+    # preço/foto/estoque/veredito (V5.7 descoberta).
+    encontrados = _referencias_de_busca(alvos, brutos, relatorio, criterios,
+                                        texto or consulta)
     if baixar_fn is None and produtos:
         _prog("verificando", "imagens reais dos produtos")
         # V5.7: valida a imagem de TODOS os cards exibidos (até MAX_PRODUTOS).
         verificar_imagens(produtos, maximo=MAX_PRODUTOS)
     _prog("organizando", f"{len(produtos)} recomendações"
-          + (f", {len(alternativas)} alternativas" if alternativas else ""))
+          + (f", {len(alternativas)} alternativas" if alternativas else "")
+          + (f", {len(encontrados)} referências não verificadas"
+             if encontrados else ""))
     fontes = [{"id": f"S{i + 1}", "titulo": (a.get("titulo") or "")[:160],
                "url": a.get("url", "")[:500]}
               for i, a in enumerate(achados[:8])]
     resultado = {"produtos": produtos, "alternativas": alternativas,
+                 "encontrados": encontrados,
                  "fontes": fontes, "criterios": criterios,
                  "total_bruto": len(brutos), "excluidos": duros[:6],
                  "verificacao": _resumo_verificacao(
@@ -1770,12 +1991,84 @@ def _selo_verificacao(p: dict) -> str:
             "nao_verificado": "link não verificado"}.get(v, "link não verificado")
 
 
+_TIER_ROTULOS = {
+    "confirmada": "oferta confirmada",
+    "parcial": "oferta parcialmente verificada",
+    "encontrada": "produto encontrado (não verificado)",
+}
+
+
+def _tier(p: dict) -> str:
+    """Nível de evidência do item — nunca superestimado (V5.7 descoberta).
+
+    - `confirmada`: preço confirmado em dado estruturado com link verificado
+      (página aberta e validada) ou item da API oficial (MLB).
+    - `parcial`: dado estruturado real, mas sem verificação completa (preço
+      não confirmado, link não aberto, item de listagem).
+    - `encontrada`: página achada na busca, sem nenhum dado verificável
+      (referência não verificada).
+    """
+    if not isinstance(p, dict):
+        return "parcial"
+    if p.get("origem_encontro"):
+        return "encontrada"
+    if p.get("preco_confirmado") and (
+            p.get("link_veredito") == "verificado"
+            or str(p.get("preco_origem") or "") == "mlb"):
+        return "confirmada"
+    return "parcial"
+
+
+def _rotulo_tier(p: dict) -> str:
+    return _TIER_ROTULOS[_tier(p)]
+
+
+def _filtros_resumo(criterios: dict) -> str:
+    """Linha honesta dos filtros EXPLÍCITOS do pedido (ou nenhum)."""
+    fx = filtros_explicitos(criterios or {})
+    partes = []
+    if fx.get("preco_max") is not None:
+        partes.append("preço até " + formatar_preco(fx["preco_max"]))
+    if fx.get("preco_min") is not None:
+        partes.append("preço a partir de " + formatar_preco(fx["preco_min"]))
+    if fx.get("marcas"):
+        partes.append("marca(s): " + ", ".join(fx["marcas"]))
+    for k, v in (fx.get("specs") or {}).items():
+        partes.append(f"{k}={v}")
+    if not partes:
+        return ("FILTROS EXPLÍCITOS DO PEDIDO: nenhum — busca pelo tema apenas; "
+                "NÃO exija do usuário marca/modelo/tamanho/orçamento para "
+                "completar a busca.")
+    return "FILTROS EXPLÍCITOS DO PEDIDO (obrigatórios): " + "; ".join(partes) + "."
+
+
+def _linhas_referencias(refs: list, limite: int = MAX_REFERENCIAS) -> list:
+    """Linhas do bloco para referências não verificadas (links com motivo)."""
+    linhas = ["REFERÊNCIAS NÃO VERIFICADAS (páginas achadas na busca; NÃO foram "
+              "abertas/validadas — nunca trate como oferta; nunca afirme preço, "
+              "foto ou estoque; pode citá-las como links úteis, sempre com a "
+              "ressalva e o motivo):"]
+    for r in (refs or [])[:limite]:
+        linhas.append(f"- {str(r.get('nome') or '')[:120]} | "
+                      f"{str(r.get('loja_dominio') or '')[:80]} | "
+                      f"{str(r.get('url') or '')[:500]} | "
+                      f"{str(r.get('motivo') or '')[:160]}")
+    return linhas
+
+
 def bloco_para_llm(resultado: dict) -> str:
-    """Bloco system com ofertas verificadas. Sem dado → ordem de honestidade."""
+    """Bloco system com ofertas verificadas. Sem dado → ordem de honestidade.
+
+    V5.7 (descoberta): nível de verificação por item (confirmada/parcial/
+    encontrada) e referências não verificadas com motivo — nunca preço/foto/
+    estoque presumidos; nunca exigir do usuário dados que ele não pediu.
+    """
     prods = (resultado or {}).get("produtos", [])
     alts = (resultado or {}).get("alternativas", []) or []
+    refs = (resultado or {}).get("encontrados", []) or []
     de_cache = bool((resultado or {}).get("de_cache"))
     quando = _data_br_curta((resultado or {}).get("verificado_em", ""))
+    filtros_linha = _filtros_resumo((resultado or {}).get("criterios") or {})
     # V5.7: cache é histórico — o bloco declara a idade e proíbe apresentar
     # como "verificado agora" (preço/link podem ter mudado desde a consulta).
     if de_cache:
@@ -1786,8 +2079,9 @@ def bloco_para_llm(resultado: dict) -> str:
         estado = "executada agora"
     if not prods:
         linhas = [f"RESULTADO DE PESQUISA DE PRODUTOS ({estado}): nenhuma "
-                  "oferta atende a TODOS os critérios com dados estruturados "
-                  "verificáveis (preço/imagem)."]
+                  "página específica de produto pôde ser validada com dados "
+                  "estruturados verificáveis (preço/imagem).",
+                  filtros_linha]
         if alts:
             linhas.append("OPÇÕES PRÓXIMAS (NÃO atendem a tudo; cite SEMPRE as "
                           "diferenças e nunca como se atendessem):")
@@ -1796,9 +2090,11 @@ def bloco_para_llm(resultado: dict) -> str:
                     f"- {a.get('nome', '')[:120]} | {a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
                     f" | loja: {a.get('loja', '')} | {_link_do_produto(a)}"
                     f" | diferenças: {a.get('diferencas', '')}")
-        linhas.append("Diga com honestidade o que faltou e peça um modelo mais "
-                      "específico. PROIBIDO inventar produtos, preços, lojas, "
-                      "fotos, avaliações ou links.")
+        if refs:
+            linhas.extend(_linhas_referencias(refs))
+        linhas.append("Explique a limitação de forma objetiva, sem exigir do "
+                      "usuário dados que ele não pediu. PROIBIDO inventar "
+                      "produtos, preços, lojas, fotos, avaliações ou links.")
         return "\n".join(linhas)
     if de_cache:
         linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (consulta reaproveitada do "
@@ -1808,9 +2104,11 @@ def bloco_para_llm(resultado: dict) -> str:
                   "ESTES produtos/preços/lojas/links; os cards visuais serão "
                   "anexados pela ferramenta):"]
     else:
-        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (dados verificados agora; "
-                  "só cite ESTES produtos/preços/lojas/links; os cards visuais "
-                  "serão anexados pela ferramenta):"]
+        linhas = ["RESULTADO DE PESQUISA DE PRODUTOS (dados coletados agora; o "
+                  "nível de verificação de cada item está indicado; só cite ESTES "
+                  "produtos/preços/lojas/links; os cards visuais serão anexados "
+                  "pela ferramenta):"]
+    linhas.append(filtros_linha)
     for i, p in enumerate(prods[:6]):
         specs = ", ".join(f"{k}={v}" for k, v in
                           list((p.get("specs", {}) or {}).items())[:6])
@@ -1818,6 +2116,7 @@ def bloco_para_llm(resultado: dict) -> str:
             f"- [{i + 1}] {p.get('nome', '')} | {p.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
             f" | loja: {p.get('loja', '')} | link: {_link_do_produto(p)}"
             f" | {_selo_verificacao(p)}"
+            f" | nível: {_rotulo_tier(p)}"
             f" | aval: {p.get('avaliacao') if p.get('avaliacao') is not None else 'não informada'}"
             f" | disp: {p.get('disponibilidade', '')}"
             + (f" | specs: {specs}" if specs else ""))
@@ -1829,6 +2128,8 @@ def bloco_para_llm(resultado: dict) -> str:
                 f"- {a.get('nome', '')[:120]} | {a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
                 f" | loja: {a.get('loja', '')} | {_link_do_produto(a)}"
                 f" | diferenças: {a.get('diferencas', '')}")
+    if refs:
+        linhas.extend(_linhas_referencias(refs, limite=3))
     for ex in (resultado or {}).get("excluidos", [])[:3]:
         linhas.append(f"- EXCLUÍDO (explique se citar): {ex.get('nome', '')[:80]}"
                        f" ({ex.get('excluido_por', '')})")
@@ -1935,33 +2236,56 @@ def resumo_texto(resultado: dict) -> str:
     """Texto Markdown do chat (cards vão no fence; sem JSON bruto)."""
     prods = (resultado or {}).get("produtos", [])
     alts = (resultado or {}).get("alternativas", []) or []
+    refs = (resultado or {}).get("encontrados", []) or []
     crit = (resultado or {}).get("criterios", {}) or {}
     if not prods:
         if (resultado or {}).get("erro") == "provedor_indisponivel":
             return ("Não consegui consultar ofertas agora (provedor indisponível). "
                     "Tente de novo em instantes. 🔍")
+        linhas = []
         if alts:
-            linhas = [f"Encontrei {len(alts)} opção(ões), mas **nenhuma atende a "
-                      "todos os critérios**. Próximas do pedido (com as diferenças):"]
+            linhas.append(f"Encontrei {len(alts)} opção(ões), mas **nenhuma atende a "
+                          "todos os critérios**. Próximas do pedido (com as diferenças):")
             for a in alts[:3]:
                 linhas.append(f"- **{a.get('nome', '')[:80]}** — "
                                f"{a.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
                                f" · {a.get('loja', '')}"
                                f"\n  _diferenças: {a.get('diferencas', '')}_")
-            return "\n".join(linhas)
-        return ("Pesquisei anúncios, mas nenhuma página trouxe dados estruturados "
-                "confiáveis (preço/imagem) para montar cards. Me diga um modelo "
-                "específico que eu aprofundo a busca. 🔍")
+        if refs:
+            linhas.append(f"Encontrei {len(refs)} referência(s) de produto na busca — "
+                          "**não verificadas** (página sem dados estruturados "
+                          "validados; não invento preço/foto/estoque):")
+            for r in refs[:MAX_REFERENCIAS]:
+                linhas.append(f"- **{str(r.get('nome') or '')[:80]}** · "
+                               f"{str(r.get('loja_dominio') or '')}"
+                               f" — _{str(r.get('motivo') or '')}_"
+                               f"\n  {str(r.get('url') or '')}")
+        if not linhas:
+            explic = ("Pesquisei anúncios, mas nenhuma página trouxe dados "
+                      "estruturados verificáveis (preço/foto) para montar cards: "
+                      "os sites consultados bloquearam o acesso automático "
+                      "(403/CAPTCHA) ou não expuseram dados estruturados.")
+            if not filtros_explicitos(crit):
+                explic += (" Nenhuma restrição do seu pedido limitou a busca — a "
+                           "limitação veio dos sites.")
+            linhas.append(explic)
+        elif refs and not alts and not filtros_explicitos(crit):
+            linhas.append("_Nenhuma restrição do seu pedido limitou a busca — as "
+                          "páginas é que não puderam ser validadas. Abra a "
+                          "referência na loja para conferir._")
+        return "\n".join(linhas)
     cat = crit.get("categoria") or "produtos"
-    todos_ok = all(p.get("link_veredito") == "verificado" for p in prods)
+    todas_ok = all(_tier(p) == "confirmada" for p in prods)
     cabeca = (f"Encontrei **{len(prods)}** {cat} com dados verificados:"
-              if todos_ok else
+              if todas_ok else
               f"Encontrei **{len(prods)}** {cat} com dados estruturados reais:")
     linhas = [cabeca]
     for p in prods:
         marca = ""
         if p.get("item_de_listagem") or p.get("link_veredito") in ("nao_verificado", "reprovado"):
             marca = " · _link não verificado_"
+        elif _tier(p) == "parcial":
+            marca = " · _verificação parcial_"
         linhas.append(f"- **{p['nome']}** — {p.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
                        f" · {p.get('loja', '')}{marca}")
     for a in alts[:3]:
@@ -1970,6 +2294,14 @@ def resumo_texto(resultado: dict) -> str:
                        f" _({a.get('diferencas', '')})_")
     for ex in (resultado or {}).get("excluidos", [])[:3]:
         linhas.append(f"- _{ex.get('nome', '')[:60]}_: fora ({ex.get('excluido_por', '')})")
+    if refs:
+        linhas.append(f"\n_Outras {len(refs)} página(s) achadas na busca — não "
+                      "verificadas:_")
+        for r in refs[:3]:
+            linhas.append(f"  - {str(r.get('nome') or '')[:70]} · "
+                           f"{str(r.get('loja_dominio') or '')} — "
+                           f"_{str(r.get('motivo') or '')}_ — "
+                           f"{str(r.get('url') or '')}")
     if (resultado or {}).get("de_cache"):
         linhas.append(f"\n_Preços de consulta anterior (verificados em "
                        f"{_data_br_curta((resultado or {}).get('verificado_em', ''))})._")

@@ -109,3 +109,31 @@ jogar basquete" (resposta com produtos/preços inventados, sem busca):
 
 Regressão determinística: `tests/test_shopping_reliability_v57.py` (38
 testes, inclui harness Node do `public/jdui.js`).
+
+## V5.7 — Descoberta em consulta genérica (follow-up 2026-10-18)
+
+Torna a consulta genérica ("me mostre tenis para jogar basquete") útil sem
+afrouxar nenhuma garantia do hotfix acima:
+
+- **Filtros explícitos × desejáveis**: orçamento/marca/specs declaradas são
+  obrigatórios; categoria e uso ("para jogar basquete") são contexto — nunca
+  requisito. Sem filtro nenhum, o texto diz explicitamente que a limitação
+  veio dos sites, não do pedido (`shopping.filtros_explicitos` /
+  `shopping.atributos_desejaveis`).
+- **Níveis de evidência por item** (`shopping._tier`): `confirmada` (preço
+  confirmado + página verificada, ou API oficial do ML), `parcial` (dado
+  estruturado sem verificação completa) e `encontrada` (referência não
+  verificada). Texto e grounding declaram o nível; schema JDUI inalterado.
+- **Referências não verificadas** (`resultado["encontrados"]`): resultado
+  de busca com cara de página específica de produto (fora de home/busca/
+  categoria/blog/autor/login; título com o tema) que não pôde ser aberta
+  (403/CAPTCHA — sem contorno) ou não expôs dados estruturados vira
+  referência com nome+URL+domínio+motivo — nunca preço/foto/estoque/
+  veredito, nunca card, nunca duplicando oferta existente. Página
+  removida/soft-404, home, busca/categoria e junk sem identidade ficam de
+  fora; `MAX_REFERENCIAS`=4.
+- **Sem exigência indevida**: grounding e resumo não pedem "modelo
+  específico" para "desbloquear" uma busca genérica — explicam a limitação
+  objetiva (bloqueio do site/ausência de dados estruturados).
+
+Regressão: `tests/test_shopping_generic_v57.py` (13 testes).

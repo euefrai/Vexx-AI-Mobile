@@ -711,3 +711,47 @@ com produtos/preços/lojas **inventados** (tabela Markdown "Preço Estimado
 - Deploy (Render) não verificável desta máquina (sem URL remota configurada);
   procedimento de verificação fica documentado no relatório do hotfix.
 
+## Descoberta em consulta genérica (concluída, 2026-10-18)
+
+Follow-up do hotfix: "me mostre tenis para jogar basquete" seguia devolvendo
+0 resultados úteis quando as lojas bloqueavam o acesso — o pipeline só
+materializava oferta com dado estruturado completo e, sem ele, pedia "um
+modelo específico" (exigência que o usuário não tinha como satisfazer).
+
+- **Relatório de motivo por página** (`_recuperar_ofertas(..., relatorio)`):
+  bloqueio / rede / sem-dados / removido / listagem / vazio — parâmetro
+  opcional, sem mudar o retorno existente.
+- **Referências não verificadas** (`resultado["encontrados"]`): páginas
+  específicas achadas na busca que não viraram oferta são apresentadas como
+  links úteis, com motivo e nível "encontrada" — nunca preço/foto/estoque/
+  veredito; deduplicadas contra cards e entre si; home/busca/categoria/
+  login/blog, página removida e junk sem tema ficam fora
+  (`MAX_REFERENCIAS`=4).
+- **Filtros explícitos × atributos**: orçamento/marca/specs declaradas são
+  obrigatórios; categoria/uso são desejáveis (`filtros_explicitos` /
+  `atributos_desejaveis` alimentam o grounding); sem filtro nenhum o texto
+  diz que a limitação veio dos sites.
+- **Níveis**: `_tier` → confirmada / parcial / encontrada; o header fresco
+  do grounding deixou de afirmar "dados verificados agora" para itens
+  parciais (afirmação de verificação só quando real).
+- **Sem exigir dados extras**: textos não pedem mais "modelo específico";
+  explicam objetivamente bloqueio/ausência de dados estruturados.
+- Provedores: cadeia existente mlb→ddg→ddg-lite→web reutilizada; API do ML
+  e CAPTCHA continuam tratados como bloqueio (403), sem contorno; ddg-lite
+  segue tentado antes do orquestrador.
+- Suíte completa: **830 passed / 4 skipped** (+14 testes: 13 em
+  `tests/test_shopping_generic_v57.py` + 1 no arquivo de confiabilidade).
+  Benchmarks congelados: `shopping_v4` **59/59**, `pesquisa_v57` **34/34**.
+- E2E real nesta rede: resultados de busca só genéricos/bloqueados
+  (nenhuma página específica com identidade de produto) → resposta explica
+  a limitação e afirma "nenhuma restrição do seu pedido limitou a busca"
+  (antes pedia modelo); sem fence, sem invenção.
+
+### Limitações registradas (follow-up)
+
+- A descoberta de páginas específicas depende dos provedores acessíveis na
+  rede; nesta rede DDG/ddg-lite e a API do ML estão bloqueados (403) e o
+  orquestrador (Bing) devolveu páginas genéricas para a consulta genérica.
+  As referências aparecem quando existe página específica com identidade —
+  coberto por testes determinísticos (`test_shopping_generic_v57.py`).
+
