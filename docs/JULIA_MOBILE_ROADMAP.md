@@ -176,6 +176,27 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
   [V5_6_PROGRESS.md](V5_6_PROGRESS.md) e
   [RELATORIO_JULIA_5.6.md](../RELATORIO_JULIA_5.6.md).
 
+## V5.7 — RESEARCH ACCURACY & INTELLIGENT RESULTS (em entrega; commits locais)
+- Orquestrador: reformulação conservadora de pergunta (`consulta_conteudo`),
+  retry na mesma fonte, correspondência honesta (`< 0.5` declara enxuta e
+  dispara recuperação), republicações (Jaccard ≥ 0.9, ≥ 4 termos) com
+  registro em descartes — nada é apagado.
+- Leitura: trecho usado nunca vem de referências/bibliografia
+  (`Consultado em`/`Cópia arquivada`/ISBN/doi/`«»`/`↑`).
+- Shopping/validação: marca obrigatória (alternativas explícitas), specs
+  pareadas (8GB 512GB → RAM 8 + armazenamento 512), `url_item` como link do
+  item, selo de imagem honesto no card (parcial/não verificada/reprovada).
+- JDUI: autolink com rótulo curto (`rotuloUrl`), bloco "Fontes:" anexado por
+  estrutura (não por substring), cartões de fonte clicáveis.
+- Benchmark independente: `benchmarks/pesquisa_v57_v1.json` +
+  `tools/bench_pesquisa_v57.py` (27/27 offline; `--real` grava sonda),
+  artefatos em `qa-artifacts/v57/`.
+- Docs: [JULIA_RESEARCH_ACCURACY.md](JULIA_RESEARCH_ACCURACY.md),
+  [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),
+  [JULIA_RESEARCH_RESULTS_JDUI.md](JULIA_RESEARCH_RESULTS_JDUI.md),
+  [V5_7_PROGRESS.md](V5_7_PROGRESS.md) e
+  [RELATORIO_JULIA_5.7.md](../RELATORIO_JULIA_5.7.md).
+
 ## V5.7+ — 3D: evolução possível (sem data, sem trabalho iniciado)
 - Tutorial de montagem guiado por etapas, com travas por peça e instruções.
 - Ensaio em Android/iOS físicos e leitor de tela real (pendências de medição).
