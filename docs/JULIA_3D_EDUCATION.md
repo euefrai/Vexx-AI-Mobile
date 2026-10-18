@@ -17,3 +17,14 @@ Cada etapa contém título, texto, parte selecionada, vista e estado explodido. 
 O snapshot salva etapa, velocidade e reprodução, além da seleção/câmera/visibilidade. Não salva o ângulo orbital a cada frame: o reload restaura a etapa, mas reinicia a fase orbital. Pausar durante uma sessão congela a posição atual. A câmera inicial solar enquadra o trajeto orbital completo, não somente o alinhamento inicial dos corpos.
 
 Limites atuais: sem áudio/narração, dinâmica física, compatibilidade de hardware, modelos externos ou edição livre de cenas. As explicações são textos locais do catálogo e anotações validadas. Não dependem de inferência LLM.
+
+## V5.6 — deltas
+
+- Nova educação `device`: aparelhos do catálogo local e cenas aproximadas por
+  pesquisa, com rótulo de fidelidade (`aproximado`/`conceitual`) e fonte visível
+  ([JULIA_3D_MODEL_GENERATION.md](JULIA_3D_MODEL_GENERATION.md)).
+- Cenas de dispositivo usam papel/grupo/ordem por peça, relações registradas e
+  ≥ 3 etapas educativas; limites continuam ≤ 32 peças e ≤ 8 etapas.
+- As cenas clássicas ganharam sombras suaves, contornos e palco claro
+  ([JULIA_3D_VISUAL_POLISH.md](JULIA_3D_VISUAL_POLISH.md)); nenhuma promessa
+  técnica nova foi adicionada — as limitações de escala continuam valendo.

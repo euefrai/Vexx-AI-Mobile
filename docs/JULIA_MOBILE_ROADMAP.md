@@ -157,9 +157,30 @@ obrigatórios; offline-first; nada simulado; cada versão com testes.
 - QA Chrome real e regressão: [RELATORIO_DADOS_ATUAIS.md](../RELATORIO_DADOS_ATUAIS.md).
 - Uso, custo e limites: [DADOS_ATUAIS.md](DADOS_ATUAIS.md).
 
-## V5.6+ — 3D Optimization & Integration (futuro, sem trabalho iniciado)
-- Otimização e integração final do 3D ao chat e ao JDUI (slot que era
-  "V5.5 — 3D" foi reatribuído: o V5.5 passou a ser Research Intelligence 3.0).
+## V5.6 — 3D Visual Polish + Smart Assembly Foundation + Model Generation (entregue; commits locais)
+- Polimento visual: sombras suaves estáticas (PCF 512), contornos de aresta,
+  tone mapping ACES e palco com gradiente; motor Three rebuildado
+  (146.978 bytes gzip, teste < 150.000).
+- Interação: grupos internos/externos, “mostre como isso se conecta”,
+  “explique como funciona”, chips de fidelidade e fonte controlada nos detalhes.
+- Geração honesta: catálogo local com 14 cenas aproximadas, templates
+  paramétricos e pesquisa pública (rótulo `aproximado`/`conceitual`); sem
+  template ou sem rede → limitação honesta, nunca geometria inventada.
+- Fundações de montagem: `role`/`group`/`order` por peça, relações `related`,
+  etapas com vista/separado e modo explodido.
+- QA em Chrome real: `tools/3d/qa-v56.cjs` (+ regressão `qa-v54.cjs`),
+  desempenho medido em `tools/3d/qa-perf.cjs`.
+- Docs: [JULIA_3D_VISUAL_POLISH.md](JULIA_3D_VISUAL_POLISH.md),
+  [JULIA_3D_MODEL_GENERATION.md](JULIA_3D_MODEL_GENERATION.md),
+  [JULIA_3D_ASSEMBLY_FOUNDATION.md](JULIA_3D_ASSEMBLY_FOUNDATION.md),
+  [V5_6_PROGRESS.md](V5_6_PROGRESS.md) e
+  [RELATORIO_JULIA_5.6.md](../RELATORIO_JULIA_5.6.md).
+
+## V5.7+ — 3D: evolução possível (sem data, sem trabalho iniciado)
+- Tutorial de montagem guiado por etapas, com travas por peça e instruções.
+- Ensaio em Android/iOS físicos e leitor de tela real (pendências de medição).
+- Novos GLB originais autorizados e refinamentos visuais leves, se houver custo
+  justificado (texturas/HDR/post ficam fora até reavaliação de desempenho).
 
 ## COMUNIDADE/MULTI-CONTA (adiada, sem versão definida)
 - Cadastro, isolamento total, compartilhamento explícito (prompts, quizzes,

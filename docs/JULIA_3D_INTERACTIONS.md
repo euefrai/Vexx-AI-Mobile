@@ -34,3 +34,15 @@ Scripts, shaders, URLs externas e HTML do modelo continuam proibidos pelo schema
 ## Verificação
 
 `tests/test_model3d_v54.py`: paridade Python/JS, IDs inválidos, limites, comandos, contexto local ainda não sincronizado e isolamento por conta/conversa. `tools/3d/qa-v54.cjs`: Chrome/WebGL real, pixels, raycast, teclado/toque, operações, etapas, reuso de canvas/buffers, cleanup e chat autenticado com SSE/IndexedDB/reload. Executar contra `tests/preview_workspace.py`, que utiliza SQLite temporário, nunca a base real.
+
+## V5.6 — deltas
+
+- Operações novas: “mostre apenas as peças internas/externas” (op `onlyGroup`),
+  “mostre como isso se conecta” (relações `related`) e “explique como funciona”.
+- Botões “Ver só internas/externas” (desabilitados quando a cena não tem
+  grupos) e “Ver conexões” (ativa com peça selecionada) no menu de opções.
+- Peças ganharam papel/grupo/ordem; os detalhes mostram “Estrutural/Opcional ·
+  Interna/Externa · Montagem #N”
+  ([JULIA_3D_ASSEMBLY_FOUNDATION.md](JULIA_3D_ASSEMBLY_FOUNDATION.md)).
+- Cenas de dispositivo (catálogo local e pesquisa) usam exatamente as mesmas
+  operações, limites e isolamento por dono/conversa descritos acima.
