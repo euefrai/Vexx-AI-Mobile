@@ -2029,6 +2029,29 @@ def imagens_primeiro(fence: str, texto: str) -> str:
     return fence + (("\n\n" + corpo) if corpo else "")
 
 
+_RX_FONTES_HEAD = re.compile(
+    r"^[ \t]*(?:#{1,6}[ \t]*)?(?:\*\*[ \t]*)?fontes\b[^\S\r\n]*(?:\*\*)?[^\S\r\n]*:?",
+    re.I | re.M)
+_RX_LINK_LINHA = re.compile(
+    r"^[ \t]*(?:[-*][ \t]+)?[^\n]*\[[^\]]+\]\(\s*https?://", re.M)
+
+
+def _ja_tem_fontes_markdown(texto: str) -> bool:
+    """True quando o texto já tem um bloco "Fontes:" com links markdown.
+
+    V5.7: substitui o teste por substring — uma menção à palavra no meio da
+    resposta escondia as fontes reais. Só conta cabeçalho próprio (linha com
+    "Fontes", "## Fontes", "**Fontes:**" etc.) seguido de linha com link
+    http em até 1500 caracteres.
+    """
+    if not texto:
+        return False
+    for m in _RX_FONTES_HEAD.finditer(texto):
+        if _RX_LINK_LINHA.search(texto[m.end():m.end() + 1500]):
+            return True
+    return False
+
+
 def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
     texto = texto or ""
     if termo_img:
@@ -2043,7 +2066,7 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
             slug = urllib.parse.quote(termo_img.strip() or "paisagem")
             # Imagens primeiro: imagem garantida abrindo a resposta.
             texto = f"![{termo_img}](https://loremflickr.com/800/500/{slug})\n\n" + texto
-    if fontes and "Fontes:" not in (texto or ""):
+    if fontes and not _ja_tem_fontes_markdown(texto):
         linhas = "\n".join(
             f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"
             for f in fontes)

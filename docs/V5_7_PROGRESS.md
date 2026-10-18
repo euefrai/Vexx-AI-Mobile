@@ -107,6 +107,13 @@ Testes: 2 casos novos em `tests/test_search_orchestrator_v57.py`.
    Fim das URLs cruas gigantes quebrando o layout do chat.
 3. Verificação: `node --check` nos dois arquivos + suíte JDUI
    (`test_jdui*.py`) 34/34 verde.
+4. `pc_agent.anexar_fontes` — o teste por substring `"Fontes:" not in texto`
+   foi trocado por `_ja_tem_fontes_markdown`: o bloco estruturado só é
+   omitido quando já existe **cabeçalho** "Fontes:" (com ou sem `#`/`**`)
+   seguido de linha com link http em até 1500 caracteres. Menção solta à
+   palavra no meio da resposta não esconde mais as fontes reais; lista real
+   do modelo não é duplicada.
+   Testes: `tests/test_pc_agent_fontes_v57.py` (7 casos).
 
 ## FASE 4 — Links, produtos e imagens (incremento 1 concluído)
 
