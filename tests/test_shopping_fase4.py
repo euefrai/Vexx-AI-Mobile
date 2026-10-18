@@ -293,3 +293,24 @@ def test_dedupe_mantem_flag_da_oferta_mais_barata():
     assert unicos[0]["preco"] == 199.9
     assert unicos[0]["preco_a_partir_de"] is True
     assert unicos[0]["preco_texto"] == "a partir de R$ 199,90"
+
+
+# ── Métricas: descartes e alternativas por código ──────────────────────
+
+def test_resumo_verificacao_conta_codigos_de_descarte():
+    descartes = [{"excluido_codigos": ["modelo_diferente", "usado"]},
+                 {"excluido_codigos": ["modelo_diferente"]},
+                 {"excluido_codigos": []}]
+    alternativas = [{"excluido_codigos": ["preco_acima"]}]
+    r = shopping._resumo_verificacao(
+        [{"link_veredito": "verificado", "imagem_veredito": "parcial"}],
+        descartes, alternativas)
+    assert r["links"]["verificado"] == 1 and r["links"]["total"] == 1
+    assert r["imagens"]["parcial"] == 1 and r["imagens"]["total"] == 1
+    assert r["descartes_por_codigo"] == {"modelo_diferente": 2, "usado": 1}
+    assert r["alternativas_por_codigo"] == {"preco_acima": 1}
+
+
+def test_resumo_verificacao_retrocompativel_sem_listas():
+    r = shopping._resumo_verificacao([])
+    assert set(r) == {"links", "imagens"}  # sem listas, saída antiga intacta

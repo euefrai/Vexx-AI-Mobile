@@ -451,6 +451,18 @@ menor + "a partir de"; mesmo preço → exato; lowPrice/highPrice → faixa;
 AggregateOffer sem preço não inventa; dedupe mantém o qualificador.
 Benchmark congelado `pesquisa_v57_v1` segue **34/34**.
 
+### Incremento 3 — métricas de descarte por código (concluído)
+
+`_resumo_verificacao` agora também reporta `descartes_por_codigo` (por que
+cada anúncio foi derrubado sem virar produto nem alternativa: preço,
+usado, armazenamento, marca, versão, modelo...) e `alternativas_por_codigo`
+(motivo pelo qual cada alternativa "quase passou"). Aditivo e
+retrocompatível: chamadas antigas sem as listas continuam devolvendo
+apenas `links`/`imagens`; sem dashboard e sem persistência nova — os
+números vivem no `resultado` já salvo por consulta. Testes novos em
+`tests/test_shopping_fase4.py` (33 no arquivo): contagem por código e
+saída antiga intacta.
+
 ## FASE 7 — JDUI (incremento 1 concluído)
 
 1. `public/jdui.js` — `productImgSelo`: selo honesto de imagem no card.

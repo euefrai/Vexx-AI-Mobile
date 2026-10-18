@@ -1497,8 +1497,13 @@ def verificar_imagens(produtos: list, maximo: int = 3, timeout: float = 5.0,
     return produtos or []
 
 
-def _resumo_verificacao(produtos: list) -> dict:
-    """Contagem honesta de vereditos (link e imagem) dos produtos exibidos."""
+def _resumo_verificacao(produtos: list, descartes: list = None,
+                        alternativas: list = None) -> dict:
+    """Contagem honesta de vereditos (link e imagem) dos produtos exibidos.
+
+    FASE 4 (aditivo): com `descartes`/`alternativas`, conta também os
+    códigos de exclusão (`excluido_codigos`) que mais derrubaram anúncios —
+    sem alterar chamadas antigas."""
     links = {v: 0 for v in source_check.VEREDITOS}
     imagens = {v: 0 for v in source_check.VEREDITOS}
     for p in produtos or []:
@@ -1510,7 +1515,20 @@ def _resumo_verificacao(produtos: list) -> dict:
             imagens[iv] += 1
     links["total"] = sum(links[v] for v in source_check.VEREDITOS)
     imagens["total"] = sum(imagens[v] for v in source_check.VEREDITOS)
-    return {"links": links, "imagens": imagens}
+    resumo = {"links": links, "imagens": imagens}
+
+    def _por_codigo(itens):
+        cont: dict = {}
+        for it in itens or []:
+            for c in it.get("excluido_codigos") or []:
+                cont[c] = cont.get(c, 0) + 1
+        return dict(sorted(cont.items(), key=lambda kv: (-kv[1], kv[0])))
+
+    if descartes is not None:
+        resumo["descartes_por_codigo"] = _por_codigo(descartes)
+    if alternativas is not None:
+        resumo["alternativas_por_codigo"] = _por_codigo(alternativas)
+    return resumo
 
 
 def pesquisar(db, owner: str, texto: str, conv: str = "",
@@ -1609,7 +1627,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     resultado = {"produtos": produtos, "alternativas": alternativas,
                  "fontes": fontes, "criterios": criterios,
                  "total_bruto": len(brutos), "excluidos": duros[:6],
-                 "verificacao": _resumo_verificacao(produtos + alternativas),
+                 "verificacao": _resumo_verificacao(
+                     produtos + alternativas, duros, alternativas),
                  "de_cache": False, "verificado_em": agora_iso(),
                  "etapas_provedores": etapas_prov[:8]}
     salvar_consulta(db, owner, conv, consulta, criterios, resultado)
