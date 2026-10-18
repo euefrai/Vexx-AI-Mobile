@@ -83,7 +83,7 @@ _MARCAS = (
     "britania", "cadence", "nintendo", "microsoft", "logitech", "razer",
     "hyperx", "kingston", "sandisk", "seagate", "corsair", "nzxt", "intel",
     "amd", "nvidia", "tp-link", "intelbras", "amazfit", "huawei", "realme",
-    "infinix", "nokia", "asus rog",
+    "infinix", "nokia", "asus rog", "adidas", "nike", "mizuno",
 )
 
 
@@ -150,7 +150,12 @@ def detectar_intencao(texto: str) -> bool:
 # ── Critérios ─────────────────────────────────────────────────────────
 
 def _extrair_orcamento(texto: str) -> dict:
-    """Retorna {min, max} em BRL. 'até R$ 1000' → max=1000."""
+    """Retorna {min, max} em BRL. 'até R$ 1000' → max=1000.
+
+    Números de modelo NÃO viram orçamento: 'iPhone 15 Pro Max 256GB' não
+    tem teto de R$ 256 (o 'max' é edição do aparelho) e 'até 512GB' é
+    capacidade, não preço.
+    """
     t = (texto or "").lower().replace("\u00a0", " ")
     valores = []
 
@@ -165,7 +170,7 @@ def _extrair_orcamento(texto: str) -> dict:
         except ValueError:
             return None
 
-    for m in re.finditer(r"r\$\s?(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:,\d{1,2})?)", t):
+    for m in re.finditer(r"r\$\s?(\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)", t):
         v = _num(m.group(1))
         if v is not None:
             valores.append(v)
@@ -174,18 +179,33 @@ def _extrair_orcamento(texto: str) -> dict:
         if v is not None:
             valores.append(v)
     criterios = {}
-    m_ate = re.search(r"(?:at[eé]|abaixo de|menos de|m[aá]ximo(?: de)?|max(?:imo)?(?: de)?|or[cç]amento(?: de)?(?: at[eé])?)\s?(?:de\s?)?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)", t)
+    # só o que NÃO for capacidade/medida entra como orçamento
+    _nao_unidade = r"(?!\d)(?!\s?(?:gb|tb|mah|hz|mm|pol|polegadas))"
+    # 'pro max' é edição de produto — o 'max' não é teto de preço
+    t_busca = re.sub(r"\bpro\s+m[aá]x\b", " ", t)
+    m_ate = re.search(
+        r"(?:at[eé]|abaixo de|menos de|or[cç]amento(?: de)?(?: at[eé])?)\s?"
+        r"(?:de\s?)?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)" + _nao_unidade, t)
     if m_ate:
         v = _num(m_ate.group(1))
         if v is not None:
             criterios["max"] = v
-    m_entre = re.search(r"entre\s?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)\s?e\s?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)", t)
+    m_max = re.search(
+        r"(?<![a-z0-9])m[aá]x(?:imo)?\s?(?:de\s?)?(?:r\$\s?)?"
+        r"(\d[\d.]*(?:,\d{1,2})?)" + _nao_unidade, t_busca)
+    if m_max and "max" not in criterios:
+        v = _num(m_max.group(1))
+        if v is not None:
+            criterios["max"] = v
+    m_entre = re.search(
+        r"entre\s?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)" + _nao_unidade +
+        r"\s?e\s?(?:r\$\s?)?(\d[\d.]*(?:,\d{1,2})?)" + _nao_unidade, t)
     if m_entre:
         a, b = _num(m_entre.group(1)), _num(m_entre.group(2))
         if a is not None and b is not None:
             criterios["min"], criterios["max"] = min(a, b), max(a, b)
     if "max" not in criterios and valores:
-        if re.search(r"(?:at[eé]|abaixo|menos|max|or[cç]amento|at[eé] r\$)", t):
+        if re.search(r"(?:at[eé]|abaixo|menos|m[aá]x|or[cç]amento)", t_busca):
             criterios["max"] = max(valores)
     return criterios
 
@@ -209,6 +229,137 @@ def _extrair_ram(texto: str) -> dict:
         else:
             out["ram_fisica_gb"] = max(out.get("ram_fisica_gb", 0), v)
     return out
+
+
+# ── Identidade do produto: versão/edição e modelo (FASE 4) ────────────
+# Variante incompatível NUNCA vira correspondência exata. Só se conclui
+# conflito a partir do que o anúncio NEGAn de forma legível:
+# - versão/edição diferente (Pro × padrão, Plus, Ultra, Mini...);
+# - modelo "irmão" com número diferente (s23 para pedido s24);
+# - família com número divergente ("iphone 14" para pedido "iphone 15").
+# Ausência de número no anúncio não cria compatibilidade afirmada.
+
+_TIERS = ("pro max", "pro", "plus", "ultra", "mini", "lite", "max")
+
+# 'pro' em pt-BR costuma ser contração de "para o" ("notebook pro meu
+# filho") — nesses casos NÃO é versão do produto.
+_RX_PRO_STOP = re.compile(
+    r"pro\s+(?:o|a|os|as|um|uma|meu|minha|meus|minhas|seu|sua|seus|suas|"
+    r"ele|ela|eles|elas|isso|isto|aquilo|mim|nos|voc[eê]|que|quem|onde|"
+    r"trabalho|estudo|faculdade|escola|jogo|jogar|filho|filha|esposa|"
+    r"marido|namorad[ao]|casa|dia|mes|ano|viagem|presente|comprar|usar|"
+    r"fazer|ver|dormir|estudar|trabalhar)")
+
+
+def _tiers_no_texto(texto: str) -> list:
+    """Edições citadas no texto ('pro', 'pro max', 'plus', 'ultra'...)."""
+    t = _sem_acentos(texto or "").lower()
+    if not t:
+        return []
+    achados = []
+    for tier in _TIERS:
+        padrao = tier.replace(" ", r"\s+")
+        ocorrencias = list(re.finditer(
+            r"(?<![a-z0-9])" + padrao + r"(?![a-z0-9])", t))
+        if not ocorrencias:
+            continue
+        if tier == "pro" and not any(
+                not _RX_PRO_STOP.match(t, m.start())
+                for m in ocorrencias):
+            continue
+        if tier == "max" and not any(
+                not re.search(r"(?:no|pelo|pelas?|ate|em)\s+$",
+                              t[max(0, m.start() - 6):m.start()])
+                for m in ocorrencias):
+            continue
+        achados.append(tier)
+    if "pro max" in achados:
+        achados = [a for a in achados if a not in ("pro", "max")]
+    return achados
+
+
+def _tiers_expandidos(tiers) -> set:
+    """'pro' cabe em 'pro max'; 'pro max' não cabe em 'pro'."""
+    out = set(str(t) for t in (tiers or []))
+    if "pro max" in out:
+        out.update(("pro", "max"))
+    return out
+
+
+_RX_TOKEN_MODELO = re.compile(
+    r"(?<![a-z0-9])([a-z]{1,4})(\d{2,4})([a-z]{0,2})(?![a-z0-9])")
+
+
+def _tokens_modelo(texto: str) -> set:
+    """Tokens colados letra+número ('s24', 'a54', 'rtx4060')."""
+    t = _sem_acentos(texto or "").lower()
+    return {m.group(1) + m.group(2) + m.group(3)
+            for m in _RX_TOKEN_MODELO.finditer(t)}
+
+
+_RX_FAMILIA_NUM = re.compile(
+    r"(?<![a-z0-9])(air\s?max|iphone|ipad|note|pixel|redmi|flip|fold|watch|"
+    r"series|playstation|ps|rtx|gtx|zenfone|kindle)\s*(\d{1,4})(?![a-z0-9])")
+
+
+def _numeros_familia(texto: str) -> dict:
+    """'iphone 15' → {'iphone': ['15']} (família + número separados)."""
+    t = _sem_acentos(texto or "").lower()
+    out: dict = {}
+    for m in _RX_FAMILIA_NUM.finditer(t):
+        fam = re.sub(r"\s+", "", m.group(1))
+        out.setdefault(fam, set()).add(m.group(2))
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def _partes_token(tok: str):
+    m = re.match(r"([a-z]{1,4})(\d{2,4})([a-z]{0,2})$", str(tok or ""))
+    return (m.group(1), m.group(2)) if m else None
+
+
+def _numero_relacionado(a: str, b: str) -> bool:
+    """'15'~'15'/'150' relacionam; '14' × '15' não."""
+    a, b = str(a), str(b)
+    return a == b or a.startswith(b) or b.startswith(a)
+
+
+def _conflito_modelo(ped_tokens, ped_fams: dict, produto_txt: str):
+    """(pedido, achado) quando o anúncio indica OUTRO modelo da família."""
+    prod_tokens = _tokens_modelo(produto_txt)
+    if not (set(ped_tokens or ()) & prod_tokens):
+        for q in sorted(set(ped_tokens or ())):
+            pq = _partes_token(q)
+            for ptok in sorted(prod_tokens):
+                pp = _partes_token(ptok)
+                if pq and pp and pq[0] == pp[0] \
+                        and len(pq[1]) == len(pp[1]) and pq[1] != pp[1]:
+                    return (q, ptok)
+    prod_fams = _numeros_familia(produto_txt)
+    for fam in sorted(ped_fams or {}):
+        nums_prod = prod_fams.get(fam) or []
+        nums_ped = [str(n) for n in (ped_fams.get(fam) or [])]
+        for pnum in nums_prod:
+            if not any(_numero_relacionado(pnum, qnum) for qnum in nums_ped):
+                return (f"{fam} {nums_ped[0]}", f"{fam} {pnum}")
+    return None
+
+
+def _modelo_mencionado(specs: dict, produto_txt: str) -> bool:
+    """O anúncio cita o modelo/família pedidos (confirmável, não 'sem info')?"""
+    tokens = set(specs.get("modelos") or [])
+    prod_tokens = _tokens_modelo(produto_txt)
+    if tokens and not (tokens & prod_tokens):
+        return False
+    fams = dict(specs.get("familias") or {})
+    if not fams:
+        return bool(tokens)
+    prod_fams = _numeros_familia(produto_txt)
+    for fam, nums in fams.items():
+        encontrados = prod_fams.get(fam) or []
+        if not any(_numero_relacionado(pq, str(q))
+                   for pq in encontrados for q in (nums or [])):
+            return False
+    return True
 
 
 def _extrair_specs(texto: str) -> dict:
@@ -246,6 +397,15 @@ def _extrair_specs(texto: str) -> dict:
                  "2 em 1", "touchscreen", "ssd", "placa dedicada"):
         if flag in t:
             specs["flag_" + re.sub(r"\W+", "_", flag).strip("_")] = True
+    tiers = _tiers_no_texto(texto)
+    if tiers:
+        specs["tiers"] = tiers
+    tokens = _tokens_modelo(texto)
+    fams = _numeros_familia(texto)
+    if tokens:
+        specs["modelos"] = sorted(tokens)
+    if fams:
+        specs["familias"] = fams
     return specs
 
 
@@ -687,6 +847,38 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
             if ap is not None and ap < specs["armazenamento_gb"]:
                 motivos.append("armazenamento abaixo do pedido")
                 codigos.append("armazenamento_abaixa")
+        # FASE 4: versão/edição e modelo pedidos são identidade, não enfeite.
+        tiers_pedido = [str(x) for x in (specs.get("tiers") or [])
+                        if str(x).strip()]
+        if tiers_pedido:
+            titulo_p = (p.get("nome") or "") + " " + (p.get("modelo") or "")
+            tiers_prod = _tiers_no_texto(titulo_p)
+            if not _tiers_expandidos(tiers_pedido).issubset(
+                    _tiers_expandidos(tiers_prod)):
+                motivos.append(
+                    "versão não confere com o pedido (pedido: "
+                    + " + ".join(tiers_pedido) + "; anúncio: "
+                    + (" + ".join(tiers_prod) or "sem indicação de versão")
+                    + ")")
+                codigos.append("versao_diferente")
+        modelos_pedido = set(specs.get("modelos") or [])
+        familias_pedido = dict(specs.get("familias") or {})
+        if modelos_pedido or familias_pedido:
+            alvo_p = _sem_acentos((p.get("nome") or "") + " "
+                                  + (p.get("modelo") or "")).lower()
+            conflito = _conflito_modelo(modelos_pedido, familias_pedido, alvo_p)
+            if conflito:
+                motivos.append("modelo diferente do pedido (pedido: "
+                               f"{conflito[0]}; anúncio: {conflito[1]})")
+                codigos.append("modelo_diferente")
+            elif not _modelo_mencionado(specs, alvo_p):
+                motivos.append("modelo do pedido não indicado no anúncio "
+                               f"({', '.join(sorted(modelos_pedido)) or ''}"
+                               f"{' ' if modelos_pedido and familias_pedido else ''}"
+                               + ", ".join(f"{k} {v[0]}" for k, v in
+                                           sorted(familias_pedido.items()))
+                               + ")")
+                codigos.append("modelo_nao_confirmado")
         if motivos:
             p["excluido_por"] = "; ".join(motivos)
             p["excluido_codigos"] = codigos
@@ -762,6 +954,30 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
         if "usado" in codigos:
             difs.append("condição: usado (pedido: somente novos)")
             distancias.append(0.5)
+        if "versao_diferente" in codigos:
+            tiers_prod = _tiers_no_texto((p.get("nome") or "") + " "
+                                         + (p.get("modelo") or ""))
+            pedido_v = " + ".join(str(t) for t in (specs.get("tiers") or []))
+            difs.append("versão "
+                        + (" + ".join(tiers_prod) or "padrão/sem indicação")
+                        + f" (pedido: {pedido_v})")
+            distancias.append(0.35)
+        if "modelo_diferente" in codigos or "modelo_nao_confirmado" in codigos:
+            if "modelo_diferente" in codigos:
+                conflito = _conflito_modelo(
+                    set(specs.get("modelos") or []),
+                    dict(specs.get("familias") or {}),
+                    _sem_acentos((p.get("nome") or "") + " "
+                                 + (p.get("modelo") or "")).lower())
+                difs.append(f"modelo {conflito[1]} (pedido: {conflito[0]})"
+                            if conflito else "modelo diferente do pedido")
+            else:
+                pedido_m = ", ".join(
+                    sorted(set(specs.get("modelos") or [])
+                           | {f"{k} {v[0]}" for k, v in
+                              (specs.get("familias") or {}).items()}))
+                difs.append(f"modelo não indicado no anúncio (pedido: {pedido_m})")
+            distancias.append(0.45)
         if not difs:
             continue
         alt = dict(p)
@@ -1077,6 +1293,34 @@ def diagnosticar_provedores(timeout: float = 6.0) -> list:
 
 # ── Busca orquestrada (reusa Research Engine; sem loja única) ──────────
 
+_RX_PEDIDO_WORDS = re.compile(
+    r"\b(?:me\s+mostre|mostre|mostra|quero|queria|procuro|pesquis[ea]|"
+    r"pesquise|busque|buscar|encontre|encontrar|pre[cç]os?|preco|imagens?|"
+    r"fotos?|links?|comprar|compra|ofertas?|promo[cç][aã]o|promo|onde|"
+    r"quanto|custa|por\s+favor|pra\s+mim|para\s+mim|imagem)\b",
+    re.IGNORECASE)
+
+
+def _termo_referencia(texto: str) -> str:
+    """Referência do usuário sem as palavras de pedido ('me mostre', ...).
+
+    A busca não pode descartar o modelo pedido ('Adidas Pro Model 2.0',
+    'Galaxy S24') — era essa lacuna que devolvia resultados genéricos.
+    """
+    t = re.sub(r"\s+", " ", (texto or "")).strip()
+    if not t:
+        return ""
+    t = _RX_PEDIDO_WORDS.sub(" ", t)
+    vazias = {"e", "o", "a", "os", "as", "de", "do", "da", "dos", "das",
+              "por", "com", "para", "pra", "no", "na", "nos", "nas"}
+    palavras = [w for w in t.split()
+                if w.lower() not in vazias
+                and not re.fullmatch(r"[.,;:!?()\-]+", w)]
+    t = " ".join(palavras)
+    t = re.sub(r"\s+", " ", t).strip(" .,;:-")
+    return t[:80]
+
+
 def _consultas_produto(criterios: dict, texto: str) -> list:
     base = [criterios.get("categoria", ""),
             " ".join(criterios.get("marcas", [])[:2])]
@@ -1087,14 +1331,31 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
         detalhe += f" {specs['ram_fisica_gb']}GB RAM"
     if specs.get("armazenamento_gb"):
         detalhe += f" {specs['armazenamento_gb']}GB"
-    consultas = []
-    nucleo = " ".join(t for t in base if t).strip() or (texto or "")[:80]
-    consultas.append(f"{nucleo}{detalhe} comprar oferta".strip())
-    if orc.get("max"):
-        consultas.append(f"{nucleo}{detalhe} preço até {orc['max']:g}".strip())
+    ref = _termo_referencia(texto)
+    if ref and orc.get("max"):
+        ref = re.sub(r"\b(?:at[eé]|abaixo\s+de|menos\s+de|no\s+m[aá]ximo)"
+                     r"\s*R?\$?\s*[\d.,]+", " ", ref, flags=re.IGNORECASE)
+        ref = re.sub(r"\s+", " ", ref).strip(" .,;:-")
+    nucleo = " ".join(t for t in base if t).strip() or ref or (texto or "")[:80]
+    if ref:
+        consultas = [f"{ref} comprar oferta".strip()]
+        if orc.get("max"):
+            consultas.append(f"{ref} preço até {orc['max']:g}".strip())
+        else:
+            consultas.append(f"melhor {ref} comprar Brasil".strip())
     else:
-        consultas.append(f"melhor {nucleo}{detalhe} comprar Brasil".strip())
-    return consultas[:2]
+        consultas = [f"{nucleo}{detalhe} comprar oferta".strip()]
+        if orc.get("max"):
+            consultas.append(f"{nucleo}{detalhe} preço até {orc['max']:g}".strip())
+        else:
+            consultas.append(f"melhor {nucleo}{detalhe} comprar Brasil".strip())
+    vistos, final = set(), []
+    for q in consultas:
+        chave = q.lower()
+        if q and chave not in vistos:
+            vistos.add(chave)
+            final.append(q)
+    return final[:2]
 
 
 def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
