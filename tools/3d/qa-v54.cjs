@@ -19,7 +19,7 @@ const url='http://127.0.0.1:8770';let browser,page;
    if(m.location().url===url+'/api/session' && m.text().includes('401'))expectedAuth.push(m.text());
    else errors.push(m.text()+' '+m.location().url);
  }});
- await page.route('**/qa-v54',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/interface.css"><style>html,body{height:auto;overflow:auto}#fixture{max-width:760px;margin:auto}</style><main id="fixture"></main><script src="/model3d-schema.js"></script><script src="/jdui.js"></script>'}));
+ await page.route('**/qa-v54',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/interface.css"><style>html,body{height:auto;overflow:auto}#fixture{max-width:760px;margin:auto}</style><main id="fixture"></main><script src="/model3d-schema.js"></script><script src="/jdui.js"></script>'}));
  await page.goto(url+'/qa-v54');await page.waitForFunction(()=>window.JDUI);
  async function mount(p,append=false){await page.evaluate(({p,append})=>{
    const host=document.querySelector('#fixture');if(!append){host.replaceChildren();window.__state={};}

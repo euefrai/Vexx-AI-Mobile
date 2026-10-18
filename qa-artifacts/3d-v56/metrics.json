@@ -1,0 +1,43 @@
+{
+  "cleanup": {
+    "draws": 800,
+    "created": 33,
+    "deleted": 33
+  },
+  "draws": 651,
+  "errors": [],
+  "expectedAuth": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "restored": {
+    "messageId": "52423966-e62b-4dc6-b629-bc960b2f1114-r1",
+    "scene": "dev-console-branco",
+    "interaction": {
+      "selected": "corpo",
+      "hidden": [
+        "corpo",
+        "grade_topo",
+        "grade_frente",
+        "usb",
+        "botao",
+        "pe_esq",
+        "pe_dir"
+      ],
+      "isolated": "",
+      "exploded": false,
+      "transparent": [],
+      "view": "free",
+      "focus": "",
+      "step": 0,
+      "speed": 1,
+      "lessonPlaying": false
+    },
+    "rotation": [
+      0.3141592653589793,
+      0.4537856055185257,
+      0
+    ],
+    "distance": 6
+  },
+  "checks": "catalogo local, selo de fidelidade, ver-so-internas/externas com pixels reais, ver conexoes, explodir com pixels, cena aproximada por pesquisa com fonte visivel, limpeza de buffers, chat de dispositivo, continuacao por grupo, canvas reutilizado, estado restaurado no reload, mobile sem overflow"
+}

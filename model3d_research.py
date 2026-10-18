@@ -80,7 +80,7 @@ def _p(objects, key, label, pos, dims, color, desc, related=(), role='functional
 def _t_disco(o):
     _p(o, 'corpo', 'Corpo', [0, 0, 0], [2.0, .55, 2.0], '#3a3f4c',
        'Corpo em disco, formato típico desse tipo de aparelho.', ('topo', 'sensor', 'base'),
-       role='structural', order=1)
+       role='structural', order=1, kind='cylinder')
     _p(o, 'topo', 'Aro superior', [0, .3, 0], [1.6, .06, 1.6], '#23252c',
        'Acabamento superior ilustrativo.', ('corpo', 'sensor'), order=2, kind='cylinder')
     _p(o, 'sensor', 'Sensor', [0, .4, .4], [.28, .18, .28], '#14161c',

@@ -19,7 +19,7 @@ sem assets de terceiros e sem APIs pagas.
 | 7. Fundações de montagem | parcial | por peça: `role` (structural/functional/optional), `group` (internal/external), `order`; relações `related`; etapas com vista/explodido; modo separado. Tutorial de montagem guiado fica para depois |
 | 8. JDUI | parcial | chips de fidelidade (Modelo aproximado/conceitual/educativo) e fonte controlada; ações rápidas extras pendentes de revisão |
 | 9. Roteamento conversacional | concluída (novos comandos) | continuações e reconstrução preservadas; dispositivos entram por verbos 3D; isolamento por dono/conversa coberto por teste |
-| 10. Testes + QA real | parcial | 78 testes 3D verdes (21 na V5.6); suíte completa em `qa-artifacts/3d-catalog-tests.txt` (pré-pesquisa); QA em Chrome/WebGL da fase pendente (`tools/3d/qa-v56.cjs`) |
+| 10. Testes + QA real | parcial | 78 testes 3D verdes (21 na V5.6); suíte completa em `qa-artifacts/3d-research-tests.txt`; QA Chrome/WebGL `tools/3d/qa-v56.cjs` verde (cena de catálogo com grupos/conexões e pixels reais, cena de pesquisa com fonte visível, chat de dispositivo, continuação por grupo, reload, mobile) + regressão `qa-v54.cjs` verde; artefatos em `qa-artifacts/3d-v56/` |
 | 11. Desempenho | parcial | sem novos assets públicos; sombras estáticas; limites de 20 KB/32 peças/8 etapas seguem; passada final pendente |
 | 12. Entrega | pendente | docs `JULIA_3D_VISUAL_POLISH`/`MODEL_GENERATION`/`ASSEMBLY_FOUNDATION`, `RELATORIO_JULIA_5.6.md` e roadmap |
 
@@ -46,6 +46,9 @@ sem assets de terceiros e sem APIs pagas.
   inútil); listagens em triplo são lidas como L×P×A e, em disco/drone, a menor
   medida vira altura; triplo só vale com 1–500 cm e sem razão > 100; cache
   positivo de 6 h e negativo de 30 min, no máximo 32 assuntos em memória.
+- QA: fixture local precisa declarar `charset=utf-8` (descoberto na FASE 10:
+  o regex de fontes da V5.6 tem acentos e scripts sem charset quebram no
+  Chrome). O app real já declara `meta charset` e o cabeçalho do servidor.
 
 ## Ferramentas de QA
 
