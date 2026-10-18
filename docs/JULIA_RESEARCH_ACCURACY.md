@@ -80,6 +80,11 @@ Contratos preservados: a consulta original é sempre a primeira tentativa;
    descarte com motivo `republicação de <url>` e a mantida ganha
    `republicacoes: [urls]`. Títulos curtos (< 4 termos) nunca entram na
    regra (evita juntar páginas distintas de tema comum).
+3. **FASE 3 — qual versão fica**: "posterior" usa a **data declarada**
+   (pubDate/ISO em `data` ou `meta.publicado_em`) quando **ambas** têm data:
+   a mais antiga é a base e a outra vira republicação registrada. Sem data
+   conhecida, ou em empate, mantém a ordem de chegada (contrato antigo
+   preservado). Nada é apagado — só demovido com motivo.
 
 ## 5. Recuperação
 
@@ -154,10 +159,16 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   para **outro domínio**, a fonte ganha `origem_declarada` (declarado pela
   página; não verificado por nós; o link nunca é trocado) e o grounding do
   Lucas mostra "página declara a origem em X". Mesma origem/subdomínio não
-  marca; consulta sem canônica não muda nada.
+  marca; consulta sem canônica não muda nada. A marca chega ao cartão de
+  fontes da JDUI em "original declarado: X" (fonte → evidência → fence,
+  paridade `jdui.py` × `jdui.js`).
 - **Imagens referenciadas**: `web_extract.extrair_imagens` devolve as URLs
   que o documento declara (JSON-LD → og/twitter → `<img>`), absolutas e
   sem duplicatas; `extrair_pagina` expõe `imagens`.
+- **Medição contínua**: `diagnosticar()` traz por linha o acumulado de
+  `metricas()`, e `research.metricas_provedores()` junta as métricas do
+  dispatcher ao último `registrar_status` de cada provedor (leitura pura;
+  memória do processo, sem persistência entre reinícios — declarado).
 - **Sonda E2E real** (2026-10-18, `freio abs`, fontes permitidas):
   bing/stackexchange/worldbank/wikipedia/openlibrary/commons ok;
   pubmed/bing-news/hn/marginalia/bcb responderam sem resultado utilizável
@@ -178,9 +189,10 @@ pedido cobertos a mais) — quantidade de resultados não conta como ganho.
   correspondência, republicações, desatualizado temporal §7, P6, parada por
   ganho §6, índice geral §3). Candidato futuro (não prometido): preferência
   de fontes primárias por classe além da cadeia congelada de provedores.
-- FASE 3 (nova frente) **em andamento**: incrementos 1–3 concluídos (§9);
-  pendências declaradas no relatório (exibição na JDUI, medição contínua de
-  latência, avaliação de trafilatura/extruct).
+- FASE 3 (nova frente) **em andamento**: incrementos 1–6 concluídos (§9 e
+  §4.3); pendência declarada: notícia que só cita estudo publicado em outro
+  lugar (títulos diferentes) e avaliação de trafilatura/extruct só com
+  ganho comprovado.
 
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),

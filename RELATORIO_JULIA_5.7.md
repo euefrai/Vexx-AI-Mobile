@@ -164,9 +164,20 @@ existente e preservado** (nada recriado). Incrementos concluídos:
 3. **Origem declarada** pela página: `rel=canonical` para outro domínio vira
    `origem_declarada` na fonte, marca no grounding do Lucas e sinal no
    veredito de página — declarado, nunca verificado; o link não é trocado.
+4. **Exibição na JDUI**: a marca chega ao cartão de fontes ("original
+   declarado: X", mesma linha de domínio/data) via fonte → evidência →
+   fence, com paridade `jdui.py` × `jdui.js` (teto 120) e harness Node.
+5. **Medição contínua**: `diagnosticar()` traz por linha o acumulado de
+   `metricas()`; `research.metricas_provedores()` junta as métricas ao
+   último `registrar_status` (leitura pura; memória do processo,
+   persistência entre reinícios declarada fora de escopo).
+6. **Republicação com data declarada**: mesmo título em domínios distintos
+   — quando ambas as versões declaram data (pubDate/ISO), a mais antiga
+   fica como base e a outra vira republicação registrada; sem data ou em
+   empate, mantém a ordem de chegada (contrato antigo preservado).
 
-Suíte completa com os incrementos: **727 passed / 4 skipped** (722 dos
-incrementos 1–2 + 5 do incremento 3); benchmark congelado re-verificado
+Suíte completa com os incrementos: **735 passed / 4 skipped** (727 dos
+incrementos 1–3 + 8 dos incrementos 4–6); benchmark congelado re-verificado
 offline **34/34**.
 
 Sonda E2E real dos provedores (2026-10-18) em `qa-artifacts/v57/`
@@ -174,12 +185,15 @@ Sonda E2E real dos provedores (2026-10-18) em `qa-artifacts/v57/`
 openlibrary/commons ok, OpenAlex/Crossref ok; pubmed/bing-news/hn/marginalia/
 bcb responderam `vazio`; ddg/ddg-lite `rede` neste host — nada contornado.
 
-Pendências honestas desta frente: exibição da origem declarada na JDUI;
-medição de latência por provedor em uso contínuo; avaliação de
+Pendências honestas desta frente: notícia que só **cita** um estudo
+publicado em outro lugar (títulos diferentes — exigiria leitura cruzada de
+páginas, sem base de teste congelada); avaliação de
 trafilatura/extruct/crawl4ai (licenças livres — Apache-2.0/MIT —, mas
 dependências não se justificam por ora: o extrator atual já cobre título,
 texto, seções, metadados, JSON-LD, canônica, links, tabelas e agora imagens;
-os gates opcionais permanecem no código para quem instalar).
+os gates opcionais permanecem no código para quem instalar); persistência
+das métricas entre reinícios (hoje memória do processo — declarado, sem
+novo dashboard nesta fase).
 
 ## Métricas (antes → depois)
 
@@ -197,7 +211,11 @@ os gates opcionais permanecem no código para quem instalar).
 | Métricas por provedor (FASE 3) | só último status + contagem da rodada | `metricas()`: chamadas/ok/vazio/erros/ms por provedor |
 | Imagens referenciadas (FASE 3) | não extraídas | `extrair_pagina["imagens"]` (JSON-LD/og/`<img>`, dedup) |
 | Origem declarada (FASE 3) | não sinalizada | `origem_declarada` + marca no grounding |
+| Origem declarada na JDUI (FASE 3) | não exibida | cartão de fontes: "original declarado: X" (paridade py×js) |
+| Métricas no diagnóstico (FASE 3) | sonda sem métrica acumulada | `diagnosticar()` com `metricas`; `metricas_provedores()` (métricas + último status) |
+| Republicação com data (FASE 3) | primeira vista vence | base = versão mais antiga quando ambas têm data; sem data, primeira vista |
 | Suíte completa (FASE 3, inc. 1–3) | 712 passed / 4 skipped | **727 passed / 4 skipped** |
+| Suíte completa (FASE 3, inc. 1–6) | 712 passed / 4 skipped | **735 passed / 4 skipped** |
 
 ## Contratos preservados
 

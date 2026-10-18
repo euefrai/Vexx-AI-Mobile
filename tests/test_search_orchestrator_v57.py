@@ -144,6 +144,37 @@ def test_titulos_curtos_nao_sao_tratados_como_republicacao():
     assert len(unicos) == 2
 
 
+def test_republicacao_com_data_mantem_a_versao_mais_antiga():
+    titulo = "Chuva de meteoros ilumina o céu na madrugada desta sexta-feira"
+    recente = {"titulo": titulo, "url": "https://portal-a.example/n/meteoros",
+               "trecho": "cópia publicada depois",
+               "meta": {"publicado_em": "Sat, 17 Oct 2026 09:00:00 GMT"}}
+    original = {"titulo": titulo, "url": "https://portal-b.example/2026/meteoros",
+                "trecho": "texto original",
+                "meta": {"publicado_em": "Fri, 16 Oct 2026 22:10:00 GMT"}}
+    unicos, descartes = orch.deduplicar([recente, original])
+    assert [u["url"] for u in unicos] == [original["url"]]
+    assert unicos[0]["republicacoes"] == [recente["url"]]
+    assert any(recente["url"] in d["url"] for d in descartes)
+    assert any("republicação de" in d["motivo"] for d in descartes)
+
+
+def test_republicacao_sem_data_ou_data_igual_mantem_primeiro_visto():
+    titulo = "Chuva de meteoros ilumina o céu na madrugada desta sexta-feira"
+    a = {"titulo": titulo, "url": "https://portal-a.example/n/meteoros", "trecho": ""}
+    b = {"titulo": titulo, "url": "https://portal-b.example/n/meteoros", "trecho": ""}
+    unicos, _ = orch.deduplicar([a, b])
+    assert unicos[0]["url"] == a["url"]
+
+    mesma = "Fri, 16 Oct 2026 22:10:00 GMT"
+    c = {"titulo": titulo, "url": "https://portal-c.example/n/meteoros",
+         "trecho": "", "meta": {"publicado_em": mesma}}
+    d = {"titulo": titulo, "url": "https://portal-d.example/n/meteoros",
+         "trecho": "", "meta": {"publicado_em": mesma}}
+    unicos2, _ = orch.deduplicar([c, d])
+    assert unicos2[0]["url"] == c["url"]
+
+
 # ── Conteúdo desatualizado em consultas temporais (V5.7) ─────────────
 
 def test_conteudo_desatualizado_e_sinalizado_nao_apagado(monkeypatch):

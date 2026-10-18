@@ -14,6 +14,10 @@ Cartão por fonte:
 - **badge de estado**: `Encontrada` / `Aberta` / `Utilizada`
   (classe `jdui-badge st-*`);
 - **domínio · data**;
+- **"original declarado: X"** (novo na FASE 3): quando a página aberta declara
+  via `rel=canonical` outro domínio como origem, o cartão acrescenta a marca
+  na mesma linha — declarado pela página, nunca verificado por nós, e o link
+  exibido continua o da fonte aberta;
 - **trecho literal** (proveniência — na V5.7 nunca mais vindo de
   referências/bibliografia);
 - botão **"Abrir fonte ↗"** (`target="_blank"`,
@@ -79,6 +83,10 @@ Testes: `tests/test_pc_agent_fontes_v57.py`.
 - Smoke de frontend (`test_frontend_smoke.py`): 14/14 (Markdown, autolink,
   citações, imagens, XSS, tabelas, dual-view).
 - Regressão completa: 712 passed / 4 skipped.
+- FASE 3: origem declarada no cartão de fontes ("original declarado: X"),
+  paridade `jdui.py` × `jdui.js` com teto 120 — `tests/test_jdui_fontes_v57.py`
+  (4 casos, incluindo harness Node); regressão da fase completa:
+  **735 passed / 4 skipped**.
 
 ## 7. Pendências honestas
 

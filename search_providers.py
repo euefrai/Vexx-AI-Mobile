@@ -505,7 +505,12 @@ def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> 
 
 
 def diagnosticar(consulta: str = "notebook", timeout: float = 12.0) -> list:
-    """Sonda cada provedor (uso real, sem bypass) para relatório de auditoria."""
+    """Sonda cada provedor (uso real, sem bypass) para relatório de auditoria.
+
+    Cada linha carrega o acumulado de `metricas()` do provedor até este ponto
+    (chamadas/ok/vazio/erros/latência média) — medição contínua do processo,
+    sempre aditiva ao resultado anterior.
+    """
     out = []
     for nome in disponiveis():
         t0 = time.time()
@@ -513,14 +518,18 @@ def diagnosticar(consulta: str = "notebook", timeout: float = 12.0) -> list:
             achados = buscar(nome, consulta, limite=2, timeout=timeout)
             out.append({"provedor": nome, "estado": "ok", "resultados": len(achados),
                         "segundos": round(time.time() - t0, 2),
+                        "metricas": metricas().get(nome, {}),
                         "exemplo": (achados[0].get("titulo") or "")[:80]})
         except ErroProvedor as exc:
             out.append({"provedor": nome, "estado": exc.codigo, "resultados": 0,
                         "segundos": round(time.time() - t0, 2),
+                        "metricas": metricas().get(nome, {}),
                         "detalhe": str(exc)[:160]})
         except Exception as exc:  # nunca derruba o diagnóstico
             out.append({"provedor": nome, "estado": type(exc).__name__, "resultados": 0,
-                        "segundos": round(time.time() - t0, 2), "detalhe": str(exc)[:160]})
+                        "segundos": round(time.time() - t0, 2),
+                        "metricas": metricas().get(nome, {}),
+                        "detalhe": str(exc)[:160]})
     return out
 
 

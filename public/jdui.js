@@ -379,6 +379,7 @@
             titulo: S(f.titulo || f.title, 160), url: URL_OK(f.url),
             dominio: S(f.dominio, 120), data: S(f.data, 48),
             trecho: S(f.trecho, 300),
+            origem_declarada: S(f.origem_declarada, 120),
             status: sts.indexOf(st) >= 0 ? st : 'encontrada'
           };
         }),
@@ -2242,7 +2243,9 @@
       top.appendChild(el('strong', '', f.titulo));
       top.appendChild(el('span', 'jdui-badge st-' + f.status, ROT[f.status] || f.status));
       card.appendChild(top);
-      const meta = [f.dominio, f.data].filter(Boolean).join(' · ');
+      const partes = [f.dominio, f.data].filter(Boolean);
+      if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
+      const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
       if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
       if (f.url) {

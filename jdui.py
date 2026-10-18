@@ -562,6 +562,7 @@ def _v_sources(p: dict) -> dict:
                     "dominio": _str(f.get("dominio"), 120),
                     "data": _str(f.get("data"), 48),
                     "trecho": _str(f.get("trecho"), 300),
+                    "origem_declarada": _str(f.get("origem_declarada"), 120),
                     "status": status})
     return {"title": _str(p.get("title"), 160), "items": out,
             "sources": _provenance(p.get("sources"))}

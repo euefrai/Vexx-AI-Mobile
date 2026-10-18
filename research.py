@@ -313,6 +313,27 @@ def status_provedor(nome: str) -> dict:
     return dict(_STATUS_PROVEDOR.get(str(nome)[:40]) or {})
 
 
+def metricas_provedores() -> dict:
+    """Métricas cumulativas + último status por provedor (V5.7 F3).
+
+    Junta o acumulado de `search_providers.metricas()` (latência/erros no
+    dispatcher) ao último `registrar_status` — leitura pura, sem I/O e sem
+    alterar a busca. Cobre provedores da cadeia orquestrada e o caminho
+    ddg/ddg-lite/wikipedia.
+    """
+    try:
+        import search_providers as _sp
+        acumulado = _sp.metricas()
+    except Exception:
+        acumulado = {}
+    out = {}
+    for nome in sorted(set(list(acumulado.keys()) + list(_STATUS_PROVEDOR.keys()))):
+        m = dict(acumulado.get(nome) or {})
+        m["ultimo_status"] = dict(_STATUS_PROVEDOR.get(nome) or {})
+        out[nome] = m
+    return out
+
+
 _RX_RESULTADOS = [
     r'''class=["']result__a["'][^>]*href=["']([^"']+)["'][^>]*>(.*?)</a>''',
     r'''class=["']result-link["'][^>]*href=["']([^"']+)["'][^>]*>(.*?)</a>''',

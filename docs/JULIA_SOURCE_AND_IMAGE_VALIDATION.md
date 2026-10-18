@@ -80,7 +80,9 @@ nunca inventadas.
 outro domínio, `research._fonte_de` marca `origem_declarada` e
 `source_check.avaliar_pagina` devolve o mesmo sinal. É declaração da própria
 página (agregador/cópia aponta o original) — **não é verificação nossa**,
-não troca o link e não promove veredito.
+não troca o link e não promove veredito. A marca aparece no cartão de
+fontes da JDUI ("original declarado: X" na linha de domínio/data; campos
+espelhados em `jdui.py` e `public/jdui.js`).
 
 ## 4. Bloqueios externos observados (2026-10-17) — sem bypass
 
@@ -107,8 +109,11 @@ não simula verificação.
   referenciadas (og/JSON-LD/`<img>`, dedup, `data:` fora) — FASE 3.
 - `tests/test_fontes_origem_v57.py` — origem declarada (canônica externa,
   mesmo domínio silencia, grounding, veredito) — FASE 3.
-- `tests/test_providers_v57.py` — métricas por provedor e classificação
-  HTTP 202/403/429/5xx/timeout/vazio — FASE 3.
+- `tests/test_jdui_fontes_v57.py` — origem declarada no cartão de fontes:
+  schema py×js (paridade, teto 120), fence end-to-end (fonte → evidência →
+  card) e render Node — FASE 3.
+- `tests/test_providers_v57.py` — métricas por provedor, classificação
+  HTTP 202/403/429/5xx/timeout/vazio e métricas no diagnóstico — FASE 3.
 - Benchmark `tools/bench_pesquisa_v57.py`, grupos `produtos`, `specs` e
   `links` (12 casos) — 34/34 global.
 - Sonda real de provedores (2026-10-18): `qa-artifacts/v57/`

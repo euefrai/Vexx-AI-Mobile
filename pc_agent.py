@@ -3051,6 +3051,7 @@ def fence_de_fontes(db, owner: str) -> str:
                       "dominio": (e.get("dominio", "") or "")[:120],
                       "data": (e.get("acessado_em", "") or "")[:10],
                       "trecho": trecho[:300],
+                      "origem_declarada": (e.get("origem_declarada", "") or "")[:120],
                       "status": "utilizada" if (e.get("afirmacao") or "") else (
                           "aberta" if trecho else "encontrada")})
     if not itens:

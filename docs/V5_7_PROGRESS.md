@@ -231,6 +231,40 @@ Testes: 2 casos novos; benchmark ganhou o grupo `indice` (3 casos).
   mesmo domínio/subdomínio/vazio silencia; usa a URL final da recuperação;
   marca no grounding; veredito com e sem divergência.
 
+### Incremento 4 — origem declarada exibida na JDUI (concluído)
+
+- Fluxo completo: fonte da pesquisa → `research_agents.registrar_evidencia`
+  (já guardava a fonte inteira em `original`; leitura agora inclui
+  `origem_declarada`) → `pc_agent.fence_de_fontes` passa o campo (≤120) →
+  validadores `jdui.py` e `public/jdui.js` (paridade) → cartão de fontes
+  mostra "original declarado: X" na mesma linha de domínio/data, sem
+  componente novo e sem CSS novo.
+- Testes: `tests/test_jdui_fontes_v57.py` — schema aceita/limita/normaliza
+  vazio; fence end-to-end com e sem a marca; harness Node valida schema e
+  render no `jdui.js` (4 casos).
+
+### Incremento 5 — métricas na medição contínua (concluído)
+
+- `search_providers.diagnosticar()`: cada linha ganha `metricas` do
+  provedor (chamadas/ok/vazio/erros/latência média até o momento da sonda).
+- `research.metricas_provedores()` (novo): junta o acumulado do dispatcher
+  ao último `registrar_status` por provedor — leitura pura para relatórios,
+  sem I/O e sem mudar a busca. Persistência entre reinícios fica declarada
+  como fora de escopo (memória do processo; sem novo dashboard).
+- Testes: 2 casos em `tests/test_providers_v57.py` (sonda com métricas;
+  junção métricas+último status).
+
+### Incremento 6 — republicação: base mais antiga com data declarada (concluído)
+
+- `search_orchestrator.deduplicar`: quando as duas versões do mesmo título
+  declaram data (pubDate/ISO em `data` ou `meta.publicado_em`), a **mais
+  antiga** fica como base e a outra vira republicação registrada — resolve
+  o "primeiro visto vence" que contrariava o próprio docstring. Sem data
+  conhecida, ou em empate, mantém a ordem de chegada (contrato preservado);
+  nada é apagado (descarte com motivo + `republicacoes`).
+- Testes: 2 casos novos (troca pela mais antiga com datas; sem data/empate
+  mantém o primeiro visto). Benchmark congelado segue 34/34.
+
 ### Sonda E2E real de provedores (2026-10-18)
 
 Artefato: `qa-artifacts/v57/fase3-provedores-2026-10-18.json`.
@@ -260,13 +294,18 @@ utilizável — não é sucesso, e permanece registrado assim.
 1. Métricas por provedor — **resolvido** (incremento 1).
 2. Testes HTTP 202/403/429/5xx/timeout/vazio — **resolvido** (incremento 1).
 3. Imagens referenciadas — **resolvido** (incremento 2).
-4. Fonte primária — **parcialmente resolvido**: sinal de origem declarada
-   (incremento 3) + preferência por página de produto da FASE 4 (shopping);
-   sem reordenação da cadeia congelada.
+4. Fonte primária — **resolvido no que tem evidência real**: sinal de origem
+   declarada (incremento 3) agora exibido na JDUI (incremento 4),
+   republicação mantendo a base mais antiga quando há data declarada
+   (incremento 6) e preferência por página de produto da FASE 4; sem
+   reordenação da cadeia congelada. Fica pendente declarado o caso "notícia
+   que só cita um estudo publicado em outro lugar" (títulos diferentes —
+   exigiria leitura cruzada de páginas, sem base de teste congelada).
 5. E2E externo — **resolvido** (tabela acima). "Antes/depois" de latência
    não é atribuível a estes incrementos (camadas passivas: métricas e
    campos aditivos); a mudança de comportamento continua coberta pelo
-   benchmark congelado 34/34.
+   benchmark congelado 34/34. Medição contínua agora legível em
+   `diagnosticar()`/`metricas_provedores()` (memória do processo).
 
 ## FASE 7 — JDUI (incremento 1 concluído)
 
@@ -389,9 +428,10 @@ congelada de provedores.
   `--real` acrescenta sondas de rede) e `pytest -q tests/test_bench_pesquisa_v57.py`.
 - FASE 5 (trecho): `pytest -q tests/test_web_extract_v57.py` 4/4; prova real
   no mesmo probe da Wikipédia (trecho do corpo do artigo).
-- FASE 3 (incrementos 1–3): `pytest -q tests/test_providers_v57.py` 7/7,
-  `tests/test_fontes_origem_v57.py` 5/5 e `tests/test_web_extract_v57.py`
-  (trecho + imagens) verde; sonda real de provedores em
-  `qa-artifacts/v57/fase3-provedores-2026-10-18.json`; suíte completa
-  **727 passed / 4 skipped** (722 com métricas + imagens, mais 5 de origem
-  declarada); benchmark congelado re-verificado offline **34/34**.
+- FASE 3 (incrementos 1–6): suíte da área verde — `test_providers_v57.py`
+  (métricas + diagnóstico), `test_fontes_origem_v57.py` (origem declarada),
+  `test_jdui_fontes_v57.py` (card de fontes; inclui harness Node) e
+  `test_search_orchestrator_v57.py` (republicação com/sem data); sonda real
+  de provedores em `qa-artifacts/v57/fase3-provedores-2026-10-18.json`;
+  suíte completa **735 passed / 4 skipped**; benchmark congelado
+  re-verificado offline **34/34**.

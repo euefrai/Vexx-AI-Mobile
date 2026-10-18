@@ -396,12 +396,36 @@ def _pagina_de_indice(a: dict) -> bool:
     return bool(RX_INDICE_CAMINHO.search(caminho))
 
 
+def _data_do_item(a: dict):
+    """Data publicada declarada pelo item (pubDate/ISO) ou None — sem palpite."""
+    bruto = str(a.get("data") or (a.get("meta") or {}).get("publicado_em")
+                or a.get("publicado_em") or "").strip()
+    if not bruto:
+        return None
+    import email.utils
+    from datetime import datetime, timezone
+    try:
+        try:
+            dt = email.utils.parsedate_to_datetime(bruto)
+        except (TypeError, ValueError):
+            dt = None
+        if dt is None:
+            dt = datetime.fromisoformat(bruto.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except (TypeError, ValueError):
+        return None
+
+
 def deduplicar(achados: list) -> tuple:
     """Agrupa por URL canônica e sinaliza republicações. (únicos, descartes).
 
     V5.7: título praticamente idêntico (Jaccard >= 0.9, >= 4 termos) entre
     URLs distintas é registrado como republicação — a versão posterior é
     descartada com motivo e a mantida ganha `republicacoes` (nunca apagado).
+    "Posterior" usa a data declarada quando ambas existem (a mais antiga
+    fica como base); sem data conhecida, mantém a ordem de chegada.
     """
     vistos, unicos, descartes = {}, [], []
     for a in achados or []:
@@ -434,6 +458,21 @@ def deduplicar(achados: list) -> tuple:
                     dono = item
                     break
             if dono is not None:
+                d_dono, d_nova = _data_do_item(dono), _data_do_item(a)
+                if d_nova is not None and d_dono is not None and d_nova < d_dono:
+                    # Evidência real (pubDate declarada): a versão mais antiga é
+                    # a base; a mantida até aqui vira republicação — sem apagar.
+                    reps = list(dono.get("republicacoes") or [])
+                    reps.append((dono.get("url") or "")[:200])
+                    a["republicacoes"] = reps
+                    descartes.append({"url": (dono.get("url") or "")[:200],
+                                      "motivo": f"republicação de {(a.get('url') or '')[:120]}"})
+                    finais[finais.index(dono)] = a
+                    for j, (conj, item) in enumerate(vistos_titulo):
+                        if item is dono:
+                            vistos_titulo[j] = (conj, a)
+                            break
+                    continue
                 dono.setdefault("republicacoes", []).append((a.get("url") or "")[:200])
                 descartes.append({"url": (a.get("url") or "")[:200],
                                   "motivo": f"republicação de {(dono.get('url') or '')[:120]}"})

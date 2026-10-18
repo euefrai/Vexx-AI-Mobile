@@ -158,3 +158,34 @@ def test_http_202_sem_corpo_e_vazio_honesto(monkeypatch):
         sp.buscar("bing", "abs freio")
     assert ei.value.codigo == "vazio"
     assert sp.metricas()["bing"]["erros"] == {"vazio": 1}
+
+
+def test_diagnosticar_inclui_metricas(monkeypatch):
+    def fn(consulta, limite=6, timeout=10.0):
+        if consulta == "falha":
+            raise sp.ErroProvedor("sem rede", "rede")
+        return [{"titulo": "T", "url": "https://a.example/1"}]
+    _provedor_fake(monkeypatch, fn)
+    monkeypatch.setattr(sp, "disponiveis", lambda classes=None: ["prova-v57"])
+
+    linha = sp.diagnosticar("tema", timeout=1.0)[0]
+    assert linha["estado"] == "ok" and linha["resultados"] == 1
+    assert linha["metricas"]["chamadas"] == 1 and linha["metricas"]["ok"] == 1
+
+    linha2 = sp.diagnosticar("falha", timeout=1.0)[0]
+    assert linha2["estado"] == "rede"
+    assert linha2["metricas"]["erros"] == {"rede": 1}
+
+
+def test_metricas_provedores_junta_status(monkeypatch):
+    def fn(consulta, limite=6, timeout=10.0):
+        return [{"titulo": "T", "url": "https://a.example/1"}]
+    _provedor_fake(monkeypatch, fn)
+    sp.buscar("prova-v57", "tema")
+
+    monkeypatch.setattr(research, "_STATUS_PROVEDOR", {})
+    research.registrar_status("prova-v57", resultados=1)
+
+    m = research.metricas_provedores()["prova-v57"]
+    assert m["chamadas"] == 1 and m["resultados"] == 1
+    assert m["ultimo_status"]["resultados"] == 1

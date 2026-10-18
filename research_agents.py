@@ -521,7 +521,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "full_text_fetched",
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
-                    "table_hint"):
+                    "table_hint", "origem_declarada"):
             if key in metadata:
                 ev[key] = metadata[key]
         evidencias.append(ev)
