@@ -1,0 +1,128 @@
+{
+ "quando": "2026-10-18T14:14:48-0300",
+ "tarefa": "V5.7 validação positiva de oferta real (sem provedores novos)",
+ "ambiente": "rede real; venv; Windows",
+ "consultas_testadas": [
+  "notebook para trabalhar e estudar"
+ ],
+ "escolhida_para_render": "notebook para trabalhar e estudar",
+ "ofertas_confirmadas": 4,
+ "limitacoes_externas": [
+  "ddg-lite: sem resultados (bloqueio?)",
+  "ddg: sem resultados (bloqueio?)",
+  "mlb: falhou (ResearchErro)"
+ ],
+ "por_consulta": [
+  {
+   "texto": "notebook para trabalhar e estudar",
+   "segundos": 17.0,
+   "fases": [
+    "buscando: notebook",
+    "identificando: 12 anúncios candidatos",
+    "consultando: 6 páginas",
+    "extraindo: 4 ofertas estruturadas",
+    "validando: 4 modelos únicos",
+    "confirmando: 4 páginas de item",
+    "verificando: imagens reais dos produtos",
+    "organizando: 4 recomendações, 1 referências não verificadas"
+   ],
+   "etapas": [
+    "notebook trabalhar estudar comprar ofert: mlb: falhou (ResearchErro)",
+    "notebook trabalhar estudar comprar ofert: ddg: sem resultados (bloqueio?)",
+    "notebook trabalhar estudar comprar ofert: ddg-lite: sem resultados (bloqueio?)",
+    "notebook trabalhar estudar comprar ofert: web: 6 resultados (bing, ok)",
+    "melhor notebook trabalhar estudar compra: mlb: falhou (ResearchErro)",
+    "melhor notebook trabalhar estudar compra: ddg: sem resultados (bloqueio?)",
+    "melhor notebook trabalhar estudar compra: ddg-lite: sem resultados (bloqueio?)",
+    "melhor notebook trabalhar estudar compra: web: 18 resultados (bing+marginalia, ok)"
+   ],
+   "n_achados": null,
+   "produtos": [
+    {
+     "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+     "preco_texto": "R$ 2.974,15",
+     "preco": 2974.15,
+     "preco_confirmado": true,
+     "preco_origem": "jsonld",
+     "disponibilidade": "em_estoque",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "imagem_veredito": "verificado",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "item_de_listagem": false,
+     "tier": "confirmada",
+     "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "url_verificada": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288"
+    },
+    {
+     "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+     "preco_texto": "R$ 4.703,04",
+     "preco": 4703.04,
+     "preco_confirmado": true,
+     "preco_origem": "jsonld",
+     "disponibilidade": "em_estoque",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "imagem_veredito": "verificado",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "item_de_listagem": false,
+     "tier": "confirmada",
+     "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300"
+    },
+    {
+     "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+     "preco_texto": "R$ 7.299,00",
+     "preco": 7299.0,
+     "preco_confirmado": true,
+     "preco_origem": "jsonld",
+     "disponibilidade": "em_estoque",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "imagem_veredito": "verificado",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "item_de_listagem": false,
+     "tier": "confirmada",
+     "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "url_verificada": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30"
+    },
+    {
+     "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+     "preco_texto": "R$ 9.750,24",
+     "preco": 9750.24,
+     "preco_confirmado": true,
+     "preco_origem": "jsonld",
+     "disponibilidade": "em_estoque",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "imagem_veredito": "verificado",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "item_de_listagem": false,
+     "tier": "confirmada",
+     "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300"
+    }
+   ],
+   "encontrados": [
+    {
+     "nome": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+     "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+     "motivo_codigo": "bloqueio",
+     "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado"
+    }
+   ],
+   "erro": ""
+  }
+ ],
+ "render_node": {
+  "ok": true,
+  "fence_valido": true,
+  "erros_jdui": [],
+  "stdout": "ok payload-valido\nok payload-links\nok payload-tem-verificado\nok render-link-verificado\nok render-nomes",
+  "stderr": ""
+ }
+}

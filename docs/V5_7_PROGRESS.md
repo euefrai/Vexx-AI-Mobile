@@ -830,3 +830,66 @@ enviadas + resultados brutos por provedor, sem dados sensíveis).
 - `ddg-lite` é intermitente: quando responde, amplia a descoberta (foi dele
   a referência Netshoes na primeira rodada); nada garante disponibilidade.
 
+## Validação positiva da oferta (concluída, 2026-10-18)
+
+Follow-up direto da auditoria: com a descoberta corrigida, os itens KaBuM
+seguiam `parcial` — as páginas individuais dos itens nunca eram abertas.
+Investigação: **nenhum passo do pipeline abria a URL do item declarada no
+JSON-LD** (`offers.url`); o card nascia `item_nao_aberto`/`item_de_listagem`
+e ficava parcial para sempre. Probe ao vivo (antes de mudar código): página
+de item KaBuM responde 200 em ~1 s, `avaliar_pagina(tipo=produto)` dá
+"verificado" e o preço real da página difere do da listagem (Alienware:
+R$ 7.299,00 na página × R$ 11.400,19 na listagem) — abrir o item é o que
+faltava, e corrige o dado exibido.
+
+### Correção (incremental; nenhum provedor novo, nenhum contorno)
+
+- `shopping._validar_itens_declarados` chamado por `pesquisar` após montar os
+  cards: para cada card com `link_codigo` em `item_nao_aberto`/
+  `item_de_listagem` e `url_item` http(s) fora de home/busca, abre a URL com
+  o MESMO `baixar_fn` das candidatas (orçamento `MAX_VALIDACOES_ITEM = 6`,
+  paralelo 3).
+- Promoção SÓ com evidência: `avaliar_pagina(pagina, final,
+  esperado={tipo: produto, termos: identidade})` — até 3 termos
+  determinísticos do card (variante → modelo → nome). "verificado" promove
+  (`link_veredito=verificado`, `link_codigo=ok`, `item_de_listagem=False`,
+  `url_verificada`, `verificado_em` novo) e adota preço/estoque/foto/
+  avaliação/specs da própria página; imagem trocada volta a
+  `imagem_veredito=""` para reverificação.
+- Bloqueio/rede/página vazia/outro produto: card preservado exatamente como
+  estava (parcial + motivo original). `_tier` intacto (confirmada = preço em
+  dado estruturado + link verificado); página do item sem preço não apaga
+  preço estruturado existente.
+
+### E2E real (rede atual)
+
+- "notebook para trabalhar e estudar": 12 candidatos → 6 páginas → 4 ofertas
+  estruturadas → **4/4 confirmadas na página do item** (R$ 2.974,15 /
+  R$ 4.703,04 / R$ 7.299,00 / R$ 9.750,24; `em_estoque`; 4 imagens CDN
+  verificadas; 17 s; fases: "confirmando: 4 páginas de item").
+- Payload JDUI gerado do resultado real: válido (`jdui.validar_mensagem`) e
+  renderizado no espelho `public/jdui.js` (node): "Link verificado", sem selo
+  de listagem.
+- Magazine Luiza 403 → referência não verificada (bloqueio não contornado);
+  `mlb`/`ddg` seguem bloqueados nesta rede (etapas registradas).
+- Evidência bruta: `qa-artifacts/v57/validacao-item-2026-10-18.json`.
+
+### Validação
+
+- Testes novos: `tests/test_shopping_item_v57.py` (9) — promoção com adoção de
+  preço/estoque/foto, item de listagem promovido, página sem preço, bloqueio
+  preserva parcial, outro produto não promove, orçamento, identidade
+  determinística, render node do fence.
+- Suíte completa: **842 passed / 4 skipped**; benchmarks congelados:
+  `shopping_v4` **59/59**, `pesquisa_v57` **34/34** (artefato restaurado via
+  `git checkout`).
+
+### Limitações
+
+- A promoção depende da página do item estar acessível (KaBuM sim; lojas com
+  403/CAPTCHA não — o card fica parcial, como antes, sem contorno).
+- Identidade conservadora: página que não repita variante/modelo/nome do card
+  não promove (falso negativo preferível a falso positivo).
+- Fixtures dos testes são sintéticas (mesmo perfil das páginas reais); a
+  verificação "de rede" é a do artefato E2E.
+

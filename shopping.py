@@ -62,6 +62,7 @@ MAX_CONSULTAS_POR_CONV = 20
 MAX_PAGINAS = 6
 MAX_PRODUTOS = 6
 MAX_REFERENCIAS = 4
+MAX_VALIDACOES_ITEM = 6  # páginas de item abertas p/ confirmar cards (V5.7)
 
 PRECO_NAO_CONFIRMADO = "Preço não confirmado"
 
@@ -1622,6 +1623,145 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
     return saidas
 
 
+# ── Validação da página do item declarada no JSON-LD (V5.7) ───────────
+# Item que declara a URL da própria página de produto (`offers.url` em
+# categoria/listagem/agregador) nasce `item_de_listagem`/`item_nao_aberto`.
+# Esta etapa ABRE a URL declarada (mesmo downloader das candidatas; nunca
+# contorna bloqueio) e só promove o card quando `avaliar_pagina` confirma
+# produto + identidade. Preço/estoque/foto passam a vir da página do item;
+# página inacessível preserva o card parcial exatamente como estava.
+
+def _identidade_do_card(p: dict) -> list:
+    """Até 3 termos distintivos (variante, modelo, nome) p/ conferir a página
+    do item — ordem determinística; variante entra primeiro (cor/tamanho)."""
+    out: list = []
+    for texto in (p.get("variante"), p.get("modelo"), p.get("nome")):
+        for t in sorted(_termos_busca(texto), key=lambda t: (-len(t), t)):
+            if t not in out:
+                out.append(t)
+            if len(out) == 3:
+                return out
+    return out
+
+
+def _item_para_confirmar(p: dict) -> bool:
+    """Card elegível: link do item declarado em OUTRA página, ainda não aberto."""
+    if p.get("link_codigo") not in ("item_de_listagem", "item_nao_aberto"):
+        return False
+    url = _limpa(p.get("url_item"), 500)
+    if not url.lower().startswith(("http://", "https://")):
+        return False
+    return not source_check.url_de_listagem(url)
+
+
+def _nome_chave(nome: str) -> str:
+    return _sem_acentos(_limpa(nome, 200)).strip().lower()
+
+
+def _validar_item_declarado(p: dict, baixar_fn, consulta: str) -> dict | None:
+    """Abre a página do item declarada; devolve os campos COMPROVADOS (página
+    verificada + identidade) ou None — sem promoção e sem alterar o card."""
+    url_item = _limpa(p.get("url_item"), 500)
+    try:
+        if baixar_fn is not None:
+            rec = baixar_fn(url_item)
+            final = rec.get("final", url_item) if isinstance(rec, dict) else url_item
+            pagina = rec.get("texto", "") if isinstance(rec, dict) else ""
+            if not pagina or "<" not in pagina:
+                return None
+        else:
+            final, pagina = research.baixar(url_item, timeout=6.0)
+    except Exception as exc:
+        log.info("shopping: página do item não abriu (%s): %s",
+                 type(exc).__name__, url_item[:80])
+        return None
+    try:
+        aval = source_check.avaliar_pagina(
+            pagina, final, consulta=consulta,
+            esperado={"tipo": "produto", "termos": _identidade_do_card(p)})
+    except Exception:
+        return None
+    if aval.get("veredito") != "verificado":
+        log.info("shopping: item declarado não confirmado (%s): %s",
+                 aval.get("codigo"), url_item[:80])
+        return None
+    upd: dict = {"link_veredito": "verificado",
+                 "link_codigo": _limpa(aval.get("codigo"), 40) or "ok",
+                 "link_motivo": _limpa(aval.get("motivo"), 160),
+                 "item_de_listagem": False,
+                 "url_verificada": _limpa(final or url_item, 500),
+                 "verificado_em": agora_iso()}
+    # Dados da PRÓPRIA página do item (JSON-LD): preço/estoque/foto frescos.
+    try:
+        extraidos = [e for e in extrair_ofertas_jsonld(pagina) if e.get("nome")]
+    except Exception:
+        extraidos = []
+    meu_nome = _nome_chave(p.get("nome"))
+    ex2 = next((e for e in extraidos
+                if meu_nome and _nome_chave(e.get("nome")) == meu_nome), None)
+    if ex2 is None and len(extraidos) == 1:
+        ex2 = extraidos[0]
+    if ex2 is not None:
+        ex2 = dict(ex2)
+        ex2.setdefault("origem_preco", "jsonld")
+        try:
+            p2 = montar_produto(ex2, url_item, final or url_item,
+                                p.get("fonte_titulo", ""))
+        except Exception:
+            p2 = None
+        if p2:
+            if p2.get("preco") is not None:
+                for k in ("preco", "moeda", "preco_confirmado",
+                          "preco_a_partir_de", "preco_texto", "preco_origem"):
+                    upd[k] = p2.get(k)
+            if p2.get("disponibilidade", "desconhecida") != "desconhecida":
+                upd["disponibilidade"] = p2["disponibilidade"]
+            if p2.get("imagem") and p2["imagem"] != p.get("imagem"):
+                upd["imagem"] = p2["imagem"]
+                upd["imagem_veredito"] = ""
+                upd["imagem_motivo"] = ""
+            if p2.get("avaliacao") is not None:
+                upd["avaliacao"] = p2.get("avaliacao")
+                upd["n_avaliacoes"] = p2.get("n_avaliacoes")
+            if p2.get("specs") and len(p2["specs"]) >= len(p.get("specs") or {}):
+                upd["specs"] = p2["specs"]
+            if p2.get("descricao") and not p.get("descricao"):
+                upd["descricao"] = p2["descricao"]
+    return upd
+
+
+def _validar_itens_declarados(produtos: list, baixar_fn, consulta: str,
+                              progresso=None) -> int:
+    """Abre a página do item de cada card ainda não aberto (com orçamento).
+    Sucesso promove o card com evidência; bloqueio/erro preserva o parcial."""
+    pendentes = [p for p in produtos if _item_para_confirmar(p)]
+    if not pendentes:
+        return 0
+    alvos = pendentes[:MAX_VALIDACOES_ITEM]
+    try:
+        if progresso:
+            progresso("confirmando", f"{len(alvos)} páginas de item")
+    except Exception:
+        pass
+    from concurrent.futures import ThreadPoolExecutor
+    promovidos = 0
+    with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliaitem") as pool:
+        futs = {pool.submit(_validar_item_declarado, p, baixar_fn, consulta): p
+                for p in alvos}
+        for fut, p in futs.items():
+            try:
+                upd = fut.result()
+            except Exception:
+                upd = None
+            if upd:
+                p.update(upd)
+                promovidos += 1
+    if promovidos:
+        log.info("shopping: %d/%d itens declarados confirmados na página do item",
+                 promovidos, len(alvos))
+    return promovidos
+
+
 # ── Referências não verificadas (descoberta genérica — V5.7) ─────────
 # Página achada na busca que NÃO virou oferta (bloqueio/sem dados) pode ser
 # apresentada como referência útil, SEMPRE marcada como não verificada — só
@@ -1937,6 +2077,10 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     alternativas = separar_alternativas(fora, criterios)
     ids_alt = {a.get("id") for a in alternativas}
     duros = [p for p in fora if p.get("id") not in ids_alt]
+    # V5.7: página do item declarada no JSON-LD (listagem/categoria/agregador)
+    # é aberta quando acessível — sem isso o card nunca sai de "parcial".
+    # Bloqueio/erro preserva o card como estava; nada é contornado.
+    _validar_itens_declarados(produtos, baixar_fn, consulta, _prog)
     # Referências não verificadas: páginas específicas achadas na busca que
     # NÃO viraram oferta (bloqueio/sem-dados) — link útil com motivo, jamais
     # preço/foto/estoque/veredito (V5.7 descoberta).

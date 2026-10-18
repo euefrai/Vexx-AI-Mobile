@@ -32,11 +32,20 @@ JDUI (`productcard`/`productgrid`/`productcompare`/`productdetails`/`productgall
    (menor preço confirmado vence o card).
 7. **Filtrar**: fora do orçamento/specs vai para `excluidos` **com motivo**
    ("acima do orçamento (R$ 1.500,00)", "só informa RAM virtual/expansível").
-8. **Comparar** (`comparar`): preço, loja, avaliação, disponibilidade, specs,
+8. **Confirmar o item (V5.7)**: card cujo JSON-LD declara a página do próprio
+   produto em OUTRA página aberta (categoria/listagem/agregador) tem a URL
+   declarada aberta (`MAX_VALIDACOES_ITEM` por consulta, mesmo downloader,
+   bloqueio nunca contornado) e avaliada por `source_check.avaliar_pagina`
+   (tipo produto + termos de identidade do card, variante primeiro). Só com
+   veredito "verificado" o card sai de `item_nao_aberto`/`item_de_listagem`
+   para `link_veredito=verificado` (nível **confirmada**), adotando
+   preço/estoque/foto da própria página do item; bloqueio, página removida
+   ou de outro produto preservam o card parcial exatamente como estava.
+9. **Comparar** (`comparar`): preço, loja, avaliação, disponibilidade, specs,
    vantagens e limitações — tudo derivado dos dados; sem benchmarks inventados.
-9. **Persistir** (`shopping_consultas`, por `owner_id` + conversa, TTL 6h,
-   máx 20/conversa). Preço guardado é **histórico**: exibido com
-   `verificado_em`; cache reusado marca `de_cache=True`.
+10. **Persistir** (`shopping_consultas`, por `owner_id` + conversa, TTL 6h,
+    máx 20/conversa). Preço guardado é **histórico**: exibido com
+    `verificado_em`; cache reusado marca `de_cache=True`.
 
 ## Regras duras
 
@@ -164,3 +173,36 @@ Verificação ao vivo: KaBuM (notebook/fone) responde 200 e seus itens saem
 `parcial`/`item_nao_aberto`; provedores da rede (ML API, DDG) seguem
 bloqueados e não são contornados; consultas genéricas mantidas (variantes
 não descobriam nada além — limitação do índice, não da formulação).
+
+## V5.7 — Validação da página do item (2026-10-18)
+
+Follow-up direto da auditoria de descoberta: o que faltava era ABRIR a página
+do item declarada no JSON-LD. Nenhum passo do pipeline fazia isso — o card
+nascia `item_nao_aberto`/`item_de_listagem` e ficava **parcial para sempre**,
+mesmo com a página do produto acessível (KaBuM 200, ~1 s).
+
+- `shopping._validar_itens_declarados` (novo passo 8 do pipeline): abre a URL
+  declarada com o MESMO downloader das candidatas (`baixar_fn`/`research.baixar`,
+  sem contornar 403/CAPTCHA; orçamento `MAX_VALIDACOES_ITEM`), em paralelo (3).
+- Promoção só com evidência: `source_check.avaliar_pagina(tipo=produto)` +
+  termos de identidade do card (até 3: variante → modelo → nome, determinístico).
+  Veredito "verificado" → `link_veredito=verificado`, `link_codigo=ok`,
+  `item_de_listagem=False`, `url_verificada` (URL final aberta) e adoção de
+  preço/estoque/foto/avaliação/specs da própria página do item; imagem trocada
+  volta para reverificação (`imagem_veredito=""`).
+- Falha (bloqueio/rede/vazio, página de listagem/removida, outro produto):
+  card preservado exatamente como estava — parcial, com o motivo original.
+- `_tier` inalterado: **confirmada** = preço em dado estruturado + link
+  verificado; página do item sem preço não apaga preço estruturado existente.
+
+E2E real (rede atual): "notebook para trabalhar e estudar" → 4/4 itens KaBuM
+**confirmados na página do item** (preços R$ 2.974,15 / R$ 4.703,04 /
+R$ 7.299,00 / R$ 9.750,24; `em_estoque`; imagens CDN verificadas; 17 s).
+Payload JDUI gerado do resultado real (válido em `jdui.validar_mensagem`) e
+renderizado no espelho `public/jdui.js` via node ("Link verificado").
+Evidência: `qa-artifacts/v57/validacao-item-2026-10-18.json`.
+Magazine Luiza segue 403 → referência não verificada (bloqueio não contornado).
+
+Testes: `tests/test_shopping_item_v57.py` (9: promoção, listagem promovida,
+sem preço na página, bloqueio preserva, outro produto não promove, orçamento,
+identidade, render node). Suíte 842/4; benchmarks 59/59 e 34/34.
