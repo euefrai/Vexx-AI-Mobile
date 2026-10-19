@@ -1,0 +1,70 @@
+{
+ "quando": "2026-10-19T15:01:49",
+ "ambiente": {
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "python": "3.14.4",
+  "app": "http://127.0.0.1:59120",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-chrome-j6mhonl9\\e2e.sqlite3",
+  "hermes": "http://127.0.0.1:8645/v1",
+  "modelo": "poolside/laguna-s-2.1:free",
+  "viewport_desktop": "1280x900",
+  "viewport_mobile": "390x844",
+  "chrome_versao": "Chrome/155.0.8059.82"
+ },
+ "etapas": [
+  {
+   "etapa": "relay",
+   "detalhe": "uvicorn server:app em http://127.0.0.1:59120",
+   "t": 0.08
+  },
+  {
+   "etapa": "agente",
+   "detalhe": "pc_agent.py conectando ao relay",
+   "t": 1.8
+  },
+  {
+   "etapa": "stack_pronto",
+   "detalhe": "relay + agente online",
+   "t": 3.48
+  },
+  {
+   "etapa": "chrome",
+   "detalhe": "headless CDP porta 59121",
+   "t": 3.48
+  },
+  {
+   "etapa": "pagina_carregada",
+   "detalhe": "http://127.0.0.1:59120/",
+   "t": 4.88
+  },
+  {
+   "etapa": "login_ok",
+   "detalhe": "conversa 906d9e5b-6546-4432-bfe0-1e9440b120ec",
+   "t": 5.41
+  },
+  {
+   "etapa": "chat_real",
+   "detalhe": "8.07s, 204 chars",
+   "t": 13.48,
+   "segundos": 8.07
+  },
+  {
+   "etapa": "screenshot",
+   "detalhe": "desktop-chat.png",
+   "t": 13.58
+  },
+  {
+   "etapa": "FALHA",
+   "detalhe": "HTTPError: HTTP Error 403: Forbidden",
+   "t": 15.29
+  }
+ ],
+ "ok": false,
+ "chat_real": {
+  "pergunta": "Oi, Júlia! Em uma frase curta, o que é fotossíntese?",
+  "latencia_s": 8.07,
+  "resposta_chars": 204,
+  "resposta_recorte": "19 de outubroOi, Júlia! Em uma frase curta, o que é fotossíntese?15:01✓ Sincronizadov.VexxFotossíntese é o processo pelas que plantas convertem luz solar em energia, produzindo glicose e oxigênio.15:01···"
+ },
+ "erro": "HTTPError: HTTP Error 403: Forbidden"
+}

@@ -1,5 +1,10 @@
 # E2E reais — V5.7 FINAL (2026-10-18)
 
+> **Atualização V5.7.2 (2026-10-19):** as pendências registradas abaixo foram
+> resolvidas — preço numérico (`preco_valor` com Decimal), extração de conteúdo
+> principal, JDUI no Chrome real e inferência/streaming Hermes. Evidências:
+> `docs/V5_7_2_PROGRESS.md` e `docs/V5_7_2_E2E_RESULTS.md`.
+
 ## Método
 
 1. **Bateria determinística** (`tools/bench_experiencia_real.py`, 16
@@ -30,16 +35,16 @@ JS; coerção de `item_de_listagem` JS; tipo de `specs` JS.
 
 | Bloco | Resultado | Honestidade |
 |---|---|---|
-| Hermes | porta 8645 aberta, `/v1/models` 200 | inferência LLM não exercitada (custo não autorizado) |
+| Hermes | porta 8645 aberta, `/v1/models` 200 | inferência LLM não exercitada nesta rodada (V5.7.2: inferência/streaming reais executados, modelo free) |
 | Pesquisa real (fotossíntese) | `estado=ok`, bing, **3 fontes abertas**, conteúdo lido ≤1.200 cada, grounding 4.388 chars, 4,2s | DDG bloqueado no dia não foi usado; nada contornado |
-| Página do usuário: Wikipédia | **aberta**, conteúdo do artigo no `texto_lido`, 2,3s | extração determinística tem resíduos de sidebar/marcação |
+| Página do usuário: Wikipédia | **aberta**, conteúdo do artigo no `texto_lido`, 2,3s | V5.7.2: extração reescrita; sem menu/sidebar na Wikipédia |
 | Página do usuário: Magalu | **bloqueado (403)** | erro classificado, aviso honesto, sem fonte/Conteúdo inventado |
-| Shopping real | **2/2 ofertas confirmadas na página do item** (KaBuM), URL + preço exibido (R$ 25,74 / R$ 110,12), 41,5s | `preco_valor` numérico ausente nesses cards (limitação); categoria Amazon ignorada com log |
+| Shopping real | **2/2 ofertas confirmadas na página do item** (KaBuM), URL + preço exibido (R$ 25,74 / R$ 110,12), 41,5s | V5.7.2: `preco_valor` numérico normalizado (2/2 com preço numérico); categoria Amazon ignorada com log |
 | Prompt com página | página lida presente no prompt (amostra do texto confere), sem pesquisa genérica extra, 5.114 chars | — |
 
 ## Suíte e benchmarks (código final)
 
-- Suíte completa: **868 passed, 4 skipped, 2 warnings** (~3min).
+- Suíte completa: **868 passed, 4 skipped, 2 warnings** (~3min); V5.7.2: **891 passed, 4 skipped**.
 - Benchmark pesquisa (congelado): **34/34**.
 - Benchmark shopping (congelado): **59/59**.
 
@@ -48,7 +53,7 @@ JS; coerção de `item_de_listagem` JS; tipo de `specs` JS.
 | # | Cenário | Local (determinístico/real) | Publicado |
 |---|---|---|---|
 | 1 | Produto específico | PASS — 2/2 confirmadas com URL | NOT_TESTED |
-| 2 | Orçamento | PARTIAL — produto dentro do orçamento; gate numérico limitado por `preco_valor` ausente | NOT_TESTED |
+| 2 | Orçamento | PASS (V5.7.2) — 2 ofertas reais ≤R$300 com `preco_valor` numérico; exclusões acima do teto; 12 testes de filtros | NOT_TESTED |
 | 3 | Comparação | NOT_RUN — cards comparativos existem (JDUI validado) | NOT_TESTED |
 | 4 | Factual | PASS — 3 fontes lidas reais + grounding com conteúdo | NOT_TESTED |
 | 5 | Recente | NOT_RUN — sem caso real nesta rodada; grounding carrega data de acesso | NOT_TESTED |
@@ -58,7 +63,7 @@ JS; coerção de `item_de_listagem` JS; tipo de `specs` JS.
 | 9 | Verificação | PARTIAL — fence de evidências testada na suíte; não exercitada em smoke real | NOT_TESTED |
 | 10 | Sem resultados | PASS — provedor vazio → `sem_resultados` + aviso honesto (bateria) | NOT_TESTED |
 | 11 | Follow-up | NOT_RUN — reuso/replay cobertos pela suíte; sem caso real novo | NOT_TESTED |
-| 12 | JDUI | PARTIAL — paridade Node 4/4 + frontend smoke na suíte; navegador real pendente | NOT_TESTED |
+| 12 | JDUI | PASS (V5.7.2) — Chrome real desktop + mobile emulado; card/fonte renderizados; screenshots em `qa-artifacts/v572/chrome/` | NOT_TESTED |
 
 Legenda: PASS = evidência real/determinística nesta rodada; PARTIAL =
 funciona com limitação declarada; NOT_RUN = não executado nesta rodada
@@ -67,10 +72,15 @@ autorizado nesta rodada** — nenhum teste foi feito no serviço publicado.
 
 ## Limitações herdadas do smoke (registradas, não escondidas)
 
-- Extração determinística da Wikipédia inclui resíduos de sidebar/marcação na
-  janela lida (trafilatura não instalada no ambiente).
-- `preco_valor` numérico ausente em cards reais (preço em texto) — limita o
-  gate de orçamento e filtros que exigem número.
-- DDG/Magalu/MLB bloqueados no dia; a busca seguiu com bing.
-- LLM (Hermes) disponível, mas respostas geradas não foram avaliadas nesta
-  rodada (sem autorização de custo).
+- ~~Extração determinística da Wikipédia inclui resíduos de sidebar/marcação na
+  janela lida (trafilatura não instalada no ambiente).~~ **Resolvido na V5.7.2**:
+  `melhor_bloco` reescrito; Wikipédia e docs.python.org sem menu/sidebar (5/5 testes).
+- ~~`preco_valor` numérico ausente em cards reais (preço em texto) — limita o
+  gate de orçamento e filtros que exigem número.~~ **Resolvido na V5.7.2**:
+  normalização com `Decimal`; 2/2 ofertas do smoke externo com preço numérico.
+- DDG/Magalu/MLB bloqueados no dia; a busca seguiu com bing (bloqueio externo
+  permanece honesto, sem contorno).
+- ~~LLM (Hermes) disponível, mas respostas geradas não foram avaliadas nesta
+  rodada (sem autorização de custo).~~ **Resolvido na V5.7.2**: inferência
+  (5,81s), streaming (5,51s/38 deltas) e resposta fundamentada (27,15s) com
+  modelo free (custo 0).

@@ -1,0 +1,159 @@
+{
+ "quando": "2026-10-19T15:26:50",
+ "cenarios": {
+  "produtos": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "consulta": "Me mostre um fone bluetooth até R$ 300.",
+    "produtos": 2,
+    "alternativas": 0,
+    "referencias": 1,
+    "total_bruto": 4,
+    "motivo": "confirmed_offers_found",
+    "orcamento": {
+     "max": 300.0
+    },
+    "precos": [
+     28.6,
+     68.32
+    ],
+    "todos_dentro_do_orcamento": true,
+    "cards_jdui_validos": true,
+    "resumo": "Encontrei **2** fone com dados estruturados reais:\n- **Fone De Ouvido C/microfone Taue101bk/00 Preto Philips** — R$ 28,60 · kabum.com.br · _link não verificado_\n- **Fone de Ouvido Intra-auricular JBL C50HI, com Fio, com Microfone, Preto - JBLC50HIBLKE** — R$ 68,32 · kabum.com.br · _link não verificado_\n- _Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP_: fora (acima do orçamento (R$ 466,66))\n- _Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bater_: fora (acima do orçamento ("
+   },
+   "erro": "",
+   "segundos": 6.97,
+   "rotulo": "EXTERNO REAL"
+  },
+  "pesquisa_geral": {
+   "dados": null,
+   "erro": "BridgeErro: Provedor com limite excedido (429). Aguarde e tente de novo.",
+   "segundos": 4.82,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "url_direta": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "url": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+    "erro_api": "",
+    "status_fonte": "aberta",
+    "titulo": "Fotossíntese – Wikipédia, a enciclopédia livre",
+    "texto_lido_chars": 1200,
+    "trecho_chars": 400,
+    "trecho_contido_no_texto": true,
+    "residuos_menu": [],
+    "inicio_texto": "z e a guardam em . Essa energia permite que produzam matéria para crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substâncias orgânicas cadeias alimentares 1 [ ] Na forma realizada por"
+   },
+   "erro": "",
+   "segundos": 0.84,
+   "rotulo": "EXTERNO REAL"
+  },
+  "comparacao_documentacao": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "url_documentacao": "https://docs.python.org/3/tutorial/datastructures.html",
+    "turno1": {
+     "consulta": "Analise esta documentação oficial: https://docs.python.org/3/tutorial/datastructures.html",
+     "fontes": 1,
+     "dominios": [
+      "docs.python.org"
+     ],
+     "resposta_chars": 2584,
+     "recorte": "Recebido. Vou analisar a documentação oficial sobre estruturas de dados do Python acessada em `https://docs.python.org/3/tutorial/datastructures.html`.\n\n---\n\n# Análise: Estruturas de Dados no Python  \nDocumento fonte: [Python Docs - Data Structures](https://docs.python.org/3/tutorial/datastructures."
+    },
+    "turno2": {
+     "consulta": "Agora compare listas e tuplas.",
+     "resposta_chars": 1168,
+     "menciona_lista_e_tupla": true,
+     "sem_tool_call": true,
+     "recorte": "Vou comparar listas e tuplas com base na documentação oficial do Python.\n\n---\n\n# Comparação: Listas vs Tuplas\n\n| Característica | **Lista (`list`)** | **Tupla (`tuple`)** |\n|----------------|--------------------|---------------------|\n| **Mutabilidade** | Mutável — pode ser modificada após criação (`append`, `remove`, etc.) | Imutável — não permite alterações após definição |\n| **Sintaxe** | `[1, 2, 3]` | `(1, 2, 3)` ou apenas `1, 2, 3` |\n| **Uso típico** | Quando há necessidade de adicionar, remover ou reordenar elementos | Armazenamento de dados fixos (ex: coordenadas, pares ordenados) |\n| *"
+    },
+    "documentacao_oficial": true,
+    "modelo": "poolside/laguna-s-2.1:free"
+   },
+   "erro": "",
+   "segundos": 35.81,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "continuacao": {
+   "dados": {
+    "status": "LOCAL REAL (dados guardados)",
+    "tentativa_externa": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone De Ouvido C/microfone Taue101bk/00 Preto Philips** — R$ 28,60 (kabum.com.br)\n- **Fone de Ouvido Intra-auricular JBL C50HI, com Fio, com Microfone, Preto - JBLC50HIBLKE** — R$ 68,32 (kabum.com.br)",
+     "observacao": ""
+    },
+    "com_dados_guardados": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone B** — R$ 150,00 (Loja B)\n- **Fone C** — R$ 200,00 (Loja C)\n- **Fone A** — R$ 300,00 (Loja A)",
+     "ordem_barato_primeiro": [
+      "- **Fone B** — R$ 150,00 (Loja B)",
+      "- **Fone C** — R$ 200,00 (Loja C)",
+      "- **Fone A** — R$ 300,00 (Loja A)"
+     ],
+     "fence_valido": true
+    },
+    "ordem_esperada": [
+     "R$ 150,00",
+     "R$ 200,00",
+     "R$ 300,00"
+    ]
+   },
+   "erro": "",
+   "segundos": 0.02,
+   "rotulo": "LOCAL REAL (dados guardados)"
+  },
+  "falha_externa": {
+   "dados": {
+    "status": "LOCAL REAL + DNS REAL",
+    "url_inexistente": {
+     "erro": "rede",
+     "status_fonte": null,
+     "texto_lido": 0
+    },
+    "busca_sem_provedor": {
+     "produtos": 0,
+     "erro": "provedor_indisponivel",
+     "motivo": "provider_unavailable",
+     "nota_honesta": "Não consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_preco_inventado": true,
+     "texto_final": "Não há ofertas verificáveis.\n\nNão consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_fence": true
+    }
+   },
+   "erro": "",
+   "segundos": 0.03,
+   "rotulo": "LOCAL REAL + DNS REAL"
+  }
+ },
+ "ok": false,
+ "ambiente": {
+  "modelo": "poolside/laguna-s-2.1:free",
+  "proxy": "http://127.0.0.1:8645/v1",
+  "pesquisa_web": true,
+  "max_tokens": 1500,
+  "sqlite": "temporário"
+ },
+ "frontend_delivery": {
+  "evidencia": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\chrome-e2e-20261019-150401.json",
+  "ok": true,
+  "chrome": "Chrome/155.0.8059.82",
+  "chat_real": 197,
+  "desktop": {
+   "origem": "real:kabum",
+   "preco": "R$ 110,12",
+   "imagem_veredito": "verificado",
+   "link_veredito": "parcial"
+  },
+  "mobile": "390x844 (mobile=true, touch=true)"
+ },
+ "checagens": {
+  "produtos_filtro_ok": true,
+  "pesquisa_geral_fundamentada": false,
+  "url_direta_limpa": true,
+  "comparacao_documentacao": true,
+  "continuacao_ordenada": true,
+  "falha_honesta": true,
+  "frontend_chrome": true
+ }
+}

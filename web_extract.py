@@ -122,10 +122,11 @@ def _limpar(texto: str, teto: int = 400) -> str:
 
 # ── Pontuação de blocos (artigo principal) ──────────────────────────
 def _texto_bloco(no: "_No") -> str:
+    """Texto visível do bloco, sem boilerplate (nav/cabeçalho/rodapé/aside)."""
     partes = []
 
     def _anda(n):
-        if n.tag in _PULAR:
+        if n.tag in _PULAR or n.tag in _IGNORAR:
             return
         if n.texto and n.texto.strip():
             partes.append(n.texto)
@@ -157,16 +158,7 @@ def _texto_documento(raiz: "_No") -> str:
     return _normalizar(" ".join(partes))
 
 
-def _contar_tags(no: "_No", cache: dict) -> int:
-    total = cache.get(id(no))
-    if total is not None:
-        return total
-    total = 1 + sum(_contar_tags(f, cache) for f in no.filhos)
-    cache[id(no)] = total
-    return total
-
-
-def _link_densidade(no: "_No", cache: dict) -> float:
+def _link_densidade(no: "_No", cache: dict | None = None) -> float:
     total = max(1, len(_texto_bloco(no)))
     texto_link = 0
 
@@ -188,32 +180,6 @@ def _pista(no: "_No") -> str:
     return " ".join(str(a.get(k, "")) for k in ("class", "id", "role", "itemprop"))
 
 
-def _pontuar(no: "_No", cache: dict) -> float:
-    texto = _texto_bloco(no)
-    n = len(texto)
-    if n < 80:
-        return 0.0
-    pista = _pista(no)
-    tags = max(1, _contar_tags(no, cache))
-    paragrafos = sum(1 for f in _descendentes(no) if f.tag in _BLOCO and len(_normalizar(f.texto)) > 40)
-    densidade = n / tags
-    link = _link_densidade(no, cache)
-    pontos = n * 0.6 + densidade * 6.0 + paragrafos * 25.0
-    if no.tag in ("article", "main"):
-        pontos += 220.0
-    if str(no.attrs.get("role", "")).lower() == "main" or \
-            str(no.attrs.get("itemprop", "")).lower() == "articlebody":
-        pontos += 200.0
-    if pista and _BOM.search(pista):
-        pontos += 90.0
-    if pista and _RUIM.search(pista):
-        pontos -= 260.0
-    if no.tag in ("nav", "header", "footer", "aside", "form"):
-        pontos -= 300.0
-    pontos -= link * 380.0
-    return max(0.0, pontos)
-
-
 def _descendentes(no: "_No"):
     for f in no.filhos:
         yield f
@@ -221,14 +187,60 @@ def _descendentes(no: "_No"):
 
 
 def melhor_bloco(raiz: "_No"):
+    """Bloco que concentra o conteúdo principal (estilo readability).
+
+    A pontuação nasce nos parágrafos/títulos reais e sobe para os ancestrais
+    com peso decrescente (100% → 50% → 25%). Assim um contêiner grande não
+    vence só por abranger o site inteiro (menus, barras laterais, rodapé):
+    o bloco mais próximo dos parágrafos do artigo fica com a maior soma.
+    """
     cache: dict = {}
+    pontos: dict = {}
+
+    for no in _descendentes(raiz):
+        if no.tag in _IGNORAR or no.tag in _PULAR or no.tag not in _BLOCO:
+            continue
+        n = len(_texto_bloco(no))
+        if n < 40:
+            continue
+        pista = _pista(no)
+        valor = min(n, 1200) / 12.0 + 8.0
+        if no.tag in ("h1", "h2", "h3"):
+            valor += 6.0
+        elif no.tag in ("td", "th", "li", "blockquote", "pre", "dd", "dt"):
+            valor *= 0.6
+        if pista and _RUIM.search(pista):
+            valor *= 0.35
+        valor *= max(0.25, 1.0 - _link_densidade(no, cache))
+        anc = no.pai
+        for fator in (1.0, 0.8, 0.6):
+            if anc is None or anc is raiz:
+                break
+            if anc.tag in _IGNORAR or anc.tag in _PULAR:
+                break
+            pontos[id(anc)] = pontos.get(id(anc), 0.0) + valor * fator
+            anc = anc.pai
+
     melhor, melhor_pontos = None, 0.0
     for no in [raiz, *list(_descendentes(raiz))]:
-        if no.tag in _IGNORAR or no.tag in _PULAR:
+        pts = pontos.get(id(no))
+        if not pts:
             continue
-        pontos = _pontuar(no, cache)
-        if pontos > melhor_pontos:
-            melhor, melhor_pontos = no, pontos
+        pista = _pista(no)
+        if no.tag in ("article", "main"):
+            pts *= 1.6
+        if str(no.attrs.get("role", "")).lower() == "main" or \
+                str(no.attrs.get("itemprop", "")).lower() == "articlebody":
+            pts *= 1.4
+        if pista and _BOM.search(pista):
+            pts *= 1.25
+        if pista and _RUIM.search(pista):
+            pts *= 0.5
+        if no.tag in ("body", "html") or no is raiz:
+            # o contêiner total inclui menus/rodapé: só vence se nada melhor
+            pts *= 0.35
+        if pts > melhor_pontos:
+            melhor, melhor_pontos = no, pts
     return melhor
 
 
@@ -252,22 +264,24 @@ def _paragrafos(no: "_No") -> list:
 
 
 def _texto_bloco_inline(no: "_No") -> str:
+    """Texto inline do bloco (negrito/itálico/links), sem sub-blocos."""
     partes = []
 
     def _anda(n, profundidade=0):
-        if n.tag in _PULAR or profundidade > 6:
+        if n.tag in _PULAR or n.tag in _IGNORAR or profundidade > 8:
             return
-        if n.tag == "a":
-            txt = _normalizar(n.texto)
-            if txt:
-                partes.append(txt)
-            return
+        if n.texto and n.texto.strip():
+            partes.append(n.texto)
         for f in n.filhos:
+            if f.tag in _BLOCO:
+                continue
             _anda(f, profundidade + 1)
 
     for f in no.filhos:
+        if f.tag in _BLOCO:
+            continue
         _anda(f)
-    return " ".join(partes)
+    return _normalizar(" ".join(partes))
 
 
 def secoes(no: "_No", teto: int = 12) -> list:
@@ -368,6 +382,21 @@ def _autor(valor) -> str:
     return _limpar(valor, 120)
 
 
+def _titulo_plausivel(titulo: str) -> bool:
+    """Descarta 'título' que na verdade é frase-descrição (JSON-LD de wiki).
+
+    Só rejeita o padrão inequívoco: começa minúsculo e termina em ponto
+    (ex.: 'processo físico-químico ... solar.'). Títulos reais como
+    'iPhone 15' continuam válidos.
+    """
+    t = (titulo or "").strip()
+    if len(t) < 3:
+        return False
+    if t[:1].islower() and t.endswith("."):
+        return False
+    return True
+
+
 def extrair_metadados(pagina: str, base_url: str = "") -> dict:
     """{titulo, descricao, canonica, og, twitter, idioma, publicado_em, autor,
     site, tipo, ld} — só o que existe no HTML."""
@@ -385,6 +414,8 @@ def extrair_metadados(pagina: str, base_url: str = "") -> dict:
     if m:
         can = _url_absoluta(m.group(1), base_url)
     titulo_ld = _limpar(principal.get("headline") or principal.get("name"), 200)
+    if not _titulo_plausivel(titulo_ld):
+        titulo_ld = ""
     titulo_html = _limpar((_RX_TITULO.search(pagina or "") or [None, ""])[1]
                          if _RX_TITULO.search(pagina or "") else "", 200)
     idioma = ""

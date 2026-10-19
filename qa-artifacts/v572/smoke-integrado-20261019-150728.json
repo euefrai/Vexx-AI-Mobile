@@ -1,0 +1,164 @@
+{
+ "quando": "2026-10-19T15:06:38",
+ "cenarios": {
+  "produtos": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "consulta": "Me mostre um notebook até R$ 3.000.",
+    "produtos": 0,
+    "alternativas": 0,
+    "referencias": 2,
+    "total_bruto": 4,
+    "motivo": "no_confirmed_offers",
+    "orcamento": {
+     "max": 3000.0
+    },
+    "precos": [],
+    "todos_dentro_do_orcamento": true,
+    "cards_jdui_validos": null,
+    "resumo": "Encontrei 2 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu** · www.magazineluiza.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.magazineluiza.com.br/notebook/informatica/s/in/note/\n- **Notebook até R$ 3.000 em 2026: 8 modelos para compra - Zoom** · www.zoom.com.br — _página abriu,"
+   },
+   "erro": "",
+   "segundos": 8.98,
+   "rotulo": "EXTERNO REAL"
+  },
+  "pesquisa_geral": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "consulta": "Explique a fotossíntese e apresente fontes.",
+    "fontes": 3,
+    "fontes_com_texto_lido": 3,
+    "dominios": [
+     "biologianet.com",
+     "brasilescola.uol.com.br",
+     "todamateria.com.br"
+    ],
+    "modelo": "poolside/laguna-s-2.1:free",
+    "resposta_chars": 2152,
+    "menciona_fotossintese": true,
+    "urls_na_resposta": [
+     "https://brasilescola.uol.com.br/biologia/fotossintese.htm",
+     "https://www.biologianet.com/botanica/reacoes-fotossintese.htm",
+     "https://www.todamateria.com.br/fotossintese/"
+    ],
+    "resposta_recorte": "Sua síntese da fotossíntese, com base nas fontes consultadas, fica assim:\n\n---\n\n## 🌿 **Síntese da Fotossíntese**\n\nA **fotossíntese** é um processo biológico realizado por organismos autotróficos — como plantas, algas e alguns procariontes — que convertem energia luminosa em energia química, por meio de reações que ocorrem nos **cloroplastos**.\n\n### 🔬 Equação Geral da Fotossíntese\n\n```\n6 CO₂ + 6 H₂O + luz solar → C₆H₁₂O₆ (glicose) + 6 O₂\n```\n\n- **CO₂ e H₂O** são as matérias-primas.\n- A **clorofila** e outros pigmentos (como carotenoides e ficobilinas) absorvem a luz solar.\n- O oxigênio é liberado como subproduto.\n- A glicose é armazenada como energia química.\n\n---\n\n### 🧩 Etapas Principais\n\n1."
+   },
+   "erro": "",
+   "segundos": 32.16,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "url_direta": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "url": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+    "erro_api": "",
+    "status_fonte": "aberta",
+    "titulo": "Fotossíntese – Wikipédia, a enciclopédia livre",
+    "texto_lido_chars": 1200,
+    "trecho_chars": 400,
+    "trecho_contido_no_texto": true,
+    "residuos_menu": [],
+    "inicio_texto": "z e a guardam em . Essa energia permite que produzam matéria para crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substâncias orgânicas cadeias alimentares 1 [ ] Na forma realizada por"
+   },
+   "erro": "",
+   "segundos": 1.24,
+   "rotulo": "EXTERNO REAL"
+  },
+  "comparacao_documentacao": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "consulta": "Compare listas e tuplas em Python com base na documentação.",
+    "fontes": 0,
+    "dominios": [],
+    "documentacao_oficial": false,
+    "modelo": "poolside/laguna-s-2.1:free",
+    "resposta_chars": 31,
+    "menciona_lista_e_tupla": false,
+    "resposta_recorte": "Olá! Como posso te ajudar hoje?"
+   },
+   "erro": "",
+   "segundos": 7.38,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "continuacao": {
+   "dados": {
+    "status": "LOCAL REAL (dados guardados)",
+    "tentativa_externa": {
+     "disponivel": false,
+     "texto": "",
+     "observacao": "sem produtos na busca real desta execução — follow-up honesto sem inventar ofertas"
+    },
+    "com_dados_guardados": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone B** — R$ 150,00 (Loja B)\n- **Fone C** — R$ 200,00 (Loja C)\n- **Fone A** — R$ 300,00 (Loja A)",
+     "ordem_barato_primeiro": [
+      "- **Fone B** — R$ 150,00 (Loja B)",
+      "- **Fone C** — R$ 200,00 (Loja C)",
+      "- **Fone A** — R$ 300,00 (Loja A)"
+     ],
+     "fence_valido": true
+    },
+    "ordem_esperada": [
+     "R$ 150,00",
+     "R$ 200,00",
+     "R$ 300,00"
+    ]
+   },
+   "erro": "",
+   "segundos": 0.02,
+   "rotulo": "LOCAL REAL (dados guardados)"
+  },
+  "falha_externa": {
+   "dados": {
+    "status": "LOCAL REAL + DNS REAL",
+    "url_inexistente": {
+     "erro": "rede",
+     "status_fonte": null,
+     "texto_lido": 0
+    },
+    "busca_sem_provedor": {
+     "produtos": 0,
+     "erro": "provedor_indisponivel",
+     "motivo": "provider_unavailable",
+     "nota_honesta": "Não consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_preco_inventado": true,
+     "texto_final": "Não há ofertas verificáveis.\n\nNão consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_fence": true
+    }
+   },
+   "erro": "",
+   "segundos": 0.03,
+   "rotulo": "LOCAL REAL + DNS REAL"
+  }
+ },
+ "ok": false,
+ "ambiente": {
+  "modelo": "poolside/laguna-s-2.1:free",
+  "proxy": "http://127.0.0.1:8645/v1",
+  "pesquisa_web": true,
+  "max_tokens": 1500,
+  "sqlite": "temporário"
+ },
+ "frontend_delivery": {
+  "evidencia": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\chrome-e2e-20261019-150401.json",
+  "ok": true,
+  "chrome": "Chrome/155.0.8059.82",
+  "chat_real": 197,
+  "desktop": {
+   "origem": "real:kabum",
+   "preco": "R$ 110,12",
+   "imagem_veredito": "verificado",
+   "link_veredito": "parcial"
+  },
+  "mobile": "390x844 (mobile=true, touch=true)"
+ },
+ "checagens": {
+  "produtos_filtro_ok": true,
+  "pesquisa_geral_fundamentada": true,
+  "url_direta_limpa": true,
+  "comparacao_documentacao": false,
+  "continuacao_ordenada": true,
+  "falha_honesta": true,
+  "frontend_chrome": true
+ }
+}

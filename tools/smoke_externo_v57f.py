@@ -114,13 +114,17 @@ def _shopping():
     try:
         res = shopping.pesquisar(db, "smoke", "fone bluetooth até R$ 300")
         produtos = res.get("produtos") or []
+        cards = [shopping._jdui_produto(p) for p in produtos]
         desc = res.get("descoberta") if isinstance(res.get("descoberta"), dict) else {}
         return {
             "produtos": len(produtos),
             "confirmados_com_url": sum(
                 1 for p in produtos
                 if (p.get("url_item") or p.get("url") or "").startswith("http")),
-            "com_preco_numerico": sum(1 for p in produtos if p.get("preco_valor")),
+            # V5.7.2: o card é o que chega ao JDUI — mede `preco_valor` nele
+            # (a métrica anterior olhava o produto interno, que usa `preco`).
+            "com_preco_numerico": sum(1 for c in cards
+                                      if c.get("preco_valor") is not None),
             "motivo_final": res.get("motivo_final") or desc.get("motivo_final", ""),
             "amostra": [{"nome": (p.get("nome") or "")[:60],
                          "preco": p.get("preco_texto") or p.get("preco"),

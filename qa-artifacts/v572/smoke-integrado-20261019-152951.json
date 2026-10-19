@@ -1,0 +1,178 @@
+{
+ "quando": "2026-10-19T15:28:50",
+ "cenarios": {
+  "produtos": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "consulta": "Me mostre um fone bluetooth até R$ 300.",
+    "produtos": 1,
+    "alternativas": 1,
+    "referencias": 1,
+    "total_bruto": 4,
+    "motivo": "confirmed_offers_found",
+    "orcamento": {
+     "max": 300.0
+    },
+    "precos": [
+     134.29
+    ],
+    "todos_dentro_do_orcamento": true,
+    "cards_jdui_validos": true,
+    "resumo": "Encontrei **1** fone com dados estruturados reais:\n- **Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto** — R$ 134,29 · kabum.com.br · _link não verificado_\n- _Próxima do pedido_: **Fone De Ouvido Headphone Soundcore Q30 Bluetooth Preto** — R$ 304,23 _(R$ 304,23 — 1% acima do teto (R$ 300,00))_\n- _Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP_: fora (acima do orçamento (R$ 466,66))\n- _Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bater_: fora (acima do orçamen"
+   },
+   "erro": "",
+   "segundos": 11.59,
+   "rotulo": "EXTERNO REAL"
+  },
+  "pesquisa_geral": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "consulta": "Explique a fotossíntese e apresente fontes.",
+    "fontes": 3,
+    "fontes_com_texto_lido": 3,
+    "dominios": [
+     "biologianet.com",
+     "brasilescola.uol.com.br",
+     "todamateria.com.br"
+    ],
+    "modelo": "poolside/laguna-s-2.1:free",
+    "resposta_chars": 1393,
+    "menciona_fotossintese": true,
+    "sem_tool_call": true,
+    "urls_na_resposta": [
+     "https://brasilescola.uol.com.br/biologia/fotossintese.htm",
+     "https://www.biologianet.com/botanica/reaccoes-fotossintese.htm",
+     "https://www.todamateria.com.br/fotossintese/"
+    ],
+    "resposta_recorte": "# Fotossíntese\n\nA **fotossíntese** é um processo biológico em que plantas, algas e algumas bactérias convertem energia luminosa em energia química, produzindo glicose a partir de **dióxido de carbono (CO₂)** e **água (H₂O)**, com liberação de **oxigênio (O₂)**.\n\n## Equação Geral\n\n```\n6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂\n```\n\n## Etapas Principais\n\n1. **Fase Clara (Luminosa):**  \n   - Ocorre nos tilacoides dos cloroplastos.  \n   - Chlophyllas absorvem luz solar.  \n   - A água é quebrada (fotólise), liberando O₂.  \n   - Produção de ATP e NADPH (energia e reductantes).\n\n2. **Fase Escura (Reações do Ciclo de Calvin ou Fixação do Carbono):**  \n   - Acontece no estroma do cloroplasto.  \n   - CO₂ é fix"
+   },
+   "erro": "",
+   "segundos": 19.19,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "url_direta": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "url": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+    "erro_api": "",
+    "status_fonte": "aberta",
+    "titulo": "Fotossíntese – Wikipédia, a enciclopédia livre",
+    "texto_lido_chars": 1200,
+    "trecho_chars": 400,
+    "trecho_contido_no_texto": true,
+    "residuos_menu": [],
+    "inicio_texto": "z e a guardam em . Essa energia permite que produzam matéria para crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substâncias orgânicas cadeias alimentares 1 [ ] Na forma realizada por"
+   },
+   "erro": "",
+   "segundos": 1.83,
+   "rotulo": "EXTERNO REAL"
+  },
+  "comparacao_documentacao": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "url_documentacao": "https://docs.python.org/3/tutorial/datastructures.html",
+    "turno1": {
+     "consulta": "Analise esta documentação oficial: https://docs.python.org/3/tutorial/datastructures.html",
+     "fontes": 1,
+     "dominios": [
+      "docs.python.org"
+     ],
+     "resposta_chars": 2212,
+     "recorte": "Analisarei a documentação oficial sobre estruturas de dados do Python. Primeiro, preciso acessar o conteúdo do link fornecido.\n\n**Aguarde um momento enquanto recupero o conteúdo da documentação...**\n\n*Nota: Como assistente de texto, não posso acessar diretamente URLs, mas posso trabalhar com informa"
+    },
+    "turno2": {
+     "consulta": "Agora compare listas e tuplas.",
+     "resposta_chars": 2282,
+     "menciona_lista_e_tupla": true,
+     "sem_tool_call": true,
+     "recorte": "# Comparação: Listas vs Tuplas\n\n## Tabela Comparativa\n\n| Aspecto | Lista | Tupla |\n|---------|-------|-------|\n| **Mutabilidade** | Mutável (pode ser alterada) | Imutável (não pode ser alterada) |\n| **Sintaxe** | `lista = [1, 2, 3]` | `tupla = (1, 2, 3)` |\n| **Desempenho** | Mais lento para iteração | Mais rápido (devido à imutabilidade) |\n| **Uso de memória** | Maior consumo | Menor consumo |\n| **Métodos disponíveis** | Muitos (.append(), .remove(), etc.) | Limitados (.count(), .index()) |\n| **Segurança** | Risco de modificação acidental | Protegida contra alterações |\n| **Casos de uso típico"
+    },
+    "documentacao_oficial": true,
+    "modelo": "poolside/laguna-s-2.1:free"
+   },
+   "erro": "",
+   "segundos": 28.01,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "continuacao": {
+   "dados": {
+    "status": "LOCAL REAL (dados guardados)",
+    "tentativa_externa": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto** — R$ 134,29 (kabum.com.br)",
+     "observacao": ""
+    },
+    "com_dados_guardados": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone B** — R$ 150,00 (Loja B)\n- **Fone C** — R$ 200,00 (Loja C)\n- **Fone A** — R$ 300,00 (Loja A)",
+     "ordem_barato_primeiro": [
+      "- **Fone B** — R$ 150,00 (Loja B)",
+      "- **Fone C** — R$ 200,00 (Loja C)",
+      "- **Fone A** — R$ 300,00 (Loja A)"
+     ],
+     "fence_valido": true
+    },
+    "ordem_esperada": [
+     "R$ 150,00",
+     "R$ 200,00",
+     "R$ 300,00"
+    ]
+   },
+   "erro": "",
+   "segundos": 0.02,
+   "rotulo": "LOCAL REAL (dados guardados)"
+  },
+  "falha_externa": {
+   "dados": {
+    "status": "LOCAL REAL + DNS REAL",
+    "url_inexistente": {
+     "erro": "rede",
+     "status_fonte": null,
+     "texto_lido": 0
+    },
+    "busca_sem_provedor": {
+     "produtos": 0,
+     "erro": "provedor_indisponivel",
+     "motivo": "provider_unavailable",
+     "nota_honesta": "Não consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_preco_inventado": true,
+     "texto_final": "Não há ofertas verificáveis.\n\nNão consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_fence": true
+    }
+   },
+   "erro": "",
+   "segundos": 0.01,
+   "rotulo": "LOCAL REAL + DNS REAL"
+  }
+ },
+ "ok": true,
+ "ambiente": {
+  "modelo": "poolside/laguna-s-2.1:free",
+  "proxy": "http://127.0.0.1:8645/v1",
+  "pesquisa_web": true,
+  "max_tokens": 1500,
+  "sqlite": "temporário"
+ },
+ "frontend_delivery": {
+  "evidencia": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\chrome-e2e-20261019-150401.json",
+  "ok": true,
+  "chrome": "Chrome/155.0.8059.82",
+  "chat_real": 197,
+  "desktop": {
+   "origem": "real:kabum",
+   "preco": "R$ 110,12",
+   "imagem_veredito": "verificado",
+   "link_veredito": "parcial"
+  },
+  "mobile": "390x844 (mobile=true, touch=true)"
+ },
+ "checagens": {
+  "produtos_filtro_ok": true,
+  "pesquisa_geral_fundamentada": true,
+  "url_direta_limpa": true,
+  "comparacao_documentacao": true,
+  "continuacao_ordenada": true,
+  "falha_honesta": true,
+  "frontend_chrome": true
+ }
+}

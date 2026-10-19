@@ -1,5 +1,9 @@
 # V5.7 FINAL — Research Stabilization & Production Quality — Progresso por checkpoint
 
+> **Atualização V5.7.2 (2026-10-19):** `preco_valor` numérico normalizado e
+> extração reescrita (sem resíduos). As menções abaixo são históricas da V5.7;
+> evidências em `docs/V5_7_2_PROGRESS.md`.
+
 Objetivo: tornar o Research Engine utilizável de verdade (busca confiável,
 recuperação de páginas/documentos, fontes verificáveis, shopping exato, JDUI
 real, E2E honesto), consolidando o existente — sem nova arquitetura, sem
@@ -82,9 +86,9 @@ Sem mudança de produção nesta rodada (V5.7.1 é a base). Smoke externo real:
   confirmadas na página do item**, com URL do produto e preço exibido
   (R$ 25,74 / R$ 110,12, KaBuM); página de categoria da Amazon ignorada com
   log honesto. 41,5s.
-- Limitação registrada: `preco_valor` numérico ausente nos 2 cards do smoke
-  (preço veio em texto) — o gate de orçamento por `preco_valor` não age
-  nesses casos; documentado na matriz.
+- Limitação registrada na V5.7 (**resolvida na V5.7.2**): `preco_valor` numérico
+  ausente nos 2 cards do smoke (preço em texto); na V5.7.2 a normalização usa
+  `Decimal` e os 2/2 cards do smoke externo têm preço numérico.
 
 ## Checkpoint F — Respostas e JDUI
 
@@ -140,9 +144,11 @@ Sem mudança de produção. Estado real (na matriz):
 
 ## Pendências honestas (na matriz, sem expansão de escopo)
 
-- Extração determinística de páginas grandes (Wikipédia) tem resíduos de
-  sidebar/marcação no início da janela lida (trafilatura não instalada).
-- `preco_valor` numérico ausente em cards reais do smoke (preço em texto).
+- ~~Extração determinística de páginas grandes (Wikipédia) tem resíduos de
+  sidebar/marcação no início da janela lida (trafilatura não instalada).~~
+  **Resolvido na V5.7.2** (extração reescrita; sem resíduos).
+- ~~`preco_valor` numérico ausente em cards reais do smoke (preço em texto).~~
+  **Resolvido na V5.7.2** (normalização Decimal; 2/2 com preço numérico).
 - JDUI em navegador real (Chrome mobile/desktop) não executado nesta rodada.
 - Respostas via LLM não exercitadas no smoke (Hermes disponível; custo não
   autorizado); SSE duplicação, métricas sem chamador e hipóteses job-only

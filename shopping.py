@@ -41,6 +41,7 @@ import re
 import time
 import urllib.parse
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation
 
 import research
 import source_check
@@ -521,8 +522,41 @@ def atributos_desejaveis(criterios: dict) -> dict:
 
 # ── Preços ────────────────────────────────────────────────────────────
 
+def _valor_decimal(bruto: str):
+    """Converte '1.234,56' / '1,234.56' / '1299.99' em Decimal (sem float no meio).
+
+    Regra de separador: com DOIS separadores, o ÚLTIMO é o decimal
+    ('1.299,00' e '1,299.00' → 1299.00). Com UM separador, grupos de 3
+    dígitos são milhar ('1.299', '1,299') e 1–2 dígitos são centavos.
+    Valor que não forma número válido devolve None — nunca um palpite.
+    """
+    if not re.fullmatch(r"\d[\d.,]*", bruto or ""):
+        return None
+    tem_ponto = "." in bruto
+    tem_virgula = "," in bruto
+    try:
+        if tem_ponto and tem_virgula:
+            if bruto.rfind(",") > bruto.rfind("."):
+                limpo = bruto.replace(".", "").replace(",", ".")
+            else:
+                limpo = bruto.replace(",", "")
+        elif tem_virgula:
+            limpo = (bruto.replace(",", "")
+                     if re.fullmatch(r"\d{1,3}(,\d{3})+", bruto)
+                     else bruto.replace(",", "."))
+        elif tem_ponto:
+            limpo = (bruto.replace(".", "")
+                     if re.fullmatch(r"\d{1,3}(\.\d{3})+", bruto)
+                     else bruto)
+        else:
+            limpo = bruto
+        return Decimal(limpo)
+    except (InvalidOperation, ValueError):
+        return None
+
+
 def normalizar_preco(valor, moeda: str = "") -> tuple | None:
-    """(valor_float, moeda_ISO). Suporta 'R$ 1.234,56', '1299,99', '$1,299.00'."""
+    """(valor_float, moeda_ISO). Suporta 'R$ 1.234,56', '1,299.00', '$4.999'."""
     if isinstance(valor, (int, float)) and not isinstance(valor, bool):
         if 0 < valor < 1e9:
             return round(float(valor), 2), (moeda or "BRL").upper()[:3] or "BRL"
@@ -533,27 +567,17 @@ def normalizar_preco(valor, moeda: str = "") -> tuple | None:
     s_up = s.upper()
     if "R$" in s_up or "REAIS" in s_up or "BRL" in s_up:
         moeda = "BRL"
-    elif "US$" in s_up or "USD" in s_up:
+    elif "US$" in s_up or "USD" in s_up or "$" in s_up:
         moeda = "USD"
     m = re.search(r"\d[\d.,\s]*\d|\d", s)
     if not m:
         return None
-    bruto = m.group(0).replace(" ", "")
+    bruto = re.sub(r"\s+", "", m.group(0))
     moeda = (moeda or "BRL").upper()[:3]
-    try:
-        if "." in bruto and "," in bruto:
-            v = float(bruto.replace(".", "").replace(",", "."))
-        elif "," in bruto:
-            v = float(bruto.replace(",", "."))
-        elif re.fullmatch(r"\d+\.\d{1,2}", bruto):
-            v = float(bruto)  # separador decimal explícito (ex.: 1299.99)
-        else:
-            v = float(bruto.replace(".", "").replace(",", ""))
-    except ValueError:
+    dec = _valor_decimal(bruto)
+    if dec is None or not (Decimal(0) < dec < Decimal("1e9")):
         return None
-    if not 0 < v < 1e9:
-        return None
-    return round(v, 2), moeda or "BRL"
+    return round(float(dec), 2), moeda or "BRL"
 
 
 def formatar_preco(valor: float | None, moeda: str = "BRL") -> str:
@@ -936,14 +960,27 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                      if str(m).strip()]
     for p in produtos:
         motivos, codigos = [], []
-        if orc.get("max") is not None and p.get("preco") is not None \
-                and p["preco"] > orc["max"]:
-            motivos.append(f"acima do orçamento ({p['preco_texto']})")
-            codigos.append("preco_acima")
-        if orc.get("min") is not None and p.get("preco") is not None \
-                and p["preco"] < orc["min"]:
-            motivos.append(f"abaixo da faixa ({p['preco_texto']})")
-            codigos.append("preco_abaixo")
+        tem_orcamento = orc.get("max") is not None or orc.get("min") is not None
+        moeda_orc = str(orc.get("moeda") or "BRL").upper()
+        moeda_p = str(p.get("moeda") or "BRL").upper()
+        if tem_orcamento and p.get("preco") is None:
+            # Orçamento é critério verificável: sem preço numérico não há
+            # como afirmar que está dentro — fica explícito, nunca "dentro".
+            motivos.append("preço não confirmado (orçamento não verificável)")
+            codigos.append("preco_nao_confirmado")
+        elif (tem_orcamento and p.get("preco") is not None
+              and moeda_p != moeda_orc):
+            motivos.append(f"preço em {moeda_p} (orçamento em {moeda_orc})")
+            codigos.append("moeda_diferente")
+        else:
+            if orc.get("max") is not None and p.get("preco") is not None \
+                    and p["preco"] > orc["max"]:
+                motivos.append(f"acima do orçamento ({p['preco_texto']})")
+                codigos.append("preco_acima")
+            if orc.get("min") is not None and p.get("preco") is not None \
+                    and p["preco"] < orc["min"]:
+                motivos.append(f"abaixo da faixa ({p['preco_texto']})")
+                codigos.append("preco_abaixo")
         if marcas_pedido:
             # V5.7: marca pedida é critério obrigatório — nunca misturar
             # marcas diferentes como se fossem o pedido (marca do anúncio
@@ -1063,6 +1100,14 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
                         f"{excesso * 100:.0f}% acima do teto "
                         f"({formatar_preco(float(teto))})")
             distancias.append(excesso)
+        if "preco_nao_confirmado" in codigos:
+            difs.append("preço não confirmado — orçamento não verificável")
+            distancias.append(0.65)
+        if "moeda_diferente" in codigos:
+            moeda_orc = str(orc.get("moeda") or "BRL").upper()
+            difs.append(f"preço em {p.get('moeda') or '?'} "
+                        f"(orçamento em {moeda_orc})")
+            distancias.append(0.5)
         if "ram_abaixa" in codigos or "ram_virtual" in codigos:
             ram = _ram_do_produto(p)
             pedido = specs.get("ram_fisica_gb") or 0

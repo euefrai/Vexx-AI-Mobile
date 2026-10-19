@@ -1,0 +1,48 @@
+{
+ "quando": "2026-10-19T15:00:51",
+ "ambiente": {
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "python": "3.14.4",
+  "app": "http://127.0.0.1:55585",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-chrome-xcjsy9u1\\e2e.sqlite3",
+  "hermes": "http://127.0.0.1:8645/v1",
+  "modelo": "poolside/laguna-s-2.1:free",
+  "viewport_desktop": "1280x900",
+  "viewport_mobile": "390x844",
+  "chrome_versao": "Chrome/155.0.8059.82"
+ },
+ "etapas": [
+  {
+   "etapa": "relay",
+   "detalhe": "uvicorn server:app em http://127.0.0.1:55585",
+   "t": 0.06
+  },
+  {
+   "etapa": "agente",
+   "detalhe": "pc_agent.py conectando ao relay",
+   "t": 1.78
+  },
+  {
+   "etapa": "stack_pronto",
+   "detalhe": "relay + agente online",
+   "t": 3.47
+  },
+  {
+   "etapa": "chrome",
+   "detalhe": "headless CDP porta 55586",
+   "t": 3.47
+  },
+  {
+   "etapa": "pagina_carregada",
+   "detalhe": "http://127.0.0.1:55585/",
+   "t": 5.06
+  },
+  {
+   "etapa": "FALHA",
+   "detalhe": "AssertionError: login pela interface não ocorreu em 30s (último: {'oculto': False, 'erro': 'Usuário ou senha inválidos'})",
+   "t": 35.26
+  }
+ ],
+ "ok": false,
+ "erro": "AssertionError: login pela interface não ocorreu em 30s (último: {'oculto': False, 'erro': 'Usuário ou senha inválidos'})"
+}

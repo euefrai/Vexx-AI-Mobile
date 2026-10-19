@@ -545,6 +545,44 @@ def normalizar_consulta(texto: str) -> str:
     return re.sub(r"\s+", " ", (texto or "").strip().lower())[:200]
 
 
+# Pedido do usuário (pergunta/instrução) que NÃO deve ir ao buscador.
+_RX_PEDIDO_PESQUISA = re.compile(
+    r"\b(?:explique(?:-me)?|explica(?:r)?|me\s+explique|"
+    r"fale(?:\s+sobre|\s+de)|falar\s+sobre|me\s+fale\s+sobre|"
+    r"o\s+que\s+(?:é|e|s[ãa]o|foi)|quem\s+(?:é|e|foi)|"
+    r"como\s+funciona|como\s+surgiu|"
+    r"me\s+diga|me\s+diz|quero\s+saber|gostaria\s+de\s+saber|preciso\s+saber|"
+    r"apresente|apresentar|mostre|mostrar|cite|citar|traga|trazer|"
+    r"liste|listar|resuma|resumir|pesquise|pesquisar|busque|buscar|"
+    r"procure|procura|encontre|encontrar|compare|comparar|analise|analisar|"
+    r"com\s+fontes|fontes|refer[êe]ncias|bibliografia|"
+    r"por\s+favor|para\s+mim|pra\s+mim)\b",
+    re.IGNORECASE)
+
+
+def consulta_de_pesquisa(texto: str) -> str:
+    """Consulta de BUSCA a partir da frase do usuário (pedido fora, tema fica).
+
+    "Explique a fotossíntese e apresente fontes." → "a fotossíntese": pedir
+    uma explicação não é tema de busca — a frase crua traz dicionário da
+    palavra "explique" em vez de artigos sobre o assunto. Conservador: se a
+    limpeza deixar pouco texto, mantém a frase original.
+    """
+    t = re.sub(r"\s+", " ", (texto or "").strip())
+    if not t:
+        return ""
+    limpa = _RX_PEDIDO_PESQUISA.sub(" ", t)
+    limpa = re.sub(r"\s+", " ", limpa).strip(" .,;:!?-\u2013\u2014")
+    limpa = re.sub(r"^(?:sobre|e|ou|de|da|do|das|dos|a|o|as|os)\s+", "",
+                   limpa, flags=re.IGNORECASE)
+    limpa = re.sub(r"\s+(?:e|ou|de|da|do|das|dos|a|o|as|os)$", "",
+                   limpa, flags=re.IGNORECASE)
+    limpa = re.sub(r"\s+", " ", limpa).strip(" .,;:!?-\u2013\u2014")
+    if len(limpa) < 8:
+        return t[:200]
+    return limpa[:200]
+
+
 def chave_cache(owner: str, provedor: str, consulta: str) -> str:
     return hashlib.sha256(f"{owner}\x00{provedor}\x00{normalizar_consulta(consulta)}".encode()).hexdigest()[:32]
 
@@ -761,6 +799,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     sem página legível entram como "encontrada" (trecho do índice).
     """
     from concurrent.futures import ThreadPoolExecutor
+    consulta = consulta_de_pesquisa(consulta)
     if buscar_fn is None:
         def buscar_fn(q, _m=6, _o=orcamento, _t=timeout_busca):
             achados, info = _buscar_orquestrado(q, _m, timeout=_t, orcamento=_o)

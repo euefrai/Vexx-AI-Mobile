@@ -1,0 +1,86 @@
+{
+ "quando": "2026-10-19T15:24:09",
+ "resultados": {
+  "hermes": {
+   "porta_8645": true,
+   "v1_models_http": 200,
+   "v1_models_amostra": "{\"data\":[{\"id\":\"deepseek/deepseek-v4.1-flash-1017\",\"canonical_slug\":\"deepseek/deepseek-v4.1-flash-20261017\",\"hugging_face_id\":\"deepseek-ai/DeepSeek-V4.1-Flash-1017\",\"name\":\"DeepSeek: DeepSeek V4.1 Flash 1017\",\"created\":1792225624,\"description\":\"DeepSeek V4.1 Flash 1017 is the October 17, 2026 snapsh",
+   "segundos": 0.6
+  },
+  "pesquisa_rapida": {
+   "estado": "ok",
+   "fontes": 3,
+   "abertas": 3,
+   "com_texto_lido": 3,
+   "amostra": [
+    {
+     "url": "https://www.todamateria.com.br/fotossintese/",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    },
+    {
+     "url": "https://brasilescola.uol.com.br/biologia/fotossintese.htm",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    },
+    {
+     "url": "https://www.biologianet.com/botanica/reacoes-fotossintese.htm",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    }
+   ],
+   "grounding_chars": 4367,
+   "provedores": {
+    "usados": {
+     "bing": 1
+    },
+    "falhas": [],
+    "vazios": [],
+    "consultados": [
+     "bing"
+    ]
+   },
+   "segundos": 2.9
+  },
+  "analisar_url_wikipedia": {
+   "erro": "",
+   "titulo": "Fotossíntese – Wikipédia, a enciclopédia livre",
+   "status": "aberta",
+   "texto_lido_chars": 1200,
+   "trecho_amostra": "z e a guardam em . Essa energia permite que produzam matéria para crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substância",
+   "segundos": 1.3
+  },
+  "analisar_url_magalu": {
+   "erro": "bloqueado",
+   "tem_fonte": false,
+   "segundos": 0.4
+  },
+  "shopping_real": {
+   "produtos": 2,
+   "confirmados_com_url": 2,
+   "com_preco_numerico": 2,
+   "motivo_final": "confirmed_offers_found",
+   "amostra": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco": "R$ 28,60",
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto"
+    },
+    {
+     "nome": "Fone de Ouvido Intra-auricular JBL C50HI, com Fio, com Micro",
+     "preco": "R$ 68,32",
+     "url": "https://www.kabum.com.br/produto/929906/fone-de-ouvido-intra-auricular-jbl-c50hi-com-fio-com-microfone-preto-jblc50hiblk"
+    }
+   ],
+   "segundos": 11.7
+  },
+  "prompt_pagina_usuario": {
+   "pagina_usuario": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+   "fontes": 1,
+   "prompt_chars": 5078,
+   "prompt_tem_amostra_do_texto": true,
+   "pesquisa_generica_extra": false,
+   "segundos": 1.9
+  }
+ }
+}
