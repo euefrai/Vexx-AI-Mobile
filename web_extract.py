@@ -634,16 +634,17 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     elif texto_det and len(texto_det) > len(texto_art) * 1.8:
         # trafilatura devolveu menos que o extrator local: o local é mais útil
         texto_art, extrator = texto_det, "deterministico"
+    texto_final = texto_art[:teto]
     saida = {
         "titulo": metas["titulo"] or _limpar(parser.titulo, 200),
-        "texto": texto_art[:teto],
+        "texto": texto_final,
         "paragrafos": paragrafos[:240],
         "secoes": secs,
         "metadados": metas,
         "links": extrair_links(html_txt, base_url),
         "imagens": extrair_imagens(html_txt, base_url),
         "tabelas": extrair_tabelas(html_txt),
-        "trecho_usado": melhor_trecho(texto_art, consulta, 400),
+        "trecho_usado": melhor_trecho(texto_final, consulta, 400),
         "extrator": extrator,
         "ilegivel": ilegivel(texto_art),
         "tamanho_html": len(html_txt),

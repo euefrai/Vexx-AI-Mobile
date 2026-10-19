@@ -1,0 +1,139 @@
+{
+ "criado_em": "2026-10-18T22:52:39",
+ "commit": "b91ab31",
+ "resultados": [
+  {
+   "grupo": "pesquisa geral",
+   "id": "geral_grounding_carrega_conteudo_lido",
+   "desc": "conteúdo lido da página chega ao prompt (além do trecho curto)",
+   "ok": true,
+   "detalhe": "marcador de conteúdo presente no grounding",
+   "ms": 70
+  },
+  {
+   "grupo": "pesquisa geral",
+   "id": "geral_aberta_vs_encontrada",
+   "desc": "página aberta x só encontrada com marcas honestas",
+   "ok": true,
+   "detalhe": "aberta sem marca; encontrada marcada 'NÃO lida'",
+   "ms": 65
+  },
+  {
+   "grupo": "pesquisa geral",
+   "id": "geral_sem_resultados_honesto",
+   "desc": "provedor vazio vira estado honesto + aviso",
+   "ok": true,
+   "detalhe": "estado sem_resultados + aviso honesto",
+   "ms": 62
+  },
+  {
+   "grupo": "página do usuário",
+   "id": "pagina_usuario_lida_entra_no_prompt",
+   "desc": "\"analise esta página: URL\" traz o conteúdo real",
+   "ok": true,
+   "detalhe": "página lida entrou no prompt como fonte",
+   "ms": 88
+  },
+  {
+   "grupo": "página do usuário",
+   "id": "pagina_usuario_bloqueada_honesta",
+   "desc": "página bloqueada: aviso honesto, sem invenção",
+   "ok": true,
+   "detalhe": "bloqueio explicado sem contorno",
+   "ms": 61
+  },
+  {
+   "grupo": "página do usuário",
+   "id": "pagina_usuario_controle_sem_url",
+   "desc": "pedido de leitura sem URL não ativa o caminho",
+   "ok": true,
+   "detalhe": "sem URL, sem leitura de página",
+   "ms": 61
+  },
+  {
+   "grupo": "comercial",
+   "id": "comercial_oferta_confirmada_com_link",
+   "desc": "produto específico vira card com link do item e preço",
+   "ok": true,
+   "detalhe": "1 card(s) confirmado(s) com link do item",
+   "ms": 67
+  },
+  {
+   "grupo": "comercial",
+   "id": "comercial_orcamento_respeitado",
+   "desc": "acima do orçamento nunca vira oferta",
+   "ok": true,
+   "detalhe": "oferta dentro do teto; acima do teto fora",
+   "ms": 67
+  },
+  {
+   "grupo": "comercial",
+   "id": "comercial_sem_ofertas_nao_inventa",
+   "desc": "sem resultados: nenhuma oferta inventada",
+   "ok": true,
+   "detalhe": "sem produtos, explicação presente",
+   "ms": 62
+  },
+  {
+   "grupo": "documentos",
+   "id": "documento_txt_trechos",
+   "desc": "TXT salvo, trechos relevantes recuperáveis",
+   "ok": true,
+   "detalhe": "1 trecho(s) relevantes",
+   "ms": 67
+  },
+  {
+   "grupo": "documentos",
+   "id": "documento_csv_tabela",
+   "desc": "CSV extraído como tabela com trecho relevante",
+   "ok": true,
+   "detalhe": "CSV extraído como tabela com trecho relevante",
+   "ms": 66
+  },
+  {
+   "grupo": "evidência",
+   "id": "evidencia_claim_estados",
+   "desc": "claim com/sem evidência: SUPPORTED/INSUFFICIENT_EVIDENCE",
+   "ok": true,
+   "detalhe": "SUPPORTED com fonte; INSUFFICIENT_EVIDENCE sem fonte",
+   "ms": 0
+  },
+  {
+   "grupo": "JDUI",
+   "id": "jdui_python_produto",
+   "desc": "validador Python: preço, coerção e specs",
+   "ok": true,
+   "detalhe": "fallback de preço, coerção e specs conforme o backend",
+   "ms": 0
+  },
+  {
+   "grupo": "JDUI",
+   "id": "jdui_js_preco_fallback",
+   "desc": "espelho JS: preço numérico sem preco_valor informa valor",
+   "ok": true,
+   "detalhe": "harness node ok",
+   "ms": 86
+  },
+  {
+   "grupo": "JDUI",
+   "id": "jdui_js_item_de_listagem",
+   "desc": "espelho JS: coerção de item_de_listagem igual ao backend",
+   "ok": true,
+   "detalhe": "harness node ok",
+   "ms": 78
+  },
+  {
+   "grupo": "JDUI",
+   "id": "jdui_js_specs_tipo",
+   "desc": "espelho JS: specs com mesmo aceite/recusa do backend",
+   "ok": true,
+   "detalhe": "harness node ok",
+   "ms": 79
+  }
+ ],
+ "resumo": {
+  "ok": 16,
+  "total": 16,
+  "falhas": 0
+ }
+}

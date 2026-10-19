@@ -1,0 +1,86 @@
+{
+ "quando": "2026-10-18T23:06:30",
+ "resultados": {
+  "hermes": {
+   "porta_8645": true,
+   "v1_models_http": 200,
+   "v1_models_amostra": "{\"data\":[{\"id\":\"deepseek/deepseek-v4.1-flash-1017\",\"canonical_slug\":\"deepseek/deepseek-v4.1-flash-20261017\",\"hugging_face_id\":\"deepseek-ai/DeepSeek-V4.1-Flash-1017\",\"name\":\"DeepSeek: DeepSeek V4.1 Flash 1017\",\"created\":1792225624,\"description\":\"DeepSeek V4.1 Flash 1017 is the October 17, 2026 snapsh",
+   "segundos": 0.6
+  },
+  "pesquisa_rapida": {
+   "estado": "ok",
+   "fontes": 3,
+   "abertas": 3,
+   "com_texto_lido": 3,
+   "amostra": [
+    {
+     "url": "https://pt.m.wikipedia.org/wiki/Fotoss%C3%ADntese",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    },
+    {
+     "url": "https://www.todamateria.com.br/fotossintese/",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    },
+    {
+     "url": "https://m.brasilescola.uol.com.br/biologia/fotossintese.htm",
+     "status": "aberta",
+     "texto_lido_chars": 1200
+    }
+   ],
+   "grounding_chars": 4388,
+   "provedores": {
+    "usados": {
+     "bing": 1
+    },
+    "falhas": [],
+    "vazios": [],
+    "consultados": [
+     "bing"
+    ]
+   },
+   "segundos": 4.2
+  },
+  "analisar_url_wikipedia": {
+   "erro": "",
+   "titulo": "processo físico-químico celular para obtenção de glicose através de energia solar.",
+   "status": "aberta",
+   "texto_lido_chars": 1200,
+   "trecho_amostra": "crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substâncias orgânicas cadeias alimentares 1 [ ] Na forma realizada por plant",
+   "segundos": 2.3
+  },
+  "analisar_url_magalu": {
+   "erro": "bloqueado",
+   "tem_fonte": false,
+   "segundos": 0.4
+  },
+  "shopping_real": {
+   "produtos": 2,
+   "confirmados_com_url": 2,
+   "com_preco": 0,
+   "motivo_final": "confirmed_offers_found",
+   "amostra": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco": "R$ 25,74",
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto"
+    },
+    {
+     "nome": "Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto",
+     "preco": "R$ 110,12",
+     "url": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto"
+    }
+   ],
+   "segundos": 41.5
+  },
+  "prompt_pagina_usuario": {
+   "pagina_usuario": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+   "fontes": 1,
+   "prompt_chars": 5114,
+   "prompt_tem_amostra_do_texto": true,
+   "pesquisa_generica_extra": false,
+   "segundos": 2.5
+  }
+ }
+}

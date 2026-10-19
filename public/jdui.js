@@ -300,7 +300,9 @@
     },
     _produto(o) {
       if (!o || typeof o !== 'object') throw new JduiErro('produto');
-      let pv = o.preco_valor !== undefined && o.preco_valor !== null ? parseFloat(o.preco_valor) : null;
+      let pv = null;
+      if (o.preco_valor !== undefined && o.preco_valor !== null) pv = parseFloat(o.preco_valor);
+      else if (o.preco !== undefined && o.preco !== null) pv = parseFloat(o.preco);
       if (pv !== null && !(pv > 0 && pv < 1e9)) pv = null;
       let av = o.avaliacao !== undefined && o.avaliacao !== null ? parseFloat(o.avaliacao) : null;
       if (av !== null && !(av >= 0 && av <= 5)) av = null;
@@ -308,11 +310,17 @@
       if (nv !== null && !(nv >= 0 && nv < 1e7)) nv = null;
       const disp = String(o.disponibilidade || 'desconhecida').toLowerCase();
       const specs = {};
-      if (o.specs && typeof o.specs === 'object' && !Array.isArray(o.specs)) {
-        Object.keys(o.specs).slice(0, 12).forEach(k => {
-          const v = o.specs[k];
-          if (S(k, 40) && (typeof v === 'string' || typeof v === 'number')) specs[S(k, 40)] = S(v, 120);
-        });
+      if (o.specs) {
+        const listaVazia = Array.isArray(o.specs) && o.specs.length === 0;
+        if (!listaVazia && (typeof o.specs !== 'object' || Array.isArray(o.specs))) {
+          throw new JduiErro('produto.specs');
+        }
+        if (!Array.isArray(o.specs)) {
+          Object.keys(o.specs).slice(0, 12).forEach(k => {
+            const v = o.specs[k];
+            if (S(k, 40) && (typeof v === 'string' || typeof v === 'number')) specs[S(k, 40)] = S(v, 120);
+          });
+        }
       }
       const ofertas = (Array.isArray(o.ofertas) ? o.ofertas : []).slice(0, 6).map(item => {
         if (!item || typeof item !== 'object') return null;
@@ -330,7 +338,7 @@
         verificado_em: S(o.verificado_em, 48), ofertas,
         link_veredito: VER_LINK.indexOf(lv) >= 0 ? lv : '',
         link_motivo: S(o.link_motivo, 120),
-        item_de_listagem: o.item_de_listagem === true,
+        item_de_listagem: !!o.item_de_listagem,
         imagem_veredito: VER_LINK.indexOf(iv) >= 0 ? iv : '',
         imagem_motivo: S(o.imagem_motivo, 120)
       };

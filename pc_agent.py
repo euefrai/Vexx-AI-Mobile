@@ -1962,8 +1962,29 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         and not shopping.eh_followup(texto_usuario) \
         and extras["podem_pesquisar"]
     extras["shop"] = eh_shop
+    # V5.7 FINAL: página específica pedida pelo usuário (URL na mensagem) —
+    # lida UMA vez pelo mesmo `baixar` (SSRF/redirect/tamanho/tipo), com aviso
+    # honesto quando não abrir; nunca substitui o shopping nem um job.
+    if cfg.get("pesquisa_web", True) and not eh_shop and extras["podem_pesquisar"] \
+            and not _JOB_START_RE.search(texto_usuario or ""):
+        url_pu = research.url_pedida(texto_usuario)
+        if url_pu:
+            hoje_pu = (_data_local(contexto_local)
+                       or datetime.now().date()).strftime("%d/%m/%Y")
+            fonte_pu, erro_pu = research.analisar_url(
+                url_pu, consulta=(texto_usuario or "")[:200])
+            extras["pagina_usuario"] = url_pu
+            if fonte_pu:
+                extras["fontes"] = [fonte_pu]
+                extras["ferramentas_usadas"].append("pagina")
+                partes_sistema.append(
+                    research.bloco_grounding([fonte_pu], hoje_pu)
+                    + " (página específica pedida pelo usuário; leia antes de responder)")
+            else:
+                partes_sistema.append(research.bloco_pagina_usuario(url_pu, erro_pu))
     if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) \
-            and not eh_shop and extras["podem_pesquisar"]:
+            and not eh_shop and extras["podem_pesquisar"] \
+            and not extras.get("pagina_usuario"):
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         consulta = (texto_usuario or "")[:200]
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)

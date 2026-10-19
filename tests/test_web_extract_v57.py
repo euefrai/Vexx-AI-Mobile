@@ -46,6 +46,20 @@ def test_penalidade_citacoes_e_limitada():
     assert web_extract._penalidade_citacoes("texto normal sem citações") == 0.0
 
 
+def test_trecho_usado_fica_dentro_do_texto_guardado():
+    """Achado V5.7 FINAL: a janela era escolhida no texto completo e podia
+    ficar fora de `texto[:teto]` — o conteúdo lido então caía no fallback
+    (menus). O trecho usado tem que pertencer ao texto guardado."""
+    partes = [f"Seção {i} sem termo exclusivo algum para desviar o ranking. "
+              for i in range(60)]
+    partes.append("Palavra-chave zzpalavra exclusiva aparece só no fim do artigo. ")
+    html = ("<html><body><article><p>" + "".join(partes)
+            + "</p></article></body></html>")
+    ext = web_extract.extrair_pagina(html, "https://a.example/x", "zzpalavra", teto=500)
+    assert ext["trecho_usado"]
+    assert ext["trecho_usado"][:60] in ext["texto"]
+
+
 # ── FASE 3: imagens referenciadas ──────────────────────────────────
 def test_imagens_og_jsonld_e_img_relativo():
     html = (
