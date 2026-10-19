@@ -1,6 +1,7 @@
 # VEXX AI V5.7.2 — Progresso por checkpoint (Final Acceptance)
 
 - **Base:** `HEAD 772ec3a` (V5.7 FINAL), árvore limpa no início.
+- **Commit de entrega:** `e98d316` (local, sem push/deploy).
 - **Data:** 2026-10-19.
 - **Regras:** sem push/deploy, sem reiniciar produção, sem credenciais novas,
   sem modelo pago, sem tocar motor 3D/extensão Júlia/Fajulto Studio, sem

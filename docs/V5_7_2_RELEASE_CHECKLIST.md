@@ -9,7 +9,7 @@ deployado nesta rodada.
 | Item | Valor |
 |---|---|
 | Base | `772ec3a` — V5.7 FINAL (árvore limpa no início) |
-| Commit local desta versão | ver `git log -1` (criado no fim da rodada) |
+| Commit local desta versão | `e98d316` |
 | Push | **não realizado** (proibido nesta rodada) |
 | Deploy | **não realizado** (proibido nesta rodada) |
 | Branch | local, sem remoto alterado |

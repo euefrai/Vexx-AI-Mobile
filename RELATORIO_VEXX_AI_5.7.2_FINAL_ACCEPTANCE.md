@@ -2,6 +2,7 @@
 
 - **Data:** 2026-10-19
 - **Base:** commit local `772ec3a` (V5.7 FINAL), árvore limpa no início
+- **Commit de entrega:** `e98d316` (local, sem push/deploy)
 - **Escopo:** auditoria dirigida + correções dos checkpoints A–I, sem novas
   funcionalidades, sem push/deploy, sem modelo pago
 - **Decisão final:** **READY_WITH_LIMITATIONS**
