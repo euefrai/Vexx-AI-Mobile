@@ -1,0 +1,1182 @@
+{
+ "quando": "2026-10-18T22:05:01-0300",
+ "head_testado": "020c85fa2b0cc0009f1d473bc0fcccf62b585f8e",
+ "tarefa": "smoke V5.7.1 (hotfix descoberta) — cadeia NATURAL sem neutralizar ddg/ddg-lite; 4 consultas; mesmo caminho do agente; render node + checagem HTTP independente",
+ "ambiente": "rede real; venv; Windows; roteamento->pesquisar->fence->render (node + public/jdui.js); decisões estruturadas da descoberta registradas",
+ "consultas": [
+  {
+   "rotulo": "notebook_simples",
+   "texto": "me mostre um notebook",
+   "exige_confirmada": true,
+   "status": "aprovado",
+   "roteado_para_shopping": true,
+   "segundos": 11.5,
+   "tentativas": 1,
+   "fases": [
+    "buscando: notebook",
+    "identificando: 17 anúncios candidatos",
+    "consultando: 6 páginas",
+    "extraindo: 4 ofertas estruturadas",
+    "validando: 4 modelos únicos",
+    "confirmando: 4 páginas de item",
+    "verificando: imagens reais dos produtos",
+    "organizando: 4 recomendações, 1 referências não verificadas"
+   ],
+   "etapas_provedores": [
+    "um notebook comprar oferta: mlb: falhou (ResearchErro)",
+    "um notebook comprar oferta: ddg: sem resultados (bloqueio?)",
+    "um notebook comprar oferta: ddg-lite: sem resultados (bloqueio?)",
+    "um notebook comprar oferta: web: 6 resultados (bing, ok)",
+    "melhor um notebook comprar Brasil: mlb: falhou (ResearchErro)",
+    "melhor um notebook comprar Brasil: ddg: sem resultados (bloqueio?)",
+    "melhor um notebook comprar Brasil: ddg-lite: sem resultados (bloqueio?)",
+    "melhor um notebook comprar Brasil: web: 16 resultados (bing+marginalia, sem_correspondencia)"
+   ],
+   "descoberta": {
+    "motivo_final": "confirmed_offers_found",
+    "ondas": 1,
+    "paginas_disponiveis": 10,
+    "paginas_consultadas": 6,
+    "ofertas_extraidas": 4,
+    "confirmadas": 4,
+    "orcamento_esgotado": false,
+    "decisoes": [
+     {
+      "consulta": "um notebook comprar oferta",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 377
+     },
+     {
+      "consulta": "um notebook comprar oferta",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 625
+     },
+     {
+      "consulta": "um notebook comprar oferta",
+      "provedor": "web",
+      "resultados": 6,
+      "comerciais": 4,
+      "rejeitados": 0,
+      "rebaixados": 2,
+      "motivo": "fallback_success",
+      "ms": 701
+     },
+     {
+      "consulta": "melhor um notebook comprar Brasil",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 266
+     },
+     {
+      "consulta": "melhor um notebook comprar Brasil",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 595
+     },
+     {
+      "consulta": "melhor um notebook comprar Brasil",
+      "provedor": "web",
+      "resultados": 16,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 16,
+      "motivo": "irrelevant_results",
+      "ms": 3679
+     }
+    ]
+   },
+   "motivos_descoberta": [
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success",
+    "provider_blocked",
+    "provider_blocked",
+    "irrelevant_results"
+   ],
+   "fallback_web_acionado": true,
+   "ddglite_so_lixo_continuou": false,
+   "produtos": [
+    {
+     "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+     "preco_texto": "R$ 2.974,15",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "url_verificada": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+     "preco_texto": "R$ 4.703,04",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+     "preco_texto": "R$ 7.299,00",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "url_verificada": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+     "preco_texto": "R$ 9.750,24",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "item_de_listagem": false
+    }
+   ],
+   "confirmadas": 4,
+   "produtos_jdui": [
+    {
+     "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+     "preco": "R$ 2.974,15",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 8",
+     "preco": "R$ 4.703,04",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, P",
+     "preco": "R$ 7.299,00",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - ",
+     "preco": "R$ 9.750,24",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    }
+   ],
+   "validacao_jdui": {
+    "ok": true,
+    "erros": []
+   },
+   "render_node": {
+    "ok": true,
+    "checks": [
+     "ok payload-valido",
+     "ok payload-links",
+     "ok payload-tem-verificado",
+     "ok payload-tem-imagem",
+     "ok payload-tem-preco",
+     "ok render-link-verificado",
+     "ok render-nomes",
+     "ok render-precos"
+    ],
+    "stderr": ""
+   },
+   "imagens_live": [
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    }
+   ],
+   "paginas_live": [
+    {
+     "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "bytes_html": 112301,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "bytes_html": 192492,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "bytes_html": 166707,
+     "pagina_item": true
+    }
+   ],
+   "limitacoes": [
+    "ddg-lite: sem resultados (bloqueio?)",
+    "ddg: sem resultados (bloqueio?)",
+    "mlb: falhou (ResearchErro)"
+   ],
+   "erro": ""
+  },
+  {
+   "rotulo": "notebook_aprovada_antes",
+   "texto": "me mostre um notebook para trabalhar e estudar",
+   "exige_confirmada": true,
+   "status": "aprovado",
+   "roteado_para_shopping": true,
+   "segundos": 9.2,
+   "tentativas": 1,
+   "fases": [
+    "buscando: notebook",
+    "identificando: 21 anúncios candidatos",
+    "consultando: 6 páginas",
+    "extraindo: 4 ofertas estruturadas",
+    "validando: 4 modelos únicos",
+    "confirmando: 4 páginas de item",
+    "verificando: imagens reais dos produtos",
+    "organizando: 4 recomendações, 3 referências não verificadas"
+   ],
+   "etapas_provedores": [
+    "um notebook trabalhar estudar comprar of: mlb: falhou (ResearchErro)",
+    "um notebook trabalhar estudar comprar of: ddg: sem resultados (bloqueio?)",
+    "um notebook trabalhar estudar comprar of: ddg-lite: sem resultados (bloqueio?)",
+    "um notebook trabalhar estudar comprar of: web: 12 resultados (bing, ok)",
+    "melhor um notebook trabalhar estudar com: mlb: falhou (ResearchErro)",
+    "melhor um notebook trabalhar estudar com: ddg: sem resultados (bloqueio?)",
+    "melhor um notebook trabalhar estudar com: ddg-lite: sem resultados (bloqueio?)",
+    "melhor um notebook trabalhar estudar com: web: 16 resultados (bing, ok)"
+   ],
+   "descoberta": {
+    "motivo_final": "confirmed_offers_found",
+    "ondas": 1,
+    "paginas_disponiveis": 10,
+    "paginas_consultadas": 6,
+    "ofertas_extraidas": 4,
+    "confirmadas": 4,
+    "orcamento_esgotado": false,
+    "decisoes": [
+     {
+      "consulta": "um notebook trabalhar estudar comprar oferta",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 293
+     },
+     {
+      "consulta": "um notebook trabalhar estudar comprar oferta",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 587
+     },
+     {
+      "consulta": "um notebook trabalhar estudar comprar oferta",
+      "provedor": "web",
+      "resultados": 12,
+      "comerciais": 5,
+      "rejeitados": 0,
+      "rebaixados": 7,
+      "motivo": "fallback_success",
+      "ms": 835
+     },
+     {
+      "consulta": "melhor um notebook trabalhar estudar comprar Brasil",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 336
+     },
+     {
+      "consulta": "melhor um notebook trabalhar estudar comprar Brasil",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 517
+     },
+     {
+      "consulta": "melhor um notebook trabalhar estudar comprar Brasil",
+      "provedor": "web",
+      "resultados": 16,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 16,
+      "motivo": "irrelevant_results",
+      "ms": 1922
+     }
+    ]
+   },
+   "motivos_descoberta": [
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success",
+    "provider_blocked",
+    "provider_blocked",
+    "irrelevant_results"
+   ],
+   "fallback_web_acionado": true,
+   "ddglite_so_lixo_continuou": false,
+   "produtos": [
+    {
+     "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+     "preco_texto": "R$ 2.974,15",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "url_verificada": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+     "preco_texto": "R$ 4.703,04",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+     "preco_texto": "R$ 7.299,00",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "url_verificada": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+     "preco_texto": "R$ 9.750,24",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "url_verificada": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "item_de_listagem": false
+    }
+   ],
+   "confirmadas": 4,
+   "produtos_jdui": [
+    {
+     "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+     "preco": "R$ 2.974,15",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 8",
+     "preco": "R$ 4.703,04",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, P",
+     "preco": "R$ 7.299,00",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - ",
+     "preco": "R$ 9.750,24",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    }
+   ],
+   "validacao_jdui": {
+    "ok": true,
+    "erros": []
+   },
+   "render_node": {
+    "ok": true,
+    "checks": [
+     "ok payload-valido",
+     "ok payload-links",
+     "ok payload-tem-verificado",
+     "ok payload-tem-imagem",
+     "ok payload-tem-preco",
+     "ok render-link-verificado",
+     "ok render-nomes",
+     "ok render-precos"
+    ],
+    "stderr": ""
+   },
+   "imagens_live": [
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/large/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    }
+   ],
+   "paginas_live": [
+    {
+     "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+     "bytes_html": 112301,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+     "bytes_html": 192500,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+     "bytes_html": 166707,
+     "pagina_item": true
+    }
+   ],
+   "limitacoes": [
+    "ddg-lite: sem resultados (bloqueio?)",
+    "ddg: sem resultados (bloqueio?)",
+    "mlb: falhou (ResearchErro)"
+   ],
+   "erro": ""
+  },
+  {
+   "rotulo": "fone_simples",
+   "texto": "me mostre um fone bluetooth",
+   "exige_confirmada": false,
+   "status": "aprovado",
+   "roteado_para_shopping": true,
+   "segundos": 10.3,
+   "tentativas": 1,
+   "fases": [
+    "buscando: fone",
+    "identificando: 17 anúncios candidatos",
+    "consultando: 6 páginas",
+    "extraindo: 4 ofertas estruturadas",
+    "validando: 4 modelos únicos",
+    "confirmando: 4 páginas de item",
+    "verificando: imagens reais dos produtos",
+    "organizando: 4 recomendações"
+   ],
+   "etapas_provedores": [
+    "um fone bluetooth comprar oferta: mlb: falhou (ResearchErro)",
+    "um fone bluetooth comprar oferta: ddg: sem resultados (bloqueio?)",
+    "um fone bluetooth comprar oferta: ddg-lite: sem resultados (bloqueio?)",
+    "um fone bluetooth comprar oferta: web: 6 resultados (bing, ok)",
+    "melhor um fone bluetooth comprar Brasil: mlb: falhou (ResearchErro)",
+    "melhor um fone bluetooth comprar Brasil: ddg: sem resultados (bloqueio?)",
+    "melhor um fone bluetooth comprar Brasil: ddg-lite: sem resultados (bloqueio?)",
+    "melhor um fone bluetooth comprar Brasil: web: 12 resultados (bing, ok)"
+   ],
+   "descoberta": {
+    "motivo_final": "confirmed_offers_found",
+    "ondas": 1,
+    "paginas_disponiveis": 10,
+    "paginas_consultadas": 6,
+    "ofertas_extraidas": 4,
+    "confirmadas": 4,
+    "orcamento_esgotado": false,
+    "decisoes": [
+     {
+      "consulta": "um fone bluetooth comprar oferta",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 306
+     },
+     {
+      "consulta": "um fone bluetooth comprar oferta",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 560
+     },
+     {
+      "consulta": "um fone bluetooth comprar oferta",
+      "provedor": "web",
+      "resultados": 6,
+      "comerciais": 5,
+      "rejeitados": 0,
+      "rebaixados": 1,
+      "motivo": "fallback_success",
+      "ms": 760
+     },
+     {
+      "consulta": "melhor um fone bluetooth comprar Brasil",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 332
+     },
+     {
+      "consulta": "melhor um fone bluetooth comprar Brasil",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 586
+     },
+     {
+      "consulta": "melhor um fone bluetooth comprar Brasil",
+      "provedor": "web",
+      "resultados": 12,
+      "comerciais": 3,
+      "rejeitados": 0,
+      "rebaixados": 9,
+      "motivo": "fallback_success",
+      "ms": 1999
+     }
+    ]
+   },
+   "motivos_descoberta": [
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success",
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success"
+   ],
+   "fallback_web_acionado": true,
+   "ddglite_so_lixo_continuou": false,
+   "produtos": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco_texto": "R$ 25,74",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "url_item": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "url_verificada": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto",
+     "preco_texto": "R$ 110,12",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "url_item": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "url_verificada": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bateria Até 40 Horas, Bluetooth 5.3, Conexão Multipontos, IP54, Preto - JBLWBUDS2BLK",
+     "preco_texto": "R$ 299,90",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "url_verificada": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+     "preco_texto": "R$ 319,90",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "url_verificada": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "item_de_listagem": false
+    }
+   ],
+   "confirmadas": 4,
+   "produtos_jdui": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco": "R$ 25,74",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto",
+     "preco": "R$ 110,12",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "url": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bateria Até 40 Horas, Bluetooth 5.3, Conexão Multipontos, IP54, P",
+     "preco": "R$ 299,90",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "url": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+     "preco": "R$ 319,90",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "url": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    }
+   ],
+   "validacao_jdui": {
+    "ok": true,
+    "erros": []
+   },
+   "render_node": {
+    "ok": true,
+    "checks": [
+     "ok payload-valido",
+     "ok payload-links",
+     "ok payload-tem-verificado",
+     "ok payload-tem-imagem",
+     "ok payload-tem-preco",
+     "ok render-link-verificado",
+     "ok render-nomes",
+     "ok render-precos"
+    ],
+    "stderr": ""
+   },
+   "imagens_live": [
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    }
+   ],
+   "paginas_live": [
+    {
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "bytes_html": 102495,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "bytes_html": 106333,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "bytes_html": 127523,
+     "pagina_item": true
+    }
+   ],
+   "limitacoes": [
+    "ddg-lite: sem resultados (bloqueio?)",
+    "ddg: sem resultados (bloqueio?)",
+    "mlb: falhou (ResearchErro)"
+   ],
+   "erro": ""
+  },
+  {
+   "rotulo": "fone_ate_500",
+   "texto": "preço fone bluetooth até R$ 500",
+   "exige_confirmada": false,
+   "status": "aprovado",
+   "roteado_para_shopping": true,
+   "segundos": 8.1,
+   "tentativas": 1,
+   "fases": [
+    "buscando: fone",
+    "identificando: 6 anúncios candidatos",
+    "consultando: 6 páginas",
+    "extraindo: 4 ofertas estruturadas",
+    "validando: 4 modelos únicos",
+    "confirmando: 4 páginas de item",
+    "verificando: imagens reais dos produtos",
+    "organizando: 4 recomendações"
+   ],
+   "etapas_provedores": [
+    "fone bluetooth comprar oferta: mlb: falhou (ResearchErro)",
+    "fone bluetooth comprar oferta: ddg: sem resultados (bloqueio?)",
+    "fone bluetooth comprar oferta: ddg-lite: sem resultados (bloqueio?)",
+    "fone bluetooth comprar oferta: web: 6 resultados (bing, ok)",
+    "fone bluetooth preço até 500: mlb: falhou (ResearchErro)",
+    "fone bluetooth preço até 500: ddg: sem resultados (bloqueio?)",
+    "fone bluetooth preço até 500: ddg-lite: sem resultados (bloqueio?)",
+    "fone bluetooth preço até 500: web: 6 resultados (bing, ok)"
+   ],
+   "descoberta": {
+    "motivo_final": "confirmed_offers_found",
+    "ondas": 1,
+    "paginas_disponiveis": 6,
+    "paginas_consultadas": 6,
+    "ofertas_extraidas": 4,
+    "confirmadas": 4,
+    "orcamento_esgotado": false,
+    "decisoes": [
+     {
+      "consulta": "fone bluetooth comprar oferta",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 298
+     },
+     {
+      "consulta": "fone bluetooth comprar oferta",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 613
+     },
+     {
+      "consulta": "fone bluetooth comprar oferta",
+      "provedor": "web",
+      "resultados": 6,
+      "comerciais": 5,
+      "rejeitados": 0,
+      "rebaixados": 1,
+      "motivo": "fallback_success",
+      "ms": 763
+     },
+     {
+      "consulta": "fone bluetooth preço até 500",
+      "provedor": "mlb",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "erro": "ResearchErro",
+      "ms": 315
+     },
+     {
+      "consulta": "fone bluetooth preço até 500",
+      "provedor": "ddg+ddg-lite",
+      "resultados": 0,
+      "comerciais": 0,
+      "rejeitados": 0,
+      "rebaixados": 0,
+      "motivo": "provider_blocked",
+      "ms": 560
+     },
+     {
+      "consulta": "fone bluetooth preço até 500",
+      "provedor": "web",
+      "resultados": 6,
+      "comerciais": 5,
+      "rejeitados": 0,
+      "rebaixados": 1,
+      "motivo": "fallback_success",
+      "ms": 692
+     }
+    ]
+   },
+   "motivos_descoberta": [
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success",
+    "provider_blocked",
+    "provider_blocked",
+    "fallback_success"
+   ],
+   "fallback_web_acionado": true,
+   "ddglite_so_lixo_continuou": false,
+   "produtos": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco_texto": "R$ 25,74",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "url_item": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "url_verificada": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto",
+     "preco_texto": "R$ 110,12",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "url_item": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "url_verificada": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bateria Até 40 Horas, Bluetooth 5.3, Conexão Multipontos, IP54, Preto - JBLWBUDS2BLK",
+     "preco_texto": "R$ 299,90",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "url_verificada": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "item_de_listagem": false
+    },
+    {
+     "nome": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+     "preco_texto": "R$ 319,90",
+     "disponibilidade": "em_estoque",
+     "tier": "confirmada",
+     "link_veredito": "verificado",
+     "link_codigo": "ok",
+     "link_motivo": "abriu, tipo certo e produto confirmado",
+     "imagem_veredito": "verificado",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "url_item": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "url_verificada": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "item_de_listagem": false
+    }
+   ],
+   "confirmadas": 4,
+   "produtos_jdui": [
+    {
+     "nome": "Fone De Ouvido C/microfone Taue101bk/00 Preto Philips",
+     "preco": "R$ 25,74",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto",
+     "preco": "R$ 110,12",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "url": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone de Ouvido JBL Wave Buds 2, Cancelamento de Ruído, Bateria Até 40 Horas, Bluetooth 5.3, Conexão Multipontos, IP54, P",
+     "preco": "R$ 299,90",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "url": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    },
+    {
+     "nome": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+     "preco": "R$ 319,90",
+     "imagem": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "url": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+     "link_veredito": "verificado",
+     "imagem_veredito": "verificado",
+     "disponibilidade": "em_estoque"
+    }
+   ],
+   "validacao_jdui": {
+    "ok": true,
+    "erros": []
+   },
+   "render_node": {
+    "ok": true,
+    "checks": [
+     "ok payload-valido",
+     "ok payload-links",
+     "ok payload-tem-verificado",
+     "ok payload-tem-imagem",
+     "ok payload-tem-preco",
+     "ok render-link-verificado",
+     "ok render-nomes",
+     "ok render-precos"
+    ],
+    "stderr": ""
+   },
+   "imagens_live": [
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/120543/large/Fone-De-Ouvido-C-microfone-Taue101bk-00-Preto-Philips_1792067916.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/927806/large/Fone-De-Ouvido-Philips-Tat1139-Bluetooth-True-Wireless-Preto_1792007320.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem webp 400x400",
+     "formato": "webp"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk_1735305047_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    },
+    {
+     "url": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_g.jpg",
+     "veredito": "verificado",
+     "codigo": "ok",
+     "motivo": "imagem jpeg 395x395",
+     "formato": "jpeg"
+    }
+   ],
+   "paginas_live": [
+    {
+     "url": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/120543/fone-de-ouvido-intra-auricular-com-microfone-taue101bk-preto",
+     "bytes_html": 102495,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/927806/fone-de-ouvido-philips-tat1139-bluetooth-true-wireless-preto",
+     "bytes_html": 106333,
+     "pagina_item": true
+    },
+    {
+     "url": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "ok": true,
+     "url_final": "https://www.kabum.com.br/produto/690301/fone-de-ouvido-jbl-wave-buds-2-cancelamento-de-ruido-bateria-ate-40-horas-bluetooth-5-3-conexao-multipontos-ip54-preto-jblwbuds2blk",
+     "bytes_html": 127522,
+     "pagina_item": true
+    }
+   ],
+   "limitacoes": [
+    "ddg-lite: sem resultados (bloqueio?)",
+    "ddg: sem resultados (bloqueio?)",
+    "mlb: falhou (ResearchErro)"
+   ],
+   "erro": ""
+  }
+ ],
+ "resumo": {
+  "geral": "APROVADO",
+  "por_status": {
+   "notebook_simples": "aprovado",
+   "notebook_aprovada_antes": "aprovado",
+   "fone_simples": "aprovado",
+   "fone_ate_500": "aprovado"
+  },
+  "confirmadas_total": 16,
+  "fallback_web_acionado_em": [
+   "notebook_simples",
+   "notebook_aprovada_antes",
+   "fone_simples",
+   "fone_ate_500"
+  ],
+  "ddglite_so_lixo_continuou_em": [],
+  "paginas_live_ok": 12,
+  "imagens_live_verificadas": 16,
+  "render_ok": {
+   "notebook_simples": true,
+   "notebook_aprovada_antes": true,
+   "fone_simples": true,
+   "fone_ate_500": true
+  }
+ },
+ "limitacoes_externas": [
+  "ddg-lite: sem resultados (bloqueio?)",
+  "ddg: sem resultados (bloqueio?)",
+  "mlb: falhou (ResearchErro)"
+ ]
+}

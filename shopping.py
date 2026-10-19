@@ -63,6 +63,7 @@ MAX_PAGINAS = 6
 MAX_PRODUTOS = 6
 MAX_REFERENCIAS = 4
 MAX_VALIDACOES_ITEM = 6  # páginas de item abertas p/ confirmar cards (V5.7)
+MAX_ONDAS_PAGINAS = 2  # V5.7.1: 2ª onda só quando a 1ª não rende nenhuma oferta
 
 PRECO_NAO_CONFIRMADO = "Preço não confirmado"
 
@@ -1334,21 +1335,148 @@ def produto_de_mlb(item: dict) -> dict | None:
     }
 
 
+# ── Gate comercial da descoberta (V5.7.1) ──────────────────────────────
+# Classifica CANDIDATOS por TIPO de página — nada aqui valida oferta: preço,
+# estoque, variante e identidade continuam por conta do validador (V5.7).
+# Regra da cadeia: um provedor só encerra a busca quando trouxe candidato
+# comercial (produto/listagem de loja); blog/índice/anúncio → continua.
+CLASSIFICA_CANDIDATO = ("PRODUCT_CANDIDATE", "COMMERCIAL_LISTING",
+                        "EDITORIAL_REFERENCE", "GENERIC_INDEX",
+                        "IRRELEVANT", "UNKNOWN")
+COBERTURA_COMERCIAL_MINIMA = 1  # ≥1 página comercial sustenta o caminho rápido
+
+_RX_CAND_HOST_BUSCA = re.compile(
+    r"^(?:duckduckgo|google|bing|yahoo|yandex|ecosia|brave|startpage|baidu)\.",
+    re.I)
+_RX_CAND_HOST_LOJA = re.compile(
+    r"^(?:loja|lojas|shop|store|compras|mercado)\.", re.I)
+# Portais editoriais observados ao vivo (lista extensível; não é critério
+# de loja/marca/produto — só evita gastar página com guia/review).
+_RX_CAND_HOST_EDITORIAL = re.compile(
+    r"^(?:tecnoblog|techtudo|olhardigital|oficinadanet|canaltech|techinter|"
+    r"leandroabreu|melhoresparacomprar|soundbests|ocomparador|techknow)\.",
+    re.I)
+_RX_CAND_CAMINHO_EDITORIAL = re.compile(
+    r"/(?:blog|blogs|autor|author|tag|tags|forum|forums|wiki|noticias|news|"
+    r"guias?|reviews?|artigos?|posts?|materias?|colunas?|opiniao|"
+    r"comparativos?)(?:/|$|\?)", re.I)
+_RX_CAND_CAMINHO_ACESSO = re.compile(
+    r"/(?:login|entrar|conta|cadastro|sobre|contact|contato)(?:/|$|\?)",
+    re.I)
+_HOSTS_COMERCIO_CONHECIDOS = frozenset({
+    "kabum.com.br", "mercadolivre.com.br", "magazineluiza.com.br",
+    "amazon.com.br", "americanas.com.br", "shopee.com.br",
+    "casasbahia.com.br", "extra.com.br", "pontofrio.com.br",
+    "carrefour.com.br", "aliexpress.com", "terabyteshop.com.br",
+    "pichau.com.br", "gigantec.com.br", "fastshop.com.br",
+})
+_ORDEM_CANDIDATO = {"PRODUCT_CANDIDATE": 0, "COMMERCIAL_LISTING": 1,
+                    "UNKNOWN": 2, "EDITORIAL_REFERENCE": 3,
+                    "GENERIC_INDEX": 4, "IRRELEVANT": 5}
+
+
+def classificar_candidato(item: dict) -> str:
+    """Tipo do candidato para a descoberta (PRODUCT_CANDIDATE, ...).
+
+    Heurística conservadora sobre a URL (título não decide). Não é validação
+    de oferta: página comercial aparente continua precisando do validador.
+    UNKNOWN fica como candidato fraco — jamais justifica encerrar a cadeia.
+    """
+    url = str((item or {}).get("url") or "").strip()
+    if not re.match(r"^https?://", url, re.I):
+        return "IRRELEVANT"
+    try:
+        partes = urllib.parse.urlsplit(url)
+    except ValueError:
+        return "IRRELEVANT"
+    host = (partes.hostname or "").lower()
+    caminho = partes.path or ""
+    if not host:
+        return "IRRELEVANT"
+    if host.startswith("www."):
+        host = host[4:]
+    if _RX_CAND_HOST_BUSCA.match(host) or host.endswith(".google"):
+        if re.search(r"/y\.js(?:[/?]|$)", caminho):
+            return "IRRELEVANT"  # anúncio pago do próprio buscador
+        return "GENERIC_INDEX"
+    if not caminho.strip("/"):
+        return "GENERIC_INDEX"
+    if _RX_CAND_HOST_EDITORIAL.match(host) \
+            or _RX_CAND_CAMINHO_EDITORIAL.search(caminho):
+        return "EDITORIAL_REFERENCE"
+    if _RX_CAND_CAMINHO_ACESSO.search(caminho):
+        return "GENERIC_INDEX"
+    if _RX_REF_URL_PRODUTO.search(caminho):
+        return "PRODUCT_CANDIDATE"
+    if _RX_REF_HOST_LISTA.match(host) or source_check.url_de_listagem(url) \
+            or _RX_CAND_HOST_LOJA.match(host) \
+            or host in _HOSTS_COMERCIO_CONHECIDOS:
+        return "COMMERCIAL_LISTING"
+    return "UNKNOWN"
+
+
+def _contagem_classificacoes(candidatos: list) -> dict:
+    cont = {c: 0 for c in CLASSIFICA_CANDIDATO}
+    for a in candidatos or []:
+        c = classificar_candidato(a)
+        cont[c] = cont.get(c, 0) + 1
+    return cont
+
+
+def _ordenar_candidatos(candidatos: list) -> list:
+    """Comerciais primeiro, lixo no fim; IRRELEVANT fica FORA (nunca gasta
+    página nem vira referência). Ordenação estável (empate mantém ordem)."""
+    uteis = [a for a in (candidatos or [])
+             if classificar_candidato(a) != "IRRELEVANT"]
+    uteis.sort(key=lambda a: _ORDEM_CANDIDATO.get(classificar_candidato(a), 2))
+    return uteis
+
+
+def _mesclar_candidatos(*listas: list) -> list:
+    """Concatena provedores deduplicando o mesmo recurso (host+caminho)."""
+    mesclado: list = []
+    for lista in listas:
+        for a in lista or []:
+            url = str((a or {}).get("url") or "").strip()
+            if not url:
+                continue
+            if any(_mesmo_recurso(url, str(b.get("url") or ""))
+                   for b in mesclado):
+                continue
+            mesclado.append(a)
+    return mesclado
+
+
 def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
-    """DDG HTML → Lite. Retorna (achados, etapas). Nunca levanta."""
+    """DDG HTML → Lite com gate comercial. Retorna (achados, etapas).
+
+    Nunca levanta. O legado parava na primeira base com QUALQUER resultado;
+    aqui lixo (blog/índice/anúncio) não bloqueia a base seguinte: a cascata
+    só para quando já existe candidato comercial — senão acumula o útil das
+    duas bases (mesclado/deduplicado) para o `buscar_com_fallback` decidir.
+    """
     etapas = []
-    for base_nome, base in (("ddg", research.DDG_HTML), ("ddg-lite", research.DDG_LITE)):
+    pool: list = []
+    for base_nome, base in (("ddg", research.DDG_HTML),
+                            ("ddg-lite", research.DDG_LITE)):
         try:
             achados = research.buscar_ddg(consulta, base=base,
                                           max_resultados=max_resultados) or []
         except Exception as exc:
             etapas.append(f"{base_nome}: falhou ({type(exc).__name__})")
             continue
-        if achados:
-            etapas.append(f"{base_nome}: {len(achados)} resultados")
-            return achados, etapas
-        etapas.append(f"{base_nome}: sem resultados (bloqueio?)")
-    return [], etapas
+        if not achados:
+            etapas.append(f"{base_nome}: sem resultados (bloqueio?)")
+            continue
+        cont = _contagem_classificacoes(achados)
+        comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
+                      + cont.get("COMMERCIAL_LISTING", 0))
+        etapas.append(f"{base_nome}: {len(achados)} resultados "
+                      f"({comerciais} comerciais)")
+        pool = _mesclar_candidatos(pool, achados)
+        if comerciais >= COBERTURA_COMERCIAL_MINIMA:
+            return pool, etapas
+    return pool, etapas
 
 
 def buscar_web_v55(consulta: str, max_resultados: int = 10) -> tuple:
@@ -1371,32 +1499,83 @@ def buscar_web_v55(consulta: str, max_resultados: int = 10) -> tuple:
 
 
 def buscar_com_fallback(consulta: str, buscar_fn=None,
-                        limite_mlb: int = 10) -> tuple:
-    """Cadeia mlb → ddg → lite → web (orquestrador). Retorna (achados, etapas).
+                        limite_mlb: int = 10, diag: list | None = None) -> tuple:
+    """Cadeia mlb → ddg → lite → web (orquestrador), com gate comercial.
 
-    Nunca levanta. A etapa `web` roda por último e só quando as anteriores
-    não trouxeram nada; ela é a mesma busca multi-provedor do Research
-    Engine (Bing/Marginalia/Wikipedia/...), sem bypass de bloqueio.
+    Retorna (achados, etapas). Nunca levanta. V5.7.1: um provedor só encerra
+    a cadeia quando trouxe candidato comercial (produto/listagem); lixo
+    (blog/índice/anúncio) faz a busca CONTINUAR para o próximo provedor,
+    mesclando o que houver de útil. A etapa `web` roda por último e é a
+    mesma busca multi-provedor do Research Engine (Bing/Marginalia/
+    Wikipedia/...), sem bypass de bloqueio.
+
+    `diag` (opcional): lista que recebe o rastreamento estruturado das
+    decisões reais da descoberta (provedor, contagens, motivo, erro, ms).
     """
     if buscar_fn is not None:
         try:
             return list(buscar_fn(consulta) or [])[:12], ["injetado (teste)"]
         except Exception as exc:
             return [], [f"injetado falhou ({type(exc).__name__})"]
+
+    def _reg(**campos) -> None:
+        if isinstance(diag, list):
+            campos["consulta"] = _limpa(consulta, 80)
+            campos["ms"] = int(campos.get("ms") or 0)
+            diag.append(campos)
+
     etapas: list = []
+    inicio = time.monotonic()
     try:
         achados = buscar_mlb(consulta, limite=limite_mlb)
         etapas.append(f"mlb: {len(achados)} ofertas (API oficial)")
+        _reg(provedor="mlb", resultados=len(achados),
+             comerciais=len(achados), rejeitados=0, rebaixados=0,
+             motivo="useful_candidates_found",
+             ms=(time.monotonic() - inicio) * 1000)
         return achados, etapas
     except Exception as exc:
         etapas.append(f"mlb: falhou ({type(exc).__name__})")
-    ddg, detapas = buscar_ddg_chain(consulta)
+        _reg(provedor="mlb", resultados=0, comerciais=0, rejeitados=0,
+             rebaixados=0, erro=type(exc).__name__,
+             motivo=("provider_blocked"
+                     if isinstance(exc, research.ResearchErro)
+                     else "provider_error"),
+             ms=(time.monotonic() - inicio) * 1000)
+    inicio = time.monotonic()
+    cascata, detapas = buscar_ddg_chain(consulta)
     etapas.extend(detapas)
-    if ddg:
-        return ddg, etapas
+    cont = _contagem_classificacoes(cascata)
+    comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
+                  + cont.get("COMMERCIAL_LISTING", 0))
+    _reg(provedor="ddg+ddg-lite", resultados=len(cascata),
+         comerciais=comerciais, rejeitados=cont.get("IRRELEVANT", 0),
+         rebaixados=(cont.get("EDITORIAL_REFERENCE", 0)
+                     + cont.get("GENERIC_INDEX", 0)
+                     + cont.get("UNKNOWN", 0)),
+         motivo=("useful_candidates_found"
+                 if comerciais >= COBERTURA_COMERCIAL_MINIMA else
+                 ("insufficient_commercial_candidates" if cascata
+                  else "provider_blocked")),
+         ms=(time.monotonic() - inicio) * 1000)
+    if comerciais >= COBERTURA_COMERCIAL_MINIMA:
+        return _ordenar_candidatos(cascata), etapas
+    inicio = time.monotonic()
     achados, wetapas = buscar_web_v55(consulta)
     etapas.extend(wetapas)
-    return achados, etapas
+    cont = _contagem_classificacoes(achados)
+    comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
+                  + cont.get("COMMERCIAL_LISTING", 0))
+    _reg(provedor="web", resultados=len(achados), comerciais=comerciais,
+         rejeitados=cont.get("IRRELEVANT", 0),
+         rebaixados=(cont.get("EDITORIAL_REFERENCE", 0)
+                     + cont.get("GENERIC_INDEX", 0)
+                     + cont.get("UNKNOWN", 0)),
+         motivo=("fallback_success"
+                 if comerciais >= COBERTURA_COMERCIAL_MINIMA else
+                 ("irrelevant_results" if achados else "provider_blocked")),
+         ms=(time.monotonic() - inicio) * 1000)
+    return _ordenar_candidatos(_mesclar_candidatos(cascata, achados)), etapas
 
 
 def diagnosticar_provedores(timeout: float = 6.0) -> list:
@@ -2022,8 +2201,10 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
 
     consultas = _consultas_produto(criterios, texto)
     achados, vistas, etapas_prov = [], set(), []
+    decisoes: list = []
     for q in consultas:
-        parcial, detapas = buscar_com_fallback(q, buscar_fn=buscar_fn)
+        parcial, detapas = buscar_com_fallback(q, buscar_fn=buscar_fn,
+                                               diag=decisoes)
         etapas_prov.extend(f"{q[:40]}: {e}" for e in detapas)
         for a in parcial[:12]:
             if a.get("url") and a["url"] not in vistas:
@@ -2036,7 +2217,9 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                      "total_bruto": 0, "excluidos": [], "de_cache": False,
                      "encontrados": [],
                      "verificado_em": agora_iso(), "erro": "provedor_indisponivel",
-                     "etapas_provedores": etapas_prov[:8]}
+                     "etapas_provedores": etapas_prov[:8],
+                     "descoberta": {"decisoes": decisoes[:12],
+                                    "motivo_final": "provider_unavailable"}}
         salvar_consulta(db, owner, conv, consulta, criterios, resultado)
         return resultado
 
@@ -2057,18 +2240,38 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                 log.info("shopping: item mlb ignorado (%s)", type(exc).__name__)
         paginas.append(a)
     paginas.sort(key=_prioridade_descarga)  # estável: específica primeiro
-    alvos = paginas[:teto_paginas]
-    _prog("consultando", f"{len(alvos)} páginas")
     relatorio: list = []
-    with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliashop") as pool:
-        futs = {pool.submit(_recuperar_ofertas, a["url"], a.get("titulo", ""),
-                            baixar_fn, a.get("_consulta", ""), relatorio): a
-                for a in alvos}
-        for fut, a in futs.items():
-            try:
-                brutos.extend(fut.result())
-            except Exception as exc:
-                log.info("shopping: extração falhou (%s)", type(exc).__name__)
+    consultadas: list = []
+    ondas = 0
+    while ondas < MAX_ONDAS_PAGINAS:
+        lote = paginas[ondas * int(teto_paginas):
+                       (ondas + 1) * int(teto_paginas)]
+        if not lote:
+            if ondas == 0:
+                _prog("consultando", "0 páginas")
+            break
+        ondas += 1
+        if ondas == 1:
+            _prog("consultando", f"{len(lote)} páginas")
+        else:
+            # V5.7.1: 1ª onda não rendeu NENHUMA oferta estruturada —
+            # tenta os candidatos seguintes antes de declarar ausência.
+            _prog("recuperando", f"{len(lote)} páginas alternativas")
+        with ThreadPoolExecutor(max_workers=3,
+                                thread_name_prefix="juliashop") as pool:
+            futs = {pool.submit(_recuperar_ofertas, a["url"],
+                                a.get("titulo", ""), baixar_fn,
+                                a.get("_consulta", ""), relatorio): a
+                    for a in lote}
+            for fut, a in futs.items():
+                try:
+                    brutos.extend(fut.result())
+                except Exception as exc:
+                    log.info("shopping: extração falhou (%s)",
+                             type(exc).__name__)
+        consultadas.extend(lote)
+        if brutos:
+            break
     _prog("extraindo", f"{len(brutos)} ofertas estruturadas")
     dedup = deduplicar(brutos)
     _prog("validando", f"{len(dedup)} modelos únicos")
@@ -2084,8 +2287,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # Referências não verificadas: páginas específicas achadas na busca que
     # NÃO viraram oferta (bloqueio/sem-dados) — link útil com motivo, jamais
     # preço/foto/estoque/veredito (V5.7 descoberta).
-    encontrados = _referencias_de_busca(alvos, brutos, relatorio, criterios,
-                                        texto or consulta)
+    encontrados = _referencias_de_busca(consultadas, brutos, relatorio,
+                                        criterios, texto or consulta)
     if baixar_fn is None and produtos:
         _prog("verificando", "imagens reais dos produtos")
         # V5.7: valida a imagem de TODOS os cards exibidos (até MAX_PRODUTOS).
@@ -2097,6 +2300,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     fontes = [{"id": f"S{i + 1}", "titulo": (a.get("titulo") or "")[:160],
                "url": a.get("url", "")[:500]}
               for i, a in enumerate(achados[:8])]
+    esgotado = bool(not brutos and ondas >= MAX_ONDAS_PAGINAS
+                    and len(paginas) > len(consultadas))
     resultado = {"produtos": produtos, "alternativas": alternativas,
                  "encontrados": encontrados,
                  "fontes": fontes, "criterios": criterios,
@@ -2104,7 +2309,19 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                  "verificacao": _resumo_verificacao(
                      produtos + alternativas, duros, alternativas),
                  "de_cache": False, "verificado_em": agora_iso(),
-                 "etapas_provedores": etapas_prov[:8]}
+                 "etapas_provedores": etapas_prov[:8],
+                 "descoberta": {
+                     "decisoes": decisoes[:12],
+                     "paginas_disponiveis": len(paginas),
+                     "paginas_consultadas": len(consultadas),
+                     "ondas": ondas,
+                     "ofertas_extraidas": len(brutos),
+                     "confirmadas": len(produtos),
+                     "orcamento_esgotado": esgotado,
+                     "motivo_final": ("confirmed_offers_found" if produtos
+                                      else
+                                      ("search_budget_exhausted" if esgotado
+                                       else "no_confirmed_offers"))}}
     salvar_consulta(db, owner, conv, consulta, criterios, resultado)
     return resultado
 

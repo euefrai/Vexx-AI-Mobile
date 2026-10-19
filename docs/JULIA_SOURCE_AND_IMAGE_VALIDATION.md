@@ -121,3 +121,15 @@ não simula verificação.
 - Prova real do shopping (2026-10-17): pedido Lenovo → produtos Lenovo com
   link `verificado`/`url_item`; Asus e Dell como alternativas explícitas com
   "pedido: lenovo".
+
+## 6. Gate da descoberta (V5.7.1) — o que ele NÃO valida
+
+O gate comercial da V5.7.1 (`shopping.classificar_candidato`) classifica o
+TIPO da página (produto/listagem/editorial/índice/lixo/desconhecido) para
+decidir se a busca continua em outro provedor — **não** é verificação.
+Página comercial aparente continua precisando do validador (JSON-LD/OG +
+`source_check`, §1–§4): "Link verificado" nunca vem do gate. Anúncio
+(`duckduckgo.com/y.js...`) é classificado IRRELEVANT e nunca é baixado nem
+vira referência; blog/índice vira candidato rebaixado (não encerra a
+descoberta) e só vira referência não verificada se tiver cara de página
+específica. Sem bypass: bloqueios continuam registrados como bloqueio.

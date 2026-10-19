@@ -242,7 +242,23 @@ cruzada (rtx × gtx) e chips Apple (M2/M3) fora dos tokens (evita colisão
 com m²); "airpods max 3000" tratado como orçamento (ambíguo por
 natureza).
 
+## 12. Descoberta comercial (V5.7.1) — gate de utilidade e recuperação
+
+Hotfix do curto-circuito que zerava "me mostre um notebook" quando
+ddg/ddg-lite devolviam lixo (anúncio/blog/índice): a cadeia só encerra com
+candidato comercial. Classificação por tipo de URL (`PRODUCT_CANDIDATE`,
+`COMMERCIAL_LISTING`, `EDITORIAL_REFERENCE`, `GENERIC_INDEX`, `IRRELEVANT`,
+`UNKNOWN`) — tipo de descoberta, **nunca** validação de oferta; preço/
+estoque/variante continuam exigindo o validador (§11). Nada acadêmico/geral
+mudou (`research.py`/`research_agents.py` intocados). Recomendação
+operacional registrada: nenhum provedor é declarado "sem resultados" se
+ainda havia orçamento de páginas/ondas para tentar (`MAX_ONDAS_PAGINAS = 2`,
+motivo `search_budget_exhausted` quando o teto acaba sem ofertas sem que
+todas as páginas tenham sido tentadas). Detalhes e números no relatório
+V5.7.1.
+
 Ver também: [V5_7_PROGRESS.md](V5_7_PROGRESS.md),
 [JULIA_SOURCE_AND_IMAGE_VALIDATION.md](JULIA_SOURCE_AND_IMAGE_VALIDATION.md),
-[JULIA_RESEARCH_RESULTS_JDUI.md](JULIA_RESEARCH_RESULTS_JDUI.md) e
-[../RELATORIO_JULIA_5.7.md](../RELATORIO_JULIA_5.7.md).
+[JULIA_RESEARCH_RESULTS_JDUI.md](JULIA_RESEARCH_RESULTS_JDUI.md),
+[../RELATORIO_JULIA_5.7.md](../RELATORIO_JULIA_5.7.md) e
+[../RELATORIO_JULIA_5.7.1_SHOPPING_HOTFIX.md](../RELATORIO_JULIA_5.7.1_SHOPPING_HOTFIX.md).

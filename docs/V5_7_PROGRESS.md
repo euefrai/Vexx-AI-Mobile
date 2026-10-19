@@ -893,3 +893,50 @@ faltava, e corrige o dado exibido.
 - Fixtures dos testes são sintéticas (mesmo perfil das páginas reais); a
   verificação "de rede" é a do artefato E2E.
 
+## V5.7.1 — Hotfix da descoberta comercial (concluído, 2026-10-18)
+
+Incidente pós-publicação da V5.7: "me mostre um notebook" → mlb 403 → ddg
+bloqueado → **ddg-lite devolveu 6 resultados de lixo** (anúncio `y.js`,
+guia de blog, índice/dicionário) → a cadeia antiga considerava isso
+suficiente e **nunca chamava o provedor web** → 0 ofertas (smoke oficial:
+`smoke-v57-pos-publicacao-2026-10-18.json`, sem nenhuma etapa `web:`).
+
+- **Causa-raiz (pré-existente, idêntica em `a77bbeb`)**: `if ddg:` em
+  `shopping.buscar_com_fallback` e "primeira base com resultado vence" em
+  `shopping.buscar_ddg_chain` — qualquer resultado, inclusive irrelevante,
+  encerrava a descoberta.
+- **Gate comercial** (`shopping.classificar_candidato`): tipo do candidato
+  por URL — `PRODUCT_CANDIDATE`, `COMMERCIAL_LISTING`,
+  `EDITORIAL_REFERENCE`, `GENERIC_INDEX`, `IRRELEVANT`, `UNKNOWN`. Só
+  comercial (`COBERTURA_COMERCIAL_MINIMA = 1`) encerra a cascata;
+  IRRELEVANT nunca é baixado nem vira referência; UNKNOWN é candidato fraco.
+  O gate não valida oferta (preço/estoque/variante seguem com o validador
+  V5.7).
+- **Cascata**: ddg+ddg-lite mesclados/deduplicados (`_mesclar_candidatos`),
+  comerciais primeiro (`_ordenar_candidatos`); `buscar_com_fallback` decide
+  o web com o pool classificado (caminho rápido preservado: com comercial,
+  web não roda).
+- **Onda de recuperação**: `MAX_ONDAS_PAGINAS = 2` — se a 1ª onda não
+  rendeu NENHUMA oferta estruturada, a 2ª onda consulta os candidatos
+  seguintes (fase SSE real "recuperando"); demais limites intactos (teto,
+  pool, ThreadPool 3, timeouts).
+- **Observabilidade**: `resultado["descoberta"]` (decisões por provedor +
+  resumo: páginas, ondas, ofertas, confirmadas, `orcamento_esgotado`,
+  `motivo_final`) com códigos `useful_candidates_found`,
+  `insufficient_commercial_candidates`, `fallback_success`,
+  `irrelevant_results`, `provider_blocked`, `provider_error`,
+  `provider_unavailable`, `search_budget_exhausted`, `no_confirmed_offers`;
+  etapas "N resultados (C comerciais)".
+- Testes: `tests/test_shopping_discovery_v571.py` (9; cenários do briefing;
+  5 falhavam no código antigo). Suíte: **851 passed / 4 skipped** (base
+  842/4, zero edições nos testes antigos); benchmarks `shopping_v4`
+  **59/59** e `pesquisa_v57` **34/34**; subáreas shopping 173+2skip,
+  JDUI/pesquisa/acadêmico/segurança 186.
+- E2E real sem neutralizar ddg/ddg-lite: **4/4 consultas aprovadas, 16
+  confirmadas**, 16 imagens verificadas ao vivo, 12 páginas de item, render
+  node ok — `qa-artifacts/v57/smoke-v571-descoberta-2026-10-18.json`;
+  8–12 s/consulta. Provedores hoje: mlb 403; ddg/ddg-lite vazio (bloqueio)
+  — o caminho de lixo do incidente fica coberto pelas fixtures congeladas
+  dos testes determinísticos.
+- Relatório completo: `RELATORIO_JULIA_5.7.1_SHOPPING_HOTFIX.md` (raiz).
+
