@@ -1,0 +1,48 @@
+{
+ "quando": "2026-10-19T22:18:49",
+ "ambiente": {
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "python": "3.14.4",
+  "app": "http://127.0.0.1:65062",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-chrome-1ydql9w0\\e2e.sqlite3",
+  "hermes": "http://127.0.0.1:8645/v1",
+  "modelo": "poolside/laguna-s-2.1:free",
+  "viewport_desktop": "1280x900",
+  "viewport_mobile": "390x844",
+  "chrome_versao": "Chrome/155.0.8059.85"
+ },
+ "etapas": [
+  {
+   "etapa": "relay",
+   "detalhe": "uvicorn server:app em http://127.0.0.1:65062",
+   "t": 0.14
+  },
+  {
+   "etapa": "agente",
+   "detalhe": "pc_agent.py conectando ao relay",
+   "t": 2.43
+  },
+  {
+   "etapa": "stack_pronto",
+   "detalhe": "relay + agente online",
+   "t": 5.4
+  },
+  {
+   "etapa": "chrome",
+   "detalhe": "headless CDP porta 65063",
+   "t": 5.4
+  },
+  {
+   "etapa": "pagina_carregada",
+   "detalhe": "http://127.0.0.1:65062/",
+   "t": 7.77
+  },
+  {
+   "etapa": "FALHA",
+   "detalhe": "AssertionError: login pela interface não ocorreu em 30s (último: {'oculto': False, 'erro': ''})",
+   "t": 38.06
+  }
+ ],
+ "ok": false,
+ "erro": "AssertionError: login pela interface não ocorreu em 30s (último: {'oculto': False, 'erro': ''})"
+}

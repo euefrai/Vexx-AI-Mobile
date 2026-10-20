@@ -1,0 +1,136 @@
+{
+ "quando": "2026-10-19T22:20:40",
+ "ambiente": {
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "python": "3.14.4",
+  "app": "http://127.0.0.1:62385",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-chrome-nksw3yt5\\e2e.sqlite3",
+  "hermes": "http://127.0.0.1:8645/v1",
+  "modelo": "poolside/laguna-s-2.1:free",
+  "viewport_desktop": "1280x900",
+  "viewport_mobile": "390x844",
+  "chrome_versao": "Chrome/155.0.8059.85"
+ },
+ "etapas": [
+  {
+   "etapa": "relay",
+   "detalhe": "uvicorn server:app em http://127.0.0.1:62385",
+   "t": 0.12
+  },
+  {
+   "etapa": "agente",
+   "detalhe": "pc_agent.py conectando ao relay",
+   "t": 2.42
+  },
+  {
+   "etapa": "stack_pronto",
+   "detalhe": "relay + agente online",
+   "t": 4.45
+  },
+  {
+   "etapa": "chrome",
+   "detalhe": "headless CDP porta 62386",
+   "t": 4.45
+  },
+  {
+   "etapa": "pagina_carregada",
+   "detalhe": "http://127.0.0.1:62385/",
+   "t": 6.0
+  },
+  {
+   "etapa": "login_ok",
+   "detalhe": "conversa c931bc60-cfad-41f4-a8d3-54175b0dbbf7",
+   "t": 6.55
+  },
+  {
+   "etapa": "chat_real",
+   "detalhe": "5.03s, 250 chars",
+   "t": 11.58,
+   "segundos": 5.03
+  },
+  {
+   "etapa": "screenshot",
+   "detalhe": "desktop-chat.png",
+   "t": 11.64
+  },
+  {
+   "etapa": "card_injetado",
+   "detalhe": "real:kabum | R$ 110,12",
+   "t": 13.4
+  },
+  {
+   "etapa": "card_render_desktop",
+   "detalhe": "preço + card + fonte declarada visíveis",
+   "t": 14.36
+  },
+  {
+   "etapa": "screenshot",
+   "detalhe": "desktop-card.png",
+   "t": 14.44
+  },
+  {
+   "etapa": "screenshot",
+   "detalhe": "mobile-card.png",
+   "t": 15.59
+  },
+  {
+   "etapa": "mobile_emulado",
+   "detalhe": "390x844, overflow {'sw': 390, 'cw': 390, 'iw': 390, 'dpr': 2}",
+   "t": 15.59
+  },
+  {
+   "etapa": "console",
+   "detalhe": "1 erros de console",
+   "t": 15.59
+  }
+ ],
+ "ok": true,
+ "chat_real": {
+  "pergunta": "Oi, Júlia! Em uma frase curta, o que é fotossíntese?",
+  "latencia_s": 5.03,
+  "resposta_chars": 250,
+  "resposta_recorte": "19 de outubroOi, Júlia! Em uma frase curta, o que é fotossíntese?22:20✓ Sincronizadov.VexxFotossíntese é o processo pelos quais plantas e alguns micro-organismos convertem luz solar em energia química, produzindo glicose e liberando oxigênio.22:20···"
+ },
+ "desktop": {
+  "screenshot_chat": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\desktop-chat.png",
+  "screenshot_card": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\desktop-card.png",
+  "overflow": {
+   "sw": 1264,
+   "cw": 1264,
+   "iw": 1264
+  },
+  "card": {
+   "origem": "real:kabum",
+   "preco": "R$ 110,12",
+   "imagem_veredito": "verificado",
+   "link_veredito": "parcial"
+  }
+ },
+ "mobile": {
+  "emulado": "390x844 (mobile=true, touch=true)",
+  "screenshot": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\mobile-card.png",
+  "overflow": {
+   "sw": 390,
+   "cw": 390,
+   "iw": 390,
+   "dpr": 2
+  },
+  "observacao": "emulação do Chrome — NÃO é teste em Android/iOS físico"
+ },
+ "console_erros": [
+  {
+   "tipo": "log",
+   "texto": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  }
+ ],
+ "rede_falhas": [
+  {
+   "tipo": "net_fail",
+   "texto": "net::ERR_ABORTED"
+  },
+  {
+   "tipo": "net_fail",
+   "texto": "net::ERR_ABORTED"
+  }
+ ]
+}

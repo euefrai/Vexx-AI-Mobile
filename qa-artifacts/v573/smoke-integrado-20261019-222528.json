@@ -1,0 +1,176 @@
+{
+ "quando": "2026-10-19T22:24:18",
+ "cenarios": {
+  "produtos": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "consulta": "Me mostre um fone bluetooth até R$ 300.",
+    "produtos": 3,
+    "alternativas": 1,
+    "referencias": 1,
+    "total_bruto": 8,
+    "motivo": "confirmed_offers_found",
+    "orcamento": {
+     "max": 300.0
+    },
+    "precos": [
+     28.6,
+     68.32,
+     134.29
+    ],
+    "todos_dentro_do_orcamento": true,
+    "cards_jdui_validos": true,
+    "resumo": "Encontrei **3** fone com dados estruturados reais:\n- **Fone De Ouvido C/microfone Taue101bk/00 Preto Philips** — R$ 28,60 · kabum.com.br · _link não verificado_\n- **Fone de Ouvido Intra-auricular JBL C50HI, com Fio, com Microfone, Preto - JBLC50HIBLKE** — R$ 68,32 · kabum.com.br · _link não verificado_\n- **Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto** — R$ 134,29 · kabum.com.br · _link não verificado_\n- _Próxima do pedido_: **Fone De Ouvido Headphone Soundcore Q30 Bluetooth Pret"
+   },
+   "erro": "",
+   "segundos": 10.55,
+   "rotulo": "EXTERNO REAL"
+  },
+  "pesquisa_geral": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "consulta": "Explique a fotossíntese e apresente fontes.",
+    "fontes": 3,
+    "fontes_com_texto_lido": 3,
+    "dominios": [
+     "biologianet.com",
+     "m.brasilescola.uol.com.br",
+     "todamateria.com.br"
+    ],
+    "modelo": "poolside/laguna-s-2.1:free",
+    "resposta_chars": 355,
+    "menciona_fotossintese": true,
+    "sem_tool_call": true,
+    "urls_na_resposta": [],
+    "resposta_recorte": "# Fotossíntese\n\nA **fotossíntese** é um processo realizado por organismos autotróficos (como plantas, algas e algumas bactérias) para converter energia solar em energia química, utilizando dióxido de carbono (CO₂) e água (H₂O) para produzir glicose (C₆H₁₂O₆) e oxigênio (O₂). A equação geral do processo é:\n\n```\n6CO₂ + 6H₂O + luz solar → C₆H₁₂O₆ + 6O₂\n```"
+   },
+   "erro": "",
+   "segundos": 25.36,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "url_direta": {
+   "dados": {
+    "status": "EXTERNO REAL",
+    "url": "https://pt.wikipedia.org/wiki/Fotoss%C3%ADntese",
+    "erro_api": "",
+    "status_fonte": "aberta",
+    "titulo": "Fotossíntese – Wikipédia, a enciclopédia livre",
+    "texto_lido_chars": 1200,
+    "trecho_chars": 400,
+    "trecho_contido_no_texto": true,
+    "residuos_menu": [],
+    "inicio_texto": "z e a guardam em . Essa energia permite que produzam matéria para crescer e chega aos demais seres vivos pelas . Fotossíntese plantas algas bactérias substâncias orgânicas cadeias alimentares 1 [ ] Na forma realizada por"
+   },
+   "erro": "",
+   "segundos": 1.05,
+   "rotulo": "EXTERNO REAL"
+  },
+  "comparacao_documentacao": {
+   "dados": {
+    "status": "EXTERNO REAL + LLM REAL",
+    "url_documentacao": "https://docs.python.org/3/tutorial/datastructures.html",
+    "turno1": {
+     "consulta": "Analise esta documentação oficial: https://docs.python.org/3/tutorial/datastructures.html",
+     "fontes": 1,
+     "dominios": [
+      "docs.python.org"
+     ],
+     "resposta_chars": 2560,
+     "recorte": "# Análise da Documentação Oficial: Estruturas de Dados em Python\n\n## Visão Geral\nA documentação do Python sobre **Estruturas de Dados** (https://docs.python.org/3/tutorial/datastructures.html) apresenta de forma clara e didática as principais estruturas nativas da linguagem, com foco especial na **l"
+    },
+    "turno2": {
+     "consulta": "Agora compare listas e tuplas.",
+     "resposta_chars": 2497,
+     "menciona_lista_e_tupla": true,
+     "sem_tool_call": true,
+     "recorte": "# Comparação: Listas vs Tuplas em Python\n\n| Característica | **Listas (`list`)** | **Tuplas (`tuple`)** |\n|----------------|---------------------|----------------------|\n| **Sintaxe** | `[1, 2, 3]` | `(1, 2, 3)` |\n| **Mutabilidade** | **Mutáveis** – elementos podem ser alterados apois criação | **Imutáveis** – elementos não podem ser modificados |\n| **Desempenho** | Mais lento para leitura (por ser mutável) | Mais rápido (otimizado para imutabilidade) |\n| **Uso recomendado** | Dados que mudam frequentemente (ex: lista de tarefas) | Dados fixos (ex: coordenadas, configurações) |\n| **Métodos dis"
+    },
+    "documentacao_oficial": true,
+    "modelo": "poolside/laguna-s-2.1:free"
+   },
+   "erro": "",
+   "segundos": 32.96,
+   "rotulo": "EXTERNO REAL + LLM REAL"
+  },
+  "continuacao": {
+   "dados": {
+    "status": "LOCAL REAL (dados guardados)",
+    "tentativa_externa": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone De Ouvido C/microfone Taue101bk/00 Preto Philips** — R$ 28,60 (kabum.com.br)\n- **Fone de Ouvido Intra-auricular JBL C50HI, com Fio, com Microfone, Preto - JBLC50HIBLKE** — R$ 68,32 (kabum.com.br)\n- **Fone De Ouvido Philips Tat1139 Bluetooth True Wireless Preto**",
+     "observacao": ""
+    },
+    "com_dados_guardados": {
+     "disponivel": true,
+     "texto": "Do mais barato ao mais caro:\n- **Fone B** — R$ 150,00 (Loja B)\n- **Fone C** — R$ 200,00 (Loja C)\n- **Fone A** — R$ 300,00 (Loja A)",
+     "ordem_barato_primeiro": [
+      "- **Fone B** — R$ 150,00 (Loja B)",
+      "- **Fone C** — R$ 200,00 (Loja C)",
+      "- **Fone A** — R$ 300,00 (Loja A)"
+     ],
+     "fence_valido": true
+    },
+    "ordem_esperada": [
+     "R$ 150,00",
+     "R$ 200,00",
+     "R$ 300,00"
+    ]
+   },
+   "erro": "",
+   "segundos": 0.0,
+   "rotulo": "LOCAL REAL (dados guardados)"
+  },
+  "falha_externa": {
+   "dados": {
+    "status": "LOCAL REAL + DNS REAL",
+    "url_inexistente": {
+     "erro": "rede",
+     "status_fonte": null,
+     "texto_lido": 0
+    },
+    "busca_sem_provedor": {
+     "produtos": 0,
+     "erro": "provedor_indisponivel",
+     "motivo": "provider_unavailable",
+     "nota_honesta": "Não consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_preco_inventado": true,
+     "texto_final": "Não há ofertas verificáveis.\n\nNão consegui consultar ofertas agora (provedor indisponível). Tente de novo em instantes. 🔍",
+     "sem_fence": true
+    }
+   },
+   "erro": "",
+   "segundos": 0.04,
+   "rotulo": "LOCAL REAL + DNS REAL"
+  }
+ },
+ "ok": true,
+ "ambiente": {
+  "modelo": "poolside/laguna-s-2.1:free",
+  "proxy": "http://127.0.0.1:8645/v1",
+  "pesquisa_web": true,
+  "max_tokens": 1500,
+  "sqlite": "temporário"
+ },
+ "frontend_delivery": {
+  "evidencia": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v572\\chrome\\chrome-e2e-20261019-150401.json",
+  "ok": true,
+  "chrome": "Chrome/155.0.8059.82",
+  "chat_real": 197,
+  "desktop": {
+   "origem": "real:kabum",
+   "preco": "R$ 110,12",
+   "imagem_veredito": "verificado",
+   "link_veredito": "parcial"
+  },
+  "mobile": "390x844 (mobile=true, touch=true)"
+ },
+ "checagens": {
+  "produtos_filtro_ok": true,
+  "pesquisa_geral_fundamentada": true,
+  "url_direta_limpa": true,
+  "comparacao_documentacao": true,
+  "continuacao_ordenada": true,
+  "falha_honesta": true,
+  "frontend_chrome": true
+ }
+}
