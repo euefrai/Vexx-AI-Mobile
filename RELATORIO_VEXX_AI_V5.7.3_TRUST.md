@@ -3,7 +3,7 @@
 - **Data:** 2026-10-19
 - **Base inicial:** `ed0d44fd8b40e9fa32c2cdf727bba997760ce2fe`
 - **Commit de código/testes:** `63e12c00370c6b13b328e6836d5b3af9b7b45ff6`
-- **Entrega final:** commit documental imediatamente seguinte; hash em
+- **Entrega final:** commits documentais seguintes; hash em
   `qa-artifacts/v573/final-head.txt`
 - **Branch:** `main` local
 - **Push/deploy:** **não realizados**
@@ -24,7 +24,9 @@ Endurecer o Vexx AI V5.7.3 para que o assistente não:
 7. repita, reordene ou perca eventos de pesquisa no SSE;
 8. mostre no stream uma identidade/comparação errada e depois a corrija no
    `ai_done`;
-9. transforme 429 / 404 / timeout / vazio / interrupção em sucesso falso.
+9. transforme 429 / 404 / timeout / vazio / interrupção em sucesso falso;
+10. conclua um evento de agenda por texto ambíguo (“concluído”) em vez de
+    comando explícito.
 
 A identidade canônica foi **preservada**, não apenas bloqueada: `Lucas`
 (`Luccas Trawman` quando o nome completo for pedido). “Vexxia” é corrigido
@@ -34,7 +36,7 @@ para o nome canônico; a Vexx AI permanece descrita apenas como o produto/app.
 
 | Incidente | Correção principal | Evidência |
 |---|---|---|
-| Identidade corporativa inventada | fatos canônicos + limitador por frase + resposta direta determinística | 7 testes, full suite |
+| Identidade corporativa inventada | fatos canônicos + limitador por frase + resposta direta determinística | 6 novos + suíte existente |
 | “Vexxia” exibido no stream | correção canônica + `_GuardaStreamResposta` | teste de stream |
 | `<tool_call>` vazando | sanitizador incremental no adaptador e barreira final | 8 testes |
 | Chamada dividida/incompleta | buffer de marcador + JSON balanceado + erro de protocolo | 4 testes |
@@ -46,6 +48,7 @@ para o nome canônico; a Vexx AI permanece descrita apenas como o produto/app.
 | SSE duplicado/fora de ordem/replay | `ResearchSSECursor` | 2 testes + integração |
 | 429/404 sem fallback honesto | mapeamento `rate_limit` / `modelo-nao-encontrado` | 2 testes |
 | 404/latência/timeout | erros tipados; sem resposta artificial | suíte existente + novos testes |
+| Evento concluído por engano | comando explícito; texto ambíguo não altera | teste de evento |
 
 **Regressão:** `929 passed, 4 skipped` na suíte completa; **38** regressões
 novas em `tests/test_trust_v573.py`; benchmarks **34/34**, **59/59** e
@@ -195,15 +198,15 @@ caminho específico para detectá-las/neutralizá-las.
 ### I6 — “Concluído” antes do estado terminal
 
 **Sintoma:** o SSE podia entregar `research_completed` enquanto o status
-persistido ainda estava em andamento; quem recarregasse via polling via
+persistido ainda estava em andamento; quem recarregasse via polling veria um
 estado inconsistente.
 
 **Causa:** `salvar_job()` era chamado depois de `emitir()`.
 
 **Correção:** `research_agents.executar()` persiste o status terminal
 (`concluida`, `interrompida` ou `falhou`) **antes** de emitir o evento
-terminal. O evento `research_completed` só é emitido com comando explícito;
-não é inferido de texto do modelo.
+terminal. O `research_completed` é emitido pelo orquestrador, não inferido de
+texto do modelo.
 
 **Teste:** `test_research_completed_so_depois_do_status_persistido`.
 
@@ -251,6 +254,19 @@ Stream interrompido preserva apenas o que já foi recebido e sinaliza parcial.
 `test_bridge_mapeia_404_como_indisponivel`, regressões existentes de
 `vazia`/timeout/indisponível.
 
+### I10 — Evento concluído por texto ambíguo
+
+**Sintoma:** “teste visual concluido” podia ser interpretado como comando de
+conclusão, encerrando um evento de agenda sem pedido explícito.
+
+**Causa:** o parser de comandos de memória aceitava “concluído” solto como
+intenção suficiente.
+
+**Correção:** a conclusão exige comando explícito (“concluir evento …”); texto
+ambíguo permanece apenas texto e o evento continua ativo.
+
+**Teste:** `test_evento_concluido_so_com_comando_explicito`.
+
 ## 5. Arquivos alterados (código)
 
 | Arquivo | Papel |
@@ -287,6 +303,17 @@ Nenhum teste foi removido, nenhum skip artificial foi criado e nenhuma
 fixture de resposta foi enfraquecida. A única alteração de fixture existente
 foi dar um título coerente (“Café”) à fonte usada no teste de grounding; o
 gate novo corretamente rejeitava o título genérico “T”.
+
+### Cobertura existente preservada
+
+A suíte completa também cobre os cenários que não precisaram de teste novo:
+memória conflitante (`test_correcao_vence_e_preserva_historico`,
+`test_contraditorios_multiplos_usuarios_e_reinicio`), injeção de contexto
+(`test_contexto_local_validado_e_injetado_so_quando_enviado`,
+`test_orcamento_memoria_no_prompt`), dados ausentes (limitação de identidade),
+datas divergentes e fontes conflitantes (Evidence Graph/benchmarks) e
+instruções maliciosas em página externa (`test_research`). Nenhum desses
+testes foi removido ou afrouxado.
 
 ## 7. Evidência E2E
 
@@ -351,6 +378,9 @@ limitação de estabilidade do harness, não da autenticação.
    navegador; a reexecução passou, mas o harness não é imune a esse crash.
 6. O smoke integrado usa o modelo free local; não foi testada uma matriz de
    modelos pagos nem todos os provedores alternativos.
+7. A semântica de recarga durante um job terminal é coberta pelo status
+   persistido + cursor/replay, mas **não** foi exercitada uma recarga real de
+   navegador no E2E.
 
 ## 10. Reprodução
 

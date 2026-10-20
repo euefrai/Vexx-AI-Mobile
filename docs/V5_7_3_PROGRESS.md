@@ -3,7 +3,7 @@
 - **Data:** 2026-10-19
 - **Base inicial:** `ed0d44fd8b40e9fa32c2cdf727bba997760ce2fe`
 - **Commit de código/testes:** `63e12c00370c6b13b328e6836d5b3af9b7b45ff6`
-- **HEAD final da entrega:** commit documental seguinte; hash em
+- **HEAD final da entrega:** commits documentais seguintes; hash em
   `qa-artifacts/v573/final-head.txt`
 - **Branch:** `main` local; sem push, sem deploy, sem reiniciar produção.
 - **Formato:** AUDITAR → REPRODUZIR → CORRIGIR → TESTAR → DOCUMENTAR.
@@ -79,6 +79,12 @@ antes de uma correção final.
 
 Sete testes de identidade/limites, incluindo dados comerciais inventados,
 preservação de terceiros e pesquisa legítima.
+
+## Checkpoint C2 — Comando explícito de evento
+
+O parser de eventos passou a exigir comando explícito (“concluir evento …”).
+“teste visual concluido” não encerra mais o evento; ele permanece ativo.
+Teste: `test_evento_concluido_so_com_comando_explicito`.
 
 ## Checkpoint D — Relevância de fonte e digest
 

@@ -3,7 +3,7 @@
 - **Data:** 2026-10-19
 - **Base inicial:** `ed0d44fd8b40e9fa32c2cdf727bba997760ce2fe`
 - **Commit de código/testes:** `63e12c00370c6b13b328e6836d5b3af9b7b45ff6`
-- **HEAD final da entrega:** commit documental seguinte; hash em
+- **HEAD final da entrega:** commits documentais seguintes; hash em
   `qa-artifacts/v573/final-head.txt`
 - **Branch:** `main` local
 - **Push:** não realizado
@@ -122,6 +122,7 @@ shopping, Evidence Graph, JDUI Python/Node e smoke de frontend.
 | Provedores externos variáveis | 403/bot-wall/429 possível | mensagens honestas; nunca `PASS` artificial |
 | Mobile emulado | não cobre Android/iOS físico | declarado; teste físico futuro |
 | Crash do network service do Chrome | harness pode falhar antes do login | reexecução; artefato de falha preservado |
+| Recarga de navegador em job terminal | reload real não exercitado no E2E | semântica coberta por status persistido + cursor/replay |
 | Modelo free único | não cobre todos os modelos/providers | suíte e smoke usam o caminho configurado |
 
 ## 7. Sequência de publicação (somente quando autorizada)
@@ -161,6 +162,7 @@ shopping, Evidence Graph, JDUI Python/Node e smoke de frontend.
 | Fontes relevantes | ✅ local |
 | Ofertas verificadas preservadas | ✅ local/externo |
 | Comparações sem evidência neutralizadas | ✅ local |
+| Evento só concluído por comando explícito | ✅ local |
 | SSE ordenado/deduplicado/terminal | ✅ local/integração |
 | Segurança | ✅ sem regressão |
 | Contratos/migrações/deps/estáticos | ✅ sem mudança incompatível |

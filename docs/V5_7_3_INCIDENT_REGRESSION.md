@@ -32,6 +32,7 @@
 | I16 | Vazamento no stream | identidade/comparação antes do `ai_done` | correção só no texto final | `_GuardaStreamResposta` | 4 testes | **FIXED (local)** |
 | I17 | 429/404 como sucesso | HTTPError 429/404 | mensagem genérica/fallback | `rate_limit` / `modelo-nao-encontrado` | 2 testes | **FIXED (local)** |
 | I18 | Chrome login aparente | primeira execução E2E | crash do network service do Chrome | reexecução limpa | `CHROME_E2E` | **ENV LIMITATION** |
+| I19 | Evento concluído por engano | “teste visual concluido” | conclusão aceitava texto ambíguo | comando explícito | 1 teste | **FIXED (local)** |
 
 ## 2. Evidência por incidente
 
@@ -58,7 +59,6 @@ preço; “Vexxia” podia ser adotado como nome.
 - `test_cmd_identidade_responde_produto_sem_inventar_empresa`
 - `test_cmd_identidade_nao_bloqueia_pesquisa_sobre_produto`
 - `test_cmd_identidade_dados_comerciais_sem_fonte_viram_limitacao`
-- `test_evento_concluido_so_com_comando_explicito`
 
 **Rótulo:** `DETERMINISTIC_FIXTURE`; o caminho real de geração aparece nos
 testes de stream/Chrome.
@@ -197,6 +197,17 @@ verificável, o fallback é uma limitação explícita.
 - `test_bridge_mapeia_404_como_indisponivel`
 - regressões existentes de vazio/timeout/indisponível.
 
+### I19 — Evento concluído por texto ambíguo
+
+**Antes:** “teste visual concluido” podia ser aceito como conclusão, alterando
+a agenda sem comando explícito.
+
+**Depois:** `interpretar_comando_memoria()` exige “concluir evento …”; texto
+ambíguo não altera o evento. O teste confirma que o evento continua ativo e só
+é removido com o comando explícito.
+
+**Teste:** `test_evento_concluido_so_com_comando_explicito`.
+
 ## 3. Incidente de harness Chrome (não é incidente de produto)
 
 A primeira execução de `tools/chrome_e2e_v572.py` falhou no login:
@@ -229,6 +240,16 @@ crash; a limitação está declarada no release readiness.
 | Chrome sucesso | `qa-artifacts/v573/chrome/chrome-e2e-20261019-222056.json` | `CHROME_E2E` |
 | Chrome falha inicial | `qa-artifacts/v573/chrome/chrome-e2e-20261019-221928.json` | `CHROME_E2E` (harness) |
 | Produção | `/api/health`, `/api/diag` | `PRODUCTION_OBSERVATION` |
+
+### Cobertura existente preservada
+
+A suíte completa também cobre memória conflitante, injeção de contexto, dados
+ausentes, datas divergentes, fontes conflitantes e instruções maliciosas em
+página externa. Exemplos: `test_correcao_vence_e_preserva_historico`,
+`test_contraditorios_multiplos_usuarios_e_reinicio`,
+`test_contexto_local_validado_e_injetado_so_quando_enviado`,
+`test_orcamento_memoria_no_prompt`, `test_b4_conflitantes_65w_95w` e o teste de
+grounding de `tests/test_research.py`. Nenhum foi removido ou afrouxado.
 
 ## 5. O que não foi validado
 
