@@ -836,7 +836,11 @@ def test_sse_entrega_ordenada_com_replay_e_fechamento():
                         atendidos += 1
                         if atendidos == 1:
                             # TestClient entrega SSE só ao concluir: fecha com completed.
-                            for seq, tipo in ((3, "search_completed"), (4, "search_completed"),
+                            # Push fora de ordem + duplicado: o cursor deve
+                            # deduplicar e entregar 3,4,5 nessa ordem.
+                            for seq, tipo in ((4, "search_completed"),
+                                               (3, "search_completed"),
+                                               (3, "search_completed"),
                                                (5, "research_completed")):
                                 ws.send_json({"request_id": f"p{seq}",
                                               "type": "research_event_push",

@@ -181,6 +181,18 @@ _RX_COMP = re.compile(r"\b(mais|menos|maior|menor|melhor|pior|superior|inferior|
                       r"([\w\s]{2,40}?)(?:[.,;]|$)", re.IGNORECASE)
 _RX_DATA = re.compile(r"\b(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}|janeiro|fevereiro|março|abril|maio|"
                       r"junho|julho|agosto|setembro|outubro|novembro|dezembro)\b", re.IGNORECASE)
+# Verbo finito suficiente para saber que o primeiro trecho de um "e" já é
+# uma oração (evita separar sujeito composto: "X e Y são mais rápidos").
+_RX_VERBO_ORACAO = re.compile(
+    r"\b(?:é|e|são|sao|foi|foram|será|sera|está|esta|estão|estao|"
+    r"consome|consomem|gasta|gastam|tem|têm|tem|possui|possuem|usa|usam|"
+    r"oferece|oferecem|entrega|entregam|apresenta|apresentam|"
+    r"custa|custam|chega|chegam|atinge|atingem|fica|ficam|"
+    r"ganha|ganham|perde|perdem|roda|rodam|funciona|funcionam)\b", re.IGNORECASE)
+
+
+def _tem_verbo_oracao(texto: str) -> bool:
+    return bool(_RX_VERBO_ORACAO.search(texto or ""))
 
 
 def _num_norm(bruto: str):
@@ -205,25 +217,35 @@ def extrair_quantidades(texto: str) -> list:
     return out[:8]
 
 
-def extrair_afirmacoes_v2(texto: str, teto: int = 12) -> list:
+def extrair_afirmacoes_v2(texto: str, teto: int = 12, minimo: int = 40) -> list:
     """Divide em afirmações + condições (comparado, métrica, valor, data).
 
     Sem LLM: condições ausentes → marcadas como desconhecidas e o estado
-    factual fica NÃO VERIFICADO (nunca presumido).
+    factual fica NÃO VERIFICADO (nunca presumido). `minimo` baixa o corte de
+    tamanho para frases comparativas curtas ("tuplas são mais rápidas que listas").
     """
     out = []
     for s in re.split(r"(?<=[.!?])\s+", texto or ""):
         s = s.strip()
-        if len(s) < 40 or len(s) > 400:
+        if len(s) < minimo or len(s) > 400:
             continue
-        if not (re.search(r"\d", s) or re.search(r"\b[A-ZÀ-Ú][a-zà-ú]{3,}\b", s)):
+        if not (re.search(r"\d", s) or re.search(r"\b[A-ZÀ-Ú][a-zà-ú]{3,}\b", s)
+                or _RX_COMP.search(s)):
             continue
         grupos, atual = [], ""
-        for parte in re.split(r"\s+e\s+|\s+além disso,?\s+|;\s*", s):
+        # Em frase comparativa, o "e" só separa orações se o primeiro trecho
+        # já tiver verbo. Assim "X consome menos e é mais rápido que Y" vira
+        # duas afirmações, mas "X e Y são mais rápidos que Z" preserva o
+        # sujeito composto e a comparação inteira.
+        pedacos = re.split(r"\s+e\s+|\s+além disso,?\s+|;\s*", s)
+        if _RX_COMP.search(s) and len(pedacos) > 1 and \
+                not _tem_verbo_oracao(pedacos[0]):
+            pedacos = [s]
+        for parte in pedacos:
             parte = parte.strip()
             if not parte:
                 continue
-            if atual and len(parte) < 40:
+            if atual and len(parte) < minimo:
                 atual = atual + " e " + parte
             else:
                 if atual:
@@ -232,7 +254,7 @@ def extrair_afirmacoes_v2(texto: str, teto: int = 12) -> list:
         if atual:
             grupos.append(atual)
         for parte in grupos:
-            if len(parte) < 40:
+            if len(parte) < minimo:
                 continue
             cond = {"comparado_a": "", "metrica": "", "quantidades": extrair_quantidades(parte),
                     "datas": _RX_DATA.findall(parte)[:3]}
@@ -245,6 +267,22 @@ def extrair_afirmacoes_v2(texto: str, teto: int = 12) -> list:
             if len(out) >= teto:
                 return out
     return out
+
+
+def detectar_comparacao(texto: str) -> dict | None:
+    """Decompõe "X é mais rápido que Y" em sujeito/métrica/comparado.
+
+    Usada para rotular e neutralizar comparações sem evidência; não decide
+    sozinha se a frase é verdadeira (isso é `verificar_claim`).
+    """
+    m = _RX_COMP.search(texto or "")
+    if not m:
+        return None
+    sujeito = (texto or "")[:m.start()].strip(" ,;:-")
+    sujeito = re.sub(r"\s+(?:é|e|são|sao|foi|foram|seria|está|esta)\s*$", "",
+                     sujeito, flags=re.IGNORECASE).strip(" ,;:-")
+    return {"termo": m.group(1).lower(), "metrica": (m.group(1) + " " + m.group(2)).strip()[:80],
+            "comparado_a": (m.group(3) or "").strip()[:80], "sujeito": sujeito[:120]}
 
 
 # ── Independência ───────────────────────────────────────────────────
@@ -370,10 +408,14 @@ def verificar_claim(claim: dict, evidencias: list) -> dict:
     Número igual sozinho NÃO sustenta (ex.: 'TDP 65 W' ≠ 'consumo máximo').
     """
     import units as _u
+    # Fonte apenas encontrada (sem leitura) não sustenta afirmação: o trecho
+    # do índice pode estar fora de contexto. `lida` ausente = contrato antigo,
+    # preservado; `lida=False` é explícito e só serve para localizar a fonte.
+    evidencias = [e for e in (evidencias or []) if e.get("lida") is not False]
     cond = claim.get("condicoes", {}) or {}
     cqs = cond.get("quantidades", [])
     toks_claim = _tokens_conteudo(claim["texto"])
-    for e in evidencias or []:
+    for e in evidencias:
         trecho = e.get("trecho", "") or ""
         eqs = extrair_quantidades(trecho)
         for q in cqs:
@@ -435,6 +477,45 @@ def _faltas(claim: dict) -> list:
     if cond.get("quantidades") and not cond.get("datas"):
         faltas.append("data ausente p/ quantidade")
     return faltas
+
+
+# ── Classificação explícita das afirmações (V5.7.3) ──────────────────
+CLASSIFICACOES_AFIRMACAO = ("FACT", "DERIVED_FROM_DATA", "ESTIMATE",
+                            "HYPOTHESIS", "UNVERIFIED")
+_RX_ESTIMATIVA = re.compile(
+    r"(?i)\b(?:cerca\s+de|aproximad[ao]s?|em\s+torno\s+de|estimad[ao]|"
+    r"estimo|ordem\s+de\s+grandeza|talvez\s+uns?)\b")
+_RX_HIPOTESE = re.compile(
+    r"(?i)\b(?:pode\s+ser|talvez|possivelmente|provavelmente|hip[óo]tese|"
+    r"suponho|acredito\s+que|imagino\s+que|é\s+poss[íi]vel\s+que)\b")
+
+
+def classificar_afirmacoes(texto: str, evidencias: list,
+                           teto: int = 12, minimo: int = 40) -> list:
+    """Classifica cada afirmação: FACT, DERIVED_FROM_DATA, ESTIMATE,
+    HYPOTHESIS ou UNVERIFIED — sempre a partir do veredito real, nunca de
+    presunção. Comparações sem base de comparação ficam UNVERIFIED."""
+    out = []
+    for claim in extrair_afirmacoes_v2(texto or "", teto=teto, minimo=minimo):
+        v = verificar_claim(claim, evidencias or [])
+        estado = v.get("estado", "UNVERIFIED")
+        trecho = claim.get("texto", "")
+        if estado == "SUPPORTED":
+            classe = "FACT"
+        elif estado == "PARTIALLY_SUPPORTED":
+            classe = "DERIVED_FROM_DATA"
+        elif _RX_ESTIMATIVA.search(trecho):
+            classe = "ESTIMATE"
+        elif _RX_HIPOTESE.search(trecho):
+            classe = "HYPOTHESIS"
+        else:
+            classe = "UNVERIFIED"
+        out.append({"texto": trecho, "classificacao": classe, "veredito": estado,
+                    "comparacao": detectar_comparacao(trecho),
+                    "cobertura_lexica": v.get("cobertura_lexica", 0.0),
+                    "condicoes_ausentes": v.get("condicoes_ausentes", []),
+                    "evidencia": v.get("evidencia", "")})
+    return out
 
 
 # ── Auditor 2.0 ─────────────────────────────────────────────────────

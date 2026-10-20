@@ -1044,11 +1044,13 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         if job["status"] == "interrompida" and not job["pendencias"]:
             job["pendencias"].append("sem evidências suficientes")
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
+        # V5.7.3: o estado terminal é persistido ANTES do evento: quem consultar
+        # no instante do research_completed já enxerga o status final (sem
+        # janela em que o evento diz "acabou" e o job ainda está rodando).
+        salvar_job(db, job)
         emitir(db, job["id"], owner, "orchestrator", "research_completed", "ok",
                f"Pesquisa {job['status']}: {len(todas_evid or _evidencias_job(db, job))} evidências.",
                {})
-        # Pollers may stop on the terminal state: publish it only after its event.
-        salvar_job(db, job)
         return _resumo(db, job)
     except Exception as exc:
         job["status"] = "falhou"

@@ -20,6 +20,7 @@ import urllib.request
 
 import env_local
 import hermes_bridge
+import tool_protocol
 from hermes_bridge import BridgeErro
 
 log = logging.getLogger("JULIA-providers")
@@ -291,8 +292,14 @@ def _anthropic_complete(d: dict, key: str, model_id: str, messages: list,
     except (OSError, TimeoutError, ValueError) as exc:
         raise BridgeErro(f"Falha ao falar com Anthropic ({type(exc).__name__}).",
                          "indisponivel") from None
-    texto = _extrair_anthropic(dados)
+    texto, erros = tool_protocol.sanitizar_texto(_extrair_anthropic(dados))
+    for erro in erros:
+        log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
+                    erro.get("ferramenta") or "?", erro.get("detalhe") or "")
     if not texto.strip():
+        if erros:
+            raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
+                             "nada foi executado nem exibido.", "protocolo_ferramenta")
         raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
     return {"texto": texto[:hermes_bridge.MAX_TEXTO],
             "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
@@ -364,11 +371,35 @@ def _anthropic_stream(d: dict, key: str, model_id: str, messages: list, on_delta
                  "anthropic-version": ANTHROPIC_VERSION,
                  "Accept": "text/event-stream"})
     inicio, partes, seq = time.monotonic(), [], [0]
+    limpo = tool_protocol.Sanitizador()
     buf = ""
+    erros_protocolo: list = []
+    sanitizador_fechado = [False]
+
+    def _emitir_seguro(txt):
+        if not txt:
+            return
+        seq[0] += 1
+        partes.append(txt)
+        on_delta(seq[0], txt)
+
+    def _fechar_sanitizador():
+        if sanitizador_fechado[0]:
+            return list(erros_protocolo)
+        sanitizador_fechado[0] = True
+        resto, erros = limpo.finalizar()
+        erros_protocolo.extend(erros)
+        for erro in erros:
+            log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
+                        erro.get("ferramenta") or "?", erro.get("detalhe") or "")
+        _emitir_seguro(resto)
+        return list(erros_protocolo)
+
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             while True:
                 if deve_parar is not None and deve_parar():
+                    _fechar_sanitizador()
                     return {"texto": "".join(partes)[:hermes_bridge.MAX_TEXTO],
                             "cancelada": True,
                             "latencia_s": round(time.monotonic() - inicio, 2)}
@@ -393,21 +424,24 @@ def _anthropic_stream(d: dict, key: str, model_id: str, messages: list, on_delta
                     if isinstance(ev, dict) and ev.get("type") == "content_block_delta":
                         txt = ((ev.get("delta") or {}).get("text")) or ""
                         if txt:
-                            seq[0] += 1
-                            partes.append(txt)
-                            on_delta(seq[0], txt)
+                            _emitir_seguro(limpo.alimentar(txt))
     except urllib.error.HTTPError as exc:
         raise _mapear_anthropic(exc, model_id) from None
     except BridgeErro:
         raise
     except (OSError, TimeoutError) as exc:
         if partes:
+            _fechar_sanitizador()
             return {"texto": "".join(partes)[:hermes_bridge.MAX_TEXTO], "parcial": True,
                     "latencia_s": round(time.monotonic() - inicio, 2)}
         raise BridgeErro(f"Falha ao falar com Anthropic ({type(exc).__name__}).",
                          "indisponivel") from None
+    _fechar_sanitizador()
     texto = "".join(partes)
     if not texto.strip():
+        if erros_protocolo:
+            raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
+                             "nada foi executado nem exibido.", "protocolo_ferramenta")
         raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
     return {"texto": texto[:hermes_bridge.MAX_TEXTO],
             "truncada": len(texto) > hermes_bridge.MAX_TEXTO,

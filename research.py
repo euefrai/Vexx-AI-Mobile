@@ -23,6 +23,7 @@ import json
 import re
 import socket
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -526,7 +527,17 @@ def buscar_com_fallback(consulta: str, max_resultados: int = 6,
 
 
 def resumo_deterministico(fontes: list, consulta: str) -> str:
-    """Digest sem LLM: fontes + trechos reais, com limite declarado."""
+    """Digest sem LLM: fontes + trechos reais, com limite declarado.
+
+    V5.7.3: nenhuma fonte é exibida se não compartilhar assunto com o pedido.
+    Isso evita o fallback de 429 misturar clima/investimentos com notebooks.
+    """
+    relevantes = fontes_relevantes(consulta, fontes)
+    if fontes and not relevantes:
+        return ("Não encontrei fontes que respondam de verdade a este pedido. "
+                "Os resultados devolvidos não tinham relação demonstrável com o "
+                "assunto e foram descartados; não vou usá-los como evidência. 🔍")
+    fontes = relevantes
     if not fontes:
         return ("Pesquisei agora, mas nenhum provedor retornou fontes "
                 "utilizáveis. Tente reformular ou mais tarde. 🔍")
@@ -581,6 +592,59 @@ def consulta_de_pesquisa(texto: str) -> str:
     if len(limpa) < 8:
         return t[:200]
     return limpa[:200]
+
+
+def _sem_acentos(texto: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFKD", (texto or "").lower())
+                   if not unicodedata.combining(c))
+
+
+def termos_assunto(texto: str) -> list:
+    """Termos do pedido que podem provar correspondência temática.
+
+    Usa o mesmo vocabulário do Search Orchestrator (não cria outro
+    orquestrador) e remove pedidos/follow-ups genéricos ("agora", "mostre",
+    "resultados", "mais baratos") que fariam qualquer página casar.
+    """
+    import search_orchestrator as orch
+    return [_sem_acentos(t) for t in orch._termos_correspondencia(consulta_de_pesquisa(texto))]
+
+
+def consulta_tem_assunto(texto: str) -> bool:
+    return bool(termos_assunto(texto))
+
+
+def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> list:
+    """Gate PEDIDO → FONTES antes de anexar qualquer fonte à resposta.
+
+    Rejeita fontes cujo título/trecho/conteúdo lido/URL não contenha nenhum
+    termo não-genérico do pedido. Uma fonte pode ser indireta, mas precisa
+    compartilhar um termo demonstrável do assunto. Sem termos no pedido, não
+    há como provar pertinência: retorna [] (limitação honesta, não mistura).
+    """
+    termos = termos_assunto(consulta)
+    if not termos:
+        return []
+    if info is None:
+        info = {}
+    # O orquestrador já mediu correspondência global; se ela for nula e não
+    # houver termo no conteúdo, nada é anexado.
+    out = []
+    for f in fontes or []:
+        if not isinstance(f, dict):
+            continue
+        partes = [f.get("titulo", ""), f.get("trecho", ""),
+                  f.get("texto_lido", ""), f.get("url", "")]
+        try:
+            partes.append(urllib.parse.unquote(f.get("url", "")))
+        except Exception:
+            pass
+        hay = _sem_acentos(" ".join(str(p or "") for p in partes))
+        if any(t in hay for t in termos):
+            out.append(f)
+    if not out and fontes:
+        info["rejeitadas_por_relevancia"] = len(fontes)
+    return out
 
 
 def chave_cache(owner: str, provedor: str, consulta: str) -> str:

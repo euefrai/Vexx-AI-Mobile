@@ -226,8 +226,8 @@ def test_prompt_grounding_e_reuso(monkeypatch):
     cfg = {"proxy": "x", "model": "m", "system": "S", "context": 5, "max_tokens": 50,
            "memoria_global": True, "pesquisa_web": True}
     monkeypatch.setattr(research, "pesquisa_rapida",
-                        lambda *a, **k: {"fontes": [{"id": "S1", "titulo": "T",
-                                                    "trecho": "trecho real",
+                        lambda *a, **k: {"fontes": [{"id": "S1", "titulo": "Café",
+                                                    "trecho": "trecho real sobre café",
                                                     "url": "http://e/x", "dominio": "e",
                                                     "acessado_em": "t", "tipo": "p",
                                                     "status": "ok"}],

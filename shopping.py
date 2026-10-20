@@ -2796,6 +2796,42 @@ def eh_followup(texto: str) -> bool:
                 ("compar" in t and "os dois" in t))
 
 
+# Referências anafóricas a resultados anteriores ("os dois", "essas opções").
+_RX_ANAFORA = re.compile(
+    r"\b(?:os dois|as duas|dois primeiros|duas primeiras|primeir[oa]s?|"
+    r"segund[oa]s?|terceir[oa]s?|esses|essas|deles|delas|desses|dessas|"
+    r"resultados?|op[cç][oõ]es|lista|acima|anterior(?:es)?|guardad[oa]s?|"
+    r"mesmos?|mesmas?)\b", re.IGNORECASE)
+_RX_ESPECIFICACAO = re.compile(
+    r"^(?:\d+(?:[.,]\d+)?\s*(?:gb|tb|mb|ram|pol|polegadas?|hz|w|kg|g)|"
+    r"(?:ram|ssd|hd|gb|tb|ddr\d?|gpu|cpu))$", re.IGNORECASE)
+_TERMOS_INSTRUCAO = {
+    "filtra", "filtrar", "filtre", "ordena", "ordenar", "ordene", "mostra",
+    "mostre", "exibe", "exiba", "busca", "buscar", "pesquisa", "pesquisar",
+    "quero", "queria", "ver", "veja", "manda", "mande", "envia", "envie",
+    "foto", "fotos", "imagem", "imagens", "produto", "produtos", "modelo",
+    "modelos", "item", "itens",
+}
+
+
+def followup_sem_contexto(texto: str) -> bool:
+    """Follow-up de produtos que NÃO contém assunto próprio para nova busca.
+
+    "agora mostre só os resultados mais baratos" depende da pesquisa anterior;
+    "qual o melhor notebook?" não depende (tem assunto e pode buscar de novo).
+    """
+    if not (eh_followup(texto) or quer_fotos(texto)):
+        return False
+    if _RX_ANAFORA.search(texto or ""):
+        return True
+    proprios = []
+    for termo in research.termos_assunto(texto or ""):
+        if termo in _TERMOS_INSTRUCAO or _RX_ESPECIFICACAO.match(termo):
+            continue
+        proprios.append(termo)
+    return not proprios
+
+
 _FOLLOWUP_FOTOS = re.compile(
     r"(\btem fotos?\b|\bver as (fotos?|imagens?)\b|\bquero (ver )?(as )?(fotos?|imagens?)\b|"
     r"\bmostra(r)? (as )?(fotos?|imagens?)\b|"

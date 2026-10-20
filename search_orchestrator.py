@@ -130,6 +130,15 @@ _GENERICOS_CORRESPONDENCIA = {
     "onde", "encontrar", "encontre", "loja", "lojas", "vale", "pena",
     "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar",
     "pesquisar", "buscar", "procurar", "queria", "preciso",
+    # Follow-ups de interface/ordenação: "agora mostre só os resultados mais
+    # baratos" não tem assunto e não pode autorizar busca externa.
+    "agora", "apenas", "somente", "mostre", "mostra", "mostrar", "exiba",
+    "exibir", "liste", "lista", "listar", "resultado", "resultados",
+    "pesquisa", "pesquisados", "encontrados", "encontradas", "opção", "opcao",
+    "opções", "opcoes", "ordem", "ordenar", "ordene", "baratos", "baratas",
+    "barato", "barata", "caros", "caras", "primeiro", "primeiros", "primeira",
+    "primeiras", "segundo", "segunda", "terceiro", "terceira", "dois", "duas",
+    "três", "tres", "foto", "fotos", "imagem", "imagens",
 }
 
 

@@ -20,11 +20,16 @@ import model3d
 import model3d_research
 import env_local
 env_local.carregar_env_local()  # .env local do PC (nunca sobrescreve o sistema)
-from assistant_identity import CONVERSATION_NAME, OFFICIAL_NAME, system_with_identity
+from assistant_identity import (CONVERSATION_NAME, OFFICIAL_NAME,
+                                limitar_afirmacoes_nao_suportadas,
+                                pergunta_identidade_produto,
+                                resposta_identidade_produto,
+                                system_with_identity)
 import hermes_bridge
 import intent
 import jdui
 import providers
+import tool_protocol
 import julia_auth as JULIA_auth
 import learning
 import remoto
@@ -784,7 +789,7 @@ def memorias_relevantes(db, pergunta: str, k: int = 8, owner=DONO_PADRAO) -> lis
 
 # ── Identidade determinística (V5.0: funciona mesmo sem LLM) ──────────
 NOMES_ALHEIOS = ("julia", "cortana", "siri", "alexa", "chatgpt", "gpt",
-                 "gemini", "copilot", "bixby", "vexx")
+                 "gemini", "copilot", "bixby", "vexx", "vexxia")
 _SAUDACOES_VOCATIVO = ("oi", "ola", "opa", "eai", "bom dia", "boa tarde",
                        "boa noite", "obrigado", "obrigada", "valeu")
 
@@ -794,6 +799,12 @@ def cmd_identidade(texto: str):
     t = _normalizar_temporal(texto or "")
     if not t:
         return None
+    if pergunta_identidade_produto(texto or ""):
+        return (resposta_identidade_produto(), "id_produto")
+    if re.search(r"(?:\b(?:voce|vc)\s+(?:e|eh)\s+(?:a\s+)?vex(?:x)?ia\b|"
+                 r"\bseu\s+nome\s+(?:e|eh)\s+vex(?:x)?ia\b)", t):
+        return (f"Pode me chamar de {CONVERSATION_NAME}. Vexx AI é o nome "
+                "do produto em que eu atendo. 😊", "id_correcao")
     if "nome completo" in t:
         return (f"Meu nome completo é {OFFICIAL_NAME} — pode me chamar de "
                 f"{CONVERSATION_NAME}. 😊", "id_nome_completo")
@@ -817,6 +828,16 @@ def cmd_identidade(texto: str):
     return None
 
 
+_RX_EVENTO_CMD = re.compile(
+    r"(?is)(?:^|[.!?]\s*)\s*(?:por favor[,\s]+)?"
+    r"(?P<verbo>cancela(?:r|ndo)?|cancele|desmarca(?:r)?|desmarque|"
+    r"conclui(?:r|rá)?|conclua|concluí|marque\s+como\s+feit[oa]|"
+    r"marcar\s+como\s+feit[oa])"
+    r"\s+(?:o\s+|a\s+|os\s+|as\s+)?"
+    r"(?:evento\s+|compromisso\s+|tarefa\s+)?"
+    r"(?P<alvo>[^.!?\n]{2,120})")
+
+
 def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
     """Comandos diretos de memória. Retorna resposta pronta ou None."""
     owner = dono_valido(owner)
@@ -837,13 +858,18 @@ def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
         linhas = "\n".join(f"- **{p['key']}**: {p['value'][:150]}" for p in pend)
         return (f"Aguardando sua confirmação:\n\n{linhas}\n\n"
                 "Diga \"pode guardar\" para confirmar ou \"descarta\" para recusar.", "mem_pend_listar")
-    m_ev = re.search(r"(?i)(cancela(?:r|ndo)?|desmarca(?:r)?|conclu(?:ir|[ií])(?:da|do)?|marcar como feit)[a-z ]{0,20}(.+)", t)
-    if m_ev and ("cancel" in t or "desmarc" in t or "conclu" in t or "feit" in t):
-        alvo = (m_ev.group(2) or "").strip(" .;:")[:120]
-        feito = atualizar_evento(db, owner, alvo, "concluido" if "conclu" in t or "feit" in t else "cancelado")
-        if feito:
-            return (f"Pronto: **{feito}** atualizado. ✅", "mem_evento")
-        return ("Não encontrei esse evento nos próximos. Veja seus eventos perguntando \"meus eventos\".", "mem_evento_nada")
+    m_ev = _RX_EVENTO_CMD.search(texto or "")
+    if m_ev:
+        # Só comando explícito no início (ou após pontuação) altera evento:
+        # "teste visual concluido" é uma frase comum, não uma ordem.
+        verbo = (m_ev.group("verbo") or "").lower()
+        alvo = (m_ev.group("alvo") or "").strip(" .;:")[:120]
+        status_ev = "cancelado" if ("cancel" in verbo or "desmarc" in verbo) else "concluido"
+        if alvo:
+            feito = atualizar_evento(db, owner, alvo, status_ev)
+            if feito:
+                return (f"Pronto: **{feito}** atualizado. ✅", "mem_evento")
+            return ("Não encontrei esse evento nos próximos. Veja seus eventos perguntando \"meus eventos\".", "mem_evento_nada")
     if re.search(r"(meus eventos|pr[óo]ximos eventos|minha agenda|compromissos)", t):
         evs = proximos_eventos(db, owner)
         if not evs:
@@ -1377,7 +1403,12 @@ TERMOS_PESQUISA = ("pesquise", "pesquisar", "busque", "buscar", "google",
 
 def intencao_pesquisa(texto: str) -> bool:
     t = (texto or "").lower()
-    return any(k in t for k in TERMOS_PESQUISA)
+    if not any(k in t for k in TERMOS_PESQUISA):
+        return False
+    # V5.7.3: gatilho genérico ("resultado", "preço", "agora") não basta.
+    # Sem assunto não-genérico, a busca só devolveria páginas fora do pedido
+    # (incidente 429: clima/investimentos após follow-up de shopping).
+    return research.consulta_tem_assunto(texto)
 
 
 APROFUNDADA_TRIGGERS = ("a fundo", "aprofundada", "aprofundado", "relatório completo",
@@ -1959,7 +1990,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     # (com cards verificados); a pesquisa genérica síncrona é pulada aqui
     # para não duplicar carga no Render Free.
     eh_shop = shopping.detectar_intencao(texto_usuario) \
-        and not shopping.eh_followup(texto_usuario) \
+        and not shopping.followup_sem_contexto(texto_usuario) \
         and extras["podem_pesquisar"]
     extras["shop"] = eh_shop
     # V5.7 FINAL: página específica pedida pelo usuário (URL na mensagem) —
@@ -2002,14 +2033,23 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
             run_reuso = research.ultima_run(db, owner, conversation_id)
         try:
             if run_reuso and run_reuso.get("fontes"):
-                extras["fontes"] = run_reuso["fontes"]
+                # O pedido atual pode ser só "essas fontes": usa o assunto da
+                # pesquisa anterior como referência de relevância.
+                fontes_reuso = research.fontes_relevantes(
+                    run_reuso.get("consulta") or consulta,
+                    run_reuso["fontes"], run_reuso)
+                extras["fontes"] = fontes_reuso
                 extras["research_run"] = run_reuso["id"]
-                partes_sistema.append(
-                    research.bloco_grounding(run_reuso["fontes"], hoje)
-                    + " (pesquisa anterior desta conversa; não busque de novo)")
+                if fontes_reuso:
+                    partes_sistema.append(
+                        research.bloco_grounding(fontes_reuso, hoje)
+                        + " (pesquisa anterior desta conversa; não busque de novo)")
+                else:
+                    partes_sistema.append(research.bloco_falha(hoje, "sem_correspondencia"))
             elif not extras.get("research_cmd") and intencao_pesquisa_aprofundada(texto_usuario):
                 run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
-                fontes = run.get("fontes", [])
+                fontes = research.fontes_relevantes(
+                    consulta, run.get("fontes", []), run)
                 extras["fontes"] = fontes
                 extras["research_run"] = run.get("run_id", "")
                 if fontes:
@@ -2020,17 +2060,20 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                         partes_sistema.append(
                             f"DIVERGÊNCIA ENTRE {d['entre'][0]} e {d['entre'][1]}: {d['motivo']}.")
                 else:
-                    partes_sistema.append(research.bloco_falha(hoje, run.get("estado", "")))
+                    estado = "sem_correspondencia" if run.get("fontes") else run.get("estado", "")
+                    partes_sistema.append(research.bloco_falha(hoje, estado))
             elif not extras.get("research_cmd"):
                 rap = research.pesquisa_rapida(db, owner, consulta)
-                fontes = rap.get("fontes", [])
+                fontes = research.fontes_relevantes(
+                    consulta, rap.get("fontes", []), rap)
                 extras["fontes"] = fontes
                 if fontes:
                     partes_sistema.append(
                         research.bloco_grounding(fontes, hoje, rap)
                         + (" (cache local)" if rap.get("de_cache") else ""))
                 else:
-                    partes_sistema.append(research.bloco_falha(hoje, rap.get("estado", "")))
+                    estado = "sem_correspondencia" if rap.get("fontes") else rap.get("estado", "")
+                    partes_sistema.append(research.bloco_falha(hoje, estado))
         except Exception as exc:
             log.warning("research falhou (%s)", type(exc).__name__)
             partes_sistema.append(research.bloco_falha(hoje))
@@ -2445,7 +2488,7 @@ def ai_continuar(db, payload: dict, cfg: dict) -> dict:
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
     modelo = res.get("model_usado", modelo)
-    trecho = (res.get("texto") or "").strip()
+    trecho = _texto_seguro((res.get("texto") or "").strip(), mid).strip()
     if not trecho:
         return {"error": "Modelo não continuou.", "codigo": "vazia"}
     anterior = (est["response_text"] or "").rstrip()
@@ -2879,10 +2922,48 @@ def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
         nota = shopping.resumo_texto(shop_res)
         if nota and nota not in texto:
             texto = (texto or "") + "\n\n" + nota
-    if fence_shop and "```jdui" not in texto:
-        # Imagens primeiro: cards com as fotos reais abrem a mensagem.
+    if fence_shop and fence_shop not in (texto or ""):
+        # Imagens primeiro: cards com as fotos reais abrem a mensagem. Fences
+        # alheios (gráfico/aula) NÃO escondem ofertas verificadas da ferramenta.
         texto = imagens_primeiro(fence_shop, texto)
     return texto
+
+
+def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None) -> str:
+    """Texto determinístico quando o LLM falha: fontes reais E ofertas reais.
+
+    V5.7.3: ofertas verificadas da busca de produtos não somem porque a
+    inferência caiu (429); o digest de pesquisa continua vindo primeiro.
+    """
+    digest = ""
+    if extras.get("fontes"):
+        digest = research.resumo_deterministico(extras["fontes"], user_text)
+    if shop_res is not None and shop_res.get("produtos"):
+        resumo = shopping.resumo_texto(shop_res)
+        base = digest or ("Não consegui gerar a análise completa agora, mas as "
+                          "ofertas abaixo foram verificadas na fonte:")
+        if resumo and resumo not in base:
+            base = base + "\n\n" + resumo
+        return _shopping_aplicar(base, shop_res)
+    if digest:
+        return digest
+    if shop_res is not None:
+        nota = shopping.resumo_texto(shop_res)
+        if nota:
+            return nota
+    return ""
+
+
+def _texto_followup_sem_contexto(texto: str) -> str:
+    """Resposta honesta quando o ajuste depende de ofertas que não existem."""
+    if shopping.quer_fotos(texto or "") and not shopping.eh_followup(texto or ""):
+        return ("Não tenho fotos verificadas de produtos de uma pesquisa anterior "
+                "nesta conversa. Faça uma busca de produtos primeiro (por exemplo: "
+                "\"notebook até R$ 3.000\") — não vou inventar imagens ou ofertas. 🔍")
+    return ("Não tenho ofertas verificadas de uma pesquisa anterior nesta conversa "
+            "para aplicar esse ajuste. Faça uma nova busca de produtos (por exemplo: "
+            "\"notebook até R$ 3.000\") — não vou inventar preços nem reutilizar "
+            "resultados fora do assunto. 🔍")
 
 
 def _validar_resposta(intencao: dict, texto: str, *, usadas: list, produtos: list,
@@ -2910,6 +2991,78 @@ def _validar_resposta(intencao: dict, texto: str, *, usadas: list, produtos: lis
             "conhecimento geral e podem estar desatualizados — confirme na "
             "loja antes de comprar._")
     return texto
+
+
+_RX_JDUIF_BLOCO = re.compile(r"```jdui[\s\S]*?(?:```|$)", re.IGNORECASE)
+
+
+def _evidencias_verificaveis(fontes: list, produtos: list) -> list:
+    """Evidências reais para o verificador: trechos lidos + dados de produto.
+
+    Fonte apenas `encontrada` (sem `texto_lido`) serve de contexto, mas não
+    prova afirmação numérica/comparativa: `lida=False` impede o veredito
+    SUPPORTED. Fontes legadas sem `status` continuam válidas.
+    """
+    evs = []
+    for i, f in enumerate(fontes or []):
+        if not isinstance(f, dict):
+            continue
+        texto_lido = (f.get("texto_lido") or "").strip()
+        trecho = (texto_lido or f.get("trecho") or "").strip()
+        if not trecho:
+            continue
+        status = str(f.get("status") or "")
+        if status:
+            lida = status == "aberta" and bool(texto_lido)
+        else:
+            lida = bool(texto_lido) or None
+        evs.append({"id": str(f.get("id") or f"S{i + 1}"),
+                    "trecho": trecho[:4000], "url": f.get("url", ""),
+                    "status": status, "lida": lida})
+    for i, p in enumerate(produtos or []):
+        if not isinstance(p, dict):
+            continue
+        partes = [str(p.get("nome") or ""), str(p.get("preco_texto") or ""),
+                  str(p.get("loja") or "")]
+        for k, v in list((p.get("specs") or {}).items())[:8]:
+            partes.append(f"{k}: {v}")
+        if p.get("avaliacao") is not None:
+            partes.append(f"avaliacao: {p['avaliacao']}")
+        trecho = " | ".join(x for x in partes if x).strip()
+        if trecho:
+            evs.append({"id": f"produto-{i + 1}", "trecho": trecho[:2000]})
+    return evs
+
+
+def _validar_comparacoes(texto: str, fontes: list, produtos: list,
+                         mid: str = "") -> tuple:
+    """Neutraliza comparações sem evidência e devolve o laudo das afirmações.
+
+    FATOS: SUPPORTED → FACT; PARTIALLY_SUPPORTED → DERIVED_FROM_DATA;
+    ESTIMATE/HYPOTHESIS explícitos ficam rotulados; o resto é UNVERIFIED e
+    comparações não sustentadas viram limitação declarada, nunca fato.
+    """
+    limpo = _RX_JDUIF_BLOCO.sub(" [interface] ", texto or "")
+    evidencias = _evidencias_verificaveis(fontes, produtos)
+    try:
+        laudo = evgraph.classificar_afirmacoes(limpo, evidencias, minimo=20)
+    except Exception as exc:
+        log.warning("classificação de afirmações falhou (%s)", type(exc).__name__)
+        return texto, []
+    novo = texto or ""
+    for item in laudo:
+        comp = item.get("comparacao")
+        if not comp or item["classificacao"] not in ("UNVERIFIED", "HYPOTHESIS"):
+            continue
+        sujeito = comp.get("sujeito") or "o primeiro item"
+        comparado = comp.get("comparado_a") or "o segundo item"
+        substituicao = (f"Não tenho evidência verificada para sustentar a "
+                        f"comparação entre {sujeito} e {comparado} (UNVERIFIED).")
+        if item["texto"] in novo:
+            novo = novo.replace(item["texto"], substituicao, 1)
+            log.warning("COMPARACAO_NAO_VERIFICADA %s: %s", mid,
+                        item["texto"][:120])
+    return novo, laudo
 
 
 # ── Continuidade determinística entre conversas (V5.0; sem LLM) ──────
@@ -3510,8 +3663,128 @@ def cmd_model3d(db, texto, owner, conv, scene_state='', pesquisa_web=False):
     return text
 
 
+def _texto_seguro(texto: str, mid: str = "") -> str:
+    """Última barreira: protocolo de ferramenta + fatos de identidade.
+
+    A barreira principal fica no adaptador (bridge/providers); esta garante
+    que caminhos alternativos, testes e respostas antigas não publiquem uma
+    chamada interna nem uma afirmação corporativa inventada sobre a Vexx AI.
+    """
+    limpo, erros = tool_protocol.sanitizar_texto(texto or "")
+    for erro in erros:
+        log.warning("TOOL_PROTOCOL_FINAL %s %s: %s", mid[-8:] if mid else "-",
+                    erro.get("codigo"), erro.get("ferramenta") or "?")
+    return limitar_afirmacoes_nao_suportadas(limpo)
+
+
+class _GuardaStreamResposta:
+    """Evita que identidade/comparação erradas apareçam antes da correção final.
+
+    Texto sem marcadores de risco continua fluindo imediatamente (TTFT). Se o
+    delta contém "vex"/autoidentificação ou um termo comparativo, a frase é
+    segurada até a pontuação, validada e só então enviada. No fim, o restante
+    passa pela mesma barreira. Assim o cliente nunca vê "Vexxia" ou uma
+    comparação não sustentada e depois um texto diferente em `ai_done`.
+    """
+
+    _TOKENS_RISCO = (
+        "vexx", "vexxia", "vex", "meu nome", "eu sou", "pode me chamar",
+        "mais", "menos", "maior", "menor", "melhor", "pior", "superior",
+        "inferior", "rápido", "rapido", "lento", "eficiente", "caro", "barato",
+    )
+    _RX_FIM_FRASE = re.compile(r"(?<=[.!?])(?:\s+|$)")
+
+    def __init__(self, fontes: list | None = None, produtos: list | None = None,
+                 mid: str = ""):
+        self.fontes = fontes or []
+        self.produtos = produtos or []
+        self.mid = mid
+        self.buffer = ""
+        self.emitido: list[str] = []
+
+    def _tem_risco(self, texto: str) -> bool:
+        baixo = (texto or "").lower()
+        return any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", baixo)
+                   for t in self._TOKENS_RISCO)
+
+    def _sufixo_risco(self, texto: str) -> int:
+        """Sufixo que pode ser o começo de um token de risco (ex.: "vex")."""
+        baixo = (texto or "").lower()
+        for n in range(min(24, len(baixo)), 0, -1):
+            suf = baixo[-n:]
+            if any(t.startswith(suf) for t in self._TOKENS_RISCO):
+                return n
+        return 0
+
+    def _seguro(self, texto: str) -> str:
+        seguro = limitar_afirmacoes_nao_suportadas(texto)
+        if evgraph.detectar_comparacao(seguro):
+            seguro, _ = _validar_comparacoes(
+                seguro, self.fontes, self.produtos, mid=self.mid)
+        return seguro
+
+    def _emitir(self, trecho: str, saida: list) -> None:
+        if trecho:
+            saida.append(trecho)
+            self.emitido.append(trecho)
+
+    def alimentar(self, trecho: str) -> list[str]:
+        self.buffer += str(trecho or "")
+        saida: list[str] = []
+        while self.buffer:
+            if self._tem_risco(self.buffer):
+                m = self._RX_FIM_FRASE.search(self.buffer)
+                if not m:
+                    break
+                corte = m.end()
+                self._emitir(self._seguro(self.buffer[:corte]), saida)
+                self.buffer = self.buffer[corte:]
+                continue
+            n = self._sufixo_risco(self.buffer)
+            if n:
+                self._emitir(self.buffer[:-n], saida)
+                self.buffer = self.buffer[-n:]
+                break
+            self._emitir(self.buffer, saida)
+            self.buffer = ""
+        return saida
+
+    def finalizar(self) -> list[str]:
+        saida: list[str] = []
+        if self.buffer:
+            self._emitir(self._seguro(self.buffer), saida)
+            self.buffer = ""
+        return saida
+
+    @property
+    def texto_emitido(self) -> str:
+        return "".join(self.emitido)
+
+
+def _complemento_stream(final: str, exibido: str) -> str:
+    """Delta que completa o que já foi exibido, sem repetir o prefixo comum.
+
+    Normalmente `final` começa por `exibido`. Quando o backend acrescenta
+    cards/fontes no início, o trecho novo é anexado ao fim (o `ai_done`
+    continua sendo a fonte autoritativa para persistência).
+    """
+    final, exibido = final or "", exibido or ""
+    if not exibido:
+        return final
+    if final.startswith(exibido):
+        return final[len(exibido):]
+    pos = final.find(exibido)
+    if pos >= 0:
+        return final[:pos] + final[pos + len(exibido):]
+    i = 0
+    while i < len(final) and i < len(exibido) and final[i] == exibido[i]:
+        i += 1
+    return final[i:]
+
+
 def ai_resposta_direta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> dict:
     """Resposta sem LLM (comandos de memória). Salva e marca como completa."""
+    texto = _texto_seguro(texto, mid)
     ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
     ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner)
     return {"reply_id": reply_id, "response_text": texto, "model": modelo}
@@ -3539,6 +3812,20 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     cp = cmd_projeto(db, prep.get("user_text", ""), owner, conv)
     if cp:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cp, owner)
+    # Follow-up de shopping: reusa ofertas verificadas; sem contexto, admite
+    # honestamente em vez de cair na web/LLM e misturar fontes sem relação.
+    if shopping.eh_followup(prep.get("user_text", "")) or \
+            shopping.quer_fotos(prep.get("user_text", "")):
+        fup = shopping.responder_followup(
+            db, owner, conv, prep.get("user_text", ""))
+        if fup:
+            texto_fup = imagens_primeiro(fup.get("fence"), fup["texto"])
+            return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"],
+                                      texto_fup, owner)
+        if shopping.followup_sem_contexto(prep.get("user_text", "")):
+            return ai_resposta_direta(
+                db, mid, conv, modelo, prep["reply_id"],
+                _texto_followup_sem_contexto(prep.get("user_text", "")), owner)
     rq = cmd_qualidade(db, prep.get("user_text", ""), owner)
     if rq:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rq, owner)
@@ -3562,21 +3849,33 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
-        if extras.get("fontes"):
-            digest = research.resumo_deterministico(
-                extras["fontes"], prep.get("user_text", ""))
-            ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], digest, owner)
-            log.info("IA sem inferência: digest determinístico (%s)", mid)
-            return {"reply_id": prep["reply_id"], "response_text": digest,
-                    "model": modelo, "digest": True}
+        texto_fb = _fallback_sem_inferencia(
+            prep.get("user_text", ""), extras, shop_res)
+        if texto_fb:
+            texto_fb, _b, _e = jdui.normalizar(texto_fb)
+            texto_fb = _validar_resposta(
+                extras.get("intent") or {}, texto_fb,
+                usadas=extras.get("ferramentas_usadas", []),
+                produtos=(shop_res or {}).get("produtos", []), mid=mid)
+            ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"],
+                                texto_fb, owner)
+            log.info("IA sem inferência: fallback determinístico (%s, ofertas=%s)",
+                     mid, bool((shop_res or {}).get("produtos")))
+            return {"reply_id": prep["reply_id"], "response_text": texto_fb,
+                    "model": modelo, "digest": True,
+                    "shopping": bool((shop_res or {}).get("produtos"))}
         ai_marcar(db, mid, conv, modelo, "failed", error=str(exc), owner=owner)
         return {"error": str(exc), "codigo": exc.codigo}
     modelo = res.get("model_usado", modelo)
-    texto = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+    texto = _texto_seguro(res["texto"], mid)
+    texto = anexar_fontes(texto, extras["fontes"], intencao_imagem(prep.get("user_text", "")))
     if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto or ""):
         texto = (texto or "") + "\n\n" + prep["pergunta_memoria"]
     # V5.7: cards reais (ou nota honesta) + banimento de fence de produto do modelo.
     texto = _shopping_aplicar(texto, shop_res)
+    # V5.7.3: comparação sem evidência não vira fato (com laudo por afirmação).
+    texto, extras["afirmacoes"] = _validar_comparacoes(
+        texto, extras.get("fontes"), (shop_res or {}).get("produtos"), mid=mid)
     texto, blocos_jdui, erros_jdui = jdui.normalizar(texto)
     if erros_jdui:
         log.warning("JDUI descartado na msg %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -3755,6 +4054,18 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 except (ConnectionClosed, OSError, RuntimeError, ValueError):
                     pass
                 return
+            if shopping.followup_sem_contexto(prep.get("user_text", "")):
+                direta = ai_resposta_direta(
+                    db, mid, conv, modelo, prep["reply_id"],
+                    _texto_followup_sem_contexto(prep.get("user_text", "")), owner)
+                try:
+                    enviar_ws(websocket, {"request_id": request_id, "type": "ai_done",
+                                          "reply_id": direta["reply_id"],
+                                          "response_text": direta["response_text"],
+                                          "model": modelo})
+                except (ConnectionClosed, OSError, RuntimeError, ValueError):
+                    pass
+                return
         # V5.0: identidade determinística (nome/correção; funciona sem LLM).
         cmd_id = cmd_identidade(prep.get("user_text", ""))
         if cmd_id:
@@ -3854,11 +4165,28 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             shop_res = _shopping_executar(db, owner, conv,
                                           prep.get("user_text", ""), extras,
                                           messages, progresso=_prog_shop)
+        guarda_stream = _GuardaStreamResposta(
+            extras.get("fontes"), (shop_res or {}).get("produtos"), mid)
+
+        def emitir_modelo(_seq, trecho):
+            for seguro in guarda_stream.alimentar(trecho):
+                emitir(last_delta_seq[0] + 1, seguro)
+
         try:
-            res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages, emitir,
-                               deve_parar=sessao.parar.is_set, max_tokens=cfg["max_tokens"])
+            res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages,
+                               emitir_modelo, deve_parar=sessao.parar.is_set,
+                               max_tokens=cfg["max_tokens"])
             modelo = res.get("model_usado", modelo)
+            for seguro in guarda_stream.finalizar():
+                emitir(last_delta_seq[0] + 1, seguro)
         except hermes_bridge.BridgeErro as exc:
+            # O que estava retido por segurança também precisa ser liberado
+            # (já sanitizado) antes de qualquer fallback/erro.
+            try:
+                for seguro in guarda_stream.finalizar():
+                    emitir(last_delta_seq[0] + 1, seguro)
+            except hermes_bridge.BridgeErro:
+                pass
             log.warning(
                 "AI_AGENT_ERROR msg=%s prep_ms=%d context_ms=%d provider_ms=%d "
                 "first_delta_ms=%d code=%s",
@@ -3869,18 +4197,29 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 if first_delta_at[0] else -1, exc.codigo)
             if fut_sintese is not None:
                 fut_sintese.cancel()
-            if extras.get("fontes"):
-                # V5.0.1: sem inferência, mas com fontes reais → digest
-                # determinístico em vez de erro vazio.
-                digest = research.resumo_deterministico(
-                    extras["fontes"], prep.get("user_text", ""))
+            # V5.0.1/V5.7.3: sem inferência, fontes reais (digest) e/ou
+            # ofertas verificadas continuam disponíveis em vez de erro vazio.
+            texto_fb = _fallback_sem_inferencia(
+                prep.get("user_text", ""), extras, shop_res)
+            if texto_fb:
+                texto_fb, _b, _e = jdui.normalizar(texto_fb)
+                texto_fb = _validar_resposta(
+                    extras.get("intent") or {}, texto_fb,
+                    usadas=extras.get("ferramentas_usadas", []),
+                    produtos=(shop_res or {}).get("produtos", []), mid=mid)
                 ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"],
-                                    digest, owner)
+                                    texto_fb, owner)
+                ja_enviado = "".join(partial_chunks)
+                complemento = texto_fb
+                if ja_enviado and texto_fb.startswith(ja_enviado):
+                    complemento = texto_fb[len(ja_enviado):]
                 try:
-                    emitir(last_delta_seq[0] + 1, digest)
+                    if complemento:
+                        emitir(last_delta_seq[0] + 1, complemento)
                     enviar({"request_id": request_id, "type": "ai_done",
                             "reply_id": prep["reply_id"],
-                            "response_text": digest, "model": modelo})
+                            "response_text": texto_fb, "model": modelo,
+                            "digest": True})
                 except hermes_bridge.BridgeErro:
                     pass
                 return
@@ -3903,10 +4242,14 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except hermes_bridge.BridgeErro:
                 pass
             return
-        texto_final = anexar_fontes(res["texto"], extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        resposta_modelo = _texto_seguro(res["texto"], mid)
+        texto_final = anexar_fontes(resposta_modelo, extras["fontes"], intencao_imagem(prep.get("user_text", "")))
         if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto_final or ""):
             texto_final = (texto_final or "") + "\n\n" + prep["pergunta_memoria"]
         texto_final = _shopping_aplicar(texto_final, shop_res)
+        texto_final, extras["afirmacoes"] = _validar_comparacoes(
+            texto_final, extras.get("fontes"),
+            (shop_res or {}).get("produtos"), mid=mid)
         texto_final, blocos_jdui, erros_jdui = jdui.normalizar(texto_final)
         if erros_jdui:
             log.warning("JDUI descartado no stream %s: %s", mid, "; ".join(erros_jdui[:3]))
@@ -3969,11 +4312,12 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             extras.get("intent") or {}, texto_final,
             usadas=extras.get("ferramentas_usadas", []),
             produtos=(shop_res or {}).get("produtos", []), mid=mid)
-        if texto_final != res["texto"]:
-            # envia o complemento (fontes/imagem) como deltas finais para TTFT não degradar
+        complemento = _complemento_stream(texto_final, guarda_stream.texto_emitido)
+        if complemento:
+            # envia fontes/imagem/correção como deltas finais para TTFT não
+            # degradar; o que já saiu sanitizado não é repetido.
             try:
-                emitir(last_delta_seq[0] + 1,
-                       texto_final[len(res["texto"]):])
+                emitir(last_delta_seq[0] + 1, complemento)
             except Exception:
                 pass
         ai_guardar_resposta(db, mid, conv, modelo, prep["reply_id"], texto_final, owner)

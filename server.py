@@ -305,6 +305,45 @@ relay = AgentRelay()
 login_failures: dict[str, list[float]] = {}
 
 
+class ResearchSSECursor:
+    """Ordena/deduplica eventos por seq e tolera replay fora de ordem.
+
+    O backlog é autoritativo, mas push ao vivo pode repetir ou chegar
+    invertido. Só libera `vistos+1` em diante; no evento terminal (ou após
+    timeout) libera o que restou em ordem, para não prolongar a conexão por
+    uma lacuna que não será preenchida.
+    """
+
+    TERMINAIS = {"research_completed", "research_failed", "research_cancelled"}
+
+    def __init__(self, apos_seq: int = 0):
+        self.vistos = max(0, int(apos_seq or 0))
+        self.pendentes: dict[int, dict] = {}
+
+    def oferecer(self, ev: dict) -> list[dict]:
+        seq = ev.get("seq") if isinstance(ev, dict) else None
+        if not isinstance(seq, int) or seq <= self.vistos:
+            return []
+        self.pendentes[seq] = ev
+        out = []
+        while self.vistos + 1 in self.pendentes:
+            self.vistos += 1
+            out.append(self.pendentes.pop(self.vistos))
+        return out
+
+    def liberar_tudo(self) -> list[dict]:
+        out = [self.pendentes[s] for s in sorted(self.pendentes)
+               if s > self.vistos]
+        if out:
+            self.vistos = max(self.vistos, out[-1]["seq"])
+            self.pendentes.clear()
+        return out
+
+    @classmethod
+    def terminal(cls, ev: dict) -> bool:
+        return isinstance(ev, dict) and ev.get("tipo") in cls.TERMINAIS
+
+
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
     response = await call_next(request)
@@ -1912,13 +1951,21 @@ async def research_stream(request: Request, job_id: str, apos_seq: int = 0):
         raise _research_erro(backlog)
 
     async def gerar():
-        vistos = apos_seq
+        cursor = ResearchSSECursor(apos_seq)
         try:
-            for ev in backlog.get("eventos", []):
-                if isinstance(ev.get("seq"), int) and ev["seq"] > vistos:
-                    vistos = ev["seq"]
+            eventos_backlog = [e for e in backlog.get("eventos", [])
+                               if isinstance(e, dict)]
+            terminal_backlog = any(ResearchSSECursor.terminal(e)
+                                   for e in eventos_backlog)
+            for ev in eventos_backlog:
+                for pronto in cursor.oferecer(ev):
                     yield ("event: research\n"
-                           f"data: {json.dumps(ev, ensure_ascii=False)}\n\n")
+                           f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
+            if terminal_backlog:
+                for pronto in cursor.liberar_tudo():
+                    yield ("event: research\n"
+                           f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
+                return
             espera = 0.0
             while True:
                 try:
@@ -1927,20 +1974,30 @@ async def research_stream(request: Request, job_id: str, apos_seq: int = 0):
                     espera += 15.0
                     if espera >= 360.0:
                         return
+                    # Lacuna não preenchida: libera o que chegou em ordem para
+                    # não deixar a interface parada; o polling continua válido.
+                    for pronto in cursor.liberar_tudo():
+                        yield ("event: research\n"
+                               f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
                     yield ": ping\n\n"
                     continue
                 if not isinstance(ev, dict):
                     continue
                 if ev.get("seq", 0) == -1:
+                    for pronto in cursor.liberar_tudo():
+                        yield ("event: research\n"
+                               f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
                     yield ("event: error\n"
                            f"data: {json.dumps({'error': 'Agente desconectado'}, ensure_ascii=False)}\n\n")
                     return
-                if isinstance(ev.get("seq"), int) and ev["seq"] > vistos:
-                    vistos = ev["seq"]
+                terminal = ResearchSSECursor.terminal(ev)
+                for pronto in cursor.oferecer(ev):
                     yield ("event: research\n"
-                           f"data: {json.dumps(ev, ensure_ascii=False)}\n\n")
-                if ev.get("tipo") in ("research_completed", "research_failed",
-                                      "research_cancelled"):
+                           f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
+                if terminal:
+                    for pronto in cursor.liberar_tudo():
+                        yield ("event: research\n"
+                               f"data: {json.dumps(pronto, ensure_ascii=False)}\n\n")
                     return
         finally:
             relay.research_subs.pop(sub_id, None)
@@ -2115,8 +2172,6 @@ async def agent_ws(websocket: WebSocket):
                     continue
                 # Sem stream ativa: ai_done/ai_error de POST /api/ai caem no pending.
             if isinstance(body, dict) and body.get("type") == "research_event_push":
-                job_id, owner = str(body.get("job_id", "")), str(body.get("owner", ""))
-                ev = body.get("event") if isinstance(body.get("event"), dict) else None
                 job_id, owner = str(body.get("job_id", "")), str(body.get("owner", ""))
                 ev = body.get("event") if isinstance(body.get("event"), dict) else None
                 if job_id and ev and isinstance(ev.get("seq"), int):

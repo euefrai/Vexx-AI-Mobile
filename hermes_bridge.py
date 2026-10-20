@@ -6,10 +6,15 @@ por isso a URL é restrita a loopback (proteção contra SSRF) e nenhum token
 real (Render/Nous) é enviado ou registrado aqui.
 """
 import json
+import logging
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+import tool_protocol
+
+log = logging.getLogger(__name__)
 
 DEFAULT_PROXY_URL = "http://127.0.0.1:8645/v1"
 DEFAULT_MODEL = "poolside/laguna-s-2.1:free"
@@ -201,8 +206,14 @@ def chat_complete(base: str, model: str, messages: list,
                          "indisponivel") from None
     except ValueError as exc:
         raise BridgeErro("Resposta do proxy em formato inesperado.", "formato") from None
-    texto = extrair_texto(dados)
+    texto, erros = tool_protocol.sanitizar_texto(extrair_texto(dados))
+    for erro in erros:
+        log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
+                    erro.get("ferramenta") or "?", erro.get("detalhe") or "")
     if not texto.strip():
+        if erros:
+            raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
+                             "nada foi executado nem exibido.", "protocolo_ferramenta")
         raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
     return {"texto": texto[:MAX_TEXTO],
             "truncada": len(texto) > MAX_TEXTO,
@@ -224,12 +235,37 @@ def chat_stream(base: str, model: str, messages: list, on_delta,
                 "max_tokens": max_tokens, "stream": True}, timeout, api_key)
     req.add_header("Accept", "text/event-stream")
     acum = AcumuladorSSE()
+    limpo = tool_protocol.Sanitizador()
     partes = []
+    seq_envio = [0]
+    erros_protocolo: list = []
+    sanitizador_fechado = [False]
+
+    def _emitir_seguro(trecho):
+        if not trecho:
+            return
+        seq_envio[0] += 1
+        partes.append(trecho)
+        on_delta(seq_envio[0], trecho)
+
+    def _fechar_sanitizador():
+        if sanitizador_fechado[0]:
+            return list(erros_protocolo)
+        sanitizador_fechado[0] = True
+        resto, erros = limpo.finalizar()
+        erros_protocolo.extend(erros)
+        for erro in erros:
+            log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
+                        erro.get("ferramenta") or "?", erro.get("detalhe") or "")
+        _emitir_seguro(resto)
+        return list(erros_protocolo)
+
     inicio_leitura = time.monotonic()
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             while True:
                 if deve_parar is not None and deve_parar():
+                    _fechar_sanitizador()
                     return {"texto": "".join(partes)[:MAX_TEXTO],
                             "cancelada": True,
                             "latencia_s": round(time.monotonic() - inicio, 2)}
@@ -241,24 +277,29 @@ def chat_stream(base: str, model: str, messages: list, on_delta,
                     continue
                 if not bloco:
                     break
-                for seq, trecho in acum.alimentar(bloco):
-                    partes.append(trecho)
-                    on_delta(seq, trecho)
+                for _seq, trecho in acum.alimentar(bloco):
+                    _emitir_seguro(limpo.alimentar(trecho))
     except urllib.error.HTTPError as exc:
         raise _mapear_http(exc, model) from None
     except BridgeErro:
         raise
     except (OSError, TimeoutError) as exc:
         if partes:
+            _fechar_sanitizador()
             return {"texto": "".join(partes)[:MAX_TEXTO], "parcial": True,
                     "latencia_s": round(time.monotonic() - inicio, 2)}
         raise BridgeErro(f"Falha ao falar com o proxy ({type(exc).__name__}).",
                          "indisponivel") from None
+    _fechar_sanitizador()
     texto = "".join(partes)
     if not texto.strip():
+        if erros_protocolo:
+            raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
+                             "nada foi executado nem exibido.", "protocolo_ferramenta")
         raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
     return {"texto": texto[:MAX_TEXTO],
             "truncada": len(texto) > MAX_TEXTO,
+            "parcial": not acum.concluido,
             "latencia_s": round(time.monotonic() - inicio, 2)}
 
 
