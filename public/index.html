@@ -92,6 +92,7 @@
       <p class="drawer-caption">Seu espaço</p>
       <nav class="drawer-nav" aria-label="Navegação">
         <button class="drawer-item" data-tab="documents" type="button"><svg class="icon"><use href="#i-archive"/></svg> Documentos <span class="drawer-hint" id="docCount">0</span></button>
+        <button class="drawer-item" data-tab="research" type="button"><svg class="icon"><use href="#i-search"/></svg> Pesquisas</button>
         <button class="drawer-item" data-tab="desktop" type="button"><svg class="icon"><use href="#i-monitor"/></svg> Meu PC</button>
         <button class="drawer-item" data-tab="estudos" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Meus Estudos</button>
         <button class="drawer-item" data-tab="settings" data-scroll="memory" type="button"><svg class="icon"><use href="#i-sparkle"/></svg> Memória</button>
@@ -143,6 +144,7 @@
       <section class="page active" id="page-chat" aria-label="Chat">
         <div class="research-bar" id="researchBar" hidden>
           <span class="tiny-dot"></span><span id="researchLabel">Pesquisando…</span>
+          <span class="research-progress" aria-hidden="true"><span id="researchProgressFill"></span></span>
           <button class="mini-tool" id="researchToggle" type="button" aria-expanded="false">Detalhes</button>
           <button class="mini-tool" id="researchCancel" type="button">Cancelar</button>
         </div>
@@ -157,6 +159,13 @@
           <div class="timeline" id="researchSteps"></div>
           <h2 class="section-caption">Fontes consultadas</h2>
           <div class="timeline" id="researchSources"></div>
+          <div class="export-row">
+            <button id="researchViewToggle" class="subtle-button" type="button" aria-expanded="false">Visão estruturada</button>
+            <a id="researchExportMd" class="subtle-button" href="#" hidden download>Baixar MD</a>
+            <a id="researchExportCsv" class="subtle-button" href="#" hidden download>Baixar CSV</a>
+            <a id="researchExportJson" class="subtle-button" href="#" hidden download>Baixar JSON</a>
+          </div>
+          <div class="timeline" id="researchView" hidden></div>
           <div class="export-row">
             <button id="researchResult" class="subtle-button" type="button">Ver resultado no chat</button>
             <button id="researchPause" class="subtle-button" type="button">Pausar</button>
@@ -177,6 +186,25 @@
       <section class="page" id="page-documents" aria-label="Documentos" hidden>
         <div class="section-header"><p class="eyebrow">SEU ESPAÇO</p><h1>Documentos</h1><p class="intro-copy">Consulte os arquivos anexados e continue trabalhando com eles nas conversas.</p></div>
         <div class="doc-list" id="docList" aria-label="Documentos anexados"></div>
+      </section>
+
+      <section class="page" id="page-research" aria-label="Pesquisas" hidden>
+        <div class="section-header">
+          <p class="eyebrow">PESQUISA PROFUNDA</p>
+          <h1>Investigações<span class="brand-dot">.</span></h1>
+          <p class="intro-copy">Planos, evidências, mídia descoberta e exportações reais. Uma imagem ou vídeo encontrado não é prova.</p>
+        </div>
+        <div class="doc-list" id="researchJobList" aria-label="Pesquisas salvas"></div>
+        <div id="researchWorkspace" hidden>
+          <div class="export-row">
+            <button class="subtle-button" id="researchWorkspaceBack" type="button">Voltar às pesquisas</button>
+            <a class="subtle-button" id="researchWorkspaceExportMd" href="#" hidden download>Baixar MD</a>
+            <a class="subtle-button" id="researchWorkspaceExportCsv" href="#" hidden download>Baixar CSV</a>
+            <a class="subtle-button" id="researchWorkspaceExportJson" href="#" hidden download>Baixar JSON</a>
+          </div>
+          <h2 class="section-caption" id="researchWorkspaceTitle">Pesquisa</h2>
+          <div id="researchWorkspaceView" aria-live="polite"></div>
+        </div>
       </section>
 
       <section class="page" id="page-desktop" aria-label="PC" hidden>

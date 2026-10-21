@@ -23,6 +23,24 @@
     }
     catch (_) { return ''; }
   }
+  function URL_RECURSO(u) {
+    const remote = URL_OK(u);
+    if (remote) return remote;
+    const s = S(u, 500);
+    if (s.indexOf('/api/research/export?') !== 0) return '';
+    try {
+      const p = new URL(s, location.origin);
+      if (p.origin !== location.origin || p.pathname !== '/api/research/export') return '';
+      if (p.hash || p.username || p.password) return '';
+      const keys = Array.from(p.searchParams.keys());
+      if (!keys.length || keys.some(k => k !== 'job_id' && k !== 'formato')) return '';
+      const job = p.searchParams.get('job_id') || '';
+      if (!/^[A-Za-z0-9_-]{2,64}$/.test(job)) return '';
+      const fmt = p.searchParams.get('formato') || 'md';
+      if (['md', 'csv', 'json'].indexOf(fmt) < 0) return '';
+      return '/api/research/export?job_id=' + encodeURIComponent(job) + '&formato=' + fmt;
+    } catch (_) { return ''; }
+  }
   function PROVENANCE(value) {
     if (value === undefined || value === null) return [];
     if (!Array.isArray(value) || value.length > 20) throw new JduiErro('sources até 20 referências');
@@ -422,6 +440,159 @@
             id: S(e.id, 40), title: S(e.title, 120), desc: S(e.desc, 500),
             status: sts.indexOf(st) >= 0 ? st : 'todo',
             data: S(e.data, 48), marco: !!e.marco
+          };
+        }),
+        sources: PROVENANCE(p.sources)
+      };
+    },
+    researchplan(p) {
+      const steps = reqList(p, 'steps', 1, 24, 'researchplan.steps 1..24');
+      const ids = {};
+      const map = { pending: 'todo', todo: 'todo', active: 'doing', doing: 'doing',
+        em_andamento: 'doing', pausada: 'todo', done: 'done', feita: 'done',
+        removida: 'skipped', skipped: 'skipped', error: 'error', erro: 'error' };
+      const out = steps.map(step => {
+        if (!step || typeof step !== 'object' || !S(step.id, 40)) throw new JduiErro('researchplan.step id');
+        const id = S(step.id, 40);
+        if (ids[id]) throw new JduiErro('researchplan.step id duplicado');
+        if (!S(step.title)) throw new JduiErro('researchplan.step title');
+        ids[id] = 1;
+        const st = map[String(step.status || 'pending').toLowerCase()] || 'todo';
+        return {
+          id, title: S(step.title, 160), kind: S(step.kind, 24) || 'research',
+          status: st, detail: S(step.detail || step.objetivo_etapa, 500),
+          stop_condition: S(step.stop_condition || step.regra_parada, 300),
+          dependencies: []
+        };
+      });
+      out.forEach(step => {
+        step.dependencies = (Array.isArray(step.dependencies) ? step.dependencies : []);
+      });
+      steps.forEach((step, i) => {
+        const deps = Array.isArray(step.dependencies) ? step.dependencies : [];
+        out[i].dependencies = deps.map(d => S(d, 40)).filter(d => ids[d] && d !== out[i].id).slice(0, 8);
+      });
+      const done = out.filter(s => s.status === 'done').length;
+      const skipped = out.filter(s => s.status === 'skipped').length;
+      const errors = out.filter(s => s.status === 'error').length;
+      const total = out.length;
+      const pct = total ? Math.round(done / total * 1000) / 10 : 0;
+      const stats = (obj, keys) => {
+        const saida = {};
+        if (!obj || typeof obj !== 'object') return saida;
+        keys.forEach(k => {
+          if (obj[k] !== undefined && obj[k] !== null) {
+            saida[k] = Math.min(1000000, Math.max(0, N(obj[k])));
+          }
+        });
+        return saida;
+      };
+      const st = S(p.status, 20).toLowerCase();
+      return {
+        title: S(p.title, 160) || 'Plano de pesquisa',
+        objective: S(p.objective || p.objetivo, 500),
+        mode: S(p.mode || p.modo, 40),
+        status: ['planned', 'running', 'paused', 'completed', 'failed', 'cancelled'].indexOf(st) >= 0 ? st : 'planned',
+        steps: out,
+        progress: { done, total, skipped, errors, percent: pct },
+        budgets: stats(p.budgets, ['buscas', 'paginas', 'timeout_s', 'subs', 'replans',
+          'midia', 'concorrencia', 'max_bytes_pagina']),
+        used: stats(p.used, ['buscas', 'paginas', 'replans']),
+        sources: PROVENANCE(p.sources)
+      };
+    },
+    evidence(p) {
+      const claims = reqList(p, 'claims', 1, 10, 'evidence.claims 1..10');
+      const estados = ['SUPPORTED', 'CONTRADICTED', 'PARTIALLY_SUPPORTED', 'UNVERIFIED', 'INCONCLUSIVE'];
+      const relacoes = ['SUPPORTS', 'PARTIALLY_SUPPORTS', 'CONTRADICTS', 'MENTIONS', 'REQUIRES_VERIFICATION'];
+      const saida = claims.map(claim => {
+        if (!claim || typeof claim !== 'object' || !S(claim.statement || claim.afirmacao)) throw new JduiErro('evidence.claim statement');
+        const estado = String(claim.state || claim.estado || 'UNVERIFIED').toUpperCase();
+        if (estados.indexOf(estado) < 0) throw new JduiErro('evidence.state');
+        const fontes = Array.isArray(claim.sources || claim.fontes) ? (claim.sources || claim.fontes) : [];
+        if (fontes.length > 12) throw new JduiErro('evidence.sources máx 12');
+        const sources = fontes.map(f => {
+          if (!f || typeof f !== 'object') throw new JduiErro('evidence.source');
+          const rel = String(f.relation || 'REQUIRES_VERIFICATION').toUpperCase();
+          if (relacoes.indexOf(rel) < 0) throw new JduiErro('evidence.relation');
+          const title = S(f.title || f.titulo, 160);
+          if (!title) throw new JduiErro('evidence.source título');
+          return {
+            id: S(f.id || f.evidence_id, 80), title, url: URL_OK(f.url),
+            domain: S(f.domain || f.dominio, 120), relation: rel, read: !!f.read,
+            access_state: S(f.access_state, 40),
+            excerpt: S(f.excerpt || f.used_excerpt, 500),
+            published_at: S(f.published_at || f.data, 48)
+          };
+        });
+        if (['SUPPORTED', 'CONTRADICTED', 'PARTIALLY_SUPPORTED'].indexOf(estado) >= 0 && !sources.length) {
+          throw new JduiErro('evidence: estado apoiado exige fonte');
+        }
+        if (estado === 'SUPPORTED' && !sources.some(f => f.relation === 'SUPPORTS' || f.relation === 'PARTIALLY_SUPPORTS')) {
+          throw new JduiErro('evidence: SUPPORTED exige apoio');
+        }
+        if (estado === 'CONTRADICTED' && !sources.some(f => f.relation === 'CONTRADICTS')) {
+          throw new JduiErro('evidence: CONTRADICTED exige contradição');
+        }
+        return {
+          statement: S(claim.statement || claim.afirmacao, 1200), state: estado,
+          method: S(claim.method || claim.metodo, 200),
+          coverage: Math.min(1, Math.max(0, N(claim.coverage || claim.cobertura_lexica))),
+          sources,
+          found_count: sources.length,
+          read_count: sources.filter(f => f.read).length,
+          supporting_count: sources.filter(f => f.relation === 'SUPPORTS' || f.relation === 'PARTIALLY_SUPPORTS').length,
+          contradicting_count: sources.filter(f => f.relation === 'CONTRADICTS').length
+        };
+      });
+      return { title: S(p.title, 160) || 'Evidências por afirmação', claims: saida, sources: PROVENANCE(p.sources) };
+    },
+    media(p) {
+      const itens = reqList(p, 'items', 1, 12, 'media.items 1..12');
+      const tipos = ['image', 'video', 'document'];
+      const acessos = ['metadata_only', 'link_only', 'not_fetched', 'read', 'snippet_only'];
+      const validacoes = ['unverified', 'blocked', 'invalid'];
+      return {
+        title: S(p.title, 160) || 'Mídia descoberta',
+        items: itens.map(item => {
+          if (!item || typeof item !== 'object') throw new JduiErro('media.item');
+          const tipo = S(item.type, 20).toLowerCase();
+          if (tipos.indexOf(tipo) < 0) throw new JduiErro('media.type');
+          const url = URL_OK(item.url);
+          if (!url) throw new JduiErro('media.url real');
+          let acesso = S(item.access_state, 40).toLowerCase();
+          if (acessos.indexOf(acesso) < 0) acesso = 'link_only';
+          let validacao = S(item.validation_state, 40).toLowerCase();
+          if (validacoes.indexOf(validacao) < 0) validacao = 'unverified';
+          const analise = 'not_analyzed';
+          return {
+            type: tipo, title: S(item.title, 160) || (tipo + ' descoberto'),
+            url, thumb: URL_OK(item.thumb || item.thumbnail),
+            source_title: S(item.source_title, 160), source_url: URL_OK(item.source_url),
+            publisher: S(item.publisher, 120), date: S(item.date, 40),
+            rights: S(item.rights, 160) || 'não informado',
+            access_state: acesso, validation_state: validacao, analysis_state: analise,
+            excerpt: S(item.excerpt, 500), alt: S(item.alt || item.title, 200), evidence: false
+          };
+        }),
+        sources: PROVENANCE(p.sources)
+      };
+    },
+    filecard(p) {
+      const files = reqList(p, 'files', 1, 8, 'filecard.files 1..8');
+      const kinds = ['pdf', 'docx', 'xlsx', 'csv', 'md', 'txt', 'json', 'zip'];
+      return {
+        title: S(p.title, 160) || 'Arquivos',
+        files: files.map(f => {
+          if (!f || typeof f !== 'object' || !S(f.name)) throw new JduiErro('filecard.file');
+          const url = URL_RECURSO(f.url);
+          if (!url) throw new JduiErro('filecard.url real');
+          const kind = S(f.kind, 12).toLowerCase();
+          if (kinds.indexOf(kind) < 0) throw new JduiErro('filecard.kind');
+          const st = S(f.status, 20).toLowerCase();
+          return {
+            name: S(f.name, 160), url, kind, size: S(f.size, 40), source: S(f.source, 200),
+            status: ['available', 'generated', 'unverified'].indexOf(st) >= 0 ? st : 'unverified'
           };
         }),
         sources: PROVENANCE(p.sources)
@@ -2351,6 +2522,198 @@
       });
       box.appendChild(node);
       if (e.desc) box.appendChild(det);
+    });
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.researchplan = function (root, props, st, save) {
+    st.open = (st.open && typeof st.open === 'object') ? st.open : {};
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    if (props.objective) box.appendChild(el('div', 'jdui-q', props.objective));
+    const STATUS_ROT = { planned: 'planejado', running: 'em andamento', paused: 'pausada',
+      completed: 'concluída', failed: 'falhou', cancelled: 'cancelada' };
+    const meta = [props.mode ? 'Modo ' + props.mode : '',
+      STATUS_ROT[props.status] || props.status].filter(Boolean).join(' · ');
+    if (meta) box.appendChild(el('div', 'jdui-count', meta));
+    const pct = props.progress.percent;
+    const barra = el('div', 'jdui-prog');
+    const trilho = el('div', 'jdui-progtrilho');
+    const fill = el('div', 'jdui-progfill');
+    fill.style.width = pct + '%';
+    fill.setAttribute('role', 'progressbar');
+    fill.setAttribute('aria-valuenow', String(pct));
+    fill.setAttribute('aria-valuemin', '0');
+    fill.setAttribute('aria-valuemax', '100');
+    fill.setAttribute('aria-label', 'Progresso do plano de pesquisa');
+    trilho.appendChild(fill);
+    barra.appendChild(trilho);
+    barra.appendChild(el('span', 'jdui-count', pct + '% · ' + props.progress.done + '/' + props.progress.total
+      + (props.progress.skipped ? ' · ' + props.progress.skipped + ' pulada(s)' : '')
+      + (props.progress.errors ? ' · ' + props.progress.errors + ' com erro' : '')));
+    box.appendChild(barra);
+    const budget = [];
+    [['buscas', 'buscas'], ['paginas', 'páginas'], ['replans', 'replanos'], ['midia', 'mídias']].forEach(pair => {
+      const key = pair[0];
+      if (props.budgets[key] !== undefined) {
+        budget.push(pair[1] + ' ' + (props.used[key] || 0) + '/' + props.budgets[key]);
+      }
+    });
+    if (budget.length) box.appendChild(el('div', 'jdui-count', 'Orçamento: ' + budget.join(' · ')));
+    const DOT = { todo: '○', doing: '◐', done: '●', skipped: '–', error: '!' };
+    const ROT = { todo: 'Pendente', doing: 'Em andamento', done: 'Concluída',
+      skipped: 'Pulada', error: 'Erro' };
+    props.steps.forEach(e => {
+      const node = el('button', 'jdui-node st-' + e.status + (st.open[e.id] ? ' open' : ''));
+      node.type = 'button';
+      node.setAttribute('aria-expanded', st.open[e.id] ? 'true' : 'false');
+      node.appendChild(el('span', 'jdui-dot', DOT[e.status] || '○'));
+      const tx = el('span', 'jdui-nodetx');
+      tx.appendChild(el('strong', '', e.title));
+      tx.appendChild(el('small', '', [ROT[e.status] || e.status, e.kind].filter(Boolean).join(' · ')));
+      node.appendChild(tx);
+      const det = el('div', 'jdui-q');
+      det.hidden = !st.open[e.id];
+      if (e.detail) det.appendChild(el('div', '', e.detail));
+      if (e.stop_condition) det.appendChild(el('small', '', 'Critério de parada: ' + e.stop_condition));
+      node.addEventListener('click', () => {
+        st.open[e.id] = !st.open[e.id]; save(st);
+        node.classList.toggle('open', !!st.open[e.id]);
+        node.setAttribute('aria-expanded', st.open[e.id] ? 'true' : 'false');
+        det.hidden = !st.open[e.id];
+      });
+      box.appendChild(node);
+      if (e.detail || e.stop_condition) box.appendChild(det);
+    });
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.evidence = function (root, props) {
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const ROT = { SUPPORTED: 'Sustentada', CONTRADICTED: 'Contradita',
+      PARTIALLY_SUPPORTED: 'Parcialmente sustentada', UNVERIFIED: 'Não verificada',
+      INCONCLUSIVE: 'Inconclusiva' };
+    const REL = { SUPPORTS: 'apoia', PARTIALLY_SUPPORTS: 'apoia em parte',
+      CONTRADICTS: 'contradiz', MENTIONS: 'menciona', REQUIRES_VERIFICATION: 'requer verificação' };
+    props.claims.forEach((c, i) => {
+      const card = el('div', 'jdui-srccard');
+      const top = el('div', 'jdui-cardtop');
+      top.appendChild(el('strong', '', (i + 1) + '. ' + c.statement));
+      top.appendChild(el('span', 'jdui-badge st-' + c.state.toLowerCase(), ROT[c.state] || c.state));
+      card.appendChild(top);
+      const counts = c.found_count + ' fonte(s) · ' + c.read_count + ' lida(s) · '
+        + c.supporting_count + ' de apoio · ' + c.contradicting_count + ' contrária(s)';
+      card.appendChild(el('div', 'jdui-ploja', counts + (c.method ? ' · ' + c.method : '')));
+      if (c.sources.length) {
+        const det = document.createElement('details');
+        const sum = document.createElement('summary');
+        sum.textContent = 'Fontes e trechos usados (' + c.sources.length + ')';
+        det.appendChild(sum);
+        c.sources.forEach(f => {
+          const linha = el('div', 'jdui-q');
+          linha.appendChild(el('span', 'jdui-badge', REL[f.relation] || f.relation));
+          linha.appendChild(document.createTextNode(' ' + f.title + (f.read ? ' · lida' : ' · não lida')));
+          if (f.url) {
+            const a = el('a', 'jdui-btn ghost', 'Abrir ↗');
+            a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            linha.appendChild(a);
+          }
+          if (f.excerpt) linha.appendChild(el('div', 'jdui-desc', f.excerpt));
+          det.appendChild(linha);
+        });
+        card.appendChild(det);
+      } else {
+        card.appendChild(el('div', 'jdui-desc', 'Nenhuma fonte específica atribuída a esta afirmação.'));
+      }
+      box.appendChild(card);
+    });
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.media = function (root, props) {
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const TIPO = { image: 'Imagem', video: 'Vídeo', document: 'Documento' };
+    const ACESSO = { metadata_only: 'somente metadados', link_only: 'somente link',
+      not_fetched: 'não buscado', read: 'lido', snippet_only: 'trecho' };
+    const ANALISE = { not_analyzed: 'não analisado', metadata_reviewed: 'metadados revisados',
+      transcript_available: 'transcrição disponível', transcript_read: 'transcrição lida',
+      visually_analyzed: 'analisado visualmente' };
+    props.items.forEach(item => {
+      const card = el('div', 'jdui-pcard');
+      const moldura = el('div', 'jdui-pmedia');
+      if (item.type === 'image' && (item.thumb || item.url)) {
+        const img = document.createElement('img');
+        img.className = 'jdui-pimg';
+        img.src = item.thumb || item.url;
+        img.alt = item.alt || item.title;
+        img.loading = 'lazy';
+        img.referrerPolicy = 'no-referrer';
+        img.addEventListener('error', () => {
+          if (img.parentNode) img.parentNode.replaceChild(el('div', 'jdui-pimg ph', 'Imagem indisponível'), img);
+        });
+        moldura.appendChild(img);
+      } else {
+        moldura.appendChild(el('div', 'jdui-pimg ph',
+          item.type === 'video' ? '▶ Vídeo' : 'Documento'));
+      }
+      card.appendChild(moldura);
+      const corpo = el('div', 'jdui-pbody');
+      corpo.appendChild(el('strong', 'jdui-pnome', item.title));
+      corpo.appendChild(el('span', 'jdui-badge', TIPO[item.type] + ' · não é evidência'));
+      const meta = [item.publisher, item.date].filter(Boolean).join(' · ');
+      if (meta) corpo.appendChild(el('div', 'jdui-ploja', meta));
+      corpo.appendChild(el('div', 'jdui-count',
+        'Acesso: ' + (ACESSO[item.access_state] || item.access_state)
+        + ' · Análise: ' + (ANALISE[item.analysis_state] || item.analysis_state)));
+      if (item.rights && item.rights !== 'não informado') {
+        corpo.appendChild(el('div', 'jdui-count', 'Direitos: ' + item.rights));
+      }
+      if (item.excerpt) corpo.appendChild(el('div', 'jdui-desc', item.excerpt));
+      const acts = el('div', 'jdui-cardacts');
+      const a = el('a', 'jdui-btn ghost',
+        item.type === 'video' ? 'Abrir vídeo no site ↗' : 'Abrir no site de origem ↗');
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      acts.appendChild(a);
+      if (item.source_url) {
+        const s = el('a', 'jdui-btn ghost', 'Página de origem');
+        s.href = item.source_url; s.target = '_blank'; s.rel = 'noopener noreferrer';
+        acts.appendChild(s);
+      }
+      corpo.appendChild(acts);
+      card.appendChild(corpo);
+      box.appendChild(card);
+    });
+    box.appendChild(el('div', 'jdui-source',
+      'Mídia descoberta não é prova: imagens não foram analisadas e vídeos não foram assistidos, transcritos ou analisados.'));
+    renderProvenance(box, props.sources);
+    root.appendChild(box);
+  };
+
+  R.filecard = function (root, props) {
+    const box = el('div', 'jdui-cards');
+    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const ROT = { available: 'disponível', generated: 'gerado', unverified: 'não verificado' };
+    props.files.forEach(f => {
+      const card = el('div', 'jdui-srccard');
+      const top = el('div', 'jdui-cardtop');
+      top.appendChild(el('strong', '', f.name));
+      top.appendChild(el('span', 'jdui-badge', f.kind.toUpperCase() + ' · ' + (ROT[f.status] || f.status)));
+      card.appendChild(top);
+      const meta = [f.size, f.source].filter(Boolean).join(' · ');
+      if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
+      const acts = el('div', 'jdui-cardacts');
+      const a = el('a', 'jdui-btn', 'Baixar/abrir arquivo ↗');
+      a.href = f.url; a.rel = 'noopener noreferrer';
+      if (f.url.indexOf('/api/') === 0) a.setAttribute('download', f.name);
+      else a.target = '_blank';
+      acts.appendChild(a);
+      card.appendChild(acts);
+      box.appendChild(card);
     });
     renderProvenance(box, props.sources);
     root.appendChild(box);

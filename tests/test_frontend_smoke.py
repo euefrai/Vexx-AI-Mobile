@@ -112,7 +112,7 @@ def test_app_js_sintaxe_e_regressoes():
 HARNESS_JDUI = r"""
 const fs = require('fs');
 const src = fs.readFileSync(process.argv[2], 'utf8');
-global.location = { href: 'http://127.0.0.1:8123/' };
+global.location = { href: 'http://127.0.0.1:8123/', origin: 'http://127.0.0.1:8123' };
 global.window = {};
 global.document = { createElement: () => { throw new Error('sem DOM'); } };
 eval(src);
@@ -139,6 +139,30 @@ t('calc-expr', JDUI.calcExpr('2+3*4') === 14 && JDUI.calcExpr('(10-4)/3') === 2)
 let jogou = false;
 try { JDUI.calcExpr('process.exit(1)'); } catch (_) { jogou = true; }
 t('calc-sem-eval', jogou);
+const ev = JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'evidence', props: { claims: [
+    { statement: 'A', state: 'SUPPORTED', sources: [
+      { id: 'e1', title: 'Fonte', relation: 'SUPPORTS', read: true }] }] } }] });
+t('evidence-contadores', ev.ok === true &&
+  ev.msg.blocks[0].props.claims[0].read_count === 1);
+t('evidence-sem-fonte', JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'evidence', props: { claims: [
+    { statement: 'A', state: 'SUPPORTED', sources: [] }] } }] }).ok === false);
+const mid = JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'media', props: { items: [
+    { type: 'image', title: 'Foto', url: 'https://example.com/f.jpg',
+      analysis_state: 'visually_analyzed', evidence: true }] } }] });
+t('media-nao-evidencia', mid.ok === true &&
+  mid.msg.blocks[0].props.items[0].evidence === false &&
+  mid.msg.blocks[0].props.items[0].analysis_state === 'not_analyzed');
+const fc = JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'filecard', props: { files: [
+    { name: 'R', url: '/api/research/export?job_id=rj-abc&formato=md', kind: 'md' }] } }] });
+t('filecard-export', fc.ok === true &&
+  fc.msg.blocks[0].props.files[0].url.indexOf('/api/research/export?') === 0);
+t('filecard-rota-interna', JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'filecard', props: { files: [
+    { name: 'R', url: '/api/admin', kind: 'md' }] } }] }).ok === false);
 """
 
 HARNESS_JDUI_STATE = r"""

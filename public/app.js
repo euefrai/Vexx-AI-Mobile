@@ -89,11 +89,12 @@ function navigate(tab) {
   $('chatOptions').hidden = !chat;
   composer.style.display = chat ? 'flex' : 'none';
   if (tab === 'documents') renderDocs();
-  if (!chat) { $('chatTitle').textContent = {desktop:'Meu PC',activity:'Atividades',estudos:'Estudos',settings:'Ajustes e conta',documents:'Documentos'}[tab] || 'Vexx AI'; $('chatSubtitle').textContent = 'Seu espaço pessoal'; }
+  if (!chat) { $('chatTitle').textContent = {desktop:'Meu PC',activity:'Atividades',estudos:'Estudos',settings:'Ajustes e conta',documents:'Documentos',research:'Pesquisas'}[tab] || 'Vexx AI'; $('chatSubtitle').textContent = 'Seu espaço pessoal'; }
   $('suggestions').style.display = chat ? 'flex' : 'none';
   document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
   if (tab === 'activity') renderTimeline();
   if (tab === 'estudos') renderEstudos();
+  if (tab === 'research') renderPesquisas();
   if (tab === 'settings') { loadMemories(); paintSavedItems(); }
   if (tab === 'chat' || tab === 'estudos') learnSyncOutbox();
   if (tab === 'chat' && db) renderMessages();
@@ -1072,10 +1073,151 @@ function researchAttach(jobId) {
   $('researchToggle').setAttribute('aria-expanded', 'false');
   $('researchSteps').replaceChildren();
   $('researchSources').replaceChildren();
+  const view = $('researchView');
+  if (view) { view.replaceChildren(); view.hidden = true; delete view.dataset.job; }
+  const viewToggle = $('researchViewToggle');
+  if (viewToggle) viewToggle.setAttribute('aria-expanded', 'false');
+  const fill = $('researchProgressFill');
+  if (fill) fill.style.width = '0%';
+  researchAtualizaExport(jobId);
   researchFiltroAtual = 'all';
   researchAplicaFiltro();
-  $('researchLabel').textContent = 'Pesquisando…';
+  $('researchLabel').textContent = 'Pesquisando...';
   researchPoll();
+}
+function researchJobIdAtual() {
+  return (researchJob && researchJob.id) || window._researchLast || '';
+}
+function researchAtualizaExport(jobId) {
+  const id = jobId || researchJobIdAtual();
+  if (!id || !/^[A-Za-z0-9_-]{2,64}$/.test(id)) return;
+  const base = '/api/research/export?job_id=' + encodeURIComponent(id) + '&formato=';
+  [['researchExportMd', 'md'], ['researchExportCsv', 'csv'],
+    ['researchExportJson', 'json']].forEach(pair => {
+    const a = $(pair[0]);
+    if (!a) return;
+    a.href = base + pair[1];
+    a.hidden = false;
+  });
+}
+function researchAtualizaProgresso(s) {
+  const fill = $('researchProgressFill');
+  if (!fill) return;
+  const etapas = (s && Array.isArray(s.etapas)) ? s.etapas : [];
+  const feitas = etapas.filter(e => e.status === 'feita').length;
+  const pct = etapas.length ? Math.round(feitas / etapas.length * 100) : 0;
+  fill.style.width = pct + '%';
+  const bar = fill.parentElement;
+  if (bar) {
+    bar.setAttribute('role', 'progressbar');
+    bar.setAttribute('aria-valuenow', String(pct));
+    bar.setAttribute('aria-valuemin', '0');
+    bar.setAttribute('aria-valuemax', '100');
+    bar.setAttribute('aria-label', 'Progresso da pesquisa: ' + feitas + ' de ' + etapas.length + ' etapas');
+  }
+}
+async function renderPesquisas() {
+  const box = $('researchJobList');
+  if (!box) return;
+  box.replaceChildren();
+  box.textContent = 'Carregando pesquisas…';
+  try {
+    const r = await api('/api/research/jobs');
+    const jobs = Array.isArray(r.jobs) ? r.jobs : [];
+    box.replaceChildren();
+    if (!jobs.length) {
+      box.textContent = 'Nenhuma pesquisa salva ainda. Peça uma investigação no chat.';
+      return;
+    }
+    const ROT = { criada: 'criada', em_andamento: 'em andamento', pausada: 'pausada',
+      concluida: 'concluida', interrompida: 'interrompida', cancelada: 'cancelada',
+      falhou: 'falhou' };
+    jobs.forEach(job => {
+      const card = document.createElement('div');
+      card.className = 'doc-item';
+      const strong = document.createElement('strong');
+      strong.textContent = job.objetivo || 'Pesquisa sem objetivo';
+      card.appendChild(strong);
+      const meta = document.createElement('small');
+      meta.textContent = [ROT[job.status] || job.status || '', job.modo || '',
+        job.atualizado_em || job.criado_em || ''].filter(Boolean).join(' · ');
+      card.appendChild(meta);
+      const acts = document.createElement('div');
+      acts.className = 'doc-actions';
+      const abrir = document.createElement('button');
+      abrir.type = 'button'; abrir.className = 'subtle-button'; abrir.textContent = 'Abrir';
+      abrir.addEventListener('click', () => researchWorkspaceAbrir(job.id));
+      acts.appendChild(abrir);
+      const chat = document.createElement('button');
+      chat.type = 'button'; chat.className = 'subtle-button'; chat.textContent = 'Acompanhar no chat';
+      chat.addEventListener('click', () => { researchAttach(job.id); navigate('chat'); });
+      acts.appendChild(chat);
+      card.appendChild(acts);
+      box.appendChild(card);
+    });
+  } catch (_) {
+    box.replaceChildren();
+    box.textContent = 'Não foi possível carregar as pesquisas. Verifique a conexão com o PC.';
+  }
+}
+function researchWorkspaceExporta(id) {
+  if (!id || !/^[A-Za-z0-9_-]{2,64}$/.test(id)) return;
+  const base = '/api/research/export?job_id=' + encodeURIComponent(id) + '&formato=';
+  [['researchWorkspaceExportMd', 'md'], ['researchWorkspaceExportCsv', 'csv'],
+    ['researchWorkspaceExportJson', 'json']].forEach(pair => {
+    const a = $(pair[0]);
+    if (!a) return;
+    a.href = base + pair[1];
+    a.hidden = false;
+  });
+}
+async function researchWorkspaceAbrir(id) {
+  const lista = $('researchJobList');
+  const painel = $('researchWorkspace');
+  const view = $('researchWorkspaceView');
+  const titulo = $('researchWorkspaceTitle');
+  if (!lista || !painel || !view || !titulo || !id) return;
+  lista.hidden = true; painel.hidden = false;
+  titulo.textContent = 'Carregando pesquisa…';
+  view.replaceChildren();
+  researchWorkspaceExporta(id);
+  try {
+    const st = await api('/api/research/status?job_id=' + encodeURIComponent(id));
+    const resumo = (st && st.resumo) || {};
+    titulo.textContent = resumo.objetivo || 'Pesquisa';
+    const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
+    view.replaceChildren();
+    if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
+    JDUI.mount(view, [r.message], { markdown: renderMarkdown });
+  } catch (_) {
+    view.replaceChildren();
+    const p = document.createElement('p');
+    p.className = 'settings-note';
+    p.textContent = 'Não foi possível montar a visão estruturada. O plano e as fontes continuam disponíveis no chat.';
+    view.appendChild(p);
+  }
+}
+async function researchCarregaView(force) {
+  const box = $('researchView');
+  const id = researchJobIdAtual();
+  if (!box || !id) return;
+  if (!force && box.dataset.job === id && box.hasChildNodes()) { box.hidden = false; return; }
+  box.hidden = false;
+  box.replaceChildren();
+  box.textContent = 'Carregando visão estruturada…';
+  try {
+    const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
+    if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
+    box.replaceChildren();
+    JDUI.mount(box, [r.message], { markdown: renderMarkdown });
+    box.dataset.job = id;
+  } catch (_) {
+    box.replaceChildren();
+    const p = document.createElement('p');
+    p.className = 'jdui-source';
+    p.textContent = 'Visão estruturada indisponível. Use a linha do tempo e as fontes consultadas; nenhum dado foi inventado.';
+    box.appendChild(p);
+  }
 }
 function researchStop() {
   if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
@@ -1142,6 +1284,9 @@ async function researchPollHTTP() {
       ? 'Pesquisa concluída: ' + (s.evidencias || 0) + ' evidências.'
       : 'Pesquisa ' + s.status + '.';
     researchCarregaFontes();
+    researchAtualizaExport(s.id || researchJob.id);
+    const view = $('researchView');
+    if (view && !view.hidden) researchCarregaView(true);
     researchStop();
   }
 }
@@ -1199,9 +1344,16 @@ document.querySelectorAll('#researchFilters button').forEach(b => b.addEventList
 function researchPintaResumo(s, ultimo) {
   s = s || null;
   if (s) {
-    const feitas = (s.etapas || []).filter(e => e.status === 'feita').length;
-    const total = (s.etapas || []).length;
-    $('researchLabel').textContent = 'Pesquisando…' + (total ? ' (' + feitas + '/' + total + ')' : '');
+    window._researchResumo = s;
+    researchAtualizaProgresso(s);
+    const etapas = Array.isArray(s.etapas) ? s.etapas : [];
+    const feitas = etapas.filter(e => e.status === 'feita').length;
+    const total = etapas.length;
+    const fim = RESEARCH_FIM.indexOf(s.status) >= 0;
+    $('researchLabel').textContent = fim
+      ? 'Pesquisa ' + s.status + ': ' + (s.evidencias || 0) + ' evidências.'
+      : 'Pesquisando...' + (total ? ' (' + feitas + '/' + total + ')' : '');
+    if (s.id) researchAtualizaExport(s.id);
     return;
   }
   if (ultimo) $('researchLabel').textContent = researchFase(ultimo);
@@ -1210,7 +1362,12 @@ function researchFinal(ev) {
   if (!researchJob) return;
   const id = researchJob.id;
   api('/api/research/status?job_id=' + encodeURIComponent(id) + '&apos_seq=0')
-    .then(r => researchPintaResumo(r.resumo || {}))
+    .then(r => {
+      researchPintaResumo(r.resumo || {});
+      researchAtualizaExport((r.resumo && r.resumo.id) || id);
+      const view = $('researchView');
+      if (view && !view.hidden) researchCarregaView(true);
+    })
     .catch(() => {})
     .finally(() => {
       const s = $('researchLabel');
@@ -1221,9 +1378,10 @@ function researchFinal(ev) {
 }
 async function researchCarregaFontes() {
   if (!$('researchPanel') || $('researchPanel').hidden) return;
+  const id = researchJobIdAtual();
+  if (!id) return;
   try {
-    const r = await api('/api/research/evidence?job_id=' + encodeURIComponent(
-      (researchJob && researchJob.id) || window._researchLast || ''));
+    const r = await api('/api/research/evidence?job_id=' + encodeURIComponent(id));
     const box = $('researchSources');
     box.replaceChildren();
     (r.evidencias || []).slice(0, 20).forEach(e => {
@@ -1237,9 +1395,16 @@ async function researchCarregaFontes() {
       const st = document.createElement('strong');
       st.appendChild(a);
       wrap.appendChild(st);
+      const acesso = e.access_state === 'metadata_only' ? 'somente metadados'
+        : (e.texto_lido ? 'texto lido' : (e.access_state === 'snippet_only' ? 'trecho' : 'origem'));
       const sm = document.createElement('small');
-      sm.textContent = (e.dominio || '') + ' · ' + (e.status || '');
+      sm.textContent = [e.dominio || '', e.status || '', acesso].filter(Boolean).join(' · ');
       wrap.appendChild(sm);
+      if (e.trecho) {
+        const p = document.createElement('p');
+        p.textContent = String(e.trecho).slice(0, 320);
+        wrap.appendChild(p);
+      }
       d.innerHTML = ic;
       d.appendChild(wrap);
       box.appendChild(d);
@@ -1250,7 +1415,24 @@ $('researchToggle').addEventListener('click', () => {
   const p = $('researchPanel');
   p.hidden = !p.hidden;
   $('researchToggle').setAttribute('aria-expanded', p.hidden ? 'false' : 'true');
-  if (!p.hidden) researchCarregaFontes();
+  if (!p.hidden) { researchCarregaFontes(); researchAtualizaExport(); }
+});
+const researchWorkspaceBack = $('researchWorkspaceBack');
+if (researchWorkspaceBack) researchWorkspaceBack.addEventListener('click', () => {
+  const painel = $('researchWorkspace');
+  const lista = $('researchJobList');
+  if (painel) painel.hidden = true;
+  if (lista) lista.hidden = false;
+  renderPesquisas();
+});
+const researchViewToggle = $('researchViewToggle');
+if (researchViewToggle) researchViewToggle.addEventListener('click', () => {
+  const box = $('researchView');
+  if (!box) return;
+  const abrir = box.hidden;
+  box.hidden = !abrir;
+  researchViewToggle.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+  if (abrir) researchCarregaView(false);
 });
 $('researchCancel').addEventListener('click', async () => {
   if (!researchJob) return;
