@@ -6,7 +6,7 @@
 |---|---|---|
 | Pre-V5.8 baseline | `python -m pytest -q` (2026-10-20) | **929 passed, 4 skipped, 2 warnings in 227.42 s** |
 | Focused research/JDUI/server | `pytest tests/test_v58... tests/test_research... tests/test_jdui... -q` | **156 passed, 1 skipped** |
-| Full local suite after V5.8 + audit snapshot | `python -m pytest -q` | **954 passed, 4 skipped, 2 warnings in 172.87 s** |
+| Full local suite after V5.8 + audit snapshot | `python -m pytest -q` | **954 passed, 4 skipped, 2 warnings in 211.39 s** (final HEAD; an earlier run took 172.87 s with the same counts) |
 | Frozen quality benchmarks | `pytest tests/test_research_quality_lab.py tests/test_bench_pesquisa_v57.py tests/test_evidence_benchmarks.py -q` | **38 passed, 1 skipped** |
 | Frozen search benchmark | `python tools/bench_pesquisa_v57.py --sem-salvar` | **34/34, taxa 1.0** |
 | Security/ownership subset | `test_isolamento`, `test_auth`, `test_exports`, SSRF, V5.8 route/URL tests | **33 passed** |
@@ -17,6 +17,7 @@
 
 Raw outputs:
 
+- `qa-artifacts/v58/full-suite-final.txt` (final HEAD)
 - `qa-artifacts/v58/full-suite.txt`
 - `qa-artifacts/v58/frozen-benchmarks.txt`
 - `qa-artifacts/v58/bench-pesquisa-frozen.txt`

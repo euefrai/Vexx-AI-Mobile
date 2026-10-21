@@ -23,7 +23,7 @@ concurrent audit work as its own.
 The code commits preserve the working behavior verified by:
 
 ```text
-954 passed, 4 skipped, 2 warnings in 172.87s
+954 passed, 4 skipped, 2 warnings in 211.39s (final HEAD)
 38 passed, 1 skipped (frozen quality)
 34/34 frozen search benchmark
 33 passed (security/ownership subset)

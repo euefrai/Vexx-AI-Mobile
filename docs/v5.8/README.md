@@ -26,7 +26,7 @@ Raw evidence is in `qa-artifacts/v58/`. Final report:
 
 ## Short result
 
-- Full local suite: **954 passed, 4 skipped, 2 warnings in 172.87 s**.
+- Full local suite: **954 passed, 4 skipped, 2 warnings in 211.39 s** (final HEAD).
 - Frozen research/search benchmarks: **34/34**, quality-lab suite **38 passed,
   1 skipped**.
 - Focused security suite: **33 passed**.

@@ -43,7 +43,7 @@ das bibliotecas pesadas, reload ao vivo no Chrome, dispositivo físico,
 E2E externo completo, produção/Render e push/deploy. Essas ausências estão
 declaradas nas limitações e não foram mascaradas como sucesso.
 
-**Resultado de testes:** `954 passed, 4 skipped, 2 warnings in 172.87s` na suíte
+**Resultado de testes:** `954 passed, 4 skipped, 2 warnings in 211.39s` na suíte
 local completa. Benchmark congelado de pesquisa: `34/34`. Segurança/isolamento:
 `33 passed`. Chrome E2E: `ok: true`.
 
@@ -371,7 +371,7 @@ exports, auth e isolamento entre donos.
 |---|---|
 | Baseline pré-V5.8 | 929 passed, 4 skipped, 2 warnings, 227,42 s |
 | Alvo pesquisa/JDUI/servidor | 156 passed, 1 skipped |
-| Suíte completa local | **954 passed, 4 skipped, 2 warnings, 172,87 s** |
+| Suíte completa local | **954 passed, 4 skipped, 2 warnings, 211,39 s (HEAD final)** |
 | Benchmark congelado de qualidade | **38 passed, 1 skipped** |
 | Benchmark congelado de pesquisa | **34/34**, taxa 1.0 |
 | Segurança/isolamento | **33 passed** |
@@ -547,7 +547,7 @@ posterior.
 
 ### Evidência bruta
 
-`qa-artifacts/v58/`: suíte completa, benchmarks, segurança, Chrome JSON/texto,
+`qa-artifacts/v58/`: suíte completa (incluindo `full-suite-final.txt`), benchmarks, segurança, Chrome JSON/texto,
 5 screenshots, performance. Baseline: `qa-artifacts/v573/baseline-v58.txt`.
 
 ---
