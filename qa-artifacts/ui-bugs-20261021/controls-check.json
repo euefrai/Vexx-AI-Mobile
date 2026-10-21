@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "savedItemsNotDuplicated": true,
+    "savedCopyFallback": true,
+    "shareButtonFallback": true,
+    "canceledShareDoesNotCopy": true,
+    "failedShareFallsBack": true,
+    "activityIdentity": true,
+    "exportTxt": true,
+    "exportCsv": true,
+    "exportMd": true,
+    "exportBrand": true,
+    "printIdentity": true,
+    "latestQueryWins": true,
+    "historyIdentity": true,
+    "clearedSearchStaysEmpty": true,
+    "delayedTitlesIgnored": true,
+    "accountSwitchIgnoresPending": true,
+    "cacheResetIgnoresPending": true
+  },
+  "errors": [],
+  "note": "Chrome mobile viewport, real app/IndexedDB/downloads. Clipboard, sharing, print transports and search delays simulated; no OS print or clipboard integration claimed."
+}
