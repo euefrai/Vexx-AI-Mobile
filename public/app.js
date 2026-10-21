@@ -1130,7 +1130,7 @@ async function renderPesquisas() {
       return;
     }
     const ROT = { criada: 'criada', em_andamento: 'em andamento', pausada: 'pausada',
-      concluida: 'concluida', interrompida: 'interrompida', cancelada: 'cancelada',
+      concluida: 'conclu?da', interrompida: 'interrompida', cancelada: 'cancelada',
       falhou: 'falhou' };
     jobs.forEach(job => {
       const card = document.createElement('div');
@@ -1190,6 +1190,7 @@ async function researchWorkspaceAbrir(id) {
     if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
     JDUI.mount(view, [r.message], { markdown: renderMarkdown });
   } catch (_) {
+    titulo.textContent = 'Pesquisa';
     view.replaceChildren();
     const p = document.createElement('p');
     p.className = 'settings-note';
