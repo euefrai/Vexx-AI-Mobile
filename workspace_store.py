@@ -97,14 +97,17 @@ def chat_deleted(db, owner, conv):
 
 
 def forget_chat(db, owner, conv):
-    old = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
-                     (owner, conv)).fetchone()
-    record = json.loads(old[0]) if old else dict(id=conv, kind="chat", title="Conversa excluída")
-    now = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
-    # Even a device clock in the future must not prevent an explicit deletion.
-    record.update(deleted=True, updated_at=max(now, record.get("updated_at", "")),
-                  change_id="z" * 100)
-    merge_records(db, [record], owner)
+    with db:
+        if not db.in_transaction:
+            db.execute("BEGIN IMMEDIATE")
+        old = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
+                         (owner, conv)).fetchone()
+        record = json.loads(old[0]) if old else dict(id=conv, kind="chat", title="Conversa excluída")
+        now = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+        # Even a device clock in the future must not prevent an explicit deletion.
+        record.update(deleted=True, updated_at=max(now, record.get("updated_at", "")),
+                      change_id="z" * 100)
+        merge_records(db, [record], owner)
 
 
 def save_ui_states(db, owner, states):

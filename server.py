@@ -18,8 +18,8 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, Response, Uploa
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
-from pydantic import BaseModel, Field
-from workspace_store import WorkspaceBatch
+from pydantic import BaseModel, Field, field_validator
+from workspace_store import WorkspaceBatch, WorkspaceRecord
 
 import env_local
 env_local.carregar_env_local()  # .env local do PC (nunca sobrescreve o sistema)
@@ -216,7 +216,7 @@ class AIRequest(BaseModel):
     scene_state: str = Field(default="", max_length=4000)
     message_id: str = Field(min_length=8, max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
     conversation_id: str = Field(min_length=3, max_length=100)
-    model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_.:/+-]*$")
+    model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_~.:/+-]*$")
     memory: int = Field(default=1, ge=0, le=1)
     local_time: str = Field(default="", max_length=48)
     timezone: str = Field(default="", max_length=80)
@@ -1114,6 +1114,11 @@ class UiStateItem(BaseModel):
     slot: str = Field(min_length=1, max_length=40)
     state: dict = Field(default_factory=dict)
     updated_at: str = Field(min_length=10, max_length=48)
+
+    @field_validator("updated_at")
+    @classmethod
+    def timestamp(cls, value):
+        return WorkspaceRecord.timestamp(value)
 
 
 class UiStateBody(BaseModel):

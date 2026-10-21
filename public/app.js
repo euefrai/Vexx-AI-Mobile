@@ -142,8 +142,10 @@ async function preloadJduiStates(msgIds) {
   jduiStateCache = {};
   if (!db || !msgIds || !msgIds.length) return;
   const want = new Set(msgIds);
+  const generation = storageGeneration, owner = currentUid;
   try {
     const rows = await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll());
+    if (generation !== storageGeneration || owner !== currentUid) return;
     rows.forEach(r => {
       if (r && typeof r.k === 'string' && want.has(r.k.split('#')[0])
           && (r.owner || 'local') === currentUid) jduiStateCache[r.k] = r.state || {};
@@ -152,6 +154,7 @@ async function preloadJduiStates(msgIds) {
 }
 function jduiCtx(row) {
   const contextOwner = currentUid;
+  const contextGeneration = storageGeneration;
   return {
     messageId: row.id,
     conversationId: row.conversation_id,
@@ -163,7 +166,7 @@ function jduiCtx(row) {
     markdown: (t) => renderMarkdown(String(t).replace(/```jdui[\s\S]*?(```|$)/gi, '')),
     loadState: (key) => jduiStateCache[row.id + '#' + key],
     saveState: (key, st) => {
-      if (currentUid !== contextOwner) return;
+      if (currentUid !== contextOwner || contextGeneration !== storageGeneration) return;
       const k = row.id + '#' + key;
       jduiStateCache[k] = st;
       jduiDirty[k] = { k, message_id: row.id, slot: key, state: st, updated_at: new Date().toISOString(), owner: currentUid };
@@ -174,6 +177,7 @@ function jduiCtx(row) {
 }
 async function persistJduiSoon() {
   if (!db) return;
+  const generation = storageGeneration;
   const pending = { ...jduiDirty };
   try {
     const tx = db.transaction(UISTATE, 'readwrite');
@@ -183,6 +187,7 @@ async function persistJduiSoon() {
     await done;
     Object.keys(pending).forEach(k => { if (jduiDirty[k] === pending[k]) delete jduiDirty[k]; });
   } catch (_) {}
+  if (generation !== storageGeneration) return;
   clearTimeout(jduiSyncTimer);
   jduiSyncTimer = setTimeout(syncJduiStates, 4000);
 }
@@ -263,6 +268,9 @@ async function deleteMessagesOf(conv) {
 }
 async function clearStorage() {
   storageGeneration++;
+  clearTimeout(jduiSyncTimer);
+  jduiSyncTimer = null;
+  jduiDirty = {};
   if (workspace) workspace.reset();
   const tx = db.transaction([STORE, SESSIONS, SAVED, UISTATE, META], 'readwrite');
   const done = txDone(tx);
@@ -2164,16 +2172,13 @@ conversation.addEventListener('click', e => {
   const cp = e.target.closest('.code-copy');
   if (cp) {
     const pre = cp.parentElement.querySelector('code');
-    if (pre && navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(() => showToast('Código copiado')).catch(() => showToast('Não foi possível copiar'));
+    if (pre) copyText(pre.textContent, 'Código copiado');
     return;
   }
   const mc = e.target.closest('[data-copy]');
   if (mc) {
     const mid = mc.dataset.copy;
-    allMessages().then(rows => {
-      const r = rows.find(m => m.id === mid);
-      if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
-    });
+    copyMessage(mid);
     return;
   }
   const mn = e.target.closest('[data-menu]');
@@ -2185,10 +2190,7 @@ conversation.addEventListener('click', e => {
     document.querySelectorAll('.msg-menu-pop').forEach(p => p.remove());
     if (!mid) return;
     if (mi.dataset.act === 'copy') {
-      allMessages().then(rows => {
-        const r = rows.find(m => m.id === mid);
-        if (r && navigator.clipboard) navigator.clipboard.writeText(r.text).then(() => showToast('Copiado')).catch(() => showToast('Não foi possível copiar'));
-      });
+      copyMessage(mid);
     } else if (mi.dataset.act === 'save' || mi.dataset.act === 'share'
         || mi.dataset.act === 'download' || mi.dataset.act === 'print') {
       const printWindow = mi.dataset.act === 'print' ? window.open('', '_blank') : null;
@@ -2292,6 +2294,56 @@ function downloadBlob(name, blob) {
   document.body.appendChild(a);
   a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+async function copyText(text, successMessage = 'Copiado') {
+  const value = String(text == null ? '' : text);
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(value);
+      showToast(successMessage);
+      return true;
+    }
+  } catch (_) { /* Try the browser's legacy copy path below. */ }
+  const active = document.activeElement;
+  const selection = window.getSelection();
+  const ranges = selection ? Array.from({length: selection.rangeCount}, (_, i) => selection.getRangeAt(i).cloneRange()) : [];
+  const caret = active && typeof active.selectionStart === 'number'
+    ? [active.selectionStart, active.selectionEnd, active.selectionDirection] : null;
+  const field = document.createElement('textarea');
+  field.value = value;
+  field.readOnly = true;
+  field.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none;font-size:16px';
+  let copied = false;
+  try {
+    document.body.appendChild(field);
+    field.focus({preventScroll: true});
+    field.select();
+    field.setSelectionRange(0, value.length);
+    copied = typeof document.execCommand === 'function' && document.execCommand('copy');
+  } catch (_) { /* Show a useful failure instead of leaving the button silent. */ }
+  finally {
+    field.remove();
+    if (selection && ranges.length) {
+      selection.removeAllRanges();
+      ranges.forEach(range => selection.addRange(range));
+    }
+    if (active && active.isConnected) {
+      active.focus({preventScroll: true});
+      if (caret) active.setSelectionRange(...caret);
+    }
+  }
+  showToast(copied ? successMessage : 'Não foi possível copiar. Selecione o texto e copie manualmente.');
+  return !!copied;
+}
+async function copyMessage(id) {
+  try {
+    const row = await messageById(id);
+    if (!row || (row.owner || 'local') !== currentUid) {
+      showToast('Mensagem indisponível para copiar.');
+      return;
+    }
+    await copyText(row.text);
+  } catch (_) { showToast('Não foi possível ler a mensagem para copiar.'); }
 }
 async function shareText(title, text, allowShare) {
   const payload = String(text || '');
