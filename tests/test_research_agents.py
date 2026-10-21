@@ -252,6 +252,13 @@ def test_searxng_instancia_propria_via_loopback(monkeypatch):
     srv = HTTPServer(("127.0.0.1", 0), _H)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     try:
+        # Explicit fixture transport: only this disposable local HTTP server.
+        # Production now validates DNS again at connection time.
+        import socket
+        def local_connect(address, timeout, source_address=None):
+            assert address == ("127.0.0.1", srv.server_port)
+            return socket.create_connection(address, timeout, source_address)
+        monkeypatch.setattr(research, "_conectar_publico", local_connect)
         sx = ra.ProvedorSearXNG(f"http://127.0.0.1:{srv.server_port}")
         achados, info = ra.buscar_com_fallback([sx], "tema")
         assert len(achados) == 1 and info["provedor"] == "searxng"

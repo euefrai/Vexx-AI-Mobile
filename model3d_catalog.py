@@ -15,7 +15,7 @@ TITULO_PREFIXO = 'Catálogo local V5.6 — '
 # A ordem importa: apelidos específicos antes dos genéricos.
 _ALIASES = (
     ('suporte_celular', r'suporte (?:de |para )?(?:celular|telefone)'),
-    ('motor_v8', r'motor(?: v8)?|\bv8\b'),
+    ('motor_v8', r'\bv8\b'),
     ('xbox', r'xbox'),
     ('playstation', r'playstation|\bps ?[2-5]\b'),
     ('controle', r'controle|gamepad|joystick'),
@@ -37,6 +37,8 @@ def _norm(texto):
 
 def resolver(texto_norm):
     """Apelido de dispositivo no texto já normalizado, ou None."""
+    if re.search(r'\bxbox\b', texto_norm) and not re.search(r'\bxbox series s\b', texto_norm):
+        return 'console'  # Não representar Series X/One/360 como Series S.
     for chave, padrao in _ALIASES:
         if re.search(padrao, texto_norm):
             return chave

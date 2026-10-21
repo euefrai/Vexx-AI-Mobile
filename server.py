@@ -2,6 +2,7 @@
 No chat history or SQLite file is stored on Render.
 """
 import asyncio
+import base64
 import hmac
 import json
 import logging
@@ -134,10 +135,7 @@ def emitir_sessao(response: Response, uid: str, nome: str, sid: str = "") -> dic
     return {"authenticated": True, "csrf": csrf_value(token), "user": nome, "uid": uid}
 
 
-# Revogação server-side: lista de sids revogados no PC (TTL 60s; expiração
-# de 12h limita a janela quando o PC está offline — documentado).
-# `suportado=False` após 2 timeouts: agentes antigos sem sess_revogados não
-# sofrem stall a cada minuto.
+# Revogação no PC; falhas transitórias nunca desabilitam a verificação.
 revogados = {"sids": set(), "ts": 0.0, "suportado": True, "falhas": 0}
 REVOGA_TTL = 60.0
 
@@ -149,19 +147,22 @@ async def revogacao_ok(request: Request) -> str:
     sid = str(data.get("sid") or "")
     if sid:
         agora = time.monotonic()
-        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is not None and revogados["suportado"]:
+        if sid in revogados["sids"]:
+            raise HTTPException(status_code=401, detail="Sessão revogada")
+        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is None:
+            raise HTTPException(503, "Computador offline; não foi possível verificar a sessão")
+        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is not None:
             try:
                 res = await relay.exchange({"type": "sess_revogados"}, timeout=5.0)
                 if res.get("type") == "sess_revogados":
-                    revogados["sids"] = set(res.get("sids", [])[:500])
+                    revogados["sids"] = set(res.get("sids", []))
                     revogados["ts"] = agora
                     revogados["falhas"] = 0
                 else:
-                    revogados["falhas"] += 1
+                    raise HTTPException(503, "Não foi possível verificar a sessão")
             except HTTPException:
                 revogados["falhas"] += 1
-            if revogados["falhas"] >= 2:
-                revogados["suportado"] = False
+                raise HTTPException(503, "Não foi possível verificar a sessão; tente novamente") from None
         if sid in revogados["sids"]:
             raise HTTPException(status_code=401, detail="Sessão revogada")
     return uid
@@ -288,11 +289,9 @@ class AgentRelay:
             if not future.done():
                 future.set_exception(HTTPException(503, "Agente desconectado"))
         for fila in self.streams.values():
-            try:
-                fila.put_nowait({"type": "ai_error", "error": "Agente desconectado",
-                                 "codigo": "desconectado"})
-            except asyncio.QueueFull:
-                pass
+            while not fila.empty():
+                fila.get_nowait()
+            fila.put_nowait({"type": "ai_error", "error": "Agente desconectado", "codigo": "desconectado"})
         for sub in self.research_subs.values():
             try:
                 sub["fila"].put_nowait({"seq": -1, "tipo": "relay_desconectado"})
@@ -507,12 +506,12 @@ async def session(request: Request):
 @app.post("/api/logout")
 async def logout(request: Request, response: Response):
     require_csrf(request)
-    try:
-        sid = str(sessao_dados(request).get("sid") or "")
-        if sid and relay.ws is not None:
-            await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
-    except HTTPException:
-        pass
+    sid = str(sessao_dados(request).get("sid") or "")
+    if sid:
+        result = await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
+        if result.get("type") != "auth_logged_out":
+            raise HTTPException(503, "O PC não confirmou o encerramento da sessão")
+        revogados["sids"].add(sid)
     response.delete_cookie("JULIA_session", path="/")
     return {"ok": True}
 
@@ -924,16 +923,33 @@ async def sync_messages(request: Request, body: SyncBody):
 
 
 @app.get("/api/messages")
-async def messages(request: Request, conversation_id: str = ""):
+async def messages(request: Request, conversation_id: str = "", cursor: str = ""):
     verify_session(request)
     dono = await revogacao_ok(request)
-    result = await relay.exchange({"type": "list", "owner": dono, "limit": 200})
+    before = None
+    if cursor:
+        try:
+            if len(cursor) > 400:
+                raise ValueError()
+            before = json.loads(base64.urlsafe_b64decode(cursor).decode())
+            if not (isinstance(before, list) and len(before) == 2 and
+                    all(isinstance(v, str) for v in before) and len(before[0]) <= 48 and len(before[1]) <= 100):
+                raise ValueError()
+        except (ValueError, UnicodeError):
+            raise HTTPException(422, "Cursor inválido") from None
+    result = await relay.exchange({"type": "list", "owner": dono, "limit": 200,
+                                   "conversation_id": conversation_id, "before": before})
     if result.get("type") != "history":
         raise HTTPException(503, "Histórico não disponível")
     msgs = result.get("messages", [])[:200]
     if conversation_id:
         msgs = [m for m in msgs if m.get("conversation_id") == conversation_id]
-    return {"messages": msgs}
+    next_cursor = ""
+    if len(msgs) == 200:
+        first = msgs[0]
+        next_cursor = base64.urlsafe_b64encode(json.dumps(
+            [first["created_at"], first["id"]]).encode()).decode()
+    return {"messages": msgs, "next_cursor": next_cursor}
 
 
 @app.post("/api/workspace/sync")
@@ -1130,10 +1146,10 @@ async def ui_state_save(request: Request, body: UiStateBody):
 
 
 @app.get("/api/ui-state")
-async def ui_state_list(request: Request):
+async def ui_state_list(request: Request, cursor: str = ""):
     verify_session(request)
     dono = await revogacao_ok(request)
-    result = await relay.exchange({"type": "ui_state_list", "owner": dono},
+    result = await relay.exchange({"type": "ui_state_list", "owner": dono, "cursor": cursor[:200]},
                                   timeout=20.0)
     if result.get("type") != "ui_state_list":
         raise HTTPException(503, "Estados indisponíveis")
@@ -1147,7 +1163,7 @@ async def ui_state_list(request: Request):
                         "updated_at": r.get("updated_at", "")})
         except (ValueError, KeyError, TypeError):
             continue
-    return {"states": out}
+    return {"states": out, "next_cursor": result.get("next_cursor", "")}
 
 
 @app.delete("/api/conversations/{conversation_id}")
@@ -2029,6 +2045,11 @@ async def ai_models(request: Request):
                           for p in provs if isinstance(p, dict)][:20]}
 
 
+@app.post("/api/ai/stream")
+async def ai_stream_post(request: Request, body: AIRequest):
+    return await ai_stream(request, **body.model_dump())
+
+
 @app.get("/api/ai/stream")
 async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
                     model: str = "", memory: str = "1", local_time: str = "",
@@ -2055,13 +2076,15 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
         raise HTTPException(422, "Latitude inválida")
     if longitude is not None and not -180 <= longitude <= 180:
         raise HTTPException(422, "Longitude inválida")
+    if len(relay.streams) >= 8:
+        raise HTTPException(429, "Muitas respostas simultâneas; aguarde uma terminar")
     stream_id = uuid.uuid4().hex
-    fila: asyncio.Queue = asyncio.Queue()
+    fila: asyncio.Queue = asyncio.Queue(maxsize=256)
     relay.streams[stream_id] = fila
     payload = {"type": "ai_stream", "owner": dono,
                "message_id": message_id,
                "conversation_id": conversation_id, "model": model[:120],
-               "memory": "1" if memory != "0" else "0",
+               "memory": "0" if str(memory) == "0" else "1",
                "local_time": local_time, "timezone": timezone, "city": city,
                "latitude": latitude, "longitude": longitude,
                "text": text, "created_at": created_at, "scene_state": scene_state}
@@ -2112,7 +2135,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     yield f"event: cancelled\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'partial': item.get('partial', '')}, ensure_ascii=False)}\n\n"
                     return
                 else:
-                    concluido = True
+                    concluido = item.get("codigo") != "backpressure"
                     log.info("AI_RELAY_ERROR msg=%s total_ms=%d code=%s",
                              message_id[-8:],
                              round((time.monotonic() - request_started) * 1000),
@@ -2168,7 +2191,12 @@ async def agent_ws(websocket: WebSocket):
                     try:
                         fila.put_nowait(body)
                     except asyncio.QueueFull:
-                        pass
+                        # Never silently lose a terminal result or a delta.
+                        while not fila.empty():
+                            fila.get_nowait()
+                        fila.put_nowait(body if body.get("type") != "ai_delta" else {
+                            "type": "ai_error", "codigo": "backpressure",
+                            "error": "Conexão lenta; a resposta parcial ficará salva. Tente novamente."})
                     continue
                 # Sem stream ativa: ai_done/ai_error de POST /api/ai caem no pending.
             if isinstance(body, dict) and body.get("type") == "research_event_push":

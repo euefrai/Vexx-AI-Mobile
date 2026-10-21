@@ -5,7 +5,7 @@
   const newer = (a, b) => !b || a.updated_at > b.updated_at ||
     (a.updated_at === b.updated_at && a.change_id > b.change_id);
   function create(options) {
-    let owner = null, cache = new Map(), loading = null, syncing = null, timer;
+    let owner = null, cache = new Map(), loading = null, syncing = null, timer, generation = 0;
     const prefix = uid => 'workspace:' + uid + ':';
     const request = req => new Promise((resolve, reject) => {
       req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error);
@@ -15,9 +15,11 @@
       if (owner === uid) return;
       if (loading) { await loading; return load(); }
       loading = (async () => {
+        const started = generation;
         const db = options.getDb();
         if (!db) return;
         const rows = await request(db.transaction('meta', 'readonly').objectStore('meta').getAll());
+        if (started !== generation || uid !== options.getUid()) return;
         cache = new Map(rows.filter(r => r.k.startsWith(prefix(uid))).map(r => [key(r.v), r.v]));
         owner = uid;
       })();
@@ -77,15 +79,17 @@
     }
     async function performSync() {
       const uid = options.getUid();
+      const started = generation;
       try {
         // Reload to include writes made by another tab before this sync.
         owner = null;
         await load();
+        if (started !== generation || uid !== options.getUid()) return false;
         const snapshot = [...cache.values()];
         for (let i = 0; i < Math.max(snapshot.length, 1); i += 100) {
           const result = await options.api('/api/workspace/sync', {method: 'POST',
             body: JSON.stringify({records: snapshot.slice(i, i + 100)})});
-          if (uid !== options.getUid()) return;
+          if (started !== generation || uid !== options.getUid()) return false;
           await merge(result.records || [], uid);
         }
         options.onStatus('Projetos sincronizados com o PC');
@@ -97,6 +101,7 @@
       }
     }
     return {load, change, trackSession, sync,
+      reset: () => { generation++; clearTimeout(timer); owner = null; cache = new Map(); },
       get: (kind, id) => cache.get(kind + ':' + id),
       list: kind => [...cache.values()].filter(r => r.kind === kind && !r.deleted),
       overlay: s => {

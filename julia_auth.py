@@ -17,7 +17,7 @@ import hmac
 import re
 import secrets
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 DONO_UID = "local"
 ROLES = ("admin", "user")
@@ -411,8 +411,14 @@ def sessao_valida(db, sid: str):
 
 
 def revogar_sessao(db, sid: str) -> None:
+    if not isinstance(sid, str) or not sid or len(sid) > 200:
+        raise ValueError("SID inválido")
+    now = datetime.now(timezone.utc)
     with db:
-        db.execute("UPDATE user_sessions SET revogada=1 WHERE sid=?", (sid,))
+        # Login legado é emitido no relay: seu SID também precisa de tombstone.
+        db.execute("""INSERT INTO user_sessions(sid,uid,created_at,expira_em,revogada)
+                      VALUES(?,?,?,?,1) ON CONFLICT(sid) DO UPDATE SET revogada=1""",
+                   (sid, DONO_UID, now.isoformat(), (now + timedelta(hours=12)).isoformat()))
 
 
 def revogar_sessoes(db, ator_uid: str, alvo_uid: str) -> None:
@@ -423,12 +429,10 @@ def revogar_sessoes(db, ator_uid: str, alvo_uid: str) -> None:
 
 
 def sids_revogados(db, limite: int = 500) -> list:
-    try:
-        rows = db.execute("SELECT sid FROM user_sessions WHERE revogada=1 "
-                          "ORDER BY rowid DESC LIMIT ?", (limite,)).fetchall()
-        return [r[0] for r in rows]
-    except Exception:
-        return []
+    # Compatibilidade da assinatura; nunca cortar revogações ainda relevantes.
+    rows = db.execute("SELECT sid FROM user_sessions WHERE revogada=1 "
+                      "AND julianday(expira_em)>julianday('now')").fetchall()
+    return [r[0] for r in rows]
 
 
 # ── Convites ──────────────────────────────────────────────────────────

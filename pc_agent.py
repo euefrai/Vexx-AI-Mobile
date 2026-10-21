@@ -312,6 +312,8 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
     owner = dono_valido(owner)
     confirmed = []
     with db:
+        if not db.in_transaction:
+            db.execute("BEGIN IMMEDIATE")
         for m in rows:
             # The relay validates payloads, but the agent independently limits data.
             if not isinstance(m, dict):
@@ -326,6 +328,12 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
                     isinstance(created, str) and 10 <= len(created) <= 48 and
                     m.get("origin") == "mobile" and m.get("role") in ("user", "assistant")):
                 continue
+            if workspace_store.chat_deleted(db, owner, conv):
+                continue
+            existing = db.execute("SELECT conversation_id,role,text,created_at FROM messages "
+                                  "WHERE id=? AND owner_id=? AND origin='mobile'", (mid, owner)).fetchone()
+            if existing and tuple(existing) != (conv, m["role"], txt, created):
+                continue
             db.execute("""INSERT OR IGNORE INTO messages
                 (id, conversation_id, origin, role, text, created_at, received_at, owner_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
@@ -335,13 +343,20 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
     return confirmed
 
 
-def list_messages(db, limit=200, owner=DONO_PADRAO):
+def list_messages(db, limit=200, owner=DONO_PADRAO, conversation_id="", before=None):
     owner = dono_valido(owner)
+    filters, params = "", ["mobile", owner]
+    if conversation_id:
+        filters += " AND conversation_id=?"
+        params.append(conversation_id)
+    if before:
+        filters += " AND (created_at,id)<(?,?)"
+        params.extend(before)
+    params.append(min(max(int(limit), 1), 200))
     rows = db.execute("""SELECT id, conversation_id, origin, role, text, created_at,
                                 COALESCE(model, '')
                          FROM messages WHERE origin=? AND owner_id=?
-                         ORDER BY created_at DESC, id DESC LIMIT ?""",
-                      ("mobile", owner, min(max(int(limit), 1), 200))).fetchall()
+                         """ + filters + " ORDER BY created_at DESC, id DESC LIMIT ?", params).fetchall()
     cols = ["id", "conversation_id", "origin", "role", "text", "created_at", "model"]
     return [dict(zip(cols, row)) for row in reversed(rows)]
 
@@ -2170,6 +2185,10 @@ def ai_estado(db, user_message_id: str, owner=DONO_PADRAO):
 def ai_marcar(db, user_message_id, conversation_id, model, state,
               reply_id=None, response_text=None, error=None, owner=DONO_PADRAO):
     with db:
+        if not db.in_transaction:
+            db.execute("BEGIN IMMEDIATE")
+        if workspace_store.chat_deleted(db, dono_valido(owner), conversation_id):
+            return
         db.execute("""INSERT INTO ai_requests
             (user_message_id, conversation_id, model, state, reply_id,
              response_text, error, created_at, updated_at, owner_id)
@@ -2381,12 +2400,16 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
     if not (isinstance(modelo, str) and 1 <= len(modelo) <= 120):
         return {"error": "Modelo inválido.", "codigo": "invalido"}
     owner = dono_valido(payload.get("owner"))
+    if workspace_store.chat_deleted(db, owner, conv):
+        return {"error": "Conversa excluída.", "codigo": "excluida"}
     if dono_bloqueado(db, owner):
         return {"error": "Conta indisponível.", "codigo": "bloqueada"}
-    identity = db.execute("SELECT conversation_id, role FROM messages WHERE id=? "
+    identity = db.execute("SELECT conversation_id, role, text FROM messages WHERE id=? "
                           "AND origin='mobile' AND owner_id=?", (mid, owner)).fetchone()
-    if identity and identity != (conv, "user"):
+    if identity and identity[:2] != (conv, "user"):
         return {"error": "Identificador da mensagem pertence a outra conversa ou papel.", "codigo": "invalido"}
+    if identity and payload.get("text") and identity[2] != payload["text"]:
+        return {"error": "Este identificador já está associado a outra mensagem.", "codigo": "conflito"}
     previo = ai_estado(db, mid, owner)
     if previo and previo["state"] == "completed":
         return {"replay": True, "reply_id": previo["reply_id"],
@@ -2434,6 +2457,10 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
 def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> None:
     owner = dono_valido(owner)
     with db:
+        if not db.in_transaction:
+            db.execute("BEGIN IMMEDIATE")
+        if workspace_store.chat_deleted(db, owner, conv):
+            return
         db.execute("""INSERT OR IGNORE INTO messages
             (id, conversation_id, origin, role, text, created_at, received_at, model, owner_id)
             VALUES (?, ?, 'mobile', 'assistant', ?, ?, ?, ?, ?)""",
@@ -4902,7 +4929,8 @@ def run():
                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
                     elif req.get("type") == "list":
                         reply = {"request_id": request_id, "type": "history",
-                                 "messages": list_messages(db, req.get("limit", 200), dono)}
+                                 "messages": list_messages(db, req.get("limit", 200), dono,
+                                     str(req.get("conversation_id", "")), req.get("before"))}
                     elif req.get("type") == "workspace_sync":
                         try:
                             workspace_store.merge_records(db, req.get("records", []), dono)
@@ -5186,49 +5214,19 @@ def run():
                     elif req.get("type") == "research_job_pause":
                         reply = {"request_id": request_id, **rjob_pause(db, req, dono)}
                     elif req.get("type") == "ui_state_save":
-                        salvos = 0
-                        with db:
-                            for s in req.get("states", [])[:300]:
-                                try:
-                                    k = str(s.get("k", ""))[:200]
-                                    if not (k and isinstance(s.get("state"), str)
-                                            and len(s["state"]) <= 8000):
-                                        continue
-                                    ex = db.execute("SELECT owner_id FROM ui_state WHERE k=?",
-                                                    (k,)).fetchone()
-                                    if ex and ex[0] != dono:
-                                        continue  # chave de outro dono: não toca
-                                    db.execute("""INSERT INTO ui_state
-                                        (k, message_id, slot, state, updated_at, owner_id)
-                                        VALUES (?, ?, ?, ?, ?, ?)
-                                        ON CONFLICT(k) DO UPDATE SET
-                                        state=excluded.state, updated_at=excluded.updated_at""",
-                                        (k, str(s.get("message_id", ""))[:100],
-                                         str(s.get("slot", ""))[:40], s["state"],
-                                         str(s.get("updated_at", agora_iso()))[:48], dono))
-                                    salvos += 1
-                                except Exception:
-                                    continue
-                        reply = {"request_id": request_id, "type": "ui_state_saved",
-                                 "saved": salvos}
+                        salvos = workspace_store.save_ui_states(db, dono, req.get("states", []))
+                        reply = {"request_id": request_id, "type": "ui_state_saved", "saved": salvos}
                     elif req.get("type") == "ui_state_list":
-                        rows = db.execute("SELECT k, message_id, slot, state, updated_at "
-                                          "FROM ui_state WHERE owner_id=? "
-                                          "ORDER BY updated_at DESC LIMIT 500", (dono,)).fetchall()
-                        reply = {"request_id": request_id, "type": "ui_state_list",
-                                 "states": [{"k": k, "message_id": m, "slot": s,
-                                             "state": st, "updated_at": u}
-                                            for k, m, s, st, u in rows]}
+                        rows = workspace_store.ui_state_page(db, dono, str(req.get("cursor", ""))[:200])
+                        reply = {"request_id": request_id, "type": "ui_state_list", "states": rows,
+                                 "next_cursor": rows[-1]["k"] if len(rows) == 200 else ""}
                     elif req.get("type") == "conv_forget":
                         conv = req.get("conversation_id", "")
                         n = 0
                         if isinstance(conv, str) and 3 <= len(conv) <= 100:
-                            with db:
-                                cur = db.execute("DELETE FROM messages WHERE origin='mobile' "
-                                                 "AND owner_id=? AND conversation_id=?", (dono, conv))
-                                n = cur.rowcount or 0
-                                db.execute("DELETE FROM ai_requests WHERE owner_id=? AND conversation_id=?",
-                                           (dono, conv))
+                            n = db.execute("SELECT count(*) FROM messages WHERE origin='mobile' "
+                                           "AND owner_id=? AND conversation_id=?", (dono, conv)).fetchone()[0]
+                            workspace_store.forget_chat(db, dono, conv)
                         log.info("conversa esquecida no PC: %s (%d msgs)", conv, n)
                         reply = {"request_id": request_id, "type": "conv_forgotten",
                                  "deleted": n}
@@ -5314,6 +5312,10 @@ def run():
                             reply = {"request_id": request_id, "type": "ai_error",
                                      "error": str(exc), "codigo": exc.codigo}
                     elif req.get("type") == "ai_stream":
+                        if len(cancelados) >= 8 or request_id in cancelados:
+                            enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
+                                "codigo": "ocupado", "error": "Muitas respostas simultâneas; aguarde."})
+                            continue
                         sessao = SessaoStream()
                         cancelados[request_id] = sessao
                         threading.Thread(target=ai_stream_worker,

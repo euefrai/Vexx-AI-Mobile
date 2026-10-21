@@ -298,3 +298,5 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .m3-lesson-controls button { flex: 1; }
 .model3d button:disabled { opacity: .45; cursor: default; }
 @media(max-width: 480px) { .model3d:has(.m3-lesson) .m3-stage { height: 320px; } .m3-tools:has(.m3-secondary) > button:not([hidden]) { flex: 1 0 20%; font-size: .8rem; padding: 6px; } }
+
+.svg-art img { max-width: 100%; height: auto; }

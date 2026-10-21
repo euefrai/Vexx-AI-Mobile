@@ -121,3 +121,16 @@ EvidenceGraph também passou com o DOM de teste atualizado para representar `dat
 Não houve push/deploy. O ambiente descartável de navegador/servidor/agente foi encerrado.
 Arquivos e testes acrescentados por outro processo após a coleta desta suíte não
 podem ser considerados cobertos por essa contagem.
+
+
+## Complemento de 20/10/2026 — correções autorizadas da auditoria
+
+Foram implementadas correções de sincronização, histórico paginado, exclusão durável,
+conflitos de IDs, estados JDUI, JSON persistente, segurança SVG/sessões/DNS e limites SSE.
+Relatório detalhado: [RELATORIO_CORRECOES_AUDITORIA_2026-10-20.md](RELATORIO_CORRECOES_AUDITORIA_2026-10-20.md).
+
+Validação final: **941 passaram, 4 pulados e 2 avisos**. Chrome local verificou
+composer POST, persistência, logout/replay, limpeza de cache, SVG e navegação em
+320/390/1280 px. Não equivale a teste em aparelho físico ou latência de LLM real.
+Sem push/deploy. Dados e credenciais reais preservados. Riscos operacionais restantes
+e próximo passo estão documentados no relatório detalhado.

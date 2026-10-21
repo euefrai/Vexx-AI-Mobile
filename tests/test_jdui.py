@@ -240,7 +240,7 @@ def test_relay_ui_state_via_agente_fake():
             req = pega('ui_state_list')
             ws.send_json({'request_id': req['request_id'], 'type': 'ui_state_list', 'states': []})
             t.join(timeout=8)
-            assert out['l'].json() == {'states': []}
+            assert out['l'].json() == {'states': [], 'next_cursor': ''}
 
             bad = client.post('/api/ui-state', json={'states': []}, headers={'X-CSRF-Token': csrf})
             assert bad.status_code == 422

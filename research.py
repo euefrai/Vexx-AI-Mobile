@@ -17,9 +17,11 @@ conteúdo externo sempre tratado como dado não confiável (nunca comando).
 Cache e runs são por dono (nunca misturam usuários).
 """
 import hashlib
+import http.client
 import html as _html
 import ipaddress
 import json
+import json_store
 import re
 import socket
 import time
@@ -126,9 +128,54 @@ class _SemRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
+def _conectar_publico(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT, source_address=None):
+    """Validate and connect the same resolved addresses; never resolve twice."""
+    host, port = address
+    infos = socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM)
+    if not infos or any(not ipaddress.ip_address(info[4][0]).is_global for info in infos):
+        raise ResearchErro("Alvo não público bloqueado.", "ssrf")
+    last_error = None
+    for family, socktype, proto, _, target in infos:
+        connection = socket.socket(family, socktype, proto)
+        try:
+            if timeout is not socket._GLOBAL_DEFAULT_TIMEOUT:
+                connection.settimeout(timeout)
+            if source_address:
+                connection.bind(source_address)
+            connection.connect(target)
+            return connection
+        except OSError as exc:
+            last_error = exc
+            connection.close()
+    raise last_error or OSError("Nenhum endereço disponível")
+
+
+class _HTTPPublico(http.client.HTTPConnection):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._create_connection = _conectar_publico
+
+
+class _HTTPSPublico(http.client.HTTPSConnection):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._create_connection = _conectar_publico
+        # HTTPSConnection retains the original hostname for SNI/cert validation.
+
+
+class _HTTPHandlerPublico(urllib.request.HTTPHandler):
+    def http_open(self, req):
+        return self.do_open(_HTTPPublico, req)
+
+
+class _HTTPSHandlerPublico(urllib.request.HTTPSHandler):
+    def https_open(self, req):
+        return self.do_open(_HTTPSPublico, req, context=self._context)
+
+
 def _abrir(url: str, timeout: float, user_agent: str = ""):
-    opener = urllib.request.build_opener(_SemRedirect, urllib.request.HTTPHandler,
-                                         urllib.request.HTTPSHandler)
+    opener = urllib.request.build_opener(_SemRedirect, urllib.request.ProxyHandler({}),
+                                         _HTTPHandlerPublico, _HTTPSHandlerPublico)
     req = urllib.request.Request(
         url, headers={"User-Agent": user_agent or "Mozilla/5.0 (JuliaResearch/1.0)"})
     return opener.open(req, timeout=timeout)
@@ -669,7 +716,7 @@ def cache_put(db, owner: str, provedor: str, consulta: str, resposta: dict, ttl:
         db.execute("INSERT OR REPLACE INTO research_cache (chave, owner_id, provedor, consulta,"
                    " resposta, criado_em, expira_em) VALUES (?,?,?,?,?,?,?)",
                    (chave_cache(owner, provedor, consulta), owner, provedor,
-                    normalizar_consulta(consulta)[:200], json.dumps(resposta, ensure_ascii=False)[:60000],
+                    normalizar_consulta(consulta)[:200], json_store.encode(resposta, 60000),
                     agora_iso(), datetime.fromtimestamp(time.time() + ttl, timezone.utc).isoformat()))
 
 
@@ -1245,7 +1292,7 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
                    " divergencias, estado, criado_em, concluido_em) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                    (rid, owner, conv or "", "profunda", normalizar_consulta(consulta)[:200],
                     json.dumps(subs, ensure_ascii=False),
-                    json.dumps(saida["fontes"], ensure_ascii=False)[:60000],
+                    json_store.encode(saida["fontes"], 60000),
                     json.dumps(saida["divergencias"], ensure_ascii=False),
                     "interrompida" if deve_parar is not None and deve_parar() else "concluida",
                     agora_iso(), agora_iso()))

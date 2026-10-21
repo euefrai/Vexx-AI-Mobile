@@ -1,0 +1,43 @@
+{
+  "history": {
+    "stored_old_chat": 1,
+    "api_returned": 0
+  },
+  "deleted_chat_resync": {
+    "before": 0,
+    "after_stale_sync": 1,
+    "tombstone_still_deleted": true
+  },
+  "conflicting_message_ack": {
+    "acknowledged": true,
+    "stored_matches_submitted": false
+  },
+  "revocation_limit": {
+    "stored": 501,
+    "returned": 500,
+    "oldest_revoked_included": false
+  },
+  "uncommitted_media_persistence": {
+    "saved_items": 1,
+    "loaded_items": 0
+  },
+  "research_json_truncation": {
+    "valid_input_json_length": 61015,
+    "load_error": "pesquisa corrompida"
+  },
+  "revocation_after_timeouts": {
+    "allowed_requests": 3,
+    "rpc_calls": 2,
+    "checks_enabled": false
+  },
+  "model3d_mismatch": [
+    {
+      "question": "Mostre um Xbox Series X em 3D",
+      "title": "Console compacto branco (aproxima\u00e7\u00e3o do Xbox Series S)"
+    },
+    {
+      "question": "Mostre um motor el\u00e9trico em 3D",
+      "title": "Motor V8 ilustrativo"
+    }
+  ]
+}

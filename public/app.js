@@ -11,6 +11,7 @@ const STORE = 'messages';
 const SESSIONS = 'sessions';
 const PREVIEW_MODE = location.protocol === 'file:';
 let db = null;
+let storageGeneration = 0;
 let workspace = null;
 let csrf = '';
 let authenticated = false;
@@ -188,12 +189,19 @@ async function persistJduiSoon() {
 async function syncJduiStates() {
   if (!authenticated || !pcOnline || !db) return;
   const owner = currentUid;
+  const generation = storageGeneration;
   try {
     const rows = (await reqPromise(db.transaction(UISTATE, 'readonly').objectStore(UISTATE).getAll()))
       .filter(r => (r.owner || 'local') === currentUid);
-    if (rows.length) await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(-300) }) });
-    const remote = await api('/api/ui-state');
-    if (owner !== currentUid || !authenticated) return;
+    for (let i = 0; i < rows.length; i += 100) {
+      if (generation !== storageGeneration || owner !== currentUid || !authenticated) return;
+      await api('/api/ui-state', { method: 'POST', body: JSON.stringify({ states: rows.slice(i, i + 100) }) });
+    }
+    let stateCursor = '';
+    const stateCursors = new Set();
+    do {
+    const remote = await api('/api/ui-state' + (stateCursor ? '?cursor=' + encodeURIComponent(stateCursor) : ''));
+    if (generation !== storageGeneration || owner !== currentUid || !authenticated) return;
     const tx = db.transaction(UISTATE, 'readwrite');
     const done = txDone(tx);
     const store = tx.objectStore(UISTATE);
@@ -207,6 +215,10 @@ async function syncJduiStates() {
       } catch (_) {}
     }
     await done;
+    stateCursor = remote.next_cursor || '';
+    if (stateCursor && stateCursors.has(stateCursor)) throw Error('Cursor de estado repetido');
+    stateCursors.add(stateCursor);
+    } while (stateCursor);
     if (!aiAbort) await renderMessages();
   } catch (_) { /* offline: tenta na próxima */ }
 }
@@ -250,9 +262,13 @@ async function deleteMessagesOf(conv) {
   await done;
 }
 async function clearStorage() {
-  const tx = db.transaction([STORE, SESSIONS, SAVED], 'readwrite');
+  storageGeneration++;
+  if (workspace) workspace.reset();
+  const tx = db.transaction([STORE, SESSIONS, SAVED, UISTATE, META], 'readwrite');
   const done = txDone(tx);
   tx.objectStore(STORE).clear(); tx.objectStore(SESSIONS).clear(); tx.objectStore(SAVED).clear();
+  tx.objectStore(UISTATE).clear(); tx.objectStore(META).clear();
+  jduiStateCache = {};
   await done;
 }
 async function allSessions() {
@@ -445,6 +461,11 @@ function sanitizeSvg(raw) {
   s = s.replace(/((?:href|xlink:href)\s*=\s*')\s*javascript:[^']*'/gi, "$1#'");
   return s.trim();
 }
+// SVG is an image document: never insert model markup into the application DOM.
+function renderSvg(raw) {
+  const clean = sanitizeSvg(raw);
+  return clean ? '<div class="svg-art"><img alt="Ilustração SVG" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(clean).replace(/'/g, '%27') + '"></div>' : '<p>[desenho vazio]</p>';
+}
 let pendingJdui = [];
 let duoEmitted = false;
 let lastAssistantId = '';
@@ -573,8 +594,7 @@ function renderMarkdown(text) {
     const svgPh = ln.match(/ SVG(\d+) /);
     if (svgPh && svgs[Number(svgPh[1])] !== undefined) {
       flushList(); flushBq(); flushTable();
-      const clean = sanitizeSvg(svgs[Number(svgPh[1])]);
-      html.push(clean ? '<div class="svg-art">' + clean + '</div>' : '<p>[desenho vazio]</p>');
+      html.push(renderSvg(svgs[Number(svgPh[1])]));
       continue;
     }
     const jPh = ln.match(/\x00JDUI(\d+)\x00/);
@@ -1386,7 +1406,7 @@ $('loginForm').addEventListener('submit', async e => {
 });
 $('logoutButton').addEventListener('click', async () => {
   stopAI();
-  try { await api('/api/logout', { method: 'POST' }); } catch (_) {}
+  try { await api('/api/logout', { method: 'POST' }); } catch (_) { showToast('O PC não confirmou a saída. Reconecte e tente novamente.'); return; }
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
   $('loginError').textContent = ''; $('regError').textContent = '';
@@ -1534,38 +1554,54 @@ async function checkStatus() {
 async function syncAndRefresh() {
   if (busy || !authenticated || !pcOnline || !db) return [];
   busy = true;
+  const owner = currentUid;
+  const generation = storageGeneration;
   const conf = [];
   try {
     // Resolve names and project membership before importing message-only history.
     // Otherwise a fresh device could publish an inferred title over a real edit.
     const workspaceReady = workspace ? await workspace.sync() : false;
+    if (generation !== storageGeneration || owner !== currentUid || !authenticated) return [];
     for (let guard = 0; guard < 5 && pcOnline; guard++) {
       const rem = ownRows(await allMessages()).filter(m => m.role === 'user' && m.status === 'pending').slice(0, 100);
+      if (generation !== storageGeneration || owner !== currentUid || !authenticated) return [];
       if (!rem.length) break;
       const clean = rem.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at }));
       const r = await api('/api/sync', { method: 'POST', body: JSON.stringify({ messages: clean }) });
+      if (generation !== storageGeneration || owner !== currentUid || !authenticated) return [];
       const ok = new Set(r.confirmed_ids || []);
       if (!ok.size) break;
       const batch = rem.filter(m => ok.has(m.id));
-      await storeMessages(batch.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at, status: 'synced', want_ai: true })));
+      await storeMessages(batch.map(m => ({ id: m.id, conversation_id: m.conversation_id, origin: 'mobile', role: 'user', text: m.text, created_at: m.created_at, status: 'synced', want_ai: true, owner })));
       conf.push(...batch);
     }
-    const remote = await api('/api/messages');
+    const conversations = new Map();
+    let historyCursor = '';
+    const historyCursors = new Set();
+    do {
+    const remote = await api('/api/messages' + (historyCursor ? '?cursor=' + encodeURIComponent(historyCursor) : ''));
+    if (generation !== storageGeneration || owner !== currentUid || !authenticated) return [];
     const adds = [];
     for (const m of remote.messages || []) {
       if (!m || typeof m.id !== 'string' || typeof m.text !== 'string' || m.origin !== 'mobile') continue;
       const cid = m.conversation_id || activeConversation;
       if (isDeleted(cid)) continue; // excluída: não ressuscita
-      adds.push({ id: m.id, conversation_id: cid, origin: 'mobile', role: m.role === 'assistant' ? 'assistant' : 'user', text: m.text, created_at: m.created_at, status: 'synced', model: m.model || '' });
+      adds.push({ id: m.id, conversation_id: cid, origin: 'mobile', role: m.role === 'assistant' ? 'assistant' : 'user', text: m.text, created_at: m.created_at, status: 'synced', model: m.model || '', owner });
     }
-    if (adds.length) {
-      await storeMessages(adds);
-      const convs = [...new Set(adds.map(a => a.conversation_id))];
-      for (const c of convs) {
-        const rows = adds.filter(m => m.conversation_id === c).sort((a,b) => a.created_at.localeCompare(b.created_at));
-        const first = rows.find(m => m.role === 'user');
-        await touchSession(c, first ? titleFrom(first.text) : undefined, rows[rows.length - 1]?.created_at, workspaceReady);
-      }
+    await storeMessages(adds);
+    for (const m of adds) {
+      const summary = conversations.get(m.conversation_id) || {first: null, last: ''};
+      if (m.role === 'user' && (!summary.first || m.created_at < summary.first.created_at)) summary.first = m;
+      if (m.created_at > summary.last) summary.last = m.created_at;
+      conversations.set(m.conversation_id, summary);
+    }
+    historyCursor = remote.next_cursor || '';
+    if (historyCursor && historyCursors.has(historyCursor)) throw Error('Cursor de histórico repetido');
+    historyCursors.add(historyCursor);
+    } while (historyCursor);
+    for (const [conv, summary] of conversations) {
+      if (generation !== storageGeneration || owner !== currentUid || !authenticated) return [];
+      await touchSession(conv, summary.first ? titleFrom(summary.first.text) : undefined, summary.last, workspaceReady);
     }
     await renderSessions($('sessionSearch').value);
     if (!aiAbort) await renderMessages();
@@ -1906,7 +1942,7 @@ async function runAIRequest(userRow, options, timing) {
   }
   try {
     timing.requestStartedAt = performance.now();
-    const streamRequest = fetch('/api/ai/stream?' + qs.toString(), { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
+    const streamRequest = fetch('/api/ai/stream', { method: 'POST', body: JSON.stringify({ ...Object.fromEntries(qs), memory: memoryOn() ? 1 : 0 }), headers: { Accept: 'text/event-stream', 'Content-Type': 'application/json', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: aiAbort.signal });
     if (typeof options.onStarted === 'function') Promise.resolve(options.onStarted()).catch(() => {});
     if (userRow.conversation_id === activeConversation) {
       renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
@@ -2360,13 +2396,14 @@ $('shareConversation').addEventListener('click', async () => {
   if (!db) { showToast('Cache indisponível'); return; }
   const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
   if (!rows.length) { showToast('Nada para compartilhar'); return; }
-  const text = rows.map(m => (m.role === 'assistant' ? 'Júlia' : 'Você') + ': ' + (m.text || '')).join('\n\n');
+  const text = rows.map(m => (m.role === 'assistant' ? 'Lucas' : 'Você') + ': ' + (m.text || '')).join('\n\n');
   const session = (await ownSessions()).find(s => s.id === activeConversation);
-  await shareText((session && session.title) || 'Conversa com Júlia', text, true);
+  await shareText((session && session.title) || 'Conversa com Lucas', text, true);
 });
 $('clearCache').addEventListener('click', async () => {
   if (!window.confirm('Apagar todo o cache? Esta ação não pode ser desfeita.')) return;
   await clearStorage();
+  if (workspace) workspace.reset();
   ['city', 'location', 'enabled'].forEach(key => {
     try { localStorage.removeItem(localContextKey(key)); } catch (_) {}
   });

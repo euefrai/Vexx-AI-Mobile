@@ -259,6 +259,11 @@ def test_e2e_local_pipeline(monkeypatch):
     srv = HTTPServer(("127.0.0.1", 0), _H)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     try:
+        import socket
+        def local_connect(address, timeout, source_address=None):
+            assert address == ("127.0.0.1", srv.server_port)
+            return socket.create_connection(address, timeout, source_address)
+        monkeypatch.setattr(research, "_conectar_publico", local_connect)
         base = f"http://127.0.0.1:{srv.server_port}/busca?q="
         db = _db()
         res = research.pesquisa_rapida(

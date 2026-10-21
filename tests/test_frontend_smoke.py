@@ -53,7 +53,7 @@ t('widget-iframe-sem-execucao', hw.includes('<iframe') && hw.includes('sandbox="
 t('widget-toggle', hw.includes('Ver c'));
 t('widget-no-naked-button', !hw.includes('<button onclick'));
 const hs = renderMarkdown('veja:\n```svg\n<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><rect width="100" height="50" fill="red" onclick="evil()"/><script>alert(1)</script></svg>\n```');
-t('svg-inline', hs.includes('<svg') && hs.includes('<rect'));
+t('svg-isolated-image', hs.includes('data:image/svg+xml') && hs.includes('%3Crect') && !hs.includes('<svg'));
 t('svg-no-script', !hs.includes('<script'));
 t('svg-no-onclick', !hs.includes('onclick'));
 const hi = renderMarkdown('olha ![gato fofo](https://example.com/gato.jpg) aqui');

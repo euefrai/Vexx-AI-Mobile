@@ -41,3 +41,20 @@ para concluir desempenho da IA.
 - Não declarar validação visual completa dos 19 componentes: nesta rodada, o teste
   visual de interação concentrou-se em quiz, tabela e EvidenceGraph.
 - Sem push/deploy. Para implantação futura, atualizar frontend, servidor e agente juntos.
+
+
+## Atualização de 20/10/2026 — auditoria e correções autorizadas
+
+- Base desta rodada: HEAD `607ff1f`; alterações preexistentes de mídia/pesquisa preservadas.
+- A01–A15 receberam correções incrementais; GET SSE legado permanece compatível e
+  registros antigos já corrompidos não foram alterados. R01/R02 receberam proteções.
+- Suíte final: **941 passed, 4 skipped, 2 warnings**, 214,70 s.
+- Chrome: composer POST, relógio determinístico, SQLite, SVG isolado, drawer clicável
+  em 320/390/1280 px, cache limpo e cookie revogado rejeitado. Evidências em
+  `qa-artifacts/correcoes-20261020/`. Sem inferência Hermes real no preview.
+- Relatório: `RELATORIO_CORRECOES_AUDITORIA_2026-10-20.md`. Sem push/deploy.
+- Próximo passo exato: reproduzir R03 em banco descartável, medindo resumo/upload de
+  documento em paralelo com `/api/sync`; implementar fila limitada com conexão SQLite
+  própria somente depois de medir o bloqueio, mantendo autenticação e cancelamento.
+- Depois: benchmark de histórico grande e Android/iOS reais; lock de dependências,
+  restauração completa e política de mídia externa continuam pendentes (R04–R08).

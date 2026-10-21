@@ -13,6 +13,7 @@ Tabelas (owner em tudo; PC é o definitivo):
 """
 import hashlib
 import json
+import json_store
 import re
 import threading
 import time
@@ -70,7 +71,7 @@ def criar_tabelas(db) -> None:
         orcamento TEXT NOT NULL DEFAULT '{}', usados TEXT NOT NULL DEFAULT '{}',
         achados TEXT NOT NULL DEFAULT '[]', pendencias TEXT NOT NULL DEFAULT '[]',
         erros TEXT NOT NULL DEFAULT '[]', criado_em TEXT NOT NULL,
-        atualizado_em TEXT NOT NULL)""")
+        atualizado_em TEXT NOT NULL, midia TEXT NOT NULL DEFAULT '[]')""")
     db.execute("""CREATE TABLE IF NOT EXISTS research_events (
         id INTEGER PRIMARY KEY AUTOINCREMENT, job_id TEXT NOT NULL,
         owner_id TEXT NOT NULL DEFAULT 'local', seq INT NOT NULL DEFAULT 0,
@@ -91,7 +92,8 @@ def criar_tabelas(db) -> None:
     for _col, _ddl in (("investigacoes", "TEXT NOT NULL DEFAULT '[]'"),
                        ("auditoria", "TEXT NOT NULL DEFAULT '{}'"),
                        ("ajustes", "TEXT NOT NULL DEFAULT '{}'"),
-                       ("structured_analysis", "TEXT NOT NULL DEFAULT '[]'")):
+                       ("structured_analysis", "TEXT NOT NULL DEFAULT '[]'"),
+                       ("midia", "TEXT NOT NULL DEFAULT '[]'")):
         try:
             cols = [c[1] for c in db.execute("PRAGMA table_info(research_jobs)").fetchall()]
             if _col not in cols:
@@ -129,7 +131,7 @@ def emitir(db, job_id: str, owner: str, agente: str, tipo: str, status: str = "o
                    " status, descricao, meta) VALUES (?,?,?,?,?,?,?,?,?)",
                    (job_id, owner, ev["seq"], ev["ts"], ev["agente"], ev["tipo"],
                     ev["status"], ev["descricao"],
-                    json.dumps(ev["meta"], ensure_ascii=False)[:4000]))
+                    json_store.encode(ev["meta"], 4000)))
     return ev
 
 
@@ -174,7 +176,8 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
     row = db.execute("SELECT id, conv, modo, objetivo, plano, plano_versao, status, orcamento,"
                      " usados, achados, pendencias, erros, criado_em, atualizado_em,"
                      " COALESCE(investigacoes, '[]'), COALESCE(auditoria, '{}'),"
-                     " COALESCE(ajustes, '{}'), COALESCE(structured_analysis, '[]')"
+                     " COALESCE(ajustes, '{}'), COALESCE(structured_analysis, '[]'),"
+                     " COALESCE(midia, '[]')"
                      " FROM research_jobs WHERE id=? AND owner_id=?", (job_id, owner)).fetchone()
     if not row:
         raise AgentErro("pesquisa não encontrada", "ausente")
@@ -188,7 +191,8 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
                 "investigacoes": json.loads(row[14] or "[]"),
                 "auditoria": json.loads(row[15] or "{}"),
                 "ajustes": json.loads(row[16] or "{}"),
-                "structured_analysis": json.loads(row[17] or "[]")}
+                "structured_analysis": json.loads(row[17] or "[]"),
+                "midia": json.loads(row[18] or "[]")}
     except (TypeError, ValueError, IndexError) as exc:
         raise AgentErro("pesquisa corrompida", "corrompida") from exc
 
@@ -200,19 +204,20 @@ def salvar_job(db, job: dict) -> None:
     with db:
         db.execute("UPDATE research_jobs SET plano=?, plano_versao=?, status=?, orcamento=?,"
                    " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?,"
-                   " investigacoes=?, auditoria=?, ajustes=?, structured_analysis=?"
+                   " investigacoes=?, auditoria=?, ajustes=?, structured_analysis=?, midia=?"
                    " WHERE id=? AND owner_id=?",
-                   (json.dumps(plano_limpo, ensure_ascii=False)[:60000], job["plano_versao"],
+                   (json_store.encode(plano_limpo, 60000), job["plano_versao"],
                     job["status"], json.dumps(job["orcamento"], ensure_ascii=False),
                     json.dumps(job["usados"], ensure_ascii=False),
-                    json.dumps(job["achados"], ensure_ascii=False)[:60000],
-                    json.dumps(job["pendencias"], ensure_ascii=False)[:20000],
-                    json.dumps(job["erros"], ensure_ascii=False)[:20000],
+                    json_store.encode(job["achados"], 60000),
+                    json_store.encode(job["pendencias"], 20000),
+                    json_store.encode(job["erros"], 20000),
                     agora_iso(),
-                    json.dumps(job.get("investigacoes", []), ensure_ascii=False)[:20000],
-                    json.dumps(job.get("auditoria", {}), ensure_ascii=False)[:8000],
-                    json.dumps(job.get("ajustes", {}), ensure_ascii=False)[:8000],
-                    json.dumps(job.get("structured_analysis", []), ensure_ascii=False)[:60000],
+                    json_store.encode(job.get("investigacoes", []), 20000),
+                    json_store.encode(job.get("auditoria", {}), 8000),
+                    json_store.encode(job.get("ajustes", {}), 8000),
+                    json_store.encode(job.get("structured_analysis", []), 60000),
+                    json_store.encode(job.get("midia", []), 60000),
                     job["id"], job["owner"]))
 
 
@@ -484,7 +489,7 @@ def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str 
            "trecho": (trecho or "")[:2000],
            "localizacao": (fonte.get("localizacao") or "")[:120],
            "afirmacao": (afirmacao or "")[:500], "relacao": relacao[:20], "status": status,
-           "original": json.dumps(fonte, ensure_ascii=False)[:12000]}
+           "original": json_store.encode(fonte, 12000)}
     with db:
         db.execute("INSERT INTO evidence (id, job_id, owner_id, fonte_id, url, titulo, dominio,"
                    " acessado_em, publicado_em, trecho, localizacao, afirmacao, relacao,"
@@ -1053,6 +1058,11 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                {})
         return _resumo(db, job)
     except Exception as exc:
+        if isinstance(exc, json_store.JSONLimitError):
+            # The rejected in-memory payload is still oversized. Record failure
+            # against the last valid checkpoint instead of trying to save it again.
+            job = carregar_job(db, owner, job_id)
+            job["erros"] = job["erros"][-20:]
         job["status"] = "falhou"
         job["erros"].append(f"orquestrador: {type(exc).__name__}: {exc}"[:300])
         salvar_job(db, job)

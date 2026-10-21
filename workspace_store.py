@@ -57,7 +57,11 @@ def merge_records(db, records, owner):
     # to supply the owner: it is taken from the authenticated RPC envelope.
     batch = WorkspaceBatch.model_validate({"records": records})
     with db:
+        if not db.in_transaction:
+            db.execute("BEGIN IMMEDIATE")
         for record in batch.records:
+            if record.kind == "chat" and not record.deleted and chat_deleted(db, owner, record.id):
+                continue  # Exclusão é terminal; cliente atrasado não restaura o chat.
             data = record.model_dump()
             cursor = db.execute("""INSERT INTO workspace_records
                 (owner_id, kind, id, payload, updated_at, change_id) VALUES (?,?,?,?,?,?)
@@ -84,3 +88,49 @@ def merge_records(db, records, owner):
 def list_records(db, owner):
     return [json.loads(row[0]) for row in db.execute(
         "SELECT payload FROM workspace_records WHERE owner_id=? ORDER BY kind,id", (owner,))]
+
+
+def chat_deleted(db, owner, conv):
+    row = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
+                     (owner, conv)).fetchone()
+    return bool(row and json.loads(row[0]).get("deleted"))
+
+
+def forget_chat(db, owner, conv):
+    old = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
+                     (owner, conv)).fetchone()
+    record = json.loads(old[0]) if old else dict(id=conv, kind="chat", title="Conversa excluída")
+    now = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+    # Even a device clock in the future must not prevent an explicit deletion.
+    record.update(deleted=True, updated_at=max(now, record.get("updated_at", "")),
+                  change_id="z" * 100)
+    merge_records(db, [record], owner)
+
+
+def save_ui_states(db, owner, states):
+    saved = 0
+    with db:
+        for item in states[:300]:
+            try:
+                key, state = item["k"], item["state"]
+                if not isinstance(key, str) or not 3 <= len(key) <= 200:
+                    continue
+                if not isinstance(state, str) or len(state) > 8000 or not isinstance(json.loads(state), dict):
+                    continue
+                updated = WorkspaceRecord.timestamp(item["updated_at"])
+                cursor = db.execute("""INSERT INTO ui_state(k,message_id,slot,state,updated_at,owner_id)
+                    VALUES(?,?,?,?,?,?) ON CONFLICT(k) DO UPDATE SET
+                    state=excluded.state,updated_at=excluded.updated_at
+                    WHERE ui_state.owner_id=excluded.owner_id AND
+                    (excluded.updated_at,excluded.state)>(ui_state.updated_at,ui_state.state)""",
+                    (key, str(item["message_id"])[:100], str(item["slot"])[:40], state, updated, owner))
+                saved += max(0, cursor.rowcount)
+            except (KeyError, ValueError, TypeError):
+                continue
+    return saved
+
+
+def ui_state_page(db, owner, after=""):
+    rows = db.execute("SELECT k,message_id,slot,state,updated_at FROM ui_state "
+                      "WHERE owner_id=? AND k>? ORDER BY k LIMIT 200", (owner, after)).fetchall()
+    return [dict(zip(("k","message_id","slot","state","updated_at"), row)) for row in rows]
