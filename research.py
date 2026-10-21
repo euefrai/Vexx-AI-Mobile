@@ -109,13 +109,14 @@ def url_segura(url: str) -> str:
     """Valida URL pública; levanta ResearchErro(ssrf/rede) caso contrário."""
     try:
         parte = urllib.parse.urlsplit((url or "").strip()[:2000])
-    except ValueError as exc:
+        port = parte.port
+    except ValueError:
         raise ResearchErro("URL inválida.", "ssrf") from None
     if parte.scheme not in ("http", "https"):
         raise ResearchErro("Só http/https.", "ssrf")
     if parte.username or parte.password or not parte.hostname:
         raise ResearchErro("URL com credenciais ou sem host.", "ssrf")
-    if parte.port and not (1 <= parte.port <= 65535):
+    if port is not None and not (1 <= port <= 65535):
         raise ResearchErro("Porta inválida.", "ssrf")
     if any(parte.path.lower().endswith(e) for e in EXT_BLOQUEADAS):
         raise ResearchErro("Tipo de arquivo bloqueado.", "tipo_bloqueado")
