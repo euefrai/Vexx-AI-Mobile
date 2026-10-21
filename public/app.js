@@ -894,7 +894,7 @@ async function renderTimeline() {
   }
   items.forEach(m => {
     const d = document.createElement('div'); d.className = 'timeline-item';
-    d.innerHTML = '<div class="timeline-icon"><svg class="icon"><use href="#i-chat"/></svg></div><div><strong>' + esc((m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' + (m.status || '')) + '</strong><p>' + esc(String(m.text || '').slice(0, 120)) + '</p><small>' + esc(fmtTime(m.created_at)) + '</small></div>';
+    d.innerHTML = '<div class="timeline-icon"><svg class="icon"><use href="#i-chat"/></svg></div><div><strong>' + esc((m.role === 'assistant' ? 'Lucas' : 'Você') + ' · ' + (m.status || '')) + '</strong><p>' + esc(String(m.text || '').slice(0, 120)) + '</p><small>' + esc(fmtTime(m.created_at)) + '</small></div>';
     tl.appendChild(d);
   });
 }
@@ -2380,7 +2380,7 @@ conversation.addEventListener('click', e => {
       allMessages().then(async rows => {
         const row = rows.find(m => m.id === mid);
         if (!row) { if (printWindow) printWindow.close(); return; }
-        const title = String(row.text || '').split(/\r?\n/, 1)[0].replace(/^#+\s*/, '').slice(0, 80) || 'Resposta da Júlia';
+        const title = String(row.text || '').split(/\r?\n/, 1)[0].replace(/^#+\s*/, '').slice(0, 80) || 'Resposta de Lucas';
         if (mi.dataset.act === 'save') {
           try {
             await saveItem({ title, text: row.text || '', message_id: row.id, conversation_id: row.conversation_id });
@@ -2388,11 +2388,11 @@ conversation.addEventListener('click', e => {
           } catch (_) { showToast('Não foi possível salvar a resposta.'); }
         } else if (mi.dataset.act === 'share') await shareText(title, row.text || '', true);
         else if (mi.dataset.act === 'download') {
-          const filename = title.replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'resposta-julia';
+          const filename = title.replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'resposta-lucas';
           downloadFile(filename + '.txt', 'text/plain', row.text || '');
           showToast('Resposta baixada em TXT.');
         } else {
-          openPrintWindow(title, '<article><strong>Júlia</strong><pre>' + esc(row.text || '') + '</pre></article>', printWindow);
+          openPrintWindow(title, '<article><strong>Lucas</strong><pre>' + esc(row.text || '') + '</pre></article>', printWindow);
         }
       });
     } else if (mi.dataset.act === 'regen' || mi.dataset.act === 'cont' || mi.dataset.act === 'retry') {
@@ -2536,12 +2536,7 @@ async function shareText(title, text, allowShare) {
       if (err && err.name === 'AbortError') return;
     }
   }
-  if (!navigator.clipboard || !navigator.clipboard.writeText) {
-    showToast('Compartilhamento indisponível neste navegador.');
-    return;
-  }
-  try { await navigator.clipboard.writeText(payload); showToast('Copiado para compartilhar.'); }
-  catch (_) { showToast('Não foi possível copiar.'); }
+  await copyText(payload, allowShare ? 'Copiado para compartilhar.' : 'Copiado');
 }
 async function exportConversation(fmt) {
   if (!db) { showToast('Cache indisponível'); return; }
@@ -2552,7 +2547,7 @@ async function exportConversation(fmt) {
   if (fmt === 'json') {
     downloadFile(title + '.json', 'application/json', JSON.stringify({ title, exported_at: new Date().toISOString(), messages: rows }, null, 2));
   } else if (fmt === 'txt') {
-    const text = rows.map(m => (m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' +
+    const text = rows.map(m => (m.role === 'assistant' ? 'Lucas' : 'Você') + ' · ' +
       fmtTime(m.created_at) + '\n' + String(m.text || '')).join('\n\n');
     downloadFile(title + '.txt', 'text/plain', text);
   } else if (fmt === 'csv') {
@@ -2562,13 +2557,13 @@ async function exportConversation(fmt) {
       return '"' + text.replace(/"/g, '""') + '"';
     };
     const csv = [['Autor', 'Data e hora', 'Mensagem'], ...rows.map(m => [
-      m.role === 'assistant' ? 'Júlia' : 'Você', m.created_at || '', m.text || ''
+      m.role === 'assistant' ? 'Lucas' : 'Você', m.created_at || '', m.text || ''
     ])].map(row => row.map(quote).join(',')).join('\r\n');
     downloadFile(title + '.csv', 'text/csv', '\uFEFF' + csv);
   } else {
-    let md = '# ' + title + '\n\n_Exportado da Júlia Mobile em ' + new Date().toLocaleString('pt-BR') + '_\n\n';
+    let md = '# ' + title + '\n\n_Exportado do Vexx AI em ' + new Date().toLocaleString('pt-BR') + '_\n\n';
     rows.forEach(m => {
-      md += (m.role === 'assistant' ? '## ✦ Júlia' : '## Você') + ' · ' + fmtTime(m.created_at) + '\n\n' + String(m.text || '') + '\n\n---\n\n';
+      md += (m.role === 'assistant' ? '## ✦ Lucas' : '## Você') + ' · ' + fmtTime(m.created_at) + '\n\n' + String(m.text || '') + '\n\n---\n\n';
     });
     downloadFile(title + '.md', 'text/markdown', md);
   }
@@ -2617,7 +2612,7 @@ async function printConversation(printWindow) {
   const rows = ownRows(await allMessages()).filter(m => m.conversation_id === activeConversation);
   if (!rows.length) { if (printWindow) printWindow.close(); showToast('Nada para imprimir'); return; }
   const session = (await ownSessions()).find(s => s.id === activeConversation);
-  const cards = rows.map(m => '<article><strong>' + esc(m.role === 'assistant' ? 'Júlia' : 'Você') +
+  const cards = rows.map(m => '<article><strong>' + esc(m.role === 'assistant' ? 'Lucas' : 'Você') +
     ' · ' + esc(fmtTime(m.created_at)) + '</strong><pre>' + esc(m.text || '') + '</pre></article>').join('');
   openPrintWindow((session && session.title) || 'Conversa', cards, printWindow);
 }
@@ -2819,7 +2814,11 @@ function paintMemories() {
     box.appendChild(row);
   });
 }
+let historySearchVersion = 0;
 async function searchHistory() {
+  const version = ++historySearchVersion;
+  const generation = storageGeneration, owner = currentUid;
+  const isCurrent = () => version === historySearchVersion && generation === storageGeneration && owner === currentUid;
   const box = $('historyResults');
   if (!box) return;
   const query = String($('historySearch').value || '').trim().toLocaleLowerCase('pt-BR');
@@ -2827,6 +2826,7 @@ async function searchHistory() {
   if (query.length < 2) return;
   if (!db) { box.textContent = 'Histórico local indisponível.'; return; }
   const all = ownRows(await allMessages());
+  if (!isCurrent()) return;
   const matches = all.filter(m => String(m.text || '').toLocaleLowerCase('pt-BR').includes(query))
     .slice(-50).reverse();
   if (!matches.length) {
@@ -2836,11 +2836,12 @@ async function searchHistory() {
     return;
   }
   const titles = new Map((await ownSessions()).map(s => [s.id, s.title || 'Conversa']));
+  if (!isCurrent()) return;
   matches.forEach(m => {
     const row = document.createElement('button'); row.type = 'button'; row.className = 'history-result';
     const head = document.createElement('strong');
     head.textContent = (titles.get(m.conversation_id) || 'Conversa') + ' · ' +
-      (m.role === 'assistant' ? 'Júlia' : 'Você') + ' · ' + fmtTime(m.created_at);
+      (m.role === 'assistant' ? 'Lucas' : 'Você') + ' · ' + fmtTime(m.created_at);
     const excerpt = document.createElement('span');
     const text = String(m.text || '').replace(/\s+/g, ' ');
     const at = text.toLocaleLowerCase('pt-BR').indexOf(query);
@@ -2857,11 +2858,15 @@ async function searchHistory() {
     box.appendChild(row);
   });
 }
+let savedItemsRenderVersion = 0;
 async function paintSavedItems() {
+  const version = ++savedItemsRenderVersion;
+  const generation = storageGeneration, owner = currentUid;
   const box = $('savedItems');
   if (!box) return;
   box.replaceChildren();
   const items = await savedItems();
+  if (version !== savedItemsRenderVersion || generation !== storageGeneration || owner !== currentUid) return;
   if (!items.length) {
     const empty = document.createElement('div'); empty.className = 'doc-empty';
     empty.textContent = 'Nenhum item salvo neste aparelho.';
