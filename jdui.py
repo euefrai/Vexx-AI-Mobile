@@ -54,6 +54,41 @@ def _url(u) -> str:
     return u
 
 
+def _url_recurso(u) -> str:
+    """A real remote URL or a narrow same-origin download route.
+
+    This is intentionally stricter than a generic relative URL: generated UI
+    may point to a research export it knows about, not to arbitrary internal
+    endpoints (which could become a confused-deputy action).
+    """
+    remote = _url(u)
+    if remote:
+        return remote
+    path = _str(u, 500)
+    if not path.startswith("/api/research/export?"):
+        return ""
+    try:
+        parsed = urlsplit(path)
+        allowed = {"job_id", "formato"}
+        query = parsed.query
+        if parsed.scheme or parsed.netloc or parsed.fragment:
+            return ""
+        if parsed.path != "/api/research/export" or not query or len(query) > 200:
+            return ""
+        from urllib.parse import parse_qsl
+        pares = parse_qsl(query, keep_blank_values=False)
+        if not pares or any(k not in allowed for k, _ in pares):
+            return ""
+        dados = dict(pares)
+        if not re.fullmatch(r"[A-Za-z0-9_-]{2,64}", dados.get("job_id", "")):
+            return ""
+        if dados.get("formato", "md") not in ("md", "csv", "json"):
+            return ""
+    except (ValueError, TypeError):
+        return ""
+    return path
+
+
 def _provenance(value) -> list:
     if value is None:
         return []
@@ -543,6 +578,212 @@ def _v_productgallery(p: dict) -> dict:
             "sources": _provenance(p.get("sources"))}
 
 
+RESEARCH_STATES = ("SUPPORTED", "CONTRADICTED", "PARTIALLY_SUPPORTED",
+                   "UNVERIFIED", "INCONCLUSIVE")
+RESEARCH_RELATIONS = ("SUPPORTS", "PARTIALLY_SUPPORTS", "CONTRADICTS",
+                      "MENTIONS", "REQUIRES_VERIFICATION")
+PLAN_STATES = ("planned", "running", "paused", "completed", "failed", "cancelled")
+PLAN_STEP_STATES = {"pending": "todo", "todo": "todo", "active": "doing",
+                    "doing": "doing", "em_andamento": "doing", "pausada": "todo",
+                    "done": "done", "feita": "done", "removida": "skipped",
+                    "skipped": "skipped", "error": "error", "erro": "error"}
+MEDIA_TYPES = ("image", "video", "document")
+MEDIA_ACCESS = ("metadata_only", "link_only", "not_fetched", "read", "snippet_only")
+MEDIA_VALIDATION = ("unverified", "blocked", "invalid")
+MEDIA_ANALYSIS = ("not_analyzed",)
+
+
+def _v_researchplan(p: dict) -> dict:
+    """Plan/progress from real steps; percent is computed, never trusted."""
+    steps = p.get("steps")
+    if not isinstance(steps, list) or not (1 <= len(steps) <= 24):
+        raise JduiErro("researchplan.steps: 1..24 obrigatórios")
+    out, ids = [], set()
+    for step in steps:
+        if not isinstance(step, dict) or not _str(step.get("id"), 40):
+            raise JduiErro("researchplan.step sem id")
+        sid = _str(step.get("id"), 40)
+        if sid in ids:
+            raise JduiErro("researchplan.step id duplicado")
+        if not _str(step.get("title")):
+            raise JduiErro("researchplan.step sem title")
+        ids.add(sid)
+        status = PLAN_STEP_STATES.get(str(step.get("status", "pending")).lower(), "todo")
+        deps = step.get("dependencies") if isinstance(step.get("dependencies"), list) else []
+        out.append({
+            "id": sid, "title": _str(step.get("title"), 160),
+            "kind": _str(step.get("kind"), 24) or "research",
+            "status": status,
+            "detail": _str(step.get("detail") or step.get("objetivo_etapa"), 500),
+            "stop_condition": _str(step.get("stop_condition") or step.get("regra_parada"), 300),
+            "dependencies": [_str(d, 40) for d in deps[:8] if _str(d, 40)],
+        })
+    for step in out:
+        step["dependencies"] = [d for d in step["dependencies"]
+                                if d in ids and d != step["id"]]
+    done = sum(1 for step in out if step["status"] == "done")
+    skipped = sum(1 for step in out if step["status"] == "skipped")
+    errors = sum(1 for step in out if step["status"] == "error")
+    total = len(out)
+    pct = round(done / total * 100, 1) if total else 0.0
+    status = str(p.get("status", "planned")).lower()
+    if status not in PLAN_STATES:
+        status = "planned"
+    orcamento = p.get("budgets") if isinstance(p.get("budgets"), dict) else {}
+    usado = p.get("used") if isinstance(p.get("used"), dict) else {}
+    def _nmap(obj, keys):
+        return {key: max(0, min(1_000_000, _num(obj.get(key)))) for key in keys
+                if obj.get(key) is not None}
+    return {
+        "title": _str(p.get("title"), 160) or "Plano de pesquisa",
+        "objective": _str(p.get("objective") or p.get("objetivo"), 500),
+        "mode": _str(p.get("mode") or p.get("modo"), 40),
+        "status": status,
+        "steps": out,
+        "progress": {"done": done, "total": total, "skipped": skipped,
+                     "errors": errors, "percent": pct},
+        "budgets": _nmap(orcamento, ("buscas", "paginas", "timeout_s", "subs", "replans",
+                                     "midia", "concorrencia", "max_bytes_pagina")),
+        "used": _nmap(usado, ("buscas", "paginas", "replans")),
+        "sources": _provenance(p.get("sources")),
+    }
+
+
+def _v_researchevidence(p: dict) -> dict:
+    """Claim table where counts come from the sources actually attached."""
+    claims = p.get("claims")
+    if not isinstance(claims, list) or not (1 <= len(claims) <= 10):
+        raise JduiErro("evidence.claims: 1..10 obrigatórias")
+    out = []
+    for claim in claims:
+        if not isinstance(claim, dict) or not _str(claim.get("statement") or claim.get("afirmacao")):
+            raise JduiErro("evidence.claim sem statement")
+        estado = str(claim.get("state") or claim.get("estado") or "UNVERIFIED").upper()
+        if estado not in RESEARCH_STATES:
+            raise JduiErro("evidence.state inválido")
+        fontes = claim.get("sources") or claim.get("fontes") or []
+        if not isinstance(fontes, list) or len(fontes) > 12:
+            raise JduiErro("evidence.sources: máx 12")
+        norm_fontes = []
+        for fonte in fontes:
+            if not isinstance(fonte, dict):
+                raise JduiErro("evidence.source inválida")
+            relation = str(fonte.get("relation") or "REQUIRES_VERIFICATION").upper()
+            if relation not in RESEARCH_RELATIONS:
+                raise JduiErro("evidence.relation inválida")
+            title = _str(fonte.get("title") or fonte.get("titulo"), 160)
+            if not title:
+                raise JduiErro("evidence.source sem título")
+            norm_fontes.append({
+                "id": _str(fonte.get("id") or fonte.get("evidence_id"), 80),
+                "title": title,
+                "url": _url(fonte.get("url")),
+                "domain": _str(fonte.get("domain") or fonte.get("dominio"), 120),
+                "relation": relation,
+                "read": bool(fonte.get("read")),
+                "access_state": _str(fonte.get("access_state"), 40),
+                "excerpt": _str(fonte.get("excerpt") or fonte.get("used_excerpt"), 500),
+                "published_at": _str(fonte.get("published_at") or fonte.get("data"), 48),
+            })
+        if estado in ("SUPPORTED", "CONTRADICTED", "PARTIALLY_SUPPORTED") and not norm_fontes:
+            raise JduiErro("evidence: estado apoiado exige fonte")
+        if estado == "SUPPORTED" and not any(
+                fonte["relation"] in ("SUPPORTS", "PARTIALLY_SUPPORTS") for fonte in norm_fontes):
+            raise JduiErro("evidence: SUPPORTED exige relação de apoio")
+        if estado == "CONTRADICTED" and not any(
+                fonte["relation"] == "CONTRADICTS" for fonte in norm_fontes):
+            raise JduiErro("evidence: CONTRADICTED exige fonte contraditória")
+        out.append({
+            "statement": _str(claim.get("statement") or claim.get("afirmacao"), 1200),
+            "state": estado,
+            "method": _str(claim.get("method") or claim.get("metodo"), 200),
+            "coverage": max(0.0, min(1.0, _num(claim.get("coverage") or
+                                              claim.get("cobertura_lexica")))),
+            "sources": norm_fontes,
+            "found_count": len(norm_fontes),
+            "read_count": sum(1 for fonte in norm_fontes if fonte["read"]),
+            "supporting_count": sum(1 for fonte in norm_fontes
+                                    if fonte["relation"] in ("SUPPORTS", "PARTIALLY_SUPPORTS")),
+            "contradicting_count": sum(1 for fonte in norm_fontes
+                                       if fonte["relation"] == "CONTRADICTS"),
+        })
+    return {"title": _str(p.get("title"), 160) or "Evidências por afirmação",
+            "claims": out, "sources": _provenance(p.get("sources"))}
+
+
+def _v_researchmedia(p: dict) -> dict:
+    """Discovery gallery: media can never be promoted to evidence here."""
+    items = p.get("items")
+    if not isinstance(items, list) or not (1 <= len(items) <= 12):
+        raise JduiErro("media.items: 1..12 obrigatórios")
+    out = []
+    for item in items:
+        if not isinstance(item, dict):
+            raise JduiErro("media.item inválida")
+        kind = str(item.get("type") or "").lower()
+        if kind not in MEDIA_TYPES:
+            raise JduiErro("media.type: image|video|document")
+        url = _url(item.get("url"))
+        if not url:
+            raise JduiErro("media.url real obrigatória")
+        access = str(item.get("access_state") or "link_only").lower()
+        if access not in MEDIA_ACCESS:
+            access = "link_only"
+        validation = str(item.get("validation_state") or "unverified").lower()
+        if validation not in MEDIA_VALIDATION:
+            validation = "unverified"
+        # No media analysis pipeline is exposed in V5.8: never trust a label
+        # that claims a video was watched/transcribed or an image analysed.
+        analysis = "not_analyzed"
+        out.append({
+            "type": kind,
+            "title": _str(item.get("title"), 160) or f"{kind} descoberto",
+            "url": url,
+            "thumb": _url(item.get("thumb") or item.get("thumbnail")),
+            "source_title": _str(item.get("source_title"), 160),
+            "source_url": _url(item.get("source_url")),
+            "publisher": _str(item.get("publisher"), 120),
+            "date": _str(item.get("date"), 40),
+            "rights": _str(item.get("rights"), 160) or "não informado",
+            "access_state": access,
+            "validation_state": validation,
+            "analysis_state": analysis,
+            "excerpt": _str(item.get("excerpt"), 500),
+            "alt": _str(item.get("alt") or item.get("title"), 200),
+            "evidence": False,
+        })
+    return {"title": _str(p.get("title"), 160) or "Mídia descoberta",
+            "items": out, "sources": _provenance(p.get("sources"))}
+
+
+FILE_KINDS = ("pdf", "docx", "xlsx", "csv", "md", "txt", "json", "zip")
+
+
+def _v_filecard(p: dict) -> dict:
+    files = p.get("files")
+    if not isinstance(files, list) or not (1 <= len(files) <= 8):
+        raise JduiErro("filecard.files: 1..8 obrigatórios")
+    out = []
+    for item in files:
+        if not isinstance(item, dict) or not _str(item.get("name")):
+            raise JduiErro("filecard.file sem name")
+        url = _url_recurso(item.get("url"))
+        if not url:
+            raise JduiErro("filecard.url real obrigatória")
+        kind = str(item.get("kind") or "").lower()
+        if kind not in FILE_KINDS:
+            raise JduiErro("filecard.kind inválido")
+        status = str(item.get("status") or "available").lower()
+        if status not in ("available", "generated", "unverified"):
+            status = "unverified"
+        out.append({"name": _str(item.get("name"), 160), "url": url,
+                    "kind": kind, "size": _str(item.get("size"), 40),
+                    "source": _str(item.get("source"), 200),
+                    "status": status})
+    return {"title": _str(p.get("title"), 160) or "Arquivos",
+            "files": out, "sources": _provenance(p.get("sources"))}
+
+
 STATUS_FONTE = ("encontrada", "aberta", "utilizada")
 
 
@@ -651,6 +892,8 @@ VALIDADORES = {
     "productcompare": _v_productcompare, "productdetails": _v_productdetails,
     "productgallery": _v_productgallery,
     "sources": _v_sources, "video": _v_video, "roadmap": _v_roadmap,
+    "researchplan": _v_researchplan, "evidence": _v_researchevidence,
+    "media": _v_researchmedia, "filecard": _v_filecard,
 }
 
 

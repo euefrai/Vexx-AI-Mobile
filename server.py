@@ -1890,6 +1890,73 @@ async def research_report(request: Request, job_id: str,
     return {k: v for k, v in result.items() if k != "type"}
 
 
+@app.get("/api/research/view")
+async def research_view(request: Request, job_id: str):
+    """JDUI 4.0 a partir de registros reais (componentes validados no backend)."""
+    import research_view
+
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{2,64}", job_id or ""):
+        raise HTTPException(422, "Identificador inválido")
+    status = await relay.exchange({"type": "research_job_status", "owner": dono,
+                                   "job_id": job_id, "apos_seq": 0}, timeout=20.0)
+    if status.get("type") != "research_status":
+        raise _research_erro(status)
+    evidence = await relay.exchange({"type": "research_job_evidence", "owner": dono,
+                                     "job_id": job_id}, timeout=20.0)
+    if evidence.get("type") != "research_evidence":
+        raise _research_erro(evidence)
+    hypotheses = await relay.exchange({"type": "research_job_hypotheses", "owner": dono,
+                                       "job_id": job_id}, timeout=20.0)
+    if hypotheses.get("type") != "research_hypotheses":
+        raise _research_erro(hypotheses)
+    message = research_view.build_view(
+        status.get("resumo", {}), evidence.get("evidencias", []),
+        hypotheses.get("hypotheses", []))
+    return {"message": message}
+
+
+@app.get("/api/research/export")
+async def research_export(request: Request, job_id: str, formato: str = "md"):
+    """Gera bytes reais no servidor a partir dos registros owner-scoped.
+
+    Nada é persistido/rehospedado no Render.  O conteúdo vem do PC via relay;
+    se o job não pertence ao dono autenticado, o PC responde ``ausente``.
+    """
+    import research_exports
+
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{2,64}", job_id or ""):
+        raise HTTPException(422, "Identificador inválido")
+    if formato not in research_exports.FORMATS:
+        raise HTTPException(422, "Formato inválido; use md, csv ou json")
+    status = await relay.exchange({"type": "research_job_status", "owner": dono,
+                                   "job_id": job_id, "apos_seq": 0}, timeout=20.0)
+    if status.get("type") != "research_status":
+        raise _research_erro(status)
+    evidence = await relay.exchange({"type": "research_job_evidence", "owner": dono,
+                                     "job_id": job_id}, timeout=20.0)
+    if evidence.get("type") != "research_evidence":
+        raise _research_erro(evidence)
+    hypotheses = await relay.exchange({"type": "research_job_hypotheses", "owner": dono,
+                                       "job_id": job_id}, timeout=20.0)
+    if hypotheses.get("type") != "research_hypotheses":
+        raise _research_erro(hypotheses)
+    try:
+        payload, media_type, filename = research_exports.build_export(
+            status.get("resumo", {}), evidence.get("evidencias", []),
+            hypotheses.get("hypotheses", []), formato)
+    except research_exports.ExportError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return Response(payload, media_type=media_type, headers={
+        "Content-Disposition": f'attachment; filename="{filename}"',
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+    })
+
+
 @app.delete("/api/research/{job_id}")
 async def research_delete(request: Request, job_id: str):
     require_csrf(request)
