@@ -1,0 +1,41 @@
+{
+ "quando": "2026-10-20T21:50:23",
+ "ambiente": {
+  "python": "3.14.4",
+  "rss_mb": 22.06,
+  "plataforma": "win32"
+ },
+ "view": {
+  "steps": 24,
+  "claims": 10,
+  "media": 12,
+  "hypotheses": 8,
+  "build_ms": 7.349,
+  "peak_python_mb": 0.11,
+  "blocos": 6
+ },
+ "exports": {
+  "md": {
+   "ms": 21.696,
+   "peak_python_mb": 0.48,
+   "bytes": 64486
+  },
+  "csv": {
+   "ms": 33.807,
+   "peak_python_mb": 0.46,
+   "bytes": 62071
+  },
+  "json": {
+   "ms": 9.013,
+   "peak_python_mb": 0.43,
+   "bytes": 112699
+  }
+ },
+ "limites": {
+  "MAX_EXPORT_BYTES": 2000000,
+  "MAX_ITEMS": 200,
+  "JDUI_MAX_BLOCOS": 6
+ },
+ "libs_pesadas_importadas": [],
+ "observacao": "Tempos locais de módulos puros; não são latência de rede/render."
+}
