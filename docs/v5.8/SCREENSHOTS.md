@@ -8,7 +8,7 @@ Chrome: `155.0.8059.85`; desktop 1280×900; mobile emulated 390×844.
 
 | File | What it proves | SHA-256 prefix |
 |---|---|---|
-| `research-workspace-desktop.png` | “Pesquisas” page, saved job list, real objective | `4D75191F62C2126D` |
+| `research-workspace-desktop.png` | “Pesquisas” page, saved job list, real objective | `F418ED8AD02285B1` |
 | `research-workspace-desktop-detail.png` | plan component, progress, status/mode, budget, epistemic limit, exports | `2ED4A409F664C0BA` |
 | `research-workspace-desktop-evidence.png` | claim state `SUSTENTADA`, source counts, opened source details, used excerpt | `3E8A35B9CEED1974` |
 | `research-workspace-desktop-evidence-media.png` | media gallery with “não é evidência”, metadata fallback, export file cards | `F5A4649256BB023E` |

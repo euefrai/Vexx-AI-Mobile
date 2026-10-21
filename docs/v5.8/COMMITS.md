@@ -9,7 +9,10 @@ Branch: `main`. No commit was pushed. Origin remained at
 | `de0597d` | `feat(v5.8): implement deep-search provenance, evidence view, bounded exports and JDUI schemas` — research agents/media/view/exports, JDUI backend, server routes, contracts |
 | `e4cf84d` | `feat(v5.8): add research workspace, multimedia JDUI renderers and export actions` — frontend page, renderers, styles, frontend smoke test |
 | `634511d` | `test(v5.8): add real Chrome E2E, performance benchmark and QA evidence` — tools + `qa-artifacts/v58` |
-| documentation commit | `docs(v5.8): add architecture, capability, QA, security and performance reports` — `docs/v5.8/`, final report, matrix update |
+| `17014d1` | `docs(v5.8): add architecture, capability, QA, security and performance reports` — `docs/v5.8/`, final report, matrix update |
+| `4806454` | `fix(v5.8): polish research status label and workspace error title` |
+| `c65a1c1` | `test(v5.8): refresh Chrome evidence after UI polish` |
+| final docs update | records the commit map and refreshed screenshot hash |
 
 Commit boundaries are local and can be reorganized before an authorized push.
 The audit snapshot commit is intentionally separate so V5.8 does not claim

@@ -503,7 +503,9 @@ Nada disso está declarado como feito.
 | `de0597d` | backend V5.8: deep search, mídia, view, exports, schemas, rotas |
 | `e4cf84d` | frontend V5.8: workspace, renderers, estilos, smoke |
 | `634511d` | QA V5.8: Chrome E2E, benchmark, artefatos |
-| commit de documentação | `docs/v5.8/`, matriz e este relatório |
+| `17014d1` | documentação V5.8, matriz e este relatório |
+| `4806454` | polimento do rótulo de status e título de erro do workspace |
+| `c65a1c1` | atualização da evidência Chrome após o polimento |
 
 Nenhum commit foi enviado ao origin. O push/deploy depende de autorização
 posterior.
