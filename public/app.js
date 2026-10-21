@@ -1810,6 +1810,8 @@ async function syncAndRefresh() {
 /* ----- Modelos ----- */
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
 let modelCatalog = { models: [], providers: [] };
+let modelLoadVersion = 0;
+let providerMutation = false;
 function providerLabel(pid) {
   const p = (modelCatalog.providers || []).find(x => x.id === pid);
   return p ? p.label : pid;
@@ -1832,39 +1834,53 @@ function providerOf(id) {
   }
   return 'hermes';
 }
+function modelGroup(id) {
+  const pid = providerOf(id);
+  if (String(id).endsWith(':free')) return 0;
+  return pid !== 'hermes' && isConfigured(pid) ? 1 : 2;
+}
 function fillModels(filter) {
   const sel = $('modelSelect');
   const cur = modeloAtivo() || modelCatalog.default || '';
   sel.replaceChildren();
   const q = (filter || '').trim().toLowerCase();
-  const groups = {};
-  for (const id of modelCatalog.models || []) {
-    if (q && id.toLowerCase().indexOf(q) < 0 && providerLabel(providerOf(id)).toLowerCase().indexOf(q) < 0) continue;
-    (groups[providerOf(id)] = groups[providerOf(id)] || []).push(id);
-  }
-  const order = Object.keys(groups).sort((a, b) => isConfigured(b) - isConfigured(a));
-  for (const pid of order) {
-    const g = document.createElement('optgroup');
-    const pronto = isConfigured(pid);
-    const recusada = !pronto && providerFlag(pid, 'auth_error');
-    g.label = providerLabel(pid) + (pronto ? '' : (recusada ? ' · chave recusada no PC' : ' · sem chave'));
-    for (const id of groups[pid]) {
-      const o = document.createElement('option');
-      o.value = id; o.textContent = id;
-      if (!pronto) { o.disabled = true; o.textContent += recusada ? ' (chave recusada — atualize no PC)' : ' (sem chave)'; }
-      if (id === cur) o.selected = true;
-      g.appendChild(o);
+  const ids = [...new Set(modelCatalog.models || [])].filter(id => !q ||
+    id.toLowerCase().includes(q) || providerLabel(providerOf(id)).toLowerCase().includes(q));
+  ids.sort((a, b) => modelGroup(a) - modelGroup(b) ||
+    providerLabel(providerOf(a)).localeCompare(providerLabel(providerOf(b)), 'pt-BR') || a.localeCompare(b));
+  const groups = new Map();
+  for (const id of ids) {
+    const pid = providerOf(id), rank = modelGroup(id), pronto = isConfigured(pid);
+    const recusada = providerFlag(pid, 'auth_error');
+    const key = rank + ':' + pid;
+    if (!groups.has(key)) {
+      const g = document.createElement('optgroup');
+      g.label = ['Grátis', 'Suas API keys', 'Outros'][rank] + ' · ' + providerLabel(pid) +
+        (pronto ? '' : recusada ? ' · chave recusada' : ' · sem chave');
+      groups.set(key, g); sel.appendChild(g);
     }
-    sel.appendChild(g);
+    const o = document.createElement('option');
+    o.value = id;
+    o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
+    o.title = id; o.disabled = !pronto;
+    groups.get(key).appendChild(o);
   }
-  if (cur && !(modelCatalog.models || []).includes(cur)) { const o = document.createElement('option'); o.value = cur; o.textContent = cur + ' (salvo)'; o.selected = true; sel.appendChild(o); }
+  // Filtering must not silently select a different model than the one sent.
+  sel.value = cur;
+  const selected = $('modelSelected');
+  if (selected) selected.textContent = cur ? 'Selecionado: ' + cur : 'Escolha um modelo';
+  const info = $('modelResults');
+  if (info) info.textContent = ids.length ? ids.length + ' modelos · grátis, suas chaves e outros' : 'Nenhum modelo encontrado. Tente outra busca ou atualize a lista.';
   return cur;
 }
 async function loadModels(force) {
   if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return false; }
+  if (providerMutation && !force) return false;
   if (!force && Date.now() - modelsLoadedAt < 300000) return true;
+  const version = ++modelLoadVersion, owner = currentUid;
   try {
     const r = await api('/api/ai/models');
+    if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
     modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
       itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])) };
@@ -1874,12 +1890,17 @@ async function loadModels(force) {
     const pid = providerOf(escolhido);
     const aviso = (pid !== 'hermes' && !isConfigured(pid))
       ? (providerFlag(pid, 'auth_error') ? ' · chave recusada no PC' : ' · sem chave no PC') : '';
-    $('aiStatus').textContent = 'IA pronta · ' + escolhido + aviso;
+    $('aiStatus').textContent = (isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + escolhido + aviso;
     return true;
-  } catch (_) { $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
+  } catch (_) { if (version === modelLoadVersion) $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
 }
 $('modelSearch') && $('modelSearch').addEventListener('input', e => { fillModels(e.target.value); });
-$('modelSelect').addEventListener('change', e => { localStorage.setItem('julia-model', e.target.value); $('aiStatus').textContent = 'IA pronta · ' + e.target.value; });
+$('modelSelect').addEventListener('change', e => {
+  if (!e.target.value || !isConfigured(providerOf(e.target.value))) return;
+  localStorage.setItem('julia-model', e.target.value);
+  $('aiStatus').textContent = 'IA pronta · ' + e.target.value;
+  $('modelSelected').textContent = 'Selecionado: ' + e.target.value;
+});
 $('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
   const b = $('modelRefresh');
   b.disabled = true;
@@ -1906,7 +1927,7 @@ $('popModelRow') && $('popModelRow').addEventListener('keydown', e => {
 function providerChipInfo(p) {
   if (!p.configured) return { texto: 'Sem chave', classe: '' };
   if (p.auth_error) return { texto: 'Chave recusada no PC', classe: 'warn' };
-  return { texto: 'Chave OK', classe: 'ok' };
+  return { texto: 'Chave salva', classe: 'ok' };
 }
 function providerSourceHint(p) {
   if (p.source === 'arquivo') return 'Salva neste PC — troque ou remova aqui.';
@@ -1921,7 +1942,8 @@ function providersError(msg) {
 }
 function renderProviders() {
   const alvo = $('providersList');
-  if (!alvo) return;
+  if (!alvo || providerMutation) return;
+  const drafts = new Map([...alvo.querySelectorAll('.provider-row')].map(row => [row.dataset.provider, row.querySelector('input')?.value || '']));
   alvo.replaceChildren();
   const provs = (modelCatalog.providers || []).filter(p => p && p.id !== 'hermes');
   if (!provs.length) {
@@ -1952,21 +1974,35 @@ function renderProviders() {
       fonte.textContent = dica;
       row.appendChild(fonte);
     }
-    const form = document.createElement('div');
+    const form = document.createElement('form');
     form.className = 'provider-form';
     const entrada = document.createElement('input');
     entrada.type = 'password';
     entrada.autocomplete = 'off';
+    entrada.value = drafts.get(p.id) || '';
+    entrada.maxLength = 400;
+    entrada.enterKeyHint = 'done';
     entrada.spellcheck = false;
     entrada.placeholder = p.configured ? 'Trocar a chave…' : 'Colar a chave…';
     entrada.setAttribute('aria-label', 'Chave de ' + (p.label || p.id));
     const salvar = document.createElement('button');
-    salvar.type = 'button';
+    salvar.type = 'submit';
     salvar.className = 'subtle-button';
     salvar.textContent = 'Salvar';
-    salvar.addEventListener('click', () => salvarChaveProvedor(p.id, entrada, salvar));
+    form.addEventListener('submit', e => { e.preventDefault(); salvarChaveProvedor(p.id, entrada, salvar); });
     form.append(entrada, salvar);
     row.appendChild(form);
+    if (p.configured && !p.auth_error) {
+      const escolher = document.createElement('button');
+      escolher.type = 'button'; escolher.className = 'provider-remove';
+      escolher.textContent = 'Escolher modelo deste provedor';
+      escolher.addEventListener('click', () => {
+        $('providersDialog').close();
+        $('modelSearch').value = p.label || p.id;
+        fillModels($('modelSearch').value); abrirSeletorDeModelo();
+      });
+      row.appendChild(escolher);
+    }
     if (p.source === 'arquivo') {
       const remover = document.createElement('button');
       remover.type = 'button';
@@ -1978,30 +2014,51 @@ function renderProviders() {
     alvo.appendChild(row);
   }
 }
+function providerPending(pending) {
+  providerMutation = pending;
+  $('providersRefresh').disabled = pending;
+  $('providersList').querySelectorAll('input, button').forEach(el => { el.disabled = pending; });
+}
+function applyProviderResult(pid, result) {
+  if (!result.ok || result.provider !== pid) throw new Error('O PC não confirmou a alteração da chave.');
+  const provider = modelCatalog.providers.find(p => p.id === pid);
+  if (provider) Object.assign(provider, { configured: result.configured, source: result.source, auth_error: false });
+  ++modelLoadVersion; modelsLoadedAt = 0;
+  fillModels($('modelSearch').value);
+}
 async function salvarChaveProvedor(pid, entrada, botao) {
+  if (providerMutation) return;
   const valor = String(entrada.value || '').trim();
   if (valor.length < 8) { providersError('Cole a chave completa do provedor (mínimo 8 caracteres).'); entrada.focus(); return; }
-  botao.disabled = true;
+  ++modelLoadVersion;
+  providerPending(true); botao.textContent = 'Salvando…';
+  $('providersError').hidden = true; $('providersNotice').textContent = '';
   try {
-    await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'set', key: valor }) });
+    const result = await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'set', key: valor }) });
+    if (!result.configured) throw new Error('O PC não confirmou que a chave foi salva.');
+    applyProviderResult(pid, result);
     entrada.value = ''; /* a chave nunca fica guardada na tela */
-    showToast('Chave salva só neste PC');
-    await loadModels(true);
-    renderProviders();
+    $('providersNotice').textContent = 'Chave de ' + providerLabel(pid) + ' salva no PC. O campo fica vazio por segurança. Escolha um modelo deste provedor para usá-la.';
+    const refreshed = await loadModels(true);
+    if (!refreshed) $('providersNotice').textContent += ' Não foi possível atualizar os modelos agora; tente Atualizar lista de modelos.';
+    else if (providerFlag(pid, 'auth_error')) providersError('A chave foi salva, mas ' + providerLabel(pid) + ' recusou o acesso. Confira a chave e as permissões no provedor.');
   } catch (e) {
     providersError((e && e.message) || 'Não consegui salvar a chave');
-  } finally { botao.disabled = false; }
+  } finally { providerPending(false); renderProviders(); }
 }
 async function removerChaveProvedor(pid, botao) {
-  botao.disabled = true;
+  if (providerMutation) return;
+  ++modelLoadVersion;
+  providerPending(true); botao.textContent = 'Removendo…';
+  $('providersError').hidden = true; $('providersNotice').textContent = '';
   try {
-    await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'del' }) });
-    showToast('Chave removida deste PC');
-    await loadModels(true);
-    renderProviders();
+    const result = await api('/api/providers', { method: 'POST', body: JSON.stringify({ provider: pid, action: 'del' }) });
+    applyProviderResult(pid, result);
+    $('providersNotice').textContent = result.configured ? 'Chave do app removida. A chave definida no sistema continua ativa.' : 'Chave removida deste PC.';
+    if (!await loadModels(true)) $('providersNotice').textContent += ' Atualize a lista de modelos quando a conexão voltar.';
   } catch (e) {
     providersError((e && e.message) || 'Não consegui remover a chave');
-  } finally { botao.disabled = false; }
+  } finally { providerPending(false); renderProviders(); }
 }
 async function abrirProvedores() {
   const d = $('providersDialog');

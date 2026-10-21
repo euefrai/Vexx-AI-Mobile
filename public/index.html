@@ -112,7 +112,9 @@
         <div class="drawer-model">
           <label for="modelSelect">Modelo</label>
           <input id="modelSearch" class="model-search" type="search" placeholder="Pesquisar modelo ou provedor…" aria-label="Pesquisar modelo" autocomplete="off" />
-          <select id="modelSelect" class="model-select" aria-label="Modelo de IA"></select>
+          <select id="modelSelect" class="model-select" size="8" aria-label="Modelo de IA" aria-describedby="modelResults modelSelected"></select>
+          <small id="modelResults" class="model-hint" role="status"></small>
+          <small id="modelSelected" class="model-hint"></small>
           <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
         </div>
         <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
@@ -524,6 +526,7 @@
     <div class="dialog-heading"><h2 id="providersTitle">Provedores de IA</h2><button class="icon-button" id="providersClose" type="button" aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button></div>
     <p class="dialog-description">Cole a chave de API para usar os modelos do provedor como IA. As chaves ficam <strong>só neste PC</strong> — o servidor e o aplicativo nunca guardam nem mostram de volta.</p>
     <div id="providersList" class="providers-list" aria-live="polite"></div>
+    <p id="providersNotice" class="provider-notice" role="status"></p>
     <p id="providersError" class="login-error" role="alert" hidden></p>
     <div class="dialog-actions"><button class="subtle-button" id="providersRefresh" type="button">Atualizar lista de modelos</button></div>
   </dialog>
