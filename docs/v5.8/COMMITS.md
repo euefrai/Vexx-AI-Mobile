@@ -12,7 +12,9 @@ Branch: `main`. No commit was pushed. Origin remained at
 | `17014d1` | `docs(v5.8): add architecture, capability, QA, security and performance reports` — `docs/v5.8/`, final report, matrix update |
 | `4806454` | `fix(v5.8): polish research status label and workspace error title` |
 | `c65a1c1` | `test(v5.8): refresh Chrome evidence after UI polish` |
-| final docs update | records the commit map and refreshed screenshot hash |
+| `2562a77` | `docs(v5.8): record final commit map and refreshed Chrome hash` |
+| `6d4f73b` | `test(v5.8): record final-head full suite and update QA report` |
+| final docs update | closes the local commit map; no runtime change |
 
 Commit boundaries are local and can be reorganized before an authorized push.
 The audit snapshot commit is intentionally separate so V5.8 does not claim
