@@ -5305,7 +5305,8 @@ def run():
                         try:
                             cat = providers.listar_tudo(cfg["proxy"])
                             reply = {"request_id": request_id, "type": "ai_models",
-                                     "models": cat["models"][:500],
+                                     "models": cat["models"][:2000],
+                                     "items": cat["items"][:2000],
                                      "default": cat["default"],
                                      "providers": cat["providers"]}
                         except hermes_bridge.BridgeErro as exc:

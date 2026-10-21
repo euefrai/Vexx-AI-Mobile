@@ -29,6 +29,11 @@ def main():
                    JULIA_ENV_FILE=str(Path(directory) / "preview.env"),
                    JULIA_RELAY_URL="http://127.0.0.1:8770", JULIA_ENV="development",
                    JULIA_REMOTE="0", HERMES_PROXY_URL="http://127.0.0.1:9/v1")
+        provider_fixtures = os.environ.get('VEXX_PROVIDER_FIXTURES') == '1'
+        if provider_fixtures:
+            import env_local
+            for key in env_local.PROVIDER_KEY_ENVS:
+                env.pop(key, None)
         import pc_agent
         db = pc_agent.open_db(Path(env["JULIA_SQLITE_PATH"]))
         pc_agent.persist_messages(db, [
@@ -59,7 +64,8 @@ def main():
         children = []
         try:
             children.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "server:app", "--host", "127.0.0.1", "--port", "8770", "--log-level", "warning"], cwd=ROOT, env=env))
-            children.append(subprocess.Popen([sys.executable, "pc_agent.py"], cwd=ROOT, env=env))
+            agent = "tests/provider_fixture_agent.py" if provider_fixtures else "pc_agent.py"
+            children.append(subprocess.Popen([sys.executable, agent], cwd=ROOT, env=env))
             print("Disposable preview: http://127.0.0.1:8770 (preview / preview-only-2026)", flush=True)
             while all(p.poll() is None for p in children):
                 time.sleep(1)

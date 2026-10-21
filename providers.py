@@ -11,6 +11,7 @@ caímos na curadoria se a listagem falhar (Anthropic não tem listagem —
 use os IDs do console).
 """
 import json
+from concurrent.futures import ThreadPoolExecutor
 import logging
 import os
 import re
@@ -187,43 +188,49 @@ def _modelos_vivos_openai(nome: str, d: dict, timeout: float = 8.0) -> tuple:
     except BridgeErro as exc:
         log.warning("provedor %s: listagem falhou (%s)", nome, exc.codigo)
         return None, exc.codigo
-    return ([i for i in ids if isinstance(i, str) and i][:200] or None), ""
+    return (sorted({i for i in ids if isinstance(i, str) and i}, key=lambda mid: (not mid.endswith(":free"), mid))[:200] or None), ""
 
 
 def listar_tudo(proxy_cfg: str = "") -> dict:
     """Catálogo p/ o seletor: models, default, providers (SEM chaves)."""
+    # Independent network requests share a bounded pool: serial discovery could
+    # exceed the relay's 30-second deadline before reaching the saved provider.
+    def descobrir(nome, d):
+        if nome == "hermes":
+            try:
+                ids = hermes_bridge.listar_modelos(proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL)
+                return sorted(set(ids), key=lambda mid: (not mid.endswith(":free"), mid))[:500], ""
+            except BridgeErro as exc:
+                log.warning("hermes listar falhou (%s)", exc.codigo)
+                return [], exc.codigo
+        if chave(nome) and d["api"] == "openai":
+            return _modelos_vivos_openai(nome, d)
+        return None, ""
+
+    with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
+        pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
+        discoveries = {nome: task.result() for nome, task in pending.items()}
     itens, provs = [], []
     for nome, d in PROVIDERS.items():
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
         origem = chave_origem(nome) if conf else ""
         if origem:
-            prov["source"] = origem  # 'arquivo' (salva no app) ou 'sistema'
-        provs.append(prov)
-        if nome == "hermes":
-            try:
-                for mid in hermes_bridge.listar_modelos(proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL):
-                    itens.append({"id": mid, "provider": "hermes",
-                                  "label": d["label"]})
-            except BridgeErro as exc:
-                log.warning("hermes listar falhou (%s)", exc.codigo)
-            continue
-        if not conf:
-            for mid in d["modelos"]:
-                itens.append({"id": f"{nome}/{mid}", "provider": nome,
-                              "label": d["label"], "needs_key": True})
-            continue
-        vivos, erro = (None, "")
-        if d["api"] == "openai":
-            vivos, erro = _modelos_vivos_openai(nome, d)
+            prov["source"] = origem
+        vivos, erro = discoveries[nome]
         auth_ruim = erro in ("auth", "sem_chave")
         if auth_ruim:
             prov["auth_error"] = True
+        provs.append(prov)
         for mid in (vivos if vivos else d["modelos"]):
-            itens.append({"id": f"{nome}/{mid}", "provider": nome,
-                          "label": d["label"],
-                          **({} if vivos else {"curated": True}),
+            itens.append({"id": mid if nome == "hermes" else f"{nome}/{mid}",
+                          "provider": nome, "label": d["label"],
+                          "free": mid.endswith(":free"),
+                          **({"needs_key": True} if not conf else {}),
+                          **({"curated": True} if not vivos else {}),
                           **({"auth_error": True} if auth_ruim else {})})
+    # Up to 500 proxy models + 200 per external provider. Do not silently cut
+    # off the providers at the end of the registry after only 500 total IDs.
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": hermes_bridge.DEFAULT_MODEL, "providers": provs}
 
