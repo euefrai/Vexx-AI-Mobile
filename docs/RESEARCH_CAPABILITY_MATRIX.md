@@ -1,5 +1,10 @@
-# Matriz de capacidades — Research Engine (V5.7 FINAL, 2026-10-18)
+# Matriz de capacidades — Research Engine (V5.8, 2026-10-20)
 
+> **Atualização V5.8 (2026-10-20):** deep search com plano/progresso,
+> proveniência de evidências, mídia descoberta, JDUI 4.0, workspace de pesquisas
+> e exports reais. Evidência local; **sem deploy/push**. Ver
+> `docs/v5.8/` e `RELATORIO_VEXX_AI_V5.8_DEEP_RESEARCH.md`.
+>
 > **Atualização V5.7.2 (2026-10-19):** linhas 3, 12 e 13 atualizadas com
 > evidência real (extração, `preco_valor`, comparação). Ver
 > `docs/V5_7_2_PROGRESS.md`.
@@ -28,11 +33,27 @@ evidência nesta rodada). Nunca marcar pronto só porque teste unitário passou.
 | 15 | SSE/continuidade | PARTIAL | Fases reais no shopping; reconexão/replay testados | Risco de duplicação no tail-emit (`pc_agent.py:3951-3957`) documentado |
 | 16 | Métricas/observabilidade por provedor | PARTIAL | `metricas_provedores()` com latência/erros/vazios/bloqueios | Sem chamador em produção (só diagnóstico) |
 | 17 | JDUI paridade backend×frontend (produto) | FUNCTIONAL | 3 correções + harness Node (falha antes/passa depois); suíte | Outros componentes cobertos pela suíte, sem auditoria campo-a-campo nesta rodada |
-| 18 | JDUI em navegador real (Chrome mobile/desktop) | NOT_TESTED | — | Validação visual manual pendente (exigida pelo brief; não executada) |
+| 18 | JDUI em navegador real (Chrome mobile/desktop) | FUNCTIONAL (local V5.8) | Chrome 155 headless, desktop 1280×900 e mobile emulado 390×844; 5 slots, 6 nós de plano, 3 mídias, export de 1.839 bytes; sem overflow | Mobile é emulação; produção não validada |
 | 19 | Segurança (SSRF/DNS/redirects/limites/bloqueios) | FUNCTIONAL | URL do usuário passa pelo mesmo `baixar`; suíte de segurança intacta | Sem bypass de bot-wall em nenhum caminho |
 | 20 | Performance (tempos reais) | FUNCTIONAL | Busca 4,1s; URL 2,3s; shopping 41,5s; prompt+página 2,5s | Render Free preservado (gates/limites existentes) |
 | 21 | Serviço publicado (Render) | NOT_TESTED | Sem deploy/push autorizado nesta rodada | Distinguir sempre local × publicado (E2E) |
 | 22 | Respostas via LLM (Hermes) | PARTIAL | Hermes disponível: porta 8645, `/v1/models` HTTP 200 (DeepSeek V4.1 Flash) | Não exercitado no smoke (custo não autorizado); qualidade de resposta não medida |
+
+## V5.8 — incrementos verificados
+
+| # | Capacidade V5.8 | Estado | Evidência | Limitação |
+|---|---|---|---|---|
+| 23 | Plano estruturado, subquestões não redundantes e critérios de parada | FUNCTIONAL | `test_v58_deep_research.py::test_plan_rejects...`; metadados de plano v3 | Planejador determinístico |
+| 24 | Replanejamento por lacuna, detecção de duplicata e limite de rodadas | FUNCTIONAL | `test_replan_sem_loop`, `test_replanejar_*`, `test_executar_replaneja...` | 0–3 rodadas; semântica lexical |
+| 25 | Cancelamento, pausa, orçamento, timeout e retomada | FUNCTIONAL | `test_cancelar_e_orcamento`, worker cancel/pause, checkpoint restore | Retomada por etapa |
+| 26 | Hipótese → evidências → lacunas → próximos passos → conclusão | FUNCTIONAL | `_hipotese_publica`, JDUI accordion, exports | Testes são propostas, não executados |
+| 27 | Estados de evidência e contagem encontrada/lida/usada | PARTIAL | `test_verificador_estados`, fonte/proveniência V5.8 | Entailment semântico BLOCKED sem LLM |
+| 28 | Mídia descoberta com proveniência, sem virar evidência | FUNCTIONAL | `test_media_discovery...`, `test_media_component...`; Chrome | Sem download, thumbnail, transcript ou análise visual |
+| 29 | JDUI 4.0: researchplan/evidence/media/filecard validados | FUNCTIONAL | test_v58, test_jdui, harness Node; Chrome | Blocos inválidos omitidos com nota |
+| 30 | Workspace “Pesquisas” com view, progresso e exports | FUNCTIONAL (local) | Chrome desktop/mobile; screenshots | Sem anotações/versionamento de relatório |
+| 31 | Exports reais md/csv/json com isolamento de dono | FUNCTIONAL (local) | route tests; Chrome 1.839 bytes; CSV injection test | 2 MB; sem persistência; produção não testada |
+| 32 | PDF.js/ECharts/Video.js/Docling avaliados | FUNCTIONAL (avaliação) | `docs/v5.8/PERFORMANCE.md` com versões/licenças/bytes | Nenhum foi adotado |
+| 33 | Deploy/push V5.8 | NOT_TESTED | — | Sem autorização; PID 24356 intocado |
 
 ## Como ler esta matriz
 
