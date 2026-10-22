@@ -338,7 +338,9 @@ def _subconsultas_unicas(objetivo: str, limite: int) -> list:
         saida.append(alvo[:160])
         if len(saida) >= max(1, limite):
             break
-    return saida or [objetivo[:120]]
+    if len(saida) <= 1:
+        return [re.sub(r"\s+", " ", objetivo).strip()[:240]]
+    return saida or [objetivo[:240]]
 
 
 def montar_plano(db, job: dict) -> dict:
@@ -429,10 +431,15 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
     chaves_feitas = {_chave_consulta(s.get("alvo", "")) for s in job["plano"]
                      if s.get("tipo") == "busca"}
     novas = 0
+    limite_novas = min(4, max(0, job["orcamento"].get("buscas", 0) - job["usados"].get("buscas", 0)))
+    if not limite_novas:
+        return job
     feitos_fu = set(job["usados"].get("follow_ups", []))
     for inv in job.get("investigacoes") or []:
         for q in (inv.get("follow_up") or [])[:2]:
-            alvo = re.sub(r"\s+", " ", str(q or "")).strip()[:120]
+            if novas >= limite_novas:
+                break
+            alvo = re.sub(r"\s+", " ", str(q or "")).strip()[:240]
             chave = _chave_consulta(alvo)
             if (not chave or ("busca", alvo) in feitas or alvo in feitos_fu
                     or chave in chaves_feitas):
@@ -459,7 +466,9 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
                    f"Busca motivada por lacuna: {alvo[:80]}", {})
     job["usados"]["follow_ups"] = sorted(feitos_fu)
     for lac in (lacunas or [])[:4]:
-        alvo = re.sub(r"\s+", " ", str(lac or "")).strip()[:120]
+        if novas >= limite_novas:
+            break
+        alvo = re.sub(r"\s+", " ", str(lac or "")).strip()[:240]
         chave = _chave_consulta(alvo)
         if not chave or ("busca", alvo) in feitas or chave in chaves_feitas:
             continue
@@ -501,6 +510,17 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         feitas.add(("busca", alvo))
         novas += 1
     if novas:
+        # New evidence invalidates derived conclusions, not completed retrieval.
+        analyses = [step["id"] for step in job["plano"] if step["tipo"] == "analisar"]
+        for step in job["plano"]:
+            if step["tipo"] in ("verificar", "sintetizar", "auditar"):
+                step["status"] = "pendente"
+                for key in ("_vereditos", "_sintese", "_auditoria"):
+                    step.pop(key, None)
+                if step["tipo"] == "verificar":
+                    step["dependencias"] = analyses
+        job["sintese"] = {}
+        job["auditoria"] = {}
         job["usados"]["replans"] = job["usados"].get("replans", 0) + 1
         job["plano_versao"] += 1
         salvar_job(db, job)
@@ -706,7 +726,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
                  deve_parar=None, prazo: float = 0) -> list:
     """Search Agent: consultas adaptativas (original + variação sem stopwords)."""
     base = etapa["alvo"]
-    variacao = " ".join(w for w in base.split() if len(w) > 4 and w not in ("sobre", "para"))
+    import search_orchestrator as orch
+    variacao = orch.consulta_conteudo(base)
     consultas = [base] + ([variacao] if variacao and variacao != base else [])
     achados, falhas = [], []
     buscas_realizadas = 0
@@ -714,6 +735,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     parar = deve_parar or (lambda: False)
     etapas_por_consulta = job["usados"].setdefault("consultas_etapas", {})
     for q in consultas[:2]:
+        if achados or job["usados"].get("buscas", 0) + buscas_realizadas >= job["orcamento"].get("buscas", 0):
+            break
         if parar() or (prazo and time.monotonic() >= prazo):
             cancelado = True
             break
@@ -1016,13 +1039,26 @@ def cobertura(afirmacao: str, trechos: list) -> float:
     return round(len(a & b) / len(a), 3)
 
 
+def _evidencia_lida(e: dict) -> bool:
+    if e.get("access_state") in ("snippet_only", "found", "inaccessible") or e.get("status") in ("encontrada", "inacessivel"):
+        return False
+    if e.get("content_scope") == "abstract_only" and (e.get("abstract") or e.get("trecho")):
+        return True  # The retrieved abstract supports only its own content.
+    if "texto_lido" in e:
+        return bool(e["texto_lido"])
+    if e.get("access_state"):
+        return e["access_state"] == "read"
+    return bool(e.get("trecho"))  # Legacy manually registered evidence, not discovered URLs.
+
+
 def agente_verificador(db, job: dict, evidencias: list) -> list:
     """Fact Checker 2.0: claims v2 × evidências (regras válidas; resto UNVERIFIED).
 
     Mantém chaves {afirmacao, estado, cobertura_lexica} + metodo/relacoes.
     """
     import evidence_graph as _eg
-    base = job["objetivo"] + ". " + " ".join(e.get("trecho", "") for e in evidencias)
+    elegiveis = [e for e in evidencias if _evidencia_lida(e)]
+    base = job["objetivo"] + ". " + " ".join(e.get("trecho", "") for e in elegiveis)
     claims = _eg.extrair_afirmacoes_v2(base)
     if not claims and evidencias:
         claims = [{"texto": job["objetivo"], "condicoes": {"comparado_a": "", "metrica": "",
@@ -1033,12 +1069,13 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
     for c in claims[:12]:
         emitir(db, job["id"], job["owner"], "checker", "claim_identified", "ok",
                f"Afirmação: {c['texto'][:90]}", {})
-        contrad = [e["id"] for e in evidencias if e.get("status") == "contradiz"]
+        contrad = [e["id"] for e in elegiveis if e.get("status") == "contradiz"
+                   and _relevancia(c["texto"], e.get("afirmacao") or e.get("trecho", "")) > 0]
         if contrad:
             res = {"estado": "CONTRADICTED", "metodo": "evidencia-contradiz",
                    "evidencia": contrad[0], "cobertura_lexica": 0.0}
         else:
-            res = _eg.verificar_claim(c, [{"id": e["id"], "trecho": e["trecho"]} for e in evidencias])
+            res = _eg.verificar_claim(c, [{"id": e["id"], "trecho": e["trecho"]} for e in elegiveis])
         ncl = _eg.no_id("claim", job["id"], c["texto"][:200])
         nos_lote.append(("claim", c["texto"][:200],
                          {"texto": c["texto"][:500], "condicoes": c["condicoes"]}))
@@ -1054,7 +1091,7 @@ def agente_verificador(db, job: dict, evidencias: list) -> list:
                 relacao = "CONTRADICTS"
                 arestas_lote.append((nev, ncl, relacao,
                                      "evidencia-contradiz", "fonte marcada como contraditória"))
-            elif res["estado"] == "PARTIALLY_SUPPORTED" and \
+            elif _evidencia_lida(e) and res["estado"] == "PARTIALLY_SUPPORTED" and \
                     _relevancia(c["texto"], e.get("trecho", "")) >= 0.25:
                 relacao = "PARTIALLY_SUPPORTS"
                 arestas_lote.append((nev, ncl, relacao,
@@ -1149,7 +1186,8 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
 
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dict:
     """Synthesizer extrativo honesto (redação LLM = BLOQUEADA sem provedor)."""
-    tops = sorted(evidencias, key=lambda e: e.get("score", 0), reverse=True)[:6]
+    tops = sorted([e for e in evidencias if _evidencia_lida(e)],
+                  key=lambda e: e.get("score", 0), reverse=True)[:6]
     resposta = [f"Investigação: {job['objetivo']}"]
     if any(e.get("provider_metadata_untrusted")
            or e.get("content_scope") in ("abstract_only", "metadata_only") for e in tops):
@@ -1257,7 +1295,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     t0 = t0 or time.monotonic()
     timeout = job["orcamento"].get("timeout_s", 120)
     prazo = t0 + timeout
-    vistas = set()
+    vistas = set(job["usados"].get("consultas_etapas", {}))
     todas_evid = []
     vereditos = []
     for step in job["plano"]:
@@ -1320,6 +1358,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                     todas_evid.extend(etapa["_evidencias"])
                 elif etapa["tipo"] == "analisar":
                     etapa["_n"] = len(todas_evid)
+                    _avaliar_rodada(db, job, etapa, todas_evid)
                 elif etapa["tipo"] == "verificar":
                     base_ev = todas_evid or _evidencias_job(db, job)
                     analisar_independencia_job(db, job, base_ev)
@@ -1369,7 +1408,11 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             if job["status"] == "cancelada":
                 return _resumo(db, job)
         lacunas = _lacunas(job)
-        if lacunas and not _orcamento_ok(job) and job["plano"] and \
+        if job.get("investigacoes"):
+            lacunas += [q for inv in job["investigacoes"] for q in inv.get("follow_up", [])]
+        zero_gain = bool(job["usados"].get("replans", 0) and
+                         (job["usados"].get("adaptive_rounds") or [{}])[-1].get("new_evidence") == 0)
+        if lacunas and not zero_gain and not _orcamento_ok(job) and job["plano"] and \
                 job["usados"].get("replans", 0) < job["orcamento"].get("replans", 1) and \
                 all(s.get("status") != "pendente" for s in job["plano"]):
             v0 = job["plano_versao"]
@@ -1381,6 +1424,10 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             ("concluida" if todas_evid else "interrompida")
         if job["status"] == "interrompida" and not job["pendencias"]:
             job["pendencias"].append("sem evidências suficientes")
+        job["usados"]["research_outcome"] = {
+            "state": "partial" if lacunas or not todas_evid else "complete",
+            "unresolved_fronts": lacunas[:8],
+            "reason": "evidências insuficientes ou lacunas remanescentes" if lacunas or not todas_evid else "frentes com evidência recuperada; verificar limitações dos vereditos"}
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         # V5.7.3: o estado terminal é persistido ANTES do evento: quem consultar
         # no instante do research_completed já enxerga o status final (sem
@@ -1948,13 +1995,40 @@ def excluir_job(db, owner: str, job_id: str) -> dict:
     return {"job_id": job_id, "deleted": True}
 
 
+def _consulta_lacuna(job: dict, dimension: str, alvo: str = "") -> str:
+    # User constraints stay in the request; never replace the topic by generic words.
+    base = alvo or job.get("objetivo", "")
+    base = re.sub(r"\s+", " ", base).strip(" .?!")[:160]
+    return base if base.casefold().endswith(dimension.casefold()) else base + " " + dimension
+
+
+def _avaliar_rodada(db, job: dict, etapa: dict, evidencias: list) -> dict:
+    current = {e["id"] for e in evidencias if e.get("id")}
+    previous = set(job["usados"].get("round_evidence_ids", []))
+    new = current - previous
+    decision = {"step_id": etapa["id"], "new_evidence": len(new),
+                "total_evidence": len(current), "remaining_searches": max(0,
+                job["orcamento"].get("buscas", 0) - job["usados"].get("buscas", 0)),
+                "decision": "evidence_gained" if new else "no_new_evidence"}
+    history = job["usados"].setdefault("adaptive_rounds", [])
+    history.append(decision)
+    job["usados"]["adaptive_rounds"] = history[-16:]
+    job["usados"]["round_evidence_ids"] = sorted(current)
+    emitir(db, job["id"], job["owner"], "orchestrator", "adaptive_round_evaluated", "ok",
+           f"Rodada avaliada: {len(new)} nova(s) evidência(s); {decision['remaining_searches']} busca(s) restantes.", decision)
+    return decision
+
+
 def _lacunas(job: dict) -> list:
     subs_busca = {s.get("alvo") for s in job["plano"] if s.get("tipo") == "busca"}
     com_evid = set()
     for s in job["plano"]:
         if s.get("tipo") == "ler" and s.get("_evidencias"):
             com_evid.add(s.get("alvo"))
-    lacunas = sorted(subs_busca - com_evid)
+    covered = {base for base in subs_busca if any(
+        done.casefold().startswith(base.casefold()) for done in com_evid)}
+    lacunas = [_consulta_lacuna(job, "fontes primárias texto completo", alvo)
+               for alvo in sorted(subs_busca - covered)]
     # Lacunas de BUSCA reais (orquestrador): consultas complementares que o
     # pedido ainda não cobriu entram como novas buscas no replanejamento.
     for q in (job["usados"].get("recuperacao_busca") or []):
@@ -1986,7 +2060,8 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                 inv = {"tipo": "valor_divergente", "status": "em_aberto",
                        "explicacao": f"Mesma unidade, valores distintos ({a['valor']} × {b['valor']}). "
                                      "Verificar metodologia, data e condições.",
-                       "follow_up": ["metodologia medição", "data atualização dado"],
+                       "follow_up": [_consulta_lacuna(job, "metodologia medição"),
+                                     _consulta_lacuna(job, "data de publicação e condições")],
                        "entre": [evidencias[i]["id"], evidencias[j]["id"]]}
                 invs.append(inv)
                 try:
@@ -2013,6 +2088,7 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                                 "datas": _eg._RX_DATA.findall(tj)[:3]}}
             inv = _eg.investigar_divergencia(ci, cj, evidencias[i]["id"], evidencias[j]["id"])
             inv.update({"entre": [evidencias[i]["id"], evidencias[j]["id"]]})
+            inv["follow_up"] = [_consulta_lacuna(job, q) for q in inv.get("follow_up", [])[:2]]
             invs.append(inv)
             try:
                 na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])
@@ -2058,6 +2134,10 @@ def _resumo(db, job: dict) -> dict:
     invs = job.get("investigacoes") or []
     aud = job.get("auditoria") or {}
     hypotheses = hypothesis_engine.HypothesisStore(db).list_for_job(job["owner"], job["id"])
+    synthesis = job.get("sintese")
+    if synthesis is None and job.get("status") in ("concluida", "interrompida", "cancelada"):
+        checkpoint = continuous_research.ResearchContextStore(db).restore_latest(job["owner"], job["id"])
+        synthesis = ((checkpoint or {}).get("state", {}).get("results") or {}).get("synthesis", {})
     next_step = min((s for s in job["plano"] if s.get("status") == "pendente"),
                     key=lambda step: step.get("prioridade", 50), default=None)
     return {"id": job["id"], "status": job["status"], "modo": job["modo"],
@@ -2073,6 +2153,7 @@ def _resumo(db, job: dict) -> dict:
                         "criterio_conclusao": s.get("criterio_conclusao", "")}
                        for s in job["plano"]],
             "evidencias": len(evs), "achados": job["achados"],
+            "sintese": synthesis or {},
             "investigacoes": len(invs),
             "hipoteses": [_hipotese_publica(item) for item in hypotheses],
             "proxima_acao": (f"Executar {next_step['id']} ({next_step['tipo']})"
