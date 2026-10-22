@@ -1,5 +1,5 @@
 {
-  "quando": "2026-10-21T22:21:41",
+  "quando": "2026-10-21T22:29:29",
   "base": "https://vexx-ai.onrender.com",
   "etapas": {
     "health": {
@@ -8,10 +8,10 @@
     },
     "diag": {
       "ok": true,
-      "detalhe": "{'pc_online': True, 'agente_ha': 204, 'commit': 'dc71cc88a9bc', 'instance': '1ad659c5'}",
+      "detalhe": "{'pc_online': True, 'agente_ha': 34, 'commit': '10e70286171c', 'instance': '0aac82ba'}",
       "dados": {
-        "commit": "dc71cc88a9bc",
-        "instance": "1ad659c5"
+        "commit": "10e70286171c",
+        "instance": "0aac82ba"
       }
     },
     "sessao_anonima_401": {
@@ -32,7 +32,7 @@
     },
     "sessao_autenticada": {
       "ok": true,
-      "detalhe": "HTTP 200; uid=u-18306d3ade4e",
+      "detalhe": "HTTP 200; uid=u-f3af76aa742f",
       "dados": {
         "uid_confere": true
       }
@@ -49,7 +49,7 @@
       "ok": true,
       "detalhe": "HTTP 200; 2 chars",
       "dados": {
-        "segundos": 4.7,
+        "segundos": 3.9,
         "tipo": null,
         "amostra": "OK",
         "sem_chave": true
@@ -57,18 +57,18 @@
     },
     "shopping": {
       "ok": true,
-      "detalhe": "HTTP 200; 1388 chars",
+      "detalhe": "HTTP 200; 2015 chars",
       "dados": {
         "tem_jdui": false,
         "tem_link": true,
-        "amostra": "**Limitação encontrada:**  \nA pesquisa rodou agora, mas não consegui validar preços, imagens ou estoque de nenhum fone específico — os resultados são apenas páginas listadas (não abertas com dados estruturados). Por isso"
+        "amostra": "**Limitação encontrada**\n\nInfelizmente, não foi possível confirmar nenhum fone Bluetooth com **preço real até R$ 300,00** verificável nesta pesquisa.\n\nAs opções listadas em sites como `agorasonora.com.br` mencionam model"
       }
     },
     "pesquisa_start": {
       "ok": true,
       "detalhe": "HTTP 200",
       "dados": {
-        "job_id": "rj-9a764b4ecfc6",
+        "job_id": "rj-d9eb104b5c1c",
         "modo": "pro",
         "etapas": 6,
         "erro": null
@@ -90,7 +90,7 @@
     },
     "pesquisa_resultado": {
       "ok": true,
-      "detalhe": "status=concluida; 0.7s",
+      "detalhe": "status=concluida; 1.0s",
       "dados": {
         "status": "concluida",
         "plano": 6,
@@ -105,5 +105,5 @@
     }
   },
   "ok": true,
-  "usuario_qa": "qa_v58_jmcq475j"
+  "usuario_qa": "qa_v58_16q4aal8"
 }
