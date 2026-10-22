@@ -1,0 +1,141 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+........................s............................................... [ 20%]
+........................................................................ [ 27%]
+.F.....F................................................................ [ 33%]
+........................................................................ [ 40%]
+........................................................................ [ 47%]
+........................................................................ [ 54%]
+...s................................F...............FF.................. [ 60%]
+........................................................................ [ 67%]
+................................................................s....... [ 74%]
+...s.................................................................... [ 81%]
+........................................................................ [ 88%]
+........................................................................ [ 94%]
+.......................................................                  [100%]
+================================== FAILURES ===================================
+____________________________ test_jdui_v52_no_node ____________________________
+
+    def test_jdui_v52_no_node():
+        import shutil as _sh
+        import subprocess as _sp
+        node = _sh.which("node")
+        if node is None:
+            pytest.skip("Node indisponível")
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as tmp:
+            harness = Path(tmp) / "harness_v52.cjs"
+            harness.write_text(HARNESS_V52, encoding="utf-8")
+            raiz = Path(__file__).resolve().parents[1]
+            r = _sp.run([node, str(harness), str(raiz / "public" / "jdui.js")],
+                         capture_output=True, text=True, timeout=60)
+>           assert r.returncode == 0, "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr
+E           AssertionError: STDOUT:
+E             ok sources-valido
+E             ok sources-teto
+E             ok video-youtube
+E             ok video-bloqueado
+E             ok roadmap-valido
+E             ok video-render
+E             ok roadmap-progresso
+E             ok table-paginacao
+E             ok table-filtro
+E             ok table-csv-btn
+E             ok table-csv-dados
+E             
+E             STDERR:
+E             FAIL sources-render
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['C:\\nvm4w\\nodejs\\node.EXE', 'C:\\Users\\efrai\\AppData\\Local\\Temp\\tmpfnotexps\\harness_v5...rogresso\nok table-paginacao\nok table-filtro\nok table-csv-btn\nok table-csv-dados\n', stderr='FAIL sources-render\n').returncode
+
+tests\test_jdui_v52.py:203: AssertionError
+____________________ test_js_render_card_e_fonte_declarada ____________________
+
+    def test_js_render_card_e_fonte_declarada():
+        node = _node()
+        if node is None:
+            pytest.skip("node indisponível")
+        with tempfile.TemporaryDirectory() as tmp:
+            arq = Path(tmp) / "harness.cjs"
+            arq.write_text(_HARNESS + _CORPO, encoding="utf-8")
+            r = subprocess.run([node, str(arq), str(RAIZ / "public" / "jdui.js")],
+                               capture_output=True, text=True, timeout=60)
+>       assert r.returncode == 0, (r.stdout or "") + (r.stderr or "")
+E       AssertionError: ok card-valida
+E         ok card-mostra-preco
+E         ok card-selo-imagem
+E         ok card-selo-link
+E         ok card-imagem-src
+E         ok card-sem-foto-placeholder
+E         ok sources-valida
+E         ok sources-origem-declarada
+E         FAIL sources-status-encontrada
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\nvm4w\\nodejs\\node.EXE', 'C:\\Users\\efrai\\AppData\\Local\\Temp\\tmp0eqa73nv\\harness.cj...ard-sem-foto-placeholder\nok sources-valida\nok sources-origem-declarada\n', stderr='FAIL sources-status-encontrada\n').returncode
+
+tests\test_jdui_visual_v572.py:111: AssertionError
+_________________________ test_resumo_deterministico __________________________
+
+    def test_resumo_deterministico():
+        fontes = [{"id": "S1", "titulo": "Python", "url": "https://pt.wikipedia.org/wiki/Python",
+                   "trecho": "linguagem de programação"}]
+        txt = research.resumo_deterministico(fontes, "Python")
+        assert "[Python](https://pt.wikipedia.org/wiki/Python)" in txt
+>       assert "Sem inferência" in txt
+E       AssertionError: assert 'Sem inferência' in 'Encontrei **1** fonte(s) sobre **Python**:\n- [Python](https://pt.wikipedia.org/wiki/Python) — linguagem de programaç...e)\n\n_Sem síntese automática. Descoberta não equivale a leitura; os limites de acesso estão indicados em cada fonte._'
+
+tests\test_research_recovery.py:180: AssertionError
+___________ test_agente_busca_registra_recuperacao_lacunas_e_estado ___________
+
+    def test_agente_busca_registra_recuperacao_lacunas_e_estado():
+        db = _db()
+        try:
+            job = ra.criar_job(db, "u-x", "notebook 16gb vale a pena?", manual="rapida")
+            etapa = {"id": "p1", "tipo": "busca", "alvo": "notebook 16gb vale a pena?",
+                     "status": "pendente", "tentativas": 0, "prioridade": 10,
+                     "dependencias": []}
+            prov = WebProv()
+            achados = ra.agente_busca(db, job, etapa, [prov], vistas=set())
+            assert [a["url"] for a in achados] == ["https://lab-a/placa-a"]
+            assert job["usados"]["recuperacao_busca"] == ["benchmark placa a 2026"]
+            assert job["usados"]["lacunas_busca"] == ["benchmark placa a"]
+>           assert job["usados"]["provedores"]["web"]["ok"] == 2  # original + variação
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           assert 1 == 2
+
+tests\test_research_v55.py:120: AssertionError
+________ test_lacunas_inclui_recuperacao_do_orquestrador_sem_duplicar _________
+
+    def test_lacunas_inclui_recuperacao_do_orquestrador_sem_duplicar():
+        job = {"plano": [
+            {"tipo": "busca", "alvo": "tema principal"},
+            {"tipo": "busca", "alvo": "frente coberta"},
+            {"tipo": "ler", "alvo": "frente coberta", "_evidencias": [{"id": "e1"}]},
+        ], "usados": {"recuperacao_busca": ["consulta complementar x", "frente coberta"]}}
+>       assert ra._lacunas(job) == ["tema principal", "consulta complementar x"]
+E       AssertionError: assert ['frente cobe...mplementar x'] == ['tema princi...mplementar x']
+E         
+E         At index 0 diff: 'frente coberta fontes primárias texto completo' != 'tema principal'
+E         Left contains one more item: 'consulta complementar x'
+E         Use -v to get more diff
+
+tests\test_research_v55.py:136: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_jdui_v52.py::test_jdui_v52_no_node - AssertionError: STDOUT:
+FAILED tests/test_jdui_visual_v572.py::test_js_render_card_e_fonte_declarada
+FAILED tests/test_research_recovery.py::test_resumo_deterministico - Assertio...
+FAILED tests/test_research_v55.py::test_agente_busca_registra_recuperacao_lacunas_e_estado
+FAILED tests/test_research_v55.py::test_lacunas_inclui_recuperacao_do_orquestrador_sem_duplicar
+5 failed, 1054 passed, 4 skipped, 2 warnings in 178.66s (0:02:58)

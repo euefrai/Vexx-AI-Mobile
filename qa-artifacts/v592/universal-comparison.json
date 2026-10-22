@@ -1,0 +1,214 @@
+{
+  "kind": "RECORDED_EXTERNAL_PROBES",
+  "limitations": "Different network snapshots, not controlled latency benchmark. Events rerun after cache defect fix. Context page does not verify an event. No model inference or verified travel inventory.",
+  "cases": [
+    {
+      "case": "flights",
+      "query": "Pesquise voos de Salvador para São Paulo daqui a 30 dias, para um adulto, com o menor preço disponível.",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 12.865,
+      "final_state": "sem_correspondencia",
+      "final_seconds": 8.251,
+      "usable_sources": 0,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "\"Salvador\" \"São Paulo\" voos 2026-11-21 1 adulto",
+        "domain": "air_travel",
+        "original_request": "Pesquise voos de Salvador para São Paulo daqui a 30 dias, para um adulto, com o menor preço disponível.",
+        "resolved_request": "Pesquise voos de Salvador para São Paulo em 2026-11-21, para um adulto, com o menor preço disponível.",
+        "parameters": {
+          "start_date": "2026-10-22",
+          "end_date": "2026-11-21",
+          "departure_date": "2026-11-21",
+          "origin": "Salvador",
+          "destination": "São Paulo",
+          "adults": 1,
+          "inventory_state": "not_verified"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:13.034268+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 0,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    },
+    {
+      "case": "bus",
+      "query": "Pesquise passagens de ônibus de Salvador para Feira de Santana para daqui a sete dias.",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 10.585,
+      "final_state": "sem_correspondencia",
+      "final_seconds": 8.03,
+      "usable_sources": 0,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "\"Salvador\" \"Feira de Santana\" passagens de ônibus 2026-10-29",
+        "domain": "bus_travel",
+        "original_request": "Pesquise passagens de ônibus de Salvador para Feira de Santana para daqui a sete dias.",
+        "resolved_request": "Pesquise passagens de ônibus de Salvador para Feira de Santana em 2026-10-29.",
+        "parameters": {
+          "start_date": "2026-10-22",
+          "end_date": "2026-10-29",
+          "departure_date": "2026-10-29",
+          "origin": "Salvador",
+          "destination": "Feira de Santana",
+          "inventory_state": "not_verified"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:21.713220+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 0,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    },
+    {
+      "case": "fx-now",
+      "query": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 10.638,
+      "final_state": "reference_data_retrieved",
+      "final_seconds": 0.314,
+      "usable_sources": 1,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+        "domain": "currency",
+        "original_request": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+        "resolved_request": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+        "parameters": {
+          "base": "USD",
+          "quote": "BRL",
+          "amount": "100"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:30.219643+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 1,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    },
+    {
+      "case": "fx-history",
+      "query": "Como mudou o dólar em relação ao real nos últimos 30 dias?",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 8.408,
+      "final_state": "reference_data_retrieved",
+      "final_seconds": 0.327,
+      "usable_sources": 1,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "Como mudou o dólar em relação ao real entre 2026-09-22 e 2026-10-22?",
+        "domain": "currency",
+        "original_request": "Como mudou o dólar em relação ao real nos últimos 30 dias?",
+        "resolved_request": "Como mudou o dólar em relação ao real entre 2026-09-22 e 2026-10-22?",
+        "parameters": {
+          "start_date": "2026-09-22",
+          "end_date": "2026-10-22",
+          "base": "USD",
+          "quote": "BRL",
+          "amount": "1"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:31.024139+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 22,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    },
+    {
+      "case": "local-news",
+      "query": "O que aconteceu de mais importante em Salvador nos últimos sete dias?",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 8.318,
+      "final_state": "sem_correspondencia",
+      "final_seconds": 5.102,
+      "usable_sources": 0,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "Salvador notícias",
+        "domain": "news",
+        "original_request": "O que aconteceu de mais importante em Salvador nos últimos sete dias?",
+        "resolved_request": "O que aconteceu de mais importante em Salvador entre 2026-10-15 e 2026-10-22?",
+        "parameters": {
+          "start_date": "2026-10-15",
+          "end_date": "2026-10-22",
+          "location": "Salvador"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:31.807038+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 0,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    },
+    {
+      "case": "events",
+      "query": "Quais eventos culturais acontecerão em Recife nas próximas duas semanas?",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 12.595,
+      "final_state": "parcial",
+      "final_seconds": 2.264,
+      "usable_sources": 1,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "Recife eventos culturais 2026-10-22 2026-11-05",
+        "domain": "events",
+        "original_request": "Quais eventos culturais acontecerão em Recife nas próximas duas semanas?",
+        "resolved_request": "Quais eventos culturais acontecerão em Recife entre 2026-10-22 e 2026-11-05?",
+        "parameters": {
+          "start_date": "2026-10-22",
+          "end_date": "2026-11-05",
+          "location": "Recife"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:49:58.885096+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 0,
+      "provenance": "events-cache-repair.json",
+      "earlier_error": "  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\tools\\retrieval_recovery_v592.py\", line 178, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\tools\\retrieval_recovery_v592.py\", line 154, in main\n    print(json.dumps(run_case(case), ensure_ascii=False, default=str))\n                     ~~~~~~~~^^^^^^\n  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\tools\\retrieval_recovery_v592.py\", line 119, in run_case\n    result = research.pesquisa_rapida(db, 'v59-probe', query, max_fontes=3,\n        orcamento={'max_consultas': 2, 'max_provedores': 3, 'timeout_total': 16},\n        timeout_busca=4, timeout_pagina=5)\n  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\research.py\", line 1081, in pesquisa_rapida\n    cache_put(db, owner, \"web\", cache_pedido, saida, ttl)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\research.py\", line 737, in cache_put\n    normalizar_consulta(consulta)[:200], json_store.encode(resposta, 60000),\n                                         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\json_store.py\", line 12, in encode\n    raise JSONLimitError(f\"Estado JSON excede o limite de {limit} caracteres; registro anterior preservado\")\njson_store.JSONLimitError: Estado JSON excede o limite de 60000 caracteres; registro anterior preservado\n"
+    },
+    {
+      "case": "news-compare",
+      "query": "Compare as informações publicadas por fontes diferentes sobre um acontecimento recente.",
+      "baseline_state": "sem_correspondencia",
+      "baseline_seconds": 4.382,
+      "final_state": "sem_correspondencia",
+      "final_seconds": 4.051,
+      "usable_sources": 0,
+      "confirmed_offers": 0,
+      "request": {
+        "version": 1,
+        "search_query": "Compare as informações publicadas por fontes diferentes sobre um acontecimento recente.",
+        "domain": "news",
+        "original_request": "Compare as informações publicadas por fontes diferentes sobre um acontecimento recente.",
+        "resolved_request": "Compare as informações publicadas por fontes diferentes sobre um acontecimento recente.",
+        "parameters": {},
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:48:40.365414+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "observations": 0,
+      "provenance": "final-universal-validated.json",
+      "earlier_error": null
+    }
+  ]
+}

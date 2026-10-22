@@ -1,0 +1,27 @@
+.F.........................                                              [100%]
+================================== FAILURES ===================================
+_____________ test_sources_contract_matches_python_and_javascript _____________
+
+    def test_sources_contract_matches_python_and_javascript():
+        message = {'version':jdui.VERSION, 'blocks':[{'type':'ui','component':'sources','props':{
+            'title':'Fontes', 'items':[{'titulo':'Estudo real', 'url':'https://example.com/paper',
+                'status':'utilizada', 'escopo':'Somente resumo', 'tipo':'academico',
+                'relacao':'Trecho ligado à afirmação', 'data':'2026-10-01', 'data_evento':'2026-09-20'}]}}]}
+        valid, py, errors = jdui.validar_mensagem(message)
+        assert valid, errors
+        assert shutil.which('node'), 'Node is required for Python/JS contract parity'
+        script = "global.window={}; eval(require('fs').readFileSync('public/jdui.js','utf8')); console.log(JSON.stringify(window.JDUI.validateMessage(JSON.parse(process.argv[1])).msg));"
+        process = subprocess.run(['node','-e',script,json.dumps(message)],cwd=Path(__file__).parents[1],capture_output=True,text=True,encoding='utf-8')
+        assert process.returncode == 0, process.stderr
+>       assert json.loads(process.stdout) == py
+E       AssertionError: assert {'version': '...urces': []}}]} == {'version': '...urces': []}}]}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': 'Fontes', 'items': [{'titulo': 'Estudo real', 'url': '', 'dominio': '', 'data': '2026-10-01', ...}], 'sources': []}}]} != {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': 'Fontes', 'items': [{'titulo': 'Estudo real', 'url': 'https://example.com/paper', 'dominio': '', 'data': '2026-10-01', ...}], 'sources': []}}]}
+E         Use -v to get more diff
+
+tests\test_research_presentation_v592.py:34: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_research_presentation_v592.py::test_sources_contract_matches_python_and_javascript
+1 failed, 26 passed in 1.30s

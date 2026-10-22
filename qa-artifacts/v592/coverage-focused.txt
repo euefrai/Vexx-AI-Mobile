@@ -1,0 +1,46 @@
+................................................................F....... [ 64%]
+........................................                                 [100%]
+================================== FAILURES ===================================
+____ test_optional_orchestrator_dispatch_never_fetches_academic_full_text _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001DBD0BE54F0>
+
+    def test_optional_orchestrator_dispatch_never_fetches_academic_full_text(monkeypatch):
+        payload = {"results": [_openalex_item()]}
+        fake_gate = FakeGate()
+        provider = ar.OpenAlexWorksProvider(
+            open_url=lambda request, timeout: FakeResponse(payload), gate=fake_gate)
+        academic_provider = ar.AcademicResearchProvider
+        monkeypatch.setattr(
+            ra.academic_research, "AcademicResearchProvider",
+            lambda mailto="": academic_provider(
+                mailto, openalex=provider, crossref=FakeProvider("crossref", [])))
+        monkeypatch.setenv("JULIA_ACADEMIC_RESEARCH", "1")
+        monkeypatch.setenv("JULIA_RESEARCH_MAILTO", "research@example.org")
+    
+        providers = ra.provedores_reais()
+        assert [p.nome for p in providers] == ["ddg", "searxng", "wikipedia", "academic"]
+        db = pc_agent.open_db(Path(":memory:"))
+        try:
+            job = ra.criar_job(db, "researcher", "artigos científicos sobre fotossíntese",
+                               manual="rapida")
+    
+            def must_not_fetch(_url):
+                raise AssertionError("academic abstracts must never fetch article full text")
+    
+            result = ra.executar(db, job["id"], "researcher", providers, must_not_fetch)
+            assert result["status"] == "concluida", result
+            evidence = ra.listar_evidencias(db, "researcher", job["id"])
+>           assert evidence and evidence[0]["doi"] == "10.1234/ABC.1"
+E           assert ([])
+
+tests\test_academic_research.py:308: AssertionError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_academic_research.py::test_optional_orchestrator_dispatch_never_fetches_academic_full_text
+1 failed, 111 passed, 1 warning in 9.19s

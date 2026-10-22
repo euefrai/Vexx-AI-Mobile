@@ -1,0 +1,170 @@
+[
+  {
+    "query": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+    "data": {
+      "base": "USD",
+      "quote": "BRL",
+      "amount": "100",
+      "rate": "5.0233",
+      "converted": "502.33",
+      "rate_date": "2026-10-21",
+      "rate_time": null,
+      "rate_timezone": "UTC",
+      "queried_at": "2026-10-22T10:34:54.467522+00:00",
+      "query_timezone": "America/Bahia",
+      "rate_type": "daily_reference",
+      "provider": "ECB via Frankfurter",
+      "source_url": "https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL",
+      "historical": false,
+      "observations": [
+        {
+          "date": "2026-10-21",
+          "rate": "5.0233"
+        }
+      ],
+      "request": {
+        "version": 1,
+        "domain": "currency",
+        "original_request": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+        "resolved_request": "Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.",
+        "parameters": {
+          "base": "USD",
+          "quote": "BRL",
+          "amount": "100"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:34:54.467522+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      }
+    },
+    "response": "**100 USD ≈ 502.33 BRL**\n\nTaxa de referência diária: 1 USD = 5.0233 BRL. Data da taxa: 2026-10-21 (UTC); horário de publicação não informado. Consulta: 2026-10-22T10:34:55.297933+00:00. Não é uma oferta bancária nem cotação intradiária. [Fonte: ECB via Frankfurter](https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL). Cache de até 5 minutos.\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"cards\", \"props\": {\"title\": \"Câmbio de referência\", \"items\": [{\"title\": \"USD → BRL\", \"desc\": \"Referência diária de 2026-10-21; sem impostos ou spread de instituição.\", \"value\": \"502.33 BRL\", \"badge\": \"Referência diária\", \"url\": \"https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL\", \"action\": {}}]}}]}\n```"
+  },
+  {
+    "query": "Como mudou o dólar em relação ao real nos últimos 30 dias?",
+    "data": {
+      "base": "USD",
+      "quote": "BRL",
+      "amount": "1",
+      "rate": "5.0233",
+      "converted": "5.02",
+      "rate_date": "2026-10-21",
+      "rate_time": null,
+      "rate_timezone": "UTC",
+      "queried_at": "2026-10-22T10:34:55.326457+00:00",
+      "query_timezone": "America/Bahia",
+      "rate_type": "daily_reference",
+      "provider": "ECB via Frankfurter",
+      "source_url": "https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL&from=2026-09-22&to=2026-10-22",
+      "historical": true,
+      "observations": [
+        {
+          "date": "2026-09-22",
+          "rate": "5.1231"
+        },
+        {
+          "date": "2026-09-23",
+          "rate": "5.1322"
+        },
+        {
+          "date": "2026-09-24",
+          "rate": "5.1808"
+        },
+        {
+          "date": "2026-09-25",
+          "rate": "5.1821"
+        },
+        {
+          "date": "2026-09-28",
+          "rate": "5.2018"
+        },
+        {
+          "date": "2026-09-29",
+          "rate": "5.2115"
+        },
+        {
+          "date": "2026-09-30",
+          "rate": "5.2027"
+        },
+        {
+          "date": "2026-10-01",
+          "rate": "5.1885"
+        },
+        {
+          "date": "2026-10-02",
+          "rate": "5.2214"
+        },
+        {
+          "date": "2026-10-05",
+          "rate": "4.9847"
+        },
+        {
+          "date": "2026-10-06",
+          "rate": "4.9686"
+        },
+        {
+          "date": "2026-10-07",
+          "rate": "5.0061"
+        },
+        {
+          "date": "2026-10-08",
+          "rate": "5.0168"
+        },
+        {
+          "date": "2026-10-09",
+          "rate": "5.005"
+        },
+        {
+          "date": "2026-10-12",
+          "rate": "4.9923"
+        },
+        {
+          "date": "2026-10-13",
+          "rate": "5.0165"
+        },
+        {
+          "date": "2026-10-14",
+          "rate": "5.0242"
+        },
+        {
+          "date": "2026-10-15",
+          "rate": "5.057"
+        },
+        {
+          "date": "2026-10-16",
+          "rate": "5.0828"
+        },
+        {
+          "date": "2026-10-19",
+          "rate": "5.0453"
+        },
+        {
+          "date": "2026-10-20",
+          "rate": "5.0235"
+        },
+        {
+          "date": "2026-10-21",
+          "rate": "5.0233"
+        }
+      ],
+      "request": {
+        "version": 1,
+        "domain": "currency",
+        "original_request": "Como mudou o dólar em relação ao real nos últimos 30 dias?",
+        "resolved_request": "Como mudou o dólar em relação ao real nos entre 2026-09-22 e 2026-10-22?",
+        "parameters": {
+          "start_date": "2026-09-22",
+          "end_date": "2026-10-22",
+          "base": "USD",
+          "quote": "BRL",
+          "amount": "1"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-22T10:34:55.326457+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      }
+    },
+    "response": "**1 USD ≈ 5.02 BRL**\n\nTaxa de referência diária: 1 USD = 5.0233 BRL. Data da taxa: 2026-10-21 (UTC); horário de publicação não informado. Consulta: 2026-10-22T10:34:56.013074+00:00. Não é uma oferta bancária nem cotação intradiária. [Fonte: ECB via Frankfurter](https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL&from=2026-09-22&to=2026-10-22). Cache de até 5 minutos.\n\nSérie disponível: 2026-09-22 a 2026-10-21, 22 observações. Primeira taxa: 5.1231; última: 5.0233. O gráfico seleciona até 24 observações existentes; não preenche dias sem publicação.\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"cards\", \"props\": {\"title\": \"Câmbio de referência\", \"items\": [{\"title\": \"USD → BRL\", \"desc\": \"Referência diária de 2026-10-21; sem impostos ou spread de instituição.\", \"value\": \"5.02 BRL\", \"badge\": \"Referência diária\", \"url\": \"https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL&from=2026-09-22&to=2026-10-22\", \"action\": {}}]}}, {\"type\": \"ui\", \"component\": \"chart\", \"props\": {\"type\": \"line\", \"title\": \"Observações reais — USD/BRL\", \"labels\": [\"2026-09-22\", \"2026-09-23\", \"2026-09-24\", \"2026-09-25\", \"2026-09-28\", \"2026-09-29\", \"2026-09-30\", \"2026-10-01\", \"2026-10-02\", \"2026-10-05\", \"2026-10-06\", \"2026-10-07\", \"2026-10-08\", \"2026-10-09\", \"2026-10-12\", \"2026-10-13\", \"2026-10-14\", \"2026-10-15\", \"2026-10-16\", \"2026-10-19\", \"2026-10-20\", \"2026-10-21\"], \"series\": [{\"label\": \"BRL por USD\", \"values\": [5.1231, 5.1322, 5.1808, 5.1821, 5.2018, 5.2115, 5.2027, 5.1885, 5.2214, 4.9847, 4.9686, 5.0061, 5.0168, 5.005, 4.9923, 5.0165, 5.0242, 5.057, 5.0828, 5.0453, 5.0235, 5.0233]}], \"source\": \"https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL&from=2026-09-22&to=2026-10-22\", \"x_label\": \"\", \"y_label\": \"\", \"sources\": []}}]}\n```"
+  }
+]

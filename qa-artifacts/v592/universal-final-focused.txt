@@ -1,0 +1,22 @@
+..................................F..................................... [ 72%]
+...........................                                              [100%]
+================================== FAILURES ===================================
+_______________________ test_sintese_extrativa_honesta ________________________
+
+    def test_sintese_extrativa_honesta():
+        db = _db()
+        job = ra.criar_job(db, "u-x", "café?")
+        s = ra.agente_sintetizador(db, job, [], [])
+>       assert "LLM indisponível" in s["texto"] and s["llm"] is False
+E       AssertionError: assert ('LLM indisponível' in 'Investigação: café?\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM não foi utilizada nesta investigação.')
+
+tests\test_research_agents.py:479: AssertionError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_research_agents.py::test_sintese_extrativa_honesta - Assert...
+1 failed, 98 passed, 1 warning in 13.41s

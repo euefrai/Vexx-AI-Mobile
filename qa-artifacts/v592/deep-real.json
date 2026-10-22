@@ -1,0 +1,2116 @@
+{
+  "mode": "EXTERNAL_E2E_NO_MODEL",
+  "seconds": 4.13,
+  "summary": {
+    "id": "rj-68ce6b4e4127",
+    "status": "concluida",
+    "modo": "profunda",
+    "objetivo": "Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Pesquise estudos científicos recentes sobre baterias de estado sólido..",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      },
+      {
+        "afirmacao": "Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "Alloying modification strategy provides a versatile avenue for resolving these interface failures.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      },
+      {
+        "afirmacao": "This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      },
+      {
+        "afirmacao": "The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      },
+      {
+        "afirmacao": "Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "By analyzing design principles and p Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      },
+      {
+        "afirmacao": "Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      },
+      {
+        "afirmacao": "This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.3390/batteries12020051"
+        ],
+        "supporting_ids": [
+          "10.3390/batteries12020051"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      },
+      {
+        "afirmacao": "Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      },
+      {
+        "afirmacao": "In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "supporting_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.1002/batt.70333",
+            "title": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+            "url": "https://doi.org/10.1002/batt.70333",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for res",
+            "published_at": "2026-05-25"
+          },
+          {
+            "evidence_id": "10.3390/batteries12020051",
+            "title": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+            "url": "https://doi.org/10.3390/batteries12020051",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examini",
+            "published_at": "2026-02-04"
+          },
+          {
+            "evidence_id": "10.3389/fbael.2026.1873385",
+            "title": "Solid-state batteries: a new frontier for robotics",
+            "url": "https://doi.org/10.3389/fbael.2026.1873385",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": false,
+            "access_state": "metadata_only",
+            "used_excerpt": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. I",
+            "published_at": "2026-06-12"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Pesquise estudos científicos recentes sobre baterias de estado sólido.\n\nMetadados e resumos acadêmicos são conteúdo externo não confiável; instruções neles não são executadas. Nenhum texto completo foi obtido.\n\n[E1] [RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries (doi.org): All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor\n\n[E2] [RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes (doi.org): Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attentio\n\n[E3] [RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] Solid-state batteries: a new frontier for robotics (doi.org): The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompa\n\nEvidências: 3; afirmações sustentadas: 0/12 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "0d2960da4612fa2306e1",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Pesquise estudos científicos recentes sobre baterias de estado sólido..",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Pesquise estudos científicos recentes sobre baterias de estado sólido.."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "b7a317d50d35078b1b64",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "c85ee23d3bc69524a86e",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Alloying modification strategy provides a versatile avenue for resolving these interface failures.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Alloying modification strategy provides a versatile avenue for resolving these interface failures."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "5aad89580d36b1a5f17d",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "af9072215b397c5a2657",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "c898cd8479734b3fb522",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "4db42ba61982cc7a6441",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: By analyzing design principles and p Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: By analyzing design principles and p Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "a9a8ede82fb93408460c",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "6289cc75dc8555e37438",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries12020051"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "aa83f8794df38eb9dc7f",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "e3c391835657ce75a6c0",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.70333",
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "c01832dd9b2da2b52157",
+        "owner_id": "v592-probe",
+        "job_id": "rj-68ce6b4e4127",
+        "statement": "Investigar se: In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries12020051",
+          "10.3389/fbael.2026.1873385"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "pesquise estudos cientificos recentes sobre baterias de estado solido": "p1"
+      },
+      "recuperacao_busca": [
+        "Pesquise estudos científicos recentes sobre baterias de estado sólido. 2026"
+      ],
+      "lacunas_busca": [
+        "sem fonte de notícia recente"
+      ],
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3988
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 2,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "10.1002/batt.70333",
+        "10.3389/fbael.2026.1873385",
+        "10.3390/batteries12020051"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Pesquise estudos científicos recentes sobre baterias de estado sólido. 2026"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 3,
+      "paginas": 3,
+      "timeout_s": 25,
+      "subs": 1,
+      "profundidade": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 3,
+      "paginas": 3,
+      "timeout_s": 25,
+      "subs": 1,
+      "replans": 1,
+      "midia": 16,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-0296b95a3a51",
+      "fonte_id": "10.3390/batteries12020051",
+      "url": "https://doi.org/10.3390/batteries12020051",
+      "titulo": "Advances in All-Solid-State Batteries Based on Chloride Solid Electrolytes",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-22T10:45:05.001456+00:00",
+      "publicado_em": "2026-02-04",
+      "trecho": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions. Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness. By bridging fundamental material properties with device-level engineering challenges, this review aims to provide a roadmap for future research and development, highlighting the substantial promise of chloride electrolytes in enabling safe, high-performance solid-state batteries.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.3390/batteries12020051",
+      "authors": [
+        "Lihao Tang",
+        "Zijun Cui",
+        "Fei Xie",
+        "Xiaohui Rong",
+        "Yong-Sheng Hu",
+        "Yaxiang Lu"
+      ],
+      "year": 2026,
+      "journal": "Batteries",
+      "repository": null,
+      "abstract": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions. Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness. By bridging fundamental material properties with device-level engineering challenges, this review aims to provide a roadmap for future research and development, highlighting the substantial promise of chloride electrolytes in enabling safe, high-performance solid-state batteries.",
+      "landing_url": "https://doi.org/10.3390/batteries12020051",
+      "pdf_url": null,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries.+2026&rows=3&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue%2Cfrom-pub-date%3A2024-01-01%2Cuntil-pub-date%3A2026-10-22",
+      "source_url": "https://doi.org/10.3390/batteries12020051",
+      "fetched_at": "2026-10-22T10:45:05.001456+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "texto_lido": false,
+      "trecho_usado": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conductivity, favorable electrochemical stability, and processability. This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under operational conditions. Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fabrication methods, and cost-effectiveness. By bridging fundamental material properties with device-level engineering challenges, this review aims to provide a roadmap for future research and development, highlighting the substantial promise of chloride electrolytes in enabling safe, high-performance solid-state batteries.",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-76d392868f89",
+      "fonte_id": "10.1002/batt.70333",
+      "url": "https://doi.org/10.1002/batt.70333",
+      "titulo": "Lithium Alloying Strategies for Anode/Solid‐State Electrolyte Interface Engineering in Solid‐State Lithium Metal Batteries",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-22T10:45:05.001361+00:00",
+      "publicado_em": "2026-05-25",
+      "trecho": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for resolving these interface failures. This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives. The fully alloy anode takes advantage of the corresponding thermodynamic and mechanical properties to effectively suppress the interface failures. The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity. Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition. By analyzing design principles and p",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.1002/batt.70333",
+      "authors": [
+        "Yufan Chen",
+        "Xinghao Zhang",
+        "Ao Jia",
+        "Guobin Xi",
+        "Wanjie Gao",
+        "Yinxu Lu",
+        "Jiarui He",
+        "Yuping Wu"
+      ],
+      "year": 2026,
+      "journal": "Batteries &amp; Supercaps",
+      "repository": "Portico",
+      "abstract": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for resolving these interface failures. This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives. The fully alloy anode takes advantage of the corresponding thermodynamic and mechanical properties to effectively suppress the interface failures. The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity. Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition. By analyzing design principles and p",
+      "landing_url": "https://doi.org/10.1002/batt.70333",
+      "pdf_url": "https://chemistry-europe.onlinelibrary.wiley.com/doi/pdf/10.1002/batt.70333",
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries.+2026&rows=3&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue%2Cfrom-pub-date%3A2024-01-01%2Cuntil-pub-date%3A2026-10-22",
+      "source_url": "https://doi.org/10.1002/batt.70333",
+      "fetched_at": "2026-10-22T10:45:05.001361+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "texto_lido": false,
+      "trecho_usado": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side reactions, controllable lithium (Li) dendrite growth, and accumulated internal stress. Alloying modification strategy provides a versatile avenue for resolving these interface failures. This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives. The fully alloy anode takes advantage of the corresponding thermodynamic and mechanical properties to effectively suppress the interface failures. The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity. Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition. By analyzing design principles and p",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-a5757be5f4d4",
+      "fonte_id": "10.3389/fbael.2026.1873385",
+      "url": "https://doi.org/10.3389/fbael.2026.1873385",
+      "titulo": "Solid-state batteries: a new frontier for robotics",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-22T10:45:05.001522+00:00",
+      "publicado_em": "2026-06-12",
+      "trecho": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands. Critically, we demonstrate that a single commercial robot operating with hot-swappable battery packs consumes a cumulative battery capacity of 60–88 kWh over a 7–10 years service life—equivalent to the entire battery of one passenger electric vehicle (EV)—exposing a substantial and underappreciated battery demand from the robotics sector that grows in lockstep with the installed robot fleet. We survey the current state of oxide-, sulfi",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.3389/fbael.2026.1873385",
+      "authors": [
+        "Dongsoo Lee"
+      ],
+      "year": 2026,
+      "journal": "Frontiers in Batteries and Electrochemistry",
+      "repository": null,
+      "abstract": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands. Critically, we demonstrate that a single commercial robot operating with hot-swappable battery packs consumes a cumulative battery capacity of 60–88 kWh over a 7–10 years service life—equivalent to the entire battery of one passenger electric vehicle (EV)—exposing a substantial and underappreciated battery demand from the robotics sector that grows in lockstep with the installed robot fleet. We survey the current state of oxide-, sulfi",
+      "landing_url": "https://doi.org/10.3389/fbael.2026.1873385",
+      "pdf_url": null,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries.+2026&rows=3&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue%2Cfrom-pub-date%3A2024-01-01%2Cuntil-pub-date%3A2026-10-22",
+      "source_url": "https://doi.org/10.3389/fbael.2026.1873385",
+      "fetched_at": "2026-10-22T10:45:05.001522+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "texto_lido": false,
+      "trecho_usado": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompatible with emerging soft and structural robotic designs. Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges. In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking capability, and geometric versatility—address these demands. Critically, we demonstrate that a single commercial robot operating with hot-swappable battery packs consumes a cumulative battery capacity of 60–88 kWh over a 7–10 years service life—equivalent to the entire battery of one passenger electric vehicle (EV)—exposing a substantial and underappreciated battery demand from the robotics sector that grows in lockstep with the installed robot fleet. We survey the current state of oxide-, sulfi",
+      "access_state": "metadata_only"
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "ts": "2026-10-22T10:45:00.982187+00:00",
+      "agente": "orchestrator",
+      "tipo": "research_created",
+      "status": "ok",
+      "descricao": "Pesquisa criada (modo profunda).",
+      "meta": {
+        "modo": "profunda"
+      }
+    },
+    {
+      "seq": 2,
+      "ts": "2026-10-22T10:45:01.018733+00:00",
+      "agente": "orchestrator",
+      "tipo": "plan_created",
+      "status": "ok",
+      "descricao": "Plano v2: 1 frentes, 6 etapas.",
+      "meta": {
+        "subs": [
+          "Pesquise estudos científicos recentes sobre baterias de estado sólido."
+        ],
+        "dependencies": true,
+        "non_redundant": true,
+        "stopping_criteria": "orçamento de buscas/páginas, timeout, uma rodada extra por lacuna",
+        "budgets": {
+          "buscas": 3,
+          "paginas": 3,
+          "timeout_s": 25,
+          "subs": 1,
+          "replans": 1
+        },
+        "max_replans": 1
+      }
+    },
+    {
+      "seq": 3,
+      "ts": "2026-10-22T10:45:01.020177+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 1).",
+      "meta": {
+        "sequence": 1,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 4,
+      "ts": "2026-10-22T10:45:01.023971+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 2).",
+      "meta": {
+        "sequence": 2,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 5,
+      "ts": "2026-10-22T10:45:01.024565+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p1 (busca): Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+      "meta": {}
+    },
+    {
+      "seq": 6,
+      "ts": "2026-10-22T10:45:05.020517+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Pesquise estudos científicos recentes sobre baterias de esta': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok"
+      }
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-22T10:45:05.023066+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 3).",
+      "meta": {
+        "sequence": 3,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 8,
+      "ts": "2026-10-22T10:45:05.023942+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p2 (ler): Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+      "meta": {}
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-22T10:45:05.027649+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-76d39286 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-22T10:45:05.028424+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-22T10:45:05.032223+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.1002/batt.70333",
+        "dominio": "doi.org",
+        "trecho": "All‐solid‐state lithium metal batteries (ASSLMBs) are considered a potential next‐generation system with enhanced safety and high energy density. Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor",
+        "url": "https://doi.org/10.1002/batt.70333"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-22T10:45:05.033436+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-0296b95a de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-22T10:45:05.034131+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-22T10:45:05.037478+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.3390/batteries12020051",
+        "dominio": "doi.org",
+        "trecho": "Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies. Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attentio",
+        "url": "https://doi.org/10.3390/batteries12020051"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-22T10:45:05.038957+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-a5757be5 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-22T10:45:05.039693+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-22T10:45:05.043375+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.3389/fbael.2026.1873385",
+        "dominio": "doi.org",
+        "trecho": "The rapid expansion of robotics into unstructured, human-proximate environments has exposed fundamental limitations of conventional lithium-ion batteries, including safety risks from flammable electrolytes, insufficient energy density for extended untethered operation, and rigid form factors incompa",
+        "url": "https://doi.org/10.3389/fbael.2026.1873385"
+      }
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-22T10:45:05.047327+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 4).",
+      "meta": {
+        "sequence": 4,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-22T10:45:05.047995+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p3 (analisar): Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+      "meta": {}
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-22T10:45:05.048517+00:00",
+      "agente": "orchestrator",
+      "tipo": "adaptive_round_evaluated",
+      "status": "ok",
+      "descricao": "Rodada avaliada: 3 nova(s) evidência(s); 2 busca(s) restantes.",
+      "meta": {
+        "step_id": "p3",
+        "new_evidence": 3,
+        "total_evidence": 3,
+        "remaining_searches": 2,
+        "decision": "evidence_gained"
+      }
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-22T10:45:05.051485+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 5).",
+      "meta": {
+        "sequence": 5,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-22T10:45:05.052042+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p4 (verificar): ",
+      "meta": {}
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-22T10:45:05.056738+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Pesquise estudos científicos recentes sobre baterias de estado sólido..",
+      "meta": {}
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-22T10:45:05.058487+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "UNVERIFIED (lexico-provisorio): Pesquise estudos científicos recentes sobre baterias de estado sólido..",
+      "meta": {
+        "estado": "UNVERIFIED",
+        "afirmacao": "Pesquise estudos científicos recentes sobre baterias de estado sólido..",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-22T10:45:05.059568+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Nonetheless, the practical application is greatly limited by the multiple interface failur",
+      "meta": {}
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-22T10:45:05.061450+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Nonetheless, the practical application is greatly limited by the multiple interface failur",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Nonetheless, the practical application is greatly limited by the multiple interface failures between the anode and solid‐state electrolyte, including poor solid–solid contact, permanent interface‐side",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-22T10:45:05.062006+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Alloying modification strategy provides a versatile avenue for resolving these interface f",
+      "meta": {}
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-22T10:45:05.063055+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Alloying modification strategy provides a versatile avenue for resolving these interface f",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Alloying modification strategy provides a versatile avenue for resolving these interface failures.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-22T10:45:05.063479+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: This review summarizes recent progresses on the interface‐directed alloying strategy from ",
+      "meta": {}
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-22T10:45:05.064452+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): This review summarizes recent progresses on the interface‐directed alloying strategy from ",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "This review summarizes recent progresses on the interface‐directed alloying strategy from three perspectives.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-22T10:45:05.064911+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: The composite embedded alloy framework approach decouples the structural support from Li s",
+      "meta": {}
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-22T10:45:05.066176+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): The composite embedded alloy framework approach decouples the structural support from Li s",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "The composite embedded alloy framework approach decouples the structural support from Li storage, by 3D scaffolds confining a homogeneous lithium‐ion (Li + ) flow and keeping high capacity.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    },
+    {
+      "seq": 33,
+      "ts": "2026-10-22T10:45:05.066772+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Artificial mixed‐conducting interphases actively control charge transfer by a gradient str",
+      "meta": {}
+    },
+    {
+      "seq": 34,
+      "ts": "2026-10-22T10:45:05.067802+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Artificial mixed‐conducting interphases actively control charge transfer by a gradient str",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Artificial mixed‐conducting interphases actively control charge transfer by a gradient structure for electronic conduction and ionic conduction, suppressing electrolyte decomposition.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      }
+    },
+    {
+      "seq": 35,
+      "ts": "2026-10-22T10:45:05.068202+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: By analyzing design principles and p Driven by the imperative for enhanced battery safety,",
+      "meta": {}
+    },
+    {
+      "seq": 36,
+      "ts": "2026-10-22T10:45:05.069121+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): By analyzing design principles and p Driven by the imperative for enhanced battery safety,",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "By analyzing design principles and p Driven by the imperative for enhanced battery safety, solid electrolytes have emerged as a leading strategy in next-generation energy storage technologies.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      }
+    },
+    {
+      "seq": 37,
+      "ts": "2026-10-22T10:45:05.069547+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid el",
+      "meta": {}
+    },
+    {
+      "seq": 38,
+      "ts": "2026-10-22T10:45:05.070525+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid el",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Beyond conventional polymer, oxide, and sulfide systems, chloride-based inorganic solid electrolytes have recently garnered significant attention due to their unique combination of high ionic conducti",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    },
+    {
+      "seq": 39,
+      "ts": "2026-10-22T10:45:05.070970+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: This work presents a comprehensive review of chloride solid electrolytes, examining their ",
+      "meta": {}
+    },
+    {
+      "seq": 40,
+      "ts": "2026-10-22T10:45:05.072276+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): This work presents a comprehensive review of chloride solid electrolytes, examining their ",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "This work presents a comprehensive review of chloride solid electrolytes, examining their crystal structures, synthesis approaches, ionic transport mechanisms, and physicochemical stability under oper",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 1
+      }
+    },
+    {
+      "seq": 41,
+      "ts": "2026-10-22T10:45:05.072839+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Furthermore, we discuss critical considerations for integrating these materials into pract",
+      "meta": {}
+    },
+    {
+      "seq": 42,
+      "ts": "2026-10-22T10:45:05.073898+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Furthermore, we discuss critical considerations for integrating these materials into pract",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Furthermore, we discuss critical considerations for integrating these materials into practical all-solid-state batteries (ASSBs), including performance across wide temperature ranges, scalable cell fa",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      }
+    },
+    {
+      "seq": 43,
+      "ts": "2026-10-22T10:45:05.074371+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductor",
+      "meta": {}
+    },
+    {
+      "seq": 44,
+      "ts": "2026-10-22T10:45:05.075294+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductor",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "Solid-state batteries (SSBs), which replace liquid electrolytes with solid ionic conductors, offer a compelling solution to these challenges.",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 3
+      }
+    },
+    {
+      "seq": 45,
+      "ts": "2026-10-22T10:45:05.075738+00:00",
+      "agente": "checker",
+      "tipo": "claim_identified",
+      "status": "ok",
+      "descricao": "Afirmação: In this Perspective, we examine the unique power requirements of modern robotic systems an",
+      "meta": {}
+    },
+    {
+      "seq": 46,
+      "ts": "2026-10-22T10:45:05.076805+00:00",
+      "agente": "checker",
+      "tipo": "claim_verified",
+      "status": "ok",
+      "descricao": "PARTIALLY_SUPPORTED (lexico-provisorio): In this Perspective, we examine the unique power requirements of modern robotic systems an",
+      "meta": {
+        "estado": "PARTIALLY_SUPPORTED",
+        "afirmacao": "In this Perspective, we examine the unique power requirements of modern robotic systems and evaluate how the intrinsic properties of SSBs—non-flammability, wide temperature tolerance, bipolar stacking",
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 2
+      }
+    },
+    {
+      "seq": 47,
+      "ts": "2026-10-22T10:45:05.079067+00:00",
+      "agente": "checker",
+      "tipo": "claim_verification_completed",
+      "status": "ok",
+      "descricao": "12 afirmações avaliadas.",
+      "meta": {}
+    },
+    {
+      "seq": 48,
+      "ts": "2026-10-22T10:45:05.088671+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "12 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    },
+    {
+      "seq": 49,
+      "ts": "2026-10-22T10:45:05.093317+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 6).",
+      "meta": {
+        "sequence": 6,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 50,
+      "ts": "2026-10-22T10:45:05.094450+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p5 (sintetizar): ",
+      "meta": {}
+    },
+    {
+      "seq": 51,
+      "ts": "2026-10-22T10:45:05.095449+00:00",
+      "agente": "synthesizer",
+      "tipo": "answer_started",
+      "status": "ok",
+      "descricao": "Síntese extrativa com 3 evidências.",
+      "meta": {}
+    },
+    {
+      "seq": 52,
+      "ts": "2026-10-22T10:45:05.099693+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 7).",
+      "meta": {
+        "sequence": 7,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 53,
+      "ts": "2026-10-22T10:45:05.100487+00:00",
+      "agente": "orchestrator",
+      "tipo": "step_started",
+      "status": "ok",
+      "descricao": "Etapa p6 (auditar): ",
+      "meta": {}
+    },
+    {
+      "seq": 54,
+      "ts": "2026-10-22T10:45:05.101030+00:00",
+      "agente": "auditor",
+      "tipo": "audit_started",
+      "status": "ok",
+      "descricao": "Auditoria final da resposta.",
+      "meta": {}
+    },
+    {
+      "seq": 55,
+      "ts": "2026-10-22T10:45:05.101715+00:00",
+      "agente": "auditor",
+      "tipo": "answer_started",
+      "status": "ok",
+      "descricao": "Auditoria: 0 problemas.",
+      "meta": {
+        "problemas": []
+      }
+    },
+    {
+      "seq": 56,
+      "ts": "2026-10-22T10:45:05.102377+00:00",
+      "agente": "auditor",
+      "tipo": "audit_completed",
+      "status": "ok",
+      "descricao": "Auditoria: 0 problemas.",
+      "meta": {}
+    },
+    {
+      "seq": 57,
+      "ts": "2026-10-22T10:45:05.106612+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 8).",
+      "meta": {
+        "sequence": 8,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 58,
+      "ts": "2026-10-22T10:45:05.110007+00:00",
+      "agente": "orchestrator",
+      "tipo": "context_checkpoint_saved",
+      "status": "ok",
+      "descricao": "Contexto persistido (checkpoint 9).",
+      "meta": {
+        "sequence": 9,
+        "context_version": 1
+      }
+    },
+    {
+      "seq": 59,
+      "ts": "2026-10-22T10:45:05.111603+00:00",
+      "agente": "orchestrator",
+      "tipo": "research_completed",
+      "status": "ok",
+      "descricao": "Pesquisa concluida: 3 evidências.",
+      "meta": {}
+    }
+  ]
+}
