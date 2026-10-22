@@ -667,7 +667,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
         except (TypeError, ValueError):
             metadata = {}
         for key in ("doi", "authors", "year", "journal", "repository", "abstract",
-                    "landing_url", "pdf_url", "license", "review_status", "provider",
+                    "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
                     "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                     "abstract_kind", "provider_metadata_untrusted", "content_scope",
                     "full_text_fetched",
@@ -935,7 +935,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                  or research.agora_iso()}
         if academic:
             for key in ("doi", "authors", "year", "journal", "repository", "abstract",
-                        "landing_url", "pdf_url", "license", "review_status", "provider",
+                        "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
                         "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                         "abstract_kind", "provider_metadata_untrusted", "content_scope",
                         "full_text_fetched",
@@ -945,7 +945,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             fonte["full_text_fetched"] = False
             fonte["texto_lido"] = False
             fonte["access_state"] = "metadata_only"
-            fonte["publicado_em"] = str(a.get("year") or "")
+            fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
         if academic:
             ev.update({key: value for key, value in fonte.items()

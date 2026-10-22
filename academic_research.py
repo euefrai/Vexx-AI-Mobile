@@ -259,11 +259,37 @@ def normalize_crossref(item: dict, provider_url: str) -> dict:
     landing = item.get("URL") if isinstance(item.get("URL"), str) else None
     abstract = _plain_abstract(item.get("abstract"))
     source_url = landing
-    return _normalize_base(
+    record = _normalize_base(
         "crossref", provider_url, source_url, landing, _doi(item.get("DOI")), title,
         _authors(item.get("author"), crossref=True), _year_from_crossref(item), journal,
         repository, abstract, pdf, license_value, _explicit_review_status(item),
     )
+
+    dates = []
+    for field in ("published-online", "published-print", "issued"):
+        value = item.get(field)
+        parts = value.get("date-parts") if isinstance(value, dict) else None
+        if not isinstance(parts, list) or not parts or not isinstance(parts[0], list):
+            continue
+        nums = parts[0]
+        if not 1 <= len(nums) <= 3 or any(type(v) is not int for v in nums):
+            continue
+        try:
+            dt = datetime(nums[0], nums[1] if len(nums) > 1 else 1,
+                          nums[2] if len(nums) > 2 else 1, tzinfo=timezone.utc)
+        except (ValueError, OverflowError):
+            continue
+        if dt > datetime.now(timezone.utc):
+            continue
+        declared = "-".join(str(v).zfill(4 if i == 0 else 2) for i, v in enumerate(nums))
+        dates.append((dt, declared, field))
+    if dates:
+        _, declared, origin = min(dates)
+        record["publicado_em"] = declared
+        record["publication_date_origin"] = origin
+        record["year"] = int(declared[:4])
+    record["publication_type"] = kind or "unknown"
+    return record
 
 
 class _RateGate:

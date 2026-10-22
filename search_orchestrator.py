@@ -146,7 +146,7 @@ _GENERICOS_CORRESPONDENCIA.update({
     "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
     "tecnica", "técnica", "analise", "análise", "usando", "sobre", "pesquise",
     "documentacao", "documentação", "oficial", "oficiais", "recentes", "recente",
-    "estudos", "cientificos", "científicos", "cientifica", "científica",
+    "avanços", "avancos", "estudos", "cientificos", "científicos", "cientifica", "científica",
 })
 
 
@@ -168,7 +168,7 @@ def _termos_correspondencia(consulta: str) -> list:
 def _tem_termo(termo: str, texto: str) -> bool:
     """Token boundaries prevent API from matching capital or RAM from programa."""
     aliases = {"arquitetura": ("architecture",), "baterias": ("batteries",),
-               "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",)}
+               "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
     if re.fullmatch(r"\d+(?:[.,]\d+)*", term):
@@ -190,6 +190,8 @@ def correspondencia_item(a: dict, consulta: str) -> dict:
 
 
 def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
+    if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip():
+        return False
     if not termos:
         return True
     texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
@@ -316,6 +318,17 @@ def variantes(consulta: str, classes=None, teto: int = 3, produto: bool = False)
     return out[:teto]
 
 
+def consulta_cientifica(consulta: str) -> str:
+    """Small deterministic vocabulary; unknown subjects retain original words."""
+    q = _sem_acentos(consulta)
+    for pt, en in (("baterias de estado solido", "solid-state batteries"),
+                   ("materiais semicondutores", "semiconductor materials"),
+                   ("arquitetura transformer", "Transformer architecture")):
+        q = q.replace(pt, en)
+    q = re.sub(r"\b(pesquise|pesquisar|estudos?|cientificos?|cientificas?|recentes?|avancos|sobre|fontes|tecnicas)\b", " ", q)
+    return re.sub(r"\s+", " ", q).strip(" .")[:180]
+
+
 def termos_para_provedor(consulta: str, classe: str) -> str:
     """Consulta ajustada ao provedor (ex.: técnico → inglês determinístico)."""
     if classe != sp.CLASSE_TECNICA:
@@ -440,24 +453,30 @@ def _pagina_de_indice(a: dict) -> bool:
 
 
 def _data_do_item(a: dict):
-    """Data publicada declarada pelo item (pubDate/ISO) ou None — sem palpite."""
-    bruto = str(a.get("data") or (a.get("meta") or {}).get("publicado_em")
-                or a.get("publicado_em") or "").strip()
-    if not bruto:
-        return None
+    """Publication only; retrieval, indexing and update dates are not substitutes."""
     import email.utils
     from datetime import datetime, timezone
+    meta = a.get("meta") or {}
+    bruto = str(a.get("publicado_em") or meta.get("publicado_em")
+                or a.get("published_at") or a.get("publication_date")
+                or a.get("data") or a.get("year") or "").strip()
+    if not bruto:
+        return None
     try:
-        try:
-            dt = email.utils.parsedate_to_datetime(bruto)
-        except (TypeError, ValueError):
-            dt = None
-        if dt is None:
-            dt = datetime.fromisoformat(bruto.replace("Z", "+00:00"))
+        if re.fullmatch(r"\d{4}(?:-\d{2})?", bruto):
+            parts = [int(v) for v in bruto.split("-")]
+            dt = datetime(parts[0], parts[1] if len(parts) > 1 else 1, 1, tzinfo=timezone.utc)
+        else:
+            try:
+                dt = email.utils.parsedate_to_datetime(bruto)
+            except (TypeError, ValueError):
+                dt = datetime.fromisoformat(bruto.replace("Z", "+00:00"))
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
-        return dt
-    except (TypeError, ValueError):
+        dt = dt.astimezone(timezone.utc)
+        # Future or malformed dates never get a freshness bonus.
+        return dt if dt <= datetime.now(timezone.utc) else None
+    except (TypeError, ValueError, OverflowError):
         return None
 
 
@@ -473,7 +492,8 @@ def deduplicar(achados: list) -> tuple:
     vistos, unicos, descartes = {}, [], []
     for a in achados or []:
         url = (a.get("url") or "").strip()
-        chave = canonizar_url(url)
+        doi = str(a.get("doi") or "").lower().removeprefix("https://doi.org/").removeprefix("doi:").strip()
+        chave = "doi:" + doi if re.fullmatch(r"10\.\d{4,9}/\S+", doi) else canonizar_url(url)
         if not url or not chave:
             descartes.append({"url": url[:200], "motivo": "url inválida"})
             continue
@@ -496,6 +516,8 @@ def deduplicar(achados: list) -> tuple:
         if len(tokens) >= 4:
             dono = None
             for conj, item in vistos_titulo:
+                if a.get("doi") and item.get("doi") and a["doi"].lower() != item["doi"].lower():
+                    continue  # Same title does not override distinct bibliographic identities.
                 uniao = len(tokens | conj)
                 if uniao and (len(tokens & conj) / uniao) >= 0.9:
                     dono = item
@@ -529,11 +551,17 @@ RX_ANO_CITADO = re.compile(r"\b(?:19|20)\d{2}\b")
 
 
 def _ano_do_item(a: dict):
-    """Ano declarado pelo item: pubDate (data) primeiro; senão ano no título."""
-    for campo in ("data", "titulo"):
-        m = RX_ANO_CITADO.search(a.get(campo) or "")
-        if m:
-            return int(m.group(0))
+    dt = _data_do_item(a)
+    if dt is not None:
+        return dt.year
+    # An explicit invalid publication date must not fall back to a title year.
+    if any(a.get(k) for k in ("data", "publicado_em", "published_at", "publication_date", "year")) or (a.get("meta") or {}).get("publicado_em"):
+        return None
+    m = RX_ANO_CITADO.search(a.get("titulo") or "")
+    if m:
+        from datetime import datetime, timezone
+        year = int(m.group(0))
+        return year if year <= datetime.now(timezone.utc).year else None
     return None
 
 
@@ -592,18 +620,14 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
         pontos -= 2.0
     alvo = _ano_alvo(consulta, info)
     if alvo is not None:
-        ano = re.search(r"\b(20\d{2})\b", titulo + " " + trecho)
-        if ano:
-            try:
-                pontos += max(0, min(3.0, (int(ano.group(1)) - 2015) * 0.3))
-            except ValueError:
-                pass
         # V5.7: conteúdo desatualizado é sinalizado e levemente rebaixado
         # (nunca escondido). Regra única do evidence_graph: sem data
         # conhecida, NÃO acusa.
         ano_item = _ano_do_item(a)
         if ano_item is not None:
             a["ano"] = ano_item
+            # Bounded freshness, only for a temporal request and declared publication.
+            pontos += max(0.0, 3.0 - max(0, alvo - ano_item))
             velho = eg.fonte_desatualizada({"year": ano_item}, ano_ref=alvo)
             a["desatualizado"] = bool(velho)
             if velho:
@@ -624,8 +648,8 @@ def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
         a["correspondencia_tipo"] = match["tipo"]
         a["cobertura_pedido"] = match["cobertura"]
         a["relevancia"] = round(_pontos_relevancia(a, consulta, classes, info), 2)
-    return sorted(achados, key=lambda a: (not a.get("fonte_primaria", False),
-        not _util_para_pedido(a, _termos_correspondencia(consulta), consulta), -a.get("relevancia", 0.0)))
+    return sorted(achados, key=lambda a: (not _util_para_pedido(a, _termos_correspondencia(consulta), consulta),
+        not a.get("fonte_primaria", False), -a.get("relevancia", 0.0)))
 
 
 # ── Lacunas do pedido ──────────────────────────────────────────────
@@ -722,6 +746,8 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     """Provedores por afinidade; dados/notícias só quando fazem sentido."""
     nomes = []
     ordem = []
+    if info.get("academica"):
+        ordem.append("crossref")
     if info.get("produto"):
         ordem.extend(["bing", "marginalia"])
     if sp.CLASSE_NOTICIA in classes and not info.get("academica"):

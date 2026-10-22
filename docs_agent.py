@@ -660,16 +660,19 @@ def obter_texto(db, doc_id: str, limite: int = 60000, owner=DONO_PADRAO) -> str:
     return "".join(partes)[:limite]
 
 
-def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DONO_PADRAO) -> list:
+def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DONO_PADRAO, contexto: str = "") -> list:
     """Recupera trechos lexicais com proveniência, usando FTS5 quando disponível."""
+    temporal = bool(re.search(r"\b(atual|atuais|recentes?|últim[oa]s?|latest|recent|current)\b", pergunta + " " + contexto, re.I))
     toks_q = _tokens(pergunta)
+    if temporal:
+        toks_q -= {"atual", "atuais", "recente", "recentes", "último", "últimos", "última", "últimas", "latest", "recent", "current"}
     if not toks_q:
         return []
     k = min(max(int(k), 1), 20)
     rows = []
     fts_available = False
     terms = sorted(toks_q)
-    fts_query = " AND ".join('"' + term.replace('"', '""') + '"' for term in terms)
+    fts_query = (" OR " if temporal else " AND ").join('"' + term.replace('"', '""') + '"' for term in terms)
     try:
         fts_sql = """SELECT c.doc_id, c.idx, c.text, c.chunk_id, c.section, c.page,
                             c.content_hash, c.version, c.source, d.name, c.table_hint,
@@ -686,7 +689,7 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
             fts_sql += " AND c.doc_id=?"
             args.append(doc_id)
         fts_sql += " ORDER BY bm25(doc_chunks_fts), c.idx LIMIT ?"
-        rows = db.execute(fts_sql, (*args, k)).fetchall()
+        rows = db.execute(fts_sql, (*args, min(100, k * 5) if temporal else k)).fetchall()
         fts_available = True
     except Exception:
         pass
@@ -712,8 +715,21 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
                 score = len(inter) / max(1, len(toks_q)) + 0.1 * len(inter) / max(1, len(toks))
                 scored.append((score, did, idx, txt, chunk_id, section, page, digest, version, source, name,
                                table_hint))
-    if not fts_available:
+    if not rows:
         scored.sort(key=lambda x: (-x[0], x[1], x[2]))
+    if temporal:
+        def temporal_key(row):
+            # Explicit dates in content, never upload/index timestamps. Retain relevance
+            # ahead of freshness; a recent unrelated chunk cannot win.
+            text = row[3]
+            coverage = len(toks_q & _tokens(text)) / max(1, len(toks_q))
+            match = re.search(r"\b(?:report|relatório|published|publicado|updated|atualizado)\s*(?:em|in|:)?\s*((?:19|20)\d{2})(?:-\d{2}-\d{2})?", text[:500], re.I)
+            from datetime import datetime, timezone
+            year = int(match.group(1)) if match else 0
+            if year > datetime.now(timezone.utc).year:
+                year = 0
+            return (-int(coverage >= 0.6), -year, -coverage, row[1], row[2])
+        scored.sort(key=temporal_key)
     return [{"doc_id": did, "doc": name, "idx": idx, "chunk_id": chunk_id,
              "owner_id": owner, "section": section, "page": page, "content_hash": digest,
              "version": version, "source": source, "table_hint": bool(table_hint),

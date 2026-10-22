@@ -353,7 +353,7 @@ def run_document_retrieval_benchmark(
             for query in case["queries"]:
                 before = time.perf_counter()
                 hits = docs_agent.trechos_relevantes(
-                    db, query["text"], k=k, owner=owner
+                    db, query["text"], k=k, owner=owner, contexto=case.get("question", "")
                 )
                 elapsed_ms = (time.perf_counter() - before) * 1000
                 query_times.append(elapsed_ms)

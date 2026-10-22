@@ -95,6 +95,45 @@ def _url_ok(url: str) -> str:
     return url[:500] if url.lower().startswith("http") else ""
 
 
+def buscar_crossref(consulta: str, limite: int = 6, timeout: float = 8.0) -> list:
+    """Existing bibliographic normalizer, bounded safe downloader, no retries."""
+    import academic_research as academic
+    import search_orchestrator as orch
+    from datetime import datetime, timezone
+    core = _research()
+    if core._circuito_fechado("crossref"):
+        raise ErroProvedor("Crossref em espera após falha.", "bloqueado")
+    q = orch.consulta_cientifica(consulta)
+    params = {"query.bibliographic": q, "rows": max(1, min(int(limite), 10)),
+              "select": academic.CROSSREF_FIELDS, "filter": "type:journal-article,has-abstract:true"}
+    if orch.classificar(consulta)["temporal"]:
+        year = datetime.now(timezone.utc).year
+        params["filter"] += f",from-pub-date:{year-2}-01-01,until-pub-date:{datetime.now(timezone.utc).date().isoformat()}"
+    url = academic.CROSSREF_WORKS_URL + "?" + urllib.parse.urlencode(params)
+    try:
+        payload = _json(url, timeout)
+    except ErroProvedor as exc:
+        if exc.codigo in ("bloqueado", "rate_limited"):
+            core._circuito_falha("crossref")
+        raise
+    message = payload.get("message") if isinstance(payload, dict) else None
+    items = message.get("items") if isinstance(message, dict) else None
+    if not isinstance(items, list):
+        raise ErroProvedor("Crossref sem lista de trabalhos.", "formato")
+    out = []
+    for item in items[:10]:
+        if not isinstance(item, dict):
+            continue
+        record = academic.normalize_crossref(item, url)
+        record.update(origem="crossref", tipo="academico", fonte_primaria=True,
+                      publication_type=str(item.get("type") or "unknown"))
+        if record.get("titulo") and record.get("doi"):
+            out.append(record)
+    if not out:
+        raise ErroProvedor("Crossref sem resultados.", "vazio")
+    return out[:limite]
+
+
 # ── Bing (feed RSS oficial de busca e de notícias) ──────────────────
 def buscar_ddg(consulta: str, limite: int = 8, timeout: float = 10.0) -> list:
     """Reuse the existing HTML search adapter; blocked responses stop here."""
@@ -437,6 +476,8 @@ CLASSE_LIVRO = "livros"
 CLASSE_SAUDE = "saude"
 
 PROVEDORES: dict = {
+    "crossref": {"rotulo": "Crossref (metadados públicos)", "classes": (CLASSE_ACADEMICA,),
+                 "tipo": "academico", "peso": 8.0, "fn": buscar_crossref},
     "ddg": {"rotulo": "DuckDuckGo", "classes": (CLASSE_GERAL, CLASSE_TECNICA, CLASSE_ACADEMICA),
             "tipo": "pagina", "peso": 8.0, "fn": buscar_ddg},
     "bing": {"rotulo": "Bing (feed oficial)", "classes": (CLASSE_GERAL, CLASSE_NOTICIA),

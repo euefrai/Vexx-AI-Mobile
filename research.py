@@ -752,6 +752,12 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
     se a página foi de fato lida (`lida=True`) — fonte encontrada não é
     fonte consultada.
     """
+    if recuperar_fn is None and a.get("metadata_source") == "academic_provider":
+        abstract = str(a.get("abstract") or "")[:1200]
+        return {"titulo": a.get("titulo", ""), "texto": abstract, "final": a["url"],
+                "lida": bool(abstract), "ilegivel": False,
+                "content_scope": "abstract_only" if abstract else "metadata_only",
+                "extrator": "academic_provider", "trecho_usado": abstract}
     if recuperar_fn is None and urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
         import source_check
         import docs_agent
@@ -839,7 +845,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             and not dom_canonica.endswith("." + dominio) \
             and not dominio.endswith("." + dom_canonica):
         origem_declarada = dom_canonica
-    return {"titulo": (rec.get("titulo") or a.get("titulo") or "")[:160],
+    fonte = {"titulo": (rec.get("titulo") or a.get("titulo") or "")[:160],
             "url": (a.get("url") or "")[:500],
             "dominio": _dominio(a.get("url", "")),
             "acessado_em": agora_iso(),
@@ -861,6 +867,19 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             **({"full_text_fetched": False} if rec.get("content_scope") == "abstract_only"
                else {"full_text_fetched": lida} if rec.get("content_scope") == "document_text" else {}),
             "ilegivel": bool(rec.get("ilegivel", False))}
+    if a.get("metadata_source") == "academic_provider":
+        for key in ("doi", "authors", "year", "journal", "repository", "abstract",
+                    "landing_url", "pdf_url", "review_status", "publication_type",
+                    "provider", "provider_url", "source_url", "fetched_at",
+                    "metadata_source", "publication_date_origin", "provider_metadata_untrusted", "abstract_untrusted"):
+            if key in a:
+                fonte[key] = a[key]
+        fonte["full_text_fetched"] = False
+        fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
+        fonte["autor"] = ", ".join(a.get("authors") or [])[:400]
+        fonte["access_state"] = "abstract_metadata" if lida else "metadata_only"
+    return fonte
+
 
 
 # Orçamento padrão da busca síncrona (Render Free): poucas consultas e
@@ -968,7 +987,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         buscar_fn.etapas = []
         buscar_fn.info = {}
     salvos = cache_get(db, owner, "web", pedido)
-    if salvos is not None and salvos.get("retrieval_version") == "5.9":
+    if salvos is not None and salvos.get("retrieval_version") == "5.9.1":
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -1031,7 +1050,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado_texto = info_busca.get("estado_texto") or ESTADO_TEXTO.get(estado, "")
     prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
-             "retrieval_version": "5.9",
+             "retrieval_version": "5.9.1",
              "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
              "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(fontes),
@@ -1120,6 +1139,8 @@ def bloco_grounding(fontes: list, hoje_br: str, info: dict = None) -> str:
         marcas = []
         if f.get("relevante") is False:
             marcas.append("sem correspondência demonstrável com o pedido; não usar como suporte")
+        if f.get("metadata_source") == "academic_provider":
+            marcas.append("metadados bibliográficos recuperados; página original não aberta; revisão por pares não presumida")
         if f.get("content_scope") == "abstract_only":
             marcas.append("somente resumo lido; texto completo não recuperado")
         if f.get("status") and f.get("status") != "aberta":
