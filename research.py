@@ -403,6 +403,10 @@ def buscar_ddg(consulta: str, base: str = DDG_HTML, max_resultados: int = 6,
     q = (consulta or "").strip()[:200]
     if not q:
         return []
+    if abrir is None and _circuito_fechado("ddg"):
+        registrar_status("ddg-lite" if "lite" in base else "ddg", bloqueado=True,
+                         erro="circuit_breaker")
+        return []
     pagina = baixar(base + urllib.parse.quote(q), timeout=timeout,
                     max_bytes=512 * 1024, abrir=abrir)[1]
     out = []

@@ -458,6 +458,8 @@ def extrair_criterios(texto: str) -> dict:
         if c in t and c not in marcas:
             categoria = c
             break
+    if not categoria and re.search(r"\b(?:samsung\s+)?galaxy\s+[as]\d{2}\b", t):
+        categoria = "celular"
     orc = _extrair_orcamento(texto or "")
     specs = _extrair_specs(texto or "")
     if categoria in ("notebook", "celular", "tablet") and \
@@ -470,6 +472,12 @@ def extrair_criterios(texto: str) -> dict:
             if 2 <= ram <= 64 and 64 <= arm <= 8192:
                 specs.setdefault("ram_fisica_gb", ram)
                 specs.setdefault("armazenamento_gb", arm)
+    if categoria in ("celular", "smartphone", "tablet") and "armazenamento_gb" not in specs:
+        # Single high-capacity GB on a phone is storage, never inferred RAM.
+        capacity = re.search(r"\b(64|128|256|512|1024)\s*gb\b(?!\s*ram)", t)
+        if capacity:
+            specs["armazenamento_gb"] = int(capacity.group(1))
+            specs["armazenamento_exato"] = not bool(re.search(r"pelo menos|minimo|no minimo|ou mais", t))
     comparacao = bool(re.search(r"compar|versus|\bvs\b|diferen|qual melhor|prós e contras|pros e contras", t))
     return {"categoria": categoria, "orcamento": orc, "marcas": marcas,
             "specs": specs, "comparacao": comparacao,
@@ -479,7 +487,7 @@ def extrair_criterios(texto: str) -> dict:
 # Specs que o usuário DECLAROU (viram exclusão dura em `aplicar_filtros`);
 # o restante (flags aspiracionais como "gamer") é atributo desejável.
 _SPECS_DURAS = ("ram_fisica_gb", "armazenamento_gb", "tela_pol", "bateria_mah",
-                "flag_novo", "tiers", "modelos", "familias")
+                "flag_novo", "tiers", "modelos", "familias", "armazenamento_exato")
 
 
 def filtros_explicitos(criterios: dict) -> dict:
@@ -737,7 +745,7 @@ def _nos_produto(obj) -> list:
     return achados
 
 
-def extrair_ofertas_jsonld(pagina: str) -> list:
+def extrair_ofertas_jsonld(pagina: str, consulta: str = "") -> list:
     """Produtos com ofertas a partir de blocos JSON-LD. Nunca inventa."""
     out = []
     for m in _RX_LDJSON.finditer(pagina or ""):
@@ -749,8 +757,16 @@ def extrair_ofertas_jsonld(pagina: str) -> list:
             out.extend(_nos_produto(obj))
         except (AttributeError, TypeError, RecursionError):
             continue
-        if len(out) >= 4:
+        if len(out) >= (64 if consulta else 4):
             break
+    if consulta:
+        criteria = extrair_criterios(consulta)
+        def priority(ext):
+            # Local selection only: no page or price is verified by this ranking.
+            p = montar_produto(ext, "https://candidate.invalid/item", "https://candidate.invalid/item", "")
+            inside, _ = aplicar_filtros([p], criteria)
+            return (not bool(inside), bool(p.get("pendencias_do_pedido")), not p.get("preco_confirmado"))
+        out = sorted(out[:64], key=priority)
     return out[:4]
 
 
@@ -872,6 +888,7 @@ def montar_produto(extraido: dict, url: str, url_final: str,
         "preco": preco,
         "moeda": moeda,
         "preco_confirmado": confirmado,
+        "preco_valido_ate": (dono.get("valido_ate") or "") if confirmadas else "",
         "preco_a_partir_de": bool(confirmado and faixa),
         "preco_texto": (f"a partir de {formatar_preco(preco, moeda)}"
                         if (confirmado and faixa)
@@ -1021,6 +1038,9 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
             if ap is not None and ap < specs["armazenamento_gb"]:
                 motivos.append("armazenamento abaixo do pedido")
                 codigos.append("armazenamento_abaixa")
+            if specs.get("armazenamento_exato") and ap is not None and ap > specs["armazenamento_gb"]:
+                motivos.append("armazenamento diferente da variante pedida")
+                codigos.append("armazenamento_diferente")
         # FASE 4: versão/edição e modelo pedidos são identidade, não enfeite.
         tiers_pedido = [str(x) for x in (specs.get("tiers") or [])
                         if str(x).strip()]
@@ -1219,7 +1239,7 @@ def salvar_consulta(db, owner: str, conv: str, consulta: str,
 
 
 def ultima_consulta(db, owner: str, conv: str) -> dict | None:
-    row = db.execute("SELECT id, consulta, criterios, resultado, criado_em"
+    row = db.execute("SELECT id, consulta, criterios, resultado, criado_em, expira_em"
                      " FROM shopping_consultas WHERE owner_id=? AND conv=?"
                      " ORDER BY criado_em DESC LIMIT 1",
                      (owner, conv or "")).fetchone()
@@ -1229,7 +1249,7 @@ def ultima_consulta(db, owner: str, conv: str) -> dict | None:
         return {"id": row[0], "consulta": row[1],
                 "criterios": json.loads(row[2] or "{}"),
                 "resultado": json.loads(row[3] or "{}"),
-                "criado_em": row[4]}
+                "criado_em": row[4], "expira_em": row[5]}
     except (TypeError, ValueError):
         return None
 
@@ -1244,6 +1264,8 @@ def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = No
             res = json.loads(row[0])
             # Category/brand alone cannot identify a budget, model or variant.
             if criterios is not None and res.get("criterios") != criterios:
+                continue
+            if any(not _preco_vigente(p) for p in res.get("produtos", []) + res.get("alternativas", [])):
                 continue
             res["de_cache"] = True
             res["verificado_em"] = row[1]
@@ -1510,6 +1532,18 @@ def _mesclar_candidatos(*listas: list) -> list:
     return mesclado
 
 
+def _descoberta_suficiente(candidatos: list, consulta: str) -> bool:
+    """Specific requests need matching item candidates, not generic categories."""
+    import search_orchestrator as orch
+    termos = orch._termos_correspondencia(consulta)
+    if len(termos) <= 2:
+        return sum(classificar_candidato(a) in ("PRODUCT_CANDIDATE", "COMMERCIAL_LISTING")
+                   for a in candidatos) >= COBERTURA_COMERCIAL_MINIMA
+    return sum(classificar_candidato(a) == "PRODUCT_CANDIDATE"
+               and orch._util_para_pedido(a, termos, consulta)
+               for a in candidatos) >= COBERTURA_COMERCIAL_MINIMA
+
+
 def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
     """DDG HTML → Lite com gate comercial. Retorna (achados, etapas).
 
@@ -1522,14 +1556,23 @@ def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
     pool: list = []
     for base_nome, base in (("ddg", research.DDG_HTML),
                             ("ddg-lite", research.DDG_LITE)):
+        status_anterior = research.status_provedor(base_nome)
         try:
             achados = research.buscar_ddg(consulta, base=base,
                                           max_resultados=max_resultados) or []
         except Exception as exc:
             etapas.append(f"{base_nome}: falhou ({type(exc).__name__})")
+            if getattr(exc, "codigo", "") == "bloqueado":
+                research._circuito_falha("ddg")
+                break
             continue
         if not achados:
-            etapas.append(f"{base_nome}: sem resultados (bloqueio?)")
+            status_atual = research.status_provedor(base_nome)
+            blocked = status_atual != status_anterior and status_atual.get("bloqueado")
+            etapas.append(f"{base_nome}: " + ("bloqueado (sem nova tentativa)" if blocked else "sem resultados"))
+            if blocked:
+                research._circuito_falha("ddg")
+                break
             continue
         cont = _contagem_classificacoes(achados)
         comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
@@ -1537,7 +1580,7 @@ def buscar_ddg_chain(consulta: str, max_resultados: int = 6) -> tuple:
         etapas.append(f"{base_nome}: {len(achados)} resultados "
                       f"({comerciais} comerciais)")
         pool = _mesclar_candidatos(pool, achados)
-        if comerciais >= COBERTURA_COMERCIAL_MINIMA:
+        if _descoberta_suficiente(pool, consulta):
             return pool, etapas
     return pool, etapas
 
@@ -1623,9 +1666,9 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
          motivo=("useful_candidates_found"
                  if comerciais >= COBERTURA_COMERCIAL_MINIMA else
                  ("insufficient_commercial_candidates" if cascata
-                  else "provider_blocked")),
+                  else "discovery_empty")),
          ms=(time.monotonic() - inicio) * 1000)
-    if comerciais >= COBERTURA_COMERCIAL_MINIMA:
+    if _descoberta_suficiente(cascata, consulta):
         return _ordenar_candidatos(cascata), etapas
     inicio = time.monotonic()
     achados, wetapas = buscar_web_v55(consulta)
@@ -1640,7 +1683,7 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
                      + cont.get("UNKNOWN", 0)),
          motivo=("fallback_success"
                  if comerciais >= COBERTURA_COMERCIAL_MINIMA else
-                 ("irrelevant_results" if achados else "provider_blocked")),
+                 ("irrelevant_results" if achados else "discovery_empty")),
          ms=(time.monotonic() - inicio) * 1000)
     return _ordenar_candidatos(_mesclar_candidatos(cascata, achados)), etapas
 
@@ -1726,6 +1769,8 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
             consultas.append(f"{nucleo}{detalhe} preço até {orc['max']:g}".strip())
         else:
             consultas.append(f"melhor {nucleo}{detalhe} comprar Brasil".strip())
+    consultas = [re.sub(r"\b(?:melhor|menor)\b|[,;]", " ", q, flags=re.I) for q in consultas]
+    consultas = [re.sub(r"\s+", " ", q).strip() for q in consultas]
     vistos, final = set(), []
     for q in consultas:
         chave = q.lower()
@@ -1750,7 +1795,10 @@ def _mesmo_recurso(a: str, b: str) -> bool:
         if host.startswith("www."):
             host = host[4:]
         caminho = re.sub(r"/+", "/", p.path or "/").rstrip("/") or "/"
-        return f"{host}{caminho}" if host else ""
+        identity = sorted((k.lower(), v) for k, v in urllib.parse.parse_qsl(p.query)
+                          if k.lower() in {"sku", "variant", "variation", "variation_id", "productid", "product_id", "pid", "id"})
+        suffix = "?" + urllib.parse.urlencode(identity) if identity else ""
+        return f"{host}{caminho}{suffix}" if host else ""
     na, nb = _norm(a), _norm(b)
     return bool(na) and na == nb
 
@@ -1769,11 +1817,14 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
     página NÃO ter virado oferta — {"url", "codigo", "motivo"} — para as
     referências não verificadas. Não altera o resultado retornado.
     """
-    def _reg(codigo: str, motivo: str = "") -> None:
+    inicio_pagina = time.monotonic()
+
+    def _reg(codigo: str, motivo: str = "", **campos) -> None:
         if relatorio is not None:
             try:
                 relatorio.append({"url": url, "codigo": codigo,
-                                  "motivo": _limpa(motivo, 160)})
+                                  "motivo": _limpa(motivo, 160),
+                                  "ms": round((time.monotonic() - inicio_pagina) * 1000), **campos})
             except Exception:
                 pass
 
@@ -1815,7 +1866,7 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
         return []
     saidas = []
     try:
-        for ext in extrair_ofertas_jsonld(pagina):
+        for ext in extrair_ofertas_jsonld(pagina, consulta=consulta):
             ext["origem_preco"] = "jsonld"
             url_item = ext.get("url_produto") or ""
             if listagem:
@@ -1866,6 +1917,9 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
             _reg("listagem", "listagem/catálogo (item sem URL própria)")
         else:
             _reg("sem_dados", "página sem dados estruturados de produto")
+    if saidas:
+        _reg("extraida", "dados efetivamente extraídos", origem=[p.get("preco_origem") for p in saidas],
+             ofertas=len(saidas), url_final=final, listagem=listagem)
     return saidas
 
 
@@ -1956,9 +2010,12 @@ def _validar_item_declarado(p: dict, baixar_fn, consulta: str) -> dict | None:
         except Exception:
             p2 = None
         if p2:
+            for identity_key in ("nome", "marca", "modelo", "variante"):
+                if p2.get(identity_key):
+                    upd[identity_key] = p2[identity_key]
             if p2.get("preco") is not None:
                 for k in ("preco", "moeda", "preco_confirmado",
-                          "preco_a_partir_de", "preco_texto", "preco_origem"):
+                          "preco_a_partir_de", "preco_texto", "preco_origem", "preco_valido_ate"):
                     upd[k] = p2.get(k)
             if p2.get("disponibilidade", "desconhecida") != "desconhecida":
                 upd["disponibilidade"] = p2["disponibilidade"]
@@ -2269,7 +2326,13 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     consultas = _consultas_produto(criterios, texto)
     achados, vistas, etapas_prov = [], set(), []
     decisoes: list = []
-    for q in consultas:
+    for idx_consulta, q in enumerate(consultas):
+        if idx_consulta and not _descoberta_suficiente(achados, consultas[0]):
+            specs = criterios.get("specs") or {}
+            model = next(iter(specs.get("modelos") or []), "")
+            if model and model.lower() in q.lower():
+                q = re.sub(re.escape(model), lambda m: '"' + m.group(0) + '"', q, count=1, flags=re.I)
+            consultas[idx_consulta] = q
         parcial, detapas = buscar_com_fallback(q, buscar_fn=buscar_fn,
                                                diag=decisoes)
         etapas_prov.extend(f"{q[:40]}: {e}" for e in detapas)
@@ -2286,6 +2349,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                      "verificado_em": agora_iso(), "erro": "provedor_indisponivel",
                      "etapas_provedores": etapas_prov[:8],
                      "descoberta": {"decisoes": decisoes[:12],
+                                    "diagnosticos": ["PROVIDER_BLOCKED"] if any(d.get("codigo") == "bloqueado" for d in decisoes) else ["DISCOVERY_EMPTY"],
                                     "motivo_final": "provider_unavailable"}}
         salvar_consulta(db, owner, conv, consulta, criterios, resultado)
         return resultado
@@ -2295,7 +2359,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # visita a página. Demais URLs passam pela extração JSON-LD/OG.
     brutos: list = []
     paginas = []
-    for a in achados[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
+    for a in sorted(achados, key=_prioridade_descarga)[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
         if a.get("origem") == "mlb" and isinstance(a.get("mlb"), dict):
             try:
                 extraido = produto_de_mlb(a["mlb"])
@@ -2328,7 +2392,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                                 thread_name_prefix="juliashop") as pool:
             futs = {pool.submit(_recuperar_ofertas, a["url"],
                                 a.get("titulo", ""), baixar_fn,
-                                a.get("_consulta", ""), relatorio): a
+                                texto or consulta, relatorio): a
                     for a in lote}
             for fut, a in futs.items():
                 try:
@@ -2351,7 +2415,13 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # V5.7: página do item declarada no JSON-LD (listagem/categoria/agregador)
     # é aberta quando acessível — sem isso o card nunca sai de "parcial".
     # Bloqueio/erro preserva o card como estava; nada é contornado.
-    _validar_itens_declarados(produtos, baixar_fn, consulta, _prog)
+    _validar_itens_declarados(produtos, baixar_fn, texto or consulta, _prog)
+    produtos, novos_fora = aplicar_filtros(produtos, criterios)
+    if novos_fora:
+        fora.extend(novos_fora)
+        alternativas = separar_alternativas(fora, criterios)
+        ids_alt = {a.get("id") for a in alternativas}
+        duros = [p for p in fora if p.get("id") not in ids_alt]
     for p in produtos:
         p["correspondencia_tipo"] = ("PARTIAL_MATCH" if p.get("pendencias_do_pedido") or _tier(p) != "confirmada"
                                     else "EXACT_MATCH")
@@ -2383,9 +2453,30 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                        "titulo": (a.get("titulo") or "")[:160], "url": url_fonte})
         if len(fontes) >= 8:
             break
+    diagnosticos = set()
+    for item in relatorio:
+        code = item.get("codigo")
+        if code in ("bloqueio", "rede", "nao_aberta", "produto_removido", "vazio"):
+            diagnosticos.add("PRODUCT_PAGE_UNAVAILABLE")
+        elif code == "sem_dados":
+            diagnosticos.add("STRUCTURED_DATA_MISSING")
+        elif code == "listagem":
+            diagnosticos.add("SEARCH_IRRELEVANT")
+    if any(d.get("codigo") == "bloqueado" for d in decisoes):
+        diagnosticos.add("PROVIDER_BLOCKED")
+    for p in fora:
+        for code in p.get("excluido_codigos") or []:
+            diagnosticos.add("BUDGET_MISMATCH" if code in ("preco_acima", "preco_abaixo") else
+                             "PRICE_UNVERIFIED" if code in ("preco_nao_confirmado", "moeda_diferente") else
+                             "VARIANT_MISMATCH" if code in ("armazenamento_abaixa", "armazenamento_diferente", "versao_diferente", "ram_abaixa") else "PRODUCT_MISMATCH")
+    if any(not p.get("preco_confirmado") for p in brutos):
+        diagnosticos.add("PRICE_UNVERIFIED")
     esgotado = bool(not brutos and ondas >= MAX_ONDAS_PAGINAS
                     and len(paginas) > len(consultadas))
     resultado = {"produtos": produtos, "alternativas": alternativas,
+                 "consultas": consultas, "diagnostico_paginas": relatorio,
+                 "candidatos": [{"url": a.get("url"), "titulo": a.get("titulo"),
+                                  "tipo": classificar_candidato(a)} for a in achados[:24]],
                  "encontrados": encontrados,
                  "fontes": fontes, "criterios": criterios,
                  "total_bruto": len(brutos), "excluidos": duros[:6],
@@ -2395,13 +2486,14 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                  "etapas_provedores": etapas_prov[:8],
                  "descoberta": {
                      "decisoes": decisoes[:12],
+                     "diagnosticos": sorted(diagnosticos),
                      "paginas_disponiveis": len(paginas),
                      "paginas_consultadas": len(consultadas),
                      "ondas": ondas,
                      "ofertas_extraidas": len(brutos),
                       "confirmadas": sum(_tier(p) == "confirmada" for p in produtos),
                      "orcamento_esgotado": esgotado,
-                     "motivo_final": ("confirmed_offers_found" if produtos
+                     "motivo_final": ("confirmed_offers_found" if any(_tier(p) == "confirmada" for p in produtos)
                                       else
                                       ("search_budget_exhausted" if esgotado
                                        else "no_confirmed_offers"))}}
@@ -2463,6 +2555,8 @@ def _link_do_produto(p: dict) -> str:
 
 
 def _selo_verificacao(p: dict) -> str:
+    if not _preco_vigente(p):
+        return "preço com validade encerrada; confirmar novamente"
     """Rótulo curto e honesto do estado do link (nunca "ok" sem verificação)."""
     if p.get("item_de_listagem"):
         return "link do item veio de listagem (página do item NÃO aberta)"
@@ -2482,6 +2576,21 @@ _TIER_ROTULOS = {
 }
 
 
+def _preco_vigente(p: dict) -> bool:
+    raw = str(p.get("preco_valido_ate") or "").strip()
+    if not raw:
+        return True  # No invented expiry; bounded cache TTL still applies.
+    try:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw):
+            return datetime.fromisoformat(raw).date() >= datetime.now(timezone.utc).date()
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt >= datetime.now(timezone.utc)
+    except (ValueError, TypeError, OverflowError):
+        return False
+
+
 def _tier(p: dict) -> str:
     """Nível de evidência do item — nunca superestimado (V5.7 descoberta).
 
@@ -2496,6 +2605,8 @@ def _tier(p: dict) -> str:
         return "parcial"
     if p.get("origem_encontro"):
         return "encontrada"
+    if p.get("pendencias_do_pedido") or not _preco_vigente(p):
+        return "parcial"
     if p.get("preco_confirmado") and (
             p.get("link_veredito") == "verificado"
             or str(p.get("preco_origem") or "") == "mlb"):
@@ -2636,14 +2747,16 @@ def _jdui_produto(p: dict) -> dict:
         if p.get("pendencias_do_pedido"):
             aviso += ": " + "; ".join(p["pendencias_do_pedido"])
         specs = {"Pedido": aviso, **specs}
+    if not _preco_vigente(p):
+        specs = {"Validade": "Preço expirado; consultar novamente", **specs}
     return {
         "nome": p.get("nome", "")[:160],
         "marca": p.get("marca", "")[:80],
         "modelo": p.get("modelo", "")[:80],
         "variante": p.get("variante", "")[:80],
         "imagem": p.get("imagem", "")[:500],
-        "preco": p.get("preco_texto", PRECO_NAO_CONFIRMADO)[:40],
-        "preco_valor": p.get("preco"),
+        "preco": p.get("preco_texto", PRECO_NAO_CONFIRMADO)[:40] if _preco_vigente(p) else PRECO_NAO_CONFIRMADO,
+        "preco_valor": p.get("preco") if _preco_vigente(p) else None,
         "moeda": p.get("moeda", "BRL")[:3],
         "loja": p.get("loja", "")[:80],
         "url": _link_do_produto(p)[:500],
@@ -2902,6 +3015,9 @@ def responder_followup(db, owner: str, conv: str, texto: str) -> dict | None:
     if not ultima:
         return None
     prods = (ultima.get("resultado", {}) or {}).get("produtos", [])
+    expired = bool(ultima.get("expira_em") and ultima["expira_em"] <= agora_iso())
+    if expired or any(not _preco_vigente(p) for p in prods):
+        return {"texto": "Os preços da consulta anterior precisam ser verificados novamente. Faça uma nova pesquisa para obter valores atuais.", "fence": "", "produtos": []}
     if not prods:
         return None
     t = (texto or "").lower()

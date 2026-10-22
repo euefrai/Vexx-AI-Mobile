@@ -339,8 +339,8 @@ def test_critico_8_falhas_provedores_estados_honestos(monkeypatch):
     assert achados == []
     assert etapas[0] == "mlb: falhou (ResearchErro)"
     assert any(e.startswith("ddg: falhou (ResearchErro)") for e in etapas)
-    assert any(e.startswith("ddg-lite: falhou (TimeoutError)")
-               for e in etapas)
+    # V5.9.1: a blocked DDG host must not be retried via its Lite surface.
+    assert not any(e.startswith("ddg-lite:") for e in etapas)
     # Erro interno do web aparece pelo tipo — nunca rotulado como bloqueio.
     assert any(e.startswith("web: falhou (ValueError)") for e in etapas)
 
