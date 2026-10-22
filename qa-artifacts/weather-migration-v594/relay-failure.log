@@ -1,0 +1,87 @@
+INFO:     Started server process [29316]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:53936 (Press CTRL+C to quit)
+INFO:     127.0.0.1:53941 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53942 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53943 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53944 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59769 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59770 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59772 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59773 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59774 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59775 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59776 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59777 - "WebSocket /api/agent/ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59778 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62986 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62986 - "GET /styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58360 - "GET /interface.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /organize.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /workspace.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /model3d-schema.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /jdui.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64084 - "GET /manifest.webmanifest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /icon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "POST /api/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /icon-192.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /api/account HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/diag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /api/docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /api/docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /styles.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57672 - "GET /index.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57672 - "GET /app.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52456 - "GET /interface.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:51286 - "GET /workspace.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52456 - "GET /organize.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:51286 - "GET /jdui.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57672 - "GET /model3d-schema.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52456 - "GET /manifest.webmanifest HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:51286 - "GET /icon-192.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57672 - "GET /icon-512.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "GET /api/ui-state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49804 - "POST /api/ai/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "POST /api/workspace/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57672 - "GET /api/ui-state HTTP/1.1" 200 OK

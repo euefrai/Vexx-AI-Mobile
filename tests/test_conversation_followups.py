@@ -6,6 +6,7 @@ import conversation_followups as follow
 import live_data
 import pc_agent
 import shopping
+from weather_fixtures import timeline
 
 WEATHER='**Clima em Salvador, Bahia, Brasil**\n\n26 °C\n\n[Fonte: Open-Meteo](https://open-meteo.com/)'
 
@@ -101,7 +102,7 @@ def test_clarification_preserves_new_budget(tmp_path,monkeypatch,selection):
 def test_forecast_dates(monkeypatch,day,text,expected):
     live_data._cache.clear()
     data={'timezone':'America/Bahia','current':{'time':f'2026-10-{day}T09:00','temperature_2m':26,'apparent_temperature':28,'relative_humidity_2m':80,'wind_speed_10m':12,'weather_code':2},'daily':{'time':[f'2026-10-{d}' for d in range(day,day+7)],'temperature_2m_min':[24]*7,'temperature_2m_max':[30]*7,'precipitation_probability_max':[15]*7,'weather_code':[2]*7}}
-    monkeypatch.setattr(live_data,'get_json',lambda *args:data)
+    monkeypatch.setattr(live_data,'get_json',lambda *args:timeline(data))
     data['current_units']={'temperature_2m':'°C','wind_speed_10m':'km/h'}
     answer=live_data.weather('Previsão '+text,{'coordinates':(-12.97,-38.5)},datetime(2026,10,day,12,tzinfo=timezone.utc))
     rows=[line.split(' | ')[0].removeprefix('| ') for line in answer.splitlines() if re.match(r'\| \d\d/\d\d',line)]

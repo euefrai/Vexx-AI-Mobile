@@ -4,6 +4,10 @@ from decimal import InvalidOperation
 import html
 import json
 import math
+import os
+import hashlib
+import sqlite3
+from pathlib import Path
 import re
 import threading
 import time
@@ -84,7 +88,15 @@ def get_json(base, params):
     if blocked and time.monotonic()-blocked[0]<60:
         raise research.ResearchErro('Fonte temporariamente limitada.','rate_limited')
     try:
-        _, raw = research.baixar(base+'?'+urlencode(params), timeout=6, max_bytes=256*1024, aceitar='json')
+        options={}
+        if urlsplit(base).hostname=='weather.visualcrossing.com':
+            def same_host(url,timeout,user_agent=''):
+                target=urlsplit(url)
+                if target.scheme!='https' or target.hostname!='weather.visualcrossing.com' or not target.path.startswith('/VisualCrossingWebServices/rest/services/timeline/'):
+                    raise ValueError('Redirecionamento meteorológico não autorizado')
+                return research._abrir(url,timeout,user_agent)
+            options['abrir']=same_host
+        _, raw = research.baixar(base+'?'+urlencode(params), timeout=6, max_bytes=256*1024, aceitar='json',**options)
     except research.ResearchErro as exc:
         if getattr(exc,'http',None)==429 or exc.codigo=='rate_limited':
             with _lock:_cache[('rate-limit',base)]=(time.monotonic(),True)
@@ -121,72 +133,83 @@ def parse_place(city):
 
 
 def _ibge(path):
-    if not re.fullmatch(r'(?:estados/[A-Z]{2}/municipios|municipios/\d{7})',path):raise ValueError('Consulta geográfica inválida')
+    if not re.fullmatch(r'(?:estados/[A-Z]{2}/municipios|municipios(?:/\d{7})?)',path):raise ValueError('Consulta geográfica inválida')
     def fetch():
-        _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v1/localidades/'+path,timeout=6,max_bytes=512*1024,aceitar='json')
+        _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v1/localidades/'+path,timeout=6,max_bytes=6*1024*1024,aceitar='json')
         data=json.loads(raw)
         if not isinstance(data,(dict,list)):raise ValueError('Cadastro geográfico inválido')
         return data
     return cached(('ibge',path),86400,fetch)
 
 
+def _municipal_place(row, uf):
+    code=str(row['id'])
+    if not re.fullmatch(r'\d{7}',code):raise ValueError('Identificador oficial inválido')
+    def fetch():
+        _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v3/malhas/municipios/'+code+'/metadados',timeout=6,max_bytes=65536,aceitar='json')
+        record=next(v for v in json.loads(raw) if str(v.get('id'))==code)
+        center=record['centroide']
+        return number(center['latitude'],-90,90),number(center['longitude'],-180,180)
+    lat,lon=cached(('ibge-center',code),86400,fetch)
+    return dict(label=row['nome']+', '+STATES.get(uf,uf)+', Brasil (centroide municipal)',
+        name=row['nome'],state=STATES.get(uf,uf),country='Brasil',ibge_id=int(code),
+        latitude=lat,longitude=lon,timezone='',coordinate_scope='municipal_centroid',
+        source_url='https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'+code)
+
+
+_geo_lock=threading.Lock()
+_geo_last=0.0
+
+
+def _photon(query):
+    # Optional low-volume city lookup only. No autocomplete or address harvesting.
+    if os.getenv('VEXX_PHOTON_ENABLED','1')!='1':return []
+    global _geo_last
+    with _geo_lock:
+        time.sleep(max(0,1-(time.monotonic()-_geo_last)))
+        _geo_last=time.monotonic()
+        data=get_json('https://photon.komoot.io/api/',{'q':query,'limit':10,'lang':'en','layer':'city'})
+    features=data.get('features',[])
+    if not isinstance(features,list):raise ValueError('Localização inválida')
+    rows=[]
+    for feature in features:
+        prop=feature['properties'];lon,lat=feature['geometry']['coordinates'][:2]
+        rows.append(dict(name=prop.get('name',''),state=prop.get('state',''),country=prop.get('country',''),
+            country_code=prop.get('countrycode','').upper(),latitude=number(lat,-90,90),longitude=number(lon,-180,180),
+            timezone='',source_url='https://www.openstreetmap.org/copyright'))
+    return rows
+
+
 def geocode(city):
     query=parse_place(city);name=query['city'];uf=query['state'];country=query['country_code']
-    municipality=None;registry_error=False
+    registry_error=False
+    if country in ('','BR'):
+        try:
+            rows=_ibge('municipios/'+name) if re.fullmatch(r'\d{7}',name) else _ibge('estados/'+uf+'/municipios' if uf else 'municipios')
+            if isinstance(rows,dict):
+                if str(rows.get('id'))!=name:raise ValueError('Identificador oficial divergente')
+                rows=[rows]
+            matches=[r for r in rows if isinstance(r,dict) and (str(r.get('id'))==name or norm(r.get('nome',''))==norm(name))]
+            def state(r):
+                return ((r.get('microrregiao') or {}).get('mesorregiao',{}).get('UF',{}).get('sigla') or
+                    (r.get('regiao-imediata') or {}).get('regiao-intermediaria',{}).get('UF',{}).get('sigla') or uf)
+            if uf:matches=[r for r in matches if state(r)==uf]
+            if len(matches)>1:
+                return None,'Encontrei mais de uma localização. Qual delas?\n\n'+'\n'.join('- '+safe(r['nome']+', '+state(r)) for r in matches[:5])
+            if matches:return _municipal_place(matches[0],state(matches[0])),None
+        except (research.ResearchErro,ValueError,KeyError,TypeError,StopIteration):registry_error=True
     try:
-        if re.fullmatch(r'\d{7}',name):
-            municipality=_ibge('municipios/'+name)
-            if not isinstance(municipality,dict) or str(municipality.get('id'))!=name:raise ValueError('Município inválido')
-            name=municipality['nome'];country='BR'
-            uf=(municipality.get('microrregiao') or {}).get('mesorregiao',{}).get('UF',{}).get('sigla','')
-            uf=uf or (municipality.get('regiao-imediata') or {}).get('regiao-intermediaria',{}).get('UF',{}).get('sigla','')
-        elif uf:
-            rows=_ibge('estados/'+uf+'/municipios')
-            municipality=next((r for r in rows if isinstance(r,dict) and norm(r.get('nome',''))==norm(name)),None)
-            if municipality:name=municipality['nome']
-    except (research.ResearchErro,ValueError,KeyError,TypeError):registry_error=True
-    params={'name':name,'count':50,'language':'pt','format':'json'}
-    if country:params['countryCode']=country
-    try:
-        data = cached(('geo',name.casefold(),uf,country),3600,lambda:get_json('https://geocoding-api.open-meteo.com/v1/search',params))
-    except (research.ResearchErro,OSError,ValueError):
-        data={'results':[]};registry_error=True
-    candidates = []
-    rows=data.get('results',[])
-    if not isinstance(rows,list) or any(not isinstance(row,dict) for row in rows):raise ValueError('Localização inválida')
-    rows=[r for r in rows if norm(r.get('name',''))==norm(name) and str(r.get('feature_code','')).startswith('PPL')]
-    if country:rows=[r for r in rows if r.get('country_code')==country]
-    if uf:rows=[r for r in rows if norm(r.get('admin1',''))==norm(STATES[uf])]
-    if municipality:rows=[r for r in rows if not r.get('admin2') or norm(r['admin2'])==norm(name)]
-    if query['qualifier']:
-        wanted=norm(query['qualifier'])
-        rows=[r for r in rows if wanted in {norm(str(r.get(k,''))) for k in ('admin1','country','country_code')}]
-    for row in rows:
-        lat,lon = row.get('latitude'),row.get('longitude')
-        if type(lat) not in (int,float) or type(lon) not in (int,float) or not -90<=lat<=90 or not -180<=lon<=180:
-            continue
-        label = ', '.join(dict.fromkeys(str(row[k]) for k in ('name','admin2','admin1','country') if row.get(k)))
-        candidates.append({'label':label,'name':row.get('name'),'state':row.get('admin1'),
-                           'country':row.get('country'),'geonames_id':row.get('id'),
-                           'ibge_id':municipality.get('id') if municipality else None,
-                           'latitude':lat,'longitude':lon,'timezone':row.get('timezone','')})
-    if not candidates:
-        if municipality:
-            try:
-                code=str(municipality['id'])
-                if not re.fullmatch(r'\d{7}',code):raise ValueError('Identificador oficial inválido')
-                _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v3/malhas/municipios/'+code+'/metadados',timeout=6,max_bytes=65536,aceitar='json')
-                record=next(v for v in json.loads(raw) if str(v.get('id'))==code)
-                center=record['centroide'];lat=number(center['latitude'],-90,90);lon=number(center['longitude'],-180,180)
-                return {'label':name+', '+STATES.get(uf,uf)+', Brasil (centroide municipal)',
-                        'name':name,'state':STATES.get(uf,uf),'country':'Brasil','ibge_id':municipality['id'],
-                        'latitude':lat,'longitude':lon,'timezone':'','coordinate_scope':'municipal_centroid'},None
-            except (research.ResearchErro,ValueError,KeyError,TypeError,StopIteration):registry_error=True
-        return None, f'Não consegui confirmar a localização de “{safe(city)}” nas fontes disponíveis'+(' porque um serviço está indisponível' if registry_error else '')+'. Isso não significa que o município não exista. Informe cidade e estado/país.'
-    # Never silently choose among homonymous cities in different regions.
-    if len({(r['label'],round(r['latitude'],3),round(r['longitude'],3)) for r in candidates})>1:
-        return None, 'Encontrei mais de uma localização. Qual delas?\n\n'+'\n'.join('- '+safe(r['label']) for r in candidates[:5])+'\n\nRepita o pedido incluindo a cidade e o estado/país.'
-    return candidates[0], None
+        rows=cached(('photon',norm(city)),86400,lambda:_photon(city))
+        rows=[r for r in rows if norm(r['name'])==norm(name)]
+        if country:rows=[r for r in rows if r['country_code']==country]
+        if uf:rows=[r for r in rows if norm(r['state'])==norm(STATES[uf])]
+        if query['qualifier']:rows=[r for r in rows if norm(query['qualifier']) in (norm(r['country']),norm(r['state']),norm(r['country_code']))]
+        for r in rows:r['label']=', '.join(dict.fromkeys(v for v in (r['name'],r['state'],r['country']) if v))
+        if len({(r['label'],round(r['latitude'],3),round(r['longitude'],3)) for r in rows})>1:
+            return None,'Encontrei mais de uma localização. Qual delas?\n\n'+'\n'.join('- '+safe(r['label']) for r in rows[:5])
+        if rows:return rows[0],None
+    except (research.ResearchErro,ValueError,KeyError,TypeError,IndexError):registry_error=True
+    return None,f'Não consegui confirmar a localização de “{safe(city)}” nas fontes disponíveis'+(' porque um serviço está indisponível' if registry_error else '')+'. Isso não significa que o município não exista. Informe cidade e estado/país.'
 
 
 def safe(value):
@@ -208,6 +231,120 @@ def condition(code):
              85:'Pancadas de neve',86:'Pancadas fortes de neve',95:'Trovoadas',96:'Trovoadas com granizo',99:'Trovoadas fortes com granizo'}).get(code,'Condição não informada')
 
 
+VC_BASE='https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
+WEATHER_DISCLAIMER=('Dados sujeitos a erros, atrasos, estimativas e indisponibilidade, sem garantia de exatidão ou adequação. '
+    'Previsões são incertas. Não substituem alertas oficiais ou aconselhamento meteorológico profissional '
+    'e não devem ser a única base para decisões críticas.')
+
+
+class WeatherError(ValueError):
+    def __init__(self,code):self.code=code;super().__init__(code)
+
+
+def _weather_store():
+    configured=os.getenv('VISUAL_CROSSING_USAGE_PATH','')
+    if not configured:
+        parent=Path(os.path.expandvars(os.getenv('JULIA_SQLITE_PATH',str(Path.home()/'.JULIA-mobile'/'memory.sqlite3')))).parent
+        configured=str(parent/'weather-usage.sqlite3')
+    path=Path(configured);path.parent.mkdir(parents=True,exist_ok=True)
+    db=sqlite3.connect(path,timeout=1)
+    db.executescript("""CREATE TABLE IF NOT EXISTS vc_calls(id INTEGER PRIMARY KEY,key_id TEXT,at REAL,cost INTEGER);
+        CREATE TABLE IF NOT EXISTS vc_cache(key_id TEXT,lat REAL,lon REAL,at REAL,payload TEXT,PRIMARY KEY(key_id,lat,lon));
+        CREATE TABLE IF NOT EXISTS vc_lease(id INTEGER PRIMARY KEY,until REAL);
+        CREATE TABLE IF NOT EXISTS vc_circuit(key_id TEXT PRIMARY KEY,until REAL,reason TEXT);""")
+    return db
+
+
+def _normalize_weather(raw,lat,lon,now):
+    if not isinstance(raw,dict) or raw.get('unitGroup','metric')!='metric':raise WeatherError('invalid_data')
+    if abs(number(raw['latitude'],-90,90)-lat)>.05 or abs(number(raw['longitude'],-180,180)-lon)>.05:raise WeatherError('location_mismatch')
+    zone=ZoneInfo(raw['timezone'])
+    current=raw.get('currentConditions')
+    if not isinstance(current,dict):raise WeatherError('missing_current')
+    epoch=number(current['datetimeEpoch'],0,4102444800)
+    instant=datetime.fromtimestamp(epoch,zone)
+    if abs((now-instant).total_seconds())>7200 or (instant-now).total_seconds()>900:raise WeatherError('stale')
+    # Only this section can supply current temperature. Never substitute daily mean/forecast.
+    temp=number(current['temp'],-100,70)
+    source=current.get('source','')
+    nature={'obs':'Observação agregada; pode incluir interpolação',
+            'fcst':'Estimativa por modelo; não é observação medida',
+            'comb':'Condições combinadas de observações e modelos'}.get(source,'Estimativa atual; origem observacional não confirmada')
+    result=dict(time=instant.replace(tzinfo=None).isoformat(),temperature_2m=temp,
+        apparent_temperature=None if current.get('feelslike') is None else number(current['feelslike'],-120,90),
+        relative_humidity_2m=None if current.get('humidity') is None else number(current['humidity'],0,100),
+        wind_speed_10m=None if current.get('windspeed') is None else number(current['windspeed'],0,500),weather_code=None,condition=current.get('conditions') or 'Condição não informada')
+    daily=dict(time=[],temperature_2m_min=[],temperature_2m_max=[],precipitation_probability_max=[],weather_code=[],conditions=[])
+    days=raw.get('days',[])
+    if not isinstance(days,list) or len(days)>16:raise WeatherError('invalid_data')
+    for day in days:
+        date=datetime.fromisoformat(day['datetime']).date()
+        if day['datetime']!=date.isoformat() or (daily['time'] and day['datetime']<=daily['time'][-1]):raise WeatherError('invalid_data')
+        if date<now.astimezone(zone).date() or date>now.astimezone(zone).date()+timedelta(days=14):raise WeatherError('invalid_data')
+        lo=number(day['tempmin'],-100,70);hi=number(day['tempmax'],-100,70)
+        if lo>hi:raise WeatherError('invalid_data')
+        daily['time'].append(day['datetime']);daily['temperature_2m_min'].append(lo);daily['temperature_2m_max'].append(hi)
+        probability=day.get('precipprob')
+        daily['precipitation_probability_max'].append(None if probability is None else number(probability,0,100))
+        daily['weather_code'].append(None);daily['conditions'].append(day.get('conditions') or 'Condição não informada')
+    return dict(timezone=raw['timezone'],current=result,daily=daily,nature=nature,
+        current_units={'temperature_2m':'°C','wind_speed_10m':'km/h'},_fetched_at=now.isoformat())
+
+
+def _weather_data(lat,lon,now):
+    lat,lon=round(number(lat,-90,90),2),round(number(lon,-180,180),2)
+    key=os.getenv('VISUAL_CROSSING_API_KEY','').strip()
+    if not key:raise WeatherError('missing_key')
+    fingerprint=hashlib.sha256(key.encode()).hexdigest()[:24]
+    try:limit=min(1000,max(1,int(os.getenv('VISUAL_CROSSING_DAILY_LIMIT','1000'))))
+    except ValueError:raise WeatherError('configuration') from None
+    db=_weather_store();lease=False
+    try:
+        now_s=time.time()
+        db.execute('BEGIN IMMEDIATE')
+        db.execute('DELETE FROM vc_cache WHERE at<?',(now_s-1800,))
+        cached_row=db.execute('SELECT at,payload FROM vc_cache WHERE key_id=? AND lat=? AND lon=?',(fingerprint,lat,lon)).fetchone()
+        if cached_row and 0<=now_s-cached_row[0]<300:
+            db.commit();return json.loads(cached_row[1])
+        circuit=db.execute('SELECT until,reason FROM vc_circuit WHERE key_id=?',(fingerprint,)).fetchone()
+        if circuit and circuit[0]>now_s:raise WeatherError(circuit[1])
+        row=db.execute('SELECT until FROM vc_lease WHERE id=1').fetchone()
+        if row and row[0]>now_s:raise WeatherError('busy')
+        db.execute('DELETE FROM vc_calls WHERE at<?',(now_s-86400,))
+        used=db.execute('SELECT COALESCE(sum(cost),0) FROM vc_calls WHERE key_id=?',(fingerprint,)).fetchone()[0]
+        # Reserve conservatively before I/O; crash/retry cannot erase usage.
+        if used+32>limit:raise WeatherError('local_quota')
+        cursor=db.execute('INSERT INTO vc_calls(key_id,at,cost) VALUES(?,?,32)',(fingerprint,now_s))
+        call_id=cursor.lastrowid
+        db.execute('INSERT OR REPLACE INTO vc_lease VALUES(1,?)',(now_s+120,));db.commit();lease=True
+        params=dict(key=key,unitGroup='metric',include='current,days',contentType='json',lang='pt',
+            elements='datetime,datetimeEpoch,temp,tempmax,tempmin,feelslike,humidity,windspeed,precipprob,conditions,source,stations')
+        try:
+            raw=get_json(VC_BASE+f'{lat},{lon}/next7days',params)
+        except research.ResearchErro as exc:
+            status=getattr(exc,'http',None)
+            reason='invalid_key' if status in (401,403) else 'rate_limited' if status==429 or exc.codigo=='rate_limited' else 'unavailable'
+            db.execute('INSERT OR REPLACE INTO vc_circuit VALUES(?,?,?)',(fingerprint,time.time()+(300 if reason=='invalid_key' else 60),reason));db.commit()
+            raise WeatherError(reason) from None
+        cost=raw.get('queryCost') if isinstance(raw,dict) else None
+        if type(cost) is not int or not 0<=cost<=32:raise WeatherError('invalid_data')
+        db.execute('UPDATE vc_calls SET cost=? WHERE id=?',(cost,call_id));db.commit()
+        try:
+            result=_normalize_weather(raw,lat,lon,now)
+        except (ValueError,KeyError,TypeError,IndexError) as exc:
+            reason=exc.code if isinstance(exc,WeatherError) else 'invalid_data'
+            db.execute('INSERT OR REPLACE INTO vc_circuit VALUES(?,?,?)',(fingerprint,time.time()+60,reason));db.commit()
+            raise WeatherError(reason) from None
+        db.execute('INSERT OR REPLACE INTO vc_cache VALUES(?,?,?,?,?)',(fingerprint,lat,lon,time.time(),json.dumps(result,ensure_ascii=False)));db.commit()
+        return result
+    except sqlite3.Error:
+        raise WeatherError('busy') from None
+    finally:
+        if lease:
+            db.execute('UPDATE vc_lease SET until=0 WHERE id=1');db.commit()
+        db.close()
+
+
 def weather(text, context, now):
     normalized=norm(text)
     if re.search(r'\b(ontem|passad[oa]|historico|daqui a|\d{1,2}/\d{1,2})\b',normalized):
@@ -224,14 +361,7 @@ def weather(text, context, now):
     else:
         return LOCATION_PROMPT
     lat,lon = round(lat,2),round(lon,2)
-    def fetch():
-        data=get_json('https://api.open-meteo.com/v1/forecast',{
-            'latitude':lat,'longitude':lon,'timezone':'auto','forecast_days':7,
-            'current':'temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m',
-            'daily':'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'})
-        data['_fetched_at']=datetime.now(UTC).isoformat()
-        return data
-    data=cached(('weather',lat,lon),300,fetch)
+    data=_weather_data(lat,lon,now)
     zone=ZoneInfo(data['timezone']);current=data['current'];units=data['current_units']
     observed=datetime.fromisoformat(current['time']).replace(tzinfo=zone)
     age=(now-observed).total_seconds()
@@ -239,11 +369,14 @@ def weather(text, context, now):
         return 'O serviço retornou uma leitura fora da janela atual. Não vou apresentá-la como clima de agora; tente novamente mais tarde.'
     if units.get('temperature_2m')!='°C' or units.get('wind_speed_10m')!='km/h':raise ValueError('Unidades inesperadas')
     temp=number(current['temperature_2m'],-100,70)
-    apparent=number(current['apparent_temperature'],-120,90)
-    humidity=number(current['relative_humidity_2m'],0,100)
-    wind=number(current['wind_speed_10m'],0,500)
-    lines=[f'**Clima em {safe(label)}**',f"{condition(current.get('weather_code'))} · **{temp:g} °C** · sensação de {apparent:g} °C.",
-           f'Umidade: {humidity:g}% · vento: {wind:g} km/h.']
+    apparent=current['apparent_temperature'];humidity=current['relative_humidity_2m'];wind=current['wind_speed_10m']
+    apparent_text='não informada' if apparent is None else f'{number(apparent,-120,90):g} °C'
+    humidity_text='não informada' if humidity is None else f'{number(humidity,0,100):g}%'
+    wind_text='não informado' if wind is None else f'{number(wind,0,500):g} km/h'
+    display_label=label.removesuffix(' (centroide municipal)')
+    geographic_note=' · centroide municipal' if display_label!=label else ''
+    lines=[f'**Clima em {safe(display_label)}{geographic_note}**',f"{safe(current.get('condition') or condition(current.get('weather_code')))} · **{temp:g} °C** · sensação de {apparent_text}.",
+           f'Umidade: {humidity_text} · vento: {wind_text}.']
     t=norm(text);forecast=bool(re.search(r'amanha|previsao|proximos|semana|vai chover',t))
     summary=None
     if forecast:
@@ -261,17 +394,21 @@ def weather(text, context, now):
             if lo>hi:raise ValueError('Intervalo meteorológico inválido')
             prob=daily['precipitation_probability_max'][i]
             rain='não informada' if prob is None else f'{number(prob,0,100):g}%'
-            if summary is None:summary=(f'{lo:g}–{hi:g} °C',f'{date} · {condition(daily["weather_code"][i])} · chance de chuva {rain}. Previsão por modelo.')
-            rows.append(f"| {datetime.fromisoformat(date):%d/%m} | {lo:g}–{hi:g} °C | {rain} | {condition(daily['weather_code'][i])} |")
+            description=safe(daily['conditions'][i]) if daily.get('conditions') else condition(daily['weather_code'][i])
+            if summary is None:summary=(f'{lo:g}–{hi:g} °C',f'{date} · {description} · chance de chuva {rain}. Previsão por modelo.')
+            rows.append(f"| {datetime.fromisoformat(date):%d/%m} | {lo:g}–{hi:g} °C | {rain} | {description} |")
             if len(rows)>=count:break
         if rows:lines.extend(['**Previsão** (probabilidades, não garantia):','| Dia | Mín.–máx. | Chance de chuva | Condição |\n|---|---|---|---|\n'+'\n'.join(rows)])
         if len(rows)<count:lines.append('A fonte não disponibilizou todos os dias solicitados nesta consulta.')
     fetched=datetime.fromisoformat(data['_fetched_at']).astimezone(zone)
     lines.append(f'Dado válido para {observed:%d/%m/%Y às %H:%M} ({safe(data["timezone"])}); consultado às {fetched:%H:%M}.')
-    lines.append('[Fonte: Open-Meteo](https://open-meteo.com/) · condições estimadas por modelos meteorológicos; cache de até 5 minutos.')
-    return card('\n\n'.join(lines),label,summary[0] if summary else f'{temp:g} °C',
-                desc=summary[1] if summary else f'{condition(current.get("weather_code"))} · sensação {apparent:g} °C · {observed:%d/%m/%Y %H:%M} ({data["timezone"]}). Estimativa por modelo.',
-                url='https://open-meteo.com/',badge='Open-Meteo · previsão' if summary else 'Open-Meteo · estimativa')
+    lines.append('[Dados meteorológicos: Visual Crossing](https://www.visualcrossing.com/) · '+data.get('nature','Natureza não confirmada')+'; cache de até 5 minutos.')
+    if city and place.get('source_url')=='https://www.openstreetmap.org/copyright':
+        lines.append('Localização: [© OpenStreetMap contributors · ODbL](https://www.openstreetmap.org/copyright), via Photon.')
+    lines.append(WEATHER_DISCLAIMER)
+    return card('\n\n'.join(lines),display_label,summary[0] if summary else f'{temp:g} °C',
+                desc=(summary[1] if summary else f'{safe(current.get("condition") or condition(current.get("weather_code")))} · sensação {apparent_text} · {observed:%d/%m/%Y %H:%M} ({data["timezone"]}). {data.get("nature","Natureza não confirmada")}.')+(' Referência: centroide municipal.' if geographic_note else '')+' Dados meteorológicos: Visual Crossing.',
+                url='https://www.visualcrossing.com/',badge='Visual Crossing · previsão' if summary else 'Visual Crossing · atual')
 
 
 def clock(text, context, now):
@@ -286,10 +423,13 @@ def clock(text, context, now):
         except (ValueError,ZoneInfoNotFoundError):pass
     place,error=geocode(city)
     if error:return error
-    if not place.get('timezone'):return 'A localização foi confirmada, mas a fonte não informou um fuso confiável. Informe o fuso IANA para calcular o horário.'
+    if not place.get('timezone'):
+        place=dict(place,timezone=_weather_data(round(place['latitude'],2),round(place['longitude'],2),now)['timezone'])
     zone=ZoneInfo(place['timezone'])
     instant=now.astimezone(zone)
-    body=f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [Open-Meteo/GeoNames](https://open-meteo.com/en/docs/geocoding-api).'
+    geographic_source='IBGE' if place.get('ibge_id') else '© OpenStreetMap contributors · ODbL'
+    geographic_url=place.get('source_url','https://www.openstreetmap.org/copyright')
+    body=f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [{geographic_source}]({geographic_url}); fuso confirmado pela Visual Crossing.'
     return card(body,place['label'],instant.strftime('%H:%M'),desc=instant.strftime('%d/%m/%Y')+' · '+place['timezone'],badge='Relógio do sistema')
 
 
@@ -451,11 +591,11 @@ def location(text,context,now):
     place,error=geocode(city)
     if error:return error
     code=place.get('ibge_id')
-    source='https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'+str(code) if code else 'https://open-meteo.com/en/docs/geocoding-api'
+    source='https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'+str(code) if code else 'https://www.openstreetmap.org/copyright'
     # Official identifiers, not an invented precise address.
     body='**'+safe(place['label'])+'**'+('\n\nCódigo IBGE: '+str(code)+'.' if code else '')
     body+='\n\nLocalização confirmada no cadastro consultado. [Fonte geográfica]('+source+').'
-    return card(body,place['label'],str(code) if code else 'Localidade',url=source,badge='IBGE' if code else 'GeoNames')
+    return card(body,place['label'],str(code) if code else 'Localidade',url=source,badge='IBGE' if code else '© OpenStreetMap · ODbL')
 
 
 def respond(text,context):
@@ -467,6 +607,20 @@ def respond(text,context):
         for phrase,status in [('mais de uma localização','ambiguous'),('fora da janela atual','stale'),('Não consegui confirmar a localização','unconfirmed')]:
             if result and phrase in result:return card(result,'Não foi possível concluir',{'ambiguous':'Qual localidade?','stale':'Dado desatualizado','unconfirmed':'Local não confirmado'}[status],badge=status)
         return result
+    except WeatherError as exc:
+        messages={'missing_key':'A chave do serviço meteorológico não está configurada no servidor.',
+            'invalid_key':'O serviço meteorológico recusou a chave configurada. Verifique a configuração no servidor.',
+            'local_quota':'O limite local de consultas meteorológicas das últimas 24 horas foi atingido.',
+            'rate_limited':'A fonte limitou as consultas ou esgotou a quota. Aguarde pelo menos um minuto.',
+            'stale':'O serviço retornou dados fora da janela atual. Não vou apresentá-los como clima de agora.',
+            'busy':'Há outra consulta meteorológica em andamento. Tente novamente em instantes.',
+            'location_mismatch':'A fonte retornou coordenadas divergentes; não vou substituir a localidade.',
+            'missing_current':'A fonte não disponibilizou condições atuais válidas.',
+            'configuration':'A configuração do serviço meteorológico precisa ser revisada.',
+            'invalid_data':'A fonte retornou dados meteorológicos vazios ou inválidos.',
+            'unavailable':'O serviço meteorológico está indisponível agora. Tente novamente mais tarde.'}
+        body=messages.get(exc.code,messages['unavailable'])+' Não vou estimar valores sem uma fonte.'
+        return card(body,'Consulta meteorológica indisponível','Verifique a configuração' if exc.code in ('missing_key','invalid_key','configuration') else 'Consulta não concluída',badge='Clima')
     except research.ResearchErro as exc:
         limited=getattr(exc,'http',None)==429 or exc.codigo=='rate_limited'
         body=('A fonte limitou temporariamente as consultas. Aguarde um minuto antes de tentar novamente.' if limited else 'O serviço de dados está indisponível agora. Tente novamente mais tarde.')+' Não vou estimar valores sem uma fonte.'

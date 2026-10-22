@@ -18,8 +18,8 @@ def weather_request(text, previous):
     if not short and not (req and req['kind']=='weather' and not live_data.place_from(text)):
         return None
     match=re.search(r'^\*\*Clima em (.+?)\*\*',previous)
-    if not match or '[Fonte: Open-Meteo]' not in previous:return None
-    city=match[1]
+    if not match or not any(source in previous for source in ('[Fonte: Open-Meteo]','[Dados meteorológicos: Visual Crossing]')):return None
+    city=match[1].removesuffix(' (centroide municipal)').removesuffix(' · centroide municipal')
     if city=='Sua localização aproximada':return 'Previsão do tempo '+text
     return ('Previsão do tempo ' if short else '')+text+' em '+city
 

@@ -1,0 +1,52 @@
+{
+  "real_smoke_success": true,
+  "ibge_id": 2932309,
+  "coordinate_scope": "municipal_centroid",
+  "timezone": "America/Bahia",
+  "source_nature": "Estimativa por modelo; não é observação medida",
+  "api_endpoint": "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/",
+  "api_key_in_logs": false,
+  "open_meteo_calls": false,
+  "live_weather_requests": 1,
+  "browser": {
+    "kind": "BROWSER_E2E_LOCAL_FIXTURE",
+    "model_inference": false,
+    "ok": true,
+    "live_chat": {
+      "weather_live": true,
+      "greeting_geocode_calls": 0,
+      "isolated_new_chat": true,
+      "turns": 6
+    },
+    "terminal_bar_cleared": true,
+    "contextual_cards_fixture": true,
+    "chart": {
+      "points": 23,
+      "ticks": 4,
+      "overlap": false,
+      "dated": true
+    },
+    "exchange_chat_external": true,
+    "job_id": "rj-a1bee237c68b",
+    "reloaded_while_running": true,
+    "forced_disconnect": true,
+    "source_cards": true,
+    "image_bytes": true,
+    "image_zoom_escape": true,
+    "viewport_widths": [
+      1280,
+      390,
+      320
+    ],
+    "export": {
+      "status": 200,
+      "bytes": 1983
+    },
+    "events": 43,
+    "errors": []
+  },
+  "usage_scope": "Counters are per isolated test run; account-wide usage from other clients is not known.",
+  "local_full_suite": "1154 passed, 4 skipped, 2 warnings (448.98 s)",
+  "final_focused": "107 passed",
+  "publication": "ready_for_authorized_fast_forward"
+}

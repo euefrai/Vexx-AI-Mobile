@@ -15,3 +15,10 @@ def _limpar_limitadores():
     yield
     server.rate_limiter.clear()
     server.login_failures.clear()
+
+
+@pytest.fixture(autouse=True)
+def _isolated_weather_credentials_and_usage(monkeypatch,tmp_path):
+    # Never consume the operator key or persist QA quota/cache in the real PC DB.
+    monkeypatch.setenv('VISUAL_CROSSING_API_KEY','fixture-weather-key')
+    monkeypatch.setenv('VISUAL_CROSSING_USAGE_PATH',str(tmp_path/'weather-usage.sqlite3'))

@@ -1,0 +1,21 @@
+[ 14.17s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\weather-migration-v594\weather-desktop.png
+[ 14.81s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\weather-migration-v594\weather-mobile.png
+[ 14.98s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\weather-migration-v594\weather-mobile-320.png
+[ 16.13s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\weather-migration-v594\time-mobile.png
+[ 17.59s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\weather-migration-v594\chrome-failure.png
+{"kind": "BROWSER_E2E_LOCAL_FIXTURE", "model_inference": false, "ok": false, "error": "AssertionError: v.\nVexx\n···\n17:37\n···", "ui_state": {"job": null, "hidden": true, "label": "Pesquisando…", "last": []}}
+Traceback (most recent call last):
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_weather_migration_v594.py", line 209, in <module>
+    run()
+    ~~~^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_weather_migration_v594.py", line 103, in run
+    chat('oi, tudo bem?',('Oi!',))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_weather_migration_v594.py", line 69, in chat
+    assert any(token in reply for token in expected),reply
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: v.
+Vexx
+···
+17:37
+···

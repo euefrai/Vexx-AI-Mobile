@@ -9,12 +9,14 @@ import pytest
 import live_data as live
 import pc_agent
 import research
+from weather_fixtures import timeline, photon
 
 NOW=datetime(2026,10,17,12,tzinfo=timezone.utc)
 
 
 @pytest.fixture(autouse=True)
-def clean_cache():
+def clean_cache(monkeypatch):
+    monkeypatch.setattr(live,"_ibge",lambda _:[])
     live._cache.clear()
     yield
     live._cache.clear()
@@ -39,20 +41,21 @@ def weather_data():
                      'temperature_2m_max':[29,30],'precipitation_probability_max':[15,65],'weather_code':[2,61]}}
 
 
-def test_weather_cache_freshness_units_and_missing_values(monkeypatch):
+def test_weather_cache_freshness_units_and_missing_values(monkeypatch,tmp_path):
     calls=[]
-    def get(base,params):calls.append(params);return weather_data()
+    def get(base,params):calls.append(params);return timeline(weather_data())
     monkeypatch.setattr(live,'get_json',get)
     ctx={'coordinates':(-12.97,-38.5)}
     result=live.weather('vai chover amanhã',ctx,NOW)
     assert '26 °C' in result and '18/10' in result and '65%' in result
-    assert '17/10/2026 às 09:00' in result and 'Open-Meteo' in result
+    assert '17/10/2026 às 09:00' in result and 'Visual Crossing' in result
     live.weather('clima agora',ctx,NOW)
     assert len(calls)==1
     assert 'fora da janela' in live.weather('clima agora',ctx,NOW.replace(hour=16))
     live._cache.clear()
+    monkeypatch.setenv('VISUAL_CROSSING_USAGE_PATH',str(tmp_path/'missing.sqlite3'))
     def missing(*_):
-        data=weather_data();data['current']['temperature_2m']=None;return data
+        data=weather_data();data['current']['temperature_2m']=None;return timeline(data)
     monkeypatch.setattr(live,'get_json',missing)
     with pytest.raises(ValueError):live.weather('clima',ctx,NOW)
 
@@ -62,7 +65,7 @@ def test_location_required_explicit_overrides_and_ambiguity(monkeypatch):
     assert live.respond('qual o clima agora',{})==live.LOCATION_PROMPT
     rows=[dict(name='Springfield',admin1='A',country='US',feature_code='PPL',latitude=10,longitude=20),
           dict(name='Springfield',admin1='B',country='US',feature_code='PPL',latitude=11,longitude=21)]
-    monkeypatch.setattr(live,'get_json',lambda *_:{'results':rows})
+    monkeypatch.setattr(live,'get_json',lambda *_:photon(rows))
     assert 'mais de uma' in live.geocode('Springfield')[1]
     assert live.place_from('Como está o clima em Lisboa hoje?')=='Lisboa'
     seen=[]

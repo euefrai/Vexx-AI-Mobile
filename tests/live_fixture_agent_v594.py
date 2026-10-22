@@ -25,7 +25,7 @@ def get(base,params):
     start=time.monotonic()
     try:
         result=_get(base,params)
-        record(dict(kind='api',host=base,params=params,current=result.get('current'),daily=result.get('daily'),units=result.get('current_units'),timezone=result.get('timezone'),latency_ms=round((time.monotonic()-start)*1000)))
+        record(dict(kind='api',host=base,params={k:('REDACTED' if k.lower() in ('key','token','apikey') else v) for k,v in params.items()},current=result.get('current'),daily=result.get('daily'),units=result.get('current_units'),timezone=result.get('timezone'),latency_ms=round((time.monotonic()-start)*1000)))
         return result
     except Exception as exc:
         record(dict(kind='api_error',host=base,error=type(exc).__name__,latency_ms=round((time.monotonic()-start)*1000)))

@@ -10,13 +10,19 @@ import intent
 import docs_agent
 import research
 import jdui
+from weather_fixtures import photon
 
 NOW=datetime(2026,10,22,12,tzinfo=timezone.utc)
 
 @pytest.fixture(autouse=True)
 def isolated(monkeypatch):
     live._cache.clear()
-    monkeypatch.setattr(research,'baixar',lambda *a,**k:pytest.fail('Unmocked external request'))
+    def geometry(url,**kwargs):
+        import re
+        match=re.search(r'/malhas/municipios/(\d{7})/metadados$',url)
+        if not match:pytest.fail('Unmocked external request')
+        return '',json.dumps([{'id':match[1],'centroide':{'latitude':-14.0964,'longitude':-39.5219}}])
+    monkeypatch.setattr(research,'baixar',geometry)
     yield
     live._cache.clear()
 
@@ -45,27 +51,22 @@ def city(name='Ubatã',state='Bahia',code=3445849,country='BR'):
 def test_brazil_aliases(monkeypatch,text):
     registry=municipal(2932309,'Ubatã','BA')
     monkeypatch.setattr(live,'_ibge',lambda path:registry if path.startswith('municipios/') else [registry])
-    calls=[]
-    def get(base,params):
-        calls.append(params)
-        return {'results':[city(),city('Ubá','Minas Gerais')]+([city('Ubatã','Bahia',country='JP')] if params.get('countryCode') else [])}
-    monkeypatch.setattr(live,'get_json',get)
+    monkeypatch.setattr(live,'get_json',lambda *a:pytest.fail('Official municipality must not use hosted geocoder'))
     place,error=live.geocode(text)
     assert not error and place['name']=='Ubatã' and place['state']=='Bahia'
-    assert calls[0]['name'] in ('Ubatã','Ubata')
     if '/' in text or 'BA' in text or 'Bahia' in text or text.isdigit():assert place['ibge_id']==2932309
 
 @pytest.mark.parametrize('name,uf,state', [('Ubá','MG','Minas Gerais'),('Salvador','BA','Bahia'),('Feira de Santana','BA','Bahia')])
 def test_distinct_municipalities(monkeypatch,name,uf,state):
     monkeypatch.setattr(live,'_ibge',lambda _:[])
-    monkeypatch.setattr(live,'get_json',lambda *_:{'results':[city(),city(name,state)]})
+    monkeypatch.setattr(live,'get_json',lambda *_:photon([city(),city(name,state)]))
     place,error=live.geocode(name+'/'+uf)
     assert not error and place['name']==name and place['state']==state
 
 
 def test_ambiguity_and_explicit_state(monkeypatch):
     monkeypatch.setattr(live,'_ibge',lambda _:[])
-    monkeypatch.setattr(live,'get_json',lambda *_:{'results':[city('Santa Luzia','Bahia'),city('Santa Luzia','Minas Gerais')]})
+    monkeypatch.setattr(live,'get_json',lambda *_:photon([city('Santa Luzia','Bahia'),city('Santa Luzia','Minas Gerais')]))
     assert 'mais de uma' in live.geocode('Santa Luzia')[1]
     assert live.geocode('Santa Luzia/BA')[0]['state']=='Bahia'
 
@@ -88,7 +89,7 @@ def test_empty_provider_does_not_deny_existence(monkeypatch):
 def test_same_state_homonyms_do_not_silently_pick_coordinates(monkeypatch):
     monkeypatch.setattr(live,'_ibge',lambda _:[])
     a=city('Santa Luzia');b=dict(a,latitude=-12.0,admin2='Outro município')
-    monkeypatch.setattr(live,'get_json',lambda *_:{'results':[a,b]})
+    monkeypatch.setattr(live,'get_json',lambda *_:photon([a,b]))
     assert 'mais de uma' in live.geocode('Santa Luzia/BA')[1]
 
 
@@ -186,9 +187,9 @@ def test_real_clock_ignores_stale_device_date(tmp_path):
 
 def test_explicit_oi_city_is_not_greeting(monkeypatch):
     seen=[]
-    monkeypatch.setattr(live,'get_json',lambda base,params:seen.append(params) or {'results':[city('Oi','Saitama',country='JP')]})
+    monkeypatch.setattr(live,'get_json',lambda base,params:seen.append(params) or photon([city('Oi','Saitama',country='JP')]))
     assert 'Oi' in live.respond('pesquise a cidade de Oi no Japão',{})
-    assert seen[0]['name']=='Oi' and seen[0]['countryCode']=='JP'
+    assert 'Oi' in seen[0]['q'] and 'Japão' in seen[0]['q']
 
 
 @pytest.mark.parametrize('text,expected', [('qual é o código IBGE de Ubatã BA?','Ubatã BA'),('localize código IBGE 2932309','2932309')])
