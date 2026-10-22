@@ -809,6 +809,10 @@ def _v_sources(p: dict) -> dict:
                     "escopo": _str(f.get("escopo"), 80),
                     "relacao": _str(f.get("relacao"), 80),
                     "data_evento": _str(f.get("data_evento"), 48),
+                    "publicador": _str(f.get('publicador'),120), "autores":_str(f.get('autores'),300),
+                    "doi":_str(f.get('doi'),160), "imagem":_url(f.get('imagem')),
+                    "favicon":_url(f.get('favicon')), "texto_url":_url(f.get('texto_url')),
+                    "detalhes":[_str(v,240) for v in (f.get('detalhes') or [])[:6] if isinstance(v,str)] if isinstance(f.get('detalhes',[]),list) else [],
                     "status": status})
     return {"title": _str(p.get("title"), 160), "items": out,
             "sources": _provenance(p.get("sources"))}

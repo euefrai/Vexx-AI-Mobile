@@ -2152,6 +2152,10 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
             resto = (texto[:m.start()] + texto[m.end():]).strip()
             texto = m.group(0) + (("\n\n" + resto) if resto else "")
     if fontes and not _ja_tem_fontes_markdown(texto):
+        import research_view
+        contextual=research_view.contextual_fence(fontes)
+        if contextual and '"component": "sources"' not in texto:
+            return texto+contextual
         linhas = "\n".join(
             f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"
             for f in fontes)
@@ -2973,7 +2977,8 @@ def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None
             base = base + "\n\n" + resumo
         return _shopping_aplicar(base, shop_res)
     if digest:
-        return digest
+        import research_view
+        return digest+research_view.contextual_fence(extras['fontes'])
     if shop_res is not None:
         nota = shopping.resumo_texto(shop_res)
         if nota:
@@ -3346,14 +3351,8 @@ def fence_de_fontes(db, owner: str) -> str:
         if not url.startswith("http"):
             continue
         trecho = (e.get("trecho", "") or "")
-        itens.append({"titulo": (e.get("titulo", "") or e.get("dominio", ""))[:160],
-                      "url": url[:500],
-                      "dominio": (e.get("dominio", "") or "")[:120],
-                      "data": (e.get("acessado_em", "") or "")[:10],
-                      "trecho": trecho[:300],
-                      "origem_declarada": (e.get("origem_declarada", "") or "")[:120],
-                      "status": "utilizada" if (e.get("afirmacao") or "") else (
-                          "aberta" if trecho else "encontrada")})
+        import research_view
+        itens.append(research_view.source_card(e,bool(e.get('afirmacao'))))
     if not itens:
         return ""
     fence = {"version": jdui.VERSION, "blocks": [

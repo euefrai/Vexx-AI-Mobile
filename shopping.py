@@ -88,6 +88,8 @@ CATEGORIAS = (
     "nintendo", "playstation", "xbox", "iphone", "galaxy", "xiaomi",
     "redmi", "poco", "motorola", "samsung", "lenovo", "dell", "hp", "asus",
     "acer", "apple", "jbl", "soda", "fritadeira",
+    "lavadora", "furadeira", "parafusadeira", "livro", "resistor", "capacitor",
+    "transistor", "pastilha de freio", "amortecedor", "bola de basquete",
 )
 
 _VERBOS_COMPRA = (
@@ -405,6 +407,9 @@ def _modelo_mencionado(specs: dict, produto_txt: str) -> bool:
 def _extrair_specs(texto: str) -> dict:
     t = (texto or "").lower()
     specs = {}
+    for field,pattern in (('capacidade_l',r'\b(\d{2,4})\s*(?:litros?|l)\b'),('tensao_v',r'\b(110|127|220)\s*(?:v|volts?)\b')):
+        match=re.search(pattern,t)
+        if match: specs[field]=int(match[1])
     specs.update(_extrair_ram(texto))
     m = re.search(r"(\d{2,4})\s?gb(?!\s?ram)", t)
     if m and ("armazen" in t or "ssd" in t or "interno" in t or "memória" in t or "memoria" in t):
@@ -487,7 +492,7 @@ def extrair_criterios(texto: str) -> dict:
 # Specs que o usuário DECLAROU (viram exclusão dura em `aplicar_filtros`);
 # o restante (flags aspiracionais como "gamer") é atributo desejável.
 _SPECS_DURAS = ("ram_fisica_gb", "armazenamento_gb", "tela_pol", "bateria_mah",
-                "flag_novo", "tiers", "modelos", "familias", "armazenamento_exato")
+                "flag_novo", "tiers", "modelos", "familias", "armazenamento_exato", "capacidade_l", "tensao_v")
 
 
 def filtros_explicitos(criterios: dict) -> dict:
@@ -978,6 +983,22 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
     for p in produtos:
         motivos, codigos = [], []
         pendencias = []
+        requested=_sem_acentos(criterios.get('texto',''))
+        product_text=_sem_acentos(str(p.get('nome',''))+' '+str(p.get('specs') or {}))
+        # Explicit cross-category conflicts in newly covered families, not missing metadata.
+        families=(r'geladeira|refrigerador',r'lavadora|maquina de lavar',r'furadeira',r'parafusadeira',r'livro',r'resistor',r'capacitor',r'transistor',r'pastilha de freio',r'amortecedor',r'bola de basquete')
+        asked=next((rx for rx in families if re.search(r'\b(?:'+rx+r')\b',requested)),None)
+        found=next((rx for rx in families if re.search(r'\b(?:'+rx+r')\b',product_text)),None)
+        if asked and found and asked!=found:
+            motivos.append('tipo de produto diferente do pedido');codigos.append('tipo_produto_diferente')
+        if asked and re.search(r'\b(capa|suporte para|peca de reposicao|compativel com)\b',product_text) and not re.search(r'\b(capa|suporte|peca|compativel)\b',requested):
+            motivos.append('acessório em vez do produto solicitado');codigos.append('acessorio')
+        declared=_extrair_specs(product_text)
+        for field in ('capacidade_l','tensao_v'):
+            if specs.get(field):
+                if not declared.get(field): pendencias.append(field+' não informado')
+                elif declared[field]!=specs[field] and not (field=='tensao_v' and 'bivolt' in product_text):
+                    motivos.append(field+' diferente do pedido');codigos.append(field+'_diferente')
         tem_orcamento = orc.get("max") is not None or orc.get("min") is not None
         moeda_orc = str(orc.get("moeda") or "BRL").upper()
         moeda_p = str(p.get("moeda") or "BRL").upper()
@@ -1478,6 +1499,8 @@ def classificar_candidato(item: dict) -> str:
     caminho = partes.path or ""
     if not host:
         return "IRRELEVANT"
+    if host in ('creativecommons.org','www.creativecommons.org','schema.org','www.w3.org'):
+        return 'IRRELEVANT'  # Licence/schema links are not product candidates.
     if host.startswith("www."):
         host = host[4:]
     if _RX_CAND_HOST_BUSCA.match(host) or host.endswith(".google"):
@@ -2616,6 +2639,14 @@ def _tier(p: dict) -> str:
 
 def _rotulo_tier(p: dict) -> str:
     return _TIER_ROTULOS[_tier(p)]
+
+
+def precision_status(p: dict, alternative=False) -> str:
+    """Additive diagnostic contract; existing public tiers remain unchanged."""
+    if p.get('disponibilidade') in ('indisponivel','esgotado'):
+        return 'UNAVAILABLE'
+    if alternative: return 'ALTERNATIVE'
+    return {'confirmada':'CONFIRMED_OFFER','parcial':'PARTIAL_PRODUCT','encontrada':'UNVERIFIED'}[_tier(p)]
 
 
 def _filtros_resumo(criterios: dict) -> str:

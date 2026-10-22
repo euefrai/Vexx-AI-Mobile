@@ -409,6 +409,9 @@
             origem_declarada: S(f.origem_declarada, 120),
             tipo: S(f.tipo, 40), escopo: S(f.escopo, 80),
             relacao: S(f.relacao, 80), data_evento: S(f.data_evento, 48),
+            publicador: S(f.publicador,120), autores: S(f.autores,300), doi: S(f.doi,160),
+            imagem: URL_OK(f.imagem), favicon: URL_OK(f.favicon), texto_url: URL_OK(f.texto_url),
+            detalhes: Array.isArray(f.detalhes) ? f.detalhes.slice(0,6).filter(v=>typeof v==='string').map(v=>S(v,240)) : [],
             status: sts.indexOf(st) >= 0 ? st : 'encontrada'
           };
         }),
@@ -2428,17 +2431,27 @@
     const ROT = { encontrada: 'Encontrada · não lida', aberta: 'Fonte lida', utilizada: 'Utilizada na resposta' };
     props.items.forEach(f => {
       const card = el('div', 'jdui-srccard');
+        if (f.imagem) {
+          const img=el('img','jdui-source-image');img.src=f.imagem;img.alt=f.titulo;img.loading='lazy';img.referrerPolicy='no-referrer';
+          img.addEventListener('error',()=>img.remove(),{once:true});card.appendChild(img);
+        }
       const top = el('div', 'jdui-cardtop');
       const heading = el(f.url ? 'a' : 'strong', 'jdui-source-title', f.titulo);
+        if (f.favicon) {
+          const icon=el('img','jdui-source-favicon');icon.src=f.favicon;icon.alt='';icon.width=16;icon.height=16;icon.referrerPolicy='no-referrer';icon.addEventListener('error',()=>icon.remove(),{once:true});top.appendChild(icon);
+        }
       if (f.url) { heading.href = f.url; heading.target = '_blank'; heading.rel = 'noopener noreferrer'; }
       top.appendChild(heading);
       top.appendChild(el('span', 'jdui-badge st-' + f.status, ROT[f.status] || f.status));
       card.appendChild(top);
-      const partes = [f.dominio, f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
+        const partes = [f.publicador || f.dominio, f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
       if (f.data_evento) partes.push('Acontecimento: ' + f.data_evento);
       if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
       const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
+        if (f.autores) card.appendChild(el('div','jdui-source-authors',f.autores));
+        if (f.doi) card.appendChild(el('div','jdui-source-doi','DOI: '+f.doi));
+        (f.detalhes || []).forEach(line=>card.appendChild(el('div','jdui-source-detail',line)));
       if (f.escopo || f.relacao) card.appendChild(el('div', 'jdui-source-scope', [f.escopo, f.relacao].filter(Boolean).join(' · ')));
       if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
       if (f.url) {
@@ -2446,6 +2459,9 @@
         a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
         const acts = el('div', 'jdui-cardacts');
         acts.appendChild(a);
+          if (f.texto_url && f.texto_url!==f.url) {
+            const full=el('a','jdui-btn ghost','Abrir texto recuperado ↗');full.href=f.texto_url;full.target='_blank';full.rel='noopener noreferrer';acts.appendChild(full);
+          }
         card.appendChild(acts);
       }
       box.appendChild(card);

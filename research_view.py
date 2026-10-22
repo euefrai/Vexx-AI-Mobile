@@ -167,6 +167,48 @@ def _files(resumo: dict) -> dict:
     ]}
 
 
+def source_card(item: dict, used=False) -> dict:
+    import research_agents
+    read=research_agents._evidencia_lida(item)
+    abstract=item.get('content_scope')=='abstract_only'
+    full=bool(item.get('full_text_fetched'))
+    vertical=item.get('vertical') or {}
+    data=vertical.get('data') or {}
+    details=[]
+    labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
+            'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
+            'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
+    for key,label in labels.items():
+        if data.get(key): details.append(label+': '+str(data[key])[:160])
+    if data.get('price') and vertical.get('verification')=='MATCHED_DECLARED_FARE':
+        details.append('Tarifa declarada: '+data['price']+' '+data.get('currency','')+'; disponibilidade não verificada')
+    if vertical.get('kind') in ('air_travel','bus_travel'):
+        details.append('Sem confirmação de disponibilidade atual')
+    images=item.get('imagens') or []
+    image=next((v.get('url') or v.get('src') for v in images if isinstance(v,dict) and (v.get('url') or v.get('src'))),'')
+    return {'titulo':item.get('titulo') or item.get('title'),'url':item.get('url'),
+            'dominio':item.get('dominio'),'data':item.get('publicado_em') or str(item.get('year') or ''),
+            'origem_declarada':item.get('origem_declarada') or '',
+            'data_evento':data.get('event_date') or '', 'trecho':item.get('trecho'),
+            'tipo':item.get('publication_type') or {'news':'Notícia','events':'Evento declarado','air_travel':'Voo · informações encontradas','bus_travel':'Ônibus · informações encontradas'}.get(vertical.get('kind'),item.get('tipo','Fonte')),
+            'escopo':'Texto de PDF aberto recuperado; extração limitada' if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado' if read else 'Página não lida; sem suporte factual',
+            'relacao':'Trecho ligado a uma afirmação' if used else 'Fonte de contexto',
+            'status':'utilizada' if used and read else 'aberta' if read else 'encontrada',
+            'publicador':item.get('publicador') or item.get('journal') or item.get('repository') or '',
+            'autores':', '.join(str(v) for v in (item.get('authors') or [])[:6]),'doi':item.get('doi') or '',
+            'imagem':image if vertical.get('kind')=='news' else '', 'favicon':item.get('favicon') or '',
+            'texto_url':item.get('full_text_url') if full else '', 'detalhes':details[:6]}
+
+
+def contextual_fence(sources: list) -> str:
+    import json
+    selected=[s for s in sources if s.get('metadata_source')=='academic_provider' or (s.get('vertical') or {}).get('kind') in ('news','events','air_travel','bus_travel')]
+    if not selected: return ''
+    message={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'sources','props':{'title':'Fontes e dados recuperados','items':[source_card(s) for s in selected[:6]]}}]}
+    ok,normalized,_=jdui.validar_mensagem(message)
+    return '\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```' if ok else ''
+
+
 def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -> dict:
     """Return ``JULIA-ui-message/v1`` with only validated, real data."""
     resumo = resumo if isinstance(resumo, dict) else {}
@@ -182,15 +224,7 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
             claim.get("supporting_ids", []) + claim.get("contradicting_ids", [])}
     source_items = []
     for item in (evidencias or [])[:10]:
-        read = bool(item.get("texto_lido")) or item.get("access_state") == "read"
-        abstract = item.get("content_scope") == "abstract_only"
-        source_items.append({"titulo": item.get("titulo"), "url": item.get("url"),
-            "dominio": item.get("dominio"), "data": item.get("publicado_em"),
-            "trecho": item.get("trecho"), "tipo": item.get("publication_type") or item.get("tipo", "Fonte"),
-            "escopo": "Somente resumo; texto completo não lido" if abstract else
-                      "Texto recuperado" if read else "Página não lida; sem suporte factual",
-            "relacao": "Trecho ligado a uma afirmação" if item.get("id") in used else "Fonte de contexto",
-            "status": "utilizada" if item.get("id") in used and (read or abstract) else "aberta" if read or abstract else "encontrada"})
+        source_items.append(source_card(item,item.get('id') in used))
     if source_items:
         candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))
     for component, props in candidatos:
