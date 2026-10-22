@@ -162,12 +162,19 @@ def _termos(texto: str, minimo: int = 3) -> list:
 
 def _termos_correspondencia(consulta: str) -> list:
     """Termos do pedido que provam correspondência (sem genéricos de loja)."""
+    import query_intelligence as qi
+    request = qi.analyze(consulta)
+    params = request["parameters"]
+    if request["domain"] in ("air_travel", "bus_travel") and params.get("origin") and params.get("destination"):
+        consulta = params["origin"] + " " + params["destination"]
+    elif request["domain"] in ("news", "events") and params.get("location"):
+        consulta = params["location"] + (" eventos culturais" if request["domain"] == "events" else "")
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
 
 def _tem_termo(termo: str, texto: str) -> bool:
     """Token boundaries prevent API from matching capital or RAM from programa."""
-    aliases = {"arquitetura": ("architecture",), "baterias": ("batteries",),
+    aliases = {"fotossintese": ("photosynthesis",), "arquitetura": ("architecture",), "baterias": ("batteries",),
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
@@ -190,6 +197,22 @@ def correspondencia_item(a: dict, consulta: str) -> dict:
 
 
 def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
+    import query_intelligence as qi
+    request = qi.analyze(consulta) if consulta else {}
+    params = request.get("parameters") or {}
+    text = qi.normalized(" ".join(str(a.get(k) or "") for k in ("titulo", "trecho")))
+    if request.get("domain") in ("air_travel", "bus_travel") and params.get("origin") and params.get("destination"):
+        if not all(qi.normalized(params[k]) in text for k in ("origin", "destination")):
+            return False
+        return bool(re.search(r"\b(onibus|rodoviaria|rodoviario)\b" if request["domain"] == "bus_travel" else r"\b(voos?|aereas?|aeroportos?)\b", text))
+    if request.get("domain") == "news" and params.get("location"):
+        if qi.normalized(params["location"]) not in text:
+            return False
+        if params.get("start_date"):
+            published = _data_do_item(a)
+            if published is None or not params["start_date"] <= published.date().isoformat() <= params["end_date"]:
+                return False
+        return True
     if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip():
         return False
     if not termos:
@@ -686,7 +709,7 @@ def detectar_lacunas(consulta: str, achados: list, classes: list, info: dict) ->
         if not any(a.get("tipo") == "dados" for a in achados) and \
                 not any(re.search(r"r\$\s?\d", (a.get("trecho") or ""), re.I) for a in achados):
             lacunas.append("preço/valor comercial não confirmado por fonte de dados")
-    if sp.CLASSE_NOTICIA in classes and not any(a.get("tipo") == "noticia" for a in achados):
+    if sp.CLASSE_NOTICIA in classes and not info.get("academica") and not any(a.get("tipo") == "noticia" for a in achados):
         lacunas.append("sem fonte de notícia recente")
     if sp.CLASSE_ACADEMICA in classes and not any(
             a.get("tipo") in ("academico", "saude") for a in achados):
@@ -703,7 +726,9 @@ def _consultas_recuperacao(consulta: str, classes: list, info: dict, lacunas: li
         if "números" in lac or "preço" in lac:
             out.append(f"{base} valor preço número")
         elif "datas" in lac or "notícia" in lac:
-            out.append(f"{base} 2026")
+            from datetime import datetime, timezone
+            year = _ano_alvo(consulta, info) or datetime.now(timezone.utc).year
+            out.append(f"{base} {year}")
         elif "enciclopédica" in lac:
             out.append(f"{base} definição")
         elif "independente" in lac:
@@ -815,12 +840,20 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
               extra_queries=None, historico=None) -> dict:
     """Busca orquestrada completa. Nunca levanta por falha de provedor."""
     info = classificar(consulta)
+    import query_intelligence
+    request_info = query_intelligence.analyze(consulta)
+    info["request"] = request_info
+    if request_info["domain"] in ("air_travel", "bus_travel", "events", "currency"):
+        info["produto"] = False
+    if request_info["domain"] == "news":
+        info["classes"] = list(dict.fromkeys([sp.CLASSE_NOTICIA] + info["classes"]))
     if classes_forcadas:
         info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
     orc = dict(ORCAMENTO_PADRAO)
     orc.update(orcamento or {})
     consultas = list(extra_queries or [])
-    for q in variantes(consulta, info["classes"], teto=3,
+    query = request_info["search_query"] if request_info["requires_live_data"] else consulta
+    for q in variantes(query, info["classes"], teto=3,
                        produto=bool(info.get("produto"))):
         if q not in consultas:
             consultas.append(q)

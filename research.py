@@ -592,23 +592,39 @@ def resumo_deterministico(fontes: list, consulta: str) -> str:
     V5.7.3: nenhuma fonte é exibida se não compartilhar assunto com o pedido.
     Isso evita o fallback de 429 misturar clima/investimentos com notebooks.
     """
+    import query_intelligence
+    req = query_intelligence.analyze(consulta)
+    params = req["parameters"]
+    limitation = ""
+    if req["domain"] in ("air_travel", "bus_travel"):
+        route = " → ".join(params.get(k, "não informada") for k in ("origin", "destination"))
+        limitation = (f"Pedido: {route}; data: {params.get('departure_date', 'não informada')}. "
+                      "Não obtive inventário de disponibilidade ou tarifa confirmada para esse pedido. "
+                      "Links e informações gerais não confirmam preço, horário ou assento.\n\n")
+    elif req["domain"] == "events":
+        limitation = "Ainda não confirmei uma agenda de eventos para a janela pedida. Data de publicação não prova data do evento; links de contexto não confirmam ingressos.\n\n"
+    elif req["domain"] == "news" and params.get("start_date"):
+        limitation = (f"Janela pedida: {params['start_date']} a {params['end_date']}. "
+                      "A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\n")
     relevantes = fontes_relevantes(consulta, fontes)
     if fontes and not relevantes:
-        return ("Não encontrei fontes que respondam de verdade a este pedido. "
+        return limitation + ("Não encontrei fontes que respondam de verdade a este pedido. "
                 "Os resultados devolvidos não tinham relação demonstrável com o "
                 "assunto e foram descartados; não vou usá-los como evidência. 🔍")
     fontes = relevantes
     if not fontes:
-        return ("Pesquisei agora, mas nenhum provedor retornou fontes "
+        return limitation + ("Pesquisei agora, mas nenhum provedor retornou fontes "
                 "utilizáveis. Tente reformular ou mais tarde. 🔍")
     linhas = [f"Encontrei **{len(fontes)}** fonte(s) sobre **{(consulta or '')[:80]}**:"]
     for f in fontes[:6]:
         trecho = (f.get("trecho", "") or "")[:220]
+        scope = "somente resumo recuperado" if f.get("content_scope") == "abstract_only" else (
+            "página lida" if f.get("status") == "aberta" else "página não lida; trecho do índice")
         linhas.append(f"- [{f.get('titulo', f.get('url', ''))}]({f.get('url', '')})"
-                       + (f" — {trecho}" if trecho else ""))
-    linhas.append("\n_Sem inferência no momento: acima vão fontes e trechos "
-                   "verificados, sem síntese automática._")
-    return "\n".join(linhas)
+                       + (f" — {trecho}" if trecho else "") + f" ({scope})")
+    linhas.append("\n_Sem síntese automática. Descoberta não equivale a leitura; "
+                   "os limites de acesso estão indicados em cada fonte._")
+    return limitation + "\n".join(linhas)
 
 
 # ── Orquestração ────────────────────────────────────────────────────
@@ -691,7 +707,7 @@ def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> 
     # houver termo no conteúdo, nada é anexado.
     out = []
     for f in fontes or []:
-        if not isinstance(f, dict):
+        if not isinstance(f, dict) or f.get("relevante") is False:
             continue
         partes = [f.get("titulo", ""), f.get("trecho", ""),
                   f.get("texto_lido", ""), f.get("url", "")]
@@ -834,7 +850,9 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
     relevante = True
     if lida:
         import search_orchestrator as orch
-        evidence = {"titulo": rec.get("titulo") or "", "trecho": texto}
+        metadata_read = rec.get("metadados") or {}
+        evidence = {"titulo": rec.get("titulo") or "", "trecho": texto,
+                    "publicado_em": metadata_read.get("publicado_em") or a.get("publicado_em") or (a.get("meta") or {}).get("publicado_em")}
         relevante = not avaliar_relevancia or orch._util_para_pedido(
             evidence, orch._termos_correspondencia(consulta), consulta)
     metas = rec.get("metadados") if isinstance(rec.get("metadados"), dict) else {}
@@ -981,6 +999,11 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     """
     from concurrent.futures import ThreadPoolExecutor
     pedido = consulta
+    import query_intelligence
+    request_info = query_intelligence.analyze(pedido)
+    cache_pedido = request_info["resolved_request"] if request_info["temporal"] else pedido
+    if request_info["requires_live_data"]:
+        ttl = min(ttl, 180)
     consulta = consulta_de_pesquisa(consulta)
     if buscar_fn is None:
         def buscar_fn(q, _m=6, _o=orcamento, _t=timeout_busca):
@@ -990,8 +1013,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
             return achados
         buscar_fn.etapas = []
         buscar_fn.info = {}
-    salvos = cache_get(db, owner, "web", pedido)
-    if salvos is not None and salvos.get("retrieval_version") == "5.9.1":
+    salvos = cache_get(db, owner, "web", cache_pedido)
+    if salvos is not None and salvos.get("retrieval_version") == "5.9.2":
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -1054,7 +1077,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado_texto = info_busca.get("estado_texto") or ESTADO_TEXTO.get(estado, "")
     prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
-             "retrieval_version": "5.9.1",
+             "retrieval_version": "5.9.2", "request": request_info,
              "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
              "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(fontes),
@@ -1069,7 +1092,13 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              "tentativas_busca": info_busca.get("tentativas_busca", []),
              "segundos": info_busca.get("segundos", 0.0)}
     if fontes:
-        cache_put(db, owner, "web", pedido, saida, ttl)
+        try:
+            cache_put(db, owner, "web", cache_pedido, saida, ttl)
+        except json_store.JSONLimitError:
+            # Cache is optional. Preserve the valid response and the old cache row;
+            # never truncate JSON or erase evidence to squeeze it into storage.
+            saida["cache_status"] = "skipped_size_limit"
+            saida["etapas"].append("cache não gravado: resposta acima do limite de armazenamento")
     return saida
 
 

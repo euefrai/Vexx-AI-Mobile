@@ -80,3 +80,31 @@ def test_explicitly_unread_snippet_cannot_support_a_fact(tmp_path):
     verdicts = ra.agente_verificador(db, job, [evidence])
     assert all(v['estado'] not in ('SUPPORTED', 'PARTIALLY_SUPPORTED', 'CONTRADICTED') for v in verdicts)
     assert all(not v['supporting_ids'] and not v['contradicting_ids'] for v in verdicts)
+
+
+def test_numerical_disagreement_is_an_open_question_not_proven_contradiction(tmp_path, monkeypatch):
+    import evidence_graph
+    db, job = _job(tmp_path, 'Consumo da bateria ZX')
+    relations=[]
+    monkeypatch.setattr(evidence_graph, 'ligar', lambda db, owner, jid, a, b, relation, *args: relations.append(relation))
+    evidence=[{'id':'a','titulo':'Bateria ZX','trecho':'A bateria ZX consome 500 W no ensaio de 2025.'},
+              {'id':'b','titulo':'Bateria ZX','trecho':'A bateria ZX consome 600 W no ensaio de 2026.'}]
+    questions=ra.investigar_contradicoes_job(db, job, evidence)
+    assert questions and all(q['state']=='INCONCLUSIVE' for q in questions)
+    assert relations and set(relations)=={'REQUIRES_VERIFICATION'}
+    assert all('bateria ZX' in query for q in questions for query in q['follow_up'])
+
+
+def test_repeated_source_is_reused_without_another_page_download(tmp_path):
+    db, job = _job(tmp_path, 'Bateria ZX capacidade nominal')
+    fetched=[]
+    def read(url):
+        fetched.append(url)
+        return {'titulo':'Bateria ZX','texto':'Bateria ZX capacidade nominal de 500 ciclos.', 'final':url}
+    hits=[{'titulo':'Bateria ZX','url':'https://example.com/zx','trecho':'Bateria ZX'}]
+    first={'id':'read-a','alvo':job['objetivo']}
+    second={'id':'read-b','alvo':job['objetivo']}
+    a=ra.agente_analista(db,job,first,hits,read)
+    b=ra.agente_analista(db,job,second,hits,read)
+    assert a and b and a[0]['id']==b[0]['id']
+    assert fetched==['https://example.com/zx'] and job['usados']['paginas']==1

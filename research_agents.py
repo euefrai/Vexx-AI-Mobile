@@ -345,7 +345,10 @@ def _subconsultas_unicas(objetivo: str, limite: int) -> list:
 
 def montar_plano(db, job: dict) -> dict:
     """Etapas com dependências explícitas; preservar etapas e resultados feitos."""
-    subs = _subconsultas_unicas(job["objetivo"], int(job["orcamento"].get("subs", 3) or 3))
+    import query_intelligence
+    request_info = job["ajustes"].setdefault("request", query_intelligence.analyze(job["objetivo"]))
+    request_text = request_info["resolved_request"] if request_info["requires_live_data"] else job["objetivo"]
+    subs = _subconsultas_unicas(request_text, int(job["orcamento"].get("subs", 3) or 3))
     feitas = { (s.get("tipo"), s.get("alvo")) for s in job["plano"] if s.get("status") == "feita" }
     plano, n = [], 0
     for sub_index, sub in enumerate(subs):
@@ -897,7 +900,17 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
 
-    alvos = achados[:teto_paginas]
+    import search_orchestrator as orch
+    anteriores = {orch.canonizar_url(e.get("url", "")): e for e in _evidencias_job(db, job) if _evidencia_lida(e)}
+    reutilizadas = [anteriores[orch.canonizar_url(a.get("url", ""))] for a in achados
+                    if orch.canonizar_url(a.get("url", "")) in anteriores][:teto_paginas]
+    novas_paginas = [a for a in achados if orch.canonizar_url(a.get("url", "")) not in anteriores]
+    restantes = max(0, job["orcamento"].get("paginas", 0) - job["usados"].get("paginas", 0))
+    alvos = novas_paginas[:min(teto_paginas, restantes)]
+    if reutilizadas:
+        emitir(db, job["id"], job["owner"], "analyst", "source_reused", "ok",
+               f"{len(reutilizadas)} fonte(s) já lida(s) reutilizada(s), sem novo download.", {})
+    job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
     baixados: dict = {}
     pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
     futs = {pool.submit(_ler, a): a for a in alvos}
@@ -925,7 +938,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         for fut in futs:
             fut.cancel()
         pool.shutdown(wait=False, cancel_futures=True)
-    evidencias = []
+    evidencias = list(reutilizadas)
     for a in alvos:
         if cancelado or parar():
             break
@@ -941,6 +954,12 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                    "vazia", f"Sem texto: {a['url'][:60]}.", {})
             continue
         academic = a.get("metadata_source") == "academic_provider"
+        termos_pedido = orch._termos_correspondencia(etapa["alvo"])
+        content = (rec.get("titulo") or a.get("titulo", "")) + " " + texto
+        if texto and termos_pedido and not any(orch._tem_termo(t, content) for t in termos_pedido if not t.isdigit()):
+            emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
+                   "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
+            continue
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
         if not trecho_fonte:
             trecho_fonte = texto[:1500] or str(a.get("trecho") or "")
@@ -984,7 +1003,6 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             ev["trecho_usado"] = fonte["trecho_usado"]
         ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])
         evidencias.append(ev)
-        job["usados"]["paginas"] = job["usados"].get("paginas", 0) + 1
         descricao = (f"Metadados acadêmicos de {ev['dominio']}; "
                      f"{'resumo apenas' if academic and texto else 'sem texto completo'}."
                      if academic else f"Lida {ev['dominio']} (relevância {ev['score']}).")
@@ -1162,7 +1180,7 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
     """Source Independence: pares de documentos → laudo + arestas."""
     import evidence_graph as _eg
     docs = [{"url": e.get("url", ""), "texto": e.get("trecho", ""), "id": e.get("id", "")}
-            for e in evidencias or []]
+            for e in evidencias or [] if _evidencia_lida(e)]
     laudos = []
     arestas = []
     for i in range(len(docs)):
@@ -1204,10 +1222,11 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dic
                         f"{e['trecho'][:300]}")
     suportadas = sum(1 for v in vereditos if v["estado"] == "SUPPORTED")
     resposta.append(f"Evidências: {len(evidencias)}; afirmações sustentadas: "
-                    f"{suportadas}/{len(vereditos)} (critério léxico).")
+                    + (f"{suportadas}/{len(vereditos)} (critério léxico)." if vereditos
+                       else "nenhuma afirmação verificável identificada."))
     if any(v["estado"] == "CONTRADICTED" for v in vereditos):
         resposta.append("Há contradições entre fontes — leia as evidências antes de concluir.")
-    resposta.append("Síntese extrativa: redação por LLM indisponível (provedor Hermes bloqueado).")
+    resposta.append("Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.")
     sintese = {"texto": "\n\n".join(resposta), "llm": False}
     emitir(db, job["id"], job["owner"], "synthesizer", "answer_started", "ok",
            f"Síntese extrativa com {len(tops)} evidências.", {})
@@ -1356,6 +1375,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                                                           recuperar_fn, teto,
                                                           deve_parar=deve_parar, prazo=prazo)
                     todas_evid.extend(etapa["_evidencias"])
+                    todas_evid = list({e["id"]: e for e in todas_evid if e.get("id")}.values())
                 elif etapa["tipo"] == "analisar":
                     etapa["_n"] = len(todas_evid)
                     _avaliar_rodada(db, job, etapa, todas_evid)
@@ -2023,7 +2043,7 @@ def _lacunas(job: dict) -> list:
     subs_busca = {s.get("alvo") for s in job["plano"] if s.get("tipo") == "busca"}
     com_evid = set()
     for s in job["plano"]:
-        if s.get("tipo") == "ler" and s.get("_evidencias"):
+        if s.get("tipo") == "ler" and any(_evidencia_lida(e) for e in s.get("_evidencias", [])):
             com_evid.add(s.get("alvo"))
     covered = {base for base in subs_busca if any(
         done.casefold().startswith(base.casefold()) for done in com_evid)}
@@ -2057,7 +2077,7 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
             if mesmos:
                 a, b = mesmos[0], [x for x in qj if x.get("unidade") == mesmos[0].get("unidade")
                                    and x["valor"] != mesmos[0]["valor"]][0]
-                inv = {"tipo": "valor_divergente", "status": "em_aberto",
+                inv = {"tipo": "valor_divergente", "status": "em_aberto", "state": "INCONCLUSIVE",
                        "explicacao": f"Mesma unidade, valores distintos ({a['valor']} × {b['valor']}). "
                                      "Verificar metodologia, data e condições.",
                        "follow_up": [_consulta_lacuna(job, "metodologia medição"),
@@ -2067,7 +2087,7 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                 try:
                     na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])
                     nb = _eg.no_id("evidence", job["id"], evidencias[j]["id"])
-                    _eg.ligar(db, job["owner"], job["id"], na, nb, "CONTRADICTS",
+                    _eg.ligar(db, job["owner"], job["id"], na, nb, "REQUIRES_VERIFICATION",
                               "contradicao", inv["tipo"])
                 except Exception:
                     pass
@@ -2087,13 +2107,13 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                                 "quantidades": _eg.extrair_quantidades(tj),
                                 "datas": _eg._RX_DATA.findall(tj)[:3]}}
             inv = _eg.investigar_divergencia(ci, cj, evidencias[i]["id"], evidencias[j]["id"])
-            inv.update({"entre": [evidencias[i]["id"], evidencias[j]["id"]]})
+            inv.update({"entre": [evidencias[i]["id"], evidencias[j]["id"]], "state": "INCONCLUSIVE"})
             inv["follow_up"] = [_consulta_lacuna(job, q) for q in inv.get("follow_up", [])[:2]]
             invs.append(inv)
             try:
                 na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])
                 nb = _eg.no_id("evidence", job["id"], evidencias[j]["id"])
-                _eg.ligar(db, job["owner"], job["id"], na, nb, "CONTRADICTS",
+                _eg.ligar(db, job["owner"], job["id"], na, nb, "REQUIRES_VERIFICATION",
                           "contradicao", inv["tipo"])
             except Exception:
                 pass

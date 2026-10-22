@@ -1,5 +1,6 @@
 """Dados atuais determinísticos. Fontes limitadas, sem chaves nem código do modelo."""
 import copy
+from decimal import InvalidOperation
 import html
 import json
 import math
@@ -31,6 +32,12 @@ def request(text):
     t = re.sub(r'^(lucas|luccas)[, :]+', '', t)
     if re.search(r'\b(nao (pesquise|busque|consulte)|sem (internet|pesquisa|buscar))\b',t):return None
     if re.search(r'\b(traduza|traduzi[ra]|escreva|redija|codigo|significa|defina|explique|o que e|diferenca|mudancas climaticas|clima organizacional|cpu|gpu|processador)\b', t):
+        return None
+    import query_intelligence
+    try:
+        if query_intelligence.analyze(text)['domain'] == 'currency':
+            return {'kind': 'currency', 'text': text}
+    except ValueError:
         return None
     weather = re.search(r'\b(clima|previsao do tempo|meteorologia|temperatura|vai chover|esta chovendo|ta chovendo|chove agora)\b', t)
     weather = weather or re.search(r'\b(como (esta|ta) o tempo|tempo (agora|hoje|amanha|em))\b', t)
@@ -239,10 +246,99 @@ def news(text,context,now):
     return '\n\n'.join(lines)
 
 
+def exchange_data(text, context, now):
+    """Daily ECB reference observations; no banking spread or live inventory."""
+    from decimal import Decimal
+    import query_intelligence
+    info = query_intelligence.analyze(text, now, context.get('timezone') or 'America/Bahia')
+    params = info['parameters']
+    base, quote = params.get('base'), params.get('quote')
+    if not base or not quote or base == quote:
+        raise ValueError('Informe duas moedas diferentes')
+    query = {'base': base, 'quotes': quote}
+    historical = bool(params.get('start_date'))
+    if historical:
+        query.update({'from': params['start_date'], 'to': params['end_date']})
+    endpoint = 'https://api.frankfurter.dev/v2/providers/ecb/rates'
+    url = endpoint + '?' + urlencode(query)
+    if research._circuito_fechado('fx-ecb'):
+        raise ValueError('Fonte de câmbio em espera após bloqueio')
+    def fetch():
+        try:
+            _, raw = research.baixar(url, timeout=6, max_bytes=128*1024, aceitar='json')
+        except research.ResearchErro as exc:
+            if exc.codigo == 'bloqueado':
+                research._circuito_falha('fx-ecb')
+            raise
+        rows = json.loads(raw)
+        if not isinstance(rows, list) or len(rows) > 367:
+            raise ValueError('Formato de cotações inválido')
+        return rows
+    rows = cached(('fx-ecb', url), 300, fetch)
+    observations = {}
+    for row in rows:
+        if not isinstance(row, dict) or str(row.get('base', '')).upper() != base or str(row.get('quote', '')).upper() != quote:
+            raise ValueError('Par de moedas divergente')
+        date = datetime.strptime(str(row.get('date')), '%Y-%m-%d').date()
+        value = Decimal(str(row.get('rate')))
+        if not value.is_finite() or not 0 < value < Decimal('1000000000') or date > now.date():
+            raise ValueError('Taxa ou data inválida')
+        if historical and not params['start_date'] <= date.isoformat() <= params['end_date']:
+            continue
+        observations[date.isoformat()] = value
+    if not observations:
+        raise ValueError('Nenhuma observação disponível')
+    ordered = sorted(observations.items())
+    if not historical and (now.date() - datetime.fromisoformat(ordered[-1][0]).date()).days > 7:
+        raise ValueError('Cotação antiga demais para consulta atual')
+    amount = Decimal(params['amount'])
+    return {'base': base, 'quote': quote, 'amount': str(amount),
+            'rate': str(ordered[-1][1]), 'converted': str((amount * ordered[-1][1]).quantize(Decimal('0.01'))),
+            'rate_date': ordered[-1][0], 'rate_time': None, 'rate_timezone': 'UTC',
+            'queried_at': now.isoformat(), 'query_timezone': info['timezone'],
+            'rate_type': 'daily_reference', 'provider': 'ECB via Frankfurter',
+            'source_url': url, 'historical': historical,
+            'observations': [{'date': d, 'rate': str(v)} for d, v in ordered],
+            'request': info}
+
+
+def currency(text, context, now):
+    import jdui
+    data = exchange_data(text, context, now)
+    source = data['source_url']
+    body = (f"**{data['amount']} {data['base']} ≈ {data['converted']} {data['quote']}**\n\n"
+            f"Taxa de referência diária: 1 {data['base']} = {data['rate']} {data['quote']}. "
+            f"Data da taxa: {data['rate_date']} (UTC); horário de publicação não informado. "
+            f"Consulta: {data['queried_at']}. Não é uma oferta bancária nem cotação intradiária. "
+            f"[Fonte: ECB via Frankfurter]({source}). Cache de até 5 minutos.")
+    blocks = [{'type': 'ui', 'component': 'cards', 'props': {'title': 'Câmbio de referência', 'items': [{
+        'title': data['base'] + ' → ' + data['quote'], 'value': data['converted'] + ' ' + data['quote'],
+        'desc': 'Referência diária de ' + data['rate_date'] + '; sem impostos ou spread de instituição.',
+        'badge': 'Referência diária', 'url': source}]}}]
+    series = data['observations']
+    if data['historical'] and len(series) >= 2:
+        count = min(24, len(series))
+        sample = [series[round(i * (len(series)-1) / (count-1))] for i in range(count)]
+        blocks.append({'type': 'ui', 'component': 'chart', 'props': {
+            'type': 'line', 'title': 'Observações reais — ' + data['base'] + '/' + data['quote'],
+            'labels': [p['date'] for p in sample],
+            'series': [{'label': data['quote'] + ' por ' + data['base'], 'values': [float(p['rate']) for p in sample]}],
+            'source': source}})
+        first, last = series[0], series[-1]
+        body += f"\n\nSérie disponível: {first['date']} a {last['date']}, {len(series)} observações. "
+        from decimal import Decimal
+        variation = ((Decimal(last['rate']) / Decimal(first['rate']) - 1) * 100).quantize(Decimal('0.01'))
+        body += f"Primeira taxa: {first['rate']}; última: {last['rate']}; variação observada: {variation}%. O gráfico seleciona até 24 observações existentes; não preenche dias sem publicação."
+    ok, msg, errors = jdui.validar_mensagem({'version': jdui.VERSION, 'blocks': blocks})
+    if not ok:
+        raise ValueError('Não foi possível validar apresentação da cotação')
+    return body + '\n\n```jdui\n' + json.dumps(msg, ensure_ascii=False) + '\n```'
+
+
 def respond(text,context):
     req=request(text)
     if not req:return None
     try:
-        return {'weather':weather,'clock':clock,'news':news}[req['kind']](text,context,datetime.now(UTC))
-    except (ValueError,KeyError,TypeError,IndexError,AttributeError,OSError,ZoneInfoNotFoundError):
+        return {'weather':weather,'clock':clock,'news':news,'currency':currency}[req['kind']](text,context,datetime.now(UTC))
+    except (ValueError,KeyError,TypeError,IndexError,AttributeError,OSError,ZoneInfoNotFoundError,InvalidOperation):
         return 'Não consegui consultar os dados atuais agora: a fonte está indisponível ou retornou dados inválidos. Tente novamente em instantes. Não vou estimar valores sem uma fonte.'
