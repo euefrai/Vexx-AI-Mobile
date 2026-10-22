@@ -960,6 +960,7 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                      if str(m).strip()]
     for p in produtos:
         motivos, codigos = [], []
+        pendencias = []
         tem_orcamento = orc.get("max") is not None or orc.get("min") is not None
         moeda_orc = str(orc.get("moeda") or "BRL").upper()
         moeda_p = str(p.get("moeda") or "BRL").upper()
@@ -999,6 +1000,8 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                     codigos.append("marca_nao_confirmada")
         if specs.get("ram_fisica_gb"):
             ram = _ram_do_produto(p)
+            if ram is None:
+                pendencias.append("RAM física não informada")
             if ram is not None and ram[0] < specs["ram_fisica_gb"] and ram[0] > 0:
                 motivos.append(f"RAM física abaixo do pedido ({ram[0]}GB)")
                 codigos.append("ram_abaixa")
@@ -1013,6 +1016,8 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
         if specs.get("armazenamento_gb"):
             txt = (p.get("nome", "") + json.dumps(p.get("specs", {}))).lower()
             ap = _armazenamento_aparente(txt)
+            if ap is None:
+                pendencias.append("armazenamento não informado")
             if ap is not None and ap < specs["armazenamento_gb"]:
                 motivos.append("armazenamento abaixo do pedido")
                 codigos.append("armazenamento_abaixa")
@@ -1049,10 +1054,14 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                                + ")")
                 codigos.append("modelo_nao_confirmado")
         if motivos:
+            p["correspondencia_tipo"] = "IRRELEVANT"
             p["excluido_por"] = "; ".join(motivos)
             p["excluido_codigos"] = codigos
             fora.append(p)
         else:
+            p["pendencias_do_pedido"] = pendencias
+            p["correspondencia_tipo"] = ("PARTIAL_MATCH" if pendencias or _tier(p) != "confirmada"
+                                        else "EXACT_MATCH")
             dentro.append(p)
     dentro.sort(key=lambda p: (not p.get("preco_confirmado"),
                                p.get("preco") is None, p.get("preco") or 0))
@@ -1158,6 +1167,7 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
         if not difs:
             continue
         alt = dict(p)
+        alt["correspondencia_tipo"] = "ALTERNATIVE"
         alt["diferencas"] = " · ".join(difs)
         alt["diferencas_lista"] = difs
         alt["distancia"] = round(min(distancias), 3)
@@ -1272,14 +1282,19 @@ def _get_json(url: str, timeout: float) -> dict:
                     raise research.ResearchErro("Redirect sem destino.", "redirect")
                 atual = research.url_segura(_up.urljoin(atual, loc))
                 continue
-            raise research.ResearchErro(f"Provedor HTTP {exc.code}.", "http")
+            err = research.ResearchErro(f"Provedor HTTP {exc.code}.",
+                                       "bloqueado" if exc.code in (401, 403, 429) else "http")
+            err.http = exc.code
+            raise err from None
         except (OSError, TimeoutError, ValueError) as exc:
             raise research.ResearchErro(
                 f"Falha de rede ({type(exc).__name__}).", "rede") from None
         with resp:
             if getattr(resp, "status", 200) >= 400:
-                raise research.ResearchErro(
-                    f"Provedor HTTP {resp.status}.", "http")
+                err = research.ResearchErro(f"Provedor HTTP {resp.status}.",
+                                           "bloqueado" if resp.status in (401, 403, 429) else "http")
+                err.http = resp.status
+                raise err
             try:
                 ctype = (resp.headers.get_content_type()
                          if hasattr(resp.headers, "get_content_type")
@@ -1575,19 +1590,23 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
     etapas: list = []
     inicio = time.monotonic()
     try:
+        if isinstance(diag, list) and any(d.get("provedor") == "mlb" and d.get("codigo") == "bloqueado" for d in diag):
+            raise research.ResearchErro("Bloqueio já observado nesta pesquisa; API não repetida.", "bloqueado")
         achados = buscar_mlb(consulta, limite=limite_mlb)
         etapas.append(f"mlb: {len(achados)} ofertas (API oficial)")
         _reg(provedor="mlb", resultados=len(achados),
              comerciais=len(achados), rejeitados=0, rebaixados=0,
              motivo="useful_candidates_found",
              ms=(time.monotonic() - inicio) * 1000)
-        return achados, etapas
+        if achados:
+            return achados, etapas
     except Exception as exc:
         etapas.append(f"mlb: falhou ({type(exc).__name__})")
         _reg(provedor="mlb", resultados=0, comerciais=0, rejeitados=0,
              rebaixados=0, erro=type(exc).__name__,
+             codigo=getattr(exc, "codigo", "erro"), http=getattr(exc, "http", 0),
              motivo=("provider_blocked"
-                     if isinstance(exc, research.ResearchErro)
+                     if getattr(exc, "codigo", "") == "bloqueado"
                      else "provider_error"),
              ms=(time.monotonic() - inicio) * 1000)
     inicio = time.monotonic()
@@ -1709,11 +1728,6 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
             consultas.append(f"melhor {nucleo}{detalhe} comprar Brasil".strip())
     vistos, final = set(), []
     for q in consultas:
-        # Every reformulation retains mandatory price limits, not just the last.
-        if orc.get("max") is not None and _extrair_orcamento(q).get("max") != orc["max"]:
-            q += f" até R$ {orc['max']:g}"
-        if orc.get("min") is not None:
-            q += f" a partir de R$ {orc['min']:g}"
         chave = q.lower()
         if q and chave not in vistos:
             vistos.add(chave)
@@ -2338,6 +2352,9 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # é aberta quando acessível — sem isso o card nunca sai de "parcial".
     # Bloqueio/erro preserva o card como estava; nada é contornado.
     _validar_itens_declarados(produtos, baixar_fn, consulta, _prog)
+    for p in produtos:
+        p["correspondencia_tipo"] = ("PARTIAL_MATCH" if p.get("pendencias_do_pedido") or _tier(p) != "confirmada"
+                                    else "EXACT_MATCH")
     # Referências não verificadas: páginas específicas achadas na busca que
     # NÃO viraram oferta (bloqueio/sem-dados) — link útil com motivo, jamais
     # preço/foto/estoque/veredito (V5.7 descoberta).
@@ -2351,9 +2368,21 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
           + (f", {len(alternativas)} alternativas" if alternativas else "")
           + (f", {len(encontrados)} referências não verificadas"
              if encontrados else ""))
-    fontes = [{"id": f"S{i + 1}", "titulo": (a.get("titulo") or "")[:160],
-               "url": a.get("url", "")[:500]}
-              for i, a in enumerate(achados[:8])]
+    # Late, validated offers must carry their actual source into grounding/JDUI.
+    fontes = []
+    fontes_vistas = set()
+    usadas = [{"titulo": p.get("fonte_titulo") or p.get("nome", ""),
+               "url": p.get("url_final") or p.get("url", "")}
+              for p in produtos + alternativas]
+    for a in usadas + consultadas + achados:
+        url_fonte = a.get("url", "")[:500]
+        if not url_fonte or url_fonte in fontes_vistas:
+            continue
+        fontes_vistas.add(url_fonte)
+        fontes.append({"id": f"S{len(fontes) + 1}",
+                       "titulo": (a.get("titulo") or "")[:160], "url": url_fonte})
+        if len(fontes) >= 8:
+            break
     esgotado = bool(not brutos and ondas >= MAX_ONDAS_PAGINAS
                     and len(paginas) > len(consultadas))
     resultado = {"produtos": produtos, "alternativas": alternativas,
@@ -2370,7 +2399,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                      "paginas_consultadas": len(consultadas),
                      "ondas": ondas,
                      "ofertas_extraidas": len(brutos),
-                     "confirmadas": len(produtos),
+                      "confirmadas": sum(_tier(p) == "confirmada" for p in produtos),
                      "orcamento_esgotado": esgotado,
                      "motivo_final": ("confirmed_offers_found" if produtos
                                       else
@@ -2571,7 +2600,9 @@ def bloco_para_llm(resultado: dict) -> str:
             f"- [{i + 1}] {p.get('nome', '')} | {p.get('preco_texto', PRECO_NAO_CONFIRMADO)}"
             f" | loja: {p.get('loja', '')} | link: {_link_do_produto(p)}"
             f" | {_selo_verificacao(p)}"
-            f" | nível: {_rotulo_tier(p)}"
+            f" | correspondência com o pedido: {p.get('correspondencia_tipo', 'não classificada')}"
+            + (" | pendências: " + ", ".join(p['pendencias_do_pedido']) if p.get('pendencias_do_pedido') else "")
+            + f" | nível: {_rotulo_tier(p)}"
             f" | aval: {p.get('avaliacao') if p.get('avaliacao') is not None else 'não informada'}"
             f" | disp: {p.get('disponibilidade', '')}"
             + (f" | specs: {specs}" if specs else ""))
@@ -2599,6 +2630,12 @@ COMPONENTES_PRODUTO = ("productcard", "productgrid", "productcompare",
 
 
 def _jdui_produto(p: dict) -> dict:
+    specs = dict(p.get("specs") or {})
+    if p.get("correspondencia_tipo") == "PARTIAL_MATCH":
+        aviso = "Correspondência parcial"
+        if p.get("pendencias_do_pedido"):
+            aviso += ": " + "; ".join(p["pendencias_do_pedido"])
+        specs = {"Pedido": aviso, **specs}
     return {
         "nome": p.get("nome", "")[:160],
         "marca": p.get("marca", "")[:80],
@@ -2611,7 +2648,7 @@ def _jdui_produto(p: dict) -> dict:
         "loja": p.get("loja", "")[:80],
         "url": _link_do_produto(p)[:500],
         "specs": {str(k)[:40]: str(v)[:120]
-                  for k, v in list((p.get("specs", {}) or {}).items())[:12]},
+                  for k, v in list(specs.items())[:12]},
         "avaliacao": p.get("avaliacao"),
         "n_avaliacoes": p.get("n_avaliacoes"),
         "disponibilidade": p.get("disponibilidade", "desconhecida"),

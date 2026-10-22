@@ -216,14 +216,18 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
                 atual = url_segura(urllib.parse.urljoin(atual, loc))
                 continue
             if exc.code in (401, 403, 429):
-                raise ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
+                err = ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
+                err.http = exc.code
+                raise err from None
             raise ResearchErro(f"Página HTTP {exc.code}.", "http")
         except (OSError, TimeoutError, ValueError) as exc:
             raise ResearchErro(f"Falha de rede ({type(exc).__name__}).", "rede") from None
         with resp:
             if getattr(resp, "status", 200) >= 400:
                 if resp.status in (401, 403, 429):
-                    raise ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
+                    err = ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
+                    err.http = resp.status
+                    raise err
                 raise ResearchErro(f"Página HTTP {resp.status}.", "http")
             ctype = (resp.headers.get_content_type() if hasattr(resp.headers, "get_content_type")
                      else str(resp.headers.get("Content-Type", "")).split(";")[0]).lower()
@@ -343,7 +347,7 @@ _RX_BLOQUEIO = re.compile(
     r"(anomaly-modal|select all squares containing|complete the following challenge|"
     r"are you a robot|making sure you'?re not a bot|checking your browser|"
     r"cf-browser-verification|just a moment\.\.\.|enable javascript and cookies|"
-    r"unusual traffic|verifying you are human)", re.IGNORECASE)
+    r"unusual traffic|verifying you are human|access denied|request blocked|cf-browser-verification)", re.IGNORECASE)
 
 
 def pagina_bloqueada(pagina: str) -> bool:
@@ -476,14 +480,18 @@ def _baixar_json(url: str, timeout: float = 8.0, abrir=None, user_agent: str = "
                 atual = url_segura(urllib.parse.urljoin(atual, loc))
                 continue
             if exc.code in (401, 403, 429):
-                raise ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
+                err = ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
+                err.http = exc.code
+                raise err from None
             raise ResearchErro(f"Provedor HTTP {exc.code}.", "http")
         except (OSError, TimeoutError, ValueError) as exc:
             raise ResearchErro(f"Falha de rede ({type(exc).__name__}).", "rede") from None
         with resp:
             if getattr(resp, "status", 200) >= 400:
                 if resp.status in (401, 403, 429):
-                    raise ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
+                    err = ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
+                    err.http = resp.status
+                    raise err
                 raise ResearchErro(f"Provedor HTTP {resp.status}.", "http")
             try:
                 ctype = (resp.headers.get_content_type()
@@ -744,6 +752,21 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
     se a página foi de fato lida (`lida=True`) — fonte encontrada não é
     fonte consultada.
     """
+    if recuperar_fn is None and urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+        import source_check
+        import docs_agent
+        final, status, ctype, raw = source_check._baixar_bytes(a["url"], timeout=timeout_pagina,
+                                                            max_bytes=MAX_PAGINA_BYTES)
+        if ctype != "application/pdf" or not raw.startswith(b"%PDF-"):
+            raise ResearchErro("PDF sem assinatura/tipo válido.", "tipo_bloqueado")
+        try:
+            texto = docs_agent.extrair_texto(".pdf", raw, "source.pdf")[:MAX_TEXTO_PAGINA]
+        except docs_agent.DocErro as exc:
+            raise ResearchErro("Não foi possível extrair texto do PDF.", exc.codigo) from None
+        return {"titulo": a.get("titulo", ""), "texto": texto, "final": final,
+                "lida": bool(texto.strip()), "ilegivel": not bool(texto.strip()),
+                "content_scope": "document_text",
+                "extrator": "pdf", "trecho_usado": texto[:600]}
     if recuperar_fn is not None:
         rec = recuperar_fn(a["url"])
         rec = dict(rec or {})
@@ -758,6 +781,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "final": final,
                "trecho_usado": art.get("trecho_usado", ""),
                "metadados": art.get("metadados", {}),
+               "content_scope": art.get("content_scope", "page_text"),
                "secoes": art.get("secoes", [])[:12],
                "tabelas": art.get("tabelas", [])[:5],
                "imagens": art.get("imagens", [])[:10],
@@ -788,7 +812,7 @@ def _janela_lida(texto: str, ancora: str, tamanho: int = 1200) -> str:
     return texto[:tamanho]
 
 
-def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
+def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = True) -> dict:
     """Fonte normalizada a partir do achado + página recuperada."""
     texto = (rec.get("texto") or "")
     trecho = (rec.get("trecho_usado") or "").strip()
@@ -797,11 +821,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
     if not trecho:
         trecho = (a.get("trecho") or "")[:600]
     lida = bool(rec.get("lida", bool(texto.strip()))) and not rec.get("ilegivel", False)
+    relevante = True
     if lida:
         import search_orchestrator as orch
         evidence = {"titulo": rec.get("titulo") or "", "trecho": texto}
-        if not orch._util_para_pedido(evidence, orch._termos_correspondencia(consulta), consulta):
-            lida = False
+        relevante = not avaliar_relevancia or orch._util_para_pedido(
+            evidence, orch._termos_correspondencia(consulta), consulta)
     metas = rec.get("metadados") if isinstance(rec.get("metadados"), dict) else {}
     canonica = (metas.get("canonica") or "").strip()[:500]
     dominio = _dominio(rec.get("final") or a.get("url", ""))
@@ -822,6 +847,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
             "texto_lido": (_janela_lida(texto, trecho) if lida else ""),
             "tipo": a.get("tipo", "pagina"),
             "status": "aberta" if lida else "encontrada",
+            "relevante": relevante,
             "origem": a.get("origem", ""),
             "publicado_em": (metas.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
             "extrator": rec.get("extrator", ""),
@@ -831,6 +857,9 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
             "secoes": rec.get("secoes", [])[:12] if lida else [],
             "tabelas": rec.get("tabelas", [])[:5] if lida else [],
             "imagens": rec.get("imagens", [])[:10],
+            "content_scope": rec.get("content_scope", "page_text"),
+            **({"full_text_fetched": False} if rec.get("content_scope") == "abstract_only"
+               else {"full_text_fetched": lida} if rec.get("content_scope") == "document_text" else {}),
             "ilegivel": bool(rec.get("ilegivel", False))}
 
 
@@ -912,6 +941,7 @@ def _buscar_orquestrado(consulta: str, max_resultados: int = 6,
             "correspondencia": res.get("correspondencia", 0.0),
             "segundos": res.get("segundos", 0.0),
             "recuperou": bool(res.get("recuperou")),
+            "tentativas_busca": res.get("tentativas_busca", []),
             "etapas": list(res.get("etapas", []))}
     return achados, info
 
@@ -927,17 +957,18 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     sem página legível entram como "encontrada" (trecho do índice).
     """
     from concurrent.futures import ThreadPoolExecutor
+    pedido = consulta
     consulta = consulta_de_pesquisa(consulta)
     if buscar_fn is None:
         def buscar_fn(q, _m=6, _o=orcamento, _t=timeout_busca):
-            achados, info = _buscar_orquestrado(q, _m, timeout=_t, orcamento=_o)
+            achados, info = _buscar_orquestrado(pedido, _m, timeout=_t, orcamento=_o)
             buscar_fn.etapas = list(info.get("etapas", []))
             buscar_fn.info = dict(info)
             return achados
         buscar_fn.etapas = []
         buscar_fn.info = {}
-    salvos = cache_get(db, owner, "web", consulta)
-    if salvos is not None:
+    salvos = cache_get(db, owner, "web", pedido)
+    if salvos is not None and salvos.get("retrieval_version") == "5.9":
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -962,7 +993,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     info_busca = dict(getattr(buscar_fn, "info", {}) or {})
     recs: dict = {}
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
-        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, consulta): a
+        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
                 for a in achados}
         for fut, a in futs.items():
             try:
@@ -977,19 +1008,22 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         rec = recs.get(a["url"])
         if rec is None:
             continue
-        fontes.append(_fonte_de(rec, a, consulta))
+        fontes.append(_fonte_de(rec, a, pedido))
     for a in achados:  # 2º: achados com trecho de índice (página não lida)
         if len(fontes) >= max_fontes:
             break
         if recs.get(a["url"]) is not None or not (a.get("trecho") or "").strip():
             continue
         fontes.append(_fonte_de({"texto": "", "lida": False,
-                                 "titulo": a.get("titulo", "")}, a, consulta))
+                                 "titulo": a.get("titulo", "")}, a, pedido))
     lidas_n = sum(1 for f in fontes if f.get("status") == "aberta")
-    if lidas_n >= 2:
+    uteis_n = sum(1 for f in fontes if f.get("status") == "aberta" and f.get("relevante", True))
+    if uteis_n >= 2:
         estado, estado_texto = "ok", ESTADO_TEXTO["ok"]
-    elif lidas_n == 1:
+    elif uteis_n == 1:
         estado, estado_texto = "parcial", ESTADO_TEXTO["parcial"]
+    elif lidas_n:
+        estado, estado_texto = "sem_correspondencia", ESTADO_TEXTO["sem_correspondencia"]
     elif fontes:
         estado, estado_texto = "paginas_ilegiveis", ESTADO_TEXTO["paginas_ilegiveis"]
     else:
@@ -997,6 +1031,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado_texto = info_busca.get("estado_texto") or ESTADO_TEXTO.get(estado, "")
     prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
+             "retrieval_version": "5.9",
+             "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
              "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(fontes),
              "de_cache": False,
@@ -1007,9 +1043,10 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              "consultas": info_busca.get("consultas", []),
              "descartes": info_busca.get("descartes", []),
              "correspondencia": info_busca.get("correspondencia", 0.0),
+             "tentativas_busca": info_busca.get("tentativas_busca", []),
              "segundos": info_busca.get("segundos", 0.0)}
     if fontes:
-        cache_put(db, owner, "web", consulta, saida, ttl)
+        cache_put(db, owner, "web", pedido, saida, ttl)
     return saida
 
 
@@ -1081,6 +1118,10 @@ def bloco_grounding(fontes: list, hoje_br: str, info: dict = None) -> str:
     linhas = []
     for f in fontes:
         marcas = []
+        if f.get("relevante") is False:
+            marcas.append("sem correspondência demonstrável com o pedido; não usar como suporte")
+        if f.get("content_scope") == "abstract_only":
+            marcas.append("somente resumo lido; texto completo não recuperado")
         if f.get("status") and f.get("status") != "aberta":
             marcas.append("página NÃO lida; trecho do índice de busca")
         if f.get("publicado_em"):
@@ -1214,7 +1255,7 @@ def analisar_url(url: str, consulta: str = "", timeout: float = 8.0) -> tuple:
            "final": final, "trecho_usado": art.get("trecho_usado", ""),
            "metadados": art.get("metadados", {}), "extrator": art.get("extrator", ""),
            "ilegivel": bool(art.get("ilegivel")), "lida": True}
-    return _fonte_de(rec, {"url": url, "trecho": ""}, consulta), ""
+    return _fonte_de(rec, {"url": url, "trecho": ""}, consulta, avaliar_relevancia=False), ""
 
 
 PAGINA_ERRO_TEXTO = {

@@ -850,6 +850,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             if restante <= 0:
                 raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
             limite_tempo = max(0.5, min(limite_tempo, restante))
+        if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+            rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+            return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                    "access_state": "read" if rec.get("lida") else "snippet_only"}
         try:
             final, pagina = research.baixar(
                 a["url"], timeout=limite_tempo,
@@ -857,13 +861,16 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
         except TypeError:
             final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+        if research.pagina_bloqueada(pagina):
+            raise research.ResearchErro("Página bloqueada; conteúdo não usado como evidência.", "bloqueado")
         artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
                                          teto=research.MAX_TEXTO_PAGINA)
         texto = (artigo.get("texto") or "").strip()
         return {"titulo": artigo.get("titulo") or a["titulo"],
                 "texto": texto, "final": final,
+                "content_scope": artigo.get("content_scope", "page_text"),
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
-                "texto_lido": bool(texto),
+                "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
 
@@ -916,6 +923,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             trecho_fonte = texto[:1500] or str(a.get("trecho") or "")
         fonte = {"id": a.get("id", ""), "url": a["url"],
                  "titulo": rec.get("titulo") or a.get("titulo", ""),
+                 "content_scope": rec.get("content_scope", "page_text"),
+                 **({"full_text_fetched": False} if rec.get("content_scope") == "abstract_only" else {}),
                  "dominio": research._dominio(a["url"]),
                  "texto_lido": bool(rec.get("texto_lido")) and not academic,
                  "trecho_usado": trecho_fonte[:1500],
@@ -945,6 +954,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             ev["abstract_untrusted"] = bool(a.get("abstract_untrusted", False))
         else:
             ev["texto_lido"] = fonte["texto_lido"]
+            ev["content_scope"] = fonte["content_scope"]
+            if "full_text_fetched" in fonte:
+                ev["full_text_fetched"] = fonte["full_text_fetched"]
             ev["access_state"] = fonte["access_state"]
             ev["trecho_usado"] = fonte["trecho_usado"]
         ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])

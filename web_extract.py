@@ -196,6 +196,20 @@ def melhor_bloco(raiz: "_No"):
     """
     cache: dict = {}
     pontos: dict = {}
+    nodes = list(_descendentes(raiz))
+    abstracts = [n for n in nodes if re.search(r"(?:^|[\s_-])abstract(?:$|[\s_-])", _pista(n), re.I)
+                 and n.tag not in _PULAR | _IGNORAR and len(_texto_bloco(n)) >= 120]
+    if abstracts:
+        abstract = max(abstracts, key=lambda n: len(_texto_bloco(n)))
+        # An abstract landing page often has more promotional paragraphs than
+        # scientific text. Prefer the labelled abstract unless a substantive
+        # full article is actually present too.
+        full_sections = any(n.tag in ("h2", "h3") and re.search(
+            r"\b(introduction|methods|results|discussion|conclusion|introdução|metodologia|resultados|discussão|conclusão)\b",
+            _texto_bloco(n), re.I) for n in nodes)
+        if not any((n.tag == "article" or (n.tag == "main" and full_sections)) and
+                   len(_texto_bloco(n)) > 2 * len(_texto_bloco(abstract)) for n in nodes):
+            return abstract
 
     for no in _descendentes(raiz):
         if no.tag in _IGNORAR or no.tag in _PULAR or no.tag not in _BLOCO:
@@ -656,11 +670,15 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     except Exception:
         pass
     bloco = melhor_bloco(parser.raiz)
+    abstract_only = bloco is not None and bool(re.search(
+        r"(?:^|[\s_-])abstract(?:$|[\s_-])", _pista(bloco), re.I))
     texto_det = (_texto_bloco(bloco) if bloco is not None
                  else _texto_documento(parser.raiz))
     paragrafos = [t for _, t in _paragrafos(bloco)] if bloco is not None else []
     secs = secoes(bloco) if bloco is not None else []
-    if not texto_art:
+    if abstract_only:
+        texto_art, extrator = texto_det, "deterministico"
+    elif not texto_art:
         texto_art = texto_det
     elif texto_det and len(texto_det) > len(texto_art) * 1.8:
         # trafilatura devolveu menos que o extrator local: o local é mais útil
@@ -677,6 +695,7 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         "tabelas": extrair_tabelas(html_txt),
         "trecho_usado": melhor_trecho(texto_final, consulta, 400),
         "extrator": extrator,
+        "content_scope": "abstract_only" if abstract_only else "page_text",
         "ilegivel": ilegivel(texto_art),
         "tamanho_html": len(html_txt),
     }

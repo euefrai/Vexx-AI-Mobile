@@ -30,8 +30,9 @@ def run_case(case):
     import search_orchestrator as orch
     import search_providers as sp
     name, query, mode = case
-    requests, pages, calls = [], [], []
+    requests, pages, calls, discovered, item_pages = [], [], [], [], []
     download, json_download, search = research.baixar, research._baixar_json, sp.buscar
+    discovery, item_reader, market_json = research._buscar_orquestrado, shopping._recuperar_ofertas, shopping._get_json
     started = time.monotonic()
 
     def observed_download(url, *args, **kwargs):
@@ -58,7 +59,29 @@ def run_case(case):
         calls.append({'provider': provider, 'query': query})
         return search(provider, query, *args, **kwargs)
 
+    def observed_discovery(*args, **kwargs):
+        hits, info = discovery(*args, **kwargs)
+        discovered.extend({k: h.get(k) for k in ('titulo', 'url', 'origem')} for h in hits)
+        return hits, info
+
+    def observed_item(url, *args, **kwargs):
+        products = item_reader(url, *args, **kwargs)
+        diagnostic = args[3] if len(args) > 3 else kwargs.get('relatorio', [])
+        item_pages.append({'url': url, 'offers': len(products),
+                           'diagnostic': [d for d in (diagnostic or []) if d.get('url') == url]})
+        return products
+
+    def observed_market(url, *args, **kwargs):
+        entry = {'url': url, 'error': ''}
+        requests.append(entry)
+        try:
+            return market_json(url, *args, **kwargs)
+        except Exception as exc:
+            entry['error'] = getattr(exc, 'codigo', type(exc).__name__)
+            raise
+
     research.baixar, research._baixar_json, sp.buscar = observed_download, observed_json, observed_search
+    research._buscar_orquestrado, shopping._recuperar_ofertas, shopping._get_json = observed_discovery, observed_item, observed_market
     db = sqlite3.connect(':memory:')
     research.criar_tabelas(db)
     shopping.criar_tabelas(db)
@@ -75,14 +98,15 @@ def run_case(case):
         sources, products = result.get('fontes', []), []
     for source in sources:
         pages.append({key: source.get(key) for key in (
-            'url', 'titulo', 'status', 'origem', 'trecho', 'texto_lido', 'publicado_em')})
+            'url', 'titulo', 'status', 'origem', 'trecho', 'texto_lido', 'publicado_em',
+            'relevante', 'content_scope', 'full_text_fetched', 'autor', 'publicador')})
     return {'case': name, 'query': query, 'mode': mode,
             'seconds': round(time.monotonic()-started, 3), 'sources': pages,
-            'opened_sources': sum(s.get('status') == 'aberta' for s in sources),
-            'products': products, 'confirmed_offers': sum(
-                p.get('verificacao', {}).get('estado') == 'confirmado' for p in products
-                if isinstance(p.get('verificacao'), dict)),
-            'criteria': result.get('criterios'), 'state': result.get('estado', result.get('erro', '')),
+            'opened_sources': sum(s.get('status') == 'aberta' for s in sources) if mode == 'research' else None,
+            'usable_sources': result.get('fontes_uteis'), 'discovered': discovered,
+            'item_pages': item_pages,
+            'products': products, 'confirmed_offers': sum(shopping._tier(p) == 'confirmada' for p in products),
+            'criteria': result.get('criterios'), 'state': result.get('estado', result.get('erro') or result.get('descoberta', {}).get('motivo_final', '')),
             'provider_decisions': result.get('descoberta', result.get('provedores')),
             'queries': result.get('consultas', []), 'search_calls': calls, 'requests': requests,
             'extraction': result.get('verificacao'), 'final': final,

@@ -60,6 +60,9 @@ def _json(url: str, timeout: float):
 def _traduzir(exc: Exception) -> ErroProvedor:
     if isinstance(exc, ErroProvedor):
         return exc
+    http = getattr(exc, "http", getattr(exc, "code", 0))
+    if http == 429:
+        return ErroProvedor("Limite de requisições do provedor (HTTP 429).", "rate_limited")
     codigo = getattr(exc, "codigo", "") or type(exc).__name__
     mapa = {"ssrf": "bloqueado", "tipo_bloqueado": "tipo", "redirect": "http",
             "http": "http", "rede": "rede", "tamanho": "tamanho", "formato": "formato",
@@ -90,6 +93,25 @@ def _url_ok(url: str) -> str:
 
 
 # ── Bing (feed RSS oficial de busca e de notícias) ──────────────────
+def buscar_ddg(consulta: str, limite: int = 8, timeout: float = 10.0) -> list:
+    """Reuse the existing HTML search adapter; blocked responses stop here."""
+    core = _research()
+    if core._circuito_fechado("ddg"):
+        raise ErroProvedor("DuckDuckGo em espera após bloqueio.", "bloqueado")
+    try:
+        results = core.buscar_ddg(consulta, max_resultados=limite, timeout=timeout)
+    except Exception as exc:
+        if getattr(exc, "codigo", "") == "bloqueado":
+            core._circuito_falha("ddg")
+        raise _traduzir(exc) from None
+    if not results:
+        if core.status_provedor("ddg").get("bloqueado"):
+            core._circuito_falha("ddg")
+            raise ErroProvedor("DuckDuckGo bloqueou a pesquisa.", "bloqueado")
+        raise ErroProvedor("DuckDuckGo sem resultados.", "vazio")
+    return results[:limite]
+
+
 def buscar_bing(consulta: str, limite: int = 8, timeout: float = 10.0,
                 _path: str = "/search", tipo: str = "pagina") -> list:
     q = (consulta or "").strip()[:200]
@@ -182,18 +204,25 @@ def buscar_stackexchange(consulta: str, limite: int = 5, timeout: float = 12.0) 
     if not q:
         raise ErroProvedor("Consulta vazia.", "vazio")
     out, ultimo = [], None
+    prazo = time.monotonic() + max(0.1, timeout)
     for site in _SE_SITES:
+        restante = prazo - time.monotonic()
+        if restante <= 0:
+            ultimo = ErroProvedor("Prazo da busca Stack Exchange esgotado.", "rede")
+            break
         url = ("https://api.stackexchange.com/2.3/search/advanced?" +
                urllib.parse.urlencode({"order": "desc", "sort": "relevance", "q": q,
                                        "site": site, "pagesize": max(1, min(limite, 8)),
                                        "filter": "withbody"}))
         try:
-            dados = _json(url, timeout)
+            dados = _json(url, min(timeout, restante))
         except ErroProvedor as exc:
             ultimo = exc
-            if exc.codigo in ("bloqueado", "http", "tipo"):
-                continue
+            if exc.codigo in ("bloqueado", "rate_limited"):
+                break  # Same API host: another site is not a valid bypass.
             continue
+        if dados.get("backoff") or dados.get("error_id") == 502:
+            raise ErroProvedor("Stack Exchange solicitou pausa.", "rate_limited")
         for it in (dados.get("items") or [])[:limite]:
             link = _url_ok(it.get("link"))
             titulo = _limpar(it.get("title"), 160)
@@ -405,6 +434,8 @@ CLASSE_LIVRO = "livros"
 CLASSE_SAUDE = "saude"
 
 PROVEDORES: dict = {
+    "ddg": {"rotulo": "DuckDuckGo", "classes": (CLASSE_GERAL, CLASSE_TECNICA, CLASSE_ACADEMICA),
+            "tipo": "pagina", "peso": 8.0, "fn": buscar_ddg},
     "bing": {"rotulo": "Bing (feed oficial)", "classes": (CLASSE_GERAL, CLASSE_NOTICIA),
              "tipo": "pagina", "peso": 8.0, "fn": buscar_bing},
     "marginalia": {"rotulo": "Marginalia Search", "classes": (CLASSE_GERAL,),

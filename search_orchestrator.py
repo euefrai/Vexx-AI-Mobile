@@ -60,7 +60,7 @@ RX_PRODUTO = re.compile(
     r"onde encontrar|oferta|promoção|promocao|mais barato|barato|loja|modelo|"
     r"marca|vale a pena|custo-?benefício)\b", re.I)
 RX_COMPARACAO = re.compile(
-    r"\b(comparar|comparação|comparacao|versus|\bvs\b|diferença|diferenca|"
+    r"\b(compare|comparar|comparação|comparacao|versus|\bvs\b|diferença|diferenca|"
     r"melhor entre|qual melhor|prós e contras|pros e contras)\b", re.I)
 RX_TEMPORAL = re.compile(
     r"\b(quando|em que ano|desde|até|ate|prazo|data|vigência|vigencia|"
@@ -257,6 +257,7 @@ def classificar(consulta: str) -> dict:
         classes.append(sp.CLASSE_GERAL)
     return {"classes": classes, "produto": produto, "comparacao": comparacao,
             "temporal": temporal, "tecnica": sp.CLASSE_TECNICA in classes,
+            "documentacao": bool(re.search(r"documentacao|documentation|fontes? tecnicas|fontes? oficiais", ta)),
             "academica": sp.CLASSE_ACADEMICA in classes}
 
 
@@ -273,6 +274,10 @@ def variantes(consulta: str, classes=None, teto: int = 3, produto: bool = False)
         return []
     classes = list(classes or [])
     out = [base]
+    if not produto:
+        scholarly = re.match(r"^(?:pesquise|pesquisar|busque|buscar)?\s*((?:estudos|artigos|papers|pesquisas)(?:\s+(?:cient[ií]ficos|cient[ií]ficas|recentes|atuais|de\s+20\d\d)){0,4})\s+(?:sobre|acerca\s+de)\s+(.+)$", base, re.I)
+        if scholarly:
+            out.insert(0, (scholarly.group(2) + " " + scholarly.group(1)).strip())
     termos = _termos(base)
     trocas = []
     for termo in termos:
@@ -556,6 +561,8 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
             pontos += 1.0
     if not termos:
         pontos += 1.0
+    if a.get("fonte_primaria"):
+        pontos += 2.0
     peso_prov = float(sp.PROVEDORES.get(a.get("origem", ""), {}).get("peso", 4.0))
     pontos += peso_prov * 0.6
     tipo = a.get("tipo", "")
@@ -612,7 +619,8 @@ def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
         a["correspondencia_tipo"] = match["tipo"]
         a["cobertura_pedido"] = match["cobertura"]
         a["relevancia"] = round(_pontos_relevancia(a, consulta, classes, info), 2)
-    return sorted(achados, key=lambda a: (not _util_para_pedido(a, _termos_correspondencia(consulta), consulta), -a.get("relevancia", 0.0)))
+    return sorted(achados, key=lambda a: (not a.get("fonte_primaria", False),
+        not _util_para_pedido(a, _termos_correspondencia(consulta), consulta), -a.get("relevancia", 0.0)))
 
 
 # ── Lacunas do pedido ──────────────────────────────────────────────
@@ -688,20 +696,41 @@ ORCAMENTO_PADRAO = {"max_consultas": 4, "max_provedores": 6, "timeout_total": 28
                     "min_resultados": 3, "max_por_provedor": 6}
 
 
+def fontes_preferenciais(consulta: str) -> list:
+    t = _sem_acentos(consulta)
+    docs = bool(re.search(r"documenta[cç][aã]o|documentation|fontes? (?:oficiais|tecnicas)", t))
+    entries = []
+    if docs and _tem_termo("python", t) and _tem_termo("asyncio", t):
+        entries.append(("Python asyncio documentation", "https://docs.python.org/3/library/asyncio.html"))
+    if docs and _tem_termo("fastapi", t):
+        entries.append(("FastAPI documentation", "https://fastapi.tiangolo.com/"))
+    if docs and _tem_termo("django", t):
+        entries.append(("Django documentation", "https://docs.djangoproject.com/en/stable/"))
+    if docs and re.search(r"arquitetura\s+transformer|transformer\s+architecture", t):
+        entries.append(("Attention Is All You Need (Transformer)", "https://arxiv.org/abs/1706.03762"))
+    return [{"titulo": title, "url": url, "trecho": "", "origem": "fonte-primaria",
+             "tipo": "tecnico", "fonte_primaria": True, "status": "encontrada"}
+            for title, url in entries]
+
+
 def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     """Provedores por afinidade; dados/notícias só quando fazem sentido."""
     nomes = []
     ordem = []
     if info.get("produto"):
         ordem.extend(["bing", "marginalia"])
-    if sp.CLASSE_NOTICIA in classes:
+    if sp.CLASSE_NOTICIA in classes and not info.get("academica"):
         ordem.extend(["bing-news", "bing", "hn"])
     if sp.CLASSE_TECNICA in classes:
-        ordem.extend(["stackexchange", "hn", "bing"])
+        ordem.extend(["bing", "ddg", "wikipedia", "stackexchange"] if info.get("documentacao")
+                     else ["stackexchange", "hn", "bing"])
     if sp.CLASSE_SAUDE in classes:
         ordem.extend(["pubmed", "wikipedia", "bing"])
     if sp.CLASSE_ACADEMICA in classes:
-        ordem.extend(["pubmed", "openlibrary", "wikipedia"])
+        # Preserve the legacy classes-only API when no domain context exists.
+        ordem.extend(["pubmed", "openlibrary", "wikipedia"] if "academica" not in info
+                     else ["pubmed", "wikipedia", "bing"] if sp.CLASSE_SAUDE in classes
+                     else ["bing", "ddg", "wikipedia", "marginalia"])
     if sp.CLASSE_DADOS in classes:
         ordem.extend(["worldbank", "bcb", "bing"])
     if sp.CLASSE_LIVRO in classes:
@@ -710,7 +739,7 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
         ordem.extend(["commons", "bing"])
     if sp.CLASSE_ENCICLOPEDIA in classes:
         ordem.extend(["wikipedia", "bing"])
-    ordem.extend(["bing", "marginalia", "wikipedia"])
+    ordem.extend(["bing", "ddg", "marginalia", "wikipedia"])
     vistos = set()
     todos = set(disponiveis or sp.disponiveis())
     for nome in ordem:
@@ -732,7 +761,7 @@ def _estado_final(achados: list, falhas: list, vazios: list, consultas: int,
     codigos = {f.get("codigo") for f in falhas}
     if codigos and codigos <= {"rede"}:
         return "rede"
-    if codigos and codigos <= {"bloqueado"}:
+    if codigos and codigos <= {"bloqueado", "rate_limited"}:
         return "bloqueado"
     if codigos:
         return "indisponivel"
@@ -752,7 +781,7 @@ CODIGO_TEXTO = {
 
 def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
               provedores=None, classes_forcadas=None, orcamento: dict = None,
-              extra_queries=None) -> dict:
+              extra_queries=None, historico=None) -> dict:
     """Busca orquestrada completa. Nunca levanta por falha de provedor."""
     info = classificar(consulta)
     if classes_forcadas:
@@ -769,7 +798,21 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     nomes = nomes[: max(1, int(orc["max_provedores"]))]
 
     t0 = time.monotonic()
-    achados, etapas, falhas, vazios = [], [], [], []
+    achados = fontes_preferenciais(consulta) if provedores is None else []
+    etapas, falhas, vazios = [], [], []
+    tentativas = list(historico or [])
+    feitas = {(x["provedor"], x["consulta"].casefold()) for x in tentativas}
+    max_tentativas = max(1, int(orc.get("max_tentativas", int(orc["max_provedores"]) * 2)))
+
+    def _tentar(nome, q):
+        key = (nome, q.casefold())
+        if key in feitas or len(tentativas) >= max_tentativas:
+            return False
+        if any(f.get("provedor") == nome and f.get("codigo") in ("bloqueado", "rate_limited") for f in falhas):
+            return False
+        feitas.add(key)
+        tentativas.append({"provedor": nome, "consulta": q})
+        return True
     usados = {}
     consultas_feitas = 0
     provedor_indice = 0
@@ -790,7 +833,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
                                       and nome in ("stackexchange", "hn") else "")
         restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
-        if restante <= 0:
+        if restante <= 0 or not _tentar(nome, q_prov):
             return False
         try:
             novos = sp.buscar(nome, q_prov,
@@ -829,6 +872,10 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             nome = nomes[provedor_indice]
             consulta_prov = termos_para_provedor(q, "tecnico" if info["tecnica"]
                                                  and nome in ("stackexchange", "hn") else "")
+            if not _tentar(nome, consulta_prov):
+                provedor_indice += 1
+                tentativa_provedor += 1
+                continue
             try:
                 achados_novos = sp.buscar(nome, consulta_prov,
                                           limite=max(2, min(int(orc["max_por_provedor"]),
@@ -880,7 +927,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         # parada por ganho zero na próxima volta
         ultimo_ganho = _ganho_informacao(retrato_antes, achados,
                                          consulta)["ganho_real"]
-        if provedor_indice >= len(nomes) and _uteis() >= int(orc["min_resultados"]):
+        if provedor_indice >= len(nomes):
             break
 
     unicos, descartes = deduplicar(achados)
@@ -914,12 +961,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         if enxuta.lower() != (consulta or "").strip().lower() and enxuta not in recuperacao:
             recuperacao.insert(0, enxuta)
     return {
+        "tentativas_busca": tentativas,
         "achados": ranqueados[:max(6, max_resultados * 2)],
         "etapas": etapas,
         "estado": estado,
         "estado_texto": CODIGO_TEXTO.get(estado, ""),
         "provedores": {"usados": usados, "falhas": falhas, "vazios": vazios,
-                       "consultados": nomes[: max(1, provedor_indice)]},
+                       "consultados": list(dict.fromkeys(x["provedor"] for x in tentativas))},
         "classes": info["classes"],
         "temporal": bool(info.get("temporal")),
         "desatualizados": [a.get("url") for a in ranqueados if a.get("desatualizado")],
@@ -958,12 +1006,28 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
         return res
     orc2 = dict(ORCAMENTO_PADRAO)
     orc2.update(orcamento or {})
-    orc2["max_consultas"] = max(1, int(orc2.get("max_consultas", 4)) - len(res["consultas"]))
-    if orc2["max_consultas"] < 1:
-        orc2["max_consultas"] = 1
+    restante = float(orc2["timeout_total"]) - float(res.get("segundos", 0))
+    # max_consultas is the legacy per-round limit. The total is explicit and
+    # bounded across the original round plus at most one recovery round.
+    max_total = int(orc2.get("max_consultas_total", 2 * int(orc2["max_consultas"])))
+    consultas_restantes = max_total - len(res.get("consultas", []))
+    if restante <= 0 or consultas_restantes <= 0:
+        res["recuperou"] = False
+        res["recuperacao_adiada"] = "orçamento total de tempo/consultas esgotado"
+        return res
+    orc2["timeout_total"] = restante
+    orc2["max_consultas"] = min(int(orc2["max_consultas"]), consultas_restantes)
+    blocked = {f.get("provedor") for f in res.get("provedores", {}).get("falhas", [])
+               if f.get("codigo") in ("bloqueado", "rate_limited")}
+    saudaveis = [p for p in _escolher_provedores(res.get("classes", []), classificar(consulta)) if p not in blocked]
+    if not saudaveis:
+        res["recuperou"] = False
+        res["recuperacao_adiada"] = "nenhum provedor disponível sem bloqueio"
+        return res
     retrato_1 = _retrato(res.get("achados", []), consulta)
     extra = pesquisar(consulta, max_resultados=max_resultados, timeout=timeout,
-                      orcamento=orc2, extra_queries=res["recuperacao"])
+                      orcamento=orc2, extra_queries=res["recuperacao"],
+                      provedores=saudaveis, historico=res.get("tentativas_busca", []))
     # merge honesto: marca a rodada de recuperação nas etapas
     res["etapas"] = (res.get("etapas", []) + ["— recuperação por lacuna —"]
                      + extra.get("etapas", []))
@@ -972,6 +1036,16 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
         consulta, res.get("classes", []),
         {"temporal": bool(res.get("temporal"))})
     res["achados"] = merged
+    res["consultas"] = list(dict.fromkeys(res.get("consultas", []) + extra.get("consultas", [])))
+    res["tentativas_busca"] = extra.get("tentativas_busca", res.get("tentativas_busca", []))
+    original_p, extra_p = res.get("provedores", {}), extra.get("provedores", {})
+    used = dict(original_p.get("usados", {}))
+    for name, count in extra_p.get("usados", {}).items():
+        used[name] = used.get(name, 0) + count
+    res["provedores"] = {"usados": used,
+        "falhas": original_p.get("falhas", []) + extra_p.get("falhas", []),
+        "vazios": list(dict.fromkeys(original_p.get("vazios", []) + extra_p.get("vazios", []))),
+        "consultados": list(dict.fromkeys(original_p.get("consultados", []) + extra_p.get("consultados", [])))}
     res["desatualizados"] = [a.get("url") for a in merged if a.get("desatualizado")]
     res["indice_geral"] = [a.get("url") for a in merged if a.get("pagina_de_indice")]
     res["descartes"] = (res.get("descartes", []) + extra.get("descartes", []))[:20]
