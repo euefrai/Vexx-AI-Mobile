@@ -689,7 +689,7 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
             fts_sql += " AND c.doc_id=?"
             args.append(doc_id)
         fts_sql += " ORDER BY bm25(doc_chunks_fts), c.idx LIMIT ?"
-        rows = db.execute(fts_sql, (*args, min(100, k * 5) if temporal else k)).fetchall()
+        rows = db.execute(fts_sql, (*args, min(100, k * 5))).fetchall()
         fts_available = True
     except Exception:
         pass
@@ -697,7 +697,7 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
     if rows:
         for row in rows:
             did, idx, txt, chunk_id, section, page, digest, version, source, name, table_hint, _ = row
-            scored.append((0, did, idx, txt, chunk_id, section, page, digest, version, source, name, table_hint))
+            scored.append((-float(row[-1]), did, idx, txt, chunk_id, section, page, digest, version, source, name, table_hint))
     else:
         sql = """SELECT c.doc_id, c.idx, c.text, c.chunk_id, c.section, c.page,
                         c.content_hash, c.version, c.source, d.name, c.table_hint
@@ -715,9 +715,17 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
                 score = len(inter) / max(1, len(toks_q)) + 0.1 * len(inter) / max(1, len(toks))
                 scored.append((score, did, idx, txt, chunk_id, section, page, digest, version, source, name,
                                table_hint))
-    if not rows:
-        scored.sort(key=lambda x: (-x[0], x[1], x[2]))
+    def coverage(row):
+        return len(toks_q & _tokens(row[3])) / max(1, len(toks_q))
+
+    def republication(row):
+        # Explicit copy declarations only; an abstract is not inherently secondary.
+        return bool(re.search(r'\b(reposted|reprinted|republication|republica[çc][aã]o|reproduzido de)\b', row[3], re.I))
+
+    scored.sort(key=lambda row: (-coverage(row), republication(row), -row[0], row[1], row[2]))
     if temporal:
+        if any(coverage(row) >= 0.6 for row in scored):
+            scored = [row for row in scored if coverage(row) >= 0.6]
         def temporal_key(row):
             # Explicit dates in content, never upload/index timestamps. Retain relevance
             # ahead of freshness; a recent unrelated chunk cannot win.
@@ -728,7 +736,7 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
             year = int(match.group(1)) if match else 0
             if year > datetime.now(timezone.utc).year:
                 year = 0
-            return (-int(coverage >= 0.6), -year, -coverage, row[1], row[2])
+            return (-int(coverage >= 0.6), -year, -coverage, republication(row), -row[0], row[1], row[2])
         scored.sort(key=temporal_key)
     return [{"doc_id": did, "doc": name, "idx": idx, "chunk_id": chunk_id,
              "owner_id": owner, "section": section, "page": page, "content_hash": digest,
