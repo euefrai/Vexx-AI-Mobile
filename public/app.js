@@ -1081,9 +1081,17 @@ function researchAttach(jobId) {
   if (!jobId || (researchJob && researchJob.id === jobId)) return;
   if (researchJob && researchJob.controller) researchJob.controller.abort();
   if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
+  if (researchJob && researchJob.statusTimer) clearInterval(researchJob.statusTimer);
   window._researchLast = jobId;
   try { localStorage.setItem('vexx-research-active:' + currentUid, JSON.stringify({ id: jobId, owner: currentUid, at: Date.now() })); } catch (_) {}
   researchJob = { id: jobId, seq: 0, vistos: new Set(), inicio: Date.now(), timer: null };
+  const active = researchJob;
+  // A stream may stay open without delivering the terminal event after reconnect.
+  active.statusTimer = setInterval(() => {
+    if (researchJob !== active || active.statusPending) return;
+    active.statusPending = true;
+    researchPollHTTP().catch(() => {}).finally(() => { active.statusPending = false; });
+  }, 5000);
   $('researchBar').hidden = false;
   $('researchPanel').hidden = true;
   $('researchToggle').setAttribute('aria-expanded', 'false');
@@ -1260,6 +1268,7 @@ function researchStop() {
   $('researchBar').hidden = true;
   try { localStorage.removeItem('vexx-research-active:' + currentUid); } catch (_) {}
   if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
+  if (researchJob && researchJob.statusTimer) clearInterval(researchJob.statusTimer);
   if (researchJob && researchJob.controller) researchJob.controller.abort();
   researchJob = null;
 }

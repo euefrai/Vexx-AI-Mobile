@@ -66,7 +66,8 @@ def run():
             cdp.esperar_js(f"typeof researchJobIdAtual==='function' && researchJobIdAtual()==={json.dumps(job)}",bool,20,'automatic owner-scoped resume')
             cdp.esperar_js("document.querySelectorAll('#researchSteps .timeline-item').length",lambda n:n>0,15,'event replay')
             cdp.esperar_js(f"api('/api/research/status?job_id={job}').then(r=>r.resumo.status)",lambda s:s=='concluida',30,'worker completion')
-            cdp.esperar_js("researchJob === null && document.getElementById('researchBar').hidden",bool,10,'terminal bar cleared')
+            cdp.esperar_js("researchJob === null && document.getElementById('researchBar').hidden",bool,25,'terminal bar cleared')
+            result['terminal_bar_cleared']=True
             cdp.js(f"navigate('research'); researchWorkspaceAbrir({json.dumps(job)})")
             cdp.esperar_js("document.querySelectorAll('#researchWorkspaceView .jdui-srccard').length",lambda n:n>0,15,'source cards')
             cdp.esperar_js("Array.from(document.querySelectorAll('#researchWorkspaceView img')).some(i=>i.complete&&i.naturalWidth>0)",bool,15,'real local image bytes')
@@ -119,6 +120,7 @@ def run():
         except Exception as exc:
             result['error']=f'{type(exc).__name__}: {exc}'
             if cdp:
+                result['ui_state']=cdp.js("({job:researchJob&&{id:researchJob.id,seq:researchJob.seq},hidden:document.getElementById('researchBar').hidden,label:document.getElementById('researchLabel').textContent,last:[...document.querySelectorAll('#researchSteps .timeline-item')].slice(-3).map(n=>n.dataset.tipo)})")
                 cdp.screenshot('chrome-failure.png')
             for name in ('agent','relay'):
                 if (tmp/(name+'.log')).exists():
