@@ -31,7 +31,7 @@ Photon: [política do serviço demonstrativo](https://github.com/komoot/photon#d
 
 - Regressões originais de clima foram adaptadas ao payload da Timeline sem retirar assertions de cache, idade, unidades, ausência de dados, ambiguidade ou isolamento. Credenciais e SQLite de quota são isolados de produção em todos os testes.
 - 107 testes focados passaram, incluindo 25 casos específicos do adaptador: ausência/chave inválida, quota, timeout, cooldown, cache entre processos, concorrência, troca de chave, dados vazios/antigos/futuros, coordenadas, fuso, unidades, campos opcionais, fonte, atribuição e redirecionamento com credencial.
-- Primeiro integral: 1153 passed, 4 skipped, 2 warnings. Integral final posterior à proteção de redirecionamento: EM_EXECUCAO.
+- Integral local: **1154 passed, 4 skipped, 2 warnings** (448,98 s). Depois dos últimos ajustes de apresentação, os 107 focados e o Chrome real passaram novamente. O CI executou a suíte completa sobre o código final publicado: **1152 passed, 6 skipped, 2 warnings** no Linux. As contagens diferem pelos skips de plataforma; avisos preexistentes foram mantidos.
 - Smoke **externo real** bem-sucedido com chave autorizada: Ubatã/BA, IBGE 2932309, coordenadas oficiais municipais e America/Bahia. Não foi necessário LLM. O retorno classificou o dado atual como estimativa por modelo, sem fingir observação.
 - Chrome real, relay e PC reais em SQLite descartável: 6 turnos de chat, clima externo real e amanhã por cache; cumprimento zero geocodificações; relógio e novo chat isolado; telas 1280/390/320. Deep Research usa fonte fictícia identificada, com reload/SSE, 43 eventos, cards, zoom e exportação 200. Câmbio externo real também preservado. Nenhuma exceção JS na execução aprovada.
 - Benchmarks preservados: pesquisa 34/34, compras 59/59, experiência 16/16. Sem afirmação de precisão universal, telefone físico ou inferência real de modelo.
@@ -41,6 +41,12 @@ Photon: [política do serviço demonstrativo](https://github.com/komoot/photon#d
 
 HEAD inicial `daa403c`; Git remoto verificado sem divergência, main local à frente. Produção inicial `cccd8b5996de`, PC online. Chave configurada no arquivo de ambiente do PC correto; ambiente de teste isolado. Sessão do usuário autenticada no navegador para smoke final, sem ler/exportar senha ou cookies.
 
-STATUS_PUBLICACAO: aguardando integral final; nenhuma alteração de produção feita antes dos gates. Sequência autorizada: commit/push fast-forward → CI → confirmar Render → verificar ociosidade do PC → reiniciar somente seu agente com mesmo banco → smoke autenticado. Resultado final e hashes serão atualizados aqui.
+Publicado o código em `137e126a1e0e2c69ceb9f52143f60f1c5c4ca178`, por push fast-forward. [CI 39853147590 aprovado](https://github.com/euefrai/Vexx-AI-Mobile/actions/runs/39853147590). Render confirmou primeiro `137e126a1e0e`; na conclusão está em `3823b9f39fbb`, commit posterior que adiciona somente este relatório e os metadados do reinício, sem mudança de código. PC conectado.
+
+Agente reiniciado após CI/deploy e verificação de ociosidade (zero tarefas de IA/pesquisa ativas): PID 26684 → 16116, mesmo banco `~/.julia-mobile/memory.sqlite3`, relay, credenciais e permissões; controle remoto de entrada continuou desativado. Não houve exclusão de dados.
+
+Smoke autenticado **real em produção**, após recarregar a página em 22/10/2026 às 20:09 (America/Bahia): clima de Ubatã/BA com fonte, validade temporal e indicação explícita de estimativa; “e amanhã?” conservou o município e mostrou 23/10; ambas as mensagens sincronizaram. “oi” respondeu como saudação, sem repetir clima. Contador privado: uma chamada nova, queryCost 1, para este smoke; amanhã reutilizou o cache. Havia outra chamada anterior, também de custo 1. Nenhuma senha ou cookie foi lido/exportado. Evidência: `qa-artifacts/weather-migration-v594/production-weather.png` e `production-summary.json`.
+
+Esta atualização final do relatório e suas evidências ficam locais, evitando um novo deploy apenas documental.
 
 Limitações: serviço público Photon sem SLA; limite local não é quota global da conta; períodos históricos continuam indisponíveis, sem mascará-los como atuais; centroides representam o município, não endereço preciso. Nenhuma fonte paga foi ativada e nenhuma API bruta de clima foi adicionada.
