@@ -15,6 +15,8 @@ let storageGeneration = 0;
 let workspace = null;
 let csrf = '';
 let authenticated = false;
+let authEpoch = 0;
+let authBusy = false;
 let pcOnline = false;
 let busy = false;
 let toastTimer;
@@ -1564,12 +1566,15 @@ function ownRows(rows) {
   return (rows || []).filter(m => (m.owner || 'local') === currentUid);
 }
 async function restoreSession() {
+  const epoch = authEpoch;
   if (PREVIEW_MODE) { authenticated = true; $('loginOverlay').hidden = true; return; }
   try {
     const s = await api('/api/session');
+    if (epoch !== authEpoch || authBusy) return;  // login/cadastro mais novo venceu a corrida
     csrf = s.csrf; authenticated = true; $('loginOverlay').hidden = true;
     if (aplicarSessao(s) === false) return;
   } catch (_) {
+    if (epoch !== authEpoch || authBusy || authenticated) return;
     authenticated = false; $('loginOverlay').hidden = false;
     pintarPerfil('Offline', '', 'user', false);
   }
@@ -1584,7 +1589,7 @@ $('passToggle').addEventListener('click', () => {
   $('passToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
 });
 $('loginForm').addEventListener('submit', async e => {
-  e.preventDefault();
+  e.preventDefault(); ++authEpoch; authBusy = true;
   const btn = $('loginButton'); btn.disabled = true; $('loginError').textContent = '';
   try {
     const r = await api('/api/login', { method: 'POST', body: JSON.stringify({ username: $('loginUser').value, password: $('loginPassword').value }) });
@@ -1593,11 +1598,12 @@ $('loginForm').addEventListener('submit', async e => {
     if (aplicarSessao(r) === false) return;
     await checkStatus(); showToast('Conectado');
   } catch (err) { $('loginError').textContent = err.message || 'Não foi possível entrar'; }
-  finally { btn.disabled = false; }
+  finally { authBusy = false; btn.disabled = false; }
 });
 $('logoutButton').addEventListener('click', async () => {
   stopAI();
   try { await api('/api/logout', { method: 'POST' }); } catch (_) { showToast('O PC não confirmou a saída. Reconecte e tente novamente.'); return; }
+  ++authEpoch;
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
   $('loginError').textContent = ''; $('regError').textContent = '';
@@ -1659,6 +1665,7 @@ $('registerForm').addEventListener('submit', async e => {
   const pw1 = $('regPassword').value; const pw2 = $('regPassword2').value;
   if (pw1.length < 8) { $('regError').textContent = 'Senha precisa ter pelo menos 8 caracteres'; btn.disabled = false; return; }
   if (pw1 !== pw2) { $('regError').textContent = 'Senhas não coincidem'; btn.disabled = false; return; }
+  ++authEpoch; authBusy = true;
   try {
     const r = await api('/api/register', { method: 'POST', body: JSON.stringify({
       display: $('regDisplay').value, username: $('regUsername').value,
@@ -1677,7 +1684,7 @@ $('registerForm').addEventListener('submit', async e => {
     showToast('Conta criada. Bem-vindo!');
     await checkStatus();
   } catch (err) { $('regError').textContent = err.message || 'Não foi possível cadastrar'; }
-  finally { btn.disabled = false; }
+  finally { authBusy = false; btn.disabled = false; }
 });
 
 /* ----- Conta: trocar senha + excluir (formulário inline, sem prompt) ----- */

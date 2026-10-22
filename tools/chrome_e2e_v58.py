@@ -421,7 +421,9 @@ def main():
         (ART / "chrome-e2e.json").write_text(
             json.dumps(resultado, ensure_ascii=False, indent=1), encoding="utf-8")
         (ART / "chrome-e2e.txt").write_text(
-            "\n".join(f"[{e['t']:6.2f}s] {e['etapa']}: {e['detalhe']}" for e in ETAPAS),
+            "\n".join(f"[{e['t']:6.2f}s] {e['etapa']}"
+                      + (f": {e['detalhe']}" if e["detalhe"] else "")
+                      for e in ETAPAS),
             encoding="utf-8")
         print(json.dumps({k: v for k, v in resultado.items() if k != "etapas"},
                          ensure_ascii=False, indent=1)[:3000])

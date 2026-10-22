@@ -1,0 +1,41 @@
+{
+ "quando": "2026-10-21T21:13:01",
+ "ambiente": {
+  "python": "3.14.4",
+  "rss_mb": 21.46,
+  "plataforma": "win32"
+ },
+ "view": {
+  "steps": 24,
+  "claims": 10,
+  "media": 12,
+  "hypotheses": 8,
+  "build_ms": 4.742,
+  "peak_python_mb": 0.11,
+  "blocos": 6
+ },
+ "exports": {
+  "md": {
+   "ms": 15.081,
+   "peak_python_mb": 0.48,
+   "bytes": 64486
+  },
+  "csv": {
+   "ms": 21.58,
+   "peak_python_mb": 0.46,
+   "bytes": 62071
+  },
+  "json": {
+   "ms": 5.33,
+   "peak_python_mb": 0.43,
+   "bytes": 112699
+  }
+ },
+ "limites": {
+  "MAX_EXPORT_BYTES": 2000000,
+  "MAX_ITEMS": 200,
+  "JDUI_MAX_BLOCOS": 6
+ },
+ "libs_pesadas_importadas": [],
+ "observacao": "Tempos locais de m├│dulos puros; n├úo s├úo lat├¬ncia de rede/render."
+}

@@ -1,0 +1,49 @@
+[  0.09s] job_preparado: rj-66a0483bb1d0
+[  0.21s] relay: http://127.0.0.1:54322
+[  2.46s] agente: pc_agent.py
+[  5.80s] chrome: headless CDP porta 54323
+[  9.07s] login_ok: sess├úo local
+[ 11.12s] lista_pesquisas_ok
+[ 11.26s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v58\research-workspace-desktop.png
+[ 11.69s] workspace_ok: {"slots": 5, "planos": 6, "midia": 3, "badges": 8, "overflow": false, "titulo": "A dose de 400 mg de caf├® ├® segura para adultos?"}
+[ 11.76s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v58\research-workspace-desktop-detail.png
+[ 12.26s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v58\research-workspace-desktop-evidence.png
+[ 12.82s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v58\research-workspace-desktop-evidence-media.png
+[ 12.87s] export_bytes_ok: 1839 bytes via Chrome
+[ 13.80s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v58\research-workspace-mobile.png
+[ 13.80s] mobile_emulado_ok: {"overflow": false, "width": 390, "botoes": true}
+{
+ "quando": "2026-10-21T21:14:37",
+ "tipo_evidencia": "chrome-real-desktop + mobile-emulado; stack local isolado",
+ "ambiente": {
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "python": "3.14.4",
+  "app": "http://127.0.0.1:54322",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-v58-chrome-7xn527ax\\e2e-v58.sqlite3",
+  "job_id": "rj-66a0483bb1d0",
+  "viewport_desktop": "1280x900",
+  "viewport_mobile": "390x844",
+  "chrome_versao": "Chrome/155.0.8059.85"
+ },
+ "ok": true,
+ "resumo_ui": {
+  "slots": 5,
+  "planos": 6,
+  "midia": 3,
+  "badges": 8,
+  "overflow": false,
+  "titulo": "A dose de 400 mg de caf├® ├® segura para adultos?"
+ },
+ "export": {
+  "status": 200,
+  "type": "text/markdown; charset=utf-8",
+  "disp": "attachment; filename=\"vexx-pesquisa-rj-66a0483bb1d0.md\"",
+  "bytes": 1839,
+  "inicio": "# Relat├│rio de pesquisa Vexx AI\n\n**Objetivo:** A dose de 400 mg de caf├® ├® seg"
+ },
+ "mobile": {
+  "overflow": false,
+  "width": 390,
+  "botoes": true
+ }
+}

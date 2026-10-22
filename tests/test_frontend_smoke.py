@@ -443,3 +443,88 @@ def test_chat_imagens_csp_e_scroll_ancorado():
     assert 'chatStick' in js and js.count('chatStick') >= 5
     css = (RAIZ / 'public' / 'styles.css').read_text(encoding='utf-8')
     assert '.image-unavailable' in css
+
+
+HARNESS_AUTH_RACE = r"""
+const fs = require('fs');
+const src = fs.readFileSync(process.argv[2], 'utf8');
+const start = src.indexOf('async function restoreSession()');
+const end = src.indexOf("$('passToggle')", start);
+if (start < 0 || end < 0) { console.error('restoreSession ausente'); process.exit(2); }
+const fn = src.slice(start, end);
+const code = `
+let authEpoch = 0, authBusy = false, authenticated = false, csrf = '';
+const PREVIEW_MODE = false;
+const els = { loginOverlay: { hidden: false } };
+const $ = id => els[id] || (els[id] = { hidden: false });
+let api = null, aplicados = 0, perfis = 0, configs = 0;
+function aplicarSessao(_) { aplicados++; return true; }
+function pintarPerfil() { perfis++; }
+async function fetchAuthConfig() { configs++; }
+` + fn + String.raw`
+const assert = (nome, ok) => {
+  if (!ok) throw new Error('FAIL ' + nome);
+  console.log('ok ' + nome);
+};
+async function run() {
+  // Sess?o inicial atrasada responde 401 depois do login: n?o pode reabrir o overlay.
+  authEpoch = 0; authBusy = false; authenticated = false; csrf = ''; aplicados = 0;
+  els.loginOverlay.hidden = false;
+  let rejeitar;
+  api = () => new Promise((_, reject) => { rejeitar = reject; });
+  const atrasada = restoreSession();
+  ++authEpoch; authenticated = true; csrf = 'csrf-novo'; els.loginOverlay.hidden = true;
+  rejeitar(new Error('401'));
+  await atrasada;
+  assert('sessao-401-atrasada-nao-reabre', els.loginOverlay.hidden === true);
+  assert('sessao-401-atrasada-mantem-login', authenticated === true && csrf === 'csrf-novo');
+  assert('sessao-401-atrasada-nao-aplica', aplicados === 0);
+
+  // Sonda iniciada DURANTE o login, antes do cookie: 401 n?o pode reabrir nem deslogar.
+  authEpoch = 0; authBusy = true; authenticated = true; csrf = 'csrf-novo'; aplicados = 0;
+  els.loginOverlay.hidden = true;
+  let rejeitarDurante;
+  api = () => new Promise((_, reject) => { rejeitarDurante = reject; });
+  const durante = restoreSession();
+  ++authEpoch;
+  rejeitarDurante(new Error('401'));
+  await durante;
+  assert('sessao-401-durante-login-nao-reabre', els.loginOverlay.hidden === true);
+  assert('sessao-401-durante-login-mantem-auth', authenticated === true && csrf === 'csrf-novo');
+
+  // Sess?o antiga responde 200 depois do login: tamb?m n?o pode sobrescrever o novo dono.
+  authEpoch = 0; authBusy = false; authenticated = false; csrf = 'csrf-novo'; aplicados = 0;
+  els.loginOverlay.hidden = true;
+  let resolver;
+  api = () => new Promise(resolve => { resolver = resolve; });
+  const antiga = restoreSession();
+  ++authEpoch; authenticated = true;
+  resolver({ csrf: 'csrf-antigo', uid: 'outro', user: 'Outro' });
+  await antiga;
+  assert('sessao-200-atrasada-nao-aplica', aplicados === 0 && csrf === 'csrf-novo');
+  assert('sessao-200-atrasada-mantem-overlay', els.loginOverlay.hidden === true && authenticated === true);
+
+  // Controle: sem login concorrente, 401 continua pedindo autentica??o.
+  authEpoch = 0; authBusy = false; authenticated = false; csrf = ''; aplicados = 0;
+  els.loginOverlay.hidden = true;
+  api = () => Promise.reject(new Error('401'));
+  await restoreSession();
+  assert('sessao-401-normal-reabre', els.loginOverlay.hidden === false && authenticated === false);
+}
+run().catch(err => { console.error(err.stack || err); process.exit(1); });
+`;
+eval(code);
+"""
+
+
+def test_login_nao_e_derrubado_por_sessao_atrasada():
+    """Regress?o do Chrome E2E: 401 inicial atrasado reabria o login ap?s entrar."""
+    if NODE is None:
+        pytest.skip('Node indispon?vel')
+    with tempfile.TemporaryDirectory() as tmp:
+        harness = Path(tmp) / 'harness_auth_race.cjs'
+        harness.write_text(HARNESS_AUTH_RACE, encoding='utf-8')
+        r = subprocess.run([NODE, str(harness), str(APP_JS)],
+                           capture_output=True, text=True, timeout=60)
+        assert r.returncode == 0, 'STDOUT:\n' + r.stdout + '\nSTDERR:\n' + r.stderr
+        assert 'FAIL' not in r.stdout

@@ -1,0 +1,16 @@
+# Chrome E2E stability - V5.8 combined HEAD
+
+Three consecutive runs on the final combined-head code (after the auth transition guard and register guard):
+
+- run 1: `2026-10-21T21:14:37`, ok: true
+- run 2: `2026-10-21T21:14:52`, ok: true
+- run 3: `2026-10-21T21:15:05`, ok: true
+
+Canonical final run: `2026-10-21T21:15:05`, `ok: true`.
+Chrome: Chrome/155.0.8059.85; desktop 1280x900; emulated mobile 390x844.
+JDUI: 5 slots, 6 plan nodes, 3 media cards, 8 badges.
+Export: 1839 real bytes; mobile overflow: False.
+
+Canonical raw output: `chrome-e2e.txt`; full final run: `chrome-e2e-combined-head.txt`.
+
+The earlier failure was a real startup race: a late `/api/session` 401 reopened the login overlay after a successful login.
