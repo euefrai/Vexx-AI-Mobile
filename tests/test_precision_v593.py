@@ -43,6 +43,11 @@ def test_model_or_accessory_cannot_win_by_name_overlap(title):
     assert not orch._util_para_pedido({'titulo':title,'trecho':''},orch._termos_correspondencia(q),q)
 
 
+def test_consumption_inflection_does_not_drop_counterevidence():
+    q='Consumo do processador C62'
+    assert orch._util_para_pedido({'titulo':'Teste de laboratório','trecho':'O processador C62 consome 95 W em jogos.'},orch._termos_correspondencia(q),q)
+
+
 def test_post_read_page_cannot_keep_discovery_title_relevance():
     f=research._fonte_de({'titulo':'Jardins','texto':'Flores em parques municipais.','lida':True},
                         {'titulo':'Notebook Lenovo X90','url':'https://example.org/wrong'},'Notebook Lenovo X90')
@@ -83,6 +88,12 @@ def test_travel_fare_requires_direction_date_passengers_and_keeps_inventory_unkn
     assert 'price' not in verticals.assess(r,s)['data']
     s['structured'][0].update(departureAirport='Brasília',arrivalAirport='Manaus')
     assert 'price' not in verticals.assess(r,s)['data']
+
+
+def test_tourism_page_does_not_become_a_travel_route_from_incidental_mentions():
+    r=qi.analyze('Voos de Salvador para São Paulo daqui a sete dias',now=NOW)
+    source={'titulo':'O que fazer em Salvador: passeios imperdíveis','trecho':'Chegue de voos para Salvador. Existem ligações para São Paulo. Conheça restaurantes.'}
+    assert 'SOURCE_MISMATCH' in verticals.assess(r,source)['reasons']
 
 
 def test_news_feed_is_discovery_not_a_page_read(monkeypatch):

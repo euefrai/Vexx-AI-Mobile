@@ -88,6 +88,9 @@ def assess(request, source) -> SourceContract:
             if not all(contains(p[k],body) for k in ('origin','destination')): reasons.append('ENTITY_MISMATCH')
         mode=r'\b(onibus|rodoviari[ao]|bustrip)\b' if domain=='bus_travel' else r'\b(voos?|aereas?|aeroportos?|flight)\b'
         if not re.search(mode,qi.normalized(body)): reasons.append('INTENT_MISMATCH')
+        structured_trip=any(r.get('kind')==domain for r in source.get('structured',[]))
+        if not re.search(mode,qi.normalized(source.get('titulo',''))) and not structured_trip:
+            reasons.append('SOURCE_MISMATCH')
         state='ROUTE_INFORMATION' if not reasons else 'UNVERIFIED'
         trip=next((r for r in source.get('structured',[]) if r.get('kind')==domain),{})
         origin=trip.get('departureAirport') or trip.get('departureBusStop') or ''

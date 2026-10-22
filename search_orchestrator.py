@@ -178,7 +178,7 @@ def _termos_correspondencia(consulta: str) -> list:
 
 def _tem_termo(termo: str, texto: str) -> bool:
     """Token boundaries prevent API from matching capital or RAM from programa."""
-    aliases = {"fotossintese": ("photosynthesis",), "arquitetura": ("architecture",), "baterias": ("batteries",),
+    aliases = {"consumo": ("consome","consumiu","consumido","consumption"), "fotossintese": ("photosynthesis",), "arquitetura": ("architecture",), "baterias": ("batteries",),
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
