@@ -5,6 +5,7 @@
 **Produção:** https://vexx-ai.onrender.com
 **Commit funcional verificado:** `10e7028` (HSTS + código de segurança)
 **Commit de evidências:** `217bba7`
+**Commit do relatório:** `c76fda2`
 **Decisão final:** **GO_WITH_LIMITATIONS**
 
 ---
@@ -19,7 +20,7 @@ Resultado:
 - Suítes focados de segurança, autenticação, isolamento, pesquisa, shopping, deep research, JDUI, SSE, contratos, documentos e IA: **339 passed, 2 skipped** somados.
 - Chrome local (stack isolado): **desktop + mobile aprovados**, JDUI, export e screenshots.
 - Produção: login, sessão, CSRF, IA, shopping, pesquisa profunda (`modo=pro`), SSE, PWA/HTTPS e Chrome desktop/mobile aprovados.
-- CI final: **success** (run `39706107860`, 1m31s).
+- CI final: **success** (run `39706659604`).
 - Render: deploy automático confirmado; `/api/diag` reporta o commit novo e PC online.
 - PC Agent reiniciado pelo Fajulto Studio, banco preservado e schema aditivo aplicado.
 
