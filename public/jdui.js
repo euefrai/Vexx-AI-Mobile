@@ -1903,8 +1903,13 @@
       const rotulos = props.labels || [];
       const n = cartesiano ? series[0].values.length : 0;
       if (cartesiano) {
+        const stride = Math.max(1, Math.ceil((n - 1) / 3));
         for (let j = 0; j < n; j++) {
-          if (rotulos[j]) svg.appendChild(svgText(X(j), H - 8, String(rotulos[j]).slice(0, 10), 'middle', 9));
+          if (rotulos[j] && (j % stride === 0 || j === n - 1)) {
+            const raw = String(rotulos[j]);
+            const label = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw.slice(8) + '/' + raw.slice(5, 7) : raw.slice(0, 10);
+            svg.appendChild(svgText(X(j), H - 8, label, j === 0 ? 'start' : j === n - 1 ? 'end' : 'middle', 11));
+          }
         }
       }
       if (props.type === 'bar') {
@@ -1939,7 +1944,9 @@
             }));
           }
           pts.forEach((p, j) => {
-            const c = dica(svgEl('circle', { cx: p[0], cy: p[1], r: props.type === 'scatter' ? 4 : 3, fill: cor }), (s.label ? s.label + ': ' : '') + fmtTick(cartesiano ? s.values[j] : s.values[j][1]));
+            const value = cartesiano ? s.values[j] : s.values[j][1];
+            const description = (s.label ? s.label + ': ' : '') + value.toLocaleString('pt-BR', { maximumFractionDigits: 6 }) + (rotulos[j] ? ' (' + rotulos[j] + ')' : '');
+            const c = dica(svgEl('circle', { cx: p[0], cy: p[1], r: props.type === 'scatter' ? 4 : 3, fill: cor, tabindex: 0, 'aria-label': description }), description);
             svg.appendChild(c);
           });
         });
@@ -2418,7 +2425,7 @@
   R.sources = function (root, props) {
     const box = el('div', 'jdui-cards');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
-    const ROT = { encontrada: 'Não lida', aberta: 'Fonte lida', utilizada: 'Usada na resposta' };
+    const ROT = { encontrada: 'Encontrada · não lida', aberta: 'Fonte lida', utilizada: 'Utilizada na resposta' };
     props.items.forEach(f => {
       const card = el('div', 'jdui-srccard');
       const top = el('div', 'jdui-cardtop');

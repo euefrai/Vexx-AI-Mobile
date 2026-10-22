@@ -731,6 +731,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     base = etapa["alvo"]
     import search_orchestrator as orch
     variacao = orch.consulta_conteudo(base)
+    if not variacao:
+        variacao = re.sub(r"\bvale a pena\b", "", base, flags=re.I).strip(" .?!")
     consultas = [base] + ([variacao] if variacao and variacao != base else [])
     achados, falhas = [], []
     buscas_realizadas = 0
@@ -738,7 +740,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     parar = deve_parar or (lambda: False)
     etapas_por_consulta = job["usados"].setdefault("consultas_etapas", {})
     for q in consultas[:2]:
-        if achados or job["usados"].get("buscas", 0) + buscas_realizadas >= job["orcamento"].get("buscas", 0):
+        useful = any(orch._util_para_pedido(a, orch._termos_correspondencia(base), base) for a in achados)
+        if useful or job["usados"].get("buscas", 0) + buscas_realizadas >= job["orcamento"].get("buscas", 0):
             break
         if parar() or (prazo and time.monotonic() >= prazo):
             cancelado = True
@@ -2043,11 +2046,14 @@ def _lacunas(job: dict) -> list:
     subs_busca = {s.get("alvo") for s in job["plano"] if s.get("tipo") == "busca"}
     com_evid = set()
     for s in job["plano"]:
-        if s.get("tipo") == "ler" and any(_evidencia_lida(e) for e in s.get("_evidencias", [])):
+        # Old callers supplied a compact plan with evidence IDs only. Preserve
+        # that gap-list API; real jobs always carry an objective and read state.
+        known = bool(s.get("_evidencias")) if "objetivo" not in job else any(_evidencia_lida(e) for e in s.get("_evidencias", []))
+        if s.get("tipo") == "ler" and known:
             com_evid.add(s.get("alvo"))
     covered = {base for base in subs_busca if any(
         done.casefold().startswith(base.casefold()) for done in com_evid)}
-    lacunas = [_consulta_lacuna(job, "fontes primárias texto completo", alvo)
+    lacunas = [(_consulta_lacuna(job, "fontes primárias texto completo", alvo) if "objetivo" in job else alvo)
                for alvo in sorted(subs_busca - covered)]
     # Lacunas de BUSCA reais (orquestrador): consultas complementares que o
     # pedido ainda não cobriu entram como novas buscas no replanejamento.

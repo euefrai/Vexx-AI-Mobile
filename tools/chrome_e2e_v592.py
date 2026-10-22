@@ -73,7 +73,10 @@ def run():
             cdp.cmd('Input.dispatchKeyEvent',{'type':'keyDown','key':'Escape','code':'Escape','windowsVirtualKeyCode':27,'nativeVirtualKeyCode':27})
             cdp.cmd('Input.dispatchKeyEvent',{'type':'keyUp','key':'Escape','code':'Escape','windowsVirtualKeyCode':27,'nativeVirtualKeyCode':27})
             cdp.esperar_js("!document.querySelector('dialog[open]')",bool,5,'Escape closes image')
+            cdp.js("document.getElementById('researchWorkspaceView').scrollIntoView({block:'start'}); true")
             cdp.screenshot('research-desktop.png')
+            cdp.js("document.querySelector('#researchWorkspaceView .jdui-source-title').closest('.jdui-srccard').scrollIntoView({block:'start'}); true")
+            cdp.screenshot('sources-desktop.png')
             for width in (390,320):
                 cdp.cmd('Emulation.setDeviceMetricsOverride',{'width':width,'height':844,'deviceScaleFactor':1,'mobile':True})
                 time.sleep(.3)
@@ -82,6 +85,27 @@ def run():
             # Export must return real bytes, not a decorative control.
             export=cdp.js(f"fetch('/api/research/export?job_id={job}&formato=md').then(async r=>({{status:r.status,bytes:(await r.arrayBuffer()).byteLength}}))")
             assert export['status']==200 and export['bytes']>100,export
+            cdp.cmd('Emulation.setDeviceMetricsOverride',{'width':1280,'height':900,'deviceScaleFactor':1,'mobile':False})
+            cdp.js("navigate('chat'); document.getElementById('newChatTop').click(); true")
+            for text in ('Quanto vale 100 dólares em reais agora? Mostre a fonte e o horário da cotação.',
+                         'Como mudou o dólar em relação ao real nos últimos 30 dias?'):
+                count=cdp.js("document.querySelectorAll('.message.ai').length")
+                cdp.js("document.getElementById('messageInput').focus(); true")
+                cdp.cmd('Input.insertText',{'text':text})
+                cdp.js("document.getElementById('composer').requestSubmit(); true")
+                cdp.esperar_js(f"Array.from(document.querySelectorAll('.message.ai')).length > {count} && Array.from(document.querySelectorAll('.message.ai')).at(-1).textContent.includes('Frankfurter')",bool,35,'external currency answer')
+            assert cdp.js("document.querySelectorAll('.message.ai .jdui-slot').length >= 2")
+            cdp.screenshot('exchange-desktop.png')
+            cdp.cmd('Page.reload',{'ignoreCache':True})
+            cdp.esperar_js("Array.from(document.querySelectorAll('.message.ai')).some(e=>e.textContent.includes('Frankfurter'))",bool,20,'exchange persists after reload')
+            cdp.cmd('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
+            cdp.esperar_js("document.getElementById('drawer').getBoundingClientRect().right <= 1",bool,5,'mobile drawer settled')
+            assert cdp.js('document.documentElement.scrollWidth <= innerWidth + 1')
+            cdp.screenshot('exchange-mobile.png')
+            chart=cdp.js("(() => { const svg=document.querySelector('.message.ai .jdui-chart svg'); const labels=[...svg.querySelectorAll('text')].filter(n=>Number(n.getAttribute('y'))===212); const boxes=labels.map(n=>n.getBoundingClientRect()).sort((a,b)=>a.x-b.x); return {points:svg.querySelectorAll('circle').length, ticks:labels.length, overlap:boxes.some((b,i)=>i&&b.left<boxes[i-1].right-1), dated:[...svg.querySelectorAll('circle')].every(n=>/\d{4}-\d{2}-\d{2}/.test(n.getAttribute('aria-label')||''))}; })()" )
+            assert chart['points']>=2 and chart['ticks']<=4 and not chart['overlap'] and chart['dated'],chart
+            result['chart']=chart
+            result['exchange_chat_external']=True
             state=cdp.js(f"api('/api/research/status?job_id={job}&apos_seq=0')")
             events=state['eventos']
             seqs=[e['seq'] for e in events]

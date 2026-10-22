@@ -622,7 +622,7 @@ def resumo_deterministico(fontes: list, consulta: str) -> str:
             "página lida" if f.get("status") == "aberta" else "página não lida; trecho do índice")
         linhas.append(f"- [{f.get('titulo', f.get('url', ''))}]({f.get('url', '')})"
                        + (f" — {trecho}" if trecho else "") + f" ({scope})")
-    linhas.append("\n_Sem síntese automática. Descoberta não equivale a leitura; "
+    linhas.append("\n_Sem inferência no momento; síntese automática não utilizada. Descoberta não equivale a leitura; "
                    "os limites de acesso estão indicados em cada fonte._")
     return limitation + "\n".join(linhas)
 
