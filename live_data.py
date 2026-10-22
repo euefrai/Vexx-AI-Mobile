@@ -34,8 +34,9 @@ def request(text):
     t = re.sub(r'^(lucas|luccas)[, :]+', '', t)
     if greeting(text):return {'kind':'greeting','text':text}
     if re.search(r'\b(nao (pesquise|busque|consulte)|sem (internet|pesquisa|buscar))\b',t):return None
-    if re.search(r'\b(traduza|traduzi[ra]|escreva|redija|codigo|significa|defina|explique|o que e|diferenca|mudancas climaticas|clima organizacional|cpu|gpu|processador)\b', t):
+    if re.search(r'\b(traduza|traduzi[ra]|escreva|redija|codigo(?! ibge)|significa|defina|explique|o que e|diferenca|mudancas climaticas|clima organizacional|cpu|gpu|processador)\b', t):
         return None
+    if re.search(r'\b(3d|maquete|modelo tridimensional)\b',t):return None
     import query_intelligence
     try:
         if query_intelligence.analyze(text)['domain'] == 'currency':
@@ -47,7 +48,7 @@ def request(text):
     weather = weather or re.search(r'\bprevisao (?:para )?(hoje|amanha|esta semana|os proximos)\b', t)
     if weather:
         return {'kind':'weather','text':text}
-    if re.search(r'\b(cidade (?:de|chamada)|onde fica|localize a cidade|codigo ibge|municipio de)\b',t):
+    if re.search(r'\b(onde fica|localize (?:a )?cidade|codigo ibge|(?:pesquise|busque|consulte|mostre|qual).*\b(?:cidade (?:de|chamada)|municipio de))\b',t):
         return {'kind':'location','text':text}
     if re.search(r'\b(noticias|manchetes)\b', t) and (len(t.split()) < 5 or re.search(r'\b(hoje|agora|ultimas|recentes|atualizadas|mostr\w*|quais|busque|pesquise|sobre|de)\b', t)):
         return {'kind':'news','text':text}
@@ -95,7 +96,7 @@ def get_json(base, params):
 
 
 def place_from(text):
-    match = re.search(r'\b(?:em|na cidade de|para a cidade de|cidade (?:de|chamada)|onde fica|municipio de|clima (?:de|do|da)|temperatura (?:de|do|da))\s+(.+)',text,re.I)
+    match = re.search(r'\b(?:em|na cidade de|para a cidade de|cidade (?:de|chamada)|onde fica|municipio de|c[oó]digo IBGE de|clima (?:de|do|da)|temperatura (?:de|do|da))\s+(.+)',text,re.I)
     if not match:
         return ''
     value = re.split(r'\s+(?:agora|hoje|amanhã|amanha|neste momento|por favor|nos próximos)\b',match[1],flags=re.I)[0]
@@ -440,6 +441,9 @@ def card(body, title, value, desc='', url='', badge=''):
 
 def location(text,context,now):
     city=place_from(text)
+    if 'codigo ibge' in norm(text):
+        match=re.search(r'\b\d{7}\b',text)
+        if match:city=match[0]
     if not city:
         match=re.search(r'\b\d{7}\b',text)
         city=match[0] if match else ''

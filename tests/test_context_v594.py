@@ -191,6 +191,23 @@ def test_explicit_oi_city_is_not_greeting(monkeypatch):
     assert seen[0]['name']=='Oi' and seen[0]['countryCode']=='JP'
 
 
+@pytest.mark.parametrize('text,expected', [('qual é o código IBGE de Ubatã BA?','Ubatã BA'),('localize código IBGE 2932309','2932309')])
+def test_official_lookup_reaches_geocoder(monkeypatch,text,expected):
+    seen=[]
+    monkeypatch.setattr(live,'geocode',lambda city:(seen.append(city) or None,'consulta de teste'))
+    assert live.respond(text,{})=='consulta de teste'
+    assert seen==[expected]
+
+
+def test_location_task_does_not_intercept_3d(tmp_path,monkeypatch):
+    db=pc_agent.open_db(tmp_path/'no-3d-intercept.sqlite3')
+    put(db,'pending-weather-3d','qual a temperatura?')
+    monkeypatch.setattr(live,'geocode',lambda _:pytest.fail('Do not geocode a 3D request'))
+    assert pc_agent.cmd_dados_atuais(db,'crie um modelo 3D da cidade de Salvador','u-alice','chat-one',{}) is None
+    assert live.request('gosto da cidade de Salvador') is None
+    db.close()
+
+
 def test_document_context_and_project_isolation(tmp_path,monkeypatch):
     monkeypatch.setenv('JULIA_DOCS_PATH',str(tmp_path/'docs'))
     db=pc_agent.open_db(tmp_path/'docs.sqlite3')

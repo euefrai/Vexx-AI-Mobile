@@ -3574,7 +3574,9 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
 
 def cmd_dados_atuais(db, texto, owner, conv, contexto, message_id=None):
     """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
-    if intent.analisar(texto).get('route')=='GREETING':
+    analysis=intent.analisar(texto)
+    if analysis.get('intencao')=='model3d':return None
+    if analysis.get('route')=='GREETING':
         return 'Oi! Tudo bem? Como posso ajudar?'
     slots=conversation_followups.weather_slots(db,dono_valido(owner),conv,texto,message_id)
     if slots:
