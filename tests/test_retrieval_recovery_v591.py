@@ -65,6 +65,10 @@ def test_storage_constraint_is_extracted_without_word_storage():
     c = shopping.extrair_criterios('Celular Samsung Galaxy A56 256 GB, menor preço.')
     assert c['specs']['armazenamento_gb'] == 256
     assert c['specs']['armazenamento_exato']
+    bare = shopping.extrair_criterios('Samsung Galaxy A56 256 GB, menor preço.')
+    assert bare['categoria'] == 'celular'
+    assert bare['specs']['armazenamento_gb'] == 256
+    assert 'flag_novo' not in shopping.extrair_criterios('Notebook Lenovo 16GB RAM')['specs']
     p = {'nome': 'Samsung Galaxy A56 512GB', 'preco': 2000, 'preco_confirmado': True,
          'preco_texto': 'R$ 2.000', 'marca': 'Samsung', 'link_veredito': 'verificado'}
     inside, outside = shopping.aplicar_filtros([p], c)

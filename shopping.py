@@ -435,7 +435,7 @@ def _extrair_specs(texto: str) -> dict:
                  "ip68", "a prova d'água", "a prova dagua", "dual chip",
                  "desbloqueado", "novo", "lacrado", "gamer", "ultrabook",
                  "2 em 1", "touchscreen", "ssd", "placa dedicada"):
-        if flag in t:
+        if re.search(r"(?<!\w)" + re.escape(flag) + r"(?!\w)", t):
             specs["flag_" + re.sub(r"\W+", "_", flag).strip("_")] = True
     tiers = _tiers_no_texto(texto)
     if tiers:
@@ -458,7 +458,7 @@ def extrair_criterios(texto: str) -> dict:
         if c in t and c not in marcas:
             categoria = c
             break
-    if not categoria and re.search(r"\b(?:samsung\s+)?galaxy\s+[as]\d{2}\b", t):
+    if categoria in ("", "galaxy") and re.search(r"\b(?:samsung\s+)?galaxy\s+[as]\d{2}\b", t):
         categoria = "celular"
     orc = _extrair_orcamento(texto or "")
     specs = _extrair_specs(texto or "")
