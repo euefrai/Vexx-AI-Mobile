@@ -1,0 +1,109 @@
+{
+  "quando": "2026-10-21T22:21:41",
+  "base": "https://vexx-ai.onrender.com",
+  "etapas": {
+    "health": {
+      "ok": true,
+      "detalhe": "{'status': 'ok', 'configured': True}"
+    },
+    "diag": {
+      "ok": true,
+      "detalhe": "{'pc_online': True, 'agente_ha': 204, 'commit': 'dc71cc88a9bc', 'instance': '1ad659c5'}",
+      "dados": {
+        "commit": "dc71cc88a9bc",
+        "instance": "1ad659c5"
+      }
+    },
+    "sessao_anonima_401": {
+      "ok": true,
+      "detalhe": "HTTP 401"
+    },
+    "criar_conta_qa": {
+      "ok": true,
+      "detalhe": "{'ok': True}"
+    },
+    "login": {
+      "ok": true,
+      "detalhe": "HTTP 200; csrf=presente",
+      "dados": {
+        "uid_confere": true,
+        "user": "QA V5.8"
+      }
+    },
+    "sessao_autenticada": {
+      "ok": true,
+      "detalhe": "HTTP 200; uid=u-18306d3ade4e",
+      "dados": {
+        "uid_confere": true
+      }
+    },
+    "conta": {
+      "ok": true,
+      "detalhe": "HTTP 200"
+    },
+    "csrf_ausente_403": {
+      "ok": true,
+      "detalhe": "HTTP 403"
+    },
+    "ia": {
+      "ok": true,
+      "detalhe": "HTTP 200; 2 chars",
+      "dados": {
+        "segundos": 4.7,
+        "tipo": null,
+        "amostra": "OK",
+        "sem_chave": true
+      }
+    },
+    "shopping": {
+      "ok": true,
+      "detalhe": "HTTP 200; 1388 chars",
+      "dados": {
+        "tem_jdui": false,
+        "tem_link": true,
+        "amostra": "**Limitação encontrada:**  \nA pesquisa rodou agora, mas não consegui validar preços, imagens ou estoque de nenhum fone específico — os resultados são apenas páginas listadas (não abertas com dados estruturados). Por isso"
+      }
+    },
+    "pesquisa_start": {
+      "ok": true,
+      "detalhe": "HTTP 200",
+      "dados": {
+        "job_id": "rj-9a764b4ecfc6",
+        "modo": "pro",
+        "etapas": 6,
+        "erro": null
+      }
+    },
+    "pesquisa_sse": {
+      "ok": true,
+      "detalhe": "HTTP 200; text/event-stream; charset=utf-8; 11 linhas",
+      "dados": {
+        "eventos": [
+          "event: research",
+          "event: research",
+          "event: research",
+          "event: research",
+          "event: research"
+        ],
+        "tem_data": true
+      }
+    },
+    "pesquisa_resultado": {
+      "ok": true,
+      "detalhe": "status=concluida; 0.7s",
+      "dados": {
+        "status": "concluida",
+        "plano": 6,
+        "achados": 12,
+        "evidencias": 6,
+        "erros": []
+      }
+    },
+    "limpeza_conta_qa": {
+      "ok": true,
+      "detalhe": "{'ok': True}"
+    }
+  },
+  "ok": true,
+  "usuario_qa": "qa_v58_jmcq475j"
+}

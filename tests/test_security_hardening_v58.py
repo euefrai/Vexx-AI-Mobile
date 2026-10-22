@@ -77,6 +77,17 @@ def test_login_burst_429_com_retry_after(monkeypatch):
     assert int(r.headers["Retry-After"]) >= 1
 
 
+def test_hsts_somente_em_producao(monkeypatch):
+    monkeypatch.setenv("JULIA_ENV", "production")
+    with TestClient(server.app) as client:
+        resposta = client.get("/api/health")
+    assert resposta.headers["Strict-Transport-Security"] == "max-age=31536000"
+    monkeypatch.setenv("JULIA_ENV", "development")
+    with TestClient(server.app) as client:
+        local = client.get("/api/health")
+    assert "Strict-Transport-Security" not in local.headers
+
+
 def test_corpo_json_grande_rejeitado_antes_da_autenticacao():
     with TestClient(server.app) as client:
         r = client.post("/api/sync", content=b"x" * (server.API_BODY_MAX_BYTES + 1),
