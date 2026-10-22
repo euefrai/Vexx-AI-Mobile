@@ -1257,6 +1257,7 @@ async function researchCarregaView(force) {
   }
 }
 function researchStop() {
+  $('researchBar').hidden = true;
   try { localStorage.removeItem('vexx-research-active:' + currentUid); } catch (_) {}
   if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
   if (researchJob && researchJob.controller) researchJob.controller.abort();

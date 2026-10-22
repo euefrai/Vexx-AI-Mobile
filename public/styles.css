@@ -1721,7 +1721,9 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .jdui-field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);margin-top:6px}
 
 /* V4.5 Live Research: barra compacta + painel expansível (só quando relevante) */
-.research-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12.5px;color:var(--muted)}
+.research-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;font-size:12.5px;color:var(--muted)}
+.research-bar #researchLabel{min-width:0;flex:1 1 160px;overflow-wrap:anywhere}
+.research-bar .mini-tool{flex-shrink:0}
 .research-bar .tiny-dot{width:8px;height:8px;border-radius:99px;background:var(--purple-2);box-shadow:0 0 0 3px var(--glow-rose);animation:jdui-in .5s ease}
 .research-bar .mini-tool{margin-left:auto}
 .research-bar #researchCancel{margin-left:0}

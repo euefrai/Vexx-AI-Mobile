@@ -53,6 +53,7 @@ def run():
             cdp.esperar_js("document.readyState === 'complete' && typeof api === 'function' && !!document.getElementById('loginUser')",bool,20,'login handlers ready')
             cdp.js("document.getElementById('loginUser').value='preview'; document.getElementById('loginPassword').value='preview-only-2026'; document.getElementById('loginForm').requestSubmit(); true")
             cdp.esperar_js("authenticated && pcOnline && document.getElementById('loginOverlay').hidden",bool,25,'authenticated PC')
+            assert cdp.js("document.getElementById('researchBar').hidden"), 'no research bar before starting'
             created=cdp.js("api('/api/research/start',{method:'POST',body:JSON.stringify({objetivo:'Bateria ZX capacidade nominal — teste local',modo:'profunda'})})")
             job=created['job_id']
             cdp.js(f'researchAttach({json.dumps(job)}); true')
@@ -65,6 +66,7 @@ def run():
             cdp.esperar_js(f"typeof researchJobIdAtual==='function' && researchJobIdAtual()==={json.dumps(job)}",bool,20,'automatic owner-scoped resume')
             cdp.esperar_js("document.querySelectorAll('#researchSteps .timeline-item').length",lambda n:n>0,15,'event replay')
             cdp.esperar_js(f"api('/api/research/status?job_id={job}').then(r=>r.resumo.status)",lambda s:s=='concluida',30,'worker completion')
+            cdp.esperar_js("researchJob === null && document.getElementById('researchBar').hidden",bool,10,'terminal bar cleared')
             cdp.js(f"navigate('research'); researchWorkspaceAbrir({json.dumps(job)})")
             cdp.esperar_js("document.querySelectorAll('#researchWorkspaceView .jdui-srccard').length",lambda n:n>0,15,'source cards')
             cdp.esperar_js("Array.from(document.querySelectorAll('#researchWorkspaceView img')).some(i=>i.complete&&i.naturalWidth>0)",bool,15,'real local image bytes')
@@ -102,7 +104,7 @@ def run():
             cdp.esperar_js("document.getElementById('drawer').getBoundingClientRect().right <= 1",bool,5,'mobile drawer settled')
             assert cdp.js('document.documentElement.scrollWidth <= innerWidth + 1')
             cdp.screenshot('exchange-mobile.png')
-            chart=cdp.js("(() => { const svg=document.querySelector('.message.ai .jdui-chart svg'); const labels=[...svg.querySelectorAll('text')].filter(n=>Number(n.getAttribute('y'))===212); const boxes=labels.map(n=>n.getBoundingClientRect()).sort((a,b)=>a.x-b.x); return {points:svg.querySelectorAll('circle').length, ticks:labels.length, overlap:boxes.some((b,i)=>i&&b.left<boxes[i-1].right-1), dated:[...svg.querySelectorAll('circle')].every(n=>/\d{4}-\d{2}-\d{2}/.test(n.getAttribute('aria-label')||''))}; })()" )
+            chart=cdp.js(r"(() => { const svg=document.querySelector('.message.ai .jdui-chart svg'); const labels=[...svg.querySelectorAll('text')].filter(n=>Number(n.getAttribute('y'))===212); const boxes=labels.map(n=>n.getBoundingClientRect()).sort((a,b)=>a.x-b.x); return {points:svg.querySelectorAll('circle').length, ticks:labels.length, overlap:boxes.some((b,i)=>i&&b.left<boxes[i-1].right-1), dated:[...svg.querySelectorAll('circle')].every(n=>/\d{4}-\d{2}-\d{2}/.test(n.getAttribute('aria-label')||''))}; })()" )
             assert chart['points']>=2 and chart['ticks']<=4 and not chart['overlap'] and chart['dated'],chart
             result['chart']=chart
             result['exchange_chat_external']=True
