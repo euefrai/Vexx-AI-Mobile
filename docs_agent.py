@@ -629,12 +629,14 @@ def salvar_documento(db, nome: str, raw: bytes, conversation_id: str, owner=DONO
             "content_hash": content_hash, "version": DOC_VERSION}
 
 
-def listar_documentos(db, limite: int = 50, owner=DONO_PADRAO) -> list:
+def listar_documentos(db, limite: int = 50, owner=DONO_PADRAO, conversation_id=None) -> list:
+    scope=' AND conversation_id=?' if conversation_id is not None else ''
+    params=[owner]+([conversation_id] if conversation_id is not None else [])
     rows = db.execute("""SELECT id, name, ext, size, chars, chunks,
                                 summary IS NOT NULL, conversation_id, created_at, title,
                                 content_hash, version
-                         FROM documents WHERE owner_id=? ORDER BY created_at DESC LIMIT ?""",
-                      (owner, min(max(int(limite), 1), 200))).fetchall()
+                         FROM documents WHERE owner_id=?"""+scope+" ORDER BY created_at DESC LIMIT ?",
+                      (*params, min(max(int(limite), 1), 200))).fetchall()
     return [{"doc_id": i, "name": n, "ext": e, "size": s, "chars": c,
              "chunks": k, "tem_resumo": bool(r), "conversation_id": cv,
              "created_at": ca, "title": title, "content_hash": digest, "version": version}

@@ -21,7 +21,46 @@ def weather_request(text, previous):
     if not match or '[Fonte: Open-Meteo]' not in previous:return None
     city=match[1]
     if city=='Sua localização aproximada':return 'Previsão do tempo '+text
-    return 'Previsão do tempo '+text+' em '+city
+    return ('Previsão do tempo ' if short else '')+text+' em '+city
+
+
+def weather_slots(db, owner, conv, text, message_id=None):
+    """Rebuild bounded task slots from this chat, before this request only.
+
+    No global memory; a greeting/new topic ends the pending weather task.
+    Row insertion order also prevents a later concurrent request supplying slots.
+    """
+    params=[owner,conv]
+    cutoff=''
+    if message_id:
+        cutoff=' AND rowid < COALESCE((SELECT rowid FROM messages WHERE owner_id=? AND conversation_id=? AND id=?),0)'
+        params += [owner,conv,message_id]
+    rows=db.execute("SELECT role,text FROM messages WHERE owner_id=? AND conversation_id=? AND origin='mobile'"+cutoff+" ORDER BY rowid DESC LIMIT 32",params).fetchall()
+    state=None
+    def advance(value, state):
+        req=live_data.request(value)
+        t=live_data.norm(value).strip(' .?!')
+        short=bool(re.fullmatch(r'(?:e |e para |no )?(?:amanha|hoje|depois de amanha|fim de semana|vai chover)',t))
+        if req and req['kind']=='weather':
+            city=live_data.place_from(value) or (state or {}).get('city','')
+            return dict(intent='weather',city=city,request=value,period='forecast' if re.search(r'amanha|previsao|semana',t) else 'current',unit='°C',source='conversation',pending=[] if city else ['city'])
+        if state and short:
+            return dict(state,request='Previsão do tempo '+value,period='forecast')
+        # Bare place is a slot only in a pending task, or an explicit correction
+        # (city/state). Verbs/greetings cannot become geographic entities.
+        bare=bool(len(value)<=100 and re.fullmatch(r"[\wÀ-ÿ ,./'-]+[.!]?",value.strip()) and not re.search(r'\b(oi|ola|obrigad\w*|ok|valeu|nao|sim|me|quero|fale|explique|resuma|pesquise|ajude)\b',t))
+        qualified=bool(re.search(r'[,/]',value) or live_data.parse_place(value)['state'])
+        if state and bare and (state['pending'] or qualified):
+            return dict(state,city=value.strip(' .?!'),pending=[],source='clarification')
+        return None
+    for role,value in reversed(rows):
+        if role=='user':state=advance(value,state)
+    resolved=advance(text,state)
+    if not resolved:return None
+    # Preserve the current request wording (current stays current).
+    request=resolved['request']
+    if resolved['city'] and not live_data.place_from(request):request=request.rstrip(' .?!')+' em '+resolved['city']
+    return dict(resolved,resolved_request=request)
 
 
 def product_reply(db, owner, conv, text, previous):

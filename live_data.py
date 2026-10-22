@@ -19,6 +19,8 @@ import search_providers
 
 UTC = timezone.utc
 LOCATION_PROMPT = 'Para consultar o clima, em qual cidade você está? Informe cidade e estado/país (por exemplo, Salvador, Bahia).'
+STATES = dict(zip('AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(),
+    ['Acre','Alagoas','Amapá','Amazonas','Bahia','Ceará','Distrito Federal','Espírito Santo','Goiás','Maranhão','Mato Grosso','Mato Grosso do Sul','Minas Gerais','Pará','Paraíba','Paraná','Pernambuco','Piauí','Rio de Janeiro','Rio Grande do Norte','Rio Grande do Sul','Rondônia','Roraima','Santa Catarina','São Paulo','Sergipe','Tocantins']))
 _cache = {}
 _lock = threading.Lock()
 
@@ -30,6 +32,7 @@ def norm(text):
 def request(text):
     t = norm(text).strip().rstrip('.!?')
     t = re.sub(r'^(lucas|luccas)[, :]+', '', t)
+    if greeting(text):return {'kind':'greeting','text':text}
     if re.search(r'\b(nao (pesquise|busque|consulte)|sem (internet|pesquisa|buscar))\b',t):return None
     if re.search(r'\b(traduza|traduzi[ra]|escreva|redija|codigo|significa|defina|explique|o que e|diferenca|mudancas climaticas|clima organizacional|cpu|gpu|processador)\b', t):
         return None
@@ -44,11 +47,19 @@ def request(text):
     weather = weather or re.search(r'\bprevisao (?:para )?(hoje|amanha|esta semana|os proximos)\b', t)
     if weather:
         return {'kind':'weather','text':text}
+    if re.search(r'\b(cidade (?:de|chamada)|onde fica|localize a cidade|codigo ibge|municipio de)\b',t):
+        return {'kind':'location','text':text}
     if re.search(r'\b(noticias|manchetes)\b', t) and (len(t.split()) < 5 or re.search(r'\b(hoje|agora|ultimas|recentes|atualizadas|mostr\w*|quais|busque|pesquise|sobre|de)\b', t)):
         return {'kind':'news','text':text}
     if re.search(r'\b(que horas (sao|e)|qual (e )?a hora|horario atual|hora atual|qual (e )?a data|que dia e hoje|data (de hoje|atual))\b',t):
         return {'kind':'clock','text':text}
     return None
+
+
+def greeting(text):
+    words=re.findall(r'[a-z]+',norm(text))
+    return bool(words and len(words)<=7 and words[0] in ('oi','ola','oie','bom','boa','hello','hey') and
+                all(w in {'oi','ola','oie','bom','boa','dia','tarde','noite','tudo','bem','lucas','luccas','hello','hey','voce','e','com'} for w in words))
 
 
 def cached(key, ttl, fetch):
@@ -67,7 +78,16 @@ def cached(key, ttl, fetch):
 
 def get_json(base, params):
     # Fixed hosts only; research.baixar rechecks SSRF and each redirect, with a byte cap.
-    _, raw = research.baixar(base+'?'+urlencode(params), timeout=6, max_bytes=256*1024, aceitar='json')
+    with _lock:
+        blocked=_cache.get(('rate-limit',base))
+    if blocked and time.monotonic()-blocked[0]<60:
+        raise research.ResearchErro('Fonte temporariamente limitada.','rate_limited')
+    try:
+        _, raw = research.baixar(base+'?'+urlencode(params), timeout=6, max_bytes=256*1024, aceitar='json')
+    except research.ResearchErro as exc:
+        if getattr(exc,'http',None)==429 or exc.codigo=='rate_limited':
+            with _lock:_cache[('rate-limit',base)]=(time.monotonic(),True)
+        raise
     data = json.loads(raw)
     if not isinstance(data,dict) or data.get('error'):
         raise ValueError('Resposta inválida do serviço')
@@ -75,31 +95,92 @@ def get_json(base, params):
 
 
 def place_from(text):
-    match = re.search(r'\b(?:em|na cidade de|para a cidade de|clima (?:de|do|da)|temperatura (?:de|do|da))\s+(.+)',text,re.I)
+    match = re.search(r'\b(?:em|na cidade de|para a cidade de|cidade (?:de|chamada)|onde fica|municipio de|clima (?:de|do|da)|temperatura (?:de|do|da))\s+(.+)',text,re.I)
     if not match:
         return ''
     value = re.split(r'\s+(?:agora|hoje|amanhã|amanha|neste momento|por favor|nos próximos)\b',match[1],flags=re.I)[0]
+    value=re.sub(r'\s+no\s+(Japão|Japao|Brasil|Portugal)$',r', \1',value,flags=re.I)
     return value.strip(' .?!')[:100]
 
 
+def parse_place(city):
+    value=re.sub(r'\s+',' ',str(city).strip(' .?!')).replace('/',',')[:100]
+    country='';region=''
+    for word,code in [('Brasil','BR'),('Brazil','BR'),('BR','BR'),('Japão','JP'),('Japao','JP'),('Japan','JP'),('Portugal','PT')]:
+        m=re.search(r'(?:[, ]+)'+re.escape(norm(word))+r'$',norm(value))
+        if m: country=code;value=value[:m.start()].strip(' ,');break
+    for uf,name in sorted(STATES.items(),key=lambda x:len(x[1]),reverse=True):
+        m=re.search(r'(?:[, ]+)(?:'+re.escape(norm(name))+'|'+uf.lower()+r')$',norm(value))
+        if m:region=uf;country=country or 'BR';value=value[:m.start()].strip(' ,');break
+    qualifier=''
+    if ',' in value:
+        value,qualifier=value.split(',',1)
+        value=value.strip();qualifier=qualifier.strip()
+    return {'city':value,'state':region,'country_code':country,'qualifier':qualifier}
+
+
+def _ibge(path):
+    if not re.fullmatch(r'(?:estados/[A-Z]{2}/municipios|municipios/\d{7})',path):raise ValueError('Consulta geográfica inválida')
+    def fetch():
+        _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v1/localidades/'+path,timeout=6,max_bytes=512*1024,aceitar='json')
+        data=json.loads(raw)
+        if not isinstance(data,(dict,list)):raise ValueError('Cadastro geográfico inválido')
+        return data
+    return cached(('ibge',path),86400,fetch)
+
+
 def geocode(city):
-    data = cached(('geo',city.casefold()),3600,lambda:get_json('https://geocoding-api.open-meteo.com/v1/search',
-                  {'name':city,'count':5,'language':'pt','format':'json'}))
+    query=parse_place(city);name=query['city'];uf=query['state'];country=query['country_code']
+    municipality=None;registry_error=False
+    try:
+        if re.fullmatch(r'\d{7}',name):
+            municipality=_ibge('municipios/'+name)
+            if not isinstance(municipality,dict) or str(municipality.get('id'))!=name:raise ValueError('Município inválido')
+            name=municipality['nome'];country='BR'
+            uf=(municipality.get('microrregiao') or {}).get('mesorregiao',{}).get('UF',{}).get('sigla','')
+            uf=uf or (municipality.get('regiao-imediata') or {}).get('regiao-intermediaria',{}).get('UF',{}).get('sigla','')
+        elif uf:
+            rows=_ibge('estados/'+uf+'/municipios')
+            municipality=next((r for r in rows if isinstance(r,dict) and norm(r.get('nome',''))==norm(name)),None)
+            if municipality:name=municipality['nome']
+    except (research.ResearchErro,ValueError,KeyError,TypeError):registry_error=True
+    params={'name':name,'count':50,'language':'pt','format':'json'}
+    if country:params['countryCode']=country
+    try:
+        data = cached(('geo',name.casefold(),uf,country),3600,lambda:get_json('https://geocoding-api.open-meteo.com/v1/search',params))
+    except (research.ResearchErro,OSError,ValueError):
+        data={'results':[]};registry_error=True
     candidates = []
     rows=data.get('results',[])
     if not isinstance(rows,list) or any(not isinstance(row,dict) for row in rows):raise ValueError('Localização inválida')
-    exact=[r for r in rows if norm(r.get('name',''))==norm(city.split(',')[0].strip()) and str(r.get('feature_code','')).startswith('PPL')]
-    if exact:rows=exact
-    capitals=[r for r in rows if r.get('feature_code') in ('PPLA','PPLC')]
-    if ',' in city and len(capitals)==1:rows=capitals
+    rows=[r for r in rows if norm(r.get('name',''))==norm(name) and str(r.get('feature_code','')).startswith('PPL')]
+    if country:rows=[r for r in rows if r.get('country_code')==country]
+    if uf:rows=[r for r in rows if norm(r.get('admin1',''))==norm(STATES[uf])]
+    if query['qualifier']:
+        wanted=norm(query['qualifier'])
+        rows=[r for r in rows if wanted in {norm(str(r.get(k,''))) for k in ('admin1','country','country_code')}]
     for row in rows:
         lat,lon = row.get('latitude'),row.get('longitude')
         if type(lat) not in (int,float) or type(lon) not in (int,float) or not -90<=lat<=90 or not -180<=lon<=180:
             continue
         label = ', '.join(dict.fromkeys(str(row[k]) for k in ('name','admin1','country') if row.get(k)))
-        candidates.append({'label':label,'latitude':lat,'longitude':lon,'timezone':row.get('timezone','UTC')})
+        candidates.append({'label':label,'name':row.get('name'),'state':row.get('admin1'),
+                           'country':row.get('country'),'geonames_id':row.get('id'),
+                           'ibge_id':municipality.get('id') if municipality else None,
+                           'latitude':lat,'longitude':lon,'timezone':row.get('timezone','')})
     if not candidates:
-        return None, f'Não localizei “{safe(city)}”. Informe cidade e estado/país.'
+        if municipality:
+            try:
+                code=str(municipality['id'])
+                if not re.fullmatch(r'\d{7}',code):raise ValueError('Identificador oficial inválido')
+                _,raw=research.baixar('https://servicodados.ibge.gov.br/api/v3/malhas/municipios/'+code+'/metadados',timeout=6,max_bytes=65536,aceitar='json')
+                record=next(v for v in json.loads(raw) if str(v.get('id'))==code)
+                center=record['centroide'];lat=number(center['latitude'],-90,90);lon=number(center['longitude'],-180,180)
+                return {'label':name+', '+STATES.get(uf,uf)+', Brasil (centroide municipal)',
+                        'name':name,'state':STATES.get(uf,uf),'country':'Brasil','ibge_id':municipality['id'],
+                        'latitude':lat,'longitude':lon,'timezone':'','coordinate_scope':'municipal_centroid'},None
+            except (research.ResearchErro,ValueError,KeyError,TypeError,StopIteration):registry_error=True
+        return None, f'Não consegui confirmar a localização de “{safe(city)}” nas fontes disponíveis'+(' porque um serviço está indisponível' if registry_error else '')+'. Isso não significa que o município não exista. Informe cidade e estado/país.'
     # Never silently choose among homonymous cities in different regions.
     if len({r['label'] for r in candidates})>1:
         return None, 'Encontrei mais de uma localização. Qual delas?\n\n'+'\n'.join('- '+safe(r['label']) for r in candidates[:5])+'\n\nRepita o pedido incluindo a cidade e o estado/país.'
@@ -162,6 +243,7 @@ def weather(text, context, now):
     lines=[f'**Clima em {safe(label)}**',f"{condition(current.get('weather_code'))} · **{temp:g} °C** · sensação de {apparent:g} °C.",
            f'Umidade: {humidity:g}% · vento: {wind:g} km/h.']
     t=norm(text);forecast=bool(re.search(r'amanha|previsao|proximos|semana|vai chover',t))
+    summary=None
     if forecast:
         local_day=now.astimezone(zone).date()
         offset=2 if 'depois de amanha' in t else 1 if 'amanha' in t else 0
@@ -174,8 +256,10 @@ def weather(text, context, now):
         for i,date in enumerate(daily['time']):
             if date<target.isoformat():continue
             lo=number(daily['temperature_2m_min'][i],-100,70);hi=number(daily['temperature_2m_max'][i],-100,70)
+            if lo>hi:raise ValueError('Intervalo meteorológico inválido')
             prob=daily['precipitation_probability_max'][i]
             rain='não informada' if prob is None else f'{number(prob,0,100):g}%'
+            if summary is None:summary=(f'{lo:g}–{hi:g} °C',f'{date} · {condition(daily["weather_code"][i])} · chance de chuva {rain}. Previsão por modelo.')
             rows.append(f"| {datetime.fromisoformat(date):%d/%m} | {lo:g}–{hi:g} °C | {rain} | {condition(daily['weather_code'][i])} |")
             if len(rows)>=count:break
         if rows:lines.extend(['**Previsão** (probabilidades, não garantia):','| Dia | Mín.–máx. | Chance de chuva | Condição |\n|---|---|---|---|\n'+'\n'.join(rows)])
@@ -183,17 +267,28 @@ def weather(text, context, now):
     fetched=datetime.fromisoformat(data['_fetched_at']).astimezone(zone)
     lines.append(f'Dado válido para {observed:%d/%m/%Y às %H:%M} ({safe(data["timezone"])}); consultado às {fetched:%H:%M}.')
     lines.append('[Fonte: Open-Meteo](https://open-meteo.com/) · condições estimadas por modelos meteorológicos; cache de até 5 minutos.')
-    return '\n\n'.join(lines)
+    return card('\n\n'.join(lines),label,summary[0] if summary else f'{temp:g} °C',
+                desc=summary[1] if summary else f'{condition(current.get("weather_code"))} · sensação {apparent:g} °C · {observed:%d/%m/%Y %H:%M} ({data["timezone"]}). Estimativa por modelo.',
+                url='https://open-meteo.com/',badge='Open-Meteo · previsão' if summary else 'Open-Meteo · estimativa')
 
 
 def clock(text, context, now):
     city=place_from(text)
     if not city:return None  # Existing device-clock/calendar handler remains authoritative.
+    if '/' in city or city in ('UTC','GMT'):
+        try:
+            zone=ZoneInfo(city)
+            instant=now.astimezone(zone)
+            body=f'No fuso **{safe(city)}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}**.'
+            return card(body,city,instant.strftime('%H:%M'),desc=instant.strftime('%d/%m/%Y'),badge='Relógio do sistema')
+        except (ValueError,ZoneInfoNotFoundError):pass
     place,error=geocode(city)
     if error:return error
+    if not place.get('timezone'):return 'A localização foi confirmada, mas a fonte não informou um fuso confiável. Informe o fuso IANA para calcular o horário.'
     zone=ZoneInfo(place['timezone'])
-    instant=context.get('current_at',now).astimezone(zone)
-    return f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [Open-Meteo/GeoNames](https://open-meteo.com/en/docs/geocoding-api).'
+    instant=now.astimezone(zone)
+    body=f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [Open-Meteo/GeoNames](https://open-meteo.com/en/docs/geocoding-api).'
+    return card(body,place['label'],instant.strftime('%H:%M'),desc=instant.strftime('%d/%m/%Y')+' · '+place['timezone'],badge='Relógio do sistema')
 
 
 def news(text,context,now):
@@ -335,10 +430,41 @@ def currency(text, context, now):
     return body + '\n\n```jdui\n' + json.dumps(msg, ensure_ascii=False) + '\n```'
 
 
+def card(body, title, value, desc='', url='', badge=''):
+    """Use the existing Python/JS cards schema; text remains a safe fallback."""
+    import jdui
+    ok,msg,_=jdui.validar_mensagem({'version':jdui.VERSION,'blocks':[{'type':'ui','component':'cards','props':{'items':[dict(title=title,value=value,desc=desc,url=url,badge=badge)]}}]})
+    return body+'\n\n```jdui\n'+json.dumps(msg,ensure_ascii=False)+'\n```' if ok else body
+
+
+def location(text,context,now):
+    city=place_from(text)
+    if not city:
+        match=re.search(r'\b\d{7}\b',text)
+        city=match[0] if match else ''
+    if not city:return 'Qual cidade e estado/país você quer localizar?'
+    place,error=geocode(city)
+    if error:return error
+    code=place.get('ibge_id')
+    source='https://servicodados.ibge.gov.br/api/v1/localidades/municipios/'+str(code) if code else 'https://open-meteo.com/en/docs/geocoding-api'
+    # Official identifiers, not an invented precise address.
+    body='**'+safe(place['label'])+'**'+('\n\nCódigo IBGE: '+str(code)+'.' if code else '')
+    body+='\n\nLocalização confirmada no cadastro consultado. [Fonte geográfica]('+source+').'
+    return card(body,place['label'],str(code) if code else 'Localidade',url=source,badge='IBGE' if code else 'GeoNames')
+
+
 def respond(text,context):
     req=request(text)
     if not req:return None
     try:
-        return {'weather':weather,'clock':clock,'news':news,'currency':currency}[req['kind']](text,context,datetime.now(UTC))
+        if req['kind']=='greeting':return 'Oi! Tudo bem? Como posso ajudar?'
+        result={'weather':weather,'clock':clock,'news':news,'currency':currency,'location':location}[req['kind']](text,context,datetime.now(UTC))
+        for phrase,status in [('mais de uma localização','ambiguous'),('fora da janela atual','stale'),('Não consegui confirmar a localização','unconfirmed')]:
+            if result and phrase in result:return card(result,'Não foi possível concluir',{'ambiguous':'Qual localidade?','stale':'Dado desatualizado','unconfirmed':'Local não confirmado'}[status],badge=status)
+        return result
+    except research.ResearchErro as exc:
+        limited=getattr(exc,'http',None)==429 or exc.codigo=='rate_limited'
+        body=('A fonte limitou temporariamente as consultas. Aguarde um minuto antes de tentar novamente.' if limited else 'O serviço de dados está indisponível agora. Tente novamente mais tarde.')+' Não vou estimar valores sem uma fonte.'
+        return card(body,'Consulta indisponível','Limite de consultas' if limited else 'Serviço indisponível',badge='rate_limit' if limited else 'unavailable')
     except (ValueError,KeyError,TypeError,IndexError,AttributeError,OSError,ZoneInfoNotFoundError,InvalidOperation):
         return 'Não consegui consultar os dados atuais agora: a fonte está indisponível ou retornou dados inválidos. Tente novamente em instantes. Não vou estimar valores sem uma fonte.'

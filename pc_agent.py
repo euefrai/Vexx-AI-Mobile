@@ -1380,7 +1380,7 @@ def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> s
     """Acha documento citado pelo nome ou o mais recente da conversa."""
     t = (texto or "").lower()
     try:
-        docs = docs_agent.listar_documentos(db, 50, owner)
+        docs = docs_agent.listar_documentos(db, 50, owner, conversation_id=conversation_id)
     except Exception:
         return ""
     for d in docs:
@@ -1388,8 +1388,8 @@ def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> s
         base = re.sub(r"\.[a-z0-9]+$", "", nome)
         if len(base) >= 4 and base in t:
             return d["doc_id"]
-    if re.search(r"(documento|arquivo|pdf|texto|contrato|relat[óo]rio|planilha|resum)", t):
-        mesmos = [d for d in docs if d["conversation_id"] == conversation_id] or docs
+    if re.search(r"\b(documento|arquivo|pdf|contrato|relat[óo]rio|planilha)\b", t):
+        mesmos = docs
         if mesmos:
             return mesmos[0]["doc_id"]
     return ""
@@ -3566,10 +3566,17 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
     return ""
 
 
-def cmd_dados_atuais(db, texto, owner, conv, contexto):
+def cmd_dados_atuais(db, texto, owner, conv, contexto, message_id=None):
     """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
+    if intent.analisar(texto).get('route')=='GREETING':
+        return 'Oi! Tudo bem? Como posso ajudar?'
+    slots=conversation_followups.weather_slots(db,dono_valido(owner),conv,texto,message_id)
+    if slots:
+        return live_data.respond(slots['resolved_request'],contexto)
     anterior = conversation_followups.last_answer(db, dono_valido(owner), conv)
-    continuacao = conversation_followups.weather_request(texto, anterior)
+    # Legacy rendered-answer fallback only for old chats without user history.
+    has_history=db.execute("SELECT 1 FROM messages WHERE owner_id=? AND conversation_id=? AND role='user' LIMIT 1",(dono_valido(owner),conv)).fetchone()
+    continuacao = conversation_followups.weather_request(texto, anterior) if not has_history else None
     if continuacao:
         return live_data.respond(continuacao, contexto)
     produto = conversation_followups.product_reply(db, dono_valido(owner), conv, texto, anterior)
@@ -3577,18 +3584,21 @@ def cmd_dados_atuais(db, texto, owner, conv, contexto):
         return produto
     req = live_data.request(texto)
     if not req:
-        if len(texto)>100 or not re.fullmatch(r"[\wÀ-ÿ ,.'-]+[.!]?",texto.strip()) or live_data.norm(texto.strip()) in ('obrigado','obrigada','ok','valeu','nao','não'):
-            return None
-        row = db.execute("SELECT id,text FROM messages WHERE owner_id=? AND conversation_id=? AND role='assistant' ORDER BY created_at DESC,id DESC LIMIT 1",(dono_valido(owner),conv)).fetchone()
-        if not row or row[1] != live_data.LOCATION_PROMPT:
-            return None
-        original = db.execute("SELECT text FROM messages WHERE id=? AND owner_id=? AND conversation_id=? AND role='user'",(row[0].removesuffix('-r1'),dono_valido(owner),conv)).fetchone()
-        pedido = original[0].rstrip(' .?!') if original else 'Qual o clima agora'
-        return live_data.respond(pedido+' em '+texto.strip(), contexto)
+        return None
     if req['kind']=='clock' and not live_data.place_from(texto):
+        # Device timezone is useful; a stale/manipulated device clock is not.
+        contexto=dict(contexto)
+        if contexto.get('timezone'):
+            from zoneinfo import ZoneInfo
+            try:
+                contexto['current_at']=datetime.now(timezone.utc).astimezone(ZoneInfo(contexto['timezone']))
+            except (ValueError,KeyError):
+                return 'Não consegui validar o fuso informado. Informe uma cidade ou fuso IANA válido.'
+        else:
+            contexto.pop('current_at',None)
         resposta = _resposta_temporal_direta(texto, contexto)
         if resposta:
-            return resposta
+            return live_data.card(resposta,'Horário atual',contexto['current_at'].strftime('%H:%M'),desc=contexto['current_at'].strftime('%d/%m/%Y')+' · '+contexto.get('timezone',''),badge='Relógio do sistema')
         # No place is inferred from UTC. The existing clock stays the source when available.
         if contexto.get('current_at'):
             instante=contexto['current_at']
@@ -3823,7 +3833,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return prep
     mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
     owner = prep.get("owner", DONO_PADRAO)
-    atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}))
+    atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}), payload.get('message_id'))
     if atual:
         return ai_resposta_direta(db, mid, conv, modelo, prep['reply_id'], atual, owner)
     model_response = cmd_model3d(db, prep.get("user_text", ""), owner, conv, payload.get('scene_state',''),
@@ -4014,7 +4024,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         mid, conv, modelo = payload["message_id"], prep["conversation_id"], prep["model"]
         owner = prep.get("owner", DONO_PADRAO)
         claimed = True
-        atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}))
+        atual = cmd_dados_atuais(db, prep.get('user_text',''), owner, conv, prep.get('contexto_local',{}), payload.get('message_id'))
         if atual:
             if sessao.parar.is_set():
                 ai_marcar(db, mid, conv, modelo, 'cancelled', reply_id=prep['reply_id'], response_text='', owner=owner)

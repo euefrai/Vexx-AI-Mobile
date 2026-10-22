@@ -361,7 +361,7 @@ def analisar(texto: str, contexto: dict | None = None) -> dict:
             conf = 0.95 if intencao in ("identidade", "memoria") else 0.85
         else:
             conf = 0.5 if secundarias else 0.3
-        return {"intencao": intencao, "confianca": conf,
+        return {"intencao": intencao, "route": _route(texto,intencao), "confianca": conf,
                 "evidencias": evidencias[:4], "secundarias": secundarias[:3],
                 "entidades": entidades, "restricoes": restricoes,
                 "referencias": referencias, "correcao": correcao,
@@ -372,8 +372,32 @@ def analisar(texto: str, contexto: dict | None = None) -> dict:
         return _vazio()
 
 
+def _route(text, legacy):
+    """Expose precise tool classes using the existing classifiers and evidence.
+
+    Preserve the legacy intent contract used by research/shopping benchmarks.
+    """
+    import live_data
+    import query_intelligence
+    req=live_data.request(text)
+    if req:
+        kind=req['kind']
+        if kind=='weather':return 'WEATHER_FORECAST' if re.search(r'amanha|previsao|semana|vai chover',_norm(text)) else 'WEATHER_CURRENT'
+        return {'greeting':'GREETING','clock':'CURRENT_TIME','location':'LOCATION_LOOKUP','news':'NEWS','currency':'CURRENCY'}[kind]
+    t=_norm(text)
+    if re.search(r'\b(arquivo|documento|pdf|todo\.md)\b',t) and re.search(r'\b(resuma|leia|abra|analise|compare|meu|minha)\b',t):
+        return 'PROJECT_FILE_QUERY' if 'projeto' in t else 'DOCUMENT_QUERY'
+    domain=query_intelligence.analyze(text)['domain']
+    if domain in ('air_travel','bus_travel'):return 'TRANSPORT'
+    if domain=='events':return 'EVENTS'
+    if legacy=='shopping':return 'SHOPPING'
+    if re.search(r'\b(pesquisa profunda|deep research|deep search|pesquise profundamente)\b',t):return 'DEEP_RESEARCH'
+    if legacy=='pesquisa' or domain in ('news','science','documents'):return 'GENERAL_SEARCH'
+    return 'GENERAL_CHAT'
+
+
 def _vazio() -> dict:
-    return {"intencao": "conversa", "confianca": 0.3, "evidencias": [],
+    return {"intencao": "conversa", "route": "GENERAL_CHAT", "confianca": 0.3, "evidencias": [],
             "secundarias": [], "entidades": {},
             "restricoes": {"obrigatorias": [], "proibidas": [],
                            "preferencias": [], "formato": {}},
