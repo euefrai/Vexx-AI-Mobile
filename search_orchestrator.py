@@ -170,7 +170,12 @@ def _tem_termo(termo: str, texto: str) -> bool:
     aliases = {"arquitetura": ("architecture",), "baterias": ("batteries",),
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",)}
     term = _sem_acentos(termo)
-    return any(re.search(r"(?<![\w])" + re.escape(value) + r"(?![\w])", _sem_acentos(texto))
+    text = _sem_acentos(texto)
+    if re.fullmatch(r"\d+(?:[.,]\d+)*", term):
+        # A grouping separator does not change the requested amount: 3.000 = 3000.
+        term = re.sub(r"(?<=\d)[.,](?=\d{3}(?:\D|$))", "", term)
+        text = re.sub(r"(?<=\d)[.,](?=\d{3}(?:\D|$))", "", text)
+    return any(re.search(r"(?<![\w])" + re.escape(value) + r"(?![\w])", text)
                for value in (term, *aliases.get(term, ()), *SINONIMOS.get(term, ())))
 
 
@@ -841,7 +846,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                                                 max_resultados)),
                               timeout=min(timeout, restante))
         except Exception as exc:
-            falhas.append({"provedor": nome, "codigo": getattr(exc, "codigo", type(exc).__name__)})
+            falhas.append({"provedor": nome, "codigo": getattr(exc, "codigo", type(exc).__name__),
+                           **({"http": exc.http, "categoria": exc.categoria} if hasattr(exc, "categoria") else {})})
             return False
         usados[nome] = usados.get(nome, 0) + 1
         etapas.append(f"{nome} (consulta reformulada '{alt[:40]}'): "
@@ -912,7 +918,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                     vazios.append(nome)
                     etapas.append(f"{nome}: sem resultados ({q[:40]})")
                 else:
-                    falhas.append({"provedor": nome, "codigo": exc.codigo})
+                    falhas.append({"provedor": nome, "codigo": exc.codigo,
+                                   **({"http": exc.http, "categoria": exc.categoria} if hasattr(exc, "categoria") else {})})
                     etapas.append(f"{nome}: {exc.codigo} ({q[:40]})")
                 provedor_indice += 1
                 tentativa_provedor += 1

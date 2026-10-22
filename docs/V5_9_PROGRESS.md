@@ -29,3 +29,8 @@
 - Final live run: Transformer=1 useful abstract; frameworks=2 useful official docs; asyncio=1 useful official doc; batteries=0 useful (external DDG blocked, generic Bing results rejected). Three shopping cases still 0 confirmed offers; limitations must be explicit.
 - Read status is now actual retrieval; relevance is separate. Explicit user-selected URL remains readable without invented topic constraints. One initial price-query proposal was reverted to preserve intentional legacy coverage contract.
 - Next: final full suite exactly once, diagnose any regression without changing expected fixtures, write before/after report and final local commits. No push/deploy/restart.
+
+## Final regression repair
+
+- First complete suite: 1,015 passed, 2 failed, 4 skipped; original log retained. Both failures were compatibility issues: public HTTP429 code must remain bloqueado, and relevance must recognize 3.000 as 3000. Fixed code (not old expected fixtures); diagnostic category still identifies rate limits. Focused regressions: 92 passed.
+- Full suite rerun is required due to those failures, not routine repetition. Next: final report/QA commit after result.

@@ -231,7 +231,14 @@ def test_stackexchange_shares_deadline_across_sites(monkeypatch):
 def test_rate_limit_has_distinct_provider_diagnostic():
     error = research.ResearchErro('provider rejected', 'bloqueado')
     error.http = 429
-    assert sp._traduzir(error).codigo == 'rate_limited'
+    translated = sp._traduzir(error)
+    assert translated.codigo == 'bloqueado'
+    assert translated.http == 429 and translated.categoria == 'rate_limited'
+
+
+def test_numeric_relevance_preserves_brazilian_grouping_separator():
+    assert orch._tem_termo('3000', 'até R$ 3.000')
+    assert orch._tem_termo('3.000', 'até R$ 3000')
 
 
 def test_existing_ddg_is_available_as_general_fallback(monkeypatch):

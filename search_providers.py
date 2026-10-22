@@ -62,7 +62,10 @@ def _traduzir(exc: Exception) -> ErroProvedor:
         return exc
     http = getattr(exc, "http", getattr(exc, "code", 0))
     if http == 429:
-        return ErroProvedor("Limite de requisições do provedor (HTTP 429).", "rate_limited")
+        # Public error code stays compatible; the diagnostic distinguishes 429.
+        error = ErroProvedor("Limite de requisições do provedor (HTTP 429).", "bloqueado")
+        error.http, error.categoria = 429, "rate_limited"
+        return error
     codigo = getattr(exc, "codigo", "") or type(exc).__name__
     mapa = {"ssrf": "bloqueado", "tipo_bloqueado": "tipo", "redirect": "http",
             "http": "http", "rede": "rede", "tamanho": "tamanho", "formato": "formato",
