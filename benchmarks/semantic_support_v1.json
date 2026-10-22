@@ -1,0 +1,17 @@
+{
+  "scope": "Casos sintéticos congelados para avaliar concordância do revisor com rubrica humana. Sem busca web, dados reais de produtos ou precisão universal.",
+  "cases": [
+    {"id":"S1","state":"SUPPORTED","reason":"none","source":"No ensaio de navegação com brilho reduzido, o modelo Atlas atingiu autonomia de 10 horas.","claim":"O modelo Atlas atingiu 10 horas no ensaio de navegação com brilho reduzido."},
+    {"id":"S2","state":"SUPPORTED","reason":"none","source":"O modelo Atlas não possui GPS integrado. A localização exige conexão com outro aparelho.","claim":"O Atlas não oferece GPS integrado e depende de outro aparelho para localização."},
+    {"id":"S3","state":"SUPPORTED","reason":"none","source":"O estudo observacional identificou uma associação entre café e atenção, mas não estabeleceu causalidade.","claim":"Foi observada associação entre café e atenção, sem demonstração de causalidade."},
+    {"id":"C1","state":"CONTRADICTED","reason":"negation","source":"O fabricante esclarece que o modelo Atlas não oferece GPS integrado; localização depende de um aparelho externo.","quote":"oferece GPS integrado; localização depende de um aparelho externo.","claim":"O modelo Atlas oferece GPS integrado."},
+    {"id":"C2","state":"CONTRADICTED","reason":"entity","source":"O modelo Pico Max possui tela OLED. O modelo Pico básico possui tela LCD, sem opção OLED.","claim":"O modelo Pico básico possui tela OLED."},
+    {"id":"C3","state":"CONTRADICTED","reason":"date","source":"Em 2024, o ensaio do Atlas registrou 10 horas de autonomia. Em 2025, o mesmo ensaio registrou 8 horas para o Atlas.","claim":"Em 2025, o ensaio do Atlas registrou 10 horas de autonomia."},
+    {"id":"C4","state":"CONTRADICTED","reason":"causality","source":"O estudo observacional identificou associação entre café e atenção, mas explicitamente não demonstrou que café causa melhora da atenção.","claim":"O estudo demonstrou que café causa melhora da atenção."},
+    {"id":"P1","state":"PARTIAL","reason":"scope","source":"No ensaio de navegação, o Atlas atingiu autonomia de 10 horas. O relatório não avaliou resistência à água.","claim":"O Atlas atingiu 10 horas no ensaio e é impermeável."},
+    {"id":"P2","state":"PARTIAL","reason":"scope","scope":"abstract_only","source":"O resumo relata associação entre café e atenção. Não foi recuperado o texto completo, nem seus detalhes metodológicos.","claim":"O resumo relata associação entre café e atenção, e a análise do texto completo confirmou rigor metodológico."},
+    {"id":"P3","state":"PARTIAL","reason":"scope","source":"list.sort modifica a própria lista e retorna None. O documento não discute a motivação dessa decisão.","claim":"list.sort modifica a lista e retorna None porque essa decisão aumenta a segurança do programa."},
+    {"id":"I1","state":"INCONCLUSIVE","reason":"insufficient","source":"O catálogo contém apenas fotografias do Atlas. Não apresenta especificações de bateria, resultados de autonomia ou avaliações.","claim":"A autonomia do modelo Atlas é excelente."},
+    {"id":"I2","state":"INCONCLUSIVE","reason":"insufficient","source":"Foi publicado um protocolo para avaliar um tratamento. A pesquisa não disponibilizou resultados de eficácia ou observações clínicas.","claim":"O tratamento é eficaz para os pacientes."}
+  ]
+}

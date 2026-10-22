@@ -4471,7 +4471,7 @@ def _job_tailer(db_path: str, job_id: str, owner: str, websocket, parar, pronto)
 
 
 def _research_writer(cfg: dict, parar):
-    """One configured model, one bounded request; no tools or chat/memory prompt."""
+    """One configured model/request per phase; no tools or chat/memory prompt."""
     def write(messages, timeout):
         if parar.is_set():
             return ''

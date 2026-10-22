@@ -1,0 +1,40 @@
+{
+  "scope": "real configured model writing + review, fictional fixture, isolated DB; no web retrieval or production UI",
+  "phases": [
+    "write",
+    "verify_support"
+  ],
+  "elapsed_s": 5.033,
+  "result": {
+    "texto": "No ensaio de navegação com brilho reduzido, o modelo Atlas atingiu autonomia de 10 horas. [E1](https://example.org/fixture)\n\nRedação assistida por IA; citações e trechos conferidos. Suporte revisado automaticamente por parágrafo; essa revisão pode errar e não comprova a verdade.",
+    "llm": true,
+    "references": {
+      "E1": "fixture"
+    },
+    "provenance": [
+      {
+        "label": "E1",
+        "evidence_id": "fixture",
+        "quote": "No ensaio de navegação com brilho reduzido, o modelo Atlas atingiu autonomia de 10 horas.",
+        "paragraph": 0,
+        "original_paragraph": 0
+      }
+    ],
+    "findings": [
+      {
+        "text": "No ensaio de navegação com brilho reduzido, o modelo Atlas atingiu autonomia de 10 horas.",
+        "evidence_ids": [
+          "fixture"
+        ]
+      }
+    ],
+    "semantic_review": [
+      {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    ],
+    "verification": "citation-and-quote-checks + separate model support review; not proof of truth"
+  }
+}

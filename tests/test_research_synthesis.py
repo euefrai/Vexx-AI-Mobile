@@ -32,8 +32,17 @@ def answer(text=EXCERPT, label='E1', quote=EXCERPT):
     return json.dumps({'points': [{'text': text, 'evidence': [{'id': label, 'quote': quote}]}]})
 
 
+def approved_review(messages, timeout):
+    """Explicit controlled reviewer; real semantic quality is tested separately."""
+    payload = json.loads(messages[-1]['content'])
+    assert payload['task'] == 'verify_support'
+    return json.dumps({'reviews': [{'paragraph': p['paragraph'], 'state': 'SUPPORTED', 'reason': 'none'}
+                                   for p in payload['paragraphs']]})
+
+
 def synth(context, output, items=None, **kwargs):
     db, job = context
+    kwargs.setdefault('verificar_fn', approved_review)
     return ra.agente_sintetizador(db, job, items or [evidence()], [],
                                  sintetizar_fn=lambda *a: output, **kwargs)
 
@@ -74,7 +83,7 @@ def test_never_sends_unread_evidence_or_other_context(context):
     def writer(messages, timeout):
         captured.append(json.loads(messages[-1]['content']))
         return answer()
-    result = ra.agente_sintetizador(db, job, [evidence(), unread], [], writer)
+    result = ra.agente_sintetizador(db, job, [evidence(), unread], [], writer, verificar_fn=approved_review)
     assert result['llm']
     assert [s['evidence_id'] for s in captured[0]['sources']] == ['ev-a']
     assert set(captured[0]) == {'objective', 'sources', 'verification'}
@@ -104,7 +113,7 @@ def test_source_numbers_survive_relevance_sorting(context):
 def test_abstract_and_conflicts_keep_explicit_limits(context):
     db, job = context
     result = ra.agente_sintetizador(db, job, [evidence(content_scope='abstract_only')],
-                                  [{'estado': 'CONTRADICTED'}], lambda *a: answer())
+                                  [{'estado': 'CONTRADICTED'}], lambda *a: answer(), verificar_fn=approved_review)
     assert 'não é texto completo' in result['texto']
     assert 'divergências' in result['texto']
 
@@ -187,7 +196,7 @@ def test_checkpoint_reloads_synthesis_and_report_without_new_inference(context):
     ra.registrar_evidencia(db, job, {'titulo': ev['titulo'], 'url': ev['url'],
         'dominio': ev['dominio'], 'texto_lido': True}, EXCERPT)
     items = ra.listar_evidencias(db, job['owner'], job['id'])
-    result = ra.agente_sintetizador(db, job, items, [], lambda *a: answer())
+    result = ra.agente_sintetizador(db, job, items, [], lambda *a: answer(), verificar_fn=approved_review)
     assert result['llm']
     job['sintese'] = result
     job['status'] = 'concluida'
@@ -207,7 +216,7 @@ def test_checkpoint_reloads_synthesis_and_report_without_new_inference(context):
     assert EXCERPT in view['blocks'][0]['content']
 
 
-def test_orchestrator_calls_writer_once_and_resumes_without_repeating(context):
+def test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating(context):
     db, job = context
     calls = []
     class Provider:
@@ -218,17 +227,19 @@ def test_orchestrator_calls_writer_once_and_resumes_without_repeating(context):
     def recover(url):
         return {'titulo': 'Autonomia dos modelos A e B', 'texto': EXCERPT, 'final': url}
     def writer(messages, timeout):
-        calls.append(1)
-        # This is invoked after every adaptive search round, not during one.
         payload = json.loads(messages[-1]['content'])
+        calls.append(payload.get('task', 'write'))
+        if payload.get('task') == 'verify_support':
+            return approved_review(messages, timeout)
+        # Writing starts after all adaptive search rounds, not during one.
         label = payload['sources'][0]['id']
         assert timeout <= 25
         return answer(label=label)
     result = ra.executar(db, job['id'], job['owner'], [Provider()], recover, sintetizar_fn=writer)
     assert result['status'] == 'concluida' and result['sintese']['llm'], result
-    assert calls == [1]
+    assert calls == ['write', 'verify_support']
     again = ra.executar(db, job['id'], job['owner'], [Provider()], recover, sintetizar_fn=writer)
-    assert calls == [1] and again['sintese']['llm']
+    assert calls == ['write', 'verify_support'] and again['sintese']['llm']
 
 
 def test_worker_wires_model_and_can_disable_it(context, monkeypatch, tmp_path):

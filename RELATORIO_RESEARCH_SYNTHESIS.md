@@ -1,5 +1,7 @@
 # Vexx AI — síntese fundamentada de pesquisa
 
+> Histórico da primeira entrega. A evolução posterior acrescenta uma revisão separada de suporte e orçamento compartilhado para até duas chamadas; veja `RELATORIO_SEMANTIC_SUPPORT.md`. As medições abaixo continuam referentes à versão original, sem revisão semântica.
+
 Entrega local, 22/10/2026. Base: `c8a1845`. Sem push, deploy ou reinício do agente de produção.
 
 ## Alterado

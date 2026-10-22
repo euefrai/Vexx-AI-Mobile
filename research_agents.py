@@ -1230,7 +1230,7 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
 
 
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
-                       sintetizar_fn=None, timeout=25, deve_parar=None) -> dict:
+                       sintetizar_fn=None, timeout=25, deve_parar=None, verificar_fn=None) -> dict:
     """Optional assisted writing; extraction remains the fail-closed fallback."""
     tops = sorted([e for e in evidencias if _evidencia_lida(e)],
                   key=lambda e: e.get("score", 0), reverse=True)[:6]
@@ -1281,10 +1281,13 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                    for e in tops if str(e.get('trecho', '')).strip()]
         try:
             candidate = research_synthesis.generate(job['objetivo'], sources, vereditos,
-                                                    sintetizar_fn, timeout, deve_parar)
+                                                    sintetizar_fn, timeout, deve_parar, verificar_fn)
             if candidate:
                 notes = ["Redação assistida por IA; citações e trechos conferidos. "
-                         "A verificação automática não comprova todas as conclusões."]
+                         "Suporte revisado automaticamente por parágrafo; essa revisão pode errar e não comprova a verdade."]
+                removed = sum(r['state'] != 'SUPPORTED' for r in candidate['semantic_review'])
+                if removed:
+                    notes.append(f'{removed} parágrafo(s) omitido(s) por suporte parcial, contraditório ou inconclusivo.')
                 if any(s['scope'] in ('abstract_only', 'metadata_only') for s in sources):
                     notes.append("Parte das fontes contém apenas resumos ou metadados; não é texto completo.")
                 if any(v.get('estado') == 'CONTRADICTED' for v in vereditos):
@@ -1297,10 +1300,14 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
             # Provider errors can contain credentials/request bodies; never persist them.
             sintese['fallback_reason'] = 'provider_or_validation_failure'
             sintese['fallback_detail'] = research_synthesis.failure_detail(exc)
+            if isinstance(exc, research_synthesis.SupportReviewError):
+                sintese['semantic_review'] = exc.reviews
         if not sintese['llm']:
             sintese['texto'] = sintese['texto'].replace(
                 'Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.',
                 'Síntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.')
+            if sintese.get('semantic_review'):
+                sintese['texto'] += '\n\nConclusões geradas sem suporte suficiente foram omitidas; os trechos originais foram preservados.'
     emitir(db, job["id"], job["owner"], "synthesizer", "answer_started", "ok",
            f"Síntese {'assistida' if sintese['llm'] else 'extrativa'} com {len(tops)} evidências.",
            {"llm": sintese['llm'], "fallback_reason": sintese.get('fallback_reason', ''),
@@ -1518,7 +1525,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             if job["plano_versao"] > v0:
                 return executar(db, job_id, owner, provedores, recuperar_fn, deve_parar, t0,
                                 sintetizar_fn=sintetizar_fn)
-        # Write only after adaptive rounds finish: one request per job, not per round.
+        # One writing/review pair after adaptive rounds, never one pair per round.
         if sintetizar_fn and not job['usados'].get('synthesis_attempted') and prazo-time.monotonic() >= 2:
             job['usados']['synthesis_attempted'] = True
             salvar_job(db, job)
@@ -1905,6 +1912,11 @@ def gerar_relatorio(db, owner: str, job_id: str,
         ("Redação assistida por IA; referências e trechos conferidos, sem garantia de suporte semântico."
          if synthesis.get('llm') else "Não há redação generativa validada neste relatório."),
     ]
+    review_counts = research_synthesis.support_summary(synthesis)
+    if review_counts:
+        limitations.append('Revisão automática de suporte por parágrafo (pode errar): '
+                           + ', '.join(f'{state}={count}' for state, count in review_counts.items())
+                           + '. Apenas parágrafos SUPPORTED integram a redação assistida.')
     if not evidencias:
         limitations.append("Nenhuma evidência foi armazenada para este job.")
     midia_resumo = media_evidence.resumo_midia(job.get("midia") or [])

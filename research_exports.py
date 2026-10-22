@@ -11,6 +11,7 @@ import csv
 import io
 import json
 import re
+import research_synthesis
 from datetime import datetime, timezone
 
 MAX_EXPORT_BYTES = 2_000_000
@@ -76,6 +77,7 @@ def _context(job: dict, media: list, claims: list, evidence: list, hypotheses: l
         "hypotheses": hypotheses,
         "synthesis": {"text": str(synthesis.get('texto') or '')[:3500],
                       "assisted": synthesis.get('llm') is True,
+                      "support_review": research_synthesis.support_summary(synthesis),
                       "verification": "Citações e trechos não comprovam suporte semântico."},
         "limitations": [
             "A verificação é lexical/determinística e não estabelece causalidade.",

@@ -1,0 +1,138 @@
+{
+  "scope": "Casos sintéticos congelados para avaliar concordância do revisor com rubrica humana. Sem busca web, dados reais de produtos ou precisão universal.",
+  "model": "poolside/laguna-s-2.1:free",
+  "real_model": true,
+  "generation_tested": false,
+  "retrieval_tested": false,
+  "automatic_retries": 0,
+  "cases": [
+    {
+      "id": "S1",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 1.835
+    },
+    {
+      "id": "S2",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 2.25
+    },
+    {
+      "id": "S3",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 2.543
+    },
+    {
+      "id": "C1",
+      "expected": "CONTRADICTED",
+      "match": false,
+      "error": "semantic_review_invalid",
+      "elapsed_s": 1.468
+    },
+    {
+      "id": "C2",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "entity"
+      },
+      "match": true,
+      "elapsed_s": 6.93
+    },
+    {
+      "id": "C3",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": true,
+      "elapsed_s": 3.287
+    },
+    {
+      "id": "C4",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "causality"
+      },
+      "match": true,
+      "elapsed_s": 3.482
+    },
+    {
+      "id": "P1",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "scope"
+      },
+      "match": true,
+      "elapsed_s": 1.959
+    },
+    {
+      "id": "P2",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": false,
+      "elapsed_s": 2.748
+    },
+    {
+      "id": "P3",
+      "expected": "PARTIAL",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 0.919
+    },
+    {
+      "id": "I1",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": false,
+      "elapsed_s": 1.328
+    },
+    {
+      "id": "I2",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": false,
+      "elapsed_s": 7.167
+    }
+  ],
+  "completed": 12,
+  "matches": 7,
+  "elapsed_s": 35.931,
+  "unsupported_classified_as_supported": 0
+}
