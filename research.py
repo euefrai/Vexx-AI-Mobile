@@ -688,7 +688,10 @@ def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> 
         except Exception:
             pass
         hay = _sem_acentos(" ".join(str(p or "") for p in partes))
-        if any(t in hay for t in termos):
+        import search_orchestrator as orch
+        evidence = {"titulo": f.get("titulo", ""),
+                    "trecho": " ".join(str(f.get(k) or "") for k in ("trecho", "texto_lido"))}
+        if orch._util_para_pedido(evidence, orch._termos_correspondencia(consulta), consulta):
             out.append(f)
     if not out and fontes:
         info["rejeitadas_por_relevancia"] = len(fontes)
@@ -755,6 +758,9 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "final": final,
                "trecho_usado": art.get("trecho_usado", ""),
                "metadados": art.get("metadados", {}),
+               "secoes": art.get("secoes", [])[:12],
+               "tabelas": art.get("tabelas", [])[:5],
+               "imagens": art.get("imagens", [])[:10],
                "extrator": art.get("extrator", ""),
                "ilegivel": bool(art.get("ilegivel")),
                "lida": bool((art.get("texto") or "").strip())}
@@ -790,7 +796,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
         trecho = texto[:600]
     if not trecho:
         trecho = (a.get("trecho") or "")[:600]
-    lida = bool(rec.get("lida", bool(texto.strip())))
+    lida = bool(rec.get("lida", bool(texto.strip()))) and not rec.get("ilegivel", False)
+    if lida:
+        import search_orchestrator as orch
+        evidence = {"titulo": rec.get("titulo") or "", "trecho": texto}
+        if not orch._util_para_pedido(evidence, orch._termos_correspondencia(consulta), consulta):
+            lida = False
     metas = rec.get("metadados") if isinstance(rec.get("metadados"), dict) else {}
     canonica = (metas.get("canonica") or "").strip()[:500]
     dominio = _dominio(rec.get("final") or a.get("url", ""))
@@ -815,7 +826,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str) -> dict:
             "publicado_em": (metas.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
             "extrator": rec.get("extrator", ""),
             "canonica": canonica,
-            "origem_declarada": origem_declarada}
+            "origem_declarada": origem_declarada,
+            "autor": metas.get("autor", ""), "publicador": metas.get("site", ""),
+            "secoes": rec.get("secoes", [])[:12] if lida else [],
+            "tabelas": rec.get("tabelas", [])[:5] if lida else [],
+            "imagens": rec.get("imagens", [])[:10],
+            "ilegivel": bool(rec.get("ilegivel", False))}
 
 
 # Orçamento padrão da busca síncrona (Render Free): poucas consultas e
@@ -946,7 +962,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     info_busca = dict(getattr(buscar_fn, "info", {}) or {})
     recs: dict = {}
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
-        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina): a
+        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, consulta): a
                 for a in achados}
         for fut, a in futs.items():
             try:

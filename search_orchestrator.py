@@ -32,10 +32,10 @@ RX_TECNICO = re.compile(
     r"docker|kubernetes|linux|windows|android|ios|react|node|django|fastapi|"
     r"erro|bug|exceção|exception|stack ?trace|compile|compilar|instalar|"
     r"configurar|regex|algoritmo|banco de dados|sqlite|postgres|mysql|git|"
-    r"servidor|deploy|json|xml|csv|html|css|criptografia|hash|token)\b", re.I)
+    r"servidor|deploy|json|xml|csv|html|css|criptografia|hash|token|asyncio|transformer|transformers|attention)\b", re.I)
 RX_ACADEMICO = re.compile(
-    r"\b(artigo|paper|estudo|pesquisa científica|tese|dissertação|doi|"
-    r"revisão sistemática|meta-?análise|pubmed|scopus|openalex|crossref|"
+    r"\b(artigo|artigos|paper|papers|estudo|estudos|pesquisa cientifica|tese|dissertacao|doi|"
+    r"revisao sistematica|meta-?analise|pubmed|scopus|openalex|crossref|"
     r"referência bibliográfica|citação)\b", re.I)
 RX_NOTICIA = re.compile(
     r"\b(notícia|noticia|últimas|ultimas|hoje|ontem|esta semana|nesta semana|"
@@ -142,14 +142,22 @@ _GENERICOS_CORRESPONDENCIA = {
 }
 
 
+_GENERICOS_CORRESPONDENCIA.update({
+    "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
+    "tecnica", "técnica", "analise", "análise", "usando", "sobre", "pesquise",
+    "documentacao", "documentação", "oficial", "oficiais", "recentes", "recente",
+    "estudos", "cientificos", "científicos", "cientifica", "científica",
+})
+
+
 def _sem_acentos(texto: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFKD", (texto or "").lower())
                    if not unicodedata.combining(c))
 
 
 def _termos(texto: str, minimo: int = 3) -> list:
-    return [t for t in re.findall(r"[0-9a-zà-ú][0-9a-zà-ú\-\+\.]*", (texto or "").lower())
-            if len(t) >= minimo and t not in _ESTOPO]
+    return [t for raw in re.findall(r"[0-9a-zà-ú][0-9a-zà-ú\-\+\.]*", (texto or "").lower())
+            if len(t := raw.strip(".,;:-")) >= minimo and t not in _ESTOPO]
 
 
 def _termos_correspondencia(consulta: str) -> list:
@@ -157,16 +165,32 @@ def _termos_correspondencia(consulta: str) -> list:
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
 
-def _util_para_pedido(a: dict, termos: list) -> bool:
-    """O achado responde ao pedido? (menciona algum termo não-genérico).
+def _tem_termo(termo: str, texto: str) -> bool:
+    """Token boundaries prevent API from matching capital or RAM from programa."""
+    aliases = {"arquitetura": ("architecture",), "baterias": ("batteries",),
+               "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",)}
+    term = _sem_acentos(termo)
+    return any(re.search(r"(?<![\w])" + re.escape(value) + r"(?![\w])", _sem_acentos(texto))
+               for value in (term, *aliases.get(term, ()), *SINONIMOS.get(term, ())))
 
-    Sem termos aproveitáveis no pedido, todo achado conta como útil —
-    não há como distinguir correspondência melhor.
-    """
+
+def correspondencia_item(a: dict, consulta: str) -> dict:
+    termos = _termos_correspondencia(consulta)
+    texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
+    presentes = [t for t in termos if _tem_termo(t, texto)]
+    ratio = len(presentes) / len(termos) if termos else 1.0
+    tipo = "EXACT_MATCH" if ratio == 1 else "PARTIAL_MATCH" if presentes else "IRRELEVANT"
+    return {"tipo": tipo, "cobertura": round(ratio, 3),
+            "faltantes": [t for t in termos if t not in presentes]}
+
+
+def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
     if not termos:
         return True
-    texto = ((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
-    return any(t in texto for t in termos)
+    texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
+    ratio = sum(_tem_termo(t, texto) for t in termos) / len(termos)
+    # Comparisons may legitimately need one primary page per compared subject.
+    return ratio >= (0.5 if RX_COMPARACAO.search(consulta) else 0.6)
 
 
 def _correspondencia(achados: list, termos: list) -> float:
@@ -178,7 +202,7 @@ def _correspondencia(achados: list, termos: list) -> float:
         return 1.0
     juntos = " ".join(((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
                       for a in topo)
-    return round(sum(1 for t in termos if t in juntos) / len(termos), 3)
+    return round(sum(1 for t in termos if _tem_termo(t, juntos)) / len(termos), 3)
 
 
 def _temas_cobertos(achados: list, consulta: str) -> set:
@@ -186,7 +210,7 @@ def _temas_cobertos(achados: list, consulta: str) -> set:
     termos = _termos_correspondencia(consulta)
     texto = " ".join(((a.get("titulo") or "") + " " + (a.get("trecho") or "")).lower()
                      for a in achados or [])
-    return {t for t in termos if t in texto}
+    return {t for t in termos if _tem_termo(t, texto)}
 
 
 def _retrato(achados: list, consulta: str) -> dict:
@@ -584,8 +608,11 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
 
 def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
     for a in achados:
+        match = correspondencia_item(a, consulta)
+        a["correspondencia_tipo"] = match["tipo"]
+        a["cobertura_pedido"] = match["cobertura"]
         a["relevancia"] = round(_pontos_relevancia(a, consulta, classes, info), 2)
-    return sorted(achados, key=lambda a: -a.get("relevancia", 0.0))
+    return sorted(achados, key=lambda a: (not _util_para_pedido(a, _termos_correspondencia(consulta), consulta), -a.get("relevancia", 0.0)))
 
 
 # ── Lacunas do pedido ──────────────────────────────────────────────
@@ -750,7 +777,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     ultimo_ganho = True  # ganho da consulta anterior (parada por ganho zero)
 
     def _uteis() -> int:
-        return sum(1 for a in achados if _util_para_pedido(a, termos_c))
+        return sum(1 for a in achados if _util_para_pedido(a, termos_c, consulta))
 
     def _retry_com_conteudo(nome: str, q_atual: str) -> bool:
         """Mesma fonte, consulta reformulada (pergunta → conteúdo); 1x por fonte.
@@ -762,18 +789,22 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             return False
         q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
                                       and nome in ("stackexchange", "hn") else "")
+        restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
+        if restante <= 0:
+            return False
         try:
             novos = sp.buscar(nome, q_prov,
                               limite=max(2, min(int(orc["max_por_provedor"]),
                                                 max_resultados)),
-                              timeout=timeout)
-        except Exception:
+                              timeout=min(timeout, restante))
+        except Exception as exc:
+            falhas.append({"provedor": nome, "codigo": getattr(exc, "codigo", type(exc).__name__)})
             return False
         usados[nome] = usados.get(nome, 0) + 1
         etapas.append(f"{nome} (consulta reformulada '{alt[:40]}'): "
                       f"{len(novos)} resultados")
         achados.extend(novos)
-        return bool(novos) and any(_util_para_pedido(a, termos_c) for a in novos)
+        return bool(novos) and any(_util_para_pedido(a, termos_c, consulta) for a in novos)
 
     for i, q in enumerate(consultas):
         if _uteis() >= int(orc["min_resultados"]) and i > 0:
@@ -791,6 +822,10 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         retrato_antes = _retrato(achados, consulta)
         tentativa_provedor = 0
         while tentativa_provedor < 3 and provedor_indice < len(nomes):
+            restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
+            if restante <= 0:
+                etapas.append("orçamento de tempo esgotado durante fallback")
+                break
             nome = nomes[provedor_indice]
             consulta_prov = termos_para_provedor(q, "tecnico" if info["tecnica"]
                                                  and nome in ("stackexchange", "hn") else "")
@@ -798,13 +833,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 achados_novos = sp.buscar(nome, consulta_prov,
                                           limite=max(2, min(int(orc["max_por_provedor"]),
                                                             max_resultados)),
-                                          timeout=timeout)
+                                          timeout=min(timeout, restante))
                 usados[nome] = usados.get(nome, 0) + 1
                 etapas.append(f"{nome}: {len(achados_novos)} resultados "
                               f"({q[:40]})")
                 achados.extend(achados_novos)
                 if achados_novos and termos_c and not any(
-                        _util_para_pedido(a, termos_c) for a in achados_novos):
+                        _util_para_pedido(a, termos_c, consulta) for a in achados_novos):
                     # resultados existem, mas nenhum responde ao pedido:
                     # 1º tenta a MESMA fonte com a consulta reformulada
                     # (ex.: "como funciona o freio ABS" → "freio ABS");

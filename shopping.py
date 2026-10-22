@@ -1224,20 +1224,23 @@ def ultima_consulta(db, owner: str, conv: str) -> dict | None:
         return None
 
 
-def consulta_em_cache(db, owner: str, consulta: str) -> dict | None:
-    row = db.execute("SELECT resultado, criado_em FROM shopping_consultas"
-                     " WHERE id LIKE ? AND owner_id=? AND expira_em > ?"
-                     " ORDER BY criado_em DESC LIMIT 1",
-                     (_id_consulta(owner, consulta) + "%", owner, agora_iso())).fetchone()
-    if not row:
-        return None
-    try:
-        res = json.loads(row[0])
-        res["de_cache"] = True
-        res["verificado_em"] = row[1]
-        return res
-    except (TypeError, ValueError):
-        return None
+def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = None) -> dict | None:
+    rows = db.execute("SELECT resultado, criado_em FROM shopping_consultas"
+                      " WHERE id LIKE ? AND owner_id=? AND expira_em > ?"
+                      " ORDER BY criado_em DESC LIMIT 20",
+                      (_id_consulta(owner, consulta) + "%", owner, agora_iso())).fetchall()
+    for row in rows:
+        try:
+            res = json.loads(row[0])
+            # Category/brand alone cannot identify a budget, model or variant.
+            if criterios is not None and res.get("criterios") != criterios:
+                continue
+            res["de_cache"] = True
+            res["verificado_em"] = row[1]
+            return res
+        except (TypeError, ValueError):
+            continue
+    return None
 
 
 # ── Provedores de busca (V4.9.1.1: cadeia com fallback) ────────────────
@@ -1706,6 +1709,11 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
             consultas.append(f"melhor {nucleo}{detalhe} comprar Brasil".strip())
     vistos, final = set(), []
     for q in consultas:
+        # Every reformulation retains mandatory price limits, not just the last.
+        if orc.get("max") is not None and _extrair_orcamento(q).get("max") != orc["max"]:
+            q += f" até R$ {orc['max']:g}"
+        if orc.get("min") is not None:
+            q += f" a partir de R$ {orc['min']:g}"
         chave = q.lower()
         if q and chave not in vistos:
             vistos.add(chave)
@@ -2240,7 +2248,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             pass
 
     _prog("buscando", consulta)
-    em_cache = consulta_em_cache(db, owner, consulta) if usar_cache else None
+    em_cache = consulta_em_cache(db, owner, consulta, criterios=criterios) if usar_cache else None
     if em_cache is not None:
         return em_cache
 
@@ -2273,7 +2281,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # visita a página. Demais URLs passam pela extração JSON-LD/OG.
     brutos: list = []
     paginas = []
-    for a in achados[:teto_paginas + 4]:
+    for a in achados[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
         if a.get("origem") == "mlb" and isinstance(a.get("mlb"), dict):
             try:
                 extraido = produto_de_mlb(a["mlb"])
@@ -2315,7 +2323,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                     log.info("shopping: extração falhou (%s)",
                              type(exc).__name__)
         consultadas.extend(lote)
-        if brutos:
+        validos, _ = aplicar_filtros(deduplicar(brutos), criterios)
+        if any(_tier(p) == "confirmada" for p in validos):
             break
     _prog("extraindo", f"{len(brutos)} ofertas estruturadas")
     dedup = deduplicar(brutos)
