@@ -1,0 +1,509 @@
+{
+  "report_schema": "julia-research-quality-report/1",
+  "dataset": {
+    "dataset_id": "julia-research-quality",
+    "version": "2.0.0",
+    "sha256": "4e4f5f2e773800a3c05537432f280513c7f7bd487dd8a395e77bc66d19e93e8f",
+    "truth_basis": "synthetic_local_fixture"
+  },
+  "execution": {
+    "kind": "local_frozen_document_retrieval",
+    "retriever": "docs_agent.trechos_relevantes",
+    "database": "temporary SQLite; owner-scoped fixture data only",
+    "python": "3.14.4",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "sqlite": "3.50.4",
+    "k": 5
+  },
+  "counts": {
+    "documents": 12,
+    "cases": 8,
+    "queries": 8
+  },
+  "timing_ms": {
+    "total": 283.853,
+    "extraction_mean": 7.976,
+    "retrieval_mean": 0.708,
+    "retrieval_max": 1.579,
+    "peak_python_kb": 7.2
+  },
+  "retrieval_metrics": {
+    "precision_at_k": 0.25,
+    "recall_at_k": 0.854167,
+    "mrr_at_k": 1.0,
+    "ndcg_at_k": 0.81697,
+    "duplicate_rate_at_k": 0.0
+  },
+  "by_category": {
+    "academic_research": {
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 0.70981,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "adversarial_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "document_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 2,
+      "query_count": 2
+    },
+    "factual_qa": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.333333,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 0.86091,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "multi_hop_research": {
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 0.833991,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "numerical_reasoning": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "temporal_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.5,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 0.131046,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    }
+  },
+  "source_checks": [
+    {
+      "case_id": "academic-abstract",
+      "category": "academic_research",
+      "primary_source_id": "abs-photon",
+      "primary_source_retrieved": true,
+      "republication_only": false
+    },
+    {
+      "case_id": "temporal-recency",
+      "category": "temporal_research",
+      "latest_source_id": "temp-2025",
+      "latest_source_retrieved": false
+    }
+  ],
+  "source_quality_metrics": {
+    "primary_source": {
+      "cases": 1,
+      "retrieved": 1,
+      "recall": 1.0,
+      "republication_only": 0
+    },
+    "latest_temporal_source": {
+      "cases": 1,
+      "retrieved": 0,
+      "recall": 0.0
+    },
+    "contradiction_evidence_pair": {
+      "cases": 0,
+      "complete": 0,
+      "recall": null
+    },
+    "independence": "not scored: domain or URL difference is not evidence of independent origin"
+  },
+  "optimization_recommendations": [
+    {
+      "signal": "low_precision_with_recall",
+      "recommendation": "Review ranking specificity and irrelevant top-K results without reducing coverage."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "json-retrieval",
+      "category": "document_research",
+      "queries": [
+        {
+          "query": "ciclo dias alface horta",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "data-horta"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-8bbde9dd9d03:0"
+          ],
+          "elapsed_ms": 1.579
+        }
+      ]
+    },
+    {
+      "case_id": "academic-abstract",
+      "category": "academic_research",
+      "queries": [
+        {
+          "query": "PhotonFlux-9 yield gain trial",
+          "metrics": {
+            "precision_at_k": 0.4,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 0.70981,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 2,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "abs-photon-reprint",
+            "abs-photon"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-b744d6894f3d:0",
+            "doc-98f1fe15fddc:0"
+          ],
+          "elapsed_ms": 0.696
+        }
+      ]
+    },
+    {
+      "case_id": "temporal-recency",
+      "category": "temporal_research",
+      "queries": [
+        {
+          "query": "average chamber humidity trial",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 0.5,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 0.131046,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "temp-2023"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-5adb2218a422:0"
+          ],
+          "elapsed_ms": 0.622
+        }
+      ]
+    },
+    {
+      "case_id": "adversarial-injection",
+      "category": "adversarial_research",
+      "queries": [
+        {
+          "query": "sky color fact",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "adv-inject"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-cf9e2d4f0952:0"
+          ],
+          "elapsed_ms": 0.471
+        }
+      ]
+    },
+    {
+      "case_id": "units-conversion",
+      "category": "numerical_reasoning",
+      "queries": [
+        {
+          "query": "P-7 pump flow rate",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "num-pump"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-5633ad4c6485:0"
+          ],
+          "elapsed_ms": 0.475
+        }
+      ]
+    },
+    {
+      "case_id": "long-doc",
+      "category": "document_research",
+      "queries": [
+        {
+          "query": "GH-S soil potassium survey",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "long-soil"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-f0993bd21c24:0"
+          ],
+          "elapsed_ms": 0.441
+        }
+      ]
+    },
+    {
+      "case_id": "fruit-distractors",
+      "category": "factual_qa",
+      "queries": [
+        {
+          "query": "yellow tropical fruit",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 0.333333,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 0.86091,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 3
+          },
+          "retrieved_document_ids": [
+            "plain-banana"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-92a99a98b16a:0"
+          ],
+          "elapsed_ms": 0.802
+        }
+      ]
+    },
+    {
+      "case_id": "multi-hop-v2",
+      "category": "multi_hop_research",
+      "queries": [
+        {
+          "query": "trial N=10000 gain 12 percent",
+          "metrics": {
+            "precision_at_k": 0.4,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 0.833991,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 2,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "abs-photon-reprint",
+            "abs-photon"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-b744d6894f3d:0",
+            "doc-98f1fe15fddc:0"
+          ],
+          "elapsed_ms": 0.578
+        }
+      ]
+    }
+  ],
+  "not_measured": [
+    "semantic claim correctness",
+    "web search quality",
+    "source independence beyond curated fixture labels",
+    "LLM generation quality",
+    "CPU time and process-wide RSS (peak Python KB is measured)",
+    "token consumption",
+    "real-world factual accuracy"
+  ],
+  "checkpoint_benchmark": {
+    "dataset": {
+      "dataset_id": "julia-research-quality",
+      "version": "2.0.0",
+      "sha256": "4e4f5f2e773800a3c05537432f280513c7f7bd487dd8a395e77bc66d19e93e8f",
+      "truth_basis": "synthetic_local_fixture"
+    },
+    "execution": {
+      "kind": "local_sqlite_checkpoint_save_close_reopen_restore",
+      "store": "continuous_research.ResearchContextStore",
+      "semantic_compaction": "not tested; unavailable without LLM"
+    },
+    "counts": {
+      "scenarios": 3,
+      "checkpoints_saved": 85,
+      "steps_in_scenarios": 85
+    },
+    "scenarios": [
+      {
+        "scenario_id": "checkpoint-10-steps",
+        "step_count": 10,
+        "checkpoint_sequence": 10,
+        "restored_sequence": 10,
+        "semantic_compaction": "unavailable_without_llm",
+        "metrics": {
+          "state": {
+            "objectives": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "constraints": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "decisions": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "evidence_ids": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "pending": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            }
+          },
+          "operation_count": null,
+          "duplicate_operation_ids": null
+        },
+        "elapsed_ms": 154.811
+      },
+      {
+        "scenario_id": "checkpoint-25-steps",
+        "step_count": 25,
+        "checkpoint_sequence": 25,
+        "restored_sequence": 25,
+        "semantic_compaction": "unavailable_without_llm",
+        "metrics": {
+          "state": {
+            "objectives": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "constraints": {
+              "expected": 0,
+              "preserved": 0,
+              "recall": null,
+              "missing": []
+            },
+            "decisions": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "evidence_ids": {
+              "expected": 2,
+              "preserved": 2,
+              "recall": 1.0,
+              "missing": []
+            },
+            "pending": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            }
+          },
+          "operation_count": null,
+          "duplicate_operation_ids": null
+        },
+        "elapsed_ms": 394.217
+      },
+      {
+        "scenario_id": "checkpoint-50-steps",
+        "step_count": 50,
+        "checkpoint_sequence": 50,
+        "restored_sequence": 50,
+        "semantic_compaction": "unavailable_without_llm",
+        "metrics": {
+          "state": {
+            "objectives": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "constraints": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "decisions": {
+              "expected": 0,
+              "preserved": 0,
+              "recall": null,
+              "missing": []
+            },
+            "evidence_ids": {
+              "expected": 1,
+              "preserved": 1,
+              "recall": 1.0,
+              "missing": []
+            },
+            "pending": {
+              "expected": 2,
+              "preserved": 2,
+              "recall": 1.0,
+              "missing": []
+            }
+          },
+          "operation_count": null,
+          "duplicate_operation_ids": null
+        },
+        "elapsed_ms": 682.12
+      }
+    ]
+  }
+}

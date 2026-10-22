@@ -1,0 +1,648 @@
+F.F.........FFFF....FFF.F..FF........................................... [ 80%]
+.................                                                        [100%]
+================================== FAILURES ===================================
+________ test_generic_architecture_does_not_stop_transformer_fallback _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E74FAFCE90>
+
+    def test_generic_architecture_does_not_stop_transformer_fallback(monkeypatch):
+        calls = []
+        def search(provider, query, **kwargs):
+            calls.append(provider)
+            if provider == 'bing':
+                return [hit('Arquitetura: conceito e estilos', f'https://decor.example/{i}') for i in range(3)]
+            return [hit('Transformer architecture: self-attention', 'https://arxiv.org/abs/1706.03762')]
+        monkeypatch.setattr(sp, 'buscar', search)
+>       result = orch.pesquisar('Como funciona a arquitetura Transformer? Fontes técnicas.',
+            provedores=['bing', 'marginalia'], orcamento={'max_consultas': 2})
+
+tests\test_search_coverage_v59.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'Como funciona a arquitetura Transformer? Fontes técnicas.'
+max_resultados = 6, timeout = 8.0, provedores = ['bing', 'marginalia']
+classes_forcadas = None, orcamento = {'max_consultas': 2}, extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+_______ test_provider_loop_respects_elapsed_budget_and_records_failures _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515D4770>
+
+    def test_provider_loop_respects_elapsed_budget_and_records_failures(monkeypatch):
+        clock = [0.0]
+        monkeypatch.setattr(orch.time, 'monotonic', lambda: clock[0])
+        calls = []
+        def search(provider, query, **kwargs):
+            calls.append((provider, kwargs['timeout']))
+            clock[0] += 5
+            raise sp.ErroProvedor('network unavailable', 'rede')
+        monkeypatch.setattr(sp, 'buscar', search)
+>       result = orch.pesquisar('python asyncio', provedores=['bing', 'marginalia', 'wikipedia'],
+            timeout=8, orcamento={'timeout_total': 2, 'max_consultas': 2})
+
+tests\test_search_coverage_v59.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'python asyncio', max_resultados = 6, timeout = 8
+provedores = ['bing', 'marginalia', 'wikipedia'], classes_forcadas = None
+orcamento = {'timeout_total': 2, 'max_consultas': 2}, extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+__________ test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515AF750>
+
+    def test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append((nome, consulta))
+            if "funciona" in consulta.lower():
+                return [{"titulo": "Funciona - Dicionário", "url": "https://dicio.example/funciona",
+                         "trecho": "conjugação do verbo funciona", "origem": nome, "tipo": "pagina"}]
+            return [
+                {"titulo": "Freio ABS: o que é e como funciona", "url": "https://auto.example/abs",
+                 "trecho": "sistema de freio ABS com sensor", "origem": nome, "tipo": "pagina"},
+                {"titulo": "Freio ABS — Wikipédia", "url": "https://pt.wikipedia.org/wiki/Freio_ABS",
+                 "trecho": "freio antibloqueio", "origem": nome, "tipo": "enciclopedia"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("como funciona o freio ABS", provedores=["bing"],
+                             orcamento=ORC)
+
+tests\test_search_orchestrator_v57.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'como funciona o freio ABS', max_resultados = 6, timeout = 8.0
+provedores = ['bing'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+_______________ test_provedor_vazio_reformula_antes_de_desistir _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515AF950>
+
+    def test_provedor_vazio_reformula_antes_de_desistir(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append(consulta)
+            if consulta.lower().startswith("o que"):
+                raise sp.ErroProvedor("nada para essa consulta", "vazio")
+            return [{"titulo": "Fotossíntese — Wikipédia",
+                     "url": "https://pt.wikipedia.org/wiki/Fotossintese",
+                     "trecho": "a fotossíntese é o processo de conversão", "origem": nome,
+                     "tipo": "enciclopedia"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("o que é fotossíntese", provedores=["wikipedia"],
+                             orcamento=ORC)
+
+tests\test_search_orchestrator_v57.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'o que é fotossíntese', max_resultados = 6, timeout = 8.0
+provedores = ['wikipedia'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+_________ test_correspondencia_fraca_declara_enxuta_para_recuperacao __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E751636300>
+
+    def test_correspondencia_fraca_declara_enxuta_para_recuperacao(monkeypatch):
+        monkeypatch.setattr(sp, "buscar", lambda nome, consulta, limite=6, timeout=10.0:
+                            [{"titulo": "Freio motor: o que é", "url": f"https://a.example/{nome}",
+                              "trecho": "freio motor ajuda na descida", "origem": nome,
+                              "tipo": "pagina"}])
+>       res = orch.pesquisar("quanto custa o freio ABS hidráulico", provedores=["bing"],
+                             orcamento=ORC)
+
+tests\test_search_orchestrator_v57.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'quanto custa o freio ABS hidráulico', max_resultados = 6
+timeout = 8.0, provedores = ['bing'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+__________ test_recuperacao_com_enxuta_melhora_correspondencia_fraca __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515977A0>
+
+    def test_recuperacao_com_enxuta_melhora_correspondencia_fraca(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            if consulta.lower().startswith("freio abs"):
+                return [{"titulo": "Freio ABS hidráulico azul: manual",
+                         "url": "https://m.example/abs",
+                         "trecho": "freio ABS hidráulico azul automotivo",
+                         "origem": nome, "tipo": "pagina"}]
+            return [{"titulo": "Freio motor", "url": f"https://a.example/{nome}",
+                     "trecho": "freio motor ajuda na descida", "origem": nome,
+                     "tipo": "pagina"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar_com_recuperacao("preço do freio ABS hidráulico azul",
+                                             max_resultados=4, orcamento=ORC)
+
+tests\test_search_orchestrator_v57.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+search_orchestrator.py:987: in pesquisar_com_recuperacao
+    res = pesquisar(consulta, max_resultados=max_resultados, timeout=timeout,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'preço do freio ABS hidráulico azul', max_resultados = 4
+timeout = 8.0, provedores = None, classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+____________ test_conteudo_desatualizado_e_sinalizado_nao_apagado _____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515BBCB0>
+
+    def test_conteudo_desatualizado_e_sinalizado_nao_apagado(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            return [
+                {"titulo": "Eleições 2026: calendário oficial",
+                 "url": "https://t.example/novo", "trecho": "calendário do pleito",
+                 "data": "Fri, 10 Jan 2026 00:00:00 GMT", "origem": "bing",
+                 "tipo": "noticia"},
+                {"titulo": "Eleições 2018: como foi o pleito",
+                 "url": "https://t.example/velho", "trecho": "retrospecto do pleito",
+                 "data": "Mon, 01 Jan 2018 00:00:00 GMT", "origem": "bing",
+                 "tipo": "noticia"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("eleições 2026", provedores=["bing"], orcamento=ORC)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_search_orchestrator_v57.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'eleições 2026', max_resultados = 6, timeout = 8.0
+provedores = ['bing'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+_______________ test_sem_data_conhecida_nao_acusa_desatualizado _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E7515BA7B0>
+
+    def test_sem_data_conhecida_nao_acusa_desatualizado(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            return [{"titulo": "Como votar nas eleições", "url": "https://s.example/a",
+                     "trecho": "passo a passo", "origem": "bing", "tipo": "pagina"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("eleições 2026", provedores=["bing"], orcamento=ORC)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_search_orchestrator_v57.py:210: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'eleições 2026', max_resultados = 6, timeout = 8.0
+provedores = ['bing'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+______________ test_consulta_sem_recorte_temporal_nao_marca_nada ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E75163F790>
+
+    def test_consulta_sem_recorte_temporal_nao_marca_nada(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            return [{"titulo": "Freio ABS: o que é", "url": "https://f.example/a",
+                     "trecho": "sistema de freios", "origem": "bing", "tipo": "pagina",
+                     "data": "Mon, 01 Jan 2015 00:00:00 GMT"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("freio ABS", provedores=["bing"], orcamento=ORC)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_search_orchestrator_v57.py:222: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'freio ABS', max_resultados = 6, timeout = 8.0, provedores = ['bing']
+classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+____________ test_parada_por_ganho_zero_evita_consulta_redundante _____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E750162150>
+
+    def test_parada_por_ganho_zero_evita_consulta_redundante(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append((nome, consulta))
+            return [{"titulo": "Freio ABS: explicação",
+                     "url": f"https://m.example/{len(chamadas)}",
+                     "trecho": "sistema de freios abs", "origem": nome,
+                     "tipo": "pagina"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        orc = {"max_consultas": 4, "max_provedores": 3, "min_resultados": 3,
+               "timeout_total": 5.0, "max_por_provedor": 4}
+>       res = orch.pesquisar("freio ABS", provedores=["bing", "marginalia", "wikipedia"],
+                             orcamento=orc,
+                             extra_queries=["freio ABS sistema", "freio ABS valores"])
+
+tests\test_search_orchestrator_v57.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'freio ABS', max_resultados = 6, timeout = 8.0
+provedores = ['bing', 'marginalia', 'wikipedia'], classes_forcadas = None
+orcamento = {'max_consultas': 4, 'max_provedores': 3, 'min_resultados': 3, 'timeout_total': 5.0, ...}
+extra_queries = ['freio ABS sistema', 'freio ABS valores']
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+_____________ test_paginas_de_indice_sao_sinalizadas_e_demovidas ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E751621020>
+
+    def test_paginas_de_indice_sao_sinalizadas_e_demovidas(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            return [
+                {"titulo": "Resultados para freio ABS",
+                 "url": "https://m.example/search?q=freio+abs",
+                 "trecho": "freio abs resultados", "origem": "bing",
+                 "tipo": "pagina"},
+                {"titulo": "Freio ABS: como funciona",
+                 "url": "https://n.example/guia",
+                 "trecho": "freio abs sistema", "origem": "bing",
+                 "tipo": "pagina"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("freio ABS", provedores=["bing"], orcamento=ORC)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_search_orchestrator_v57.py:325: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'freio ABS', max_resultados = 6, timeout = 8.0, provedores = ['bing']
+classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+______ test_rodada_so_com_indices_gera_lacuna_e_consulta_de_recuperacao _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E74FC793B0>
+
+    def test_rodada_so_com_indices_gera_lacuna_e_consulta_de_recuperacao(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            return [
+                {"titulo": "Resultados para freio ABS",
+                 "url": "https://m.example/search?q=freio",
+                 "trecho": "freio abs resultados", "origem": "bing",
+                 "tipo": "pagina"},
+                {"titulo": "Índice de conteúdos de freios",
+                 "url": "https://m.example/indice",
+                 "trecho": "freio abs índice", "origem": "bing",
+                 "tipo": "pagina"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+>       res = orch.pesquisar("como funciona o freio ABS",
+                             provedores=["bing"], orcamento=ORC)
+
+tests\test_search_orchestrator_v57.py:348: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consulta = 'como funciona o freio ABS', max_resultados = 6, timeout = 8.0
+provedores = ['bing'], classes_forcadas = None
+orcamento = {'max_consultas': 1, 'max_provedores': 2, 'min_resultados': 1, 'timeout_total': 5.0, ...}
+extra_queries = None
+
+    def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
+                  provedores=None, classes_forcadas=None, orcamento: dict = None,
+                  extra_queries=None) -> dict:
+        """Busca orquestrada completa. Nunca levanta por falha de provedor."""
+        info = classificar(consulta)
+        if classes_forcadas:
+            info["classes"] = list(dict.fromkeys(list(classes_forcadas) + info["classes"]))
+        orc = dict(ORCAMENTO_PADRAO)
+        orc.update(orcamento or {})
+        consultas = list(extra_queries or [])
+        for q in variantes(consulta, info["classes"], teto=3,
+                           produto=bool(info.get("produto"))):
+            if q not in consultas:
+                consultas.append(q)
+        consultas = consultas[: max(1, int(orc["max_consultas"]))]
+        nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
+        nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    
+        t0 = time.monotonic()
+        achados = fontes_preferenciais(consulta) if provedores is None else []
+        etapas, falhas, vazios = [], [], []
+>       tentativas = list(historico or [])
+                          ^^^^^^^^^
+E       NameError: name 'historico' is not defined
+
+search_orchestrator.py:798: NameError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_search_coverage_v59.py::test_generic_architecture_does_not_stop_transformer_fallback
+FAILED tests/test_search_coverage_v59.py::test_provider_loop_respects_elapsed_budget_and_records_failures
+FAILED tests/test_search_orchestrator_v57.py::test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte
+FAILED tests/test_search_orchestrator_v57.py::test_provedor_vazio_reformula_antes_de_desistir
+FAILED tests/test_search_orchestrator_v57.py::test_correspondencia_fraca_declara_enxuta_para_recuperacao
+FAILED tests/test_search_orchestrator_v57.py::test_recuperacao_com_enxuta_melhora_correspondencia_fraca
+FAILED tests/test_search_orchestrator_v57.py::test_conteudo_desatualizado_e_sinalizado_nao_apagado
+FAILED tests/test_search_orchestrator_v57.py::test_sem_data_conhecida_nao_acusa_desatualizado
+FAILED tests/test_search_orchestrator_v57.py::test_consulta_sem_recorte_temporal_nao_marca_nada
+FAILED tests/test_search_orchestrator_v57.py::test_parada_por_ganho_zero_evita_consulta_redundante
+FAILED tests/test_search_orchestrator_v57.py::test_paginas_de_indice_sao_sinalizadas_e_demovidas
+FAILED tests/test_search_orchestrator_v57.py::test_rodada_so_com_indices_gera_lacuna_e_consulta_de_recuperacao
+12 failed, 77 passed, 1 warning in 31.24s

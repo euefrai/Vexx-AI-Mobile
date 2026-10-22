@@ -1,0 +1,27 @@
+...............F...........................                              [100%]
+================================== FAILURES ===================================
+__________ test_recuperacao_com_enxuta_melhora_correspondencia_fraca __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029C8CF7C500>
+
+    def test_recuperacao_com_enxuta_melhora_correspondencia_fraca(monkeypatch):
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            if consulta.lower().startswith("freio abs"):
+                return [{"titulo": "Freio ABS hidráulico azul: manual",
+                         "url": "https://m.example/abs",
+                         "trecho": "freio ABS hidráulico azul automotivo",
+                         "origem": nome, "tipo": "pagina"}]
+            return [{"titulo": "Freio motor", "url": f"https://a.example/{nome}",
+                     "trecho": "freio motor ajuda na descida", "origem": nome,
+                     "tipo": "pagina"}]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        res = orch.pesquisar_com_recuperacao("preço do freio ABS hidráulico azul",
+                                             max_resultados=4, orcamento=ORC)
+>       assert res["recuperou"] is True
+E       assert False is True
+
+tests\test_search_orchestrator_v57.py:118: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_search_orchestrator_v57.py::test_recuperacao_com_enxuta_melhora_correspondencia_fraca
+1 failed, 42 passed in 7.79s

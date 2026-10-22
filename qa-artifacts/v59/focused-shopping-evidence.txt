@@ -1,0 +1,21 @@
+...................................................s..........s......... [ 43%]
+.............F.......................................................... [ 86%]
+...........s...........                                                  [100%]
+================================== FAILURES ===================================
+____________ test_consulta_inclui_modelo_e_orcamento_sem_duplicar _____________
+
+    def test_consulta_inclui_modelo_e_orcamento_sem_duplicar():
+        txt = "celular galaxy s24 at� R$ 3000"
+        c = shopping.extrair_criterios(txt)
+        qs = shopping._consultas_produto(c, txt)
+>       assert qs and "s24" in qs[0] and "3000" not in qs[0]
+E       AssertionError: assert (['celular galaxy s24 comprar oferta at� R$ 3000', 'celular galaxy s24 pre�o at� 3000'] and 's24' in 'celular galaxy s24 comprar oferta at� R$ 3000' and '3000' not in 'celular gal... at� R$ 3000'
+E         
+E         '3000' is contained here:
+E           celular galaxy s24 comprar oferta at� R$ 3000
+E         ?                                          ++++)
+
+tests\test_shopping_fase4.py:187: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_shopping_fase4.py::test_consulta_inclui_modelo_e_orcamento_sem_duplicar
+1 failed, 163 passed, 3 skipped in 53.09s

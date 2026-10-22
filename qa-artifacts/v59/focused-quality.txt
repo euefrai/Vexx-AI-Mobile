@@ -1,0 +1,23 @@
+............................F........................................... [ 56%]
+........................................................                 [100%]
+================================== FAILURES ===================================
+_____________________ test_escolher_provedores_por_classe _____________________
+
+    def test_escolher_provedores_por_classe():
+        disponiveis = ["bing", "marginalia", "wikipedia", "pubmed", "stackexchange",
+                       "hn", "openlibrary", "worldbank", "bcb", "commons", "bing-news"]
+        prod = orch._escolher_provedores([sp.CLASSE_GERAL], {"produto": True},
+                                         disponiveis=disponiveis)
+        assert prod[:2] == ["bing", "marginalia"]
+        acad = orch._escolher_provedores([sp.CLASSE_ACADEMICA], {"produto": False},
+                                         disponiveis=disponiveis)
+>       assert acad[:3] == ["pubmed", "openlibrary", "wikipedia"]
+E       AssertionError: assert ['bing', 'wik... 'marginalia'] == ['pubmed', 'o..., 'wikipedia']
+E         
+E         At index 0 diff: 'bing' != 'pubmed'
+E         Use -v to get more diff
+
+tests\test_search_core_v55.py:213: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_search_core_v55.py::test_escolher_provedores_por_classe - A...
+1 failed, 127 passed in 11.34s

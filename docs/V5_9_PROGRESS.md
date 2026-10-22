@@ -34,3 +34,9 @@
 
 - First complete suite: 1,015 passed, 2 failed, 4 skipped; original log retained. Both failures were compatibility issues: public HTTP429 code must remain bloqueado, and relevance must recognize 3.000 as 3000. Fixed code (not old expected fixtures); diagnostic category still identifies rate limits. Focused regressions: 92 passed.
 - Full suite rerun is required due to those failures, not routine repetition. Next: final report/QA commit after result.
+
+## Complete
+
+- Final full suite after compatibility repairs: 1,018 passed, 4 skipped, 2 deprecation warnings, 243.81s. Code commits: 99560c9, 35cdb28, 8f268be. No original frozen fixtures modified.
+- Final report: RELATORIO_VEXX_AI_V5.9.0_SEARCH_COVERAGE.md. Comparison artifacts include live failure/offer limits; no commercial confirmation gain is claimed. Local document Quality Lab v2 temporal source 0/1 is explicitly residual.
+- No push, deploy, production restart, credential/data changes, identity/3D/extension/Fajulto changes. Final QA/report commit closes this task.

@@ -1,0 +1,89 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+_________ test_read_source_preserves_tables_sections_author_and_date __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B693A80>
+
+    def test_read_source_preserves_tables_sections_author_and_date(monkeypatch):
+        monkeypatch.setattr(research, 'baixar', lambda *a, **kw: ('https://docs.example/page',
+            '<html><head><title>Python asyncio</title><meta name="author" content="Example author"></head>'
+            '<body><main><h1>Python asyncio</h1><p>Python asyncio supports concurrent tasks. ' + 'Details about asyncio. '*30 + '</p>'
+            '<h2>Timings</h2><table><tr><th>Method</th><th>Time</th></tr><tr><td>await</td><td>2 ms</td></tr></table></main></body></html>'))
+        result = research.pesquisa_rapida(db(), 'owner', 'Python asyncio',
+            buscar_fn=lambda q: [hit('Python asyncio', 'https://docs.example/page')])
+        source = result['fontes'][0]
+        assert source['status'] == 'aberta'
+>       assert source['tabelas'][0][1] == ['await', '2 ms']
+               ^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B693A80>
+result     = {'fontes': [{'titulo': 'Python asyncio', 'url': 'https://docs.example/page', 'dominio': 'docs.example', 'acessado_em':...5397+00:00', ...}], 'etapas': ['busca: 1 resultados', '1 fontes, 1 lidas'], 'divergencias': [], 'de_cache': False, ...}
+source     = {'titulo': 'Python asyncio', 'url': 'https://docs.example/page', 'dominio': 'docs.example', 'acessado_em': '2026-10-22T05:02:16.955397+00:00', ...}
+
+tests\test_search_coverage_v59.py:77: IndexError
+_______ test_shopping_second_wave_runs_until_offer_matches_budget[2-2] ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B714640>
+valid_index = 2, page_limit = 2
+
+    @pytest.mark.parametrize('valid_index,page_limit', [(2, 2), (10, 6)])
+    def test_shopping_second_wave_runs_until_offer_matches_budget(monkeypatch, valid_index, page_limit):
+        monkeypatch.setattr(research, '_ips_globais', lambda host: None)
+        candidates = [hit(f'Notebook Lenovo 16GB RAM {i}', f'https://shop.example/item-{i}') for i in range(12)]
+        def download(url, **kwargs):
+            number = int(url.rsplit('-', 1)[-1])
+            price = '2500.00' if number == valid_index else '4500.00'
+            product = {'@context':'https://schema.org','@type':'Product','name':f'Notebook Lenovo 16GB RAM {number}',
+                'brand':{'@type':'Brand','name':'Lenovo'},'offers':{'@type':'Offer','price':price,'priceCurrency':'BRL',
+                    'url':url,'availability':'https://schema.org/InStock'}}
+            return url, '<html><head><title>Notebook Lenovo 16GB RAM</title></head><body><script type="application/ld+json">' + json.dumps(product) + '</script></body></html>'
+        result = shopping.pesquisar(db(), 'owner', 'Notebook Lenovo 16 GB RAM até R$ 3000',
+            buscar_fn=lambda q: candidates, baixar_fn=download, teto_paginas=page_limit, usar_cache=False)
+>       assert result['produtos'], result['descoberta']
+E       AssertionError: {'decisoes': [], 'paginas_disponiveis': 4, 'paginas_consultadas': 4, 'ondas': 2, ...}
+E       assert []
+
+candidates = [{'titulo': 'Notebook Lenovo 16GB RAM 0', 'url': 'https://shop.example/item-0', 'trecho': '', 'origem': 'bing', ...}, ...titulo': 'Notebook Lenovo 16GB RAM 5', 'url': 'https://shop.example/item-5', 'trecho': '', 'origem': 'bing', ...}, ...]
+download   = <function test_shopping_second_wave_runs_until_offer_matches_budget.<locals>.download at 0x000002521B6F5FE0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B714640>
+page_limit = 2
+result     = {'produtos': [], 'alternativas': [], 'encontrados': [], 'fontes': [{'id': 'S1', 'titulo': 'Notebook Lenovo 16GB RAM 0'...xample/item-4'}, {'id': 'S6', 'titulo': 'Notebook Lenovo 16GB RAM 5', 'url': 'https://shop.example/item-5'}, ...], ...}
+valid_index = 2
+
+tests\test_search_coverage_v59.py:111: AssertionError
+_______ test_shopping_second_wave_runs_until_offer_matches_budget[10-6] _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B683AD0>
+valid_index = 10, page_limit = 6
+
+    @pytest.mark.parametrize('valid_index,page_limit', [(2, 2), (10, 6)])
+    def test_shopping_second_wave_runs_until_offer_matches_budget(monkeypatch, valid_index, page_limit):
+        monkeypatch.setattr(research, '_ips_globais', lambda host: None)
+        candidates = [hit(f'Notebook Lenovo 16GB RAM {i}', f'https://shop.example/item-{i}') for i in range(12)]
+        def download(url, **kwargs):
+            number = int(url.rsplit('-', 1)[-1])
+            price = '2500.00' if number == valid_index else '4500.00'
+            product = {'@context':'https://schema.org','@type':'Product','name':f'Notebook Lenovo 16GB RAM {number}',
+                'brand':{'@type':'Brand','name':'Lenovo'},'offers':{'@type':'Offer','price':price,'priceCurrency':'BRL',
+                    'url':url,'availability':'https://schema.org/InStock'}}
+            return url, '<html><head><title>Notebook Lenovo 16GB RAM</title></head><body><script type="application/ld+json">' + json.dumps(product) + '</script></body></html>'
+        result = shopping.pesquisar(db(), 'owner', 'Notebook Lenovo 16 GB RAM até R$ 3000',
+            buscar_fn=lambda q: candidates, baixar_fn=download, teto_paginas=page_limit, usar_cache=False)
+>       assert result['produtos'], result['descoberta']
+E       AssertionError: {'decisoes': [], 'paginas_disponiveis': 12, 'paginas_consultadas': 12, 'ondas': 2, ...}
+E       assert []
+
+candidates = [{'titulo': 'Notebook Lenovo 16GB RAM 0', 'url': 'https://shop.example/item-0', 'trecho': '', 'origem': 'bing', ...}, ...titulo': 'Notebook Lenovo 16GB RAM 5', 'url': 'https://shop.example/item-5', 'trecho': '', 'origem': 'bing', ...}, ...]
+download   = <function test_shopping_second_wave_runs_until_offer_matches_budget.<locals>.download at 0x000002521B6F5E80>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002521B683AD0>
+page_limit = 6
+result     = {'produtos': [], 'alternativas': [], 'encontrados': [], 'fontes': [{'id': 'S1', 'titulo': 'Notebook Lenovo 16GB RAM 0'...xample/item-4'}, {'id': 'S6', 'titulo': 'Notebook Lenovo 16GB RAM 5', 'url': 'https://shop.example/item-5'}, ...], ...}
+valid_index = 10
+
+tests\test_search_coverage_v59.py:111: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_search_coverage_v59.py::test_read_source_preserves_tables_sections_author_and_date
+FAILED tests/test_search_coverage_v59.py::test_shopping_second_wave_runs_until_offer_matches_budget[2-2]
+FAILED tests/test_search_coverage_v59.py::test_shopping_second_wave_runs_until_offer_matches_budget[10-6]
+3 failed in 1.15s

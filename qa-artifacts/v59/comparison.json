@@ -1,0 +1,212 @@
+{
+  "rows": [
+    {
+      "case": "lenovo",
+      "query": "Notebook Lenovo com 16 GB RAM até R$ 3.000.",
+      "seconds_before": 13.782,
+      "seconds_after": 14.625,
+      "useful_before": null,
+      "useful_after": null,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "no_confirmed_offers",
+      "source_urls_before": [],
+      "source_urls_after": [],
+      "requests_observed_after": 19,
+      "provider_calls_after": 8,
+      "pages_attempted_after": 6,
+      "failures_after": [
+        {
+          "url": "https://api.mercadolibre.com/sites/MLB/search?q=Notebook+Lenovo+16+GB+RAM+comprar+oferta&limit=10",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.casasbahia.com.br/c/informatica/notebook?filtro=categoria-c56_c57",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+          "error": "bloqueado"
+        }
+      ]
+    },
+    {
+      "case": "samsung",
+      "query": "Celular Samsung Galaxy A56 256 GB, menor preço.",
+      "seconds_before": 11.424,
+      "seconds_after": 13.742,
+      "useful_before": null,
+      "useful_after": null,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "no_confirmed_offers",
+      "source_urls_before": [],
+      "source_urls_after": [],
+      "requests_observed_after": 20,
+      "provider_calls_after": 10,
+      "pages_attempted_after": 6,
+      "failures_after": [
+        {
+          "url": "https://api.mercadolibre.com/sites/MLB/search?q=Celular+Samsung+Galaxy+A56+256+GB%2C+menor+comprar+oferta&limit=10",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.casasbahia.com.br/celular/b",
+          "error": "bloqueado"
+        }
+      ]
+    },
+    {
+      "case": "basketball",
+      "query": "Tênis de basquete até R$ 300.",
+      "seconds_before": 7.89,
+      "seconds_after": 10.946,
+      "useful_before": null,
+      "useful_after": null,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "no_confirmed_offers",
+      "source_urls_before": [],
+      "source_urls_after": [],
+      "requests_observed_after": 18,
+      "provider_calls_after": 8,
+      "pages_attempted_after": 6,
+      "failures_after": [
+        {
+          "url": "https://api.mercadolibre.com/sites/MLB/search?q=T%C3%AAnis+basquete+comprar+oferta&limit=10",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete/ofertas/emoferta",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.nike.com.br/nav/categorias/tenis/esportes/basquete",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.centauro.com.br/nav/categorias/calcados/esportes/basquete",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.magazineluiza.com.br/busca/tenis+basquete/",
+          "error": "bloqueado"
+        }
+      ]
+    },
+    {
+      "case": "transformer",
+      "query": "Como funciona a arquitetura Transformer? Fontes técnicas.",
+      "seconds_before": 5.594,
+      "seconds_after": 6.634,
+      "useful_before": 0,
+      "useful_after": 1,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "parcial",
+      "source_urls_before": [],
+      "source_urls_after": [
+        "https://arxiv.org/abs/1706.03762"
+      ],
+      "requests_observed_after": 11,
+      "provider_calls_after": 5,
+      "pages_attempted_after": 0,
+      "failures_after": []
+    },
+    {
+      "case": "frameworks",
+      "query": "Compare FastAPI e Django usando documentação.",
+      "seconds_before": 13.61,
+      "seconds_after": 5.538,
+      "useful_before": 3,
+      "useful_after": 2,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "ok",
+      "source_urls_before": [
+        "https://fastapi.tiangolo.com/",
+        "https://fastapi.tiangolo.com/pt/",
+        "https://hub.asimov.academy/blog/fastapi-o-que-e/"
+      ],
+      "source_urls_after": [
+        "https://fastapi.tiangolo.com/",
+        "https://docs.djangoproject.com/en/stable/"
+      ],
+      "requests_observed_after": 11,
+      "provider_calls_after": 5,
+      "pages_attempted_after": 0,
+      "failures_after": [
+        {
+          "url": "https://versus.com/br",
+          "error": "bloqueado"
+        }
+      ]
+    },
+    {
+      "case": "batteries",
+      "query": "Pesquise estudos científicos recentes sobre baterias de estado sólido.",
+      "seconds_before": 4.986,
+      "seconds_after": 5.443,
+      "useful_before": 0,
+      "useful_after": 0,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "sem_correspondencia",
+      "source_urls_before": [],
+      "source_urls_after": [],
+      "requests_observed_after": 12,
+      "provider_calls_after": 6,
+      "pages_attempted_after": 0,
+      "failures_after": []
+    },
+    {
+      "case": "asyncio",
+      "query": "Analise a documentação oficial do Python sobre asyncio.",
+      "seconds_before": 8.479,
+      "seconds_after": 6.126,
+      "useful_before": 0,
+      "useful_after": 1,
+      "confirmed_before": 0,
+      "confirmed_after": 0,
+      "state_after": "parcial",
+      "source_urls_before": [],
+      "source_urls_after": [
+        "https://docs.python.org/3/library/asyncio.html"
+      ],
+      "requests_observed_after": 11,
+      "provider_calls_after": 5,
+      "pages_attempted_after": 0,
+      "failures_after": []
+    }
+  ],
+  "method": "Same seven queries, one initial and final live snapshot. Relevance is a lexical/topic heuristic over actual read title/excerpts, not statistical confidence. Backend useful_after can use the full extracted text. Baseline did not instrument marketplace JSON or all discovery candidates, so raw HTTP-count deltas and shopping opened-source rates are not comparable.",
+  "total_seconds_before": 65.765,
+  "total_seconds_after": 63.054,
+  "research_seconds_before": 32.669,
+  "research_seconds_after": 23.741,
+  "frozen_benchmarks": {
+    "search": [
+      34,
+      34
+    ],
+    "shopping": [
+      59,
+      59
+    ],
+    "experience": [
+      16,
+      16
+    ]
+  },
+  "final_validation": {
+    "pytest_passed": 1018,
+    "pytest_skipped": 4,
+    "warnings": 2,
+    "seconds": 243.81,
+    "code_commits": [
+      "99560c9",
+      "35cdb28",
+      "8f268be"
+    ]
+  }
+}

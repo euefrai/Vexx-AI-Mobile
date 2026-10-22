@@ -1,0 +1,67 @@
+........................................................................ [  7%]
+........................................................................ [ 14%]
+.................s...................................................... [ 21%]
+........................................................................ [ 28%]
+........................................................................ [ 35%]
+........................................................................ [ 42%]
+........................................................................ [ 49%]
+........F.......................................................s....... [ 56%]
+........................................................................ [ 63%]
+........................................................................ [ 70%]
+.......................................s..........s..................... [ 77%]
+........................................................................ [ 84%]
+........................................................................ [ 91%]
+.........................F.............................................. [ 98%]
+.............                                                            [100%]
+================================== FAILURES ===================================
+__________________ test_http_403_e_429_bloqueado_sem_bypass ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000172ACD11860>
+
+    def test_http_403_e_429_bloqueado_sem_bypass(monkeypatch):
+        _sem_ssrf(monkeypatch)
+        for codigo in (403, 429):
+            _abrir_http(monkeypatch, erro=codigo)
+            with pytest.raises(sp.ErroProvedor) as ei:
+                sp.buscar("bing", "abs freio")
+>           assert ei.value.codigo == "bloqueado", codigo
+E           AssertionError: 429
+E           assert 'rate_limited' == 'bloqueado'
+E             
+E             - bloqueado
+E             + rate_limited
+
+tests\test_providers_v57.py:128: AssertionError
+_____________ test_fontes_relevantes_rejeitam_clima_para_notebook _____________
+
+    def test_fontes_relevantes_rejeitam_clima_para_notebook():
+        fontes = [
+            {"id": "clima", "titulo": "Clima em Marabá hoje",
+             "trecho": "Previsão do tempo e temperatura", "url": "https://clima.example/x"},
+            {"id": "invest", "titulo": "Investimentos agora",
+             "trecho": "Bolsa e dólar", "url": "https://invest.example/x"},
+            {"id": "note", "titulo": "Notebook bom e barato",
+             "trecho": "Ofertas de notebook até R$ 3.000", "url": "https://loja.example/n"},
+        ]
+        aceitas = research.fontes_relevantes("notebook até 3000", fontes)
+>       assert [f["id"] for f in aceitas] == ["note"]
+E       AssertionError: assert [] == ['note']
+E         
+E         Right contains one more item: 'note'
+E         Use -v to get more diff
+
+tests\test_trust_v573.py:274: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_providers_v57.py::test_http_403_e_429_bloqueado_sem_bypass
+FAILED tests/test_trust_v573.py::test_fontes_relevantes_rejeitam_clima_para_notebook
+2 failed, 1015 passed, 4 skipped, 2 warnings in 195.66s (0:03:15)
