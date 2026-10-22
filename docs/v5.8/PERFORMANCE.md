@@ -3,9 +3,11 @@
 ## Local measurements
 
 Command: `python tools/bench_v58.py`
-Raw: `qa-artifacts/v58/performance.json`.
 
-Environment: Windows, Python 3.14.4, process RSS 22.06 MB after imports.
+Raw closure: `qa-artifacts/v58/performance.txt`. Combined refresh:
+`qa-artifacts/v58/performance-combined-head.txt` and `performance.json`.
+
+Environment at closure: Windows, Python 3.14.4, process RSS 22.06 MB after imports.
 These are pure-module measurements, not network or browser-render latency.
 
 | Operation | Input | Mean | Peak Python allocations | Output |
@@ -14,6 +16,23 @@ These are pure-module measurements, not network or browser-render latency.
 | Export Markdown | 200 evidence, 50 hypotheses | **21.70 ms** | 0.48 MB | 64,486 B |
 | Export CSV | same | **33.81 ms** | 0.46 MB | 62,071 B |
 | Export JSON | same | **9.01 ms** | 0.43 MB | 112,699 B |
+
+## Combined-head refresh (22c0ce3)
+
+Rerun on 2026-10-21 with the same 24-step / 10-claim / 12-media / 8-hypothesis
+input:
+
+| Operation | Mean | Peak Python allocations | Output |
+|---|---:|---:|---:|
+| Build validated JDUI view | **4.742 ms** | 0.11 MB | 6 blocks |
+| Export Markdown | **15.081 ms** | 0.48 MB | 64,486 B |
+| Export CSV | **21.58 ms** | 0.46 MB | 62,071 B |
+| Export JSON | **5.33 ms** | 0.43 MB | 112,699 B |
+
+Process RSS after imports: **21.46 MB**. Heavy libraries imported: **none**.
+Raw: `qa-artifacts/v58/performance-combined-head.txt`. The canonical
+`performance.json` now contains this refresh; the closure values remain in
+`performance.txt` and in the table above.
 
 Limits measured by the code: export max **2,000,000 bytes**, max **200 items**,
 JDUI view **6 blocks** (validator ceiling is 8; the view intentionally stays at

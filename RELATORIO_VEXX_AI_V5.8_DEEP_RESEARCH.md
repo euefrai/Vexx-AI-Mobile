@@ -9,6 +9,15 @@
 
 ---
 
+> **Atualização pós-fechamento (2026-10-21):** o HEAD combinado recebeu trabalho
+> concorrente de provedores/modelos/UI e a correção de uma corrida de sessão no
+> login (commit `22c0ce3`). A suíte completa desse HEAD passou com **966 passed,
+> 4 skipped, 2 warnings**; o Chrome E2E passou em três execuções finais. Isso não
+> altera a classificação local **READY_WITH_LIMITATIONS** nem autoriza push/deploy.
+> Detalhes: `docs/v5.8/COMBINED_HEAD_2026-10-21.md`.
+
+---
+
 ## 1. Resumo executivo
 
 A V5.8 foi implementada como uma extensão da arquitetura existente, não como
@@ -371,13 +380,16 @@ exports, auth e isolamento entre donos.
 |---|---|
 | Baseline pré-V5.8 | 929 passed, 4 skipped, 2 warnings, 227,42 s |
 | Alvo pesquisa/JDUI/servidor | 156 passed, 1 skipped |
-| Suíte completa local | **954 passed, 4 skipped, 2 warnings, 211,39 s (HEAD final)** |
+| Suíte completa local | **954 passed, 4 skipped, 2 warnings, 211,39 s (`4b9aca6`)** |
+| Suíte completa, HEAD combinado pós-V5.8 | **966 passed, 4 skipped, 2 warnings, 140,48 s (`22c0ce3`)** |
 | Benchmark congelado de qualidade | **38 passed, 1 skipped** |
 | Benchmark congelado de pesquisa | **34/34**, taxa 1.0 |
 | Segurança/isolamento | **33 passed** |
+| Segurança/isolamento, HEAD combinado | **42 passed** |
 | Contratos V5.8 | **13 passed** |
 | Node syntax | `node --check public/jdui.js` e `public/app.js` OK |
-| Chrome E2E | **ok: true** |
+| Chrome E2E | **ok: true** (fechamento) |
+| Chrome E2E, 3 execuções finais | **3/3 ok** (`22c0ce3`) |
 
 O delta 929→954 inclui os testes V5.8 **e** o snapshot de auditoria; não é
 atribuído integralmente à V5.8. Os 4 skips não são contados como passes.
@@ -506,9 +518,14 @@ Nada disso está declarado como feito.
 | `17014d1` | documentação V5.8, matriz e este relatório |
 | `4806454` | polimento do rótulo de status e título de erro do workspace |
 | `c65a1c1` | atualização da evidência Chrome após o polimento |
+| `ff84de4` | fechamento do mapa de commits |
+| `4b9aca6` | normalização UTF-8 da evidência de QA |
+| trabalho concorrente | provedores/modelos/UI fora do escopo V5.8; `origin/main` passou a `52a4bc4` |
+| `22c0ce3` | correção da corrida de sessão no login + evidência do HEAD combinado |
 
-Nenhum commit foi enviado ao origin. O push/deploy depende de autorização
-posterior.
+Nenhum commit da V5.8 foi enviado ao origin. O `origin/main` local passou a
+`52a4bc4` por trabalho concorrente; `4b9aca6` não é ancestral desse ref. O
+push/deploy continua dependendo de autorização posterior.
 
 ---
 
@@ -529,7 +546,8 @@ posterior.
 - `docs/v5.8/SECURITY.md` — segurança;
 - `docs/v5.8/LIMITATIONS.md` — limitações;
 - `docs/v5.8/PENDING.md` — pendências;
-- `docs/v5.8/COMMITS.md` — commits.
+- `docs/v5.8/COMMITS.md` — commits;
+- `docs/v5.8/COMBINED_HEAD_2026-10-21.md` — integração, corrida de login e QA do HEAD combinado.
 
 ### Código principal
 
@@ -565,3 +583,26 @@ prontidão para produção: não houve push/deploy, E2E externo completo, infer�
 real, análise multimodal, dispositivo físico ou validação Render. O próximo
 passo correto é revisar os commits locais e, somente com autorização explícita,
 executar a validação publicada.
+
+---
+
+## 18. Addendum pós-fechamento (2026-10-21)
+
+O Chrome E2E do HEAD combinado encontrou uma corrida real de inicialização: um
+`GET /api/session` inicial respondia 401 depois de um `POST /api/login` já ter
+sido aceito, reabrindo o overlay de login. A correção (`22c0ce3`) usa época de
+autenticação e estado de login/cadastro em andamento para ignorar respostas
+obsoletas, sem alterar as rotas, o RBAC ou o isolamento. O teste de regressão é
+comportamental e cobre 401 atrasado, sonda iniciada durante o login, 200 antigo e
+o caso-controle sem login concorrente.
+
+O HEAD combinado passou com 966 testes, 4 skips e 2 avisos; benchmarks
+congelados 38+1 e 34/34; segurança/isolamento 42; três execuções Chrome finais
+ok, com export real de 1.839 bytes. A performance medida foi 4,742 ms para a
+visão JDUI, 5,33-21,58 ms para exports e RSS de 21,46 MB, sem bibliotecas
+pesadas. A produção não foi atualizada: o PID `24356` não foi iniciado, parado ou
+reiniciado por este trabalho e, na conferência final, não estava em execução.
+
+A classificação final permanece **READY_WITH_LIMITATIONS**, local. E2E externo,
+inferência real, mídia analisada, OCR/PDF, dispositivo físico, reload durante
+streaming e validação Render continuam não comprovados.

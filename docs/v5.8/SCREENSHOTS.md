@@ -8,14 +8,19 @@ Chrome: `155.0.8059.85`; desktop 1280×900; mobile emulated 390×844.
 
 | File | What it proves | SHA-256 prefix |
 |---|---|---|
-| `research-workspace-desktop.png` | “Pesquisas” page, saved job list, real objective | `F418ED8AD02285B1` |
+| `research-workspace-desktop.png` | “Pesquisas” page, saved job list, real objective | `DBEBC1955EABC8A5` |
 | `research-workspace-desktop-detail.png` | plan component, progress, status/mode, budget, epistemic limit, exports | `2ED4A409F664C0BA` |
 | `research-workspace-desktop-evidence.png` | claim state `SUSTENTADA`, source counts, opened source details, used excerpt | `3E8A35B9CEED1974` |
 | `research-workspace-desktop-evidence-media.png` | media gallery with “não é evidência”, metadata fallback, export file cards | `F5A4649256BB023E` |
 | `research-workspace-mobile.png` | 390×844 emulated layout, no horizontal overflow, tappable buttons | `95204F46B483BD8C` |
 
+The `research-workspace-desktop.png` hash was refreshed after the final
+combined-head run (`22c0ce3`). Three consecutive Chrome runs passed; see
+`chrome-e2e-stability.txt`.
+
 Files are in `qa-artifacts/v58/`. JSON/text evidence:
-`qa-artifacts/v58/chrome-e2e.json` and `chrome-e2e.txt`.
+`qa-artifacts/v58/chrome-e2e.json`, `chrome-e2e.txt` and
+`chrome-e2e-stability.txt`.
 
 ## Honest interpretation
 

@@ -55,11 +55,14 @@ These limitations are part of the result, not footnotes to hide.
 18. Reload during a live model stream was not re-run in Chrome. SSE replay and
     idempotence are covered by tests; the browser-level case remains partial.
 19. No production/Render validation was performed. PID `24356` and production
-    data were untouched.
+    data were untouched. At the final combined-head check the PID was not
+    running; that is an observed external state, not a restart or deploy.
 20. 4 tests are skipped; they are not counted as passes. The semantic/LLM
     benchmark is intentionally blocked.
-21. The local suite includes a concurrent audit snapshot; the 929→954 delta is
-    not exclusively V5.8.
+21. The local suite includes a concurrent audit snapshot and later
+    provider/model/UI work; the 929→954 and 954→966 deltas are not
+    exclusively V5.8. The combined-head auth fix is separate from the research
+    capability claim.
 22. Performance measurements are for pure Python modules on Windows; they are
     not production concurrency or browser-render numbers.
 

@@ -6,29 +6,34 @@
 |---|---|---|
 | Pre-V5.8 baseline | `python -m pytest -q` (2026-10-20) | **929 passed, 4 skipped, 2 warnings in 227.42 s** |
 | Focused research/JDUI/server | `pytest tests/test_v58... tests/test_research... tests/test_jdui... -q` | **156 passed, 1 skipped** |
-| Full local suite after V5.8 + audit snapshot | `python -m pytest -q` | **954 passed, 4 skipped, 2 warnings in 211.39 s** (final HEAD; an earlier run took 172.87 s with the same counts) |
-| Frozen quality benchmarks | `pytest tests/test_research_quality_lab.py tests/test_bench_pesquisa_v57.py tests/test_evidence_benchmarks.py -q` | **38 passed, 1 skipped** |
-| Frozen search benchmark | `python tools/bench_pesquisa_v57.py --sem-salvar` | **34/34, taxa 1.0** |
-| Security/ownership subset | `test_isolamento`, `test_auth`, `test_exports`, SSRF, V5.8 route/URL tests | **33 passed** |
+| Full local suite, V5.8 closure | `python -m pytest -q` | **954 passed, 4 skipped, 2 warnings in 211.39 s** (`4b9aca6`; an earlier run took 172.87 s with the same counts) |
+| Full local suite, combined HEAD | `python -m pytest -q` | **966 passed, 4 skipped, 2 warnings in 140.48 s** (`22c0ce3`, after concurrent work + auth guard) |
+| Focused combined suite | `test_v58`, `test_jdui`, `test_frontend_smoke`, research, audit, provider, small improvements | **105 passed in 22.86 s** |
+| Frozen quality benchmarks | `pytest tests/test_research_quality_lab.py tests/test_bench_pesquisa_v57.py tests/test_evidence_benchmarks.py -q` | **38 passed, 1 skipped in 11.97 s** (combined HEAD) |
+| Frozen search benchmark | `python tools/bench_pesquisa_v57.py --sem-salvar` | **34/34, rate 1.0** (combined HEAD) |
+| Security/ownership subset | `test_isolamento`, `test_auth`, `test_exports`, V5.8 route/URL tests | **42 passed** combined HEAD; **33 passed** at closure |
 | New V5.8 contracts | `tests/test_v58_deep_research.py` | **13 passed** |
-| Node syntax | `node --check public/jdui.js` / `public/app.js` | pass |
-| Real Chrome E2E | `python tools/chrome_e2e_v58.py` | **ok: true** |
+| Node syntax | `node --check public/jdui.js` / `public/app.js` / `public/sw.js` | pass |
+| Real Chrome E2E | `python tools/chrome_e2e_v58.py` | **ok: true**, 3/3 final-code runs |
 | Performance | `python tools/bench_v58.py` | see `performance.json` |
 
 Raw outputs:
 
-- `qa-artifacts/v58/full-suite-final.txt` (final HEAD)
-- `qa-artifacts/v58/full-suite.txt`
-- `qa-artifacts/v58/frozen-benchmarks.txt`
-- `qa-artifacts/v58/bench-pesquisa-frozen.txt`
-- `qa-artifacts/v58/security.txt`
-- `qa-artifacts/v58/chrome-e2e.json` / `.txt` / console
-- `qa-artifacts/v58/performance.json` / `.txt`
+- `qa-artifacts/v58/full-suite-final.txt` (V5.8 closure)
+- `qa-artifacts/v58/full-suite-combined-head.txt` (combined HEAD)
+- `qa-artifacts/v58/combined-head-focused.txt`
+- `qa-artifacts/v58/frozen-benchmarks.txt` / `frozen-benchmarks-combined-head.txt`
+- `qa-artifacts/v58/bench-pesquisa-frozen.txt` / `bench-pesquisa-frozen-combined-head.txt`
+- `qa-artifacts/v58/security.txt` / `security-combined-head.txt`
+- `qa-artifacts/v58/chrome-e2e.json` / `.txt` / `chrome-e2e-stability.txt`
+- `qa-artifacts/v58/chrome-e2e-final-run1.txt` / `run2.txt` / `run3.txt`
+- `qa-artifacts/v58/performance.json` / `performance-combined-head.txt`
 - `qa-artifacts/v573/baseline-v58.txt` (pre-V5.8 baseline)
 
 The full-suite delta from 929 to 954 includes the new V5.8 tests **and** the
-concurrent audit test file preserved in commit `52e3195`. It is not a claim that
-all 25 new passes are V5.8 behavior.
+concurrent audit test file preserved in commit `52e3195`. The combined-head
+count of 966 also includes concurrent provider/model/UI tests and the auth race
+regression. It is not a claim that all new passes are V5.8 behavior.
 
 ## What the V5.8 tests cover
 
@@ -45,7 +50,9 @@ all 25 new passes are V5.8 behavior.
 - relay view/export routes with authenticated owner and real bytes;
 - frontend JDUI parity for the four new components (Node harness);
 - Chrome desktop/mobile workspace, component count, evidence/media rendering,
-  overflow, button height and export fetch.
+  overflow, button height and export fetch;
+- auth startup race: late 401/200 session probes cannot override a newer login
+  or registration (`test_login_nao_e_derrubado_por_sessao_atrasada`).
 
 ## Evidence kinds (kept separate)
 
@@ -85,4 +92,6 @@ bytes, mobile width 390, no overflow, no uncaught exceptions.
 - The mobile viewport is Chrome emulation, not a physical device.
 - No test was altered to inflate a result; the 4 skips are unchanged and are
   not counted as passes.
-- Production PID `24356` was not touched.
+- Production PID `24356` was not started, stopped or restarted by this work. At
+  the final combined-head check it was not running; that external state is not a
+  deploy or a production validation.
