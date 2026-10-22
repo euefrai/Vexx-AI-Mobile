@@ -1,0 +1,36 @@
+........................................................F............... [ 66%]
+....................................                                     [100%]
+================================== FAILURES ===================================
+______________ test_critico_8_falhas_provedores_estados_honestos ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019D32113770>
+
+    def test_critico_8_falhas_provedores_estados_honestos(monkeypatch):
+        db = _db()
+    
+        def _ddg(q, base=research.DDG_HTML, max_resultados=6, timeout=8.0):
+            if base == research.DDG_HTML:
+                raise research.ResearchErro("Provedor bloqueou (429).",
+                                            "bloqueado")
+            raise TimeoutError("tempo esgotado")
+    
+        def _web(q, max_resultados=6, timeout=8.0, orcamento=None):
+            raise ValueError("erro interno de programação")
+    
+        monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+        monkeypatch.setattr(research, "buscar_ddg", _ddg)
+        monkeypatch.setattr(research, "_buscar_orquestrado", _web)
+    
+        achados, etapas = shopping.buscar_com_fallback("notebook")
+        assert achados == []
+        assert etapas[0] == "mlb: falhou (ResearchErro)"
+        assert any(e.startswith("ddg: falhou (ResearchErro)") for e in etapas)
+>       assert any(e.startswith("ddg-lite: falhou (TimeoutError)")
+                   for e in etapas)
+E       assert False
+E        +  where False = any(<generator object test_critico_8_falhas_provedores_estados_honestos.<locals>.<genexpr> at 0x0000019D3367F140>)
+
+tests\test_shopping_discovery_v571.py:342: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_shopping_discovery_v571.py::test_critico_8_falhas_provedores_estados_honestos
+1 failed, 107 passed in 16.75s

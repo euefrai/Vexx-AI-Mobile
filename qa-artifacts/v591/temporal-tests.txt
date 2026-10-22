@@ -1,0 +1,54 @@
+F....................................................................... [ 74%]
+.........................                                                [100%]
+================================== FAILURES ===================================
+_______________ test_fallback_is_sorted_even_with_fts_installed _______________
+
+    def test_fallback_is_sorted_even_with_fts_installed():
+        db = sqlite3.connect(':memory:')
+        docs_agent.criar_tabelas(db)
+        for name, content in [('weak.txt', 'banana'), ('strong.txt', 'banana tropical fruit')]:
+>           docs_agent.salvar_documento(db, name, content.encode(), 'test', owner='qa')
+
+tests\test_retrieval_recovery_v591.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+docs_agent.py:568: in salvar_documento
+    texto_completo = extrair_texto(ext, bytes(raw), base)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+ext = '.txt', raw = b'banana', nome = 'weak.txt'
+
+    def extrair_texto(ext: str, raw: bytes, nome: str) -> str:
+        if ext == ".pdf":
+            texto = _extrair_pdf(raw)
+        elif ext == ".docx":
+            texto = _extrair_docx(raw)
+        elif ext in (".xlsx",):
+            texto = _extrair_xlsx(raw, nome)
+        elif ext == ".xls":
+            raise DocErro("Converta .xls para .xlsx ou .csv e envie de novo.", "formato_antigo")
+        elif ext in (".csv", ".tsv"):
+            texto = _extrair_csv(raw, "\t" if ext == ".tsv" else ",")
+        elif ext in (".html", ".htm"):
+            texto = _extrair_html(raw)
+        elif ext == ".json":
+            texto = _extrair_json(raw)
+        elif ext in (".txt", ".md", ".markdown"):
+            texto = _decode(raw).strip()
+            if not texto:
+                raise DocErro("Arquivo de texto vazio.", "vazio")
+        elif ext in (".pptx", ".ppt", ".odt", ".ods", ".epub"):
+            raise DocErro(f"{ext} ainda não é lido. Converta para PDF e envie de novo.", "nao_suportado")
+        else:
+            raise DocErro(f"Tipo {ext or '?'} não suportado. Envie PDF, DOCX, TXT, CSV, XLSX, HTML ou JSON.",
+                          "nao_suportado")
+        texto = re.sub(r"[ \t]+", " ", texto)
+        texto = re.sub(r"\n{3,}", "\n\n", texto).strip()
+        if len(texto) < 10:
+>           raise DocErro("Não encontrei texto legível neste arquivo.", "vazio")
+E           docs_agent.DocErro: Não encontrei texto legível neste arquivo.
+
+docs_agent.py:451: DocErro
+=========================== short test summary info ===========================
+FAILED tests/test_retrieval_recovery_v591.py::test_fallback_is_sorted_even_with_fts_installed
+1 failed, 96 passed in 26.99s

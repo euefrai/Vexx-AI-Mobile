@@ -1,0 +1,16 @@
+..............................................s..........s.............. [ 58%]
+C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\_pytest\unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored while finalizing file <http.client.HTTPResponse object at 0x000001893EE0C970>: None
+
+Traceback (most recent call last):
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 437, in close
+    super().close() # set "closed" flag
+    ~~~~~~~~~~~~~^^
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 450, in flush
+    self.fp.flush()
+    ~~~~~~~~~~~~~^^
+ValueError: I/O operation on closed file.
+
+
+  warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))
+...................................................                      [100%]
+121 passed, 2 skipped in 40.76s

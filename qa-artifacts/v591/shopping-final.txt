@@ -1,0 +1,157 @@
+..............................................s..........s.............. [ 64%]
+..............................FFFF.....                                  [100%]
+================================== FAILURES ===================================
+______________ test_critico_1_ddglite_so_lixo_continua_para_web _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024CC4A729C0>
+
+    def test_critico_1_ddglite_so_lixo_continua_para_web(monkeypatch):
+        monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+        monkeypatch.setattr(research, "buscar_ddg",
+                            _ddg_por_base([], DDGLITE_LIXO))
+        chamadas = []
+    
+        def _orch(q, max_resultados=6, timeout=8.0, orcamento=None):
+            chamadas.append(q)
+            return ([dict(x) for x in WEB_COMERCIAL],
+                    {"estado": "ok", "provedores": {"usados": {"bing": 5}},
+                     "etapas": []})
+    
+        monkeypatch.setattr(research, "_buscar_orquestrado", _orch)
+    
+        achados, etapas = shopping.buscar_com_fallback(
+            "notebook comprar oferta")
+    
+        assert chamadas, "cadeia deveria CONTINUAR até o provedor web"
+        urls = [a["url"] for a in achados]
+        # Candidatos comerciais na frente (potencial de validação).
+        assert urls[:4] == [
+            "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15",
+            "https://www.lojax.com.br/produto/notebook-lenovo-ideapad-1i",
+            "https://www.kabum.com.br/computadores/notebooks",
+            "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+        ]
+        # Anúncio nunca é baixado nem vira candidato/referência.
+        assert not any("y.js" in u for u in urls)
+        # Mesclagem deduplica o mesmo recurso (tecnoblog veio nas duas etapas).
+        assert urls.count(
+            "https://tecnoblog.net/guias/notebook-para-estudar-e-trabalhar/") == 1
+        # Etapas registram a decisão real (lixo classificado, continuação).
+>       assert any(e.startswith("ddg-lite:") and "0 comerciais" in e
+                   for e in etapas)
+E       assert False
+E        +  where False = any(<generator object test_critico_1_ddglite_so_lixo_continua_para_web.<locals>.<genexpr> at 0x0000024CC3584820>)
+
+tests\test_shopping_discovery_v571.py:168: AssertionError
+___________ test_critico_2_ddglite_comercial_mantem_caminho_rapido ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024CC4A727A0>
+
+    def test_critico_2_ddglite_comercial_mantem_caminho_rapido(monkeypatch):
+        monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+        quatro = [{"titulo": f"Notebook Bom {i}", "trecho": "",
+                   "url": f"https://lojaboa.com.br/produto/notebook-bom-{i}"}
+                  for i in range(1, 5)]
+        monkeypatch.setattr(research, "buscar_ddg", _ddg_por_base([], quatro))
+        monkeypatch.setattr(shopping, "buscar_web_v55", _nunca)
+    
+>       achados, etapas = shopping.buscar_com_fallback("notebook")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_shopping_discovery_v571.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+shopping.py:1671: in buscar_com_fallback
+    achados, wetapas = buscar_web_v55(consulta)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+a = ('notebook',), kw = {}
+
+    def _nunca(*a, **kw):
+>       raise AssertionError("etapa não deveria rodar nesta condição")
+E       AssertionError: etapa não deveria rodar nesta condição
+
+tests\test_shopping_discovery_v571.py:57: AssertionError
+__________________ test_critico_3_mistura_preserva_produtos ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024CC4C9CD50>
+
+    def test_critico_3_mistura_preserva_produtos(monkeypatch):
+        monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+        p1 = {"titulo": "Fone Bluetooth JBL Tune 510BT — KaBuM!", "trecho": "",
+              "url": "https://www.kabum.com.br/produto/123456/"
+                     "fone-jbl-tune-510bt"}
+        p2 = {"titulo": "Fone de Ouvido Bluetooth Sony — Loja X", "trecho": "",
+              "url": "https://www.lojax.com.br/produto/fone-sony-wf-c500"}
+        blogs = DDGLITE_LIXO[2:]  # 4 blogs/agregadores congelados
+        monkeypatch.setattr(research, "buscar_ddg",
+                            _ddg_por_base([], [p1, p2] + blogs))
+        monkeypatch.setattr(shopping, "buscar_web_v55", _nunca)
+    
+>       achados, etapas = shopping.buscar_com_fallback("fone bluetooth")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_shopping_discovery_v571.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+shopping.py:1671: in buscar_com_fallback
+    achados, wetapas = buscar_web_v55(consulta)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+a = ('fone bluetooth',), kw = {}
+
+    def _nunca(*a, **kw):
+>       raise AssertionError("etapa não deveria rodar nesta condição")
+E       AssertionError: etapa não deveria rodar nesta condição
+
+tests\test_shopping_discovery_v571.py:57: AssertionError
+______________ test_critico_4_todos_editoriais_zero_confirmadas _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024CC4C9D250>
+
+    def test_critico_4_todos_editoriais_zero_confirmadas(monkeypatch):
+        db = _db()
+        monkeypatch.setattr(shopping, "buscar_mlb", _mlb_falha)
+        monkeypatch.setattr(research, "buscar_ddg", _ddg_por_base([], DDGLITE_LIXO))
+        editoriais = [
+            {"titulo": "Os melhores notebooks de 2026", "trecho": "",
+             "origem": "bing",
+             "url": "https://olhardigital.com.br/2026/10/17/reviews/"
+                    "melhores-notebooks-para-trabalhar/"},
+            {"titulo": "Melhor notebook", "trecho": "", "origem": "bing",
+             "url": "https://dicio.com.br/melhor"},
+            {"titulo": "notebook — Busca", "trecho": "", "origem": "bing",
+             "url": "https://www.google.com/search?q=notebook"},
+        ]
+        monkeypatch.setattr(research, "_buscar_orquestrado",
+                            _web(editoriais))
+    
+        fases = []
+        res = shopping.pesquisar(
+            db, "ana", "me mostre um notebook", "c4",
+            baixar_fn=lambda url: {"final": url,
+                                   "texto": "<html><head><title>Guia</title>"
+                                            "</head><body><p>artigo</p></body>"
+                                            "</html>"},
+            progresso=lambda fase, detalhe="": fases.append(fase))
+    
+        assert res["produtos"] == [] and res["alternativas"] == []
+        # O web foi realmente consultado (continuação registrada nas etapas).
+        assert any("web:" in e for e in res["etapas_provedores"])
+        dec = res.get("descoberta") or {}
+        motivos = {d.get("motivo") for d in dec.get("decisoes", [])}
+        assert "irrelevant_results" in motivos
+        assert dec.get("motivo_final") == "no_confirmed_offers"
+        # 1ª onda não rendeu nada → 2ª onda real (recuperação) foi disparada.
+>       assert dec.get("ondas") == 2 and "recuperando" in fases
+E       AssertionError: assert (1 == 2)
+E        +  where 1 = <built-in method get of dict object at 0x0000024CC4B15440>('ondas')
+E        +    where <built-in method get of dict object at 0x0000024CC4B15440> = {'decisoes': [{'provedor': 'mlb', 'resultados': 0, 'comerciais': 0, 'rejeitados': 0, ...}, {'provedor': 'ddg+ddg-lite'...agnosticos': ['SEARCH_IRRELEVANT', 'STRUCTURED_DATA_MISSING'], 'paginas_disponiveis': 3, 'paginas_consultadas': 3, ...}.get
+
+tests\test_shopping_discovery_v571.py:248: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_shopping_discovery_v571.py::test_critico_1_ddglite_so_lixo_continua_para_web
+FAILED tests/test_shopping_discovery_v571.py::test_critico_2_ddglite_comercial_mantem_caminho_rapido
+FAILED tests/test_shopping_discovery_v571.py::test_critico_3_mistura_preserva_produtos
+FAILED tests/test_shopping_discovery_v571.py::test_critico_4_todos_editoriais_zero_confirmadas
+4 failed, 105 passed, 2 skipped in 27.37s

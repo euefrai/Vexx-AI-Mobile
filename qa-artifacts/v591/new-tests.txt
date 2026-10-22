@@ -1,0 +1,46 @@
+....F...F..                                                              [100%]
+================================== FAILURES ===================================
+______ test_item_beyond_first_budget_is_validated_and_delivered_to_jdui _______
+
+    def test_item_beyond_first_budget_is_validated_and_delivered_to_jdui():
+        db = sqlite3.connect(':memory:')
+        shopping.criar_tabelas(db)
+        categories = [{'titulo': 'Notebooks', 'url': f'https://shop.test/categoria/notebook-{i}'} for i in range(9)]
+        target = 'https://shop.test/produto/notebook-lenovo-16gb'
+        fetched = []
+        def download(url):
+            fetched.append(url)
+            return {'final': url, 'texto': _page() if url == target else '<html>Categoria</html>'}
+>       result = shopping.pesquisar(db, 'qa', 'Notebook Lenovo com 16 GB RAM até R$ 3.000.',
+            buscar_fn=lambda q: categories + [{'titulo': 'Notebook Lenovo 16GB RAM', 'url': target}],
+            baixar_fn=download, verificar_imgs=False, teto_paginas=1, usar_cache=False)
+E       TypeError: pesquisar() got an unexpected keyword argument 'verificar_imgs'
+
+tests\test_retrieval_recovery_v591.py:87: TypeError
+___ test_scientific_adapter_uses_existing_normalizer_and_safe_bounded_fetch ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023A42005940>
+
+    def test_scientific_adapter_uses_existing_normalizer_and_safe_bounded_fetch(monkeypatch):
+        seen = []
+        monkeypatch.setattr(research, '_circuito', {})
+        def fetch(url, timeout):
+            seen.append((url, timeout))
+            return {'message': {'items': [{'DOI': '10.1234/fixture', 'title': ['Solid-state batteries research'],
+                'URL': 'https://publisher.test/paper', 'type': 'journal-article',
+                'published-online': {'date-parts': [[2025, 2, 3]]},
+                'author': [{'given': 'Ana', 'family': 'Silva'}],
+                'abstract': '<jats:p>Solid-state batteries with solid electrolytes. A fictional abstract used only for pipeline verification and limitations.</jats:p>'}]}}
+        monkeypatch.setattr(providers, '_json', fetch)
+        result = providers.buscar_crossref('Estudos científicos recentes sobre baterias de estado sólido', timeout=1.25)
+        source = result[0]
+        assert 'solid-state+batteries' in seen[0][0] and 'from-pub-date' in seen[0][0]
+        assert seen[0][1] == 1.25
+>       assert source['review_status'] == 'unknown'
+E       AssertionError: assert None == 'unknown'
+
+tests\test_retrieval_recovery_v591.py:142: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_retrieval_recovery_v591.py::test_item_beyond_first_budget_is_validated_and_delivered_to_jdui
+FAILED tests/test_retrieval_recovery_v591.py::test_scientific_adapter_uses_existing_normalizer_and_safe_bounded_fetch
+2 failed, 9 passed in 0.47s
