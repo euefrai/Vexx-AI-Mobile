@@ -1,0 +1,38 @@
+..............F............F............................................ [ 78%]
+....................                                                     [100%]
+================================== FAILURES ===================================
+___________ test_open_text_must_match_identity_and_sufficient_text ____________
+
+    def test_open_text_must_match_identity_and_sufficient_text():
+        p=paper();calls=[]
+        def fetch(record,timeout):
+            calls.append((record['url'],timeout))
+            return {'texto':p['title']+' Methods and results. '*100,'lida':True,'final':record['url']}
+        r=ar.read_open_text(p,1.5,fetch)
+>       assert r['full_text_fetched'] and r['content_scope']=='document_text' and calls==[(p['pdf_url'],1.5)]
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'full_text_fetched'
+
+tests\test_precision_v593.py:111: KeyError
+_______________ test_fonte_com_origem_declarada_chega_ao_fence ________________
+
+    def test_fonte_com_origem_declarada_chega_ao_fence():
+        db = _db()
+        job = ra.criar_job(db, "u-x", "nota republicada")
+        f = {"id": "S1", "url": "https://agregador.example/n1", "titulo": "Nota",
+             "dominio": "agregador.example", "acessado_em": "2026-10-18",
+             "origem_declarada": "original.example"}
+        ra.registrar_evidencia(db, job, f, "trecho lido da página")
+        fence = pc_agent.fence_de_fontes(db, "u-x")
+        corpo = json.loads(fence.split("```jdui", 1)[1].rsplit("```", 1)[0])
+        item = corpo["blocks"][0]["props"]["items"][0]
+>       assert item["origem_declarada"] == "original.example"
+E       AssertionError: assert '' == 'original.example'
+E         
+E         - original.example
+
+tests\test_jdui_fontes_v57.py:62: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_precision_v593.py::test_open_text_must_match_identity_and_sufficient_text
+FAILED tests/test_jdui_fontes_v57.py::test_fonte_com_origem_declarada_chega_ao_fence
+2 failed, 90 passed in 10.18s

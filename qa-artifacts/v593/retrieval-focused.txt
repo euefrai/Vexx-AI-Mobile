@@ -1,0 +1,76 @@
+.......................F.......s........................................ [ 65%]
+.F.....F..............................                                   [100%]
+================================== FAILURES ===================================
+________________________ test_factual_simples_metricas ________________________
+
+    def test_factual_simples_metricas():
+        db, job, r, m = _roda()
+        assert r["status"] == "concluida"
+>       assert m["evidencias"] >= 1 and m["fontes_independentes"] >= 1
+E       assert (0 >= 1)
+
+tests\test_research_quality.py:48: AssertionError
+____ test_optional_orchestrator_dispatch_never_fetches_academic_full_text _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000170EB42FBD0>
+
+    def test_optional_orchestrator_dispatch_never_fetches_academic_full_text(monkeypatch):
+        payload = {"results": [_openalex_item()]}
+        fake_gate = FakeGate()
+        provider = ar.OpenAlexWorksProvider(
+            open_url=lambda request, timeout: FakeResponse(payload), gate=fake_gate)
+        academic_provider = ar.AcademicResearchProvider
+        monkeypatch.setattr(
+            ra.academic_research, "AcademicResearchProvider",
+            lambda mailto="": academic_provider(
+                mailto, openalex=provider, crossref=FakeProvider("crossref", [])))
+        monkeypatch.setenv("JULIA_ACADEMIC_RESEARCH", "1")
+        monkeypatch.setenv("JULIA_RESEARCH_MAILTO", "research@example.org")
+    
+        providers = ra.provedores_reais()
+        assert [p.nome for p in providers] == ["ddg", "searxng", "wikipedia", "academic"]
+        db = pc_agent.open_db(Path(":memory:"))
+        try:
+            job = ra.criar_job(db, "researcher", "artigos científicos sobre fotossíntese",
+                               manual="rapida")
+    
+            def must_not_fetch(_url):
+                raise AssertionError("academic abstracts must never fetch article full text")
+    
+            result = ra.executar(db, job["id"], "researcher", providers, must_not_fetch)
+            assert result["status"] == "concluida", result
+            evidence = ra.listar_evidencias(db, "researcher", job["id"])
+>           assert evidence and evidence[0]["doi"] == "10.1234/ABC.1"
+E           assert ([])
+
+tests\test_academic_research.py:308: AssertionError
+________ test_adaptive_pipeline_synthesis_contains_new_round_evidence _________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-193/test_adaptive_pipeline_synthes0')
+
+    def test_adaptive_pipeline_synthesis_contains_new_round_evidence(tmp_path):
+        db, job = _job(tmp_path, 'Bateria ZX capacidade nominal')
+        job['orcamento'].update(buscas=4, paginas=4, subs=1, replans=1)
+        ra.salvar_job(db, job)
+        class Provider:
+            nome = 'fixture'
+            def buscar(self, query, limite=6):
+                return [{'titulo': 'Bateria ZX', 'url': 'https://example.com/primary',
+                         'trecho': 'Bateria ZX capacidade nominal de 500 ciclos.'}] if 'fontes primárias' in query else []
+        out = ra.executar(db, job['id'], 'qa', [Provider()],
+            recuperar_fn=lambda u: {'titulo': 'Bateria ZX', 'texto': 'Bateria ZX capacidade nominal de 500 ciclos.', 'final': u})
+        current = ra.carregar_job(db, 'qa', job['id'])
+        assert current['usados']['replans'] == 1
+>       assert '500 ciclos' in out.get('sintese', {}).get('texto', '')
+E       AssertionError: assert '500 ciclos' in 'Investigação: Bateria ZX capacidade nominal\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável i...ada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.'
+E        +  where 'Investigação: Bateria ZX capacidade nominal\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável i...ada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.' = <built-in method get of dict object at 0x00000170EB19E200>('texto', '')
+E        +    where <built-in method get of dict object at 0x00000170EB19E200> = {'texto': 'Investigação: Bateria ZX capacidade nominal\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação ver... extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.', 'llm': False}.get
+E        +      where {'texto': 'Investigação: Bateria ZX capacidade nominal\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação ver... extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.', 'llm': False} = <built-in method get of dict object at 0x00000170EB19D780>('sintese', {})
+E        +        where <built-in method get of dict object at 0x00000170EB19D780> = {'id': 'rj-cb9bc8687093', 'status': 'concluida', 'modo': 'profunda', 'objetivo': 'Bateria ZX capacidade nominal', ...}.get
+
+tests\test_adaptive_research_v592.py:69: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_research_quality.py::test_factual_simples_metricas - assert...
+FAILED tests/test_academic_research.py::test_optional_orchestrator_dispatch_never_fetches_academic_full_text
+FAILED tests/test_adaptive_research_v592.py::test_adaptive_pipeline_synthesis_contains_new_round_evidence
+3 failed, 106 passed, 1 skipped in 20.19s

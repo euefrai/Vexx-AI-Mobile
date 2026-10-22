@@ -1,0 +1,60 @@
+{
+  "before": {
+    "document_macro": {
+      "5": {
+        "precision_at_k": 0.275,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.925589,
+        "duplicate_rate_at_k": 0.0
+      },
+      "10": {
+        "precision_at_k": 0.1375,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.925589,
+        "duplicate_rate_at_k": 0.0
+      }
+    },
+    "returned_document_precision_micro": 0.8461538461538461,
+    "returned_documents": 13,
+    "relevant_hits": 11,
+    "queries": 8,
+    "holdout_macro": {
+      "eligible_precision": 0.38888888888888884,
+      "eligible_recall": 0.6666666666666666
+    },
+    "holdout_p5": 0.4000000000000001,
+    "holdout_ndcg10": 0.8434013333333333,
+    "holdout_sha256": "8adc5b7f0b7d70580d7fcfe9e7702d8e7bf1b84f23b1db9aca451b7d02401115"
+  },
+  "after": {
+    "document_macro": {
+      "5": {
+        "precision_at_k": 0.275,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.982614,
+        "duplicate_rate_at_k": 0.0
+      },
+      "10": {
+        "precision_at_k": 0.1375,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.982614,
+        "duplicate_rate_at_k": 0.0
+      }
+    },
+    "returned_document_precision_micro": 1.0,
+    "returned_documents": 11,
+    "relevant_hits": 11,
+    "queries": 8,
+    "holdout_macro": {
+      "eligible_precision": 1.0,
+      "eligible_recall": 1.0
+    },
+    "holdout_p5": 0.4000000000000001,
+    "holdout_ndcg10": 1.0,
+    "holdout_sha256": "8adc5b7f0b7d70580d7fcfe9e7702d8e7bf1b84f23b1db9aca451b7d02401115"
+  }
+}

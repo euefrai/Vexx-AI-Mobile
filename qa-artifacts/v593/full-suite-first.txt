@@ -1,0 +1,40 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+.............F..........s............................................... [ 19%]
+........................................................................ [ 26%]
+........................................................................ [ 32%]
+........................................................................ [ 39%]
+........................................................................ [ 46%]
+........................................................................ [ 52%]
+...............................s........................................ [ 59%]
+........................................................................ [ 65%]
+........................................................................ [ 72%]
+....................s..........s........................................ [ 79%]
+........................................................................ [ 85%]
+........................................................................ [ 92%]
+........................................................................ [ 98%]
+...........                                                              [100%]
+================================== FAILURES ===================================
+________________________ test_b4_conflitantes_65w_95w _________________________
+
+    def test_b4_conflitantes_65w_95w():
+        db, job, r = _roda("Qual o consumo da Placa A?", [DOC_65W, DOC_95W])
+        invs = ra.carregar_job(db, "u-x", job["id"]).get("investigacoes", [])
+        vals = [i for i in invs if i.get("tipo") == "valor_divergente"]
+>       assert vals and vals[0]["status"] == "em_aberto" and vals[0]["follow_up"]
+E       assert ([])
+
+tests\test_evidence_benchmarks.py:94: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_evidence_benchmarks.py::test_b4_conflitantes_65w_95w - asse...
+1 failed, 1086 passed, 4 skipped, 2 warnings in 250.43s (0:04:10)

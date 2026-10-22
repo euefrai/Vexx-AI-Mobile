@@ -1,0 +1,237 @@
+[
+  {
+    "kind": "DETERMINISTIC",
+    "id": "appliance",
+    "query": "Geladeira frost free 400 litros",
+    "constraints": {
+      "categoria": "geladeira",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {
+        "capacidade_l": 400
+      },
+      "comparacao": false,
+      "texto": "Geladeira frost free 400 litros"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/appliance",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 42,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/appliance",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Geladeira frost free 400 litros\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/appliance\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "washer",
+    "query": "Máquina de lavar 10 kg",
+    "constraints": {
+      "categoria": "maquina de lavar",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Máquina de lavar 10 kg"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/washer",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 5,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/washer",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Máquina de lavar 10 kg\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/washer\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "tool",
+    "query": "Furadeira 220 V",
+    "constraints": {
+      "categoria": "furadeira",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {
+        "tensao_v": 220
+      },
+      "comparacao": false,
+      "texto": "Furadeira 220 V"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/tool",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 4,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/tool",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Furadeira 220 V\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/tool\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "book",
+    "query": "Livro Dom Casmurro edição física",
+    "constraints": {
+      "categoria": "livro",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Livro Dom Casmurro edição física"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/book",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 4,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/book",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Livro Dom Casmurro edição física\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/book\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "component",
+    "query": "Resistor de 10 kohms",
+    "constraints": {
+      "categoria": "resistor",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Resistor de 10 kohms"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/component",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 7,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/component",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Resistor de 10 kohms\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/component\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "vehicle",
+    "query": "Pastilha de freio Corolla 2018",
+    "constraints": {
+      "categoria": "pastilha de freio",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Pastilha de freio Corolla 2018"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/vehicle",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 3,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/vehicle",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Pastilha de freio Corolla 2018\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/vehicle\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  },
+  {
+    "kind": "DETERMINISTIC",
+    "id": "sport",
+    "query": "Bola de basquete tamanho 7",
+    "constraints": {
+      "categoria": "bola de basquete",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Bola de basquete tamanho 7"
+    },
+    "extracted": 1,
+    "accepted": 1,
+    "excluded": [],
+    "page_diagnostics": [
+      {
+        "url": "https://fixture.example/produto/sport",
+        "codigo": "extraida",
+        "motivo": "dados efetivamente extraídos",
+        "ms": 3,
+        "origem": [
+          "jsonld"
+        ],
+        "ofertas": 1,
+        "url_final": "https://fixture.example/produto/sport",
+        "listagem": false
+      }
+    ],
+    "jdui_valid": true,
+    "cards": "\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"productcard\", \"props\": {\"produto\": {\"nome\": \"Bola de basquete tamanho 7\", \"marca\": \"\", \"modelo\": \"\", \"variante\": \"\", \"imagem\": \"\", \"preco\": \"R$ 999,90\", \"preco_valor\": 999.9, \"moeda\": \"BRL\", \"loja\": \"fixture.example\", \"url\": \"https://fixture.example/produto/sport\", \"specs\": {}, \"avaliacao\": null, \"n_avaliacoes\": 0, \"disponibilidade\": \"em_estoque\", \"verificado_em\": \"22/10/2026\", \"link_veredito\": \"verificado\", \"link_motivo\": \"abriu, tipo certo e produto confirmado\", \"item_de_listagem\": false, \"imagem_veredito\": \"\", \"imagem_motivo\": \"\", \"ofertas\": []}, \"sources\": []}}]}\n```",
+    "external_offer_confirmed": false
+  }
+]

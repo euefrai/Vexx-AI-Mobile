@@ -1,0 +1,24 @@
+...................................F.................................... [ 71%]
+.s..........s................                                            [100%]
+================================== FAILURES ===================================
+_______________ test_fonte_com_origem_declarada_chega_ao_fence ________________
+
+    def test_fonte_com_origem_declarada_chega_ao_fence():
+        db = _db()
+        job = ra.criar_job(db, "u-x", "nota republicada")
+        f = {"id": "S1", "url": "https://agregador.example/n1", "titulo": "Nota",
+             "dominio": "agregador.example", "acessado_em": "2026-10-18",
+             "origem_declarada": "original.example"}
+        ra.registrar_evidencia(db, job, f, "trecho lido da página")
+        fence = pc_agent.fence_de_fontes(db, "u-x")
+        corpo = json.loads(fence.split("```jdui", 1)[1].rsplit("```", 1)[0])
+        item = corpo["blocks"][0]["props"]["items"][0]
+>       assert item["origem_declarada"] == "original.example"
+E       AssertionError: assert '' == 'original.example'
+E         
+E         - original.example
+
+tests\test_jdui_fontes_v57.py:62: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_jdui_fontes_v57.py::test_fonte_com_origem_declarada_chega_ao_fence
+1 failed, 98 passed, 2 skipped in 54.41s
