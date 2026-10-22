@@ -169,6 +169,10 @@ def _termos_correspondencia(consulta: str) -> list:
         consulta = params["origin"] + " " + params["destination"]
     elif request["domain"] in ("news", "events") and params.get("location"):
         consulta = params["location"] + (" eventos culturais" if request["domain"] == "events" else "")
+    elif request['domain']=='science':
+        consulta=re.sub(r'\b(artigos?|cient[ií]fic[oa]s?|estudos?|recentes?)\b',' ',consulta,flags=re.I)
+        consulta=re.sub(r'\b(texto completo(?: aberto)?|acesso aberto|com doi|original)\b',' ',consulta,flags=re.I)
+    consulta=re.sub(r'\bfaz\s+bem\b',' ',consulta,flags=re.I)
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
 
@@ -201,26 +205,34 @@ def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
     request = qi.analyze(consulta) if consulta else {}
     params = request.get("parameters") or {}
     text = qi.normalized(" ".join(str(a.get(k) or "") for k in ("titulo", "trecho")))
-    if request.get("domain") in ("air_travel", "bus_travel") and params.get("origin") and params.get("destination"):
-        if not all(qi.normalized(params[k]) in text for k in ("origin", "destination")):
-            return False
-        return bool(re.search(r"\b(onibus|rodoviaria|rodoviario)\b" if request["domain"] == "bus_travel" else r"\b(voos?|aereas?|aeroportos?)\b", text))
-    if request.get("domain") == "news" and params.get("location"):
-        if qi.normalized(params["location"]) not in text:
-            return False
-        if params.get("start_date"):
-            published = _data_do_item(a)
-            if published is None or not params["start_date"] <= published.date().isoformat() <= params["end_date"]:
-                return False
-        return True
-    if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip():
+    if request.get("domain") in ("air_travel", "bus_travel", "news", "events"):
+        import search_verticals
+        if params.get('location') or (params.get('origin') and params.get('destination')):
+            return search_verticals.assess(request, a)['eligible']
+    if _context_mismatch(a, consulta):
+        return False
+    if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip() and not (a.get('open_access') and a.get('pdf_url')):
         return False
     if not termos:
         return True
-    texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
+    texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho", "curated_topic"))
     ratio = sum(_tem_termo(t, texto) for t in termos) / len(termos)
     # Comparisons may legitimately need one primary page per compared subject.
     return ratio >= (0.5 if RX_COMPARACAO.search(consulta) else 0.6)
+
+
+def _context_mismatch(a: dict, consulta: str) -> list:
+    """Hard entity/context exclusions, separate from broad lexical coverage."""
+    q=_sem_acentos(consulta);body=_sem_acentos(' '.join(str(a.get(k) or '') for k in ('titulo','trecho')))
+    models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',q))
+    matched=[_tem_termo(m,body) for m in models]
+    reasons=[]
+    if matched and not (any(matched) if RX_COMPARACAO.search(consulta) else all(matched)):
+        reasons.append('ENTITY_MISMATCH')
+    accessory=r'\b(capa|carregador|pelicula|bateria de reposicao|compativel com|acessorio|acessorios)\b'
+    if re.search(accessory,body) and not re.search(accessory,q) and re.search(r'\b(notebook|celular|smartphone|roteador|geladeira|lavadora)\b',q):
+        reasons.append('INTENT_MISMATCH')
+    return reasons
 
 
 def _correspondencia(achados: list, termos: list) -> float:
@@ -608,12 +620,12 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
     pagina_de_indice = _pagina_de_indice(a)  # V5.7: índice geral não é conteúdo
     pontos = 0.0
     for t in termos:
-        if t in titulo:
+        if _tem_termo(t, titulo):
             pontos += 3.0
-        if t in trecho:
+        if _tem_termo(t, trecho):
             pontos += 1.5
         # URL de índice ecoa a busca (?q=…) — não vale ponto de conteúdo
-        if t in url and not pagina_de_indice:
+        if _tem_termo(t, url) and not pagina_de_indice:
             pontos += 1.0
     if not termos:
         pontos += 1.0
@@ -671,8 +683,14 @@ def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
         a["correspondencia_tipo"] = match["tipo"]
         a["cobertura_pedido"] = match["cobertura"]
         a["relevancia"] = round(_pontos_relevancia(a, consulta, classes, info), 2)
+        a['relevance_reasons'] = _context_mismatch(a, consulta)
+        request=info.get('request')
+        if request and request['domain'] in ('news','events','air_travel','bus_travel'):
+            import search_verticals
+            a['vertical']=search_verticals.assess(request,a)
+            a['relevance_reasons'] += a['vertical']['reasons']
     return sorted(achados, key=lambda a: (not _util_para_pedido(a, _termos_correspondencia(consulta), consulta),
-        not a.get("fonte_primaria", False), -a.get("relevancia", 0.0)))
+        -a.get("relevancia", 0.0), not a.get("fonte_primaria", False)))
 
 
 # ── Lacunas do pedido ──────────────────────────────────────────────
@@ -762,9 +780,19 @@ def fontes_preferenciais(consulta: str) -> list:
         entries.append(("Django documentation", "https://docs.djangoproject.com/en/stable/"))
     if docs and re.search(r"arquitetura\s+transformer|transformer\s+architecture", t):
         entries.append(("Attention Is All You Need (Transformer)", "https://arxiv.org/abs/1706.03762"))
-    return [{"titulo": title, "url": url, "trecho": "", "origem": "fonte-primaria",
+    sources=[{"titulo": title, "url": url, "trecho": "", "origem": "fonte-primaria",
              "tipo": "tecnico", "fonte_primaria": True, "status": "encontrada"}
             for title, url in entries]
+    if re.search(r'\btransformer\b',t) and re.search(r'\b(artigo|paper|original|texto completo)\b',t):
+        sources=[s for s in sources if s['url']!='https://arxiv.org/abs/1706.03762']
+        sources.append({'titulo':'Attention Is All You Need — Transformer','title':'Attention Is All You Need',
+            'url':'https://arxiv.org/abs/1706.03762','landing_url':'https://arxiv.org/abs/1706.03762',
+            'pdf_url':'https://arxiv.org/pdf/1706.03762','open_access':True,
+            'curated_topic':'Transformer architecture',
+            'metadata_source':'academic_provider','content_scope':'metadata_only','full_text_fetched':False,
+            'origem':'fonte-primaria','tipo':'academico','fonte_primaria':True,'status':'encontrada',
+            'trecho':'Referência bibliográfica curada; texto ainda não recuperado.'})
+    return sources
 
 
 def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
@@ -776,6 +804,8 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     if info.get("produto"):
         ordem.extend(["bing", "marginalia"])
     if sp.CLASSE_NOTICIA in classes and not info.get("academica"):
+        if (info.get('request') or {}).get('domain')=='news':
+            ordem.append('google-news')
         ordem.extend(["bing-news", "bing", "hn"])
     if sp.CLASSE_TECNICA in classes:
         ordem.extend(["bing", "ddg", "wikipedia", "stackexchange"] if info.get("documentacao")
@@ -853,6 +883,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     orc.update(orcamento or {})
     consultas = list(extra_queries or [])
     query = request_info["search_query"] if request_info["requires_live_data"] else consulta
+    params=request_info['parameters']
+    if not consultas and request_info['domain'] in ('air_travel','bus_travel') and params.get('origin') and params.get('destination'):
+        # Second query discovers route-specific public pages; exact dates/passengers
+        # remain in request and the fare gate, never inferred from a promotion.
+        host='clickbus.com.br' if request_info['domain']=='bus_travel' else 'voegol.com.br'
+        mode='passagens ônibus' if request_info['domain']=='bus_travel' else 'passagens voos'
+        consultas=[f'"{params["origin"]}" "{params["destination"]}" {mode} site:{host}',query]
     for q in variantes(query, info["classes"], teto=3,
                        produto=bool(info.get("produto"))):
         if q not in consultas:

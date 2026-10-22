@@ -4,6 +4,7 @@ from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 import html
 import json
+import re
 import threading
 import time
 import urllib.error
@@ -230,12 +231,44 @@ def normalize_openalex(item: dict, provider_url: str) -> dict:
     if (not isinstance(citation_count, int) or isinstance(citation_count, bool)
             or citation_count < 0):
         citation_count = None
-    return _normalize_base(
+    record = _normalize_base(
         "openalex", provider_url, source_url, landing, _doi(item.get("doi")),
         item.get("title"), _authors(item.get("authorships")), _year(item.get("publication_year")),
         journal, repository, abstract, pdf, license_value, _explicit_review_status(item),
         citation_count,
     )
+    record['open_access'] = any(x.get('is_oa') is True and x.get('pdf_url')==pdf for x in location_candidates)
+    return record
+
+
+def read_open_text(record, timeout, fetch_pdf):
+    """One legal OA candidate, bounded reader, verified bibliographic identity.
+
+    OA/licence metadata is a declaration; network and PDF safety stay in the
+    central downloader. No paywall fallback, scraping escalation, or retries.
+    """
+    license_value=str(record.get('license') or '').lower()
+    allowed=record.get('open_access') is True or license_value.startswith(('cc-','https://creativecommons.org/','http://creativecommons.org/'))
+    pdf=_external_url(record.get('pdf_url'))
+    if not allowed or not pdf: return None
+    try:
+        rec=fetch_pdf({'url':pdf,'titulo':record.get('titulo') or record.get('title',''),'pdf_expected':True},timeout)
+        content=str((rec or {}).get('texto') or '')
+        import query_intelligence
+        normalized=query_intelligence.normalized(content)
+        title=query_intelligence.normalized(record.get('title') or record.get('titulo',''))
+        terms=set(re.findall(r'[a-z0-9]{3,}',title))
+        found=sum(bool(re.search(r'(?<!\w)'+re.escape(t)+r'(?!\w)',normalized[:12000])) for t in terms)
+        doi=str(record.get('doi') or '').casefold()
+        identity=(bool(doi) and doi in normalized) or (len(terms)>=3 and found/len(terms)>=0.75)
+        if not rec or not rec.get('lida') or len(content.strip())<1000 or not identity:
+            return {'oa_attempt':'identity_or_text_insufficient'}
+        return {**rec,'content_scope':'document_text','full_text_fetched':True,
+                'full_text_url':rec.get('final') or pdf,'access_state':'read','texto_lido':True,
+                'oa_attempt':'read_identity_matched'}
+    except (research.ResearchErro, OSError, ValueError) as exc:
+        # Only an optional retrieval attempt; keep the actual abstract on failure.
+        return {'oa_attempt':str(getattr(exc,'codigo',type(exc).__name__))[:80]}
 
 
 def normalize_crossref(item: dict, provider_url: str) -> dict:

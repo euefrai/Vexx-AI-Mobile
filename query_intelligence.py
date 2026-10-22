@@ -24,7 +24,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
     local = now.astimezone(ZoneInfo(timezone_name))
     t = normalized(text)
     domain = 'general'
-    if re.search(r'\b(voos?|passagens? aereas?|avioes?|aeroportos?)\b', t):
+    if re.search(r'\b(voos?|passagens? aereas?|avioes?|aeroportos?)\b', t) or (re.search(r'\bpassagens? de .+? para ', t) and 'onibus' not in t):
         domain = 'air_travel'
     elif re.search(r'\b(onibus|rodoviari[ao]s?)\b', t):
         domain = 'bus_travel'
@@ -34,7 +34,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         domain = 'events'
     elif re.search(r'\b(noticias?|manchetes|aconteceu|acontecimentos?)\b', t):
         domain = 'news'
-    elif re.search(r'\b(estudos?|cientific[oa]s?|papers?)\b', t):
+    elif re.search(r'\b(estudos?|cientific[oa]s?|papers?)\b', t) or re.search(r'\bartigo\b.*\b(doi|pesquisa)\b',t):
         domain = 'science'
     elif re.search(r'\b(documentacao|documentos?|arquivos?|pdf|asyncio)\b', t):
         domain = 'documents'
@@ -85,9 +85,14 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         except InvalidOperation:
             raise ValueError('Valor inválido') from None
     if domain in ('news', 'events'):
-        location = re.search(r'\bem\s+(.+?)(?=\s+(?:nos|nas|ultimos|ultimas|proximos|proximas)|[,.!?]|$)', t)
+        location = re.search(r'\b(?:em|noticias de)\s+(.+?)(?=\s+(?:nos|nas|ultimos|ultimas|proximos|proximas|recentemente)|[,.!?]|$)', t)
         if location:
             params['location'] = str(text)[location.start(1):location.end(1)].strip()
+            region = re.match(r',\s*([a-z ]{2,30}?)(?=,|\s+(?:nos|nas|ultimos|ultimas)|[.!?]|$)', t[location.end():])
+            if region:
+                params['region'] = region[1].strip()
+        if domain == 'news' and not params.get('start_date') and re.search(r'\b(ultimas?|recentemente|recentes?)\b', t):
+            params.update(start_date=(local.date()-timedelta(days=7)).isoformat(),end_date=local.date().isoformat(),window_inferred=True)
     search_query = resolved
     if domain in ('air_travel', 'bus_travel') and params.get('origin') and params.get('destination'):
         mode = 'voos' if domain == 'air_travel' else 'passagens de ônibus'
@@ -97,7 +102,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         if params.get('adults'):
             search_query += ' ' + str(params['adults']) + ' adulto'
     if domain in ('news', 'events') and params.get('location'):
-        search_query = params['location'] + (' notícias' if domain == 'news' else ' eventos culturais')
+        search_query = '"' + params['location'] + '"' + (' "'+params['region']+'"' if params.get('region') else '') + (' notícias' if domain == 'news' else ' eventos programação')
         # News dates are a verification filter, not literal text that pages must repeat.
         if domain == 'events' and params.get('end_date'):
             search_query += ' ' + params['start_date'] + ' ' + params['end_date']

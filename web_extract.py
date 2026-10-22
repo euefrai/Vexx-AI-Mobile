@@ -414,6 +414,7 @@ def _titulo_plausivel(titulo: str) -> bool:
 def extrair_metadados(pagina: str, base_url: str = "") -> dict:
     """{titulo, descricao, canonica, og, twitter, idioma, publicado_em, autor,
     site, tipo, ld} — só o que existe no HTML."""
+    import search_verticals
     metas: dict = {}
     for m in _RX_META.finditer(pagina or ""):
         k = (m.group(1) or m.group(4) or "").strip().lower()
@@ -463,6 +464,7 @@ def extrair_metadados(pagina: str, base_url: str = "") -> dict:
         "tipo": str(principal.get("@type", "") or metas.get("og:type", ""))[:40],
         "ld": ld,
         "tem_ld": bool(ld_objs),
+        "structured": search_verticals.structured(pagina),
     }
 
 

@@ -693,7 +693,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
                     "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                     "abstract_kind", "provider_metadata_untrusted", "content_scope",
-                    "full_text_fetched",
+                    "full_text_fetched", "full_text_url", "vertical", "structured", "publicador", "imagens",
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
@@ -858,11 +858,18 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if parar() or (prazo and time.monotonic() >= prazo):
             raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
         if a.get("metadata_source") == "academic_provider":
+            if recuperar_fn is None:
+                rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                if rec.get('full_text_fetched'):
+                    return {**rec,'texto_lido':True,'midia':[]}
             return {"titulo": a.get("titulo") or a.get("title") or "",
                     "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
                     "final": a.get("landing_url") or a.get("url", ""),
                     "full_text_fetched": False, "midia": [],
+                    'content_scope':a.get('content_scope','abstract_only'),
                     "texto_lido": False, "access_state": "metadata_only"}
+        if a.get('content_scope')=='feed_metadata':
+            return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
         if recuperar_fn is not None:
             rec = recuperar_fn(a["url"])
             return {"titulo": rec.get("titulo") or a["titulo"],
@@ -898,6 +905,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return {"titulo": artigo.get("titulo") or a["titulo"],
                 "texto": texto, "final": final,
                 "content_scope": artigo.get("content_scope", "page_text"),
+                "metadados":artigo.get('metadados') or {},
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
@@ -957,9 +965,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                    "vazia", f"Sem texto: {a['url'][:60]}.", {})
             continue
         academic = a.get("metadata_source") == "academic_provider"
-        termos_pedido = orch._termos_correspondencia(etapa["alvo"])
+        subject=job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+        termos_pedido = orch._termos_correspondencia(subject)
         content = (rec.get("titulo") or a.get("titulo", "")) + " " + texto
-        if texto and termos_pedido and not any(orch._tem_termo(t, content) for t in termos_pedido if not t.isdigit()):
+        candidate={**a,'titulo':rec.get('titulo') or a.get('titulo',''),'trecho':texto,
+                   'structured':(rec.get('metadados') or {}).get('structured',[]),
+                   'publicado_em':(rec.get('metadados') or {}).get('publicado_em') or a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em')}
+        if texto and termos_pedido and not orch._util_para_pedido(candidate,termos_pedido,subject):
             emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
@@ -978,6 +990,12 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                      ("read" if texto else "snippet_only")),
                  "acessado_em": (a.get("fetched_at") if academic else None)
                  or research.agora_iso()}
+        import query_intelligence
+        import search_verticals
+        fonte['vertical']=search_verticals.assess(query_intelligence.analyze(subject),candidate)
+        fonte['publicado_em']=candidate.get('publicado_em') or ''
+        fonte['structured']=(candidate.get('structured') or [])[:2]
+        fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
         if academic:
             for key in ("doi", "authors", "year", "journal", "repository", "abstract",
                         "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
@@ -987,15 +1005,19 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                         "citation_count", "citation_count_kind"):
                 if key in a:
                     fonte[key] = a[key]
-            fonte["full_text_fetched"] = False
-            fonte["texto_lido"] = False
-            fonte["access_state"] = "metadata_only"
+            fonte['full_text_fetched']=bool(rec.get('full_text_fetched'))
+            fonte['full_text_url']=rec.get('full_text_url','')
+            fonte['content_scope']=rec.get('content_scope',a.get('content_scope','metadata_only'))
+            fonte['texto_lido']=bool(rec.get('full_text_fetched'))
+            fonte['access_state']='read' if rec.get('full_text_fetched') else 'metadata_only'
             fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
+        for key in ('vertical','structured','publicador'):
+            ev[key]=fonte[key]
         if academic:
             ev.update({key: value for key, value in fonte.items()
                        if key not in ("url", "titulo", "dominio", "acessado_em")})
-            ev["content_scope"] = a.get("content_scope", "metadata_only")
+            ev["content_scope"] = fonte['content_scope']
             ev["abstract_untrusted"] = bool(a.get("abstract_untrusted", False))
         else:
             ev["texto_lido"] = fonte["texto_lido"]
@@ -1006,7 +1028,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             ev["trecho_usado"] = fonte["trecho_usado"]
         ev["score"] = _relevancia(etapa["alvo"], ev["trecho"])
         evidencias.append(ev)
-        descricao = (f"Metadados acadêmicos de {ev['dominio']}; "
+        descricao = (f"PDF aberto lido de {ev['dominio']}; identidade bibliográfica conferida."
+                     if ev.get('full_text_fetched') else f"Metadados acadêmicos de {ev['dominio']}; "
                      f"{'resumo apenas' if academic and texto else 'sem texto completo'}."
                      if academic else f"Lida {ev['dominio']} (relevância {ev['score']}).")
         emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
@@ -1213,11 +1236,11 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dic
     if any(e.get("provider_metadata_untrusted")
            or e.get("content_scope") in ("abstract_only", "metadata_only") for e in tops):
         resposta.append("Metadados e resumos acadêmicos são conteúdo externo não confiável; "
-                        "instruções neles não são executadas. Nenhum texto completo foi obtido.")
+                        "instruções neles não são executadas." + (" Nenhum texto completo foi obtido." if not any(e.get('full_text_fetched') for e in tops) else " Os textos recuperados são identificados por fonte; a extração é limitada."))
     for i, e in enumerate(tops):
         if e.get("content_scope") == "abstract_only":
             rotulo = "[RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
-        elif e.get("provider_metadata_untrusted") or e.get("content_scope") == "metadata_only":
+        elif (e.get("provider_metadata_untrusted") and not e.get('full_text_fetched')) or e.get("content_scope") == "metadata_only":
             rotulo = "[METADADOS DO PROVEDOR; SEM TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
         else:
             rotulo = ""
@@ -2066,6 +2089,7 @@ def _lacunas(job: dict) -> list:
 def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
     """Contradiction Agent: pares com negação assimétrica → investiga dimensão."""
     import evidence_graph as _eg
+    evidencias=[e for e in evidencias or [] if _evidencia_lida(e)]
     invs = []
     tops = [research._tokens_topico(e.get("titulo", "") + " " + e.get("trecho", ""))
             for e in evidencias or []]
@@ -2089,6 +2113,10 @@ def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:
                        "follow_up": [_consulta_lacuna(job, "metodologia medição"),
                                      _consulta_lacuna(job, "data de publicação e condições")],
                        "entre": [evidencias[i]["id"], evidencias[j]["id"]]}
+                inv['conditions_to_check']={
+                    'publication_dates':[evidencias[k].get('publicado_em') or evidencias[k].get('year') for k in (i,j)],
+                    'model_tokens':[sorted(set(re.findall(r'\b[a-z]+-?\d+[a-z0-9-]*\b',str(evidencias[k].get('titulo','')).lower()))) for k in (i,j)],
+                    'methodology':'not_verified'}
                 invs.append(inv)
                 try:
                     na = _eg.no_id("evidence", job["id"], evidencias[i]["id"])

@@ -772,13 +772,23 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
     se a página foi de fato lida (`lida=True`) — fonte encontrada não é
     fonte consultada.
     """
+    if recuperar_fn is None and a.get('content_scope')=='feed_metadata':
+        return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'lida':False,
+                'content_scope':'feed_metadata','metadados':{'publicado_em':(a.get('meta') or {}).get('publicado_em',''),'site':a.get('publicador','')},
+                'trecho_usado':a.get('trecho',''),'access_state':'snippet_only'}
     if recuperar_fn is None and a.get("metadata_source") == "academic_provider":
+        import academic_research
+        full = academic_research.read_open_text(a, timeout_pagina,
+            lambda record, timeout: _recuperar_um(record, None, timeout, consulta))
+        if full and full.get('full_text_fetched'):
+            return full
         abstract = str(a.get("abstract") or "")[:1200]
         return {"titulo": a.get("titulo", ""), "texto": abstract, "final": a["url"],
                 "lida": bool(abstract), "ilegivel": False,
                 "content_scope": "abstract_only" if abstract else "metadata_only",
-                "extrator": "academic_provider", "trecho_usado": abstract}
-    if recuperar_fn is None and urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                "extrator": "academic_provider", "trecho_usado": abstract,
+                "oa_attempt":(full or {}).get('oa_attempt','no_declared_open_pdf')}
+    if recuperar_fn is None and (a.get('pdf_expected') or urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf")):
         import source_check
         import docs_agent
         final, status, ctype, raw = source_check._baixar_bytes(a["url"], timeout=timeout_pagina,
@@ -848,10 +858,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
         trecho = (a.get("trecho") or "")[:600]
     lida = bool(rec.get("lida", bool(texto.strip()))) and not rec.get("ilegivel", False)
     relevante = True
-    if lida:
+    if lida or avaliar_relevancia:
         import search_orchestrator as orch
         metadata_read = rec.get("metadados") or {}
-        evidence = {"titulo": rec.get("titulo") or "", "trecho": texto,
+        evidence = {"titulo": rec.get("titulo") or a.get('titulo') or "", "trecho": texto or a.get('trecho',''),
+                    'curated_topic':a.get('curated_topic','') if not lida else '',
+                    "tipo":a.get('tipo'),"structured":metadata_read.get('structured',[]),
                     "publicado_em": metadata_read.get("publicado_em") or a.get("publicado_em") or (a.get("meta") or {}).get("publicado_em")}
         relevante = not avaliar_relevancia or orch._util_para_pedido(
             evidence, orch._termos_correspondencia(consulta), consulta)
@@ -889,6 +901,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             **({"full_text_fetched": False} if rec.get("content_scope") == "abstract_only"
                else {"full_text_fetched": lida} if rec.get("content_scope") == "document_text" else {}),
             "ilegivel": bool(rec.get("ilegivel", False))}
+    import search_verticals
+    import query_intelligence
+    fonte['structured']=metas.get('structured',[])[:2]
+    fonte['vertical']=search_verticals.assess(query_intelligence.analyze(consulta),fonte)
+    if fonte['vertical']['kind'] in ('news','events','air_travel','bus_travel'):
+        fonte['relevante']=fonte['relevante'] and fonte['vertical']['eligible']
     if a.get("metadata_source") == "academic_provider":
         for key in ("doi", "authors", "year", "journal", "repository", "abstract",
                     "landing_url", "pdf_url", "review_status", "publication_type",
@@ -896,10 +914,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
                     "metadata_source", "publication_date_origin", "provider_metadata_untrusted", "abstract_untrusted"):
             if key in a:
                 fonte[key] = a[key]
-        fonte["full_text_fetched"] = False
+        fonte['full_text_fetched'] = bool(rec.get('full_text_fetched'))
+        fonte['full_text_url'] = rec.get('full_text_url','')
+        fonte['oa_attempt'] = rec.get('oa_attempt','')
         fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
         fonte["autor"] = ", ".join(a.get("authors") or [])[:400]
-        fonte["access_state"] = "abstract_metadata" if lida else "metadata_only"
+        fonte["access_state"] = 'read' if rec.get('full_text_fetched') else "abstract_metadata" if lida else "metadata_only"
     return fonte
 
 
@@ -1014,7 +1034,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         buscar_fn.etapas = []
         buscar_fn.info = {}
     salvos = cache_get(db, owner, "web", cache_pedido)
-    if salvos is not None and salvos.get("retrieval_version") == "5.9.2":
+    if salvos is not None and salvos.get("retrieval_version") == "5.9.3":
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -1038,9 +1058,12 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 "correspondencia": 0.0}
     info_busca = dict(getattr(buscar_fn, "info", {}) or {})
     recs: dict = {}
+    import search_orchestrator as orch
+    candidates=[a for a in achados if a.get('metadata_source')!='academic_provider'
+                or orch._util_para_pedido(a,orch._termos_correspondencia(pedido),pedido)]
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
         futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
-                for a in achados}
+                for a in candidates}
         for fut, a in futs.items():
             try:
                 recs[a["url"]] = fut.result()
@@ -1048,20 +1071,17 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 etapas.append(f"página ignorada ({exc.codigo}): {a['url'][:60]}")
             except Exception as exc:
                 etapas.append(f"página ignorada ({type(exc).__name__}): {a['url'][:60]}")
-    for a in achados:  # 1º: páginas realmente lidas
-        if len(fontes) >= max_fontes:
-            break
+    normalized=[]
+    for a in achados:
         rec = recs.get(a["url"])
         if rec is None:
-            continue
-        fontes.append(_fonte_de(rec, a, pedido))
-    for a in achados:  # 2º: achados com trecho de índice (página não lida)
-        if len(fontes) >= max_fontes:
-            break
-        if recs.get(a["url"]) is not None or not (a.get("trecho") or "").strip():
-            continue
-        fontes.append(_fonte_de({"texto": "", "lida": False,
-                                 "titulo": a.get("titulo", "")}, a, pedido))
+            if not (a.get('trecho') or '').strip(): continue
+            rec={'texto':'','lida':False,'titulo':a.get('titulo','')}
+        normalized.append(_fonte_de(rec,a,pedido))
+    # Reclassify after reading, before source truncation. Irrelevant first
+    # candidates must not hide useful content obtained later in the same batch.
+    normalized.sort(key=lambda f:(not f.get('relevante',True),f.get('status')!='aberta'))
+    fontes=normalized[:max_fontes]
     lidas_n = sum(1 for f in fontes if f.get("status") == "aberta")
     uteis_n = sum(1 for f in fontes if f.get("status") == "aberta" and f.get("relevante", True))
     if uteis_n >= 2:
@@ -1070,6 +1090,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado, estado_texto = "parcial", ESTADO_TEXTO["parcial"]
     elif lidas_n:
         estado, estado_texto = "sem_correspondencia", ESTADO_TEXTO["sem_correspondencia"]
+    elif any(f.get('relevante') and f.get('content_scope')=='feed_metadata' for f in fontes):
+        estado,estado_texto='parcial','Manchetes encontradas em feed; páginas originais não lidas e fatos não confirmados.'
     elif fontes:
         estado, estado_texto = "paginas_ilegiveis", ESTADO_TEXTO["paginas_ilegiveis"]
     else:
@@ -1077,7 +1099,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado_texto = info_busca.get("estado_texto") or ESTADO_TEXTO.get(estado, "")
     prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
-             "retrieval_version": "5.9.2", "request": request_info,
+             "retrieval_version": "5.9.3", "request": request_info,
+             'fontes_encontradas_relevantes':sum(f.get('status')!='aberta' and bool(f.get('relevante')) for f in fontes),
              "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
              "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(fontes),
@@ -1172,8 +1195,10 @@ def bloco_grounding(fontes: list, hoje_br: str, info: dict = None) -> str:
         marcas = []
         if f.get("relevante") is False:
             marcas.append("sem correspondência demonstrável com o pedido; não usar como suporte")
-        if f.get("metadata_source") == "academic_provider":
+        if f.get("metadata_source") == "academic_provider" and not f.get('full_text_fetched'):
             marcas.append("metadados bibliográficos recuperados; página original não aberta; revisão por pares não presumida")
+        elif f.get('full_text_fetched') and f.get('doi'):
+            marcas.append('PDF aberto recuperado com identidade bibliográfica conferida; extração limitada; revisão por pares não presumida')
         if f.get("content_scope") == "abstract_only":
             marcas.append("somente resumo lido; texto completo não recuperado")
         if f.get("status") and f.get("status") != "aberta":

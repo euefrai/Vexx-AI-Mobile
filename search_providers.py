@@ -189,6 +189,34 @@ def buscar_bing_news(consulta: str, limite: int = 8, timeout: float = 10.0) -> l
     return buscar_bing(consulta, limite, timeout, _path="/news/search", tipo="noticia")
 
 
+def buscar_google_news(consulta: str, limite: int = 8, timeout: float = 10.0) -> list:
+    """Public RSS discovery. Aggregator links remain aggregator links, not read evidence."""
+    import xml.etree.ElementTree as ET
+    import query_intelligence
+    request=query_intelligence.analyze(consulta)
+    query=request['search_query']
+    params=request['parameters']
+    if params.get('start_date'):
+        query+=' after:'+params['start_date']+' before:'+params['end_date']
+    url='https://news.google.com/rss/search?'+urllib.parse.urlencode({'q':query[:240],'hl':'pt-BR','gl':'BR','ceid':'BR:pt-419'})
+    page=_baixar(url,timeout,aceitar='feed')[1]
+    _verificar_bloqueio(page)
+    try: root=ET.fromstring(page)
+    except ET.ParseError: raise ErroProvedor('Feed de notícias inválido.','formato') from None
+    out=[]
+    for node in root.findall('./channel/item')[:max(1,min(20,int(limite)))]:
+        link=_url_ok(node.findtext('link',''))
+        title=_limpar(node.findtext('title',''),240)
+        if not link or not title: continue
+        source=node.find('source')
+        out.append({'titulo':title,'url':link,'trecho':_limpar(node.findtext('description',''),600),
+                    'origem':'google-news','tipo':'noticia','status':'encontrada',
+                    'publicador':_limpar(source.text or '',120) if source is not None else '',
+                    'meta':{'publicado_em':node.findtext('pubDate','')[:80]},'content_scope':'feed_metadata'})
+    if not out: raise ErroProvedor('Feed sem notícias correspondentes.','vazio')
+    return out
+
+
 # ── Marginalia (índice independente; interface texto oficial) ───────
 _MARG_SKIP = re.compile(r"(marginalia|about\.marginalia|donate|explore/random)", re.I)
 
@@ -489,6 +517,9 @@ PROVEDORES: dict = {
     "bing-news": {"rotulo": "Bing Notícias (feed oficial)",
                   "classes": (CLASSE_NOTICIA,), "tipo": "noticia", "peso": 7.0,
                   "fn": buscar_bing_news},
+    "google-news": {"rotulo": "Google Notícias (RSS público)",
+                    "classes": (CLASSE_NOTICIA,), "tipo": "noticia", "peso": 7.0,
+                    "fn": buscar_google_news},
     "stackexchange": {"rotulo": "Stack Exchange (API oficial)",
                       "classes": (CLASSE_TECNICA,), "tipo": "tecnico", "peso": 8.0,
                       "fn": buscar_stackexchange},
