@@ -74,7 +74,8 @@ def test_docs_e_uistate_isolados(tmp_path):
 
 def test_ai_replay_nao_vaza_entre_donos(tmp_path, monkeypatch):
     db = pc_agent.open_db(tmp_path / 'iso4.sqlite3')
-    pc_agent.persist_messages(db, [msg('r-user-001', 'conv-a')], owner='alice')
+    # Exercise model response replay; greetings now take the deterministic path.
+    pc_agent.persist_messages(db, [msg('r-user-001', 'conv-a', 'Conte uma história curta')], owner='alice')
     cfg = {'proxy': 'http://127.0.0.1:9/v1', 'model': 'm', 'system': 's',
            'context': 5, 'max_tokens': 50}
     monkeypatch.setattr('hermes_bridge.chat_complete',

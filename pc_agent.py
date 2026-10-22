@@ -1379,6 +1379,12 @@ def _consolidar_memorias(db, cfg: dict, owner=DONO_PADRAO) -> None:
 def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> str:
     """Acha documento citado pelo nome ou o mais recente da conversa."""
     t = (texto or "").lower()
+    if re.search(r'\b(n[aã]o (leia|abra|consulte)|sem (ler|abrir|consultar))\b',t):
+        return ''
+    pedido=bool(re.search(r'\b(resum\w*|leia|abra|analis\w*|compare|consulte|mostre|explique|qual|quais|quanto\w*|conte[uú]do)\b',t))
+    if not pedido:
+        return ''
+    doc_hint=bool(re.search(r'\b(documento|arquivo|pdf|contrato|relat[óo]rio|planilha|resum\w*|leia|abra|consulte)\b',t))
     try:
         docs = docs_agent.listar_documentos(db, 50, owner, conversation_id=conversation_id)
     except Exception:
@@ -1386,7 +1392,7 @@ def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> s
     for d in docs:
         nome = (d["name"] or "").lower()
         base = re.sub(r"\.[a-z0-9]+$", "", nome)
-        if len(base) >= 4 and base in t:
+        if len(base) >= 4 and (nome in t or doc_hint) and re.search(r'(?<!\w)'+re.escape(base)+r'(?!\w)',t):
             return d["doc_id"]
     if re.search(r"\b(documento|arquivo|pdf|contrato|relat[óo]rio|planilha)\b", t):
         mesmos = docs

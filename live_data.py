@@ -156,6 +156,7 @@ def geocode(city):
     rows=[r for r in rows if norm(r.get('name',''))==norm(name) and str(r.get('feature_code','')).startswith('PPL')]
     if country:rows=[r for r in rows if r.get('country_code')==country]
     if uf:rows=[r for r in rows if norm(r.get('admin1',''))==norm(STATES[uf])]
+    if municipality:rows=[r for r in rows if not r.get('admin2') or norm(r['admin2'])==norm(name)]
     if query['qualifier']:
         wanted=norm(query['qualifier'])
         rows=[r for r in rows if wanted in {norm(str(r.get(k,''))) for k in ('admin1','country','country_code')}]
@@ -163,7 +164,7 @@ def geocode(city):
         lat,lon = row.get('latitude'),row.get('longitude')
         if type(lat) not in (int,float) or type(lon) not in (int,float) or not -90<=lat<=90 or not -180<=lon<=180:
             continue
-        label = ', '.join(dict.fromkeys(str(row[k]) for k in ('name','admin1','country') if row.get(k)))
+        label = ', '.join(dict.fromkeys(str(row[k]) for k in ('name','admin2','admin1','country') if row.get(k)))
         candidates.append({'label':label,'name':row.get('name'),'state':row.get('admin1'),
                            'country':row.get('country'),'geonames_id':row.get('id'),
                            'ibge_id':municipality.get('id') if municipality else None,
@@ -182,7 +183,7 @@ def geocode(city):
             except (research.ResearchErro,ValueError,KeyError,TypeError,StopIteration):registry_error=True
         return None, f'Não consegui confirmar a localização de “{safe(city)}” nas fontes disponíveis'+(' porque um serviço está indisponível' if registry_error else '')+'. Isso não significa que o município não exista. Informe cidade e estado/país.'
     # Never silently choose among homonymous cities in different regions.
-    if len({r['label'] for r in candidates})>1:
+    if len({(r['label'],round(r['latitude'],3),round(r['longitude'],3)) for r in candidates})>1:
         return None, 'Encontrei mais de uma localização. Qual delas?\n\n'+'\n'.join('- '+safe(r['label']) for r in candidates[:5])+'\n\nRepita o pedido incluindo a cidade e o estado/país.'
     return candidates[0], None
 

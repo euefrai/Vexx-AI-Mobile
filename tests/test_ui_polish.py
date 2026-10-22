@@ -25,7 +25,8 @@ def test_duplicate_claim_and_startup_recovery_preserve_partial_text(tmp_path):
 
 def test_worker_exception_releases_message_for_retry(tmp_path, monkeypatch):
     path = tmp_path / 'exception.sqlite3'
-    payload = dict(message_id='polish-user-003', conversation_id='conv-polish', text='Olá')
+    # Reach the failing memory command, beyond the deterministic greeting handler.
+    payload = dict(message_id='polish-user-003', conversation_id='conv-polish', text='Conte uma história curta')
     def fail(*args):
         raise RuntimeError('controlled test failure')
     monkeypatch.setattr(pc_agent, 'interpretar_comando_memoria', fail)

@@ -145,6 +145,12 @@ def test_contexto_temporal_rejeita_datas_e_fusos_invalidos():
 
 def test_ai_completa_responde_hora_sem_chamar_modelo(monkeypatch):
     db = _db()
+    from datetime import datetime, timezone
+    class ServerClock(datetime):
+        @classmethod
+        def now(cls,tz=None):
+            return cls(2026,10,22,0,24,13,tzinfo=timezone.utc).astimezone(tz)
+    monkeypatch.setattr(pc_agent,'datetime',ServerClock)
     contexto = pc_agent._contexto_local_seguro({
         'local_time': '2026-10-14T21:24:13-03:00',
         'timezone': 'America/Sao_Paulo',
@@ -167,7 +173,9 @@ def test_ai_completa_responde_hora_sem_chamar_modelo(monkeypatch):
     result = pc_agent.ai_completa(
         db, {'message_id': 'user-clock', 'conversation_id': 'conv-clock'}, {})
 
-    assert result['response_text'] == 'São 21:24 (America/Sao_Paulo).'
+    assert result['response_text'].startswith('São 21:24 (America/Sao_Paulo).')
+    assert '21/10/2026' in result['response_text']  # Server date; device claimed 14/10.
+    assert '14/10/2026' not in result['response_text']
     assert len(respostas) == 1
     db.close()
 

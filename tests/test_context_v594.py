@@ -85,6 +85,27 @@ def test_empty_provider_does_not_deny_existence(monkeypatch):
     assert 'não significa que o município não exista' in live.geocode('Ubata/BA')[1]
 
 
+def test_same_state_homonyms_do_not_silently_pick_coordinates(monkeypatch):
+    monkeypatch.setattr(live,'_ibge',lambda _:[])
+    a=city('Santa Luzia');b=dict(a,latitude=-12.0,admin2='Outro município')
+    monkeypatch.setattr(live,'get_json',lambda *_:{'results':[a,b]})
+    assert 'mais de uma' in live.geocode('Santa Luzia/BA')[1]
+
+
+def test_two_project_chats_keep_their_own_slots(tmp_path):
+    import workspace_store
+    db=pc_agent.open_db(tmp_path/'projects.sqlite3')
+    workspace_store.merge_records(db,[dict(id=key,kind=kind,title=key,project_id=project,
+        updated_at=NOW.isoformat(),change_id='change-594') for key,kind,project in
+        [('proj-one','project',''),('proj-two','project',''),('chat-one','chat','proj-one'),('chat-two','chat','proj-two')]],'u-alice')
+    put(db,'project-weather-1','clima em Ubatã BA',conv='chat-one')
+    put(db,'project-weather-2','clima em Ubá MG',conv='chat-two')
+    assert follow.weather_slots(db,'u-alice','chat-one','e amanhã?')['city']=='Ubatã BA'
+    assert follow.weather_slots(db,'u-alice','chat-two','e amanhã?')['city']=='Ubá MG'
+    assert follow.weather_slots(db,'u-bob','chat-two','e amanhã?') is None
+    db.close()
+
+
 def put(db,mid,text,conv='chat-one',owner='u-alice',role='user'):
     pc_agent.persist_messages(db,[dict(id=mid,conversation_id=conv,role=role,origin='mobile',text=text,created_at=NOW.isoformat())],owner)
 
@@ -178,4 +199,7 @@ def test_document_context_and_project_isolation(tmp_path,monkeypatch):
     assert pc_agent.doc_mencionado(db,'resuma meu TODO.md','chat-one','u-alice')==''
     assert pc_agent.doc_mencionado(db,'resuma meu TODO.md','project-chat','u-bob')==''
     assert pc_agent.doc_mencionado(db,'resuma meu TODO.md','project-chat','u-alice')==doc['doc_id']
+    assert pc_agent.doc_mencionado(db,'todo dia estudo física','project-chat','u-alice')==''
+    assert pc_agent.doc_mencionado(db,'qual a temperatura todo dia?','project-chat','u-alice')==''
+    assert pc_agent.doc_mencionado(db,'não leia TODO.md','project-chat','u-alice')==''
     db.close()
