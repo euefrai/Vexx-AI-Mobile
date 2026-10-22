@@ -1,0 +1,14 @@
+{
+  "base": "https://vexx-ai.onrender.com",
+  "checks": {
+    "sem_sessao_get_conversations": 401,
+    "login": 200,
+    "login_autenticado": true,
+    "csrf_presente": true,
+    "sessao_get_conversations": 200,
+    "sessao_sem_csrf_post_sync_valido": 403,
+    "sessao_csrf_invalido_post_sync_valido": 403,
+    "sem_sessao_post_sync_valido": 401
+  },
+  "ok": true
+}

@@ -1,0 +1,159 @@
+........................................................................ [  7%]
+........................................................................ [ 15%]
+................s....................................................... [ 22%]
+......................................F................................. [ 30%]
+........................................................................ [ 38%]
+........................................................................ [ 45%]
+........................................................................ [ 53%]
+..............................F............................s............ [ 61%]
+.......................F................................................ [ 68%]
+.......................................................s..........s..... [ 76%]
+........................................................................ [ 83%]
+........................................................................ [ 91%]
+........................................................................ [ 99%]
+........                                                                 [100%]
+================================== FAILURES ===================================
+_____________________ test_relay_ui_state_via_agente_fake _____________________
+
+    def test_relay_ui_state_via_agente_fake():
+        with TestClient(server.app) as client:
+            csrf = _login(client)
+            with client.websocket_connect('/api/agent/ws',
+                                          headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+                out = {}
+    
+                def salva():
+                    out['s'] = client.post('/api/ui-state',
+                                           json={'states': [{'k': 'mid-0001#0:quiz', 'message_id': 'mid-0001',
+                                                             'slot': '0:quiz', 'state': {'answers': {'0': 1}},
+                                                             'updated_at': '2026-10-13T00:00:00Z'}]},
+                                           headers={'X-CSRF-Token': csrf})
+    
+                def lista():
+                    out['l'] = client.get('/api/ui-state')
+    
+                def pega(tipo):
+                    for _ in range(3):
+                        req = ws.receive_json()
+                        if req['type'] == 'sess_revogados':
+                            ws.send_json({'request_id': req['request_id'],
+                                          'type': 'sess_revogados', 'sids': []})
+                            continue
+                        assert req['type'] == tipo, req
+                        return req
+                    raise AssertionError('sem ' + tipo)
+    
+                t = threading.Thread(target=salva)
+                t.start()
+                req = pega('ui_state_save')
+                ws.send_json({'request_id': req['request_id'], 'type': 'ui_state_saved', 'saved': 1})
+                t.join(timeout=8)
+                assert out['s'].json() == {'saved': 1}
+    
+                t = threading.Thread(target=lista)
+                t.start()
+                req = pega('ui_state_list')
+                ws.send_json({'request_id': req['request_id'], 'type': 'ui_state_list', 'states': []})
+                t.join(timeout=8)
+>               assert out['l'].json() == {'states': []}
+E               AssertionError: assert {'states': []...t_cursor': ''} == {'states': []}
+E                 
+E                 Omitting 1 identical items, use -vv to show
+E                 Left contains 1 more item:
+E                 {'next_cursor': ''}
+E                 Use -v to get more diff
+
+tests\test_jdui.py:243: AssertionError
+_________________ test_searxng_instancia_propria_via_loopback _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002CF84B260B0>
+
+    def test_searxng_instancia_propria_via_loopback(monkeypatch):
+        """Inst�ncia autorizada (JULIA_SEARXNG_URL): JSON /search real via HTTP."""
+        import json as _json
+        import threading
+        from http.server import BaseHTTPRequestHandler, HTTPServer
+        monkeypatch.setattr(research, "_ips_globais", lambda host: None)
+    
+        class _H(BaseHTTPRequestHandler):
+            def do_GET(self):
+                corpo = _json.dumps({"results": [
+                    {"title": "Fonte Local", "url": "https://exemplo.com/a",
+                     "content": "trecho local"}]}).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(corpo)))
+                self.end_headers()
+                self.wfile.write(corpo)
+    
+            def log_message(self, *a):
+                pass
+    
+        srv = HTTPServer(("127.0.0.1", 0), _H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            sx = ra.ProvedorSearXNG(f"http://127.0.0.1:{srv.server_port}")
+            achados, info = ra.buscar_com_fallback([sx], "tema")
+>           assert len(achados) == 1 and info["provedor"] == "searxng"
+E           assert (0 == 1)
+E            +  where 0 = len([])
+
+tests\test_research_agents.py:257: AssertionError
+___________________________ test_e2e_local_pipeline ___________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002CF84BC5780>
+
+    def test_e2e_local_pipeline(monkeypatch):
+        import threading
+        from http.server import BaseHTTPRequestHandler, HTTPServer
+        monkeypatch.setattr(research, "_ips_globais", lambda host: None)
+    
+        class _H(BaseHTTPRequestHandler):
+            def do_GET(self):
+                if self.path.startswith("/busca"):
+                    corpo = ('<html><body><a class="result__a" href="http://127.0.0.1:PORT/artigo">'
+                             "Artigo Local</a>"
+                             '<div class="result__snippet">trecho local</div></body></html>'
+                             ).replace("PORT", str(srv.server_port)).encode()
+                else:
+                    corpo = ("<html><head><title>Artigo Local</title></head><body>"
+                             "<nav>menu</nav><p>Conte�do real do artigo local.</p></body></html>"
+                             ).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(corpo)))
+                self.end_headers()
+                self.wfile.write(corpo)
+    
+            def log_message(self, *a):
+                pass
+    
+        srv = HTTPServer(("127.0.0.1", 0), _H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            base = f"http://127.0.0.1:{srv.server_port}/busca?q="
+            db = _db()
+            res = research.pesquisa_rapida(
+                db, "ana", "artigo local",
+                buscar_fn=lambda q: research.buscar_ddg(q, base=base, max_resultados=3),
+                recuperar_fn=None, max_fontes=1)
+>           assert len(res["fontes"]) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests\test_research_recovery.py:268: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_jdui.py::test_relay_ui_state_via_agente_fake - AssertionErr...
+FAILED tests/test_research_agents.py::test_searxng_instancia_propria_via_loopback
+FAILED tests/test_research_recovery.py::test_e2e_local_pipeline - assert 0 == 1
+3 failed, 937 passed, 4 skipped, 2 warnings in 217.18s (0:03:37)

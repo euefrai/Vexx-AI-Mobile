@@ -1,0 +1,434 @@
+diff --git a/pc_agent.py b/pc_agent.py
+index b6c9abe..919a519 100644
+--- a/pc_agent.py
++++ b/pc_agent.py
+@@ -312,6 +312,8 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
+     owner = dono_valido(owner)
+     confirmed = []
+     with db:
++        if not db.in_transaction:
++            db.execute("BEGIN IMMEDIATE")
+         for m in rows:
+             # The relay validates payloads, but the agent independently limits data.
+             if not isinstance(m, dict):
+@@ -326,6 +328,12 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
+                     isinstance(created, str) and 10 <= len(created) <= 48 and
+                     m.get("origin") == "mobile" and m.get("role") in ("user", "assistant")):
+                 continue
++            if workspace_store.chat_deleted(db, owner, conv):
++                continue
++            existing = db.execute("SELECT conversation_id,role,text,created_at FROM messages "
++                                  "WHERE id=? AND owner_id=? AND origin='mobile'", (mid, owner)).fetchone()
++            if existing and tuple(existing) != (conv, m["role"], txt, created):
++                continue
+             db.execute("""INSERT OR IGNORE INTO messages
+                 (id, conversation_id, origin, role, text, created_at, received_at, owner_id)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+@@ -335,13 +343,20 @@ def persist_messages(db, rows, owner=DONO_PADRAO):
+     return confirmed
+ 
+ 
+-def list_messages(db, limit=200, owner=DONO_PADRAO):
++def list_messages(db, limit=200, owner=DONO_PADRAO, conversation_id="", before=None):
+     owner = dono_valido(owner)
++    filters, params = "", ["mobile", owner]
++    if conversation_id:
++        filters += " AND conversation_id=?"
++        params.append(conversation_id)
++    if before:
++        filters += " AND (created_at,id)<(?,?)"
++        params.extend(before)
++    params.append(min(max(int(limit), 1), 200))
+     rows = db.execute("""SELECT id, conversation_id, origin, role, text, created_at,
+                                 COALESCE(model, '')
+                          FROM messages WHERE origin=? AND owner_id=?
+-                         ORDER BY created_at DESC, id DESC LIMIT ?""",
+-                      ("mobile", owner, min(max(int(limit), 1), 200))).fetchall()
++                         """ + filters + " ORDER BY created_at DESC, id DESC LIMIT ?", params).fetchall()
+     cols = ["id", "conversation_id", "origin", "role", "text", "created_at", "model"]
+     return [dict(zip(cols, row)) for row in reversed(rows)]
+ 
+@@ -2170,6 +2185,10 @@ def ai_estado(db, user_message_id: str, owner=DONO_PADRAO):
+ def ai_marcar(db, user_message_id, conversation_id, model, state,
+               reply_id=None, response_text=None, error=None, owner=DONO_PADRAO):
+     with db:
++        if not db.in_transaction:
++            db.execute("BEGIN IMMEDIATE")
++        if workspace_store.chat_deleted(db, dono_valido(owner), conversation_id):
++            return
+         db.execute("""INSERT INTO ai_requests
+             (user_message_id, conversation_id, model, state, reply_id,
+              response_text, error, created_at, updated_at, owner_id)
+@@ -2381,12 +2400,16 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
+     if not (isinstance(modelo, str) and 1 <= len(modelo) <= 120):
+         return {"error": "Modelo inválido.", "codigo": "invalido"}
+     owner = dono_valido(payload.get("owner"))
++    if workspace_store.chat_deleted(db, owner, conv):
++        return {"error": "Conversa excluída.", "codigo": "excluida"}
+     if dono_bloqueado(db, owner):
+         return {"error": "Conta indisponível.", "codigo": "bloqueada"}
+-    identity = db.execute("SELECT conversation_id, role FROM messages WHERE id=? "
++    identity = db.execute("SELECT conversation_id, role, text FROM messages WHERE id=? "
+                           "AND origin='mobile' AND owner_id=?", (mid, owner)).fetchone()
+-    if identity and identity != (conv, "user"):
++    if identity and identity[:2] != (conv, "user"):
+         return {"error": "Identificador da mensagem pertence a outra conversa ou papel.", "codigo": "invalido"}
++    if identity and payload.get("text") and identity[2] != payload["text"]:
++        return {"error": "Este identificador já está associado a outra mensagem.", "codigo": "conflito"}
+     previo = ai_estado(db, mid, owner)
+     if previo and previo["state"] == "completed":
+         return {"replay": True, "reply_id": previo["reply_id"],
+@@ -2434,6 +2457,10 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
+ def ai_guardar_resposta(db, mid, conv, modelo, reply_id, texto, owner=DONO_PADRAO) -> None:
+     owner = dono_valido(owner)
+     with db:
++        if not db.in_transaction:
++            db.execute("BEGIN IMMEDIATE")
++        if workspace_store.chat_deleted(db, owner, conv):
++            return
+         db.execute("""INSERT OR IGNORE INTO messages
+             (id, conversation_id, origin, role, text, created_at, received_at, model, owner_id)
+             VALUES (?, ?, 'mobile', 'assistant', ?, ?, ?, ?, ?)""",
+@@ -4902,7 +4929,8 @@ def run():
+                         reply = {"request_id": request_id, "type": "ack", "confirmed_ids": confirmed_ids}
+                     elif req.get("type") == "list":
+                         reply = {"request_id": request_id, "type": "history",
+-                                 "messages": list_messages(db, req.get("limit", 200), dono)}
++                                 "messages": list_messages(db, req.get("limit", 200), dono,
++                                     str(req.get("conversation_id", "")), req.get("before"))}
+                     elif req.get("type") == "workspace_sync":
+                         try:
+                             workspace_store.merge_records(db, req.get("records", []), dono)
+@@ -5186,49 +5214,19 @@ def run():
+                     elif req.get("type") == "research_job_pause":
+                         reply = {"request_id": request_id, **rjob_pause(db, req, dono)}
+                     elif req.get("type") == "ui_state_save":
+-                        salvos = 0
+-                        with db:
+-                            for s in req.get("states", [])[:300]:
+-                                try:
+-                                    k = str(s.get("k", ""))[:200]
+-                                    if not (k and isinstance(s.get("state"), str)
+-                                            and len(s["state"]) <= 8000):
+-                                        continue
+-                                    ex = db.execute("SELECT owner_id FROM ui_state WHERE k=?",
+-                                                    (k,)).fetchone()
+-                                    if ex and ex[0] != dono:
+-                                        continue  # chave de outro dono: não toca
+-                                    db.execute("""INSERT INTO ui_state
+-                                        (k, message_id, slot, state, updated_at, owner_id)
+-                                        VALUES (?, ?, ?, ?, ?, ?)
+-                                        ON CONFLICT(k) DO UPDATE SET
+-                                        state=excluded.state, updated_at=excluded.updated_at""",
+-                                        (k, str(s.get("message_id", ""))[:100],
+-                                         str(s.get("slot", ""))[:40], s["state"],
+-                                         str(s.get("updated_at", agora_iso()))[:48], dono))
+-                                    salvos += 1
+-                                except Exception:
+-                                    continue
+-                        reply = {"request_id": request_id, "type": "ui_state_saved",
+-                                 "saved": salvos}
++                        salvos = workspace_store.save_ui_states(db, dono, req.get("states", []))
++                        reply = {"request_id": request_id, "type": "ui_state_saved", "saved": salvos}
+                     elif req.get("type") == "ui_state_list":
+-                        rows = db.execute("SELECT k, message_id, slot, state, updated_at "
+-                                          "FROM ui_state WHERE owner_id=? "
+-                                          "ORDER BY updated_at DESC LIMIT 500", (dono,)).fetchall()
+-                        reply = {"request_id": request_id, "type": "ui_state_list",
+-                                 "states": [{"k": k, "message_id": m, "slot": s,
+-                                             "state": st, "updated_at": u}
+-                                            for k, m, s, st, u in rows]}
++                        rows = workspace_store.ui_state_page(db, dono, str(req.get("cursor", ""))[:200])
++                        reply = {"request_id": request_id, "type": "ui_state_list", "states": rows,
++                                 "next_cursor": rows[-1]["k"] if len(rows) == 200 else ""}
+                     elif req.get("type") == "conv_forget":
+                         conv = req.get("conversation_id", "")
+                         n = 0
+                         if isinstance(conv, str) and 3 <= len(conv) <= 100:
+-                            with db:
+-                                cur = db.execute("DELETE FROM messages WHERE origin='mobile' "
+-                                                 "AND owner_id=? AND conversation_id=?", (dono, conv))
+-                                n = cur.rowcount or 0
+-                                db.execute("DELETE FROM ai_requests WHERE owner_id=? AND conversation_id=?",
+-                                           (dono, conv))
++                            n = db.execute("SELECT count(*) FROM messages WHERE origin='mobile' "
++                                           "AND owner_id=? AND conversation_id=?", (dono, conv)).fetchone()[0]
++                            workspace_store.forget_chat(db, dono, conv)
+                         log.info("conversa esquecida no PC: %s (%d msgs)", conv, n)
+                         reply = {"request_id": request_id, "type": "conv_forgotten",
+                                  "deleted": n}
+@@ -5314,6 +5312,10 @@ def run():
+                             reply = {"request_id": request_id, "type": "ai_error",
+                                      "error": str(exc), "codigo": exc.codigo}
+                     elif req.get("type") == "ai_stream":
++                        if len(cancelados) >= 8 or request_id in cancelados:
++                            enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",
++                                "codigo": "ocupado", "error": "Muitas respostas simultâneas; aguarde."})
++                            continue
+                         sessao = SessaoStream()
+                         cancelados[request_id] = sessao
+                         threading.Thread(target=ai_stream_worker,
+diff --git a/server.py b/server.py
+index b685404..798a039 100644
+--- a/server.py
++++ b/server.py
+@@ -2,6 +2,7 @@
+ No chat history or SQLite file is stored on Render.
+ """
+ import asyncio
++import base64
+ import hmac
+ import json
+ import logging
+@@ -134,10 +135,7 @@ def emitir_sessao(response: Response, uid: str, nome: str, sid: str = "") -> dic
+     return {"authenticated": True, "csrf": csrf_value(token), "user": nome, "uid": uid}
+ 
+ 
+-# Revogação server-side: lista de sids revogados no PC (TTL 60s; expiração
+-# de 12h limita a janela quando o PC está offline — documentado).
+-# `suportado=False` após 2 timeouts: agentes antigos sem sess_revogados não
+-# sofrem stall a cada minuto.
++# Revogação no PC; falhas transitórias nunca desabilitam a verificação.
+ revogados = {"sids": set(), "ts": 0.0, "suportado": True, "falhas": 0}
+ REVOGA_TTL = 60.0
+ 
+@@ -149,19 +147,22 @@ async def revogacao_ok(request: Request) -> str:
+     sid = str(data.get("sid") or "")
+     if sid:
+         agora = time.monotonic()
+-        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is not None and revogados["suportado"]:
++        if sid in revogados["sids"]:
++            raise HTTPException(status_code=401, detail="Sessão revogada")
++        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is None:
++            raise HTTPException(503, "Computador offline; não foi possível verificar a sessão")
++        if agora - revogados["ts"] > REVOGA_TTL and relay.ws is not None:
+             try:
+                 res = await relay.exchange({"type": "sess_revogados"}, timeout=5.0)
+                 if res.get("type") == "sess_revogados":
+-                    revogados["sids"] = set(res.get("sids", [])[:500])
++                    revogados["sids"] = set(res.get("sids", []))
+                     revogados["ts"] = agora
+                     revogados["falhas"] = 0
+                 else:
+-                    revogados["falhas"] += 1
++                    raise HTTPException(503, "Não foi possível verificar a sessão")
+             except HTTPException:
+                 revogados["falhas"] += 1
+-            if revogados["falhas"] >= 2:
+-                revogados["suportado"] = False
++                raise HTTPException(503, "Não foi possível verificar a sessão; tente novamente") from None
+         if sid in revogados["sids"]:
+             raise HTTPException(status_code=401, detail="Sessão revogada")
+     return uid
+@@ -288,11 +289,9 @@ class AgentRelay:
+             if not future.done():
+                 future.set_exception(HTTPException(503, "Agente desconectado"))
+         for fila in self.streams.values():
+-            try:
+-                fila.put_nowait({"type": "ai_error", "error": "Agente desconectado",
+-                                 "codigo": "desconectado"})
+-            except asyncio.QueueFull:
+-                pass
++            while not fila.empty():
++                fila.get_nowait()
++            fila.put_nowait({"type": "ai_error", "error": "Agente desconectado", "codigo": "desconectado"})
+         for sub in self.research_subs.values():
+             try:
+                 sub["fila"].put_nowait({"seq": -1, "tipo": "relay_desconectado"})
+@@ -507,12 +506,12 @@ async def session(request: Request):
+ @app.post("/api/logout")
+ async def logout(request: Request, response: Response):
+     require_csrf(request)
+-    try:
+-        sid = str(sessao_dados(request).get("sid") or "")
+-        if sid and relay.ws is not None:
+-            await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
+-    except HTTPException:
+-        pass
++    sid = str(sessao_dados(request).get("sid") or "")
++    if sid:
++        result = await relay.exchange({"type": "auth_logout", "sid": sid}, timeout=10.0)
++        if result.get("type") != "auth_logged_out":
++            raise HTTPException(503, "O PC não confirmou o encerramento da sessão")
++        revogados["sids"].add(sid)
+     response.delete_cookie("JULIA_session", path="/")
+     return {"ok": True}
+ 
+@@ -924,16 +923,33 @@ async def sync_messages(request: Request, body: SyncBody):
+ 
+ 
+ @app.get("/api/messages")
+-async def messages(request: Request, conversation_id: str = ""):
++async def messages(request: Request, conversation_id: str = "", cursor: str = ""):
+     verify_session(request)
+     dono = await revogacao_ok(request)
+-    result = await relay.exchange({"type": "list", "owner": dono, "limit": 200})
++    before = None
++    if cursor:
++        try:
++            if len(cursor) > 400:
++                raise ValueError()
++            before = json.loads(base64.urlsafe_b64decode(cursor).decode())
++            if not (isinstance(before, list) and len(before) == 2 and
++                    all(isinstance(v, str) for v in before) and len(before[0]) <= 48 and len(before[1]) <= 100):
++                raise ValueError()
++        except (ValueError, UnicodeError):
++            raise HTTPException(422, "Cursor inválido") from None
++    result = await relay.exchange({"type": "list", "owner": dono, "limit": 200,
++                                   "conversation_id": conversation_id, "before": before})
+     if result.get("type") != "history":
+         raise HTTPException(503, "Histórico não disponível")
+     msgs = result.get("messages", [])[:200]
+     if conversation_id:
+         msgs = [m for m in msgs if m.get("conversation_id") == conversation_id]
+-    return {"messages": msgs}
++    next_cursor = ""
++    if len(msgs) == 200:
++        first = msgs[0]
++        next_cursor = base64.urlsafe_b64encode(json.dumps(
++            [first["created_at"], first["id"]]).encode()).decode()
++    return {"messages": msgs, "next_cursor": next_cursor}
+ 
+ 
+ @app.post("/api/workspace/sync")
+@@ -1130,10 +1146,10 @@ async def ui_state_save(request: Request, body: UiStateBody):
+ 
+ 
+ @app.get("/api/ui-state")
+-async def ui_state_list(request: Request):
++async def ui_state_list(request: Request, cursor: str = ""):
+     verify_session(request)
+     dono = await revogacao_ok(request)
+-    result = await relay.exchange({"type": "ui_state_list", "owner": dono},
++    result = await relay.exchange({"type": "ui_state_list", "owner": dono, "cursor": cursor[:200]},
+                                   timeout=20.0)
+     if result.get("type") != "ui_state_list":
+         raise HTTPException(503, "Estados indisponíveis")
+@@ -1147,7 +1163,7 @@ async def ui_state_list(request: Request):
+                         "updated_at": r.get("updated_at", "")})
+         except (ValueError, KeyError, TypeError):
+             continue
+-    return {"states": out}
++    return {"states": out, "next_cursor": result.get("next_cursor", "")}
+ 
+ 
+ @app.delete("/api/conversations/{conversation_id}")
+@@ -2029,6 +2045,11 @@ async def ai_models(request: Request):
+                           for p in provs if isinstance(p, dict)][:20]}
+ 
+ 
++@app.post("/api/ai/stream")
++async def ai_stream_post(request: Request, body: AIRequest):
++    return await ai_stream(request, **body.model_dump())
++
++
+ @app.get("/api/ai/stream")
+ async def ai_stream(request: Request, message_id: str = "", conversation_id: str = "",
+                     model: str = "", memory: str = "1", local_time: str = "",
+@@ -2055,13 +2076,15 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
+         raise HTTPException(422, "Latitude inválida")
+     if longitude is not None and not -180 <= longitude <= 180:
+         raise HTTPException(422, "Longitude inválida")
++    if len(relay.streams) >= 8:
++        raise HTTPException(429, "Muitas respostas simultâneas; aguarde uma terminar")
+     stream_id = uuid.uuid4().hex
+-    fila: asyncio.Queue = asyncio.Queue()
++    fila: asyncio.Queue = asyncio.Queue(maxsize=256)
+     relay.streams[stream_id] = fila
+     payload = {"type": "ai_stream", "owner": dono,
+                "message_id": message_id,
+                "conversation_id": conversation_id, "model": model[:120],
+-               "memory": "1" if memory != "0" else "0",
++               "memory": "0" if str(memory) == "0" else "1",
+                "local_time": local_time, "timezone": timezone, "city": city,
+                "latitude": latitude, "longitude": longitude,
+                "text": text, "created_at": created_at, "scene_state": scene_state}
+@@ -2112,7 +2135,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
+                     yield f"event: cancelled\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'partial': item.get('partial', '')}, ensure_ascii=False)}\n\n"
+                     return
+                 else:
+-                    concluido = True
++                    concluido = item.get("codigo") != "backpressure"
+                     log.info("AI_RELAY_ERROR msg=%s total_ms=%d code=%s",
+                              message_id[-8:],
+                              round((time.monotonic() - request_started) * 1000),
+@@ -2168,7 +2191,12 @@ async def agent_ws(websocket: WebSocket):
+                     try:
+                         fila.put_nowait(body)
+                     except asyncio.QueueFull:
+-                        pass
++                        # Never silently lose a terminal result or a delta.
++                        while not fila.empty():
++                            fila.get_nowait()
++                        fila.put_nowait(body if body.get("type") != "ai_delta" else {
++                            "type": "ai_error", "codigo": "backpressure",
++                            "error": "Conexão lenta; a resposta parcial ficará salva. Tente novamente."})
+                     continue
+                 # Sem stream ativa: ai_done/ai_error de POST /api/ai caem no pending.
+             if isinstance(body, dict) and body.get("type") == "research_event_push":
+diff --git a/workspace_store.py b/workspace_store.py
+index 01c79ae..824d0ff 100644
+--- a/workspace_store.py
++++ b/workspace_store.py
+@@ -57,7 +57,11 @@ def merge_records(db, records, owner):
+     # to supply the owner: it is taken from the authenticated RPC envelope.
+     batch = WorkspaceBatch.model_validate({"records": records})
+     with db:
++        if not db.in_transaction:
++            db.execute("BEGIN IMMEDIATE")
+         for record in batch.records:
++            if record.kind == "chat" and not record.deleted and chat_deleted(db, owner, record.id):
++                continue  # Exclusão é terminal; cliente atrasado não restaura o chat.
+             data = record.model_dump()
+             cursor = db.execute("""INSERT INTO workspace_records
+                 (owner_id, kind, id, payload, updated_at, change_id) VALUES (?,?,?,?,?,?)
+@@ -84,3 +88,49 @@ def merge_records(db, records, owner):
+ def list_records(db, owner):
+     return [json.loads(row[0]) for row in db.execute(
+         "SELECT payload FROM workspace_records WHERE owner_id=? ORDER BY kind,id", (owner,))]
++
++
++def chat_deleted(db, owner, conv):
++    row = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
++                     (owner, conv)).fetchone()
++    return bool(row and json.loads(row[0]).get("deleted"))
++
++
++def forget_chat(db, owner, conv):
++    old = db.execute("SELECT payload FROM workspace_records WHERE owner_id=? AND kind='chat' AND id=?",
++                     (owner, conv)).fetchone()
++    record = json.loads(old[0]) if old else dict(id=conv, kind="chat", title="Conversa excluída")
++    now = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
++    # Even a device clock in the future must not prevent an explicit deletion.
++    record.update(deleted=True, updated_at=max(now, record.get("updated_at", "")),
++                  change_id="z" * 100)
++    merge_records(db, [record], owner)
++
++
++def save_ui_states(db, owner, states):
++    saved = 0
++    with db:
++        for item in states[:300]:
++            try:
++                key, state = item["k"], item["state"]
++                if not isinstance(key, str) or not 3 <= len(key) <= 200:
++                    continue
++                if not isinstance(state, str) or len(state) > 8000 or not isinstance(json.loads(state), dict):
++                    continue
++                updated = WorkspaceRecord.timestamp(item["updated_at"])
++                cursor = db.execute("""INSERT INTO ui_state(k,message_id,slot,state,updated_at,owner_id)
++                    VALUES(?,?,?,?,?,?) ON CONFLICT(k) DO UPDATE SET
++                    state=excluded.state,updated_at=excluded.updated_at
++                    WHERE ui_state.owner_id=excluded.owner_id AND
++                    (excluded.updated_at,excluded.state)>(ui_state.updated_at,ui_state.state)""",
++                    (key, str(item["message_id"])[:100], str(item["slot"])[:40], state, updated, owner))
++                saved += max(0, cursor.rowcount)
++            except (KeyError, ValueError, TypeError):
++                continue
++    return saved
++
++
++def ui_state_page(db, owner, after=""):
++    rows = db.execute("SELECT k,message_id,slot,state,updated_at FROM ui_state "
++                      "WHERE owner_id=? AND k>? ORDER BY k LIMIT 200", (owner, after)).fetchall()
++    return [dict(zip(("k","message_id","slot","state","updated_at"), row)) for row in rows]
