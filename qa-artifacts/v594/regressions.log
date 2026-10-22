@@ -1,0 +1,19 @@
+...............F........................................................ [ 81%]
+...............F                                                         [100%]
+================================== FAILURES ===================================
+______________ test_ai_completa_responde_hora_sem_chamar_modelo _______________
+tests\test_memoria41.py:176: in test_ai_completa_responde_hora_sem_chamar_modelo
+    assert result['response_text'].startswith('São 21:24 (America/Sao_Paulo).')
+E   AssertionError: assert False
+E    +  where False = <built-in method startswith of str object at 0x00000211B3D332B0>('São 21:24 (America/Sao_Paulo).')
+E    +    where <built-in method startswith of str object at 0x00000211B3D332B0> = 'Data local: 21/10/2026; horário: 21:24 (America/Sao_Paulo).'.startswith
+_________________ test_document_context_and_project_isolation _________________
+tests\test_context_v594.py:182: in test_document_context_and_project_isolation
+    assert pc_agent.doc_mencionado(db,'qual a temperatura todo dia?','project-chat','u-alice')==''
+E   AssertionError: assert 'doc-722760acde4d' == ''
+E     
+E     + doc-722760acde4d
+=========================== short test summary info ===========================
+FAILED tests/test_memoria41.py::test_ai_completa_responde_hora_sem_chamar_modelo
+FAILED tests/test_context_v594.py::test_document_context_and_project_isolation
+2 failed, 86 passed in 30.40s

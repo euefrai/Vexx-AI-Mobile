@@ -1,0 +1,116 @@
+{
+  "head": "24ba58b",
+  "kind": "BASELINE",
+  "reproductions": {
+    "greeting_after_weather": "ROUTED:qual a temperatura em oi",
+    "slash_location_after_weather": null,
+    "unrelated_doc_fallback": true,
+    "first_response": "Para consultar o clima, em qual cidade você está? Informe cidade e estado/país (por exemplo, Salvador, Bahia)."
+  },
+  "geo-whole": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=ubata+bahia&count=5&language=pt&format=json",
+    "data": {
+      "generationtime_ms": 0.18823147
+    }
+  },
+  "geo-city": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=Ubata&countryCode=BR&count=20&language=pt&format=json",
+    "data": {
+      "results": [
+        {
+          "id": 3445849,
+          "name": "Ubatã",
+          "latitude": -14.20906,
+          "longitude": -39.52641,
+          "elevation": 112.0,
+          "feature_code": "PPL",
+          "country_code": "BR",
+          "admin1_id": 3471168,
+          "admin2_id": 6321083,
+          "timezone": "America/Bahia",
+          "population": 27263,
+          "country_id": 3469034,
+          "country": "Brasil",
+          "admin1": "Bahia",
+          "admin2": "Ubatã"
+        }
+      ],
+      "generationtime_ms": 0.19931793
+    }
+  },
+  "ibge": {
+    "url": "https://servicodados.ibge.gov.br/api/v1/localidades/estados/BA/municipios",
+    "data": [
+      {
+        "id": 2932309,
+        "nome": "Ubatã",
+        "microrregiao": {
+          "id": 29031,
+          "nome": "Ilhéus-Itabuna",
+          "mesorregiao": {
+            "id": 2907,
+            "nome": "Sul Baiano",
+            "UF": {
+              "id": 29,
+              "sigla": "BA",
+              "nome": "Bahia",
+              "regiao": {
+                "id": 2,
+                "sigla": "NE",
+                "nome": "Nordeste"
+              }
+            }
+          }
+        },
+        "regiao-imediata": {
+          "id": 290014,
+          "nome": "Ipiaú",
+          "regiao-intermediaria": {
+            "id": 2904,
+            "nome": "Vitória da Conquista",
+            "UF": {
+              "id": 29,
+              "sigla": "BA",
+              "nome": "Bahia",
+              "regiao": {
+                "id": 2,
+                "sigla": "NE",
+                "nome": "Nordeste"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "ibge-geometry": {
+    "url": "https://servicodados.ibge.gov.br/api/v3/malhas/municipios/2932309/metadados",
+    "data": [
+      {
+        "id": "2932309",
+        "nivel-geografico": "município",
+        "centroide": {
+          "longitude": -39.5219,
+          "latitude": -14.0964
+        },
+        "regiao-limitrofe": [
+          {
+            "longitude": -39.5784,
+            "latitude": -13.9322
+          },
+          {
+            "longitude": -39.4708,
+            "latitude": -14.2398
+          }
+        ],
+        "area": {
+          "dimensao": "177.643",
+          "unidade": {
+            "id": "km2",
+            "nome": "Quilômetros quadrados"
+          }
+        }
+      }
+    ]
+  }
+}

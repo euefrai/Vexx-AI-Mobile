@@ -1,0 +1,21 @@
+................FF..............F..                                      [100%]
+================================== FAILURES ===================================
+________________________ test_brazil_aliases[Ubat\xe3] ________________________
+tests\test_context_v594.py:54: in test_brazil_aliases
+    assert not error and place['name']=='Ubatã' and place['state']=='Bahia'
+E   AssertionError: assert (not 'Encontrei mais de uma localização. Qual delas?\n\n- Ubatã, Bahia, Brasil\n- Ubatã, Bahia, Japão\n\nRepita o pedido incluindo a cidade e o estado/país.')
+_________________________ test_brazil_aliases[Ubata] __________________________
+tests\test_context_v594.py:54: in test_brazil_aliases
+    assert not error and place['name']=='Ubatã' and place['state']=='Bahia'
+E   AssertionError: assert (not 'Encontrei mais de uma localização. Qual delas?\n\n- Ubatã, Bahia, Brasil\n- Ubatã, Bahia, Japão\n\nRepita o pedido incluindo a cidade e o estado/país.')
+__________________ test_real_clock_ignores_stale_device_date __________________
+tests\test_context_v594.py:160: in test_real_clock_ignores_stale_device_date
+    assert now.strftime('%d/%m/%Y') in result and now.strftime('%H:%M') in result and '2000' not in result
+E   AssertionError: assert ('22/10/2026' in 'São 16:25 (America/Bahia).')
+E    +  where '22/10/2026' = <built-in method strftime of datetime.datetime object at 0x000001E126731B00>('%d/%m/%Y')
+E    +    where <built-in method strftime of datetime.datetime object at 0x000001E126731B00> = datetime.datetime(2026, 10, 22, 16, 25, 16, 602984, tzinfo=zoneinfo.ZoneInfo(key='America/Bahia')).strftime
+=========================== short test summary info ===========================
+FAILED tests/test_context_v594.py::test_brazil_aliases[Ubat\xe3] - AssertionE...
+FAILED tests/test_context_v594.py::test_brazil_aliases[Ubata] - AssertionErro...
+FAILED tests/test_context_v594.py::test_real_clock_ignores_stale_device_date
+3 failed, 32 passed in 4.35s

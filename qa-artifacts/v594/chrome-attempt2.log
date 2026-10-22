@@ -1,0 +1,18 @@
+[ 15.79s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-desktop.png
+[ 16.56s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-mobile.png
+[ 17.60s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\time-mobile.png
+[ 63.03s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\chrome-failure.png
+{"kind": "BROWSER_E2E_LOCAL_FIXTURE", "model_inference": false, "ok": false, "error": "AssertionError: chat completed: qual a temperatura? não ocorreu em 45s (último: False)", "ui_state": {"job": null, "hidden": true, "label": "Pesquisando…", "last": []}}
+Traceback (most recent call last):
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 199, in <module>
+    run()
+    ~~~^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 93, in run
+    chat('qual a temperatura?',('em qual cidade',))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 66, in chat
+    cdp.esperar_js(f"document.querySelectorAll('.message.ai').length>{count} && !aiAbort",bool,timeout,'chat completed: '+text)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v58.py", line 147, in esperar_js
+    raise AssertionError(f"{nome} não ocorreu em {timeout}s (último: {ultimo})")
+AssertionError: chat completed: qual a temperatura? não ocorreu em 45s (último: False)

@@ -1,0 +1,59 @@
+........................................................................ [  6%]
+........................................................................ [ 12%]
+...........................................................s............ [ 19%]
+....................................................................F... [ 25%]
+........................................................................ [ 31%]
+......................F................................................. [ 38%]
+........................................................................ [ 44%]
+........................................................................ [ 51%]
+....................................................................s... [ 57%]
+........................................................................ [ 63%]
+........................................................................ [ 70%]
+.........................................................s..........s... [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 89%]
+.....................................................................F.. [ 95%]
+................................................                         [100%]
+================================== FAILURES ===================================
+_____________________ test_ai_replay_nao_vaza_entre_donos _____________________
+tests\test_isolamento.py:85: in test_ai_replay_nao_vaza_entre_donos
+    assert r['response_text'] == 'RESP'
+E   AssertionError: assert 'Oi! Tudo bem...posso ajudar?' == 'RESP'
+E     
+E     - RESP
+E     + Oi! Tudo bem? Como posso ajudar?
+______________ test_ai_completa_responde_hora_sem_chamar_modelo _______________
+tests\test_memoria41.py:170: in test_ai_completa_responde_hora_sem_chamar_modelo
+    assert result['response_text'] == 'São 21:24 (America/Sao_Paulo).'
+E   assert 'São 16:32 (A...{}}]}}]}\n```' == 'São 21:24 (A...a/Sao_Paulo).'
+E     
+E     - São 21:24 (America/Sao_Paulo).
+E     ?      ----
+E     + São 16:32 (America/Sao_Paulo).
+E     ?     ++++                      +
+E     + 
+E     + ```jdui
+E     + {"version": "JULIA-ui-message/v1", "blocks": [{"type": "ui", "component": "cards", "props": {"title": "", "items": [{"title": "Horário atual", "desc": "22/10/2026 · America/Sao_Paulo", "value": "16:32", "badge": "Relógio do sistema", "url": "", "action": {}}]}}]}
+E     + ```
+______________ test_worker_exception_releases_message_for_retry _______________
+tests\test_ui_polish.py:36: in test_worker_exception_releases_message_for_retry
+    assert pc_agent.ai_estado(db, payload['message_id'])['state'] == 'failed'
+E   AssertionError: assert 'completed' == 'failed'
+E     
+E     - failed
+E     + completed
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_isolamento.py::test_ai_replay_nao_vaza_entre_donos - Assert...
+FAILED tests/test_memoria41.py::test_ai_completa_responde_hora_sem_chamar_modelo
+FAILED tests/test_ui_polish.py::test_worker_exception_releases_message_for_retry
+3 failed, 1121 passed, 4 skipped, 2 warnings in 259.82s (0:04:19)

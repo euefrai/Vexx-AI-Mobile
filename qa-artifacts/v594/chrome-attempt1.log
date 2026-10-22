@@ -1,0 +1,12 @@
+[ 15.75s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-desktop.png
+[ 16.41s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-mobile.png
+[ 17.45s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\chrome-failure.png
+{"kind": "BROWSER_E2E_LOCAL_FIXTURE", "model_inference": false, "ok": false, "error": "AssertionError: ", "ui_state": {"job": null, "hidden": true, "label": "Pesquisando…", "last": []}}
+Traceback (most recent call last):
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 199, in <module>
+    run()
+    ~~~^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 90, in run
+    assert 'Relógio do sistema' in time_reply
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

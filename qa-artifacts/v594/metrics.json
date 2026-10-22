@@ -1,0 +1,178 @@
+{
+  "kind": "BOUNDED_LABELED_AND_LIVE_SAMPLE_NOT_UNIVERSAL",
+  "intent": {
+    "correct": 16,
+    "total": 16,
+    "cases": [
+      {
+        "text": "oi",
+        "expected": "GREETING",
+        "actual": "GREETING",
+        "ok": true,
+        "latency_ms": 13.15
+      },
+      {
+        "text": "oi, tudo bem?",
+        "expected": "GREETING",
+        "actual": "GREETING",
+        "ok": true,
+        "latency_ms": 0.266
+      },
+      {
+        "text": "que horas são agora?",
+        "expected": "CURRENT_TIME",
+        "actual": "CURRENT_TIME",
+        "ok": true,
+        "latency_ms": 19.15
+      },
+      {
+        "text": "qual temperatura em Ubatã?",
+        "expected": "WEATHER_CURRENT",
+        "actual": "WEATHER_CURRENT",
+        "ok": true,
+        "latency_ms": 0.689
+      },
+      {
+        "text": "vai chover amanhã em Ubatã?",
+        "expected": "WEATHER_FORECAST",
+        "actual": "WEATHER_FORECAST",
+        "ok": true,
+        "latency_ms": 0.362
+      },
+      {
+        "text": "pesquise a cidade de Oi no Japão",
+        "expected": "LOCATION_LOOKUP",
+        "actual": "LOCATION_LOOKUP",
+        "ok": true,
+        "latency_ms": 0.633
+      },
+      {
+        "text": "pesquise notebooks",
+        "expected": "SHOPPING",
+        "actual": "SHOPPING",
+        "ok": true,
+        "latency_ms": 5.147
+      },
+      {
+        "text": "resuma meu TODO.md",
+        "expected": "DOCUMENT_QUERY",
+        "actual": "DOCUMENT_QUERY",
+        "ok": true,
+        "latency_ms": 0.342
+      },
+      {
+        "text": "leia o arquivo do projeto",
+        "expected": "PROJECT_FILE_QUERY",
+        "actual": "PROJECT_FILE_QUERY",
+        "ok": true,
+        "latency_ms": 0.243
+      },
+      {
+        "text": "converta 100 USD para BRL",
+        "expected": "CURRENCY",
+        "actual": "CURRENCY",
+        "ok": true,
+        "latency_ms": 0.755
+      },
+      {
+        "text": "notícias de tecnologia hoje",
+        "expected": "NEWS",
+        "actual": "NEWS",
+        "ok": true,
+        "latency_ms": 0.699
+      },
+      {
+        "text": "passagens de ônibus de Salvador para Ilhéus",
+        "expected": "TRANSPORT",
+        "actual": "TRANSPORT",
+        "ok": true,
+        "latency_ms": 0.781
+      },
+      {
+        "text": "eventos em Salvador amanhã",
+        "expected": "EVENTS",
+        "actual": "EVENTS",
+        "ok": true,
+        "latency_ms": 0.265
+      },
+      {
+        "text": "pesquisa profunda sobre semicondutores",
+        "expected": "DEEP_RESEARCH",
+        "actual": "DEEP_RESEARCH",
+        "ok": true,
+        "latency_ms": 0.846
+      },
+      {
+        "text": "pesquise artigos científicos sobre baterias",
+        "expected": "GENERAL_SEARCH",
+        "actual": "GENERAL_SEARCH",
+        "ok": true,
+        "latency_ms": 0.662
+      },
+      {
+        "text": "como posso estudar melhor?",
+        "expected": "GENERAL_CHAT",
+        "actual": "GENERAL_CHAT",
+        "ok": true,
+        "latency_ms": 0.303
+      }
+    ]
+  },
+  "entity_resolution": {
+    "fixture_aliases": 6,
+    "fixture_distinct_cities": 3,
+    "live_municipality_ibge": 2932309,
+    "live_municipality_geonames": 3445849
+  },
+  "slot_retention": {
+    "fixture_tests": "tests/test_context_v594.py",
+    "live_tomorrow_city": true,
+    "cross_chat_city_prompt": true
+  },
+  "wrong_tool_invocation": {
+    "live_greeting_geocode_calls": 0
+  },
+  "context_contamination": {
+    "live_transcript_todo_mentions": 0
+  },
+  "live_data": {
+    "current_temperature": 27.4,
+    "grounded_current_value": true,
+    "forecast_date": "2026-10-23",
+    "weather_fetches": 1,
+    "retries": 0,
+    "tracked_json_calls": 2,
+    "tracked_json_errors": [],
+    "model_generation_calls": 0,
+    "measurement_scope": "Open-Meteo JSON adapters only; IBGE/Frankfurter/boot discovery calls excluded. retries=0 means no repeated JSON attempt within this chat run.",
+    "grounded_forecast_range": true
+  },
+  "latencies_ms": [
+    {
+      "text": "qual a temperatura em ubata bahia agora?",
+      "ms": 5504
+    },
+    {
+      "text": "e amanhã?",
+      "ms": 450
+    },
+    {
+      "text": "oi",
+      "ms": 416
+    },
+    {
+      "text": "que horas são agora?",
+      "ms": 426
+    },
+    {
+      "text": "qual a temperatura?",
+      "ms": 413
+    },
+    {
+      "text": "oi, tudo bem?",
+      "ms": 414
+    }
+  ],
+  "validation_code_head": "f8c2508",
+  "official_id_live_confirmed": true
+}

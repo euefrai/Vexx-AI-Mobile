@@ -1,0 +1,836 @@
+{
+  "kind": "DETERMINISTIC",
+  "holdout_sha256": "8adc5b7f0b7d70580d7fcfe9e7702d8e7bf1b84f23b1db9aca451b7d02401115",
+  "scope": "Document-level synthetic local retrieval and frozen candidate reranking; not universal web accuracy.",
+  "documents": {
+    "5": {
+      "report_schema": "julia-research-quality-report/1",
+      "dataset": {
+        "dataset_id": "julia-research-quality",
+        "version": "2.0.0",
+        "sha256": "4e4f5f2e773800a3c05537432f280513c7f7bd487dd8a395e77bc66d19e93e8f",
+        "truth_basis": "synthetic_local_fixture"
+      },
+      "execution": {
+        "kind": "local_frozen_document_retrieval",
+        "retriever": "docs_agent.trechos_relevantes",
+        "database": "temporary SQLite; owner-scoped fixture data only",
+        "python": "3.14.4",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "sqlite": "3.50.4",
+        "k": 5
+      },
+      "counts": {
+        "documents": 12,
+        "cases": 8,
+        "queries": 8
+      },
+      "timing_ms": {
+        "total": 309.92,
+        "extraction_mean": 6.48,
+        "retrieval_mean": 1.605,
+        "retrieval_max": 7.661,
+        "peak_python_kb": 8.7
+      },
+      "retrieval_metrics": {
+        "precision_at_k": 0.275,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.982614,
+        "duplicate_rate_at_k": 0.0
+      },
+      "by_category": {
+        "academic_research": {
+          "precision_at_k": 0.4,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "adversarial_research": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "document_research": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 2,
+          "query_count": 2
+        },
+        "factual_qa": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 0.333333,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.86091,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "multi_hop_research": {
+          "precision_at_k": 0.4,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "numerical_reasoning": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "temporal_research": {
+          "precision_at_k": 0.4,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        }
+      },
+      "source_checks": [
+        {
+          "case_id": "academic-abstract",
+          "category": "academic_research",
+          "primary_source_id": "abs-photon",
+          "primary_source_retrieved": true,
+          "republication_only": false
+        },
+        {
+          "case_id": "temporal-recency",
+          "category": "temporal_research",
+          "latest_source_id": "temp-2025",
+          "latest_source_retrieved": true
+        }
+      ],
+      "source_quality_metrics": {
+        "primary_source": {
+          "cases": 1,
+          "retrieved": 1,
+          "recall": 1.0,
+          "republication_only": 0
+        },
+        "latest_temporal_source": {
+          "cases": 1,
+          "retrieved": 1,
+          "recall": 1.0
+        },
+        "contradiction_evidence_pair": {
+          "cases": 0,
+          "complete": 0,
+          "recall": null
+        },
+        "independence": "not scored: domain or URL difference is not evidence of independent origin"
+      },
+      "optimization_recommendations": [
+        {
+          "signal": "low_precision_with_recall",
+          "recommendation": "Review ranking specificity and irrelevant top-K results without reducing coverage."
+        }
+      ],
+      "cases": [
+        {
+          "case_id": "json-retrieval",
+          "category": "document_research",
+          "queries": [
+            {
+              "query": "ciclo dias alface horta",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "data-horta"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-eb1d6b2294b2:0"
+              ],
+              "elapsed_ms": 7.661
+            }
+          ]
+        },
+        {
+          "case_id": "academic-abstract",
+          "category": "academic_research",
+          "queries": [
+            {
+              "query": "PhotonFlux-9 yield gain trial",
+              "metrics": {
+                "precision_at_k": 0.4,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "abs-photon",
+                "abs-photon-reprint"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-bb094b7d2cb4:0",
+                "doc-1d83a7705ea4:0"
+              ],
+              "elapsed_ms": 0.941
+            }
+          ]
+        },
+        {
+          "case_id": "temporal-recency",
+          "category": "temporal_research",
+          "queries": [
+            {
+              "query": "average chamber humidity trial",
+              "metrics": {
+                "precision_at_k": 0.4,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "temp-2025",
+                "temp-2023"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-4eac64071631:0",
+                "doc-ba902ef337f9:0"
+              ],
+              "elapsed_ms": 1.407
+            }
+          ]
+        },
+        {
+          "case_id": "adversarial-injection",
+          "category": "adversarial_research",
+          "queries": [
+            {
+              "query": "sky color fact",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "adv-inject"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-97426d8c30a3:0"
+              ],
+              "elapsed_ms": 0.673
+            }
+          ]
+        },
+        {
+          "case_id": "units-conversion",
+          "category": "numerical_reasoning",
+          "queries": [
+            {
+              "query": "P-7 pump flow rate",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "num-pump"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-14198914ee78:0"
+              ],
+              "elapsed_ms": 0.522
+            }
+          ]
+        },
+        {
+          "case_id": "long-doc",
+          "category": "document_research",
+          "queries": [
+            {
+              "query": "GH-S soil potassium survey",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "long-soil"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-9a7a5e39658c:0"
+              ],
+              "elapsed_ms": 0.459
+            }
+          ]
+        },
+        {
+          "case_id": "fruit-distractors",
+          "category": "factual_qa",
+          "queries": [
+            {
+              "query": "yellow tropical fruit",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 0.333333,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 0.86091,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 3
+              },
+              "retrieved_document_ids": [
+                "plain-banana"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-c3271619ab81:0"
+              ],
+              "elapsed_ms": 0.619
+            }
+          ]
+        },
+        {
+          "case_id": "multi-hop-v2",
+          "category": "multi_hop_research",
+          "queries": [
+            {
+              "query": "trial N=10000 gain 12 percent",
+              "metrics": {
+                "precision_at_k": 0.4,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "abs-photon",
+                "abs-photon-reprint"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-bb094b7d2cb4:0",
+                "doc-1d83a7705ea4:0"
+              ],
+              "elapsed_ms": 0.555
+            }
+          ]
+        }
+      ],
+      "not_measured": [
+        "semantic claim correctness",
+        "web search quality",
+        "source independence beyond curated fixture labels",
+        "LLM generation quality",
+        "CPU time and process-wide RSS (peak Python KB is measured)",
+        "token consumption",
+        "real-world factual accuracy"
+      ]
+    },
+    "10": {
+      "report_schema": "julia-research-quality-report/1",
+      "dataset": {
+        "dataset_id": "julia-research-quality",
+        "version": "2.0.0",
+        "sha256": "4e4f5f2e773800a3c05537432f280513c7f7bd487dd8a395e77bc66d19e93e8f",
+        "truth_basis": "synthetic_local_fixture"
+      },
+      "execution": {
+        "kind": "local_frozen_document_retrieval",
+        "retriever": "docs_agent.trechos_relevantes",
+        "database": "temporary SQLite; owner-scoped fixture data only",
+        "python": "3.14.4",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "sqlite": "3.50.4",
+        "k": 10
+      },
+      "counts": {
+        "documents": 12,
+        "cases": 8,
+        "queries": 8
+      },
+      "timing_ms": {
+        "total": 84.345,
+        "extraction_mean": 6.209,
+        "retrieval_mean": 0.833,
+        "retrieval_max": 1.565,
+        "peak_python_kb": 8.1
+      },
+      "retrieval_metrics": {
+        "precision_at_k": 0.1375,
+        "recall_at_k": 0.916667,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 0.982614,
+        "duplicate_rate_at_k": 0.0
+      },
+      "by_category": {
+        "academic_research": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "adversarial_research": {
+          "precision_at_k": 0.1,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "document_research": {
+          "precision_at_k": 0.1,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 2,
+          "query_count": 2
+        },
+        "factual_qa": {
+          "precision_at_k": 0.1,
+          "recall_at_k": 0.333333,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 0.86091,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "multi_hop_research": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "numerical_reasoning": {
+          "precision_at_k": 0.1,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        },
+        "temporal_research": {
+          "precision_at_k": 0.2,
+          "recall_at_k": 1.0,
+          "mrr_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "duplicate_rate_at_k": 0.0,
+          "case_count": 1,
+          "query_count": 1
+        }
+      },
+      "source_checks": [
+        {
+          "case_id": "academic-abstract",
+          "category": "academic_research",
+          "primary_source_id": "abs-photon",
+          "primary_source_retrieved": true,
+          "republication_only": false
+        },
+        {
+          "case_id": "temporal-recency",
+          "category": "temporal_research",
+          "latest_source_id": "temp-2025",
+          "latest_source_retrieved": true
+        }
+      ],
+      "source_quality_metrics": {
+        "primary_source": {
+          "cases": 1,
+          "retrieved": 1,
+          "recall": 1.0,
+          "republication_only": 0
+        },
+        "latest_temporal_source": {
+          "cases": 1,
+          "retrieved": 1,
+          "recall": 1.0
+        },
+        "contradiction_evidence_pair": {
+          "cases": 0,
+          "complete": 0,
+          "recall": null
+        },
+        "independence": "not scored: domain or URL difference is not evidence of independent origin"
+      },
+      "optimization_recommendations": [
+        {
+          "signal": "low_precision_with_recall",
+          "recommendation": "Review ranking specificity and irrelevant top-K results without reducing coverage."
+        }
+      ],
+      "cases": [
+        {
+          "case_id": "json-retrieval",
+          "category": "document_research",
+          "queries": [
+            {
+              "query": "ciclo dias alface horta",
+              "metrics": {
+                "precision_at_k": 0.1,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "data-horta"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-36beb0d8a619:0"
+              ],
+              "elapsed_ms": 1.565
+            }
+          ]
+        },
+        {
+          "case_id": "academic-abstract",
+          "category": "academic_research",
+          "queries": [
+            {
+              "query": "PhotonFlux-9 yield gain trial",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "abs-photon",
+                "abs-photon-reprint"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-0fb1e81563bd:0",
+                "doc-f64d16a1b18c:0"
+              ],
+              "elapsed_ms": 0.909
+            }
+          ]
+        },
+        {
+          "case_id": "temporal-recency",
+          "category": "temporal_research",
+          "queries": [
+            {
+              "query": "average chamber humidity trial",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "temp-2025",
+                "temp-2023"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-6693c30ee841:0",
+                "doc-78ecfc56f92a:0"
+              ],
+              "elapsed_ms": 0.968
+            }
+          ]
+        },
+        {
+          "case_id": "adversarial-injection",
+          "category": "adversarial_research",
+          "queries": [
+            {
+              "query": "sky color fact",
+              "metrics": {
+                "precision_at_k": 0.1,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "adv-inject"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-701ddbae925d:0"
+              ],
+              "elapsed_ms": 0.607
+            }
+          ]
+        },
+        {
+          "case_id": "units-conversion",
+          "category": "numerical_reasoning",
+          "queries": [
+            {
+              "query": "P-7 pump flow rate",
+              "metrics": {
+                "precision_at_k": 0.1,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "num-pump"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-54da02070209:0"
+              ],
+              "elapsed_ms": 0.77
+            }
+          ]
+        },
+        {
+          "case_id": "long-doc",
+          "category": "document_research",
+          "queries": [
+            {
+              "query": "GH-S soil potassium survey",
+              "metrics": {
+                "precision_at_k": 0.1,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 1
+              },
+              "retrieved_document_ids": [
+                "long-soil"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-470aad25563f:0"
+              ],
+              "elapsed_ms": 0.594
+            }
+          ]
+        },
+        {
+          "case_id": "fruit-distractors",
+          "category": "factual_qa",
+          "queries": [
+            {
+              "query": "yellow tropical fruit",
+              "metrics": {
+                "precision_at_k": 0.1,
+                "recall_at_k": 0.333333,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 0.86091,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 1,
+                "relevant_count": 3
+              },
+              "retrieved_document_ids": [
+                "plain-banana"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-4c9287afbb6e:0"
+              ],
+              "elapsed_ms": 0.755
+            }
+          ]
+        },
+        {
+          "case_id": "multi-hop-v2",
+          "category": "multi_hop_research",
+          "queries": [
+            {
+              "query": "trial N=10000 gain 12 percent",
+              "metrics": {
+                "precision_at_k": 0.2,
+                "recall_at_k": 1.0,
+                "mrr_at_k": 1.0,
+                "ndcg_at_k": 1.0,
+                "duplicate_rate_at_k": 0.0,
+                "retrieved_count_at_k": 2,
+                "relevant_count": 2
+              },
+              "retrieved_document_ids": [
+                "abs-photon",
+                "abs-photon-reprint"
+              ],
+              "retrieved_chunk_ids": [
+                "doc-0fb1e81563bd:0",
+                "doc-f64d16a1b18c:0"
+              ],
+              "elapsed_ms": 0.494
+            }
+          ]
+        }
+      ],
+      "not_measured": [
+        "semantic claim correctness",
+        "web search quality",
+        "source independence beyond curated fixture labels",
+        "LLM generation quality",
+        "CPU time and process-wide RSS (peak Python KB is measured)",
+        "token consumption",
+        "real-world factual accuracy"
+      ]
+    }
+  },
+  "holdout": [
+    {
+      "id": "network-device",
+      "query": "Roteador Orion AX1800 especificações oficiais",
+      "ranked": [
+        "1",
+        "3",
+        "2",
+        "0",
+        "4",
+        "5"
+      ],
+      "eligible": [
+        "1",
+        "3"
+      ],
+      "at5": {
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 5,
+        "relevant_count": 2
+      },
+      "at10": {
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 6,
+        "relevant_count": 2
+      },
+      "eligible_precision": 1.0,
+      "eligible_recall": 1.0
+    },
+    {
+      "id": "regional-identity",
+      "query": "Notícias em Santarém, Pará, nos últimos sete dias",
+      "ranked": [
+        "1",
+        "5",
+        "2",
+        "4",
+        "0",
+        "3"
+      ],
+      "eligible": [
+        "1",
+        "5"
+      ],
+      "at5": {
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 5,
+        "relevant_count": 2
+      },
+      "at10": {
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 6,
+        "relevant_count": 2
+      },
+      "eligible_precision": 1.0,
+      "eligible_recall": 1.0
+    },
+    {
+      "id": "local-event",
+      "query": "Eventos em Campina Grande nas próximas duas semanas",
+      "ranked": [
+        "1",
+        "3",
+        "0",
+        "2",
+        "5",
+        "4"
+      ],
+      "eligible": [
+        "1",
+        "3"
+      ],
+      "at5": {
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 5,
+        "relevant_count": 2
+      },
+      "at10": {
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "ndcg_at_k": 1.0,
+        "duplicate_rate_at_k": 0.0,
+        "retrieved_count_at_k": 6,
+        "relevant_count": 2
+      },
+      "eligible_precision": 1.0,
+      "eligible_recall": 1.0
+    }
+  ],
+  "holdout_clock_utc": "2026-10-22T12:00:00+00:00"
+}

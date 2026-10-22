@@ -1,0 +1,22 @@
+[ 16.78s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-desktop.png
+[ 17.46s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\weather-mobile.png
+[ 18.44s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\time-mobile.png
+[ 38.45s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\research-desktop.png
+[ 38.61s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\sources-desktop.png
+[ 39.02s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\research-mobile-390.png
+[ 39.42s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\research-mobile-320.png
+Traceback (most recent call last):
+[ 39.87s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\contextual-1280.png
+[ 40.29s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\contextual-390.png
+[ 40.68s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\contextual-320.png
+[ 76.10s] screenshot: C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\qa-artifacts\v594\chrome-failure.png
+{"kind": "BROWSER_E2E_LOCAL_FIXTURE", "model_inference": false, "ok": false, "live_chat": {"weather_live": true, "greeting_geocode_calls": 0, "isolated_new_chat": true, "turns": 6}, "terminal_bar_cleared": true, "contextual_cards_fixture": true, "error": "AssertionError: external currency answer não ocorreu em 35s (último: False)", "ui_state": {"job": null, "hidden": true, "label": "Pesquisa concluída: 1 evidências.", "last": ["context_checkpoint_saved", "context_checkpoint_saved", "research_completed"]}}
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 200, in <module>
+    run()
+    ~~~^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v594.py", line 160, in run
+    cdp.esperar_js(f"Array.from(document.querySelectorAll('.message.ai')).length > {count} && Array.from(document.querySelectorAll('.message.ai')).at(-1).textContent.includes('Frankfurter')",bool,35,'external currency answer')
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\chrome_e2e_v58.py", line 147, in esperar_js
+    raise AssertionError(f"{nome} não ocorreu em {timeout}s (último: {ultimo})")
+AssertionError: external currency answer não ocorreu em 35s (último: False)
