@@ -19,6 +19,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from pydantic import BaseModel, Field, field_validator
+from rate_limit import RateLimiter, client_ip, env_int
 from workspace_store import WorkspaceBatch, WorkspaceRecord
 
 import env_local
@@ -31,25 +32,38 @@ ph = PasswordHasher()
 SESSION_LIFETIME = 12 * 60 * 60
 DOC_UPLOAD_MAX_BYTES = 15 * 1024 * 1024
 DOC_UPLOAD_REQUEST_MAX_BYTES = DOC_UPLOAD_MAX_BYTES + 1024 * 1024
+API_BODY_MAX_BYTES = 2 * 1024 * 1024
+XLSX_REQUEST_MAX_BYTES = 8 * 1024 * 1024
+
+# Limites de corpo por rota. Qualquer outro JSON de /api/ fica no teto padrão.
+REQUEST_BODY_LIMITS = {
+    "/api/docs/upload": DOC_UPLOAD_REQUEST_MAX_BYTES,
+    "/api/export/xlsx": XLSX_REQUEST_MAX_BYTES,
+}
 
 
-class DocumentUploadBodyLimit:
-    """Bound actual multipart request bytes before Starlette spools uploaded files."""
+class RequestBodyLimit:
+    """Limita bytes reais antes do parse/spool (Content-Length e streaming)."""
 
     def __init__(self, app):
         self.app = app
 
     async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or scope.get("path") != "/api/docs/upload":
+        if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
+        path = scope.get("path", "")
+        if not path.startswith("/api/"):
+            await self.app(scope, receive, send)
+            return
+        limite = REQUEST_BODY_LIMITS.get(path, API_BODY_MAX_BYTES)
         headers = {key.lower(): value for key, value in scope.get("headers", [])}
         length = headers.get(b"content-length")
         if length:
             try:
-                if int(length) > DOC_UPLOAD_REQUEST_MAX_BYTES:
+                if int(length) > limite:
                     response = JSONResponse(
-                        {"detail": "Pedido de upload excede o limite permitido."}, status_code=413)
+                        {"detail": "Pedido excede o limite permitido."}, status_code=413)
                     await response(scope, receive, send)
                     return
             except ValueError:
@@ -63,8 +77,8 @@ class DocumentUploadBodyLimit:
             message = await receive()
             if message["type"] == "http.request":
                 total += len(message.get("body", b""))
-                if total > DOC_UPLOAD_REQUEST_MAX_BYTES:
-                    raise HTTPException(413, "Pedido de upload excede o limite permitido.")
+                if total > limite:
+                    raise HTTPException(413, "Pedido excede o limite permitido.")
             return message
 
         try:
@@ -76,7 +90,9 @@ class DocumentUploadBodyLimit:
             await response(scope, receive, send)
 
 
-app.add_middleware(DocumentUploadBodyLimit)
+app.add_middleware(RequestBodyLimit)
+# Compatibilidade com testes/importadores do limitador antigo de upload.
+DocumentUploadBodyLimit = RequestBodyLimit
 
 
 def config():
@@ -300,8 +316,51 @@ class AgentRelay:
 
 
 relay = AgentRelay()
-# Basic, non-durable login rate limiting; reinforce with Cloudflare / WAF for production.
+# Throttle por usuário/IP do relay (defesa em profundidade, volátil).
+# A fonte definitiva para contas do PC é o SQLite do agente.
 login_failures: dict[str, list[float]] = {}
+MAX_LOGIN_CHAVES = 4096
+rate_limiter = RateLimiter()
+
+# ação -> (env por sujeito, teto, janela, env global, teto global, janela global)
+RATE_RULES = {
+    "login": ("JULIA_RATE_LOGIN_IP", 20, 60,
+              "JULIA_RATE_LOGIN_GLOBAL", 300, 60),
+    "register": ("JULIA_RATE_REGISTER_IP", 20, 3600,
+                 "JULIA_RATE_REGISTER_GLOBAL", 60, 3600),
+    "ai": ("JULIA_RATE_AI_USER", 60, 60,
+           "JULIA_RATE_AI_GLOBAL", 240, 60),
+    "research_start": ("JULIA_RATE_RESEARCH_START_USER", 10, 60,
+                       "JULIA_RATE_RESEARCH_START_GLOBAL", 40, 60),
+    "research_stream": ("JULIA_RATE_RESEARCH_STREAM_USER", 20, 60,
+                        "JULIA_RATE_RESEARCH_STREAM_GLOBAL", 80, 60),
+    "docs": ("JULIA_RATE_DOCS_USER", 30, 60,
+             "JULIA_RATE_DOCS_GLOBAL", 120, 60),
+    "admin": ("JULIA_RATE_ADMIN_USER", 60, 60,
+              "JULIA_RATE_ADMIN_GLOBAL", 240, 60),
+    "admin_quality": ("JULIA_RATE_ADMIN_QUALITY_USER", 5, 60,
+                      "JULIA_RATE_ADMIN_QUALITY_GLOBAL", 10, 60),
+    "screen": ("JULIA_RATE_SCREEN_USER", 60, 60,
+               "JULIA_RATE_SCREEN_GLOBAL", 180, 60),
+    "input": ("JULIA_RATE_INPUT_USER", 120, 60,
+              "JULIA_RATE_INPUT_GLOBAL", 360, 60),
+}
+
+
+def _rate_limit(request: Request, acao: str, sujeito: str) -> None:
+    """Aplica teto por sujeito e teto global; 429 sempre com Retry-After."""
+    env_sujeito, teto, janela, env_global, teto_global, janela_global = RATE_RULES[acao]
+    sujeito = str(sujeito or "anon")[:120]
+    esperas = [
+        rate_limiter.hit(f"{acao}:sujeito:{sujeito}",
+                         env_int(env_sujeito, teto), env_int(f"{env_sujeito}_JANELA", janela)),
+        rate_limiter.hit(f"{acao}:global",
+                         env_int(env_global, teto_global), env_int(f"{env_global}_JANELA", janela_global)),
+    ]
+    espera = max(esperas)
+    if espera:
+        raise HTTPException(429, "Muitos pedidos; tente novamente mais tarde",
+                            headers={"Retry-After": str(espera)})
 
 
 class ResearchSSECursor:
@@ -385,23 +444,33 @@ def diag():
 
 
 def _limite_tentativas(request: Request, chave: str, teto: int, janela: float) -> None:
-    source = (request.client.host if request.client else "unknown") + ":" + chave
+    source = client_ip(request) + ":" + chave
     agora = time.monotonic()
     tentativas = [t for t in login_failures.get(source, []) if agora - t < janela]
     if len(tentativas) >= teto:
-        raise HTTPException(429, "Muitas tentativas; tente novamente mais tarde")
+        espera = max(1, int(janela - (agora - tentativas[0])))
+        raise HTTPException(429, "Muitas tentativas; tente novamente mais tarde",
+                            headers={"Retry-After": str(espera)})
     tentativas.append(agora)
     login_failures[source] = tentativas
+    if len(login_failures) > 1024:
+        for nome, marcas in list(login_failures.items()):
+            if not marcas or agora - marcas[-1] > 3600:
+                login_failures.pop(nome, None)
+    if len(login_failures) > MAX_LOGIN_CHAVES:
+        for nome in list(login_failures)[:len(login_failures) - MAX_LOGIN_CHAVES]:
+            login_failures.pop(nome, None)
 
 
 def _limpa_tentativas(request: Request, chave: str) -> None:
-    login_failures.pop(((request.client.host if request.client else "unknown") + ":" + chave), None)
+    login_failures.pop(client_ip(request) + ":" + chave, None)
 
 
 @app.post("/api/login")
 async def login(credentials: Credentials, request: Request, response: Response):
     if not is_ready():
         raise HTTPException(503, "Configure as variáveis secretas no servidor")
+    _rate_limit(request, "login", client_ip(request))
     cfg = config()
     if hmac.compare_digest(credentials.username, cfg["user"]):
         _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
@@ -419,9 +488,14 @@ async def login(credentials: Credentials, request: Request, response: Response):
     _limite_tentativas(request, "login:" + credentials.username.strip().lower()[:40], 5, 300)
     try:
         result = await relay.exchange({"type": "auth_login", "username": credentials.username,
-                                       "password": credentials.password}, timeout=20.0)
+                                       "password": credentials.password,
+                                       "cliente": client_ip(request)}, timeout=20.0)
     except HTTPException:
         raise HTTPException(401, "Usuário ou senha inválidos") from None
+    if result.get("type") == "auth_error" and result.get("codigo") == "rate":
+        espera = max(1, int(result.get("retry_after", 60) or 60))
+        raise HTTPException(429, "Muitas tentativas; tente novamente mais tarde",
+                            headers={"Retry-After": str(espera)})
     if result.get("type") == "auth_error" and result.get("codigo") == "pendente":
         raise HTTPException(403, "Conta aguardando aprovação.")
     if result.get("type") != "auth_ok":
@@ -455,6 +529,7 @@ async def auth_config(request: Request):
 
 @app.post("/api/register")
 async def register(body: Registro, request: Request, response: Response):
+    _rate_limit(request, "register", client_ip(request))
     if relay.ws is None:
         raise HTTPException(503, "Cadastro indisponível: computador offline. Tente quando online.")
     _limite_tentativas(request, "register", 3, 3600)
@@ -622,12 +697,15 @@ class AdminLimitsBody(BaseModel):
 
 
 async def admin_uid(request: Request) -> str:
-    """Valida sessão + CSRF e retorna uid se o usuário for admin ativo."""
+    """Valida sessão + CSRF (em POST) e retorna uid se for admin ativo."""
     verify_session(request)
+    if request.method not in ("GET", "HEAD", "OPTIONS"):
+        require_csrf(request)
     data = sessao_dados(request)
     uid = str(data.get("uid") or "") or "local"
     # Owner legado é sempre admin
     if uid == "local":
+        _rate_limit(request, "admin", uid)
         return uid
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
@@ -640,6 +718,7 @@ async def admin_uid(request: Request) -> str:
         raise HTTPException(401, "Sessão inválida")
     if user.get("role") != "admin" or user.get("status") != "ativo":
         raise HTTPException(403, "Permissão de administrador necessária")
+    _rate_limit(request, "admin", uid)
     return uid
 
 
@@ -737,6 +816,7 @@ async def admin_set_limits(request: Request, body: AdminLimitsBody):
 @app.post("/api/admin/quality/run")
 async def admin_quality_run(request: Request):
     uid = await admin_uid(request)
+    _rate_limit(request, "admin_quality", uid)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
     result = await relay.exchange({"type": "quality_run", "owner": uid}, timeout=120.0)
@@ -997,6 +1077,7 @@ async def docs_upload(request: Request, file: UploadFile = File(...),
     """Recebe um documento (até 15MB) e encaminha ao PC para leitura."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "docs", dono)
     limite = DOC_UPLOAD_MAX_BYTES
     recebido = bytearray()
     try:
@@ -1043,6 +1124,7 @@ async def docs_list(request: Request):
 async def docs_search(request: Request, body: DocSearch):
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "docs", dono)
     result = await relay.exchange({"type": "doc_search", "owner": dono,
                                    "query": body.query, "doc_id": body.doc_id,
                                    "limit": body.limit}, timeout=30.0)
@@ -1058,6 +1140,7 @@ async def docs_search(request: Request, body: DocSearch):
 async def docs_compare(request: Request, body: DocCompare):
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "docs", dono)
     result = await relay.exchange({"type": "doc_compare", "owner": dono,
                                    "query": body.query, "doc_ids": body.doc_ids}, timeout=30.0)
     if result.get("type") == "doc_error":
@@ -1086,6 +1169,7 @@ async def docs_delete(request: Request, doc_id: str):
 async def docs_resumo(request: Request, body: DocAsk):
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "docs", dono)
     result = await relay.exchange({"type": "doc_resumo", "owner": dono,
                                    "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
@@ -1099,6 +1183,7 @@ async def docs_resumo(request: Request, body: DocAsk):
 async def docs_topicos(request: Request, body: DocAsk):
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "docs", dono)
     result = await relay.exchange({"type": "doc_topicos", "owner": dono,
                                    "doc_id": body.doc_id}, timeout=180.0)
     if result.get("type") == "doc_error":
@@ -1290,6 +1375,7 @@ async def ai_complete(request: Request, body: AIRequest):
     """Resposta completa (sem streaming). Idempotente por message_id no agente."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
     result = await relay.exchange({"type": "ai", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
@@ -1322,6 +1408,7 @@ async def ai_regenerate(request: Request, body: AIContinue):
     """Apaga resposta anterior (PC + idempotência) para gerar de novo."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
     result = await relay.exchange({"type": "ai_reset", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id}, timeout=20.0)
@@ -1337,6 +1424,7 @@ async def ai_continue(request: Request, body: AIContinue):
     """Continua a resposta anterior, anexando ao mesmo reply_id."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
     result = await relay.exchange({"type": "ai_continue", "owner": dono,
                                    "message_id": body.message_id,
                                    "conversation_id": body.conversation_id,
@@ -1386,6 +1474,7 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
     """Foto atual da tela do PC (JPEG base64). Exige login + CSRF + grant remoto."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "screen", dono)
     result = await relay.exchange({"type": "screen", "owner": dono,
                                    "max_w": max(320, min(max_w, 960)),
                                    "q": max(30, min(q, 80))}, timeout=20.0)
@@ -1403,6 +1492,7 @@ async def remote_input(request: Request, body: InputBody):
     """Executa mouse/teclado no PC. Exige login + CSRF + grant remoto (além de JULIA_REMOTE=1)."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "input", dono)
     result = await relay.exchange({"type": "input", "owner": dono,
                                    "cmd": body.model_dump()}, timeout=15.0)
     if result.get("type") != "input_done":
@@ -1802,6 +1892,7 @@ async def research_start(request: Request, body: ResearchStartIn):
     """Inicia pesquisa agêntica em background (1 ativa por dono)."""
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "research_start", dono)
     result = await relay.exchange({"type": "research_job_start", "owner": dono,
                                    "objetivo": body.objetivo, "conv": body.conv,
                                    "modo": body.modo}, timeout=20.0)
@@ -1978,7 +2069,22 @@ async def research_delete(request: Request, job_id: str):
 class ResearchInterveneIn(BaseModel):
     job_id: str = Field(min_length=2, max_length=64, pattern=r"^[a-zA-Z0-9_-]+$")
     op: str = Field(min_length=3, max_length=30, pattern=r"^[a-z_]+$")
-    params: dict = Field(default={})
+    params: dict = Field(default_factory=dict, max_length=10)
+
+    @field_validator("params")
+    @classmethod
+    def _params_limitados(cls, valor: dict) -> dict:
+        for chave, item in valor.items():
+            if not isinstance(chave, str) or not (1 <= len(chave) <= 40):
+                raise ValueError("parâmetro inválido")
+            if isinstance(item, bool) or isinstance(item, (int, float)):
+                continue
+            if isinstance(item, str) and len(item) <= 500:
+                continue
+            raise ValueError("parâmetro inválido")
+        if len(json.dumps(valor, ensure_ascii=False)) > 4000:
+            raise ValueError("parâmetros grandes demais")
+        return valor
 
 
 class ResearchPauseIn(BaseModel):
@@ -2023,10 +2129,16 @@ async def research_stream(request: Request, job_id: str, apos_seq: int = 0):
     dono = await revogacao_ok(request)
     if not (2 <= len(job_id) <= 64):
         raise HTTPException(422, "Identificador inválido")
+    _rate_limit(request, "research_stream", dono)
     if relay.ws is None:
         raise HTTPException(503, "Computador desconectado; use o painel com polling")
+    if sum(1 for sub in relay.research_subs.values()
+           if sub.get("owner") == dono) >= 4:
+        raise HTTPException(429, "Muitos acompanhamentos; tente de novo",
+                            headers={"Retry-After": "15"})
     if len(relay.research_subs) >= 20:
-        raise HTTPException(429, "Muitos acompanhamentos; tente de novo")
+        raise HTTPException(429, "Muitos acompanhamentos; tente de novo",
+                            headers={"Retry-After": "15"})
     from fastapi.responses import StreamingResponse
     fila: asyncio.Queue = asyncio.Queue(maxsize=200)
     sub_id = uuid.uuid4().hex
@@ -2096,7 +2208,8 @@ async def research_stream(request: Request, job_id: str, apos_seq: int = 0):
 
 @app.get("/api/ai/models")
 async def ai_models(request: Request):
-    verify_session(request)
+    dono = sessao_usuario(request)
+    _rate_limit(request, "ai", dono)
     result = await relay.exchange({"type": "ai_models"}, timeout=30.0)
     if result.get("type") == "ai_error":
         raise HTTPException(503, result.get("error", "Hermes indisponível"))
@@ -2133,6 +2246,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
     request_started = time.monotonic()
     require_csrf(request)
     dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
     auth_completed = time.monotonic()
     if not (8 <= len(message_id) <= 100) or not (3 <= len(conversation_id) <= 100):
         raise HTTPException(422, "Parâmetros inválidos")

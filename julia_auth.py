@@ -14,6 +14,7 @@ Modelo:
 """
 import hashlib
 import hmac
+import os
 import re
 import secrets
 import time
@@ -30,9 +31,10 @@ SENHA_MAX = 128
 
 
 class AuthErro(ValueError):
-    def __init__(self, mensagem, codigo="erro"):
+    def __init__(self, mensagem, codigo="erro", retry_after=0):
         super().__init__(mensagem)
         self.codigo = codigo
+        self.retry_after = max(0, int(retry_after or 0))
 
 
 def agora_iso() -> str:
@@ -65,6 +67,14 @@ def criar_tabelas(db) -> None:
         expira_em TEXT NOT NULL, revogada INT NOT NULL DEFAULT 0
     )""")
     db.execute("CREATE INDEX IF NOT EXISTS idx_sess_uid ON user_sessions(uid, revogada)")
+    # Throttle persistente de login (sobrevive a reinício/deploy do relay).
+    # Cada linha é uma tentativa reservada; sucesso remove as linhas do par
+    # usuário/IP. Sem conteúdo sensível: somente hash da chave e timestamp.
+    db.execute("""CREATE TABLE IF NOT EXISTS login_attempts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, chave TEXT NOT NULL, ts REAL NOT NULL
+    )""")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_login_attempts ON login_attempts(chave, ts)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_login_attempts_ts ON login_attempts(ts)")
     db.execute("""CREATE TABLE IF NOT EXISTS audit_log (
         id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, ator TEXT NOT NULL,
         acao TEXT NOT NULL, alvo TEXT NOT NULL DEFAULT '', detalhe TEXT NOT NULL DEFAULT ''
@@ -270,9 +280,108 @@ def vincular_proprietario(db, username: str, display: str, senha: str) -> dict:
     return {"uid": DONO_UID, "username": u, "display": d, "role": "admin"}
 
 
-def login_conta(db, username: str, senha: str) -> dict:
-    """Retorna {uid, username, display, role} ou levanta AuthErro genérico."""
+def _throttle_cfg() -> tuple[int, int, int, int]:
+    def _inteiro(nome: str, padrao: int, minimo: int, maximo: int) -> int:
+        try:
+            valor = int(os.environ.get(nome, ""))
+        except (TypeError, ValueError):
+            valor = padrao
+        return max(minimo, min(maximo, valor))
+
+    return (_inteiro("JULIA_LOGIN_MAX_FALHAS", 5, 1, 50),
+            _inteiro("JULIA_LOGIN_JANELA_S", 300, 10, 86_400),
+            _inteiro("JULIA_LOGIN_MAX_FALHAS_IP", 20, 1, 500),
+            _inteiro("JULIA_LOGIN_JANELA_IP_S", 300, 10, 86_400))
+
+
+def _chave_throttle(tipo: str, valor: str) -> str:
+    digest = hashlib.sha256((tipo + ":" + (valor or "").strip().lower()).encode()).hexdigest()
+    return tipo + ":" + digest[:32]
+
+
+def _reservar_login(db, username: str, ip: str = "") -> tuple[list[int], int]:
+    """Reserva tentativa atomicamente; retorna (ids, espera).
+
+    A reserva acontece ANTES de verificar a senha, então rajadas concorrentes
+    não conseguem executar scrypt além do teto. Sucesso remove a reserva.
+    """
+    max_usuario, janela_usuario, max_ip, janela_ip = _throttle_cfg()
+    chaves = [(_chave_throttle("u", username), max_usuario, janela_usuario)]
+    if ip:
+        chaves.append((_chave_throttle("ip", ip), max_ip, janela_ip))
+    agora = time.time()
+    ids: list[int] = []
+    propria = not db.in_transaction
+    try:
+        if propria:
+            db.execute("BEGIN IMMEDIATE")
+        else:
+            db.execute("SAVEPOINT login_throttle")
+        db.execute("DELETE FROM login_attempts WHERE ts < ?", (agora - 86_400,))
+        total = db.execute("SELECT COUNT(*) FROM login_attempts").fetchone()[0] or 0
+        if total > 20_000:
+            db.execute("DELETE FROM login_attempts WHERE id IN "
+                       "(SELECT id FROM login_attempts ORDER BY id LIMIT ?)",
+                       (total - 20_000,))
+        for chave, teto, janela in chaves:
+            n, primeira = db.execute(
+                "SELECT COUNT(*), MIN(ts) FROM login_attempts WHERE chave=? AND ts>?",
+                (chave, agora - janela)).fetchone()
+            if (n or 0) >= teto:
+                espera = int(janela - (agora - (primeira or agora))) + 1
+                _desfazer(db, propria)
+                return [], max(1, min(espera, janela + 1))
+        for chave, _teto, _janela in chaves:
+            cur = db.execute("INSERT INTO login_attempts (chave, ts) VALUES (?,?)",
+                             (chave, agora))
+            ids.append(int(cur.lastrowid))
+        if propria:
+            db.commit()
+        else:
+            db.execute("RELEASE login_throttle")
+        return ids, 0
+    except Exception:
+        _desfazer(db, propria)
+        return [], 0
+
+
+def _desfazer(db, propria: bool) -> None:
+    try:
+        if propria:
+            db.rollback()
+        else:
+            db.execute("ROLLBACK TO login_throttle")
+            db.execute("RELEASE login_throttle")
+    except Exception:
+        pass
+
+
+def _liberar_login(db, ids: list[int], username: str = "", ip: str = "") -> None:
+    """Sucesso limpa todo o histórico do usuário/IP, não só a reserva atual."""
+    chaves = [_chave_throttle("u", username)] if username else []
+    if ip:
+        chaves.append(_chave_throttle("ip", ip))
+    try:
+        with db:
+            if ids:
+                db.executemany("DELETE FROM login_attempts WHERE id=?", [(i,) for i in ids])
+            if chaves:
+                db.executemany("DELETE FROM login_attempts WHERE chave=?", [(c,) for c in chaves])
+    except Exception:
+        pass
+
+
+def login_conta(db, username: str, senha: str, ip: str = "") -> dict:
+    """Retorna {uid, username, display, role} ou levanta AuthErro genérico.
+
+    O throttle é persistente e atômico; a mensagem nunca revela se o usuário
+    existe. `ip` é opcional para chamadas internas/testes.
+    """
     u = (username or "").strip().lower()
+    ids, espera = _reservar_login(db, u, ip)
+    if espera:
+        raise AuthErro("Muitas tentativas; tente novamente mais tarde.",
+                       "rate", retry_after=espera)
     user = buscar_usuario(db, u)
     if user is None or not user["hash"] or not confere_senha(senha or "", user["hash"]):
         # Check if there's a pending registration request with this username
@@ -282,6 +391,7 @@ def login_conta(db, username: str, senha: str) -> dict:
             if pend[0] == "pendente":
                 raise AuthErro("Conta aguardando aprovação.", "pendente")
         raise AuthErro("Usuário ou senha inválidos.", "credenciais")
+    _liberar_login(db, ids, u, ip)
     if status_efetivo(db, user["uid"]) == "bloqueado":
         raise AuthErro("Usuário ou senha inválidos.", "credenciais")
     if not user["aprovado"] or status_efetivo(db, user["uid"]) != "ativo":

@@ -8,6 +8,10 @@ services:
     envVars:
       - key: JULIA_ENV
         value: production
+      # Cloudflare/Render sobrescrevem CF-Connecting-IP/X-Forwarded-For.
+      # O throttle persistente no PC não depende deste cabeçalho.
+      - key: JULIA_TRUST_PROXY
+        value: "1"
       - key: JULIA_USERNAME
         sync: false
       - key: JULIA_PASSWORD_HASH

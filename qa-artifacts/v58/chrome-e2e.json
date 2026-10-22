@@ -1,12 +1,12 @@
 {
- "quando": "2026-10-21T21:15:05",
+ "quando": "2026-10-21T22:13:52",
  "tipo_evidencia": "chrome-real-desktop + mobile-emulado; stack local isolado",
  "ambiente": {
   "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
   "python": "3.14.4",
-  "app": "http://127.0.0.1:55419",
-  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-v58-chrome-plt9drjw\\e2e-v58.sqlite3",
-  "job_id": "rj-e912a86afcc1",
+  "app": "http://127.0.0.1:51111",
+  "sqlite": "C:\\Users\\efrai\\AppData\\Local\\Temp\\vexx-v58-chrome-dpb3nb45\\e2e-v58.sqlite3",
+  "job_id": "rj-0cee465b5d66",
   "viewport_desktop": "1280x900",
   "viewport_mobile": "390x844",
   "chrome_versao": "Chrome/155.0.8059.85"
@@ -14,73 +14,73 @@
  "etapas": [
   {
    "etapa": "job_preparado",
-   "detalhe": "rj-e912a86afcc1",
-   "t": 0.07
+   "detalhe": "rj-0cee465b5d66",
+   "t": 0.14
   },
   {
    "etapa": "relay",
-   "detalhe": "http://127.0.0.1:55419",
-   "t": 0.17
+   "detalhe": "http://127.0.0.1:51111",
+   "t": 0.29
   },
   {
    "etapa": "agente",
    "detalhe": "pc_agent.py",
-   "t": 1.89
+   "t": 2.6
   },
   {
    "etapa": "chrome",
-   "detalhe": "headless CDP porta 55420",
-   "t": 4.81
+   "detalhe": "headless CDP porta 51112",
+   "t": 5.91
   },
   {
    "etapa": "login_ok",
    "detalhe": "sessão local",
-   "t": 6.39
+   "t": 10.22
   },
   {
    "etapa": "lista_pesquisas_ok",
    "detalhe": "",
-   "t": 8.42
+   "t": 12.29
   },
   {
    "etapa": "screenshot",
    "detalhe": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v58\\research-workspace-desktop.png",
-   "t": 8.57
+   "t": 12.48
   },
   {
    "etapa": "workspace_ok",
    "detalhe": "{\"slots\": 5, \"planos\": 6, \"midia\": 3, \"badges\": 8, \"overflow\": false, \"titulo\": \"A dose de 400 mg de café é segura para adultos?\"}",
-   "t": 8.99
+   "t": 12.92
   },
   {
    "etapa": "screenshot",
    "detalhe": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v58\\research-workspace-desktop-detail.png",
-   "t": 9.06
+   "t": 13.07
   },
   {
    "etapa": "screenshot",
    "detalhe": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v58\\research-workspace-desktop-evidence.png",
-   "t": 9.56
+   "t": 13.65
   },
   {
    "etapa": "screenshot",
    "detalhe": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v58\\research-workspace-desktop-evidence-media.png",
-   "t": 10.11
+   "t": 14.24
   },
   {
    "etapa": "export_bytes_ok",
    "detalhe": "1839 bytes via Chrome",
-   "t": 10.13
+   "t": 14.3
   },
   {
    "etapa": "screenshot",
    "detalhe": "C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\qa-artifacts\\v58\\research-workspace-mobile.png",
-   "t": 11.02
+   "t": 15.27
   },
   {
    "etapa": "mobile_emulado_ok",
    "detalhe": "{\"overflow\": false, \"width\": 390, \"botoes\": true}",
-   "t": 11.02
+   "t": 15.27
   }
  ],
  "ok": true,
@@ -95,7 +95,7 @@
  "export": {
   "status": 200,
   "type": "text/markdown; charset=utf-8",
-  "disp": "attachment; filename=\"vexx-pesquisa-rj-e912a86afcc1.md\"",
+  "disp": "attachment; filename=\"vexx-pesquisa-rj-0cee465b5d66.md\"",
   "bytes": 1839,
   "inicio": "# Relatório de pesquisa Vexx AI\n\n**Objetivo:** A dose de 400 mg de café é seg"
  },

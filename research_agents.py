@@ -261,12 +261,23 @@ def carregar_job(db, owner: str, job_id: str) -> dict:
         raise AgentErro("pesquisa corrompida", "corrompida") from exc
 
 
-def salvar_job(db, job: dict) -> None:
+def salvar_job(db, job: dict, forcar_status: bool = False) -> None:
+    """Persiste o job preservando cancelamento/pausa concorrentes.
+
+    Um passo longo pode terminar depois de o usuário cancelar/pausar. Sem
+    `forcar_status`, o estado de controle já gravado no banco vence o
+    snapshot antigo do worker (evita "ressuscitar" job cancelado).
+    """
     plano_limpo = []
     for s in job["plano"]:
         plano_limpo.append({k: v for k, v in s.items() if not k.startswith("_")})
+    # CASE atômico: um cancelamento/pausa gravado entre a leitura do snapshot e
+    # este UPDATE continua vencendo, sem janela de corrida.
+    status_sql = "?" if forcar_status else \
+        "CASE WHEN status IN ('cancelada','pausada') THEN status ELSE ? END"
     with db:
-        db.execute("UPDATE research_jobs SET plano=?, plano_versao=?, status=?, orcamento=?,"
+        db.execute("UPDATE research_jobs SET plano=?, plano_versao=?,"
+                   f" status={status_sql}, orcamento=?,"
                    " usados=?, achados=?, pendencias=?, erros=?, atualizado_em=?,"
                    " investigacoes=?, auditoria=?, ajustes=?, structured_analysis=?, midia=?"
                    " WHERE id=? AND owner_id=?",
@@ -283,6 +294,14 @@ def salvar_job(db, job: dict) -> None:
                     json_store.encode(job.get("structured_analysis", []), 60000),
                     json_store.encode(job.get("midia", []), 60000),
                     job["id"], job["owner"]))
+    if not forcar_status:
+        try:
+            atual = db.execute("SELECT status FROM research_jobs WHERE id=? AND owner_id=?",
+                               (job["id"], job["owner"])).fetchone()
+            if atual:
+                job["status"] = atual[0]
+        except Exception:
+            pass
 
 
 def listar_jobs(db, owner: str, limite: int = 20) -> list:
@@ -571,15 +590,20 @@ class ProvedorOrquestrado(ProvedorBusca):
         return []
 
 
-def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6) -> tuple:
+def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6,
+                        deve_parar=None) -> tuple:
     """Tenta provedores em ordem; vazio silencioso TAMBÉM alterna (bot-wall
     não para a cadeia); registra falhas; nunca inventa resultado.
 
     Provedor que guarda diagnóstico (`info`, ex.: ProvedorOrquestrado)
-    devolve `detalhe` junto — estados/lacunas reais da busca.
+    devolve `detalhe` junto — estados/lacunas reais da busca. `deve_parar`
+    é checado antes de cada provedor para cancelar sem esperar a cadeia toda.
     """
     erros = []
+    parar = deve_parar or (lambda: False)
     for p in provedores or []:
+        if parar():
+            return [], {"provedor": "", "erros": erros, "cancelado": True}
         try:
             achados = p.buscar(consulta, limite) or []
         except Exception as exc:
@@ -591,6 +615,8 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6) -> tup
             detalhe = getattr(p, "info", None)
             if isinstance(detalhe, dict) and detalhe:
                 out["detalhe"] = dict(detalhe)
+            if parar():
+                out["cancelado"] = True
             return achados, out
         erros.append({"provedor": getattr(p, "nome", "?"), "codigo": "vazio"})
     return [], {"provedor": "", "erros": erros}
@@ -676,15 +702,21 @@ def _relevancia(alvo: str, trecho: str) -> float:
     return round(len(a & b) / len(a), 3)
 
 
-def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> list:
+def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
+                 deve_parar=None, prazo: float = 0) -> list:
     """Search Agent: consultas adaptativas (original + variação sem stopwords)."""
     base = etapa["alvo"]
     variacao = " ".join(w for w in base.split() if len(w) > 4 and w not in ("sobre", "para"))
     consultas = [base] + ([variacao] if variacao and variacao != base else [])
     achados, falhas = [], []
     buscas_realizadas = 0
+    cancelado = False
+    parar = deve_parar or (lambda: False)
     etapas_por_consulta = job["usados"].setdefault("consultas_etapas", {})
     for q in consultas[:2]:
+        if parar() or (prazo and time.monotonic() >= prazo):
+            cancelado = True
+            break
         if q in vistas:
             continue
         chave = _chave_consulta(q)
@@ -707,7 +739,17 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
             providers_for_query = academic + general
         else:
             providers_for_query = general + academic
-        encontrados, info = buscar_com_fallback(providers_for_query, q, 6)
+        encontrados, info = buscar_com_fallback(providers_for_query, q, 6,
+                                                deve_parar=parar)
+        if info.get("cancelado"):
+            for a in encontrados:
+                if a["url"] not in {x["url"] for x in achados}:
+                    achados.append(a)
+            cancelado = True
+            break
+        if prazo and time.monotonic() >= prazo:
+            cancelado = True
+            break
         detalhe = info.get("detalhe") or {}
         if detalhe:
             rec = [str(x)[:160] for x in (detalhe.get("recuperacao") or []) if str(x).strip()]
@@ -740,7 +782,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set) -> l
     if prios:
         achados.sort(key=lambda a: 0 if any(p in (a.get("url", "") or "").lower()
                                             for p in prios) else 1)
-    if not achados:
+    if not achados and not cancelado:
         job["erros"].append(f"busca '{base[:60]}': sem resultados" +
                             (f" ({len(falhas)} falhas de provedor)" if falhas else ""))
         emitir(db, job["id"], job["owner"], "search", "search_completed", "alerta",
@@ -776,12 +818,16 @@ def _agregar_midia(db, job: dict, itens: list) -> int:
 
 
 def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
-                    teto_paginas: int = 3) -> list:
+                    teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
     """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
     import evidence_graph as _eg
     from concurrent.futures import ThreadPoolExecutor
 
+    parar = deve_parar or (lambda: False)
+
     def _ler(a):
+        if parar() or (prazo and time.monotonic() >= prazo):
+            raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
         if a.get("metadata_source") == "academic_provider":
             return {"titulo": a.get("titulo") or a.get("title") or "",
                     "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
@@ -798,13 +844,19 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     "access_state": str(rec.get("access_state") or
                                         ("read" if (rec.get("texto") or "").strip()
                                          else "snippet_only"))[:40]}
+        limite_tempo = 8.0
+        if prazo:
+            restante = prazo - time.monotonic()
+            if restante <= 0:
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            limite_tempo = max(0.5, min(limite_tempo, restante))
         try:
             final, pagina = research.baixar(
-                a["url"], timeout=8.0,
+                a["url"], timeout=limite_tempo,
                 max_bytes=max(65_536, int(job["orcamento"].get(
                     "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
         except TypeError:
-            final, pagina = research.baixar(a["url"], timeout=8.0)
+            final, pagina = research.baixar(a["url"], timeout=limite_tempo)
         artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
                                          teto=research.MAX_TEXTO_PAGINA)
         texto = (artigo.get("texto") or "").strip()
@@ -817,19 +869,36 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
 
     alvos = achados[:teto_paginas]
     baixados: dict = {}
-    with ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer") as pool:
-        futs = {pool.submit(_ler, a): a for a in alvos}
+    pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
+    futs = {pool.submit(_ler, a): a for a in alvos}
+    cancelado = False
+    try:
         for fut, a in futs.items():
+            if parar() or (prazo and time.monotonic() >= prazo):
+                cancelado = True
+                break
             try:
                 baixados[a["url"]] = fut.result()
             except research.ResearchErro as exc:
+                if exc.codigo == "cancelada" or parar():
+                    cancelado = True
+                    break
                 emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                        f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
             except Exception as exc:
+                if parar():
+                    cancelado = True
+                    break
                 emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                        f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+    finally:
+        for fut in futs:
+            fut.cancel()
+        pool.shutdown(wait=False, cancel_futures=True)
     evidencias = []
     for a in alvos:
+        if cancelado or parar():
+            break
         rec = baixados.get(a["url"])
         if rec is None:
             continue
@@ -1175,6 +1244,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     _save_context_checkpoint(db, job)
     t0 = t0 or time.monotonic()
     timeout = job["orcamento"].get("timeout_s", 120)
+    prazo = t0 + timeout
     vistas = set()
     todas_evid = []
     vereditos = []
@@ -1209,10 +1279,12 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             if deve_parar is not None and deve_parar():
                 job["status"] = "interrompida"
                 salvar_job(db, job)
+                if job["status"] in ("cancelada", "pausada"):
+                    return _resumo(db, job)
                 emitir(db, job["id"], owner, "orchestrator", "research_cancelled", "ok",
                        "Interrompida pelo usuário; retomável.", {})
                 return _resumo(db, job)
-            if time.monotonic() - t0 > timeout:
+            if time.monotonic() > prazo:
                 job["pendencias"].append("tempo esgotado antes de " + etapa["id"])
                 break
             msg = _orcamento_etapa(job, etapa["tipo"])
@@ -1224,13 +1296,15 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             etapa["tentativas"] = etapa.get("tentativas", 0) + 1
             try:
                 if etapa["tipo"] == "busca":
-                    etapa["_achados"] = agente_busca(db, job, etapa, provedores, vistas)
+                    etapa["_achados"] = agente_busca(db, job, etapa, provedores, vistas,
+                                                     deve_parar=deve_parar, prazo=prazo)
                 elif etapa["tipo"] == "ler":
                     teto = max(1, job["orcamento"].get("paginas", 3) // max(1, len(
                         [s for s in job["plano"] if s["tipo"] == "ler"])))
                     fonte = _achados_etapa(job, etapa)
                     etapa["_evidencias"] = agente_analista(db, job, etapa, fonte,
-                                                          recuperar_fn, teto)
+                                                          recuperar_fn, teto,
+                                                          deve_parar=deve_parar, prazo=prazo)
                     todas_evid.extend(etapa["_evidencias"])
                 elif etapa["tipo"] == "analisar":
                     etapa["_n"] = len(todas_evid)
@@ -1280,6 +1354,8 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                        f"Etapa {etapa['id']} falhou ({getattr(exc, 'codigo', '?')}).", {})
             salvar_job(db, job)
             _save_context_checkpoint(db, job)
+            if job["status"] == "cancelada":
+                return _resumo(db, job)
         lacunas = _lacunas(job)
         if lacunas and not _orcamento_ok(job) and job["plano"] and \
                 job["usados"].get("replans", 0) < job["orcamento"].get("replans", 1) and \
@@ -1298,6 +1374,8 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         # no instante do research_completed já enxerga o status final (sem
         # janela em que o evento diz "acabou" e o job ainda está rodando).
         salvar_job(db, job)
+        if job["status"] in ("cancelada", "pausada"):
+            return _resumo(db, job)
         emitir(db, job["id"], owner, "orchestrator", "research_completed", "ok",
                f"Pesquisa {job['status']}: {len(todas_evid or _evidencias_job(db, job))} evidências.",
                {})
@@ -1311,6 +1389,8 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         job["status"] = "falhou"
         job["erros"].append(f"orquestrador: {type(exc).__name__}: {exc}"[:300])
         salvar_job(db, job)
+        if job["status"] in ("cancelada", "pausada"):
+            return _resumo(db, job)
         emitir(db, job["id"], owner, "orchestrator", "research_failed", "falha",
                f"Falha: {type(exc).__name__}. Estado preservado.", {})
         return _resumo(db, job)
@@ -2018,7 +2098,7 @@ def pausar(db, owner: str, job_id: str, pausar: bool = True) -> dict:
     if job["status"] not in ("em_andamento", "pausada"):
         raise AgentErro("só pausa job em andamento", "estado")
     job["status"] = "pausada" if pausar else "em_andamento"
-    salvar_job(db, job)
+    salvar_job(db, job, forcar_status=True)
     emitir(db, job["id"], owner, "orchestrator",
            "research_cancelled" if pausar else "step_started",
            "ok", "Pausada pelo usuário." if pausar else "Retomada pelo usuário.", {})
@@ -2032,7 +2112,13 @@ OPS_INTERVENCAO = ("escopo_add", "escopo_remove", "priorizar_dominio",
 def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
     """Alteração estruturada do plano (sem LLM): nova versão, feitas preservadas,
     incompatíveis invalidadas e listadas."""
-    params = params or {}
+    if not isinstance(params, dict):
+        params = {}
+    params = {
+        str(chave)[:40]: (valor[:500] if isinstance(valor, str) else valor)
+        for chave, valor in list(params.items())[:10]
+        if isinstance(chave, str) and isinstance(valor, (str, int, float, bool))
+    }
     if op not in OPS_INTERVENCAO:
         raise AgentErro("operação inválida", "op")
     job = carregar_job(db, owner, job_id)
@@ -2111,7 +2197,7 @@ def intervir(db, owner: str, job_id: str, op: str, params: dict = None) -> dict:
     job["plano_versao"] += 1
     if job["status"] in ("interrompida", "pausada"):
         job["status"] = "em_andamento"
-    salvar_job(db, job)
+    salvar_job(db, job, forcar_status=True)
     emitir(db, job["id"], owner, "orchestrator", "plan_updated", "ok",
            f"Intervenção {op} → plano v{job['plano_versao']}: +{len(adicionadas)}/-{len(removidas)}.",
            {"op": op})

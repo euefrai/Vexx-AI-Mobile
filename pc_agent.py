@@ -3291,12 +3291,13 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
                 return "Sua pesquisa já está em andamento — acompanhe no painel. 🔍"
             return "Não encontrei pesquisa interrompida para retomar. 🔍"
         job["status"] = "em_andamento"
-        research_agents.salvar_job(db, job)
+        # Retomada explícita do usuário: vence cancelamento/pausa anteriores.
+        research_agents.salvar_job(db, job, forcar_status=True)
         if iniciar_job_bg(database_path(), job["id"], owner):
             return (f"Pesquisa sobre **{job['objetivo']}** retomada de onde parou "
                     f"(id {job['id']}). Acompanhe no painel. 🔍")
         job["status"] = "interrompida"
-        research_agents.salvar_job(db, job)
+        research_agents.salvar_job(db, job, forcar_status=True)
         return "Já há outra pesquisa em andamento; conclua ou cancele antes. 🔍"
     m = _JOB_START_RE.search(texto or "")
     if m or "inicie uma pesquisa sobre" in t:
@@ -4476,8 +4477,9 @@ def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
             job["status"] = "falhou"
             job["erros"].append(f"worker: {type(exc).__name__}"[:200])
             research_agents.salvar_job(db, job)
-            research_agents.emitir(db, job_id, owner, "orchestrator", "research_failed",
-                                   "falha", f"Worker falhou ({type(exc).__name__}).", {})
+            if job["status"] not in ("cancelada", "pausada"):
+                research_agents.emitir(db, job_id, owner, "orchestrator", "research_failed",
+                                       "falha", f"Worker falhou ({type(exc).__name__}).", {})
         except Exception:
             pass
     finally:
@@ -4621,6 +4623,36 @@ def recover_interrupted_ai(db):
                    ("Agente reiniciado durante a geração. Tente novamente.", agora_iso()))
 
 
+def recover_interrupted_research(db) -> int:
+    """Marca jobs órfãos após reinício; nunca apaga plano/evidências.
+
+    `em_andamento`/`criada` não têm worker após o boot. Sem isso, o job
+    ficaria "vivo" para sempre e bloquearia novas pesquisas do dono.
+    """
+    rows = db.execute("SELECT id, owner_id FROM research_jobs "
+                      "WHERE status IN ('em_andamento','criada')").fetchall()
+    recuperados = 0
+    for job_id, owner in rows:
+        try:
+            job = research_agents.carregar_job(db, owner, job_id)
+        except Exception:
+            continue
+        if job["status"] not in ("em_andamento", "criada"):
+            continue
+        job["status"] = "interrompida"
+        job["pendencias"].append("Agente reiniciado; pesquisa retomável.")
+        job["pendencias"] = job["pendencias"][-20:]
+        try:
+            research_agents.salvar_job(db, job)
+            research_agents.emitir(db, job_id, owner, "orchestrator",
+                                   "research_cancelled", "alerta",
+                                   "Interrompida pelo reinício do agente; retomável.", {})
+            recuperados += 1
+        except Exception:
+            continue
+    return recuperados
+
+
 def run():
     relay_url = os.environ.get("JULIA_RELAY_URL", "").strip().rstrip("/")
     token = os.environ.get("JULIA_AGENT_TOKEN", "")
@@ -4634,6 +4666,9 @@ def run():
     ws_url = f"{'wss' if parsed.scheme == 'https' else 'ws'}://{parsed.netloc}/api/agent/ws"
     db = open_db(database_path())
     recover_interrupted_ai(db)
+    recuperados = recover_interrupted_research(db)
+    if recuperados:
+        log.info("Pesquisas órfãs marcadas como interrompidas: %d", recuperados)
     cfg = ai_config()
     try:
         modelos = hermes_bridge.listar_modelos(cfg["proxy"])
@@ -4686,13 +4721,16 @@ def run():
                     elif tipo == "auth_login":
                         try:
                             user = JULIA_auth.login_conta(db, req.get("username", ""),
-                                                          req.get("password", ""))
+                                                          req.get("password", ""),
+                                                          str(req.get("cliente", ""))[:80])
                             sess = JULIA_auth.criar_sessao(db, user["uid"])
                             reply = _resp_ok("auth_ok", uid=user["uid"], username=user["username"],
                                              display=user["display"], role=user["role"],
                                              sid=sess["sid"], expira_em=sess["expira_em"])
                         except JULIA_auth.AuthErro as exc:
                             reply = _resp_erro(str(exc), exc.codigo)
+                            if exc.retry_after:
+                                reply["retry_after"] = exc.retry_after
                     elif tipo == "auth_register":
                         try:
                             reg = JULIA_auth.registrar(db, req.get("display", ""),

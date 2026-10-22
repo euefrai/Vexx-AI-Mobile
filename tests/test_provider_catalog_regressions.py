@@ -77,7 +77,7 @@ def test_relay_keeps_late_provider_and_metadata(monkeypatch):
         return {'type': 'ai_models', 'models': [i['id'] for i in items], 'items': items,
                 'providers': [{'id': 'groq', 'configured': True, 'source': 'arquivo'}]}
 
-    monkeypatch.setattr(server, 'verify_session', lambda request: {'uid': 'local'})
+    monkeypatch.setattr(server, 'sessao_usuario', lambda request: 'local')
     monkeypatch.setattr(server.relay, 'exchange', exchange)
     with TestClient(server.app) as client:
         response = client.get('/api/ai/models')

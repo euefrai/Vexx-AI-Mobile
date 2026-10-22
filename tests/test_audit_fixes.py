@@ -154,7 +154,7 @@ def test_research_size_limit_finishes_with_recoverable_checkpoint(db, monkeypatc
     job = research_agents.criar_job(db, "local", "Synthetic objective", conv="chat-a", modo="rapida")
     job["plano"] = [{"id": "step1", "tipo": "busca", "status": "pendente", "alvo": "test"}]
     research_agents.salvar_job(db, job)
-    def oversized(db, job, *args):
+    def oversized(db, job, *args, **kwargs):
         job["achados"] = [{"texto": "x" * 61000}]
         return []
     monkeypatch.setattr(research_agents, "agente_busca", oversized)
