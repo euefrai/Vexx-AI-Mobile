@@ -1,0 +1,681 @@
+{
+  "scope": "20 perguntas técnicas reais; resumos manuais em português da documentação oficial conferida em 2026-10-22. Avalia redação e citações, não recuperação web nem precisão universal.",
+  "retrieval_tested": false,
+  "real_model": true,
+  "model": "poolside/laguna-s-2.1:free",
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "Qual a diferença entre list.sort e sorted?",
+      "baseline_ms": 0.76,
+      "assisted_ms": 8010.81,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: Qual a diferença entre list.sort e sorted?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Qual a diferença entre list.sort e sorted?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q02",
+      "question": "Como ordenar sem modificar minha lista original?",
+      "baseline_ms": 1.04,
+      "assisted_ms": 7057.08,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Como ordenar sem modificar minha lista original?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Para ordenar sem modificar a lista original, use a função sorted() em vez de list.sort(). A função sorted() cria uma nova lista ordenada e aceita qualquer iterável como entrada, mantendo a lista original intacta. Ambos sorted() e list.sort() aceitam os parâmetros key e reverse para personalizar a ordenação. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Para ordenar sem modificar a lista original, use a função sorted() em vez de list.sort(). A função sorted() cria uma nova lista ordenada e aceita qualquer iterável como entrada, mantendo a lista original intacta. Ambos sorted() e list.sort() aceitam os parâmetros key e reverse para personalizar a ordenação.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q03",
+      "question": "Posso usar sorted em uma tupla?",
+      "baseline_ms": 0.76,
+      "assisted_ms": 3638.59,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: Posso usar sorted em uma tupla?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\n[E2](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 2; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting",
+          "E2": "structures"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Posso usar sorted em uma tupla?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\n[E2](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 2; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting",
+          "E2": "structures"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q04",
+      "question": "Por que atribuir o resultado de list.sort não retorna a lista ordenada?",
+      "baseline_ms": 0.85,
+      "assisted_ms": 5972.27,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Por que atribuir o resultado de list.sort não retorna a lista ordenada?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "O método list.sort() não retorna a lista ordenada porque ele modifica a lista original in-place e retorna explicitamente None, como parte de seu design deliberado para indicar que a operação é mutável e não produtiva. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "O método list.sort() não retorna a lista ordenada porque ele modifica a lista original in-place e retorna explicitamente None, como parte de seu design deliberado para indicar que a operação é mutável e não produtiva.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q05",
+      "question": "O que significa uma ordenação estável?",
+      "baseline_ms": 0.75,
+      "assisted_ms": 7600.24,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: O que significa uma ordenação estável?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Investigação: O que significa uma ordenação estável?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q06",
+      "question": "reverse faz perder a ordem dos elementos empatados?",
+      "baseline_ms": 0.59,
+      "assisted_ms": 5342.5,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: reverse faz perder a ordem dos elementos empatados?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Não, usar reverse não faz perder a ordem dos elementos empatados. A ordenação em Python é estável, o que significa que elementos com a mesma chave mantêm sua ordem original mesmo quando reverse é aplicado. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "A ordenação é estável: elementos com a mesma chave conservam sua ordem original. reverse permite ordem decrescente e preserva estabilidade.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não, usar reverse não faz perder a ordem dos elementos empatados. A ordenação em Python é estável, o que significa que elementos com a mesma chave mantêm sua ordem original mesmo quando reverse é aplicado.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q07",
+      "question": "A função key é chamada repetidamente para o mesmo registro?",
+      "baseline_ms": 1.47,
+      "assisted_ms": 4666.71,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: A função key é chamada repetidamente para o mesmo registro?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "A função key é chamada exatamente uma vez por cada registro de entrada durante a ordenação. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "A função key é chamada uma vez por registro de entrada.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "A função key é chamada exatamente uma vez por cada registro de entrada durante a ordenação.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q08",
+      "question": "Como comparar palavras sem distinguir letras maiúsculas e minúsculas na ordenação?",
+      "baseline_ms": 1.03,
+      "assisted_ms": 5142.41,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Como comparar palavras sem distinguir letras maiúsculas e minúsculas na ordenação?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Para comparar palavras sem distinguir letras maiúsculas e minúsculas na ordenação, utilize a função str.casefold como chave (key) em list.sort ou sorted. A chave é chamada uma vez por registro de entrada, permitindo que a comparação seja feita em caixa baixa sem modificar os elementos originais da lista. A ordenação permanece estável, preservando a ordem original dos elementos com a mesma chave. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Para comparar palavras sem distinguir letras maiúsculas e minúsculas na ordenação, utilize a função str.casefold como chave (key) em list.sort ou sorted. A chave é chamada uma vez por registro de entrada, permitindo que a comparação seja feita em caixa baixa sem modificar os elementos originais da lista. A ordenação permanece estável, preservando a ordem original dos elementos com a mesma chave.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q09",
+      "question": "Em uma ordenação por várias chaves, qual chave ordeno primeiro?",
+      "baseline_ms": 1.17,
+      "assisted_ms": 7372.48,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Em uma ordenação por várias chaves, qual chave ordeno primeiro?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Em uma ordenação por várias chaves, recomenda-se ordenar primeiro pela chave secundária e, em seguida, pela chave principal. Isso é possível porque a ordenação é estável, conservando a ordem relativa dos elementos com chaves iguais. A estabilidade permite aplicar múltiplas etapas de ordenação sem perder a ordem definida em etapas anteriores. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "A estabilidade permite ordenar em múltiplas etapas, primeiro pela chave secundária e depois pela principal.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Em uma ordenação por várias chaves, recomenda-se ordenar primeiro pela chave secundária e, em seguida, pela chave principal. Isso é possível porque a ordenação é estável, conservando a ordem relativa dos elementos com chaves iguais. A estabilidade permite aplicar múltiplas etapas de ordenação sem perder a ordem definida em etapas anteriores.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q10",
+      "question": "Uma tupla pode conter uma lista mutável?",
+      "baseline_ms": 0.53,
+      "assisted_ms": 2762.57,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Uma tupla pode conter uma lista mutável?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Sim, uma tupla pode conter uma lista mutável. [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Sim, uma tupla pode conter uma lista mutável.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q11",
+      "question": "Copiar uma lista com list.copy cria uma cópia profunda?",
+      "baseline_ms": 0.57,
+      "assisted_ms": 5710.53,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: Copiar uma lista com list.copy cria uma cópia profunda?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Copiar uma lista com list.copy cria uma cópia profunda?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q12",
+      "question": "Qual estrutura remove elementos duplicados?",
+      "baseline_ms": 0.86,
+      "assisted_ms": 4135.27,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Qual estrutura remove elementos duplicados?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Conjuntos em Python são estruturas de dados que não contêm elementos duplicados. De acordo com a documentação oficial, ao contrário de listas, os conjuntos garantem a unicidade dos elementos, removendo automaticamente cópias de valores repetidos. Isso os torna especialmente úteis para operações que envolvem eliminação de duplicatas. [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Conjuntos em Python são estruturas de dados que não contêm elementos duplicados. De acordo com a documentação oficial, ao contrário de listas, os conjuntos garantem a unicidade dos elementos, removendo automaticamente cópias de valores repetidos. Isso os torna especialmente úteis para operações que envolvem eliminação de duplicatas.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q13",
+      "question": "Chaves vazias criam um conjunto ou um dicionário?",
+      "baseline_ms": 1.09,
+      "assisted_ms": 5848.49,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: Chaves vazias criam um conjunto ou um dicionário?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Chaves vazias criam um conjunto ou um dicionário?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q14",
+      "question": "Para uma fila com remoções no início, uso lista ou deque?",
+      "baseline_ms": 0.73,
+      "assisted_ms": 4256.33,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Para uma fila com remoções no início, uso lista ou deque?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Para uma fila com remoções no início, a estrutura recomendada é collections.deque, pois foi projetada especificamente para inserções e remoções rápidas em ambas as extremidades, enquanto listas são mais eficientes apenas para operações no final. [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "Listas permitem implementar pilhas com append e pop no final. Para filas, collections.deque foi projetada para inserções e remoções rápidas nas duas extremidades.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Para uma fila com remoções no início, a estrutura recomendada é collections.deque, pois foi projetada especificamente para inserções e remoções rápidas em ambas as extremidades, enquanto listas são mais eficientes apenas para operações no final.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q15",
+      "question": "Posso usar uma lista como chave de dicionário?",
+      "baseline_ms": 1.19,
+      "assisted_ms": 4754.25,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Posso usar uma lista como chave de dicionário?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Não, listas não podem ser usadas como chaves de dicionário em Python. [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "listas não podem ser usadas como chaves.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não, listas não podem ser usadas como chaves de dicionário em Python.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q16",
+      "question": "WAL permite leitores e escritores ao mesmo tempo? E vários escritores?",
+      "baseline_ms": 1.12,
+      "assisted_ms": 2390.62,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: WAL permite leitores e escritores ao mesmo tempo? E vários escritores?\n\n[E1](https://www.sqlite.org/wal.html) SQLite — Write-Ahead Logging (www.sqlite.org): No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede. Um checkpoint transfere as transações do WAL para o arquivo principal do banco. Leitores de lo\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "wal"
+        }
+      },
+      "result": {
+        "texto": "No modo WAL, leitores e um escritor podem operar simultaneamente, mas ainda existe apenas um escritor por vez. [E1](https://www.sqlite.org/wal.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "wal"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "No modo WAL, leitores e um escritor podem operar simultaneamente, mas ainda existe apenas um escritor por vez.",
+            "evidence_ids": [
+              "wal"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q17",
+      "question": "Posso compartilhar um banco SQLite em WAL entre máquinas por uma pasta de rede?",
+      "baseline_ms": 1.25,
+      "assisted_ms": 4430.1,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Posso compartilhar um banco SQLite em WAL entre máquinas por uma pasta de rede?\n\n[E1](https://www.sqlite.org/wal.html) SQLite — Write-Ahead Logging (www.sqlite.org): No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede. Um checkpoint transfere as transações do WAL para o arquivo principal do banco. Leitores de lo\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "wal"
+        }
+      },
+      "result": {
+        "texto": "Não, não é recomendado compartilhar um banco SQLite em modo WAL entre máquinas por uma pasta de rede. O modo WAL requer que os processos estejam na mesma máquina e não funciona em sistemas de arquivos de rede. [E1](https://www.sqlite.org/wal.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "wal"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não, não é recomendado compartilhar um banco SQLite em modo WAL entre máquinas por uma pasta de rede. O modo WAL requer que os processos estejam na mesma máquina e não funciona em sistemas de arquivos de rede.",
+            "evidence_ids": [
+              "wal"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q18",
+      "question": "O que faz um checkpoint e como leitores longos afetam o WAL?",
+      "baseline_ms": 1.11,
+      "assisted_ms": 4560.93,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: O que faz um checkpoint e como leitores longos afetam o WAL?\n\n[E1](https://www.sqlite.org/wal.html) SQLite — Write-Ahead Logging (www.sqlite.org): No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede. Um checkpoint transfere as transações do WAL para o arquivo principal do banco. Leitores de lo\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "wal"
+        }
+      },
+      "result": {
+        "texto": "Investigação: O que faz um checkpoint e como leitores longos afetam o WAL?\n\n[E1](https://www.sqlite.org/wal.html) SQLite — Write-Ahead Logging (www.sqlite.org): No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede. Um checkpoint transfere as transações do WAL para o arquivo principal do banco. Leitores de lo\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "wal"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    },
+    {
+      "id": "Q19",
+      "question": "Basta habilitar chaves estrangeiras em uma única conexão SQLite?",
+      "baseline_ms": 0.98,
+      "assisted_ms": 5072.25,
+      "accepted": true,
+      "fallback_reason": null,
+      "baseline": {
+        "texto": "Investigação: Basta habilitar chaves estrangeiras em uma única conexão SQLite?\n\n[E1](https://www.sqlite.org/foreignkeys.html) SQLite — Foreign Key Support (www.sqlite.org): A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão. Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito. Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "foreignkeys"
+        }
+      },
+      "result": {
+        "texto": "Não, não basta habilitar chaves estrangeiras em uma única conexão SQLite. Deve-se habilitar e verificar a aplicação das chaves estrangeiras em cada conexão individualmente. Não se deve presumir o estado padrão, pois as chaves estrangeiras não são ativadas por padrão no SQLite. [E1](https://www.sqlite.org/foreignkeys.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "foreignkeys"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não, não basta habilitar chaves estrangeiras em uma única conexão SQLite. Deve-se habilitar e verificar a aplicação das chaves estrangeiras em cada conexão individualmente. Não se deve presumir o estado padrão, pois as chaves estrangeiras não são ativadas por padrão no SQLite.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q20",
+      "question": "Posso ativar foreign_keys dentro de uma transação? E quando uma restrição diferida é verificada?",
+      "baseline_ms": 0.88,
+      "assisted_ms": 8726.59,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "baseline": {
+        "texto": "Investigação: Posso ativar foreign_keys dentro de uma transação? E quando uma restrição diferida é verificada?\n\n[E1](https://www.sqlite.org/foreignkeys.html) SQLite — Foreign Key Support (www.sqlite.org): A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão. Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito. Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "foreignkeys"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Posso ativar foreign_keys dentro de uma transação? E quando uma restrição diferida é verificada?\n\n[E1](https://www.sqlite.org/foreignkeys.html) SQLite — Foreign Key Support (www.sqlite.org): A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão. Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito. Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "foreignkeys"
+        },
+        "fallback_reason": "provider_or_validation_failure"
+      }
+    }
+  ],
+  "accepted": 13,
+  "completed": 20,
+  "elapsed_s": 107.55
+}

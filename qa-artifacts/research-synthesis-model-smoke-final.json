@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "elapsed_s": 6.46,
+  "scope": "real configured model; fictional public test data; no web research",
+  "output": {
+    "texto": "O ensaio fictício compara a autonomia dos modelos A e B sob as mesmas condições, com o modelo A durando 10 horas e o modelo B durando 8 horas. [E1](https://example.org/controlled-test)",
+    "llm": true,
+    "references": {
+      "E1": "public-test"
+    },
+    "provenance": [
+      {
+        "label": "E1",
+        "evidence_id": "public-test",
+        "quote": "Neste ensaio fictício, o modelo A durou 10 horas e o modelo B durou 8 horas sob as mesmas condições.",
+        "paragraph": 0
+      }
+    ],
+    "findings": [
+      {
+        "text": "O ensaio fictício compara a autonomia dos modelos A e B sob as mesmas condições, com o modelo A durando 10 horas e o modelo B durando 8 horas.",
+        "evidence_ids": [
+          "public-test"
+        ]
+      }
+    ],
+    "verification": "citation-and-quote-checks; not semantic entailment"
+  }
+}

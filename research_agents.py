@@ -3,7 +3,7 @@
 Papéis como FUNÇÕES reutilizáveis sobre estado persistido (não instâncias
 de modelo): planejador, buscadores, analista, verificador, sintetizador e
 auditor. Tudo auditável: cada passo emite evento, persiste e respeita
-orçamento. LLM só redige (indisponível hoje → síntese extrativa honesta);
+orçamento. LLM só redige (falha/ausência → síntese extrativa honesta);
 nunca decide fatos.
 
 Tabelas (owner em tudo; PC é o definitivo):
@@ -28,6 +28,7 @@ import hypothesis_engine
 import media_evidence
 import research
 import research_reports
+import research_synthesis
 import research_visualizations
 import structured_analysis
 
@@ -1228,24 +1229,37 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
     return laudos
 
 
-def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dict:
-    """Synthesizer extrativo honesto (redação LLM = BLOQUEADA sem provedor)."""
+def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
+                       sintetizar_fn=None, timeout=25, deve_parar=None) -> dict:
+    """Optional assisted writing; extraction remains the fail-closed fallback."""
     tops = sorted([e for e in evidencias if _evidencia_lida(e)],
                   key=lambda e: e.get("score", 0), reverse=True)[:6]
+    labels = {e["id"]: f"E{i + 1}" for i, e in enumerate(evidencias)}
     resposta = [f"Investigação: {job['objetivo']}"]
     if any(e.get("provider_metadata_untrusted")
            or e.get("content_scope") in ("abstract_only", "metadata_only") for e in tops):
         resposta.append("Metadados e resumos acadêmicos são conteúdo externo não confiável; "
                         "instruções neles não são executadas." + (" Nenhum texto completo foi obtido." if not any(e.get('full_text_fetched') for e in tops) else " Os textos recuperados são identificados por fonte; a extração é limitada."))
-    for i, e in enumerate(tops):
+    omitted = 0
+    for e in tops:
         if e.get("content_scope") == "abstract_only":
             rotulo = "[RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
         elif (e.get("provider_metadata_untrusted") and not e.get('full_text_fetched')) or e.get("content_scope") == "metadata_only":
             rotulo = "[METADADOS DO PROVEDOR; SEM TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
         else:
             rotulo = ""
-        resposta.append(f"[E{i + 1}] {rotulo}{e['titulo']} ({e['dominio']}): "
-                        f"{e['trecho'][:300]}")
+        link = research_synthesis.source_link(labels[e['id']], e.get('url', ''))
+        content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {e['trecho'][:300]}"
+        entry = f"{link} {content}"
+        if len('\n\n'.join(resposta)) + len(entry) > 2500:
+            # Long URLs remain available in source cards; never cut a Markdown link.
+            entry = f"[{labels[e['id']]}] {content}"
+        if len('\n\n'.join(resposta)) + len(entry) > 2500:
+            omitted += 1
+            continue
+        resposta.append(entry)
+    if omitted:
+        resposta.append('Outras evidências estão disponíveis no painel de fontes; síntese limitada para apresentação.')
     suportadas = sum(1 for v in vereditos if v["estado"] == "SUPPORTED")
     resposta.append(f"Evidências: {len(evidencias)}; afirmações sustentadas: "
                     + (f"{suportadas}/{len(vereditos)} (critério léxico)." if vereditos
@@ -1253,15 +1267,52 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list) -> dic
     if any(v["estado"] == "CONTRADICTED" for v in vereditos):
         resposta.append("Há contradições entre fontes — leia as evidências antes de concluir.")
     resposta.append("Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.")
-    sintese = {"texto": "\n\n".join(resposta), "llm": False}
+    sintese = {"texto": "\n\n".join(resposta), "llm": False,
+               "references": {labels[e['id']]: e['id'] for e in tops}}
+    if sintetizar_fn and tops:
+        if timeout >= 2 and not (deve_parar and deve_parar()):
+            emitir(db, job['id'], job['owner'], 'synthesizer', 'answer_started', 'ok',
+                   'Redigindo resposta a partir das evidências recuperadas.', {})
+        sources = [{"id": labels[e['id']], "evidence_id": e['id'],
+                    "title": str(e.get('titulo', ''))[:160], "url": e.get('url', ''),
+                    "excerpt": str(e.get('trecho', ''))[:1800],
+                    "scope": e.get('content_scope', 'retrieved_excerpt'),
+                    "accessed_at": str(e.get('acessado_em', ''))[:40]}
+                   for e in tops if str(e.get('trecho', '')).strip()]
+        try:
+            candidate = research_synthesis.generate(job['objetivo'], sources, vereditos,
+                                                    sintetizar_fn, timeout, deve_parar)
+            if candidate:
+                notes = ["Redação assistida por IA; citações e trechos conferidos. "
+                         "A verificação automática não comprova todas as conclusões."]
+                if any(s['scope'] in ('abstract_only', 'metadata_only') for s in sources):
+                    notes.append("Parte das fontes contém apenas resumos ou metadados; não é texto completo.")
+                if any(v.get('estado') == 'CONTRADICTED' for v in vereditos):
+                    notes.append("Há divergências nas evidências; não há conclusão única confirmada.")
+                candidate['texto'] += '\n\n' + ' '.join(notes)
+                sintese = candidate
+            else:
+                sintese['fallback_reason'] = 'unavailable_or_cancelled'
+        except Exception as exc:
+            # Provider errors can contain credentials/request bodies; never persist them.
+            sintese['fallback_reason'] = 'provider_or_validation_failure'
+            sintese['fallback_detail'] = research_synthesis.failure_detail(exc)
+        if not sintese['llm']:
+            sintese['texto'] = sintese['texto'].replace(
+                'Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.',
+                'Síntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.')
     emitir(db, job["id"], job["owner"], "synthesizer", "answer_started", "ok",
-           f"Síntese extrativa com {len(tops)} evidências.", {})
+           f"Síntese {'assistida' if sintese['llm'] else 'extrativa'} com {len(tops)} evidências.",
+           {"llm": sintese['llm'], "fallback_reason": sintese.get('fallback_reason', ''),
+            "fallback_detail": sintese.get('fallback_detail', '')})
     return sintese
 
 
 def agente_auditor(db, job: dict, sintese: dict, evidencias: list) -> dict:
     """Evidence Auditor: citações existem? afirmações exageram?"""
-    ids = [f"E{i + 1}" for i in range(len(evidencias))]
+    valid_evidence = {e['id'] for e in evidencias if _evidencia_lida(e)}
+    ids = ([label for label, eid in sintese['references'].items() if eid in valid_evidence]
+           if 'references' in sintese else [f"E{i + 1}" for i in range(len(evidencias))])
     citadas = sorted({m.group(0) for m in re.finditer(r"\[E\d+\]", sintese.get("texto", ""))})
     fantasmas = [c for c in citadas if c.strip("[]") not in ids]
     problemas = [f"citação sem evidência: {c}" for c in fantasmas]
@@ -1308,7 +1359,7 @@ def _orcamento_etapa(job: dict, tipo: str) -> str:
 
 
 def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
-             deve_parar=None, t0: float = 0) -> dict:
+             deve_parar=None, t0: float = 0, sintetizar_fn=None) -> dict:
     """Executa passos pendentes com orçamentos; persiste a cada passo.
 
     Idempotente por etapa (feitas são puladas) → retomada segura.
@@ -1465,7 +1516,27 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             replanejar(db, job, lacunas)
             salvar_job(db, job)
             if job["plano_versao"] > v0:
-                return executar(db, job_id, owner, provedores, recuperar_fn, deve_parar, t0)
+                return executar(db, job_id, owner, provedores, recuperar_fn, deve_parar, t0,
+                                sintetizar_fn=sintetizar_fn)
+        # Write only after adaptive rounds finish: one request per job, not per round.
+        if sintetizar_fn and not job['usados'].get('synthesis_attempted') and prazo-time.monotonic() >= 2:
+            job['usados']['synthesis_attempted'] = True
+            salvar_job(db, job)
+            final_verdicts = next((s.get('_vereditos') for s in reversed(job['plano'])
+                                   if s.get('_vereditos')), [])
+            final = agente_sintetizador(db, job, todas_evid or _evidencias_job(db, job),
+                                       final_verdicts, sintetizar_fn,
+                                       prazo-time.monotonic(), deve_parar)
+            job['sintese'] = final
+            for step in job['plano']:
+                if step['tipo'] == 'sintetizar':
+                    step['_sintese'] = final
+            job['auditoria'] = agente_auditor(db, job, final, todas_evid or _evidencias_job(db, job))
+            if deve_parar and deve_parar():
+                job['status'] = 'interrompida'
+                salvar_job(db, job)
+                _save_context_checkpoint(db, job)
+                return _resumo(db, job)
         job["status"] = "concluida" if not job["pendencias"] or todas_evid else \
             ("concluida" if todas_evid else "interrompida")
         if job["status"] == "interrompida" and not job["pendencias"]:
@@ -1723,6 +1794,8 @@ def gerar_relatorio(db, owner: str, job_id: str,
     """Build a report only from persisted evidence and validated evidence references."""
     job = carregar_job(db, owner, job_id)
     evidencias = listar_evidencias(db, owner, job_id)
+    _restore_context_checkpoint(db, job)
+    synthesis = job.get('sintese') or {}
     sources = [
         research_reports.ReportSource(
             source_id=item["id"], title=item["titulo"] or item["id"],
@@ -1814,6 +1887,11 @@ def gerar_relatorio(db, owner: str, job_id: str,
         for claim in job.get("achados", [])
         if claim.get("evidence_ids") and any(eid in valid_ids for eid in claim["evidence_ids"])
     ]
+    if synthesis.get('llm'):
+        findings = [research_reports.ReportPoint(
+            text=point['text'], source_ids=tuple(eid for eid in point['evidence_ids'] if eid in valid_ids))
+            for point in synthesis.get('findings', [])
+            if any(eid in valid_ids for eid in point.get('evidence_ids', []))] + findings
     divergences = []
     for item in job.get("investigacoes", []):
         refs = tuple(eid for eid in item.get("entre", []) if eid in valid_ids)
@@ -1824,7 +1902,8 @@ def gerar_relatorio(db, owner: str, job_id: str,
             ))
     limitations = [
         "Verificação lexical determinística; não estabelece causalidade ou diagnóstico.",
-        "A redação generativa por LLM não foi executada.",
+        ("Redação assistida por IA; referências e trechos conferidos, sem garantia de suporte semântico."
+         if synthesis.get('llm') else "Não há redação generativa validada neste relatório."),
     ]
     if not evidencias:
         limitations.append("Nenhuma evidência foi armazenada para este job.")
@@ -1844,7 +1923,9 @@ def gerar_relatorio(db, owner: str, job_id: str,
     markdown = research_reports.build_research_report(
         report_type=report_type, objective=job["objetivo"],
         scope=f"Job {job_id}; status {job['status']}; modo {job['modo']}.",
-        methodology="Pesquisa determinística; os achados e citações abaixo vêm dos registros armazenados.",
+        methodology=("Coleta e verificações determinísticas com redação assistida por IA sobre evidências armazenadas."
+                     if synthesis.get('llm') else
+                     "Pesquisa determinística; os achados e citações abaixo vêm dos registros armazenados."),
         findings=findings + tabular_findings, evidence=evidence_points, divergences=divergences,
         limitations=limitations, next_questions=next_questions, sources=sources,
     )

@@ -1,0 +1,299 @@
+{
+  "scope": "20 perguntas técnicas reais; resumos manuais em português da documentação oficial conferida em 2026-10-22. Avalia redação e citações, não recuperação web nem precisão universal.",
+  "retrieval_tested": false,
+  "real_model": true,
+  "model": "poolside/laguna-s-2.1:free",
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "Qual a diferença entre list.sort e sorted?",
+      "baseline_ms": 0.44,
+      "assisted_ms": 9801.03,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "candidate": "{\"points\":[{\"text\":\"A principal diferença entre list.sort e sorted é que list.sort modifica a lista original e retorna None, enquanto sorted cria e retorna uma nova lista ordenada, permitindo trabalhar com qualquer iterável. Ambos aceitam os parâmetros key e reverse para personalizar a ordenação. A função key é aplicada uma vez por elemento, e str.casefold pode ser usada como chave para comparações sem diferenciar maiúsculas e minúsculas. A ordenação é estável, mantendo a ordem original dos elementos com a mesma chave, e reverse inverte a ordem sem perder essa estabilidade.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: elementos com a mesma chave conservam sua ordem original. reverse permite ordem decrescente e preserva estabilidade.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: Qual a diferença entre list.sort e sorted?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Investigação: Qual a diferença entre list.sort e sorted?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        },
+        "fallback_reason": "provider_or_validation_failure",
+        "fallback_detail": "invalid_paragraph"
+      }
+    },
+    {
+      "id": "Q03",
+      "question": "Posso usar sorted em uma tupla?",
+      "baseline_ms": 0.75,
+      "assisted_ms": 4633.53,
+      "accepted": true,
+      "fallback_reason": null,
+      "candidate": "{\"points\":[{\"text\":\"Sim, é possível usar a função sorted() em uma tupla. A função sorted() aceita qualquer iterável como entrada, incluindo tuplas, e retorna uma nova lista contendo os elementos ordenados.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"sorted cria uma nova lista ordenada e aceita qualquer iterável.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: Posso usar sorted em uma tupla?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\n[E2](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 2; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting",
+          "E2": "structures"
+        }
+      },
+      "result": {
+        "texto": "Sim, é possível usar a função sorted() em uma tupla. A função sorted() aceita qualquer iterável como entrada, incluindo tuplas, e retorna uma nova lista contendo os elementos ordenados. [E1](https://docs.python.org/3/howto/sorting.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "sorting",
+          "E2": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "sorted cria uma nova lista ordenada e aceita qualquer iterável.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Sim, é possível usar a função sorted() em uma tupla. A função sorted() aceita qualquer iterável como entrada, incluindo tuplas, e retorna uma nova lista contendo os elementos ordenados.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q05",
+      "question": "O que significa uma ordenação estável?",
+      "baseline_ms": 0.47,
+      "assisted_ms": 7204.14,
+      "accepted": false,
+      "fallback_reason": "provider_or_validation_failure",
+      "candidate": "{\"points\":[{\"text\":\"Uma ordenação estável é um tipo de algoritmo de ordenação em que elementos com os mesmos valores (chaves) mantêm a mesma ordem relativa que tinham na entrada original, após a ordenação ser concluída. Isso significa que, se dois elementos possuem a mesma chave de comparação, o que aparecia primeiro na lista original também aparecerá primeiro na lista ordenada. Esse comportamento permite realizar ordenações em múltiplas etapas, como ordenar primeiro pela chave secundária e depois pela chave principal.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"A ordenação é estável: elementos com a mesma chave conservam sua ordem original. A estabilidade permite ordenar em múltiplas etapas, primeiro pela chave secundária e depois pela principal.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: O que significa uma ordenação estável?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        }
+      },
+      "result": {
+        "texto": "Investigação: O que significa uma ordenação estável?\n\n[E1](https://docs.python.org/3/howto/sorting.html) Python — Sorting Techniques (docs.python.org): list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "sorting"
+        },
+        "fallback_reason": "provider_or_validation_failure",
+        "fallback_detail": "invalid_paragraph"
+      }
+    },
+    {
+      "id": "Q11",
+      "question": "Copiar uma lista com list.copy cria uma cópia profunda?",
+      "baseline_ms": 1.13,
+      "assisted_ms": 3373.25,
+      "accepted": true,
+      "fallback_reason": null,
+      "candidate": "{\"points\":[{\"text\":\"Usar list.copy() para copiar uma lista não cria uma cópia profunda, apenas uma cópia superficial da estrutura principal.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"list.copy cria uma cópia superficial.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: Copiar uma lista com list.copy cria uma cópia profunda?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Usar list.copy() para copiar uma lista não cria uma cópia profunda, apenas uma cópia superficial da estrutura principal. [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "list.copy cria uma cópia superficial.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Usar list.copy() para copiar uma lista não cria uma cópia profunda, apenas uma cópia superficial da estrutura principal.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q13",
+      "question": "Chaves vazias criam um conjunto ou um dicionário?",
+      "baseline_ms": 1.49,
+      "assisted_ms": 4245.89,
+      "accepted": true,
+      "fallback_reason": null,
+      "candidate": "{\"points\":[{\"text\":\"Em Python, chaves vazias criam um dicionário, e não um conjunto. Para criar um conjunto vazio, deve-se usar a função set().\", \"evidence\":[{\"id\":\"E1\",\"quote\":\"Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: Chaves vazias criam um conjunto ou um dicionário?\n\n[E1](https://docs.python.org/3/tutorial/datastructures.html) Python — Data Structures (docs.python.org): Listas são mutáveis; tuplas são imutáveis, mas podem conter objetos mutáveis, como listas. list.copy cria uma cópia superficial. Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário. Listas permitem implementar pilhas com \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "structures"
+        }
+      },
+      "result": {
+        "texto": "Em Python, chaves vazias criam um dicionário, e não um conjunto. Para criar um conjunto vazio, deve-se usar a função set(). [E1](https://docs.python.org/3/tutorial/datastructures.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Em Python, chaves vazias criam um dicionário, e não um conjunto. Para criar um conjunto vazio, deve-se usar a função set().",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q18",
+      "question": "O que faz um checkpoint e como leitores longos afetam o WAL?",
+      "baseline_ms": 2.35,
+      "assisted_ms": 7047.13,
+      "accepted": true,
+      "fallback_reason": null,
+      "candidate": "{\n  \"points\": [\n    {\n      \"text\": \"No modo WAL (Write-Ahead Logging), um checkpoint é o processo que transfere as transações registradas no arquivo WAL para o arquivo principal do banco de dados, mantendo a consistência e liberação de espaço.\",\n      \"evidence\": [\n        {\n          \"id\": \"E1\",\n          \"quote\": \"Um checkpoint transfere as transações do WAL para o arquivo principal do banco.\"\n        }\n      ]\n    },\n    {\n      \"text\": \"Leitores longos podem interferir no funcionamento do checkpoint, pois mantêm referências a páginas antigas no WAL, impedindo que o checkpoint avance e remova essas páginas, o que leva ao crescimento do arquivo WAL.\",\n      \"evidence\": [\n        {\n          \"id\": \"E1\",\n          \"quote\": \"Leitores de longa duração podem impedir que o checkpoint termine e contribuir para o crescimento do WAL.\"\n        }\n      ]\n    }\n  ]\n}",
+      "baseline": {
+        "texto": "Investigação: O que faz um checkpoint e como leitores longos afetam o WAL?\n\n[E1](https://www.sqlite.org/wal.html) SQLite — Write-Ahead Logging (www.sqlite.org): No modo WAL, leitores e um escritor podem operar simultaneamente. Ainda existe apenas um escritor por vez. WAL exige que os processos estejam na mesma máquina e não funciona em sistema de arquivos de rede. Um checkpoint transfere as transações do WAL para o arquivo principal do banco. Leitores de lo\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "wal"
+        }
+      },
+      "result": {
+        "texto": "No modo WAL (Write-Ahead Logging), um checkpoint é o processo que transfere as transações registradas no arquivo WAL para o arquivo principal do banco de dados, mantendo a consistência e liberação de espaço. [E1](https://www.sqlite.org/wal.html)\n\nLeitores longos podem interferir no funcionamento do checkpoint, pois mantêm referências a páginas antigas no WAL, impedindo que o checkpoint avance e remova essas páginas, o que leva ao crescimento do arquivo WAL. [E1](https://www.sqlite.org/wal.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "wal"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "Um checkpoint transfere as transações do WAL para o arquivo principal do banco.",
+            "paragraph": 0
+          },
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "Leitores de longa duração podem impedir que o checkpoint termine e contribuir para o crescimento do WAL.",
+            "paragraph": 1
+          }
+        ],
+        "findings": [
+          {
+            "text": "No modo WAL (Write-Ahead Logging), um checkpoint é o processo que transfere as transações registradas no arquivo WAL para o arquivo principal do banco de dados, mantendo a consistência e liberação de espaço.",
+            "evidence_ids": [
+              "wal"
+            ]
+          },
+          {
+            "text": "Leitores longos podem interferir no funcionamento do checkpoint, pois mantêm referências a páginas antigas no WAL, impedindo que o checkpoint avance e remova essas páginas, o que leva ao crescimento do arquivo WAL.",
+            "evidence_ids": [
+              "wal"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q20",
+      "question": "Posso ativar foreign_keys dentro de uma transação? E quando uma restrição diferida é verificada?",
+      "baseline_ms": 1.42,
+      "assisted_ms": 11332.63,
+      "accepted": true,
+      "fallback_reason": null,
+      "candidate": "{\"points\":[{\"text\":\"Não é possível ativar foreign_keys no meio de uma transação. Segundo a documentação oficial do SQLite, alterar PRAGMA foreign_keys durante uma transação não produz efeito, sendo necessário habilitar essa verificação antes de iniciar a transação.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito.\"}]},{\"text\":\"As restrições diferidas podem permanecer temporariamente violadas durante a transação. Esse tipo de restrição não é verificado imediatamente, permitindo que a violação exista até o momento do COMMIT.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas o COMMIT falha se a violação continuar.\"}]},{\"text\":\"A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite, não sendo seguro presumir o estado padrão dessa configuração.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão.\"}]}]}",
+      "baseline": {
+        "texto": "Investigação: Posso ativar foreign_keys dentro de uma transação? E quando uma restrição diferida é verificada?\n\n[E1](https://www.sqlite.org/foreignkeys.html) SQLite — Foreign Key Support (www.sqlite.org): A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão. Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito. Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas \n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+        "llm": false,
+        "references": {
+          "E1": "foreignkeys"
+        }
+      },
+      "result": {
+        "texto": "Não é possível ativar foreign_keys no meio de uma transação. Segundo a documentação oficial do SQLite, alterar PRAGMA foreign_keys durante uma transação não produz efeito, sendo necessário habilitar essa verificação antes de iniciar a transação. [E1](https://www.sqlite.org/foreignkeys.html)\n\nAs restrições diferidas podem permanecer temporariamente violadas durante a transação. Esse tipo de restrição não é verificado imediatamente, permitindo que a violação exista até o momento do COMMIT. [E1](https://www.sqlite.org/foreignkeys.html)\n\nA aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite, não sendo seguro presumir o estado padrão dessa configuração. [E1](https://www.sqlite.org/foreignkeys.html)\n\nRedação assistida por IA; citações e trechos conferidos. A verificação automática não comprova todas as conclusões.",
+        "llm": true,
+        "references": {
+          "E1": "foreignkeys"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito.",
+            "paragraph": 0
+          },
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas o COMMIT falha se a violação continuar.",
+            "paragraph": 1
+          },
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão.",
+            "paragraph": 2
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não é possível ativar foreign_keys no meio de uma transação. Segundo a documentação oficial do SQLite, alterar PRAGMA foreign_keys durante uma transação não produz efeito, sendo necessário habilitar essa verificação antes de iniciar a transação.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          },
+          {
+            "text": "As restrições diferidas podem permanecer temporariamente violadas durante a transação. Esse tipo de restrição não é verificado imediatamente, permitindo que a violação exista até o momento do COMMIT.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          },
+          {
+            "text": "A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite, não sendo seguro presumir o estado padrão dessa configuração.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    }
+  ],
+  "accepted": 5,
+  "completed": 7,
+  "elapsed_s": 47.68
+}

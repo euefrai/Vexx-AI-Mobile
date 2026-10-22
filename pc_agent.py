@@ -4470,6 +4470,19 @@ def _job_tailer(db_path: str, job_id: str, owner: str, websocket, parar, pronto)
             pass
 
 
+def _research_writer(cfg: dict, parar):
+    """One configured model, one bounded request; no tools or chat/memory prompt."""
+    def write(messages, timeout):
+        if parar.is_set():
+            return ''
+        bounded = dict(cfg, fallbacks=[])
+        messages = [dict(m) for m in messages]
+        messages[0]['content'] = system_with_identity(messages[0]['content'])
+        result = gerar_texto(bounded, messages, max_tokens=1800, timeout=min(25, timeout))
+        return '' if parar.is_set() else result.get('texto', '')
+    return write
+
+
 def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
                 websocket=None) -> None:
     db = open_db(Path(db_path))
@@ -4487,7 +4500,9 @@ def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
                                  research_agents.provedores_reais(
                                      orquestrado=bool(cfg.get("pesquisa_web", True))),
                                  research_agents.recuperar_real(),
-                                 deve_parar=parar.is_set)
+                                 deve_parar=parar.is_set,
+                                 sintetizar_fn=(_research_writer(cfg, parar) if
+                                     os.getenv('VEXX_RESEARCH_SYNTHESIS', '1') != '0' else None))
     except Exception as exc:
         try:
             job = research_agents.carregar_job(db, owner, job_id)

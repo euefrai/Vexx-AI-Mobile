@@ -57,6 +57,7 @@ def _safe_filename(job_id: str, fmt: str) -> str:
 
 
 def _context(job: dict, media: list, claims: list, evidence: list, hypotheses: list) -> dict:
+    synthesis = job.get('sintese') if isinstance(job.get('sintese'), dict) else {}
     return {
         "schema": "vexx-research-export/v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -73,11 +74,16 @@ def _context(job: dict, media: list, claims: list, evidence: list, hypotheses: l
         "evidence": evidence,
         "media": media,
         "hypotheses": hypotheses,
+        "synthesis": {"text": str(synthesis.get('texto') or '')[:3500],
+                      "assisted": synthesis.get('llm') is True,
+                      "verification": "Citações e trechos não comprovam suporte semântico."},
         "limitations": [
             "A verificação é lexical/determinística e não estabelece causalidade.",
             "Itens de mídia são descobertas de metadados/links; imagens não são evidência "
             "e vídeos não foram assistidos, transcritos ou analisados.",
-            "Export gerado a partir dos registros persistidos; nenhum valor foi inventado.",
+            ("Síntese assistida sujeita a erros; trechos e quantidades conferidos, sem validação semântica completa."
+             if synthesis.get('llm') else
+             "Export gerado a partir dos registros persistidos; nenhum valor foi inventado."),
         ],
     }
 
@@ -96,6 +102,8 @@ def _markdown(ctx: dict) -> bytes:
         "## Conclusões por afirmação",
         "",
     ]
+    if ctx['synthesis']['text']:
+        out[-2:-2] = ["## Síntese", "", ctx['synthesis']['text'], ""]
     if not ctx["claims"]:
         out.append("_Nenhuma afirmação verificada foi registrada._")
     for index, claim in enumerate(ctx["claims"], 1):
@@ -166,6 +174,9 @@ def _csv(ctx: dict) -> bytes:
     job = ctx["job"]
     row(["job", job["id"], job["status"], job["objective"], "",
          "", ctx["generated_at"], "", "", "", f"modo={job['mode']}"])
+    if ctx['synthesis']['text']:
+        row(['sintese', job['id'], 'assistida' if ctx['synthesis']['assisted'] else 'extrativa',
+             '', '', '', '', '', '', ctx['synthesis']['text'], ctx['synthesis']['verification']])
     for claim in ctx["claims"]:
         row(["afirmacao", "", claim.get("estado"), claim.get("afirmacao"),
              "", "", "", "", "", "", claim.get("metodo")])

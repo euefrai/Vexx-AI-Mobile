@@ -1,0 +1,215 @@
+{
+  "scope": "Revalidation of 7 saved real-model diagnostic outputs, not an independent or full benchmark run. No provider calls.",
+  "results": [
+    {
+      "id": "Q01",
+      "accepted": true,
+      "output": {
+        "texto": "A principal diferença entre list.sort e sorted é que list.sort modifica a lista original e retorna None, enquanto sorted cria e retorna uma nova lista ordenada, permitindo trabalhar com qualquer iterável. Ambos aceitam os parâmetros key e reverse para personalizar a ordenação. A função key é aplicada uma vez por elemento, e str.casefold pode ser usada como chave para comparações sem diferenciar maiúsculas e minúsculas. A ordenação é estável, mantendo a ordem original dos elementos com a mesma chave, e reverse inverte a ordem sem perder essa estabilidade. [E1](https://docs.python.org/3/howto/sorting.html)",
+        "llm": true,
+        "references": {
+          "E1": "sorting"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "list.sort modifica a própria lista e retorna None. sorted cria uma nova lista ordenada e aceita qualquer iterável. Ambos aceitam key e reverse. A função key é chamada uma vez por registro de entrada. str.casefold pode ser usada como chave para comparação sem distinguir caixa. A ordenação é estável: elementos com a mesma chave conservam sua ordem original. reverse permite ordem decrescente e preserva estabilidade.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "A principal diferença entre list.sort e sorted é que list.sort modifica a lista original e retorna None, enquanto sorted cria e retorna uma nova lista ordenada, permitindo trabalhar com qualquer iterável. Ambos aceitam os parâmetros key e reverse para personalizar a ordenação. A função key é aplicada uma vez por elemento, e str.casefold pode ser usada como chave para comparações sem diferenciar maiúsculas e minúsculas. A ordenação é estável, mantendo a ordem original dos elementos com a mesma chave, e reverse inverte a ordem sem perder essa estabilidade.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q03",
+      "accepted": true,
+      "output": {
+        "texto": "Sim, é possível usar a função sorted() em uma tupla. A função sorted() aceita qualquer iterável como entrada, incluindo tuplas, e retorna uma nova lista contendo os elementos ordenados. [E1](https://docs.python.org/3/howto/sorting.html)",
+        "llm": true,
+        "references": {
+          "E1": "sorting",
+          "E2": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "sorting",
+            "quote": "sorted cria uma nova lista ordenada e aceita qualquer iterável.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Sim, é possível usar a função sorted() em uma tupla. A função sorted() aceita qualquer iterável como entrada, incluindo tuplas, e retorna uma nova lista contendo os elementos ordenados.",
+            "evidence_ids": [
+              "sorting"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q05",
+      "accepted": false,
+      "failure_detail": "quote_mismatch"
+    },
+    {
+      "id": "Q11",
+      "accepted": true,
+      "output": {
+        "texto": "Usar list.copy() para copiar uma lista não cria uma cópia profunda, apenas uma cópia superficial da estrutura principal. [E1](https://docs.python.org/3/tutorial/datastructures.html)",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "list.copy cria uma cópia superficial.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Usar list.copy() para copiar uma lista não cria uma cópia profunda, apenas uma cópia superficial da estrutura principal.",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q13",
+      "accepted": true,
+      "output": {
+        "texto": "Em Python, chaves vazias criam um dicionário, e não um conjunto. Para criar um conjunto vazio, deve-se usar a função set(). [E1](https://docs.python.org/3/tutorial/datastructures.html)",
+        "llm": true,
+        "references": {
+          "E1": "structures"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "structures",
+            "quote": "Conjuntos não contêm elementos duplicados; um conjunto vazio pode ser criado com set(), enquanto chaves vazias criam um dicionário.",
+            "paragraph": 0
+          }
+        ],
+        "findings": [
+          {
+            "text": "Em Python, chaves vazias criam um dicionário, e não um conjunto. Para criar um conjunto vazio, deve-se usar a função set().",
+            "evidence_ids": [
+              "structures"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q18",
+      "accepted": true,
+      "output": {
+        "texto": "No modo WAL (Write-Ahead Logging), um checkpoint é o processo que transfere as transações registradas no arquivo WAL para o arquivo principal do banco de dados, mantendo a consistência e liberação de espaço. [E1](https://www.sqlite.org/wal.html)\n\nLeitores longos podem interferir no funcionamento do checkpoint, pois mantêm referências a páginas antigas no WAL, impedindo que o checkpoint avance e remova essas páginas, o que leva ao crescimento do arquivo WAL. [E1](https://www.sqlite.org/wal.html)",
+        "llm": true,
+        "references": {
+          "E1": "wal"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "Um checkpoint transfere as transações do WAL para o arquivo principal do banco.",
+            "paragraph": 0
+          },
+          {
+            "label": "E1",
+            "evidence_id": "wal",
+            "quote": "Leitores de longa duração podem impedir que o checkpoint termine e contribuir para o crescimento do WAL.",
+            "paragraph": 1
+          }
+        ],
+        "findings": [
+          {
+            "text": "No modo WAL (Write-Ahead Logging), um checkpoint é o processo que transfere as transações registradas no arquivo WAL para o arquivo principal do banco de dados, mantendo a consistência e liberação de espaço.",
+            "evidence_ids": [
+              "wal"
+            ]
+          },
+          {
+            "text": "Leitores longos podem interferir no funcionamento do checkpoint, pois mantêm referências a páginas antigas no WAL, impedindo que o checkpoint avance e remova essas páginas, o que leva ao crescimento do arquivo WAL.",
+            "evidence_ids": [
+              "wal"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    },
+    {
+      "id": "Q20",
+      "accepted": true,
+      "output": {
+        "texto": "Não é possível ativar foreign_keys no meio de uma transação. Segundo a documentação oficial do SQLite, alterar PRAGMA foreign_keys durante uma transação não produz efeito, sendo necessário habilitar essa verificação antes de iniciar a transação. [E1](https://www.sqlite.org/foreignkeys.html)\n\nAs restrições diferidas podem permanecer temporariamente violadas durante a transação. Esse tipo de restrição não é verificado imediatamente, permitindo que a violação exista até o momento do COMMIT. [E1](https://www.sqlite.org/foreignkeys.html)\n\nA aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite, não sendo seguro presumir o estado padrão dessa configuração. [E1](https://www.sqlite.org/foreignkeys.html)",
+        "llm": true,
+        "references": {
+          "E1": "foreignkeys"
+        },
+        "provenance": [
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "Alterar PRAGMA foreign_keys no meio de uma transação não produz efeito.",
+            "paragraph": 0
+          },
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "Restrições diferidas podem permanecer temporariamente violadas durante a transação, mas o COMMIT falha se a violação continuar.",
+            "paragraph": 1
+          },
+          {
+            "label": "E1",
+            "evidence_id": "foreignkeys",
+            "quote": "A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite. Não se deve presumir o estado padrão.",
+            "paragraph": 2
+          }
+        ],
+        "findings": [
+          {
+            "text": "Não é possível ativar foreign_keys no meio de uma transação. Segundo a documentação oficial do SQLite, alterar PRAGMA foreign_keys durante uma transação não produz efeito, sendo necessário habilitar essa verificação antes de iniciar a transação.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          },
+          {
+            "text": "As restrições diferidas podem permanecer temporariamente violadas durante a transação. Esse tipo de restrição não é verificado imediatamente, permitindo que a violação exista até o momento do COMMIT.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          },
+          {
+            "text": "A aplicação deve habilitar e verificar a aplicação das chaves estrangeiras em cada conexão do SQLite, não sendo seguro presumir o estado padrão dessa configuração.",
+            "evidence_ids": [
+              "foreignkeys"
+            ]
+          }
+        ],
+        "verification": "citation-and-quote-checks; not semantic entailment"
+      }
+    }
+  ]
+}
