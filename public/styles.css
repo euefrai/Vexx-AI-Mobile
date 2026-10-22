@@ -1727,3 +1727,19 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .research-bar #researchCancel{margin-left:0}
 .research-panel{padding:2px 12px 12px}
 .research-panel .timeline{margin-top:4px}
+
+/* V5.9.2: readable research sources across narrow screens. */
+.jdui-srccard{min-width:0;gap:9px;padding:16px}
+.jdui-srccard .jdui-cardtop{flex-wrap:wrap}
+.jdui-source-title{flex:1 1 220px;min-width:0;color:var(--text);font-size:14px;font-weight:600;line-height:1.5;text-decoration:none;overflow-wrap:anywhere}
+.jdui-source-title:hover{text-decoration:underline}
+.jdui-source-title:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.jdui-source-scope{font-size:12px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+.jdui-srccard .jdui-desc{font-size:13px;overflow-wrap:anywhere}
+.jdui-srccard .jdui-badge{white-space:normal;max-width:100%}
+@media(max-width:480px){.jdui-srccard{padding:13px}.jdui-source-title{flex-basis:100%}.jdui-srccard .jdui-cardacts a{min-height:40px}}
+
+.jdui-media-zoom{position:absolute;right:8px;bottom:8px;min-height:36px;background:var(--panel)}
+.jdui-image-dialog{max-width:min(96vw,1100px);max-height:94dvh;padding:16px;border:1px solid var(--line);border-radius:16px;color:var(--text);background:var(--panel)}
+.jdui-image-dialog::backdrop{background:rgba(0,0,0,.78)}
+.jdui-image-dialog img{display:block;max-width:100%;max-height:78dvh;object-fit:contain;margin:12px auto 0}

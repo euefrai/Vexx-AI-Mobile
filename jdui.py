@@ -805,6 +805,10 @@ def _v_sources(p: dict) -> dict:
                     "data": _str(f.get("data"), 48),
                     "trecho": _str(f.get("trecho"), 300),
                     "origem_declarada": _str(f.get("origem_declarada"), 120),
+                    "tipo": _str(f.get("tipo"), 40),
+                    "escopo": _str(f.get("escopo"), 80),
+                    "relacao": _str(f.get("relacao"), 80),
+                    "data_evento": _str(f.get("data_evento"), 48),
                     "status": status})
     return {"title": _str(p.get("title"), 160), "items": out,
             "sources": _provenance(p.get("sources"))}

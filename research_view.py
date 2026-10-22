@@ -72,6 +72,8 @@ def _claims(resumo: dict) -> dict:
         if not isinstance(item, dict):
             continue
         state = _text(item.get("estado"), 40).upper()
+        if state == "INSUFFICIENT_EVIDENCE":
+            state = "INCONCLUSIVE"
         if state not in _STATE:
             state = "UNVERIFIED"
         sources = []
@@ -176,6 +178,21 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         ("media", _media(resumo)),
         ("filecard", _files(resumo)),
     ]
+    used = {eid for claim in resumo.get("achados", []) for eid in
+            claim.get("supporting_ids", []) + claim.get("contradicting_ids", [])}
+    source_items = []
+    for item in (evidencias or [])[:10]:
+        read = bool(item.get("texto_lido")) or item.get("access_state") == "read"
+        abstract = item.get("content_scope") == "abstract_only"
+        source_items.append({"titulo": item.get("titulo"), "url": item.get("url"),
+            "dominio": item.get("dominio"), "data": item.get("publicado_em"),
+            "trecho": item.get("trecho"), "tipo": item.get("publication_type") or item.get("tipo", "Fonte"),
+            "escopo": "Somente resumo; texto completo não lido" if abstract else
+                      "Texto recuperado" if read else "Página não lida; sem suporte factual",
+            "relacao": "Trecho ligado a uma afirmação" if item.get("id") in used else "Fonte de contexto",
+            "status": "utilizada" if item.get("id") in used and (read or abstract) else "aberta" if read or abstract else "encontrada"})
+    if source_items:
+        candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))
     for component, props in candidatos:
         if component == "evidence" and not props.get("claims"):
             continue
@@ -206,8 +223,10 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         linhas.append("**Componentes omitidos por dados inválidos:** "
                       + ", ".join(sorted(set(omitted))) + ".")
     texto = "\n".join(linhas)[:MAX_TEXT]
+    answer = str((resumo.get("sintese") or {}).get("texto") or "").strip()[:3500]
+    text_blocks = [{"type": "text", "content": answer}] if answer else []
     mensagem = {"version": jdui.VERSION,
-                "blocks": [{"type": "text", "content": texto}] + blocks}
+                "blocks": text_blocks + [{"type": "text", "content": texto}] + blocks}
     ok, normalizado, erros = jdui.validar_mensagem(mensagem)
     if not ok:
         # Last-resort honest fallback: text only, never raw invalid JSON.

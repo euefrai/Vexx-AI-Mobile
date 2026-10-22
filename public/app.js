@@ -1056,6 +1056,9 @@ function researchFase(ev) {
   const a = ev.agente || '', t = ev.tipo || '', s = ev.status || '';
   if (t === 'research_created' || t === 'plan_created') return 'Planejando…';
   if (t === 'plan_updated') return 'Replanejando…';
+  if (t === 'adaptive_round_evaluated') return 'Avaliando lacunas e novas evidências…';
+  if (t === 'source_reused') return 'Reutilizando fontes já lidas…';
+  if (t === 'source_irrelevant') return 'Fonte sem correspondência; seguindo a pesquisa…';
   if (t === 'research_completed') return 'Finalizado.';
   if (t === 'research_cancelled') return 'Interrompido.';
   if (t === 'research_failed') return 'Falhou.';
@@ -1076,7 +1079,10 @@ function researchFase(ev) {
 }
 function researchAttach(jobId) {
   if (!jobId || (researchJob && researchJob.id === jobId)) return;
+  if (researchJob && researchJob.controller) researchJob.controller.abort();
+  if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
   window._researchLast = jobId;
+  try { localStorage.setItem('vexx-research-active:' + currentUid, JSON.stringify({ id: jobId, owner: currentUid, at: Date.now() })); } catch (_) {}
   researchJob = { id: jobId, seq: 0, vistos: new Set(), inicio: Date.now(), timer: null };
   $('researchBar').hidden = false;
   $('researchPanel').hidden = true;
@@ -1094,6 +1100,26 @@ function researchAttach(jobId) {
   researchAplicaFiltro();
   $('researchLabel').textContent = 'Pesquisando...';
   researchPoll();
+}
+let researchRestoring = false;
+async function researchResumeSaved() {
+  if (researchJob || researchRestoring || !authenticated || !pcOnline) return;
+  const owner = currentUid;
+  const epoch = authEpoch;
+  const key = 'vexx-research-active:' + owner;
+  let saved;
+  try { saved = JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) { return; }
+  if (!saved) return;
+  if (saved.owner !== owner || !Number.isFinite(saved.at) || !/^rj-[a-z0-9]+$/.test(saved.id || '') || Date.now() - saved.at > 86400000) {
+    try { localStorage.removeItem(key); } catch (_) {} return;
+  }
+  researchRestoring = true;
+  try {
+    await api('/api/research/status?job_id=' + encodeURIComponent(saved.id));
+    if (authenticated && currentUid === owner && authEpoch === epoch && !researchJob) researchAttach(saved.id);
+  } catch (error) {
+    if (error.status === 404) { try { localStorage.removeItem(key); } catch (_) {} }
+  } finally { researchRestoring = false; }
 }
 function researchJobIdAtual() {
   return (researchJob && researchJob.id) || window._researchLast || '';
@@ -1231,7 +1257,9 @@ async function researchCarregaView(force) {
   }
 }
 function researchStop() {
+  try { localStorage.removeItem('vexx-research-active:' + currentUid); } catch (_) {}
   if (researchJob && researchJob.timer) clearTimeout(researchJob.timer);
+  if (researchJob && researchJob.controller) researchJob.controller.abort();
   researchJob = null;
 }
 function researchItem(icon, title, desc) {
@@ -1241,25 +1269,30 @@ function researchItem(icon, title, desc) {
 }
 async function researchPoll() {
   if (!researchJob) return;
+  const active = researchJob;
   if (Date.now() - researchJob.inicio > 10 * 60 * 1000) { researchStop(); return; }
   // V4.7: SSE push em tempo real; qualquer falha cai no polling (fallback).
   try {
     await researchPollSSE();
   } catch (_) {
+    if (researchJob !== active) return;
     await researchPollHTTP();
   }
-  if (researchJob) researchJob.timer = setTimeout(researchPoll, 2000);
+  if (researchJob === active) researchJob.timer = setTimeout(researchPoll, 2000);
 }
 async function researchPollSSE() {
+  const active = researchJob;
+  if (!active) return;
+  active.controller = new AbortController();
   const res = await fetch('/api/research/stream?job_id=' + encodeURIComponent(researchJob.id)
     + '&apos_seq=' + researchJob.seq,
-    { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+    { headers: { Accept: 'text/event-stream', 'X-CSRF-Token': csrf }, credentials: 'same-origin', signal: active.controller.signal });
   if (!res.ok || !res.body) throw new Error('SSE indisponível (' + res.status + ')');
   const reader = res.body.getReader();
   const dec = new TextDecoder();
   let buf = '';
   for (;;) {
-    if (!researchJob) { try { await reader.cancel(); } catch (_) {} return; }
+    if (researchJob !== active) { try { await reader.cancel(); } catch (_) {} return; }
     const read = await reader.read();
     if (read.done) return;
     buf += dec.decode(read.value, { stream: true });
@@ -1271,7 +1304,7 @@ async function researchPollSSE() {
         if (ln.startsWith('event:')) tipo = ln.slice(6).trim();
         else if (ln.startsWith('data:')) dados += ln.slice(5).trim();
       }
-      if (tipo !== 'research' || !researchJob) continue;
+      if (tipo !== 'research' || researchJob !== active) continue;
       let ev = null;
       try { ev = JSON.parse(dados); } catch (_) { continue; }
       if (ev && typeof ev.seq === 'number') researchRecebe(ev);
@@ -1285,8 +1318,11 @@ async function researchPollSSE() {
   }
 }
 async function researchPollHTTP() {
+  const active = researchJob;
+  if (!active) return;
   const r = await api('/api/research/status?job_id=' + encodeURIComponent(researchJob.id)
     + '&apos_seq=' + researchJob.seq);
+  if (researchJob !== active) return;
   (r.eventos || []).forEach(ev => researchRecebe(ev));
   const s = r.resumo || {};
   researchPintaResumo(s);
@@ -1302,7 +1338,7 @@ async function researchPollHTTP() {
   }
 }
 function researchRecebe(ev) {
-  if (!researchJob || researchJob.vistos.has(ev.seq)) return;
+  if (!researchJob || (ev.job_id && ev.job_id !== researchJob.id) || researchJob.vistos.has(ev.seq)) return;
   researchJob.vistos.add(ev.seq);
   researchJob.seq = Math.max(researchJob.seq, ev.seq);
   const d = document.createElement('div');
@@ -1371,9 +1407,11 @@ function researchPintaResumo(s, ultimo) {
 }
 function researchFinal(ev) {
   if (!researchJob) return;
+  const active = researchJob;
   const id = researchJob.id;
   api('/api/research/status?job_id=' + encodeURIComponent(id) + '&apos_seq=0')
     .then(r => {
+      if (researchJob !== active) return;
       researchPintaResumo(r.resumo || {});
       researchAtualizaExport((r.resumo && r.resumo.id) || id);
       const view = $('researchView');
@@ -1381,6 +1419,7 @@ function researchFinal(ev) {
     })
     .catch(() => {})
     .finally(() => {
+      if (researchJob !== active) return;
       const s = $('researchLabel');
       if (s && /Pesquisand/.test(s.textContent)) s.textContent = 'Pesquisa concluída. Ver detalhes.';
       researchCarregaFontes();
@@ -1604,6 +1643,7 @@ $('logoutButton').addEventListener('click', async () => {
   stopAI();
   try { await api('/api/logout', { method: 'POST' }); } catch (_) { showToast('O PC não confirmou a saída. Reconecte e tente novamente.'); return; }
   ++authEpoch;
+  researchStop();
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
   $('loginError').textContent = ''; $('regError').textContent = '';
@@ -1733,6 +1773,7 @@ async function checkStatus() {
     } catch (_) { /* diag é auxiliar; status já vale */ }
     updateConnection();
     if (pcOnline) {
+      await researchResumeSaved();
       const conf = await syncAndRefresh();
       await loadModels(false);
       renderDocs();

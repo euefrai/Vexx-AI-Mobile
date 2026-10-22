@@ -407,6 +407,8 @@
             dominio: S(f.dominio, 120), data: S(f.data, 48),
             trecho: S(f.trecho, 300),
             origem_declarada: S(f.origem_declarada, 120),
+            tipo: S(f.tipo, 40), escopo: S(f.escopo, 80),
+            relacao: S(f.relacao, 80), data_evento: S(f.data_evento, 48),
             status: sts.indexOf(st) >= 0 ? st : 'encontrada'
           };
         }),
@@ -2416,17 +2418,21 @@
   R.sources = function (root, props) {
     const box = el('div', 'jdui-cards');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
-    const ROT = { encontrada: 'Encontrada', aberta: 'Aberta', utilizada: 'Utilizada' };
+    const ROT = { encontrada: 'Não lida', aberta: 'Fonte lida', utilizada: 'Usada na resposta' };
     props.items.forEach(f => {
       const card = el('div', 'jdui-srccard');
       const top = el('div', 'jdui-cardtop');
-      top.appendChild(el('strong', '', f.titulo));
+      const heading = el(f.url ? 'a' : 'strong', 'jdui-source-title', f.titulo);
+      if (f.url) { heading.href = f.url; heading.target = '_blank'; heading.rel = 'noopener noreferrer'; }
+      top.appendChild(heading);
       top.appendChild(el('span', 'jdui-badge st-' + f.status, ROT[f.status] || f.status));
       card.appendChild(top);
-      const partes = [f.dominio, f.data].filter(Boolean);
+      const partes = [f.dominio, f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
+      if (f.data_evento) partes.push('Acontecimento: ' + f.data_evento);
       if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
       const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
+      if (f.escopo || f.relacao) card.appendChild(el('div', 'jdui-source-scope', [f.escopo, f.relacao].filter(Boolean).join(' · ')));
       if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
       if (f.url) {
         const a = el('a', 'jdui-btn ghost', 'Abrir fonte ↗');
@@ -2646,7 +2652,7 @@
     props.items.forEach(item => {
       const card = el('div', 'jdui-pcard');
       const moldura = el('div', 'jdui-pmedia');
-      if (item.type === 'image' && (item.thumb || item.url)) {
+      if ((item.type === 'image' && (item.thumb || item.url)) || (item.type === 'video' && item.thumb)) {
         const img = document.createElement('img');
         img.className = 'jdui-pimg';
         img.src = item.thumb || item.url;
@@ -2657,6 +2663,29 @@
           if (img.parentNode) img.parentNode.replaceChild(el('div', 'jdui-pimg ph', 'Imagem indisponível'), img);
         });
         moldura.appendChild(img);
+        if (item.type === 'image') {
+          const zoom = el('button', 'jdui-btn ghost jdui-media-zoom', 'Ampliar imagem');
+          zoom.type = 'button'; zoom.setAttribute('aria-label', 'Ampliar: ' + (item.title || 'imagem'));
+          img.addEventListener('error', () => { zoom.hidden = true; });
+          zoom.addEventListener('click', () => {
+            const dialog = document.createElement('dialog');
+            if (typeof dialog.showModal !== 'function') return;
+            dialog.className = 'jdui-image-dialog';
+            dialog.addEventListener('keydown', event => {
+              if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); dialog.close(); }
+            });
+            dialog.setAttribute('aria-label', item.title || 'Visualização da imagem');
+            const close = el('button', 'jdui-btn ghost', 'Fechar imagem'); close.type = 'button';
+            close.addEventListener('click', () => dialog.close());
+            const full = document.createElement('img'); full.src = item.url;
+            full.alt = item.alt || item.title; full.referrerPolicy = 'no-referrer';
+            full.addEventListener('error', () => { full.replaceWith(el('p', '', 'Imagem indisponível. Consulte a fonte original.')); });
+            dialog.appendChild(close); dialog.appendChild(full);
+            dialog.addEventListener('close', () => { dialog.remove(); zoom.focus(); }, { once: true });
+            document.body.appendChild(dialog); dialog.showModal();
+          });
+          moldura.appendChild(zoom);
+        }
       } else {
         moldura.appendChild(el('div', 'jdui-pimg ph',
           item.type === 'video' ? '▶ Vídeo' : 'Documento'));
