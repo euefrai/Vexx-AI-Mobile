@@ -67,5 +67,68 @@ def test_recovery_does_not_retry_blocked_provider(monkeypatch):
                 'content_scope':'feed_metadata'}]
         raise sp.ErroProvedor('blocked','bloqueado')
     monkeypatch.setattr(sp,'buscar',search)
+    monkeypatch.setattr(sp,'recuperar_feed_publicador',lambda *args: [])
     orch.pesquisar('Notícias de Ubatã Bahia', provedores=['google-news','bing'])
     assert calls.count('bing')==1
+
+
+def test_sse_preserves_utf8_split_across_every_byte():
+    import hermes_bridge
+    parser=hermes_bridge.AcumuladorSSE()
+    payload=('data: '+json.dumps({'choices':[{'delta':{'content':'Ubatã: ciência ☀'}}]},ensure_ascii=False)+'\n\n').encode()
+    chunks=[]
+    for byte in payload: chunks.extend(parser.alimentar(bytes([byte])))
+    assert ''.join(text for _,text in chunks)=='Ubatã: ciência ☀'
+
+
+def test_specific_video_metadata_and_generic_channel_rejected():
+    import media_evidence as media
+    assert not media._is_video('https://www.youtube.com/')
+    assert not media._is_video('https://www.youtube.com/channel/UCtest')
+    assert not media._is_video('https://evilyoutube.com/watch?v=abcdefghijk')
+    url='https://www.youtube.com/watch?v=abcdefghijk'
+    page='<script type="application/ld+json">'+json.dumps({'@graph':[{
+        '@type':'VideoObject','url':url,'name':'NASA James Webb',
+        'author':{'name':'NASA'},'duration':'PT2M','thumbnailUrl':'https://images.nasa.gov/webb.jpg'}]})+'</script>'
+    records=media.extrair_midia(page,'https://science.nasa.gov/webb/','NASA Webb')
+    video=next(item for item in records if item['type']=='video')
+    assert video['metadata_state']=='METADATA_READ'
+    assert video['duration']=='PT2M' and video['publisher']=='NASA'
+    assert video['analysis_state']=='not_analyzed' and not video['evidence']
+
+
+def test_media_topic_gate_rejects_irrelevant_images():
+    import media_evidence as media
+    records=[{'type':'image','title':'Ponte Estaiada São Paulo','url':'https://example.org/bridge.jpg'},
+             {'type':'image','title':'Logotipo da loja','url':'https://example.org/logo.jpg'},
+             {'type':'video','title':'Ponte Estaiada São Paulo','url':'https://www.youtube.com/watch?v=abcdefghijk'}]
+    result=media.relevant_media(records,'Imagens licenciadas da Ponte Estaiada em São Paulo')
+    assert len(result)==1 and result[0]['title']=='Ponte Estaiada São Paulo'
+
+
+def test_original_feed_is_discovered_not_guessed_or_read():
+    lead={'publisher_url':'https://jornal.example','titulo':'Ubatã inaugura biblioteca municipal para estudantes',
+          'url':'https://news.google.com/rss/articles/opaque'}
+    calls=[]
+    def fetch(url,kind):
+        calls.append((url,kind))
+        if kind=='html':return url,'<link rel="alternate" type="application/rss+xml" href="/noticias.xml">'
+        return url,'<rss><channel><item><title>Ubatã inaugura biblioteca municipal para estudantes</title><link>https://jornal.example/ubata-biblioteca</link><pubDate>Fri, 23 Oct 2026 10:00:00 GMT</pubDate></item></channel></rss>'
+    records=sp.recuperar_feed_publicador(lead,fetch)
+    assert len(calls)==2 and calls[-1][0]=='https://jornal.example/noticias.xml'
+    assert records[0]['url']=='https://jornal.example/ubata-biblioteca'
+    assert records[0]['source_recovery']['state']=='original_candidate'
+    assert not records[0].get('texto_lido') and records[0]['trecho']==''
+
+
+def test_science_fronts_preserve_topic_and_extracted_sections():
+    import research_agents as ra
+    import academic_research as ar
+    fronts=ra._subconsultas_unicas('Compare estudos sobre baterias de sódio e lítio: métodos e limitações',4)
+    assert all('bater' in q for q in fronts)
+    assert not any(q in ('métodos','lítio','limitações') for q in fronts)
+    sections=ar.scientific_sections({'final':'https://paper.example/open','secoes':[
+        {'titulo':'Methods','texto':'Measured 32 samples.','pagina':3},
+        {'titulo':'Limitations','texto':'Only one temperature.'}]})
+    assert sections[0]['kind']=='methods' and sections[0]['page']==3
+    assert sections[1]['kind']=='limitations' and sections[1]['page'] is None

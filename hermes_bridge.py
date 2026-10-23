@@ -156,6 +156,8 @@ class AcumuladorSSE:
     """Reconstrói deltas de um stream SSE, tolerando eventos fragmentados."""
 
     def __init__(self):
+        import codecs
+        self.decoder = codecs.getincrementaldecoder('utf-8')(errors='replace')
         self.resto = ""
         self.seq = 0
         self.concluido = False
@@ -163,7 +165,7 @@ class AcumuladorSSE:
     def alimentar(self, bloco: bytes) -> list:
         novos = []
         try:
-            self.resto += bloco.decode("utf-8", errors="ignore")
+            self.resto += self.decoder.decode(bloco)
         except Exception:
             return novos
         while "\n" in self.resto:

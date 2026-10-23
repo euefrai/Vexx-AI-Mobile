@@ -140,6 +140,7 @@ def _media(resumo: dict) -> dict:
             "publisher": item.get("publisher") or "",
             "date": item.get("date") or "",
             "rights": item.get("rights") or "não informado",
+            **{key:item.get(key) for key in ('attribution','license_url','mime','width','height','duration','metadata_state')},
             "access_state": item.get("access_state") or "link_only",
             "validation_state": item.get("validation_state") or "unverified",
             "analysis_state": item.get("analysis_state") or "not_analyzed",
@@ -193,6 +194,7 @@ def source_card(item: dict, used=False) -> dict:
             'escopo':('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado' if read else 'Página não lida; sem suporte factual',
             'relacao':'Trecho ligado a uma afirmação' if used else 'Fonte de contexto',
             'status':'utilizada' if used and read else 'aberta' if read else 'encontrada',
+            'leitura':'PARTIAL' if abstract or full else 'READ' if read else 'UNAVAILABLE' if item.get('access_state')=='blocked' else 'FOUND',
             'publicador':item.get('publicador') or item.get('journal') or item.get('repository') or '',
             'autores':', '.join(str(v) for v in (item.get('authors') or [])[:6]),'doi':item.get('doi') or '',
             'imagem':image if vertical.get('kind')=='news' else '', 'favicon':item.get('favicon') or '',
@@ -226,6 +228,23 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         source_items.append(source_card(item,item.get('id') in used))
     if source_items:
         candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))
+    papers=[item for item in (evidencias or []) if item.get('doi') and item.get('full_text_fetched')]
+    if len(papers)>=2 and any(p.get('scientific_sections') for p in papers):
+        rows=[]
+        for paper in papers[:6]:
+            sections=paper.get('scientific_sections') or []
+            row=[_text(paper.get('titulo') or paper.get('title'),160)]
+            for kind in ('methods','results','limitations'):
+                section=next((s for s in sections if s.get('kind')==kind),{})
+                row.append(_text(section.get('text'),180) or 'Não recuperado')
+            rows.append(row)
+        candidatos.append(('table',{'title':'Estudos: trechos extraídos, condições não normalizadas',
+            'columns':['Estudo','Métodos','Resultados','Limitações'],'rows':rows}))
+    # Promote actual result content before diagnostic/export controls. Different
+    # intents use their existing components, without inventing empty cards.
+    media_intent=bool(re.search(r'\b(imagens?|fotos?|v[ií]deos?)\b',resumo.get('objetivo',''),re.I))
+    priority=['media','sources','evidence'] if media_intent else ['evidence','table','sources','media']
+    candidatos.sort(key=lambda entry: priority.index(entry[0]) if entry[0] in priority else 10)
     for component, props in candidatos:
         if component == "evidence" and not props.get("claims"):
             continue

@@ -1080,6 +1080,18 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 achados.extend(recovered)
                 etapas.append(f'{name}: recuperação de manchete no publicador; {len(recovered)} candidato(s), leitura pendente')
                 break
+            if not any(a.get('source_recovery',{}).get('publisher_url')==feed.get('publisher_url') for a in achados):
+                def fetch_publisher(url, kind):
+                    remaining = float(orc['timeout_total']) - (time.monotonic()-t0)
+                    if remaining<=0 or not _tentar('publisher-feed',url):
+                        raise sp.ErroProvedor('Publisher recovery budget exhausted','orcamento')
+                    return sp._baixar(url,min(timeout,remaining),aceitar=kind)
+                try:
+                    originals=sp.recuperar_feed_publicador(feed,fetch_publisher)
+                    achados.extend(originals)
+                    etapas.append(f'RSS do publicador: {len(originals)} artigo(s) candidato(s), leitura pendente')
+                except (sp.ErroProvedor, ValueError) as exc:
+                    etapas.append('Recuperação no publicador limitada: '+str(getattr(exc,'codigo',type(exc).__name__)))
 
     unicos, descartes = deduplicar(achados)
     ranqueados = ranquear(unicos, consulta, info["classes"], info)

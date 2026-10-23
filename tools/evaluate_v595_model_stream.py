@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import sys
 import time
+from unittest.mock import patch
+import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -13,6 +15,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--live', action='store_true', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--max-tokens', type=int, default=160, choices=(160,1800))
     args = parser.parse_args()
     import pc_agent
     import providers
@@ -25,6 +28,22 @@ def main():
               'deep_research_approved':False, 'ui_tested':False}
     started = time.monotonic()
     chunks = []
+    transport = {}
+    wire = bytearray()
+    original_open = urllib.request.urlopen
+    def observed_open(*values, **kwargs):
+        response = original_open(*values, **kwargs)
+        transport.update(http_status=getattr(response,'status',None),
+                         content_type=response.headers.get('Content-Type','').split(';')[0])
+        class Observed:
+            def __enter__(self): response.__enter__(); return self
+            def __exit__(self,*args): return response.__exit__(*args)
+            def __getattr__(self,key): return getattr(response,key)
+            def read1(self,size):
+                data=response.read1(size)
+                wire.extend(data[:max(0,65536-len(wire))])
+                return data
+        return Observed()
     try:
         if not cfg['model'].endswith(':free'):
             result['reason'] = 'configured_model_not_explicitly_free'
@@ -48,9 +67,10 @@ def main():
             def delta(seq, value):
                 chunks.append((seq, value))
             if prov == 'hermes':
-                response = bridge.chat_stream(cfg['proxy'], model, messages, delta, timeout=12, max_tokens=160)
+                with patch('urllib.request.urlopen', observed_open):
+                    response = bridge.chat_stream(cfg['proxy'], model, messages, delta, timeout=25, max_tokens=args.max_tokens)
             else:
-                response = providers.chat_stream(prov, model, messages, delta, timeout=12, max_tokens=160)
+                response = providers.chat_stream(prov, model, messages, delta, timeout=25, max_tokens=args.max_tokens)
             answer = response.get('texto', '')
             result.update(state='PARTIAL', stream_inference_executed=bool(chunks or answer),
                           chunks=len(chunks), sequence_ordered=[c[0] for c in chunks] == sorted(c[0] for c in chunks),
@@ -59,6 +79,21 @@ def main():
     except Exception as exc:
         result.update(reason=rs.safe_provider_code(exc), error_type=type(exc).__name__,
                       chunks=len(chunks), stream_inference_executed=bool(chunks))
+    # Preserve protocol observations, never raw provider bodies/headers or credentials.
+    events=[]
+    for line in wire.decode('utf-8',errors='replace').splitlines():
+        if line.startswith('data:'):
+            try: events.append(json.loads(line[5:].strip()))
+            except ValueError: pass
+    transport.update(captured_bytes=len(wire), json_sse_events=len(events),
+        upstream_error_events=sum(isinstance(e,dict) and bool(e.get('error')) for e in events),
+        nonempty_content_events=sum(bool(((e.get('choices') or [{}])[0].get('delta') or {}).get('content')) for e in events if isinstance(e,dict)))
+    choices=[c for e in events if isinstance(e,dict) for c in (e.get('choices') or []) if isinstance(c,dict)]
+    transport['delta_fields'] = sorted({k for c in choices for k in (c.get('delta') or {}) if k in ('content','role','reasoning','reasoning_content','tool_calls')})
+    transport['reasoning_events'] = sum(bool((c.get('delta') or {}).get('reasoning_content') or (c.get('delta') or {}).get('reasoning')) for c in choices)
+    transport['finish_reasons'] = sorted({c['finish_reason'] for c in choices if c.get('finish_reason') in ('stop','length','tool_calls','content_filter')})
+    result['max_tokens']=args.max_tokens
+    result['transport']=transport
     result['elapsed_s'] = round(time.monotonic()-started,3)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')

@@ -248,6 +248,22 @@ def normalize_openalex(item: dict, provider_url: str) -> dict:
     return record
 
 
+def scientific_sections(record):
+    """Label only sections actually extracted; missing study data stays absent."""
+    groups={'methods':r'm[eé]tod|method|materials|experimental|amostra|sample',
+            'results':r'resulta|results|findings',
+            'limitations':r'limita|limitations', 'conclusions':r'conclu|conclusion'}
+    out=[]
+    for section in (record.get('secoes') or [])[:12]:
+        title=str(section.get('titulo') or '')[:160]
+        body=str(section.get('texto') or '').strip()[:1000]
+        if not body: continue
+        kind=next((name for name,pattern in groups.items() if re.search(pattern,title,re.I)),'section')
+        out.append({'title':title,'text':body,'kind':kind,'page':section.get('pagina'),
+                    'source_url':record.get('final') or '', 'extraction_scope':'bounded_section'})
+    return out[:8]
+
+
 def read_open_text(record, timeout, fetch_pdf):
     """One legal OA candidate, bounded reader, verified bibliographic identity.
 
@@ -275,7 +291,8 @@ def read_open_text(record, timeout, fetch_pdf):
         return {**rec,'content_scope':'document_text','full_text_fetched':True,
                 'full_text_url':rec.get('final') or candidate,'access_state':'read','texto_lido':True,
                 'extraction_scope':'bounded_text','full_document_read':False,
-                'full_text_format':'pdf' if pdf else 'html',
+                'full_text_format':'pdf' if pdf or rec.get('extrator')=='pdf' else 'html',
+                'scientific_sections':scientific_sections(rec),
                 'oa_attempt':'read_identity_matched'}
     except (research.ResearchErro, OSError, ValueError) as exc:
         # Only an optional retrieval attempt; keep the actual abstract on failure.

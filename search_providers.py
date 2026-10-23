@@ -218,6 +218,59 @@ def buscar_google_news(consulta: str, limite: int = 8, timeout: float = 10.0) ->
     return out
 
 
+def recuperar_feed_publicador(lead: dict, fetch) -> list:
+    """Discover only feeds actually linked by the declared publisher.
+
+    The caller owns the shared deadline/attempt budget for both fetches.
+    Returned article URLs are candidates; RSS summaries are never read articles.
+    """
+    from html.parser import HTMLParser
+    import xml.etree.ElementTree as ET
+    import search_orchestrator as orch
+    home = lead.get('publisher_url') or ''
+    host = urllib.parse.urlsplit(home).hostname or ''
+    if not host: return []
+    class Links(HTMLParser):
+        def __init__(self): super().__init__(); self.feeds=[]
+        def handle_starttag(self, tag, attrs):
+            attr=dict(attrs)
+            if tag=='link' and 'alternate' in (attr.get('rel') or '').lower().split() and attr.get('type') in ('application/rss+xml','application/atom+xml'):
+                url=urllib.parse.urljoin(home,attr.get('href') or '')
+                if urllib.parse.urlsplit(url).hostname==host and url not in self.feeds:
+                    self.feeds.append(url)
+    final,page=fetch(home,'html')
+    if urllib.parse.urlsplit(final).hostname!=host: return []
+    links=Links();links.feed(page)
+    if not links.feeds: return []
+    feed_url,xml=fetch(links.feeds[0],'feed')
+    try: root=ET.fromstring(xml)
+    except ET.ParseError: return []
+    title=lead.get('titulo') or ''
+    label=lead.get('publicador') or ''
+    if label and title.endswith(' - '+label):title=title[:-(len(label)+3)]
+    terms=set(orch._termos(title))
+    out=[]
+    entries=root.findall('./channel/item') or root.findall('{http://www.w3.org/2005/Atom}entry')
+    for node in entries[:30]:
+        atom='{http://www.w3.org/2005/Atom}'
+        headline=node.findtext('title') or node.findtext(atom+'title') or ''
+        url=node.findtext('link') or ''
+        if not url:
+            link=next((n for n in node.findall(atom+'link') if n.get('rel','alternate')=='alternate'),None)
+            if link is not None:url=link.get('href','')
+        url=urllib.parse.urljoin(feed_url,url)
+        target=urllib.parse.urlsplit(url).hostname or ''
+        overlap=len(terms & set(orch._termos(headline)))/max(1,len(terms))
+        if not (target==host or target.endswith('.'+host)) or overlap<0.6: continue
+        out.append({'titulo':_limpar(headline,240),'url':url,'trecho':'',
+            'origem':'publisher-feed','tipo':'noticia', 'publicador':label,
+            'publicado_em':node.findtext('pubDate') or node.findtext(atom+'published') or '',
+            'date_source':'publisher_feed', 'content_scope':'article_candidate',
+            'source_recovery':{'method':'publisher_feed_autodiscovery','feed_url':lead.get('url',''),
+                'publisher_url':home,'original_feed_url':feed_url,'state':'original_candidate'}})
+    return out[:2]
+
+
 # ── Marginalia (índice independente; interface texto oficial) ───────
 _MARG_SKIP = re.compile(r"(marginalia|about\.marginalia|donate|explore/random)", re.I)
 
@@ -461,13 +514,16 @@ def buscar_bcb(consulta: str, limite: int = 3, timeout: float = 12.0) -> list:
 
 # ── Wikimedia Commons (API oficial; imagens) ───────────────────────
 def buscar_commons(consulta: str, limite: int = 6, timeout: float = 12.0) -> list:
-    q = (consulta or "").strip()[:160]
+    q = re.sub(r'\b(imagens?|fotos?|fotografias?|licenciad[oa]s?|com licen[cç]a|pesquise|encontre|mostre)\b',
+               ' ', consulta or '', flags=re.I)
+    q = re.sub(r'\b(d[aeo]s?|em|para)\b', ' ', q, flags=re.I)
+    q = re.sub(r'\s+', ' ', q).strip()[:160]
     if not q:
         raise ErroProvedor("Consulta vazia.", "vazio")
     dados = _json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(
         {"action": "query", "generator": "search", "gsrsearch": q, "gsrnamespace": "6",
          "gsrlimit": max(1, min(limite, 10)), "prop": "imageinfo",
-         "iiprop": "url|size|mime", "iiurlwidth": "640", "format": "json"}), timeout)
+         "iiprop": "url|size|mime|extmetadata", "iiurlwidth": "640", "format": "json"}), timeout)
     paginas = ((dados.get("query") or {}).get("pages") or {})
     out = []
     for _pid, pg in list(paginas.items()):
@@ -475,17 +531,25 @@ def buscar_commons(consulta: str, limite: int = 6, timeout: float = 12.0) -> lis
             continue
         ii = (pg.get("imageinfo") or [{}])
         ii = ii[0] if ii else {}
+        ext = ii.get('extmetadata') or {}
+        def field(name, limit=240):
+            value = ext.get(name) or {}
+            return _limpar(value.get('value') if isinstance(value, dict) else '', limit)
         titulo = _limpar(str(pg.get("title", "")).replace("File:", ""), 160)
         img = _url_ok(ii.get("thumburl") or ii.get("url"))
         pagina = _url_ok(pg.get("descriptionurl") or ii.get("descriptionurl"))
         if not titulo or not img:
             continue
         out.append({"titulo": titulo, "url": img,
+                    'license':field('LicenseShortName'), 'attribution':field('Artist'),
+                    'description':field('ImageDescription',600),
                     "trecho": f"{ii.get('width')}x{ii.get('height')} · {ii.get('mime')}"
                               + (f" · página: {pagina}" if pagina else ""),
                     "origem": "commons", "tipo": "imagem",
                     "meta": {"pagina": pagina, "mime": ii.get("mime"),
-                             "largura": ii.get("width"), "altura": ii.get("height")}})
+                             "largura": ii.get("width"), "altura": ii.get("height"),
+                             'license_url':_url_ok(field('LicenseUrl',500)),
+                             'thumb_url':_url_ok(ii.get('thumburl')), 'original_url':_url_ok(ii.get('url'))}})
     if not out:
         raise ErroProvedor("Commons sem imagens para esta busca.", "vazio")
     return out

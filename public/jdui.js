@@ -412,6 +412,7 @@
             publicador: S(f.publicador,120), autores: S(f.autores,300), doi: S(f.doi,160),
             imagem: URL_OK(f.imagem), favicon: URL_OK(f.favicon), texto_url: URL_OK(f.texto_url),
             detalhes: Array.isArray(f.detalhes) ? f.detalhes.slice(0,6).filter(v=>typeof v==='string').map(v=>S(v,240)) : [],
+            leitura: ['FOUND','READ','PARTIAL','UNAVAILABLE'].includes(f.leitura) ? f.leitura : ['aberta','utilizada'].includes(st) ? 'READ' : 'FOUND',
             status: sts.indexOf(st) >= 0 ? st : 'encontrada'
           };
         }),
@@ -576,6 +577,10 @@
             source_title: S(item.source_title, 160), source_url: URL_OK(item.source_url),
             publisher: S(item.publisher, 120), date: S(item.date, 40),
             rights: S(item.rights, 160) || 'não informado',
+            attribution: S(item.attribution,240), license_url: URL_OK(item.license_url),
+            mime: S(item.mime,80), width: N(item.width)>0 && N(item.width)<=100000 ? Math.trunc(N(item.width)) : 0,
+            height: N(item.height)>0 && N(item.height)<=100000 ? Math.trunc(N(item.height)) : 0, duration: S(item.duration,40),
+            metadata_state: item.metadata_state==='METADATA_READ' ? 'METADATA_READ' : tipo==='video' ? 'VIDEO_FOUND' : 'FOUND',
             access_state: acesso, validation_state: validacao, analysis_state: analise,
             excerpt: S(item.excerpt, 500), alt: S(item.alt || item.title, 200), evidence: false
           };
@@ -2425,11 +2430,12 @@
     root.appendChild(box);
   };
 
-  R.sources = function (root, props) {
+  R.sources = function (root, props, st, save) {
+    st = st || {}; st.sourceDetails = st.sourceDetails || {};
     const box = el('div', 'jdui-cards');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const ROT = { encontrada: 'Encontrada · não lida', aberta: 'Fonte lida', utilizada: 'Utilizada na resposta' };
-    props.items.forEach(f => {
+    props.items.forEach((f,index) => {
       const card = el('div', 'jdui-srccard');
         if (f.imagem) {
           const img=el('img','jdui-source-image');img.src=f.imagem;img.alt=f.titulo;img.loading='lazy';img.referrerPolicy='no-referrer';
@@ -2442,18 +2448,27 @@
         }
       if (f.url) { heading.href = f.url; heading.target = '_blank'; heading.rel = 'noopener noreferrer'; }
       top.appendChild(heading);
-      top.appendChild(el('span', 'jdui-badge st-' + f.status, ROT[f.status] || f.status));
+      const READ = {FOUND:'Encontrada',READ:'Trecho lido',PARTIAL:'Leitura parcial',UNAVAILABLE:'Indisponível'};
+      top.appendChild(el('span', 'jdui-badge st-' + f.status, READ[f.leitura] || ROT[f.status] || f.status));
       card.appendChild(top);
         const partes = [f.publicador || f.dominio, f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
       if (f.data_evento) partes.push('Acontecimento: ' + f.data_evento);
       if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
       const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
-        if (f.autores) card.appendChild(el('div','jdui-source-authors',f.autores));
-        if (f.doi) card.appendChild(el('div','jdui-source-doi','DOI: '+f.doi));
         (f.detalhes || []).forEach(line=>card.appendChild(el('div','jdui-source-detail',line)));
       if (f.escopo || f.relacao) card.appendChild(el('div', 'jdui-source-scope', [f.escopo, f.relacao].filter(Boolean).join(' · ')));
       if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
+      if (f.autores || f.doi || f.origem_declarada) {
+        const details = document.createElement('details'); details.className='jdui-source-provenance';
+        const summary = document.createElement('summary'); summary.textContent='Proveniência e publicação'; details.appendChild(summary);
+        if (f.autores) details.appendChild(el('div','jdui-source-authors',f.autores));
+        if (f.doi) details.appendChild(el('div','jdui-source-doi','DOI: '+f.doi));
+        if (f.origem_declarada) details.appendChild(el('div','jdui-source-detail',f.origem_declarada));
+        details.open=!!st.sourceDetails[index];
+        details.addEventListener('toggle',()=>{st.sourceDetails[index]=details.open;if(save)save(st);});
+        card.appendChild(details);
+      }
       if (f.url) {
         const a = el('a', 'jdui-btn ghost', 'Abrir fonte ↗');
         a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
@@ -2664,7 +2679,7 @@
   };
 
   R.media = function (root, props) {
-    const box = el('div', 'jdui-cards');
+    const box = el('div', 'jdui-cards jdui-media-grid');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const TIPO = { image: 'Imagem', video: 'Vídeo', document: 'Documento' };
     const ACESSO = { metadata_only: 'somente metadados', link_only: 'somente link',
@@ -2719,6 +2734,9 @@
       corpo.appendChild(el('span', 'jdui-badge', TIPO[item.type] + ' · não é evidência'));
       const meta = [item.publisher, item.date].filter(Boolean).join(' · ');
       if (meta) corpo.appendChild(el('div', 'jdui-ploja', meta));
+      const specifics=[item.duration,item.width && item.height ? item.width+' × '+item.height : '',item.mime].filter(Boolean);
+      if (specifics.length) corpo.appendChild(el('div','jdui-count',specifics.join(' · ')));
+      if (item.attribution) corpo.appendChild(el('div','jdui-count','Crédito: '+item.attribution));
       corpo.appendChild(el('div', 'jdui-count',
         'Acesso: ' + (ACESSO[item.access_state] || item.access_state)
         + ' · Análise: ' + (ANALISE[item.analysis_state] || item.analysis_state)));

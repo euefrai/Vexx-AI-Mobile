@@ -716,6 +716,9 @@ def _v_researchmedia(p: dict) -> dict:
     items = p.get("items")
     if not isinstance(items, list) or not (1 <= len(items) <= 12):
         raise JduiErro("media.items: 1..12 obrigatórios")
+    def dimension(value):
+        number = _num(value)
+        return int(number) if 0 < number <= 100000 else 0
     out = []
     for item in items:
         if not isinstance(item, dict):
@@ -745,6 +748,13 @@ def _v_researchmedia(p: dict) -> dict:
             "publisher": _str(item.get("publisher"), 120),
             "date": _str(item.get("date"), 40),
             "rights": _str(item.get("rights"), 160) or "não informado",
+            "attribution": _str(item.get('attribution'),240),
+            "license_url": _url(item.get('license_url')),
+            "mime": _str(item.get('mime'),80),
+            "width": dimension(item.get('width')),
+            "height": dimension(item.get('height')),
+            "duration": _str(item.get('duration'),40),
+            "metadata_state": 'METADATA_READ' if item.get('metadata_state')=='METADATA_READ' else 'VIDEO_FOUND' if kind=='video' else 'FOUND',
             "access_state": access,
             "validation_state": validation,
             "analysis_state": analysis,
@@ -779,6 +789,7 @@ def _v_filecard(p: dict) -> dict:
         out.append({"name": _str(item.get("name"), 160), "url": url,
                     "kind": kind, "size": _str(item.get("size"), 40),
                     "source": _str(item.get("source"), 200),
+                    "leitura":f.get('leitura') if f.get('leitura') in ('FOUND','READ','PARTIAL','UNAVAILABLE') else 'READ' if status in ('aberta','utilizada') else 'FOUND',
                     "status": status})
     return {"title": _str(p.get("title"), 160) or "Arquivos",
             "files": out, "sources": _provenance(p.get("sources"))}

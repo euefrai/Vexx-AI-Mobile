@@ -328,6 +328,17 @@ def _chave_consulta(texto: str) -> str:
 
 def _subconsultas_unicas(objetivo: str, limite: int) -> list:
     """Prevent the planner from spending budget on the same front twice."""
+    import query_intelligence
+    request=query_intelligence.analyze(objetivo)
+    if request['domain']=='science' and limite>1:
+        import search_orchestrator
+        # A bare "métricas" or "lítio" loses the study/entity context. Every
+        # front keeps the original question; translation is discovery, not data.
+        base=re.sub(r'\s+',' ',objetivo).strip()[:180]
+        fronts=[base, base+' métodos amostra métricas', base+' resultados limitações']
+        translated=search_orchestrator.consulta_cientifica(objetivo)
+        if translated.casefold()!=base.casefold(): fronts.append(translated)
+        return list(dict.fromkeys(fronts))[:max(1,limite)]
     brutas = research.dividir_subconsultas(objetivo, limite) or [objetivo[:120]]
     vistas, saida = set(), []
     for bruta in brutas:
@@ -696,7 +707,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
                     "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                     "abstract_kind", "provider_metadata_untrusted", "content_scope",
-                    "full_text_fetched", "full_text_url", "full_text_format", "extraction_scope", "full_document_read", "sections",
+                    "full_text_fetched", "full_text_url", "full_text_format", "extraction_scope", "full_document_read", "sections", "scientific_sections",
                     "vertical", "structured", "publicador", "imagens", "source_recovery",
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
@@ -807,7 +818,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
         emitir(db, job["id"], job["owner"], "search", "search_completed", "ok",
                f"Busca '{q[:60]}': {len(encontrados)} achados.",
                {"provedor": info["provedor"], "falhas": info["erros"],
-                "estado": detalhe.get("estado", "")})
+                "estado": detalhe.get("estado", ""),
+                "recovery_steps":(detalhe.get('etapas') or [])[:12]})
         falhas.extend(info["erros"])
         for a in encontrados:
             if a["url"] not in {x["url"] for x in achados}:
@@ -834,6 +846,7 @@ def _agregar_midia(db, job: dict, itens: list) -> int:
     limite = max(0, int(job["orcamento"].get("midia", 8) or 0))
     if not limite or not itens:
         return 0
+    itens = media_evidence.relevant_media(itens, job.get('objetivo') or '')
     atuais = [item for item in (job.get("midia") or []) if isinstance(item, dict)]
     chaves = {(item.get("type"), item.get("url")) for item in atuais}
     adicionados = 0
@@ -918,6 +931,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto": texto, "final": final,
                 "content_scope": artigo.get("content_scope", "page_text"),
                 "metadados":artigo.get('metadados') or {},
+                "imagens":artigo.get('imagens') or [],
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
@@ -1107,6 +1121,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         fonte['publicado_em']=candidate.get('publicado_em') or ''
         fonte['structured']=(candidate.get('structured') or [])[:2]
         fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
+        fonte['imagens'] = (rec.get('imagens') or [])[:2]
         if a.get('source_recovery'):
             fonte['source_recovery'] = {**a['source_recovery'],
                 'state':'original_read' if fonte['texto_lido'] else 'original_unread',
@@ -1125,6 +1140,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             fonte['full_text_format']=rec.get('full_text_format','')
             fonte['extraction_scope']=rec.get('extraction_scope','')
             fonte['full_document_read']=False
+            fonte['scientific_sections']=rec.get('scientific_sections') or []
             fonte['sections']=[{'title': str(s.get('titulo') or '')[:160], 'text': str(s.get('texto') or '')[:800]}
                                for s in (rec.get('secoes') or [])[:8] if isinstance(s,dict)]
             fonte['content_scope']=rec.get('content_scope',a.get('content_scope','metadata_only'))
@@ -2290,11 +2306,13 @@ def _avaliar_rodada(db, job: dict, etapa: dict, evidencias: list) -> dict:
 def _lacunas(job: dict) -> list:
     subs_busca = {s.get("alvo") for s in job["plano"] if s.get("tipo") == "busca"}
     com_evid = set()
+    needs_full = bool(re.search(r'texto completo|m[eé]todos|m[eé]tricas|compare estudos', job.get('objetivo',''), re.I))
     for s in job["plano"]:
         # Old callers supplied a compact plan with evidence IDs only. Preserve
         # that gap-list API; real jobs always carry an objective and read state.
         known = bool(s.get("_evidencias")) if "objetivo" not in job else any(
-            _evidencia_lida(e) and (e.get('vertical') or {}).get('data_complete', True)
+            _evidencia_lida(e) and (not needs_full or e.get('full_text_fetched') or e.get('content_scope')=='document_text')
+            and (e.get('vertical') or {}).get('data_complete', True)
             for e in s.get("_evidencias", []))
         if s.get("tipo") == "ler" and known:
             com_evid.add(s.get("alvo"))

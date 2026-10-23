@@ -1750,3 +1750,12 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .jdui-image-dialog{max-width:min(96vw,1100px);max-height:94dvh;padding:16px;border:1px solid var(--line);border-radius:16px;color:var(--text);background:var(--panel)}
 .jdui-image-dialog::backdrop{background:rgba(0,0,0,.78)}
 .jdui-image-dialog img{display:block;max-width:100%;max-height:78dvh;object-fit:contain;margin:12px auto 0}
+.jdui-source-provenance{border-top:1px solid var(--line);padding-top:10px;color:var(--muted);font-size:12px}
+.jdui-source-provenance summary{cursor:pointer;min-height:32px;display:list-item;padding:6px 0}
+.jdui-source-provenance summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.jdui-media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.jdui-media-grid>.jdui-title{grid-column:1/-1}
+.jdui-media-grid .jdui-pcard{min-width:0;align-self:start}
+.jdui-media-grid .jdui-pimg{object-fit:contain;aspect-ratio:16/10}
+.jdui-media-grid .jdui-cardacts{flex-wrap:wrap}
+.jdui-media-grid .jdui-cardacts .jdui-btn{flex:1 1 8rem;min-width:0;overflow-wrap:normal}

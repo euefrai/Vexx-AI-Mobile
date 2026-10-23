@@ -37,7 +37,7 @@ def load_cases(path=None):
         ident, route, question = row
         if not re.fullmatch(r'[a-z0-9_-]{1,60}', ident) or ident in ids:
             raise ValueError('case IDs must be unique safe basenames')
-        if route not in ('shopping','shopping_web','followup','research','live_data') or not isinstance(question, str) or not 1 <= len(question) <= 1000:
+        if route not in ('shopping','shopping_web','followup','research','deep_research','live_data') or not isinstance(question, str) or not 1 <= len(question) <= 1000:
             raise ValueError('invalid evaluation case')
         normalized.append((ident, route, question)); ids.add(ident)
     return normalized
@@ -60,6 +60,15 @@ def run_case(case, workspace):
     db = pc_agent.open_db(workspace / 'evaluation.sqlite3')
     owner, conv = 'live-evaluation-only', 'price-followup'
     started = time.monotonic()
+    discoveries=[]
+    original_search=search_providers.buscar
+    def observed_search(name, query, **kwargs):
+        rows=original_search(name,query,**kwargs)
+        for row in rows:
+            if len(discoveries)<80:
+                discoveries.append({key:row.get(key) for key in ('titulo','url','origem','tipo','meta','license','description','publisher_url','source_recovery')})
+        return rows
+    search_providers.buscar=observed_search
     result = {'id': ident, 'route': route, 'question': question,
               'claim_support_human_review': None, 'ui_tested': False}
     import query_intelligence
@@ -86,7 +95,7 @@ def run_case(case, workspace):
                 result.update(state='answered' if text else 'unresolved', answer=text or '',
                               previous_answer=previous)
         else:
-            job = ra.criar_job(db, owner, question, manual='rapida')
+            job = ra.criar_job(db, owner, question, manual='profunda' if route=='deep_research' else 'rapida')
             calls = []
             cfg = pc_agent.ai_config()
             # Never silently switch to a paid model to make the benchmark pass.
@@ -119,7 +128,7 @@ def run_case(case, workspace):
                           model=cfg['model'] if writer else None, model_calls_requested=len(calls),
                           citation_mechanics=metrics,
                           displayed_citation_links=displayed,
-                          search_events=[e for e in events if e['tipo'] in ('search_completed', 'source_opened', 'source_irrelevant')])
+                          search_events=[e for e in events if e['agente'] in ('search','analyst')])
             import research_view
             import jdui
             view = research_view.build_view(summary, evidence)
@@ -128,9 +137,11 @@ def run_case(case, workspace):
             result['jdui_errors'] = errors[:3]
             result['jdui'] = view
         result['provider_metrics'] = search_providers.metricas()
+        result['source_discovery']=discoveries
         result['elapsed_s'] = round(time.monotonic() - started, 3)
         return result
     finally:
+        search_providers.buscar=original_search
         db.close()
 
 
@@ -178,7 +189,7 @@ def main(argv=None):
                         command += ['--dataset', str(args.dataset.resolve())]
                     env['VEXX_EVAL_BLOCKED_PROVIDERS'] = ','.join(sorted(blocked_providers))
                     proc = subprocess.run(command, cwd=ROOT, env=env,
-                                          stdout=log, stderr=log, timeout=65)
+                                          stdout=log, stderr=log, timeout=150 if route=='deep_research' else 65)
                     if proc.returncode == 0:
                         data = json.loads(output.read_text(encoding='utf-8'))
                         blocked_providers.update(name for name, metrics in data.get('provider_metrics', {}).items()

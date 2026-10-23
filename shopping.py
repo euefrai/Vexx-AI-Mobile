@@ -2550,9 +2550,16 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         diagnosticos.add("PRICE_UNVERIFIED")
     esgotado = bool(not brutos and ondas >= MAX_ONDAS_PAGINAS
                     and len(paginas) > len(consultadas))
+    for product in produtos + alternativas + duros:
+        codes=set(product.get('excluido_codigos') or [])
+        product['identity_state'] = ('CONFLICTING_VARIANT' if codes & {'ram_abaixa','ram_virtual','armazenamento_abaixa','armazenamento_diferente','versao_diferente','modelo_diferente','tipo_produto_diferente','marca_diferente'} else
+            'COMPATIBLE_ALTERNATIVE' if product in alternativas else
+            'PARTIAL_INFORMATION' if product.get('pendencias_do_pedido') else
+            'EXACT_MATCH' if _tier(product)=='confirmada' and not codes else 'UNVERIFIED_OFFER')
     trace = [{'id': p.get('id'), 'source_url': p.get('url_final') or p.get('url'),
               'item_url': p.get('url_item') or p.get('url'), 'product': p.get('nome'),
               'variant': p.get('variante'), 'match': p.get('correspondencia_tipo'),
+              'identity_state':p.get('identity_state'),
               'mismatches': p.get('excluido_codigos') or [],
               'price_declared': bool(p.get('preco_confirmado')), 'currency': p.get('moeda'),
               'stock_declared': p.get('disponibilidade'), 'stock_independently_verified': False,
