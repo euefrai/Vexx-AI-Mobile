@@ -1538,6 +1538,9 @@ td .image-unavailable{margin:0;min-height:0;padding:4px 8px;font-size:11px}
 .jdui-conn{text-align:center;color:var(--purple);font-size:11px;padding:3px 0;font-weight:700}
 .jdui-diagram.horiz .jdui-conn{padding:0 8px}
 .jdui-scrollx{overflow-x:auto;margin:0 -2px;padding:0 2px}
+#researchView .jdui-scrollx,#researchWorkspaceView .jdui-scrollx{max-width:100%;overscroll-behavior-x:contain}
+#researchView table.jdui-table,#researchWorkspaceView table.jdui-table{min-width:560px}
+#researchView table.jdui-table td,#researchWorkspaceView table.jdui-table td{min-width:140px;overflow-wrap:anywhere}
 table.jdui-table{width:100%;min-width:280px;border-collapse:collapse;font-size:12.5px}
 table.jdui-table th,table.jdui-table td{border:1px solid var(--line);padding:8px;text-align:left}
 table.jdui-table th{background:var(--bg-elev);color:var(--purple);cursor:pointer;white-space:nowrap;user-select:none}

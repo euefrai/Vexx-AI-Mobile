@@ -141,8 +141,8 @@ function openDb() {
 let jduiStateCache = {};
 let jduiDirty = {};
 let jduiSyncTimer = null;
-async function preloadJduiStates(msgIds) {
-  jduiStateCache = {};
+async function preloadJduiStates(msgIds, merge = false) {
+  if (!merge) jduiStateCache = {};
   if (!db || !msgIds || !msgIds.length) return;
   const want = new Set(msgIds);
   const generation = storageGeneration, owner = currentUid;
@@ -1215,25 +1215,39 @@ function researchWorkspaceExporta(id) {
     a.hidden = false;
   });
 }
+async function researchJduiContext(id) {
+  const owner = currentUid, generation = storageGeneration;
+  const row = { id: 'research:' + owner + ':' + id, conversation_id: '' };
+  await preloadJduiStates([row.id], true);
+  if (owner !== currentUid || generation !== storageGeneration) return null;
+  return jduiCtx(row);
+}
 async function researchWorkspaceAbrir(id) {
   const lista = $('researchJobList');
   const painel = $('researchWorkspace');
   const view = $('researchWorkspaceView');
   const titulo = $('researchWorkspaceTitle');
   if (!lista || !painel || !view || !titulo || !id) return;
+  const owner = currentUid, generation = storageGeneration;
+  const token = view.dataset.request = String(Number(view.dataset.request || 0) + 1);
+  const valid = () => currentUid === owner && storageGeneration === generation && view.dataset.request === token && !painel.hidden;
   lista.hidden = true; painel.hidden = false;
   titulo.textContent = 'Carregando pesquisa…';
   view.replaceChildren();
   researchWorkspaceExporta(id);
   try {
     const st = await api('/api/research/status?job_id=' + encodeURIComponent(id));
+    if (!valid()) return;
     const resumo = (st && st.resumo) || {};
     titulo.textContent = resumo.objetivo || 'Pesquisa';
     const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
+    const ctx = await researchJduiContext(id);
+    if (!valid() || !ctx) return;
     view.replaceChildren();
     if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
-    JDUI.mount(view, [r.message], { markdown: renderMarkdown, download: (name, mime, text) => downloadFile(name, mime, text) });
+    JDUI.mount(view, [r.message], ctx);
   } catch (_) {
+    if (!valid()) return;
     titulo.textContent = 'Pesquisa';
     view.replaceChildren();
     const p = document.createElement('p');
@@ -1247,16 +1261,22 @@ async function researchCarregaView(force) {
   const id = researchJobIdAtual();
   if (!box || !id) return;
   if (!force && box.dataset.job === id && box.hasChildNodes()) { box.hidden = false; return; }
+  const owner = currentUid, generation = storageGeneration;
+  const token = box.dataset.request = String(Number(box.dataset.request || 0) + 1);
+  const valid = () => owner === currentUid && generation === storageGeneration && box.dataset.request === token && researchJobIdAtual() === id;
   box.hidden = false;
   box.replaceChildren();
   box.textContent = 'Carregando visão estruturada…';
   try {
     const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
+    const ctx = await researchJduiContext(id);
+    if (!valid() || !ctx) return;
     if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
     box.replaceChildren();
-    JDUI.mount(box, [r.message], { markdown: renderMarkdown, download: (name, mime, text) => downloadFile(name, mime, text) });
+    JDUI.mount(box, [r.message], ctx);
     box.dataset.job = id;
   } catch (_) {
+    if (!valid()) return;
     box.replaceChildren();
     const p = document.createElement('p');
     p.className = 'jdui-source';

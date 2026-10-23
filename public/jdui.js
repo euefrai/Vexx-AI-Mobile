@@ -2465,8 +2465,9 @@
         if (f.autores) details.appendChild(el('div','jdui-source-authors',f.autores));
         if (f.doi) details.appendChild(el('div','jdui-source-doi','DOI: '+f.doi));
         if (f.origem_declarada) details.appendChild(el('div','jdui-source-detail',f.origem_declarada));
-        details.open=!!st.sourceDetails[index];
-        details.addEventListener('toggle',()=>{st.sourceDetails[index]=details.open;if(save)save(st);});
+        const sourceKey = 'source:' + (f.url || f.doi || f.titulo);
+        details.open=Object.prototype.hasOwnProperty.call(st.sourceDetails, sourceKey) && !!st.sourceDetails[sourceKey];
+        details.addEventListener('toggle',()=>{st.sourceDetails[sourceKey]=details.open;if(save)save(st);});
         card.appendChild(details);
       }
       if (f.url) {
@@ -2634,7 +2635,8 @@
     root.appendChild(box);
   };
 
-  R.evidence = function (root, props) {
+  R.evidence = function (root, props, st, save) {
+    st = st || {}; st.evidenceDetails = st.evidenceDetails || {};
     const box = el('div', 'jdui-cards');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const ROT = { SUPPORTED: 'Sustentada', CONTRADICTED: 'Contradita',
@@ -2653,6 +2655,9 @@
       card.appendChild(el('div', 'jdui-ploja', counts + (c.method ? ' · ' + c.method : '')));
       if (c.sources.length) {
         const det = document.createElement('details');
+        const detailKey = 'claim:' + c.statement;
+        det.open = Object.prototype.hasOwnProperty.call(st.evidenceDetails, detailKey) && !!st.evidenceDetails[detailKey];
+        det.addEventListener('toggle', () => { st.evidenceDetails[detailKey] = det.open; if (save) save(st); });
         const sum = document.createElement('summary');
         sum.textContent = 'Fontes e trechos usados (' + c.sources.length + ')';
         det.appendChild(sum);
