@@ -1,0 +1,28 @@
+{
+  "id": "weather",
+  "route": "live_data",
+  "question": "Qual o clima agora em Salvador?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Qual o clima agora em Salvador?",
+    "domain": "general",
+    "original_request": "Qual o clima agora em Salvador?",
+    "resolved_request": "Qual o clima agora em Salvador?",
+    "parameters": {},
+    "temporal": true,
+    "resolved_at": "2026-10-23T10:27:04.057911+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "**Clima em Salvador, Bahia, Brasil · centroide municipal**\n\nParcialmente nublado · **27 °C** · sensação de 29.5 °C.\n\nUmidade: 78.8% · vento: 20.5 km/h.\n\nDado válido para 23/10/2026 às 07:00 (America/Bahia); consultado às 07:27.\n\n[Dados meteorológicos: Visual Crossing](https://www.visualcrossing.com/) · Observação agregada; pode incluir interpolação; cache de até 5 minutos.\n\nDados sujeitos a erros, atrasos, estimativas e indisponibilidade, sem garantia de exatidão ou adequação. Previsões são incertas. Não substituem alertas oficiais ou aconselhamento meteorológico profissional e não devem ser a única base para decisões críticas.\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"cards\", \"props\": {\"title\": \"\", \"items\": [{\"title\": \"Salvador, Bahia, Brasil\", \"desc\": \"Parcialmente nublado · sensação 29.5 °C · 23/10/2026 07:00 (America/Bahia). Observação agregada; pode incluir interpolação. Referência: centroide municipal. Dados meteorológicos: Visual Crossing.\", \"value\": \"27 °C\", \"badge\": \"Visual Crossing · atual\", \"url\": \"https://www.visualcrossing.com/\", \"action\": {}}]}}]}\n```",
+  "model_calls_requested": 0,
+  "provider_metrics": {},
+  "elapsed_s": 2.327
+}

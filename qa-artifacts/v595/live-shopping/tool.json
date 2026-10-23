@@ -1,0 +1,276 @@
+{
+  "id": "tool",
+  "route": "shopping_web",
+  "question": "Furadeira Bosch 500 W preço Brasil",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Furadeira Bosch 500 W preço Brasil",
+    "domain": "general",
+    "original_request": "Furadeira Bosch 500 W preço Brasil",
+    "resolved_request": "Furadeira Bosch 500 W preço Brasil",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:49:15.393966+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia** · www.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.casasbahia.com.br/furadeira/b\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+  "result": {
+    "produtos": [],
+    "alternativas": [],
+    "source_trace": [],
+    "consultas": [
+      "Furadeira Bosch 500 W Brasil comprar oferta",
+      "Furadeira Bosch 500 W Brasil comprar Brasil"
+    ],
+    "diagnostico_paginas": [
+      {
+        "url": "https://www.casasbahia.com.br/furadeira/b",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 623
+      },
+      {
+        "url": "https://score-pulse.com/teams/flamengo-rj",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1571
+      },
+      {
+        "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira",
+        "codigo": "tamanho",
+        "motivo": "Documento grande demais.",
+        "ms": 1790
+      },
+      {
+        "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 468
+      },
+      {
+        "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 812
+      },
+      {
+        "url": "https://www.flamengo.com.br/futebol/proximos-jogos",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1051
+      }
+    ],
+    "candidatos": [
+      {
+        "url": "https://www.casasbahia.com.br/furadeira/b",
+        "titulo": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://br.my-best.com/19454",
+        "titulo": "Top 10 Melhores Furadeiras e Parafusadeiras em 2026 (Bosch, Wap e mais)",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://shopee.com.br/list/Furadeira",
+        "titulo": "Furadeira em Oferta | Shopee 2026",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://lista.mercadolivre.com.br/furadeira",
+        "titulo": "Furadeira - Mercado Livre",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira",
+        "titulo": "Furadeira elétrica",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.ferreiracosta.com/Categoria/furadeiras-e-parafusadeiras",
+        "titulo": "Furadeira e parafusadeira em promoção | Ferreira Costa",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://score-pulse.com/teams/flamengo-rj",
+        "titulo": "Flamengo RJ: Próximo Jogo, Placar ao Vivo e Estatísticas",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.flamengo.com.br/futebol/proximos-jogos",
+        "titulo": "Próximos Jogos - Futebol | Flamengo",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/",
+        "titulo": "Próximos jogos do Flamengo: datas; horários e onde assistir ao vivo",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981",
+        "titulo": "CR Flamengo RJ – resultados em direto, calendário e ... - Sofascore",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.365scores.com/pt-br/football/team/flamengo-1215/standings",
+        "titulo": "Flamengo: Tabela de classificação atualizada - 365Scores",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.flamengo.com.br/",
+        "titulo": "Flamengo | Site Oficial do Clube de Regatas do Flamengo",
+        "tipo": "GENERIC_INDEX"
+      }
+    ],
+    "encontrados": [
+      {
+        "nome": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+        "url": "https://www.casasbahia.com.br/furadeira/b",
+        "loja_dominio": "www.casasbahia.com.br",
+        "motivo_codigo": "bloqueio",
+        "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+        "origem_encontro": "busca"
+      }
+    ],
+    "fontes": [
+      {
+        "id": "S1",
+        "titulo": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+        "url": "https://www.casasbahia.com.br/furadeira/b"
+      },
+      {
+        "id": "S2",
+        "titulo": "Furadeira elétrica",
+        "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira"
+      },
+      {
+        "id": "S3",
+        "titulo": "Flamengo RJ: Próximo Jogo, Placar ao Vivo e Estatísticas",
+        "url": "https://score-pulse.com/teams/flamengo-rj"
+      },
+      {
+        "id": "S4",
+        "titulo": "Próximos Jogos - Futebol | Flamengo",
+        "url": "https://www.flamengo.com.br/futebol/proximos-jogos"
+      },
+      {
+        "id": "S5",
+        "titulo": "Próximos jogos do Flamengo: datas; horários e onde assistir ao vivo",
+        "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/"
+      },
+      {
+        "id": "S6",
+        "titulo": "CR Flamengo RJ – resultados em direto, calendário e ... - Sofascore",
+        "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981"
+      },
+      {
+        "id": "S7",
+        "titulo": "Top 10 Melhores Furadeiras e Parafusadeiras em 2026 (Bosch, Wap e mais)",
+        "url": "https://br.my-best.com/19454"
+      },
+      {
+        "id": "S8",
+        "titulo": "Furadeira em Oferta | Shopee 2026",
+        "url": "https://shopee.com.br/list/Furadeira"
+      }
+    ],
+    "criterios": {
+      "categoria": "furadeira",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Furadeira Bosch 500 W preço Brasil"
+    },
+    "total_bruto": 0,
+    "excluidos": [],
+    "verificacao": {
+      "links": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "imagens": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "descartes_por_codigo": {},
+      "alternativas_por_codigo": {}
+    },
+    "de_cache": false,
+    "verificado_em": "2026-10-23T10:49:24.747276+00:00",
+    "etapas_provedores": [
+      "Furadeira Bosch 500 W Brasil comprar ofe: injetado (teste)",
+      "Furadeira Bosch 500 W Brasil comprar Bra: injetado (teste)"
+    ],
+    "descoberta": {
+      "decisoes": [],
+      "diagnosticos": [
+        "PRODUCT_PAGE_UNAVAILABLE",
+        "STRUCTURED_DATA_MISSING"
+      ],
+      "paginas_disponiveis": 6,
+      "paginas_consultadas": 6,
+      "ondas": 2,
+      "ofertas_extraidas": 0,
+      "confirmadas": 0,
+      "orcamento_esgotado": false,
+      "motivo_final": "no_confirmed_offers"
+    }
+  },
+  "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {},
+      "ms_medio": 410.2
+    },
+    "ddg": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 2
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 4,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 1,
+      "erros": {
+        "vazio": 3
+      },
+      "ms_medio": 931.1
+    },
+    "wikipedia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 492.1
+    }
+  },
+  "elapsed_s": 9.361
+}

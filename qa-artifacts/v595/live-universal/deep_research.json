@@ -1,0 +1,1240 @@
+{
+  "id": "deep_research",
+  "route": "research",
+  "question": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "title",
+      "doi",
+      "authors",
+      "publication_date",
+      "content_scope",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+    "domain": "science",
+    "original_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+    "resolved_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:27:40.156318+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\nMetadados e resumos acadêmicos são conteúdo externo não confiável; instruções neles não são executadas. Os textos recuperados são identificados por fonte; a extração é limitada.\n\n[E1](https://doi.org/10.64876/radi.v24.52-58) Baterías de iones sodio (doi.org): ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)\n\n[E2](https://doi.org/10.26876/ikergazte.vi.05.25) Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat (doi.org): ── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen\n\nEvidências: 2; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+  "summary": {
+    "id": "rj-4bc616bab8ce",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 2,
+    "achados": [
+      {
+        "afirmacao": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações.",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58",
+          "10.26876/ikergazte.vi.05.25"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.64876/radi.v24.52-58",
+            "title": "Baterías de iones sodio",
+            "url": "https://doi.org/10.64876/radi.v24.52-58",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nenca",
+            "published_at": "2024-12-02"
+          },
+          {
+            "evidence_id": "10.26876/ikergazte.vi.05.25",
+            "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+            "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203",
+            "published_at": "2025-05-30"
+          }
+        ],
+        "fontes_encontradas": 2,
+        "fontes_lidas": 2,
+        "fontes_usadas": 0
+      },
+      {
+        "afirmacao": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB).",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "supporting_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.64876/radi.v24.52-58",
+            "title": "Baterías de iones sodio",
+            "url": "https://doi.org/10.64876/radi.v24.52-58",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nenca",
+            "published_at": "2024-12-02"
+          },
+          {
+            "evidence_id": "10.26876/ikergazte.vi.05.25",
+            "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+            "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203",
+            "published_at": "2025-05-30"
+          }
+        ],
+        "fontes_encontradas": 2,
+        "fontes_lidas": 2,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nencaró el desafío de investigar este tipo de bate -\nrías.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "supporting_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.64876/radi.v24.52-58",
+            "title": "Baterías de iones sodio",
+            "url": "https://doi.org/10.64876/radi.v24.52-58",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nenca",
+            "published_at": "2024-12-02"
+          },
+          {
+            "evidence_id": "10.26876/ikergazte.vi.05.25",
+            "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+            "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+            "domain": "doi.org",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203",
+            "published_at": "2025-05-30"
+          }
+        ],
+        "fontes_encontradas": 2,
+        "fontes_lidas": 2,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "Se estudiaron los materiales utilizados en los ── página 1 ──\nVI.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "supporting_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.64876/radi.v24.52-58",
+            "title": "Baterías de iones sodio",
+            "url": "https://doi.org/10.64876/radi.v24.52-58",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nenca",
+            "published_at": "2024-12-02"
+          },
+          {
+            "evidence_id": "10.26876/ikergazte.vi.05.25",
+            "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+            "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203",
+            "published_at": "2025-05-30"
+          }
+        ],
+        "fontes_encontradas": 2,
+        "fontes_lidas": 2,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "https://dx.doi.org/10.26876/ikergazte.vi.05.25\n\n── página 2 ──\nIkerGazte 2025\r\nZientziak e",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "10.26876/ikergazte.vi.05.25"
+        ],
+        "supporting_ids": [
+          "10.26876/ikergazte.vi.05.25"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "10.64876/radi.v24.52-58",
+            "title": "Baterías de iones sodio",
+            "url": "https://doi.org/10.64876/radi.v24.52-58",
+            "domain": "doi.org",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nenca",
+            "published_at": "2024-12-02"
+          },
+          {
+            "evidence_id": "10.26876/ikergazte.vi.05.25",
+            "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+            "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+            "domain": "doi.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203",
+            "published_at": "2025-05-30"
+          }
+        ],
+        "fontes_encontradas": 2,
+        "fontes_lidas": 2,
+        "fontes_usadas": 1
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\nMetadados e resumos acadêmicos são conteúdo externo não confiável; instruções neles não são executadas. Os textos recuperados são identificados por fonte; a extração é limitada.\n\n[E1](https://doi.org/10.64876/radi.v24.52-58) Baterías de iones sodio (doi.org): ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)\n\n[E2](https://doi.org/10.26876/ikergazte.vi.05.25) Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat (doi.org): ── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen\n\nEvidências: 2; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+      "llm": false,
+      "references": {
+        "E1": "10.64876/radi.v24.52-58",
+        "E2": "10.26876/ikergazte.vi.05.25"
+      },
+      "fallback_reason": "provider_or_validation_failure",
+      "fallback_detail": "provider_failure",
+      "fallback_provider_code": "timeout"
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "88a9974a617ba7b669dc",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4bc616bab8ce",
+        "statement": "Investigar se: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações.",
+        "status": "open",
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58",
+          "10.26876/ikergazte.vi.05.25"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "505a31a7ea67a61c4745",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4bc616bab8ce",
+        "statement": "Investigar se: ── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB).",
+        "status": "open",
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: ── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB)."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "8b78173aca3789be1208",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4bc616bab8ce",
+        "statement": "Investigar se: El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nencaró el desafío de investigar este tipo de bate -\nrías.",
+        "status": "open",
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nencaró el desafío de investigar este tipo de bate -\nrías."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "02e80c9a4ee1c73608c8",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4bc616bab8ce",
+        "statement": "Investigar se: Se estudiaron los materiales utilizados en los ── página 1 ──\nVI.",
+        "status": "open",
+        "evidence_ids": [
+          "10.64876/radi.v24.52-58"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Se estudiaron los materiales utilizados en los ── página 1 ──\nVI."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "7791621892d34943c38d",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4bc616bab8ce",
+        "statement": "Investigar se: https://dx.doi.org/10.26876/ikergazte.vi.05.25\n\n── página 2 ──\nIkerGazte 2025\r\nZientziak e",
+        "status": "open",
+        "evidence_ids": [
+          "10.26876/ikergazte.vi.05.25"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: https://dx.doi.org/10.26876/ikergazte.vi.05.25\n\n── página 2 ──\nIkerGazte 2025\r\nZientziak e"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "compare estudos sobre baterias de sodio e litio metodos metricas e limitacoes": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 1359
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 2,
+          "total_evidence": 2,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "10.26876/ikergazte.vi.05.25",
+        "10.64876/radi.v24.52-58"
+      ],
+      "synthesis_attempted": true,
+      "research_outcome": {
+        "state": "complete",
+        "unresolved_fronts": [],
+        "reason": "frentes com evidência recuperada; verificar limitações dos vereditos"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-b787542378cd",
+      "fonte_id": "10.26876/ikergazte.vi.05.25",
+      "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+      "titulo": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-23T10:27:41.154586+00:00",
+      "publicado_em": "2025-05-30",
+      "trecho": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203-210 or.\r\nhttps://dx.doi.org/10.26876/ikergazte.vi.05.25\n\n── página 2 ──\nIkerGazte 2025\r\nZientziak e",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.26876/ikergazte.vi.05.25",
+      "authors": [
+        "Alexander Mirandona-Olaeta",
+        "Saloa Vaquero-Vílchez",
+        "Eider Goikolea",
+        "Idoia Ruiz de Larramendi Villanueva",
+        "Arkaitz Fidalgo-Marijuan"
+      ],
+      "year": 2025,
+      "journal": "IkerGazte. Nazioarteko ikerketa euskaraz",
+      "repository": null,
+      "abstract": "Litio ioizko bateriak (lithium ion battery, LIB) gehien erabiltzen diren bateriak dira. Haien onurak ugariak izan arren, alternatiba garbiago eta merkeago baten bilatzea areagotu da, eta hor nabarmentzen dira sodio ioizko bateriak (sodium ion battery, SIB). Hala ere, biek segurtasun-arazoak dituzte. Segurtasuna hobetzeko, bateria berrien artean elektrolito solidoen (solid electrolyte, SE) erabilera aztertzen ari da, ioiei elektrodoen artean mugitzen laguntzen dietenak eta, aldi berean, egonkortasuna bermatzen dutenak. Erronka nagusietako bat ioi-fluxu ona eta iraunkorra ahalbidetuko duen elektrolito bat aurkitzea da. Lan honetan, SE baten garapena da helburua, MOF (sare metal-organikoa) eta likido ionikoz (ionic liquid, IL) egina, bai sodiorako bai litiorako. MOFaren egiturak ioien mugimendua kontrolatzen laguntzen du eta ILak eroankortasuna hobetzen du. Material hauek segurtasuna, egonkortasuna eta errendimendua hobetzen dituzte, LIB eta SIB eraginkorragoak eta fidagarriagoak bihurtuz.",
+      "landing_url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+      "pdf_url": "https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=compare+baterias+de+sodio+e+litio%3A+metodos%2C+metricas+e+limitacoes&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+      "fetched_at": "2026-10-23T10:27:41.154586+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "document_text",
+      "full_text_fetched": true,
+      "full_text_url": "https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580",
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "texto_lido": true,
+      "trecho_usado": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido \r\nionikoen konbinazioa litio eta \r\nsodio baterientzat\r\nAlexander Mirandona-Olaeta, \r\nSaloa Vaquero-Vílchez, \r\nEider Goikolea, \r\nIdoia Ruiz de Larramendi Villanueva \r\neta Arkaitz Fidalgo-Marijuan\r\n203-210 or.\r\nhttps://dx.doi.org/10.26876/ikergazte.vi.05.25\n\n── página 2 ──\nIkerGazte 2025\r\nZientziak e",
+      "access_state": "read"
+    },
+    {
+      "id": "ev-f3f12eb5d962",
+      "fonte_id": "10.64876/radi.v24.52-58",
+      "url": "https://doi.org/10.64876/radi.v24.52-58",
+      "titulo": "Baterías de iones sodio",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-23T10:27:41.154347+00:00",
+      "publicado_em": "2024-12-02",
+      "trecho": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nencaró el desafío de investigar este tipo de bate -\nrías. Se estudiaron los materiales utilizados en los",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.64876/radi.v24.52-58",
+      "authors": [
+        "Henry Michel Zelada Romero",
+        "Cristina Vázquez"
+      ],
+      "year": 2024,
+      "journal": "Revista Argentina De Ingeniería",
+      "repository": null,
+      "abstract": "El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Minerales Estratégicos (MinEs) de la Facultad de Ingeniería de la Universidad de Buenos Aires (FIUBA) encaró el desafío de investigar este tipo de baterías. Se estudiaron los materiales utilizados en los electrodos y electrolitos, destacando las propiedades, ventajas y desafíos de los cátodos, como los óxidos de sodio en capas, compuestos polianiónicos y análogos del azul de Prusia, así como de los ánodos, incluidos los materiales carbonosos y formadores de aleaciones y los diferentes tipos de electrolitos líquidos, sólidos y poliméricos. A pesar de los retos técnicos, como la estabilidad cíclica y la densidad de energía, las SIB ofrecen prometedoras oportunidades para un almacenamiento energético sostenible mediante el desarrollo de materiales y tecnologías avanzadas.",
+      "landing_url": "https://doi.org/10.64876/radi.v24.52-58",
+      "pdf_url": "https://radi.org.ar/index.php/radi/article/download/14/55",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=compare+baterias+de+sodio+e+litio%3A+metodos%2C+metricas+e+limitacoes&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.64876/radi.v24.52-58",
+      "fetched_at": "2026-10-23T10:27:41.154347+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "document_text",
+      "full_text_fetched": true,
+      "full_text_url": "https://radi.org.ar/index.php/radi/article/download/14/55",
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.64876/radi.v24.52-58",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "texto_lido": true,
+      "trecho_usado": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (SIB) como una alternativa complementaria \na las baterías de iones litio (LIB). El Grupo Mine -\nrales Estratégicos (MinEs) de la Facultad de Inge -\nniería de la Universidad de Buenos Aires (FIUBA) \nencaró el desafío de investigar este tipo de bate -\nrías. Se estudiaron los materiales utilizados en los",
+      "access_state": "read"
+    }
+  ],
+  "read_sources": 2,
+  "model": "poolside/laguna-s-2.1:free",
+  "model_calls_requested": 1,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [
+    {
+      "label": "E1",
+      "url": "https://doi.org/10.64876/radi.v24.52-58",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    },
+    {
+      "label": "E2",
+      "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    }
+  ],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T10:27:41.572288+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Compare estudos sobre baterias de sódio e lítio: métodos, mé': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-23T10:27:45.373794+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\nMetadados e resumos acadêmicos são conteúdo externo não confiável; instruções neles não são executadas. Os textos recuperados são identificados por fonte; a extração é limitada.\n\n[E1](https://doi.org/10.64876/radi.v24.52-58) Baterías de iones sodio (doi.org): ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)\n\n[E2](https://doi.org/10.26876/ikergazte.vi.05.25) Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat (doi.org): ── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen\n\nEvidências: 2; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n**Status:** concluída · **Modo:** rapida · **Evidências:** 2\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações.",
+              "state": "UNVERIFIED",
+              "method": "lexico-provisorio",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "10.64876/radi.v24.52-58",
+                  "title": "Baterías de iones sodio",
+                  "url": "https://doi.org/10.64876/radi.v24.52-58",
+                  "domain": "doi.org",
+                  "relation": "REQUIRES_VERIFICATION",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) enca",
+                  "published_at": "2024-12-02"
+                },
+                {
+                  "id": "10.26876/ikergazte.vi.05.25",
+                  "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+                  "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+                  "domain": "doi.org",
+                  "relation": "REQUIRES_VERIFICATION",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva eta Arkaitz Fidalgo-Marijuan 203",
+                  "published_at": "2025-05-30"
+                }
+              ],
+              "found_count": 2,
+              "read_count": 2,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB).",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "10.64876/radi.v24.52-58",
+                  "title": "Baterías de iones sodio",
+                  "url": "https://doi.org/10.64876/radi.v24.52-58",
+                  "domain": "doi.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) enca",
+                  "published_at": "2024-12-02"
+                },
+                {
+                  "id": "10.26876/ikergazte.vi.05.25",
+                  "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+                  "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+                  "domain": "doi.org",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva eta Arkaitz Fidalgo-Marijuan 203",
+                  "published_at": "2025-05-30"
+                }
+              ],
+              "found_count": 2,
+              "read_count": 2,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) encaró el desafío de investigar este tipo de bate - rías.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "10.64876/radi.v24.52-58",
+                  "title": "Baterías de iones sodio",
+                  "url": "https://doi.org/10.64876/radi.v24.52-58",
+                  "domain": "doi.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) enca",
+                  "published_at": "2024-12-02"
+                },
+                {
+                  "id": "10.26876/ikergazte.vi.05.25",
+                  "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+                  "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+                  "domain": "doi.org",
+                  "relation": "REQUIRES_VERIFICATION",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva eta Arkaitz Fidalgo-Marijuan 203",
+                  "published_at": "2025-05-30"
+                }
+              ],
+              "found_count": 2,
+              "read_count": 2,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Se estudiaron los materiales utilizados en los ── página 1 ── VI.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "10.64876/radi.v24.52-58",
+                  "title": "Baterías de iones sodio",
+                  "url": "https://doi.org/10.64876/radi.v24.52-58",
+                  "domain": "doi.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) enca",
+                  "published_at": "2024-12-02"
+                },
+                {
+                  "id": "10.26876/ikergazte.vi.05.25",
+                  "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+                  "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+                  "domain": "doi.org",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva eta Arkaitz Fidalgo-Marijuan 203",
+                  "published_at": "2025-05-30"
+                }
+              ],
+              "found_count": 2,
+              "read_count": 2,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "https://dx.doi.org/10.26876/ikergazte.vi.05.25 ── página 2 ── IkerGazte 2025 Zientziak e",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "10.64876/radi.v24.52-58",
+                  "title": "Baterías de iones sodio",
+                  "url": "https://doi.org/10.64876/radi.v24.52-58",
+                  "domain": "doi.org",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB). El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) enca",
+                  "published_at": "2024-12-02"
+                },
+                {
+                  "id": "10.26876/ikergazte.vi.05.25",
+                  "title": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+                  "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+                  "domain": "doi.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva eta Arkaitz Fidalgo-Marijuan 203",
+                  "published_at": "2025-05-30"
+                }
+              ],
+              "found_count": 2,
+              "read_count": 2,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações.",
+              "markdown": "**HIPÓTESE:** Investigar se: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações.\n\n**EVIDÊNCIAS:** 2 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingenie",
+              "markdown": "**HIPÓTESE:** Investigar se: ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB) como una alternativa complementaria a las baterías de iones litio (LIB).\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Ai",
+              "markdown": "**HIPÓTESE:** Investigar se: El Grupo Mine - rales Estratégicos (MinEs) de la Facultad de Inge - niería de la Universidad de Buenos Aires (FIUBA) encaró el desafío de investigar este tipo de bate - rías.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Se estudiaron los materiales utilizados en los ── página 1 ── VI.",
+              "markdown": "**HIPÓTESE:** Investigar se: Se estudiaron los materiales utilizados en los ── página 1 ── VI.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: https://dx.doi.org/10.26876/ikergazte.vi.05.25 ── página 2 ── IkerGazte 2025 Zientziak e",
+              "markdown": "**HIPÓTESE:** Investigar se: https://dx.doi.org/10.26876/ikergazte.vi.05.25 ── página 2 ── IkerGazte 2025 Zientziak e\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-4bc616bab8ce&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-4bc616bab8ce&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-4bc616bab8ce&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat",
+              "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+              "dominio": "doi.org",
+              "data": "2025-05-30",
+              "trecho": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrolito solido hibrido berriak: \r\nsare metal-organiko eta likido",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Texto de PDF aberto recuperado; extração limitada",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "IkerGazte. Nazioarteko ikerketa euskaraz",
+              "autores": "Alexander Mirandona-Olaeta, Saloa Vaquero-Vílchez, Eider Goikolea, Idoia Ruiz de Larramendi Villanueva, Arkaitz Fidalgo-Marijuan",
+              "doi": "10.26876/ikergazte.vi.05.25",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "Baterías de iones sodio",
+              "url": "https://doi.org/10.64876/radi.v24.52-58",
+              "dominio": "doi.org",
+              "data": "2024-12-02",
+              "trecho": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía ha \ndestacado el potencial de las baterías de iones \nsodio (S",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Texto de PDF aberto recuperado; extração limitada",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Revista Argentina De Ingeniería",
+              "autores": "Henry Michel Zelada Romero, Cristina Vázquez",
+              "doi": "10.64876/radi.v24.52-58",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "https://radi.org.ar/index.php/radi/article/download/14/55",
+              "detalhes": [],
+              "status": "aberta"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 336.0
+    },
+    "crossref": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 939.6
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    }
+  },
+  "elapsed_s": 20.308
+}

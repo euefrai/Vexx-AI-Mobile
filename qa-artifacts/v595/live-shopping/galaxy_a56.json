@@ -1,0 +1,252 @@
+{
+  "id": "galaxy_a56",
+  "route": "shopping_web",
+  "question": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+    "domain": "general",
+    "original_request": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+    "resolved_request": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:47:45.279389+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Celular | Casas Bahia** · m.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://m.casasbahia.com.br/celular/b",
+  "result": {
+    "produtos": [],
+    "alternativas": [],
+    "source_trace": [],
+    "consultas": [
+      "Celular Samsung Galaxy A56 256 GB Brasil comprar oferta",
+      "Celular Samsung Galaxy \"A56\" 256 GB Brasil comprar Brasil"
+    ],
+    "diagnostico_paginas": [
+      {
+        "url": "https://m.casasbahia.com.br/celular-em-promocao/b",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 848
+      },
+      {
+        "url": "https://m.casasbahia.com.br/celular/b",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 889
+      },
+      {
+        "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1011
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 528
+      },
+      {
+        "url": "https://www.americanas.com.br/celulares-e-smartphones",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 733
+      },
+      {
+        "url": "https://lista.mercadolivre.com.br/celulares",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1164
+      }
+    ],
+    "candidatos": [
+      {
+        "url": "https://m.casasbahia.com.br/celular-em-promocao/b",
+        "titulo": "celular em promocao - Casas Bahia",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://m.casasbahia.com.br/celular/b",
+        "titulo": "Celular | Casas Bahia",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.americanas.com.br/celulares-e-smartphones",
+        "titulo": "Celulares e smartphones: Promoção | Americanas",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://lista.mercadolivre.com.br/celulares",
+        "titulo": "Celulares - Mercado Livre",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://www.tudocelular.com/",
+        "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios",
+        "titulo": "Ofertas TIM: celulares com desconto em até 21x sem juros",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "titulo": "CC-BY-SA 4.0",
+        "tipo": "IRRELEVANT"
+      }
+    ],
+    "encontrados": [
+      {
+        "nome": "Celular | Casas Bahia",
+        "url": "https://m.casasbahia.com.br/celular/b",
+        "loja_dominio": "m.casasbahia.com.br",
+        "motivo_codigo": "bloqueio",
+        "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+        "origem_encontro": "busca"
+      }
+    ],
+    "fontes": [
+      {
+        "id": "S1",
+        "titulo": "celular em promocao - Casas Bahia",
+        "url": "https://m.casasbahia.com.br/celular-em-promocao/b"
+      },
+      {
+        "id": "S2",
+        "titulo": "Celular | Casas Bahia",
+        "url": "https://m.casasbahia.com.br/celular/b"
+      },
+      {
+        "id": "S3",
+        "titulo": "Ofertas TIM: celulares com desconto em até 21x sem juros",
+        "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios"
+      },
+      {
+        "id": "S4",
+        "titulo": "CC-BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "id": "S5",
+        "titulo": "Celulares e smartphones: Promoção | Americanas",
+        "url": "https://www.americanas.com.br/celulares-e-smartphones"
+      },
+      {
+        "id": "S6",
+        "titulo": "Celulares - Mercado Livre",
+        "url": "https://lista.mercadolivre.com.br/celulares"
+      },
+      {
+        "id": "S7",
+        "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "url": "https://www.tudocelular.com/"
+      }
+    ],
+    "criterios": {
+      "categoria": "celular",
+      "orcamento": {},
+      "marcas": [
+        "samsung"
+      ],
+      "specs": {
+        "modelos": [
+          "a56"
+        ],
+        "armazenamento_gb": 256,
+        "armazenamento_exato": true
+      },
+      "comparacao": false,
+      "texto": "Celular Samsung Galaxy A56 256 GB preço Brasil"
+    },
+    "total_bruto": 0,
+    "excluidos": [],
+    "verificacao": {
+      "links": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "imagens": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "descartes_por_codigo": {},
+      "alternativas_por_codigo": {}
+    },
+    "de_cache": false,
+    "verificado_em": "2026-10-23T10:47:54.356776+00:00",
+    "etapas_provedores": [
+      "Celular Samsung Galaxy A56 256 GB Brasil: injetado (teste)",
+      "Celular Samsung Galaxy \"A56\" 256 GB Bras: injetado (teste)"
+    ],
+    "descoberta": {
+      "decisoes": [],
+      "diagnosticos": [
+        "PRODUCT_PAGE_UNAVAILABLE",
+        "STRUCTURED_DATA_MISSING"
+      ],
+      "paginas_disponiveis": 6,
+      "paginas_consultadas": 6,
+      "ondas": 2,
+      "ofertas_extraidas": 0,
+      "confirmadas": 0,
+      "orcamento_esgotado": false,
+      "motivo_final": "no_confirmed_offers"
+    }
+  },
+  "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {},
+      "ms_medio": 423.6
+    },
+    "ddg": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 2
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 4,
+      "erros": {},
+      "ms_medio": 1093.0
+    },
+    "wikipedia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 348.3
+    }
+  },
+  "elapsed_s": 9.083
+}

@@ -1,0 +1,236 @@
+{
+  "id": "book",
+  "route": "shopping_web",
+  "question": "Livro Python Fluente segunda edição preço Brasil",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Livro Python Fluente segunda edição preço Brasil",
+    "domain": "general",
+    "original_request": "Livro Python Fluente segunda edição preço Brasil",
+    "resolved_request": "Livro Python Fluente segunda edição preço Brasil",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:48:56.849490+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **MEC Livros — Ministério da Educação** · www.gov.br — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://www.gov.br/mec/pt-br/mec-livros\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+  "result": {
+    "produtos": [],
+    "alternativas": [],
+    "source_trace": [],
+    "consultas": [
+      "Livro Python Fluente segunda edição Brasil comprar oferta",
+      "Livro Python Fluente segunda edição Brasil comprar Brasil"
+    ],
+    "diagnostico_paginas": [
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 518
+      },
+      {
+        "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011",
+        "codigo": "http",
+        "motivo": "Página HTTP 503.",
+        "ms": 542
+      },
+      {
+        "url": "https://www.gov.br/mec/pt-br/mec-livros",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1023
+      },
+      {
+        "url": "https://livrariapublica.com.br/",
+        "codigo": "listagem",
+        "motivo": "listagem/catálogo (item sem URL própria)",
+        "ms": 655
+      },
+      {
+        "url": "https://www.baixelivros.com.br/",
+        "codigo": "listagem",
+        "motivo": "listagem/catálogo (item sem URL própria)",
+        "ms": 842
+      },
+      {
+        "url": "https://pt.m.wikipedia.org/wiki/Livro",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1093
+      }
+    ],
+    "candidatos": [
+      {
+        "url": "https://pt.m.wikipedia.org/wiki/Livro",
+        "titulo": "Livro – Wikipédia, a enciclopédia livre",
+        "tipo": "EDITORIAL_REFERENCE"
+      },
+      {
+        "url": "https://livrariapublica.com.br/",
+        "titulo": "Livraria Pública - Sua Biblioteca Virtual Gratuita",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://www.baixelivros.com.br/",
+        "titulo": "Baixe Livros - Biblioteca Virtual Gratuita",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://www.gov.br/mec/pt-br/mec-livros",
+        "titulo": "MEC Livros — Ministério da Educação",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011",
+        "titulo": "Livros - Livros Na Amazon.com.br",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://books.google.com.br/",
+        "titulo": "Google Books: Find, Preview, and Read Books Online.",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "titulo": "CC-BY-SA 4.0",
+        "tipo": "IRRELEVANT"
+      }
+    ],
+    "encontrados": [
+      {
+        "nome": "MEC Livros — Ministério da Educação",
+        "url": "https://www.gov.br/mec/pt-br/mec-livros",
+        "loja_dominio": "www.gov.br",
+        "motivo_codigo": "sem_dados",
+        "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+        "origem_encontro": "busca"
+      }
+    ],
+    "fontes": [
+      {
+        "id": "S1",
+        "titulo": "MEC Livros — Ministério da Educação",
+        "url": "https://www.gov.br/mec/pt-br/mec-livros"
+      },
+      {
+        "id": "S2",
+        "titulo": "Livros - Livros Na Amazon.com.br",
+        "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011"
+      },
+      {
+        "id": "S3",
+        "titulo": "CC-BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "id": "S4",
+        "titulo": "Livro – Wikipédia, a enciclopédia livre",
+        "url": "https://pt.m.wikipedia.org/wiki/Livro"
+      },
+      {
+        "id": "S5",
+        "titulo": "Livraria Pública - Sua Biblioteca Virtual Gratuita",
+        "url": "https://livrariapublica.com.br/"
+      },
+      {
+        "id": "S6",
+        "titulo": "Baixe Livros - Biblioteca Virtual Gratuita",
+        "url": "https://www.baixelivros.com.br/"
+      },
+      {
+        "id": "S7",
+        "titulo": "Google Books: Find, Preview, and Read Books Online.",
+        "url": "https://books.google.com.br/"
+      }
+    ],
+    "criterios": {
+      "categoria": "livro",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Livro Python Fluente segunda edição preço Brasil"
+    },
+    "total_bruto": 0,
+    "excluidos": [],
+    "verificacao": {
+      "links": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "imagens": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "descartes_por_codigo": {},
+      "alternativas_por_codigo": {}
+    },
+    "de_cache": false,
+    "verificado_em": "2026-10-23T10:49:14.419983+00:00",
+    "etapas_provedores": [
+      "Livro Python Fluente segunda edição Bras: injetado (teste)",
+      "Livro Python Fluente segunda edição Bras: injetado (teste)"
+    ],
+    "descoberta": {
+      "decisoes": [],
+      "diagnosticos": [
+        "SEARCH_IRRELEVANT",
+        "STRUCTURED_DATA_MISSING"
+      ],
+      "paginas_disponiveis": 6,
+      "paginas_consultadas": 6,
+      "ondas": 2,
+      "ofertas_extraidas": 0,
+      "confirmadas": 0,
+      "orcamento_esgotado": false,
+      "motivo_final": "no_confirmed_offers"
+    }
+  },
+  "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {},
+      "ms_medio": 402.0
+    },
+    "marginalia": {
+      "chamadas": 4,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 1,
+      "erros": {
+        "vazio": 3
+      },
+      "ms_medio": 908.2
+    },
+    "stackexchange": {
+      "chamadas": 4,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 4
+      },
+      "ms_medio": 2512.0
+    }
+  },
+  "elapsed_s": 17.577
+}

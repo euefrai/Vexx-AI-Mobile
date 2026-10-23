@@ -1,0 +1,32 @@
+{
+  "id": "currency",
+  "route": "live_data",
+  "question": "Cotação atual de 1 dólar em reais",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Cotação atual de 1 dólar em reais",
+    "domain": "currency",
+    "original_request": "Cotação atual de 1 dólar em reais",
+    "resolved_request": "Cotação atual de 1 dólar em reais",
+    "parameters": {
+      "base": "USD",
+      "quote": "BRL",
+      "amount": "1"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T10:27:01.939724+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "**1 USD ≈ 5.05 BRL**\n\nTaxa de referência diária: 1 USD = 5.049 BRL. Data da taxa: 2026-10-22 (UTC); horário de publicação não informado. Consulta: 2026-10-23T10:27:01.977400+00:00. Não é uma oferta bancária nem cotação intradiária. [Fonte: ECB via Frankfurter](https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL). Cache de até 5 minutos.\n\n```jdui\n{\"version\": \"JULIA-ui-message/v1\", \"blocks\": [{\"type\": \"ui\", \"component\": \"cards\", \"props\": {\"title\": \"Câmbio de referência\", \"items\": [{\"title\": \"USD → BRL\", \"desc\": \"Referência diária de 2026-10-22; sem impostos ou spread de instituição.\", \"value\": \"5.05 BRL\", \"badge\": \"Referência diária\", \"url\": \"https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=BRL\", \"action\": {}}]}}]}\n```",
+  "model_calls_requested": 0,
+  "provider_metrics": {},
+  "elapsed_s": 0.787
+}

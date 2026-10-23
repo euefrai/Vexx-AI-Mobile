@@ -1,0 +1,179 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+................................................................s....... [ 15%]
+........................................................................ [ 21%]
+........................................................................ [ 26%]
+........................................................................ [ 31%]
+........................................................................ [ 37%]
+........................................................................ [ 42%]
+....................FF.FFFFF............................................ [ 47%]
+..................................................s..................... [ 53%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 69%]
+..............................................s..........s.............. [ 74%]
+........................................................................ [ 79%]
+........................................................................ [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 95%]
+..........................................................               [100%]
+================================== FAILURES ===================================
+_________________ test_falha_interna_mantem_o_tipo_observado __________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E625F0DE0>
+
+    def test_falha_interna_mantem_o_tipo_observado(monkeypatch):
+        def fn(consulta, limite=6, timeout=10.0):
+            raise TypeError("boom")
+        _provedor_fake(monkeypatch, fn)
+        with pytest.raises(sp.ErroProvedor) as ei:
+            sp.buscar("prova-v57", "x")
+>       assert ei.value.codigo == "TypeError"
+E       AssertionError: assert 'bloqueado' == 'TypeError'
+E         
+E         - TypeError
+E         + bloqueado
+
+tests\test_providers_v57.py:100: AssertionError
+______________________ test_rede_ampla_vira_codigo_rede _______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473DD30>
+
+    def test_rede_ampla_vira_codigo_rede(monkeypatch):
+        for exc in (OSError("dns"), TimeoutError("tempo"), ConnectionResetError("reset")):
+            def fn(consulta, limite=6, timeout=10.0, _exc=exc):
+                raise _exc
+            _provedor_fake(monkeypatch, fn)
+            with pytest.raises(sp.ErroProvedor) as ei:
+                sp.buscar("prova-v57", "x")
+>           assert ei.value.codigo == "rede", type(exc).__name__
+E           AssertionError: OSError
+E           assert 'bloqueado' == 'rede'
+E             
+E             - rede
+E             + bloqueado
+
+tests\test_providers_v57.py:111: AssertionError
+__________________ test_http_403_e_429_bloqueado_sem_bypass ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473E0B0>
+
+    def test_http_403_e_429_bloqueado_sem_bypass(monkeypatch):
+        _sem_ssrf(monkeypatch)
+        for codigo in (403, 429):
+            _abrir_http(monkeypatch, erro=codigo)
+            with pytest.raises(sp.ErroProvedor) as ei:
+                sp.buscar("bing", "abs freio")
+            assert ei.value.codigo == "bloqueado", codigo
+>       assert sp.metricas()["bing"]["erros"] == {"bloqueado": 2}
+E       AssertionError: assert {'bloqueado':...cuit_open': 1} == {'bloqueado': 2}
+E         
+E         Differing items:
+E         {'bloqueado': 1} != {'bloqueado': 2}
+E         Left contains 1 more item:
+E         {'circuit_open': 1}
+E         Use -v to get more diff
+
+tests\test_providers_v57.py:129: AssertionError
+____________________ test_http_5xx_e_timeout_classificados ____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473E6D0>
+
+    def test_http_5xx_e_timeout_classificados(monkeypatch):
+        _sem_ssrf(monkeypatch)
+        _abrir_http(monkeypatch, erro=503)
+        with pytest.raises(sp.ErroProvedor) as ei:
+            sp.buscar("bing", "abs freio")
+>       assert ei.value.codigo == "http"
+E       AssertionError: assert 'bloqueado' == 'http'
+E         
+E         - http
+E         + bloqueado
+
+tests\test_providers_v57.py:137: AssertionError
+___________________ test_http_202_sem_corpo_e_vazio_honesto ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473E200>
+
+    def test_http_202_sem_corpo_e_vazio_honesto(monkeypatch):
+        _sem_ssrf(monkeypatch)
+        _abrir_http(monkeypatch, status=202, corpo=b"")
+        with pytest.raises(sp.ErroProvedor) as ei:
+            sp.buscar("bing", "abs freio")
+>       assert ei.value.codigo == "vazio"
+E       AssertionError: assert 'bloqueado' == 'vazio'
+E         
+E         - vazio
+E         + bloqueado
+
+tests\test_providers_v57.py:159: AssertionError
+______________________ test_diagnosticar_inclui_metricas ______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473E890>
+
+    def test_diagnosticar_inclui_metricas(monkeypatch):
+        def fn(consulta, limite=6, timeout=10.0):
+            if consulta == "falha":
+                raise sp.ErroProvedor("sem rede", "rede")
+            return [{"titulo": "T", "url": "https://a.example/1"}]
+        _provedor_fake(monkeypatch, fn)
+        monkeypatch.setattr(sp, "disponiveis", lambda classes=None: ["prova-v57"])
+    
+        linha = sp.diagnosticar("tema", timeout=1.0)[0]
+>       assert linha["estado"] == "ok" and linha["resultados"] == 1
+E       AssertionError: assert ('bloqueado' == 'ok'
+E         
+E         - ok
+E         + bloqueado)
+
+tests\test_providers_v57.py:172: AssertionError
+____________________ test_metricas_provedores_junta_status ____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018E6473EC10>
+
+    def test_metricas_provedores_junta_status(monkeypatch):
+        def fn(consulta, limite=6, timeout=10.0):
+            return [{"titulo": "T", "url": "https://a.example/1"}]
+        _provedor_fake(monkeypatch, fn)
+>       sp.buscar("prova-v57", "tema")
+
+tests\test_providers_v57.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+nome = 'prova-v57', consulta = 'tema', limite = 6, timeout = 10.0
+
+    def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> list:
+        """Executa um provedor; levanta ErroProvedor com c�digo honesto.
+    
+        Cada execu��o alimenta as m�tricas cumulativas (`metricas()`).
+        """
+        meta = PROVEDORES.get(nome)
+        if not meta:
+            raise ErroProvedor(f"Provedor desconhecido: {nome}", "indisponivel")
+        t0 = time.monotonic()
+        core = _research()
+        if core._circuito_fechado(nome):
+            _metrica(nome, t0, erro='circuit_open')
+>           raise ErroProvedor('Provedor em espera ap�s bloqueio; sem nova requisi��o.', 'bloqueado')
+E           search_providers.ErroProvedor: Provedor em espera ap�s bloqueio; sem nova requisi��o.
+
+search_providers.py:621: ErroProvedor
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_providers_v57.py::test_falha_interna_mantem_o_tipo_observado
+FAILED tests/test_providers_v57.py::test_rede_ampla_vira_codigo_rede - Assert...
+FAILED tests/test_providers_v57.py::test_http_403_e_429_bloqueado_sem_bypass
+FAILED tests/test_providers_v57.py::test_http_5xx_e_timeout_classificados - A...
+FAILED tests/test_providers_v57.py::test_http_202_sem_corpo_e_vazio_honesto
+FAILED tests/test_providers_v57.py::test_diagnosticar_inclui_metricas - Asser...
+FAILED tests/test_providers_v57.py::test_metricas_provedores_junta_status - s...
+7 failed, 1343 passed, 4 skipped, 2 warnings in 159.53s (0:02:39)

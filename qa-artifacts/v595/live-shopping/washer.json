@@ -1,0 +1,257 @@
+{
+  "id": "washer",
+  "route": "shopping_web",
+  "question": "Máquina de lavar Brastemp 12 kg preço Brasil",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Máquina de lavar Brastemp 12 kg preço Brasil",
+    "domain": "general",
+    "original_request": "Máquina de lavar Brastemp 12 kg preço Brasil",
+    "resolved_request": "Máquina de lavar Brastemp 12 kg preço Brasil",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:48:44.494687+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Máquina ou maquina? - Português à Letra** · portuguesaletra.com — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+  "result": {
+    "produtos": [],
+    "alternativas": [],
+    "source_trace": [],
+    "consultas": [
+      "Máquina lavar Brastemp 12 kg Brasil comprar oferta",
+      "Máquina lavar Brastemp 12 kg Brasil comprar Brasil"
+    ],
+    "diagnostico_paginas": [
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 619
+      },
+      {
+        "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1341
+      },
+      {
+        "url": "https://shopee.com.br/list/M%C3%A1quina",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1607
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 704
+      },
+      {
+        "url": "https://conceito.de/maquina",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1018
+      },
+      {
+        "url": "https://www.dicio.com.br/maquina/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 2025
+      }
+    ],
+    "candidatos": [
+      {
+        "url": "https://shopee.com.br/list/M%C3%A1quina",
+        "titulo": "Máquina em Oferta | Shopee 2026",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+        "titulo": "Máquina ou maquina? - Português à Letra",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://conceito.de/maquina",
+        "titulo": "Máquina - O que é, tipos, conceito e definição",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://www.dicio.com.br/maquina/",
+        "titulo": "Máquina - Dicio, Dicionário Online de Português",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina",
+        "titulo": "Máquina – Wikipédia, a enciclopédia livre",
+        "tipo": "EDITORIAL_REFERENCE"
+      },
+      {
+        "url": "https://www.todamateria.com.br/maquina-simples/",
+        "titulo": "Máquinas simples: o que são e como funcionam (com exemplos)",
+        "tipo": "UNKNOWN"
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "titulo": "CC-BY-SA 4.0",
+        "tipo": "IRRELEVANT"
+      },
+      {
+        "url": "https://ciba.org.in/blog_single.php?id&#x3D;11",
+        "titulo": "Getting the max out of your email marketing campaign",
+        "tipo": "UNKNOWN"
+      }
+    ],
+    "encontrados": [
+      {
+        "nome": "Máquina ou maquina? - Português à Letra",
+        "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+        "loja_dominio": "portuguesaletra.com",
+        "motivo_codigo": "sem_dados",
+        "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+        "origem_encontro": "busca"
+      }
+    ],
+    "fontes": [
+      {
+        "id": "S1",
+        "titulo": "Máquina ou maquina? - Português à Letra",
+        "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/"
+      },
+      {
+        "id": "S2",
+        "titulo": "CC-BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "id": "S3",
+        "titulo": "Máquina em Oferta | Shopee 2026",
+        "url": "https://shopee.com.br/list/M%C3%A1quina"
+      },
+      {
+        "id": "S4",
+        "titulo": "Máquina - O que é, tipos, conceito e definição",
+        "url": "https://conceito.de/maquina"
+      },
+      {
+        "id": "S5",
+        "titulo": "Máquina - Dicio, Dicionário Online de Português",
+        "url": "https://www.dicio.com.br/maquina/"
+      },
+      {
+        "id": "S6",
+        "titulo": "Máquina – Wikipédia, a enciclopédia livre",
+        "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina"
+      },
+      {
+        "id": "S7",
+        "titulo": "Máquinas simples: o que são e como funcionam (com exemplos)",
+        "url": "https://www.todamateria.com.br/maquina-simples/"
+      },
+      {
+        "id": "S8",
+        "titulo": "Getting the max out of your email marketing campaign",
+        "url": "https://ciba.org.in/blog_single.php?id&#x3D;11"
+      }
+    ],
+    "criterios": {
+      "categoria": "maquina de lavar",
+      "orcamento": {},
+      "marcas": [
+        "brastemp"
+      ],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Máquina de lavar Brastemp 12 kg preço Brasil"
+    },
+    "total_bruto": 0,
+    "excluidos": [],
+    "verificacao": {
+      "links": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "imagens": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "descartes_por_codigo": {},
+      "alternativas_por_codigo": {}
+    },
+    "de_cache": false,
+    "verificado_em": "2026-10-23T10:48:55.144068+00:00",
+    "etapas_provedores": [
+      "Máquina lavar Brastemp 12 kg Brasil comp: injetado (teste)",
+      "Máquina lavar Brastemp 12 kg Brasil comp: injetado (teste)"
+    ],
+    "descoberta": {
+      "decisoes": [],
+      "diagnosticos": [
+        "STRUCTURED_DATA_MISSING"
+      ],
+      "paginas_disponiveis": 6,
+      "paginas_consultadas": 6,
+      "ondas": 2,
+      "ofertas_extraidas": 0,
+      "confirmadas": 0,
+      "orcamento_esgotado": false,
+      "motivo_final": "no_confirmed_offers"
+    }
+  },
+  "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {},
+      "ms_medio": 482.7
+    },
+    "ddg": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 2
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 4,
+      "ok": 3,
+      "vazio": 0,
+      "resultados": 4,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 1051.8
+    },
+    "wikipedia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 354.7
+    }
+  },
+  "elapsed_s": 10.656
+}

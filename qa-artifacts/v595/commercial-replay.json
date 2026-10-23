@@ -1,0 +1,38 @@
+{
+  "scope": "Offline replay of actual captured external products; not a new live offer",
+  "source_capture": "qa-artifacts/v595/commercial-baseline-capture.json",
+  "question": "Qual o preço do Samsung Galaxy A56 256 GB no Brasil agora?",
+  "before_alternatives": [
+    "Smart TV Samsung Vision AI 85\" Crystal UHD 4K U8000H",
+    "Galaxy S26+",
+    "Galaxy S26 Ultra"
+  ],
+  "after_accepted": [],
+  "after_alternatives": [
+    "Galaxy S26+",
+    "Galaxy S26 Ultra"
+  ],
+  "rejected": [
+    {
+      "name": "Smart TV Samsung Vision AI 85\" Crystal UHD 4K U8000H",
+      "codes": [
+        "tipo_produto_diferente",
+        "modelo_nao_confirmado"
+      ]
+    },
+    {
+      "name": "Galaxy S26+",
+      "codes": [
+        "marca_nao_confirmada",
+        "modelo_nao_confirmado"
+      ]
+    },
+    {
+      "name": "Galaxy S26 Ultra",
+      "codes": [
+        "marca_nao_confirmada",
+        "modelo_nao_confirmado"
+      ]
+    }
+  ]
+}

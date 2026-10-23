@@ -1,0 +1,238 @@
+{
+  "id": "sport",
+  "route": "shopping_web",
+  "question": "Bola de basquete Spalding tamanho 7 preço Brasil",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Bola de basquete Spalding tamanho 7 preço Brasil",
+    "domain": "general",
+    "original_request": "Bola de basquete Spalding tamanho 7 preço Brasil",
+    "resolved_request": "Bola de basquete Spalding tamanho 7 preço Brasil",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T10:49:52.632943+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Pesquisei anúncios, mas nenhuma página trouxe dados estruturados verificáveis (preço/foto) para montar cards: os sites consultados bloquearam o acesso automático (403/CAPTCHA) ou não expuseram dados estruturados. Nenhuma restrição do seu pedido limitou a busca — a limitação veio dos sites.",
+  "result": {
+    "produtos": [],
+    "alternativas": [],
+    "source_trace": [],
+    "consultas": [
+      "Bola basquete Spalding tamanho 7 Brasil comprar oferta",
+      "Bola basquete Spalding tamanho 7 Brasil comprar Brasil"
+    ],
+    "diagnostico_paginas": [
+      {
+        "url": "https://www.centauro.com.br/nav/produto/bola",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 431
+      },
+      {
+        "url": "https://www.centauro.com.br/nav/produto/boladefutebol",
+        "codigo": "bloqueio",
+        "motivo": "Provedor bloqueou (403).",
+        "ms": 456
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 548
+      },
+      {
+        "url": "https://www.papodebola.com.br/",
+        "codigo": "listagem",
+        "motivo": "listagem/catálogo (item sem URL própria)",
+        "ms": 1129
+      },
+      {
+        "url": "https://www.abola.pt/",
+        "codigo": "listagem",
+        "motivo": "listagem/catálogo (item sem URL própria)",
+        "ms": 1469
+      },
+      {
+        "url": "https://lista.mercadolivre.com.br/bola",
+        "codigo": "sem_dados",
+        "motivo": "página sem dados estruturados de produto",
+        "ms": 1483
+      }
+    ],
+    "candidatos": [
+      {
+        "url": "https://www.papodebola.com.br/",
+        "titulo": "Papo de Bola | Futebol e Esportes do Brasil e do Mundo",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://www.centauro.com.br/nav/produto/bola",
+        "titulo": "Loja de Bola Online - Centauro",
+        "tipo": "PRODUCT_CANDIDATE"
+      },
+      {
+        "url": "https://lista.mercadolivre.com.br/bola",
+        "titulo": "Bola - Mercado Livre",
+        "tipo": "COMMERCIAL_LISTING"
+      },
+      {
+        "url": "https://www.abola.pt/",
+        "titulo": "Notícias desportivas & mais lidas | A Bola",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://guiadabola.com.br/",
+        "titulo": "Guia da Bola · Onde passa o jogo de hoje, ao vivo",
+        "tipo": "GENERIC_INDEX"
+      },
+      {
+        "url": "https://www.centauro.com.br/nav/produto/boladefutebol",
+        "titulo": "Bola de Futebol | Loja de Bola de Futebol Online | Centauro",
+        "tipo": "PRODUCT_CANDIDATE"
+      },
+      {
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "titulo": "CC-BY-SA 4.0",
+        "tipo": "IRRELEVANT"
+      }
+    ],
+    "encontrados": [],
+    "fontes": [
+      {
+        "id": "S1",
+        "titulo": "Loja de Bola Online - Centauro",
+        "url": "https://www.centauro.com.br/nav/produto/bola"
+      },
+      {
+        "id": "S2",
+        "titulo": "Bola de Futebol | Loja de Bola de Futebol Online | Centauro",
+        "url": "https://www.centauro.com.br/nav/produto/boladefutebol"
+      },
+      {
+        "id": "S3",
+        "titulo": "CC-BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "id": "S4",
+        "titulo": "Papo de Bola | Futebol e Esportes do Brasil e do Mundo",
+        "url": "https://www.papodebola.com.br/"
+      },
+      {
+        "id": "S5",
+        "titulo": "Bola - Mercado Livre",
+        "url": "https://lista.mercadolivre.com.br/bola"
+      },
+      {
+        "id": "S6",
+        "titulo": "Notícias desportivas & mais lidas | A Bola",
+        "url": "https://www.abola.pt/"
+      },
+      {
+        "id": "S7",
+        "titulo": "Guia da Bola · Onde passa o jogo de hoje, ao vivo",
+        "url": "https://guiadabola.com.br/"
+      }
+    ],
+    "criterios": {
+      "categoria": "bola de basquete",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {},
+      "comparacao": false,
+      "texto": "Bola de basquete Spalding tamanho 7 preço Brasil"
+    },
+    "total_bruto": 0,
+    "excluidos": [],
+    "verificacao": {
+      "links": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "imagens": {
+        "verificado": 0,
+        "parcial": 0,
+        "reprovado": 0,
+        "nao_verificado": 0,
+        "total": 0
+      },
+      "descartes_por_codigo": {},
+      "alternativas_por_codigo": {}
+    },
+    "de_cache": false,
+    "verificado_em": "2026-10-23T10:50:00.710823+00:00",
+    "etapas_provedores": [
+      "Bola basquete Spalding tamanho 7 Brasil : injetado (teste)",
+      "Bola basquete Spalding tamanho 7 Brasil : injetado (teste)"
+    ],
+    "descoberta": {
+      "decisoes": [],
+      "diagnosticos": [
+        "PRODUCT_PAGE_UNAVAILABLE",
+        "SEARCH_IRRELEVANT",
+        "STRUCTURED_DATA_MISSING"
+      ],
+      "paginas_disponiveis": 6,
+      "paginas_consultadas": 6,
+      "ondas": 2,
+      "ofertas_extraidas": 0,
+      "confirmadas": 0,
+      "orcamento_esgotado": false,
+      "motivo_final": "no_confirmed_offers"
+    }
+  },
+  "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 4,
+      "ok": 4,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {},
+      "ms_medio": 424.0
+    },
+    "ddg": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 2
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 4,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 1,
+      "erros": {
+        "vazio": 3
+      },
+      "ms_medio": 889.9
+    },
+    "wikipedia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 314.5
+    }
+  },
+  "elapsed_s": 8.084
+}

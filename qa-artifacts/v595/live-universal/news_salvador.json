@@ -1,0 +1,781 @@
+{
+  "id": "news_salvador",
+  "route": "research",
+  "question": "Notícias recentes de Salvador",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Notícias recentes de Salvador",
+    "domain": "news",
+    "original_request": "Notícias recentes de Salvador",
+    "resolved_request": "Notícias recentes de Salvador",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "window_inferred": true
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T10:26:19.346586+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Notícias recentes de Salvador\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-2c3adc84aea7",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Notícias recentes de Salvador",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Notícias recentes de Salvador",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Notícias recentes de Salvador",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Notícias recentes de Salvador",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Notícias recentes de Salvador",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-f3f1f2cdc8a8",
+          "ev-4e087ecf3613",
+          "ev-c053291b1d0a"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-f3f1f2cdc8a8",
+            "title": "Cau Gomez lança primeiro livro infantil em Salvador - ANF - Agência de Notícias das Favelas",
+            "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONzBpTWJGQndFSFdMZ1UwTjVxcjFVb0dhYjJnZ04tVFZHdVI2YTFoUXo3elh1RHJKUEZFMXNmOWpQenpnOWIwVDI1QmhVbnNjcGZwcm56RzQ0ODFRQTJPSngzd2owZWxkZDltNl81NkhJazJvc2hlckRwekxXYXlCZg?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Cau Gomez lança primeiro livro infantil em Salvador ANF - Agência de Notícias das Favelas",
+            "published_at": "Wed, 21 Oct 2026 22:43:41 GMT"
+          },
+          {
+            "evidence_id": "ev-4e087ecf3613",
+            "title": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas - Estadão",
+            "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTG5iWVgyeXpsN3NVSmZNMDdoNnFDbFoxbmYxNmc1V3hlOVV6UzFjTkpUZU0zRjJFcW1JUF8zYy1Ha2hNQ0VKc2MwUjVuczl1ODRwd3ZzcnM4dGZEcEY0ZlZKNkh5STRNQ2REUlRQMEd3Sk1NRTA1QXJPZ25xdWsySmJnVFFrTkJvV09jbmpBQ0pCU3NucTctc1UxcGpJUnctTi1CMkFlTXc3RmVLSnFQNENvWGVEYkgwMUFPdGQ1dzF4MHllRWRBQkIxbmJkR2dDc2fSAdcBQVVfeXFMUGd4ZVltaXJLemJtLW5BYUdKSExNX0FJc255dFZEa2Vtei1aRXhHVTdfS1FrdkNTRHhRWUo5ejM4X2ZGd2FZc2taSXdnb2daYlp3c2JUb0hycGZDUXVMTElPMHhVeE1rUzVEc1lmaEtFakRjS3JSbXdEMDZjYlRJOVd",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas Estadão",
+            "published_at": "Sat, 17 Oct 2026 21:14:36 GMT"
+          },
+          {
+            "evidence_id": "ev-c053291b1d0a",
+            "title": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador - G1",
+            "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGhvamI1RWRkS19LdTg0eUlhblhldXZ4cFZJeVM0ZmdxNlM1Q2xia0VSczV4eUhqM1NwSF9uS0gtZThyS1MxbHJlNE1tbzVaSzZ2NUlIQms1aGhlVzdCVjAyRWgxeGlybWRnS21ycDRvQmNBSVM4TDRaZUNKVlNkcnByVG9ZMkNiMFhuSXNhR1d3cjMxY1piV1gxakNZbGplbk84WGZKUEY2RmdnS1ZKMGNhbWtUeHpGV3VXR2NORUJNd1l3RkHSAdQBQVVfeXFMUFdTUmxKMWkyZExMTlpBakdiUUF3eUhoWDNtZEFsQ2hyR19WUkw3aXBnWkF2b3ppVTB1bnVzbkEtdTBVU2FhOWpkUUczSWRaMzlGZERwSkFyZFpmaVk1bVlhSXVycE5tQXJtNk9Zam1ZVlFrTnFlejAtLWxqZzZoc1ZNT2lOMkUwOGVYeGl",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador G1",
+            "published_at": "Tue, 20 Oct 2026 16:14:50 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Notícias recentes de Salvador\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "8cf6624cdaa056b65650",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-2c3adc84aea7",
+        "statement": "Investigar se: Notícias recentes de Salvador",
+        "status": "open",
+        "evidence_ids": [
+          "ev-f3f1f2cdc8a8",
+          "ev-4e087ecf3613",
+          "ev-c053291b1d0a"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Notícias recentes de Salvador"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "noticias recentes de salvador": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 2053
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-4e087ecf3613",
+        "ev-c053291b1d0a",
+        "ev-f3f1f2cdc8a8"
+      ],
+      "synthesis_attempted": true,
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Notícias recentes de Salvador fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-4e087ecf3613",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTG5iWVgyeXpsN3NVSmZNMDdoNnFDbFoxbmYxNmc1V3hlOVV6UzFjTkpUZU0zRjJFcW1JUF8zYy1Ha2hNQ0VKc2MwUjVuczl1ODRwd3ZzcnM4dGZEcEY0ZlZKNkh5STRNQ2REUlRQMEd3Sk1NRTA1QXJPZ25xdWsySmJnVFFrTkJvV09jbmpBQ0pCU3NucTctc1UxcGpJUnctTi1CMkFlTXc3RmVLSnFQNENvWGVEYkgwMUFPdGQ1dzF4MHllRWRBQkIxbmJkR2dDc2fSAdcBQVVfeXFMUGd4ZVltaXJLemJtLW5BYUdKSExNX0FJc255dFZEa2Vtei1aRXhHVTdfS1FrdkNTRHhRWUo5ejM4X2ZGd2FZc2taSXdnb2daYlp3c2JUb0hycGZDUXVMTElPMHhVeE1rUzVEc1lmaEtFakRjS3JSbXdEMDZjYlRJOVd",
+      "titulo": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas - Estadão",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T10:26:21.510025+00:00",
+      "publicado_em": "Sat, 17 Oct 2026 21:14:36 GMT",
+      "trecho": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas Estadão",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTG5iWVgyeXpsN3NVSmZNMDdoNnFDbFoxbmYxNmc1V3hlOVV6UzFjTkpUZU0zRjJFcW1JUF8zYy1Ha2hNQ0VKc2MwUjVuczl1ODRwd3ZzcnM4dGZEcEY0ZlZKNkh5STRNQ2REUlRQMEd3Sk1NRTA1QXJPZ25xdWsySmJnVFFrTkJvV09jbmpBQ0pCU3NucTctc1UxcGpJUnctTi1CMkFlTXc3RmVLSnFQNENvWGVEYkgwMUFPdGQ1dzF4MHllRWRBQkIxbmJkR2dDc2fSAdcBQVVfeXFMUGd4ZVltaXJLemJtLW5BYUdKSExNX0FJc255dFZEa2Vtei1aRXhHVTdfS1FrdkNTRHhRWUo5ejM4X2ZGd2FZc2taSXdnb2daYlp3c2JUb0hycGZDUXVMTElPMHhVeE1rUzVEc1lmaEtFakRjS3JSbXdEMDZjYlRJOVd",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Sat, 17 Oct 2026 21:14:36 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Estadão",
+      "texto_lido": false,
+      "trecho_usado": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas Estadão",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-c053291b1d0a",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGhvamI1RWRkS19LdTg0eUlhblhldXZ4cFZJeVM0ZmdxNlM1Q2xia0VSczV4eUhqM1NwSF9uS0gtZThyS1MxbHJlNE1tbzVaSzZ2NUlIQms1aGhlVzdCVjAyRWgxeGlybWRnS21ycDRvQmNBSVM4TDRaZUNKVlNkcnByVG9ZMkNiMFhuSXNhR1d3cjMxY1piV1gxakNZbGplbk84WGZKUEY2RmdnS1ZKMGNhbWtUeHpGV3VXR2NORUJNd1l3RkHSAdQBQVVfeXFMUFdTUmxKMWkyZExMTlpBakdiUUF3eUhoWDNtZEFsQ2hyR19WUkw3aXBnWkF2b3ppVTB1bnVzbkEtdTBVU2FhOWpkUUczSWRaMzlGZERwSkFyZFpmaVk1bVlhSXVycE5tQXJtNk9Zam1ZVlFrTnFlejAtLWxqZzZoc1ZNT2lOMkUwOGVYeGl",
+      "titulo": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador - G1",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T10:26:21.516056+00:00",
+      "publicado_em": "Tue, 20 Oct 2026 16:14:50 GMT",
+      "trecho": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador G1",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGhvamI1RWRkS19LdTg0eUlhblhldXZ4cFZJeVM0ZmdxNlM1Q2xia0VSczV4eUhqM1NwSF9uS0gtZThyS1MxbHJlNE1tbzVaSzZ2NUlIQms1aGhlVzdCVjAyRWgxeGlybWRnS21ycDRvQmNBSVM4TDRaZUNKVlNkcnByVG9ZMkNiMFhuSXNhR1d3cjMxY1piV1gxakNZbGplbk84WGZKUEY2RmdnS1ZKMGNhbWtUeHpGV3VXR2NORUJNd1l3RkHSAdQBQVVfeXFMUFdTUmxKMWkyZExMTlpBakdiUUF3eUhoWDNtZEFsQ2hyR19WUkw3aXBnWkF2b3ppVTB1bnVzbkEtdTBVU2FhOWpkUUczSWRaMzlGZERwSkFyZFpmaVk1bVlhSXVycE5tQXJtNk9Zam1ZVlFrTnFlejAtLWxqZzZoc1ZNT2lOMkUwOGVYeGl",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Tue, 20 Oct 2026 16:14:50 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "G1",
+      "texto_lido": false,
+      "trecho_usado": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador G1",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-f3f1f2cdc8a8",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONzBpTWJGQndFSFdMZ1UwTjVxcjFVb0dhYjJnZ04tVFZHdVI2YTFoUXo3elh1RHJKUEZFMXNmOWpQenpnOWIwVDI1QmhVbnNjcGZwcm56RzQ0ODFRQTJPSngzd2owZWxkZDltNl81NkhJazJvc2hlckRwekxXYXlCZg?oc=5",
+      "titulo": "Cau Gomez lança primeiro livro infantil em Salvador - ANF - Agência de Notícias das Favelas",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T10:26:21.496818+00:00",
+      "publicado_em": "Wed, 21 Oct 2026 22:43:41 GMT",
+      "trecho": "Cau Gomez lança primeiro livro infantil em Salvador ANF - Agência de Notícias das Favelas",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONzBpTWJGQndFSFdMZ1UwTjVxcjFVb0dhYjJnZ04tVFZHdVI2YTFoUXo3elh1RHJKUEZFMXNmOWpQenpnOWIwVDI1QmhVbnNjcGZwcm56RzQ0ODFRQTJPSngzd2owZWxkZDltNl81NkhJazJvc2hlckRwekxXYXlCZg?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Wed, 21 Oct 2026 22:43:41 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "ANF - Agência de Notícias das Favelas",
+      "texto_lido": false,
+      "trecho_usado": "Cau Gomez lança primeiro livro infantil em Salvador ANF - Agência de Notícias das Favelas",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": "poolside/laguna-s-2.1:free",
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T10:26:21.481863+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Notícias recentes de Salvador': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok"
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Notícias recentes de Salvador\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Notícias recentes de Salvador\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Notícias recentes de Salvador",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Notícias recentes de Salvador",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Notícias recentes de Salvador",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Notícias recentes de Salvador",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Notícias recentes de Salvador",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-f3f1f2cdc8a8",
+                  "title": "Cau Gomez lança primeiro livro infantil em Salvador - ANF - Agência de Notícias das Favelas",
+                  "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONzBpTWJGQndFSFdMZ1UwTjVxcjFVb0dhYjJnZ04tVFZHdVI2YTFoUXo3elh1RHJKUEZFMXNmOWpQenpnOWIwVDI1QmhVbnNjcGZwcm56RzQ0ODFRQTJPSngzd2owZWxkZDltNl81NkhJazJvc2hlckRwekxXYXlCZg?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Cau Gomez lança primeiro livro infantil em Salvador ANF - Agência de Notícias das Favelas",
+                  "published_at": "Wed, 21 Oct 2026 22:43:41 GMT"
+                },
+                {
+                  "id": "ev-4e087ecf3613",
+                  "title": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas - Estadão",
+                  "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTG5iWVgyeXpsN3NVSmZNMDdoNnFDbFoxbmYxNmc1V3hlOVV6UzFjTkpUZU0zRjJFcW1JUF8zYy1Ha2hNQ0VKc2MwUjVuczl1ODRwd3ZzcnM4dGZEcEY0ZlZKNkh5STRNQ2REUlRQMEd3Sk1NRTA1QXJPZ25xdWsySmJnVFFrTkJvV09jbmpBQ0pCU3NucTctc1UxcGpJUnctTi1CMkFlTXc3RmVLSnFQNENvWGVEYkgwMUFPdGQ1dzF4MHllRWRBQkIxbmJkR2dDc2fSAdcBQVVfeXFMUGd4ZVltaXJLemJtLW5BYUdKSExNX0FJc255dFZEa2Vtei1aRXhHVTdfS1FrdkNTRHhRWUo5ejM4X2ZGd2FZc2taSXdnb2daYlp3c2JUb0hycGZDUXVMTElPMHhVeE1rUzVEc1lmaEtFakRjS3JSbXdEMDZjYlRJOVd",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas Estadão",
+                  "published_at": "Sat, 17 Oct 2026 21:14:36 GMT"
+                },
+                {
+                  "id": "ev-c053291b1d0a",
+                  "title": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador - G1",
+                  "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGhvamI1RWRkS19LdTg0eUlhblhldXZ4cFZJeVM0ZmdxNlM1Q2xia0VSczV4eUhqM1NwSF9uS0gtZThyS1MxbHJlNE1tbzVaSzZ2NUlIQms1aGhlVzdCVjAyRWgxeGlybWRnS21ycDRvQmNBSVM4TDRaZUNKVlNkcnByVG9ZMkNiMFhuSXNhR1d3cjMxY1piV1gxakNZbGplbk84WGZKUEY2RmdnS1ZKMGNhbWtUeHpGV3VXR2NORUJNd1l3RkHSAdQBQVVfeXFMUFdTUmxKMWkyZExMTlpBakdiUUF3eUhoWDNtZEFsQ2hyR19WUkw3aXBnWkF2b3ppVTB1bnVzbkEtdTBVU2FhOWpkUUczSWRaMzlGZERwSkFyZFpmaVk1bVlhSXVycE5tQXJtNk9Zam1ZVlFrTnFlejAtLWxqZzZoc1ZNT2lOMkUwOGVYeGl",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador G1",
+                  "published_at": "Tue, 20 Oct 2026 16:14:50 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Notícias recentes de Salvador",
+              "markdown": "**HIPÓTESE:** Investigar se: Notícias recentes de Salvador\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-2c3adc84aea7&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-2c3adc84aea7&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-2c3adc84aea7&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas - Estadão",
+              "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTG5iWVgyeXpsN3NVSmZNMDdoNnFDbFoxbmYxNmc1V3hlOVV6UzFjTkpUZU0zRjJFcW1JUF8zYy1Ha2hNQ0VKc2MwUjVuczl1ODRwd3ZzcnM4dGZEcEY0ZlZKNkh5STRNQ2REUlRQMEd3Sk1NRTA1QXJPZ25xdWsySmJnVFFrTkJvV09jbmpBQ0pCU3NucTctc1UxcGpJUnctTi1CMkFlTXc3RmVLSnFQNENvWGVEYkgwMUFPdGQ1dzF4MHllRWRBQkIxbmJkR2dDc2fSAdcBQVVfeXFMUGd4ZVltaXJLemJtLW5BYUdKSExNX0FJc255dFZEa2Vtei1aRXhHVTdfS1FrdkNTRHhRWUo5ejM4X2ZGd2FZc2taSXdnb2daYlp3c2JUb0hycGZDUXVMTElPMHhVeE1rUzVEc1lmaEtFakRjS3JSbXdEMDZjYlRJOVd",
+              "dominio": "news.google.com",
+              "data": "Sat, 17 Oct 2026 21:14:36 GMT",
+              "trecho": "Flávio percorre orla de Salvador entre gritos de ‘volta Bolsonaro’ e provocações de petistas Estadão",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Estadão",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador - G1",
+              "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPdGhvamI1RWRkS19LdTg0eUlhblhldXZ4cFZJeVM0ZmdxNlM1Q2xia0VSczV4eUhqM1NwSF9uS0gtZThyS1MxbHJlNE1tbzVaSzZ2NUlIQms1aGhlVzdCVjAyRWgxeGlybWRnS21ycDRvQmNBSVM4TDRaZUNKVlNkcnByVG9ZMkNiMFhuSXNhR1d3cjMxY1piV1gxakNZbGplbk84WGZKUEY2RmdnS1ZKMGNhbWtUeHpGV3VXR2NORUJNd1l3RkHSAdQBQVVfeXFMUFdTUmxKMWkyZExMTlpBakdiUUF3eUhoWDNtZEFsQ2hyR19WUkw3aXBnWkF2b3ppVTB1bnVzbkEtdTBVU2FhOWpkUUczSWRaMzlGZERwSkFyZFpmaVk1bVlhSXVycE5tQXJtNk9Zam1ZVlFrTnFlejAtLWxqZzZoc1ZNT2lOMkUwOGVYeGl",
+              "dominio": "news.google.com",
+              "data": "Tue, 20 Oct 2026 16:14:50 GMT",
+              "trecho": "Professor Bira, geógrafo e educador do IFBA, morre aos 51 anos em Salvador G1",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "G1",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Cau Gomez lança primeiro livro infantil em Salvador - ANF - Agência de Notícias das Favelas",
+              "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONzBpTWJGQndFSFdMZ1UwTjVxcjFVb0dhYjJnZ04tVFZHdVI2YTFoUXo3elh1RHJKUEZFMXNmOWpQenpnOWIwVDI1QmhVbnNjcGZwcm56RzQ0ODFRQTJPSngzd2owZWxkZDltNl81NkhJazJvc2hlckRwekxXYXlCZg?oc=5",
+              "dominio": "news.google.com",
+              "data": "Wed, 21 Oct 2026 22:43:41 GMT",
+              "trecho": "Cau Gomez lança primeiro livro infantil em Salvador ANF - Agência de Notícias das Favelas",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "ANF - Agência de Notícias das Favelas",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 435.8
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 534.1
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 1060.9
+    }
+  },
+  "elapsed_s": 2.236
+}

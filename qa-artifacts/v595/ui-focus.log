@@ -1,0 +1,9 @@
+### Result
+{
+  "tag": "A",
+  "href": "https://doi.org/10.26876/ikergazte.vi.05.25"
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({tag:document.activeElement.tagName,href:document.activeElement.href})');
+```

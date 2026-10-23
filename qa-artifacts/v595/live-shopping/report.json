@@ -1,0 +1,4326 @@
+{
+  "schema": "vexx-live-research-evaluation/v1",
+  "started_at": "2026-10-23T10:47:44.308235+00:00",
+  "scope": "live component pipelines; temporary SQLite; not authenticated UI",
+  "case_timeout_s": 65,
+  "cases": [
+    {
+      "id": "galaxy_a56",
+      "route": "shopping_web",
+      "question": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+        "domain": "general",
+        "original_request": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+        "resolved_request": "Celular Samsung Galaxy A56 256 GB preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:47:45.279389+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Celular | Casas Bahia** · m.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://m.casasbahia.com.br/celular/b",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Celular Samsung Galaxy A56 256 GB Brasil comprar oferta",
+          "Celular Samsung Galaxy \"A56\" 256 GB Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://m.casasbahia.com.br/celular-em-promocao/b",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 848
+          },
+          {
+            "url": "https://m.casasbahia.com.br/celular/b",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 889
+          },
+          {
+            "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1011
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 528
+          },
+          {
+            "url": "https://www.americanas.com.br/celulares-e-smartphones",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 733
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/celulares",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1164
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://m.casasbahia.com.br/celular-em-promocao/b",
+            "titulo": "celular em promocao - Casas Bahia",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://m.casasbahia.com.br/celular/b",
+            "titulo": "Celular | Casas Bahia",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.americanas.com.br/celulares-e-smartphones",
+            "titulo": "Celulares e smartphones: Promoção | Americanas",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/celulares",
+            "titulo": "Celulares - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.tudocelular.com/",
+            "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios",
+            "titulo": "Ofertas TIM: celulares com desconto em até 21x sem juros",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Celular | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/celular/b",
+            "loja_dominio": "m.casasbahia.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "celular em promocao - Casas Bahia",
+            "url": "https://m.casasbahia.com.br/celular-em-promocao/b"
+          },
+          {
+            "id": "S2",
+            "titulo": "Celular | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/celular/b"
+          },
+          {
+            "id": "S3",
+            "titulo": "Ofertas TIM: celulares com desconto em até 21x sem juros",
+            "url": "https://www.tim.com.br/celular/aparelhos-e-acessorios"
+          },
+          {
+            "id": "S4",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Celulares e smartphones: Promoção | Americanas",
+            "url": "https://www.americanas.com.br/celulares-e-smartphones"
+          },
+          {
+            "id": "S6",
+            "titulo": "Celulares - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/celulares"
+          },
+          {
+            "id": "S7",
+            "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+            "url": "https://www.tudocelular.com/"
+          }
+        ],
+        "criterios": {
+          "categoria": "celular",
+          "orcamento": {},
+          "marcas": [
+            "samsung"
+          ],
+          "specs": {
+            "modelos": [
+              "a56"
+            ],
+            "armazenamento_gb": 256,
+            "armazenamento_exato": true
+          },
+          "comparacao": false,
+          "texto": "Celular Samsung Galaxy A56 256 GB preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:47:54.356776+00:00",
+        "etapas_provedores": [
+          "Celular Samsung Galaxy A56 256 GB Brasil: injetado (teste)",
+          "Celular Samsung Galaxy \"A56\" 256 GB Bras: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 423.6
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 4,
+          "erros": {},
+          "ms_medio": 1093.0
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 348.3
+        }
+      },
+      "elapsed_s": 9.083
+    },
+    {
+      "id": "lenovo",
+      "route": "shopping_web",
+      "question": "Notebook Lenovo IdeaPad 16 GB RAM preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Notebook Lenovo IdeaPad 16 GB RAM preço Brasil",
+        "domain": "general",
+        "original_request": "Notebook Lenovo IdeaPad 16 GB RAM preço Brasil",
+        "resolved_request": "Notebook Lenovo IdeaPad 16 GB RAM preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:47:55.533652+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei **2** notebook com dados estruturados reais:\n- **Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300** — R$ 5.532,99 · kabum.com.br · _link não verificado_\n- **Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300** — R$ 11.470,87 · kabum.com.br · _link não verificado_\n- _Próxima do pedido_: **Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SS** — R$ 11.400,19 _(outra marca: dell (pedido: lenovo) · RAM 8GB (pedido: 16GB))_\n- _Próxima do pedido_: **Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb ** — R$ 4.099,00 _(outra marca: asus (pedido: lenovo))_\n\n_Outras 1 página(s) achadas na busca — não verificadas:_\n  - Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu · www.magazineluiza.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_ — https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+      "result": {
+        "produtos": [
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "marca": "KaBuM!",
+            "modelo": "1037468",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_original.jpg",
+            "descricao": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 Desempenho Inteligente e Processamento Avançado O Notebook Lenovo IdeaPad Slim 3 foi rigorosamente projetado para entregar alta performance e eficiência para a sua rotina diária de trabalho, estudos ou entretenimento. O coração desta máquina é o potente pro",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "preco": 5532.99,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 5.532,99",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:04.067561+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 5532.99,
+                "moeda": "BRL",
+                "preco_texto": "R$ 5.532,99",
+                "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:04.067561+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [
+              "RAM física não informada"
+            ],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "marca": "KaBuM!",
+            "modelo": "1003399",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_original.jpg",
+            "descricao": "Lenovo LOQ 15IRX9 Performance de Elite com Intel Core i5 e NVIDIA RTX 4050 O Lenovo LOQ 15IRX9 foi projetado para quem não aceita menos que a máxima potência em suas tarefas. Equipado com o processador Intel Core i5-13450HX, que conta com 10 núcleos e 16 threads, este notebook entrega uma capacidade",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "preco": 11470.87,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.470,87",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:04.067653+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11470.87,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.470,87",
+                "url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:04.067653+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [
+              "RAM física não informada"
+            ],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          }
+        ],
+        "alternativas": [
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "marca": "KaBuM!",
+            "modelo": "1066088",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_original.jpg",
+            "descricao": "Notebook Gamer Dell Alienware 15 Potência e Performance Inigualáveis Para você que busca superar todos os limites, este equipamento conta com o moderno processador Intel Core 5 210H de Série 2. Com 8 núcleos, incríveis 12MB de cache e frequência alcançando até 4.8 GHz, você terá uma capacidade de pr",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "preco": 11400.19,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.400,19",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:04.067731+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11400.19,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.400,19",
+                "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:04.067731+00:00"
+              }
+            ],
+            "correspondencia_tipo": "ALTERNATIVE",
+            "excluido_por": "marca diferente do pedido (dell; pedido: lenovo); RAM física abaixo do pedido (8GB)",
+            "excluido_codigos": [
+              "marca_diferente",
+              "ram_abaixa"
+            ],
+            "diferencas": "outra marca: dell (pedido: lenovo) · RAM 8GB (pedido: 16GB)",
+            "diferencas_lista": [
+              "outra marca: dell (pedido: lenovo)",
+              "RAM 8GB (pedido: 16GB)"
+            ],
+            "distancia": 0.5
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "marca": "Magalu",
+            "modelo": "649861",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/xlarge/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+            "descricao": "ASUS Vivobook Go 15O notebook projetado para ser seu parceiro ideal, combinando produtividade e entretenimento em um formato compacto e leve.Com o poderoso processador AMD Ryzen 5 7520U, 16 GB de memória RAM LPDDR5 e um SSD de até 512 GB, este notebook garante desempenho excelente para suas tarefas ",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "preco": 4099.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 4.099,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:04.067803+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 4099.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 4.099,00",
+                "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:04.067803+00:00"
+              }
+            ],
+            "correspondencia_tipo": "ALTERNATIVE",
+            "excluido_por": "marca diferente do pedido (asus; pedido: lenovo)",
+            "excluido_codigos": [
+              "marca_diferente"
+            ],
+            "diferencas": "outra marca: asus (pedido: lenovo)",
+            "diferencas_lista": [
+              "outra marca: asus (pedido: lenovo)"
+            ],
+            "distancia": 0.55
+          }
+        ],
+        "source_trace": [
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "product": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "product": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "product": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "variant": "",
+            "match": "ALTERNATIVE",
+            "mismatches": [
+              "marca_diferente",
+              "ram_abaixa"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "product": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "variant": "",
+            "match": "ALTERNATIVE",
+            "mismatches": [
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Notebook Lenovo IdeaPad 16 GB RAM Brasil comprar oferta",
+          "Notebook Lenovo IdeaPad 16 GB RAM Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 401
+          },
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 604
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 2200,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "listagem": false
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 527
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/notebook",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 970
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 2029
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/notebook",
+            "titulo": "Notebook - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "loja_dominio": "www.magazineluiza.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "url": "https://www.kabum.com.br/computadores/notebooks"
+          },
+          {
+            "id": "S2",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook"
+          },
+          {
+            "id": "S3",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+          },
+          {
+            "id": "S4",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "url": "https://notebook.google/?hl=pt-BR"
+          },
+          {
+            "id": "S6",
+            "titulo": "Notebook - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/notebook"
+          },
+          {
+            "id": "S7",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/"
+          }
+        ],
+        "criterios": {
+          "categoria": "notebook",
+          "orcamento": {},
+          "marcas": [
+            "lenovo"
+          ],
+          "specs": {
+            "ram_fisica_gb": 16
+          },
+          "comparacao": false,
+          "texto": "Notebook Lenovo IdeaPad 16 GB RAM preço Brasil"
+        },
+        "total_bruto": 4,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 4,
+            "total": 4
+          },
+          "imagens": {
+            "verificado": 2,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 2
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {
+            "marca_diferente": 2,
+            "ram_abaixa": 1
+          }
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:48:09.762937+00:00",
+        "etapas_provedores": [
+          "Notebook Lenovo IdeaPad 16 GB RAM Brasil: injetado (teste)",
+          "Notebook Lenovo IdeaPad 16 GB RAM Brasil: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_MISMATCH",
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING",
+            "VARIANT_MISMATCH"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 384.5
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 2,
+          "vazio": 0,
+          "resultados": 2,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 935.8
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 454.3
+        }
+      },
+      "elapsed_s": 14.234
+    },
+    {
+      "id": "basketball_shoes",
+      "route": "shopping_web",
+      "question": "Tênis de basquete Nike preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Tênis de basquete Nike preço Brasil",
+        "domain": "general",
+        "original_request": "Tênis de basquete Nike preço Brasil",
+        "resolved_request": "Tênis de basquete Nike preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:48:10.995846+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Pesquisei anúncios, mas nenhuma página trouxe dados estruturados verificáveis (preço/foto) para montar cards: os sites consultados bloquearam o acesso automático (403/CAPTCHA) ou não expuseram dados estruturados.",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Tênis basquete Nike Brasil comprar oferta",
+          "Tênis basquete Nike Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.netshoes.com.br/busca/tenis",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 428
+          },
+          {
+            "url": "https://www.centauro.com.br/nav/produto/tenis",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 432
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 507
+          },
+          {
+            "url": "https://www.wtennis.com.br/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 1060
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/tenis",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1109
+          },
+          {
+            "url": "https://www.brooksrunning.com.br/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1431
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.netshoes.com.br/busca/tenis",
+            "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.brooksrunning.com.br/",
+            "titulo": "Brooks Running Brasil - Tênis esportivo para corrida de Alta Performance",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.wtennis.com.br/",
+            "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/tenis",
+            "titulo": "Tenis - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.centauro.com.br/nav/produto/tenis",
+            "titulo": "Loja de Tênis Online - Centauro",
+            "tipo": "PRODUCT_CANDIDATE"
+          },
+          {
+            "url": "https://www.centauro.com.br/",
+            "titulo": "Centauro Loja de Esportes",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.lowcardmag.com/news/assault-skateboards-11/comment-page-10/",
+            "titulo": "Assault Skateboards… | Lowcard Mag",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          },
+          {
+            "url": "https://www.lowcardmag.com/news/417-skateboard-shop/comment-page-24/",
+            "titulo": "41/7 Skateboard Shop… | Lowcard Mag",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://www.lowcardmag.com/news/welcome-to-vox-brandon-perelson/comment-page-3/",
+            "titulo": "Welcome to VOX – Brandon Perelson | Lowcard Mag",
+            "tipo": "EDITORIAL_REFERENCE"
+          }
+        ],
+        "encontrados": [],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Loja de Tênis Online - Centauro",
+            "url": "https://www.centauro.com.br/nav/produto/tenis"
+          },
+          {
+            "id": "S2",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S3",
+            "titulo": "Tênis: Nike, Adidas, Olympikus, New Balance e Mais!",
+            "url": "https://www.netshoes.com.br/busca/tenis"
+          },
+          {
+            "id": "S4",
+            "titulo": "Brooks Running Brasil - Tênis esportivo para corrida de Alta Performance",
+            "url": "https://www.brooksrunning.com.br/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Tênis de Corrida, Casual e Esportivos Originais",
+            "url": "https://www.wtennis.com.br/"
+          },
+          {
+            "id": "S6",
+            "titulo": "Tenis - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/tenis"
+          },
+          {
+            "id": "S7",
+            "titulo": "Centauro Loja de Esportes",
+            "url": "https://www.centauro.com.br/"
+          },
+          {
+            "id": "S8",
+            "titulo": "Assault Skateboards… | Lowcard Mag",
+            "url": "https://www.lowcardmag.com/news/assault-skateboards-11/comment-page-10/"
+          }
+        ],
+        "criterios": {
+          "categoria": "tenis",
+          "orcamento": {},
+          "marcas": [
+            "nike"
+          ],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Tênis de basquete Nike preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:48:19.859815+00:00",
+        "etapas_provedores": [
+          "Tênis basquete Nike Brasil comprar ofert: injetado (teste)",
+          "Tênis basquete Nike Brasil comprar Brasi: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 450.6
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 2,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 996.1
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 499.4
+        }
+      },
+      "elapsed_s": 8.872
+    },
+    {
+      "id": "bluetooth",
+      "route": "shopping_web",
+      "question": "Fone Bluetooth JBL preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Fone Bluetooth JBL preço Brasil",
+        "domain": "general",
+        "original_request": "Fone Bluetooth JBL preço Brasil",
+        "resolved_request": "Fone Bluetooth JBL preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:48:21.453709+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei **4** fone com dados estruturados reais:\n- **Fone de Ouvido Intra-Auricular JBL Tune 110, com Fio e Microfone, Pure Bass, Preto - JBLT110BLKE** — R$ 133,32 · kabum.com.br · _link não verificado_\n- **Fone de Ouvido JBL Tune 310C, USB-C, Azul - 28913775** — R$ 168,41 · kabum.com.br · _link não verificado_\n- **Fone de Ouvido On-Ear JBL Tune 530BT, Bluetooth, Bateria Longa Duração, Som Pure Bass, Preto - JBLT530BTBLKBR** — R$ 344,43 · kabum.com.br · _link não verificado_\n- **Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK** — R$ 466,66 · kabum.com.br · _link não verificado_",
+      "result": {
+        "produtos": [
+          {
+            "id": "01c22a651f76ffb96ca71655",
+            "nome": "Fone de Ouvido Intra-Auricular JBL Tune 110, com Fio e Microfone, Pure Bass, Preto - JBLT110BLKE",
+            "marca": "KaBuM!",
+            "modelo": "947298",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/947298/fone-de-ouvido-intra-auricular-jbl-tune-110-com-fio-com-microfone-preto-jblt110blke_1766510821_original.jpg",
+            "descricao": "Fone de Ouvido JBL Tune 110: Graves que Impressionam, Pronto para o Dia a Dia Som JBL Pure Bass Há mais de 60 anos, a JBL projeta o som preciso e impressionante encontrado em grandes locais ao redor do mundo. Os fones JBL Tune 110 reproduzem o mesmo DNA sonoro, oferecendo graves profundos, poderosos",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_final": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_item": "https://www.kabum.com.br/produto/947298/fone-de-ouvido-intra-auricular-jbl-tune-110-com-fio-e-microfone-pure-bass-preto-jblt110blke",
+            "preco": 133.32,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 133,32",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:25.755589+00:00",
+            "fonte_titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 133.32,
+                "moeda": "BRL",
+                "preco_texto": "R$ 133,32",
+                "url": "https://www.kabum.com.br/produto/947298/fone-de-ouvido-intra-auricular-jbl-tune-110-com-fio-e-microfone-pure-bass-preto-jblt110blke",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:25.755589+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "44758b0e38269f761abc6e70",
+            "nome": "Fone de Ouvido JBL Tune 310C, USB-C, Azul - 28913775",
+            "marca": "KaBuM!",
+            "modelo": "876288",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/876288/fone-de-ouvido-com-fio-tune-310c-usb-c-jbl-azul-28913775_1751309935_original.jpg",
+            "descricao": "JBL Tune 310C Azul: O Som JBL Pure Bass no Seu USB-C, com Cor e Estilo! Experimente a qualidade sonora lendária da JBL com o Fone de Ouvido Com Fio JBL Tune 310C USB-C, na vibrante cor azul. Projetado para dispositivos modernos que dispensaram a entrada P2, este fone oferece uma conexão digital limp",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_final": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_item": "https://www.kabum.com.br/produto/876288/fone-de-ouvido-jbl-tune-310c-usb-c-azul-28913775",
+            "preco": 168.41,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 168,41",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:25.755710+00:00",
+            "fonte_titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 168.41,
+                "moeda": "BRL",
+                "preco_texto": "R$ 168,41",
+                "url": "https://www.kabum.com.br/produto/876288/fone-de-ouvido-jbl-tune-310c-usb-c-azul-28913775",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:25.755710+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "9e9958411eec988337cb7a3e",
+            "nome": "Fone de Ouvido On-Ear JBL Tune 530BT, Bluetooth, Bateria Longa Duração, Som Pure Bass, Preto - JBLT530BTBLKBR",
+            "marca": "KaBuM!",
+            "modelo": "1004896",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1004896/fone-de-ouvido-jbl-tune-530bt-on-ear-bluetooth-preto-jblt530btblkbr_1779730271_original.jpg",
+            "descricao": "Fone de Ouvido JBL Tune 530BT Áudio de Alta Performance com JBL Pure Bass Sinta o impacto de cada batida com o headphone JBL Tune 530BT. Desenvolvido com a renomada engenharia acústica JBL Pure Bass, este modelo entrega frequências baixas profundas, encorpadas e dinâmicas, reproduzindo a mesma assin",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_final": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_item": "https://www.kabum.com.br/produto/1004896/fone-de-ouvido-on-ear-jbl-tune-530bt-bluetooth-bateria-longa-duracao-som-pure-bass-preto-jblt530btblkbr",
+            "preco": 344.43,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 344,43",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:25.755447+00:00",
+            "fonte_titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 344.43,
+                "moeda": "BRL",
+                "preco_texto": "R$ 344,43",
+                "url": "https://www.kabum.com.br/produto/1004896/fone-de-ouvido-on-ear-jbl-tune-530bt-bluetooth-bateria-longa-duracao-som-pure-bass-preto-jblt530btblkbr",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:25.755447+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "1d01924b4292da5cb1696c00",
+            "nome": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+            "marca": "KaBuM!",
+            "modelo": "698163",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk_1751477559_original.jpg",
+            "descricao": "Fone de Ouvido JBL Wave Beam 2, True Wireless, Bluetooth, com Cancelamento Ativo de Ruído, Preto Mergulhe em um mundo de som puro e liberdade com o Fone de Ouvido JBL Wave Beam 2! Projetado para oferecer uma experiência sonora imersiva e sem complicações, este fone True Wireless da JBL é o seu passa",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_final": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "url_item": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+            "preco": 466.66,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 466,66",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:25.755273+00:00",
+            "fonte_titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 466.66,
+                "moeda": "BRL",
+                "preco_texto": "R$ 466,66",
+                "url": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T10:48:25.755273+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          }
+        ],
+        "alternativas": [],
+        "source_trace": [
+          {
+            "id": "01c22a651f76ffb96ca71655",
+            "source_url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "item_url": "https://www.kabum.com.br/produto/947298/fone-de-ouvido-intra-auricular-jbl-tune-110-com-fio-e-microfone-pure-bass-preto-jblt110blke",
+            "product": "Fone de Ouvido Intra-Auricular JBL Tune 110, com Fio e Microfone, Pure Bass, Preto - JBLT110BLKE",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "44758b0e38269f761abc6e70",
+            "source_url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "item_url": "https://www.kabum.com.br/produto/876288/fone-de-ouvido-jbl-tune-310c-usb-c-azul-28913775",
+            "product": "Fone de Ouvido JBL Tune 310C, USB-C, Azul - 28913775",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "9e9958411eec988337cb7a3e",
+            "source_url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "item_url": "https://www.kabum.com.br/produto/1004896/fone-de-ouvido-on-ear-jbl-tune-530bt-bluetooth-bateria-longa-duracao-som-pure-bass-preto-jblt530btblkbr",
+            "product": "Fone de Ouvido On-Ear JBL Tune 530BT, Bluetooth, Bateria Longa Duração, Som Pure Bass, Preto - JBLT530BTBLKBR",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "1d01924b4292da5cb1696c00",
+            "source_url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "item_url": "https://www.kabum.com.br/produto/698163/fone-de-ouvido-sem-fio-jbl-beam-2-cancelamento-de-ruido-ip54-ate-40-horas-de-bateria-bluetooth-preto-jblwbeam2blk",
+            "product": "Fone de Ouvido Sem Fio JBL Beam 2, Cancelamento de Ruído, IP54, Até 40 Horas de Bateria, Bluetooth, Preto - JBLWBEAM2BLK",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Fone Bluetooth JBL Brasil comprar oferta",
+          "Fone Bluetooth JBL Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1365
+          },
+          {
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 2154,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "listagem": false
+          },
+          {
+            "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 3103
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1198
+          },
+          {
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1570
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/fones",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 4264
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth",
+            "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/fone-de-ouvido",
+            "titulo": "Fone de ouvido - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido",
+            "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011",
+            "titulo": "Fones de Ouvido - Amazon.com.br",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/fones",
+            "titulo": "Fones - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido",
+            "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+            "tipo": "COMMERCIAL_LISTING"
+          }
+        ],
+        "encontrados": [],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Fones de Ouvido KaBuM!: Ofertas de até 15% OFF no PIX",
+            "url": "https://www.kabum.com.br/audio/fone-de-ouvido"
+          },
+          {
+            "id": "S2",
+            "titulo": "Fones de Ouvido - Amazon.com.br",
+            "url": "https://www.amazon.com.br/Fones-Ouvido/b?node=16244120011"
+          },
+          {
+            "id": "S3",
+            "titulo": "Fone de Ouvido Bluetooth em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido/Bluetooth"
+          },
+          {
+            "id": "S4",
+            "titulo": "Fone de ouvido - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/fone-de-ouvido"
+          },
+          {
+            "id": "S5",
+            "titulo": "Fones - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/fones"
+          },
+          {
+            "id": "S6",
+            "titulo": "Linha Dente De Tubarão em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/Fone%20de%20ouvido"
+          }
+        ],
+        "criterios": {
+          "categoria": "fone",
+          "orcamento": {},
+          "marcas": [
+            "jbl"
+          ],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Fone Bluetooth JBL preço Brasil"
+        },
+        "total_bruto": 4,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 4,
+            "total": 4
+          },
+          "imagens": {
+            "verificado": 4,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 4
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:48:35.464393+00:00",
+        "etapas_provedores": [
+          "Fone Bluetooth JBL Brasil comprar oferta: injetado (teste)",
+          "Fone Bluetooth JBL Brasil comprar Brasil: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 502.4
+        }
+      },
+      "elapsed_s": 14.022
+    },
+    {
+      "id": "fridge",
+      "route": "shopping_web",
+      "question": "Geladeira Consul 300 litros preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Geladeira Consul 300 litros preço Brasil",
+        "domain": "general",
+        "original_request": "Geladeira Consul 300 litros preço Brasil",
+        "resolved_request": "Geladeira Consul 300 litros preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:48:36.883346+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 3 opção(ões), mas **nenhuma atende a todos os critérios**. Próximas do pedido (com as diferenças):\n- **Geladeira Frost Free French Door 3 Portas Branca Brastemp - BRO85MB** — R$ 4.799,00 · brastemp.com.br\n  _diferenças: outra marca: brastemp (pedido: consul)_\n- **Geladeira Inteligente B= Smart 3 Portas French Door Frost Free 630L Branca Brast** — R$ 5.449,00 · brastemp.com.br\n  _diferenças: outra marca: brastemp (pedido: consul)_\n- **Geladeira French Door 3 Portas cor Inox Design e Tecnologia Premium Brastemp - B** — R$ 5.699,00 · brastemp.com.br\n  _diferenças: outra marca: brastemp (pedido: consul)_\nEncontrei 2 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Geladeira Frost Free, Inverse, Duplex, Electrolux, Consul e Mais!** · www.americanas.com.br — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://www.americanas.com.br/eletrodomesticos/geladeira-e-refrigeradores\n- **Geladeira em Oferta: Frost Free, Inverse e mais | Casas Bahia** · m.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://m.casasbahia.com.br/geladeira/b",
+      "result": {
+        "produtos": [],
+        "alternativas": [
+          {
+            "id": "d13657d7f407019c968f57cc",
+            "nome": "Geladeira Frost Free French Door 3 Portas Branca Brastemp - BRO85MB",
+            "marca": "Brastemp",
+            "modelo": "",
+            "variante": "",
+            "imagem": "https://brastemp.vtexassets.com/arquivos/ids/281325/01_Brastemp_Geladeira_BRO85MB_Imagem_Fr.jpg?v=639096303588500000",
+            "descricao": "",
+            "loja": "brastemp.com.br",
+            "loja_dominio": "www.brastemp.com.br",
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_final": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_item": "https://www.brastemp.com.br/geladeira-frost-free-french-door-3-portas-branca-brastemp-bro85mb-326196065/p",
+            "preco": 4799.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 4.799,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:43.284629+00:00",
+            "fonte_titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "brastemp.com.br",
+                "preco": 4799.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 4.799,00",
+                "url": "https://www.brastemp.com.br/geladeira-frost-free-french-door-3-portas-branca-brastemp-bro85mb-326196065/p",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:48:43.284629+00:00"
+              }
+            ],
+            "correspondencia_tipo": "ALTERNATIVE",
+            "excluido_por": "marca diferente do pedido (brastemp; pedido: consul)",
+            "excluido_codigos": [
+              "marca_diferente"
+            ],
+            "diferencas": "outra marca: brastemp (pedido: consul)",
+            "diferencas_lista": [
+              "outra marca: brastemp (pedido: consul)"
+            ],
+            "distancia": 0.55
+          },
+          {
+            "id": "45b46c7154a6b869e753c938",
+            "nome": "Geladeira Inteligente B= Smart 3 Portas French Door Frost Free 630L Branca Brastemp - BRO88AB",
+            "marca": "Brastemp",
+            "modelo": "",
+            "variante": "",
+            "imagem": "https://brastemp.vtexassets.com/arquivos/ids/299917/01_Brastemp_Geladeira_BRO88AB.jpg?v=639268159284270000",
+            "descricao": "",
+            "loja": "brastemp.com.br",
+            "loja_dominio": "www.brastemp.com.br",
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_final": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_item": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-3-portas-french-door-frost-free-630l-branca-brastemp-bro88ab-326199397/p",
+            "preco": 5449.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 5.449,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:43.284834+00:00",
+            "fonte_titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "brastemp.com.br",
+                "preco": 5449.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 5.449,00",
+                "url": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-3-portas-french-door-frost-free-630l-branca-brastemp-bro88ab-326199397/p",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:48:43.284834+00:00"
+              }
+            ],
+            "correspondencia_tipo": "ALTERNATIVE",
+            "excluido_por": "capacidade_l diferente do pedido; marca diferente do pedido (brastemp; pedido: consul)",
+            "excluido_codigos": [
+              "capacidade_l_diferente",
+              "marca_diferente"
+            ],
+            "diferencas": "outra marca: brastemp (pedido: consul)",
+            "diferencas_lista": [
+              "outra marca: brastemp (pedido: consul)"
+            ],
+            "distancia": 0.55
+          },
+          {
+            "id": "07a2359c728d00437e0c2b34",
+            "nome": "Geladeira French Door 3 Portas cor Inox Design e Tecnologia Premium Brastemp - BRO85MK",
+            "marca": "Brastemp",
+            "modelo": "",
+            "variante": "",
+            "imagem": "https://brastemp.vtexassets.com/arquivos/ids/296087/01_Brastemp_Geladeira_BRO85MK_Frontal_fechada.jpg?v=639247419977800000",
+            "descricao": "",
+            "loja": "brastemp.com.br",
+            "loja_dominio": "www.brastemp.com.br",
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_final": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_item": "https://www.brastemp.com.br/geladeira-french-door-3-portas-inox-design-e-tecnologia-premium-bro85mk-1-326196067/p",
+            "preco": 5699.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 5.699,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:43.284504+00:00",
+            "fonte_titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "brastemp.com.br",
+                "preco": 5699.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 5.699,00",
+                "url": "https://www.brastemp.com.br/geladeira-french-door-3-portas-inox-design-e-tecnologia-premium-bro85mk-1-326196067/p",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:48:43.284504+00:00"
+              }
+            ],
+            "correspondencia_tipo": "ALTERNATIVE",
+            "excluido_por": "marca diferente do pedido (brastemp; pedido: consul)",
+            "excluido_codigos": [
+              "marca_diferente"
+            ],
+            "diferencas": "outra marca: brastemp (pedido: consul)",
+            "diferencas_lista": [
+              "outra marca: brastemp (pedido: consul)"
+            ],
+            "distancia": 0.55
+          }
+        ],
+        "source_trace": [
+          {
+            "id": "d13657d7f407019c968f57cc",
+            "source_url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "item_url": "https://www.brastemp.com.br/geladeira-frost-free-french-door-3-portas-branca-brastemp-bro85mb-326196065/p",
+            "product": "Geladeira Frost Free French Door 3 Portas Branca Brastemp - BRO85MB",
+            "variant": "",
+            "match": "ALTERNATIVE",
+            "mismatches": [
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "45b46c7154a6b869e753c938",
+            "source_url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "item_url": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-3-portas-french-door-frost-free-630l-branca-brastemp-bro88ab-326199397/p",
+            "product": "Geladeira Inteligente B= Smart 3 Portas French Door Frost Free 630L Branca Brastemp - BRO88AB",
+            "variant": "",
+            "match": "ALTERNATIVE",
+            "mismatches": [
+              "capacidade_l_diferente",
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "07a2359c728d00437e0c2b34",
+            "source_url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "item_url": "https://www.brastemp.com.br/geladeira-french-door-3-portas-inox-design-e-tecnologia-premium-bro85mk-1-326196067/p",
+            "product": "Geladeira French Door 3 Portas cor Inox Design e Tecnologia Premium Brastemp - BRO85MK",
+            "variant": "",
+            "match": "ALTERNATIVE",
+            "mismatches": [
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "597daa30b199da662a134e0c",
+            "source_url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "item_url": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-brastemp-frost-free-3-portas-french-door-630-litros-cor-inox-bro88ak-326199396/p",
+            "product": "Geladeira Inteligente B= Smart 3 Portas French Door Frost Free 630L cor Inox Brastemp - BRO88AK",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "mismatches": [
+              "capacidade_l_diferente",
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Geladeira Consul 300 litros Brasil comprar oferta",
+          "Geladeira Consul 300 litros Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.magazineluiza.com.br/geladeira-refrigerador/eletrodomesticos/s/ed/refr/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 555
+          },
+          {
+            "url": "https://m.casasbahia.com.br/geladeira/b",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 565
+          },
+          {
+            "url": "https://www.americanas.com.br/eletrodomesticos/geladeira-e-refrigeradores",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 2192
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/busca/geladeira/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 555
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 639
+          },
+          {
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 1060,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "listagem": false
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.americanas.com.br/eletrodomesticos/geladeira-e-refrigeradores",
+            "titulo": "Geladeira Frost Free, Inverse, Duplex, Electrolux, Consul e Mais!",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://m.casasbahia.com.br/geladeira/b",
+            "titulo": "Geladeira em Oferta: Frost Free, Inverse e mais | Casas Bahia",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/busca/geladeira/",
+            "titulo": "Geladeira em Promoção: Brastemp e Consul | Magalu",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.buscape.com.br/geladeira",
+            "titulo": "Geladeira em promoção | Electrolux, Brastemp e mais ofertas",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/geladeira-refrigerador/eletrodomesticos/s/ed/refr/",
+            "titulo": "Geladeira Frost Free e Inverse em Promoção | Magazine Luiza",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Geladeira Frost Free, Inverse, Duplex, Electrolux, Consul e Mais!",
+            "url": "https://www.americanas.com.br/eletrodomesticos/geladeira-e-refrigeradores",
+            "loja_dominio": "www.americanas.com.br",
+            "motivo_codigo": "sem_dados",
+            "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+            "origem_encontro": "busca"
+          },
+          {
+            "nome": "Geladeira em Oferta: Frost Free, Inverse e mais | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/geladeira/b",
+            "loja_dominio": "m.casasbahia.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador"
+          },
+          {
+            "id": "S2",
+            "titulo": "Geladeira Frost Free, Inverse, Duplex, Electrolux, Consul e Mais!",
+            "url": "https://www.americanas.com.br/eletrodomesticos/geladeira-e-refrigeradores"
+          },
+          {
+            "id": "S3",
+            "titulo": "Geladeira em Oferta: Frost Free, Inverse e mais | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/geladeira/b"
+          },
+          {
+            "id": "S4",
+            "titulo": "Geladeira Frost Free e Inverse em Promoção | Magazine Luiza",
+            "url": "https://www.magazineluiza.com.br/geladeira-refrigerador/eletrodomesticos/s/ed/refr/"
+          },
+          {
+            "id": "S5",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S6",
+            "titulo": "Geladeira em Promoção: Brastemp e Consul | Magalu",
+            "url": "https://www.magazineluiza.com.br/busca/geladeira/"
+          },
+          {
+            "id": "S7",
+            "titulo": "Geladeira em promoção | Electrolux, Brastemp e mais ofertas",
+            "url": "https://www.buscape.com.br/geladeira"
+          }
+        ],
+        "criterios": {
+          "categoria": "geladeira",
+          "orcamento": {},
+          "marcas": [
+            "consul"
+          ],
+          "specs": {
+            "capacidade_l": 300
+          },
+          "comparacao": false,
+          "texto": "Geladeira Consul 300 litros preço Brasil"
+        },
+        "total_bruto": 4,
+        "excluidos": [
+          {
+            "id": "597daa30b199da662a134e0c",
+            "nome": "Geladeira Inteligente B= Smart 3 Portas French Door Frost Free 630L cor Inox Brastemp - BRO88AK",
+            "marca": "Brastemp",
+            "modelo": "",
+            "variante": "",
+            "imagem": "https://brastemp.vtexassets.com/arquivos/ids/299971/01_Brastemp_Geladeira_BRO88AK.jpg?v=639268265673230000",
+            "descricao": "",
+            "loja": "brastemp.com.br",
+            "loja_dominio": "www.brastemp.com.br",
+            "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_final": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+            "url_item": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-brastemp-frost-free-3-portas-french-door-630-litros-cor-inox-bro88ak-326199396/p",
+            "preco": 6610.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 6.610,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:48:43.284731+00:00",
+            "fonte_titulo": "Geladeira: Modelos Frost Free, Inverse e muito mais",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "brastemp.com.br",
+                "preco": 6610.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 6.610,00",
+                "url": "https://www.brastemp.com.br/geladeira-inteligente-b-smart-brastemp-frost-free-3-portas-french-door-630-litros-cor-inox-bro88ak-326199396/p",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:48:43.284731+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "capacidade_l diferente do pedido; marca diferente do pedido (brastemp; pedido: consul)",
+            "excluido_codigos": [
+              "capacidade_l_diferente",
+              "marca_diferente"
+            ]
+          }
+        ],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 3,
+            "total": 3
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {
+            "capacidade_l_diferente": 1,
+            "marca_diferente": 1
+          },
+          "alternativas_por_codigo": {
+            "marca_diferente": 3,
+            "capacidade_l_diferente": 1
+          }
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:48:43.295079+00:00",
+        "etapas_provedores": [
+          "Geladeira Consul 300 litros Brasil compr: injetado (teste)",
+          "Geladeira Consul 300 litros Brasil compr: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_MISMATCH",
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 2,
+          "ok": 2,
+          "vazio": 0,
+          "resultados": 12,
+          "erros": {},
+          "ms_medio": 430.8
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 2,
+          "ok": 2,
+          "vazio": 0,
+          "resultados": 2,
+          "erros": {},
+          "ms_medio": 1092.9
+        }
+      },
+      "elapsed_s": 6.419
+    },
+    {
+      "id": "washer",
+      "route": "shopping_web",
+      "question": "Máquina de lavar Brastemp 12 kg preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Máquina de lavar Brastemp 12 kg preço Brasil",
+        "domain": "general",
+        "original_request": "Máquina de lavar Brastemp 12 kg preço Brasil",
+        "resolved_request": "Máquina de lavar Brastemp 12 kg preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:48:44.494687+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Máquina ou maquina? - Português à Letra** · portuguesaletra.com — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Máquina lavar Brastemp 12 kg Brasil comprar oferta",
+          "Máquina lavar Brastemp 12 kg Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 619
+          },
+          {
+            "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1341
+          },
+          {
+            "url": "https://shopee.com.br/list/M%C3%A1quina",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1607
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 704
+          },
+          {
+            "url": "https://conceito.de/maquina",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1018
+          },
+          {
+            "url": "https://www.dicio.com.br/maquina/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 2025
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://shopee.com.br/list/M%C3%A1quina",
+            "titulo": "Máquina em Oferta | Shopee 2026",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+            "titulo": "Máquina ou maquina? - Português à Letra",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://conceito.de/maquina",
+            "titulo": "Máquina - O que é, tipos, conceito e definição",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.dicio.com.br/maquina/",
+            "titulo": "Máquina - Dicio, Dicionário Online de Português",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina",
+            "titulo": "Máquina – Wikipédia, a enciclopédia livre",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://www.todamateria.com.br/maquina-simples/",
+            "titulo": "Máquinas simples: o que são e como funcionam (com exemplos)",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          },
+          {
+            "url": "https://ciba.org.in/blog_single.php?id&#x3D;11",
+            "titulo": "Getting the max out of your email marketing campaign",
+            "tipo": "UNKNOWN"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Máquina ou maquina? - Português à Letra",
+            "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/",
+            "loja_dominio": "portuguesaletra.com",
+            "motivo_codigo": "sem_dados",
+            "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Máquina ou maquina? - Português à Letra",
+            "url": "https://portuguesaletra.com/duvidas/maquina-ou-maquina/"
+          },
+          {
+            "id": "S2",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S3",
+            "titulo": "Máquina em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/M%C3%A1quina"
+          },
+          {
+            "id": "S4",
+            "titulo": "Máquina - O que é, tipos, conceito e definição",
+            "url": "https://conceito.de/maquina"
+          },
+          {
+            "id": "S5",
+            "titulo": "Máquina - Dicio, Dicionário Online de Português",
+            "url": "https://www.dicio.com.br/maquina/"
+          },
+          {
+            "id": "S6",
+            "titulo": "Máquina – Wikipédia, a enciclopédia livre",
+            "url": "https://pt.wikipedia.org/wiki/M%C3%A1quina"
+          },
+          {
+            "id": "S7",
+            "titulo": "Máquinas simples: o que são e como funcionam (com exemplos)",
+            "url": "https://www.todamateria.com.br/maquina-simples/"
+          },
+          {
+            "id": "S8",
+            "titulo": "Getting the max out of your email marketing campaign",
+            "url": "https://ciba.org.in/blog_single.php?id&#x3D;11"
+          }
+        ],
+        "criterios": {
+          "categoria": "maquina de lavar",
+          "orcamento": {},
+          "marcas": [
+            "brastemp"
+          ],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Máquina de lavar Brastemp 12 kg preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:48:55.144068+00:00",
+        "etapas_provedores": [
+          "Máquina lavar Brastemp 12 kg Brasil comp: injetado (teste)",
+          "Máquina lavar Brastemp 12 kg Brasil comp: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 482.7
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 3,
+          "vazio": 0,
+          "resultados": 4,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 1051.8
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 354.7
+        }
+      },
+      "elapsed_s": 10.656
+    },
+    {
+      "id": "book",
+      "route": "shopping_web",
+      "question": "Livro Python Fluente segunda edição preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Livro Python Fluente segunda edição preço Brasil",
+        "domain": "general",
+        "original_request": "Livro Python Fluente segunda edição preço Brasil",
+        "resolved_request": "Livro Python Fluente segunda edição preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:48:56.849490+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **MEC Livros — Ministério da Educação** · www.gov.br — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://www.gov.br/mec/pt-br/mec-livros\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Livro Python Fluente segunda edição Brasil comprar oferta",
+          "Livro Python Fluente segunda edição Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 518
+          },
+          {
+            "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011",
+            "codigo": "http",
+            "motivo": "Página HTTP 503.",
+            "ms": 542
+          },
+          {
+            "url": "https://www.gov.br/mec/pt-br/mec-livros",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1023
+          },
+          {
+            "url": "https://livrariapublica.com.br/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 655
+          },
+          {
+            "url": "https://www.baixelivros.com.br/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 842
+          },
+          {
+            "url": "https://pt.m.wikipedia.org/wiki/Livro",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1093
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://pt.m.wikipedia.org/wiki/Livro",
+            "titulo": "Livro – Wikipédia, a enciclopédia livre",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://livrariapublica.com.br/",
+            "titulo": "Livraria Pública - Sua Biblioteca Virtual Gratuita",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.baixelivros.com.br/",
+            "titulo": "Baixe Livros - Biblioteca Virtual Gratuita",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.gov.br/mec/pt-br/mec-livros",
+            "titulo": "MEC Livros — Ministério da Educação",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011",
+            "titulo": "Livros - Livros Na Amazon.com.br",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://books.google.com.br/",
+            "titulo": "Google Books: Find, Preview, and Read Books Online.",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "MEC Livros — Ministério da Educação",
+            "url": "https://www.gov.br/mec/pt-br/mec-livros",
+            "loja_dominio": "www.gov.br",
+            "motivo_codigo": "sem_dados",
+            "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "MEC Livros — Ministério da Educação",
+            "url": "https://www.gov.br/mec/pt-br/mec-livros"
+          },
+          {
+            "id": "S2",
+            "titulo": "Livros - Livros Na Amazon.com.br",
+            "url": "https://www.amazon.com.br/livros/s?k=livros&rh=n%3A6740748011"
+          },
+          {
+            "id": "S3",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S4",
+            "titulo": "Livro – Wikipédia, a enciclopédia livre",
+            "url": "https://pt.m.wikipedia.org/wiki/Livro"
+          },
+          {
+            "id": "S5",
+            "titulo": "Livraria Pública - Sua Biblioteca Virtual Gratuita",
+            "url": "https://livrariapublica.com.br/"
+          },
+          {
+            "id": "S6",
+            "titulo": "Baixe Livros - Biblioteca Virtual Gratuita",
+            "url": "https://www.baixelivros.com.br/"
+          },
+          {
+            "id": "S7",
+            "titulo": "Google Books: Find, Preview, and Read Books Online.",
+            "url": "https://books.google.com.br/"
+          }
+        ],
+        "criterios": {
+          "categoria": "livro",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Livro Python Fluente segunda edição preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:49:14.419983+00:00",
+        "etapas_provedores": [
+          "Livro Python Fluente segunda edição Bras: injetado (teste)",
+          "Livro Python Fluente segunda edição Bras: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 402.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 1,
+          "erros": {
+            "vazio": 3
+          },
+          "ms_medio": 908.2
+        },
+        "stackexchange": {
+          "chamadas": 4,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 4
+          },
+          "ms_medio": 2512.0
+        }
+      },
+      "elapsed_s": 17.577
+    },
+    {
+      "id": "tool",
+      "route": "shopping_web",
+      "question": "Furadeira Bosch 500 W preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Furadeira Bosch 500 W preço Brasil",
+        "domain": "general",
+        "original_request": "Furadeira Bosch 500 W preço Brasil",
+        "resolved_request": "Furadeira Bosch 500 W preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:49:15.393966+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia** · www.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.casasbahia.com.br/furadeira/b\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Furadeira Bosch 500 W Brasil comprar oferta",
+          "Furadeira Bosch 500 W Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.casasbahia.com.br/furadeira/b",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 623
+          },
+          {
+            "url": "https://score-pulse.com/teams/flamengo-rj",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1571
+          },
+          {
+            "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira",
+            "codigo": "tamanho",
+            "motivo": "Documento grande demais.",
+            "ms": 1790
+          },
+          {
+            "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 468
+          },
+          {
+            "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 812
+          },
+          {
+            "url": "https://www.flamengo.com.br/futebol/proximos-jogos",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1051
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.casasbahia.com.br/furadeira/b",
+            "titulo": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://br.my-best.com/19454",
+            "titulo": "Top 10 Melhores Furadeiras e Parafusadeiras em 2026 (Bosch, Wap e mais)",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://shopee.com.br/list/Furadeira",
+            "titulo": "Furadeira em Oferta | Shopee 2026",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/furadeira",
+            "titulo": "Furadeira - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira",
+            "titulo": "Furadeira elétrica",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.ferreiracosta.com/Categoria/furadeiras-e-parafusadeiras",
+            "titulo": "Furadeira e parafusadeira em promoção | Ferreira Costa",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://score-pulse.com/teams/flamengo-rj",
+            "titulo": "Flamengo RJ: Próximo Jogo, Placar ao Vivo e Estatísticas",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.flamengo.com.br/futebol/proximos-jogos",
+            "titulo": "Próximos Jogos - Futebol | Flamengo",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/",
+            "titulo": "Próximos jogos do Flamengo: datas; horários e onde assistir ao vivo",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981",
+            "titulo": "CR Flamengo RJ – resultados em direto, calendário e ... - Sofascore",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.365scores.com/pt-br/football/team/flamengo-1215/standings",
+            "titulo": "Flamengo: Tabela de classificação atualizada - 365Scores",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.flamengo.com.br/",
+            "titulo": "Flamengo | Site Oficial do Clube de Regatas do Flamengo",
+            "tipo": "GENERIC_INDEX"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+            "url": "https://www.casasbahia.com.br/furadeira/b",
+            "loja_dominio": "www.casasbahia.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Furadeira: Bosch, Makita, impacto, elétrica e mais - Casas Bahia",
+            "url": "https://www.casasbahia.com.br/furadeira/b"
+          },
+          {
+            "id": "S2",
+            "titulo": "Furadeira elétrica",
+            "url": "https://www.lojadomecanico.com.br/subcategorias/21/221/furadeira"
+          },
+          {
+            "id": "S3",
+            "titulo": "Flamengo RJ: Próximo Jogo, Placar ao Vivo e Estatísticas",
+            "url": "https://score-pulse.com/teams/flamengo-rj"
+          },
+          {
+            "id": "S4",
+            "titulo": "Próximos Jogos - Futebol | Flamengo",
+            "url": "https://www.flamengo.com.br/futebol/proximos-jogos"
+          },
+          {
+            "id": "S5",
+            "titulo": "Próximos jogos do Flamengo: datas; horários e onde assistir ao vivo",
+            "url": "https://ge.globo.com/futebol/times/flamengo/agenda-de-jogos-do-flamengo/"
+          },
+          {
+            "id": "S6",
+            "titulo": "CR Flamengo RJ – resultados em direto, calendário e ... - Sofascore",
+            "url": "https://www.sofascore.com/pt-pt/football/team/flamengo/5981"
+          },
+          {
+            "id": "S7",
+            "titulo": "Top 10 Melhores Furadeiras e Parafusadeiras em 2026 (Bosch, Wap e mais)",
+            "url": "https://br.my-best.com/19454"
+          },
+          {
+            "id": "S8",
+            "titulo": "Furadeira em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/Furadeira"
+          }
+        ],
+        "criterios": {
+          "categoria": "furadeira",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Furadeira Bosch 500 W preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:49:24.747276+00:00",
+        "etapas_provedores": [
+          "Furadeira Bosch 500 W Brasil comprar ofe: injetado (teste)",
+          "Furadeira Bosch 500 W Brasil comprar Bra: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 410.2
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 1,
+          "erros": {
+            "vazio": 3
+          },
+          "ms_medio": 931.1
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 492.1
+        }
+      },
+      "elapsed_s": 9.361
+    },
+    {
+      "id": "auto_part",
+      "route": "shopping_web",
+      "question": "Pastilha de freio dianteira Volkswagen Gol 2018 preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Pastilha de freio dianteira Volkswagen Gol 2018 preço Brasil",
+        "domain": "general",
+        "original_request": "Pastilha de freio dianteira Volkswagen Gol 2018 preço Brasil",
+        "resolved_request": "Pastilha de freio dianteira Volkswagen Gol 2018 preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:49:27.092954+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei **4** pastilha de freio com dados estruturados reais:\n- **Pastilha de Vidro para Cozinha Banheiro Parede Branco Neve e Metal 30x30cm - La Bella Griffe** — R$ 29,31 · madeiramadeira.com.br · _link não verificado_\n- **Pastilha Adesiva Aluminio Decoração Banheiro Colmeia Dourada** — R$ 32,29 · madeiramadeira.com.br · _link não verificado_\n- **Pastilhas de Vidro 1,4 X 1,4 La Bella Griffe - Branco** — R$ 51,97 · madeiramadeira.com.br · _link não verificado_\n- **Pastilha Descalcificante 56.00.562 - Rational** — R$ 691,60 · madeiramadeira.com.br · _link não verificado_",
+      "result": {
+        "produtos": [
+          {
+            "id": "7d1e6daaab8f7434de7fc625",
+            "nome": "Pastilha de Vidro para Cozinha Banheiro Parede Branco Neve e Metal 30x30cm - La Bella Griffe",
+            "marca": "La Bella Griffe",
+            "modelo": "636031363",
+            "variante": "",
+            "imagem": "https://product-hub-prd.madeiramadeira.com.br/636031363/images/90ca0a40-0d6f-4b60-b8ad-6186af6fda81f51d63c365a8381a6e246886c7.jpg",
+            "descricao": "Pastilha de Vidro para Cozinha Banheiro Parede Branco Neve e Metal 30x30cm - La Bella Griffe",
+            "loja": "madeiramadeira.com.br",
+            "loja_dominio": "www.madeiramadeira.com.br",
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_final": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_item": "https://www.madeiramadeira.com.br/pastilha-de-vidro-para-cozinha-banheiro-parede-branco-neve-e-metal-30x30cm-la-bella-griffe-636031363.html",
+            "preco": 29.31,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 29,31",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": 5.0,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:49:37.463823+00:00",
+            "fonte_titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_de_listagem",
+            "link_motivo": "item extraído de listagem; página do item não aberta",
+            "item_de_listagem": true,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "madeiramadeira.com.br",
+                "preco": 29.31,
+                "moeda": "BRL",
+                "preco_texto": "R$ 29,31",
+                "url": "https://www.madeiramadeira.com.br/pastilha-de-vidro-para-cozinha-banheiro-parede-branco-neve-e-metal-30x30cm-la-bella-griffe-636031363.html",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:49:37.463823+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "e38ffa53957ee2b547e68fd8",
+            "nome": "Pastilha Adesiva Aluminio Decoração Banheiro Colmeia Dourada",
+            "marca": "BolaAzul",
+            "modelo": "524034414",
+            "variante": "",
+            "imagem": "https://product-hub-prd.madeiramadeira.com.br/524034414/images/9c614233-e21d-4798-8938-fb5303ff505f301312c0d7b525152579446803.png",
+            "descricao": "Pastilha Adesiva Aluminio Decoração Banheiro Colmeia Dourada",
+            "loja": "madeiramadeira.com.br",
+            "loja_dominio": "www.madeiramadeira.com.br",
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_final": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_item": "https://www.madeiramadeira.com.br/pastilha-adesiva-aluminio-decoracao-banheiro-colmeia-dourada-524034414.html",
+            "preco": 32.29,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 32,29",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:49:37.463994+00:00",
+            "fonte_titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_de_listagem",
+            "link_motivo": "item extraído de listagem; página do item não aberta",
+            "item_de_listagem": true,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "madeiramadeira.com.br",
+                "preco": 32.29,
+                "moeda": "BRL",
+                "preco_texto": "R$ 32,29",
+                "url": "https://www.madeiramadeira.com.br/pastilha-adesiva-aluminio-decoracao-banheiro-colmeia-dourada-524034414.html",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:49:37.463994+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "f42acfb1fe6012205ef435fb",
+            "nome": "Pastilhas de Vidro 1,4 X 1,4 La Bella Griffe - Branco",
+            "marca": "La Bella Griffe",
+            "modelo": "313246318",
+            "variante": "",
+            "imagem": "https://product-hub-prd.madeiramadeira.com.br/313246318/images/b5c937bd-aed7-420e-afb5-07e58e2c35d2f65aba92a52f9114fe80773f34.JPG",
+            "descricao": "Pastilhas de Vidro 1,4 X 1,4 La Bella Griffe - Branco",
+            "loja": "madeiramadeira.com.br",
+            "loja_dominio": "www.madeiramadeira.com.br",
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_final": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_item": "https://www.madeiramadeira.com.br/pastilhas-de-vidro-1-4-x-1-4-la-bella-griffe-branco-313246318.html",
+            "preco": 51.97,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 51,97",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:49:37.463945+00:00",
+            "fonte_titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_de_listagem",
+            "link_motivo": "item extraído de listagem; página do item não aberta",
+            "item_de_listagem": true,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "madeiramadeira.com.br",
+                "preco": 51.97,
+                "moeda": "BRL",
+                "preco_texto": "R$ 51,97",
+                "url": "https://www.madeiramadeira.com.br/pastilhas-de-vidro-1-4-x-1-4-la-bella-griffe-branco-313246318.html",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:49:37.463945+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          },
+          {
+            "id": "93200f9a14b6f740f75fd0ae",
+            "nome": "Pastilha Descalcificante 56.00.562 - Rational",
+            "marca": "RATIONAL",
+            "modelo": "884892826",
+            "variante": "",
+            "imagem": "https://product-hub-prd.madeiramadeira.com.br/884892826/images/636a5f06-246c-438f-80bc-4647f89a6378132dd007standardresolution.jpg",
+            "descricao": "Pastilha Descalcificante 56.00.562 - Rational",
+            "loja": "madeiramadeira.com.br",
+            "loja_dominio": "www.madeiramadeira.com.br",
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_final": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "url_item": "https://www.madeiramadeira.com.br/pastilha-descalcificante-56-00-562-rational-884892826.html",
+            "preco": 691.6,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 691,60",
+            "preco_origem": "jsonld",
+            "disponibilidade": "em_estoque",
+            "avaliacao": 4.25,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T10:49:37.463894+00:00",
+            "fonte_titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_de_listagem",
+            "link_motivo": "item extraído de listagem; página do item não aberta",
+            "item_de_listagem": true,
+            "imagem_veredito": "verificado",
+            "ofertas": [
+              {
+                "loja": "madeiramadeira.com.br",
+                "preco": 691.6,
+                "moeda": "BRL",
+                "preco_texto": "R$ 691,60",
+                "url": "https://www.madeiramadeira.com.br/pastilha-descalcificante-56-00-562-rational-884892826.html",
+                "disponibilidade": "em_estoque",
+                "verificado_em": "2026-10-23T10:49:37.463894+00:00"
+              }
+            ],
+            "pendencias_do_pedido": [],
+            "correspondencia_tipo": "PARTIAL_MATCH"
+          }
+        ],
+        "alternativas": [],
+        "source_trace": [
+          {
+            "id": "7d1e6daaab8f7434de7fc625",
+            "source_url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "item_url": "https://www.madeiramadeira.com.br/pastilha-de-vidro-para-cozinha-banheiro-parede-branco-neve-e-metal-30x30cm-la-bella-griffe-636031363.html",
+            "product": "Pastilha de Vidro para Cozinha Banheiro Parede Branco Neve e Metal 30x30cm - La Bella Griffe",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": true,
+            "tier": "parcial"
+          },
+          {
+            "id": "e38ffa53957ee2b547e68fd8",
+            "source_url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "item_url": "https://www.madeiramadeira.com.br/pastilha-adesiva-aluminio-decoracao-banheiro-colmeia-dourada-524034414.html",
+            "product": "Pastilha Adesiva Aluminio Decoração Banheiro Colmeia Dourada",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": true,
+            "tier": "parcial"
+          },
+          {
+            "id": "f42acfb1fe6012205ef435fb",
+            "source_url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "item_url": "https://www.madeiramadeira.com.br/pastilhas-de-vidro-1-4-x-1-4-la-bella-griffe-branco-313246318.html",
+            "product": "Pastilhas de Vidro 1,4 X 1,4 La Bella Griffe - Branco",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": true,
+            "tier": "parcial"
+          },
+          {
+            "id": "93200f9a14b6f740f75fd0ae",
+            "source_url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "item_url": "https://www.madeiramadeira.com.br/pastilha-descalcificante-56-00-562-rational-884892826.html",
+            "product": "Pastilha Descalcificante 56.00.562 - Rational",
+            "variant": "",
+            "match": "PARTIAL_MATCH",
+            "mismatches": [],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "em_estoque",
+            "stock_independently_verified": false,
+            "image_state": "verificado",
+            "link_state": "nao_verificado",
+            "listing_item": true,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Pastilha freio dianteira Volkswagen Gol 2018 Brasil comprar oferta",
+          "Pastilha freio dianteira Volkswagen Gol 2018 Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.telhanorte.com.br/pisos-e-revestimentos/pastilhas",
+            "codigo": "tamanho",
+            "motivo": "Documento descompactado grande demais.",
+            "ms": 1202
+          },
+          {
+            "url": "https://www.abcdaconstrucao.com.br/pisos-e-revestimentos/pastilha-piso-ou-parede",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 2423
+          },
+          {
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 4233,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "listagem": true
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 428
+          },
+          {
+            "url": "https://www.leroymerlin.com.br/pastilhas",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 428
+          },
+          {
+            "url": "https://www.leroymerlin.com.br/revestimento-pastilha",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 440
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.leroymerlin.com.br/revestimento-pastilha",
+            "titulo": "Revestimento Pastilha - Tudo para Comprar! - Leroy Merlin",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.abcdaconstrucao.com.br/pisos-e-revestimentos/pastilha-piso-ou-parede",
+            "titulo": "Pastilha: Para Banheiro, Cozinha e Mais! | ABC da Construção",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.leroymerlin.com.br/pastilhas",
+            "titulo": "PASTILHAS: Vidro, Adesiva, Banheiro, Cozinha - Leroy Merlin",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas",
+            "titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.telhanorte.com.br/pisos-e-revestimentos/pastilhas",
+            "titulo": "Pastilhas: escolha o melhor para o seu lar - Telhanorte",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.pastilhart.com.br/",
+            "titulo": "Pastilhart - Referência em Pastilhas e Revestimentos",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Pastilhas: Banheiro, Cozinha, Adesiva e Mais - MadeiraMadeira",
+            "url": "https://www.madeiramadeira.com.br/pisos-e-revestimentos/pastilhas"
+          },
+          {
+            "id": "S2",
+            "titulo": "Pastilha: Para Banheiro, Cozinha e Mais! | ABC da Construção",
+            "url": "https://www.abcdaconstrucao.com.br/pisos-e-revestimentos/pastilha-piso-ou-parede"
+          },
+          {
+            "id": "S3",
+            "titulo": "Pastilhas: escolha o melhor para o seu lar - Telhanorte",
+            "url": "https://www.telhanorte.com.br/pisos-e-revestimentos/pastilhas"
+          },
+          {
+            "id": "S4",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Revestimento Pastilha - Tudo para Comprar! - Leroy Merlin",
+            "url": "https://www.leroymerlin.com.br/revestimento-pastilha"
+          },
+          {
+            "id": "S6",
+            "titulo": "PASTILHAS: Vidro, Adesiva, Banheiro, Cozinha - Leroy Merlin",
+            "url": "https://www.leroymerlin.com.br/pastilhas"
+          },
+          {
+            "id": "S7",
+            "titulo": "Pastilhart - Referência em Pastilhas e Revestimentos",
+            "url": "https://www.pastilhart.com.br/"
+          }
+        ],
+        "criterios": {
+          "categoria": "pastilha de freio",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Pastilha de freio dianteira Volkswagen Gol 2018 preço Brasil"
+        },
+        "total_bruto": 4,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 4,
+            "total": 4
+          },
+          "imagens": {
+            "verificado": 4,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 4
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:49:42.830851+00:00",
+        "etapas_provedores": [
+          "Pastilha freio dianteira Volkswagen Gol : injetado (teste)",
+          "Pastilha freio dianteira Volkswagen Gol : injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 393.4
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 1,
+          "erros": {
+            "vazio": 3
+          },
+          "ms_medio": 922.5
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 352.4
+        }
+      },
+      "elapsed_s": 15.743
+    },
+    {
+      "id": "component",
+      "route": "shopping_web",
+      "question": "Resistor 10k ohm 1/4W preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Resistor 10k ohm 1/4W preço Brasil",
+        "domain": "general",
+        "original_request": "Resistor 10k ohm 1/4W preço Brasil",
+        "resolved_request": "Resistor 10k ohm 1/4W preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:49:44.263028+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 2 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Resistores: o que são, tipos e exercícios - Brasil Escola** · brasilescola.uol.com.br — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://brasilescola.uol.com.br/fisica/resistores.htm\n- **Resistores: o que são, tipos, função, associação - Mundo Educação** · mundoeducacao.uol.com.br — _página abriu, mas não expôs dados estruturados de produto; não verificada_\n  https://mundoeducacao.uol.com.br/fisica/resistores.htm\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Resistor 10k ohm 1/4W Brasil comprar oferta",
+          "Resistor 10k ohm 1/4W Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://mundoeducacao.uol.com.br/fisica/resistores.htm",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1492
+          },
+          {
+            "url": "https://brasilescola.uol.com.br/fisica/resistores.htm",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1658
+          },
+          {
+            "url": "https://www.todamateria.com.br/resistores/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 3157
+          },
+          {
+            "url": "https://www.mundodaeletrica.com.br/o-que-e-um-resistor/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 811
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Resistor",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1171
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Resistor",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1910
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://brasilescola.uol.com.br/fisica/resistores.htm",
+            "titulo": "Resistores: o que são, tipos e exercícios - Brasil Escola",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.todamateria.com.br/resistores/",
+            "titulo": "Resistores: o que são, associações e leis de Ohm - Toda Matéria",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://mundoeducacao.uol.com.br/fisica/resistores.htm",
+            "titulo": "Resistores: o que são, tipos, função, associação - Mundo Educação",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.mundodaeletrica.com.br/o-que-e-um-resistor/",
+            "titulo": "O que é um resistor? - Mundo da Elétrica",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Resistor",
+            "titulo": "Resistor - Wikipedia",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Resistor",
+            "titulo": "Resistor – Wikipédia, a enciclopédia livre",
+            "tipo": "EDITORIAL_REFERENCE"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Resistores: o que são, tipos e exercícios - Brasil Escola",
+            "url": "https://brasilescola.uol.com.br/fisica/resistores.htm",
+            "loja_dominio": "brasilescola.uol.com.br",
+            "motivo_codigo": "sem_dados",
+            "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+            "origem_encontro": "busca"
+          },
+          {
+            "nome": "Resistores: o que são, tipos, função, associação - Mundo Educação",
+            "url": "https://mundoeducacao.uol.com.br/fisica/resistores.htm",
+            "loja_dominio": "mundoeducacao.uol.com.br",
+            "motivo_codigo": "sem_dados",
+            "motivo": "página abriu, mas não expôs dados estruturados de produto; não verificada",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Resistores: o que são, tipos e exercícios - Brasil Escola",
+            "url": "https://brasilescola.uol.com.br/fisica/resistores.htm"
+          },
+          {
+            "id": "S2",
+            "titulo": "Resistores: o que são, tipos, função, associação - Mundo Educação",
+            "url": "https://mundoeducacao.uol.com.br/fisica/resistores.htm"
+          },
+          {
+            "id": "S3",
+            "titulo": "Resistores: o que são, associações e leis de Ohm - Toda Matéria",
+            "url": "https://www.todamateria.com.br/resistores/"
+          },
+          {
+            "id": "S4",
+            "titulo": "O que é um resistor? - Mundo da Elétrica",
+            "url": "https://www.mundodaeletrica.com.br/o-que-e-um-resistor/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Resistor - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Resistor"
+          },
+          {
+            "id": "S6",
+            "titulo": "Resistor – Wikipédia, a enciclopédia livre",
+            "url": "https://pt.wikipedia.org/wiki/Resistor"
+          }
+        ],
+        "criterios": {
+          "categoria": "resistor",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Resistor 10k ohm 1/4W preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:49:51.315074+00:00",
+        "etapas_provedores": [
+          "Resistor 10k ohm 1/4W Brasil comprar ofe: injetado (teste)",
+          "Resistor 10k ohm 1/4W Brasil comprar Bra: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 457.2
+        }
+      },
+      "elapsed_s": 7.058
+    },
+    {
+      "id": "sport",
+      "route": "shopping_web",
+      "question": "Bola de basquete Spalding tamanho 7 preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Bola de basquete Spalding tamanho 7 preço Brasil",
+        "domain": "general",
+        "original_request": "Bola de basquete Spalding tamanho 7 preço Brasil",
+        "resolved_request": "Bola de basquete Spalding tamanho 7 preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:49:52.632943+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Pesquisei anúncios, mas nenhuma página trouxe dados estruturados verificáveis (preço/foto) para montar cards: os sites consultados bloquearam o acesso automático (403/CAPTCHA) ou não expuseram dados estruturados. Nenhuma restrição do seu pedido limitou a busca — a limitação veio dos sites.",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Bola basquete Spalding tamanho 7 Brasil comprar oferta",
+          "Bola basquete Spalding tamanho 7 Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.centauro.com.br/nav/produto/bola",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 431
+          },
+          {
+            "url": "https://www.centauro.com.br/nav/produto/boladefutebol",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 456
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 548
+          },
+          {
+            "url": "https://www.papodebola.com.br/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1129
+          },
+          {
+            "url": "https://www.abola.pt/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1469
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/bola",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1483
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.papodebola.com.br/",
+            "titulo": "Papo de Bola | Futebol e Esportes do Brasil e do Mundo",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.centauro.com.br/nav/produto/bola",
+            "titulo": "Loja de Bola Online - Centauro",
+            "tipo": "PRODUCT_CANDIDATE"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/bola",
+            "titulo": "Bola - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.abola.pt/",
+            "titulo": "Notícias desportivas & mais lidas | A Bola",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://guiadabola.com.br/",
+            "titulo": "Guia da Bola · Onde passa o jogo de hoje, ao vivo",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.centauro.com.br/nav/produto/boladefutebol",
+            "titulo": "Bola de Futebol | Loja de Bola de Futebol Online | Centauro",
+            "tipo": "PRODUCT_CANDIDATE"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Loja de Bola Online - Centauro",
+            "url": "https://www.centauro.com.br/nav/produto/bola"
+          },
+          {
+            "id": "S2",
+            "titulo": "Bola de Futebol | Loja de Bola de Futebol Online | Centauro",
+            "url": "https://www.centauro.com.br/nav/produto/boladefutebol"
+          },
+          {
+            "id": "S3",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S4",
+            "titulo": "Papo de Bola | Futebol e Esportes do Brasil e do Mundo",
+            "url": "https://www.papodebola.com.br/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Bola - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/bola"
+          },
+          {
+            "id": "S6",
+            "titulo": "Notícias desportivas & mais lidas | A Bola",
+            "url": "https://www.abola.pt/"
+          },
+          {
+            "id": "S7",
+            "titulo": "Guia da Bola · Onde passa o jogo de hoje, ao vivo",
+            "url": "https://guiadabola.com.br/"
+          }
+        ],
+        "criterios": {
+          "categoria": "bola de basquete",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Bola de basquete Spalding tamanho 7 preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:50:00.710823+00:00",
+        "etapas_provedores": [
+          "Bola basquete Spalding tamanho 7 Brasil : injetado (teste)",
+          "Bola basquete Spalding tamanho 7 Brasil : injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 424.0
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 1,
+          "erros": {
+            "vazio": 3
+          },
+          "ms_medio": 889.9
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 314.5
+        }
+      },
+      "elapsed_s": 8.084
+    },
+    {
+      "id": "furniture",
+      "route": "shopping_web",
+      "question": "Sofá dois lugares preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Sofá dois lugares preço Brasil",
+        "domain": "general",
+        "original_request": "Sofá dois lugares preço Brasil",
+        "resolved_request": "Sofá dois lugares preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:50:02.086197+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 2 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Sofá em Oferta: Retrátil, Reclinável e de Canto | Casas Bahia** · m.casasbahia.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://m.casasbahia.com.br/sofa/b\n- **Sofá: modelos, conforto e estilos pra sua casa | Magalu** · www.magazineluiza.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.magazineluiza.com.br/sofas/moveis/s/mo/msof/\n_Nenhuma restrição do seu pedido limitou a busca — as páginas é que não puderam ser validadas. Abra a referência na loja para conferir._",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Sofá dois lugares Brasil comprar oferta",
+          "Sofá dois lugares Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.magazineluiza.com.br/sofas/moveis/s/mo/msof/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 567
+          },
+          {
+            "url": "https://m.casasbahia.com.br/sofa/b",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 573
+          },
+          {
+            "url": "https://www.madeiramadeira.com.br/moveis/moveis-para-sala-de-estar/sofas",
+            "codigo": "tamanho",
+            "motivo": "Documento grande demais.",
+            "ms": 2389
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 568
+          },
+          {
+            "url": "https://metareciclagem.github.io/node/2211/aggregator55df.html",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 904
+          },
+          {
+            "url": "https://education.gov.gy/web2/index.php/sec/syllabus-curriculum-guides/ccslc-syllabus/7792-ccslc-modern-languages-syllabus/file",
+            "codigo": "tipo_bloqueado",
+            "motivo": "Conteúdo não textual (application/pdf).",
+            "ms": 1956
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://m.casasbahia.com.br/sofa/b",
+            "titulo": "Sofá em Oferta: Retrátil, Reclinável e de Canto | Casas Bahia",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://shopee.com.br/list/Sof%C3%A1",
+            "titulo": "Sofá em Oferta | Shopee 2026",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/busca/sofa/",
+            "titulo": "Sofá em Oferta - Modelos Retrátil, Reclinável e Mais | Magazine Luiza",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/sofas/moveis/s/mo/msof/",
+            "titulo": "Sofá: modelos, conforto e estilos pra sua casa | Magalu",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.madeiramadeira.com.br/moveis/moveis-para-sala-de-estar/sofas",
+            "titulo": "Sofá em Promoção | MadeiraMadeira",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.netsofas.com.br/",
+            "titulo": "Netsofás | Loja Online de Sofás",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://www.thevrara.com/news2/category/Lisbon",
+            "titulo": "Lisbon — The VR/AR Beat Newsletter & Blog — VR/AR Association (VRARA)",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://metareciclagem.github.io/node/2211/aggregator55df.html",
+            "titulo": "nebl.in/a | MetaReciclagem",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://education.gov.gy/web2/index.php/sec/syllabus-curriculum-guides/ccslc-syllabus/7792-ccslc-modern-languages-syllabus/file",
+            "titulo": "Caribbean Certificate of",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.lowcardmag.com/news/helping-hands-over-the-border-project/comment-page-2/",
+            "titulo": "Helping Hands over the Border Project… | Lowcard Mag",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://www.lowcardmag.com/news/vu-skateboard-shop/comment-page-48/",
+            "titulo": "VU Skateboard Shop… | Lowcard Mag",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          },
+          {
+            "url": "https://www.livenirvana.com/interviews/9301rl/index.php",
+            "titulo": "Live Nirvana | Interview Archive | 1993 | January 23, 1993 - Rio de Janeiro, BR",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://jazzstation-oblogdearnaldodesouteiros.blogspot.com/2008/07/",
+            "titulo": "Jazz Station - Arnaldo DeSouteiro's Blog (Jazz, Bossa & Beyond): July 2008",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://ivy.fm/tag/ajuda",
+            "titulo": "Ajuda podcasts | Ivy.fm",
+            "tipo": "EDITORIAL_REFERENCE"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Sofá em Oferta: Retrátil, Reclinável e de Canto | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/sofa/b",
+            "loja_dominio": "m.casasbahia.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          },
+          {
+            "nome": "Sofá: modelos, conforto e estilos pra sua casa | Magalu",
+            "url": "https://www.magazineluiza.com.br/sofas/moveis/s/mo/msof/",
+            "loja_dominio": "www.magazineluiza.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Sofá em Oferta: Retrátil, Reclinável e de Canto | Casas Bahia",
+            "url": "https://m.casasbahia.com.br/sofa/b"
+          },
+          {
+            "id": "S2",
+            "titulo": "Sofá: modelos, conforto e estilos pra sua casa | Magalu",
+            "url": "https://www.magazineluiza.com.br/sofas/moveis/s/mo/msof/"
+          },
+          {
+            "id": "S3",
+            "titulo": "Sofá em Promoção | MadeiraMadeira",
+            "url": "https://www.madeiramadeira.com.br/moveis/moveis-para-sala-de-estar/sofas"
+          },
+          {
+            "id": "S4",
+            "titulo": "nebl.in/a | MetaReciclagem",
+            "url": "https://metareciclagem.github.io/node/2211/aggregator55df.html"
+          },
+          {
+            "id": "S5",
+            "titulo": "Caribbean Certificate of",
+            "url": "https://education.gov.gy/web2/index.php/sec/syllabus-curriculum-guides/ccslc-syllabus/7792-ccslc-modern-languages-syllabus/file"
+          },
+          {
+            "id": "S6",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S7",
+            "titulo": "Sofá em Oferta | Shopee 2026",
+            "url": "https://shopee.com.br/list/Sof%C3%A1"
+          },
+          {
+            "id": "S8",
+            "titulo": "Sofá em Oferta - Modelos Retrátil, Reclinável e Mais | Magazine Luiza",
+            "url": "https://www.magazineluiza.com.br/busca/sofa/"
+          }
+        ],
+        "criterios": {
+          "categoria": "sofa",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Sofá dois lugares preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:50:13.372317+00:00",
+        "etapas_provedores": [
+          "Sofá dois lugares Brasil comprar oferta: injetado (teste)",
+          "Sofá dois lugares Brasil comprar Brasil: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 431.1
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 3,
+          "vazio": 0,
+          "resultados": 18,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 1021.5
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 480.4
+        }
+      },
+      "elapsed_s": 11.293
+    },
+    {
+      "id": "building",
+      "route": "shopping_web",
+      "question": "Cimento CP II saco 50 kg preço Brasil",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Cimento CP II saco 50 kg preço Brasil",
+        "domain": "general",
+        "original_request": "Cimento CP II saco 50 kg preço Brasil",
+        "resolved_request": "Cimento CP II saco 50 kg preço Brasil",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T10:50:15.373724+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Pesquisei anúncios, mas nenhuma página trouxe dados estruturados verificáveis (preço/foto) para montar cards: os sites consultados bloquearam o acesso automático (403/CAPTCHA) ou não expuseram dados estruturados. Nenhuma restrição do seu pedido limitou a busca — a limitação veio dos sites.",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [],
+        "consultas": [
+          "Cimento CP II saco 50 kg Brasil comprar oferta",
+          "Cimento CP II saco 50 kg Brasil comprar Brasil"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1132
+          },
+          {
+            "url": "https://www.decorfacil.com/tipos-de-cimento/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1379
+          },
+          {
+            "url": "https://www.escolaengenharia.com.br/tipos-de-cimento/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1739
+          },
+          {
+            "url": "https://www.leroymerlin.com.br/cimentos",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 816
+          },
+          {
+            "url": "https://pt.m.wikipedia.org/wiki/Cimento",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1482
+          },
+          {
+            "url": "https://www.portaldoconcreto.com.br/tipos-de-cimento",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1770
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.decorfacil.com/tipos-de-cimento/",
+            "titulo": "Tipos de Cimento: Conheça as Características e Aplicações",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.escolaengenharia.com.br/tipos-de-cimento/",
+            "titulo": "Tipos de cimento: Características e especificações",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.portaldoconcreto.com.br/tipos-de-cimento",
+            "titulo": "Tipos de Cimento - Portal do Concreto",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://pt.m.wikipedia.org/wiki/Cimento",
+            "titulo": "Cimento – Wikipédia, a enciclopédia livre",
+            "tipo": "EDITORIAL_REFERENCE"
+          },
+          {
+            "url": "https://www.leroymerlin.com.br/cimentos",
+            "titulo": "Cimento - Melhores Preços e Marcas na Leroy Merlin!",
+            "tipo": "UNKNOWN"
+          },
+          {
+            "url": "https://www.votorantimcimentos.com.br/",
+            "titulo": "Home - Votorantim Cimentos",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S2",
+            "titulo": "Tipos de Cimento: Conheça as Características e Aplicações",
+            "url": "https://www.decorfacil.com/tipos-de-cimento/"
+          },
+          {
+            "id": "S3",
+            "titulo": "Tipos de cimento: Características e especificações",
+            "url": "https://www.escolaengenharia.com.br/tipos-de-cimento/"
+          },
+          {
+            "id": "S4",
+            "titulo": "Tipos de Cimento - Portal do Concreto",
+            "url": "https://www.portaldoconcreto.com.br/tipos-de-cimento"
+          },
+          {
+            "id": "S5",
+            "titulo": "Cimento – Wikipédia, a enciclopédia livre",
+            "url": "https://pt.m.wikipedia.org/wiki/Cimento"
+          },
+          {
+            "id": "S6",
+            "titulo": "Cimento - Melhores Preços e Marcas na Leroy Merlin!",
+            "url": "https://www.leroymerlin.com.br/cimentos"
+          },
+          {
+            "id": "S7",
+            "titulo": "Home - Votorantim Cimentos",
+            "url": "https://www.votorantimcimentos.com.br/"
+          }
+        ],
+        "criterios": {
+          "categoria": "",
+          "orcamento": {},
+          "marcas": [],
+          "specs": {},
+          "comparacao": false,
+          "texto": "Cimento CP II saco 50 kg preço Brasil"
+        },
+        "total_bruto": 0,
+        "excluidos": [],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {},
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T10:50:25.856703+00:00",
+        "etapas_provedores": [
+          "Cimento CP II saco 50 kg Brasil comprar : injetado (teste)",
+          "Cimento CP II saco 50 kg Brasil comprar : injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "STRUCTURED_DATA_MISSING"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 0,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 424.0
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 4,
+          "ok": 3,
+          "vazio": 0,
+          "resultados": 3,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 1027.3
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 515.3
+        }
+      },
+      "elapsed_s": 10.49
+    }
+  ]
+}

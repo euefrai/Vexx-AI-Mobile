@@ -1,0 +1,12 @@
+### Result
+{
+  "width": 390,
+  "scrollWidth": 390,
+  "ready": true,
+  "links": 10,
+  "unsafeLinks": 0
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,ready:window.fixtureReady,links:document.links.length,unsafeLinks:Array.from(document.links).filter(a=>!/^https?:/.test(a.href)).length})');
+```
