@@ -1742,6 +1742,8 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .jdui-source-scope{font-size:12px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
 .jdui-srccard .jdui-desc{font-size:13px;overflow-wrap:anywhere}
 .jdui-srccard .jdui-badge{white-space:normal;max-width:100%}
+.jdui-srccard .jdui-cardacts{flex-wrap:wrap}
+.jdui-srccard .jdui-cardacts .jdui-btn{flex:1 1 7rem;min-width:0;overflow-wrap:normal}
 @media(max-width:480px){.jdui-srccard{padding:13px}.jdui-source-title{flex-basis:100%}.jdui-srccard .jdui-cardacts a{min-height:40px}}
 
 .jdui-media-zoom{position:absolute;right:8px;bottom:8px;min-height:36px;background:var(--panel)}
