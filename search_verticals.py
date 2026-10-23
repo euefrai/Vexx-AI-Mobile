@@ -3,7 +3,7 @@
 No requests, inferred inventory, model code, or parallel engine. Structured data
 is a source declaration, never independently verified availability.
 """
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 import re
 from typing import TypedDict
@@ -62,17 +62,26 @@ def assess(request, source) -> SourceContract:
     data={};reasons=[];state='UNVERIFIED';eligible=True
     if domain in ('news','events') and p.get('location'):
         if not contains(p['location'],body): reasons.append('ENTITY_MISMATCH')
-        if p.get('region') and not contains(p['region'],body): reasons.append('SOURCE_MISMATCH')
+        region = {'BA': 'Bahia', 'PE': 'Pernambuco', 'SP': 'São Paulo'}.get(str(p.get('region','')).upper(), p.get('region'))
+        if region and not (contains(region,body) or contains(p['region'],body)): reasons.append('SOURCE_MISMATCH')
     if domain=='news':
         if source.get('tipo')=='enciclopedia' or re.search(r'\b(turismo|pontos turisticos|wikipedia)\b',qi.normalized(source.get('titulo',''))):
             reasons.append('INTENT_MISMATCH')
         published=source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em')
-        if p.get('start_date'):
+        if p.get('start_date') or p.get('start_at'):
             import search_orchestrator
             dt=search_orchestrator._data_do_item(source)
             if not dt: reasons.append('INCOMPLETE_EVIDENCE')
-            elif not p['start_date']<=dt.date().isoformat()<=p['end_date']: reasons.append('TEMPORAL_MISMATCH')
+            elif p.get('start_date') and not p['start_date']<=dt.date().isoformat()<=p['end_date']: reasons.append('TEMPORAL_MISMATCH')
         if published: data['published_at']=str(published)[:48]
+        if p.get('start_at'):
+            if not published or len(str(published).strip()) <= 10:
+                reasons.append('INCOMPLETE_EVIDENCE')
+            elif dt and not datetime.fromisoformat(p['start_at']) <= dt <= datetime.fromisoformat(p['end_at']):
+                reasons.append('TEMPORAL_MISMATCH')
+        import search_orchestrator
+        if source.get('pagina_de_indice') or search_orchestrator._pagina_de_indice(source):
+            reasons.append('INDEX_PAGE')
         state='PUBLISHED_REPORT' if not reasons else 'UNVERIFIED'
     if domain=='events':
         event=next((r for r in source.get('structured',[]) if r.get('kind')=='event' and contains(p.get('location'),r.get('location','')+' '+r.get('name',''))),{})
@@ -98,9 +107,31 @@ def assess(request, source) -> SourceContract:
         if trip and contains(p.get('origin'),origin) and contains(p.get('destination'),destination):
             data={k:v for k,v in trip.items() if k not in ('declared_price','currency','availability')}
             state='PUBLISHED_SCHEDULE'
-            if p.get('departure_date')==str(trip.get('departureTime',''))[:10] and p.get('adults') and trip.get('adults')==p['adults'] and trip.get('declared_price'):
-                state='MATCHED_DECLARED_FARE';data.update(price=trip['declared_price'],currency=trip['currency'])
+            valid_price = False
+            try:
+                amount = Decimal(str(trip.get('declared_price', '')))
+                valid_price = amount.is_finite() and amount > 0 and bool(re.fullmatch('[A-Z]{3}', str(trip.get('currency', ''))))
+                expiry = trip.get('validThrough')
+                if expiry and date.fromisoformat(str(expiry)[:10]) < date.fromisoformat(request['resolved_at'][:10]):
+                    valid_price = False
+                    reasons.append('EXPIRED_FARE')
+            except (InvalidOperation, ValueError, KeyError):
+                valid_price = False
+            if p.get('departure_date')==str(trip.get('departureTime',''))[:10] and p.get('adults') and trip.get('adults')==p['adults'] and valid_price:
+                state='MATCHED_DECLARED_FARE';data.update(price=str(amount),currency=trip['currency'])
         # No source timestamp/stock verification: never assert current inventory.
         data['inventory_state']='not_verified'
     eligible=not reasons
-    return {'kind':domain,'url':str(source.get('url') or '')[:500], 'eligible':eligible,'verification':state,'reasons':list(dict.fromkeys(reasons)),'data':data}
+    retrieval = {'ROUTE_INFORMATION':'ROUTE_FOUND', 'PUBLISHED_SCHEDULE':'SCHEDULE_FOUND',
+                 'MATCHED_DECLARED_FARE':'PRICE_FOUND', 'PUBLISHED_REPORT':'ARTICLE_FOUND',
+                 'DECLARED_EVENT':'EVENT_DECLARED'}.get(state, 'UNAVAILABLE')
+    complete = eligible
+    if domain == 'news':
+        complete = eligible and bool(data.get('published_at')) and bool(source.get('texto_lido'))
+    elif domain == 'events':
+        complete = eligible and all(data.get(k) for k in ('name','location','event_date','organizer'))
+    elif domain in ('air_travel', 'bus_travel'):
+        complete = False  # No adapter here verifies live inventory or sale conditions.
+    return {'kind':domain,'url':str(source.get('url') or '')[:500], 'eligible':eligible,'verification':state,
+            'retrieval_state': retrieval, 'data_complete': complete, 'required_data': request.get('required_data', []),
+            'reasons':list(dict.fromkeys(reasons)),'data':data}

@@ -556,6 +556,29 @@ def _metrica(nome: str, t0: float, *, resultados: int = 0, erro: str = "") -> No
         m["vazio"] += 1
 
 
+def capacidades() -> dict:
+    """Declared adapter fields, never an E2E or inventory guarantee."""
+    measured = metricas()
+    out = {}
+    for name, meta in PROVEDORES.items():
+        fields = ['title', 'url', 'snippet']
+        if name in ('google-news', 'bing-news'):
+            fields += ['published_at', 'publisher']
+        if name == 'crossref':
+            fields += ['doi', 'authors', 'year', 'abstract', 'pdf_url', 'license']
+        if name == 'bcb':
+            fields += ['rate', 'date']
+        if name == 'commons':
+            fields += ['media_url', 'media_type', 'license']
+        out[name] = {'categories': list(meta['classes']), 'declared_fields': fields,
+                     'auth': 'public_adapter_no_key', 'access': 'metadata_or_public_search',
+                     'license': 'source_specific; abstracts/media may have separate rights',
+                     'commercial_use': 'not_assessed', 'freshness': 'source_declared_not_guaranteed',
+                     'limits': 'existing timeout, byte limit, circuit breaker; no private inventory',
+                     'observed': measured.get(name, {}), 'e2e_verified_fields': []}
+    return out
+
+
 def metricas() -> dict:
     """Métricas cumulativas por provedor (desde o início do processo)."""
     out = {}
@@ -592,13 +615,21 @@ def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> 
     if not meta:
         raise ErroProvedor(f"Provedor desconhecido: {nome}", "indisponivel")
     t0 = time.monotonic()
+    core = _research()
+    if core._circuito_fechado(nome):
+        _metrica(nome, t0, erro='circuit_open')
+        raise ErroProvedor('Provedor em espera após bloqueio; sem nova requisição.', 'bloqueado')
     try:
         achados = meta["fn"](consulta, limite=limite, timeout=timeout) or []
     except ErroProvedor as exc:
+        if exc.codigo in ('bloqueado', 'rate_limited'):
+            core._circuito_falha(nome)
         _metrica(nome, t0, erro=exc.codigo or "erro")
         raise
     except Exception as exc:
         trad = _traduzir(exc)
+        if trad.codigo in ('bloqueado', 'rate_limited'):
+            core._circuito_falha(nome)
         _metrica(nome, t0, erro=trad.codigo or "erro")
         raise trad
     for a in achados:

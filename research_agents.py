@@ -348,7 +348,9 @@ def montar_plano(db, job: dict) -> dict:
     """Etapas com dependências explícitas; preservar etapas e resultados feitos."""
     import query_intelligence
     request_info = job["ajustes"].setdefault("request", query_intelligence.analyze(job["objetivo"]))
-    request_text = request_info["resolved_request"] if request_info["requires_live_data"] else job["objetivo"]
+    # Keep the original temporal expression for the discovery adapter. Re-parsing
+    # a rendered date range loses hour windows and can absorb it into the city.
+    request_text = job["objetivo"]
     subs = _subconsultas_unicas(request_text, int(job["orcamento"].get("subs", 3) or 3))
     feitas = { (s.get("tipo"), s.get("alvo")) for s in job["plano"] if s.get("status") == "feita" }
     plano, n = [], 0
@@ -694,7 +696,8 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",
                     "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                     "abstract_kind", "provider_metadata_untrusted", "content_scope",
-                    "full_text_fetched", "full_text_url", "vertical", "structured", "publicador", "imagens",
+                    "full_text_fetched", "full_text_url", "full_text_format", "extraction_scope", "full_document_read", "sections",
+                    "vertical", "structured", "publicador", "imagens",
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
@@ -769,6 +772,10 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
             providers_for_query = academic + general
         else:
             providers_for_query = general + academic
+        import query_intelligence
+        if query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science'):
+            specialized = [p for p in providers_for_query if isinstance(p, ProvedorOrquestrado)]
+            providers_for_query = specialized + [p for p in providers_for_query if p not in specialized]
         encontrados, info = buscar_com_fallback(providers_for_query, q, 6,
                                                 deve_parar=parar)
         if info.get("cancelado"):
@@ -875,6 +882,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             rec = recuperar_fn(a["url"])
             return {"titulo": rec.get("titulo") or a["titulo"],
                     "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                    "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                    "content_scope": rec.get('content_scope') or 'page_text',
                     "midia": rec.get("midia") or [],
                     "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
                     "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
@@ -915,16 +924,25 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     import search_orchestrator as orch
     subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
     termos_pedido = orch._termos_correspondencia(subject)
+    import query_intelligence
+    import search_verticals
+    saved_request = (job.get('ajustes') or {}).get('request') or {}
+    request = saved_request if saved_request.get('original_request') == job['objetivo'] else query_intelligence.analyze(job['objetivo'])
 
     def _candidato(a, rec):
         return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
                 'trecho': rec.get('texto') or '',
+                'texto_lido': bool(rec.get('texto_lido')),
                 'structured': (rec.get('metadados') or {}).get('structured', []),
                 'publicado_em': (rec.get('metadados') or {}).get('publicado_em')
                 or a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em')}
 
     def _corresponde(a, rec):
-        return not termos_pedido or orch._util_para_pedido(_candidato(a, rec), termos_pedido, subject)
+        candidate = _candidato(a, rec)
+        if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel'):
+            if not search_verticals.assess(request, candidate)['eligible']:
+                return False
+        return not termos_pedido or orch._util_para_pedido(candidate, termos_pedido, subject)
 
     def _util(a, rec):
         texto = (rec.get('texto') or '').strip()
@@ -1083,7 +1101,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                  or research.agora_iso()}
         import query_intelligence
         import search_verticals
-        fonte['vertical']=search_verticals.assess(query_intelligence.analyze(subject),candidate)
+        fonte['vertical']=search_verticals.assess(request,candidate)
         fonte['publicado_em']=candidate.get('publicado_em') or ''
         fonte['structured']=(candidate.get('structured') or [])[:2]
         fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
@@ -1098,6 +1116,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     fonte[key] = a[key]
             fonte['full_text_fetched']=bool(rec.get('full_text_fetched'))
             fonte['full_text_url']=rec.get('full_text_url','')
+            fonte['full_text_format']=rec.get('full_text_format','')
+            fonte['extraction_scope']=rec.get('extraction_scope','')
+            fonte['full_document_read']=False
+            fonte['sections']=[{'title': str(s.get('titulo') or '')[:160], 'text': str(s.get('texto') or '')[:800]}
+                               for s in (rec.get('secoes') or [])[:8] if isinstance(s,dict)]
             fonte['content_scope']=rec.get('content_scope',a.get('content_scope','metadata_only'))
             fonte['texto_lido']=bool(rec.get('full_text_fetched'))
             fonte['access_state']='read' if rec.get('full_text_fetched') else 'metadata_only'
@@ -2264,7 +2287,9 @@ def _lacunas(job: dict) -> list:
     for s in job["plano"]:
         # Old callers supplied a compact plan with evidence IDs only. Preserve
         # that gap-list API; real jobs always carry an objective and read state.
-        known = bool(s.get("_evidencias")) if "objetivo" not in job else any(_evidencia_lida(e) for e in s.get("_evidencias", []))
+        known = bool(s.get("_evidencias")) if "objetivo" not in job else any(
+            _evidencia_lida(e) and (e.get('vertical') or {}).get('data_complete', True)
+            for e in s.get("_evidencias", []))
         if s.get("tipo") == "ler" and known:
             com_evid.add(s.get("alvo"))
     covered = {base for base in subs_busca if any(

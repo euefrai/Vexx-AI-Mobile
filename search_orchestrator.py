@@ -525,7 +525,7 @@ def deduplicar(achados: list) -> tuple:
     fica como base); sem data conhecida, mantém a ordem de chegada.
     """
     vistos, unicos, descartes = {}, [], []
-    for a in achados or []:
+    for a in sorted(achados or [], key=lambda item: item.get('content_scope') == 'feed_metadata'):
         url = (a.get("url") or "").strip()
         doi = str(a.get("doi") or "").lower().removeprefix("https://doi.org/").removeprefix("doi:").strip()
         chave = "doi:" + doi if re.fullmatch(r"10\.\d{4,9}/\S+", doi) else canonizar_url(url)
@@ -559,7 +559,7 @@ def deduplicar(achados: list) -> tuple:
                     break
             if dono is not None:
                 d_dono, d_nova = _data_do_item(dono), _data_do_item(a)
-                if d_nova is not None and d_dono is not None and d_nova < d_dono:
+                if a.get('content_scope') != 'feed_metadata' and d_nova is not None and d_dono is not None and d_nova < d_dono:
                     # Evidência real (pubDate declarada): a versão mais antiga é
                     # a base; a mantida até aqui vira republicação — sem apagar.
                     reps = list(dono.get("republicacoes") or [])
@@ -921,7 +921,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     ultimo_ganho = True  # ganho da consulta anterior (parada por ganho zero)
 
     def _uteis() -> int:
-        return sum(1 for a in achados if _util_para_pedido(a, termos_c, consulta))
+        return sum(1 for a in achados if a.get('content_scope') != 'feed_metadata' and _util_para_pedido(a, termos_c, consulta))
 
     def _retry_com_conteudo(nome: str, q_atual: str) -> bool:
         """Mesma fonte, consulta reformulada (pergunta → conteúdo); 1x por fonte.
@@ -987,6 +987,11 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 etapas.append(f"{nome}: {len(achados_novos)} resultados "
                               f"({q[:40]})")
                 achados.extend(achados_novos)
+                if achados_novos and all(a.get('content_scope') == 'feed_metadata' for a in achados_novos):
+                    etapas.append(f'{nome}: RSS apenas para descoberta; procurando artigos originais')
+                    provedor_indice += 1
+                    tentativa_provedor += 1
+                    continue
                 if achados_novos and termos_c and not any(
                         _util_para_pedido(a, termos_c, consulta) for a in achados_novos):
                     # resultados existem, mas nenhum responde ao pedido:

@@ -28,6 +28,21 @@ CASES = [
 ]
 
 
+def load_cases(path=None):
+    cases = json.loads(Path(path).read_text(encoding='utf-8'))['cases'] if path else CASES
+    if not isinstance(cases, list) or not 1 <= len(cases) <= 40:
+        raise ValueError('evaluation requires 1..40 cases')
+    normalized, ids = [], set()
+    for row in cases:
+        ident, route, question = row
+        if not re.fullmatch(r'[a-z0-9_-]{1,60}', ident) or ident in ids:
+            raise ValueError('case IDs must be unique safe basenames')
+        if route not in ('shopping','followup','research','live_data') or not isinstance(question, str) or not 1 <= len(question) <= 1000:
+            raise ValueError('invalid evaluation case')
+        normalized.append((ident, route, question)); ids.add(ident)
+    return normalized
+
+
 def run_case(case, workspace):
     import pc_agent
     import research_agents as ra
@@ -35,6 +50,11 @@ def run_case(case, workspace):
     import conversation_followups
     import research_quality_lab as lab
     from research_synthesis import normalized
+    import research
+    import search_providers
+    for blocked in os.environ.get('VEXX_EVAL_BLOCKED_PROVIDERS', '').split(','):
+        if blocked in search_providers.PROVEDORES:
+            research._circuito_falha(blocked)
 
     ident, route, question = case
     db = pc_agent.open_db(workspace / 'evaluation.sqlite3')
@@ -42,8 +62,13 @@ def run_case(case, workspace):
     started = time.monotonic()
     result = {'id': ident, 'route': route, 'question': question,
               'claim_support_human_review': None, 'ui_tested': False}
+    import query_intelligence
+    result['request'] = query_intelligence.analyze(question)
     try:
-        if route == 'shopping':
+        if route == 'live_data':
+            import live_data
+            result.update(answer=live_data.respond(question, {}), model_calls_requested=0)
+        elif route == 'shopping':
             data = shopping.pesquisar(db, owner, question, conv, usar_cache=False, teto_paginas=3)
             text = shopping.resumo_texto(data)
             (workspace / 'price-answer.txt').write_text(text, encoding='utf-8')
@@ -62,7 +87,7 @@ def run_case(case, workspace):
             calls = []
             cfg = pc_agent.ai_config()
             # Never silently switch to a paid model to make the benchmark pass.
-            writer = pc_agent._research_writer(cfg, threading.Event()) if cfg['model'].endswith(':free') else None
+            writer = pc_agent._research_writer(cfg, threading.Event()) if cfg['model'].endswith(':free') and not os.environ.get('VEXX_EVAL_MODEL_BLOCKED') else None
             def measured_writer(messages, timeout):
                 calls.append({'timeout_s': round(timeout, 2)})
                 return writer(messages, timeout)
@@ -92,6 +117,14 @@ def run_case(case, workspace):
                           citation_mechanics=metrics,
                           displayed_citation_links=displayed,
                           search_events=[e for e in events if e['tipo'] in ('search_completed', 'source_opened', 'source_irrelevant')])
+            import research_view
+            import jdui
+            view = research_view.build_view(summary, evidence)
+            valid, _, errors = jdui.validar_mensagem(view)
+            result['jdui_valid'] = valid
+            result['jdui_errors'] = errors[:3]
+            result['jdui'] = view
+        result['provider_metrics'] = search_providers.metricas()
         result['elapsed_s'] = round(time.monotonic() - started, 3)
         return result
     finally:
@@ -102,13 +135,21 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--live', action='store_true', required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--child', choices=[c[0] for c in CASES], help=argparse.SUPPRESS)
+    parser.add_argument('--dataset', type=Path)
+    parser.add_argument('--cases', default='', help='Comma-separated IDs; no retries')
+    parser.add_argument('--child', help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
+    cases = load_cases(args.dataset)
+    if args.cases:
+        selected = args.cases.split(',')
+        if set(selected) - {c[0] for c in cases}:
+            parser.error('unknown case ID')
+        cases = [c for c in cases if c[0] in selected]
     if args.child:
         workspace = Path(os.environ['VEXX_LIVE_EVALUATION_WORKSPACE']).resolve()
         if not workspace.name.startswith('vexx-live-evaluation-'):
             parser.error('evaluation requires its isolated temporary workspace')
-        case = next(c for c in CASES if c[0] == args.child)
+        case = next(c for c in cases if c[0] == args.child)
         result = run_case(case, workspace)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
         return 0
@@ -122,16 +163,26 @@ def main(argv=None):
         env = dict(os.environ, VEXX_LIVE_EVALUATION_WORKSPACE=folder, PYTHONIOENCODING='utf-8')
         env['JULIA_SQLITE_PATH'] = str(Path(folder) / 'evaluation.sqlite3')
         env['VISUAL_CROSSING_USAGE_PATH'] = str(Path(folder) / 'weather-usage.sqlite3')
-        for ident, route, question in CASES:
+        blocked_providers = set(os.environ.get('VEXX_EVAL_BLOCKED_PROVIDERS', '').split(',')) - {''}
+        for ident, route, question in cases:
             output = args.output / f'{ident}.json'
             started = time.monotonic()
             with (args.output / f'{ident}.log').open('w', encoding='utf-8') as log:
                 try:
-                    proc = subprocess.run([sys.executable, __file__, '--live', '--child', ident,
-                                           '--output', str(output.resolve())], cwd=ROOT, env=env,
+                    command = [sys.executable, __file__, '--live', '--child', ident,
+                               '--output', str(output.resolve())]
+                    if args.dataset:
+                        command += ['--dataset', str(args.dataset.resolve())]
+                    env['VEXX_EVAL_BLOCKED_PROVIDERS'] = ','.join(sorted(blocked_providers))
+                    proc = subprocess.run(command, cwd=ROOT, env=env,
                                           stdout=log, stderr=log, timeout=65)
                     if proc.returncode == 0:
                         data = json.loads(output.read_text(encoding='utf-8'))
+                        blocked_providers.update(name for name, metrics in data.get('provider_metrics', {}).items()
+                                                 if any(metrics.get('erros', {}).get(code) for code in ('bloqueado','rate_limited')))
+                        model_code = data.get('summary', {}).get('sintese', {}).get('fallback_provider_code')
+                        if model_code in ('auth','quota','rate_limit','modelo-nao-encontrado','circuito_aberto','indisponivel'):
+                            env['VEXX_EVAL_MODEL_BLOCKED'] = model_code
                     else:
                         data = {'id': ident, 'state': 'error', 'exit_code': proc.returncode}
                 except subprocess.TimeoutExpired:

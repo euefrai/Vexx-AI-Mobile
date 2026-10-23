@@ -24,7 +24,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
     local = now.astimezone(ZoneInfo(timezone_name))
     t = normalized(text)
     domain = 'general'
-    if re.search(r'\b(voos?|passagens? aereas?|avioes?|aeroportos?)\b', t) or (re.search(r'\bpassagens? de .+? para ', t) and 'onibus' not in t):
+    if re.search(r'\b(voos?|passage(?:m|ns) aereas?|(?:aviao|avioes)|aeroportos?)\b', t) or (re.search(r'\bpassage(?:m|ns) de .+? para ', t) and 'onibus' not in t):
         domain = 'air_travel'
     elif re.search(r'\b(onibus|rodoviari[ao]s?)\b', t):
         domain = 'bus_travel'
@@ -40,7 +40,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         domain = 'documents'
     params = {}
     resolved = str(text)
-    relative = re.search(r'\b(daqui a|ultimos?|ultimas?|proximos?|proximas?)\s+(\d{1,3}|um|uma|dois|duas|sete|quinze|trinta)\s+(dias?|semanas?)\b', t)
+    relative = re.search(r'\b(daqui a|ultimos?|ultimas?|proximos?|proximas?)\s+(\d{1,3}|um|uma|dois|duas|sete|quinze|trinta)\s+(dias?|semanas?|horas?)\b', t)
     if relative:
         count = int(relative[2]) if relative[2].isdigit() else _NUMBERS[relative[2]]
         days = count * (7 if relative[3].startswith('semana') else 1)
@@ -49,6 +49,11 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         past = relative[1].startswith('ultim')
         start = local.date() - timedelta(days=days) if past else local.date()
         end = local.date() if past else local.date() + timedelta(days=days)
+        if relative[3].startswith('hora'):
+            start_at = local - timedelta(hours=count) if past else local
+            end_at = local if past else local + timedelta(hours=count)
+            start, end = start_at.date(), end_at.date()
+            params.update(start_at=start_at.isoformat(), end_at=end_at.isoformat())
         params.update(start_date=start.isoformat(), end_date=end.isoformat())
         if relative[1] == 'daqui a':
             params['departure_date'] = end.isoformat()
@@ -62,7 +67,10 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
     if explicit and domain in ('air_travel', 'bus_travel'):
         params['departure_date'] = datetime.strptime(explicit[1], '%Y-%m-%d').date().isoformat()
     if domain in ('air_travel', 'bus_travel'):
-        route = re.search(r'\b(?:voos?|passagens?(?:\s+(?:aereas?|de onibus|rodoviarias?))?|onibus)\s+de\s+(.+?)\s+para\s+(.+?)(?=\s+(?:para\s+)?daqui|\s+em\s+20\d\d|,|[.!?]|$)', t)
+        relative_day = re.search(r'\b(depois de amanha|amanha|hoje)\b', t)
+        if relative_day and not params.get('departure_date'):
+            params['departure_date'] = (local.date() + timedelta(days={'hoje': 0, 'amanha': 1, 'depois de amanha': 2}[relative_day[1]])).isoformat()
+        route = re.search(r'\b(?:voos?|passage(?:m|ns)(?:\s+(?:aereas?|de onibus|rodoviarias?))?|onibus)\s+de\s+(.+?)\s+para\s+(.+?)(?=\s+(?:para\s+)?(?:daqui|hoje|amanha|depois de amanha|\d+ adultos?|um adulto)|\s+em\s+20\d\d|,|[.!?]|$)', t)
         if route:
             params.update(origin=str(text)[route.start(1):route.end(1)].strip(),
                           destination=str(text)[route.start(2):route.end(2)].strip())
@@ -88,11 +96,16 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         location = re.search(r'\b(?:em|noticias de)\s+(.+?)(?=\s+(?:nos|nas|ultimos|ultimas|proximos|proximas|recentemente)|[,.!?]|$)', t)
         if location:
             params['location'] = str(text)[location.start(1):location.end(1)].strip()
+            city_state = re.fullmatch(r'(.+?)/([A-Za-z]{2})', params['location'])
+            if city_state:
+                params.update(location=city_state[1].strip(), region=city_state[2].upper())
             region = re.match(r',\s*([a-z ]{2,30}?)(?=,|\s+(?:nos|nas|ultimos|ultimas)|[.!?]|$)', t[location.end():])
             if region:
                 params['region'] = region[1].strip()
         if domain == 'news' and not params.get('start_date') and re.search(r'\b(ultimas?|recentemente|recentes?)\b', t):
             params.update(start_date=(local.date()-timedelta(days=7)).isoformat(),end_date=local.date().isoformat(),window_inferred=True)
+        if domain == 'events' and not params.get('start_date') and re.search(r'\b(futuros?|proximos?)\b', t):
+            params.update(start_date=local.date().isoformat(), end_date=(local.date()+timedelta(days=90)).isoformat(), window_inferred=True)
     search_query = resolved
     if domain in ('air_travel', 'bus_travel') and params.get('origin') and params.get('destination'):
         mode = 'voos' if domain == 'air_travel' else 'passagens de ônibus'
@@ -106,7 +119,13 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         # News dates are a verification filter, not literal text that pages must repeat.
         if domain == 'events' and params.get('end_date'):
             search_query += ' ' + params['start_date'] + ' ' + params['end_date']
-    return {'version': 1, 'search_query': search_query[:240], 'domain': domain, 'original_request': str(text)[:1000],
+    required = {'air_travel': ['origin','destination','departure_date','adults','operator','departure_time','price','currency','inventory','source','observed_at'],
+                'bus_travel': ['origin','destination','departure_date','operator','departure_time','price','currency','inventory','source','observed_at'],
+                'news': ['article_url','article_text','published_at','location','source'],
+                'events': ['name','location','event_date','organizer','source'],
+                'science': ['title','doi','authors','publication_date','content_scope','source']}.get(domain, ['source','content_scope'])
+    missing = [key for key in ('origin','destination','departure_date','adults') if domain in ('air_travel','bus_travel') and not params.get(key)]
+    return {'version': 1, 'required_data': required, 'missing_parameters': missing, 'search_query': search_query[:240], 'domain': domain, 'original_request': str(text)[:1000],
             'resolved_request': resolved[:1000], 'parameters': params,
             'temporal': bool(relative or explicit or re.search(r'\b(agora|atual|recentes?|hoje)\b', t)),
             'resolved_at': now.isoformat(), 'timezone': timezone_name,

@@ -969,6 +969,30 @@ def _ram_do_produto(p: dict) -> tuple | None:
     return (max(fis) if fis else 0, max(vir) if vir else 0)
 
 
+def _categoria_comercial(value: str) -> str:
+    """Explicit product families; absence of a family is not a mismatch."""
+    value = _sem_acentos(str(value or ''))
+    families = (
+        ('celular', r'celular|smartphone|iphone'),
+        ('notebook', r'notebook|laptop|ultrabook|macbook'),
+        ('fone', r'fone|fones|headphone|headset|earbuds|airpods'),
+        ('tv', r'smart tv|televisor|tv'), ('monitor', r'monitor'),
+        ('geladeira', r'geladeira|refrigerador'),
+        ('lavadora', r'lavadora|maquina de lavar'),
+        ('livro', r'livro|livros'), ('furadeira', r'furadeira'),
+        ('parafusadeira', r'parafusadeira'), ('resistor', r'resistor'),
+        ('capacitor', r'capacitor'), ('transistor', r'transistor'),
+        ('pastilha', r'pastilha de freio'), ('amortecedor', r'amortecedor'),
+        ('tenis', r'tenis'), ('bola', r'bola de basquete'),
+        ('movel', r'cadeira|mesa|sofa|colchao|guarda-roupas?'),
+        ('construcao', r'cimento|argamassa|tijolo|rejunte'),
+    )
+    for family, pattern in families:
+        if re.search(r'\b(?:' + pattern + r')\b', value):
+            return family
+    return 'celular' if re.search(r'\bgalaxy\s+[as]\d{2}\b', value) else ''
+
+
 def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
     """(dentro, fora_com_motivo). Fora do orçamento/specs vem explicado.
 
@@ -985,6 +1009,12 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
         pendencias = []
         requested=_sem_acentos(criterios.get('texto',''))
         product_text=_sem_acentos(str(p.get('nome',''))+' '+str(p.get('specs') or {}))
+        category = _categoria_comercial(criterios.get('categoria') or requested)
+        found_category = _categoria_comercial(p.get('nome') or '')
+        if category and found_category and category != found_category:
+            motivos.append('tipo de produto diferente do pedido'); codigos.append('tipo_produto_diferente')
+        if category and re.search(r'\b(capa|pelicula|suporte para|peca de reposicao|compativel com)\b', _sem_acentos(p.get('nome') or '')) and not re.search(r'\b(capa|pelicula|suporte|peca|compativel)\b', requested):
+            motivos.append('acessório em vez do produto solicitado'); codigos.append('acessorio')
         # Explicit cross-category conflicts in newly covered families, not missing metadata.
         families=(r'geladeira|refrigerador',r'lavadora|maquina de lavar',r'furadeira',r'parafusadeira',r'livro',r'resistor',r'capacitor',r'transistor',r'pastilha de freio',r'amortecedor',r'bola de basquete')
         asked=next((rx for rx in families if re.search(r'\b(?:'+rx+r')\b',requested)),None)
@@ -1123,6 +1153,8 @@ def separar_alternativas(fora: list, criterios: dict, maximo: int = 3,
     alts = []
     for p in fora or []:
         codigos = set(p.get("excluido_codigos") or [])
+        if codigos & {'tipo_produto_diferente', 'acessorio'}:
+            continue
         difs: list = []
         distancias: list = []
         if "marca_diferente" in codigos or "marca_nao_confirmada" in codigos:
@@ -2382,7 +2414,12 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     # visita a página. Demais URLs passam pela extração JSON-LD/OG.
     brutos: list = []
     paginas = []
-    for a in sorted(achados, key=_prioridade_descarga)[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
+    def prioridade_pedido(a):
+        identity = _sem_acentos(str(a.get('titulo') or '') + ' ' + urllib.parse.unquote(str(a.get('url') or '')))
+        specs = criterios.get('specs') or {}
+        match = _modelo_mencionado(specs, identity) if specs.get('modelos') or specs.get('familias') else True
+        return (_prioridade_descarga(a), not match)
+    for a in sorted(achados, key=prioridade_pedido)[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
         if a.get("origem") == "mlb" and isinstance(a.get("mlb"), dict):
             try:
                 extraido = produto_de_mlb(a["mlb"])
@@ -2393,7 +2430,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             except Exception as exc:
                 log.info("shopping: item mlb ignorado (%s)", type(exc).__name__)
         paginas.append(a)
-    paginas.sort(key=_prioridade_descarga)  # estável: específica primeiro
+    paginas.sort(key=prioridade_pedido)  # página individual e identidade antes de modelos alheios
     relatorio: list = []
     consultadas: list = []
     ondas = 0
@@ -2496,7 +2533,16 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         diagnosticos.add("PRICE_UNVERIFIED")
     esgotado = bool(not brutos and ondas >= MAX_ONDAS_PAGINAS
                     and len(paginas) > len(consultadas))
-    resultado = {"produtos": produtos, "alternativas": alternativas,
+    trace = [{'id': p.get('id'), 'source_url': p.get('url_final') or p.get('url'),
+              'item_url': p.get('url_item') or p.get('url'), 'product': p.get('nome'),
+              'variant': p.get('variante'), 'match': p.get('correspondencia_tipo'),
+              'mismatches': p.get('excluido_codigos') or [],
+              'price_declared': bool(p.get('preco_confirmado')), 'currency': p.get('moeda'),
+              'stock_declared': p.get('disponibilidade'), 'stock_independently_verified': False,
+              'image_state': p.get('imagem_veredito'), 'link_state': p.get('link_veredito'),
+              'listing_item': bool(p.get('item_de_listagem')), 'tier': _tier(p)}
+             for p in (produtos + alternativas + duros)[:24]]
+    resultado = {"produtos": produtos, "alternativas": alternativas, 'source_trace': trace,
                  "consultas": consultas, "diagnostico_paginas": relatorio,
                  "candidatos": [{"url": a.get("url"), "titulo": a.get("titulo"),
                                   "tipo": classificar_candidato(a)} for a in achados[:24]],

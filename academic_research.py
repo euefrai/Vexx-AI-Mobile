@@ -210,6 +210,11 @@ def normalize_openalex(item: dict, provider_url: str) -> dict:
     location_candidates = ([location] if isinstance(location, dict) else []) + [
         x for x in locations if isinstance(x, dict)
     ]
+    # Select the open location itself, rather than attaching its licence to a
+    # different, possibly closed primary landing page.
+    open_locations = [x for x in location_candidates if x.get('is_oa') is True]
+    if open_locations:
+        location_candidates = open_locations
     landing = next((x.get("landing_page_url") for x in location_candidates
                     if isinstance(x.get("landing_page_url"), str)
                     and x["landing_page_url"].startswith(("http://", "https://"))), None)
@@ -237,7 +242,9 @@ def normalize_openalex(item: dict, provider_url: str) -> dict:
         journal, repository, abstract, pdf, license_value, _explicit_review_status(item),
         citation_count,
     )
-    record['open_access'] = any(x.get('is_oa') is True and x.get('pdf_url')==pdf for x in location_candidates)
+    record['open_access'] = any(x.get('is_oa') is True and
+                              (x.get('pdf_url') == pdf if pdf else x.get('landing_page_url') == landing)
+                              for x in location_candidates)
     return record
 
 
@@ -250,9 +257,11 @@ def read_open_text(record, timeout, fetch_pdf):
     license_value=str(record.get('license') or '').lower()
     allowed=record.get('open_access') is True or license_value.startswith(('cc-','https://creativecommons.org/','http://creativecommons.org/'))
     pdf=_external_url(record.get('pdf_url'))
-    if not allowed or not pdf: return None
+    candidate = pdf or _external_url(record.get('landing_url') or record.get('url'))
+    if not allowed or not candidate: return None
     try:
-        rec=fetch_pdf({'url':pdf,'titulo':record.get('titulo') or record.get('title',''),'pdf_expected':True},timeout)
+        rec=fetch_pdf({'url':candidate,'titulo':record.get('titulo') or record.get('title',''),
+                       'pdf_expected':bool(pdf)},timeout)
         content=str((rec or {}).get('texto') or '')
         import query_intelligence
         normalized=query_intelligence.normalized(content)
@@ -264,7 +273,9 @@ def read_open_text(record, timeout, fetch_pdf):
         if not rec or not rec.get('lida') or len(content.strip())<1000 or not identity:
             return {'oa_attempt':'identity_or_text_insufficient'}
         return {**rec,'content_scope':'document_text','full_text_fetched':True,
-                'full_text_url':rec.get('final') or pdf,'access_state':'read','texto_lido':True,
+                'full_text_url':rec.get('final') or candidate,'access_state':'read','texto_lido':True,
+                'extraction_scope':'bounded_text','full_document_read':False,
+                'full_text_format':'pdf' if pdf else 'html',
                 'oa_attempt':'read_identity_matched'}
     except (research.ResearchErro, OSError, ValueError) as exc:
         # Only an optional retrieval attempt; keep the actual abstract on failure.

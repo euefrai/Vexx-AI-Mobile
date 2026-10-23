@@ -169,19 +169,20 @@ def _files(resumo: dict) -> dict:
 
 def source_card(item: dict, used=False) -> dict:
     import research_agents
+    from web_extract import melhor_trecho
     read=research_agents._evidencia_lida(item)
     abstract=item.get('content_scope')=='abstract_only'
     full=bool(item.get('full_text_fetched'))
     vertical=item.get('vertical') or {}
     data=vertical.get('data') or {}
-    details=[]
+    details=['Disponibilidade atual não confirmada'] if vertical.get('kind') in ('air_travel','bus_travel') else []
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
     for key,label in labels.items():
         if data.get(key): details.append(label+': '+str(data[key])[:160])
     if data.get('price') and vertical.get('verification')=='MATCHED_DECLARED_FARE':
-        details.append('Tarifa declarada: '+data['price']+' '+data.get('currency','')+'; disponibilidade não verificada')
+        details.insert(1, 'Tarifa declarada: '+data['price']+' '+data.get('currency','')+'; disponibilidade não verificada')
     if vertical.get('kind') in ('air_travel','bus_travel'):
         details.append('Sem confirmação de disponibilidade atual')
     images=item.get('imagens') or []
@@ -189,9 +190,9 @@ def source_card(item: dict, used=False) -> dict:
     return {'titulo':item.get('titulo') or item.get('title'),'url':item.get('url'),
             'dominio':item.get('dominio'),'data':item.get('publicado_em') or str(item.get('year') or ''),
             'origem_declarada':item.get('origem_declarada') or '',
-            'data_evento':data.get('event_date') or '', 'trecho':item.get('trecho'),
+            'data_evento':data.get('event_date') or '', 'trecho':melhor_trecho(str(item.get('trecho') or ''), '', 300),
             'tipo':item.get('publication_type') or {'news':'Notícia','events':'Evento declarado','air_travel':'Voo · informações encontradas','bus_travel':'Ônibus · informações encontradas'}.get(vertical.get('kind'),item.get('tipo','Fonte')),
-            'escopo':'Texto de PDF aberto recuperado; extração limitada' if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado' if read else 'Página não lida; sem suporte factual',
+            'escopo':('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado' if read else 'Página não lida; sem suporte factual',
             'relacao':'Trecho ligado a uma afirmação' if used else 'Fonte de contexto',
             'status':'utilizada' if used and read else 'aberta' if read else 'encontrada',
             'publicador':item.get('publicador') or item.get('journal') or item.get('repository') or '',
@@ -248,6 +249,7 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         f"**Status:** {status_rot.get(resumo.get('status'), _text(resumo.get('status'), 40) or '-')} · "
         f"**Modo:** {_text(resumo.get('modo'), 40) or '-'} · "
         f"**Evidências:** {int(resumo.get('evidencias') or 0)}",
+        '**Cobertura dos dados:** ' + ('parcial; há dados pendentes' if (resumo.get('usados') or {}).get('research_outcome', {}).get('state') == 'partial' else 'consulte evidências e limitações'),
         f"**Mídia descoberta:** {int(resumo_midia.get('total') or 0)} item(ns); "
         "imagens não são evidência e vídeos não foram assistidos ou analisados.",
         "**Limite epistêmico:** a verificação é lexical/determinística; "
