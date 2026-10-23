@@ -1323,6 +1323,7 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                        sintetizar_fn=None, timeout=25, deve_parar=None, verificar_fn=None) -> dict:
     """Optional assisted writing; extraction remains the fail-closed fallback."""
+    from web_extract import melhor_trecho
     tops = sorted([e for e in evidencias if _evidencia_lida(e)],
                   key=lambda e: e.get("score", 0), reverse=True)[:6]
     labels = {e["id"]: f"E{i + 1}" for i, e in enumerate(evidencias)}
@@ -1340,7 +1341,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
         else:
             rotulo = ""
         link = research_synthesis.source_link(labels[e['id']], e.get('url', ''))
-        content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {e['trecho'][:300]}"
+        content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {melhor_trecho(e['trecho'], '', 300)}"
         entry = f"{link} {content}"
         if len('\n\n'.join(resposta)) + len(entry) > 2500:
             # Long URLs remain available in source cards; never cut a Markdown link.

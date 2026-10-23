@@ -593,15 +593,29 @@ def _penalidade_citacoes(pedaco: str) -> float:
 def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     """Trecho literal que melhor cobre os termos da consulta (sem gerar texto)."""
     texto = _normalizar(texto)
-    if not texto:
+    if not texto or janela <= 0:
         return ""
+
+    def janela_literal(inicio):
+        # Character offsets must not turn 200 into 0, or truncate decimals/signs.
+        limite = max(0, inicio - janela)
+        while inicio > limite and not texto[inicio - 1].isspace():
+            inicio -= 1
+        if inicio and not texto[inicio - 1].isspace():
+            return ""  # A token larger than the window cannot be cited whole.
+        fim = min(len(texto), inicio + janela)
+        if fim < len(texto) and not texto[fim].isspace():
+            while fim > inicio and not texto[fim - 1].isspace():
+                fim -= 1
+        return texto[inicio:fim].strip()
+
     termos = {t for t in re.findall(r"[0-9a-zà-ú]{3,}", (consulta or "").lower())}
     if not termos:
-        return texto[:janela]
+        return janela_literal(0)
     melhor, melhor_pontos = "", 0.0
     passo = max(40, janela // 2)
     for i in range(0, max(1, len(texto) - janela // 2), passo):
-        pedaco = texto[i:i + janela]
+        pedaco = janela_literal(i)
         baixo = pedaco.lower()
         pontos = sum(len(t) for t in termos if t in baixo)
         frases = pedaco.count(". ") + (1 if pedaco.endswith(".") else 0)
@@ -609,7 +623,7 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         pontos -= _penalidade_citacoes(pedaco)
         if pontos > melhor_pontos:
             melhor, melhor_pontos = pedaco, pontos
-    return (melhor or texto[:janela]).strip()
+    return melhor or janela_literal(0)
 
 
 def ilegivel(texto: str) -> bool:
