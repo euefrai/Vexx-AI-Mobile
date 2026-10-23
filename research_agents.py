@@ -697,7 +697,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "provider_url", "source_url", "fetched_at", "abstract_untrusted",
                     "abstract_kind", "provider_metadata_untrusted", "content_scope",
                     "full_text_fetched", "full_text_url", "full_text_format", "extraction_scope", "full_document_read", "sections",
-                    "vertical", "structured", "publicador", "imagens",
+                    "vertical", "structured", "publicador", "imagens", "source_recovery",
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
@@ -1107,6 +1107,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         fonte['publicado_em']=candidate.get('publicado_em') or ''
         fonte['structured']=(candidate.get('structured') or [])[:2]
         fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
+        if a.get('source_recovery'):
+            fonte['source_recovery'] = {**a['source_recovery'],
+                'state':'original_read' if fonte['texto_lido'] else 'original_unread',
+                'final_url':rec.get('final') or a['url']}
         if academic:
             for key in ("doi", "authors", "year", "journal", "repository", "abstract",
                         "landing_url", "pdf_url", "license", "review_status", "publication_type", "publication_date_origin", "provider",

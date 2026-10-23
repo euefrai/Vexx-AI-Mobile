@@ -486,7 +486,8 @@ def _pagina_de_indice(a: dict) -> bool:
         caminho = urllib.parse.urlsplit(a.get("url") or "").path or "/"
     except ValueError:
         return False
-    return bool(RX_INDICE_CAMINHO.search(caminho))
+    return bool(RX_INDICE_CAMINHO.search(caminho) or
+                re.fullmatch(r'/(noticias|news|ultimas-noticias)/?', caminho, re.I))
 
 
 def _data_do_item(a: dict):
@@ -1041,6 +1042,44 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                                          consulta)["ganho_real"]
         if provedor_indice >= len(nomes):
             break
+
+    # A feed is a lead, not an article. Spend at most two existing attempt
+    # slots on a specific headline at its declared publisher, never an opaque
+    # aggregator decoding endpoint or a bypass. All ordinary budgets still apply.
+    if request_info['domain'] == 'news' and _uteis() < int(orc['min_resultados']):
+        feeds = [a for a in achados if a.get('content_scope') == 'feed_metadata'][:2]
+        for feed in feeds:
+            publisher = urllib.parse.urlsplit(feed.get('publisher_url') or '').hostname or ''
+            title = str(feed.get('titulo') or '').strip()
+            label = str(feed.get('publicador') or '').strip()
+            if label and title.endswith(' - ' + label):
+                title = title[:-(len(label) + 3)]
+            if len(title) < 20 or not re.fullmatch(r'[a-zA-Z0-9.-]+', publisher):
+                continue
+            q_original = f'"{title[:180]}" site:{publisher}'
+            for name in [n for n in nomes if n in ('bing', 'ddg', 'marginalia')][:2]:
+                remaining = float(orc['timeout_total']) - (time.monotonic() - t0)
+                if remaining <= 0 or not _tentar(name, q_original):
+                    continue
+                try:
+                    candidates = sp.buscar(name, q_original, limite=3, timeout=min(timeout, remaining))
+                except sp.ErroProvedor as exc:
+                    falhas.append({'provedor': name, 'codigo': exc.codigo})
+                    continue
+                usados[name] = usados.get(name, 0) + 1
+                terms = set(_termos(title))
+                recovered = []
+                for candidate in candidates:
+                    host = urllib.parse.urlsplit(candidate.get('url') or '').hostname or ''
+                    overlap = len(terms & set(_termos(candidate.get('titulo') or ''))) / max(1, len(terms))
+                    if (host == publisher or host.endswith('.' + publisher)) and overlap >= 0.6:
+                        candidate['source_recovery'] = {'method':'headline_publisher_search',
+                            'feed_url':feed.get('url',''), 'publisher_url':feed.get('publisher_url',''),
+                            'feed_title':feed.get('titulo',''), 'state':'original_candidate'}
+                        recovered.append(candidate)
+                achados.extend(recovered)
+                etapas.append(f'{name}: recuperação de manchete no publicador; {len(recovered)} candidato(s), leitura pendente')
+                break
 
     unicos, descartes = deduplicar(achados)
     ranqueados = ranquear(unicos, consulta, info["classes"], info)

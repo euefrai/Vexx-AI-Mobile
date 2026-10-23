@@ -960,13 +960,29 @@ def _ram_do_produto(p: dict) -> tuple | None:
     texto = " ".join([p.get("nome", ""), p.get("modelo", ""),
                       json.dumps(p.get("specs", {}), ensure_ascii=False)]).lower()
     fis, vir = [], []
-    for m in re.finditer(r"(\d{1,2})\s?gb\s?(?:de\s?)?ram", texto):
-        janela = texto[max(0, m.start() - 30):m.end() + 30]
-        (vir if re.search(r"virtual|plus|expans|estendida|extendida", janela)
-         else fis).append(int(m.group(1)))
+    named = _extrair_ram(texto)
+    if named.get('ram_fisica_gb'): fis.append(named['ram_fisica_gb'])
+    if named.get('ram_virtual_gb'): vir.append(named['ram_virtual_gb'])
+    # Keyed specs and an unambiguous notebook title are declarations too.
+    # Never use prose mentioning upgrade capacity, storage or GPU VRAM as RAM.
+    for key, value in (p.get('specs') or {}).items():
+        label = _sem_acentos(str(key))
+        if re.search(r'\bram\b|memoria(?: fisica)?$', label) and not re.search(r'maxim|suport|expan|virtual|video', label):
+            match = re.search(r'\b(\d{1,2})\s*gb\b', str(value), re.I)
+            if match: fis.append(int(match.group(1)))
+    title = _sem_acentos(p.get('nome') or '')
+    if _categoria_comercial(title) == 'notebook':
+        for match in re.finditer(r'\b(\d{1,2})\s*gb\b', title):
+            before, after = title[max(0,match.start()-24):match.start()], title[match.end():match.end()+24]
+            if (int(match.group(1)) <= 64 and
+                    not re.search(r'(ssd|hdd|emmc|vram|gddr\d?|rtx\s+\d+|gtx\s+\d+)\s*[,/-:]?\s*$', before) and
+                    not re.match(r'\s*(ssd|hdd|emmc|vram|gddr|virtual|plus|expans|ram\s+(?:plus|virtual|expans))', after)):
+                fis.append(int(match.group(1)))
+                break
     if not fis and not vir:
         return None
-    return (max(fis) if fis else 0, max(vir) if vir else 0)
+    # Conflicting declarations must not be resolved by choosing the largest.
+    return (min(fis) if fis else 0, max(vir) if vir else 0)
 
 
 def _categoria_comercial(value: str) -> str:
@@ -1071,7 +1087,8 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
             if ram is None:
                 pendencias.append("RAM física não informada")
             if ram is not None and ram[0] < specs["ram_fisica_gb"] and ram[0] > 0:
-                motivos.append(f"RAM física abaixo do pedido ({ram[0]}GB)")
+                motivos.append(f"RAM física abaixo do pedido ({ram[0]}GB)"
+                               + ('; RAM virtual não substitui RAM física' if ram[1] else ''))
                 codigos.append("ram_abaixa")
             elif ram is not None and ram[0] == 0 and specs["ram_fisica_gb"] > 0:
                 motivos.append("só informa RAM virtual/expansível")

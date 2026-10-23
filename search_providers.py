@@ -212,6 +212,7 @@ def buscar_google_news(consulta: str, limite: int = 8, timeout: float = 10.0) ->
         out.append({'titulo':title,'url':link,'trecho':_limpar(node.findtext('description',''),600),
                     'origem':'google-news','tipo':'noticia','status':'encontrada',
                     'publicador':_limpar(source.text or '',120) if source is not None else '',
+                    'publisher_url':_url_ok(source.get('url','')) if source is not None else '',
                     'meta':{'publicado_em':node.findtext('pubDate','')[:80]},'content_scope':'feed_metadata'})
     if not out: raise ErroProvedor('Feed sem notícias correspondentes.','vazio')
     return out
