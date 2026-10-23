@@ -165,3 +165,14 @@ def test_documentation_navigation_links_do_not_become_media_cards(research_job):
     ra._agregar_midia(db,job,[{'type':'document','url':'https://docs.python.org/3/contents.html'},
                              {'type':'document','url':'https://docs.python.org/3/manual.pdf'}])
     assert [m['url'] for m in job['midia']]==['https://docs.python.org/3/manual.pdf']
+
+
+def test_read_paper_does_not_render_reference_links_as_duplicate_file_gallery():
+    import research_view
+    summary={'id':'rj-v596-paper','objetivo':'Compare estudos sobre baterias',
+             'midia':[{'type':'document','title':'Reference link','url':'https://example.org/reference.pdf'}]}
+    view=research_view.build_view(summary,[{'titulo':'Paper','url':'https://example.org/paper.pdf',
+        'doi':'10.1234/paper','texto_lido':True,'full_text_fetched':True,'trecho':'Bounded paper excerpt.'}])
+    components=[b.get('component') for b in view['blocks']]
+    assert 'sources' in components and 'media' not in components
+    assert len(summary['midia'])==1  # Discovery remains available for provenance/export.
