@@ -241,7 +241,18 @@ def recuperar_feed_publicador(lead: dict, fetch) -> list:
     final,page=fetch(home,'html')
     if urllib.parse.urlsplit(final).hostname!=host: return []
     links=Links();links.feed(page)
-    if not links.feeds: return []
+    import web_extract
+    terms=set(orch._termos(lead.get('titulo') or ''))
+    direct=[]
+    for link in web_extract.extrair_links(page,final,limite=100):
+        target=urllib.parse.urlsplit(link['url']).hostname or ''
+        overlap=len(terms & set(orch._termos(link['texto'])))/max(1,len(terms))
+        if (target==host or target.endswith('.'+host)) and overlap>=0.6:
+            direct.append({'titulo':link['texto'],'url':link['url'],'trecho':'',
+                'origem':'publisher-feed','tipo':'noticia','content_scope':'article_candidate',
+                'source_recovery':{'method':'publisher_link','publisher_url':home,
+                    'feed_url':lead.get('url',''),'state':'original_candidate'}})
+    if direct or not links.feeds: return direct[:2]
     feed_url,xml=fetch(links.feeds[0],'feed')
     try: root=ET.fromstring(xml)
     except ET.ParseError: return []

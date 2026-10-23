@@ -1232,7 +1232,7 @@ async function researchWorkspaceAbrir(id) {
     const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
     view.replaceChildren();
     if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
-    JDUI.mount(view, [r.message], { markdown: renderMarkdown });
+    JDUI.mount(view, [r.message], { markdown: renderMarkdown, download: (name, mime, text) => downloadFile(name, mime, text) });
   } catch (_) {
     titulo.textContent = 'Pesquisa';
     view.replaceChildren();
@@ -1254,7 +1254,7 @@ async function researchCarregaView(force) {
     const r = await api('/api/research/view?job_id=' + encodeURIComponent(id));
     if (!r || !r.message || typeof JDUI === 'undefined') throw new Error('sem visão');
     box.replaceChildren();
-    JDUI.mount(box, [r.message], { markdown: renderMarkdown });
+    JDUI.mount(box, [r.message], { markdown: renderMarkdown, download: (name, mime, text) => downloadFile(name, mime, text) });
     box.dataset.job = id;
   } catch (_) {
     box.replaceChildren();

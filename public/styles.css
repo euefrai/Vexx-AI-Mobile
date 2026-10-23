@@ -1755,6 +1755,7 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .jdui-source-provenance summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .jdui-media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
 .jdui-media-grid>.jdui-title{grid-column:1/-1}
+.jdui-media-grid>.jdui-source{grid-column:1/-1}
 .jdui-media-grid .jdui-pcard{min-width:0;align-self:start}
 .jdui-media-grid .jdui-pimg{object-fit:contain;aspect-ratio:16/10}
 .jdui-media-grid .jdui-cardacts{flex-wrap:wrap}

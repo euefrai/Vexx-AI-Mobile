@@ -317,7 +317,8 @@ def discover_search_media(results: list[dict]) -> list[dict]:
     """
     out, seen = [], set()
     for source in (results or [])[:MAX_MEDIA]:
-        url = _safe_url(source.get('pdf_url') or source.get('url'))
+        metadata = source.get('meta') or {}
+        url = _safe_url((metadata.get('original_url') if source.get('origem')=='commons' else '') or source.get('pdf_url') or source.get('url'))
         if not url:
             continue
         import ipaddress
@@ -329,7 +330,7 @@ def discover_search_media(results: list[dict]) -> list[dict]:
             if host == 'localhost' or host.endswith(('.localhost', '.local', '.internal')):
                 continue
         kind = ('image' if source.get('tipo') == 'imagem' and source.get('origem') == 'commons'
-                and _host(url) == 'upload.wikimedia.org' else
+                and _host(url) in ('upload.wikimedia.org','thumb.wikimedia.org') else
                 'video' if _is_video(url) else
                 'document' if source.get('pdf_url') or urllib.parse.urlsplit(url).path.lower().endswith('.pdf') else '')
         if not kind:

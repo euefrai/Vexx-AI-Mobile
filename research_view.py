@@ -240,11 +240,17 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
             rows.append(row)
         candidatos.append(('table',{'title':'Estudos: trechos extraídos, condições não normalizadas',
             'columns':['Estudo','Métodos','Resultados','Limitações'],'rows':rows}))
+    elif len(papers)>=2:
+        candidatos.append(('table',{'title':'Publicações recuperadas — sem comparação experimental aprovada',
+            'columns':['Publicação','Ano','Escopo','DOI'], 'rows':[
+                [_text(p.get('titulo') or p.get('title'),150),str(p.get('year') or ''),
+                 'Extração limitada; texto integral não confirmado',_text(p.get('doi'),160)] for p in papers[:6]]}))
     # Promote actual result content before diagnostic/export controls. Different
     # intents use their existing components, without inventing empty cards.
     media_intent=bool(re.search(r'\b(imagens?|fotos?|v[ií]deos?)\b',resumo.get('objetivo',''),re.I))
     priority=['media','sources','evidence'] if media_intent else ['evidence','table','sources','media']
-    candidatos.sort(key=lambda entry: priority.index(entry[0]) if entry[0] in priority else 10)
+    if media_intent or source_items:
+        candidatos.sort(key=lambda entry: priority.index(entry[0]) if entry[0] in priority else 10)
     for component, props in candidatos:
         if component == "evidence" and not props.get("claims"):
             continue

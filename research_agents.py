@@ -847,6 +847,10 @@ def _agregar_midia(db, job: dict, itens: list) -> int:
     if not limite or not itens:
         return 0
     itens = media_evidence.relevant_media(itens, job.get('objetivo') or '')
+    import query_intelligence
+    if query_intelligence.analyze(job.get('objetivo') or '')['domain']=='documents' and not re.search(r'\b(imagens?|fotos?|v[ií]deos?)\b',job.get('objetivo') or '',re.I):
+        itens=[item for item in itens if item.get('type')=='document' and
+               not urllib.parse.urlsplit(item.get('url') or '').path.lower().endswith(('.html','.htm'))]
     atuais = [item for item in (job.get("midia") or []) if isinstance(item, dict)]
     chaves = {(item.get("type"), item.get("url")) for item in atuais}
     adicionados = 0

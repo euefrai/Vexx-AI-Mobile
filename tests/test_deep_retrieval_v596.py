@@ -7,6 +7,7 @@ import pytest
 import shopping
 import search_orchestrator as orch
 import search_providers as sp
+from test_research_parallel_reading import research_job
 
 
 @pytest.mark.parametrize('name,specs,expected', [
@@ -132,3 +133,35 @@ def test_science_fronts_preserve_topic_and_extracted_sections():
         {'titulo':'Limitations','texto':'Only one temperature.'}]})
     assert sections[0]['kind']=='methods' and sections[0]['page']==3
     assert sections[1]['kind']=='limitations' and sections[1]['page'] is None
+
+
+def test_jdui_research_sources_and_exports_validate_together():
+    import research_view
+    import jdui
+    view=research_view.build_view({'id':'rj-v596-test','objetivo':'Documentação Python','status':'concluida'},
+        [{'titulo':'Python documentation','url':'https://docs.python.org/','texto_lido':True,'trecho':'Python'}])
+    assert jdui.validar_mensagem(view)[0]
+    assert {'filecard','sources'} <= {b.get('component') for b in view['blocks']}
+    source=next(b for b in view['blocks'] if b.get('component')=='sources')['props']['items'][0]
+    assert source['leitura']=='READ'
+
+
+def test_commons_separates_thumbnail_from_original_file():
+    import media_evidence as media
+    records=media.discover_search_media([{'titulo':'Ponte Estaiada São Paulo',
+        'origem':'commons','tipo':'imagem','url':'https://thumb.wikimedia.org/thumb.jpg',
+        'meta':{'original_url':'https://upload.wikimedia.org/original.jpg',
+                'thumb_url':'https://thumb.wikimedia.org/thumb.jpg','largura':1200,'altura':750},
+        'license':'CC0'}])
+    assert records[0]['url']=='https://upload.wikimedia.org/original.jpg'
+    assert records[0]['thumb']=='https://thumb.wikimedia.org/thumb.jpg'
+    assert records[0]['rights']=='CC0' and not records[0]['evidence']
+
+
+def test_documentation_navigation_links_do_not_become_media_cards(research_job):
+    import research_agents as ra
+    db,job=research_job
+    job['objetivo']='Documentação oficial Python asyncio TaskGroup'
+    ra._agregar_midia(db,job,[{'type':'document','url':'https://docs.python.org/3/contents.html'},
+                             {'type':'document','url':'https://docs.python.org/3/manual.pdf'}])
+    assert [m['url'] for m in job['midia']]==['https://docs.python.org/3/manual.pdf']

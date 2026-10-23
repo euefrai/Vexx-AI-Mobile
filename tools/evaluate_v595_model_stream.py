@@ -86,6 +86,7 @@ def main():
             try: events.append(json.loads(line[5:].strip()))
             except ValueError: pass
     transport.update(captured_bytes=len(wire), json_sse_events=len(events),
+        capture_limit_bytes=65536, captured_prefix_only=len(wire)==65536,
         upstream_error_events=sum(isinstance(e,dict) and bool(e.get('error')) for e in events),
         nonempty_content_events=sum(bool(((e.get('choices') or [{}])[0].get('delta') or {}).get('content')) for e in events if isinstance(e,dict)))
     choices=[c for e in events if isinstance(e,dict) for c in (e.get('choices') or []) if isinstance(c,dict)]
