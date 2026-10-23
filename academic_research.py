@@ -256,8 +256,26 @@ def scientific_sections(record):
     out=[]
     for section in (record.get('secoes') or [])[:12]:
         title=str(section.get('titulo') or '')[:160]
-        body=str(section.get('texto') or '').strip()[:1000]
+        raw_body=str(section.get('texto') or '').strip()
+        body=raw_body[:1000]
         if not body: continue
+        # PDF page excerpts have no DOM headings. Recognize only explicit
+        # heading lines actually present, never infer a method from prose.
+        if section.get('pagina') is not None:
+            headings=list(re.finditer(
+                r'(?im)^\s*(?:\d+(?:\.\d+)*[.)]?\s+)?'
+                r'(Materials and methods|Methods|Methodology|Experimental(?: procedure)?|'
+                r'Results(?: and discussion)?|Findings|Limitations|Conclusions?|'
+                r'Materiais e métodos|Métodos|Resultados(?: e discussão)?|Limitações|Conclusões?)\s*$', raw_body))
+            if headings:
+                for i, heading in enumerate(headings):
+                    text=raw_body[heading.end():headings[i+1].start() if i+1<len(headings) else len(raw_body)].strip()[:1000]
+                    if not text: continue
+                    label=heading.group(1)
+                    kind=next((name for name,pattern in groups.items() if re.search(pattern,label,re.I)),'section')
+                    out.append({'title':label,'text':text,'kind':kind,'page':section['pagina'],
+                                'source_url':record.get('final') or '', 'extraction_scope':'bounded_section'})
+                continue
         kind=next((name for name,pattern in groups.items() if re.search(pattern,title,re.I)),'section')
         out.append({'title':title,'text':body,'kind':kind,'page':section.get('pagina'),
                     'source_url':record.get('final') or '', 'extraction_scope':'bounded_section'})

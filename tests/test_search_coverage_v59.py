@@ -182,10 +182,13 @@ def test_pdf_uses_existing_safe_reader_and_reports_parser_failure(monkeypatch):
     import source_check
     import docs_agent
     monkeypatch.setattr(source_check, '_baixar_bytes', lambda *a, **k: ('https://docs.example/source.pdf', 200, 'application/pdf', b'%PDF-fixture'))
-    monkeypatch.setattr(docs_agent, 'extrair_texto', lambda *a: 'Python asyncio supports concurrent tasks. ' * 10)
+    def bounded_reader(*args, **kwargs):
+        assert kwargs == {'pdf_max_pages': 12, 'pdf_max_chars': research.MAX_TEXTO_PAGINA}
+        return 'Python asyncio supports concurrent tasks. ' * 10
+    monkeypatch.setattr(docs_agent, 'extrair_texto', bounded_reader)
     result = research._recuperar_um(hit('Python asyncio', 'https://docs.example/source.pdf'), None, 2, 'Python asyncio')
     assert result['lida'] and result['extrator'] == 'pdf'
-    def broken(*a):
+    def broken(*a, **kwargs):
         raise docs_agent.DocErro('bad PDF', 'pdf_ilegivel')
     monkeypatch.setattr(docs_agent, 'extrair_texto', broken)
     with pytest.raises(research.ResearchErro) as error:

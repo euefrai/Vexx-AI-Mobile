@@ -355,12 +355,10 @@ def _ld_por_tipo(objs: list, tipos: set, teto: int = 8) -> list:
         if len(out) >= teto:
             return
         if isinstance(o, dict):
-            t = str(o.get("@type", "")).lower()
-            if t in tipos and isinstance(o, dict):
+            raw_types = o.get("@type", "")
+            ts = raw_types if isinstance(raw_types, list) else [raw_types]
+            if any(str(t).lower() in tipos for t in ts):
                 out.append(o)
-            if isinstance(o.get("@graph"), list):
-                for g in o["@graph"]:
-                    _anda(g)
             for v in o.values():
                 if isinstance(v, (dict, list)):
                     _anda(v)
@@ -422,7 +420,13 @@ def extrair_metadados(pagina: str, base_url: str = "") -> dict:
         if k and v and k not in metas:
             metas[k] = _limpar(v, 500)
     ld_objs = _ldjson_objs(pagina)
-    artigos = _ld_por_tipo(ld_objs, _ARTIGO_TIPOS, teto=6)
+    # Publisher/site nodes often precede the actual article in @graph. Search
+    # article types separately so a shared URL cannot deduplicate them away.
+    article_types = {"article", "newsarticle", "blogposting", "report",
+                     "scholarlyarticle", "techarticle", "review"}
+    artigos = _ld_por_tipo(ld_objs, article_types, teto=6)
+    if not artigos:
+        artigos = _ld_por_tipo(ld_objs, _ARTIGO_TIPOS, teto=6)
     principal = artigos[0] if artigos else {}
     can = ""
     m = _RX_CANON.search(pagina or "") or _RX_CANON2.search(pagina or "")

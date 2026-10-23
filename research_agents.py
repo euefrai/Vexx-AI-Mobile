@@ -978,7 +978,12 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if chave and chave not in vistas:
             vistas.add(chave)
             unicos.append(a)
-    achados = unicos
+    # RSS is discovery, not a network page read. It must not consume all three
+    # quick-mode slots before an original candidate can even reach the reader.
+    discovery_only = [a for a in unicos if a.get('content_scope')=='feed_metadata']
+    achados = [a for a in unicos if a.get('content_scope')!='feed_metadata']
+    if request['domain']=='news':
+        achados.sort(key=lambda a: not bool(a.get('source_recovery')))
     historico_falhas = job['usados'].get('failed_source_reads', [])
     if not isinstance(historico_falhas, list):
         historico_falhas = []
@@ -1014,6 +1019,20 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return reutilizadas
     job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
     baixados: dict = {}
+    def read_trace(source, state, rec=None, code=''):
+        rec=rec or {}
+        def public_url(value):
+            try:
+                parts=urllib.parse.urlsplit(value or '')
+                return urllib.parse.urlunsplit((parts.scheme,parts.netloc.rsplit('@',1)[-1],parts.path,'',''))[:500]
+            except ValueError: return ''
+        emit_meta={'url':public_url(source.get('url')), 'final_url':public_url(rec.get('final')),
+            'stage':state,'code':str(code)[:60], 'scope':rec.get('content_scope',''),
+            'extracted_chars':len(rec.get('texto') or ''), 'read':bool(rec.get('texto_lido')),
+            'published_at':(rec.get('metadados') or {}).get('publicado_em') or source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em',''),
+            'excerpt':str(rec.get('trecho_usado') or rec.get('texto') or '')[:400]}
+        emitir(db,job['id'],job['owner'],'analyst','source_read_trace','alerta' if code else 'ok',
+               'Leitura de fonte: '+state+'.',emit_meta)
 
     def _ler_cronometrado(a):
         rec = _ler(a)
@@ -1042,6 +1061,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     concluida = True
                     if not prazo or concluido_em <= prazo:
                         baixados[a["url"]] = rec
+                        read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
                         substituir = not _util(a, rec)
                 except research.ResearchErro as exc:
                     if parar():
@@ -1052,6 +1072,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                             _registrar_falha(a)
                         emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                                f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+                        read_trace(a,'fetch_failed',code=exc.codigo)
                     else:
                         substituir = False
                 except Exception as exc:
@@ -1059,6 +1080,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                         _registrar_falha(a)
                     emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                            f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+                    read_trace(a,'reader_failed',code=type(exc).__name__)
                 if (substituir and not parar() and (not prazo or time.monotonic() < prazo)
                         and len(alvos) < min(limite_tentativas, len(novas_paginas))):
                     proxima = novas_paginas[len(alvos)]
@@ -1083,6 +1105,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         emitir(db, job["id"], job["owner"], "analyst", "source_reading_timeout", "alerta",
                "Prazo de leitura esgotado; apenas resultados concluídos no prazo serão usados.",
                {"completed": len(baixados), "attempted": len(alvos)})
+    if not cancelado and not parar():
+        for lead in discovery_only[:3]:
+            baixados[lead['url']]={'titulo':lead.get('titulo',''),'texto':'','final':lead['url'],
+                'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            alvos.append(lead)
     evidencias = list(reutilizadas)
     for a in alvos:
         if cancelado or parar():
@@ -1101,6 +1128,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         academic = a.get("metadata_source") == "academic_provider"
         candidate = _candidato(a, rec)
         if texto and not _corresponde(a, rec):
+            read_trace(a,'relevance_rejected',rec,code=','.join(search_verticals.assess(request,candidate).get('reasons') or ['TOPIC_MISMATCH']))
             emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
@@ -1152,6 +1180,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             fonte['access_state']='read' if rec.get('full_text_fetched') else 'metadata_only'
             fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
+        read_trace(a,'evidence_stored' if fonte['texto_lido'] else 'discovery_stored',rec)
         for key in ('vertical','structured','publicador'):
             ev[key]=fonte[key]
         if academic:
@@ -1514,6 +1543,35 @@ def _orcamento_etapa(job: dict, tipo: str) -> str:
     return ""
 
 
+def preparar_retomada(db, owner: str, job_id: str) -> dict:
+    """Explicit user resume only; preserve reads and permit one new writing attempt."""
+    job = carregar_job(db, owner, job_id)
+    if job['status'] not in ('interrompida', 'cancelada', 'falhou'):
+        raise AgentErro('pesquisa não pode ser retomada neste estado', 'estado')
+    job['status'] = 'em_andamento'
+    if job.get('usados', {}).get('research_outcome', {}).get('state') == 'blocked':
+        job['usados'].pop('synthesis_attempted', None)
+    salvar_job(db, job, forcar_status=True)
+    return job
+
+
+def _completion_outcome(job, evidencias, lacunas, assisted=False):
+    sintese = job.get('sintese') or {}
+    provider_code = sintese.get('fallback_provider_code', '')
+    blocked = bool(provider_code)
+    read = [e for e in evidencias if _evidencia_lida(e)]
+    incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
+                  or (assisted and not sintese.get('llm'))
+                  or job.get('auditoria', {}).get('ok') is False
+                  or any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', [])))
+    state = 'blocked' if blocked else ('partial' if incomplete else 'complete')
+    return {'state': state, 'unresolved_fronts': lacunas[:8],
+            'provider_code': provider_code, 'read_sources': len(read),
+            'reason': ('redação ou revisão bloqueada pelo provedor; evidências preservadas'
+                       if blocked else 'evidências insuficientes ou limitações remanescentes'
+                       if incomplete else 'etapas concluídas dentro do escopo recuperado')}
+
+
 def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
              deve_parar=None, t0: float = 0, sintetizar_fn=None) -> dict:
     """Executa passos pendentes com orçamentos; persiste a cada passo.
@@ -1697,10 +1755,10 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             ("concluida" if todas_evid else "interrompida")
         if job["status"] == "interrompida" and not job["pendencias"]:
             job["pendencias"].append("sem evidências suficientes")
-        job["usados"]["research_outcome"] = {
-            "state": "partial" if lacunas or not todas_evid else "complete",
-            "unresolved_fronts": lacunas[:8],
-            "reason": "evidências insuficientes ou lacunas remanescentes" if lacunas or not todas_evid else "frentes com evidência recuperada; verificar limitações dos vereditos"}
+        job["usados"]["research_outcome"] = _completion_outcome(
+            job, todas_evid or _evidencias_job(db, job), lacunas, bool(sintetizar_fn))
+        if job['usados']['research_outcome']['state'] == 'blocked':
+            job['status'] = 'interrompida'
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         # V5.7.3: o estado terminal é persistido ANTES do evento: quem consultar
         # no instante do research_completed já enxerga o status final (sem
@@ -1708,9 +1766,10 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         salvar_job(db, job)
         if job["status"] in ("cancelada", "pausada"):
             return _resumo(db, job)
-        emitir(db, job["id"], owner, "orchestrator", "research_completed", "ok",
+        emitir(db, job["id"], owner, "orchestrator", "research_completed",
+               "ok" if job['usados']['research_outcome']['state'] == 'complete' else 'alerta',
                f"Pesquisa {job['status']}: {len(todas_evid or _evidencias_job(db, job))} evidências.",
-               {})
+               {"outcome": job['usados']['research_outcome']})
         return _resumo(db, job)
     except Exception as exc:
         if isinstance(exc, json_store.JSONLimitError):

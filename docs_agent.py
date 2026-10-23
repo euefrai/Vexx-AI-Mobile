@@ -244,22 +244,30 @@ def _validar_conteudo(ext: str, raw: bytes) -> None:
             raise DocErro("O conteúdo contém bytes binários incompatíveis com texto.", "conteudo_invalido")
 
 
-def _extrair_pdf(raw: bytes) -> str:
+def _extrair_pdf(raw: bytes, *, max_pages=200, max_chars=None) -> str:
+    max_pages = max(1, min(200, int(max_pages)))
     partes = []
     titulo = ""
+    def append_page(i, text):
+        if text:
+            entry = f"\n── página {i + 1} ──\n{text}"
+            remaining = max_chars - len(titulo) - sum(map(len, partes)) - len(partes) if max_chars else len(entry)
+            if remaining > 0:
+                partes.append(entry[:remaining])
+        return bool(max_chars and len(titulo) + sum(map(len, partes)) + len(partes) >= max_chars)
     try:
         from pypdf import PdfReader
         reader = PdfReader(io.BytesIO(raw))
         title = getattr(reader.metadata, "title", None) if reader.metadata else None
         if title:
             titulo = f"# {str(title)[:200]}\n"
-        for i, pg in enumerate(reader.pages[:200]):
+        for i, pg in enumerate(reader.pages[:max_pages]):
             try:
                 t = (pg.extract_text() or "").strip()
             except Exception:
                 t = ""
-            if t:
-                partes.append(f"\n── página {i + 1} ──\n{t}")
+            if append_page(i, t):
+                break
         if partes:
             return titulo + "\n".join(partes)
     except ImportError:
@@ -269,13 +277,13 @@ def _extrair_pdf(raw: bytes) -> str:
     try:
         import pypdfium2 as pdfium
         doc = pdfium.PdfDocument(io.BytesIO(raw))
-        for i in range(min(len(doc), 200)):
+        for i in range(min(len(doc), max_pages)):
             try:
                 t = (doc[i].get_textpage().get_text_range() or "").strip()
             except Exception:
                 t = ""
-            if t:
-                partes.append(f"\n── página {i + 1} ──\n{t}")
+            if append_page(i, t):
+                break
         if partes:
             return titulo + "\n".join(partes)
     except ImportError:
@@ -421,9 +429,9 @@ def _extrair_json(raw: bytes) -> str:
     return "\n".join(linhas)
 
 
-def extrair_texto(ext: str, raw: bytes, nome: str) -> str:
+def extrair_texto(ext: str, raw: bytes, nome: str, *, pdf_max_pages=200, pdf_max_chars=None) -> str:
     if ext == ".pdf":
-        texto = _extrair_pdf(raw)
+        texto = _extrair_pdf(raw, max_pages=pdf_max_pages, max_chars=pdf_max_chars)
     elif ext == ".docx":
         texto = _extrair_docx(raw)
     elif ext in (".xlsx",):

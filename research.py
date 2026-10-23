@@ -796,13 +796,19 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         if ctype != "application/pdf" or not raw.startswith(b"%PDF-"):
             raise ResearchErro("PDF sem assinatura/tipo válido.", "tipo_bloqueado")
         try:
-            texto = docs_agent.extrair_texto(".pdf", raw, "source.pdf")[:MAX_TEXTO_PAGINA]
+            texto = docs_agent.extrair_texto('.pdf', raw, 'source.pdf',
+                pdf_max_pages=12, pdf_max_chars=MAX_TEXTO_PAGINA)[:MAX_TEXTO_PAGINA]
         except docs_agent.DocErro as exc:
             raise ResearchErro("Não foi possível extrair texto do PDF.", exc.codigo) from None
         return {"titulo": a.get("titulo", ""), "texto": texto, "final": final,
                 "lida": bool(texto.strip()), "ilegivel": not bool(texto.strip()),
                 "content_scope": "document_text",
-                "extrator": "pdf", "trecho_usado": texto[:600]}
+                "extrator": "pdf", "trecho_usado": texto[:600],
+                "reading_limits": {"max_pages": 12, "max_chars": MAX_TEXTO_PAGINA,
+                                   "scope": "bounded_excerpt", "full_document_read": False},
+                "secoes": [{"titulo": f"Página {m.group(1)} — trecho extraído",
+                            "pagina": int(m.group(1)), "texto": m.group(2).strip()}
+                           for m in re.finditer(r"── página (\d+) ──\n(.*?)(?=\n── página \d+ ──|$)", texto, re.S)]}
     if recuperar_fn is not None:
         rec = recuperar_fn(a["url"])
         rec = dict(rec or {})

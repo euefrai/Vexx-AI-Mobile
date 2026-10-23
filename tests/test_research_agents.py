@@ -511,6 +511,8 @@ def test_rjob_start_status_cancel(monkeypatch):
 
 
 def test_worker_thread_completa_e_cancela(monkeypatch):
+    # Controlled reader/provider test: never inherit a developer's live model.
+    monkeypatch.setenv('VEXX_RESEARCH_SYNTHESIS', '0')
     import threading as _t
     db_path = Path(tempfile.mkdtemp()) / "w.sqlite3"
     db = pc_agent.open_db(db_path)

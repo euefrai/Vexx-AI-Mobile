@@ -77,6 +77,9 @@ def test_e2e_pesquisa_com_eventos_reais(tmp_path):
     env["JULIA_RELAY_URL"] = f"http://127.0.0.1:{porta}"
     env["JULIA_SQLITE_PATH"] = str(tmp_path / "e2e.sqlite3")
     env["HERMES_PROXY_URL"] = "http://127.0.0.1:9/v1"
+    # This integration explicitly tests deterministic research, not inference.
+    # Keep local developer model configuration out of the child PC Agent.
+    env['VEXX_RESEARCH_SYNTHESIS'] = '0'
     raiz = str(Path(__file__).resolve().parents[1])
     relay_log = tmp_path / "relay.log"
     agent_log = tmp_path / "agent.log"

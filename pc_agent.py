@@ -3301,9 +3301,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
             if ativo is not None:
                 return "Sua pesquisa já está em andamento — acompanhe no painel. 🔍"
             return "Não encontrei pesquisa interrompida para retomar. 🔍"
-        job["status"] = "em_andamento"
-        # Retomada explícita do usuário: vence cancelamento/pausa anteriores.
-        research_agents.salvar_job(db, job, forcar_status=True)
+        job = research_agents.preparar_retomada(db, owner, job['id'])
         if iniciar_job_bg(database_path(), job["id"], owner):
             return (f"Pesquisa sobre **{job['objetivo']}** retomada de onde parou "
                     f"(id {job['id']}). Acompanhe no painel. 🔍")

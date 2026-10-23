@@ -318,7 +318,7 @@ def analisar_independencia(doc_a: dict, doc_b: dict) -> dict:
     citadas = citacoes_raras_em_comum(doc_a.get("texto", ""), doc_b.get("texto", ""))
     dom_a = (urllib.parse.urlsplit(url_a).hostname or "") if url_a else ""
     dom_b = (urllib.parse.urlsplit(url_b).hostname or "") if url_b else ""
-    if mesmo_doc or hash_a == hash_b:
+    if mesmo_doc or (doc_a.get('texto','').strip() and doc_b.get('texto','').strip() and hash_a == hash_b):
         return {"relacao": "DUPLICATES", "confianca": "estrutural",
                 "motivo": "mesmo documento/conteúdo idêntico"}
     if sim >= 0.6 or citadas:
@@ -411,7 +411,8 @@ def verificar_claim(claim: dict, evidencias: list) -> dict:
     # Fonte apenas encontrada (sem leitura) não sustenta afirmação: o trecho
     # do índice pode estar fora de contexto. `lida` ausente = contrato antigo,
     # preservado; `lida=False` é explícito e só serve para localizar a fonte.
-    evidencias = [e for e in (evidencias or []) if e.get("lida") is not False]
+    evidencias = [e for e in (evidencias or []) if e.get("lida") is not False
+                  and e.get('texto_lido') is not False and e.get('content_scope') not in ('feed_metadata','metadata_only')]
     cond = claim.get("condicoes", {}) or {}
     cqs = cond.get("quantidades", [])
     toks_claim = _tokens_conteudo(claim["texto"])

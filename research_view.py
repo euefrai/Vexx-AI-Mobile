@@ -271,12 +271,16 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
                   "pausada": "pausada", "concluida": "concluída",
                   "interrompida": "interrompida", "cancelada": "cancelada",
                   "falhou": "falhou"}
+    outcome = (resumo.get('usados') or {}).get('research_outcome', {})
+    coverage = {'partial': 'parcial; há dados pendentes',
+                'blocked': 'bloqueada pelo provedor; evidências preservadas; retomada explícita disponível',
+                'complete': 'etapas concluídas no escopo recuperado; consulte as limitações'}
     linhas = [
         f"**Objetivo:** {_text(resumo.get('objetivo'), 500) or '(não informado)'}",
         f"**Status:** {status_rot.get(resumo.get('status'), _text(resumo.get('status'), 40) or '-')} · "
         f"**Modo:** {_text(resumo.get('modo'), 40) or '-'} · "
         f"**Evidências:** {int(resumo.get('evidencias') or 0)}",
-        '**Cobertura dos dados:** ' + ('parcial; há dados pendentes' if (resumo.get('usados') or {}).get('research_outcome', {}).get('state') == 'partial' else 'consulte evidências e limitações'),
+        '**Cobertura dos dados:** ' + coverage.get(outcome.get('state'), 'consulte evidências e limitações'),
         f"**Mídia descoberta:** {int(resumo_midia.get('total') or 0)} item(ns); "
         "imagens não são evidência e vídeos não foram assistidos ou analisados.",
         "**Limite epistêmico:** a verificação é lexical/determinística; "
