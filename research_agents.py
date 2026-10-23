@@ -851,7 +851,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
     """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
     import evidence_graph as _eg
-    from concurrent.futures import ThreadPoolExecutor
+    from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 
     parar = deve_parar or (lambda: False)
 
@@ -922,34 +922,57 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     if reutilizadas:
         emitir(db, job["id"], job["owner"], "analyst", "source_reused", "ok",
                f"{len(reutilizadas)} fonte(s) já lida(s) reutilizada(s), sem novo download.", {})
+    if parar() or (prazo and time.monotonic() >= prazo):
+        return reutilizadas
     job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
     baixados: dict = {}
+
+    def _ler_cronometrado(a):
+        rec = _ler(a)
+        return rec, time.monotonic()
+
     pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
-    futs = {pool.submit(_ler, a): a for a in alvos}
+    futs = {pool.submit(_ler_cronometrado, a): a for a in alvos}
+    pendentes = set(futs)
     cancelado = False
+    expirado = False
     try:
-        for fut, a in futs.items():
-            if parar() or (prazo and time.monotonic() >= prazo):
+        while pendentes:
+            if parar():
                 cancelado = True
                 break
-            try:
-                baixados[a["url"]] = fut.result()
-            except research.ResearchErro as exc:
-                if exc.codigo == "cancelada" or parar():
-                    cancelado = True
-                    break
-                emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
-                       f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
-            except Exception as exc:
-                if parar():
-                    cancelado = True
-                    break
-                emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
-                       f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+            restante = prazo - time.monotonic() if prazo else 0.1
+            expirado = bool(prazo and restante <= 0)
+            prontas, pendentes = wait(pendentes, timeout=max(0, min(0.1, restante)),
+                                      return_when=FIRST_COMPLETED)
+            for fut in prontas:
+                a = futs[fut]
+                try:
+                    rec, concluido_em = fut.result()
+                    if not prazo or concluido_em <= prazo:
+                        baixados[a["url"]] = rec
+                except research.ResearchErro as exc:
+                    if parar():
+                        cancelado = True
+                        break
+                    if exc.codigo != "cancelada":
+                        emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                               f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+                except Exception as exc:
+                    emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                           f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+            if cancelado:
+                break
+            if expirado:
+                break
     finally:
         for fut in futs:
             fut.cancel()
         pool.shutdown(wait=False, cancel_futures=True)
+    if expirado:
+        emitir(db, job["id"], job["owner"], "analyst", "source_reading_timeout", "alerta",
+               "Prazo de leitura esgotado; apenas resultados concluídos no prazo serão usados.",
+               {"completed": len(baixados), "attempted": len(alvos)})
     evidencias = list(reutilizadas)
     for a in alvos:
         if cancelado or parar():
