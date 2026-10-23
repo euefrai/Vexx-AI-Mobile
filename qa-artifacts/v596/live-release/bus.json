@@ -1,0 +1,1196 @@
+{
+  "id": "bus",
+  "route": "research",
+  "question": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "origin",
+      "destination",
+      "departure_date",
+      "operator",
+      "departure_time",
+      "price",
+      "currency",
+      "inventory",
+      "source",
+      "observed_at"
+    ],
+    "missing_parameters": [
+      "adults"
+    ],
+    "search_query": "\"Salvador\" \"Feira de Santana\" passagens de ônibus 2026-10-24",
+    "domain": "bus_travel",
+    "original_request": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+    "resolved_request": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+    "parameters": {
+      "departure_date": "2026-10-24",
+      "origin": "Salvador",
+      "destination": "Feira de Santana",
+      "inventory_state": "not_verified"
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-23T18:07:51.782366+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Ônibus de Salvador para Feira de Santana amanhã: horários e preços\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-9d2a1b9f8f2a",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [
+      {
+        "afirmacao": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [],
+        "fontes_encontradas": 0,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Ônibus de Salvador para Feira de Santana amanhã: horários e preços\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "c32d1d03e76fa788d2a4",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-9d2a1b9f8f2a",
+        "statement": "Investigar se: Ônibus de Salvador para Feira de Santana amanhã: horários e preços.",
+        "status": "open",
+        "evidence_ids": [],
+        "missing_evidence": [
+          "Nenhuma evidência específica foi atribuída pelo verificador."
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Ônibus de Salvador para Feira de Santana amanhã: horários e preços."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "Nenhuma referência específica atribuída."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "onibus de salvador para feira de santana amanha horarios e precos": "p1"
+      },
+      "recuperacao_busca": [
+        "salvador feira santana"
+      ],
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3470
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Ônibus de Salvador para Feira de Santana amanhã: horários e preços fontes primárias texto completo",
+          "salvador feira santana"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-5a84e9557458",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/geral/templates/header_prefeitura/logo_pms_topo.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/geral/templates/header_prefeitura/logo_pms_topo.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-73c6a40ac122",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_salvador_digital_topo.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_salvador_digital_topo.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c9e8f8d4dc02",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_lei_de_dados_topo.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_lei_de_dados_topo.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-b342f1263dca",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/icone_acesso_informacao.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/icone_acesso_informacao.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-2b7a9ed37f48",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/insta.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/insta.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-3a4969eb7f07",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/face.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/face.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-432103b71933",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/youtube.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/youtube.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-526ca064c47a",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/twitter.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/twitter.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:07:55.293677+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Ônibus de Salvador para Feira de Santana amanhã: horários e ': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (\"Salvador\" \"Feira de Santana\" passagens )",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Salvador\" \"Feira de Santana\" passagens )",
+          "ddg: bloqueado (\"Salvador\" \"Feira de Santana\" passagens )",
+          "marginalia: sem resultados (\"Salvador\" \"Feira de Santana\" passagens )",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (salvador feira santana)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (salvador feira santana)",
+          "marginalia: 6 resultados (salvador feira santana)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (salvador feira santana)",
+          "wikipedia: sem resultados (salvador feira santana)",
+          "recuperação com ganho novo: 3 domínio(s), 2 tema(s) além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:07:56.629637+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:07:56.631393+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:07:56.637759+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:07:56.643301+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:07:56.661670+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Ônibus de Salvador para Feira de Santana amanhã: horários e preços\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Ônibus de Salvador para Feira de Santana amanhã: horários e preços\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [],
+              "found_count": 0,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/geral/templates/header_prefeitura/logo_pms_topo.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_salvador_digital_topo.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/logo_lei_de_dados_topo.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/icone_acesso_informacao.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/insta.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/face.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/youtube.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo Prefeitura de Salvador",
+              "url": "https://cdnsemit.salvador.ba.gov.br/secretarias/pms/redes-sociais/twitter.png",
+              "thumb": "",
+              "source_title": "Prefeitura Municipal de Salvador",
+              "source_url": "https://salvador.ba.gov.br/",
+              "publisher": "cdnsemit.salvador.ba.gov.br",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo Prefeitura de Salvador",
+              "alt": "Logo Prefeitura de Salvador",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Ônibus de Salvador para Feira de Santana amanhã: horários e preços.",
+              "markdown": "**HIPÓTESE:** Investigar se: Ônibus de Salvador para Feira de Santana amanhã: horários e preços.\n\n**EVIDÊNCIAS:** Nenhuma referência específica atribuída.\n\n**LACUNAS:** Nenhuma evidência específica foi atribuída pelo verificador.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-9d2a1b9f8f2a&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-9d2a1b9f8f2a&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-9d2a1b9f8f2a&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 411.2
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 2,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 1084.0
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 376.7
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Salvador – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Salvador",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 13:42:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura Municipal de Salvador",
+      "url": "https://salvador.ba.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 07:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Tudo que você precisa saber para curtir a capital da Bahia!",
+      "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador BA: 20 Pontos turísticos e praias",
+      "url": "https://www.viagensecaminhos.com/salvador-ba/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 16:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador, Bahia - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:20:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador: 20 passeios imperdíveis - Mala de Aventuras",
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-salvador/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:26:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Salvador",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 13:42:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura Municipal de Salvador",
+      "url": "https://salvador.ba.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 07:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Tudo que você precisa saber para curtir a capital da Bahia!",
+      "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador BA: 20 Pontos turísticos e praias",
+      "url": "https://www.viagensecaminhos.com/salvador-ba/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 16:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador, Bahia - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:20:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador: 20 passeios imperdíveis - Mala de Aventuras",
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-salvador/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:26:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Feira de Santana",
+      "url": "https://en.wikipedia.org/wiki/Feira_de_Santana",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Bahia",
+      "url": "https://en.wikipedia.org/wiki/Rede_Bahia",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Archdiocese of Feira de Santana",
+      "url": "https://en.wikipedia.org/wiki/Archdiocese_of_Feira_de_Santana",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Getting from Lençóis to Morro de São Paulo",
+      "url": "https://travel.stackexchange.com/questions/38822",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Analysis of Electroencephalographic Signals Using the Root Mean Square (RMS) Fluctuation Function: Applicable Sample Test , ...",
+      "url": "https://www.sciencepublishinggroup.com/article/10.11648/j.mma.20240903.13",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "The verbal complement lhe in the Documentary Collection of the Regiments of Black and Mixed-race Men (1650–1793) | D...",
+      "url": "https://seer.ufu.br/index.php/dominiosdelinguagem/article/view/77482/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 4.911
+}

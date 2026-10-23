@@ -1,0 +1,1112 @@
+{
+  "id": "news_local",
+  "route": "research",
+  "question": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Ubatã\" \"bahia\" notícias",
+    "domain": "news",
+    "original_request": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+    "resolved_request": "Quais notícias aconteceram em Ubatã, Bahia, entre 2026-10-16 e 2026-10-23?",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "location": "Ubatã",
+      "region": "bahia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T18:10:17.982612+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-964a223697ed",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-48871705c177",
+          "ev-ca00652138fc",
+          "ev-34030666093e"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-48871705c177",
+            "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+            "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-ca00652138fc",
+            "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+            "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-34030666093e",
+            "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+            "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "e61a6430d1b5ed68eb2c",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-964a223697ed",
+        "statement": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-48871705c177",
+          "ev-ca00652138fc",
+          "ev-34030666093e"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "quais noticias aconteceram em ubata bahia nos ultimos sete dias": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 5737
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-34030666093e",
+        "ev-48871705c177",
+        "ev-ca00652138fc"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-34030666093e",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+      "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:10:23.844401+00:00",
+      "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT",
+      "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Jornal Grande Bahia",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-48871705c177",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+      "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:10:23.817488+00:00",
+      "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+      "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-ca00652138fc",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+      "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:10:23.835280+00:00",
+      "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT",
+      "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Canal Rural",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:10:23.785903+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (\"Ubatã\" \"bahia\" notícias)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (\"Ubatã\" \"bahia\" notícias)",
+          "bing: 6 resultados (\"Ubatã\" \"bahia\" notícias)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Ubatã\" \"bahia\" notícias)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:10:23.820475+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-48871705 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:10:23.822899+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:10:23.833708+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-48871705c177",
+        "dominio": "news.google.com",
+        "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1l"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:10:23.837002+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-ca006521 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T18:10:23.838301+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T18:10:23.843223+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-ca00652138fc",
+        "dominio": "news.google.com",
+        "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnV"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-23T18:10:23.846785+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-34030666 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-23T18:10:23.847805+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-23T18:10:23.854795+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-34030666093e",
+        "dominio": "news.google.com",
+        "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJ"
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-23T18:10:23.882301+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-48871705c177",
+                  "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+                  "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+                },
+                {
+                  "id": "ev-ca00652138fc",
+                  "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+                  "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+                  "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+                },
+                {
+                  "id": "ev-34030666093e",
+                  "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+                  "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+                  "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+              "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+              "dominio": "news.google.com",
+              "data": "Fri, 19 Jun 2026 07:00:00 GMT",
+              "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Jornal Grande Bahia",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 19 Oct 2026 13:00:00 GMT",
+              "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 08 Jun 2026 07:00:00 GMT",
+              "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Canal Rural",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+              "markdown": "**HIPÓTESE:** Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-964a223697ed&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-964a223697ed&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-964a223697ed&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 9,
+      "erros": {},
+      "ms_medio": 459.5
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 466.2
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 1009.8
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 31 Aug 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.canalrural.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia - G1",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOeVdjOGNpbmtRR1hiYTcxYnRmd01JS2FEOTY2MWVzeVNyYmVLV0l3SFJUcFJ3cUxiOVhheTNfeFEyUnZ0QU5iV1VjVllMQ256c29Vc2FORGJzdXpLSnhVcFZPNGxrd05RQlBvdUV1b09KQktaT1p5RVhDZVRONUNVWmxRYlNNTHpORGZTU0ZnckF1YlFK0gGjAUFVX3lxTE84dkFtR1QyN2pRbno5YVlXSjRxck5IWVpBWGg1aGNfMlRuZHM4d3M5V3RjNF9GZVViWEpKYVd1SmtKSERmUnNGY2hTVDF1WlFtR2poV3RoMGh4U2k1YVZWalk1Rk56cDRteHg0M3RtM2NqeDA2bGl6bUZGZFhoaUJNTGF1bmI0V1o2S1I3cF9sUVpMTFR1SjAxYW03VUROMlA5TzQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 06 Jul 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://jornalgrandebahia.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã - Ilhéus Eventos",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOUTFCOFFjZjhqTkRXSG41MXhJTzRsdjNwSk1JbUpubXlobFEzWTBNQnZsY2ItMGQ2RlprMkhXNlQ1VXhuRE02UlRRdVZTdmNfbGxCV1llWDRCV2NPVFpvRllEMkktZ3lyQVVFSURKenVlNExxV0p0em8wczZLUk5NckdRRUVrMnJwVmNwY0p2SEthRWNqRjJ3N1lHOHBUY21ra3pSQ1pyamVhblhCcTk1bw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 17 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://ilheuseventos.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Trends",
+      "url": "https://trends.google.com.br/trends/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Maps",
+      "url": "https://maps.google.com.br/mapfiles/home3.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 14:22:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Earth",
+      "url": "https://www.google.com.br/earth/index.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 17:58:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Maps",
+      "url": "https://www.google.com.br/mapfiles/home3.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:51:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google for Education - Online Resources for Teachers & Students",
+      "url": "https://edu.google.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 10:14:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Trends",
+      "url": "https://trends.google.com.br/trends/explore",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 09:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Home - Portal DPESP",
+      "url": "https://www.defensoria.sp.def.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 19:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Agende seu atendimento - Portal DPESP",
+      "url": "https://www.defensoria.sp.def.br/atendimento/agende-seu-atendimento",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 06:16:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "DPESP | Defensoria Pública do Estado de São Paulo",
+      "url": "https://portal.defensoria.sp.def.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 02:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 5.953
+}

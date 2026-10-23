@@ -1,0 +1,9 @@
+### Result
+{
+  "width": 320,
+  "scrollWidth": 320
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth})');
+```

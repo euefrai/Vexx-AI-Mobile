@@ -1,0 +1,467 @@
+{
+  "id": "videos",
+  "route": "research",
+  "question": "Vídeos públicos James Webb NASA",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Vídeos públicos James Webb NASA",
+    "domain": "general",
+    "original_request": "Vídeos públicos James Webb NASA",
+    "resolved_request": "Vídeos públicos James Webb NASA",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T17:52:51.511035+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-2fad960a190d",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Vídeos públicos James Webb NASA",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Vídeos públicos James Webb NASA",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Vídeos públicos James Webb NASA",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Vídeos públicos James Webb NASA",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [],
+    "sintese": {
+      "texto": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "videos publicos james webb nasa": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 2007
+        }
+      },
+      "failed_source_reads": [
+        "077976a4b1b0f60b97bf2db7501eaef610536967d5a13652f4551c63eebe913a"
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Vídeos públicos James Webb NASA fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T17:52:53.571300+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Vídeos públicos James Webb NASA': 10 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "ok"
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T17:52:54.066173+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://www.pexels.com/pt-br/videos/.",
+      "meta": {}
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T17:52:54.284610+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T17:52:54.286040+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Vídeos públicos James Webb NASA\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Vídeos públicos James Webb NASA",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Vídeos públicos James Webb NASA",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Vídeos públicos James Webb NASA",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Vídeos públicos James Webb NASA",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-2fad960a190d&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-2fad960a190d&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-2fad960a190d&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 481.6
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 4,
+      "erros": {},
+      "ms_medio": 1061.2
+    }
+  },
+  "elapsed_s": 2.806
+}

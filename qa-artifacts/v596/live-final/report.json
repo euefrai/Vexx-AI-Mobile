@@ -1,0 +1,948 @@
+{
+  "schema": "vexx-live-research-evaluation/v1",
+  "started_at": "2026-10-23T18:03:25.534754+00:00",
+  "scope": "live component pipelines; temporary SQLite; not authenticated UI",
+  "case_timeout_s": 65,
+  "cases": [
+    {
+      "id": "science",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "technology",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "products",
+      "route": "shopping_web",
+      "question": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "domain": "general",
+        "original_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "resolved_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:03:47.114382+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu** · www.magazineluiza.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "product": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "identity_state": "CONFLICTING_VARIANT",
+            "mismatches": [
+              "preco_acima",
+              "marca_diferente",
+              "ram_abaixa"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "product": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "identity_state": "CONFLICTING_VARIANT",
+            "mismatches": [
+              "preco_acima",
+              "ram_abaixa"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "product": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "identity_state": "CONFLICTING_VARIANT",
+            "mismatches": [
+              "preco_acima",
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "product": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "identity_state": "UNVERIFIED_OFFER",
+            "mismatches": [
+              "preco_acima"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Notebook Lenovo 16 GB RAM comprar oferta",
+          "Notebook Lenovo 16 GB RAM preço até 3000"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 877
+          },
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1163
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 2860,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "listagem": false
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 983
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1529
+          },
+          {
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 2419
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/notebook",
+            "titulo": "Notebook - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "titulo": "CC-BY-SA 4.0",
+            "tipo": "IRRELEVANT"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "loja_dominio": "www.magazineluiza.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook"
+          },
+          {
+            "id": "S2",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+          },
+          {
+            "id": "S3",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "url": "https://www.kabum.com.br/computadores/notebooks"
+          },
+          {
+            "id": "S4",
+            "titulo": "CC-BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/"
+          },
+          {
+            "id": "S6",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "url": "https://notebook.google/?hl=pt-BR"
+          },
+          {
+            "id": "S7",
+            "titulo": "Notebook - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/notebook"
+          }
+        ],
+        "criterios": {
+          "categoria": "notebook",
+          "orcamento": {
+            "max": 3000.0
+          },
+          "marcas": [
+            "lenovo"
+          ],
+          "specs": {
+            "ram_fisica_gb": 16
+          },
+          "comparacao": false,
+          "texto": "Notebook Lenovo com 16 GB RAM até R$ 3.000"
+        },
+        "total_bruto": 4,
+        "excluidos": [
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "marca": "KaBuM!",
+            "modelo": "1066088",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_original.jpg",
+            "descricao": "Notebook Gamer Dell Alienware 15 Potência e Performance Inigualáveis Para você que busca superar todos os limites, este equipamento conta com o moderno processador Intel Core 5 210H de Série 2. Com 8 núcleos, incríveis 12MB de cache e frequência alcançando até 4.8 GHz, você terá uma capacidade de pr",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "preco": 11400.19,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.400,19",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T18:03:54.257052+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11400.19,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.400,19",
+                "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T18:03:54.257052+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 11.400,19); marca diferente do pedido (dell; pedido: lenovo); RAM física abaixo do pedido (8GB)",
+            "excluido_codigos": [
+              "preco_acima",
+              "marca_diferente",
+              "ram_abaixa"
+            ],
+            "identity_state": "CONFLICTING_VARIANT"
+          },
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "marca": "KaBuM!",
+            "modelo": "1037468",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_original.jpg",
+            "descricao": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 Desempenho Inteligente e Processamento Avançado O Notebook Lenovo IdeaPad Slim 3 foi rigorosamente projetado para entregar alta performance e eficiência para a sua rotina diária de trabalho, estudos ou entretenimento. O coração desta máquina é o potente pro",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "preco": 5532.99,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 5.532,99",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T18:03:54.257271+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 5532.99,
+                "moeda": "BRL",
+                "preco_texto": "R$ 5.532,99",
+                "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T18:03:54.257271+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 5.532,99); RAM física abaixo do pedido (8GB)",
+            "excluido_codigos": [
+              "preco_acima",
+              "ram_abaixa"
+            ],
+            "identity_state": "CONFLICTING_VARIANT"
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "marca": "Magalu",
+            "modelo": "649861",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/xlarge/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+            "descricao": "ASUS Vivobook Go 15O notebook projetado para ser seu parceiro ideal, combinando produtividade e entretenimento em um formato compacto e leve.Com o poderoso processador AMD Ryzen 5 7520U, 16 GB de memória RAM LPDDR5 e um SSD de até 512 GB, este notebook garante desempenho excelente para suas tarefas ",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "preco": 4099.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 4.099,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T18:03:54.257431+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 4099.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 4.099,00",
+                "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T18:03:54.257431+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 4.099,00); marca diferente do pedido (asus; pedido: lenovo)",
+            "excluido_codigos": [
+              "preco_acima",
+              "marca_diferente"
+            ],
+            "identity_state": "CONFLICTING_VARIANT"
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "marca": "KaBuM!",
+            "modelo": "1003399",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_original.jpg",
+            "descricao": "Lenovo LOQ 15IRX9 Performance de Elite com Intel Core i5 e NVIDIA RTX 4050 O Lenovo LOQ 15IRX9 foi projetado para quem não aceita menos que a máxima potência em suas tarefas. Equipado com o processador Intel Core i5-13450HX, que conta com 10 núcleos e 16 threads, este notebook entrega uma capacidade",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "preco": 11470.87,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.470,87",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T18:03:54.257566+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11470.87,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.470,87",
+                "url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T18:03:54.257566+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 11.470,87)",
+            "excluido_codigos": [
+              "preco_acima"
+            ],
+            "identity_state": "UNVERIFIED_OFFER"
+          }
+        ],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {
+            "preco_acima": 4,
+            "marca_diferente": 2,
+            "ram_abaixa": 2
+          },
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T18:03:56.731318+00:00",
+        "etapas_provedores": [
+          "Notebook Lenovo 16 GB RAM comprar oferta: injetado (teste)",
+          "Notebook Lenovo 16 GB RAM preço até 3000: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "BUDGET_MISMATCH",
+            "PRODUCT_MISMATCH",
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING",
+            "VARIANT_MISMATCH"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 459.5
+        },
+        "ddg": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 1
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 2,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 1,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 969.5
+        },
+        "wikipedia": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 341.4
+        }
+      },
+      "source_discovery": [
+        {
+          "titulo": "KaBuM!: Notebooks em promoção",
+          "url": "https://www.kabum.com.br/computadores/notebooks",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:31:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+          "url": "https://notebook.google/?hl=pt-BR",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+          "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:32:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+          "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:59:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+          "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 15:56:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "KaBuM!: Notebooks em promoção",
+          "url": "https://www.kabum.com.br/computadores/notebooks",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:31:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+          "url": "https://notebook.google/?hl=pt-BR",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+          "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:32:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+          "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:59:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+          "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 15:56:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "KaBuM!: Notebooks em promoção",
+          "url": "https://www.kabum.com.br/computadores/notebooks",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:31:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+          "url": "https://notebook.google/?hl=pt-BR",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+          "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:32:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+          "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:59:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+          "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 15:56:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "KaBuM!: Notebooks em promoção",
+          "url": "https://www.kabum.com.br/computadores/notebooks",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:31:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+          "url": "https://notebook.google/?hl=pt-BR",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+          "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:32:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+          "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 11:59:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+          "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 15:56:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        }
+      ],
+      "elapsed_s": 9.627
+    },
+    {
+      "id": "news_local",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "news_national",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "events",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "flights",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "bus",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "documentation",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "videos",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "images",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "pdfs",
+      "state": "error",
+      "exit_code": 1
+    },
+    {
+      "id": "scarce",
+      "state": "error",
+      "exit_code": 1
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+...........................................................FF........... [ 59%]
+.................................................                        [100%]
+================================== FAILURES ===================================
+_ test_media_discovery_keeps_targets_without_downloading_or_claiming_analysis _
+
+    def test_media_discovery_keeps_targets_without_downloading_or_claiming_analysis():
+        import media_evidence as media
+        found = media.discover_search_media([
+            {'titulo':'Commons fixture','tipo':'imagem','origem':'commons','url':'https://upload.wikimedia.org/fixture.jpg'},
+            {'titulo':'NASA fixture','url':'https://www.youtube.com/watch?v=fixture123'},
+            {'titulo':'PDF fixture','pdf_url':'https://example.org/study.pdf','license':'cc-by'},
+            {'titulo':'Unsafe PDF','pdf_url':'http://127.0.0.1/private.pdf'},
+            {'titulo':'Unsafe image','tipo':'imagem','origem':'commons','url':'http://localhost/fixture.jpg'}])
+>       assert [x['type'] for x in found] == ['image','video','document']
+E       AssertionError: assert ['image', 'document'] == ['image', 'video', 'document']
+E         
+E         At index 1 diff: 'document' != 'video'
+E         Right contains one more item: 'document'
+E         Use -v to get more diff
+
+tests\test_verified_sources_v595.py:292: AssertionError
+__________ test_search_media_is_persisted_even_without_readable_html __________
+
+research_job = (<sqlite3.Connection object at 0x00000191E9401120>, {'id': 'rj-a2dfc68cda5d', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_search_media_is_persisted_even_without_readable_html(research_job):
+        db, job = research_job
+        class Provider:
+            nome = 'fixture'
+            def buscar(self, query, limite=6):
+                return [{'titulo':'V�deo NASA telesc�pio', 'url':'https://www.youtube.com/watch?v=fixture123','trecho':'NASA telesc�pio'}]
+        ra.agente_busca(db, job, {'id':'search-media','alvo':'V�deo NASA telesc�pio'}, [Provider()], set())
+        ra.salvar_job(db, job)
+        restored = ra.carregar_job(db, job['owner'], job['id'])
+>       assert restored['midia'][0]['type'] == 'video' and not restored['midia'][0]['evidence']
+               ^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests\test_verified_sources_v595.py:306: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_verified_sources_v595.py::test_media_discovery_keeps_targets_without_downloading_or_claiming_analysis
+FAILED tests/test_verified_sources_v595.py::test_search_media_is_persisted_even_without_readable_html
+2 failed, 119 passed in 11.38s

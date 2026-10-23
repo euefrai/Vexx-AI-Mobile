@@ -1,0 +1,2355 @@
+{
+  "schema": "vexx-live-research-evaluation/v1",
+  "started_at": "2026-10-23T17:52:37.390039+00:00",
+  "scope": "live component pipelines; temporary SQLite; not authenticated UI",
+  "case_timeout_s": 65,
+  "cases": [
+    {
+      "id": "products",
+      "route": "shopping_web",
+      "question": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "domain": "general",
+        "original_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "resolved_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T17:52:38.242046+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Encontrei 1 referência(s) de produto na busca — **não verificadas** (página sem dados estruturados validados; não invento preço/foto/estoque):\n- **Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu** · www.magazineluiza.com.br — _site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado_\n  https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+      "result": {
+        "produtos": [],
+        "alternativas": [],
+        "source_trace": [
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "product": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "mismatches": [
+              "preco_acima",
+              "marca_diferente",
+              "ram_abaixa"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "product": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "mismatches": [
+              "preco_acima",
+              "ram_abaixa"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "product": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "mismatches": [
+              "preco_acima",
+              "marca_diferente"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "source_url": "https://www.kabum.com.br/computadores/notebooks",
+            "item_url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "product": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "variant": "",
+            "match": "IRRELEVANT",
+            "mismatches": [
+              "preco_acima"
+            ],
+            "price_declared": true,
+            "currency": "BRL",
+            "stock_declared": "desconhecida",
+            "stock_independently_verified": false,
+            "image_state": "",
+            "link_state": "nao_verificado",
+            "listing_item": false,
+            "tier": "parcial"
+          }
+        ],
+        "consultas": [
+          "Notebook Lenovo 16 GB RAM comprar oferta",
+          "Notebook Lenovo 16 GB RAM preço até 3000"
+        ],
+        "diagnostico_paginas": [
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "codigo": "bloqueio",
+            "motivo": "Provedor bloqueou (403).",
+            "ms": 476
+          },
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 733
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "codigo": "extraida",
+            "motivo": "dados efetivamente extraídos",
+            "ms": 2156,
+            "origem": [
+              "jsonld",
+              "jsonld",
+              "jsonld",
+              "jsonld"
+            ],
+            "ofertas": 4,
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "listagem": false
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/notebook",
+            "codigo": "sem_dados",
+            "motivo": "página sem dados estruturados de produto",
+            "ms": 1137
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1182
+          },
+          {
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+            "codigo": "listagem",
+            "motivo": "listagem/catálogo (item sem URL própria)",
+            "ms": 1970
+          }
+        ],
+        "candidatos": [
+          {
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "tipo": "COMMERCIAL_LISTING"
+          },
+          {
+            "url": "https://notebook.google/?hl=pt-BR",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "tipo": "GENERIC_INDEX"
+          },
+          {
+            "url": "https://lista.mercadolivre.com.br/notebook",
+            "titulo": "Notebook - Mercado Livre",
+            "tipo": "COMMERCIAL_LISTING"
+          }
+        ],
+        "encontrados": [
+          {
+            "nome": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/",
+            "loja_dominio": "www.magazineluiza.com.br",
+            "motivo_codigo": "bloqueio",
+            "motivo": "site bloqueou o acesso automático (403/CAPTCHA); página não verificada — bloqueio não contornado",
+            "origem_encontro": "busca"
+          }
+        ],
+        "fontes": [
+          {
+            "id": "S1",
+            "titulo": "Notebook Dell, Samsung, Acer, Lenovo e Mais em Promoção",
+            "url": "https://www.americanas.com.br/computadores-e-informatica/notebook"
+          },
+          {
+            "id": "S2",
+            "titulo": "Notebook: Samsung, Acer, Dell, Macbook, Lenovo | Magalu",
+            "url": "https://www.magazineluiza.com.br/notebook/informatica/s/in/note/"
+          },
+          {
+            "id": "S3",
+            "titulo": "KaBuM!: Notebooks em promoção",
+            "url": "https://www.kabum.com.br/computadores/notebooks"
+          },
+          {
+            "id": "S4",
+            "titulo": "Notebooks: Dell, Samsung, Acer, Lenovo e mais - Carrefour",
+            "url": "https://www.carrefour.com.br/categoria/informatica/notebook/"
+          },
+          {
+            "id": "S5",
+            "titulo": "Gemini Notebook | Parceiro de pesquisa e análise com tecnologia de IA",
+            "url": "https://notebook.google/?hl=pt-BR"
+          },
+          {
+            "id": "S6",
+            "titulo": "Notebook - Mercado Livre",
+            "url": "https://lista.mercadolivre.com.br/notebook"
+          }
+        ],
+        "criterios": {
+          "categoria": "notebook",
+          "orcamento": {
+            "max": 3000.0
+          },
+          "marcas": [
+            "lenovo"
+          ],
+          "specs": {
+            "ram_fisica_gb": 16
+          },
+          "comparacao": false,
+          "texto": "Notebook Lenovo com 16 GB RAM até R$ 3.000"
+        },
+        "total_bruto": 4,
+        "excluidos": [
+          {
+            "id": "2a82c2424100240bd9d3d45a",
+            "nome": "Notebook Gamer Dell Alienware 15, Intel Core i5, 8GB RAM, SSD 512GB, 15.3\" WUXGA, NVIDIA GeForce RTX 4050, Windows 11, Preto - DA15-C5210H-A30",
+            "marca": "KaBuM!",
+            "modelo": "1066088",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30_1788981801_original.jpg",
+            "descricao": "Notebook Gamer Dell Alienware 15 Potência e Performance Inigualáveis Para você que busca superar todos os limites, este equipamento conta com o moderno processador Intel Core 5 210H de Série 2. Com 8 núcleos, incríveis 12MB de cache e frequência alcançando até 4.8 GHz, você terá uma capacidade de pr",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+            "preco": 11400.19,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.400,19",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T17:52:44.432341+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11400.19,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.400,19",
+                "url": "https://www.kabum.com.br/produto/1066088/notebook-gamer-dell-alienware-15-intel-core-i5-8gb-ram-ssd-512gb-15-3-wuxga-nvidia-geforce-rtx-4050-windows-11-preto-da15-c5210h-a30",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T17:52:44.432341+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 11.400,19); marca diferente do pedido (dell; pedido: lenovo); RAM física abaixo do pedido (8GB)",
+            "excluido_codigos": [
+              "preco_acima",
+              "marca_diferente",
+              "ram_abaixa"
+            ]
+          },
+          {
+            "id": "24b1f4f24092afc73fd4d35c",
+            "nome": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 7535HS, 8GB, AMD Radeon Graphics, SSD 512GB, 15.3\" WUXGA 1920x1200, Linux - 83MMS00300",
+            "marca": "KaBuM!",
+            "modelo": "1037468",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300_1780426518_original.jpg",
+            "descricao": "Notebook Lenovo IdeaPad Slim 3 AMD Ryzen 5 Desempenho Inteligente e Processamento Avançado O Notebook Lenovo IdeaPad Slim 3 foi rigorosamente projetado para entregar alta performance e eficiência para a sua rotina diária de trabalho, estudos ou entretenimento. O coração desta máquina é o potente pro",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+            "preco": 5532.99,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 5.532,99",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T17:52:44.432453+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 5532.99,
+                "moeda": "BRL",
+                "preco_texto": "R$ 5.532,99",
+                "url": "https://www.kabum.com.br/produto/1037468/notebook-lenovo-ideapad-slim-3-amd-ryzen-5-7535hs-8gb-amd-radeon-graphics-ssd-512gb-15-3-wuxga-1920x1200-linux-83mms00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T17:52:44.432453+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 5.532,99); RAM física abaixo do pedido (8GB)",
+            "excluido_codigos": [
+              "preco_acima",
+              "ram_abaixa"
+            ]
+          },
+          {
+            "id": "588098bbc5169b8656ac77b9",
+            "nome": "Notebook Asus Vivobook Go 15 E1504fa Amd Ryzen 5 7520u 16gb Ram 512gb SSD Linux Keepos Tela 15,6\" LED Fhd Black - Nj1288",
+            "marca": "Magalu",
+            "modelo": "649861",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/649861/xlarge/Notebook-Asus-Vivobook-Go-15-E1504fa-Amd-Ryzen-5-7520u-16gb-Ram-512gb-SSD-Linux-Keepos-Tela-15-6-LED-Fhd-Black-Nj1288_1789568622.jpg",
+            "descricao": "ASUS Vivobook Go 15O notebook projetado para ser seu parceiro ideal, combinando produtividade e entretenimento em um formato compacto e leve.Com o poderoso processador AMD Ryzen 5 7520U, 16 GB de memória RAM LPDDR5 e um SSD de até 512 GB, este notebook garante desempenho excelente para suas tarefas ",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+            "preco": 4099.0,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 4.099,00",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T17:52:44.432537+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 4099.0,
+                "moeda": "BRL",
+                "preco_texto": "R$ 4.099,00",
+                "url": "https://www.kabum.com.br/produto/649861/notebook-asus-vivobook-go-15-e1504fa-amd-ryzen-5-7520u-16gb-ram-512gb-ssd-linux-keepos-tela-15-6-led-fhd-black-nj1288",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T17:52:44.432537+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 4.099,00); marca diferente do pedido (asus; pedido: lenovo)",
+            "excluido_codigos": [
+              "preco_acima",
+              "marca_diferente"
+            ]
+          },
+          {
+            "id": "4f000bee61a0261761d02732",
+            "nome": "Notebook Gamer Lenovo LOQ 15IRX9, 15.6\" Full HD 144Hz, Intel Core i5-13450HX, 16GB, 512GB SSD, NVIDIA RTX 4050, Linux - 83KHS00300",
+            "marca": "KaBuM!",
+            "modelo": "1003399",
+            "variante": "",
+            "imagem": "https://images.kabum.com.br/produtos/fotos/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300_1771932936_original.jpg",
+            "descricao": "Lenovo LOQ 15IRX9 Performance de Elite com Intel Core i5 e NVIDIA RTX 4050 O Lenovo LOQ 15IRX9 foi projetado para quem não aceita menos que a máxima potência em suas tarefas. Equipado com o processador Intel Core i5-13450HX, que conta com 10 núcleos e 16 threads, este notebook entrega uma capacidade",
+            "loja": "kabum.com.br",
+            "loja_dominio": "www.kabum.com.br",
+            "url": "https://www.kabum.com.br/computadores/notebooks",
+            "url_final": "https://www.kabum.com.br/computadores/notebooks",
+            "url_item": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+            "preco": 11470.87,
+            "moeda": "BRL",
+            "preco_confirmado": true,
+            "preco_valido_ate": "",
+            "preco_a_partir_de": false,
+            "preco_texto": "R$ 11.470,87",
+            "preco_origem": "jsonld",
+            "disponibilidade": "desconhecida",
+            "avaliacao": null,
+            "n_avaliacoes": 0,
+            "specs": {},
+            "verificado_em": "2026-10-23T17:52:44.432617+00:00",
+            "fonte_titulo": "KaBuM!: Notebooks em promoção",
+            "link_veredito": "nao_verificado",
+            "link_codigo": "item_nao_aberto",
+            "link_motivo": "link do item declarado na página analisada; a página do item não foi aberta",
+            "item_de_listagem": false,
+            "imagem_veredito": "",
+            "ofertas": [
+              {
+                "loja": "kabum.com.br",
+                "preco": 11470.87,
+                "moeda": "BRL",
+                "preco_texto": "R$ 11.470,87",
+                "url": "https://www.kabum.com.br/produto/1003399/notebook-gamer-lenovo-loq-15irx9-15-6-full-hd-144hz-intel-core-i5-13450hx-16gb-512gb-ssd-nvidia-rtx-4050-linux-83khs00300",
+                "disponibilidade": "desconhecida",
+                "verificado_em": "2026-10-23T17:52:44.432617+00:00"
+              }
+            ],
+            "correspondencia_tipo": "IRRELEVANT",
+            "excluido_por": "acima do orçamento (R$ 11.470,87)",
+            "excluido_codigos": [
+              "preco_acima"
+            ]
+          }
+        ],
+        "verificacao": {
+          "links": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "imagens": {
+            "verificado": 0,
+            "parcial": 0,
+            "reprovado": 0,
+            "nao_verificado": 0,
+            "total": 0
+          },
+          "descartes_por_codigo": {
+            "preco_acima": 4,
+            "marca_diferente": 2,
+            "ram_abaixa": 2
+          },
+          "alternativas_por_codigo": {}
+        },
+        "de_cache": false,
+        "verificado_em": "2026-10-23T17:52:46.420900+00:00",
+        "etapas_provedores": [
+          "Notebook Lenovo 16 GB RAM comprar oferta: injetado (teste)",
+          "Notebook Lenovo 16 GB RAM preço até 3000: injetado (teste)"
+        ],
+        "descoberta": {
+          "decisoes": [],
+          "diagnosticos": [
+            "BUDGET_MISMATCH",
+            "PRODUCT_MISMATCH",
+            "PRODUCT_PAGE_UNAVAILABLE",
+            "SEARCH_IRRELEVANT",
+            "STRUCTURED_DATA_MISSING",
+            "VARIANT_MISMATCH"
+          ],
+          "paginas_disponiveis": 6,
+          "paginas_consultadas": 6,
+          "ondas": 2,
+          "ofertas_extraidas": 4,
+          "confirmadas": 0,
+          "orcamento_esgotado": false,
+          "motivo_final": "no_confirmed_offers"
+        }
+      },
+      "route_note": "Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.",
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 404.1
+        },
+        "ddg": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 1
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 2
+          },
+          "ms_medio": 868.1
+        },
+        "wikipedia": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 536.2
+        }
+      },
+      "elapsed_s": 8.2
+    },
+    {
+      "id": "news_local",
+      "route": "research",
+      "question": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Ubatã\" \"bahia\" notícias",
+        "domain": "news",
+        "original_request": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "resolved_request": "Quais notícias aconteceram em Ubatã, Bahia, entre 2026-10-16 e 2026-10-23?",
+        "parameters": {
+          "start_date": "2026-10-16",
+          "end_date": "2026-10-23",
+          "location": "Ubatã",
+          "region": "bahia"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-23T17:52:47.373551+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "answer": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "summary": {
+        "id": "rj-f54d74e0ef2f",
+        "status": "concluida",
+        "modo": "rapida",
+        "objetivo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "plano_versao": 2,
+        "etapas": [
+          {
+            "id": "p1",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+            "frente": 1,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 10,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p2",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+            "frente": 1,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p1"
+            ],
+            "prioridade": 30,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p3",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+            "frente": 1,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p2"
+            ],
+            "prioridade": 50,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p4",
+            "tipo": "verificar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+            "dependencias": [
+              "p3"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+          },
+          {
+            "id": "p5",
+            "tipo": "sintetizar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "redigir apenas com evidências registradas",
+            "dependencias": [
+              "p4"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resposta extrativa com citações existentes"
+          },
+          {
+            "id": "p6",
+            "tipo": "auditar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "checar citações e limitações antes de concluir",
+            "dependencias": [
+              "p5"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+          }
+        ],
+        "evidencias": 3,
+        "achados": [
+          {
+            "afirmacao": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+            "estado": "INSUFFICIENT_EVIDENCE",
+            "metodo": "sem-evidencia",
+            "cobertura_lexica": 0.0,
+            "evidence_ids": [
+              "ev-9aa34724384d",
+              "ev-a614d7b3afb0",
+              "ev-a5a0f21eb17a"
+            ],
+            "supporting_ids": [],
+            "contradicting_ids": [],
+            "fontes": [
+              {
+                "evidence_id": "ev-9aa34724384d",
+                "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+                "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+                "domain": "news.google.com",
+                "relation": "MENTIONS",
+                "read": false,
+                "access_state": "snippet_only",
+                "used_excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+                "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+              },
+              {
+                "evidence_id": "ev-a614d7b3afb0",
+                "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+                "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+                "domain": "news.google.com",
+                "relation": "MENTIONS",
+                "read": false,
+                "access_state": "snippet_only",
+                "used_excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+                "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+              },
+              {
+                "evidence_id": "ev-a5a0f21eb17a",
+                "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+                "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+                "domain": "news.google.com",
+                "relation": "MENTIONS",
+                "read": false,
+                "access_state": "snippet_only",
+                "used_excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+                "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+              }
+            ],
+            "fontes_encontradas": 3,
+            "fontes_lidas": 0,
+            "fontes_usadas": 0
+          }
+        ],
+        "sintese": {
+          "texto": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+          "llm": false,
+          "references": {}
+        },
+        "investigacoes": 0,
+        "hipoteses": [
+          {
+            "hypothesis_id": "e61a6430d1b5ed68eb2c",
+            "owner_id": "live-evaluation-only",
+            "job_id": "rj-f54d74e0ef2f",
+            "statement": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+            "status": "open",
+            "evidence_ids": [
+              "ev-9aa34724384d",
+              "ev-a614d7b3afb0",
+              "ev-a5a0f21eb17a"
+            ],
+            "missing_evidence": [],
+            "next_steps": [
+              "Revisar as evidências armazenadas e buscar validação independente."
+            ],
+            "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+            "cadeia": [
+              {
+                "rotulo": "HIPÓTESE",
+                "texto": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?."
+              },
+              {
+                "rotulo": "EVIDÊNCIAS",
+                "texto": "3 referência(s) ligada(s) a esta hipótese."
+              },
+              {
+                "rotulo": "LACUNAS",
+                "texto": "Nenhuma lacuna explícita registrada."
+              },
+              {
+                "rotulo": "PRÓXIMOS PASSOS",
+                "texto": "Revisar as evidências armazenadas e buscar validação independente."
+              },
+              {
+                "rotulo": "CONCLUSÃO",
+                "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+              }
+            ],
+            "testes_executados": false
+          }
+        ],
+        "proxima_acao": "Revisar resultados e limitações",
+        "auditoria_ok": true,
+        "pendencias": [],
+        "erros": [],
+        "usados": {
+          "buscas": 1,
+          "paginas": 3,
+          "local_context_checked": true,
+          "replans": 0,
+          "consultas_etapas": {
+            "quais noticias aconteceram em ubata bahia nos ultimos sete dias": "p1"
+          },
+          "provedores": {
+            "web": {
+              "ok": 1,
+              "falhas": 0,
+              "ms": 2989
+            }
+          },
+          "adaptive_rounds": [
+            {
+              "step_id": "p3",
+              "new_evidence": 3,
+              "total_evidence": 3,
+              "remaining_searches": 1,
+              "decision": "evidence_gained"
+            }
+          ],
+          "round_evidence_ids": [
+            "ev-9aa34724384d",
+            "ev-a5a0f21eb17a",
+            "ev-a614d7b3afb0"
+          ],
+          "research_outcome": {
+            "state": "partial",
+            "unresolved_fronts": [
+              "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias fontes primárias texto completo"
+            ],
+            "reason": "evidências insuficientes ou lacunas remanescentes"
+          }
+        },
+        "orcamento": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "profundidade": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "replans": 1,
+          "max_bytes_pagina": 2000000
+        },
+        "midia": [],
+        "midia_resumo": {
+          "total": 0,
+          "images": 0,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 0,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "limites": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "replans": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "max_bytes_pagina": 2000000
+        }
+      },
+      "evidence": [
+        {
+          "id": "ev-9aa34724384d",
+          "fonte_id": "",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+          "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+          "dominio": "news.google.com",
+          "acessado_em": "2026-10-23T17:52:50.422727+00:00",
+          "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+          "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+          "afirmacao": "",
+          "relacao": "cita",
+          "status": "recuperada",
+          "content_scope": "feed_metadata",
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+            }
+          },
+          "structured": [],
+          "publicador": "Bahia Notícias",
+          "imagens": [],
+          "texto_lido": false,
+          "trecho_usado": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+          "access_state": "snippet_only"
+        },
+        {
+          "id": "ev-a5a0f21eb17a",
+          "fonte_id": "",
+          "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+          "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+          "dominio": "news.google.com",
+          "acessado_em": "2026-10-23T17:52:50.455082+00:00",
+          "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT",
+          "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+          "afirmacao": "",
+          "relacao": "cita",
+          "status": "recuperada",
+          "content_scope": "feed_metadata",
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+            }
+          },
+          "structured": [],
+          "publicador": "Jornal Grande Bahia",
+          "imagens": [],
+          "texto_lido": false,
+          "trecho_usado": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+          "access_state": "snippet_only"
+        },
+        {
+          "id": "ev-a614d7b3afb0",
+          "fonte_id": "",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+          "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+          "dominio": "news.google.com",
+          "acessado_em": "2026-10-23T17:52:50.440038+00:00",
+          "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT",
+          "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+          "afirmacao": "",
+          "relacao": "cita",
+          "status": "recuperada",
+          "content_scope": "feed_metadata",
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+            }
+          },
+          "structured": [],
+          "publicador": "Canal Rural",
+          "imagens": [],
+          "texto_lido": false,
+          "trecho_usado": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+          "access_state": "snippet_only"
+        }
+      ],
+      "read_sources": 0,
+      "model": null,
+      "model_calls_requested": 0,
+      "citation_mechanics": {
+        "citation_count": 0,
+        "stages": {
+          "citation_exists": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "source_retrieved": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "passage_found": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          }
+        }
+      },
+      "displayed_citation_links": [],
+      "search_events": [
+        {
+          "seq": 6,
+          "ts": "2026-10-23T17:52:50.402559+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete': 12 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [],
+            "estado": "ok"
+          }
+        }
+      ],
+      "jdui_valid": true,
+      "jdui_errors": [],
+      "jdui": {
+        "version": "JULIA-ui-message/v1",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Investigação: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+          },
+          {
+            "type": "text",
+            "content": "**Objetivo:** Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+          },
+          {
+            "type": "ui",
+            "component": "researchplan",
+            "props": {
+              "title": "Plano de pesquisa",
+              "objective": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+              "mode": "rapida",
+              "status": "completed",
+              "steps": [
+                {
+                  "id": "p1",
+                  "title": "Buscar: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p2",
+                  "title": "Ler: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p1"
+                  ]
+                },
+                {
+                  "id": "p3",
+                  "title": "Analisar: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p2"
+                  ]
+                },
+                {
+                  "id": "p4",
+                  "title": "Verificar",
+                  "kind": "verificar",
+                  "status": "done",
+                  "detail": "classificar cada afirmação contra as fontes lidas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p3"
+                  ]
+                },
+                {
+                  "id": "p5",
+                  "title": "Sintetizar",
+                  "kind": "sintetizar",
+                  "status": "done",
+                  "detail": "redigir apenas com evidências registradas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p4"
+                  ]
+                },
+                {
+                  "id": "p6",
+                  "title": "Auditar",
+                  "kind": "auditar",
+                  "status": "done",
+                  "detail": "checar citações e limitações antes de concluir",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p5"
+                  ]
+                }
+              ],
+              "progress": {
+                "done": 6,
+                "total": 6,
+                "skipped": 0,
+                "errors": 0,
+                "percent": 100.0
+              },
+              "budgets": {
+                "buscas": 2.0,
+                "paginas": 3.0,
+                "timeout_s": 30.0,
+                "subs": 1.0,
+                "replans": 1.0,
+                "midia": 8.0,
+                "concorrencia": 3.0,
+                "max_bytes_pagina": 1000000
+              },
+              "used": {
+                "buscas": 1.0,
+                "paginas": 3.0,
+                "replans": 0
+              },
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "evidence",
+            "props": {
+              "title": "Evidências por afirmação",
+              "claims": [
+                {
+                  "statement": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+                  "state": "INCONCLUSIVE",
+                  "method": "sem-evidencia",
+                  "coverage": 0.0,
+                  "sources": [
+                    {
+                      "id": "ev-9aa34724384d",
+                      "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+                      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+                      "domain": "news.google.com",
+                      "relation": "MENTIONS",
+                      "read": false,
+                      "access_state": "snippet_only",
+                      "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+                      "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+                    },
+                    {
+                      "id": "ev-a614d7b3afb0",
+                      "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+                      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+                      "domain": "news.google.com",
+                      "relation": "MENTIONS",
+                      "read": false,
+                      "access_state": "snippet_only",
+                      "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+                      "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+                    },
+                    {
+                      "id": "ev-a5a0f21eb17a",
+                      "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+                      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+                      "domain": "news.google.com",
+                      "relation": "MENTIONS",
+                      "read": false,
+                      "access_state": "snippet_only",
+                      "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+                      "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+                    }
+                  ],
+                  "found_count": 3,
+                  "read_count": 0,
+                  "supporting_count": 0,
+                  "contradicting_count": 0
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "accordion",
+            "props": {
+              "items": [
+                {
+                  "title": "Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.",
+                  "markdown": "**HIPÓTESE:** Investigar se: Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+                }
+              ]
+            }
+          },
+          {
+            "type": "ui",
+            "component": "filecard",
+            "props": {
+              "title": "Exportar pesquisa",
+              "files": [
+                {
+                  "name": "Relatório completo (Markdown)",
+                  "url": "/api/research/export?job_id=rj-f54d74e0ef2f&formato=md",
+                  "kind": "md",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Dados estruturados (CSV)",
+                  "url": "/api/research/export?job_id=rj-f54d74e0ef2f&formato=csv",
+                  "kind": "csv",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Registros completos (JSON)",
+                  "url": "/api/research/export?job_id=rj-f54d74e0ef2f&formato=json",
+                  "kind": "json",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "sources",
+            "props": {
+              "title": "Fontes e estado da leitura",
+              "items": [
+                {
+                  "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+                  "dominio": "news.google.com",
+                  "data": "Mon, 19 Oct 2026 13:00:00 GMT",
+                  "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+                  "origem_declarada": "",
+                  "tipo": "Notícia",
+                  "escopo": "Página não lida; sem suporte factual",
+                  "relacao": "Fonte de contexto",
+                  "data_evento": "",
+                  "publicador": "Bahia Notícias",
+                  "autores": "",
+                  "doi": "",
+                  "imagem": "",
+                  "favicon": "",
+                  "texto_url": "",
+                  "detalhes": [],
+                  "status": "encontrada"
+                },
+                {
+                  "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+                  "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+                  "dominio": "news.google.com",
+                  "data": "Fri, 19 Jun 2026 07:00:00 GMT",
+                  "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+                  "origem_declarada": "",
+                  "tipo": "Notícia",
+                  "escopo": "Página não lida; sem suporte factual",
+                  "relacao": "Fonte de contexto",
+                  "data_evento": "",
+                  "publicador": "Jornal Grande Bahia",
+                  "autores": "",
+                  "doi": "",
+                  "imagem": "",
+                  "favicon": "",
+                  "texto_url": "",
+                  "detalhes": [],
+                  "status": "encontrada"
+                },
+                {
+                  "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+                  "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+                  "dominio": "news.google.com",
+                  "data": "Mon, 08 Jun 2026 07:00:00 GMT",
+                  "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+                  "origem_declarada": "",
+                  "tipo": "Notícia",
+                  "escopo": "Página não lida; sem suporte factual",
+                  "relacao": "Fonte de contexto",
+                  "data_evento": "",
+                  "publicador": "Canal Rural",
+                  "autores": "",
+                  "doi": "",
+                  "imagem": "",
+                  "favicon": "",
+                  "texto_url": "",
+                  "detalhes": [],
+                  "status": "encontrada"
+                }
+              ],
+              "sources": []
+            }
+          }
+        ]
+      },
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 3,
+          "ok": 3,
+          "vazio": 0,
+          "resultados": 12,
+          "erros": {},
+          "ms_medio": 451.4
+        },
+        "bing-news": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 503.5
+        },
+        "google-news": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 1089.3
+        }
+      },
+      "elapsed_s": 3.167
+    },
+    {
+      "id": "videos",
+      "route": "research",
+      "question": "Vídeos públicos James Webb NASA",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Vídeos públicos James Webb NASA",
+        "domain": "general",
+        "original_request": "Vídeos públicos James Webb NASA",
+        "resolved_request": "Vídeos públicos James Webb NASA",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T17:52:51.511035+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "summary": {
+        "id": "rj-2fad960a190d",
+        "status": "concluida",
+        "modo": "rapida",
+        "objetivo": "Vídeos públicos James Webb NASA",
+        "plano_versao": 2,
+        "etapas": [
+          {
+            "id": "p1",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "Vídeos públicos James Webb NASA",
+            "frente": 1,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 10,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p2",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "Vídeos públicos James Webb NASA",
+            "frente": 1,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p1"
+            ],
+            "prioridade": 30,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p3",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "Vídeos públicos James Webb NASA",
+            "frente": 1,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p2"
+            ],
+            "prioridade": 50,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p4",
+            "tipo": "verificar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+            "dependencias": [
+              "p3"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+          },
+          {
+            "id": "p5",
+            "tipo": "sintetizar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "redigir apenas com evidências registradas",
+            "dependencias": [
+              "p4"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resposta extrativa com citações existentes"
+          },
+          {
+            "id": "p6",
+            "tipo": "auditar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "checar citações e limitações antes de concluir",
+            "dependencias": [
+              "p5"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+          }
+        ],
+        "evidencias": 0,
+        "achados": [],
+        "sintese": {
+          "texto": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+          "llm": false,
+          "references": {}
+        },
+        "investigacoes": 0,
+        "hipoteses": [],
+        "proxima_acao": "Revisar resultados e limitações",
+        "auditoria_ok": true,
+        "pendencias": [],
+        "erros": [],
+        "usados": {
+          "buscas": 1,
+          "paginas": 3,
+          "local_context_checked": true,
+          "replans": 0,
+          "consultas_etapas": {
+            "videos publicos james webb nasa": "p1"
+          },
+          "provedores": {
+            "web": {
+              "ok": 1,
+              "falhas": 0,
+              "ms": 2007
+            }
+          },
+          "failed_source_reads": [
+            "077976a4b1b0f60b97bf2db7501eaef610536967d5a13652f4551c63eebe913a"
+          ],
+          "adaptive_rounds": [
+            {
+              "step_id": "p3",
+              "new_evidence": 0,
+              "total_evidence": 0,
+              "remaining_searches": 1,
+              "decision": "no_new_evidence"
+            }
+          ],
+          "round_evidence_ids": [],
+          "research_outcome": {
+            "state": "partial",
+            "unresolved_fronts": [
+              "Vídeos públicos James Webb NASA fontes primárias texto completo"
+            ],
+            "reason": "evidências insuficientes ou lacunas remanescentes"
+          }
+        },
+        "orcamento": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "profundidade": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "replans": 1,
+          "max_bytes_pagina": 2000000
+        },
+        "midia": [],
+        "midia_resumo": {
+          "total": 0,
+          "images": 0,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 0,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "limites": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "replans": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "max_bytes_pagina": 2000000
+        }
+      },
+      "evidence": [],
+      "read_sources": 0,
+      "model": null,
+      "model_calls_requested": 0,
+      "citation_mechanics": {
+        "citation_count": 0,
+        "stages": {
+          "citation_exists": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "source_retrieved": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "passage_found": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          }
+        }
+      },
+      "displayed_citation_links": [],
+      "search_events": [
+        {
+          "seq": 6,
+          "ts": "2026-10-23T17:52:53.571300+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'Vídeos públicos James Webb NASA': 10 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [
+              {
+                "provedor": "ddg",
+                "codigo": "vazio"
+              },
+              {
+                "provedor": "searxng",
+                "codigo": "indisponivel"
+              },
+              {
+                "provedor": "wikipedia",
+                "codigo": "vazio"
+              }
+            ],
+            "estado": "ok"
+          }
+        },
+        {
+          "seq": 9,
+          "ts": "2026-10-23T17:52:54.066173+00:00",
+          "agente": "analyst",
+          "tipo": "source_opened",
+          "status": "falha",
+          "descricao": "Ignorada (bloqueado): https://www.pexels.com/pt-br/videos/.",
+          "meta": {}
+        },
+        {
+          "seq": 10,
+          "ts": "2026-10-23T17:52:54.284610+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 11,
+          "ts": "2026-10-23T17:52:54.286040+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        }
+      ],
+      "jdui_valid": true,
+      "jdui_errors": [],
+      "jdui": {
+        "version": "JULIA-ui-message/v1",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Investigação: Vídeos públicos James Webb NASA\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+          },
+          {
+            "type": "text",
+            "content": "**Objetivo:** Vídeos públicos James Webb NASA\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+          },
+          {
+            "type": "ui",
+            "component": "researchplan",
+            "props": {
+              "title": "Plano de pesquisa",
+              "objective": "Vídeos públicos James Webb NASA",
+              "mode": "rapida",
+              "status": "completed",
+              "steps": [
+                {
+                  "id": "p1",
+                  "title": "Buscar: Vídeos públicos James Webb NASA",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p2",
+                  "title": "Ler: Vídeos públicos James Webb NASA",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p1"
+                  ]
+                },
+                {
+                  "id": "p3",
+                  "title": "Analisar: Vídeos públicos James Webb NASA",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p2"
+                  ]
+                },
+                {
+                  "id": "p4",
+                  "title": "Verificar",
+                  "kind": "verificar",
+                  "status": "done",
+                  "detail": "classificar cada afirmação contra as fontes lidas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p3"
+                  ]
+                },
+                {
+                  "id": "p5",
+                  "title": "Sintetizar",
+                  "kind": "sintetizar",
+                  "status": "done",
+                  "detail": "redigir apenas com evidências registradas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p4"
+                  ]
+                },
+                {
+                  "id": "p6",
+                  "title": "Auditar",
+                  "kind": "auditar",
+                  "status": "done",
+                  "detail": "checar citações e limitações antes de concluir",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p5"
+                  ]
+                }
+              ],
+              "progress": {
+                "done": 6,
+                "total": 6,
+                "skipped": 0,
+                "errors": 0,
+                "percent": 100.0
+              },
+              "budgets": {
+                "buscas": 2.0,
+                "paginas": 3.0,
+                "timeout_s": 30.0,
+                "subs": 1.0,
+                "replans": 1.0,
+                "midia": 8.0,
+                "concorrencia": 3.0,
+                "max_bytes_pagina": 1000000
+              },
+              "used": {
+                "buscas": 1.0,
+                "paginas": 3.0,
+                "replans": 0
+              },
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "filecard",
+            "props": {
+              "title": "Exportar pesquisa",
+              "files": [
+                {
+                  "name": "Relatório completo (Markdown)",
+                  "url": "/api/research/export?job_id=rj-2fad960a190d&formato=md",
+                  "kind": "md",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Dados estruturados (CSV)",
+                  "url": "/api/research/export?job_id=rj-2fad960a190d&formato=csv",
+                  "kind": "csv",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Registros completos (JSON)",
+                  "url": "/api/research/export?job_id=rj-2fad960a190d&formato=json",
+                  "kind": "json",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                }
+              ],
+              "sources": []
+            }
+          }
+        ]
+      },
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 481.6
+        },
+        "ddg": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 1
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 4,
+          "erros": {},
+          "ms_medio": 1061.2
+        }
+      },
+      "elapsed_s": 2.806
+    },
+    {
+      "id": "images",
+      "route": "research",
+      "question": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "domain": "general",
+        "original_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "resolved_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T17:52:55.297332+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "summary": {
+        "id": "rj-742bc82ac99a",
+        "status": "concluida",
+        "modo": "rapida",
+        "objetivo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "plano_versao": 2,
+        "etapas": [
+          {
+            "id": "p1",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+            "frente": 1,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 10,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p2",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+            "frente": 1,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p1"
+            ],
+            "prioridade": 30,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p3",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+            "frente": 1,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p2"
+            ],
+            "prioridade": 50,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p4",
+            "tipo": "verificar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+            "dependencias": [
+              "p3"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+          },
+          {
+            "id": "p5",
+            "tipo": "sintetizar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "redigir apenas com evidências registradas",
+            "dependencias": [
+              "p4"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resposta extrativa com citações existentes"
+          },
+          {
+            "id": "p6",
+            "tipo": "auditar",
+            "status": "feita",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "checar citações e limitações antes de concluir",
+            "dependencias": [
+              "p5"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+          }
+        ],
+        "evidencias": 0,
+        "achados": [
+          {
+            "afirmacao": "Imagens licenciadas da Ponte Estaiada em São Paulo.",
+            "estado": "INSUFFICIENT_EVIDENCE",
+            "metodo": "sem-evidencia",
+            "cobertura_lexica": 0.0,
+            "evidence_ids": [],
+            "supporting_ids": [],
+            "contradicting_ids": [],
+            "fontes": [],
+            "fontes_encontradas": 0,
+            "fontes_lidas": 0,
+            "fontes_usadas": 0
+          }
+        ],
+        "sintese": {
+          "texto": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+          "llm": false,
+          "references": {}
+        },
+        "investigacoes": 0,
+        "hipoteses": [
+          {
+            "hypothesis_id": "2d4ad3386f6a6392c845",
+            "owner_id": "live-evaluation-only",
+            "job_id": "rj-742bc82ac99a",
+            "statement": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.",
+            "status": "open",
+            "evidence_ids": [],
+            "missing_evidence": [
+              "Nenhuma evidência específica foi atribuída pelo verificador."
+            ],
+            "next_steps": [
+              "Revisar as evidências armazenadas e buscar validação independente."
+            ],
+            "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+            "cadeia": [
+              {
+                "rotulo": "HIPÓTESE",
+                "texto": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo."
+              },
+              {
+                "rotulo": "EVIDÊNCIAS",
+                "texto": "Nenhuma referência específica atribuída."
+              },
+              {
+                "rotulo": "LACUNAS",
+                "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+              },
+              {
+                "rotulo": "PRÓXIMOS PASSOS",
+                "texto": "Revisar as evidências armazenadas e buscar validação independente."
+              },
+              {
+                "rotulo": "CONCLUSÃO",
+                "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+              }
+            ],
+            "testes_executados": false
+          }
+        ],
+        "proxima_acao": "Revisar resultados e limitações",
+        "auditoria_ok": true,
+        "pendencias": [],
+        "erros": [],
+        "usados": {
+          "buscas": 1,
+          "paginas": 3,
+          "local_context_checked": true,
+          "replans": 0,
+          "consultas_etapas": {
+            "imagens licenciadas da ponte estaiada em sao paulo": "p1"
+          },
+          "provedores": {
+            "web": {
+              "ok": 1,
+              "falhas": 0,
+              "ms": 1783
+            }
+          },
+          "failed_source_reads": [
+            "192d03a71033da733e558466a6bc173b6256909f03ddf5ce1f20458ad688a740",
+            "a9c69a756b2eade7d5c33bd2ff1e389d740ee9d92672aaf32973a996e6112951",
+            "da33d4f135f63a335dd7bd10d40e76661f91faf1c5e311a41e6ed738d0693b53"
+          ],
+          "adaptive_rounds": [
+            {
+              "step_id": "p3",
+              "new_evidence": 0,
+              "total_evidence": 0,
+              "remaining_searches": 1,
+              "decision": "no_new_evidence"
+            }
+          ],
+          "round_evidence_ids": [],
+          "research_outcome": {
+            "state": "partial",
+            "unresolved_fronts": [
+              "Imagens licenciadas da Ponte Estaiada em São Paulo fontes primárias texto completo"
+            ],
+            "reason": "evidências insuficientes ou lacunas remanescentes"
+          }
+        },
+        "orcamento": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "profundidade": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "replans": 1,
+          "max_bytes_pagina": 2000000
+        },
+        "midia": [],
+        "midia_resumo": {
+          "total": 0,
+          "images": 0,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 0,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "limites": {
+          "buscas": 2,
+          "paginas": 3,
+          "timeout_s": 30,
+          "subs": 1,
+          "replans": 1,
+          "midia": 8,
+          "concorrencia": 3,
+          "max_bytes_pagina": 2000000
+        }
+      },
+      "evidence": [],
+      "read_sources": 0,
+      "model": null,
+      "model_calls_requested": 0,
+      "citation_mechanics": {
+        "citation_count": 0,
+        "stages": {
+          "citation_exists": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "source_retrieved": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "passage_found": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          }
+        }
+      },
+      "displayed_citation_links": [],
+      "search_events": [
+        {
+          "seq": 6,
+          "ts": "2026-10-23T17:52:57.138150+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'Imagens licenciadas da Ponte Estaiada em São Paulo': 12 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [
+              {
+                "provedor": "ddg",
+                "codigo": "vazio"
+              },
+              {
+                "provedor": "searxng",
+                "codigo": "indisponivel"
+              },
+              {
+                "provedor": "wikipedia",
+                "codigo": "vazio"
+              }
+            ],
+            "estado": "ok"
+          }
+        },
+        {
+          "seq": 9,
+          "ts": "2026-10-23T17:52:57.679854+00:00",
+          "agente": "analyst",
+          "tipo": "source_opened",
+          "status": "falha",
+          "descricao": "Ignorada (tipo_bloqueado): https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Pon.",
+          "meta": {}
+        },
+        {
+          "seq": 10,
+          "ts": "2026-10-23T17:52:57.697988+00:00",
+          "agente": "analyst",
+          "tipo": "source_opened",
+          "status": "falha",
+          "descricao": "Ignorada (tipo_bloqueado): https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Pon.",
+          "meta": {}
+        },
+        {
+          "seq": 11,
+          "ts": "2026-10-23T17:52:58.799411+00:00",
+          "agente": "analyst",
+          "tipo": "source_opened",
+          "status": "falha",
+          "descricao": "Ignorada (bloqueado): https://www.magnific.com/br/imagens.",
+          "meta": {}
+        }
+      ],
+      "jdui_valid": true,
+      "jdui_errors": [],
+      "jdui": {
+        "version": "JULIA-ui-message/v1",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+          },
+          {
+            "type": "text",
+            "content": "**Objetivo:** Imagens licenciadas da Ponte Estaiada em São Paulo\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+          },
+          {
+            "type": "ui",
+            "component": "researchplan",
+            "props": {
+              "title": "Plano de pesquisa",
+              "objective": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+              "mode": "rapida",
+              "status": "completed",
+              "steps": [
+                {
+                  "id": "p1",
+                  "title": "Buscar: Imagens licenciadas da Ponte Estaiada em São Paulo",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p2",
+                  "title": "Ler: Imagens licenciadas da Ponte Estaiada em São Paulo",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p1"
+                  ]
+                },
+                {
+                  "id": "p3",
+                  "title": "Analisar: Imagens licenciadas da Ponte Estaiada em São Paulo",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p2"
+                  ]
+                },
+                {
+                  "id": "p4",
+                  "title": "Verificar",
+                  "kind": "verificar",
+                  "status": "done",
+                  "detail": "classificar cada afirmação contra as fontes lidas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p3"
+                  ]
+                },
+                {
+                  "id": "p5",
+                  "title": "Sintetizar",
+                  "kind": "sintetizar",
+                  "status": "done",
+                  "detail": "redigir apenas com evidências registradas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p4"
+                  ]
+                },
+                {
+                  "id": "p6",
+                  "title": "Auditar",
+                  "kind": "auditar",
+                  "status": "done",
+                  "detail": "checar citações e limitações antes de concluir",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p5"
+                  ]
+                }
+              ],
+              "progress": {
+                "done": 6,
+                "total": 6,
+                "skipped": 0,
+                "errors": 0,
+                "percent": 100.0
+              },
+              "budgets": {
+                "buscas": 2.0,
+                "paginas": 3.0,
+                "timeout_s": 30.0,
+                "subs": 1.0,
+                "replans": 1.0,
+                "midia": 8.0,
+                "concorrencia": 3.0,
+                "max_bytes_pagina": 1000000
+              },
+              "used": {
+                "buscas": 1.0,
+                "paginas": 3.0,
+                "replans": 0
+              },
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "evidence",
+            "props": {
+              "title": "Evidências por afirmação",
+              "claims": [
+                {
+                  "statement": "Imagens licenciadas da Ponte Estaiada em São Paulo.",
+                  "state": "INCONCLUSIVE",
+                  "method": "sem-evidencia",
+                  "coverage": 0.0,
+                  "sources": [],
+                  "found_count": 0,
+                  "read_count": 0,
+                  "supporting_count": 0,
+                  "contradicting_count": 0
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "accordion",
+            "props": {
+              "items": [
+                {
+                  "title": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.",
+                  "markdown": "**HIPÓTESE:** Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.\n\n**EVIDÊNCIAS:** Nenhuma referência específica atribuída.\n\n**LACUNAS:** Nenhuma evidência específica foi atribuída pelo verificador.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+                }
+              ]
+            }
+          },
+          {
+            "type": "ui",
+            "component": "filecard",
+            "props": {
+              "title": "Exportar pesquisa",
+              "files": [
+                {
+                  "name": "Relatório completo (Markdown)",
+                  "url": "/api/research/export?job_id=rj-742bc82ac99a&formato=md",
+                  "kind": "md",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Dados estruturados (CSV)",
+                  "url": "/api/research/export?job_id=rj-742bc82ac99a&formato=csv",
+                  "kind": "csv",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Registros completos (JSON)",
+                  "url": "/api/research/export?job_id=rj-742bc82ac99a&formato=json",
+                  "kind": "json",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                }
+              ],
+              "sources": []
+            }
+          }
+        ]
+      },
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 443.2
+        },
+        "commons": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 853.2
+        },
+        "ddg": {
+          "chamadas": 1,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 1
+          },
+          "ms_medio": 0.0
+        }
+      },
+      "elapsed_s": 3.564
+    }
+  ]
+}

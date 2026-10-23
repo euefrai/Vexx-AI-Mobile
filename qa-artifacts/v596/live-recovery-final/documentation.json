@@ -1,0 +1,1340 @@
+{
+  "id": "documentation",
+  "route": "research",
+  "question": "Documentação oficial Python asyncio TaskGroup cancelamento",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Documentação oficial Python asyncio TaskGroup cancelamento",
+    "domain": "documents",
+    "original_request": "Documentação oficial Python asyncio TaskGroup cancelamento",
+    "resolved_request": "Documentação oficial Python asyncio TaskGroup cancelamento",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-23T18:10:25.274979+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Documentação oficial Python asyncio TaskGroup cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-e17c3cf20e7d",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Documentação oficial Python asyncio TaskGroup cancelamento",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 1,
+    "achados": [
+      {
+        "afirmacao": "Documentação oficial Python asyncio TaskGroup cancelamento.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.333,
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "supporting_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-9110616ea1e4",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "supporting_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-9110616ea1e4",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "supporting_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-9110616ea1e4",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Documentação oficial Python asyncio TaskGroup cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {
+        "E1": "ev-9110616ea1e4"
+      }
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "b57cc6a8f5fe87231e11",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-e17c3cf20e7d",
+        "statement": "Investigar se: Documentação oficial Python asyncio TaskGroup cancelamento.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Documentação oficial Python asyncio TaskGroup cancelamento."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "3a5f50745773d66f7799",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-e17c3cf20e7d",
+        "statement": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+        "status": "open",
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg ."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "4c07287f6de5e0ba33fb",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-e17c3cf20e7d",
+        "statement": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+        "status": "open",
+        "evidence_ids": [
+          "ev-9110616ea1e4"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time ."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "documentacao oficial python asyncio taskgroup cancelamento": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 853
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 1,
+          "total_evidence": 1,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-9110616ea1e4"
+      ],
+      "research_outcome": {
+        "state": "complete",
+        "unresolved_fronts": [],
+        "reason": "frentes com evidência recuperada; verificar limitações dos vereditos"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-43118fe04ccb",
+        "type": "document",
+        "title": "contents.html",
+        "url": "https://docs.python.org/3/contents.html",
+        "final_url": "https://docs.python.org/3/contents.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-4feaf4851bdf",
+        "type": "document",
+        "title": "asyncio-task.html",
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-32e0db0d9ea2",
+        "type": "document",
+        "title": "asyncio-runner.html",
+        "url": "https://docs.python.org/3/library/asyncio-runner.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-runner.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-b167402e4f02",
+        "type": "document",
+        "title": "asyncio-stream.html",
+        "url": "https://docs.python.org/3/library/asyncio-stream.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-stream.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-c957c917eedf",
+        "type": "document",
+        "title": "bugs.html",
+        "url": "https://docs.python.org/3/bugs.html",
+        "final_url": "https://docs.python.org/3/bugs.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-2c5e8ab656d1",
+        "type": "document",
+        "title": "improve-page-nojs.html",
+        "url": "https://docs.python.org/3/improve-page-nojs.html",
+        "final_url": "https://docs.python.org/3/improve-page-nojs.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-5287bd2c91ae",
+        "type": "document",
+        "title": "genindex.html",
+        "url": "https://docs.python.org/3/genindex.html",
+        "final_url": "https://docs.python.org/3/genindex.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-e01e04c1138a",
+        "type": "document",
+        "title": "py-modindex.html",
+        "url": "https://docs.python.org/3/py-modindex.html",
+        "final_url": "https://docs.python.org/3/py-modindex.html",
+        "source_title": "Coroutines and tasks",
+        "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "publisher": "docs.python.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 0,
+      "videos": 0,
+      "documents": 8,
+      "metadata_only": 0,
+      "link_only": 8,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-9110616ea1e4",
+      "fonte_id": "",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "titulo": "Coroutines and tasks",
+      "dominio": "docs.python.org",
+      "acessado_em": "2026-10-23T18:10:27.794090+00:00",
+      "publicado_em": "",
+      "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "documents",
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "Python documentation",
+      "imagens": [
+        "https://docs.python.org/3.15/_images/social_previews/summary_library_asyncio-task_304fcdb3.png",
+        "https://docs.python.org/3/_static/py.svg"
+      ],
+      "texto_lido": true,
+      "trecho_usado": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+      "access_state": "read"
+    }
+  ],
+  "read_sources": 1,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [
+    {
+      "label": "E1",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    }
+  ],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:10:26.199768+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Documentação oficial Python asyncio TaskGroup cancelamento': 7 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (Documentação oficial Python asyncio Task)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Documentação oficial Python asyncio Task)",
+          "ddg: bloqueado (Documentação oficial Python asyncio Task)",
+          "wikipedia: sem resultados (Documentação oficial Python asyncio Task)"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:10:27.782834+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 0,
+          "videos": 0,
+          "documents": 8,
+          "metadata_only": 0,
+          "link_only": 8,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:10:27.796645+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-9110616e de docs.python.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:10:27.797748+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Lida docs.python.org (relevância 0.333).",
+      "meta": {}
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:10:27.805088+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (docs.python.org).",
+      "meta": {
+        "evidencia_id": "ev-9110616ea1e4",
+        "dominio": "docs.python.org",
+        "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strft",
+        "url": "https://docs.python.org/3/library/asyncio-task.html"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T18:10:27.812007+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T18:10:27.836219+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-23T18:10:27.886891+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "3 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Documentação oficial Python asyncio TaskGroup cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Documentação oficial Python asyncio TaskGroup cancelamento\n**Status:** concluída · **Modo:** rapida · **Evidências:** 1\n**Cobertura dos dados:** consulte evidências e limitações\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Documentação oficial Python asyncio TaskGroup cancelamento.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 0.333,
+              "sources": [
+                {
+                  "id": "ev-9110616ea1e4",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-9110616ea1e4",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-9110616ea1e4",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Coroutines and tasks",
+              "url": "https://docs.python.org/3/library/asyncio-task.html",
+              "dominio": "docs.python.org",
+              "data": "",
+              "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "Python documentation",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "document",
+              "title": "contents.html",
+              "url": "https://docs.python.org/3/contents.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "contents.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "asyncio-task.html",
+              "url": "https://docs.python.org/3/library/asyncio-task.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "asyncio-task.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "asyncio-runner.html",
+              "url": "https://docs.python.org/3/library/asyncio-runner.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "asyncio-runner.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "asyncio-stream.html",
+              "url": "https://docs.python.org/3/library/asyncio-stream.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "asyncio-stream.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "bugs.html",
+              "url": "https://docs.python.org/3/bugs.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "bugs.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "improve-page-nojs.html",
+              "url": "https://docs.python.org/3/improve-page-nojs.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "improve-page-nojs.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "genindex.html",
+              "url": "https://docs.python.org/3/genindex.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "genindex.html",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "py-modindex.html",
+              "url": "https://docs.python.org/3/py-modindex.html",
+              "thumb": "",
+              "source_title": "Coroutines and tasks",
+              "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+              "publisher": "docs.python.org",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "This section outlines high-level asyncio APIs to work with coroutines and Tasks. Coroutines, Awaitables, Creating tasks, Task cancellation, Task groups, Sleeping, Running tasks concurrently, Eager ...",
+              "alt": "py-modindex.html",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Documentação oficial Python asyncio TaskGroup cancelamento",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Documentação oficial Python asyncio TaskGroup cancelamento",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Documentação oficial Python asyncio TaskGroup cancelamento",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Documentação oficial Python asyncio TaskGroup cancelamento",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Documentação oficial Python asyncio TaskGroup cancelamento.",
+              "markdown": "**HIPÓTESE:** Investigar se: Documentação oficial Python asyncio TaskGroup cancelamento.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+              "markdown": "**HIPÓTESE:** Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+              "markdown": "**HIPÓTESE:** Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-e17c3cf20e7d&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-e17c3cf20e7d&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-e17c3cf20e7d&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 544.2
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 264.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Documentação – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Documenta%C3%A7%C3%A3o",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 06:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação - O que é, conceito e definição",
+      "url": "https://conceito.de/documentacao",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 09:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que é Documentação - Entenda sua Importância",
+      "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 06:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/documentacao/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 22 set. 2026 08:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação de processos: o que é, tipos e como criar [2025 ... - Asana",
+      "url": "https://asana.com/pt/resources/process-documentation",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 01:15:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conceito de Documentação: Origem, Definição e Significado",
+      "url": "https://lucidarium.com.br/conceito-de-documentacao-origem-definicao-e-significado/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 05:33:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 2.681
+}

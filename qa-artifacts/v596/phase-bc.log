@@ -1,0 +1,29 @@
+...................................F.................................... [ 27%]
+........................................................................ [ 55%]
+..................................................................F..... [ 83%]
+...........s..........s.....................                             [100%]
+================================== FAILURES ===================================
+___________________ test_news_index_is_not_a_recent_article ___________________
+
+    def test_news_index_is_not_a_recent_article():
+        req = qi.analyze('�ltimas not�cias de Salvador', now=NOW)
+        source = {'titulo': '�ltimas not�cias de Salvador', 'url': 'https://example.org/noticias/',
+                  'trecho': 'Salvador', 'publicado_em': NOW.isoformat()}
+>       assert not sv.assess(req, source)['eligible']
+E       assert not True
+
+tests\test_verified_sources_v595.py:124: AssertionError
+______________________ test_filtro_ram_virtual_explicado ______________________
+
+    def test_filtro_ram_virtual_explicado():
+        virtual = _produto_base(nome="Galaxy com 4GB RAM + 8GB RAM Plus virtual")
+        dentro, fora = shopping.aplicar_filtros(
+            [virtual], {"orcamento": {}, "specs": {"ram_fisica_gb": 8}})
+>       assert not dentro
+E       AssertionError: assert not [{'nome': 'Galaxy com 4GB RAM + 8GB RAM Plus virtual', 'marca': 'Samsung', 'modelo': '', 'variante': '', ...}]
+
+tests\test_shopping.py:201: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_verified_sources_v595.py::test_news_index_is_not_a_recent_article
+FAILED tests/test_shopping.py::test_filtro_ram_virtual_explicado - AssertionE...
+2 failed, 256 passed, 2 skipped in 27.60s

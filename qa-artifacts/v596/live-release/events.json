@@ -1,0 +1,1028 @@
+{
+  "id": "events",
+  "route": "research",
+  "question": "Eventos futuros em Recife: local, data e organizador",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Recife: local\" \"data e organizador\" eventos programação 2026-10-23 2027-01-21",
+    "domain": "events",
+    "original_request": "Eventos futuros em Recife: local, data e organizador",
+    "resolved_request": "Eventos futuros em Recife: local, data e organizador",
+    "parameters": {
+      "location": "Recife: local",
+      "region": "data e organizador",
+      "start_date": "2026-10-23",
+      "end_date": "2027-01-21",
+      "window_inferred": true
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-23T18:07:36.813504+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Eventos futuros em Recife: local, data e organizador\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-92460c6797cf",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Eventos futuros em Recife: local, data e organizador",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Eventos futuros em Recife: local, data e organizador",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Eventos futuros em Recife: local, data e organizador",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Eventos futuros em Recife: local, data e organizador",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [
+      {
+        "afirmacao": "Eventos futuros em Recife: local, data e organizador.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [],
+        "fontes_encontradas": 0,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Eventos futuros em Recife: local, data e organizador\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "b3a9c4e3c13ee51fa763",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-92460c6797cf",
+        "statement": "Investigar se: Eventos futuros em Recife: local, data e organizador.",
+        "status": "open",
+        "evidence_ids": [],
+        "missing_evidence": [
+          "Nenhuma evidência específica foi atribuída pelo verificador."
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Eventos futuros em Recife: local, data e organizador."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "Nenhuma referência específica atribuída."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "eventos futuros em recife local data e organizador": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 1299
+        }
+      },
+      "failed_source_reads": [
+        "5ad95c011f539601ad51a107cb60e6088962f8dbfdf874b6e984591c6b8cf0d6"
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Eventos futuros em Recife: local, data e organizador fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-a67056a92a06",
+        "type": "image",
+        "title": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-595f45fba7c8",
+        "type": "image",
+        "title": "Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-636e3fbce209",
+        "type": "image",
+        "title": "Recife - Praia da Boa Viagem",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praia da Boa Viagem",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c00a2d9d3806",
+        "type": "image",
+        "title": "Recife - Praia do Pina",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praia do Pina",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d58f2134e8ee",
+        "type": "image",
+        "title": "Rua Bom Jesus - Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Rua Bom Jesus - Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-e3be13c98dd6",
+        "type": "image",
+        "title": "Marco Zero de Recife",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Marco Zero de Recife",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-75950cba8701",
+        "type": "image",
+        "title": "Recife - Praça da República",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praça da República",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d4ceadd26616",
+        "type": "image",
+        "title": "Parque das Esculturas - Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Parque das Esculturas - Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:07:38.159196+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Eventos futuros em Recife: local, data e organizador': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (\"Recife: local\" \"data e organizador\" eve)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Recife: local\" \"data e organizador\" eve)",
+          "ddg: bloqueado (\"Recife: local\" \"data e organizador\" eve)",
+          "marginalia: sem resultados (\"Recife: local\" \"data e organizador\" eve)"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:07:46.566163+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (rede): https://www2.recife.pe.gov.br/.",
+      "meta": {}
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:07:46.570378+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:07:46.588818+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:07:46.603735+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:07:46.624774+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Eventos futuros em Recife: local, data e organizador\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Eventos futuros em Recife: local, data e organizador\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Eventos futuros em Recife: local, data e organizador.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [],
+              "found_count": 0,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+              "alt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Recife PE",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Recife PE",
+              "alt": "Recife PE",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Recife - Praia da Boa Viagem",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Recife - Praia da Boa Viagem",
+              "alt": "Recife - Praia da Boa Viagem",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Recife - Praia do Pina",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Recife - Praia do Pina",
+              "alt": "Recife - Praia do Pina",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Rua Bom Jesus - Recife PE",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Rua Bom Jesus - Recife PE",
+              "alt": "Rua Bom Jesus - Recife PE",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Marco Zero de Recife",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Marco Zero de Recife",
+              "alt": "Marco Zero de Recife",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Recife - Praça da República",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Recife - Praça da República",
+              "alt": "Recife - Praça da República",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Parque das Esculturas - Recife PE",
+              "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+              "thumb": "",
+              "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+              "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+              "publisher": "www.viagensecaminhos.com",
+              "date": "2014-05-31T15:38:00+00:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Parque das Esculturas - Recife PE",
+              "alt": "Parque das Esculturas - Recife PE",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Eventos futuros em Recife: local, data e organizador",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Eventos futuros em Recife: local, data e organizador",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Eventos futuros em Recife: local, data e organizador",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Eventos futuros em Recife: local, data e organizador",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Eventos futuros em Recife: local, data e organizador.",
+              "markdown": "**HIPÓTESE:** Investigar se: Eventos futuros em Recife: local, data e organizador.\n\n**EVIDÊNCIAS:** Nenhuma referência específica atribuída.\n\n**LACUNAS:** Nenhuma evidência específica foi atribuída pelo verificador.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-92460c6797cf&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-92460c6797cf&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-92460c6797cf&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 427.8
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 848.3
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Recife – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 00:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura do Recife",
+      "url": "https://www2.recife.pe.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 14:01:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Recife PE: 30 pontos turísticos",
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 11:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "AS 15 MELHORES coisas para fazer em Recife (ATUALIZADO 2026)",
+      "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 11:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Recife: 30 dicas para todos os gostos!",
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 11:09:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura do Recife - Pernambuco",
+      "url": "https://www2.recife.pe.gov.br/?i=1",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 07:09:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 9.849
+}

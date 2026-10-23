@@ -1,0 +1,44 @@
+Exception occurred during processing of request from ('127.0.0.1', 52752)
+........................................................................ [  5%]
+........................................................................ [ 10%]
+................................................................s....... [ 15%]
+........................................................................ [ 21%]
+........................................................................ [ 26%]
+........................................................................ [ 31%]
+........................................................................ [ 37%]
+........................................................................ [ 42%]
+........................................................................ [ 47%]
+...................................................s.................... [ 53%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 68%]
+...............................................s..........s............. [ 74%]
+........................................................................ [ 79%]
+........................................................................ [ 84%]
+........................................................................ [ 90%]
+......................................................................F. [ 95%]
+..............................................................           [100%]
+================================== FAILURES ===================================
+___________________ test_news_index_is_not_a_recent_article ___________________
+
+    def test_news_index_is_not_a_recent_article():
+        req = qi.analyze('�ltimas not�cias de Salvador', now=NOW)
+        source = {'titulo': '�ltimas not�cias de Salvador', 'url': 'https://example.org/noticias/',
+                  'trecho': 'Salvador', 'publicado_em': NOW.isoformat()}
+>       assert not sv.assess(req, source)['eligible']
+E       assert not True
+
+tests\test_verified_sources_v595.py:124: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_verified_sources_v595.py::test_news_index_is_not_a_recent_article
+1 failed, 1353 passed, 4 skipped, 2 warnings in 162.48s (0:02:42)

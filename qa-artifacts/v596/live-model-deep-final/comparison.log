@@ -1,0 +1,28 @@
+2026-10-23 15:04:48,026 WARNING pypdf falhou (cryptography>=3.1 is required for AES algorithm), tentando pypdfium2
+Traceback (most recent call last):
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\evaluate_live_research.py", line 211, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\evaluate_live_research.py", line 167, in main
+    result = run_case(case, workspace)
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\tools\evaluate_live_research.py", line 134, in run_case
+    view = research_view.build_view(summary, evidence)
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\research_view.py", line 255, in build_view
+    if _block_ok(component, props):
+       ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\research_view.py", line 28, in _block_ok
+    ok, _, _ = jdui.validar_mensagem({
+               ~~~~~~~~~~~~~~~~~~~~~^^
+        "version": jdui.VERSION,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+        "blocks": [{"type": "ui", "component": component, "props": props}],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\jdui.py", line 954, in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ~~~^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\jdui.py", line 792, in _v_filecard
+    "leitura":f.get('leitura') if f.get('leitura') in ('FOUND','READ','PARTIAL','UNAVAILABLE') else 'READ' if status in ('aberta','utilizada') else 'FOUND',
+                                  ^
+NameError: name 'f' is not defined

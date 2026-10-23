@@ -1,0 +1,1193 @@
+{
+  "id": "news_national",
+  "route": "research",
+  "question": "Notícias nacionais do Brasil nos últimos sete dias",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Notícias nacionais do Brasil entre 2026-10-16 e 2026-10-23",
+    "domain": "news",
+    "original_request": "Notícias nacionais do Brasil nos últimos sete dias",
+    "resolved_request": "Notícias nacionais do Brasil entre 2026-10-16 e 2026-10-23",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T18:07:29.913792+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Notícias nacionais do Brasil nos últimos sete dias\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-5d5dfeb664ce",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Notícias nacionais do Brasil nos últimos sete dias",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Notícias nacionais do Brasil nos últimos sete dias",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Notícias nacionais do Brasil nos últimos sete dias",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Notícias nacionais do Brasil nos últimos sete dias",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [
+      {
+        "afirmacao": "Notícias nacionais do Brasil nos últimos sete dias.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [],
+        "fontes_encontradas": 0,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Notícias nacionais do Brasil nos últimos sete dias\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "07fca2a8a9e9d4d1faef",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-5d5dfeb664ce",
+        "statement": "Investigar se: Notícias nacionais do Brasil nos últimos sete dias.",
+        "status": "open",
+        "evidence_ids": [],
+        "missing_evidence": [
+          "Nenhuma evidência específica foi atribuída pelo verificador."
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Notícias nacionais do Brasil nos últimos sete dias."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "Nenhuma referência específica atribuída."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "noticias nacionais do brasil nos ultimos sete dias": "p1"
+      },
+      "recuperacao_busca": [
+        "notícias nacionais nos últimos sete dias"
+      ],
+      "lacunas_busca": [
+        "nenhuma fonte utilizável"
+      ],
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3617
+        }
+      },
+      "failed_source_reads": [
+        "ee3627b9f5ae3e28a55fec1a95ae8611800d638af758e01902c01b9eb1c6e07e"
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Notícias nacionais do Brasil nos últimos sete dias fontes primárias texto completo",
+          "notícias nacionais nos últimos sete dias"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-56d8b59ede85",
+        "type": "image",
+        "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-14b92c9f90e8",
+        "type": "image",
+        "title": "Logo CNN Brasil",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo CNN Brasil",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-48c6ae6db059",
+        "type": "image",
+        "title": "Tainá Falcão",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_taina_falcao_blog-e1708466329179.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_taina_falcao_blog-e1708466329179.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Tainá Falcão",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-80575135818c",
+        "type": "image",
+        "title": "Lucinda Pinto",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/LUCINDA_01.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/LUCINDA_01.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Lucinda Pinto",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-2ae491dd429b",
+        "type": "image",
+        "title": "Jorge Moraes",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/jorge-moraes-colunista.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/jorge-moraes-colunista.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Jorge Moraes",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-e0a0f2692590",
+        "type": "image",
+        "title": "Elijonas Maia",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elijonas__Maia2.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elijonas__Maia2.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Elijonas Maia",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-f0113dcd3110",
+        "type": "image",
+        "title": "Caio Junqueira",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Caio Junqueira",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-7e47cca81ec1",
+        "type": "image",
+        "title": "Gustavo Uribe",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_gustavo_uribe_blog2-e1707507026677.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_gustavo_uribe_blog2-e1707507026677.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2022-06-23T15:04:17-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Gustavo Uribe",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:07:33.581736+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Notícias nacionais do Brasil nos últimos sete dias': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (Notícias nacionais do Brasil entre 2026-)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (Notícias nacionais do Brasil entre 2026-)",
+          "bing: 6 resultados (Notícias nacionais do Brasil entre 2026-)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Notícias nacionais do Brasil entre 2026-)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento",
+          "— recuperação por lacuna —",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:07:34.551134+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://noticias.uol.com.br/.",
+      "meta": {}
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:07:35.582608+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:07:35.584111+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:07:35.585068+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:07:35.606868+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Notícias nacionais do Brasil nos últimos sete dias\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Notícias nacionais do Brasil nos últimos sete dias\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Notícias nacionais do Brasil nos últimos sete dias.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [],
+              "found_count": 0,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+              "alt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Logo CNN Brasil",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Logo CNN Brasil",
+              "alt": "Logo CNN Brasil",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Tainá Falcão",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_taina_falcao_blog-e1708466329179.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Tainá Falcão",
+              "alt": "Tainá Falcão",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Lucinda Pinto",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/LUCINDA_01.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Lucinda Pinto",
+              "alt": "Lucinda Pinto",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Jorge Moraes",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/jorge-moraes-colunista.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Jorge Moraes",
+              "alt": "Jorge Moraes",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Elijonas Maia",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elijonas__Maia2.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Elijonas Maia",
+              "alt": "Elijonas Maia",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Caio Junqueira",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Caio Junqueira",
+              "alt": "Caio Junqueira",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Gustavo Uribe",
+              "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_gustavo_uribe_blog2-e1707507026677.png?w=117&h=116&crop=0&quality=90",
+              "thumb": "",
+              "source_title": "CNN Brasil",
+              "source_url": "https://www.cnnbrasil.com.br/",
+              "publisher": "admin.cnnbrasil.com.br",
+              "date": "2022-06-23T15:04:17-03:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Gustavo Uribe",
+              "alt": "Gustavo Uribe",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Notícias nacionais do Brasil nos últimos sete dias",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Notícias nacionais do Brasil nos últimos sete dias",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Notícias nacionais do Brasil nos últimos sete dias",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Notícias nacionais do Brasil nos últimos sete dias",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Notícias nacionais do Brasil nos últimos sete dias.",
+              "markdown": "**HIPÓTESE:** Investigar se: Notícias nacionais do Brasil nos últimos sete dias.\n\n**EVIDÊNCIAS:** Nenhuma referência específica atribuída.\n\n**LACUNAS:** Nenhuma evidência específica foi atribuída pelo verificador.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-5d5dfeb664ce&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-5d5dfeb664ce&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-5d5dfeb664ce&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 3,
+      "ok": 3,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 528.4
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 729.3
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 840.4
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Estudantes desenvolvem plataformas para combater a desinformação - Agência Brasil",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Sat, 17 Oct 2026 13:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://agenciabrasil.ebc.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Nova pesquisa para presidente hoje: veja os números divulgados nesta segunda - UOL Notícias",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPWTVSc2JPNDRMSWYtMWkydk9ldE1aZmJyLVRMeXJBYk5mTWM4Vk1KYnpqSHVOU0xoU2dncHJyd243Z0E5WEdqcWZvM2NjbDZsTVZyV2Jab1VXZWdINVJKeWlnQVpwX1MxTmRqMlh2WW1sSmNuVGw4bTd4OUdKN0YzdjNWekNxQmdvMVFPMGRoNGwyQzFaZ3FsdV9QVFVISXJicHh1VlJzTzIzWVpCWWR3b3I3LXNCZ0ZyWkxBUzBxUUlYMmdl?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 22:15:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://noticias.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Entrevista de Flávio Bolsonaro na Globo: veja quando e onde assistir - G1",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNZWt2TGFLVkU5ZkhmczlKdEV4a19SdXI5OG9pc21jbnk0ZlhBa0NWT2pOdVlNb1kxMFNDd1VpTUJFa01BNjRrRzA2bThYY2lyWUU4TWEtZWt0UjdRZlFwNTZMajNaSlNuV2N5ODdkM2REbzhKaHNwM01TMjJ4emEyVjFEOTlOVDA4dlgwVFVzNGFUdFFra3M4dThfUk1aR3ZWenY3ZHA2OG3SAbcBQVVfeXFMTklvN0NzYXdKSWdkWVE5bEhOd2w1VDh3aTJ5NlFBRnVDUTBVd000VmV1eTh4LVBndnE1MGdwU0k0dGN2eWFPMFRMNW5XajVXZ0E1RHMzU3JtalNYaEZ4N183aXhaaWszNTBCX0xsd2QzMmhzU3lOX2xveWNXb0pZMW1NbEprOVQ5T2J3aUZJWW02M01SUVlwSF9sWlIza2k3b2tmSGljQjJHbGt",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 16 Oct 2026 03:00:01 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Papa celebra missa no hospital: exames confirmam melhora constante da saúde - Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPSG9RQ2swRDNXbTRuTnZMM1dUeE5XRjBqMzB5SjVwQnN3enB1Z1l5VkVzQWw0YUpJWGlhMlY1aEFZYW9BQzRuLXN6QnIzZUNqcFlHTTdwdC01Vk1wYVZ5RmxiaHQ0NnJOREJILXMtbFRidUEyb251NzVPXzRBcnpqSi0xVFMwZWo2MnNpLVJaT1RWUEw3OV9hREpaRWwxQk9BQTRYRWVyNVhxN2dqVW80NDZiMmc?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 16 Oct 2026 12:14:15 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.vaticannews.va",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Lula x Flávio: quatro pesquisas vão sair neste fim de semana; veja quais - Transmissão Política",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNb2VMZVV0UmhpZU5sMmw2d0xfTElXb2k3MEtYRDBHSVNrd2F5bm5nUnlxQmpmWjJqNXhsSTBwNzlEMmhsMEVaMjFUNjhfdW5VNFFhMkZvZk9CbGY1T1F5bzNpOWk1ZmZYeEI1ZHlNd1VNWUduTHZaZFFQdVM4NUZ5ZTlfN3EzQldmYVJveVZDR1dZN1lJaHBQZXNvZ3laZG1Sek9TRHJwMXFwWUU?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 16 Oct 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://transmissaopolitica.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ataques a Lula, crítica à Globo, contra reeleição: o que Flávio disse no JN - UOL Notícias",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPTks0aHBCcHNDbFQ3YnRlSEp3dEcyVFZKeG5ndUVVYzlJbXlwWjZNckExTEVCeUlzY0NiY1hGdTlPVjNoVHpCQk5UNFN3MVhUZ0dXbTJLZ05DaGxqZUZkRFV2eEJPQTdtWUg2UWFrTlVMaHlENWp2alFTS1UzV09jNDRCOVlCaGZEV0s1QVZfZzZXaDIwOV9DaFRGMVE0WThfTzNvZ3dWX0N2X3N5Vkx6RHc0LWNfWE5vV19kTkVOd0NMUQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Sat, 17 Oct 2026 01:25:37 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://noticias.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "g1 - O portal de notícias da Globo",
+      "url": "https://g1.globo.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Notícias",
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+      "url": "https://noticias.uol.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+      "url": "https://www.cnnbrasil.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:10:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+      "url": "https://www.terra.com.br/noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:10:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Notícias, vídeos, análise e contexto em português - BBC News Brasil",
+      "url": "https://www.bbc.com/portuguese",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 27 jun. 2013 19:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Estudante - Serviços e Informações do Brasil",
+      "url": "https://www.gov.br/pt-br/perfil_usuario/estudante",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 05:57:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Jornada do Estudante — Ministério da Educação",
+      "url": "https://www.gov.br/mec/pt-br/jornadadoestudante",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 02 jun. 2026 19:14:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "UNE – União Nacional dos Estudantes",
+      "url": "https://www.une.org.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Nova Concursos - Cursos para Concursos Públicos",
+      "url": "https://www.novaconcursos.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:59:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "front-nova-telecom",
+      "url": "https://www.rnova.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 04:01:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Nova - AI Chatbot",
+      "url": "https://chat.novaapp.ai/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 06:44:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 5.745
+}

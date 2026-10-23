@@ -1,0 +1,458 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 15%]
+........s............................................................... [ 20%]
+........................................................................ [ 26%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................F............... [ 41%]
+........................................................................ [ 47%]
+........................................................F..........s.... [ 52%]
+........................................................................ [ 57%]
+.........F.............................................................. [ 62%]
+........................................................................ [ 68%]
+...............................................................s........ [ 73%]
+..s..................................................................... [ 78%]
+........................................................................ [ 83%]
+........................................................................ [ 89%]
+......................................................FFF...F........... [ 94%]
+........................................................................ [ 99%]
+......                                                                   [100%]
+================================== FAILURES ===================================
+___________ test_contextual_source_python_js_parity_and_safe_links ____________
+
+    def test_contextual_source_python_js_parity_and_safe_links():
+        props={'items':[{'titulo':'Evento de teste','url':'https://example.org/event','publicador':'Ve�culo','autores':'Ana','doi':'10.1234/example',
+                         'imagem':'javascript:alert(1)','texto_url':'https://example.org/paper.pdf','detalhes':['Local: teste'],'data_evento':'2026-10-29'}]}
+        m={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'sources','props':props}]}
+        ok,python,_=jdui.validar_mensagem(m);assert ok
+        script="global.window=global;global.location={href:'https://app.example/'};require('./public/jdui.js');process.stdout.write(JSON.stringify(JDUI.validateMessage("+json.dumps(m)+").msg));"
+        js=json.loads(subprocess.check_output(['node','-e',script],cwd=Path(__file__).resolve().parents[1]))
+>       assert js==python and not python['blocks'][0]['props']['items'][0]['imagem']
+E       AssertionError: assert ({'version': '...urces': []}}]} == {'version': '...urces': []}}]}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': '', 'items': [{'titulo': 'Evento de teste', 'url': 'https://example.org/event', 'dominio': '', 'data': '', ...}], 'sources': []}}]} != {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': '', 'items': [{'titulo': 'Evento de teste', 'url': 'https://example.org/event', 'dominio': '', 'data': '', ...}], 'sources': []}}]}
+E         Use -v to get more diff)
+
+tests\test_precision_v593.py:177: AssertionError
+_____________ test_sources_contract_matches_python_and_javascript _____________
+
+    def test_sources_contract_matches_python_and_javascript():
+        message = {'version':jdui.VERSION, 'blocks':[{'type':'ui','component':'sources','props':{
+            'title':'Fontes', 'items':[{'titulo':'Estudo real', 'url':'https://example.com/paper',
+                'status':'utilizada', 'escopo':'Somente resumo', 'tipo':'academico',
+                'relacao':'Trecho ligado � afirma��o', 'data':'2026-10-01', 'data_evento':'2026-09-20'}]}}]}
+        valid, py, errors = jdui.validar_mensagem(message)
+        assert valid, errors
+        assert shutil.which('node'), 'Node is required for Python/JS contract parity'
+        script = "global.window={}; global.location={href: 'https://app.example/'}; eval(require('fs').readFileSync('public/jdui.js','utf8')); console.log(JSON.stringify(window.JDUI.validateMessage(JSON.parse(process.argv[1])).msg));"
+        process = subprocess.run(['node','-e',script,json.dumps(message)],cwd=Path(__file__).parents[1],capture_output=True,text=True,encoding='utf-8')
+        assert process.returncode == 0, process.stderr
+>       assert json.loads(process.stdout) == py
+E       AssertionError: assert {'version': '...urces': []}}]} == {'version': '...urces': []}}]}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': 'Fontes', 'items': [{'titulo': 'Estudo real', 'url': 'https://example.com/paper', 'dominio': '', 'data': '2026-10-01', ...}], 'sources': []}}]} != {'blocks': [{'type': 'ui', 'component': 'sources', 'props': {'title': 'Fontes', 'items': [{'titulo': 'Estudo real', 'url': 'https://example.com/paper', 'dominio': '', 'data': '2026-10-01', ...}], 'sources': []}}]}
+E         Use -v to get more diff
+
+tests\test_research_presentation_v592.py:34: AssertionError
+_____ test_checkpoint_reloads_synthesis_and_report_without_new_inference ______
+
+context = (<sqlite3.Connection object at 0x000002530AAF48B0>, {'id': 'rj-56cd2969ec9c', 'owner': 'owner-a', 'conv': 'chat-a', 'modo': 'pro', ...})
+
+    def test_checkpoint_reloads_synthesis_and_report_without_new_inference(context):
+        db, job = context
+        ev = evidence()
+        # Persist through the real evidence API, then use its real ID in provenance.
+        ra.registrar_evidencia(db, job, {'titulo': ev['titulo'], 'url': ev['url'],
+            'dominio': ev['dominio'], 'texto_lido': True}, EXCERPT)
+        items = ra.listar_evidencias(db, job['owner'], job['id'])
+        result = ra.agente_sintetizador(db, job, items, [], lambda *a: answer(), verificar_fn=approved_review)
+        assert result['llm']
+        job['sintese'] = result
+        job['status'] = 'concluida'
+        ra.salvar_job(db, job)
+        ra._save_context_checkpoint(db, job)
+        reloaded = ra._resumo(db, ra.carregar_job(db, job['owner'], job['id']))
+        assert reloaded['sintese']['provenance'] == result['provenance']
+        report = ra.gerar_relatorio(db, job['owner'], job['id'])
+        assert EXCERPT in report['markdown'].replace('\\.', '.') and 'reda��o assistida' in report['markdown']
+        assert 'n�o foi executada' not in report['markdown']
+        with pytest.raises(ra.AgentErro):
+            ra.gerar_relatorio(db, 'owner-b', job['id'])
+        for fmt in ('md', 'csv', 'json'):
+            payload, _, _ = research_exports.build_export(reloaded, items, [], fmt)
+            assert EXCERPT.encode('utf-8') in payload
+>       view = research_view.build_view(reloaded, items)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_research_synthesis.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research_view.py:255: in build_view
+    if _block_ok(component, props):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research_view.py:28: in _block_ok
+    ok, _, _ = jdui.validar_mensagem({
+jdui.py:954: in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+p = {'title': 'Exportar pesquisa', 'files': [{'name': 'Relat�rio completo (Markdown)', 'url': '/api/research/export?job_id...SON)', 'url': '/api/research/export?job_id=rj-56cd2969ec9c&formato=json', 'kind': 'json', 'size': 'limite 2 MB', ...}]}
+
+    def _v_filecard(p: dict) -> dict:
+        files = p.get("files")
+        if not isinstance(files, list) or not (1 <= len(files) <= 8):
+            raise JduiErro("filecard.files: 1..8 obrigat�rios")
+        out = []
+        for item in files:
+            if not isinstance(item, dict) or not _str(item.get("name")):
+                raise JduiErro("filecard.file sem name")
+            url = _url_recurso(item.get("url"))
+            if not url:
+                raise JduiErro("filecard.url real obrigat�ria")
+            kind = str(item.get("kind") or "").lower()
+            if kind not in FILE_KINDS:
+                raise JduiErro("filecard.kind inv�lido")
+            status = str(item.get("status") or "available").lower()
+            if status not in ("available", "generated", "unverified"):
+                status = "unverified"
+            out.append({"name": _str(item.get("name"), 160), "url": url,
+                        "kind": kind, "size": _str(item.get("size"), 40),
+                        "source": _str(item.get("source"), 200),
+>                       "status": status})
+                                           
+E           NameError: name 'f' is not defined
+
+jdui.py:792: NameError
+____________ test_filecard_accepts_only_real_export_or_remote_url _____________
+
+    def test_filecard_accepts_only_real_export_or_remote_url():
+>       ok, norm, _ = jdui.validar_mensagem(_msg("filecard", {"files": [
+            {"name": "Relat�rio", "url": "/api/research/export?job_id=rj-abc&formato=md",
+             "kind": "md", "status": "available"},
+            {"name": "PDF", "url": "https://example.com/a.pdf", "kind": "pdf"},
+        ]}))
+
+tests\test_v58_deep_research.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+jdui.py:954: in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+p = {'files': [{'name': 'Relat�rio', 'url': '/api/research/export?job_id=rj-abc&formato=md', 'kind': 'md', 'status': 'available'}, {'name': 'PDF', 'url': 'https://example.com/a.pdf', 'kind': 'pdf'}]}
+
+    def _v_filecard(p: dict) -> dict:
+        files = p.get("files")
+        if not isinstance(files, list) or not (1 <= len(files) <= 8):
+            raise JduiErro("filecard.files: 1..8 obrigat�rios")
+        out = []
+        for item in files:
+            if not isinstance(item, dict) or not _str(item.get("name")):
+                raise JduiErro("filecard.file sem name")
+            url = _url_recurso(item.get("url"))
+            if not url:
+                raise JduiErro("filecard.url real obrigat�ria")
+            kind = str(item.get("kind") or "").lower()
+            if kind not in FILE_KINDS:
+                raise JduiErro("filecard.kind inv�lido")
+            status = str(item.get("status") or "available").lower()
+            if status not in ("available", "generated", "unverified"):
+                status = "unverified"
+            out.append({"name": _str(item.get("name"), 160), "url": url,
+                        "kind": kind, "size": _str(item.get("size"), 40),
+                        "source": _str(item.get("source"), 200),
+>                       "status": status})
+                                           
+E           NameError: name 'f' is not defined
+
+jdui.py:792: NameError
+__________ test_research_view_validates_real_data_and_links_exports ___________
+
+    def test_research_view_validates_real_data_and_links_exports():
+>       message = research_view.build_view(_resumo())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v58_deep_research.py:175: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research_view.py:255: in build_view
+    if _block_ok(component, props):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research_view.py:28: in _block_ok
+    ok, _, _ = jdui.validar_mensagem({
+jdui.py:954: in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+p = {'title': 'Exportar pesquisa', 'files': [{'name': 'Relat�rio completo (Markdown)', 'url': '/api/research/export?job_id...tos (JSON)', 'url': '/api/research/export?job_id=rj-abc123&formato=json', 'kind': 'json', 'size': 'limite 2 MB', ...}]}
+
+    def _v_filecard(p: dict) -> dict:
+        files = p.get("files")
+        if not isinstance(files, list) or not (1 <= len(files) <= 8):
+            raise JduiErro("filecard.files: 1..8 obrigat�rios")
+        out = []
+        for item in files:
+            if not isinstance(item, dict) or not _str(item.get("name")):
+                raise JduiErro("filecard.file sem name")
+            url = _url_recurso(item.get("url"))
+            if not url:
+                raise JduiErro("filecard.url real obrigat�ria")
+            kind = str(item.get("kind") or "").lower()
+            if kind not in FILE_KINDS:
+                raise JduiErro("filecard.kind inv�lido")
+            status = str(item.get("status") or "available").lower()
+            if status not in ("available", "generated", "unverified"):
+                status = "unverified"
+            out.append({"name": _str(item.get("name"), 160), "url": url,
+                        "kind": kind, "size": _str(item.get("size"), 40),
+                        "source": _str(item.get("source"), 200),
+>                       "status": status})
+                                           
+E           NameError: name 'f' is not defined
+
+jdui.py:792: NameError
+_________ test_research_view_omits_invalid_component_without_raw_json _________
+
+    def test_research_view_omits_invalid_component_without_raw_json():
+        resumo = _resumo()
+        resumo["midia"][0]["url"] = "javascript:alert(1)"
+>       message = research_view.build_view(resumo)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v58_deep_research.py:189: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research_view.py:255: in build_view
+    if _block_ok(component, props):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research_view.py:28: in _block_ok
+    ok, _, _ = jdui.validar_mensagem({
+jdui.py:954: in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+p = {'title': 'Exportar pesquisa', 'files': [{'name': 'Relat�rio completo (Markdown)', 'url': '/api/research/export?job_id...tos (JSON)', 'url': '/api/research/export?job_id=rj-abc123&formato=json', 'kind': 'json', 'size': 'limite 2 MB', ...}]}
+
+    def _v_filecard(p: dict) -> dict:
+        files = p.get("files")
+        if not isinstance(files, list) or not (1 <= len(files) <= 8):
+            raise JduiErro("filecard.files: 1..8 obrigat�rios")
+        out = []
+        for item in files:
+            if not isinstance(item, dict) or not _str(item.get("name")):
+                raise JduiErro("filecard.file sem name")
+            url = _url_recurso(item.get("url"))
+            if not url:
+                raise JduiErro("filecard.url real obrigat�ria")
+            kind = str(item.get("kind") or "").lower()
+            if kind not in FILE_KINDS:
+                raise JduiErro("filecard.kind inv�lido")
+            status = str(item.get("status") or "available").lower()
+            if status not in ("available", "generated", "unverified"):
+                status = "unverified"
+            out.append({"name": _str(item.get("name"), 160), "url": url,
+                        "kind": kind, "size": _str(item.get("size"), 40),
+                        "source": _str(item.get("source"), 200),
+>                       "status": status})
+                                           
+E           NameError: name 'f' is not defined
+
+jdui.py:792: NameError
+________ test_relay_view_and_export_routes_return_real_validated_bytes ________
+
+    def test_relay_view_and_export_routes_return_real_validated_bytes():
+        import os
+        import threading
+        from argon2 import PasswordHasher
+        from fastapi.testclient import TestClient
+        import server
+        from test_auth import _agente_generico, _login_legacy
+    
+        os.environ["JULIA_USERNAME"] = "owneruser"
+        os.environ["JULIA_PASSWORD_HASH"] = PasswordHasher().hash("strong-example-password")
+        os.environ["JULIA_SESSION_SECRET"] = "a" * 64
+        os.environ["JULIA_AGENT_TOKEN"] = "b" * 64
+        server.login_failures.clear()
+        resumo = _resumo()
+    
+        def fake(req):
+            tipo = req.get("type")
+            if tipo == "research_job_status":
+                if req.get("job_id") == "rj-none":
+                    return {"type": "research_error", "codigo": "ausente",
+                            "error": "Pesquisa n�o encontrada"}
+                return {"type": "research_status", "resumo": resumo,
+                        "eventos": [{"seq": 1, "tipo": "research_completed"}]}
+            if tipo == "research_job_evidence":
+                return {"type": "research_evidence", "evidencias": [{
+                    "id": "ev1", "titulo": "Ensaio", "url": "https://example.com/ensaio",
+                    "dominio": "example.com", "status": "recuperada", "texto_lido": True,
+                    "access_state": "read", "trecho": "O caf� � seguro em 400 mg."}]}
+            if tipo == "research_job_hypotheses":
+                return {"type": "research_hypotheses", "hypotheses": [{
+                    "hypothesis_id": "h1", "statement": "Caf� causa ins�nia?",
+                    "status": "open"}]}
+            return {"type": "learn_error", "error": "?", "codigo": "erro"}
+    
+        with TestClient(server.app) as client:
+            with client.websocket_connect(
+                    "/api/agent/ws", headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+                vistos = {}
+                rr = {key: fake for key in ("research_job_status", "research_job_evidence",
+                                            "research_job_hypotheses")}
+                thread = threading.Thread(target=_agente_generico, args=(ws, rr, vistos), daemon=True)
+                thread.start()
+                csrf = _login_legacy(client)
+                h = {"X-CSRF-Token": csrf}
+>               r = client.get("/api/research/view?job_id=rj-abc123", headers=h)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v58_deep_research.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.venv\Lib\site-packages\httpx2\_client.py:1113: in get
+    return self.request(
+..\.venv\Lib\site-packages\starlette\testclient.py:457: in request
+    return super().request(
+..\.venv\Lib\site-packages\httpx2\_client.py:797: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\httpx2\_client.py:980: in send
+    response = self._send_handling_auth(
+..\.venv\Lib\site-packages\httpx2\_client.py:1008: in _send_handling_auth
+    response = self._send_handling_redirects(
+..\.venv\Lib\site-packages\httpx2\_client.py:1043: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\httpx2\_client.py:1076: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\starlette\testclient.py:354: in handle_request
+    raise exc
+..\.venv\Lib\site-packages\starlette\testclient.py:351: in handle_request
+    portal.call(self.app, scope, receive, send)
+..\.venv\Lib\site-packages\anyio\from_thread.py:340: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+..\.venv\Lib\site-packages\anyio\from_thread.py:265: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\fastapi\applications.py:1216: in __call__
+    await super().__call__(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\applications.py:96: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+..\.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+..\.venv\Lib\site-packages\fastapi\telemetry\_asgi.py:151: in __call__
+    await self.app(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\middleware\base.py:203: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.py:407: in security_headers
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\starlette\middleware\base.py:179: in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+..\.venv\Lib\site-packages\starlette\middleware\base.py:149: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+server.py:85: in __call__
+    await self.app(scope, receive_limited, send)
+..\.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\routing.py:676: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\.venv\Lib\site-packages\fastapi\routing.py:2788: in app
+    await route.handle(scope, receive, send)
+..\.venv\Lib\site-packages\fastapi\routing.py:1310: in handle
+    await super().handle(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\routing.py:282: in handle
+    await self.app(scope, receive, send)
+..\.venv\Lib\site-packages\fastapi\routing.py:165: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+..\.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\.venv\Lib\site-packages\fastapi\routing.py:151: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\fastapi\routing.py:727: in app
+    raw_response = await run_endpoint_function(
+..\.venv\Lib\site-packages\fastapi\routing.py:360: in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.py:2012: in research_view
+    message = research_view.build_view(
+research_view.py:255: in build_view
+    if _block_ok(component, props):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research_view.py:28: in _block_ok
+    ok, _, _ = jdui.validar_mensagem({
+jdui.py:954: in validar_mensagem
+    norm.append({"type": "ui", "component": comp, "props": val(props)})
+                                                           ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+p = {'title': 'Exportar pesquisa', 'files': [{'name': 'Relat�rio completo (Markdown)', 'url': '/api/research/export?job_id...tos (JSON)', 'url': '/api/research/export?job_id=rj-abc123&formato=json', 'kind': 'json', 'size': 'limite 2 MB', ...}]}
+
+    def _v_filecard(p: dict) -> dict:
+        files = p.get("files")
+        if not isinstance(files, list) or not (1 <= len(files) <= 8):
+            raise JduiErro("filecard.files: 1..8 obrigat�rios")
+        out = []
+        for item in files:
+            if not isinstance(item, dict) or not _str(item.get("name")):
+                raise JduiErro("filecard.file sem name")
+            url = _url_recurso(item.get("url"))
+            if not url:
+                raise JduiErro("filecard.url real obrigat�ria")
+            kind = str(item.get("kind") or "").lower()
+            if kind not in FILE_KINDS:
+                raise JduiErro("filecard.kind inv�lido")
+            status = str(item.get("status") or "available").lower()
+            if status not in ("available", "generated", "unverified"):
+                status = "unverified"
+            out.append({"name": _str(item.get("name"), 160), "url": url,
+                        "kind": kind, "size": _str(item.get("size"), 40),
+                        "source": _str(item.get("source"), 200),
+>                       "status": status})
+                                           
+E           NameError: name 'f' is not defined
+
+jdui.py:792: NameError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_precision_v593.py::test_contextual_source_python_js_parity_and_safe_links
+FAILED tests/test_research_presentation_v592.py::test_sources_contract_matches_python_and_javascript
+FAILED tests/test_research_synthesis.py::test_checkpoint_reloads_synthesis_and_report_without_new_inference
+FAILED tests/test_v58_deep_research.py::test_filecard_accepts_only_real_export_or_remote_url
+FAILED tests/test_v58_deep_research.py::test_research_view_validates_real_data_and_links_exports
+FAILED tests/test_v58_deep_research.py::test_research_view_omits_invalid_component_without_raw_json
+FAILED tests/test_v58_deep_research.py::test_relay_view_and_export_routes_return_real_validated_bytes
+7 failed, 1363 passed, 4 skipped, 2 warnings in 214.81s (0:03:34)

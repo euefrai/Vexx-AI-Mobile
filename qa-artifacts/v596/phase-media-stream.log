@@ -1,0 +1,22 @@
+............F.......................................................     [100%]
+================================== FAILURES ===================================
+__________ test_specific_video_metadata_and_generic_channel_rejected __________
+
+    def test_specific_video_metadata_and_generic_channel_rejected():
+        import media_evidence as media
+        assert not media._is_video('https://www.youtube.com/')
+        assert not media._is_video('https://www.youtube.com/channel/UCtest')
+        assert not media._is_video('https://evilyoutube.com/watch?v=abcdefghijk')
+        url='https://www.youtube.com/watch?v=abcdefghijk'
+        page='<script type="application/ld+json">'+json.dumps({'@graph':[{
+            '@type':'VideoObject','url':url,'name':'NASA James Webb',
+            'author':{'name':'NASA'},'duration':'PT2M','thumbnailUrl':'https://images.nasa.gov/webb.jpg'}]})+'</script>'
+        records=media.extrair_midia(page,'https://science.nasa.gov/webb/','NASA Webb')
+>       video=next(item for item in records if item['type']=='video')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       StopIteration
+
+tests\test_deep_retrieval_v596.py:93: StopIteration
+=========================== short test summary info ===========================
+FAILED tests/test_deep_retrieval_v596.py::test_specific_video_metadata_and_generic_channel_rejected
+1 failed, 67 passed in 4.21s

@@ -1,0 +1,1565 @@
+{
+  "schema": "vexx-live-research-evaluation/v1",
+  "started_at": "2026-10-23T17:56:56.716544+00:00",
+  "scope": "live component pipelines; temporary SQLite; not authenticated UI",
+  "case_timeout_s": 65,
+  "cases": [
+    {
+      "id": "comparison",
+      "route": "deep_research",
+      "question": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "domain": "science",
+        "original_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "resolved_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T17:56:57.757615+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\n[E1](https://www.manualdaquimica.com/quimica-geral/litio-li.htm) Lítio (Li): o que é, para que serve, fontes (www.manualdaquimica.com): Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação :\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+      "summary": {
+        "id": "rj-21e60f35215a",
+        "status": "concluida",
+        "modo": "profunda",
+        "objetivo": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "plano_versao": 2,
+        "etapas": [
+          {
+            "id": "p1",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "estudos baterias sódio",
+            "frente": 1,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 10,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p2",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "estudos baterias sódio",
+            "frente": 1,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p1"
+            ],
+            "prioridade": 30,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p3",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "estudos baterias sódio",
+            "frente": 1,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p2"
+            ],
+            "prioridade": 50,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p4",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "lítio: métodos",
+            "frente": 2,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 11,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p5",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "lítio: métodos",
+            "frente": 2,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p4"
+            ],
+            "prioridade": 31,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p6",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "lítio: métodos",
+            "frente": 2,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p5"
+            ],
+            "prioridade": 51,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p7",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "métricas",
+            "frente": 3,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 12,
+            "priority_reason": "frente 3 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p8",
+            "tipo": "ler",
+            "status": "pendente",
+            "alvo": "métricas",
+            "frente": 3,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p7"
+            ],
+            "prioridade": 32,
+            "priority_reason": "frente 3 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p9",
+            "tipo": "analisar",
+            "status": "pendente",
+            "alvo": "métricas",
+            "frente": 3,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p8"
+            ],
+            "prioridade": 52,
+            "priority_reason": "frente 3 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p10",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "limitações",
+            "frente": 4,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 13,
+            "priority_reason": "frente 4 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p11",
+            "tipo": "ler",
+            "status": "pendente",
+            "alvo": "limitações",
+            "frente": 4,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p10"
+            ],
+            "prioridade": 33,
+            "priority_reason": "frente 4 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p12",
+            "tipo": "analisar",
+            "status": "pendente",
+            "alvo": "limitações",
+            "frente": 4,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p11"
+            ],
+            "prioridade": 53,
+            "priority_reason": "frente 4 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p13",
+            "tipo": "verificar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+            "dependencias": [
+              "p3",
+              "p6",
+              "p9",
+              "p12"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+          },
+          {
+            "id": "p14",
+            "tipo": "sintetizar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "redigir apenas com evidências registradas",
+            "dependencias": [
+              "p13"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resposta extrativa com citações existentes"
+          },
+          {
+            "id": "p15",
+            "tipo": "auditar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "checar citações e limitações antes de concluir",
+            "dependencias": [
+              "p14"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+          }
+        ],
+        "evidencias": 1,
+        "achados": [],
+        "sintese": {
+          "texto": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\n[E1](https://www.manualdaquimica.com/quimica-geral/litio-li.htm) Lítio (Li): o que é, para que serve, fontes (www.manualdaquimica.com): Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação :\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+          "llm": false,
+          "references": {
+            "E1": "ev-66f3ec7d1469"
+          },
+          "fallback_reason": "provider_or_validation_failure",
+          "fallback_detail": "empty_or_invalid_paragraphs"
+        },
+        "investigacoes": 0,
+        "hipoteses": [],
+        "proxima_acao": "Executar p8 (ler)",
+        "auditoria_ok": true,
+        "pendencias": [
+          "p8: orçamento de páginas esgotado",
+          "p11: orçamento de páginas esgotado",
+          "p9: aguardando dependências explícitas concluírem",
+          "p12: aguardando dependências explícitas concluírem",
+          "p13: aguardando dependências explícitas concluírem",
+          "p14: aguardando dependências explícitas concluírem",
+          "p15: aguardando dependências explícitas concluírem"
+        ],
+        "erros": [],
+        "usados": {
+          "buscas": 4,
+          "paginas": 12,
+          "local_context_checked": true,
+          "replans": 0,
+          "consultas_etapas": {
+            "estudos baterias sodio": "p1",
+            "litio metodos": "p4",
+            "metricas": "p7",
+            "limitacoes": "p10"
+          },
+          "provedores": {
+            "web": {
+              "ok": 2,
+              "falhas": 0,
+              "ms": 3509
+            },
+            "wikipedia": {
+              "ok": 2,
+              "falhas": 0,
+              "ms": 862
+            }
+          },
+          "adaptive_rounds": [
+            {
+              "step_id": "p3",
+              "new_evidence": 1,
+              "total_evidence": 1,
+              "remaining_searches": 4,
+              "decision": "evidence_gained"
+            },
+            {
+              "step_id": "p6",
+              "new_evidence": 0,
+              "total_evidence": 1,
+              "remaining_searches": 4,
+              "decision": "no_new_evidence"
+            }
+          ],
+          "round_evidence_ids": [
+            "ev-66f3ec7d1469"
+          ],
+          "synthesis_attempted": true,
+          "research_outcome": {
+            "state": "partial",
+            "unresolved_fronts": [
+              "estudos baterias sódio fontes primárias texto completo",
+              "limitações fontes primárias texto completo",
+              "métricas fontes primárias texto completo"
+            ],
+            "reason": "evidências insuficientes ou lacunas remanescentes"
+          }
+        },
+        "orcamento": {
+          "buscas": 8,
+          "paginas": 12,
+          "timeout_s": 120,
+          "subs": 4,
+          "profundidade": 2,
+          "midia": 16,
+          "concorrencia": 3,
+          "replans": 2,
+          "max_bytes_pagina": 2000000
+        },
+        "midia": [
+          {
+            "id": "med-08f3ece5d41c",
+            "type": "document",
+            "title": "EFECTIVIDAD DEL LOCALIZADOR APICAL EN PRESENCIA DE HIPOCLORITO DE SODIO CLORHEXIDINA Y CLORURO DE SODIO - 2014",
+            "url": "https://revistas.ujcm.edu.pe/index.php/rctd/article/download/19/16",
+            "final_url": "https://revistas.ujcm.edu.pe/index.php/rctd/article/download/19/16",
+            "source_title": "EFECTIVIDAD DEL LOCALIZADOR APICAL EN PRESENCIA DE HIPOCLORITO DE SODIO CLORHEXIDINA Y CLORURO DE SODIO - 2014",
+            "source_url": "https://doi.org/10.37260/rctd.v1i2.19",
+            "publisher": "revistas.ujcm.edu.pe",
+            "date": "2015-12-30",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "search metadata"
+          },
+          {
+            "id": "med-9ac3db6e33bb",
+            "type": "document",
+            "title": "De compras para la salud: Sodio",
+            "url": "https://journals.flvc.org/edis/article/download/120743/119243",
+            "final_url": "https://journals.flvc.org/edis/article/download/120743/119243",
+            "source_title": "De compras para la salud: Sodio",
+            "source_url": "https://doi.org/10.32473/edis-fs211-2013",
+            "publisher": "journals.flvc.org",
+            "date": "2013-03-31",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "search metadata"
+          },
+          {
+            "id": "med-377bb00c061f",
+            "type": "document",
+            "title": "Testador de baterias / Battery tester",
+            "url": "https://brazilianjournals.com/ojs/index.php/BRJD/article/download/45780/pdf",
+            "final_url": "https://brazilianjournals.com/ojs/index.php/BRJD/article/download/45780/pdf",
+            "source_title": "Testador de baterias / Battery tester",
+            "source_url": "https://doi.org/10.34117/bjdv8n3-395",
+            "publisher": "brazilianjournals.com",
+            "date": "2022-03-30",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "search metadata"
+          },
+          {
+            "id": "med-fda7e78aaeac",
+            "type": "document",
+            "title": "Sobre baterias e tamborins",
+            "url": "https://www.revistas.usp.br/rieb/article/download/149633/146690",
+            "final_url": "https://www.revistas.usp.br/rieb/article/download/149633/146690",
+            "source_title": "Sobre baterias e tamborins",
+            "source_url": "https://doi.org/10.11606/issn.2316-901x.v0i70p59-77",
+            "publisher": "www.revistas.usp.br",
+            "date": "2018-08-30",
+            "rights": "http://creativecommons.org/licenses/by-nc/4.0",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "search metadata"
+          },
+          {
+            "id": "med-6999b724efe5",
+            "type": "image",
+            "title": "O lítio, ou carbonato de lítio, é um remédio indicado para o tratamento e controle de episódios de mania no transtorno bipolar ou para auxiliar no tratamento da",
+            "url": "https://image.tuasaude.com/media/article/bm/rw/litio-carbolitium_76092.jpg",
+            "final_url": "https://image.tuasaude.com/media/article/bm/rw/litio-carbolitium_76092.jpg",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O lítio, ou carbonato de lítio, é um remédio indicado para o tratamento e controle de episódios de mania no transtorno bipolar ou para auxiliar no tratamento da depressão. Entenda melhor o que é e para que serve o lítio, e os possíveis efei",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ee785de8c8ca",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo Como fazer uma dieta para emagrecer rápido (com cardápio)",
+            "url": "https://image.tuasaude.com/media/article/wm/nn/emagrecer-rapido_54914.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/wm/nn/emagrecer-rapido_54914.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo Como fazer uma dieta para emagrecer rápido (com cardápio)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8a94a65ba0d7",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 10 exercícios para perder a barriga (e como fazer)",
+            "url": "https://image.tuasaude.com/media/article/my/ij/3-exercicios-simples-para-fazer-em-casa-e-perder-barriga_38753.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/my/ij/3-exercicios-simples-para-fazer-em-casa-e-perder-barriga_38753.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 10 exercícios para perder a barriga (e como fazer)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-617f0ef4b5f7",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 14 melhores chás para emagrecer e perder barriga",
+            "url": "https://image.tuasaude.com/media/article/gc/oi/cha-para-emagrecer_27797.webp?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/gc/oi/cha-para-emagrecer_27797.webp?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 14 melhores chás para emagrecer e perder barriga",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9525902ee839",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 19 remédios para emagrecer: de farmácia e naturais",
+            "url": "https://image.tuasaude.com/media/article/ac/bd/remedio-para-emagrecer_19960.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/ac/bd/remedio-para-emagrecer_19960.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 19 remédios para emagrecer: de farmácia e naturais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9b5b6f3185fb",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 10 alimentos probióticos que fazem bem à saúde",
+            "url": "https://image.tuasaude.com/media/article/xz/ft/alimentos-probioticos_54158.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/xz/ft/alimentos-probioticos_54158.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 10 alimentos probióticos que fazem bem à saúde",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-89c3a43ad8f6",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo Alimentos funcionais: o que são e para que servem",
+            "url": "https://image.tuasaude.com/media/article/pe/gg/alimentos-funcionais_40528.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/pe/gg/alimentos-funcionais_40528.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo Alimentos funcionais: o que são e para que servem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b164d03966d4",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 10 alimentos laxantes que soltam o intestino (com cardápio)",
+            "url": "https://image.tuasaude.com/media/article/uh/wd/alimentos-com-efeito-laxante_8205.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/uh/wd/alimentos-com-efeito-laxante_8205.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 10 alimentos laxantes que soltam o intestino (com cardápio)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1460888d79cb",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 12 alimentos que ajudam na cicatrização",
+            "url": "https://image.tuasaude.com/media/article/wl/nr/alimentos-cicatrizantes_75060.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/wl/nr/alimentos-cicatrizantes_75060.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 12 alimentos que ajudam na cicatrização",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-40c16c691916",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 8 melhores suplementos para queimar gordura e secar",
+            "url": "https://image.tuasaude.com/media/article/kk/qw/suplementos-para-queimar-gordura_33111.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/kk/qw/suplementos-para-queimar-gordura_33111.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 8 melhores suplementos para queimar gordura e secar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-13f1588c24c8",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 10 suplementos para ganhar massa muscular (e como usar)",
+            "url": "https://image.tuasaude.com/media/article/aj/kn/suplementos-para-ganhar-massa-muscular_32719.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/aj/kn/suplementos-para-ganhar-massa-muscular_32719.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 10 suplementos para ganhar massa muscular (e como usar)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4a3011f3ccda",
+            "type": "image",
+            "title": "Imagem ilustrativa do artigo 10 suplementos para melhorar a memória e a concentração",
+            "url": "https://image.tuasaude.com/media/article/ts/bd/suplementos-para-a-mente_19057.jpg?width=48&height=48",
+            "final_url": "https://image.tuasaude.com/media/article/ts/bd/suplementos-para-a-mente_19057.jpg?width=48&height=48",
+            "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+            "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+            "publisher": "image.tuasaude.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa do artigo 10 suplementos para melhorar a memória e a concentração",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "midia_resumo": {
+          "total": 16,
+          "images": 12,
+          "videos": 0,
+          "documents": 4,
+          "metadata_only": 12,
+          "link_only": 4,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "limites": {
+          "buscas": 8,
+          "paginas": 12,
+          "timeout_s": 120,
+          "subs": 4,
+          "replans": 2,
+          "midia": 16,
+          "concorrencia": 3,
+          "max_bytes_pagina": 2000000
+        }
+      },
+      "evidence": [
+        {
+          "id": "ev-66f3ec7d1469",
+          "fonte_id": "",
+          "url": "https://www.manualdaquimica.com/quimica-geral/litio-li.htm",
+          "titulo": "Lítio (Li): o que é, para que serve, fontes",
+          "dominio": "www.manualdaquimica.com",
+          "acessado_em": "2026-10-23T17:57:08.086488+00:00",
+          "publicado_em": "2024-04-30UTC17:32:16",
+          "trecho": "Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação : 180,5°C. Ponto de fusão : 1342°C. Ponto de ebulição : 0,534 g/cm³. Densidade : 520,2 kJ/mol. Energia",
+          "afirmacao": "",
+          "relacao": "cita",
+          "status": "recuperada",
+          "content_scope": "page_text",
+          "vertical": {
+            "kind": "science",
+            "url": "https://www.manualdaquimica.com/quimica-geral/litio-li.htm",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "title",
+              "doi",
+              "authors",
+              "publication_date",
+              "content_scope",
+              "source"
+            ],
+            "reasons": [],
+            "data": {}
+          },
+          "structured": [],
+          "publicador": "Manual da Química",
+          "imagens": [
+            "https://static.manualdaquimica.com/2024/04/simbolo-do-litio-ao-lado-de-um-po-prateado.jpg",
+            "https://sb.scorecardresearch.com/p?c1=2&amp;c2=6036356&amp;cv=4.4.0&amp;cj=1"
+          ],
+          "texto_lido": true,
+          "trecho_usado": "Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação : 180,5°C. Ponto de fusão : 1342°C. Ponto de ebulição : 0,534 g/cm³. Densidade : 520,2 kJ/mol. Energia",
+          "access_state": "read"
+        }
+      ],
+      "read_sources": 1,
+      "model": "poolside/laguna-s-2.1:free",
+      "model_calls_requested": 1,
+      "citation_mechanics": {
+        "citation_count": 0,
+        "stages": {
+          "citation_exists": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "source_retrieved": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "passage_found": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          }
+        }
+      },
+      "displayed_citation_links": [
+        {
+          "label": "E1",
+          "url": "https://www.manualdaquimica.com/quimica-geral/litio-li.htm",
+          "source_exists": true,
+          "source_retrieved": true,
+          "claim_supported": null
+        }
+      ],
+      "search_events": [
+        {
+          "seq": 6,
+          "ts": "2026-10-23T17:56:59.185546+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'estudos baterias sódio': 12 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [],
+            "estado": "ok"
+          }
+        },
+        {
+          "seq": 10,
+          "ts": "2026-10-23T17:57:01.333718+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'lítio: métodos': 12 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [
+              {
+                "provedor": "ddg",
+                "codigo": "vazio"
+              },
+              {
+                "provedor": "searxng",
+                "codigo": "indisponivel"
+              },
+              {
+                "provedor": "wikipedia",
+                "codigo": "vazio"
+              }
+            ],
+            "estado": "ok"
+          }
+        },
+        {
+          "seq": 13,
+          "ts": "2026-10-23T17:57:01.806412+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'métricas': 6 achados.",
+          "meta": {
+            "provedor": "wikipedia",
+            "falhas": [
+              {
+                "provedor": "ddg",
+                "codigo": "vazio"
+              },
+              {
+                "provedor": "searxng",
+                "codigo": "indisponivel"
+              }
+            ],
+            "estado": ""
+          }
+        },
+        {
+          "seq": 16,
+          "ts": "2026-10-23T17:57:02.226485+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'limitações': 4 achados.",
+          "meta": {
+            "provedor": "wikipedia",
+            "falhas": [
+              {
+                "provedor": "ddg",
+                "codigo": "vazio"
+              },
+              {
+                "provedor": "searxng",
+                "codigo": "indisponivel"
+              }
+            ],
+            "estado": ""
+          }
+        },
+        {
+          "seq": 22,
+          "ts": "2026-10-23T17:57:05.014873+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 23,
+          "ts": "2026-10-23T17:57:05.016974+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 24,
+          "ts": "2026-10-23T17:57:05.018182+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 25,
+          "ts": "2026-10-23T17:57:05.019532+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 26,
+          "ts": "2026-10-23T17:57:05.020565+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 27,
+          "ts": "2026-10-23T17:57:05.025408+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 34,
+          "ts": "2026-10-23T17:57:08.082845+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 38,
+          "ts": "2026-10-23T17:57:08.093368+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 39,
+          "ts": "2026-10-23T17:57:08.095602+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 40,
+          "ts": "2026-10-23T17:57:08.099344+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 41,
+          "ts": "2026-10-23T17:57:08.102868+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        }
+      ],
+      "jdui_valid": true,
+      "jdui_errors": [],
+      "jdui": {
+        "version": "JULIA-ui-message/v1",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n\n[E1](https://www.manualdaquimica.com/quimica-geral/litio-li.htm) Lítio (Li): o que é, para que serve, fontes (www.manualdaquimica.com): Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação :\n\nEvidências: 1; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas."
+          },
+          {
+            "type": "text",
+            "content": "**Objetivo:** Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações\n**Status:** concluída · **Modo:** profunda · **Evidências:** 1\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+          },
+          {
+            "type": "ui",
+            "component": "researchplan",
+            "props": {
+              "title": "Plano de pesquisa",
+              "objective": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+              "mode": "profunda",
+              "status": "completed",
+              "steps": [
+                {
+                  "id": "p1",
+                  "title": "Buscar: estudos baterias sódio",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p2",
+                  "title": "Ler: estudos baterias sódio",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p1"
+                  ]
+                },
+                {
+                  "id": "p3",
+                  "title": "Analisar: estudos baterias sódio",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p2"
+                  ]
+                },
+                {
+                  "id": "p4",
+                  "title": "Buscar: lítio: métodos",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p5",
+                  "title": "Ler: lítio: métodos",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p4"
+                  ]
+                },
+                {
+                  "id": "p6",
+                  "title": "Analisar: lítio: métodos",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p5"
+                  ]
+                },
+                {
+                  "id": "p7",
+                  "title": "Buscar: métricas",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p8",
+                  "title": "Ler: métricas",
+                  "kind": "ler",
+                  "status": "todo",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p7"
+                  ]
+                },
+                {
+                  "id": "p9",
+                  "title": "Analisar: métricas",
+                  "kind": "analisar",
+                  "status": "todo",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p8"
+                  ]
+                },
+                {
+                  "id": "p10",
+                  "title": "Buscar: limitações",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p11",
+                  "title": "Ler: limitações",
+                  "kind": "ler",
+                  "status": "todo",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p10"
+                  ]
+                },
+                {
+                  "id": "p12",
+                  "title": "Analisar: limitações",
+                  "kind": "analisar",
+                  "status": "todo",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p11"
+                  ]
+                },
+                {
+                  "id": "p13",
+                  "title": "Verificar",
+                  "kind": "verificar",
+                  "status": "todo",
+                  "detail": "classificar cada afirmação contra as fontes lidas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p3",
+                    "p6",
+                    "p9",
+                    "p12"
+                  ]
+                },
+                {
+                  "id": "p14",
+                  "title": "Sintetizar",
+                  "kind": "sintetizar",
+                  "status": "todo",
+                  "detail": "redigir apenas com evidências registradas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p13"
+                  ]
+                },
+                {
+                  "id": "p15",
+                  "title": "Auditar",
+                  "kind": "auditar",
+                  "status": "todo",
+                  "detail": "checar citações e limitações antes de concluir",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p14"
+                  ]
+                }
+              ],
+              "progress": {
+                "done": 8,
+                "total": 15,
+                "skipped": 0,
+                "errors": 0,
+                "percent": 53.3
+              },
+              "budgets": {
+                "buscas": 8.0,
+                "paginas": 12.0,
+                "timeout_s": 120.0,
+                "subs": 4.0,
+                "replans": 2.0,
+                "midia": 16.0,
+                "concorrencia": 3.0,
+                "max_bytes_pagina": 1000000
+              },
+              "used": {
+                "buscas": 4.0,
+                "paginas": 12.0,
+                "replans": 0
+              },
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "media",
+            "props": {
+              "title": "Mídia descoberta (não é evidência)",
+              "items": [
+                {
+                  "type": "document",
+                  "title": "EFECTIVIDAD DEL LOCALIZADOR APICAL EN PRESENCIA DE HIPOCLORITO DE SODIO CLORHEXIDINA Y CLORURO DE SODIO - 2014",
+                  "url": "https://revistas.ujcm.edu.pe/index.php/rctd/article/download/19/16",
+                  "thumb": "",
+                  "source_title": "EFECTIVIDAD DEL LOCALIZADOR APICAL EN PRESENCIA DE HIPOCLORITO DE SODIO CLORHEXIDINA Y CLORURO DE SODIO - 2014",
+                  "source_url": "https://doi.org/10.37260/rctd.v1i2.19",
+                  "publisher": "revistas.ujcm.edu.pe",
+                  "date": "2015-12-30",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "link_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "",
+                  "alt": "EFECTIVIDAD DEL LOCALIZADOR APICAL EN PRESENCIA DE HIPOCLORITO DE SODIO CLORHEXIDINA Y CLORURO DE SODIO - 2014",
+                  "evidence": false
+                },
+                {
+                  "type": "document",
+                  "title": "De compras para la salud: Sodio",
+                  "url": "https://journals.flvc.org/edis/article/download/120743/119243",
+                  "thumb": "",
+                  "source_title": "De compras para la salud: Sodio",
+                  "source_url": "https://doi.org/10.32473/edis-fs211-2013",
+                  "publisher": "journals.flvc.org",
+                  "date": "2013-03-31",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "link_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "",
+                  "alt": "De compras para la salud: Sodio",
+                  "evidence": false
+                },
+                {
+                  "type": "document",
+                  "title": "Testador de baterias / Battery tester",
+                  "url": "https://brazilianjournals.com/ojs/index.php/BRJD/article/download/45780/pdf",
+                  "thumb": "",
+                  "source_title": "Testador de baterias / Battery tester",
+                  "source_url": "https://doi.org/10.34117/bjdv8n3-395",
+                  "publisher": "brazilianjournals.com",
+                  "date": "2022-03-30",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "link_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "",
+                  "alt": "Testador de baterias / Battery tester",
+                  "evidence": false
+                },
+                {
+                  "type": "document",
+                  "title": "Sobre baterias e tamborins",
+                  "url": "https://www.revistas.usp.br/rieb/article/download/149633/146690",
+                  "thumb": "",
+                  "source_title": "Sobre baterias e tamborins",
+                  "source_url": "https://doi.org/10.11606/issn.2316-901x.v0i70p59-77",
+                  "publisher": "www.revistas.usp.br",
+                  "date": "2018-08-30",
+                  "rights": "http://creativecommons.org/licenses/by-nc/4.0",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "link_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "",
+                  "alt": "Sobre baterias e tamborins",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "O lítio, ou carbonato de lítio, é um remédio indicado para o tratamento e controle de episódios de mania no transtorno bipolar ou para auxiliar no tratamento da",
+                  "url": "https://image.tuasaude.com/media/article/bm/rw/litio-carbolitium_76092.jpg",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "O lítio, ou carbonato de lítio, é um remédio indicado para o tratamento e controle de episódios de mania no transtorno bipolar ou para auxiliar no tratamento da depressão. Entenda melhor o que é e para que serve o lítio, e os possíveis efei",
+                  "alt": "O lítio, ou carbonato de lítio, é um remédio indicado para o tratamento e controle de episódios de mania no transtorno bipolar ou para auxiliar no tratamento da",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo Como fazer uma dieta para emagrecer rápido (com cardápio)",
+                  "url": "https://image.tuasaude.com/media/article/wm/nn/emagrecer-rapido_54914.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo Como fazer uma dieta para emagrecer rápido (com cardápio)",
+                  "alt": "Imagem ilustrativa do artigo Como fazer uma dieta para emagrecer rápido (com cardápio)",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo 10 exercícios para perder a barriga (e como fazer)",
+                  "url": "https://image.tuasaude.com/media/article/my/ij/3-exercicios-simples-para-fazer-em-casa-e-perder-barriga_38753.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo 10 exercícios para perder a barriga (e como fazer)",
+                  "alt": "Imagem ilustrativa do artigo 10 exercícios para perder a barriga (e como fazer)",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo 14 melhores chás para emagrecer e perder barriga",
+                  "url": "https://image.tuasaude.com/media/article/gc/oi/cha-para-emagrecer_27797.webp?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo 14 melhores chás para emagrecer e perder barriga",
+                  "alt": "Imagem ilustrativa do artigo 14 melhores chás para emagrecer e perder barriga",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo 19 remédios para emagrecer: de farmácia e naturais",
+                  "url": "https://image.tuasaude.com/media/article/ac/bd/remedio-para-emagrecer_19960.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo 19 remédios para emagrecer: de farmácia e naturais",
+                  "alt": "Imagem ilustrativa do artigo 19 remédios para emagrecer: de farmácia e naturais",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo 10 alimentos probióticos que fazem bem à saúde",
+                  "url": "https://image.tuasaude.com/media/article/xz/ft/alimentos-probioticos_54158.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo 10 alimentos probióticos que fazem bem à saúde",
+                  "alt": "Imagem ilustrativa do artigo 10 alimentos probióticos que fazem bem à saúde",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo Alimentos funcionais: o que são e para que servem",
+                  "url": "https://image.tuasaude.com/media/article/pe/gg/alimentos-funcionais_40528.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo Alimentos funcionais: o que são e para que servem",
+                  "alt": "Imagem ilustrativa do artigo Alimentos funcionais: o que são e para que servem",
+                  "evidence": false
+                },
+                {
+                  "type": "image",
+                  "title": "Imagem ilustrativa do artigo 10 alimentos laxantes que soltam o intestino (com cardápio)",
+                  "url": "https://image.tuasaude.com/media/article/uh/wd/alimentos-com-efeito-laxante_8205.jpg?width=48&height=48",
+                  "thumb": "",
+                  "source_title": "Lítio: o que é, para que serve (e efeitos colaterais)",
+                  "source_url": "https://www.tuasaude.com/litio-carbolitium/",
+                  "publisher": "image.tuasaude.com",
+                  "date": "",
+                  "rights": "não informado",
+                  "attribution": "",
+                  "license_url": "",
+                  "mime": "",
+                  "width": 0,
+                  "height": 0,
+                  "duration": "",
+                  "metadata_state": "FOUND",
+                  "access_state": "metadata_only",
+                  "validation_state": "unverified",
+                  "analysis_state": "not_analyzed",
+                  "excerpt": "Imagem ilustrativa do artigo 10 alimentos laxantes que soltam o intestino (com cardápio)",
+                  "alt": "Imagem ilustrativa do artigo 10 alimentos laxantes que soltam o intestino (com cardápio)",
+                  "evidence": false
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "filecard",
+            "props": {
+              "title": "Exportar pesquisa",
+              "files": [
+                {
+                  "name": "Relatório completo (Markdown)",
+                  "url": "/api/research/export?job_id=rj-21e60f35215a&formato=md",
+                  "kind": "md",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Dados estruturados (CSV)",
+                  "url": "/api/research/export?job_id=rj-21e60f35215a&formato=csv",
+                  "kind": "csv",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Registros completos (JSON)",
+                  "url": "/api/research/export?job_id=rj-21e60f35215a&formato=json",
+                  "kind": "json",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "sources",
+            "props": {
+              "title": "Fontes e estado da leitura",
+              "items": [
+                {
+                  "titulo": "Lítio (Li): o que é, para que serve, fontes",
+                  "url": "https://www.manualdaquimica.com/quimica-geral/litio-li.htm",
+                  "dominio": "www.manualdaquimica.com",
+                  "data": "2024-04-30UTC17:32:16",
+                  "trecho": "Símbolo : 3. Número atômico : 6,94 u. Massa atômica : metal alcalino, pertencente ao grupo 1 . Série química da tabela periódica : [He] 2s¹. Configuração eletrônica : 0,98 (escala de Pauling). Eletronegatividade : 59,6 kJ/mol. Afinidade eletrônica : 1. Eletropositividade : +1. Estados de oxidação :",
+                  "origem_declarada": "",
+                  "tipo": "Fonte",
+                  "escopo": "Texto recuperado",
+                  "relacao": "Fonte de contexto",
+                  "data_evento": "",
+                  "publicador": "Manual da Química",
+                  "autores": "",
+                  "doi": "",
+                  "imagem": "",
+                  "favicon": "",
+                  "texto_url": "",
+                  "detalhes": [],
+                  "status": "aberta"
+                }
+              ],
+              "sources": []
+            }
+          }
+        ]
+      },
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 2,
+          "ok": 2,
+          "vazio": 0,
+          "resultados": 12,
+          "erros": {},
+          "ms_medio": 471.8
+        },
+        "crossref": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 767.5
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 1,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 6,
+          "erros": {},
+          "ms_medio": 1281.0
+        }
+      },
+      "elapsed_s": 11.85
+    }
+  ]
+}

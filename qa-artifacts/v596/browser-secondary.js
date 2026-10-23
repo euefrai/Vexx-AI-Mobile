@@ -1,0 +1,11 @@
+async (page) => {
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.reload();await page.waitForFunction(()=>window.fixtureReady);
+  const results=[];
+  for(const name of ['documentation','news_local']) {
+    await page.getByLabel('Pesquisa').selectOption(name);
+    await page.screenshot({path:'qa-artifacts/v596/jdui-'+name+'390.png',fullPage:true});
+    results.push({name,fallbacks:await page.locator('.jdui-fallback').count(),overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)});
+  }
+  return {results,pageErrors:errors};
+}

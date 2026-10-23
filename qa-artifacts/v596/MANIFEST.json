@@ -1,0 +1,15 @@
+{
+  "scope": "Public QA only; raw failures retained; component Chrome separate from authenticated app",
+  "initial_head": "ed3b9984b9054bfa97fc3c9f0831bf5b23e225e3",
+  "implementation_head": "7a8a707c22d2bfdbaa944d0252e64681d83852df",
+  "benchmarks": {
+    "benchmarks\\pesquisa_v57_v1.json": "c9b79f0f4617ea74939fb7da4ee32ffb82885926a72f910a982e89b897b89ac6",
+    "benchmarks\\shopping_v4_v1.json": "85a6203cf3b14e1176c1f25fa95952e447cbffdd978054bc51e872d03a3bcfd1",
+    "benchmarks\\deep_retrieval_v596.json": "3a37bba921495efa29de2d0859eeeb58a13cc5246613c464636ca5dc0aed8d00"
+  },
+  "acceptance": "assessment.json",
+  "browser": "browser-interactions.json",
+  "real_model": "live-model-acceptance/comparison.json",
+  "final_suite": "full-suite-final-acceptance.log",
+  "security": "Selected files scanned against configured local credential values; zero matches; no raw model transport body stored"
+}

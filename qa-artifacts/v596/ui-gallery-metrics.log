@@ -1,0 +1,32 @@
+### Result
+{
+  "width": 1280,
+  "scrollWidth": 1280,
+  "images": [
+    {
+      "loaded": true,
+      "width": 960
+    },
+    {
+      "loaded": true,
+      "width": 960
+    },
+    {
+      "loaded": true,
+      "width": 960
+    },
+    {
+      "loaded": true,
+      "width": 960
+    },
+    {
+      "loaded": true,
+      "width": 960
+    }
+  ],
+  "dialogs": 0
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,images:Array.from(document.images).map(i=>({loaded:i.complete&&i.naturalWidth>0,width:i.naturalWidth})),dialogs:Array.from(document.body.children).filter(e=>/DIALOG/.test(e.tagName)).length})');
+```

@@ -1,0 +1,36 @@
+2026-10-23 15:06:56,820 INFO documento doc-88e32d55d3be (contrato.txt, 2649 chars, 1 chunks)
+2026-10-23 15:06:56,913 INFO documento doc-984f040bbb3a (vendas.csv, 42 chars, 1 chunks)
+[ok   ] geral_grounding_carrega_conteudo_lido (107 ms) � conte�do lido da p�gina chega ao prompt (al�m do trecho curto)
+         -> marcador de conte�do presente no grounding
+[ok   ] geral_aberta_vs_encontrada (74 ms) � p�gina aberta x s� encontrada com marcas honestas
+         -> aberta sem marca; encontrada marcada 'N�O lida'
+[ok   ] geral_sem_resultados_honesto (115 ms) � provedor vazio vira estado honesto + aviso
+         -> estado sem_resultados + aviso honesto
+[ok   ] pagina_usuario_lida_entra_no_prompt (108 ms) � "analise esta p�gina: URL" traz o conte�do real
+         -> p�gina lida entrou no prompt como fonte
+[ok   ] pagina_usuario_bloqueada_honesta (98 ms) � p�gina bloqueada: aviso honesto, sem inven��o
+         -> bloqueio explicado sem contorno
+[ok   ] pagina_usuario_controle_sem_url (100 ms) � pedido de leitura sem URL n�o ativa o caminho
+         -> sem URL, sem leitura de p�gina
+[ok   ] comercial_oferta_confirmada_com_link (113 ms) � produto espec�fico vira card com link do item e pre�o
+         -> 1 card(s) confirmado(s) com link do item
+[ok   ] comercial_orcamento_respeitado (90 ms) � acima do or�amento nunca vira oferta
+         -> oferta dentro do teto; acima do teto fora
+[ok   ] comercial_sem_ofertas_nao_inventa (103 ms) � sem resultados: nenhuma oferta inventada
+         -> sem produtos, explica��o presente
+[ok   ] documento_txt_trechos (98 ms) � TXT salvo, trechos relevantes recuper�veis
+         -> 1 trecho(s) relevantes
+[ok   ] documento_csv_tabela (93 ms) � CSV extra�do como tabela com trecho relevante
+         -> CSV extra�do como tabela com trecho relevante
+[ok   ] evidencia_claim_estados (0 ms) � claim com/sem evid�ncia: SUPPORTED/INSUFFICIENT_EVIDENCE
+         -> SUPPORTED com fonte; INSUFFICIENT_EVIDENCE sem fonte
+[ok   ] jdui_python_produto (0 ms) � validador Python: pre�o, coer��o e specs
+         -> fallback de pre�o, coer��o e specs conforme o backend
+[ok   ] jdui_js_preco_fallback (149 ms) � espelho JS: pre�o num�rico sem preco_valor informa valor
+         -> harness node ok
+[ok   ] jdui_js_item_de_listagem (151 ms) � espelho JS: coer��o de item_de_listagem igual ao backend
+         -> harness node ok
+[ok   ] jdui_js_specs_tipo (133 ms) � espelho JS: specs com mesmo aceite/recusa do backend
+         -> harness node ok
+
+resultado: 16/16 checagens ok

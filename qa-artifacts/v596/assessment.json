@@ -1,0 +1,731 @@
+{
+  "scope": "Manually scoped acceptance; not universal accuracy or authenticated application E2E",
+  "states": {
+    "CONFIRMED": "Required information recovered within explicitly stated scope",
+    "PARTIAL": "Real leads/reading exist but requested answer incomplete",
+    "UNAVAILABLE": "Specific data not recovered within budget",
+    "FAILED": "Internal execution error",
+    "BLOCKED": "Access/provider prevents completion"
+  },
+  "cases": [
+    {
+      "id": "science",
+      "question": "Estudos científicos abertos sobre baterias de estado sólido: eletrólitos, segurança e limitações",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "Estudos científicos abertos sobre baterias de estado sólido: eletrólitos, segurança e limitações",
+        "domain": "science",
+        "original_request": "Estudos científicos abertos sobre baterias de estado sólido: eletrólitos, segurança e limitações",
+        "resolved_request": "Estudos científicos abertos sobre baterias de estado sólido: eletrólitos, segurança e limitações",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:06:54.996641+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 24,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 7,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 4.948,
+      "calls": {
+        "provider_attempts": 6,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Não recuperou informação específica elegível; mídias genéricas/links não contam como atendimento.",
+      "artifact": "qa-artifacts/v596/live-release/science.json"
+    },
+    {
+      "id": "technology",
+      "question": "Como funciona o protocolo QUIC? fontes técnicas originais",
+      "kind": "LIVE_EXTERNAL",
+      "status": "PARTIAL",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Como funciona o protocolo QUIC? fontes técnicas originais",
+        "domain": "general",
+        "original_request": "Como funciona o protocolo QUIC? fontes técnicas originais",
+        "resolved_request": "Como funciona o protocolo QUIC? fontes técnicas originais",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:07:01.628660+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 13,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [
+        {
+          "url": "https://protocolo.registrocivil.org.br/",
+          "scope": "page_text",
+          "doi": null,
+          "excerpt": "E-Protocolo ... E-Protocolo"
+        }
+      ],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 9.411,
+      "calls": {
+        "provider_attempts": 12,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Dados específicos insuficientes; descoberta não equivale a leitura.",
+      "artifact": "qa-artifacts/v596/live-release/technology.json"
+    },
+    {
+      "id": "products",
+      "question": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "domain": "general",
+        "original_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "resolved_request": "Notebook Lenovo com 16 GB RAM até R$ 3.000",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:07:12.268910+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 6,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 0,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": null,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 8.94,
+      "calls": {
+        "provider_attempts": 8,
+        "page_slots": 0,
+        "model": 0
+      },
+      "reason": "Nenhuma oferta/tarifa ou inventário específico confirmado.",
+      "artifact": "qa-artifacts/v596/live-release/products.json"
+    },
+    {
+      "id": "news_local",
+      "question": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+      "kind": "LIVE_EXTERNAL",
+      "status": "PARTIAL",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Ubatã\" \"bahia\" notícias",
+        "domain": "news",
+        "original_request": "Quais notícias aconteceram em Ubatã, Bahia, nos últimos sete dias?",
+        "resolved_request": "Quais notícias aconteceram em Ubatã, Bahia, entre 2026-10-16 e 2026-10-23?",
+        "parameters": {
+          "start_date": "2026-10-16",
+          "end_date": "2026-10-23",
+          "location": "Ubatã",
+          "region": "bahia"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-23T18:10:17.982612+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "discovered_urls": 15,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 0,
+      "information": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+          "scope": "feed_metadata",
+          "doi": null,
+          "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia"
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+          "scope": "feed_metadata",
+          "doi": null,
+          "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias"
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+          "scope": "feed_metadata",
+          "doi": null,
+          "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural"
+        }
+      ],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "component capture",
+      "elapsed_s": 5.953,
+      "calls": {
+        "provider_attempts": 4,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Três feeds; tentativas limitadas por manchete, site e RSS do publicador; zero artigo original lido.",
+      "artifact": "qa-artifacts/v596/live-recovery-final/news_local.json"
+    },
+    {
+      "id": "news_national",
+      "question": "Notícias nacionais do Brasil nos últimos sete dias",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "Notícias nacionais do Brasil entre 2026-10-16 e 2026-10-23",
+        "domain": "news",
+        "original_request": "Notícias nacionais do Brasil nos últimos sete dias",
+        "resolved_request": "Notícias nacionais do Brasil entre 2026-10-16 e 2026-10-23",
+        "parameters": {
+          "start_date": "2026-10-16",
+          "end_date": "2026-10-23"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-23T18:07:29.913792+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "discovered_urls": 18,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 5.745,
+      "calls": {
+        "provider_attempts": 5,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Não recuperou informação específica elegível; mídias genéricas/links não contam como atendimento.",
+      "artifact": "qa-artifacts/v596/live-release/news_national.json"
+    },
+    {
+      "id": "events",
+      "question": "Eventos futuros em Recife: local, data e organizador",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Recife: local\" \"data e organizador\" eventos programação 2026-10-23 2027-01-21",
+        "domain": "events",
+        "original_request": "Eventos futuros em Recife: local, data e organizador",
+        "resolved_request": "Eventos futuros em Recife: local, data e organizador",
+        "parameters": {
+          "location": "Recife: local",
+          "region": "data e organizador",
+          "start_date": "2026-10-23",
+          "end_date": "2027-01-21",
+          "window_inferred": true
+        },
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:07:36.813504+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "discovered_urls": 6,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 9.849,
+      "calls": {
+        "provider_attempts": 3,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Não recuperou informação específica elegível; mídias genéricas/links não contam como atendimento.",
+      "artifact": "qa-artifacts/v596/live-release/events.json"
+    },
+    {
+      "id": "flights",
+      "question": "Voos de Salvador para São Paulo amanhã para um adulto: horários e tarifa",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "origin",
+          "destination",
+          "departure_date",
+          "adults",
+          "operator",
+          "departure_time",
+          "price",
+          "currency",
+          "inventory",
+          "source",
+          "observed_at"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Salvador\" \"São Paulo\" voos 2026-10-24 1 adulto",
+        "domain": "air_travel",
+        "original_request": "Voos de Salvador para São Paulo amanhã para um adulto: horários e tarifa",
+        "resolved_request": "Voos de Salvador para São Paulo amanhã para um adulto: horários e tarifa",
+        "parameters": {
+          "departure_date": "2026-10-24",
+          "origin": "Salvador",
+          "destination": "São Paulo",
+          "adults": 1,
+          "inventory_state": "not_verified"
+        },
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:07:47.896165+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "discovered_urls": 7,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 2.765,
+      "calls": {
+        "provider_attempts": 3,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Nenhuma oferta/tarifa ou inventário específico confirmado.",
+      "artifact": "qa-artifacts/v596/live-release/flights.json"
+    },
+    {
+      "id": "bus",
+      "question": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "origin",
+          "destination",
+          "departure_date",
+          "operator",
+          "departure_time",
+          "price",
+          "currency",
+          "inventory",
+          "source",
+          "observed_at"
+        ],
+        "missing_parameters": [
+          "adults"
+        ],
+        "search_query": "\"Salvador\" \"Feira de Santana\" passagens de ônibus 2026-10-24",
+        "domain": "bus_travel",
+        "original_request": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+        "resolved_request": "Ônibus de Salvador para Feira de Santana amanhã: horários e preços",
+        "parameters": {
+          "departure_date": "2026-10-24",
+          "origin": "Salvador",
+          "destination": "Feira de Santana",
+          "inventory_state": "not_verified"
+        },
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:07:51.782366+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true
+      },
+      "discovered_urls": 12,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 4.911,
+      "calls": {
+        "provider_attempts": 6,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Nenhuma oferta/tarifa ou inventário específico confirmado.",
+      "artifact": "qa-artifacts/v596/live-release/bus.json"
+    },
+    {
+      "id": "documentation",
+      "question": "Documentação oficial Python asyncio TaskGroup cancelamento",
+      "kind": "LIVE_EXTERNAL",
+      "status": "PARTIAL",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "domain": "documents",
+        "original_request": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "resolved_request": "Documentação oficial Python asyncio TaskGroup cancelamento",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:10:25.274979+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 6,
+      "read_sources": 1,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 0,
+      "information": [
+        {
+          "url": "https://docs.python.org/3/library/asyncio-task.html",
+          "scope": "page_text",
+          "doi": null,
+          "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the "
+        }
+      ],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "component capture",
+      "elapsed_s": 1.762,
+      "calls": {
+        "provider_attempts": 3,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Página oficial TaskGroup lida; resposta extrativa não equivale a explicação por modelo aprovada.",
+      "artifact": "qa-artifacts/v596/live-documentation-final/documentation.json"
+    },
+    {
+      "id": "videos",
+      "question": "Vídeos públicos James Webb NASA",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Vídeos públicos James Webb NASA",
+        "domain": "general",
+        "original_request": "Vídeos públicos James Webb NASA",
+        "resolved_request": "Vídeos públicos James Webb NASA",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:08:01.232838+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 10,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 0,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 3.582,
+      "calls": {
+        "provider_attempts": 3,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Não recuperou informação específica elegível; mídias genéricas/links não contam como atendimento.",
+      "artifact": "qa-artifacts/v596/live-release/videos.json"
+    },
+    {
+      "id": "images",
+      "question": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+      "kind": "LIVE_EXTERNAL",
+      "status": "CONFIRMED",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "domain": "general",
+        "original_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "resolved_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:10:29.320949+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 12,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 5,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "component capture",
+      "elapsed_s": 2.216,
+      "calls": {
+        "provider_attempts": 3,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Cinco imagens pertinentes recuperadas com URLs, contexto/licença declarada e carregamento real em Chrome; sem análise audiovisual ou auditoria independente de direitos.",
+      "artifact": "qa-artifacts/v596/live-recovery-final/images.json"
+    },
+    {
+      "id": "pdfs",
+      "question": "PDF científico de acesso aberto Attention Is All You Need",
+      "kind": "LIVE_EXTERNAL",
+      "status": "PARTIAL",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "PDF científico de acesso aberto Attention Is All You Need",
+        "domain": "science",
+        "original_request": "PDF científico de acesso aberto Attention Is All You Need",
+        "resolved_request": "PDF científico de acesso aberto Attention Is All You Need",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:08:09.351990+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 17,
+      "read_sources": 2,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [
+        {
+          "url": "https://arxiv.org/abs/1706.03762",
+          "scope": "abstract_only",
+          "doi": null,
+          "excerpt": "decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks "
+        },
+        {
+          "url": "https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf",
+          "scope": "document_text",
+          "doi": null,
+          "excerpt": "# Attention is All you Need\n\n── página 1 ──\nAttention Is All You Need\nAshish Vaswani∗\nGoogle Brain\navaswani@google.com\nNoam Shazeer∗\nGoogle Brain\nnoam@google.com\nNiki Parmar∗\nGoogle Research\nnikip@google.com\nJakob Uszkoreit∗\nGoogle Research"
+        }
+      ],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 10.371,
+      "calls": {
+        "provider_attempts": 5,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Dados específicos insuficientes; descoberta não equivale a leitura.",
+      "artifact": "qa-artifacts/v596/live-release/pdfs.json"
+    },
+    {
+      "id": "comparison",
+      "question": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+      "kind": "REAL_MODEL",
+      "status": "BLOCKED",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "domain": "science",
+        "original_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "resolved_request": "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:10:17.979414+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 28,
+      "read_sources": 2,
+      "original_publisher_articles": 0,
+      "full_text_sources": 2,
+      "media_items": 15,
+      "information": [
+        {
+          "url": "https://doi.org/10.64876/radi.v24.52-58",
+          "scope": "document_text",
+          "doi": "10.64876/radi.v24.52-58",
+          "excerpt": "── página 1 ──\n52\nREVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina\nRESUMEN\nEl creciente interés por soluciones sostenibles y \neficientes para el almacenamiento de energía h"
+        },
+        {
+          "url": "https://doi.org/10.26876/ikergazte.vi.05.25",
+          "scope": "document_text",
+          "doi": "10.26876/ikergazte.vi.05.25",
+          "excerpt": "── página 1 ──\nVI. IKERGAZTE\r\nNAZIOARTEKO IKERKETA EUSKARAZ\r\n2025eko maiatzaren 28, 29 eta 30a\r\nBilbo, Euskal Herria\r\nANTOLATZAILEA:\r\nUdako Euskal Unibertsitatea (UEU)\r\nAitortu-PartekatuBerdin 4.0\r\nZIENTZIAK ETA \r\nNATURA ZIENTZIAK\r\nElektrol"
+        }
+      ],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "component capture",
+      "elapsed_s": 30.625,
+      "calls": {
+        "provider_attempts": 21,
+        "page_slots": 12,
+        "model": 1
+      },
+      "reason": "Dois PDFs OA com texto limitado; uma chamada de síntese limitada pelo provedor (rate_limit); comparação experimental não aprovada.",
+      "artifact": "qa-artifacts/v596/live-model-acceptance/comparison.json"
+    },
+    {
+      "id": "scarce",
+      "question": "Publicações originais sobre amostragem de microplásticos no Rio de Contas em Ubatã Bahia",
+      "kind": "LIVE_EXTERNAL",
+      "status": "UNAVAILABLE",
+      "constraints": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Publicações originais sobre amostragem de microplásticos no Rio de Contas em Ubatã Bahia",
+        "domain": "general",
+        "original_request": "Publicações originais sobre amostragem de microplásticos no Rio de Contas em Ubatã Bahia",
+        "resolved_request": "Publicações originais sobre amostragem de microplásticos no Rio de Contas em Ubatã Bahia",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-23T18:08:21.150280+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "discovered_urls": 6,
+      "read_sources": 0,
+      "original_publisher_articles": 0,
+      "full_text_sources": 0,
+      "media_items": 8,
+      "information": [],
+      "answer_produced": true,
+      "jdui_schema_valid": true,
+      "chrome_scope": "not_rendered_in_chrome",
+      "elapsed_s": 5.327,
+      "calls": {
+        "provider_attempts": 6,
+        "page_slots": 3,
+        "model": 0
+      },
+      "reason": "Não recuperou informação específica elegível; mídias genéricas/links não contam como atendimento.",
+      "artifact": "qa-artifacts/v596/live-release/scarce.json"
+    }
+  ],
+  "model_probe": {
+    "model": "poolside/laguna-s-2.1:free",
+    "state": "PARTIAL",
+    "stream_inference_executed": true,
+    "deep_research_approved": false,
+    "ui_tested": false,
+    "discovered_model_count": 425,
+    "configured_model_discovered": true,
+    "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+    "source_read": true,
+    "chunks": 184,
+    "sequence_ordered": true,
+    "cited_literal_present": false,
+    "answer": "O código que você compartilhou utiliza `asyncio.TaskGroup`, que foi introduzido no Python **3.11** (não 3.7). Ele permite gerenciar um grupo de tarefas assíncronas de forma estruturada, garantindo que todas as tarefas sejam concluídas antes de prosseguir e propagando exceções de forma coletiva.\n\nExemplo:\n```python\nasync with asyncio.TaskGroup() as tg:\n    for i in range(10):\n        tg.create_task(some_coro(param=i))\n```\n\nEste padrão substitui a necessidade de usar `asyncio.gather` ou `asyncio.wait` em versões anteriores. Se precisar de mais detalhes, é só perguntar! [S1]",
+    "max_tokens": 1800,
+    "transport": {
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "captured_bytes": 65536,
+      "json_sse_events": 165,
+      "upstream_error_events": 0,
+      "nonempty_content_events": 0,
+      "delta_fields": [
+        "content",
+        "reasoning",
+        "reasoning_content",
+        "role"
+      ],
+      "reasoning_events": 165,
+      "finish_reasons": [],
+      "captured_prefix_only": true,
+      "capture_limit_bytes": 65536
+    },
+    "elapsed_s": 14.571
+  }
+}

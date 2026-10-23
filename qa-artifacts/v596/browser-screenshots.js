@@ -1,0 +1,15 @@
+async (page) => {
+  await page.getByLabel('Pesquisa').selectOption('images');
+  const metrics=[];
+  for (const [name,width,height,zoom] of [['desktop',1280,900,1],['mobile390',390,844,1],['mobile320',320,800,1],['zoom200',320,800,2]]) {
+    await page.setViewportSize({width,height});
+    await page.evaluate(z=>document.body.style.zoom=z,zoom);
+    await page.screenshot({path:'qa-artifacts/v596/jdui-'+name+'.png',fullPage:true});
+    metrics.push(await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,images:Array.from(document.images).filter(i=>i.complete&&i.naturalWidth>0).length})));
+  }
+  await page.evaluate(()=>document.body.style.zoom=1);
+  await page.setViewportSize({width:390,height:844});
+  await page.getByLabel('Pesquisa').selectOption('comparison');
+  await page.screenshot({path:'qa-artifacts/v596/jdui-comparison390.png',fullPage:true});
+  return metrics;
+}

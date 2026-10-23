@@ -1,0 +1,20 @@
+........................................F............................... [ 90%]
+........                                                                 [100%]
+================================== FAILURES ===================================
+__________ test_research_view_validates_real_data_and_links_exports ___________
+
+    def test_research_view_validates_real_data_and_links_exports():
+        message = research_view.build_view(_resumo())
+        ok, norm, errs = jdui.validar_mensagem(message)
+        assert ok, errs
+        components = [block.get("component") for block in norm["blocks"] if block["type"] == "ui"]
+>       assert components == ["researchplan", "evidence", "accordion", "media", "filecard"]
+E       AssertionError: assert ['evidence', ...', 'filecard'] == ['researchpla...', 'filecard']
+E         
+E         At index 0 diff: 'evidence' != 'researchplan'
+E         Use -v to get more diff
+
+tests\test_v58_deep_research.py:179: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_v58_deep_research.py::test_research_view_validates_real_data_and_links_exports
+1 failed, 79 passed in 12.17s

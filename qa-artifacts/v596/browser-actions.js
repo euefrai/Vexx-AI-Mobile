@@ -1,0 +1,32 @@
+async (page) => {
+  const report = {scope:'Chrome component QA, public captures; SSE replay and injected image network error'};
+  await page.getByRole('button',{name:'Reproduzir eventos capturados',exact:true}).click();
+  await page.waitForFunction(()=>document.getElementById('status').textContent.startsWith('Replay:'));
+  report.sseReplayReceived = true;
+  await page.getByRole('button',{name:'Parar reprodução',exact:true}).click();
+  report.cancelReplay = await page.getByRole('status').innerText();
+  const summary = page.getByText('Proveniência e publicação',{exact:true}).first();
+  await summary.click();
+  await page.waitForTimeout(100);
+  await page.reload();
+  await page.waitForFunction(()=>window.fixtureReady);
+  report.provenancePersistsAfterReload = await page.locator('details.jdui-source-provenance').first().evaluate(e=>e.open);
+  const [download] = await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Baixar CSV',exact:true}).click()]);
+  await download.saveAs('qa-artifacts/v596/comparison-browser.csv');
+  report.csvDownloaded = download.suggestedFilename();
+  await page.getByLabel('Pesquisa').selectOption('images');
+  const [popup] = await Promise.all([page.waitForEvent('popup'),page.getByRole('link',{name:'Página de origem',exact:true}).first().click()]);
+  await popup.waitForLoadState('domcontentloaded').catch(()=>{});
+  report.originalLinkOpened = popup.url(); await popup.close();
+  await page.route('https://thumb.wikimedia.org/**',route=>route.abort());
+  await page.reload(); await page.waitForFunction(()=>window.fixtureReady);
+  await page.waitForTimeout(500);
+  report.injectedImageErrorFallbacks = await page.locator('.jdui-pimg.ph').count();
+  await page.screenshot({path:'qa-artifacts/v596/jdui-image-error.png',fullPage:true});
+  await page.unroute('https://thumb.wikimedia.org/**');
+  await page.reload();await page.waitForFunction(()=>window.fixtureReady);
+  await page.keyboard.press('Tab');
+  report.focusTag = await page.evaluate(()=>document.activeElement.tagName);
+  report.horizontalOverflow = await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+  return report;
+}
