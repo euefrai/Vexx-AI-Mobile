@@ -271,3 +271,38 @@ def test_resume_keeps_original_request_time_for_source_validation(research_job):
         return {'titulo':source['titulo'], 'texto':source['trecho'], 'texto_lido':True,
                 'metadados':{'publicado_em':'2026-10-22T11:30:00Z'}}
     assert ra.agente_analista(db, job, {'alvo':job['objetivo']}, [source], read) == []
+
+
+def test_taskgroup_request_uses_specific_official_document_and_entity_terms():
+    query = 'Documentação oficial Python asyncio TaskGroup cancelamento'
+    source = orch.fontes_preferenciais(query)[0]
+    assert source['url'] == 'https://docs.python.org/3/library/asyncio-task.html'
+    source['trecho'] = 'Python asyncio TaskGroup supports task cancellation.'
+    assert orch._util_para_pedido(source, orch._termos_correspondencia(query), query)
+
+
+def test_media_discovery_keeps_targets_without_downloading_or_claiming_analysis():
+    import media_evidence as media
+    found = media.discover_search_media([
+        {'titulo':'Commons fixture','tipo':'imagem','origem':'commons','url':'https://upload.wikimedia.org/fixture.jpg'},
+        {'titulo':'NASA fixture','url':'https://www.youtube.com/watch?v=fixture123'},
+        {'titulo':'PDF fixture','pdf_url':'https://example.org/study.pdf','license':'cc-by'},
+        {'titulo':'Unsafe PDF','pdf_url':'http://127.0.0.1/private.pdf'},
+        {'titulo':'Unsafe image','tipo':'imagem','origem':'commons','url':'http://localhost/fixture.jpg'}])
+    assert [x['type'] for x in found] == ['image','video','document']
+    assert all(x['evidence'] is False and x['analysis_state'] == 'not_analyzed' for x in found)
+    assert found[0]['rights'] == 'não informado'
+
+
+def test_search_media_is_persisted_even_without_readable_html(research_job):
+    db, job = research_job
+    class Provider:
+        nome = 'fixture'
+        def buscar(self, query, limite=6):
+            return [{'titulo':'Vídeo NASA telescópio', 'url':'https://www.youtube.com/watch?v=fixture123','trecho':'NASA telescópio'}]
+    ra.agente_busca(db, job, {'id':'search-media','alvo':'Vídeo NASA telescópio'}, [Provider()], set())
+    ra.salvar_job(db, job)
+    restored = ra.carregar_job(db, job['owner'], job['id'])
+    assert restored['midia'][0]['type'] == 'video' and not restored['midia'][0]['evidence']
+    assert restored['usados']['paginas'] == 0
+    assert ra.listar_evidencias(db, job['owner'], job['id']) == []

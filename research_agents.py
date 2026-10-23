@@ -773,7 +773,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
         else:
             providers_for_query = general + academic
         import query_intelligence
-        if query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science'):
+        if query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science', 'documents'):
             specialized = [p for p in providers_for_query if isinstance(p, ProvedorOrquestrado)]
             providers_for_query = specialized + [p for p in providers_for_query if p not in specialized]
         encontrados, info = buscar_com_fallback(providers_for_query, q, 6,
@@ -824,6 +824,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
                             (f" ({len(falhas)} falhas de provedor)" if falhas else ""))
         emitir(db, job["id"], job["owner"], "search", "search_completed", "alerta",
                f"Busca '{base[:60]}' sem resultados.", {})
+    if not cancelado and not parar():
+        _agregar_midia(db, job, media_evidence.discover_search_media(achados))
     return achados
 
 

@@ -290,6 +290,41 @@ def extrair_midia(pagina: str, url_base: str, titulo: str = "") -> list[dict]:
     return out
 
 
+def discover_search_media(results: list[dict]) -> list[dict]:
+    """Keep known media targets even when they cannot be read as HTML.
+
+    No download, analysis, invented thumbnail or licence; image targets are
+    restricted to the existing Commons adapter's Wikimedia hosts.
+    """
+    out, seen = [], set()
+    for source in (results or [])[:MAX_MEDIA]:
+        url = _safe_url(source.get('pdf_url') or source.get('url'))
+        if not url:
+            continue
+        import ipaddress
+        host = _host(url)
+        try:
+            if not ipaddress.ip_address(host).is_global:
+                continue
+        except ValueError:
+            if host == 'localhost' or host.endswith(('.localhost', '.local', '.internal')):
+                continue
+        kind = ('image' if source.get('tipo') == 'imagem' and source.get('origem') == 'commons'
+                and _host(url) == 'upload.wikimedia.org' else
+                'video' if _host(url) in _VIDEO_HOSTS else
+                'document' if source.get('pdf_url') or urllib.parse.urlsplit(url).path.lower().endswith('.pdf') else '')
+        if not kind:
+            continue
+        page = _safe_url((source.get('meta') or {}).get('pagina') or source.get('landing_url') or source.get('url'))
+        item = _base_item(kind, url, title=source.get('titulo') or source.get('title'),
+                          source_title=source.get('titulo') or '', source_url=page,
+                          date=source.get('publicado_em') or '', access_state='link_only')
+        item['provenance'] = 'search metadata'
+        item['rights'] = _clean(source.get('license')) or 'não informado'
+        _add(out, item, seen)
+    return out
+
+
 def resumo_midia(items: list[dict]) -> dict:
     """Honest counts for cards/progress; never implies analysis."""
     items = [item for item in (items or []) if isinstance(item, dict)]

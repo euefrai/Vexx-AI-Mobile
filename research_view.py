@@ -183,8 +183,6 @@ def source_card(item: dict, used=False) -> dict:
         if data.get(key): details.append(label+': '+str(data[key])[:160])
     if data.get('price') and vertical.get('verification')=='MATCHED_DECLARED_FARE':
         details.insert(1, 'Tarifa declarada: '+data['price']+' '+data.get('currency','')+'; disponibilidade não verificada')
-    if vertical.get('kind') in ('air_travel','bus_travel'):
-        details.append('Sem confirmação de disponibilidade atual')
     images=item.get('imagens') or []
     image=next((v.get('url') or v.get('src') for v in images if isinstance(v,dict) and (v.get('url') or v.get('src'))),'')
     return {'titulo':item.get('titulo') or item.get('title'),'url':item.get('url'),

@@ -43,7 +43,10 @@ class _Resp:
 
 
 @pytest.fixture(autouse=True)
-def _metricas_limpas():
+def _metricas_limpas(monkeypatch):
+    # Each transport-classification test starts a fresh process-local circuit.
+    # Retry suppression itself is exercised separately by the V5.9.5 tests.
+    monkeypatch.setattr(research, '_circuito', {})
     sp._reset_metricas()
     yield
     sp._reset_metricas()
@@ -119,14 +122,14 @@ def test_provedor_desconhecido_sem_metrica():
     assert "nao-existe" not in sp.metricas()
 
 
-def test_http_403_e_429_bloqueado_sem_bypass(monkeypatch):
+@pytest.mark.parametrize('codigo', [403, 429])
+def test_http_403_e_429_bloqueado_sem_bypass(monkeypatch, codigo):
     _sem_ssrf(monkeypatch)
-    for codigo in (403, 429):
-        _abrir_http(monkeypatch, erro=codigo)
-        with pytest.raises(sp.ErroProvedor) as ei:
-            sp.buscar("bing", "abs freio")
-        assert ei.value.codigo == "bloqueado", codigo
-    assert sp.metricas()["bing"]["erros"] == {"bloqueado": 2}
+    _abrir_http(monkeypatch, erro=codigo)
+    with pytest.raises(sp.ErroProvedor) as ei:
+        sp.buscar("bing", "abs freio")
+    assert ei.value.codigo == "bloqueado", codigo
+    assert sp.metricas()["bing"]["erros"] == {"bloqueado": 1}
 
 
 def test_http_5xx_e_timeout_classificados(monkeypatch):

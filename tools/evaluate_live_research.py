@@ -37,7 +37,7 @@ def load_cases(path=None):
         ident, route, question = row
         if not re.fullmatch(r'[a-z0-9_-]{1,60}', ident) or ident in ids:
             raise ValueError('case IDs must be unique safe basenames')
-        if route not in ('shopping','followup','research','live_data') or not isinstance(question, str) or not 1 <= len(question) <= 1000:
+        if route not in ('shopping','shopping_web','followup','research','live_data') or not isinstance(question, str) or not 1 <= len(question) <= 1000:
             raise ValueError('invalid evaluation case')
         normalized.append((ident, route, question)); ids.add(ident)
     return normalized
@@ -68,11 +68,14 @@ def run_case(case, workspace):
         if route == 'live_data':
             import live_data
             result.update(answer=live_data.respond(question, {}), model_calls_requested=0)
-        elif route == 'shopping':
-            data = shopping.pesquisar(db, owner, question, conv, usar_cache=False, teto_paginas=3)
+        elif route in ('shopping','shopping_web'):
+            search = (lambda query: shopping.buscar_web_v55(query)[0]) if route == 'shopping_web' else None
+            data = shopping.pesquisar(db, owner, question, conv, usar_cache=False, teto_paginas=3, buscar_fn=search)
             text = shopping.resumo_texto(data)
             (workspace / 'price-answer.txt').write_text(text, encoding='utf-8')
             result.update(answer=text, result=data)
+            if route == 'shopping_web':
+                result['route_note'] = 'Real existing web adapter and extraction; MLB intentionally not called after recorded 403; no fixtures.'
         elif route == 'followup':
             prior = workspace / 'price-answer.txt'
             if not prior.exists():

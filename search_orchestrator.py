@@ -172,6 +172,8 @@ def _termos_correspondencia(consulta: str) -> list:
     elif request['domain']=='science':
         consulta=re.sub(r'\b(artigos?|cient[ií]fic[oa]s?|estudos?|recentes?)\b',' ',consulta,flags=re.I)
         consulta=re.sub(r'\b(texto completo(?: aberto)?|acesso aberto|com doi|original)\b',' ',consulta,flags=re.I)
+    if request['domain'] == 'documents':
+        consulta=re.sub(r'\b(documenta[cç][aã]o|documentation|oficial|oficiais)\b', ' ', consulta, flags=re.I)
     consulta=re.sub(r'\bfaz\s+bem\b',' ',consulta,flags=re.I)
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
@@ -179,7 +181,7 @@ def _termos_correspondencia(consulta: str) -> list:
 def _tem_termo(termo: str, texto: str) -> bool:
     """Token boundaries prevent API from matching capital or RAM from programa."""
     aliases = {"consumo": ("consome","consumiu","consumido","consumption"), "fotossintese": ("photosynthesis",), "arquitetura": ("architecture",), "baterias": ("batteries",),
-               "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
+               "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "cancelamento": ("cancellation", "cancelled", "cancelling"), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
     if re.fullmatch(r"\d+(?:[.,]\d+)*", term):
@@ -773,7 +775,9 @@ def fontes_preferenciais(consulta: str) -> list:
     docs = bool(re.search(r"documenta[cç][aã]o|documentation|fontes? (?:oficiais|tecnicas)", t))
     entries = []
     if docs and _tem_termo("python", t) and _tem_termo("asyncio", t):
-        entries.append(("Python asyncio documentation", "https://docs.python.org/3/library/asyncio.html"))
+        specific = bool(re.search(r'\b(taskgroup|cancelamento|cancellation|create_task|gather)\b', t))
+        entries.append(("Python asyncio TaskGroup tasks documentation" if specific else "Python asyncio documentation",
+                        "https://docs.python.org/3/library/asyncio-task.html" if specific else "https://docs.python.org/3/library/asyncio.html"))
     if docs and _tem_termo("fastapi", t):
         entries.append(("FastAPI documentation", "https://fastapi.tiangolo.com/"))
     if docs and _tem_termo("django", t):

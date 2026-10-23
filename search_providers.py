@@ -563,13 +563,15 @@ def capacidades() -> dict:
     for name, meta in PROVEDORES.items():
         fields = ['title', 'url', 'snippet']
         if name in ('google-news', 'bing-news'):
-            fields += ['published_at', 'publisher']
+            fields += ['published_at']
+        if name == 'google-news':
+            fields += ['publisher']
         if name == 'crossref':
             fields += ['doi', 'authors', 'year', 'abstract', 'pdf_url', 'license']
         if name == 'bcb':
             fields += ['rate', 'date']
         if name == 'commons':
-            fields += ['media_url', 'media_type', 'license']
+            fields += ['media_url', 'media_type']
         out[name] = {'categories': list(meta['classes']), 'declared_fields': fields,
                      'auth': 'public_adapter_no_key', 'access': 'metadata_or_public_search',
                      'license': 'source_specific; abstracts/media may have separate rights',
