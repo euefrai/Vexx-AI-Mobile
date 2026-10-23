@@ -1,0 +1,17 @@
+{
+  "scope": "12 novos casos sintéticos congelados antes da alteração do revisor. Comparação pareada de estado e bloqueios; não mede verdade universal ou recuperação web. Nenhum caso/gabarito foi alterado após observar inferências.",
+  "cases": [
+    {"id":"H01","state":"SUPPORTED","reason":"none","source":"A biblioteca fictícia Nimbo é distribuída sob licença MIT, permitindo uso comercial conforme os termos dessa licença.","claim":"A licença MIT da biblioteca Nimbo permite uso comercial, respeitados seus termos."},
+    {"id":"H02","state":"SUPPORTED","reason":"none","source":"No registro controlado, a temperatura às 06:00 foi de 8 °C. Às 12:00, a temperatura registrada foi de 14 °C.","claim":"O registro controlado das 06:00 indicou temperatura de 8 °C."},
+    {"id":"H03","state":"SUPPORTED","reason":"none","source":"O sensor fictício Orbe não possui Bluetooth integrado. Sua comunicação ocorre exclusivamente por cabo USB.","claim":"O Orbe usa comunicação por cabo USB e não possui Bluetooth integrado."},
+    {"id":"H04","state":"SUPPORTED","reason":"none","source":"O relato observacional fictício registrou associação entre tempo de estudo e desempenho. Seu desenho não permite estabelecer causalidade.","claim":"O relato identificou associação entre estudo e desempenho, sem estabelecer causalidade."},
+    {"id":"H05","state":"CONTRADICTED","reason":"entity","source":"O roteador fictício Lume Pro possui porta óptica. O Lume básico possui apenas portas de cobre e não oferece porta óptica.","claim":"O roteador Lume básico oferece porta óptica."},
+    {"id":"H06","state":"CONTRADICTED","reason":"date","source":"A edição de 2022 do manual adotava o formato XML. A edição de 2023 substituiu XML por JSON como formato obrigatório.","claim":"Na edição de 2023, o formato obrigatório do manual é XML."},
+    {"id":"H07","state":"CONTRADICTED","reason":"negation","source":"A política fictícia permite exportar relatórios em PDF, mas proíbe expressamente a exportação de dados pessoais identificáveis.","claim":"A política permite exportar dados pessoais identificáveis."},
+    {"id":"H08","state":"PARTIAL","reason":"scope","source":"A especificação do medidor fictício informa alimentação por pilhas. Não informa resistência a quedas ou impactos.","claim":"O medidor usa pilhas e resiste a quedas."},
+    {"id":"H09","state":"PARTIAL","reason":"scope","source":"O teste controlado de uma câmera fictícia foi realizado em ambiente iluminado e produziu imagens nítidas. Não foi realizado teste noturno.","claim":"A câmera produziu imagens nítidas no teste diurno e também apresenta ótima qualidade noturna."},
+    {"id":"H10","state":"PARTIAL","reason":"scope","source":"O resumo de um estudo fictício menciona associação entre iluminação e produtividade. O texto completo não estava disponível para análise.","scope":"abstract_only","claim":"O resumo menciona associação entre iluminação e produtividade, e o texto completo confirma que o estudo eliminou todos os vieses."},
+    {"id":"H11","state":"INCONCLUSIVE","reason":"insufficient","source":"O cadastro fictício de uma pousada informa somente endereço e telefone. Não contém avaliações de limpeza, conforto ou atendimento.","claim":"A pousada oferece excelente limpeza e atendimento."},
+    {"id":"H12","state":"INCONCLUSIVE","reason":"insufficient","source":"O catálogo fictício de uma mochila contém somente fotografias externas. O peso não foi informado e não há medições de capacidade.","claim":"A mochila é leve e tem grande capacidade interna."}
+  ]
+}

@@ -46,11 +46,19 @@ Não reescreva texto nem invente evidências. Retorne APENAS JSON:
 Inclua exatamente uma revisão para cada índice recebido. reason deve ser um de:
 none, negation, entity, date, quantity, causality, scope, insufficient.
 Use none apenas para SUPPORTED. Os demais estados precisam de outro reason.
+Para CONTRADICTED, inclua também counterevidence:
+{"source_id":"E1","quote":"trecho literal da fonte que afirma o contrário",
+"claim":"trecho literal do parágrafo que está sendo refutado"}.
+O quote precisa ter 12 a 450 caracteres e o claim de 12 a 250 caracteres.
+Escolha a oração que apresenta a oposição, não o parágrafo inteiro da fonte.
+Não informado, não avaliado, indisponível e desconhecido NÃO são provas de
+contradição. Se não puder apontar uma afirmação oposta, não use CONTRADICTED.
+Para os outros estados, omita counterevidence. Não invente trechos ou IDs.
 """
 
 
 class SupportReviewError(ValueError):
-    """Only validated, closed-vocabulary review metadata may leave this error."""
+    """Only validated labels and source-bound excerpts may leave this error."""
     def __init__(self, reviews):
         super().__init__('no supported paragraphs')
         self.reviews = reviews
@@ -61,6 +69,50 @@ def _parse_json(raw, limit):
         raise ValueError('invalid synthesis size')
     fenced = re.fullmatch(r"\s*```(?:json)?\s*\n([\s\S]*?)\n```\s*", raw)
     return json.loads(fenced.group(1) if fenced else raw)
+
+
+_ABSENCE = re.compile(
+    r'\bn[aã]o\s+(?:(?:foi|foram|est[aá]|estava|estavam)\s+)?'
+    r'(?:inform\w*|avali\w*|recuper\w*|dispon[ií]ve\w*|disponibiliz\w*|discut\w*|realiz\w*)'
+    r'|\bn[aã]o\s+(?:informa\w*|apresenta\w*|cont[eéê]m)\s+'
+    r'(?:dados|resultados|especifica[çc][oõ]es|avalia[çc][oõ]es|medi[çc][oõ]es|detalhes|peso|pre[çc]o)'
+    r'|\bsem\s+(?:dados|resultados|informa[çc][aã]o|informa[çc][oõ]es|medi[çc][oõ]es)'
+    r'|\b(?:desconhecid\w*|indispon[ií]ve\w*|n[aã]o\s+dispon[ií]vel)\b', re.I)
+
+
+def _bind_counterevidence(review, point, sources):
+    """A literal, cited opposition is necessary, but still not proof of truth.
+
+    Missing/invalid/absence-only evidence downgrades to unknown, never support.
+    Source text must contain the complete opposition quote; invented spans and
+    quotes bound to an uncited source are not retained in the checkpoint.
+    """
+    proof = review.get('counterevidence')
+    status = 'missing'
+    valid = False
+    if isinstance(proof, dict) and set(proof) == {'source_id', 'quote', 'claim'}:
+        label, excerpt, claim = proof['source_id'], proof['quote'], proof['claim']
+        cited = {r['id'] for r in point['evidence']}
+        source = next((s for s in sources if s['id'] == label), None) if isinstance(label, str) else None
+        valid = (isinstance(label, str) and label in cited and source is not None
+                 and isinstance(excerpt, str) and 12 <= len(excerpt.strip()) <= 450
+                 and isinstance(claim, str) and 12 <= len(claim.strip()) <= 250
+                 and normalized(excerpt) in normalized(source['excerpt'])
+                 and normalized(claim) in normalized(point['text']))
+        status = 'traceable' if valid else 'invalid'
+        if valid and normalized(excerpt).casefold() == normalized(claim).casefold():
+            status = 'not_opposition'
+        elif valid and _ABSENCE.search(excerpt):
+            status = 'absence_only'
+    elif proof is not None:
+        status = 'invalid'
+    if status == 'traceable':
+        review['counterevidence_status'] = status
+        return
+    if not valid:
+        review.pop('counterevidence', None)
+    review.update(state='INCONCLUSIVE', reason='insufficient', proposed_state='CONTRADICTED',
+                  counterevidence_status=status)
 
 
 def check_support(points, sources, verify_fn, timeout, should_stop=None):
@@ -89,7 +141,8 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
         raise ValueError('invalid support review')
     seen = set()
     for review in reviews:
-        if not isinstance(review, dict) or set(review) != {'paragraph', 'state', 'reason'}:
+        if (not isinstance(review, dict) or not {'paragraph', 'state', 'reason'} <= set(review)
+                or set(review) - {'paragraph', 'state', 'reason', 'counterevidence'}):
             raise ValueError('invalid support review')
         i, state, reason = review['paragraph'], review['state'], review['reason']
         if (type(i) is not int or not 0 <= i < len(points) or i in seen
@@ -99,6 +152,12 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
                 or (state == 'SUPPORTED') != (reason == 'none')):
             raise ValueError('invalid support review')
         seen.add(i)
+        if state == 'CONTRADICTED':
+            _bind_counterevidence(review, points[i], sources)
+        elif review.get('counterevidence') is not None:
+            raise ValueError('invalid support review')
+        else:
+            review.pop('counterevidence', None)
     return sorted(reviews, key=lambda r: r['paragraph'])
 
 

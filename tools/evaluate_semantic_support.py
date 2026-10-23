@@ -16,8 +16,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--live', action='store_true', required=True)
     parser.add_argument('--output', default='qa-artifacts/semantic-support-live.json')
+    parser.add_argument('--corpus', default='benchmarks/semantic_support_v1.json')
     args = parser.parse_args()
-    corpus = json.loads((ROOT/'benchmarks/semantic_support_v1.json').read_text(encoding='utf-8'))
+    corpus = json.loads((ROOT/args.corpus).read_text(encoding='utf-8'))
     cfg = pc_agent.ai_config()
     writer = pc_agent._research_writer(cfg, threading.Event())
     out = ROOT/args.output
@@ -33,12 +34,28 @@ def main():
                     'scope': case.get('scope', 'controlled_fixture')}]
         before = time.monotonic()
         record = {'id': case['id'], 'expected': case['state']}
+        captured = []
+        provider_errors = []
+        def capture(messages, timeout):
+            try:
+                raw = writer(messages, timeout)
+            except Exception as exc:
+                code = getattr(exc, 'codigo', None)
+                allowed = {'auth', 'modelo-nao-encontrado', 'quota', 'pedido', 'rate_limit',
+                           'provedor', 'http', 'timeout', 'conexao', 'json', 'resposta',
+                           'circuito_aberto', 'url_invalida', 'sem_modelo', 'vazio'}
+                provider_errors.append(code if isinstance(code, str) and code in allowed else 'other_provider_error')
+                raise
+            captured.append(raw[:5000])
+            return raw
         try:
-            review = rs.check_support(points, sources, writer, timeout=12)[0]
+            review = rs.check_support(points, sources, capture, timeout=12)[0]
             record.update(review=review, match=review['state'] == case['state'])
         except Exception as exc:
             record.update(match=False, error=rs.failure_detail(exc))
         record['elapsed_s'] = round(time.monotonic()-before, 3)
+        record['raw_review'] = captured[0] if captured else None
+        record['provider_error_code'] = provider_errors[0] if provider_errors else None
         results['cases'].append(record)
         out.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
         print(case['id'], record.get('review', {}).get('state', record.get('error')), flush=True)
@@ -46,6 +63,15 @@ def main():
     results['matches'] = sum(c['match'] for c in results['cases'])
     results['unsupported_classified_as_supported'] = sum(
         c['expected'] != 'SUPPORTED' and c.get('review', {}).get('state') == 'SUPPORTED' for c in results['cases'])
+    results['supported_controls'] = sum(c['expected'] == 'SUPPORTED' for c in results['cases'])
+    results['supported_controls_blocked'] = sum(
+        c['expected'] == 'SUPPORTED' and c.get('review', {}).get('state') != 'SUPPORTED' for c in results['cases'])
+    results['supported_controls_rejected_by_review'] = sum(
+        c['expected'] == 'SUPPORTED' and 'review' in c and c['review']['state'] != 'SUPPORTED' for c in results['cases'])
+    results['supported_controls_failed_due_to_errors'] = sum(
+        c['expected'] == 'SUPPORTED' and 'error' in c for c in results['cases'])
+    results['non_contradictions_labeled_contradicted'] = sum(
+        c['expected'] != 'CONTRADICTED' and c.get('review', {}).get('state') == 'CONTRADICTED' for c in results['cases'])
     results['elapsed_s'] = round(time.monotonic()-started, 3)
     out.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
 

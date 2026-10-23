@@ -1,0 +1,27 @@
+...............F........................................................ [ 67%]
+..................................                                       [100%]
+================================== FAILURES ===================================
+_ test_absence_only_cannot_be_presented_as_refutation[O relat\xf3rio n\xe3o avaliou alcance ou estabilidade da conex\xe3o Bluetooth.] _
+
+excerpt = 'O relat�rio n�o avaliou alcance ou estabilidade da conex�o Bluetooth.'
+
+    @pytest.mark.parametrize('excerpt', [
+        'O cat�logo n�o apresenta especifica��es de Bluetooth ou conectividade.',
+        'O relat�rio n�o avaliou alcance ou estabilidade da conex�o Bluetooth.',
+        'O peso n�o foi informado e n�o h� resultados de conectividade dispon�veis.',
+        'O texto completo n�o estava dispon�vel para an�lise de conectividade.',
+        'O cadastro n�o cont�m avalia��es sobre conectividade e alcance do dispositivo.',
+    ])
+    def test_absence_only_cannot_be_presented_as_refutation(excerpt):
+        point = {'text': TEXT, 'evidence': [{'id': 'E1', 'quote': excerpt}]}
+        result = check(dict(PROOF, quote=excerpt), point=point, sources=[dict(SOURCE, excerpt=excerpt)])
+>       assert result['state'] == 'INCONCLUSIVE'
+E       AssertionError: assert 'CONTRADICTED' == 'INCONCLUSIVE'
+E
+E         - INCONCLUSIVE
+E         + CONTRADICTED
+
+tests\test_support_calibration.py:61: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_support_calibration.py::test_absence_only_cannot_be_presented_as_refutation[O relat\xf3rio n\xe3o avaliou alcance ou estabilidade da conex\xe3o Bluetooth.]
+1 failed, 105 passed in 13.88s

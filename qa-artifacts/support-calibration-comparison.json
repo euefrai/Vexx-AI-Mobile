@@ -1,0 +1,27 @@
+{
+  "new_corpus_sha256": "19ab24c316c815bba713514eff571de95f77b9568f1f1ba42e6f1f8843117ca1",
+  "previous_corpus_sha256": "5ca60ad324c587bd7a969c05ad47cf421c6629813572893a5d30d352eafd5a78",
+  "valid_in_both": [
+    "H03",
+    "H04",
+    "H06"
+  ],
+  "overall_accuracy_improvement_demonstrated": false,
+  "scope": "Paired synthetic cases; availability differs; not universal accuracy.",
+  "before": {
+    "matches": 5,
+    "total": 12,
+    "valid_reviews": 7,
+    "correct_controls_rejected_by_classification": 0,
+    "correct_controls_blocked_by_errors": 2,
+    "unsupported_accepted": 0
+  },
+  "after": {
+    "matches": 5,
+    "total": 12,
+    "valid_reviews": 5,
+    "correct_controls_rejected_by_classification": 0,
+    "correct_controls_blocked_by_errors": 1,
+    "unsupported_accepted": 0
+  }
+}

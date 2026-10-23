@@ -23,8 +23,15 @@ def candidate(case):
         {'id': 'E1', 'quote': case.get('quote', case['source'])}]}]})
 
 
-def review(state='SUPPORTED', reason='none', paragraph=0):
-    return {'paragraph': paragraph, 'state': state, 'reason': reason}
+def review(state='SUPPORTED', reason='none', paragraph=0, counterevidence=None):
+    value = {'paragraph': paragraph, 'state': state, 'reason': reason}
+    if counterevidence is not None:
+        value['counterevidence'] = counterevidence
+    return value
+
+
+def opposition(case):
+    return {'source_id': 'E1', 'quote': case['source'], 'claim': case['claim']}
 
 
 @pytest.mark.parametrize('case', CASES, ids=lambda c: c['id'])
@@ -34,14 +41,19 @@ def test_reviewer_states_gate_each_frozen_case(case):
         assert payload['sources'][0]['excerpt'] == case['source']
         assert payload['paragraphs'][0]['text'] == case['claim']
         assert timeout <= 12
-        return json.dumps({'reviews': [review(case['state'], case['reason'])]})
+        return json.dumps({'reviews': [review(case['state'], case['reason'],
+            counterevidence=opposition(case) if case['state'] == 'CONTRADICTED' else None)]})
     if case['state'] == 'SUPPORTED':
         result = rs.generate('Avalie o caso', [source(case)], [], lambda *a: candidate(case), verify_fn=verifier)
         assert case['claim'] in result['texto']
     else:
         with pytest.raises(rs.SupportReviewError) as error:
             rs.generate('Avalie o caso', [source(case)], [], lambda *a: candidate(case), verify_fn=verifier)
-        assert error.value.reviews == [review(case['state'], case['reason'])]
+        expected = review(case['state'], case['reason'],
+                          counterevidence=opposition(case) if case['state'] == 'CONTRADICTED' else None)
+        if case['state'] == 'CONTRADICTED':
+            expected['counterevidence_status'] = 'traceable'
+        assert error.value.reviews == [expected]
 
 
 @pytest.mark.parametrize('invalid', [
@@ -129,7 +141,8 @@ def test_rejected_support_persists_without_false_claim_in_exports(tmp_path):
     ra.registrar_evidencia(db, job, ev, case['source'])
     items = ra.listar_evidencias(db, job['owner'], job['id'])
     result = ra.agente_sintetizador(db, job, items, [], lambda *a: candidate(case),
-        verificar_fn=lambda *a: json.dumps({'reviews': [review('CONTRADICTED', 'negation')]}))
+        verificar_fn=lambda *a: json.dumps({'reviews': [review('CONTRADICTED', 'negation',
+                                                           counterevidence=opposition(case))]}))
     assert not result['llm'] and result['fallback_detail'] == 'semantic_support_rejected'
     assert case['claim'] not in result['texto']
     job['sintese'], job['status'] = result, 'concluida'

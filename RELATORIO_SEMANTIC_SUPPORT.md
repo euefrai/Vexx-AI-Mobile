@@ -1,5 +1,7 @@
 # Vexx AI — revisão de suporte por parágrafo
 
+> Histórico desta etapa. A exigência posterior de contraevidência literal para contradições e suas novas medições estão em `RELATORIO_SUPPORT_CALIBRATION.md`.
+
 Entrega local sobre `b5cd857`, em 22/10/2026. Sem push/deploy/reinício de produção. Modelo, provedores, chaves, contas, identidade, memória, 3D, extensão e permissões preservados.
 
 ## Comportamento

@@ -1,0 +1,129 @@
+{
+  "scope": "12 novos casos sintéticos congelados antes da alteração do revisor. Comparação pareada de estado e bloqueios; não mede verdade universal ou recuperação web. Nenhum caso/gabarito foi alterado após observar inferências.",
+  "model": "poolside/laguna-s-2.1:free",
+  "real_model": true,
+  "generation_tested": false,
+  "retrieval_tested": false,
+  "automatic_retries": 0,
+  "cases": [
+    {
+      "id": "H01",
+      "expected": "SUPPORTED",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 1.938
+    },
+    {
+      "id": "H02",
+      "expected": "SUPPORTED",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 0.926
+    },
+    {
+      "id": "H03",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 1.6
+    },
+    {
+      "id": "H04",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 5.716
+    },
+    {
+      "id": "H05",
+      "expected": "CONTRADICTED",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 0.688
+    },
+    {
+      "id": "H06",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "entity"
+      },
+      "match": true,
+      "elapsed_s": 4.037
+    },
+    {
+      "id": "H07",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": true,
+      "elapsed_s": 4.604
+    },
+    {
+      "id": "H08",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "quantity"
+      },
+      "match": true,
+      "elapsed_s": 2.572
+    },
+    {
+      "id": "H09",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation"
+      },
+      "match": false,
+      "elapsed_s": 4.529
+    },
+    {
+      "id": "H10",
+      "expected": "PARTIAL",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 1.013
+    },
+    {
+      "id": "H11",
+      "expected": "INCONCLUSIVE",
+      "match": false,
+      "error": "semantic_review_unavailable",
+      "elapsed_s": 0.606
+    },
+    {
+      "id": "H12",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "quantity"
+      },
+      "match": false,
+      "elapsed_s": 6.009
+    }
+  ],
+  "completed": 12,
+  "matches": 5,
+  "unsupported_classified_as_supported": 0,
+  "supported_controls": 4,
+  "supported_controls_blocked": 2,
+  "non_contradictions_labeled_contradicted": 1,
+  "elapsed_s": 34.256
+}

@@ -1,0 +1,194 @@
+{
+  "scope": "Casos sintéticos congelados para avaliar concordância do revisor com rubrica humana. Sem busca web, dados reais de produtos ou precisão universal.",
+  "model": "poolside/laguna-s-2.1:free",
+  "real_model": true,
+  "generation_tested": false,
+  "retrieval_tested": false,
+  "automatic_retries": 0,
+  "cases": [
+    {
+      "id": "S1",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 2.093,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "S2",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 1.924,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "S3",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 1.888,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "C1",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O fabricante esclarece que o modelo Atlas não oferece GPS integrado; localização depende de um aparelho externo.",
+          "claim": "O modelo Atlas oferece GPS integrado."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 3.885,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"negation\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"O fabricante esclarece que o modelo Atlas não oferece GPS integrado; localização depende de um aparelho externo.\",\"claim\":\"O modelo Atlas oferece GPS integrado.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "C2",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O modelo Pico básico possui tela LCD, sem opção OLED.",
+          "claim": "O modelo Pico básico possui tela OLED."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 5.252,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"negation\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"O modelo Pico básico possui tela LCD, sem opção OLED.\",\"claim\":\"O modelo Pico básico possui tela OLED.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "C3",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient",
+        "proposed_state": "CONTRADICTED",
+        "counterevidence_status": "invalid"
+      },
+      "match": false,
+      "elapsed_s": 5.658,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"quantity\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"Em 2025, o mesmo ensaio registrou 8 horas para o Atlas.\",\"claim\":\"Em 2025, o ensino do Atlas registrou 10 horas de autonomia.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "C4",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "causality",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O estudo observacional identificou associação entre café e atenção, mas explicitamente não demonstrou que café causa melhora da atenção.",
+          "claim": "O estudo demonstrou que café causa melhora da atenção."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 6.8,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"causality\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"O estudo observacional identificou associação entre café e atenção, mas explicitamente não demonstrou que café causa melhora da atenção.\",\"claim\":\"O estudo demonstrou que café causa melhora da atenção.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "P1",
+      "expected": "PARTIAL",
+      "match": false,
+      "error": "semantic_review_invalid",
+      "elapsed_s": 5.12,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"PARTIAL\",\"reason\":\"scope\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"No ensaio de navegação, o Atlas atingiu autonomia de 10 horas. O relatório não avaliou resistência à água.\",\"claim\":\"O Atlas atingiu 10 horas no ensaio e é impermeável.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "P2",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "Não foi recuperado o texto completo, nem seus detalhes metodológicos.",
+          "claim": "a análise do texto completo confirmou rigor metodológico."
+        },
+        "proposed_state": "CONTRADICTED",
+        "counterevidence_status": "absence_only"
+      },
+      "match": false,
+      "elapsed_s": 4.499,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"insufficient\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"Não foi recuperado o texto completo, nem seus detalhes metodológicos.\",\"claim\":\"a análise do texto completo confirmou rigor metodológico.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "P3",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "scope"
+      },
+      "match": true,
+      "elapsed_s": 2.876,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"PARTIAL\",\"reason\":\"scope\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "I1",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient"
+      },
+      "match": true,
+      "elapsed_s": 2.751,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"INCONCLUSIVE\",\"reason\":\"insufficient\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "I2",
+      "expected": "INCONCLUSIVE",
+      "match": false,
+      "error": "semantic_review_invalid",
+      "elapsed_s": 4.298,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"causality\",\"source\":\"E1\",\"quote\":\"A pesquisa não disponibilizou resultados de eficácia ou observações clínicas.\",\"claim\":\"O tratamento é eficaz para os pacientes.\"}]}",
+      "provider_error_code": null
+    }
+  ],
+  "completed": 12,
+  "matches": 8,
+  "unsupported_classified_as_supported": 0,
+  "supported_controls": 3,
+  "supported_controls_blocked": 0,
+  "supported_controls_rejected_by_review": 0,
+  "supported_controls_failed_due_to_errors": 0,
+  "non_contradictions_labeled_contradicted": 0,
+  "elapsed_s": 47.08
+}
