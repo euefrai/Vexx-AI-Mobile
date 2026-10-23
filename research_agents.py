@@ -913,12 +913,62 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "access_state": "read" if texto else "snippet_only"}
 
     import search_orchestrator as orch
+    subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+    termos_pedido = orch._termos_correspondencia(subject)
+
+    def _candidato(a, rec):
+        return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
+                'trecho': rec.get('texto') or '',
+                'structured': (rec.get('metadados') or {}).get('structured', []),
+                'publicado_em': (rec.get('metadados') or {}).get('publicado_em')
+                or a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em')}
+
+    def _corresponde(a, rec):
+        return not termos_pedido or orch._util_para_pedido(_candidato(a, rec), termos_pedido, subject)
+
+    def _util(a, rec):
+        texto = (rec.get('texto') or '').strip()
+        return bool(texto) and _evidencia_lida({**rec, 'trecho': texto}) and _corresponde(a, rec)
+
+    # Preserve ranking, but never spend a page slot on the same canonical URL twice.
+    unicos, vistas = [], set()
+    for a in achados:
+        try:
+            chave = orch.canonizar_url(a.get('url', ''))
+        except ValueError:
+            continue
+        if chave and chave not in vistas:
+            vistas.add(chave)
+            unicos.append(a)
+    achados = unicos
+    historico_falhas = job['usados'].get('failed_source_reads', [])
+    if not isinstance(historico_falhas, list):
+        historico_falhas = []
+    falhas_leitura = {key for key in historico_falhas[:80]
+                     if isinstance(key, str) and re.fullmatch(r'[0-9a-f]{64}', key)}
+
+    def _chave_fonte(a):
+        return hashlib.sha256(orch.canonizar_url(a['url']).encode('utf-8')).hexdigest()
+
+    def _registrar_falha(a):
+        # No URL/query string or raw exception is stored in the job counters.
+        if not parar() and (not prazo or time.monotonic() < prazo) and len(falhas_leitura) < 80:
+            falhas_leitura.add(_chave_fonte(a))
+            job['usados']['failed_source_reads'] = sorted(falhas_leitura)
+
     anteriores = {orch.canonizar_url(e.get("url", "")): e for e in _evidencias_job(db, job) if _evidencia_lida(e)}
     reutilizadas = [anteriores[orch.canonizar_url(a.get("url", ""))] for a in achados
                     if orch.canonizar_url(a.get("url", "")) in anteriores][:teto_paginas]
     novas_paginas = [a for a in achados if orch.canonizar_url(a.get("url", "")) not in anteriores]
+    ignoradas = sum(_chave_fonte(a) in falhas_leitura for a in novas_paginas)
+    novas_paginas = [a for a in novas_paginas if _chave_fonte(a) not in falhas_leitura]
+    if ignoradas:
+        emitir(db, job['id'], job['owner'], 'analyst', 'source_failed_read_skipped', 'alerta',
+               f'{ignoradas} fonte(s) com falha de download anterior ignorada(s) nesta pesquisa.',
+               {'skipped': ignoradas})
     restantes = max(0, job["orcamento"].get("paginas", 0) - job["usados"].get("paginas", 0))
     alvos = novas_paginas[:min(teto_paginas, restantes)]
+    limite_tentativas = min(restantes, max(0, teto_paginas) * 2)
     if reutilizadas:
         emitir(db, job["id"], job["owner"], "analyst", "source_reused", "ok",
                f"{len(reutilizadas)} fonte(s) já lida(s) reutilizada(s), sem novo download.", {})
@@ -947,20 +997,42 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                                       return_when=FIRST_COMPLETED)
             for fut in prontas:
                 a = futs[fut]
+                substituir = True
+                concluida = False
                 try:
                     rec, concluido_em = fut.result()
+                    concluida = True
                     if not prazo or concluido_em <= prazo:
                         baixados[a["url"]] = rec
+                        substituir = not _util(a, rec)
                 except research.ResearchErro as exc:
                     if parar():
                         cancelado = True
                         break
                     if exc.codigo != "cancelada":
+                        if not concluida:
+                            _registrar_falha(a)
                         emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                                f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+                    else:
+                        substituir = False
                 except Exception as exc:
+                    if not concluida and isinstance(exc, OSError):
+                        _registrar_falha(a)
                     emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                            f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+                if (substituir and not parar() and (not prazo or time.monotonic() < prazo)
+                        and len(alvos) < min(limite_tentativas, len(novas_paginas))):
+                    proxima = novas_paginas[len(alvos)]
+                    alvos.append(proxima)
+                    job['usados']['paginas'] += 1
+                    novo_fut = pool.submit(_ler_cronometrado, proxima)
+                    futs[novo_fut] = proxima
+                    pendentes.add(novo_fut)
+                    emitir(db, job['id'], job['owner'], 'analyst', 'source_replacement_started', 'ok',
+                           'Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.',
+                           {'previous_source_id': str(a.get('id') or '')[:120],
+                            'source_id': str(proxima.get('id') or '')[:120]})
             if cancelado:
                 break
             if expirado:
@@ -989,13 +1061,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                    "vazia", f"Sem texto: {a['url'][:60]}.", {})
             continue
         academic = a.get("metadata_source") == "academic_provider"
-        subject=job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
-        termos_pedido = orch._termos_correspondencia(subject)
-        content = (rec.get("titulo") or a.get("titulo", "")) + " " + texto
-        candidate={**a,'titulo':rec.get('titulo') or a.get('titulo',''),'trecho':texto,
-                   'structured':(rec.get('metadados') or {}).get('structured',[]),
-                   'publicado_em':(rec.get('metadados') or {}).get('publicado_em') or a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em')}
-        if texto and termos_pedido and not orch._util_para_pedido(candidate,termos_pedido,subject):
+        candidate = _candidato(a, rec)
+        if texto and not _corresponde(a, rec):
             emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
@@ -1055,7 +1122,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         descricao = (f"PDF aberto lido de {ev['dominio']}; identidade bibliográfica conferida."
                      if ev.get('full_text_fetched') else f"Metadados acadêmicos de {ev['dominio']}; "
                      f"{'resumo apenas' if academic and texto else 'sem texto completo'}."
-                     if academic else f"Lida {ev['dominio']} (relevância {ev['score']}).")
+                     if academic else f"Lida {ev['dominio']} (relevância {ev['score']})."
+                     if ev.get('texto_lido') else f"Fonte encontrada em {ev['dominio']}; conteúdo não lido.")
         emitir(db, job["id"], job["owner"], "analyst", "extraction_completed", "ok",
                descricao, {})
         try:
