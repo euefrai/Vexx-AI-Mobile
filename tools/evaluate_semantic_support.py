@@ -17,6 +17,7 @@ def main():
     parser.add_argument('--live', action='store_true', required=True)
     parser.add_argument('--output', default='qa-artifacts/semantic-support-live.json')
     parser.add_argument('--corpus', default='benchmarks/semantic_support_v1.json')
+    parser.add_argument('--cases', default='')
     args = parser.parse_args()
     corpus = json.loads((ROOT/args.corpus).read_text(encoding='utf-8'))
     cfg = pc_agent.ai_config()
@@ -26,6 +27,8 @@ def main():
                'generation_tested': False, 'retrieval_tested': False, 'automatic_retries': 0, 'cases': []}
     started = time.monotonic()
     for case in corpus['cases']:
+        if args.cases and case['id'] not in args.cases.split(','):
+            continue
         if time.monotonic()-started > 180:
             results['stopped_reason'] = 'evaluation_time_budget'
             break
@@ -40,11 +43,7 @@ def main():
             try:
                 raw = writer(messages, timeout)
             except Exception as exc:
-                code = getattr(exc, 'codigo', None)
-                allowed = {'auth', 'modelo-nao-encontrado', 'quota', 'pedido', 'rate_limit',
-                           'provedor', 'http', 'timeout', 'conexao', 'json', 'resposta',
-                           'circuito_aberto', 'url_invalida', 'sem_modelo', 'vazio'}
-                provider_errors.append(code if isinstance(code, str) and code in allowed else 'other_provider_error')
+                provider_errors.append(rs.safe_provider_code(exc))
                 raise
             captured.append(raw[:5000])
             return raw
@@ -53,6 +52,8 @@ def main():
             record.update(review=review, match=review['state'] == case['state'])
         except Exception as exc:
             record.update(match=False, error=rs.failure_detail(exc))
+            if isinstance(exc, rs.ReviewUnavailableError):
+                record['review_failure_cause'] = exc.cause
         record['elapsed_s'] = round(time.monotonic()-before, 3)
         record['raw_review'] = captured[0] if captured else None
         record['provider_error_code'] = provider_errors[0] if provider_errors else None

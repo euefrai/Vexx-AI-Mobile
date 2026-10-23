@@ -1,0 +1,122 @@
+{
+  "scope": "12 novos casos sintéticos congelados antes da alteração do revisor. Comparação pareada de estado e bloqueios; não mede verdade universal ou recuperação web. Nenhum caso/gabarito foi alterado após observar inferências.",
+  "model": "poolside/laguna-s-2.1:free",
+  "real_model": true,
+  "generation_tested": false,
+  "retrieval_tested": false,
+  "automatic_retries": 0,
+  "cases": [
+    {
+      "id": "H03",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 2.037,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H04",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 2.088,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H05",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O Lume básico possui apenas portas de cobre e não oferece porta óptica.",
+          "claim": "O roteador Lume básico oferece porta óptica."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 2.877,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"negation\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"O Lume básico possui apenas portas de cobre e não oferece porta óptica.\",\"claim\":\"O roteador Lume básico oferece porta óptica.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H06",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "A edição de 2023 substituiu XML por JSON como formato obrigatório.",
+          "claim": "Na edição de 2023, o formato obrigatório do manual é XML."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 3.989,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"negation\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"A edição de 2023 substituiu XML por JSON como formato obrigatório.\",\"claim\":\"Na edição de 2023, o formato obrigatório do manual é XML.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H07",
+      "expected": "CONTRADICTED",
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "A política fictícia permite exportar relatórios em PDF, mas proíbe expressamente a exportação de dados pessoais identificáveis.",
+          "claim": "A política permite exportar dados pessoais identificáveis."
+        },
+        "counterevidence_status": "traceable"
+      },
+      "match": true,
+      "elapsed_s": 3.925,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"negation\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"A política fictícia permite exportar relatórios em PDF, mas proíbe expressamente a exportação de dados pessoais identificáveis.\",\"claim\":\"A política permite exportar dados pessoais identificáveis.\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H10",
+      "expected": "PARTIAL",
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O texto completo não estava disponível para análise.",
+          "claim": "o texto completo confirma que o estudo eliminou todos os vieses"
+        },
+        "proposed_state": "CONTRADICTED",
+        "counterevidence_status": "absence_only"
+      },
+      "match": false,
+      "elapsed_s": 2.412,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADICTED\",\"reason\":\"insufficient\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"O texto completo não estava disponível para análise.\",\"claim\":\"o texto completo confirma que o estudo eliminou todos os vieses\"}}]}",
+      "provider_error_code": null
+    }
+  ],
+  "completed": 6,
+  "matches": 5,
+  "unsupported_classified_as_supported": 0,
+  "supported_controls": 2,
+  "supported_controls_blocked": 0,
+  "supported_controls_rejected_by_review": 0,
+  "supported_controls_failed_due_to_errors": 0,
+  "non_contradictions_labeled_contradicted": 0,
+  "elapsed_s": 17.342
+}

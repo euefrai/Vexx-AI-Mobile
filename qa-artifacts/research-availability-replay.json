@@ -1,0 +1,163 @@
+{
+  "scope": "Replay of 12 saved real-model responses. No new inference or web retrieval; format handling only.",
+  "new_model_calls": 0,
+  "before_valid": 10,
+  "after_valid": 11,
+  "before_matching_states": 8,
+  "after_matching_states": 9,
+  "cases": [
+    {
+      "id": "H01",
+      "expected": "SUPPORTED",
+      "previous_state": "SUPPORTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    },
+    {
+      "id": "H02",
+      "expected": "SUPPORTED",
+      "previous_state": "SUPPORTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    },
+    {
+      "id": "H08",
+      "expected": "PARTIAL",
+      "previous_state": null,
+      "previous_error": "semantic_review_invalid",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "quantity"
+      }
+    },
+    {
+      "id": "H09",
+      "expected": "PARTIAL",
+      "previous_state": null,
+      "previous_error": "semantic_review_invalid",
+      "error": "semantic_review_invalid"
+    },
+    {
+      "id": "H11",
+      "expected": "INCONCLUSIVE",
+      "previous_state": "INCONCLUSIVE",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient"
+      }
+    },
+    {
+      "id": "H12",
+      "expected": "INCONCLUSIVE",
+      "previous_state": "PARTIAL",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "quantity"
+      }
+    },
+    {
+      "id": "H03",
+      "expected": "SUPPORTED",
+      "previous_state": "SUPPORTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    },
+    {
+      "id": "H04",
+      "expected": "SUPPORTED",
+      "previous_state": "SUPPORTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    },
+    {
+      "id": "H05",
+      "expected": "CONTRADICTED",
+      "previous_state": "CONTRADICTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O Lume básico possui apenas portas de cobre e não oferece porta óptica.",
+          "claim": "O roteador Lume básico oferece porta óptica."
+        },
+        "counterevidence_status": "traceable"
+      }
+    },
+    {
+      "id": "H06",
+      "expected": "CONTRADICTED",
+      "previous_state": "CONTRADICTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "A edição de 2023 substituiu XML por JSON como formato obrigatório.",
+          "claim": "Na edição de 2023, o formato obrigatório do manual é XML."
+        },
+        "counterevidence_status": "traceable"
+      }
+    },
+    {
+      "id": "H07",
+      "expected": "CONTRADICTED",
+      "previous_state": "CONTRADICTED",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "CONTRADICTED",
+        "reason": "negation",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "A política fictícia permite exportar relatórios em PDF, mas proíbe expressamente a exportação de dados pessoais identificáveis.",
+          "claim": "A política permite exportar dados pessoais identificáveis."
+        },
+        "counterevidence_status": "traceable"
+      }
+    },
+    {
+      "id": "H10",
+      "expected": "PARTIAL",
+      "previous_state": "INCONCLUSIVE",
+      "previous_error": null,
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient",
+        "counterevidence": {
+          "source_id": "E1",
+          "quote": "O texto completo não estava disponível para análise.",
+          "claim": "o texto completo confirma que o estudo eliminou todos os vieses"
+        },
+        "proposed_state": "CONTRADICTED",
+        "counterevidence_status": "absence_only"
+      }
+    }
+  ]
+}

@@ -1300,6 +1300,12 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
             # Provider errors can contain credentials/request bodies; never persist them.
             sintese['fallback_reason'] = 'provider_or_validation_failure'
             sintese['fallback_detail'] = research_synthesis.failure_detail(exc)
+            if isinstance(exc, research_synthesis.ReviewUnavailableError):
+                sintese['review_failure_cause'] = exc.cause
+                if exc.provider_code:
+                    sintese['fallback_provider_code'] = exc.provider_code
+            elif sintese['fallback_detail'] == 'provider_failure':
+                sintese['fallback_provider_code'] = research_synthesis.safe_provider_code(exc)
             if isinstance(exc, research_synthesis.SupportReviewError):
                 sintese['semantic_review'] = exc.reviews
         if not sintese['llm']:
@@ -1311,7 +1317,9 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
     emitir(db, job["id"], job["owner"], "synthesizer", "answer_started", "ok",
            f"Síntese {'assistida' if sintese['llm'] else 'extrativa'} com {len(tops)} evidências.",
            {"llm": sintese['llm'], "fallback_reason": sintese.get('fallback_reason', ''),
-            "fallback_detail": sintese.get('fallback_detail', '')})
+            "fallback_detail": sintese.get('fallback_detail', ''),
+            "review_failure_cause": sintese.get('review_failure_cause', ''),
+            "provider_code": sintese.get('fallback_provider_code', '')})
     return sintese
 
 

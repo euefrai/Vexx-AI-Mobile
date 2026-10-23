@@ -203,7 +203,9 @@ def chat_complete(base: str, model: str, messages: list,
         raise _mapear_http(exc, model) from None
     except (OSError, TimeoutError) as exc:
         raise BridgeErro(f"Falha ao falar com o proxy ({type(exc).__name__}).",
-                         "indisponivel") from None
+                         "timeout" if isinstance(exc, TimeoutError) or
+                         (isinstance(exc, urllib.error.URLError) and isinstance(exc.reason, TimeoutError))
+                         else "indisponivel") from None
     except ValueError as exc:
         raise BridgeErro("Resposta do proxy em formato inesperado.", "formato") from None
     texto, erros = tool_protocol.sanitizar_texto(extrair_texto(dados))

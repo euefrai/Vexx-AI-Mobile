@@ -1,0 +1,89 @@
+{
+  "scope": "12 novos casos sintéticos congelados antes da alteração do revisor. Comparação pareada de estado e bloqueios; não mede verdade universal ou recuperação web. Nenhum caso/gabarito foi alterado após observar inferências.",
+  "model": "poolside/laguna-s-2.1:free",
+  "real_model": true,
+  "generation_tested": false,
+  "retrieval_tested": false,
+  "automatic_retries": 0,
+  "cases": [
+    {
+      "id": "H01",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 5.749,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H02",
+      "expected": "SUPPORTED",
+      "review": {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      "match": true,
+      "elapsed_s": 3.923,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"SUPPORTED\",\"reason\":\"none\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H08",
+      "expected": "PARTIAL",
+      "match": false,
+      "error": "semantic_review_invalid",
+      "elapsed_s": 3.745,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"PARTIAL\",\"reason\":\"quantity\",\"quote\":\"A especificação do medidor fictício informa alimentação por pilhas. Não informa resistência a quedas ou impactos.\",\"claim\":\"O medidor usa pilhas e resiste a quedas.\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H09",
+      "expected": "PARTIAL",
+      "match": false,
+      "error": "semantic_review_invalid",
+      "elapsed_s": 5.866,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"CONTRADIICTED\",\"reason\":\"quantity\",\"counterevidence\":{\"source_id\":\"E1\",\"quote\":\"Não foi realizado teste noturno.\",\"claim\":\"também apresenta ótima qualidade noturna\"}}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H11",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "INCONCLUSIVE",
+        "reason": "insufficient"
+      },
+      "match": true,
+      "elapsed_s": 2.677,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"INCONCLUSIVE\",\"reason\":\"insufficient\"}]}",
+      "provider_error_code": null
+    },
+    {
+      "id": "H12",
+      "expected": "INCONCLUSIVE",
+      "review": {
+        "paragraph": 0,
+        "state": "PARTIAL",
+        "reason": "quantity"
+      },
+      "match": false,
+      "elapsed_s": 1.997,
+      "raw_review": "{\"reviews\":[{\"paragraph\":0,\"state\":\"PARTIAL\",\"reason\":\"quantity\"}]}",
+      "provider_error_code": null
+    }
+  ],
+  "completed": 6,
+  "matches": 3,
+  "unsupported_classified_as_supported": 0,
+  "supported_controls": 2,
+  "supported_controls_blocked": 0,
+  "supported_controls_rejected_by_review": 0,
+  "supported_controls_failed_due_to_errors": 0,
+  "non_contradictions_labeled_contradicted": 0,
+  "elapsed_s": 23.976
+}

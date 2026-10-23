@@ -64,6 +64,26 @@ class SupportReviewError(ValueError):
         self.reviews = reviews
 
 
+PROVIDER_CODES = frozenset({
+    'auth', 'circuito_aberto', 'formato', 'http', 'indisponivel', 'modelo-nao-encontrado',
+    'pedido', 'protocolo_ferramenta', 'provedor', 'quota', 'rate_limit', 'sem_modelo',
+    'timeout', 'todos_falharam', 'url_bloqueada', 'url_invalida', 'vazia', 'vazio',
+    'sem_chave', 'desconhecido', 'unknown',
+})
+
+
+def safe_provider_code(exc):
+    code = getattr(exc, 'codigo', None)
+    return code if isinstance(code, str) and code in PROVIDER_CODES else 'unknown'
+
+
+class ReviewUnavailableError(ValueError):
+    def __init__(self, cause, provider_code=None):
+        super().__init__('support review unavailable')
+        self.cause = cause if cause in ('cancelled', 'time_budget', 'provider_error', 'late_result') else 'provider_error'
+        self.provider_code = provider_code if isinstance(provider_code, str) and provider_code in PROVIDER_CODES else None
+
+
 def _parse_json(raw, limit):
     if not isinstance(raw, str) or len(raw) > limit:
         raise ValueError('invalid synthesis size')
@@ -116,8 +136,10 @@ def _bind_counterevidence(review, point, sources):
 
 
 def check_support(points, sources, verify_fn, timeout, should_stop=None):
-    if timeout < 2 or (should_stop and should_stop()):
-        raise ValueError('support review unavailable')
+    if should_stop and should_stop():
+        raise ReviewUnavailableError('cancelled')
+    if timeout < 2:
+        raise ReviewUnavailableError('time_budget')
     deadline = time.monotonic() + min(12, timeout)
     used = {ref['id'] for p in points for ref in p['evidence']}
     payload = {'task': 'verify_support', 'paragraphs': [
@@ -126,10 +148,12 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
     try:
         raw = verify_fn([{'role': 'system', 'content': REVIEW_SYSTEM},
                          {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}], min(12, timeout))
-    except Exception:
-        raise ValueError('support review unavailable') from None
-    if time.monotonic() >= deadline or (should_stop and should_stop()):
-        raise ValueError('support review unavailable')
+    except Exception as exc:
+        raise ReviewUnavailableError('provider_error', safe_provider_code(exc)) from None
+    if should_stop and should_stop():
+        raise ReviewUnavailableError('cancelled')
+    if time.monotonic() >= deadline:
+        raise ReviewUnavailableError('late_result')
     try:
         body = _parse_json(raw, 5000)
     except (ValueError, TypeError):
@@ -141,6 +165,21 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
         raise ValueError('invalid support review')
     seen = set()
     for review in reviews:
+        # Some models attach exact flat excerpts to non-publishing verdicts.
+        # Accept only this known variation, with source/claim binding; never
+        # salvage SUPPORTED, unknown states, new links or arbitrary extra keys.
+        if (isinstance(review, dict) and set(review) == {'paragraph', 'state', 'reason', 'quote', 'claim'}
+                and review.get('state') in ('PARTIAL', 'INCONCLUSIVE')):
+            pos, excerpt, claim = review['paragraph'], review['quote'], review['claim']
+            if (type(pos) is not int or not 0 <= pos < len(points)
+                    or not isinstance(excerpt, str) or not 12 <= len(excerpt.strip()) <= 450
+                    or not isinstance(claim, str) or not 12 <= len(claim.strip()) <= 650
+                    or normalized(claim) not in normalized(points[pos]['text'])
+                    or not any(s['id'] in {r['id'] for r in points[pos]['evidence']}
+                               and normalized(excerpt) in normalized(s['excerpt']) for s in sources)):
+                raise ValueError('invalid support review')
+            review.pop('quote')
+            review.pop('claim')
         if (not isinstance(review, dict) or not {'paragraph', 'state', 'reason'} <= set(review)
                 or set(review) - {'paragraph', 'state', 'reason', 'counterevidence'}):
             raise ValueError('invalid support review')
@@ -186,6 +225,8 @@ def quantities(text):
 
 def failure_detail(exc):
     """Closed vocabulary: never expose arbitrary provider exception messages."""
+    if isinstance(exc, ReviewUnavailableError):
+        return 'semantic_review_unavailable'
     if isinstance(exc, SupportReviewError):
         return 'semantic_support_rejected'
     if isinstance(exc, json.JSONDecodeError):
