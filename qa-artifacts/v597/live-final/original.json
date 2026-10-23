@@ -1,0 +1,1508 @@
+{
+  "id": "original",
+  "route": "research",
+  "question": "Notícias de Recife nos últimos sete dias: fonte original e data",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Recife\" notícias",
+    "domain": "news",
+    "original_request": "Notícias de Recife nos últimos sete dias: fonte original e data",
+    "resolved_request": "Notícias de Recife entre 2026-10-16 e 2026-10-23: fonte original e data",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "location": "Recife"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T18:58:51.186023+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Notícias de Recife nos últimos sete dias: fonte original e data\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-f5c2e60d4cd4",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Notícias de Recife nos últimos sete dias: fonte original e data",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Notícias de Recife nos últimos sete dias: fonte original e data",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Notícias de Recife nos últimos sete dias: fonte original e data",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Notícias de Recife nos últimos sete dias: fonte original e data",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Notícias de Recife nos últimos sete dias: fonte original e data.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-1ae91a05a6b9",
+          "ev-a7d46261b33c",
+          "ev-8091ff70541d"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-1ae91a05a6b9",
+            "title": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia - UOL Notícias",
+            "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+            "published_at": "Wed, 21 Oct 2026 09:57:31 GMT"
+          },
+          {
+            "evidence_id": "ev-a7d46261b33c",
+            "title": "Recife vai abrir 34 creches domingo para pais poderem votar - SBT News",
+            "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+            "published_at": "Fri, 23 Oct 2026 16:02:13 GMT"
+          },
+          {
+            "evidence_id": "ev-8091ff70541d",
+            "title": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO - G1",
+            "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+            "published_at": "Thu, 22 Oct 2026 23:55:32 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Notícias de Recife nos últimos sete dias: fonte original e data\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "cb40108e3bbe336a4686",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-f5c2e60d4cd4",
+        "statement": "Investigar se: Notícias de Recife nos últimos sete dias: fonte original e data.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-1ae91a05a6b9",
+          "ev-a7d46261b33c",
+          "ev-8091ff70541d"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Notícias de Recife nos últimos sete dias: fonte original e data."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "noticias de recife nos ultimos sete dias fonte original e data": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3453
+        }
+      },
+      "failed_source_reads": [
+        "5ad95c011f539601ad51a107cb60e6088962f8dbfdf874b6e984591c6b8cf0d6"
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-1ae91a05a6b9",
+        "ev-8091ff70541d",
+        "ev-a7d46261b33c"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Notícias de Recife nos últimos sete dias: fonte original e data fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-a67056a92a06",
+        "type": "image",
+        "title": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-595f45fba7c8",
+        "type": "image",
+        "title": "Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-636e3fbce209",
+        "type": "image",
+        "title": "Recife - Praia da Boa Viagem",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praia da Boa Viagem",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c00a2d9d3806",
+        "type": "image",
+        "title": "Recife - Praia do Pina",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praia do Pina",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d58f2134e8ee",
+        "type": "image",
+        "title": "Rua Bom Jesus - Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Rua Bom Jesus - Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-e3be13c98dd6",
+        "type": "image",
+        "title": "Marco Zero de Recife",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Marco Zero de Recife",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-75950cba8701",
+        "type": "image",
+        "title": "Recife - Praça da República",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Recife - Praça da República",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d4ceadd26616",
+        "type": "image",
+        "title": "Parque das Esculturas - Recife PE",
+        "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+        "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+        "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "publisher": "www.viagensecaminhos.com",
+        "date": "2014-05-31T15:38:00+00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Parque das Esculturas - Recife PE",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1ae91a05a6b9",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+      "titulo": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia - UOL Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:59:03.311273+00:00",
+      "publicado_em": "Wed, 21 Oct 2026 09:57:31 GMT",
+      "trecho": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Wed, 21 Oct 2026 09:57:31 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "UOL Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-8091ff70541d",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+      "titulo": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO - G1",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:59:03.323555+00:00",
+      "publicado_em": "Thu, 22 Oct 2026 23:55:32 GMT",
+      "trecho": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 23:55:32 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "G1",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-a7d46261b33c",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+      "titulo": "Recife vai abrir 34 creches domingo para pais poderem votar - SBT News",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:59:03.318562+00:00",
+      "publicado_em": "Fri, 23 Oct 2026 16:02:13 GMT",
+      "trecho": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 16:02:13 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "SBT News",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:58:54.697355+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Notícias de Recife nos últimos sete dias: fonte original e d': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (\"Recife\" notícias)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (\"Recife\" notícias)",
+          "bing: 6 resultados (\"Recife\" notícias)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Recife\" notícias)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 1 artigo(s) candidato(s), leitura pendente",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:58:55.707672+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "final_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2014-05-31T15:38:00+00:00",
+        "excerpt": "Recife. É lá que começam a contar as distâncias do estado de Pernambuco. O local possui um belo conjunto arquitetônico ao seu redor e é bem movimentado por turistas. Há um painel com a Rosa dos Ventos no chão da praça, que fica às margens do estuário do Rio Capibaribe. Logo ao lado fica o Mercado de Artesanato. Praça da República – Recife Praça da República Localizada na Ilha de Antônio Vaz, entre"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:58:55.835343+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "2026-03-31T21:59:16-03:00",
+        "excerpt": "Especialmente se for viajar no verão ou em feriadões, daí é bom reservar com meses de antecedência. Leia todas as dicas de . onde ficar no Recife Hospedagem no Recife - A seleção do Melhores Destinos Se você ainda não sabe onde ficar, confira a nossa seleção com as melhores opções de hotéis para a sua viagem. As acomodações foram escolhidas priorizando qualidade, preço das diárias e localização."
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:59:03.302534+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (rede): https://www2.recife.pe.gov.br/.",
+      "meta": {}
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:59:03.303264+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://www2.recife.pe.gov.br/",
+        "final_url": "",
+        "stage": "fetch_failed",
+        "code": "rede",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 14:01:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T18:59:03.304277+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T18:59:03.306876+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "final_url": "https://www.viagensecaminhos.com/recife-pe/",
+        "stage": "relevance_rejected",
+        "code": "INTENT_MISMATCH,TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2014-05-31T15:38:00+00:00",
+        "excerpt": "Recife. É lá que começam a contar as distâncias do estado de Pernambuco. O local possui um belo conjunto arquitetônico ao seu redor e é bem movimentado por turistas. Há um painel com a Rosa dos Ventos no chão da praça, que fica às margens do estuário do Rio Capibaribe. Logo ao lado fica o Mercado de Artesanato. Praça da República – Recife Praça da República Localizada na Ilha de Antônio Vaz, entre"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-23T18:59:03.307566+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-23T18:59:03.310050+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "2026-03-31T21:59:16-03:00",
+        "excerpt": "Especialmente se for viajar no verão ou em feriadões, daí é bom reservar com meses de antecedência. Leia todas as dicas de . onde ficar no Recife Hospedagem no Recife - A seleção do Melhores Destinos Se você ainda não sabe onde ficar, confira a nossa seleção com as melhores opções de hotéis para a sua viagem. As acomodações foram escolhidas priorizando qualidade, preço das diárias e localização."
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-23T18:59:03.310592+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-23T18:59:03.312199+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-1ae91a05 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-23T18:59:03.313213+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz",
+        "final_url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Wed, 21 Oct 2026 09:57:31 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-23T18:59:03.314021+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:59:03.318034+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-1ae91a05a6b9",
+        "dominio": "news.google.com",
+        "trecho": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1"
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-23T18:59:03.319249+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-a7d46261 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-23T18:59:03.319734+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3",
+        "final_url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Fri, 23 Oct 2026 16:02:13 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-23T18:59:03.320195+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-23T18:59:03.323050+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-a7d46261b33c",
+        "dominio": "news.google.com",
+        "trecho": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk"
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-23T18:59:03.324167+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-8091ff70 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-23T18:59:03.324646+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+        "final_url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Thu, 22 Oct 2026 23:55:32 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-23T18:59:03.325267+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-23T18:59:03.327634+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-8091ff70541d",
+        "dominio": "news.google.com",
+        "trecho": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N"
+      }
+    },
+    {
+      "seq": 38,
+      "ts": "2026-10-23T18:59:03.339152+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Notícias de Recife nos últimos sete dias: fonte original e data\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Notícias de Recife nos últimos sete dias: fonte original e data\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Notícias de Recife nos últimos sete dias: fonte original e data.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-1ae91a05a6b9",
+                  "title": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia - UOL Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+                  "published_at": "Wed, 21 Oct 2026 09:57:31 GMT"
+                },
+                {
+                  "id": "ev-a7d46261b33c",
+                  "title": "Recife vai abrir 34 creches domingo para pais poderem votar - SBT News",
+                  "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+                  "published_at": "Fri, 23 Oct 2026 16:02:13 GMT"
+                },
+                {
+                  "id": "ev-8091ff70541d",
+                  "title": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO - G1",
+                  "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+                  "published_at": "Thu, 22 Oct 2026 23:55:32 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia - UOL Notícias",
+              "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+              "dominio": "news.google.com",
+              "data": "Wed, 21 Oct 2026 09:57:31 GMT",
+              "trecho": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia UOL Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "UOL Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO - G1",
+              "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+              "dominio": "news.google.com",
+              "data": "Thu, 22 Oct 2026 23:55:32 GMT",
+              "trecho": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO G1",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "G1",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Recife vai abrir 34 creches domingo para pais poderem votar - SBT News",
+              "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+              "dominio": "news.google.com",
+              "data": "Fri, 23 Oct 2026 16:02:13 GMT",
+              "trecho": "Recife vai abrir 34 creches domingo para pais poderem votar SBT News",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "SBT News",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Notícias de Recife nos últimos sete dias: fonte original e data",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Notícias de Recife nos últimos sete dias: fonte original e data",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Notícias de Recife nos últimos sete dias: fonte original e data",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Notícias de Recife nos últimos sete dias: fonte original e data",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Notícias de Recife nos últimos sete dias: fonte original e data.",
+              "markdown": "**HIPÓTESE:** Investigar se: Notícias de Recife nos últimos sete dias: fonte original e data.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-f5c2e60d4cd4&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-f5c2e60d4cd4&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-f5c2e60d4cd4&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 3,
+      "ok": 3,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 450.6
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 468.8
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 1162.6
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Recife vai abrir 34 creches domingo para pais poderem votar - SBT News",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjFCNnFqbkRDZmRVUlpvNDVXTFFjU28wWm9IU3hETjBGZGN3eXdtNXQzdlhmM0FrSDZsbkFzNHc0Q2p6RXBuWUI3RkVFaEVkZ3o4OEExd2RYOFJQaG5jRUQ5TmdiaHNiV2h1Y2ZST2FEbFFPdDk5MU1JNlFZMG9CdWVCY1FaWlZSNnVseTdzSS13azdvcHJvYWxjYVVWd3MyOXFqYUN3?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 16:02:13 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://sbtnews.sbt.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Apoiadores de Lula e Flávio Bolsonaro fazem atos no Recife; VÍDEO - G1",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYjFESEQ1a2lwMFVpSVpET3J2c3R6WWU1eXl4c1A1NmxoTzd6VkhQNHFtUUhsVGUzWHh4c0Q5MWIwNTVGYVlyS05jRXh2X0lRUXVEUExaT0NpTUZjQXBHU1FnS1AwYnZ4LTFXdFlubC1ZTmJfZ3N5eHNUdjBCTTVheFVmTjRFUFJjOWdxQkNQaEhzMy1VR3BZVVVWOXMyYmFuRjVPZXF0dEY3M3U2c3g1Ul9TRFBGcVFMQUJHbnZyaEVmTGU3ZF92ZmxKQm9zUjNYSEdUUtIB4wFBVV95cUxPbkVjXzRiOEFXNWtfQTA3dDlNYUVLYzhFbm5TdnM0RUJOdlZuWHBVS0MwS01XZnhDSGExelFVU1d6d0pSY1FaQ0NUZ2J0MVViUGVpM2s0OTJXWkY2VUh1LUY1aFRUTFF1aFN2T2tLM0tzYXFGa1NKbUptQm5NTGF",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 23:55:32 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ramal Camaragibe do Metrô do Recife encerra operação em via singela nesta sexta-feira (23) - Terra",
+      "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxOS2UyS1Y2Z3ZNd3JiTVZVeU5raXhtZnl2MjhpUVdrWkdCdFp2V1dSM0MwdGE5VHVFLWlFdkJkX1VFVXFUQW50aFJ3MGVIWGE3b3lCbnlZWGhZNzI5Q2VWQ1FwZFNGMVRGYnphdWpRdmpvRU1BUEhEVFpmeFRRaEJ5TW82TVp6d0hLNUZDR1FmWDhrcXl0cGJBemZWeUdpUktzaTF4WmJEazhyOE5lY3VfVGloT0Z5OTdVemNrX2d6ZExYeGRMWUxMQ2Q1TnZHODZsa1Y5UUszemRiUXkyU1NQWGlXcmw2RlVoWFdYVHphWWdndnFqQzN0RXhmbTA3WnNRNkpkamtNUU12aUZQMm5NYg?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 12:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.terra.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Soldado que sumiu com fuzil e munições no Recife é preso pela polícia - UOL Notícias",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSmR6S3ZSRVV2WVVvSXRQRUptMndCNUIxaUE4WDhhT1dxaDN1aE1GeXB2alVzSF9iMDU0MlltVXEyWUNuNm4tcnh0bUJjb2FDS1NXZzFOZkRfaHo2REoyRGNHakI4WGg1VThWMkpXMjdPd0xNYy1zYTE5YjdxeXc1OVkzbGJDU09IMldCT09WRFlGVzV1ZVkxNzZnZm1zOWVvOVdZdHR2cTlNVmsz?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 21 Oct 2026 09:57:31 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://noticias.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recife abrirá 34 creches no domingo para facilitar o voto dos pais - Agência Brasil",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZVJrZlpYNlhESTlpTG85RUl3RVYzTDRCZkc3N3N3Tmpnc05HSXRNcG5wUzVCUWlZSDJVRkNJZGNhWDR6SXU4SEpoUXU4QVY0aGdkV2VmM3VSM2RHa2gtX3Uwb3pUUVBKM0FNdllsQnBqd25Ld3Q2Q0I1ZlZHNWExUkM5blBiRXU5TFd1aWxoeGFLb005MFBlRXBYajBGV0x1VkQzRV93X3VrTUxWc1d1UkpxeVhTTjBsajBkZzh2QWdKdw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 14:29:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://agenciabrasil.ebc.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Exército prende soldado que desapareceu de quartel no Recife com fuzil e munições - Folha PE",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPNTdJcE4zbHhubXNvdE50OXdjSkt2VlhuUE5QQ0hNVEZfQ2o5clRZUms0bGFZaUtoNW9qeXdCZko5LXFXT1RNV2dVNDFzdkJVZnBCR3BNcXNvMEwwQ3dxNlVCVGNKSkZscnkwT0JScWtvS3lSSHNUYlJpYnc4c0JQM1NTRTQtQW5GXy1tclhnMDFKdHRzRi1peWZ6TzFCblRiNlZPNDYxNEF3WkczNmdZTVVsMjXSAbgBQVVfeXFMT0hBZ3hkVkxZcVpYM1Qxa0JRdkkyZk1tNUpXQlZfZnlhZjhBcm52eGxfRzFxQ3EydmY2a3N4STJZbmlNN3kwdXAycENHSG1UY2N3Sk1DQ0t6RklxMWF2RWMxT1JBWTBNSlpsTkRCX09FSnRvZnFkRkdtcl8xMnlRMjRxekNsYnpiZHdrQWJkTDNEd2RwS0o3NXFQYVA5eGR",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 21 Oct 2026 15:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.folhape.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recife – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 00:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura do Recife",
+      "url": "https://www2.recife.pe.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 14:01:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Recife PE: 30 pontos turísticos",
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 11:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "AS 15 MELHORES coisas para fazer em Recife (ATUALIZADO 2026)",
+      "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 11:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Recife: 30 dicas para todos os gostos!",
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 11:09:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura do Recife - Pernambuco",
+      "url": "https://www2.recife.pe.gov.br/?i=1",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 07:09:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recife – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 00:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura do Recife",
+      "url": "https://www2.recife.pe.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 14:01:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Recife PE: 30 pontos turísticos",
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 11:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Apoiador - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/apoiador/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 05 jun. 2026 17:59:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Apoiadores - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/apoiadores/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "seg., 25 mai. 2026 05:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Sinônimo de Apoiadores - Sinônimos",
+      "url": "https://www.sinonimos.com.br/apoiadores/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 10:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 12.179
+}

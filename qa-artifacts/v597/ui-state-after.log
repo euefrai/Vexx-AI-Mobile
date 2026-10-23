@@ -1,0 +1,14 @@
+### Result
+{
+  "owner": "owner-a",
+  "job": "comparison",
+  "open": true,
+  "stateKeys": [
+    "research:owner-a:comparison#0:3:sources"
+  ],
+  "dirty": 0
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({owner:document.getElementById(\'owner\').value,job:document.getElementById(\'job\').value,open:document.querySelector(\'details\').open,stateKeys:Object.keys(jduiStateCache),dirty:Object.keys(jduiDirty).length})');
+```

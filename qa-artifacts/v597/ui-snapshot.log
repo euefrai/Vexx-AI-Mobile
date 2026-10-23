@@ -1,0 +1,80 @@
+### Page
+- Page URL: http://127.0.0.1:63607/index.html
+- Page Title: V597 component QA
+### Snapshot
+```yaml
+- main [ref=e2]:
+  - heading "Pesquisa — QA de componentes" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Capturas públicas reais. SQLite, relay e login não fazem parte deste teste.
+  - navigation [ref=e5]:
+    - generic [ref=e6]:
+      - text: Usuário
+      - combobox "Usuário" [ref=e7]:
+        - option "owner-a" [selected]
+        - option "owner-b"
+    - generic [ref=e8]:
+      - text: Pesquisa
+      - combobox "Pesquisa" [ref=e9]:
+        - option "comparison" [selected]
+        - option "official"
+  - status [ref=e10]: owner-a / comparison
+  - generic [ref=e11]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Publicações recuperadas — sem comparação experimental aprovada
+      - generic [ref=e15]:
+        - button "Editar tabela" [ref=e16] [cursor=pointer]
+        - button "Adicionar linha" [disabled] [ref=e17]
+        - button "Restaurar original" [disabled] [ref=e18]
+        - button "Baixar CSV" [ref=e19] [cursor=pointer]
+      - searchbox "Filtrar linhas da tabela" [ref=e20]
+      - table [ref=e22]:
+        - rowgroup [ref=e23]:
+          - row [ref=e24]:
+            - button "Ordenar por Publicação" [ref=e25] [cursor=pointer]: Publicação
+            - button "Ordenar por Ano" [ref=e26] [cursor=pointer]: Ano
+            - button "Ordenar por Escopo" [ref=e27] [cursor=pointer]: Escopo
+            - button "Ordenar por DOI" [ref=e28] [cursor=pointer]: DOI
+        - rowgroup [ref=e29]:
+          - row [ref=e30]:
+            - cell "Baterías de iones sodio" [ref=e31]
+            - cell "2024" [ref=e32]
+            - cell "Extração limitada; texto integral não confirmado" [ref=e33]
+            - cell "10.64876/radi.v24.52-58" [ref=e34]
+          - row [ref=e35]:
+            - 'cell "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=e36]'
+            - cell "2025" [ref=e37]
+            - cell "Extração limitada; texto integral não confirmado" [ref=e38]
+            - cell "10.26876/ikergazte.vi.05.25" [ref=e39]
+    - generic [ref=e41]:
+      - generic [ref=e42]: Fontes e estado da leitura
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - link "Baterías de iones sodio" [ref=e45] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - generic [ref=e46]: Leitura parcial
+        - generic [ref=e47]: Revista Argentina De Ingeniería · journal-article · Publicado em 2024-12-02
+        - generic [ref=e48]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=e49]: ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)
+        - group [ref=e50]:
+          - generic "Proveniência e publicação" [ref=e51] [cursor=pointer]
+        - generic [ref=e52]:
+          - link "Abrir fonte ↗" [ref=e53] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - link "Abrir texto recuperado ↗" [ref=e54] [cursor=pointer]:
+            - /url: https://radi.org.ar/index.php/radi/article/download/14/55
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - 'link "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=e57] [cursor=pointer]':
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - generic [ref=e58]: Leitura parcial
+        - generic [ref=e59]: IkerGazte. Nazioarteko ikerketa euskaraz · journal-article · Publicado em 2025-05-30
+        - generic [ref=e60]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=e61]: "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen"
+        - group [ref=e62]:
+          - generic "Proveniência e publicação" [ref=e63] [cursor=pointer]
+        - generic [ref=e64]:
+          - link "Abrir fonte ↗" [ref=e65] [cursor=pointer]:
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - link "Abrir texto recuperado ↗" [ref=e66] [cursor=pointer]:
+            - /url: https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580
+```

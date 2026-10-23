@@ -1,0 +1,11 @@
+### Result
+- [Screenshot of viewport](qa-artifacts\v597\mobile-320.png)
+### Ran Playwright code
+```js
+// Screenshot viewport and save it as qa-artifacts\v597\mobile-320.png
+await page.screenshot({
+  path: 'qa-artifacts\\v597\\mobile-320.png',
+  scale: 'css',
+  type: 'png'
+});
+```

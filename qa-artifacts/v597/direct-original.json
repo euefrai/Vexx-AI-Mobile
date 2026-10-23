@@ -1,0 +1,157 @@
+{
+  "scope": "DIRECT_EXTERNAL; URL from prior live discovery; not new search discovery",
+  "question": "Notícias de Salvador nos últimos sete dias",
+  "evidence": [
+    {
+      "id": "ev-1dcdc2bbc696",
+      "job_id": "rj-891c9007c414",
+      "fonte_id": "",
+      "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+      "titulo": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+      "dominio": "www.bahianoticias.com.br",
+      "acessado_em": "2026-10-23T19:00:35.772314+00:00",
+      "publicado_em": "2026-10-21T06:40:00.000-03:00",
+      "trecho": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi",
+      "localizacao": "",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "original": "{\"id\": \"\", \"url\": \"https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador\", \"titulo\": \"Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador\", \"content_scope\": \"page_text\", \"dominio\": \"www.bahianoticias.com.br\", \"texto_lido\": true, \"trecho_usado\": \"A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi\", \"access_state\": \"read\", \"acessado_em\": \"2026-10-23T19:00:35.772314+00:00\", \"vertical\": {\"kind\": \"news\", \"url\": \"https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador\", \"eligible\": true, \"verification\": \"PUBLISHED_REPORT\", \"retrieval_state\": \"ARTICLE_FOUND\", \"data_complete\": true, \"required_data\": [\"article_url\", \"article_text\", \"published_at\", \"location\", \"source\"], \"reasons\": [], \"data\": {\"published_at\": \"2026-10-21T06:40:00.000-03:00\"}}, \"publicado_em\": \"2026-10-21T06:40:00.000-03:00\", \"structured\": [], \"publicador\": \"Bahia Notícias\", \"imagens\": [\"https://www.bahianoticias.com.br/fotos/principal_noticias/322696/IMAGEM_NOTICIA_9.jpg?checksum=1792575381\", \"https://sb.scorecardresearch.com/p?c1=2&amp;c2=39232836&amp;cv=4.4.0&amp;cj=1\"], \"source_recovery\": {\"method\": \"previous_live_discovery\", \"state\": \"original_read\", \"final_url\": \"https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador\"}}",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "2026-10-21T06:40:00.000-03:00"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "texto_lido": true,
+      "content_scope": "page_text",
+      "access_state": "read",
+      "trecho_usado": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi",
+      "score": 0.167
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "ts": "2026-10-23T19:00:34.725413+00:00",
+      "agente": "orchestrator",
+      "tipo": "research_created",
+      "status": "ok",
+      "descricao": "Pesquisa criada (modo rapida).",
+      "meta": {
+        "modo": "rapida"
+      }
+    },
+    {
+      "seq": 2,
+      "ts": "2026-10-23T19:00:35.749710+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "final_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1067,
+        "read": true,
+        "published_at": "2026-10-21T06:40:00.000-03:00",
+        "excerpt": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi"
+      }
+    },
+    {
+      "seq": 3,
+      "ts": "2026-10-23T19:00:35.769959+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 4,
+          "images": 4,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 4,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 4,
+      "ts": "2026-10-23T19:00:35.773878+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-1dcdc2bb de www.bahianoticias.com.br.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 5,
+      "ts": "2026-10-23T19:00:35.774876+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: evidence_stored.",
+      "meta": {
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "final_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "stage": "evidence_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1067,
+        "read": true,
+        "published_at": "2026-10-21T06:40:00.000-03:00",
+        "excerpt": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi"
+      }
+    },
+    {
+      "seq": 6,
+      "ts": "2026-10-23T19:00:35.776134+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Lida www.bahianoticias.com.br (relevância 0.167).",
+      "meta": {}
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-23T19:00:35.782272+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (www.bahianoticias.com.br).",
+      "meta": {
+        "evidencia_id": "ev-1dcdc2bbc696",
+        "dominio": "www.bahianoticias.com.br",
+        "trecho": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a a",
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador"
+      }
+    }
+  ]
+}

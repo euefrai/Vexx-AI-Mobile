@@ -1,0 +1,16 @@
+### Result
+{
+  "width": 320,
+  "scroll": 320,
+  "fallbacks": 0,
+  "internalScroll": [
+    {
+      "client": 296,
+      "scroll": 565
+    }
+  ]
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({width:innerWidth,scroll:document.documentElement.scrollWidth,fallbacks:document.querySelectorAll(\'.jdui-fallback\').length,internalScroll:[...document.querySelectorAll(\'.jdui-scrollx\')].map(e=>({client:e.clientWidth,scroll:e.scrollWidth}))})');
+```

@@ -1,0 +1,164 @@
+{
+  "scope": "12 unique end-to-end research component scenarios; temporary SQLite, external network, not browser login",
+  "cases": [
+    {
+      "id": "news_ubata",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 4,
+      "media_discovered": 0,
+      "synthesis_approved": false,
+      "elapsed_s": 5.291,
+      "artifact": "live-final/news_ubata.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "news_salvador",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 3,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 5.802,
+      "artifact": "live-final/news_salvador.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "science_compare",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 15,
+      "synthesis_approved": false,
+      "elapsed_s": 23.814,
+      "artifact": "live-final/science_compare.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "pdf",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 4.499,
+      "artifact": "live-final/pdf.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "official",
+      "state": "PARTIAL",
+      "accepted_read_sources": 1,
+      "stored_sources": 1,
+      "media_discovered": 0,
+      "synthesis_approved": false,
+      "elapsed_s": 2.525,
+      "artifact": "live-final/official.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "images",
+      "state": "PARTIAL",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 5,
+      "synthesis_approved": false,
+      "elapsed_s": 2.101,
+      "artifact": "live-final/images.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "video",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 0,
+      "synthesis_approved": false,
+      "elapsed_s": 4.835,
+      "artifact": "live-final/video.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "conflicting",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 7.317,
+      "artifact": "live-final/conflicting.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "scarce",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 5,
+      "synthesis_approved": false,
+      "elapsed_s": 1.477,
+      "artifact": "live-final/scarce.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "multistep",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 0,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 5.143,
+      "artifact": "live-final/multistep.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "original",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 3,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 12.179,
+      "artifact": "live-final/original.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    },
+    {
+      "id": "news_salvador_city",
+      "state": "UNAVAILABLE",
+      "accepted_read_sources": 0,
+      "stored_sources": 3,
+      "media_discovered": 8,
+      "synthesis_approved": false,
+      "elapsed_s": 6.335,
+      "artifact": "live-model-city/news_salvador_city.json",
+      "media_note": "Discovery count only; generic media does not satisfy the question"
+    }
+  ],
+  "totals": {
+    "cases": 12,
+    "cases_with_accepted_read_source": 1,
+    "approved_assisted_syntheses": 0,
+    "fully_confirmed_answers": 0
+  },
+  "real_model": {
+    "artifact": "live-model-official/official.json",
+    "model": "poolside/laguna-s-2.1:free",
+    "calls": 1,
+    "approved": false,
+    "failure_detail": "quantity_mismatch"
+  },
+  "direct_external": {
+    "original_article": "direct-original.json",
+    "original_accepted_read": 1,
+    "pdfs": "direct-pdfs.json",
+    "pdfs_partially_read": 2,
+    "note": "previously discovered public URLs; do not add these to full-pipeline discovery success"
+  },
+  "not_measured": [
+    "universal factual accuracy",
+    "authenticated app Chrome E2E",
+    "physical mobile",
+    "real video analysis",
+    "successful full scientific comparison"
+  ]
+}

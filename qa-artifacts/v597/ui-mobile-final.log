@@ -1,0 +1,10 @@
+### Result
+{
+  "width": 320,
+  "root": 320,
+  "open": true
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => {document.body.style.zoom=\'1\';const wrap=document.querySelector(\'.jdui-scrollx\');wrap.scrollLeft=0;return {width:innerWidth,root:document.documentElement.scrollWidth,open:document.querySelector(\'details\').open};}');
+```

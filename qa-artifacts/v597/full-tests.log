@@ -1,0 +1,166 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 15%]
+............s........................................................... [ 20%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+....................................................F................... [ 51%]
+........s............................................................... [ 57%]
+........................................................................ [ 62%]
+...........................F............................................ [ 67%]
+........................................................................ [ 72%]
+....s..........s........................................................ [ 77%]
+........................................................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 93%]
+........................................................................ [ 98%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+_____________________ test_e2e_pesquisa_com_eventos_reais _____________________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-324/test_e2e_pesquisa_com_eventos_0')
+
+    def test_e2e_pesquisa_com_eventos_reais(tmp_path):
+        if shutil.which(sys.executable) is None:
+            pytest.skip("interpretador indispon�vel")
+        import importlib.util
+        if importlib.util.find_spec("uvicorn") is None:
+            pytest.skip("uvicorn ausente: e2e exige relay real")
+        porta = available_loopback_port()
+        env = dict(os.environ)
+        env["JULIA_USERNAME"] = "efrai"
+        env["JULIA_PASSWORD_HASH"] = os.environ["JULIA_PASSWORD_HASH"]
+        env["JULIA_SESSION_SECRET"] = "a" * 64
+        env["JULIA_AGENT_TOKEN"] = "b" * 64
+        env["JULIA_RELAY_URL"] = f"http://127.0.0.1:{porta}"
+        env["JULIA_SQLITE_PATH"] = str(tmp_path / "e2e.sqlite3")
+        env["HERMES_PROXY_URL"] = "http://127.0.0.1:9/v1"
+        raiz = str(Path(__file__).resolve().parents[1])
+        relay_log = tmp_path / "relay.log"
+        agent_log = tmp_path / "agent.log"
+        with LoggedProcess(
+            [sys.executable, "-m", "uvicorn", "server:app",
+             "--host", "127.0.0.1", "--port", str(porta)],
+            relay_log, cwd=raiz, env=env,
+        ):
+            _esperar(
+                f"http://127.0.0.1:{porta}/api/diag",
+                lambda c: True, 30.0, "relay",
+            )
+            with LoggedProcess(
+                [sys.executable, "pc_agent.py"],
+                agent_log, cwd=raiz, env=env,
+            ):
+                _esperar(
+                    f"http://127.0.0.1:{porta}/api/diag",
+                    lambda c: c.get("pc_online") is True, 30.0, "agente",
+                )
+                sess = _call(
+                    porta, "/api/login",
+                    {"username": "efrai", "password": "strong-example-password"},
+                )
+                csrf = sess["csrf"]
+    
+                def call(path, data=None, csrf_=None):
+                    return _call(porta, path, data, csrf_ or csrf)
+    
+                inicio = time.monotonic()
+                r = call("/api/research/start", {"objetivo": "fotoss�ntese plantas",
+                                                 "conv": "e2e-1", "modo": "rapida"})
+                job = r["job_id"]
+                assert r["modo"] == "rapida"
+                resumo, eventos = {}, []
+                prazo = time.monotonic() + 30
+                while time.monotonic() < prazo:
+                    st = call(f"/api/research/status?job_id={job}&apos_seq=0")
+                    resumo = st["resumo"]
+                    for ev in st["eventos"]:
+                        if ev["seq"] not in {e["seq"] for e in eventos}:
+                            eventos.append(ev)
+                    tipos = {e["tipo"] for e in eventos}
+                    if (resumo["status"] in ("concluida", "falhou", "interrompida")
+                            and "research_completed" in tipos):
+                        break
+                    time.sleep(0.2)
+                dur = time.monotonic() - inicio
+>               assert resumo["status"] == "concluida", resumo
+E               AssertionError: {'id': 'rj-3bc4c68f7a5b', 'status': 'interrompida', 'modo': 'rapida', 'objetivo': 'fotoss�ntese plantas', ...}
+E               assert 'interrompida' == 'concluida'
+E                 
+E                 - concluida
+E                 + interrompida
+
+tests\test_research_e2e.py:128: AssertionError
+________ test_pdf_uses_existing_safe_reader_and_reports_parser_failure ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A8066B7770>
+
+    def test_pdf_uses_existing_safe_reader_and_reports_parser_failure(monkeypatch):
+        import source_check
+        import docs_agent
+        monkeypatch.setattr(source_check, '_baixar_bytes', lambda *a, **k: ('https://docs.example/source.pdf', 200, 'application/pdf', b'%PDF-fixture'))
+        monkeypatch.setattr(docs_agent, 'extrair_texto', lambda *a: 'Python asyncio supports concurrent tasks. ' * 10)
+>       result = research._recuperar_um(hit('Python asyncio', 'https://docs.example/source.pdf'), None, 2, 'Python asyncio')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_search_coverage_v59.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research.py:799: in _recuperar_um
+    texto = docs_agent._extrair_pdf(raw, max_pages=12, max_chars=MAX_TEXTO_PAGINA)[:MAX_TEXTO_PAGINA]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+docs_agent.py:279: in _extrair_pdf
+    doc = pdfium.PdfDocument(io.BytesIO(raw))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.venv\Lib\site-packages\pypdfium2\_helpers\document.py:76: in __init__
+    self.raw, to_hold, to_close = _open_pdf(self._input, self._password, self._autoclose)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+input_data = <_io.BytesIO object at 0x000001A80713A430>, password = None
+autoclose = False
+
+    def _open_pdf(input_data, password, autoclose):
+    
+        to_hold, to_close = (), ()
+        if password is not None:
+            password = (password+"\x00").encode("utf-8")
+    
+        if isinstance(input_data, Path):
+            pdf = pdfium_c.FPDF_LoadDocument((str(input_data)+"\x00").encode("utf-8", errors=_ENC_ERRHANDLER), password)
+        elif isinstance(input_data, (bytes, ctypes.Array)):
+            pdf = pdfium_c.FPDF_LoadMemDocument64(input_data, len(input_data), password)
+            to_hold = (input_data, )
+        elif pdfium_i.is_stream(input_data, "r"):
+            bufaccess, to_hold = pdfium_i.get_bufreader(input_data)
+            if autoclose:
+                to_close = (input_data, )
+            pdf = pdfium_c.FPDF_LoadCustomDocument(bufaccess, password)
+        else:
+            raise TypeError(f"Invalid input type '{type(input_data).__name__}'")
+    
+        if pdfium_c.FPDF_GetPageCount(pdf) < 1:
+            err_code = pdfium_c.FPDF_GetLastError()
+>           raise PdfiumError(f"Failed to load document (PDFium: {pdfium_i.ErrorToStr.get(err_code)}).", err_code=err_code)
+E           pypdfium2._helpers.misc.PdfiumError: Failed to load document (PDFium: Data format error).
+
+..\.venv\Lib\site-packages\pypdfium2\_helpers\document.py:591: PdfiumError
+------------------------------ Captured log call ------------------------------
+WARNING  pypdf._reader:_utils.py:509 EOF marker not found
+WARNING  JULIA-docs:docs_agent.py:276 pypdf falhou (Stream has ended unexpectedly), tentando pypdfium2
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_research_e2e.py::test_e2e_pesquisa_com_eventos_reais - Asse...
+FAILED tests/test_search_coverage_v59.py::test_pdf_uses_existing_safe_reader_and_reports_parser_failure
+2 failed, 1381 passed, 4 skipped, 2 warnings in 153.36s (0:02:33)

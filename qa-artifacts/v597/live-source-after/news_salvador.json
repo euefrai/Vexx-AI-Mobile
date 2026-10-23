@@ -1,0 +1,1546 @@
+{
+  "id": "news_salvador",
+  "route": "research",
+  "question": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Salvador\" \"bahia\" notícias",
+    "domain": "news",
+    "original_request": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+    "resolved_request": "Quais notícias aconteceram em Salvador, Bahia, entre 2026-10-16 e 2026-10-23?",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "location": "Salvador",
+      "region": "bahia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T18:52:48.587186+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-eb47c4f4b152",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-fa01a942b7f5",
+          "ev-f68a28a01384",
+          "ev-8c8b49bc2640"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-fa01a942b7f5",
+            "title": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+            "published_at": "Fri, 23 Oct 2026 12:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-f68a28a01384",
+            "title": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+            "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-8c8b49bc2640",
+            "title": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+            "published_at": "Thu, 22 Oct 2026 20:20:00 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "ab4076df953944ee324e",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-eb47c4f4b152",
+        "statement": "Investigar se: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-fa01a942b7f5",
+          "ev-f68a28a01384",
+          "ev-8c8b49bc2640"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "quais noticias aconteceram em salvador bahia nos ultimos sete dias": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3012
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-8c8b49bc2640",
+        "ev-f68a28a01384",
+        "ev-fa01a942b7f5"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-e87c03d6b0a6",
+        "type": "image",
+        "title": "Thumbnail",
+        "url": "https://www.bahianoticias.com.br/fotos/principal_noticias/322696/IMAGEM_NOTICIA_9.jpg?checksum=1792575381",
+        "final_url": "https://www.bahianoticias.com.br/fotos/principal_noticias/322696/IMAGEM_NOTICIA_9.jpg?checksum=1792575381",
+        "source_title": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "source_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "publisher": "www.bahianoticias.com.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Thumbnail",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-55528230e345",
+        "type": "image",
+        "title": "Marca Bahia Notícias",
+        "url": "https://www.bahianoticias.com.br/assets/images/marca-bn.svg",
+        "final_url": "https://www.bahianoticias.com.br/assets/images/marca-bn.svg",
+        "source_title": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "source_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "publisher": "www.bahianoticias.com.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Marca Bahia Notícias",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-75c798ec075c",
+        "type": "image",
+        "title": "Google News",
+        "url": "https://www.bahianoticias.com.br/assets/images/google.svg",
+        "final_url": "https://www.bahianoticias.com.br/assets/images/google.svg",
+        "source_title": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "source_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "publisher": "www.bahianoticias.com.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Google News",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-32914831c88a",
+        "type": "image",
+        "title": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "url": "https://www.bahianoticias.com.br/_next/image?url=https%3A%2F%2Fwww.bahianoticias.com.br%2Ffotos%2Fprincipal_noticias%2F322696%2FIMAGEM_NOTICIA_9.jpg%3Fchecksum%3D1792575381&w=3840&q=75",
+        "final_url": "https://www.bahianoticias.com.br/_next/image?url=https%3A%2F%2Fwww.bahianoticias.com.br%2Ffotos%2Fprincipal_noticias%2F322696%2FIMAGEM_NOTICIA_9.jpg%3Fchecksum%3D1792575381&w=3840&q=75",
+        "source_title": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "source_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "publisher": "www.bahianoticias.com.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-2a3290043183",
+        "type": "image",
+        "title": "Salvador - hotéis, dicas, onde comer, vida noturna, quando ir, o que fazer, fotos, mapa, pontos turísticos, como chegar, passagens aéreas e avaliações",
+        "url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1700180/salvador-16-c.jpg",
+        "final_url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1700180/salvador-16-c.jpg",
+        "source_title": "Guia Melhores Destinos",
+        "source_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "publisher": "imgmd.net",
+        "date": "2025-04-07T23:59:05-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Salvador - hotéis, dicas, onde comer, vida noturna, quando ir, o que fazer, fotos, mapa, pontos turísticos, como chegar, passagens aéreas e avaliações",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c4acf857ed9b",
+        "type": "image",
+        "title": "Ícone Melhores Destinos",
+        "url": "https://guia.melhoresdestinos.com.br/assets/icon/icone-app.png",
+        "final_url": "https://guia.melhoresdestinos.com.br/assets/icon/icone-app.png",
+        "source_title": "Guia Melhores Destinos",
+        "source_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "publisher": "guia.melhoresdestinos.com.br",
+        "date": "2025-04-07T23:59:05-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Ícone Melhores Destinos",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-034910fde54e",
+        "type": "image",
+        "title": "Salvador",
+        "url": "https://imgmd.net/images/v1/guia/2480219/salvador.jpg",
+        "final_url": "https://imgmd.net/images/v1/guia/2480219/salvador.jpg",
+        "source_title": "Guia Melhores Destinos",
+        "source_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "publisher": "imgmd.net",
+        "date": "2025-04-07T23:59:05-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-1016bea494e4",
+        "type": "image",
+        "title": "Salvador",
+        "url": "https://imgmd.net/images/v1/guia/2490782/salvador.jpg",
+        "final_url": "https://imgmd.net/images/v1/guia/2490782/salvador.jpg",
+        "source_title": "Guia Melhores Destinos",
+        "source_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "publisher": "imgmd.net",
+        "date": "2025-04-07T23:59:05-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-8c8b49bc2640",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+      "titulo": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:52:52.845077+00:00",
+      "publicado_em": "Thu, 22 Oct 2026 20:20:00 GMT",
+      "trecho": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 20:20:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-f68a28a01384",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+      "titulo": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:52:52.838644+00:00",
+      "publicado_em": "Thu, 22 Oct 2026 03:00:00 GMT",
+      "trecho": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-fa01a942b7f5",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+      "titulo": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:52:52.832018+00:00",
+      "publicado_em": "Fri, 23 Oct 2026 12:00:00 GMT",
+      "trecho": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 12:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:52:51.643083+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Quais notícias aconteceram em Salvador, Bahia, nos últimos s': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (\"Salvador\" \"bahia\" notícias)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (\"Salvador\" \"bahia\" notícias)",
+          "bing: 6 resultados (\"Salvador\" \"bahia\" notícias)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Salvador\" \"bahia\" notícias)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 1 artigo(s) candidato(s), leitura pendente",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:52:52.677611+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+        "final_url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2002-11-14T15:57:51Z",
+        "excerpt": "Bay of All the Saints\") is a and of the of . Situated in the in the , Salvador is recognized throughout the country and internationally for its , , and . The African influence in many cultural aspects of the city makes it a center of culture. As the of , the city is in the . Its foundation in 1549 by took place on account of the implementation of the by the . Salvador : Brazilian Portuguese"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:52:52.713656+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2025-04-07T23:59:05-03:00",
+        "excerpt": "animação. Quem deseja fugir dos dias nublados deve evitar os meses de abril e maio, quando o tempo instável pode atrapalhar os planos de praia. Se a sua ideia é ter dias de sol, mas também fugir do movimento da alta temporada de verão, considere visitar Salvador nos meses de setembro, outubro e novembro. Veja mais dicas de . quando ir a Salvador O que fazer em Salvador: principais pontos"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:52:52.800972+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "final_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1067,
+        "read": true,
+        "published_at": "2026-10-21T06:40:00.000-03:00",
+        "excerpt": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:52:52.804412+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 4,
+          "images": 4,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 4,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T18:52:52.808476+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "final_url": "https://www.bahianoticias.com.br/noticia/322696-adolescente-desaparecida-apos-sair-de-escola-no-itaigara-e-localizada-pela-policia-em-salvador",
+        "stage": "relevance_rejected",
+        "code": "SOURCE_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 1067,
+        "read": true,
+        "published_at": "2026-10-21T06:40:00.000-03:00",
+        "excerpt": "A estudante Maria Antônia Silva Santos, de 16 anos, foi localizada com vida após ter sido dada como desaparecida na tarde de terça-feira (20), ao deixar uma unidade de ensino privada no bairro do Itaigara, em Salvador. Segundo informações divulgadas pela família na manhã desta quarta-feira (21), a adolescente foi encontrada com vida ainda durante a madrugada. A localização da adolescente foi"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T18:52:52.809834+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-23T18:52:52.811132+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-23T18:52:52.819848+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2025-04-07T23:59:05-03:00",
+        "excerpt": "animação. Quem deseja fugir dos dias nublados deve evitar os meses de abril e maio, quando o tempo instável pode atrapalhar os planos de praia. Se a sua ideia é ter dias de sol, mas também fugir do movimento da alta temporada de verão, considere visitar Salvador nos meses de setembro, outubro e novembro. Veja mais dicas de . quando ir a Salvador O que fazer em Salvador: principais pontos"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-23T18:52:52.821624+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-23T18:52:52.830815+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+        "final_url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2002-11-14T15:57:51Z",
+        "excerpt": "Bay of All the Saints\") is a and of the of . Situated in the in the , Salvador is recognized throughout the country and internationally for its , , and . The African influence in many cultural aspects of the city makes it a center of culture. As the of , the city is in the . Its foundation in 1549 by took place on account of the implementation of the by the . Salvador : Brazilian Portuguese"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-23T18:52:52.831518+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-23T18:52:52.832857+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-fa01a942 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:52:52.833421+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3",
+        "final_url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Fri, 23 Oct 2026 12:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-23T18:52:52.834028+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-23T18:52:52.837935+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-fa01a942b7f5",
+        "dominio": "news.google.com",
+        "trecho": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1"
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-23T18:52:52.839794+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-f68a28a0 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-23T18:52:52.840345+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk",
+        "final_url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Thu, 22 Oct 2026 03:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-23T18:52:52.840900+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-23T18:52:52.844419+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-f68a28a01384",
+        "dominio": "news.google.com",
+        "trecho": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJ"
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-23T18:52:52.846196+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-8c8b49bc de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-23T18:52:52.846740+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ",
+        "final_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Thu, 22 Oct 2026 20:20:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-23T18:52:52.847602+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-23T18:52:52.850816+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-8c8b49bc2640",
+        "dominio": "news.google.com",
+        "trecho": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHV"
+      }
+    },
+    {
+      "seq": 40,
+      "ts": "2026-10-23T18:52:52.868894+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-fa01a942b7f5",
+                  "title": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+                  "published_at": "Fri, 23 Oct 2026 12:00:00 GMT"
+                },
+                {
+                  "id": "ev-f68a28a01384",
+                  "title": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+                  "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+                },
+                {
+                  "id": "ev-8c8b49bc2640",
+                  "title": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+                  "published_at": "Thu, 22 Oct 2026 20:20:00 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+              "dominio": "news.google.com",
+              "data": "Thu, 22 Oct 2026 20:20:00 GMT",
+              "trecho": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+              "dominio": "news.google.com",
+              "data": "Thu, 22 Oct 2026 03:00:00 GMT",
+              "trecho": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+              "dominio": "news.google.com",
+              "data": "Fri, 23 Oct 2026 12:00:00 GMT",
+              "trecho": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?.",
+              "markdown": "**HIPÓTESE:** Investigar se: Quais notícias aconteceram em Salvador, Bahia, nos últimos sete dias?.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-eb47c4f4b152&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-eb47c4f4b152&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-eb47c4f4b152&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 3,
+      "ok": 3,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 411.1
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 463.2
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 687.9
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Adolescente desaparecida após sair de escola no Itaigara é localizada pela polícia em Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOdzF1UEwycVkyZ2hLQmh2OGtXVThmMHZ1WDhrVVlKQkFNcmc0RG1nb010VzJpRWxvSEgzZldPUHJkenJzZVFrY2xyeDFfWUk3RHNOdzZrRjVwWm9BR1Exdml4NmlGNVpJWUl1ZE80WGZwSjZsajVsTkVzRzZQb2pxMzRpRXVmRlR3TGtWOW5tM2dpY3JKUGd2NGhJdmI2VVpUbnBkSXdFaThGNjhwTjVYTlV5Rng5VVF5ZEItZUh2dkpHdndaaFFqTkQ3VVdfeVZDbW5KZGFqemVmZw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 21 Oct 2026 09:40:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ivete Sangalo é anunciada no Réveillon de Fortaleza; artista comandará virada em Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQXzVDNmdJX1RVa2dvVElfNjhIekM0WHNyZ3JsQ0RDQTJ6TUN2Q0xNcTV2TjB4UnRYaE1UQ2NwQlpyYTVEeFdtQjNKdGlrejdjcEExcEN2bHhIamFTcVd0X1EtcEQyUGhHbFppc01kM1o0SFktMm1ZVGtSd2dpRmRUSm9VUWxRWDhfOEpYYjY3NzJlNk9Ra1hyR1V4VnRtSnhVbFpfbGxOUXRFZDJIeW1ib25LRUNsT0J4ckstb2RhaU54MDVWeGE0X3FoR2ZYUUF5YWdjblJxTlpaODN3?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 12:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Secretário alerta que custos do novo Balbinão podem elitizar o esporte em Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdnZxSVZfNm1TUTBVQUw0di04QUZtb1d2UVpYcDNYZVB4S01DWmc3d25VN1pCMEVsM0pxYTk0Ymw5NXk3LWIwWEN5WlJCZG1vSEwtV3ZOMk43ekg1RVBXSVoxT0tObGt2S1VPaW9yYWpMT2pGcVJCSk5rc1IxUE5mZFUycVpfb3UtWXZlUk5VQ19HMUFGTFhRNkNMSEJFbnhyaEduQU4yZ1J4bVVmbzYxdjhDLXN4Rm5Cb1hXM3RHSnVXVTF0dU1lT19iWDhEMGtpSG9YS0dXRG1HODdiMFU1cUhGS2VwcDZHU0poVU9pSkEwRkJSeDQ3dW93YmlMMUk?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 03:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Empresário é detido de cueca e critica abordagem policial na Boca do Rio, em Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUZSdEVBVWJoMVd1RTE2TE42dHItQWIzdGxZMkNJUFpxaTI1UkJfZ0lpMjg4U0t1ZmRhMmt3bkl0eENzVmNUM2xOUl9BVEdmS2h6aUpIWGNLLS1EV3RscHVRRm5OVWtrVHhSZ3hRUmlBVExBSHVXZkhmcnhwZTgtdGcwTHc5clB1TzZRbWxjci1ZVXRFa1NNUTYwXy0tRlhFaWR3RXYxaGxWRzVidEJYTGN0NDNXWExmNUZ1d2VwVC1xRnJ2QmpibDZ4TVQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 20:20:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "SAC Itinerante realiza atendimento da nova carteira de identidade em novo local de Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQTzdhd3Y0Um90eDNFNkNFN184QW90MlBUczEwTU1wYnJwOGo2UUdSNXNybTA4N2VDUVl4WGVDVGdoemthNnR2MjVGV0JzLURBSVZ3Mmh3SVBSaHBvTXBqT25JVXRCcDg1allrdXZQUFlOMWJnbkdka1ZSb1dVbzdybC1NV0ZIWFFKeTRGSVBrdzZPMjV3VjZhVUhJclFiaXRDMmZQU0xKcjZnbzNISGc3aW1ES3pCNGMwa29SLWNEaTdtRlJRR1p4Wnd4RDE0RzEtYS1pZGZB?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 21 Oct 2026 19:40:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Deputado do PL realiza panfletagem em shopping de Salvador em apoio à Flávio Bolsonaro - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQRHFHck9MNUVvWXhoZTYyclFPZkxkRUY5Q0kxY3VrbGNzajlaQnhWcWZoS18yNlh6dUwyM2dHYUNBSzNlUnEySDR0dVRkZTZsTlVYVHg5VHhEcTNYYmVnSmxCeHphS2tPd29FdmxVMTBFcE8wRC1rVG5oY0tiaUtFa3ZhZ21xRFlnakR0ckVLdGdiNnZOQUhrMkNtZkctNC1teVRBZU9lRzA5NV84TFgzSjRWX3hFM2JDYklBYlJZa0xfdG9JNFljc1pZZ0lLVHM?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 21 Oct 2026 00:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Salvador",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 13:42:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura Municipal de Salvador",
+      "url": "https://salvador.ba.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 07:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Tudo que você precisa saber para curtir a capital da Bahia!",
+      "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador BA: 20 Pontos turísticos e praias",
+      "url": "https://www.viagensecaminhos.com/salvador-ba/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 16:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador, Bahia - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:20:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador: 20 passeios imperdíveis - Mala de Aventuras",
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-salvador/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:26:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Adolescência – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Adolesc%C3%AAncia",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Saúde do Adolescente e Jovens — Ministério da Saúde",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-do-adolescente",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 28 out. 2023 16:22:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Adolescência: o que é, puberdade e características principais",
+      "url": "https://www.suapesquisa.com/ecologiasaude/adolescencia.htm",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ivete Sangalo – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Ivete_Sangalo",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:36:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ivete Sangalo | Site Oficial",
+      "url": "https://www.ivetesangalo.com/inicial/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 04:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ivete Sangalo - YouTube",
+      "url": "https://www.youtube.com/channel/UC4FK6Ki675LB-rkbD8O7ayg",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 07:58:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 4.315
+}

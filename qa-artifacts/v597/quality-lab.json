@@ -1,0 +1,392 @@
+{
+  "report_schema": "julia-research-quality-report/1",
+  "dataset": {
+    "dataset_id": "julia-research-quality-fixture",
+    "version": "1.0.0",
+    "sha256": "9942a2587743a883debd407da68be0d884475561aab8d95959b3fe84a05ad314",
+    "truth_basis": "synthetic_local_fixture"
+  },
+  "execution": {
+    "kind": "local_frozen_document_retrieval",
+    "retriever": "docs_agent.trechos_relevantes",
+    "database": "temporary SQLite; owner-scoped fixture data only",
+    "python": "3.14.4",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "sqlite": "3.50.4",
+    "k": 5
+  },
+  "counts": {
+    "documents": 11,
+    "cases": 8,
+    "queries": 9
+  },
+  "timing_ms": {
+    "total": 223.268,
+    "extraction_mean": 7.744,
+    "retrieval_mean": 0.343,
+    "retrieval_max": 0.915,
+    "peak_python_kb": 8.4
+  },
+  "retrieval_metrics": {
+    "precision_at_k": 0.266667,
+    "recall_at_k": 1.0,
+    "mrr_at_k": 1.0,
+    "ndcg_at_k": 1.0,
+    "duplicate_rate_at_k": 0.0
+  },
+  "by_category": {
+    "adversarial_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "contradiction_detection": {
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "document_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "factual_qa": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "multi_hop_research": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 2
+    },
+    "numerical_reasoning": {
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "source_attribution": {
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    },
+    "temporal_research": {
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "ndcg_at_k": 1.0,
+      "duplicate_rate_at_k": 0.0,
+      "case_count": 1,
+      "query_count": 1
+    }
+  },
+  "source_checks": [
+    {
+      "case_id": "contradiction-gh-b",
+      "category": "contradiction_detection",
+      "conflict_evidence_complete": true
+    },
+    {
+      "case_id": "source-run-r4",
+      "category": "source_attribution",
+      "primary_source_id": "primary-run-r4.html",
+      "primary_source_retrieved": true,
+      "republication_only": false
+    },
+    {
+      "case_id": "temporal-gh-e",
+      "category": "temporal_research",
+      "latest_source_id": "new-gh-e.txt",
+      "latest_source_retrieved": true
+    }
+  ],
+  "source_quality_metrics": {
+    "primary_source": {
+      "cases": 1,
+      "retrieved": 1,
+      "recall": 1.0,
+      "republication_only": 0
+    },
+    "latest_temporal_source": {
+      "cases": 1,
+      "retrieved": 1,
+      "recall": 1.0
+    },
+    "contradiction_evidence_pair": {
+      "cases": 1,
+      "complete": 1,
+      "recall": 1.0
+    },
+    "independence": "not scored: domain or URL difference is not evidence of independent origin"
+  },
+  "optimization_recommendations": [
+    {
+      "signal": "low_precision_with_recall",
+      "recommendation": "Review ranking specificity and irrelevant top-K results without reducing coverage."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "factual-gh-a-interval",
+      "category": "factual_qa",
+      "queries": [
+        {
+          "query": "GH-A nutrient solution replacement interval",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "protocol-gh-a"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-27dd4cabc6af:0"
+          ],
+          "elapsed_ms": 0.915
+        }
+      ]
+    },
+    {
+      "case_id": "multi-hop-gh-c-yield",
+      "category": "multi_hop_research",
+      "queries": [
+        {
+          "query": "GH-C treatment methods",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "study-gh-c-treatment"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-d24debce7366:0"
+          ],
+          "elapsed_ms": 0.235
+        },
+        {
+          "query": "GH-C treatment yield results",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "study-gh-c-yield"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-2bbfa0ef2fac:0"
+          ],
+          "elapsed_ms": 0.209
+        }
+      ]
+    },
+    {
+      "case_id": "contradiction-gh-b",
+      "category": "contradiction_detection",
+      "queries": [
+        {
+          "query": "GH-B trial B-1 calibration interval",
+          "metrics": {
+            "precision_at_k": 0.4,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 2,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "official-gh-b",
+            "notebook-gh-b"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-910f66c672d6:0",
+            "doc-ba8ec8b98aae:0"
+          ],
+          "elapsed_ms": 0.215
+        }
+      ]
+    },
+    {
+      "case_id": "source-run-r4",
+      "category": "source_attribution",
+      "queries": [
+        {
+          "query": "Run R-4 original measurement published",
+          "metrics": {
+            "precision_at_k": 0.4,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 2,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "primary-run-r4.html",
+            "reprint-run-r4.txt"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-9dd45c610b58:0",
+            "doc-84f02b676339:0"
+          ],
+          "elapsed_ms": 0.225
+        }
+      ]
+    },
+    {
+      "case_id": "document-table-gh-d",
+      "category": "document_research",
+      "queries": [
+        {
+          "query": "GH-D plot period output units",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "table-gh-d.csv"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-2cd6120056c5:0"
+          ],
+          "elapsed_ms": 0.204
+        }
+      ]
+    },
+    {
+      "case_id": "numerical-gh-d",
+      "category": "numerical_reasoning",
+      "queries": [
+        {
+          "query": "north 2025-Q1 2025-Q2 output units",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "table-gh-d.csv"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-2cd6120056c5:0"
+          ],
+          "elapsed_ms": 0.198
+        }
+      ]
+    },
+    {
+      "case_id": "temporal-gh-e",
+      "category": "temporal_research",
+      "queries": [
+        {
+          "query": "GH-E procedure revision ventilation interval 2025",
+          "metrics": {
+            "precision_at_k": 0.4,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 2,
+            "relevant_count": 2
+          },
+          "retrieved_document_ids": [
+            "new-gh-e.txt",
+            "old-gh-e.txt"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-bc3256db204d:0",
+            "doc-e55501c88782:0"
+          ],
+          "elapsed_ms": 0.674
+        }
+      ]
+    },
+    {
+      "case_id": "adversarial-gh-f",
+      "category": "adversarial_research",
+      "queries": [
+        {
+          "query": "GH-F table sensors inspected",
+          "metrics": {
+            "precision_at_k": 0.2,
+            "recall_at_k": 1.0,
+            "mrr_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "duplicate_rate_at_k": 0.0,
+            "retrieved_count_at_k": 1,
+            "relevant_count": 1
+          },
+          "retrieved_document_ids": [
+            "adversarial-gh-f.txt"
+          ],
+          "retrieved_chunk_ids": [
+            "doc-c6e7e090b6d3:0"
+          ],
+          "elapsed_ms": 0.213
+        }
+      ]
+    }
+  ],
+  "not_measured": [
+    "semantic claim correctness",
+    "web search quality",
+    "source independence beyond curated fixture labels",
+    "LLM generation quality",
+    "CPU time and process-wide RSS (peak Python KB is measured)",
+    "token consumption",
+    "real-world factual accuracy"
+  ]
+}

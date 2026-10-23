@@ -1,0 +1,1551 @@
+{
+  "id": "news_salvador_city",
+  "route": "research",
+  "question": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Salvador\" notícias",
+    "domain": "news",
+    "original_request": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+    "resolved_request": "Quais notícias aconteceram em Salvador entre 2026-10-16 e 2026-10-23?",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "location": "Salvador"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-23T18:58:40.666933+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Quais notícias aconteceram em Salvador nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-81b96516b30d",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Quais notícias aconteceram em Salvador nos últimos sete dias?.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-455ddcd5621a",
+          "ev-f8bb7a39456a",
+          "ev-5d6f120670e8"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-455ddcd5621a",
+            "title": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+            "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-f8bb7a39456a",
+            "title": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador - Bnews",
+            "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+            "published_at": "Fri, 23 Oct 2026 15:14:00 GMT"
+          },
+          {
+            "evidence_id": "ev-5d6f120670e8",
+            "title": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara - A TARDE",
+            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+            "domain": "news.google.com",
+            "relation": "REQUIRES_VERIFICATION",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+            "published_at": "Fri, 23 Oct 2026 16:03:45 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Quais notícias aconteceram em Salvador nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "2ea84e3386b5794f1ad3",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-81b96516b30d",
+        "statement": "Investigar se: Quais notícias aconteceram em Salvador nos últimos sete dias?.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-455ddcd5621a",
+          "ev-f8bb7a39456a",
+          "ev-5d6f120670e8"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Quais notícias aconteceram em Salvador nos últimos sete dias?."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "quais noticias aconteceram em salvador nos ultimos sete dias": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 4062
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 3,
+          "total_evidence": 3,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-455ddcd5621a",
+        "ev-5d6f120670e8",
+        "ev-f8bb7a39456a"
+      ],
+      "synthesis_attempted": true,
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quais notícias aconteceram em Salvador nos últimos sete dias fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-31eccf62321b",
+        "type": "image",
+        "title": "município capital do estado brasileiro da Bahia",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Salvador_BA_%28cropped%29_2.jpg/1280px-Salvador_BA_%28cropped%29_2.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Salvador_BA_%28cropped%29_2.jpg/1280px-Salvador_BA_%28cropped%29_2.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-dee621472346",
+        "type": "image",
+        "title": "Wikipédia",
+        "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+        "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "pt.wikipedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Wikipédia",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-53b998ad6534",
+        "type": "image",
+        "title": "Bandeira de Salvador",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Bandeira_de_Salvador.svg/120px-Bandeira_de_Salvador.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Bandeira_de_Salvador.svg/120px-Bandeira_de_Salvador.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Bandeira de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-4ee9b36ad574",
+        "type": "image",
+        "title": "Brasão de armas de Salvador",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Bras%C3%A3o_de_Salvador.svg/120px-Bras%C3%A3o_de_Salvador.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Bras%C3%A3o_de_Salvador.svg/120px-Bras%C3%A3o_de_Salvador.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Brasão de armas de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-f6671b565631",
+        "type": "image",
+        "title": "Localização de Salvador na Bahia",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Brazil_Bahia_Salvador_location_map.svg/330px-Brazil_Bahia_Salvador_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Brazil_Bahia_Salvador_location_map.svg/330px-Brazil_Bahia_Salvador_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Localização de Salvador na Bahia",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-707443562f4f",
+        "type": "image",
+        "title": "Salvador está localizado em: Brasil",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Salvador está localizado em: Brasil",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-5d8591f36e04",
+        "type": "image",
+        "title": "Mapa",
+        "url": "https://maps.wikimedia.org/img/osm-intl,12,-13,-38.516666666667,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Salvador&revid=73264955&groups=_cdf794b0606dbdce4977246c30de807a549d2318&parser=parsoid",
+        "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-13,-38.516666666667,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Salvador&revid=73264955&groups=_cdf794b0606dbdce4977246c30de807a549d2318&parser=parsoid",
+        "source_title": "município capital do estado brasileiro da Bahia",
+        "source_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "publisher": "maps.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Mapa",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-5a84e9557458",
+        "type": "image",
+        "title": "Logo Prefeitura de Salvador",
+        "url": "https://cdnsemit.salvador.ba.gov.br/geral/templates/header_prefeitura/logo_pms_topo.png",
+        "final_url": "https://cdnsemit.salvador.ba.gov.br/geral/templates/header_prefeitura/logo_pms_topo.png",
+        "source_title": "Prefeitura Municipal de Salvador",
+        "source_url": "https://salvador.ba.gov.br/",
+        "publisher": "cdnsemit.salvador.ba.gov.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo Prefeitura de Salvador",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-455ddcd5621a",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+      "titulo": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:58:46.927013+00:00",
+      "publicado_em": "Thu, 22 Oct 2026 03:00:00 GMT",
+      "trecho": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-5d6f120670e8",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+      "titulo": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara - A TARDE",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:58:46.941609+00:00",
+      "publicado_em": "Fri, 23 Oct 2026 16:03:45 GMT",
+      "trecho": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 16:03:45 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "A TARDE",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-f8bb7a39456a",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+      "titulo": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador - Bnews",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-23T18:58:46.935063+00:00",
+      "publicado_em": "Fri, 23 Oct 2026 15:14:00 GMT",
+      "trecho": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 15:14:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bnews",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": "poolside/laguna-s-2.1:free",
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T18:58:44.811279+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Quais notícias aconteceram em Salvador nos últimos sete dias': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (\"Salvador\" notícias)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (\"Salvador\" notícias)",
+          "bing: 6 resultados (\"Salvador\" notícias)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Salvador\" notícias)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 1 artigo(s) candidato(s), leitura pendente",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T18:58:46.595021+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2025-04-07T23:59:05-03:00",
+        "excerpt": "animação. Quem deseja fugir dos dias nublados deve evitar os meses de abril e maio, quando o tempo instável pode atrapalhar os planos de praia. Se a sua ideia é ter dias de sol, mas também fugir do movimento da alta temporada de verão, considere visitar Salvador nos meses de setembro, outubro e novembro. Veja mais dicas de . quando ir a Salvador O que fazer em Salvador: principais pontos"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T18:58:46.617263+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://salvador.ba.gov.br/",
+        "final_url": "https://salvador.ba.gov.br/",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 119,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 07:06:00 GMT",
+        "excerpt": "Bruno Reis repudia violência sexual contra agente de endemias em Salvador: “Episódio revoltante, covarde e inaceitável”"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T18:58:46.909922+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/Salvador",
+        "final_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2004-09-03T11:45:35Z",
+        "excerpt": "circunstância que deu nome à , à e ao dos quais foi e é capital. Ao longo do tempo, designações variaram entre essas duas referências: , , , , \"cidade da Bahia\". Na , por exemplo, as denominações \"\" e \"\" perduram ainda para nomear o município. Jesus Cristo Salvador cristianismo Império Português 65 [ ] hierotopônimo toponímia do Brasil São Salvador da Bahia de Todos os Santos 66 [ ] baía na qual"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-23T18:58:46.913383+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "7 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 7,
+        "summary": {
+          "total": 7,
+          "images": 7,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 7,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T18:58:46.918384+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/Salvador",
+        "final_url": "https://pt.wikipedia.org/wiki/Salvador",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2004-09-03T11:45:35Z",
+        "excerpt": "circunstância que deu nome à , à e ao dos quais foi e é capital. Ao longo do tempo, designações variaram entre essas duas referências: , , , , \"cidade da Bahia\". Na , por exemplo, as denominações \"\" e \"\" perduram ainda para nomear o município. Jesus Cristo Salvador cristianismo Império Português 65 [ ] hierotopônimo toponímia do Brasil São Salvador da Bahia de Todos os Santos 66 [ ] baía na qual"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T18:58:46.919241+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-23T18:58:46.920232+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "1 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 1,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-23T18:58:46.921231+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://salvador.ba.gov.br/",
+        "final_url": "https://salvador.ba.gov.br/",
+        "stage": "relevance_rejected",
+        "code": "INCOMPLETE_EVIDENCE",
+        "scope": "page_text",
+        "extracted_chars": 119,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 07:06:00 GMT",
+        "excerpt": "Bruno Reis repudia violência sexual contra agente de endemias em Salvador: “Episódio revoltante, covarde e inaceitável”"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-23T18:58:46.922104+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-23T18:58:46.925605+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "final_url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2025-04-07T23:59:05-03:00",
+        "excerpt": "animação. Quem deseja fugir dos dias nublados deve evitar os meses de abril e maio, quando o tempo instável pode atrapalhar os planos de praia. Se a sua ideia é ter dias de sol, mas também fugir do movimento da alta temporada de verão, considere visitar Salvador nos meses de setembro, outubro e novembro. Veja mais dicas de . quando ir a Salvador O que fazer em Salvador: principais pontos"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-23T18:58:46.926386+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-23T18:58:46.928010+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-455ddcd5 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-23T18:58:46.929514+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR",
+        "final_url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Thu, 22 Oct 2026 03:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-23T18:58:46.930434+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-23T18:58:46.934279+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-455ddcd5621a",
+        "dominio": "news.google.com",
+        "trecho": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2R"
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-23T18:58:46.935962+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-f8bb7a39 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-23T18:58:46.936532+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+        "final_url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Fri, 23 Oct 2026 15:14:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-23T18:58:46.937231+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-23T18:58:46.940531+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-f8bb7a39456a",
+        "dominio": "news.google.com",
+        "trecho": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlp"
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-23T18:58:46.942781+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-5d6f1206 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-23T18:58:46.943660+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+        "final_url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Fri, 23 Oct 2026 16:03:45 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-23T18:58:46.944935+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-23T18:58:46.949445+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-5d6f120670e8",
+        "dominio": "news.google.com",
+        "trecho": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHN"
+      }
+    },
+    {
+      "seq": 40,
+      "ts": "2026-10-23T18:58:46.966479+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Quais notícias aconteceram em Salvador nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Quais notícias aconteceram em Salvador nos últimos sete dias?\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Quais notícias aconteceram em Salvador nos últimos sete dias?.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-455ddcd5621a",
+                  "title": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+                  "published_at": "Thu, 22 Oct 2026 03:00:00 GMT"
+                },
+                {
+                  "id": "ev-f8bb7a39456a",
+                  "title": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador - Bnews",
+                  "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+                  "published_at": "Fri, 23 Oct 2026 15:14:00 GMT"
+                },
+                {
+                  "id": "ev-5d6f120670e8",
+                  "title": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara - A TARDE",
+                  "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+                  "domain": "news.google.com",
+                  "relation": "REQUIRES_VERIFICATION",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+                  "published_at": "Fri, 23 Oct 2026 16:03:45 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+              "dominio": "news.google.com",
+              "data": "Thu, 22 Oct 2026 03:00:00 GMT",
+              "trecho": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara - A TARDE",
+              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+              "dominio": "news.google.com",
+              "data": "Fri, 23 Oct 2026 16:03:45 GMT",
+              "trecho": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara A TARDE",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "A TARDE",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador - Bnews",
+              "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+              "dominio": "news.google.com",
+              "data": "Fri, 23 Oct 2026 15:14:00 GMT",
+              "trecho": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador Bnews",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bnews",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Quais notícias aconteceram em Salvador nos últimos sete dias?",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Quais notícias aconteceram em Salvador nos últimos sete dias?",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Quais notícias aconteceram em Salvador nos últimos sete dias?",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Quais notícias aconteceram em Salvador nos últimos sete dias?",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Quais notícias aconteceram em Salvador nos últimos sete dias?.",
+              "markdown": "**HIPÓTESE:** Investigar se: Quais notícias aconteceram em Salvador nos últimos sete dias?.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-81b96516b30d&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-81b96516b30d&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-81b96516b30d&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 3,
+      "ok": 3,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 453.7
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 828.4
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 1446.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Alexandre Aleluia consolida maioria e garante apoios para presidir Câmara - A TARDE",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNzZTTF90UzVIVENkYjRNd0daMjhiOF9BaTRpWHU2WTg5ekc0SHNEdFRoSlpWUGVvSHZpUDZZbHE0cUZ2ME03SjlqTjNtMDdERUsxN1ZxNXNDQUk5UFF5TjJJVFpGVDhnVDdkV0JKZFU4RGhmcHNEZVNQWkVQbHFhZ2hpVm12cGlHMC1jdTV1MnpIX25zZHhVUmNrRm1KZnExOEZHeGhKblk0Sm5oSjNwTDZB0gG6AUFVX3lxTE5VYlFnVlNVNTdVOXFFR1RoOUhiT3JVcVd5X2RMaWJMWmsxOVJiSm1hSS1UMUZNX29XZ0hZcV9OSjFHYXQwV0MybDFBSDFBYjVrczQ0bkdmM3h4UnNvbWpNY0FSNkN1NHFNZ0ZNVzhsRXoxQjRVdUZaU0EtNi1iZzJiaVFob09qY0Y3ZDRrek9veS1XLUtJWUJRbzVvcUs4QmN",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 16:03:45 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://atarde.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "STF julga em novembro se Carlos Muniz pode disputar terceiro mandato na Câmara de Salvador - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQM0d5VWZ1aUQtZXJLOTUzY0laRkhDQ1pZX25hWVBsT2YtRExuZV9HNHlJMFkwblhPcWhPUmo2WnRteXVyM2FvaWdRQTNRY1ZmbWxILW8wWDRDV09uVWE1blBoLUZfbC01ZUhJUFlzT1BPb09MR2RrSE00Q0VpTUtqOWhYN2VsZVpFTXVqRm8td3RTZFI5dXRrMnZZQkVScEtJVDUxU0F3clNSTzFCTnBtYzVtQW9aQ3ppRlpRQlRxd2REc0tuWUVZbGlxSmhrYUVmcDdiV056YmpaZVNKbmdXMjV5R0J0dllpY3lMeHdONzBneE9CLS1fbVZR?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 03:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Aleluia tem apoio de 23 vereadores para presidir a Câmara de Salvador - Bnews",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUmVnVDhZZG5xOFUtM0pWaktKbngyVEEzNmh6MGVub3o3VlJ5azRvNkhNbEJYVkwtSl9GbTJkR2MycGFtRm9wM2p6VE9lUnhaLTM3czBEYmdjWUhrWDd4ZkVJSTgzRVVNR3lVN0dudy1RYV9vUlpmN3pRbVFidmdDa3o5ODNfMDU5LXlyRVI5RG1CVE5ZNWQwMG1MN3lqYWhEVVE0YnRMVFhtU3F4MlhQTWhjTjBwMm1l0gG-AUFVX3lxTFBQNTF2VVRrS05rRlVYbm9scTVFNHVfWlBWek8xQWdQNVBNcTNFd29JXzFtRGQ4OW5ZM08wQ21hTmJoMHVEazVIaktEdG04SWRMQWpXX0V2VE5PQkVodkpsdTBnTkh2ck10TEtIcGlpTFl5WnNjM2xlZlV2c0x0S2k2UEtGU3QtSnRKbGdZRFdwTGZjTUpUYWc4SXF",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 15:14:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bnews.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ciclone extratropical: veja quais serão os impactos do fenômeno que se forma nesta sexta (23) e afeta o Brasil - Jornal Correio",
+      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxOeUYteGF6SWdhZnUtcl9KYjEtdHNraHFQUGNaRXVvMkNsRndxMXdrNkphLUNoelFQOXotN19YMW9nLXBBZHpUWnc4RkZOQTE1RkswdklJVjBrUDZoMEdXZFJBOGc5SldBT0hldEVHLXpacmtoS3RRa0FNcHVVWElFMF96eVBZWkNhVzI3RTJ6OVJaUk9qLWNZR1pqTmV1N05JM0Y1MkJIVWhIV2RHY2swVU55NUlpclh3YWx4V3RDY2E3NW9TRmh3TlNCUDNtX2FUeC0zYUNzdzRmM1NBN3A4Tk9kcTd6WEhk?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 13:50:56 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.correio24horas.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Vai chover no segundo turno? Confira a previsão para o fim de semana - A TARDE",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOeFh4N0FPSnlRaHJnbktDaG1nNnZVenJCTnJQMVg4Qk85cHk2X0V4X3FQMXlIa0JSMTdadWRyOHN5enhkdG51Q2c2YUJIRzQ2RGlZbkhMSmF4MVVQOTEySTNmT0JtdlA4RFl4eXlUZnVYY2tETkJhd0JYSXdfeGhRRkJfeGdUbkYtZnF6c3Q0b19yM3MxeWRFRzdvY0Z5d2RuWmxtN3VxSnM3UdIBsgFBVV95cUxNbzhiZ0hGVUpxVGUzaG5UN01CUUdYZldDYzFhUmp0YTlQX2lNUzhaMTlIdWZsU1lvZXZ2RzdleElKcEZJenFlRGVvY3lINWNGbHZZY2g2Nkw3QWRLaG5XQlFCLVVpUjJ4c29yTlo5eHBwaTM3YV8yRGtFVXhCMkR0bXVYRU9lOEJCV0VybGNvZTRITVVRb2pqTS1GYm1wSXh5dEdVNkN2Wjh",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 10:05:32 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://atarde.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Filha de procurador que virou delegada após ficar em 2.018° lugar em concurso tem nomeação derrubada pela Justiça - Jornal Correio",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOdVZJaHRESlFMU0ljUzlST2lrU2FCUEFtTnQxbGg5T1ptQXQzNjF6MVpFdmdPSGNMUFVDWUstWkIwbkUxZEROYkhnUVRmSDExRUdUOUh6RXdIZTRnSFM2WVhCQmVCaWhvMnVra0hZOTJheUowVXBwUzBfbW5HaHpCT3M5RXlUWHRJVTh6Mnl6REZqQl9vOUVFdFQ1RHMzdUViaVhoRmpTVFRZTXFCaUhxN2ZiOElydmEtU0lxaDZ0U3ZWSEtodFVBYVBNNjVmS3VPZ1hjSmxTUVhpRFh0MXRjOEpNNA?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 12:41:52 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.correio24horas.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Salvador",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 13:42:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prefeitura Municipal de Salvador",
+      "url": "https://salvador.ba.gov.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 07:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador – Tudo que você precisa saber para curtir a capital da Bahia!",
+      "url": "https://guia.melhoresdestinos.com.br/salvador-bahia.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 16:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador BA: 20 Pontos turísticos e praias",
+      "url": "https://www.viagensecaminhos.com/salvador-ba/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 16:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Salvador, Bahia - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Salvador,_Bahia",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 15:20:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que fazer em Salvador: 20 passeios imperdíveis - Mala de Aventuras",
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-salvador/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:26:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Alexandre, o Grande – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.m.wikipedia.org/wiki/Alexandre,_o_Grande",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 07:07:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Alexandre de Moraes relata inquérito contra Flávio Bolsonaro no STF",
+      "url": "https://www.gazetadopovo.com.br/republica/alexandre-de-moraes-assume-relatoria-de-investigacao-contra-flavio-bolsonaro/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 16:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Notícias sobre Alexandre de Moraes - VEJA",
+      "url": "https://veja.abril.com.br/noticias-sobre/alexandre-de-moraes/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 26 fev. 2026 00:51:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Página Principal | Portal STF",
+      "url": "https://portal.stf.jus.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 12:35:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Supremo Tribunal Federal",
+      "url": "https://portal.stf.jus.br/Jurisprudencia/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 07:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Supremo Tribunal Federal – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Supremo_Tribunal_Federal",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 14:01:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 6.335
+}

@@ -1,0 +1,30 @@
+......F...................................                               [100%]
+================================== FAILURES ===================================
+____ test_blocked_writing_preserves_evidence_and_requires_explicit_resume _____
+
+context = (<sqlite3.Connection object at 0x000002BF260835B0>, {'id': 'rj-a4850db6f293', 'owner': 'owner-a', 'conv': 'chat-a', 'modo': 'pro', ...})
+
+    def test_blocked_writing_preserves_evidence_and_requires_explicit_resume(context):
+        db, job = context
+        ra.registrar_evidencia(db, job, evidence(), EXCERPT)
+        job['plano']=[{'id':'s1','tipo':'sintetizar','status':'pendente','alvo':job['objetivo']}]
+        ra.salvar_job(db, job)
+        calls=[]
+        class RateLimit(Exception):
+            codigo='rate_limit'
+        def writer(*args):
+            calls.append(1)
+            raise RateLimit('private provider request must not be persisted')
+        first=ra.executar(db,job['id'],job['owner'],[],sintetizar_fn=writer)
+        assert first['status']=='interrompida'
+        saved=ra.carregar_job(db,job['owner'],job['id'])
+        assert saved['usados']['research_outcome']['state']=='blocked'
+        assert saved['usados']['research_outcome']['provider_code']=='rate_limit'
+>       assert EXCERPT in saved['plano'][0]['_sintese']['texto']
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: '_sintese'
+
+tests\test_research_completion_v597.py:78: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_research_completion_v597.py::test_blocked_writing_preserves_evidence_and_requires_explicit_resume
+1 failed, 41 passed in 3.04s

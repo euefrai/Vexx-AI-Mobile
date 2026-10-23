@@ -1,0 +1,16 @@
+### Result
+{
+  "font": "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif",
+  "stored": [
+    {
+      "key": "research:owner-a:comparison#0:3:sources",
+      "owner": "owner-a",
+      "open": true
+    }
+  ],
+  "open": true
+}
+### Ran Playwright code
+```js
+await page.evaluate('async () => { const details=document.querySelector(\'details\'); const rows=await reqPromise(db.transaction(UISTATE,\'readonly\').objectStore(UISTATE).getAll()); return {font:getComputedStyle(document.body).fontFamily,stored:rows.map(r=>({key:r.k,owner:r.owner,open:Object.values(r.state.sourceDetails||{}).some(Boolean)})),open:details.open}; }');
+```

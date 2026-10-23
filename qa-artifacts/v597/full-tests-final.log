@@ -1,0 +1,86 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 15%]
+............s........................................................... [ 20%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+...........FF........................................................... [ 51%]
+........s............................................................... [ 57%]
+........................................................................ [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+....s..........s........................................................ [ 77%]
+........................................................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 93%]
+........................................................................ [ 98%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+____________________ test_worker_thread_completa_e_cancela ____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D121CEA200>
+
+    def test_worker_thread_completa_e_cancela(monkeypatch):
+        import threading as _t
+        db_path = Path(tempfile.mkdtemp()) / "w.sqlite3"
+        db = pc_agent.open_db(db_path)
+        db.close()
+        monkeypatch.setattr(ra, "PROVS_FABRICA", lambda: [FakeProv({"*": CAFE})])
+        monkeypatch.setattr(ra, "RECUPERAR_FABRICA",
+                            lambda: (lambda u: {"titulo": "T", "texto": CAFE[0]["trecho"],
+                                                "final": u}))
+        db = pc_agent.open_db(db_path)
+        job = ra.criar_job(db, "u-x", "caf� faz bem?")
+        db.close()
+        assert pc_agent.iniciar_job_bg(str(db_path), job["id"], "u-x") is True
+        assert pc_agent.iniciar_job_bg(str(db_path), job["id"], "u-x") is False  # ocupado
+        for _ in range(100):
+            d = pc_agent.open_db(db_path)
+            est = ra.carregar_job(d, "u-x", job["id"])["status"]
+            d.close()
+            if est in ("concluida", "falhou", "interrompida"):
+                break
+            _t.Event().wait(0.1)
+        d = pc_agent.open_db(db_path)
+        fim = ra.carregar_job(d, "u-x", job["id"])
+>       assert fim["status"] == "concluida", fim["status"]
+E       AssertionError: em_andamento
+E       assert 'em_andamento' == 'concluida'
+E         
+E         - concluida
+E         + em_andamento
+
+tests\test_research_agents.py:536: AssertionError
+__________________________ test_cmd_pesquisa_memoria __________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D121F05080>
+
+    def test_cmd_pesquisa_memoria(monkeypatch):
+        db = _db()
+        assert pc_agent.cmd_pesquisa(db, "que horas s�o?", "u-x", "c1") == ""
+        assert "n�o tem pesquisa" in pc_agent.cmd_pesquisa(db, "mostra o resultado da pesquisa", "u-x", "c1")
+        assert "Ainda n�o h� pesquisa" in pc_agent.cmd_pesquisa(db, "quais fontes voc� encontrou?", "u-x", "c1")
+        assert "retomar" in pc_agent.cmd_pesquisa(db, "continue aquela pesquisa", "u-x", "c1")
+        monkeypatch.setattr(pc_agent, "iniciar_job_bg", lambda *a, **k: True)
+        r = pc_agent.cmd_pesquisa(db, "pesquisa profunda sobre caf�", "u-x", "c9")
+>       assert "iniciada" in r and "(id rj-" in r
+E       AssertionError: assert ('iniciada' in 'N\xe3o consegui iniciar: J\xe1 h\xe1 pesquisa em andamento. \U0001f50d')
+
+tests\test_research_agents.py:551: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_research_agents.py::test_worker_thread_completa_e_cancela
+FAILED tests/test_research_agents.py::test_cmd_pesquisa_memoria - AssertionEr...
+2 failed, 1381 passed, 4 skipped, 2 warnings in 148.12s (0:02:28)

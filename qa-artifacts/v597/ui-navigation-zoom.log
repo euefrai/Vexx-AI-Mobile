@@ -1,0 +1,4 @@
+### Ran Playwright code
+```js
+await (async page => {const wrap=page.locator('.jdui-scrollx').first();await wrap.evaluate(e=>e.scrollLeft=e.scrollWidth);const left=await wrap.evaluate(e=>e.scrollLeft);if(left<=0)throw Error('scroll inaccessible');await page.getByLabel('Pesquisa').selectOption('official');await page.waitForFunction(()=>document.getElementById('status').textContent.endsWith('official'));await page.getByLabel('Pesquisa').selectOption('comparison');await page.waitForFunction(()=>document.getElementById('status').textContent.endsWith('comparison'));if(!await page.locator('details').first().evaluate(e=>e.open))throw Error('job state lost');await page.evaluate(()=>document.body.style.zoom='2');if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('zoom overflow');})(page);
+```

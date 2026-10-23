@@ -1,0 +1,4 @@
+### Ran Playwright code
+```js
+await (async page => { await page.getByText('Proveniência e publicação',{exact:true}).first().click(); await page.waitForFunction(() => document.querySelector('details').open); await page.reload(); await page.waitForFunction(() => window.fixtureReady); const reload=await page.locator('details').first().evaluate(e=>e.open); await page.getByLabel('Usuário').selectOption('owner-b'); await page.waitForFunction(() => document.getElementById('status').textContent.startsWith('owner-b')); const other=await page.locator('details').first().evaluate(e=>e.open); await page.getByLabel('Usuário').selectOption('owner-a'); await page.waitForFunction(() => document.getElementById('status').textContent.startsWith('owner-a')); const restored=await page.locator('details').first().evaluate(e=>e.open); console.log(JSON.stringify({reload,other,restored})); if(!reload||other||!restored)throw Error('state isolation failed'); })(page);
+```
