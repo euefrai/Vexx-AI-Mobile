@@ -773,7 +773,13 @@ function appendMessage(row) {
   if (type === 'ai' && row.status !== 'generating') {
     // V4.5: resposta anuncia pesquisa agêntica → anexa o painel live (id real).
     const mj = /\(id (rj-[0-9a-f]+)\)/.exec(row.text || '');
-    if (mj) { try { researchAttach(mj[1]); } catch (_) {} }
+    if (mj) {
+      const open = document.createElement('button');
+      open.type = 'button'; open.className = 'subtle-button'; open.textContent = 'Ver pesquisa';
+      open.addEventListener('click', () => { navigate('research'); researchWorkspaceAbrir(mj[1]); });
+      bubble.appendChild(open);
+      if (row.id === lastAssistantId) researchAttachFromMessage(mj[1], row.id, row.conversation_id);
+    }
   }
   const meta = document.createElement('div'); meta.className = 'msg-meta';
   const tm = document.createElement('span'); tm.className = 'msg-time'; tm.textContent = fmtTime(row.created_at);
@@ -1077,6 +1083,22 @@ function researchFase(ev) {
   if (a === 'synthesizer') return 'Gerando resposta…';
   return 'Pesquisando…';
 }
+const researchMessageChecks = new Map();
+async function researchAttachFromMessage(jobId, messageId, conversationId) {
+  if (!authenticated || !pcOnline || conversationId !== activeConversation) return;
+  const owner = currentUid, epoch = authEpoch;
+  const key = owner + ':' + epoch + ':' + messageId + ':' + jobId;
+  if (researchMessageChecks.has(key)) return;
+  if (researchMessageChecks.size > 128) researchMessageChecks.clear();
+  researchMessageChecks.set(key, 'pending');
+  try {
+    const r = await api('/api/research/status?job_id=' + encodeURIComponent(jobId));
+    if (currentUid !== owner || authEpoch !== epoch || activeConversation !== conversationId || !authenticated) return;
+    const state = (r.resumo || {}).status;
+    researchMessageChecks.set(key, state || 'unknown');
+    if (['criada', 'em_andamento', 'pausada'].includes(state)) researchAttach(jobId);
+  } catch (_) { researchMessageChecks.delete(key); }
+}
 function researchAttach(jobId) {
   if (!jobId || (researchJob && researchJob.id === jobId)) return;
   if (researchJob && researchJob.controller) researchJob.controller.abort();
@@ -1220,7 +1242,7 @@ async function researchJduiContext(id) {
   const row = { id: 'research:' + owner + ':' + id, conversation_id: '' };
   await preloadJduiStates([row.id], true);
   if (owner !== currentUid || generation !== storageGeneration) return null;
-  return jduiCtx(row);
+  const ctx = jduiCtx(row); ctx.stableComponentKeys = true; return ctx;
 }
 async function researchWorkspaceAbrir(id) {
   const lista = $('researchJobList');

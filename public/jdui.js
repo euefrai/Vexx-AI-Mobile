@@ -2955,6 +2955,7 @@
     ctx = ctx || {};
     (slots || []).forEach((msg, si) => {
       if (!msg || !msg.blocks) return;
+      const componentCounts = {};
       msg.blocks.forEach((b, bi) => {
         if (b.type === 'text') {
           const host = el('div', 'jdui-mdhost');
@@ -2964,9 +2965,12 @@
         }
         const fn = R[b.component];
         if (!fn) return; // desconhecido: validado fora, ignora silencioso
-        const key = si + ':' + bi + ':' + b.component;
+        const ordinal = componentCounts[b.component] || 0;
+        componentCounts[b.component] = ordinal + 1;
+        const legacyKey = si + ':' + bi + ':' + b.component;
+        const key = ctx.stableComponentKeys ? si + ':' + ordinal + ':' + b.component : legacyKey;
         let st = {};
-        try { st = ctx.loadState ? (ctx.loadState(key) || {}) : {}; } catch (_) { st = {}; }
+        try { st = ctx.loadState ? (ctx.loadState(key) || (ctx.stableComponentKeys && ctx.loadState(legacyKey)) || {}) : {}; } catch (_) { st = {}; }
         if (!st || typeof st !== 'object') st = {};
         const save = s => { try { if (ctx.saveState) ctx.saveState(key, s || {}); } catch (_) {} };
         const slot = el('div', 'jdui-slot');
