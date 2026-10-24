@@ -1386,6 +1386,7 @@ async function researchPollHTTP() {
     researchAtualizaExport(s.id || researchJob.id);
     const view = $('researchView');
     if (view && !view.hidden) researchCarregaView(true);
+    if (s.chat_result_id) await syncAndRefresh();
     researchStop();
   }
 }
@@ -1462,12 +1463,13 @@ function researchFinal(ev) {
   const active = researchJob;
   const id = researchJob.id;
   api('/api/research/status?job_id=' + encodeURIComponent(id) + '&apos_seq=0')
-    .then(r => {
+    .then(async r => {
       if (researchJob !== active) return;
       researchPintaResumo(r.resumo || {});
       researchAtualizaExport((r.resumo && r.resumo.id) || id);
       const view = $('researchView');
       if (view && !view.hidden) researchCarregaView(true);
+      if ((r.resumo || {}).chat_result_id) await syncAndRefresh();
     })
     .catch(() => {})
     .finally(() => {

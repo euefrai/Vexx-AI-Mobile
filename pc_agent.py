@@ -4574,6 +4574,7 @@ def _job_worker(db_path: str, job_id: str, owner: str, cfg: dict, parar, pronto,
                                  deve_parar=parar.is_set,
                                  sintetizar_fn=(_research_writer(cfg, parar) if
                                      os.getenv('VEXX_RESEARCH_SYNTHESIS', '1') != '0' else None))
+        _persistir_resultado_pesquisa(db, research_agents.carregar_job(db, owner, job_id), owner)
     except Exception as exc:
         try:
             job = research_agents.carregar_job(db, owner, job_id)
@@ -4618,6 +4619,43 @@ def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
             "etapas": len(job["plano"])}
 
 
+def _persistir_resultado_pesquisa(db, job, owner):
+    """Deliver a terminal research view once; never turn a cancelled job into chat."""
+    if job.get('owner')!=owner or job.get('status')!='concluida' or not job.get('conv'):
+        return ''
+    reply_id=job['id']+'-result'
+    if workspace_store.chat_deleted(db, owner, job['conv']):
+        return ''
+    if db.execute("SELECT 1 FROM messages WHERE id=? AND owner_id=? AND origin='mobile'",
+                  (reply_id,owner)).fetchone():
+        return reply_id
+    import research_view
+    summary=research_agents._resumo(db,job)
+    evidence=research_agents.listar_evidencias(db,owner,job['id'])
+    view=research_view.build_view(summary,evidence)
+    blocks=[block for block in view.get('blocks',[]) if block.get('type')=='text'
+            or block.get('component') in ('sources','media')]
+    while blocks:
+        message={'version':jdui.VERSION,'blocks':blocks}
+        valid,normalized,_=jdui.validar_mensagem(message)
+        if not valid:return ''
+        text='Resultado da pesquisa\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```'
+        if len(text)<=10000:break
+        # Full evidence remains in the job; never truncate a JSON fence or facts.
+        removable=next((i for i in range(len(blocks)-1,-1,-1) if blocks[i].get('type')=='ui'),None)
+        if removable is None:return ''
+        blocks.pop(removable)
+    if not blocks:return ''
+    with db:
+        if not db.in_transaction:db.execute('BEGIN IMMEDIATE')
+        if workspace_store.chat_deleted(db,owner,job['conv']):return ''
+        db.execute("""INSERT OR IGNORE INTO messages
+            (id,conversation_id,origin,role,text,created_at,received_at,model,owner_id)
+            VALUES (?,?,'mobile','assistant',?,?,?,?,?)""",
+            (reply_id,job['conv'],text,agora_iso(),agora_iso(),'Pesquisa',owner))
+    return reply_id
+
+
 def rjob_status(db, req: dict, dono: str) -> dict:
     try:
         job = research_agents.carregar_job(db, dono, str(req.get("job_id", ""))[:64])
@@ -4631,6 +4669,7 @@ def rjob_status(db, req: dict, dono: str) -> dict:
     with JOBS_BG_LOCK:
         viva = job["id"] in JOBS_BG
     resumo = research_agents._resumo(db, job)
+    resumo['chat_result_id']=_persistir_resultado_pesquisa(db,job,dono)
     resumo["viva"] = viva
     return {"type": "research_status", "resumo": resumo, "eventos": evs}
 

@@ -172,3 +172,48 @@ def test_explicit_deep_news_reaches_job_and_keeps_requested_depth(monkeypatch,te
     req,owner=calls[0]
     assert req['modo']=='profunda' and req['conv']=='chat' and owner=='qa'
     assert 'notícias' in req['objetivo']
+
+
+def test_terminal_research_result_is_persisted_once_and_survives_sqlite_reload(tmp_path):
+    import json
+    import pc_agent,research_agents,jdui
+    path=tmp_path/'qa.sqlite'
+    db=pc_agent.open_db(path)
+    job=research_agents.criar_job(db,'local','Public research',conv='qa-chat')
+    job['status']='concluida';research_agents.salvar_job(db,job)
+    first=pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    assert first==job['id']+'-result'
+    assert pc_agent._persistir_resultado_pesquisa(db,job,'local')==first
+    status=pc_agent.rjob_status(db,{'job_id':job['id']},'local')
+    assert status['resumo']['chat_result_id']==first
+    row=db.execute('select text,conversation_id,role from messages where id=?',(first,)).fetchone()
+    assert row[1:] == ('qa-chat','assistant')
+    fences=jdui.extrair_fences(row[0]);assert len(fences)==1
+    assert jdui.validar_mensagem(json.loads(fences[0]))[0]
+    assert db.execute('select count(*) from messages').fetchone()[0]==1
+    db.close();reopened=pc_agent.open_db(path)
+    assert reopened.execute('select text from messages where id=?',(first,)).fetchone()[0]==row[0]
+    reopened.close()
+
+
+@pytest.mark.parametrize('state',['criada','em_andamento','cancelada','falhou'])
+def test_nonfinal_or_cancelled_research_does_not_post_a_result(tmp_path,state):
+    import pc_agent,research_agents
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    job=research_agents.criar_job(db,'local','Public research',conv='qa-chat')
+    job['status']=state
+    assert not pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    assert db.execute('select count(*) from messages').fetchone()[0]==0
+    db.close()
+
+
+def test_research_delivery_cannot_cross_owner_or_resurrect_deleted_chat(tmp_path,monkeypatch):
+    import pc_agent,research_agents
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    job=research_agents.criar_job(db,'local','Public research',conv='qa-chat')
+    job['status']='concluida'
+    assert not pc_agent._persistir_resultado_pesquisa(db,job,'other-owner')
+    monkeypatch.setattr(pc_agent.workspace_store,'chat_deleted',lambda *a:True)
+    assert not pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    assert db.execute('select count(*) from messages').fetchone()[0]==0
+    db.close()
