@@ -212,3 +212,22 @@ def test_science_starts_with_subject_not_blind_method_fronts():
 def test_encyclopedia_is_not_counted_as_original_scientific_study():
     source=paper(1);source.pop('doi');source['publication_type']='encyclopedia'
     assert all(g['observed_publications']==0 for g in gaps.identify(job(),[source]))
+
+
+def test_checkpoint_compacts_repeated_claim_excerpts_without_losing_evidence(research_job):
+    import json
+    db, current = research_job
+    sources = [{'evidence_id':f'ev-{i}', 'url':'https://example.org/'+'x'*480,
+                'title':'t'*160, 'used_excerpt':'á'*500, 'relation':'MENTIONS',
+                'read':True, 'access_state':'read'} for i in range(12)]
+    current['achados'] = [{'afirmacao':f'Claim {i}', 'estado':'UNVERIFIED',
+                         'evidence_ids':[s['evidence_id'] for s in sources], 'fontes':sources}
+                         for i in range(12)]
+    assert len(json.dumps(current['achados'],ensure_ascii=False)) > 60000
+    ra.salvar_job(db,current)
+    loaded=ra.carregar_job(db,current['owner'],current['id'])
+    assert len(loaded['achados']) == 12
+    assert loaded['usados']['claim_sources_compacted']
+    assert loaded['achados'][0]['evidence_ids'] == current['achados'][0]['evidence_ids']
+    assert loaded['achados'][0]['fontes'][0]['relation'] == 'MENTIONS'
+    assert len(current['achados'][0]['fontes'][0]['used_excerpt']) == 500

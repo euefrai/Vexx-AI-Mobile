@@ -272,6 +272,18 @@ def salvar_job(db, job: dict, forcar_status: bool = False) -> None:
     plano_limpo = []
     for s in job["plano"]:
         plano_limpo.append({k: v for k, v in s.items() if not k.startswith("_")})
+    # Source excerpts already live in research_evidence. Avoid multiplying them
+    # across every claim until an otherwise valid research cannot checkpoint.
+    findings = job["achados"]
+    if len(json.dumps(findings, ensure_ascii=False)) > 60000:
+        findings = [dict(item, fontes=[{k: v for k, v in source.items()
+                    if k != "used_excerpt"} for source in item.get("fontes", [])])
+                    for item in findings]
+        if len(json.dumps(findings, ensure_ascii=False)) > 60000:
+            findings = [dict(item, fontes=[{k: source[k] for k in
+                        ("evidence_id", "relation", "read", "access_state") if k in source}
+                        for source in item.get("fontes", [])]) for item in findings]
+        job["usados"]["claim_sources_compacted"] = True
     # CASE atômico: um cancelamento/pausa gravado entre a leitura do snapshot e
     # este UPDATE continua vencendo, sem janela de corrida.
     status_sql = "?" if forcar_status else \
@@ -285,7 +297,7 @@ def salvar_job(db, job: dict, forcar_status: bool = False) -> None:
                    (json_store.encode(plano_limpo, 60000), job["plano_versao"],
                     job["status"], json.dumps(job["orcamento"], ensure_ascii=False),
                     json.dumps(job["usados"], ensure_ascii=False),
-                    json_store.encode(job["achados"], 60000),
+                    json_store.encode(findings, 60000),
                     json_store.encode(job["pendencias"], 20000),
                     json_store.encode(job["erros"], 20000),
                     agora_iso(),
