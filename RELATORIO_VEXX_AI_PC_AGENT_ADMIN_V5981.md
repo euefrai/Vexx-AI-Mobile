@@ -48,7 +48,7 @@ Rodadas intermediárias tiveram falhas reais preservadas nos logs: inserção JS
 
 O Chrome final capturou zero alertas/erros JavaScript. Um 401 anterior ao login é esperado; avisos DOM de senha fora de form no chat legado permanecem. Não se declara console de rede sem erros em todos os fluxos. Screenshots em `qa-artifacts/v5981/admin-*.png`; relatórios sanitizados `admin-browser.json`, `admin-tabs.json`, `admin-browser-sqlite.json`, `operational-summary.json` e `research-e2e-persistence.json`.
 
-Encerrados o servidor/PC Agent temporários pelo canal de QA e o Chrome de teste. Inventário final dirigido encontrou somente o PID13712 de produção. Verificação de 81 arquivos de fonte/evidência contra valores secretos configurados não encontrou coincidências; arquivos de fonte/documentação examinados passaram em UTF-8 estrito. Isso não é varredura de todos os segredos possíveis nem de todo o histórico Git. Compilação dos novos operadores, sintaxe do verificador JS e git diff --check passaram.
+Encerrados o servidor/PC Agent temporários pelo canal de QA e o Chrome de teste. Inventário final dirigido encontrou somente o PID13712 de produção. Verificação de 81 arquivos de fonte/evidência contra valores secretos configurados não encontrou coincidências; arquivos de fonte/documentação examinados passaram em UTF-8 estrito. Isso não é varredura de todos os segredos possíveis nem de todo o histórico Git. Compilação dos novos operadores, sintaxe do verificador JS e git diff --check de fonte/documentação passaram. Os logs originais preservam espaços finais de tracebacks; incluí-los no diff --check gera avisos de whitespace, sem erro novo de aplicação. Eles não foram reformatados para esconder os avisos.
 
 ## Pesquisa real: aprovação limitada
 
@@ -70,4 +70,4 @@ Operação/QA: `tools/ops_restart_v597.py`, `ops_controlled_restart_v5981.py`, `
 
 O console e o backend V598 continuam locais. Produção recebeu somente o wrapper de controle e a migração de papéis autorizados. Seus endpoints legados ainda não receberam a proteção adicional de reauth deste console. O supervisor antigo não supervisiona o wrapper novo; sua adoção exige trabalho futuro, sem alterar o Studio nesta entrega.
 
-Commits locais anteriores preservados: `cd6e6a9` (runtime inicial) e `7181b7e` (consolidação externa das alterações durante a sessão). A conclusão local acrescenta operadores, documentação e QA final; o SHA dessa conclusão é informado na entrega. Nenhum push foi feito por esta execução.
+Commits locais anteriores preservados: `cd6e6a9` (runtime inicial) e `7181b7e` (consolidação externa das alterações durante a sessão). Conclusão: `9562e46` (operadores e exportação sanitizada) e `43cb57c` (relatórios e QA final), seguidos desta precisão documental sobre whitespace nos logs. Nenhum push foi feito por esta execução.
