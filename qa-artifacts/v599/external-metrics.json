@@ -1,0 +1,64 @@
+{
+  "development": {
+    "scope": "LIVE_EXTERNAL; counts are not independent precision or recall",
+    "cases": 20,
+    "states": {
+      "parcial": 5,
+      "paginas_ilegiveis": 4,
+      "sem_correspondencia": 10,
+      "not_reported": 1
+    },
+    "opened_sources": 31,
+    "eligible_read_sources": 1,
+    "discovered_candidates": 190,
+    "media_items": 137,
+    "verified_offers": 0,
+    "median_seconds": 7.576,
+    "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1",
+    "recall": null,
+    "independent_precision": null,
+    "citation_accuracy": null
+  },
+  "evaluation": {
+    "scope": "LIVE_EXTERNAL; counts are not independent precision or recall",
+    "cases": 20,
+    "states": {
+      "parcial": 2,
+      "paginas_ilegiveis": 3,
+      "sem_correspondencia": 10,
+      "ok": 4,
+      "not_reported": 1
+    },
+    "opened_sources": 43,
+    "eligible_read_sources": 11,
+    "discovered_candidates": 184,
+    "media_items": 169,
+    "verified_offers": 0,
+    "median_seconds": 7.165,
+    "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1",
+    "recall": null,
+    "independent_precision": null,
+    "citation_accuracy": null
+  },
+  "evaluation-final": {
+    "scope": "LIVE_EXTERNAL; counts are not independent precision or recall",
+    "cases": 20,
+    "states": {
+      "parcial": 1,
+      "sem_correspondencia": 14,
+      "ok": 3,
+      "not_reported": 1,
+      "paginas_ilegiveis": 1
+    },
+    "opened_sources": 50,
+    "eligible_read_sources": 7,
+    "discovered_candidates": 168,
+    "media_items": 201,
+    "verified_offers": 0,
+    "median_seconds": 7.364,
+    "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1",
+    "recall": null,
+    "independent_precision": null,
+    "citation_accuracy": null
+  }
+}

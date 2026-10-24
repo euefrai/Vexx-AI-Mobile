@@ -1,0 +1,421 @@
+{
+  "id": "dev-02",
+  "category": "national_news",
+  "query": "Quais foram as principais notícias do Brasil hoje?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 3.36,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Brasil\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Brasil\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Brasil\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno\" site:www.bbc.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Como a imprensa internacional repercutiu o último debate entre Flávio Bolsonaro e Lula\" site:g1.globo.com",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Brasil%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Brasil%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 134421
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Brasil%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Brasil%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6068
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Brasil%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Brasil%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5658
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Mapa+das+Elei%C3%A7%C3%B5es+2026%3A+veja+o+resultado+para+presidente+e+governador+no+2%C2%BA+turno%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Mapa+das+Elei%C3%A7%C3%B5es+2026%3A+veja+o+resultado+para+presidente+e+governador+no+2%C2%BA+turno%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4801
+    },
+    {
+      "url": "https://www.bbc.com",
+      "final": "https://www.bbc.com",
+      "chars": 655079
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Como+a+imprensa+internacional+repercutiu+o+%C3%BAltimo+debate+entre+Fl%C3%A1vio+Bolsonaro+e+Lula%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Como+a+imprensa+internacional+repercutiu+o+%C3%BAltimo+debate+entre+Fl%C3%A1vio+Bolsonaro+e+Lula%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5157
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Brasil\" notícias",
+    "domain": "news",
+    "original_request": "Quais foram as principais notícias do Brasil hoje?",
+    "resolved_request": "Quais foram as principais notícias do Brasil hoje?",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Brasil"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:34:59.116229+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Brasil"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "8f337cd150a85c074788",
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+        "title": "Saiba como votar usando o aplicativo e-Título do TSE - Agência Brasil",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Sat, 24 Oct 2026 11:12:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Saiba como votar usando o aplicativo e-Título do TSE Agência Brasil"
+      },
+      {
+        "id": "cbe5a7c5ecb56b716eed",
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNNHpTS3RaMVN2N0N5V0t6U1BrQWpuWnNDOUZZQnk0Qk11TzZTMXZwTGtCYkpxbUc4MkZ4MW1mTThHZDRGak9QdmhBblNTMnI4UUcwVkRfN2dMNlJXTjJtRUVwSElBNkd6d25yNl9aMGZCWS13NW4xa01lYWt6bFFIb1UyNE52OW5Fa2dLbkRsNm5aZ19BVm9hYV9NT3pBYXYxTzBoNngtelU2R0VkN3d0MFJ1cDZadWdzUUZEOGZKMGl6UDRWMUdUTGFWTmIxUzQ?oc=5",
+        "title": "Eduardo diz que Flávio deve deixar o Brasil se perder e contesta urnas - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Sat, 24 Oct 2026 00:09:40 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Eduardo diz que Flávio deve deixar o Brasil se perder e contesta urnas UOL Notícias"
+      },
+      {
+        "id": "550e96c7609c77bec951",
+        "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+        "title": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro - R7",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Sat, 24 Oct 2026 00:31:19 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro R7"
+      },
+      {
+        "id": "37d71db382b9d44089df",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE91UUZjZkVkVFBDWjRXU2tMcEdVRFFVampNeklTLXlORnQwS3lubDJvUVExZGQxLUxIYnIxa0V1RW1iQ3NlX3pWVndQTWxCZnVQcExZN1NUMU9jV05EX2o2aEhGdldFWU5JZnJOTUZURW9KQl8xTVYzbHNMcm1vZw?oc=5",
+        "title": "Eduardo Bolsonaro fala em enviar tropas dos EUA ao Brasil se Flávio perder eleição - ICL Notícias",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Sat, 24 Oct 2026 00:40:36 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Eduardo Bolsonaro fala em enviar tropas dos EUA ao Brasil se Flávio perder eleição ICL Notícias"
+      },
+      {
+        "id": "e63af5f248f76d214630",
+        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5aVTVudVdLZlJoYXhwY2ljVGR4X0l5dHVobTQtc0ZSMThzRDJiZWxqQkNFbl81MTZfRTEyRTFtWkZOSm1rRWQwVmZFT3VRdzFIbndIcFpFREZ1bjAzRk51RG9TZ9IBaEFVX3lxTE5sZmZxTEthdDRhOTdEQ3J6dUtRcGd2NXU1UEh1b2F3amFPVEJGTDJzdmdkTjFUMTlvUTFsWlZieG5selc3Nk1vVWtVNHYxYnFIYVI1NW11N1ZyQkZmTFVLUzlrdXpabzIz?oc=5",
+        "title": "Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno - BBC",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Fri, 23 Oct 2026 14:07:14 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno BBC"
+      },
+      {
+        "id": "a41b7045a339335a7c25",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQbHJ0TGh0X1FhOWZDSVc2STlSa0VhMjNjUHVOTjJKLUQxMTVSSG1UdDVkVkdmTVV6NlhLdVVBTHFUOHRpYnd4OW1DZW9wR2NoYUxIbDdqbkdLVVJzeTJOajBlWVBuWTBtQzloYWV6Wnlnb3EzeC1RUjkyTFhqTGg2WWx3dVNxTWF1MkxIT3dqSmV4YzBYbk5HWE84c1RsUUlUM1pBNXEtNWVrdnRsSTdYdWFzbDV6czlxWlppaNIBywFBVV95cUxNS25wMDVHUTJySnZma3FZa2MtcThuaWZsdERvUHZJYW10dVMwOE9nSmxzRk5KQmFhNkk4VGIyaGhtT29mUFgzbDBWQTJOSEJwdHVaQU5sUFpQRTRMTW9fNnA5ajdXT3F0TlVJWU9LWndjc1FUNHZrTDJuYWxDU1ZaaG5kdi1PX3F6ZWJfYlRfUTFMLXlkOU9",
+        "title": "Como a imprensa internacional repercutiu o último debate entre Flávio Bolsonaro e Lula - G1",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias",
+        "date": "Sat, 24 Oct 2026 14:47:14 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Como a imprensa internacional repercutiu o último debate entre Flávio Bolsonaro e Lula G1"
+      },
+      {
+        "id": "55fb95156b400b43fe4c",
+        "url": "https://www.dreamstime.com/photos-images/autumn-sunset-high-point-state-park-new-jersey.html",
+        "title": "Autumn Sunset High Point State Park New Jersey Stock Photos - Free ...",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "sáb., 24 out. 2026 01:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Search among 38 authentic autumn sunset high point state park new jersey stock photos, high-definition images, and pictures, or look at other high point or new "
+      },
+      {
+        "id": "2758fa7b87d0918fec78",
+        "url": "https://www.shutterstock.com/image-photo/autumn-sunset-over-high-point-state-1148763509",
+        "title": "Autumn Sunset over High Point State Park in New Jersey",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "sáb., 17 out. 2026 03:52:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Find Autumn Sunset Over High Point State stock images in HD and millions of other royalty-free stock photos, 3D objects, illustrations and vectors in the Shutte"
+      },
+      {
+        "id": "4dae827c103b9632a24c",
+        "url": "https://www.youtube.com/watch?v=YdZok9vzYac",
+        "title": "High Point State Park NJ- Full Experience: Autumn Beauty | Monument ...",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "ter., 20 out. 2026 10:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Embark on an enchanting journey through High Point State Park in New Jersey during the vibrant autumn season. Join us as we explore the breathtaking fall foliag"
+      },
+      {
+        "id": "d3ad48b1e19a1f9fa0be",
+        "url": "https://opentravelguide.com/united-states/new-jersey/photography/high-point-state-park-panorama/",
+        "title": "High Point State Park — Panoramic View, New Jersey [2026]",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "sáb., 24 out. 2026 02:40:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "October is the defining month for photography at High Point. The panoramic views encompass miles of unbroken deciduous forest covering the Kittatinny, Shawangun"
+      },
+      {
+        "id": "c73e9552947e0845ea33",
+        "url": "https://www.dreamstime.com/stock-photo-high-point-state-park-late-autumn-starburst-sunset-spotlights-highest-new-jersey-image62743712",
+        "title": "High Point State Park in late autumn with starburst sunset and ...",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "sex., 23 out. 2026 00:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Photo about Starburst sunset and spotlights at the highest point of New Jersey in autumn. Image of environment, fall, autumn - 62743712."
+      },
+      {
+        "id": "d2946fe5eb84019509c8",
+        "url": "https://dep.nj.gov/parksandforests/state-park/high-point-state-park/",
+        "title": "High Point State Park & New Jersey Veterans’ Memorial",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias",
+        "date": "seg., 30 set. 2024 17:48:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "The monument was built through the generosity of Colonel Anthony R. and Susie Dryden Kuser from Bernardsville, NJ, who also donated the land for High Point Stat"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-82ebbd25c940",
+      "type": "video",
+      "title": "High Point State Park NJ- Full Experience: Autumn Beauty | Monument ...",
+      "url": "https://www.youtube.com/watch?v=YdZok9vzYac",
+      "final_url": "https://www.youtube.com/watch?v=YdZok9vzYac",
+      "source_title": "High Point State Park NJ- Full Experience: Autumn Beauty | Monument ...",
+      "source_url": "https://www.youtube.com/watch?v=YdZok9vzYac",
+      "publisher": "www.youtube.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "search metadata",
+      "metadata_state": "VIDEO_FOUND"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+      "titulo": "Saiba como votar usando o aplicativo e-Título do TSE - Agência Brasil",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Sat, 24 Oct 2026 11:12:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Sat, 24 Oct 2026 11:12:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNNHpTS3RaMVN2N0N5V0t6U1BrQWpuWnNDOUZZQnk0Qk11TzZTMXZwTGtCYkpxbUc4MkZ4MW1mTThHZDRGak9QdmhBblNTMnI4UUcwVkRfN2dMNlJXTjJtRUVwSElBNkd6d25yNl9aMGZCWS13NW4xa01lYWt6bFFIb1UyNE52OW5Fa2dLbkRsNm5aZ19BVm9hYV9NT3pBYXYxTzBoNngtelU2R0VkN3d0MFJ1cDZadWdzUUZEOGZKMGl6UDRWMUdUTGFWTmIxUzQ?oc=5",
+      "titulo": "Eduardo diz que Flávio deve deixar o Brasil se perder e contesta urnas - UOL Notícias",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Sat, 24 Oct 2026 00:09:40 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNNHpTS3RaMVN2N0N5V0t6U1BrQWpuWnNDOUZZQnk0Qk11TzZTMXZwTGtCYkpxbUc4MkZ4MW1mTThHZDRGak9QdmhBblNTMnI4UUcwVkRfN2dMNlJXTjJtRUVwSElBNkd6d25yNl9aMGZCWS13NW4xa01lYWt6bFFIb1UyNE52OW5Fa2dLbkRsNm5aZ19BVm9hYV9NT3pBYXYxTzBoNngtelU2R0VkN3d0MFJ1cDZadWdzUUZEOGZKMGl6UDRWMUdUTGFWTmIxUzQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Sat, 24 Oct 2026 00:09:40 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+      "titulo": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro - R7",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Sat, 24 Oct 2026 00:31:19 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Sat, 24 Oct 2026 00:31:19 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

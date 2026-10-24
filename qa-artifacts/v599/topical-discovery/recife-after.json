@@ -1,0 +1,712 @@
+{
+  "id": "recife",
+  "category": "municipal_news",
+  "query": "Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.455,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Recife\" notícias acidentes",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Recife\" notícias acidentes",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Recife\" notícias acidentes",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Homem e mulher morrem atropelados após acidente entre carro e motos na PE-22; outras duas pessoas ficam feridas\" site:g1.globo.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Acidente na BR-101 deixa homem morto e causa congestionamento de mais de 10 quilômetros\" site:www.folhape.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Recife%22+not%C3%ADcias+acidentes&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Recife%22+not%C3%ADcias+acidentes&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 67121
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Recife%22+not%C3%ADcias+acidentes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Recife%22+not%C3%ADcias+acidentes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 2016
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Recife%22+not%C3%ADcias+acidentes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Recife%22+not%C3%ADcias+acidentes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5105
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Homem+e+mulher+morrem+atropelados+ap%C3%B3s+acidente+entre+carro+e+motos+na+PE-22%3B+outras+duas+pessoas+ficam+feridas%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Homem+e+mulher+morrem+atropelados+ap%C3%B3s+acidente+entre+carro+e+motos+na+PE-22%3B+outras+duas+pessoas+ficam+feridas%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5650
+    },
+    {
+      "url": "https://g1.globo.com",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Acidente+na+BR-101+deixa+homem+morto+e+causa+congestionamento+de+mais+de+10+quil%C3%B4metros%22+site%3Awww.folhape.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Acidente+na+BR-101+deixa+homem+morto+e+causa+congestionamento+de+mais+de+10+quil%C3%B4metros%22+site%3Awww.folhape.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5712
+    },
+    {
+      "url": "https://www2.recife.pe.gov.br/",
+      "error": "rede"
+    },
+    {
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "final": "https://www.viagensecaminhos.com/recife-pe/",
+      "chars": 378122
+    },
+    {
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "final": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "chars": 202963
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Recife",
+      "final": "https://en.wikipedia.org/wiki/Recife",
+      "chars": 779553
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "final": "https://pt.wikipedia.org/wiki/Recife",
+      "chars": 1616599
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Recife\" notícias acidentes",
+    "domain": "news",
+    "original_request": "Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.",
+    "resolved_request": "Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Recife",
+      "topic": "acidentes"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T21:04:39.651261+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Recife",
+        "topic": "acidentes"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "33e95224383f790340a4",
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNWWNVT21QLWhLTnJOVnBWV3RibDdqN1pSLVF4OU1ra2dMNGJXbGNxWi12UFZ1Xy05QVRUckFXd2stUTRVWi1Fckg0NnRGb0VVcjVIWG94UndXa3Z2WGhUYzBQZklCS29tMUhUZzNQUzludF9UTUlGeDgzNE9UVjVMa2hYM3pvczM2SU1ISXZqck5iRnBQSm4xRUd0SzNtRjl2TW9NaUlyYWJhUEVwNmgtVWY5VWtSU3c?oc=5",
+        "title": "Motociclista morre após sofrer acidente na BR-101, no Recife - JC",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Mon, 17 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Motociclista morre após sofrer acidente na BR-101, no Recife JC"
+      },
+      {
+        "id": "33c5c7f5e72b339d21cd",
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxORHZ4YzRWU2phNGRDMEhObmp1c2RsVDA1TUxNTHBXYVhBUE1adVhtb1FpdWhCWVdudzBGTTdLc2RhZ2w5eXZQbnA0RElDZVZOUVJJNUFOeVBteUZGMlNMUGFBTklvSEgxTks3UHNaaWZwLUp3QUxyV2V1VE1kWUpESVpqSGEzOVQ5eUNyWmFxLWtSNnUxMDEwS1NkdC1pSzE3TnhHcG5Vc2xnRUVOd1I5d1ZERUJIVm9PNk9V?oc=5",
+        "title": "Motociclista de 62 anos morre em acidente na BR-101, no Recife - LeiaJá",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Mon, 17 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Motociclista de 62 anos morre em acidente na BR-101, no Recife LeiaJá"
+      },
+      {
+        "id": "ece8a1b74d3f85defd09",
+        "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPNzhncnU4RmFNeGxIeGFwb0RodGlPR2RTcVZiVU03S2FCZ1FHaE42N0ZtbC1LV2lmY3oyS1pXZDBvWjRpM2ljWnM4a3pBSUVHT1RMSlE3T016U2V5dEJwZkVOdFo2T3p4M1FrNVhmUjFDRkptcmNfM21QdzRNMlQyeXNNLWNIelMtTS1qc2ZpNWZzUlV2dWN6RkhZUjRmZTZ2bnNSRGlhOGxmUmJzdnhHYllfRWduWGtHSlZCVWtfbU1yQmhtUVVIT2JpcW1kLUh1UFFVT3RDcXRudkFIaXJBUnhFa243ekNIakVLaERpM2N3LW9Gb2RKTERB0gGIAkFVX3lxTE9tczRORmVMOUc5TDVqN010VzgyTTRQbS1tS0JycGlRTXNLWU1MRzdfRWFCbmhxMkdQNGlGVUNTTDcyUmdZOUFRbTZNSzZFZTNsQjc4ZktDSlo",
+        "title": "Número de vítimas de acidentes de moto socorridas pelo Samu cresce 57% em três anos no Grande Recife - G1",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Mon, 13 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Número de vítimas de acidentes de moto socorridas pelo Samu cresce 57% em três anos no Grande Recife G1"
+      },
+      {
+        "id": "5ad95c011f539601ad51",
+        "url": "https://www2.recife.pe.gov.br/",
+        "title": "Prefeitura do Recife",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "sex., 23 out. 2026 14:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Av. Cais do Apolo, 925, Bairro do Recife, Recife / PE - CEP: 50030-903 - Ouvidoria Geral: 0800 281 0040 - Município do Recife - CNPJ 10.565.000/0001-92"
+      },
+      {
+        "id": "f3da286375ff8d7a8f95",
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "2014-05-31T15:38:00+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "João, Pinacoteca (museu de quadros de pintura), Biblioteca, Auditório, Jardins das Esculturas. Conta também com uma galeria para exposições temporárias, além de"
+      },
+      {
+        "id": "23cbf76267f6f1a45428",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "title": "O que fazer em Recife: 30 dicas para todos os gostos!",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "2026-03-31T21:59:16-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "sorte de souvenir, além dos lanches, com tapioca, acarajé, doces e mais muita coisa boa. Feirinha de Boa Viagem A gente traz todas as dicas de Boa Viagem , incl"
+      },
+      {
+        "id": "025f1376e0ed7ca7cc17",
+        "url": "https://en.wikipedia.org/wiki/Recife",
+        "title": "Recife - Wikipedia",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "2002-07-29T09:51:55Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "—known for its . At one point, it was known as , when it served as the capital city of the 17th century colony of of (founded by the ). Situated at the confluen"
+      },
+      {
+        "id": "e75c219ebc7ec0178d66",
+        "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+        "title": "AS 15 MELHORES coisas para fazer em Recife (ATUALIZADO 2026)",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "sáb., 24 out. 2026 06:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Da sofisticação e história do Recife Antigo ao charme das ladeiras de Olinda. As praias são um espetáculo à parte, especialmente Porto de Galinhas e Carneiros, "
+      },
+      {
+        "id": "2a82393e083d6087ee83",
+        "url": "https://pt.wikipedia.org/wiki/Recife",
+        "title": "Recife – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "2003-07-28T23:00:56Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "] 10 [ ] João Pessoa Maceió Natal 11 [ ] O Recife é a e sétima do Brasil, articulando, em sua , 71 cidades, que somam um PIB de 135 bilhões de reais. Já o munic"
+      },
+      {
+        "id": "fe1a4ce9a43a5bb04850",
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNFRGUlA1Q0NNWW5kMGV5N1QzMlVhWmhDekFSZkZPMVBYNTVFcjBHYVlWVGJCQlVlSXhyVm1DV1ZsTVo0Ukp4RzNlX01Yc0J2OHprbHg5dUk4ejJSajFXQWlTRlA2aW05WFdXYnB6WXQyMENfTTdGWnlqY0M4NDhHTVdJSU55WnRkc200cmNUVzNmX3NVdVlUd1pB0gGoAUFVX3lxTE5SQWxCQ3BKVUJ2SzRVZUJrVUgwWU9ZSG1mTTFBdTdUS2lHb3FiWWdoOVlwcWdveHc0em84NFJBLUN3cHp5V1ZPTi1NNms4TE9yTEhiNlkxcTBKWmR5NEoyMmdsU1hFZ2xydjBLLWlXdERqMFUxN2pUdlF6QlFqeGhpT3hTdUY2WWQtTmtoV3lMMXVpUl9uZWFkb3lkMkw3NFcweE1FVkVCVw?oc=5",
+        "title": "Homem e mulher morrem atropelados após acidente entre carro e motos na PE-22; outras duas pessoas ficam feridas - G1",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Mon, 12 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Homem e mulher morrem atropelados após acidente entre carro e motos na PE-22; outras duas pessoas ficam feridas G1"
+      },
+      {
+        "id": "f815763635a754719b89",
+        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNQmhuN0tfUWFiX2g0b3BwQ2lrQS1uOGZNeHRrMERmSUUzSE9XUlZaRlBqWDZZMXJnN2p5STZWS0hFUXlxNXZ3aTZJTnNFSG5kNHhKZHRGM3JRenh4UmVFR1pUOXZWMXk0WTZDODBhUm5NRW5IaFBJZ1B5MlRYTDZKN2NIQS1EWG0tR25QRmZUUUc2ZDIwSkhfR1paWVhWa042NTQ5cGJFcE5IRjNndEHSAbIBQVVfeXFMTU9yNWtWMWFhRUxwLV9XNmVFandjcmNmNHJUb01aSWhrZDdydlpFd1VkYUNnaHBsSVZGRW9UR2tfOWd3RmJGNENaNFo0VTMxX3NLb1diNXVYWWlOMU9lQklQV2RUdzZCUFpwbjRZODFDT19iaFlHQWNxSVJVOTZTdXNkUHdlVkl2X29vZDI2aFZ3SHBKaFF5UHlvcWxlVmwtVUhxOHV",
+        "title": "Acidente na BR-101 deixa homem morto e causa congestionamento de mais de 10 quilômetros - Folha PE",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Mon, 17 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Acidente na BR-101 deixa homem morto e causa congestionamento de mais de 10 quilômetros Folha PE"
+      },
+      {
+        "id": "3439280c0f9aabcbeb27",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNdkFFdUJUUWxDbEc1MUcxQUJLcjktU3JlNXNBQVQtWlZvUDliLTFpNjFWeVZUZXpUODZkekxOM1BJUmo2RndDRlNUakdramh4U3JycU9Bd0lTb3FfX1FIUnhNcVJDSEtZRXBheTdydmRHWFlITl9RN0NmWWZRTzVXZWRReUYwbldNakxubjlUOWFZX3ZWYnBTcnZsRFhOUGhoTkhNVlRkOTFZOEpjVk5RNjhSNnZXV05wMTFNMU5PZmhGYTI4QWtZRXlDSdIB2gFBVV95cUxQcEx1SzBFamhlQzlaRE9xNXRrMF9xdDZ5QjZKalFOVF9sem9JeFZyd0VnMVBvdzlNaHgwWHY3dnc2NzFXbE51dGVMc1NfWm9jQWdOeTloN3AwbzNySl9lODVXbDV6cEVRN2hCaHZFdGlCZlc2amdqX1ZFZVFMWGNPRE1sV3gzSDI",
+        "title": "Jovem morre em acidente entre duas motos durante corrida por aplicativo - G1",
+        "origin": "google-news",
+        "query": "\"Recife\" notícias acidentes",
+        "date": "Sun, 27 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Jovem morre em acidente entre duas motos durante corrida por aplicativo G1"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-a67056a92a06",
+      "type": "image",
+      "title": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-595f45fba7c8",
+      "type": "image",
+      "title": "Recife PE",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe-696x464.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife PE",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-636e3fbce209",
+      "type": "image",
+      "title": "Recife - Praia da Boa Viagem",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praia-boa-viagem.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife - Praia da Boa Viagem",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c00a2d9d3806",
+      "type": "image",
+      "title": "Recife - Praia do Pina",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/12/recife-praia-do-pina.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife - Praia do Pina",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d58f2134e8ee",
+      "type": "image",
+      "title": "Rua Bom Jesus - Recife PE",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/rua-bom-jesus-recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rua Bom Jesus - Recife PE",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e3be13c98dd6",
+      "type": "image",
+      "title": "Marco Zero de Recife",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/marco-zero-recife.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Marco Zero de Recife",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-75950cba8701",
+      "type": "image",
+      "title": "Recife - Praça da República",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-praca-da-republica.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife - Praça da República",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d4ceadd26616",
+      "type": "image",
+      "title": "Parque das Esculturas - Recife PE",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-das-esculturas-recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Parque das Esculturas - Recife PE",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b04bc3d49ae0",
+      "type": "image",
+      "title": "Ponte da Boa Vista - Recife PE",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/ponte-boa-vista-recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/ponte-boa-vista-recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ponte da Boa Vista - Recife PE",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-41160a9fd3ba",
+      "type": "image",
+      "title": "Parque Treze de Maio - Recife PE",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-treze-de-maio-recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/parque-treze-de-maio-recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Parque Treze de Maio - Recife PE",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7f6817016f26",
+      "type": "image",
+      "title": "Recife - Parque Dona Lindu",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-parque-dona-lindu.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-parque-dona-lindu.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife - Parque Dona Lindu",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0b8511b2aaf6",
+      "type": "image",
+      "title": "Confira aqui todas as nossas dicas do que ver e fazer em Recife! As melhores praias e opções de lazer, pontos turísticos, restaurantes, bares, museus e mais!",
+      "url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684247/recife-108-c.jpg",
+      "final_url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684247/recife-108-c.jpg",
+      "source_title": "Guia Melhores Destinos",
+      "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "publisher": "imgmd.net",
+      "date": "2026-03-31T21:59:16-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Confira aqui todas as nossas dicas do que ver e fazer em Recife! As melhores praias e opções de lazer, pontos turísticos, restaurantes, bares, museus e mais!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "titulo": "O que fazer em Recife PE: 30 pontos turísticos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2014-05-31T15:38:00+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2014-05-31T15:38:00+00:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+      "titulo": "Guia Melhores Destinos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-03-31T21:59:16-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-recife.html",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2026-03-31T21:59:16-03:00"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://en.wikipedia.org/wiki/Recife",
+      "titulo": "municipality of Pernambuco state, Brazil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2002-07-29T09:51:55Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://en.wikipedia.org/wiki/Recife",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2002-07-29T09:51:55Z"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "parsed_request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Recife\" notícias acidentes",
+    "domain": "news",
+    "original_request": "Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.",
+    "resolved_request": "Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Recife",
+      "topic": "acidentes"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T21:04:47.106257+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Recife",
+        "topic": "acidentes"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "observed_at": "2026-10-24T21:04:47.106358+00:00",
+  "source_revision": "4b54a2604ad80e8a38abf674c8c1e601034bfd6c + working tree",
+  "query_intelligence_sha256": "d2fff2584643fc5de8c7e9d06f0fb409c05d943328028222bdb58ebf69d72f39"
+}

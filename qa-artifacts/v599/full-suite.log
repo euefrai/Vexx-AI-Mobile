@@ -1,0 +1,103 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+..................F..................................................... [ 14%]
+........................................................................ [ 19%]
+...............s........................................................ [ 24%]
+........................................................................ [ 29%]
+........................................................................ [ 34%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 48%]
+........................................................................ [ 53%]
+.............s.......................................................... [ 58%]
+........................................................................ [ 63%]
+...........F.................................F.......................... [ 68%]
+........................................................................ [ 73%]
+.........s..........s................................................... [ 77%]
+........................................................................ [ 82%]
+........................................................................ [ 87%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+.......................................                                  [100%]
+================================== FAILURES ===================================
+________________ test_bench_pesquisa_v57_offline_tudo_aprovado ________________
+
+    def test_bench_pesquisa_v57_offline_tudo_aprovado():
+        rel = _carregar().rodar(salvar=False)
+>       assert rel["falhas"] == []
+E       AssertionError: assert ['fluxo_junk:... o freio ABS'] == []
+E         
+E         Left contains one more item: 'fluxo_junk: como funciona o freio ABS'
+E         Use -v to get more diff
+
+tests\test_bench_pesquisa_v57.py:24: AssertionError
+_________________ test_recuperacao_roda_uma_rodada_por_lacuna _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000016A4F747930>
+
+    def test_recuperacao_roda_uma_rodada_por_lacuna(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append(consulta)
+            if "valor preço número" in consulta:
+                return [dict(R1), dict(R2), dict(R3)]
+            return [dict(R1)]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        res = orch.pesquisar_com_recuperacao("quanto custa a placa a?", max_resultados=4,
+                                             orcamento=_orcamento_1())
+        assert res["recuperou"] is True
+        assert "— recuperação por lacuna —" in res["etapas"]
+        assert len(res["achados"]) == 3
+        assert res["estado"] == "ok"
+        assert any("valor preço número" in c for c in chamadas)
+>       assert all("quanto custa a placa a?" in c for c in chamadas)
+E       assert False
+E        +  where False = all(<generator object test_recuperacao_roda_uma_rodada_por_lacuna.<locals>.<genexpr> at 0x0000016A4E18A670>)
+
+tests\test_search_core_v55.py:403: AssertionError
+__________ test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000016A4F5B66D0>
+
+    def test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append((nome, consulta))
+            if "funciona" in consulta.lower():
+                return [{"titulo": "Funciona - Dicionário", "url": "https://dicio.example/funciona",
+                         "trecho": "conjugação do verbo funciona", "origem": nome, "tipo": "pagina"}]
+            return [
+                {"titulo": "Freio ABS: o que é e como funciona", "url": "https://auto.example/abs",
+                 "trecho": "sistema de freio ABS com sensor", "origem": nome, "tipo": "pagina"},
+                {"titulo": "Freio ABS — Wikipédia", "url": "https://pt.wikipedia.org/wiki/Freio_ABS",
+                 "trecho": "freio antibloqueio", "origem": nome, "tipo": "enciclopedia"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        res = orch.pesquisar("como funciona o freio ABS", provedores=["bing"],
+                             orcamento=ORC)
+        assert ("bing", "freio ABS") in chamadas
+>       assert any("consulta reformulada" in e for e in res["etapas"])
+E       assert False
+E        +  where False = any(<generator object test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte.<locals>.<genexpr> at 0x0000016A4E29D970>)
+
+tests\test_search_orchestrator_v57.py:63: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_evidence_benchmarks.py:229: Verificação semântica LLM BLOQUEADA sem provedor; determinístico cobre o resto.
+SKIPPED [1] tests\test_research_quality.py:162: Inferência Hermes real bloqueada no provedor; síntese LLM marcada BLOQUEADA.
+SKIPPED [1] tests\test_shopping.py:438: DDG sem resultados (rede instável)
+SKIPPED [1] tests\test_shopping.py:627: BLOQUEADO: mlb=ResearchErro: Provedor HTTP 403. ddg=página sem resultados (bot-wall?) lite=página sem resultados (bot-wall?)
+3 failed, 1472 passed, 4 skipped, 2 warnings in 253.31s (0:04:13)

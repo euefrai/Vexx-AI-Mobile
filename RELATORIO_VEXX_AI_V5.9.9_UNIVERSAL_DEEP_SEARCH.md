@@ -13,6 +13,8 @@ Corrigidas perdas reproduzidas entre pergunta, descoberta, leitura, filtro final
 | Tópico desaparecia ao formar a consulta só com cidade | Tópico preservado na descoberta; local/região/tópico reaplicados nas variantes/replanos de notícias |
 | Notícia sem cidade podia passar sem pertinência temática | Avaliação vertical não substitui a correspondência com o assunto |
 | Palavras de instrução favoreciam dicionários | Pontuação usa termos distintivos; verbos/instruções não contam como assunto; API qualificada tolera espaços de HTML sem perder fronteiras de tokens |
+| Pedido temático longo sem cidade ia inteiro ao buscador | Extração de tópico independente do local; instruções finais de apresentação com objeto genérico saem da consulta. Comparações nomeadas, exclusões e preços são preservados; pedido original continua no filtro |
+| Página do agregador contava como artigo original | Google Notícias permanece descoberta; gate considera o URL final lido para rejeitar índices após redirect, mantendo também o link de descoberta |
 | Seis primeiros leads escondiam originais posteriores | Doze candidatos preservados; até seis leituras; feeds/Commons não gastam posições de leitura HTML; metadados incompletos não são eliminados antes da recuperação original |
 | Candidatos desapareciam após corte/seleção | Reservoir limitado, IDs estáveis, origem/consulta/data/estado/motivos e referências; cache existente, sem novo motor/banco |
 | Mídia não atravessava pesquisa rápida/cache/mensagem | Transporte real por media_evidence → research → research_view → mensagem → SQLite/IndexedDB/reload |
@@ -27,7 +29,7 @@ Corrigidas perdas reproduzidas entre pergunta, descoberta, leitura, filtro final
 
 ## Validação
 
-Baseline: **1443 passed, 4 skipped, 2 warnings**. Última suíte final: **1493 passed, 4 skipped, 2 warnings em208,61s**, log `full-suite-delivery.log`, código1181c2e. Benchmarks congelados mantidos: **Search34/34, Shopping59/59, Experience16/16**; gabaritos não foram alterados. Focados cobriram restrições, cidades incompatíveis, datas, API qualificada, seleção após feeds, cache/SQLite, mídia, redação, autorização administrativa e isolamento.
+Baseline: **1443 passed, 4 skipped, 2 warnings**. Última suíte final: **1507 passed, 4 skipped, 2 warnings em 147,26s**, log `full-suite-topical-final.log`, código `ee770ce`. Benchmarks congelados mantidos: **Search 34/34, Shopping 59/59, Experience 16/16**; gabaritos não foram alterados. Focados cobriram restrições, cidades incompatíveis, datas, API qualificada, seleção após feeds, cache/SQLite, mídia, redação, autorização administrativa, isolamento e índices após redirect.
 
 Quatro skips conhecidos: verificação semântica LLM, inferência científica Hermes específica e dois casos externos de shopping sem resultados/bloqueados por 403/bot-wall. A sonda de modelo real desta etapa não transforma esses testes semânticos/científicos em aprovados. Dois warnings existentes: `mss.mss` e timeout do Starlette TestClient.
 
@@ -59,7 +61,7 @@ UI:1280/390/320px sem overflow de página; zoom **CSS**200%; modal anterior/pró
 
 Não foram medidos FPS, RAM/CPU de aparelho físico ou contraste por ferramenta especializada. Não houve aprovação visual de cards de vídeo/oferta ausentes, nem captura completa dos bytes SSE do app no navegador. Testes do protocolo, sonda upstream e observação da UI têm escopos diferentes. Não se somam FIXTURE/FROZEN_REPLAY/LIVE_EXTERNAL/REAL_MODEL/AUTHENTICATED_E2E em uma taxa única.
 
-Scan dirigido de229arquivos contra sete valores secretos configurados: nenhuma coincidência; fontes/documentação examinadas passaram em UTF-8 estrito. Não é auditoria de todo o histórico. Logs originais mantêm whitespace de tracebacks; o diff --check de fonte/documentação passou. Nenhum SQLite, cookie ou segredo operacional foi exportado.
+Scan dirigido de 246 arquivos contra sete valores secretos configurados: nenhuma coincidência; fontes/documentação examinadas passaram em UTF-8 estrito. Não é auditoria de todo o histórico. Logs originais mantêm whitespace de tracebacks; o diff --check de fonte/documentação passou. Nenhum SQLite, cookie ou segredo operacional foi exportado.
 
 ## Segurança administrativa
 
@@ -71,7 +73,7 @@ Código: `query_intelligence.py`, `search_orchestrator.py`, `search_verticals.py
 
 Testes: `tests/test_universal_search_v599.py`, `tests/test_admin_route_gate_v599.py` e contrato visual atualizado em `tests/test_autonomous_research_v598.py`. Ferramentas: benchmark universal, coleta sanitizada, chat/visual QA e opção live do harness isolado existente. Documentação em `docs/v5.9.9/`; evidências em `qa-artifacts/v599/`. Metadados privados de runtime, bancos, cookies, chaves e backups não fazem parte da entrega versionada.
 
-Commits de implementação:31491a3,96f0175,37afd55,83664b6,174411c,cb94da8,3fc21a1 e1181c2e. A documentação final registra o estado de validação sem reescrever esses commits. HEAD final da entrega é informado na resposta e conferível no Git local. Sem push.
+Commits de implementação: `31491a3`, `96f0175`, `37afd55`, `83664b6`, `174411c`, `cb94da8`, `3fc21a1`, `1181c2e` e `ee770ce`. A documentação registra o estado de validação sem reescrever esses commits. HEAD final da entrega é conferível no Git local. Sem push.
 
 ## Pendências e próximo recorte
 

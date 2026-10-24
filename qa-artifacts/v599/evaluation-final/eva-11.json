@@ -1,0 +1,553 @@
+{
+  "id": "eva-11",
+  "category": "events",
+  "query": "Eventos em Fortaleza nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.602,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "fortaleza eventos culturais",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "fortaleza eventos culturais",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "fortaleza eventos culturais",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4982
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Fortaleza%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Fortaleza%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14348
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 1109
+    },
+    {
+      "url": "https://www.bing.com/search?q=fortaleza+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=fortaleza+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4850
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=fortaleza+eventos+culturais",
+      "final": "https://old-search.marginalia.nu/search?query=fortaleza+eventos+culturais",
+      "chars": 1029
+    },
+    {
+      "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "final": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "chars": 872576
+    },
+    {
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "final": "https://www.fortaleza.ce.gov.br/",
+      "chars": 36476
+    },
+    {
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "final": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "chars": 194509
+    },
+    {
+      "url": "https://visit-fortaleza.com/",
+      "final": "https://visit-fortaleza.com/",
+      "chars": 354116
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "final": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "chars": 1650176
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Fortaleza nos próximos sete dias",
+    "resolved_request": "Eventos em Fortaleza entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Fortaleza"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T17:09:12.969644+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Fortaleza"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "432144285cd57c60c8c7",
+        "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+        "title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 12:05:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Invicto no returno, Tricolor visita adversário paulista pela 35ª rodada da Série B de olho nos playoffs e no equilíbrio do retrospecto"
+      },
+      {
+        "id": "cd67d9b168aae6759e2e",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "title": "Prefeitura Municipal de Fortaleza",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Prefeitura de Fortaleza entrega tablets e celulares para agentes de saúde e de combate às endemias e apresenta novos fardamentos O investimento foi de R$ 4,1 mi"
+      },
+      {
+        "id": "3e2d4b853960d4eee837",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2021-05-31T12:50:37+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "pode render alguns dias ficando hospedado por lá mesmo. É uma cidade pequena, com um litoral extenso, que possui falésias no mar e boas barracas de praia. É uma"
+      },
+      {
+        "id": "0d64a866eb628ef6c1b2",
+        "url": "https://visit-fortaleza.com/",
+        "title": "Visit Fortaleza - Site Oficial de Turismo",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2025-07-28T21:19:40+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "De sal e sol: viva fortaleza com vista para o mar"
+      },
+      {
+        "id": "59d0aaa84ee2ae7e83db",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+        "title": "AS 15 MELHORES coisas para fazer em Fortaleza (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 02:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pretende visitar as belezas de Fortaleza e arredores?? Então me sinto a vontade para recomendar a todos que procurem a Valéria para o planejamento e dicas de pa"
+      },
+      {
+        "id": "22670c25cee126f79945",
+        "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "title": "Fortaleza – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2004-04-15T06:57:04Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "municipal da nação. No turismo, em 2012, a cidade alcançou as marcas de segundo destino mais desejado do Brasil e quarta cidade brasileira que mais recebeu turi"
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-386a02bc0f99",
+      "type": "image",
+      "title": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "url": "https://s3.glbimg.com/v1/AUTH_378ee63fe83141e69caddd838034e850/static/preview-share-min.png",
+      "final_url": "https://s3.glbimg.com/v1/AUTH_378ee63fe83141e69caddd838034e850/static/preview-share-min.png",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "s3.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bcacffdd6ddd",
+      "type": "image",
+      "title": "Athletico-PR",
+      "url": "https://s.glbimg.com/es/sde/f/organizacoes/escudo_default_65x65.png",
+      "final_url": "https://s.glbimg.com/es/sde/f/organizacoes/escudo_default_65x65.png",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Athletico-PR",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b31c82b51872",
+      "type": "document",
+      "title": "aston-villa.html",
+      "url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/aston-villa.html",
+      "final_url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/aston-villa.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-f21450ce07f3",
+      "type": "document",
+      "title": "newcastle.html",
+      "url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/newcastle.html",
+      "final_url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/newcastle.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-54fc6ca87988",
+      "type": "document",
+      "title": "selecoes.html",
+      "url": "https://ge.globo.com/futebol/copa-do-mundo/selecoes.html",
+      "final_url": "https://ge.globo.com/futebol/copa-do-mundo/selecoes.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-22b06a1dad83",
+      "type": "document",
+      "title": "todos-os-esportes.html",
+      "url": "https://ge.globo.com/todos-os-esportes.html",
+      "final_url": "https://ge.globo.com/todos-os-esportes.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-657d9c6d90e7",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "http://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "http://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-708495d65805",
+      "type": "document",
+      "title": "privacidade.html",
+      "url": "https://www.globo.com/privacidade.html",
+      "final_url": "https://www.globo.com/privacidade.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "www.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-65978fd35534",
+      "type": "image",
+      "title": "Logo da Prefeitura Municipal de Fortaleza",
+      "url": "https://www.fortaleza.ce.gov.br/templates/pmf/images/logo-portal-prefeitura-fortaleza.png",
+      "final_url": "https://www.fortaleza.ce.gov.br/templates/pmf/images/logo-portal-prefeitura-fortaleza.png",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo da Prefeitura Municipal de Fortaleza",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-82b5711f0260",
+      "type": "image",
+      "title": "Fortaleza Digital",
+      "url": "https://www.fortaleza.ce.gov.br/images/images2/banners/Banner_FD_-Portal-da-Prefeitura.png",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images2/banners/Banner_FD_-Portal-da-Prefeitura.png",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Fortaleza Digital",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e7d81232dfe8",
+      "type": "image",
+      "title": "Imagem Destacada",
+      "url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/3/23%2010%202026%20_27A7978.JPG",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/3/23%2010%202026%20_27A7978.JPG",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem Destacada",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a10958868f02",
+      "type": "image",
+      "title": "Imagem Destacada",
+      "url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/terminal%20santu%C3%A1rio%20da%20f%C3%A9%20movimenta%C3%A7%C3%A3o.jpg",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/terminal%20santu%C3%A1rio%20da%20f%C3%A9%20movimenta%C3%A7%C3%A3o.jpg",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem Destacada",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "titulo": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "titulo": "Prefeitura Municipal de Fortaleza",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sex., 23 out. 2026 04:14:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "titulo": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2021-05-31T12:50:37+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

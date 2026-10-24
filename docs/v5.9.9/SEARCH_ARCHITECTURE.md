@@ -17,6 +17,8 @@ Baseline Git: 79c63db, worktree `vexx-v598-dev`. A produção não participa des
 
 Checkpoints SSE não podem rebaixar completed/failed/cancelled a processing. A reabertura explícita passa por queued, preservando retry. A correção decorre de uma corrida observada no SQLite QA após resposta visual já concluída.
 
+Consulta temática: pedidos de notícias com `sobre/acerca de` podem informar tópico sem cidade. Só instruções terminais de apresentação com objetos genéricos são retiradas; comparações com entidades nomeadas permanecem. Exclusão/negação/preço detectados impedem essa compactação conservadora. O pedido original e os parâmetros seguem no gate; nenhuma janela nova é deduzida apenas de “novidades”. Isso não é um parser universal de restrições negativas ou homônimos.
+
 Perdas reproduzidas: datas removidas antes do gate final; pergunta sobre cidade não reconhecida; tópico eliminado da busca; metadados de mídia não atravessavam a pesquisa rápida; prompt negava busca de imagens; visual iniciava job sem mostrar galeria no chat; verbo “usar” exigido literalmente em documentação inglesa; pedidos “encontre” não pesquisavam; imagens secundárias de páginas viravam galerias sem intenção de mídia.
 
 O contrato novo torna explícitos parâmetros já suportados. Não é um extrator universal de todas as preferências/negações/entidades. Shopping mantém seus critérios próprios existentes. Desambiguação mundial de homônimos e verificação semântica ampla continuam limitadas; não há alegação de cobertura absoluta.

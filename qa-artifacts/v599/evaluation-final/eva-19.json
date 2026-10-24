@@ -1,0 +1,664 @@
+{
+  "id": "eva-19",
+  "category": "multiple_requirements",
+  "query": "Notícias sobre educação em Fortaleza hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.481,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Fortaleza\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Fortaleza\" notícias educação",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Fortaleza\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza\" site:agenciasebrae.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 101729
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5595
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4896
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Forma%C3%A7%C3%A3o+de+professores+e+transforma%C3%A7%C3%A3o+da+educa%C3%A7%C3%A3o+mobilizam+lideran%C3%A7as+em+encontro+do+Sebrae+em+Fortaleza%22+site%3Aagenciasebrae.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Forma%C3%A7%C3%A3o+de+professores+e+transforma%C3%A7%C3%A3o+da+educa%C3%A7%C3%A3o+mobilizam+lideran%C3%A7as+em+encontro+do+Sebrae+em+Fortaleza%22+site%3Aagenciasebrae.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5631
+    },
+    {
+      "url": "https://agenciasebrae.com.br",
+      "final": "https://agenciasebrae.com.br",
+      "chars": 130315
+    },
+    {
+      "url": "https://agenciasebrae.com.br/feed/",
+      "final": "https://agenciasebrae.com.br/feed/",
+      "chars": 60565
+    },
+    {
+      "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "final": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "chars": 872578
+    },
+    {
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "final": "https://www.fortaleza.ce.gov.br/",
+      "chars": 36476
+    },
+    {
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "final": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "chars": 194509
+    },
+    {
+      "url": "https://visit-fortaleza.com/",
+      "final": "https://visit-fortaleza.com/",
+      "chars": 354116
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "final": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "chars": 1650176
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Fortaleza\" notícias educação",
+    "domain": "news",
+    "original_request": "Notícias sobre educação em Fortaleza hoje",
+    "resolved_request": "Notícias sobre educação em Fortaleza hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Fortaleza",
+      "topic": "educação"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T17:10:15.168054+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Fortaleza",
+        "topic": "educação"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "a92de25454857589ab66",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPdkhOWHc1dWNHSndfbHRuekpZd2RkYThzUmJSRXdwNW1PS09SMXNQeWZmSENqOGZ1cXZ5MDBfWG0xMDlQNXl6T2xGSjhNTExLYmthZGwyZTdXTEY0TlozUkZYR2VFaFVweVBEcFNadmFqbE1BYkFrR2lhNkxpRk5Ec3ZJNklyS2JYeVU2M1BJNWpzenpvN294VHFLenQwM1RUWXhUWkctSWs4UmRxYmZ0LWlnalhxU1NtLTZRR2N3RGxNQTZxWHFyVkktemk5aFVabk5scnptU0JZWXV1SHk1eUhfZWxiamMyWE5LTWh0cXg?oc=5",
+        "title": "Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza - Agência Sebrae de Notícias",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Fri, 09 Oct 2026 18:46:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza Agência Sebrae de Notícias"
+      },
+      {
+        "id": "82b72e5daebb1ec17d15",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNZFBKZExZc3JaV0dxU05wNXQ5WW0wTFItUFRFb0h5RW1SeWk4bDBpQWdZeVdzUy1MZWptSmplUktsb1NJYXA4Z0lXczdYTUlaMkxjZmp5aGNmR2E5aU84aUF5Ui1nTExDX0kxZm1CNlZfYzNWWEJwMzZXNm5VaGptbVBoTXRzTXBoT3ZSU2FKVl9XNVpQcXhzVldWRzRuMnhVd3pOUm5MLXdzQjI4VlNtci1aTHRfbzRRcEtjOG8xcUxZWTRhYTRrU1VkTUpQaHh0MWdtWFBNLTZXY2o3RlAybw?oc=5",
+        "title": "Formação em educação patrimonial reúne professores de Governador Celso Ramos na Fortaleza de Anhatomirim - Notícias da UFSC",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Fri, 25 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Formação em educação patrimonial reúne professores de Governador Celso Ramos na Fortaleza de Anhatomirim Notícias da UFSC"
+      },
+      {
+        "id": "96a8fa99955cd8082959",
+        "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQYzVFZjljdlU2VVFyalVWNEloSTlzZklHdXF0b0pMLTZRZlNMejBJTXBmV2JWVDQ5RGNRanN6RjhKTzVYZV9TWGxlb2RUQld3SE55N09OX2hmOWRhOEVSeTdrN3BIT1BnNDZudEhvdUxocHJORU5IQjdrcW1WTlN3ZHZfUlFzckQ3ejBZYzdENnpPZ3Z3TlpSWjBQd09oejl5Y1h6SFBSUkd0bmJLbTF6bXBBdldwMmpqd2V6R19GaXFLSGs2c2xuUDJqVUJMbHd0SG81eGRFUndWUWRDUy1VT2J0bXhmckE?oc=5",
+        "title": "ConheCER 2026 reúne especialistas em Fortaleza para debater educação e transformação dos territórios - Agência Sebrae de Notícias",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Thu, 08 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ConheCER 2026 reúne especialistas em Fortaleza para debater educação e transformação dos territórios Agência Sebrae de Notícias"
+      },
+      {
+        "id": "2a2626529368454b3805",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZ01NYmVkYjVURW1EQ1dyeUpCR1REazRtSGk2cjF3aFVSYS1vTW9rN3ZtVVZTX1pvUmE4cDhXV0NHeFBWNjk1ek1BSWFkWGpoSFhjX29yem9jejI0U3IzWG1QeG5MeXJ4LWpRYXJ5UEE3VG55NmlQNzJscnRPcVpaMGZOZXl5Q01FTUpnOXhBbXN1aTZkNE9UaVFUWktBTmRwOEI0ZVRBSzZPelkzMkphOF9UU0ptOS1RbmtacQ?oc=5",
+        "title": "Assistentes da Educação Infantil substitutas de Fortaleza iniciam greve por equiparação salarial - Fetamce",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Mon, 28 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Assistentes da Educação Infantil substitutas de Fortaleza iniciam greve por equiparação salarial Fetamce"
+      },
+      {
+        "id": "432144285cd57c60c8c7",
+        "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+        "title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "sáb., 24 out. 2026 12:05:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Invicto no returno, Tricolor visita adversário paulista pela 35ª rodada da Série B de olho nos playoffs e no equilíbrio do retrospecto"
+      },
+      {
+        "id": "0c743a48b9908908ec51",
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPazhKTFhaR2swNW9FcXZHZEw0dGE1RGNpZDNZZGFFUDZTQ2hZY3Y3QjRBUUFudGRtVHUzMnR3dndTc3lpcmlRanVxZVRtQW1aaVEtdXZQcENob2FfY0dOYUhXdDNzRzhUc2xOVDhJdHFpNC1XNnhUbGxJVEJHbjM0cmZQNzE2a2hVS2JXdVh3RmdUcXJPR0lvcVRUSHU3TnkyeVlZd3d0UFJQRWhkTDZQR2M3MA?oc=5",
+        "title": "SBPC/ML aproxima Medicina Laboratorial de estudantes de Medicina em Fortaleza - SBPC/ML",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Tue, 29 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "SBPC/ML aproxima Medicina Laboratorial de estudantes de Medicina em Fortaleza SBPC/ML"
+      },
+      {
+        "id": "3d774c671fe7ccdb36d9",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMFdaVXpCZzZzbEtUNXM4ZGtWY2Yyb3BwYXRSZ1BrU1h3eXhyQmFQVUItblNmWUQwY1BaX3FXQmxybHdqTDhZNUZXM3l3RER3blRNdHZPMExyWW5WYlUwbGlGYVVrdVIyamNjazdNNnBpNm9WV2tFWk9VRXJkNXVYVzk2WGVsR25JX2wwNFk0QTc2U1JxLWZvVFBZQXNHOFVXM3o3cFF0TGgxeF85RG1td2g0cDR5aGpu?oc=5",
+        "title": "Prefeitura de Fortaleza leva 8 mil estudantes da Rede Municipal ao Sana 2026 - Prefeitura de Fortaleza",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Sat, 11 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Fortaleza leva 8 mil estudantes da Rede Municipal ao Sana 2026 Prefeitura de Fortaleza"
+      },
+      {
+        "id": "cd67d9b168aae6759e2e",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "title": "Prefeitura Municipal de Fortaleza",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Prefeitura de Fortaleza entrega tablets e celulares para agentes de saúde e de combate às endemias e apresenta novos fardamentos O investimento foi de R$ 4,1 mi"
+      },
+      {
+        "id": "3e2d4b853960d4eee837",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2021-05-31T12:50:37+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "pode render alguns dias ficando hospedado por lá mesmo. É uma cidade pequena, com um litoral extenso, que possui falésias no mar e boas barracas de praia. É uma"
+      },
+      {
+        "id": "0d64a866eb628ef6c1b2",
+        "url": "https://visit-fortaleza.com/",
+        "title": "Visit Fortaleza - Site Oficial de Turismo",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2025-07-28T21:19:40+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "De sal e sol: viva fortaleza com vista para o mar"
+      },
+      {
+        "id": "59d0aaa84ee2ae7e83db",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+        "title": "AS 15 MELHORES coisas para fazer em Fortaleza (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "sex., 23 out. 2026 02:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pretende visitar as belezas de Fortaleza e arredores?? Então me sinto a vontade para recomendar a todos que procurem a Valéria para o planejamento e dicas de pa"
+      },
+      {
+        "id": "22670c25cee126f79945",
+        "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "title": "Fortaleza – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2004-04-15T06:57:04Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "esse território podem ter chegado há cerca de anos. Aproximadamente até o ano , a região era dominada pelos . Nessa época, tais índios foram expulsos para o int"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-386a02bc0f99",
+      "type": "image",
+      "title": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "url": "https://s3.glbimg.com/v1/AUTH_378ee63fe83141e69caddd838034e850/static/preview-share-min.png",
+      "final_url": "https://s3.glbimg.com/v1/AUTH_378ee63fe83141e69caddd838034e850/static/preview-share-min.png",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "s3.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bcacffdd6ddd",
+      "type": "image",
+      "title": "Athletico-PR",
+      "url": "https://s.glbimg.com/es/sde/f/organizacoes/escudo_default_65x65.png",
+      "final_url": "https://s.glbimg.com/es/sde/f/organizacoes/escudo_default_65x65.png",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Athletico-PR",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b31c82b51872",
+      "type": "document",
+      "title": "aston-villa.html",
+      "url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/aston-villa.html",
+      "final_url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/aston-villa.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-f21450ce07f3",
+      "type": "document",
+      "title": "newcastle.html",
+      "url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/newcastle.html",
+      "final_url": "https://ge.globo.com/equipe/futebol/futebol-internacional/futebol-ingles/newcastle.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-54fc6ca87988",
+      "type": "document",
+      "title": "selecoes.html",
+      "url": "https://ge.globo.com/futebol/copa-do-mundo/selecoes.html",
+      "final_url": "https://ge.globo.com/futebol/copa-do-mundo/selecoes.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-22b06a1dad83",
+      "type": "document",
+      "title": "todos-os-esportes.html",
+      "url": "https://ge.globo.com/todos-os-esportes.html",
+      "final_url": "https://ge.globo.com/todos-os-esportes.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "ge.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-657d9c6d90e7",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "http://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "http://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-708495d65805",
+      "type": "document",
+      "title": "privacidade.html",
+      "url": "https://www.globo.com/privacidade.html",
+      "final_url": "https://www.globo.com/privacidade.html",
+      "source_title": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "source_url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "publisher": "www.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Próximos jogos do Fortaleza, resultados, vídeos, reforços, escalação e notícias ao vivo. Acompanhe tudo sobre o seu clube do coração no ge.globo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-65978fd35534",
+      "type": "image",
+      "title": "Logo da Prefeitura Municipal de Fortaleza",
+      "url": "https://www.fortaleza.ce.gov.br/templates/pmf/images/logo-portal-prefeitura-fortaleza.png",
+      "final_url": "https://www.fortaleza.ce.gov.br/templates/pmf/images/logo-portal-prefeitura-fortaleza.png",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo da Prefeitura Municipal de Fortaleza",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-82b5711f0260",
+      "type": "image",
+      "title": "Fortaleza Digital",
+      "url": "https://www.fortaleza.ce.gov.br/images/images2/banners/Banner_FD_-Portal-da-Prefeitura.png",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images2/banners/Banner_FD_-Portal-da-Prefeitura.png",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Fortaleza Digital",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e7d81232dfe8",
+      "type": "image",
+      "title": "Imagem Destacada",
+      "url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/3/23%2010%202026%20_27A7978.JPG",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/3/23%2010%202026%20_27A7978.JPG",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem Destacada",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a10958868f02",
+      "type": "image",
+      "title": "Imagem Destacada",
+      "url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/terminal%20santu%C3%A1rio%20da%20f%C3%A9%20movimenta%C3%A7%C3%A3o.jpg",
+      "final_url": "https://www.fortaleza.ce.gov.br/images/images3/midias/2026/Outubro/terminal%20santu%C3%A1rio%20da%20f%C3%A9%20movimenta%C3%A7%C3%A3o.jpg",
+      "source_title": "Prefeitura Municipal de Fortaleza",
+      "source_url": "https://www.fortaleza.ce.gov.br/",
+      "publisher": "www.fortaleza.ce.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem Destacada",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+      "titulo": "Fortaleza | Notícias, resultados e próximos jogos | ge",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://ge.globo.com/ce/futebol/times/fortaleza/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 12:05:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "titulo": "Prefeitura Municipal de Fortaleza",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sex., 23 out. 2026 04:14:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sex., 23 out. 2026 04:14:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "titulo": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2021-05-31T12:50:37+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2021-05-31T12:50:37+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

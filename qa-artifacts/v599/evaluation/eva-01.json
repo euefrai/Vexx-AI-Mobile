@@ -1,0 +1,388 @@
+{
+  "id": "eva-01",
+  "category": "municipal_news",
+  "query": "Notícias em Manaus nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 8.967,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Manaus\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Família diz ter encontrado corpo de jovem desaparecido em Manaus\" site:ampost.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 167162
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6045
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4843
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5245
+    },
+    {
+      "url": "https://www.acritica.com",
+      "final": "https://www.acritica.com",
+      "chars": 108732
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Fam%C3%ADlia+diz+ter+encontrado+corpo+de+jovem+desaparecido+em+Manaus%22+site%3Aampost.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Fam%C3%ADlia+diz+ter+encontrado+corpo+de+jovem+desaparecido+em+Manaus%22+site%3Aampost.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5637
+    },
+    {
+      "url": "https://www.manaus.am.gov.br/",
+      "error": "tamanho"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Manaus\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Manaus nos últimos sete dias",
+    "resolved_request": "Notícias em Manaus entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Manaus"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:45:36.078052+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Manaus"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "3df5553bd641ef9fb3b1",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+        "title": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 17:51:30 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 A Crítica"
+      },
+      {
+        "id": "cc7d34d674a0a91384cc",
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQU3VfMFlPTkkxVEEwWWRPTHhqSkNZTGljZlVwSHNrLUg0TU5UQURUUnFDRVdPQUZEQTRMQVhZWEhzaGJXUXZoaldPLTB3UkRFRXJtUkpTNzBZWWloeHhycml5Q19NaVhwY29WRi01NVVqdXBkeElfT0FXSUNxdTk3V0JZOXJzYWZiZDNuaUFCc05RcVFlUU5XUHN3?oc=5",
+        "title": "Família diz ter encontrado corpo de jovem desaparecido em Manaus - AM POST",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 00:37:02 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Família diz ter encontrado corpo de jovem desaparecido em Manaus AM POST"
+      },
+      {
+        "id": "e41b9626f94fecfa9849",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+        "title": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 14:50:05 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores A Crítica"
+      },
+      {
+        "id": "ec0e87d23ea1f4387f24",
+        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxORUJsUjJHQ2tMTndTUDRuZEV6TTlVOVE1T3hmeXNkTW4xTkZlS1JVcEgxNGZzWmwyajRFcXhqY3l6VzhoNjg0WXh0VUNKWElqMHpHN0RueHpWbG1rdjZvS2E2RDY1RVZkMzZuZWZWai1YWnZlWnliNGMyRXIzbGlkSmNmUW92d0c2Tld6M29qZElMcEhESEpPVFoxTHJ4SXRiam5yVTdNSlI3WVNvZ3c?oc=5",
+        "title": "Temporal em Manaus faz cinco voos serem alternados no Aeroporto Eduardo Gomes - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Thu, 22 Oct 2026 11:54:45 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Temporal em Manaus faz cinco voos serem alternados no Aeroporto Eduardo Gomes A Crítica"
+      },
+      {
+        "id": "7bd54b7b9bd9e897a8cf",
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUVItelZLMi1fWkkzWjNZSzVzWU9oVUtQWXJ1NTl4QkJQUGliQUxXWDVUdWg2RXI5NmFPWjNsR0Y3aG92UFJnSTkwSElZRk9ycmg2czFlVFg1dXhYdGgyMTBMWVh0WjlxbTBoclJ0V2lvTi0zWUtJZ0hWWTBMXzlvX1FoX3BKS3hrc19KVVhUcm9OWFhWajJXalgxelJoeHhVYkJ3RC12ZmxHZ3N0MDdNQ2VYQnpXWGlub1hr?oc=5",
+        "title": "Empretec abre 25 vagas para empreendedores em Manaus; veja como se inscrever - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 11:32:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Empretec abre 25 vagas para empreendedores em Manaus; veja como se inscrever Portal do Holanda"
+      },
+      {
+        "id": "0586e8e3fccc03428e01",
+        "url": "https://www.manaus.am.gov.br/",
+        "title": "Prefeitura de Manaus - Site oficial da Prefeitura de Manaus.",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 24 out. 2026 09:06:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portal da Prefeitura de Manaus. Serviços online, notícias, transparência, acesso a informação da Prefeitura de Manaus."
+      },
+      {
+        "id": "daca04b58d035fe48a69",
+        "url": "https://g1.globo.com/am/amazonas/",
+        "title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 24 out. 2026 12:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede A"
+      },
+      {
+        "id": "c0818434b33351b5bb6d",
+        "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+        "title": "O que fazer em Manaus: 20 pontos turísticos imperdíveis",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sex., 23 out. 2026 10:48:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Confira o que fazer em Manaus: Teatro Amazonas, MUSA, restaurantes... Veja os TOP passeios e experiências para incluir no roteiro."
+      },
+      {
+        "id": "4bda345689f4664134d7",
+        "url": "https://en.wikipedia.org/wiki/Manaus",
+        "title": "Manaus - Wikipedia",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "dom., 18 out. 2026 06:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Many wealthy European families settled in Manaus and brought their love for sophisticated European art, architecture, and culture with them. Manaus was one of t"
+      },
+      {
+        "id": "0a2ffabaa400ec780323",
+        "url": "https://18horas.com.br/manaus/",
+        "title": "Manaus - 18 Horas",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 24 out. 2026 08:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Exposição sobre memória da Covid-19 chega ao Museu da Cidade de Manaus Mostra reúne relatos, fotos, vídeos, cartazes, diários, mensagens e outros registros sobr"
+      },
+      {
+        "id": "3af69a3c522dd6a1027d",
+        "url": "https://pt.wikipedia.org/wiki/Manaus",
+        "title": "Manaus – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "qua., 21 out. 2026 00:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A região de Manaus, antes da chegada dos colonizadores, era habitada pelos povos nativos, com destaque aos manaus e aos barés. Em 3 de junho de 1542, a expediçã"
+      },
+      {
+        "id": "bb8a008b7e92be1bda8d",
+        "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+        "title": "Esportes Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 há 22 horas",
+        "origin": "publisher-feed",
+        "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+        "date": "",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": ""
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+      "titulo": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 - A Crítica",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 17:51:30 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 17:51:30 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQU3VfMFlPTkkxVEEwWWRPTHhqSkNZTGljZlVwSHNrLUg0TU5UQURUUnFDRVdPQUZEQTRMQVhZWEhzaGJXUXZoaldPLTB3UkRFRXJtUkpTNzBZWWloeHhycml5Q19NaVhwY29WRi01NVVqdXBkeElfT0FXSUNxdTk3V0JZOXJzYWZiZDNuaUFCc05RcVFlUU5XUHN3?oc=5",
+      "titulo": "Família diz ter encontrado corpo de jovem desaparecido em Manaus - AM POST",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 00:37:02 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQU3VfMFlPTkkxVEEwWWRPTHhqSkNZTGljZlVwSHNrLUg0TU5UQURUUnFDRVdPQUZEQTRMQVhZWEhzaGJXUXZoaldPLTB3UkRFRXJtUkpTNzBZWWloeHhycml5Q19NaVhwY29WRi01NVVqdXBkeElfT0FXSUNxdTk3V0JZOXJzYWZiZDNuaUFCc05RcVFlUU5XUHN3?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 00:37:02 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+      "titulo": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores - A Crítica",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 14:50:05 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 14:50:05 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

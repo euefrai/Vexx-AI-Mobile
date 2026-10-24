@@ -1,0 +1,36 @@
+2026-10-24 13:45:37,975 INFO documento doc-10e876a3a5c2 (contrato.txt, 2649 chars, 1 chunks)
+2026-10-24 13:45:38,088 INFO documento doc-f52d269c6f68 (vendas.csv, 42 chars, 1 chunks)
+[ok   ] geral_grounding_carrega_conteudo_lido (113 ms) — conteúdo lido da página chega ao prompt (além do trecho curto)
+         -> marcador de conteúdo presente no grounding
+[ok   ] geral_aberta_vs_encontrada (104 ms) — página aberta x só encontrada com marcas honestas
+         -> aberta sem marca; encontrada marcada 'NÃO lida'
+[ok   ] geral_sem_resultados_honesto (98 ms) — provedor vazio vira estado honesto + aviso
+         -> estado sem_resultados + aviso honesto
+[ok   ] pagina_usuario_lida_entra_no_prompt (124 ms) — "analise esta página: URL" traz o conteúdo real
+         -> página lida entrou no prompt como fonte
+[ok   ] pagina_usuario_bloqueada_honesta (111 ms) — página bloqueada: aviso honesto, sem invenção
+         -> bloqueio explicado sem contorno
+[ok   ] pagina_usuario_controle_sem_url (101 ms) — pedido de leitura sem URL não ativa o caminho
+         -> sem URL, sem leitura de página
+[ok   ] comercial_oferta_confirmada_com_link (106 ms) — produto específico vira card com link do item e preço
+         -> 1 card(s) confirmado(s) com link do item
+[ok   ] comercial_orcamento_respeitado (82 ms) — acima do orçamento nunca vira oferta
+         -> oferta dentro do teto; acima do teto fora
+[ok   ] comercial_sem_ofertas_nao_inventa (76 ms) — sem resultados: nenhuma oferta inventada
+         -> sem produtos, explicação presente
+[ok   ] documento_txt_trechos (77 ms) — TXT salvo, trechos relevantes recuperáveis
+         -> 1 trecho(s) relevantes
+[ok   ] documento_csv_tabela (113 ms) — CSV extraído como tabela com trecho relevante
+         -> CSV extraído como tabela com trecho relevante
+[ok   ] evidencia_claim_estados (0 ms) — claim com/sem evidência: SUPPORTED/INSUFFICIENT_EVIDENCE
+         -> SUPPORTED com fonte; INSUFFICIENT_EVIDENCE sem fonte
+[ok   ] jdui_python_produto (0 ms) — validador Python: preço, coerção e specs
+         -> fallback de preço, coerção e specs conforme o backend
+[ok   ] jdui_js_preco_fallback (128 ms) — espelho JS: preço numérico sem preco_valor informa valor
+         -> harness node ok
+[ok   ] jdui_js_item_de_listagem (99 ms) — espelho JS: coerção de item_de_listagem igual ao backend
+         -> harness node ok
+[ok   ] jdui_js_specs_tipo (103 ms) — espelho JS: specs com mesmo aceite/recusa do backend
+         -> harness node ok
+
+resultado: 16/16 checagens ok

@@ -1,0 +1,531 @@
+{
+  "id": "eva-02",
+  "category": "national_news",
+  "query": "Notícias do Canadá hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.615,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Canadá\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país\" site:www.bbc.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Alberta decide se abre caminho para separação do Canadá\" site:noticias.uol.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 154148
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5502
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4663
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5276
+    },
+    {
+      "url": "https://www.bbc.com",
+      "final": "https://www.bbc.com",
+      "chars": 655172
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Alberta+decide+se+abre+caminho+para+separa%C3%A7%C3%A3o+do+Canad%C3%A1%22+site%3Anoticias.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Alberta+decide+se+abre+caminho+para+separa%C3%A7%C3%A3o+do+Canad%C3%A1%22+site%3Anoticias.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5180
+    },
+    {
+      "url": "https://cav.receita.fazenda.gov.br/",
+      "error": "rede"
+    },
+    {
+      "url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+      "final": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+      "chars": 210874
+    },
+    {
+      "url": "https://servicos.receita.fazenda.gov.br/Servicos/procuracoesrfb/controlador/controlePrincipal.asp",
+      "final": "https://servicos.receita.fazenda.gov.br/Servicos/procuracoesrfb/controlador/controlePrincipal.asp",
+      "chars": 147
+    },
+    {
+      "url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+      "final": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+      "chars": 136714
+    },
+    {
+      "url": "https://servicos.receita.fazenda.gov.br/servicos/servicos-ecac/default.aspx",
+      "final": "https://servicos.receita.fazenda.gov.br/servicos/servicos-ecac/default.aspx",
+      "chars": 339557
+    },
+    {
+      "url": "https://app.consultaecac.com.br/app/usuarios/autenticar.aspx",
+      "final": "https://app.consultaecac.com.br/app/usuarios/autenticar.aspx",
+      "chars": 8213
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Canadá\" notícias",
+    "domain": "news",
+    "original_request": "Notícias do Canadá hoje",
+    "resolved_request": "Notícias do Canadá hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Canadá"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T17:07:56.157306+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Canadá"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "b935d01e217d25efd4a4",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOWjFGY3FyRWRtczA3cDNxOHYyMnpGYVJjNTcwY0Q2NGM1c0JqRWxjSktHR0dQWlFvcTdGcXB2OW1UT0tOOEFtaEpNS2pqVGFjcXl1UjFRbkk5dFJMN0FoMksxb01hSEtKdWZrMTlTREhFR0s5dXRVaVBSRzRmSnVCLTBjR25zbzRDUThsRHhzNnF2SGUxczdiNTlxR2J2YWdCdlAyRzVlWG0zZU02ZG1OVDktWVJpRHZleHNHNE81b25mNmZqd0hGY0hn?oc=5",
+        "title": "Alberta decide se abre caminho para separação do Canadá - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Mon, 19 Oct 2026 11:41:30 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Alberta decide se abre caminho para separação do Canadá UOL Notícias"
+      },
+      {
+        "id": "6f5947ecfa5cd1a02641",
+        "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPLUVXT1YwZVZQY191a2MxZTAza2FVcXFyQXNkMUdWOFRzUl83ODBWd1BMREZWNzJDX1NvOEo2SzdkUGpvMmN3VTFERHNLZUU5aURoWjRQZTFnemVkbmlmcXJaQ1lrSkhXRmhnMTJjc2oyN0pPTWlVbFhvOVktM3Biczc2MWFYQU1QcE11LTZjMkQ0U3J3U2JJWmwtbHhCQQ?oc=5",
+        "title": "Canadá: 75% dos eleitores de Alberta rejeitam avanço do separatismo - Vero Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 10:20:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Canadá: 75% dos eleitores de Alberta rejeitam avanço do separatismo Vero Notícias"
+      },
+      {
+        "id": "b26a0118f9f7137c23bf",
+        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+        "title": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país - BBC",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 10:00:43 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país BBC"
+      },
+      {
+        "id": "4f336ec2ff624fff1b55",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+        "title": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê - G1",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 06:35:51 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê G1"
+      },
+      {
+        "id": "ea4f473af80fda7debe3",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+        "title": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá - Agência Brasil",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Sun, 18 Oct 2026 20:54:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá Agência Brasil"
+      },
+      {
+        "id": "80835aaabcd581116a35",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQZi1oRGVkMWoyUFJxakEyM3h4ek1PdUJ3WFhNSXR5SklweXRMQVBna3ctc2N0M2VQYlA5X3VFM0tUTVVMX3NLZVJucEwwYm5GVmJ1OEJBdjM0VWtiQm5HdXcxUG9sWXZScGpCd1R6UnRsSlVNRnU2bUNTa1lPNHp2cUtKcEJYQWxCZFctWVdOaHI3dXpkWEdPTXRhODdrS1JIeVFnZFd1bGdMcnQ4UGk0c3BFZ0J1UQ?oc=5",
+        "title": "Canadá e Turquia iniciam negociações sobre acordo de livre comércio - Jornal de Brasília",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Thu, 22 Oct 2026 20:49:51 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Canadá e Turquia iniciam negociações sobre acordo de livre comércio Jornal de Brasília"
+      },
+      {
+        "id": "79ec1bd67ef9fd16de40",
+        "url": "https://cav.receita.fazenda.gov.br/",
+        "title": "eCAC - Centro Virtual de Atendimento",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 01:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "eCAC - Centro Virtual de Atendimento Para cadastrar um procurador, o contribuinte pode utilizar: a opção \"Procuração Eletrônica\", disponível no Portal e-CAC (o "
+      },
+      {
+        "id": "677c59abcb4ef53a7d59",
+        "url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+        "title": "e-CAC — Receita Federal",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sex., 23 out. 2026 02:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Assuntos Notícias Todas as notícias Arrecadação e Cobrança Cidadania Fiscal Combate ao contrabando Combate à corrupção Combate à sonegação Institucional Serviço"
+      },
+      {
+        "id": "04c6aa4740eedb882f8b",
+        "url": "https://servicos.receita.fazenda.gov.br/Servicos/procuracoesrfb/controlador/controlePrincipal.asp",
+        "title": "Portal e-CAC",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 02:33:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Acesse os serviços da Receita Federal relacionados a procurações eletrônicas e gerencie autorizações de acesso para terceiros."
+      },
+      {
+        "id": "174b3a10e09a96270c68",
+        "url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+        "title": "Cadastrar Autorização de Acesso (Procuração Digital) para ... - gov",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 22 nov. 2025 13:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "consultar a , verifique o despacho enviado no processo. Solicitação de Procuração Digital Para consultar esse despacho: 1. Acesse o canal abaixo. 2. Entre em “”"
+      },
+      {
+        "id": "20c9414a459a95ac4493",
+        "url": "https://servicos.receita.fazenda.gov.br/servicos/servicos-ecac/default.aspx",
+        "title": "Serviços Disponíveis no Portal e-CAC",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 02:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "optar, ou cancelar a opção realizada anteriormente, pela Caixa Postal do Portal e-CAC como meio para ciência de atos oficiais enviados pela Receita Federal. Lei"
+      },
+      {
+        "id": "a660ba34be4aea8fca17",
+        "url": "https://app.consultaecac.com.br/app/usuarios/autenticar.aspx",
+        "title": "Consulta e-CAC",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sex., 23 out. 2026 21:39:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Autenticar Nova Senha"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-bd443e0283d4",
+      "type": "image",
+      "title": "Acesse o centro de atendimento virtual ao contribuinte (e-CAC).",
+      "url": "https://www.gov.br/receitafederal/logo.png",
+      "final_url": "https://www.gov.br/receitafederal/logo.png",
+      "source_title": "e-CAC",
+      "source_url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+      "publisher": "www.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Acesse o centro de atendimento virtual ao contribuinte (e-CAC).",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9c2e997aea64",
+      "type": "image",
+      "title": "Acessar o e-CAC",
+      "url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual/acessar-ecac/@@images/image",
+      "final_url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual/acessar-ecac/@@images/image",
+      "source_title": "e-CAC",
+      "source_url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+      "publisher": "www.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Acessar o e-CAC",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1231bf034957",
+      "type": "document",
+      "title": "d8539.htm",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/decreto/d8539.htm",
+      "final_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/decreto/d8539.htm",
+      "source_title": "Cadastrar Autorização de Acesso (Procuração Digital) para acesso ao Portal de Serviços",
+      "source_url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+      "publisher": "www.planalto.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-d6ac3a14f496",
+      "type": "document",
+      "title": "l14129.htm",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14129.htm",
+      "final_url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14129.htm",
+      "source_title": "Cadastrar Autorização de Acesso (Procuração Digital) para acesso ao Portal de Serviços",
+      "source_url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+      "publisher": "www.planalto.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-81c7985bdd4b",
+      "type": "image",
+      "title": "site logo",
+      "url": "https://app.consultaecac.com.br/app/images/Logo.png",
+      "final_url": "https://app.consultaecac.com.br/app/images/Logo.png",
+      "source_title": "Consulta e-CAC",
+      "source_url": "https://app.consultaecac.com.br/app/usuarios/autenticar.aspx",
+      "publisher": "app.consultaecac.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "site logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+      "titulo": "e-CAC",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sex., 23 out. 2026 02:34:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/atendimento-virtual",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sex., 23 out. 2026 02:34:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+      "titulo": "Cadastrar Autorização de Acesso (Procuração Digital) para acesso ao Portal de Serviços",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 22 nov. 2025 13:36:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 22 nov. 2025 13:36:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://servicos.receita.fazenda.gov.br/servicos/servicos-ecac/default.aspx",
+      "titulo": "Serviços Disponíveis no Portal e-CAC",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 02:11:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://servicos.receita.fazenda.gov.br/servicos/servicos-ecac/default.aspx",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 02:11:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

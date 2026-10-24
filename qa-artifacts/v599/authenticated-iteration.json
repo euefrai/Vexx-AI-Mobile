@@ -1,0 +1,2328 @@
+{
+  "scope": "AUTHENTICATED_E2E; isolated QA accounts and SQLite only",
+  "cases": [
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "municipal",
+      "query": "Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.",
+      "seconds": 14.454,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 12,
+        "sources": 1,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nJanela pedida: 2026-10-17 a 2026-10-24. A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\nEncontrei 1 fonte(s) sobre Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.:\n\nDefensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias — Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro B",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "national",
+      "query": "Quais foram as principais notícias do Brasil hoje?",
+      "seconds": 7.654,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 12,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 8
+      },
+      "answer_excerpt": "v.\nVexx\n\nJanela pedida: 2026-10-24 a 2026-10-24. A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\nPesquisei agora, mas nenhum provedor retornou fontes utilizáveis. Tente reformular ou mais tarde. 🔍\n\nMídia descoberta (não é evidência)\nAmpliar imagem\nLog in to WhatsApp Web for simple, reliable and private messaging on your desktop. Send and receive messages and files with ease, all for fr",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "universal",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "seconds": 13.702,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 3,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nVou pesquisar as recentes novidades sobre inteligência artificial para você.\n\nFontes e dados recuperados\nPrincipais\nTRECHO LIDO\nDicio, Dicionário Online de Português · Notícia · Publicado em qua., 30 set. 2026 14:00:00 GMT\nTexto recuperado · Fonte de contexto\nprincipais Significado de Principais é o plural de principal. O mesmo que: essenciais, centrais, salientes, importantes, primários. Principais Usando \"\" num texto? O ajuda a variar ",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "documentation",
+      "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+      "seconds": 43.306,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nNão consegui responder: Modelo devolveu resposta vazia.\n\n13:56\n···\nTentar novamente",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "products",
+      "query": "Encontre notebooks Lenovo de 16 GB até R$ 3.000.",
+      "seconds": 24.103,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 1,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nLenovo · 16 GB RAM · até R$ 3.000\n\nA pesquisa online direta foi bloqueada automaticamente pelos sites (CAPTCHA/403), então não consegui confirmar preços nem estoque reais neste momento. Por isso, não posso afirmar que nenhum modelo específico está disponível dentro do seu orçamento.\n\nPara encontrar opções atualmente, recomendo buscar diretamente com os seguintes filtros:\n\nCritério de busca\tTermo sugerido\nMarca\tLenovo\nMemória RAM\t16 GB\nPr",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "images",
+      "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+      "seconds": 1.445,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 5,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 3
+      },
+      "answer_excerpt": "v.\nVexx\n\nEncontrei 5 item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.\n\nMídia descoberta (não é evidência)\nAmpliar imagem\nPonte Estaiada - São Paulo.jpg\nIMAGEM · NÃO É EVIDÊNCIA\nupload.wikimedia.org\n1213 × 750 · image/jpeg\nCrédito: Bruno M.\nAcesso: somente link · Análise: não analisado\nDireitos: CC0\nMarginal Pinheiros, com a Ponte Estaiada em destaque\nAbrir no site de origem ↗\nPágina de origem\nAm",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "videos",
+      "query": "Encontre vídeos explicativos sobre motores elétricos.",
+      "seconds": 9.635,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nNão consegui recuperar mídia pertinente nas fontes disponíveis agora. houve resultados, mas nenhum responde ao pedido\n\n13:57\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "history",
+      "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+      "seconds": 29.373,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nVou pesquisar a história da fundação de Salvador e comparar as informações de diferentes fontes históricas.\n\nInício da Pesquisa\nObjetivo da Investigação\nPESQUISA\nEm andamento\nPesquisar a história da fundação de Salvador e comparar informações de diferentes fontes históricas.\n13:57\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "comparison",
+      "query": "Compare Python, JavaScript e Go para aplicações web, considerando vantagens e limitações.",
+      "seconds": 31.315,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 1,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nAqui está uma comparação entre Python, JavaScript e Go para desenvolvimento web:\n\nComparação: Python, JavaScript e Go para Web\nCritério\tPython\tJavaScript (Node.js)\tGo\nDesempenho\tMédio (interpretalnguagem)\tBom (event loop)\tExcelente (compilada, concorrência eficiente)\nSimplicidade\tMuito simples e legível\tModerate (async pode complicar)\tSimples, mas menos intuitivo para iniciantes\nEscalabilidade\tLimitada para alta concorrência\tBoa com asyn",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "scarce",
+      "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+      "seconds": 11.75,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nNão há informações sobre um dispositivo chamado ZZUNIVERSAL999999. O nome parece ser fictício ou inventado, e não corresponde a nenhum produto real conhecido.\n\nPortanto, não há data de lançamento para pesquisar.\n\n13:59\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    }
+  ],
+  "cache": [
+    {
+      "query": "pesquise notícias sobre ubatã, bahia, entre 2026-10-17 e 2026-10-24. | 2026-10-17 2026-10-24",
+      "state": "sem_correspondencia",
+      "read": 2,
+      "useful": 0,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "ba4cfea31e424f95738c",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Mon, 19 Oct 2026 13:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias"
+          },
+          {
+            "id": "5dded0e8b78e152058dd",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Mon, 08 Jun 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural"
+          },
+          {
+            "id": "d0f3b1d844affd4f9a2d",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+            "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Fri, 19 Jun 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia"
+          },
+          {
+            "id": "3dbffe2263686d66eed4",
+            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5",
+            "title": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Mon, 31 Aug 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia G1"
+          },
+          {
+            "id": "bb9dc14e805aa1142609",
+            "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOeVdjOGNpbmtRR1hiYTcxYnRmd01JS2FEOTY2MWVzeVNyYmVLV0l3SFJUcFJ3cUxiOVhheTNfeFEyUnZ0QU5iV1VjVllMQ256c29Vc2FORGJzdXpLSnhVcFZPNGxrd05RQlBvdUV1b09KQktaT1p5RVhDZVRONUNVWmxRYlNNTHpORGZTU0ZnckF1YlFK0gGjAUFVX3lxTE84dkFtR1QyN2pRbno5YVlXSjRxck5IWVpBWGg1aGNfMlRuZHM4d3M5V3RjNF9GZVViWEpKYVd1SmtKSERmUnNGY2hTVDF1WlFtR2poV3RoMGh4U2k1YVZWalk1Rk56cDRteHg0M3RtM2NqeDA2bGl6bUZGZFhoaUJNTGF1bmI0V1o2S1I3cF9sUVpMTFR1SjAxYW03VUROMlA5TzQ?oc=5",
+            "title": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia - G1",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Mon, 06 Jul 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia G1"
+          },
+          {
+            "id": "b00573de4ce60fec7a62",
+            "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOUTFCOFFjZjhqTkRXSG41MXhJTzRsdjNwSk1JbUpubXlobFEzWTBNQnZsY2ItMGQ2RlprMkhXNlQ1VXhuRE02UlRRdVZTdmNfbGxCV1llWDRCV2NPVFpvRllEMkktZ3lyQVVFSURKenVlNExxV0p0em8wczZLUk5NckdRRUVrMnJwVmNwY0p2SEthRWNqRjJ3N1lHOHBUY21ra3pSQ1pyamVhblhCcTk1bw?oc=5",
+            "title": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã - Ilhéus Eventos",
+            "origin": "google-news",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "Wed, 17 Jun 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã Ilhéus Eventos"
+          },
+          {
+            "id": "053016b612aa0b1a2546",
+            "url": "https://jingyan.baidu.com/article/0bc808fc02856b1bd585b949.html",
+            "title": "如何设置Word邮件合并后的数字保留几位小数-百度经验",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "sáb., 24 out. 2026 04:06:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "1 首先，选中“语文”，单击右键，在出现的对话框中，选择“编辑域代码”，如下图所示。 2 出现域编辑页面，如下图所示。 3 在输入法英文状态下，将该页面中的语文加上双引号，如下图所示。 4 再在语文的后面，添加 \\# 两个符号，如下图所示。 5 最后，再输入 \"0.00\"（包括双引号），如下图所示。（如果是想保留3位小"
+          },
+          {
+            "id": "955a2ddea4783cc868df",
+            "url": "https://jingyan.baidu.com/article/77b8dc7ffdb27f2075eab62d.html",
+            "title": "word文字超出页边距怎么调整-百度经验",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "seg., 19 out. 2026 23:38:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "打开有问题的Word，可以看到文字超出页边距，选中所有文字，右键鼠标点击【段落】。"
+          },
+          {
+            "id": "394534b1f20adcba8fa4",
+            "url": "https://www.zhihu.com/question/339840855",
+            "title": "Word为什么设计得这么难用？ - 知乎",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "qua., 21 out. 2026 22:03:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Word为什么设计得这么难用？ 首先请要举报的收起小红酱贴大字报的冲动，不要动不动以理中客自居阻碍讨论。 说回提问，我在知乎搜索Word设计得难用，发现仅有的两个提问，一个无人回答，… 显示全部 关注者 130"
+          },
+          {
+            "id": "6a9469d832ad2e7593b3",
+            "url": "https://www.zhihu.com/question/20541531",
+            "title": "如何做到像使用 LaTeX 那样优雅地使用 Word？",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "qua., 21 out. 2026 01:32:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "一个人，对word有基础的了解，知道样式是怎么回事，知道怎么调段落间距行间距，知道怎么消除页眉下面的横线，那么你只需要外面有人再稍稍推你一把，你就能被带进优雅使用Word的中高档次，排出LaTeX那样的文档。 昨日找到一个模板，简直是一个对格式有追求的理科学生的福音！"
+          },
+          {
+            "id": "4a4570f7de0e37734b23",
+            "url": "https://jingyan.baidu.com/article/fb48e8bec1e49b6e622e140a.html",
+            "title": "Word文档如何设置制表位（Tab键）占用字符长度-百度经验",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "qua., 21 out. 2026 13:13:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "在编辑word文档中，有一个必不可少的键就是TAB键（即制表符），默认情况下，制表位占用2个字符，如果想重新设置这个参数，又该如何操作实现呢？"
+          },
+          {
+            "id": "a566f955dd4d67c39225",
+            "url": "https://jingyan.baidu.com/article/466506583c6257f549e5f8ab.html",
+            "title": "如何隐藏Word表格的整行 - 百度经验",
+            "origin": "bing",
+            "query": "\"Ubatã\" \"bahia\" notícias",
+            "date": "qua., 21 out. 2026 18:43:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "1 首先打开要处理的word文档，选择要处理的表格 2 接着选择要隐藏的行 3 单击字体选项卡下的斜箭头，打开“字体”对话框，勾选“效果”中的“隐藏”复选框，单击“确定”，关闭“字体”对话框。 4 得到的效果如下图，就实现了隐藏表格中一整行 5 如何显示查看隐藏的内容呢？其快捷键是：“ctrl+shift+8”，不断地"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+          "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+          "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://jingyan.baidu.com/article/0bc808fc02856b1bd585b949.html",
+          "titulo": "如何设置Word邮件合并后的数字保留几位小数-百度经验",
+          "publicado_em": "sáb., 24 out. 2026 04:06:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://jingyan.baidu.com/article/0bc808fc02856b1bd585b949.html",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 04:06:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://jingyan.baidu.com/article/77b8dc7ffdb27f2075eab62d.html",
+          "titulo": "word文字超出页边距怎么调整-百度经验",
+          "publicado_em": "seg., 19 out. 2026 23:38:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://jingyan.baidu.com/article/77b8dc7ffdb27f2075eab62d.html",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "seg., 19 out. 2026 23:38:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "quais foram as principais notícias do brasil hoje? | 2026-10-24 2026-10-24",
+      "state": "sem_correspondencia",
+      "read": 2,
+      "useful": 0,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "8f337cd150a85c074788",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+            "title": "Saiba como votar usando o aplicativo e-Título do TSE - Agência Brasil",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Sat, 24 Oct 2026 11:12:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "Saiba como votar usando o aplicativo e-Título do TSE Agência Brasil"
+          },
+          {
+            "id": "37d71db382b9d44089df",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE91UUZjZkVkVFBDWjRXU2tMcEdVRFFVampNeklTLXlORnQwS3lubDJvUVExZGQxLUxIYnIxa0V1RW1iQ3NlX3pWVndQTWxCZnVQcExZN1NUMU9jV05EX2o2aEhGdldFWU5JZnJOTUZURW9KQl8xTVYzbHNMcm1vZw?oc=5",
+            "title": "Eduardo Bolsonaro fala em enviar tropas dos EUA ao Brasil se Flávio perder eleição - ICL Notícias",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Sat, 24 Oct 2026 00:40:36 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Eduardo Bolsonaro fala em enviar tropas dos EUA ao Brasil se Flávio perder eleição ICL Notícias"
+          },
+          {
+            "id": "550e96c7609c77bec951",
+            "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+            "title": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro - R7",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Sat, 24 Oct 2026 00:31:19 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro R7"
+          },
+          {
+            "id": "b66054868c046a1fc899",
+            "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPQ1BaNVF6TGZ4S3BTU1Z2MzBiODk4VWdhNXRiVk5RV1E3bUxlWERTcU5WQ0tBV3dVRFR6ZDdUZFdXY0pDZjJ5S2tNZWw2WFV1alFjUk9aa0FndlZoZnh0emg5Wk5OVXQ4b3E1UzJUSHJidHNJQTlmOWhxX3F4Tk1TQ0lsWmpWMU4wTFhLUzJ0LTlDYktwVXNmSVhYaThoamVWaC1ORzB1V3h3MGlndHhuY2sxV0plRzkzblVSNXlxS3loQ2kwZkwyRVZtODFwdkFqTEE1d2lnTVUwMERVUUpRX1gyYXVleGV50gH3AUFVX3lxTE9SRjMxYVJnZ0dMeU84RGZwSmZmRkxha0REN1k0SVVBQ2p3V2FTc29HUmgtTnFwY2dFZDdpcUt2VmthNkw4WUJ5MTB4RGViLU5CZWhSMVhrRWdValRsN2kxQXNKVUlvMlY5RUt",
+            "title": "Diplomatas estrangeiros no Brasil avaliam reconhecer rapidamente ganhador das eleições e temem reação de Trump - G1",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Fri, 23 Oct 2026 11:05:23 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Diplomatas estrangeiros no Brasil avaliam reconhecer rapidamente ganhador das eleições e temem reação de Trump G1"
+          },
+          {
+            "id": "e63af5f248f76d214630",
+            "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5aVTVudVdLZlJoYXhwY2ljVGR4X0l5dHVobTQtc0ZSMThzRDJiZWxqQkNFbl81MTZfRTEyRTFtWkZOSm1rRWQwVmZFT3VRdzFIbndIcFpFREZ1bjAzRk51RG9TZ9IBaEFVX3lxTE5sZmZxTEthdDRhOTdEQ3J6dUtRcGd2NXU1UEh1b2F3amFPVEJGTDJzdmdkTjFUMTlvUTFsWlZieG5selc3Nk1vVWtVNHYxYnFIYVI1NW11N1ZyQkZmTFVLUzlrdXpabzIz?oc=5",
+            "title": "Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno - BBC",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Fri, 23 Oct 2026 14:07:14 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno BBC"
+          },
+          {
+            "id": "7900bbde69d957c4ca62",
+            "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNbjFIRWhqZ0huMG9ZMFpCZ0JvX01WSmcweDlEUnJjMV85RHYyMDBNeDcwTVpqODN2elc0cVZqcTBYNFdfOUFPRURMM0NCQlJIMlNrd21rYlo3N0h5cXRTREI3eTZnR0tQdlUycjBNRWQwZG9ScHFZUzhCaUEyd3pHdnlMVFIwMWxidElzbXNwbWFOZExtQXY3ZUlmZVR0UlIy?oc=5",
+            "title": "Análise: Em debate mais civilizado do que o primeiro, Lula vence Flávio por pontos - Folha de S.Paulo",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias",
+            "date": "Sat, 24 Oct 2026 02:57:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Análise: Em debate mais civilizado do que o primeiro, Lula vence Flávio por pontos Folha de S.Paulo"
+          },
+          {
+            "id": "3310cc9a54e3b7f8cdaf",
+            "url": "https://web.whatsapp.com/",
+            "title": "WhatsApp Web",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "qui., 22 out. 2026 16:11:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "Browser not supported We recommend using WhatsApp with one of the following browsers: Google Chrome Mozilla Firefox Microsoft Edge WhatsApp also supports: Opera"
+          },
+          {
+            "id": "4267f6eadd23b9ea8db9",
+            "url": "https://www.whatsapp.com/download",
+            "title": "Download WhatsApp",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "ter., 13 out. 2026 00:01:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "Start chatting and calling privately with WhatsApp across your devices."
+          },
+          {
+            "id": "b3a0d9e95872145e1b42",
+            "url": "https://www.whatsapp.com/",
+            "title": "WhatsApp | Secure and Reliable Free Private Messaging and Calling",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "qui., 22 out. 2026 00:12:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Never miss a moment with voice and video calls From a group call to classmates to a quick call with mom, feel like you’re in the same room with voice and video "
+          },
+          {
+            "id": "5ce9ab60755534ac6fe4",
+            "url": "https://wa.me/",
+            "title": "HOUSAB - WhatsApp",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "sex., 23 out. 2026 11:45:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Looks like you don't have WhatsApp installed! Download"
+          },
+          {
+            "id": "4df0f709426a98c0f7a8",
+            "url": "https://apps.microsoft.com/detail/9nksqgp7f2nh?hl=pt-BR&gl=BR",
+            "title": "WhatsApp - Download e instalação gratuitos no Windows | Microsoft Store",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "sáb., 18 nov. 2023 21:41:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O app é simples, confiável e privado, e ajuda você a manter contato com seus amigos e familiares. O WhatsApp está disponível para celular e computador, não cobr"
+          },
+          {
+            "id": "88540cf0babc363faeff",
+            "url": "https://play.google.com/store/apps/details/?id=com.whatsapp&hl=pt",
+            "title": "WhatsApp Messenger - Apps no Google Play",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias",
+            "date": "sex., 23 out. 2026 10:55:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Os dados não são compartilhados com terceiros sobre como os desenvolvedores declaram o compartilhamento Saiba mais Este app pode coletar estes tipos de dados Lo"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+          "titulo": "Saiba como votar usando o aplicativo e-Título do TSE - Agência Brasil",
+          "publicado_em": "Sat, 24 Oct 2026 11:12:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 11:12:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://web.whatsapp.com/",
+          "titulo": "WhatsApp Web",
+          "publicado_em": "qui., 22 out. 2026 16:11:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://web.whatsapp.com/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "qui., 22 out. 2026 16:11:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://www.whatsapp.com/download",
+          "titulo": "Download WhatsApp",
+          "publicado_em": "ter., 13 out. 2026 00:01:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.whatsapp.com/download",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "ter., 13 out. 2026 00:01:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "state": "ok",
+      "read": 3,
+      "useful": 3,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "1797b3a2b9f014b49ed5",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+            "title": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Mon, 21 Sep 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir T1 Notícias"
+          },
+          {
+            "id": "12d297f579e8e6b67cee",
+            "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+            "title": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços - G1",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Tue, 21 Jul 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços G1"
+          },
+          {
+            "id": "371457027672cf43ec4e",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+            "title": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais - BBC",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Sat, 18 Oct 2025 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais BBC"
+          },
+          {
+            "id": "ab3ced2d30e9e07b4293",
+            "url": "https://www.dicio.com.br/principais/",
+            "title": "Principais - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "qua., 30 set. 2026 14:00:00 GMT",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "principais Significado de Principais é o plural de principal. O mesmo que: essenciais, centrais, salientes, importantes, primários. Principais Usando \"\" num tex"
+          },
+          {
+            "id": "55716d6b2c88ddcfc574",
+            "url": "https://dicionario.priberam.org/principais",
+            "title": "Significado de principais - Dicionário Priberam da Língua Portuguesa",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "sáb., 24 out. 2026 11:01:00 GMT",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "S2",
+            "excerpt": "© 2026 Priberam Informática, S.A. Todos os direitos reservados"
+          },
+          {
+            "id": "859adea59ff65f91c94c",
+            "url": "https://www.dicionarioinformal.com.br/principais/",
+            "title": "Principais - Dicionário inFormal",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "seg., 07 set. 2026 22:41:00 GMT",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "S3",
+            "excerpt": "Dicionário inFormal O dicionário onde o português é definido por você! Dicionário inFormal® possui definições de gírias e palavras de baixo-calão. Seu conteúdo "
+          },
+          {
+            "id": "52d985342c742e9c2f5c",
+            "url": "https://escreva.ai/palavra/principais/",
+            "title": "Principais - Significado e Sinônimo - escreva.ai",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "2025-08-29T15:37:39+00:00",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Significado de Principais Que ocupam o primeiro lugar em importância, valor ou influência Que são fundamentais, essenciais ou indispensáveis Em administração, r"
+          },
+          {
+            "id": "0bf80cbc5b026ad1656e",
+            "url": "https://dicionariodebase.com.br/adjetivos/principais",
+            "title": "Principais: significado, classificação e exemplos de uso",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "2026-09-03T15:43:58-03:00",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "demais. Em geral, pressupõe uma comparação, ainda que ela não apareça de modo explícito na frase. Principais principal Em “as principais causas do problema”, po"
+          },
+          {
+            "id": "f650aac615bafd108617",
+            "url": "https://www.sinonimos.com.br/principais/",
+            "title": "Sinônimo de Principais - Sinônimos",
+            "origin": "bing",
+            "query": "principais novidades inteligência artificial acontecimentos relevantes",
+            "date": "qui., 22 out. 2026 06:38:00 GMT",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Sinônimo de principais para 2 sentidos da palavra : 41 sinônimos de principais principais Que são fundamentais: , , , , , , , , , , , , , , , , , , , , , , , , "
+          },
+          {
+            "id": "901cd4e91c4ea1c85374",
+            "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9PT0dieDNmZzd4WFdQRW1ySGNPUzR4V3NuQWNYeUx4Tmt4MWkwM21BUUdYa19Xa1BvTHZ0NUpnSmJrRE1Ya0ZJeW1JVlZNTVYzQ3kyTC0xM1Jhb2txOGhUdGxZLUd3QkRDTE92QXVTVXowSDhaSG5F?oc=5",
+            "title": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública - Assine Abril",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública Assine Abril"
+          },
+          {
+            "id": "6965a67314078b0cfd65",
+            "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQld3a0hjYWZxYnJDVUlWUFBpUEhJNHNiQVJjclNkbnotaGFYWUl1bGZkbl9ybFMwTm04QWlDZ3c3SmplelJ6ZjVDQXFwTmptaWhEa0hvVWpBMDhHSDdUTDhGN2tOTW5KSldndGFBQy1mcW1GSzRjS1JrTkNUaUtnWlBuZUJUQUVSekNtel9NcTVDZmhYUEM0VmlzSEJ5UnpuOXFjbVd6bXp2Y2RWOXhLRGhOM1FfYm5BLXc?oc=5",
+            "title": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho - Exame",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho Exame"
+          },
+          {
+            "id": "50f76ca3d916c5d20c59",
+            "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBQWkhPMVFCWVR4cUh6aW82Z1BtTGg5RTBaWUVJVGtqWS1VT19ubU9hWWNwS1M3YXQ5SVpUUXJuakFWeWZOb1IwSC1lVXoxTVZE?oc=5",
+            "title": "Os temas mais importantes de 2026 para a educação - PORVIR",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Thu, 05 Feb 2026 08:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Os temas mais importantes de 2026 para a educação PORVIR"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://www.dicio.com.br/principais/",
+          "titulo": "Principais",
+          "publicado_em": "qua., 30 set. 2026 14:00:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.dicio.com.br/principais/",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "qua., 30 set. 2026 14:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://dicionario.priberam.org/principais",
+          "titulo": "principais",
+          "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://dicionario.priberam.org/principais",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 11:01:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://www.dicionarioinformal.com.br/principais/",
+          "titulo": "Principais",
+          "publicado_em": "seg., 07 set. 2026 22:41:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.dicionarioinformal.com.br/principais/",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "seg., 07 set. 2026 22:41:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "encontre na documentação oficial como usar asyncio.taskgroup.",
+      "state": "sem_correspondencia",
+      "read": 3,
+      "useful": 0,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "17067361510cf975c117",
+            "url": "https://conceito.de/documentacao",
+            "title": "Documentação - O que é, conceito e definição",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "qua., 21 out. 2026 09:17:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S1",
+            "excerpt": "operar. Finalmente, a disciplina dedicada à coleta e organização de documentos é chamada de documentação. Seu objetivo é garantir e facilitar o armazenamento de"
+          },
+          {
+            "id": "43def78e2fd7f1fbe1c5",
+            "url": "https://www.dicio.com.br/documentacao/",
+            "title": "Documentação - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "ter., 22 set. 2026 08:18:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "documentação Significado de Documentação substantivo feminino Ato ou efeito de documentar. Conjunto de documentos para verificação de fatos históricos, identida"
+          },
+          {
+            "id": "93cc68636198e4d1d48b",
+            "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+            "title": "O que é Documentação - Entenda sua Importância",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "2024-08-21T00:09:34+00:00",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "equipes. Documentação e Compliance No contexto de regulamentações e compliance, a documentação se torna ainda mais crítica. Muitas indústrias, como a financeira"
+          },
+          {
+            "id": "ca09b925cb776db12ae2",
+            "url": "https://lucidarium.com.br/conceito-de-documentacao-origem-definicao-e-significado/",
+            "title": "Conceito de Documentação: Origem, Definição e Significado",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "2025-06-15T03:21:37-03:00",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "e histórias. Na Idade Média, manuscritos manuscritos de valor histórico e cultural surgiram como forma de preservar conhecimentos acadêmicos e religiosos. Com a"
+          },
+          {
+            "id": "40221ff67b06ddb11f3a",
+            "url": "https://asana.com/pt/resources/process-documentation",
+            "title": "Documentação de processos: o que é, tipos e como criar [2025 ... - Asana",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "2025-10-26T11:00:00+0000",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "boas práticas e erros comuns que devem ser evitados. Quando as equipes crescem e os projetos se tornam mais complexos, manter a clareza sobre como cada processo"
+          },
+          {
+            "id": "edd3e64ecd0d6ae16774",
+            "url": "https://pt.wikipedia.org/wiki/Documenta%C3%A7%C3%A3o",
+            "title": "Documentação – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "2006-04-27T22:14:43Z",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "centro ativo e dinâmico de informações e ser um instrumento de . conservação de documentos Os princípios do arquivo são: , , , e . localização rápida segurança "
+          },
+          {
+            "id": "8648139190e534786d62",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "title": "Python asyncio TaskGroup tasks documentation",
+            "origin": "fonte-primaria",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "a67c308c89e509f6cffb",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-BR",
+            "title": "Encontrar seu smartphone - Google Account",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 05:24:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Se você esqueceu onde deixou seu smartphone ou tablet ou se ele foi roubado, algumas etapas simples podem ajudar a proteger seu dispositivo"
+          },
+          {
+            "id": "83980568418595fe8bf3",
+            "url": "https://www.google.com/android/find/?hl=pt-BR",
+            "title": "Localizador: encontre, bloqueie ou limpe seu dispositivo",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 08:02:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Encontre, bloqueie, limpe ou toque um som em um dispositivo Android perdido. Localize seu dispositivo Android perdido e faça o bloqueio dele até que ele seja re"
+          },
+          {
+            "id": "9ffed30c9b42731afc3f",
+            "url": "https://legacy.encontresuavaga.com.br/Login.aspx",
+            "title": "Encontre Sua Vaga",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acesse a sua conta do Encontre Sua Vaga e tenha acesso aos benefícios que só o Encontre Sua Vaga oferece."
+          },
+          {
+            "id": "1ed2d6043d68e5f57afc",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-PT",
+            "title": "Localizar o telemóvel - Google Account",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "qui., 22 out. 2026 16:32:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Alguns passos podem ajudar a proteger o seu telemóvel ou tablet, independentemente de este ter sido roubado ou de se ter esquecido de onde o deixou."
+          },
+          {
+            "id": "e393c557ac9bb031d977",
+            "url": "https://www.caixa.gov.br/atendimento/Paginas/encontre-a-caixa.aspx",
+            "title": "Encontre a CAIXA",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Canais Digitais Aplicativos Todos os telefones Atendimento em Libras Encontre a CAIXA Fale Conosco Sobre a CAIXA Canal de Denúncias Promoções Sustentabilidade c"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://conceito.de/documentacao",
+          "titulo": "Conceito de documentação - Conceito.de",
+          "publicado_em": "qua., 21 out. 2026 09:17:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://conceito.de/documentacao",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.dicio.com.br/documentacao/",
+          "titulo": "documentação",
+          "publicado_em": "ter., 22 set. 2026 08:18:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://www.dicio.com.br/documentacao/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+          "titulo": "O que é Documentação - Entenda sua Importância",
+          "publicado_em": "2024-08-21T00:09:34+00:00",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise imagens da ponte estaiada de são paulo.",
+      "state": "paginas_ilegiveis",
+      "read": 0,
+      "useful": 0,
+      "media": 5,
+      "reservoir": {
+        "items": [
+          {
+            "id": "da33d4f135f63a335dd7",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada - São Paulo.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "1213x750 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg"
+          },
+          {
+            "id": "a9c69a756b2eade7d5c3",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S2",
+            "excerpt": "2956x1948 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg"
+          },
+          {
+            "id": "b0afa3967bba44e9a0b4",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S3",
+            "excerpt": "3264x2448 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266763267).jpg"
+          },
+          {
+            "id": "0f780d63d018b18d681a",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "2448x3264 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266768515).jpg"
+          },
+          {
+            "id": "fe33b443e25d7353bea3",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "3264x2448 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4267503980).jpg"
+          },
+          {
+            "id": "5d4c4b4253978ec589d9",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg/960px-Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Octávio Frias de Oliveira Bridge, 2014.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "2000x1403 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Oct%C3%A1vio_Frias_de_Oliveira_Bridge,_2014.jpg"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte Estaiada - São Paulo.jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "encontre vídeos explicativos sobre motores elétricos.",
+      "state": "sem_correspondencia",
+      "read": 3,
+      "useful": 0,
+      "media": 0,
+      "reservoir": {
+        "items": [
+          {
+            "id": "6be96514e23f370d81c8",
+            "url": "https://www.google.com/videohp?hl=pt-BR",
+            "title": "Google Videos",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "qui., 22 out. 2026 16:04:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S1",
+            "excerpt": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps"
+          },
+          {
+            "id": "16061ca5a0cfceb5a80f",
+            "url": "https://www.google.com.br/videohp",
+            "title": "Google Videos",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "sáb., 24 out. 2026 02:04:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps"
+          },
+          {
+            "id": "32fb50cbc473d0f7d481",
+            "url": "https://www.boafoda.com/",
+            "title": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "sáb., 24 out. 2026 05:17:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "Assista Vídeos de Sexo e Filme Porno Gratis no BoaFoda"
+          },
+          {
+            "id": "e1d5e2c7a98d2acd129f",
+            "url": "https://www.youtube.com/",
+            "title": "YouTube",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "sex., 23 out. 2026 19:23:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouT"
+          },
+          {
+            "id": "d895fc66e459c7833ce2",
+            "url": "https://www.tiktok.com/pt-BR",
+            "title": "TikTok - Make Your Day",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "sáb., 24 out. 2026 10:47:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o ap"
+          },
+          {
+            "id": "a67c308c89e509f6cffb",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-BR",
+            "title": "Encontrar seu smartphone - Google Account",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "sáb., 24 out. 2026 05:24:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sign in Use your Google Account"
+          },
+          {
+            "id": "83980568418595fe8bf3",
+            "url": "https://www.google.com/android/find/?hl=pt-BR",
+            "title": "Localizador: encontre, bloqueie ou limpe seu dispositivo",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "sáb., 24 out. 2026 08:02:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Encontre, bloqueie, limpe ou toque um som em um dispositivo Android perdido. Localize seu dispositivo Android perdido e faça o bloqueio dele até que ele seja re"
+          },
+          {
+            "id": "9ffed30c9b42731afc3f",
+            "url": "https://legacy.encontresuavaga.com.br/Login.aspx",
+            "title": "Encontre Sua Vaga",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acesse a sua conta do Encontre Sua Vaga e tenha acesso aos benefícios que só o Encontre Sua Vaga oferece."
+          },
+          {
+            "id": "1ed2d6043d68e5f57afc",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-PT",
+            "title": "Localizar o telemóvel - Google Account",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "qui., 22 out. 2026 16:32:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Alguns passos podem ajudar a proteger o seu telemóvel ou tablet, independentemente de este ter sido roubado ou de se ter esquecido de onde o deixou."
+          },
+          {
+            "id": "e393c557ac9bb031d977",
+            "url": "https://www.caixa.gov.br/atendimento/Paginas/encontre-a-caixa.aspx",
+            "title": "Encontre a CAIXA",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Canais Digitais Aplicativos Todos os telefones Atendimento em Libras Encontre a CAIXA Fale Conosco Sobre a CAIXA Canal de Denúncias Promoções Sustentabilidade c"
+          },
+          {
+            "id": "995e6c13ba9be3634c27",
+            "url": "https://www.conjugacao.com.br/verbo-encontrar/",
+            "title": "Conjugação do Verbo Encontrar - Conjugação de Verbos",
+            "origin": "bing",
+            "query": "Encontre vídeos explicativos sobre motores elétricos.",
+            "date": "sáb., 24 out. 2026 02:18:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Subjuntivo Presente que eu encontre que tu encontres que ele encontre que nós encontremos que vós encontreis que eles encontrem"
+          },
+          {
+            "id": "9b5a53e817e23eb735a6",
+            "url": "https://www.youtube.com/feed",
+            "title": "YouTube",
+            "origin": "bing",
+            "query": "vídeos explicativos sobre motores elétricos",
+            "date": "sáb., 24 out. 2026 05:32:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "AboutPressCopyrightContact usCreatorsAdvertiseDevelopersTermsPrivacyPolicy & SafetyHow YouTube worksTest new featuresNFL Sunday Ticket © 2026 Google LLC"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://www.google.com/videohp?hl=pt-BR",
+          "titulo": "Google Videos",
+          "publicado_em": "qui., 22 out. 2026 16:04:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.google.com/videohp?hl=pt-BR",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.google.com.br/videohp",
+          "titulo": "Google Videos",
+          "publicado_em": "sáb., 24 out. 2026 02:04:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.google.com.br/videohp",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.boafoda.com/",
+          "titulo": "Boafoda",
+          "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.boafoda.com/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise a história da fundação de salvador e compare as informações de fontes históricas.",
+      "state": "parcial",
+      "read": 3,
+      "useful": 1,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "c499cd23e7c9926d15d5",
+            "url": "https://www.todamateria.com.br/historia/",
+            "title": "História - Toda Matéria",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "sáb., 24 out. 2026 08:31:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "uma religião afro-brasileira, surgida em 1908, fundada por Zélio Fernandino de Moraes. É marcada pela fusão de elementos de diferentes tradições espirituais e c"
+          },
+          {
+            "id": "9fd175bca6b8c850bb14",
+            "url": "https://brasilescola.uol.com.br/historia",
+            "title": "História, estudo das ações do homem no tempo e espaço",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "2007-04-13-0309:22:15",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "investigação de fontes históricas. O historiador não deve glorificar ou demonizar determinado acontecimento, mas deve analisá-lo criticamente, utilizando todas "
+          },
+          {
+            "id": "b4c39d330dec8ad20603",
+            "url": "https://humanidades.com/br/historia/",
+            "title": "História: início, final, ramos, divisão e características",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "2023-06-27T06:15:11-06:00",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "perguntas do tema. Estas suposições, chamadas hipóteses, serão corroboradas ou descartadas com base na investigação. Formulação de hipóteses . Procura-se inform"
+          },
+          {
+            "id": "08c239a51cbc6f0e7adf",
+            "url": "https://www.historiadomundo.com.br/",
+            "title": "História do mundo - A História da Humanidade a um Clique",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "qua., 21 out. 2026 02:00:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Copyright © 2024 - Todos os Direitos Reservados Rede Omnia Proibida a reprodução total ou parcial sem autorização prévia da equipe (Inciso I do Artigo 29 Lei 9."
+          },
+          {
+            "id": "843a3a763210c2de22fd",
+            "url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+            "title": "História – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "2003-02-03T05:18:55Z",
+            "type": "pagina",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "descoberta, a coleção, a organização, a apresentação e a interpretação destes eventos. Os buscam o conhecimento do passado usando , como documentos escritos, re"
+          },
+          {
+            "id": "3d6a525b8c41383c9c99",
+            "url": "https://www.youtube.com/historybrasil",
+            "title": "Canal History Brasil - YouTube",
+            "origin": "bing",
+            "query": "história da fundação de Salvador e compare as informações de fontes históricas",
+            "date": "sáb., 24 out. 2026 11:01:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Convidamos você a conhecer a história por trás da história, a explorar o misterioso, o desconhecido e o intrigante."
+          },
+          {
+            "id": "da03e0ae202872d9a9ee",
+            "url": "https://www.canalpesquise.com.br/",
+            "title": "Estatística | Canal PESQUISE",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "sex., 23 out. 2026 04:14:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!"
+          },
+          {
+            "id": "238748849eab2db872b2",
+            "url": "https://www.dicio.com.br/pesquise/",
+            "title": "Pesquise - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "sáb., 05 set. 2026 07:34:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de Pesquise no Dicio, Dicionário Online de Português. O que é pesquise: Pesquise vem do verbo pesquisar. O mesmo que: procure, cate, sonde, deslinde"
+          },
+          {
+            "id": "bd194ea1ec20cd6cc572",
+            "url": "https://app.pesquisemais.com.br/",
+            "title": "Pesquise (+) - Bem Vindo",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "qui., 15 out. 2026 07:37:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+          },
+          {
+            "id": "288f6af9722db02d4645",
+            "url": "https://dicionario.priberam.org/pesquise",
+            "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "sáb., 17 out. 2026 07:27:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de pesquise, verbo transitivo: Indagar, investigar, procurar com diligência. — Dicionário Priberam da Língua Portuguesa, dicionário online."
+          },
+          {
+            "id": "a91f52c000b4a8eb534d",
+            "url": "https://pesquisemais.com.br/",
+            "title": "Pesquise Mais",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "ter., 20 out. 2026 08:07:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "(11) 97591-8958 A Empresa Sobre Nós Tecnologia e IA LGPD e Compliance Pesquise Mais Lab Soluções HealthCare Product Test Mercados Consumo Agro Opinião Pública A"
+          },
+          {
+            "id": "b4f6c57f14706fc12b88",
+            "url": "https://www.canalpesquise.com.br/sobre-2",
+            "title": "Vídeos | Canal Pesquise",
+            "origin": "bing",
+            "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+            "date": "sex., 02 out. 2026 02:09:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complexos após os vídeos do Canal. Pergunte, mas"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "titulo": "eventos ocorridos no passado",
+          "publicado_em": "2003-02-03T05:18:55Z",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.todamateria.com.br/historia/",
+          "titulo": "História",
+          "publicado_em": "sáb., 24 out. 2026 08:31:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.todamateria.com.br/historia/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://brasilescola.uol.com.br/historia",
+          "titulo": "História, estudo das ações do homem no tempo e espaço",
+          "publicado_em": "2007-04-13-0309:22:15",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://brasilescola.uol.com.br/historia",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise a data de lançamento do dispositivo inexistente zzuniversal999999.",
+      "state": "sem_correspondencia",
+      "read": 3,
+      "useful": 0,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "7811086b877afc5423a7",
+            "url": "https://horabr.com.br/data-e-hora",
+            "title": "Data e Hora Agora — Data de Hoje e Relógio Online | HoraBR",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "sáb., 24 out. 2026 12:05:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "S1",
+            "excerpt": "ter horário local diferente da capital federal. Data e hora no mundo Para comparar com outros países, consulte o mapa mundial de fusos horários. Calendário e di"
+          },
+          {
+            "id": "1faaaa7e1f29c67dd467",
+            "url": "https://www.calculator.io/pt/data-de-hoje/",
+            "title": "Qual é a Data de Hoje? Dia, Número da Semana e Dia do Ano",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "sáb., 24 out. 2026 10:39:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "O Que Esta Página Mostra Esta página responde a uma pergunta no momento em que é aberta: A resposta é lida a partir do relógio do seu próprio dispositivo, por i"
+          },
+          {
+            "id": "cc69e99af5b4203f6757",
+            "url": "https://todaydateandtime.com/pt/",
+            "title": "Data e hora de hoje - Data atual, hora e mais",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "sáb., 24 out. 2026 12:05:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "Que horas são Consulte a hora exata no seu fuso horário. Veja a hora nos formatos de 12 e 24 horas, a hora UTC e informações sobre fusos horários. Data de hoje "
+          },
+          {
+            "id": "b22441cbd4b88acdced4",
+            "url": "https://datadehoje.net/",
+            "title": "Data de hoje - datadehoje.net",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "2022-12-13T21:13:48+00:00",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "americana) ou 11 de abril de 2021 (interpretação britânica) Esta pode ser uma boa razão pela qual é melhor escrever o nome do mês. Abaixo estão as abreviações p"
+          },
+          {
+            "id": "485dd09c9505e5a0fdaf",
+            "url": "https://www.calendarr.com/brasil/",
+            "title": "Calendário (que dia é hoje e o que se comemora) - Calendarr",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "sáb., 24 out. 2026 11:08:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Aniversário de Manaus Dia das Nações Unidas Outubro 24 sáb Dia Mundial de Combate à Poliomielite 24 sáb Dia Mundial do Desenvolvimento da Informação 24 sáb Iníc"
+          },
+          {
+            "id": "da03e0ae202872d9a9ee",
+            "url": "https://www.canalpesquise.com.br/",
+            "title": "Estatística | Canal PESQUISE",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "sex., 23 out. 2026 04:14:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Canal Pesquise busca motivação nos interesses e no envolvimento de nossa comunidade de educadores apaixonados e eternos aprendizes. Somos um canal de educação"
+          },
+          {
+            "id": "238748849eab2db872b2",
+            "url": "https://www.dicio.com.br/pesquise/",
+            "title": "Pesquise - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "sáb., 05 set. 2026 07:34:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de Pesquise no Dicio, Dicionário Online de Português. O que é pesquise: Pesquise vem do verbo pesquisar. O mesmo que: procure, cate, sonde, deslinde"
+          },
+          {
+            "id": "bd194ea1ec20cd6cc572",
+            "url": "https://app.pesquisemais.com.br/",
+            "title": "Pesquise (+) - Bem Vindo",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "qui., 15 out. 2026 07:37:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+          },
+          {
+            "id": "288f6af9722db02d4645",
+            "url": "https://dicionario.priberam.org/pesquise",
+            "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "sáb., 17 out. 2026 07:27:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de pesquise, verbo transitivo: Indagar, investigar, procurar com diligência. — Dicionário Priberam da Língua Portuguesa, dicionário online."
+          },
+          {
+            "id": "a91f52c000b4a8eb534d",
+            "url": "https://pesquisemais.com.br/",
+            "title": "Pesquise Mais",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "ter., 20 out. 2026 08:07:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "(11) 97591-8958 A Empresa Sobre Nós Tecnologia e IA LGPD e Compliance Pesquise Mais Lab Soluções HealthCare Product Test Mercados Consumo Agro Opinião Pública A"
+          },
+          {
+            "id": "b4f6c57f14706fc12b88",
+            "url": "https://www.canalpesquise.com.br/sobre-2",
+            "title": "Vídeos | Canal Pesquise",
+            "origin": "bing",
+            "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+            "date": "sex., 02 out. 2026 02:09:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complexos após os vídeos do Canal. Pergunte, mas"
+          },
+          {
+            "id": "ce1c570da59ec4e21bc5",
+            "url": "https://calendarionacional.com.br/",
+            "title": "Calendário Nacional -",
+            "origin": "bing",
+            "query": "data de lançamento do dispositivo inexistente ZZUNIVERSAL999999",
+            "date": "sáb., 24 out. 2026 11:37:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Calendário Nacional, o seu site de calendários na web, com as datas de todos os feriados e calendários, inclusive do Bolsa Família."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://horabr.com.br/data-e-hora",
+          "titulo": "Data e Hora Agora",
+          "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://horabr.com.br/data-e-hora",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.calculator.io/pt/data-de-hoje/",
+          "titulo": "Calculator.io",
+          "publicado_em": "sáb., 24 out. 2026 10:39:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.calculator.io/pt/data-de-hoje/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://todaydateandtime.com/pt/",
+          "titulo": "TodayDateAndTime.com",
+          "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://todaydateandtime.com/pt/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    }
+  ],
+  "messages": {
+    "assistant": 9,
+    "user": 10
+  },
+  "unique_message_ids": 19,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "requests": {
+    "completed": 9,
+    "failed": 1
+  },
+  "research_jobs": {}
+}

@@ -1,0 +1,400 @@
+{
+  "id": "dev-16",
+  "category": "recent_news",
+  "query": "Notícias sobre tecnologia hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 4.037,
+  "state": "paginas_ilegiveis",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"tecnologia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"tecnologia\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"tecnologia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino\" site:noticias.sorocaba.sp.gov.br",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"AgNest recebe empresas europeias de tecnologia agroalimentar\" site:www.embrapa.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22tecnologia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22tecnologia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 149380
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22tecnologia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22tecnologia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5454
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22tecnologia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22tecnologia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5590
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Semana+Nacional+de+Ci%C3%AAncia+e+Tecnologia+destaca+protagonismo+feminino%22+site%3Anoticias.sorocaba.sp.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Semana+Nacional+de+Ci%C3%AAncia+e+Tecnologia+destaca+protagonismo+feminino%22+site%3Anoticias.sorocaba.sp.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5060
+    },
+    {
+      "url": "https://noticias.sorocaba.sp.gov.br",
+      "final": "https://noticias.sorocaba.sp.gov.br",
+      "chars": 93691
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22AgNest+recebe+empresas+europeias+de+tecnologia+agroalimentar%22+site%3Awww.embrapa.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22AgNest+recebe+empresas+europeias+de+tecnologia+agroalimentar%22+site%3Awww.embrapa.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5301
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"tecnologia\" notícias",
+    "domain": "news",
+    "original_request": "Notícias sobre tecnologia hoje",
+    "resolved_request": "Notícias sobre tecnologia hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "tecnologia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:36:45.968982+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "tecnologia"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "83b839d06d4e284e95d4",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPdUtVYTVmQ0oxcDVYekRBNmhWTlI5ZmpZYUl5Z181THZWRjI2UkFvcEZMQ1VwSlZpQzhvZ3dyNDcwY1VEOG5zd1diQjJPTDI5LXN5SEhTNEhfVV96eE5WTEltTkRWNGltRGdQaUwzeXU1MDBHN0RvMzhFZlpmelRsY3M0dlg0LTRNUDdhQjR3UEVHekpsb1E3YlpkZ3I3UWFGbVhTcTN4amdDZzF0V05jOQ?oc=5",
+        "title": "DropsTec 22/10/2026 | Sua coletânea diária de notícias sobre tecnologia - CartaCapital",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Thu, 22 Oct 2026 12:50:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "DropsTec 22/10/2026 | Sua coletânea diária de notícias sobre tecnologia CartaCapital"
+      },
+      {
+        "id": "2efe545617675beedf35",
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORGlxYnc4UHI1RWFYUXZWeDc1TDAtNGhhYUxvMDl6ejY5eDFKUkZ4Q0RjQ1UxQk5EcU5uYU05RzJKUlctMmd3OENIYTQ1SjBKY3JraEZWUWE2X0VqMGdHYURaZVlIRW50VEJ2eVlRaDhEdkVsNktNcE5KZXJOMDlreWtTZGlINW83YmdLUVBteV91YjlNNkEwZm40Z1ZsamU50gGmAUFVX3lxTE9UcW05UGlydE1ZQ2kzX3VMakF1Y3lqaFZTNmVUWkVOWnBlRndoYXpxZVRZWkozVHB3bnFtMzYzbkoxeW0xaDhoYU1TUGFzTFdNcjFnM2VWb2N1cGdvOFR6bWdoSWxNZUlkZ21tWHJLTmgzQ25Jd3NHb2x4bDF3YXNsU056aDFpM2JxLVRzbWJqZGRwdmQ3RDhCeXVRVUVoSDdlOWtsa2c?oc=5",
+        "title": "10 notícias de tecnologia para você começar o dia (09/03) - Estadão",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Wed, 21 Oct 2026 10:04:04 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "10 notícias de tecnologia para você começar o dia (09/03) Estadão"
+      },
+      {
+        "id": "bfda85831df010cc0e5c",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQYXlyX3VYek85b1M2QXB6TmZ6c3JaRHhtNTdvell0eldPUWo4aHBJWHRsQW03ZWI2U0N2Z0Zlc3hHcUFnUHJQQWZ3czY1QzBCTWI2S0NYMDNlU1FxMFRuZGR2RzZpT1FVaUs5ZG9ibFktajRNR2ZYcXZtaFNoeGVRbjd3Tmh2OFRBRVRZZ21oVEppWjhVUEQ2MEhYeVNyVm9ZQmlGajliVnhVQQ?oc=5",
+        "title": "Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino - Prefeitura de Sorocaba",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Fri, 23 Oct 2026 19:32:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino Prefeitura de Sorocaba"
+      },
+      {
+        "id": "6756d0b6705a06bf0874",
+        "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdzFYR0VrUG1uR0RfeDViLXQ0LVMyWFp4OV91ZTU2VjdDc1BHNUtxTUEwYjZxRDhSbkd4NUI1NkMwb0M3NzFVUjBRa1JhUENFX2hNMUt6VGlqUWpLd0ItYUZQRUZsdm9mQlV3czlBZEpCUC1ycm40V2cyNnUwSmN5WUJTMEhZZlZyUjJfRGVwQzcxcHZMZ25QNW5rOXo1R0VQZ2RwUHhKUG4wU2ZVRE0yeUtnZDVJNUo3YTVDQjBTeTRoc2lTSWY3cWZ0RElKb2g0aEJta2ZR?oc=5",
+        "title": "AgNest recebe empresas europeias de tecnologia agroalimentar - Embrapa",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Fri, 23 Oct 2026 23:26:15 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "AgNest recebe empresas europeias de tecnologia agroalimentar Embrapa"
+      },
+      {
+        "id": "054fafe3be462ceeaa94",
+        "url": "https://news.google.com/rss/articles/CBMi5AVBVV95cUxQalYtTVdGQTJpYzcwMUNqTEw1T1NXQUUzNURJTXdKOW9NQVp5dDJCdGV2LWhRSWRVYlBlM19VaFBMSDE1R3FUd1NyQnQyWEVLV3gtZTYyOW1mbEpTWmdTYWoybWZvWVhfdjNIc1pEX3FlTDg3dUNfLWZrRlNfQ1hSR2NMeVBkQWtraGRFbnhEN0NZOE9DcVRXSThlWjBJeERmVmp1anJPaHdiRndZQ0NDXzc0N1Fpa09IRjc1ODQ4eElGSTBGVkd4b0lmNnNsREJhQ25oQ3BBcldLN2JYdGdIdy15Z3FyU012a1hkQWYwT0gwVG1HMUJscGpCaFVkRVZtd0RDdnozUm5mVy1GNW9kRVdnSDFCMmhoZnZVSnZkX1g1VjRtcWtFR1RfWlNvS3pTekhTV2M5NGpacXVOaE0xVGFLV21UMUF6bC1DS2FzX2k3MGIyMVF",
+        "title": "Notícias - Secretaria dos Direitos da Pessoa com Deficiência",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Tue, 20 Oct 2026 00:25:24 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Notícias Secretaria dos Direitos da Pessoa com Deficiência"
+      },
+      {
+        "id": "9b65dd4fc8994a2f3a9f",
+        "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPTGZBemVmbmJpM0plUVpxLUVvUXhpaFdZU3dhdEtGMXBwNWxEWVB4YWtNQk5ETFZRUExBalZ3QUpLMkNjVUl3N1VfTFZuc3Y0ajdnSXRaX2hfekxPdGM4cU1OTFdIRlFpTnRHTUIyOHl5Wk41X2dNd0Q4Y0IzZ25sRFVlTXd6OW9STlI0UGdLdHlLRzZGVlI3cTJrRzFBNy1HSG9JdmpmbjZva3h5eTNES2lfY1B0YldseWlxWFlYU3c3ZEhYcVlTTmIzNWpzU3BIQlRCSHZGM2dvWU15ZldURWpNLUREcHI0S0FNazRCUGxkTGNzOGU3dTkwLXk2QmV2aDk2YklFRXNxNXJvbkJtNDc0c0tpbzZRMFBHaQ?oc=5",
+        "title": "Últimas Notícias - Governo do Estado de São Paulo",
+        "origin": "google-news",
+        "query": "\"tecnologia\" notícias",
+        "date": "Wed, 21 Oct 2026 19:08:17 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Últimas Notícias Governo do Estado de São Paulo"
+      },
+      {
+        "id": "8f46e858f3ba08129ea0",
+        "url": "https://www.tecnoloblog.com/pt/O-que-%C3%A9-tecnologia/",
+        "title": "O que é tecnologia, quais são os seus tipos, qual a sua história e como ...",
+        "origin": "bing",
+        "query": "\"tecnologia\" notícias",
+        "date": "sáb., 24 out. 2026 02:33:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O que é tecnologia: definição, tipos, história e impacto na sociedade. A tecnologia engloba conhecimento, ferramentas e processos para solucionar necessidades h"
+      },
+      {
+        "id": "0042d3e5380b3f924987",
+        "url": "https://tecnoblog.net/responde/o-que-e-tecnologia-confira-as-principais-areas-tecnologicas-do-mercado/",
+        "title": "O que é tecnologia? Confira as principais áreas ... - Tecnoblog",
+        "origin": "bing",
+        "query": "\"tecnologia\" notícias",
+        "date": "ter., 18 nov. 2025 14:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O termo “tecnologia” é derivado da combinação das palavras gregas téchnē (“técnicas”, em tradução livre) e lógos (“estudo”). Logo, a expressão pode ser traduzid"
+      },
+      {
+        "id": "1105fd6da34f5fb68cf7",
+        "url": "https://canaltech.com.br/internet/o-que-e-tecnologia/",
+        "title": "O que é tecnologia? - Canaltech",
+        "origin": "bing",
+        "query": "\"tecnologia\" notícias",
+        "date": "dom., 12 mar. 2023 12:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O termo \"tecnologia\", próximo ao sentido moderno, remonta ao início do século XVII e representava o tratamento sistemático do conhecimento. Muitos anos antes, o"
+      },
+      {
+        "id": "7c7c3732e6e8f3430cdd",
+        "url": "https://noticias.sorocaba.sp.gov.br/semana-nacional-de-ciencia-e-tecnologia-destaca-protagonismo-feminino/",
+        "title": "Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino Com o tema “Ciência Delas”, evento reúne atividades científicas, Feira de Ciências e Feira",
+        "origin": "publisher-feed",
+        "query": "\"Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino\" site:noticias.sorocaba.sp.gov.br",
+        "date": "",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": ""
+      },
+      {
+        "id": "1d030072ebdae58d4b4b",
+        "url": "https://pt.wikipedia.org/wiki/Tecnologia",
+        "title": "Tecnologia – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"tecnologia\" notícias",
+        "date": "sáb., 24 out. 2026 02:33:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Sistema tecnológico (ou computacional) que através do input de dados, faz à análise destes e, então produz um resultado. A forma mais simples de tecnologia é o "
+      },
+      {
+        "id": "b94dbda2950ba39e57ec",
+        "url": "https://g1.globo.com/tecnologia/",
+        "title": "G1 Tecnologia - Internet, celular, redes sociais e muita inovação",
+        "origin": "bing",
+        "query": "\"tecnologia\" notícias",
+        "date": "sáb., 24 out. 2026 03:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Falhas graves na linguagem de programação PHP, usada em grande parte da internet, provocaram milhões de tentativas de invasão e levaram empresas e órgãos públic"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPdUtVYTVmQ0oxcDVYekRBNmhWTlI5ZmpZYUl5Z181THZWRjI2UkFvcEZMQ1VwSlZpQzhvZ3dyNDcwY1VEOG5zd1diQjJPTDI5LXN5SEhTNEhfVV96eE5WTEltTkRWNGltRGdQaUwzeXU1MDBHN0RvMzhFZlpmelRsY3M0dlg0LTRNUDdhQjR3UEVHekpsb1E3YlpkZ3I3UWFGbVhTcTN4amdDZzF0V05jOQ?oc=5",
+      "titulo": "DropsTec 22/10/2026 | Sua coletânea diária de notícias sobre tecnologia - CartaCapital",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Thu, 22 Oct 2026 12:50:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPdUtVYTVmQ0oxcDVYekRBNmhWTlI5ZmpZYUl5Z181THZWRjI2UkFvcEZMQ1VwSlZpQzhvZ3dyNDcwY1VEOG5zd1diQjJPTDI5LXN5SEhTNEhfVV96eE5WTEltTkRWNGltRGdQaUwzeXU1MDBHN0RvMzhFZlpmelRsY3M0dlg0LTRNUDdhQjR3UEVHekpsb1E3YlpkZ3I3UWFGbVhTcTN4amdDZzF0V05jOQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 12:50:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORGlxYnc4UHI1RWFYUXZWeDc1TDAtNGhhYUxvMDl6ejY5eDFKUkZ4Q0RjQ1UxQk5EcU5uYU05RzJKUlctMmd3OENIYTQ1SjBKY3JraEZWUWE2X0VqMGdHYURaZVlIRW50VEJ2eVlRaDhEdkVsNktNcE5KZXJOMDlreWtTZGlINW83YmdLUVBteV91YjlNNkEwZm40Z1ZsamU50gGmAUFVX3lxTE9UcW05UGlydE1ZQ2kzX3VMakF1Y3lqaFZTNmVUWkVOWnBlRndoYXpxZVRZWkozVHB3bnFtMzYzbkoxeW0xaDhoYU1TUGFzTFdNcjFnM2VWb2N1cGdvOFR6bWdoSWxNZUlkZ21tWHJLTmgzQ25Jd3NHb2x4bDF3YXNsU056aDFpM2JxLVRzbWJqZGRwdmQ3RDhCeXVRVUVoSDdlOWtsa2c?oc=5",
+      "titulo": "10 notícias de tecnologia para você começar o dia (09/03) - Estadão",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Wed, 21 Oct 2026 10:04:04 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORGlxYnc4UHI1RWFYUXZWeDc1TDAtNGhhYUxvMDl6ejY5eDFKUkZ4Q0RjQ1UxQk5EcU5uYU05RzJKUlctMmd3OENIYTQ1SjBKY3JraEZWUWE2X0VqMGdHYURaZVlIRW50VEJ2eVlRaDhEdkVsNktNcE5KZXJOMDlreWtTZGlINW83YmdLUVBteV91YjlNNkEwZm40Z1ZsamU50gGmAUFVX3lxTE9UcW05UGlydE1ZQ2kzX3VMakF1Y3lqaFZTNmVUWkVOWnBlRndoYXpxZVRZWkozVHB3bnFtMzYzbkoxeW0xaDhoYU1TUGFzTFdNcjFnM2VWb2N1cGdvOFR6bWdoSWxNZUlkZ21tWHJLTmgzQ25Jd3NHb2x4bDF3YXNsU056aDFpM2JxLVRzbWJqZGRwdmQ3RDhCeXVRVUVoSDdlOWtsa2c?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Wed, 21 Oct 2026 10:04:04 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQYXlyX3VYek85b1M2QXB6TmZ6c3JaRHhtNTdvell0eldPUWo4aHBJWHRsQW03ZWI2U0N2Z0Zlc3hHcUFnUHJQQWZ3czY1QzBCTWI2S0NYMDNlU1FxMFRuZGR2RzZpT1FVaUs5ZG9ibFktajRNR2ZYcXZtaFNoeGVRbjd3Tmh2OFRBRVRZZ21oVEppWjhVUEQ2MEhYeVNyVm9ZQmlGajliVnhVQQ?oc=5",
+      "titulo": "Semana Nacional de Ciência e Tecnologia destaca protagonismo feminino - Prefeitura de Sorocaba",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Fri, 23 Oct 2026 19:32:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQYXlyX3VYek85b1M2QXB6TmZ6c3JaRHhtNTdvell0eldPUWo4aHBJWHRsQW03ZWI2U0N2Z0Zlc3hHcUFnUHJQQWZ3czY1QzBCTWI2S0NYMDNlU1FxMFRuZGR2RzZpT1FVaUs5ZG9ibFktajRNR2ZYcXZtaFNoeGVRbjd3Tmh2OFRBRVRZZ21oVEppWjhVUEQ2MEhYeVNyVm9ZQmlGajliVnhVQQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 19:32:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

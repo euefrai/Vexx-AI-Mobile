@@ -1,0 +1,622 @@
+{
+  "id": "dev-20",
+  "category": "multistep",
+  "query": "Pesquise energia solar compare vantagens custos e limitações",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.144,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Pesquise energia solar compare vantagens custos e limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Pesquise energia solar compare vantagens custos e limitações",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Pesquise energia solar compare vantagens custos e limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "energia solar vantagens custos limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "energia solar vantagens custos limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "energia solar vantagens custos limitações",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Pesquise+energia+solar+compare+vantagens+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Pesquise+energia+solar+compare+vantagens+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4713
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Pesquise%20energia%20solar%20compare%20vantagens%20custos%20e%20limita%C3%A7%C3%B5es",
+      "final": "https://html.duckduckgo.com/html/?q=Pesquise%20energia%20solar%20compare%20vantagens%20custos%20e%20limita%C3%A7%C3%B5es",
+      "chars": 14371
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Pesquise+energia+solar+compare+vantagens+custos+e+limita%C3%A7%C3%B5es",
+      "final": "https://old-search.marginalia.nu/search?query=Pesquise+energia+solar+compare+vantagens+custos+e+limita%C3%A7%C3%B5es",
+      "chars": 1115
+    },
+    {
+      "url": "https://www.bing.com/search?q=energia+solar+vantagens+custos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=energia+solar+vantagens+custos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5032
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=energia+solar+vantagens+custos+limita%C3%A7%C3%B5es",
+      "final": "https://old-search.marginalia.nu/search?query=energia+solar+vantagens+custos+limita%C3%A7%C3%B5es",
+      "chars": 1077
+    },
+    {
+      "url": "https://www.todamateria.com.br/energia/",
+      "final": "https://www.todamateria.com.br/energia/",
+      "chars": 519843
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "final": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "chars": 133600
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "final": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "chars": 124144
+    },
+    {
+      "url": "https://ma.equatorialenergia.com.br/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.equatorialenergia.com.br/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Energia",
+      "final": "https://pt.wikipedia.org/wiki/Energia",
+      "chars": 975445
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Pesquise energia solar compare vantagens custos e limitações",
+    "domain": "general",
+    "original_request": "Pesquise energia solar compare vantagens custos e limitações",
+    "resolved_request": "Pesquise energia solar compare vantagens custos e limitações",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T16:37:17.814030+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "0abbb674225ae6025982",
+        "url": "https://www.todamateria.com.br/energia/",
+        "title": "Energia: o que é, origem, conservação e tipos | Física",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "2016-05-16T19:18:40+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "subatômicas. As cargas ao se deslocarem geram corrente elétrica, criando o que chamamos de eletricidade. . Leia mais sobre a Energia Elétrica Energia Luminosa A"
+      },
+      {
+        "id": "63f8204a57f91aa8c17f",
+        "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+        "title": "Energia: o que é, tipos, fórmulas - Brasil Escola",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "2020-04-15-0318:46:26",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "simplificada, o trabalho é toda ação que é feita contra uma , como a . energia trabalho. força força gravitacional O conhecimento sobre a energia é muito vasto "
+      },
+      {
+        "id": "321e93e07ec4a213ea63",
+        "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+        "title": "O que é energia? - Brasil Escola",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "2016-04-22-0311:47:08",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "É a energia liberada ou formada a partir de , como a energia produzida por pilhas e baterias. Energia química: reações químicas É a energia proveniente da luz d"
+      },
+      {
+        "id": "d762bb27dbb2a20b376e",
+        "url": "https://ma.equatorialenergia.com.br/",
+        "title": "Equatorial Energia Maranhão",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "sáb., 24 out. 2026 09:49:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Equatorial Energia Maranhão: distribuidora de energia elétrica. Acesse sua conta, consulte faturas, solicite serviços e tire dúvidas sobre tarifas e energia."
+      },
+      {
+        "id": "0bfa9161b24fc9aa6513",
+        "url": "https://www.equatorialenergia.com.br/",
+        "title": "Equatorial Energia",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "sex., 23 out. 2026 10:55:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Acesse o novo site da Equatorial Energia e descubra as facilidades da Agência Web: segunda via, consulta de débitos, informar falta de energia e muito mais."
+      },
+      {
+        "id": "35ac0e91388a011a3ad0",
+        "url": "https://pt.wikipedia.org/wiki/Energia",
+        "title": "Energia – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "energia solar vantagens custos limitações",
+        "date": "2004-07-16T00:19:12Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "objeto, aumenta-se a energia potencial do sistema formado por ele e pela Terra. O nível ao qual se atribui energia potencial nula pode ser escolhido por conveni"
+      },
+      {
+        "id": "da03e0ae202872d9a9ee",
+        "url": "https://www.canalpesquise.com.br/",
+        "title": "Estatística | Canal PESQUISE",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!"
+      },
+      {
+        "id": "238748849eab2db872b2",
+        "url": "https://www.dicio.com.br/pesquise/",
+        "title": "Pesquise - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "sáb., 05 set. 2026 07:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Significado de Pesquise no Dicio, Dicionário Online de Português. O que é pesquise: Pesquise vem do verbo pesquisar. O mesmo que: procure, cate, sonde, deslinde"
+      },
+      {
+        "id": "bd194ea1ec20cd6cc572",
+        "url": "https://app.pesquisemais.com.br/",
+        "title": "Pesquise (+) - Bem Vindo",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "qui., 15 out. 2026 07:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+      },
+      {
+        "id": "288f6af9722db02d4645",
+        "url": "https://dicionario.priberam.org/pesquise",
+        "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "sáb., 17 out. 2026 07:27:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Significado de pesquise, verbo transitivo: Indagar, investigar, procurar com diligência. — Dicionário Priberam da Língua Portuguesa, dicionário online."
+      },
+      {
+        "id": "a91f52c000b4a8eb534d",
+        "url": "https://pesquisemais.com.br/",
+        "title": "Pesquise Mais",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "ter., 20 out. 2026 08:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "(11) 97591-8958 A Empresa Sobre Nós Tecnologia e IA LGPD e Compliance Pesquise Mais Lab Soluções HealthCare Product Test Mercados Consumo Agro Opinião Pública A"
+      },
+      {
+        "id": "b4f6c57f14706fc12b88",
+        "url": "https://www.canalpesquise.com.br/sobre-2",
+        "title": "Vídeos | Canal Pesquise",
+        "origin": "bing",
+        "query": "Pesquise energia solar compare vantagens custos e limitações",
+        "date": "sex., 02 out. 2026 02:09:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complexos após os vídeos do Canal. Pergunte, mas"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-13b2b3f2be03",
+      "type": "image",
+      "title": "Energia, na Física, é um conceito essencial que representa a capacidade de realizar trabalho ou provocar mudanças no estado de um sistema. Trata-se de uma grand",
+      "url": "https://static.todamateria.com.br/upload/en/er/energia-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/en/er/energia-og.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Energia, na Física, é um conceito essencial que representa a capacidade de realizar trabalho ou provocar mudanças no estado de um sistema. Trata-se de uma grandeza fundamental presente em todos os fenômenos naturais, responsável por ações c",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0e3b07c26b60",
+      "type": "image",
+      "title": "Rafael C. Asth",
+      "url": "https://static.todamateria.com.br/img/autor/ra/fa/rafael-asth_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ra/fa/rafael-asth_72.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rafael C. Asth",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c94c9038a329",
+      "type": "image",
+      "title": "Infográfico - Origem da energia que usamos na Terra",
+      "url": "https://static.todamateria.com.br/upload/en/er/energia3-0.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/en/er/energia3-0.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Infográfico - Origem da energia que usamos na Terra",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-637f9b38b361",
+      "type": "image",
+      "title": "Rosimar Gouveia",
+      "url": "https://static.todamateria.com.br/img/autor/ro/si/rosimar-gouveia_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ro/si/rosimar-gouveia_72.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rosimar Gouveia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7beac1d59fbd",
+      "type": "image",
+      "title": "Vamos criar a sua conta.",
+      "url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "final_url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vamos criar a sua conta.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1f24e6ef0f76",
+      "type": "image",
+      "title": "Elementos visuais do fundo",
+      "url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "final_url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Elementos visuais do fundo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-84c2cb10e27f",
+      "type": "image",
+      "title": "Você sabe o que é energia? Descubra qual é o significado de energia para a Física, conheça os diferentes tipos de energia e confira quais são as fórmulas para c",
+      "url": "https://s3.static.brasilescola.uol.com.br/be/2020/04/energia.jpg",
+      "final_url": "https://s3.static.brasilescola.uol.com.br/be/2020/04/energia.jpg",
+      "source_title": "Energia: o que é, tipos, fórmulas",
+      "source_url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "publisher": "s3.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Você sabe o que é energia? Descubra qual é o significado de energia para a Física, conheça os diferentes tipos de energia e confira quais são as fórmulas para calculá-la!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-288d21f4049a",
+      "type": "image",
+      "title": "Imprimir",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imprimir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d8ccfc8347f",
+      "type": "image",
+      "title": "Escutar texto",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escutar texto",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2ae2d2bf30c6",
+      "type": "image",
+      "title": "Compartilhar",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Compartilhar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.todamateria.com.br/energia/",
+      "titulo": "Energia: o que é, origem, conservação e tipos | Física",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-05-16T19:18:40+0100",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.todamateria.com.br/energia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "titulo": "Energia: o que é, tipos, fórmulas",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2020-04-15-0318:46:26",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "titulo": "O que é energia?",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-04-22-0311:47:08",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

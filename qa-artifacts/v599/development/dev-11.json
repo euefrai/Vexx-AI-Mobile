@@ -1,0 +1,526 @@
+{
+  "id": "dev-11",
+  "category": "events",
+  "query": "Eventos em Recife nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.163,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Recife%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Recife%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5130
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Recife%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Recife%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14342
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Recife%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Recife%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 1103
+    },
+    {
+      "url": "https://www2.recife.pe.gov.br/",
+      "error": "rede"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Recife",
+      "final": "https://en.wikipedia.org/wiki/Recife",
+      "chars": 779553
+    },
+    {
+      "url": "https://www2.recife.pe.gov.br/?i=1",
+      "error": "rede"
+    },
+    {
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "final": "https://www.viagensecaminhos.com/recife-pe/",
+      "chars": 378122
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "final": "https://pt.wikipedia.org/wiki/Recife",
+      "chars": 1616599
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Recife nos próximos sete dias",
+    "resolved_request": "Eventos em Recife entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Recife"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:36:14.085867+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Recife"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "5ad95c011f539601ad51",
+        "url": "https://www2.recife.pe.gov.br/",
+        "title": "Prefeitura do Recife",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 14:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Av. Cais do Apolo, 925, Bairro do Recife, Recife / PE - CEP: 50030-903 - Ouvidoria Geral: 0800 281 0040 - Município do Recife - CNPJ 10.565.000/0001-92"
+      },
+      {
+        "id": "025f1376e0ed7ca7cc17",
+        "url": "https://en.wikipedia.org/wiki/Recife",
+        "title": "Recife - Wikipedia",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2002-07-29T09:51:55Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Beberibe River at Recife. At that time the banks of the Capibaribe River were covered by . Kingdom of Portugal engenho Nossa Senhora da Ajuda sugar cane Recife "
+      },
+      {
+        "id": "978614ba94f18f611bb4",
+        "url": "https://www2.recife.pe.gov.br/?i=1",
+        "title": "Prefeitura do Recife - Pernambuco",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "ter., 20 out. 2026 07:09:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "HABITAÇÃO Recife garante dignidade na Vila do Papel com implantação de banheiros e instalações para água e esgoto nas residências mulher Prefeitura do Recife ab"
+      },
+      {
+        "id": "f3da286375ff8d7a8f95",
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "title": "O que fazer em Recife PE: 30 pontos turísticos",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2014-05-31T15:38:00+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "igrejas centenárias, prédios históricos, museus e centros de artesanato. Veneza Brasileira Recife Antigo Geralmente quem vai a Recife aproveita para conhecer a "
+      },
+      {
+        "id": "e75c219ebc7ec0178d66",
+        "url": "https://www.tripadvisor.com.br/Attractions-g304560-Activities-Recife_State_of_Pernambuco.html",
+        "title": "AS 15 MELHORES coisas para fazer em Recife (ATUALIZADO 2026)",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 06:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Da sofisticação e história do Recife Antigo ao charme das ladeiras de Olinda. As praias são um espetáculo à parte, especialmente Porto de Galinhas e Carneiros, "
+      },
+      {
+        "id": "2a82393e083d6087ee83",
+        "url": "https://pt.wikipedia.org/wiki/Recife",
+        "title": "Recife – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Recife\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2003-07-28T23:00:56Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "graças à e ao (ou ). No século XVII, a cidade foi por 24 anos a sede da colônia de , que teve como um dos administradores o conde . Após a expulsão dos neerland"
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-ea82767ed068",
+      "type": "image",
+      "title": "municipality of Pernambuco state, Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg/1280px-Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg/1280px-Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1af776a0003e",
+      "type": "image",
+      "title": "Wikipedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0997b8b9c241",
+      "type": "image",
+      "title": "The Free Encyclopedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The Free Encyclopedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bec19d84ced0",
+      "type": "image",
+      "title": "Flag of Recife",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Bandeira_de_Recife.svg/120px-Bandeira_de_Recife.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Bandeira_de_Recife.svg/120px-Bandeira_de_Recife.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flag of Recife",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-58ff8bf24031",
+      "type": "image",
+      "title": "Coat of arms of Recife",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Coat_of_arms_of_Recife.svg/120px-Coat_of_arms_of_Recife.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Coat_of_arms_of_Recife.svg/120px-Coat_of_arms_of_Recife.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Coat of arms of Recife",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5f35d57e6b91",
+      "type": "image",
+      "title": "Map",
+      "url": "https://maps.wikimedia.org/img/osm-intl,a,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Recife&revid=1379868764&groups=_8abc3b09a5566bf9cd5360d704d844600e9bf855&parser=parsoid",
+      "final_url": "https://maps.wikimedia.org/img/osm-intl,a,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Recife&revid=1379868764&groups=_8abc3b09a5566bf9cd5360d704d844600e9bf855&parser=parsoid",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "maps.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Map",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f46fafc3609c",
+      "type": "image",
+      "title": "Recife is located in Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Relief_Map_of_Brazil.jpg/250px-Relief_Map_of_Brazil.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Relief_Map_of_Brazil.jpg/250px-Relief_Map_of_Brazil.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife is located in Brazil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e372fd6c3163",
+      "type": "image",
+      "title": "Recife",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/20px-Red_pog.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/20px-Red_pog.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2a79c4ff966b",
+      "type": "image",
+      "title": "Recife is located in South America",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/South_America_laea_relief_location_map.jpg/250px-South_America_laea_relief_location_map.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/South_America_laea_relief_location_map.jpg/250px-South_America_laea_relief_location_map.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recife is located in South America",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-24ef290191a1",
+      "type": "image",
+      "title": "Portugal",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Flag_of_Portugal_%281640%29.svg/40px-Flag_of_Portugal_%281640%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Flag_of_Portugal_%281640%29.svg/40px-Flag_of_Portugal_%281640%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Portugal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5e0f126b6d6",
+      "type": "image",
+      "title": "Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Pernambuco state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Recife",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brazil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a67056a92a06",
+      "type": "image",
+      "title": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2014/05/recife-pe.jpg",
+      "source_title": "O que fazer em Recife PE: 30 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/recife-pe/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2014-05-31T15:38:00+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Saiba o que fazer em recife PE. Conheça as praias e pontos turísticos da cidade, dicas de hospedagem, como chegar e quando ir.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://en.wikipedia.org/wiki/Recife",
+      "titulo": "municipality of Pernambuco state, Brazil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2002-07-29T09:51:55Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://en.wikipedia.org/wiki/Recife",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.viagensecaminhos.com/recife-pe/",
+      "titulo": "O que fazer em Recife PE: 30 pontos turísticos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2014-05-31T15:38:00+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.viagensecaminhos.com/recife-pe/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://pt.wikipedia.org/wiki/Recife",
+      "titulo": "município brasileiro e a capital do estado brasileiro de Pernambuco",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2003-07-28T23:00:56Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://pt.wikipedia.org/wiki/Recife",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

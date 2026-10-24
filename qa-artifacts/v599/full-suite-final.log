@@ -1,0 +1,80 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+...F.................................................................... [ 14%]
+....................................F................................... [ 19%]
+...............s........................................................ [ 24%]
+........................................................................ [ 29%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 48%]
+........................................................................ [ 53%]
+.............s.......................................................... [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+.........s..........s................................................... [ 77%]
+........................................................................ [ 82%]
+........................................................................ [ 87%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+...........................................                              [100%]
+================================== FAILURES ===================================
+___ test_real_image_search_uses_existing_research_job_not_generated_claims ____
+
+research_job = (<sqlite3.Connection object at 0x00000214CB95CB80>, {'id': 'rj-9a1ced499872', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000214CBC12C10>
+
+    def test_real_image_search_uses_existing_research_job_not_generated_claims(research_job,monkeypatch):
+        import pc_agent
+        db,j=research_job;captured=[]
+        monkeypatch.setattr(pc_agent,'rjob_start',lambda db,req,owner:captured.append(req) or
+                            {'type':'research_job','job_id':'rj-controlled'})
+        result=pc_agent.cmd_pesquisa(db,'Pesquise e mostre imagens reais da Ponte Estaiada de São Paulo.',j['owner'],'qa')
+>       assert captured[0]['modo']=='rapida' and 'Pesquisa de imagens' in result
+               ^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests\test_autonomous_research_v598.py:176: IndexError
+___________ test_feed_headline_recovery_stays_at_declared_publisher ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000214E4C5AD60>
+
+    def test_feed_headline_recovery_stays_at_declared_publisher(monkeypatch):
+        calls=[]
+        title='Ubatã Bahia inaugura biblioteca municipal para estudantes'
+        def search(name, query, **kwargs):
+            calls.append((name,query))
+            if name=='google-news':
+                return [{'titulo':title+' - Jornal Local', 'url':'https://news.google.com/rss/articles/opaque',
+                         'publisher_url':'https://jornal.example', 'publicador':'Jornal Local',
+                         'content_scope':'feed_metadata','tipo':'noticia'}]
+            if 'site:jornal.example' in query:
+                return [{'titulo':title,'url':'https://jornal.example/noticia/biblioteca'},
+                        {'titulo':title,'url':'https://jornal.example.evil.test/forged'}]
+            return []
+        monkeypatch.setattr(sp,'buscar',search)
+        result=orch.pesquisar('Notícias de Ubatã Bahia nos últimos sete dias',
+            provedores=['google-news','bing'],orcamento={'max_tentativas':5,'timeout_total':3})
+        recovered=[x for x in result['achados'] if x.get('source_recovery')]
+>       assert len(recovered)==1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests\test_deep_retrieval_v596.py:54: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_evidence_benchmarks.py:229: Verificação semântica LLM BLOQUEADA sem provedor; determinístico cobre o resto.
+SKIPPED [1] tests\test_research_quality.py:162: Inferência Hermes real bloqueada no provedor; síntese LLM marcada BLOQUEADA.
+SKIPPED [1] tests\test_shopping.py:438: DDG sem resultados (rede instável)
+SKIPPED [1] tests\test_shopping.py:627: BLOQUEADO: mlb=ResearchErro: Provedor HTTP 403. ddg=página sem resultados (bot-wall?) lite=página sem resultados (bot-wall?)
+2 failed, 1477 passed, 4 skipped, 2 warnings in 258.30s (0:04:18)

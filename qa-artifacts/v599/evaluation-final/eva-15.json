@@ -1,0 +1,605 @@
+{
+  "id": "eva-15",
+  "category": "comparison",
+  "query": "Compare SQLite e PostgreSQL para aplicações web",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.236,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Compare SQLite e PostgreSQL para aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "Compare SQLite e PostgreSQL para aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Compare SQLite e PostgreSQL para aplicações web",
+      "candidates": 6
+    },
+    {
+      "provider": "stackexchange",
+      "query": "sqlite postgresql aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "sqlite postgresql aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "sqlite postgresql aplicações web",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Compare+SQLite+e+PostgreSQL+para+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Compare+SQLite+e+PostgreSQL+para+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4429
+    },
+    {
+      "url": "https://www.bing.com/search?q=sqlite+postgresql+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=sqlite+postgresql+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5122
+    },
+    {
+      "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "final": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "chars": 146405
+    },
+    {
+      "url": "https://sqliteonline.com/",
+      "final": "https://sqliteonline.com/",
+      "chars": 141817
+    },
+    {
+      "url": "https://text-compare.com/",
+      "final": "https://text-compare.com/",
+      "chars": 65777
+    },
+    {
+      "url": "https://m.gsmarena.com/compare.php3",
+      "final": "https://m.gsmarena.com/compare.php3",
+      "chars": 35747
+    },
+    {
+      "url": "https://sqlite.org/index.html",
+      "final": "https://sqlite.org/index.html",
+      "chars": 9008
+    },
+    {
+      "url": "https://sqlite.org/download.html",
+      "final": "https://sqlite.org/download.html",
+      "chars": 18299
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Compare SQLite e PostgreSQL para aplicações web",
+    "domain": "general",
+    "original_request": "Compare SQLite e PostgreSQL para aplicações web",
+    "resolved_request": "Compare SQLite e PostgreSQL para aplicações web",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T17:09:39.097554+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "cd0c48e1c125916e9281",
+        "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+        "title": "O que é SQLite? Como funciona e quando usar",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "2024-11-22T08:44:00-03:00",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "ou , ele não requer a instalação de um servidor dedicado para funcionar. Isso significa que todos os dados e estruturas de banco de dados são armazenados em um "
+      },
+      {
+        "id": "fd632c4416f41c2e28c3",
+        "url": "https://sqliteonline.com/",
+        "title": "SQL Online IDE - Fast SQL Editor | SQL Compiler",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "UPD PostgreSQL server UPD MS SQL server ADD info from Oracle 12.2021 FIX left menu for mobile FIX left menu scroll 10.2021 UPD left menu, ADD multi >-< multi da"
+      },
+      {
+        "id": "780e18a60246b1bf9947",
+        "url": "https://text-compare.com/",
+        "title": "Text Compare! - Find differences between two text files",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "sáb., 24 out. 2026 06:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "writer, editor, or student, Text Compare! lets you instantly see changes between document versions. Text Compare! How It Works To use Text Compare!, simply past"
+      },
+      {
+        "id": "182d3aa636b7d72d61e9",
+        "url": "https://m.gsmarena.com/compare.php3",
+        "title": "Compare phones, smartphones, tablets - GSMArena.com",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "sáb., 24 out. 2026 04:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Network Technology GSM / HSPA / LTE / 5G 2G bands GSM 850 / 900 / 1800 / 1900 3G Network HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 4G Network 1, 2, 3, 4, 5, 7, "
+      },
+      {
+        "id": "94f2cc5f4eb712441ca4",
+        "url": "https://sqlite.org/index.html",
+        "title": "SQLite Home Page",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "SQLite is a C-language library that implements a , , , , , SQL database engine. SQLite is the database engine in the world. SQLite is built into all mobile phon"
+      },
+      {
+        "id": "30fc89169bddf68086ca",
+        "url": "https://sqlite.org/download.html",
+        "title": "SQLite Download Page",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "sáb., 24 out. 2026 01:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "available for anonymous read-only access. Anyone can view the repository contents and download historical versions of individual files or ZIP archives of histor"
+      },
+      {
+        "id": "2e2c82dc479748ba1f14",
+        "url": "https://www.diffchecker.com/",
+        "title": "Compare text and find differences online or offline - Diffchecker",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs."
+      },
+      {
+        "id": "b65f0135870745c64232",
+        "url": "https://versus.com/br",
+        "title": "Versus | Compare tudo",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "sáb., 24 out. 2026 02:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de pr"
+      },
+      {
+        "id": "b3171cbf16dec96a68f5",
+        "url": "https://sqlitebrowser.org/",
+        "title": "DB Browser for SQLite",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "sáb., 24 out. 2026 06:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "DB Browser for SQLite (DB4S) is a high quality, visual, open source tool designed for people who want to create, search, and edit SQLite or SQLCipher database f"
+      },
+      {
+        "id": "a4256e1fd3a861167a74",
+        "url": "https://pt.wikipedia.org/wiki/SQLite",
+        "title": "SQLite – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "sqlite postgresql aplicações web",
+        "date": "sex., 23 out. 2026 17:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "SQLite é uma biblioteca em linguagem C que implementa uma base de dados SQL embutida. Programas que usem a biblioteca SQLite podem ter acesso a banco de dados S"
+      },
+      {
+        "id": "80bc7f77b7e8fa771300",
+        "url": "https://www.tudocelular.com/comparacao/",
+        "title": "Comparação - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "ter., 02 jun. 2026 16:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones "
+      },
+      {
+        "id": "55cb4e0221f680f302a7",
+        "url": "https://www.tudocelular.com/compare/",
+        "title": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare SQLite e PostgreSQL para aplicações web",
+        "date": "ter., 20 out. 2026 16:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O site Brasileiro de Telefonia - TudoCelular.com"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-1dea64bf1926",
+      "type": "image",
+      "title": "logo do SQLite",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2024/11/sqlite-imagem.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2024/11/sqlite-imagem.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo do SQLite",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d3204205484c",
+      "type": "image",
+      "title": "open",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-menu.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-menu.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "open",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e9ee0c495967",
+      "type": "image",
+      "title": "close",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-close.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-close.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "close",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-003db8af62e9",
+      "type": "image",
+      "title": "logo do SQLite",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2024/11/sqlite-imagem-564x283.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2024/11/sqlite-imagem-564x283.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo do SQLite",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ace69f7e8def",
+      "type": "image",
+      "title": "logo do SQLite",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2025/01/programador11-564x283.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2025/01/programador11-564x283.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo do SQLite",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bfb8ea585d09",
+      "type": "image",
+      "title": "Seta para a direita",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-arrow-right.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/icon-arrow-right.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Seta para a direita",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b6ef94063467",
+      "type": "image",
+      "title": "Notebook com código para testes E2E com Playwright",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-Laptop_Programmcode-564x283.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-Laptop_Programmcode-564x283.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notebook com código para testes E2E com Playwright",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8f3f18e13f22",
+      "type": "image",
+      "title": "Estação de trabalho usada no desenvolvimento de aplicações Node.js",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-A_Programmer27s_Workstation-564x283.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-A_Programmer27s_Workstation-564x283.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Estação de trabalho usada no desenvolvimento de aplicações Node.js",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4006755406ee",
+      "type": "image",
+      "title": "Rack de servidores processando fluxos de dados no Node.js",
+      "url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-Server_Rack_with_Spaghetti-Like_Mass_of_Network_Cables-564x283.jpg",
+      "final_url": "https://codigofacil.com.br/wp-content/uploads/2026/07/1920px-Server_Rack_with_Spaghetti-Like_Mass_of_Network_Cables-564x283.jpg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rack de servidores processando fluxos de dados no Node.js",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c8d12682d750",
+      "type": "image",
+      "title": "Ícone com a logo do Codepen",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/codepen-dark3.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/codepen-dark3.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ícone com a logo do Codepen",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-09f59fe4f682",
+      "type": "image",
+      "title": "Ícone com a logo do Facebook",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/facebook-dark.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/facebook-dark.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ícone com a logo do Facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f8c6632a02d4",
+      "type": "image",
+      "title": "Ícone com a logo do Instagram",
+      "url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/instagram-dark.svg",
+      "final_url": "https://codigofacil.com.br/wp-content/themes/codigo-facil-blog/build/images/instagram-dark.svg",
+      "source_title": "O que é SQLite? Como funciona e quando usar",
+      "source_url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "publisher": "codigofacil.com.br",
+      "date": "2024-11-22T08:44:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ícone com a logo do Instagram",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+      "titulo": "O que é SQLite? Como funciona e quando usar",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2024-11-22T08:44:00-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://sqliteonline.com/",
+      "titulo": "SQL Online IDE - Fast SQL Editor | SQL Compiler",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://sqliteonline.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://text-compare.com/",
+      "titulo": "Text Compare! - Find differences between two text files",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 06:43:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://text-compare.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 2,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

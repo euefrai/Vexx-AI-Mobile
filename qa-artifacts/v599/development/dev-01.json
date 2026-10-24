@@ -1,0 +1,446 @@
+{
+  "id": "dev-01",
+  "category": "municipal_news",
+  "query": "Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.377,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Ubatã\" \"bahia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Ubatã\" \"bahia\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Ubatã\" \"bahia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro\" site:www.bahianoticias.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 106822
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3779
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Ubat%C3%A3%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4781
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Defensoria+leva+atendimento+jur%C3%ADdico+gratuito+a+Nova+Ibi%C3%A1+e+Ubat%C3%A3+entre+20+e+22+de+outubro%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Defensoria+leva+atendimento+jur%C3%ADdico+gratuito+a+Nova+Ibi%C3%A1+e+Ubat%C3%A3+entre+20+e+22+de+outubro%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5671
+    },
+    {
+      "url": "https://www.bahianoticias.com.br",
+      "final": "https://www.bahianoticias.com.br",
+      "chars": 486866
+    },
+    {
+      "url": "https://www.bahianoticias.com.br/principal/rss.xml",
+      "final": "https://cdn.bahianoticias.com.br/rss.xml",
+      "chars": 38990
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Ubatã\" \"bahia\" notícias",
+    "domain": "news",
+    "original_request": "Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.",
+    "resolved_request": "Pesquise notícias sobre Ubatã, Bahia, entre 2026-10-17 e 2026-10-24.",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Ubatã",
+      "region": "bahia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:34:53.369777+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Ubatã",
+        "region": "bahia"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "ba4cfea31e424f95738c",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+        "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Mon, 19 Oct 2026 13:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias"
+      },
+      {
+        "id": "5dded0e8b78e152058dd",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+        "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Mon, 08 Jun 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural"
+      },
+      {
+        "id": "d0f3b1d844affd4f9a2d",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+        "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Fri, 19 Jun 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia"
+      },
+      {
+        "id": "3dbffe2263686d66eed4",
+        "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5",
+        "title": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Mon, 31 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia G1"
+      },
+      {
+        "id": "bb9dc14e805aa1142609",
+        "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOeVdjOGNpbmtRR1hiYTcxYnRmd01JS2FEOTY2MWVzeVNyYmVLV0l3SFJUcFJ3cUxiOVhheTNfeFEyUnZ0QU5iV1VjVllMQ256c29Vc2FORGJzdXpLSnhVcFZPNGxrd05RQlBvdUV1b09KQktaT1p5RVhDZVRONUNVWmxRYlNNTHpORGZTU0ZnckF1YlFK0gGjAUFVX3lxTE84dkFtR1QyN2pRbno5YVlXSjRxck5IWVpBWGg1aGNfMlRuZHM4d3M5V3RjNF9GZVViWEpKYVd1SmtKSERmUnNGY2hTVDF1WlFtR2poV3RoMGh4U2k1YVZWalk1Rk56cDRteHg0M3RtM2NqeDA2bGl6bUZGZFhoaUJNTGF1bmI0V1o2S1I3cF9sUVpMTFR1SjAxYW03VUROMlA5TzQ?oc=5",
+        "title": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia - G1",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Mon, 06 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia G1"
+      },
+      {
+        "id": "b00573de4ce60fec7a62",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOUTFCOFFjZjhqTkRXSG41MXhJTzRsdjNwSk1JbUpubXlobFEzWTBNQnZsY2ItMGQ2RlprMkhXNlQ1VXhuRE02UlRRdVZTdmNfbGxCV1llWDRCV2NPVFpvRllEMkktZ3lyQVVFSURKenVlNExxV0p0em8wczZLUk5NckdRRUVrMnJwVmNwY0p2SEthRWNqRjJ3N1lHOHBUY21ra3pSQ1pyamVhblhCcTk1bw?oc=5",
+        "title": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã - Ilhéus Eventos",
+        "origin": "google-news",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "Wed, 17 Jun 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã Ilhéus Eventos"
+      },
+      {
+        "id": "ebba3c7abcbe012ae5ac",
+        "url": "https://www.youtube.com/watch?v=CPMetOon6mI",
+        "title": "Caps love lilcrashz chorume 2 remake bondaverso - YouTube",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "dom., 08 mar. 2026 22:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "créditos https://youtube.com/@GabrielCrasheiro23?si=RHVMEhl0eYqwC_sx"
+      },
+      {
+        "id": "010099d7eae52dd82c26",
+        "url": "https://www.youtube.com/watch?v=_IZ1IA_aM_A",
+        "title": "Caps love lilcrashz chorume 2 bondaverso - YouTube",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "ter., 07 jul. 2026 02:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Caps love lilcrashz chorume 2 bondaverso um assassino dançante 449 subscribers Subscribe"
+      },
+      {
+        "id": "81bed0312d509fcb06f4",
+        "url": "https://lista.mercadolivre.com.br/tampao-caps",
+        "title": "Tampao Caps - MercadoLivre",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "dom., 08 jun. 2025 02:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Frete grátis no dia Compre Tampao Caps parcelado sem juros! Saiba mais sobre nossas incríveis ofertas e promoções em milhões de produtos."
+      },
+      {
+        "id": "7eaf36727c23d1399d24",
+        "url": "https://pecas.romi.com/p/tampa-da-cx-de-protecao-da-correia/T21704",
+        "title": "TAMPA DA CX DE PROTECAO DA CORREIA - pecas.romi.com",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "qui., 22 out. 2026 13:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "T21704 TAMPA DA CX DE PROTECAO DA CORREIA Ver preço Compartilhar: Características Imagens meramente ilustrativas"
+      },
+      {
+        "id": "8ca59a239ff98ed192f2",
+        "url": "https://lista.mercadolivre.com.br/tampao-galvanizado-2",
+        "title": "Tampao Galvanizado 2 - Mercado Livre",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "ter., 02 dez. 2025 05:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Frete grátis no dia Compre já Tampao Galvanizado 2 parcelado sem juros! Saiba mais sobre nossas incríveis ofertas e promoções em milhões de produtos."
+      },
+      {
+        "id": "8c87af0133239a7c6aeb",
+        "url": "https://www.fundicaoalea.com.br/produtos/tampoes-circulares/tampoes-simples/tampao-cx-passeio-tipo-ii-comgas",
+        "title": "TAMPAO CX. PASSEIO TIPO II COMGAS - Fundição Álea",
+        "origin": "bing",
+        "query": "\"Ubatã\" \"bahia\" notícias",
+        "date": "sáb., 17 out. 2026 00:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A Fundição Alea é especializada na fabricação de tampões, tampas e grelhas em ferro fundido nodular. Nosso material é produzido de acordo com a norma NBR 10.160"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-6a260f34bd3a",
+      "type": "video",
+      "title": "Caps love lilcrashz chorume 2 remake bondaverso - YouTube",
+      "url": "https://www.youtube.com/watch?v=CPMetOon6mI",
+      "final_url": "https://www.youtube.com/watch?v=CPMetOon6mI",
+      "source_title": "Caps love lilcrashz chorume 2 remake bondaverso - YouTube",
+      "source_url": "https://www.youtube.com/watch?v=CPMetOon6mI",
+      "publisher": "www.youtube.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "search metadata",
+      "metadata_state": "VIDEO_FOUND"
+    },
+    {
+      "id": "med-bc0182631591",
+      "type": "video",
+      "title": "Caps love lilcrashz chorume 2 bondaverso - YouTube",
+      "url": "https://www.youtube.com/watch?v=_IZ1IA_aM_A",
+      "final_url": "https://www.youtube.com/watch?v=_IZ1IA_aM_A",
+      "source_title": "Caps love lilcrashz chorume 2 bondaverso - YouTube",
+      "source_url": "https://www.youtube.com/watch?v=_IZ1IA_aM_A",
+      "publisher": "www.youtube.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "search metadata",
+      "metadata_state": "VIDEO_FOUND"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+      "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+      "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+      "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

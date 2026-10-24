@@ -1,0 +1,641 @@
+{
+  "id": "eva-01",
+  "category": "municipal_news",
+  "query": "Notícias em Manaus nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 10.405,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Manaus\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores\" site:www.acritica.com",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 172728
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6045
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4981
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5383
+    },
+    {
+      "url": "https://www.acritica.com",
+      "final": "https://www.acritica.com",
+      "chars": 108558
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Homem+capota+carro+sobre+casas+em+Manaus+ap%C3%B3s+derrota+do+Flamengo+na+Libertadores%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Homem+capota+carro+sobre+casas+em+Manaus+ap%C3%B3s+derrota+do+Flamengo+na+Libertadores%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5649
+    },
+    {
+      "url": "https://www.manaus.am.gov.br/",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://g1.globo.com/am/amazonas/",
+      "final": "https://g1.globo.com/am/amazonas/",
+      "chars": 814436
+    },
+    {
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "final": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "chars": 684534
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Manaus",
+      "final": "https://en.wikipedia.org/wiki/Manaus",
+      "chars": 701062
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/brasil/manaus.htm",
+      "final": "https://brasilescola.uol.com.br/brasil/manaus.htm",
+      "chars": 141140
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Manaus",
+      "final": "https://pt.wikipedia.org/wiki/Manaus",
+      "chars": 1525464
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Manaus\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Manaus nos últimos sete dias",
+    "resolved_request": "Notícias em Manaus entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Manaus"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T17:07:45.191595+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Manaus"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "3df5553bd641ef9fb3b1",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+        "title": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 17:51:30 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 A Crítica"
+      },
+      {
+        "id": "e41b9626f94fecfa9849",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+        "title": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 14:50:05 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores A Crítica"
+      },
+      {
+        "id": "7bd54b7b9bd9e897a8cf",
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUVItelZLMi1fWkkzWjNZSzVzWU9oVUtQWXJ1NTl4QkJQUGliQUxXWDVUdWg2RXI5NmFPWjNsR0Y3aG92UFJnSTkwSElZRk9ycmg2czFlVFg1dXhYdGgyMTBMWVh0WjlxbTBoclJ0V2lvTi0zWUtJZ0hWWTBMXzlvX1FoX3BKS3hrc19KVVhUcm9OWFhWajJXalgxelJoeHhVYkJ3RC12ZmxHZ3N0MDdNQ2VYQnpXWGlub1hr?oc=5",
+        "title": "Empretec abre 25 vagas para empreendedores em Manaus; veja como se inscrever - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 11:32:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Empretec abre 25 vagas para empreendedores em Manaus; veja como se inscrever Portal do Holanda"
+      },
+      {
+        "id": "4dbd3bbbeb63c1c90c10",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPN1NuRkhjaklabFpuRmZtWHJsQmkydGwyRzQzQ0xXUjFvbWI5SlZHaHlpdFlpdExhR09CNEpNWHkxQ2lqQi00eGtmYzZmWXFSSEhmRkk0YW9SdFFMczZlSGlZbHNvU1ByYnFwS0wySUVMOHVFOWg4NEZZODVSM2NkOE1HN3dBUzJsczZXV1lmMXdWSWdPRGpEX0hORHBhQnNEMmlELVFpd0UwVEFDT1RPZGFtSUwyZEpSWTNDSWFTc1g1aGtyU2o0OTZ0dw?oc=5",
+        "title": "Eleições 2026: Manaus terá ônibus gratuitos e esquema especial de trânsito neste domingo - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 20:44:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Eleições 2026: Manaus terá ônibus gratuitos e esquema especial de trânsito neste domingo Portal do Holanda"
+      },
+      {
+        "id": "7008eb57c6b7946d6f28",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOYWZZek1LN3VFMFV3MTFMM1lMT0g0SUdpM3E2LWFaNjFBSnNOU292Q0tDcFRzLWpDeU5fQnNMRXYxYU1CRDY1d0VuT2RwclhmSHN0UUF4ZFNuZ1hINGVoRWRRWldyTy1uM2J1VTVOVTBmZlA2N0NoaVdjQzZJNTlNLU5UZzJDU0lhMF8tbDlCX2kxakxkWThKaXZfNEIzcFh0ZmhvaGZiRFRDbWpGOHZNcVZKZl9Cdw?oc=5",
+        "title": "Após mãe, Justiça concede semiaberto a irmão de Djidja Cardoso em Manaus - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 16:19:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Após mãe, Justiça concede semiaberto a irmão de Djidja Cardoso em Manaus Portal do Holanda"
+      },
+      {
+        "id": "0586e8e3fccc03428e01",
+        "url": "https://www.manaus.am.gov.br/",
+        "title": "Prefeitura de Manaus - Site oficial da Prefeitura de Manaus.",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "qui., 22 out. 2026 13:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portal da Prefeitura de Manaus. Serviços online, notícias, transparência, acesso a informação da Prefeitura de Manaus."
+      },
+      {
+        "id": "daca04b58d035fe48a69",
+        "url": "https://g1.globo.com/am/amazonas/",
+        "title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 03 out. 2026 11:19:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Nova norma revoga a portaria conjunta, que previa a proibição do consumo de bebidas alcoólicas em todo o estado, das 2h às 17h do dia da votação. A restrição va"
+      },
+      {
+        "id": "c0818434b33351b5bb6d",
+        "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+        "title": "O que fazer em Manaus: 20 pontos turísticos imperdíveis",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2022-07-05T23:11:59+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "pode imaginar. E é claro que não podemos nos esquecer da culinária manauara com influência da cultura indígena. São tantas cores, texturas e sabores diferentes "
+      },
+      {
+        "id": "4bda345689f4664134d7",
+        "url": "https://en.wikipedia.org/wiki/Manaus",
+        "title": "Manaus - Wikipedia",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2004-02-04T22:44:41Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "On October 24, 1848, under Law 145 of the Provincial Assembly of Para, it was renamed the City of Barra do Rio Negro. On September 4, 1856, the governor, Hercul"
+      },
+      {
+        "id": "0174c079ff714fb8a132",
+        "url": "https://brasilescola.uol.com.br/brasil/manaus.htm",
+        "title": "Manaus: dados gerais, história, economia, cultura - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2021-06-21-0315:03:04",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "(IBGE, 2022). População total: 181,01 hab./km² (IBGE, 2022). Densidade: quatorial quente e úmido. Clima: e 92 metros. Altitude: GMT -4. Fuso horário: Anuncie aq"
+      },
+      {
+        "id": "3af69a3c522dd6a1027d",
+        "url": "https://pt.wikipedia.org/wiki/Manaus",
+        "title": "Manaus – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2004-04-06T14:45:48Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "tribo dos , habitante da região dos rios Negro e Solimões. Na grafia antiga, escrevia-se , preservando-se o e acentuando-se a vogal precedente. Na língua indíge"
+      },
+      {
+        "id": "bb8a008b7e92be1bda8d",
+        "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+        "title": "Esportes Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 há 23 horas",
+        "origin": "publisher-feed",
+        "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+        "date": "",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": ""
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede A",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+      "source_url": "https://g1.globo.com/am/amazonas/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede Amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+      "source_url": "https://g1.globo.com/am/amazonas/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede Amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+      "source_url": "https://g1.globo.com/am/amazonas/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede Amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "G1 – Amazonas: notícias e vídeos da Rede Amazônica",
+      "source_url": "https://g1.globo.com/am/amazonas/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Manaus e o estado do AM. Acompanhe informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Rede Amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0ac06da739c3",
+      "type": "image",
+      "title": "Confira o que fazer em Manaus: Teatro Amazonas, MUSA, restaurantes... Veja os TOP passeios e experiências para incluir no roteiro.",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/floresta-em-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/floresta-em-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Confira o que fazer em Manaus: Teatro Amazonas, MUSA, restaurantes... Veja os TOP passeios e experiências para incluir no roteiro.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f9fa6c4f2729",
+      "type": "image",
+      "title": "dicas de manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/dicas-de-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/dicas-de-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "dicas de manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-52fc9b4a42e3",
+      "type": "image",
+      "title": "pontos turísticos manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/pontos-turisticos-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/pontos-turisticos-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "pontos turísticos manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-64afb5ccb116",
+      "type": "image",
+      "title": "teatro amazonas manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/teatro-amazonas-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/teatro-amazonas-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "teatro amazonas manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c062b1066293",
+      "type": "image",
+      "title": "roteiro manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/roteiro-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/roteiro-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "roteiro manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-40e0d670d74e",
+      "type": "image",
+      "title": "teatro amazonas programação",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/06/pontos-turisticos-de-manaus-porto.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/06/pontos-turisticos-de-manaus-porto.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "teatro amazonas programação",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1bb98970084e",
+      "type": "image",
+      "title": "o que fazer em manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/melhores-restaurantes-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/melhores-restaurantes-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "o que fazer em manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3616fc0a5259",
+      "type": "image",
+      "title": "o que fazer em manaus no centro",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2018/01/9D0C3E01-AC44-4A79-A597-5EF3BCF961F9.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2018/01/9D0C3E01-AC44-4A79-A597-5EF3BCF961F9.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "o que fazer em manaus no centro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+      "titulo": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027 - A Crítica",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 17:51:30 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWkl5OGVFaUFUby1URWxaZUhaS3lFQ2pyanVoRVg4THdQR2JuWVdzVnFJbThucGxaWG9HSlQtZVdrc2hqWDlTTVhMQm5TZUMtcVNObExkaU4xaHJCLTRFQlFIb29Xc2FTempwbDlRS1JBMVpCbkVORzJUQkNEWk9lU1FaaW9OaVNJYWFLT1UxeWhzYU10d3BUZjhYd2s5QnpqRGxlOXd1eEozNGtZdnBoVVlpY3QweEFheWpJZnR6ZjRyV19ITkNsSFJB?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 17:51:30 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+      "titulo": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores - A Crítica",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 14:50:05 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 14:50:05 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUVItelZLMi1fWkkzWjNZSzVzWU9oVUtQWXJ1NTl4QkJQUGliQUxXWDVUdWg2RXI5NmFPWjNsR0Y3aG92UFJnSTkwSElZRk9ycmg2czFlVFg1dXhYdGgyMTBMWVh0WjlxbTBoclJ0V2lvTi0zWUtJZ0hWWTBMXzlvX1FoX3BKS3hrc19KVVhUcm9OWFhWajJXalgxelJoeHhVYkJ3RC12ZmxHZ3N0MDdNQ2VYQnpXWGlub1hr?oc=5",
+      "titulo": "Empretec abre 25 vagas para empreendedores em Manaus; veja como se inscrever - Portal do Holanda",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 11:32:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUVItelZLMi1fWkkzWjNZSzVzWU9oVUtQWXJ1NTl4QkJQUGliQUxXWDVUdWg2RXI5NmFPWjNsR0Y3aG92UFJnSTkwSElZRk9ycmg2czFlVFg1dXhYdGgyMTBMWVh0WjlxbTBoclJ0V2lvTi0zWUtJZ0hWWTBMXzlvX1FoX3BKS3hrc19KVVhUcm9OWFhWajJXalgxelJoeHhVYkJ3RC12ZmxHZ3N0MDdNQ2VYQnpXWGlub1hr?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 11:32:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

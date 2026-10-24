@@ -1,0 +1,670 @@
+{
+  "id": "solar",
+  "category": "technology",
+  "query": "Pesquise novidades sobre energia solar compare os acontecimentos",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.323,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "notícias energia solar",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "notícias energia solar",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "notícias energia solar",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Órigo suspende construção de usinas solares e aposta em eficiência para crescer\" site:canalsolar.com.br",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Energia solar muda o sistema energético brasileiro\" site:jornal.ufg.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=not%C3%ADcias+energia+solar&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=not%C3%ADcias+energia+solar&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 142137
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=not%C3%ADcias+energia+solar&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=not%C3%ADcias+energia+solar&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6423
+    },
+    {
+      "url": "https://www.bing.com/search?q=not%C3%ADcias+energia+solar&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=not%C3%ADcias+energia+solar&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3316
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22%C3%93rigo+suspende+constru%C3%A7%C3%A3o+de+usinas+solares+e+aposta+em+efici%C3%AAncia+para+crescer%22+site%3Acanalsolar.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22%C3%93rigo+suspende+constru%C3%A7%C3%A3o+de+usinas+solares+e+aposta+em+efici%C3%AAncia+para+crescer%22+site%3Acanalsolar.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5403
+    },
+    {
+      "url": "https://canalsolar.com.br",
+      "final": "https://canalsolar.com.br",
+      "chars": 261263
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Energia+solar+muda+o+sistema+energ%C3%A9tico+brasileiro%22+site%3Ajornal.ufg.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Energia+solar+muda+o+sistema+energ%C3%A9tico+brasileiro%22+site%3Ajornal.ufg.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5261
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "final": "https://g1.globo.com/",
+      "chars": 879474
+    },
+    {
+      "url": "https://noticias.uol.com.br/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.cnnbrasil.com.br/",
+      "final": "https://www.cnnbrasil.com.br/",
+      "chars": 1074360
+    },
+    {
+      "url": "https://canalsolar.com.br/origo-suspende-construcao-usinas-aposta-eficiencia/",
+      "final": "https://canalsolar.com.br/origo-suspende-construcao-usinas-aposta-eficiencia/",
+      "chars": 142777
+    },
+    {
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "final": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+      "chars": 1870253
+    },
+    {
+      "url": "https://www.terra.com.br/noticias/",
+      "final": "https://www.terra.com.br/noticias/",
+      "chars": 380691
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "notícias energia solar",
+    "domain": "news",
+    "original_request": "Pesquise novidades sobre energia solar compare os acontecimentos",
+    "resolved_request": "Pesquise novidades sobre energia solar compare os acontecimentos",
+    "parameters": {
+      "topic": "energia solar"
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-24T21:04:25.409152+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "topic": "energia solar"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "372b32a63ca0457547e7",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbTdTak1rc0FRTE9HUkE5YUhwQmJaYkJWeFBtMTNSVmpwVEV3bjJuSkI3Q3diRWRDN2dXMjk0eThOOHlEaXhhQ3dVbjFyUFRMR0htMXI4eXpGNkt0RHJwZWN3ajdIRlBiSmJQQ2MzakthNnFKVzdwNGVoOWNVQmQ1SWstRkk3eGdf?oc=5",
+        "title": "Energia solar muda o sistema energético brasileiro - Jornal UFG",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Tue, 06 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Energia solar muda o sistema energético brasileiro Jornal UFG"
+      },
+      {
+        "id": "283bca7912a74de29641",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNNkozcktBUkgxLUJtaFdlSEN4UkMtc3lfbi04SnB3TVBFWWs1MFJydF80NXdsZ0Jyekprblp5OTZNdkpuaV9fcjFYMW9yRTlUSVJKWTEwLWZIY083ajFjdUxZaDdfTDRMWjBNZ0p3YzhReXIyNXNuUms3dklSTE16ejhhQktnVmt4VDRPNG4tdU1JM1pmbmRiNFVWay1jWktBaV9n0gGyAUFVX3lxTFAwZzFieXVkdTdEc21GMllwXy1vcDJ6LXlOU1N2OGJmT1VxZUE4eXZIazhvbnhNaUE5aWd4ZUM2cGJjM3FkSHo3ZzNXbkdyR0VpdWk1U1ZrejRHV3BCWHNxVC1xU0NhdURvZFhpTDBVZG5VbjgyWTMwbkdHMkR2M0k5TkdNLU1OY0JOdTVyYjNSVDNLRWw1WTRtWG9oTjA5aWlKclJwTms3MklVcGJORGx",
+        "title": "Energia solar acaba com apagões em cidade de MG - G1",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Tue, 20 Oct 2026 17:43:56 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Energia solar acaba com apagões em cidade de MG G1"
+      },
+      {
+        "id": "975a97a4cbcaf62cbb20",
+        "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOb0w4dGViNkVraTR1M3E0MUpaVnV1Y3ZRQm1LU1hWNHc0a09idVhNMmdIc09tRmdrVXhwX1JHZGhtajd5T1pjT0NoUFhvSWdvVWtxZWR6RndoYjNUNEE0WllxRV9lY2I2ZWdlSHV4YTRtS1NCWXNzbzBVUzlFRlozUDV4WQ?oc=5",
+        "title": "Órigo suspende construção de usinas solares e aposta em eficiência para crescer - Canal Solar",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Fri, 23 Oct 2026 15:51:16 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Órigo suspende construção de usinas solares e aposta em eficiência para crescer Canal Solar"
+      },
+      {
+        "id": "cbbceb4625f20d372993",
+        "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQbGJqMVlFaERzVTlBMTdxcll3ZEhtMlVJQlozdUpIZXl5eEhwTk9xSjVfREdkYnZvQVNFX2k0RGVuTlBZb2Y5dUdsbFBmbktKSHA3UUQxTXZzV1VBaWVVSF8yOUllUmppdDZOZTRqNzJ3anBNZ096Wk95eU1ydi1KdVI5NmVKN2YxdTF0MUc2RjQtbXlHTkFxRWo0V1BvSElwd05CWmszQUFrbDhBUl8wN01LUERlOElzWGZ2a250ZFRXT2RSc2ttRVVvRFZhSnZ5S0RDUmtMMHA2N3VwLW5SYW14aw?oc=5",
+        "title": "O grupo Trinergy coloca à venda portfólio solar operacional de 9,1 MWp no Mato Grosso do Sul - Portal Solar",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Tue, 20 Oct 2026 12:14:38 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "O grupo Trinergy coloca à venda portfólio solar operacional de 9,1 MWp no Mato Grosso do Sul Portal Solar"
+      },
+      {
+        "id": "84f53643ae3df574f48b",
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQMEl2X3dDWGFRQzlyY3NPNDFlOWtHNzFRTVZ1QVF5TGZDSjczWTc5YWJzbHl2RlE3andZVWRzQ3J4ZkhNanJJVVg5RUd6VFZZUkZQMnRub2U2ZEVjUHRNeldYT21CZHRteGw4dWtzSHFPempWbDF6VFVBaVlkdWRBbkNBN2pEY2Y5UkluRUIyZXg4c1k?oc=5",
+        "title": "Mara Schwengber transformou pioneirismo em caminho para o sucesso - GAZ",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Sat, 24 Oct 2026 14:23:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mara Schwengber transformou pioneirismo em caminho para o sucesso GAZ"
+      },
+      {
+        "id": "fcd968704402e549edf3",
+        "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9PSm1YSE9LcXVSM3oyWE1UWmlqcHlwdEpYcTdvMzdNekxSMW85YUlLbmk0VmJuUEh1cVlCSy04clVTb2sxREZmeHlIWlhEcjlHVGFrcUUxblcwbnM?oc=5",
+        "title": "Novo abrigo de ônibus oferece mais conforto e tecnologia aos passageiros em Porto Velho - Prefeitura de Porto Velho",
+        "origin": "google-news",
+        "query": "notícias energia solar",
+        "date": "Fri, 23 Oct 2026 18:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Novo abrigo de ônibus oferece mais conforto e tecnologia aos passageiros em Porto Velho Prefeitura de Porto Velho"
+      },
+      {
+        "id": "159629efc4e40b660600",
+        "url": "https://g1.globo.com/",
+        "title": "g1 - O portal de notícias da Globo",
+        "origin": "bing",
+        "query": "notícias energia solar",
+        "date": "sáb., 24 out. 2026 20:55:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuc"
+      },
+      {
+        "id": "ee3627b9f5ae3e28a55f",
+        "url": "https://noticias.uol.com.br/",
+        "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+        "origin": "bing",
+        "query": "notícias energia solar",
+        "date": "sáb., 24 out. 2026 20:33:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais."
+      },
+      {
+        "id": "63b2c72b28f5501a2f17",
+        "url": "https://www.cnnbrasil.com.br/",
+        "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+        "origin": "bing",
+        "query": "notícias energia solar",
+        "date": "2022-06-23T15:04:17-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "“Best Pancakes in the County”: conheça filme em que Nicolas Cage está “irreconhecível”"
+      },
+      {
+        "id": "48638b0ac7ff0d8925b6",
+        "url": "https://canalsolar.com.br/origo-suspende-construcao-usinas-aposta-eficiencia/",
+        "title": "Notícias Órigo suspende construção de usinas solares e aposta em eficiência para crescer Com cerca de 840 MWp instalados, companhia reduz estrutura operacional ",
+        "origin": "publisher-feed",
+        "query": "\"Órigo suspende construção de usinas solares e aposta em eficiência para crescer\" site:canalsolar.com.br",
+        "date": "2026-10-23T12:51:16-03:00",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "tensão. Ambiente mais competitivo A decisão de interromper novos investimentos também ocorre em um momento de maior competição no segmento de geração distribuíd"
+      },
+      {
+        "id": "047cd59c18bcf5d75b6f",
+        "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+        "title": "Google Notícias",
+        "origin": "bing",
+        "query": "notícias energia solar",
+        "date": "sáb., 24 out. 2026 19:51:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Notícias Google Notícias Suas notícias Hoje 33 ° 22 ° dom. 35 ° 24 ° seg. 33 ° 24 ° ter. 27 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: "
+      },
+      {
+        "id": "7c9e707ac422f77f6562",
+        "url": "https://www.terra.com.br/noticias/",
+        "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+        "origin": "bing",
+        "query": "notícias energia solar",
+        "date": "sáb., 24 out. 2026 20:19:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Em meio às montanhas: elevador de vidro de 326 metros instalado em penhasco na China virou atração turística mundial"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos tele",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-56d8b59ede85",
+      "type": "image",
+      "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-14b92c9f90e8",
+      "type": "image",
+      "title": "Logo CNN Brasil",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo CNN Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f0113dcd3110",
+      "type": "image",
+      "title": "Caio Junqueira",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Caio Junqueira",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cc1aa81db9a3",
+      "type": "image",
+      "title": "Larissa Rodrigues",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Larissa Rodrigues",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0ba7beb4bc74",
+      "type": "image",
+      "title": "Iuri Pitta",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Iuri Pitta",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f94763fae17b",
+      "type": "image",
+      "title": "Julliana Lopes",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Julliana Lopes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-39ef96938452",
+      "type": "image",
+      "title": "Pedro Venceslau",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Pedro Venceslau",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9be8563a97ad",
+      "type": "image",
+      "title": "Edilene Lopes",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Edilene Lopes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://canalsolar.com.br/origo-suspende-construcao-usinas-aposta-eficiencia/",
+      "titulo": "Órigo suspende construção de usinas solares e aposta em eficiência",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2026-10-23T12:51:16-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://canalsolar.com.br/origo-suspende-construcao-usinas-aposta-eficiencia/",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "2026-10-23T12:51:16-03:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "titulo": "Google Notícias",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "sáb., 24 out. 2026 19:51:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 19:51:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbTdTak1rc0FRTE9HUkE5YUhwQmJaYkJWeFBtMTNSVmpwVEV3bjJuSkI3Q3diRWRDN2dXMjk0eThOOHlEaXhhQ3dVbjFyUFRMR0htMXI4eXpGNkt0RHJwZWN3ajdIRlBiSmJQQ2MzakthNnFKVzdwNGVoOWNVQmQ1SWstRkk3eGdf?oc=5",
+      "titulo": "Energia solar muda o sistema energético brasileiro - Jornal UFG",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Tue, 06 Oct 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbTdTak1rc0FRTE9HUkE5YUhwQmJaYkJWeFBtMTNSVmpwVEV3bjJuSkI3Q3diRWRDN2dXMjk0eThOOHlEaXhhQ3dVbjFyUFRMR0htMXI4eXpGNkt0RHJwZWN3ajdIRlBiSmJQQ2MzakthNnFKVzdwNGVoOWNVQmQ1SWstRkk3eGdf?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Tue, 06 Oct 2026 07:00:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 2,
+  "eligible_read": 2,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "parsed_request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "notícias energia solar",
+    "domain": "news",
+    "original_request": "Pesquise novidades sobre energia solar compare os acontecimentos",
+    "resolved_request": "Pesquise novidades sobre energia solar compare os acontecimentos",
+    "parameters": {
+      "topic": "energia solar"
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-24T21:04:30.732173+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "topic": "energia solar"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "observed_at": "2026-10-24T21:04:30.732245+00:00",
+  "source_revision": "4b54a2604ad80e8a38abf674c8c1e601034bfd6c + working tree",
+  "query_intelligence_sha256": "d2fff2584643fc5de8c7e9d06f0fb409c05d943328028222bdb58ebf69d72f39"
+}

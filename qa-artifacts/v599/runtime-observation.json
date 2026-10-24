@@ -1,0 +1,19 @@
+{
+  "scope": "Read-only operational observation; no production changes",
+  "production_processes": [
+    {
+      "pid": 13712,
+      "kind": "private_control_wrapper"
+    },
+    {
+      "pid": 31456,
+      "kind": "legacy_published_agent",
+      "parent": "Studio control",
+      "created_utc": "2026-10-24T16:05:09.490656+00:00"
+    }
+  ],
+  "same_production_relay_and_sqlite": true,
+  "active_relay_connections": "not_verified",
+  "qa_processes_stopped": true,
+  "production_restart_performed": false
+}

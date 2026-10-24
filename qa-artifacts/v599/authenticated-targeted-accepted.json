@@ -1,0 +1,793 @@
+{
+  "scope": "AUTHENTICATED_E2E; isolated QA accounts and SQLite only",
+  "cases": [
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "documentation",
+      "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+      "seconds": 18.503,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 1,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nAqui está um exemplo retirado da documentação ofoficial (Python 3.11+) mostrando como usar asyncio.TaskGroup:\n\nPYTHON\nCopiar\nimport asyncio\nimport time\n\nasync def say_after(delay, what):\n    await asyncio.sleep(delay)\n    print(what)\n\nasync def main():\n    async with asyncio.TaskGroup() as tg:\n        task1 = tg.create_task(say_after(1, 'hello'))\n        task2 = tg.create_task(say_after(2, 'world'))\n\n        print(f\"started at {time.strf",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "images",
+      "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+      "seconds": 1.589,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 5,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 5
+      },
+      "answer_excerpt": "v.\nVexx\n\nEncontrei 5 item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.\n\nMídia descoberta (não é evidência)\nAmpliar imagem\nPonte Estaiada - São Paulo.jpg\nImagem · upload.wikimedia.org\nCrédito: Bruno M.\nDireitos: CC0\nMetadados e limites\nAbrir imagem ↗\nOrigem ↗\nAmpliar imagem\nPonte estaiada Octavio Frias - Sao Paulo.jpg\nImagem · upload.wikimedia.org\nCrédito: Marcosleal\nDireitos: CC BY-SA 3.0\nMetadad",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "universal",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "seconds": 55.03,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 1,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\nPrincipais Novidades sobre Inteligência Artificial\n\nCom base na pesquisa realizada, identifiquei três eventos relevantes sobre IA, com foco em diferentes aspectos do avanço da tecnologia. Abaixo, uma comparação dos acontecimentos mais destacados:\n\nComparação dos Eventos Principais\nData\tFonte\tTema Central\tEscopo\tImpacto Destacado\n18/10/2025\tBBC\tHistória de 70 anos da IA\tGlobal/L história\tContexto histórico da evolução da IA\n21/07/2026\tG1\tI",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    }
+  ],
+  "cache": [
+    {
+      "query": "encontre na documentação oficial como usar asyncio.taskgroup.",
+      "state": "parcial",
+      "read": 3,
+      "useful": 1,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "8648139190e534786d62",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "title": "Python asyncio TaskGroup tasks documentation",
+            "origin": "fonte-primaria",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "",
+            "type": "tecnico",
+            "state": "READ",
+            "read": true,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f "
+          },
+          {
+            "id": "a67c308c89e509f6cffb",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-BR",
+            "title": "Encontrar seu smartphone - Google Account",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 05:24:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sign in Use your Google Account"
+          },
+          {
+            "id": "83980568418595fe8bf3",
+            "url": "https://www.google.com/android/find/?hl=pt-BR",
+            "title": "Localizador: encontre, bloqueie ou limpe seu dispositivo",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 08:02:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S2",
+            "excerpt": "Localizador Localizador Localizador Encontre, bloqueie, limpe ou toque um som em um dispositivo Android perdido. Localize seu dispositivo Android perdido e faça"
+          },
+          {
+            "id": "9ffed30c9b42731afc3f",
+            "url": "https://legacy.encontresuavaga.com.br/Login.aspx",
+            "title": "Encontre Sua Vaga",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "S3",
+            "excerpt": "Carregando... Sou cadastrado Matrícula, E-mail, CPF ou CNPJ: Você deve preencher o seu login Senha: Esqueci minha senha Você deve preencher a sua senha É novo a"
+          },
+          {
+            "id": "1ed2d6043d68e5f57afc",
+            "url": "https://myaccount.google.com/intro/find-your-phone?hl=pt-PT",
+            "title": "Localizar o telemóvel - Google Account",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "qui., 22 out. 2026 16:32:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sign in Use your Google Account"
+          },
+          {
+            "id": "e393c557ac9bb031d977",
+            "url": "https://www.caixa.gov.br/atendimento/Paginas/encontre-a-caixa.aspx",
+            "title": "Encontre a CAIXA",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 09:42:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Canais Digitais Aplicativos Todos os telefones Atendimento em Libras Encontre a CAIXA Fale Conosco Sobre a CAIXA Canal de Denúncias Promoções Sustentabilidade c"
+          },
+          {
+            "id": "995e6c13ba9be3634c27",
+            "url": "https://www.conjugacao.com.br/verbo-encontrar/",
+            "title": "Conjugação do Verbo Encontrar - Conjugação de Verbos",
+            "origin": "bing",
+            "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+            "date": "sáb., 24 out. 2026 02:18:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Subjuntivo Presente que eu encontre que tu encontres que ele encontre que nós encontremos que vós encontreis que eles encontrem"
+          },
+          {
+            "id": "17067361510cf975c117",
+            "url": "https://conceito.de/documentacao",
+            "title": "Documentação - O que é, conceito e definição",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "qua., 21 out. 2026 09:17:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Documentação, da palavra latina “documentatiōne”, é o ato e o resultado de documentar: provar algo através de documentos ou evidências. O termo geralmente se re"
+          },
+          {
+            "id": "43def78e2fd7f1fbe1c5",
+            "url": "https://www.dicio.com.br/documentacao/",
+            "title": "Documentação - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "ter., 22 set. 2026 08:18:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de Documentação no Dicio, Dicionário Online de Português. O que é documentação: s.f. Ato ou efeito de documentar. Conjunto de documentos para verifi"
+          },
+          {
+            "id": "93cc68636198e4d1d48b",
+            "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+            "title": "O que é Documentação - Entenda sua Importância",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "qui., 22 out. 2026 06:17:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Documentação é um conjunto de informações organizadas que descrevem e orientam sobre processos e sistemas em projetos de análise de dados. Ela garante que metod"
+          },
+          {
+            "id": "ca09b925cb776db12ae2",
+            "url": "https://lucidarium.com.br/conceito-de-documentacao-origem-definicao-e-significado/",
+            "title": "Conceito de Documentação: Origem, Definição e Significado",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "sex., 23 out. 2026 05:33:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "De forma simplificada, documentação é o conjunto de registros, informações, documentos e evidências que descrevem processos, procedimentos, fatos ou conheciment"
+          },
+          {
+            "id": "40221ff67b06ddb11f3a",
+            "url": "https://asana.com/pt/resources/process-documentation",
+            "title": "Documentação de processos: o que é, tipos e como criar [2025 ... - Asana",
+            "origin": "bing",
+            "query": "documentação oficial como usar asyncio.TaskGroup",
+            "date": "sáb., 24 out. 2026 01:14:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Aprenda o que é documentação de processos, conheça os 5 tipos principais e descubra como criar a sua em 8 etapas. Guia completo com exemplos e boas práticas."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://docs.python.org/3/library/asyncio-task.html",
+          "titulo": "Coroutines and tasks",
+          "publicado_em": "",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.google.com/android/find/?hl=pt-BR",
+          "titulo": "Localizador: encontre, bloqueie ou limpe seu dispositivo",
+          "publicado_em": "sáb., 24 out. 2026 08:02:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://www.google.com/android/find/?hl=pt-BR",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://legacy.encontresuavaga.com.br/Login.aspx",
+          "titulo": "Encontre Sua Vaga | Login",
+          "publicado_em": "sáb., 24 out. 2026 09:42:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "documents",
+            "url": "https://legacy.encontresuavaga.com.br/Login.aspx",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "state": "parcial",
+      "read": 0,
+      "useful": 0,
+      "media": 12,
+      "reservoir": {
+        "items": [
+          {
+            "id": "1797b3a2b9f014b49ed5",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+            "title": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Mon, 21 Sep 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir T1 Notícias"
+          },
+          {
+            "id": "12d297f579e8e6b67cee",
+            "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+            "title": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços - G1",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Tue, 21 Jul 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S2",
+            "excerpt": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços G1"
+          },
+          {
+            "id": "371457027672cf43ec4e",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+            "title": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais - BBC",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Sat, 18 Oct 2025 07:00:00 GMT",
+            "type": "noticia",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S3",
+            "excerpt": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais BBC"
+          },
+          {
+            "id": "901cd4e91c4ea1c85374",
+            "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9PT0dieDNmZzd4WFdQRW1ySGNPUzR4V3NuQWNYeUx4Tmt4MWkwM21BUUdYa19Xa1BvTHZ0NUpnSmJrRE1Ya0ZJeW1JVlZNTVYzQ3kyTC0xM1Jhb2txOGhUdGxZLUd3QkRDTE92QXVTVXowSDhaSG5F?oc=5",
+            "title": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública - Assine Abril",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública Assine Abril"
+          },
+          {
+            "id": "6965a67314078b0cfd65",
+            "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQld3a0hjYWZxYnJDVUlWUFBpUEhJNHNiQVJjclNkbnotaGFYWUl1bGZkbl9ybFMwTm04QWlDZ3c3SmplelJ6ZjVDQXFwTmptaWhEa0hvVWpBMDhHSDdUTDhGN2tOTW5KSldndGFBQy1mcW1GSzRjS1JrTkNUaUtnWlBuZUJUQUVSekNtel9NcTVDZmhYUEM0VmlzSEJ5UnpuOXFjbVd6bXp2Y2RWOXhLRGhOM1FfYm5BLXc?oc=5",
+            "title": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho - Exame",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho Exame"
+          },
+          {
+            "id": "50f76ca3d916c5d20c59",
+            "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBQWkhPMVFCWVR4cUh6aW82Z1BtTGg5RTBaWUVJVGtqWS1VT19ubU9hWWNwS1M3YXQ5SVpUUXJuakFWeWZOb1IwSC1lVXoxTVZE?oc=5",
+            "title": "Os temas mais importantes de 2026 para a educação - PORVIR",
+            "origin": "google-news",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "Thu, 05 Feb 2026 08:00:00 GMT",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Os temas mais importantes de 2026 para a educação PORVIR"
+          },
+          {
+            "id": "da03e0ae202872d9a9ee",
+            "url": "https://www.canalpesquise.com.br/",
+            "title": "Estatística | Canal PESQUISE",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "sex., 23 out. 2026 04:14:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Canal Pesquise busca motivação nos interesses e no envolvimento de nossa comunidade de educadores apaixonados e eternos aprendizes. Somos um canal de educação"
+          },
+          {
+            "id": "238748849eab2db872b2",
+            "url": "https://www.dicio.com.br/pesquise/",
+            "title": "Pesquise - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "sáb., 05 set. 2026 07:34:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "variar a escrita sem mudar o sentido. pesquise Reescrever Texto Significado de pesquisar Investigar com a finalidade de descobrir conhecimentos novos; inquirir,"
+          },
+          {
+            "id": "bd194ea1ec20cd6cc572",
+            "url": "https://app.pesquisemais.com.br/",
+            "title": "Pesquise (+) - Bem Vindo",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "qui., 15 out. 2026 07:37:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+          },
+          {
+            "id": "288f6af9722db02d4645",
+            "url": "https://dicionario.priberam.org/pesquise",
+            "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "sáb., 17 out. 2026 07:27:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "© 2026 Priberam Informática, S.A. Todos os direitos reservados"
+          },
+          {
+            "id": "a91f52c000b4a8eb534d",
+            "url": "https://pesquisemais.com.br/",
+            "title": "Pesquise Mais",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "ter., 20 out. 2026 08:07:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Política de Privacidade e Cookies © 2026 Pesquise Mais. Todos os direitos reservados. CNPJ 26.713.312/0001-36."
+          },
+          {
+            "id": "b4f6c57f14706fc12b88",
+            "url": "https://www.canalpesquise.com.br/sobre-2",
+            "title": "Vídeos | Canal Pesquise",
+            "origin": "bing",
+            "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+            "date": "sex., 02 out. 2026 02:09:00 GMT",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": true,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "possuem base matemática em sua formação. Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complex"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+          "titulo": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+          "publicado_em": "Mon, 21 Sep 2026 07:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Mon, 21 Sep 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+          "titulo": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços - G1",
+          "publicado_em": "Tue, 21 Jul 2026 07:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Tue, 21 Jul 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+          "titulo": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais - BBC",
+          "publicado_em": "Sat, 18 Oct 2025 07:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Sat, 18 Oct 2025 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise imagens da ponte estaiada de são paulo.",
+      "state": "paginas_ilegiveis",
+      "read": 0,
+      "useful": 0,
+      "media": 5,
+      "reservoir": {
+        "items": [
+          {
+            "id": "da33d4f135f63a335dd7",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada - São Paulo.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S1",
+            "excerpt": "1213x750 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg"
+          },
+          {
+            "id": "a9c69a756b2eade7d5c3",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S2",
+            "excerpt": "2956x1948 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg"
+          },
+          {
+            "id": "b0afa3967bba44e9a0b4",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "S3",
+            "excerpt": "3264x2448 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266763267).jpg"
+          },
+          {
+            "id": "0f780d63d018b18d681a",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "2448x3264 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266768515).jpg"
+          },
+          {
+            "id": "fe33b443e25d7353bea3",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "3264x2448 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4267503980).jpg"
+          },
+          {
+            "id": "5d4c4b4253978ec589d9",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg/960px-Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "title": "Octávio Frias de Oliveira Bridge, 2014.jpg",
+            "origin": "commons",
+            "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+            "date": "",
+            "type": "imagem",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "RELEVANCE_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "2000x1403 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Oct%C3%A1vio_Frias_de_Oliveira_Bridge,_2014.jpg"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "sources": [
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte Estaiada - São Paulo.jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "titulo": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+          "publicado_em": "",
+          "status": "encontrada",
+          "content_scope": "metadata_only",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    }
+  ],
+  "messages": {
+    "assistant": 3,
+    "user": 3
+  },
+  "unique_message_ids": 6,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "requests": {
+    "completed": 3
+  },
+  "research_jobs": {}
+}

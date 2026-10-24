@@ -1,0 +1,351 @@
+{
+  "id": "dev-15",
+  "category": "comparison",
+  "query": "Compare Python, JavaScript e Go para aplicações web",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.901,
+  "state": "paginas_ilegiveis",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Compare Python, JavaScript e Go para aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "Compare Python, JavaScript e Go para aplicações web",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Compare Python, JavaScript e Go para aplicações web",
+      "candidates": 6
+    },
+    {
+      "provider": "stackexchange",
+      "query": "python javascript aplicações web",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Compare+Python%2C+JavaScript+e+Go+para+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Compare+Python%2C+JavaScript+e+Go+para+aplica%C3%A7%C3%B5es+web&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4449
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/411529/qual-%c3%a9-real-necessidade-do-ssr-server-side-rendering",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/491893/tocar-uma-musica-por-vez-em-uma-tag-de-audio-no-html5-que-%c3%a9-criada-dinamicamente",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/257023/como-pegar-qualquer-tipo-de-cookie-utilizando-o-selenium",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/574164/dificuldade-em-passar-dados-do-flask-para-o-js",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/268777/web-frameworks-frontend-vs-backend",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.stackoverflow.com/questions/342117/back-end-python-para-o-front-end",
+      "error": "bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Compare Python, JavaScript e Go para aplicações web",
+    "domain": "general",
+    "original_request": "Compare Python, JavaScript e Go para aplicações web",
+    "resolved_request": "Compare Python, JavaScript e Go para aplicações web",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T16:36:37.561650+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "f0e5f9c7276e51c1c276",
+        "url": "https://pt.stackoverflow.com/questions/411529/qual-%c3%a9-real-necessidade-do-ssr-server-side-rendering",
+        "title": "Qual é real necessidade do SSR (Server Side Rendering)?",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "É notório que o desenvolvimento de aplicações web de um tempo pra cá tomou um rumo bastante \"diferente\". Frameworks como AngularJS, Vue e ReactJS tem se tornado"
+      },
+      {
+        "id": "ee2014551dd7235983f7",
+        "url": "https://pt.stackoverflow.com/questions/491893/tocar-uma-musica-por-vez-em-uma-tag-de-audio-no-html5-que-%c3%a9-criada-dinamicamente",
+        "title": "Tocar uma musica por vez em uma TAG de Audio no HTML5 que é criada dinamicamente com mesmo ID",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Bom dia! Estou com uma dúvida referente a estar trabalhando com áudio em uma aplicação Web, tenho um App feito em Python utilizando Flask que varre um determina"
+      },
+      {
+        "id": "8f923882ec7ab8554b90",
+        "url": "https://pt.stackoverflow.com/questions/257023/como-pegar-qualquer-tipo-de-cookie-utilizando-o-selenium",
+        "title": "Como pegar qualquer tipo de cookie utilizando o Selenium?",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Resumo Para resumir tudo que eu falei aqui embaixo, eu preciso abrir o Whatsapp Web ler o QR Code e salvar os cookies para que na próxima inicialização do Selen"
+      },
+      {
+        "id": "17ddc6ac4513d4475afa",
+        "url": "https://pt.stackoverflow.com/questions/574164/dificuldade-em-passar-dados-do-flask-para-o-js",
+        "title": "Dificuldade em passar dados do Flask para o JS",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Tenho uma aplicação feita com o framework Flask. Em um formulário de Login, tenho o interesse de enviar uma informação do Python para o Javascript. Tentei fazer"
+      },
+      {
+        "id": "1dd1fce93c2e8ad8cda8",
+        "url": "https://pt.stackoverflow.com/questions/268777/web-frameworks-frontend-vs-backend",
+        "title": "Web Frameworks: Frontend vs Backend",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Gostaria de saber o que caracteriza/diferencia um framework web frontend de um framework web backend. Por exemplo, Django é considerado back e Angular é conside"
+      },
+      {
+        "id": "e7da6184859884226969",
+        "url": "https://pt.stackoverflow.com/questions/342117/back-end-python-para-o-front-end",
+        "title": "Back-end Python para o Front-end",
+        "origin": "stackexchange",
+        "query": "python javascript aplicações web",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fiz uma aplicação simples que cadastra uns dados num banco sqlite3, toda essa parte do Back-end ta feita em Python com arquivos.py rodando no terminal mesmo, pa"
+      },
+      {
+        "id": "780e18a60246b1bf9947",
+        "url": "https://text-compare.com/",
+        "title": "Text Compare! - Find differences between two text files",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "sáb., 24 out. 2026 06:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Text Compare! is an online diff tool that can find the difference between two text documents. Just paste and compare."
+      },
+      {
+        "id": "182d3aa636b7d72d61e9",
+        "url": "https://m.gsmarena.com/compare.php3",
+        "title": "Compare phones, smartphones, tablets - GSMArena.com",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "sáb., 24 out. 2026 04:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare detailed specifications of mobile phones, smartphones and tablets side by side. Find which one's for you!"
+      },
+      {
+        "id": "2e2c82dc479748ba1f14",
+        "url": "https://www.diffchecker.com/",
+        "title": "Compare text and find differences online or offline - Diffchecker",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs."
+      },
+      {
+        "id": "b65f0135870745c64232",
+        "url": "https://versus.com/br",
+        "title": "Versus | Compare tudo",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "sáb., 24 out. 2026 02:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de pr"
+      },
+      {
+        "id": "80bc7f77b7e8fa771300",
+        "url": "https://www.tudocelular.com/comparacao/",
+        "title": "Comparação - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "ter., 02 jun. 2026 16:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones "
+      },
+      {
+        "id": "55cb4e0221f680f302a7",
+        "url": "https://www.tudocelular.com/compare/",
+        "title": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare Python, JavaScript e Go para aplicações web",
+        "date": "ter., 20 out. 2026 16:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O site Brasileiro de Telefonia - TudoCelular.com"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.stackoverflow.com/questions/411529/qual-%c3%a9-real-necessidade-do-ssr-server-side-rendering",
+      "titulo": "Qual é real necessidade do SSR (Server Side Rendering)?",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.stackoverflow.com/questions/411529/qual-%c3%a9-real-necessidade-do-ssr-server-side-rendering",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://pt.stackoverflow.com/questions/491893/tocar-uma-musica-por-vez-em-uma-tag-de-audio-no-html5-que-%c3%a9-criada-dinamicamente",
+      "titulo": "Tocar uma musica por vez em uma TAG de Audio no HTML5 que é criada dinamicamente com mesmo ID",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.stackoverflow.com/questions/491893/tocar-uma-musica-por-vez-em-uma-tag-de-audio-no-html5-que-%c3%a9-criada-dinamicamente",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://pt.stackoverflow.com/questions/257023/como-pegar-qualquer-tipo-de-cookie-utilizando-o-selenium",
+      "titulo": "Como pegar qualquer tipo de cookie utilizando o Selenium?",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.stackoverflow.com/questions/257023/como-pegar-qualquer-tipo-de-cookie-utilizando-o-selenium",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

@@ -1,0 +1,583 @@
+{
+  "id": "eva-06",
+  "category": "places",
+  "query": "Parque Nacional de Brasília horários oficiais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.495,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "candidates": 4
+    },
+    {
+      "provider": "bing",
+      "query": "parque nacional brasília horários",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "parque nacional brasília horários",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "parque nacional brasília horários",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5383
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Parque%20Nacional%20de%20Bras%C3%ADlia%20hor%C3%A1rios%20oficiais",
+      "final": "https://html.duckduckgo.com/html/?q=Parque%20Nacional%20de%20Bras%C3%ADlia%20hor%C3%A1rios%20oficiais",
+      "chars": 14311
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais",
+      "final": "https://old-search.marginalia.nu/search?query=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais",
+      "chars": 19915
+    },
+    {
+      "url": "https://www.bing.com/search?q=parque+nacional+bras%C3%ADlia+hor%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=parque+nacional+bras%C3%ADlia+hor%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5335
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=parque+nacional+bras%C3%ADlia+hor%C3%A1rios",
+      "final": "https://old-search.marginalia.nu/search?query=parque+nacional+bras%C3%ADlia+hor%C3%A1rios",
+      "chars": 1061
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Parque",
+      "final": "https://pt.wikipedia.org/wiki/Parque",
+      "chars": 328368
+    },
+    {
+      "url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "final": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "chars": 36314
+    },
+    {
+      "url": "https://parquearvoredo.com.br/",
+      "final": "https://parquearvoredo.com.br/",
+      "chars": 175800
+    },
+    {
+      "url": "https://www.instagram.com/parquearvoredo/",
+      "final": "https://www.instagram.com/parquearvoredo/",
+      "chars": 697177
+    },
+    {
+      "url": "https://rolfpark.com.br/",
+      "final": "https://rolfpark.com.br/",
+      "chars": 35659
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g652400-Activities-c57-Camacari_State_of_Bahia.html",
+      "error": "bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Parque Nacional de Brasília horários oficiais",
+    "domain": "general",
+    "original_request": "Parque Nacional de Brasília horários oficiais",
+    "resolved_request": "Parque Nacional de Brasília horários oficiais",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T16:46:20.805016+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "09cedb52d12d3ffdc5c2",
+        "url": "https://pt.m.wikipedia.org/wiki/Parque",
+        "title": "Parque – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "2005-05-02T02:06:01Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Se procura parque de diversões, veja . Nota: Parque de diversão Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências E"
+      },
+      {
+        "id": "d3308ac824b4ce52db12",
+        "url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+        "title": "Bairro Parque das Palmeiras - Camaçari - BA - Guiamapa.com",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "ter., 13 out. 2026 09:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Mapa do Bairro Parque das Palmeiras Camaçari - BA Onde fica o bairro Parque das Palmeiras O bairro Parque das Palmeiras está localizado na cidade de , estado da"
+      },
+      {
+        "id": "07eeb32d2a39f5b54b30",
+        "url": "https://parquearvoredo.com.br/",
+        "title": "Nova Home - Parque Arvoredo Camaçari",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "2022-03-27T18:37:41+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "LAZER Felicidade é ter tantos itens de lazer no mesmo lugar. O que não falta no Parque Arvoredo é opção para você se divertir com sua família e na companhia dos"
+      },
+      {
+        "id": "c1e19a9fffe96d800298",
+        "url": "https://www.instagram.com/parquearvoredo/",
+        "title": "Parque Arvoredo Camaçari (@parquearvoredo) - Instagram",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "seg., 19 out. 2026 17:55:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Log In Sign Up"
+      },
+      {
+        "id": "55d03188f7ae86ec801c",
+        "url": "https://rolfpark.com.br/",
+        "title": "Rolf Park - Venha se divertir com a gente",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "sex., 23 out. 2026 14:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "adolescentes do estado da Bahia. Formar cidadãos de caráter e capazes de construir um país melhor, proporcionando, gratuitamente, educação de excelência a aluno"
+      },
+      {
+        "id": "69ba9d94ec65abe18de4",
+        "url": "https://www.tripadvisor.com.br/Attractions-g652400-Activities-c57-Camacari_State_of_Bahia.html",
+        "title": "OS 5 MELHORES parques em Camaçari (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "sex., 23 out. 2026 03:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Local para ser visitado durante a semana. Nos finais de semana fica muito cheio e cada um coloca uma caixa de som tocando em sua mesa, deixando uma super poluiç"
+      },
+      {
+        "id": "51a31babc6dae57ecb71",
+        "url": "https://revistas.rcaap.pt/thij/issue/download/1696/484",
+        "title": "ISCE - INSTITUTO SUPERIOR DE LISBOA E VALE DO TEJO ISCE - HIGHER INSTITUTE OF LISBOA E VALE DO TEJO Departamento de Turismo T...",
+        "origin": "marginalia",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": ""
+      },
+      {
+        "id": "8d9faef2782024f95531",
+        "url": "https://diplomatizzando.blogspot.com/2011/03/",
+        "title": "Diplomatizzando: março 2011",
+        "origin": "marginalia",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": ""
+      },
+      {
+        "id": "aa52ad58e9e138a8e7ec",
+        "url": "https://repositorio.ufmg.br/server/api/core/bitstreams/d1ce1069-fcee-4de9-a62a-e53b8d88b4d0/content",
+        "title": "FILE SÃO PAULO 2019",
+        "origin": "marginalia",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": ""
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": ""
+      }
+    ],
+    "unique_candidates": 10,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-8ccc5e3f0318",
+      "type": "image",
+      "title": "espaço aberto para recreação ou conservação",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7eb2487bedf5",
+      "type": "image",
+      "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5238b77d69c",
+      "type": "image",
+      "title": "Wikcionário",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikcionário",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c2fa23e5a2c3",
+      "type": "image",
+      "title": "Veja no mapa a localização do bairro Parque das Palmeiras - Camaçari, BA. Veja o mapa do bairro Parque das Palmeiras, suas coordenadas para uso em aparelhos com",
+      "url": "https://guiamapa.com/mapas/bairros/ba/camacari/parque-das-palmeiras.jpg",
+      "final_url": "https://guiamapa.com/mapas/bairros/ba/camacari/parque-das-palmeiras.jpg",
+      "source_title": "Mapa Parque das Palmeiras",
+      "source_url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "publisher": "guiamapa.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Veja no mapa a localização do bairro Parque das Palmeiras - Camaçari, BA. Veja o mapa do bairro Parque das Palmeiras, suas coordenadas para uso em aparelhos como GPS e um guia completo de ruas.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-180138c5c8a6",
+      "type": "image",
+      "title": "Veja no mapa a localização do bairro Parque das Palmeiras - Camaçari, BA. Veja o mapa do bairro Parque das Palmeiras, suas coordenadas para uso em aparelhos com",
+      "url": "https://guiamapa.com/assets/images/social/thumbnail.png",
+      "final_url": "https://guiamapa.com/assets/images/social/thumbnail.png",
+      "source_title": "Mapa Parque das Palmeiras",
+      "source_url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "publisher": "guiamapa.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Veja no mapa a localização do bairro Parque das Palmeiras - Camaçari, BA. Veja o mapa do bairro Parque das Palmeiras, suas coordenadas para uso em aparelhos como GPS e um guia completo de ruas.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-24ada9c04a64",
+      "type": "image",
+      "title": "Logo",
+      "url": "https://guiamapa.com/assets/logo-D16tF8Gy.svg",
+      "final_url": "https://guiamapa.com/assets/logo-D16tF8Gy.svg",
+      "source_title": "Mapa Parque das Palmeiras",
+      "source_url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "publisher": "guiamapa.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e115813527d3",
+      "type": "image",
+      "title": "Salão de festas",
+      "url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/salao-de-festas.jpg",
+      "final_url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/salao-de-festas.jpg",
+      "source_title": "Nova Home - Parque Arvoredo Camaçari",
+      "source_url": "https://parquearvoredo.com.br/",
+      "publisher": "parquearvoredo.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Salão de festas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-12c4e284a5b3",
+      "type": "image",
+      "title": "Academia",
+      "url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/academia.jpg",
+      "final_url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/academia.jpg",
+      "source_title": "Nova Home - Parque Arvoredo Camaçari",
+      "source_url": "https://parquearvoredo.com.br/",
+      "publisher": "parquearvoredo.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Academia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-88e84b0dd854",
+      "type": "image",
+      "title": "Piscina",
+      "url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/pisicina.jpg",
+      "final_url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/pisicina.jpg",
+      "source_title": "Nova Home - Parque Arvoredo Camaçari",
+      "source_url": "https://parquearvoredo.com.br/",
+      "publisher": "parquearvoredo.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Piscina",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-40bf63368e03",
+      "type": "image",
+      "title": "Campo de futebol",
+      "url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/campo.jpg",
+      "final_url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/campo.jpg",
+      "source_title": "Nova Home - Parque Arvoredo Camaçari",
+      "source_url": "https://parquearvoredo.com.br/",
+      "publisher": "parquearvoredo.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Campo de futebol",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-27c4d3d0979d",
+      "type": "image",
+      "title": "Salão de festas",
+      "url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/HR-CJ-BRINQUEDOTECA-V01-R01-1024x645-1.jpg",
+      "final_url": "https://parquearvoredo.com.br/wp-content/uploads/2020/09/HR-CJ-BRINQUEDOTECA-V01-R01-1024x645-1.jpg",
+      "source_title": "Nova Home - Parque Arvoredo Camaçari",
+      "source_url": "https://parquearvoredo.com.br/",
+      "publisher": "parquearvoredo.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Salão de festas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.m.wikipedia.org/wiki/Parque",
+      "titulo": "espaço aberto para recreação ou conservação",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2005-05-02T02:06:01Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.m.wikipedia.org/wiki/Parque",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+      "titulo": "Mapa Parque das Palmeiras",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "ter., 13 out. 2026 09:34:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://guiamapa.com/ba/camacari/parque-das-palmeiras",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://parquearvoredo.com.br/",
+      "titulo": "Nova Home - Parque Arvoredo Camaçari",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2022-03-27T18:37:41+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://parquearvoredo.com.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

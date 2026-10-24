@@ -1,0 +1,26 @@
+..............................F......................................... [ 67%]
+...................................                                      [100%]
+================================== FAILURES ===================================
+_______ test_orchestrator_uses_compact_topic_but_keeps_original_request _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000153D9392900>
+
+    def test_orchestrator_uses_compact_topic_but_keeps_original_request(monkeypatch):
+        import search_orchestrator as orch
+        calls=[]
+        def search(name,query,**kwargs):
+            calls.append(query)
+            return [{'titulo':'Energia solar: novidades do setor', 'url':'https://example.org/solar',
+                     'trecho':'Novas tecnologias de energia solar', 'origem':name, 'tipo':'pagina'}]
+        monkeypatch.setattr(orch.sp,'buscar',search)
+        query='Pesquise novidades sobre energia solar compare os acontecimentos'
+        result=orch.pesquisar(query,provedores=['bing'],orcamento={'max_consultas':1,'min_resultados':1})
+        assert calls==['notícias energia solar']
+>       assert result['request']['original_request']==query
+               ^^^^^^^^^^^^^^^^^
+E       KeyError: 'request'
+
+tests\test_universal_search_v599.py:255: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_universal_search_v599.py::test_orchestrator_uses_compact_topic_but_keeps_original_request
+1 failed, 106 passed in 5.14s

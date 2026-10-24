@@ -1,0 +1,69 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+...............s........................................................ [ 24%]
+........................................................................ [ 29%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 48%]
+........................................................................ [ 53%]
+.............s.................................F........................ [ 58%]
+........................................................................ [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+.........s..........s................................................... [ 77%]
+........................................................................ [ 82%]
+........................................................................ [ 87%]
+........................................................................ [ 91%]
+........................................................................ [ 96%]
+...............................................                          [100%]
+================================== FAILURES ===================================
+_______________________ test_ai_completa_digest_sem_llm _______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000016A30E9A740>
+
+    def test_ai_completa_digest_sem_llm(monkeypatch):
+        import hermes_bridge
+        db = _db()
+        pc_agent.persist_messages(db, [{
+            "id": "rec-user-01", "conversation_id": "conv-r", "origin": "mobile",
+            "role": "user", "text": "pesquise sobre Python e traga as fontes",
+            "created_at": pc_agent.agora_iso()}], "ana")
+        fontes = [{"id": "S1", "titulo": "Python", "url": "https://pt.wikipedia.org/wiki/Python",
+                   "trecho": "linguagem"}]
+        monkeypatch.setattr(research, "pesquisa_rapida",
+                            lambda *a, **k: {"fontes": fontes, "etapas": ["wiki: 1"],
+                                            "divergencias": [], "de_cache": False})
+        monkeypatch.setattr(hermes_bridge, "chat_complete",
+                            lambda *a, **k: (_ for _ in ()).throw(
+                                hermes_bridge.BridgeErro("fora", "indisponivel")))
+        monkeypatch.setattr(hermes_bridge, "chat_stream",
+                            lambda *a, **k: (_ for _ in ()).throw(
+                                hermes_bridge.BridgeErro("fora", "indisponivel")))
+        cfg = {"system": "sys", "model": "m", "context": 5, "max_tokens": 50,
+               "memoria_global": False, "pesquisa_web": True, "proxy": "",
+               "fallbacks": []}
+        out = pc_agent.ai_completa(db, {"message_id": "rec-user-01",
+                                        "conversation_id": "conv-r", "owner": "ana"}, cfg)
+>       assert "response_text" in out and "digest" in out
+E       AssertionError: assert ('response_text' in {'reply_id': 'rec-user-01-r1', 'response_text': 'Encontrei **1** fonte(s) sobre **pesquise sobre Python e traga as fon... não utilizada. Descoberta não equivale a leitura; os limites de acesso estão indicados em cada fonte._', 'model': 'm'} and 'digest' in {'reply_id': 'rec-user-01-r1', 'response_text': 'Encontrei **1** fonte(s) sobre **pesquise sobre Python e traga as fon... não utilizada. Descoberta não equivale a leitura; os limites de acesso estão indicados em cada fonte._', 'model': 'm'})
+
+tests\test_research_recovery.py:208: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_evidence_benchmarks.py:229: Verificação semântica LLM BLOQUEADA sem provedor; determinístico cobre o resto.
+SKIPPED [1] tests\test_research_quality.py:162: Inferência Hermes real bloqueada no provedor; síntese LLM marcada BLOQUEADA.
+SKIPPED [1] tests\test_shopping.py:438: DDG sem resultados (rede instável)
+SKIPPED [1] tests\test_shopping.py:627: BLOQUEADO: mlb=ResearchErro: Provedor HTTP 403. ddg=página sem resultados (bot-wall?) lite=página sem resultados (bot-wall?)
+1 failed, 1482 passed, 4 skipped, 2 warnings in 211.76s (0:03:31)

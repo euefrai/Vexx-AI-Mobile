@@ -1,0 +1,669 @@
+{
+  "id": "verbose-ai",
+  "category": "technology",
+  "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.027,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing-news",
+      "query": "principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir\" site:t1noticias.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 17063
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 1598
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 2279
+    },
+    {
+      "url": "https://www.bing.com/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Pesquise+as+principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4970
+    },
+    {
+      "url": "https://www.bing.com/search?q=principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=principais+novidades+sobre+intelig%C3%AAncia+artificial+e+compare+os+acontecimentos+mais+relevantes&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5072
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Em+Debate+%7C+A+intelig%C3%AAncia+artificial+deixou+de+apenas+responder%2C+agora+ela+come%C3%A7a+a+agir%22+site%3At1noticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Em+Debate+%7C+A+intelig%C3%AAncia+artificial+deixou+de+apenas+responder%2C+agora+ela+come%C3%A7a+a+agir%22+site%3At1noticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4474
+    },
+    {
+      "url": "https://www.canalpesquise.com.br/",
+      "final": "https://www.canalpesquise.com.br/",
+      "chars": 1251597
+    },
+    {
+      "url": "https://www.dicio.com.br/pesquise/",
+      "final": "https://www.dicio.com.br/pesquise/",
+      "chars": 210914
+    },
+    {
+      "url": "https://app.pesquisemais.com.br/",
+      "final": "https://app.pesquisemais.com.br/",
+      "chars": 10209
+    },
+    {
+      "url": "https://pesquisemais.com.br/",
+      "final": "https://pesquisemais.com.br/",
+      "chars": 69220
+    },
+    {
+      "url": "https://pesquiseja.com.br/",
+      "final": "https://pesquiseja.com.br/",
+      "chars": 381800
+    },
+    {
+      "url": "https://dicionario.priberam.org/pesquise",
+      "final": "https://dicionario.priberam.org/pt-pt/pesquise",
+      "chars": 96523
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "domain": "news",
+    "original_request": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "resolved_request": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T21:04:06.405641+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "1797b3a2b9f014b49ed5",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+        "title": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Mon, 21 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir T1 Notícias"
+      },
+      {
+        "id": "12d297f579e8e6b67cee",
+        "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+        "title": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços - G1",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Tue, 21 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços G1"
+      },
+      {
+        "id": "371457027672cf43ec4e",
+        "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+        "title": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais - BBC",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Sat, 18 Oct 2025 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais BBC"
+      },
+      {
+        "id": "901cd4e91c4ea1c85374",
+        "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9PT0dieDNmZzd4WFdQRW1ySGNPUzR4V3NuQWNYeUx4Tmt4MWkwM21BUUdYa19Xa1BvTHZ0NUpnSmJrRE1Ya0ZJeW1JVlZNTVYzQ3kyTC0xM1Jhb2txOGhUdGxZLUd3QkRDTE92QXVTVXowSDhaSG5F?oc=5",
+        "title": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública - Assine Abril",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare as propostas de Lula e Flávio Bolsonaro para a saúde pública Assine Abril"
+      },
+      {
+        "id": "6965a67314078b0cfd65",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQld3a0hjYWZxYnJDVUlWUFBpUEhJNHNiQVJjclNkbnotaGFYWUl1bGZkbl9ybFMwTm04QWlDZ3c3SmplelJ6ZjVDQXFwTmptaWhEa0hvVWpBMDhHSDdUTDhGN2tOTW5KSldndGFBQy1mcW1GSzRjS1JrTkNUaUtnWlBuZUJUQUVSekNtel9NcTVDZmhYUEM0VmlzSEJ5UnpuOXFjbVd6bXp2Y2RWOXhLRGhOM1FfYm5BLXc?oc=5",
+        "title": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho - Exame",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho Exame"
+      },
+      {
+        "id": "50f76ca3d916c5d20c59",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBQWkhPMVFCWVR4cUh6aW82Z1BtTGg5RTBaWUVJVGtqWS1VT19ubU9hWWNwS1M3YXQ5SVpUUXJuakFWeWZOb1IwSC1lVXoxTVZE?oc=5",
+        "title": "Os temas mais importantes de 2026 para a educação - PORVIR",
+        "origin": "google-news",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "Thu, 05 Feb 2026 08:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Os temas mais importantes de 2026 para a educação PORVIR"
+      },
+      {
+        "id": "da03e0ae202872d9a9ee",
+        "url": "https://www.canalpesquise.com.br/",
+        "title": "Estatística | Canal PESQUISE",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Canal Pesquise busca motivação nos interesses e no envolvimento de nossa comunidade de educadores apaixonados e eternos aprendizes. Somos um canal de educação"
+      },
+      {
+        "id": "238748849eab2db872b2",
+        "url": "https://www.dicio.com.br/pesquise/",
+        "title": "Pesquise - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "sáb., 05 set. 2026 07:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "variar a escrita sem mudar o sentido. pesquise Reescrever Texto Significado de pesquisar Investigar com a finalidade de descobrir conhecimentos novos; inquirir,"
+      },
+      {
+        "id": "bd194ea1ec20cd6cc572",
+        "url": "https://app.pesquisemais.com.br/",
+        "title": "Pesquise (+) - Bem Vindo",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "qui., 15 out. 2026 07:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+      },
+      {
+        "id": "a91f52c000b4a8eb534d",
+        "url": "https://pesquisemais.com.br/",
+        "title": "Pesquise Mais",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "ter., 20 out. 2026 08:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Política de Privacidade e Cookies © 2026 Pesquise Mais. Todos os direitos reservados. CNPJ 26.713.312/0001-36."
+      },
+      {
+        "id": "4564b99e482924aeb0f1",
+        "url": "https://pesquiseja.com.br/",
+        "title": "Home - Pesquise Já",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "sáb., 24 out. 2026 03:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Somos especialistas em PRICING, atuando diretamente no Varejo, Atacado e indústria, criando soluções para a melhor tomada de decisão relacionadas a se manter co"
+      },
+      {
+        "id": "288f6af9722db02d4645",
+        "url": "https://dicionario.priberam.org/pesquise",
+        "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+        "origin": "bing",
+        "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+        "date": "sáb., 17 out. 2026 07:27:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "© 2026 Priberam Informática, S.A. Todos os direitos reservados"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-6cfeac045009",
+      "type": "image",
+      "title": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!",
+      "url": "https://static.wixstatic.com/media/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a%7Emv2.png",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a%7Emv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2a436c677931",
+      "type": "image",
+      "title": "LOGO-quadrado.png",
+      "url": "https://static.wixstatic.com/media/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a~mv2.png/v1/fill/w_173,h_173,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-quadrado.png",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_9bedc5b65f6f4bbc8e6d57ae18f93b1a~mv2.png/v1/fill/w_173,h_173,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-quadrado.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "LOGO-quadrado.png",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-754e64439962",
+      "type": "image",
+      "title": "Youtube",
+      "url": "https://static.wixstatic.com/media/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png",
+      "final_url": "https://static.wixstatic.com/media/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Youtube",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8ab5c4f07203",
+      "type": "image",
+      "title": "Instagram",
+      "url": "https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png",
+      "final_url": "https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Instagram",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bb91540ec686",
+      "type": "image",
+      "title": "Facebook",
+      "url": "https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png",
+      "final_url": "https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6be1b1dacc61",
+      "type": "image",
+      "title": "X",
+      "url": "https://static.wixstatic.com/media/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png",
+      "final_url": "https://static.wixstatic.com/media/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "X",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dae367e96e44",
+      "type": "image",
+      "title": "Linkedin",
+      "url": "https://static.wixstatic.com/media/11062b_7cf73902d06c4f3685c379a21c6c8285~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_7cf73902d06c4f3685c379a21c6c8285~mv2.png",
+      "final_url": "https://static.wixstatic.com/media/11062b_7cf73902d06c4f3685c379a21c6c8285~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_7cf73902d06c4f3685c379a21c6c8285~mv2.png",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Linkedin",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-137094696ac3",
+      "type": "image",
+      "title": "Sem título-777777777777777777777777777777777777777777777777777777777777777777777777.jpg",
+      "url": "https://static.wixstatic.com/media/c9dea7_35ecb8ab137745289701d220e8fd5779~mv2.jpg/v1/fill/w_147,h_69,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_35ecb8ab137745289701d220e8fd5779~mv2.jpg",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_35ecb8ab137745289701d220e8fd5779~mv2.jpg/v1/fill/w_147,h_69,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_35ecb8ab137745289701d220e8fd5779~mv2.jpg",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Sem título-777777777777777777777777777777777777777777777777777777777777777777777777.jpg",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ec12d0351f92",
+      "type": "image",
+      "title": "Desktop_edited.jpg",
+      "url": "https://static.wixstatic.com/media/c9dea7_5f5e5f399d334f4f81d1ea43d052afa4~mv2.jpg/v1/fill/w_123,h_62,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_5f5e5f399d334f4f81d1ea43d052afa4~mv2.jpg",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_5f5e5f399d334f4f81d1ea43d052afa4~mv2.jpg/v1/fill/w_123,h_62,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_5f5e5f399d334f4f81d1ea43d052afa4~mv2.jpg",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Desktop_edited.jpg",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-540511ed0867",
+      "type": "image",
+      "title": "BG_Cenario-BRANCO -777777777777777777777777777777777777777777777 Copia.jpg",
+      "url": "https://static.wixstatic.com/media/c9dea7_ef8c485d2d1440cf9c10fc7c0bdae97c~mv2.jpg/v1/fill/w_114,h_64,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_ef8c485d2d1440cf9c10fc7c0bdae97c~mv2.jpg",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_ef8c485d2d1440cf9c10fc7c0bdae97c~mv2.jpg/v1/fill/w_114,h_64,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_ef8c485d2d1440cf9c10fc7c0bdae97c~mv2.jpg",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BG_Cenario-BRANCO -777777777777777777777777777777777777777777777 Copia.jpg",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c9982d1afb2b",
+      "type": "image",
+      "title": "AZUL_Cenario4.jpg",
+      "url": "https://static.wixstatic.com/media/c9dea7_fb0e7794fdbe41d7ba435f502b64e392~mv2.jpg/v1/fill/w_147,h_66,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_fb0e7794fdbe41d7ba435f502b64e392~mv2.jpg",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_fb0e7794fdbe41d7ba435f502b64e392~mv2.jpg/v1/fill/w_147,h_66,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c9dea7_fb0e7794fdbe41d7ba435f502b64e392~mv2.jpg",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "AZUL_Cenario4.jpg",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3e4f5dd52f07",
+      "type": "image",
+      "title": "HEITOR_PESQUISE-40x40.jpg",
+      "url": "https://static.wixstatic.com/media/c9dea7_ffa6a7cb689c4a4eb004a1d752860a03~mv2.jpg/v1/fill/w_239,h_239,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/HEITOR_PESQUISE-40x40.jpg",
+      "final_url": "https://static.wixstatic.com/media/c9dea7_ffa6a7cb689c4a4eb004a1d752860a03~mv2.jpg/v1/fill/w_239,h_239,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/HEITOR_PESQUISE-40x40.jpg",
+      "source_title": "Canal Pesquise",
+      "source_url": "https://www.canalpesquise.com.br/",
+      "publisher": "static.wixstatic.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "HEITOR_PESQUISE-40x40.jpg",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+      "titulo": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Mon, 21 Sep 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Mon, 21 Sep 2026 07:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+      "titulo": "Como a inteligência artificial ajuda consumidores de Porto Alegre a escolher o que comprar e comparar preços - G1",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Tue, 21 Jul 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPUl84UElRVnE1eGVqSW5lY0dDTlN1RlgtM25rWTYxZVA1SDkzUS0xdkRKdUQ3RFVvTS13NXBJWFdQMS1fVFZKbVhSYWJaTFJlX3hJVE5UVUs1QW9VUXlnMFl6NE1aR1lOb2RseXQ0eUg5NTQ4MlAwcjlMVXdHbnZxa3I2X1lVRENmbjgxNThOcFRqeUM2eVZNVWlhZVdnQkZibE5keUlteVVKXzdqTnF4dk4wZno1T1hrbklSdFoxVzhKZXRzbHk2UzREcnpxUFd6Ry1GYkY5OGRYeVlfTERDYzNmMDFId9IB9AFBVV95cUxORThqSnZZaUVTSEx6bWFKTzFDdHZxbDc0RUVsMEtHaG1ma3BILTFRVTU4Q0xDVWdDdUV0V0tySUNEUUVvWU9RR0hnTFFFYWlWbnZqRmd1S2tZUHllU21IOEt4Qmd4eDZHdkJxSlZ",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Tue, 21 Jul 2026 07:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+      "titulo": "Inteligência artificial: máquinas podem pensar? Os 70 anos de história que resultaram nos dias atuais - BBC",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Sat, 18 Oct 2025 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE52QjdWVDZNRHhHeXM2SndzVU5TeTdGRHBtVHNBckF6dm9hNEwyOEVPQlJwUkxCUkZZVW5VdVBNYkQ1RVQzOWRuN25qajNxN1FmLXY2YTI1YzFIV2N3NmNmR2tB0gFnQVVfeXFMTlN6Y05IRU95VmNoeTk4MS1KN2hEc21obk9aUHpub2I5Ymt3SWdCSXRiY2dpQXZBekhtWWE0SmxBcjBqZmRHeElvTEFONXVhbUxTQnNLbHhlaWV2VnZEUDNiM0lSajZENA?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Sat, 18 Oct 2025 07:00:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "parsed_request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "domain": "news",
+    "original_request": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "resolved_request": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T21:04:12.432737+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "observed_at": "2026-10-24T21:04:12.432815+00:00",
+  "source_revision": "4b54a2604ad80e8a38abf674c8c1e601034bfd6c",
+  "query_intelligence_sha256": "22471bed94c441856c2f226e253933bf3925a3bb20dae121b160ca84df48040c"
+}

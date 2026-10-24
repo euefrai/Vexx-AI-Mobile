@@ -1,0 +1,54 @@
+### Result
+{"scope":"AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model","case":"images","query":"Pesquise imagens da Ponte Estaiada de São Paulo.","seconds":1.465,"http_status":200,"wire_capture":"not_available_in_browser; SSE upstream probe is separate","page_errors":[],"counts":{"media":5,"sources":0,"tables":0,"loaded_images":0},"answer_excerpt":"v.\nVexx\n\nEncontrei 5 item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.\n\nMídia descoberta (não é evidência)\nAmpliar imagem\nPonte Estaiada - São Paulo.jpg\nIMAGEM · NÃO É EVIDÊNCIA\nupload.wikimedia.org\n1213 × 750 · image/jpeg\nCrédito: Bruno M.\nAcesso: somente link · Análise: não analisado\nDireitos: CC0\nMarginal Pinheiros, com a Ponte Estaiada em destaque\nAbrir no site de origem ↗\nPágina de origem\nAm","reload_preserved":true,"media_survived_reload":true}
+### Ran Playwright code
+```js
+await (async page => {
+  const cases=[
+    ['municipal','Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.'],
+    ['national','Quais foram as principais notícias do Brasil hoje?'],
+    ['universal','Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.'],
+    ['documentation','Encontre na documentação oficial como usar asyncio.TaskGroup.'],
+    ['products','Encontre notebooks Lenovo de 16 GB até R$ 3.000.'],
+    ['images','Pesquise imagens da Ponte Estaiada de São Paulo.'],
+    ['videos','Encontre vídeos explicativos sobre motores elétricos.'],
+    ['history','Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.'],
+    ['comparison','Compare Python, JavaScript e Go para aplicações web, considerando vantagens e limitações.'],
+    ['scarce','Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.']
+  ];
+  if(await page.locator('#loginOverlay').isVisible()){
+    await page.getByRole('textbox',{name:'Usuário',exact:true}).fill('alice');
+    await page.getByRole('textbox',{name:'Senha',exact:true}).fill('qa-password-long-5981');
+    await page.locator('#loginButton').click();
+    await page.locator('#loginOverlay').waitFor({state:'hidden'});
+  }
+  const index=await page.evaluate(()=>Number(sessionStorage.getItem('v599-case')||0));
+  if(index>=cases.length)return {complete:true};
+  const [name,query]=cases[index];let errors=[];page.on('pageerror',e=>errors.push(e.message));
+  if(index){if(!(await page.locator('#newChatCta').isVisible()))await page.locator('#drawerOpen').click();await page.locator('#newChatCta').click();}
+  const responsePromise=page.waitForResponse(r=>r.url().includes('/api/ai/stream')&&r.request().method()==='POST',{timeout:30000});
+  await page.getByRole('textbox',{name:'Mensagem',exact:true}).fill(query);
+  const start=Date.now();await page.getByRole('button',{name:'Enviar',exact:true}).click();
+  const response=await responsePromise;
+  await page.locator('.message.ai').last().waitFor({state:'visible',timeout:15000});
+  await page.locator('#stopGen').waitFor({state:'hidden',timeout:110000});
+  const assistant=page.locator('.message.ai').last();
+  const counts=await assistant.evaluate(el=>({media:el.querySelectorAll('.jdui-media-grid .jdui-pcard').length,
+      sources:el.querySelectorAll('.jdui-srccard').length,tables:el.querySelectorAll('table').length,
+      loaded_images:[...el.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth>0).length}));
+  const before=await assistant.innerText();
+  await page.screenshot({path:`qa-artifacts/v599/chat-${name}.png`,fullPage:true});
+  await page.reload();await page.locator('#loginOverlay').waitFor({state:'hidden'});
+  await page.locator('.message.ai').last().waitFor({state:'visible'});
+  const reloaded=await page.locator('.message.ai').last().innerText();
+  const reloadedMedia=await page.locator('.message.ai').last().locator('.jdui-media-grid .jdui-pcard').count();
+  await page.evaluate(value=>sessionStorage.setItem('v599-case',String(value)),index+1);
+  return {scope:'AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model',
+    case:name,query,seconds:(Date.now()-start)/1000,http_status:response.status(),
+    wire_capture:'not_available_in_browser; SSE upstream probe is separate',page_errors:errors,counts,
+    answer_excerpt:before.slice(0,450),reload_preserved:before===reloaded,
+    media_survived_reload:counts.media>0&&reloadedMedia===counts.media};
+}
+)(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T17-05-39-298Z.log#L19-L21

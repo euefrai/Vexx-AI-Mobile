@@ -1,0 +1,334 @@
+{
+  "id": "dev-08",
+  "category": "technology",
+  "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 1.855,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 123882
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 1433
+    },
+    {
+      "url": "https://www.bing.com/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Pesquise+novidades+sobre+intelig%C3%AAncia+artificial+compare+os+acontecimentos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4759
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+    "domain": "news",
+    "original_request": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+    "resolved_request": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T16:35:56.540167+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "f76036395526949f9449",
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPVFpPUFdlMU9ieWFmLW5wSzkyZ2ZBQ1dwQUdwNE53c09IR3BIMGh6RWtHZXZfeFo1cFgwY2tLM2dZc0Y2NUFQd2d0TkhabXhGdXpKejYtU0E5cTdxdFRQdzFTOXpaWEJGSFU2dXFVQzZQWmpWZVZjNnAzYTE0ZGtzSjVEQThaN3J3UW1Oa0NLdVM1UVFFYU1rY3BKdXU0Y0VLYXBGXzQwNXFONVhZSkt0by1ER1ZOV2w2cDVrcW53cjFnUmVWYnlNNWNmdzRNUGvSAd4BQVVfeXFMTUE3cUpLUTQxS0N1N0xHNl9BbjgzSXpnOGFWS2EwWkFnUFUzbHg0VjA4dVoyTDBwYk1yRjlUS2M4UDQ3UnhMYkpwWW1XMTE4MTV3YzMzQzZNTXdEd2Q3VmZZMDhpaEROODlPcy00Z29Tbnh6UEVxMlNYZEZHYW41bXl4eGx",
+        "title": "Avanço da inteligência artificial ou ‘roubo’ de pesquisa acadêmica? - O GLOBO",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Fri, 11 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Avanço da inteligência artificial ou ‘roubo’ de pesquisa acadêmica? O GLOBO"
+      },
+      {
+        "id": "1797b3a2b9f014b49ed5",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+        "title": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Mon, 21 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir T1 Notícias"
+      },
+      {
+        "id": "997d65c05d3db4ac6cf0",
+        "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPaFJ3bmRvbUxTWWZRQTRXRHJPS1dubUJhc29aMXBiYllJc2QzdUNZVmpKNmEwM2FUOUJoWW94dTd4SjNya0UtcnR5RlVwb01uYjlLakVJcHNUeTdwTU5acWc4R2VCUXpIYVVUNVFWTGpTaFp5MDR1RFVMZVZFdmJKZ0hJM1NSWkhmZTZVTnh2ZmEzd3VTd1lmWVNjQ2ozX3Ewa2RIaDdVS0lOUnRKcDF3TjZJX3NCZmR6MUduakZVdE9MOWhwSXo0dzZVR1NGZVBwRm9KRk9zcVhIcXE1cVNRTGJSbnRMTVEtTXRLd2R6TFZ0R3NfQVhjZC1DX19yclhHeElaU3JCZXotS19SaHFyUmVfdkR4VUdLZmNIbA?oc=5",
+        "title": "Nota conjunta MRE, MCTI e MGI — Ministério da Ciência, Tecnologia e Inovação - Governo Federal",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Thu, 16 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Nota conjunta MRE, MCTI e MGI — Ministério da Ciência, Tecnologia e Inovação Governo Federal"
+      },
+      {
+        "id": "1231cf667add3536cc71",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5ybklLQ0RHWkZaVjZscE9uaXZkUWg4clZUV1NROUo0UFlaNWx1Z0hRSTUxYm9XZ1B3eVVocDZ1UHQ0LUlpdGc2UDZiZWp6NzJMT2JpeTIzdnZNRnQwRjVn?oc=5",
+        "title": "Bancos estimam investir R$ 3 bi em IA e soluções de dados neste ano, revela pesquisa - FEBRABAN - Home",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Tue, 25 Aug 2026 17:36:09 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Bancos estimam investir R$ 3 bi em IA e soluções de dados neste ano, revela pesquisa FEBRABAN - Home"
+      },
+      {
+        "id": "6965a67314078b0cfd65",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQld3a0hjYWZxYnJDVUlWUFBpUEhJNHNiQVJjclNkbnotaGFYWUl1bGZkbl9ybFMwTm04QWlDZ3c3SmplelJ6ZjVDQXFwTmptaWhEa0hvVWpBMDhHSDdUTDhGN2tOTW5KSldndGFBQy1mcW1GSzRjS1JrTkNUaUtnWlBuZUJUQUVSekNtel9NcTVDZmhYUEM0VmlzSEJ5UnpuOXFjbVd6bXp2Y2RWOXhLRGhOM1FfYm5BLXc?oc=5",
+        "title": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho - Exame",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Você conhece o verdadeiro potencial do Grok? Veja como usar a IA no trabalho Exame"
+      },
+      {
+        "id": "a4427b43005194357ef2",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNUGpmUGxCMGN5ZWZ6d1ZHX2xnbUF2OW41RlNKQ0lfYXVJODdRRGFEaC1Od295LWszSFh0TC1xRzM1VlNFcW0tOE51Y21zSl80d1kwYV9ldXRZVmFJOElacjVyVWxISXpYTFJrUEttVzBzejc3eTMybm5HalBCZFNZM3VyRm1EeldTSTVKVGF2ZzNkRGctSDVzeU9CaF9WcFZwSHlka0xSVjlSclQtZXJaYTdfUXE2U0tNMnk5RG1UdmZtMlk?oc=5",
+        "title": "Com recursos de IA, plataforma gratuita ajuda eleitor a comparar candidatos e decidir voto - VEJA",
+        "origin": "google-news",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "Mon, 31 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Com recursos de IA, plataforma gratuita ajuda eleitor a comparar candidatos e decidir voto VEJA"
+      },
+      {
+        "id": "da03e0ae202872d9a9ee",
+        "url": "https://www.canalpesquise.com.br/",
+        "title": "Estatística | Canal PESQUISE",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!"
+      },
+      {
+        "id": "238748849eab2db872b2",
+        "url": "https://www.dicio.com.br/pesquise/",
+        "title": "Pesquise - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "sáb., 05 set. 2026 07:34:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Significado de Pesquise no Dicio, Dicionário Online de Português. O que é pesquise: Pesquise vem do verbo pesquisar. O mesmo que: procure, cate, sonde, deslinde"
+      },
+      {
+        "id": "bd194ea1ec20cd6cc572",
+        "url": "https://app.pesquisemais.com.br/",
+        "title": "Pesquise (+) - Bem Vindo",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "qui., 15 out. 2026 07:37:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+      },
+      {
+        "id": "288f6af9722db02d4645",
+        "url": "https://dicionario.priberam.org/pesquise",
+        "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "sáb., 17 out. 2026 07:27:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Significado de pesquise, verbo transitivo: Indagar, investigar, procurar com diligência. — Dicionário Priberam da Língua Portuguesa, dicionário online."
+      },
+      {
+        "id": "a91f52c000b4a8eb534d",
+        "url": "https://pesquisemais.com.br/",
+        "title": "Pesquise Mais",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "ter., 20 out. 2026 08:07:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "(11) 97591-8958 A Empresa Sobre Nós Tecnologia e IA LGPD e Compliance Pesquise Mais Lab Soluções HealthCare Product Test Mercados Consumo Agro Opinião Pública A"
+      },
+      {
+        "id": "b4f6c57f14706fc12b88",
+        "url": "https://www.canalpesquise.com.br/sobre-2",
+        "title": "Vídeos | Canal Pesquise",
+        "origin": "bing",
+        "query": "Pesquise novidades sobre inteligência artificial compare os acontecimentos",
+        "date": "sex., 02 out. 2026 02:09:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complexos após os vídeos do Canal. Pergunte, mas"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPVFpPUFdlMU9ieWFmLW5wSzkyZ2ZBQ1dwQUdwNE53c09IR3BIMGh6RWtHZXZfeFo1cFgwY2tLM2dZc0Y2NUFQd2d0TkhabXhGdXpKejYtU0E5cTdxdFRQdzFTOXpaWEJGSFU2dXFVQzZQWmpWZVZjNnAzYTE0ZGtzSjVEQThaN3J3UW1Oa0NLdVM1UVFFYU1rY3BKdXU0Y0VLYXBGXzQwNXFONVhZSkt0by1ER1ZOV2w2cDVrcW53cjFnUmVWYnlNNWNmdzRNUGvSAd4BQVVfeXFMTUE3cUpLUTQxS0N1N0xHNl9BbjgzSXpnOGFWS2EwWkFnUFUzbHg0VjA4dVoyTDBwYk1yRjlUS2M4UDQ3UnhMYkpwWW1XMTE4MTV3YzMzQzZNTXdEd2Q3VmZZMDhpaEROODlPcy00Z29Tbnh6UEVxMlNYZEZHYW41bXl4eGx",
+      "titulo": "Avanço da inteligência artificial ou ‘roubo’ de pesquisa acadêmica? - O GLOBO",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 11 Sep 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPVFpPUFdlMU9ieWFmLW5wSzkyZ2ZBQ1dwQUdwNE53c09IR3BIMGh6RWtHZXZfeFo1cFgwY2tLM2dZc0Y2NUFQd2d0TkhabXhGdXpKejYtU0E5cTdxdFRQdzFTOXpaWEJGSFU2dXFVQzZQWmpWZVZjNnAzYTE0ZGtzSjVEQThaN3J3UW1Oa0NLdVM1UVFFYU1rY3BKdXU0Y0VLYXBGXzQwNXFONVhZSkt0by1ER1ZOV2w2cDVrcW53cjFnUmVWYnlNNWNmdzRNUGvSAd4BQVVfeXFMTUE3cUpLUTQxS0N1N0xHNl9BbjgzSXpnOGFWS2EwWkFnUFUzbHg0VjA4dVoyTDBwYk1yRjlUS2M4UDQ3UnhMYkpwWW1XMTE4MTV3YzMzQzZNTXdEd2Q3VmZZMDhpaEROODlPcy00Z29Tbnh6UEVxMlNYZEZHYW41bXl4eGx",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 11 Sep 2026 07:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+      "titulo": "Em Debate | A inteligência artificial deixou de apenas responder, agora ela começa a agir - T1 Notícias",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Mon, 21 Sep 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanBsajhqdmRPMXRzZVZGbzRSMHd4d2VDWExob29TU3VocDdsZTBfS2xRYlRsWkxFNnZ3Q0k1VGRYZUN3OTIxemsycGFIR1NkcDFnSUYtNS1pc3VKOWdVOER5WjlDQkluYVZCZ212S2x2cllzdHJ1RDh3cllQUGhBdG1uRmpYZDJaNVZpYTRmS2VEVE90dDdUd1FjY2hKT3VmMmx2ZFN6eEZndnVIdHFHVDRGNnRWY2tmd0dFTw?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Mon, 21 Sep 2026 07:00:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPaFJ3bmRvbUxTWWZRQTRXRHJPS1dubUJhc29aMXBiYllJc2QzdUNZVmpKNmEwM2FUOUJoWW94dTd4SjNya0UtcnR5RlVwb01uYjlLakVJcHNUeTdwTU5acWc4R2VCUXpIYVVUNVFWTGpTaFp5MDR1RFVMZVZFdmJKZ0hJM1NSWkhmZTZVTnh2ZmEzd3VTd1lmWVNjQ2ozX3Ewa2RIaDdVS0lOUnRKcDF3TjZJX3NCZmR6MUduakZVdE9MOWhwSXo0dzZVR1NGZVBwRm9KRk9zcVhIcXE1cVNRTGJSbnRMTVEtTXRLd2R6TFZ0R3NfQVhjZC1DX19yclhHeElaU3JCZXotS19SaHFyUmVfdkR4VUdLZmNIbA?oc=5",
+      "titulo": "Nota conjunta MRE, MCTI e MGI — Ministério da Ciência, Tecnologia e Inovação - Governo Federal",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Thu, 16 Jul 2026 07:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPaFJ3bmRvbUxTWWZRQTRXRHJPS1dubUJhc29aMXBiYllJc2QzdUNZVmpKNmEwM2FUOUJoWW94dTd4SjNya0UtcnR5RlVwb01uYjlLakVJcHNUeTdwTU5acWc4R2VCUXpIYVVUNVFWTGpTaFp5MDR1RFVMZVZFdmJKZ0hJM1NSWkhmZTZVTnh2ZmEzd3VTd1lmWVNjQ2ozX3Ewa2RIaDdVS0lOUnRKcDF3TjZJX3NCZmR6MUduakZVdE9MOWhwSXo0dzZVR1NGZVBwRm9KRk9zcVhIcXE1cVNRTGJSbnRMTVEtTXRLd2R6TFZ0R3NfQVhjZC1DX19yclhHeElaU3JCZXotS19SaHFyUmVfdkR4VUdLZmNIbA?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Thu, 16 Jul 2026 07:00:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

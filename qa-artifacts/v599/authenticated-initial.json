@@ -1,0 +1,625 @@
+{
+  "scope": "AUTHENTICATED_E2E initial run before final routing fixes; temporary QA accounts only",
+  "cases": [
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "municipal",
+      "query": "Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.",
+      "seconds": 7.808,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 1,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nJanela pedida: 2026-10-17 a 2026-10-24. A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\nEncontrei 1 fonte(s) sobre Pesquise notícias sobre Ubatã, Bahia, nos últimos sete dias.:\n\nDefensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias — Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro B",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "national",
+      "query": "Quais foram as principais notícias do Brasil hoje?",
+      "seconds": 5.005,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nJanela pedida: 2026-10-24 a 2026-10-24. A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\nPesquisei agora, mas nenhum provedor retornou fontes utilizáveis. Tente reformular ou mais tarde. 🔍\n\n13:47\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "universal",
+      "query": "Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "seconds": 43.756,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 12,
+        "sources": 3,
+        "tables": 1,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\nPrincipais Novidades em Inteligência Artificial\n\nAviso importante: Não tenho acesso a uma ferramenta de busca web ativa nesta conversa, então não posso trazer notícias recentes de 2026. O que compartilho abaixo é baseado no meu conhecimento geral (até meados de 2025) e pode estar desatualizado em relação ao que aconteceu recentemente.\n\nComparação dos Acontecimentos Mais Relevantes\nEvento\tData\tImpacto\tDiferencial\nLançamento do ChatGPT\tNov/",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "documentation",
+      "query": "Encontre na documentação oficial como usar asyncio.TaskGroup.",
+      "seconds": 6.605,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nProcurarei na documentação oficial do Python sobre asyncio.TaskGroup.<tool_call>Search(resultdb_id=\"search\", query=\"asyncio TaskGroup documentation site:docs.python.org\", time_range=\"2022-01-01\", num_results=10, target=\"search_docs\")\n\n13:48\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "products",
+      "query": "Encontre notebooks Lenovo de 16 GB até R$ 3.000.",
+      "seconds": 19.955,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nResposta direta: A pesquisa automatizada não conseguiu validar ofertas de notebooks Lenovo com 16 GB de RAM até R$ 3.000,00 com dados verificáveis (preço/imagem).\n\nMagazine Luiza: bloqueou o acesso automático (403/CAPTCHA); página não verificada.\n\nPróximos passos:\n\nAcesse manualmente a Magalu ou outras lojas (Amazon, Mercado Livre, Kabum) e filtre por \"Lenovo 16 GB\" + \"até R$ 3.000\".\nPosso orientar a interpretar spec ou comparar modelos ",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "images",
+      "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+      "seconds": 0.749,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nPesquisa de imagens iniciada sobre Pesquise imagens da Ponte Estaiada de São Paulo.. Abra o resultado da pesquisa para acompanhar as fontes (id rj-c57ed1928a3a). 🔍\n\nVer pesquisa\n13:49\n···",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "videos",
+      "query": "Encontre vídeos explicativos sobre motores elétricos.",
+      "seconds": 17.324,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\n\nNão tenho acesso a ferramentas de busca ou navegação web no momento, então não consigo localizar vídeos em tempo real para você. Mas posso orientar sobre onde e como encontrar bons conteúdos explicativos sobre motores elétricos:\n\nOnde buscar:\nYouTube — A melhor fonte. Experimente buscar por:\n\"motor elétrico funcionamento explicado\"\n\"como funciona um motor de indução\"\n\"motor elétrico DC vs AC\"\nCanais recomendados: Minuto da Física, Rafael",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "history",
+      "query": "Pesquise a história da fundação de Salvador e compare as informações de fontes históricas.",
+      "seconds": 39.125,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 12,
+        "sources": 0,
+        "tables": 2,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\nFundação de Salvador: visão geral\n\nA fundação da cidade de Salvador, na Bahia, está associada a dois momentos distintos da história colonial portuguesa no Brasil:\n\nMomento\tData\tEvento\tPrincipais fontes\nDescoberta do litoral\t1501–1502\tChegada da primeira frota portuguesa liderada por Antônio de Nebrija (às vezes confundido com outros navegadores)\tCrônicas de Damião de Góis, João de Barros\nFundação da cidade\t2 de novembro de 1549\tTomé de So",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "comparison",
+      "query": "Compare Python, JavaScript e Go para aplicações web, considerando vantagens e limitações.",
+      "seconds": 28.777,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 0,
+        "sources": 0,
+        "tables": 1,
+        "loaded_images": 0
+      },
+      "answer_excerpt": "v.\nVexx\nComparação: Python, JavaScript e Go para Aplicações Web\nPython\n\nVantagens:\n\nSintaxe simples e rápida de aprender\nEcossistema maduro (Django, Flask, FastAPI)\nExcelente para prototipagem e MVPs\nForte em ciência de dados e machine learning (integração fácil)\n\nLimitações:\n\nPerformance mais lenta (GIL limita concorrência)\nEscalabilidade horizontal mais complexa\nConsumo de memória mais alto\nJavaScript (Node.js)\n\nVantagens:\n\nFull-stack com uma ú",
+      "reload_preserved": true,
+      "media_survived_reload": false
+    },
+    {
+      "scope": "AUTHENTICATED_E2E; local relay + actual PC Agent + temporary SQLite + real free model",
+      "case": "scarce",
+      "query": "Pesquise a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.",
+      "seconds": 12.193,
+      "http_status": 200,
+      "wire_capture": "not_available_in_browser; SSE upstream probe is separate",
+      "page_errors": [],
+      "counts": {
+        "media": 12,
+        "sources": 0,
+        "tables": 0,
+        "loaded_images": 1
+      },
+      "answer_excerpt": "v.\nVexx\n\nZZUNIVERSAL999999 — dispositivo pesquisado, mas não há registros ou notícias sobre ele.\n\nNão encontrei nenhuma referência a um dispositivo com esse nome em fontes verificáveis. Como ele não consta em bases de dados tecnológicas, sites oficiais ou notícias recentes, é provável que se trate de um nome fictício ou invenção.\n\nSe quiser, posso ajudar a verificar outros dispositivos reais. Fique à vontete!\n\nMídia descoberta (não é evidência)\nA",
+      "reload_preserved": true,
+      "media_survived_reload": true
+    }
+  ],
+  "cache": [
+    {
+      "query": "pesquise notícias sobre ubatã, bahia, entre 2026-10-17 e 2026-10-24. | 2026-10-17 2026-10-24",
+      "state": "parcial",
+      "read": 0,
+      "useful": 0,
+      "media": 0,
+      "sources": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+          "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+          "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+          "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+          "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+          "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+          "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "quais foram as principais notícias do brasil hoje? | 2026-10-24 2026-10-24",
+      "state": "parcial",
+      "read": 0,
+      "useful": 0,
+      "media": 0,
+      "sources": [
+        {
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+          "titulo": "Saiba como votar usando o aplicativo e-Título do TSE - Agência Brasil",
+          "publicado_em": "Sat, 24 Oct 2026 11:12:00 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYmxzUzd4VjR2VGZZb3pKWnJWWEJ6a2s5TjE1bHdnNnhZV0RLUmd6R0dsSlRTTFFCakl1Rk9teXVJSERsRHpiOEJUeUZfYmRRX1huV3UzRDlhODNCY3dwRGx4YzVTYm43MERjQld1d1BYcHRKNElpRUlDWUFnTDdMbE5wVG1zUUpYZVNHd3lPbHpFMU1BTjVqQlQwZk51dVoxTVpEa3RONW14QkdXWkJN?oc=5",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 11:12:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNNHpTS3RaMVN2N0N5V0t6U1BrQWpuWnNDOUZZQnk0Qk11TzZTMXZwTGtCYkpxbUc4MkZ4MW1mTThHZDRGak9QdmhBblNTMnI4UUcwVkRfN2dMNlJXTjJtRUVwSElBNkd6d25yNl9aMGZCWS13NW4xa01lYWt6bFFIb1UyNE52OW5Fa2dLbkRsNm5aZ19BVm9hYV9NT3pBYXYxTzBoNngtelU2R0VkN3d0MFJ1cDZadWdzUUZEOGZKMGl6UDRWMUdUTGFWTmIxUzQ?oc=5",
+          "titulo": "Eduardo diz que Flávio deve deixar o Brasil se perder e contesta urnas - UOL Notícias",
+          "publicado_em": "Sat, 24 Oct 2026 00:09:40 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNNHpTS3RaMVN2N0N5V0t6U1BrQWpuWnNDOUZZQnk0Qk11TzZTMXZwTGtCYkpxbUc4MkZ4MW1mTThHZDRGak9QdmhBblNTMnI4UUcwVkRfN2dMNlJXTjJtRUVwSElBNkd6d25yNl9aMGZCWS13NW4xa01lYWt6bFFIb1UyNE52OW5Fa2dLbkRsNm5aZ19BVm9hYV9NT3pBYXYxTzBoNngtelU2R0VkN3d0MFJ1cDZadWdzUUZEOGZKMGl6UDRWMUdUTGFWTmIxUzQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 00:09:40 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+          "titulo": "R7 é o segundo portal de notícias mais acessado do Brasil por visitantes únicos em setembro - R7",
+          "publicado_em": "Sat, 24 Oct 2026 00:31:19 GMT",
+          "status": "encontrada",
+          "content_scope": "feed_metadata",
+          "relevante": false,
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQclF4eUdMd2M3dHhDTWVpWTRROTVXbXdzYndjNnpzSndDeGJlaGJHRi1RblI0aUFqQkRsNUZ5dFg1aENCR19QTU4tVi12N1ZnX19pb1hRUlF3VDdBSU5yV1hLbVJJNmJ4WXNNOTJFTU41TG03cTlMM3Z4WE1Dek9OdGxhQ2VXY0lIOUQ0WUZ3VG5GcmFrclFlNmZhSlptUmJQQWVHbk52TGppQ0VFbFpyQnp4Rmh0ZWFTOWZqNTBuaDM2dVZEOUYwRWQ5YjlwSXptVEV1Zl83WQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 00:31:19 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.",
+      "state": "ok",
+      "read": 3,
+      "useful": 3,
+      "media": 12,
+      "sources": [
+        {
+          "url": "https://www.dicio.com.br/principais/",
+          "titulo": "Principais",
+          "publicado_em": "qua., 30 set. 2026 14:00:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.dicio.com.br/principais/",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "qua., 30 set. 2026 14:00:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://dicionario.priberam.org/principais",
+          "titulo": "principais",
+          "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://dicionario.priberam.org/principais",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 11:01:00 GMT"
+            }
+          }
+        },
+        {
+          "url": "https://www.dicionarioinformal.com.br/principais/",
+          "titulo": "Principais",
+          "publicado_em": "seg., 07 set. 2026 22:41:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.dicionarioinformal.com.br/principais/",
+            "eligible": true,
+            "verification": "PUBLISHED_REPORT",
+            "retrieval_state": "ARTICLE_FOUND",
+            "data_complete": true,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [],
+            "data": {
+              "published_at": "seg., 07 set. 2026 22:41:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise a história da fundação de salvador e compare as informações de fontes históricas.",
+      "state": "parcial",
+      "read": 3,
+      "useful": 1,
+      "media": 12,
+      "sources": [
+        {
+          "url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "titulo": "eventos ocorridos no passado",
+          "publicado_em": "2003-02-03T05:18:55Z",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": true,
+          "vertical": {
+            "kind": "general",
+            "url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.todamateria.com.br/historia/",
+          "titulo": "História",
+          "publicado_em": "sáb., 24 out. 2026 08:31:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.todamateria.com.br/historia/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://brasilescola.uol.com.br/historia",
+          "titulo": "História, estudo das ações do homem no tempo e espaço",
+          "publicado_em": "2007-04-13-0309:22:15",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://brasilescola.uol.com.br/historia",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "pesquise a data de lançamento do dispositivo inexistente zzuniversal999999.",
+      "state": "sem_correspondencia",
+      "read": 3,
+      "useful": 0,
+      "media": 12,
+      "sources": [
+        {
+          "url": "https://horabr.com.br/data-e-hora",
+          "titulo": "Data e Hora Agora",
+          "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://horabr.com.br/data-e-hora",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://www.calculator.io/pt/data-de-hoje/",
+          "titulo": "Calculator.io",
+          "publicado_em": "sáb., 24 out. 2026 10:39:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://www.calculator.io/pt/data-de-hoje/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        },
+        {
+          "url": "https://todaydateandtime.com/pt/",
+          "titulo": "TodayDateAndTime.com",
+          "publicado_em": "sáb., 24 out. 2026 12:05:00 GMT",
+          "status": "aberta",
+          "content_scope": "page_text",
+          "relevante": false,
+          "vertical": {
+            "kind": "general",
+            "url": "https://todaydateandtime.com/pt/",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "source",
+              "content_scope"
+            ],
+            "reasons": [],
+            "data": {}
+          }
+        }
+      ]
+    }
+  ],
+  "messages": {
+    "assistant": 10,
+    "user": 10
+  },
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "requests": {
+    "completed": 10
+  }
+}

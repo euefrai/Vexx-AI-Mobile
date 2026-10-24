@@ -1,0 +1,36 @@
+..............F..............                                            [100%]
+================================== FAILURES ===================================
+_ test_legacy_endpoint_cannot_bypass_recent_authorization[POST-/api/admin/invites/revoke-body14] _
+
+env = namespace(db=<sqlite3.Connection object at 0x000002746B08CF40>, admin='u-85e5eebbb5d6', user='u-def6becf8de8', calls=[...WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-389/test_legacy_endpoint_cannot_by14/qa.sqlite'))
+method = 'POST', path = '/api/admin/invites/revoke'
+body = {'codigo': 'fixture-code'}
+
+    @pytest.mark.parametrize('method,path,body',[
+        ('GET','/api/admin/users',None),('GET','/api/admin/quality/runs',None),
+        ('GET','/api/admin/invites',None),('GET','/api/admin/regs',None),
+        ('GET','/api/admin/config',None),('GET','/api/admin/audit',None),
+        ('POST','/api/admin/users/create',{'display':'QA account','username':'qa-user','password':'fixture-only-password'}),
+        ('POST','/api/admin/users/role',{'uid':'qa-target','role':'admin'}),
+        ('POST','/api/admin/users/status',{'uid':'qa-target','status':'bloqueado'}),
+        ('POST','/api/admin/users/sessions',{'uid':'qa-target'}),
+        ('POST','/api/admin/users/delete',{'uid':'qa-target'}),
+        ('POST','/api/admin/users/limits',{'uid':'qa-target','max_ai_hora':1}),
+        ('POST','/api/admin/quality/run',{}),('POST','/api/admin/invites/create',{'max_usos':1,'dias':1}),
+        ('POST','/api/admin/invites/revoke',{'codigo':'fixture-code'}),
+        ('POST','/api/admin/regs/decide',{'id':1,'aprovar':True}),
+        ('POST','/api/admin/config',{'modo':'aberto'}),
+    ])
+    def test_legacy_endpoint_cannot_bypass_recent_authorization(env,method,path,body):
+        with TestClient(server.app) as client:
+            headers=login(client)
+            response=client.request(method,path,json=body,headers=headers)
+>           assert response.status_code==403,response.text
+E           AssertionError: {"detail":[{"type":"missing","loc":["body","id"],"msg":"Field required","input":{"codigo":"fixture-code"}},{"type":"missing","loc":["body","aprovar"],"msg":"Field required","input":{"codigo":"fixture-code"}}]}
+E           assert 422 == 403
+E            +  where 422 = <Response [422 Unprocessable Content]>.status_code
+
+tests\test_admin_route_gate_v599.py:27: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_admin_route_gate_v599.py::test_legacy_endpoint_cannot_bypass_recent_authorization[POST-/api/admin/invites/revoke-body14]
+1 failed, 28 passed in 19.33s

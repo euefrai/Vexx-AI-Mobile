@@ -1,0 +1,623 @@
+{
+  "id": "eva-20",
+  "category": "multistep",
+  "query": "Pesquise reciclagem compare processos custos e limitações",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.52,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Pesquise reciclagem compare processos custos e limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "reciclagem compare processos custos e limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Pesquise reciclagem compare processos custos e limitações",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Pesquise reciclagem compare processos custos e limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "marginalia",
+      "query": "reciclagem compare processos custos e limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "reciclagem processos custos limitações",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Pesquise+reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Pesquise+reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4701
+    },
+    {
+      "url": "https://www.bing.com/search?q=reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6239
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Pesquise%20reciclagem%20compare%20processos%20custos%20e%20limita%C3%A7%C3%B5es",
+      "final": "https://html.duckduckgo.com/html/?q=Pesquise%20reciclagem%20compare%20processos%20custos%20e%20limita%C3%A7%C3%B5es",
+      "chars": 14342
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Pesquise+reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es",
+      "final": "https://old-search.marginalia.nu/search?query=Pesquise+reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es",
+      "chars": 1109
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es",
+      "final": "https://old-search.marginalia.nu/search?query=reciclagem+compare+processos+custos+e+limita%C3%A7%C3%B5es",
+      "chars": 1091
+    },
+    {
+      "url": "https://www.bing.com/search?q=reciclagem+processos+custos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=reciclagem+processos+custos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6199
+    },
+    {
+      "url": "https://www.todamateria.com.br/reciclagem/",
+      "final": "https://www.todamateria.com.br/reciclagem/",
+      "chars": 518485
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "final": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "chars": 145644
+    },
+    {
+      "url": "https://mundoeducacao.uol.com.br/geografia/reciclagem.htm",
+      "final": "https://mundoeducacao.uol.com.br/geografia/reciclagem.htm",
+      "chars": 339454
+    },
+    {
+      "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+      "final": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+      "chars": 193092
+    },
+    {
+      "url": "https://idec.org.br/dicas-e-direitos/reciclagem-o-que-e-e-como-ela-funciona",
+      "final": "https://idec.org.br/dicas-e-direitos/reciclagem-o-que-e-e-como-ela-funciona",
+      "chars": 121775
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Reciclagem",
+      "final": "https://pt.wikipedia.org/wiki/Reciclagem",
+      "chars": 206137
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Pesquise reciclagem compare processos custos e limitações",
+    "domain": "general",
+    "original_request": "Pesquise reciclagem compare processos custos e limitações",
+    "resolved_request": "Pesquise reciclagem compare processos custos e limitações",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T16:48:04.137546+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "19929b0595186f8c92ce",
+        "url": "https://www.todamateria.com.br/reciclagem/",
+        "title": "Reciclagem: entenda o que é e como funciona - Toda Matéria",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "2013-09-26T20:05:48+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ecologistas e estudiosos da área. O foco foi a causa da poluição ambiental e como os materiais eram descartados. Na França e na Alemanha, por exemplo, a recicla"
+      },
+      {
+        "id": "36c4b8862b7aa8a9653f",
+        "url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+        "title": "Reciclagem: o que é, tipos, coleta, importância - Brasil Escola",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "2007-04-17-0309:19:00",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "em outros produtos ou matérias-primas. Sua principal função é o reaproveitamento de materiais, evitando desperdícios e reduzindo o volume de resíduos sólidos ac"
+      },
+      {
+        "id": "c5a9755c5fc72bbc3e19",
+        "url": "https://mundoeducacao.uol.com.br/geografia/reciclagem.htm",
+        "title": "Reciclagem: o que é, função, tipos, cores - Mundo Educação",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "2008-03-17-0308:20:42",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "desenvolvimento econômico das comunidades. A reciclagem pode ser realizada por meio da coleta seletiva, que facilita a destinação correta dos resíduos sólidos. "
+      },
+      {
+        "id": "7d0aa8331c12cf0f779c",
+        "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+        "title": "O que é Reciclagem — Ministério do Meio Ambiente e Mudança do Clima",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "sex., 04 set. 2026 19:02:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A reciclagem é um conjunto de técnicas de reaproveitamento de materiais descartados, reintroduzindo-os no ciclo produtivo. É uma das alternativas de tratamento "
+      },
+      {
+        "id": "abcdd62f1707ba5235c6",
+        "url": "https://idec.org.br/dicas-e-direitos/reciclagem-o-que-e-e-como-ela-funciona",
+        "title": "Reciclagem: o que é e como ela funciona? | Idec - Instituto de Defesa ...",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "qui., 13 mar. 2025 23:59:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "objetos. A reciclagem é a melhor opção para o lixo? A reciclagem é sim uma forma de lidar com os resíduos, mas não é a melhor. Isso porque muitos materiais não "
+      },
+      {
+        "id": "c28fe29a65fb4bd191a2",
+        "url": "https://pt.wikipedia.org/wiki/Reciclagem",
+        "title": "Reciclagem – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "reciclagem compare processos custos e limitações",
+        "date": "2004-04-08T00:24:06Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Para um mecanismo usado para armazenar objetos excluídos, veja .Para a política interna da Wikipédia, veja . Nota: Lixeira (computação) Wikipédia:Reciclagem Est"
+      },
+      {
+        "id": "da03e0ae202872d9a9ee",
+        "url": "https://www.canalpesquise.com.br/",
+        "title": "Estatística | Canal PESQUISE",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Se você tem dúvidas sobre metodologia de pesquisa e estatística, o Canal PESQUISE é o local certo para você, pois aqui sua pesquisa vai decolar!"
+      },
+      {
+        "id": "238748849eab2db872b2",
+        "url": "https://www.dicio.com.br/pesquise/",
+        "title": "Pesquise - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "sáb., 05 set. 2026 07:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Significado de Pesquise no Dicio, Dicionário Online de Português. O que é pesquise: Pesquise vem do verbo pesquisar. O mesmo que: procure, cate, sonde, deslinde"
+      },
+      {
+        "id": "bd194ea1ec20cd6cc572",
+        "url": "https://app.pesquisemais.com.br/",
+        "title": "Pesquise (+) - Bem Vindo",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "qui., 15 out. 2026 07:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fale Conosco +55 11 99760-0722 +55 11 99498-5001 contato@pesquisemais.com.br Conteúdo do Site Home Produto Como Funciona Contato Redes Sociais Política de Priva"
+      },
+      {
+        "id": "288f6af9722db02d4645",
+        "url": "https://dicionario.priberam.org/pesquise",
+        "title": "Significado de pesquise - Dicionário Priberam da Língua Portuguesa",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "sáb., 17 out. 2026 07:27:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Significado de pesquise, verbo transitivo: Indagar, investigar, procurar com diligência. — Dicionário Priberam da Língua Portuguesa, dicionário online."
+      },
+      {
+        "id": "a91f52c000b4a8eb534d",
+        "url": "https://pesquisemais.com.br/",
+        "title": "Pesquise Mais",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "ter., 20 out. 2026 08:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "(11) 97591-8958 A Empresa Sobre Nós Tecnologia e IA LGPD e Compliance Pesquise Mais Lab Soluções HealthCare Product Test Mercados Consumo Agro Opinião Pública A"
+      },
+      {
+        "id": "b4f6c57f14706fc12b88",
+        "url": "https://www.canalpesquise.com.br/sobre-2",
+        "title": "Vídeos | Canal Pesquise",
+        "origin": "bing",
+        "query": "Pesquise reciclagem compare processos custos e limitações",
+        "date": "sex., 02 out. 2026 02:09:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Ter insegurança sobre o tema é algo absolutamente normal e mesmo os mais receosos poderão compreender conceitos complexos após os vídeos do Canal. Pergunte, mas"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-bc2c8223d23f",
+      "type": "image",
+      "title": "A Reciclagem é uma forma de reaproveitamento de matéria-prima descartada. Nesse sentido, reciclar significa diminuir a quantidade de resíduos provenientes dos p",
+      "url": "https://static.todamateria.com.br/upload/re/ci/reciclagem-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/re/ci/reciclagem-og.jpg",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A Reciclagem é uma forma de reaproveitamento de matéria-prima descartada. Nesse sentido, reciclar significa diminuir a quantidade de resíduos provenientes dos produtos consumidos pelo homem. O termo \"Reciclagem\" é proveniente da língua ingl",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e2191f2cfc0e",
+      "type": "image",
+      "title": "Rubens Castilho",
+      "url": "https://static.todamateria.com.br/img/autor/ru/be/rubens-carvalho_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ru/be/rubens-carvalho_72.jpg",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rubens Castilho",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-893c5929430b",
+      "type": "image",
+      "title": "Símbolo Internacional da Reciclagem preto em fundo branco",
+      "url": "https://static.todamateria.com.br/upload/57/0b/570bff4864aa4-reciclagem.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/57/0b/570bff4864aa4-reciclagem.jpg",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Símbolo Internacional da Reciclagem preto em fundo branco",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cb74ba3e28e4",
+      "type": "image",
+      "title": "Coleta Seletiva",
+      "url": "https://static.todamateria.com.br/upload/co/le/coletaseletiva-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/co/le/coletaseletiva-cke.jpg?width=50&blur=10",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Coleta Seletiva",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-19c473ebd9c3",
+      "type": "image",
+      "title": "Recilagem e meio ambiente",
+      "url": "https://static.todamateria.com.br/upload/re/ci/reciclagemmeioambiente-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/re/ci/reciclagemmeioambiente-cke.jpg?width=50&blur=10",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Recilagem e meio ambiente",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f79cde70e53a",
+      "type": "image",
+      "title": "Materiais reciclaveis",
+      "url": "https://static.todamateria.com.br/upload/ma/te/materialreciclavel-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/ma/te/materialreciclavel-cke.jpg?width=50&blur=10",
+      "source_title": "Reciclagem: entenda o que é e como funciona",
+      "source_url": "https://www.todamateria.com.br/reciclagem/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Materiais reciclaveis",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2147d88b8778",
+      "type": "image",
+      "title": "Você sabe o que é reciclagem? Acesse o nosso texto e entenda como é o processo de reciclagem. Veja a importância da reciclagem para o meio ambiente.",
+      "url": "https://s5.static.brasilescola.uol.com.br/be/2024/05/tres-pessoas-carregando-caixas-com-materiais-para-reciclagem.jpg",
+      "final_url": "https://s5.static.brasilescola.uol.com.br/be/2024/05/tres-pessoas-carregando-caixas-com-materiais-para-reciclagem.jpg",
+      "source_title": "Reciclagem: o que é, tipos, coleta, importância",
+      "source_url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "publisher": "s5.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Você sabe o que é reciclagem? Acesse o nosso texto e entenda como é o processo de reciclagem. Veja a importância da reciclagem para o meio ambiente.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "Reciclagem: o que é, tipos, coleta, importância",
+      "source_url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-288d21f4049a",
+      "type": "image",
+      "title": "Imprimir",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "source_title": "Reciclagem: o que é, tipos, coleta, importância",
+      "source_url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imprimir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d8ccfc8347f",
+      "type": "image",
+      "title": "Escutar texto",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "source_title": "Reciclagem: o que é, tipos, coleta, importância",
+      "source_url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escutar texto",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2ae2d2bf30c6",
+      "type": "image",
+      "title": "Compartilhar",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "source_title": "Reciclagem: o que é, tipos, coleta, importância",
+      "source_url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Compartilhar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+      "titulo": "Reciclagem: o que é, tipos, coleta, importância",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2007-04-17-0309:19:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://brasilescola.uol.com.br/biologia/reciclagem.htm",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://mundoeducacao.uol.com.br/geografia/reciclagem.htm",
+      "titulo": "Reciclagem: o que é, função, tipos, cores",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2008-03-17-0308:20:42",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://mundoeducacao.uol.com.br/geografia/reciclagem.htm",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://idec.org.br/dicas-e-direitos/reciclagem-o-que-e-e-como-ela-funciona",
+      "titulo": "Reciclagem: o que é e como ela funciona?",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "qui., 13 mar. 2025 23:59:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://idec.org.br/dicas-e-direitos/reciclagem-o-que-e-e-como-ela-funciona",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 3,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

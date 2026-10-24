@@ -1,0 +1,547 @@
+{
+  "id": "dev-03",
+  "category": "international_news",
+  "query": "Notícias em Portugal nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.79,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Portugal\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Portugal\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Portugal\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Debate entre Lula e Flávio repercute na imprensa internacional\" site:www.gazetadopovo.com.br",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Brasileira morre em viagem a Portugal após reação alérgica\" site:sbtnews.sbt.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 151202
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6501
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4966
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Debate+entre+Lula+e+Fl%C3%A1vio+repercute+na+imprensa+internacional%22+site%3Awww.gazetadopovo.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Debate+entre+Lula+e+Fl%C3%A1vio+repercute+na+imprensa+internacional%22+site%3Awww.gazetadopovo.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5074
+    },
+    {
+      "url": "https://www.gazetadopovo.com.br",
+      "final": "https://www.gazetadopovo.com.br",
+      "chars": 685237
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Brasileira+morre+em+viagem+a+Portugal+ap%C3%B3s+rea%C3%A7%C3%A3o+al%C3%A9rgica%22+site%3Asbtnews.sbt.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Brasileira+morre+em+viagem+a+Portugal+ap%C3%B3s+rea%C3%A7%C3%A3o+al%C3%A9rgica%22+site%3Asbtnews.sbt.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5053
+    },
+    {
+      "url": "https://www.todamateria.com.br/portugal/",
+      "final": "https://www.todamateria.com.br/portugal/",
+      "chars": 527178
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Portugal",
+      "error": "tamanho"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Portugal\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Portugal nos últimos sete dias",
+    "resolved_request": "Notícias em Portugal entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Portugal"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T16:35:02.914568+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Portugal"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "112d744af9a541ccc8f5",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdlBjbVQ5Y2c0X09RYl9rMUNFVmwtRUpkX05DSTNxaEhwLXIwS1lHUmZ5VVEwUmFrQWttc0Iyb25YUGxOcUVILVpDbmFfMGkyaTNKUVhVZ3VyZkZuZkFPSnk5eWQ4NWluVW9EVllvQTktUEVFNDNQYi1QbUlXN0R1cHZlQ3VTdWMtX0NqdmxVY3JGUXFKcS1VdzF1Q1hCczR3Q2o0ejR1S0JvbW5meGxiLTlyT21naTJaRXEyMUVrQ2hKVnFRLXNMcQ?oc=5",
+        "title": "Centro sobre ditadura de António Salazar é inaugurado em Portugal - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Fri, 23 Oct 2026 11:17:04 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Centro sobre ditadura de António Salazar é inaugurado em Portugal UOL Notícias"
+      },
+      {
+        "id": "54c981a10b3dacc7cb34",
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOVTFiczBaVzMyZzJYMGJDaE0xSjVQRWtwX2l6MkZ3X2dKTDVtNUJLMC1tZ2ZHVWI2aDBJbUk0cVY5R0dxc0c2bTdmNmRMd29mLXRIcm1hUk13UmhIcFVnRkZNREZGdjREcXN6Ti1hNkZQbjN4eVM5elF4bUl2ZFVaR3Badmc3UVF5Wm5n?oc=5",
+        "title": "Gabriel Medina é vice-campeão em Portugal. - Notícias das Praias",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Fri, 23 Oct 2026 17:44:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Gabriel Medina é vice-campeão em Portugal. Notícias das Praias"
+      },
+      {
+        "id": "64c9815fa6570a2314de",
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbTNXdGpBekt0RWkxNFN4UzNRT3lRcU85eXNPVVVsdXFtLWpyeXRmd01LSjRHaDlYeXJyUzlPbDl5Q1haSFkxb2VaaExQNllEelUxRFM3bGlqbXZvX0ZYUDV0d2JxTTFEeUFCU3MzU1RHakxvbDNjd1lVb0hCYmp3QnoxV2t2U3EyNkZER0RSUFlZalRmRW9xOWo2T2RRV2pZSEE?oc=5",
+        "title": "Brasileira morre em viagem a Portugal após reação alérgica - SBT News",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Fri, 23 Oct 2026 14:14:07 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Brasileira morre em viagem a Portugal após reação alérgica SBT News"
+      },
+      {
+        "id": "c818ddc466fb9f448271",
+        "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN0pfZE1wQjZMVkhHYUVGV1I1YU1JUWN5dTVGQnppcXFrR1R0OTJhUmxHSzVIVlN3T25rVnB2YUJGWVNSX2pSUDRNNlhrdXhNZFVNN2kyNVJBNTB0SDBsWVduZE9xRTA3ejZrcjVfVWxZNDkwcklXQkp0Uko5aWRZSDJrVmtCX3ZTQnBsTXBIMll0eGNlWld4Z1M1SQ?oc=5",
+        "title": "Medina enfrenta Ítalo Ferreira na semifinal da WSL em Portugal - Band",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Fri, 23 Oct 2026 13:15:00 GMT",
+        "type": "noticia",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Medina enfrenta Ítalo Ferreira na semifinal da WSL em Portugal Band"
+      },
+      {
+        "id": "b9c7260fbd04530c42ff",
+        "url": "https://en.wikipedia.org/wiki/Portugal",
+        "title": "Portugal - Wikipedia",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "sex., 23 out. 2026 15:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portugal is a unitary republic and multi-party representative democracy with four separate sovereignty organs: president, government, parliament, and judiciary."
+      },
+      {
+        "id": "c7ec13011e349389ad58",
+        "url": "https://www.todamateria.com.br/portugal/",
+        "title": "Portugal: mapa, bandeira, cultura e características gerais",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "2024-08-30T01:25:45+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "parte significativa da economia agrícola do país. A indústria manufatureira também desempenha um papel crucial, com destaque para os setores de têxteis, calçado"
+      },
+      {
+        "id": "e602904d2efcfd885537",
+        "url": "https://dicasdaeuropa.com.br/portugal/",
+        "title": "Portugal : Dicas da Europa - Guia de viagem completo",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "sáb., 24 out. 2026 10:39:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Seu Guia de Viagem para Portugal com informações e dicas sobre os melhores hotéis, destinos, quando ir, o que fazer, atrações turísticas e muito mais"
+      },
+      {
+        "id": "bde77dd959fd3f3cbf21",
+        "url": "https://brasilescola.uol.com.br/geografia/portugal.htm",
+        "title": "Portugal: dados, mapa, geografia, história - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "sáb., 24 out. 2026 06:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Conheça Portugal, um dos países da Península Ibérica. Aprofunde seus conhecimentos sobre aspectos de sua história e geografia e veja curiosidades a seu respeito"
+      },
+      {
+        "id": "6f3eb4e82f1bddf58d77",
+        "url": "https://www.dicasdeviagem.com/o-que-fazer-em-portugal/",
+        "title": "O que fazer em Portugal: 30 atrações imperdíveis pelo país",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "sex., 23 out. 2026 15:41:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Confira aqui as principais cidades, atrações e as melhores dicas de o que fazer em Portugal para montar um roteiro incrível pela Terrinha!"
+      },
+      {
+        "id": "2031ff50ed3e04ab57b8",
+        "url": "https://pt.wikipedia.org/wiki/Portugal",
+        "title": "Portugal – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Portugal\" notícias",
+        "date": "sex., 23 out. 2026 19:59:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portugal é a nação mais a ocidente do continente europeu. O nome do país provém da sua segunda maior cidade, Porto, cujo nome latino - celta era Portus Cale. [1"
+      },
+      {
+        "id": "7e2d1f4f02b1341c70a0",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxON2JGT055aHhvVmpOeWhQR2pVTV8ySFA2RVAyZTk5U2JucEZ5elpHeTlodXNtV3NhWDF4LTFHTTNOZzlRUFpOMU05ZGEzQzFWRm5OZE0tUDdSd1RkWUlQOUtWaXhYbERYQlh4Q3B1N2dnZkNfMmhYX1AzUlNHLXIxVHY3blo1V2RiRnY0SXBfYWRPNktWT3JscU5PMmpFTHlqTU9R?oc=5",
+        "title": "Debate entre Lula e Flávio repercute na imprensa internacional - Gazeta do Povo",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Sat, 24 Oct 2026 03:29:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Debate entre Lula e Flávio repercute na imprensa internacional Gazeta do Povo"
+      },
+      {
+        "id": "683b2bb68926cd75599f",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTWFMeFE0NEZ2Z19FY1V5eDAzWW5XcjNDOE45c29sSHVRNXBfbWdDZHJOZ0I0RGJNVkhPRE5CamZtWlZTQ3pKeDV3a2tvajFMeXdQdkt4WGh1ZlFxMVFxOWd0WGFwbXdCa2ZlcmlrR0s1emdhRURDQlBOcm1zZkxBVE40cWpROUtwWmV0X09YdlU3UzZ0ckNrbG9QMDh0Y09lMnlkalpqc0RrbllEbXBWRzJxXzdhVnBLLUE?oc=5",
+        "title": "Jihadistas apelam a atentados durante manifestações na Europa - Euronews.com",
+        "origin": "google-news",
+        "query": "\"Portugal\" notícias",
+        "date": "Fri, 23 Oct 2026 18:19:02 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Jihadistas apelam a atentados durante manifestações na Europa Euronews.com"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-73a01111465b",
+      "type": "image",
+      "title": "Portugal é um país localizado no sudoeste da Europa, na Península Ibérica, e sua capital é Lisboa. A população portuguesa é de aproximadamente 10,4 milhões de p",
+      "url": "https://static.todamateria.com.br/upload/po/rt/portugal-rascunho-nao-publicar-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/po/rt/portugal-rascunho-nao-publicar-og.jpg",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Portugal é um país localizado no sudoeste da Europa, na Península Ibérica, e sua capital é Lisboa. A população portuguesa é de aproximadamente 10,4 milhões de pessoas. Tornou-se independente durante a Reconquista e, posteriormente, destacou",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c2aa66da895e",
+      "type": "image",
+      "title": "Vinícius Marques",
+      "url": "https://static.todamateria.com.br/img/autor/vi/ni/vinicius-marques_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/vi/ni/vinicius-marques_72.jpg",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vinícius Marques",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cffc1ccfdca3",
+      "type": "image",
+      "title": "Mapa de Portugal",
+      "url": "https://static.todamateria.com.br/upload/ma/pa/mapadeportugal-cke.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/ma/pa/mapadeportugal-cke.jpg",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Mapa de Portugal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a3ddda9ffa46",
+      "type": "image",
+      "title": "Bandeira de Portugal",
+      "url": "https://static.todamateria.com.br/upload/po/rt/portugal-0-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/po/rt/portugal-0-cke.jpg?width=50&blur=10",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bandeira de Portugal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-76ddbeac5463",
+      "type": "image",
+      "title": "Festa de São João em Porto.",
+      "url": "https://static.todamateria.com.br/upload/fe/st/festadesaojoaonacidadedoporto-0-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/fe/st/festadesaojoaonacidadedoporto-0-cke.jpg?width=50&blur=10",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Festa de São João em Porto.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d401d3de8a31",
+      "type": "image",
+      "title": "Praça do Comércio em Lisboa.",
+      "url": "https://static.todamateria.com.br/upload/pr/ac/pracadocomercioemlisboaportugal-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/pr/ac/pracadocomercioemlisboaportugal-cke.jpg?width=50&blur=10",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Praça do Comércio em Lisboa.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-97cf2d38dcf7",
+      "type": "image",
+      "title": "Praia da Marinha, em Algarve, sul de Portugal.",
+      "url": "https://static.todamateria.com.br/upload/pr/ai/praiadamarinhaemportugal-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/pr/ai/praiadamarinhaemportugal-cke.jpg?width=50&blur=10",
+      "source_title": "Portugal: mapa, bandeira, cultura e características gerais",
+      "source_url": "https://www.todamateria.com.br/portugal/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Praia da Marinha, em Algarve, sul de Portugal.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdlBjbVQ5Y2c0X09RYl9rMUNFVmwtRUpkX05DSTNxaEhwLXIwS1lHUmZ5VVEwUmFrQWttc0Iyb25YUGxOcUVILVpDbmFfMGkyaTNKUVhVZ3VyZkZuZkFPSnk5eWQ4NWluVW9EVllvQTktUEVFNDNQYi1QbUlXN0R1cHZlQ3VTdWMtX0NqdmxVY3JGUXFKcS1VdzF1Q1hCczR3Q2o0ejR1S0JvbW5meGxiLTlyT21naTJaRXEyMUVrQ2hKVnFRLXNMcQ?oc=5",
+      "titulo": "Centro sobre ditadura de António Salazar é inaugurado em Portugal - UOL Notícias",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 11:17:04 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdlBjbVQ5Y2c0X09RYl9rMUNFVmwtRUpkX05DSTNxaEhwLXIwS1lHUmZ5VVEwUmFrQWttc0Iyb25YUGxOcUVILVpDbmFfMGkyaTNKUVhVZ3VyZkZuZkFPSnk5eWQ4NWluVW9EVllvQTktUEVFNDNQYi1QbUlXN0R1cHZlQ3VTdWMtX0NqdmxVY3JGUXFKcS1VdzF1Q1hCczR3Q2o0ejR1S0JvbW5meGxiLTlyT21naTJaRXEyMUVrQ2hKVnFRLXNMcQ?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 11:17:04 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOVTFiczBaVzMyZzJYMGJDaE0xSjVQRWtwX2l6MkZ3X2dKTDVtNUJLMC1tZ2ZHVWI2aDBJbUk0cVY5R0dxc0c2bTdmNmRMd29mLXRIcm1hUk13UmhIcFVnRkZNREZGdjREcXN6Ti1hNkZQbjN4eVM5elF4bUl2ZFVaR3Badmc3UVF5Wm5n?oc=5",
+      "titulo": "Gabriel Medina é vice-campeão em Portugal. - Notícias das Praias",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 17:44:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOVTFiczBaVzMyZzJYMGJDaE0xSjVQRWtwX2l6MkZ3X2dKTDVtNUJLMC1tZ2ZHVWI2aDBJbUk0cVY5R0dxc0c2bTdmNmRMd29mLXRIcm1hUk13UmhIcFVnRkZNREZGdjREcXN6Ti1hNkZQbjN4eVM5elF4bUl2ZFVaR3Badmc3UVF5Wm5n?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 17:44:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbTNXdGpBekt0RWkxNFN4UzNRT3lRcU85eXNPVVVsdXFtLWpyeXRmd01LSjRHaDlYeXJyUzlPbDl5Q1haSFkxb2VaaExQNllEelUxRFM3bGlqbXZvX0ZYUDV0d2JxTTFEeUFCU3MzU1RHakxvbDNjd1lVb0hCYmp3QnoxV2t2U3EyNkZER0RSUFlZalRmRW9xOWo2T2RRV2pZSEE?oc=5",
+      "titulo": "Brasileira morre em viagem a Portugal após reação alérgica - SBT News",
+      "status": "encontrada",
+      "relevante": true,
+      "publicado_em": "Fri, 23 Oct 2026 14:14:07 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbTNXdGpBekt0RWkxNFN4UzNRT3lRcU85eXNPVVVsdXFtLWpyeXRmd01LSjRHaDlYeXJyUzlPbDl5Q1haSFkxb2VaaExQNllEelUxRFM3bGlqbXZvX0ZYUDV0d2JxTTFEeUFCU3MzU1RHakxvbDNjd1lVb0hCYmp3QnoxV2t2U3EyNkZER0RSUFlZalRmRW9xOWo2T2RRV2pZSEE?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Fri, 23 Oct 2026 14:14:07 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}
