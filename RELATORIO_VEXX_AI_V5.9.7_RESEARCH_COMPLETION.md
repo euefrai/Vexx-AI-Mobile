@@ -4,6 +4,10 @@
 
 HEAD inicial local: `7beb67b6bc21b6d572449a149f3f254784cce64f`. Remoto inicial atualizado por fetch: `ed3b9984b9054bfa97fc3c9f0831bf5b23e225e3`. Os cinco commits V5.9.6 anteriores foram preservados.
 
+HEAD final publicado e confirmado por `ls-remote`: `0814864e0e20bcb94f22a0b4fe861b205c15ed7c`. Push fast-forward realizado. GitHub Actions [40010107263](https://github.com/euefrai/Vexx-AI-Mobile/actions/runs/40010107263) terminou com sucesso. Deploy automático observado: relay informa `0814864e0e20`, health/configured OK e PC online. Novos assets confirmados por HTTP; research/jobs, research/stream e ui-state mantêm 401 sem sessão. Recibo completo: `qa-artifacts/v597/publication-receipt.json`.
+
+Esta atualização pós-publicação e o recibo foram salvos localmente; não foi feito um segundo push apenas de documentação que provocaria outro deploy. O código publicado e validado permanece no SHA acima.
+
 ## Correções
 
 - RSS deixa de consumir slots reservados a páginas. Traces distinguem abrir, extrair, rejeitar e aceitar uma fonte.
