@@ -717,7 +717,7 @@ def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> 
             pass
         hay = _sem_acentos(" ".join(str(p or "") for p in partes))
         import search_orchestrator as orch
-        evidence = {"titulo": f.get("titulo", ""),
+        evidence = {**f, "titulo": f.get("titulo", ""),
                     "trecho": " ".join(str(f.get(k) or "") for k in ("trecho", "texto_lido"))}
         if orch._util_para_pedido(evidence, orch._termos_correspondencia(consulta), consulta):
             out.append(f)
@@ -818,6 +818,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         if pagina_bloqueada(pagina):
             raise ResearchErro("Página é bot-wall/CAPTCHA (não contornado).", "bloqueado")
         art = extrair_artigo(pagina, url=a["url"], consulta=consulta or a.get("titulo", ""))
+        import media_evidence
         rec = {"titulo": art.get("titulo") or a.get("titulo", ""),
                "texto": art.get("texto", "") or "",
                "final": final,
@@ -827,6 +828,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "secoes": art.get("secoes", [])[:12],
                "tabelas": art.get("tabelas", [])[:5],
                "imagens": art.get("imagens", [])[:10],
+               "midia": media_evidence.extrair_midia(pagina, final, art.get('titulo') or ''),
                "extrator": art.get("extrator", ""),
                "ilegivel": bool(art.get("ilegivel")),
                "lida": bool((art.get("texto") or "").strip())}
@@ -895,7 +897,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             "status": "aberta" if lida else "encontrada",
             "relevante": relevante,
             "origem": a.get("origem", ""),
-            "publicado_em": (metas.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
+            "publicado_em": str(metas.get("publicado_em") or a.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
             "extrator": rec.get("extrator", ""),
             "canonica": canonica,
             "origem_declarada": origem_declarada,
@@ -1013,6 +1015,35 @@ def _buscar_orquestrado(consulta: str, max_resultados: int = 6,
     return achados, info
 
 
+def candidate_report(candidates, sources, query, limit=24):
+    """Bounded diagnostic references, never a second evidence store."""
+    import hashlib
+    import search_orchestrator as orch
+    by_url = {s.get('url'):s for s in sources}
+    rows, seen = [], set()
+    for candidate in candidates:
+        url = candidate.get('url') or ''
+        try: canonical = orch.canonizar_url(url)
+        except ValueError: continue
+        if not canonical or canonical in seen: continue
+        seen.add(canonical)
+        if len(rows) >= limit: continue
+        source = by_url.get(url) or {}
+        reasons = (source.get('vertical') or {}).get('reasons') or candidate.get('relevance_reasons') or []
+        if source.get('relevante') is False and not reasons: reasons=['RELEVANCE_MISMATCH']
+        state = 'REJECTED' if reasons else 'READ' if source.get('status')=='aberta' else 'FOUND'
+        rows.append({'id':hashlib.sha256(canonical.encode()).hexdigest()[:20],
+                     'url':url[:500], 'title':str(candidate.get('titulo') or '')[:160],
+                     'origin':str(candidate.get('origem') or '')[:50],
+                     'query':str(candidate.get('discovery_query') or query)[:240],
+                     'date':str(source.get('publicado_em') or candidate.get('publicado_em') or '')[:48],
+                     'type':str(candidate.get('tipo') or 'page')[:40], 'state':state,
+                     'read':source.get('status')=='aberta','reasons':list(reasons)[:6],
+                     'evidence_ref':source.get('id') or '',
+                     'excerpt':str(source.get('trecho') or '')[:160]})
+    return {'items':rows,'unique_candidates':len(seen),'omitted':max(0,len(seen)-len(rows))}
+
+
 def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=None,
                     max_fontes: int = 3, ttl: int = TTL_RAPIDA, timeout_pagina: float = 6.0,
                     orcamento: dict = None, timeout_busca: float = 8.0) -> dict:
@@ -1028,6 +1059,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     import query_intelligence
     request_info = query_intelligence.analyze(pedido)
     cache_pedido = request_info["resolved_request"] if request_info["temporal"] else pedido
+    if request_info['parameters'].get('start_date'):
+        cache_pedido += ' | '+request_info['parameters']['start_date']+' '+request_info['parameters'].get('end_date','')
     if request_info["requires_live_data"]:
         ttl = min(ttl, 180)
     consulta = consulta_de_pesquisa(consulta)
@@ -1040,13 +1073,13 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         buscar_fn.etapas = []
         buscar_fn.info = {}
     salvos = cache_get(db, owner, "web", cache_pedido)
-    if salvos is not None and salvos.get("retrieval_version") == "5.9.3":
+    if salvos is not None and salvos.get("retrieval_version") == "5.9.9":
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
     etapas, fontes = [], []
     try:
-        achados = buscar_fn(consulta)[:6]
+        achados = buscar_fn(consulta)[:12]
         etapas.append(f"busca: {len(achados)} resultados")
     except Exception as exc:
         codigo = getattr(exc, "codigo", "")
@@ -1063,16 +1096,21 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 "provedores": {}, "lacunas": [], "consultas": [], "descartes": [],
                 "correspondencia": 0.0}
     info_busca = dict(getattr(buscar_fn, "info", {}) or {})
+    import media_evidence
+    midia = media_evidence.discover_search_media(achados)
     recs: dict = {}
     import search_orchestrator as orch
-    candidates=[a for a in achados if a.get('metadata_source')!='academic_provider'
-                or orch._util_para_pedido(a,orch._termos_correspondencia(pedido),pedido)]
+    candidates=[a for a in achados if a.get('content_scope')!='feed_metadata'
+                and not (a.get('origem')=='commons' and a.get('tipo')=='imagem')
+                and (a.get('metadata_source')!='academic_provider'
+                or orch._util_para_pedido(a,orch._termos_correspondencia(pedido),pedido))][:6]
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
         futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
                 for a in candidates}
         for fut, a in futs.items():
             try:
                 recs[a["url"]] = fut.result()
+                midia.extend((recs[a['url']] or {}).get('midia') or [])
             except ResearchErro as exc:
                 etapas.append(f"página ignorada ({exc.codigo}): {a['url'][:60]}")
             except Exception as exc:
@@ -1082,7 +1120,10 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         rec = recs.get(a["url"])
         if rec is None:
             if not (a.get('trecho') or '').strip(): continue
-            rec={'texto':'','lida':False,'titulo':a.get('titulo','')}
+            rec={'texto':'','lida':False,'titulo':a.get('titulo',''),
+                 'content_scope':a.get('content_scope') or 'metadata_only',
+                 'metadados':{'publicado_em':a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em',''),
+                              'site':a.get('publicador','')}}
         normalized.append(_fonte_de(rec,a,pedido))
     # Reclassify after reading, before source truncation. Irrelevant first
     # candidates must not hide useful content obtained later in the same batch.
@@ -1105,7 +1146,9 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         estado_texto = info_busca.get("estado_texto") or ESTADO_TEXTO.get(estado, "")
     prov_etapas = list(getattr(buscar_fn, "etapas", []) or [])
     saida = {"fontes": _numerar(fontes),
-             "retrieval_version": "5.9.3", "request": request_info,
+             'candidate_reservoir':candidate_report(achados, normalized, pedido),
+             "retrieval_version": "5.9.9", "request": request_info,
+             "midia": list({item['id']:item for item in media_evidence.relevant_media(midia,pedido)}.values())[:12],
              'fontes_encontradas_relevantes':sum(f.get('status')!='aberta' and bool(f.get('relevante')) for f in fontes),
              "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
              "etapas": etapas + prov_etapas + [f"{len(fontes)} fontes, {lidas_n} lidas"],
@@ -1120,7 +1163,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              "correspondencia": info_busca.get("correspondencia", 0.0),
              "tentativas_busca": info_busca.get("tentativas_busca", []),
              "segundos": info_busca.get("segundos", 0.0)}
-    if fontes:
+    if fontes or saida['midia']:
         try:
             cache_put(db, owner, "web", cache_pedido, saida, ttl)
         except json_store.JSONLimitError:
@@ -1369,12 +1412,13 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
                          timeout_pagina: float = 6.0, orcamento: dict = None) -> dict:
     """N subconsultas determinísticas + merge/dedupe + run persistido. Interrompível."""
     salvos = cache_get(db, owner, "web-deep", consulta)
-    if salvos is not None:
+    if salvos is not None and salvos.get('retrieval_version') == '5.9.9':
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
     subs = dividir_subconsultas(consulta)
     todas, vistas, etapas = [], set(), [f"{len(subs)} subperguntas"]
+    midia = {}
     estados, lacunas, descartes, consultas = [], [], [], []
     prov_usados: dict = {}
     prov_falhas, prov_vazios = [], []
@@ -1393,6 +1437,8 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
             etapas.append(f"sub-busca falhou ({type(exc).__name__})")
             continue
         etapas.extend(parcial.get("etapas", []))
+        for item in parcial.get('midia') or []:
+            if len(midia) < 12: midia[item['id']] = item
         estados.append(parcial.get("estado", ""))
         lacunas.extend(parcial.get("lacunas", []) or [])
         descartes.extend(parcial.get("descartes", []) or [])
@@ -1419,6 +1465,7 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
     lacunas_unicas = list(dict.fromkeys(lacunas))[:8]
     consultas_unicas = list(dict.fromkeys(consultas))[:12]
     saida = {"fontes": _numerar(todas)[:12],
+             'midia': list(midia.values()), 'retrieval_version':'5.9.9',
              "etapas": etapas + [f"{len(todas)} fontes únicas, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(todas),
              "subs": subs, "de_cache": False,

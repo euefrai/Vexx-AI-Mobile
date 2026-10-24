@@ -16,6 +16,13 @@ PASSWORD='qa-password-long-5981'
 
 
 def main():
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--research-live',action='store_true',help='Real free configured inference and public research; isolated accounts/database')
+    parser.add_argument('--evidence-dir',type=Path)
+    args=parser.parse_args()
+    global QA
+    if args.evidence_dir: QA=args.evidence_dir.resolve()
     QA.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='v5981-admin-qa-') as folder:
         temp=Path(folder)
@@ -38,12 +45,15 @@ def main():
         runner.write_text('''import sys,os
 sys.path.insert(0,os.environ['VEXX_QA_ROOT'])
 import pc_agent,agent_runtime
-pc_agent.hermes_bridge.listar_modelos=lambda *a,**kw:[]
-pc_agent.providers.listar_tudo=lambda *a,**kw: {'models':[],'items':[],'default':'qa:free','providers':[]}
+if os.environ.get('VEXX_QA_LIVE')!='1':
+    pc_agent.hermes_bridge.listar_modelos=lambda *a,**kw:[]
+    pc_agent.providers.listar_tudo=lambda *a,**kw: {'models':[],'items':[],'default':'qa:free','providers':[]}
+elif not pc_agent.ai_config()['model'].endswith(':free'):
+    raise RuntimeError('QA live requires an explicitly free configured model')
 pc_agent.VEXX_BACKEND_REVISION='QA development checkout'
 agent_runtime.launch(pc_agent)
-''')
-        env=dict(os.environ,VEXX_QA_ROOT=str(ROOT))
+''',encoding='utf-8')
+        env=dict(os.environ,VEXX_QA_ROOT=str(ROOT),VEXX_QA_LIVE='1' if args.research_live else '0')
         log=(temp/'backend.log').open('wb')
         child=None
         stopfile=QA/'qa-stop'

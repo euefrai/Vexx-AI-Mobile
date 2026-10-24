@@ -65,6 +65,11 @@ def assess(request, source) -> SourceContract:
         region = {'BA': 'Bahia', 'PE': 'Pernambuco', 'SP': 'São Paulo'}.get(str(p.get('region','')).upper(), p.get('region'))
         if region and not (contains(region,body) or contains(p['region'],body)): reasons.append('SOURCE_MISMATCH')
     if domain=='news':
+        if p.get('topic'):
+            import search_orchestrator
+            terms=search_orchestrator._termos(p['topic'])
+            if terms and not any(contains(term,body) for term in terms):
+                reasons.append('TOPIC_MISMATCH')
         if source.get('tipo')=='enciclopedia' or re.search(r'\b(turismo|pontos turisticos|wikipedia)\b',qi.normalized(source.get('titulo',''))):
             reasons.append('INTENT_MISMATCH')
         published=source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em')

@@ -2716,14 +2716,33 @@
             dialog.className = 'jdui-image-dialog';
             dialog.addEventListener('keydown', event => {
               if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); dialog.close(); }
+              if (images.length>1 && ['ArrowLeft','ArrowRight'].includes(event.key)) {
+                event.preventDefault(); show(active+(event.key==='ArrowRight'?1:-1));
+              }
             });
             dialog.setAttribute('aria-label', item.title || 'Visualização da imagem');
             const close = el('button', 'jdui-btn ghost', 'Fechar imagem'); close.type = 'button';
             close.addEventListener('click', () => dialog.close());
-            const full = document.createElement('img'); full.src = item.url;
-            full.alt = item.alt || item.title; full.referrerPolicy = 'no-referrer';
-            full.addEventListener('error', () => { full.replaceWith(el('p', '', 'Imagem indisponível. Consulte a fonte original.')); });
-            dialog.appendChild(close); dialog.appendChild(full);
+            const images=props.items.filter(v=>v.type==='image');let active=images.indexOf(item);
+            const full = document.createElement('img');full.referrerPolicy = 'no-referrer';
+            const caption=el('p','jdui-image-caption');caption.setAttribute('aria-live','polite');
+            const unavailable=el('p','','Imagem indisponível. Consulte a fonte original.');unavailable.hidden=true;
+            const origin=el('a','jdui-btn ghost','Página de origem ↗');origin.target='_blank';origin.rel='noopener noreferrer';
+            function show(index){
+              active=(index+images.length)%images.length;const current=images[active];
+              unavailable.hidden=true;full.hidden=false;full.src=current.url;full.alt=current.alt||current.title;
+              caption.textContent=(active+1)+' / '+images.length+' · '+current.title;
+              origin.href=current.source_url||current.url;
+            }
+            full.addEventListener('error',()=>{full.hidden=true;unavailable.hidden=false;});
+            const controls=el('div','jdui-image-controls');controls.appendChild(close);
+            if(images.length>1){
+              [['Imagem anterior',-1],['Próxima imagem',1]].forEach(([label,step])=>{
+                const button=el('button','jdui-btn ghost',label);button.type='button';
+                button.addEventListener('click',()=>show(active+step));controls.appendChild(button);
+              });
+            }
+            show(active);dialog.append(controls,full,unavailable,caption,origin);
             dialog.addEventListener('close', () => { dialog.remove(); zoom.focus(); }, { once: true });
             document.body.appendChild(dialog); dialog.showModal();
           });

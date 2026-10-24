@@ -201,13 +201,39 @@ def source_card(item: dict, used=False) -> dict:
             'texto_url':item.get('full_text_url') if full else '', 'detalhes':details[:6]}
 
 
+def media_fence(items: list) -> str:
+    """Deterministic media from retrieval, independent of model prose."""
+    import json
+    props = _media({'midia':items})
+    if not props['items']: return ''
+    message={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'media','props':props}]}
+    ok,normalized,_=jdui.validar_mensagem(message)
+    return '\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```' if ok else ''
+
+
 def contextual_fence(sources: list) -> str:
     import json
-    selected=[s for s in sources if s.get('metadata_source')=='academic_provider' or (s.get('vertical') or {}).get('kind') in ('news','events','air_travel','bus_travel')]
+    selected=[s for s in sources if s.get('relevante') is not False and (s.get('metadata_source')=='academic_provider' or s.get('status') in ('aberta','encontrada') or (s.get('vertical') or {}).get('kind') in ('news','events','air_travel','bus_travel'))]
     if not selected: return ''
     message={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'sources','props':{'title':'Fontes e dados recuperados','items':[source_card(s) for s in selected[:6]]}}]}
     ok,normalized,_=jdui.validar_mensagem(message)
     return '\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```' if ok else ''
+
+
+def strip_model_research_cards(text: str) -> str:
+    """Retrieval owns media/source cards; model URLs are not recovered records."""
+    import json
+    def replace(match):
+        try:
+            message=json.loads(match[1])
+            blocks=message.get('blocks')
+            if not isinstance(blocks,list):return match[0]
+            kept=[b for b in blocks if not isinstance(b,dict) or b.get('component') not in ('media','sources')]
+            if len(kept)==len(blocks):return match[0]
+            if not kept:return ''
+            return '```jdui\n'+json.dumps({**message,'blocks':kept},ensure_ascii=False)+'\n```'
+        except (ValueError,TypeError,AttributeError):return match[0]
+    return re.sub(r'```jdui\s*\n([\s\S]*?)```',replace,text,flags=re.I)
 
 
 def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -> dict:

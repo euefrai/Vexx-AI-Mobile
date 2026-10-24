@@ -6,6 +6,27 @@ import shopping
 ASK_PRODUCT = 'Qual modelo você quer usar como referência?'
 
 
+def news_request(db,owner,conv,text,message_id=None):
+    """Only an explicit day continuation of the preceding request in this chat."""
+    import query_intelligence as qi
+    day=re.fullmatch(r'(?:e\s+)?(?:(?:as|os|a|o)\s+)?(?:de\s+)?(hoje|ontem|anteontem)',qi.normalized(text).strip(' .?!'))
+    if not day or not message_id: return None
+    rows=db.execute("SELECT text FROM messages WHERE owner_id=? AND conversation_id=? AND role='user' "
+        "AND origin='mobile' AND rowid < COALESCE((SELECT rowid FROM messages WHERE owner_id=? AND conversation_id=? AND id=?),0) "
+        "ORDER BY rowid DESC LIMIT 8",(owner,conv,owner,conv,message_id)).fetchall()
+    previous=None
+    for row in reversed(rows):
+        parsed=qi.analyze(row[0])
+        if parsed['domain']=='news' and parsed['parameters'].get('location'):previous=parsed
+        elif not re.fullmatch(r'(?:e\s+)?(?:(?:as|os|a|o)\s+)?(?:de\s+)?(?:hoje|ontem|anteontem)',qi.normalized(row[0]).strip(' .?!')):previous=None
+    if not previous:return None
+    p=previous['parameters']
+    resolved='Notícias em '+p['location']
+    if p.get('region'):resolved+=', '+p['region']
+    if p.get('topic'):resolved+=' sobre '+p['topic']
+    return resolved+' '+day[1]
+
+
 def last_answer(db, owner, conv):
     row=db.execute("SELECT text FROM messages WHERE owner_id=? AND conversation_id=? AND role='assistant' ORDER BY created_at DESC,id DESC LIMIT 1",(owner,conv)).fetchone()
     return row[0] if row else ''

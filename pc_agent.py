@@ -1419,7 +1419,8 @@ def listar_conversas(db, limite: int = 100, owner=DONO_PADRAO) -> list:
 TERMOS_PESQUISA = ("pesquise", "pesquisar", "busque", "buscar", "google",
                    "últimas notícias", "ultimas noticias", "notícia", "noticia",
                    "fontes", "referências", "referencias", "atualizado", "hoje",
-                   "preço", "preco", "clima", "placar", "resultado")
+                   "preço", "preco", "clima", "placar", "resultado", "encontre", "procure",
+                   "documentação oficial", "documentacao oficial")
 
 
 def intencao_pesquisa(texto: str) -> bool:
@@ -1978,11 +1979,10 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     if termo_img:
         partes_sistema.append(
             f"O usuário pediu/mencionou uma imagem ('{termo_img[:80]}'). Você NÃO tem "
-            "busca de imagens: NÃO invente URL de imagem, NÃO use serviço de placeholder "
-            "(loremflickr etc.) e NÃO prometa mostrar fotos. Se ele pediu para ver uma "
-            "imagem, diga em 1 linha que não consegue exibir imagens avulsas e siga "
-            "ajudando por texto; produtos aparecem com imagens reais verificadas nos "
-            "cards da pesquisa de produtos.")
+            "permissão para inventar URL de imagem nem usar placeholders. A galeria "
+            "é anexada pelo sistema somente quando a pesquisa recupera mídia elegível. "
+            "Não afirme que não existe busca de imagens; se não houver mídia recuperada, "
+            "explique essa limitação sem prometer fotos. Metadados não são análise visual.")
     # V5.1: Intent Engine — estrutura validada guia roteamento, formato
     # e validação. `ultimos_resultados` resolve follow-ups ("os dois primeiros").
     try:
@@ -2044,6 +2044,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
             consulta = f"{consulta} {termos_mem}"[:200]
             extras["memoria_usada"] = True
         extras["fontes"] = []
+        extras['pesquisa_executada'] = True
         tbaixo = (texto_usuario or "").lower()
         run_reuso = None
         if _JOB_START_RE.search(texto_usuario or "") or "inicie uma pesquisa sobre" in tbaixo:
@@ -2069,6 +2070,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     partes_sistema.append(research.bloco_falha(hoje, "sem_correspondencia"))
             elif not extras.get("research_cmd") and intencao_pesquisa_aprofundada(texto_usuario):
                 run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
+                extras['midia'] = run.get('midia') or [] if re.search(r'\b(imagens?|fotos?|v[ií]deos?|pdf|documentos?)\b',texto_usuario,re.I) else []
                 fontes = research.fontes_relevantes(
                     consulta, run.get("fontes", []), run)
                 extras["fontes"] = fontes
@@ -2085,6 +2087,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     partes_sistema.append(research.bloco_falha(hoje, estado))
             elif not extras.get("research_cmd"):
                 rap = research.pesquisa_rapida(db, owner, consulta)
+                extras['midia'] = rap.get('midia') or [] if re.search(r'\b(imagens?|fotos?|v[ií]deos?|pdf|documentos?)\b',texto_usuario,re.I) else []
                 fontes = research.fontes_relevantes(
                     consulta, rap.get("fontes", []), rap)
                 extras["fontes"] = fontes
@@ -2145,8 +2148,18 @@ def _ja_tem_fontes_markdown(texto: str) -> bool:
     return False
 
 
-def anexar_fontes(texto: str, fontes: list, termo_img: str = "") -> str:
+def anexar_fontes(texto: str, fontes: list, termo_img: str = "", midia: list = None, pesquisa_executada=False, consulta='') -> str:
     texto = texto or ""
+    if pesquisa_executada:
+        import research_view
+        texto=research_view.strip_model_research_cards(texto)
+        if re.search(r'<tool_call\b',texto,re.I):
+            texto='A redação do modelo não pôde ser utilizada; preservei os resultados recuperados.\n\n'+research.resumo_deterministico(fontes,consulta or termo_img or 'fontes recuperadas').replace('Sem inferência no momento; ','')
+    if midia:
+        import research_view
+        fence = research_view.media_fence(midia)
+        if fence and not re.search(r'"component"\s*:\s*"media"', texto):
+            texto = imagens_primeiro(fence, texto)
     # V5.7 F4: placeholder nunca entra no texto final (imagem fake + instável).
     if "loremflickr.com" in texto.lower():
         texto = _RX_IMG_PLACEHOLDER.sub("", texto).strip()
@@ -3310,10 +3323,18 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
         return "Já há outra pesquisa em andamento; conclua ou cancele antes. 🔍"
     m = _JOB_START_RE.search(texto or "")
     visual = bool(re.search(r'\b(pesquis\w*|mostr\w*|encontr\w*)\b', t)
-                  and re.search(r'\b(imagens|fotos)\b', t)
+                  and re.search(r'\b(imagens|fotos|v[ií]deos)\b', t)
                   and not re.search(r'\b(gerar|criar|desenhar|analise|analisar)\b', t))
     official_docs = bool(re.search(r'\bpesquis\w*\b', t)
                          and re.search(r'\bdocumenta[cç][aã]o\s+oficial\b', t))
+    if visual and not m and 'pesquisa profunda' not in t:
+        result=research.pesquisa_rapida(db,owner,texto)
+        import research_view
+        media=result.get('midia') or []
+        fence=research_view.media_fence(media)
+        if fence:
+            return imagens_primeiro(fence,f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
+        return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:200]
         req = {"objetivo": objetivo, "conv": conv or "",
@@ -3596,8 +3617,17 @@ def cmd_dados_atuais(db, texto, owner, conv, contexto, message_id=None):
     if produto:
         return produto
     req = live_data.request(texto)
+    news_followup=conversation_followups.news_request(db,dono_valido(owner),conv,texto,message_id)
+    if news_followup:
+        texto=news_followup
+        req=live_data.request(texto)
     if not req:
         return None
+    if req['kind']=='news':
+        result=research.pesquisa_rapida(db,dono_valido(owner),texto)
+        sources=research.fontes_relevantes(texto,result.get('fontes') or [],result)
+        summary=research.resumo_deterministico(sources,texto)
+        return anexar_fontes(summary,sources)
     if req['kind']=='clock' and not live_data.place_from(texto):
         # Device timezone is useful; a stale/manipulated device clock is not.
         contexto=dict(contexto)
@@ -3741,6 +3771,7 @@ class _GuardaStreamResposta:
         "vexx", "vexxia", "vex", "meu nome", "eu sou", "pode me chamar",
         "mais", "menos", "maior", "menor", "melhor", "pior", "superior",
         "inferior", "rápido", "rapido", "lento", "eficiente", "caro", "barato",
+        "<tool_call",
     )
     _RX_FIM_FRASE = re.compile(r"(?<=[.!?])(?:\s+|$)")
 
@@ -3767,6 +3798,7 @@ class _GuardaStreamResposta:
         return 0
 
     def _seguro(self, texto: str) -> str:
+        if re.search(r'<tool_call\b',texto,re.I):return ''
         seguro = limitar_afirmacoes_nao_suportadas(texto)
         if evgraph.detectar_comparacao(seguro):
             seguro, _ = _validar_comparacoes(
@@ -3918,7 +3950,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
         return {"error": str(exc), "codigo": exc.codigo}
     modelo = res.get("model_usado", modelo)
     texto = _texto_seguro(res["texto"], mid)
-    texto = anexar_fontes(texto, extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+    texto = anexar_fontes(texto, extras["fontes"], intencao_imagem(prep.get("user_text", "")), extras.get('midia'), extras.get('pesquisa_executada',False), consulta=prep.get('user_text',''))
     if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto or ""):
         texto = (texto or "") + "\n\n" + prep["pergunta_memoria"]
     # V5.7: cards reais (ou nota honesta) + banimento de fence de produto do modelo.
@@ -4293,7 +4325,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 pass
             return
         resposta_modelo = _texto_seguro(res["texto"], mid)
-        texto_final = anexar_fontes(resposta_modelo, extras["fontes"], intencao_imagem(prep.get("user_text", "")))
+        texto_final = anexar_fontes(resposta_modelo, extras["fontes"], intencao_imagem(prep.get("user_text", "")), extras.get('midia'), extras.get('pesquisa_executada',False), consulta=prep.get('user_text',''))
         if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto_final or ""):
             texto_final = (texto_final or "") + "\n\n" + prep["pergunta_memoria"]
         texto_final = _shopping_aplicar(texto_final, shop_res)

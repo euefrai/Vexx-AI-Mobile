@@ -93,7 +93,19 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         except InvalidOperation:
             raise ValueError('Valor inválido') from None
     if domain in ('news', 'events'):
-        location = re.search(r'\b(?:em|noticias de)\s+(.+?)(?=\s+(?:nos|nas|ultimos|ultimas|proximos|proximas|recentemente)|[,.!?]|$)', t)
+        # Keep explicit calendar windows out of the entity, including follow-ups.
+        if not params.get('start_date'):
+            day = re.search(r'\b(anteontem|ontem|hoje)\b', t)
+            week = re.search(r'\b(?:na|da|a)?\s*ultima semana\b', t)
+            if day:
+                chosen = local.date() - timedelta(days={'hoje':0,'ontem':1,'anteontem':2}[day[1]])
+                params.update(start_date=chosen.isoformat(), end_date=chosen.isoformat())
+            elif week:
+                params.update(start_date=(local.date()-timedelta(days=7)).isoformat(), end_date=local.date().isoformat())
+        boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)|[,.!?]|$)'
+        location = re.search(r'\bem\s+(.+?)'+boundary, t)
+        if not location:
+            location = re.search(r'\bnoticias\s+(?:de|do|da|sobre)\s+(.+?)'+boundary, t)
         if location:
             params['location'] = str(text)[location.start(1):location.end(1)].strip()
             city_state = re.fullmatch(r'(.+?)/([A-Za-z]{2})', params['location'])
@@ -119,6 +131,11 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         # News dates are a verification filter, not literal text that pages must repeat.
         if domain == 'events' and params.get('end_date'):
             search_query += ' ' + params['start_date'] + ' ' + params['end_date']
+        # The place is mandatory, but is not the entire subject of the query.
+        topic = re.search(r'\b(?:sobre|acerca de)\s+(.+?)(?=\s+(?:em|nos|nas|na ultima|hoje|ontem)\s*|[,.!?]|$)', t)
+        if topic and not topic[1].strip().startswith(normalized(params['location'])):
+            params['topic'] = str(text)[topic.start(1):topic.end(1)].strip()
+            search_query += ' ' + params['topic']
     required = {'air_travel': ['origin','destination','departure_date','adults','operator','departure_time','price','currency','inventory','source','observed_at'],
                 'bus_travel': ['origin','destination','departure_date','operator','departure_time','price','currency','inventory','source','observed_at'],
                 'news': ['article_url','article_text','published_at','location','source'],
@@ -127,6 +144,21 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
     missing = [key for key in ('origin','destination','departure_date','adults') if domain in ('air_travel','bus_travel') and not params.get(key)]
     return {'version': 1, 'required_data': required, 'missing_parameters': missing, 'search_query': search_query[:240], 'domain': domain, 'original_request': str(text)[:1000],
             'resolved_request': resolved[:1000], 'parameters': params,
-            'temporal': bool(relative or explicit or re.search(r'\b(agora|atual|recentes?|hoje)\b', t)),
+            'temporal': bool(params.get('start_date') or relative or explicit or re.search(r'\b(agora|atual|recentes?|hoje)\b', t)),
             'resolved_at': now.isoformat(), 'timezone': timezone_name,
-            'requires_live_data': domain in ('air_travel', 'bus_travel', 'currency', 'news', 'events')}
+            'requires_live_data': domain in ('air_travel', 'bus_travel', 'currency', 'news', 'events'),
+            'constraints': {'hard': {k:v for k,v in params.items() if k in ('location','region','topic','start_date','end_date','start_at','end_at','origin','destination','departure_date','adults')},
+                            'soft': {}, 'optional': {}}}
+
+
+def constrain_discovery(query, request):
+    """Reformulation may broaden vocabulary, never drop an explicit news place/topic."""
+    if request.get('domain') != 'news': return query
+    params=request.get('parameters') or {}
+    missing=[]
+    for field in ('location','region','topic'):
+        value=str(params.get(field) or '').strip()
+        if value and not re.search(r'(?<!\w)'+re.escape(normalized(value))+r'(?!\w)',normalized(query)):
+            missing.append('"'+value.replace('"','')+'"')
+    suffix=' '.join(missing)
+    return (str(query)[:max(0,240-len(suffix)-1)]+' '+suffix).strip() if suffix else query

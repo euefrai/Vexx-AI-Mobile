@@ -319,6 +319,27 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .model-hint {flex:1 1 100%;min-width:0;overflow-wrap:anywhere;color:var(--text-2);line-height:1.5}
 .provider-notice {font-size:13px;line-height:1.5;color:var(--text-1);overflow-wrap:anywhere}
 .provider-notice:empty {display:none}
+
+/* V599: quiet, content-led research cards; no artificial progress animation. */
+.research-bar {border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:10px 12px;margin:8px 0;font-size:13px}
+.research-bar .tiny-dot {box-shadow:none;background:var(--muted);animation:none}
+.research-panel {border-left:1px solid var(--line);margin:0 10px 12px;padding:4px 14px 12px}
+.jdui-slot .jdui-title {font-size:15px;line-height:1.5;letter-spacing:-.015em;margin-bottom:10px}
+.jdui-slot .jdui-srccard,.jdui-media-grid .jdui-pcard {border:1px solid var(--line);border-radius:16px;background:var(--surface-2);box-shadow:none;overflow:hidden}
+.jdui-slot .jdui-srccard {padding:16px;gap:8px}
+.jdui-media-grid {gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.jdui-media-grid .jdui-pimg {aspect-ratio:16/10;background:var(--surface-3);max-height:260px;object-fit:contain}
+.jdui-media-grid .jdui-pbody {padding:14px;gap:8px}
+.jdui-media-grid .jdui-pnome {font-size:14px;line-height:1.5;letter-spacing:-.01em}
+.jdui-slot .jdui-badge {border:0;background:var(--surface-3);color:var(--text-2);font-size:11px;font-weight:400}
+.jdui-slot .jdui-btn {min-height:40px;border-radius:10px;transition:background-color .15s,transform .15s}
+.jdui-slot .jdui-btn:active {transform:translateY(1px)}
+.jdui-slot .jdui-btn:focus-visible,.jdui-image-dialog button:focus-visible,.jdui-image-dialog a:focus-visible {outline:2px solid var(--text);outline-offset:3px}
+.jdui-image-dialog {background:var(--surface-2);padding:16px;max-width:min(96vw,1100px)}
+.jdui-image-controls {display:flex;gap:8px;flex-wrap:wrap}
+.jdui-image-caption {font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+@media(max-width:480px){.jdui-slot .jdui-srccard{padding:13px}.jdui-slot .jdui-btn,.jdui-image-controls button{min-height:44px}.jdui-media-grid{grid-template-columns:1fr}.jdui-media-grid .jdui-pbody{padding:12px}}
+@media(prefers-reduced-motion:reduce){.jdui-slot .jdui-btn{transition:none}.jdui-slot .jdui-btn:active{transform:none}}
 .provider-top {flex-wrap:wrap}
 .provider-form {margin:0}
 @media(max-width:420px) {.provider-form {flex-wrap:wrap}.provider-form input {flex-basis:100%}.provider-form button {min-height:40px}.provider-top {gap:5px}}

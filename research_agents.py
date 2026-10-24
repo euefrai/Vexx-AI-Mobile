@@ -775,6 +775,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     parar = deve_parar or (lambda: False)
     etapas_por_consulta = job["usados"].setdefault("consultas_etapas", {})
     for q in consultas[:2]:
+        import query_intelligence
+        q=query_intelligence.constrain_discovery(q,(job.get('ajustes') or {}).get('request') or query_intelligence.analyze(job['objetivo']))
         useful = any(orch._util_para_pedido(a, orch._termos_correspondencia(base), base) for a in achados)
         if useful or job["usados"].get("buscas", 0) + buscas_realizadas >= job["orcamento"].get("buscas", 0):
             break

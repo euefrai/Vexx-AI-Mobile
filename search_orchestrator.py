@@ -143,6 +143,7 @@ _GENERICOS_CORRESPONDENCIA = {
 
 
 _GENERICOS_CORRESPONDENCIA.update({
+    "usar", "utilizar", "utilize", "utilizando", "explique-me",
     "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
     "tecnica", "técnica", "analise", "análise", "usando", "sobre", "pesquise",
     "documentacao", "documentação", "oficial", "oficiais", "recentes", "recente",
@@ -209,7 +210,7 @@ def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
     text = qi.normalized(" ".join(str(a.get(k) or "") for k in ("titulo", "trecho")))
     if request.get("domain") in ("air_travel", "bus_travel", "news", "events"):
         import search_verticals
-        if params.get('location') or (params.get('origin') and params.get('destination')):
+        if request.get('domain') == 'news' or params.get('location') or (params.get('origin') and params.get('destination')):
             return search_verticals.assess(request, a)['eligible']
     if _context_mismatch(a, consulta):
         return False
@@ -407,6 +408,8 @@ def consulta_conteudo(consulta: str) -> str:
     t = re.sub(r"\s+", " ", (consulta or "").strip()).rstrip("?!.:;")
     if not t:
         return ""
+    baixo = _sem_acentos(t).lower()
+    t = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure|mostre|liste)\s+', '', t, flags=re.I)
     baixo = _sem_acentos(t).lower()
     for prefixo in _SCAFFOLD_PERGUNTA:
         pa = _sem_acentos(prefixo).lower()
@@ -775,7 +778,7 @@ def fontes_preferenciais(consulta: str) -> list:
     t = _sem_acentos(consulta)
     docs = bool(re.search(r"documenta[cç][aã]o|documentation|fontes? (?:oficiais|tecnicas)", t))
     entries = []
-    if docs and _tem_termo("python", t) and _tem_termo("asyncio", t):
+    if docs and _tem_termo("asyncio", t):
         specific = bool(re.search(r'\b(taskgroup|cancelamento|cancellation|create_task|gather)\b', t))
         entries.append(("Python asyncio TaskGroup tasks documentation" if specific else "Python asyncio documentation",
                         "https://docs.python.org/3/library/asyncio-task.html" if specific else "https://docs.python.org/3/library/asyncio.html"))
@@ -900,6 +903,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         if q not in consultas:
             consultas.append(q)
     consultas = consultas[: max(1, int(orc["max_consultas"]))]
+    consultas = list(dict.fromkeys(query_intelligence.constrain_discovery(q, request_info) for q in consultas))
     nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
     nomes = nomes[: max(1, int(orc["max_provedores"]))]
 
@@ -920,6 +924,11 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         tentativas.append({"provedor": nome, "consulta": q})
         return True
     usados = {}
+    def remember(items, name, query):
+        for item in items:
+            item.setdefault('discovery_query', query[:240])
+            item.setdefault('discovery_provider', name)
+        achados.extend(items)
     consultas_feitas = 0
     provedor_indice = 0
     termos_c = _termos_correspondencia(consulta)
@@ -953,7 +962,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         usados[nome] = usados.get(nome, 0) + 1
         etapas.append(f"{nome} (consulta reformulada '{alt[:40]}'): "
                       f"{len(novos)} resultados")
-        achados.extend(novos)
+        remember(novos, nome, q_prov)
         return bool(novos) and any(_util_para_pedido(a, termos_c, consulta) for a in novos)
 
     for i, q in enumerate(consultas):
@@ -991,7 +1000,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 usados[nome] = usados.get(nome, 0) + 1
                 etapas.append(f"{nome}: {len(achados_novos)} resultados "
                               f"({q[:40]})")
-                achados.extend(achados_novos)
+                remember(achados_novos, nome, consulta_prov)
                 if achados_novos and all(a.get('content_scope') == 'feed_metadata' for a in achados_novos):
                     etapas.append(f'{nome}: RSS apenas para descoberta; procurando artigos originais')
                     provedor_indice += 1
@@ -1047,7 +1056,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     # slots on a specific headline at its declared publisher, never an opaque
     # aggregator decoding endpoint or a bypass. All ordinary budgets still apply.
     if request_info['domain'] == 'news' and _uteis() < int(orc['min_resultados']):
-        feeds = [a for a in achados if a.get('content_scope') == 'feed_metadata'][:2]
+        # Incomplete feed metadata is not proof that the original is irrelevant.
+        feeds = sorted([a for a in achados if a.get('content_scope') == 'feed_metadata'],
+                       key=lambda a:not _util_para_pedido(a,termos_c,consulta))[:2]
         for feed in feeds:
             publisher = urllib.parse.urlsplit(feed.get('publisher_url') or '').hostname or ''
             title = str(feed.get('titulo') or '').strip()
@@ -1077,7 +1088,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                             'feed_url':feed.get('url',''), 'publisher_url':feed.get('publisher_url',''),
                             'feed_title':feed.get('titulo',''), 'state':'original_candidate'}
                         recovered.append(candidate)
-                achados.extend(recovered)
+                remember(recovered, name, q_original)
                 etapas.append(f'{name}: recuperação de manchete no publicador; {len(recovered)} candidato(s), leitura pendente')
                 break
             if not any(a.get('source_recovery',{}).get('publisher_url')==feed.get('publisher_url') for a in achados):
@@ -1088,7 +1099,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                     return sp._baixar(url,min(timeout,remaining),aceitar=kind)
                 try:
                     originals=sp.recuperar_feed_publicador(feed,fetch_publisher)
-                    achados.extend(originals)
+                    remember(originals, 'publisher-feed', q_original)
                     etapas.append(f'RSS do publicador: {len(originals)} artigo(s) candidato(s), leitura pendente')
                 except (sp.ErroProvedor, ValueError) as exc:
                     etapas.append('Recuperação no publicador limitada: '+str(getattr(exc,'codigo',type(exc).__name__)))
@@ -1123,9 +1134,11 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         enxuta = " ".join(termos_c)[:200]
         if enxuta.lower() != (consulta or "").strip().lower() and enxuta not in recuperacao:
             recuperacao.insert(0, enxuta)
+    from research import candidate_report
     return {
         "tentativas_busca": tentativas,
         "achados": ranqueados[:max(6, max_resultados * 2)],
+        "candidate_reservoir": candidate_report(achados, ranqueados, consulta),
         "etapas": etapas,
         "estado": estado,
         "estado_texto": CODIGO_TEXTO.get(estado, ""),

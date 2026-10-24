@@ -167,13 +167,15 @@ def test_cancelled_job_never_requests_more_searches():
     assert gaps.decision(j,records)['reason']=='interrupted_or_cancelled'
 
 
-def test_real_image_search_uses_existing_research_job_not_generated_claims(research_job,monkeypatch):
+def test_real_image_search_uses_shared_retrieval_not_generated_claims(research_job,monkeypatch):
     import pc_agent
     db,j=research_job;captured=[]
-    monkeypatch.setattr(pc_agent,'rjob_start',lambda db,req,owner:captured.append(req) or
-                        {'type':'research_job','job_id':'rj-controlled'})
+    monkeypatch.setattr(pc_agent.research,'pesquisa_rapida',lambda db,owner,query:captured.append((owner,query)) or
+                        {'midia':[{'type':'image','title':'Ponte Estaiada','url':'https://upload.wikimedia.org/ponte.jpg',
+                                   'source_url':'https://commons.wikimedia.org/wiki/File:Ponte.jpg'}]})
     result=pc_agent.cmd_pesquisa(db,'Pesquise e mostre imagens reais da Ponte Estaiada de São Paulo.',j['owner'],'qa')
-    assert captured[0]['modo']=='rapida' and 'Pesquisa de imagens' in result
+    assert captured[0][0]==j['owner'] and 'Ponte Estaiada' in captured[0][1]
+    assert '"component": "media"' in result and 'não foram analisados' in result
     assert 'verificadas' not in result
     assert pc_agent.cmd_pesquisa(db,'Crie imagens de um gato.',j['owner'],'qa')==''
 
