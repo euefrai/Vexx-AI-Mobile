@@ -25,8 +25,11 @@ def run(pid):
     assert any(str(private/'agent_runtime.py')==a for a in args)
     script=next(Path(a).resolve() for a in args if a.lower().endswith('pc_agent.py'))
     revision=subprocess.check_output(['git','-C',str(script.parent),'rev-parse','HEAD'],text=True).strip()
-    assert revision==PUBLISHED
-    assert not subprocess.check_output(['git','-C',str(script.parent),'diff','--name-only','HEAD','--','*.py'],text=True).strip()
+    # A descendant containing only documentation/QA cannot change the loaded backend.
+    subprocess.run(['git','-C',str(script.parent),'merge-base','--is-ancestor',PUBLISHED,revision],check=True)
+    changed=subprocess.check_output(['git','-C',str(script.parent),'diff','--name-only',PUBLISHED,revision],text=True).splitlines()
+    assert all(p.endswith('.md') or p.startswith(('docs/','qa-artifacts/','.playwright-cli/')) for p in changed), 'Published executable source changed'
+    assert not subprocess.check_output(['git','-C',str(script.parent),'status','--porcelain','--untracked-files=no'],text=True).strip()
     database=Path(env['JULIA_SQLITE_PATH']).resolve()
     assert database==(Path.home()/'.julia-mobile/memory.sqlite3').resolve()
     db=sqlite3.connect(database.as_uri()+'?mode=ro',uri=True,timeout=5)
@@ -53,7 +56,7 @@ def run(pid):
                   stdout=log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW);log.close()
     receipt={'old_pid':pid,'old_created':created,'new_pid':child.pid,'backend_commit':revision,
              'old_stop':'authenticated IPC; no terminate/kill','old_terminal':terminal['state'],
-             'wrapper_sha256':hashlib.sha256(staged.read_bytes()).hexdigest(),'backup':str(backup),
+             'source_equivalent_to':PUBLISHED,'wrapper_sha256':hashlib.sha256(staged.read_bytes()).hexdigest(),'backup':str(backup),
              'active_operations_before':initial['active_operations'],'rollback':False}
     deadline=time.monotonic()+45
     while time.monotonic()<deadline and child.poll() is None:
