@@ -235,3 +235,12 @@ def test_late_sse_checkpoint_cannot_overwrite_a_terminal_result_and_retry_still_
     pc_agent.ai_marcar(db,'qa-id','qa-chat','qa-model','processing',response_text='New attempt')
     assert pc_agent.ai_estado(db,'qa-id')['response_text']=='New attempt'
     db.close()
+
+
+@pytest.mark.parametrize('url',['http://127.0.0.1/image.png','http://169.254.169.254/image.png',
+    'http://[::1]/image.png','http://localhost./image.png','http://router.internal/image.png',
+    'http://2130706433/image.png','http://0x7f000001/image.png'])
+def test_public_page_metadata_cannot_point_media_at_local_services(url):
+    import media_evidence
+    assert media_evidence._safe_url(url)==''
+    assert media_evidence._safe_url('https://upload.wikimedia.org/public.jpg')

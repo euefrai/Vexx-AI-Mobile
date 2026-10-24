@@ -46,6 +46,16 @@ def _safe_url(raw, base: str = "") -> str:
             return ""
         if not parts.hostname or parts.username or parts.password:
             return ""
+        host=parts.hostname.rstrip('.').lower()
+        if host=='localhost' or host.endswith(('.localhost','.local','.internal')):
+            return ''
+        import ipaddress
+        try:
+            if not ipaddress.ip_address(host).is_global:return ''
+        except ValueError:
+            if re.fullmatch(r'(?:0x[0-9a-f]+|\d+)(?:\.(?:0x[0-9a-f]+|\d+))*',host):return ''
+        # Reject malformed port declarations without performing DNS or fetching.
+        _=parts.port
     except ValueError:
         return ""
     # Fragments are not sent to servers and can carry misleading anchors.
