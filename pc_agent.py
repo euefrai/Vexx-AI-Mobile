@@ -5441,4 +5441,5 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    import agent_runtime
+    agent_runtime.launch(__import__("sys").modules[__name__])
