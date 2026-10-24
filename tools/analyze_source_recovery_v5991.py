@@ -48,8 +48,8 @@ def analyze_case(row):
 
 
 def summarize(folder):
-    cases=[analyze_case(json.loads(path.read_text(encoding='utf-8')))
-           for path in sorted(folder.glob('eva-*.json'))]
+    rows=[json.loads(path.read_text(encoding='utf-8')) for path in sorted(folder.glob('*.json'))]
+    cases=[analyze_case(row) for row in rows if isinstance(row,dict) and row.get('id')]
     latencies=[case['seconds'] for case in cases if isinstance(case['seconds'],(int,float))]
     return {'scope':'OFFLINE_ANALYSIS_OF_LIVE_EXTERNAL','input_folder':str(folder),
             'cases':cases,'summary':{'cases':len(cases),
