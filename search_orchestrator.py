@@ -491,9 +491,13 @@ def _pagina_de_indice(a: dict) -> bool:
     if RX_INDICE_TITULO.search((a.get("titulo") or "").strip()):
         return True
     try:
-        caminho = urllib.parse.urlsplit(a.get("url") or "").path or "/"
+        target = urllib.parse.urlsplit(a.get("url_final") or a.get("url") or "")
+        caminho = target.path or "/"
     except ValueError:
         return False
+    # Aggregator pages/wrappers are discovery, never the publisher's article.
+    if (target.hostname or '').lower().rstrip('.') == 'news.google.com':
+        return True
     return bool(RX_INDICE_CAMINHO.search(caminho) or
                 re.fullmatch(r'/(noticias|news|ultimas-noticias)/?', caminho, re.I))
 

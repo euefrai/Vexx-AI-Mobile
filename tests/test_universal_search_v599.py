@@ -200,6 +200,93 @@ def test_news_without_city_still_requires_topic_not_a_generic_dictionary():
     assert orch._util_para_pedido(relevant,terms,query)
 
 
+@pytest.mark.parametrize('query,topic',[
+    ('Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.', 'inteligência artificial'),
+    ('Pesquise novidades sobre energia solar compare os acontecimentos', 'energia solar'),
+    ('Pesquise acontecimentos acerca de ciência e tecnologia e resuma os pontos principais.', 'ciência e tecnologia'),
+    ('Pesquise acontecimentos sobre energia solar nos Estados Unidos', 'energia solar nos Estados Unidos'),
+])
+def test_topical_news_query_separates_generic_instructions_without_inventing_dates(query,topic):
+    parsed=qi.analyze(query,now=NOW)
+    assert parsed['parameters']['topic']==topic
+    assert parsed['constraints']['hard']['topic']==topic
+    assert parsed['original_request']==query
+    assert parsed['search_query']=='notícias '+topic
+    assert not parsed['parameters'].get('start_date')
+    assert topic in qi.constrain_discovery('últimas manchetes',parsed)
+
+
+@pytest.mark.parametrize('query',[
+    'Pesquise acontecimentos sobre energia solar e compare a China com o Brasil',
+    'Pesquise notícias em Recife hoje, mas não inclua esportes',
+    'Pesquise notícias sobre energia solar exceto instalações residenciais',
+    'Pesquise notícias de notebooks até R$ 3.000',
+])
+def test_query_compaction_preserves_named_comparisons_exclusions_and_prices(query):
+    parsed=qi.analyze(query,now=NOW)
+    if 'compare a China' in query:
+        assert 'compare a China com o Brasil' in parsed['search_query']
+    else:
+        assert parsed['search_query']==parsed['resolved_request']
+
+
+def test_compact_news_query_preserves_place_topic_and_calendar():
+    parsed=qi.analyze('Notícias sobre acidentes em Recife hoje e compare os acontecimentos mais relevantes.',now=NOW)
+    assert parsed['search_query']=='"Recife" notícias acidentes'
+    assert parsed['parameters']['topic']=='acidentes'
+    assert parsed['parameters']['start_date']=='2026-10-24'
+    assert parsed['parameters']['location']=='Recife'
+    wrong={'titulo':'Modelos artificiais de pontes', 'trecho':'Estruturas artificiais para pontes'}
+    topical=qi.analyze('Pesquise novidades sobre energia solar compare os acontecimentos',now=NOW)
+    assert 'TOPIC_MISMATCH' in sv.assess(topical,wrong)['reasons']
+
+
+def test_orchestrator_uses_compact_topic_but_keeps_original_request(monkeypatch):
+    import search_orchestrator as orch
+    calls=[];requests=[]
+    assess=sv.assess
+    def validate(request,source):
+        requests.append(request)
+        return assess(request,source)
+    def search(name,query,**kwargs):
+        calls.append(query)
+        return [{'titulo':'Energia solar: novidades do setor', 'url':'https://example.org/solar',
+                 'trecho':'Novas tecnologias de energia solar', 'origem':name, 'tipo':'pagina'}]
+    monkeypatch.setattr(orch.sp,'buscar',search)
+    monkeypatch.setattr(sv,'assess',validate)
+    query='Pesquise novidades sobre energia solar compare os acontecimentos'
+    result=orch.pesquisar(query,provedores=['bing'],orcamento={'max_consultas':1,'min_resultados':1})
+    assert calls==['notícias energia solar']
+    assert result['achados']
+    assert requests and all(r['original_request']==query for r in requests)
+    assert all(r['constraints']['hard']['topic']=='energia solar' for r in requests)
+
+
+@pytest.mark.parametrize('target',[
+    'https://news.google.com/home?hl=pt-BR',
+    'https://news.google.com/rss/articles/opaque?oc=5',
+    'https://publisher.example/search?q=solar',
+])
+def test_aggregator_or_redirected_index_is_read_but_not_verified_article(target):
+    found={'titulo':'Energia solar: avanços', 'url':'https://publisher.example/solar', 'tipo':'noticia'}
+    page={'titulo':'Energia solar', 'texto':'Energia solar é um dos temas desta página. '*20,
+          'lida':True,'final':target, 'metadados':{'publicado_em':'2026-10-24'}}
+    source=research._fonte_de(page,found,'Pesquise novidades sobre energia solar compare os acontecimentos')
+    assert source['status']=='aberta' and source['url']==found['url']
+    assert source['url_final']==target
+    assert source['relevante'] is False
+    assert 'INDEX_PAGE' in source['vertical']['reasons']
+    assert not source['vertical']['data_complete']
+
+
+def test_publisher_article_is_not_rejected_for_mentioning_google_news():
+    request=qi.analyze('Pesquise novidades sobre energia solar compare os acontecimentos',now=NOW)
+    source={'titulo':'Energia solar em expansão', 'url':'https://publisher.example/energia-solar',
+            'trecho':'Notícia sobre energia solar, também citada no Google Notícias',
+            'publicado_em':'2026-10-24', 'texto_lido':'Corpo do artigo'}
+    assert sv.assess(request,source)['data_complete']
+
+
 def test_instruction_words_cannot_outrank_a_specific_primary_document():
     import search_orchestrator as orch
     query='Encontre na documentação oficial como usar asyncio.TaskGroup.'

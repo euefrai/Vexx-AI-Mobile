@@ -870,6 +870,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
         import search_orchestrator as orch
         metadata_read = rec.get("metadados") or {}
         evidence = {"titulo": rec.get("titulo") or a.get('titulo') or "", "trecho": texto or a.get('trecho',''),
+                    "url": rec.get("final") or a.get('url') or '',
                     'curated_topic':a.get('curated_topic','') if not lida else '',
                     "tipo":a.get('tipo'),"structured":metadata_read.get('structured',[]),
                     "publicado_em": metadata_read.get("publicado_em") or a.get("publicado_em") or (a.get("meta") or {}).get("publicado_em")}
@@ -889,6 +890,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
         origem_declarada = dom_canonica
     fonte = {"titulo": (rec.get("titulo") or a.get("titulo") or "")[:160],
             "url": (a.get("url") or "")[:500],
+            "url_final": (rec.get("final") or a.get("url") or "")[:500],
             "dominio": _dominio(a.get("url", "")),
             "acessado_em": agora_iso(),
             "trecho": trecho[:600],

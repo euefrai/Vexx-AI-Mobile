@@ -102,7 +102,10 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
                 params.update(start_date=chosen.isoformat(), end_date=chosen.isoformat())
             elif week:
                 params.update(start_date=(local.date()-timedelta(days=7)).isoformat(), end_date=local.date().isoformat())
-        boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)|[,.!?]|$)'
+        # Only remove terminal presentation instructions with generic objects.
+        # Comparisons naming entities, exclusions and budgets remain search text.
+        presentation = r'\s+(?:e\s+)?(?:compare|resuma|destaque)\s+(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)\s*(?=[.!?]|$)'
+        boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)\b|' + presentation + r'|[,.!?]|$)'
         location = re.search(r'\bem\s+(.+?)'+boundary, t)
         if not location:
             location = re.search(r'\bnoticias\s+(?:de|do|da|sobre)\s+(.+?)'+boundary, t)
@@ -118,6 +121,9 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
             params.update(start_date=(local.date()-timedelta(days=7)).isoformat(),end_date=local.date().isoformat(),window_inferred=True)
         if domain == 'events' and not params.get('start_date') and re.search(r'\b(futuros?|proximos?)\b', t):
             params.update(start_date=local.date().isoformat(), end_date=(local.date()+timedelta(days=90)).isoformat(), window_inferred=True)
+        topic = re.search(r'\b(?:sobre|acerca de)\s+(.+?)(?=\s+(?:em|(?:nos|nas)\s+(?:ultimos?|ultimas?|proximos?|proximas?)|na ultima|hoje|ontem|anteontem)\b|' + presentation + r'|[,.!?]|$)', t)
+        if topic and (not params.get('location') or not topic[1].strip().startswith(normalized(params['location']))):
+            params['topic'] = str(text)[topic.start(1):topic.end(1)].strip()
     search_query = resolved
     if domain in ('air_travel', 'bus_travel') and params.get('origin') and params.get('destination'):
         mode = 'voos' if domain == 'air_travel' else 'passagens de ônibus'
@@ -126,16 +132,17 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
             search_query += ' ' + params['departure_date']
         if params.get('adults'):
             search_query += ' ' + str(params['adults']) + ' adulto'
-    if domain in ('news', 'events') and params.get('location'):
-        search_query = '"' + params['location'] + '"' + (' "'+params['region']+'"' if params.get('region') else '') + (' notícias' if domain == 'news' else ' eventos programação')
+    if domain in ('news', 'events') and (params.get('location') or params.get('topic')):
+        search_query = ('"' + params['location'] + '"' if params.get('location') else '') + (' "'+params['region']+'"' if params.get('region') else '') + (' notícias' if domain == 'news' else ' eventos programação')
         # News dates are a verification filter, not literal text that pages must repeat.
         if domain == 'events' and params.get('end_date'):
             search_query += ' ' + params['start_date'] + ' ' + params['end_date']
-        # The place is mandatory, but is not the entire subject of the query.
-        topic = re.search(r'\b(?:sobre|acerca de)\s+(.+?)(?=\s+(?:em|nos|nas|na ultima|hoje|ontem)\s*|[,.!?]|$)', t)
-        if topic and not topic[1].strip().startswith(normalized(params['location'])):
-            params['topic'] = str(text)[topic.start(1):topic.end(1)].strip()
+        if params.get('topic'):
             search_query += ' ' + params['topic']
+        # Do not shorten ambiguous restrictions that this parser does not model.
+        if re.search(r'\b(?:nao|exceto|exclua|sem|ate|abaixo|acima|menos de|mais de)\b|r\$', t):
+            search_query = resolved
+        search_query = search_query.strip()
     required = {'air_travel': ['origin','destination','departure_date','adults','operator','departure_time','price','currency','inventory','source','observed_at'],
                 'bus_travel': ['origin','destination','departure_date','operator','departure_time','price','currency','inventory','source','observed_at'],
                 'news': ['article_url','article_text','published_at','location','source'],
