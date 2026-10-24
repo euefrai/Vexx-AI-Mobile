@@ -1,0 +1,143 @@
+..........................F.........................FFF.                 [100%]
+================================== FAILURES ===================================
+_______ test_admin_frontend_uses_safe_dom_no_model_or_remote_execution ________
+
+    def test_admin_frontend_uses_safe_dom_no_model_or_remote_execution():
+>       source=Path('public/admin.js').read_text(encoding='utf-8')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:266: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py:788: in read_text
+    return f.read()
+           ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <encodings.utf_8.IncrementalDecoder object at 0x00000144CF817FB0>
+input = b"'use strict';\r\n(() => {\r\n  const $ = id => document.getElementById(id);\r\n  const panels = ['overview','agents'...-1;if(next!==undefined){event.preventDefault();select(tabs[next]);tabs[next].focus();}});});\r\n  init();\r\n})();\r\n"
+final = True
+
+>   ???
+E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe3 in position 3452: invalid continuation byte
+
+<frozen codecs>:325: UnicodeDecodeError
+___________ test_real_local_authenticated_channel_and_drain_timeout ___________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-375/test_real_local_authenticated_0')
+
+    def test_real_local_authenticated_channel_and_drain_timeout(tmp_path):
+>       r = ar.Runtime('http://localhost:12345', directory=tmp_path/'runtime').start()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_agent_runtime_v5981.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+agent_runtime.py:118: in start
+    self.listener = Listener(self.address, family=self.family, authkey=None)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:482: in __init__
+    self._listener = PipeListener(address, backlog)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:701: in __init__
+    self._handle_queue = [self._new_handle(first=True)]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <multiprocessing.connection.PipeListener object at 0x00000144E73A3770>
+first = True
+
+    def _new_handle(self, first=False):
+        flags = _winapi.PIPE_ACCESS_DUPLEX | _winapi.FILE_FLAG_OVERLAPPED
+        if first:
+            flags |= _winapi.FILE_FLAG_FIRST_PIPE_INSTANCE
+>       return _winapi.CreateNamedPipe(
+            self._address, flags,
+            _winapi.PIPE_TYPE_MESSAGE | _winapi.PIPE_READMODE_MESSAGE |
+            _winapi.PIPE_WAIT,
+            _winapi.PIPE_UNLIMITED_INSTANCES, BUFSIZE, BUFSIZE,
+            _winapi.NMPWAIT_WAIT_FOREVER, _winapi.NULL
+            )
+E       PermissionError: [WinError 5] Acesso negado
+
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:714: PermissionError
+________________ test_wrong_key_and_stale_process_are_rejected ________________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-375/test_wrong_key_and_stale_proce0')
+
+    def test_wrong_key_and_stale_process_are_rejected(tmp_path):
+>       r = ar.Runtime('http://localhost:23456', directory=tmp_path/'runtime').start()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_agent_runtime_v5981.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+agent_runtime.py:118: in start
+    self.listener = Listener(self.address, family=self.family, authkey=None)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:482: in __init__
+    self._listener = PipeListener(address, backlog)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:701: in __init__
+    self._handle_queue = [self._new_handle(first=True)]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <multiprocessing.connection.PipeListener object at 0x00000144E7473610>
+first = True
+
+    def _new_handle(self, first=False):
+        flags = _winapi.PIPE_ACCESS_DUPLEX | _winapi.FILE_FLAG_OVERLAPPED
+        if first:
+            flags |= _winapi.FILE_FLAG_FIRST_PIPE_INSTANCE
+>       return _winapi.CreateNamedPipe(
+            self._address, flags,
+            _winapi.PIPE_TYPE_MESSAGE | _winapi.PIPE_READMODE_MESSAGE |
+            _winapi.PIPE_WAIT,
+            _winapi.PIPE_UNLIMITED_INSTANCES, BUFSIZE, BUFSIZE,
+            _winapi.NMPWAIT_WAIT_FOREVER, _winapi.NULL
+            )
+E       PermissionError: [WinError 5] Acesso negado
+
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:714: PermissionError
+____________________ test_operation_finishes_without_force ____________________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-375/test_operation_finishes_withou0')
+
+    def test_operation_finishes_without_force(tmp_path):
+>       r = ar.Runtime('http://localhost:34567', directory=tmp_path/'runtime').start()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_agent_runtime_v5981.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+agent_runtime.py:118: in start
+    self.listener = Listener(self.address, family=self.family, authkey=None)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:482: in __init__
+    self._listener = PipeListener(address, backlog)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:701: in __init__
+    self._handle_queue = [self._new_handle(first=True)]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <multiprocessing.connection.PipeListener object at 0x00000144E7472D50>
+first = True
+
+    def _new_handle(self, first=False):
+        flags = _winapi.PIPE_ACCESS_DUPLEX | _winapi.FILE_FLAG_OVERLAPPED
+        if first:
+            flags |= _winapi.FILE_FLAG_FIRST_PIPE_INSTANCE
+>       return _winapi.CreateNamedPipe(
+            self._address, flags,
+            _winapi.PIPE_TYPE_MESSAGE | _winapi.PIPE_READMODE_MESSAGE |
+            _winapi.PIPE_WAIT,
+            _winapi.PIPE_UNLIMITED_INSTANCES, BUFSIZE, BUFSIZE,
+            _winapi.NMPWAIT_WAIT_FOREVER, _winapi.NULL
+            )
+E       PermissionError: [WinError 5] Acesso negado
+
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py:714: PermissionError
+=========================== short test summary info ===========================
+FAILED tests/test_admin_v5981.py::test_admin_frontend_uses_safe_dom_no_model_or_remote_execution
+FAILED tests/test_agent_runtime_v5981.py::test_real_local_authenticated_channel_and_drain_timeout
+FAILED tests/test_agent_runtime_v5981.py::test_wrong_key_and_stale_process_are_rejected
+FAILED tests/test_agent_runtime_v5981.py::test_operation_finishes_without_force
+4 failed, 52 passed in 46.21s

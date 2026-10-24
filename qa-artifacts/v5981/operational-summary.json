@@ -1,0 +1,32 @@
+{
+  "initial_backend": "0814864e0e20bcb94f22a0b4fe861b205c15ed7c",
+  "initial_wrapper_pid": 28520,
+  "final": {
+    "old_pid": 28520,
+    "new_pid": 13712,
+    "backend_commit": "5517c2678dd588cdba3f0f722938f24bf5eb678a",
+    "source_equivalent_to": "0814864e0e20bcb94f22a0b4fe861b205c15ed7c",
+    "old_stop": "authenticated IPC; no terminate/kill",
+    "old_terminal": "STOPPED",
+    "wrapper_sha256": "cb239545cd3de7d8a27ce5b2713bd25ea93d1bbbe4411b42f18d134e53beb5c0",
+    "active_operations_before": 0,
+    "rollback": false,
+    "integrity": "ok",
+    "message_count_preserved": true
+  },
+  "migration": {
+    "promoted": 2,
+    "before": {
+      "admin": 3,
+      "user": 2
+    },
+    "after": {
+      "admin": 5
+    }
+  },
+  "browser_reload": {
+    "messages_visible": 14,
+    "pc_connected": true
+  },
+  "scope": "Operational receipts + authenticated UI observation; no credentials, account IDs or environment exported"
+}

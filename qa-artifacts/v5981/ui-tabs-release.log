@@ -1,0 +1,22 @@
+### Result
+{"tabs":["Visão geral","PC Agents","Usuários","Pesquisas","Modelos e fontes","Auditoria"],"all_nonempty":true,"locked":true}
+### Ran Playwright code
+```js
+await (async page => {
+  await page.getByLabel('Senha',{exact:true}).fill('qa-password-long-5981');
+  await page.getByRole('button',{name:'Autorizar console',exact:true}).click();
+  const tabs=['Visão geral','PC Agents','Usuários','Pesquisas','Modelos e fontes','Auditoria'];
+  const checked=[];
+  for(const name of tabs){
+    const tab=page.getByRole('tab',{name,exact:true});await tab.click();
+    if(await tab.getAttribute('aria-selected')!=='true')throw Error('Inactive tab '+name);
+    const panel=page.locator('#'+await tab.getAttribute('aria-controls'));
+    await panel.waitFor({state:'visible'});
+    if(!(await panel.innerText()).trim())throw Error('Empty tab '+name);
+    checked.push(name);
+  }
+  await page.getByRole('button',{name:'Bloquear console',exact:true}).click();
+  return {tabs:checked,all_nonempty:true,locked:true};
+}
+)(page);
+```

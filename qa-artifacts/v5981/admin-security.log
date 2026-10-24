@@ -1,0 +1,704 @@
+EEEEEEEEEEEEEEEEEEEE.                                                    [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_anonymous_shell_has_no_operational_data_and_api_denied _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_anonymous_shell_has_no_op0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A846190>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+______ ERROR at setup of test_user_cannot_forge_role_or_access_admin_api ______
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_user_cannot_forge_role_or0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A846650>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_admin_needs_recent_reauth_and_reload_keeps_valid_grant _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_admin_needs_recent_reauth0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A81DC70>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+____________ ERROR at setup of test_expired_authorization_rejected ____________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_expired_authorization_rej0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A851D00>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_live_account_and_session_changes_invalidate_access[revoke] _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_live_account_and_session_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A8516A0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_live_account_and_session_changes_invalidate_access[block] _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_live_account_and_session_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BCAEA50>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_live_account_and_session_changes_invalidate_access[demote] _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_live_account_and_session_2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BCAD450>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_live_account_and_session_changes_invalidate_access[unapprove] _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_live_account_and_session_3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A813020>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_live_account_and_session_changes_invalidate_access[revision] _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_live_account_and_session_4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BBFE030>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_____________ ERROR at setup of test_csrf_and_cross_origin_denied _____________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_csrf_and_cross_origin_den0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A34D7F0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_______ ERROR at setup of test_wrong_password_rate_limited_and_audited ________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_wrong_password_rate_limit0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A34D470>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_________ ERROR at setup of test_legacy_argon2_reauth_and_revocation __________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_legacy_argon2_reauth_and_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20A313A00>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+___________ ERROR at setup of test_secure_cookie_and_explicit_lock ____________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_secure_cookie_and_explici0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BCB5790>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_aggregate_diagnostics_do_not_include_private_content_or_hashes _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_aggregate_diagnostics_do_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BCB4650>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_non_admin_relay_identity_cannot_impersonate_another_session _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_non_admin_relay_identity_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BC8E8E0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+____ ERROR at setup of test_admin_status_does_not_enable_remote_permission ____
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_admin_status_does_not_ena0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BC512E0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_migration_snapshot_idempotent_excludes_pending_service_fixture_future _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_migration_snapshot_idempo0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BD916D0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+__________ ERROR at setup of test_migration_detects_changed_snapshot __________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_migration_detects_changed0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BD918B0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+_ ERROR at setup of test_last_active_approved_admin_cannot_be_removed_demoted_or_blocked _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_last_active_approved_admi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BD8A8D0>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+____________ ERROR at setup of test_public_registration_still_user ____________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-363/test_public_registration_still0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D20BD8F250>
+
+    @pytest.fixture
+    def env(tmp_path,monkeypatch):
+        for key,value in {'JULIA_USERNAME':'ownerqa','JULIA_PASSWORD_HASH':PasswordHasher().hash(PASSWORD),
+                          'JULIA_SESSION_SECRET':'q'*64,'JULIA_AGENT_TOKEN':'r'*64,'JULIA_ENV':'test',
+                          'JULIA_RATE_ADMIN_USER':'1000'}.items():
+            monkeypatch.setenv(key,value)
+        server.login_failures.clear(); server.revogados['sids']=set();server.revogados['ts']=0
+        path=tmp_path/'qa.sqlite';pc_agent.open_db(path).close()
+        db=sqlite3.connect(path,check_same_thread=False)
+        auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)
+>       admin=auth.criar_usuario(db,'Alice Human','alice',PASSWORD,papel='admin',criado_por='local')['uid']
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_v5981.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+julia_auth.py:239: in criar_usuario
+    u = valida_username(username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+username = 'Alice Human'
+
+    def valida_username(username: str) -> str:
+        u = (username or "").strip().lower()
+        if not USERNAME_RE.match(u):
+>           raise AuthErro("Usu�rio: 3�30 letras/n�meros/./_/-.", "username_invalido")
+E           julia_auth.AuthErro: Usu�rio: 3�30 letras/n�meros/./_/-.
+
+julia_auth.py:155: AuthErro
+=========================== short test summary info ===========================
+ERROR tests/test_admin_v5981.py::test_anonymous_shell_has_no_operational_data_and_api_denied
+ERROR tests/test_admin_v5981.py::test_user_cannot_forge_role_or_access_admin_api
+ERROR tests/test_admin_v5981.py::test_admin_needs_recent_reauth_and_reload_keeps_valid_grant
+ERROR tests/test_admin_v5981.py::test_expired_authorization_rejected - julia_...
+ERROR tests/test_admin_v5981.py::test_live_account_and_session_changes_invalidate_access[revoke]
+ERROR tests/test_admin_v5981.py::test_live_account_and_session_changes_invalidate_access[block]
+ERROR tests/test_admin_v5981.py::test_live_account_and_session_changes_invalidate_access[demote]
+ERROR tests/test_admin_v5981.py::test_live_account_and_session_changes_invalidate_access[unapprove]
+ERROR tests/test_admin_v5981.py::test_live_account_and_session_changes_invalidate_access[revision]
+ERROR tests/test_admin_v5981.py::test_csrf_and_cross_origin_denied - julia_au...
+ERROR tests/test_admin_v5981.py::test_wrong_password_rate_limited_and_audited
+ERROR tests/test_admin_v5981.py::test_legacy_argon2_reauth_and_revocation - j...
+ERROR tests/test_admin_v5981.py::test_secure_cookie_and_explicit_lock - julia...
+ERROR tests/test_admin_v5981.py::test_aggregate_diagnostics_do_not_include_private_content_or_hashes
+ERROR tests/test_admin_v5981.py::test_non_admin_relay_identity_cannot_impersonate_another_session
+ERROR tests/test_admin_v5981.py::test_admin_status_does_not_enable_remote_permission
+ERROR tests/test_admin_v5981.py::test_migration_snapshot_idempotent_excludes_pending_service_fixture_future
+ERROR tests/test_admin_v5981.py::test_migration_detects_changed_snapshot - ju...
+ERROR tests/test_admin_v5981.py::test_last_active_approved_admin_cannot_be_removed_demoted_or_blocked
+ERROR tests/test_admin_v5981.py::test_public_registration_still_user - julia_...
+1 passed, 20 errors in 14.47s

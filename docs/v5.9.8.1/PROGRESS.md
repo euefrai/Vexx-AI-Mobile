@@ -1,5 +1,15 @@
 # V5981 — progresso
 
+## Estado final — 24/10/2026
+
+As notas abaixo deste bloco são histórico, não pendências atuais. Aplicação local concluída e suíte final: 1443 passed, 4 skipped, 2 warnings. Benchmarks atuais: pesquisa34/34, compras59/59 e experiência16/16. Chrome final: seis abas,320/390/1280,zoomCSS200%,teclado,reauth,reload,XSStexto,limites,cancelamento,/admin sem mensagens/AI e lock, sem erros JS capturados.
+
+Produção: transição inicial25924→28520 com parada legada autorizada; atualização final28520→13712 por IPC autenticado até STOPPED, sem terminate/kill. A revisão avançou externamente para5517c26, confirmada equivalente em código à0814864, somente docs/QA. SQLiteok,contagem de mensagens preservada,relayconectado após reload. SemV598backend/console emprodução.
+
+Migração real aplicada:2promoções,5admins,demaiscampos/sessõespreservados,idempotência0. Pesquisa real:14mensagenspersistidas,saudação/TaskGroupresponderam; ciência0fonteslidas/partial,notíciasmunicipaisfalharam,imagens/compra parciais. Não declarar qualidade científica aprovada.
+
+Relatório completo: `RELATORIO_VEXX_AI_PC_AGENT_ADMIN_V5981.md`. Documentos separados: inventário,paradagraciosa,segurança,migração,E2E e próximo recorteV599. Nenhum push/deploy. Próximo passo exato: diagnóstico delimitado da recuperação de fontes originais no caso científico, conforme `RESEARCH_NEXT.md`, antes de ampliar escopo.
+
 Pedido anexado 45d91fc6: estabilizar runtime, console admin seguro, migração limitada e pesquisa autenticada. Sem push/deploy/Render/Windows restart; não alterar Studio/VERY/extensão.
 
 Base dev: 60d002b, branch codex/v598-autonomous-research. Produção: 0814864. Inventário atual: um pc_agent.py ativo, PID25924, pai18196 Fajulto controle.py. Duas cópias são checkout publicado e worktree dev inativa, não dois consumidores. Hermes/yui/Studio/vexx_remote são integrações separadas preservadas. Inventário privado em ~/.julia-mobile/ops-v5981.

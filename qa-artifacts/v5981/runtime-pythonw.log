@@ -1,0 +1,56 @@
+.....F                                                                   [100%]
+================================== FAILURES ===================================
+___________ test_real_pythonw_wss_reconnect_named_pipe_stop_and_wal ___________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-368/test_real_pythonw_wss_reconnec0')
+
+    @pytest.mark.skipif(os.name != 'nt', reason='Windows pythonw integration')
+    def test_real_pythonw_wss_reconnect_named_pipe_stop_and_wal(tmp_path):
+        """Real Windows process and local WebSocket; no production/model invocation."""
+        import sqlite3
+        from websockets.sync.server import serve
+        received=[]
+        ready=threading.Event()
+        def handler(ws):
+            index=len(received)+1
+            ws.send(json.dumps({'type':'auth_config','request_id':f'qa-{index}'}))
+            received.append(json.loads(ws.recv(timeout=12)))
+            if index==1:
+                ws.close(code=1012,reason='QA reconnect')
+            else:
+                ready.set()
+                try:
+                    ws.recv(timeout=15)
+                except Exception:
+                    pass
+        with serve(handler,'127.0.0.1',0) as ws_server:
+            port=ws_server.socket.getsockname()[1]
+            thread=threading.Thread(target=ws_server.serve_forever,daemon=True);thread.start()
+            script=tmp_path/'qa_backend.py'
+            script.write_text('''import sys,os
+    sys.path.insert(0,os.environ['VEXX_QA_ROOT'])
+    import pc_agent,agent_runtime,time
+    pc_agent.hermes_bridge.listar_modelos=lambda *a: []
+    class FastTime:
+        def __getattr__(self,n):return getattr(time,n)
+        def sleep(self,s):time.sleep(min(s,.05))
+    pc_agent.time=FastTime()
+    agent_runtime.launch(pc_agent)
+    ''')
+            directory=tmp_path/'runtime';database=tmp_path/'qa.sqlite'
+            env=dict(os.environ,JULIA_ENV_FILE=str(tmp_path/'no.env'),JULIA_RELAY_URL=f'http://127.0.0.1:{port}',
+                     JULIA_SQLITE_PATH=str(database),JULIA_AGENT_TOKEN='qa-local-token-not-production',
+                     VEXX_AGENT_ROLE='development',VEXX_AGENT_RUNTIME_DIR=str(directory),VEXX_QA_ROOT=str(Path.cwd()))
+            child=subprocess.Popen([str(Path(sys.executable).with_name('pythonw.exe')),str(script)],env=env,
+                                  creationflags=subprocess.CREATE_NO_WINDOW,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+            try:
+                assert ready.wait(15),'QA backend did not reconnect'
+                assert len(received)==2 and all(r['type']=='auth_config' for r in received)
+>               assert ar.command(directory)['pid']==child.pid
+E               AssertionError: assert 2012 == 2164
+E                +  where 2164 = <Popen: returncode: None args: ['C:\\Users\\efrai\\Documents\\julia-mobile-v...>.pid
+
+tests\test_agent_runtime_v5981.py:130: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_agent_runtime_v5981.py::test_real_pythonw_wss_reconnect_named_pipe_stop_and_wal
+1 failed, 5 passed in 15.30s

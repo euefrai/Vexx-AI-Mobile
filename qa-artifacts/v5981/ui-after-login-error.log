@@ -1,0 +1,24 @@
+### Page
+- Page URL: http://127.0.0.1:59896/admin
+- Page Title: VEXX Admin Console
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- main [ref=f3e2]:
+  - generic [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - paragraph [ref=f3e5]: VEXX AI · Administração
+      - heading "VEXX Admin Console" [level=1] [ref=f3e6]
+    - link "Voltar ao chat" [ref=f3e7] [cursor=pointer]:
+      - /url: /
+  - status [ref=f3e8]: Computador offline; autorização administrativa indisponível
+  - region [ref=f3e9]:
+    - heading "Confirme seu acesso" [level=2] [ref=f3e10]
+    - paragraph [ref=f3e11]: Confirme a senha desta conta. A autorização expira em 10 minutos.
+    - generic [ref=f3e12]:
+      - generic [ref=f3e13]: Senha
+      - textbox "Senha" [ref=f3e14]
+      - button "Autorizar console" [ref=f3e15] [cursor=pointer]
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T11-25-19-420Z.log#L3-L7

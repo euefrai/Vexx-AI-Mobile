@@ -1,0 +1,16 @@
+................F....                                                    [100%]
+================================== FAILURES ===================================
+_ test_migration_snapshot_idempotent_excludes_pending_service_fixture_future __
+
+env = namespace(db=<sqlite3.Connection object at 0x000001D90C1ECD60>, admin='u-811e2f54f0e4', user='u-ab0a8b7ecaa3', calls=[...=WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-365/test_migration_snapshot_idempo0/qa.sqlite'))
+
+    def test_migration_snapshot_idempotent_excludes_pending_service_fixture_future(env):
+        for name,status,approved,actor in [('carol','ativo',True,'local'),('pending','pendente',False,'local'),
+                ('test-fixture','ativo',True,'local'),('svc-agent','ativo',True,'local'),('unknown','ativo',True,'unverified')]:
+>           auth.criar_usuario(env.db,name,'Display '+name,PASSWORD,status=status,aprovado=approved,criado_por=actor)
+E           TypeError: criar_usuario() got an unexpected keyword argument 'status'
+
+tests\test_admin_v5981.py:182: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_admin_v5981.py::test_migration_snapshot_idempotent_excludes_pending_service_fixture_future
+1 failed, 20 passed in 21.61s

@@ -1,0 +1,21 @@
+QA relay ready at http://127.0.0.1:59896/admin
+Exception in thread Thread-1 (supervisor):
+Traceback (most recent call last):
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\tools\serve_admin_qa_v5981.py", line 64, in supervisor
+    try:
+    
+  File "C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\agent_runtime.py", line 197, in command
+    with Client(address, family="AF_PIPE" if os.name == "nt" else "AF_UNIX", authkey=None) as channel:
+         ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 547, in Client
+    c = PipeClient(address)
+  File "c:\Users\efrai\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 758, in PipeClient
+    _winapi.WaitNamedPipe(address, 1000)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] O sistema n�o pode encontrar o arquivo especificado

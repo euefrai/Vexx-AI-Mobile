@@ -1,0 +1,17 @@
+.........................F.......                                        [100%]
+================================== FAILURES ===================================
+________________ test_admin_does_not_bypass_message_ownership _________________
+
+env = namespace(db=<sqlite3.Connection object at 0x000001F31B55CD60>, admin='u-282fae29c916', user='u-d8ebd548da11', calls=[...=WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-372/test_admin_does_not_bypass_mes0/qa.sqlite'))
+
+    def test_admin_does_not_bypass_message_ownership(env):
+        # Administrator remains an ordinary owner for conversational data.
+        for owner,mid in ((env.admin,'admin-msg'),(env.user,'other-msg')):
+>           env.db.execute("INSERT INTO messages(id,conversation_id,origin,role,text,created_at,received_at,owner_id) VALUES (?,?,?,?,?,?,?,?)",
+                           (mid,'shared-name','mobile','user','private-'+owner,auth.agora_iso(),auth.agora_iso(),owner))
+E           sqlite3.OperationalError: table messages has no column named status
+
+tests\test_admin_v5981.py:258: OperationalError
+=========================== short test summary info ===========================
+FAILED tests/test_admin_v5981.py::test_admin_does_not_bypass_message_ownership
+1 failed, 32 passed in 40.34s
