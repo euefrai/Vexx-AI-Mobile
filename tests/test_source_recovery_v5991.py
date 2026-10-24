@@ -227,3 +227,40 @@ def test_document_request_never_gets_unrelated_images_or_generic_manuals():
     result=media.relevant_media(records,'Pesquise o manual público PDF Raspberry Pi Pico')
     assert len(result)==1 and result[0]['url'].endswith('/pico.pdf')
     assert result[0]['relevance_state']=='TOPIC_METADATA_MATCH'
+
+
+def test_qualified_api_anchor_cannot_be_replaced_by_a_generic_aspect():
+    import search_orchestrator as orch
+    query='asyncio.TaskGroup documentação oficial exemplos e limitações'
+    wrong={'titulo':'Limitações aos direitos autorais','trecho':'Limitações e exemplos de direitos autorais'}
+    assert 'ENTITY_MISMATCH' in orch._context_mismatch(wrong,query)
+    assert not orch._context_mismatch({'trecho':'class asyncio . TaskGroup: manages tasks'},query)
+    assert not orch._context_mismatch({'trecho':'httpx.AsyncClient manages HTTP requests'},
+        'Compare asyncio.TaskGroup e httpx.AsyncClient')
+
+
+def test_deep_aspect_cannot_supply_evidence_without_original_api_entity(tmp_path):
+    import pc_agent,research_agents
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    job=research_agents.criar_job(db,'local','asyncio.TaskGroup documentação oficial exemplos e limitações',conv='qa-chat',modo='profunda')
+    found=[{'titulo':'Limitações aos direitos autorais','url':'https://example.org/copyright'}]
+    def read(url):
+        return {'titulo':found[0]['titulo'],'texto':'Limitações aos direitos autorais e exemplos de proteção de obras. '*25,
+                'final':url,'texto_lido':True}
+    result=research_agents.agente_analista(db,job,{'alvo':'limitações'},found,read,teto_paginas=1)
+    assert not result
+    assert db.execute('select count(*) from evidence').fetchone()[0]==0
+    db.close()
+
+
+def test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it(tmp_path):
+    import pc_agent,research_agents
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    job=research_agents.criar_job(db,'local','asyncio.TaskGroup documentação oficial exemplos e limitações',conv='qa-chat',modo='profunda')
+    found=[{'titulo':'Task groups','url':'https://docs.example/taskgroup'}]
+    def read(url):
+        return {'titulo':'Task groups','texto':'class asyncio . TaskGroup(): Examples and limitations of structured concurrency. '*20,
+                'final':url,'texto_lido':True}
+    result=research_agents.agente_analista(db,job,{'alvo':'limitações'},found,read,teto_paginas=1)
+    assert result and db.execute('select count(*) from evidence').fetchone()[0]>0
+    db.close()

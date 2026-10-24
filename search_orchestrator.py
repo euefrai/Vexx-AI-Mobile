@@ -186,6 +186,7 @@ def _tem_termo(termo: str, texto: str) -> bool:
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "cancelamento": ("cancellation", "cancelled", "cancelling"), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
+    aliases.update({'exemplos':('examples','example'),'limitacoes':('limitations','limitation')})
     if re.fullmatch(r'[a-z_]\w*(?:\.[a-z_]\w*)+',term):
         # Semantic HTML can split a qualified API name across adjacent spans.
         text=re.sub(r'\s*\.\s*','.',text)
@@ -236,6 +237,10 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     matched=[_tem_termo(m,body) for m in models]
     reasons=[]
     if matched and not (any(matched) if RX_COMPARACAO.search(consulta) else all(matched)):
+        reasons.append('ENTITY_MISMATCH')
+    identifiers=set(re.findall(r'(?<![\w/:])(?:[a-z_]\w*\.)+[A-Z]\w*\b',consulta or ''))
+    matched_ids=[_tem_termo(identifier,body) for identifier in identifiers]
+    if matched_ids and not (any(matched_ids) if RX_COMPARACAO.search(consulta) else all(matched_ids)):
         reasons.append('ENTITY_MISMATCH')
     accessory=r'\b(capa|carregador|pelicula|bateria de reposicao|compativel com|acessorio|acessorios)\b'
     if re.search(accessory,body) and not re.search(accessory,q) and re.search(r'\b(notebook|celular|smartphone|roteador|geladeira|lavadora)\b',q):

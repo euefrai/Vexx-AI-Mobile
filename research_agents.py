@@ -986,6 +986,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
 
     def _corresponde(a, rec):
         candidate = _candidato(a, rec)
+        if orch._context_mismatch(candidate,job['objetivo']):
+            return False
         if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel'):
             if not search_verticals.assess(request, candidate)['eligible']:
                 return False
@@ -1160,7 +1162,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         academic = a.get("metadata_source") == "academic_provider"
         candidate = _candidato(a, rec)
         if texto and not _corresponde(a, rec):
-            read_trace(a,'relevance_rejected',rec,code=','.join(search_verticals.assess(request,candidate).get('reasons') or ['TOPIC_MISMATCH']))
+            read_trace(a,'relevance_rejected',rec,code=','.join(search_verticals.assess(request,candidate).get('reasons')
+                or orch._context_mismatch(candidate,job['objetivo']) or ['TOPIC_MISMATCH']))
             emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
