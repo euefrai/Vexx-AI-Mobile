@@ -221,3 +221,17 @@ def test_missing_research_evidence_does_not_become_model_facts_or_capture_code_r
            'status':'encontrada','trecho':'TaskGroup documentation','relevante':True,'content_scope':'metadata_only'}
     limited=pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[found]},user_text='TaskGroup')
     assert 'página não lida' in limited and 'TaskGroup' in limited
+
+
+@pytest.mark.parametrize('terminal',['completed','failed','cancelled'])
+def test_late_sse_checkpoint_cannot_overwrite_a_terminal_result_and_retry_still_works(tmp_path,terminal):
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    pc_agent.ai_marcar(db,'qa-id','qa-chat','qa-model',terminal,reply_id='qa-reply',response_text='Final saved')
+    pc_agent.ai_marcar(db,'qa-id','qa-chat','qa-model','processing',reply_id='qa-reply',response_text='Late partial')
+    saved=pc_agent.ai_estado(db,'qa-id')
+    assert saved['state']==terminal and saved['response_text']=='Final saved'
+    # Explicit retry/reset is allowed; only stale partial writes are refused.
+    pc_agent.ai_marcar(db,'qa-id','qa-chat','qa-model','queued')
+    pc_agent.ai_marcar(db,'qa-id','qa-chat','qa-model','processing',response_text='New attempt')
+    assert pc_agent.ai_estado(db,'qa-id')['response_text']=='New attempt'
+    db.close()

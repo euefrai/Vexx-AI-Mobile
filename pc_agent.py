@@ -2224,7 +2224,8 @@ def ai_marcar(db, user_message_id, conversation_id, model, state,
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(owner_id, user_message_id) DO UPDATE SET state=excluded.state,
              reply_id=excluded.reply_id, response_text=excluded.response_text,
-             error=excluded.error, updated_at=excluded.updated_at""",
+             error=excluded.error, updated_at=excluded.updated_at
+             WHERE NOT (excluded.state='processing' AND ai_requests.state IN ('completed','failed','cancelled'))""",
             (user_message_id, conversation_id, model, state, reply_id,
              response_text, error, agora_iso(), agora_iso(), dono_valido(owner)))
 
