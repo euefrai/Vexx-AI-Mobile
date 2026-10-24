@@ -143,6 +143,7 @@ _GENERICOS_CORRESPONDENCIA = {
 
 
 _GENERICOS_CORRESPONDENCIA.update({
+    "principais", "novidades", "acontecimentos", "relevantes",
     "usar", "utilizar", "utilize", "utilizando", "explique-me",
     "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
     "tecnica", "técnica", "analise", "análise", "usando", "sobre", "pesquise",
@@ -214,7 +215,8 @@ def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
     if request.get("domain") in ("air_travel", "bus_travel", "news", "events"):
         import search_verticals
         if request.get('domain') == 'news' or params.get('location') or (params.get('origin') and params.get('destination')):
-            return search_verticals.assess(request, a)['eligible']
+            if not search_verticals.assess(request, a)['eligible']:return False
+            if params.get('location') or (params.get('origin') and params.get('destination')):return True
     if _context_mismatch(a, consulta):
         return False
     if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip() and not (a.get('open_access') and a.get('pdf_url')):
@@ -625,7 +627,7 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
     titulo = (a.get("titulo") or "").lower()
     trecho = (a.get("trecho") or "").lower()
     url = (a.get("url") or "").lower()
-    termos = _termos(consulta)
+    termos = _termos_correspondencia(consulta)
     pagina_de_indice = _pagina_de_indice(a)  # V5.7: índice geral não é conteúdo
     pontos = 0.0
     for t in termos:

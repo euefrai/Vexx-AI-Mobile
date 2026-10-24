@@ -188,3 +188,23 @@ def test_qualified_api_identifier_survives_semantic_html_spacing():
     assert orch._tem_termo('asyncio.TaskGroup','asyncio . TaskGroup ()')
     assert orch._tem_termo('httpx.AsyncClient','httpx . AsyncClient')
     assert not orch._tem_termo('asyncio.TaskGroup','myasyncio . TaskGroup')
+
+
+def test_news_without_city_still_requires_topic_not_a_generic_dictionary():
+    import search_orchestrator as orch
+    query='Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.'
+    terms=orch._termos_correspondencia(query)
+    junk={'titulo':'Principais significado','trecho':'Principais é plural de principal'}
+    relevant={'titulo':'Inteligência artificial: novos modelos','trecho':'Novos modelos de inteligência artificial'}
+    assert not orch._util_para_pedido(junk,terms,query)
+    assert orch._util_para_pedido(relevant,terms,query)
+
+
+def test_instruction_words_cannot_outrank_a_specific_primary_document():
+    import search_orchestrator as orch
+    query='Encontre na documentação oficial como usar asyncio.TaskGroup.'
+    candidates=orch.fontes_preferenciais(query)+[{'titulo':'Documentação significado','url':'https://example.org/dictionary',
+        'trecho':'Documentação conceito','origem':'bing','tipo':'pagina'}]
+    info=orch.classificar(query)
+    ranked=orch.ranquear(candidates,query,info['classes'],info)
+    assert ranked[0]['url'].startswith('https://docs.python.org/')
