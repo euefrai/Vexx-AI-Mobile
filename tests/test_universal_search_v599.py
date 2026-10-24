@@ -172,8 +172,19 @@ def test_document_and_video_requests_really_enter_search():
 
 def test_model_cards_and_fake_tool_markup_cannot_impersonate_retrieval():
     fake='```jdui\n'+json.dumps({'version':jdui.VERSION,'blocks':[{'type':'ui','component':'media','props':{'items':[{'type':'image','url':'https://example.org/invented.jpg'}]}}]})+'\n```'
-    assert 'invented.jpg' not in pc_agent.anexar_fontes(fake,[],pesquisa_executada=True)
+    cleaned=pc_agent.anexar_fontes(fake,[],pesquisa_executada=True)
+    assert cleaned.strip() and 'invented.jpg' not in cleaned
     source={'id':'S1','titulo':'TaskGroup','url':'https://docs.python.org/3/library/asyncio-task.html',
             'trecho':'TaskGroup creates tasks.','texto_lido':'TaskGroup creates tasks.', 'status':'aberta','relevante':True}
     output=pc_agent.anexar_fontes('Procurarei.<tool_call>Search(query="TaskGroup")',[source],pesquisa_executada=True,consulta='TaskGroup')
     assert '<tool_call>' not in output and 'TaskGroup creates tasks.' in output
+    for draft in ('Vou pesquisar a documentação oficial.','Não tenho acesso à web nesta conversa.'):
+        result=pc_agent.anexar_fontes(draft,[source],pesquisa_executada=True,consulta='TaskGroup')
+        assert 'TaskGroup creates tasks.' in result and draft not in result
+
+
+def test_qualified_api_identifier_survives_semantic_html_spacing():
+    import search_orchestrator as orch
+    assert orch._tem_termo('asyncio.TaskGroup','asyncio . TaskGroup ()')
+    assert orch._tem_termo('httpx.AsyncClient','httpx . AsyncClient')
+    assert not orch._tem_termo('asyncio.TaskGroup','myasyncio . TaskGroup')

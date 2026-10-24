@@ -2683,7 +2683,8 @@
     root.appendChild(box);
   };
 
-  R.media = function (root, props) {
+  R.media = function (root, props, st, save) {
+    st=st||{};st.mediaDetails=st.mediaDetails||{};
     const box = el('div', 'jdui-cards jdui-media-grid');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const TIPO = { image: 'Imagem', video: 'Vídeo', document: 'Documento' };
@@ -2755,26 +2756,30 @@
       card.appendChild(moldura);
       const corpo = el('div', 'jdui-pbody');
       corpo.appendChild(el('strong', 'jdui-pnome', item.title));
-      corpo.appendChild(el('span', 'jdui-badge', TIPO[item.type] + ' · não é evidência'));
-      const meta = [item.publisher, item.date].filter(Boolean).join(' · ');
+      const meta = [TIPO[item.type],item.publisher, item.date].filter(Boolean).join(' · ');
       if (meta) corpo.appendChild(el('div', 'jdui-ploja', meta));
+      const details=el('details','jdui-media-details');
+      details.appendChild(el('summary','','Metadados e limites'));
+      const detailKey=item.source_url||item.url;details.open=!!st.mediaDetails[detailKey];
+      details.addEventListener('toggle',()=>{st.mediaDetails[detailKey]=details.open;if(typeof save==='function')save(st);});
       const specifics=[item.duration,item.width && item.height ? item.width+' × '+item.height : '',item.mime].filter(Boolean);
-      if (specifics.length) corpo.appendChild(el('div','jdui-count',specifics.join(' · ')));
+      if (specifics.length) details.appendChild(el('div','jdui-count',specifics.join(' · ')));
       if (item.attribution) corpo.appendChild(el('div','jdui-count','Crédito: '+item.attribution));
-      corpo.appendChild(el('div', 'jdui-count',
+      details.appendChild(el('div', 'jdui-count',
         'Acesso: ' + (ACESSO[item.access_state] || item.access_state)
         + ' · Análise: ' + (ANALISE[item.analysis_state] || item.analysis_state)));
       if (item.rights && item.rights !== 'não informado') {
         corpo.appendChild(el('div', 'jdui-count', 'Direitos: ' + item.rights));
       }
-      if (item.excerpt) corpo.appendChild(el('div', 'jdui-desc', item.excerpt));
+      if (item.excerpt) details.appendChild(el('div', 'jdui-desc', item.excerpt));
+      corpo.appendChild(details);
       const acts = el('div', 'jdui-cardacts');
       const a = el('a', 'jdui-btn ghost',
-        item.type === 'video' ? 'Abrir vídeo no site ↗' : 'Abrir no site de origem ↗');
+        item.type === 'video' ? 'Abrir vídeo ↗' : item.type === 'image' ? 'Abrir imagem ↗' : 'Abrir documento ↗');
       a.href = item.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
       acts.appendChild(a);
-      if (item.source_url) {
-        const s = el('a', 'jdui-btn ghost', 'Página de origem');
+      if (item.source_url && item.source_url!==item.url) {
+        const s = el('a', 'jdui-btn ghost', 'Origem ↗');
         s.href = item.source_url; s.target = '_blank'; s.rel = 'noopener noreferrer';
         acts.appendChild(s);
       }

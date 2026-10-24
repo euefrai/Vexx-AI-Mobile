@@ -9,6 +9,7 @@ async page => {
   for(const width of [1280,390,320]){
     await page.setViewportSize({width,height:900});
     if(width<900 && await page.locator('#drawer').getAttribute('aria-hidden')==='false')await page.locator('#drawerClose').click();
+    if(width<900)await page.waitForFunction(()=>document.querySelector('#drawer').getBoundingClientRect().right<=1,null,{timeout:3000});
     await cards.first().scrollIntoViewIfNeeded();
     const dimensions=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth,
       cards:[...document.querySelectorAll('.message.ai .jdui-media-grid .jdui-pcard')].map(c=>Math.round(c.getBoundingClientRect().width))}));

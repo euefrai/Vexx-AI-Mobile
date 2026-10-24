@@ -2153,7 +2153,11 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "", midia: list = N
     if pesquisa_executada:
         import research_view
         texto=research_view.strip_model_research_cards(texto)
-        if re.search(r'<tool_call\b',texto,re.I):
+        if not texto.strip() and not fontes and not midia:
+            texto='Não recuperei dados verificáveis para montar esse resultado visual.'
+        promise_only=len(texto.strip())<220 and bool(re.match(r'\s*(?:vou (?:pesquisar|buscar)|procurarei|pesquisarei|buscarei)\b',texto,re.I))
+        denies_access=bool(fontes) and bool(re.search(r'n[aã]o (?:tenho|consigo|posso).{0,100}(?:acesso|pesquis|navega)',texto,re.I))
+        if re.search(r'<tool_call\b',texto,re.I) or promise_only or denies_access:
             texto='A redação do modelo não pôde ser utilizada; preservei os resultados recuperados.\n\n'+research.resumo_deterministico(fontes,consulta or termo_img or 'fontes recuperadas').replace('Sem inferência no momento; ','')
     if midia:
         import research_view

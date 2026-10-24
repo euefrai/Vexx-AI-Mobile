@@ -185,6 +185,9 @@ def _tem_termo(termo: str, texto: str) -> bool:
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "cancelamento": ("cancellation", "cancelled", "cancelling"), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
+    if re.fullmatch(r'[a-z_]\w*(?:\.[a-z_]\w*)+',term):
+        # Semantic HTML can split a qualified API name across adjacent spans.
+        text=re.sub(r'\s*\.\s*','.',text)
     if re.fullmatch(r"\d+(?:[.,]\d+)*", term):
         # A grouping separator does not change the requested amount: 3.000 = 3000.
         term = re.sub(r"(?<=\d)[.,](?=\d{3}(?:\D|$))", "", term)
