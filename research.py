@@ -817,7 +817,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         final, pagina = baixar(a["url"], timeout=timeout_pagina)
         if pagina_bloqueada(pagina):
             raise ResearchErro("Página é bot-wall/CAPTCHA (não contornado).", "bloqueado")
-        art = extrair_artigo(pagina, url=a["url"], consulta=consulta or a.get("titulo", ""))
+        art = extrair_artigo(pagina, url=final, consulta=consulta or a.get("titulo", ""))
         import media_evidence
         rec = {"titulo": art.get("titulo") or a.get("titulo", ""),
                "texto": art.get("texto", "") or "",
@@ -901,6 +901,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             "origem": a.get("origem", ""),
             "publicado_em": str(metas.get("publicado_em") or a.get("publicado_em") or a.get("meta", {}).get("publicado_em") or "")[:40],
             "extrator": rec.get("extrator", ""),
+            "atualizado_em": str(metas.get("atualizado_em") or '')[:40],
             "canonica": canonica,
             "origem_declarada": origem_declarada,
             "autor": metas.get("autor", ""), "publicador": metas.get("site", ""),
@@ -1067,6 +1068,7 @@ def candidate_report(candidates, sources, query, limit=24, *, read_outcomes=None
             rows[-1].update(selected=url in selected_urls,returned=url in (returned_urls or set()),
                             extracted_chars=outcome.get('chars',0),final_url=outcome.get('final',''),
                             content_state=content_state,
+                            recovery_method=str((candidate.get('source_recovery') or {}).get('method') or '')[:60],
                             fetch_error=error,losses=list(dict.fromkeys(losses))[:8])
     return {'items':rows,'unique_candidates':len(seen),'omitted':max(0,len(seen)-len(rows))}
 

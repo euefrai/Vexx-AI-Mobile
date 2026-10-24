@@ -242,12 +242,16 @@ def recuperar_feed_publicador(lead: dict, fetch) -> list:
     if urllib.parse.urlsplit(final).hostname!=host: return []
     links=Links();links.feed(page)
     import web_extract
-    terms=set(orch._termos(lead.get('titulo') or ''))
+    title=lead.get('titulo') or ''
+    label=lead.get('publicador') or ''
+    if label and title.endswith(' - '+label):title=title[:-(len(label)+3)]
+    terms=set(orch._termos(title))
     direct=[]
     for link in web_extract.extrair_links(page,final,limite=100):
         target=urllib.parse.urlsplit(link['url']).hostname or ''
         overlap=len(terms & set(orch._termos(link['texto'])))/max(1,len(terms))
-        if (target==host or target.endswith('.'+host)) and overlap>=0.6:
+        is_article=urllib.parse.urlsplit(link['url']).path not in ('','/') and not orch._pagina_de_indice({'url':link['url']})
+        if (target==host or target.endswith('.'+host)) and overlap>=0.6 and is_article and not any(row['url']==link['url'] for row in direct):
             direct.append({'titulo':link['texto'],'url':link['url'],'trecho':'',
                 'origem':'publisher-feed','tipo':'noticia','content_scope':'article_candidate',
                 'source_recovery':{'method':'publisher_link','publisher_url':home,
@@ -256,10 +260,6 @@ def recuperar_feed_publicador(lead: dict, fetch) -> list:
     feed_url,xml=fetch(links.feeds[0],'feed')
     try: root=ET.fromstring(xml)
     except ET.ParseError: return []
-    title=lead.get('titulo') or ''
-    label=lead.get('publicador') or ''
-    if label and title.endswith(' - '+label):title=title[:-(len(label)+3)]
-    terms=set(orch._termos(title))
     out=[]
     entries=root.findall('./channel/item') or root.findall('{http://www.w3.org/2005/Atom}entry')
     for node in entries[:30]:

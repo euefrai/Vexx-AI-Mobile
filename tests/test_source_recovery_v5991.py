@@ -78,3 +78,77 @@ def test_old_retrieval_cache_is_not_reused_after_selection_change():
     result=research.pesquisa_rapida(db,'qa','solar',lambda q:calls.append(q) or [],lambda _:None)
     assert calls and not result['de_cache'] and result['retrieval_version']=='5.9.9.1'
     db.close()
+
+
+def test_offline_loss_analysis_does_not_invent_missing_trace_or_model_failure():
+    from tools.analyze_source_recovery_v5991 import analyze_case
+    row=analyze_case({'id':'shopping','sources':[],'calls':[],'opened':0})
+    assert row['losses']=={'TRACE_UNAVAILABLE':1}
+    assert row['synthesis']=='NOT_EXECUTED_RETRIEVAL_PROBE'
+    assert row['factual_precision'] is None and row['absolute_recall'] is None
+
+
+def test_offline_loss_analysis_preserves_read_rejection_and_external_block():
+    from tools.analyze_source_recovery_v5991 import analyze_case
+    row=analyze_case({'reservoir':{'unique_candidates':2,'items':[
+        {'url':'https://one.example/a','read':True,'reasons':['TEMPORAL_MISMATCH']},
+        {'url':'https://two.example/a','read':False,'reasons':[]}]},
+        'fetches':[{'url':'https://one.example/a','final':'https://one.example/a'},
+                   {'url':'https://two.example/a','error':'bloqueado'}]})
+    assert row['losses']=={'DATE_MISMATCH':1,'FETCH_BLOCKED':1}
+    assert row['read_in_candidate_pool']==1
+    assert row['extraction_trace_available'] is False
+
+
+@pytest.mark.parametrize('query,entity',[
+    ('História da empresa Embraer fontes oficiais','Embraer'),
+    ('História da fundação de Ouro Preto','Ouro Preto'),
+    ('História da empresa Horizonte Verde exceto publicidade','Horizonte Verde'),
+])
+def test_named_entity_retry_or_original_preserves_request_constraints(query,entity):
+    import search_orchestrator as orch
+    retry=orch.consulta_conteudo(query) or query
+    assert entity in retry
+    assert retry.replace('"','')==query
+
+
+def test_named_entity_retry_does_not_replace_original_or_change_product_query():
+    import search_orchestrator as orch
+    query='História da empresa Horizonte Verde fontes oficiais'
+    assert orch.variantes(query)[0]==query
+    assert not orch.consulta_conteudo('notebook 16 GB até R$ 3000')
+
+
+def test_publisher_name_does_not_dilute_headline_match_or_create_duplicate_originals():
+    import search_providers as sp
+    lead={'publisher_url':'https://publisher.example','titulo':'Biblioteca municipal inaugurada - Agência Estadual de Comunicação',
+          'publicador':'Agência Estadual de Comunicação','url':'https://news.google.com/rss/articles/x'}
+    calls=[]
+    def fetch(url,kind):
+        calls.append(url)
+        return url,('<a href="/">Biblioteca municipal inaugurada</a>'
+                    '<a href="/report">Biblioteca municipal inaugurada</a>'
+                    '<a href="/report">Biblioteca municipal inaugurada</a>'
+                    '<a href="https://publisher.example.evil.test/report">Biblioteca municipal inaugurada</a>')
+    result=sp.recuperar_feed_publicador(lead,fetch)
+    assert calls==[lead['publisher_url']]
+    assert len(result)==1 and result[0]['url']=='https://publisher.example/report'
+    assert result[0]['content_scope']=='article_candidate'
+    assert not result[0].get('publicado_em')
+
+
+def test_article_extraction_resolves_declared_metadata_against_fetched_destination(monkeypatch):
+    final='https://publisher.example/content/article'
+    html='<title>Research article</title><link rel="canonical" href="canonical"><article><h1>Research article</h1><p>'+('Useful research content with exact names and numbers 42. '*30)+'</p></article>'
+    monkeypatch.setattr(research,'baixar',lambda *a,**kw:(final,html))
+    result=research._recuperar_um({'url':'https://publisher.example/redirect'},None,3,'research')
+    assert result['final']==final
+    assert result['metadados']['canonica']=='https://publisher.example/content/canonical'
+
+
+def test_publication_and_update_remain_distinct_in_normalized_source():
+    row=research._fonte_de({'texto':'Research content '*30,'lida':True,
+        'metadados':{'publicado_em':'2026-10-20','atualizado_em':'2026-10-24'}},
+        {'url':'https://publisher.example/research','titulo':'Research'},'Research')
+    assert row['publicado_em']=='2026-10-20'
+    assert row['atualizado_em']=='2026-10-24'
