@@ -1,0 +1,21 @@
+..F..................................................................... [ 76%]
+......................                                                   [100%]
+================================== FAILURES ===================================
+__ test_distinct_read_studies_resolve_extraction_gaps_without_claiming_truth __
+
+    def test_distinct_read_studies_resolve_extraction_gaps_without_claiming_truth():
+        records=gaps.identify(job(),[paper(1),paper(2)])
+>       assert all(g['status']=='RESOLVED' for g in records)
+E       assert False
+E        +  where False = all(<generator object test_distinct_read_studies_resolve_extraction_gaps_without_claiming_truth.<locals>.<genexpr> at 0x0000024038C7A740>)
+
+tests\test_autonomous_research_v598.py:41: AssertionError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_autonomous_research_v598.py::test_distinct_read_studies_resolve_extraction_gaps_without_claiming_truth
+1 failed, 93 passed, 1 warning in 19.52s

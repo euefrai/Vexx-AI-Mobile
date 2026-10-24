@@ -1,0 +1,4 @@
+### Ran Playwright code
+```js
+await (async page => {await page.getByLabel('Pesquisa').selectOption('gaps');await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).click();await page.getByText('Ausente no trecho recuperado não significa ausente no estudo inteiro.',{exact:false}).waitFor();await page.reload();await page.waitForFunction(()=>window.fixtureReady);if(await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).getAttribute('aria-expanded')!=='true')throw Error('gap expansion lost');})(page);
+```

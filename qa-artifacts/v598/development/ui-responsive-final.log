@@ -1,0 +1,4 @@
+### Ran Playwright code
+```js
+await (async page => {const rows=[];for(const width of [1280,390,320]){await page.setViewportSize({width,height:800});await page.getByLabel('Pesquisa').selectOption('gaps');await page.waitForFunction(()=>document.getElementById('status').textContent.endsWith('gaps'));rows.push(await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,fallbacks:document.querySelectorAll('.jdui-fallback').length})));await page.screenshot({path:'qa-artifacts/v598/development/explorer-'+width+'.png'});}await page.evaluate(()=>document.body.style.zoom='2');rows.push(await page.evaluate(()=>({cssZoom:2,width:innerWidth,scroll:document.documentElement.scrollWidth})));await page.evaluate(rows=>window.v598Widths=rows,rows);if(rows.some(r=>r.scroll>r.width))throw Error('root overflow');})(page);
+```

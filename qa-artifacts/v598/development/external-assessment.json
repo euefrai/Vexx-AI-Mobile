@@ -1,0 +1,248 @@
+{
+  "scope": "Latest available observation per case; different runs/providers; not a causal external before/after",
+  "cases": [
+    {
+      "id": "conflicting",
+      "artifact": "qa-artifacts/v598/development/live/conflicting.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "FDA e EFSA: cafeína para adultos e gestantes, limites e condições primary source original text",
+          "FDA e EFSA: cafeína para adultos e gestantes, limites e condições fontes primárias texto completo",
+          "fda efsa cafeína adultos gestantes limites condições"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 10.09,
+      "claim_support_verified": false
+    },
+    {
+      "id": "images",
+      "artifact": "qa-artifacts/v598/development/live/images.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Imagens licenciadas da Ponte Estaiada em São Paulo fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 2.987,
+      "claim_support_verified": false
+    },
+    {
+      "id": "multistep",
+      "artifact": "qa-artifacts/v598/development/live/multistep.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Tecnologia QUIC e TCP: controle de congestionamento e limitações, fontes oficiais primary source original text",
+          "Tecnologia QUIC e TCP: controle de congestionamento e limitações, fontes oficiais fontes primárias texto completo",
+          "tecnologia quic tcp controle congestionamento limitações"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 6.666,
+      "claim_support_verified": false
+    },
+    {
+      "id": "municipal",
+      "artifact": "qa-artifacts/v598/development/live-temporal-final/municipal.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\" Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias? primary source original text",
+          "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 18.104,
+      "claim_support_verified": false
+    },
+    {
+      "id": "national",
+      "artifact": "qa-artifacts/v598/development/live-temporal-final/national.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 11.818,
+      "claim_support_verified": false
+    },
+    {
+      "id": "official",
+      "artifact": "qa-artifacts/v598/development/live/official.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 1,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 2.16,
+      "claim_support_verified": false
+    },
+    {
+      "id": "pdf",
+      "artifact": "qa-artifacts/v598/development/live-repaired/pdf.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações open access full text",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações results measurements units",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações limitations study",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações fontes primárias texto completo",
+          "pdf aberto baterias íons sódio limitações"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 5.997,
+      "claim_support_verified": false
+    },
+    {
+      "id": "products",
+      "artifact": "qa-artifacts/v598/development/live/products.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": null,
+      "read_sources": 0,
+      "errors": [],
+      "outcome": null,
+      "elapsed_s": 11.34,
+      "claim_support_verified": false
+    },
+    {
+      "id": "scarce",
+      "artifact": "qa-artifacts/v598/development/live-temporal-final/scarce.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Estudos originais sobre microplásticos no Rio de Contas em Ubatã Bahia open access full text",
+          "Estudos originais sobre microplásticos no Rio de Contas em Ubatã Bahia fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 1.795,
+      "claim_support_verified": false
+    },
+    {
+      "id": "scientific_comparison",
+      "artifact": "qa-artifacts/v598/development/live-repaired/scientific_comparison.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "interrompida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações open access full text",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações methods sample experimental",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações results measurements units",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações experimental conditions temperature pressure",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações limitations study",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações fontes primárias texto completo",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações métodos amostra métricas fontes primárias texto completo",
+          "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações resultados limitações fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 29.483,
+      "claim_support_verified": false
+    },
+    {
+      "id": "solid_state",
+      "artifact": "qa-artifacts/v598/development/live-storage-final/solid_state.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "papers baterias de estado sólido open access full text",
+          "papers baterias de estado sólido methods sample experimental",
+          "papers baterias de estado sólido results measurements units",
+          "papers baterias de estado sólido experimental conditions temperature pressure",
+          "papers baterias de estado sólido limitations study",
+          "estudos científicos baterias de estado sólido fontes primárias texto completo",
+          "papers solid-state batteries fontes primárias texto completo",
+          "baterias estado sólido"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 12.979,
+      "claim_support_verified": false
+    },
+    {
+      "id": "video",
+      "artifact": "qa-artifacts/v598/development/live/video.json",
+      "scope": "LIVE_EXTERNAL; temporary SQLite, no model or authenticated UI",
+      "status": "concluida",
+      "read_sources": 0,
+      "errors": [],
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Vídeo específico NASA James Webb com título e canal fontes primárias texto completo",
+          "vídeo específico nasa james webb título canal"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "elapsed_s": 5.293,
+      "claim_support_verified": false
+    }
+  ]
+}

@@ -1,0 +1,1905 @@
+{
+  "id": "national",
+  "route": "research",
+  "question": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Últimas notícias sobre inteligência artificial no Brasil entre 2026-10-22 e 2026-10-23.",
+    "domain": "news",
+    "original_request": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+    "resolved_request": "Últimas notícias sobre inteligência artificial no Brasil entre 2026-10-22 e 2026-10-23.",
+    "parameters": {
+      "start_at": "2026-10-22T21:37:42.535450-03:00",
+      "end_at": "2026-10-23T21:37:42.535450-03:00",
+      "start_date": "2026-10-22",
+      "end_date": "2026-10-23"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T00:37:42.535450+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-f5369e23e8bf",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-82a0629c171c",
+          "ev-b6ae46e6346c",
+          "ev-6d81ad26119a"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-82a0629c171c",
+            "title": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+            "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+            "published_at": "Mon, 19 Oct 2026 20:05:00 GMT"
+          },
+          {
+            "evidence_id": "ev-b6ae46e6346c",
+            "title": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+            "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+            "published_at": "Thu, 22 Oct 2026 13:27:04 GMT"
+          },
+          {
+            "evidence_id": "ev-6d81ad26119a",
+            "title": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+            "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+            "published_at": "Mon, 19 Oct 2026 12:19:17 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "0091f14ef9f47b40c16d",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-f5369e23e8bf",
+        "statement": "Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+        "status": "open",
+        "evidence_ids": [
+          "ev-82a0629c171c",
+          "ev-b6ae46e6346c",
+          "ev-6d81ad26119a"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 2,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "ultimas noticias sobre inteligencia artificial no brasil nas ultimas 24 horas": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 2,
+          "falhas": 0,
+          "ms": 7990
+        }
+      },
+      "research_gaps": [
+        {
+          "id": "3b1ca37bacf17dfc",
+          "dimension": "original_text",
+          "description": "Trecho original pertinente",
+          "subquestion": "\"UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Dir\" Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas. primary source original text",
+          "expected_data": "Trecho original pertinente",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+            "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+            "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5"
+          ],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "",
+          "budget": {
+            "remaining_searches": 0,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 0,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-97e32455f5ea",
+        "type": "image",
+        "title": "Notícias de Últimas Horas: Atualizações rápidas e precisas sobre os acontecimentos mais recentes, cobrindo uma ampla gama de temas, incluindo política, economia",
+        "url": "https://yt3.googleusercontent.com/e8KGjoBkt5aCoR_2PpeJFCBc1KYrVAN0G-RACaGxEwo9rSAdV9a6PSCEUkU5YBbT4nd0k5ef=s900-c-k-c0x00ffffff-no-rj",
+        "final_url": "https://yt3.googleusercontent.com/e8KGjoBkt5aCoR_2PpeJFCBc1KYrVAN0G-RACaGxEwo9rSAdV9a6PSCEUkU5YBbT4nd0k5ef=s900-c-k-c0x00ffffff-no-rj",
+        "source_title": "Notícias De Últimas Horas",
+        "source_url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+        "publisher": "yt3.googleusercontent.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Notícias de Últimas Horas: Atualizações rápidas e precisas sobre os acontecimentos mais recentes, cobrindo uma ampla gama de temas, incluindo política, economia, ciência, tecnologia e entretenimento. Nosso foco é trazer os fatos mais releva",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-0ca5495d5b47",
+        "type": "image",
+        "title": "Últimas Notícias de hoje do Brasil e do mundo, com reportagens e vídeos sobre política, economia, ciência, saúde, tecnologia, carros e mais.",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/08/1307_site_2.jpg?w=1200&h=630&crop=1",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/08/1307_site_2.jpg?w=1200&h=630&crop=1",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Últimas Notícias de hoje do Brasil e do mundo, com reportagens e vídeos sobre política, economia, ciência, saúde, tecnologia, carros e mais.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-14b92c9f90e8",
+        "type": "image",
+        "title": "Logo CNN Brasil",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Logo CNN Brasil",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-61e82c18d0ae",
+        "type": "image",
+        "title": "Bandeira da Rússia no topo do domo do prédio do Senado do Kremlin em Moscou",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXNPEL980SG-BASEIMAGE.jpg?w=419&h=249&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXNPEL980SG-BASEIMAGE.jpg?w=419&h=249&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Bandeira da Rússia no topo do domo do prédio do Senado do Kremlin em Moscou",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c1c83241157d",
+        "type": "image",
+        "title": "Marina Ruy Barbosa, Any Gabrielly e Marco Pigossi farão nova série do Prime Video",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/obsessao.png?w=419&h=249&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/obsessao.png?w=419&h=249&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Marina Ruy Barbosa, Any Gabrielly e Marco Pigossi farão nova série do Prime Video",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-dc9e49bb7040",
+        "type": "image",
+        "title": "Plataforma em campo de petróleo em Midland - 22 de agosto de 2018",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2026binary_LYNXMPEM4Q23H-BASEIMAGE.jpg?w=419&h=249&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2026binary_LYNXMPEM4Q23H-BASEIMAGE.jpg?w=419&h=249&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Plataforma em campo de petróleo em Midland - 22 de agosto de 2018",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-7f9a2ae45aae",
+        "type": "image",
+        "title": "Bernardo Pascowitch",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/FT_00776-e1774899060140.png?w=117&h=116&crop=0&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/FT_00776-e1774899060140.png?w=117&h=116&crop=0&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Bernardo Pascowitch",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-2bc8242f037f",
+        "type": "image",
+        "title": "Gabigol, atacante do Santos",
+        "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/09/Santos-Gabigol-e1788539155932.jpg?w=419&h=249&crop=1&quality=90",
+        "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/09/Santos-Gabigol-e1788539155932.jpg?w=419&h=249&crop=1&quality=90",
+        "source_title": "CNN Brasil",
+        "source_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "publisher": "admin.cnnbrasil.com.br",
+        "date": "2021-06-21T10:41:45-03:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Gabigol, atacante do Santos",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-6d81ad26119a",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+      "titulo": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:37:52.278497+00:00",
+      "publicado_em": "Mon, 19 Oct 2026 12:19:17 GMT",
+      "trecho": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 12:19:17 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "UOL Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-82a0629c171c",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+      "titulo": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:37:52.259563+00:00",
+      "publicado_em": "Mon, 19 Oct 2026 20:05:00 GMT",
+      "trecho": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 20:05:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Olhar Direto",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-b6ae46e6346c",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+      "titulo": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:37:52.269865+00:00",
+      "publicado_em": "Thu, 22 Oct 2026 13:27:04 GMT",
+      "trecho": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 13:27:04 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "G1",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:37:46.421273+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Últimas notícias sobre inteligência artificial no Brasil nas': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (Últimas notícias sobre inteligência arti)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (Últimas notícias sobre inteligência arti)",
+          "bing: 6 resultados (Últimas notícias sobre inteligência arti)",
+          "bing (consulta reformulada 'Últimas notícias sobre inteligência arti'): 6 resultados",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Últimas notícias sobre inteligência arti)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-24T00:37:50.580164+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Últimas notícias sobre inteligência artificial no Brasil nas': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (Últimas notícias sobre inteligência arti)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (Últimas notícias sobre inteligência arti)",
+          "bing: 6 resultados (Últimas notícias sobre inteligência arti)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Últimas notícias sobre inteligência arti)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: tamanho",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:37:52.021928+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://g1.globo.com/ultimas-noticias/",
+        "final_url": "https://g1.globo.com/ultimas-noticias/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "seg., 05 jun. 2023 13:24:00 GMT",
+        "excerpt": "Rio RJ TV 1ª Edição RJ TV 2ª Edição Esporte bom dia sábado São Paulo São Paulo São Paulo e região São Paulo e região Primeira Página Bom Dia SP SP1 SP2 Antena Paulista Mistura Paulista O que fazer em SP Esporte Bauru e Marília Bauru e Marília Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem Notícias 2ª Edição Nosso Campo Esporte Campinas e região Campinas e região Primeira"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:37:52.189449+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "final_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1512,
+        "read": true,
+        "published_at": "2021-06-21T10:41:45-03:00",
+        "excerpt": "23/10/2026 | 20:55 Internacional EUA, Rússia e Ucrânia realizarão negociações em novembro, diz Zelensky 23/10/2026 | 20:49 Eleições Meta diz que \"Exército do Lula\" não viola políticas da empresa 23/10/2026 | 20:49 Eleições TSE manda remover áudio falso sobre mesários do canal \"Tropa do Flávio\" 23/10/2026 | 20:48"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:37:52.247973+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+        "final_url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 206,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 12:58:00 GMT",
+        "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:37:52.249534+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "1 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 1,
+        "summary": {
+          "total": 1,
+          "images": 1,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 1,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:37:52.250898+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+        "final_url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "INCOMPLETE_EVIDENCE",
+        "scope": "page_text",
+        "extracted_chars": 206,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 12:58:00 GMT",
+        "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:37:52.251646+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:37:52.252848+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "7 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 7,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:37:52.254344+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "final_url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TEMPORAL_MISMATCH,INDEX_PAGE",
+        "scope": "page_text",
+        "extracted_chars": 1512,
+        "read": true,
+        "published_at": "2021-06-21T10:41:45-03:00",
+        "excerpt": "23/10/2026 | 20:55 Internacional EUA, Rússia e Ucrânia realizarão negociações em novembro, diz Zelensky 23/10/2026 | 20:49 Eleições Meta diz que \"Exército do Lula\" não viola políticas da empresa 23/10/2026 | 20:49 Eleições TSE manda remover áudio falso sobre mesários do canal \"Tropa do Flávio\" 23/10/2026 | 20:48"
+      }
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-24T00:37:52.256038+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-24T00:37:52.257692+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://g1.globo.com/ultimas-noticias/",
+        "final_url": "https://g1.globo.com/ultimas-noticias/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "INCOMPLETE_EVIDENCE,INDEX_PAGE",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "seg., 05 jun. 2023 13:24:00 GMT",
+        "excerpt": "Rio RJ TV 1ª Edição RJ TV 2ª Edição Esporte bom dia sábado São Paulo São Paulo São Paulo e região São Paulo e região Primeira Página Bom Dia SP SP1 SP2 Antena Paulista Mistura Paulista O que fazer em SP Esporte Bauru e Marília Bauru e Marília Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem Notícias 2ª Edição Nosso Campo Esporte Campinas e região Campinas e região Primeira"
+      }
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-24T00:37:52.258679+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-24T00:37:52.260831+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-82a0629c de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-24T00:37:52.261679+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw",
+        "final_url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Mon, 19 Oct 2026 20:05:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-24T00:37:52.263099+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:37:52.268813+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-82a0629c171c",
+        "dominio": "news.google.com",
+        "trecho": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:37:52.271419+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-b6ae46e6 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-24T00:37:52.272590+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+        "final_url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Thu, 22 Oct 2026 13:27:04 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-24T00:37:52.273444+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-24T00:37:52.277404+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-b6ae46e6346c",
+        "dominio": "news.google.com",
+        "trecho": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC0"
+      }
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-24T00:37:52.279584+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-6d81ad26 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-24T00:37:52.280371+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ",
+        "final_url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Mon, 19 Oct 2026 12:19:17 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-24T00:37:52.281232+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-24T00:37:52.286713+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-6d81ad26119a",
+        "dominio": "news.google.com",
+        "trecho": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEV"
+      }
+    },
+    {
+      "seq": 41,
+      "ts": "2026-10-24T00:37:52.317382+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-82a0629c171c",
+                  "title": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+                  "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+                  "published_at": "Mon, 19 Oct 2026 20:05:00 GMT"
+                },
+                {
+                  "id": "ev-b6ae46e6346c",
+                  "title": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+                  "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+                  "published_at": "Thu, 22 Oct 2026 13:27:04 GMT"
+                },
+                {
+                  "id": "ev-6d81ad26119a",
+                  "title": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+                  "published_at": "Mon, 19 Oct 2026 12:19:17 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+              "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 19 Oct 2026 12:19:17 GMT",
+              "trecho": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio UOL Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "UOL Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+              "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 19 Oct 2026 20:05:00 GMT",
+              "trecho": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial Olhar Direto",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Olhar Direto",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+              "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+              "dominio": "news.google.com",
+              "data": "Thu, 22 Oct 2026 13:27:04 GMT",
+              "trecho": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta G1",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "G1",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+              "markdown": "**HIPÓTESE:** Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-f5369e23e8bf&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-f5369e23e8bf&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-f5369e23e8bf&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (1)",
+              "markdown": "- Trecho original pertinente: 0/1 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 6,
+      "ok": 6,
+      "vazio": 0,
+      "resultados": 27,
+      "erros": {},
+      "ms_medio": 574.5
+    },
+    "bing-news": {
+      "chamadas": 3,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 3
+      },
+      "ms_medio": 527.5
+    },
+    "google-news": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 1165.5
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "O que é PHP e a falha grave de segurança detectada por IA que tirou sites do ar - G1",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxONUpsMXJtRTQtbVdWUXNVWTYxdWd6N0VST3k1MjRVYktPT0pvcVZCRngzdm94Y2JQR3E2LU8xMi15a01LZlpSeWNaZTVRNDhJUlljUEV4NEcyWGtkZlFpWkNNeDdHb0pleTA0eEpaUW16cGN0SV9wQ0dmV3JYMGtadURjdzF5WmdWcHQ0NHZSSlVZdmtkWnNETi1YZkd0eE1UcVlLTkdhclU2X1l6SmhlT3ByTHV6X2JhbnhHVW9iRHQtSVh5SVUzaFlmMGpRSTJ0ZkHSAeABQVVfeXFMTWg2cHM0QXZ3Umg3ZFFZWUVFTGVmbFhCTzlrUEEtYl80Y2R0WWlBQkxlUG4tYkctZzRhTU9YUG1oVld0U3hua1dPOEs0VFlBME85N1RfcEdGSlJyQmhNVGZmWTNPaFNLaDRXRVkxc0E5N2hUd0Q2YzlTU2VGOVFpSFp",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 11:14:54 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Startup diz ter usado vírus criado por IA para tratar paciente - Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPbW9zV1dBcC10MEMybGtEVWdiODhGd3h3MXBwVFVtTGt1OUYwMW9IMlowZXhLQVFnMUc1VTBRT3RxSmpDcTNIYzZUOG0zaTBEZl90RVdBVDdObXJEQlcwNXBTSVN4b1l6NWZoTUJRRkZOMGJlZWdZRnNwQjI2a3ZwSVY4dHlkaGNBNDBRMzBHUlFoSHc1X2VyR3M5OC13STlPQV9UcGdvczlqUXIxT0FsNmFxTVQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 17:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www1.folha.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 20:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.olhardireto.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 13:27:04 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 12:19:17 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://noticias.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Saiba como será debate da Globo com candidatos à Presidência da República - G1",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNc1ZhcTllRzNieGY4RkJzSjhtbkluZ1BsMG1WVThFS0xuRDJoUzhCT1VhR0drVXd5MnVnWG1KNFkwT1YzN1o1NG9YNFZoZFlnRnpTNlozWWxVSUNhbWVLblR0dDRVZTh0cVZuY2lLa2NlTWNKd0wyTXpkbjFycUxJay03LUllOUVMaml6aFpBb3p2dVhWX3VfQ0RzUlR1Um5ybk93ZENoeTBhYnNNTmJoLXllSF83QkRPVlE2cW5FYjVmMHktdHlTdDFEOENvUjZl0gHfAUFVX3lxTE53X1RETE9BSE1UUXladjM3ajU0d2FGVW5IRUVGck1TSExOT0I5T1EyRmd5RnBSWTFVVVRjd0ZBUDVqTnpORU0yYVdJYUxPdDNGZmlmSHFxY1Q3TnpxN1c0dzk0dFp4ZzNVamYwZW1jUW1VTHp4Z25yQURCQjgzamVXeGR",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 00:34:59 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "g1 - O portal de notícias da Globo",
+      "url": "https://g1.globo.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias de hoje | Fique ligado na CNN Brasil",
+      "url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 07 set. 2022 19:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas notícias - g1",
+      "url": "https://g1.globo.com/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "seg., 05 jun. 2023 13:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias | VEJA",
+      "url": "https://veja.abril.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+      "url": "https://noticias.uol.com.br/%3B/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Notícias De Últimas Horas - YouTube",
+      "url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:58:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "g1 - O portal de notícias da Globo",
+      "url": "https://g1.globo.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias de hoje | Fique ligado na CNN Brasil",
+      "url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 07 set. 2022 19:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas notícias - g1",
+      "url": "https://g1.globo.com/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "seg., 05 jun. 2023 13:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias | VEJA",
+      "url": "https://veja.abril.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+      "url": "https://noticias.uol.com.br/%3B/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Notícias De Últimas Horas - YouTube",
+      "url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:58:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O, ó, ò, oh ou ho? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/o-o-o-oh-ou-ho/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ô – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/%C3%94",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 01:11:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Aprenda a letra O com a ostra Oli | Abecedário para crianças",
+      "url": "https://www.youtube.com/watch?v=LpEKs5DGYE0",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:13:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que é PHP e a falha grave de segurança detectada por IA que tirou sites do ar - G1",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxONUpsMXJtRTQtbVdWUXNVWTYxdWd6N0VST3k1MjRVYktPT0pvcVZCRngzdm94Y2JQR3E2LU8xMi15a01LZlpSeWNaZTVRNDhJUlljUEV4NEcyWGtkZlFpWkNNeDdHb0pleTA0eEpaUW16cGN0SV9wQ0dmV3JYMGtadURjdzF5WmdWcHQ0NHZSSlVZdmtkWnNETi1YZkd0eE1UcVlLTkdhclU2X1l6SmhlT3ByTHV6X2JhbnhHVW9iRHQtSVh5SVUzaFlmMGpRSTJ0ZkHSAeABQVVfeXFMTWg2cHM0QXZ3Umg3ZFFZWUVFTGVmbFhCTzlrUEEtYl80Y2R0WWlBQkxlUG4tYkctZzRhTU9YUG1oVld0U3hua1dPOEs0VFlBME85N1RfcEdGSlJyQmhNVGZmWTNPaFNLaDRXRVkxc0E5N2hUd0Q2YzlTU2VGOVFpSFp",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 11:14:54 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Startup diz ter usado vírus criado por IA para tratar paciente - Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPbW9zV1dBcC10MEMybGtEVWdiODhGd3h3MXBwVFVtTGt1OUYwMW9IMlowZXhLQVFnMUc1VTBRT3RxSmpDcTNIYzZUOG0zaTBEZl90RVdBVDdObXJEQlcwNXBTSVN4b1l6NWZoTUJRRkZOMGJlZWdZRnNwQjI2a3ZwSVY4dHlkaGNBNDBRMzBHUlFoSHc1X2VyR3M5OC13STlPQV9UcGdvczlqUXIxT0FsNmFxTVQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 17:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www1.folha.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "UFMT realiza evento com palestrantes de universidades internacionais sobre inteligência artificial - Olhar Direto",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOYzJwTEpWdE9JMzFuOHIwdGdGSmo0emFsZ3I1eThLXzF6UkdHZWFiZ1MySExHWmNfbXlUR0d4dkEtbjRPenI2eW9xZWVSTmtSYWlzTURSb0xFN0VsRDRKeGdYbEZkdjFqcjltM0xfa21CcGRWQzV0cmtEb3loTkpZZjJqODAybmJESEtONkV6Y1VidVFjMTVWRHNzLU5yV0xQWEdTRXRJazV5WnpsRkl3WV82MTJkWERlOEZzY1FLV1ZRTHo5bTdZbmw3LWRsOWpRempJRDgwODNpUzlRVzlXXw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 20:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.olhardireto.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Falhas no PHP levam tribunais no Brasil e Anatel a suspender sistemas; governo emite alerta - G1",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQcjlUbFJCb2NwUm93cWpCd19xcUdlMXVCdFVpLUdvSXNKUHNNN1FKZ2lnWXVheE1yYlpXNmV1YXgtb3JoSGlHSGhySFV5TE5LemZOaWVabmh2RThhRFk4UWlvZnd4NE45QV9QeUZhWHlXRHVXaC00WjlrSjNRWkxtbGpOVHExcWk1NzU3YjZzVmNqNWtjTnNNM2pJaFBZN3J6RGxBU09EcmZnZXNZcjJrT21pRUhGWjd2ZDdzWmJEODUtZUFMcjlVR3hSTENGeUNBbnROQ3dCQUpsMjNsc3lGTdIB7wFBVV95cUxQRlhYZ0Z6MXNvMy1PdHRkR0RSOUtNbHB2OHE4SHJiUHpsNXp4SzZMWnlqOUtHZ1h5U2lvSTFoY0sya0JtSV9jT2hLelplVndacFo4X3JZRTR2TC1kQjZQYW1NZ3ZiTEVpcC1va2xFcmE2VEl",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Thu, 22 Oct 2026 13:27:04 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "TSE dá 24h para Meta provar que IA não favorece Lula ou Flávio - UOL Notícias",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQmVWOGtMclMxR05WUlI3elhnVVZiYzNUc1hfRkFOOXZUZkdwV1h3b2tILVpjSzA2eDh0VnFSZkYwVnM2WTd4UVR1QkVrVy1GZS1SQnVUd1NEa2FySGVwaHZXUW1TWWUwam5MeXc4VjJyNS1HOEVGWmE1NFoxSFZHbWRLaXlnTnJqY24wYjVfbG9yZWJDWEE3NDdTX2JiNl9FLTVGWFc2YWpuQTBOQ3FFeXE1NTBNSHZDUDVsZVZIR2dfM2NVSU5XOQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 12:19:17 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://noticias.uol.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Saiba como será debate da Globo com candidatos à Presidência da República - G1",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNc1ZhcTllRzNieGY4RkJzSjhtbkluZ1BsMG1WVThFS0xuRDJoUzhCT1VhR0drVXd5MnVnWG1KNFkwT1YzN1o1NG9YNFZoZFlnRnpTNlozWWxVSUNhbWVLblR0dDRVZTh0cVZuY2lLa2NlTWNKd0wyTXpkbjFycUxJay03LUllOUVMaml6aFpBb3p2dVhWX3VfQ0RzUlR1Um5ybk93ZENoeTBhYnNNTmJoLXllSF83QkRPVlE2cW5FYjVmMHktdHlTdDFEOENvUjZl0gHfAUFVX3lxTE53X1RETE9BSE1UUXladjM3ajU0d2FGVW5IRUVGck1TSExOT0I5T1EyRmd5RnBSWTFVVVRjd0ZBUDVqTnpORU0yYVdJYUxPdDNGZmlmSHFxY1Q3TnpxN1c0dzk0dFp4ZzNVamYwZW1jUW1VTHp4Z25yQURCQjgzamVXeGR",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 23 Oct 2026 00:34:59 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "g1 - O portal de notícias da Globo",
+      "url": "https://g1.globo.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias de hoje | Fique ligado na CNN Brasil",
+      "url": "https://www.cnnbrasil.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 07 set. 2022 19:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas notícias - g1",
+      "url": "https://g1.globo.com/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "seg., 05 jun. 2023 13:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Últimas Notícias | VEJA",
+      "url": "https://veja.abril.com.br/ultimas-noticias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+      "url": "https://noticias.uol.com.br/%3B/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Notícias De Últimas Horas - YouTube",
+      "url": "https://www.youtube.com/@Not%C3%ADciasde%C3%BAltimashoras",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:58:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O, ó, ò, oh ou ho? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/o-o-o-oh-ou-ho/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ô – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/%C3%94",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 01:11:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Aprenda a letra O com a ostra Oli | Abecedário para crianças",
+      "url": "https://www.youtube.com/watch?v=LpEKs5DGYE0",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:13:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que é uma startup? Definição, objetivos e como montar a sua!",
+      "url": "https://conteudos.xpi.com.br/aprenda-a-investir/relatorios/o-que-e-startup/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 12:14:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que é uma startup? Conheça os tipos e veja exemplos de empresas",
+      "url": "https://tecnoblog.net/responde/o-que-e-uma-startup-conheca-os-tipos-e-veja-exemplos-de-empresas/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 17 jun. 2025 15:03:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Startup – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Startup",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 18:37:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 9.823
+}

@@ -1,0 +1,769 @@
+...............F..........................FFFFFF...F..F                  [100%]
+================================== FAILURES ===================================
+_ test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections __
+
+    def test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections():
+        from pathlib import Path
+        from tools.bench_autonomous_v598 import run
+        result=run(Path(__file__).resolve().parents[1])
+>       assert result['replans']==1 and result['duplicate_reads']==0
+E       assert (0 == 1)
+
+tests\test_autonomous_research_v598.py:150: AssertionError
+_______ test_deadline_keeps_completed_page_behind_stalled_first_source ________
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE602020>, {'id': 'rj-eb621628fcd8', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_deadline_keeps_completed_page_behind_stalled_first_source(research_job):
+        db, job = research_job
+        release = threading.Event()
+        finished = threading.Event()
+        slow_finished = threading.Event()
+    
+        def read(url):
+            if url.endswith('/slow'):
+                release.wait(2)
+                slow_finished.set()
+            else:
+                finished.set()
+            return content(url)
+    
+        started = time.monotonic()
+        try:
+>           evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+                hits('slow', 'fast'), read, prazo=started + 0.5)
+
+tests\test_research_parallel_reading.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE602020>
+job = {'id': 'rj-eb621628fcd8', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'slow', 'titulo': 'Bateria ZX', 'url': 'https://example.com/slow', 'trecho': 'Bateria ZX'}, {'id': 'fast', 'titulo': 'Bateria ZX', 'url': 'https://example.com/fast', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_deadline_keeps_completed_page_behind_stalled_first_source.<locals>.read at 0x0000025FAE663D70>
+teto_paginas = 3, deve_parar = None, prazo = 584255.8780837
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+_____________ test_cancellation_does_not_wait_for_blocked_reader ______________
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE603E20>, {'id': 'rj-73d076d6e173', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_cancellation_does_not_wait_for_blocked_reader(research_job):
+        db, job = research_job
+        release = threading.Event()
+        cancel = threading.Event()
+        started_reading = threading.Event()
+        timer = threading.Timer(0.2, cancel.set)
+    
+        def read(url):
+            started_reading.set()
+            timer.start()
+            release.wait(2)
+            return content(url)
+    
+        started = time.monotonic()
+        try:
+>           assert ra.agente_analista(db, job, {'alvo': job['objetivo']},
+                hits('slow'), read, deve_parar=cancel.is_set) == []
+
+tests\test_research_parallel_reading.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE603E20>
+job = {'id': 'rj-73d076d6e173', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'slow', 'titulo': 'Bateria ZX', 'url': 'https://example.com/slow', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_cancellation_does_not_wait_for_blocked_reader.<locals>.read at 0x0000025FAE681F30>
+teto_paginas = 3
+deve_parar = <bound method Event.is_set of <threading.Event at 0x25fae5abad0: unset>>
+prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+_______ test_success_preserves_search_order_not_thread_completion_order _______
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE602E30>, {'id': 'rj-c9b89cb25e5b', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_success_preserves_search_order_not_thread_completion_order(research_job):
+        db, job = research_job
+        second_finished = threading.Event()
+    
+        def read(url):
+            if url.endswith('/first'):
+                assert second_finished.wait(1)
+            else:
+                second_finished.set()
+            return content(url)
+    
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            hits('first', 'second'), read)
+
+tests\test_research_parallel_reading.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE602E30>
+job = {'id': 'rj-c9b89cb25e5b', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'first', 'titulo': 'Bateria ZX', 'url': 'https://example.com/first', 'trecho': 'Bateria ZX'}, {'id': 'second', 'titulo': 'Bateria ZX', 'url': 'https://example.com/second', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_success_preserves_search_order_not_thread_completion_order.<locals>.read at 0x0000025FAE5E62A0>
+teto_paginas = 3, deve_parar = None, prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+______________ test_expired_deadline_does_not_spend_page_budget _______________
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE601990>, {'id': 'rj-76d6cd46bd51', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_expired_deadline_does_not_spend_page_budget(research_job):
+        db, job = research_job
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            hits('unused'), lambda url: pytest.fail('expired read'), prazo=time.monotonic() - 1)
+
+tests\test_research_parallel_reading.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE601990>
+job = {'id': 'rj-76d6cd46bd51', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'unused', 'titulo': 'Bateria ZX', 'url': 'https://example.com/unused', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_expired_deadline_does_not_spend_page_budget.<locals>.<lambda> at 0x0000025FAE5E61F0>
+teto_paginas = 3, deve_parar = None, prazo = 584256.7143383
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+_____ test_failure_does_not_hide_success_and_budget_still_caps_downloads ______
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE597880>, {'id': 'rj-4040f63cc659', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_failure_does_not_hide_success_and_budget_still_caps_downloads(research_job):
+        db, job = research_job
+        job['orcamento']['paginas'] = 2
+        called = []
+    
+        def read(url):
+            called.append(url)
+            if url.endswith('/broken'):
+                raise OSError('fixture failure')
+            return content(url)
+    
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            hits('broken', 'good', 'over-budget'), read)
+
+tests\test_research_parallel_reading.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE597880>
+job = {'id': 'rj-4040f63cc659', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'broken', 'titulo': 'Bateria ZX', 'url': 'https://example.com/broken', 'trecho': 'Bateria ZX'}, {'id': 'good',... ZX'}, {'id': 'over-budget', 'titulo': 'Bateria ZX', 'url': 'https://example.com/over-budget', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_failure_does_not_hide_success_and_budget_still_caps_downloads.<locals>.read at 0x0000025FAE5E57A0>
+teto_paginas = 3, deve_parar = None, prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+_______________ test_unread_result_never_becomes_read_evidence ________________
+
+research_job = (<sqlite3.Connection object at 0x0000025FAE5963E0>, {'id': 'rj-4cecc1363a78', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_unread_result_never_becomes_read_evidence(research_job):
+        db, job = research_job
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']}, hits('snippet'),
+            lambda url: {**content(url), 'texto_lido': False, 'access_state': 'snippet_only'})
+
+tests\test_research_parallel_reading.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE5963E0>
+job = {'id': 'rj-4cecc1363a78', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'id': 'snippet', 'titulo': 'Bateria ZX', 'url': 'https://example.com/snippet', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_unread_result_never_becomes_read_evidence.<locals>.<lambda> at 0x0000025FAE5E5380>
+teto_paginas = 3, deve_parar = None, prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+________ test_adaptive_pipeline_synthesis_contains_new_round_evidence _________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-346/test_adaptive_pipeline_synthes0')
+
+    def test_adaptive_pipeline_synthesis_contains_new_round_evidence(tmp_path):
+        db, job = _job(tmp_path, 'Bateria ZX capacidade nominal')
+        job['orcamento'].update(buscas=4, paginas=4, subs=1, replans=1)
+        ra.salvar_job(db, job)
+        class Provider:
+            nome = 'fixture'
+            def buscar(self, query, limite=6):
+                return [{'titulo': 'Bateria ZX', 'url': 'https://example.com/primary',
+                         'trecho': 'Bateria ZX capacidade nominal de 500 ciclos.'}] if 'fontes prim�rias' in query else []
+        out = ra.executar(db, job['id'], 'qa', [Provider()],
+            recuperar_fn=lambda u: {'titulo': 'Bateria ZX', 'texto': 'Bateria ZX capacidade nominal de 500 ciclos.', 'final': u})
+        current = ra.carregar_job(db, 'qa', job['id'])
+>       assert current['usados']['replans'] == 1
+E       assert 0 == 1
+
+tests\test_adaptive_research_v592.py:68: AssertionError
+________ test_repeated_source_is_reused_without_another_page_download _________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-346/test_repeated_source_is_reused0')
+
+    def test_repeated_source_is_reused_without_another_page_download(tmp_path):
+        db, job = _job(tmp_path, 'Bateria ZX capacidade nominal')
+        fetched=[]
+        def read(url):
+            fetched.append(url)
+            return {'titulo':'Bateria ZX','texto':'Bateria ZX capacidade nominal de 500 ciclos.', 'final':url}
+        hits=[{'titulo':'Bateria ZX','url':'https://example.com/zx','trecho':'Bateria ZX'}]
+        first={'id':'read-a','alvo':job['objetivo']}
+        second={'id':'read-b','alvo':job['objetivo']}
+>       a=ra.agente_analista(db,job,first,hits,read)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_adaptive_research_v592.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x0000025FAE73DF30>
+job = {'id': 'rj-70d00d0e9ac2', 'owner': 'qa', 'conv': '', 'modo': 'profunda', ...}
+etapa = {'id': 'read-a', 'alvo': 'Bateria ZX capacidade nominal'}
+achados = [{'titulo': 'Bateria ZX', 'url': 'https://example.com/zx', 'trecho': 'Bateria ZX'}]
+recuperar_fn = <function test_repeated_source_is_reused_without_another_page_download.<locals>.read at 0x0000025FAE5FCF60>
+teto_paginas = 3, deve_parar = None, prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("P�gina bloqueada; conte�do n�o usado como evid�ncia.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+>       if request['domain'] == 'science':
+           ^^^^^^^
+E       UnboundLocalError: cannot access local variable 'request' where it is not associated with a value
+
+research_agents.py:956: UnboundLocalError
+=========================== short test summary info ===========================
+FAILED tests/test_autonomous_research_v598.py::test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections
+FAILED tests/test_research_parallel_reading.py::test_deadline_keeps_completed_page_behind_stalled_first_source
+FAILED tests/test_research_parallel_reading.py::test_cancellation_does_not_wait_for_blocked_reader
+FAILED tests/test_research_parallel_reading.py::test_success_preserves_search_order_not_thread_completion_order
+FAILED tests/test_research_parallel_reading.py::test_expired_deadline_does_not_spend_page_budget
+FAILED tests/test_research_parallel_reading.py::test_failure_does_not_hide_success_and_budget_still_caps_downloads
+FAILED tests/test_research_parallel_reading.py::test_unread_result_never_becomes_read_evidence
+FAILED tests/test_adaptive_research_v592.py::test_adaptive_pipeline_synthesis_contains_new_round_evidence
+FAILED tests/test_adaptive_research_v592.py::test_repeated_source_is_reused_without_another_page_download
+9 failed, 46 passed in 18.00s

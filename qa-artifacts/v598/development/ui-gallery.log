@@ -1,0 +1,4 @@
+### Ran Playwright code
+```js
+await (async page => {await page.getByLabel('Pesquisa').selectOption('images');await page.waitForFunction(()=>document.getElementById('status').textContent.endsWith('images'));await page.waitForFunction(()=>[...document.querySelectorAll('.jdui-media-grid img')].every(i=>i.complete),{timeout:12000});const media=await page.evaluate(()=>({images:[...document.querySelectorAll('.jdui-media-grid img')].map(i=>({loaded:i.complete&&i.naturalWidth>0,source:i.src})),fallbacks:document.querySelectorAll('.jdui-fallback').length}));if(await page.getByRole('button',{name:/Ampliar:/}).count()){await page.getByRole('button',{name:/Ampliar:/}).first().click();await page.getByRole('dialog').waitFor();await page.keyboard.press('Escape');if(await page.getByRole('dialog').count())throw Error('Escape did not close zoom');}await page.evaluate(data=>window.v598Media=data,media);})(page);
+```

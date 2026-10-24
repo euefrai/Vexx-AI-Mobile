@@ -1,0 +1,11 @@
+### Result
+{
+  "ready": true,
+  "errors": 0,
+  "width": 1280,
+  "scroll": 1280
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ({ready:window.fixtureReady,errors:document.querySelectorAll(\'.jdui-fallback\').length,width:innerWidth,scroll:document.documentElement.scrollWidth})');
+```

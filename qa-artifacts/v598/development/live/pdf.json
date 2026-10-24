@@ -1,0 +1,1226 @@
+{
+  "id": "pdf",
+  "route": "research",
+  "question": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "title",
+      "doi",
+      "authors",
+      "publication_date",
+      "content_scope",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+    "domain": "science",
+    "original_request": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+    "resolved_request": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:38:19.879157+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: PDF científico aberto sobre baterias de íons sódio: resultados e limitações\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-5a9965ab8382",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [],
+    "sintese": {
+      "texto": "Investigação: PDF científico aberto sobre baterias de íons sódio: resultados e limitações\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "pdf cientifico aberto sobre baterias de ions sodio resultados e limitacoes": "p1"
+      },
+      "recuperacao_busca": [
+        "pdf aberto baterias íons sódio limitações"
+      ],
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 3464
+        }
+      },
+      "failed_source_reads": [
+        "ac297404b55799ee76168e057d3b9777a3c6f0a209e20c0da00bcc1dcabbfc63"
+      ],
+      "research_gaps": [
+        {
+          "id": "3c43f5661a51e8b9",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações open access full text",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "b19844bf1e9f5f26",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações results measurements units",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "864898aa599c9996",
+          "dimension": "limitations",
+          "description": "Limitações declaradas",
+          "subquestion": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações limitations study",
+          "expected_data": "Limitações declaradas",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações limitations study",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações open access full text",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações results measurements units",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações limitations study",
+          "PDF científico aberto sobre baterias de íons sódio: resultados e limitações fontes primárias texto completo",
+          "pdf aberto baterias íons sódio limitações"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-be45b16f798f",
+        "type": "image",
+        "title": "Converta para PDF ou a partir de PDF gratuitamente em segundos. Não é necessária instalação nem criação de conta.",
+        "url": "https://smallpdf.com/assets/img/fb/converter2.png",
+        "final_url": "https://smallpdf.com/assets/img/fb/converter2.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "smallpdf.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Converta para PDF ou a partir de PDF gratuitamente em segundos. Não é necessária instalação nem criação de conta.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-21873436814f",
+        "type": "image",
+        "title": "How to convert files to and from PDF: import your file, choose a format, convert, and download the result",
+        "url": "https://s.smallpdf.com/static/cms/f/102628/1382x784/4691565e41/pdf-converter-how-to-steps.png",
+        "final_url": "https://s.smallpdf.com/static/cms/f/102628/1382x784/4691565e41/pdf-converter-how-to-steps.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "s.smallpdf.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "How to convert files to and from PDF: import your file, choose a format, convert, and download the result",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-89342e399f10",
+        "type": "image",
+        "title": "professional-converting-a-pdf-file-on-laptop.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/3fnf1qKNXpC7YblVIlQktv/a1ea2aca20fd6709ac4a6c807b828a77/professional-converting-a-pdf-file-on-laptop.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/3fnf1qKNXpC7YblVIlQktv/a1ea2aca20fd6709ac4a6c807b828a77/professional-converting-a-pdf-file-on-laptop.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "professional-converting-a-pdf-file-on-laptop.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-a2ce77350e00",
+        "type": "image",
+        "title": "pdf-maker-make-pdf-online-with-one-click_2x.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/11JUObfpG4oiuKEe0Ys824/47e32a74c1c7cb1781698150e7646580/pdf-maker-make-pdf-online-with-one-click_2x.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/11JUObfpG4oiuKEe0Ys824/47e32a74c1c7cb1781698150e7646580/pdf-maker-make-pdf-online-with-one-click_2x.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "pdf-maker-make-pdf-online-with-one-click_2x.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-4bcb386cc8e9",
+        "type": "image",
+        "title": "best-online-graphic-design-software.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/4Hb3DcUwOuDoF9YMHUaUB9/c5035531e3001f440d76ea531ab915de/best-online-graphic-design-software.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/4Hb3DcUwOuDoF9YMHUaUB9/c5035531e3001f440d76ea531ab915de/best-online-graphic-design-software.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "best-online-graphic-design-software.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-a6a42afb8cd1",
+        "type": "image",
+        "title": "Long_Banner_-_gray_2x.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/51WSv5y3hS4aSYqikKuQOg/5ed4241ab100c358716966d3df15b32d/Long_Banner_-_gray_2x.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/51WSv5y3hS4aSYqikKuQOg/5ed4241ab100c358716966d3df15b32d/Long_Banner_-_gray_2x.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Long_Banner_-_gray_2x.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-4018a3d80c4e",
+        "type": "image",
+        "title": "pdf-creator-create-pdfs-online-free_2x.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/3LzZhDj772kyS2OiqIMekm/6039bbdd7ab946e7c87ae86335ca2e68/pdf-creator-create-pdfs-online-free_2x.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/3LzZhDj772kyS2OiqIMekm/6039bbdd7ab946e7c87ae86335ca2e68/pdf-creator-create-pdfs-online-free_2x.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "pdf-creator-create-pdfs-online-free_2x.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-1e4c39ac8a8d",
+        "type": "image",
+        "title": "Online2PDF_Converter_by_Smallpdf.png",
+        "url": "https://images.ctfassets.net/l3l0sjr15nav/2rNuX2UHzqtqBkD1GTVCpW/36de708fcbf31679f2c88234f49a089b/Online2PDF_Converter_by_Smallpdf.png",
+        "final_url": "https://images.ctfassets.net/l3l0sjr15nav/2rNuX2UHzqtqBkD1GTVCpW/36de708fcbf31679f2c88234f49a089b/Online2PDF_Converter_by_Smallpdf.png",
+        "source_title": "Smallpdf",
+        "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "publisher": "images.ctfassets.net",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Online2PDF_Converter_by_Smallpdf.png",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:38:23.473828+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'PDF científico aberto sobre baterias de íons sódio: resultad': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (PDF científico aberto sobre baterias de )",
+          "bing: sem correspondência com o pedido; tentando outro provedor (PDF científico aberto sobre baterias de )",
+          "ddg: bloqueado (PDF científico aberto sobre baterias de )",
+          "marginalia: sem resultados (PDF científico aberto sobre baterias de )",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (pdf aberto baterias íons sódio limitaçõe)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (pdf aberto baterias íons sódio limitaçõe)",
+          "marginalia: sem resultados (pdf aberto baterias íons sódio limitaçõe)",
+          "wikipedia: sem resultados (pdf aberto baterias íons sódio limitaçõe)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-24T00:38:24.376877+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://www.adobe.com/br/acrobat/pdf-reader.html.",
+      "meta": {}
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:38:24.393708+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://www.adobe.com/br/acrobat/pdf-reader.html",
+        "final_url": "",
+        "source_state": "BLOCKED",
+        "stage": "fetch_failed",
+        "code": "bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "qui., 22 out. 2026 17:44:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:38:25.712844+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.foxit.com/pdf-reader/",
+        "final_url": "https://www.foxit.com/pdf-reader/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 7170,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 01:25:00 GMT",
+        "excerpt": "viewing, and eSignature workflows through scalable cloud APIs. Explore APIs Developer SDKs PDF SDK Add robust PDF capabilities across platforms. PDF Conversion Convert documents and images to and from PDF. Web Embed a customizable PDF experience in web apps. Desktop Build native PDF tools for Windows, macOS, and Linux. Mobile Add PDF viewing and editing to iOS and Android apps. Server Automate"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:38:25.759049+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "final_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1455,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 21:33:00 GMT",
+        "excerpt": "desejado. Posso converter PDFs digitalizados em documentos editáveis? Sim. A tecnologia OCR do Smallpdf permite pesquisar e editar texto em PDFs convertidos e digitalizados ao extraí-lo. Esse recurso está disponível para usuários com conta Pro. Como faço para converter um PDF no Mac, Windows ou em um dispositivo móvel? Converta PDFs sem esforço com o conversor online do Smallpdf. Envie seu arquivo"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:38:25.764679+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:38:25.769471+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "final_url": "https://smallpdf.com/pt/conversor-de-pdf",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 1455,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 21:33:00 GMT",
+        "excerpt": "desejado. Posso converter PDFs digitalizados em documentos editáveis? Sim. A tecnologia OCR do Smallpdf permite pesquisar e editar texto em PDFs convertidos e digitalizados ao extraí-lo. Esse recurso está disponível para usuários com conta Pro. Como faço para converter um PDF no Mac, Windows ou em um dispositivo móvel? Converta PDFs sem esforço com o conversor online do Smallpdf. Envie seu arquivo"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:38:25.772481+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:38:25.788085+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.foxit.com/pdf-reader/",
+        "final_url": "https://www.foxit.com/pdf-reader/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 7170,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 01:25:00 GMT",
+        "excerpt": "viewing, and eSignature workflows through scalable cloud APIs. Explore APIs Developer SDKs PDF SDK Add robust PDF capabilities across platforms. PDF Conversion Convert documents and images to and from PDF. Web Embed a customizable PDF experience in web apps. Desktop Build native PDF tools for Windows, macOS, and Linux. Mobile Add PDF viewing and editing to iOS and Android apps. Server Automate"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:38:25.790803+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:38:25.842462+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "0 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: PDF científico aberto sobre baterias de íons sódio: resultados e limitações\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** PDF científico aberto sobre baterias de íons sódio: resultados e limitações\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: PDF científico aberto sobre baterias de íons sódio: resultados e limitações",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "Converta para PDF ou a partir de PDF gratuitamente em segundos. Não é necessária instalação nem criação de conta.",
+              "url": "https://smallpdf.com/assets/img/fb/converter2.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "smallpdf.com",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Converta para PDF ou a partir de PDF gratuitamente em segundos. Não é necessária instalação nem criação de conta.",
+              "alt": "Converta para PDF ou a partir de PDF gratuitamente em segundos. Não é necessária instalação nem criação de conta.",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "How to convert files to and from PDF: import your file, choose a format, convert, and download the result",
+              "url": "https://s.smallpdf.com/static/cms/f/102628/1382x784/4691565e41/pdf-converter-how-to-steps.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "s.smallpdf.com",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "How to convert files to and from PDF: import your file, choose a format, convert, and download the result",
+              "alt": "How to convert files to and from PDF: import your file, choose a format, convert, and download the result",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "professional-converting-a-pdf-file-on-laptop.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/3fnf1qKNXpC7YblVIlQktv/a1ea2aca20fd6709ac4a6c807b828a77/professional-converting-a-pdf-file-on-laptop.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "professional-converting-a-pdf-file-on-laptop.png",
+              "alt": "professional-converting-a-pdf-file-on-laptop.png",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "pdf-maker-make-pdf-online-with-one-click_2x.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/11JUObfpG4oiuKEe0Ys824/47e32a74c1c7cb1781698150e7646580/pdf-maker-make-pdf-online-with-one-click_2x.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "pdf-maker-make-pdf-online-with-one-click_2x.png",
+              "alt": "pdf-maker-make-pdf-online-with-one-click_2x.png",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "best-online-graphic-design-software.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/4Hb3DcUwOuDoF9YMHUaUB9/c5035531e3001f440d76ea531ab915de/best-online-graphic-design-software.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "best-online-graphic-design-software.png",
+              "alt": "best-online-graphic-design-software.png",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Long_Banner_-_gray_2x.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/51WSv5y3hS4aSYqikKuQOg/5ed4241ab100c358716966d3df15b32d/Long_Banner_-_gray_2x.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Long_Banner_-_gray_2x.png",
+              "alt": "Long_Banner_-_gray_2x.png",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "pdf-creator-create-pdfs-online-free_2x.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/3LzZhDj772kyS2OiqIMekm/6039bbdd7ab946e7c87ae86335ca2e68/pdf-creator-create-pdfs-online-free_2x.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "pdf-creator-create-pdfs-online-free_2x.png",
+              "alt": "pdf-creator-create-pdfs-online-free_2x.png",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Online2PDF_Converter_by_Smallpdf.png",
+              "url": "https://images.ctfassets.net/l3l0sjr15nav/2rNuX2UHzqtqBkD1GTVCpW/36de708fcbf31679f2c88234f49a089b/Online2PDF_Converter_by_Smallpdf.png",
+              "thumb": "",
+              "source_title": "Smallpdf",
+              "source_url": "https://smallpdf.com/pt/conversor-de-pdf",
+              "publisher": "images.ctfassets.net",
+              "date": "",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Online2PDF_Converter_by_Smallpdf.png",
+              "alt": "Online2PDF_Converter_by_Smallpdf.png",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-5a9965ab8382&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-5a9965ab8382&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-5a9965ab8382&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (3)",
+              "markdown": "- Texto científico além do abstract: 0/1 publicação(ões) com o dado extraído.\n\n- Resultados com métrica e unidade: 0/1 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 0/1 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 500.1
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 901.1
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 555.6
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Ferramentas online para os amantes de PDF - iLovePDF",
+      "url": "https://www.ilovepdf.com/pt",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Download Adobe Acrobat Reader: Free PDF viewer",
+      "url": "https://get.adobe.com/reader/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 14:02:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "iLovePDF | Online PDF tools for PDF lovers",
+      "url": "https://www.ilovepdf.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 03:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conversor de PDF - Converta online e gratuitamente arquivos para PDF ou ...",
+      "url": "https://smallpdf.com/pt/conversor-de-pdf",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 21:33:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Leitor de PDF: a solução original de PDF | Adobe Acrobat Reader",
+      "url": "https://www.adobe.com/br/acrobat/pdf-reader.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Free PDF Reader: Download and View PDFs - Foxit",
+      "url": "https://www.foxit.com/pdf-reader/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ferramentas online para os amantes de PDF - iLovePDF",
+      "url": "https://www.ilovepdf.com/pt",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Download Adobe Acrobat Reader: Free PDF viewer",
+      "url": "https://get.adobe.com/reader/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 14:02:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "iLovePDF | Online PDF tools for PDF lovers",
+      "url": "https://www.ilovepdf.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 03:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conversor de PDF - Converta online e gratuitamente arquivos para PDF ou ...",
+      "url": "https://smallpdf.com/pt/conversor-de-pdf",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 21:33:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Leitor de PDF: a solução original de PDF | Adobe Acrobat Reader",
+      "url": "https://www.adobe.com/br/acrobat/pdf-reader.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 17:44:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Free PDF Reader: Download and View PDFs - Foxit",
+      "url": "https://www.foxit.com/pdf-reader/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 6.052
+}

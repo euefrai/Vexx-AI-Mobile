@@ -1,0 +1,1526 @@
+{
+  "id": "municipal",
+  "route": "research",
+  "question": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Ubatã\" \"bahia\" notícias",
+    "domain": "news",
+    "original_request": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+    "resolved_request": "Quais acontecimentos ocorreram em Ubatã, Bahia, entre 2026-10-16 e 2026-10-23?",
+    "parameters": {
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "location": "Ubatã",
+      "region": "bahia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T00:46:29.117016+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true
+  },
+  "answer": "Investigação: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-3c407b505652",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-525cc0927c82",
+          "ev-e2c27188cecd",
+          "ev-729e62064dc2"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-525cc0927c82",
+            "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+            "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-e2c27188cecd",
+            "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+            "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+          },
+          {
+            "evidence_id": "ev-729e62064dc2",
+            "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+            "domain": "news.google.com",
+            "relation": "MENTIONS",
+            "read": false,
+            "access_state": "snippet_only",
+            "used_excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+            "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+          }
+        ],
+        "fontes_encontradas": 3,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "421532430f3a7f2219a1",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-3c407b505652",
+        "statement": "Investigar se: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-525cc0927c82",
+          "ev-e2c27188cecd",
+          "ev-729e62064dc2"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "quais acontecimentos ocorreram em ubata bahia nos ultimos sete dias": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 11903
+        }
+      },
+      "failed_source_reads": [
+        "70f105b500dbbf972121f86965f775f0b55cf0ce8a43d287a6af3dcee4cb9aed"
+      ],
+      "research_gaps": [
+        {
+          "id": "fd87345ba6ee7403",
+          "dimension": "original_text",
+          "description": "Trecho original pertinente",
+          "subquestion": "\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\" Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias? primary source original text",
+          "expected_data": "Trecho original pertinente",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+            "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+            "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5"
+          ],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\" Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias? primary source original text",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\" Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias? primary source original text",
+          "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-bcfc8ffded23",
+        "type": "document",
+        "title": "584261203.html",
+        "url": "https://zhidao.baidu.com/question/584261203.html",
+        "final_url": "https://zhidao.baidu.com/question/584261203.html",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-69b540066911",
+        "type": "document",
+        "title": "584616402.html",
+        "url": "https://zhidao.baidu.com/question/584616402.html?qbl=relate_question_0",
+        "final_url": "https://zhidao.baidu.com/question/584616402.html?qbl=relate_question_0",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-0aec4ecf4791",
+        "type": "document",
+        "title": "581648110.html",
+        "url": "https://zhidao.baidu.com/question/581648110.html?qbl=relate_question_1",
+        "final_url": "https://zhidao.baidu.com/question/581648110.html?qbl=relate_question_1",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-e00019d2d38b",
+        "type": "document",
+        "title": "584329672.html",
+        "url": "https://zhidao.baidu.com/question/584329672.html?qbl=relate_question_2",
+        "final_url": "https://zhidao.baidu.com/question/584329672.html?qbl=relate_question_2",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-8f1838a707ab",
+        "type": "document",
+        "title": "581651428.html",
+        "url": "https://zhidao.baidu.com/question/581651428.html?qbl=relate_question_3",
+        "final_url": "https://zhidao.baidu.com/question/581651428.html?qbl=relate_question_3",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-5a72f4620fda",
+        "type": "document",
+        "title": "2079369450588151548.html",
+        "url": "https://zhidao.baidu.com/question/2079369450588151548.html?qbl=relate_question_4",
+        "final_url": "https://zhidao.baidu.com/question/2079369450588151548.html?qbl=relate_question_4",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-90026a207d3d",
+        "type": "document",
+        "title": "501734528574511644.html",
+        "url": "https://zhidao.baidu.com/question/501734528574511644.html?qbl=relate_question_5",
+        "final_url": "https://zhidao.baidu.com/question/501734528574511644.html?qbl=relate_question_5",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-ca0b6afd6638",
+        "type": "document",
+        "title": "588680592241465925.html",
+        "url": "https://zhidao.baidu.com/question/588680592241465925.html?qbl=relate_question_6",
+        "final_url": "https://zhidao.baidu.com/question/588680592241465925.html?qbl=relate_question_6",
+        "source_title": "Pink Floyd的《time》 歌词_百度知道",
+        "source_url": "https://zhidao.baidu.com/question/584261203.html",
+        "publisher": "zhidao.baidu.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pink Floyd的《time》 歌词歌名：Time歌手：Pink Floyd所属专辑：Pulse作词：Pink Floyd作曲：Pink FloydTicking away the moments that make up a dull day时间在无聊的一天里瞬间流失You fritter and waste the ho",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 0,
+      "videos": 0,
+      "documents": 8,
+      "metadata_only": 0,
+      "link_only": 8,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-525cc0927c82",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+      "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:46:47.050276+00:00",
+      "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT",
+      "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Bahia Notícias",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-729e62064dc2",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+      "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:46:47.087703+00:00",
+      "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT",
+      "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Jornal Grande Bahia",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-e2c27188cecd",
+      "fonte_id": "",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+      "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+      "dominio": "news.google.com",
+      "acessado_em": "2026-10-24T00:46:47.071140+00:00",
+      "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT",
+      "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+        }
+      },
+      "structured": [],
+      "publicador": "Canal Rural",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+      "access_state": "snippet_only"
+    }
+  ],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:46:41.440662+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos ': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "google-news: 6 resultados (\"Ubatã\" \"bahia\" notícias)",
+          "google-news: RSS apenas para descoberta; procurando artigos originais",
+          "bing-news: sem resultados (\"Ubatã\" \"bahia\" notícias)",
+          "bing: 6 resultados (\"Ubatã\" \"bahia\" notícias)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (\"Ubatã\" \"bahia\" notícias)",
+          "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+          "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+          "Recuperação no publicador limitada: orcamento"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-24T00:46:42.596924+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://www.zhihu.com/question/39526534.",
+      "meta": {}
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:46:42.976800+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://www.zhihu.com/question/39526534",
+        "final_url": "",
+        "source_state": "BLOCKED",
+        "stage": "fetch_failed",
+        "code": "bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "qua., 30 set. 2026 02:25:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:46:46.133601+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://zhidao.baidu.com/question/584261203.html",
+        "final_url": "https://zhidao.baidu.com/question/584261203.html",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1802,
+        "read": true,
+        "published_at": "ter., 20 out. 2026 19:41:00 GMT",
+        "excerpt": "时光流逝了，歌声也结束了 Thought I'd something more to say 但总觉得自己还有话想说...... Home, home again 回家,又回家 I like to be here when I can 我希望可以在这里 （家里） And when I come home cold and tired 当我逐渐冰冷疲惫 Its good to warm my bones beside the fire 还是在火堆旁温暖我的身体更好吧 Far away across the field 远处，越过田野的远处 The tolling of the iron bell 铁制的钟低缓的鸣响 Calls the faithful to their knees 呼唤着忠诚者使他们屈服 To hear the softly spoken magic spells."
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:46:47.028603+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://zhidao.baidu.com/question/327778580699327165.html",
+        "final_url": "https://zhidao.baidu.com/question/327778580699327165.html",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1197,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 03:31:00 GMT",
+        "excerpt": "2、You can check your program one command at a time while it's running. 你可以在程序运行期间，逐条输入命令以对程序进行检查。 3、Blend in the eggs, one at a time, beating well after each one. 一次一个地掺入鸡蛋，每放一个都充分打匀。 4、You can attack this problem from many angles, but let's take one thing at a time 这个问题可以从多个角度解决，不过，还是让我们逐个分析吧。 at one time 的用法 1、At one time 400 men, women and children lived in the village. 曾经有400个男人、女人和孩子居住在村子里。"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:46:47.034396+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 0,
+          "videos": 0,
+          "documents": 8,
+          "metadata_only": 0,
+          "link_only": 8,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:46:47.041062+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://zhidao.baidu.com/question/584261203.html",
+        "final_url": "https://zhidao.baidu.com/question/584261203.html",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "ENTITY_MISMATCH,SOURCE_MISMATCH,INCOMPLETE_EVIDENCE",
+        "scope": "page_text",
+        "extracted_chars": 1802,
+        "read": true,
+        "published_at": "ter., 20 out. 2026 19:41:00 GMT",
+        "excerpt": "时光流逝了，歌声也结束了 Thought I'd something more to say 但总觉得自己还有话想说...... Home, home again 回家,又回家 I like to be here when I can 我希望可以在这里 （家里） And when I come home cold and tired 当我逐渐冰冷疲惫 Its good to warm my bones beside the fire 还是在火堆旁温暖我的身体更好吧 Far away across the field 远处，越过田野的远处 The tolling of the iron bell 铁制的钟低缓的鸣响 Calls the faithful to their knees 呼唤着忠诚者使他们屈服 To hear the softly spoken magic spells."
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:46:47.042774+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:46:47.047120+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://zhidao.baidu.com/question/327778580699327165.html",
+        "final_url": "https://zhidao.baidu.com/question/327778580699327165.html",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "ENTITY_MISMATCH,SOURCE_MISMATCH,INCOMPLETE_EVIDENCE",
+        "scope": "page_text",
+        "extracted_chars": 1197,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 03:31:00 GMT",
+        "excerpt": "2、You can check your program one command at a time while it's running. 你可以在程序运行期间，逐条输入命令以对程序进行检查。 3、Blend in the eggs, one at a time, beating well after each one. 一次一个地掺入鸡蛋，每放一个都充分打匀。 4、You can attack this problem from many angles, but let's take one thing at a time 这个问题可以从多个角度解决，不过，还是让我们逐个分析吧。 at one time 的用法 1、At one time 400 men, women and children lived in the village. 曾经有400个男人、女人和孩子居住在村子里。"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:46:47.048848+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-24T00:46:47.053603+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-525cc092 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-24T00:46:47.055592+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE",
+        "final_url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Mon, 19 Oct 2026 13:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-24T00:46:47.057783+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-24T00:46:47.068346+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-525cc0927c82",
+        "dominio": "news.google.com",
+        "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1l"
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-24T00:46:47.075017+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-e2c27188 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-24T00:46:47.076802+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c",
+        "final_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Mon, 08 Jun 2026 07:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:46:47.078507+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:46:47.086261+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-e2c27188cecd",
+        "dominio": "news.google.com",
+        "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnV"
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-24T00:46:47.089571+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-729e6206 de news.google.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-24T00:46:47.091803+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0",
+        "final_url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "feed_metadata",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "Fri, 19 Jun 2026 07:00:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-24T00:46:47.093704+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em news.google.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-24T00:46:47.100821+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (news.google.com).",
+      "meta": {
+        "evidencia_id": "ev-729e62064dc2",
+        "dominio": "news.google.com",
+        "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJ"
+      }
+    },
+    {
+      "seq": 38,
+      "ts": "2026-10-24T00:46:47.144238+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?\n\nEvidências: 3; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?\n**Status:** concluída · **Modo:** rapida · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [
+                {
+                  "id": "ev-525cc0927c82",
+                  "title": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+                  "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+                  "published_at": "Mon, 19 Oct 2026 13:00:00 GMT"
+                },
+                {
+                  "id": "ev-e2c27188cecd",
+                  "title": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+                  "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+                  "published_at": "Mon, 08 Jun 2026 07:00:00 GMT"
+                },
+                {
+                  "id": "ev-729e62064dc2",
+                  "title": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+                  "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+                  "domain": "news.google.com",
+                  "relation": "MENTIONS",
+                  "read": false,
+                  "access_state": "snippet_only",
+                  "excerpt": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+                  "published_at": "Fri, 19 Jun 2026 07:00:00 GMT"
+                }
+              ],
+              "found_count": 3,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 19 Oct 2026 13:00:00 GMT",
+              "trecho": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Bahia Notícias",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+              "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+              "dominio": "news.google.com",
+              "data": "Fri, 19 Jun 2026 07:00:00 GMT",
+              "trecho": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação Jornal Grande Bahia",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Jornal Grande Bahia",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+              "dominio": "news.google.com",
+              "data": "Mon, 08 Jun 2026 07:00:00 GMT",
+              "trecho": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural",
+              "origem_declarada": "",
+              "tipo": "Notícia",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Canal Rural",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?.",
+              "markdown": "**HIPÓTESE:** Investigar se: Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-3c407b505652&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-3c407b505652&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-3c407b505652&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (1)",
+              "markdown": "- Trecho original pertinente: 0/1 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 9,
+      "erros": {},
+      "ms_medio": 1544.8
+    },
+    "bing-news": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 2261.7
+    },
+    "google-news": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 2362.6
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 19 Oct 2026 13:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.bahianoticias.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 31 Aug 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 08 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://www.canalrural.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Governador Jerônimo entrega 150ª escola reformada da rede estadual em Ubatã e anuncia novos investimentos em educação - Jornal Grande Bahia",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOX19LUi1FYTJGd2duTmlzU2R6R2c3Y0JkeXlnSHRFQkZtYmpEN1ZCd1EwTURELVduaXM0UGRiaXlpZ2tINmxpYmJoUGpIZzRtYks5dk1XSndRVTFod3RCN29ZN2h1WnpjRmdzb21PNFFLUmVZcWJGX2c2Q2NTUThYN0UySENhS25lSVJ1WHlDaTQwTGRkRUZEMzZPUjdWbU9oYkR5bEpyNjUyMTdIeG5Yc3dhbHBsMVRwTUdORk1MS0NheERteDFzdzRpeVNaei1CeHdfdDVZYU4tWTNHR1JTdEt5SkJ2TnpFYlNxM0RWVi0?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Fri, 19 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://jornalgrandebahia.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Mecânico é encontrado morto após ficar uma semana desaparecido na Bahia - G1",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOeVdjOGNpbmtRR1hiYTcxYnRmd01JS2FEOTY2MWVzeVNyYmVLV0l3SFJUcFJ3cUxiOVhheTNfeFEyUnZ0QU5iV1VjVllMQ256c29Vc2FORGJzdXpLSnhVcFZPNGxrd05RQlBvdUV1b09KQktaT1p5RVhDZVRONUNVWmxRYlNNTHpORGZTU0ZnckF1YlFK0gGjAUFVX3lxTE84dkFtR1QyN2pRbno5YVlXSjRxck5IWVpBWGg1aGNfMlRuZHM4d3M5V3RjNF9GZVViWEpKYVd1SmtKSERmUnNGY2hTVDF1WlFtR2poV3RoMGh4U2k1YVZWalk1Rk56cDRteHg0M3RtM2NqeDA2bGl6bUZGZFhoaUJNTGF1bmI0V1o2S1I3cF9sUVpMTFR1SjAxYW03VUROMlA5TzQ?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Mon, 06 Jul 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://g1.globo.com",
+      "source_recovery": null
+    },
+    {
+      "titulo": "Dois suspeitos morrem após troca de tiros com a PM em Ubatã - Ilhéus Eventos",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOUTFCOFFjZjhqTkRXSG41MXhJTzRsdjNwSk1JbUpubXlobFEzWTBNQnZsY2ItMGQ2RlprMkhXNlQ1VXhuRE02UlRRdVZTdmNfbGxCV1llWDRCV2NPVFpvRllEMkktZ3lyQVVFSURKenVlNExxV0p0em8wczZLUk5NckdRRUVrMnJwVmNwY0p2SEthRWNqRjJ3N1lHOHBUY21ra3pSQ1pyamVhblhCcTk1bw?oc=5",
+      "origem": "google-news",
+      "tipo": "noticia",
+      "meta": {
+        "publicado_em": "Wed, 17 Jun 2026 07:00:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": "https://ilheuseventos.com.br",
+      "source_recovery": null
+    },
+    {
+      "titulo": "如何理解 Pink Floyd 的 Time 这首歌的内涵？它的伟大之处在哪里？",
+      "url": "https://www.zhihu.com/question/39526534",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 30 set. 2026 02:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Pink Floyd的《time》 歌词_百度知道",
+      "url": "https://zhidao.baidu.com/question/584261203.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 19:41:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "at a time，at one time 和at the time有什么区别_百度知道",
+      "url": "https://zhidao.baidu.com/question/327778580699327165.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 03:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "word里面如何将公式的格式改为新罗马字体？ - 知乎",
+      "url": "https://www.zhihu.com/question/63424892",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 18:40:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "2026年 9月 显卡天梯图（更新RTX 5090Dv2&RX 9060）",
+      "url": "https://www.zhihu.com/tardis/bd/art/294283384",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 23:29:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "getsockopt无法连接mc - 百度知道",
+      "url": "https://zhidao.baidu.com/question/596660810185898165.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 08:40:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Defensoria Pública do Rio de Janeiro",
+      "url": "https://defensoria.rj.def.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 11:38:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Defensoria Pública do Rio de Janeiro",
+      "url": "https://defensoria.rj.def.br/Atendimento",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 14 jul. 2026 21:37:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Concurso Público para a Defensoria Pública do Estado do Rio de Janeiro ...",
+      "url": "https://conhecimento.fgv.br/concursos/dperj2026",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 18.104
+}

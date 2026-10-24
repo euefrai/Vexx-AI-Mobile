@@ -1,0 +1,192 @@
+{
+  "scope": "held aside until code frozen; controlled contracts, no external accuracy claim",
+  "cases": [
+    {
+      "id": "low_carbon_concrete",
+      "kind": "FIXTURE_HOLDOUT",
+      "passed": true,
+      "gaps": [
+        {
+          "id": "8c0e64164b7571c2",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "concretos de baixo carbono open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "concretos de baixo carbono open access full text",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "e330e6674e30658d",
+          "dimension": "methods",
+          "description": "Métodos e amostra",
+          "subquestion": "concretos de baixo carbono methods sample experimental",
+          "expected_data": "Métodos e amostra",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "concretos de baixo carbono methods sample experimental",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "e8c432d65fd3408e",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "concretos de baixo carbono results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "concretos de baixo carbono results measurements units",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "da6270cabd2bf182",
+          "dimension": "conditions",
+          "description": "Condições experimentais",
+          "subquestion": "concretos de baixo carbono experimental conditions temperature pressure",
+          "expected_data": "Condições experimentais",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 4,
+          "status": "OPEN",
+          "query": "concretos de baixo carbono experimental conditions temperature pressure",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "88613393a35a7d5b",
+          "dimension": "limitations",
+          "description": "Limitações declaradas",
+          "subquestion": "concretos de baixo carbono limitations study",
+          "expected_data": "Limitações declaradas",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 5,
+          "status": "OPEN",
+          "query": "concretos de baixo carbono limitations study",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ]
+    },
+    {
+      "id": "caffeine_abstract",
+      "kind": "FIXTURE_HOLDOUT",
+      "passed": true,
+      "gaps": [
+        {
+          "id": "3f1b097ed84ce2da",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "\"10.1234/holdout\" open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "\"10.1234/holdout\" open access full text",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "9907941a2a8ba8d8",
+          "dimension": "methods",
+          "description": "Métodos e amostra",
+          "subquestion": "\"10.1234/holdout\" methods sample experimental",
+          "expected_data": "Métodos e amostra",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "\"10.1234/holdout\" methods sample experimental",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "db816e764e35ca9b",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "\"10.1234/holdout\" results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "\"10.1234/holdout\" results measurements units",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ]
+    },
+    {
+      "id": "unit_dimensions",
+      "kind": "FIXTURE_HOLDOUT",
+      "passed": true
+    }
+  ]
+}

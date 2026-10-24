@@ -1,0 +1,131 @@
+.......F................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 15%]
+..............................s......................................... [ 20%]
+........................................................................ [ 25%]
+........................................................................ [ 30%]
+........................................................................ [ 35%]
+........................................................................ [ 40%]
+........................................................................ [ 46%]
+........................................................................ [ 51%]
+............................s........................................... [ 56%]
+............F........................................................... [ 61%]
+........................................................................ [ 66%]
+........................................................................ [ 71%]
+........................s..........s.................................... [ 76%]
+........................................................................ [ 81%]
+........................................................................ [ 86%]
+........................................................................ [ 92%]
+..............................................................F......... [ 97%]
+.......................................                                  [100%]
+================================== FAILURES ===================================
+____ test_optional_orchestrator_dispatch_never_fetches_academic_full_text _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C6752AB4D0>
+
+    def test_optional_orchestrator_dispatch_never_fetches_academic_full_text(monkeypatch):
+        payload = {"results": [_openalex_item()]}
+        fake_gate = FakeGate()
+        provider = ar.OpenAlexWorksProvider(
+            open_url=lambda request, timeout: FakeResponse(payload), gate=fake_gate)
+        academic_provider = ar.AcademicResearchProvider
+        monkeypatch.setattr(
+            ra.academic_research, "AcademicResearchProvider",
+            lambda mailto="": academic_provider(
+                mailto, openalex=provider, crossref=FakeProvider("crossref", [])))
+        monkeypatch.setenv("JULIA_ACADEMIC_RESEARCH", "1")
+        monkeypatch.setenv("JULIA_RESEARCH_MAILTO", "research@example.org")
+    
+        providers = ra.provedores_reais()
+        assert [p.nome for p in providers] == ["ddg", "searxng", "wikipedia", "academic"]
+        db = pc_agent.open_db(Path(":memory:"))
+        try:
+            job = ra.criar_job(db, "researcher", "artigos cient�ficos sobre fotoss�ntese",
+                               manual="rapida")
+    
+            def must_not_fetch(_url):
+                raise AssertionError("academic abstracts must never fetch article full text")
+    
+            result = ra.executar(db, job["id"], "researcher", providers, must_not_fetch)
+            assert result["status"] == "concluida", result
+            evidence = ra.listar_evidencias(db, "researcher", job["id"])
+>           assert evidence and evidence[0]["doi"] == "10.1234/ABC.1"
+E           assert ([])
+
+tests\test_academic_research.py:308: AssertionError
+___ test_academic_abstract_keeps_its_scope_without_unnecessary_replacement ____
+
+research_job = (<sqlite3.Connection object at 0x000001C612583A60>, {'id': 'rj-4adf53dc5e04', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_academic_abstract_keeps_its_scope_without_unnecessary_replacement(research_job):
+        db, job = research_job
+        abstract = {**hits('abstract')[0], 'metadata_source': 'academic_provider',
+                    'abstract': content('')['texto'], 'content_scope': 'abstract_only'}
+        def read(url):
+            pytest.fail('academic abstract does not use custom page reader')
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            [abstract] + hits('unused'), read, teto_paginas=1)
+
+tests\test_research_source_replacement.py:136: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research_agents.py:1074: in agente_analista
+    rec, concluido_em = fut.result()
+                        ^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:443: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py:86: in run
+    result = ctx.run(self.task)
+             ^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py:73: in run
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+research_agents.py:1052: in _ler_cronometrado
+    rec = _ler(a)
+          ^^^^^^^
+research_agents.py:908: in _ler
+    rec = recuperar_fn(a["url"])
+          ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = 'https://example.com/unused'
+
+    def read(url):
+>       pytest.fail('academic abstract does not use custom page reader')
+E       Failed: academic abstract does not use custom page reader
+
+tests\test_research_source_replacement.py:135: Failed
+___________ test_undated_news_is_replaced_before_it_can_be_evidence ___________
+
+research_job = (<sqlite3.Connection object at 0x000001C611366890>, {'id': 'rj-3c3ce18ce035', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_undated_news_is_replaced_before_it_can_be_evidence(research_job):
+        db, job = research_job
+        job['objetivo'] = 'Not�cias intelig�ncia artificial nas �ltimas 24 horas'
+        sources = [{'id':x, 'titulo':job['objetivo'], 'url':f'https://example.org/{x}', 'trecho':job['objetivo']} for x in ('undated','dated')]
+        def read(url):
+            return {'titulo':job['objetivo'],'texto':job['objetivo']+' Relat�rio publicado.', 'texto_lido':True,
+                    'metadados':{'publicado_em':(datetime.now(timezone.utc)-timedelta(minutes=1)).isoformat() if url.endswith('/dated') else ''}}
+        evidence = ra.agente_analista(db, job, {'alvo':job['objetivo']}, sources, read, teto_paginas=1)
+>       assert len(evidence) == 1 and evidence[0]['url'].endswith('/dated')
+E       assert (0 == 1)
+E        +  where 0 = len([])
+
+tests\test_verified_sources_v595.py:251: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_academic_research.py::test_optional_orchestrator_dispatch_never_fetches_academic_full_text
+FAILED tests/test_research_source_replacement.py::test_academic_abstract_keeps_its_scope_without_unnecessary_replacement
+FAILED tests/test_verified_sources_v595.py::test_undated_news_is_replaced_before_it_can_be_evidence
+3 failed, 1400 passed, 4 skipped, 2 warnings in 234.85s (0:03:54)

@@ -1,0 +1,30 @@
+### Result
+{
+  "images": [
+    {
+      "loaded": true,
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "loaded": true,
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "loaded": true,
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "loaded": true,
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "loaded": true,
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
+  "fallbacks": 0
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => window.v598Media');
+```

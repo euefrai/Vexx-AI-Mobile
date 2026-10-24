@@ -1,0 +1,935 @@
+{
+  "scope": "FIXTURE; same controlled corpus/readers; not external/inference/auth UI",
+  "question": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+  "status": "concluida",
+  "queries": [
+    "Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+    "Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental",
+    "Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units",
+    "Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure",
+    "Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study"
+  ],
+  "read_urls": [
+    "https://fixture.example/result-1",
+    "https://fixture.example/result-2",
+    "https://fixture.example/method-1",
+    "https://fixture.example/method-2"
+  ],
+  "duplicate_reads": 0,
+  "read_sources": 4,
+  "gaps": [
+    {
+      "id": "904b464e90a93d1c",
+      "dimension": "original_text",
+      "description": "Texto científico além do abstract",
+      "subquestion": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações open access full text",
+      "expected_data": "Texto científico além do abstract",
+      "relevance": "necessário para responder ao pedido",
+      "evidence_ids": [
+        "ev-14b4a44b1d0c",
+        "ev-806ded59933e",
+        "ev-c92d3f04250b",
+        "ev-647c10360078"
+      ],
+      "candidate_sources": [
+        "https://fixture.example/result-1",
+        "https://fixture.example/result-2",
+        "https://fixture.example/method-1",
+        "https://fixture.example/method-2"
+      ],
+      "previous_attempts": [],
+      "priority": 1,
+      "status": "RESOLVED",
+      "query": "",
+      "budget": {
+        "remaining_searches": 1,
+        "max_new_searches": 1
+      },
+      "required_publications": 2,
+      "observed_publications": 4,
+      "scope": "bounded extracted evidence; no claim of full study coverage"
+    },
+    {
+      "id": "c9ad4758eccb13c2",
+      "dimension": "methods",
+      "description": "Métodos e amostra",
+      "subquestion": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental",
+      "expected_data": "Métodos e amostra",
+      "relevance": "necessário para responder ao pedido",
+      "evidence_ids": [
+        "ev-c92d3f04250b"
+      ],
+      "candidate_sources": [
+        "https://fixture.example/result-1",
+        "https://fixture.example/result-2",
+        "https://fixture.example/method-1",
+        "https://fixture.example/method-2"
+      ],
+      "previous_attempts": [
+        "Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental"
+      ],
+      "priority": 2,
+      "status": "OPEN",
+      "query": "",
+      "budget": {
+        "remaining_searches": 1,
+        "max_new_searches": 1
+      },
+      "required_publications": 2,
+      "observed_publications": 1,
+      "scope": "bounded extracted evidence; no claim of full study coverage"
+    },
+    {
+      "id": "fade9aeca3db3381",
+      "dimension": "results",
+      "description": "Resultados com métrica e unidade",
+      "subquestion": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units",
+      "expected_data": "Resultados com métrica e unidade",
+      "relevance": "necessário para responder ao pedido",
+      "evidence_ids": [
+        "ev-14b4a44b1d0c",
+        "ev-806ded59933e",
+        "ev-c92d3f04250b"
+      ],
+      "candidate_sources": [
+        "https://fixture.example/result-1",
+        "https://fixture.example/result-2",
+        "https://fixture.example/method-1",
+        "https://fixture.example/method-2"
+      ],
+      "previous_attempts": [
+        "Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units"
+      ],
+      "priority": 3,
+      "status": "RESOLVED",
+      "query": "",
+      "budget": {
+        "remaining_searches": 1,
+        "max_new_searches": 1
+      },
+      "required_publications": 2,
+      "observed_publications": 3,
+      "scope": "bounded extracted evidence; no claim of full study coverage"
+    },
+    {
+      "id": "1fb22e1a6e556756",
+      "dimension": "conditions",
+      "description": "Condições experimentais",
+      "subquestion": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure",
+      "expected_data": "Condições experimentais",
+      "relevance": "necessário para responder ao pedido",
+      "evidence_ids": [
+        "ev-c92d3f04250b"
+      ],
+      "candidate_sources": [
+        "https://fixture.example/result-1",
+        "https://fixture.example/result-2",
+        "https://fixture.example/method-1",
+        "https://fixture.example/method-2"
+      ],
+      "previous_attempts": [
+        "Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure"
+      ],
+      "priority": 4,
+      "status": "OPEN",
+      "query": "",
+      "budget": {
+        "remaining_searches": 1,
+        "max_new_searches": 1
+      },
+      "required_publications": 2,
+      "observed_publications": 1,
+      "scope": "bounded extracted evidence; no claim of full study coverage"
+    },
+    {
+      "id": "516096d81ff1db35",
+      "dimension": "limitations",
+      "description": "Limitações declaradas",
+      "subquestion": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study",
+      "expected_data": "Limitações declaradas",
+      "relevance": "necessário para responder ao pedido",
+      "evidence_ids": [
+        "ev-c92d3f04250b"
+      ],
+      "candidate_sources": [
+        "https://fixture.example/result-1",
+        "https://fixture.example/result-2",
+        "https://fixture.example/method-1",
+        "https://fixture.example/method-2"
+      ],
+      "previous_attempts": [
+        "Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study"
+      ],
+      "priority": 5,
+      "status": "OPEN",
+      "query": "",
+      "budget": {
+        "remaining_searches": 1,
+        "max_new_searches": 1
+      },
+      "required_publications": 2,
+      "observed_publications": 1,
+      "scope": "bounded extracted evidence; no claim of full study coverage"
+    }
+  ],
+  "replans": 1,
+  "controller_decisions": [
+    {
+      "action": "REPLAN",
+      "reason": "required_data_missing",
+      "gap_ids": [
+        "c9ad4758eccb13c2",
+        "fade9aeca3db3381",
+        "1fb22e1a6e556756",
+        "516096d81ff1db35"
+      ],
+      "step_id": "p3",
+      "executed": true,
+      "new_searches": 4
+    },
+    {
+      "action": "STOP_PARTIAL",
+      "reason": "budget_or_no_new_query",
+      "gap_ids": [],
+      "step_id": "p9",
+      "executed": false
+    },
+    {
+      "action": "STOP_PARTIAL",
+      "reason": "budget_or_no_new_query",
+      "gap_ids": [],
+      "step_id": "p12",
+      "executed": false
+    },
+    {
+      "action": "STOP_PARTIAL",
+      "reason": "budget_or_no_new_query",
+      "gap_ids": [],
+      "step_id": "p15",
+      "executed": false
+    },
+    {
+      "action": "STOP_PARTIAL",
+      "reason": "budget_or_no_new_query",
+      "gap_ids": [],
+      "step_id": "p18",
+      "executed": false
+    }
+  ],
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [],
+    "provider_code": "",
+    "read_sources": 4,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "synthesis": {
+    "texto": "Investigação: Compare estudos de baterias de estado sólido: métodos, resultados e limitações\n\n[E4](https://fixture.example/method-2) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.\n\n[E1](https://fixture.example/result-1) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.\n\n[E2](https://fixture.example/result-2) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.\n\n[E3](https://fixture.example/method-1) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.\n\nEvidências: 4; afirmações sustentadas: 2/5 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+    "llm": false,
+    "references": {
+      "E4": "ev-647c10360078",
+      "E1": "ev-14b4a44b1d0c",
+      "E2": "ev-806ded59933e",
+      "E3": "ev-c92d3f04250b"
+    }
+  },
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Compare estudos de baterias de estado sólido: métodos, resultados e limitações\n\n[E4](https://fixture.example/method-2) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.\n\n[E1](https://fixture.example/result-1) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.\n\n[E2](https://fixture.example/result-2) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.\n\n[E3](https://fixture.example/method-1) Estudo de baterias de estado sólido (fixture.example): Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.\n\nEvidências: 4; afirmações sustentadas: 2/5 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Compare estudos de baterias de estado sólido: métodos, resultados e limitações\n**Status:** concluída · **Modo:** profunda · **Evidências:** 4\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 0.75,
+              "sources": [
+                {
+                  "id": "ev-14b4a44b1d0c",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-806ded59933e",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-c92d3f04250b",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-647c10360078",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 4,
+              "read_count": 4,
+              "supporting_count": 4,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Baterias de estado sólido métodos resultados limitações.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-14b4a44b1d0c",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-806ded59933e",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-c92d3f04250b",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-647c10360078",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 4,
+              "read_count": 4,
+              "supporting_count": 4,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Baterias de estado sólido: measured capacity was 100 mAh/g.",
+              "state": "SUPPORTED",
+              "method": "quantidade+contexto",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-14b4a44b1d0c",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-1",
+                  "domain": "fixture.example",
+                  "relation": "SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-806ded59933e",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-2",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-c92d3f04250b",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-1",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-647c10360078",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-2",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 4,
+              "read_count": 4,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Baterias de estado sólido: 50 cells were tested at 25 C.",
+              "state": "SUPPORTED",
+              "method": "quantidade+contexto",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-14b4a44b1d0c",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-1",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-806ded59933e",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-2",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-c92d3f04250b",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-1",
+                  "domain": "fixture.example",
+                  "relation": "SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-647c10360078",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-2",
+                  "domain": "fixture.example",
+                  "relation": "MENTIONS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 4,
+              "read_count": 4,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Baterias de estado sólido: observations are limited to laboratory cells.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-14b4a44b1d0c",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-806ded59933e",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/result-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-c92d3f04250b",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-1",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                },
+                {
+                  "id": "ev-647c10360078",
+                  "title": "Estudo de baterias de estado sólido",
+                  "url": "https://fixture.example/method-2",
+                  "domain": "fixture.example",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 4,
+              "read_count": 4,
+              "supporting_count": 4,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Estudo de baterias de estado sólido",
+              "url": "https://fixture.example/result-1",
+              "dominio": "fixture.example",
+              "data": "",
+              "trecho": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            },
+            {
+              "titulo": "Estudo de baterias de estado sólido",
+              "url": "https://fixture.example/method-2",
+              "dominio": "fixture.example",
+              "data": "",
+              "trecho": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            },
+            {
+              "titulo": "Estudo de baterias de estado sólido",
+              "url": "https://fixture.example/result-2",
+              "dominio": "fixture.example",
+              "data": "",
+              "trecho": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            },
+            {
+              "titulo": "Estudo de baterias de estado sólido",
+              "url": "https://fixture.example/method-1",
+              "dominio": "fixture.example",
+              "data": "",
+              "trecho": "Baterias de estado sólido métodos resultados limitações. Baterias de estado sólido: measured capacity was 100 mAh/g. Baterias de estado sólido: 50 cells were tested at 25 C. Baterias de estado sólido: observations are limited to laboratory cells.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+          "mode": "profunda",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3",
+                "p9",
+                "p12",
+                "p15",
+                "p18"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            },
+            {
+              "id": "p7",
+              "title": "Buscar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p8",
+              "title": "Ler: Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p7"
+              ]
+            },
+            {
+              "id": "p9",
+              "title": "Analisar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações methods sample experimental",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p8"
+              ]
+            },
+            {
+              "id": "p10",
+              "title": "Buscar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p11",
+              "title": "Ler: Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p10"
+              ]
+            },
+            {
+              "id": "p12",
+              "title": "Analisar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações results measurements units",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p11"
+              ]
+            },
+            {
+              "id": "p13",
+              "title": "Buscar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p14",
+              "title": "Ler: Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p13"
+              ]
+            },
+            {
+              "id": "p15",
+              "title": "Analisar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações experimental conditions temperature pressure",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p14"
+              ]
+            },
+            {
+              "id": "p16",
+              "title": "Buscar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p17",
+              "title": "Ler: Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p16"
+              ]
+            },
+            {
+              "id": "p18",
+              "title": "Analisar: Compare estudos de baterias de estado sólido: métodos, resultados e limitações limitations study",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p17"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 18,
+            "total": 18,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 6.0,
+            "paginas": 8.0,
+            "timeout_s": 25.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 16.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 5.0,
+            "paginas": 4.0,
+            "replans": 1.0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Compare estudos de baterias de estado sólido: métodos, resultados e limitações.",
+              "markdown": "**HIPÓTESE:** Investigar se: Compare estudos de baterias de estado sólido: métodos, resultados e limitações.\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Baterias de estado sólido métodos resultados limitações.",
+              "markdown": "**HIPÓTESE:** Investigar se: Baterias de estado sólido métodos resultados limitações.\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Baterias de estado sólido: measured capacity was 100 mAh/g.",
+              "markdown": "**HIPÓTESE:** Investigar se: Baterias de estado sólido: measured capacity was 100 mAh/g.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Baterias de estado sólido: 50 cells were tested at 25 C.",
+              "markdown": "**HIPÓTESE:** Investigar se: Baterias de estado sólido: 50 cells were tested at 25 C.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Baterias de estado sólido: observations are limited to laboratory cells.",
+              "markdown": "**HIPÓTESE:** Investigar se: Baterias de estado sólido: observations are limited to laboratory cells.\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-de9dd38f82c1&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-de9dd38f82c1&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-de9dd38f82c1&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (3)",
+              "markdown": "- Métodos e amostra: 1/2 publicação(ões) com o dado extraído.\n\n- Condições experimentais: 1/2 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 1/2 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "elapsed_s": 0.246
+}

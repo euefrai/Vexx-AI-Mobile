@@ -1,0 +1,4007 @@
+{
+  "id": "solid_state",
+  "route": "deep_research",
+  "question": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "title",
+      "doi",
+      "authors",
+      "publication_date",
+      "content_scope",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "domain": "science",
+    "original_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "resolved_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:51:16.286150+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n\n[E1](https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido) Bateria de estado sólido (pt.wikipedia.org): ] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar\n\nEvidências: 1; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-a89fc6c11ad6",
+    "status": "concluida",
+    "modo": "profunda",
+    "objetivo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "plano_versao": 3,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 11,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p5",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 31,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p6",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 51,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p7",
+        "tipo": "verificar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3",
+          "p6",
+          "p12",
+          "p15",
+          "p18",
+          "p21"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p8",
+        "tipo": "sintetizar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p7"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p9",
+        "tipo": "auditar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p8"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      },
+      {
+        "id": "p10",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "baterias de estado sólido open access full text",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p11",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "baterias de estado sólido open access full text",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p10"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p12",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "baterias de estado sólido open access full text",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p11"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p13",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "baterias de estado sólido methods sample experimental",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p14",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "baterias de estado sólido methods sample experimental",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p13"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p15",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "baterias de estado sólido methods sample experimental",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p14"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p16",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "baterias de estado sólido results measurements units",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p17",
+        "tipo": "ler",
+        "status": "pendente",
+        "alvo": "baterias de estado sólido results measurements units",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p16"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p18",
+        "tipo": "analisar",
+        "status": "pendente",
+        "alvo": "baterias de estado sólido results measurements units",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p17"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p19",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "baterias de estado sólido experimental conditions temperature pressure",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p20",
+        "tipo": "ler",
+        "status": "pendente",
+        "alvo": "baterias de estado sólido experimental conditions temperature pressure",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p19"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      },
+      {
+        "id": "p21",
+        "tipo": "analisar",
+        "status": "pendente",
+        "alvo": "baterias de estado sólido experimental conditions temperature pressure",
+        "frente": 0,
+        "objetivo_etapa": "",
+        "dependencias": [
+          "p20"
+        ],
+        "prioridade": 25,
+        "priority_reason": "",
+        "replan_reason": "consulta complementar por lacuna real de busca",
+        "regra_parada": "uma única rodada extra, orçamento e timeout originais",
+        "criterio_conclusao": ""
+      }
+    ],
+    "evidencias": 3,
+    "achados": [
+      {
+        "afirmacao": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.333,
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "supporting_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-2f8a1f4c6c70",
+            "title": "Bateria de estado sólido",
+            "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "domain": "pt.wikipedia.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+            "published_at": "2021-09-02T03:52:40Z"
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "] Operações em baixa temperatura podem ser desafiadoras.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "supporting_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-2f8a1f4c6c70",
+            "title": "Bateria de estado sólido",
+            "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "domain": "pt.wikipedia.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+            "published_at": "2021-09-02T03:52:40Z"
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "supporting_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-2f8a1f4c6c70",
+            "title": "Bateria de estado sólido",
+            "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "domain": "pt.wikipedia.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+            "published_at": "2021-09-02T03:52:40Z"
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "supporting_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-2f8a1f4c6c70",
+            "title": "Bateria de estado sólido",
+            "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "domain": "pt.wikipedia.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+            "published_at": "2021-09-02T03:52:40Z"
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "supporting_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-2f8a1f4c6c70",
+            "title": "Bateria de estado sólido",
+            "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "domain": "pt.wikipedia.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+            "published_at": "2021-09-02T03:52:40Z"
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n\n[E1](https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido) Bateria de estado sólido (pt.wikipedia.org): ] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar\n\nEvidências: 1; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {
+        "E1": "ev-2f8a1f4c6c70"
+      }
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "6a123485fa2d08ea514b",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-a89fc6c11ad6",
+        "statement": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+        "status": "open",
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "6181f9010056f566ddf6",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-a89fc6c11ad6",
+        "statement": "Investigar se: ] Operações em baixa temperatura podem ser desafiadoras.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: ] Operações em baixa temperatura podem ser desafiadoras."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "00855f88893945565829",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-a89fc6c11ad6",
+        "statement": "Investigar se: 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "4efe2fd585428e06104b",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-a89fc6c11ad6",
+        "statement": "Investigar se: Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "1f91de5b1f2e66389f49",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-a89fc6c11ad6",
+        "statement": "Investigar se: eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+        "status": "open",
+        "evidence_ids": [
+          "ev-2f8a1f4c6c70"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Executar p17 (ler)",
+    "auditoria_ok": null,
+    "pendencias": [
+      "p17: orçamento de páginas esgotado",
+      "p18: aguardando dependências explícitas concluírem",
+      "p20: orçamento de páginas esgotado",
+      "p21: aguardando dependências explícitas concluírem",
+      "p7: aguardando dependências explícitas concluírem",
+      "p8: aguardando dependências explícitas concluírem",
+      "p9: aguardando dependências explícitas concluírem"
+    ],
+    "erros": [],
+    "usados": {
+      "buscas": 6,
+      "paginas": 12,
+      "local_context_checked": true,
+      "replans": 1,
+      "consultas_etapas": {
+        "baterias de estado solido": "p1",
+        "solid state batteries": "p4",
+        "baterias de estado solido open access full text": "p10",
+        "baterias de estado solido methods sample experimental": "p13",
+        "baterias de estado solido results measurements units": "p16",
+        "baterias de estado solido experimental conditions temperature pressure": "p19"
+      },
+      "provedores": {
+        "wikipedia": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 506
+        },
+        "web": {
+          "ok": 5,
+          "falhas": 0,
+          "ms": 20755
+        }
+      },
+      "research_gaps": [
+        {
+          "id": "4237584080447679",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "baterias de estado sólido open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [
+            "ev-2f8a1f4c6c70"
+          ],
+          "candidate_sources": [
+            "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          ],
+          "previous_attempts": [
+            "baterias de estado sólido open access full text"
+          ],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 1,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "32ac0c247602134b",
+          "dimension": "methods",
+          "description": "Métodos e amostra",
+          "subquestion": "baterias de estado sólido methods sample experimental",
+          "expected_data": "Métodos e amostra",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          ],
+          "previous_attempts": [
+            "baterias de estado sólido methods sample experimental"
+          ],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "94a2879839b06c20",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "baterias de estado sólido results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          ],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "307ed6f0b1a8be66",
+          "dimension": "conditions",
+          "description": "Condições experimentais",
+          "subquestion": "baterias de estado sólido experimental conditions temperature pressure",
+          "expected_data": "Condições experimentais",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          ],
+          "previous_attempts": [],
+          "priority": 4,
+          "status": "OPEN",
+          "query": "",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "c23a7fbdd3eefc7f",
+          "dimension": "limitations",
+          "description": "Limitações declaradas",
+          "subquestion": "baterias de estado sólido limitations study",
+          "expected_data": "Limitações declaradas",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+            "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          ],
+          "previous_attempts": [],
+          "priority": 5,
+          "status": "OPEN",
+          "query": "baterias de estado sólido limitations study",
+          "budget": {
+            "remaining_searches": 4,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "REPLAN",
+          "reason": "required_data_missing",
+          "gap_ids": [
+            "4237584080447679",
+            "32ac0c247602134b",
+            "94a2879839b06c20",
+            "307ed6f0b1a8be66"
+          ],
+          "step_id": "p3",
+          "executed": false
+        },
+        {
+          "action": "REPLAN",
+          "reason": "required_data_missing",
+          "gap_ids": [
+            "4237584080447679",
+            "32ac0c247602134b",
+            "94a2879839b06c20",
+            "307ed6f0b1a8be66"
+          ],
+          "step_id": "p6",
+          "executed": true,
+          "new_searches": 4
+        },
+        {
+          "action": "REPLAN",
+          "reason": "required_data_missing",
+          "gap_ids": [
+            "c23a7fbdd3eefc7f"
+          ],
+          "step_id": "p12",
+          "executed": false
+        },
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p15",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 1,
+          "total_evidence": 1,
+          "remaining_searches": 6,
+          "decision": "evidence_gained"
+        },
+        {
+          "step_id": "p6",
+          "new_evidence": 0,
+          "total_evidence": 1,
+          "remaining_searches": 6,
+          "decision": "no_new_evidence"
+        },
+        {
+          "step_id": "p12",
+          "new_evidence": 0,
+          "total_evidence": 1,
+          "remaining_searches": 5,
+          "decision": "no_new_evidence"
+        },
+        {
+          "step_id": "p15",
+          "new_evidence": 0,
+          "total_evidence": 1,
+          "remaining_searches": 4,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-2f8a1f4c6c70"
+      ],
+      "follow_ups": [],
+      "recuperacao_busca": [
+        "baterias estado sólido experimental conditions temperature pressure",
+        "baterias estado sólido methods sample experimental",
+        "baterias estado sólido open access full text",
+        "baterias estado sólido results measurements units"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "baterias de estado sólido limitations study",
+          "baterias de estado sólido fontes primárias texto completo",
+          "baterias de estado sólido experimental conditions temperature pressure fontes primárias texto completo",
+          "baterias de estado sólido methods sample experimental fontes primárias texto completo",
+          "baterias de estado sólido open access full text fontes primárias texto completo",
+          "baterias de estado sólido results measurements units fontes primárias texto completo",
+          "solid-state batteries fontes primárias texto completo",
+          "baterias estado sólido experimental conditions temperature pressure"
+        ],
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "profundidade": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "replans": 2,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-dee621472346",
+        "type": "image",
+        "title": "Wikipédia",
+        "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+        "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+        "source_title": "Bateria de estado sólido",
+        "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "publisher": "pt.wikipedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Wikipédia",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-38e1176af089",
+        "type": "image",
+        "title": "Acessível livremente",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/20px-Lock-green.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/20px-Lock-green.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "source_title": "Bateria de estado sólido",
+        "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "publisher": "thumb.wikimedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Acessível livremente",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-8930cb3b5a58",
+        "type": "image",
+        "title": "Wikimedia Foundation",
+        "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+        "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+        "source_title": "Bateria de estado sólido",
+        "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "publisher": "pt.wikipedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Wikimedia Foundation",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-4f63425d32e1",
+        "type": "image",
+        "title": "Powered by MediaWiki",
+        "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+        "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+        "source_title": "Bateria de estado sólido",
+        "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "publisher": "pt.wikipedia.org",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Powered by MediaWiki",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-cd6488479b81",
+        "type": "image",
+        "title": "Fique por dentro do que são os princípios SOLID e como podemos aplicá-los nos códigos para aumentar a qualidade dos projetos.",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/solid.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/solid.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Fique por dentro do que são os princípios SOLID e como podemos aplicá-los nos códigos para aumentar a qualidade dos projetos.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-7117b16dd691",
+        "type": "image",
+        "title": "Figura representando o SOLID. Há 5 colunas brancas, sustentando uma plataforma. Acima de cada coluna, na plataforma, há uma letra, representando cada princípio.",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/image-solid.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/image-solid.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Figura representando o SOLID. Há 5 colunas brancas, sustentando uma plataforma. Acima de cada coluna, na plataforma, há uma letra, representando cada princípio. Abaixo de cada coluna, há o nome em português e a sigla em inglês dos princípio",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-45a3bd58a59b",
+        "type": "image",
+        "title": "Banner do Guia Tático Alura sobre carreira em tecnologia, destacando o mapa da carreira tech. A imagem convida a explorar diferentes caminhos profissionais, com",
+        "url": "https://cdn-wcsm.alura.com.br/2026/10/05211031/Blog-Vertical-A.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2026/10/05211031/Blog-Vertical-A.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Banner do Guia Tático Alura sobre carreira em tecnologia, destacando o mapa da carreira tech. A imagem convida a explorar diferentes caminhos profissionais, comparar possibilidades e encontrar a próxima fase da carreira na área de tecnologi",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-f7160fd44eba",
+        "type": "image",
+        "title": "Fotografia de Robert Martin. Homem branco com cabelo grisalho e louro, usando óculos. Ele olha e aponta para a câmera e se encontra sentado em uma poltrona bran",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/robert-martin.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/robert-martin.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Fotografia de Robert Martin. Homem branco com cabelo grisalho e louro, usando óculos. Ele olha e aponta para a câmera e se encontra sentado em uma poltrona branca estampada. Veste um casaco fechado azul marinho.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-67913c02b549",
+        "type": "image",
+        "title": "Fotografia de Michael Feathers. Homem de cabelo e barba branca. Pele branca. Ele está em um ambiente iluminado, ao fundo uma parede na cor verde",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/michael-feathers.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/michael-feathers.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Fotografia de Michael Feathers. Homem de cabelo e barba branca. Pele branca. Ele está em um ambiente iluminado, ao fundo uma parede na cor verde",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-0190d51d7565",
+        "type": "image",
+        "title": "Imagem representando 2 categorias: Classe, Objetos. Na parte superior, categoria Classe, onde é ilustrado um carro abstrato na cor cinza, ao lado desta imagem h",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/carros-solid.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/carros-solid.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Imagem representando 2 categorias: Classe, Objetos. Na parte superior, categoria Classe, onde é ilustrado um carro abstrato na cor cinza, ao lado desta imagem há as seguintes características: Tipo, Cor, Placa e Número de portas. Ambas as ca",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-56307129c4da",
+        "type": "image",
+        "title": "Imagem de um canivete suíço com muitas utilidades, sendo a mistura de diversas ferramentas, como chaves e facas diferentes. Essas ferramentas se amontoam dos la",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/canivete.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/canivete.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Imagem de um canivete suíço com muitas utilidades, sendo a mistura de diversas ferramentas, como chaves e facas diferentes. Essas ferramentas se amontoam dos lados do canivete, deixando-o difícil de manusear.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-5fe8e47bd1f0",
+        "type": "image",
+        "title": "Imagem de um caminhão e suas várias carrocerias. À direita, há a cabine - parte da frente - do caminhão. à esquerda, há 3 tipos diferentes de carrocerias do cam",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/caminhao.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/caminhao.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Imagem de um caminhão e suas várias carrocerias. À direita, há a cabine - parte da frente - do caminhão. à esquerda, há 3 tipos diferentes de carrocerias do caminhão. A primeira é retangular, a segunda é em forma de trapézio e a terceira é ",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-9dacd0154dde",
+        "type": "image",
+        "title": "Imagem comparando dois patos. A imagem é composta por duas fotos, uma com cada pato, e as fotos estão separadas por um símbolo de diferente. Os dois patos estão",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/patos.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/patos.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Imagem comparando dois patos. A imagem é composta por duas fotos, uma com cada pato, e as fotos estão separadas por um símbolo de diferente. Os dois patos estão sob a água, iluminados com uma luz azulada. O primeiro pato, à esquerda, é um p",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-6d5d0809b2f7",
+        "type": "image",
+        "title": "Imagem de um dispositivo eletrônico multifuncional em cor preta, destacando suas seis conexões, incluindo portas USB e tipo C.",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/multifuncional.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/multifuncional.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Imagem de um dispositivo eletrônico multifuncional em cor preta, destacando suas seis conexões, incluindo portas USB e tipo C.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d4ad822d8ced",
+        "type": "image",
+        "title": "Representação visual de uma pessoa conectando um equipamento à tomada. O ambiente é composto por uma parede branca com um interruptor visível, destacando a ação",
+        "url": "https://cdn-wcsm.alura.com.br/2025/04/tomada.jpg",
+        "final_url": "https://cdn-wcsm.alura.com.br/2025/04/tomada.jpg",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "cdn-wcsm.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Representação visual de uma pessoa conectando um equipamento à tomada. O ambiente é composto por uma parede branca com um interruptor visível, destacando a ação prática de plugar o dispositivo.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-7c0d9628cd73",
+        "type": "image",
+        "title": "Banner do Guia Tático Alura sobre carreira em tecnologia, destacando o mapa da carreira tech. A imagem convida a explorar diferentes caminhos profissionais, com",
+        "url": "https://www.alura.com.br/_next/image?url=https%3A%2F%2Fcdn-wcsm.alura.com.br%2F2026%2F10%2F05211028%2FBlog-Horizontal-B.jpg&w=3840&q=100",
+        "final_url": "https://www.alura.com.br/_next/image?url=https%3A%2F%2Fcdn-wcsm.alura.com.br%2F2026%2F10%2F05211028%2FBlog-Horizontal-B.jpg&w=3840&q=100",
+        "source_title": "SOLID: o que é e quais os 5 princípios da Programação Orientada a Objetos (POO)",
+        "source_url": "https://www.alura.com.br/artigos/solid",
+        "publisher": "www.alura.com.br",
+        "date": "2024-01-03 21:00:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Banner do Guia Tático Alura sobre carreira em tecnologia, destacando o mapa da carreira tech. A imagem convida a explorar diferentes caminhos profissionais, comparar possibilidades e encontrar a próxima fase da carreira na área de tecnologi",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 16,
+      "images": 16,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 16,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "replans": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-166fccb4dcea",
+      "fonte_id": "",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "dominio": "shopee.com.br",
+      "acessado_em": "2026-10-24T00:51:32.029376+00:00",
+      "publicado_em": "sex., 23 out. 2026 00:25:00 GMT",
+      "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "science",
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-2ecf04fceffa",
+      "fonte_id": "",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "dominio": "shopee.com.br",
+      "acessado_em": "2026-10-24T00:51:38.766177+00:00",
+      "publicado_em": "sex., 23 out. 2026 00:25:00 GMT",
+      "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "science",
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-2f8a1f4c6c70",
+      "fonte_id": "",
+      "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+      "titulo": "Bateria de estado sólido",
+      "dominio": "pt.wikipedia.org",
+      "acessado_em": "2026-10-24T00:51:19.382522+00:00",
+      "publicado_em": "2021-09-02T03:52:40Z",
+      "trecho": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "scientific_sections": [
+        {
+          "title": "",
+          "text": "Uma é uma tecnologia de sólidos e um , em vez dos eletrólitos líquidos ou de gel de encontrados ou de . bateria de estado sólido bateria que usa eletrodos eletrólito sólido polímero nas baterias de íon-lítio polímero de lítio 1 [ ] 2 [ ]\nEmbora os eletrólitos sólidos tenham sido descobertos no século XIX, várias desvantagens, como baixas , impediram sua aplicação generalizada. Os desenvolvimentos do final do século XX e início do século XXI geraram um interesse renovado em tecnologias de baterias de estado sólido, especialmente no contexto de , a partir da década de 2010. densidades de energia veículos elétricos\nOs materiais propostos para uso como eletrólitos sólidos em baterias de estado sólido incluem cerâmicas (por exemplo, óxidos, sulfetos, fosfatos) e polímeros sólidos. Baterias de estado sólido encontraram uso em , e . Eles são potencialmente mais seguros, com densidades de energia mais altas, mas a um custo muito maior. Os desafios para a adoção generalizada incluem energia e d",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+          "extraction_scope": "bounded_section"
+        },
+        {
+          "title": "Sensibilidade à temperatura e pressão",
+          "text": "Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ]\nBaterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ]\n(Li) sólido em baterias de estado sólido são candidatos de substituição em para mais altas, segurança e tempos de recarga mais rápidos. Esses ânodos tendem a sofrer com a formação e o crescimento de de Li. Ânodos de metal de lítio baterias de íon de lítio densidades de energia dendritos 31 [ ]\nOs dendritos penetram no separador entre o ânodo e o cátodo causando . Isso causa superaquecimento, que pode resultar em incêndios ou de . curtos-circuitos explosões avalanche térmica 32 [ ]\nAcredita-se que a tecnologia de bateria de estado sólido oferece mais altas ao habilitar ânodos de metal de lítio. densidades de energia 33 [ ]\nElas p",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+          "extraction_scope": "bounded_section"
+        }
+      ],
+      "vertical": {
+        "kind": "science",
+        "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "Wikimedia Foundation, Inc.",
+      "imagens": [
+        "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+        "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg"
+      ],
+      "texto_lido": true,
+      "trecho_usado": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+      "access_state": "read"
+    }
+  ],
+  "read_sources": 1,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [
+    {
+      "label": "E1",
+      "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    }
+  ],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:51:16.865894+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'baterias de estado sólido': 1 achados.",
+      "meta": {
+        "provedor": "wikipedia",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          }
+        ],
+        "estado": "",
+        "recovery_steps": []
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-24T00:51:18.695571+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'solid-state batteries': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "sem_correspondencia",
+        "recovery_steps": [
+          "bing: 6 resultados (solid-state batteries)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (solid-state batteries)",
+          "ddg: bloqueado (solid-state batteries)",
+          "marginalia: sem resultados (solid-state batteries)"
+        ]
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:51:19.352699+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "final_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2021-09-02T03:52:40Z",
+        "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:51:19.367341+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 4,
+          "images": 4,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 4,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:51:19.386119+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-2f8a1f4c de pt.wikipedia.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:51:19.387952+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: evidence_stored.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "final_url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+        "source_state": "EVIDENCE_ELIGIBLE",
+        "stage": "evidence_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2021-09-02T03:52:40Z",
+        "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:51:19.390082+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Lida pt.wikipedia.org (relevância 1.0).",
+      "meta": {}
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:51:19.404239+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (pt.wikipedia.org).",
+      "meta": {
+        "evidencia_id": "ev-2f8a1f4c6c70",
+        "dominio": "pt.wikipedia.org",
+        "trecho": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar ",
+        "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido"
+      }
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-24T00:51:20.951150+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.alura.com.br/artigos/solid",
+        "final_url": "https://www.alura.com.br/artigos/solid",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "2024-01-03T21:00:00.000Z",
+        "excerpt": "conectarAPI //... public void criarTarefa //... public void atualizarTarefa //... public void removerTarefa //... public void enviarNotificacao //... public void produzirRelatorio //... public void enviarRelatorio //... Problemática Tente enumerar todas as funções que a classe tem. Ela é responsável por lidar com todas as operações das tarefas em si e também está consumindo uma API, enviando"
+      }
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-24T00:51:21.298109+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.freecodecamp.org/portuguese/news/os-principios-solid-da-programacao-orientada-a-objetos-explicados-em-bom-portugues/",
+        "final_url": "https://www.freecodecamp.org/portuguese/news/os-principios-solid-da-programacao-orientada-a-objetos-explicados-em-bom-portugues/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2022-05-18T17:35:04.000Z",
+        "excerpt": "de software em geral. Por isso, creio que seja um tópico que todo desenvolvedor deveria conhecer. Este artigo ensinará a você tudo o que você precisa saber para aplicar os princípios SOLID aos seus projetos. Vamos começar dando uma olhada na história desse termo. Em seguida, vamos nos aprofundar nos detalhes – os porquês e modos de usar cada princípio – criando um design de classe e melhorando-o"
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-24T00:51:21.981939+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://solides.com.br/",
+        "final_url": "https://solides.com.br/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 994,
+        "read": true,
+        "published_at": "2026-08-11T02:07:45+00:00",
+        "excerpt": "contratação, desenvolvimento e gestão de pessoas. Plataforma All-in-One: Integração total entre inteligência de gestão de pessoas (RH) e operacional trabalhista (DP). Inteligência Artificial Nativa: Copilot IA e agentes de inteligência artificial que automatizam tarefas e aprimoram processos ao longo de toda a jornada do colaborador, do recrutamento à retenção . SuperAPP do Colaborador: centraliza"
+      }
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-24T00:51:22.335701+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://solidproject.org/",
+        "final_url": "https://solidproject.org/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1242,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 12:36:00 GMT",
+        "excerpt": "Solid Your data, your choice Advancing the Web to empower people and communities. Get a Solid Pod Already have a Pod - try the apps “When I invented the World Wide Web, I envisioned technology that would empower people and enable collaboration. Somewhere along the way, we lost that human-first approach; today’s web often prioritises profits over people. Solid returns the web to its roots by giving"
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:51:23.064426+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/SOLID",
+        "final_url": "https://pt.wikipedia.org/wiki/SOLID",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 2763,
+        "read": true,
+        "published_at": "2018-12-02T15:15:31Z",
+        "excerpt": "direcionadas das interfaces, adaptando o código às necessidades de cada contexto. Evita dependências desnecessárias: Permite que clientes não exponham métodos que eles não implementam. 8 [ ] Dependency Inversion Principle (DIP) [ editar | editar código ] A. \"Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações.\" B. \"Abstrações não devem depender de"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:51:23.833049+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.geeksforgeeks.org/system-design/solid-principle-in-programming-understand-with-real-life-examples/",
+        "final_url": "https://www.geeksforgeeks.org/system-design/solid-principle-in-programming-understand-with-real-life-examples/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2019-10-12 11:58:44",
+        "excerpt": "on its specific responsibility baker . bakeBread (); inventoryManager . manageInventory (); supplyOrder . orderSupplies (); customerService . serveCustomer (); cleaner . cleanBakery (); } main (); Output Baking high-quality bread... Managing inventory... Ordering supplies... Serving customers... Cleaning the bakery... BreadBaker Class : Responsible solely for baking bread. This class focuses on"
+      }
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-24T00:51:23.846177+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "12 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 12,
+        "summary": {
+          "total": 16,
+          "images": 16,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 16,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-24T00:51:23.857681+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.alura.com.br/artigos/solid",
+        "final_url": "https://www.alura.com.br/artigos/solid",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 7999,
+        "read": true,
+        "published_at": "2024-01-03T21:00:00.000Z",
+        "excerpt": "conectarAPI //... public void criarTarefa //... public void atualizarTarefa //... public void removerTarefa //... public void enviarNotificacao //... public void produzirRelatorio //... public void enviarRelatorio //... Problemática Tente enumerar todas as funções que a classe tem. Ela é responsável por lidar com todas as operações das tarefas em si e também está consumindo uma API, enviando"
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-24T00:51:23.860135+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-24T00:51:23.870040+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.freecodecamp.org/portuguese/news/os-principios-solid-da-programacao-orientada-a-objetos-explicados-em-bom-portugues/",
+        "final_url": "https://www.freecodecamp.org/portuguese/news/os-principios-solid-da-programacao-orientada-a-objetos-explicados-em-bom-portugues/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2022-05-18T17:35:04.000Z",
+        "excerpt": "de software em geral. Por isso, creio que seja um tópico que todo desenvolvedor deveria conhecer. Este artigo ensinará a você tudo o que você precisa saber para aplicar os princípios SOLID aos seus projetos. Vamos começar dando uma olhada na história desse termo. Em seguida, vamos nos aprofundar nos detalhes – os porquês e modos de usar cada princípio – criando um design de classe e melhorando-o"
+      }
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-24T00:51:23.871993+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-24T00:51:23.875019+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://solides.com.br/",
+        "final_url": "https://solides.com.br/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 994,
+        "read": true,
+        "published_at": "2026-08-11T02:07:45+00:00",
+        "excerpt": "contratação, desenvolvimento e gestão de pessoas. Plataforma All-in-One: Integração total entre inteligência de gestão de pessoas (RH) e operacional trabalhista (DP). Inteligência Artificial Nativa: Copilot IA e agentes de inteligência artificial que automatizam tarefas e aprimoram processos ao longo de toda a jornada do colaborador, do recrutamento à retenção . SuperAPP do Colaborador: centraliza"
+      }
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-24T00:51:23.876710+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 33,
+      "ts": "2026-10-24T00:51:23.885993+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.geeksforgeeks.org/system-design/solid-principle-in-programming-understand-with-real-life-examples/",
+        "final_url": "https://www.geeksforgeeks.org/system-design/solid-principle-in-programming-understand-with-real-life-examples/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2019-10-12 11:58:44",
+        "excerpt": "on its specific responsibility baker . bakeBread (); inventoryManager . manageInventory (); supplyOrder . orderSupplies (); customerService . serveCustomer (); cleaner . cleanBakery (); } main (); Output Baking high-quality bread... Managing inventory... Ordering supplies... Serving customers... Cleaning the bakery... BreadBaker Class : Responsible solely for baking bread. This class focuses on"
+      }
+    },
+    {
+      "seq": 34,
+      "ts": "2026-10-24T00:51:23.889058+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 35,
+      "ts": "2026-10-24T00:51:23.893862+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://solidproject.org/",
+        "final_url": "https://solidproject.org/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 1242,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 12:36:00 GMT",
+        "excerpt": "Solid Your data, your choice Advancing the Web to empower people and communities. Get a Solid Pod Already have a Pod - try the apps “When I invented the World Wide Web, I envisioned technology that would empower people and enable collaboration. Somewhere along the way, we lost that human-first approach; today’s web often prioritises profits over people. Solid returns the web to its roots by giving"
+      }
+    },
+    {
+      "seq": 36,
+      "ts": "2026-10-24T00:51:23.897071+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 37,
+      "ts": "2026-10-24T00:51:23.906354+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://pt.wikipedia.org/wiki/SOLID",
+        "final_url": "https://pt.wikipedia.org/wiki/SOLID",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 2763,
+        "read": true,
+        "published_at": "2018-12-02T15:15:31Z",
+        "excerpt": "direcionadas das interfaces, adaptando o código às necessidades de cada contexto. Evita dependências desnecessárias: Permite que clientes não exponham métodos que eles não implementam. 8 [ ] Dependency Inversion Principle (DIP) [ editar | editar código ] A. \"Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações.\" B. \"Abstrações não devem depender de"
+      }
+    },
+    {
+      "seq": 38,
+      "ts": "2026-10-24T00:51:23.910625+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 58,
+      "ts": "2026-10-24T00:51:24.052053+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "5 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    },
+    {
+      "seq": 71,
+      "ts": "2026-10-24T00:51:28.342195+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'baterias de estado sólido open access full text': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "sem_correspondencia",
+        "recovery_steps": [
+          "bing: 6 resultados (baterias de estado sólido open access fu)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido open access fu)",
+          "ddg: bloqueado (baterias de estado sólido open access fu)",
+          "marginalia: 6 resultados (baterias de estado sólido open access fu)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido open access fu)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (baterias estado sólido open access full )",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido open access full )",
+          "marginalia: 6 resultados (baterias estado sólido open access full )",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido open access full )",
+          "wikipedia: bloqueado (baterias estado sólido open access full )",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 74,
+      "ts": "2026-10-24T00:51:29.194732+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.moura.com.br/",
+        "final_url": "https://www.moura.com.br/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 317,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 17:31:00 GMT",
+        "excerpt": "Carreiras Moura Acreditamos nas pessoas e estamos sempre em busca de novos talentos para compor nossas equipes. Se você possui um perfil dinâmico, trabalha com foco em resultados, apresenta bom relacionamento interpessoal, trabalha bem em equipe e busca se desenvolver constantemente, venha fazer parte do nosso time!"
+      }
+    },
+    {
+      "seq": 75,
+      "ts": "2026-10-24T00:51:29.210706+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "",
+        "source_id": ""
+      }
+    },
+    {
+      "seq": 76,
+      "ts": "2026-10-24T00:51:30.429272+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.postodasbaterias.com.br/",
+        "final_url": "https://www.postodasbaterias.com.br/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1308,
+        "read": true,
+        "published_at": "ter., 20 out. 2026 11:34:00 GMT",
+        "excerpt": "BATERIA TROJAN 225ah 6v MOTIVE T-105 PLUS - TR... R$ 2.960,58 Em x de 8 R$404,15 R$ 2.812,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA TROJAN 390ah 6v MOTIVE L16G-AC - TRACI... R$ 5.840,58 Em x de 8 R$797,30 R$ 5.548,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA MOURA 9ah 12v 12MVA-9 - ESTACIONÁRIA V... R$ 190,00 Em"
+      }
+    },
+    {
+      "seq": 77,
+      "ts": "2026-10-24T00:51:30.449294+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "",
+        "source_id": ""
+      }
+    },
+    {
+      "seq": 78,
+      "ts": "2026-10-24T00:51:30.454085+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: no_readable_content.",
+      "meta": {
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "source_state": "FETCHED",
+        "stage": "no_readable_content",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 79,
+      "ts": "2026-10-24T00:51:32.012240+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.atacadaodebaterias.com.br/",
+        "final_url": "https://www.atacadaodebaterias.com.br/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 53,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 03:39:00 GMT",
+        "excerpt": "Assine nossa newsletter e receba as melhores ofertas!"
+      }
+    },
+    {
+      "seq": 80,
+      "ts": "2026-10-24T00:51:32.032493+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-166fccb4 de shopee.com.br.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 81,
+      "ts": "2026-10-24T00:51:32.044379+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 82,
+      "ts": "2026-10-24T00:51:32.052611+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em shopee.com.br; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 83,
+      "ts": "2026-10-24T00:51:32.084808+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (shopee.com.br).",
+      "meta": {
+        "evidencia_id": "ev-166fccb4dcea",
+        "dominio": "shopee.com.br",
+        "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122"
+      }
+    },
+    {
+      "seq": 84,
+      "ts": "2026-10-24T00:51:32.090500+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.moura.com.br/",
+        "final_url": "https://www.moura.com.br/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 317,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 17:31:00 GMT",
+        "excerpt": "Carreiras Moura Acreditamos nas pessoas e estamos sempre em busca de novos talentos para compor nossas equipes. Se você possui um perfil dinâmico, trabalha com foco em resultados, apresenta bom relacionamento interpessoal, trabalha bem em equipe e busca se desenvolver constantemente, venha fazer parte do nosso time!"
+      }
+    },
+    {
+      "seq": 85,
+      "ts": "2026-10-24T00:51:32.094407+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 86,
+      "ts": "2026-10-24T00:51:32.109757+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.postodasbaterias.com.br/",
+        "final_url": "https://www.postodasbaterias.com.br/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 1308,
+        "read": true,
+        "published_at": "ter., 20 out. 2026 11:34:00 GMT",
+        "excerpt": "BATERIA TROJAN 225ah 6v MOTIVE T-105 PLUS - TR... R$ 2.960,58 Em x de 8 R$404,15 R$ 2.812,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA TROJAN 390ah 6v MOTIVE L16G-AC - TRACI... R$ 5.840,58 Em x de 8 R$797,30 R$ 5.548,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA MOURA 9ah 12v 12MVA-9 - ESTACIONÁRIA V... R$ 190,00 Em"
+      }
+    },
+    {
+      "seq": 87,
+      "ts": "2026-10-24T00:51:32.114439+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 88,
+      "ts": "2026-10-24T00:51:32.129274+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.atacadaodebaterias.com.br/",
+        "final_url": "https://www.atacadaodebaterias.com.br/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 53,
+        "read": true,
+        "published_at": "qui., 22 out. 2026 03:39:00 GMT",
+        "excerpt": "Assine nossa newsletter e receba as melhores ofertas!"
+      }
+    },
+    {
+      "seq": 89,
+      "ts": "2026-10-24T00:51:32.132221+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 95,
+      "ts": "2026-10-24T00:51:37.331325+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'baterias de estado sólido methods sample experimental': 11 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (baterias de estado sólido methods sample)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido methods sample)",
+          "ddg: bloqueado (baterias de estado sólido methods sample)",
+          "marginalia: 5 resultados (baterias de estado sólido methods sample)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido methods sample)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (baterias estado sólido methods sample ex)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido methods sample ex)",
+          "marginalia: 5 resultados (baterias estado sólido methods sample ex)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido methods sample ex)",
+          "wikipedia: bloqueado (baterias estado sólido methods sample ex)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 98,
+      "ts": "2026-10-24T00:51:38.761925+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: no_readable_content.",
+      "meta": {
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "source_state": "FETCHED",
+        "stage": "no_readable_content",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 99,
+      "ts": "2026-10-24T00:51:38.772451+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-2ecf04fc de shopee.com.br.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 100,
+      "ts": "2026-10-24T00:51:38.778230+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 101,
+      "ts": "2026-10-24T00:51:38.784847+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em shopee.com.br; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 102,
+      "ts": "2026-10-24T00:51:38.811693+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (shopee.com.br).",
+      "meta": {
+        "evidencia_id": "ev-2ecf04fceffa",
+        "dominio": "shopee.com.br",
+        "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+        "url": "https://shopee.com.br/Baterias-cat.11059984.11060122"
+      }
+    },
+    {
+      "seq": 108,
+      "ts": "2026-10-24T00:51:43.526313+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'baterias de estado sólido results measurements units': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (baterias de estado sólido results measur)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido results measur)",
+          "ddg: bloqueado (baterias de estado sólido results measur)",
+          "marginalia: sem resultados (baterias de estado sólido results measur)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (baterias estado sólido results measureme)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido results measureme)",
+          "marginalia: sem resultados (baterias estado sólido results measureme)",
+          "wikipedia: bloqueado (baterias estado sólido results measureme)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 111,
+      "ts": "2026-10-24T00:51:48.574800+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'baterias de estado sólido experimental conditions temperatur': 8 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "sem_correspondencia",
+        "recovery_steps": [
+          "bing: 6 resultados (baterias de estado sólido experimental c)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido experimental c)",
+          "ddg: bloqueado (baterias de estado sólido experimental c)",
+          "marginalia: 2 resultados (baterias de estado sólido experimental c)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (baterias de estado sólido experimental c)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (baterias estado sólido experimental cond)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido experimental cond)",
+          "marginalia: sem resultados (baterias estado sólido experimental cond)",
+          "wikipedia: bloqueado (baterias estado sólido experimental cond)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n\n[E1](https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido) Bateria de estado sólido (pt.wikipedia.org): ] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar\n\nEvidências: 1; afirmações sustentadas: 0/5 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n**Status:** concluída · **Modo:** profunda · **Evidências:** 3\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 0.333,
+              "sources": [
+                {
+                  "id": "ev-2f8a1f4c6c70",
+                  "title": "Bateria de estado sólido",
+                  "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+                  "domain": "pt.wikipedia.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+                  "published_at": "2021-09-02T03:52:40Z"
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "] Operações em baixa temperatura podem ser desafiadoras.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-2f8a1f4c6c70",
+                  "title": "Bateria de estado sólido",
+                  "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+                  "domain": "pt.wikipedia.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+                  "published_at": "2021-09-02T03:52:40Z"
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-2f8a1f4c6c70",
+                  "title": "Bateria de estado sólido",
+                  "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+                  "domain": "pt.wikipedia.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+                  "published_at": "2021-09-02T03:52:40Z"
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-2f8a1f4c6c70",
+                  "title": "Bateria de estado sólido",
+                  "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+                  "domain": "pt.wikipedia.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+                  "published_at": "2021-09-02T03:52:40Z"
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-2f8a1f4c6c70",
+                  "title": "Bateria de estado sólido",
+                  "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+                  "domain": "pt.wikipedia.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico. eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+                  "published_at": "2021-09-02T03:52:40Z"
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+              "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+              "dominio": "shopee.com.br",
+              "data": "sex., 23 out. 2026 00:25:00 GMT",
+              "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+              "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+              "dominio": "shopee.com.br",
+              "data": "sex., 23 out. 2026 00:25:00 GMT",
+              "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Bateria de estado sólido",
+              "url": "https://pt.wikipedia.org/wiki/Bateria_de_estado_s%C3%B3lido",
+              "dominio": "pt.wikipedia.org",
+              "data": "2021-09-02T03:52:40Z",
+              "trecho": "] Operações em baixa temperatura podem ser desafiadoras. As baterias de estado sólido historicamente tiveram um desempenho ruim. 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos. Baterias de estado sólido com separadores de cerâmica podem quebrar",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "Wikimedia Foundation, Inc.",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+          "mode": "profunda",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: baterias de estado sólido",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: baterias de estado sólido",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: baterias de estado sólido",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Buscar: solid-state batteries",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p5",
+              "title": "Ler: solid-state batteries",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Analisar: solid-state batteries",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            },
+            {
+              "id": "p7",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "todo",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3",
+                "p6",
+                "p12",
+                "p15",
+                "p18",
+                "p21"
+              ]
+            },
+            {
+              "id": "p8",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "todo",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p7"
+              ]
+            },
+            {
+              "id": "p9",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "todo",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p8"
+              ]
+            },
+            {
+              "id": "p10",
+              "title": "Buscar: baterias de estado sólido open access full text",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p11",
+              "title": "Ler: baterias de estado sólido open access full text",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p10"
+              ]
+            },
+            {
+              "id": "p12",
+              "title": "Analisar: baterias de estado sólido open access full text",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p11"
+              ]
+            },
+            {
+              "id": "p13",
+              "title": "Buscar: baterias de estado sólido methods sample experimental",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p14",
+              "title": "Ler: baterias de estado sólido methods sample experimental",
+              "kind": "ler",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p13"
+              ]
+            },
+            {
+              "id": "p15",
+              "title": "Analisar: baterias de estado sólido methods sample experimental",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p14"
+              ]
+            },
+            {
+              "id": "p16",
+              "title": "Buscar: baterias de estado sólido results measurements units",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p17",
+              "title": "Ler: baterias de estado sólido results measurements units",
+              "kind": "ler",
+              "status": "todo",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p16"
+              ]
+            },
+            {
+              "id": "p18",
+              "title": "Analisar: baterias de estado sólido results measurements units",
+              "kind": "analisar",
+              "status": "todo",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p17"
+              ]
+            },
+            {
+              "id": "p19",
+              "title": "Buscar: baterias de estado sólido experimental conditions temperature pressure",
+              "kind": "busca",
+              "status": "done",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": []
+            },
+            {
+              "id": "p20",
+              "title": "Ler: baterias de estado sólido experimental conditions temperature pressure",
+              "kind": "ler",
+              "status": "todo",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p19"
+              ]
+            },
+            {
+              "id": "p21",
+              "title": "Analisar: baterias de estado sólido experimental conditions temperature pressure",
+              "kind": "analisar",
+              "status": "todo",
+              "detail": "",
+              "stop_condition": "uma única rodada extra, orçamento e timeout originais",
+              "dependencies": [
+                "p20"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 14,
+            "total": 21,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 66.7
+          },
+          "budgets": {
+            "buscas": 8.0,
+            "paginas": 12.0,
+            "timeout_s": 120.0,
+            "subs": 4.0,
+            "replans": 2.0,
+            "midia": 16.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 6.0,
+            "paginas": 12.0,
+            "replans": 1.0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+              "markdown": "**HIPÓTESE:** Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: ] Operações em baixa temperatura podem ser desafiadoras.",
+              "markdown": "**HIPÓTESE:** Investigar se: ] Operações em baixa temperatura podem ser desafiadoras.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos.",
+              "markdown": "**HIPÓTESE:** Investigar se: 29 [ ] 9 [ ] Baterias de estado sólido com requerem alta pressão para manter contato com os eletrodos.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico.",
+              "markdown": "**HIPÓTESE:** Investigar se: Baterias de estado sólido com separadores de cerâmica podem quebrar devido ao estresse mecânico.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código",
+              "markdown": "**HIPÓTESE:** Investigar se: eletrólitos de cerâmica 30 [ ] 7 [ ] Dendritos [ editar | editar código\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-a89fc6c11ad6&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-a89fc6c11ad6&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-a89fc6c11ad6&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (5)",
+              "markdown": "- Texto científico além do abstract: 1/2 publicação(ões) com o dado extraído.\n\n- Métodos e amostra: 0/2 publicação(ões) com o dado extraído.\n\n- Resultados com métrica e unidade: 0/2 publicação(ões) com o dado extraído.\n\n- Condições experimentais: 0/2 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 0/2 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 9,
+      "ok": 9,
+      "vazio": 0,
+      "resultados": 54,
+      "erros": {},
+      "ms_medio": 665.6
+    },
+    "ddg": {
+      "chamadas": 5,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 5
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 9,
+      "ok": 5,
+      "vazio": 0,
+      "resultados": 24,
+      "erros": {
+        "vazio": 4
+      },
+      "ms_medio": 1213.5
+    },
+    "wikipedia": {
+      "chamadas": 4,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 4
+      },
+      "ms_medio": 0.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "SOLID: o que é e quais os 5 princípios da Programação ... - Alura",
+      "url": "https://www.alura.com.br/artigos/solid",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 07:07:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Os princípios SOLID da Programação Orientada a Objetos explicados em ...",
+      "url": "https://www.freecodecamp.org/portuguese/news/os-principios-solid-da-programacao-orientada-a-objetos-explicados-em-bom-portugues/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 06:16:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Sistema de RH e DP Completo: Economize até 40% | Sólides",
+      "url": "https://solides.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SOLID – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/SOLID",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 29 set. 2026 05:04:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SOLID Principles with Real Life Examples",
+      "url": "https://www.geeksforgeeks.org/system-design/solid-principle-in-programming-understand-with-real-life-examples/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 23:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Solid: Your data, your choice - Solid Project",
+      "url": "https://solidproject.org/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 12:36:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Vol. 11, 2022/1 No. 21",
+      "url": "https://czasopisma.ignatianum.edu.pl/jpe/issue/download/149/70",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "B360 B360 Pro",
+      "url": "https://www.magnumelectronics.com/web/content/760508",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "V110 Series",
+      "url": "https://www.magnumelectronics.com/web/content/760510",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "MELiSSA TECHNICAL NOTE 96.1 TECHNICAL NOTE 96.1 Results of Chamber Reassembly at UAB",
+      "url": "https://www.melissafoundation.org/download/248",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Assault Skateboards… | Lowcard Mag",
+      "url": "https://www.lowcardmag.com/news/assault-skateboards-11/comment-page-10/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Vol. 11, 2022/1 No. 21",
+      "url": "https://czasopisma.ignatianum.edu.pl/jpe/issue/download/149/70",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "B360 B360 Pro",
+      "url": "https://www.magnumelectronics.com/web/content/760508",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "V110 Series",
+      "url": "https://www.magnumelectronics.com/web/content/760510",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "MELiSSA TECHNICAL NOTE 96.1 TECHNICAL NOTE 96.1 Results of Chamber Reassembly at UAB",
+      "url": "https://www.melissafoundation.org/download/248",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Assault Skateboards… | Lowcard Mag",
+      "url": "https://www.lowcardmag.com/news/assault-skateboards-11/comment-page-10/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Vol. 11, 2022/1 No. 21",
+      "url": "https://czasopisma.ignatianum.edu.pl/jpe/issue/download/149/70",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CONEM2010 - Anais",
+      "url": "https://www.abcm.org.br/anais/conem/2010/tema05.htm",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Training | BCMaterials",
+      "url": "https://www.bcmaterials.net/en/training",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prestakuntza | BCMaterials",
+      "url": "https://www.bcmaterials.net/eu/prestakuntza",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Vol. 11, 2022/1 No. 21",
+      "url": "https://czasopisma.ignatianum.edu.pl/jpe/issue/download/149/70",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CONEM2010 - Anais",
+      "url": "https://www.abcm.org.br/anais/conem/2010/tema05.htm",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Training | BCMaterials",
+      "url": "https://www.bcmaterials.net/en/training",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Prestakuntza | BCMaterials",
+      "url": "https://www.bcmaterials.net/eu/prestakuntza",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CONEM2010 - Anais",
+      "url": "https://www.abcm.org.br/anais/conem/2010/tema05.htm",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Moura - Home",
+      "url": "https://www.moura.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+      "url": "https://www.postodasbaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Atacadão das Baterias e Lubrificantes",
+      "url": "https://www.atacadaodebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+      "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+      "url": "https://redeunicadebaterias.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Baterias Duran | A bateria que dura de verdade!",
+      "url": "https://www.bateriasduran.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 32.402
+}

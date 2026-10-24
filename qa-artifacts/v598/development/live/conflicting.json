@@ -1,0 +1,1208 @@
+{
+  "id": "conflicting",
+  "route": "research",
+  "question": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+    "domain": "general",
+    "original_request": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+    "resolved_request": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:38:27.390954+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: FDA e EFSA: cafeína para adultos e gestantes, limites e condições\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-052a3f495940",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [],
+    "sintese": {
+      "texto": "Investigação: FDA e EFSA: cafeína para adultos e gestantes, limites e condições\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "fda e efsa cafeina para adultos e gestantes limites e condicoes": "p1"
+      },
+      "recuperacao_busca": [
+        "fda efsa cafeína adultos gestantes limites condições"
+      ],
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 4969
+        }
+      },
+      "research_gaps": [
+        {
+          "id": "017700de007dd10d",
+          "dimension": "original_text",
+          "description": "Trecho original pertinente",
+          "subquestion": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições primary source original text",
+          "expected_data": "Trecho original pertinente",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições primary source original text",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "FDA e EFSA: cafeína para adultos e gestantes, limites e condições primary source original text",
+          "FDA e EFSA: cafeína para adultos e gestantes, limites e condições fontes primárias texto completo",
+          "fda efsa cafeína adultos gestantes limites condições"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-46aefc3823ee",
+        "type": "image",
+        "title": "The Center for Drug Evaluation and Research (CDER) ensures that safe and effective drugs are available to improve the health of the people in the United States",
+        "url": "https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png",
+        "final_url": "https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "The Center for Drug Evaluation and Research (CDER) ensures that safe and effective drugs are available to improve the health of the people in the United States",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-d03ee3087e99",
+        "type": "image",
+        "title": "U.S. flag",
+        "url": "https://www.fda.gov/themes/custom/preview/assets/images/US_Flag.png",
+        "final_url": "https://www.fda.gov/themes/custom/preview/assets/images/US_Flag.png",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "U.S. flag",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-ae6e6c1ac6d8",
+        "type": "image",
+        "title": "Dot gov",
+        "url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-dot-gov.svg",
+        "final_url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-dot-gov.svg",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Dot gov",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-ed3ee393bf15",
+        "type": "image",
+        "title": "SSL",
+        "url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-https.svg",
+        "final_url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-https.svg",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "SSL",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-e5cc04b74af1",
+        "type": "image",
+        "title": "U.S. Food and Drug Administration logo",
+        "url": "https://www.fda.gov/themes/custom/preview/assets/images/FDA_Logo_Icon_White.svg",
+        "final_url": "https://www.fda.gov/themes/custom/preview/assets/images/FDA_Logo_Icon_White.svg",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "U.S. Food and Drug Administration logo",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-7fb1fc3c6121",
+        "type": "image",
+        "title": "Pill bottle and cell phone",
+        "url": "https://www.fda.gov/files/styles/call_to_action_992x558/public/oea_pdurs_finalguidance_web_1600x900_260803.png?itok=sPkh_Xw3",
+        "final_url": "https://www.fda.gov/files/styles/call_to_action_992x558/public/oea_pdurs_finalguidance_web_1600x900_260803.png?itok=sPkh_Xw3",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Pill bottle and cell phone",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-2699ccd698ac",
+        "type": "image",
+        "title": "FDA Approves Once-Weekly Generic Hormone Therapy Patch for Women",
+        "url": "https://www.fda.gov/files/styles/medium_3/public/hrt_patch_for_women_1600x900.png?itok=YpCWRR_Z",
+        "final_url": "https://www.fda.gov/files/styles/medium_3/public/hrt_patch_for_women_1600x900.png?itok=YpCWRR_Z",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "FDA Approves Once-Weekly Generic Hormone Therapy Patch for Women",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-ecf6fa2a14a2",
+        "type": "image",
+        "title": "Woman reaching for medication on pharmacy shelf",
+        "url": "https://www.fda.gov/files/styles/medium_3/public/fda_approves_new_nonprescription_eyedrop_1600x900.png?itok=1bBempa9",
+        "final_url": "https://www.fda.gov/files/styles/medium_3/public/fda_approves_new_nonprescription_eyedrop_1600x900.png?itok=1bBempa9",
+        "source_title": "Drugs",
+        "source_url": "https://www.fda.gov/drugs",
+        "publisher": "www.fda.gov",
+        "date": "Thu, 10/22/2026 - 13:00",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Woman reaching for medication on pharmacy shelf",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:38:32.448878+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'FDA e EFSA: cafeína para adultos e gestantes, limites e cond': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "sem_correspondencia",
+        "recovery_steps": [
+          "bing: 6 resultados (FDA e EFSA: cafeína para adultos e gesta)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (FDA e EFSA: cafeína para adultos e gesta)",
+          "ddg: bloqueado (FDA e EFSA: cafeína para adultos e gesta)",
+          "marginalia: sem resultados (FDA e EFSA: cafeína para adultos e gesta)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (fda efsa cafeína adultos gestantes limit)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (fda efsa cafeína adultos gestantes limit)",
+          "marginalia: sem resultados (fda efsa cafeína adultos gestantes limit)",
+          "wikipedia: sem resultados (fda efsa cafeína adultos gestantes limit)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-24T00:38:33.472538+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.fda.gov/drugs",
+        "final_url": "https://www.fda.gov/drugs",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 845,
+        "read": true,
+        "published_at": "Thu, 10/22/2026 - 13:00",
+        "excerpt": "Drug Information, Safety, and Availability Medication Guides, Drug Safety Communications, Shortages, Recalls Drug Approvals and Databases Drugs@FDA, Orange Book, National Drug Code, Recent drug approvals Drug Development and Review Process Drug applications, submissions, manufacturing, and small business help Guidance, Compliance, and Regulatory Information Guidances, warning letters, drug"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:38:33.916113+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.usa.gov/agencies/food-and-drug-administration",
+        "final_url": "https://www.usa.gov/agencies/food-and-drug-administration",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 353,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 08:34:00 GMT",
+        "excerpt": "The Food and Drug Administration (FDA) is responsible for protecting the public health by assuring the safety, efficacy, and security of human and veterinary drugs, biological products, medical devices, our nation's food supply, cosmetics, and products that emit radiation. The FDA also provides accurate, science-based health information to the public."
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:38:37.300317+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+        "final_url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2022-05-02T12:35:00+00:00",
+        "excerpt": "precisam da obtenção da certificação e como alcançá-la! Produtos farmacêuticos Para um medicamento não precisar de FDA, ele precisa estar de acordo com as monografias OTC, pois elas determinam as condições sob as quais a FDA estabeleceu para que a droga seja segura e eficiente. Caso o medicamento não cumpra com a monografia, será preciso ter aprovação da FDA. Para consegui-la, os fabricantes de"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:38:37.317519+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 8,
+          "images": 8,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 8,
+          "link_only": 0,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:38:37.321732+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.fda.gov/drugs",
+        "final_url": "https://www.fda.gov/drugs",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 845,
+        "read": true,
+        "published_at": "Thu, 10/22/2026 - 13:00",
+        "excerpt": "Drug Information, Safety, and Availability Medication Guides, Drug Safety Communications, Shortages, Recalls Drug Approvals and Databases Drugs@FDA, Orange Book, National Drug Code, Recent drug approvals Drug Development and Review Process Drug applications, submissions, manufacturing, and small business help Guidance, Compliance, and Regulatory Information Guidances, warning letters, drug"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:38:37.323788+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:38:37.339475+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+        "final_url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "2022-05-02T12:35:00+00:00",
+        "excerpt": "precisam da obtenção da certificação e como alcançá-la! Produtos farmacêuticos Para um medicamento não precisar de FDA, ele precisa estar de acordo com as monografias OTC, pois elas determinam as condições sob as quais a FDA estabeleceu para que a droga seja segura e eficiente. Caso o medicamento não cumpra com a monografia, será preciso ter aprovação da FDA. Para consegui-la, os fabricantes de"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:38:37.342133+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:38:37.344052+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.usa.gov/agencies/food-and-drug-administration",
+        "final_url": "https://www.usa.gov/agencies/food-and-drug-administration",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 353,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 08:34:00 GMT",
+        "excerpt": "The Food and Drug Administration (FDA) is responsible for protecting the public health by assuring the safety, efficacy, and security of human and veterinary drugs, biological products, medical devices, our nation's food supply, cosmetics, and products that emit radiation. The FDA also provides accurate, science-based health information to the public."
+      }
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-24T00:38:37.345206+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:38:37.392201+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "0 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: FDA e EFSA: cafeína para adultos e gestantes, limites e condições\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** FDA e EFSA: cafeína para adultos e gestantes, limites e condições\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: FDA e EFSA: cafeína para adultos e gestantes, limites e condições",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "The Center for Drug Evaluation and Research (CDER) ensures that safe and effective drugs are available to improve the health of the people in the United States",
+              "url": "https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "The Center for Drug Evaluation and Research (CDER) ensures that safe and effective drugs are available to improve the health of the people in the United States",
+              "alt": "The Center for Drug Evaluation and Research (CDER) ensures that safe and effective drugs are available to improve the health of the people in the United States",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "U.S. flag",
+              "url": "https://www.fda.gov/themes/custom/preview/assets/images/US_Flag.png",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "U.S. flag",
+              "alt": "U.S. flag",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Dot gov",
+              "url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-dot-gov.svg",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Dot gov",
+              "alt": "Dot gov",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "SSL",
+              "url": "https://www.fda.gov/themes/custom/preview/assets/images/icon-https.svg",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "SSL",
+              "alt": "SSL",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "U.S. Food and Drug Administration logo",
+              "url": "https://www.fda.gov/themes/custom/preview/assets/images/FDA_Logo_Icon_White.svg",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "U.S. Food and Drug Administration logo",
+              "alt": "U.S. Food and Drug Administration logo",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Pill bottle and cell phone",
+              "url": "https://www.fda.gov/files/styles/call_to_action_992x558/public/oea_pdurs_finalguidance_web_1600x900_260803.png?itok=sPkh_Xw3",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Pill bottle and cell phone",
+              "alt": "Pill bottle and cell phone",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "FDA Approves Once-Weekly Generic Hormone Therapy Patch for Women",
+              "url": "https://www.fda.gov/files/styles/medium_3/public/hrt_patch_for_women_1600x900.png?itok=YpCWRR_Z",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "FDA Approves Once-Weekly Generic Hormone Therapy Patch for Women",
+              "alt": "FDA Approves Once-Weekly Generic Hormone Therapy Patch for Women",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Woman reaching for medication on pharmacy shelf",
+              "url": "https://www.fda.gov/files/styles/medium_3/public/fda_approves_new_nonprescription_eyedrop_1600x900.png?itok=1bBempa9",
+              "thumb": "",
+              "source_title": "Drugs",
+              "source_url": "https://www.fda.gov/drugs",
+              "publisher": "www.fda.gov",
+              "date": "Thu, 10/22/2026 - 13:00",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "metadata_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Woman reaching for medication on pharmacy shelf",
+              "alt": "Woman reaching for medication on pharmacy shelf",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-052a3f495940&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-052a3f495940&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-052a3f495940&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (1)",
+              "markdown": "- Trecho original pertinente: 0/1 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 935.3
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 2,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 2
+      },
+      "ms_medio": 912.8
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 623.5
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 14 out. 2026 23:37:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Drugs | FDA",
+      "url": "https://www.fda.gov/drugs",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 04:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Entenda o que é a FDA e sua importância nos Estados Unidos",
+      "url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 00:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Food_and_Drug_Administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 04 out. 2026 20:57:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Food_and_Drug_Administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration (FDA) | USAGov",
+      "url": "https://www.usa.gov/agencies/food-and-drug-administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 08:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 14 out. 2026 23:37:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Drugs | FDA",
+      "url": "https://www.fda.gov/drugs",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 04:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Entenda o que é a FDA e sua importância nos Estados Unidos",
+      "url": "https://blogdasegurancaalimentar.volkdobrasil.com.br/fda/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 00:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Food_and_Drug_Administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "dom., 04 out. 2026 20:57:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Food_and_Drug_Administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 10:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Food and Drug Administration (FDA) | USAGov",
+      "url": "https://www.usa.gov/agencies/food-and-drug-administration",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 08:34:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 10.09
+}

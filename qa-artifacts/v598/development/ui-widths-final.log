@@ -1,0 +1,27 @@
+### Result
+[
+  {
+    "width": 1280,
+    "scroll": 1280,
+    "fallbacks": 0
+  },
+  {
+    "width": 390,
+    "scroll": 390,
+    "fallbacks": 0
+  },
+  {
+    "width": 320,
+    "scroll": 320,
+    "fallbacks": 0
+  },
+  {
+    "cssZoom": 2,
+    "width": 320,
+    "scroll": 320
+  }
+]
+### Ran Playwright code
+```js
+await page.evaluate('() => window.v598Widths');
+```

@@ -1,0 +1,7 @@
+### Ran Playwright code
+```js
+await (async page => {await page.waitForFunction(()=>window.fixtureReady);await page.getByLabel('Pesquisa').selectOption('gaps');await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).click();await page.reload();await page.waitForFunction(()=>window.fixtureReady);if(await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).getAttribute('aria-expanded')!=='true')throw Error('gap state lost');await page.getByLabel('Usuário').selectOption('owner-b');await page.waitForFunction(()=>document.getElementById('status').textContent.startsWith('owner-b'));if(await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).getAttribute('aria-expanded')!=='false')throw Error('owner state leaked');await page.getByLabel('Usuário').selectOption('owner-a');await page.waitForFunction(()=>document.getElementById('status').textContent.startsWith('owner-a'));if(await page.getByRole('button',{name:'O que ainda falta confirmar (3)'}).getAttribute('aria-expanded')!=='true')throw Error('owner state lost');await page.getByLabel('Pesquisa').selectOption('comparison');const download=page.waitForEvent('download');await page.getByRole('button',{name:'Baixar CSV',exact:true}).click();const file=await download;await file.saveAs('qa-artifacts/v598/development/comparison.csv');})(page);
+```
+### Events
+- Downloading file Publicaes recuperadas  sem comparao expe.csv ...
+- Downloaded file Publicaes recuperadas  sem comparao expe.csv to ".playwright-cli\Publicaes-recuperadas-sem-comparao-expe.csv"

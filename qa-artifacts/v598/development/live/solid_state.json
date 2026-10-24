@@ -1,0 +1,3059 @@
+{
+  "id": "solid_state",
+  "route": "deep_research",
+  "question": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "title",
+      "doi",
+      "authors",
+      "publication_date",
+      "content_scope",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "domain": "science",
+    "original_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "resolved_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:36:37.578034+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "",
+  "summary": {
+    "id": "rj-37bd8886593a",
+    "status": "interrompida",
+    "modo": "profunda",
+    "objetivo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+        "frente": 2,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 11,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p5",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+        "frente": 2,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 31,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p6",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+        "frente": 2,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 51,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p7",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+        "frente": 3,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 12,
+        "priority_reason": "frente 3 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p8",
+        "tipo": "ler",
+        "status": "pendente",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+        "frente": 3,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p7"
+        ],
+        "prioridade": 32,
+        "priority_reason": "frente 3 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p9",
+        "tipo": "analisar",
+        "status": "pendente",
+        "alvo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+        "frente": 3,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p8"
+        ],
+        "prioridade": 52,
+        "priority_reason": "frente 3 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p10",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+        "frente": 4,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 13,
+        "priority_reason": "frente 4 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p11",
+        "tipo": "ler",
+        "status": "pendente",
+        "alvo": "faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+        "frente": 4,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p10"
+        ],
+        "prioridade": 33,
+        "priority_reason": "frente 4 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p12",
+        "tipo": "analisar",
+        "status": "pendente",
+        "alvo": "faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+        "frente": 4,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p11"
+        ],
+        "prioridade": 53,
+        "priority_reason": "frente 4 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p13",
+        "tipo": "verificar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3",
+          "p6",
+          "p9",
+          "p12"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p14",
+        "tipo": "sintetizar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p13"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p15",
+        "tipo": "auditar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p14"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [],
+    "sintese": {},
+    "investigacoes": 0,
+    "hipoteses": [],
+    "proxima_acao": "Executar p8 (ler)",
+    "auditoria_ok": null,
+    "pendencias": [
+      "p8: orçamento de páginas esgotado",
+      "p11: orçamento de páginas esgotado",
+      "p9: aguardando dependências explícitas concluírem",
+      "p12: aguardando dependências explícitas concluírem",
+      "p13: aguardando dependências explícitas concluírem",
+      "p14: aguardando dependências explícitas concluírem",
+      "p15: aguardando dependências explícitas concluírem"
+    ],
+    "erros": [],
+    "usados": {
+      "buscas": 5,
+      "paginas": 12,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "faca uma pesquisa profunda sobre baterias de estado solido comparando estudos metodos e limitacoes": "p1",
+        "faca uma pesquisa profunda sobre baterias de estado solido comparando estudos metodos e limitacoes metodos amostra metricas": "p4",
+        "faca uma pesquisa profunda sobre baterias de estado solido comparando estudos metodos e limitacoes resultados limitacoes": "p7",
+        "faca uma pesquisa profunda solid state batteries comparando metodos e limitacoes": "p10"
+      },
+      "provedores": {
+        "web": {
+          "ok": 5,
+          "falhas": 0,
+          "ms": 17323
+        }
+      },
+      "recuperacao_busca": [
+        "faca profunda solid-state batteries comparando metodos limitacoes",
+        "faça profunda baterias estado sólido comparando métodos limitações limitações",
+        "faça profunda baterias estado sólido comparando métodos limitações métodos amostra métricas"
+      ],
+      "research_gaps": [
+        {
+          "id": "7e981d66bf28a68c",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. open access full text",
+          "budget": {
+            "remaining_searches": 3,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "0b600eb27d97ea80",
+          "dimension": "methods",
+          "description": "Métodos e amostra",
+          "subquestion": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. methods sample experimental",
+          "expected_data": "Métodos e amostra",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. methods sample experimental",
+          "budget": {
+            "remaining_searches": 3,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "3bf43b8935bc7f90",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. results measurements units",
+          "budget": {
+            "remaining_searches": 3,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "de6331883b9991a3",
+          "dimension": "conditions",
+          "description": "Condições experimentais",
+          "subquestion": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. experimental conditions temperature pressure",
+          "expected_data": "Condições experimentais",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 4,
+          "status": "OPEN",
+          "query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. experimental conditions temperature pressure",
+          "budget": {
+            "remaining_searches": 3,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "a385134aef380e9a",
+          "dimension": "limitations",
+          "description": "Limitações declaradas",
+          "subquestion": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. limitations study",
+          "expected_data": "Limitações declaradas",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [],
+          "previous_attempts": [],
+          "priority": 5,
+          "status": "OPEN",
+          "query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. limitations study",
+          "budget": {
+            "remaining_searches": 3,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        },
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p6",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 3,
+          "decision": "no_new_evidence"
+        },
+        {
+          "step_id": "p6",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 3,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. open access full text",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. methods sample experimental",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. results measurements units",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. experimental conditions temperature pressure",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. limitations study",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações fontes primárias texto completo",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas fontes primárias texto completo",
+          "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "profundidade": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "replans": 2,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-20daec2b62a7",
+        "type": "document",
+        "title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+        "url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+        "final_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+        "source_title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+        "source_url": "https://doi.org/10.1002/batt.201900089",
+        "publisher": "onlinelibrary.wiley.com",
+        "date": "2019-09-02",
+        "rights": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-b23df74f2c0b",
+        "type": "document",
+        "title": "Resenha livro metodos de pesquisa para internet",
+        "url": "https://periodicos.uninove.br/eccos/article/viewFile/16759/8486",
+        "final_url": "https://periodicos.uninove.br/eccos/article/viewFile/16759/8486",
+        "source_title": "Resenha livro metodos de pesquisa para internet",
+        "source_url": "https://doi.org/10.5585/eccos.n54.16759",
+        "publisher": "periodicos.uninove.br",
+        "date": "2020-09-30",
+        "rights": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-03836088d171",
+        "type": "document",
+        "title": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+        "url": "http://proxy.furb.br/ojs/index.php/atosdepesquisa/article/viewFile/6335/3627",
+        "final_url": "http://proxy.furb.br/ojs/index.php/atosdepesquisa/article/viewFile/6335/3627",
+        "source_title": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+        "source_url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+        "publisher": "proxy.furb.br",
+        "date": "2017-09-18",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-946fce88d2f7",
+        "type": "document",
+        "title": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+        "url": "http://www.periodicos.rc.biblioteca.unesp.br/index.php/pesquisa/article/viewFile/6664/5504",
+        "final_url": "http://www.periodicos.rc.biblioteca.unesp.br/index.php/pesquisa/article/viewFile/6664/5504",
+        "source_title": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+        "source_url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+        "publisher": "www.periodicos.rc.biblioteca.unesp.br",
+        "date": "2013-08-20",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-1e7ab5c05b49",
+        "type": "document",
+        "title": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+        "url": "https://revfitotecnia.mx/index.php/RFM/article/download/1759/1667",
+        "final_url": "https://revfitotecnia.mx/index.php/RFM/article/download/1759/1667",
+        "source_title": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+        "source_url": "https://doi.org/10.35196/rfm.1988.2.171",
+        "publisher": "revfitotecnia.mx",
+        "date": "2024-04-30",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-8fed5e20fc16",
+        "type": "document",
+        "title": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a",
+        "url": "https://revistas.unc.edu.ar/index.php/anatclinar/article/download/13912/14006",
+        "final_url": "https://revistas.unc.edu.ar/index.php/anatclinar/article/download/13912/14006",
+        "source_title": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a",
+        "source_url": "https://doi.org/10.31051/1852.8023.v3.n1.13912",
+        "publisher": "revistas.unc.edu.ar",
+        "date": "2016-03-28",
+        "rights": "https://creativecommons.org/licenses/by-nc/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-dd37b1abe9d0",
+        "type": "document",
+        "title": "Eficiencia de metodos de prevencion del cyberbullying",
+        "url": "https://conocimientoglobal.org/revista/index.php/cglobal/article/download/345/222",
+        "final_url": "https://conocimientoglobal.org/revista/index.php/cglobal/article/download/345/222",
+        "source_title": "Eficiencia de metodos de prevencion del cyberbullying",
+        "source_url": "https://doi.org/10.70165/cglobal.v8i2.345",
+        "publisher": "conocimientoglobal.org",
+        "date": "2024-03-16",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-135ee8134111",
+        "type": "document",
+        "title": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+        "url": "http://201.159.223.128/index.php/cienciaunemi/article/download/163/167",
+        "final_url": "http://201.159.223.128/index.php/cienciaunemi/article/download/163/167",
+        "source_title": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+        "source_url": "https://doi.org/10.29076/issn.2528-7737vol1iss1.2008pp16-19p",
+        "publisher": "201.159.223.128",
+        "date": "2015-07-09",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-a7215806873c",
+        "type": "document",
+        "title": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+        "url": "https://submissoesrevistarcmos.com.br/rcmos/article/download/2590/6148",
+        "final_url": "https://submissoesrevistarcmos.com.br/rcmos/article/download/2590/6148",
+        "source_title": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+        "source_url": "https://doi.org/10.51473/rcmos.v1i1.2026.2590",
+        "publisher": "submissoesrevistarcmos.com.br",
+        "date": "2024-06-15",
+        "rights": "https://creativecommons.org/licenses/by/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-fd82af497255",
+        "type": "document",
+        "title": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+        "url": "https://www.revistatransportes.org.br/anpet/article/download/1244/664",
+        "final_url": "https://www.revistatransportes.org.br/anpet/article/download/1244/664",
+        "source_title": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+        "source_url": "https://doi.org/10.14295/transportes.v25i4.1244",
+        "publisher": "www.revistatransportes.org.br",
+        "date": "2017-12-30",
+        "rights": "http://creativecommons.org/licenses/by/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-e2812e56adc1",
+        "type": "document",
+        "title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+        "url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/3189/1700",
+        "final_url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/3189/1700",
+        "source_title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+        "source_url": "https://doi.org/10.24054/01204211.v1.n1.2018.3189",
+        "publisher": "revistas.unipamplona.edu.co",
+        "date": "2019-01-11",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-b02f7134df28",
+        "type": "document",
+        "title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+        "url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/2924/1559",
+        "final_url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/2924/1559",
+        "source_title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+        "source_url": "https://doi.org/10.24054/01204211.v1.n1.2018.2924",
+        "publisher": "revistas.unipamplona.edu.co",
+        "date": "2018-08-24",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-ccc3d94674ed",
+        "type": "document",
+        "title": "COMPARANDO OS RESULTADOS DO ENADE 2009 POR NÚMERO DE INSTITUIÇÕES E NÚMERO DE ESTUDANTES: COMO ANDA O DESEMPENHO ACADÊMICO DOS CURSOS DE ADMINISTRAÇÃO?",
+        "url": "http://raep.emnuvens.com.br/raep/article/viewFile/76/43",
+        "final_url": "http://raep.emnuvens.com.br/raep/article/viewFile/76/43",
+        "source_title": "COMPARANDO OS RESULTADOS DO ENADE 2009 POR NÚMERO DE INSTITUIÇÕES E NÚMERO DE ESTUDANTES: COMO ANDA O DESEMPENHO ACADÊMICO DOS CURSOS DE ADMINISTRAÇÃO?",
+        "source_url": "https://doi.org/10.13058/raep.2013.v14n1.76",
+        "publisher": "raep.emnuvens.com.br",
+        "date": "2013-03-31",
+        "rights": "http://creativecommons.org/licenses/by/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-3842675fbe4a",
+        "type": "document",
+        "title": "GESTÃO DE CUSTOS RURAIS: COMPARANDO PRÁTICAS ENTRE DISTINTOS POLOS DE PRODUÇÃO AGROINDUSTRIAIS DO ESTADO DE PERNAMBUCO",
+        "url": "https://periodicos.ufc.br/contextus/article/download/32113/72413",
+        "final_url": "https://periodicos.ufc.br/contextus/article/download/32113/72413",
+        "source_title": "GESTÃO DE CUSTOS RURAIS: COMPARANDO PRÁTICAS ENTRE DISTINTOS POLOS DE PRODUÇÃO AGROINDUSTRIAIS DO ESTADO DE PERNAMBUCO",
+        "source_url": "https://doi.org/10.19094/contextus.v7i2.32113",
+        "publisher": "periodicos.ufc.br",
+        "date": "2009-12-30",
+        "rights": "http://creativecommons.org/licenses/by-nc-nd/4.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-d125286e8fa1",
+        "type": "document",
+        "title": "A inserção da música na escola: processos e resultados de uma pesquisa",
+        "url": "http://www.seer.ufu.br/index.php/ouvirouver/article/download/46988/26255",
+        "final_url": "http://www.seer.ufu.br/index.php/ouvirouver/article/download/46988/26255",
+        "source_title": "A inserção da música na escola: processos e resultados de uma pesquisa",
+        "source_url": "https://doi.org/10.14393/ouv24-v15n1a2019-1",
+        "publisher": "www.seer.ufu.br",
+        "date": "2019-06-17",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-c7d76440f9d8",
+        "type": "document",
+        "title": "FUNDAMENTOS PARA UMA TEORIA GERAL DOS MECANISMOS EXPLANATÓRIOS: OBJETIVOS, METODOLOGIA E PRIMEIROS RESULTADOS DA PESQUISA",
+        "url": "https://seer.ufrgs.br/cadernosdoil/article/viewFile/24900/14900",
+        "final_url": "https://seer.ufrgs.br/cadernosdoil/article/viewFile/24900/14900",
+        "source_title": "FUNDAMENTOS PARA UMA TEORIA GERAL DOS MECANISMOS EXPLANATÓRIOS: OBJETIVOS, METODOLOGIA E PRIMEIROS RESULTADOS DA PESQUISA",
+        "source_url": "https://doi.org/10.22456/2236-6385.24900",
+        "publisher": "seer.ufrgs.br",
+        "date": "2012-01-20",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 16,
+      "images": 0,
+      "videos": 0,
+      "documents": 16,
+      "metadata_only": 0,
+      "link_only": 16,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "replans": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:36:40.342842+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Faça uma pesquisa profunda sobre baterias de estado sólido, ': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "crossref (consulta reformulada 'Faça uma pesquisa profunda sobre bateria'): 6 resultados",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "bing: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "bing (consulta reformulada 'Faça uma pesquisa profunda sobre bateria'): 6 resultados",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "ddg: bloqueado (Faça uma pesquisa profunda sobre bateria)"
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-24T00:36:42.009629+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Faça uma pesquisa profunda sobre baterias de estado sólido, ': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "bing: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "ddg: bloqueado (Faça uma pesquisa profunda sobre bateria)"
+        ]
+      }
+    },
+    {
+      "seq": 8,
+      "ts": "2026-10-24T00:36:42.012955+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 4,
+          "images": 0,
+          "videos": 0,
+          "documents": 4,
+          "metadata_only": 0,
+          "link_only": 4,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:36:46.177619+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Faça uma pesquisa profunda sobre baterias de estado sólido, ': 14 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "bing: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "ddg: bloqueado (Faça uma pesquisa profunda sobre bateria)",
+          "— recuperação por lacuna —",
+          "crossref: 6 resultados (faça profunda baterias estado sólido com)",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (faça profunda baterias estado sólido com)",
+          "bing: 6 resultados (faça profunda baterias estado sólido com)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (faça profunda baterias estado sólido com)",
+          "wikipedia: sem resultados (faça profunda baterias estado sólido com)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:36:46.183699+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "4 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 4,
+        "summary": {
+          "total": 8,
+          "images": 0,
+          "videos": 0,
+          "documents": 8,
+          "metadata_only": 0,
+          "link_only": 8,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:36:50.448588+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Faça uma pesquisa profunda sobre baterias de estado sólido, ': 18 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "bing: 6 resultados (Faça uma pesquisa profunda sobre bateria)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Faça uma pesquisa profunda sobre bateria)",
+          "ddg: bloqueado (Faça uma pesquisa profunda sobre bateria)",
+          "— recuperação por lacuna —",
+          "crossref: 6 resultados (faça profunda baterias estado sólido com)",
+          "crossref: sem correspondência com o pedido; tentando outro provedor (faça profunda baterias estado sólido com)",
+          "bing: 6 resultados (faça profunda baterias estado sólido com)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (faça profunda baterias estado sólido com)",
+          "wikipedia: sem resultados (faça profunda baterias estado sólido com)",
+          "recuperação com ganho novo: 0 domínio(s), 4 tema(s) além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:36:50.451302+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 8,
+        "summary": {
+          "total": 16,
+          "images": 0,
+          "videos": 0,
+          "documents": 16,
+          "metadata_only": 0,
+          "link_only": 16,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-24T00:36:55.009346+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'faca uma pesquisa profunda solid-state batteries, comparando': 7 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "sem_correspondencia",
+        "recovery_steps": [
+          "bing: 6 resultados (faca uma pesquisa profunda solid-state b)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (faca uma pesquisa profunda solid-state b)",
+          "ddg: bloqueado (faca uma pesquisa profunda solid-state b)",
+          "marginalia: 1 resultados (faca uma pesquisa profunda solid-state b)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (faca uma pesquisa profunda solid-state b)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (faca profunda solid-state batteries comp)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (faca profunda solid-state batteries comp)",
+          "marginalia: sem resultados (faca profunda solid-state batteries comp)",
+          "wikipedia: sem resultados (faca profunda solid-state batteries comp)",
+          "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-24T00:36:55.035532+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.1002/batt.201900089.",
+      "meta": {}
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-24T00:36:55.036687+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.1002/batt.201900089",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2019-09-02",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:36:55.038545+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.1002/batt.201900089",
+        "source_id": "10.5585/eccos.n54.16759"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:36:56.738909+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.3390/batteries9020110.",
+      "meta": {}
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-24T00:36:56.739801+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9020110",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2023-02-03",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-24T00:36:56.740756+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.3390/batteries9020110",
+        "source_id": "10.7867/1809-0354.2017v12n2p324-345"
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-24T00:36:56.742197+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.7867/1809-0354.2017v12n2p324-345.",
+      "meta": {}
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-24T00:36:56.743306+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2017-09-18",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-24T00:36:56.745413+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.7867/1809-0354.2017v12n2p324-345",
+        "source_id": "10.18675/2177-580x.vol8.n1.p36-50"
+      }
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-24T00:36:56.746324+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.18675/2177-580x.vol8.n1.p36-50.",
+      "meta": {}
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-24T00:36:56.747644+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2013-08-20",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 33,
+      "ts": "2026-10-24T00:36:56.800883+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.3390/batteries9070355.",
+      "meta": {}
+    },
+    {
+      "seq": 34,
+      "ts": "2026-10-24T00:36:56.802818+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9070355",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2023-07-04",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 35,
+      "ts": "2026-10-24T00:36:58.955018+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.5585/eccos.n54.16759",
+        "final_url": "https://periodicos.uninove.br/eccos/article/download/16759/8486/0",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "document_text",
+        "extracted_chars": 7987,
+        "read": true,
+        "published_at": "2020-09-30",
+        "excerpt": "── página 1 ──\n1 de 4 \n \nEccoS – Rev. Cient., São Paulo, n. 54, p. 1-4, e16759, jul./set. 2020 \n \nR \nE \nS \nE \nN \nH \nA \n \nhttps://doi.org/10.5585/eccos.n54.16759 \ne-ISSN: 1983-9278 \nRecebido em: 07 mar. 2020 - Aprovado em: 04 set. 2020 \n \n \nFRAGOSO, Suely; RECUERO, Raquel; AMARAL, Adriana. \nMétodos de pesquisa para internet. Porto Alegre: Sulina, 2016. \n239 p. 4º reimpressão \n \nLuciano Nobre Resend"
+      }
+    },
+    {
+      "seq": 36,
+      "ts": "2026-10-24T00:36:58.991640+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://doi.org/10.5585/eccos.n54.16759",
+        "final_url": "https://periodicos.uninove.br/eccos/article/download/16759/8486/0",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "document_text",
+        "extracted_chars": 7987,
+        "read": true,
+        "published_at": "2020-09-30",
+        "excerpt": "── página 1 ──\n1 de 4 \n \nEccoS – Rev. Cient., São Paulo, n. 54, p. 1-4, e16759, jul./set. 2020 \n \nR \nE \nS \nE \nN \nH \nA \n \nhttps://doi.org/10.5585/eccos.n54.16759 \ne-ISSN: 1983-9278 \nRecebido em: 07 mar. 2020 - Aprovado em: 04 set. 2020 \n \n \nFRAGOSO, Suely; RECUERO, Raquel; AMARAL, Adriana. \nMétodos de pesquisa para internet. Porto Alegre: Sulina, 2016. \n239 p. 4º reimpressão \n \nLuciano Nobre Resend"
+      }
+    },
+    {
+      "seq": 37,
+      "ts": "2026-10-24T00:36:58.993460+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 40,
+      "ts": "2026-10-24T00:36:59.010091+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.7867/1809-0354.2017v12n2p324-345.",
+      "meta": {}
+    },
+    {
+      "seq": 41,
+      "ts": "2026-10-24T00:36:59.118139+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2017-09-18",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 42,
+      "ts": "2026-10-24T00:36:59.195013+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.7867/1809-0354.2017v12n2p324-345",
+        "source_id": "10.35265/2236-6717-230-12331"
+      }
+    },
+    {
+      "seq": 43,
+      "ts": "2026-10-24T00:36:59.259020+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.35265/2236-6717-230-12331.",
+      "meta": {}
+    },
+    {
+      "seq": 44,
+      "ts": "2026-10-24T00:36:59.261391+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.35265/2236-6717-230-12331",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2023-02-22",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 45,
+      "ts": "2026-10-24T00:36:59.263644+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.35265/2236-6717-230-12331",
+        "source_id": "10.31051/1852.8023.v3.n1.13912"
+      }
+    },
+    {
+      "seq": 46,
+      "ts": "2026-10-24T00:36:59.265386+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.35196/rfm.1988.2.171.",
+      "meta": {}
+    },
+    {
+      "seq": 47,
+      "ts": "2026-10-24T00:36:59.266744+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.35196/rfm.1988.2.171",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2024-04-30",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 48,
+      "ts": "2026-10-24T00:36:59.268844+00:00",
+      "agente": "analyst",
+      "tipo": "source_replacement_started",
+      "status": "ok",
+      "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+      "meta": {
+        "previous_source_id": "10.35196/rfm.1988.2.171",
+        "source_id": "10.70165/cglobal.v8i2.345"
+      }
+    },
+    {
+      "seq": 49,
+      "ts": "2026-10-24T00:36:59.270300+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.70165/cglobal.v8i2.345.",
+      "meta": {}
+    },
+    {
+      "seq": 50,
+      "ts": "2026-10-24T00:36:59.271545+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.70165/cglobal.v8i2.345",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2024-03-16",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 51,
+      "ts": "2026-10-24T00:37:00.021941+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (NameError): https://doi.org/10.31051/1852.8023.v3.n1.13912.",
+      "meta": {}
+    },
+    {
+      "seq": 52,
+      "ts": "2026-10-24T00:37:00.098566+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: reader_failed.",
+      "meta": {
+        "url": "https://doi.org/10.31051/1852.8023.v3.n1.13912",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "reader_failed",
+        "code": "NameError",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "2016-03-28",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 53,
+      "ts": "2026-10-24T00:37:01.511240+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.5585/eccos.n54.16759",
+        "final_url": "https://periodicos.uninove.br/eccos/article/download/16759/8486/0",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "document_text",
+        "extracted_chars": 7987,
+        "read": true,
+        "published_at": "2020-09-30",
+        "excerpt": "── página 1 ──\n1 de 4 \n \nEccoS – Rev. Cient., São Paulo, n. 54, p. 1-4, e16759, jul./set. 2020 \n \nR \nE \nS \nE \nN \nH \nA \n \nhttps://doi.org/10.5585/eccos.n54.16759 \ne-ISSN: 1983-9278 \nRecebido em: 07 mar. 2020 - Aprovado em: 04 set. 2020 \n \n \nFRAGOSO, Suely; RECUERO, Raquel; AMARAL, Adriana. \nMétodos de pesquisa para internet. Porto Alegre: Sulina, 2016. \n239 p. 4º reimpressão \n \nLuciano Nobre Resend"
+      }
+    },
+    {
+      "seq": 54,
+      "ts": "2026-10-24T00:37:01.591470+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://doi.org/10.5585/eccos.n54.16759",
+        "final_url": "https://periodicos.uninove.br/eccos/article/download/16759/8486/0",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "document_text",
+        "extracted_chars": 7987,
+        "read": true,
+        "published_at": "2020-09-30",
+        "excerpt": "── página 1 ──\n1 de 4 \n \nEccoS – Rev. Cient., São Paulo, n. 54, p. 1-4, e16759, jul./set. 2020 \n \nR \nE \nS \nE \nN \nH \nA \n \nhttps://doi.org/10.5585/eccos.n54.16759 \ne-ISSN: 1983-9278 \nRecebido em: 07 mar. 2020 - Aprovado em: 04 set. 2020 \n \n \nFRAGOSO, Suely; RECUERO, Raquel; AMARAL, Adriana. \nMétodos de pesquisa para internet. Porto Alegre: Sulina, 2016. \n239 p. 4º reimpressão \n \nLuciano Nobre Resend"
+      }
+    },
+    {
+      "seq": 55,
+      "ts": "2026-10-24T00:37:01.593140+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**Objetivo:** Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n**Status:** interrompida · **Modo:** profunda · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+          "mode": "profunda",
+          "status": "paused",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Buscar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p5",
+              "title": "Ler: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Analisar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. métodos amostra métricas",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            },
+            {
+              "id": "p7",
+              "title": "Buscar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p8",
+              "title": "Ler: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+              "kind": "ler",
+              "status": "todo",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p7"
+              ]
+            },
+            {
+              "id": "p9",
+              "title": "Analisar: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações. resultados limitações",
+              "kind": "analisar",
+              "status": "todo",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p8"
+              ]
+            },
+            {
+              "id": "p10",
+              "title": "Buscar: faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p11",
+              "title": "Ler: faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+              "kind": "ler",
+              "status": "todo",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p10"
+              ]
+            },
+            {
+              "id": "p12",
+              "title": "Analisar: faca uma pesquisa profunda solid-state batteries, comparando , metodos e limitacoes",
+              "kind": "analisar",
+              "status": "todo",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p11"
+              ]
+            },
+            {
+              "id": "p13",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "todo",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3",
+                "p6",
+                "p9",
+                "p12"
+              ]
+            },
+            {
+              "id": "p14",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "todo",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p13"
+              ]
+            },
+            {
+              "id": "p15",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "todo",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p14"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 8,
+            "total": 15,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 53.3
+          },
+          "budgets": {
+            "buscas": 8.0,
+            "paginas": 12.0,
+            "timeout_s": 120.0,
+            "subs": 4.0,
+            "replans": 2.0,
+            "midia": 16.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 5.0,
+            "paginas": 12.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "document",
+              "title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+              "url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+              "thumb": "",
+              "source_title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+              "source_url": "https://doi.org/10.1002/batt.201900089",
+              "publisher": "onlinelibrary.wiley.com",
+              "date": "2019-09-02",
+              "rights": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Resenha livro metodos de pesquisa para internet",
+              "url": "https://periodicos.uninove.br/eccos/article/viewFile/16759/8486",
+              "thumb": "",
+              "source_title": "Resenha livro metodos de pesquisa para internet",
+              "source_url": "https://doi.org/10.5585/eccos.n54.16759",
+              "publisher": "periodicos.uninove.br",
+              "date": "2020-09-30",
+              "rights": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Resenha livro metodos de pesquisa para internet",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+              "url": "http://proxy.furb.br/ojs/index.php/atosdepesquisa/article/viewFile/6335/3627",
+              "thumb": "",
+              "source_title": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+              "source_url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+              "publisher": "proxy.furb.br",
+              "date": "2017-09-18",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+              "url": "http://www.periodicos.rc.biblioteca.unesp.br/index.php/pesquisa/article/viewFile/6664/5504",
+              "thumb": "",
+              "source_title": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+              "source_url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+              "publisher": "www.periodicos.rc.biblioteca.unesp.br",
+              "date": "2013-08-20",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+              "url": "https://revfitotecnia.mx/index.php/RFM/article/download/1759/1667",
+              "thumb": "",
+              "source_title": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+              "source_url": "https://doi.org/10.35196/rfm.1988.2.171",
+              "publisher": "revfitotecnia.mx",
+              "date": "2024-04-30",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a",
+              "url": "https://revistas.unc.edu.ar/index.php/anatclinar/article/download/13912/14006",
+              "thumb": "",
+              "source_title": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a",
+              "source_url": "https://doi.org/10.31051/1852.8023.v3.n1.13912",
+              "publisher": "revistas.unc.edu.ar",
+              "date": "2016-03-28",
+              "rights": "https://creativecommons.org/licenses/by-nc/4.0",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Eficiencia de metodos de prevencion del cyberbullying",
+              "url": "https://conocimientoglobal.org/revista/index.php/cglobal/article/download/345/222",
+              "thumb": "",
+              "source_title": "Eficiencia de metodos de prevencion del cyberbullying",
+              "source_url": "https://doi.org/10.70165/cglobal.v8i2.345",
+              "publisher": "conocimientoglobal.org",
+              "date": "2024-03-16",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Eficiencia de metodos de prevencion del cyberbullying",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+              "url": "http://201.159.223.128/index.php/cienciaunemi/article/download/163/167",
+              "thumb": "",
+              "source_title": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+              "source_url": "https://doi.org/10.29076/issn.2528-7737vol1iss1.2008pp16-19p",
+              "publisher": "201.159.223.128",
+              "date": "2015-07-09",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+              "url": "https://submissoesrevistarcmos.com.br/rcmos/article/download/2590/6148",
+              "thumb": "",
+              "source_title": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+              "source_url": "https://doi.org/10.51473/rcmos.v1i1.2026.2590",
+              "publisher": "submissoesrevistarcmos.com.br",
+              "date": "2024-06-15",
+              "rights": "https://creativecommons.org/licenses/by/4.0",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+              "url": "https://www.revistatransportes.org.br/anpet/article/download/1244/664",
+              "thumb": "",
+              "source_title": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+              "source_url": "https://doi.org/10.14295/transportes.v25i4.1244",
+              "publisher": "www.revistatransportes.org.br",
+              "date": "2017-12-30",
+              "rights": "http://creativecommons.org/licenses/by/4.0",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/3189/1700",
+              "thumb": "",
+              "source_title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "source_url": "https://doi.org/10.24054/01204211.v1.n1.2018.3189",
+              "publisher": "revistas.unipamplona.edu.co",
+              "date": "2019-01-11",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "evidence": false
+            },
+            {
+              "type": "document",
+              "title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "url": "http://revistas.unipamplona.edu.co/ojs_viceinves/index.php/BISTUA/article/viewFile/2924/1559",
+              "thumb": "",
+              "source_title": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "source_url": "https://doi.org/10.24054/01204211.v1.n1.2018.2924",
+              "publisher": "revistas.unipamplona.edu.co",
+              "date": "2018-08-24",
+              "rights": "não informado",
+              "attribution": "",
+              "license_url": "",
+              "mime": "",
+              "width": 0,
+              "height": 0,
+              "duration": "",
+              "metadata_state": "FOUND",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "",
+              "alt": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-37bd8886593a&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-37bd8886593a&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-37bd8886593a&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (5)",
+              "markdown": "- Texto científico além do abstract: 0/2 publicação(ões) com o dado extraído.\n\n- Métodos e amostra: 0/2 publicação(ões) com o dado extraído.\n\n- Resultados com métrica e unidade: 0/2 publicação(ões) com o dado extraído.\n\n- Condições experimentais: 0/2 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 0/2 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 9,
+      "ok": 9,
+      "vazio": 0,
+      "resultados": 54,
+      "erros": {},
+      "ms_medio": 518.6
+    },
+    "crossref": {
+      "chamadas": 7,
+      "ok": 7,
+      "vazio": 0,
+      "resultados": 42,
+      "erros": {},
+      "ms_medio": 891.2
+    },
+    "ddg": {
+      "chamadas": 5,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 5
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 2,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 1,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 1093.1
+    },
+    "wikipedia": {
+      "chamadas": 3,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 3
+      },
+      "ms_medio": 620.5
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+      "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+      "url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resenha livro metodos de pesquisa para internet",
+      "url": "https://doi.org/10.5585/eccos.n54.16759",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+      "url": "https://doi.org/10.3390/batteries9020110",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+      "url": "https://doi.org/10.1002/batt.201900089",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+      "url": "https://doi.org/10.3390/batteries9070355",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+      "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+      "url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resenha livro metodos de pesquisa para internet",
+      "url": "https://doi.org/10.5585/eccos.n54.16759",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+      "url": "https://doi.org/10.3390/batteries9020110",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+      "url": "https://doi.org/10.1002/batt.201900089",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+      "url": "https://doi.org/10.3390/batteries9070355",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+      "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Educomunicação ambiental: comparando ações realizadas no espaço escolar e no percurso de aula passeio em uma Unidade de Conservação costeira",
+      "url": "https://doi.org/10.18675/2177-580x.vol8.n1.p36-50",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resenha livro metodos de pesquisa para internet",
+      "url": "https://doi.org/10.5585/eccos.n54.16759",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+      "url": "https://doi.org/10.3390/batteries9020110",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+      "url": "https://doi.org/10.1002/batt.201900089",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+      "url": "https://doi.org/10.3390/batteries9070355",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+      "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resenha livro metodos de pesquisa para internet",
+      "url": "https://doi.org/10.5585/eccos.n54.16759",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos antropometricos",
+      "url": "https://doi.org/10.31051/1852.8023.v3.n1.13912",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "OS CONFLITOS EM PERSPECTIVA: UMA ANÁLISE DOS METODOS JUDICIAIS E EXTRAJUDICIAIS A PARTIS DA CONJUGAÇÃO COM PRECEDENTES PROCESSUAIS",
+      "url": "https://doi.org/10.35265/2236-6717-230-12331",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Eficiencia de metodos de prevencion del cyberbullying",
+      "url": "https://doi.org/10.70165/cglobal.v8i2.345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+      "url": "https://doi.org/10.29076/issn.2528-7737vol1iss1.2008pp16-19p",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos antropometricos",
+      "url": "https://doi.org/10.31051/1852.8023.v3.n1.13912",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resenha livro metodos de pesquisa para internet",
+      "url": "https://doi.org/10.5585/eccos.n54.16759",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Eficiencia de metodos de prevencion del cyberbullying",
+      "url": "https://doi.org/10.70165/cglobal.v8i2.345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Metodos y Estrategias Didácticas en el proceso de Enseñanza",
+      "url": "https://doi.org/10.29076/issn.2528-7737vol1iss1.2008pp16-19p",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "EVALUACION CRITICA DE LOS METODOS DE PLANEACION",
+      "url": "https://doi.org/10.35426/iav10n47.03",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by-nc/4.0/legalcode",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO",
+      "url": "https://doi.org/10.35196/rfm.1988.2.171",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Resultados de aprendizaje en educación superior: un recorrido por el panorama actual de la investigación",
+      "url": "https://doi.org/10.35362/rie9916822",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://creativecommons.org/licenses/by/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "SABERES GEOMÉTRICOS NO CURSO PRIMÁRIO: UMA DISCUSSÃO SOBRE O MOVIMENTO DE SEUS METODOS E CONTEÚDOS",
+      "url": "https://doi.org/10.7867/1809-0354.2017v12n2p324-345",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Uma nova abordagem para o marketing industrial das PMEs: resultados de uma pesquisa-ação",
+      "url": "https://doi.org/10.1590/s0103-65132008000200010",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "A inserção da música na escola: processos e resultados de uma pesquisa",
+      "url": "https://doi.org/10.14393/ouv24-v15n1a2019-1",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "COMPARANDO OS RESULTADOS DO ENADE 2009 POR NÚMERO DE INSTITUIÇÕES E NÚMERO DE ESTUDANTES: COMO ANDA O DESEMPENHO ACADÊMICO DOS CURSOS DE ADMINISTRAÇÃO?",
+      "url": "https://doi.org/10.13058/raep.2013.v14n1.76",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://creativecommons.org/licenses/by/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "FUNDAMENTOS PARA UMA TEORIA GERAL DOS MECANISMOS EXPLANATÓRIOS: OBJETIVOS, METODOLOGIA E PRIMEIROS RESULTADOS DA PESQUISA",
+      "url": "https://doi.org/10.22456/2236-6385.24900",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fassa ou Faça? – Como Escrever",
+      "url": "https://comoescrever.com.br/fassa-ou-faca/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 10:49:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa? - Português à Letra",
+      "url": "https://portuguesaletra.com/duvidas/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 23:19:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-3/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 19 jun. 2026 15:55:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Conjugação do Verbo Fazer - Conjugação de Verbos",
+      "url": "https://www.conjugacao.com.br/verbo-fazer/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 20:06:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Monitoramento do desempenho da técnica de reciclagem profunda em pavimentos do estado de Goiás",
+      "url": "https://doi.org/10.14295/transportes.v25i4.1244",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://creativecommons.org/licenses/by/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Comparando políticas de desenvolvimento e atuação do Estado: América Latina e Tigres Asiáticos",
+      "url": "https://doi.org/10.21527/2237-6453.2013.23.4-39",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+      "url": "https://doi.org/10.24054/01204211.v1.n1.2018.3189",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Evaluaciòn de subproductos agrícolas sometidos a fermentación en estado solido.",
+      "url": "https://doi.org/10.24054/01204211.v1.n1.2018.2924",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Telemetria e estado de saúde de baterias em frotas elétricas: bases teóricas e um arcabouço conceitual para decisão técnico-operacional",
+      "url": "https://doi.org/10.51473/rcmos.v1i1.2026.2590",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "GESTÃO DE CUSTOS RURAIS: COMPARANDO PRÁTICAS ENTRE DISTINTOS POLOS DE PRODUÇÃO AGROINDUSTRIAIS DO ESTADO DE PERNAMBUCO",
+      "url": "https://doi.org/10.19094/contextus.v7i2.32113",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://creativecommons.org/licenses/by-nc-nd/4.0",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/faca-ou-fassa/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 10 out. 2026 23:56:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Faça ou fassa: como se escreve? | Blog do Vestibular",
+      "url": "https://www.blogdovestibular.com/portugues/faca-ou-fassa.html",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 29 jul. 2026 21:48:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 24.096
+}

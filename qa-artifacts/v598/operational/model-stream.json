@@ -1,0 +1,36 @@
+{
+  "model": "poolside/laguna-s-2.1:free",
+  "state": "BLOCKED",
+  "stream_inference_executed": false,
+  "deep_research_approved": false,
+  "ui_tested": false,
+  "discovered_model_count": 426,
+  "configured_model_discovered": true,
+  "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+  "source_read": true,
+  "reason": "vazia",
+  "error_type": "BridgeErro",
+  "chunks": 0,
+  "max_tokens": 160,
+  "transport": {
+    "http_status": 200,
+    "content_type": "text/event-stream",
+    "captured_bytes": 64284,
+    "json_sse_events": 162,
+    "capture_limit_bytes": 65536,
+    "captured_prefix_only": false,
+    "upstream_error_events": 0,
+    "nonempty_content_events": 0,
+    "delta_fields": [
+      "content",
+      "reasoning",
+      "reasoning_content",
+      "role"
+    ],
+    "reasoning_events": 160,
+    "finish_reasons": [
+      "length"
+    ]
+  },
+  "elapsed_s": 5.968
+}

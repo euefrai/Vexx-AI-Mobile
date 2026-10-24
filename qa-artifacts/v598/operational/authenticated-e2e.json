@@ -1,0 +1,47 @@
+{
+  "scope": "AUTHENTICATED_E2E; actual existing IAB app/session; runtime PID25924 predates V597; not V598 E2E",
+  "cases": [
+    {
+      "id": "greeting",
+      "state": "PASS",
+      "observed": "Normal greeting, synchronized user/assistant messages; not counted as model inference proof"
+    },
+    {
+      "id": "official_docs",
+      "state": "PARTIAL",
+      "observed": "Specific docs.python.org asyncio-task link, but response only promises to check; explanation missing"
+    },
+    {
+      "id": "scientific",
+      "state": "PARTIAL",
+      "job_id": "rj-dd1e6bb3e790",
+      "observed": "Job stored in audited SQLite, terminal partial, one search/three pages; no approved scientific synthesis"
+    },
+    {
+      "id": "municipal",
+      "state": "FAIL",
+      "observed": "Ubatã question returned unrelated national feed headlines; acknowledged articles unread"
+    },
+    {
+      "id": "images",
+      "state": "PARTIAL",
+      "observed": "Wikimedia URLs and model-declared metadata, but no JDUI gallery; licenses/dimensions not independently approved"
+    },
+    {
+      "id": "products",
+      "state": "PARTIAL",
+      "observed": "No confirmed Lenovo 16GB offer within budget; incompatible brands and unverified prices explicitly separated"
+    }
+  ],
+  "reload": {
+    "state": "PASS",
+    "observed": "After normal startup/session restoration, all 12 QA messages remained and PC connected"
+  },
+  "visual_observation": {
+    "scope": "actual IAB screenshot inspected; not exported or counted as 1280/390/320 Chrome test",
+    "issue": "Historical completed job briefly reattaches research bar; guarded in isolated V598"
+  },
+  "no_existing_conversations_modified": true,
+  "credentials_extracted": false,
+  "production_runtime_restarted": false
+}

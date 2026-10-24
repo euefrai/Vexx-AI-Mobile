@@ -1,0 +1,2197 @@
+{
+  "schema": "vexx-live-research-evaluation/v1",
+  "started_at": "2026-10-24T01:07:47.492207+00:00",
+  "scope": "live component pipelines; temporary SQLite; not authenticated UI",
+  "case_timeout_s": 65,
+  "cases": [
+    {
+      "id": "solid_state",
+      "route": "deep_research",
+      "question": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+      "claim_support_human_review": null,
+      "ui_tested": false,
+      "request": {
+        "version": 1,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "domain": "science",
+        "original_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "resolved_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T01:07:49.155821+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false
+      },
+      "answer": "",
+      "summary": {
+        "id": "rj-47323670da14",
+        "status": "concluida",
+        "modo": "profunda",
+        "objetivo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+        "plano_versao": 2,
+        "etapas": [
+          {
+            "id": "p1",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "estudos científicos baterias de estado sólido",
+            "frente": 1,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 10,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p2",
+            "tipo": "ler",
+            "status": "feita",
+            "alvo": "estudos científicos baterias de estado sólido",
+            "frente": 1,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p1"
+            ],
+            "prioridade": 30,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p3",
+            "tipo": "analisar",
+            "status": "feita",
+            "alvo": "estudos científicos baterias de estado sólido",
+            "frente": 1,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p2"
+            ],
+            "prioridade": 50,
+            "priority_reason": "frente 1 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p4",
+            "tipo": "busca",
+            "status": "feita",
+            "alvo": "papers solid-state batteries",
+            "frente": 2,
+            "objetivo_etapa": "localizar fontes relevantes e independentes",
+            "dependencias": [],
+            "prioridade": 11,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+          },
+          {
+            "id": "p5",
+            "tipo": "ler",
+            "status": "pendente",
+            "alvo": "papers solid-state batteries",
+            "frente": 2,
+            "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+            "dependencias": [
+              "p4"
+            ],
+            "prioridade": 31,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+          },
+          {
+            "id": "p6",
+            "tipo": "analisar",
+            "status": "pendente",
+            "alvo": "papers solid-state batteries",
+            "frente": 2,
+            "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+            "dependencias": [
+              "p5"
+            ],
+            "prioridade": 51,
+            "priority_reason": "frente 2 do plano explícito",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "achados da etapa disponíveis para verificação"
+          },
+          {
+            "id": "p7",
+            "tipo": "verificar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+            "dependencias": [
+              "p3",
+              "p6"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+          },
+          {
+            "id": "p8",
+            "tipo": "sintetizar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "redigir apenas com evidências registradas",
+            "dependencias": [
+              "p7"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "resposta extrativa com citações existentes"
+          },
+          {
+            "id": "p9",
+            "tipo": "auditar",
+            "status": "pendente",
+            "alvo": "",
+            "frente": 0,
+            "objetivo_etapa": "checar citações e limitações antes de concluir",
+            "dependencias": [
+              "p8"
+            ],
+            "prioridade": 100,
+            "priority_reason": "etapa final dependente das frentes de pesquisa",
+            "replan_reason": "",
+            "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+            "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+          }
+        ],
+        "evidencias": 1,
+        "achados": [],
+        "sintese": {},
+        "investigacoes": 0,
+        "hipoteses": [],
+        "proxima_acao": "Executar p5 (ler)",
+        "auditoria_ok": null,
+        "pendencias": [
+          "p5: orçamento de páginas esgotado",
+          "p6: aguardando dependências explícitas concluírem",
+          "p7: aguardando dependências explícitas concluírem",
+          "p8: aguardando dependências explícitas concluírem",
+          "p9: aguardando dependências explícitas concluírem"
+        ],
+        "erros": [],
+        "usados": {
+          "buscas": 2,
+          "paginas": 12,
+          "local_context_checked": true,
+          "replans": 0,
+          "consultas_etapas": {
+            "estudos cientificos baterias de estado solido": "p1",
+            "papers solid state batteries": "p4"
+          },
+          "recuperacao_busca": [
+            "baterias estado sólido",
+            "estudos científicos baterias de estado sólido estudo artigo",
+            "papers solid-state batteries estudo artigo"
+          ],
+          "lacunas_busca": [
+            "sem fonte acadêmica/científica direta"
+          ],
+          "provedores": {
+            "web": {
+              "ok": 2,
+              "falhas": 0,
+              "ms": 4991
+            }
+          },
+          "research_gaps": [
+            {
+              "id": "2e95945caf4978d1",
+              "dimension": "original_text",
+              "description": "Texto científico além do abstract",
+              "subquestion": "papers baterias de estado sólido open access full text",
+              "expected_data": "Texto científico além do abstract",
+              "relevance": "necessário para responder ao pedido",
+              "evidence_ids": [],
+              "candidate_sources": [
+                "https://shopee.com.br/Baterias-cat.11059984.11060122"
+              ],
+              "previous_attempts": [],
+              "priority": 1,
+              "status": "OPEN",
+              "query": "papers baterias de estado sólido open access full text",
+              "budget": {
+                "remaining_searches": 6,
+                "max_new_searches": 1
+              },
+              "required_publications": 2,
+              "observed_publications": 0,
+              "scope": "bounded extracted evidence; no claim of full study coverage"
+            },
+            {
+              "id": "5d6d2ae8b758909a",
+              "dimension": "methods",
+              "description": "Métodos e amostra",
+              "subquestion": "papers baterias de estado sólido methods sample experimental",
+              "expected_data": "Métodos e amostra",
+              "relevance": "necessário para responder ao pedido",
+              "evidence_ids": [],
+              "candidate_sources": [
+                "https://shopee.com.br/Baterias-cat.11059984.11060122"
+              ],
+              "previous_attempts": [],
+              "priority": 2,
+              "status": "OPEN",
+              "query": "papers baterias de estado sólido methods sample experimental",
+              "budget": {
+                "remaining_searches": 6,
+                "max_new_searches": 1
+              },
+              "required_publications": 2,
+              "observed_publications": 0,
+              "scope": "bounded extracted evidence; no claim of full study coverage"
+            },
+            {
+              "id": "7010740d8a74f571",
+              "dimension": "results",
+              "description": "Resultados com métrica e unidade",
+              "subquestion": "papers baterias de estado sólido results measurements units",
+              "expected_data": "Resultados com métrica e unidade",
+              "relevance": "necessário para responder ao pedido",
+              "evidence_ids": [],
+              "candidate_sources": [
+                "https://shopee.com.br/Baterias-cat.11059984.11060122"
+              ],
+              "previous_attempts": [],
+              "priority": 3,
+              "status": "OPEN",
+              "query": "papers baterias de estado sólido results measurements units",
+              "budget": {
+                "remaining_searches": 6,
+                "max_new_searches": 1
+              },
+              "required_publications": 2,
+              "observed_publications": 0,
+              "scope": "bounded extracted evidence; no claim of full study coverage"
+            },
+            {
+              "id": "0defd81c6da91c39",
+              "dimension": "conditions",
+              "description": "Condições experimentais",
+              "subquestion": "papers baterias de estado sólido experimental conditions temperature pressure",
+              "expected_data": "Condições experimentais",
+              "relevance": "necessário para responder ao pedido",
+              "evidence_ids": [],
+              "candidate_sources": [
+                "https://shopee.com.br/Baterias-cat.11059984.11060122"
+              ],
+              "previous_attempts": [],
+              "priority": 4,
+              "status": "OPEN",
+              "query": "papers baterias de estado sólido experimental conditions temperature pressure",
+              "budget": {
+                "remaining_searches": 6,
+                "max_new_searches": 1
+              },
+              "required_publications": 2,
+              "observed_publications": 0,
+              "scope": "bounded extracted evidence; no claim of full study coverage"
+            },
+            {
+              "id": "42a070727980a67c",
+              "dimension": "limitations",
+              "description": "Limitações declaradas",
+              "subquestion": "papers baterias de estado sólido limitations study",
+              "expected_data": "Limitações declaradas",
+              "relevance": "necessário para responder ao pedido",
+              "evidence_ids": [],
+              "candidate_sources": [
+                "https://shopee.com.br/Baterias-cat.11059984.11060122"
+              ],
+              "previous_attempts": [],
+              "priority": 5,
+              "status": "OPEN",
+              "query": "papers baterias de estado sólido limitations study",
+              "budget": {
+                "remaining_searches": 6,
+                "max_new_searches": 1
+              },
+              "required_publications": 2,
+              "observed_publications": 0,
+              "scope": "bounded extracted evidence; no claim of full study coverage"
+            }
+          ],
+          "controller_decisions": [
+            {
+              "action": "STOP_PARTIAL",
+              "reason": "budget_or_no_new_query",
+              "gap_ids": [],
+              "step_id": "p3",
+              "executed": false
+            }
+          ],
+          "adaptive_rounds": [
+            {
+              "step_id": "p3",
+              "new_evidence": 0,
+              "total_evidence": 0,
+              "remaining_searches": 6,
+              "decision": "no_new_evidence"
+            }
+          ],
+          "round_evidence_ids": [],
+          "research_outcome": {
+            "state": "partial",
+            "unresolved_fronts": [
+              "papers baterias de estado sólido open access full text",
+              "papers baterias de estado sólido methods sample experimental",
+              "papers baterias de estado sólido results measurements units",
+              "papers baterias de estado sólido experimental conditions temperature pressure",
+              "papers baterias de estado sólido limitations study",
+              "estudos científicos baterias de estado sólido fontes primárias texto completo",
+              "papers solid-state batteries fontes primárias texto completo",
+              "baterias estado sólido"
+            ],
+            "provider_code": "",
+            "read_sources": 0,
+            "reason": "evidências insuficientes ou limitações remanescentes"
+          }
+        },
+        "orcamento": {
+          "buscas": 8,
+          "paginas": 12,
+          "timeout_s": 120,
+          "subs": 4,
+          "profundidade": 2,
+          "midia": 16,
+          "concorrencia": 3,
+          "replans": 2,
+          "max_bytes_pagina": 2000000
+        },
+        "midia": [
+          {
+            "id": "med-7b71f2ca6f55",
+            "type": "image",
+            "title": "Lista de conteúdos e atividades grátis oferecidas pela plataforma online Seneca gratuitamente, cobrindo Ensino Fundamental, Ensino Médio e ENEM, seguindo a nova",
+            "url": "https://s3-eu-west-1.amazonaws.com/senecalearning.com/blogImages/Google+OG_Image+SEO+Image+Homepage+static+site+(1).png",
+            "final_url": "https://s3-eu-west-1.amazonaws.com/senecalearning.com/blogImages/Google+OG_Image+SEO+Image+Homepage+static+site+(1).png",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "s3-eu-west-1.amazonaws.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lista de conteúdos e atividades grátis oferecidas pela plataforma online Seneca gratuitamente, cobrindo Ensino Fundamental, Ensino Médio e ENEM, seguindo a nova BNCC",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f2fedfe0e0e",
+            "type": "image",
+            "title": "Seneca logo",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/staticSiteDesignImages/senecaByGoStudentBlueLogo.svg",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/staticSiteDesignImages/senecaByGoStudentBlueLogo.svg",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Seneca logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4561c025a8dc",
+            "type": "image",
+            "title": "UK (English)",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagUK.svg",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagUK.svg",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "UK (English)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-01731fad1114",
+            "type": "image",
+            "title": "Brasil (Português)",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagBR.svg",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagBR.svg",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil (Português)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-846a65dc0453",
+            "type": "image",
+            "title": "México (Español)",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagMX.svg",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagMX.svg",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "México (Español)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3bf3268bce6c",
+            "type": "image",
+            "title": "Österreich (Deutsch)",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagAT.svg",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/assets/flagAT.svg",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Österreich (Deutsch)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7f2d0cc7d3f5",
+            "type": "video",
+            "title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "url": "https://d17hukvrbysd4e.cloudfront.net/student-overview.mp4",
+            "final_url": "https://d17hukvrbysd4e.cloudfront.net/student-overview.mp4",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "d17hukvrbysd4e.cloudfront.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Estude conteúdos do Ensino Fundamental, Ensino Médio e ENEM de forma divertida e eficiente.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-56f1283b6b1e",
+            "type": "document",
+            "title": "materiais.html",
+            "url": "https://gerador-de-atividades.senecalearning.com/materiais.html",
+            "final_url": "https://gerador-de-atividades.senecalearning.com/materiais.html",
+            "source_title": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+            "source_url": "https://senecalearning.com/pt-br/",
+            "publisher": "gerador-de-atividades.senecalearning.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Estude conteúdos do Ensino Fundamental, Ensino Médio e ENEM de forma divertida e eficiente.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-31eed5b6d610",
+            "type": "image",
+            "title": "logo moura baterias",
+            "url": "https://www.moura.com.br/_next/static/media/logo-moura.1onenkdak0slp.svg?dpl=dpl_HBthwJdzfbTiJFCqhWxBCtD61fsB",
+            "final_url": "https://www.moura.com.br/_next/static/media/logo-moura.1onenkdak0slp.svg?dpl=dpl_HBthwJdzfbTiJFCqhWxBCtD61fsB",
+            "source_title": "Baterias Moura - Home",
+            "source_url": "https://www.moura.com.br/",
+            "publisher": "www.moura.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logo moura baterias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-565cc0970740",
+            "type": "image",
+            "title": "A maior variedade do mercado. Baterias automotivas, tracionárias, estacionárias, energia renovável e muito, muito mais. Aproveite!",
+            "url": "https://www.postodasbaterias.com.br/media/logo/default/logo-170.png",
+            "final_url": "https://www.postodasbaterias.com.br/media/logo/default/logo-170.png",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "www.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A maior variedade do mercado. Baterias automotivas, tracionárias, estacionárias, energia renovável e muito, muito mais. Aproveite!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-343ecb18d0e7",
+            "type": "image",
+            "title": "Favoritos",
+            "url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-coracao.png",
+            "final_url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-coracao.png",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "cdn.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Favoritos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d835e9d5c5aa",
+            "type": "image",
+            "title": "Buscar",
+            "url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/search.svg",
+            "final_url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/search.svg",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "cdn.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Buscar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e4fdeb80bf7a",
+            "type": "image",
+            "title": "Login",
+            "url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-login.png",
+            "final_url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-login.png",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "cdn.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Login",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a096d4fe8fed",
+            "type": "image",
+            "title": "Sacola",
+            "url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-sacola.png",
+            "final_url": "https://cdn.postodasbaterias.com.br/skin/frontend/agile-x/deco-clean/images/ico-sacola.png",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "cdn.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Sacola",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2edf91dc726e",
+            "type": "image",
+            "title": "ENERGIA SOLAR",
+            "url": "https://www.postodasbaterias.com.br/media/ibanners/BANNER_FELIZ_2026.jpg",
+            "final_url": "https://www.postodasbaterias.com.br/media/ibanners/BANNER_FELIZ_2026.jpg",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "www.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ENERGIA SOLAR",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b43995f9235d",
+            "type": "image",
+            "title": "BATERIA TUDOR 12TE150",
+            "url": "https://www.postodasbaterias.com.br/media/ibanners/BANNER_janeiro_26.jpg",
+            "final_url": "https://www.postodasbaterias.com.br/media/ibanners/BANNER_janeiro_26.jpg",
+            "source_title": "Posto das Baterias",
+            "source_url": "https://www.postodasbaterias.com.br/",
+            "publisher": "www.postodasbaterias.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BATERIA TUDOR 12TE150",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "midia_resumo": {
+          "total": 16,
+          "images": 14,
+          "videos": 1,
+          "documents": 1,
+          "metadata_only": 14,
+          "link_only": 2,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "limites": {
+          "buscas": 8,
+          "paginas": 12,
+          "timeout_s": 120,
+          "subs": 4,
+          "replans": 2,
+          "midia": 16,
+          "concorrencia": 3,
+          "max_bytes_pagina": 2000000
+        }
+      },
+      "evidence": [
+        {
+          "id": "ev-198368826f53",
+          "fonte_id": "",
+          "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+          "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+          "dominio": "shopee.com.br",
+          "acessado_em": "2026-10-24T01:08:01.659650+00:00",
+          "publicado_em": "sex., 23 out. 2026 00:25:00 GMT",
+          "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+          "afirmacao": "",
+          "relacao": "cita",
+          "status": "recuperada",
+          "content_scope": "page_text",
+          "vertical": {
+            "kind": "science",
+            "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+            "eligible": true,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": true,
+            "required_data": [
+              "title",
+              "doi",
+              "authors",
+              "publication_date",
+              "content_scope",
+              "source"
+            ],
+            "reasons": [],
+            "data": {}
+          },
+          "structured": [],
+          "publicador": "",
+          "imagens": [],
+          "texto_lido": false,
+          "trecho_usado": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+          "access_state": "snippet_only"
+        }
+      ],
+      "read_sources": 0,
+      "model": null,
+      "model_calls_requested": 0,
+      "citation_mechanics": {
+        "citation_count": 0,
+        "stages": {
+          "citation_exists": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "source_retrieved": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          },
+          "passage_found": {
+            "passed": 0,
+            "total": 0,
+            "rate": null
+          }
+        }
+      },
+      "displayed_citation_links": [],
+      "search_events": [
+        {
+          "seq": 6,
+          "ts": "2026-10-24T01:07:51.583693+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'estudos científicos baterias de estado sólido': 12 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [],
+            "estado": "ok",
+            "recovery_steps": [
+              "crossref: bloqueado (estudos científicos baterias de estado s)",
+              "bing: 6 resultados (estudos científicos baterias de estado s)",
+              "bing: sem correspondência com o pedido; tentando outro provedor (estudos científicos baterias de estado s)",
+              "ddg: bloqueado (estudos científicos baterias de estado s)",
+              "— recuperação por lacuna —",
+              "bing: 6 resultados (baterias estado sólido)",
+              "bing: sem correspondência com o pedido; tentando outro provedor (baterias estado sólido)",
+              "wikipedia: bloqueado (baterias estado sólido)",
+              "marginalia: sem resultados (baterias estado sólido)",
+              "recuperação com ganho novo: 6 domínio(s), 1 tema(s) além da 1ª rodada"
+            ]
+          }
+        },
+        {
+          "seq": 9,
+          "ts": "2026-10-24T01:07:54.334069+00:00",
+          "agente": "search",
+          "tipo": "search_completed",
+          "status": "ok",
+          "descricao": "Busca 'papers solid-state batteries': 8 achados.",
+          "meta": {
+            "provedor": "web",
+            "falhas": [],
+            "estado": "ok",
+            "recovery_steps": [
+              "crossref: bloqueado (papers solid-state batteries)",
+              "bing: 6 resultados (papers solid-state batteries)",
+              "bing: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries)",
+              "ddg: bloqueado (papers solid-state batteries)",
+              "— recuperação por lacuna —",
+              "bing: 6 resultados (papers solid-state batteries estudo arti)",
+              "bing: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries estudo arti)",
+              "wikipedia: bloqueado (papers solid-state batteries estudo arti)",
+              "marginalia: 2 resultados (papers solid-state batteries estudo arti)",
+              "marginalia: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries estudo arti)",
+              "recuperação com ganho novo: 2 domínio(s), 0 tema(s) além da 1ª rodada"
+            ]
+          }
+        },
+        {
+          "seq": 12,
+          "ts": "2026-10-24T01:07:55.716506+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://www.moura.com.br/",
+            "final_url": "https://www.moura.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 317,
+            "read": true,
+            "published_at": "qua., 21 out. 2026 17:31:00 GMT",
+            "excerpt": "Carreiras Moura Acreditamos nas pessoas e estamos sempre em busca de novos talentos para compor nossas equipes. Se você possui um perfil dinâmico, trabalha com foco em resultados, apresenta bom relacionamento interpessoal, trabalha bem em equipe e busca se desenvolver constantemente, venha fazer parte do nosso time!"
+          }
+        },
+        {
+          "seq": 13,
+          "ts": "2026-10-24T01:07:55.724050+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 14,
+          "ts": "2026-10-24T01:07:56.623267+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://www.postodasbaterias.com.br/",
+            "final_url": "https://www.postodasbaterias.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 1308,
+            "read": true,
+            "published_at": "ter., 20 out. 2026 11:34:00 GMT",
+            "excerpt": "BATERIA TROJAN 225ah 6v MOTIVE T-105 PLUS - TR... R$ 2.960,58 Em x de 8 R$404,15 R$ 2.812,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA TROJAN 390ah 6v MOTIVE L16G-AC - TRACI... R$ 5.840,58 Em x de 8 R$797,30 R$ 5.548,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA MOURA 9ah 12v 12MVA-9 - ESTACIONÁRIA V... R$ 190,00 Em"
+          }
+        },
+        {
+          "seq": 15,
+          "ts": "2026-10-24T01:07:56.630882+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 16,
+          "ts": "2026-10-24T01:07:57.046878+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: no_readable_content.",
+          "meta": {
+            "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+            "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+            "source_state": "FETCHED",
+            "stage": "no_readable_content",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 0,
+            "read": false,
+            "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+            "excerpt": ""
+          }
+        },
+        {
+          "seq": 17,
+          "ts": "2026-10-24T01:07:57.236808+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 18,
+          "ts": "2026-10-24T01:07:57.343555+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://senecalearning.com/pt-br/",
+            "final_url": "https://senecalearning.com/pt-br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 55,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 20:49:00 GMT",
+            "excerpt": "Do 🚌 ao 🚽 à 🌙... aprenda em qualquer lugar Use de graça"
+          }
+        },
+        {
+          "seq": 19,
+          "ts": "2026-10-24T01:07:57.350074+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 20,
+          "ts": "2026-10-24T01:07:58.510209+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://www.atacadaodebaterias.com.br/",
+            "final_url": "https://www.atacadaodebaterias.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 53,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 03:39:00 GMT",
+            "excerpt": "Assine nossa newsletter e receba as melhores ofertas!"
+          }
+        },
+        {
+          "seq": 21,
+          "ts": "2026-10-24T01:07:58.514001+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 22,
+          "ts": "2026-10-24T01:07:59.217119+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://redeunicadebaterias.com.br/",
+            "final_url": "https://redeunicadebaterias.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 240,
+            "read": true,
+            "published_at": "2023-10-05T20:13:58+00:00",
+            "excerpt": "Procure o SAC ou assistência técnica autorizada com a nota fiscal e a bateria dentro do prazo de validade. Como acionar: Defeitos de fabricação. Não cobre mau uso, instalação inadequada ou falhas no sistema elétrico do veículo. O que cobre:"
+          }
+        },
+        {
+          "seq": 23,
+          "ts": "2026-10-24T01:07:59.221375+00:00",
+          "agente": "analyst",
+          "tipo": "source_replacement_started",
+          "status": "ok",
+          "descricao": "Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.",
+          "meta": {
+            "previous_source_id": "",
+            "source_id": ""
+          }
+        },
+        {
+          "seq": 24,
+          "ts": "2026-10-24T01:07:59.722665+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://www.bateriasduran.com.br/",
+            "final_url": "https://www.bateriasduran.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 841,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 22:30:00 GMT",
+            "excerpt": "70ah estão funcionando muito bem recomendo Written by: Elenilson Baterias Duran / stars 1 1 Jairo Djalma Nome: Positivo Avaliação: Comprei um carregador de bateria para cadeira de rodas freedom, estou super satisfeito, pois o mesmo... Depoimento: 18/06/2020 Comentado em: 1261 Baterias Duran Comprei um carregador de bateria para cadeira de rodas freedom, estou super satisfeito, pois o mesmo..."
+          }
+        },
+        {
+          "seq": 25,
+          "ts": "2026-10-24T01:08:00.252469+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://estudei.com.br/",
+            "final_url": "https://estudei.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 1339,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 07:28:00 GMT",
+            "excerpt": "vestibular ou exame, ou monte seu plano personalizado. Todas as matérias são carregadas de forma verticalizada. Planejamento inteligente Informe sua rotina e preferências. O Estudei distribui as disciplinas de forma equilibrada, considerando suas facilidades e dificuldades. Registre seus estudos Use o cronômetro no app ou no navegador para registrar horas líquidas e categorizar cada sessão"
+          }
+        },
+        {
+          "seq": 26,
+          "ts": "2026-10-24T01:08:00.671407+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://studeli.com/pt",
+            "final_url": "https://studeli.com/pt",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 2416,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 13:12:00 GMT",
+            "excerpt": "YouTube - em materiais de aprendizagem abrangentes. Gera com capítulos detalhados, rápidos ou para aprender passo a passo. Testa-te com e . Consulta e explora . Obtém ajuda do teu pessoal quando estiveres preso. Tudo é estruturado em torno de claros. Organiza materiais em , acompanha o teu progresso e aprende em vários idiomas. Guias de Estudo Resumos Lições Interativas Questões de Prática"
+          }
+        },
+        {
+          "seq": 27,
+          "ts": "2026-10-24T01:08:01.418175+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://www.todamateria.com.br/",
+            "final_url": "https://www.todamateria.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 2870,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 10:26:00 GMT",
+            "excerpt": "Fascismo: o que é e suas características Thiago Souza Professor de Sociologia, Filosofia e História História do Halloween Carolina Batista Professora de Química Exercícios sobre tipos de gráficos (com gabarito explicado) Rafael C. Asth Professor de Matemática e Física 25 personalidades negras do Brasil que marcaram a história Juliana Bezerra Professora de História Comunismo Pedro Menezes Professor"
+          }
+        },
+        {
+          "seq": 28,
+          "ts": "2026-10-24T01:08:01.440071+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://pt.khanacademy.org/",
+            "final_url": "https://pt.khanacademy.org/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 209,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 02:05:00 GMT",
+            "excerpt": "A required part of this site couldn’t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser."
+          }
+        },
+        {
+          "seq": 29,
+          "ts": "2026-10-24T01:08:01.634252+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: extracted.",
+          "meta": {
+            "url": "https://knowunity.com.br/",
+            "final_url": "https://knowunity.com.br/",
+            "source_state": "READABLE",
+            "stage": "extracted",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 118,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 14:58:00 GMT",
+            "excerpt": "A app de estudo tudo-em-um em quem confias Tudo o que precisas para resolver os trabalhos de casa e preparar os exames"
+          }
+        },
+        {
+          "seq": 30,
+          "ts": "2026-10-24T01:08:01.664748+00:00",
+          "agente": "analyst",
+          "tipo": "evidence_registered",
+          "status": "ok",
+          "descricao": "Evidência ev-19836882 de shopee.com.br.",
+          "meta": {
+            "status": "recuperada"
+          }
+        },
+        {
+          "seq": 31,
+          "ts": "2026-10-24T01:08:01.681574+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "ok",
+          "descricao": "Leitura de fonte: discovery_stored.",
+          "meta": {
+            "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+            "final_url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+            "source_state": "DISCOVERED",
+            "stage": "discovery_stored",
+            "code": "",
+            "scope": "page_text",
+            "extracted_chars": 0,
+            "read": false,
+            "published_at": "sex., 23 out. 2026 00:25:00 GMT",
+            "excerpt": ""
+          }
+        },
+        {
+          "seq": 32,
+          "ts": "2026-10-24T01:08:01.690589+00:00",
+          "agente": "analyst",
+          "tipo": "extraction_completed",
+          "status": "ok",
+          "descricao": "Fonte encontrada em shopee.com.br; conteúdo não lido.",
+          "meta": {}
+        },
+        {
+          "seq": 33,
+          "ts": "2026-10-24T01:08:01.726118+00:00",
+          "agente": "analyst",
+          "tipo": "evidence_linked",
+          "status": "ok",
+          "descricao": "Evidência ligada ao documento (shopee.com.br).",
+          "meta": {
+            "evidencia_id": "ev-198368826f53",
+            "dominio": "shopee.com.br",
+            "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+            "url": "https://shopee.com.br/Baterias-cat.11059984.11060122"
+          }
+        },
+        {
+          "seq": 34,
+          "ts": "2026-10-24T01:08:01.739741+00:00",
+          "agente": "analyst",
+          "tipo": "media_discovered",
+          "status": "ok",
+          "descricao": "8 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+          "meta": {
+            "added": 8,
+            "summary": {
+              "total": 8,
+              "images": 6,
+              "videos": 1,
+              "documents": 1,
+              "metadata_only": 6,
+              "link_only": 2,
+              "validated": 0,
+              "analyzed": 0,
+              "evidence": 0
+            },
+            "claim_evidence": false,
+            "analysis_state": "not_analyzed"
+          }
+        },
+        {
+          "seq": 35,
+          "ts": "2026-10-24T01:08:01.744554+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://senecalearning.com/pt-br/",
+            "final_url": "https://senecalearning.com/pt-br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 55,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 20:49:00 GMT",
+            "excerpt": "Do 🚌 ao 🚽 à 🌙... aprenda em qualquer lugar Use de graça"
+          }
+        },
+        {
+          "seq": 36,
+          "ts": "2026-10-24T01:08:01.751456+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 37,
+          "ts": "2026-10-24T01:08:01.775463+00:00",
+          "agente": "analyst",
+          "tipo": "media_discovered",
+          "status": "ok",
+          "descricao": "1 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+          "meta": {
+            "added": 1,
+            "summary": {
+              "total": 9,
+              "images": 7,
+              "videos": 1,
+              "documents": 1,
+              "metadata_only": 7,
+              "link_only": 2,
+              "validated": 0,
+              "analyzed": 0,
+              "evidence": 0
+            },
+            "claim_evidence": false,
+            "analysis_state": "not_analyzed"
+          }
+        },
+        {
+          "seq": 38,
+          "ts": "2026-10-24T01:08:01.786653+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://www.moura.com.br/",
+            "final_url": "https://www.moura.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 317,
+            "read": true,
+            "published_at": "qua., 21 out. 2026 17:31:00 GMT",
+            "excerpt": "Carreiras Moura Acreditamos nas pessoas e estamos sempre em busca de novos talentos para compor nossas equipes. Se você possui um perfil dinâmico, trabalha com foco em resultados, apresenta bom relacionamento interpessoal, trabalha bem em equipe e busca se desenvolver constantemente, venha fazer parte do nosso time!"
+          }
+        },
+        {
+          "seq": 39,
+          "ts": "2026-10-24T01:08:01.804877+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 40,
+          "ts": "2026-10-24T01:08:01.815347+00:00",
+          "agente": "analyst",
+          "tipo": "media_discovered",
+          "status": "ok",
+          "descricao": "7 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+          "meta": {
+            "added": 7,
+            "summary": {
+              "total": 16,
+              "images": 14,
+              "videos": 1,
+              "documents": 1,
+              "metadata_only": 14,
+              "link_only": 2,
+              "validated": 0,
+              "analyzed": 0,
+              "evidence": 0
+            },
+            "claim_evidence": false,
+            "analysis_state": "not_analyzed"
+          }
+        },
+        {
+          "seq": 41,
+          "ts": "2026-10-24T01:08:01.822626+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://www.postodasbaterias.com.br/",
+            "final_url": "https://www.postodasbaterias.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 1308,
+            "read": true,
+            "published_at": "ter., 20 out. 2026 11:34:00 GMT",
+            "excerpt": "BATERIA TROJAN 225ah 6v MOTIVE T-105 PLUS - TR... R$ 2.960,58 Em x de 8 R$404,15 R$ 2.812,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA TROJAN 390ah 6v MOTIVE L16G-AC - TRACI... R$ 5.840,58 Em x de 8 R$797,30 R$ 5.548,55 Desconto 5% para clientes que escolherem pagar via Depósito / Transferência BATERIA MOURA 9ah 12v 12MVA-9 - ESTACIONÁRIA V... R$ 190,00 Em"
+          }
+        },
+        {
+          "seq": 42,
+          "ts": "2026-10-24T01:08:01.833736+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 43,
+          "ts": "2026-10-24T01:08:01.856061+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://www.atacadaodebaterias.com.br/",
+            "final_url": "https://www.atacadaodebaterias.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 53,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 03:39:00 GMT",
+            "excerpt": "Assine nossa newsletter e receba as melhores ofertas!"
+          }
+        },
+        {
+          "seq": 44,
+          "ts": "2026-10-24T01:08:01.861255+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 45,
+          "ts": "2026-10-24T01:08:01.887279+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://redeunicadebaterias.com.br/",
+            "final_url": "https://redeunicadebaterias.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 240,
+            "read": true,
+            "published_at": "2023-10-05T20:13:58+00:00",
+            "excerpt": "Procure o SAC ou assistência técnica autorizada com a nota fiscal e a bateria dentro do prazo de validade. Como acionar: Defeitos de fabricação. Não cobre mau uso, instalação inadequada ou falhas no sistema elétrico do veículo. O que cobre:"
+          }
+        },
+        {
+          "seq": 46,
+          "ts": "2026-10-24T01:08:01.892825+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 47,
+          "ts": "2026-10-24T01:08:01.912207+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://www.bateriasduran.com.br/",
+            "final_url": "https://www.bateriasduran.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 841,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 22:30:00 GMT",
+            "excerpt": "70ah estão funcionando muito bem recomendo Written by: Elenilson Baterias Duran / stars 1 1 Jairo Djalma Nome: Positivo Avaliação: Comprei um carregador de bateria para cadeira de rodas freedom, estou super satisfeito, pois o mesmo... Depoimento: 18/06/2020 Comentado em: 1261 Baterias Duran Comprei um carregador de bateria para cadeira de rodas freedom, estou super satisfeito, pois o mesmo..."
+          }
+        },
+        {
+          "seq": 48,
+          "ts": "2026-10-24T01:08:01.920262+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 49,
+          "ts": "2026-10-24T01:08:01.937236+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://www.todamateria.com.br/",
+            "final_url": "https://www.todamateria.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 2870,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 10:26:00 GMT",
+            "excerpt": "Fascismo: o que é e suas características Thiago Souza Professor de Sociologia, Filosofia e História História do Halloween Carolina Batista Professora de Química Exercícios sobre tipos de gráficos (com gabarito explicado) Rafael C. Asth Professor de Matemática e Física 25 personalidades negras do Brasil que marcaram a história Juliana Bezerra Professora de História Comunismo Pedro Menezes Professor"
+          }
+        },
+        {
+          "seq": 50,
+          "ts": "2026-10-24T01:08:01.942244+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 51,
+          "ts": "2026-10-24T01:08:01.952042+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://studeli.com/pt",
+            "final_url": "https://studeli.com/pt",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 2416,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 13:12:00 GMT",
+            "excerpt": "YouTube - em materiais de aprendizagem abrangentes. Gera com capítulos detalhados, rápidos ou para aprender passo a passo. Testa-te com e . Consulta e explora . Obtém ajuda do teu pessoal quando estiveres preso. Tudo é estruturado em torno de claros. Organiza materiais em , acompanha o teu progresso e aprende em vários idiomas. Guias de Estudo Resumos Lições Interativas Questões de Prática"
+          }
+        },
+        {
+          "seq": 52,
+          "ts": "2026-10-24T01:08:01.955196+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 53,
+          "ts": "2026-10-24T01:08:01.962522+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://estudei.com.br/",
+            "final_url": "https://estudei.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 1339,
+            "read": true,
+            "published_at": "qui., 22 out. 2026 07:28:00 GMT",
+            "excerpt": "vestibular ou exame, ou monte seu plano personalizado. Todas as matérias são carregadas de forma verticalizada. Planejamento inteligente Informe sua rotina e preferências. O Estudei distribui as disciplinas de forma equilibrada, considerando suas facilidades e dificuldades. Registre seus estudos Use o cronômetro no app ou no navegador para registrar horas líquidas e categorizar cada sessão"
+          }
+        },
+        {
+          "seq": 54,
+          "ts": "2026-10-24T01:08:01.966745+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 55,
+          "ts": "2026-10-24T01:08:01.971814+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://knowunity.com.br/",
+            "final_url": "https://knowunity.com.br/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 118,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 14:58:00 GMT",
+            "excerpt": "A app de estudo tudo-em-um em quem confias Tudo o que precisas para resolver os trabalhos de casa e preparar os exames"
+          }
+        },
+        {
+          "seq": 56,
+          "ts": "2026-10-24T01:08:01.978218+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        },
+        {
+          "seq": 57,
+          "ts": "2026-10-24T01:08:01.983461+00:00",
+          "agente": "analyst",
+          "tipo": "source_read_trace",
+          "status": "alerta",
+          "descricao": "Leitura de fonte: relevance_rejected.",
+          "meta": {
+            "url": "https://pt.khanacademy.org/",
+            "final_url": "https://pt.khanacademy.org/",
+            "source_state": "REJECTED",
+            "stage": "relevance_rejected",
+            "code": "TOPIC_MISMATCH",
+            "scope": "page_text",
+            "extracted_chars": 209,
+            "read": true,
+            "published_at": "sex., 23 out. 2026 02:05:00 GMT",
+            "excerpt": "A required part of this site couldn’t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser."
+          }
+        },
+        {
+          "seq": 58,
+          "ts": "2026-10-24T01:08:01.992715+00:00",
+          "agente": "analyst",
+          "tipo": "source_irrelevant",
+          "status": "alerta",
+          "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+          "meta": {}
+        }
+      ],
+      "jdui_valid": true,
+      "jdui_errors": [],
+      "jdui": {
+        "version": "JULIA-ui-message/v1",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "**Objetivo:** Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n**Status:** concluída · **Modo:** profunda · **Evidências:** 1\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+          },
+          {
+            "type": "ui",
+            "component": "sources",
+            "props": {
+              "title": "Fontes e estado da leitura",
+              "items": [
+                {
+                  "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+                  "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+                  "dominio": "shopee.com.br",
+                  "data": "sex., 23 out. 2026 00:25:00 GMT",
+                  "trecho": "Compre Baterias pelo melhor preço no site ou app da Shopee Brasil. Encontre os mais diversos tipos de Baterias pelo melhor preço em nossas lojas. Aproveite cupons de desconto e compre com a segurança e garantia Shopee.",
+                  "origem_declarada": "",
+                  "tipo": "Fonte",
+                  "escopo": "Página não lida; sem suporte factual",
+                  "relacao": "Fonte de contexto",
+                  "data_evento": "",
+                  "publicador": "",
+                  "autores": "",
+                  "doi": "",
+                  "imagem": "",
+                  "favicon": "",
+                  "texto_url": "",
+                  "leitura": "FOUND",
+                  "detalhes": [],
+                  "status": "encontrada"
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "researchplan",
+            "props": {
+              "title": "Plano de pesquisa",
+              "objective": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+              "mode": "profunda",
+              "status": "completed",
+              "steps": [
+                {
+                  "id": "p1",
+                  "title": "Buscar: estudos científicos baterias de estado sólido",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p2",
+                  "title": "Ler: estudos científicos baterias de estado sólido",
+                  "kind": "ler",
+                  "status": "done",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p1"
+                  ]
+                },
+                {
+                  "id": "p3",
+                  "title": "Analisar: estudos científicos baterias de estado sólido",
+                  "kind": "analisar",
+                  "status": "done",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p2"
+                  ]
+                },
+                {
+                  "id": "p4",
+                  "title": "Buscar: papers solid-state batteries",
+                  "kind": "busca",
+                  "status": "done",
+                  "detail": "localizar fontes relevantes e independentes",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": []
+                },
+                {
+                  "id": "p5",
+                  "title": "Ler: papers solid-state batteries",
+                  "kind": "ler",
+                  "status": "todo",
+                  "detail": "abrir a fonte e extrair trecho com proveniência",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p4"
+                  ]
+                },
+                {
+                  "id": "p6",
+                  "title": "Analisar: papers solid-state batteries",
+                  "kind": "analisar",
+                  "status": "todo",
+                  "detail": "registrar evidência sem transformar descoberta em prova",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p5"
+                  ]
+                },
+                {
+                  "id": "p7",
+                  "title": "Verificar",
+                  "kind": "verificar",
+                  "status": "todo",
+                  "detail": "classificar cada afirmação contra as fontes lidas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p3",
+                    "p6"
+                  ]
+                },
+                {
+                  "id": "p8",
+                  "title": "Sintetizar",
+                  "kind": "sintetizar",
+                  "status": "todo",
+                  "detail": "redigir apenas com evidências registradas",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p7"
+                  ]
+                },
+                {
+                  "id": "p9",
+                  "title": "Auditar",
+                  "kind": "auditar",
+                  "status": "todo",
+                  "detail": "checar citações e limitações antes de concluir",
+                  "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+                  "dependencies": [
+                    "p8"
+                  ]
+                }
+              ],
+              "progress": {
+                "done": 4,
+                "total": 9,
+                "skipped": 0,
+                "errors": 0,
+                "percent": 44.4
+              },
+              "budgets": {
+                "buscas": 8.0,
+                "paginas": 12.0,
+                "timeout_s": 120.0,
+                "subs": 4.0,
+                "replans": 2.0,
+                "midia": 16.0,
+                "concorrencia": 3.0,
+                "max_bytes_pagina": 1000000
+              },
+              "used": {
+                "buscas": 2.0,
+                "paginas": 12.0,
+                "replans": 0
+              },
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "filecard",
+            "props": {
+              "title": "Exportar pesquisa",
+              "files": [
+                {
+                  "name": "Relatório completo (Markdown)",
+                  "url": "/api/research/export?job_id=rj-47323670da14&formato=md",
+                  "kind": "md",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Dados estruturados (CSV)",
+                  "url": "/api/research/export?job_id=rj-47323670da14&formato=csv",
+                  "kind": "csv",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                },
+                {
+                  "name": "Registros completos (JSON)",
+                  "url": "/api/research/export?job_id=rj-47323670da14&formato=json",
+                  "kind": "json",
+                  "size": "limite 2 MB",
+                  "source": "gerado no servidor",
+                  "status": "available"
+                }
+              ],
+              "sources": []
+            }
+          },
+          {
+            "type": "ui",
+            "component": "accordion",
+            "props": {
+              "items": [
+                {
+                  "title": "O que ainda falta confirmar (5)",
+                  "markdown": "- Texto científico além do abstract: 0/2 publicação(ões) com o dado extraído.\n\n- Métodos e amostra: 0/2 publicação(ões) com o dado extraído.\n\n- Resultados com métrica e unidade: 0/2 publicação(ões) com o dado extraído.\n\n- Condições experimentais: 0/2 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 0/2 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "provider_metrics": {
+        "bing": {
+          "chamadas": 4,
+          "ok": 4,
+          "vazio": 0,
+          "resultados": 24,
+          "erros": {},
+          "ms_medio": 610.2
+        },
+        "crossref": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "ddg": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        },
+        "marginalia": {
+          "chamadas": 2,
+          "ok": 1,
+          "vazio": 0,
+          "resultados": 2,
+          "erros": {
+            "vazio": 1
+          },
+          "ms_medio": 1177.8
+        },
+        "wikipedia": {
+          "chamadas": 2,
+          "ok": 0,
+          "vazio": 0,
+          "resultados": 0,
+          "erros": {
+            "circuit_open": 2
+          },
+          "ms_medio": 0.0
+        }
+      },
+      "source_discovery": [
+        {
+          "titulo": "Seneca | Estudos Eficientes, Divertidos e Gratuitos",
+          "url": "https://senecalearning.com/pt-br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 20:49:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Seu companheiro de aprendizado AI #1 - Knowunity",
+          "url": "https://knowunity.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 14:58:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Conteúdos Escolares - Toda Matéria",
+          "url": "https://www.todamateria.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 10:26:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "IA para estudar: resumos, flashcards e exercícios grátis",
+          "url": "https://studeli.com/pt",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 13:12:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Estudei",
+          "url": "https://estudei.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 07:28:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Khan Academy | Cursos, aulas e prática on-line gratuitos",
+          "url": "https://pt.khanacademy.org/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 02:05:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Baterias Moura - Home",
+          "url": "https://www.moura.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 17:31:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Posto das Baterias - O melhor site de baterias do Brasil!",
+          "url": "https://www.postodasbaterias.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 11:34:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Atacadão das Baterias e Lubrificantes",
+          "url": "https://www.atacadaodebaterias.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 03:39:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Compre Baterias em Promoção - Eletrodomésticos | Shopee Brasil",
+          "url": "https://shopee.com.br/Baterias-cat.11059984.11060122",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 00:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Rede Unica de Baterias - Baterias Direto da Fábrica",
+          "url": "https://redeunicadebaterias.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 02:47:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Baterias Duran | A bateria que dura de verdade!",
+          "url": "https://www.bateriasduran.com.br/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 22:30:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Papers AI — one research workspace for Word, LaTeX, data & code",
+          "url": "https://papers.ai/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Google Scholar",
+          "url": "https://scholar.google.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 17:57:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Connected Papers | Find and explore academic papers",
+          "url": "https://www.connectedpapers.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Papers - ReadCube Literature Management Solutions",
+          "url": "https://about.readcube.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 02:12:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "PaperGate - Search 450M+ Research Papers & Scholarly Articles",
+          "url": "https://papergate.org/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Sci-Hub:Get the latest free papers Library",
+          "url": "https://www.sci-hub.in/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:46:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Papers AI — one research workspace for Word, LaTeX, data & code",
+          "url": "https://papers.ai/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Google Scholar",
+          "url": "https://scholar.google.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 17:57:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Connected Papers | Find and explore academic papers",
+          "url": "https://www.connectedpapers.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Papers - ReadCube Literature Management Solutions",
+          "url": "https://about.readcube.com/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 02:12:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "PaperGate - Search 450M+ Research Papers & Scholarly Articles",
+          "url": "https://papergate.org/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Sci-Hub:Get the latest free papers Library",
+          "url": "https://www.sci-hub.in/",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:46:00 GMT"
+          },
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "Eduardo SBPMAT – SBPMat – Sociedade Brasileira de Pesquisa em Materiais",
+          "url": "https://www.sbpmat.org.br/pt/author/eduardo/",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        },
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "license": null,
+          "description": null,
+          "publisher_url": null,
+          "source_recovery": null
+        }
+      ],
+      "elapsed_s": 12.979
+    }
+  ]
+}

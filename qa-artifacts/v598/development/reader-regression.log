@@ -1,0 +1,23 @@
+..............................................................F......... [ 81%]
+................                                                         [100%]
+================================== FAILURES ===================================
+___________ test_undated_news_is_replaced_before_it_can_be_evidence ___________
+
+research_job = (<sqlite3.Connection object at 0x0000021C36E62C50>, {'id': 'rj-7edab562df3c', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_undated_news_is_replaced_before_it_can_be_evidence(research_job):
+        db, job = research_job
+        job['objetivo'] = 'Not�cias intelig�ncia artificial nas �ltimas 24 horas'
+        sources = [{'id':x, 'titulo':job['objetivo'], 'url':f'https://example.org/{x}', 'trecho':job['objetivo']} for x in ('undated','dated')]
+        def read(url):
+            return {'titulo':job['objetivo'],'texto':job['objetivo']+' Relat�rio publicado.', 'texto_lido':True,
+                    'metadados':{'publicado_em':(datetime.now(timezone.utc)-timedelta(minutes=1)).isoformat() if url.endswith('/dated') else ''}}
+        evidence = ra.agente_analista(db, job, {'alvo':job['objetivo']}, sources, read, teto_paginas=1)
+>       assert len(evidence) == 1 and evidence[0]['url'].endswith('/dated')
+E       assert (0 == 1)
+E        +  where 0 = len([])
+
+tests\test_verified_sources_v595.py:251: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_verified_sources_v595.py::test_undated_news_is_replaced_before_it_can_be_evidence
+1 failed, 87 passed in 18.09s

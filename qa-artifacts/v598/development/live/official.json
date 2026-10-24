@@ -1,0 +1,1153 @@
+{
+  "id": "official",
+  "route": "research",
+  "question": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+    "domain": "documents",
+    "original_request": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+    "resolved_request": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:37:53.335365+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Documentação oficial Python asyncio TaskGroup: cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-fa6f5d77fc6f",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 1,
+    "achados": [
+      {
+        "afirmacao": "Documentação oficial Python asyncio TaskGroup: cancelamento.",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.333,
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "supporting_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-243b0f1f0d70",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "supporting_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-243b0f1f0d70",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      },
+      {
+        "afirmacao": "create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+        "estado": "PARTIALLY_SUPPORTED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 1.0,
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "supporting_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-243b0f1f0d70",
+            "title": "Coroutines and tasks",
+            "url": "https://docs.python.org/3/library/asyncio-task.html",
+            "domain": "docs.python.org",
+            "relation": "PARTIALLY_SUPPORTS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 1
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Documentação oficial Python asyncio TaskGroup: cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {
+        "E1": "ev-243b0f1f0d70"
+      }
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "5d9bb778a666b21ce389",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-fa6f5d77fc6f",
+        "statement": "Investigar se: Documentação oficial Python asyncio TaskGroup: cancelamento.",
+        "status": "open",
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Documentação oficial Python asyncio TaskGroup: cancelamento."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "3a5f50745773d66f7799",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-fa6f5d77fc6f",
+        "statement": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+        "status": "open",
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg ."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "4c07287f6de5e0ba33fb",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-fa6f5d77fc6f",
+        "statement": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+        "status": "open",
+        "evidence_ids": [
+          "ev-243b0f1f0d70"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time ."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "documentacao oficial python asyncio taskgroup cancelamento": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 867
+        }
+      },
+      "research_gaps": [
+        {
+          "id": "16e5c8a8fa2b28e6",
+          "dimension": "original_text",
+          "description": "Trecho original pertinente",
+          "subquestion": "Documentação oficial Python asyncio TaskGroup: cancelamento primary source original text",
+          "expected_data": "Trecho original pertinente",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [
+            "ev-243b0f1f0d70"
+          ],
+          "candidate_sources": [
+            "https://docs.python.org/3/library/asyncio-task.html"
+          ],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "RESOLVED",
+          "query": "",
+          "budget": {
+            "remaining_searches": 1,
+            "max_new_searches": 1
+          },
+          "required_publications": 1,
+          "observed_publications": 1,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "SYNTHESIZE",
+          "reason": "extracted_data_available_requires_validation",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 1,
+          "total_evidence": 1,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-243b0f1f0d70"
+      ],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [],
+    "midia_resumo": {
+      "total": 0,
+      "images": 0,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-243b0f1f0d70",
+      "fonte_id": "",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "titulo": "Coroutines and tasks",
+      "dominio": "docs.python.org",
+      "acessado_em": "2026-10-24T00:37:55.417228+00:00",
+      "publicado_em": "",
+      "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "scientific_sections": [
+        {
+          "title": "",
+          "text": "This section outlines high-level asyncio APIs to work with coroutines and Tasks.\nSource code: Lib/asyncio/coroutines.py\ndeclared with the async/await syntax is the preferred way of writing asyncio applications. For example, the following snippet of code prints “hello”, waits 1 second, and then prints “world”: Coroutines\n>>> import asyncio >>> async def main (): ... print ( 'hello' ) ... await asyncio . sleep ( 1 ) ... print ( 'world' ) >>> asyncio . run ( main ()) hello world\nNote that simply calling a coroutine will not schedule it to be executed:\n>>> main () <coroutine object main at 0x1053bb7c8>\nTo actually run a coroutine, asyncio provides the following mechanisms:\nThe function to run the top-level entry point “main()” function (see the above example.) asyncio.run()\nAwaiting on a coroutine. The following snippet of code will print “hello” after waiting for 1 second, and then print “world” after waiting for 2 seconds: another\nimport asyncio import time async def say_after ( delay , ",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+          "extraction_scope": "bounded_section"
+        },
+        {
+          "title": "Running tasks concurrently ¶",
+          "text": ", awaitable asyncio. gather ( * aws return_exceptions = False ) ¶\nRun in the sequence . awaitable objects aws concurrently\nIf any awaitable in is a coroutine, it is automatically scheduled as a Task. aws\nIf all awaitables are completed successfully, the result is an aggregate list of returned values. The order of result values corresponds to the order of awaitables in . aws\nIf is (default), the first raised exception is immediately propagated to the task that awaits on . Other awaitables in the sequence and will continue to run. return_exceptions False gather() aws won’t be cancelled\nIf is , exceptions are treated the same as successful results, and aggregated in the result list. return_exceptions True\nIf is , all submitted awaitables (that have not completed yet) are also . gather() cancelled cancelled\nIf any Task or Future from the sequence is , it is treated as if it raised – the call is cancelled in this case. This is to prevent the cancellation of one submitted Task/Future to caus",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+          "extraction_scope": "bounded_section"
+        },
+        {
+          "title": "Shielding from cancellation ¶",
+          "text": "awaitable asyncio. shield ( aw ) ¶\nProtect an from being . awaitable object cancelled\nIf is a coroutine it is automatically scheduled as a Task. aw\ntask = asyncio . create_task ( something ()) res = await shield ( task )\nthat if the coroutine containing it is cancelled, the Task running in is not cancelled. From the point of view of , the cancellation did not happen. Although its caller is still cancelled, so the “await” expression still raises a . except something() something() CancelledError\nIf is cancelled by other means (i.e. from within itself) that would also cancel . something() shield()\nIf it is desired to completely ignore cancellation (not recommended) the function should be combined with a try/except clause, as follows: shield()\ntask = asyncio . create_task ( something ()) try : res = await shield ( task ) except CancelledError : res = None\nSave a reference to tasks passed to this function, to avoid a task disappearing mid-execution. The event loop only keeps weak references",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+          "extraction_scope": "bounded_section"
+        },
+        {
+          "title": "Scheduling from other threads ¶",
+          "text": ", asyncio. run_coroutine_threadsafe ( coro loop ) ¶\nSubmit a coroutine to the given event loop. Thread-safe.\nReturn a to wait for the result from another OS thread. concurrent.futures.Future\nThis function is meant to be called from a different OS thread than the one where the event loop is running. Example:\ndef in_thread ( loop : asyncio . AbstractEventLoop ) -> None : # Run some blocking IO pathlib . Path ( \"example.txt\" ) . write_text ( \"hello world\" , encoding = \"utf8\" ) # Create a coroutine coro = asyncio . sleep ( 1 , result = 3 ) # Submit the coroutine to a given loop future = asyncio . run_coroutine_threadsafe ( coro , loop ) # Wait for the result with an optional timeout argument assert future . result ( timeout = 2 ) == 3 async def amain () -> None : # Get the running loop loop = asyncio . get_running_loop () # Run something in a thread await asyncio . to_thread ( in_thread , loop )\nIt’s also possible to run the other way around. Example:\n@contextlib . contextmanager def loop_",
+          "kind": "section",
+          "page": null,
+          "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+          "extraction_scope": "bounded_section"
+        }
+      ],
+      "vertical": {
+        "kind": "documents",
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "Python documentation",
+      "imagens": [
+        "https://docs.python.org/3.15/_images/social_previews/summary_library_asyncio-task_304fcdb3.png",
+        "https://docs.python.org/3/_static/py.svg"
+      ],
+      "texto_lido": true,
+      "trecho_usado": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+      "access_state": "read"
+    }
+  ],
+  "read_sources": 1,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [
+    {
+      "label": "E1",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    }
+  ],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:37:54.241588+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Documentação oficial Python asyncio TaskGroup: cancelamento': 7 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "bing: 6 resultados (Documentação oficial Python asyncio Task)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Documentação oficial Python asyncio Task)",
+          "ddg: bloqueado (Documentação oficial Python asyncio Task)",
+          "wikipedia: sem resultados (Documentação oficial Python asyncio Task)"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-24T00:37:55.176504+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+        "final_url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 6891,
+        "read": true,
+        "published_at": "2024-08-21T00:09:34+00:00",
+        "excerpt": "leitor. Além disso, é essencial manter a documentação atualizada, refletindo quaisquer mudanças nos processos ou resultados. A de exemplos práticos e ilustrações pode ajudar a tornar a documentação mais acessível e compreensível. Por fim, a organização da documentação em seções lógicas e facilmente navegáveis é crucial para facilitar a consulta. utilização Ferramentas para Documentação Existem"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:37:55.385844+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "",
+        "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added"
+      }
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:37:55.406777+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://conceito.de/documentacao",
+        "final_url": "https://conceito.de/documentacao",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 1855,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 09:17:00 GMT",
+        "excerpt": "operar. Finalmente, a disciplina dedicada à coleta e organização de documentos é chamada de documentação. Seu objetivo é garantir e facilitar o armazenamento de dados e o acesso aos mesmos. Continua com Documento → Citação Equipe editorial de Conceito.de. (10 de Setembro de 2020). . Conceito.de. https://conceito.de/documentacao Documentação - O que é, conceito e definição Veja também Comprovante"
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:37:55.418561+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-243b0f1f de docs.python.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:37:55.419289+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: evidence_stored.",
+      "meta": {
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "source_state": "EVIDENCE_ELIGIBLE",
+        "stage": "evidence_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 8000,
+        "read": true,
+        "published_at": "",
+        "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:37:55.420516+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Lida docs.python.org (relevância 0.333).",
+      "meta": {}
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:37:55.425375+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (docs.python.org).",
+      "meta": {
+        "evidencia_id": "ev-243b0f1f0d70",
+        "dominio": "docs.python.org",
+        "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strft",
+        "url": "https://docs.python.org/3/library/asyncio-task.html"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:37:55.430996+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://conceito.de/documentacao",
+        "final_url": "https://conceito.de/documentacao",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 1855,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 09:17:00 GMT",
+        "excerpt": "operar. Finalmente, a disciplina dedicada à coleta e organização de documentos é chamada de documentação. Seu objetivo é garantir e facilitar o armazenamento de dados e o acesso aos mesmos. Continua com Documento → Citação Equipe editorial de Conceito.de. (10 de Setembro de 2020). . Conceito.de. https://conceito.de/documentacao Documentação - O que é, conceito e definição Veja também Comprovante"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:37:55.431911+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-24T00:37:55.439984+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+        "final_url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 6891,
+        "read": true,
+        "published_at": "2024-08-21T00:09:34+00:00",
+        "excerpt": "leitor. Além disso, é essencial manter a documentação atualizada, refletindo quaisquer mudanças nos processos ou resultados. A de exemplos práticos e ilustrações pode ajudar a tornar a documentação mais acessível e compreensível. Por fim, a organização da documentação em seções lógicas e facilmente navegáveis é crucial para facilitar a consulta. utilização Ferramentas para Documentação Existem"
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-24T00:37:55.440530+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-24T00:37:55.467378+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "3 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Documentação oficial Python asyncio TaskGroup: cancelamento\n\n[E1](https://docs.python.org/3/library/asyncio-task.html) Coroutines and tasks (docs.python.org): async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .\n\nEvidências: 1; afirmações sustentadas: 0/3 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Documentação oficial Python asyncio TaskGroup: cancelamento\n**Status:** concluída · **Modo:** rapida · **Evidências:** 1\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Documentação oficial Python asyncio TaskGroup: cancelamento.",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 0.333,
+              "sources": [
+                {
+                  "id": "ev-243b0f1f0d70",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-243b0f1f0d70",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            },
+            {
+              "statement": "create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+              "state": "PARTIALLY_SUPPORTED",
+              "method": "lexico-provisorio",
+              "coverage": 1.0,
+              "sources": [
+                {
+                  "id": "ev-243b0f1f0d70",
+                  "title": "Coroutines and tasks",
+                  "url": "https://docs.python.org/3/library/asyncio-task.html",
+                  "domain": "docs.python.org",
+                  "relation": "PARTIALLY_SUPPORTS",
+                  "read": true,
+                  "access_state": "read",
+                  "excerpt": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time . strftime ( ' %X ' ) } \" ) The timing and output should be the same as for the previous version. . Added",
+                  "published_at": ""
+                }
+              ],
+              "found_count": 1,
+              "read_count": 1,
+              "supporting_count": 1,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Coroutines and tasks",
+              "url": "https://docs.python.org/3/library/asyncio-task.html",
+              "dominio": "docs.python.org",
+              "data": "",
+              "trecho": "async with asyncio . TaskGroup () as tg : task1 = tg . create_task ( say_after ( 1 , 'hello' )) task2 = tg . create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time . strftime ( ' %X ' ) } \" ) # The await is implicit when the context manager exits. print ( f \"finished at { time .",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Texto recuperado",
+              "relacao": "Trecho ligado a uma afirmação",
+              "data_evento": "",
+              "publicador": "Python documentation",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "READ",
+              "detalhes": [],
+              "status": "utilizada"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Documentação oficial Python asyncio TaskGroup: cancelamento",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Documentação oficial Python asyncio TaskGroup: cancelamento",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Documentação oficial Python asyncio TaskGroup: cancelamento",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Documentação oficial Python asyncio TaskGroup: cancelamento",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Documentação oficial Python asyncio TaskGroup: cancelamento.",
+              "markdown": "**HIPÓTESE:** Investigar se: Documentação oficial Python asyncio TaskGroup: cancelamento.\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .",
+              "markdown": "**HIPÓTESE:** Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .",
+              "markdown": "**HIPÓTESE:** Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time .\n\n**EVIDÊNCIAS:** 1 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** data ausente p/ quantidade\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-fa6f5d77fc6f&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-fa6f5d77fc6f&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-fa6f5d77fc6f&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 358.8
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "vazio": 1
+      },
+      "ms_medio": 489.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Documentação – Wikipédia, a enciclopédia livre",
+      "url": "https://pt.wikipedia.org/wiki/Documenta%C3%A7%C3%A3o",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 20 out. 2026 06:05:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação - O que é, conceito e definição",
+      "url": "https://conceito.de/documentacao",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 09:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "O que é Documentação - Entenda sua Importância",
+      "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 06:17:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/documentacao/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 22 set. 2026 08:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentação de processos: o que é, tipos e como criar [2025 ... - Asana",
+      "url": "https://asana.com/pt/resources/process-documentation",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 01:15:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Documentações - Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/documentacoes/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "ter., 22 set. 2026 08:40:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 2.16
+}

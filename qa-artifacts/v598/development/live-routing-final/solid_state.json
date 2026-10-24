@@ -1,0 +1,3128 @@
+{
+  "id": "solid_state",
+  "route": "deep_research",
+  "question": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "title",
+      "doi",
+      "authors",
+      "publication_date",
+      "content_scope",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "domain": "science",
+    "original_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "resolved_request": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:59:39.539409+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "",
+  "summary": {
+    "id": "rj-4f61c0f002ab",
+    "status": "falhou",
+    "modo": "profunda",
+    "objetivo": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "estudos científicos baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "estudos científicos baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "estudos científicos baterias de estado sólido",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "papers solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 11,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p5",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "papers solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 31,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p6",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "papers solid-state batteries",
+        "frente": 2,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 51,
+        "priority_reason": "frente 2 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p7",
+        "tipo": "verificar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3",
+          "p6"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p8",
+        "tipo": "sintetizar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p7"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p9",
+        "tipo": "auditar",
+        "status": "pendente",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p8"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 7,
+    "achados": [],
+    "sintese": {},
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "6a123485fa2d08ea514b",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "fbdb22da6852d6c9a46e",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "ca5b1f6ecfc83ec8de94",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "2 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "38a231af8ca14539ba00",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "325ea2d465ea06680f99",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.1039/d0ta02984j",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "5 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "11b3641bed28ff7ce880",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: This article begins with a basic introduction to metal–sulfur batteries and explains their challenges.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: This article begins with a basic introduction to metal–sulfur batteries and explains their challenges."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "4 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "00dc4c85af88fb525ae0",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: This article will also explain the fundamental requirements of solid Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs).",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: This article will also explain the fundamental requirements of solid Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs)."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "4 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "30bcee87be37c02eb85f",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported.",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "4 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "9e9e34ad69a31c906ed2",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: here ethoxysilatrane) with a molecule‐based crystal (MBC",
+        "status": "open",
+        "evidence_ids": [
+          "10.3390/batteries9020110",
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.1039/d0ta02984j"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: here ethoxysilatrane) with a molecule‐based crystal (MBC"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "4 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "b2cacd6fb830d0d6d84f",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: here LiTFSI‐TMEDA) the resulting SA : MBC 2 : 1 crystalline composite shows an appreciable ion conductivity of 10 −5 S cm −1 at room temperature, and low apparent activation energy, 836 K, for the ion transport.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.201900089"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: SUPPORTED (quantidade+contexto). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: here LiTFSI‐TMEDA) the resulting SA : MBC 2 : 1 crystalline composite shows an appreciable ion conductivity of 10 −5 S cm −1 at room temperature, and low apparent activation energy, 836 K, for the ion transport."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "a1d03c497fb33e393db6",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: Studies of the overall and local structure show that in the composite the Li + and TFSI ions are dissociated, and this seems to be mediated by the SA part of the matrix.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.201900089",
+          "10.3390/batteries9070355",
+          "10.3390/batteries11040128"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: PARTIALLY_SUPPORTED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Studies of the overall and local structure show that in the composite the Li + and TFSI ions are dissociated, and this seems to be mediated by the SA part of the matrix."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "3 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "9425c8861f7ab0e4b9ac",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4f61c0f002ab",
+        "statement": "Investigar se: As a proof‐of‐concept, an ASSB based on this SSE can operate at 50 °C providing up to 105 mAh g −1 during 20 cycles.",
+        "status": "open",
+        "evidence_ids": [
+          "10.1002/batt.201900089"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: SUPPORTED (quantidade+contexto). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: As a proof‐of‐concept, an ASSB based on this SSE can operate at 50 °C providing up to 105 mAh g −1 during 20 cycles."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Executar p7 (verificar)",
+    "auditoria_ok": null,
+    "pendencias": [],
+    "erros": [
+      "orquestrador: JSONLimitError: Estado JSON excede o limite de 60000 caracteres; registro anterior preservado"
+    ],
+    "usados": {
+      "buscas": 2,
+      "paginas": 12,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "estudos cientificos baterias de estado solido": "p1",
+        "papers solid state batteries": "p4"
+      },
+      "provedores": {
+        "web": {
+          "ok": 2,
+          "falhas": 0,
+          "ms": 3949
+        }
+      },
+      "recuperacao_busca": [
+        "papers solid-state batteries estudo artigo"
+      ],
+      "lacunas_busca": [
+        "sem fonte acadêmica/científica direta"
+      ],
+      "failed_source_reads": [
+        "df7c0ce9c1849450df7d746d399977e643138e0b0d9b022c667eb4d0bb8b34f3"
+      ],
+      "research_gaps": [
+        {
+          "id": "77cb4a9b5e843ec0",
+          "dimension": "original_text",
+          "description": "Texto científico além do abstract",
+          "subquestion": "papers \"10.3390/batteries9020110\" open access full text",
+          "expected_data": "Texto científico além do abstract",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://doi.org/10.3390/batteries9020110",
+            "https://doi.org/10.1002/batt.201900089",
+            "https://doi.org/10.3390/batteries9070355",
+            "https://doi.org/10.1039/d0ta02984j"
+          ],
+          "previous_attempts": [],
+          "priority": 1,
+          "status": "OPEN",
+          "query": "papers \"10.3390/batteries9020110\" open access full text",
+          "budget": {
+            "remaining_searches": 6,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "4927d34c20633db8",
+          "dimension": "methods",
+          "description": "Métodos e amostra",
+          "subquestion": "papers \"10.3390/batteries9020110\" methods sample experimental",
+          "expected_data": "Métodos e amostra",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://doi.org/10.3390/batteries9020110",
+            "https://doi.org/10.1002/batt.201900089",
+            "https://doi.org/10.3390/batteries9070355",
+            "https://doi.org/10.1039/d0ta02984j"
+          ],
+          "previous_attempts": [],
+          "priority": 2,
+          "status": "OPEN",
+          "query": "papers \"10.3390/batteries9020110\" methods sample experimental",
+          "budget": {
+            "remaining_searches": 6,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "6b3578d9d493b0ff",
+          "dimension": "results",
+          "description": "Resultados com métrica e unidade",
+          "subquestion": "papers \"10.3390/batteries9020110\" results measurements units",
+          "expected_data": "Resultados com métrica e unidade",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://doi.org/10.3390/batteries9020110",
+            "https://doi.org/10.1002/batt.201900089",
+            "https://doi.org/10.3390/batteries9070355",
+            "https://doi.org/10.1039/d0ta02984j"
+          ],
+          "previous_attempts": [],
+          "priority": 3,
+          "status": "OPEN",
+          "query": "papers \"10.3390/batteries9020110\" results measurements units",
+          "budget": {
+            "remaining_searches": 6,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "c3ed9515039b79a3",
+          "dimension": "conditions",
+          "description": "Condições experimentais",
+          "subquestion": "papers \"10.3390/batteries9020110\" experimental conditions temperature pressure",
+          "expected_data": "Condições experimentais",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://doi.org/10.3390/batteries9020110",
+            "https://doi.org/10.1002/batt.201900089",
+            "https://doi.org/10.3390/batteries9070355",
+            "https://doi.org/10.1039/d0ta02984j"
+          ],
+          "previous_attempts": [],
+          "priority": 4,
+          "status": "OPEN",
+          "query": "papers \"10.3390/batteries9020110\" experimental conditions temperature pressure",
+          "budget": {
+            "remaining_searches": 6,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        },
+        {
+          "id": "ff5789cc3b93cac9",
+          "dimension": "limitations",
+          "description": "Limitações declaradas",
+          "subquestion": "papers \"10.3390/batteries9020110\" limitations study",
+          "expected_data": "Limitações declaradas",
+          "relevance": "necessário para responder ao pedido",
+          "evidence_ids": [],
+          "candidate_sources": [
+            "https://doi.org/10.3390/batteries9020110",
+            "https://doi.org/10.1002/batt.201900089",
+            "https://doi.org/10.3390/batteries9070355",
+            "https://doi.org/10.1039/d0ta02984j"
+          ],
+          "previous_attempts": [],
+          "priority": 5,
+          "status": "OPEN",
+          "query": "papers \"10.3390/batteries9020110\" limitations study",
+          "budget": {
+            "remaining_searches": 6,
+            "max_new_searches": 1
+          },
+          "required_publications": 2,
+          "observed_publications": 0,
+          "scope": "bounded extracted evidence; no claim of full study coverage"
+        }
+      ],
+      "controller_decisions": [
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        },
+        {
+          "action": "STOP_PARTIAL",
+          "reason": "budget_or_no_new_query",
+          "gap_ids": [],
+          "step_id": "p6",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 6,
+          "total_evidence": 6,
+          "remaining_searches": 6,
+          "decision": "evidence_gained"
+        },
+        {
+          "step_id": "p6",
+          "new_evidence": 0,
+          "total_evidence": 6,
+          "remaining_searches": 6,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [
+        "10.1002/batt.201900089",
+        "10.1039/d0ta02984j",
+        "10.1039/d5eb00134j",
+        "10.3390/batteries11040128",
+        "10.3390/batteries9020110",
+        "10.3390/batteries9070355"
+      ]
+    },
+    "orcamento": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "profundidade": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "replans": 2,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-20daec2b62a7",
+        "type": "document",
+        "title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+        "url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+        "final_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+        "source_title": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+        "source_url": "https://doi.org/10.1002/batt.201900089",
+        "publisher": "onlinelibrary.wiley.com",
+        "date": "2019-09-02",
+        "rights": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-d9a5fd20cfee",
+        "type": "document",
+        "title": "Lithium-metal all-solid-state batteries enabled by polymer-coated halide solid electrolytes",
+        "url": "http://pubs.rsc.org/en/content/articlepdf/2025/EB/D5EB00134J",
+        "final_url": "http://pubs.rsc.org/en/content/articlepdf/2025/EB/D5EB00134J",
+        "source_title": "Lithium-metal all-solid-state batteries enabled by polymer-coated halide solid electrolytes",
+        "source_url": "https://doi.org/10.1039/d5eb00134j",
+        "publisher": "pubs.rsc.org",
+        "date": "2025",
+        "rights": "http://creativecommons.org/licenses/by-nc/3.0/",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata"
+      },
+      {
+        "id": "med-a0f7431fc960",
+        "type": "image",
+        "title": "Papers AI — The research workspace for the whole project",
+        "url": "https://papers.ai/opengraph-image?931dea14aaadd577",
+        "final_url": "https://papers.ai/opengraph-image?931dea14aaadd577",
+        "source_title": "Papers AI — one research workspace for Word, LaTeX, data & code",
+        "source_url": "https://papers.ai/",
+        "publisher": "papers.ai",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Papers AI — The research workspace for the whole project",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-861ac8a48984",
+        "type": "video",
+        "title": "Papers AI — one research workspace for Word, LaTeX, data & code",
+        "url": "https://papers.ai/video/papers-ai-explainer-hero-v2.mp4",
+        "final_url": "https://papers.ai/video/papers-ai-explainer-hero-v2.mp4",
+        "source_title": "Papers AI — one research workspace for Word, LaTeX, data & code",
+        "source_url": "https://papers.ai/",
+        "publisher": "papers.ai",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "One research workspace for your writing, data, and code. Collaborative Word, LaTeX, and Markdown editing with AI that has your whole project in context. Built by Overleaf.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      },
+      {
+        "id": "med-bae4d03c2199",
+        "type": "image",
+        "title": "A unique, visual tool to help researchers and applied scientists find and explore papers relevant to their field of work.",
+        "url": "https://www.connectedpapers.com/share-preview-img.png",
+        "final_url": "https://www.connectedpapers.com/share-preview-img.png",
+        "source_title": "Connected Papers | Find and explore academic papers",
+        "source_url": "https://www.connectedpapers.com/",
+        "publisher": "www.connectedpapers.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "A unique, visual tool to help researchers and applied scientists find and explore papers relevant to their field of work.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-9eb80f392f02",
+        "type": "image",
+        "title": "Need literature management for your research driven company? ReadCube helps your company discover, organize, read, annotate, share and cite.",
+        "url": "https://about.readcube.com/wp-content/uploads/2026/07/readcube-app-hero-half.png",
+        "final_url": "https://about.readcube.com/wp-content/uploads/2026/07/readcube-app-hero-half.png",
+        "source_title": "ReadCube Literature Management Solutions",
+        "source_url": "https://about.readcube.com/",
+        "publisher": "about.readcube.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Need literature management for your research driven company? ReadCube helps your company discover, organize, read, annotate, share and cite.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-883a49eabc60",
+        "type": "image",
+        "title": "readcube_logo_dark",
+        "url": "https://about.readcube.com/wp-content/uploads/2023/08/readcube_logo_dark.svg",
+        "final_url": "https://about.readcube.com/wp-content/uploads/2023/08/readcube_logo_dark.svg",
+        "source_title": "ReadCube Literature Management Solutions",
+        "source_url": "https://about.readcube.com/",
+        "publisher": "about.readcube.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "readcube_logo_dark",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-5fdbbb6abb53",
+        "type": "document",
+        "title": "about.html",
+        "url": "https://scholar.google.com/intl/pt-BR/scholar/about.html",
+        "final_url": "https://scholar.google.com/intl/pt-BR/scholar/about.html",
+        "source_title": "Google Acadêmico",
+        "source_url": "https://scholar.google.com/",
+        "publisher": "scholar.google.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "O Google Acadêmico é uma forma simples de pesquisar literatura acadêmica. Pesquise dentre uma variedade de disciplinas e fontes: artigos, teses, livros, resumos e pareceres jurídicos.",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html link"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 4,
+      "videos": 1,
+      "documents": 3,
+      "metadata_only": 4,
+      "link_only": 4,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 8,
+      "paginas": 12,
+      "timeout_s": 120,
+      "subs": 4,
+      "replans": 2,
+      "midia": 16,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-08a60d71f502",
+      "fonte_id": "",
+      "url": "https://www.connectedpapers.com/",
+      "titulo": "Connected Papers | Find and explore academic papers",
+      "dominio": "www.connectedpapers.com",
+      "acessado_em": "2026-10-24T00:59:52.568935+00:00",
+      "publicado_em": "sex., 23 out. 2026 19:45:00 GMT",
+      "trecho": "Explore and build more graphs for interesting papers that you find - soon you'll have a real, visual understanding of the trends, popular works and dynamics of the field you're interested in.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "science",
+        "url": "https://www.connectedpapers.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [
+        "https://www.connectedpapers.com/share-preview-img.png",
+        "https://www.facebook.com/tr?id=559937878730110&ev=PageView&noscript=1"
+      ],
+      "texto_lido": false,
+      "trecho_usado": "Explore and build more graphs for interesting papers that you find - soon you'll have a real, visual understanding of the trends, popular works and dynamics of the field you're interested in.",
+      "access_state": "snippet_only"
+    },
+    {
+      "id": "ev-185dcfd60e4f",
+      "fonte_id": "10.3390/batteries9070355",
+      "url": "https://doi.org/10.3390/batteries9070355",
+      "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669598+00:00",
+      "publicado_em": "2023-07-04",
+      "trecho": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-established large-scale manufacturing for sulfide SEs with high ionic conductivity. However, the synthesis for sulfide SEs remains at the laboratory scale with limited scalability owing to their air sensitivity. The liquid-phase synthesis would be an economically viable manufacturing technology for sulfide SEs. Herein, we review a chemical perspective in liquid-phase synthesis that offers high scalability, low cost, and high reaction kinetics. This review provides a guideline for desirable solvent selection based on the solubility and polarity characterized by the donor number and dielectric permittivity of solvents. Additionally, we offer a deeper understanding of the recent works on scalable liquid-phase synthesis using solubilizers and reactant agents. We present an outlook on a universal liquid-phase synthesis of sulfide SEs toward the commercialization of sulfide-based ASSBs.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.3390/batteries9070355",
+      "authors": [
+        "Hirotada Gamo",
+        "Atsushi Nagai",
+        "Atsunori Matsuda"
+      ],
+      "year": 2023,
+      "journal": "Batteries",
+      "repository": null,
+      "abstract": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-established large-scale manufacturing for sulfide SEs with high ionic conductivity. However, the synthesis for sulfide SEs remains at the laboratory scale with limited scalability owing to their air sensitivity. The liquid-phase synthesis would be an economically viable manufacturing technology for sulfide SEs. Herein, we review a chemical perspective in liquid-phase synthesis that offers high scalability, low cost, and high reaction kinetics. This review provides a guideline for desirable solvent selection based on the solubility and polarity characterized by the donor number and dielectric permittivity of solvents. Additionally, we offer a deeper understanding of the recent works on scalable liquid-phase synthesis using solubilizers and reactant agents. We present an outlook on a universal liquid-phase synthesis of sulfide SEs toward the commercialization of sulfide-based ASSBs.",
+      "landing_url": "https://doi.org/10.3390/batteries9070355",
+      "pdf_url": null,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.3390/batteries9070355",
+      "fetched_at": "2026-10-24T00:59:40.669598+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.3390/batteries9070355",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-established large-scale manufacturing for sulfide SEs with high ionic conductivity. However, the synthesis for sulfide SEs remains at the laboratory scale with limited scalability owing to their air sensitivity. The liquid-phase synthesis would be an economically viable manufacturing technology for sulfide SEs. Herein, we review a chemical perspective in liquid-phase synthesis that offers high scalability, low cost, and high reaction kinetics. This review provides a guideline for desirable solvent selection based on the solubility and polarity characterized by the donor number and dielectric permittivity of solvents. Additionally, we offer a deeper understanding of the recent works on scalable liquid-phase synthesis using solubilizers and reactant agents. We present an outlook on a universal liquid-phase synthesis of sulfide SEs toward the commercialization of sulfide-based ASSBs.",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-4629a7d6cf94",
+      "fonte_id": "10.3390/batteries11040128",
+      "url": "https://doi.org/10.3390/batteries11040128",
+      "titulo": "Applications of Laser Material Processing for Solid-State Lithium Batteries",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669739+00:00",
+      "publicado_em": "2025-03-26",
+      "trecho": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techniques, such as laser sintering, laser cutting, laser surface cleaning, laser ablation for nanoparticle generation, and pulsed laser deposition, in the fabrication and performance enhancement of SSLBs’ materials and components. It will demonstrate that laser material processing can enhance material properties such as density and surface morphology, improve ionic conductivity and reduce interfacial resistance. Laser material-processing techniques are adaptable to a variety of materials, including polymers, metal oxides, metal sulfides, and metals, making them suitable for processing various SSLB components like electrolytes, electrodes, and current collectors. In addition, the use of laser material-processing technologies reduces manufacturing costs by minimizing material waste and streamlining production processes. Looking forward, integrating laser material processing with other advanced",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.3390/batteries11040128",
+      "authors": [
+        "Dongfang Yang"
+      ],
+      "year": 2025,
+      "journal": "Batteries",
+      "repository": null,
+      "abstract": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techniques, such as laser sintering, laser cutting, laser surface cleaning, laser ablation for nanoparticle generation, and pulsed laser deposition, in the fabrication and performance enhancement of SSLBs’ materials and components. It will demonstrate that laser material processing can enhance material properties such as density and surface morphology, improve ionic conductivity and reduce interfacial resistance. Laser material-processing techniques are adaptable to a variety of materials, including polymers, metal oxides, metal sulfides, and metals, making them suitable for processing various SSLB components like electrolytes, electrodes, and current collectors. In addition, the use of laser material-processing technologies reduces manufacturing costs by minimizing material waste and streamlining production processes. Looking forward, integrating laser material processing with other advanced",
+      "landing_url": "https://doi.org/10.3390/batteries11040128",
+      "pdf_url": null,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.3390/batteries11040128",
+      "fetched_at": "2026-10-24T00:59:40.669739+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.3390/batteries11040128",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techniques, such as laser sintering, laser cutting, laser surface cleaning, laser ablation for nanoparticle generation, and pulsed laser deposition, in the fabrication and performance enhancement of SSLBs’ materials and components. It will demonstrate that laser material processing can enhance material properties such as density and surface morphology, improve ionic conductivity and reduce interfacial resistance. Laser material-processing techniques are adaptable to a variety of materials, including polymers, metal oxides, metal sulfides, and metals, making them suitable for processing various SSLB components like electrolytes, electrodes, and current collectors. In addition, the use of laser material-processing technologies reduces manufacturing costs by minimizing material waste and streamlining production processes. Looking forward, integrating laser material processing with other advanced",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-55860a21963c",
+      "fonte_id": "10.1002/batt.201900089",
+      "url": "https://doi.org/10.1002/batt.201900089",
+      "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669505+00:00",
+      "publicado_em": "2019-09-02",
+      "trecho": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported. By combining a silatrane (SA; here ethoxysilatrane) with a molecule‐based crystal (MBC; here LiTFSI‐TMEDA) the resulting SA : MBC 2 : 1 crystalline composite shows an appreciable ion conductivity of 10 −5 S cm −1 at room temperature, and low apparent activation energy, 836 K, for the ion transport. Studies of the overall and local structure show that in the composite the Li + and TFSI ions are dissociated, and this seems to be mediated by the SA part of the matrix. As a proof‐of‐concept, an ASSB based on this SSE can operate at 50 °C providing up to 105 mAh g −1 during 20 cycles.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.1002/batt.201900089",
+      "authors": [
+        "Adriana M. Navarro‐Suárez",
+        "Patrik Johansson"
+      ],
+      "year": 2019,
+      "journal": "Batteries &amp; Supercaps",
+      "repository": "Portico",
+      "abstract": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported. By combining a silatrane (SA; here ethoxysilatrane) with a molecule‐based crystal (MBC; here LiTFSI‐TMEDA) the resulting SA : MBC 2 : 1 crystalline composite shows an appreciable ion conductivity of 10 −5 S cm −1 at room temperature, and low apparent activation energy, 836 K, for the ion transport. Studies of the overall and local structure show that in the composite the Li + and TFSI ions are dissociated, and this seems to be mediated by the SA part of the matrix. As a proof‐of‐concept, an ASSB based on this SSE can operate at 50 °C providing up to 105 mAh g −1 during 20 cycles.",
+      "landing_url": "https://doi.org/10.1002/batt.201900089",
+      "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/batt.201900089",
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.1002/batt.201900089",
+      "fetched_at": "2026-10-24T00:59:40.669505+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.1002/batt.201900089",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported. By combining a silatrane (SA; here ethoxysilatrane) with a molecule‐based crystal (MBC; here LiTFSI‐TMEDA) the resulting SA : MBC 2 : 1 crystalline composite shows an appreciable ion conductivity of 10 −5 S cm −1 at room temperature, and low apparent activation energy, 836 K, for the ion transport. Studies of the overall and local structure show that in the composite the Li + and TFSI ions are dissociated, and this seems to be mediated by the SA part of the matrix. As a proof‐of‐concept, an ASSB based on this SSE can operate at 50 °C providing up to 105 mAh g −1 during 20 cycles.",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-65e0be0db715",
+      "fonte_id": "10.1039/d0ta02984j",
+      "url": "https://doi.org/10.1039/d0ta02984j",
+      "titulo": "Mechanical <i>vs.</i> chemical stability of sulphide-based solid-state batteries. Which one is the biggest challenge to tackle? Overview of solid-state batterie",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669655+00:00",
+      "publicado_em": "2020",
+      "trecho": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.1039/d0ta02984j",
+      "authors": [
+        "Léa Rose Mangani",
+        "Claire Villevieille"
+      ],
+      "year": 2020,
+      "journal": "Journal of Materials Chemistry A",
+      "repository": null,
+      "abstract": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes.",
+      "landing_url": "https://doi.org/10.1039/d0ta02984j",
+      "pdf_url": null,
+      "license": "http://rsc.li/journals-terms-of-use",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.1039/d0ta02984j",
+      "fetched_at": "2026-10-24T00:59:40.669655+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.1039/d0ta02984j",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes.",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-7138e5f96720",
+      "fonte_id": "10.3390/batteries9020110",
+      "url": "https://doi.org/10.3390/batteries9020110",
+      "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669272+00:00",
+      "publicado_em": "2023-02-03",
+      "trecho": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability. Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot. The use of ether-based liquid electrolyte has brought metal–sulfur batteries to a critical stage by causing intermediate polysulfide dissolution which results in poor cycling life and safety concerns. Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent. This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries. This article begins with a basic introduction to metal–sulfur batteries and explains their challenges. We will discuss the drawbacks of the using liquid organic electrolytes and the advantages of replacing liquid electrolytes with solid electrolytes. This article will also explain the fundamental requirements of solid",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.3390/batteries9020110",
+      "authors": [
+        "Ravindra Kumar Bhardwaj",
+        "David Zitoun"
+      ],
+      "year": 2023,
+      "journal": "Batteries",
+      "repository": null,
+      "abstract": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability. Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot. The use of ether-based liquid electrolyte has brought metal–sulfur batteries to a critical stage by causing intermediate polysulfide dissolution which results in poor cycling life and safety concerns. Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent. This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries. This article begins with a basic introduction to metal–sulfur batteries and explains their challenges. We will discuss the drawbacks of the using liquid organic electrolytes and the advantages of replacing liquid electrolytes with solid electrolytes. This article will also explain the fundamental requirements of solid",
+      "landing_url": "https://doi.org/10.3390/batteries9020110",
+      "pdf_url": null,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.3390/batteries9020110",
+      "fetched_at": "2026-10-24T00:59:40.669272+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.3390/batteries9020110",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability. Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot. The use of ether-based liquid electrolyte has brought metal–sulfur batteries to a critical stage by causing intermediate polysulfide dissolution which results in poor cycling life and safety concerns. Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent. This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries. This article begins with a basic introduction to metal–sulfur batteries and explains their challenges. We will discuss the drawbacks of the using liquid organic electrolytes and the advantages of replacing liquid electrolytes with solid electrolytes. This article will also explain the fundamental requirements of solid",
+      "access_state": "metadata_only"
+    },
+    {
+      "id": "ev-f549c7f0a2d4",
+      "fonte_id": "10.1039/d5eb00134j",
+      "url": "https://doi.org/10.1039/d5eb00134j",
+      "titulo": "Lithium-metal all-solid-state batteries enabled by polymer-coated halide solid electrolytes",
+      "dominio": "doi.org",
+      "acessado_em": "2026-10-24T00:59:40.669786+00:00",
+      "publicado_em": "2025",
+      "trecho": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode.",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "doi": "10.1039/d5eb00134j",
+      "authors": [
+        "Pravin N. Didwal",
+        "Guoying Chen"
+      ],
+      "year": 2025,
+      "journal": "EES Batteries",
+      "repository": null,
+      "abstract": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode.",
+      "landing_url": "https://doi.org/10.1039/d5eb00134j",
+      "pdf_url": "http://pubs.rsc.org/en/content/articlepdf/2025/EB/D5EB00134J",
+      "license": "http://creativecommons.org/licenses/by-nc/3.0/",
+      "review_status": null,
+      "publication_type": "journal-article",
+      "publication_date_origin": "issued",
+      "provider": "crossref",
+      "provider_url": "https://api.crossref.org/works?query.bibliographic=solid-state+batteries&rows=6&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Ccontainer-title%2Carchive%2Clink%2Clicense%2Cabstract%2Ctype%2CURL&filter=type%3Ajournal-article%2Chas-abstract%3Atrue",
+      "source_url": "https://doi.org/10.1039/d5eb00134j",
+      "fetched_at": "2026-10-24T00:59:40.669786+00:00",
+      "abstract_untrusted": true,
+      "abstract_kind": "provider_metadata",
+      "provider_metadata_untrusted": true,
+      "content_scope": "abstract_only",
+      "full_text_fetched": false,
+      "full_text_url": "",
+      "full_text_format": "",
+      "extraction_scope": "",
+      "full_document_read": false,
+      "sections": [],
+      "scientific_sections": [],
+      "vertical": {
+        "kind": "science",
+        "url": "https://doi.org/10.1039/d5eb00134j",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "title",
+          "doi",
+          "authors",
+          "publication_date",
+          "content_scope",
+          "source"
+        ],
+        "reasons": [],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "",
+      "imagens": [],
+      "texto_lido": false,
+      "trecho_usado": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode.",
+      "access_state": "metadata_only"
+    }
+  ],
+  "read_sources": 6,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:59:40.713049+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'estudos científicos baterias de estado sólido': 6 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: 6 resultados (estudos científicos baterias de estado s)"
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-24T00:59:40.715449+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "2 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 2,
+        "summary": {
+          "total": 2,
+          "images": 0,
+          "videos": 0,
+          "documents": 2,
+          "metadata_only": 0,
+          "link_only": 2,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:59:43.634577+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'papers solid-state batteries': 8 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [],
+        "estado": "ok",
+        "recovery_steps": [
+          "crossref: bloqueado (papers solid-state batteries)",
+          "bing: 6 resultados (papers solid-state batteries)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries)",
+          "ddg: bloqueado (papers solid-state batteries)",
+          "— recuperação por lacuna —",
+          "bing: 6 resultados (papers solid-state batteries estudo arti)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries estudo arti)",
+          "wikipedia: bloqueado (papers solid-state batteries estudo arti)",
+          "marginalia: 2 resultados (papers solid-state batteries estudo arti)",
+          "marginalia: sem correspondência com o pedido; tentando outro provedor (papers solid-state batteries estudo arti)",
+          "recuperação com ganho novo: 2 domínio(s), 0 tema(s) além da 1ª rodada"
+        ]
+      }
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:59:43.669082+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.1002/batt.201900089",
+        "final_url": "https://doi.org/10.1002/batt.201900089",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 994,
+        "read": false,
+        "published_at": "2019-09-02",
+        "excerpt": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is re"
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:59:43.677579+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.1039/d0ta02984j",
+        "final_url": "https://doi.org/10.1039/d0ta02984j",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 238,
+        "read": false,
+        "published_at": "2020",
+        "excerpt": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes."
+      }
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:59:46.025358+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries11040128",
+        "final_url": "https://doi.org/10.3390/batteries11040128",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1200,
+        "read": false,
+        "published_at": "2025-03-26",
+        "excerpt": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techniques, such as laser sintering, laser cutting, laser surface cleaning, laser ablation for nanopartic"
+      }
+    },
+    {
+      "seq": 16,
+      "ts": "2026-10-24T00:59:46.033728+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9020110",
+        "final_url": "https://doi.org/10.3390/batteries9020110",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1200,
+        "read": false,
+        "published_at": "2023-02-03",
+        "excerpt": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability. Despite these advantages, metal–sulfur batteries face many fundamental challenges which"
+      }
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-24T00:59:46.042768+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9070355",
+        "final_url": "https://doi.org/10.3390/batteries9070355",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1188,
+        "read": false,
+        "published_at": "2023-07-04",
+        "excerpt": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-established large-scale manufacturing for sulfide SEs with high ionic conductivity. However, the synthesi"
+      }
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-24T00:59:47.178038+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://doi.org/10.1039/d5eb00134j",
+        "final_url": "https://doi.org/10.1039/d5eb00134j",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 161,
+        "read": false,
+        "published_at": "2025",
+        "excerpt": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode."
+      }
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-24T00:59:47.241712+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-7138e5f9 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-24T00:59:47.245184+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9020110",
+        "final_url": "https://doi.org/10.3390/batteries9020110",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1200,
+        "read": false,
+        "published_at": "2023-02-03",
+        "excerpt": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability. Despite these advantages, metal–sulfur batteries face many fundamental challenges which"
+      }
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-24T00:59:47.256820+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 22,
+      "ts": "2026-10-24T00:59:47.335343+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.3390/batteries9020110",
+        "dominio": "doi.org",
+        "trecho": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sus",
+        "url": "https://doi.org/10.3390/batteries9020110"
+      }
+    },
+    {
+      "seq": 23,
+      "ts": "2026-10-24T00:59:47.353507+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-55860a21 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:59:47.356438+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.1002/batt.201900089",
+        "final_url": "https://doi.org/10.1002/batt.201900089",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 994,
+        "read": false,
+        "published_at": "2019-09-02",
+        "excerpt": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is re"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": "2026-10-24T00:59:47.363628+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 26,
+      "ts": "2026-10-24T00:59:47.407427+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.1002/batt.201900089",
+        "dominio": "doi.org",
+        "trecho": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline m",
+        "url": "https://doi.org/10.1002/batt.201900089"
+      }
+    },
+    {
+      "seq": 27,
+      "ts": "2026-10-24T00:59:47.419721+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-185dcfd6 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 28,
+      "ts": "2026-10-24T00:59:47.425561+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries9070355",
+        "final_url": "https://doi.org/10.3390/batteries9070355",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1188,
+        "read": false,
+        "published_at": "2023-07-04",
+        "excerpt": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-established large-scale manufacturing for sulfide SEs with high ionic conductivity. However, the synthesi"
+      }
+    },
+    {
+      "seq": 29,
+      "ts": "2026-10-24T00:59:47.435303+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 30,
+      "ts": "2026-10-24T00:59:47.471752+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.3390/batteries9070355",
+        "dominio": "doi.org",
+        "trecho": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires well-estab",
+        "url": "https://doi.org/10.3390/batteries9070355"
+      }
+    },
+    {
+      "seq": 31,
+      "ts": "2026-10-24T00:59:47.502282+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-65e0be0d de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 32,
+      "ts": "2026-10-24T00:59:47.506735+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.1039/d0ta02984j",
+        "final_url": "https://doi.org/10.1039/d0ta02984j",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 238,
+        "read": false,
+        "published_at": "2020",
+        "excerpt": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes."
+      }
+    },
+    {
+      "seq": 33,
+      "ts": "2026-10-24T00:59:47.510548+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 34,
+      "ts": "2026-10-24T00:59:47.537823+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.1039/d0ta02984j",
+        "dominio": "doi.org",
+        "trecho": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes.",
+        "url": "https://doi.org/10.1039/d0ta02984j"
+      }
+    },
+    {
+      "seq": 35,
+      "ts": "2026-10-24T00:59:47.558028+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-4629a7d6 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 36,
+      "ts": "2026-10-24T00:59:47.562141+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.3390/batteries11040128",
+        "final_url": "https://doi.org/10.3390/batteries11040128",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 1200,
+        "read": false,
+        "published_at": "2025-03-26",
+        "excerpt": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techniques, such as laser sintering, laser cutting, laser surface cleaning, laser ablation for nanopartic"
+      }
+    },
+    {
+      "seq": 37,
+      "ts": "2026-10-24T00:59:47.565226+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 38,
+      "ts": "2026-10-24T00:59:47.586622+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.3390/batteries11040128",
+        "dominio": "doi.org",
+        "trecho": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing techn",
+        "url": "https://doi.org/10.3390/batteries11040128"
+      }
+    },
+    {
+      "seq": 39,
+      "ts": "2026-10-24T00:59:47.607060+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-f549c7f0 de doi.org.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 40,
+      "ts": "2026-10-24T00:59:47.617841+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://doi.org/10.1039/d5eb00134j",
+        "final_url": "https://doi.org/10.1039/d5eb00134j",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "abstract_only",
+        "extracted_chars": 161,
+        "read": false,
+        "published_at": "2025",
+        "excerpt": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode."
+      }
+    },
+    {
+      "seq": 41,
+      "ts": "2026-10-24T00:59:47.620611+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Metadados acadêmicos de doi.org; resumo apenas.",
+      "meta": {}
+    },
+    {
+      "seq": 42,
+      "ts": "2026-10-24T00:59:47.642107+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (doi.org).",
+      "meta": {
+        "evidencia_id": "10.1039/d5eb00134j",
+        "dominio": "doi.org",
+        "trecho": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode.",
+        "url": "https://doi.org/10.1039/d5eb00134j"
+      }
+    },
+    {
+      "seq": 45,
+      "ts": "2026-10-24T00:59:49.622882+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://about.readcube.com/",
+        "final_url": "https://about.readcube.com/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 612,
+        "read": true,
+        "published_at": "2018-09-20T14:56:24+00:00",
+        "excerpt": "stage with dual-reviewer workflows Define the exact fields your review needs, and extract consistently across every study. Build a custom data extraction form AI Autofill answers your extraction questions for you, linked to the source — you just confirm. Pre-fill every field, cited to the source Flow diagrams and audit trails build automatically, export-ready in the format you need. Report and"
+      }
+    },
+    {
+      "seq": 46,
+      "ts": "2026-10-24T00:59:49.758994+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: no_readable_content.",
+      "meta": {
+        "url": "https://www.connectedpapers.com/",
+        "final_url": "https://www.connectedpapers.com/",
+        "source_state": "FETCHED",
+        "stage": "no_readable_content",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 19:45:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 47,
+      "ts": "2026-10-24T00:59:50.645997+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://papers.ai/",
+        "final_url": "https://papers.ai/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 400,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 01:25:00 GMT",
+        "excerpt": "Write with a partner that knows your project Papers AI can see all your work, helping you leap quickly from notes and ideas to polished final drafts. Run analysis and code without switching tools Your data, code, and notebooks live alongside your writing. Deep thinking, kept in sync Papers AI helps you think across your whole project, make connections, sync up ideas, and get to conclusions faster."
+      }
+    },
+    {
+      "seq": 48,
+      "ts": "2026-10-24T00:59:50.671634+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://papergate.org/.",
+      "meta": {}
+    },
+    {
+      "seq": 49,
+      "ts": "2026-10-24T00:59:50.678878+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://papergate.org/",
+        "final_url": "",
+        "source_state": "BLOCKED",
+        "stage": "fetch_failed",
+        "code": "bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 21:18:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 50,
+      "ts": "2026-10-24T00:59:51.444924+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://www.sci-hub.in/",
+        "final_url": "https://www.sci-hub.in/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 862,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 21:46:00 GMT",
+        "excerpt": "é o projeto mais controverso da ciência atual. O objetivo do Sci-Hub é fornecer acesso a todo o conhecimento científico já publicado em periódicos ou livros. Sci-Hub gratuito e irrestrito Hoje, a circulação do conhecimento na ciência é restringida pelos preços elevados. Muitos estudantes e pesquisadores não podem pagar revistas acadêmicas e livros que estão trancados atrás de paywalls. O Sci-Hub"
+      }
+    },
+    {
+      "seq": 51,
+      "ts": "2026-10-24T00:59:52.516609+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: extracted.",
+      "meta": {
+        "url": "https://scholar.google.com/",
+        "final_url": "https://scholar.google.com/",
+        "source_state": "READABLE",
+        "stage": "extracted",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 730,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 17:57:00 GMT",
+        "excerpt": "Carregando... O sistema não pode executar a operação agora. Tente novamente mais tarde. Pesquisa avançada Salvo em \"Minha biblioteca\" Meu perfil Minha biblioteca Alertas Métricas Labs Pesquisa avançada Configurações Fazer login Meu perfil Minha biblioteca Labs Fazer login Sobre os ombros de gigantes PT-BR Idiomas Português (Brasil) Català Čeština Dansk Deutsch English Español Filipino Français"
+      }
+    },
+    {
+      "seq": 52,
+      "ts": "2026-10-24T00:59:52.546837+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "2 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 2,
+        "summary": {
+          "total": 4,
+          "images": 1,
+          "videos": 1,
+          "documents": 2,
+          "metadata_only": 1,
+          "link_only": 3,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 53,
+      "ts": "2026-10-24T00:59:52.552729+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://papers.ai/",
+        "final_url": "https://papers.ai/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 400,
+        "read": true,
+        "published_at": "qua., 21 out. 2026 01:25:00 GMT",
+        "excerpt": "Write with a partner that knows your project Papers AI can see all your work, helping you leap quickly from notes and ideas to polished final drafts. Run analysis and code without switching tools Your data, code, and notebooks live alongside your writing. Deep thinking, kept in sync Papers AI helps you think across your whole project, make connections, sync up ideas, and get to conclusions faster."
+      }
+    },
+    {
+      "seq": 54,
+      "ts": "2026-10-24T00:59:52.563029+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 55,
+      "ts": "2026-10-24T00:59:52.566020+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "1 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 1,
+        "summary": {
+          "total": 5,
+          "images": 2,
+          "videos": 1,
+          "documents": 2,
+          "metadata_only": 2,
+          "link_only": 3,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 56,
+      "ts": "2026-10-24T00:59:52.571906+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_registered",
+      "status": "ok",
+      "descricao": "Evidência ev-08a60d71 de www.connectedpapers.com.",
+      "meta": {
+        "status": "recuperada"
+      }
+    },
+    {
+      "seq": 57,
+      "ts": "2026-10-24T00:59:52.575138+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "ok",
+      "descricao": "Leitura de fonte: discovery_stored.",
+      "meta": {
+        "url": "https://www.connectedpapers.com/",
+        "final_url": "https://www.connectedpapers.com/",
+        "source_state": "DISCOVERED",
+        "stage": "discovery_stored",
+        "code": "",
+        "scope": "page_text",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "sex., 23 out. 2026 19:45:00 GMT",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 58,
+      "ts": "2026-10-24T00:59:52.578305+00:00",
+      "agente": "analyst",
+      "tipo": "extraction_completed",
+      "status": "ok",
+      "descricao": "Fonte encontrada em www.connectedpapers.com; conteúdo não lido.",
+      "meta": {}
+    },
+    {
+      "seq": 59,
+      "ts": "2026-10-24T00:59:52.592998+00:00",
+      "agente": "analyst",
+      "tipo": "evidence_linked",
+      "status": "ok",
+      "descricao": "Evidência ligada ao documento (www.connectedpapers.com).",
+      "meta": {
+        "evidencia_id": "ev-08a60d71f502",
+        "dominio": "www.connectedpapers.com",
+        "trecho": "Explore and build more graphs for interesting papers that you find - soon you'll have a real, visual understanding of the trends, popular works and dynamics of the field you're interested in.",
+        "url": "https://www.connectedpapers.com/"
+      }
+    },
+    {
+      "seq": 60,
+      "ts": "2026-10-24T00:59:52.596494+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "2 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 2,
+        "summary": {
+          "total": 7,
+          "images": 4,
+          "videos": 1,
+          "documents": 2,
+          "metadata_only": 4,
+          "link_only": 3,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 61,
+      "ts": "2026-10-24T00:59:52.601341+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://about.readcube.com/",
+        "final_url": "https://about.readcube.com/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 612,
+        "read": true,
+        "published_at": "2018-09-20T14:56:24+00:00",
+        "excerpt": "stage with dual-reviewer workflows Define the exact fields your review needs, and extract consistently across every study. Build a custom data extraction form AI Autofill answers your extraction questions for you, linked to the source — you just confirm. Pre-fill every field, cited to the source Flow diagrams and audit trails build automatically, export-ready in the format you need. Report and"
+      }
+    },
+    {
+      "seq": 62,
+      "ts": "2026-10-24T00:59:52.605227+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 63,
+      "ts": "2026-10-24T00:59:52.612354+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://www.sci-hub.in/",
+        "final_url": "https://www.sci-hub.in/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 862,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 21:46:00 GMT",
+        "excerpt": "é o projeto mais controverso da ciência atual. O objetivo do Sci-Hub é fornecer acesso a todo o conhecimento científico já publicado em periódicos ou livros. Sci-Hub gratuito e irrestrito Hoje, a circulação do conhecimento na ciência é restringida pelos preços elevados. Muitos estudantes e pesquisadores não podem pagar revistas acadêmicas e livros que estão trancados atrás de paywalls. O Sci-Hub"
+      }
+    },
+    {
+      "seq": 64,
+      "ts": "2026-10-24T00:59:52.617090+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 65,
+      "ts": "2026-10-24T00:59:52.626236+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "1 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 1,
+        "summary": {
+          "total": 8,
+          "images": 4,
+          "videos": 1,
+          "documents": 3,
+          "metadata_only": 4,
+          "link_only": 4,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 66,
+      "ts": "2026-10-24T00:59:52.632683+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: relevance_rejected.",
+      "meta": {
+        "url": "https://scholar.google.com/",
+        "final_url": "https://scholar.google.com/",
+        "source_state": "REJECTED",
+        "stage": "relevance_rejected",
+        "code": "TOPIC_MISMATCH",
+        "scope": "page_text",
+        "extracted_chars": 730,
+        "read": true,
+        "published_at": "sex., 23 out. 2026 17:57:00 GMT",
+        "excerpt": "Carregando... O sistema não pode executar a operação agora. Tente novamente mais tarde. Pesquisa avançada Salvo em \"Minha biblioteca\" Meu perfil Minha biblioteca Alertas Métricas Labs Pesquisa avançada Configurações Fazer login Meu perfil Minha biblioteca Labs Fazer login Sobre os ombros de gigantes PT-BR Idiomas Português (Brasil) Català Čeština Dansk Deutsch English Español Filipino Français"
+      }
+    },
+    {
+      "seq": 67,
+      "ts": "2026-10-24T00:59:52.639290+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 101,
+      "ts": "2026-10-24T00:59:52.975242+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "12 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**Objetivo:** Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.\n**Status:** falhou · **Modo:** profunda · **Evidências:** 7\n**Cobertura dos dados:** consulte evidências e limitações\n**Mídia descoberta:** 8 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "sources",
+        "props": {
+          "title": "Fontes e estado da leitura",
+          "items": [
+            {
+              "titulo": "Connected Papers | Find and explore academic papers",
+              "url": "https://www.connectedpapers.com/",
+              "dominio": "www.connectedpapers.com",
+              "data": "sex., 23 out. 2026 19:45:00 GMT",
+              "trecho": "Explore and build more graphs for interesting papers that you find - soon you'll have a real, visual understanding of the trends, popular works and dynamics of the field you're interested in.",
+              "origem_declarada": "",
+              "tipo": "Fonte",
+              "escopo": "Página não lida; sem suporte factual",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "",
+              "autores": "",
+              "doi": "",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "FOUND",
+              "detalhes": [],
+              "status": "encontrada"
+            },
+            {
+              "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+              "url": "https://doi.org/10.3390/batteries9070355",
+              "dominio": "doi.org",
+              "data": "2023-07-04",
+              "trecho": "All-solid-state batteries (ASSBs) are promising to be next-generation battery that provides high energy density and intrinsic safety. Research in the field of ASSBs has so far focused on the development of highly conductive solid electrolytes (SEs). The commercialization of ASSBs requires",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Batteries",
+              "autores": "Hirotada Gamo, Atsushi Nagai, Atsunori Matsuda",
+              "doi": "10.3390/batteries9070355",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "Applications of Laser Material Processing for Solid-State Lithium Batteries",
+              "url": "https://doi.org/10.3390/batteries11040128",
+              "dominio": "doi.org",
+              "data": "2025-03-26",
+              "trecho": "Laser material processing is emerging as a critical manufacturing technology in the advancement of solid-state lithium batteries (SSLBs), offering numerous advantages in precision, efficiency, and versatility. This mini-review explores the applications and benefits of laser material-processing",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Batteries",
+              "autores": "Dongfang Yang",
+              "doi": "10.3390/batteries11040128",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+              "url": "https://doi.org/10.1002/batt.201900089",
+              "dominio": "doi.org",
+              "data": "2019-09-02",
+              "trecho": "Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs). Herein, a composite solid‐state electrolyte (SSE) based on two crystalline",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Batteries &amp; Supercaps",
+              "autores": "Adriana M. Navarro‐Suárez, Patrik Johansson",
+              "doi": "10.1002/batt.201900089",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "Mechanical <i>vs.</i> chemical stability of sulphide-based solid-state batteries. Which one is the biggest challenge to tackle? Overview of solid-state batterie",
+              "url": "https://doi.org/10.1039/d0ta02984j",
+              "dominio": "doi.org",
+              "data": "2020",
+              "trecho": "Mechanical stability and interfacial stability are the main issues hindering the development of sulphide-based solid state batteries. We review here the recent advances in this field including the alternative of hybrid solid electrolytes.",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Journal of Materials Chemistry A",
+              "autores": "Léa Rose Mangani, Claire Villevieille",
+              "doi": "10.1039/d0ta02984j",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+              "url": "https://doi.org/10.3390/batteries9020110",
+              "dominio": "doi.org",
+              "data": "2023-02-03",
+              "trecho": "Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "Batteries",
+              "autores": "Ravindra Kumar Bhardwaj, David Zitoun",
+              "doi": "10.3390/batteries9020110",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            },
+            {
+              "titulo": "Lithium-metal all-solid-state batteries enabled by polymer-coated halide solid electrolytes",
+              "url": "https://doi.org/10.1039/d5eb00134j",
+              "dominio": "doi.org",
+              "data": "2025",
+              "trecho": "Polymer coating on a halide-solid-electrolyte markedly enhances air and chemical stabilities and suppresses interfacial decomposition at the lithium metal anode.",
+              "origem_declarada": "",
+              "tipo": "journal-article",
+              "escopo": "Somente resumo; texto completo não lido",
+              "relacao": "Fonte de contexto",
+              "data_evento": "",
+              "publicador": "EES Batteries",
+              "autores": "Pravin N. Didwal, Guoying Chen",
+              "doi": "10.1039/d5eb00134j",
+              "imagem": "",
+              "favicon": "",
+              "texto_url": "",
+              "leitura": "PARTIAL",
+              "detalhes": [],
+              "status": "aberta"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações.",
+          "mode": "profunda",
+          "status": "failed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: estudos científicos baterias de estado sólido",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: estudos científicos baterias de estado sólido",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: estudos científicos baterias de estado sólido",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Buscar: papers solid-state batteries",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p5",
+              "title": "Ler: papers solid-state batteries",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Analisar: papers solid-state batteries",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            },
+            {
+              "id": "p7",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "todo",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3",
+                "p6"
+              ]
+            },
+            {
+              "id": "p8",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "todo",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p7"
+              ]
+            },
+            {
+              "id": "p9",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "todo",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p8"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 9,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 66.7
+          },
+          "budgets": {
+            "buscas": 8.0,
+            "paginas": 12.0,
+            "timeout_s": 120.0,
+            "subs": 4.0,
+            "replans": 2.0,
+            "midia": 16.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 2.0,
+            "paginas": 12.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..",
+              "markdown": "**HIPÓTESE:** Investigar se: Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações..\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread a",
+              "markdown": "**HIPÓTESE:** Investigar se: Metal–sulfur batteries, especially lithium/sodium–sulfur (Li/Na-S) batteries, have attracted widespread attention for large-scale energy application due to their superior theoretical energy density, low cost of sulfur compared to conventional lithium-ion battery (LIBs) cathodes and environmental sustainability.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on ",
+              "markdown": "**HIPÓTESE:** Investigar se: Despite these advantages, metal–sulfur batteries face many fundamental challenges which have put them on the back foot.\n\n**EVIDÊNCIAS:** 2 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challen",
+              "markdown": "**HIPÓTESE:** Investigar se: Replacement of the ether-based liquid electrolyte by a solid electrolyte (SEs) has overcome these challenges to a large extent.\n\n**EVIDÊNCIAS:** 3 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na",
+              "markdown": "**HIPÓTESE:** Investigar se: This review describes the recent development and progress of solid electrolytes for all-solid-state Li/Na-S batteries.\n\n**EVIDÊNCIAS:** 5 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: This article begins with a basic introduction to metal–sulfur batteries and explains their challenges.",
+              "markdown": "**HIPÓTESE:** Investigar se: This article begins with a basic introduction to metal–sulfur batteries and explains their challenges.\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: This article will also explain the fundamental requirements of solid Abstract All‐solid‐state batteries (",
+              "markdown": "**HIPÓTESE:** Investigar se: This article will also explain the fundamental requirements of solid Abstract All‐solid‐state batteries (ASSBs) are promoted as a promising option towards higher energies and power densities as well as drastically reduced safety risks as compared to conventional lithium‐ion batteries (LIBs).\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            },
+            {
+              "title": "Investigar se: Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly ",
+              "markdown": "**HIPÓTESE:** Investigar se: Herein, a composite solid‐state electrolyte (SSE) based on two crystalline materials with two distinctly different ion conduction mechanisms, percolation and ion hopping, is reported.\n\n**EVIDÊNCIAS:** 4 referência(s) ligada(s) a esta hipótese.\n\n**LACUNAS:** Nenhuma lacuna explícita registrada.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-4f61c0f002ab&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-4f61c0f002ab&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-4f61c0f002ab&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "O que ainda falta confirmar (5)",
+              "markdown": "- Texto científico além do abstract: 0/2 publicação(ões) com o dado extraído.\n\n- Métodos e amostra: 0/2 publicação(ões) com o dado extraído.\n\n- Resultados com métrica e unidade: 0/2 publicação(ões) com o dado extraído.\n\n- Condições experimentais: 0/2 publicação(ões) com o dado extraído.\n\n- Limitações declaradas: 0/2 publicação(ões) com o dado extraído.\n\nAusente no trecho recuperado não significa ausente no estudo inteiro."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 2,
+      "ok": 2,
+      "vazio": 0,
+      "resultados": 12,
+      "erros": {},
+      "ms_medio": 547.0
+    },
+    "crossref": {
+      "chamadas": 2,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {
+        "bloqueado": 1
+      },
+      "ms_medio": 778.8
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    },
+    "marginalia": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 2,
+      "erros": {},
+      "ms_medio": 1202.1
+    },
+    "wikipedia": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Recent Progress in Solid Electrolytes for All-Solid-State Metal(Li/Na)–Sulfur Batteries",
+      "url": "https://doi.org/10.3390/batteries9020110",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "A Silatrane:Molecule‐Based Crystal Composite Solid‐State Electrolyte for All‐Solid‐State Lithium Batteries",
+      "url": "https://doi.org/10.1002/batt.201900089",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://onlinelibrary.wiley.com/termsAndConditions#vor",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Toward Scalable Liquid-Phase Synthesis of Sulfide Solid Electrolytes for All-Solid-State Batteries",
+      "url": "https://doi.org/10.3390/batteries9070355",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Mechanical <i>vs.</i> chemical stability of sulphide-based solid-state batteries. Which one is the biggest challenge to tackle? Overview of solid-state batteries and hybrid solid state batteries",
+      "url": "https://doi.org/10.1039/d0ta02984j",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://rsc.li/journals-terms-of-use",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Applications of Laser Material Processing for Solid-State Lithium Batteries",
+      "url": "https://doi.org/10.3390/batteries11040128",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Lithium-metal all-solid-state batteries enabled by polymer-coated halide solid electrolytes",
+      "url": "https://doi.org/10.1039/d5eb00134j",
+      "origem": "crossref",
+      "tipo": "academico",
+      "meta": {},
+      "license": "http://creativecommons.org/licenses/by-nc/3.0/",
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Papers AI — one research workspace for Word, LaTeX, data & code",
+      "url": "https://papers.ai/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Scholar",
+      "url": "https://scholar.google.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 17:57:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Connected Papers | Find and explore academic papers",
+      "url": "https://www.connectedpapers.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Papers - ReadCube Literature Management Solutions",
+      "url": "https://about.readcube.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 02:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "PaperGate - Search 450M+ Research Papers & Scholarly Articles",
+      "url": "https://papergate.org/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Sci-Hub:Get the latest free papers Library",
+      "url": "https://www.sci-hub.in/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Papers AI — one research workspace for Word, LaTeX, data & code",
+      "url": "https://papers.ai/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qua., 21 out. 2026 01:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Scholar",
+      "url": "https://scholar.google.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 17:57:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Connected Papers | Find and explore academic papers",
+      "url": "https://www.connectedpapers.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 19:45:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Papers - ReadCube Literature Management Solutions",
+      "url": "https://about.readcube.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 02:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "PaperGate - Search 450M+ Research Papers & Scholarly Articles",
+      "url": "https://papergate.org/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Sci-Hub:Get the latest free papers Library",
+      "url": "https://www.sci-hub.in/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 21:46:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Eduardo SBPMAT – SBPMat – Sociedade Brasileira de Pesquisa em Materiais",
+      "url": "https://www.sbpmat.org.br/pt/author/eduardo/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "CC-BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origem": "marginalia",
+      "tipo": "pagina",
+      "meta": {},
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 13.472
+}

@@ -1,0 +1,1129 @@
+{
+  "id": "images",
+  "route": "research",
+  "question": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+    "domain": "general",
+    "original_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+    "resolved_request": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T00:38:09.256525+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false
+  },
+  "answer": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-f90d9d6b46bd",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [
+      {
+        "afirmacao": "Imagens licenciadas da Ponte Estaiada em São Paulo.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [],
+        "fontes_encontradas": 0,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "2d4ad3386f6a6392c845",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-f90d9d6b46bd",
+        "statement": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.",
+        "status": "open",
+        "evidence_ids": [],
+        "missing_evidence": [
+          "Nenhuma evidência específica foi atribuída pelo verificador."
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "Nenhuma referência específica atribuída."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "imagens licenciadas da ponte estaiada em sao paulo": "p1"
+      },
+      "provedores": {
+        "web": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 1743
+        }
+      },
+      "failed_source_reads": [
+        "a9c69a756b2eade7d5c33bd2ff1e389d740ee9d92672aaf32973a996e6112951",
+        "b0afa3967bba44e9a0b4c813ea9afd85567d1fffcb943a3877a6bd4feb87e07e",
+        "da33d4f135f63a335dd7bd10d40e76661f91faf1c5e311a41e6ed738d0693b53"
+      ],
+      "research_gaps": [],
+      "controller_decisions": [
+        {
+          "action": "SYNTHESIZE",
+          "reason": "extracted_data_available_requires_validation",
+          "gap_ids": [],
+          "step_id": "p3",
+          "executed": false
+        }
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Imagens licenciadas da Ponte Estaiada em São Paulo fontes primárias texto completo"
+        ],
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-78824582ce9d",
+        "type": "image",
+        "title": "Ponte Estaiada - São Paulo.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "source_title": "Ponte Estaiada - São Paulo.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg",
+        "publisher": "upload.wikimedia.org",
+        "date": "",
+        "rights": "CC0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Marginal Pinheiros, com a Ponte Estaiada em destaque",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "width": 1213,
+        "height": 750,
+        "mime": "image/jpeg",
+        "attribution": "Bruno M.",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "metadata_state": "METADATA_READ",
+        "relevance_state": "TOPIC_METADATA_MATCH"
+      },
+      {
+        "id": "med-bc59f2945880",
+        "type": "image",
+        "title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "source_title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg",
+        "publisher": "upload.wikimedia.org",
+        "date": "",
+        "rights": "CC BY-SA 3.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "The Octavio Frias de Oliveira bridge , São Paulo - Brazil. View from the North Tower of the CENU complex (Northeast of the bridge)",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "width": 2956,
+        "height": 1948,
+        "mime": "image/jpeg",
+        "attribution": "Marcosleal",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "metadata_state": "METADATA_READ",
+        "relevance_state": "TOPIC_METADATA_MATCH"
+      },
+      {
+        "id": "med-7b896bdb1838",
+        "type": "image",
+        "title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266763267).jpg",
+        "publisher": "upload.wikimedia.org",
+        "date": "",
+        "rights": "CC BY 2.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "width": 3264,
+        "height": 2448,
+        "mime": "image/jpeg",
+        "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "metadata_state": "METADATA_READ",
+        "relevance_state": "TOPIC_METADATA_MATCH"
+      },
+      {
+        "id": "med-41c6081d0422",
+        "type": "image",
+        "title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266768515).jpg",
+        "publisher": "upload.wikimedia.org",
+        "date": "",
+        "rights": "CC BY 2.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "width": 2448,
+        "height": 3264,
+        "mime": "image/jpeg",
+        "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "metadata_state": "METADATA_READ",
+        "relevance_state": "TOPIC_METADATA_MATCH"
+      },
+      {
+        "id": "med-fcd266d8dee8",
+        "type": "image",
+        "title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4267503980).jpg",
+        "publisher": "upload.wikimedia.org",
+        "date": "",
+        "rights": "CC BY 2.0",
+        "access_state": "link_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "search metadata",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "width": 3264,
+        "height": 2448,
+        "mime": "image/jpeg",
+        "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "metadata_state": "METADATA_READ",
+        "relevance_state": "TOPIC_METADATA_MATCH"
+      }
+    ],
+    "midia_resumo": {
+      "total": 5,
+      "images": 5,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 0,
+      "link_only": 5,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": null,
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-24T00:38:11.096642+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Imagens licenciadas da Ponte Estaiada em São Paulo': 12 achados.",
+      "meta": {
+        "provedor": "web",
+        "falhas": [
+          {
+            "provedor": "ddg",
+            "codigo": "vazio"
+          },
+          {
+            "provedor": "searxng",
+            "codigo": "indisponivel"
+          },
+          {
+            "provedor": "wikipedia",
+            "codigo": "vazio"
+          }
+        ],
+        "estado": "ok",
+        "recovery_steps": [
+          "commons: 6 resultados (Imagens licenciadas da Ponte Estaiada em)",
+          "bing: 6 resultados (Imagens licenciadas da Ponte Estaiada em)",
+          "bing: sem correspondência com o pedido; tentando outro provedor (Imagens licenciadas da Ponte Estaiada em)",
+          "ddg: bloqueado (Imagens licenciadas da Ponte Estaiada em)"
+        ]
+      }
+    },
+    {
+      "seq": 7,
+      "ts": "2026-10-24T00:38:11.108923+00:00",
+      "agente": "analyst",
+      "tipo": "media_discovered",
+      "status": "ok",
+      "descricao": "5 mídia(s) descoberta(s); apenas metadados/links, sem análise.",
+      "meta": {
+        "added": 5,
+        "summary": {
+          "total": 5,
+          "images": 5,
+          "videos": 0,
+          "documents": 0,
+          "metadata_only": 0,
+          "link_only": 5,
+          "validated": 0,
+          "analyzed": 0,
+          "evidence": 0
+        },
+        "claim_evidence": false,
+        "analysis_state": "not_analyzed"
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-24T00:38:11.950977+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (tipo_bloqueado): https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Pon.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-24T00:38:11.952772+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "fetch_failed",
+        "code": "tipo_bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 12,
+      "ts": "2026-10-24T00:38:11.979636+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (tipo_bloqueado): https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Pon.",
+      "meta": {}
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-24T00:38:11.984904+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "fetch_failed",
+        "code": "tipo_bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-24T00:38:12.042084+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (tipo_bloqueado): https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Pon.",
+      "meta": {}
+    },
+    {
+      "seq": 15,
+      "ts": "2026-10-24T00:38:12.044291+00:00",
+      "agente": "analyst",
+      "tipo": "source_read_trace",
+      "status": "alerta",
+      "descricao": "Leitura de fonte: fetch_failed.",
+      "meta": {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg",
+        "final_url": "",
+        "source_state": "REJECTED",
+        "stage": "fetch_failed",
+        "code": "tipo_bloqueado",
+        "scope": "",
+        "extracted_chars": 0,
+        "read": false,
+        "published_at": "",
+        "excerpt": ""
+      }
+    },
+    {
+      "seq": 24,
+      "ts": "2026-10-24T00:38:12.128829+00:00",
+      "agente": "analyst",
+      "tipo": "hypotheses_updated",
+      "status": "ok",
+      "descricao": "1 hipótese(s) aberta(s) para investigação.",
+      "meta": {
+        "status": "open",
+        "diagnosis": false
+      }
+    }
+  ],
+  "jdui_valid": true,
+  "jdui_errors": [],
+  "jdui": {
+    "version": "JULIA-ui-message/v1",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Investigação: Imagens licenciadas da Ponte Estaiada em São Paulo\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada."
+      },
+      {
+        "type": "text",
+        "content": "**Objetivo:** Imagens licenciadas da Ponte Estaiada em São Paulo\n**Status:** concluída · **Modo:** rapida · **Evidências:** 0\n**Cobertura dos dados:** parcial; há dados pendentes\n**Mídia descoberta:** 5 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n**Limite epistêmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas."
+      },
+      {
+        "type": "ui",
+        "component": "media",
+        "props": {
+          "title": "Mídia descoberta (não é evidência)",
+          "items": [
+            {
+              "type": "image",
+              "title": "Ponte Estaiada - São Paulo.jpg",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "source_title": "Ponte Estaiada - São Paulo.jpg",
+              "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg",
+              "publisher": "upload.wikimedia.org",
+              "date": "",
+              "rights": "CC0",
+              "attribution": "Bruno M.",
+              "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+              "mime": "image/jpeg",
+              "width": 1213,
+              "height": 750,
+              "duration": "",
+              "metadata_state": "METADATA_READ",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "Marginal Pinheiros, com a Ponte Estaiada em destaque",
+              "alt": "Ponte Estaiada - São Paulo.jpg",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "source_title": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+              "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg",
+              "publisher": "upload.wikimedia.org",
+              "date": "",
+              "rights": "CC BY-SA 3.0",
+              "attribution": "Marcosleal",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+              "mime": "image/jpeg",
+              "width": 2956,
+              "height": 1948,
+              "duration": "",
+              "metadata_state": "METADATA_READ",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "The Octavio Frias de Oliveira bridge , São Paulo - Brazil. View from the North Tower of the CENU complex (Northeast of the bridge)",
+              "alt": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+              "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266763267).jpg",
+              "publisher": "upload.wikimedia.org",
+              "date": "",
+              "rights": "CC BY 2.0",
+              "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+              "license_url": "https://creativecommons.org/licenses/by/2.0",
+              "mime": "image/jpeg",
+              "width": 3264,
+              "height": 2448,
+              "duration": "",
+              "metadata_state": "METADATA_READ",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+              "alt": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+              "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266768515).jpg",
+              "publisher": "upload.wikimedia.org",
+              "date": "",
+              "rights": "CC BY 2.0",
+              "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+              "license_url": "https://creativecommons.org/licenses/by/2.0",
+              "mime": "image/jpeg",
+              "width": 2448,
+              "height": 3264,
+              "duration": "",
+              "metadata_state": "METADATA_READ",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+              "alt": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+              "evidence": false
+            },
+            {
+              "type": "image",
+              "title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "source_title": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+              "source_url": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4267503980).jpg",
+              "publisher": "upload.wikimedia.org",
+              "date": "",
+              "rights": "CC BY 2.0",
+              "attribution": "Rodrigo Soldon from Rio de Janeiro, Brazil",
+              "license_url": "https://creativecommons.org/licenses/by/2.0",
+              "mime": "image/jpeg",
+              "width": 3264,
+              "height": 2448,
+              "duration": "",
+              "metadata_state": "METADATA_READ",
+              "access_state": "link_only",
+              "validation_state": "unverified",
+              "analysis_state": "not_analyzed",
+              "excerpt": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independent",
+              "alt": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+              "evidence": false
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "evidence",
+        "props": {
+          "title": "Evidências por afirmação",
+          "claims": [
+            {
+              "statement": "Imagens licenciadas da Ponte Estaiada em São Paulo.",
+              "state": "INCONCLUSIVE",
+              "method": "sem-evidencia",
+              "coverage": 0.0,
+              "sources": [],
+              "found_count": 0,
+              "read_count": 0,
+              "supporting_count": 0,
+              "contradicting_count": 0
+            }
+          ],
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "researchplan",
+        "props": {
+          "title": "Plano de pesquisa",
+          "objective": "Imagens licenciadas da Ponte Estaiada em São Paulo",
+          "mode": "rapida",
+          "status": "completed",
+          "steps": [
+            {
+              "id": "p1",
+              "title": "Buscar: Imagens licenciadas da Ponte Estaiada em São Paulo",
+              "kind": "busca",
+              "status": "done",
+              "detail": "localizar fontes relevantes e independentes",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": []
+            },
+            {
+              "id": "p2",
+              "title": "Ler: Imagens licenciadas da Ponte Estaiada em São Paulo",
+              "kind": "ler",
+              "status": "done",
+              "detail": "abrir a fonte e extrair trecho com proveniência",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p1"
+              ]
+            },
+            {
+              "id": "p3",
+              "title": "Analisar: Imagens licenciadas da Ponte Estaiada em São Paulo",
+              "kind": "analisar",
+              "status": "done",
+              "detail": "registrar evidência sem transformar descoberta em prova",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p2"
+              ]
+            },
+            {
+              "id": "p4",
+              "title": "Verificar",
+              "kind": "verificar",
+              "status": "done",
+              "detail": "classificar cada afirmação contra as fontes lidas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p3"
+              ]
+            },
+            {
+              "id": "p5",
+              "title": "Sintetizar",
+              "kind": "sintetizar",
+              "status": "done",
+              "detail": "redigir apenas com evidências registradas",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p4"
+              ]
+            },
+            {
+              "id": "p6",
+              "title": "Auditar",
+              "kind": "auditar",
+              "status": "done",
+              "detail": "checar citações e limitações antes de concluir",
+              "stop_condition": "etapa concluída ou orçamento/timeout atingido",
+              "dependencies": [
+                "p5"
+              ]
+            }
+          ],
+          "progress": {
+            "done": 6,
+            "total": 6,
+            "skipped": 0,
+            "errors": 0,
+            "percent": 100.0
+          },
+          "budgets": {
+            "buscas": 2.0,
+            "paginas": 3.0,
+            "timeout_s": 30.0,
+            "subs": 1.0,
+            "replans": 1.0,
+            "midia": 8.0,
+            "concorrencia": 3.0,
+            "max_bytes_pagina": 1000000
+          },
+          "used": {
+            "buscas": 1.0,
+            "paginas": 3.0,
+            "replans": 0
+          },
+          "sources": []
+        }
+      },
+      {
+        "type": "ui",
+        "component": "accordion",
+        "props": {
+          "items": [
+            {
+              "title": "Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.",
+              "markdown": "**HIPÓTESE:** Investigar se: Imagens licenciadas da Ponte Estaiada em São Paulo.\n\n**EVIDÊNCIAS:** Nenhuma referência específica atribuída.\n\n**LACUNAS:** Nenhuma evidência específica foi atribuída pelo verificador.\n\n**PRÓXIMOS PASSOS:** Revisar as evidências armazenadas e buscar validação independente.\n\n**CONCLUSÃO:** EM ABERTO; nenhuma conclusão foi estabelecida.\n\n**Testes executados:** não; hipótese e próximos passos são propostas, não resultados."
+            }
+          ]
+        }
+      },
+      {
+        "type": "ui",
+        "component": "filecard",
+        "props": {
+          "title": "Exportar pesquisa",
+          "files": [
+            {
+              "name": "Relatório completo (Markdown)",
+              "url": "/api/research/export?job_id=rj-f90d9d6b46bd&formato=md",
+              "kind": "md",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Dados estruturados (CSV)",
+              "url": "/api/research/export?job_id=rj-f90d9d6b46bd&formato=csv",
+              "kind": "csv",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            },
+            {
+              "name": "Registros completos (JSON)",
+              "url": "/api/research/export?job_id=rj-f90d9d6b46bd&formato=json",
+              "kind": "json",
+              "size": "limite 2 MB",
+              "source": "gerado no servidor",
+              "status": "available"
+            }
+          ],
+          "sources": []
+        }
+      }
+    ]
+  },
+  "provider_metrics": {
+    "bing": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 385.0
+    },
+    "commons": {
+      "chamadas": 1,
+      "ok": 1,
+      "vazio": 0,
+      "resultados": 6,
+      "erros": {},
+      "ms_medio": 825.2
+    },
+    "ddg": {
+      "chamadas": 1,
+      "ok": 0,
+      "vazio": 0,
+      "resultados": 0,
+      "erros": {
+        "circuit_open": 1
+      },
+      "ms_medio": 0.0
+    }
+  },
+  "source_discovery": [
+    {
+      "titulo": "Octávio Frias de Oliveira Bridge, 2014.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg/960px-Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Oct%C3%A1vio_Frias_de_Oliveira_Bridge,_2014.jpg",
+        "mime": "image/jpeg",
+        "largura": 2000,
+        "altura": 1403,
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg/960px-Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Oct%C3%A1vio_Frias_de_Oliveira_Bridge%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC0",
+      "description": "Sao Paulo Bridge",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ponte Estaiada - São Paulo.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg",
+        "mime": "image/jpeg",
+        "largura": 1213,
+        "altura": 750,
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC0",
+      "description": "Marginal Pinheiros, com a Ponte Estaiada em destaque",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ponte Estaiada Octávio Frias de Oliveira (4266763267).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266763267).jpg",
+        "mime": "image/jpeg",
+        "largura": 3264,
+        "altura": 2448,
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC BY 2.0",
+      "description": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independentes de 60º que cruzam o rio Pinheiros, no bairro do Brooklin, sendo a única ponte estaiada do mundo com duas pistas em curva conectadas a um mesmo mastro. Foi inaugurada em 10 de maio de 2008, após três anos de construção, e hoje é considerada uma das principais atrações turísticas da cidade. The Octavio Frias de Oliveira bridge is a cable-stayed bridge in Sã",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ponte Estaiada Octávio Frias de Oliveira (4266768515).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4266768515).jpg",
+        "mime": "image/jpeg",
+        "largura": 2448,
+        "altura": 3264,
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC BY 2.0",
+      "description": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independentes de 60º que cruzam o rio Pinheiros, no bairro do Brooklin, sendo a única ponte estaiada do mundo com duas pistas em curva conectadas a um mesmo mastro. Foi inaugurada em 10 de maio de 2008, após três anos de construção, e hoje é considerada uma das principais atrações turísticas da cidade. The Octavio Frias de Oliveira bridge is a cable-stayed bridge in Sã",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ponte Estaiada Octávio Frias de Oliveira (4267503980).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_(4267503980).jpg",
+        "mime": "image/jpeg",
+        "largura": 3264,
+        "altura": 2448,
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC BY 2.0",
+      "description": "A Ponte Estaiada Octávio Frias de Oliveira é uma ponte estaiada localizada na cidade de São Paulo, estado de São Paulo, Brasil. A ponte, que faz parte do Complexo Viário Real Parque, é formada por duas pistas estaiadas em curvas independentes de 60º que cruzam o rio Pinheiros, no bairro do Brooklin, sendo a única ponte estaiada do mundo com duas pistas em curva conectadas a um mesmo mastro. Foi inaugurada em 10 de maio de 2008, após três anos de construção, e hoje é considerada uma das principais atrações turísticas da cidade. The Octavio Frias de Oliveira bridge is a cable-stayed bridge in Sã",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Ponte estaiada Octavio Frias - Sao Paulo.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "origem": "commons",
+      "tipo": "imagem",
+      "meta": {
+        "pagina": "https://commons.wikimedia.org/wiki/File:Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg",
+        "mime": "image/jpeg",
+        "largura": 2956,
+        "altura": 1948,
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      },
+      "license": "CC BY-SA 3.0",
+      "description": "The Octavio Frias de Oliveira bridge , São Paulo - Brazil. View from the North Tower of the CENU complex (Northeast of the bridge)",
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Google Images",
+      "url": "https://images.google.com.br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 19:24:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Mais de 1 milhão de imagens grátis para você - Pixabay",
+      "url": "https://pixabay.com/pt/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sáb., 17 out. 2026 14:44:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Pinterest - Brasil",
+      "url": "https://br.pinterest.com/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 06:16:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Fotos profissionais gratuitas, imagens profissionais livres ...",
+      "url": "https://www.pexels.com/pt-br/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "sex., 23 out. 2026 13:25:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Imagens, fotos, vetores, vídeos e músicas stock | Shutterstock",
+      "url": "https://www.shutterstock.com/pt/",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 15:07:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    },
+    {
+      "titulo": "Imagens do Google",
+      "url": "https://images.google.com/?hl=pt",
+      "origem": "bing",
+      "tipo": "pagina",
+      "meta": {
+        "publicado_em": "qui., 22 out. 2026 13:12:00 GMT"
+      },
+      "license": null,
+      "description": null,
+      "publisher_url": null,
+      "source_recovery": null
+    }
+  ],
+  "elapsed_s": 2.987
+}
