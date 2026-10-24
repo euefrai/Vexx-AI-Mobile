@@ -72,7 +72,13 @@ def assess(request, source) -> SourceContract:
             import search_orchestrator
             dt=search_orchestrator._data_do_item(source)
             if not dt: reasons.append('INCOMPLETE_EVIDENCE')
-            elif p.get('start_date') and not p['start_date']<=dt.date().isoformat()<=p['end_date']: reasons.append('TEMPORAL_MISMATCH')
+            elif p.get('start_date') and not p.get('start_at'):
+                from zoneinfo import ZoneInfo
+                # Publication instants must be compared in the request's zone.
+                # A source's date-only declaration is already a calendar date.
+                day = (str(published).strip() if re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(published).strip())
+                       else dt.astimezone(ZoneInfo(request.get('timezone') or 'UTC')).date().isoformat())
+                if not p['start_date']<=day<=p['end_date']: reasons.append('TEMPORAL_MISMATCH')
         if published: data['published_at']=str(published)[:48]
         if p.get('start_at'):
             if not published or len(str(published).strip()) <= 10:

@@ -218,6 +218,7 @@ def support_summary(synthesis):
 
 def quantities(text):
     pattern = (r"(?:R\$|US\$|\$|€)?\s*[+-]?\d+(?:[.,]\d+)*(?:\s*(?:%|°C|km/h|"
+               r"(?:kWh|mWh|Wh)/(?:kg|g|cm3|L)|(?:mAh|Ah)/(?:kg|g)|MPa|kPa|Pa|"
                r"kWh|mAh|GHz|MHz|GB|TB|MB|kg|mg|km|cm|mm|W|V|h|"
                r"horas?|minutos?|segundos?|dias?|anos?)(?!\w))?")
     return {re.sub(r"\s+", "", m.group()).casefold() for m in re.finditer(pattern, text, re.I)}

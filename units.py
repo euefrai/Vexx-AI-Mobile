@@ -8,6 +8,10 @@ import math
 
 # dimensão: (fator_para_base, ...)
 _TABELA = {
+    "energia_por_massa": {"wh/kg": 1.0, "kwh/kg": 1000.0, "wh/g": 1000.0, "mwh/g": 1.0},
+    "energia_por_volume": {"wh/l": 1.0, "wh/cm3": 1000.0, "mwh/cm3": 1.0},
+    "capacidade_por_massa": {"mah/g": 1.0, "ah/kg": 1.0, "ah/g": 1000.0},
+    "pressao": {"pa": 1.0, "kpa": 1000.0, "mpa": 1000000.0},
     "potencia": {"w": 1.0, "kw": 1000.0, "mw": 0.001},
     "energia": {"j": 1.0, "wh": 3600.0, "kwh": 3600000.0},
     "armazenamento": {"b": 1.0, "kb": 1024.0, "mb": 1024.0 ** 2,

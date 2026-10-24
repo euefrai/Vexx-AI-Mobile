@@ -332,12 +332,13 @@ def _subconsultas_unicas(objetivo: str, limite: int) -> list:
     request=query_intelligence.analyze(objetivo)
     if request['domain']=='science' and limite>1:
         import search_orchestrator
-        # A bare "métricas" or "lítio" loses the study/entity context. Every
-        # front keeps the original question; translation is discovery, not data.
-        base=re.sub(r'\s+',' ',objetivo).strip()[:180]
-        fronts=[base, base+' métodos amostra métricas', base+' resultados limitações']
-        translated=search_orchestrator.consulta_cientifica(objetivo)
-        if translated.casefold()!=base.casefold(): fronts.append(translated)
+        import research_gaps
+        # Discover the topic first. Methods/results expansion follows observed
+        # gaps instead of spending all page slots on blind initial fronts.
+        base=research_gaps.science_subject(objetivo)
+        fronts=['estudos científicos ' + base]
+        translated=search_orchestrator.consulta_cientifica(base)
+        if translated.casefold()!=base.casefold(): fronts.append('papers ' + translated)
         return list(dict.fromkeys(fronts))[:max(1,limite)]
     brutas = research.dividir_subconsultas(objetivo, limite) or [objetivo[:120]]
     vistas, saida = set(), []
@@ -452,7 +453,9 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
     if not limite_novas:
         return job
     feitos_fu = set(job["usados"].get("follow_ups", []))
-    for inv in job.get("investigacoes") or []:
+    actionable_gaps = any(g.get('status') == 'OPEN' and g.get('query')
+                          for g in job['usados'].get('research_gaps', []))
+    for inv in ([] if actionable_gaps else job.get("investigacoes") or []):
         for q in (inv.get("follow_up") or [])[:2]:
             if novas >= limite_novas:
                 break
@@ -527,6 +530,11 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         feitas.add(("busca", alvo))
         novas += 1
     if novas:
+        for item in reversed(job['usados'].get('controller_decisions', [])):
+            if item.get('action') == 'REPLAN' and not item.get('executed'):
+                item['executed'] = True
+                item['new_searches'] = novas
+                break
         # New evidence invalidates derived conclusions, not completed retrieval.
         analyses = [step["id"] for step in job["plano"] if step["tipo"] == "analisar"]
         for step in job["plano"]:
@@ -902,6 +910,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             return {"titulo": rec.get("titulo") or a["titulo"],
                     "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
                     "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                    "secoes": (rec.get('secoes') or [])[:12],
                     "content_scope": rec.get('content_scope') or 'page_text',
                     "midia": rec.get("midia") or [],
                     "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
@@ -935,6 +944,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto": texto, "final": final,
                 "content_scope": artigo.get("content_scope", "page_text"),
                 "metadados":artigo.get('metadados') or {},
+                "secoes": (artigo.get('secoes') or [])[:12],
                 "imagens":artigo.get('imagens') or [],
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
@@ -943,11 +953,14 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
 
     import search_orchestrator as orch
     subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
-    termos_pedido = orch._termos_correspondencia(subject)
     import query_intelligence
     import search_verticals
     saved_request = (job.get('ajustes') or {}).get('request') or {}
     request = saved_request if saved_request.get('original_request') == job['objetivo'] else query_intelligence.analyze(job['objetivo'])
+    if request['domain'] == 'science':
+        import research_gaps
+        subject = research_gaps.science_subject(subject)
+    termos_pedido = orch._termos_correspondencia(subject)
 
     def _candidato(a, rec):
         return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
@@ -1026,7 +1039,12 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 parts=urllib.parse.urlsplit(value or '')
                 return urllib.parse.urlunsplit((parts.scheme,parts.netloc.rsplit('@',1)[-1],parts.path,'',''))[:500]
             except ValueError: return ''
+        transitions = {'extracted':'READABLE', 'no_readable_content':'FETCHED',
+                       'relevance_rejected':'REJECTED', 'evidence_stored':'EVIDENCE_ELIGIBLE',
+                       'discovery_stored':'DISCOVERED', 'reader_failed':'REJECTED',
+                       'fetch_failed':'BLOCKED' if code in ('bloqueado','rate_limit','rate_limited') else 'REJECTED'}
         emit_meta={'url':public_url(source.get('url')), 'final_url':public_url(rec.get('final')),
+            'source_state': transitions.get(state, 'DISCOVERED'),
             'stage':state,'code':str(code)[:60], 'scope':rec.get('content_scope',''),
             'extracted_chars':len(rec.get('texto') or ''), 'read':bool(rec.get('texto_lido')),
             'published_at':(rec.get('metadados') or {}).get('publicado_em') or source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em',''),
@@ -1179,7 +1197,16 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             fonte['texto_lido']=bool(rec.get('full_text_fetched'))
             fonte['access_state']='read' if rec.get('full_text_fetched') else 'metadata_only'
             fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
+        if not academic and fonte['texto_lido'] and rec.get('secoes'):
+            fonte['scientific_sections'] = academic_research.scientific_sections(rec)
+        doi = str(a.get('doi') or '')
+        if not academic and re.fullmatch(r'10\.\d{4,9}/\S+', doi) and doi.casefold() in texto.casefold():
+            fonte['doi'] = doi[:200]
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
+        if fonte.get('doi'):
+            ev['doi'] = fonte['doi']
+        if fonte.get('scientific_sections'):
+            ev['scientific_sections'] = fonte['scientific_sections']
         read_trace(a,'evidence_stored' if fonte['texto_lido'] else 'discovery_stored',rec)
         for key in ('vertical','structured','publicador'):
             ev[key]=fonte[key]
@@ -1561,6 +1588,7 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
     blocked = bool(provider_code)
     read = [e for e in evidencias if _evidencia_lida(e)]
     incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
+                  or any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', []))
                   or (assisted and not sintese.get('llm'))
                   or job.get('auditoria', {}).get('ok') is False
                   or any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', [])))
@@ -1721,6 +1749,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
         lacunas = _lacunas(job)
         if job.get("investigacoes"):
             lacunas += [q for inv in job["investigacoes"] for q in inv.get("follow_up", [])]
+        lacunas = list(dict.fromkeys(lacunas))[:8]
         zero_gain = bool(job["usados"].get("replans", 0) and
                          (job["usados"].get("adaptive_rounds") or [{}])[-1].get("new_evidence") == 0)
         if lacunas and not zero_gain and not _orcamento_ok(job) and job["plano"] and \
@@ -2350,7 +2379,14 @@ def _consulta_lacuna(job: dict, dimension: str, alvo: str = "") -> str:
 
 
 def _avaliar_rodada(db, job: dict, etapa: dict, evidencias: list) -> dict:
-    current = {e["id"] for e in evidencias if e.get("id")}
+    import research_gaps
+    current = {e["id"] for e in evidencias if e.get("id") and _evidencia_lida(e)}
+    gaps = research_gaps.identify(job, evidencias)
+    job['usados']['research_gaps'] = gaps
+    controller = research_gaps.decision(job, gaps)
+    decisions = job['usados'].setdefault('controller_decisions', [])
+    decisions.append({**controller, 'step_id': etapa['id'], 'executed': False})
+    job['usados']['controller_decisions'] = decisions[-16:]
     previous = set(job["usados"].get("round_evidence_ids", []))
     new = current - previous
     decision = {"step_id": etapa["id"], "new_evidence": len(new),
@@ -2388,7 +2424,9 @@ def _lacunas(job: dict) -> list:
     for q in (job["usados"].get("recuperacao_busca") or []):
         if q and q not in subs_busca and q not in lacunas:
             lacunas.append(q)
-    return lacunas
+    structured = job.get('usados', {}).get('research_gaps', [])
+    queries = [g['query'] for g in structured if g.get('status') == 'OPEN' and g.get('query')]
+    return list(dict.fromkeys(queries + lacunas))[:8]
 
 
 def investigar_contradicoes_job(db, job: dict, evidencias: list) -> list:

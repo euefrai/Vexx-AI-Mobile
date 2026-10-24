@@ -228,6 +228,16 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         source_items.append(source_card(item,item.get('id') in used))
     if source_items:
         candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))
+    gaps = (resumo.get('usados') or {}).get('research_gaps') or []
+    open_gaps = [g for g in gaps[:6] if g.get('status') == 'OPEN']
+    if open_gaps:
+        candidatos.append(('accordion', {'items': [{
+            'title': 'O que ainda falta confirmar (' + str(len(open_gaps)) + ')',
+            'markdown': '\n\n'.join('- ' + _text(g.get('description'), 120)
+                + ': ' + str(int(g.get('observed_publications') or 0)) + '/'
+                + str(int(g.get('required_publications') or 1)) + ' publicação(ões) com o dado extraído.'
+                for g in open_gaps)
+                + '\n\nAusente no trecho recuperado não significa ausente no estudo inteiro.'}]}))
     papers=[item for item in (evidencias or []) if item.get('doi') and item.get('full_text_fetched')]
     if len(papers)>=2 and any(p.get('scientific_sections') for p in papers):
         rows=[]

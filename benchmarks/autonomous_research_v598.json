@@ -1,0 +1,24 @@
+{
+  "scope": "LIVE_EXTERNAL cases; temporary SQLite; inference disabled and separately measured",
+  "cases": [
+    ["solid_state", "deep_research", "Faça uma pesquisa profunda sobre baterias de estado sólido, comparando estudos, métodos e limitações."],
+    ["scientific_comparison", "deep_research", "Compare estudos sobre baterias de sódio e lítio: métodos, condições, métricas e limitações"],
+    ["municipal", "research", "Quais acontecimentos ocorreram em Ubatã, Bahia, nos últimos sete dias?"],
+    ["national", "research", "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas."],
+    ["official", "research", "Documentação oficial Python asyncio TaskGroup: cancelamento"],
+    ["products", "shopping_web", "Pesquise notebooks Lenovo com 16 GB de RAM por até R$ 3.000."],
+    ["images", "research", "Imagens licenciadas da Ponte Estaiada em São Paulo"],
+    ["video", "research", "Vídeo específico NASA James Webb com título e canal"],
+    ["pdf", "research", "PDF científico aberto sobre baterias de íons sódio: resultados e limitações"],
+    ["conflicting", "research", "FDA e EFSA: cafeína para adultos e gestantes, limites e condições"],
+    ["scarce", "research", "Estudos originais sobre microplásticos no Rio de Contas em Ubatã Bahia"],
+    ["multistep", "research", "Tecnologia QUIC e TCP: controle de congestionamento e limitações, fontes oficiais"]
+  ],
+  "controlled_cases": [
+    {"id":"gap_replan", "kind":"FIXTURE", "runner":"tools/bench_autonomous_v598.py"},
+    {"id":"interrupted", "kind":"FIXTURE", "test":"tests/test_research_parallel_reading.py::test_cancellation_does_not_wait_for_blocked_reader"},
+    {"id":"model_unavailable", "kind":"FIXTURE", "test":"tests/test_research_completion_v597.py::test_blocked_writing_preserves_evidence_and_requires_explicit_resume"}
+  ],
+  "real_model": {"kind":"REAL_MODEL", "artifact":"qa-artifacts/v598/operational/model-stream.json", "max_tokens":160, "retry":false},
+  "authenticated_e2e": {"kind":"AUTHENTICATED_E2E", "scope":"six limited questions, existing runtime; not V598 deployment"}
+}

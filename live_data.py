@@ -434,10 +434,18 @@ def clock(text, context, now):
 
 
 def news(text,context,now):
+    import query_intelligence
+    import search_verticals
     deadline=time.monotonic()+14
     t=norm(text)
+    request=query_intelligence.analyze(text,now=now,timezone_name=context.get('timezone','UTC'))
+    parameters=request.get('parameters') or {}
+    location=parameters.get('location') or ''
+    if norm(location) in ('hoje','agora','recentes','ultimas','noticias'):location=''
+    region=parameters.get('region') if location else ''
     match=re.search(r'\b(?:sobre|not[ií]cias (?:de|do|da|em|no|na))\s+(.+)',text,re.I)
     topic=re.sub(r'\b(hoje|agora|recentes|ultimas|últimas)\b','',match[1],flags=re.I).strip(' .?!') if match else ''
+    if location:topic=' '.join(filter(None,(location,region)))
     query=(topic+' notícias').strip() if topic else 'notícias Brasil mundo'
     def fetch():
         try:items=search_providers.buscar_bing_news(query,limite=15,timeout=6)
@@ -446,6 +454,13 @@ def news(text,context,now):
     items=cached(('news',query),180,fetch)
     zone=ZoneInfo(context.get('timezone','UTC'));cutoff=now-timedelta(hours=48)
     if 'hoje' in t:cutoff=now.astimezone(zone).replace(hour=0,minute=0,second=0,microsecond=0)
+    end=now+timedelta(minutes=5)
+    if parameters.get('start_date'):
+        cutoff=datetime.fromisoformat(parameters['start_date']).replace(tzinfo=zone)
+        end=min(end,datetime.fromisoformat(parameters['end_date']).replace(tzinfo=zone)+timedelta(days=1))
+    if parameters.get('start_at'):
+        cutoff=datetime.fromisoformat(parameters['start_at'])
+        end=min(end,datetime.fromisoformat(parameters['end_at']))
     def select(rows):
         selected=[];seen=set()
         for row in rows:
@@ -455,11 +470,14 @@ def news(text,context,now):
                 # RFC 2822 -0000 represents UTC with an unknown original local zone.
                 if date.tzinfo is None and published.strip().endswith('-0000'):date=date.replace(tzinfo=UTC)
                 if date.tzinfo is None:continue
-                if not cutoff<=date<=now+timedelta(minutes=5):continue
+                if not cutoff<=date<=end:continue
                 url=row['url'];parsed=urlsplit(url)
                 if parsed.scheme not in ('https','http') or not parsed.hostname or parsed.username or any(c in url for c in '\r\n<>'):continue
                 if 'especial-publicitario' in url or '/publicidade/' in url:continue
                 if url in seen:continue
+                body=row['titulo']+' '+row.get('trecho','')
+                if location and not search_verticals.contains(location,body):continue
+                if region and not search_verticals.contains(region,body):continue
                 if topic and not set(re.findall(r'\w{3,}',norm(topic))).intersection(re.findall(r'\w{3,}',norm(row['titulo']+' '+row.get('trecho','')))):continue
                 seen.add(url);selected.append((date,row))
             except (ValueError,TypeError,KeyError):continue

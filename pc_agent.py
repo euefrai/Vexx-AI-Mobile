@@ -3309,14 +3309,21 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
         research_agents.salvar_job(db, job, forcar_status=True)
         return "Já há outra pesquisa em andamento; conclua ou cancele antes. 🔍"
     m = _JOB_START_RE.search(texto or "")
-    if m or "inicie uma pesquisa sobre" in t:
+    visual = bool(re.search(r'\b(pesquis\w*|mostr\w*|encontr\w*)\b', t)
+                  and re.search(r'\b(imagens|fotos)\b', t)
+                  and not re.search(r'\b(gerar|criar|desenhar|analise|analisar)\b', t))
+    official_docs = bool(re.search(r'\bpesquis\w*\b', t)
+                         and re.search(r'\bdocumenta[cç][aã]o\s+oficial\b', t))
+    if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:200]
-        req = {"objetivo": objetivo, "conv": conv or "", "modo": ""}
+        req = {"objetivo": objetivo, "conv": conv or "",
+               "modo": "profunda" if re.search(r'pesquisa\s+profunda', t) else "rapida" if visual else ""}
         resp = rjob_start(db, req, owner)
         if resp.get("type") != "research_job":
             return "Não consegui iniciar: " + resp.get("error", "tente de novo") + " 🔍"
-        return (f"Pesquisa profunda iniciada sobre **{objetivo}**. "
-                f"Acompanhe ao vivo no painel acima (id {resp['job_id']}). 🔍")
+        label = 'Pesquisa de imagens' if visual else 'Pesquisa técnica' if official_docs else 'Pesquisa profunda'
+        return (f"{label} iniciada sobre **{objetivo}**. "
+                f"Abra o resultado da pesquisa para acompanhar as fontes (id {resp['job_id']}). 🔍")
     return ""
 
 
