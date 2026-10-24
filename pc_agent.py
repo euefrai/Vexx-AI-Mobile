@@ -3357,7 +3357,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:200]
         req = {"objetivo": objetivo, "conv": conv or "",
-               "modo": "profunda" if re.search(r'pesquisa\s+profunda', t) else "rapida" if visual else ""}
+               "modo": "profunda" if m else "rapida" if visual else ""}
         resp = rjob_start(db, req, owner)
         if resp.get("type") != "research_job":
             return "Não consegui iniciar: " + resp.get("error", "tente de novo") + " 🔍"
@@ -3619,6 +3619,8 @@ def fence_transformacao_visual(db, owner: str, conv: str, texto_usuario: str) ->
 
 def cmd_dados_atuais(db, texto, owner, conv, contexto, message_id=None):
     """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
+    if _JOB_START_RE.search(texto or ''):
+        return None  # Explicit deep research must reach the existing job route.
     analysis=intent.analisar(texto)
     if analysis.get('intencao')=='model3d':return None
     if analysis.get('route')=='GREETING':

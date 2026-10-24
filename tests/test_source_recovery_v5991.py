@@ -152,3 +152,23 @@ def test_publication_and_update_remain_distinct_in_normalized_source():
         {'url':'https://publisher.example/research','titulo':'Research'},'Research')
     assert row['publicado_em']=='2026-10-20'
     assert row['atualizado_em']=='2026-10-24'
+
+
+@pytest.mark.parametrize('text',[
+    'Pesquisa profunda sobre notícias em Fortaleza hoje',
+    'Pesquise a fundo sobre notícias em Faro nos últimos sete dias',
+])
+def test_explicit_deep_news_reaches_job_and_keeps_requested_depth(monkeypatch,text):
+    import pc_agent
+    assert pc_agent.cmd_dados_atuais(None,text,'qa','chat',{}) is None
+    calls=[]
+    def start(db,req,owner):
+        calls.append((req,owner));return {'type':'research_job','job_id':'rj-test'}
+    monkeypatch.setattr(pc_agent,'_cmd_analisar_tabular',lambda *a:'')
+    monkeypatch.setattr(pc_agent,'_cmd_intervencao',lambda *a:'')
+    monkeypatch.setattr(pc_agent,'rjob_start',start)
+    result=pc_agent.cmd_pesquisa(None,text,'qa','chat')
+    assert 'rj-test' in result and len(calls)==1
+    req,owner=calls[0]
+    assert req['modo']=='profunda' and req['conv']=='chat' and owner=='qa'
+    assert 'notícias' in req['objetivo']
