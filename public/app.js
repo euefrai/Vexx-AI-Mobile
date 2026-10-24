@@ -2583,6 +2583,7 @@ messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shif
 async function sendMessage(raw) {
   const value = String(raw || '').trim();
   if (!value) return;
+  if (value === '/admin') { messageInput.value = ''; window.location.assign('/admin'); return; }
   if (!db) { showToast('Cache local indisponível'); return; }
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
   const sentAt = performance.now();

@@ -699,29 +699,8 @@ class AdminLimitsBody(BaseModel):
 
 
 async def admin_uid(request: Request) -> str:
-    """Valida sessão + CSRF (em POST) e retorna uid se for admin ativo."""
-    verify_session(request)
-    if request.method not in ("GET", "HEAD", "OPTIONS"):
-        require_csrf(request)
-    data = sessao_dados(request)
-    uid = str(data.get("uid") or "") or "local"
-    # Owner legado é sempre admin
-    if uid == "local":
-        _rate_limit(request, "admin", uid)
-        return uid
-    if relay.ws is None:
-        raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "auth_whoami", "sid": str(data.get("sid") or "")},
-                                  timeout=10.0)
-    if result.get("type") != "auth_user" or not result.get("user"):
-        raise HTTPException(401, "Sessão inválida")
-    user = result["user"]
-    if user.get("uid") != uid:
-        raise HTTPException(401, "Sessão inválida")
-    if user.get("role") != "admin" or user.get("status") != "ativo":
-        raise HTTPException(403, "Permissão de administrador necessária")
-    _rate_limit(request, "admin", uid)
-    return uid
+    import admin_http
+    return await admin_http.guard(request, __import__("sys").modules[__name__])
 
 
 @app.get("/api/admin/users")
@@ -729,7 +708,7 @@ async def admin_users(request: Request):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_users", "owner": uid}, timeout=20.0)
+    result = await relay.exchange({"type": "admin_users", "owner": uid, "sid": str(sessao_dados(request).get("sid") or "")}, timeout=20.0)
     if result.get("type") != "admin_users":
         raise HTTPException(503, result.get("error", "Indisponível"))
     return result
@@ -741,7 +720,7 @@ async def admin_create_user(request: Request, body: AdminCreateUser):
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
     result = await relay.exchange({
-        "type": "admin_user_create", "owner": uid,
+        "type": "admin_user_create", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
         "username": body.username, "display": body.display,
         "password": body.password, "role": body.role,
         "limites": body.limites,
@@ -756,7 +735,7 @@ async def admin_set_role(request: Request, body: AdminRoleBody):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_user_role", "owner": uid,
+    result = await relay.exchange({"type": "admin_user_role", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "uid": body.uid, "role": body.role}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -768,7 +747,7 @@ async def admin_set_status(request: Request, body: AdminStatusBody):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_user_status", "owner": uid,
+    result = await relay.exchange({"type": "admin_user_status", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "uid": body.uid, "status": body.status,
                                    "dias": body.dias}, timeout=20.0)
     if result.get("type") != "admin_ok":
@@ -781,7 +760,7 @@ async def admin_revoke_sessions(request: Request, body: AdminUidBody):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_sess_revoke", "owner": uid,
+    result = await relay.exchange({"type": "admin_sess_revoke", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "uid": body.uid}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -793,7 +772,7 @@ async def admin_delete_user(request: Request, body: AdminUidBody):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_user_delete", "owner": uid,
+    result = await relay.exchange({"type": "admin_user_delete", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "uid": body.uid}, timeout=30.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -805,7 +784,7 @@ async def admin_set_limits(request: Request, body: AdminLimitsBody):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_user_limits", "owner": uid,
+    result = await relay.exchange({"type": "admin_user_limits", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "uid": body.uid,
                                    "max_ai_hora": body.max_ai_hora,
                                    "max_ia_simult": body.max_ia_simult,
@@ -821,7 +800,7 @@ async def admin_quality_run(request: Request):
     _rate_limit(request, "admin_quality", uid)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "quality_run", "owner": uid}, timeout=120.0)
+    result = await relay.exchange({"type": "quality_run", "owner": uid, "sid": str(sessao_dados(request).get("sid") or "")}, timeout=120.0)
     if result.get("type") != "quality_run":
         raise HTTPException(503, result.get("error", "Benchmark indisponível"))
     return {"run_id": result.get("run_id"), "summary": result.get("summary", {}),
@@ -833,7 +812,7 @@ async def admin_quality_runs(request: Request):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "quality_runs", "owner": uid}, timeout=20.0)
+    result = await relay.exchange({"type": "quality_runs", "owner": uid, "sid": str(sessao_dados(request).get("sid") or "")}, timeout=20.0)
     if result.get("type") != "quality_runs":
         raise HTTPException(503, result.get("error", "Indisponível"))
     return {"runs": result.get("runs", [])}
@@ -844,7 +823,7 @@ async def admin_invites(request: Request):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_invites", "owner": uid}, timeout=20.0)
+    result = await relay.exchange({"type": "admin_invites", "owner": uid, "sid": str(sessao_dados(request).get("sid") or "")}, timeout=20.0)
     if result.get("type") != "admin_invites":
         raise HTTPException(503, "Indisponível")
     return result
@@ -856,7 +835,7 @@ async def admin_create_invite(request: Request, body: AdminInviteCreate):
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
     result = await relay.exchange({
-        "type": "admin_invite_create", "owner": uid,
+        "type": "admin_invite_create", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
         "max_usos": body.max_usos, "dias": body.dias, "nota": body.nota,
     }, timeout=20.0)
     if result.get("type") != "admin_invite":
@@ -871,7 +850,7 @@ async def admin_revoke_invite(request: Request, body: AdminRegDecide):
         raise HTTPException(422, "ID inválido")
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_invite_revoke", "owner": uid,
+    result = await relay.exchange({"type": "admin_invite_revoke", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "id": body.id}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -883,7 +862,7 @@ async def admin_regs(request: Request):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_regs", "owner": uid}, timeout=20.0)
+    result = await relay.exchange({"type": "admin_regs", "owner": uid, "sid": str(sessao_dados(request).get("sid") or "")}, timeout=20.0)
     if result.get("type") != "admin_regs":
         raise HTTPException(503, "Indisponível")
     return result
@@ -894,7 +873,7 @@ async def admin_decide_reg(request: Request, body: AdminRegDecide):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_reg_decide", "owner": uid,
+    result = await relay.exchange({"type": "admin_reg_decide", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "id": body.id, "aprovar": body.aprovar}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -919,7 +898,7 @@ async def admin_config_set(request: Request, body: AdminConfigSet):
         raise HTTPException(422, "Modo inválido")
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_config_set", "owner": uid,
+    result = await relay.exchange({"type": "admin_config_set", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "modo": body.modo, "exigir_aprovacao": body.exigir_aprovacao}, timeout=20.0)
     if result.get("type") != "admin_ok":
         raise HTTPException(422, result.get("error", "Falha"))
@@ -931,7 +910,7 @@ async def admin_audit(request: Request, limite: int = 200):
     uid = await admin_uid(request)
     if relay.ws is None:
         raise HTTPException(503, "Computador offline.")
-    result = await relay.exchange({"type": "admin_audit", "owner": uid,
+    result = await relay.exchange({"type": "admin_audit", "owner": uid, "sid": str(sessao_dados(request).get("sid") or ""),
                                    "limite": limite}, timeout=20.0)
     if result.get("type") != "admin_audit":
         raise HTTPException(503, "Indisponível")
@@ -2432,5 +2411,8 @@ async def three_engine_asset(request: Request):
     return FileResponse(compressed if use_gzip else base, media_type='text/javascript',
                         headers={'Vary':'Accept-Encoding', **({'Content-Encoding':'gzip'} if use_gzip else {})})
 
+
+import admin_http
+admin_http.install(app, __import__("sys").modules[__name__])
 
 app.mount("/", StaticFiles(directory=str(ROOT / "public"), html=True), name="mobile-static")

@@ -26,6 +26,8 @@ def identity(relay, role="production", instance="default"):
         raise ValueError("Relay não pode conter credenciais/parâmetros")
     if role not in ("production", "development"):
         raise ValueError("Papel de runtime inválido")
+    if role == 'production' and instance != 'default':
+        raise ValueError('Produção permite uma única instância por relay')
     if role == "development" and parsed.hostname not in ("localhost", "127.0.0.1", "::1"):
         raise ValueError("Desenvolvimento exige relay local isolado")
     # The DB is deliberately excluded: two DBs must not consume the same relay.
@@ -44,6 +46,20 @@ def private_directory(path):
     else:
         path.chmod(0o700)
     return path
+
+
+def process_created():
+    if os.name != 'nt':
+        return None
+    import ctypes
+    from ctypes import wintypes
+    kernel=ctypes.WinDLL('kernel32',use_last_error=True)
+    kernel.GetCurrentProcess.restype=wintypes.HANDLE
+    kernel.GetProcessTimes.argtypes=[wintypes.HANDLE]+[ctypes.POINTER(wintypes.FILETIME)]*4
+    values=[wintypes.FILETIME() for _ in range(4)]
+    if not kernel.GetProcessTimes(kernel.GetCurrentProcess(),*[ctypes.byref(v) for v in values]):
+        raise ctypes.WinError(ctypes.get_last_error())
+    return ((values[0].dwHighDateTime<<32)|values[0].dwLowDateTime)/10_000_000-11644473600
 
 
 class InstanceLock:
@@ -80,10 +96,12 @@ class Runtime:
         self.directory = private_directory(directory or Path.home()/".julia-mobile"/"runtime"/key)
         self.lock = InstanceLock(self.directory/"instance.lock")
         self.pid = os.getpid()
-        self.started = time.time()
+        self.created = process_created()
+        self.started = self.created if self.created is not None else time.time()
         self.generation = secrets.token_hex(16)
         self.role = role
-        self.channel_id = key
+        self.channel_id = (hashlib.sha256((str(self.directory.resolve())+key).encode()).hexdigest()[:24]
+                           if directory is not None else key)
         self.state = "STARTING"
         self.stop = threading.Event()
         self.finished = threading.Event()
@@ -93,11 +111,11 @@ class Runtime:
         self.listener = None
         self.secret = None
         self.drain = lambda: True
-        self.address = (r"\\.\pipe\vexx-"+key) if os.name == "nt" else str(self.directory/"control.sock")
+        self.address = (r"\\.\pipe\vexx-"+self.channel_id) if os.name == "nt" else str(self.directory/"control.sock")
         self.family = "AF_PIPE" if os.name == "nt" else "AF_UNIX"
 
     def snapshot(self):
-        return {"pid": self.pid, "started": self.started, "generation": self.generation,
+        return {"pid": self.pid, "ppid": os.getppid(), "started": self.started, "process_created":self.created, "generation": self.generation,
                 "role": self.role, "channel_id": self.channel_id, "state": self.state, "uptime_s": round(time.time()-self.started),
                 "active_operations": self.active}
 
@@ -144,12 +162,15 @@ class Runtime:
                     if not channel.poll(2):
                         continue
                     data = json.loads(channel.recv_bytes(4096))
+                    if not isinstance(data,dict):
+                        channel.send_bytes(b'{"error":"invalid_request"}')
+                        continue
                     action = data.get("action", "")
                     expected = hmac.new(self.secret, (nonce+":"+action).encode(), "sha256").hexdigest()
                     if not hmac.compare_digest(str(data.get("proof", "")), expected):
                         channel.send_bytes(b'{"error":"unauthorized"}')
                         continue
-                    if data.get("generation") != self.generation or data.get("pid") != self.pid:
+                    if data.get("generation") != self.generation or data.get("pid") != self.pid or data.get('process_created') != self.created:
                         channel.send_bytes(b'{"error":"stale_process"}')
                         continue
                     if action == "status":
@@ -172,14 +193,15 @@ class Runtime:
         self.transition("STOPPING_NEW_JOBS")
         self.transition("DRAINING")
         deadline = time.monotonic()+timeout
-        while time.monotonic() < deadline:
+        while time.monotonic() < deadline and not self.finished.is_set():
             if self.active == 0 and self.drain():
                 if self.connection is not None:
                     self.connection.close()
                 return
             self.finished.wait(.1)
         # No force exit and no lock release while a worker can still write.
-        self.transition("BLOCKED_DRAIN_TIMEOUT")
+        if not self.finished.is_set():
+            self.transition("BLOCKED_DRAIN_TIMEOUT")
 
     def close(self):
         self.finished.set()
@@ -201,7 +223,7 @@ def command(directory, action="status", timeout=30):
         secret = (directory/"control.key").read_bytes()
         proof = hmac.new(secret, (nonce+":"+action).encode(), "sha256").hexdigest()
         channel.send_bytes(json.dumps({"action":action, "pid":data["pid"],
-                         "generation":data["generation"], "proof":proof, "timeout":timeout}).encode())
+                         "generation":data["generation"], "process_created":data.get('process_created'), "proof":proof, "timeout":timeout}).encode())
         if not channel.poll(3):
             raise TimeoutError("Operação local não respondeu")
         return json.loads(channel.recv_bytes(4096))
@@ -210,7 +232,12 @@ def command(directory, action="status", timeout=30):
 def launch(module):
     """Wrap a pinned backend without editing its source or replacing its jobs."""
     role = os.getenv("VEXX_AGENT_ROLE", "production")
-    runtime = Runtime(os.environ["JULIA_RELAY_URL"], role, os.getenv("VEXX_AGENT_INSTANCE", "default")).start()
+    if role == "development":
+        path=os.getenv('JULIA_SQLITE_PATH','')
+        if not path or Path(path).resolve() == (Path.home()/'.julia-mobile'/'memory.sqlite3').resolve():
+            raise ValueError('Desenvolvimento exige SQLite explícito e isolado')
+    runtime = Runtime(os.environ["JULIA_RELAY_URL"], role, os.getenv("VEXX_AGENT_INSTANCE", "default"),
+                      directory=os.getenv('VEXX_AGENT_RUNTIME_DIR') if role=='development' else None).start()
     module.VEXX_RUNTIME = runtime
     original_connect = module.connect
     original_threading = module.threading
@@ -289,6 +316,17 @@ def launch(module):
         def __iter__(self):
             for raw in self.inner:
                 if runtime.stop.is_set():
+                    try:
+                        request=json.loads(raw)
+                        if not isinstance(request,dict):
+                            continue
+                        request_id=request.get('request_id')
+                        if isinstance(request_id,str):
+                            with module.ENVIO_LOCK:
+                                self.inner.send(json.dumps({'request_id':request_id,'type':'op_error',
+                                    'codigo':'manutencao','error':'PC Agent em manutenção; tente novamente após reconectar.'}))
+                    except (ValueError,TypeError):
+                        pass
                     continue
                 try:
                     with runtime.operation():

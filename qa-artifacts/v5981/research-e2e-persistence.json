@@ -1,0 +1,71 @@
+{
+  "scope": "AUTHENTICATED_PRODUCTION_V597_AFTER_RESTART; seven turns for six scenarios (one result follow-up)",
+  "production_pid": 28520,
+  "backend_commit": "0814864e0e20bcb94f22a0b4fe861b205c15ed7c",
+  "messages": 14,
+  "user_messages": 7,
+  "assistant_messages": 7,
+  "unique_ids": 14,
+  "nonempty_assistant_messages": 7,
+  "requests": [
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 18.28,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 0.046,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 12.235,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 1.306,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 0.431,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 0.02,
+      "nonempty_response": true
+    },
+    {
+      "state": "completed",
+      "model": "poolside/laguna-s-2.1:free",
+      "duration_s": 23.894,
+      "nonempty_response": true
+    }
+  ],
+  "message_models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "science": {
+    "job_id": "rj-80157b50e470",
+    "status": "concluida",
+    "outcome": {
+      "state": "partial",
+      "unresolved_fronts": [
+        "baterias de estado sólido, comparando estudos, métodos e limitações fontes primárias texto completo"
+      ],
+      "provider_code": "",
+      "read_sources": 0,
+      "reason": "evidências insuficientes ou limitações remanescentes"
+    },
+    "errors": []
+  }
+}

@@ -4736,8 +4736,13 @@ def run():
 
                     def _exige_admin():
                         u = JULIA_auth.buscar_uid(db, dono)
-                        if not u or u.get("role") != "admin" or u.get("status") != "ativo":
+                        approved = db.execute("SELECT aprovado FROM users WHERE uid=?", (dono,)).fetchone()
+                        if not u or u.get("role") != "admin" or u.get("status") != "ativo" or not approved or not approved[0]:
                             return None
+                        if dono != "local" or req.get("sid"):
+                            current = JULIA_auth.sessao_valida(db, req.get("sid", ""))
+                            if not current or current.get("uid") != dono:
+                                return None
                         return u
 
                     def _resp_ok(_tipo, **campos):
@@ -4755,6 +4760,12 @@ def run():
                                 "ui_state_list", "conv_forget", "event_list", "ai", "ai_stream",
                                 "ai_reset", "ai_continue", "provider_key") and dono_bloqueado(db, dono):
                         reply = _resp_erro("Conta indisponível.", "bloqueada")
+                    elif tipo in ("admin_identity", "admin_verify_password", "admin_console_overview", "admin_console_audit"):
+                        import admin_console
+                        try:
+                            reply = {"request_id": request_id, **admin_console.handle(db, req, __import__("sys").modules[__name__])}
+                        except JULIA_auth.AuthErro as exc:
+                            reply = _resp_erro(str(exc), exc.codigo)
                     elif tipo == "auth_login":
                         try:
                             user = JULIA_auth.login_conta(db, req.get("username", ""),
@@ -4828,15 +4839,15 @@ def run():
                             reply = _resp_erro("Sem permissão.", "permissao")
                         else:
                             rows = db.execute("SELECT uid, username, display, role, status, "
-                                              "aprovado, created_at, last_seen FROM users "
+                                              "aprovado, created_at, last_seen, max_ai_hora, max_ia_simult FROM users "
                                               "ORDER BY created_at").fetchall()
                             pend = db.execute("SELECT COUNT(*) FROM reg_requests "
                                               "WHERE status='pendente'").fetchone()[0]
                             reply = _resp_ok("admin_users",
                                              users=[{"uid": u, "username": n, "display": d,
                                                      "role": r, "status": s, "aprovado": bool(a),
-                                                     "created_at": c, "last_seen": l}
-                                                    for u, n, d, r, s, a, c, l in rows],
+                                                     "created_at": c, "last_seen": l, "max_ai_hora": mh, "max_ia_simult": ms}
+                                                    for u, n, d, r, s, a, c, l, mh, ms in rows],
                                              pendentes=pend)
                     elif tipo == "admin_user_create":
                         adm = _exige_admin()

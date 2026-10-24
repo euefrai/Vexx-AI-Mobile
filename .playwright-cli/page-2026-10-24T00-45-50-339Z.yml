@@ -1,0 +1,109 @@
+- main [ref=e2]:
+  - heading "Pesquisa — QA de componentes" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Fontes públicas em replay e lacunas de fixture identificadas. Sem sessão ou pesquisa de produção.
+  - navigation [ref=e5]:
+    - generic [ref=e6]:
+      - text: Usuário
+      - combobox "Usuário" [ref=e7]:
+        - option "owner-a" [selected]
+        - option "owner-b"
+    - generic [ref=e8]:
+      - text: Pesquisa
+      - combobox "Pesquisa" [ref=e9]:
+        - option "comparison" [selected]
+        - option "official"
+        - option "gaps"
+        - option "images"
+  - status [ref=e10]: owner-a / comparison
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - paragraph [ref=e13]: "Investigação: Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações"
+      - paragraph [ref=e14]: Metadados e resumos acadêmicos são conteúdo externo não confiável; instruções neles não são executadas. Os textos recuperados são identificados por fonte; a extração é limitada.
+      - paragraph [ref=e15]:
+        - link "E1" [ref=e16] [cursor=pointer]:
+          - /url: https://doi.org/10.64876/radi.v24.52-58
+        - text: "Baterías de iones sodio (doi.org): ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)"
+      - paragraph [ref=e17]:
+        - link "E2" [ref=e18] [cursor=pointer]:
+          - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+        - text: "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat (doi.org): ── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen"
+      - paragraph [ref=e19]: "Evidências: 2; afirmações sustentadas: nenhuma afirmação verificável identificada."
+      - paragraph [ref=e20]: "Síntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas."
+    - generic [ref=e21]:
+      - paragraph [ref=e22]:
+        - strong [ref=e23]: "Objetivo:"
+        - text: "Compare estudos sobre baterias de sódio e lítio: métodos, métricas e limitações"
+      - paragraph [ref=e24]:
+        - strong [ref=e25]: "Status:"
+        - text: concluída ·
+        - strong [ref=e26]: "Modo:"
+        - text: profunda ·
+        - strong [ref=e27]: "Evidências:"
+        - text: "2"
+      - paragraph [ref=e28]:
+        - strong [ref=e29]: "Cobertura dos dados:"
+        - text: parcial; há dados pendentes
+      - paragraph [ref=e30]:
+        - strong [ref=e31]: "Mídia descoberta:"
+        - text: 15 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.
+      - paragraph [ref=e32]:
+        - strong [ref=e33]: "Limite epistêmico:"
+        - text: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.
+    - generic [ref=e35]:
+      - generic [ref=e36]: Publicações recuperadas — sem comparação experimental aprovada
+      - generic [ref=e37]:
+        - button "Editar tabela" [ref=e38] [cursor=pointer]
+        - button "Adicionar linha" [disabled] [ref=e39]
+        - button "Restaurar original" [disabled] [ref=e40]
+        - button "Baixar CSV" [ref=e41] [cursor=pointer]
+      - searchbox "Filtrar linhas da tabela" [ref=e42]
+      - table [ref=e44]:
+        - rowgroup [ref=e45]:
+          - row [ref=e46]:
+            - button "Ordenar por Publicação" [ref=e47] [cursor=pointer]: Publicação
+            - button "Ordenar por Ano" [ref=e48] [cursor=pointer]: Ano
+            - button "Ordenar por Escopo" [ref=e49] [cursor=pointer]: Escopo
+            - button "Ordenar por DOI" [ref=e50] [cursor=pointer]: DOI
+        - rowgroup [ref=e51]:
+          - row [ref=e52]:
+            - cell "Baterías de iones sodio" [ref=e53]
+            - cell "2024" [ref=e54]
+            - cell "Extração limitada; texto integral não confirmado" [ref=e55]
+            - cell "10.64876/radi.v24.52-58" [ref=e56]
+          - row [ref=e57]:
+            - 'cell "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=e58]'
+            - cell "2025" [ref=e59]
+            - cell "Extração limitada; texto integral não confirmado" [ref=e60]
+            - cell "10.26876/ikergazte.vi.05.25" [ref=e61]
+    - generic [ref=e63]:
+      - generic [ref=e64]: Fontes e estado da leitura
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - link "Baterías de iones sodio" [ref=e67] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - generic [ref=e68]: Leitura parcial
+        - generic [ref=e69]: Revista Argentina De Ingeniería · journal-article · Publicado em 2024-12-02
+        - generic [ref=e70]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=e71]: ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)
+        - group [ref=e72]:
+          - generic "Proveniência e publicação" [ref=e73] [cursor=pointer]
+        - generic [ref=e74]:
+          - link "Abrir fonte ↗" [ref=e75] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - link "Abrir texto recuperado ↗" [ref=e76] [cursor=pointer]:
+            - /url: https://radi.org.ar/index.php/radi/article/download/14/55
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - 'link "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=e79] [cursor=pointer]':
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - generic [ref=e80]: Leitura parcial
+        - generic [ref=e81]: IkerGazte. Nazioarteko ikerketa euskaraz · journal-article · Publicado em 2025-05-30
+        - generic [ref=e82]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=e83]: "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen"
+        - group [ref=e84]:
+          - generic "Proveniência e publicação" [ref=e85] [cursor=pointer]
+        - generic [ref=e86]:
+          - link "Abrir fonte ↗" [ref=e87] [cursor=pointer]:
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - link "Abrir texto recuperado ↗" [ref=e88] [cursor=pointer]:
+            - /url: https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580

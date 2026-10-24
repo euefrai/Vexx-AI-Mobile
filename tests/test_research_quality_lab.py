@@ -331,7 +331,10 @@ def test_admin_quality_run_e_runs_pelo_agente_fake():
     with TestClient(server.app) as client:
         with client.websocket_connect('/api/agent/ws',
                                       headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            identity = {'uid':'local','role':'admin','approved':True,'revision':0}
             respostas = {
+                'admin_identity': lambda r: {'type':'admin_identity','identity':identity},
+                'admin_verify_password': lambda r: {'type':'admin_verified','identity':identity} if r.get('legacy_verified') else {'type':'op_error'},
                 'quality_run': lambda r: {'type': 'quality_run', 'run_id': 'qr-1',
                                           'summary': {'precision_at_k': 0.75, 'query_count': 8},
                                           'dataset': {'dataset_id': 'd', 'version': '1',
@@ -342,6 +345,7 @@ def test_admin_quality_run_e_runs_pelo_agente_fake():
             t = threading.Thread(target=_agente_generico, args=(ws, respostas, {}), daemon=True)
             t.start()
             csrf = _login_legacy(client)  # dono local = admin
+            assert client.post('/api/admin/reauth', json={'password':'strong-example-password'}, headers={'X-CSRF-Token':csrf}).status_code == 200
             r = client.post('/api/admin/quality/run', headers={'X-CSRF-Token': csrf})
             assert r.status_code == 200, r.text
             assert r.json()["run_id"] == "qr-1"

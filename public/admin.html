@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VEXX Admin Console</title><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/admin.css"></head>
+<body>
+<main>
+  <header><div><p class="eyebrow">VEXX AI · Administração</p><h1>VEXX Admin Console</h1></div><a href="/">Voltar ao chat</a></header>
+  <p id="notice" role="status" aria-live="polite">Verificando sessão…</p>
+  <section id="authCard" class="card" hidden aria-labelledby="authTitle">
+    <h2 id="authTitle">Confirme seu acesso</h2><p id="authHelp">Use a mesma conta do Vexx AI.</p>
+    <form id="authForm">
+      <div id="usernameRow"><label for="username">Usuário</label><input id="username" autocomplete="username" maxlength="30"></div>
+      <label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" maxlength="128" required>
+      <button id="authSubmit" type="submit">Continuar</button>
+    </form><button id="switchAccount" type="button" hidden>Trocar conta</button>
+  </section>
+  <div id="console" hidden>
+    <div class="toolbar"><p>Autorização temporária · expira em até 10 minutos</p><div><button id="refresh" type="button">Atualizar</button><button id="leave" type="button">Bloquear console</button></div></div>
+    <nav aria-label="Seções administrativas" role="tablist">
+      <button role="tab" id="tab-overview" aria-controls="overview" aria-selected="true" data-tab="overview">Visão geral</button>
+      <button role="tab" id="tab-agents" aria-controls="agents" aria-selected="false" tabindex="-1" data-tab="agents">PC Agents</button>
+      <button role="tab" id="tab-users" aria-controls="users" aria-selected="false" tabindex="-1" data-tab="users">Usuários</button>
+      <button role="tab" id="tab-research" aria-controls="research" aria-selected="false" tabindex="-1" data-tab="research">Pesquisas</button>
+      <button role="tab" id="tab-models" aria-controls="models" aria-selected="false" tabindex="-1" data-tab="models">Modelos e fontes</button>
+      <button role="tab" id="tab-audit" aria-controls="audit" aria-selected="false" tabindex="-1" data-tab="audit">Auditoria</button>
+    </nav>
+    <section id="overview" role="tabpanel" aria-labelledby="tab-overview"></section>
+    <section id="agents" role="tabpanel" aria-labelledby="tab-agents" hidden></section>
+    <section id="users" role="tabpanel" aria-labelledby="tab-users" hidden></section>
+    <section id="research" role="tabpanel" aria-labelledby="tab-research" hidden></section>
+    <section id="models" role="tabpanel" aria-labelledby="tab-models" hidden></section>
+    <section id="audit" role="tabpanel" aria-labelledby="tab-audit" hidden></section>
+  </div>
+</main>
+<dialog id="confirmDialog" aria-labelledby="confirmTitle"><form id="confirmForm">
+  <h2 id="confirmTitle">Confirmar alteração</h2><p id="confirmDescription"></p>
+  <div id="limitFields" hidden><label for="hourLimit">Respostas por hora (0 = sem limite)</label><input id="hourLimit" type="number" min="0" value="0"><label for="parallelLimit">Respostas simultâneas (0 = sem limite)</label><input id="parallelLimit" type="number" min="0" value="0"></div>
+  <label for="confirmName">Digite o username da conta para confirmar</label><input id="confirmName" autocomplete="off" required>
+  <div class="actions"><button id="cancelChange" type="button">Cancelar</button><button id="applyChange" type="submit">Confirmar</button></div>
+</form></dialog>
+<script src="/admin.js" defer></script>
+</body></html>

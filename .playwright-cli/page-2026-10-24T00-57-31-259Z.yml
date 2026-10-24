@@ -1,0 +1,17 @@
+- main [ref=f2e2]:
+  - heading "Pesquisa — QA de componentes" [level=1] [ref=f2e3]
+  - paragraph [ref=f2e4]: Fontes públicas em replay e lacunas de fixture identificadas. Sem sessão ou pesquisa de produção.
+  - navigation [ref=f2e5]:
+    - generic [ref=f2e6]:
+      - text: Usuário
+      - combobox "Usuário" [ref=f2e7]:
+        - option "owner-a" [selected]
+        - option "owner-b"
+    - generic [ref=f2e8]:
+      - text: Pesquisa
+      - combobox "Pesquisa" [ref=f2e9]:
+        - option "comparison" [selected]
+        - option "official"
+        - option "gaps"
+        - option "images"
+  - status

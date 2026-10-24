@@ -412,6 +412,26 @@ def trocar_senha(db, uid: str, atual: str, nova: str) -> None:
     auditar(db, uid, "senha_trocada")
 
 
+def _serialize_admin_change(fn):
+    from functools import wraps
+    @wraps(fn)
+    def wrapped(db, *args, **kwargs):
+        # Serialize the last-admin check and the mutation across processes.
+        if db.in_transaction:
+            db.execute("UPDATE users SET uid=uid WHERE 0")
+        else:
+            db.execute("BEGIN IMMEDIATE")
+        try:
+            result = fn(db, *args, **kwargs)
+            db.commit()
+            return result
+        except BaseException:
+            db.rollback()
+            raise
+    return wrapped
+
+
+@_serialize_admin_change
 def definir_papel(db, ator_uid: str, alvo_uid: str, papel: str) -> None:
     if papel not in ROLES:
         raise AuthErro("Papel inválido.", "papel_invalido")
@@ -422,7 +442,7 @@ def definir_papel(db, ator_uid: str, alvo_uid: str, papel: str) -> None:
         raise AuthErro("Conta não encontrada.", "ausente")
     if alvo["role"] == "admin" and papel != "admin":
         n = db.execute("SELECT COUNT(*) FROM users WHERE role='admin' AND status='ativo' "
-                       "AND uid != ?", (alvo_uid,)).fetchone()[0]
+                       "AND aprovado=1 AND uid != ?", (alvo_uid,)).fetchone()[0]
         if not n:
             raise AuthErro("Não é possível rebaixar o último admin ativo.", "ultimo_admin")
     with db:
@@ -430,6 +450,7 @@ def definir_papel(db, ator_uid: str, alvo_uid: str, papel: str) -> None:
     auditar(db, ator_uid, "papel_alterado", alvo["username"], f"papel={papel}")
 
 
+@_serialize_admin_change
 def definir_status(db, ator_uid: str, alvo_uid: str, status: str, dias: int = 0) -> None:
     """Bloqueio definitivo (dias=0) ou suspensão temporária (dias 1..365, auto-levanta)."""
     if status not in ("ativo", "bloqueado"):
@@ -439,6 +460,10 @@ def definir_status(db, ator_uid: str, alvo_uid: str, status: str, dias: int = 0)
     alvo = buscar_uid(db, alvo_uid)
     if not alvo:
         raise AuthErro("Conta não encontrada.", "ausente")
+    if status == "bloqueado" and alvo["role"] == "admin":
+        remaining = db.execute("SELECT count(*) FROM users WHERE role='admin' AND status='ativo' AND aprovado=1 AND uid!=?", (alvo_uid,)).fetchone()[0]
+        if not remaining:
+            raise AuthErro("Não é possível bloquear o último admin ativo.", "ultimo_admin")
     ate = ""
     if status == "bloqueado" and dias:
         try:
@@ -455,6 +480,7 @@ def definir_status(db, ator_uid: str, alvo_uid: str, status: str, dias: int = 0)
             alvo["username"], f"ate={ate}" if ate else "")
 
 
+@_serialize_admin_change
 def excluir_usuario(db, ator_uid: str, alvo_uid: str) -> int:
     """Apaga a conta E todos os dados do dono. Retorna mensagens apagadas."""
     if alvo_uid == ator_uid:
@@ -464,7 +490,7 @@ def excluir_usuario(db, ator_uid: str, alvo_uid: str) -> int:
         raise AuthErro("Conta não encontrada.", "ausente")
     if alvo["role"] == "admin":
         n = db.execute("SELECT COUNT(*) FROM users WHERE role='admin' AND status='ativo' "
-                       "AND uid != ?", (alvo_uid,)).fetchone()[0]
+                       "AND aprovado=1 AND uid != ?", (alvo_uid,)).fetchone()[0]
         if not n:
             raise AuthErro("Não é possível excluir o último admin ativo.", "ultimo_admin")
     total = 0
@@ -622,7 +648,7 @@ def registrar(db, display: str, username: str, senha: str, convite: str = "") ->
             raise AuthErro("É necessário um código de convite.", "convite_necessario")
         consumir_convite(db, convite)
         precisa_aprovacao = config_get(db, "exigir_aprovacao", "0") == "1"
-        user = criar_usuario(db, u, d, senha, criado_por="convite:" + (convite or "")[:12],
+        user = criar_usuario(db, u, d, senha, criado_por="convite",
                              aprovado=not precisa_aprovacao)
         return {"uid": user["uid"], "username": u, "display": d,
                 "status": "pendente" if precisa_aprovacao else "ativo"}

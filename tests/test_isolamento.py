@@ -112,6 +112,8 @@ def test_dono_legado_vale_mesmo_com_usuarios(tmp_path):
     assert pc_agent.dono_bloqueado(db, 'u-xyz') is True
     # linha local bloqueada pelo admin: bloqueia de verdade
     _ja.vincular_proprietario(db, 'dono', 'Dono', 'senha-forte-1')
+    # Keep another active admin: blocking the last admin is now forbidden.
+    _ja.criar_usuario(db, 'reserva', 'Reserva', 'senha-forte-1', papel='admin', criado_por='t')
     _ja.definir_status(db, 'u-abc123', 'local', 'bloqueado')
     assert pc_agent.dono_bloqueado(db, 'local') is True
     db.close()
