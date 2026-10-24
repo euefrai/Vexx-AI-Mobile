@@ -32,6 +32,7 @@ def main():
                 VEXX_AGENT_RUNTIME_DIR=str(temp/'runtime'),JULIA_RATE_ADMIN_USER='1000')
         from argon2 import PasswordHasher
         os.environ['JULIA_PASSWORD_HASH']=PasswordHasher().hash(PASSWORD)
+        if args.research_live:os.environ['JULIA_AI_FALLBACKS']=''
         import pc_agent,julia_auth,uvicorn,server,agent_runtime
         db=pc_agent.open_db(temp/'qa.sqlite')
         julia_auth.vincular_proprietario(db,'ownerqa','Owner QA',PASSWORD)

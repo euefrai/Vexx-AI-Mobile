@@ -208,3 +208,12 @@ def test_instruction_words_cannot_outrank_a_specific_primary_document():
     info=orch.classificar(query)
     ranked=orch.ranquear(candidates,query,info['classes'],info)
     assert ranked[0]['url'].startswith('https://docs.python.org/')
+
+
+def test_missing_research_evidence_does_not_become_model_facts_or_capture_code_requests():
+    assert pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[],'midia':[]})
+    assert not pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[{'id':'S1'}]})
+    assert not pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[]}, {'produtos':[]})
+    assert not pc_agent._pesquisa_sem_evidencia({})
+    assert not pc_agent.intencao_pesquisa('Encontre o erro neste código Python')
+    assert not pc_agent.intencao_pesquisa('Procure meus arquivos no PC')

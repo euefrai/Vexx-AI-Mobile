@@ -36,11 +36,16 @@ async page => {
   await page.emulateMedia({reducedMotion:'reduce'});
   const transition=await zoom.evaluate(b=>getComputedStyle(b).transitionDuration);
   await page.emulateMedia({reducedMotion:'no-preference'});
+  const metadata=page.locator('.jdui-media-details').first();
+  await metadata.locator('summary').click();
+  if(!(await metadata.evaluate(el=>el.open)))throw Error('Metadata did not open');
   const mediaBefore=await cards.count();await page.reload();
   await page.locator('#loginOverlay').waitFor({state:'hidden'});await cards.first().waitFor({state:'visible'});
   if(await cards.count()!==mediaBefore)throw Error('Gallery changed after reload');
+  if(!(await metadata.evaluate(el=>el.open)))throw Error('Metadata state was not restored');
+  await metadata.locator('summary').click();
   return {scope:'Real authenticated local chat, live retrieved Commons media; no fixture gallery',geometry,scale,
-    next:true,arrows:true,escape:true,focus_restored:true,reload:true,reduced_motion_transition:transition,
+    next:true,arrows:true,escape:true,focus_restored:true,reload:true,metadata_state_persisted:true,reduced_motion_transition:transition,
     loaded_images:await page.locator('.message.ai').last().evaluate(el=>[...el.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth>0).length),
     errors};
 }

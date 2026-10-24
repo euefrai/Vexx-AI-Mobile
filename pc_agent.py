@@ -1419,18 +1419,20 @@ def listar_conversas(db, limite: int = 100, owner=DONO_PADRAO) -> list:
 TERMOS_PESQUISA = ("pesquise", "pesquisar", "busque", "buscar", "google",
                    "últimas notícias", "ultimas noticias", "notícia", "noticia",
                    "fontes", "referências", "referencias", "atualizado", "hoje",
-                   "preço", "preco", "clima", "placar", "resultado", "encontre", "procure",
+                   "preço", "preco", "clima", "placar", "resultado",
                    "documentação oficial", "documentacao oficial")
 
 
 def intencao_pesquisa(texto: str) -> bool:
     t = (texto or "").lower()
-    if not any(k in t for k in TERMOS_PESQUISA):
+    explicit_find=bool(re.search(r'\b(?:encontre|procure)\b',t)) and not re.search(
+        r'\b(?:c[oó]digo|bug|erro|algoritmo|no (?:meu )?pc|arquivos? locais?|meus? arquivos?)\b',t)
+    if not any(k in t for k in TERMOS_PESQUISA) and not explicit_find:
         return False
     # V5.7.3: gatilho genérico ("resultado", "preço", "agora") não basta.
     # Sem assunto não-genérico, a busca só devolveria páginas fora do pedido
     # (incidente 429: clima/investimentos após follow-up de shopping).
-    return research.consulta_tem_assunto(texto)
+    return research.consulta_tem_assunto(re.sub(r'\b(?:encontre|procure)\b',' ',texto,flags=re.I) if explicit_find else texto)
 
 
 APROFUNDADA_TRIGGERS = ("a fundo", "aprofundada", "aprofundado", "relatório completo",
@@ -2983,6 +2985,12 @@ def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
     return texto
 
 
+def _pesquisa_sem_evidencia(extras, shop_res=None):
+    if extras.get('pesquisa_executada') and not extras.get('fontes') and not extras.get('midia') and shop_res is None:
+        return 'Não consegui recuperar fontes pertinentes para responder a essa pesquisa agora. Não vou apresentar informações ou datas como se tivessem sido verificadas. Você pode reformular o assunto ou tentar novamente mais tarde.'
+    return ''
+
+
 def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None) -> str:
     """Texto determinístico quando o LLM falha: fontes reais E ofertas reais.
 
@@ -3932,6 +3940,9 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     # (antes respondia de memória com preços/produtos inventados).
     shop_res = _shopping_executar(db, owner, conv, prep.get("user_text", ""),
                                   extras, messages)
+    without_evidence=_pesquisa_sem_evidencia(extras,shop_res)
+    if without_evidence:
+        return ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner)
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
@@ -4251,6 +4262,16 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             shop_res = _shopping_executar(db, owner, conv,
                                           prep.get("user_text", ""), extras,
                                           messages, progresso=_prog_shop)
+        without_evidence=_pesquisa_sem_evidencia(extras,shop_res)
+        if without_evidence:
+            if sessao.parar.is_set():
+                partial=''.join(partial_chunks)
+                ai_marcar(db,mid,conv,modelo,'cancelled',reply_id=prep['reply_id'],response_text=partial,owner=owner)
+                enviar({'request_id':request_id,'type':'ai_cancelled','reply_id':prep['reply_id'],'partial':partial})
+                return
+            direct=ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner)
+            enviar({'request_id':request_id,'type':'ai_done',**direct})
+            return
         guarda_stream = _GuardaStreamResposta(
             extras.get("fontes"), (shop_res or {}).get("produtos"), mid)
 
