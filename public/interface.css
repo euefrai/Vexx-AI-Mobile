@@ -338,12 +338,14 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .jdui-image-dialog {background:var(--surface-2);padding:16px;max-width:min(96vw,1100px)}
 .jdui-image-controls {display:flex;gap:8px;flex-wrap:wrap}
 .jdui-image-caption {font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.jdui-image-dialog img[hidden],.jdui-image-loading[hidden] {display:none}
+.jdui-image-loading {min-width:min(70vw,640px);min-height:160px;display:grid;place-items:center;color:var(--text-2);font-size:13px}
 .jdui-media-details {border-top:1px solid var(--line);padding-top:4px}
 .jdui-media-details summary {cursor:pointer;min-height:40px;display:flex;align-items:center;font-size:12px;color:var(--text-2)}
 .jdui-media-details[open] {padding-bottom:8px}
 .jdui-media-details summary::after {content:'+';margin-left:auto}
 .jdui-media-details[open] summary::after {content:'−'}
-.jdui-media-grid .jdui-cardacts .jdui-btn {flex:1 1 5.5rem;font-size:12px}
+.jdui-media-grid .jdui-cardacts .jdui-btn {flex:1 1 5.5rem;font-size:12px;padding:8px;white-space:nowrap}
 @media(max-width:480px){.jdui-slot .jdui-srccard{padding:13px}.jdui-slot .jdui-btn,.jdui-image-controls button{min-height:44px}.jdui-media-grid{grid-template-columns:1fr}.jdui-media-grid .jdui-pbody{padding:12px}}
 @media(prefers-reduced-motion:reduce){.jdui-slot .jdui-btn{transition:none}.jdui-slot .jdui-btn:active{transform:none}}
 .provider-top {flex-wrap:wrap}

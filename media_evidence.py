@@ -369,11 +369,14 @@ def relevant_media(items: list[dict], query: str) -> list[dict]:
     """Conservative topic metadata gate, never visual/content verification."""
     normalized = query.casefold()
     wanted = ('image' if re.search(r'\b(imagens?|fotos?|fotografias?)\b', normalized) else
-              'video' if re.search(r'\b(v[ií]deos?)\b', normalized) else '')
+              'video' if re.search(r'\b(v[ií]deos?)\b', normalized) else
+              'document' if re.search(r'\b(pdf|documentos?|manua(?:l|is)|arquivos?)\b', normalized) else '')
     if not wanted:
         return items
     import search_orchestrator as orch
     topic = re.sub(r'\b(imagens?|fotos?|fotografias?|v[ií]deos?|licenciad[oa]s?|p[uú]blic[oa]s?|apresenta[cç][aã]o|mostre|encontre)\b', ' ', query, flags=re.I)
+    if wanted=='document':
+        topic=re.sub(r'\b(pdf|documentos?|manua(?:l|is)|arquivos?|instru[cç][oõ]es)\b',' ',topic,flags=re.I)
     terms = orch._termos_correspondencia(topic)
     out=[]
     for item in items:

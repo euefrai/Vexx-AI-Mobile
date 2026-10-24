@@ -217,3 +217,13 @@ def test_research_delivery_cannot_cross_owner_or_resurrect_deleted_chat(tmp_path
     assert not pc_agent._persistir_resultado_pesquisa(db,job,'local')
     assert db.execute('select count(*) from messages').fetchone()[0]==0
     db.close()
+
+
+def test_document_request_never_gets_unrelated_images_or_generic_manuals():
+    import media_evidence as media
+    records=[{'type':'image','title':'Manual Samsung','url':'https://example.org/manual.jpg'},
+             {'type':'document','title':'Manual Samsung','url':'https://example.org/manual.pdf'},
+             {'type':'document','title':'Raspberry Pi Pico datasheet','url':'https://example.org/pico.pdf'}]
+    result=media.relevant_media(records,'Pesquise o manual público PDF Raspberry Pi Pico')
+    assert len(result)==1 and result[0]['url'].endswith('/pico.pdf')
+    assert result[0]['relevance_state']=='TOPIC_METADATA_MATCH'

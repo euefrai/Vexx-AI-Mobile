@@ -2727,15 +2727,17 @@
             const images=props.items.filter(v=>v.type==='image');let active=images.indexOf(item);
             const full = document.createElement('img');full.referrerPolicy = 'no-referrer';
             const caption=el('p','jdui-image-caption');caption.setAttribute('aria-live','polite');
+            const loading=el('p','jdui-image-loading','Carregando imagem…');loading.setAttribute('role','status');
             const unavailable=el('p','','Imagem indisponível. Consulte a fonte original.');unavailable.hidden=true;
             const origin=el('a','jdui-btn ghost','Página de origem ↗');origin.target='_blank';origin.rel='noopener noreferrer';
             function show(index){
               active=(index+images.length)%images.length;const current=images[active];
-              unavailable.hidden=true;full.hidden=false;full.src=current.url;full.alt=current.alt||current.title;
+              unavailable.hidden=true;loading.hidden=false;full.hidden=true;full.src=current.url;full.alt=current.alt||current.title;
               caption.textContent=(active+1)+' / '+images.length+' · '+current.title;
               origin.href=current.source_url||current.url;
             }
-            full.addEventListener('error',()=>{full.hidden=true;unavailable.hidden=false;});
+            full.addEventListener('load',()=>{if(full.complete&&full.naturalWidth){full.hidden=false;loading.hidden=true;unavailable.hidden=true;}});
+            full.addEventListener('error',()=>{full.hidden=true;loading.hidden=true;unavailable.hidden=false;});
             const controls=el('div','jdui-image-controls');controls.appendChild(close);
             if(images.length>1){
               [['Imagem anterior',-1],['Próxima imagem',1]].forEach(([label,step])=>{
@@ -2743,7 +2745,7 @@
                 button.addEventListener('click',()=>show(active+step));controls.appendChild(button);
               });
             }
-            show(active);dialog.append(controls,full,unavailable,caption,origin);
+            show(active);dialog.append(controls,loading,full,unavailable,caption,origin);
             dialog.addEventListener('close', () => { dialog.remove(); zoom.focus(); }, { once: true });
             document.body.appendChild(dialog); dialog.showModal();
           });
