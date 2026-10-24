@@ -3948,7 +3948,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
                                   extras, messages)
     without_evidence=_pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
     if without_evidence:
-        return ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner)
+        return {**ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner),'digest':True}
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
@@ -4276,7 +4276,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 enviar({'request_id':request_id,'type':'ai_cancelled','reply_id':prep['reply_id'],'partial':partial})
                 return
             direct=ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner)
-            enviar({'request_id':request_id,'type':'ai_done',**direct})
+            enviar({'request_id':request_id,'type':'ai_done',**direct,'digest':True})
             return
         guarda_stream = _GuardaStreamResposta(
             extras.get("fontes"), (shop_res or {}).get("produtos"), mid)
