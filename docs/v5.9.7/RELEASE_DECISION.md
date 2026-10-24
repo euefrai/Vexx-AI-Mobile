@@ -25,4 +25,6 @@ Não foi aprovada síntese científica completa. Busca Ubatã não recuperou art
 
 ## Publicação
 
-Resultado remoto, CI e deploy serão registrados após o push autorizado condicionalmente. Esta seção não afirma publicação antecipada.
+Push fast-forward concluído em main: `0814864e0e20bcb94f22a0b4fe861b205c15ed7c`, confirmado no remoto. CI [40010107263](https://github.com/euefrai/Vexx-AI-Mobile/actions/runs/40010107263): success. Render atualizou automaticamente o relay para `0814864e0e20`; health OK, configured=true, pc_online=true. Assets novos presentes e rotas protegidas retornando 401 sem sessão. Não foi necessário rollback ou reinício do PC Agent. Não foi feito smoke autenticado de chat em produção.
+
+Recibo pós-publicação local: `qa-artifacts/v597/publication-receipt.json`, com SHA inicial/final, CI e verificações HTTP. Metadados pós-publicação ficam locais para evitar novo deploy apenas de documentação. O CI avisou sobre futura manutenção das actions Node e migração da imagem Ubuntu; não houve falha do workflow.

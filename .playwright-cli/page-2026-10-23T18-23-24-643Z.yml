@@ -1,0 +1,228 @@
+- main [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - heading "Explorar a pesquisa" [level=1] [ref=f2e4]
+    - paragraph [ref=f2e5]: QA local · capturas externas reais · eventos em replay · sem sessão do aplicativo
+    - text: Pesquisa
+    - combobox "Pesquisa" [ref=f2e6]:
+      - option "Imagens · Ponte Estaiada"
+      - option "Documentação · TaskGroup"
+      - option "Estudos · sódio e lítio" [selected]
+      - option "Notícias · Ubatã"
+    - generic [ref=f2e7]:
+      - button "Reproduzir eventos capturados" [ref=f2e8] [cursor=pointer]
+      - button "Parar reprodução" [disabled] [ref=f2e9] [cursor=pointer]
+    - status [ref=f2e10]: Captura externa · comparison
+  - generic [ref=f2e11]:
+    - generic [ref=f2e13]:
+      - generic [ref=f2e14]: Publicações recuperadas — sem comparação experimental aprovada
+      - generic [ref=f2e15]:
+        - button "Editar tabela" [ref=f2e16] [cursor=pointer]
+        - button "Adicionar linha" [disabled] [ref=f2e17]
+        - button "Restaurar original" [disabled] [ref=f2e18]
+        - button "Baixar CSV" [ref=f2e19] [cursor=pointer]
+      - searchbox "Filtrar linhas da tabela" [ref=f2e20]
+      - table [ref=f2e22]:
+        - rowgroup [ref=f2e23]:
+          - row [ref=f2e24]:
+            - button "Ordenar por Publicação" [ref=f2e25] [cursor=pointer]: Publicação
+            - button "Ordenar por Ano" [ref=f2e26] [cursor=pointer]: Ano
+            - button "Ordenar por Escopo" [ref=f2e27] [cursor=pointer]: Escopo
+            - button "Ordenar por DOI" [ref=f2e28] [cursor=pointer]: DOI
+        - rowgroup [ref=f2e29]:
+          - row [ref=f2e30]:
+            - cell "Baterías de iones sodio" [ref=f2e31]
+            - cell "2024" [ref=f2e32]
+            - cell "Extração limitada; texto integral não confirmado" [ref=f2e33]
+            - cell "10.64876/radi.v24.52-58" [ref=f2e34]
+          - row [ref=f2e35]:
+            - 'cell "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=f2e36]'
+            - cell "2025" [ref=f2e37]
+            - cell "Extração limitada; texto integral não confirmado" [ref=f2e38]
+            - cell "10.26876/ikergazte.vi.05.25" [ref=f2e39]
+    - generic [ref=f2e41]:
+      - generic [ref=f2e42]: Fontes e estado da leitura
+      - generic [ref=f2e43]:
+        - generic [ref=f2e44]:
+          - link "Baterías de iones sodio" [ref=f2e45] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - generic [ref=f2e46]: Leitura parcial
+        - generic [ref=f2e47]: Revista Argentina De Ingeniería · journal-article · Publicado em 2024-12-02
+        - generic [ref=f2e48]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=f2e49]: ── página 1 ── 52 REVISTA ARGENTINA DE INGENIERÍA | Publicación del Consejo Federal de Decanos de Ingeniería de la República Argentina RESUMEN El creciente interés por soluciones sostenibles y eficientes para el almacenamiento de energía ha destacado el potencial de las baterías de iones sodio (SIB)
+        - group [ref=f2e50]:
+          - generic "Proveniência e publicação" [ref=f2e51] [cursor=pointer]
+        - generic [ref=f2e52]:
+          - link "Abrir fonte ↗" [ref=f2e53] [cursor=pointer]:
+            - /url: https://doi.org/10.64876/radi.v24.52-58
+          - link "Abrir texto recuperado ↗" [ref=f2e54] [cursor=pointer]:
+            - /url: https://radi.org.ar/index.php/radi/article/download/14/55
+      - generic [ref=f2e55]:
+        - generic [ref=f2e56]:
+          - 'link "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat" [ref=f2e57] [cursor=pointer]':
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - generic [ref=f2e58]: Leitura parcial
+        - generic [ref=f2e59]: IkerGazte. Nazioarteko ikerketa euskaraz · journal-article · Publicado em 2025-05-30
+        - generic [ref=f2e60]: Texto de PDF aberto recuperado; extração limitada · Fonte de contexto
+        - generic [ref=f2e61]: "── página 1 ── VI. IKERGAZTE NAZIOARTEKO IKERKETA EUSKARAZ 2025eko maiatzaren 28, 29 eta 30a Bilbo, Euskal Herria ANTOLATZAILEA: Udako Euskal Unibertsitatea (UEU) Aitortu-PartekatuBerdin 4.0 ZIENTZIAK ETA NATURA ZIENTZIAK Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen"
+        - group [ref=f2e62]:
+          - generic "Proveniência e publicação" [ref=f2e63] [cursor=pointer]
+        - generic [ref=f2e64]:
+          - link "Abrir fonte ↗" [ref=f2e65] [cursor=pointer]:
+            - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+          - link "Abrir texto recuperado ↗" [ref=f2e66] [cursor=pointer]:
+            - /url: https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580
+    - generic [ref=f2e68]:
+      - generic [ref=f2e69]: Mídia descoberta (não é evidência)
+      - generic [ref=f2e70]:
+        - generic [ref=f2e71]: Documento
+        - generic [ref=f2e73]:
+          - strong [ref=f2e74]: Baterías de iones sodio
+          - generic [ref=f2e75]: Documento · não é evidência
+          - generic [ref=f2e76]: radi.org.ar · 2024-12-02
+          - generic [ref=f2e77]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e78]: "Direitos: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"
+          - generic [ref=f2e79]:
+            - link "Abrir no site de origem ↗" [ref=f2e80] [cursor=pointer]:
+              - /url: https://radi.org.ar/index.php/radi/article/download/14/55
+            - link "Página de origem" [ref=f2e81] [cursor=pointer]:
+              - /url: https://doi.org/10.64876/radi.v24.52-58
+      - generic [ref=f2e82]:
+        - generic [ref=f2e83]: Documento
+        - generic [ref=f2e85]:
+          - strong [ref=f2e86]: "Elektrolito solido hibrido berriak: sare metal-organiko eta likido ionikoen konbinazioa litio eta sodio baterientzat"
+          - generic [ref=f2e87]: Documento · não é evidência
+          - generic [ref=f2e88]: aldizkariak.ueu.eus · 2025-05-30
+          - generic [ref=f2e89]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e90]: "Direitos: https://creativecommons.org/licenses/by-sa/4.0"
+          - generic [ref=f2e91]:
+            - link "Abrir no site de origem ↗" [ref=f2e92] [cursor=pointer]:
+              - /url: https://aldizkariak.ueu.eus/index.php/ikergazte/article/download/5958/5580
+            - link "Página de origem" [ref=f2e93] [cursor=pointer]:
+              - /url: https://doi.org/10.26876/ikergazte.vi.05.25
+      - generic [ref=f2e94]:
+        - generic [ref=f2e95]: Documento
+        - generic [ref=f2e97]:
+          - strong [ref=f2e98]: ANÁLISE DO DESEMPENHO, VIABILIDADE E IMPACTOS DA TECNOLOGIA DE BATERIAS DE ÍON-LÍTIO NA MOBILIDADE ELÉTRICA URBANA
+          - generic [ref=f2e99]: Documento · não é evidência
+          - generic [ref=f2e100]: recima21.com.br · 2026-06-30
+          - generic [ref=f2e101]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e102]: "Direitos: https://creativecommons.org/licenses/by/4.0"
+          - generic [ref=f2e103]:
+            - link "Abrir no site de origem ↗" [ref=f2e104] [cursor=pointer]:
+              - /url: https://recima21.com.br/recima21/article/download/8499/5611
+            - link "Página de origem" [ref=f2e105] [cursor=pointer]:
+              - /url: https://doi.org/10.47820/recima21.v7i7.8499
+      - generic [ref=f2e106]:
+        - generic [ref=f2e107]: Documento
+        - generic [ref=f2e109]:
+          - strong [ref=f2e110]: Asignación de contratos especiales de operación de litio en el marco de la Estrategia Nacional del Litio
+          - generic [ref=f2e111]: Documento · não é evidência
+          - generic [ref=f2e112]: ojs.uc.cl · 2025-07-15
+          - generic [ref=f2e113]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e114]: "Direitos: https://creativecommons.org/licenses/by-nc-sa/4.0"
+          - generic [ref=f2e115]:
+            - link "Abrir no site de origem ↗" [ref=f2e116] [cursor=pointer]:
+              - /url: https://ojs.uc.cl/index.php/REDAE/article/download/94520/70802
+            - link "Página de origem" [ref=f2e117] [cursor=pointer]:
+              - /url: https://doi.org/10.7764/redad.41.26
+      - generic [ref=f2e118]:
+        - generic [ref=f2e119]: Documento
+        - generic [ref=f2e121]:
+          - strong [ref=f2e122]: contratos especiales de operación de litio (CEOL) en el marco de la nueva estrategia nacional del litio en Chile
+          - generic [ref=f2e123]: Documento · não é evidência
+          - generic [ref=f2e124]: www.revistasmarcialpons.es · 2024-10-02
+          - generic [ref=f2e125]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e126]: "Direitos: https://creativecommons.org/licenses/by-nc-nd/4.0"
+          - generic [ref=f2e127]:
+            - link "Abrir no site de origem ↗" [ref=f2e128] [cursor=pointer]:
+              - /url: https://www.revistasmarcialpons.es/cuadernosdederechoregulatorio/article/download/rojas-los-contratos-especiales-de-operacion-de-litio/3022
+            - link "Página de origem" [ref=f2e129] [cursor=pointer]:
+              - /url: https://doi.org/10.37417/cudere/vol_2_2024_2696
+      - generic [ref=f2e130]:
+        - generic [ref=f2e131]: Documento
+        - generic [ref=f2e133]:
+          - strong [ref=f2e134]: NEW METHODOLOGICAL APPROACH FOR THE ANALYSIS OF SOCIAL ASPECTS IN THE LIFE CYCLE ASSESSMENT OF LITHIUM-ION BATTERIES PRODUCTION
+          - generic [ref=f2e135]: Documento · não é evidência
+          - generic [ref=f2e136]: periodicos.ufc.br · 2025-06-21
+          - generic [ref=f2e137]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e138]:
+            - link "Abrir no site de origem ↗" [ref=f2e139] [cursor=pointer]:
+              - /url: https://periodicos.ufc.br/mercator/article/download/e24012/256349
+            - link "Página de origem" [ref=f2e140] [cursor=pointer]:
+              - /url: https://doi.org/10.36517/rm2025.e24012
+      - generic [ref=f2e141]:
+        - generic [ref=f2e142]: Documento
+        - generic [ref=f2e144]:
+          - strong [ref=f2e145]: "Métricas da informação: o fator de impacto na prática"
+          - generic [ref=f2e146]: Documento · não é evidência
+          - generic [ref=f2e147]: egitaniasciencia.ipg.pt · 2024-07-01
+          - generic [ref=f2e148]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e149]: "Direitos: https://creativecommons.org/licenses/by/4.0"
+          - generic [ref=f2e150]:
+            - link "Abrir no site de origem ↗" [ref=f2e151] [cursor=pointer]:
+              - /url: https://egitaniasciencia.ipg.pt/index.php/revista-egitaniasciencia/article/download/401/345
+            - link "Página de origem" [ref=f2e152] [cursor=pointer]:
+              - /url: https://doi.org/10.46691/8ndstb02
+      - generic [ref=f2e153]:
+        - generic [ref=f2e154]: Documento
+        - generic [ref=f2e156]:
+          - strong [ref=f2e157]: Resenha livro metodos de pesquisa para internet
+          - generic [ref=f2e158]: Documento · não é evidência
+          - generic [ref=f2e159]: periodicos.uninove.br · 2020-09-30
+          - generic [ref=f2e160]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e161]: "Direitos: https://creativecommons.org/licenses/by-nc-sa/4.0"
+          - generic [ref=f2e162]:
+            - link "Abrir no site de origem ↗" [ref=f2e163] [cursor=pointer]:
+              - /url: https://periodicos.uninove.br/eccos/article/viewFile/16759/8486
+            - link "Página de origem" [ref=f2e164] [cursor=pointer]:
+              - /url: https://doi.org/10.5585/eccos.n54.16759
+      - generic [ref=f2e165]:
+        - generic [ref=f2e166]: Documento
+        - generic [ref=f2e168]:
+          - strong [ref=f2e169]: METODOS Y DENSIDADES DE SIEMBRA GARBANZO DE HUMEDAD RESIDUAL EN GUANAJUATO
+          - generic [ref=f2e170]: Documento · não é evidência
+          - generic [ref=f2e171]: revfitotecnia.mx · 2024-04-30
+          - generic [ref=f2e172]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e173]:
+            - link "Abrir no site de origem ↗" [ref=f2e174] [cursor=pointer]:
+              - /url: https://revfitotecnia.mx/index.php/RFM/article/download/1759/1667
+            - link "Página de origem" [ref=f2e175] [cursor=pointer]:
+              - /url: https://doi.org/10.35196/rfm.1988.2.171
+      - generic [ref=f2e176]:
+        - generic [ref=f2e177]: Documento
+        - generic [ref=f2e179]:
+          - strong [ref=f2e180]: COMPARACIÓN DEL ESTADIO FETAL OBTENIDO POSTMORTEM MEDIANTE DOS METODOS ANTROPOMETRICOS. Comparación del estadio fetal obtenido postmortem mediante dos metodos a
+          - generic [ref=f2e181]: Documento · não é evidência
+          - generic [ref=f2e182]: revistas.unc.edu.ar · 2016-03-28
+          - generic [ref=f2e183]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e184]: "Direitos: https://creativecommons.org/licenses/by-nc/4.0"
+          - generic [ref=f2e185]:
+            - link "Abrir no site de origem ↗" [ref=f2e186] [cursor=pointer]:
+              - /url: https://revistas.unc.edu.ar/index.php/anatclinar/article/download/13912/14006
+            - link "Página de origem" [ref=f2e187] [cursor=pointer]:
+              - /url: https://doi.org/10.31051/1852.8023.v3.n1.13912
+      - generic [ref=f2e188]:
+        - generic [ref=f2e189]: Documento
+        - generic [ref=f2e191]:
+          - strong [ref=f2e192]: Eficiencia de metodos de prevencion del cyberbullying
+          - generic [ref=f2e193]: Documento · não é evidência
+          - generic [ref=f2e194]: conocimientoglobal.org · 2024-03-16
+          - generic [ref=f2e195]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e196]:
+            - link "Abrir no site de origem ↗" [ref=f2e197] [cursor=pointer]:
+              - /url: https://conocimientoglobal.org/revista/index.php/cglobal/article/download/345/222
+            - link "Página de origem" [ref=f2e198] [cursor=pointer]:
+              - /url: https://doi.org/10.70165/cglobal.v8i2.345
+      - generic [ref=f2e199]:
+        - generic [ref=f2e200]: Documento
+        - generic [ref=f2e202]:
+          - strong [ref=f2e203]: Metodos y Estrategias Didácticas en el proceso de Enseñanza
+          - generic [ref=f2e204]: Documento · não é evidência
+          - generic [ref=f2e205]: 201.159.223.128 · 2015-07-09
+          - generic [ref=f2e206]: "Acesso: somente link · Análise: não analisado"
+          - generic [ref=f2e207]:
+            - link "Abrir no site de origem ↗" [ref=f2e208] [cursor=pointer]:
+              - /url: http://201.159.223.128/index.php/cienciaunemi/article/download/163/167
+            - link "Página de origem" [ref=f2e209] [cursor=pointer]:
+              - /url: https://doi.org/10.29076/issn.2528-7737vol1iss1.2008pp16-19p
+      - generic [ref=f2e210]: "Mídia descoberta não é prova: imagens não foram analisadas e vídeos não foram assistidos, transcritos ou analisados."

@@ -1,0 +1,36 @@
+{
+  "published_sha": "0814864e0e20bcb94f22a0b4fe861b205c15ed7c",
+  "checked_at": 1792783117.7177691,
+  "scope": "read-only public health, version, protected routes and static assets; no authenticated chat",
+  "/api/health": {
+    "http": 200,
+    "status": "ok",
+    "configured": true
+  },
+  "/api/diag": {
+    "http": 200,
+    "pc_online": true,
+    "commit": "0814864e0e20"
+  },
+  "/api/research/jobs": {
+    "http": 401
+  },
+  "/api/research/stream?job_id=rj-check": {
+    "http": 401
+  },
+  "/api/ui-state": {
+    "http": 401
+  },
+  "/app.js": {
+    "http": 200,
+    "new_research_context_present": true
+  },
+  "/jdui.js": {
+    "http": 200,
+    "stable_source_key_present": true
+  },
+  "/styles.css": {
+    "http": 200,
+    "research_table_width_present": true
+  }
+}

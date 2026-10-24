@@ -1,0 +1,448 @@
+{
+  "id": "science",
+  "route": "research",
+  "question": "Quais estudos científicos com placebo avaliam creatina e força em adultos?",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "answer": "Investigação: Quais estudos científicos com placebo avaliam creatina e força em adultos?\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+  "summary": {
+    "id": "rj-9f32fc938a78",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Quais estudos científicos com placebo avaliam creatina e força em adultos?",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Quais estudos científicos com placebo avaliam creatina e força em adultos?",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Quais estudos científicos com placebo avaliam creatina e força em adultos?",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Quais estudos científicos com placebo avaliam creatina e força em adultos?",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 0,
+    "achados": [
+      {
+        "afirmacao": "Quais estudos científicos com placebo avaliam creatina e força em adultos?.",
+        "estado": "INSUFFICIENT_EVIDENCE",
+        "metodo": "sem-evidencia",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [],
+        "fontes_encontradas": 0,
+        "fontes_lidas": 0,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Quais estudos científicos com placebo avaliam creatina e força em adultos?\n\nEvidências: 0; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.",
+      "llm": false,
+      "references": {}
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "3b42bcd63be6640203ea",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-9f32fc938a78",
+        "statement": "Investigar se: Quais estudos científicos com placebo avaliam creatina e força em adultos?.",
+        "status": "open",
+        "evidence_ids": [],
+        "missing_evidence": [
+          "Nenhuma evidência específica foi atribuída pelo verificador."
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: INSUFFICIENT_EVIDENCE (sem-evidencia). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Quais estudos científicos com placebo avaliam creatina e força em adultos?."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "Nenhuma referência específica atribuída."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma evidência específica foi atribuída pelo verificador."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "quais estudos cientificos com placebo avaliam creatina e forca em adultos": "p1"
+      },
+      "provedores": {
+        "ddg": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 1428
+        }
+      },
+      "failed_source_reads": [
+        "f69e5eec789ee742f006bb11b3c07712c7108cf3060fca61d198119a92efff1f"
+      ],
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 0,
+          "total_evidence": 0,
+          "remaining_searches": 1,
+          "decision": "no_new_evidence"
+        }
+      ],
+      "round_evidence_ids": [],
+      "synthesis_attempted": true,
+      "research_outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quais estudos científicos com placebo avaliam creatina e força em adultos fontes primárias texto completo"
+        ],
+        "reason": "evidências insuficientes ou lacunas remanescentes"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-a0f670f2aa4f",
+        "type": "image",
+        "title": "ISSN 1678-0817 Qualis/DOI",
+        "url": "https://revistaft.com.br/wp-content/uploads/2022/06/cropped-cropped-logo-cinza-com-amarelo-365x114.png",
+        "final_url": "https://revistaft.com.br/wp-content/uploads/2022/06/cropped-cropped-logo-cinza-com-amarelo-365x114.png",
+        "source_title": "EFEITOS DA SUPLEMENTAÇÃO DE CREATINA: FORÇA E HIPERTROFIA MUSCULAR – REVISÃO DE LITERATURA – ISSN 1678-0817 Qualis/DOI",
+        "source_url": "https://revistaft.com.br/efeitos-da-suplementacao-de-creatina-forca-e-hipertrofia-muscular-revisao-de-literatura/",
+        "publisher": "revistaft.com.br",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "ISSN 1678-0817 Qualis/DOI",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-0c99bbae5ae3",
+        "type": "image",
+        "title": "Creatina e Força Muscular: 3 Novos Estudos de 2025",
+        "url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200",
+        "final_url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "images.unsplash.com",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Creatina e Força Muscular: 3 Novos Estudos de 2025",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-ff388806c423",
+        "type": "image",
+        "title": "Creatina e Força Muscular — Evidências de 2025",
+        "url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1571019613454-1cb2f99b2d8b%3Fq%3D80%26w%3D2070&w=3840&q=75",
+        "final_url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1571019613454-1cb2f99b2d8b%3Fq%3D80%26w%3D2070&w=3840&q=75",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "rushperformance.com.br",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Creatina e Força Muscular — Evidências de 2025",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-ffdb83db23fe",
+        "type": "image",
+        "title": "Ashwagandha e Performance Esportiva: O Que a Ciência Diz",
+        "url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1512438248247-f0f2a5a8b7f0%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "final_url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1512438248247-f0f2a5a8b7f0%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "rushperformance.com.br",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Ashwagandha e Performance Esportiva: O Que a Ciência Diz",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-23e19735366a",
+        "type": "image",
+        "title": "Ashwagandha e Performance Esportiva: A Ciência em 2026",
+        "url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544367567-0f2fcb009e0b%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "final_url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544367567-0f2fcb009e0b%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "rushperformance.com.br",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Ashwagandha e Performance Esportiva: A Ciência em 2026",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-e79379fc1d1c",
+        "type": "image",
+        "title": "BCAA vs. Proteína Completa: Quando Vale a Pena",
+        "url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1579126038374-6064e9370f0f%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "final_url": "https://rushperformance.com.br/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1579126038374-6064e9370f0f%3Fq%3D80%26w%3D1200&w=3840&q=75",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "rushperformance.com.br",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "BCAA vs. Proteína Completa: Quando Vale a Pena",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-678f024d70a0",
+        "type": "image",
+        "title": "Rush Performance Instagram",
+        "url": "https://rushperformance.com.br/_next/image?url=%2Frush-performance-instagram-optimized.webp&w=3840&q=75",
+        "final_url": "https://rushperformance.com.br/_next/image?url=%2Frush-performance-instagram-optimized.webp&w=3840&q=75",
+        "source_title": "RUSH Performance",
+        "source_url": "https://rushperformance.com.br/creatina-forca-muscular-estudos-2025",
+        "publisher": "rushperformance.com.br",
+        "date": "2026-06-01",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Rush Performance Instagram",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 7,
+      "images": 7,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 7,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [],
+  "read_sources": 0,
+  "model": "poolside/laguna-s-2.1:free",
+  "model_calls_requested": 0,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T01:24:12.559008+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Quais estudos científicos com placebo avaliam creatina e for': 6 achados.",
+      "meta": {
+        "provedor": "ddg",
+        "falhas": [],
+        "estado": ""
+      }
+    },
+    {
+      "seq": 9,
+      "ts": "2026-10-23T01:24:13.346814+00:00",
+      "agente": "analyst",
+      "tipo": "source_opened",
+      "status": "falha",
+      "descricao": "Ignorada (bloqueado): https://www.researchgate.net/publication/378841630_EFEITOS_D.",
+      "meta": {}
+    },
+    {
+      "seq": 11,
+      "ts": "2026-10-23T01:24:14.545041+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 13,
+      "ts": "2026-10-23T01:24:14.552858+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    }
+  ],
+  "elapsed_s": 3.594
+}

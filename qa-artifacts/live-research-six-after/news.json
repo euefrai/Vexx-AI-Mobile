@@ -1,0 +1,709 @@
+{
+  "id": "news",
+  "route": "research",
+  "question": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+  "claim_support_human_review": null,
+  "ui_tested": false,
+  "answer": "Investigação: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n\n[E1](https://exame.com/inteligencia-artificial/) Inteligência Artificial: ultimas notícias e novidades (exame.com): Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras\n\nEvidências: 1; afirmações sustentadas: 0/4 (critério léxico).\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+  "summary": {
+    "id": "rj-4c6ed7b34b12",
+    "status": "concluida",
+    "modo": "rapida",
+    "objetivo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+    "plano_versao": 2,
+    "etapas": [
+      {
+        "id": "p1",
+        "tipo": "busca",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "localizar fontes relevantes e independentes",
+        "dependencias": [],
+        "prioridade": 10,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resultados únicos; consulta repetida é ignorada"
+      },
+      {
+        "id": "p2",
+        "tipo": "ler",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "abrir a fonte e extrair trecho com proveniência",
+        "dependencias": [
+          "p1"
+        ],
+        "prioridade": 30,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "fonte aberta e trecho extraído/persistido"
+      },
+      {
+        "id": "p3",
+        "tipo": "analisar",
+        "status": "feita",
+        "alvo": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.",
+        "frente": 1,
+        "objetivo_etapa": "registrar evidência sem transformar descoberta em prova",
+        "dependencias": [
+          "p2"
+        ],
+        "prioridade": 50,
+        "priority_reason": "frente 1 do plano explícito",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "achados da etapa disponíveis para verificação"
+      },
+      {
+        "id": "p4",
+        "tipo": "verificar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "classificar cada afirmação contra as fontes lidas",
+        "dependencias": [
+          "p3"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "todo veredito tem estado e referências quando aplicável"
+      },
+      {
+        "id": "p5",
+        "tipo": "sintetizar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "redigir apenas com evidências registradas",
+        "dependencias": [
+          "p4"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "resposta extrativa com citações existentes"
+      },
+      {
+        "id": "p6",
+        "tipo": "auditar",
+        "status": "feita",
+        "alvo": "",
+        "frente": 0,
+        "objetivo_etapa": "checar citações e limitações antes de concluir",
+        "dependencias": [
+          "p5"
+        ],
+        "prioridade": 100,
+        "priority_reason": "etapa final dependente das frentes de pesquisa",
+        "replan_reason": "",
+        "regra_parada": "etapa concluída ou orçamento/timeout atingido",
+        "criterio_conclusao": "nenhuma citação fantasma; limitações explícitas"
+      }
+    ],
+    "evidencias": 1,
+    "achados": [
+      {
+        "afirmacao": "Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-eb88ac75b548",
+            "title": "Inteligência Artificial: ultimas notícias e novidades",
+            "url": "https://exame.com/inteligencia-artificial/",
+            "domain": "exame.com",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 0
+      },
+      {
+        "afirmacao": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-eb88ac75b548",
+            "title": "Inteligência Artificial: ultimas notícias e novidades",
+            "url": "https://exame.com/inteligencia-artificial/",
+            "domain": "exame.com",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 0
+      },
+      {
+        "afirmacao": "veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple).",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-eb88ac75b548",
+            "title": "Inteligência Artificial: ultimas notícias e novidades",
+            "url": "https://exame.com/inteligencia-artificial/",
+            "domain": "exame.com",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 0
+      },
+      {
+        "afirmacao": "Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+        "estado": "UNVERIFIED",
+        "metodo": "lexico-provisorio",
+        "cobertura_lexica": 0.0,
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "supporting_ids": [],
+        "contradicting_ids": [],
+        "fontes": [
+          {
+            "evidence_id": "ev-eb88ac75b548",
+            "title": "Inteligência Artificial: ultimas notícias e novidades",
+            "url": "https://exame.com/inteligencia-artificial/",
+            "domain": "exame.com",
+            "relation": "MENTIONS",
+            "read": true,
+            "access_state": "read",
+            "used_excerpt": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+            "published_at": ""
+          }
+        ],
+        "fontes_encontradas": 1,
+        "fontes_lidas": 1,
+        "fontes_usadas": 0
+      }
+    ],
+    "sintese": {
+      "texto": "Investigação: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.\n\n[E1](https://exame.com/inteligencia-artificial/) Inteligência Artificial: ultimas notícias e novidades (exame.com): Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras\n\nEvidências: 1; afirmações sustentadas: 0/4 (critério léxico).\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.",
+      "llm": false,
+      "references": {
+        "E1": "ev-eb88ac75b548"
+      },
+      "fallback_reason": "provider_or_validation_failure",
+      "fallback_detail": "empty_or_invalid_paragraphs"
+    },
+    "investigacoes": 0,
+    "hipoteses": [
+      {
+        "hypothesis_id": "0091f14ef9f47b40c16d",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4c6ed7b34b12",
+        "statement": "Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas..",
+        "status": "open",
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "missing_evidence": [
+          "data ausente p/ quantidade"
+        ],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Últimas notícias sobre inteligência artificial no Brasil nas últimas 24 horas.."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "data ausente p/ quantidade"
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "44d7eeb2011a7fda1d49",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4c6ed7b34b12",
+        "statement": "Investigar se: Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft",
+        "status": "open",
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "dc692fca6fde327c3812",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4c6ed7b34b12",
+        "statement": "Investigar se: veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple).",
+        "status": "open",
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple)."
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      },
+      {
+        "hypothesis_id": "e87db4422d9dadeb41de",
+        "owner_id": "live-evaluation-only",
+        "job_id": "rj-4c6ed7b34b12",
+        "statement": "Investigar se: Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+        "status": "open",
+        "evidence_ids": [
+          "ev-eb88ac75b548"
+        ],
+        "missing_evidence": [],
+        "next_steps": [
+          "Revisar as evidências armazenadas e buscar validação independente."
+        ],
+        "result_summary": "Resultado do verificador determinístico: UNVERIFIED (lexico-provisorio). Não é diagnóstico nem conclusão causal.",
+        "cadeia": [
+          {
+            "rotulo": "HIPÓTESE",
+            "texto": "Investigar se: Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o"
+          },
+          {
+            "rotulo": "EVIDÊNCIAS",
+            "texto": "1 referência(s) ligada(s) a esta hipótese."
+          },
+          {
+            "rotulo": "LACUNAS",
+            "texto": "Nenhuma lacuna explícita registrada."
+          },
+          {
+            "rotulo": "PRÓXIMOS PASSOS",
+            "texto": "Revisar as evidências armazenadas e buscar validação independente."
+          },
+          {
+            "rotulo": "CONCLUSÃO",
+            "texto": "EM ABERTO; nenhuma conclusão foi estabelecida."
+          }
+        ],
+        "testes_executados": false
+      }
+    ],
+    "proxima_acao": "Revisar resultados e limitações",
+    "auditoria_ok": true,
+    "pendencias": [],
+    "erros": [],
+    "usados": {
+      "buscas": 1,
+      "paginas": 3,
+      "local_context_checked": true,
+      "replans": 0,
+      "consultas_etapas": {
+        "ultimas noticias sobre inteligencia artificial no brasil nas ultimas 24 horas": "p1"
+      },
+      "provedores": {
+        "ddg": {
+          "ok": 1,
+          "falhas": 0,
+          "ms": 1389
+        }
+      },
+      "adaptive_rounds": [
+        {
+          "step_id": "p3",
+          "new_evidence": 1,
+          "total_evidence": 1,
+          "remaining_searches": 1,
+          "decision": "evidence_gained"
+        }
+      ],
+      "round_evidence_ids": [
+        "ev-eb88ac75b548"
+      ],
+      "synthesis_attempted": true,
+      "research_outcome": {
+        "state": "complete",
+        "unresolved_fronts": [],
+        "reason": "frentes com evidência recuperada; verificar limitações dos vereditos"
+      }
+    },
+    "orcamento": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "profundidade": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "replans": 1,
+      "max_bytes_pagina": 2000000
+    },
+    "midia": [
+      {
+        "id": "med-7d76dbe46736",
+        "type": "image",
+        "title": "Notícias do Brasil, Mundo, Economia, Política, Finanças e mais. Entrevistas, Análises e Opinião de quem entende do Assunto! Acesse!",
+        "url": "https://exame.com/images/exame.png",
+        "final_url": "https://exame.com/images/exame.png",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Notícias do Brasil, Mundo, Economia, Política, Finanças e mais. Entrevistas, Análises e Opinião de quem entende do Assunto! Acesse!",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-36d47c057443",
+        "type": "image",
+        "title": "Sylvester Stallone defende IA no cinema e já sugeriu rejuvenescer Rambo com a tecnologia",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/05/rambo-1.webp",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/05/rambo-1.webp",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Sylvester Stallone defende IA no cinema e já sugeriu rejuvenescer Rambo com a tecnologia",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-317b401277a7",
+        "type": "image",
+        "title": "Confiar na IA sem checar pode virar erro de gestão; veja como criar o hábito da verificação",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/08/numan-ali-llNtovr7ctk-unsplash.jpg",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/08/numan-ali-llNtovr7ctk-unsplash.jpg",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Confiar na IA sem checar pode virar erro de gestão; veja como criar o hábito da verificação",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-52f913b4808b",
+        "type": "image",
+        "title": "Bancos dos EUA restringem agentes de IA no acesso a contas de clientes",
+        "url": "https://classic.exame.com/wp-content/uploads/2023/09/JPMorgan.jpg",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2023/09/JPMorgan.jpg",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Bancos dos EUA restringem agentes de IA no acesso a contas de clientes",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-671eaa472f48",
+        "type": "image",
+        "title": "Quanto custa assinar todas as IAs? Veja os preços do ChatGPT, Gemini, Claude e Perplexity",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/10/Logotipos-Chat-GPT-Gemini-Perplexity-e-Claude.png",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/10/Logotipos-Chat-GPT-Gemini-Perplexity-e-Claude.png",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Quanto custa assinar todas as IAs? Veja os preços do ChatGPT, Gemini, Claude e Perplexity",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-0757bdf24a38",
+        "type": "image",
+        "title": "Justiça nega pedidos da OAB-SP para restringir publicidade e novos contratos da Enter",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/10/enter.jpg",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/10/enter.jpg",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Justiça nega pedidos da OAB-SP para restringir publicidade e novos contratos da Enter",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-6a8f59f6ad23",
+        "type": "image",
+        "title": "IA já responde a 40% das dúvidas de consumidores na internet",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/10/showcake0AIA-e-compras-showcake0A.jpg",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/10/showcake0AIA-e-compras-showcake0A.jpg",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "IA já responde a 40% das dúvidas de consumidores na internet",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      },
+      {
+        "id": "med-c6f41caaa279",
+        "type": "image",
+        "title": "Hugging Face lança IA para conversar sobre DNA e analisar mutações",
+        "url": "https://classic.exame.com/wp-content/uploads/2026/04/DNA.jpg",
+        "final_url": "https://classic.exame.com/wp-content/uploads/2026/04/DNA.jpg",
+        "source_title": "Notícias sobre Inteligência artificial | Exame",
+        "source_url": "https://exame.com/noticias-sobre/inteligencia-artificial/",
+        "publisher": "classic.exame.com",
+        "date": "",
+        "rights": "não informado",
+        "access_state": "metadata_only",
+        "validation_state": "unverified",
+        "analysis_state": "not_analyzed",
+        "excerpt": "Hugging Face lança IA para conversar sobre DNA e analisar mutações",
+        "used_excerpt": "",
+        "evidence": false,
+        "provenance": "html metadata"
+      }
+    ],
+    "midia_resumo": {
+      "total": 8,
+      "images": 8,
+      "videos": 0,
+      "documents": 0,
+      "metadata_only": 8,
+      "link_only": 0,
+      "validated": 0,
+      "analyzed": 0,
+      "evidence": 0
+    },
+    "limites": {
+      "buscas": 2,
+      "paginas": 3,
+      "timeout_s": 30,
+      "subs": 1,
+      "replans": 1,
+      "midia": 8,
+      "concorrencia": 3,
+      "max_bytes_pagina": 2000000
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-eb88ac75b548",
+      "fonte_id": "",
+      "url": "https://exame.com/inteligencia-artificial/",
+      "titulo": "Inteligência Artificial: ultimas notícias e novidades",
+      "dominio": "exame.com",
+      "acessado_em": "2026-10-23T01:30:44.003805+00:00",
+      "publicado_em": "",
+      "trecho": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+      "afirmacao": "",
+      "relacao": "cita",
+      "status": "recuperada",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://exame.com/inteligencia-artificial/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      },
+      "structured": [],
+      "publicador": "Exame",
+      "texto_lido": true,
+      "trecho_usado": "Inteligência Artificial Especialistas de IA estão ganhando milhões na Microsoft; veja os salários, segundo vazamento Inteligência Artificial A IA que vai revolucionar seu celular chegou (e não é da Apple). Veja como vai ser Inteligência Artificial A verdade sobre carros autônomos que as montadoras não contam: o controle não é tão simples Inteligência Artificial Até Bill Gates se surpreende com o",
+      "access_state": "read"
+    }
+  ],
+  "read_sources": 1,
+  "model": "poolside/laguna-s-2.1:free",
+  "model_calls_requested": 1,
+  "citation_mechanics": {
+    "citation_count": 0,
+    "stages": {
+      "citation_exists": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "source_retrieved": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      },
+      "passage_found": {
+        "passed": 0,
+        "total": 0,
+        "rate": null
+      }
+    }
+  },
+  "displayed_citation_links": [
+    {
+      "label": "E1",
+      "url": "https://exame.com/inteligencia-artificial/",
+      "source_exists": true,
+      "source_retrieved": true,
+      "claim_supported": null
+    }
+  ],
+  "search_events": [
+    {
+      "seq": 6,
+      "ts": "2026-10-23T01:30:42.073372+00:00",
+      "agente": "search",
+      "tipo": "search_completed",
+      "status": "ok",
+      "descricao": "Busca 'Últimas notícias sobre inteligência artificial no Brasil nas': 6 achados.",
+      "meta": {
+        "provedor": "ddg",
+        "falhas": [],
+        "estado": ""
+      }
+    },
+    {
+      "seq": 10,
+      "ts": "2026-10-23T01:30:44.000033+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    },
+    {
+      "seq": 14,
+      "ts": "2026-10-23T01:30:44.040110+00:00",
+      "agente": "analyst",
+      "tipo": "source_irrelevant",
+      "status": "alerta",
+      "descricao": "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.",
+      "meta": {}
+    }
+  ],
+  "elapsed_s": 6.134
+}

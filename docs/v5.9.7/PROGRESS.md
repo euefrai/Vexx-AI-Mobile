@@ -15,6 +15,7 @@
 - Externo: 12 cenários de busca, só um com fonte lida aceita; zero resposta inteiramente confirmada. Um artigo original e dois PDFs parciais lidos em testes diretos separados. Modelo gratuito fez uma chamada e não aprovou a síntese.
 - Segurança: scan por padrões em 241 arquivos de alterações/artefatos, zero ocorrência; sem valores de credenciais no relatório. Remoto após fetch ainda `ed3b9984b9054bfa97fc3c9f0831bf5b23e225e3`, 0 commits exclusivos remotos e 7 locais antes da documentação.
 - Gate: GO_WITH_LIMITATIONS; publicação e observação registradas em RELEASE_DECISION. Sem migração de dados, mudança de autenticação, protocolo de mensagens, dependências ou configuração Render. Agente de produção preservado.
+- Publicado `0814864e0e20bcb94f22a0b4fe861b205c15ed7c`; CI 40010107263 success; deploy automático observado, health e PC online. Código sem alterações pendentes; somente relatório/recibo pós-publicação atualizados localmente para evitar outro deploy documental. Próximo início normal do PC Agent é necessário para garantir carregamento integral dos módulos Python novos; o processo existente não foi reiniciado.
 
 ## Próximo passo funcional
 
