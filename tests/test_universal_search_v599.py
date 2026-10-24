@@ -212,8 +212,12 @@ def test_instruction_words_cannot_outrank_a_specific_primary_document():
 
 def test_missing_research_evidence_does_not_become_model_facts_or_capture_code_requests():
     assert pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[],'midia':[]})
-    assert not pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[{'id':'S1'}]})
+    assert not pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[{'id':'S1','status':'aberta'}]})
     assert not pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[]}, {'produtos':[]})
     assert not pc_agent._pesquisa_sem_evidencia({})
     assert not pc_agent.intencao_pesquisa('Encontre o erro neste código Python')
     assert not pc_agent.intencao_pesquisa('Procure meus arquivos no PC')
+    found={'id':'S1','titulo':'TaskGroup','url':'https://docs.python.org/3/library/asyncio-task.html',
+           'status':'encontrada','trecho':'TaskGroup documentation','relevante':True,'content_scope':'metadata_only'}
+    limited=pc_agent._pesquisa_sem_evidencia({'pesquisa_executada':True,'fontes':[found]},user_text='TaskGroup')
+    assert 'página não lida' in limited and 'TaskGroup' in limited

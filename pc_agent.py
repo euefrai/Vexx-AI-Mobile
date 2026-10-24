@@ -2985,10 +2985,16 @@ def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
     return texto
 
 
-def _pesquisa_sem_evidencia(extras, shop_res=None):
-    if extras.get('pesquisa_executada') and not extras.get('fontes') and not extras.get('midia') and shop_res is None:
-        return 'Não consegui recuperar fontes pertinentes para responder a essa pesquisa agora. Não vou apresentar informações ou datas como se tivessem sido verificadas. Você pode reformular o assunto ou tentar novamente mais tarde.'
-    return ''
+def _pesquisa_sem_evidencia(extras, shop_res=None, user_text=''):
+    if not extras.get('pesquisa_executada') or shop_res is not None:return ''
+    sources=extras.get('fontes') or []
+    if any(f.get('status')=='aberta' for f in sources):return ''
+    if sources:
+        return _fallback_sem_inferencia(user_text,extras,None)
+    if extras.get('midia'):
+        import research_view
+        return imagens_primeiro(research_view.media_fence(extras['midia']),'Recuperei metadados de mídia, mas não li conteúdos que sustentem uma análise. Consulte a origem indicada.')
+    return 'Não consegui recuperar fontes pertinentes para responder a essa pesquisa agora. Não vou apresentar informações ou datas como se tivessem sido verificadas. Você pode reformular o assunto ou tentar novamente mais tarde.'
 
 
 def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None) -> str:
@@ -3940,7 +3946,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     # (antes respondia de memória com preços/produtos inventados).
     shop_res = _shopping_executar(db, owner, conv, prep.get("user_text", ""),
                                   extras, messages)
-    without_evidence=_pesquisa_sem_evidencia(extras,shop_res)
+    without_evidence=_pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
     if without_evidence:
         return ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner)
     try:
@@ -4262,7 +4268,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             shop_res = _shopping_executar(db, owner, conv,
                                           prep.get("user_text", ""), extras,
                                           messages, progresso=_prog_shop)
-        without_evidence=_pesquisa_sem_evidencia(extras,shop_res)
+        without_evidence=_pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
         if without_evidence:
             if sessao.parar.is_set():
                 partial=''.join(partial_chunks)
