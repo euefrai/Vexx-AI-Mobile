@@ -17,6 +17,12 @@ async page => {
     ['focused-technical', 'Pesquisa profunda sobre como usar asyncio.TaskGroup na documentação oficial.']
   ];
   const index = await page.evaluate(() => Number(sessionStorage.getItem('v5992-next') || 0));
+  if (!Array.isArray(cases) || cases.some(c => !Array.isArray(c) || c.length !== 2
+      || typeof c[0] !== 'string' || !/^[a-z-]{1,32}$/.test(c[0])
+      || typeof c[1] !== 'string' || c[1].length < 5 || c[1].length > 500
+      || (configuration?.version === 'v5993' && !/^(Pesquisa profunda sobre|Pesquise imagens) /.test(c[1])))) {
+    throw Error('Malformed QA cases; refusing to send an unrelated chat message');
+  }
   if (index >= cases.length) return {complete: true};
   const [name, query] = cases[index], errors = [];
   const onError = e => errors.push(e.message);
