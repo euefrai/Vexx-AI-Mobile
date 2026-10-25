@@ -1,0 +1,2832 @@
+{
+  "id": "eva-02",
+  "category": "national_news",
+  "query": "Notícias do Canadá hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.484,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Canadá\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos\" site:veronoticias.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país\" site:www.bbc.com",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 154035
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4636
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5229
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Trump+reduz+tarifas+sobre+Canad%C3%A1+em+meio+a+press%C3%A3o+eleitoral+de+republicanos%22+site%3Averonoticias.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Trump+reduz+tarifas+sobre+Canad%C3%A1+em+meio+a+press%C3%A3o+eleitoral+de+republicanos%22+site%3Averonoticias.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5379
+    },
+    {
+      "url": "https://veronoticias.com",
+      "final": "https://veronoticias.com",
+      "chars": 206558
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5410
+    },
+    {
+      "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "final": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "chars": 149876
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "final": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "chars": 137869
+    },
+    {
+      "url": "https://www.todamateria.com.br/canada/",
+      "final": "https://www.todamateria.com.br/canada/",
+      "chars": 520713
+    },
+    {
+      "url": "https://www.canada.ca/en.html",
+      "error": "rede"
+    },
+    {
+      "url": "https://www.suapesquisa.com/paises/canada/",
+      "final": "https://www.suapesquisa.com/paises/canada/",
+      "chars": 32964
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Canada",
+      "error": "tamanho"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Canadá\" notícias",
+    "domain": "news",
+    "original_request": "Notícias do Canadá hoje",
+    "resolved_request": "Notícias do Canadá hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Canadá"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T02:19:48.115382+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Canadá"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "224a2bb5cea593966d1d",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORVNZZTRoSC1DbFJ2TzRENWh4YWo0anhjVDlHUHliZ0dyR3FIVWVvZUJIS3FCb05BcThBN0RKbzA0SmU3UkNSdjNBbk1Ua3Nsd0hqMWhaRHpaRmZ4ZEFmcXBUZXNxZ3N0MDlDVl9wNDExQ2NFU18ydDkySHB3cWxCcG80MGdoWkpmeUFHcENzQ04zd2JDWDhmUXk0Zkc0TmFWbEJENTh0a1hlV3I1?oc=5",
+        "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos - Vero Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Sat, 24 Oct 2026 23:30:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos Vero Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "b26a0118f9f7137c23bf",
+        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+        "title": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país - BBC",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 10:00:43 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país BBC",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "808ec7b567562e88a67b",
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+        "title": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Fri, 23 Oct 2026 21:24:17 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato UOL Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "4f336ec2ff624fff1b55",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+        "title": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê - G1",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 06:35:51 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê G1",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "ea4f473af80fda7debe3",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+        "title": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá - Agência Brasil",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Sun, 18 Oct 2026 20:54:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá Agência Brasil",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "d03e938cf697903af3d9",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+        "title": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa - Aventuras na História",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Thu, 22 Oct 2026 16:49:59 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa Aventuras na História",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "713d2263abd01e5c3f10",
+        "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+        "title": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "2007-04-24-0309:55:28",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "O é um país quefica na América do Norte e , ficando atrás apenas da Rússia. Possui um terreno acidentado e climas que variam do Temperado, mais ao sul, ao Ártic",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "2f8f6442ba3ea1afc646",
+        "url": "https://www.todamateria.com.br/canada/",
+        "title": "Canadá: mapa, bandeira, cidades, história e turismo",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "2016-07-06T01:52:23+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "mas possuem um governo federal que as coordena e mantêm o soberano britânico como chefe de Estado. Aspectos Geográficos do Canadá O Canadá é tão grande quanto i",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.todamateria.com.br/canada/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "INTENT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "89e642b8486af598755d",
+        "url": "https://www.canada.ca/en.html",
+        "title": "Home - Canada.ca",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "qua., 18 jan. 2023 23:53:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "We are aware of a cyber security vulnerability affecting organizations around the world. As a precaution, some Government of Canada websites and online services",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "rede",
+        "losses": [
+          "FETCH_FAILED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "b082543bc4c77388349f",
+        "url": "https://www.suapesquisa.com/paises/canada/",
+        "title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 21:45:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "e lagos. Dados gerais: : 9.970.610 km² ÁREA : CAPITAL Ottawa : 36,8 milhões de habitantes (estimativa 2026). POPULAÇÃO dólar canadense MOEDA DO CANADÁ: : Canadá",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://www.suapesquisa.com/paises/canada/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "51f526dd003aaed5ec17",
+        "url": "https://en.wikipedia.org/wiki/Canada",
+        "title": "Canada - Wikipedia",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 03:08:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Canada[a] is a country in North America. Its ten provinces and three territories extend from the Atlantic Ocean to the Pacific Ocean and northward into the Arct",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "INTENT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "f9438627f2e00d7c26e5",
+        "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+        "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+        "origin": "publisher-feed",
+        "query": "\"Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos\" site:veronoticias.com",
+        "date": "2026-10-24T20:30:00-03:00",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "os Estados Unidos vão “cuidar de Cuba” depois de resolverem a situação com o Irã. Em comício na Flórida, o presidente disse que pretende enviar o secretário de ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3517,
+        "final_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "publisher_link",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-58e506ae02dc",
+      "type": "image",
+      "title": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+      "url": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8e8ef2482f8c",
+      "type": "image",
+      "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos | Vero Notícias",
+      "url": "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg",
+      "final_url": "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos | Vero Notícias",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3d6b14da21b5",
+      "type": "image",
+      "title": "Jamil Chade",
+      "url": "https://veronoticias.com/wp-content/uploads/2025/06/jamil-chade-3-150x150.jpg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/jamil-chade-3-150x150.jpg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Jamil Chade",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1293abd66269",
+      "type": "image",
+      "title": "Tales Faria",
+      "url": "https://veronoticias.com/wp-content/uploads/2025/06/tales_faria_3-150x150.jpg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/tales_faria_3-150x150.jpg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tales Faria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c8537027d3a8",
+      "type": "image",
+      "title": "Cristiano Romero",
+      "url": "https://veronoticias.com/wp-content/uploads/2025/06/romero_centralizado-150x150.jpg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/romero_centralizado-150x150.jpg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Cristiano Romero",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4f5b817f6665",
+      "type": "image",
+      "title": "Bárbara Fontinele",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/08/barbara_blue-60x60.png",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/barbara_blue-60x60.png",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bárbara Fontinele",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-232935a2d4c6",
+      "type": "image",
+      "title": "Barbara Krysttal",
+      "url": "https://veronoticias.com/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-10-at-14.38.11-60x60.jpeg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-10-at-14.38.11-60x60.jpeg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Barbara Krysttal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-64d75042a86f",
+      "type": "image",
+      "title": "Claudia Maldonado",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/11/Claudia-e1732647775190-60x60.jpg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/11/Claudia-e1732647775190-60x60.jpg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Claudia Maldonado",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-abbde8852311",
+      "type": "image",
+      "title": "Everardo Gueiros",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/08/everaldo_blue-60x60.png",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/everaldo_blue-60x60.png",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Everardo Gueiros",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-167bbde62d40",
+      "type": "image",
+      "title": "Gabriel Elias",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/11/9f828282-0ad1-4181-8c48-ec94c189d1b1-60x60.jpeg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/11/9f828282-0ad1-4181-8c48-ec94c189d1b1-60x60.jpeg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Gabriel Elias",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6ed88aa7fe20",
+      "type": "image",
+      "title": "Guilherme Mota",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/08/guilherme-60x60.jpg",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/guilherme-60x60.jpg",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Guilherme Mota",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cd1c45b74e0d",
+      "type": "image",
+      "title": "Lilian Rocha",
+      "url": "https://veronoticias.com/wp-content/uploads/2024/08/lilian_2-60x60.png",
+      "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/lilian_2-60x60.png",
+      "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "publisher": "veronoticias.com",
+      "date": "2026-10-24T20:30:00-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Lilian Rocha",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "titulo": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2026-10-24T20:30:00-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "2026-10-24T20:30:00-03:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "titulo": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2007-04-24-0309:55:28",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "2007-04-24-0309:55:28"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.todamateria.com.br/canada/",
+      "titulo": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-07-06T01:52:23+0100",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.todamateria.com.br/canada/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2016-07-06T01:52:23+0100"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "\"Canadá\" notícias",
+      "items": [
+        {
+          "titulo": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos - Vero Notícias",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORVNZZTRoSC1DbFJ2TzRENWh4YWo0anhjVDlHUHliZ0dyR3FIVWVvZUJIS3FCb05BcThBN0RKbzA0SmU3UkNSdjNBbk1Ua3Nsd0hqMWhaRHpaRmZ4ZEFmcXBUZXNxZ3N0MDlDVl9wNDExQ2NFU18ydDkySHB3cWxCcG80MGdoWkpmeUFHcENzQ04zd2JDWDhmUXk0Zkc0TmFWbEJENTh0a1hlV3I1?oc=5",
+          "trecho": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos Vero Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Vero Notícias",
+          "publisher_url": "https://veronoticias.com",
+          "meta": {
+            "publicado_em": "Sat, 24 Oct 2026 23:30:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORVNZZTRoSC1DbFJ2TzRENWh4YWo0anhjVDlHUHliZ0dyR3FIVWVvZUJIS3FCb05BcThBN0RKbzA0SmU3UkNSdjNBbk1Ua3Nsd0hqMWhaRHpaRmZ4ZEFmcXBUZXNxZ3N0MDlDVl9wNDExQ2NFU18ydDkySHB3cWxCcG80MGdoWkpmeUFHcENzQ04zd2JDWDhmUXk0Zkc0TmFWbEJENTh0a1hlV3I1?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORVNZZTRoSC1DbFJ2TzRENWh4YWo0anhjVDlHUHliZ0dyR3FIVWVvZUJIS3FCb05BcThBN0RKbzA0SmU3UkNSdjNBbk1Ua3Nsd0hqMWhaRHpaRmZ4ZEFmcXBUZXNxZ3N0MDlDVl9wNDExQ2NFU18ydDkySHB3cWxCcG80MGdoWkpmeUFHcENzQ04zd2JDWDhmUXk0Zkc0TmFWbEJENTh0a1hlV3I1?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 23:30:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país - BBC",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+          "trecho": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país BBC",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "BBC",
+          "publisher_url": "https://www.bbc.com",
+          "meta": {
+            "publicado_em": "Tue, 20 Oct 2026 10:00:43 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 20 Oct 2026 10:00:43 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato - UOL Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+          "trecho": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato UOL Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "UOL Notícias",
+          "publisher_url": "https://noticias.uol.com.br",
+          "meta": {
+            "publicado_em": "Fri, 23 Oct 2026 21:24:17 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Fri, 23 Oct 2026 21:24:17 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê - G1",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+          "trecho": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê G1",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "G1",
+          "publisher_url": "https://g1.globo.com",
+          "meta": {
+            "publicado_em": "Tue, 20 Oct 2026 06:35:51 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 20 Oct 2026 06:35:51 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá - Agência Brasil",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+          "trecho": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá Agência Brasil",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Agência Brasil",
+          "publisher_url": "https://agenciabrasil.ebc.com.br",
+          "meta": {
+            "publicado_em": "Sun, 18 Oct 2026 20:54:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sun, 18 Oct 2026 20:54:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa - Aventuras na História",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+          "trecho": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa Aventuras na História",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Aventuras na História",
+          "publisher_url": "https://aventurasnahistoria.com.br",
+          "meta": {
+            "publicado_em": "Thu, 22 Oct 2026 16:49:59 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "ano": 2026,
+          "desatualizado": false,
+          "relevancia": 11.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 22 Oct 2026 16:49:59 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Canadá\" notícias",
+      "items": [
+        {
+          "titulo": "Canadá – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Canad%C3%A1",
+          "trecho": "A partir do século XVII, aquela parte da Nova França, situada ao longo do rio São Lourenço e das margens norte dos Grandes Lagos, era conhecida como Canadá. Posteriormente, foi dividida em duas colônias britânicas, Canadá Superior e Canadá Inferior, até a união das duas como uma única Província Brit",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 23:13:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Canad%C3%A1",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://pt.wikipedia.org/wiki/Canad%C3%A1",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "qui., 22 out. 2026 23:13:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+          "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+          "trecho": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:45:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://brasilescola.uol.com.br/geografia/canada.htm",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 21:45:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Canadá: mapa, bandeira, cidades, história e turismo",
+          "url": "https://www.todamateria.com.br/canada/",
+          "trecho": "Saiba tudo sobre o Canadá. Descubra as cidades, informações gerais sobre o país, cultura diversificada, motivos para imigrar e aspectos geográficos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:05:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://todamateria.com.br/canada",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.todamateria.com.br/canada/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 20:05:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Home - Canada.ca",
+          "url": "https://www.canada.ca/en.html",
+          "trecho": "We are aware of a cyber security vulnerability affecting organizations around the world. As a precaution, some Government of Canada websites and online services may be temporarily unavailable. We are working to restore services as quickly as possible ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 18 jan. 2023 23:53:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://canada.ca/en.html",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.canada.ca/en.html",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "qua., 18 jan. 2023 23:53:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+          "url": "https://www.suapesquisa.com/paises/canada/",
+          "trecho": "O Canadá é um país localizado na América do Norte, conhecido por sua vasta extensão territorial, que o torna o segundo maior país do mundo em área total, após a Rússia.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:45:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://suapesquisa.com/paises/canada",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.suapesquisa.com/paises/canada/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 21:45:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Canada - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Canada",
+          "trecho": "Canada[a] is a country in North America. Its ten provinces and three territories extend from the Atlantic Ocean to the Pacific Ocean and northward into the Arctic Ocean, making it the second-largest country by total area, with the longest coastline of any country. Its border with the United States i",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 03:08:00 GMT"
+          },
+          "discovery_query": "\"Canadá\" notícias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Canada",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://en.wikipedia.org/wiki/Canada",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 03:08:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos\" site:veronoticias.com",
+      "items": [
+        {
+          "titulo": "Donald Trump - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Donald_Trump",
+          "trecho": "Trump began his second presidency by initiating mass layoffs of federal workers. He imposed tariffs on nearly all countries at the highest level since the Great Depression and signed the One Big Beautiful Bill Act.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 16:52:00 GMT"
+          }
+        },
+        {
+          "titulo": "Donald Trump – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Donald_Trump",
+          "trecho": "Donald Trump Nota: \"Trump\" redireciona para este artigo. Para a família, veja Família Trump. ... Donald John Trump (Nova Iorque, 14 de junho de 1946) é um empresário, personalidade televisiva e político americano. Filiado ao Partido Republicano, é o atual presidente dos Estados Unidos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          }
+        },
+        {
+          "titulo": "Donald Trump | Breaking News & Latest Updates | AP News",
+          "url": "https://apnews.com/hub/donald-trump",
+          "trecho": "Stay informed and read the latest breaking news and updates on Donald Trump from AP News, the definitive source for independent journalism.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 14 set. 2026 08:56:00 GMT"
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país\" site:www.bbc.com",
+      "items": [
+        {
+          "titulo": "Alberta - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alberta",
+          "trecho": "Alberta is a province in Western Canada and is one of the three prairie provinces. Alberta is bordered by British Columbia to its west, Saskatchewan to its east, the Northwest Territories to its north, and the U.S. state of Montana to its south. Alberta and Saskatchewan are the only two landlocked p",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:47:00 GMT"
+          }
+        },
+        {
+          "titulo": "Alberta – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Alberta",
+          "trecho": "Alberta é uma das dez províncias do Canadá. Com uma população estimada de 4 067 175 habitantes em 2016, Alberta é a quarta província mais populosa do país e a mais populosa das três províncias das pradarias.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 23:26:00 GMT"
+          }
+        },
+        {
+          "titulo": "Government of Alberta | Alberta.ca",
+          "url": "https://www.alberta.ca/",
+          "trecho": "Premier of Alberta Danielle Smith was sworn in as Alberta's 19th Premier on October 11, 2022. Find out more.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:42:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "result": {
+        "titulo": "Canadá: mapa, capital, cultura, clima, curiosidades",
+        "texto": "O é um país quefica na América do Norte e , ficando atrás apenas da Rússia. Possui um terreno acidentado e climas que variam do Temperado, mais ao sul, ao Ártico, ao norte. A população canadense é hoje de pouco mais de 37,7 milhões de habitantes, os quais se concentram nas porções meridionais do território. , sendo atualmente uma das maiores economias do planeta. Canadá consiste no segundo maior país do mundo em extensão territorial O país possui elevados indicadores sociais e econômicos Leia também: Quais são os países da América? Anuncie aqui Tópicos deste artigo 1 - Dados gerais do Canadá 2 - História do Canadá 3 - Mapa do Canadá 4 - Geografia do Canadá Clima do Canadá Relevo do Canadá Vegetação do Canadá Hidrografia do Canadá 5 - Demografia do Canadá 6 - Economia do Canadá 7 - Bandeira do Canadá 8 - Cultura do Canadá 9 - Infraestrutura do Canadá 10 - Governo do Canadá 11 - Curiosidades sobre o Canadá Dados gerais do Canadá : Canadá Nome oficial : canadense Gentílico : 9.984.670 km² Extensão territorial : América do Norte Localização : Ottawa Capital do Canadá : Temperado e Ártico Clima : Democracia parlamentar federal sob um sistema de monarquia constitucional Governo : províncias e territórios Divisão administrativa : inglês e francês Idioma : Religiões - Catolicismo: 34,7% - Protestantismo: 13,4% - Anglicanismo: 4% - Outras religiões cristãs: 5,1% - Islamismo: 3,6% - Outras religiões: 7,5% - Não religiosos e ateus: 25,8% - Desconhecido: 5,9% Anuncie aqui : 37.742.000 habitantes (ONU, 2020) População : 4,2 hab/km² Densidade demográfica : 0,929 Índice de Desenvolvimento Humano (IDH) : Dólar canadense (CAD) Moeda : US$ 1,76 trilhões Produto Interno Bruto (PIB) : US$ 46.194,72 PIB per capita : 0,333 Gini : Seis fusos horários Fuso horário - Na capital: Horário Padrão do Leste (EST), GMT -5 horas : Relações exteriores Apec Banco Mundial FMI Nafta OEA G7 G20 ONU História do Canadá , mais precisamente na costa leste do país (ou costa atlântica), por volta do ano 1000. Entretanto, o início do povoamento do território que hoje conhecemos como Canadá aconteceu em épocas muito posteriores. Os primeiros povos estrangeiros que aportaram em terras canadenses foram os vikings , e, no século seguinte, teve início a era colonial canadense, tendo à frente os britânicos. Nesse mesmo período os franceses se estabeleceram no país, formando seus próprios domínios. Algumas das províncias em que se dividia o território canadense se uniram, e deu-se início ao. Os europeus chegaram à região somente no final do século XV processo de independência política do Canadá, em 1867 Com o tempo, outras áreas foram se incorporando a esse território e declarando sua independência com relação à Grã-Bretanha. , um marco para a soberania para o país. Em 1982, o Canadá promulgou a Carta Canadense de Direitos e Liberdades Veja também: Independência dos Estados Unidos – resultado da divergência entre a Inglaterra e as Treze Colônias Mapa do Canadá Localização do Canadá. Geografia do Canadá Com, o Canadá é o segundo maior país em área do mundo, ficando atrás apenas da . O país está localizado na América do Norte e , o que inclui o território do , a oeste. quase 10 milhões de quilômetros quadrados de extensão territorial Rússia faz fronteira com apenas uma nação: os Estados Unidos Alasca Milhares de ilhas compõem o chamado Arquipélago Ártico Canadense, no , ao norte do Canadá continental. Considerando também essas áreas, a linha costeira canadense possui 202.080 km. o ceano Ártico Clima do Canadá Dois tipos climáticos são predominantes no território canadense: o , que ocorre nas terras ao sul, e o (e as suas subclasses), que se distribui pelas porções mais ao norte. Sob influência da e do relevo, as províncias das costas leste e oeste experimentam os maiores índices de precipitação na forma de chuva durante o outono e o inverno. Temperado Ártico maritimidade Anuncie aqui As condições climáticas mais extremas se instalam ao norte, que, além dos invernos rigorosos, registra as temperaturas mais baixas do Canadá e os maiores volumes de precipitação na forma de neve. . Em determinadas áreas, os solos se encontram permanentemente congelados Relevo do Canadá Mais da metade do Canadá está inserida no , abrangendo tanto as terras continentais quanto o conjunto de ilhas ao norte. Trata-se de uma formação muito antiga e intensamente transformada pela ação dos agentes erosivos. Os terrenos centrais são, por conta disso, marcados pelo acidentado, com altitudes médias de 600 metros e as maiores elevações nas bordas. Escudo Canadense relevo , com destaque para as Montanhas Rochosas. Fica nessa região o monte Logan, maior pico do país, com 5959 metros de altitude. A costa oeste é a principal área montanhosa do Canadá Imediatamente a leste da região montanhosa da costa do pacífico, fica a área de Pradaria, marcada pela presença de colinas, ao norte, e terrenos planos, ao sul. Pelo extremo leste do território canadense, estende-se parte da cordilheira dos Apalaches. O oeste canadense é uma região marcada pela presença de montanhas, como a extensão norte das Montanhas Rochosas. Vegetação do Canadá A partir do norte, seguindo o padrão de distribuição climática, a cobertura vegetal do Canadá é formada pelas espécies características de . Estima-se que a área florestada no país seja de 38,7% do seu território (ONU, 2017). T undra , T aiga e Pradaria Hidrografia do Canadá O Canadá possui uma grande quantidade de lagos naturais e rios que formam sua vasta rede de drenagem. , com 4241 km. Seu rio mais extenso é o Mackenzie O país na sua fronteira sudeste com os Estados Unidos. Fica em Déline, nos Territórios do Noroeste, o maior lago do país, o Grande Lago do Urso, com 31.153 km². abriga também parte dos Grandes Lagos Anuncie aqui Leia também: Quais são as partes de um rio? Demografia do Canadá A população canadense é de, com a maior parte se concentrando nas áreas meridionais do país. O território do Canadá pode ser , com de 4,2 hab/km². 37.742.000 habitantes considerado pouco povoado densidade Quase 82% da população se encontram em áreas urbanas., a sudoeste da capital, com 6,2 milhões de habitantes na sua região metropolitana. Ottawa, por sua vez, reúne 1.378.200 habitantes. A cidade mais populosa do Canadá é Toronto Além dos canadenses nascidos no país, a população é formada por diversos grupos, como ingleses, escoceses, franceses, irlandeses, alemães, populações indígenas norte-americanas e outros., sendo o segundo falado principalmente na província de Quebec e por outras comunidades francófonas do leste. Os idiomas inglês e francês são as línguas oficiais do Canadá O Canadá possui , que é de 82,2 anos. uma das mais elevadas expectativas de vida do mundo Economia do Canadá A economia canadense . Dados do Fundo Monetário Internacional (FMI) indicam que o do país a preços correntes é atualmente de 1,76 trilhões de dólares, cuja maior parcela é referente ao setor de serviços em conjunto com a indústria. é a nona maior do mundo PIB O subsolo canadense é , como e , minério de ferro, cobre, zinco, urânio, potássio, entre outros, o que orienta muitos setores econômicos, notadamente a indústria. O país se destaca também na produção de papel e celulose e em equipamentos de transporte. rico em recursos naturais petróleo gás natural O . Apesar da diminuta quantidade de terras agricultáveis (4,7%), o Canadá produz milho, cevada, trigo, soja e colza, além de vegetais voltados ao consumo interno. setor agropecuário é voltado para a pesca, além da produção de carne de porco e leite Anuncie aqui Bandeira do Canadá A bandeira canadense traz estampada a folha de bordo (, no inglês), um dos símbolos do país. maple leaf Cultura do Canadá A canadense é formada por meio da , sobretudo as inglesa, estadunidense e francesa. Predominam, ainda, os costumes e tradições das populações indígenas em determinadas áreas. cultura influência das diversas nacionalidades que se encontram no território do país O Dia do Canadá é celebrado anual",
+        "final": "https://brasilescola.uol.com.br/geografia/canada.htm",
+        "trecho_usado": "O é um país quefica na América do Norte e , ficando atrás apenas da Rússia. Possui um terreno acidentado e climas que variam do Temperado, mais ao sul, ao Ártico, ao norte. A população canadense é hoje de pouco mais de 37,7 milhões de habitantes, os quais se concentram nas porções meridionais do território. , sendo atualmente uma das maiores economias do planeta. Canadá consiste no segundo maior",
+        "metadados": {
+          "titulo": "Canadá: mapa, capital, cultura, clima, curiosidades",
+          "descricao": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+          "canonica": "https://brasilescola.uol.com.br/geografia/canada.htm",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:title": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+            "og:description": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+            "og:site_name": "Brasil Escola",
+            "og:url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "og:image": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg"
+          },
+          "twitter": {
+            "twitter:title": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+            "twitter:description": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+            "twitter:card": "summary_large_image",
+            "twitter:image": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2007-04-24-0309:55:28",
+          "atualizado_em": "2022-11-09-0309:13:23",
+          "autor": "Paloma Guitarrara",
+          "site": "Brasil Escola",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2007-04-24-0309:55:28",
+            "dateModified": "2022-11-09-0309:13:23",
+            "author": {
+              "@type": "Person",
+              "name": "Paloma Guitarrara"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Brasil Escola",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-br-escola.webp",
+                "width": "135",
+                "height": "69"
+              }
+            },
+            "headline": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "description": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O é um país quefica na América do Norte e , ficando atrás apenas da Rússia. Possui um terreno acidentado e climas que variam do Temperado, mais ao sul, ao Ártico, ao norte. A população canadense é hoje de pouco mais de 37,7 milhões de habitantes, os quais se concentram nas porções meridionais do território. , sendo atualmente uma das maiores economias do planeta. Canadá consiste no segundo maior país do mundo em extensão territorial O país possui elevados indicadores sociais e econômicos\nLeia também: Quais são os países da América?\n1 - Dados gerais do Canadá\n9 - Infraestrutura do Canadá\n11 - Curiosidades sobre o Canadá\n: 9.984.670 km² Extensão territorial\n: América do Norte Localização\n: Ottawa Capital do Canadá\n: Temperado e Ártico Clima\n: Democracia parlamentar federal sob um sistema de monarquia constitucional Governo\n: províncias e territórios Divisão administrativa\n: inglês e francês Idioma\n- Outras religiões cristãs: 5,1%\n- Não religiosos e ateus: 25,8%\n: 37.742.000 habitantes (ONU, 2020) População\n: 4,2 hab/km² Densidade demográfica\n: 0,929 Índice de Desenvolvimento Humano (IDH)\n: Dólar canadense (CAD) Moeda\n: US$ 1,76 trilhões Produto Interno Bruto (PIB)\n: US$ 46.194,72 PIB per capita\n: Seis fusos horários Fuso horário\n- Na capital: Horário Padrão do Leste (EST), GMT -5 horas\n, mais precisamente na costa leste do país (ou costa atlântica), por volta do ano 1000. Entretanto, o início do povoamento do território que hoje conhecemos como Canadá aconteceu em épocas muito posteriores. Os primeiros povos estrangeiros que aportaram em terras canadenses foram os vikings\n, e, no século seguinte, teve início a era colonial canadense, tendo à frente os britânicos. Nesse mesmo período os franceses se estabeleceram no país, formando seus próprios domínios. Algumas das províncias em que se dividia o território canadense se uniram, e deu-se início ao. Os europeus chegaram à região somente no final do século XV processo de independência política do Canadá, em 1867\nCom o tempo, outras áreas foram se incorporando a esse território e declarando sua independência com relação à Grã-Bretanha. , um marco para a soberania para o país. Em 1982, o Canadá promulgou a Carta Canadense de Direitos e Liberdades\nVeja também: Independência dos Estados Unidos – resultado da divergência entre a Inglaterra e as Treze Colônias\nCom, o Canadá é o segundo maior país em área do mundo, ficando atrás apenas da . O país está localizado na América do Norte e , o que inclui o território do , a oeste. quase 10 milhões de quilômetros quadrados de extensão territorial Rússia faz fronteira com apenas uma nação: os Estados Unidos Alasca\nMilhares de ilhas compõem o chamado Arquipélago Ártico Canadense, no , ao norte do Canadá continental. Considerando também essas áreas, a linha costeira canadense possui 202.080 km. o ceano Ártico\nDois tipos climáticos são predominantes no território canadense: o , que ocorre nas terras ao sul, e o (e as suas subclasses), que se distribui pelas porções mais ao norte. Sob influência da e do relevo, as províncias das costas leste e oeste experimentam os maiores índices de precipitação na forma de chuva durante o outono e o inverno. Temperado Ártico maritimidade\nAs condições climáticas mais extremas se instalam ao norte, que, além dos invernos rigorosos, registra as temperaturas mais baixas do Canadá e os maiores volumes de precipitação na forma de neve. . Em determinadas áreas, os solos se encontram permanentemente congelados\nMais da metade do Canadá está inserida no , abrangendo tanto as terras continentais quanto o conjunto de ilhas ao norte. Trata-se de uma formação muito antiga e intensamente transformada pela ação dos agentes erosivos. Os terrenos centrais são, por conta disso, marcados pelo acidentado, com altitudes médias de 600 metros e as maiores elevações nas bordas. Escudo Canadense relevo\n, com destaque para as Montanhas Rochosas. Fica nessa região o monte Logan, maior pico do país, com 5959 metros de altitude. A costa oeste é"
+          },
+          {
+            "titulo": "Curiosidades sobre o Canadá",
+            "texto": "A maior população de ursos-polares do mundo vive no Ártico canadense.\nO nome Canadá é proveniente da palavra , originária do povo indígena iroquês e que significa “povoado” ou “vila”. kanata\nO país abriga 20% dos reservatórios de água doce do mundo e 7% da água renovável do planeta.\nMontreal é a segunda cidade do mundo em número de falantes de francês. A primeira é Paris, capital da França.\nO hóquei é um dos principais esportes praticados no país.\nO Canadá é o país que concentra o maior número de ursos-polares do mundo.\nPor Paloma Guitarrara Professora de Geografia"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg",
+          "https://sb.scorecardresearch.com/p?c1=2&amp;c2=6036356&amp;cv=4.4.0&amp;cj=1",
+          "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+          "https://brasilescola.uol.com.br/assets/images/icons-webp/selo-politica-ia.webp",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/fb-white.svg",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/x-branco.svg",
+          "https://brasilescola.uol.com.br/assets/images/icons-svg/wpp-branco.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-b87807d5af25",
+            "type": "image",
+            "title": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse paí",
+            "url": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg",
+            "final_url": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "s5.static.brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-73eec5d5e5ac",
+            "type": "image",
+            "title": "Brasil Escola",
+            "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil Escola",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-288d21f4049a",
+            "type": "image",
+            "title": "Imprimir",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imprimir",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2d8ccfc8347f",
+            "type": "image",
+            "title": "Escutar texto",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Escutar texto",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2ae2d2bf30c6",
+            "type": "image",
+            "title": "Compartilhar",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Compartilhar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-19cd9c565dad",
+            "type": "image",
+            "title": "Política de IA",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-webp/selo-politica-ia.webp",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-webp/selo-politica-ia.webp",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Política de IA",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c95766303de4",
+            "type": "image",
+            "title": "Facebook",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/fb-white.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/fb-white.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Facebook",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-00d0b51075a9",
+            "type": "image",
+            "title": "X",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/x-branco.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/x-branco.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "X",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0e9c64723046",
+            "type": "image",
+            "title": "WhatsApp",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/wpp-branco.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/wpp-branco.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WhatsApp",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c0eef099a7a7",
+            "type": "image",
+            "title": "Copiar Link",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/copy-link.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/copy-link.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Copiar Link",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-55970420ace4",
+            "type": "image",
+            "title": "Play",
+            "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio-verde.svg",
+            "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio-verde.svg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Play",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c63ec148d6bc",
+            "type": "image",
+            "title": "Localização do Canadá.",
+            "url": "https://s1.static.brasilescola.uol.com.br/be/2021/04/canada-mapa.jpg",
+            "final_url": "https://s1.static.brasilescola.uol.com.br/be/2021/04/canada-mapa.jpg",
+            "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+            "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "publisher": "s1.static.brasilescola.uol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Localização do Canadá.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+      "result": {
+        "titulo": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+        "texto": "Mundo Trump diz que EUA vão “cuidar de Cuba” após Irã e cita Rubio para fechar acordo Por Thiago Cabral 24/10/2026 - 15h20 Foto: Official White House Donald Trump afirmou nesta sexta-feira (23) que os Estados Unidos vão “cuidar de Cuba” depois de resolverem a situação com o Irã. Em comício na Flórida, o presidente disse que pretende enviar o secretário de Estado, Marco Rubio, para “finalizar o acordo”. Trump já havia afirmado em setembro que Washington e Havana poderiam chegar a um entendimento e descartou, naquele momento, a necessidade de ação militar. Paralelamente, intensificou a pressão sobre Cuba, inclusive com medidas que agravaram as restrições sobre o fornecimento de petróleo ao país. Leia mais Mundo Ex-integrantes do FBI são acusados de mentir no Congresso sobre caso do laptop de Hunter Biden Por Thiago Cabral 24/10/2026 - 15h00 - Atualizada 24/10/2026 - 15h14 Foto: white house Dois ex-funcionários do FBI foram acusados de mentir ao Congresso sobre sua atuação nas investigações relacionadas ao laptop de Hunter Biden, filho do ex-presidente Joe Biden. Nikki Floris e Bradley Benavides integraram uma força-tarefa criada para combater interferência estrangeira nas eleições. Os dois compareceram a um tribunal federal em Washington e contestam as acusações, que retomam uma controvérsia da eleição de 2020. As defesas afirmam que o processo é politicamente motivado e criticam o momento das denúncias, apresentadas às vésperas das eleições legislativas de novembro. Leia mais Mundo Argentina arquiva investigação contra Milei e irmã por caso da criptomoeda $LIBRA Por Thiago Cabral 24/10/2026 - 14h20 Foto: RS via Fotos Públicas A Justiça argentina arquivou a investigação criminal contra o presidente Javier Milei e sua irmã, Karina Milei, no caso da criptomoeda $LIBRA. A decisão foi tomada pelo juiz federal Marcelo Martínez de Giorgi após pedido do promotor Eduardo Taiano. A apuração investigava possíveis fraudes ligadas ao lançamento da meme coin, divulgada por Milei em fevereiro de 2025. A publicação impulsionou temporariamente o ativo, que despencou pouco depois; o presidente apagou a postagem e negou vínculo com a operação. Leia mais Mundo Kim Jong-un ordena reforço de tropas de elite na Coreia do Norte Por Redação Vero 24/10/2026 - 13h40 Foto: Wikimedia Commons O líder da Coreia do Norte, Kim Jong-un, determinou que as companhias do Exército sejam transformadas em unidades de combate de elite e autossuficientes. A orientação foi anunciada durante uma reunião de comandantes realizada em Pyongyang, segundo a agência estatal KCNA. No encontro, realizado nos dias 22 e 23 de outubro, Kim pediu que as tropas intensifiquem a preparação militar. O líder defendeu o fortalecimento das Forças Armadas e a aceleração de uma revolução militar baseada nas estratégias adotadas pelo regime norte-coreano. Leia mais Mundo Milei chama Lula de “ladrão e mentiroso” após debate Por Redação Vero 24/10/2026 - 12h20 - Atualizada 24/10/2026 - 12h24 Foto: divulgação/casa rosada O presidente argentino, Javier Milei, chamou Lula (PT) de \"ladrão e mentiroso\" em publicação na rede social X neste sábado (24). A declaração foi uma reação às críticas feitas pelo presidente brasileiro à situação econômica da Argentina durante debate na TV Globo. No confronto de sexta-feira (23), Lula afirmou que a Argentina tem 40% da população na pobreza e mencionou o consumo de \"carne de burro\" no país vizinho. Milei acusou o petista de utilizar dados falsos para atacar adversários políticos. Leia mais",
+        "final": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+        "trecho_usado": "os Estados Unidos vão “cuidar de Cuba” depois de resolverem a situação com o Irã. Em comício na Flórida, o presidente disse que pretende enviar o secretário de Estado, Marco Rubio, para “finalizar o acordo”. Trump já havia afirmado em setembro que Washington e Havana poderiam chegar a um entendimento e descartou, naquele momento, a necessidade de ação militar. Paralelamente, intensificou a pressão",
+        "metadados": {
+          "titulo": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+          "descricao": "Donald Trump decidiu reduzir tarifas sobre uma série de produtos canadenses ligados à agricultura e ao setor florestal. Taxas de 50% serão retiradas de itens como máquinas, embalagens e caixas plásticas, usados por produtores de estados americanos próximos ao Canadá. A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em […]",
+          "canonica": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+          "og": {
+            "og:updated_time": "2026-10-24T19:25:27-03:00",
+            "og:url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "og:site_name": "Vero Notícias",
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "og:description": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+            "og:image": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+            "og:image:secure_url": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+            "og:image:width": "1200",
+            "og:image:height": "816"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:site": "https://twitter.com/OfcVeronoticias",
+            "twitter:creator": "https://twitter.com/OfcVeronoticias",
+            "twitter:title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "twitter:description": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+            "twitter:image": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2026-10-24T20:30:00-03:00",
+          "atualizado_em": "2026-10-24T19:25:27-03:00",
+          "autor": "Redação Vero",
+          "site": "Vero Notícias",
+          "tipo": "NewsArticle",
+          "ld": {
+            "datePublished": "2026-10-24T20:30:00-03:00",
+            "dateModified": "2026-10-24T19:25:27-03:00",
+            "author": {
+              "@type": "Person",
+              "name": "Redação Vero"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Vero Notícias",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg"
+              }
+            },
+            "headline": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "keywords": [
+              "Donald Trump",
+              "EUA",
+              "Pressão eleitoral de republicanos",
+              "Reduz Tarifas",
+              "Reduz tarifas sobre o canadá"
+            ],
+            "description": "Donald Trump decidiu reduzir tarifas sobre uma série de produtos canadenses ligados à agricultura e ao setor florestal. Taxas de 50% serão retiradas de itens como máquinas, embalagens e caixas plásticas, usados por produtores de estados americanos próximos ao Canadá. A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em [&hellip;]"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Trump diz que EUA vão “cuidar de Cuba” após Irã e cita Rubio para fechar acordo",
+            "texto": "Foto: Official White House\nDonald Trump afirmou nesta sexta-feira (23) que os Estados Unidos vão “cuidar de Cuba” depois de resolverem a situação com o Irã. Em comício na Flórida, o presidente disse que pretende enviar o secretário de Estado, Marco Rubio, para “finalizar o acordo”.\nTrump já havia afirmado em setembro que Washington e Havana poderiam chegar a um entendimento e descartou, naquele momento, a necessidade de ação militar. Paralelamente, intensificou a pressão sobre Cuba, inclusive com medidas que agravaram as restrições sobre o fornecimento de petróleo ao país."
+          },
+          {
+            "titulo": "Ex-integrantes do FBI são acusados de mentir no Congresso sobre caso do laptop de Hunter Biden",
+            "texto": "Dois ex-funcionários do FBI foram acusados de mentir ao Congresso sobre sua atuação nas investigações relacionadas ao laptop de Hunter Biden, filho do ex-presidente Joe Biden. Nikki Floris e Bradley Benavides integraram uma força-tarefa criada para combater interferência estrangeira nas eleições.\nOs dois compareceram a um tribunal federal em Washington e contestam as acusações, que retomam uma controvérsia da eleição de 2020. As defesas afirmam que o processo é politicamente motivado e criticam o momento das denúncias, apresentadas às vésperas das eleições legislativas de novembro."
+          },
+          {
+            "titulo": "Argentina arquiva investigação contra Milei e irmã por caso da criptomoeda $LIBRA",
+            "texto": "Foto: RS via Fotos Públicas\nA Justiça argentina arquivou a investigação criminal contra o presidente Javier Milei e sua irmã, Karina Milei, no caso da criptomoeda $LIBRA. A decisão foi tomada pelo juiz federal Marcelo Martínez de Giorgi após pedido do promotor Eduardo Taiano.\nA apuração investigava possíveis fraudes ligadas ao lançamento da meme coin, divulgada por Milei em fevereiro de 2025. A publicação impulsionou temporariamente o ativo, que despencou pouco depois; o presidente apagou a postagem e negou vínculo com a operação."
+          },
+          {
+            "titulo": "Kim Jong-un ordena reforço de tropas de elite na Coreia do Norte",
+            "texto": "O líder da Coreia do Norte, Kim Jong-un, determinou que as companhias do Exército sejam transformadas em unidades de combate de elite e autossuficientes. A orientação foi anunciada durante uma reunião de comandantes realizada em Pyongyang, segundo a agência estatal KCNA.\nNo encontro, realizado nos dias 22 e 23 de outubro, Kim pediu que as tropas intensifiquem a preparação militar. O líder defendeu o fortalecimento das Forças Armadas e a aceleração de uma revolução militar baseada nas estratégias adotadas pelo regime norte-coreano."
+          },
+          {
+            "titulo": "Milei chama Lula de “ladrão e mentiroso” após debate",
+            "texto": "Foto: divulgação/casa rosada\nO presidente argentino, Javier Milei, chamou Lula (PT) de \"ladrão e mentiroso\" em publicação na rede social X neste sábado (24). A declaração foi uma reação às críticas feitas pelo presidente brasileiro à situação econômica da Argentina durante debate na TV Globo.\nNo confronto de sexta-feira (23), Lula afirmou que a Argentina tem 40% da população na pobreza e mencionou o consumo de \"carne de burro\" no país vizinho. Milei acusou o petista de utilizar dados falsos para atacar adversários políticos."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+          "https://m.veronoticias.com/api/p.gif?d=veronoticias.com",
+          "https://www.facebook.com/tr?id=1057660305955993&ev=PageView&noscript=1",
+          "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg",
+          "https://veronoticias.com/wp-content/uploads/2025/06/jamil-chade-3-150x150.jpg",
+          "https://veronoticias.com/wp-content/uploads/2025/06/tales_faria_3-150x150.jpg",
+          "https://veronoticias.com/wp-content/uploads/2025/06/romero_centralizado-150x150.jpg",
+          "https://veronoticias.com/wp-content/uploads/2024/08/barbara_blue-60x60.png",
+          "https://veronoticias.com/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-10-at-14.38.11-60x60.jpeg",
+          "https://veronoticias.com/wp-content/uploads/2024/11/Claudia-e1732647775190-60x60.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-58e506ae02dc",
+            "type": "image",
+            "title": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+            "url": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2026/01/vlcsnap-2026-01-03-13h56m53s679-e1767461871333.png",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A mudança ocorre após pressão de republicanos que disputam eleições apertadas para o Senado em estados como Maine, Michigan e New Hampshire",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8e8ef2482f8c",
+            "type": "image",
+            "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos | Vero Notícias",
+            "url": "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg",
+            "final_url": "https://veronoticias.com/wp-content/themes/vero/assets/images/logos/logo_veronoticias_site_new.svg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos | Vero Notícias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3d6b14da21b5",
+            "type": "image",
+            "title": "Jamil Chade",
+            "url": "https://veronoticias.com/wp-content/uploads/2025/06/jamil-chade-3-150x150.jpg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/jamil-chade-3-150x150.jpg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jamil Chade",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1293abd66269",
+            "type": "image",
+            "title": "Tales Faria",
+            "url": "https://veronoticias.com/wp-content/uploads/2025/06/tales_faria_3-150x150.jpg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/tales_faria_3-150x150.jpg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tales Faria",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c8537027d3a8",
+            "type": "image",
+            "title": "Cristiano Romero",
+            "url": "https://veronoticias.com/wp-content/uploads/2025/06/romero_centralizado-150x150.jpg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2025/06/romero_centralizado-150x150.jpg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cristiano Romero",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f5b817f6665",
+            "type": "image",
+            "title": "Bárbara Fontinele",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/08/barbara_blue-60x60.png",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/barbara_blue-60x60.png",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bárbara Fontinele",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-232935a2d4c6",
+            "type": "image",
+            "title": "Barbara Krysttal",
+            "url": "https://veronoticias.com/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-10-at-14.38.11-60x60.jpeg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-10-at-14.38.11-60x60.jpeg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Barbara Krysttal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-64d75042a86f",
+            "type": "image",
+            "title": "Claudia Maldonado",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/11/Claudia-e1732647775190-60x60.jpg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/11/Claudia-e1732647775190-60x60.jpg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Claudia Maldonado",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-abbde8852311",
+            "type": "image",
+            "title": "Everardo Gueiros",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/08/everaldo_blue-60x60.png",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/everaldo_blue-60x60.png",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Everardo Gueiros",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-167bbde62d40",
+            "type": "image",
+            "title": "Gabriel Elias",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/11/9f828282-0ad1-4181-8c48-ec94c189d1b1-60x60.jpeg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/11/9f828282-0ad1-4181-8c48-ec94c189d1b1-60x60.jpeg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Gabriel Elias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6ed88aa7fe20",
+            "type": "image",
+            "title": "Guilherme Mota",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/08/guilherme-60x60.jpg",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/guilherme-60x60.jpg",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Guilherme Mota",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cd1c45b74e0d",
+            "type": "image",
+            "title": "Lilian Rocha",
+            "url": "https://veronoticias.com/wp-content/uploads/2024/08/lilian_2-60x60.png",
+            "final_url": "https://veronoticias.com/wp-content/uploads/2024/08/lilian_2-60x60.png",
+            "source_title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "source_url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "publisher": "veronoticias.com",
+            "date": "2026-10-24T20:30:00-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lilian Rocha",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.todamateria.com.br/canada/",
+      "result": {
+        "titulo": "Canadá: mapa, bandeira, cidades, história e turismo",
+        "texto": "Canadá Juliana Bezerra Professora de História Remover anúncios O é um país localizado na América do Norte. Canadá É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico. A bandeira do Canadá retrata uma folha de bordo, típica da região Dados Gerais Nome oficial: Canadá Capital: Ottawa Extensão territorial: 9.900.610 km 2 Habitantes: 35,8 milhões de habitantes (Banco Mundial, 2015) PIB (Produto Interno Bruto): US$ 1,5 trilhão (Banco Mundial, 2015) Clima: Temperado com as quatro estações bem definidas Idiomas oficiais: inglês e francês Religião: Mais de 90% da população é cristã. Porém, não há uma religião oficial no país. Moeda: dólar canadense Sistema de governo: federal Monarquia constitucional Principais cidades: Toronto, Montreal, Vancouver, Calgary, Ottawa e Edmonton Divisão Territorial Clique para aumentar. Remover anúncios O Canadá é uma federação integrada por dez províncias e três territórios. As províncias são: Alberta Colúmbia Inglesa Manitoba Nova Brunswick Terra Nova e Labrador Nova Escócia Ontário Ilha do Príncipe Eduardo Quebec Saskatchewan E os três territórios: Yukon Nunavut Território do Nordeste O país é dividido em sete regiões: a costa do pacífico, a cordilheira, as pradarias, o escudo canadense, os Grandes Lagos, os Apalaches e o Ártico. O país é banhado pelos oceanos Atlântico, Ártico e Pacífico. Cultura do Canadá Imagem ilustrativa gerada por inteligência artificial do povo inuit. Remover anúncios Membros do povo inuit A cultura canadense resulta da mistura dos colonizadores ingleses e franceses com os indígenas. Os filhos dos colonos com o povo indígena inuit são chamados de métis. Esse aspecto multicultural é percebido, principalmente, nos idiomas, pois há duas línguas oficiais: o francês e o inglês. Os nativos inuit e os outros grupos indígenas nem sempre foram bem tratados. Seu território foi invadido e as populações confinadas em reservas. Muitos tiveram seus filhos arrancados de sua convivência e internados em escolas onde recebiam uma educação ocidental para que fosse apagado qualquer traço de sua cultura. Atualmente, porém, essas políticas foram revistas e o Canadá é considerado um dos países mais receptivos do mundo. Mantém uma política de tolerância religiosa e cultural e busca manter a tradição dos povos ancestrais. O Canadá atraiu asiáticos que foram empregados como operários em minas e ferrovias, a partir do século XIX e durante o século XX. Também integram a base étnica dos canadenses, alemães, italianos, ucranianos, poloneses, holandeses, chineses, portugueses e escandinavos. Imigração no Canadá O país exibe ótimos índices de qualidade de vida. O Índice de Desenvolvimento Humano é de 0,967 (2016), o terceiro do mundo, e possui boas escolas e universidades. Por isso, a cada ano, recebe estudantes do mundo todo mundo interessados em estudar inglês ou francês, fazer intercâmbio ou cursar uma graduação. Igualmente, muitos brasileiros descobriram que o Canadá possui facilidades para imigrar em relação a outra nações. Afinal, o sistema canadense se baseia numa política de pontos (onde conta o nível de estudos, por exemplo), empregabilidade e reagrupamento familiar. Assim, há comunidades brasileiras bastante expressivas em cidades como Toronto, Vancouver, Montreal e na própria capital, Ottawa. História do Canadá Os índios inuit foram os primeiros habitantes da região que hoje corresponde ao território do Canadá e viviam da caça e da pesca. Antes, os inuit eram chamados de , mas essa denominação não é mais aceita. esquimós Os franceses começaram a explorar o território logo após a chegada de na América. Cristóvão Colombo As expedições do navegador Jacques Cartier (1491-1557), que explorou o rio São Lourenço e fez contato com os índios iroquês, possibilitou a expansão marítima francesa. Remover anúncios Cartier realizou ainda mais duas expedições ao território mantendo contato com esta tribo. Posteriormente, a primeira cidade a ser fundada no território foi Quebec, em 1608, por Samuel Champlain. Houve intenso esforço da França para o povoamento da região. O interesse, contudo, esbarrava no terreno difícil, de clima praticamente inóspito e invernos rigorosos. Os indígenas, ao perceber que os franceses vinham para ficar, substituíram a cortesia das primeiras viagens em aberta hostilidade. Igualmente, os ingleses passaram a ocupar aquele território aproveitando que já tinham povoadores instalados nas . 13 Colônias Com isso, começaram as disputas entre ingleses e franceses, sempre apoiados por tribos indígenas, que lutavam lado a lado com os brancos. A conquista inglesa foi sacramentada após a (1756-1763). Através do , os ingleses tomaram o controle da região, mas permitiram os colonos franceses conservarem seu idioma e religião. Guerra dos Sete Anos Tratado de Paris Em 1º de julho de 1867, três províncias britânicas assinaram uma ata de independência em relação ao Reino Unido e formaram a Confederação do Canadá. Somente em 1931 houve ampliação de autonomia, e em 1982 o país se desprendeu formalmente do Parlamento britânico. Atualmente, as províncias canadenses têm muita autonomia, mas possuem um governo federal que as coordena e mantêm o soberano britânico como chefe de Estado. Aspectos Geográficos do Canadá O Canadá é tão grande quanto inóspito. Têm as quatro estações do ano bem definidas. Assim, o verão pode registrar 35 ºC, enquanto o inverno 50 ºC negativos. A oscilação de temperatura depende da região. O clima limita a oferta de terras agricultáveis e há pouca disponibilidade de lavouras na maioria do território. O território é banhado por numerosos rios e recortado por diversas cadeias de montanhas. O do Canadá varia conforme o relevo, precipitação e pressão atmosférica. clima temperado A área mais temperada é encontrada na costa da Colúmbia Britânica. Nessa região, é intensa a influência das correntes de ar quentes e úmidas que saem do Pacífico. A neve é rara nessa região. O ar quente e úmido que sai do Oceano Pacífico fica retido na área da Cordilheira, que forma a Cadeia da Costa e as Montanhas Rochosas. Remover anúncios Sem poder avançar em direção às planícies, o ar úmido atravessa as montanhas, onde resfria e cai em forma de chuva. A chuva, porém, é menor nos vales que ficam entre as montanhas e, por isso, há verões de elevadas temperaturas. Nas pradarias, os invernos são rigorosos e os verões bastante quentes. É nessa região que ocorre o durante o inverno. chinook O é o vento de inverno que, por ser quente, faz com que as temperaturas subam em até 16 graus no período de um dia. chinook Na região dos Grandes Lagos, o inverno é acompanhado de severas nevascas. Os invernos mais pesados ocorrem na região denominada Canadá Atlântico. Nessa área, a neblina vai até o verão, quando os termômetros não passam dos 18 ºC. Turismo no Canadá A diversidade natural do Canadá convida turistas de todo o mundo. As atrações de inverno são as de maior procura pelos visitantes. Também o país concentra grande diversidade de paisagens naturais que encantam os turistas. O governo do Canadá mantém 38 parques nacionais que correspondem a 2% do território canadense, assim como 836 sítios históricos, 1000 parques provinciais e 50 parques territoriais. Os locais que mais atraem turistas são Vancouver e Toronto. Entre as mais exuberantes atrações estão as cataratas do Niágara, localizadas próximo à cidade de Bufallo, na fronteira com os Estados Unidos. Cataratas do Niágara Remover anúncios Curiosidades O Canadá tem seis fusos horários. Menos de 1% da população do mundo vive no país. Os lagos canadenses comportam 20% de toda a água doce do mundo. É o país com maior população imigrante do mundo: 1 de cada 5 canadenses não nasceu no Canadá. A cada ano entram 300.000 novos imigrantes no país. Até 1982 toda modificação constitucional canadense necessitava da aprovação das autoridades britânicas. : Leia também Bandeira do Canadá América do Norte Améric",
+        "final": "https://www.todamateria.com.br/canada/",
+        "trecho_usado": "mas possuem um governo federal que as coordena e mantêm o soberano britânico como chefe de Estado. Aspectos Geográficos do Canadá O Canadá é tão grande quanto inóspito. Têm as quatro estações do ano bem definidas. Assim, o verão pode registrar 35 ºC, enquanto o inverno 50 ºC negativos. A oscilação de temperatura depende da região. O clima limita a oferta de terras agricultáveis e há pouca",
+        "metadados": {
+          "titulo": "Canadá: mapa, bandeira, cidades, história e turismo",
+          "descricao": "Saiba tudo sobre o Canadá. Descubra as cidades, informações gerais sobre o país, cultura diversificada, motivos para imigrar e aspectos geográficos.",
+          "canonica": "https://www.todamateria.com.br/canada/",
+          "og": {
+            "og:type": "article",
+            "og:site_name": "Toda Matéria",
+            "og:image": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+            "og:url": "https://www.todamateria.com.br/canada/",
+            "og:title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "og:description": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico. A bandeira do Canadá retrata uma folha de bordo, típica da região Dados Gerais Nome...",
+            "og:locale": "pt_br"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "twitter:description": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico. A bandeira do Canadá retrata uma folha de bordo, típica da região Dados Gerais Nome...",
+            "twitter:image": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "2016-07-06T01:52:23+0100",
+          "atualizado_em": "2019-02-01T14:17:00+0000",
+          "autor": "Juliana Bezerra",
+          "site": "Toda Matéria",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2016-07-06T01:52:23+0100",
+            "dateModified": "2019-02-01T14:17:00+0000",
+            "author": [
+              {
+                "@type": "Person",
+                "name": "Juliana Bezerra",
+                "url": "https://www.todamateria.com.br/autor/juliana-bezerra/",
+                "jobTitle": "Professora de História",
+                "description": "Bacharelada e Licenciada em História, pela PUC-RJ. Especialista em Relações Internacionais, pelo Unilasalle-RJ. Mestre em História da América Latina e União Europeia pela Universidade de Alcalá, Espanha."
+              }
+            ],
+            "publisher": {
+              "@type": "Organization",
+              "name": "Toda Matéria",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://static.todamateria.com.br/img/logo-sd.png",
+                "width": 600,
+                "height": 60
+              }
+            },
+            "headline": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "description": "Saiba tudo sobre o Canadá. Descubra as cidades, informações gerais sobre o país, cultura diversificada, motivos para imigrar e aspectos geográficos.",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O é um país localizado na América do Norte. Canadá\nÉ o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico.\nA bandeira do Canadá retrata uma folha de bordo, típica da região\nExtensão territorial: 9.900.610 km 2\nHabitantes: 35,8 milhões de habitantes (Banco Mundial, 2015)\nPIB (Produto Interno Bruto): US$ 1,5 trilhão (Banco Mundial, 2015)\nClima: Temperado com as quatro estações bem definidas\nIdiomas oficiais: inglês e francês\nReligião: Mais de 90% da população é cristã. Porém, não há uma religião oficial no país.\nSistema de governo: federal Monarquia constitucional\nPrincipais cidades: Toronto, Montreal, Vancouver, Calgary, Ottawa e Edmonton\nO Canadá é uma federação integrada por dez províncias e três territórios. As províncias são:\nO país é dividido em sete regiões: a costa do pacífico, a cordilheira, as pradarias, o escudo canadense, os Grandes Lagos, os Apalaches e o Ártico.\nO país é banhado pelos oceanos Atlântico, Ártico e Pacífico.\nImagem ilustrativa gerada por inteligência artificial do povo inuit.\nA cultura canadense resulta da mistura dos colonizadores ingleses e franceses com os indígenas. Os filhos dos colonos com o povo indígena inuit são chamados de métis.\nEsse aspecto multicultural é percebido, principalmente, nos idiomas, pois há duas línguas oficiais: o francês e o inglês.\nOs nativos inuit e os outros grupos indígenas nem sempre foram bem tratados. Seu território foi invadido e as populações confinadas em reservas.\nMuitos tiveram seus filhos arrancados de sua convivência e internados em escolas onde recebiam uma educação ocidental para que fosse apagado qualquer traço de sua cultura.\nAtualmente, porém, essas políticas foram revistas e o Canadá é considerado um dos países mais receptivos do mundo. Mantém uma política de tolerância religiosa e cultural e busca manter a tradição dos povos ancestrais.\nO Canadá atraiu asiáticos que foram empregados como operários em minas e ferrovias, a partir do século XIX e durante o século XX.\nTambém integram a base étnica dos canadenses, alemães, italianos, ucranianos, poloneses, holandeses, chineses, portugueses e escandinavos.\nO país exibe ótimos índices de qualidade de vida. O Índice de Desenvolvimento Humano é de 0,967 (2016), o terceiro do mundo, e possui boas escolas e universidades.\nPor isso, a cada ano, recebe estudantes do mundo todo mundo interessados em estudar inglês ou francês, fazer intercâmbio ou cursar uma graduação.\nIgualmente, muitos brasileiros descobriram que o Canadá possui facilidades para imigrar em relação a outra nações.\nAfinal, o sistema canadense se baseia numa política de pontos (onde conta o nível de estudos, por exemplo), empregabilidade e reagrupamento familiar.\nAssim, há comunidades brasileiras bastante expressivas em cidades como Toronto, Vancouver, Montreal e na própria capital, Ottawa.\nOs índios inuit foram os primeiros habitantes da região que hoje corresponde ao território do Canadá e viviam da caça e da pesca. Antes, os inuit eram chamados de , mas essa denominação não é mais aceita. esquimós\nOs franceses começaram a explorar o território logo após a chegada de na América. Cristóvão Colombo\nAs expedições do navegador Jacques Cartier (1491-1557), que explorou o rio São Lourenço e fez contato com os índios iroquês, possibilitou a expansão marítima francesa.\nCartier realizou ainda mais duas expedições ao território mantendo contato com esta tribo.\nPosteriormente, a primeira cidade a ser fundada no território foi Quebec, em 1608, por Samuel Champlain.\nHouve intenso esforço da França para o povoamento da região. O interesse, contudo, esbarrava no terreno difícil, de clima praticamente inóspito e invernos rigorosos.\nOs indígenas, ao perceber que os franceses vinham para ficar, substituíram a cortesia das primeiras viagens em aberta hostilidade.\nIgualmente, os ingleses passaram a ocupar aquele território aproveitando que já tinham povoadores instalados nas ."
+          },
+          {
+            "titulo": "Aspectos Geográficos do Canadá",
+            "texto": "O Canadá é tão grande quanto inóspito. Têm as quatro estações do ano bem definidas. Assim, o verão pode registrar 35 ºC, enquanto o inverno 50 ºC negativos.\nA oscilação de temperatura depende da região. O clima limita a oferta de terras agricultáveis e há pouca disponibilidade de lavouras na maioria do território.\nO território é banhado por numerosos rios e recortado por diversas cadeias de montanhas.\nO do Canadá varia conforme o relevo, precipitação e pressão atmosférica. clima temperado\nA área mais temperada é encontrada na costa da Colúmbia Britânica. Nessa região, é intensa a influência das correntes de ar quentes e úmidas que saem do Pacífico. A neve é rara nessa região.\nO ar quente e úmido que sai do Oceano Pacífico fica retido na área da Cordilheira, que forma a Cadeia da Costa e as Montanhas Rochosas.\nSem poder avançar em direção às planícies, o ar úmido atravessa as montanhas, onde resfria e cai em forma de chuva.\nA chuva, porém, é menor nos vales que ficam entre as montanhas e, por isso, há verões de elevadas temperaturas.\nNas pradarias, os invernos são rigorosos e os verões bastante quentes. É nessa região que ocorre o durante o inverno. chinook\nO é o vento de inverno que, por ser quente, faz com que as temperaturas subam em até 16 graus no período de um dia. chinook\nNa região dos Grandes Lagos, o inverno é acompanhado de severas nevascas. Os invernos mais pesados ocorrem na região denominada Canadá Atlântico. Nessa área, a neblina vai até o verão, quando os termômetros não passam dos 18 ºC.\nA diversidade natural do Canadá convida turistas de todo o mundo. As atrações de inverno são as de maior procura pelos visitantes.\nTambém o país concentra grande diversidade de paisagens naturais que encantam os turistas. O governo do Canadá mantém 38 parques nacionais que correspondem a 2% do território canadense, assim como 836 sítios históricos, 1000 parques provinciais e 50 parques territoriais.\nOs locais que mais atraem turistas são Vancouver e Toronto. Entre as mais exuberantes atrações estão as cataratas do Niágara, localizadas próximo à cidade de Bufallo, na fronteira com os Estados Unidos.\nO Canadá tem seis fusos horários.\nMenos de 1% da população do mundo vive no país.\nOs lagos canadenses comportam 20% de toda a água doce do mundo.\nÉ o país com maior população imigrante do mundo: 1 de cada 5 canadenses não nasceu no Canadá. A cada ano entram 300.000 novos imigrantes no país.\nAté 1982 toda modificação constitucional canadense necessitava da aprovação das autoridades britânicas.\nExercícios sobre América Anglo-Saxônica\nPaíses da América do Norte: bandeiras, capitais e características\n. , . Disponível em: https://www.todamateria.com.br/canada/. Acesso em: BEZERRA, Juliana Canadá. Toda Matéria [s.d.]\nPaíses da América do Norte: quais são e suas características (com mapa)\nExercícios sobre América Anglo-Saxônica (com gabarito)\nRússia: território, história e cultura (com mapas)"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg?class=ogImageSquare",
+          "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg?class=ogImageWide",
+          "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg?class=ogImageRectangle",
+          "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+          "https://www.facebook.com/tr?id=691341014045248&ev=PageView&noscript=1",
+          "https://static.todamateria.com.br/img/logo-tm-white.svg",
+          "https://static.todamateria.com.br/img/lume/circlebuddy-waving.v1.svg",
+          "https://static.todamateria.com.br/img/lume/circlebuddy.v1.svg",
+          "https://static.todamateria.com.br/img/autor/ju/li/juliana-bezerra_72.jpg",
+          "https://static.todamateria.com.br/upload/ba/nd/bandeiradocanada-0-cke.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-dcf53a3cba08",
+            "type": "image",
+            "title": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (",
+            "url": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+            "final_url": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico. A bandeira do Canadá retrata uma folh",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d8923179ab49",
+            "type": "image",
+            "title": "Toda Matéria",
+            "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+            "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Toda Matéria",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d9c76f35a5fd",
+            "type": "image",
+            "title": "Juliana Bezerra",
+            "url": "https://static.todamateria.com.br/img/autor/ju/li/juliana-bezerra_72.jpg",
+            "final_url": "https://static.todamateria.com.br/img/autor/ju/li/juliana-bezerra_72.jpg",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Juliana Bezerra",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-46c69c76461b",
+            "type": "image",
+            "title": "Bandeira do Canadá",
+            "url": "https://static.todamateria.com.br/upload/ba/nd/bandeiradocanada-0-cke.jpg",
+            "final_url": "https://static.todamateria.com.br/upload/ba/nd/bandeiradocanada-0-cke.jpg",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira do Canadá",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7cab825e81df",
+            "type": "image",
+            "title": "Mapa do Canadá",
+            "url": "https://static.todamateria.com.br/upload/ma/pa/mapadocanadaeseusestados-cke.jpg?width=50&blur=10",
+            "final_url": "https://static.todamateria.com.br/upload/ma/pa/mapadocanadaeseusestados-cke.jpg?width=50&blur=10",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa do Canadá",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-246f234eb2ca",
+            "type": "image",
+            "title": "Povos inuit",
+            "url": "https://static.todamateria.com.br/upload/me/mb/membrosdopovoinuit-cke.jpg?width=50&blur=10",
+            "final_url": "https://static.todamateria.com.br/upload/me/mb/membrosdopovoinuit-cke.jpg?width=50&blur=10",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Povos inuit",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d6c2aac94132",
+            "type": "image",
+            "title": "Cataratas do Niágara no Canadá.",
+            "url": "https://static.todamateria.com.br/upload/ca/ta/cataratasdoniagaracanadaontario-cke.jpg?width=50&blur=10",
+            "final_url": "https://static.todamateria.com.br/upload/ca/ta/cataratasdoniagaracanadaontario-cke.jpg?width=50&blur=10",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cataratas do Niágara no Canadá.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7beac1d59fbd",
+            "type": "image",
+            "title": "Vamos criar a sua conta.",
+            "url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+            "final_url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+            "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "source_url": "https://www.todamateria.com.br/canada/",
+            "publisher": "static.todamateria.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vamos criar a sua conta.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.suapesquisa.com/paises/canada/",
+      "result": {
+        "titulo": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+        "texto": "Canadá O Canadá é um país localizado na América do Norte, conhecido por sua vasta extensão territorial, que o torna o segundo maior país do mundo em área total, após a Rússia. Com uma população multicultural distribuída em dez províncias e três territórios, suas principais cidades incluem Toronto, Vancouver e Montreal. O Canadá é uma monarquia constitucional com um sistema de governo parlamentar, tendo a rainha Elizabeth II como chefe de estado até 2022, quando foi sucedida pelo rei Charles III (atual em 2026). O país possui uma economia diversificada e avançada, com destaque para setores como recursos naturais, tecnologia e serviços. O Canadá é também reconhecido por sua alta qualidade de vida, políticas progressistas e belíssimas paisagens naturais, incluindo florestas vastas, montanhas e lagos. Dados gerais: : 9.970.610 km² ÁREA : CAPITAL Ottawa : 36,8 milhões de habitantes (estimativa 2026). POPULAÇÃO dólar canadense MOEDA DO CANADÁ: : Canadá NOME OFICIAL : canadense NACIONALIDADE : 1.º de julho (Dia da Independência do Canadá). DATA NACIONAL : 10 províncias e 3 territórios. DIVISÃO ADMINISTRATIVA : Monarquia Parlamentarista GOVERNO : norte da América do Norte. LOCALIZAÇÃO : - 2 horas em relação à Brasília (UTC-3,5 a UTC-8). FUSO HORÁRIO : Toronto, Montreal, Vancouver, Ottawa, Hamilton, Edmonton, Calgary, Quebec, Winnipeg, Regina e Halifax. CIDADES DO CANADÁ (PRINCIPAIS) Oceano Ártico (norte), Estados Unidos (Sul), Oceano Atlântico (leste) e Oceano Pacífico (oeste). LIMITES GEOGRÁFICOS: : inglês e francês (oficiais). IDIOMAS : cristianismo 83,5% (católicos 45,2%, protestantes 36,4%, ortodoxos 1,9%), judaísmo 1,2%, islamismo 0,9%, sem filiação 12,5%, outras 1,9%. RELIGIÃO : 3,9 habitantes/km² (ano de 2026 - estimativa). DENSIDADE DEMOGRÁFICA Mapa do Canadá (clique no mapa para ampliar) Geografia O Canadá é o segundo maior país do mundo em extensão territorial e ocupa grande parte da América do Norte, estendendo-se do Oceano Atlântico ao Oceano Pacífico e alcançando o Oceano Ártico ao norte. Seu território apresenta grande diversidade de relevo, com destaque para as Montanhas Rochosas, localizadas na porção oeste, que formam uma cadeia montanhosa elevada e influenciam o clima e a ocupação humana da região. Na parte central, predominam grandes planícies, importantes para a agricultura mecanizada, enquanto o Escudo Canadense, uma antiga formação geológica rica em minerais, ocupa ampla área do centro e do leste do país.A vegetação canadense varia conforme a latitude e o clima. Ao norte, predominam tundras, marcadas por musgos, liquens e vegetação rasteira, adaptadas ao frio intenso e ao solo congelado durante boa parte do ano. Mais ao sul, aparece a floresta boreal, formada principalmente por coníferas, como pinheiros e abetos. Nas regiões de clima mais ameno, sobretudo no sudeste e em áreas próximas aos Grandes Lagos, há florestas temperadas, enquanto as pradarias aparecem nas províncias centrais, como Alberta, Saskatchewan e Manitoba.O clima do Canadá é bastante variado, mas, em geral, apresenta invernos rigorosos em grande parte do território. No norte, o clima polar e subpolar domina, com temperaturas muito baixas e longos períodos de neve. No centro do país, o clima continental apresenta grande amplitude térmica, com invernos frios e verões relativamente quentes. Na costa oeste, especialmente na Colúmbia Britânica, o clima é mais úmido e moderado pela influência do Oceano Pacífico. Já na região sudeste, onde estão cidades como Toronto, Ottawa e Montreal, há clima temperado continental, com estações bem definidas.A hidrografia canadense é uma das mais importantes do mundo, pois o país possui grande quantidade de rios, lagos e reservas de água doce. Os Grandes Lagos, compartilhados com os Estados Unidos, têm enorme importância econômica, ambiental e urbana. O Rio São Lourenço liga os Grandes Lagos ao Oceano Atlântico e funciona como uma via essencial de navegação e comércio. Outros rios importantes são o Mackenzie, no norte, o Fraser, na Colúmbia Britânica, e o Yukon, associado às paisagens frias do noroeste canadense. Antes da chegada dos europeus, o território canadense era habitado por diversos povos indígenas, como inuítes, métis e várias Primeiras Nações. Esses povos desenvolveram formas próprias de organização social, práticas econômicas adaptadas aos ambientes locais e culturas marcadas por forte relação com a natureza. A partir do século XV, exploradores europeus chegaram à região, especialmente franceses e ingleses, interessados em rotas marítimas, comércio de peles e expansão territorial.A colonização francesa ganhou força no século XVII, com a criação da Nova França e o desenvolvimento de cidades como Quebec, fundada em 1608. A economia colonial estava fortemente ligada ao comércio de peles, às missões religiosas e à ocupação de áreas próximas ao Rio São Lourenço. Ao mesmo tempo, a presença britânica crescia na América do Norte, gerando disputas territoriais com a França. Após a Guerra dos Sete Anos, ocorrida entre 1756 e 1763, a França perdeu grande parte de seus domínios na região para a Grã-Bretanha.No século XIX, o Canadá passou por um processo gradual de autonomia política dentro do Império Britânico. Em 1867, foi criada a Confederação Canadense, que uniu inicialmente Ontário, Quebec, Nova Brunswick e Nova Escócia em uma federação. A partir daí, novas províncias e territórios foram incorporados, consolidando a formação do país. A expansão para o oeste envolveu a construção de ferrovias, a ocupação agrícola das pradarias e conflitos relacionados aos direitos dos povos indígenas e dos métis.No século XX, o Canadá consolidou sua independência política e sua posição internacional. Participou das duas guerras mundiais, ampliou sua industrialização e fortaleceu instituições democráticas e sociais. Em 1982, a Constituição canadense foi patriada, reduzindo os vínculos jurídicos diretos com o Parlamento britânico. Nas últimas décadas, o país passou a ser conhecido por políticas de multiculturalismo, forte imigração, elevado desenvolvimento humano e debates sobre autonomia provincial, especialmente em Quebec. História A cultura canadense é marcada pela diversidade, resultado da presença indígena, da colonização francesa e britânica e da imigração de diferentes partes do mundo. O país possui dois idiomas oficiais, o inglês e o francês, sendo Quebec a principal província francófona. Essa dupla herança linguística influencia a literatura, a educação, a política e a vida cultural canadense. As culturas indígenas também têm papel essencial, expressas em línguas, artes visuais, narrativas orais, música, espiritualidades e reivindicações por reconhecimento histórico.O Canadá também é conhecido por manifestações culturais ligadas ao esporte, à música, ao cinema e às artes. O hóquei no gelo é um dos principais símbolos nacionais e possui forte presença no cotidiano esportivo do país. A produção musical canadense tem projeção internacional, assim como seu cinema e sua televisão. Nas grandes cidades, como Toronto, Vancouver, Montreal e Ottawa, a diversidade cultural aparece na culinária, nos festivais, nos bairros de imigrantes e na convivência entre diferentes tradições. Cultura A população canadense é relativamente pequena em comparação com a enorme extensão territorial do país, concentrando-se principalmente no sul, próximo à fronteira com os Estados Unidos, onde o clima é menos rigoroso e há maior dinamismo econômico. As áreas metropolitanas de Toronto, Montreal, Vancouver, Calgary, Edmonton e Ottawa concentram grande parte dos habitantes. Em 2026, estimativas oficiais indicavam população superior a 41 milhões de habitantes, com crescimento influenciado historicamente pela imigração, embora mudanças recentes nas políticas migratórias tenham reduzido o ritmo de expansão demográfica. População A bandeira do Canadá, adotada oficialmente em 1965, é composta por duas faixas verticais vermelhas nas laterais, uma faixa branca central e uma folha de bordo",
+        "final": "https://www.suapesquisa.com/paises/canada/",
+        "trecho_usado": "e lagos. Dados gerais: : 9.970.610 km² ÁREA : CAPITAL Ottawa : 36,8 milhões de habitantes (estimativa 2026). POPULAÇÃO dólar canadense MOEDA DO CANADÁ: : Canadá NOME OFICIAL : canadense NACIONALIDADE : 1.º de julho (Dia da Independência do Canadá). DATA NACIONAL : 10 províncias e 3 territórios. DIVISÃO ADMINISTRATIVA : Monarquia Parlamentarista GOVERNO : norte da América do Norte. LOCALIZAÇÃO : -",
+        "metadados": {
+          "titulo": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+          "descricao": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+          "canonica": "https://www.suapesquisa.com/paises/canada/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O Canadá é um país localizado na América do Norte, conhecido por sua vasta extensão territorial, que o torna o segundo maior país do mundo em área total, após a Rússia. Com uma população multicultural distribuída em dez províncias e três territórios, suas principais cidades incluem Toronto, Vancouver e Montreal. O Canadá é uma monarquia constitucional com um sistema de governo parlamentar, tendo a rainha Elizabeth II como chefe de estado até 2022, quando foi sucedida pelo rei Charles III (atual em 2026). O país possui uma economia diversificada e avançada, com destaque para setores como recursos naturais, tecnologia e serviços. O Canadá é também reconhecido por sua alta qualidade de vida, políticas progressistas e belíssimas paisagens naturais, incluindo florestas vastas, montanhas e lagos.\n: 36,8 milhões de habitantes (estimativa 2026). POPULAÇÃO\ndólar canadense MOEDA DO CANADÁ:\n: canadense NACIONALIDADE\n: 1.º de julho (Dia da Independência do Canadá). DATA NACIONAL\n: 10 províncias e 3 territórios. DIVISÃO ADMINISTRATIVA\n: Monarquia Parlamentarista GOVERNO\n: norte da América do Norte. LOCALIZAÇÃO\n: - 2 horas em relação à Brasília (UTC-3,5 a UTC-8). FUSO HORÁRIO\n: Toronto, Montreal, Vancouver, Ottawa, Hamilton, Edmonton, Calgary, Quebec, Winnipeg, Regina e Halifax. CIDADES DO CANADÁ (PRINCIPAIS)\nOceano Ártico (norte), Estados Unidos (Sul), Oceano Atlântico (leste) e Oceano Pacífico (oeste). LIMITES GEOGRÁFICOS:\n: inglês e francês (oficiais). IDIOMAS\n: cristianismo 83,5% (católicos 45,2%, protestantes 36,4%, ortodoxos 1,9%), judaísmo 1,2%, islamismo 0,9%, sem filiação 12,5%, outras 1,9%. RELIGIÃO\n: 3,9 habitantes/km² (ano de 2026 - estimativa). DENSIDADE DEMOGRÁFICA\nMapa do Canadá (clique no mapa para ampliar)\nO Canadá é o segundo maior país do mundo em extensão territorial e ocupa grande parte da América do Norte, estendendo-se do Oceano Atlântico ao Oceano Pacífico e alcançando o Oceano Ártico ao norte. Seu território apresenta grande diversidade de relevo, com destaque para as Montanhas Rochosas, localizadas na porção oeste, que formam uma cadeia montanhosa elevada e influenciam o clima e a ocupação humana da região. Na parte central, predominam grandes planícies, importantes para a agricultura mecanizada, enquanto o Escudo Canadense, uma antiga formação geológica rica em minerais, ocupa ampla área do centro e do leste do país.A vegetação canadense varia conforme a latitude e o clima. Ao norte, predominam tundras, marcadas por musgos, liquens e vegetação rasteira, adaptadas ao frio intenso e ao solo congelado durante boa parte do ano. Mais ao sul, aparece a floresta boreal, formada principalmente por coníferas, como pinheiros e abetos. Nas regiões de clima mais ameno, sobretudo no sudeste e em áreas próximas aos Grandes Lagos, há florestas temperadas, enquanto as pradarias aparecem nas províncias centrais, como Alberta, Saskatchewan e Manitoba.O clima do Canadá é bastante variado, mas\nAntes da chegada dos europeus, o território canadense era habitado por diversos povos indígenas, como inuítes, métis e várias Primeiras Nações. Esses povos desenvolveram formas próprias de organização social, práticas econômicas adaptadas aos ambientes locais e culturas marcadas por forte relação com a natureza. A partir do século XV, exploradores europeus chegaram à região, especialmente franceses e ingleses, interessados em rotas marítimas, comércio de peles e expansão territorial.A colonização francesa ganhou força no século XVII, com a criação da Nova França e o desenvolvimento de cidades como Quebec, fundada em 1608. A economia colonial estava fortemente ligada ao comércio de peles, às missões religiosas e à ocupação de áreas próximas ao Rio São Lourenço. Ao mesmo tempo, a presença britânica crescia na América do Norte, gerando disputas territoriais com a França. Após a Guerra dos Sete Anos, ocorrida entre 1756 e 1763, a França perdeu grande parte de seus domínios na região para a Grã-Bretanha.No século XIX, o Canadá passou por um processo"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.suapesquisa.com/images/site/logo_suapesquisa.webp",
+          "https://www.suapesquisa.com/uploads/site/mapa_canada.gif",
+          "https://www.suapesquisa.com/uploads/site/bandeira-canada.jpg",
+          "https://www.suapesquisa.com/uploads/site/infografico-canada.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-040963f45e37",
+            "type": "image",
+            "title": "Logo Sua Pesquisa",
+            "url": "https://www.suapesquisa.com/images/site/logo_suapesquisa.webp",
+            "final_url": "https://www.suapesquisa.com/images/site/logo_suapesquisa.webp",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo Sua Pesquisa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4b4ae7e59cae",
+            "type": "image",
+            "title": "Mapa do Canadá",
+            "url": "https://www.suapesquisa.com/uploads/site/mapa_canada.gif",
+            "final_url": "https://www.suapesquisa.com/uploads/site/mapa_canada.gif",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa do Canadá",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b969d397af0f",
+            "type": "image",
+            "title": "Bandeira do Canadá",
+            "url": "https://www.suapesquisa.com/uploads/site/bandeira-canada.jpg",
+            "final_url": "https://www.suapesquisa.com/uploads/site/bandeira-canada.jpg",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira do Canadá",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-15cc3004cbad",
+            "type": "image",
+            "title": "Infográfico sobre o Canadá",
+            "url": "https://www.suapesquisa.com/uploads/site/infografico-canada.jpg",
+            "final_url": "https://www.suapesquisa.com/uploads/site/infografico-canada.jpg",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Infográfico sobre o Canadá",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eb013bac4e21",
+            "type": "video",
+            "title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "url": "https://www.youtube.com/watch?v=VmPzNPi54iM",
+            "final_url": "https://www.youtube.com/watch?v=VmPzNPi54iM",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-7c634fa2d513",
+            "type": "document",
+            "title": "ottawa.htm",
+            "url": "https://www.suapesquisa.com/cidadesdomundo/ottawa.htm",
+            "final_url": "https://www.suapesquisa.com/cidadesdomundo/ottawa.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-76f9a5f10d88",
+            "type": "document",
+            "title": "bandeira_canada.htm",
+            "url": "https://www.suapesquisa.com/paises/canada/bandeira_canada.htm",
+            "final_url": "https://www.suapesquisa.com/paises/canada/bandeira_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-809dff061a76",
+            "type": "document",
+            "title": "colonizacao_canada.htm",
+            "url": "https://www.suapesquisa.com/historia/colonizacao_canada.htm",
+            "final_url": "https://www.suapesquisa.com/historia/colonizacao_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-16022fc64716",
+            "type": "document",
+            "title": "cultura_canada.htm",
+            "url": "https://www.suapesquisa.com/musicacultura/cultura_canada.htm",
+            "final_url": "https://www.suapesquisa.com/musicacultura/cultura_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-d409b8a6f5c6",
+            "type": "document",
+            "title": "geografia_do_canada.htm",
+            "url": "https://www.suapesquisa.com/paises/canada/geografia_do_canada.htm",
+            "final_url": "https://www.suapesquisa.com/paises/canada/geografia_do_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-78b2051def63",
+            "type": "document",
+            "title": "historia_canada.htm",
+            "url": "https://www.suapesquisa.com/historia/historia_canada.htm",
+            "final_url": "https://www.suapesquisa.com/historia/historia_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-907f8e5aee28",
+            "type": "document",
+            "title": "cidades_canada.htm",
+            "url": "https://www.suapesquisa.com/listas_exemplos/cidades_canada.htm",
+            "final_url": "https://www.suapesquisa.com/listas_exemplos/cidades_canada.htm",
+            "source_title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "source_url": "https://www.suapesquisa.com/paises/canada/",
+            "publisher": "www.suapesquisa.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados gerais do Canadá, geografia, história, economia, cultura, bandeira, população e curiosidades.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "224a2bb5cea593966d1d",
+            "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxORVNZZTRoSC1DbFJ2TzRENWh4YWo0anhjVDlHUHliZ0dyR3FIVWVvZUJIS3FCb05BcThBN0RKbzA0SmU3UkNSdjNBbk1Ua3Nsd0hqMWhaRHpaRmZ4ZEFmcXBUZXNxZ3N0MDlDVl9wNDExQ2NFU18ydDkySHB3cWxCcG80MGdoWkpmeUFHcENzQ04zd2JDWDhmUXk0Zkc0TmFWbEJENTh0a1hlV3I1?oc=5",
+            "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos - Vero Notícias",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos Vero Notícias"
+          },
+          {
+            "id": "b26a0118f9f7137c23bf",
+            "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+            "title": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país - BBC",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país BBC"
+          },
+          {
+            "id": "808ec7b567562e88a67b",
+            "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+            "title": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato - UOL Notícias",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato UOL Notícias"
+          },
+          {
+            "id": "4f336ec2ff624fff1b55",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+            "title": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê - G1",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê G1"
+          },
+          {
+            "id": "ea4f473af80fda7debe3",
+            "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+            "title": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá - Agência Brasil",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá Agência Brasil"
+          },
+          {
+            "id": "d03e938cf697903af3d9",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+            "title": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa - Aventuras na História",
+            "origin": "google-news",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa Aventuras na História"
+          },
+          {
+            "id": "0e850caadd90905bf072",
+            "url": "https://pt.wikipedia.org/wiki/Canad%C3%A1",
+            "title": "Canadá – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A partir do século XVII, aquela parte da Nova França, situada ao longo do rio São Lourenço e das margens norte dos Grandes Lagos, era conhecida como Canadá. Pos"
+          },
+          {
+            "id": "713d2263abd01e5c3f10",
+            "url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+            "title": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse paí"
+          },
+          {
+            "id": "2f8f6442ba3ea1afc646",
+            "url": "https://www.todamateria.com.br/canada/",
+            "title": "Canadá: mapa, bandeira, cidades, história e turismo",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Saiba tudo sobre o Canadá. Descubra as cidades, informações gerais sobre o país, cultura diversificada, motivos para imigrar e aspectos geográficos."
+          },
+          {
+            "id": "89e642b8486af598755d",
+            "url": "https://www.canada.ca/en.html",
+            "title": "Home - Canada.ca",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "We are aware of a cyber security vulnerability affecting organizations around the world. As a precaution, some Government of Canada websites and online services"
+          },
+          {
+            "id": "b082543bc4c77388349f",
+            "url": "https://www.suapesquisa.com/paises/canada/",
+            "title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Canadá é um país localizado na América do Norte, conhecido por sua vasta extensão territorial, que o torna o segundo maior país do mundo em área total, após a"
+          },
+          {
+            "id": "51f526dd003aaed5ec17",
+            "url": "https://en.wikipedia.org/wiki/Canada",
+            "title": "Canada - Wikipedia",
+            "origin": "bing",
+            "query": "\"Canadá\" notícias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Canada[a] is a country in North America. Its ten provinces and three territories extend from the Atlantic Ocean to the Pacific Ocean and northward into the Arct"
+          },
+          {
+            "id": "f9438627f2e00d7c26e5",
+            "url": "https://veronoticias.com/mundo/trump-reduz-tarifas-sobre-canada-em-meio-a-pressao-eleitoral-de-republicanos/",
+            "title": "Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos",
+            "origin": "publisher-feed",
+            "query": "\"Trump reduz tarifas sobre Canadá em meio a pressão eleitoral de republicanos\" site:veronoticias.com",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 13,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (\"Canadá\" notícias)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (\"Canadá\" notícias)",
+        "bing: 6 resultados (\"Canadá\" notícias)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (\"Canadá\" notícias)",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "RSS do publicador: 1 artigo(s) candidato(s), leitura pendente",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento",
+        "1ª rodada só com páginas de índice geral (6 sinalizada(s)); fontes primárias não alcançadas"
+      ],
+      "query_plan": null,
+      "ganho_informacao": null,
+      "lacunas": [
+        "primeira rodada só com páginas de índice geral"
+      ]
+    }
+  ],
+  "source_revision": "2c6a3248003a59f96325fb91a282be8262fd908b",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

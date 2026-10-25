@@ -1,0 +1,3205 @@
+{
+  "id": "new-01",
+  "category": "municipal_news",
+  "query": "Notícias de Ilhéus, Bahia, nos últimos sete dias sobre transporte",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 10.416,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus\" site:www.bahianoticias.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 87025
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 2993
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Ilh%C3%A9us%22+%22bahia%22+not%C3%ADcias+transporte&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5215
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Prefeito+entrega+15+novos+%C3%B4nibus+para+refor%C3%A7ar+moderniza%C3%A7%C3%A3o+de+transporte+p%C3%BAblico+em+Ilh%C3%A9us%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Prefeito+entrega+15+novos+%C3%B4nibus+para+refor%C3%A7ar+moderniza%C3%A7%C3%A3o+de+transporte+p%C3%BAblico+em+Ilh%C3%A9us%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 6181
+    },
+    {
+      "url": "https://www.bahianoticias.com.br",
+      "final": "https://www.bahianoticias.com.br",
+      "chars": 457091
+    },
+    {
+      "url": "https://www.bahianoticias.com.br/principal/rss.xml",
+      "final": "https://cdn.bahianoticias.com.br/rss.xml",
+      "chars": 39351
+    },
+    {
+      "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "final": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "chars": 78509
+    },
+    {
+      "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+      "final": "https://ilheus.com.br/prefeitura-de-ilheus/",
+      "chars": 259668
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+      "final": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+      "chars": 695834
+    },
+    {
+      "url": "https://www.ilheus.net/",
+      "final": "https://www.ilheus.net/",
+      "chars": 245735
+    },
+    {
+      "url": "https://ilheus.com.br/",
+      "final": "https://ilheus.com.br/",
+      "chars": 367662
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+    "domain": "news",
+    "original_request": "Notícias de Ilhéus, Bahia, nos últimos sete dias sobre transporte",
+    "resolved_request": "Notícias de Ilhéus, Bahia, entre 2026-10-17 e 2026-10-24 sobre transporte",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Ilhéus",
+      "region": "bahia",
+      "topic": "transporte"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T02:24:21.308020+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Ilhéus",
+        "region": "bahia",
+        "topic": "transporte"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "97de89010cd5d19accef",
+        "url": "https://ilheus.com.br/",
+        "title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "2023-12-20T18:13:55+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 152,
+        "final_url": "https://ilheus.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "INTENT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "c5a0381fc146d80f1cf4",
+        "url": "https://www.ilheus.net/",
+        "title": "Ilhéus Net - A liderança que você escolheu!",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "sáb., 24 out. 2026 03:44:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "XI Jogos Indígenas Tupinambá reúnem esporte e cultura em Olivença CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau Copa Elas em Campo movimenta fute",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 364,
+        "final_url": "https://www.ilheus.net/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "21ba7ab677d64606de87",
+        "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+        "title": "O que fazer em Ilhéus: 15 dicas de lugares incríveis para ir",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "2020-03-06T17:00:33+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "fazer umas comprinhas. 5. Catedral de São Sebastião Fabio Bittencourt Se você ainda tem dúvidas sobre o que fazer em Ilhéus, te daremos mais uma opção. Conheça ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 6962,
+        "final_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "4896606171ae674fda09",
+        "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+        "title": "PREFEITURA DE ILHÉUS - ILHÉUS.COM.BR",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "sex., 23 out. 2026 15:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 152,
+        "final_url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "6cb4765520b7c2b8a978",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+        "title": "AS 15 MELHORES coisas para fazer em Ilhéus (ATUALIZADO 2026)",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "sáb., 24 out. 2026 22:42:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "As sugestões de poses para fotos, alguns clicks, assim como suas explicações e dicas valiosas durante nosso passeio pela fazenda Capela Velha e City Tour em Ilh",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "6086cd07775bbe34ae0b",
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORE9wUGRjX2c4alNGQTBvQktSaHYyemxiTFJmbTJHUGtIQVlMYnlSZWsxc0JYQ0s2Mk1kZDRZbDJIbXllV2hlTEZQSmFnNkVoWHVaS21jTXk3OXA2dGw3NFdtamJHMWV3Smd1RXVTTXBfdHhTS2kzRThMZmlpMVZpeks2SjRPWWZxbHRub3ZoYTd1TGY5OEM3ZEl6QzFNNGQ5UUs3WmFDYXZmbldYSUZxRTExeTJmNTdHblZMazFFYnNnX2tSZVY0blFDLVBtN1hEcmZrWA?oc=5",
+        "title": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Mon, 16 Mar 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "e861dd48c1f3daa75466",
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLVlSMlk5bzZVWWdLUjFfc2FhTm1zeTdzNVhpNTdkakhPQmRNN3hULUlWZk4wRS05T3VtOTVJLWItRU0wdFNEY3V2LURIYWpfT2FiV29kank3STQwZzBkanFCXzJ4dTdidmNvMEtiaVRRWGNzVml3NGRKbnk4dE8wdHJTTTdYRllIMDVOR09RRGtFOEdGRzRXSEp0bzAwOWlpbHRZUUVWUVJTcEhKeVJ3cDdUZw?oc=5",
+        "title": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus - Jornal do Radialista",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Sat, 24 Oct 2026 02:35:43 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus Jornal do Radialista",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "a9a627e9bc35808cbcdf",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVEF4M3dUcE4zUzVmeXdTMHpyUG4zQ3B6cEE3RWtHQ1FFQXhFQ2FuVHhwTzhxSFl3VER1ZXJlcUhjdDIzcGMxdmd1VWxvc2FNY3ZZaWszYk83V3ozczdIZnRNM3VDalBzNm92YzJ0a21IWXNNQXBxZVNpaDJxdWU4ZmFuTmExdXU3Z3ZwLWpLbVRzVHRQNWs1eTBTRzN0Q01ObWZfbFRR?oc=5",
+        "title": "Bahia terá transporte gratuito durante as eleições de 2026 - Ilhéus Eventos",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Tue, 29 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bahia terá transporte gratuito durante as eleições de 2026 Ilhéus Eventos",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0c09c8ea44053a6cde7e",
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaXlFWTJfV1lEVnRXWEFxaS03UWhxdnBuaGtDQXRGdENxaWFOZnBrbjlpeWtTU1h0OWotaWgtT3R2Tm95aW9WdV9LaXJYNUhOUTVJT192VFJxQS1qTTBkRWUtZ180b0lxWnRwQWg3Vm5qUnFVTzk4VGlRQ1NfbFhnZDUtRGlUdkc3X2tkUksxeTg2dVdzbkg1Uzh2TER3cU5sYzYybjZKa0JUUkQ1N3gxNTJn?oc=5",
+        "title": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição - Notícia Livre",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Sat, 03 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição Notícia Livre",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "24dc16ec9c26e182a73b",
+        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYWlmTjg5YjUyckRvRzBqaThsNG0xNW9OWHBYNVdnV0pOZllrYzh1N3NvUkw2c0x4RjJnS2I5VHkyTWhCZGFucWRSYldZRC1fVEl0M3ItX1hFdnFtX3Fqc1c4cU9QVTBqa0w4TjR2UXhGb09keXBzdVIyQVpHdDRBSzlubjBqLTFzakh5TzN3T0VkeERSMFBoc3EyWDNrcWVnLVhUeXRoNFpsV3gtSWc?oc=5",
+        "title": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação - Política ao Ponto",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Sat, 03 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação Política ao Ponto",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "b1eb008dd831a72b7154",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY0xwckI4QmNlOXRzNlo0bDdDZ0h1djl3a1paU2xqZXdkZjhPV01XQ2dxaGY4VHZlcjNseVlSdEVNRFJqTDNwMXpCU3lPcVVybmZSZEs4RjgwbmNWNnNWMzdqRmVyb0VHcnRrbkxiM2oyVVNJRXBJS2JFYjIzVkdKVGdJUThIYnRta0ZyaHBqTF9jMlNzWmxOQlhRMTJ5WmRmLXZsWlk3bnZVY1o4T0lrYm9LbkM4aTB2?oc=5",
+        "title": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus - Achei Sudoeste",
+        "origin": "google-news",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "Sun, 06 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus Achei Sudoeste",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "12951ffb8804f3f33c77",
+        "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+        "title": "Ilhéus – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+        "date": "2004-09-16T04:55:30Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "] É também chamada por \"IOS\" na sigla , que respeita a grafia antiga do nome da cidade, \"São Jorge dos Ilheos\", que é utilizada nos bilhetes de transporte aéreo",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-d33c05fce0eb",
+      "type": "image",
+      "title": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-43e8a74a7b5e",
+      "type": "image",
+      "title": "Viajali",
+      "url": "https://www.viajali.com.br/wp-content/themes/viajali-2026/assets/images/viajali-logo.png",
+      "final_url": "https://www.viajali.com.br/wp-content/themes/viajali-2026/assets/images/viajali-logo.png",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Viajali",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-14624bcda417",
+      "type": "image",
+      "title": "Imagem ilustrativa: O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa-775x477.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa-775x477.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem ilustrativa: O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-449f7adcc616",
+      "type": "image",
+      "title": "Imagem ilustrativa: 10 cidades no Brasil com o melhor custo-benefício para viajar",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2021/06/cidades-no-brasil-custo-beneficio-viajar-10-1-286x160.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2021/06/cidades-no-brasil-custo-beneficio-viajar-10-1-286x160.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem ilustrativa: 10 cidades no Brasil com o melhor custo-benefício para viajar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1e05e990bc0",
+      "type": "image",
+      "title": "Imagem ilustrativa: 9 motivos especiais para você viajar para Itacaré na Bahia",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2016/09/Itacare-286x160.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2016/09/Itacare-286x160.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem ilustrativa: 9 motivos especiais para você viajar para Itacaré na Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-df0bb4bc965e",
+      "type": "image",
+      "title": "Imagem ilustrativa: Guia para uma viagem inesquecível pela Costa do Dendê",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2017/03/guia-de-viagem-costa-do-dende-5-286x160.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2017/03/guia-de-viagem-costa-do-dende-5-286x160.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem ilustrativa: Guia para uma viagem inesquecível pela Costa do Dendê",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-784d32e9ab22",
+      "type": "image",
+      "title": "Imagem ilustrativa: Resorts na Bahia: 10 opções incríveis para diferentes tipos de viajantes",
+      "url": "https://www.viajali.com.br/wp-content/uploads/2019/02/resorts-na-bahia-7-286x160.jpg",
+      "final_url": "https://www.viajali.com.br/wp-content/uploads/2019/02/resorts-na-bahia-7-286x160.jpg",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.viajali.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem ilustrativa: Resorts na Bahia: 10 opções incríveis para diferentes tipos de viajantes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8e5d8d66217",
+      "type": "video",
+      "title": "CONHECENDO ILHÉUS E ITACARÉ! BAHIA, BRASIL | JQV #60",
+      "url": "https://www.youtube.com/embed/nnQYzK9m-H8?feature=oembed",
+      "final_url": "https://www.youtube.com/embed/nnQYzK9m-H8?feature=oembed",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.youtube.com",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-a2b639caad0e",
+      "type": "video",
+      "title": "Praia de Ilhéus e mirantes",
+      "url": "https://www.youtube.com/embed/gftuXhK84yI?feature=oembed",
+      "final_url": "https://www.youtube.com/embed/gftuXhK84yI?feature=oembed",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.youtube.com",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-71c92dccacc6",
+      "type": "video",
+      "title": "Vlog Viagem: O que fazer em Ilhéus e Itacaré?",
+      "url": "https://www.youtube.com/embed/NaNl-HA3jIE?feature=oembed",
+      "final_url": "https://www.youtube.com/embed/NaNl-HA3jIE?feature=oembed",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.youtube.com",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-84ce1cc29720",
+      "type": "document",
+      "title": "Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+      "url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+      "final_url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.tripadvisor.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-e41a703af829",
+      "type": "document",
+      "title": "Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+      "url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+      "final_url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+      "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "publisher": "www.tripadvisor.com.br",
+      "date": "2020-03-06T17:00:33+00:00",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://ilheus.com.br/",
+      "titulo": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2023-12-20T18:13:55+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://ilheus.com.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2023-12-20T18:13:55+00:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.ilheus.net/",
+      "titulo": "Ilhéus Net",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 03:44:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.ilheus.net/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 03:44:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "titulo": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2020-03-06T17:00:33+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2020-03-06T17:00:33+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+      "items": [
+        {
+          "titulo": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus - Bahia Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORE9wUGRjX2c4alNGQTBvQktSaHYyemxiTFJmbTJHUGtIQVlMYnlSZWsxc0JYQ0s2Mk1kZDRZbDJIbXllV2hlTEZQSmFnNkVoWHVaS21jTXk3OXA2dGw3NFdtamJHMWV3Smd1RXVTTXBfdHhTS2kzRThMZmlpMVZpeks2SjRPWWZxbHRub3ZoYTd1TGY5OEM3ZEl6QzFNNGQ5UUs3WmFDYXZmbldYSUZxRTExeTJmNTdHblZMazFFYnNnX2tSZVY0blFDLVBtN1hEcmZrWA?oc=5",
+          "trecho": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus Bahia Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Bahia Notícias",
+          "publisher_url": "https://www.bahianoticias.com.br",
+          "meta": {
+            "publicado_em": "Mon, 16 Mar 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORE9wUGRjX2c4alNGQTBvQktSaHYyemxiTFJmbTJHUGtIQVlMYnlSZWsxc0JYQ0s2Mk1kZDRZbDJIbXllV2hlTEZQSmFnNkVoWHVaS21jTXk3OXA2dGw3NFdtamJHMWV3Smd1RXVTTXBfdHhTS2kzRThMZmlpMVZpeks2SjRPWWZxbHRub3ZoYTd1TGY5OEM3ZEl6QzFNNGQ5UUs3WmFDYXZmbldYSUZxRTExeTJmNTdHblZMazFFYnNnX2tSZVY0blFDLVBtN1hEcmZrWA?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORE9wUGRjX2c4alNGQTBvQktSaHYyemxiTFJmbTJHUGtIQVlMYnlSZWsxc0JYQ0s2Mk1kZDRZbDJIbXllV2hlTEZQSmFnNkVoWHVaS21jTXk3OXA2dGw3NFdtamJHMWV3Smd1RXVTTXBfdHhTS2kzRThMZmlpMVZpeks2SjRPWWZxbHRub3ZoYTd1TGY5OEM3ZEl6QzFNNGQ5UUs3WmFDYXZmbldYSUZxRTExeTJmNTdHblZMazFFYnNnX2tSZVY0blFDLVBtN1hEcmZrWA?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 16 Mar 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus - Jornal do Radialista",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLVlSMlk5bzZVWWdLUjFfc2FhTm1zeTdzNVhpNTdkakhPQmRNN3hULUlWZk4wRS05T3VtOTVJLWItRU0wdFNEY3V2LURIYWpfT2FiV29kank3STQwZzBkanFCXzJ4dTdidmNvMEtiaVRRWGNzVml3NGRKbnk4dE8wdHJTTTdYRllIMDVOR09RRGtFOEdGRzRXSEp0bzAwOWlpbHRZUUVWUVJTcEhKeVJ3cDdUZw?oc=5",
+          "trecho": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus Jornal do Radialista",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Jornal do Radialista",
+          "publisher_url": "https://jornaldoradialista.com.br",
+          "meta": {
+            "publicado_em": "Sat, 24 Oct 2026 02:35:43 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLVlSMlk5bzZVWWdLUjFfc2FhTm1zeTdzNVhpNTdkakhPQmRNN3hULUlWZk4wRS05T3VtOTVJLWItRU0wdFNEY3V2LURIYWpfT2FiV29kank3STQwZzBkanFCXzJ4dTdidmNvMEtiaVRRWGNzVml3NGRKbnk4dE8wdHJTTTdYRllIMDVOR09RRGtFOEdGRzRXSEp0bzAwOWlpbHRZUUVWUVJTcEhKeVJ3cDdUZw?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLVlSMlk5bzZVWWdLUjFfc2FhTm1zeTdzNVhpNTdkakhPQmRNN3hULUlWZk4wRS05T3VtOTVJLWItRU0wdFNEY3V2LURIYWpfT2FiV29kank3STQwZzBkanFCXzJ4dTdidmNvMEtiaVRRWGNzVml3NGRKbnk4dE8wdHJTTTdYRllIMDVOR09RRGtFOEdGRzRXSEp0bzAwOWlpbHRZUUVWUVJTcEhKeVJ3cDdUZw?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 02:35:43 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Bahia terá transporte gratuito durante as eleições de 2026 - Ilhéus Eventos",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVEF4M3dUcE4zUzVmeXdTMHpyUG4zQ3B6cEE3RWtHQ1FFQXhFQ2FuVHhwTzhxSFl3VER1ZXJlcUhjdDIzcGMxdmd1VWxvc2FNY3ZZaWszYk83V3ozczdIZnRNM3VDalBzNm92YzJ0a21IWXNNQXBxZVNpaDJxdWU4ZmFuTmExdXU3Z3ZwLWpLbVRzVHRQNWs1eTBTRzN0Q01ObWZfbFRR?oc=5",
+          "trecho": "Bahia terá transporte gratuito durante as eleições de 2026 Ilhéus Eventos",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Ilhéus Eventos",
+          "publisher_url": "https://ilheuseventos.com.br",
+          "meta": {
+            "publicado_em": "Tue, 29 Sep 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVEF4M3dUcE4zUzVmeXdTMHpyUG4zQ3B6cEE3RWtHQ1FFQXhFQ2FuVHhwTzhxSFl3VER1ZXJlcUhjdDIzcGMxdmd1VWxvc2FNY3ZZaWszYk83V3ozczdIZnRNM3VDalBzNm92YzJ0a21IWXNNQXBxZVNpaDJxdWU4ZmFuTmExdXU3Z3ZwLWpLbVRzVHRQNWs1eTBTRzN0Q01ObWZfbFRR?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVEF4M3dUcE4zUzVmeXdTMHpyUG4zQ3B6cEE3RWtHQ1FFQXhFQ2FuVHhwTzhxSFl3VER1ZXJlcUhjdDIzcGMxdmd1VWxvc2FNY3ZZaWszYk83V3ozczdIZnRNM3VDalBzNm92YzJ0a21IWXNNQXBxZVNpaDJxdWU4ZmFuTmExdXU3Z3ZwLWpLbVRzVHRQNWs1eTBTRzN0Q01ObWZfbFRR?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 29 Sep 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição - Notícia Livre",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaXlFWTJfV1lEVnRXWEFxaS03UWhxdnBuaGtDQXRGdENxaWFOZnBrbjlpeWtTU1h0OWotaWgtT3R2Tm95aW9WdV9LaXJYNUhOUTVJT192VFJxQS1qTTBkRWUtZ180b0lxWnRwQWg3Vm5qUnFVTzk4VGlRQ1NfbFhnZDUtRGlUdkc3X2tkUksxeTg2dVdzbkg1Uzh2TER3cU5sYzYybjZKa0JUUkQ1N3gxNTJn?oc=5",
+          "trecho": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição Notícia Livre",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Notícia Livre",
+          "publisher_url": "https://noticialivre.com.br",
+          "meta": {
+            "publicado_em": "Sat, 03 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaXlFWTJfV1lEVnRXWEFxaS03UWhxdnBuaGtDQXRGdENxaWFOZnBrbjlpeWtTU1h0OWotaWgtT3R2Tm95aW9WdV9LaXJYNUhOUTVJT192VFJxQS1qTTBkRWUtZ180b0lxWnRwQWg3Vm5qUnFVTzk4VGlRQ1NfbFhnZDUtRGlUdkc3X2tkUksxeTg2dVdzbkg1Uzh2TER3cU5sYzYybjZKa0JUUkQ1N3gxNTJn?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaXlFWTJfV1lEVnRXWEFxaS03UWhxdnBuaGtDQXRGdENxaWFOZnBrbjlpeWtTU1h0OWotaWgtT3R2Tm95aW9WdV9LaXJYNUhOUTVJT192VFJxQS1qTTBkRWUtZ180b0lxWnRwQWg3Vm5qUnFVTzk4VGlRQ1NfbFhnZDUtRGlUdkc3X2tkUksxeTg2dVdzbkg1Uzh2TER3cU5sYzYybjZKa0JUUkQ1N3gxNTJn?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 03 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação - Política ao Ponto",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYWlmTjg5YjUyckRvRzBqaThsNG0xNW9OWHBYNVdnV0pOZllrYzh1N3NvUkw2c0x4RjJnS2I5VHkyTWhCZGFucWRSYldZRC1fVEl0M3ItX1hFdnFtX3Fqc1c4cU9QVTBqa0w4TjR2UXhGb09keXBzdVIyQVpHdDRBSzlubjBqLTFzakh5TzN3T0VkeERSMFBoc3EyWDNrcWVnLVhUeXRoNFpsV3gtSWc?oc=5",
+          "trecho": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação Política ao Ponto",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Política ao Ponto",
+          "publisher_url": "https://politicaaoponto.com.br",
+          "meta": {
+            "publicado_em": "Sat, 03 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYWlmTjg5YjUyckRvRzBqaThsNG0xNW9OWHBYNVdnV0pOZllrYzh1N3NvUkw2c0x4RjJnS2I5VHkyTWhCZGFucWRSYldZRC1fVEl0M3ItX1hFdnFtX3Fqc1c4cU9QVTBqa0w4TjR2UXhGb09keXBzdVIyQVpHdDRBSzlubjBqLTFzakh5TzN3T0VkeERSMFBoc3EyWDNrcWVnLVhUeXRoNFpsV3gtSWc?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYWlmTjg5YjUyckRvRzBqaThsNG0xNW9OWHBYNVdnV0pOZllrYzh1N3NvUkw2c0x4RjJnS2I5VHkyTWhCZGFucWRSYldZRC1fVEl0M3ItX1hFdnFtX3Fqc1c4cU9QVTBqa0w4TjR2UXhGb09keXBzdVIyQVpHdDRBSzlubjBqLTFzakh5TzN3T0VkeERSMFBoc3EyWDNrcWVnLVhUeXRoNFpsV3gtSWc?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 03 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus - Achei Sudoeste",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY0xwckI4QmNlOXRzNlo0bDdDZ0h1djl3a1paU2xqZXdkZjhPV01XQ2dxaGY4VHZlcjNseVlSdEVNRFJqTDNwMXpCU3lPcVVybmZSZEs4RjgwbmNWNnNWMzdqRmVyb0VHcnRrbkxiM2oyVVNJRXBJS2JFYjIzVkdKVGdJUThIYnRta0ZyaHBqTF9jMlNzWmxOQlhRMTJ5WmRmLXZsWlk3bnZVY1o4T0lrYm9LbkM4aTB2?oc=5",
+          "trecho": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus Achei Sudoeste",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Achei Sudoeste",
+          "publisher_url": "https://www.acheisudoeste.com.br",
+          "meta": {
+            "publicado_em": "Sun, 06 Sep 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY0xwckI4QmNlOXRzNlo0bDdDZ0h1djl3a1paU2xqZXdkZjhPV01XQ2dxaGY4VHZlcjNseVlSdEVNRFJqTDNwMXpCU3lPcVVybmZSZEs4RjgwbmNWNnNWMzdqRmVyb0VHcnRrbkxiM2oyVVNJRXBJS2JFYjIzVkdKVGdJUThIYnRta0ZyaHBqTF9jMlNzWmxOQlhRMTJ5WmRmLXZsWlk3bnZVY1o4T0lrYm9LbkM4aTB2?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY0xwckI4QmNlOXRzNlo0bDdDZ0h1djl3a1paU2xqZXdkZjhPV01XQ2dxaGY4VHZlcjNseVlSdEVNRFJqTDNwMXpCU3lPcVVybmZSZEs4RjgwbmNWNnNWMzdqRmVyb0VHcnRrbkxiM2oyVVNJRXBJS2JFYjIzVkdKVGdJUThIYnRta0ZyaHBqTF9jMlNzWmxOQlhRMTJ5WmRmLXZsWlk3bnZVY1o4T0lrYm9LbkM4aTB2?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sun, 06 Sep 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+      "items": [
+        {
+          "titulo": "Ilhéus – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+          "trecho": "Ilhéus é um município brasileiro do litoral e sul do estado da Bahia, região Nordeste. Conta com o mais extenso litoral do estado. Ilhéus foi fundada em 1534 como \"Vila de São Jorge dos Ilheos\" e elevada à cidade em 1881. [3]",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 22:32:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "qua., 21 out. 2026 22:32:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+          "url": "https://ilheus.com.br/",
+          "trecho": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:22:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ilheus.com.br/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://ilheus.com.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 11:22:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Ilhéus Net - A liderança que você escolheu!",
+          "url": "https://www.ilheus.net/",
+          "trecho": "CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau Copa Elas em Campo movimenta futebol feminino em Ilhéus Aos 10 anos, atleta de Ilhéus conquista mais um título e mantém sequência invicta no Jiu-Jitsu Sutram informa interdições temporárias durante o Triathlon Cup International em Ilhéus I",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 03:44:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ilheus.net/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.ilheus.net/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 03:44:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "AS 15 MELHORES coisas para fazer em Ilhéus (ATUALIZADO 2026)",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+          "trecho": "As sugestões de poses para fotos, alguns clicks, assim como suas explicações e dicas valiosas durante nosso passeio pela fazenda Capela Velha e City Tour em Ilhéus tornaram nosso passeio sensacional!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:42:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 22:42:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "O que fazer em Ilhéus: 15 dicas de lugares incríveis para ir",
+          "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+          "trecho": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:08:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://viajali.com.br/o-que-fazer-em-ilheus",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 11:08:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "PREFEITURA DE ILHÉUS - ILHÉUS.COM.BR",
+          "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+          "trecho": "Ilhéus inicia implantação de novo Sistema de Protocolo Virtual PREFEITURA DE ILHÉUS",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 15:13:00 GMT"
+          },
+          "discovery_query": "\"Ilhéus\" \"bahia\" notícias transporte",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ilheus.com.br/prefeitura-de-ilheus",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sex., 23 out. 2026 15:13:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus\" site:www.bahianoticias.com.br",
+      "items": [
+        {
+          "titulo": "Portal Oficial | Prefeitura Municipal de Guaratuba - PR",
+          "url": "https://cidadao.guaratuba.pr.gov.br/",
+          "trecho": "Envie solicitações, sugestões, reclamações, elogios e acompanhe serviços públicos municipais de forma rápida e transparente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:57:00 GMT"
+          }
+        },
+        {
+          "titulo": "Prefeito – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Prefeito",
+          "trecho": "Prefeito é chefe do poder executivo municipal no Brasil, sendo o principal responsável pela administração local e pela execução de políticas públicas voltadas para as necessidades da população municipal.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:15:00 GMT"
+          }
+        },
+        {
+          "titulo": "Prefeitura Municipal de Guaratuba – Portal Guaratuba",
+          "url": "https://www.guaratuba.com/orgao-publicos-em-guaratuba/prefeitura-municipal-de-guaratuba/",
+          "trecho": "O PODER EXECUTIVO DE GUARATUBA, ESTÁ ASSIM CONSTITUÍDO: Cobre-a de ouro um perpétuo arrebol. De onde Cristo a amplidão abençoa! Mais solene um artista achará? Onde o céu estrelado é mais perto! Mais belezas, no mundo, não há! Branca ninfa do sul do Brasil! Glória e escrínio do meu Paraná!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 08:38:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+      "result": {
+        "titulo": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+        "texto": "Ilhéus é uma cidade cheia de encantos, e fica localizada no sul da Bahia. Conhecida mundialmente através dos livros de Jorge Amado, o local é riquíssimo culturalmente e mescla arquitetura colonial com belas praias. Se você vai conhecer a cidade, leia este artigo com dicas de atrações incríveis e saiba o que fazer em Ilhéus. Publicidade Player aguardando visualizacao. Índice do conteúdo: Fotos Vídeos O que fazer em Ilhéus Tomar um sorvete na praça, caminhar pelas areias da praia ou simplesmente conhecer as construções antigas do centro histórico da cidade. São muitas as opções de lazer nessa cidade. Se é o seu sonho visitar Ilhéus, embarque nessa leitura e conheça os principais pontos turísticos da cidade. 1. Bar Vesúvio Robério Souza Bomfim Esse é o famoso bar de um dos romances de Jorge Amado e, por essa razão, um dos mais visitados entre os que vão até a cidade. De dia você poderá provar uma iguaria do cardápio do bar e tirar uma foto ao lado da estátua do escritor. Se preferir ir à noite, verá apresentações de teatro às terças, inspiradas no romance Gabriela. 2. Praias do Sul Danny Meneses Quando nos perguntamos o que fazer em Ilhéus, uma das primeiras coisas que nos vem à mente são as praias. O sul da Bahia tem um lindo litoral, para todos os tipos de visitantes. Esteja ele em busca de descanso, aventuras de buggy ou das melhores ondas para surfar. 3. Casa de Cultura Jorge Amado Reinan O museu tem como objetivo mostrar a vida e a obra do escritor. O visitante encontrará fotografias e outros objetos pertencentes à Jorge Amado, que viveu no local. Além disso, a casa ainda funciona como o Instituto Histórico de Ilhéus e como uma Fundação Cultural. O horário de funcionamento é de segunda à sábado. 4. Fábrica de Chocolate Caseiro KombiMel Bem perto de Ilhéus é possível visitar uma fábrica de produção de chocolate artesanal. Primeira do nordeste, a fábrica é uma das principais atrações para turistas. Além disso, ela ainda tem uma lojinha e uma mini fazenda para você fazer umas comprinhas. 5. Catedral de São Sebastião Fabio Bittencourt Se você ainda tem dúvidas sobre o que fazer em Ilhéus, te daremos mais uma opção. Conheça uma das igrejas mais lindas da Bahia, inaugurada no ano de 1967. Todos os detalhes dela foram feitos no estilo neoclássico, embora seu interior é bastante discreto. Vale a pena fazer uma visita! 6. Lagoa Encantada Joca Moreira A cerca de 34 quilômetros da cidade é possível conhecer a Lagoa Encantada, onde o turista pode navegar durante o passeio. Os passeios duram cerca de seis horas. Para você que está com o tempo livre e não sabe o que fazer em Ilhéus, essa pode ser uma opção diferenciada. 7. Fazendas de Cacau Fazenda Capela Velha Já pensou em realizar um tour guiado nas principais fazendas de cacau da cidade? As visitas apresentam ao turista todo o processo de plantio e colheita do cacau até a produção de chocolate. São realizadas degustações e refeições típicas de Ilhéus. 8. Mercado de Artesanato de Ilhéus Tripadvisor O momento das compras é o mais esperados por muitas pessoas que viajam à uma nova cidade. Em Ilhéus, temos o Mercado de Artesanato, onde você poderá encontrar lembranças de viagem e iguarias da cidade como chocolate em pó, por um preço em conta e com grande variedade. Mas vale pechinchar para levar o máximo de presentes para amigos e familiares. 9. Teatro Municipal Isabela Rosa O Teatro Municipal é um dos pontos mais visitados em Ilhéus. Essa casa de espetáculos, também conhecida como Cine-Teatro, recebe uma grande produção teatral, movimentando a cena cultural noturna da cidade. Atualmente, o local está revitalizado, mais um motivo para você visitá-lo. 10. Morro de Pernambuco Roger Ribeiro Seu destino são as praias de Ilhéus? Dê uma parada no Morro de Pernambuco. Poucos são os que conhecem esse local, que tem um linda paisagem que apaixona todos os visitantes que vão ao litoral Sul. O local parece uma ilha e é possível avistar o mar na praia das Conchas, o Centro Histórico e a Baía do Pontal, também em Ilhéus. 11. Bataclan Riva Santana Conhecido na cidade por ser um antigo cabaré, o Bataclan hoje em dia é uma das principais atrações da cidade. Ele era frequentado pelos antigos coronéis, donos de fazendas de cacau e hoje funciona como um bar e restaurante, mas ainda mexe com a imaginação de muitas pessoas. Mais uma opção para você que não sabe o que fazer em Ilhéus. 12. Mirante da Piedade Marcus Vinícius Anjos Conhecida também como a cidade dos mirantes, Ilhéus oferece ao turista várias chances de se encantar pelas paisagens, vistas de cima. O Mirante da Piedade fica bem ao lado do Museu da Piedade, outra atração turística da cidade que possui uma arquitetura fantástica. Para chegar, você pode ir tanto de carro, quanto a pé. 13. Praia do Cristo Regilan Meira Localizada na Baía de Ilhéus, na região do encontro do rio com o mar, essa praia oferece ao turista uma linda vista. Além disso, você poderá alugar um caiaque ou um stand up paddle e aproveitar seu passeio. Ademais, há no local um Cristo com os braços abertos, no qual os turistas aproveitam para tirar várias fotos. 14. Praia dos Milionários André Monteiro Esse é um dos pontos mais badalados de Ilhéus e que tem em suas areias muitas histórias do passado colonial da cidade. Ao longo da praia, estão instalados restaurantes e chuveiros onde é possível se refrescar após um banho de mar. 15. Igreja Matriz de São Jorge dos Ilhéus Tripadvisor Se você está em busca de história e arquitetura colonial, conheça essa igreja. Ela é a mais antiga construção religiosa da cidade e conta a história local. Ademais, você conhecerá o acervo com imagens barrocas e outros documentos no Museu de Arte Sacra, mais um ponto turístico imperdível. Impossível não ficar fascinado com as atrações de Ilhéus. E se você quiser conhecer mais sobre a cidade, acompanhe as dicas de turistas que já visitaram a cidade e recomendam o passeio. Dicas de quem já foi a Ilhéus Nada melhor que pegar as melhores dicas de quem já foi para Ilhéus e adaptar ao nosso gosto. Então acompanhe os roteiros dos turistas que já viajaram ao local e amaram a experiência. Parada Cultural: lugares especiais em Ilhéus Nesse vídeo são listados alguns dos pontos mais conhecidos de Ilhéus, com uma breve história sobre os locais. Uma aventura imperdível! Um passeio pelas praias e mirantes Além do roteiro cultural, das praias e cachoeiras, conheça os morros de Ilhéus, atrações bastante visitadas pelos turistas. Uma aventura pelas praias e cachoeiras de Ilhéus Já conheceu a cidade toda e não sabe mais o que fazer em Ilhéus? Que tal alugar um carro e ir em busca das praias e cachoeiras nas proximidades? Confira as dicas do vídeo e coloque mais essas atrações no seu roteiro de viagem. Ilhéus é uma cidade encantadora, não é mesmo? E por falar em atrações imperdíveis na cidade e nas redondezas, porque não dar um pulo na vizinha Itacaré? Para ajudar, daremos a você alguns , não perca! motivos para viajar para Itacaré",
+        "final": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+        "trecho_usado": "fazer umas comprinhas. 5. Catedral de São Sebastião Fabio Bittencourt Se você ainda tem dúvidas sobre o que fazer em Ilhéus, te daremos mais uma opção. Conheça uma das igrejas mais lindas da Bahia, inaugurada no ano de 1967. Todos os detalhes dela foram feitos no estilo neoclássico, embora seu interior é bastante discreto. Vale a pena fazer uma visita! 6. Lagoa Encantada Joca Moreira A cerca de 34",
+        "metadados": {
+          "titulo": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+          "descricao": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+          "canonica": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "O que fazer em Ilhéus: 15 dicas de lugares incríveis para ir",
+            "og:description": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "og:url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "og:site_name": "Viajali",
+            "og:image": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+            "og:image:width": "775",
+            "og:image:height": "477",
+            "og:image:type": "image/jpeg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:creator": "@viajali",
+            "twitter:site": "@viajali",
+            "twitter:label1": "Escrito por",
+            "twitter:data1": "Liz Santana",
+            "twitter:label2": "Est. tempo de leitura",
+            "twitter:data2": "7 minutos"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2020-03-06T17:00:33+00:00",
+          "atualizado_em": "2020-12-02T16:52:38+00:00",
+          "autor": "Liz Santana",
+          "site": "Viajali",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2020-03-06T17:00:33+00:00",
+            "dateModified": "2020-12-02T16:52:38+00:00",
+            "author": {
+              "name": "Liz Santana",
+              "@id": "https://www.viajali.com.br/#/schema/person/a5496abf7100a777eee7915757a9afcb"
+            },
+            "headline": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "articleSection": [
+              "Bahia"
+            ],
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Ilhéus é uma cidade cheia de encantos, e fica localizada no sul da Bahia. Conhecida mundialmente através dos livros de Jorge Amado, o local é riquíssimo culturalmente e mescla arquitetura colonial com belas praias. Se você vai conhecer a cidade, leia este artigo com dicas de atrações incríveis e saiba o que fazer em Ilhéus.\nTomar um sorvete na praça, caminhar pelas areias da praia ou simplesmente conhecer as construções antigas do centro histórico da cidade. São muitas as opções de lazer nessa cidade. Se é o seu sonho visitar Ilhéus, embarque nessa leitura e conheça os principais pontos turísticos da cidade.\nEsse é o famoso bar de um dos romances de Jorge Amado e, por essa razão, um dos mais visitados entre os que vão até a cidade. De dia você poderá provar uma iguaria do cardápio do bar e tirar uma foto ao lado da estátua do escritor. Se preferir ir à noite, verá apresentações de teatro às terças, inspiradas no romance Gabriela.\nQuando nos perguntamos o que fazer em Ilhéus, uma das primeiras coisas que nos vem à mente são as praias. O sul da Bahia tem um lindo litoral, para todos os tipos de visitantes. Esteja ele em busca de descanso, aventuras de buggy ou das melhores ondas para surfar."
+          },
+          {
+            "titulo": "3. Casa de Cultura Jorge Amado",
+            "texto": "O museu tem como objetivo mostrar a vida e a obra do escritor. O visitante encontrará fotografias e outros objetos pertencentes à Jorge Amado, que viveu no local. Além disso, a casa ainda funciona como o Instituto Histórico de Ilhéus e como uma Fundação Cultural. O horário de funcionamento é de segunda à sábado."
+          },
+          {
+            "titulo": "4. Fábrica de Chocolate Caseiro",
+            "texto": "Bem perto de Ilhéus é possível visitar uma fábrica de produção de chocolate artesanal. Primeira do nordeste, a fábrica é uma das principais atrações para turistas. Além disso, ela ainda tem uma lojinha e uma mini fazenda para você fazer umas comprinhas."
+          },
+          {
+            "titulo": "5. Catedral de São Sebastião",
+            "texto": "Se você ainda tem dúvidas sobre o que fazer em Ilhéus, te daremos mais uma opção. Conheça uma das igrejas mais lindas da Bahia, inaugurada no ano de 1967. Todos os detalhes dela foram feitos no estilo neoclássico, embora seu interior é bastante discreto. Vale a pena fazer uma visita!\nA cerca de 34 quilômetros da cidade é possível conhecer a Lagoa Encantada, onde o turista pode navegar durante o passeio. Os passeios duram cerca de seis horas. Para você que está com o tempo livre e não sabe o que fazer em Ilhéus, essa pode ser uma opção diferenciada.\nJá pensou em realizar um tour guiado nas principais fazendas de cacau da cidade? As visitas apresentam ao turista todo o processo de plantio e colheita do cacau até a produção de chocolate. São realizadas degustações e refeições típicas de Ilhéus."
+          },
+          {
+            "titulo": "8. Mercado de Artesanato de Ilhéus",
+            "texto": "O momento das compras é o mais esperados por muitas pessoas que viajam à uma nova cidade. Em Ilhéus, temos o Mercado de Artesanato, onde você poderá encontrar lembranças de viagem e iguarias da cidade como chocolate em pó, por um preço em conta e com grande variedade. Mas vale pechinchar para levar o máximo de presentes para amigos e familiares.\nO Teatro Municipal é um dos pontos mais visitados em Ilhéus. Essa casa de espetáculos, também conhecida como Cine-Teatro, recebe uma grande produção teatral, movimentando a cena cultural noturna da cidade. Atualmente, o local está revitalizado, mais um motivo para você visitá-lo.\nSeu destino são as praias de Ilhéus? Dê uma parada no Morro de Pernambuco. Poucos são os que conhecem esse local, que tem um linda paisagem que apaixona todos os visitantes que vão ao litoral Sul. O local parece uma ilha e é possível avistar o mar na praia das Conchas, o Centro Histórico e a Baía do Pontal, também em Ilhéus.\nConhecido na cidade por ser um antigo cabaré, o Bataclan hoje em dia é uma das principais atrações da cidade. Ele era frequentado pelos antigos coronéis, donos de fazendas de cacau e hoje funciona como um bar e restaurante, mas ainda mexe com a imaginação de muitas pessoas. Mais uma opção para você que não sabe o que fazer em Ilhéus.\nConhecida também como a cidade dos mirantes, Ilhéus oferece ao turista várias chances de se encantar pelas paisagens, vistas de cima. O Mirante da Piedade fica bem ao lado do Museu da Piedade, outra atração turística da cidade que possui uma arquitetura fantástica. Para chegar, você pode ir tanto de carro, quanto a pé.\nLocalizada na Baía de Ilhéus, na região do encontro do rio com o mar, essa praia oferece ao turista uma linda vista. Além disso, você poderá alugar um caiaque ou um stand up paddle e aproveitar seu passeio. Ademais, há no local um Cristo com os braços abertos, no qual os turistas aproveitam para tirar várias fotos."
+          },
+          {
+            "titulo": "14. Praia dos Milionários",
+            "texto": "Esse é um dos pontos mais badalados de Ilhéus e que tem em suas areias muitas histórias do passado colonial da cidade. Ao longo da praia, estão instalados restaurantes e chuveiros onde é possível se refrescar após um banho de mar."
+          },
+          {
+            "titulo": "15. Igreja Matriz de São Jorge dos Ilhéus",
+            "texto": "Se você está em busca de história e arquitetura colonial, conheça essa igreja. Ela é a mais antiga construção religiosa da cidade e conta a história local. Ademais, você conhecerá o acervo com imagens barrocas e outros documentos no Museu de Arte Sacra, mais um ponto turístico imperdível.\nImpossível não ficar fascinado com as atrações de Ilhéus. E se você quiser conhecer mais sobre a cidade, acompanhe as dicas de turistas que já visitaram a cidade e recomendam o passeio."
+          },
+          {
+            "titulo": "Dicas de quem já foi a Ilhéus",
+            "texto": "Nada melhor que pegar as melhores dicas de quem já foi para Ilhéus e adaptar ao nosso gosto. Então acompanhe os roteiros dos turistas que já viajaram ao local e amaram a experiência."
+          },
+          {
+            "titulo": "Parada Cultural: lugares especiais em Ilhéus",
+            "texto": "Nesse vídeo são listados alguns dos pontos mais conhecidos de Ilhéus, com uma breve história sobre os locais. Uma aventura imperdível!"
+          },
+          {
+            "titulo": "Um passeio pelas praias e mirantes",
+            "texto": "Além do roteiro cultural, das praias e cachoeiras, conheça os morros de Ilhéus, atrações bastante visitadas pelos turistas."
+          },
+          {
+            "titulo": "Uma aventura pelas praias e cachoeiras de Ilhéus",
+            "texto": "Já conheceu a cidade toda e não sabe mais o que fazer em Ilhéus? Que tal alugar um carro e ir em busca das praias e cachoeiras nas proximidades? Confira as dicas do vídeo e coloque mais essas atrações no seu roteiro de viagem.\nIlhéus é uma cidade encantadora, não é mesmo? E por falar em atrações imperdíveis na cidade e nas redondezas, porque não dar um pulo na vizinha Itacaré? Para ajudar, daremos a você alguns , não perca! motivos para viajar para Itacaré"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+          "https://secure.gravatar.com/avatar/ba578c5f7997001e7f2ec8fa854ae86f48b304929f507437f148665de1f1c075?s=96&d=mm&r=g",
+          "https://www.viajali.com.br/wp-content/themes/viajali-2026/assets/images/viajali-logo.png",
+          "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa-775x477.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2021/06/cidades-no-brasil-custo-beneficio-viajar-10-1-286x160.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2016/09/Itacare-286x160.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2017/03/guia-de-viagem-costa-do-dende-5-286x160.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-1-1.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-2-1.jpg",
+          "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-3-1.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-d33c05fce0eb",
+            "type": "image",
+            "title": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-43e8a74a7b5e",
+            "type": "image",
+            "title": "Viajali",
+            "url": "https://www.viajali.com.br/wp-content/themes/viajali-2026/assets/images/viajali-logo.png",
+            "final_url": "https://www.viajali.com.br/wp-content/themes/viajali-2026/assets/images/viajali-logo.png",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Viajali",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-14624bcda417",
+            "type": "image",
+            "title": "Imagem ilustrativa: O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa-775x477.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2020/02/o-que-fazer-em-ilheus-capa-775x477.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa: O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-449f7adcc616",
+            "type": "image",
+            "title": "Imagem ilustrativa: 10 cidades no Brasil com o melhor custo-benefício para viajar",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2021/06/cidades-no-brasil-custo-beneficio-viajar-10-1-286x160.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2021/06/cidades-no-brasil-custo-beneficio-viajar-10-1-286x160.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa: 10 cidades no Brasil com o melhor custo-benefício para viajar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1e05e990bc0",
+            "type": "image",
+            "title": "Imagem ilustrativa: 9 motivos especiais para você viajar para Itacaré na Bahia",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2016/09/Itacare-286x160.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2016/09/Itacare-286x160.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa: 9 motivos especiais para você viajar para Itacaré na Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-df0bb4bc965e",
+            "type": "image",
+            "title": "Imagem ilustrativa: Guia para uma viagem inesquecível pela Costa do Dendê",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2017/03/guia-de-viagem-costa-do-dende-5-286x160.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2017/03/guia-de-viagem-costa-do-dende-5-286x160.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa: Guia para uma viagem inesquecível pela Costa do Dendê",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-784d32e9ab22",
+            "type": "image",
+            "title": "Imagem ilustrativa: Resorts na Bahia: 10 opções incríveis para diferentes tipos de viajantes",
+            "url": "https://www.viajali.com.br/wp-content/uploads/2019/02/resorts-na-bahia-7-286x160.jpg",
+            "final_url": "https://www.viajali.com.br/wp-content/uploads/2019/02/resorts-na-bahia-7-286x160.jpg",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.viajali.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem ilustrativa: Resorts na Bahia: 10 opções incríveis para diferentes tipos de viajantes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d8e5d8d66217",
+            "type": "video",
+            "title": "CONHECENDO ILHÉUS E ITACARÉ! BAHIA, BRASIL | JQV #60",
+            "url": "https://www.youtube.com/embed/nnQYzK9m-H8?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/nnQYzK9m-H8?feature=oembed",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.youtube.com",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-a2b639caad0e",
+            "type": "video",
+            "title": "Praia de Ilhéus e mirantes",
+            "url": "https://www.youtube.com/embed/gftuXhK84yI?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/gftuXhK84yI?feature=oembed",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.youtube.com",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-71c92dccacc6",
+            "type": "video",
+            "title": "Vlog Viagem: O que fazer em Ilhéus e Itacaré?",
+            "url": "https://www.youtube.com/embed/NaNl-HA3jIE?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/NaNl-HA3jIE?feature=oembed",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.youtube.com",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-84ce1cc29720",
+            "type": "document",
+            "title": "Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+            "url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+            "final_url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d3236094-Reviews-Mercado_de_Artesanato_de_Ilheus-Ilheus_State_of_Bahia.html",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.tripadvisor.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-e41a703af829",
+            "type": "document",
+            "title": "Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+            "url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+            "final_url": "https://www.tripadvisor.com.br/Attraction_Review-g303262-d2412745-Reviews-Matriz_de_Sao_Jorge_dos_Ilheus_Church-Ilheus_State_of_Bahia.html",
+            "source_title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+            "source_url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "publisher": "www.tripadvisor.com.br",
+            "date": "2020-03-06T17:00:33+00:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.ilheus.net/",
+      "result": {
+        "titulo": "Ilhéus Net",
+        "texto": "XI Jogos Indígenas Tupinambá reúnem esporte e cultura em Olivença CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau Copa Elas em Campo movimenta futebol feminino em Ilhéus Aos 10 anos, atleta de Ilhéus conquista mais um título e mantém sequência invicta no Jiu-Jitsu Sutram informa interdições temporárias durante o Triathlon Cup International em Ilhéus",
+        "final": "https://www.ilheus.net/",
+        "trecho_usado": "XI Jogos Indígenas Tupinambá reúnem esporte e cultura em Olivença CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau Copa Elas em Campo movimenta futebol feminino em Ilhéus Aos 10 anos, atleta de Ilhéus conquista mais um título e mantém sequência invicta no Jiu-Jitsu Sutram informa interdições temporárias durante o Triathlon Cup International em Ilhéus",
+        "metadados": {
+          "titulo": "Ilhéus Net",
+          "descricao": "A liderança que você escolheu!",
+          "canonica": "https://www.ilheus.net/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "website",
+            "og:title": "Ilhéus Net",
+            "og:description": "Ilheus.net é um site de notícias voltado à todos os públicos, que se mantém sempre focado nas últimas notícias da cidade e região circunvizinhas.",
+            "og:url": "https://www.ilheus.net/",
+            "og:site_name": "Ilhéus Net"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@ilheus_net"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "WebSite",
+          "ld": {
+            "publisher": {
+              "@id": "https://www.ilheus.net/#organization"
+            },
+            "description": "A liderança que você escolheu!",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "XI Jogos Indígenas Tupinambá reúnem esporte e cultura em Olivença",
+            "texto": ""
+          },
+          {
+            "titulo": "CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau",
+            "texto": ""
+          },
+          {
+            "titulo": "Copa Elas em Campo movimenta futebol feminino em Ilhéus",
+            "texto": ""
+          },
+          {
+            "titulo": "Aos 10 anos, atleta de Ilhéus conquista mais um título e mantém sequência invicta no Jiu-Jitsu",
+            "texto": ""
+          },
+          {
+            "titulo": "Sutram informa interdições temporárias durante o Triathlon Cup International em Ilhéus",
+            "texto": ""
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.ilheus.net/wp-content/uploads/2023/05/Logotipo-Ilheus-Net-Sem-Sombra.png",
+          "https://www.ilheus.net/wp-content/uploads/2026/09/SMU-0063-26-H-BANNER-AF_728X90PX.png",
+          "https://www.ilheus.net/wp-content/uploads/2026/10/PMI_BANNER-SEDUC_728X90PX.gif",
+          "https://www.ilheus.net/wp-content/uploads/2026/06/REFIS2026_WEBBANNER_728X90px.gif",
+          "https://www.ilheus.net/wp-content/uploads/2026/08/PMI_REFIS2_WEB-BANNER-728X90.gif",
+          "https://www.ilheus.net/ads/ios.jpg",
+          "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260917-WA0223-150x150.jpg",
+          "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260915-WA0342-150x150.jpg",
+          "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260911-WA0166-150x150.jpg",
+          "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260909-WA0025-150x150.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-93e4cd336d4c",
+            "type": "image",
+            "title": "Logotipo Ilheus Net (Sem Sombra)",
+            "url": "https://www.ilheus.net/wp-content/uploads/2023/05/Logotipo-Ilheus-Net-Sem-Sombra.png",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2023/05/Logotipo-Ilheus-Net-Sem-Sombra.png",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logotipo Ilheus Net (Sem Sombra)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-34194dc34168",
+            "type": "image",
+            "title": "Instituto AOCP",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/SMU-0063-26-H-BANNER-AF_728X90PX.png",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/SMU-0063-26-H-BANNER-AF_728X90PX.png",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Instituto AOCP",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e9ecf337a9b5",
+            "type": "image",
+            "title": "Prefeitura Municipal de Ilhéus",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/10/PMI_BANNER-SEDUC_728X90PX.gif",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/10/PMI_BANNER-SEDUC_728X90PX.gif",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Prefeitura Municipal de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f5237d910dc8",
+            "type": "image",
+            "title": "Anunciar em blog de Ilhéus",
+            "url": "https://www.ilheus.net/ads/ios.jpg",
+            "final_url": "https://www.ilheus.net/ads/ios.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Anunciar em blog de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cf061c67d2df",
+            "type": "image",
+            "title": "Jogos indígenas",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260917-WA0223-150x150.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260917-WA0223-150x150.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jogos indígenas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fd061d4b0853",
+            "type": "image",
+            "title": "Corrida dez milhas CEPLAC",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260915-WA0342-150x150.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260915-WA0342-150x150.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Corrida dez milhas CEPLAC",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-21c85cf8fe89",
+            "type": "image",
+            "title": "Copa elas em campo areninha da Urbis",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260911-WA0166-150x150.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260911-WA0166-150x150.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Copa elas em campo areninha da Urbis",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d9fe78decfd9",
+            "type": "image",
+            "title": "Enzo Jiu jitsu tbm educa",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260909-WA0025-150x150.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260909-WA0025-150x150.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Enzo Jiu jitsu tbm educa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a0403a59707",
+            "type": "image",
+            "title": "Catedral Ilhéus triathron",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260903-WA0294-150x150.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/09/IMG-20260903-WA0294-150x150.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Catedral Ilhéus triathron",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1e66ac9e0639",
+            "type": "image",
+            "title": "Jabes-Ribeiro-reposta-criticas-de-Adelia-e-sinaliza-oposicao-a",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/10/Jabes-Ribeiro-reposta-criticas-de-Adelia-e-sinaliza-oposicao-a-588x421.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/10/Jabes-Ribeiro-reposta-criticas-de-Adelia-e-sinaliza-oposicao-a-588x421.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jabes-Ribeiro-reposta-criticas-de-Adelia-e-sinaliza-oposicao-a",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-959b4778daf9",
+            "type": "image",
+            "title": "Nova diretoria Sindatran",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/10/IMG-20261024-WA0513-588x441.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/10/IMG-20261024-WA0513-588x441.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Nova diretoria Sindatran",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0f72603d405e",
+            "type": "image",
+            "title": "Prefeitura de Ilhéus",
+            "url": "https://www.ilheus.net/wp-content/uploads/2026/06/IMG-20260618-WA0173-588x470.jpg",
+            "final_url": "https://www.ilheus.net/wp-content/uploads/2026/06/IMG-20260618-WA0173-588x470.jpg",
+            "source_title": "Ilhéus Net",
+            "source_url": "https://www.ilheus.net/",
+            "publisher": "www.ilheus.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Prefeitura de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+      "result": {
+        "titulo": "Ilhéus.com.br | Rumo aos 500 anos",
+        "texto": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "final": "https://ilheus.com.br/prefeitura-de-ilheus/",
+        "trecho_usado": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "metadados": {
+          "titulo": "Ilhéus.com.br | Rumo aos 500 anos",
+          "descricao": "RUMO AOS 500 ANOS",
+          "canonica": "https://ilheus.com.br/prefeitura-de-ilheus/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "PREFEITURA DE ILHÉUS - ILHÉUS.COM.BR",
+            "og:url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+            "og:site_name": "ILHÉUS.COM.BR",
+            "og:image": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "og:image:width": "3313",
+            "og:image:height": "1336",
+            "og:image:type": "image/png"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@Ilheusbrasil"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "WebSite",
+          "ld": {
+            "publisher": {
+              "@id": "https://ilheus.com.br/#organization"
+            },
+            "description": "RUMO AOS 500 ANOS",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png"
+        ],
+        "midia": [
+          {
+            "id": "med-a2fbcec2a42d",
+            "type": "image",
+            "title": "Ilhéus.com.br | Rumo aos 500 anos",
+            "url": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "final_url": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "source_title": "Ilhéus.com.br | Rumo aos 500 anos",
+            "source_url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+            "publisher": "ilheus.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+      "result": {
+        "titulo": "município do Estado da Bahia, Brasil",
+        "texto": "Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () Novembro de 2024 Ilhéus Município do Brasil Centro histórico ( à esquerda) Catedral de São Sebastião Rua Padre Luis Palmeira. ao fundo Ponte Jorge Amado Avenida Soares Lopes Rua Treze de Maio, bairro do Pontal Vista aérea e parcial da cidade Bairro do Salobrinho Morada do Porto, localizado no bairro do Banco da Vitória conjunto habitacional . Bairro do Pontal ao fundo Baía do Pontal Bandeira Brasão de armas Hino Gentílico ilheuense, 1 [ ] ilheense 2 [ ] Localização de Ilhéus na Bahia Localização de Ilhéus na Bahia Ilhéus Localização de Ilhéus no Brasil Mapa de Ilhéus Coordenadas: 14° 47′ 20″ S, 39° 02′ 56″ O País Brasil Unidade federativa Bahia Municípios limítrofes , , , , , , , e Aurelino Leal Buerarema Coaraci Itabuna Itacaré Itajuípe Itapitanga Una Uruçuca Distância até a capital 446 km Fundação (492anos) 1534 3 [ ] Governo • Prefeito(a) Valderico Luiz dos Reis Júnior(,) 4 [ ] 5 [ ] União Brasil 2025– • Vereadores 21 6 [ ] Área • Total (2025/IBGE) 7 [ ] 1 588,556km² •Urbana (/) 2022 IBGE 8 [ ] 39,65 km² Altitude 52 m População •Total () Censo de 2022 9 [ ] 178 649 hab. •Posição BA: 8º · NE: 33° · BR: 167º 10 [ ] •Estimativa (2026) 9 [ ] 189 259 hab. Densidade 112,5hab./km² Clima () tropical Af Fuso horário Hora de Brasília () UTC−3 IDH (/2010) PNUD 11 [ ] 0,690 — médio Gini (/2010) PNUD 12 [ ] 0,58 PIB (/2021) IBGE 13 [ ] 5 163 622,92mil R$ •Posição ()() BA: 13º · BR: 251° •Per capita (/2021) IBGE 13 [ ] 32 756,00 R$ Sítio () () www.ilheus.ba.gov.br Prefeitura www.camaradeilheus.ba.gov.br Câmara é um do e sul do da , . Conta com o mais extenso do estado. Ilhéus município brasileiro litoral estado Bahia região Nordeste litoral Ilhéus foi fundada em 1534 como \"Vila de São Jorge dos Ilheos\" e elevada à cidade em 1881. Considerada a \"Capital do Cacau\" e denominada por seus habitantes como a \"Princesinha do Sul\", tem sua baseada na , no e na . É conhecida por ambientar os de , famoso escritor baiano, como e . 3 [ ] economia agricultura turismo indústria romances Jorge Amado Gabriela, Cravo e Canela Terras do Sem Fim Era o maior produtor de do mundo, até sofrer a infestação da , uma doença que atacou as plantações na década de 1990 e reduziu consideravelmente a produção. cacau vassoura-de-bruxa 14 [ ] É também chamada por \"IOS\" na sigla , que respeita a grafia antiga do nome da cidade, \"São Jorge dos Ilheos\", que é utilizada nos bilhetes de transporte aéreo no . IATA Aeroporto Jorge Amado 15 [ ] Possui um que ultrapassa os . Abriga importante polo de informática do estado, além de ser o centro regional de serviços junto com Itabuna. Sedia o Aeroporto Jorge Amado e é portão de entrada para destinos muito procurados, como , , , e a própria cidade de Ilhéus. produto interno bruto per capita 25 000 reais Itacaré Canavieiras Ilha de Comandatuba Itabuna 16 [ ] O centro da cidade se localiza em uma ilha formada pelos rios Almada, que apresenta belas paisagens e elevada biodiversidade, mas ameaçado pela poluição e desmatamento dos rios , e ainda pelos canais Jacaré e Cachoeira Itacanoeira (ou Fundão) Itaípe. 17 [ ] Apesar da infraestrutura da cidade não ser a ideal, tem-se caminhado para o desenvolvimento de ações que proporcionem uma base sólida para o surgimento de uma atividade turística sustentável a médio e longo prazo. Pontos turísticos como as praias dos Milionários, Havaizinho e Olivença, os rios Cachoeira e Almada com seus manguezais, a Lagoa Encantada e o próprio Centro Histórico da cidade (dentre outros) justificam plenamente uma visita a Ilhéus. 18 [ ] História [ editar | editar código ] Período colonial [ editar | editar código ] Ver também: Capitania de Ilhéus Por volta do ano 1000, as tribos que habitavam a região foram expulsas para o interior do continente devido à chegada de povos procedentes da . No século XVI, quando chegaram os primeiros portugueses à região, a mesma era habitada pela tribo tupi dos . indígenas tapuias tupis Amazônia tupiniquins 17 [ ] No século XVI, com a , o rei português doou vasta extensão de terra, sete mil quadradas, ao , da corte real. A carta de doação foi assinada em a 26 de junho de 1534. Ainda que se falasse da terra as maiores maravilhas, o donatário da capitania preferiu o luxo e o fausto da corte, e enviou o espanhol Francisco Romero para cuidar de suas terras e representá-lo na administração da capitania. De acordo com o historiador , Francisco Romero era considerado um homem bravo e circunspecto e, para defender as terra a ele delegadas, enfrentou e pacificou os índios tupiniquins que se revoltaram diante da carta de doação da Capitania de Ilhéus a Jorge de Figueiredo Correia. colonização do Brasil pelos portugueses dom João III léguas donatário Jorge de Figueiredo Correia escrivão Évora Francisco Adolfo de Varnhagen 19 [ ] Mapa da Capitania de Ilhéus, 1640 Francisco Romero se instalou primeiro na ilha de Tinharé, atual ; depois, descobriu a , se encantou e lá fundou a sede da capitania, dando-lhe o nome de São Jorge dos Ilhéos: São Jorge, uma homenagem ao donatário Jorge e Ilhéus, devido à quantidade de ilhas (ilhéos) encontradas no seu litoral (além das que, ainda existem hoje, como a Pedra de Ilhéus, Ilheusinho, Pedra de Itapitanga e a ), além dessas, a paisagem da baía também se caracterizava pelos morros do Pernambuco, Outeiro de São Sebastião, Rapa, grande e Itapins. Hoje, estes morros são conhecidos como Morro de Pernambuco, Morro do Outeiro de São Sebastião, Morro da Conquista e Morro do Pacheco . Instalada em 1535 na , antigo domínio da , a sede administrativa logo se mudou para a região da Foz do , a chamada Baía de Ilhéus. Morro de São Paulo Baía do Pontal Ilha dos Frades Ilha de Tinharé Capitania de Ilhéus Rio Cachoeira 19 [ ] A chegada dos colonizadores possibilitou a fundação da Vila de São Jorge dos Ilhéos que, em 1556, se transformou em por ordem de . Considerada por como \"a melhor coisa desta costa, para fazenda\", a região se tornou produtora de e ganhou muitas construções. Nos seus primeiros quinze anos, o progresso da vila era enorme e atraía todo tipo de pessoa. Jorge de Figueiredo doou pedaços de terra que se chamavam a diversas figuras importantes do reino e, em 1537, doou uma sesmaria a , que seria o terceiro governador-geral do Brasil, localizada no que foi chamado de , e onde hoje está localizado o povoado de Rio do Engenho. freguesia Dom Pero Fernandes Sardinha Tomé de Sousa cana-de-açúcar sesmarias Mem de Sá Engenho de Santana 18 [ ] Ainda restam vestígios deste engenho, que foi explorado pelos jesuítas, e onde está localizada a capela de Nossa Senhora de Santana, considerada a terceira igreja mais antiga do . Em 1551, com a morte do donatário, a capitania mudou de dono várias vezes e caiu no ostracismo, tornando-se apenas mais uma vila de pescadores na costa do país. Com a chegada dos ferozes índios , que passaram a atacar as plantações, Ilhéus sofreu um declínio econômico que resultou em decadência. Brasil aimorés 18 [ ] Em 1559 começou a 'Guerra dos Ilhéus', na qual os índios tupiniquins, tribo mais amiga dos portugueses, assassinam três lusitanos para vingar a morte de um índio ocasionada por um português. Em resposta, Mem de Sá inicia uma repressão violenta que resulta na \"Batalha dos Nadadores\", na qual os índios tupiniquins lançaram-se ao mar, na praia do Cururupe, e lutaram até a morte com índios tupinambás, fieis a Mem de Sá. 19 [ ] Quando os atacaram Ilhéus e foram repelidos, em 1595, já existia na entrada do o , transformado em 1611 em de e . franceses porto fortim de Santo Antônio forte pedra cal 18 [ ] Mapa do Número das Toras de Pau- Brasil Descoberto na Capitania de Ilhéus No século XVIII, a capitania estagnou e a lavoura reduziu-se a cana de açúcar. A terra ainda era cultivada pelos indígenas que caçavam e pescavam para os colonos receosos dos índios aimorés. A vila de São Jorge mantinha-se pobre, embor",
+        "final": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+        "trecho_usado": "] É também chamada por \"IOS\" na sigla , que respeita a grafia antiga do nome da cidade, \"São Jorge dos Ilheos\", que é utilizada nos bilhetes de transporte aéreo no . IATA Aeroporto Jorge Amado 15 [ ] Possui um que ultrapassa os . Abriga importante polo de informática do estado, além de ser o centro regional de serviços junto com Itabuna. Sedia o Aeroporto Jorge Amado e é portão de entrada para",
+        "metadados": {
+          "titulo": "município do Estado da Bahia, Brasil",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Centro_de_Ilh%C3%A9us.jpg/1280px-Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "900",
+            "og:title": "Ilhéus – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2004-09-16T04:55:30Z",
+          "atualizado_em": "2026-10-17T04:33:50Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2004-09-16T04:55:30Z",
+            "dateModified": "2026-10-17T04:33:50Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "município do Estado da Bahia, Brasil"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () Novembro de 2024\nCentro histórico ( à esquerda) Catedral de São Sebastião Rua Padre Luis Palmeira. ao fundo Ponte Jorge Amado Avenida Soares Lopes Rua Treze de Maio, bairro do Pontal Vista aérea e parcial da cidade Bairro do Salobrinho Morada do Porto, localizado no bairro do Banco da Vitória conjunto habitacional . Bairro do Pontal ao fundo Baía do Pontal\nilheuense, 1 [ ] ilheense 2 [ ]\nLocalização de Ilhéus na Bahia Ilhéus Localização de Ilhéus no Brasil\nLocalização de Ilhéus na Bahia\nCoordenadas: 14° 47′ 20″ S, 39° 02′ 56″ O\n, , , , , , , e Aurelino Leal Buerarema Coaraci Itabuna Itacaré Itajuípe Itapitanga Una Uruçuca\nValderico Luiz dos Reis Júnior(,) 4 [ ] 5 [ ] União Brasil 2025–\n• Total (2025/IBGE) 7 [ ]\n•Urbana (/) 2022 IBGE 8 [ ]\n•Total () Censo de 2022 9 [ ]\nBA: 8º · NE: 33° · BR: 167º 10 [ ]\nHora de Brasília () UTC−3\n•Per capita (/2021) IBGE 13 [ ]\n() () www.ilheus.ba.gov.br Prefeitura www.camaradeilheus.ba.gov.br Câmara\né um do e sul do da , . Conta com o mais extenso do estado. Ilhéus município brasileiro litoral estado Bahia região Nordeste litoral\nIlhéus foi fundada em 1534 como \"Vila de São Jorge dos Ilheos\" e elevada à cidade em 1881. Considerada a \"Capital do Cacau\" e denominada por seus habitantes como a \"Princesinha do Sul\", tem sua baseada na , no e na . É conhecida por ambientar os de , famoso escritor baiano, como e . 3 [ ] economia agricultura turismo indústria romances Jorge Amado Gabriela, Cravo e Canela Terras do Sem Fim\nEra o maior produtor de do mundo, até sofrer a infestação da , uma doença que atacou as plantações na década de 1990 e reduziu consideravelmente a produção. cacau vassoura-de-bruxa 14 [ ]\nÉ também chamada por \"IOS\" na sigla , que respeita a grafia antiga do nome da cidade, \"São Jorge dos Ilheos\", que é utilizada nos bilhetes de transporte aéreo no . IATA Aeroporto Jorge Amado 15 [ ]\nPossui um que ultrapassa os . Abriga importante polo de informática do estado, além de ser o centro regional de serviços junto com Itabuna. Sedia o Aeroporto Jorge Amado e é portão de entrada para destinos muito procurados, como , , , e a própria cidade de Ilhéus. produto interno bruto per capita 25 000 reais Itacaré Canavieiras Ilha de Comandatuba Itabuna 16 [ ]\nO centro da cidade se localiza em uma ilha formada pelos rios Almada, que apresenta belas paisagens e elevada biodiversidade, mas ameaçado pela poluição e desmatamento dos rios , e ainda pelos canais Jacaré e Cachoeira Itacanoeira (ou Fundão) Itaípe. 17 [ ]\nApesar da infraestrutura da cidade não ser a ideal, tem-se caminhado para o desenvolvimento de ações que proporcionem uma base sólida para o surgimento de uma atividade turística sustentável a médio e longo prazo. Pontos turísticos como as praias dos Milionários, Havaizinho e Olivença, os rios Cachoeira e Almada com seus manguezais, a Lagoa Encantada e o próprio Centro Histórico da cidade (dentre outros) justificam plenamente uma visita a Ilhéus. 18 [ ]\nPor volta do ano 1000, as tribos que habitavam a região foram expulsas para o interior do continente devido à chegada de povos procedentes da . No século XVI, quando chegaram os primeiros portugueses à região, a mesma era habitada pela tribo tupi dos . indígenas tapuias tupis Amazônia tupiniquins 17 [ ]\nNo século XVI, com a , o rei português doou vasta extensão de terra, sete mil quadradas, ao , da corte real. A carta de doação foi assinada em a 26 de junho de 1534. Ainda que se falasse da terra as maiores maravilhas, o donatário da capitania preferiu o luxo e o fausto da corte, e enviou o espanhol Francisco Romero para cuidar de suas terras e representá-lo na administração da capitania. De acordo com o historiador , Francisco Romero era considerado um homem bravo e circunspecto e, para defender as terra a ele delegadas, enfrentou e pacificou os índios tupiniquins que se revoltaram di"
+          },
+          {
+            "titulo": "Século XX: apogeu e decadência da cacauicultura",
+            "texto": "na década de 1980 Catedral de São Sebastião\nNo início do século XX, a antiga vila de casas desalinhadas, dá lugar a palacetes, vinte e oito praças , diversas indústrias, agências de navegação e, além de exportar cacau , exportava também , couro, sabão, madeira para marcenaria, peixe seco, entre outros. Os principais povoados nesse período eram Pontal, Itabuna, Banco da Vitoria (criado em 1830), Almadina, Ariguatá, Cururupe, Iguape, Olivença, São João e Castelo Novo. No ano de 1914, uma forte tempestade, que resultou em uma grande enchente, danificou a estrada de ferro Ilhéus-Conquista, construída em 1904 pela firma Oliveira, Carvalho e Cia. tal acontecimento acarretou grandes prejuízos, mas a cidade conseguiu se recuperar mantendo posição de destaque entre as cidades baianas. óleo de copaíba 19 [ ]\nNesta época, começaram a construção de belos edifícios públicos, como o , que abriga até hoje a Prefeitura, e a sede da Associação Comercial de Ilhéus; belas casas, como a do coronel Misael Tavares e a da família Berbert, uma cópia do , no , e muitos outros. Palácio do Paranaguá Palácio do Catete Rio de Janeiro 21 [ ]\nNem os conflitos sangrentos que se prolongaram por mais de um ano conseguiram frear o desenvolvimento de Ilhéus. O preço do cacau subia e as fortunas cresciam rapidamente. Gastava-se abundantemente e o champagne francês era vendido como aperitivo nos bares. No ano de 1920 é inaugurada a primeira ponte de atracação do porto e um trecho de cais, além do Hospital São José. 19 [ ]\nNa década de 1920, Ilhéus fervilhava de pessoas, de dinheiro, de luxo e riqueza. Neste período, foi construído o prédio do \"Ilhéos Hotel\", o primeiro edifício no interior do com elevador, uma obra ainda hoje imponente, e o Teatro Municipal, considerado, na época, um dos mais bem aparelhados do interior do Nordeste e fora das capitais, que esteve em ruínas, mas foi reformado. Os indivíduos de maior poder aquisitivo primaram pelo bom gosto e requinte, sempre muito atentos aos costumes e modas da Capital Federal, a cidade do Rio de Janeiro, e também aos praticados na . Tudo vinha da Europa em navios. Nordeste Europa 18 [ ]\nNeste período, a exportação de cacau era realizada pelo porto de , acarretando problemas como dificuldade no embarque, perdas na qualidade e no peso do produto. Em 1924, os cacauicultores iniciaram, com recursos próprios, a construção do porto de Ilhéus, e a exportação do cacau começou a ser realizada na cidade, trazendo com isso a presença de estrangeiros e um intercâmbio cultural com países da Europa. Nesta época, vinham dançarinas, mágicos e também aventureiros para divertir as pessoas que possuíam dinheiro. Salvador 18 [ ]\nIlhéus, década de 1970 () Arquivo Nacional\nA cidade era movimentada, haviam cabarés, clubes noturnos, casinos que serviram de inspiração para o cenário dos romances de . Uma época de muito dinheiro, luxo e desmandos. O grande fluxo financeiro originado pela produção e exportação do cacau, deu origem a peculiaridades no desenvolvimento da região da , região geoestratégica da . O desenvolvimento da produção e a busca por melhor qualidade desta levaram as lideranças regionais e os produtores a criar a , hoje órgão do , com um importante centro de pesquisa, o Centro de Pesquisas do Cacau. Jorge Amado Costa do Cacau Bahia commodity Comissão Executiva de Desenvolvimento da Lavoura Cacaueira Ministério da Agricultura, Pecuária e Abastecimento 22 [ ]\nA demanda regional por , buscada nas década de 1940 e 1950, em , principalmente pelos filhos dos \"coronéis do cacau\", gerou o anseio pela implantação de faculdades e instituições de ensino superior na região. A é fruto desta demanda. Sendo, hoje, referência nordestina na formação de nível superior, firma-se como importante instituição de produção científica no nordeste, a segunda da Bahia, somente superada pela . educação superior Salvador Universidade Estadual de Santa Cruz Universidade Federal da Bahia 23 [ ]\nA partir da década de 1980, os ciclos de secas provocadas p"
+          },
+          {
+            "titulo": "Edificações e monumentos históricos",
+            "texto": "Biblioteca Pública Municipal Adonias Filho - Av. Soares Lopes\nCasa de Cultura Jorge Amado - Quarteirão Jorge Amado\nCasario secular da Rua Antonio Lavigne de Lemos\nCatedral de São Sebastião - Praça Dom Eduardo\nConvento e Igreja Nossa Senhora da Piedade -\nIgreja Matriz de São Jorge - Praça Rui Barbosa\nMuseu da Capitania de Ilhéus\nMuseu Nossa Senhora da Piedade\nPalacete Misael Tavares - Quarteirão Jorge Amado\nPalácio Episcopal - Alto Teresópolis\n- Praça J. J. Seabra Palácio Paranaguá\nTeatro Municipal de Ilhéus - Quarteirão Jorge Amado\nPraça / Praça Dom Eduardo Luiz Viana\nPraça Barão do Rio Branco\nPraça Castro Alves ou Praça da Irene\nA costa litorânea do município de Ilhéus possui uma extensão de 84km, sendo considerada a maior do estado da Bahia. O litoral se estende desde o arraial do Acuípe, limite sul, tendo como divisor o rio Acuípe, até o povoado da Ponta do Ramo, ao norte, cujo limite é o rio Sargi. As praias não se sucedem de forma contínua pelo litoral, pois são interrompidas por formações rochosas e cursos d’água, como o rio Almada. 69 [ ]\nO litoral norte se caracteriza pelas áreas de preservação de mata atlântica e por praias com ondas fortes indicadas para práticas de esportes. Neste litoral encontram-se as seguintes praias: Ponta da Tulha, Joia do Atlântico, Mamoã, Ponta do Ramo, Sargi, Marciano, de São Domingos, do Malhado, da Avenida, do Cristo. 69 [ ]\nAs praias do Sargi, Mamoã, Ponta da Tulha, Ponta do Ramo e a do Jóia encontram-se inseridas na APA da Lagoa Encantada se caracterizam por apresentar orla exposta e rústica, e trechos em diferentes níveis de ocupação (trechos não-urbanizados, urbanizados e em processo de ocupação). Tais praias apresentam áreas de mata atlântica, restinga, brejo e rios, além da fauna silvestre (primatas e pássaros). Principais usos deste trecho são: hotelaria, moradia e lazer. O acesso à estas praias ocorre de forma indireta. 69 [ ]\nAs praias de São Domingos e São Miguel sofrem processo de erosão em função das orlas do porto do Malhado. Nesta unidade situa-se o bairro de São Miguel uma península margeada pelo oceano Atlântico e o rio Almada apresenta residências fixas de veraneio com pequenos comércio cabanas de praias, restaurantes, pousadas e lojas de artesanatos. Nas praias do Marciano e do Malhado,(vila de pescadores) são encontradas atividades como a pesca artesanal, a mariscagem e o beneficiamento (defumação), bem como o estaleiro para o reparos de barcos utilizados pela comunidade. 69 [ ]\nNa área central do município se localizam a avenida Soares Lopes, a praia do Cristo e avenida Dois de Julho . Essa área é cercada por rios e praias e apresenta orla exposta em processo de assoreamento com ocupação consolidado e totalmente urbanizada de uso residencial, comercial,turismo,lazer e serviços. Tem como atributos naturais praias em mar aberto com vegetação de restinga herbácea em processo de regeneração e espécies vegetais introduzidas que compõe o Parque . Burle Marx 69 [ ]\nO Litoral Sul se caracteriza pela diversidade de paisagens, e são encontradas desde praias com formações rochosas às praias com grande extensão de areia intercaladas por rios, recifes de arenito e trechos com vegetação de restinga herbácea e arbustiva, coqueiros. O litoral apresenta trechos em diferentes níveis de ocupação (trechos urbanizados, em processo de ocupação e não-urbanizados) e de tipos de uso, como: hotelaria, lazer, comercial, residencial, cabanas de praias, clubes e transporte aéreo (aeroporto). O acesso às praias ocorre, em sua maior parte, de forma direta. Neste litoral encontram-se as seguintes praias: do Morro de Pernambuco, dos Milionários, do Cururupe, do Back Door, do Batuba, do Cai n’água, do Jairi, do Canabrava, Sirihyba e Acuípe. 69 [ ]\nPraia do Morro de Pernambuco é marcada pela presença de um farol, este trecho caracteriza-se como orla exposta não urbanizada cujos atributos naturais são rochas, vegetação de restinga herbácea, arbustiva e espécies exóticas. 69 [ ]\nA praia do Opaba se locali"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Ilhéus"
+            ],
+            [
+              "Município do Brasil"
+            ],
+            [
+              ".mw-parser-output .tmulti .multiimageinner{display:flex;flex-direction:column}.mw-parser-output .tmulti .trow{display:flex;flex-direction:row;clear:left;flex-wr"
+            ],
+            [
+              "Bandeira Brasão de armas"
+            ],
+            [
+              "Hino"
+            ],
+            [
+              "Gentílico",
+              "ilheuense, [ 1 ] ilheense [ 2 ]"
+            ],
+            [
+              "Localização de Ilhéus na Bahia Localização de Ilhéus na Bahia Ilhéus Localização de Ilhéus no Brasil"
+            ],
+            [
+              "Mapa de Ilhéus"
+            ],
+            [
+              "Coordenadas: 14° 47′ 20″ S, 39° 02′ 56″ O {{#parsoid\\u0000fragment:32}} \"}}'/>"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Unidade federativa",
+              "Bahia"
+            ],
+            [
+              "Municípios limítrofes",
+              "Aurelino Leal , Buerarema , Coaraci , Itabuna , Itacaré , Itajuípe , Itapitanga , Una e Uruçuca"
+            ],
+            [
+              "Distância até a capital",
+              "446 km"
+            ],
+            [
+              "Fundação",
+              "1534 (492 anos) [ 3 ]"
+            ],
+            [
+              "Governo"
+            ],
+            [
+              "• Prefeito(a)",
+              "Valderico Luiz dos Reis Júnior [ 4 ] [ 5 ] ( União Brasil , 2025– )"
+            ],
+            [
+              "• Vereadores",
+              "21 [ 6 ]"
+            ],
+            [
+              "Área"
+            ],
+            [
+              "• Total .mw-parser-output .nobold{font-weight:normal} (2025/IBGE) [ 7 ]",
+              "1 588,556 km²"
+            ],
+            [
+              "• Urbana ( 2022 / IBGE ) [ 8 ]",
+              "39,65 km²"
+            ],
+            [
+              "Altitude",
+              "52 m"
+            ],
+            [
+              "População"
+            ],
+            [
+              "• Total ( Censo de 2022 ) [ 9 ]",
+              "178 649 hab."
+            ],
+            [
+              "• Posição",
+              "BA: 8º · NE: 33° · BR: 167º [ 10 ]"
+            ],
+            [
+              "• Estimativa (2026 [ 9 ] )",
+              "189 259 hab."
+            ],
+            [
+              "Densidade",
+              "112,5 hab./km²"
+            ],
+            [
+              "Clima",
+              "tropical ( Af )"
+            ],
+            [
+              "Fuso horário",
+              "Hora de Brasília ( UTC−3 )"
+            ],
+            [
+              "IDH ( PNUD /2010 [ 11 ] )",
+              "0,690 — médio"
+            ],
+            [
+              "Gini ( PNUD /2010 [ 12 ] )",
+              "0,58"
+            ],
+            [
+              "PIB ( IBGE /2021 [ 13 ] )",
+              "R$ 5 163 622,92 mil"
+            ],
+            [
+              "• Posição",
+              "( BA: 13º ) · ( BR: 251° )"
+            ],
+            [
+              "• Per capita ( IBGE /2021 [ 13 ] )",
+              "R$ 32 756,00"
+            ],
+            [
+              "Sítio",
+              "www.ilheus.ba.gov.br ( Prefeitura ) www.camaradeilheus.ba.gov.br ( Câmara )"
+            ]
+          ],
+          [
+            [
+              "Dados climatológicos para Ilhéus"
+            ],
+            [
+              "Mês",
+              "Jan",
+              "Fev",
+              "Mar",
+              "Abr",
+              "Mai",
+              "Jun",
+              "Jul",
+              "Ago",
+              "Set",
+              "Out",
+              "Nov",
+              "Dez",
+              "Ano"
+            ],
+            [
+              "Temperatura máxima recorde (°C)",
+              "34,1",
+              "33,6",
+              "32,2",
+              "31,3",
+              "30,6",
+              "29",
+              "28,4",
+              "28,4",
+              "29",
+              "30,4",
+              "30",
+              "30,6",
+              "34,1"
+            ],
+            [
+              "Temperatura máxima média ( °C )",
+              "29,1",
+              "29,3",
+              "29,4",
+              "28,7",
+              "27,5",
+              "26,4",
+              "25,8",
+              "26",
+              "26,4",
+              "27,6",
+              "27,8",
+              "28,5",
+              "27,7"
+            ],
+            [
+              "Temperatura média compensada (°C)",
+              "25,9",
+              "26",
+              "25,9",
+              "25,3",
+              "24,1",
+              "22,7",
+              "22",
+              "22,2",
+              "23,2",
+              "24,4",
+              "24,9",
+              "25,4",
+              "24,3"
+            ],
+            [
+              "Temperatura mínima média (°C)",
+              "22,2",
+              "22,3",
+              "22,1",
+              "21,8",
+              "20,9",
+              "19,7",
+              "18,9",
+              "18,7",
+              "19,7",
+              "20,9",
+              "21,5",
+              "22,1",
+              "20,9"
+            ],
+            [
+              "Temperatura mínima recorde (°C)",
+              "18,3",
+              "18,1",
+              "19,1",
+              "18,4",
+              "16,1",
+              "15",
+              "14,4",
+              "12,8",
+              "15,4",
+              "16,5",
+              "17,7",
+              "18,7",
+              "12,8"
+            ],
+            [
+              "Precipitação ( mm )",
+              "151,2",
+              "182,4",
+              "216,9",
+              "204,7",
+              "144,5",
+              "200,6",
+              "200,5",
+              "134,4",
+              "128,7",
+              "146,9",
+              "146,1",
+              "178,6",
+              "2 035,5"
+            ],
+            [
+              "Dias com precipitação (≥ 1 mm)",
+              "15",
+              "15",
+              "17",
+              "15",
+              "14",
+              "16",
+              "18",
+              "16",
+              "13",
+              "13",
+              "14",
+              "13",
+              "179"
+            ],
+            [
+              "Umidade relativa compensada (%)",
+              "# 0000CA;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>80,4",
+              "# 0000C9;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>80,7",
+              "# 0000C6;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>81,5",
+              "# 0000C0;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>83",
+              "# 0000B6;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>85,7",
+              "# 0000B3;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>86,5",
+              "# 0000B2;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>86,6",
+              "# 0000B8;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>85,2",
+              "# 0000BD;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>83,7",
+              "# 0000C0;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>83,1",
+              "# 0000C1;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>82,8",
+              "# 0000C4;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>82",
+              "# 0000BE;color: # FFFFFF; font-size:85%;text-align:center; border-left-width:medium\"}]]}'>83,4"
+            ],
+            [
+              "Insolação (h)",
+              "# f7e135;color: # 000000;font-size:85%;text-align:center;\"}]]}'>220,2",
+              "# f7e135;color: # 000000;font-size:85%;text-align:center;\"}]]}'>215,6",
+              "# ffe700;color: # 000000;font-size:85%;text-align:center;\"}]]}'>235,9",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>203,4",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>199,8",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>191,3",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>197,7",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>210,8",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>198,5",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>199,5",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>190,2",
+              "# f7e135;color: # 000000;font-size:85%;text-align:center;\"}]]}'>220,2",
+              "# ffe700;color: # 000000;font-size:85%;text-align:center; border-left-width:medium\"}]]}'>2 483,1"
+            ],
+            [
+              "Fonte : Instituto Nacional de Meteorologia (normal climatológica de 1961-1990; [ 30 ] recordes de temperatura de 01/01/1961 a 31/12/1970, 01/01/1973 a 31/12/198"
+            ]
+          ],
+          [
+            [
+              "Cor/Raça",
+              "Percentagem [ 34 ]"
+            ],
+            [
+              "Parda",
+              "58,6%"
+            ],
+            [
+              "Branca",
+              "19,5%"
+            ],
+            [
+              "Preta",
+              "18,7%"
+            ],
+            [
+              "Indígena",
+              "2,1%"
+            ],
+            [
+              "Amarelo",
+              "0,9%"
+            ]
+          ],
+          [
+            [
+              "Crescimento populacional"
+            ],
+            [
+              "Censo",
+              "População \"}]]}'>Pop.",
+              "",
+              "% Crescimento \"}]]}'>%±"
+            ],
+            [
+              "1872",
+              "5 682",
+              ""
+            ],
+            [
+              "1900",
+              "4 190",
+              "",
+              "—"
+            ],
+            [
+              "1920",
+              "63 012",
+              "",
+              "1 403,9%"
+            ],
+            [
+              "1940",
+              "113 269",
+              "",
+              "79,8%"
+            ],
+            [
+              "1950",
+              "134 240",
+              "",
+              "18,5%"
+            ],
+            [
+              "1960",
+              "104 429",
+              "",
+              "−22,2%"
+            ],
+            [
+              "1970",
+              "107 971",
+              "",
+              "3,4%"
+            ],
+            [
+              "1980",
+              "131 456",
+              "",
+              "21,8%"
+            ],
+            [
+              "1991",
+              "223 750",
+              "",
+              "70,2%"
+            ],
+            [
+              "2000",
+              "222 127",
+              "",
+              "−0,7%"
+            ],
+            [
+              "2010",
+              "184 236",
+              "",
+              "−17,1%"
+            ],
+            [
+              "2022",
+              "178 649",
+              "",
+              "−3,0%"
+            ],
+            [
+              "Fontes: Censo IBGE/2022 [ 35 ]"
+            ]
+          ],
+          [
+            [
+              "Ilhéus"
+            ],
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Total de Municípios: 417 - Capital: Salvador"
+            ],
+            [
+              "Abaíra Abaré Acajutiba Adustina Água Fria Aiquara Alagoinhas Alcobaça Almadina Amargosa Amélia Rodrigues América Dourada Anagé Andaraí Andorinha Angical Anguera"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/b/bf/Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Centro_de_Ilh%C3%A9us.jpg/1280px-Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Centro_de_Ilh%C3%A9us.jpg/330px-Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Ilh%C3%A9us.jpg/250px-Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Ilh%C3%A9us_2.jpg/250px-Ilh%C3%A9us_2.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bairro_Pontal.jpg/250px-Bairro_Pontal.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-3fa9b0bad9e4",
+            "type": "image",
+            "title": "município do Estado da Bahia, Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Centro_de_Ilh%C3%A9us.jpg/1280px-Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Centro_de_Ilh%C3%A9us.jpg/1280px-Centro_de_Ilh%C3%A9us.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7eb2487bedf5",
+            "type": "image",
+            "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-50b16dcca858",
+            "type": "image",
+            "title": "Bandeira de Ilhéus",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Flag_of_Ilh%C3%A9us.svg/120px-Flag_of_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Flag_of_Ilh%C3%A9us.svg/120px-Flag_of_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d0a250193d3a",
+            "type": "image",
+            "title": "Brasão de armas de Ilhéus",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Bras%C3%A3o_de_Ilh%C3%A9us.svg/120px-Bras%C3%A3o_de_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Bras%C3%A3o_de_Ilh%C3%A9us.svg/120px-Bras%C3%A3o_de_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasão de armas de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2c84098f66b4",
+            "type": "image",
+            "title": "Localização de Ilhéus na Bahia",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Bahia_Municip_Ilheus.svg/330px-Bahia_Municip_Ilheus.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Bahia_Municip_Ilheus.svg/330px-Bahia_Municip_Ilheus.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Localização de Ilhéus na Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-707443562f4f",
+            "type": "image",
+            "title": "Ilhéus está localizado em: Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ilhéus está localizado em: Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c2dec2b9749f",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,12,-14.788888888889,-39.048888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Ilh%C3%A9us&revid=73230340&groups=_7aeb031d63d4a0db90374dc8b0bc4af3a67035f0&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-14.788888888889,-39.048888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Ilh%C3%A9us&revid=73230340&groups=_7aeb031d63d4a0db90374dc8b0bc4af3a67035f0&parser=parsoid",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cc2c0b77c03f",
+            "type": "image",
+            "title": "Rua Treze de Maio, bairro do Pontal",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Pontal_%28Ilh%C3%A9us%29.jpg/500px-Pontal_%28Ilh%C3%A9us%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Pontal_%28Ilh%C3%A9us%29.jpg/500px-Pontal_%28Ilh%C3%A9us%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Rua Treze de Maio, bairro do Pontal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c430cd8302a7",
+            "type": "image",
+            "title": "Distritos de Ilhéus",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Distritos_de_Ilh%C3%A9us.svg/330px-Distritos_de_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Distritos_de_Ilh%C3%A9us.svg/330px-Distritos_de_Ilh%C3%A9us.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Distritos de Ilhéus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://ilheus.com.br/",
+      "result": {
+        "titulo": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+        "texto": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "final": "https://ilheus.com.br/",
+        "trecho_usado": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO",
+        "metadados": {
+          "titulo": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+          "descricao": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+          "canonica": "https://ilheus.com.br/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "website",
+            "og:title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+            "og:description": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+            "og:url": "https://ilheus.com.br/",
+            "og:site_name": "ILHÉUS.COM.BR",
+            "og:image": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "og:image:width": "3313",
+            "og:image:height": "1336",
+            "og:image:type": "image/png"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@Ilheusbrasil"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2023-12-20T18:13:55+00:00",
+          "atualizado_em": "2026-10-15T20:36:42+00:00",
+          "autor": "",
+          "site": "ILHÉUS.COM.BR",
+          "tipo": "WebPage",
+          "ld": {
+            "datePublished": "2023-12-20T18:13:55+00:00",
+            "dateModified": "2026-10-15T20:36:42+00:00",
+            "description": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+            "inLanguage": "pt-BR",
+            "about": {
+              "@id": "https://ilheus.com.br/#organization"
+            },
+            "publisher": {
+              "@id": "https://ilheus.com.br/#organization"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Plataforma oficial focada no turismo e tecnologia a favor da comunicação da cidade de Ilhéus-BA | PRODUZIDO 100% POR UM ILHEENSE DE CORPO ALMA E CORAÇÃO"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png"
+        ],
+        "midia": [
+          {
+            "id": "med-a2fbcec2a42d",
+            "type": "image",
+            "title": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+            "url": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "final_url": "https://ilheus.com.br/wp-content/uploads/2023/12/logo-ilheus-oficial.png",
+            "source_title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+            "source_url": "https://ilheus.com.br/",
+            "publisher": "ilheus.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e20d450ed842",
+            "type": "video",
+            "title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+            "url": "https://ilheus.com.br/wp-content/uploads/BANNER_CAMARA_ILHEUS_728X90.mp4",
+            "final_url": "https://ilheus.com.br/wp-content/uploads/BANNER_CAMARA_ILHEUS_728X90.mp4",
+            "source_title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+            "source_url": "https://ilheus.com.br/",
+            "publisher": "",
+            "date": "2023-12-20",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata",
+            "thumb": "https://ilheus.com.br/wp-content/uploads/BANNER_CAMARA_ILHEUS_728X90.gif",
+            "duration": "PT17S",
+            "metadata_state": "METADATA_READ"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "6086cd07775bbe34ae0b",
+            "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORE9wUGRjX2c4alNGQTBvQktSaHYyemxiTFJmbTJHUGtIQVlMYnlSZWsxc0JYQ0s2Mk1kZDRZbDJIbXllV2hlTEZQSmFnNkVoWHVaS21jTXk3OXA2dGw3NFdtamJHMWV3Smd1RXVTTXBfdHhTS2kzRThMZmlpMVZpeks2SjRPWWZxbHRub3ZoYTd1TGY5OEM3ZEl6QzFNNGQ5UUs3WmFDYXZmbldYSUZxRTExeTJmNTdHblZMazFFYnNnX2tSZVY0blFDLVBtN1hEcmZrWA?oc=5",
+            "title": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Prefeito entrega 15 novos ônibus para reforçar modernização de transporte público em Ilhéus Bahia Notícias"
+          },
+          {
+            "id": "e861dd48c1f3daa75466",
+            "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLVlSMlk5bzZVWWdLUjFfc2FhTm1zeTdzNVhpNTdkakhPQmRNN3hULUlWZk4wRS05T3VtOTVJLWItRU0wdFNEY3V2LURIYWpfT2FiV29kank3STQwZzBkanFCXzJ4dTdidmNvMEtiaVRRWGNzVml3NGRKbnk4dE8wdHJTTTdYRllIMDVOR09RRGtFOEdGRzRXSEp0bzAwOWlpbHRZUUVWUVJTcEhKeVJ3cDdUZw?oc=5",
+            "title": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus - Jornal do Radialista",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acordo mediado pelo MPBA assegura continuidade do transporte público em Ilhéus Jornal do Radialista"
+          },
+          {
+            "id": "a9a627e9bc35808cbcdf",
+            "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVEF4M3dUcE4zUzVmeXdTMHpyUG4zQ3B6cEE3RWtHQ1FFQXhFQ2FuVHhwTzhxSFl3VER1ZXJlcUhjdDIzcGMxdmd1VWxvc2FNY3ZZaWszYk83V3ozczdIZnRNM3VDalBzNm92YzJ0a21IWXNNQXBxZVNpaDJxdWU4ZmFuTmExdXU3Z3ZwLWpLbVRzVHRQNWs1eTBTRzN0Q01ObWZfbFRR?oc=5",
+            "title": "Bahia terá transporte gratuito durante as eleições de 2026 - Ilhéus Eventos",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Bahia terá transporte gratuito durante as eleições de 2026 Ilhéus Eventos"
+          },
+          {
+            "id": "0c09c8ea44053a6cde7e",
+            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaXlFWTJfV1lEVnRXWEFxaS03UWhxdnBuaGtDQXRGdENxaWFOZnBrbjlpeWtTU1h0OWotaWgtT3R2Tm95aW9WdV9LaXJYNUhOUTVJT192VFJxQS1qTTBkRWUtZ180b0lxWnRwQWg3Vm5qUnFVTzk4VGlRQ1NfbFhnZDUtRGlUdkc3X2tkUksxeTg2dVdzbkg1Uzh2TER3cU5sYzYybjZKa0JUUkQ1N3gxNTJn?oc=5",
+            "title": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição - Notícia Livre",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Justiça Eleitoral determina transporte público gratuito em Ilhéus no dia da eleição Notícia Livre"
+          },
+          {
+            "id": "24dc16ec9c26e182a73b",
+            "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYWlmTjg5YjUyckRvRzBqaThsNG0xNW9OWHBYNVdnV0pOZllrYzh1N3NvUkw2c0x4RjJnS2I5VHkyTWhCZGFucWRSYldZRC1fVEl0M3ItX1hFdnFtX3Fqc1c4cU9QVTBqa0w4TjR2UXhGb09keXBzdVIyQVpHdDRBSzlubjBqLTFzakh5TzN3T0VkeERSMFBoc3EyWDNrcWVnLVhUeXRoNFpsV3gtSWc?oc=5",
+            "title": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação - Política ao Ponto",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Coligação de Jerônimo garante transporte gratuito em Ilhéus no dia de votação Política ao Ponto"
+          },
+          {
+            "id": "b1eb008dd831a72b7154",
+            "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY0xwckI4QmNlOXRzNlo0bDdDZ0h1djl3a1paU2xqZXdkZjhPV01XQ2dxaGY4VHZlcjNseVlSdEVNRFJqTDNwMXpCU3lPcVVybmZSZEs4RjgwbmNWNnNWMzdqRmVyb0VHcnRrbkxiM2oyVVNJRXBJS2JFYjIzVkdKVGdJUThIYnRta0ZyaHBqTF9jMlNzWmxOQlhRMTJ5WmRmLXZsWlk3bnZVY1o4T0lrYm9LbkM4aTB2?oc=5",
+            "title": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus - Achei Sudoeste",
+            "origin": "google-news",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Mesa de diálogo busca soluções para o transporte coletivo em Ilhéus Achei Sudoeste"
+          },
+          {
+            "id": "12951ffb8804f3f33c77",
+            "url": "https://pt.wikipedia.org/wiki/Ilh%C3%A9us",
+            "title": "Ilhéus – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ilhéus é um município brasileiro do litoral e sul do estado da Bahia, região Nordeste. Conta com o mais extenso litoral do estado. Ilhéus foi fundada em 1534 co"
+          },
+          {
+            "id": "97de89010cd5d19accef",
+            "url": "https://ilheus.com.br/",
+            "title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Portal oficial do Projeto ilhéus 500 anos | Turismo | Gastronomia | Roteiros e Guia | Notícias"
+          },
+          {
+            "id": "c5a0381fc146d80f1cf4",
+            "url": "https://www.ilheus.net/",
+            "title": "Ilhéus Net - A liderança que você escolheu!",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "CEPLAC recebe 3ª edição da Corrida Dez Milhas Costa do Cacau Copa Elas em Campo movimenta futebol feminino em Ilhéus Aos 10 anos, atleta de Ilhéus conquista mai"
+          },
+          {
+            "id": "6cb4765520b7c2b8a978",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303262-Activities-Ilheus_State_of_Bahia.html",
+            "title": "AS 15 MELHORES coisas para fazer em Ilhéus (ATUALIZADO 2026)",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "As sugestões de poses para fotos, alguns clicks, assim como suas explicações e dicas valiosas durante nosso passeio pela fazenda Capela Velha e City Tour em Ilh"
+          },
+          {
+            "id": "21ba7ab677d64606de87",
+            "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+            "title": "O que fazer em Ilhéus: 15 dicas de lugares incríveis para ir",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Está no litoral sul da Bahia? Saiba o que fazer em Ilhéus com dicas para você aproveitar tudo que a cidade tem para oferecer de bom."
+          },
+          {
+            "id": "4896606171ae674fda09",
+            "url": "https://ilheus.com.br/prefeitura-de-ilheus/",
+            "title": "PREFEITURA DE ILHÉUS - ILHÉUS.COM.BR",
+            "origin": "bing",
+            "query": "\"Ilhéus\" \"bahia\" notícias transporte",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ilhéus inicia implantação de novo Sistema de Protocolo Virtual PREFEITURA DE ILHÉUS"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (\"Ilhéus\" \"bahia\" notícias transporte)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (\"Ilhéus\" \"bahia\" notícias transporte)",
+        "bing: 6 resultados (\"Ilhéus\" \"bahia\" notícias transporte)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (\"Ilhéus\" \"bahia\" notícias transporte)",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento"
+      ],
+      "query_plan": null,
+      "ganho_informacao": null,
+      "lacunas": []
+    }
+  ],
+  "source_revision": "2c6a3248003a59f96325fb91a282be8262fd908b",
+  "dataset_sha256": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df"
+}

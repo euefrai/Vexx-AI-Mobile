@@ -1,0 +1,27 @@
+............F........................................................... [ 43%]
+........................................................................ [ 86%]
+.......................                                                  [100%]
+================================== FAILURES ===================================
+_ test_history_evidence_preserves_founding_information_instead_of_source_notice _
+
+research_job = (<sqlite3.Connection object at 0x000001D5889C5990>, {'id': 'rj-c66cc888acad', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_history_evidence_preserves_founding_information_instead_of_source_notice(research_job):
+        import research_agents as ra
+        db, job = research_job
+        job['objetivo'] = 'História da empresa Aurora fontes primárias'
+        notice = ('Aurora história empresa fontes primárias. Edite a página e inclua fontes. ' * 30)
+        fact = 'A empresa Aurora foi fundada em 1978. Sua fundação iniciou a produção industrial.'
+        text = notice + fact
+        def read(url):
+            return {'titulo': 'História da Aurora', 'texto': text, 'trecho_usado': notice[:300], 'texto_lido': True}
+        evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            [{'url': 'https://publisher.example/history', 'titulo': 'História da Aurora'}], read, teto_paginas=1)
+>       assert len(evidence) == 1 and '1978' in evidence[0]['trecho']
+E       AssertionError: assert (1 == 1 and '1978' in 'Aurora história empresa fontes primárias. Edite a página e inclua fontes. Aurora história empresa fontes primárias. E...te a página e inclua fontes. Aurora história empresa fontes primárias. Edite a página e inclua fontes. Aurora história')
+E        +  where 1 = len([{'id': 'ev-a370cf044ade', 'job_id': 'rj-c66cc888acad', 'fonte_id': '', 'url': 'https://publisher.example/history', ...}])
+
+tests\test_discovery_v5992.py:104: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_discovery_v5992.py::test_history_evidence_preserves_founding_information_instead_of_source_notice
+1 failed, 166 passed in 54.10s

@@ -1,0 +1,1011 @@
+{
+  "id": "new-14",
+  "category": "video",
+  "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 13.972,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+      "error": "rede"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "vídeos observatório nacional eclipses explicação",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "vídeos observatório nacional eclipses explicação",
+      "error": "rede"
+    },
+    {
+      "provider": "marginalia",
+      "query": "vídeos observatório nacional eclipses explicação",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=V%C3%ADdeos+do+Observat%C3%B3rio+Nacional+sobre+eclipses+explica%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=V%C3%ADdeos+do+Observat%C3%B3rio+Nacional+sobre+eclipses+explica%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4223
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=V%C3%ADdeos%20do%20Observat%C3%B3rio%20Nacional%20sobre%20eclipses%20explica%C3%A7%C3%A3o",
+      "error": "rede"
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=V%C3%ADdeos+do+Observat%C3%B3rio+Nacional+sobre+eclipses+explica%C3%A7%C3%A3o",
+      "final": "https://old-search.marginalia.nu/search?query=V%C3%ADdeos+do+Observat%C3%B3rio+Nacional+sobre+eclipses+explica%C3%A7%C3%A3o",
+      "chars": 1129
+    },
+    {
+      "url": "https://www.bing.com/search?q=v%C3%ADdeos+observat%C3%B3rio+nacional+eclipses+explica%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=v%C3%ADdeos+observat%C3%B3rio+nacional+eclipses+explica%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4187
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=v%C3%ADdeos%20observat%C3%B3rio%20nacional%20eclipses%20explica%C3%A7%C3%A3o",
+      "error": "rede"
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=v%C3%ADdeos+observat%C3%B3rio+nacional+eclipses+explica%C3%A7%C3%A3o",
+      "final": "https://old-search.marginalia.nu/search?query=v%C3%ADdeos+observat%C3%B3rio+nacional+eclipses+explica%C3%A7%C3%A3o",
+      "chars": 1111
+    },
+    {
+      "url": "https://www.google.com/videohp?hl=pt-BR",
+      "final": "https://www.google.com/videohp?hl=pt-BR",
+      "chars": 89936
+    },
+    {
+      "url": "https://www.google.com.br/videohp",
+      "final": "https://www.google.com.br/videohp",
+      "chars": 90157
+    },
+    {
+      "url": "https://www.tiktok.com/foryou",
+      "final": "https://www.tiktok.com/foryou",
+      "chars": 450266
+    },
+    {
+      "url": "https://www.youtube.com/",
+      "final": "https://www.youtube.com/",
+      "chars": 955340
+    },
+    {
+      "url": "https://www.tiktok.com/pt-BR",
+      "final": "https://www.tiktok.com/pt-BR",
+      "chars": 461394
+    },
+    {
+      "url": "https://www.youtube.com/feed",
+      "final": "https://www.youtube.com/feed",
+      "chars": 941570
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+    "domain": "general",
+    "original_request": "Vídeos do Observatório Nacional sobre eclipses explicação",
+    "resolved_request": "Vídeos do Observatório Nacional sobre eclipses explicação",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T02:26:29.743983+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "6be96514e23f370d81c8",
+        "url": "https://www.google.com/videohp?hl=pt-BR",
+        "title": "Google Videos",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "qui., 22 out. 2026 16:04:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 75,
+        "final_url": "https://www.google.com/videohp?hl=pt-BR",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "16061ca5a0cfceb5a80f",
+        "url": "https://www.google.com.br/videohp",
+        "title": "Google Videos",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "sáb., 24 out. 2026 02:04:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 75,
+        "final_url": "https://www.google.com.br/videohp",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "2455611c82bc8851b3b8",
+        "url": "https://www.tiktok.com/foryou",
+        "title": "Watch trending videos for you | TikTok",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "sáb., 24 out. 2026 15:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "It starts on TikTok. Join the millions of viewers discovering content and creators on TikTok - available on the web or on your mobile device.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.tiktok.com/foryou",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "e1d5e2c7a98d2acd129f",
+        "url": "https://www.youtube.com/",
+        "title": "YouTube",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "sáb., 24 out. 2026 23:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouT",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 206,
+        "final_url": "https://www.youtube.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d895fc66e459c7833ce2",
+        "url": "https://www.tiktok.com/pt-BR",
+        "title": "TikTok - Make Your Day",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "sáb., 24 out. 2026 10:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o ap",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.tiktok.com/pt-BR",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9b5a53e817e23eb735a6",
+        "url": "https://www.youtube.com/feed",
+        "title": "YouTube",
+        "origin": "bing",
+        "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+        "date": "sáb., 24 out. 2026 05:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouT",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 206,
+        "final_url": "https://www.youtube.com/feed",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.google.com/videohp?hl=pt-BR",
+      "titulo": "Google Videos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 22 out. 2026 16:04:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.google.com/videohp?hl=pt-BR",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.google.com.br/videohp",
+      "titulo": "Google Videos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 02:04:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.google.com.br/videohp",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.youtube.com/",
+      "titulo": "YouTube",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 23:32:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.youtube.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+      "items": [
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/",
+          "trecho": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:32:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/feed",
+          "trecho": "AboutPressCopyrightContact usCreatorsAdvertiseDevelopersTermsPrivacyPolicy & SafetyHow YouTube worksTest new featuresNFL Sunday Ticket © 2026 Google LLC",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:32:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/feed",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Videos",
+          "url": "https://www.google.com/videohp?hl=pt-BR",
+          "trecho": "Pesquise milhões de vídeos na web.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 16:04:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://google.com/videohp?hl=pt-BR",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Videos",
+          "url": "https://www.google.com.br/videohp",
+          "trecho": "Search millions of videos from across the web.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:04:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://google.com.br/videohp",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Watch trending videos for you | TikTok",
+          "url": "https://www.tiktok.com/foryou",
+          "trecho": "It starts on TikTok. Join the millions of viewers discovering content and creators on TikTok - available on the web or on your mobile device.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 15:11:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tiktok.com/foryou",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR",
+          "trecho": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o app e comece a usar.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT"
+          },
+          "discovery_query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tiktok.com/pt-BR",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "vídeos observatório nacional eclipses explicação",
+      "items": [
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/",
+          "trecho": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:32:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/feed",
+          "trecho": "AboutPressCopyrightContact usCreatorsAdvertiseDevelopersTermsPrivacyPolicy & SafetyHow YouTube worksTest new featuresNFL Sunday Ticket © 2026 Google LLC",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:32:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/feed",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Videos",
+          "url": "https://www.google.com/videohp?hl=pt-BR",
+          "trecho": "Pesquise milhões de vídeos na web.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 16:04:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://google.com/videohp?hl=pt-BR",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Videos",
+          "url": "https://www.google.com.br/videohp",
+          "trecho": "Search millions of videos from across the web.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:04:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://google.com.br/videohp",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Watch trending videos for you | TikTok",
+          "url": "https://www.tiktok.com/foryou",
+          "trecho": "It starts on TikTok. Join the millions of viewers discovering content and creators on TikTok - available on the web or on your mobile device.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 15:11:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tiktok.com/foryou",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR",
+          "trecho": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o app e comece a usar.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT"
+          },
+          "discovery_query": "vídeos observatório nacional eclipses explicação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tiktok.com/pt-BR",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.google.com/videohp?hl=pt-BR",
+      "result": {
+        "titulo": "Google Videos",
+        "texto": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "final": "https://www.google.com/videohp?hl=pt-BR",
+        "trecho_usado": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "metadados": {
+          "titulo": "Google Videos",
+          "descricao": "Pesquise milhões de vídeos na web.",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [
+          "https://www.google.com/textinputassistant/tia.png"
+        ],
+        "midia": [
+          {
+            "id": "med-601b579d393a",
+            "type": "document",
+            "title": "about.html",
+            "url": "https://www.google.com/intl/pt-BR/about.html",
+            "final_url": "https://www.google.com/intl/pt-BR/about.html",
+            "source_title": "Google Videos",
+            "source_url": "https://www.google.com/videohp?hl=pt-BR",
+            "publisher": "www.google.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pesquise milhões de vídeos na web.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.google.com.br/videohp",
+      "result": {
+        "titulo": "Google Videos",
+        "texto": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "final": "https://www.google.com.br/videohp",
+        "trecho_usado": "Fazer login Vídeos Sobre o Google © 2026 - - Privacidade Termos Google Apps",
+        "metadados": {
+          "titulo": "Google Videos",
+          "descricao": "Pesquise milhões de vídeos na web.",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [
+          "https://www.google.com.br/textinputassistant/tia.png"
+        ],
+        "midia": [
+          {
+            "id": "med-753bb06fa76d",
+            "type": "document",
+            "title": "about.html",
+            "url": "https://www.google.com.br/intl/pt-BR/about.html",
+            "final_url": "https://www.google.com.br/intl/pt-BR/about.html",
+            "source_title": "Google Videos",
+            "source_url": "https://www.google.com.br/videohp",
+            "publisher": "www.google.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pesquise milhões de vídeos na web.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.tiktok.com/foryou",
+      "result": {
+        "titulo": "TikTok - Make Your Day",
+        "texto": "",
+        "final": "https://www.tiktok.com/foryou",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "TikTok - Make Your Day",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.youtube.com/",
+      "result": {
+        "titulo": "YouTube",
+        "texto": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "final": "https://www.youtube.com/",
+        "trecho_usado": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "metadados": {
+          "titulo": "YouTube",
+          "descricao": "Aproveite vídeos e músicas que você ama, envie e compartilhe conteúdo original com amigos, parentes e o mundo no YouTube.",
+          "canonica": "https://www.youtube.com/",
+          "og": {
+            "og:image": "https://www.youtube.com/img/desktop/yt_1200.png",
+            "og:title": "YouTube"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [
+          "https://www.youtube.com/img/desktop/yt_1200.png"
+        ],
+        "midia": [
+          {
+            "id": "med-a6babfc7a40e",
+            "type": "image",
+            "title": "Aproveite vídeos e músicas que você ama, envie e compartilhe conteúdo original com amigos, parentes e o mundo no YouTube.",
+            "url": "https://www.youtube.com/img/desktop/yt_1200.png",
+            "final_url": "https://www.youtube.com/img/desktop/yt_1200.png",
+            "source_title": "YouTube",
+            "source_url": "https://www.youtube.com/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aproveite vídeos e músicas que você ama, envie e compartilhe conteúdo original com amigos, parentes e o mundo no YouTube.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.tiktok.com/pt-BR",
+      "result": {
+        "titulo": "TikTok - Make Your Day",
+        "texto": "",
+        "final": "https://www.tiktok.com/pt-BR",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "TikTok - Make Your Day",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.youtube.com/feed",
+      "result": {
+        "titulo": "YouTube",
+        "texto": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "final": "https://www.youtube.com/feed",
+        "trecho_usado": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "e1d5e2c7a98d2acd129f",
+            "url": "https://www.youtube.com/",
+            "title": "YouTube",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube."
+          },
+          {
+            "id": "9b5a53e817e23eb735a6",
+            "url": "https://www.youtube.com/feed",
+            "title": "YouTube",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "AboutPressCopyrightContact usCreatorsAdvertiseDevelopersTermsPrivacyPolicy & SafetyHow YouTube worksTest new featuresNFL Sunday Ticket © 2026 Google LLC"
+          },
+          {
+            "id": "6be96514e23f370d81c8",
+            "url": "https://www.google.com/videohp?hl=pt-BR",
+            "title": "Google Videos",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pesquise milhões de vídeos na web."
+          },
+          {
+            "id": "16061ca5a0cfceb5a80f",
+            "url": "https://www.google.com.br/videohp",
+            "title": "Google Videos",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Search millions of videos from across the web."
+          },
+          {
+            "id": "2455611c82bc8851b3b8",
+            "url": "https://www.tiktok.com/foryou",
+            "title": "Watch trending videos for you | TikTok",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "It starts on TikTok. Join the millions of viewers discovering content and creators on TikTok - available on the web or on your mobile device."
+          },
+          {
+            "id": "d895fc66e459c7833ce2",
+            "url": "https://www.tiktok.com/pt-BR",
+            "title": "TikTok - Make Your Day",
+            "origin": "bing",
+            "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o ap"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Vídeos do Observatório Nacional sobre ec)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Vídeos do Observatório Nacional sobre ec)",
+        "ddg: rede (Vídeos do Observatório Nacional sobre ec)",
+        "marginalia: sem resultados (Vídeos do Observatório Nacional sobre ec)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (vídeos observatório nacional eclipses ex)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (vídeos observatório nacional eclipses ex)",
+        "ddg: rede (vídeos observatório nacional eclipses ex)",
+        "marginalia: sem resultados (vídeos observatório nacional eclipses ex)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Vídeos do Observatório Nacional sobre eclipses explicação",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T02:26:29.743983+00:00",
+  "source_revision": "ad16f213b074680c46aa0504dea6662892885640",
+  "dataset_sha256": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df"
+}

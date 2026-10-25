@@ -1,0 +1,2399 @@
+{
+  "id": "eva-10",
+  "category": "history",
+  "query": "História da fundação de Ouro Preto",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 4.933,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto História",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "fundação de Ouro Preto História",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "fundação de Ouro Preto História",
+      "error": "vazio"
+    },
+    {
+      "provider": "marginalia",
+      "query": "fundação de Ouro Preto",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "fundação de Ouro Preto",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5264
+    },
+    {
+      "url": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5218
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=funda%C3%A7%C3%A3o%20de%20Ouro%20Preto%20Hist%C3%B3ria",
+      "final": "https://html.duckduckgo.com/html/?q=funda%C3%A7%C3%A3o%20de%20Ouro%20Preto%20Hist%C3%B3ria",
+      "chars": 14290
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria",
+      "final": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria",
+      "chars": 1067
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "final": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "chars": 1039
+    },
+    {
+      "url": "https://fundacao.bradesco/",
+      "final": "https://fundacao.bradesco/",
+      "chars": 115040
+    },
+    {
+      "url": "http://www.ev.org.br/",
+      "final": "https://www.ev.org.br/",
+      "chars": 124078
+    },
+    {
+      "url": "https://www.fcc.org.br/",
+      "final": "https://www.fcc.org.br/",
+      "chars": 165463
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "final": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "chars": 105824
+    },
+    {
+      "url": "https://www.ev.org.br/entrar",
+      "final": "https://www.ev.org.br/entrar",
+      "chars": 83544
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+      "final": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+      "chars": 252846
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da fundação de Ouro Preto",
+    "domain": "general",
+    "original_request": "História da fundação de Ouro Preto",
+    "resolved_request": "História da fundação de Ouro Preto",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T02:21:55.734314+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "c5341128874ba8ee3169",
+        "url": "https://fundacao.bradesco/",
+        "title": "Fundação Bradesco",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "sáb., 24 out. 2026 02:33:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escol",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 402,
+        "final_url": "https://fundacao.bradesco/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "445e8eeb3bdb1b1c200c",
+        "url": "http://www.ev.org.br/",
+        "title": "Fundação Bradesco - Escola Virtual",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 01:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer o",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.ev.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0f69f89e410fe51619da",
+        "url": "https://www.fcc.org.br/",
+        "title": "Fundação Carlos Chagas | FCC",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "[object Object]",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. No",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 174,
+        "final_url": "https://www.fcc.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1ab4f6c0675f3afb932e",
+        "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "2006-03-17T17:39:54Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se su",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4057,
+        "final_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b3c5f3c6e70e4a50b020",
+        "url": "https://www.ev.org.br/entrar",
+        "title": "Entrar - Fundação Bradesco - Escola Virtual",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 00:51:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer o",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://www.ev.org.br/entrar",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "473b12a08a4bd2ddba23",
+        "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+        "title": "Caldas Novas – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "2004-09-17T05:27:25Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "que atraem turistas de todo o país, principalmente das regiões Sudeste e Centro-Oeste. 8 [ ] História [ editar | editar código ] Região das Águas Quentes A regi",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-7caf8a2dbc83",
+      "type": "image",
+      "title": "Fundação Bradesco",
+      "url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+      "final_url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Fundação Bradesco",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f76f9530c160",
+      "type": "image",
+      "title": "Educação Infantil",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Educação Infantil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6f4136f7d414",
+      "type": "image",
+      "title": "Ensino Fundamental",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Fundamental",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0d12c7497b62",
+      "type": "image",
+      "title": "Ensino Fundamental",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Fundamental",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c2f80e550d80",
+      "type": "image",
+      "title": "Ensino Médio",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Médio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b5de5c55011d",
+      "type": "image",
+      "title": "Cursos Técnicos de Nível Médio",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Cursos Técnicos de Nível Médio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5b36b2fae77",
+      "type": "image",
+      "title": "Educação de Jovens e Adultos (EJA)",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Educação de Jovens e Adultos (EJA)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-794b904a4fbc",
+      "type": "image",
+      "title": "Formação Inicial e Continuada (FIC)",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Formação Inicial e Continuada (FIC)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-37be815e082c",
+      "type": "image",
+      "title": "Escola Virtual",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escola Virtual",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2d5e372007d",
+      "type": "image",
+      "title": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+      "url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-104e713c6087",
+      "type": "image",
+      "title": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+      "url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-22b98741b385",
+      "type": "image",
+      "title": "Relatório Anual 2025",
+      "url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Relatório Anual 2025",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://fundacao.bradesco/",
+      "titulo": "Fundação Bradesco",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 02:33:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://fundacao.bradesco/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "http://www.ev.org.br/",
+      "titulo": "Fundação Bradesco - Escola Virtual",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 01:56:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "http://www.ev.org.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.fcc.org.br/",
+      "titulo": "Fundação Carlos Chagas",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "[object Object]",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.fcc.org.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto História",
+      "items": [
+        {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/",
+          "trecho": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Explore suas aplicações da IA no dia a dia e em sua produtividade online.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:56:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "http://ev.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/",
+          "trecho": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:33:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fundacao.bradesco/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "trecho": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. [1][2] As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fin",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 06:37:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/",
+          "trecho": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Durante o evento, foi lançado o Relatório de Pesquisa Educacional sobre o tema com subsídios para a efetivação do PNE 2026-2036; saiba como foi.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:32:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fcc.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Caldas Novas – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+          "trecho": "Em 1722, o bandeirante Bartolomeu Bueno da Silva, o filho, enquanto procurava por ouro na Serra de Caldas, descobre fontes de águas termais em sua vertente ocidental, ali fundando um assentamento nomeado “Caldas Velhas”, situado no local em que atualmente está a Pousada do Rio Quente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 01:02:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Entrar - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/entrar",
+          "trecho": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? Bem-vindo (a) de volta! Esqueceu a senha? Ainda não tem cadastro na Escola Virtual?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:51:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ev.org.br/entrar",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto",
+      "items": [
+        {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/",
+          "trecho": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Explore suas aplicações da IA no dia a dia e em sua produtividade online.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:56:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/",
+          "trecho": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:33:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "trecho": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. [1][2] As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fin",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 06:37:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/",
+          "trecho": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Durante o evento, foi lançado o Relatório de Pesquisa Educacional sobre o tema com subsídios para a efetivação do PNE 2026-2036; saiba como foi.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:32:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Caldas Novas – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+          "trecho": "Em 1722, o bandeirante Bartolomeu Bueno da Silva, o filho, enquanto procurava por ouro na Serra de Caldas, descobre fontes de águas termais em sua vertente ocidental, ali fundando um assentamento nomeado “Caldas Velhas”, situado no local em que atualmente está a Pousada do Rio Quente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 01:02:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Entrar - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/entrar",
+          "trecho": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? Bem-vindo (a) de volta! Esqueceu a senha? Ainda não tem cadastro na Escola Virtual?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:51:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.fcc.org.br/",
+      "result": {
+        "titulo": "Fundação Carlos Chagas",
+        "texto": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. Nossas pesquisas",
+        "final": "https://www.fcc.org.br/",
+        "trecho_usado": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. Nossas pesquisas",
+        "metadados": {
+          "titulo": "Fundação Carlos Chagas",
+          "descricao": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+          "canonica": "https://www.fcc.org.br/",
+          "og": {
+            "og:site_name": "Fundação Carlos Chagas",
+            "og:url": "https://www.fcc.org.br/",
+            "og:type": "article",
+            "og:title": "Fundação Carlos Chagas | FCC",
+            "og:description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "og:image": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "og:image:secure_url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "og:image:alt": "Fundação Carlos Chagas | FCC"
+          },
+          "twitter": {
+            "twitter:card": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "twitter:url": "https://www.fcc.org.br/",
+            "twitter:title": "Fundação Carlos Chagas | FCC",
+            "twitter:description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "twitter:image": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "twitter:image:alt": "Fundação Carlos Chagas | FCC",
+            "twitter:site": "@FCC"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "[object Object]",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Fundação Carlos Chagas",
+          "tipo": "Organization",
+          "ld": {
+            "publisher": {
+              "@id": "https://www.fcc.org.br/#organization"
+            },
+            "description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "inLanguage": "pt_BR",
+            "datePublished": "2026-10-23T20:33:03.318Z",
+            "dateModified": "2026-10-23T20:33:03.318Z"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+          "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+          "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+          "https://www.fcc.org.br/_nuxt/img/instagram.a00fa29.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-bdb7c07b1752",
+            "type": "image",
+            "title": "Fundação Carlos Chagas | FCC",
+            "url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "final_url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "cdn.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Carlos Chagas | FCC",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-209a75f927e4",
+            "type": "image",
+            "title": "Fundação Carlos Chagas",
+            "url": "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+            "final_url": "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "www.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Carlos Chagas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f642cb39e55e",
+            "type": "image",
+            "title": "Who we are | Fundação Carlos Chagas",
+            "url": "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+            "final_url": "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "www.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Who we are | Fundação Carlos Chagas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "http://www.ev.org.br/",
+      "result": {
+        "titulo": "Fundação Bradesco - Escola Virtual",
+        "texto": "(Última versão: 09 de junho de 2026) Bem-vindo(a) à Escola Virtual! A , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL A seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br Como condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL Estamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio. 1. CONCEITOS BÁSICOS Para melhor entendimento destes Termos, devem ser consideradas as seguintes definições: Pessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL Meios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL Conta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso: são quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis: são os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais: para fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados: pessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco Terminologia para endereço de internet. Link: ambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br toda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento: 2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS 2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso. 2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas. 2.1.2. Nós preocupamos com a sua segurança na utilização das nossas funcionalidades, por isso, por meio de nossos procedimentos internos, estamos constantemente aprimorando nossas técnicas, visando garantir a autenticidade, confidencialidade e integridade das informações que nos são fornecidas. Relembramos que a segurança de seus dados não depende exclusivamente de Nós, de modo que Você também deve estar sempre atento às orientações apresentadas a Você. 2.2. Os cursos da são considerados cursos de Formação Inicial e Continuada (FIC). São cursos livres e, portanto, não requerem regulamentação específica ou autorização de órgãos de ensino competentes. Caracterizam-se pela modalidade de educação não formal, destinada a proporcionar ao conhecimentos para o seu desenvolvimento pessoal e profissional. ESCOLA VIRTUAL ALUNO 2.3. A oferece diversos cursos em diferentes áreas de interesse, como: ESCOLA VIRTUAL Administração Contabilidade e Finanças Desenvolvimento Pessoal e Profissional Educação Tecnologia 2.3.1. Os cursos oferecidos pela são integralmente . ESCOLA VIRTUAL gratuitos 3. DAS CONDIÇÕES BÁSICAS PARA ACESSO, CADASTRO E USO 3.1. Para o usufruir dos cursos disponibilizados no ambiente restrito da , é necessário dispor de um computador com conexão à Internet, cujos requisitos mínimos de recursos e configuração exigidos para a visualização das aulas via Internet são os seguintes: ALUNO ESCOLA VIRTUAL Windows 7 (ou superior) Acesso à Internet Uma conta de válida e-mail Bloqueadores de pop-up desabilitados Plugins do Java e Flash Player instalados e atualizados 3.2. Para acesso aos cursos on-line, o deverá realizar o cadastro prévio completo no site (), informando dados pessoais e/ou outros exigidos pela , como nome completo, telefone e e-mail. O cadastro será concluído mediante a criação de uma senha de acesso pessoal e intransferível, sendo o usuário o único responsável por manter a confidencialidade dessas informações. O fornecimento de informações falsas ou incorretas poderá resultar na suspensão ou exclusão da conta, sem prejuízo de outras medidas legais. ALUNO www.ev.org.br ESCOLA VIRTUAL 3.2.1. Nós podemos alterar os critérios de elegibilidade de acesso e utilização da Plataforma a qualquer momento e ao nosso critério, sem a necessidade de comunicação ou aviso prévio a Você ou qualquer terceiro, sendo de extrema importância que Você, ao fazer uso das nossas funcionalidades, sempre verifique as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3. Observadas as condições previstas neste Termo de Uso, o cadastro permanecerá ativo por , contados a partir da última data de em qualquer curso da . Caso o usuário cadastrado a contar da criação do cadastro, este poderá ser excluído pela . 2 (dois) anos conclusão com aprovação ESCOLA VIRTUAL não efetive matrícula em nenhum curso no prazo de 45 (quarenta e cinco) dias ESCOLA VIRTUAL 3.3.1. A também poderá excluir, sem a necessidade de aviso prévio, qualquer cadastro de usuário quando necessário para atender atualizações, migrações sistêmicas ou melhorias de funcionalidade da Plataforma, visando aprimorar nossos serviços e funcionalidades como um todo. ESCOLA VIRTUAL 3.4. Uma vez concluído o cadastro mediante a criação de uma senha de acesso pessoal e escolhido o curso desejado, o fará a sua matrícula no curso desejado e terá acesso a todo o conteúdo para estudo. ALUNO 3.5. O login e a senha permitem, ainda, o acesso ao seu cadastro individual, para eventuais atualizações das informações pessoais, como e-mail, telefone, entre outras. 3.5.1. O cadastro na Plataforma está limitado a 01 (uma) conta por CPF. É expressamente proibido que um mesmo usuário crie ou utilize múltiplos cadastros, s",
+        "final": "https://www.ev.org.br/",
+        "trecho_usado": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3.",
+        "metadados": {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "descricao": "Fundação Bradesco - Escola Virtual",
+          "canonica": "",
+          "og": {
+            "og:url": "https://www.ev.org.br/",
+            "og:type": "website",
+            "og:title": "Fundação Bradesco - Escola Virtual",
+            "og:description": "Fundação Bradesco - Escola Virtual",
+            "og:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:description": "Fundação Bradesco - Escola Virtual",
+            "twitter:title": "Fundação Bradesco - Escola Virtual",
+            "twitter:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "(Última versão: 09 de junho de 2026)\nBem-vindo(a) à Escola Virtual!\nA , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL\nA seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br\nComo condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL\nEstamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio.\nPara melhor entendimento destes Termos, devem ser consideradas as seguintes definições:\nPessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL\nMeios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL\nConta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso:\nsão quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis:\nsão os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais:\npara fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados:\npessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco\nTerminologia para endereço de internet. Link:\nambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br\ntoda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento:\n2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS\n2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso.\n2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas.\n2.1.2. Nós preocupamos com a sua segurança na utilização da"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+          "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+          "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+          "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+          "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+          "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+          "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+          "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+          "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+          "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-1fc66a9ed4e1",
+            "type": "image",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "final_url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco - Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a0b6a91cec07",
+            "type": "image",
+            "title": "fundação bradesco | escola virtual",
+            "url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "final_url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "fundação bradesco | escola virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a96bc70d988",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7abd9cada8c6",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b251ab442677",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-42936d35a87f",
+            "type": "image",
+            "title": "Bradesco Seguros",
+            "url": "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bradesco Seguros",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bac8d0a60f6a",
+            "type": "image",
+            "title": "Instituto Crescer",
+            "url": "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Instituto Crescer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d94cc0bde3c0",
+            "type": "image",
+            "title": "Microsoft",
+            "url": "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Microsoft",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0286c33eac44",
+            "type": "image",
+            "title": "Programa Semente",
+            "url": "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Programa Semente",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a2f0498ae816",
+            "type": "image",
+            "title": "Unibrad",
+            "url": "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Unibrad",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8a2391fb3209",
+            "type": "image",
+            "title": "DCSIMG",
+            "url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "final_url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "sdc.fb.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "DCSIMG",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a4f45f10abb",
+            "type": "video",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "url": "https://www.youtube.com/embed/SLuJguvou5M",
+            "final_url": "https://www.youtube.com/embed/SLuJguvou5M",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco - Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://fundacao.bradesco/",
+      "result": {
+        "titulo": "Fundação Bradesco",
+        "texto": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade. Saiba mais sobre a Fundação",
+        "final": "https://fundacao.bradesco/",
+        "trecho_usado": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade. Saiba mais sobre a",
+        "metadados": {
+          "titulo": "Fundação Bradesco",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://fundacao.bradesco/assets/images/logo_white.svg",
+          "https://fundacao.bradesco/assets/icons/contact_icon.svg",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-7caf8a2dbc83",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+            "final_url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f76f9530c160",
+            "type": "image",
+            "title": "Educação Infantil",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Educação Infantil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6f4136f7d414",
+            "type": "image",
+            "title": "Ensino Fundamental",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Fundamental",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0d12c7497b62",
+            "type": "image",
+            "title": "Ensino Fundamental",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Fundamental",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c2f80e550d80",
+            "type": "image",
+            "title": "Ensino Médio",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Médio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b5de5c55011d",
+            "type": "image",
+            "title": "Cursos Técnicos de Nível Médio",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cursos Técnicos de Nível Médio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5b36b2fae77",
+            "type": "image",
+            "title": "Educação de Jovens e Adultos (EJA)",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Educação de Jovens e Adultos (EJA)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-794b904a4fbc",
+            "type": "image",
+            "title": "Formação Inicial e Continuada (FIC)",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Formação Inicial e Continuada (FIC)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-37be815e082c",
+            "type": "image",
+            "title": "Escola Virtual",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2d5e372007d",
+            "type": "image",
+            "title": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+            "url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-104e713c6087",
+            "type": "image",
+            "title": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+            "url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-22b98741b385",
+            "type": "image",
+            "title": "Relatório Anual 2025",
+            "url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Relatório Anual 2025",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "result": {
+        "titulo": "entidade jurídica sem fins lucrativos",
+        "texto": "Esta página ou seção foi marcada para revisão devido a incoerências ou dados de confiabilidade duvidosa. Se tem algum conhecimento sobre o tema, por favor, verifique e a coerência e o rigor deste artigo. Pode encontrar ajuda no . melhore WikiProjeto Ciências sociais Se existir um mais adequado, por favor corrija esta predefinição. WikiProjeto () dezembro de 2012 Uma é uma que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ] Uma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor ou instituidores, definido por contrato de . É diferente do chamado pois é impessoal, no sentido de sua operacionalização, podendo inclusive mudar a operacionalização e/ou ampliá-la, de conformidade, sempre com a lei. De forma geral, é uma instituição caracterizada como composta pela organização de um mas que não tem . É uma entidade de , constituída por ata de dotação patrimonial ou para determinada finalidade econômica não distributiva, ou seja, pela lei toda renda deve ser e estar re-investida no chamado \" operation found \" do inglês, segundo novo entendimento internacional que reporta ao usual através dos tempos, sendo dessa feita devida, pelo ( do País). fidúcia cooperativismo pessoa jurídica patrimônio [ carecede fontes ] ? direito privado inter vivos causa mortis fiscalizada Ministério Público Poder Judiciário Portanto, é uma composta por um patrimônio juridicamente indissolúvel e personalizado, destacado pelo seu instituidor ou instituidores públicos ou privados, para uma ou mais finalidades específicas, não distributivas, com relação a sua renda, que deve forçosamente ser reincorporada. Não tem proprietário, nem titular, daí seu caráter não distributivo, que a lei estabelece, desde os primórdios tempos . Consiste apenas num patrimônio administrado, segundo a Lei e destinado a um fim econômico, determinado pela própria lei que a autoriza, sendo acompanhada em sua atuação pelo Ministério Público da União, Estados ou Municípios, dependendo da esfera de atuação. Segundo novo entendimento internacional, é dirigido por administradores ou curadores, autorizados e fiscalizados, na conformidade de seus estatutos, esses aprovados pelo Ministério Público a que está juridicamente subordinado. pessoa jurídica [ carecede fontes ] ? Origem histórica provável [ editar | editar código ] Como curiosidade Histórica, abordada no Dicionário-Enciclopédico de (1952), \"... Fundação, como instituição, teve sua origem Histórica na organização administrativa da , em que o chamado e/ou \"Comandante-em-Cristo\", administrava e guardava o acervo de toda a , numa congregação de regras próprias (localizava-se numa ilha - fortaleza), porém, tinha o dever de obediência ao ...\". Aurélio Buarque de Holanda Ferreira Ordem Beneditina Ecônomo Ordem Soberana e Militar de Malta Vaticano 3 [ ] Referências ↑ . «FUNDAÇÃO: CONCEITO, CARACTERÍSTICAS PRINCIPAIS E INSTITUIÇÃO» Ministério Público de Santa Catarina . Consultado em 11 de abril de 2023 ↑ . «Fundações» Secretaria-Geral da Presidência do Conselho de Ministros . Consultado em 11 de abril de 2023 ↑ Buarque de Hollanda Ferreira Editora do Globo de Porto Alegre, 1952. Dicionário Aurélio Ligações externas [ editar | editar código ] O possui uma com imagens e outros ficheiros sobre Commons categoria Fundação (instituição) Questões de sucessão: a importância das fundações para a salvaguarda patrimonial, Ana Motta Veiga, Academia de Escolas de Arquitetura e Urbanismo de Língua Portuguesa, Novembro de 2012 Este artigo sobre é um . Você pode ajudar a Wikipédia . direito esboço expandindo-o v d e",
+        "final": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "trecho_usado": "ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ] Uma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor",
+        "metadados": {
+          "titulo": "entidade jurídica sem fins lucrativos",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "og": {
+            "og:title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2006-03-17T17:39:54Z",
+          "atualizado_em": "2023-04-11T21:42:55Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2006-03-17T17:39:54Z",
+            "dateModified": "2023-04-11T21:42:55Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "entidade jurídica sem fins lucrativos"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página ou seção foi marcada para revisão devido a incoerências ou dados de confiabilidade duvidosa. Se tem algum conhecimento sobre o tema, por favor, verifique e a coerência e o rigor deste artigo. Pode encontrar ajuda no . melhore WikiProjeto Ciências sociais Se existir um mais adequado, por favor corrija esta predefinição. WikiProjeto () dezembro de 2012\nUma é uma que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ]\nUma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor ou instituidores, definido por contrato de . É diferente do chamado pois é impessoal, no sentido de sua operacionalização, podendo inclusive mudar a operacionalização e/ou ampliá-la, de conformidade, sempre com a lei. De forma geral, é uma instituição caracterizada como composta pela organização de um mas que não tem . É uma entidade de , constituída por ata de dotação patrimonial ou para determinada finalidade econômica não distributiva, ou seja, pela lei toda renda deve ser e estar re-investida no chamado \" operation found \" do inglês, segundo novo entendimento internacional que reporta ao usual através dos tempos, sendo dessa feita devida, pelo ( do País). fidúcia cooperativismo pessoa jurídica patrimônio [ carecede fontes ] ? direito privado inter vivos causa mortis fiscalizada Ministério Público Poder Judiciário\nPortanto, é uma composta por um patrimônio juridicamente indissolúvel e personalizado, destacado pelo seu instituidor ou instituidores públicos ou privados, para uma ou mais finalidades específicas, não distributivas, com relação a sua renda, que deve forçosamente ser reincorporada. Não tem proprietário, nem titular, daí seu caráter não distributivo, que a lei estabelece, desde os primórdios tempos . Consiste apenas num patrimônio administrado, segundo a Lei e destinado a um fim econômico, determinado pela própria lei que a autoriza, sendo acompanhada em sua atuação pelo Ministério Público da União, Estados ou Municípios, dependendo da esfera de atuação. Segundo novo entendimento internacional, é dirigido por administradores ou curadores, autorizados e fiscalizados, na conformidade de seus estatutos, esses aprovados pelo Ministério Público a que está juridicamente subordinado. pessoa jurídica [ carecede fontes ] ?"
+          },
+          {
+            "titulo": "Origem histórica provável",
+            "texto": "Como curiosidade Histórica, abordada no Dicionário-Enciclopédico de (1952), \"... Fundação, como instituição, teve sua origem Histórica na organização administrativa da , em que o chamado e/ou \"Comandante-em-Cristo\", administrava e guardava o acervo de toda a , numa congregação de regras próprias (localizava-se numa ilha - fortaleza), porém, tinha o dever de obediência ao ...\". Aurélio Buarque de Holanda Ferreira Ordem Beneditina Ecônomo Ordem Soberana e Militar de Malta Vaticano 3 [ ]\n↑ . «FUNDAÇÃO: CONCEITO, CARACTERÍSTICAS PRINCIPAIS E INSTITUIÇÃO» Ministério Público de Santa Catarina . Consultado em 11 de abril de 2023\n↑ . «Fundações» Secretaria-Geral da Presidência do Conselho de Ministros . Consultado em 11 de abril de 2023\n↑ Buarque de Hollanda Ferreira Editora do Globo de Porto Alegre, 1952. Dicionário Aurélio\nQuestões de sucessão: a importância das fundações para a salvaguarda patrimonial, Ana Motta Veiga, Academia de Escolas de Arquitetura e Urbanismo de Língua Portuguesa, Novembro de 2012\nEste artigo sobre é um . Você pode ajudar a Wikipédia . direito esboço expandindo-o"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Searchtool.svg/40px-Searchtool.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&amp;type=1x1&amp;usesul3=1",
+          "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+          "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ecbfcb161a2b",
+            "type": "image",
+            "title": "Ícone de esboço",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ícone de esboço",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.ev.org.br/entrar",
+      "result": {
+        "titulo": "Entrar",
+        "texto": "(Última versão: 09 de junho de 2026) Bem-vindo(a) à Escola Virtual! A , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL A seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br Como condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL Estamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio. 1. CONCEITOS BÁSICOS Para melhor entendimento destes Termos, devem ser consideradas as seguintes definições: Pessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL Meios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL Conta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso: são quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis: são os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais: para fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados: pessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco Terminologia para endereço de internet. Link: ambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br toda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento: 2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS 2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso. 2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas. 2.1.2. Nós preocupamos com a sua segurança na utilização das nossas funcionalidades, por isso, por meio de nossos procedimentos internos, estamos constantemente aprimorando nossas técnicas, visando garantir a autenticidade, confidencialidade e integridade das informações que nos são fornecidas. Relembramos que a segurança de seus dados não depende exclusivamente de Nós, de modo que Você também deve estar sempre atento às orientações apresentadas a Você. 2.2. Os cursos da são considerados cursos de Formação Inicial e Continuada (FIC). São cursos livres e, portanto, não requerem regulamentação específica ou autorização de órgãos de ensino competentes. Caracterizam-se pela modalidade de educação não formal, destinada a proporcionar ao conhecimentos para o seu desenvolvimento pessoal e profissional. ESCOLA VIRTUAL ALUNO 2.3. A oferece diversos cursos em diferentes áreas de interesse, como: ESCOLA VIRTUAL Administração Contabilidade e Finanças Desenvolvimento Pessoal e Profissional Educação Tecnologia 2.3.1. Os cursos oferecidos pela são integralmente . ESCOLA VIRTUAL gratuitos 3. DAS CONDIÇÕES BÁSICAS PARA ACESSO, CADASTRO E USO 3.1. Para o usufruir dos cursos disponibilizados no ambiente restrito da , é necessário dispor de um computador com conexão à Internet, cujos requisitos mínimos de recursos e configuração exigidos para a visualização das aulas via Internet são os seguintes: ALUNO ESCOLA VIRTUAL Windows 7 (ou superior) Acesso à Internet Uma conta de válida e-mail Bloqueadores de pop-up desabilitados Plugins do Java e Flash Player instalados e atualizados 3.2. Para acesso aos cursos on-line, o deverá realizar o cadastro prévio completo no site (), informando dados pessoais e/ou outros exigidos pela , como nome completo, telefone e e-mail. O cadastro será concluído mediante a criação de uma senha de acesso pessoal e intransferível, sendo o usuário o único responsável por manter a confidencialidade dessas informações. O fornecimento de informações falsas ou incorretas poderá resultar na suspensão ou exclusão da conta, sem prejuízo de outras medidas legais. ALUNO www.ev.org.br ESCOLA VIRTUAL 3.2.1. Nós podemos alterar os critérios de elegibilidade de acesso e utilização da Plataforma a qualquer momento e ao nosso critério, sem a necessidade de comunicação ou aviso prévio a Você ou qualquer terceiro, sendo de extrema importância que Você, ao fazer uso das nossas funcionalidades, sempre verifique as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3. Observadas as condições previstas neste Termo de Uso, o cadastro permanecerá ativo por , contados a partir da última data de em qualquer curso da . Caso o usuário cadastrado a contar da criação do cadastro, este poderá ser excluído pela . 2 (dois) anos conclusão com aprovação ESCOLA VIRTUAL não efetive matrícula em nenhum curso no prazo de 45 (quarenta e cinco) dias ESCOLA VIRTUAL 3.3.1. A também poderá excluir, sem a necessidade de aviso prévio, qualquer cadastro de usuário quando necessário para atender atualizações, migrações sistêmicas ou melhorias de funcionalidade da Plataforma, visando aprimorar nossos serviços e funcionalidades como um todo. ESCOLA VIRTUAL 3.4. Uma vez concluído o cadastro mediante a criação de uma senha de acesso pessoal e escolhido o curso desejado, o fará a sua matrícula no curso desejado e terá acesso a todo o conteúdo para estudo. ALUNO 3.5. O login e a senha permitem, ainda, o acesso ao seu cadastro individual, para eventuais atualizações das informações pessoais, como e-mail, telefone, entre outras. 3.5.1. O cadastro na Plataforma está limitado a 01 (uma) conta por CPF. É expressamente proibido que um mesmo usuário crie ou utilize múltiplos cadastros, s",
+        "final": "https://www.ev.org.br/entrar",
+        "trecho_usado": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3.",
+        "metadados": {
+          "titulo": "Entrar",
+          "descricao": "Fundação Bradesco - Escola Virtual",
+          "canonica": "",
+          "og": {
+            "og:url": "https://www.ev.org.br/entrar",
+            "og:type": "website",
+            "og:title": "Entrar",
+            "og:description": "Fundação Bradesco - Escola Virtual",
+            "og:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:description": "Fundação Bradesco - Escola Virtual",
+            "twitter:title": "Entrar",
+            "twitter:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "(Última versão: 09 de junho de 2026)\nBem-vindo(a) à Escola Virtual!\nA , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL\nA seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br\nComo condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL\nEstamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio.\nPara melhor entendimento destes Termos, devem ser consideradas as seguintes definições:\nPessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL\nMeios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL\nConta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso:\nsão quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis:\nsão os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais:\npara fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados:\npessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco\nTerminologia para endereço de internet. Link:\nambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br\ntoda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento:\n2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS\n2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso.\n2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas.\n2.1.2. Nós preocupamos com a sua segurança na utilização da"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+          "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+          "https://www.facebook.com/tr?id=749794675567753&ev=PageView&noscript=1",
+          "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=8.6.2"
+        ],
+        "midia": [
+          {
+            "id": "med-1fc66a9ed4e1",
+            "type": "image",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "final_url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "source_title": "Entrar",
+            "source_url": "https://www.ev.org.br/entrar",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco - Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a0b6a91cec07",
+            "type": "image",
+            "title": "fundação bradesco | escola virtual",
+            "url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "final_url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "source_title": "Entrar",
+            "source_url": "https://www.ev.org.br/entrar",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "fundação bradesco | escola virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8a2391fb3209",
+            "type": "image",
+            "title": "DCSIMG",
+            "url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "final_url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "source_title": "Entrar",
+            "source_url": "https://www.ev.org.br/entrar",
+            "publisher": "sdc.fb.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "DCSIMG",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+      "result": {
+        "titulo": "município brasileiro no Estado de Goiás",
+        "texto": "Caldas Novas Município do Brasil Vista aérea de Caldas Novas Vista aérea de Caldas Novas Bandeira Brasão de armas Hino Gentílico caldas-novense 1 [ ] Localização de Caldas Novas em Goiás Localização de Caldas Novas em Goiás Caldas Novas Localização de Caldas Novas no Brasil Mapa de Caldas Novas Coordenadas: 17° 44′ 38″ S, 48° 37′ 33″ O País Brasil Unidade federativa Goiás Municípios limítrofes , , , , , , e Morrinhos Marzagão Piracanjuba Corumbaíba Rio Quente Ipameri Santa Cruz de Goiás Pires do Rio Distância até a capital 152 km Fundação de (115anos) 21 de outubro 1911 2 [ ] Governo • Prefeito(a) Kleber Luiz Marra(,2025–2028) 3 [ ] MDB • Vereadores 17 Área • Total 1 [ ] 1 608,523km² Altitude 686 m População •Total (Estimativa /2025) IBGE 4 [ ] 106 820 hab. •Posição GO: 16º Densidade 66,4hab./km² Clima () tropical com estação seca Aw Fuso horário Hora de Brasília () UTC−3 CEP 75680-000 a 75699-999 5 [ ] IDH (/2010) PNUD 6 [ ] 0,733 — alto •Posição GO: 27º PIB (IBGE/2021) 7 [ ] 3 000 885,82 R$ mil •Per capita (IBGE/2021) 7 [ ] 31 527,54 R$ Sítio () () www.caldasnovas.go.gov.br Prefeitura www.camaradecaldas.go.gov.br Câmara é um no de , do país. Localiza-se no sudeste goiano e sua , conforme estimativas do de , é de habitantes. Caldas Novas município brasileiro estado Goiás Região Centro-Oeste população IBGE 2025 106 820 4 [ ] O município é conhecido por ser a maior estância hidrotermal do mundo, possuindo águas que brotam do chão em temperaturas que variam de 43 °C a 70 °C. A principal fonte de renda do município é o turismo. Na alta temporada, a cidade chega a comportar mais de 500 mil turistas. A estrutura da cidade conta com hotéis, pousadas, chalés, clubes, boates e bares. Uma outra grande atração de Caldas Novas é o ecoturismo, vez que a cidade encontra-se às margens do lago da represa de Corumbá e ao lado da Serra de Caldas. Todos os anos, mais de 3 milhões de turistas visitam Caldas Novas. Possui centenas de piscinas com águas termais em seus hotéis e clubes, que atraem turistas de todo o país, principalmente das regiões Sudeste e Centro-Oeste. 8 [ ] História [ editar | editar código ] Região das Águas Quentes A região de Caldas Novas originalmente era habitada pelos e , dizimados pela escravidão e doenças dos colonos. indígenas caiapós xavantes Em 1722, o , o filho, enquanto procurava por ouro na , descobre fontes de águas termais em sua vertente ocidental, ali fundando um assentamento nomeado “Caldas Velhas”, situado no local em que atualmente está a Pousada do Rio Quente. Há quem diga que estas fontes foram descobertas antes, visto que já constam em um mapa espanhol do século XVI. bandeirante Bartolomeu Bueno da Silva Serra de Caldas Pintura de que retrata a descoberta das águas termais da Lagoa de Pirapitinga por . Félix Émile Taunay Martinho Coelho de Siqueira Como o foco da neste momento na região de era a descoberta de pedras preciosas e o ouro da região de Caldas Velhas era escasso e de pouco interesse dos exploradores, as águas quentes da região permanecem esquecidas por décadas, sendo redescobertas em fevereiro de 1777 pelo bandeirante em uma de suas caças, quando seus cães gritaram ao entrar na Lagoa de Pirapitinga. No dia 16 daquele mês, ele descobre fontes termais no Córrego das Lavras (atual Córrego Caldas), pouco tempo depois erigindo sua casa em suas margens, sendo esta atualmente um edifício histórico preservado situado dentro do Sesc Caldas Novas. Mais tarde, o bandeirante também descobre ouro em grande quantidade na região do pequeno curso d’água, fazendo com que Martinho requeresse uma sesmaria ali. Coroa Portuguesa Goiás paulista Martinho Coelho de Siqueira A descoberta de águas termais e ouro traz para a área um grande número de pessoas, que constroem suas casas ao longo do córrego. Forma-se, assim, a primeira povoação. No entanto, com a chegada às margens do córrego de um número cada vez maior de portadores de doenças contagiosas, os moradores do povoado afastam-se da estância. Ao longo do século XIX, um grande número de migrantes vindos dos estados de e São Paulo chega à região de Caldas Novas, como o mineiro Coronel Luiz Gonzaga de Menezes, importante personagem da história municipal. Minas Gerais Em 1816, Martinho falece e herda as suas propriedades seu filho Antônio Coelho de Siqueira, que recebeu em 1818 o , o qual se cura de suas moléstias nas águas termais, e o naturalista francês , que estuda as propriedades das fontes. Falecendo Antônio em 1848, sua viúva, Dona Eufrásia Maria de Arruda, vende a propriedade para Domingos José Ribeiro. governador da Capitania de Goiás Fernando Delgado de Castilho Auguste de Saint-Hilaire Luiz Gonzaga de Menezes, proprietário da Fazenda Quilombo, situada a 15 km das fontes termais, combina com Domingos a transferência do povoado para um novo local. Assim, em 1850, é construída a Igreja Matriz de , em patrimônio doado por meio de escritura em 27 de janeiro daquele ano. Ao redor deste templo, moradores do Quilombo e do arraial ao redor do Córrego das Lavras se fixam, originando o povoado de Caldas Novas. Nossa Senhora do Desterro Em 1853, foi criada, dentro da , a Freguesia de Caldas Novas, cujo primeiro vigário foi o Cônego José Olinto da Silva. Nestes tempos, a economia da região se firmava como agricultora autossuficiente. Vila de Santa Cruz Em 1880, a Freguesia de Caldas Novas foi transferida à , cuja sede estava mais próxima. Esta decisão teve influência do Capitão Cândido Gonzaga de Menezes, filho do Coronel Luiz. Oito anos depois, a padroeira da freguesia foi alterada de Nossa Senhora do Desterro para . Vila Bela de Morrinhos Nossa Senhora das Dores Em 1908, inicia-se o movimento político pela emancipação caldas-novense, liderado por Bento de Godoy, Orcalino Santos, Victor Ozeda Alla e João Batista da Cunha. Em 5 de julho de 1911, o então Presidente do Estado de Goiás, , sanciona a Lei Estadual n° 393, que desmembra de Morrinhos o distrito de Caldas Novas, elevado à categoria de vila, sendo instalada em 21 de outubro do mesmo ano, com a posse do primeiro intendente (prefeito), Bento de Godoy. Urbano de Gouveia Nos primeiros tempos após a emancipação, Caldas Novas foi marcada pelo progresso paulatino. Em 1918, o médico Orozimbo Corrêa Neto, após estudos sobre as fontes termais locais, publica o livro “Águas Termais de Caldas Novas”, que faz a cidade ficar conhecida nos grandes centros urbanos brasileiros. Milhares de pessoas foram atraídas para o local, a fim de tratamento de saúde nas suas águas, principalmente nas do Balneário Municipal. Em 21 de junho de 1923, a vila foi elevada à condição de cidade. O início da década de 1970 foi marcado pelo número de empresários que investiram na região criando hotéis e clubes, incentivados pelo sucesso da Pousada do Rio Quente, dentro da qual está o , inaugurado em 1962. Houve um grande incentivo ao crescimento econômico e populacional local. O município era, até então, pouco urbanizado e com pouca infraestrutura turística. Nos anos 1990, após a emancipação de (1988), Caldas Novas teve um crescimento vertical e uma ascensão imobiliária. Hot Park Rio Quente 9 [ ] 10 [ ] 11 [ ] Geografia [ editar | editar código ] De acordo com a desde 2017, instituída pelo IBGE, o município pertence às e . Até então, com a vigência das divisões em , fazia parte da microrregião do Meia Ponte, que por sua vez estava incluída na . divisão regional vigente 12 [ ] Regiões Geográficas Intermediária de Itumbiara Imediata de Caldas Novas-Morrinhos 13 [ ] microrregiões e mesorregiões mesorregião do Sul Goiano 14 [ ] Dados climatológicos para Caldas Novas Mês Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez Ano Temperatura máxima média () °C 30,1 30,5 30,3 30,5 29,5 29,1 29,4 31,5 33,2 32,8 30,6 30 30,6 Temperatura mínima média (°C) 20,5 20,3 20,2 19,3 16,9 15,5 15,2 16,6 19,2 20,6 20,4 20,5 18,8 () Precipitação mm 253,1 203 181 73,2 21,6 6,7 2,9 7,8 36,9 103,1 207,3 248,7 1 345,3 : Weather and Climate Fonte 15 [ ] Política [ editar | editar código ] Segundo o de G",
+        "final": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+        "trecho_usado": "que atraem turistas de todo o país, principalmente das regiões Sudeste e Centro-Oeste. 8 [ ] História [ editar | editar código ] Região das Águas Quentes A região de Caldas Novas originalmente era habitada pelos e , dizimados pela escravidão e doenças dos colonos. indígenas caiapós xavantes Em 1722, o , o filho, enquanto procurava por ouro na , descobre fontes de águas termais em sua vertente",
+        "metadados": {
+          "titulo": "município brasileiro no Estado de Goiás",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+          "og": {
+            "og:image": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "og:image:width": "1200",
+            "og:image:height": "797",
+            "og:title": "Caldas Novas – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2004-09-17T05:27:25Z",
+          "atualizado_em": "2026-10-21T23:54:23Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2004-09-17T05:27:25Z",
+            "dateModified": "2026-10-21T23:54:23Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "município brasileiro no Estado de Goiás"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Vista aérea de Caldas Novas\nVista aérea de Caldas Novas\nLocalização de Caldas Novas em Goiás Caldas Novas Localização de Caldas Novas no Brasil\nLocalização de Caldas Novas em Goiás\nCoordenadas: 17° 44′ 38″ S, 48° 37′ 33″ O\n, , , , , , e Morrinhos Marzagão Piracanjuba Corumbaíba Rio Quente Ipameri Santa Cruz de Goiás Pires do Rio\nde (115anos) 21 de outubro 1911 2 [ ]\nKleber Luiz Marra(,2025–2028) 3 [ ] MDB\n•Total (Estimativa /2025) IBGE 4 [ ]\n() tropical com estação seca Aw\nHora de Brasília () UTC−3\n75680-000 a 75699-999 5 [ ]\n•Per capita (IBGE/2021) 7 [ ]\n() () www.caldasnovas.go.gov.br Prefeitura www.camaradecaldas.go.gov.br Câmara\né um no de , do país. Localiza-se no sudeste goiano e sua , conforme estimativas do de , é de habitantes. Caldas Novas município brasileiro estado Goiás Região Centro-Oeste população IBGE 2025 106 820 4 [ ]\nO município é conhecido por ser a maior estância hidrotermal do mundo, possuindo águas que brotam do chão em temperaturas que variam de 43 °C a 70 °C. A principal fonte de renda do município é o turismo. Na alta temporada, a cidade chega a comportar mais de 500 mil turistas. A estrutura da cidade conta com hotéis, pousadas, chalés, clubes, boates e bares. Uma outra grande atração de Caldas Novas é o ecoturismo, vez que a cidade encontra-se às margens do lago da represa de Corumbá e ao lado da Serra de Caldas.\nTodos os anos, mais de 3 milhões de turistas visitam Caldas Novas. Possui centenas de piscinas com águas termais em seus hotéis e clubes, que atraem turistas de todo o país, principalmente das regiões Sudeste e Centro-Oeste. 8 [ ]\nA região de Caldas Novas originalmente era habitada pelos e , dizimados pela escravidão e doenças dos colonos. indígenas caiapós xavantes\nEm 1722, o , o filho, enquanto procurava por ouro na , descobre fontes de águas termais em sua vertente ocidental, ali fundando um assentamento nomeado “Caldas Velhas”, situado no local em que atualmente está a Pousada do Rio Quente. Há quem diga que estas fontes foram descobertas antes, visto que já constam em um mapa espanhol do século XVI. bandeirante Bartolomeu Bueno da Silva Serra de Caldas\nPintura de que retrata a descoberta das águas termais da Lagoa de Pirapitinga por . Félix Émile Taunay Martinho Coelho de Siqueira\nComo o foco da neste momento na região de era a descoberta de pedras preciosas e o ouro da região de Caldas Velhas era escasso e de pouco interesse dos exploradores, as águas quentes da região permanecem esquecidas por décadas, sendo redescobertas em fevereiro de 1777 pelo bandeirante em uma de suas caças, quando seus cães gritaram ao entrar na Lagoa de Pirapitinga. No dia 16 daquele mês, ele descobre fontes termais no Córrego das Lavras (atual Córrego Caldas), pouco tempo depois erigindo sua casa em suas margens, sendo esta atualmente um edifício histórico preservado situado dentro do Sesc Caldas Novas. Mais tarde, o bandeirante também descobre ouro em grande quantidade na região do pequeno curso d’água, fazendo com que Martinho requeresse uma sesmaria ali. Coroa Portuguesa Goiás paulista Martinho Coelho de Siqueira\nA descoberta de águas termais e ouro traz para a área um grande número de pessoas, que constroem suas casas ao longo do córrego. Forma-se, assim, a primeira povoação. No entanto, com a chegada às margens do córrego de um número cada vez maior de portadores de doenças contagiosas, os moradores do povoado afastam-se da estância.\nAo longo do século XIX, um grande número de migrantes vindos dos estados de e São Paulo chega à região de Caldas Novas, como o mineiro Coronel Luiz Gonzaga de Menezes, importante personagem da história municipal. Minas Gerais\nEm 1816, Martinho falece e herda as suas propriedades seu filho Antônio Coelho de Siqueira, que recebeu em 1818 o , o qual se cura de suas moléstias nas águas termais, e o naturalista francês , que estuda as propriedades das fontes. Falecendo Antônio em 1848, sua viúva, Dona Eufrásia Maria de Arruda, vende a propriedade para Domingos José Ribeiro. gove"
+          },
+          {
+            "titulo": "Indicadores socioeconômicos",
+            "texto": "Composição do PIB (2018) 7 [ ]\nValor adicionado bruto da agropecuária: R$ ; 150 050,00 mil\nValor adicionado bruto da indústria: R$ ; 506 932,01 mil\nValor adicionado bruto dos serviços: R$ ; 1 275 713,06 mil\nValor adicionado bruto da administração pública: R$ ; 444 641,42 mil\nImpostos sobre produtos líquidos de subsídios: R$ . 177 340,70 mil\nParque Estadual Caldas Novas\nLista de municípios de Goiás\nLista de municípios do Brasil\n1 2 Instituto Brasileiro de Geografia e Estatística (IBGE). . «Caldas Novas» . Consultado em 1 de abril de 2019 Cópia arquivada em 1 de abril de 2019\n↑ (2007). . Instituto Brasileiro de Geografia e Estatística (IBGE). Enciclopédia dos Municípios Brasileiros «Caldas Novas - Histórico» (PDF) . Consultado em 1 de abril de 2019 Cópia arquivada em 1 de abril de 2019 (PDF)\n↑ . . 7 de outubro de 2024 «Kleber Marra é eleito prefeito de Caldas Novas (GO)» CNN Brasil . Consultado em 27 de janeiro de 2026\n1 2 . . 1 de julho de 2025 «Estimativas da População Residente no Brasil e Unidades da Federação» (PDF) Instituto Brasileiro de Geografia e Estatística . Consultado em 27 de janeiro de 2026\n↑ Empresa Brasileira de Correios e Telégrafos. «Busca Faixa CEP» . Consultado em 1 de fevereiro de 2019\n↑ Atlas do Desenvolvimento Humano (29 de julho de 2013). . (PNUD). «Ranking decrescente do IDH-M dos municípios do Brasil» (PDF) Programa das Nações Unidas para o Desenvolvimento . Consultado em 2 de agosto de 2013 Cópia arquivada em 8 de julho de 2014 (PDF)\n1 2 3 4 5 . Instituto Brasileiro de Geografia e Estatística «Produto Interno Bruto dos Municípios 2021» . Consultado em 21 de agosto de 2024\n↑ Borges, Olinda Mendes (2006). . turismo e fragmentação socioespacial (1970-2005) (Dissertação de mestrado). Uberlândia: UFU. pp.36–53 Caldas Novas (GO) (PDF) . Consultado em 10 de julho de 2022\n↑ PIRES, J. P. et. al. (1958). . . Rio de Janeiro: IBGE. pp.100–102 Enciclopédia dos Municípios Brasileiros 36\n↑ D'Ávila, Ylmer Rosales; Almeida, Maria Geralda. . uma alternativa para o município de Caldas Novas (GO)?. [S.l.]: UFS. 12páginas O desenvolvimento do turismo sustentável (PDF) . Consultado em 10 de julho de 2022\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE) (2017). . «Divisão Regional do Brasil» . Consultado em 1 de abril de 2019 Cópia arquivada em 1 de abril de 2019\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE) (2017). «Base de dados por municípios das Regiões Geográficas Imediatas e Intermediárias do Brasil» . Consultado em 1 de abril de 2019\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE) (2016). «Divisão Territorial Brasileira 2016» . Consultado em 1 de abril de 2019\n↑ «Caldas Novas Weather and Climate: A Comprehensive Guide» . Consultado em 2 de março de 2025\n↑ . de . 11 de junho de 2010 «Estatísticas Eleitorais - Goiás -» Tribunal Regional Eleitoral Goiás . Consultado em 14 de junho de 2011\n↑ «Como chegar a Caldas Novas de avião»\n↑ Correio Sul Goiano. «DUPLICAÇÃO GO-213: Obras seguem com 3 frentes de serviço em ritmo acelerado...»\nPrefeitura de Caldas Novas\nDados do IBGE de Caldas Novas\n— , , , , Portal Geografia Municípios Política Cultura Esportes\nDivisão regional vigente (desde 2017)\nRegiões geográficas intermediárias e imediatas\nDivisão regional extinta (vigente até 2017)\nMesorregiões e microrregiões\ne Regiões Metropolitanas RIDEs\nDistrito Federal e Entorno\nMais de 1.000.000 habitantes\nMais de 200.000 habitantes\nMais de 100.000 habitantes\nMais de 50.000 habitantes\nSanto Antônio do Descoberto\nTotal de Municípios: - Capital: 246 Goiânia\nSanta Rita do Novo Destino\nSanto Antônio do Descoberto\nSão Miguel do Passa-Quatro"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Caldas Novas"
+            ],
+            [
+              "Município do Brasil"
+            ],
+            [
+              "Vista aérea de Caldas Novas Vista aérea de Caldas Novas"
+            ],
+            [
+              "Bandeira Brasão de armas"
+            ],
+            [
+              "Hino"
+            ],
+            [
+              "Gentílico",
+              "caldas-novense [ 1 ]"
+            ],
+            [
+              "Localização de Caldas Novas em Goiás Localização de Caldas Novas em Goiás Caldas Novas Localização de Caldas Novas no Brasil"
+            ],
+            [
+              "Mapa de Caldas Novas"
+            ],
+            [
+              "Coordenadas: 17° 44′ 38″ S, 48° 37′ 33″ O {{#parsoid\\u0000fragment:19}} \"}}'/>"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Unidade federativa",
+              "Goiás"
+            ],
+            [
+              "Municípios limítrofes",
+              "Morrinhos , Marzagão , Piracanjuba , Corumbaíba , Rio Quente , Ipameri , Santa Cruz de Goiás e Pires do Rio"
+            ],
+            [
+              "Distância até a capital",
+              "152 km"
+            ],
+            [
+              "Fundação",
+              "21 de outubro de 1911 (115 anos) [ 2 ]"
+            ],
+            [
+              "Governo"
+            ],
+            [
+              "• Prefeito(a)",
+              "Kleber Luiz Marra [ 3 ] ( MDB , 2025–2028)"
+            ],
+            [
+              "• Vereadores",
+              "17"
+            ],
+            [
+              "Área"
+            ],
+            [
+              "• Total .mw-parser-output .nobold{font-weight:normal} [ 1 ]",
+              "1 608,523 km²"
+            ],
+            [
+              "Altitude",
+              "686 m"
+            ],
+            [
+              "População"
+            ],
+            [
+              "• Total (Estimativa IBGE /2025 [ 4 ] )",
+              "106 820 hab."
+            ],
+            [
+              "• Posição",
+              "GO: 16º"
+            ],
+            [
+              "Densidade",
+              "66,4 hab./km²"
+            ],
+            [
+              "Clima",
+              "tropical com estação seca ( Aw )"
+            ],
+            [
+              "Fuso horário",
+              "Hora de Brasília ( UTC−3 )"
+            ],
+            [
+              "CEP",
+              "75680-000 a 75699-999 [ 5 ]"
+            ],
+            [
+              "IDH ( PNUD /2010 [ 6 ] )",
+              "0,733 — alto"
+            ],
+            [
+              "• Posição",
+              "GO: 27º"
+            ],
+            [
+              "PIB (IBGE/2021 [ 7 ] )",
+              "R$ 3 000 885,82 mil"
+            ],
+            [
+              "• Per capita (IBGE/2021 [ 7 ] )",
+              "R$ 31 527,54"
+            ],
+            [
+              "Sítio",
+              "www.caldasnovas.go.gov.br ( Prefeitura ) www.camaradecaldas.go.gov.br ( Câmara )"
+            ]
+          ],
+          [
+            [
+              "Dados climatológicos para Caldas Novas"
+            ],
+            [
+              "Mês",
+              "Jan",
+              "Fev",
+              "Mar",
+              "Abr",
+              "Mai",
+              "Jun",
+              "Jul",
+              "Ago",
+              "Set",
+              "Out",
+              "Nov",
+              "Dez",
+              "Ano"
+            ],
+            [
+              "Temperatura máxima média ( °C )",
+              "30,1",
+              "30,5",
+              "30,3",
+              "30,5",
+              "29,5",
+              "29,1",
+              "29,4",
+              "31,5",
+              "33,2",
+              "32,8",
+              "30,6",
+              "30",
+              "30,6"
+            ],
+            [
+              "Temperatura mínima média (°C)",
+              "20,5",
+              "20,3",
+              "20,2",
+              "19,3",
+              "16,9",
+              "15,5",
+              "15,2",
+              "16,6",
+              "19,2",
+              "20,6",
+              "20,4",
+              "20,5",
+              "18,8"
+            ],
+            [
+              "Precipitação ( mm )",
+              "253,1",
+              "203",
+              "181",
+              "73,2",
+              "21,6",
+              "6,7",
+              "2,9",
+              "7,8",
+              "36,9",
+              "103,1",
+              "207,3",
+              "248,7",
+              "1 345,3"
+            ],
+            [
+              "Fonte : Weather and Climate [ 15 ]"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Portal — Geografia , Municípios , Política , Cultura , Esportes"
+            ],
+            [
+              "Capital",
+              "Goiânia"
+            ],
+            [
+              "Divisão regional vigente (desde 2017)",
+              "Regiões geográficas intermediárias e imediatas"
+            ],
+            [
+              "Divisão regional extinta (vigente até 2017)",
+              "Mesorregiões e microrregiões"
+            ],
+            [
+              "Regiões Metropolitanas e RIDEs",
+              "Distrito Federal e Entorno Goiânia"
+            ],
+            [
+              "Mais de 1.000.000 habitantes",
+              "Goiânia"
+            ],
+            [
+              "Mais de 200.000 habitantes",
+              "Aparecida de Goiânia Anápolis Águas Lindas de Goiás Rio Verde Luziânia Valparaíso de Goiás"
+            ],
+            [
+              "Mais de 100.000 habitantes",
+              "Senador Canedo Trindade Catalão Formosa Itumbiara Planaltina Jataí Novo Gama Caldas Novas"
+            ],
+            [
+              "Mais de 50.000 habitantes",
+              "Cidade Ocidental Goianésia Santo Antônio do Descoberto Goianira Mineiros Cristalina Inhumas Morrinhos"
+            ],
+            [
+              "Centro-Oeste , Brasil"
+            ]
+          ],
+          [
+            [
+              "v d e Municípios de Goiás"
+            ],
+            [
+              "Total de Municípios: 246 - Capital: Goiânia"
+            ],
+            [
+              "Abadia de Goiás Abadiânia Acreúna Adelândia Água Fria de Goiás Água Limpa Águas Lindas de Goiás Alexânia Aloândia Alto Horizonte Alto Paraíso de Goiás Alvorada "
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/b/b0/Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://upload.wikimedia.org/wikipedia/commons/b/b0/Caldas_Novas.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Caldas_Novas.jpg/330px-Caldas_Novas.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Caldas_Novas_-_Bandeira.svg/120px-Caldas_Novas_-_Bandeira.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://upload.wikimedia.org/wikipedia/commons/c/c9/Brasao_caldas_novas.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail_unscaled",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Goias_Municip_CaldasNovas.svg/330px-Goias_Municip_CaldasNovas.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-2a7c0052bcfc",
+            "type": "image",
+            "title": "município brasileiro no Estado de Goiás",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bffc7a2e3bad",
+            "type": "image",
+            "title": "Vista aérea de Caldas Novas",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Caldas_Novas.jpg/330px-Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Caldas_Novas.jpg/330px-Caldas_Novas.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vista aérea de Caldas Novas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-738627fdbf72",
+            "type": "image",
+            "title": "Bandeira de Caldas Novas",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Caldas_Novas_-_Bandeira.svg/120px-Caldas_Novas_-_Bandeira.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Caldas_Novas_-_Bandeira.svg/120px-Caldas_Novas_-_Bandeira.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira de Caldas Novas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f69e138a14ae",
+            "type": "image",
+            "title": "Brasão de armas de Caldas Novas",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Brasao_caldas_novas.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Brasao_caldas_novas.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasão de armas de Caldas Novas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3acb3db630d2",
+            "type": "image",
+            "title": "Localização de Caldas Novas em Goiás",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Goias_Municip_CaldasNovas.svg/330px-Goias_Municip_CaldasNovas.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Goias_Municip_CaldasNovas.svg/330px-Goias_Municip_CaldasNovas.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Localização de Caldas Novas em Goiás",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-707443562f4f",
+            "type": "image",
+            "title": "Caldas Novas está localizado em: Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Caldas Novas está localizado em: Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7bfd258b0894",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,12,-17.743888888889,-48.625833333333,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Caldas_Novas&revid=73265323&groups=_9a7943eaec282e2f82cd000e248a53b0449a1461&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-17.743888888889,-48.625833333333,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Caldas_Novas&revid=73265323&groups=_9a7943eaec282e2f82cd000e248a53b0449a1461&parser=parsoid",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e7f206f7f40e",
+            "type": "image",
+            "title": "Goiás",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Flag_of_Goi%C3%A1s.svg/40px-Flag_of_Goi%C3%A1s.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Flag_of_Goi%C3%A1s.svg/40px-Flag_of_Goi%C3%A1s.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Goiás",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-77470f7120a7",
+            "type": "image",
+            "title": "Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro no Estado de Goiás",
+            "source_url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "445e8eeb3bdb1b1c200c",
+            "url": "http://www.ev.org.br/",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Exp"
+          },
+          {
+            "id": "c5341128874ba8ee3169",
+            "url": "https://fundacao.bradesco/",
+            "title": "Fundação Bradesco",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fun"
+          },
+          {
+            "id": "1ab4f6c0675f3afb932e",
+            "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalid"
+          },
+          {
+            "id": "0f69f89e410fe51619da",
+            "url": "https://www.fcc.org.br/",
+            "title": "Fundação Carlos Chagas | FCC",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Dura"
+          },
+          {
+            "id": "473b12a08a4bd2ddba23",
+            "url": "https://pt.wikipedia.org/wiki/Caldas_Novas",
+            "title": "Caldas Novas – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Em 1722, o bandeirante Bartolomeu Bueno da Silva, o filho, enquanto procurava por ouro na Serra de Caldas, descobre fontes de águas termais em sua vertente ocid"
+          },
+          {
+            "id": "b3c5f3c6e70e4a50b020",
+            "url": "https://www.ev.org.br/entrar",
+            "title": "Entrar - Fundação Bradesco - Escola Virtual",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? Bem-vindo (a) de volta! Esqueceu a senha? Ainda"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (fundação de Ouro Preto História)",
+        "bing (consulta reformulada 'fundação de Ouro Preto'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (fundação de Ouro Preto História)",
+        "ddg: bloqueado (fundação de Ouro Preto História)",
+        "marginalia: sem resultados (fundação de Ouro Preto História)",
+        "— recuperação por lacuna —",
+        "wikipedia: sem resultados (fundação de Ouro Preto)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "fundação de Ouro Preto História",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História da fundação de Ouro Preto",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "fundação de Ouro Preto",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T02:21:55.734314+00:00",
+  "source_revision": "c9104dc4e72c66777e9e32365d1b66e8397d7ae3",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

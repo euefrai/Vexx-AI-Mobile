@@ -1,0 +1,70 @@
+........................................................................ [ 46%]
+.........................................................FFF............ [ 92%]
+............                                                             [100%]
+================================== FAILURES ===================================
+____ test_news_without_city_still_requires_topic_not_a_generic_dictionary _____
+
+    def test_news_without_city_still_requires_topic_not_a_generic_dictionary():
+        import search_orchestrator as orch
+        query='Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.'
+        terms=orch._termos_correspondencia(query)
+        junk={'titulo':'Principais significado','trecho':'Principais é plural de principal'}
+        relevant={'titulo':'Inteligência artificial: novos modelos','trecho':'Novos modelos de inteligência artificial'}
+        assert not orch._util_para_pedido(junk,terms,query)
+>       assert orch._util_para_pedido(relevant,terms,query)
+E       AssertionError: assert False
+E        +  where False = <function _util_para_pedido at 0x000001DF14A5C5C0>({'titulo': 'Inteligência artificial: novos modelos', 'trecho': 'Novos modelos de inteligência artificial'}, ['inteligência', 'artificial'], 'Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.')
+E        +    where <function _util_para_pedido at 0x000001DF14A5C5C0> = <module 'search_orchestrator' from 'C:\\Users\\efrai\\Documents\\julia-mobile-v0.2-offline-sqlite\\vexx-v598-dev\\search_orchestrator.py'>._util_para_pedido
+
+tests\test_universal_search_v599.py:201: AssertionError
+_ test_topical_news_query_separates_generic_instructions_without_inventing_dates[Pesquise as principais novidades sobre intelig\xeancia artificial e compare os acontecimentos mais relevantes.-intelig\xeancia artificial] _
+
+query = 'Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.'
+topic = 'inteligência artificial'
+
+    @pytest.mark.parametrize('query,topic',[
+        ('Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.', 'inteligência artificial'),
+        ('Pesquise novidades sobre energia solar compare os acontecimentos', 'energia solar'),
+        ('Pesquise acontecimentos acerca de ciência e tecnologia e resuma os pontos principais.', 'ciência e tecnologia'),
+        ('Pesquise acontecimentos sobre energia solar nos Estados Unidos', 'energia solar nos Estados Unidos'),
+    ])
+    def test_topical_news_query_separates_generic_instructions_without_inventing_dates(query,topic):
+        parsed=qi.analyze(query,now=NOW)
+        assert parsed['parameters']['topic']==topic
+        assert parsed['constraints']['hard']['topic']==topic
+        assert parsed['original_request']==query
+        assert parsed['search_query']=='notícias '+topic
+>       assert not parsed['parameters'].get('start_date')
+E       AssertionError: assert not '2026-10-17'
+E        +  where '2026-10-17' = <built-in method get of dict object at 0x000001DF1524C780>('start_date')
+E        +    where <built-in method get of dict object at 0x000001DF1524C780> = {'start_date': '2026-10-17', 'end_date': '2026-10-24', 'window_inferred': True, 'topic': 'inteligência artificial'}.get
+
+tests\test_universal_search_v599.py:216: AssertionError
+_ test_topical_news_query_separates_generic_instructions_without_inventing_dates[Pesquise novidades sobre energia solar compare os acontecimentos-energia solar] _
+
+query = 'Pesquise novidades sobre energia solar compare os acontecimentos'
+topic = 'energia solar'
+
+    @pytest.mark.parametrize('query,topic',[
+        ('Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.', 'inteligência artificial'),
+        ('Pesquise novidades sobre energia solar compare os acontecimentos', 'energia solar'),
+        ('Pesquise acontecimentos acerca de ciência e tecnologia e resuma os pontos principais.', 'ciência e tecnologia'),
+        ('Pesquise acontecimentos sobre energia solar nos Estados Unidos', 'energia solar nos Estados Unidos'),
+    ])
+    def test_topical_news_query_separates_generic_instructions_without_inventing_dates(query,topic):
+        parsed=qi.analyze(query,now=NOW)
+        assert parsed['parameters']['topic']==topic
+        assert parsed['constraints']['hard']['topic']==topic
+        assert parsed['original_request']==query
+        assert parsed['search_query']=='notícias '+topic
+>       assert not parsed['parameters'].get('start_date')
+E       AssertionError: assert not '2026-10-17'
+E        +  where '2026-10-17' = <built-in method get of dict object at 0x000001DF1524AA40>('start_date')
+E        +    where <built-in method get of dict object at 0x000001DF1524AA40> = {'start_date': '2026-10-17', 'end_date': '2026-10-24', 'window_inferred': True, 'topic': 'energia solar'}.get
+
+tests\test_universal_search_v599.py:216: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_universal_search_v599.py::test_news_without_city_still_requires_topic_not_a_generic_dictionary
+FAILED tests/test_universal_search_v599.py::test_topical_news_query_separates_generic_instructions_without_inventing_dates[Pesquise as principais novidades sobre intelig\xeancia artificial e compare os acontecimentos mais relevantes.-intelig\xeancia artificial]
+FAILED tests/test_universal_search_v599.py::test_topical_news_query_separates_generic_instructions_without_inventing_dates[Pesquise novidades sobre energia solar compare os acontecimentos-energia solar]
+3 failed, 153 passed in 13.00s

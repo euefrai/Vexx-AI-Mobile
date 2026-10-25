@@ -1,0 +1,2836 @@
+{
+  "id": "holdout-11",
+  "category": "events",
+  "query": "Eventos em Diamantina nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 8.003,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "diamantina eventos culturais",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "diamantina eventos culturais",
+      "candidates": 4
+    },
+    {
+      "provider": "wikipedia",
+      "query": "diamantina eventos culturais",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5358
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14344
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 1111
+    },
+    {
+      "url": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5226
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+      "final": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+      "chars": 18655
+    },
+    {
+      "url": "https://www.diamantina.mg.gov.br/",
+      "final": "https://www.diamantina.mg.gov.br/",
+      "chars": 296998
+    },
+    {
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "final": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "chars": 82929
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.visitediamantina.com.br/",
+      "final": "https://www.visitediamantina.com.br/",
+      "chars": 106321
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Diamantina",
+      "final": "https://pt.wikipedia.org/wiki/Diamantina",
+      "chars": 652068
+    },
+    {
+      "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+      "error": "tipo_bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Diamantina nos próximos sete dias",
+    "resolved_request": "Eventos em Diamantina entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Diamantina"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T02:19:18.185794+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Diamantina"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "7f92f2feb12f66308e96",
+        "url": "https://www.diamantina.mg.gov.br/",
+        "title": "Prefeitura Municipal de Diamantina",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 05:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "continuados de Pontos de Cultura. A... VER MAIS Prefeitura de Diamantina publica edital de subsídio a espaços culturais 21 set Cultura e... 636 visualizações Ed",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4819,
+        "final_url": "https://www.diamantina.mg.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "fe489434734c9c2fdea0",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "title": "O que fazer em Diamantina - Melhores atrações e passeios!",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2025-05-15T01:23:39-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viage",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "5d13856f06e6b48c086a",
+        "url": "https://www.diamantina.mg.gov.br/portal",
+        "title": "Prefeitura Municipal de Diamantina",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 04:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento d",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "9813fa73813cdf707e89",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+        "title": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 14:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "5c803b096670dfca3958",
+        "url": "https://www.visitediamantina.com.br/",
+        "title": "Prefeitura de Diamantina - MG",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "ter., 13 out. 2026 15:39:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Merca",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1842,
+        "final_url": "https://www.visitediamantina.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "d0845dc134c776eba296",
+        "url": "https://pt.wikipedia.org/wiki/Diamantina",
+        "title": "Diamantina – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2004-09-19T02:30:13Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Diamantina",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "3727033174019233097d",
+        "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+        "title": "Gall midges (Diptera, Cecidomyiidae) associated with Aldina heterophylla Spr. ex Benth. (Fabaceae) from Brazil Sheila Patrici...",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "tipo_bloqueado",
+        "losses": [
+          "FETCH_BLOCKED"
+        ]
+      },
+      {
+        "id": "d65399def7783c8058e2",
+        "url": "https://www.biotaneotropica.org.br/BN/issue/download/27/10",
+        "title": "FIRST RECORD OF PARAPHAENOCLADIUS EXAGITANS LONGIPES SÆTHER & WANG 1995 (DIPTERA: CHIRONOMIDAE: ORTHOCLADIINAE) FROM BRAZIL H...",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "67313484774307f5dda8",
+        "url": "https://www.workaway.info/en/host/828915285883",
+        "title": "Join a charity in a wide range of cultural projects near Brasilia de Minas, Brazil",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 10,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-6e83dcbef934",
+      "type": "image",
+      "title": "Prefeitura Municipal de Diamantina - Portal",
+      "url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Prefeitura Municipal de Diamantina - Portal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e1dac61e896e",
+      "type": "image",
+      "title": "Logo",
+      "url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+      "final_url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0c38d2f98756",
+      "type": "image",
+      "title": "Logo branca",
+      "url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+      "final_url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo branca",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2e8a4730825",
+      "type": "image",
+      "title": "Rede social instagram",
+      "url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rede social instagram",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6bd369e3985d",
+      "type": "image",
+      "title": "Rede social facebook",
+      "url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rede social facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dfc409356d9b",
+      "type": "image",
+      "title": "Banner Rotativo Banner Site Novo",
+      "url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Banner Rotativo Banner Site Novo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2e163e173f35",
+      "type": "image",
+      "title": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+      "url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5857343981f3",
+      "type": "image",
+      "title": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+      "url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-854170419eb2",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-publica-edital-de",
+      "url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-publica-edital-de",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-801490dce03d",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+      "url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-09306ae2b5e8",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+      "url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-326aea4cb62d",
+      "type": "image",
+      "title": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+      "url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.diamantina.mg.gov.br/",
+      "titulo": "Portal",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.diamantina.mg.gov.br/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "titulo": "Guia Melhores Destinos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-05-15T01:23:39-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.visitediamantina.com.br/",
+      "titulo": "Prefeitura de Diamantina - MG",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "ter., 13 out. 2026 15:39:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.visitediamantina.com.br/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "items": [
+        {
+          "titulo": "Prefeitura Municipal de Diamantina",
+          "url": "https://www.diamantina.mg.gov.br/",
+          "trecho": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento de projetos continuados de Pontos de Cultura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diamantina.mg.gov.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.diamantina.mg.gov.br/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Diamantina – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Diamantina",
+          "trecho": "Diamantina é um município brasileiro no estado de Minas Gerais, Região Sudeste. Localiza-se no Vale do Jequitinhonha, na região central mineira, [2] e ocupa uma área de 3 891,659 km², sendo que 11,98 km² estão em perímetro urbano.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Diamantina",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 8.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "O que fazer em Diamantina - Melhores atrações e passeios!",
+          "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "trecho": "Cercada por belas paisagens naturais e povoados encantadores, Diamantina oferece um bom roteiro histórico, igrejas de grande beleza, cenários deslumbrantes em meio a casarões coloniais e ainda a oportunidade de curtir uma cidade cercada por paisagens naturais maravilhosas na Serra da Espinhaço.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 09:09:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Prefeitura Municipal de Diamantina",
+          "url": "https://www.diamantina.mg.gov.br/portal",
+          "trecho": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento de projetos continuados de Pontos de Cultura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:34:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diamantina.mg.gov.br/portal",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.diamantina.mg.gov.br/portal",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "trecho": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do Biribiri, Cachoeiras, Igrejas e catedrais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 14:37:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Prefeitura de Diamantina - MG",
+          "url": "https://www.visitediamantina.com.br/",
+          "trecho": "Visitar Diamantina foi uma experiência inesquecível. A cidade respira história, com suas ruas de pedra e casarões coloniais que parecem ter parado no tempo. Caminhar pelo centro histórico é como viajar ao passado, admirando cada detalhe da arquitetura barroca e das fachadas bem preservadas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 13 out. 2026 15:39:00 GMT"
+          },
+          "discovery_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://visitediamantina.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.visitediamantina.com.br/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "diamantina eventos culturais",
+      "items": [
+        {
+          "titulo": "Prefeitura Municipal de Diamantina",
+          "url": "https://www.diamantina.mg.gov.br/",
+          "trecho": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento de projetos continuados de Pontos de Cultura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diamantina.mg.gov.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.diamantina.mg.gov.br/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Diamantina – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Diamantina",
+          "trecho": "Diamantina é um município brasileiro no estado de Minas Gerais, Região Sudeste. Localiza-se no Vale do Jequitinhonha, na região central mineira, [2] e ocupa uma área de 3 891,659 km², sendo que 11,98 km² estão em perímetro urbano.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Diamantina",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 8.8,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "O que fazer em Diamantina - Melhores atrações e passeios!",
+          "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "trecho": "Cercada por belas paisagens naturais e povoados encantadores, Diamantina oferece um bom roteiro histórico, igrejas de grande beleza, cenários deslumbrantes em meio a casarões coloniais e ainda a oportunidade de curtir uma cidade cercada por paisagens naturais maravilhosas na Serra da Espinhaço.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 09:09:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Prefeitura Municipal de Diamantina",
+          "url": "https://www.diamantina.mg.gov.br/portal",
+          "trecho": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento de projetos continuados de Pontos de Cultura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:34:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diamantina.mg.gov.br/portal",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.diamantina.mg.gov.br/portal",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "trecho": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do Biribiri, Cachoeiras, Igrejas e catedrais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 14:37:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Prefeitura de Diamantina - MG",
+          "url": "https://www.visitediamantina.com.br/",
+          "trecho": "Visitar Diamantina foi uma experiência inesquecível. A cidade respira história, com suas ruas de pedra e casarões coloniais que parecem ter parado no tempo. Caminhar pelo centro histórico é como viajar ao passado, admirando cada detalhe da arquitetura barroca e das fachadas bem preservadas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 13 out. 2026 15:39:00 GMT"
+          },
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://visitediamantina.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.visitediamantina.com.br/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "diamantina eventos culturais",
+      "items": [
+        {
+          "titulo": "Gall midges (Diptera, Cecidomyiidae) associated with Aldina heterophylla Spr. ex Benth. (Fabaceae) from Brazil Sheila Patrici...",
+          "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://biotaneotropica.org.br/BN/issue/download/42/25",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "FIRST RECORD OF PARAPHAENOCLADIUS EXAGITANS LONGIPES SÆTHER & WANG 1995 (DIPTERA: CHIRONOMIDAE: ORTHOCLADIINAE) FROM BRAZIL H...",
+          "url": "https://www.biotaneotropica.org.br/BN/issue/download/27/10",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://biotaneotropica.org.br/BN/issue/download/27/10",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.biotaneotropica.org.br/BN/issue/download/27/10",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Join a charity in a wide range of cultural projects near Brasilia de Minas, Brazil",
+          "url": "https://www.workaway.info/en/host/828915285883",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://workaway.info/en/host/828915285883",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://www.workaway.info/en/host/828915285883",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "diamantina eventos culturais",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.diamantina.mg.gov.br/",
+      "result": {
+        "titulo": "Portal",
+        "texto": "CIDADÃO EMPRESA SERVIDOR Ver todos Notícias Fique por dentro das novidades Ver mais Carnaval de Diamantina 2027: cadastro e seleção de blocos começam em 1º de outubro 29 set Cultura e... 889 visualizações A folia de 2027 já começou a ser preparada! A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio (SMCP), convida os blocos da sede, dos distritos e dos povoados a participar do Cadastro Municipal de Blocos e da chamamento público de apoio financeiro. 📅 Prazo: de 1º a 16 de outubro de 2026, até as 17h. 💰 Apoio aos... VER MAIS Diamantina lança edital de 92 mil reais para fortalecer os Pontos de Cultura 30 set Cultura e... 481 visualizações Inscrições gratuitas serão realizadas de 1º a 26 de outubro de 2026, pela internet. O edital apoiará um projeto cultural com execução de 12 meses. A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento de projetos continuados de Pontos de Cultura. A... VER MAIS Prefeitura de Diamantina publica edital de subsídio a espaços culturais 21 set Cultura e... 636 visualizações Edital nº 002/2026 destina R$ 72 mil a dois espaços, ambientes ou iniciativas culturais do Município; inscrições ficam abertas de 22 de setembro a 21 de outubro. A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica nesta segunda-feira, 21 de setembro, o Edital de Chamamento Público nº 002/2026, realizado com... VER MAIS Prefeitura de Diamantina abre inscrições para edital da PNAB com investimento de R$ 140 mil 18 set Cultura e... 1391 visualizações Serão selecionados 14 projetos culturais, com apoio financeiro de R$ 10 mil para cada iniciativa. Inscrições acontecem de 21 de setembro a 20 de outubro de 2026. A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, torna público o Edital de Chamamento Público nº 001/2026, destinado à seleção de projetos culturais... VER MAIS PREFEITURA DE DIAMANTINA ABRE PROCESSOS SELETIVOS PARA ESTÁGIO REMUNERADO 20 out Administração 194 visualizações A Prefeitura Municipal de Diamantina publicou três editais de processos seletivos para estudantes de graduação e pós-graduação, oferecendo oportunidades de formação profissional e experiência prática no serviço público. 📚 Confira as oportunidades: 🏛️ Cultura e Patrimônio — Edital nº 05/2026 Estágio para estudantes da UFVJM, com atuação em... VER MAIS Cadastro Cultural revela diversidade, tradição e força dos blocos do Carnaval de Diamantina 20 out Cultura e... 167 visualizações Levantamento reúne informações sobre manifestações carnavalescas do município e contribui para o planejamento do Carnaval 2027. A Prefeitura Municipal de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, realizou um levantamento do perfil dos blocos carnavalescos a partir das informações prestadas no Cadastro Cultural dos Blocos de... VER MAIS Acesso Rápido Clique para acessar Portal do Turismo CLIQUE PARA ACESSAR Ver mais Portal da Transparência CLIQUE PARA ACESSAR Ver mais Licitações CLIQUE PARA ACESSAR Ver mais Legislações CLIQUE PARA ACESSAR Ver mais Multas de Trânsito CLIQUE PARA ACESSAR Ver mais Secretarias e Conselhos Nossos departamentos Ver mais Conselho Municipal de Segurança Pública e Defesa Social (COMSEGDS) - - Ver Perfil Procurador Geral do Município José Rocha Ver Perfil Conselho Municipal de Promoção da Igualdade Racial (COMPIR) - - Ver Perfil Conselho Curador do fundo Municipal de Patrimônio – MONUMENTA Alberis Mafra Ver Perfil Conselho Municipal de Transporte Público Coletivo (CMTPC) Lucas Viana Ver Perfil FUMBEM Carolina Burgarelli Ver Perfil Conselho Municipal de Assistência Social (CMAS) Ana Rocha Ver Perfil Chefia de Gabinete do Prefeito Rogério Farnezi Ver Perfil Secretaria Municipal de Fazenda José Graças Ver Perfil Conselho Municipal de Preservação do Patrimônio Cultural e Políticas Culturais - - Ver Perfil Conselho Municipal de Saneamento Básico (COMUSA) . . Ver Perfil Conselho Municipal de Alimentação Escolar . . Ver Perfil Conselho Municipal de Educação . . Ver Perfil Diretoria de Comunicação – ASCOM Jean Castro Ver Perfil Conselho Municipal de Saúde (COMSAD) Geraldo Santos Ver Perfil Turismo Conheça nossa cidade Ver mais Vila de Biribiri Casa de Juscelino Kubitschek Igreja Nossa Senhora do Amparo Conselheiro Mata Antiga Casa da Intendência Mercado Velho – Centro Cultural David Ribeiro Catedral Metropolitana de Diamantina – Santo Antônio da Sé Museu do Diamante Capela Nossa Senhora da Luz Casa de Chica da Silva Previsão do Tempo Penápolis-SP Domingo 25 Outubro 31° 22° Segunda-feira 26 Outubro 27° 20° Terça-feira 27 Outubro 24° 20° Quarta-feira 28 Outubro 22° 18° Quinta-feira 29 Outubro 26° 20° Sexta-feira 30 Outubro 24° 19° Seta",
+        "final": "https://www.diamantina.mg.gov.br/",
+        "trecho_usado": "continuados de Pontos de Cultura. A... VER MAIS Prefeitura de Diamantina publica edital de subsídio a espaços culturais 21 set Cultura e... 636 visualizações Edital nº 002/2026 destina R$ 72 mil a dois espaços, ambientes ou iniciativas culturais do Município; inscrições ficam abertas de 22 de setembro a 21 de outubro. A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e",
+        "metadados": {
+          "titulo": "Portal",
+          "descricao": "Prefeitura Municipal de Diamantina",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://www.diamantina.mg.gov.br/",
+            "og:title": "Portal",
+            "og:site_name": "Prefeitura Municipal de Diamantina",
+            "og:description": "Prefeitura Municipal de Diamantina - Portal",
+            "og:image": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+            "og:image:width": "416",
+            "og:image:height": "500"
+          },
+          "twitter": {},
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Prefeitura Municipal de Diamantina",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [
+          "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+          "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+          "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+          "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+          "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+          "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+          "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+          "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+          "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+          "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png"
+        ],
+        "midia": [
+          {
+            "id": "med-6e83dcbef934",
+            "type": "image",
+            "title": "Prefeitura Municipal de Diamantina - Portal",
+            "url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Prefeitura Municipal de Diamantina - Portal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e1dac61e896e",
+            "type": "image",
+            "title": "Logo",
+            "url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+            "final_url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0c38d2f98756",
+            "type": "image",
+            "title": "Logo branca",
+            "url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+            "final_url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo branca",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2e8a4730825",
+            "type": "image",
+            "title": "Rede social instagram",
+            "url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Rede social instagram",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6bd369e3985d",
+            "type": "image",
+            "title": "Rede social facebook",
+            "url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Rede social facebook",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dfc409356d9b",
+            "type": "image",
+            "title": "Banner Rotativo Banner Site Novo",
+            "url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Banner Rotativo Banner Site Novo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2e163e173f35",
+            "type": "image",
+            "title": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+            "url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5857343981f3",
+            "type": "image",
+            "title": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+            "url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-854170419eb2",
+            "type": "image",
+            "title": "Notícia prefeitura-de-diamantina-publica-edital-de",
+            "url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia prefeitura-de-diamantina-publica-edital-de",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-801490dce03d",
+            "type": "image",
+            "title": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+            "url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-09306ae2b5e8",
+            "type": "image",
+            "title": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+            "url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-326aea4cb62d",
+            "type": "image",
+            "title": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+            "url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+            "final_url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+            "source_title": "Portal",
+            "source_url": "https://www.diamantina.mg.gov.br/",
+            "publisher": "www.diamantina.mg.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "result": {
+        "titulo": "Guia Melhores Destinos",
+        "texto": "Diamantina Quando ir Como chegar Onde ficar O que fazer Pontos turísticos Restaurantes Dicas Ver mais Como se locomover Compras Guia Melhores Destinos Brasil Sudeste Minas Gerais Diamantina O que fazer em Diamantina Monique Renne O que fazer em Diamantina Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e povoados encantadores, Diamantina oferece um bom roteiro histórico, igrejas de grande beleza, cenários deslumbrantes em meio a casarões coloniais e ainda a oportunidade de curtir uma cidade cercada por paisagens naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viagem para curtir e descansar em Diamantina. As obrigações turísticas a cumprir não são muitas e você poderá vivenciar a cidade com calma. Escolha uma deliciosa pousada em Diamantina Apesar de bem turística, a cidade de Diamantina não oferece tantas opções de hospedagem. Grande parte das pousadas é bem simples e com poucos quartos, por isso, garanta com antecedência a sua hospedagem. Grande parte das atrações turísticas de Diamantina está localizada no Centro Histórico, que tem como ponto central a Catedral Metropolitana de Diamantina. A igreja é uma excelente referência para saber se o hotel está ou não em uma boa localização. Quanto mais perto, melhor. Você não precisará de carro para se locomover entre os principais pontos turísticos, estará próximo a restaurantes, comércio e, de quebra, dentro da área mais charmosa da cidade. Confira os detalhes sobre onde ficar em Diamantina e as melhores opções de pousadas! HOTEL NOTA LINK Pouso da Chica 9.4 Ver preços Pousada Vila do Imperador 9.3 Ver preços HOTEL CANTO DO CHAFARIZ 9.1 Ver preços Pousada do Garimpo 9.1 Ver preços Pousada Relíquias do Tempo 9.1 Ver preços Pousada da Seresta 8.9 Ver preços Hotel Estilo de Minas 8.8 Ver preços Hotel Montanhas de Minas 7.9 Ver preços Sinhá Moça Diamantina-MG 7.6 Ver preços POUSADA FLOR DE LIS 7.5 Ver preços Veja onde começa a Estrada Real e o Caminho dos Escravos Marco inicial do Caminho do Diamante e parte da Estrada Real, Diamantina é o ponto de partida de muitos viajantes que desejam seguir a rota de 1.630 km que leva a Paraty, no Rio de Janeiro. Para começar a entender esse trajeto — que era usado para escoar as riquezas brasileiras até o Rio de Janeiro entre os séculos XVIII e XIX —, nada como visitar o . O local, ainda bem preservado, dá a dimensão de como era a Estrada Real. O percurso, construído com trabalho escravo, era a via por onde a produção de pedras preciosas era escoada de Diamantina. Também se tem no local uma bela vista geral de Diamantina e da paisagem que a cerca. Caminho dos Escravos Não perca o espetáculo da Vesperata Mais tradicional evento de Diamantina, a Vesperata atrai milhares de turistas para o Centro Histórico da cidade. Sob as sacadas dos casarões coloniais, em meio à Rua da Quitanda, visitantes se amontoam sentados à calçada ou às mesas dos restaurantes para ver a apresentação da Vesperata. Nas varandas, músicos da Banda do 3º Batalhão da PMMG e da Banda Mirim Prefeito Antônio de Carvalho tocam clássicos brasileiros e mundiais sob regência do maestro que, em meio ao público, comanda o espetáculo. As mesas são disputadas e os turistas podem comprar com antecedência os convites para se sentarem em posições privilegiadas. É claro que vale curtir também em um cantinho da calçada. O mais importante é a música! Veja mais sobre a . Vesperata de Diamantina Visite as igrejas do Centro Histórico e assista a um concerto de órgão Grande parte das atrações de Diamantina está concentrada no Centro Histórico. Apesar das ladeiras que exigem um certo preparo físico, a região pode ser toda percorrida a pé em um ou dois dias. Com um mapa na mão, será fácil se locomover entre as vielas de pedras e encontrar alguns dos tesouros tombados e protegidos pela UNESCO, entre eles as igrejas que compõem o conjunto arquitetônico de Diamantina. As principais igrejas para visitação na cidade são a , a e a . As três se destacam pela arquitetura da fachada e também pelo rico interior, com forros pintados e altares bem trabalhados. Também com belas fechadas coloniais, mas com interior mais simples, a e a são encantadores cenários em meio aos casarões de época. Com construções mais simples, vale conferir a Capela Nossa Senhora da Luz e a Igreja Nossa Senhora das Mercês. Entre as obras mais recentes estão a , localizada no coração do Centro Histórico, e a . Igreja Nossa Senhora do Carmo Igreja de São Francisco de Assis Igreja de Nossa Senhora do Rosário dos Pretos Capela Imperial de Nossa Senhora do Amparo Igreja de Nosso Senhor do Bonfim Catedral Metropolitana de Diamantina Basílica do Sagrado Coração de Jesus O concerto de órgão que acontece na Igreja Nossa Senhora do Carmo é um dos grandes destaques da cidade. Nas datas de apresentação, o espetáculo acontece ao som de um órgão que data do século XVIII. O evento acontece sempre às sextas-feiras, às 20, em datas pré-definidas. Para consultar a agenda, visite o site do . Órgão de Diamantina Percorra os museus da cidade e conheça mais sobre a história de Diamantina Quem gosta de conhecer a fundo a história das cidades por onde passa não pode perder a chance de visitar os museus de Diamantina. Apesar de pequenos, eles ajudam a contar como o antigo Arraial do Tijuco se tornou a cidade que é hoje. O ajuda a entender como aconteceu o enriquecimento de Diamantina com a descoberta dos diamantes. A também é um bom ponto para entender a relação entre os diamantes, a escravidão e a vida de uma das mais marcantes figuras na história de Diamantina. O , um dos ícones da arquitetura local, conta a história da mineração. Já a explica um pouco sobre como o jovem cidadão de Diamantina chegou ao posto máximo do país, tornando-se presidente da república. Museu do Diamante Casa da Chica da Silva Instituto Casa da Glória Casa de Juscelino Passe o dia no Parque do Biribiri Entre cachoeiras e paisagens espetaculares, turistas aproveitam Diamantina também fora do circuito histórico. No a natureza recebe os visitantes que podem curtir quedas d’água como a Cachoeira da Sentinela e a Cachoeira dos Cristais. O passeio ainda pode ser extendido até a bucólica , onde charmosas casas formam cenário com a serra e são destino perfeito para quem quer apenas descansar e experimentar um pouco da maravilhosa culinária regional. Parque Estadual do Biribiri Vila do Biribiri Não deixe de aproveitar a culinária mineira Difícil imaginar uma viagem a Minas Gerais sem degustar uma das suas mais famosas atrações: a comida! Aproveite o fogão a lenha dos restaurantes da , os pratos típicos servidos aos sábados no ou um dos restaurantes da cidade. O importante é não se privar do sabor mineiro. Vale também investir na culinária das regiões vizinhas, como o queijo do Serro. Veja mais sobre . Vila do Biribiri Mercado Velho onde comer em Diamantina Visite as cidades próximas a Diamantina A região de Diamantina faz parte da rota da história colonial de Minas Gerais. E ela não está sozinha. Outras pequenas cidades merecem a visita, seja pelos belos cenários do interior, pelas cachoeiras ou pela oportunidade de comer uma verdadeira comida mineira caipira. Bem pertinho de Diamantina é possível fazer passeios de um dia para , e a cidade do . As três são encantadoras! E se você tiver planos para ir de Belo Horizonte a Diamantina de carro, não deixe de passar também pela Serra do Cipó. A visita é imperdível especialmente para quem faz a linha turismo de aventura. Nesse caso, invista em algumas noites por lá, assim você terá chance de conhecer as cachoeiras e trilhas da região. São Gonçalo do Rio das Pedras Milho Verde Serro Fotografe a paisagem de Diamantina e os casarões coloniais O percurso na estrada que leva a Diamantina já seria capaz de ocupar um cartão de memória inteiro da câmera fotográfica. Contudo, a cidade também reserva v",
+        "final": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "trecho_usado": "naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viagem para curtir e descansar em Diamantina. As obrigações turísticas a cumprir não são muitas e você poderá vivenciar a cidade com calma. Escolha uma deliciosa pousada em Diamantina Apesar de bem turística, a cidade de Diamantina não oferece",
+        "metadados": {
+          "titulo": "Guia Melhores Destinos",
+          "descricao": "O que fazer em Diamantina - Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e povoados encantadores,",
+          "canonica": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:site_name": "Guia Melhores Destinos",
+            "og:title": "O que fazer em Diamantina - Melhores atrações e passeios!",
+            "og:description": "O que fazer em Diamantina - Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e povoados encantadores,",
+            "og:url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "og:image": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684154/diamantina-204-c.jpg",
+            "og:image:width": "1600",
+            "og:image:height": "840",
+            "og:image:type": "image/jpeg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@passagensaereas"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2025-05-15T01:23:39-03:00",
+          "atualizado_em": "2026-07-03T11:12:12-03:00",
+          "autor": "Monique Renne",
+          "site": "Guia Melhores Destinos",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O que fazer em Diamantina"
+          },
+          {
+            "titulo": "O que fazer em Diamantina",
+            "texto": "Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e povoados encantadores, Diamantina oferece um bom roteiro histórico, igrejas de grande beleza, cenários deslumbrantes em meio a casarões coloniais e ainda a oportunidade de curtir uma cidade cercada por paisagens naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viagem para curtir e descansar em Diamantina. As obrigações turísticas a cumprir não são muitas e você poderá vivenciar a cidade com calma."
+          },
+          {
+            "titulo": "Escolha uma deliciosa pousada em Diamantina",
+            "texto": "Apesar de bem turística, a cidade de Diamantina não oferece tantas opções de hospedagem. Grande parte das pousadas é bem simples e com poucos quartos, por isso, garanta com antecedência a sua hospedagem. Grande parte das atrações turísticas de Diamantina está localizada no Centro Histórico, que tem como ponto central a Catedral Metropolitana de Diamantina. A igreja é uma excelente referência para saber se o hotel está ou não em uma boa localização. Quanto mais perto, melhor. Você não precisará de carro para se locomover entre os principais pontos turísticos, estará próximo a restaurantes, comércio e, de quebra, dentro da área mais charmosa da cidade.\nConfira os detalhes sobre onde ficar em Diamantina e as melhores opções de pousadas!\nPousada Vila do Imperador\nPousada Relíquias do Tempo"
+          },
+          {
+            "titulo": "Veja onde começa a Estrada Real e o Caminho dos Escravos",
+            "texto": "Marco inicial do Caminho do Diamante e parte da Estrada Real, Diamantina é o ponto de partida de muitos viajantes que desejam seguir a rota de 1.630 km que leva a Paraty, no Rio de Janeiro. Para começar a entender esse trajeto — que era usado para escoar as riquezas brasileiras até o Rio de Janeiro entre os séculos XVIII e XIX —, nada como visitar o . O local, ainda bem preservado, dá a dimensão de como era a Estrada Real. O percurso, construído com trabalho escravo, era a via por onde a produção de pedras preciosas era escoada de Diamantina. Também se tem no local uma bela vista geral de Diamantina e da paisagem que a cerca. Caminho dos Escravos"
+          },
+          {
+            "titulo": "Não perca o espetáculo da Vesperata",
+            "texto": "Mais tradicional evento de Diamantina, a Vesperata atrai milhares de turistas para o Centro Histórico da cidade. Sob as sacadas dos casarões coloniais, em meio à Rua da Quitanda, visitantes se amontoam sentados à calçada ou às mesas dos restaurantes para ver a apresentação da Vesperata. Nas varandas, músicos da Banda do 3º Batalhão da PMMG e da Banda Mirim Prefeito Antônio de Carvalho tocam clássicos brasileiros e mundiais sob regência do maestro que, em meio ao público, comanda o espetáculo. As mesas são disputadas e os turistas podem comprar com antecedência os convites para se sentarem em posições privilegiadas. É claro que vale curtir também em um cantinho da calçada. O mais importante é a música! Veja mais sobre a . Vesperata de Diamantina"
+          },
+          {
+            "titulo": "Visite as igrejas do Centro Histórico e assista a um concerto de órgão",
+            "texto": "Grande parte das atrações de Diamantina está concentrada no Centro Histórico. Apesar das ladeiras que exigem um certo preparo físico, a região pode ser toda percorrida a pé em um ou dois dias. Com um mapa na mão, será fácil se locomover entre as vielas de pedras e encontrar alguns dos tesouros tombados e protegidos pela UNESCO, entre eles as igrejas que compõem o conjunto arquitetônico de Diamantina.\nAs principais igrejas para visitação na cidade são a , a e a . As três se destacam pela arquitetura da fachada e também pelo rico interior, com forros pintados e altares bem trabalhados. Também com belas fechadas coloniais, mas com interior mais simples, a e a são encantadores cenários em meio aos casarões de época. Com construções mais simples, vale conferir a Capela Nossa Senhora da Luz e a Igreja Nossa Senhora das Mercês. Entre as obras mais recentes estão a , localizada no coração do Centro Histórico, e a . Igreja Nossa Senhora do Carmo Igreja de São Francisco de Assis Igreja de Nossa Senhora do Rosário dos Pretos Capela Imperial de Nossa Senhora do Amparo Igreja de Nosso Senhor do Bonfim Catedral Metropolitana de Diamantina Basílica do Sagrado Coração de Jesus\nO concerto de órgão que acontece na Igreja Nossa Senhora do Carmo é um dos grandes destaques da cidade. Nas datas de apresentação, o espetáculo acontece ao som de um órgão que data do século XVIII. O evento acontece sempre às sextas-feiras, às 20, em datas pré-definidas. Para consultar a agenda, visite o site do . Órgão de Diamantina"
+          },
+          {
+            "titulo": "Percorra os museus da cidade e conheça mais sobre a história de Diamantina",
+            "texto": "Quem gosta de conhecer a fundo a história das cidades por onde passa não pode perder a chance de visitar os museus de Diamantina. Apesar de pequenos, eles ajudam a contar como o antigo Arraial do Tijuco se tornou a cidade que é hoje. O ajuda a entender como aconteceu o enriquecimento de Diamantina com a descoberta dos diamantes. A também é um bom ponto para entender a relação entre os diamantes, a escravidão e a vida de uma das mais marcantes figuras na história de Diamantina. O , um dos ícones da arquitetura local, conta a história da mineração. Já a explica um pouco sobre como o jovem cidadão de Diamantina chegou ao posto máximo do país, tornando-se presidente da república. Museu do Diamante Casa da Chica da Silva Instituto Casa da Glória Casa de Juscelino"
+          },
+          {
+            "titulo": "Passe o dia no Parque do Biribiri",
+            "texto": "Entre cachoeiras e paisagens espetaculares, turistas aproveitam Diamantina também fora do circuito histórico. No a natureza recebe os visitantes que podem curtir quedas d’água como a Cachoeira da Sentinela e a Cachoeira dos Cristais. O passeio ainda pode ser extendido até a bucólica , onde charmosas casas formam cenário com a serra e são destino perfeito para quem quer apenas descansar e experimentar um pouco da maravilhosa culinária regional. Parque Estadual do Biribiri Vila do Biribiri"
+          },
+          {
+            "titulo": "Não deixe de aproveitar a culinária mineira",
+            "texto": "Difícil imaginar uma viagem a Minas Gerais sem degustar uma das suas mais famosas atrações: a comida! Aproveite o fogão a lenha dos restaurantes da , os pratos típicos servidos aos sábados no ou um dos restaurantes da cidade. O importante é não se privar do sabor mineiro. Vale também investir na culinária das regiões vizinhas, como o queijo do Serro. Veja mais sobre . Vila do Biribiri Mercado Velho onde comer em Diamantina"
+          },
+          {
+            "titulo": "Visite as cidades próximas a Diamantina",
+            "texto": "A região de Diamantina faz parte da rota da história colonial de Minas Gerais. E ela não está sozinha. Outras pequenas cidades merecem a visita, seja pelos belos cenários do interior, pelas cachoeiras ou pela oportunidade de comer uma verdadeira comida mineira caipira. Bem pertinho de Diamantina é possível fazer passeios de um dia para , e a cidade do . As três são encantadoras! E se você tiver planos para ir de Belo Horizonte a Diamantina de carro, não deixe de passar também pela Serra do Cipó. A visita é imperdível especialmente para quem faz a linha turismo de aventura. Nesse caso, invista em algumas noites por lá, assim você terá chance de conhecer as cachoeiras e trilhas da região. São Gonçalo do Rio das Pedras Milho Verde Serro"
+          },
+          {
+            "titulo": "Fotografe a paisagem de Diamantina e os casarões coloniais",
+            "texto": "O percurso na estrada que leva a Diamantina já seria capaz de ocupar um cartão de memória inteiro da câmera fotográfica. Contudo, a cidade também reserva vários cenários deslumbrantes. Entre janelas e portas coloridas, ruas de pedras e luzes amareladas, será difícil resistir a muitos cliques em Diamantina. Aproveite a iluminação ao cair da noite, os mirantes — como o do —, e registre intensamente as maravilhas dessa cidade histórica protegida e declarada Patrimônio da Humanidade pela UNESCO. Cruzeiro da Serra\nEm meio à paisagem de Diamantina, destacam-se pequenos caminhos de pedras que em outros tempos serviram de passagem para os tropeiros e mercadores que viajavam em função da...\nA pequena igreja em tons de azul e branco está escondida entre as ruas apertadas de Diamantina. Com torre única no centro e fachada delicadamente decorada com peças de madeira,..."
+          },
+          {
+            "titulo": "Capela Imperial de Nossa Senhora do Amparo",
+            "texto": "Local onde viveu um dos grandes nomes da história de Diamantina, a Casa de Chica da Silva é um dos mais bem preservados casarões históricos da cidade. Andar pelo interior da...\nÍcone da arquitetura colonial de Diamantina e um dos maiores símbolos da cidade, o Instituto Casa da Glória está entre as melhores atrações locais. A construção colonial é...\nO belo casarão histórico com traços coloniais, localizado de frente para o Museu do Diamante, encanta pela imponente fachada com dezenove janelas. Construído em meados do...\nConstruída em pau a pique e com traços típicos do estilo colonial do século XVIII, a casa onde o ex-presidente do Brasil Juscelino Kubitschek viveu durante a infância e...\nO local onde está a Catedral Metropolitana de Diamantina - Igreja Matriz de Santo Antônio marca o ponto principal do Centro Histórico. A Igreja de Santo Antonio original,..."
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "HOTEL",
+              "NOTA",
+              "LINK"
+            ],
+            [
+              "Pouso da Chica",
+              "9.4",
+              "Ver preços"
+            ],
+            [
+              "Pousada Vila do Imperador",
+              "9.3",
+              "Ver preços"
+            ],
+            [
+              "HOTEL CANTO DO CHAFARIZ",
+              "9.1",
+              "Ver preços"
+            ],
+            [
+              "Pousada do Garimpo",
+              "9.1",
+              "Ver preços"
+            ],
+            [
+              "Pousada Relíquias do Tempo",
+              "9.1",
+              "Ver preços"
+            ],
+            [
+              "Pousada da Seresta",
+              "8.9",
+              "Ver preços"
+            ],
+            [
+              "Hotel Estilo de Minas",
+              "8.8",
+              "Ver preços"
+            ],
+            [
+              "Hotel Montanhas de Minas",
+              "7.9",
+              "Ver preços"
+            ],
+            [
+              "Sinhá Moça Diamantina-MG",
+              "7.6",
+              "Ver preços"
+            ],
+            [
+              "POUSADA FLOR DE LIS",
+              "7.5",
+              "Ver preços"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684154/diamantina-204-c.jpg",
+          "https://guia.melhoresdestinos.com.br/assets/icon/icone-app.png",
+          "https://imgmd.net/images/v1/guia/1684154/diamantina-204-c.jpg",
+          "https://imgmd.net/images/v1/guia/1699203/monique-renne.png",
+          "https://imgmd.net/images/v1/guia/1596728/diamantina.jpg",
+          "https://imgmd.net/images/v1/guia/1596730/caminho-dos-escravos.jpg",
+          "https://imgmd.net/images/v1/guia/1596731/diamantina.jpg",
+          "https://imgmd.net/images/v1/guia/1596732/diamantina.jpg",
+          "https://imgmd.net/images/v1/guia/1596754/igreja-de-sao-francisco-de-assis.jpg",
+          "https://imgmd.net/images/v1/guia/1596755/igreja-nossa-senhora-do-carmo.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-371988665163",
+            "type": "image",
+            "title": "O que fazer em Diamantina - Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e p",
+            "url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684154/diamantina-204-c.jpg",
+            "final_url": "https://imgmd.net/images/c_limit%2Cw_1600/v1/guia/1684154/diamantina-204-c.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O que fazer em Diamantina - Diamantina recebe os visitantes para dias de imersão na cultura e história de Minas Gerais. Cercada por belas paisagens naturais e povoados encantadores,",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c4acf857ed9b",
+            "type": "image",
+            "title": "Ícone Melhores Destinos",
+            "url": "https://guia.melhoresdestinos.com.br/assets/icon/icone-app.png",
+            "final_url": "https://guia.melhoresdestinos.com.br/assets/icon/icone-app.png",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "guia.melhoresdestinos.com.br",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ícone Melhores Destinos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-13e204dcddc2",
+            "type": "image",
+            "title": "Diamantina",
+            "url": "https://imgmd.net/images/v1/guia/1596728/diamantina.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596728/diamantina.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Diamantina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c30c2c0fcdc5",
+            "type": "image",
+            "title": "Caminho-dos-escravos",
+            "url": "https://imgmd.net/images/v1/guia/1596730/caminho-dos-escravos.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596730/caminho-dos-escravos.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Caminho-dos-escravos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dbe45dd2591c",
+            "type": "image",
+            "title": "Diamantina",
+            "url": "https://imgmd.net/images/v1/guia/1596731/diamantina.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596731/diamantina.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Diamantina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a67decc43d94",
+            "type": "image",
+            "title": "Diamantina",
+            "url": "https://imgmd.net/images/v1/guia/1596732/diamantina.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596732/diamantina.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Diamantina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4c41339e1798",
+            "type": "image",
+            "title": "Igreja-de-sao-francisco-de-assis",
+            "url": "https://imgmd.net/images/v1/guia/1596754/igreja-de-sao-francisco-de-assis.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596754/igreja-de-sao-francisco-de-assis.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Igreja-de-sao-francisco-de-assis",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eb401b80a977",
+            "type": "image",
+            "title": "Igreja-nossa-senhora-do-carmo",
+            "url": "https://imgmd.net/images/v1/guia/1596755/igreja-nossa-senhora-do-carmo.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596755/igreja-nossa-senhora-do-carmo.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Igreja-nossa-senhora-do-carmo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-75907210ac99",
+            "type": "image",
+            "title": "Instituto-casa-da-gloria",
+            "url": "https://imgmd.net/images/v1/guia/1596785/instituto-casa-da-gloria.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596785/instituto-casa-da-gloria.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Instituto-casa-da-gloria",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bfd2ab0c0962",
+            "type": "image",
+            "title": "Parque-estadual-do-biribiri-cachoeira-da-sentinela",
+            "url": "https://imgmd.net/images/v1/guia/1596786/parque-estadual-do-biribiri-cachoeira-da-sentinela.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596786/parque-estadual-do-biribiri-cachoeira-da-sentinela.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Parque-estadual-do-biribiri-cachoeira-da-sentinela",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae6b9bf9328a",
+            "type": "image",
+            "title": "Vila-do-biribiri",
+            "url": "https://imgmd.net/images/v1/guia/1596787/vila-do-biribiri.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596787/vila-do-biribiri.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vila-do-biribiri",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5f96a91e3460",
+            "type": "image",
+            "title": "Serro",
+            "url": "https://imgmd.net/images/v1/guia/1596788/serro.jpg",
+            "final_url": "https://imgmd.net/images/v1/guia/1596788/serro.jpg",
+            "source_title": "Guia Melhores Destinos",
+            "source_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "publisher": "imgmd.net",
+            "date": "2025-05-15T01:23:39-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Serro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.visitediamantina.com.br/",
+      "result": {
+        "titulo": "Prefeitura de Diamantina - MG",
+        "texto": "Visitar Diamantina foi uma experiência inesquecível. A cidade respira história, com suas ruas de pedra e casarões coloniais que parecem ter parado no tempo. Caminhar pelo centro histórico é como viajar ao passado, admirando cada detalhe da arquitetura barroca e das fachadas bem preservadas. Um dos pontos altos da minha viagem foi conhecer Biribiri, um vilarejo charmoso e tranquilo, cercado por belas paisagens e cachoeiras deslumbrantes. O silêncio e a natureza exuberante tornam o lugar perfeito para um momento de paz e contemplação. Também visitei a Casa da Chica da Silva, um dos ícones da história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Mercado Velho, onde pude sentir a energia vibrante da cidade, com suas cores, aromas e o artesanato local que enche os olhos. E claro, a gastronomia de Diamantina é um espetáculo à parte. No Mr. Chefe Gastrobar, tive uma das melhores experiências gastronômicas da viagem. O ambiente é aconchegante, o atendimento impecável e os pratos são simplesmente deliciosos, combinando sabores regionais com um toque moderno. Cada detalhe do restaurante reflete o cuidado e a paixão pela boa comida. A Vesperata em Diamantina é uma experiência única e inesquecível! A magia da música ecoando pelas ruas históricas, com os músicos posicionados nas sacadas, cria um espetáculo emocionante que toca a alma. A energia da cidade, a vibração do público e a qualidade impecável das apresentações fazem desse evento uma verdadeira joia cultural. É impossível não se encantar com a harmonia perfeita entre tradição e beleza, que transforma cada noite de Vesperata em um momento de pura emoção e encantamento! Diamantina é, sem dúvida, um destino que encanta e surpreende. Já estou contando os dias para voltar!",
+        "final": "https://www.visitediamantina.com.br/",
+        "trecho_usado": "história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Mercado Velho, onde pude sentir a energia vibrante da cidade, com suas cores, aromas e o artesanato local que enche os olhos. E claro, a gastronomia de Diamantina é um espetáculo à parte. No Mr. Chefe Gastrobar, tive uma das melhores",
+        "metadados": {
+          "titulo": "Prefeitura de Diamantina - MG",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "zxx",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Visitar Diamantina foi uma experiência inesquecível. A cidade respira história, com suas ruas de pedra e casarões coloniais que parecem ter parado no tempo. Caminhar pelo centro histórico é como viajar ao passado, admirando cada detalhe da arquitetura barroca e das fachadas bem preservadas. Um dos pontos altos da minha viagem foi conhecer Biribiri, um vilarejo charmoso e tranquilo, cercado por belas paisagens e cachoeiras deslumbrantes. O silêncio e a natureza exuberante tornam o lugar perfeito para um momento de paz e contemplação.\nTambém visitei a Casa da Chica da Silva, um dos ícones da história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Mercado Velho, onde pude sentir a energia vibrante da cidade, com suas cores, aromas e o artesanato local que enche os olhos.\nE claro, a gastronomia de Diamantina é um espetáculo à parte. No Mr. Chefe Gastrobar, tive uma das melhores experiências gastronômicas da viagem. O ambiente é aconchegante, o atendimento impecável e os pratos são simplesmente deliciosos, combinando sabores regionais com um toque moderno. Cada detalhe do restaurante reflete o cuidado e a paixão pela boa comida. A Vesperata em Diamantina é uma experiência única e inesquecível! A magia da música ecoando pelas ruas históricas, com os músicos posicionados nas sacadas, cria um espetáculo emocionante que toca a alma. A energia da cidade, a vibração do público e a qualidade impecável das apresentações fazem desse evento uma verdadeira joia cultural. É impossível não se encantar com a harmonia perfeita entre tradição e beleza, que transforma cada noite de Vesperata em um momento de pura emoção e encantamento!\nDiamantina é, sem dúvida, um destino que encanta e surpreende. Já estou contando os dias para voltar!"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://visitediamantina.com.br/assets/img/logo-black.png",
+          "https://visitediamantina.com.br/assets/img/estradareal.png",
+          "https://visitediamantina.com.br/assets/img/logo-branca.png",
+          "https://visitediamantina.com.br/assets/img/others/user.png",
+          "https://visitediamantina.com.br/assets/img/about/home-4/about-thumb-4-1.jpg",
+          "https://visitediamantina.com.br/assets/img/about/about-thumb-2.png",
+          "https://visitediamantina.com.br/assets/img/about/home-4/year.png",
+          "https://visitediamantina.com.br/assets/img/about/home-4/name.png",
+          "https://visitediamantina.com.br/assets/images/uploads/7519ecc5076f1785f86f53ba9043302e.jpg",
+          "https://visitediamantina.com.br/assets/img/offer/shape.png"
+        ],
+        "midia": [
+          {
+            "id": "med-f2815bad884a",
+            "type": "image",
+            "title": "logo",
+            "url": "https://visitediamantina.com.br/assets/img/logo-black.png",
+            "final_url": "https://visitediamantina.com.br/assets/img/logo-black.png",
+            "source_title": "Prefeitura de Diamantina - MG",
+            "source_url": "https://www.visitediamantina.com.br/",
+            "publisher": "visitediamantina.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-02f7d07742ee",
+            "type": "video",
+            "title": "Vila Nova de Foz Côa - Discover Douro",
+            "url": "https://www.youtube.com/embed/MXaOmDJt3Ec?autoplay=1&controls=0",
+            "final_url": "https://www.youtube.com/embed/MXaOmDJt3Ec?autoplay=1&controls=0",
+            "source_title": "Prefeitura de Diamantina - MG",
+            "source_url": "https://www.visitediamantina.com.br/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-d25cfe7f13c7",
+            "type": "video",
+            "title": "Carnaval da Tranquilidade: uma experiência única em Diamantina!",
+            "url": "https://www.youtube.com/embed/T1rDj7T4JuA",
+            "final_url": "https://www.youtube.com/embed/T1rDj7T4JuA",
+            "source_title": "Prefeitura de Diamantina - MG",
+            "source_url": "https://www.visitediamantina.com.br/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-94d3c90c2a59",
+            "type": "video",
+            "title": "#DIAMANTINA - a cidade histórica mais linda de Minas Gerais",
+            "url": "https://www.youtube.com/embed/Uyd7knP70A8",
+            "final_url": "https://www.youtube.com/embed/Uyd7knP70A8",
+            "source_title": "Prefeitura de Diamantina - MG",
+            "source_url": "https://www.visitediamantina.com.br/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Diamantina",
+      "result": {
+        "titulo": "município brasileiro do estado de Minas Gerais",
+        "texto": "Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () dezembro de 2022 Diamantina Município do Brasil de Diamantina Panorama urbano Catedral Metropolitana Centro Histórico Igreja de São Francisco de Assis Instituto Casa da Glória Parque Estadual do Biribiri Casa de Chica da Silva Bandeira Brasão de armas Hino Gentílico diamantinense 1 [ ] Localização de Diamantina em Minas Gerais Localização de Diamantina em Minas Gerais Diamantina Localização de Diamantina no Brasil Mapa de Diamantina Coordenadas: 18° 14′ 56″ S, 43° 36′ 00″ O País Brasil Unidade federativa Minas Gerais Municípios limítrofes , , , , , , , , , e Bocaiuva Carbonita Senador Modestino Gonçalves Couto de Magalhães de Minas Serro Datas Gouveia Monjolos Augusto de Lima Buenópolis Olhos-d'Água Distância até a capital 292 km 2 [ ] Fundação de (195anos) 6 de março 1831 3 [ ] Emancipação de (195anos) 13 de outubro 1831 4 [ ] Distritos Lista , , Diamantina (sede), , , , , , , e Conselheiro Mata Desembargador Otoni Extração Guinda Inhaí Mendanha Planalto de Minas São João da Chapada Senador Mourão Sopa 5 [ ] Governo • Prefeito(a) Geferson Giordani Burgarelli, \"Paquito\"(,2025–2028) 6 [ ] 7 [ ] MDB Área • Total 1 [ ] 3 891,659km² •Urbana (IBGE/2019) 1 [ ] 11,98 km² População •Total (censo IBGE/2022) 1 [ ] 47 702 hab. Densidade 12,3hab./km² Clima () tropical de altitude Cwb 8 [ ] Fuso horário Hora de Brasília () UTC−3 IDH (/2010) PNUD 9 [ ] 0,716 — alto PIB (IBGE/2020) 10 [ ] 841 559,73mil R$ •Per capita (/2020) IBGE 10 [ ] 17 596,65 R$ Sítio () () www.diamantina.mg.gov.br Prefeitura www.cmdiamantina.mg.gov.br Câmara é um no de , . Localiza-se no , na região central mineira, e ocupa uma de , sendo que estão em . Tem uma população estimada de habitantes em 2025. Diamantina município brasileiro estado Minas Gerais Região Sudeste Vale do Jequitinhonha 2 [ ] área 3 891,659 km² 11,98 km² perímetro urbano 49 493 11 [ ] Fundada no início do século XVIII, Diamantina teve sua origem ligada à descoberta de na região, o que impulsionou seu desenvolvimento e a transformou em um importante centro de . O município preserva até hoje um conjunto arquitetônico colonial, com casarões, igrejas e ruas de pedra que refletem seu passado histórico. Em reconhecimento à sua importância cultural e histórica, Diamantina foi declarada pela em 1999. diamantes mineração Patrimônio Mundial UNESCO 12 [ ] Localizada na , Diamantina possui uma geografia marcada por montanhas, vales e rios, oferecendo uma paisagem natural exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam a região propícia para o e atividades ao ar livre. Serra do Espinhaço tropical de altitude ecoturismo 13 [ ] 14 [ ] Diamantina é conhecida por suas tradições culturais e eventos, como a Vesperata, onde músicos se apresentam das sacadas dos casarões históricos, criando uma atmosfera única. Outras festas populares incluem o de rua e celebrações religiosas, que reforçam a identidade cultural de Diamantina. No seu legado, Diamantina é a cidade natal de , um dos presidentes mais célebres do , e onde viveu , uma alforriada que se tornou um símbolo de ascensão social no . 15 [ ] Carnaval Juscelino Kubitschek Brasil 16 [ ] Chica da Silva escrava período colonial [ carecede fontes ] ? História [ editar | editar código ] Período pré-colonial [ editar | editar código ] As mais recuadas em na região de Diamantina foram obtidas a partir de vegetais carbonizados, encontrados em fogueiras localizadas em grutas próximos a córregos da . No sítio Lapa do Caboclo foram obtidas duas datas (10.560 e 10.380 Antes do Presente), enquanto no sítio Lapa do Peixe Gordo, uma datação de 10.210 AP foi gerada em uma fogueira a cerca de 30 centímetros de profundidade. Assim, Diamantina apresenta datações praticamente contemporâneas às observadas em sítios arqueológicos da região de , onde foram encontrados e outros remanescentes ósseos humanos, além de diversos materiais arqueológicos relacionados ao em fins do . datações sítios arqueológicos bacia do rio São Francisco Antes do Presente 17 [ ] 18 [ ] 19 [ ] Lagoa Santa Luzia povoamento humano das Américas Pleistoceno 20 [ ] 21 [ ] Além dos restos de alimentos e de fogueiras, nos sítios arqueológicos mais antigos também foram encontrados antigos , quase sempre utilizando como matéria-prima o ou o . Feitos a partir de lascamento de pedaços dessas rochas, alguns desses instrumentos formavam antigas , e vários tipos de lâminas. Ferramentas feitas a partir de madeira e ossos de animais, apesar de provavelmente frequentes entre esses grupos humanos, não foram encontrados nos sítios devido aos processos de decomposição desses materiais. instrumentos feitos em pedra quartzo quartzito pontas de projétil percutores 22 [ ] Outro indício da presença humana pré-colonial em Diamantina são as e , identificados em dezenas de e ao longo da . Apesar de conhecidas desde meados do século XIX, quando foram citadas em um romance escrito por em 1868, jurista natural de Serro, só foram objeto de estudo arqueológico a partir da década de 1970. Muitas das pinturas e gravuras rupestres encontradas foram feitas com pigmentos vermelhos e, em menor medida, amarelos, brancos e pretos, representando e peixes. Embora menos frequentes, algumas das grutas também contam com pinturas . pinturas grafismos rupestres grutas abrigos de caverna Serra do Espinhaço Joaquim Felício dos Santos cervídeos antropomórficas 23 [ ] 24 [ ] 25 [ ] Entre 1200 e 680 anos Antes do Presente, um outro processo de ocupação ocorreu na região de Diamantina. Também identificados nas grutas e abrigos de caverna, esses sítios contam com diversos instrumentos feitos em pedra, restos de alimentação e de grupos indígenas agricultores. Ao contrário de ocupações contemporâneas identificadas em outras regiões de Minas Gerais, não foram encontrados vasilhas ou fragmentos de nos sítios arqueológicos dessas populações. Dos 90 sítios arqueológicos já identificados em Diamantina, 72 correspondem ao período pré-colonial. Além disso, em outros 10 sítios arqueológicos foram identificados testemunhos materiais de ocupações pré-coloniais e históricas, o que indica que as centenas de grutas e abrigos seguiram servindo de acampamentos provisórios para garimpeiros, caçadores e coletores de em tempos recentes. Em outro sítio arqueológico, batizado de “Lapa da Contagem 1”, antigos vestígios de garimpeiros foram encontrados por arqueólogos em 2017, lembrança do período em que as serras de Diamantina foram exploradas intensamente por brasileiros e portugueses em busca de e diamantes. sepultamentos humanos cerâmicas 25 [ ] 26 [ ] sempre-vivas 26 [ ] ouro 27 [ ] Antes da chegada dos , no século XVI, o território que atualmente constitui o estado de Minas Gerais era habitado por etnicamente diversos. Na região do e áreas próximas, há o registro de etnias como Kaposo (Copoxós), Panyame (), (Malales) e Monoxó, com fontes indicando sua presença ainda na primeira metade do século XIX. Contudo, o processo de colonização portuguesa na região fez com que boa parte dos nomes das populações que habitavam o centro-norte de Minas Gerais não chegasse até os dias atuais, tendo em vista as mortes causadas por doenças e guerras contra os indígenas. Populações falantes de idiomas também foram descritas pelos portugueses como habitantes dos arredores do Jequitinhonha, como os Abaetés e . Além disso, há registro da presença de grupos relacionados ao tronco linguístico , como os , e . colonizadores portugueses grupos indígenas Vale do Jequitinhonha Panhames Malali 28 [ ] 29 [ ] 30 [ ] 31 [ ] tupi-guarani Caetés Macro-Jê Kayapós Kariris Xakriabás 32 [ ] Um dos poucos relatos remanescentes do início da colonização foi escrito em 1555 pelo padre , no qual este menciona a presença de “Tapuzas”, “Tamoyas” e “Cathiguzús” no que viria a ser o no",
+        "final": "https://pt.wikipedia.org/wiki/Diamantina",
+        "trecho_usado": "exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam a região propícia para o e atividades ao ar livre. Serra do Espinhaço tropical de altitude ecoturismo 13 [ ] 14 [ ] Diamantina é conhecida por suas tradições culturais e eventos, como a Vesperata, onde músicos se apresentam das sacadas dos",
+        "metadados": {
+          "titulo": "município brasileiro do estado de Minas Gerais",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Diamantina",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg/1280px-Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "802",
+            "og:title": "Diamantina – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2004-09-19T02:30:13Z",
+          "atualizado_em": "2026-09-19T19:51:28Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2004-09-19T02:30:13Z",
+            "dateModified": "2026-09-19T19:51:28Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "município brasileiro do estado de Minas Gerais"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () dezembro de 2022\nde Diamantina Panorama urbano Catedral Metropolitana Centro Histórico Igreja de São Francisco de Assis Instituto Casa da Glória Parque Estadual do Biribiri Casa de Chica da Silva\nLocalização de Diamantina em Minas Gerais Diamantina Localização de Diamantina no Brasil\nLocalização de Diamantina em Minas Gerais\nCoordenadas: 18° 14′ 56″ S, 43° 36′ 00″ O\n, , , , , , , , , e Bocaiuva Carbonita Senador Modestino Gonçalves Couto de Magalhães de Minas Serro Datas Gouveia Monjolos Augusto de Lima Buenópolis Olhos-d'Água\nde (195anos) 6 de março 1831 3 [ ]\nde (195anos) 13 de outubro 1831 4 [ ]\n, , Diamantina (sede), , , , , , , e Conselheiro Mata Desembargador Otoni Extração Guinda Inhaí Mendanha Planalto de Minas São João da Chapada Senador Mourão Sopa 5 [ ]\nGeferson Giordani Burgarelli, \"Paquito\"(,2025–2028) 6 [ ] 7 [ ] MDB\n•Urbana (IBGE/2019) 1 [ ]\n•Total (censo IBGE/2022) 1 [ ]\n() tropical de altitude Cwb 8 [ ]\nHora de Brasília () UTC−3\n•Per capita (/2020) IBGE 10 [ ]\n() () www.diamantina.mg.gov.br Prefeitura www.cmdiamantina.mg.gov.br Câmara\né um no de , . Localiza-se no , na região central mineira, e ocupa uma de , sendo que estão em . Tem uma população estimada de habitantes em 2025. Diamantina município brasileiro estado Minas Gerais Região Sudeste Vale do Jequitinhonha 2 [ ] área 3 891,659 km² 11,98 km² perímetro urbano 49 493 11 [ ]\nFundada no início do século XVIII, Diamantina teve sua origem ligada à descoberta de na região, o que impulsionou seu desenvolvimento e a transformou em um importante centro de . O município preserva até hoje um conjunto arquitetônico colonial, com casarões, igrejas e ruas de pedra que refletem seu passado histórico. Em reconhecimento à sua importância cultural e histórica, Diamantina foi declarada pela em 1999. diamantes mineração Patrimônio Mundial UNESCO 12 [ ]\nLocalizada na , Diamantina possui uma geografia marcada por montanhas, vales e rios, oferecendo uma paisagem natural exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam a região propícia para o e atividades ao ar livre. Serra do Espinhaço tropical de altitude ecoturismo 13 [ ] 14 [ ]\nDiamantina é conhecida por suas tradições culturais e eventos, como a Vesperata, onde músicos se apresentam das sacadas dos casarões históricos, criando uma atmosfera única. Outras festas populares incluem o de rua e celebrações religiosas, que reforçam a identidade cultural de Diamantina. No seu legado, Diamantina é a cidade natal de , um dos presidentes mais célebres do , e onde viveu , uma alforriada que se tornou um símbolo de ascensão social no . 15 [ ] Carnaval Juscelino Kubitschek Brasil 16 [ ] Chica da Silva escrava período colonial [ carecede fontes ] ?\nAs mais recuadas em na região de Diamantina foram obtidas a partir de vegetais carbonizados, encontrados em fogueiras localizadas em grutas próximos a córregos da . No sítio Lapa do Caboclo foram obtidas duas datas (10.560 e 10.380 Antes do Presente), enquanto no sítio Lapa do Peixe Gordo, uma datação de 10.210 AP foi gerada em uma fogueira a cerca de 30 centímetros de profundidade. Assim, Diamantina apresenta datações praticamente contemporâneas às observadas em sítios arqueológicos da região de , onde foram encontrados e outros remanescentes ósseos humanos, além de diversos materiais arqueológicos relacionados ao em fins do . datações sítios arqueológicos bacia do rio São Francisco Antes do Presente 17 [ ] 18 [ ] 19 [ ] Lagoa Santa Luzia povoamento humano das Américas Pleistoceno 20 [ ] 21 [ ]\nAlém dos restos de alimentos e de fogueiras, nos sítios arqueológicos mais antigos também foram encontrados antigos , quase sempre utilizando como matéria-prima o ou o . Feitos a partir de lascamento de pedaços dessas rochas, al"
+          },
+          {
+            "titulo": "A fundação do arraial do Tejuco e a exploração dos diamantes",
+            "texto": ", cuja construção se iniciou no Igreja de São Francisco de Assis século XVIII\nA origem do arraial do Tejuco remonta ao processo de expansão colonial contínuo sobre os sertões do vale do Jequitinhonha. Com a descoberta de ouro na confluência dos rios Pururuca e Grande, no início do século XVIII, a região onde hoje está Diamantina começou a atrair garimpeiros, levando a fundação do arraial em 1713. Nesse primeiro momento do povoado, há registro da construção de uma em homenagem ao padroeiro, Santo Antônio, nas encostas da Serra da Lapa. Segundo consta, o nome do arraial viria do , \"água podre\", Tejuco e Ybyty'ro'y (palavra tupi que significa \"montanha fria\", pela junção de (\"montanha\") e (\"frio\"). Outra interpretação do nome escolhido para o arraial confirma a origem tupi, significando “barro escuro” ou pântano”. 34 [ ] capela 35 [ ] tupi tyîuka ybytyra ro'y 36 [ ] 35 [ ]\nDurante as buscas por veios de ouro nos morros e vales ao norte da , alguns garimpeiros encontraram jazidas de . Inicialmente exploradas de forma clandestina, inclusive por oficiais da , somente em 1729 a existência de minas de diamantes foi oficialmente reconhecida. Assim, alguns documentos do período atribuem ao português Bernardo da Fonseca Lobo a descoberta de diamantes em suas datas de mineração e, a partir de então, o arraial se tornou uma das mais desejadas áreas de garimpo da . comarca de Serro Frio diamantes Coroa de Portugal 37 [ ] Capitania de Minas Gerais 37 [ ] 38 [ ]\nO controle administrativo tão intenso sobre a chamada não se deu logo de início, todavia. Entre 1729 e 1734, a exploração das jazidas de diamantes era permitida à particulares, mediante a cobrança de uma taxa de capitação sobre cada utilizado pelos mineradores. Movidos pelos lucros do comércio diamantífero, a exploração particular colocou diamantes em demasia no mercado internacional, provocando uma queda significativa no seu preço. Esse contexto de instabilidade, além do risco real de prejuízo em virtude do contrabando, contribuiu para que o rei ordenasse a proibição total da mineração de diamantes em 1731, situação posteriormente revertida no ano seguinte. Demarcação Diamantina escravo 39 [ ] João V 38 [ ]\nLavagem de diamantes na , por , c. 1770 Comarca do Serro Frio Carlos Julião\nEm 1734, a primeira tentativa lusitana de estabelecer um controle maior e mais efetivo sobre a extração, através da demarcação do (abarcando não só Tejuco, mas também os arraiais de Gouveia, São Gonçalo, Milho Verde, Rio Manso, entre outros) e da criação da Intendência dos Diamantes. Como forma de organizar a exploração e o comércio de diamantes, a partir de 1740 tem início o regime de contrato de extração, terceirizando a uma companhia particular a atividade. Apesar de algumas fontes indicarem o início desse sistema já em 1738, a primeira arrematação das minas em licitação teria ocorrido só em 10 de junho de 1739. Com duração de quatro anos, os contratos previam que toda a organização do trabalho ficaria a cargo dos contratantes, cabendo à Intendência dos Diamantes a fiscalização e repressão ao contrabando. O regime de contratos durou até 1771, quando um decreto determinou a criação da Junta da Administração Diamantina do Tejuco. A partir de então, toda a extração de diamantes ficaria por conta da : a partir de agora, somente a Coroa de Portugal poderia extrair e venda essa mercadoria. Implementado pelo , o decreto também criava uma série de regulamentos rígidos para o Distrito Di\nComo forma de manter o domínio total da Coroa sobre o território da Intendência dos Diamantes, o arraial do Tejuco permaneceu como uma simples capela filial ligada à (atual Serro) até 1819, quando foi elevada à condição de e distrito municipal. Permanecia assim o Intendente como única autoridade local, evitando possíveis rivalidades com autoridades eclesiásticas. Apesar do aparato fiscalizador repressivo estabelecido pela Coroa Portuguesa, o arraial de Tejuco refletia a importância econômica da mineração de diamantes, sendo freq"
+          },
+          {
+            "titulo": "Emancipação do arraial do Tejuco e crise dos diamantes",
+            "texto": "Centro Histórico de Diamantina\nCom o declínio da extração diamantífera ao longo da primeira metade do século XIX, ocorreu uma gradual alteração da produção econômica regional, assim como em outras regiões minerárias da agora . Ao longo dos anos, a produção agropecuária que surgiu no entorno de Tejuco para abastecer sua população eventualmente tornou-se a principal atividade econômica. O famoso viajante francês chegou a visitar o arraial do Tejuco em 1816, descrevendo de forma elogiosa a limpeza e tamanho de suas ruas, o bom estado de manutenção das casas, os ornamentos das muitas igrejas existentes na localidade e até a qualidade dos artigos vendidos nas lojas. Província de Minas Gerais Auguste de Saint-Hilaire 35 [ ]\nO diamantinense foi o primeiro após a João da Matta Machado presidente da Câmara dos Deputados Proclamação da República\nEm 1819, o arraial de Tejuco foi elevada à condição de distrito da vila do Príncipe. Para além de simples mudanças nas administrações política e eclesiástica, estas decisões são também reflexo da diminuição do poder dos Intendentes. Assim, apesar de contar com uma população maior que a Vila do Príncipe desde meados do século XVIII, a emancipação de Diamantina ocorreu somente em 1831, através de Decreto datado de 13 de outubro daquele ano. Nesse mesmo ano, o antigo arraial passou a se chamar Diamantina, fazendo referência à atividade econômica que fez surgir a localidade. Ainda assim, o desmonte definitivo da tão temida Intendência dos Diamantes só ocorreu em 1832, após muitas reivindicações oficiais da população. Em 1838, Diamantina foi elevada à condição de cidade, reflexo da posição de destaque conquistado pelo antigo arraial no norte do estado de Minas Gerais. Na segunda metade do século XIX, Diamantina recebeu o apelido de “Atenas do Norte” de sua própria elite intelectual e econômica, fazendo referência ao papel da imprensa e literatura entre os diamantinenses dos Oitocentos, característica também notada por Auguste de Saint-Hilaire em 1816. A vida em Diamantina no final do sé\nEm 1938, Diamantina comemorou seus cem anos de elevação à categoria de cidade, recebendo do o título de \"patrimônio histórico nacional\". Com a chegada de Juscelino Kubitschek ao governo do estado e posteriormente à Presidência da República são feitas muitas melhorias em Diamantina, como a fundação da , do Hotel Tijuco, da Escola Estadual Júlia Kubitschek e da Praça de Esportes de Diamantina. No ano de 1999, foi elevada à categoria de \"\" pela . Instituto do Patrimônio Histórico e Artístico Nacional Faculdade Federal de Odontologia de Diamantina patrimônio da humanidade Organização das Nações Unidas para a Educação, a Ciência e a Cultura 46 [ ]\nNa década de 1960, a Emenda Constitucional nº 5 incluiu critério de “quantidade de municípios” para calcular repasses financeiros. Neste sentido, considerando as vantagens financeiras, emancipou 227 munícipios na lei nº 2.764 de 1962. Assim, a configuração administrativa do Alto Jequitinhonha foi alterada: emanciparam-se de , os distritos de , , , , , e . 47 [ ] Minas Gerais 48 [ ] 38 [ ] Diamantina Monjolos Presidente Kubitschek Datas Couto de Magalhães de Minas Senador Modestino Gonçalves Felisberto Caldeira Felício dos Santos 48 [ ]\nno distrito de Rio Jequitinhonha Mendanha\nO município localiza-se na , estando a sede a 285 km de distância por rodovia da capital . A cidade está situada a uma média de 1.280 metros, emoldurada pela , na região do Alto Jequitinhonha. O município é banhado pelo rio Jequitinhonha e vários de seus afluentes, como o e o Ribeirão do Inferno. A porção sudoeste do município é banhada por subafluentes do rio São Francisco, como o Rio Pardo Pequeno. Região Geográfica Intermediária de Teófilo Otoni Belo Horizonte altitude Serra dos Cristais Ribeirão das Pedras 49 [ ]\nLocalizada no alto da Serra do Espinhaço, a mais antiga formação rochosa do Brasil, Diamantina está cercada por belas Apresenta , com poucas áreas , o que favorece o surgimento de belas e o alt"
+          },
+          {
+            "titulo": "Parque Estadual do Biribiri",
+            "texto": "Criado em setembro de 1998, o faz parte do complexo da Serra do Espinhaço, abrangendo hectares que incluem vegetação típica do e , além de nascentes, cursos d'água, e diversos atrativos de grande beleza natural. O parque também possui importantes patrimônios histórico-culturais e arqueológicos. Parque Estadual do Biribiri 16 998 cerrado campos rupestres\nA Serra do Espinhaço é caracterizada por planaltos elevados, interrompidos por penhascos, e serve como um impressionante divisor de águas no estado, separando a bacia do , a oeste, das bacias dos rios Doce e Jequitinhonha, a leste. O Parque Estadual do Biribiri é um dos principais atrativos naturais de Diamantina e região, oferecendo inúmeras cachoeiras e trilhas que são ideais para o e o turismo de aventura. Rio São Francisco ecoturismo 53 [ ]"
+          },
+          {
+            "titulo": "Parque Nacional das Sempre-Vivas",
+            "texto": "Criado em dezembro de 2002, o tem como propósito, proteger a biodiversidade e os ecossistemas únicos da região. O parque abrange uma área de aproximadamente 124 mil hectares e está situado na Serra do Espinhaço, uma cadeia montanhosa conhecida por sua rica diversidade biológica e seus mananciais de água. O nome do parque vem das flores conhecidas como \"\", que são notáveis por manterem sua cor e forma mesmo depois de secas e são típicas da região . O parque oferece atividades como trilhas, observação de fauna e flora, pesquisa científica e programas de educação ambiental. É administrado pelo (ICMBio), que se dedica à preservação dos recursos naturais e ao uso sustentável da área. Parque Nacional das Sempre-Vivas sempre-vivas 54 [ ] Instituto Chico Mendes de Conservação da Biodiversidade 55 [ ]\nPossui as águas mais cristalinas do formando poços ideais para banho, ao desaguar seu forma pequenas cascatas. Parque, córrego 56 [ ]\nFormada por três quedas, tem uma história curiosa: no século XIX, sua forma foi modificada. O curso do rio que dá origem à , foi desviado por , a fim de facilitarem seus trabalhos de . cachoeira garimpeiros extração 56 [ ]\nO clima predominante é o (, de acordo com a ), característico das regiões montanhosas, com durante os meses de outubro a abril . Enquanto a média anual é de aproximadamente 19°C. Os verões são amenos e quentes, enquanto os invernos podem ser bastante frios, especialmente durante a noite. No (entre e ), as temperaturas médias variam entre 18°C e 26°C, sendo o período mais quente do ano, com grande . Já no (entre junho e agosto), as temperaturas médias variam entre 10°C e 20°C, com noites chegando a cair para abaixo de 10°C. tropical de altitude Cwb classificação climática de Köppen-Geiger chuvas 57 [ ] verão dezembro fevereiro índice pluviométrico inverno 58 [ ]\nSegundo dados do (INMET), referentes ao período de 1931 a 1962 e a partir de 1972, a menor registrada em Diamantina foi de em 31 de julho de 1972 e a maior atingiu em 8 de outubro de 1987. O maior acumulado de em 24 horas foi de milímetros (mm) em 27 de março de 1995, seguido por em 18 de janeiro de 1991 e em 28 de janeiro de 2013. Instituto Nacional de Meteorologia temperatura 2,8 °C 35,8 °C precipitação 186,2 167,9 mm 153,8 mm 59 [ ]\nDados climatológicos para Diamantina\nTemperatura máxima recorde (°C)\nTemperatura máxima média () °C\nTemperatura média compensada (°C)\nTemperatura mínima média (°C)\nTemperatura mínima recorde (°C)\ncompensada (%) Umidade relativa\n: (normal climatológica de 1981-2010; precipitação: normal 1991-2020; recordes de temperatura: 01/01/1961 a 25/10/1962 e 16/02/1972-presente) Fonte INMET 60 [ ] 61 [ ] 59 [ ]\nA Basílica do Sagrado Coração de Jesus, projetada pelo Padre Júlio Clavelin, mesmo projetista da no 62 [ ] Igreja Nossa Senhora Mãe dos Homens Santuário do Caraça 63 [ ]\nA população do município de Diamantina chegou a 47.702 habitantes no censo de 2022 feito pelo (IBGE), o que representa um aumento de 3,97% em comparação com o censo de 2010. Com uma densidade demográfica de 12,26 hab/km². Instituto Brasileiro de Geografia e Estatística 64 [ ]\nDistribuíção Religiosa de Diamantina 65 [ ]\nIgreja Evangélica ou Protestante"
+          },
+          {
+            "titulo": "Desenvolvimento Humano - IDH",
+            "texto": "Sobrado histórico que desabou na Rua Padre Bartolomeu Sipólis\nDe acordo com dados do (PNUD), o (IDH) de Diamantina em 2010 foi de 0.716, a título de comparação, no mesmo ano o Índice de Desenvolvimento Humano brasileiro foi de 0,699, numa escala de 0 a 1. Contudo, tratando-se do Alto Jequitinhonha, em Minas Gerais, região historicamente conhecido por altos índices de pobreza, vulnerabilidade social e seca, abrigando algumas das cidades com as menores rendas do estado, como Caraí e Chapada do Norte, o Índice de Desenvolvimento Humano de Diamantina é um ponto favorável. Programa das Nações Unidas para o Desenvolvimento Índice de Desenvolvimento Humano 66 [ ] 67 [ ] 68 [ ]\nApesar de estar encrustada no , Diamantina é hoje a 3ª cidade com maior custo de vida para se morar em Minas Gerais, tal custo de vida é puxado pelo . A situação ganha contornos especialmente dramáticos quando se considera que um grupo de mais de 10 municípios no entorno de Diamantina - como , , e , todos com renda per capita média inferior a R$1100,00, conforme dados do - dependem da cidade como único polo de serviços próximo, haja vista o isolamento regional:para estas pessoas, um almoço após acompanhar a ida de familiar ao hospital terá preço de \"turismo\". Vale do Jequitinhonha turismo 69 [ ] Couto de Magalhães de Minas Felício dos Santos Serra Azul de Minas Senador Modestino Gonçalves 70 [ ] Censo de 2022 71 [ ]\nÍndice de Desenvolvimento Humano 72 [ ]\nNo município há : , , , , , , , , e , além da sede. dez distritos Conselheiro Mata Desembargador Otoni Extração Guinda Inhaí Mendanha Planalto de Minas São João da Chapada Senador Mourão Sopa 73 [ ]\nO perfil da da cidade mudou muito rápido devido à forte expansão da no fim da primeira década de 2000, que acabou por se tornar o motor da economia do município, possuindo 26 cursos de graduação, 23 cursos de pós graduação e cerca de 1200 servidores e 12000 alunos. A sociedade diamantinense, até certo ponto tradicional, ainda encontra dificuldades em se adaptar à nova dinâmica imposta pela chegada de uma população jovem e com diminutas “raízes” com as tradições locais. economia Universidade Federal dos Vales do Jequitinhonha e Mucuri 77 [ ] 78 [ ]\nEntretanto, a economia de Diamantina ainda está muito ligada ao turismo, a maior parte do intenso fluxo turístico focado na arquitetura e importância histórica, o município possui um rico e variado ecossistema em seu entorno, com cachoeiras, trilhas seculares e uma enorme área de mata nativa, que teve a felicidade de ser protegida com a criação de Parques Estaduais. O município é um dos destinos da , um dos roteiros culturais e turísticos mais ricos do Brasil, e faz parte do . 79 [ ] Estrada Real circuito turístico dos Diamantes 80 [ ]\nCentro Histórico de Diamantina\nda Património Mundial UNESCO\nNome usado na Região pela lista do Património Mundial classificação da UNESCO\nApesar do grande número de turistas, a infraestrutura para receber visitantes é considerada inferior à de , a primeira cidade no estado a ser reconhecida pela , e na capital de Minas, Belo Horizonte. Um grande gargalo é o trânsito, contando com uma frota local crescente e chegada de muitos carros nos fins de semana. Diamantina é também conhecida por suas e pela vesperata, que é um evento em que os músicos se apresentam à noite, ao ar livre, das janelas e sacadas de velhos casarões, enquanto o público assiste das ruas. Um dos grandes impulsos turísticos de Diamantina é o famoso Parque Estadual do Biribiri, com suas águas cristalinas e cachoeiras, entre elas se destaca a Cachoeira das Fadas e a Cachoeira do Telésforo, localizadas no distrito de . Um grande marco histórico e turístico da cidade é o , que guarda grandes lembranças do , em destaques por seus grandes e belos casarões e igrejas coloniais que retratam um pouco do século XVIII. Diamantina ainda se localiza no vale da Serra do Espinhaço, propício para turismo de Diamantina. As paisagens exuberantes do vale podem ser observadas pela Trilha Verde da "
+          },
+          {
+            "titulo": "Aeroporto Juscelino Kubitschek",
+            "texto": "Sendo um dos aeroportos mais altos do Brasil, sendo superado apenas pelo em (MG), e pelo Aeroporto de São Joaquim em (). Anteriormente a única companhia aérea que operava no Aeroporto era a , que mais tarde veio a ser comprada pela Azul Linhas Aéreas e pouco tempo depois parou de operar. O acesso ao Aeroporto se dá pela rodovia , estando apenas 4 km de Diamantina. Aeroporto de Monte Verde Camanducaia São Joaquim SC TRIP Linhas Aéreas BR-367 97 [ ]"
+          },
+          {
+            "titulo": "Terminal Rodoviário de Diamantina",
+            "texto": "Situada em frente ao prédio da Antiga Estação Ferroviária, a Rodoviária de Diamantina oferece viagens estaduais (em sua grande maioria) e interestaduais, cujas linhas ligam o município a outros como , , , , , e , em diferentes horários durante o dia. Está localizada no Largo Dom João, no Centro de Diamantina. Belo Horizonte Curvelo Araçuaí Capelinha Montes Claros Serro São Paulo 98 [ ]\nÍndice de Educação 99 [ ]\nA e o são atendidos por diversas instituições públicas e privadas. De acordo com dados do (IBGE) e do de 2020, Diamantina possui cerca de 25 instituições, incluindo creches e pré-escolas, atendendo a crianças de 0 a 5 anos e aproximadamente 40 escolas, abrangendo tanto o I (1º ao 5º ano) quanto o fundamental II (6º ao 9º ano), levando em consideração a área urbana e as zonas rurais. educação infantil ensino fundamental Instituto Brasileiro de Geografia e Estatística Censo Escolar ensino fundamental 100 [ ] 101 [ ]\nO no município é oferecido por várias escolas públicas e privadas. Dentre as instituições de ensino médio de mais prestígio de Diamantina se destaca a Escola Estadual Professora Júlia Kubitschek , uma das principais escolas estaduais, conhecida por seu histórico de qualidade educacional e nomeada em homenagem á , professora natural da cidade e mãe de . Além disso o (IFNMG), que oferece cursos técnicos integrados ao ensino médio, proporcionando uma formação técnica e profissionalizante. ensino médio 102 [ ] Júlia Kubitschek Juscelino Kubitschek 103 [ ] Instituto Federal do Norte de Minas Gerais 104 [ ]\nLogo da -UFVJM Universidade Federal dos Vales do Jequitinhonha e Mucuri\nEm setembro de 1953, visando desenvolver a região, funda a Faculdade de Odontologia de Diamantina, desenhada por , na época uma promessa da , a Faculdade de daria origem o que hoje é a . Juscelino Kubitschek Oscar Niemeyer Arquitetura Odontologia UFVJM [ carecede fontes ] ?\nNo dia 17 de dezembro de 1960, foi transformada em Faculdade Federal de Odontologia (Fafeod), e no dia 4 de Outubro de 2002, tornou-se Faculdades Federais Integradas de Diamantina (Fafeid). A Universidade conta com cerca de mais de 80 cursos e mais de 10.00 estudantes dos cursos de presenciais e á . 105 [ ] graduação distância [ carecede fontes ] ?\nA criação da universidade visou ampliar o acesso ao de qualidade nas regiões do , áreas historicamente desfavorecidas economicamente. A presença da no município tem um impacto significativo no desenvolvimento econômico, social e cultural da região. A atrai de diversas partes do , contribuindo para a diversificação cultural e econômica de Diamantina. Além disso, a formação de profissionais qualificados nas mais diversas áreas contribui para o desenvolvimento local e regional. ensino superior Jequitinhonha e Mucuri UFVJM universidade estudantes Brasil 106 [ ]\nA unidade é uma das que compõe a (UEMG), abrigando o ensino, a e a expansão na área do . Universidade Estadual de Minas Gerais pesquisa Direito 107 [ ]"
+          },
+          {
+            "titulo": "Instituto Federal do Norte de Minas Gerais",
+            "texto": "A presença do (IFNMG) em Diamantina é significativa para a oferta de cursos técnicos e profissionalizantes como: , , e . O instituto oferece uma variedade de cursos nas áreas de tecnologia, gestão e outros setores, preparando os alunos para o mercado de trabalho com habilidades práticas e teóricas. Instituto Federal do Norte de Minas Gerais informática meio ambiente teatro biotecnologia 108 [ ] 109 [ ]"
+          },
+          {
+            "titulo": "Santa Casa de Caridade de Diamantina",
+            "texto": "A Santa Casa de Caridade de Diamantina foi fundada em 23 de maio de 1790, pelo , e é uma instituição de caráter filantrópico e sem fins lucrativos. Cumpre seu papel assistencial e se consolida como referência de média e alta complexidade. Ermitão Manuel de Jesus Fortes macrorregional 110 [ ] 111 [ ]"
+          },
+          {
+            "titulo": "Hospital Nossa Senhora da Saúde - HNSS",
+            "texto": "A Irmandade de foi criada em 9 de abril de 1901, a pedido de D. Querunbina Augusta Moreira, esposa do Capitão , o Barão de Paraúna. Ao falecer, ela, sem filhos pede seu marido, que parte de sua fortuna fosse empregada principalmente em socorrer a enferma e desamparada. Nossa Senhora da Saúde Antônio Moreira da Costa '' pobreza '' 112 [ ]\nA literatura relacionada a Diamantina inclui obras de caráter memorialístico, poético e histórico. Entre as obras associadas à cidade está , diário escrito entre 1893 e 1895 por , pseudônimo de Alice Dayrell Caldeira Brant. Nascida em Diamantina, a autora retratou no livro o cotidiano da cidade no final do século XIX. Publicada originalmente em 1942, a obra alcançou ampla circulação e é considerada um clássico da literatura brasileira. Minha Vida de Menina Helena Morley 113 [ ]\nOutro escritor nascido em Diamantina foi (1885–1934). Durante sua formação no Seminário de Diamantina, reuniu poemas em um caderno manuscrito, parte dos quais foi publicada posteriormente no livro , de 1909. Torres também publicou poemas, artigos e crônicas em periódicos locais, entre eles , , e . Antônio dos Santos Torres Horas místicas A Estrela Polar Pão de Santo Antônio A Ideia Nova A Diamantina 114 [ ] 115 [ ]\nA produção memorialística ligada ao município também inclui (1917–2000), contador de histórias e escritor autodidata do povoado do Vau, pertencente ao município de Diamantina. Braga deixou cadernos manuscritos em prosa e verso, nos quais registrou memórias pessoais e histórias relacionadas à tradição oral da comunidade. Sua produção foi objeto de estudos acadêmicos sobre a relação entre oralidade, memória e escrita. Pedro Cordeiro Braga 116 [ ] 117 [ ]\nNa produção contemporânea está a poeta , nome literário de Elizabeth do Rosário Guedes Fernandes, nascida em Curralinho, distrito de Diamantina. Entre suas obras estão (1987), (1999), (2013) e (2021). Beth Guedes Viver é Isso e Algo Mais A Pá (lavra) A Leveza da Vida em Verso O Sopro do Belo 118 [ ] 119 [ ]\nArquidiocese de Diamantina\nBispos e arcebispos de Diamantina\nLista de distritos de Diamantina\nLista de municípios de Minas Gerais\nLista de municípios do Brasil\n1 2 3 4 Instituto Brasileiro de Geografia e Estatística (IBGE). . «Diamantina» . Consultado em 17 de agosto de 2023 Cópia arquivada em 20 de março de 2026\n1 2 Cidades.Net. . Arquivado do em 9 de setembro de 2013 «Diamantina - MG» . Consultado em 31 de dezembro de 2022 original\n↑ Paulo Campos (28 de fevereiro de 2022). . Jornal O Tempo. «Diamantina comemora 309 anos neste domingo e ganha novo atrativo turístico» . Consultado em 31 de dezembro de 2022 Cópia arquivada em 31 de dezembro de 2022\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE). . «História - Diamantina» . Consultado em 31 de dezembro de 2022 Cópia arquivada em 31 de dezembro de 2022\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE) (9 de setembro de 2013). . «Diamantina - Unidades territoriais do nível Distrito» . Consultado em 31 de dezembro de 2022 Cópia arquivada em 31 de dezembro de 2022\n↑ Predefinição:Extera ligilo\n↑ . Tribuna do Paraná. «Paquito (MDB) 15: Candidato a prefeito em Diamantina» . Consultado em 5 de janeiro de 2025 Cópia arquivada em 9 de outubro de 2025\n↑ Instituto Brasileiro de Geografia e Estatística (IBGE). . Biblioteca IBGE. Arquivado do em 12 de outubro de 2013 «Brasil - Climas» . Consultado em 31 de dezembro de 2022 original\n↑ Atlas do Desenvolvimento Humano (29 de julho de 2013). . (PNUD). Arquivado do em 8 de julho de 2014 «Ranking decrescente do IDH-M dos municípios do Brasil» (PDF) Programa das Nações Unidas para o Desenvolvimento . Consultado em 31 de dezembro de 2022 original (PDF)\n1 2 Instituto Brasileiro de Geografia e Estatística (IBGE) (2020). . «Produto Interno Bruto dos Municípios - 2020» . Consultado em 31 de dezembro de 2022 Cópia arquivada em 31 de dezembro de 2022\n↑ . . «Estimativas da população residente para os municípios e para as unidades da federação | IBGE» www.ibge.gov.br . Con"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Diamantina"
+            ],
+            [
+              "Município do Brasil"
+            ],
+            [
+              ".mw-parser-output .tmulti .multiimageinner{display:flex;flex-direction:column}.mw-parser-output .tmulti .trow{display:flex;flex-direction:row;clear:left;flex-wr"
+            ],
+            [
+              "Bandeira Brasão de armas"
+            ],
+            [
+              "Hino"
+            ],
+            [
+              "Gentílico",
+              "diamantinense [ 1 ]"
+            ],
+            [
+              "Localização de Diamantina em Minas Gerais Localização de Diamantina em Minas Gerais Diamantina Localização de Diamantina no Brasil"
+            ],
+            [
+              "Mapa de Diamantina"
+            ],
+            [
+              "Coordenadas: 18° 14′ 56″ S, 43° 36′ 00″ O {{#parsoid\\u0000fragment:32}} \"}}'/>"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Unidade federativa",
+              "Minas Gerais"
+            ],
+            [
+              "Municípios limítrofes",
+              "Bocaiuva , Carbonita , Senador Modestino Gonçalves , Couto de Magalhães de Minas , Serro , Datas , Gouveia , Monjolos , Augusto de Lima , Buenópolis e Olhos-d'Á"
+            ],
+            [
+              "Distância até a capital",
+              "292 km [ 2 ]"
+            ],
+            [
+              "Fundação",
+              "6 de março de 1831 (195 anos) [ 3 ]"
+            ],
+            [
+              "Emancipação",
+              "13 de outubro de 1831 (195 anos) [ 4 ]"
+            ],
+            [
+              "Distritos",
+              "Lista Conselheiro Mata , Desembargador Otoni , Diamantina (sede), Extração , Guinda , Inhaí , Mendanha , Planalto de Minas , São João da Chapada , Senador Mourã"
+            ],
+            [
+              "Governo"
+            ],
+            [
+              "• Prefeito(a)",
+              "Geferson Giordani Burgarelli, \"Paquito\" [ 6 ] [ 7 ] ( MDB , 2025–2028)"
+            ],
+            [
+              "Área"
+            ],
+            [
+              "• Total .mw-parser-output .nobold{font-weight:normal} [ 1 ]",
+              "3 891,659 km²"
+            ],
+            [
+              "• Urbana (IBGE/2019) [ 1 ]",
+              "11,98 km²"
+            ],
+            [
+              "População"
+            ],
+            [
+              "• Total (censo IBGE/2022) [ 1 ]",
+              "47 702 hab."
+            ],
+            [
+              "Densidade",
+              "12,3 hab./km²"
+            ],
+            [
+              "Clima",
+              "tropical de altitude ( Cwb ) [ 8 ]"
+            ],
+            [
+              "Fuso horário",
+              "Hora de Brasília ( UTC−3 )"
+            ],
+            [
+              "IDH ( PNUD /2010) [ 9 ]",
+              "0,716 — alto"
+            ],
+            [
+              "PIB (IBGE/2020) [ 10 ]",
+              "R$ 841 559,73 mil"
+            ],
+            [
+              "• Per capita ( IBGE /2020 [ 10 ] )",
+              "R$ 17 596,65"
+            ],
+            [
+              "Sítio",
+              "www.diamantina.mg.gov.br ( Prefeitura ) www.cmdiamantina.mg.gov.br ( Câmara )"
+            ]
+          ],
+          [
+            [
+              "",
+              "%"
+            ],
+            [
+              "Plano",
+              "20%"
+            ],
+            [
+              "Ondulado",
+              "20%"
+            ],
+            [
+              "Montanhoso",
+              "60%"
+            ]
+          ],
+          [
+            [
+              "Dados climatológicos para Diamantina"
+            ],
+            [
+              "Mês",
+              "Jan",
+              "Fev",
+              "Mar",
+              "Abr",
+              "Mai",
+              "Jun",
+              "Jul",
+              "Ago",
+              "Set",
+              "Out",
+              "Nov",
+              "Dez",
+              "Ano"
+            ],
+            [
+              "Temperatura máxima recorde (°C)",
+              "32,7",
+              "34,6",
+              "31",
+              "33,1",
+              "29,4",
+              "29,8",
+              "29,2",
+              "33",
+              "33,1",
+              "35,8",
+              "33,6",
+              "31,8",
+              "35,8"
+            ],
+            [
+              "Temperatura máxima média ( °C )",
+              "25,8",
+              "26",
+              "25,6",
+              "24,6",
+              "23",
+              "21,9",
+              "21,4",
+              "22,9",
+              "24,5",
+              "25,5",
+              "24,5",
+              "24,9",
+              "24,2"
+            ],
+            [
+              "Temperatura média compensada (°C)",
+              "20,6",
+              "20,6",
+              "20,3",
+              "19,3",
+              "17,4",
+              "16,1",
+              "15,7",
+              "16,8",
+              "18,4",
+              "19,7",
+              "19,6",
+              "20",
+              "18,7"
+            ],
+            [
+              "Temperatura mínima média (°C)",
+              "16,8",
+              "16,7",
+              "16,6",
+              "15,6",
+              "13,6",
+              "11,9",
+              "11,3",
+              "11,8",
+              "13,6",
+              "15,3",
+              "15,9",
+              "16,5",
+              "14,6"
+            ],
+            [
+              "Temperatura mínima recorde (°C)",
+              "10,6",
+              "11,1",
+              "11,6",
+              "8",
+              "4,6",
+              "4,6",
+              "2,8",
+              "5,6",
+              "6,4",
+              "8",
+              "9,6",
+              "9,9",
+              "2,8"
+            ],
+            [
+              "Precipitação ( mm )",
+              "240,9",
+              "158,8",
+              "179,4",
+              "73,3",
+              "25,3",
+              "6,6",
+              "4,9",
+              "11,8",
+              "31,4",
+              "115,1",
+              "236,7",
+              "284,2",
+              "1 368,4"
+            ],
+            [
+              "Umidade relativa compensada (%)",
+              "# 0000D1;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>78,5",
+              "# 0000DA;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>76,1",
+              "# 0000CD;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>79,5",
+              "# 0000D0;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>78,7",
+              "# 0000D7;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>77,1",
+              "# 0000DF;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>74,8",
+              "# 0000EC;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>71,6",
+              "# 0000F9;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>68,2",
+              "# 0000FA;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>67,9",
+              "# 0000F4;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>69,4",
+              "# 0000CF;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>79,1",
+              "# 0000C5;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>81,6",
+              "# 0000DE;color: # FFFFFF; font-size:85%;text-align:center; border-left-width:medium\"}]]}'>75,2"
+            ],
+            [
+              "Insolação (h)",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>183,7",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>176,5",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>182,9",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>190,5",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>208,4",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>190,9",
+              "# f7e135;color: # 000000;font-size:85%;text-align:center;\"}]]}'>226,3",
+              "# ffe700;color: # 000000;font-size:85%;text-align:center;\"}]]}'>239,2",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>195",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>181,6",
+              "# c9bb6d;color: # 000000;font-size:85%;text-align:center;\"}]]}'>147,5",
+              "# c9bb6d;color: # 000000;font-size:85%;text-align:center;\"}]]}'>149,8",
+              "# ffe700;color: # 000000;font-size:85%;text-align:center; border-left-width:medium\"}]]}'>2 272,3"
+            ],
+            [
+              "Fonte : INMET (normal climatológica de 1981-2010; precipitação: normal 1991-2020; [ 60 ] recordes de temperatura: 01/01/1961 a 25/10/1962 e 16/02/1972-presente)"
+            ]
+          ],
+          [
+            [
+              "Religião",
+              "Adeptos"
+            ],
+            [
+              "Igreja Católica",
+              "37.831"
+            ],
+            [
+              "Igreja Evangélica ou Protestante",
+              "5.729"
+            ],
+            [
+              "Denominações Espíritas",
+              "684"
+            ]
+          ],
+          [
+            [
+              "",
+              "2000",
+              "2010"
+            ],
+            [
+              "IDH-M Renda",
+              "0,635",
+              "0,693"
+            ],
+            [
+              "IDH-M Longevidade",
+              "0,747",
+              "0,839"
+            ],
+            [
+              "IDH-M Educação",
+              "0,460",
+              "0,632"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg/1280px-Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Diamantina_-_MG_%285264743631%29.jpg/330px-Diamantina_-_MG_%285264743631%29.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Catedral_Metropolitana_%28Diamantina%2C_Minas_Gerais%29_02.jpg/120px-Catedral_Metropolitana_%28Diamantina%2C_Minas_Gerais%29_02.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg/250px-Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Saint_Francis_of_Assis_Church.jpg/250px-Saint_Francis_of_Assis_Church.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-d1c21c9244b2",
+            "type": "image",
+            "title": "município brasileiro do estado de Minas Gerais",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg/1280px-Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg/1280px-Centro_Hist%C3%B3rico_de_Diamantina_%28Amanhecer%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7eb2487bedf5",
+            "type": "image",
+            "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-45ea45ed0372",
+            "type": "image",
+            "title": "Bandeira de Diamantina",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bandeira_diamantina.png/120px-Bandeira_diamantina.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bandeira_diamantina.png/120px-Bandeira_diamantina.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira de Diamantina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6ba403fa822a",
+            "type": "image",
+            "title": "Brasão de armas de Diamantina",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Brasao_diamantina.png/120px-Brasao_diamantina.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Brasao_diamantina.png/120px-Brasao_diamantina.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasão de armas de Diamantina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8050e8a9274b",
+            "type": "image",
+            "title": "Localização de Diamantina em Minas Gerais",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/MinasGerais_Municip_Diamantina.svg/330px-MinasGerais_Municip_Diamantina.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/MinasGerais_Municip_Diamantina.svg/330px-MinasGerais_Municip_Diamantina.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Localização de Diamantina em Minas Gerais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-707443562f4f",
+            "type": "image",
+            "title": "Diamantina está localizado em: Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Diamantina está localizado em: Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f4de484cc01f",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,12,-18.248888888889,-43.6,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Diamantina&revid=73005455&groups=_2ed43ca71199e0d33a35f869a5cc58bfe3e0901c&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-18.248888888889,-43.6,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Diamantina&revid=73005455&groups=_2ed43ca71199e0d33a35f869a5cc58bfe3e0901c&parser=parsoid",
+            "source_title": "município brasileiro do estado de Minas Gerais",
+            "source_url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "7f92f2feb12f66308e96",
+            "url": "https://www.diamantina.mg.gov.br/",
+            "title": "Prefeitura Municipal de Diamantina",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento d"
+          },
+          {
+            "id": "d0845dc134c776eba296",
+            "url": "https://pt.wikipedia.org/wiki/Diamantina",
+            "title": "Diamantina – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Diamantina é um município brasileiro no estado de Minas Gerais, Região Sudeste. Localiza-se no Vale do Jequitinhonha, na região central mineira, [2] e ocupa uma"
+          },
+          {
+            "id": "fe489434734c9c2fdea0",
+            "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+            "title": "O que fazer em Diamantina - Melhores atrações e passeios!",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Cercada por belas paisagens naturais e povoados encantadores, Diamantina oferece um bom roteiro histórico, igrejas de grande beleza, cenários deslumbrantes em m"
+          },
+          {
+            "id": "5d13856f06e6b48c086a",
+            "url": "https://www.diamantina.mg.gov.br/portal",
+            "title": "Prefeitura Municipal de Diamantina",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento d"
+          },
+          {
+            "id": "9813fa73813cdf707e89",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+            "title": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do "
+          },
+          {
+            "id": "5c803b096670dfca3958",
+            "url": "https://www.visitediamantina.com.br/",
+            "title": "Prefeitura de Diamantina - MG",
+            "origin": "bing",
+            "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Visitar Diamantina foi uma experiência inesquecível. A cidade respira história, com suas ruas de pedra e casarões coloniais que parecem ter parado no tempo. Cam"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (\"Diamantina\" eventos programação 2026-10)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (\"Diamantina\" eventos programação 2026-10)",
+        "ddg: bloqueado (\"Diamantina\" eventos programação 2026-10)",
+        "marginalia: sem resultados (\"Diamantina\" eventos programação 2026-10)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (diamantina eventos culturais)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (diamantina eventos culturais)",
+        "marginalia: 4 resultados (diamantina eventos culturais)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (diamantina eventos culturais)",
+        "wikipedia: sem resultados (diamantina eventos culturais)",
+        "recuperação com ganho novo: 3 domínio(s), 0 tema(s) além da 1ª rodada"
+      ],
+      "query_plan": null,
+      "ganho_informacao": {
+        "dominios_novos": [
+          "creativecommons.org",
+          "www.biotaneotropica.org.br",
+          "www.workaway.info"
+        ],
+        "temas_novos": [],
+        "ganho_real": true
+      },
+      "lacunas": []
+    }
+  ],
+  "source_revision": "2c6a3248003a59f96325fb91a282be8262fd908b",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

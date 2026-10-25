@@ -1,0 +1,41 @@
+....................F..................................................F [ 66%]
+.....................................                                    [100%]
+================================== FAILURES ===================================
+________ test_old_retrieval_cache_is_not_reused_after_selection_change ________
+
+    def test_old_retrieval_cache_is_not_reused_after_selection_change():
+        db=sqlite3.connect(':memory:');research.criar_tabelas(db)
+        research.cache_put(db,'qa','web','solar',{'retrieval_version':'5.9.9','fontes':[]},600)
+        calls=[]
+        result=research.pesquisa_rapida(db,'qa','solar',lambda q:calls.append(q) or [],lambda _:None)
+>       assert calls and not result['de_cache'] and result['retrieval_version']=='5.9.9.1'
+E       AssertionError: assert (['solar'] and not False and '5.9.9.2' == '5.9.9.1'
+E         
+E         - 5.9.9.1
+E         ?       ^
+E         + 5.9.9.2
+E         ?       ^)
+
+tests\test_source_recovery_v5991.py:79: AssertionError
+________ test_media_survives_retrieval_cache_message_and_sqlite_reload ________
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-437/test_media_survives_retrieval_0')
+
+    def test_media_survives_retrieval_cache_message_and_sqlite_reload(tmp_path):
+        db=sqlite3.connect(tmp_path/'qa.sqlite')
+        research.criar_tabelas(db)
+        db.execute('create table messages (id text primary key,text text)')
+        calls=[]
+        def search(query): calls.append(query);return [commons_result()]
+        result=research.pesquisa_rapida(db,'qa','Imagens da Ponte Estaiada de São Paulo',search,lambda url:{'texto':'','lida':False})
+        assert len(result['midia'])==1
+        assert result['fontes_lidas']==0
+        cached=research.pesquisa_rapida(db,'qa','Imagens da Ponte Estaiada de São Paulo',search,lambda url:pytest.fail('Cache missed'))
+>       assert cached['de_cache'] and len(calls)==1
+E       assert (False)
+
+tests\test_universal_search_v599.py:78: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_source_recovery_v5991.py::test_old_retrieval_cache_is_not_reused_after_selection_change
+FAILED tests/test_universal_search_v599.py::test_media_survives_retrieval_cache_message_and_sqlite_reload
+2 failed, 107 passed in 10.55s

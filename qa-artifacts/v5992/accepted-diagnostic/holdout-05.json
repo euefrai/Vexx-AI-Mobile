@@ -1,0 +1,1918 @@
+{
+  "id": "holdout-05",
+  "category": "culture_history",
+  "query": "História do Museu do Amanhã fontes oficiais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 3.514,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã História fontes oficiais",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3+Hist%C3%B3ria+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3+Hist%C3%B3ria+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5556
+    },
+    {
+      "url": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5233
+    },
+    {
+      "url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+      "final": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+      "chars": 2055
+    },
+    {
+      "url": "https://amanhateca.org.br/",
+      "final": "https://amanhateca.org.br/",
+      "chars": 312836
+    },
+    {
+      "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+      "final": "https://site.bileto.sympla.com.br/museudoamanha/",
+      "chars": 10732
+    },
+    {
+      "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "final": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "chars": 185346
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "final": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "chars": 201459
+    },
+    {
+      "url": "https://museudoamanha.org.br/",
+      "final": "https://museudoamanha.org.br/",
+      "chars": 2055
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História do Museu do Amanhã fontes oficiais",
+    "domain": "general",
+    "original_request": "História do Museu do Amanhã fontes oficiais",
+    "resolved_request": "História do Museu do Amanhã fontes oficiais",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T02:18:31.621546+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "ac48abd8330c21c82de4",
+        "url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+        "title": "Sobre o Museu | Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "sáb., 24 out. 2026 06:29:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "The Museu do Amanhã is a space where science, art and innovation meet to explore the present and imagine the future. Em um momento de grandes transformações, so",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY"
+        ]
+      },
+      {
+        "id": "5409b23add007b91c51c",
+        "url": "https://museudoamanha.org.br/",
+        "title": "Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "sáb., 24 out. 2026 02:11:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas p",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://museudoamanha.org.br/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY"
+        ]
+      },
+      {
+        "id": "516ac61f45dfe2c1b6f2",
+        "url": "https://amanhateca.org.br/",
+        "title": "Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "sáb., 24 out. 2026 02:11:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 289,
+        "final_url": "https://amanhateca.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "b103078d6cb00641d741",
+        "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+        "title": "MUSEU DO AMANHÃ - Sympla",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "dom., 18 out. 2026 00:24:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "diferentes caminhos que se abrem para o futuro. O Amanhã é uma construção da qual cada pessoa participa, em sua cidadania. A partir das perspectivas da sustenta",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 610,
+        "final_url": "https://site.bileto.sympla.com.br/museudoamanha/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "e88d98dd66bacd4e7b12",
+        "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+        "title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "qui., 22 out. 2026 15:42:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "artista Eduardo Kobra, e visitar o vizinho . Boulevard Olímpico Etnias MAR (Museu de Arte do Rio) Arquitectura moderna en el interior del Museo del Mañana en Rí",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4948,
+        "final_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "4f53fb37e8d4077cb44d",
+        "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "2010-08-15T17:51:43Z",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de con",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "9efff0d43b1e41225275",
+        "url": "https://museudoipiranga.org.br/",
+        "title": "Início – Museu do Ipiranga - Conheça o Museu",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 24 out. 2026 15:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Descubra o Museu do Ipiranga, a sede do Museu Paulista em São Paulo. Um marco da história brasileira, o edifício, construído entre 1885 e 1890, celebra a Procla",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "70ab471a821e3197dabc",
+        "url": "https://museu.igc.usp.br/",
+        "title": "Museu de Geociências",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "qua., 21 out. 2026 06:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Museu de Geociências dispõe de um grande acervo de rochas, minerais, meteoritos e fósseis exposto ao grande público: a nossa comunidade. As gemas sempre exerc",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "7403ed62d7418a3ff184",
+        "url": "https://www.museudacidade.prefeitura.sp.gov.br/",
+        "title": "MCSP | Museu da Cidade de São Paulo – O Museu da Cidade de São Paulo ...",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 24 out. 2026 10:54:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "INSCREVA-SE Outubro e novembro Confira a programação gratuita do Museu da Cidade de São Paulo O Museu da Cidade de São Paulo oferece, nos.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "95c3286cfb1bb2fc2671",
+        "url": "https://mz.usp.br/",
+        "title": "Museu de Zoologia da USP – Museu de Zoologia da USP",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 24 out. 2026 06:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Museu de Zoologia da Universidade de São Paulo tem como principal atividade compreender padrões e processos da Biodiversidade brasileira. Somos guardiões de u",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "a57a82f3fcee44943319",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303631-Activities-c49-Sao_Paulo_State_of_Sao_Paulo.html",
+        "title": "OS 15 MELHORES museus em São Paulo (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 24 out. 2026 09:21:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Museu da língua portuguesa é um lugar imperdível de SP. Aliado a um local histórico e com uma proposta extremamente... 7. Instituto Tomie Ohtake. O prédio é lin",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "f330d09ac6494fe030b7",
+        "url": "https://www.guiadasemana.com.br/na-cidade/galeria/museus-imperdiveis-em-sao-paulo",
+        "title": "23 museus imperdíveis para visitar em São Paulo pelo menos uma vez na vida",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "dom., 29 jun. 2025 23:53:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Se você procura uma nova exposição para ver ou apenas um passeio diferente para o fim de semana, com certeza não faltam opções para explorar. São espaços com as",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-3ff61be3cc69",
+      "type": "image",
+      "title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "url": "https://www.montanistablog.com/mmrio.jpg",
+      "final_url": "https://www.montanistablog.com/mmrio.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-60d2f85e6a66",
+      "type": "image",
+      "title": "Logo de Montanista.",
+      "url": "https://www.montanistablog.com/_next/image?url=%2Flogo-brand.png&w=256&q=75",
+      "final_url": "https://www.montanistablog.com/_next/image?url=%2Flogo-brand.png&w=256&q=75",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo de Montanista.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9ae55e9b1341",
+      "type": "image",
+      "title": "Portugal",
+      "url": "https://www.montanistablog.com/_next/image?url=https%3A%2F%2Fflagcdn.com%2Fw20%2Fbr.png&w=48&q=75",
+      "final_url": "https://www.montanistablog.com/_next/image?url=https%3A%2F%2Fflagcdn.com%2Fw20%2Fbr.png&w=48&q=75",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Portugal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e160a7215d4d",
+      "type": "image",
+      "title": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro.",
+      "url": "https://www.montanistablog.com/brasil/brasil77.jpg",
+      "final_url": "https://www.montanistablog.com/brasil/brasil77.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9ab8cfaa629a",
+      "type": "image",
+      "title": "Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro.",
+      "url": "https://www.montanistablog.com/mmrio1.jpg",
+      "final_url": "https://www.montanistablog.com/mmrio1.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bcaa3e35cf05",
+      "type": "image",
+      "title": "10 playas de Río de Janeiro - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/joa4.jpg",
+      "final_url": "https://www.montanistablog.com/joa4.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "10 playas de Río de Janeiro - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2210f545dd93",
+      "type": "image",
+      "title": "Arcos da Lapa en Río de Janeiro - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/arcla.png",
+      "final_url": "https://www.montanistablog.com/arcla.png",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Arcos da Lapa en Río de Janeiro - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b55c1779f356",
+      "type": "image",
+      "title": "Barra da Tijuca - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/brasil/countrybrasil1.jpeg",
+      "final_url": "https://www.montanistablog.com/brasil/countrybrasil1.jpeg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Barra da Tijuca - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f2667bf9afc2",
+      "type": "image",
+      "title": "Botafogo - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/brasil/brasil78.jpg",
+      "final_url": "https://www.montanistablog.com/brasil/brasil78.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Botafogo - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1adaae9d49a8",
+      "type": "image",
+      "title": "Catedral Metropolitana de Río de Janeiro - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/lapa1.jpg",
+      "final_url": "https://www.montanistablog.com/lapa1.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Catedral Metropolitana de Río de Janeiro - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a0110144d829",
+      "type": "image",
+      "title": "Como pagar en Rio de Janeiro - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/prio.png",
+      "final_url": "https://www.montanistablog.com/prio.png",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Como pagar en Rio de Janeiro - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3847f4a2fb9e",
+      "type": "image",
+      "title": "Copacabana - Rio-de-janeiro",
+      "url": "https://www.montanistablog.com/copaca.jpg",
+      "final_url": "https://www.montanistablog.com/copaca.jpg",
+      "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "publisher": "www.montanistablog.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Copacabana - Rio-de-janeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://amanhateca.org.br/",
+      "titulo": "Museu do Amanhã",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "sáb., 24 out. 2026 02:11:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://amanhateca.org.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+      "titulo": "MUSEU DO AMANHÃ",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "dom., 18 out. 2026 00:24:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "titulo": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "qui., 22 out. 2026 15:42:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 3,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã História fontes oficiais",
+      "items": [
+        {
+          "titulo": "OS 15 MELHORES museus em São Paulo (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303631-Activities-c49-Sao_Paulo_State_of_Sao_Paulo.html",
+          "trecho": "Museu da língua portuguesa é um lugar imperdível de SP. Aliado a um local histórico e com uma proposta extremamente... 7. Instituto Tomie Ohtake. O prédio é lindo, a arquitetura por si só já dá um show. Pelo que vi sempre tá rolando exposições gratuitas, vale a... 8. Museu Da Imagem E Do Som - Mis.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 09:21:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303631-Activities-c49-Sao_Paulo_State_of_Sao_Paulo.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu de Geociências",
+          "url": "https://museu.igc.usp.br/",
+          "trecho": "O Museu de Geociências dispõe de um grande acervo de rochas, minerais, meteoritos e fósseis exposto ao grande público: a nossa comunidade. As gemas sempre exerceram um poder fascinante sobre as pessoas, e estão entre os objetos mais desejados desde os tempos primitivos, quando o ser humano descobriu",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 06:11:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museu.igc.usp.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "MCSP | Museu da Cidade de São Paulo – O Museu da Cidade de São Paulo ...",
+          "url": "https://www.museudacidade.prefeitura.sp.gov.br/",
+          "trecho": "INSCREVA-SE Outubro e novembro Confira a programação gratuita do Museu da Cidade de São Paulo O Museu da Cidade de São Paulo oferece, nos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:54:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudacidade.prefeitura.sp.gov.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "23 museus imperdíveis para visitar em São Paulo pelo menos uma vez na vida",
+          "url": "https://www.guiadasemana.com.br/na-cidade/galeria/museus-imperdiveis-em-sao-paulo",
+          "trecho": "Se você procura uma nova exposição para ver ou apenas um passeio diferente para o fim de semana, com certeza não faltam opções para explorar. São espaços com as mais diversas propostas espalhados pelos bairros da cidade. Pensando nisso, o Guia da Semana preparou um roteiro com 23 museus em São Paulo",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 29 jun. 2025 23:53:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://guiadasemana.com.br/na-cidade/galeria/museus-imperdiveis-em-sao-paulo",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu de Zoologia da USP – Museu de Zoologia da USP",
+          "url": "https://mz.usp.br/",
+          "trecho": "O Museu de Zoologia da Universidade de São Paulo tem como principal atividade compreender padrões e processos da Biodiversidade brasileira. Somos guardiões de uma das maiores coleções de nossa fauna. Sendo o Brasil um país megadiverso, que abriga cerca de 20% de toda a Biodiversidade do planeta, nos",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:15:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://mz.usp.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Início – Museu do Ipiranga - Conheça o Museu",
+          "url": "https://museudoipiranga.org.br/",
+          "trecho": "Descubra o Museu do Ipiranga, a sede do Museu Paulista em São Paulo. Um marco da história brasileira, o edifício, construído entre 1885 e 1890, celebra a Proclamação da Independência e abriga exposições e atividades culturais, integrando a USP.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 15:47:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudoipiranga.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 10.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã",
+      "items": [
+        {
+          "titulo": "Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/",
+          "trecho": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas para o mundo que queremos construir. A museum to explore the present and imagine the future.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:11:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudoamanha.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Sobre o Museu | Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+          "trecho": "The Museu do Amanhã is a space where science, art and innovation meet to explore the present and imagine the future. Em um momento de grandes transformações, somos convidados a refletir sobre os caminhos que se abrem diante de nós e como nossas escolhas moldam o amanhã.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:29:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã",
+          "url": "https://amanhateca.org.br/",
+          "trecho": "O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:11:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://amanhateca.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "trecho": "O Museu do Amanhã é um museu construído no município do Rio de Janeiro, no Brasil. O prédio, projeto do arquiteto espanhol Santiago Calatrava, foi erguido ao lado da Praça Mauá, na zona portuária (mais precisamente no Píer Mauá).",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 16:04:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 12.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "MUSEU DO AMANHÃ - Sympla",
+          "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+          "trecho": "O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, informações, explorações e perguntas sobre a época de grandes mudanças em que vivemos e reflexões sobre os diferentes caminhos que se abrem para o futuro.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 00:24:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://site.bileto.sympla.com.br/museudoamanha",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+          "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+          "trecho": "Guia completo para visitar o Museu do Amanhã no Rio de Janeiro em 2026: ingressos, terças gratuitas, horários, como chegar de VLT e dicas práticas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 15:42:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+      "result": {
+        "titulo": "Sobre o Museu | Museu do Amanhã",
+        "texto": "",
+        "final": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+      "result": {
+        "titulo": "MUSEU DO AMANHÃ",
+        "texto": "Sobre a casa O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, informações, explorações e perguntas sobre a época de grandes mudanças em que vivemos e reflexões sobre os diferentes caminhos que se abrem para o futuro. O Amanhã é uma construção da qual cada pessoa participa, em sua cidadania. A partir das perspectivas da sustentabilidade e da convivência, o Museu oferece ao visitante uma jornada rumo a futuros possíveis, passando por grandes perguntas que a Humanidade sempre se fez. De onde viemos? Quem somos? Onde estamos? Para onde vamos? Como queremos ir?. Site Museu do Amanhã",
+        "final": "https://site.bileto.sympla.com.br/museudoamanha/",
+        "trecho_usado": "diferentes caminhos que se abrem para o futuro. O Amanhã é uma construção da qual cada pessoa participa, em sua cidadania. A partir das perspectivas da sustentabilidade e da convivência, o Museu oferece ao visitante uma jornada rumo a futuros possíveis, passando por grandes perguntas que a Humanidade sempre se fez. De onde viemos? Quem somos? Onde estamos? Para onde vamos? Como queremos ir?. Site",
+        "metadados": {
+          "titulo": "MUSEU DO AMANHÃ",
+          "descricao": "",
+          "canonica": "",
+          "og": {
+            "og:title": "MUSEU DO AMANHÃ"
+          },
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, informações, explorações e perguntas sobre a época de grandes mudanças em que vivemos e reflexões sobre os diferentes caminhos que se abrem para o futuro. O Amanhã é uma construção da qual cada pessoa participa, em sua cidadania. A partir das perspectivas da sustentabilidade e da convivência, o Museu oferece ao visitante uma jornada rumo a futuros possíveis, passando por grandes perguntas que a Humanidade sempre se fez. De onde viemos? Quem somos? Onde estamos? Para onde vamos? Como queremos ir?. Site Museu do Amanhã"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://assets.bileto.sympla.com.br/eventmanager/production/10rk670buge37oq3hchm052g1lr1uqjvm2lide44el1b5ohailtk1cc8hclsbks1vdghpcls4hid8p4lh22i2lujo78984hfgs5js9n.png"
+        ],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "result": {
+        "titulo": "museu de ciências no Rio de Janeiro",
+        "texto": "Museu do Amanhã Vista externa Informações gerais Tipo Científico, artístico, histórico, memorial, expositório. Arquiteto(a) Santiago Calatrava Inauguração de (10anos) 17 de dezembro 2015 Capacidade 300 humano Curador Prefeitura do Rio de Janeiro Website museudoamanha.org.br Altura 20,85 metro Andares 3 Área 15 000m² Geografia País Brasil Localidade , no Rio de Janeiro Rio de Janeiro Coordenadas 22° 53′ 38″ S, 43° 10′ 45″ O Localização em mapa dinâmico O é um construído no do , no . O prédio, projeto do arquiteto espanhol , foi erguido ao lado da , na (mais precisamente no ). Sua construção teve o apoio da e teve o custo total de cerca de 230 milhões de . O edifício foi inaugurado em 17 de dezembro de 2015 com a presença da então e recebeu cerca de 25 mil visitantes em seu primeiro de funcionamento. Museu do Amanhã museu município Rio de Janeiro Brasil Santiago Calatrava Praça Mauá zona portuária Píer Mauá Fundação Roberto Marinho reais 1 [ ] presidente do Brasil Dilma Rousseff 2 [ ] fim de semana 3 [ ] O antigo desativado passou a abrigar uma construção , e que, atualmente, é um da local e cultural da cidade do Rio de Janeiro. A proposta da instituição é ser um museu de artes e ciências, além de contar com mostras que alertam sobre os perigos das , da e do colapso social. O edifício conta com espinhas solares que se movem ao longo da , projetadas para adaptar-se às mudanças das condições ambientais. A exposição principal é majoritariamente e foca em ao invés de . O museu tem parcerias com importantes e instituições científicas globais e coleta de dados em tempo real sobre o clima e a população de agências espaciais e das . A instituição também tem de várias áreas, como , e . píer pós-moderna orgânica sustentável ícone identidade 4 [ ] mudanças climáticas degradação ambiental claraboia digital ideias objetos 1 [ ] universidades brasileiras Nações Unidas consultores astronautas cientistas sociais climatologistas 1 [ ] Como uma das âncoras do projeto de urbana chamado , o museu recebeu, em 2015, como antes de sua inauguração, a escultura , do renomado artista norte-americano . O trabalho consiste de uma de vinte pontas e seis metros de que foi instalado no do museu, em frente à . A escultura metálica, antes da doação para acervo permanente a céu aberto do museu, esteve em exposição na cidade de . revitalização Porto Maravilha 5 [ ] doação Puffed Star II Frank Stella estrela diâmetro espelho d'água Baía de Guanabara 6 [ ] Nova York 7 [ ] Um dos objetivos da construção do museu foi fortalecer a identidade cultural e internacional da cidade do Rio de Janeiro. A cidade do sempre foi muito conhecida pelas suas praias e eventos, como o , mas havia a necessidade do fortalecimento da paradiplomacia cultural. Outras cidades, como e , também são muito conhecidas por seus acervos culturais. O Museu foi apresentado como um ícone da reurbanização da zona portuária. Cristo Redentor carnaval Londres Paris 4 [ ] 8 [ ] Conceito [ editar | editar código ] Interior do edifício Na parte inferior, a escultura de . Frank Stella O Museu do Amanhã foi erguido no , em meio a uma grande área verde. São cerca de 30 mil metros quadrados, com , espelhos d'água, e área de lazer. O prédio tem 15 mil metros quadrados e arquitetura sustentável, baseada nos elementos da natureza. O projeto arquitetônico, concebido por Calatrava, utiliza recursos naturais do local - como, por exemplo, a água da , utilizada na do interior do museu e reutilizada no espelho d'água. Calatrava disse que se inspirou nas do ao projetar o edifício. Píer Mauá jardins ciclovia 9 [ ] Baía de Guanabara climatização bromélias Jardim Botânico do Rio de Janeiro 1 [ ] O local reúne , e conhecimento dentro de sustentabilidade. ciência tecnologia 9 [ ] O projeto do Museu do Amanhã foi totalmente inspirado pela paisagem da zona portuária e da . Como parte integrante do , foi feita a demolição do no intuito de revitalizar a região portuária do Rio. No telhado da construção, grandes estruturas de , que se movimentam como asas, servem de base para placas de captação de . Com isso, o Museu do Amanhã busca a certificação (Liderança em Energia e Projeto Ambiental), concedida pelo (USGBC). Baía de Guanabara Projeto Porto Maravilha Elevado da Perimetral aço energia solar Leed Green Building Council 10 [ ] A pretensão do Museu do Amanhã é inaugurar uma nova geração de museus de ciências no mundo, sendo considerado \"de terceira geração\", com uma concepção que o posiciona como o primeiro museu global de \"terceira geração\". A \"primeira geração\" de museus é voltada para os vestígios do passado, como os museus de . A \"segunda geração\" busca difundir as evidências do presente, como os museus de ciência e tecnologia. A \"terceira geração\" destina-se a expor as mudanças, perguntas e a exploração de possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de contribuição para a construção do futuro. Trata-se de uma experiência , feita por meio de tecnologias . história natural carioca 11 [ ] sensorial interativas 8 [ ] Exposição principal [ editar | editar código ] A exposição principal do Museu do Amanhã funciona no segundo andar do prédio, e foi idealizada pelo em junto a uma equipe de consultores que trabalharam na concepção do acervo. A seção convida o visitante a passar por uma experiência de cinco grandes narrativas que percorrem os pavilhões: Cosmos, Terra, Antropoceno, Amanhãs e Nós. Elas trazem a experiência da vida na terra com ângulos e recortes temporais distintos. Juntos, os materiais da exposição principal reúnem mais de 40 experiências diferentes realizadas em três : , e , e ganha novas peças a cada ano. Desde a inauguração do Museu até julho de 2017, o acervo fixo recebeu 234 atualizações, como o acréscimo de , ilustrações, informações e . doutor cosmologia Luiz Alberto Oliveira línguas português espanhol inglês 12 [ ] fotos vídeos 13 [ ] Cosmos [ editar | editar código ] O primeiro módulo de visitação da exposição principal é o Cosmos. Nesse pavilhão, um grupo de visitantes é formado para entrar em um revestido com painéis de reprodução de vídeo, onde eles assistem a uma obra de cerca de 8 minutos, em 360 graus, realizada pela produtora brasileira . O filme traça uma narrativa sobre a formação do universo e da vida na terra com sobreposições de animações digitais e imagens captadas em câmera que causam grande impacto sensorial ao público. O vídeo é transmitido conjuntamente a um texto narrado em português, sem , para que não seja desviada a atenção do visitante. domo audiovisual O2 Filmes 14 [ ] legenda 15 [ ] Terra [ editar | editar código ] Visitantes acompanhando a seção \"Terra\" da exposição principal do Museu do Amanhã. O objetivo dessa segunda etapa da exposição principal é fazer o visitante questionar sobre a pergunta \"Quem somos?\". Para essa seção, foram construídos três grandes de sete metros de altura. Um deles fala sobre a vida como matéria. Do lado de fora, é apresentado, por um painel luminoso, o planeta inteiro. Do lado de dentro, se expõe as movimentações que fazem o globo funcionar, como o fluxo dos ventos, dos oceanos e das cubos Terra placas tectônicas. 16 [ ] O segundo cubo, designado para representar a vida, mostra, na parede de fora, uma esquematização do dos seres vivos. Na parte de dentro, a segunda construção expõe imagens de diversos organismos que compõem um , como animais e plantas. DNA ecossistema 16 [ ] O terceiro e último cubo representa o e apresenta, na parte interna, imagens e ilustrações que retratam de diversos momentos, ações e da vida humana no planeta. pensamento sentimentos 16 [ ] Antropoceno [ editar | editar código ] Visitantes no centro dos painéis da seção \"Antropoceno\" da exposição principal do Museu do Amanhã. O terceiro recorte da exposição principal do Museu do Amanhã trata de como a ação do homem mudou a do planeta Terra, traçando um panorama atual e trazendo dados sobre os impacto",
+        "final": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "trecho_usado": "possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de contribuição para a construção do futuro. Trata-se de uma experiência , feita por meio de tecnologias . história natural carioca 11 [ ] sensorial interativas 8 [ ] Exposição principal [ editar | editar código ] A exposição principal do Museu",
+        "metadados": {
+          "titulo": "museu de ciências no Rio de Janeiro",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "800",
+            "og:title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2010-08-15T17:51:43Z",
+          "atualizado_em": "2026-05-19T02:04:33Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2010-08-15T17:51:43Z",
+            "dateModified": "2026-05-19T02:04:33Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "museu de ciências no Rio de Janeiro"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Científico, artístico, histórico, memorial, expositório.\nde (10anos) 17 de dezembro 2015\nPrefeitura do Rio de Janeiro\n, no Rio de Janeiro Rio de Janeiro\n22° 53′ 38″ S, 43° 10′ 45″ O\nLocalização em mapa dinâmico\nO é um construído no do , no . O prédio, projeto do arquiteto espanhol , foi erguido ao lado da , na (mais precisamente no ). Sua construção teve o apoio da e teve o custo total de cerca de 230 milhões de . O edifício foi inaugurado em 17 de dezembro de 2015 com a presença da então e recebeu cerca de 25 mil visitantes em seu primeiro de funcionamento. Museu do Amanhã museu município Rio de Janeiro Brasil Santiago Calatrava Praça Mauá zona portuária Píer Mauá Fundação Roberto Marinho reais 1 [ ] presidente do Brasil Dilma Rousseff 2 [ ] fim de semana 3 [ ]\nO antigo desativado passou a abrigar uma construção , e que, atualmente, é um da local e cultural da cidade do Rio de Janeiro. A proposta da instituição é ser um museu de artes e ciências, além de contar com mostras que alertam sobre os perigos das , da e do colapso social. O edifício conta com espinhas solares que se movem ao longo da , projetadas para adaptar-se às mudanças das condições ambientais. A exposição principal é majoritariamente e foca em ao invés de . O museu tem parcerias com importantes e instituições científicas globais e coleta de dados em tempo real sobre o clima e a população de agências espaciais e das . A instituição também tem de várias áreas, como , e . píer pós-moderna orgânica sustentável ícone identidade 4 [ ] mudanças climáticas degradação ambiental claraboia digital ideias objetos 1 [ ] universidades brasileiras Nações Unidas consultores astronautas cientistas sociais climatologistas 1 [ ]\nComo uma das âncoras do projeto de urbana chamado , o museu recebeu, em 2015, como antes de sua inauguração, a escultura , do renomado artista norte-americano . O trabalho consiste de uma de vinte pontas e seis metros de que foi instalado no do museu, em frente à . A escultura metálica, antes da doação para acervo permanente a céu aberto do museu, esteve em exposição na cidade de . revitalização Porto Maravilha 5 [ ] doação Puffed Star II Frank Stella estrela diâmetro espelho d'água Baía de Guanabara 6 [ ] Nova York 7 [ ]\nUm dos objetivos da construção do museu foi fortalecer a identidade cultural e internacional da cidade do Rio de Janeiro. A cidade do sempre foi muito conhecida pelas suas praias e eventos, como o , mas havia a necessidade do fortalecimento da paradiplomacia cultural. Outras cidades, como e , também são muito conhecidas por seus acervos culturais. O Museu foi apresentado como um ícone da reurbanização da zona portuária. Cristo Redentor carnaval Londres Paris 4 [ ] 8 [ ]\nO Museu do Amanhã foi erguido no , em meio a uma grande área verde. São cerca de 30 mil metros quadrados, com , espelhos d'água, e área de lazer. O prédio tem 15 mil metros quadrados e arquitetura sustentável, baseada nos elementos da natureza. O projeto arquitetônico, concebido por Calatrava, utiliza recursos naturais do local - como, por exemplo, a água da , utilizada na do interior do museu e reutilizada no espelho d'água. Calatrava disse que se inspirou nas do ao projetar o edifício. Píer Mauá jardins ciclovia 9 [ ] Baía de Guanabara climatização bromélias Jardim Botânico do Rio de Janeiro 1 [ ]\nO local reúne , e conhecimento dentro de sustentabilidade. ciência tecnologia 9 [ ]\nO projeto do Museu do Amanhã foi totalmente inspirado pela paisagem da zona portuária e da . Como parte integrante do , foi feita a demolição do no intuito de revitalizar a região portuária do Rio. No telhado da construção, grandes estruturas de , que se movimentam como asas, servem de base para placas de captação de . Com isso, o Museu do Amanhã busca a certificação (Liderança em Energia e Projeto Ambiental), concedida pelo (USGBC). Baía de Guanabara Projeto Porto Maravilha Elevado da Perimetral aço energia solar Leed Green Building Council 10 [ ]\nA pretensão do Museu do Amanhã é inaugurar uma"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Museu do Amanhã"
+            ],
+            [
+              "Vista externa"
+            ],
+            [
+              "Informações gerais"
+            ],
+            [
+              "Tipo",
+              "Científico, artístico, histórico, memorial, expositório."
+            ],
+            [
+              "Arquiteto(a)",
+              "Santiago Calatrava"
+            ],
+            [
+              "Inauguração",
+              "17 de dezembro de 2015 (10 anos)"
+            ],
+            [
+              "Capacidade",
+              "300 humano"
+            ],
+            [
+              "Curador",
+              "Prefeitura do Rio de Janeiro"
+            ],
+            [
+              "Website",
+              "museudoamanha.org.br"
+            ],
+            [
+              "Altura",
+              "20,85 metro"
+            ],
+            [
+              "Andares",
+              "3"
+            ],
+            [
+              "Área",
+              "15 000 m²"
+            ],
+            [
+              "Geografia"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Localidade",
+              "Rio de Janeiro , no Rio de Janeiro"
+            ],
+            [
+              "Coordenadas",
+              "22° 53′ 38″ S, 43° 10′ 45″ O"
+            ],
+            [
+              "Localização em mapa dinâmico"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Porto Maravilha Baía de Guanabara Elevado da Perimetral"
+            ],
+            [
+              "Edifícios",
+              "Edifício Touring Edifício Joseph Gire Edifício Rio Branco 1 Edifício Almirante Tamandaré Arco do Teles Convento do Carmo Paço Imperial Estação Praça XV Ancorama",
+              ""
+            ],
+            [
+              "Museus e espaços culturais",
+              "AquaRio Armazém da Utopia Casa França-Brasil Centro Cultural Banco do Brasil Centro Cultural dos Correios Espaço Cultural da Marinha Museu do Amanhã Museu de Ar"
+            ],
+            [
+              "Igrejas e mosteiros",
+              "Mosteiro de São Bento Igreja da Candelária Igreja da Ordem Terceira do Carmo Igreja de Nossa Senhora do Monte do Carmo"
+            ],
+            [
+              "Praças e largos",
+              "Praça Muhammad Ali Praça Mauá Píer Mauá Praça Barão de Ladário Largo da Candelária Praça XV Largo da Misericórdia Praça Marechal Âncora"
+            ],
+            [
+              "Escolas",
+              "Escola de Magistratura do Estado do Rio de Janeiro"
+            ],
+            [
+              "Outras atrações",
+              "Rio Star Mural Etnias Estação Marítima de Passageiros do Porto do Rio de Janeiro Bolsa de Valores do Rio de Janeiro"
+            ],
+            [
+              "Paradas do VLT Carioca",
+              "Parada Utopia AquaRio Parada dos Navios/Valongo Parada dos Museus Parada Praça XV"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/6/63/Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/pt/thumb/8/88/LogoMuseuDoAmanh%C3%A3.png/330px-LogoMuseuDoAmanh%C3%A3.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/330px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Bandeira_do_estado_do_Rio_de_Janeiro.svg/20px-Bandeira_do_estado_do_Rio_de_Janeiro.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&amp;domain=pt.wikipedia.org&amp;title=Museu_do_Amanh%C3%A3&amp;revid=72268483&amp;groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&amp;parser=parsoid",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Museu_do_Amanh%C3%A3_em_sua_inaugura%C3%A7%C3%A3o_01.jpg/250px-Museu_do_Amanh%C3%A3_em_sua_inaugura%C3%A7%C3%A3o_01.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-5ac71f65ac46",
+            "type": "image",
+            "title": "museu de ciências no Rio de Janeiro",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f28ef2f7b3ea",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&domain=pt.wikipedia.org&title=Museu_do_Amanh%C3%A3&revid=72268483&groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&domain=pt.wikipedia.org&title=Museu_do_Amanh%C3%A3&revid=72268483&groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&parser=parsoid",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-355ea4f50b5f",
+            "type": "image",
+            "title": "Wd",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wd",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://amanhateca.org.br/",
+      "result": {
+        "titulo": "Museu do Amanhã",
+        "texto": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+        "final": "https://amanhateca.org.br/",
+        "trecho_usado": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+        "metadados": {
+          "titulo": "Museu do Amanhã",
+          "descricao": "",
+          "canonica": "https://amanhateca.org.br/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://amanhateca.org.br/wp-content/uploads/2020/03/cropped-logo-1.jpg"
+        ],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://museudoamanha.org.br/",
+      "result": {
+        "titulo": "Museu do Amanhã",
+        "texto": "",
+        "final": "https://museudoamanha.org.br/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+      "result": {
+        "titulo": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+        "texto": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro. O é um museu de ciências aplicadas focado na exploração das oportunidades e desafios que a humanidade enfrentará nas próximas décadas. Inaugurado no final de 2015 na revitalizada (Zona Portuária do Rio), seu impressionante prédio projetado pelo arquiteto espanhol tornou-se um dos principais pontos turísticos modernos do Rio de Janeiro. Museu do Amanhã Praça Mauá Santiago Calatrava Diferente dos museus tradicionais, o Museu do Amanhã não guarda peças antigas nem objetos históricos; em vez disso, oferece uma experiência interativa, imersiva e baseada em dados científicos sobre mudanças climáticas, biodiversidade, crescimento populacional e tecnologia. O que Ver e Fazer no Museu do Amanhã A exposição principal é organizada em torno de cinco grandes perguntas filosóficas e científicas: 1. Exposição Principal (Os 5 Grandes Eixos) O percurso interativo no andar superior guia os visitantes por cinco zonas temáticas: Uma projeção imersiva em 360° num domo gigante sobre a criação do universo e da vida na Terra. De onde viemos? (Cosmos): Três grandes cubos que exploram a matéria, a vida e o pensamento humano. Quem somos? (Terra): Uma impactante instalação multimídia sobre o impacto da ação humana no planeta. Onde estamos? (Antropoceno): Ambientes interativos focados no futuro da energia, das cidades, da tecnologia e da longevidad. Para onde vamos? (Amanhãs): Um espaço de reflexão ética sobre nossas escolhas individuais e coletivas. Como queremos ir? (Nós): 2. Admirar a Arquitetura e os Espelhos d'Água A estrutura futurista possui coberturas móveis com painéis solares que acompanham a trajetória do sol e balanços que se projetam por mais de 70 metros sobre a Baía de Guanabara. Os grandes espelhos d'água ao redor utilizam água filtrada da própria baía para resfriar o edifício. 3. Passear pela Praça Mauá e Boulevard Olímpico Ao sair do museu, aproveite para caminhar pelo , onde fica o famoso mural do artista Eduardo Kobra, e visitar o vizinho . Boulevard Olímpico Etnias MAR (Museu de Arte do Rio) Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro. Horários do Museu do Amanhã De terça-feira a domingo. Dias de funcionamento: Das 10h às 18h (última entrada às 17h). Horário de visitação: Fechado para manutenção. Segundas-feiras: Em períodos de alta temporada (janeiro, fevereiro, julho) e fins de semana, é altamente recomendável reservar ingressos com antecedência pela internet. Dica: Preços e Ingressos ~30 a 40 BRL. Ingresso Inteiro: ~15 a 20 BRL (estudantes, jovens de 15 a 29 anos com comprovante, idosos com 60 anos ou mais e pessoas com deficiência). Meia-entrada: Entrada Gratuita: Terças-feiras (Gratuito para todo o público). É obrigatório fazer a reserva prévia do ingresso gratuito no site oficial, pois os ingressos esgotam rapidamente. Existem combos com desconto para visitar ambos os museus no mesmo dia. Bilhete Único dos Museus (MAR + Museu do Amanhã): Como Comprar Ingressos Recomenda-se comprar os ingressos com antecedência pelo site oficial do museu. Ao adquirir a entrada online, você escolhe um para entrar, evitando longas filas na bilheteria física. horário agendado Como Chegar ao Museu do Amanhã O museu fica localizado na no Centro do Rio. A maneira mais fácil e prática de chegar é utilizando o VLT (VLT Carioca): Praça Mauá, 1 De VLT (A melhor opção): Pegue a ou do VLT e desça diretamente na estação , situada bem em frente ao museu. Linha 1 (Azul) Linha 8 Parada dos Museus De Metrô + VLT: Pegue a Linha 1 ou 2 do metrô até a estação ou , e faça a baldeação para a Linha 1 do VLT no sentido . Uruguaiana Cinelândia Praia Formosa / Rodoviária De Uber / Táxi: Solicite a corrida com destino à Praça Mauá. O tempo de trajeto a partir de Copacabana ou Ipanema varia entre 20 e 35 minutos dependendo do trânsito. Perguntas Frequentes (FAQ) Quanto tempo dura a visita ao Museu do Amanhã? A visita completa à exposição principal leva entre . Reserve cerca de 3 horas caso queira ver as exposições temporárias e caminhar pela praça. 1 hora e meia e 2 horas e meia É adequado para crianças? Sim, o museu é extremamente interativo, com telas sensíveis ao toque, jogos educativos e atrações visuais que prendem a atenção de crianças e jovens. O museu oferece guarda-volumes e Wi-Fi? Sim, o local conta com guarda-volumes, Wi-Fi gratuito, loja de lembranças, cafeteria e total acessibilidade para cadeirantes. É permitido tirar fotos no interior do museu? Sim, é permitido fotografar e filmar para uso pessoal, desde que sem o uso de flash ou tripés. Você Também Pode Gostar Guia do Jardim Botânico do Rio de Janeiro: Ingressos, Horários e Destaques Guia da Lagoa Rodrigo de Freitas: O que Fazer, Aluguéis e Dicas Guia do Cristo Redentor: Ingressos, Transporte e Dicas Práticas Guia do Pão de Açúcar: Ingressos, Bondinho e Dicas Úteis O que Fazer no Rio de Janeiro em 2026: Roteiro e 13 Atrações Imperdíveis",
+        "final": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+        "trecho_usado": "artista Eduardo Kobra, e visitar o vizinho . Boulevard Olímpico Etnias MAR (Museu de Arte do Rio) Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro. Horários do Museu do Amanhã De terça-feira a domingo. Dias de funcionamento: Das 10h às 18h (última entrada às 17h). Horário de visitação: Fechado para manutenção. Segundas-feiras: Em períodos de alta temporada (janeiro,",
+        "metadados": {
+          "titulo": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+          "descricao": "Guia completo para visitar o Museu do Amanhã no Rio de Janeiro em 2026: ingressos, terças gratuitas, horários, como chegar de VLT e dicas práticas.",
+          "canonica": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+          "og": {
+            "og:title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "og:description": "Guia completo para visitar o Museu do Amanhã no Rio de Janeiro em 2026: ingressos, terças gratuitas, horários, como chegar de VLT e dicas práticas.",
+            "og:url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "og:site_name": "Montanista Blog",
+            "og:locale": "pt_PT",
+            "og:image": "https://www.montanistablog.com/mmrio.jpg",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:image:alt": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "twitter:description": "Guia completo para visitar o Museu do Amanhã no Rio de Janeiro em 2026: ingressos, terças gratuitas, horários, como chegar de VLT e dicas práticas.",
+            "twitter:image": "https://www.montanistablog.com/mmrio.jpg"
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Montanista Blog",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro.\nO é um museu de ciências aplicadas focado na exploração das oportunidades e desafios que a humanidade enfrentará nas próximas décadas. Inaugurado no final de 2015 na revitalizada (Zona Portuária do Rio), seu impressionante prédio projetado pelo arquiteto espanhol tornou-se um dos principais pontos turísticos modernos do Rio de Janeiro. Museu do Amanhã Praça Mauá Santiago Calatrava\nDiferente dos museus tradicionais, o Museu do Amanhã não guarda peças antigas nem objetos históricos; em vez disso, oferece uma experiência interativa, imersiva e baseada em dados científicos sobre mudanças climáticas, biodiversidade, crescimento populacional e tecnologia."
+          },
+          {
+            "titulo": "O que Ver e Fazer no Museu do Amanhã",
+            "texto": "A exposição principal é organizada em torno de cinco grandes perguntas filosóficas e científicas:"
+          },
+          {
+            "titulo": "1. Exposição Principal (Os 5 Grandes Eixos)",
+            "texto": "O percurso interativo no andar superior guia os visitantes por cinco zonas temáticas:\nUma projeção imersiva em 360° num domo gigante sobre a criação do universo e da vida na Terra. De onde viemos? (Cosmos):\nTrês grandes cubos que exploram a matéria, a vida e o pensamento humano. Quem somos? (Terra):\nUma impactante instalação multimídia sobre o impacto da ação humana no planeta. Onde estamos? (Antropoceno):\nAmbientes interativos focados no futuro da energia, das cidades, da tecnologia e da longevidad. Para onde vamos? (Amanhãs):\nUm espaço de reflexão ética sobre nossas escolhas individuais e coletivas. Como queremos ir? (Nós):"
+          },
+          {
+            "titulo": "2. Admirar a Arquitetura e os Espelhos d'Água",
+            "texto": "A estrutura futurista possui coberturas móveis com painéis solares que acompanham a trajetória do sol e balanços que se projetam por mais de 70 metros sobre a Baía de Guanabara. Os grandes espelhos d'água ao redor utilizam água filtrada da própria baía para resfriar o edifício."
+          },
+          {
+            "titulo": "3. Passear pela Praça Mauá e Boulevard Olímpico",
+            "texto": "Ao sair do museu, aproveite para caminhar pelo , onde fica o famoso mural do artista Eduardo Kobra, e visitar o vizinho . Boulevard Olímpico Etnias MAR (Museu de Arte do Rio)\nArquitectura moderna en el interior del Museo del Mañana en Río de Janeiro."
+          },
+          {
+            "titulo": "Horários do Museu do Amanhã",
+            "texto": "De terça-feira a domingo. Dias de funcionamento:\nDas 10h às 18h (última entrada às 17h). Horário de visitação:\nFechado para manutenção. Segundas-feiras:\nEm períodos de alta temporada (janeiro, fevereiro, julho) e fins de semana, é altamente recomendável reservar ingressos com antecedência pela internet. Dica:\n~30 a 40 BRL. Ingresso Inteiro:\n~15 a 20 BRL (estudantes, jovens de 15 a 29 anos com comprovante, idosos com 60 anos ou mais e pessoas com deficiência). Meia-entrada:\nEntrada Gratuita: Terças-feiras (Gratuito para todo o público). É obrigatório fazer a reserva prévia do ingresso gratuito no site oficial, pois os ingressos esgotam rapidamente.\nExistem combos com desconto para visitar ambos os museus no mesmo dia. Bilhete Único dos Museus (MAR + Museu do Amanhã):\nRecomenda-se comprar os ingressos com antecedência pelo site oficial do museu. Ao adquirir a entrada online, você escolhe um para entrar, evitando longas filas na bilheteria física. horário agendado"
+          },
+          {
+            "titulo": "Como Chegar ao Museu do Amanhã",
+            "texto": "O museu fica localizado na no Centro do Rio. A maneira mais fácil e prática de chegar é utilizando o VLT (VLT Carioca): Praça Mauá, 1\nPegue a ou do VLT e desça diretamente na estação , situada bem em frente ao museu. Linha 1 (Azul) Linha 8 Parada dos Museus\nPegue a Linha 1 ou 2 do metrô até a estação ou , e faça a baldeação para a Linha 1 do VLT no sentido . Uruguaiana Cinelândia Praia Formosa / Rodoviária\nSolicite a corrida com destino à Praça Mauá. O tempo de trajeto a partir de Copacabana ou Ipanema varia entre 20 e 35 minutos dependendo do trânsito."
+          },
+          {
+            "titulo": "Perguntas Frequentes (FAQ)",
+            "texto": ""
+          },
+          {
+            "titulo": "Quanto tempo dura a visita ao Museu do Amanhã?",
+            "texto": "A visita completa à exposição principal leva entre . Reserve cerca de 3 horas caso queira ver as exposições temporárias e caminhar pela praça. 1 hora e meia e 2 horas e meia"
+          },
+          {
+            "titulo": "É adequado para crianças?",
+            "texto": "Sim, o museu é extremamente interativo, com telas sensíveis ao toque, jogos educativos e atrações visuais que prendem a atenção de crianças e jovens."
+          },
+          {
+            "titulo": "O museu oferece guarda-volumes e Wi-Fi?",
+            "texto": "Sim, o local conta com guarda-volumes, Wi-Fi gratuito, loja de lembranças, cafeteria e total acessibilidade para cadeirantes."
+          },
+          {
+            "titulo": "É permitido tirar fotos no interior do museu?",
+            "texto": "Sim, é permitido fotografar e filmar para uso pessoal, desde que sem o uso de flash ou tripés.\nGuia do Jardim Botânico do Rio de Janeiro: Ingressos, Horários e Destaques\nGuia da Lagoa Rodrigo de Freitas: O que Fazer, Aluguéis e Dicas\nGuia do Cristo Redentor: Ingressos, Transporte e Dicas Práticas\nGuia do Pão de Açúcar: Ingressos, Bondinho e Dicas Úteis\nO que Fazer no Rio de Janeiro em 2026: Roteiro e 13 Atrações Imperdíveis"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.montanistablog.com/mmrio.jpg",
+          "https://www.montanistablog.com/_next/image?url=%2Flogo-brand.png&amp;w=256&amp;q=75",
+          "https://www.montanistablog.com/_next/image?url=https%3A%2F%2Fflagcdn.com%2Fw20%2Fbr.png&amp;w=48&amp;q=75",
+          "https://www.montanistablog.com/brasil/brasil77.jpg",
+          "https://www.montanistablog.com/mmrio1.jpg",
+          "https://www.montanistablog.com/joa4.jpg",
+          "https://www.montanistablog.com/arcla.png",
+          "https://www.montanistablog.com/brasil/countrybrasil1.jpeg",
+          "https://www.montanistablog.com/brasil/brasil78.jpg",
+          "https://www.montanistablog.com/lapa1.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-3ff61be3cc69",
+            "type": "image",
+            "title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "url": "https://www.montanistablog.com/mmrio.jpg",
+            "final_url": "https://www.montanistablog.com/mmrio.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-60d2f85e6a66",
+            "type": "image",
+            "title": "Logo de Montanista.",
+            "url": "https://www.montanistablog.com/_next/image?url=%2Flogo-brand.png&w=256&q=75",
+            "final_url": "https://www.montanistablog.com/_next/image?url=%2Flogo-brand.png&w=256&q=75",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo de Montanista.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9ae55e9b1341",
+            "type": "image",
+            "title": "Portugal",
+            "url": "https://www.montanistablog.com/_next/image?url=https%3A%2F%2Fflagcdn.com%2Fw20%2Fbr.png&w=48&q=75",
+            "final_url": "https://www.montanistablog.com/_next/image?url=https%3A%2F%2Fflagcdn.com%2Fw20%2Fbr.png&w=48&q=75",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Portugal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e160a7215d4d",
+            "type": "image",
+            "title": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro.",
+            "url": "https://www.montanistablog.com/brasil/brasil77.jpg",
+            "final_url": "https://www.montanistablog.com/brasil/brasil77.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vista exterior del Museo del Mañana en la Praça Mauá de Río de Janeiro.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9ab8cfaa629a",
+            "type": "image",
+            "title": "Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro.",
+            "url": "https://www.montanistablog.com/mmrio1.jpg",
+            "final_url": "https://www.montanistablog.com/mmrio1.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Arquitectura moderna en el interior del Museo del Mañana en Río de Janeiro.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bcaa3e35cf05",
+            "type": "image",
+            "title": "10 playas de Río de Janeiro - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/joa4.jpg",
+            "final_url": "https://www.montanistablog.com/joa4.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "10 playas de Río de Janeiro - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2210f545dd93",
+            "type": "image",
+            "title": "Arcos da Lapa en Río de Janeiro - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/arcla.png",
+            "final_url": "https://www.montanistablog.com/arcla.png",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Arcos da Lapa en Río de Janeiro - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b55c1779f356",
+            "type": "image",
+            "title": "Barra da Tijuca - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/brasil/countrybrasil1.jpeg",
+            "final_url": "https://www.montanistablog.com/brasil/countrybrasil1.jpeg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Barra da Tijuca - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f2667bf9afc2",
+            "type": "image",
+            "title": "Botafogo - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/brasil/brasil78.jpg",
+            "final_url": "https://www.montanistablog.com/brasil/brasil78.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Botafogo - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1adaae9d49a8",
+            "type": "image",
+            "title": "Catedral Metropolitana de Río de Janeiro - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/lapa1.jpg",
+            "final_url": "https://www.montanistablog.com/lapa1.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Catedral Metropolitana de Río de Janeiro - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a0110144d829",
+            "type": "image",
+            "title": "Como pagar en Rio de Janeiro - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/prio.png",
+            "final_url": "https://www.montanistablog.com/prio.png",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Como pagar en Rio de Janeiro - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3847f4a2fb9e",
+            "type": "image",
+            "title": "Copacabana - Rio-de-janeiro",
+            "url": "https://www.montanistablog.com/copaca.jpg",
+            "final_url": "https://www.montanistablog.com/copaca.jpg",
+            "source_title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "source_url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "publisher": "www.montanistablog.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Copacabana - Rio-de-janeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "a57a82f3fcee44943319",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303631-Activities-c49-Sao_Paulo_State_of_Sao_Paulo.html",
+            "title": "OS 15 MELHORES museus em São Paulo (2026) - Tripadvisor",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Museu da língua portuguesa é um lugar imperdível de SP. Aliado a um local histórico e com uma proposta extremamente... 7. Instituto Tomie Ohtake. O prédio é lin"
+          },
+          {
+            "id": "70ab471a821e3197dabc",
+            "url": "https://museu.igc.usp.br/",
+            "title": "Museu de Geociências",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Museu de Geociências dispõe de um grande acervo de rochas, minerais, meteoritos e fósseis exposto ao grande público: a nossa comunidade. As gemas sempre exerc"
+          },
+          {
+            "id": "7403ed62d7418a3ff184",
+            "url": "https://www.museudacidade.prefeitura.sp.gov.br/",
+            "title": "MCSP | Museu da Cidade de São Paulo – O Museu da Cidade de São Paulo ...",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "INSCREVA-SE Outubro e novembro Confira a programação gratuita do Museu da Cidade de São Paulo O Museu da Cidade de São Paulo oferece, nos."
+          },
+          {
+            "id": "f330d09ac6494fe030b7",
+            "url": "https://www.guiadasemana.com.br/na-cidade/galeria/museus-imperdiveis-em-sao-paulo",
+            "title": "23 museus imperdíveis para visitar em São Paulo pelo menos uma vez na vida",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Se você procura uma nova exposição para ver ou apenas um passeio diferente para o fim de semana, com certeza não faltam opções para explorar. São espaços com as"
+          },
+          {
+            "id": "95c3286cfb1bb2fc2671",
+            "url": "https://mz.usp.br/",
+            "title": "Museu de Zoologia da USP – Museu de Zoologia da USP",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Museu de Zoologia da Universidade de São Paulo tem como principal atividade compreender padrões e processos da Biodiversidade brasileira. Somos guardiões de u"
+          },
+          {
+            "id": "9efff0d43b1e41225275",
+            "url": "https://museudoipiranga.org.br/",
+            "title": "Início – Museu do Ipiranga - Conheça o Museu",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Descubra o Museu do Ipiranga, a sede do Museu Paulista em São Paulo. Um marco da história brasileira, o edifício, construído entre 1885 e 1890, celebra a Procla"
+          },
+          {
+            "id": "5409b23add007b91c51c",
+            "url": "https://museudoamanha.org.br/",
+            "title": "Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas p"
+          },
+          {
+            "id": "ac48abd8330c21c82de4",
+            "url": "https://museudoamanha.org.br/o-museu/sobre-o-museu",
+            "title": "Sobre o Museu | Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "The Museu do Amanhã is a space where science, art and innovation meet to explore the present and imagine the future. Em um momento de grandes transformações, so"
+          },
+          {
+            "id": "516ac61f45dfe2c1b6f2",
+            "url": "https://amanhateca.org.br/",
+            "title": "Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir d"
+          },
+          {
+            "id": "4f53fb37e8d4077cb44d",
+            "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu construído no município do Rio de Janeiro, no Brasil. O prédio, projeto do arquiteto espanhol Santiago Calatrava, foi erguido ao la"
+          },
+          {
+            "id": "b103078d6cb00641d741",
+            "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+            "title": "MUSEU DO AMANHÃ - Sympla",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, informações, explorações e perguntas sobre a época de grandes mudanças em que vivemos"
+          },
+          {
+            "id": "e88d98dd66bacd4e7b12",
+            "url": "https://www.montanistablog.com/pt/destinos/brasil/rio-de-janeiro/museo-del-manana-rio-de-janeiro",
+            "title": "Museu do Amanhã: Ingressos, horários, dias gratuitos e como chegar",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Guia completo para visitar o Museu do Amanhã no Rio de Janeiro em 2026: ingressos, terças gratuitas, horários, como chegar de VLT e dicas práticas."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Museu do Amanhã História fontes oficiais)",
+        "bing (consulta reformulada 'Museu do Amanhã'): 6 resultados"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Museu do Amanhã História fontes oficiais",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "Museu do Amanhã",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": []
+    }
+  ],
+  "request_clock_reference": "2026-10-25T02:18:31.621546+00:00",
+  "source_revision": "ad16f213b074680c46aa0504dea6662892885640",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

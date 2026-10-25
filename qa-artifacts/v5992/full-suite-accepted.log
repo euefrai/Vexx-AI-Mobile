@@ -1,0 +1,45 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+.................................s...................................... [ 23%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 36%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+.....F
+================================== FAILURES ===================================
+______________________ test_screen_input_via_agente_fake ______________________
+
+    def test_screen_input_via_agente_fake():
+        with TestClient(server.app) as client:
+            csrf = _login(client)
+            with client.websocket_connect("/api/agent/ws",
+                                          headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
+                out = {}
+    
+                def tela():
+                    out["s"] = client.get("/api/screen?max_w=800&q=50",
+                                         headers={"X-CSRF-Token": csrf})
+    
+                t = threading.Thread(target=tela)
+                t.start()
+                req = ws.receive_json()
+>               assert req["type"] == "screen" and req["max_w"] == 800
+E               AssertionError: assert ('sess_revogados' == 'screen'
+E                 
+E                 - screen
+E                 + sess_revogados)
+
+tests\test_remoto.py:157: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_remoto.py::test_screen_input_via_agente_fake - AssertionErr...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 724 passed, 1 skipped, 1 warning in 300.78s (0:05:00)

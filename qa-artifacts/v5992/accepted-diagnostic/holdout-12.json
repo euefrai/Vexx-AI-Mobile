@@ -1,0 +1,2599 @@
+{
+  "id": "holdout-12",
+  "category": "technology_news",
+  "query": "Novidades sobre baterias de estado sólido fontes originais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.801,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "notícias baterias de estado sólido",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "notícias baterias de estado sólido",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "notícias baterias de estado sólido",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo\" site:insideevs.uol.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 140871
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6331
+    },
+    {
+      "url": "https://www.bing.com/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4644
+    },
+    {
+      "url": "https://insideevs.uol.com.br",
+      "final": "https://insideevs.uol.com.br",
+      "chars": 772165
+    },
+    {
+      "url": "https://insideevs.uol.com.br/rss/news/all/",
+      "final": "https://insideevs.uol.com.br/rss/news/all/",
+      "chars": 13837
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22CATL+e+BYD+aceleram+baterias+de+estado+s%C3%B3lido%2C+mas+2027+ser%C3%A1+s%C3%B3+o+come%C3%A7o%22+site%3Ainsideevs.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22CATL+e+BYD+aceleram+baterias+de+estado+s%C3%B3lido%2C+mas+2027+ser%C3%A1+s%C3%B3+o+come%C3%A7o%22+site%3Ainsideevs.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4544
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "final": "https://g1.globo.com/",
+      "chars": 889422
+    },
+    {
+      "url": "https://noticias.uol.com.br/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.cnnbrasil.com.br/",
+      "final": "https://www.cnnbrasil.com.br/",
+      "chars": 1021543
+    },
+    {
+      "url": "https://noticias.r7.com/",
+      "final": "https://noticias.r7.com/",
+      "chars": 1243275
+    },
+    {
+      "url": "https://www.terra.com.br/noticias/",
+      "final": "https://www.terra.com.br/noticias/",
+      "chars": 353505
+    },
+    {
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "final": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+      "chars": 1878066
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "notícias baterias de estado sólido",
+    "domain": "news",
+    "original_request": "Novidades sobre baterias de estado sólido fontes originais",
+    "resolved_request": "Novidades sobre baterias de estado sólido fontes originais",
+    "parameters": {
+      "topic": "baterias de estado sólido"
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-25T02:19:27.081269+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "topic": "baterias de estado sólido"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "eb1378c560246b9a2a3d",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+        "title": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "4fd21506ee90e1edea29",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+        "title": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Sat, 24 Oct 2026 06:45:48 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0cdf36cd506fb726f490",
+        "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZndOelJtN0NCV1dQc0tNQmViempnQ0dydjQwNzNfblJ5aFE0Ql9Ddk9SVktLb3hpWVpmZk93cEE0aU9iRnFhdEJYM3BqRjlhRTNOdjhUc043bFJmQXZsQk8yT2ZwS2NCUWk3Z0dsd1R1cW81cXdOT1lpNE81X2d5ODlod0J2ZHowajFfRkVxeUVEZlQybHZPMWJTR0JmVTh5S3d3RWJ2MVlkaktuamlKM1hyZXVic0E4LUxvN0IyNWQycjkwMlM5TW5JTFdQdTFzVjN0S2JHQdIB5gFBVV95cUxNdjdCaTN1N3dDUFFGUU9oXzJ1X2N3MVp4TVI2ZmY1emk0RHZ6U0ZuT2ZMOHNBUWZXWGdZSm1MMGVFZC1OMXQ0aThRYVBTUGFuaHB1RnJFenZ3Mndfa243SFMzajZhODJNU1d2NmZsRG1mZ1lKeVFKeEVzM2d",
+        "title": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 - Valor Econômico",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Tue, 21 Apr 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 Valor Econômico",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "735728c589adf30f385d",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+        "title": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Thu, 22 Oct 2026 18:51:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "950f619a25d3597b0815",
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+        "title": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Tue, 18 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "159629efc4e40b660600",
+        "url": "https://g1.globo.com/",
+        "title": "g1 - O portal de notícias da Globo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 01:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuc",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://g1.globo.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "ee3627b9f5ae3e28a55f",
+        "url": "https://noticias.uol.com.br/",
+        "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 02:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "63b2c72b28f5501a2f17",
+        "url": "https://www.cnnbrasil.com.br/",
+        "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "2022-06-23T15:04:17-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "AO VIVO: Cartagena: História, cultura e gastronomia | CNN Viagem &amp; Gastronomia CNN VIAGEM & GASTRONOMIA - Assista agora à programação ao vivo da CNN Brasil",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 159,
+        "final_url": "https://www.cnnbrasil.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "0c8dfe3f89ae7be3b0a8",
+        "url": "https://noticias.r7.com/",
+        "title": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "sex., 11 ago. 2023 12:40:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Site Oficial Entrevistas Fotos Novidades Quizzes Vídeos Íntegra Acre A Ira do Herdeiro Home Notícias Amazonas no Ar Amazonas Record Balanço Geral Manaus Amor em",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 5407,
+        "final_url": "https://noticias.r7.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "cef1b7fdac83217e2a96",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMC1KUFlOekFveTN0Sy1KcWt1R1JZU3o0ekZHRkJxaFl2U1pic24wUmYzWHVLTmk0TVBDVlRMbVBQUkRZUkZwSTVFLWFYOHQ3bzhNWC1DYmh3aTFMVDA1bGZRdEJFd2VrbVZ4S0dvUXcybFJpNEVRck82a0tLaG5pVTl1bG5zZ3ZYOUxPSmNxV3pvT0ROUXNPeGRtTG51NW5xOERjSmJUQ00wYUlFaXZaNDdHc2VpRDYyelcyRHg3ZU1ERXpxVzdtQ2pPVF81NEtzLUxRSklsdlNvSHczRFFLVg?oc=5",
+        "title": "Nova bateria promete revolucionar carros elétricos; entenda - Terra",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Mon, 24 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Nova bateria promete revolucionar carros elétricos; entenda Terra",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "7c9e707ac422f77f6562",
+        "url": "https://www.terra.com.br/noticias/",
+        "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 02:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pesquisa BTG-Nexus: Flávio Bolsonaro tem 50,5% em votos válidos no 2º turno e Lula, 49,5%; cenário é de empate técnico",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 118,
+        "final_url": "https://www.terra.com.br/noticias/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "047cd59c18bcf5d75b6f",
+        "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+        "title": "Google Notícias",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 02:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Notícias Google Notícias Suas notícias Hoje 35 ° 24 ° seg. 33 ° 24 ° ter. 27 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2034,
+        "final_url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "INDEX_PAGE",
+          "REDIRECT_TO_AGGREGATOR"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos tele",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "g1 - O portal de notícias da Globo",
+      "source_url": "https://g1.globo.com/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-56d8b59ede85",
+      "type": "image",
+      "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-14b92c9f90e8",
+      "type": "image",
+      "title": "Logo CNN Brasil",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo CNN Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f0113dcd3110",
+      "type": "image",
+      "title": "Caio Junqueira",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Caio Junqueira",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cc1aa81db9a3",
+      "type": "image",
+      "title": "Larissa Rodrigues",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Larissa Rodrigues",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0ba7beb4bc74",
+      "type": "image",
+      "title": "Iuri Pitta",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Iuri Pitta",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f94763fae17b",
+      "type": "image",
+      "title": "Julliana Lopes",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Julliana Lopes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-39ef96938452",
+      "type": "image",
+      "title": "Pedro Venceslau",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Pedro Venceslau",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9be8563a97ad",
+      "type": "image",
+      "title": "Edilene Lopes",
+      "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+      "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+      "source_title": "CNN Brasil",
+      "source_url": "https://www.cnnbrasil.com.br/",
+      "publisher": "admin.cnnbrasil.com.br",
+      "date": "2022-06-23T15:04:17-03:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Edilene Lopes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://g1.globo.com/",
+      "titulo": "g1 - O portal de notícias da Globo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 01:56:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://g1.globo.com/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "dom., 25 out. 2026 01:56:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.cnnbrasil.com.br/",
+      "titulo": "CNN Brasil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2022-06-23T15:04:17-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.cnnbrasil.com.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2022-06-23T15:04:17-03:00"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://noticias.r7.com/",
+      "titulo": "R7.com",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sex., 11 ago. 2023 12:40:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://noticias.r7.com/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "sex., 11 ago. 2023 12:40:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "notícias baterias de estado sólido",
+      "items": [
+        {
+          "titulo": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+          "trecho": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "InsideEVs Brasil",
+          "publisher_url": "https://insideevs.uol.com.br",
+          "meta": {
+            "publicado_em": "Fri, 14 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.75,
+          "pagina_de_indice": true,
+          "relevancia": 17.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Fri, 14 Aug 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+          "trecho": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Notícias ao Minuto",
+          "publisher_url": "https://www.noticiasaominuto.com",
+          "meta": {
+            "publicado_em": "Sat, 24 Oct 2026 06:45:48 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.75,
+          "pagina_de_indice": true,
+          "relevancia": 17.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 06:45:48 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+          "trecho": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Mecânica Online",
+          "publisher_url": "https://mecanicaonline.com.br",
+          "meta": {
+            "publicado_em": "Thu, 22 Oct 2026 18:51:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "pagina_de_indice": true,
+          "relevancia": 12.7,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 22 Oct 2026 18:51:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+          "trecho": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Quatro Rodas",
+          "publisher_url": "https://quatrorodas.abril.com.br",
+          "meta": {
+            "publicado_em": "Tue, 18 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 18 Aug 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 - Valor Econômico",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZndOelJtN0NCV1dQc0tNQmViempnQ0dydjQwNzNfblJ5aFE0Ql9Ddk9SVktLb3hpWVpmZk93cEE0aU9iRnFhdEJYM3BqRjlhRTNOdjhUc043bFJmQXZsQk8yT2ZwS2NCUWk3Z0dsd1R1cW81cXdOT1lpNE81X2d5ODlod0J2ZHowajFfRkVxeUVEZlQybHZPMWJTR0JmVTh5S3d3RWJ2MVlkaktuamlKM1hyZXVic0E4LUxvN0IyNWQycjkwMlM5TW5JTFdQdTFzVjN0S2JHQdIB5gFBVV95cUxNdjdCaTN1N3dDUFFGUU9oXzJ1X2N3MVp4TVI2ZmY1emk0RHZ6U0ZuT2ZMOHNBUWZXWGdZSm1MMGVFZC1OMXQ0aThRYVBTUGFuaHB1RnJFenZ3Mndfa243SFMzajZhODJNU1d2NmZsRG1mZ1lKeVFKeEVzM2d",
+          "trecho": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 Valor Econômico",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Valor Econômico",
+          "publisher_url": "https://valor.globo.com",
+          "meta": {
+            "publicado_em": "Tue, 21 Apr 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZndOelJtN0NCV1dQc0tNQmViempnQ0dydjQwNzNfblJ5aFE0Ql9Ddk9SVktLb3hpWVpmZk93cEE0aU9iRnFhdEJYM3BqRjlhRTNOdjhUc043bFJmQXZsQk8yT2ZwS2NCUWk3Z0dsd1R1cW81cXdOT1lpNE81X2d5ODlod0J2ZHowajFfRkVxeUVEZlQybHZPMWJTR0JmVTh5S3d3RWJ2MVlkaktuamlKM1hyZXVic0E4LUxvN0IyNWQycjkwMlM5TW5JTFdQdTFzVjN0S2JHQdIB5gFBVV95cUxNdjdCaTN1N3dDUFFGUU9oXzJ1X2N3MVp4TVI2ZmY1emk0RHZ6U0ZuT2ZMOHNBUWZXWGdZSm1MMGVFZC1OMXQ0aThRYVBTUGFuaHB1RnJFenZ3Mndfa243SFMzajZhODJNU1d2NmZsRG1mZ1lKeVFKeEVzM2d",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.75,
+          "pagina_de_indice": true,
+          "relevancia": 17.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZndOelJtN0NCV1dQc0tNQmViempnQ0dydjQwNzNfblJ5aFE0Ql9Ddk9SVktLb3hpWVpmZk93cEE0aU9iRnFhdEJYM3BqRjlhRTNOdjhUc043bFJmQXZsQk8yT2ZwS2NCUWk3Z0dsd1R1cW81cXdOT1lpNE81X2d5ODlod0J2ZHowajFfRkVxeUVEZlQybHZPMWJTR0JmVTh5S3d3RWJ2MVlkaktuamlKM1hyZXVic0E4LUxvN0IyNWQycjkwMlM5TW5JTFdQdTFzVjN0S2JHQdIB5gFBVV95cUxNdjdCaTN1N3dDUFFGUU9oXzJ1X2N3MVp4TVI2ZmY1emk0RHZ6U0ZuT2ZMOHNBUWZXWGdZSm1MMGVFZC1OMXQ0aThRYVBTUGFuaHB1RnJFenZ3Mndfa243SFMzajZhODJNU1d2NmZsRG1mZ1lKeVFKeEVzM2d",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 21 Apr 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Nova bateria promete revolucionar carros elétricos; entenda - Terra",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMC1KUFlOekFveTN0Sy1KcWt1R1JZU3o0ekZHRkJxaFl2U1pic24wUmYzWHVLTmk0TVBDVlRMbVBQUkRZUkZwSTVFLWFYOHQ3bzhNWC1DYmh3aTFMVDA1bGZRdEJFd2VrbVZ4S0dvUXcybFJpNEVRck82a0tLaG5pVTl1bG5zZ3ZYOUxPSmNxV3pvT0ROUXNPeGRtTG51NW5xOERjSmJUQ00wYUlFaXZaNDdHc2VpRDYyelcyRHg3ZU1ERXpxVzdtQ2pPVF81NEtzLUxRSklsdlNvSHczRFFLVg?oc=5",
+          "trecho": "Nova bateria promete revolucionar carros elétricos; entenda Terra",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Terra",
+          "publisher_url": "https://www.terra.com.br",
+          "meta": {
+            "publicado_em": "Mon, 24 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMC1KUFlOekFveTN0Sy1KcWt1R1JZU3o0ekZHRkJxaFl2U1pic24wUmYzWHVLTmk0TVBDVlRMbVBQUkRZUkZwSTVFLWFYOHQ3bzhNWC1DYmh3aTFMVDA1bGZRdEJFd2VrbVZ4S0dvUXcybFJpNEVRck82a0tLaG5pVTl1bG5zZ3ZYOUxPSmNxV3pvT0ROUXNPeGRtTG51NW5xOERjSmJUQ00wYUlFaXZaNDdHc2VpRDYyelcyRHg3ZU1ERXpxVzdtQ2pPVF81NEtzLUxRSklsdlNvSHczRFFLVg?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMC1KUFlOekFveTN0Sy1KcWt1R1JZU3o0ekZHRkJxaFl2U1pic24wUmYzWHVLTmk0TVBDVlRMbVBQUkRZUkZwSTVFLWFYOHQ3bzhNWC1DYmh3aTFMVDA1bGZRdEJFd2VrbVZ4S0dvUXcybFJpNEVRck82a0tLaG5pVTl1bG5zZ3ZYOUxPSmNxV3pvT0ROUXNPeGRtTG51NW5xOERjSmJUQ00wYUlFaXZaNDdHc2VpRDYyelcyRHg3ZU1ERXpxVzdtQ2pPVF81NEtzLUxRSklsdlNvSHczRFFLVg?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 24 Aug 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "notícias baterias de estado sólido",
+      "items": [
+        {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/",
+          "trecho": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:56:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://g1.globo.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://g1.globo.com/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 01:56:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Google Notícias",
+          "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+          "trecho": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:03:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://news.google.com/home?ceid=BR%3Apt-419&hl=pt-BR",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 1.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 02:03:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+          "url": "https://noticias.uol.com.br/",
+          "trecho": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://noticias.uol.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://noticias.uol.com.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 02:31:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+          "url": "https://www.cnnbrasil.com.br/",
+          "trecho": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 23 jun. 2022 15:00:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cnnbrasil.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.cnnbrasil.com.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "qui., 23 jun. 2022 15:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "url": "https://www.terra.com.br/noticias/",
+          "trecho": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://terra.com.br/noticias",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 2.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.terra.com.br/noticias/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 02:31:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+          "url": "https://noticias.r7.com/",
+          "trecho": "Acesse o Portal de Notícias R7 e veja os principais acontecimentos do dia no Brasil e no Mundo sobre saúde, política, tecnologia, ciência, trânsito e mais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 11 ago. 2023 12:40:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://noticias.r7.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://noticias.r7.com/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "sex., 11 ago. 2023 12:40:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo\" site:insideevs.uol.com.br",
+      "items": [
+        {
+          "titulo": "302 Moved - Google Help",
+          "url": "https://support.google.com/googletv/thread/200516743/wifi-is-connected-but-no-internet?hl=en",
+          "trecho": "302 Moved 302 Moved The document has moved here.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 19:15:00 GMT"
+          }
+        },
+        {
+          "titulo": "ipv4无internet访问权限和ipv6无网络访问权限怎么解决？ - 知乎",
+          "url": "https://www.zhihu.com/question/50553254",
+          "trecho": "我这个是用的网线，但原理大致相同，点击详细信息，查看IP地址以及DNS服务器（建议截图） 然后，打开手机等可以正常上网的设备 查看手机IP地址，照着那个更改，最后那个空可以稍微改一下（比如手机192.xxx.x.10，那你可以改成192.xxx.x.102这种） 可以多试几次 或者直接打开属性，双击internet协议 ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 21:05:00 GMT"
+          }
+        },
+        {
+          "titulo": "如何设置Internet协议（TCP/IPv4）ip地址连上网-百度经验",
+          "url": "https://jingyan.baidu.com/article/148a1921a6a1cd4d71c3b1e9.html",
+          "trecho": "如何设置Internet协议（TCP/IPv4）ip地址连上网,对插上网线，就想要上网的朋友，必须重新配置电脑的i地址，具体操作步骤如下：仅供参考：这里以wi7系统为例",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 18:10:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://g1.globo.com/",
+      "result": {
+        "titulo": "g1 - O portal de notícias da Globo",
+        "texto": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuco Minas Gerais Carros Carros primeira página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open banking Educação Educação Primeira Página Enem Guia de Carreiras Simulado Enem Teste Vocacional Universidades Empreendedorismo​ Empreendedorismo​ Primeira página pequenas empresas Menos 30 Fest Dia do Empreendedor Fato ou Fake Guia de compras Inovação Loterias Meio Ambiente Meio Ambiente Primeira Página Amazônia Globo Natureza Sustentabilidade​ Monitor da Violência Mundo Mundo Primeira página Guerra na Ucrânia Olha que legal Política Política Primeira Página Eleições 2026 Pop & Arte Pop & Arte Primeira Página Cinema Diversidade Games Música Tv e séries Circuito Sertanejo The Town Saúde Saúde Primeira página Bem Estar Coronavirus Tecnologia Tecnologia primeira página cibersegurança Trabalho e Carreira​ Trabalho e Carreira​ Primeira página Concursos Vagas de emprego Turismo e Viagem Turismo e Viagem Primeira Página Descubra o Brasil Jogos Jogos Todos os jogos Soletra Labirinto Combinado Dito Palavras cruzadas Palavras cruzadas mini Sudoku Caça-Palavras Assine Coquetel Eleições 2026 Guia de Compras Guia de Compras Primeira página Casa Celulares Lazer Moda e beleza Presentes Tecnologia Especial Vem Que Tem Especial Vem Que Tem Mercado Pago Carros Regiões Regiões centro-oeste centro-oeste Distrito Federal Distrito Federal Primeira página Bom Dia DF DF1 DF2 Globo Comunidade DF DF no campo O que fazer no DF Moto Week Goiás Goiás Primeira página Bom Dia GO Bom dia sábado JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte Mercado Imobiliário Mato Grosso Mato Grosso Primeira Página Bom Dia MT MT TV 1ª Edição MT Rural MT TV 2ª Edição Esporte Mato Grosso do Sul Mato Grosso do Sul Primeira Página Bom Dia MS MS TV 1ª Edição MS TV 2ª Edição MS Rural Esporte nordeste nordeste Alagoas Alagoas Primeira Página Esporte Bahia Bahia Primeira Página Jornal da manhã Bahia Meio Dia BATV Bahia Rural Esporte Ceará Ceará Primeira Página Bom Dia CE CETV 1ª Edição CETV 2ª Edição NE Rural Esporte Maranhão Maranhão Primeira Página Bom Dia Mirante JMTV 1ª Edição JMTV 2ª edição Mirante Rural Esporte Daqui Repórter Mirante Paraíba Paraíba Primeira Página Bom Dia Paraíba JPB 1ª Edição JPB 2ª Edição Paraíba Comunidade Esporte Pernambuco Pernambuco Recife e região Recife e região Primeira página Bom Dia PE NE 1 NE 2 Espaço PE Globo Comunidade PE Nordeste Viver e Preservar Educação Esporte Praia Limpa São João 2025 Caruaru e região Caruaru e região Primeira Página Bom Dia PE ABTV 1ª Edição ABTV 2ª Edição Globo Comunidade Esporte Paixão de Cristo Petrolina e região Petrolina e região Primeira Página Bom Dia Pernambuco GRTV 1ª Edição GRTV 2ª edição Esporte Piauí Piauí Primeira Página Bom Dia Piauí Bom dia Sábado PI TV 1ª edição PI TV 2ª Edição Clube Rural Esporte Rio Grande do Norte Rio Grande do Norte Primeira Página Bom Dia RN RN TV 1ª Edição RN TV 2ª edição Inter TV Rural Esporte Sergipe Sergipe Primeira página Bom Dia SE SETV 1ª Edição SETV 2ª Edição Estação Agrícola Esporte norte norte Acre Acre Primeira Página Bom Dia Amazônia JAC 1ª Edição JAC 2ª Edição Globo Esporte Acre Amapá Amapá Primeira Página Bom Dia Amazônia JAP 1ª Edição JAP 2ª Edição Amazônia Rural Esporte Amazonas Amazonas Primeira Página Bom Dia Amazônia JAM 1ª Edição JAM 2ª Edição Amazônia rural Esporte Pará Pará Belém e região Belém e região Primeira Página Bom Dia Pará Jornal Liberal 1ª Edição Jornal Liberal 2ª Edição Liberal Comunidade É do Pará Esporte Santarém e região Santarém e região Primeira Página Bom Dia Santarém Jornal Tapajós 1ª Edição Jornal Tapajós 2ª Edição Esporte Rondônia Rondônia Primeira Página Bom Dia Amazônia JRO 1ª Edição JRO 2ª Edição Amazônia Rural Esporte Roraima Roraima Primeira Página Bom Dia Amazônia JRR 1ª Edição JRR 2ª Edição Amazônia Rural Esporte Tocantins Tocantins Primeira Página Bom Dia Tocantins JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte sudeste sudeste Espírito Santo Espírito Santo Primeira Página Bom dia Espírito Santo Gazeta Meio Dia Boa Noite ES Jornal do Campo Agronégocios Educação Concursos Esporte Minas Gerais Minas Gerais Belo Horizonte e região Belo Horizonte e região Primeira Página Bom dia Minas MG1 MG2 Rolê nas Gerais Terra de Minas pelas cozinhas de minas Esporte Centro-Oeste Centro-Oeste Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Grande Minas Grande Minas Primeira página Inter TV Notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Sul de Minas Sul de Minas Primeira Página Bom dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da gente Esporte Triângulo Mineiro Triângulo Mineiro Primeira Página Bom dia Minas Uberlândia Uberlândia MG TV 1ª Edição MGTV 2ª edição Uberaba Uberaba MGTV 1ª Edição MGTV 2ª Edição MG Rural Integração notícia Concursos Esporte Globo Esporte Vales de Minas Gerais Vales de Minas Gerais Primeira Página Inter TV notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Zona da Mata Zona da Mata Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Globo Esporte Rio de Janeiro Rio de Janeiro Rio de Janeiro e região Rio de Janeiro e região Primeira Página Bom dia Rio RJ1 RJ2 Globo Comunidade RJ show da madonna guia rj Fora do ponto Esporte Rio Innovation Week Norte Fluminense Norte Fluminense Primeira Página Bom dia da inter Inter 1 Inter 2 Inter TV Rural Esporte Região dos Lagos Região dos Lagos Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Região Serrana Região Serrana Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Sul e Costa Verde Sul e Costa Verde Primeira Página Bom dia Rio RJ TV 1ª Edição RJ TV 2ª Edição Esporte bom dia sábado São Paulo São Paulo São Paulo e região São Paulo e região Primeira Página Bom Dia SP SP1 SP2 Antena Paulista Mistura Paulista O que fazer em SP Esporte Bauru e Marília Bauru e Marília Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem Notícias 2ª Edição Nosso Campo Esporte Campinas e região Campinas e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Concursos Esporte Itapetininga e região Itapetininga e região Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Antena Paulista Nosso Campo Resumo da Notícia Memória TEM Comunidade Esporte Mogi das Cruzes e Suzano Mogi das Cruzes e Suzano Primeira Página Bom Dia Diário Diário TV 1ª Edição Diário TV 2ª Edição Diário Comunidade Concursos Esporte Piracicaba e região Piracicaba e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Pres. Prudente e Região Ribeirão Preto e Franca Ribeirão Preto e Franca Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Rio Preto e Araçatuba Rio Preto e Araçatuba Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Nosso Campo Esporte Santos e região Santos e região Primeira Página Bom Dia Região Jornal Tribuna 1ª Edição Jornal Tribuna 2ª Edição Antena Paulista G1 em um Minuto Santos Viver Bem O Que Fazer Em Santos Culinária #13 Por Dentro do Porto Esporte São Carlos e Araraquara São Carlos e Araraquara Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª edição Terra da Gente Sorocaba e Jundiaí Sorocaba e Jundiaí Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem notícias 2ª Edição Nosso Campo Esporte Vale do Paraíba e região Vale do Paraíba e região Primeira Página Bom Dia Vanguarda Link Vanguarda Jornal Vanguarda Vanguarda Comunidade Esporte ",
+        "final": "https://g1.globo.com/",
+        "trecho_usado": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuco Minas Gerais Carros Carros primeira página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open",
+        "metadados": {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "descricao": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+          "canonica": "https://g1.globo.com/",
+          "og": {
+            "og:type": "website",
+            "og:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "og:title": "g1 - O portal de notícias da Globo",
+            "og:locale": "pt_BR",
+            "og:site_name": "G1",
+            "og:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "og:image:width": "1200",
+            "og:url": "https://g1.globo.com/"
+          },
+          "twitter": {
+            "twitter:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "g1 - O portal de notícias da Globo",
+            "twitter:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "G1",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Carnaval 2026 Carnaval 2026\nEmpreendedorismo​ Empreendedorismo​\nMeio Ambiente Meio Ambiente\nTrabalho e Carreira​ Trabalho e Carreira​\nTurismo e Viagem Turismo e Viagem\nGuia de Compras Guia de Compras\nEspecial Vem Que Tem Especial Vem Que Tem\ncentro-oeste centro-oeste\nDistrito Federal Distrito Federal\nMato Grosso do Sul Mato Grosso do Sul\nRecife e região Recife e região\nNordeste Viver e Preservar\nCaruaru e região Caruaru e região\nPetrolina e região Petrolina e região\nRio Grande do Norte Rio Grande do Norte\nBelém e região Belém e região\nSantarém e região Santarém e região\nEspírito Santo Espírito Santo\nMinas Gerais Minas Gerais\nBelo Horizonte e região Belo Horizonte e região\nCentro-Oeste Centro-Oeste\nGrande Minas Grande Minas\nSul de Minas Sul de Minas\nTriângulo Mineiro Triângulo Mineiro\nVales de Minas Gerais Vales de Minas Gerais\nZona da Mata Zona da Mata\nRio de Janeiro Rio de Janeiro\nRio de Janeiro e região Rio de Janeiro e região\nNorte Fluminense Norte Fluminense\nRegião dos Lagos Região dos Lagos\nRegião Serrana Região Serrana\nSul e Costa Verde Sul e Costa Verde\nSão Paulo e região São Paulo e região\nBauru e Marília Bauru e Marília\nCampinas e região Campinas e região\nItapetininga e região Itapetininga e região\nMogi das Cruzes e Suzano Mogi das Cruzes e Suzano\nPiracicaba e região Piracicaba e região\nRibeirão Preto e Franca Ribeirão Preto e Franca\nRio Preto e Araçatuba Rio Preto e Araçatuba\nSantos e região Santos e região\nSão Carlos e Araraquara São Carlos e Araraquara\nSorocaba e Jundiaí Sorocaba e Jundiaí\nVale do Paraíba e região Vale do Paraíba e região\nCuritiba e Região Curitiba e Região\nCampos Gerais e Sul Campos Gerais e Sul\nMeio Dia Paraná – Ponta Grossa\nNorte e Noroeste Norte e Noroeste\nMeio Dia Paraná – Maringá\nMeio Dia Paraná – Londrina\nMeio Dia Paraná - Noroeste\nOeste e Sudoeste Oeste e Sudoeste\nMeio Dia Paraná – Foz do Iguaçu\nMeio Dia Paraná – Cascavel\nRio Grande do Sul Rio Grande do Sul\nSanta Catarina Santa Catarina\nBom Dia Brasil Bom Dia Brasil\nquadros e séries quadros e séries\nGlobo Repórter Globo Repórter\nJornal da Globo Jornal da Globo\nJornal Nacional Jornal Nacional\nPequenas Empresas Pequenas Empresas\nProfissão Repórter Profissão Repórter\ndiálogos com mario sergio conti\nas histórias na globonews\nConverse com outras ideias\nredes sociais redes sociais\nMarília: O outro lado da sofrência\nDe onde vem o que eu como\nConteúdos publicitários Conteúdos publicitários\nAgenda de jogos do Flamengo\nAgenda de jogos do Corinthians\nAgenda de jogos do Grêmio\nAgenda de jogos do Palmeiras\nAgenda de jogos do Santos\nAgenda de jogos do São Paulo\nAgenda de jogos do Atlético MG\nAgenda de jogos do Fluminense\nAgenda de jogos do Botafogo\nAgenda de jogos do Cruzeiro\nInternacional Internacional\nAgenda de jogos do Internacional\nAthletico PR Athletico PR\nAgenda de jogos do Athletico PR\nAgenda de jogos do Fortaleza\nAgenda de jogos do América MG\nAgenda de jogos do Atlético GO\nAgenda de jogos do Juventude\nEntretenimento Entretenimento\nAcesse sua conta ou cadastre-se grátis"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+          "https://s2-g1.glbimg.com/B5vkn_7wUPPtL-0qPTRJLriE_pE=/0x0:565x318/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/B/R3wlSeRhmoC6HcBrDOxw/105abe3c-9bb7-4bea-90c8-8c0a702b1cf8-ezgif.com-optimize.gif",
+          "https://s2-g1.glbimg.com/byf0xElRfwI2RIWOWxFrX1ioYhU=/0x0:1280x720/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/l/Qaq4thRXeSt87QfbNl1g/flavio-e-lula-fotos.jpg",
+          "https://s2-g1.glbimg.com/pVIazlccvUHwOODrZN1YWH3vbmw=/0x0:1920x1080/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/i/M/7twQasSMihAtgvhn4cGQ/1-35-09-flavio-bolsonaro-globocop-24-oct-2026.mxf.jpg",
+          "https://s2-g1.glbimg.com/l648W6EEOBF_blebYF_eEF7rSOs=/0x0:1920x1080/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/W/BD9px0SHCWA96EWIRsXg/hn-geral-ato-lula-matarazo-jana-20261024-1432-frame-21768.jpeg",
+          "https://s2-g1.glbimg.com/9qCs6CmIzm0CHT72a5VzyoO8Y9k=/0x90:1600x990/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/j/P/SWmVpCSYe2ZiGlHFWwmQ/mega.jpeg",
+          "https://s2-g1.glbimg.com/zvTO1o6WCoEoLLHJ-EZcsT0k9qU=/0x0:1280x720/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/o/nBL4tCTdGkPwfAUlVlFg/montagem-horizontal-1280x720px.jpg",
+          "https://s2-g1.glbimg.com/8gxnX8GYvhDZxmPVruLQdEqr_vY=/0x0:1920x1080/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/N/lQLT7oTVeg2djuiYiuxg/thumb-videos-g1-12-.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-116632be447f",
+            "type": "image",
+            "title": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos tele",
+            "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "s.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e630729f6153",
+            "type": "document",
+            "title": "ultimas-noticias.html",
+            "url": "https://g1.globo.com/ultimas-noticias.html",
+            "final_url": "https://g1.globo.com/ultimas-noticias.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-9f139da7a3ab",
+            "type": "document",
+            "title": "principios-editoriais-do-grupo-globo.html",
+            "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-ebe26ebbabdf",
+            "type": "document",
+            "title": "universidades.html",
+            "url": "https://g1.globo.com/educacao/universidades.html",
+            "final_url": "https://g1.globo.com/educacao/universidades.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.cnnbrasil.com.br/",
+      "result": {
+        "titulo": "CNN Brasil",
+        "texto": "AO VIVO: Cartagena: História, cultura e gastronomia | CNN Viagem &amp; Gastronomia CNN VIAGEM & GASTRONOMIA - Assista agora à programação ao vivo da CNN Brasil",
+        "final": "https://www.cnnbrasil.com.br/",
+        "trecho_usado": "AO VIVO: Cartagena: História, cultura e gastronomia | CNN Viagem &amp; Gastronomia CNN VIAGEM & GASTRONOMIA - Assista agora à programação ao vivo da CNN Brasil",
+        "metadados": {
+          "titulo": "CNN Brasil",
+          "descricao": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+          "canonica": "https://www.cnnbrasil.com.br/",
+          "og": {
+            "og:title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "og:description": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "og:url": "https://www.cnnbrasil.com.br/",
+            "og:site_name": "CNN Brasil",
+            "og:locale": "pt_BR",
+            "og:image": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "og:image:width": "1280",
+            "og:image:height": "720",
+            "og:image:type": "image/jpeg",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:label1": "Written by",
+            "twitter:label2": "Est. reading time",
+            "twitter:data2": "menos de 1 minuto",
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@cnnbrasil",
+            "twitter:creator": "@cnnbrasil",
+            "twitter:title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "twitter:description": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "twitter:image": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2022-06-23T15:04:17-03:00",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "CNN Brasil",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "CNN VIAGEM & GASTRONOMIA - Assista agora à programação ao vivo da CNN Brasil",
+            "texto": ""
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+          "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&amp;h=56&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/BR_CNN_241026_AGR_TARDE_CLEAN_PT2_frame_25546_51d109.jpeg?w=306&amp;h=172&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/gol-giay-palmeiras-bragantino-e1792885062983.jpg?w=306&amp;h=172&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/09/mosteiro-de-sulema-na-turquia.png?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/OVNIS-1953-EUA-3.png?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/09/23947.jpg?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/VG-9.png?w=128&amp;h=112&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/kimi-antonelli-f1-e1792880402395.jpeg?w=128&amp;h=112&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/APURACAO-CNN-1-2.png?w=128&amp;h=112&amp;crop=1&amp;quality=90"
+        ],
+        "midia": [
+          {
+            "id": "med-56d8b59ede85",
+            "type": "image",
+            "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-14b92c9f90e8",
+            "type": "image",
+            "title": "Logo CNN Brasil",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo CNN Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f0113dcd3110",
+            "type": "image",
+            "title": "Caio Junqueira",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Caio Junqueira",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cc1aa81db9a3",
+            "type": "image",
+            "title": "Larissa Rodrigues",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Larissa Rodrigues",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0ba7beb4bc74",
+            "type": "image",
+            "title": "Iuri Pitta",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Iuri Pitta",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f94763fae17b",
+            "type": "image",
+            "title": "Julliana Lopes",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Julliana Lopes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-39ef96938452",
+            "type": "image",
+            "title": "Pedro Venceslau",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pedro Venceslau",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9be8563a97ad",
+            "type": "image",
+            "title": "Edilene Lopes",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Edilene Lopes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0147582a5470",
+            "type": "image",
+            "title": "Matheus Teixeira",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Matheus_TeixeiraBlog-e1768593558959.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Matheus_TeixeiraBlog-e1768593558959.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Matheus Teixeira",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7e47cca81ec1",
+            "type": "image",
+            "title": "Gustavo Uribe",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_gustavo_uribe_blog2-e1707507026677.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_gustavo_uribe_blog2-e1707507026677.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Gustavo Uribe",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a69960b48b32",
+            "type": "image",
+            "title": "David Uip",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/David_Uip-removebg-preview.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/David_Uip-removebg-preview.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "David Uip",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-604e9e4f5a5a",
+            "type": "image",
+            "title": "Adriana De Luca",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/1000716063-e1783470450810.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/1000716063-e1783470450810.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Adriana De Luca",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://noticias.r7.com/",
+      "result": {
+        "titulo": "R7.com",
+        "texto": "Site Oficial Entrevistas Fotos Novidades Quizzes Vídeos Íntegra Acre A Ira do Herdeiro Home Notícias Amazonas no Ar Amazonas Record Balanço Geral Manaus Amor em Ruínas As Sete Marias Até Onde Ele Vai Home Notícias Cidade Alerta BA Balanço Geral BA Bahia no AR Site oficial Enquetes Fotos Notícias Notícias Vídeos Íntegra Site oficial Enquetes Fotos Notícias Arquivo Vivo Podcast das Venenosas MISTÉRIO E JUSTIÇA Vídeos Íntegra Ben-Hur Branded Content Brasil Caminhoneiro Brasília Ceará Site oficial Enquetes Fotos Notícias Arquivo Vivo Narrativa de um Crime Vídeos Íntegra Site oficial Fotos Novidades CONTEÚDO EXCLUSIVO Podcast Cantinho Favorito Papo Reto Mitos e Verdades Express Prato de domingo Dicas de Cozinha Momento Venenosa Todos os vídeos Íntegra Home Capa Arroba Nerd ePipoca Estação Nerd J Box O Vício Multiverso Notícias Revista Bula Diversão Capa Bebê Mamãe Estrelando Feed TV Pop Mais Mix Me SPINOFF Capa Nova Brasil FM Site Oficial Enquetes Fotos Novidades Quizzes Vídeos Íntegra Home Capa Autoracing Home Arroba Nerd Click Grátis Estação Nerd Gamehall Gamer Point Gênio Quiz Jbox Muramasa O Vício Outer Space Overplay Fora de Jogo Capa Mundial de Clubes Mundial de Clubes - Tabela Mundial de Clubes - Lance a Lance Mundial de Clubes - Simulador de Jogos Brasileirão Série A Brasileirão Série A - Tabela Brasileirão Série B Copa do Brasil Copa do Brasil - Tabela Copa do Brasil - Lance a Lance Eliminatórias da Copa Eliminatórias da Copa - Tabela Guia do Boleiro Brasileirão Série A - Lance a Lance Jogada 10 Lance! Libertadores Libertadores - Tabela Libertadores - Lance a Lance Portal Times Giro do Apito Joga nas 11 Capa Live Basketball Br Outer Space Portal do Vale Tudo Espírito Santo Site oficial Fotos Notícias Vídeos Íntegra Home Notícias Agro Record Goiás Balanço Geral Goiás Cidade Alerta Goiás Esporte Goiano Goiás no Ar Goiás Record Site oficial Fotos Novidades Você e o Doutor Vídeos Íntegra Ao Vivo Home Agronegócios Bahia Ceará Cidades Direito do Consumidor Economia Educação É GOLPE Espírito Santo Guerra Israel X Hamas Guerra na Ucrânia Imposto de Renda Internacional Mato Grosso Mato Grosso do Sul Minas Gerais Paraíba Paraná Pernambuco Piauí Rio de Janeiro Rio Grande do Norte Rio Grande do Sul Santa Catarina São Paulo Saúde Tecnologia e Ciência Todas as Notícias Podcast Previsão do Tempo Site oficial JR Agro JR Business JR Entrevista JR Mundo JR Trade Todos os vídeos JR Na TV Home Notícias Balanço Geral Litoral Balanço Geral Vale Conexão Porto & Indústria Esporte Record SP Record Vale do Ribeira em Foco Visita na Record Mato Grosso Mato Grosso do Sul Minas Gerais Monitor7 Home Agronegócios Bahia Home Agro Record Balanço Geral DF Cidade Alerta DF DF no AR DF Record Ceará Cidades Direito do Consumidor Economia Educação Espírito Santo Guerra Israel X Hamas Guerra na Ucrânia Imposto de Renda Internacional Mato Grosso Mato Grosso do Sul Home Balanco Geral MG Cidade Alerta Minas MG no AR MG Record Home Notícias Agro Record Pará Balanço Geral Pará Cidade Alerta Pará Fala Pará Pará Record Visita na Record Paraíba Paraná Pernambuco Piauí Home Balanco Geral RJ Cidade Alerta RJ O Brasil que dá Gosto Rio Bom D+ Rio Que a Gente Gosta RJ no AR R7 Fala Comigo Rio Grande do Norte Rio Grande do Sul Santa Catarina Home Balanço Geral Manhã Balanço Geral Cidade Alerta Saúde Tecnologia e Ciência Novela Jesus Paraná Quilos Mortais R7 APPs R7 Cupons R7 Entrevista R7 Estúdio Home Capa Arroba Nerd JBox Multiverso Notícias Muramasa O Vício Capa Arroba Nerd Click Grátis Estação Nerd GameHall Gamer Point Gênio Quiz JBox Muramasa O Vício Outer Space Overplay Capa Arroba Nerd Estação Nerd Estrelando JBox Legião dos Heróis Multiverso Notícias O Vício R7 Podcasts Home Área de Mulher Click Grátis Comidinhas do Chef Cultura Mix Olha que Receita Panelaterapia Rango em Casa Receitas de Pesos R7 Tempo R7 Trilhas Sonoras R7 Vídeos Site oficial Programação Comercial A Rainha da Pérsia A Terra Prometida Apocalipse Gênesis Jezabel Reis Balanço Geral Balanço Geral Manhã Câmera Record Cidade Alerta Doc Investigação Domingo Espetacular Fala Brasil Jornal da Record A Grande Conquista 2 Brasil Caminhoneiro Hoje em Dia Hora do faro Mundo Record Patrulha das Fronteiras Quilos Mortais The Love School Site Emissoras Sobre a Rede Emissoras RECORD Reclamação de Sinal Capa A Emissora Privacidade Agro Record News Aldeia News Alerta Brasil Conexão Record News Copinha Feminina Elas com a Bola Esporte Record News Estúdio News Geek Record News Hora News Inovação & Negócios Joga nas 11 Jornal da Record News Link News Mulheres no Comando Mulheres Positivas Mundo Record News News 19 Horas News das 10 Paulistão Feminino Record News Investigação Record News Rural Record News Séries Soltando os Bichos Zapping Todos os vídeos No Youtube Playplus Norte Nordeste Centro-Oeste Sudeste Sul Comercial HOME Notícias Balanço Geral RJ Cidade Alerta RJ Rio Bom D+ RJ no Ar R7 Fala Comigo Interior RJ Balanço Geral Interior RJ RJ Record Interior RJ Tudo a Ver Interior RJ Rio Grande do Norte Home Notícias Balanço Geral RS Cidade Alerta RS Guaíba no Ar Rio Grande Record Santa Catarina HOME Notícias Balanço Geral Manhã Balanço Geral SP Cidade Alerta SP Bauru Interior SP Agro Record Interior SP Balanço Geral Interior SP Cidade Alerta Interior SP Ribeirão Preto Rio Preto SP Record Interior SP Visita na Record Interior SP Site oficial Ao Vivo Fotos Novidades Vídeos Íntegra Home Só Notícia Boa",
+        "final": "https://noticias.r7.com/",
+        "trecho_usado": "Site Oficial Entrevistas Fotos Novidades Quizzes Vídeos Íntegra Acre A Ira do Herdeiro Home Notícias Amazonas no Ar Amazonas Record Balanço Geral Manaus Amor em Ruínas As Sete Marias Até Onde Ele Vai Home Notícias Cidade Alerta BA Balanço Geral BA Bahia no AR Site oficial Enquetes Fotos Notícias Notícias Vídeos Íntegra Site oficial Enquetes Fotos Notícias Arquivo Vivo Podcast das Venenosas",
+        "metadados": {
+          "titulo": "R7.com",
+          "descricao": "O R7 é um dos maiores portais do Brasil. Foi criado em 2009 e pertence ao Grupo Record. Oferece jornalismo e entretenimento a milhões de usuários, tanto na web como nas redes sociais, incluindo conteúdo da Record TV e Record News.",
+          "canonica": "https://noticias.r7.com",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:description": "Acesse o Portal de Notícias R7 e veja os principais acontecimentos do dia no Brasil e no Mundo sobre saúde, política, tecnologia, ciência, trânsito e mais.",
+            "og:title": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+            "og:image": "https://static.themebuilder.aws.arc.pub/newr7/1715348297499.jpg",
+            "og:image:alt": "Noticias",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:site_name": "Noticias R7"
+          },
+          "twitter": {
+            "twitter:description": "Acesse o Portal de Notícias R7 e veja os principais acontecimentos do dia no Brasil e no Mundo sobre saúde, política, tecnologia, ciência, trânsito e mais.",
+            "twitter:title": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+            "twitter:image": "https://static.themebuilder.aws.arc.pub/newr7/1715348297499.jpg",
+            "twitter:image:alt": "Noticias",
+            "twitter:site": "@https://twitter.com/portalr7",
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Noticias R7",
+          "tipo": "Organization",
+          "ld": {
+            "description": "O R7 é um dos maiores portais do Brasil. Foi criado em 2009 e pertence ao Grupo Record. Oferece jornalismo e entretenimento a milhões de usuários, tanto na web como nas redes sociais, incluindo conteúdo da Record TV e Record News."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Mundial de Clubes - Tabela\nMundial de Clubes - Lance a Lance\nMundial de Clubes - Simulador de Jogos\nBrasileirão Série A - Tabela\nCopa do Brasil - Lance a Lance\nEliminatórias da Copa - Tabela\nBrasileirão Série A - Lance a Lance\nLibertadores - Lance a Lance\nConexão Porto & Indústria\nBalanço Geral Interior RJ\nBalanço Geral Interior SP\nCidade Alerta Interior SP\nVisita na Record Interior SP"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://static.themebuilder.aws.arc.pub/newr7/1715348297499.jpg",
+          "https://sb.scorecardresearch.com/p?c1=2&amp;c2=14194541&amp;cv=4.4.0&amp;cj=1",
+          "https://static.themebuilder.aws.arc.pub/newr7/1706095623373.svg",
+          "https://static.themebuilder.aws.arc.pub/newr7/1755135270703.png",
+          "https://static.themebuilder.aws.arc.pub/newr7/1755135270706.svg",
+          "https://static.themebuilder.aws.arc.pub/newr7/1706095999590.jpg",
+          "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/BQQWMV5S3JBKHAS6NYEK25ULJU.png",
+          "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/D36DBNLPHJCVXJP5INXXHXK2Y4.jpg",
+          "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/MLTOZJE6PJEW5GXPPJ5OHHSHQE.jpg?auth=072dd95b928920e3a5515b2545b62835a9dd26069210337621e078f3217c119f&amp;smart=true&amp;width=542&amp;height=330",
+          "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/32UT5CUPPRCKRLSQXUFOKAWV5A.jpeg?auth=230ebe906e1e4dccff54446b7eb7963491338f2b03ca3a94ea104baf5846fc6c&amp;smart=true&amp;width=542&amp;height=330"
+        ],
+        "midia": [
+          {
+            "id": "med-2954ca897e10",
+            "type": "image",
+            "title": "Noticias",
+            "url": "https://static.themebuilder.aws.arc.pub/newr7/1715348297499.jpg",
+            "final_url": "https://static.themebuilder.aws.arc.pub/newr7/1715348297499.jpg",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "static.themebuilder.aws.arc.pub",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Noticias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a48f6427ffc5",
+            "type": "image",
+            "title": "comscore",
+            "url": "https://sb.scorecardresearch.com/p?c1=2&c2=14194541&cv=4.4.0&cj=1",
+            "final_url": "https://sb.scorecardresearch.com/p?c1=2&c2=14194541&cv=4.4.0&cj=1",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "sb.scorecardresearch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "comscore",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ece4495b2342",
+            "type": "image",
+            "title": "Logo R7.com",
+            "url": "https://static.themebuilder.aws.arc.pub/newr7/1706095623373.svg",
+            "final_url": "https://static.themebuilder.aws.arc.pub/newr7/1706095623373.svg",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "static.themebuilder.aws.arc.pub",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo R7.com",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ef92a3759e9a",
+            "type": "image",
+            "title": "RecordPlus",
+            "url": "https://static.themebuilder.aws.arc.pub/newr7/1755135270703.png",
+            "final_url": "https://static.themebuilder.aws.arc.pub/newr7/1755135270703.png",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "static.themebuilder.aws.arc.pub",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "RecordPlus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-59766595be6e",
+            "type": "image",
+            "title": "RecordPlus",
+            "url": "https://static.themebuilder.aws.arc.pub/newr7/1755135270706.svg",
+            "final_url": "https://static.themebuilder.aws.arc.pub/newr7/1755135270706.svg",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "static.themebuilder.aws.arc.pub",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "RecordPlus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-46dbe7c0591e",
+            "type": "image",
+            "title": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+            "url": "https://static.themebuilder.aws.arc.pub/newr7/1706095999590.jpg",
+            "final_url": "https://static.themebuilder.aws.arc.pub/newr7/1706095999590.jpg",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "static.themebuilder.aws.arc.pub",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0765d503b27f",
+            "type": "image",
+            "title": "Alt para imagem",
+            "url": "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/BQQWMV5S3JBKHAS6NYEK25ULJU.png",
+            "final_url": "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/BQQWMV5S3JBKHAS6NYEK25ULJU.png",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "cloudfront-us-east-1.images.arcpublishing.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Alt para imagem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ad10d55b590b",
+            "type": "image",
+            "title": "Alt para imagem",
+            "url": "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/D36DBNLPHJCVXJP5INXXHXK2Y4.jpg",
+            "final_url": "https://cloudfront-us-east-1.images.arcpublishing.com/newr7/D36DBNLPHJCVXJP5INXXHXK2Y4.jpg",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "cloudfront-us-east-1.images.arcpublishing.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Alt para imagem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-45a268508950",
+            "type": "image",
+            "title": "Combatentes do governo iemenita apoiado pela Arábia Saudita disparam um canhão sem recuo montado em um caminhão durante batalhas contra os houthis apoiados pelo",
+            "url": "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/SY772Z3EEBGLJE6GYYK6GN5JCM.JPG?auth=4a30b38d8950e4f6e39ff852f99af23b18617b1442bf5b615bbd8fd7ae2f1714&smart=true&width=696&height=464",
+            "final_url": "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/SY772Z3EEBGLJE6GYYK6GN5JCM.JPG?auth=4a30b38d8950e4f6e39ff852f99af23b18617b1442bf5b615bbd8fd7ae2f1714&smart=true&width=696&height=464",
+            "source_title": "R7.com",
+            "source_url": "https://noticias.r7.com/",
+            "publisher": "newr7-r7-prod.web.arc-cdn.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Combatentes do governo iemenita apoiado pela Arábia Saudita disparam um canhão sem recuo montado em um caminhão durante batalhas contra os houthis apoiados pelo Irã na frente de Jabal Han, a oeste de Taiz, em 21 de outubro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.terra.com.br/noticias/",
+      "result": {
+        "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+        "texto": "Pesquisa BTG-Nexus: Flávio Bolsonaro tem 50,5% em votos válidos no 2º turno e Lula, 49,5%; cenário é de empate técnico",
+        "final": "https://www.terra.com.br/noticias/",
+        "trecho_usado": "Pesquisa BTG-Nexus: Flávio Bolsonaro tem 50,5% em votos válidos no 2º turno e Lula, 49,5%; cenário é de empate técnico",
+        "metadados": {
+          "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "descricao": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+          "canonica": "https://www.terra.com.br/noticias/",
+          "og": {
+            "og:site_name": "Terra",
+            "og:url": "https://www.terra.com.br/noticias/",
+            "og:title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "og:description": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "og:image": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Terra",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Pesquisa BTG-Nexus: Flávio Bolsonaro tem 50,5% em votos válidos no 2º turno e Lula, 49,5%; cenário é de empate técnico",
+            "texto": ""
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+          "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+          "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/23/1129531121-kotrlnch3jerjhei4yhj6ft7ea.png",
+          "https://s1.trrsf.com/update-1/fe/zaz-app-t360-user-table/_img/not-found-interests.png",
+          "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+          "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png",
+          "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/1429414427-libertadores.jpg",
+          "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/709255901-flamengo-e-estudiantes.jpg",
+          "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/terra(181)-t86tnq5ik3mp.png",
+          "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/10/327785907-xgavebg3ibdupafxh4kn7xeuci.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-708dae839e70",
+            "type": "image",
+            "title": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "url": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+            "final_url": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "s1.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ba2ffe3222d0",
+            "type": "image",
+            "title": "Notícias",
+            "url": "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9912a057d2c5",
+            "type": "image",
+            "title": "Flávio ou Lula? Últimas pesquisas eleitorais são divulgadas neste sábado",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/23/1129531121-kotrlnch3jerjhei4yhj6ft7ea.png",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/23/1129531121-kotrlnch3jerjhei4yhj6ft7ea.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flávio ou Lula? Últimas pesquisas eleitorais são divulgadas neste sábado",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5b6902a0f493",
+            "type": "image",
+            "title": "Jogo Termo",
+            "url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+            "final_url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "www.terra.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jogo Termo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-238fb7c70356",
+            "type": "image",
+            "title": "Jogo Palavras Cruzadas",
+            "url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png",
+            "final_url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "www.terra.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jogo Palavras Cruzadas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6f14d45728b3",
+            "type": "image",
+            "title": "Flamengo tem data para julgamento que pode mudar final da Libertadores",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/1429414427-libertadores.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/1429414427-libertadores.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flamengo tem data para julgamento que pode mudar final da Libertadores",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-007824f68a4c",
+            "type": "image",
+            "title": "Santos poderá 'ajudar' o Flamengo a disputar a final da Libertadores contra o Palmeiras",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/709255901-flamengo-e-estudiantes.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/709255901-flamengo-e-estudiantes.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Santos poderá 'ajudar' o Flamengo a disputar a final da Libertadores contra o Palmeiras",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-11b167ed5a9d",
+            "type": "image",
+            "title": "Quem venceu o debate da Globo entre Lula e Flávio? Especialistas avaliam desempenho dos candidatos",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/terra(181)-t86tnq5ik3mp.png",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/terra(181)-t86tnq5ik3mp.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Quem venceu o debate da Globo entre Lula e Flávio? Especialistas avaliam desempenho dos candidatos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-34757cfb68ec",
+            "type": "image",
+            "title": "Jair Bolsonaro gastou mais no cartão corporativo do que Lula",
+            "url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/10/327785907-xgavebg3ibdupafxh4kn7xeuci.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/10/327785907-xgavebg3ibdupafxh4kn7xeuci.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jair Bolsonaro gastou mais no cartão corporativo do que Lula",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6b8ce8925553",
+            "type": "image",
+            "title": "Mega-Sena acumula, e prêmio chega a R$ 300 milhões; veja números",
+            "url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2024/04/22/fta20240305001-vf96fuubvj91.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2024/04/22/fta20240305001-vf96fuubvj91.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mega-Sena acumula, e prêmio chega a R$ 300 milhões; veja números",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1df1fea8c51d",
+            "type": "image",
+            "title": "Jornalistas da GloboNews se estranham ao vivo ao comentar fala de Lula no debate",
+            "url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/24/mervalmonica-s15kgt0a4mr4.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/24/mervalmonica-s15kgt0a4mr4.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jornalistas da GloboNews se estranham ao vivo ao comentar fala de Lula no debate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-172bde10df7a",
+            "type": "image",
+            "title": "Lula falou que vai acabar com a polícia? Entenda o ato falho durante debate",
+            "url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/24/lula-1iync4bw4rejo.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/120/145/smart/images.terra.com/2026/10/24/lula-1iync4bw4rejo.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lula falou que vai acabar com a polícia? Entenda o ato falho durante debate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "result": {
+        "titulo": "Google Notícias",
+        "texto": "Notícias Google Notícias Suas notícias Hoje 35 ° 24 ° seg. 33 ° 24 ° ter. 27 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: 27/10/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia ... Ubatã 23 °C Google Clima Principais notícias Flávio Bolsonaro e Lula disputam segundo turno presidencial chevron_right G1 Mais Quaest, 2º turno - votos válidos: Flávio Bolsonaro, 51%; Lula, 49% 5 horas atrás G1 Mais Datafolha, 2º turno - votos válidos: Flávio Bolsonaro, 51%; Lula, 49% 5 horas atrás UOL Notícias Mais Datafolha, Quaest, Palver, BTG/Nexus, Atlas: veja últimas pesquisas do segundo turno 23 minutos atrás BBC Mais As pesquisas para presidente na véspera do 2º turno — o que diziam em 2018, 2022 e o que mostram agora 4 horas atrás Veja mais manchetes e perspectivas Presidente Lula encerra campanha eleitoral com ato em São Paulo chevron_right CNN Brasil Mais Flávio e Lula reúnem multidões e demonstram força na reta final do 2º turno 4 horas atrás Folha de S.Paulo Mais 'Vocês são mais que os partidos', diz Lula a apoiadores - 24/10/2026 - Política 19 minutos atrás Terra Mais Apoiadores de Lula já ocupam a orla de Copacabana em último ato no Rio 44 minutos atrás Agência Brasil Mais Candidatos à Presidência reúnem apoiadores no último dia de campanha 3 horas atrás Veja mais manchetes e perspectivas G1 Mais Eleições 2026: Até que horas é permitido fazer campanha eleitoral neste sábado? 9 horas atrás Veja mais Metrópoles Mais Homem em carro adesivado de Lula atropela duas crianças em ato bolsonarista 2 horas atrás De Andre Shalders Veja mais Notícias locais Gerenciar notícias locais Opções para você Faça login para receber matérias personalizadas no feed e no resumo de notícias Fazer login Página inicial Para você Seguindo Destaques Jornalísticos Brasil Mundo Local Negócios Ciência e tecnologia Entretenimento Esportes Saúde Mais Pesquisa Limpar pesquisa Fechar pesquisa Google Apps Menu principal",
+        "final": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+        "trecho_usado": "Notícias Google Notícias Suas notícias Hoje 35 ° 24 ° seg. 33 ° 24 ° ter. 27 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: 27/10/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia ... Ubatã 23 °C Google Clima Principais notícias Flávio Bolsonaro e Lula disputam segundo turno",
+        "metadados": {
+          "titulo": "Google Notícias",
+          "descricao": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+          "canonica": "https://news.google.com/home?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:title": "Google Notícias",
+            "og:site_name": "Google Notícias",
+            "og:url": "https://news.google.com",
+            "og:type": "website",
+            "og:image": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "og:image:type": "image/jpeg",
+            "og:image:width": "300",
+            "og:image:height": "300",
+            "og:description": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          "twitter": {
+            "twitter:title": "Google Notícias",
+            "twitter:card": "summary",
+            "twitter:image": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "twitter:description": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Google Notícias",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [
+          "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+          "https://news.google.com/api/attachments/CC8iK0NnNUtNVXRRUlZobFNEUjRORGt5VFJDZkF4ampCU2dLTWdZSk1JYkZJZ2s=-w280-h168-p-df",
+          "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://g1.globo.com&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://noticias.uol.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www.bbc.com&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://news.google.com/api/attachments/CC8iL0NnNTBiSE5ZY1RKVWFXWXpTemRaVFJEckFSaWpBeWdLTWdrVkJJSnJwV2RVNVFJ=-w280-h168-p-df",
+          "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://www.cnnbrasil.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www1.folha.uol.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://www.terra.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn3.gstatic.com/faviconV2?url=https://agenciabrasil.ebc.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL"
+        ],
+        "midia": [
+          {
+            "id": "med-4c71ffc32a85",
+            "type": "image",
+            "title": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+            "url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "final_url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "source_title": "Google Notícias",
+            "source_url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+            "publisher": "lh3.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "eb1378c560246b9a2a3d",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+            "title": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil"
+          },
+          {
+            "id": "4fd21506ee90e1edea29",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+            "title": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto"
+          },
+          {
+            "id": "735728c589adf30f385d",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+            "title": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online"
+          },
+          {
+            "id": "950f619a25d3597b0815",
+            "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+            "title": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas"
+          },
+          {
+            "id": "0cdf36cd506fb726f490",
+            "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZndOelJtN0NCV1dQc0tNQmViempnQ0dydjQwNzNfblJ5aFE0Ql9Ddk9SVktLb3hpWVpmZk93cEE0aU9iRnFhdEJYM3BqRjlhRTNOdjhUc043bFJmQXZsQk8yT2ZwS2NCUWk3Z0dsd1R1cW81cXdOT1lpNE81X2d5ODlod0J2ZHowajFfRkVxeUVEZlQybHZPMWJTR0JmVTh5S3d3RWJ2MVlkaktuamlKM1hyZXVic0E4LUxvN0IyNWQycjkwMlM5TW5JTFdQdTFzVjN0S2JHQdIB5gFBVV95cUxNdjdCaTN1N3dDUFFGUU9oXzJ1X2N3MVp4TVI2ZmY1emk0RHZ6U0ZuT2ZMOHNBUWZXWGdZSm1MMGVFZC1OMXQ0aThRYVBTUGFuaHB1RnJFenZ3Mndfa243SFMzajZhODJNU1d2NmZsRG1mZ1lKeVFKeEVzM2d",
+            "title": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 - Valor Econômico",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Nissan pode equipar veículos elétricos com baterias de estado sólido a partir de 2028 Valor Econômico"
+          },
+          {
+            "id": "cef1b7fdac83217e2a96",
+            "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMC1KUFlOekFveTN0Sy1KcWt1R1JZU3o0ekZHRkJxaFl2U1pic24wUmYzWHVLTmk0TVBDVlRMbVBQUkRZUkZwSTVFLWFYOHQ3bzhNWC1DYmh3aTFMVDA1bGZRdEJFd2VrbVZ4S0dvUXcybFJpNEVRck82a0tLaG5pVTl1bG5zZ3ZYOUxPSmNxV3pvT0ROUXNPeGRtTG51NW5xOERjSmJUQ00wYUlFaXZaNDdHc2VpRDYyelcyRHg3ZU1ERXpxVzdtQ2pPVF81NEtzLUxRSklsdlNvSHczRFFLVg?oc=5",
+            "title": "Nova bateria promete revolucionar carros elétricos; entenda - Terra",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Nova bateria promete revolucionar carros elétricos; entenda Terra"
+          },
+          {
+            "id": "159629efc4e40b660600",
+            "url": "https://g1.globo.com/",
+            "title": "g1 - O portal de notícias da Globo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros."
+          },
+          {
+            "id": "047cd59c18bcf5d75b6f",
+            "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+            "title": "Google Notícias",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          {
+            "id": "ee3627b9f5ae3e28a55f",
+            "url": "https://noticias.uol.com.br/",
+            "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais."
+          },
+          {
+            "id": "63b2c72b28f5501a2f17",
+            "url": "https://www.cnnbrasil.com.br/",
+            "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!"
+          },
+          {
+            "id": "7c9e707ac422f77f6562",
+            "url": "https://www.terra.com.br/noticias/",
+            "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra."
+          },
+          {
+            "id": "0c8dfe3f89ae7be3b0a8",
+            "url": "https://noticias.r7.com/",
+            "title": "Notícias R7 – Brasil, mundo, saúde, política, empregos e mais",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acesse o Portal de Notícias R7 e veja os principais acontecimentos do dia no Brasil e no Mundo sobre saúde, política, tecnologia, ciência, trânsito e mais."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (notícias baterias de estado sólido)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (notícias baterias de estado sólido)",
+        "bing: 6 resultados (notícias baterias de estado sólido)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (notícias baterias de estado sólido)",
+        "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento",
+        "1ª rodada só com páginas de índice geral (8 sinalizada(s)); fontes primárias não alcançadas",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "notícias baterias de estado sólido",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T02:19:27.081269+00:00",
+  "source_revision": "ad16f213b074680c46aa0504dea6662892885640",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

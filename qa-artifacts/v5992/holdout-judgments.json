@@ -1,0 +1,998 @@
+{
+  "scope": "TRACEABLE_AGENT_JUDGMENT_NOT_HUMAN_GOLD",
+  "reviewer": "Codex agent reviewing captured URLs and text; not the engine eligibility function",
+  "dataset_sha256": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df",
+  "code_frozen_before_inspection": "ad16f21",
+  "rules": [
+    "No new query/engine changes after opening this holdout.",
+    "Review covers returned sources and captured bodies, not absolute web recall.",
+    "Media metadata is assessed separately from article reading.",
+    "No independent human factual verification or complete-answer assessment in retrieval-only probes."
+  ],
+  "summary": {
+    "cases": 15,
+    "baseline_request_specific_text_partial_cases": 0,
+    "final_request_specific_text_partial_cases": 1,
+    "media_metadata_cases_before": 1,
+    "media_metadata_cases_after": 1,
+    "absolute_recall": null,
+    "global_factual_precision": null
+  },
+  "cases": [
+    {
+      "id": "new-01",
+      "question": "Notícias de Ilhéus, Bahia, nos últimos sete dias sobre transporte",
+      "criterion": "Notícia de transporte em Ilhéus/BA, no período",
+      "finding": "Homepages/guias; nenhum artigo devolvido auditado comprova conjuntamente tema e período.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://ilheus.com.br/",
+          "title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 152,
+          "artifact": "baseline-sealed/new-01.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.ilheus.net/",
+          "title": "Ilhéus Net",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 364,
+          "artifact": "baseline-sealed/new-01.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+          "title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6962,
+          "artifact": "baseline-sealed/new-01.json"
+        },
+        {
+          "run": "final",
+          "url": "https://ilheus.com.br/",
+          "title": "ILHÉUS | TURISMO | GASTRONOMIA | GUIA MÉDICO | NOTÍCIAS",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 152,
+          "artifact": "accepted-holdout/new-01.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.ilheus.net/",
+          "title": "Ilhéus Net",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 364,
+          "artifact": "accepted-holdout/new-01.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.viajali.com.br/o-que-fazer-em-ilheus/",
+          "title": "O que fazer em Ilhéus: 15 dicas imperdíveis para você aproveitar a cidade",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6962,
+          "artifact": "accepted-holdout/new-01.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-02",
+      "question": "Notícias do Brasil sobre educação nos últimos sete dias",
+      "criterion": "Educação no Brasil, no período",
+      "finding": "Páginas do país e portal geral; sem publicação educacional específica lida e validada.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://brasilescola.uol.com.br/geografia/pais-brasil.htm",
+          "title": "Brasil: dados, mapa, bandeira, economia",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-02.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://g1.globo.com/",
+          "title": "g1 - O portal de notícias da Globo",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-02.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.todamateria.com.br/brasil/",
+          "title": "Brasil: dados, bandeira, mapa, história e características",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-02.json"
+        },
+        {
+          "run": "final",
+          "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+          "title": "país na América do Sul",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-02.json"
+        },
+        {
+          "run": "final",
+          "url": "https://g1.globo.com/",
+          "title": "g1 - O portal de notícias da Globo",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-02.json"
+        },
+        {
+          "run": "final",
+          "url": "https://m.brasilescola.uol.com.br/geografia/pais-brasil.htm",
+          "title": "Brasil: dados, mapa, bandeira, economia",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-02.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-03",
+      "question": "Notícias em Coimbra, Portugal, nos últimos sete dias",
+      "criterion": "Coimbra/Portugal, no período",
+      "finding": "Cidade/turismo; falta artigo original datado no período.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://en.wikipedia.org/wiki/Coimbra",
+          "title": "municipality in Portugal",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-03.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.vagamundos.pt/visitar-coimbra-roteiro/",
+          "title": "Coimbra: o que visitar e fazer | Roteiro de 2 e 3 dias",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-03.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://visitecoimbra.pt/en/",
+          "title": "Official Coimbra Tourism website",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 206,
+          "artifact": "baseline-sealed/new-03.json"
+        },
+        {
+          "run": "final",
+          "url": "https://en.wikipedia.org/wiki/Coimbra",
+          "title": "municipality in Portugal",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-03.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.vagamundos.pt/visitar-coimbra-roteiro/",
+          "title": "Coimbra: o que visitar e fazer | Roteiro de 2 e 3 dias",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-03.json"
+        },
+        {
+          "run": "final",
+          "url": "https://visitecoimbra.pt/en/",
+          "title": "Official Coimbra Tourism website",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 206,
+          "artifact": "accepted-holdout/new-03.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-04",
+      "question": "Biografia de Nise da Silveira atuação na psiquiatria fontes institucionais",
+      "criterion": "Nise da Silveira e atuação psiquiátrica",
+      "finding": "Definições de biografia, sem trecho devolvido sobre a pessoa solicitada.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://www.todamateria.com.br/biografia/",
+          "title": "Biografia: o que é e como fazer (com exemplo)",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6200,
+          "artifact": "baseline-sealed/new-04.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.portugues.com.br/redacao/biografia.html",
+          "title": "Biografia: o que é, características, estrutura, tipos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 7940,
+          "artifact": "baseline-sealed/new-04.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://brasilescola.uol.com.br/biografia",
+          "title": "Biografia: confira as melhores que o site separou para você",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 4560,
+          "artifact": "baseline-sealed/new-04.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.todamateria.com.br/biografia/",
+          "title": "Biografia: o que é e como fazer (com exemplo)",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6200,
+          "artifact": "accepted-holdout/new-04.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.portugues.com.br/redacao/biografia.html",
+          "title": "Biografia: o que é, características, estrutura, tipos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 7940,
+          "artifact": "accepted-holdout/new-04.json"
+        },
+        {
+          "run": "final",
+          "url": "https://brasilescola.uol.com.br/biografia",
+          "title": "Biografia: confira as melhores que o site separou para você",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 4560,
+          "artifact": "accepted-holdout/new-04.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-05",
+      "question": "História da empresa Natura fundação fontes primárias",
+      "criterion": "Natura: fundação em fonte primária",
+      "finding": "História genérica; não foi devolvida evidência primária pertinente.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "title": "História, estudo das ações do homem no tempo e espaço",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6953,
+          "artifact": "baseline-sealed/new-05.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.todamateria.com.br/historia/",
+          "title": "História",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-05.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://humanidades.com/br/historia/",
+          "title": "História: início, final, ramos, divisão e características",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-05.json"
+        },
+        {
+          "run": "final",
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "title": "História, estudo das ações do homem no tempo e espaço",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6953,
+          "artifact": "accepted-holdout/new-05.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.todamateria.com.br/historia/",
+          "title": "História",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-05.json"
+        },
+        {
+          "run": "final",
+          "url": "https://humanidades.com/br/historia/",
+          "title": "História: início, final, ramos, divisão e características",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-05.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-06",
+      "question": "Documentação oficial WebAssembly memory grow limitações",
+      "criterion": "memory.grow e limitações em documentação oficial",
+      "finding": "Wikipédia é contexto geral; não há grow no corpo capturado. Homepages oficiais não contêm a operação pedida no trecho lido.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "title": "portable, efficient virtual machine and bytecode format for compiled code on the Web",
+          "engine_eligible": true,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-06.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://webassembly.org/",
+          "title": "WebAssembly",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1395,
+          "artifact": "baseline-sealed/new-06.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "title": "WebAssembly | MDN",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1812,
+          "artifact": "baseline-sealed/new-06.json"
+        },
+        {
+          "run": "final",
+          "url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "title": "portable, efficient virtual machine and bytecode format for compiled code on the Web",
+          "engine_eligible": true,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-06.json"
+        },
+        {
+          "run": "final",
+          "url": "https://webassembly.org/",
+          "title": "WebAssembly",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1395,
+          "artifact": "accepted-holdout/new-06.json"
+        },
+        {
+          "run": "final",
+          "url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "title": "WebAssembly | MDN",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1812,
+          "artifact": "accepted-holdout/new-06.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-07",
+      "question": "História da Revolta da Chibata causas e consequências",
+      "criterion": "Revolta da Chibata, causas e consequências",
+      "finding": "Fonte final contém um trecho específico sobre a causa; consequências não foram recuperadas no corpo limitado. Ganho parcial, não resposta completa.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "PARTIAL_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://www.todamateria.com.br/historia/",
+          "title": "História",
+          "engine_eligible": true,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-07.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "title": "História, estudo das ações do homem no tempo e espaço",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 6953,
+          "artifact": "baseline-sealed/new-07.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://humanidades.com/br/historia/",
+          "title": "História: início, final, ramos, divisão e características",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-07.json"
+        },
+        {
+          "run": "final",
+          "url": "https://brasilescola.uol.com.br/historiab/rebelioes-na-republica-velha.htm",
+          "title": "Revoltas na República Velha: quais foram?",
+          "engine_eligible": true,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-07.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.dicio.com.br/revolta/",
+          "title": "revolta",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2398,
+          "artifact": "accepted-holdout/new-07.json"
+        },
+        {
+          "run": "final",
+          "url": "https://conceito.de/revolta",
+          "title": "Conceito de revolta - Conceito.de",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 3029,
+          "artifact": "accepted-holdout/new-07.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-08",
+      "question": "Obra de Carolina Maria de Jesus Quarto de Despejo contexto histórico",
+      "criterion": "Carolina Maria de Jesus/Quarto de Despejo e contexto",
+      "finding": "Construção civil/obra genérica; não atende à obra e à autora.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://obrario.com.br/",
+          "title": "Obra Rio – Reformas e Reparos no Rio de Janeiro",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 203,
+          "artifact": "baseline-sealed/new-08.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://pt.wikipedia.org/wiki/Obra",
+          "title": "resultado da realização de um trabalho",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2723,
+          "artifact": "baseline-sealed/new-08.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.ogmorj.com.br/",
+          "title": "OGMO-RJ | Órgão Gestor de Mão-de-Obra do Rio de Janeiro",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 235,
+          "artifact": "baseline-sealed/new-08.json"
+        },
+        {
+          "run": "final",
+          "url": "https://obrario.com.br/",
+          "title": "Obra Rio – Reformas e Reparos no Rio de Janeiro",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 203,
+          "artifact": "accepted-holdout/new-08.json"
+        },
+        {
+          "run": "final",
+          "url": "https://pt.wikipedia.org/wiki/Obra",
+          "title": "resultado da realização de um trabalho",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2723,
+          "artifact": "accepted-holdout/new-08.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.ogmorj.com.br/",
+          "title": "OGMO-RJ | Órgão Gestor de Mão-de-Obra do Rio de Janeiro",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 235,
+          "artifact": "accepted-holdout/new-08.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-09",
+      "question": "Parque Nacional da Serra da Capivara patrimônio arqueológico fonte oficial",
+      "criterion": "Serra da Capivara/patrimônio arqueológico em fonte oficial",
+      "finding": "Outros parques, sem identidade geográfica solicitada.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://visitehemero.com.br/o-parque/",
+          "title": "O PARQUE - Hemero",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 495,
+          "artifact": "baseline-sealed/new-09.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.visitejoinville.com.br/turismoemjoinville/parque-caieira",
+          "title": "Parque Caieira",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2339,
+          "artifact": "baseline-sealed/new-09.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://onibus.info/linhas/0237",
+          "title": "Onibus.info",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 401,
+          "artifact": "baseline-sealed/new-09.json"
+        },
+        {
+          "run": "final",
+          "url": "https://visitehemero.com.br/o-parque/",
+          "title": "O PARQUE - Hemero",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 495,
+          "artifact": "accepted-holdout/new-09.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.visitejoinville.com.br/turismoemjoinville/parque-caieira",
+          "title": "Parque Caieira",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2339,
+          "artifact": "accepted-holdout/new-09.json"
+        },
+        {
+          "run": "final",
+          "url": "https://onibus.info/linhas/0237",
+          "title": "Onibus.info",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 401,
+          "artifact": "accepted-holdout/new-09.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-10",
+      "question": "Eventos em Ouro Preto nos próximos sete dias",
+      "criterion": "Evento em Ouro Preto, com data/local/organizador",
+      "finding": "Cotação do ouro; não é evento nem a localidade pedida.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://cotacaododia.com/ouro/",
+          "title": "Preço do ouro no Brasil",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 3321,
+          "artifact": "baseline-sealed/new-10.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://investidor10.com.br/commodities/ouro/",
+          "title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 3068,
+          "artifact": "baseline-sealed/new-10.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://dolarhoje.com/ouro-hoje/",
+          "title": "Ouro Hoje",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2952,
+          "artifact": "baseline-sealed/new-10.json"
+        },
+        {
+          "run": "final",
+          "url": "https://cotacaododia.com/ouro/",
+          "title": "Preço do ouro no Brasil",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 3321,
+          "artifact": "accepted-holdout/new-10.json"
+        },
+        {
+          "run": "final",
+          "url": "https://investidor10.com.br/commodities/ouro/",
+          "title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 3068,
+          "artifact": "accepted-holdout/new-10.json"
+        },
+        {
+          "run": "final",
+          "url": "https://dolarhoje.com/ouro-hoje/",
+          "title": "Ouro Hoje",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2952,
+          "artifact": "accepted-holdout/new-10.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-11",
+      "question": "SQLite documentation WAL checkpoints busy readers",
+      "criterion": "WAL/checkpoint/leitores concorrentes em documentação SQLite",
+      "finding": "Home/download/introdução; sem instruções específicas sobre checkpoint e busy readers.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://sqlite.org/index.html",
+          "title": "SQLite Home Page",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1046,
+          "artifact": "baseline-sealed/new-11.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://sqlite.org/download.html",
+          "title": "SQLite Download Page",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2531,
+          "artifact": "baseline-sealed/new-11.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+          "title": "O que é SQLite? Como funciona e quando usar",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 4518,
+          "artifact": "baseline-sealed/new-11.json"
+        },
+        {
+          "run": "final",
+          "url": "https://sqlite.org/index.html",
+          "title": "SQLite Home Page",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1046,
+          "artifact": "accepted-holdout/new-11.json"
+        },
+        {
+          "run": "final",
+          "url": "https://sqlite.org/download.html",
+          "title": "SQLite Download Page",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2531,
+          "artifact": "accepted-holdout/new-11.json"
+        },
+        {
+          "run": "final",
+          "url": "https://codigofacil.com.br/o-que-e-sqlite/",
+          "title": "O que é SQLite? Como funciona e quando usar",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 4518,
+          "artifact": "accepted-holdout/new-11.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-12",
+      "question": "Especificações oficiais Canon EOS R50 peso bateria",
+      "criterion": "Canon EOS R50: peso/bateria em fonte oficial",
+      "finding": "Marca ou especificações genéricas; variante exata não comprovada.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://www.dicio.com.br/especificacoes/",
+          "title": "Especificações",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1203,
+          "artifact": "baseline-sealed/new-12.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "title": "Como verificar as especificações do seu PC",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "baseline-sealed/new-12.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://pt.wikihow.com/Verificar-as-Especifica%C3%A7%C3%B5es-do-Computador",
+          "title": "Client Challenge",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 209,
+          "artifact": "baseline-sealed/new-12.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.canon.com.br/",
+          "title": "Canon",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 913,
+          "artifact": "accepted-holdout/new-12.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.dicio.com.br/especificacoes/",
+          "title": "Especificações",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1203,
+          "artifact": "accepted-holdout/new-12.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "title": "Como verificar as especificações do seu PC",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 8000,
+          "artifact": "accepted-holdout/new-12.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-13",
+      "question": "Imagens licenciadas do Palácio de Cristal de Petrópolis",
+      "criterion": "Imagens licenciadas do Palácio de Cristal/Petrópolis",
+      "finding": "Seis registros Commons com origem e direitos; apenas metadados, sem interpretação visual no probe.",
+      "baseline_judgment": "MEDIA_METADATA_ONLY",
+      "final_judgment": "MEDIA_METADATA_ONLY",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Petropolis%2C_Pal%C3%A1cio_de_Cristal%2C_interior.jpg/960px-Petropolis%2C_Pal%C3%A1cio_de_Cristal%2C_interior.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Petropolis, Palácio de Cristal, interior.jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "baseline-sealed/new-13.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29%2C_Agosto_de_2016.jpg/960px-Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29%2C_Agosto_de_2016.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Palácio de Cristal (Petrópolis), Agosto de 2016.jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "baseline-sealed/new-13.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29.jpg/960px-Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Palácio de Cristal (Petrópolis).jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "baseline-sealed/new-13.json"
+        },
+        {
+          "run": "final",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Petropolis%2C_Pal%C3%A1cio_de_Cristal%2C_interior.jpg/960px-Petropolis%2C_Pal%C3%A1cio_de_Cristal%2C_interior.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Petropolis, Palácio de Cristal, interior.jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "accepted-holdout/new-13.json"
+        },
+        {
+          "run": "final",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29%2C_Agosto_de_2016.jpg/960px-Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29%2C_Agosto_de_2016.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Palácio de Cristal (Petrópolis), Agosto de 2016.jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "accepted-holdout/new-13.json"
+        },
+        {
+          "run": "final",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29.jpg/960px-Pal%C3%A1cio_de_Cristal_%28Petr%C3%B3polis%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Palácio de Cristal (Petrópolis).jpg",
+          "engine_eligible": true,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "accepted-holdout/new-13.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-14",
+      "question": "Vídeos do Observatório Nacional sobre eclipses explicação",
+      "criterion": "Vídeo do Observatório Nacional explicando eclipses",
+      "finding": "Buscadores/YouTube genérico; nenhum vídeo específico recuperado.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://www.google.com/videohp?hl=pt-BR",
+          "title": "Google Videos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 75,
+          "artifact": "baseline-sealed/new-14.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.google.com.br/videohp",
+          "title": "Google Videos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 75,
+          "artifact": "baseline-sealed/new-14.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://www.youtube.com/",
+          "title": "YouTube",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 206,
+          "artifact": "baseline-sealed/new-14.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.google.com/videohp?hl=pt-BR",
+          "title": "Google Videos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 75,
+          "artifact": "accepted-holdout/new-14.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.google.com.br/videohp",
+          "title": "Google Videos",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 75,
+          "artifact": "accepted-holdout/new-14.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.youtube.com/",
+          "title": "YouTube",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 206,
+          "artifact": "accepted-holdout/new-14.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    },
+    {
+      "id": "new-15",
+      "question": "Manual público PDF monitoramento qualidade água ANA oxigênio dissolvido",
+      "criterion": "Manual PDF ANA/qualidade da água/oxigênio dissolvido",
+      "finding": "Manuais genéricos/capilares; nenhum PDF pedido foi devolvido e lido.",
+      "baseline_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "final_judgment": "INSUFFICIENT_REQUEST_SPECIFIC_CONTENT",
+      "samples": [
+        {
+          "run": "baseline",
+          "url": "https://www.manualpdf.com.br/",
+          "title": "Manual de instruções? Todos os manuais!",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1537,
+          "artifact": "baseline-sealed/new-15.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://hello.manual.com.br/",
+          "title": "Manual: Tratamento Capilar - Eficácia Comprovada - R$25/mês",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 772,
+          "artifact": "baseline-sealed/new-15.json"
+        },
+        {
+          "run": "baseline",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "title": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 2088,
+          "artifact": "baseline-sealed/new-15.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.manualpdf.com.br/",
+          "title": "Manual de instruções? Todos os manuais!",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 1537,
+          "artifact": "accepted-holdout/new-15.json"
+        },
+        {
+          "run": "final",
+          "url": "https://hello.manual.com.br/",
+          "title": "Manual: Tratamento Capilar - Eficácia Comprovada - R$25/mês",
+          "engine_eligible": false,
+          "read": true,
+          "captured_chars": 772,
+          "artifact": "accepted-holdout/new-15.json"
+        },
+        {
+          "run": "final",
+          "url": "https://www.manual.com.br/",
+          "title": "Hair Friday MANUAL | O melhor momento para cuidar da queda de cabelo ...",
+          "engine_eligible": false,
+          "read": false,
+          "captured_chars": 0,
+          "artifact": "accepted-holdout/new-15.json"
+        }
+      ],
+      "judged_relevant_lost": null
+    }
+  ]
+}

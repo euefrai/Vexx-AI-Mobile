@@ -1,0 +1,13 @@
+### Result
+{"scope":"AUTHENTICATED_REAL_PROVIDER_TIMEOUT_NO_FINAL_ANSWER","has_official_source":false,"has_excerpt":false,"panel_excerpt":"v.\nVexx AI\nSeu espaço pessoal\nA\nAlice QA\n@alice\n⏻\nNova conversa\n\nProjetos\n\nAgrupe suas conversas por assunto.\n\nSem projeto 1\n\nPesquisa profunda sobre como usar asyncio.Ta\n···\n\nSeu espaço\n\nDocumentos\n0\nPesquisas\nMeu PC\nMeus Estudos\nMemória\nProvedores de IA\nConexão e memória\n\nProjetos sincronizados com o PC\n\nPesquisas\nSeu espaço pessoal\nPC conectado\n\nPESQUISA PROFUNDA\n\nInvestigações.\n\nPlanos, evidências, mídia descoberta e exportações reais. Uma imagem ou vídeo encontrado não é prova.\n\nVoltar às pesquisas\nBaixar MD\nBaixar CSV\nBaixar JSON\nCOMO USAR ASYNCIO.TASKGROUP NA DOCUMENTAÇÃO OFICIAL","page_errors":[]}
+### Ran Playwright code
+```js
+await (async page => {
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.getByRole('button',{name:'Ver pesquisa',exact:true}).first().click();
+ await page.getByRole('link',{name:'Baixar MD',exact:true}).waitFor({state:'visible'});
+ const text=await page.locator('body').innerText();
+ await page.screenshot({path:'qa-artifacts/v5992/research-safety-blocked.png',fullPage:true});
+ return {scope:'AUTHENTICATED_REAL_PROVIDER_TIMEOUT_NO_FINAL_ANSWER',has_official_source:text.includes('docs.python.org'),has_excerpt:text.includes('TaskGroup'),panel_excerpt:text.slice(-6500),page_errors:errors};
+})(page);
+```

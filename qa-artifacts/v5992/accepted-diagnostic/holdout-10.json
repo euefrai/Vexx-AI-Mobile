@@ -1,0 +1,2390 @@
+{
+  "id": "holdout-10",
+  "category": "company",
+  "query": "História da empresa WEG fontes primárias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 13.005,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "WEG História fontes primárias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "WEG",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "WEG História fontes primárias",
+      "error": "rede"
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG História fontes primárias",
+      "candidates": 1
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4040
+    },
+    {
+      "url": "https://www.bing.com/search?q=WEG&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=WEG&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3916
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=WEG%20Hist%C3%B3ria%20fontes%20prim%C3%A1rias",
+      "error": "rede"
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias",
+      "final": "https://old-search.marginalia.nu/search?query=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias",
+      "chars": 16215
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=WEG",
+      "final": "https://old-search.marginalia.nu/search?query=WEG",
+      "chars": 54120
+    },
+    {
+      "url": "https://www.weg.net/institutional/BR/pt/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "final": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "chars": 268193
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Weg%21",
+      "final": "https://en.wikipedia.org/wiki/Weg%21",
+      "chars": 95740
+    },
+    {
+      "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+      "final": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+      "chars": 34028
+    },
+    {
+      "url": "https://www.allmystery.de/themen/pr28907-2871",
+      "final": "https://www.allmystery.de/themen/pr28907-2871",
+      "chars": 106693
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "final": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "chars": 35264
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da empresa WEG fontes primárias",
+    "domain": "general",
+    "original_request": "História da empresa WEG fontes primárias",
+    "resolved_request": "História da empresa WEG fontes primárias",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T02:19:08.076236+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "26af039bc76859fc07c5",
+        "url": "https://www.weg.net/institutional/BR/pt/",
+        "title": "Homepage | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "sáb., 24 out. 2026 22:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "31cfb26ec87d6f754f80",
+        "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "2005-10-11T01:25:49Z",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáve",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "490a03c7bea2a1008da7",
+        "url": "https://en.wikipedia.org/wiki/Weg%21",
+        "title": "Weg!",
+        "origin": "marginalia",
+        "query": "WEG",
+        "date": "2006-02-23T07:28:54Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "industry: Best overall magazine. Magazine editor of the year. Best magazine in the leisure category. References [ edit ] ↑ . Media24. Archived from on 25 Octobe",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3542,
+        "final_url": "https://en.wikipedia.org/wiki/Weg%21",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e8f811fda8c969666433",
+        "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+        "title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+        "origin": "marginalia",
+        "query": "WEG",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "efficiency, ultimately contributing to a more sustainable and innovative future. For more information on the case study and the partnership between ADT and WEG,",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3616,
+        "final_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "ac3016461e1579e4c7a8",
+        "url": "https://www.allmystery.de/themen/pr28907-2871",
+        "title": "Israel - wohin führt der Weg? (Seite 2872) - Allmystery",
+        "origin": "marginalia",
+        "query": "WEG",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "diskreditiert. Der Teil, der nicht mit Lügen diskreditiert, sondern mit Fakten, Belegen, Argumenten, Kritik.Z.B. konntest du nicht widerlegen, dass in früheren ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4776,
+        "final_url": "https://www.allmystery.de/themen/pr28907-2871",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "WEG História fontes primárias",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only so",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2088,
+        "final_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "017eed77b13210ac709a",
+        "url": "https://www.weg.net/",
+        "title": "Homepage | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "sáb., 24 out. 2026 04:06:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "666382f4f4aca057d9d1",
+        "url": "https://www.weg.net/institutional/BR/pt/career",
+        "title": "Trabalhe Conosco | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "sáb., 03 out. 2026 01:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Se você é uma dessas pessoas e quer fortalecer sua carreira numa empresa sólida, de presença global, escolha aqui o seu lugar. Valorizamos a geração de oportuni",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "246a89983c0f192c9f65",
+        "url": "https://www.weg.net/institutional/BR/pt/contact/where-to-buy",
+        "title": "Onde Comprar - WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "sáb., 24 out. 2026 06:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja abaixo onde você pode encontrar e comprar nossos produtos:",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "92c3379e19c6747795d7",
+        "url": "https://www.weg.net/institutional/BR/pt/contact/service-network",
+        "title": "Assistência Técnica | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "sáb., 17 out. 2026 11:45:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja onde você pode encontrar nossa rede de Assistência Técnica Autorizada:",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e4df9bc18c4df991e54d",
+        "url": "https://en.wikipedia.org/wiki/WEG_Industries",
+        "title": "WEG Industries",
+        "origin": "marginalia",
+        "query": "WEG",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "eeb51e32323e26af66c7",
+        "url": "https://en.wikipedia.org/wiki/Ruth_B._Weg",
+        "title": "Ruth B. Weg",
+        "origin": "marginalia",
+        "query": "WEG",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-260d63dbf7e6",
+      "type": "image",
+      "title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-772265f31891",
+      "type": "image",
+      "title": "Aumento",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aumento",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5587b179f607",
+      "type": "image",
+      "title": "Baixa",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Baixa",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-77470f7120a7",
+      "type": "image",
+      "title": "Brasil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1af776a0003e",
+      "type": "image",
+      "title": "Wikipedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0997b8b9c241",
+      "type": "image",
+      "title": "The Free Encyclopedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The Free Encyclopedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-de5e034dce69",
+      "type": "image",
+      "title": "Wikimedia Foundation",
+      "url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+      "final_url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikimedia Foundation",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f861890d8556",
+      "type": "image",
+      "title": "Powered by MediaWiki",
+      "url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+      "final_url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Powered by MediaWiki",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-65b988f7acf3",
+      "type": "document",
+      "title": "weggo.html",
+      "url": "https://web.archive.org/web/20111025011417/http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+      "final_url": "https://web.archive.org/web/20111025011417/http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "web.archive.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-53fb9a8afe40",
+      "type": "document",
+      "title": "weggo.html",
+      "url": "http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+      "final_url": "http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "www.media24.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-30e2ab83d6ec",
+      "type": "document",
+      "title": "12321.html",
+      "url": "https://www.bizcommunity.com/Article/196/39/12321.html",
+      "final_url": "https://www.bizcommunity.com/Article/196/39/12321.html",
+      "source_title": "afrikaans language outdoor and travel magazine",
+      "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+      "publisher": "www.bizcommunity.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2005-10-11T01:25:49Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://en.wikipedia.org/wiki/Weg%21",
+      "titulo": "afrikaans language outdoor and travel magazine",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2006-02-23T07:28:54Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://en.wikipedia.org/wiki/Weg%21",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+      "titulo": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "WEG História fontes primárias",
+      "items": [
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/",
+          "trecho": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:14:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/institutional/BR/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/",
+          "trecho": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:06:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Trabalhe Conosco | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/career",
+          "trecho": "Se você é uma dessas pessoas e quer fortalecer sua carreira numa empresa sólida, de presença global, escolha aqui o seu lugar. Valorizamos a geração de oportunidades de desenvolvimento profissional e pessoal, os direitos humanos, a diversidade e o meio ambiente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 03 out. 2026 01:03:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/institutional/BR/pt/career",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Onde Comprar - WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/contact/where-to-buy",
+          "trecho": "Veja abaixo onde você pode encontrar e comprar nossos produtos:",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:43:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/institutional/BR/pt/contact/where-to-buy",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Assistência Técnica | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/contact/service-network",
+          "trecho": "Veja onde você pode encontrar nossa rede de Assistência Técnica Autorizada:",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 11:45:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/institutional/BR/pt/contact/service-network",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "WEG",
+      "items": [
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/",
+          "trecho": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:14:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/",
+          "trecho": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:06:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Trabalhe Conosco | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/career",
+          "trecho": "Se você é uma dessas pessoas e quer fortalecer sua carreira numa empresa sólida, de presença global, escolha aqui o seu lugar. Valorizamos a geração de oportunidades de desenvolvimento profissional e pessoal, os direitos humanos, a diversidade e o meio ambiente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 03 out. 2026 01:03:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Onde Comprar - WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/contact/where-to-buy",
+          "trecho": "Veja abaixo onde você pode encontrar e comprar nossos produtos:",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:43:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Assistência Técnica | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/contact/service-network",
+          "trecho": "Veja onde você pode encontrar nossa rede de Assistência Técnica Autorizada:",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 11:45:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG História fontes primárias",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG",
+      "items": [
+        {
+          "titulo": "WEG Industries",
+          "url": "https://en.wikipedia.org/wiki/WEG_Industries",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/WEG_Industries",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Weg!",
+          "url": "https://en.wikipedia.org/wiki/Weg%21",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Weg%21",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Ruth B. Weg",
+          "url": "https://en.wikipedia.org/wiki/Ruth_B._Weg",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Ruth_B._Weg",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Neuer Weg",
+          "url": "https://en.wikipedia.org/wiki/Neuer_Weg",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Neuer_Weg",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+          "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://cfd-online.com/Forum/news.cgi/read/117381",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Israel - wohin führt der Weg? (Seite 2872) - Allmystery",
+          "url": "https://www.allmystery.de/themen/pr28907-2871",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://allmystery.de/themen/pr28907-2871",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Weg%21",
+      "result": {
+        "titulo": "afrikaans language outdoor and travel magazine",
+        "texto": "Afrikaans language outdoor and travel magazine Weg! First issue April2004 () 2004-04 Company Media24 Country South Africa Language Afrikaans Website www.weg.co.za (literal English translation: ; title of English-language version: ) is an outdoor and . It was first published in April 2004 and is owned by the division of . The magazine focuses on affordable destinations in and the rest of . Weg! Away! Go! Afrikaans-language travel magazine Media24 Naspers 1 [ ] South Africa Africa In addition to travel articles, the magazine also contains portfolios focusing on nature and , as well as , , , and outdoor equipment reviews. photographic recipes car book music The original name of the magazine was (Break Away), but it was forced to change its name after a court case with , the publishers of the rival magazine. Wegbreek Ramsay, Son & Parker Getaway In February 2006, the magazine achieved a circulation of 77,174 (as audited by the ), making it the largest outdoor and in any language in South Africa. This position was consolidated by the launch of its sister magazine, , in June of the same year, which resulted in a combined circulation figure of 113,248 by November 2006. Audit Bureau of Circulations of South Africa travel magazine English-language Go! In December 2006, (Tow Away), a former caravanning and camping supplement, was launched as an independent magazine. WegSleep The founding editor of the magazine was Bun Booyens. He was succeeded by Barnie Louw from 2010 to 2013, with Pierre Steyn taking over the reins as editor early in 2014. 2 [ ] In 2011, produced its first stand-alone travel map of the , created by in-house cartographer François Haasbroek. Since then, the magazine has published detailed travel maps of and the . Weg! Baviaanskloof Namibia Kruger National Park Awards [ edit ] The magazine has received several awards, including: At the 2006 Magazine Publishers' Association of South Africa's Pica Awards: Sappi 3 [ ] The inaugural Award for Editor of the Year to Booyens. Jane Raphaely The best magazine in the Travel, Wildlife and Conservation category. The best supplement, for WegSleep. In both 2005 and 2006, travel editor and columnist won the \"ATKVeertjie\" award from the (Afrikaans Language and Cultural Society) for magazine journalism. Dana Snyman Afrikaanse Taal en Kultuurvereniging 4 [ ] At the 2006 ADvantage awards of the South African magazine industry: Best overall magazine. Magazine editor of the year. Best magazine in the leisure category. References [ edit ] ↑ . Media24. Archived from on 25 October 2011. \"Weg/go!\" the original . Retrieved 2011 28 September ↑ . Who's Who of Southern Africa. \"Bun Booyens\" . Retrieved 2011 28 September ↑ . . 2 November 2006. \"Booyens ry Weg! met PICA Editor of the Year\" Bizcommunity.com . Retrieved 2011 28 September ↑ . NB Publishers. 2009. \"Dana Snyman\" . Retrieved 2011 28 September External links [ edit ] Magazine official website Weg (in Afrikaans) Magazine Website go! Archived 2017-09-20 at the Wayback Machine Data on circulation figures v t e Media24 Newspapers National Rapport Beeld City Press Daily Sun Die Burger The Witness Volksblad Son op Sondag Local Sold Newspapers Paarl Post Hermanus Times District Mail Eikestadnuus Worcester Standard Weslander [ af ] Local Free Newspapers Uitenhage Despatch News PE Express Kouga Express Mthatha Express Queenstown Express Magazines Huisgenoot Drum YOU Weg! Sarie Fair Lady Tuis True Love Magazine Idees (South African edition) Men's Health Kuier Drive Out Digital platforms News24 netwerk24",
+        "final": "https://en.wikipedia.org/wiki/Weg%21",
+        "trecho_usado": "industry: Best overall magazine. Magazine editor of the year. Best magazine in the leisure category. References [ edit ] ↑ . Media24. Archived from on 25 October 2011. \"Weg/go!\" the original . Retrieved 2011 28 September ↑ . Who's Who of Southern Africa. \"Bun Booyens\" . Retrieved 2011 28 September ↑ . . 2 November 2006. \"Booyens ry Weg! met PICA Editor of the Year\" Bizcommunity.com . Retrieved",
+        "metadados": {
+          "titulo": "afrikaans language outdoor and travel magazine",
+          "descricao": "",
+          "canonica": "https://en.wikipedia.org/wiki/Weg!",
+          "og": {
+            "og:title": "Weg! - Wikipedia",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "2006-02-23T07:28:54Z",
+          "atualizado_em": "2026-05-16T10:50:29Z",
+          "autor": "Contributors to Wikimedia projects",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2006-02-23T07:28:54Z",
+            "dateModified": "2026-05-16T10:50:29Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contributors to Wikimedia projects"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "afrikaans language outdoor and travel magazine"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "(literal English translation: ; title of English-language version: ) is an outdoor and . It was first published in April 2004 and is owned by the division of . The magazine focuses on affordable destinations in and the rest of . Weg! Away! Go! Afrikaans-language travel magazine Media24 Naspers 1 [ ] South Africa Africa\nIn addition to travel articles, the magazine also contains portfolios focusing on nature and , as well as , , , and outdoor equipment reviews. photographic recipes car book music\nThe original name of the magazine was (Break Away), but it was forced to change its name after a court case with , the publishers of the rival magazine. Wegbreek Ramsay, Son & Parker Getaway\nIn February 2006, the magazine achieved a circulation of 77,174 (as audited by the ), making it the largest outdoor and in any language in South Africa. This position was consolidated by the launch of its sister magazine, , in June of the same year, which resulted in a combined circulation figure of 113,248 by November 2006. Audit Bureau of Circulations of South Africa travel magazine English-language Go!\nIn December 2006, (Tow Away), a former caravanning and camping supplement, was launched as an independent magazine. WegSleep\nThe founding editor of the magazine was Bun Booyens. He was succeeded by Barnie Louw from 2010 to 2013, with Pierre Steyn taking over the reins as editor early in 2014. 2 [ ]\nIn 2011, produced its first stand-alone travel map of the , created by in-house cartographer François Haasbroek. Since then, the magazine has published detailed travel maps of and the . Weg! Baviaanskloof Namibia Kruger National Park\nThe magazine has received several awards, including:\nAt the 2006 Magazine Publishers' Association of South Africa's Pica Awards: Sappi 3 [ ]\nThe inaugural Award for Editor of the Year to Booyens. Jane Raphaely\nThe best magazine in the Travel, Wildlife and Conservation category.\nThe best supplement, for WegSleep.\nIn both 2005 and 2006, travel editor and columnist won the \"ATKVeertjie\" award from the (Afrikaans Language and Cultural Society) for magazine journalism. Dana Snyman Afrikaanse Taal en Kultuurvereniging 4 [ ]\nAt the 2006 ADvantage awards of the South African magazine industry:\nMagazine editor of the year.\nBest magazine in the leisure category.\n↑ . Media24. Archived from on 25 October 2011. \"Weg/go!\" the original . Retrieved 2011 28 September\n↑ . Who's Who of Southern Africa. \"Bun Booyens\" . Retrieved 2011 28 September\n↑ . . 2 November 2006. \"Booyens ry Weg! met PICA Editor of the Year\" Bizcommunity.com . Retrieved 2011 28 September\n↑ . NB Publishers. 2009. \"Dana Snyman\" . Retrieved 2011 28 September\nMagazine official website Weg (in Afrikaans)\nMagazine Website go! Archived 2017-09-20 at the Wayback Machine\nData on circulation figures\n(South African edition) Men's Health"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "First issue",
+              "April 2004 ( 2004-04 )"
+            ],
+            [
+              "Company",
+              "Media24"
+            ],
+            [
+              "Country",
+              "South Africa"
+            ],
+            [
+              "Language",
+              "Afrikaans"
+            ],
+            [
+              "Website",
+              "www .weg .co .za"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navba"
+            ],
+            [
+              "Newspapers",
+              "National",
+              "Rapport Beeld City Press Daily Sun Die Burger The Witness Volksblad Son op Sondag"
+            ],
+            [
+              "Local Sold Newspapers",
+              "Paarl Post Hermanus Times District Mail Eikestadnuus Worcester Standard Weslander [ af ]"
+            ],
+            [
+              "Local Free Newspapers",
+              "Uitenhage Despatch News PE Express Kouga Express Mthatha Express Queenstown Express"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+          "https://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&amp;type=1x1&amp;usesul3=1",
+          "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+          "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-1af776a0003e",
+            "type": "image",
+            "title": "Wikipedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0997b8b9c241",
+            "type": "image",
+            "title": "The Free Encyclopedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The Free Encyclopedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-de5e034dce69",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f861890d8556",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-65b988f7acf3",
+            "type": "document",
+            "title": "weggo.html",
+            "url": "https://web.archive.org/web/20111025011417/http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+            "final_url": "https://web.archive.org/web/20111025011417/http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "web.archive.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-53fb9a8afe40",
+            "type": "document",
+            "title": "weggo.html",
+            "url": "http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+            "final_url": "http://www.media24.com/en/magazines/lifestyle-magazines/weggo.html",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "www.media24.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-30e2ab83d6ec",
+            "type": "document",
+            "title": "12321.html",
+            "url": "https://www.bizcommunity.com/Article/196/39/12321.html",
+            "final_url": "https://www.bizcommunity.com/Article/196/39/12321.html",
+            "source_title": "afrikaans language outdoor and travel magazine",
+            "source_url": "https://en.wikipedia.org/wiki/Weg%21",
+            "publisher": "www.bizcommunity.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "result": {
+        "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+        "texto": "WEG Razão social WEG S.A. Tipo Empresa de capital aberto Cotação : : B3 WEGE3 NASDAQ WEGZY Atividade Engenharia industrial Fundação de (65anos) 16 de setembro 1961 Fundador(es) Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus Sede , , Jaraguá do Sul Santa Catarina Brasil Área(s) servida(s) Mundo Proprietário(s) Famílias Silva, Werninghaus e Voigt Presidente Alberto Yoshikazu Kuba 1 [ ] Empregados 40,793 (2023) 2 [ ] 26 694 () América do Sul 5 083 () América do Norte 2 664 () Ásia-Pacífico 1 926 () Europa 620 () África Produtos , , , , , , , , e Motores elétricos geradores transformadores disjuntores acionamento de motores controle e automação industrial componentes mecânicos equipamentos de energia tintas vernizes Acionistas WPA Participações e Serviços (50,10%) (35,30%) Free float Família dos fundadores (14,40%) Administradores (0,10%) (0,10%) Tesouraria Valor de mercado 138 bilhões (dez/2021) R$ 2 [ ] 3 [ ] 4 [ ] Ativos 23.93 bilhões R$ (2021) 2 [ ] Lucro 3.65 bilhões R$ (2021) 2 [ ] LAJIR 4.15 bilhões R$ (2021) 2 [ ] Faturamento 23.56 bilhões R$ (2021) 2 [ ] Website www.weg.net/br é uma que atua nas áreas de , e . Sua sede está em , no de . Fundada originalmente como . em 1961, a empresa foi rebatizada tempos depois para WEG, das iniciais dos três fundadores , e . WEG empresa brasileira mundialmente engenharia elétrica tecnologia de energia elétrica automação Jaraguá do Sul estado Santa Catarina 5 [ ] 6 [ ] Eletromotores Jaraguá 7 [ ] acrônimo Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 8 [ ] 9 [ ] A empresa possui operações em cerca de 140 países, com aproximadamente 40.000 funcionários. É uma das maiores fabricantes de motores elétricos e equipamentos associados do mundo. A empresa produz motores elétricos, geradores, alternadores, transformadores, turbinas, BESS, drives, revestimentos e presta serviços de automação industrial, entre outros produtos e soluções integradas relacionadas a sistemas elétricos. 10 [ ] História [ editar | editar código ] A WEG surgiu oficialmente em 16 de setembro de 1961 como , em referência à . Mais tarde, a empresa recebeu seu nome atual, WEG, sigla formada pelas iniciais dos três fundadores da empresa: , e . Eletromotores Jaraguá Jaraguá do Sul Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 7 [ ] 8 [ ] 9 [ ] No ano de 1970 iniciou a sua atuação no mercado internacional ao exportar seus produtos para alguns países da e em 1971 abriu seu capital na Bovespa (atual ). Em setembro de 1975, alcançou a marca de 1 milhão de motores fabricados. América Latina 11 [ ] B3 12 [ ] 13 [ ] Produzindo inicialmente motores elétricos, a WEG começou a ampliar suas atividades a partir da década de 80, com a produção de máquinas elétricas, componentes eletroeletrônicos, produtos para , transformadores de força e distribuição, líquidas e em pó e vernizes eletroisolantes. automação industrial tintas Em 1988, foi criada a WEG Exportadora, empresa criada para exportar os produtos da WEG no mercado internacional. 14 [ ] Em setembro de 1991, começou a atuar na ao abrir a filial WEG Electric Corp nos . Antes de abrir um nos Estados Unidos, a WEG já exportava seus produtos para o mercado americano desde 1977. América do Norte Estados Unidos subsidiária 15 [ ] Em setembro de 1992, começa a atuar na ao adquirir uma empresa na para exportar seus produtos por todo o continente europeu. Atualmente a subsidiária belga se chama WEG Benelux. Europa Bélgica 16 [ ] Em 1994, entrou no mercado asiático após abrir uma subsidiária no , e no ano seguinte passou a atuar também na e . Japão 17 [ ] Alemanha 18 [ ] Austrália 19 [ ] Em março de 2009, fechou sua fábrica em e demitiu 370 pessoas, a alegação das demissões foi devido a uma reestruturação na divisão de motores elétricos para eletrodomésticos e também por causa da . Guarulhos 20 [ ] Grande Recessão 21 [ ] Em 2011, a WEG entra para o mercado de . Em 9 de junho de 2015, ocorreu um incêndio na fábrica da empresa na cidade de Jaraguá do Sul, apesar do problema ninguém ficou ferido e a produção da unidade fabril continuou normalmente pouco tempo depois. aerogeradores 22 [ ] 23 [ ] Expansão [ editar | editar código ] . Esta seção pode conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES Visão frontal da fábrica \"WEG II, Asa Leste\" localizada em . Jaraguá do Sul Em abril de 2006, adquiriu 30% da empresa fabricante de Voltran. transformadores mexicana 24 [ ] Em março de 2007, comprou 48,6% da companhia gaucha de transformadores elétricos por 49,4 milhões de e em janeiro de 2010 adquiriu o restante das ações e passou a deter 100% da empresa. Trafo reais 25 [ ] 26 [ ] Em agosto de 2007, comprou a fabricante de e e com isso criou a que passa a ser a divisão do grupo de equipamentos de . catarinense aerogeradores turbinas eólicas HISA WEG HiSA energia eólica 27 [ ] Em 2010, a WEG adquiriu o controle acionário do na e aumentou sua participação acionária para 60% na fabricante de transformadores . ZEST Group África do Sul mexicana Voltran 28 [ ] 29 [ ] Também em 2010 adquiriu a , fabricante de sensores eletrônicos para automação industrial, comercial e de proteção humana e entrou no negócio de com a aquisição da . Instrutech 30 [ ] critical power EQUISUL 31 [ ] Em 2011, adquiriu a fabricante de , a fabricante de redutores , em outubro de 2011 anuncia com Cestari Industrial para redutores e motorredutores, e em novembro de 2011 comprou uma fábrica da (GE) nos . tintas em pó argentina Pulverlux 32 [ ] 33 [ ] austríaca WATT DRIVE 34 [ ] joint venture 35 [ ] General Electric EUA 36 [ ] No ano de 2012, expandiu as suas linhas de tintas com a aquisição da e . Stardur 37 [ ] Tintas Paumar 38 [ ] Em agosto de 2013, adquiriu na a África do Sul Hawker Siddeley Electric Africa. 39 [ ] Em fevereiro de 2014, comprou 100% da fabricantes de motores e motoredutores e em abril de 2014 fez duas aquisições na , a primeira foi a compra da que atua na fabricação de motores e componentes para e de roupas, já a segunda aquisição foi a compra da que produz transmissões e componentes mecânicos para . alemã Württembergishe 40 [ ] China Changzhou Sinya Electromotor máquinas de lavar roupa secadoras Changzhou Machine Master eletrodomésticos 41 [ ] Em setembro, comprou a no estado de . Efacec Energy Service Pernambuco 42 [ ] 43 [ ] Em dezembro, adquiriu 100% da fabricante de equipamentos de alemã , essa foi a segunda aquisição da WEG na Alemanha no ano de 2014 e expandirá a divisão de fabricação de maquinas de alta rotação da empresa. motores elétricos Katt 44 [ ] 45 [ ] Em dezembro de 2016, a WEG anuncia aquisição do controle da TGM, fabricante brasileiro de turbinas e transmissões. 46 [ ] Operações [ editar | editar código ] Brasil [ editar | editar código ] Transformador WEG A WEG possui, no , quatorze parques fabris e a sua sede e principais unidades industriais estão na cidade de , . Suas demais fábricas estão espalhadas pelo (), (), (), ( e ), (, e ) e (, , , e ). Brasil 47 [ ] Jaraguá do Sul Santa Catarina Amazonas Manaus Espírito Santo Linhares Minas Gerais Betim Rio Grande do Sul Bento Gonçalves Gravataí Santa Catarina Blumenau Guaramirim Itajaí São Paulo São Paulo São Bernardo do Campo Sertãozinho Mauá Monte Alto 48 [ ] Exterior [ editar | editar código ] No exterior, a WEG possui 48 unidades fabris distribuídas nos seguintes países: 47 [ ] (, , ) África do Sul Cape Town Gauteng Johanesburgo (, , ) Alemanha Balingen Homberg Nuremberga (, , ) Argentina Burzaco Córdoba San Francisco () Áustria Niederösterreich () Colômbia Sabaneta (, Rugao, ) China Changzhou Nantong () Espanha Valência (, , , ) Estados Unidos Bluffton McHenry Minneapolis Washington () Índia Tâmil Nadu (, , ) México Cidade do México Hidalgo Tizayuca () Portugal Porto (), Turquia Cocaeli Além dessas fábricas, instalações de e comercialização e",
+        "final": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "trecho_usado": "conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES Visão frontal da fábrica \"WEG II, Asa Leste\" localizada em . Jaraguá do Sul Em abril de 2006, adquiriu 30% da empresa fabricante de Voltran. transformadores",
+        "metadados": {
+          "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "842",
+            "og:title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2005-10-11T01:25:49Z",
+          "atualizado_em": "2026-09-25T17:42:16Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2005-10-11T01:25:49Z",
+            "dateModified": "2026-09-25T17:42:16Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Empresa de capital aberto\n: : B3 WEGE3 NASDAQ WEGZY\nde (65anos) 16 de setembro 1961\nWerner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus\n, , Jaraguá do Sul Santa Catarina Brasil\nFamílias Silva, Werninghaus e Voigt\nAlberto Yoshikazu Kuba 1 [ ]\n5 083 () América do Norte\n, , , , , , , , e Motores elétricos geradores transformadores disjuntores acionamento de motores controle e automação industrial componentes mecânicos equipamentos de energia tintas vernizes\nWPA Participações e Serviços (50,10%)\nFamília dos fundadores (14,40%)\n138 bilhões (dez/2021) R$ 2 [ ] 3 [ ] 4 [ ]\n23.93 bilhões R$ (2021) 2 [ ]\n3.65 bilhões R$ (2021) 2 [ ]\n4.15 bilhões R$ (2021) 2 [ ]\n23.56 bilhões R$ (2021) 2 [ ]\né uma que atua nas áreas de , e . Sua sede está em , no de . Fundada originalmente como . em 1961, a empresa foi rebatizada tempos depois para WEG, das iniciais dos três fundadores , e . WEG empresa brasileira mundialmente engenharia elétrica tecnologia de energia elétrica automação Jaraguá do Sul estado Santa Catarina 5 [ ] 6 [ ] Eletromotores Jaraguá 7 [ ] acrônimo Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 8 [ ] 9 [ ]\nA empresa possui operações em cerca de 140 países, com aproximadamente 40.000 funcionários. É uma das maiores fabricantes de motores elétricos e equipamentos associados do mundo. A empresa produz motores elétricos, geradores, alternadores, transformadores, turbinas, BESS, drives, revestimentos e presta serviços de automação industrial, entre outros produtos e soluções integradas relacionadas a sistemas elétricos. 10 [ ]\nA WEG surgiu oficialmente em 16 de setembro de 1961 como , em referência à . Mais tarde, a empresa recebeu seu nome atual, WEG, sigla formada pelas iniciais dos três fundadores da empresa: , e . Eletromotores Jaraguá Jaraguá do Sul Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 7 [ ] 8 [ ] 9 [ ]\nNo ano de 1970 iniciou a sua atuação no mercado internacional ao exportar seus produtos para alguns países da e em 1971 abriu seu capital na Bovespa (atual ). Em setembro de 1975, alcançou a marca de 1 milhão de motores fabricados. América Latina 11 [ ] B3 12 [ ] 13 [ ]\nProduzindo inicialmente motores elétricos, a WEG começou a ampliar suas atividades a partir da década de 80, com a produção de máquinas elétricas, componentes eletroeletrônicos, produtos para , transformadores de força e distribuição, líquidas e em pó e vernizes eletroisolantes. automação industrial tintas\nEm 1988, foi criada a WEG Exportadora, empresa criada para exportar os produtos da WEG no mercado internacional. 14 [ ]\nEm setembro de 1991, começou a atuar na ao abrir a filial WEG Electric Corp nos . Antes de abrir um nos Estados Unidos, a WEG já exportava seus produtos para o mercado americano desde 1977. América do Norte Estados Unidos subsidiária 15 [ ]\nEm setembro de 1992, começa a atuar na ao adquirir uma empresa na para exportar seus produtos por todo o continente europeu. Atualmente a subsidiária belga se chama WEG Benelux. Europa Bélgica 16 [ ]\nEm 1994, entrou no mercado asiático após abrir uma subsidiária no , e no ano seguinte passou a atuar também na e . Japão 17 [ ] Alemanha 18 [ ] Austrália 19 [ ]\nEm março de 2009, fechou sua fábrica em e demitiu 370 pessoas, a alegação das demissões foi devido a uma reestruturação na divisão de motores elétricos para eletrodomésticos e também por causa da . Guarulhos 20 [ ] Grande Recessão 21 [ ]\nEm 2011, a WEG entra para o mercado de . Em 9 de junho de 2015, ocorreu um incêndio na fábrica da empresa na cidade de Jaraguá do Sul, apesar do problema ninguém ficou ferido e a produção da unidade fabril continuou normalmente pouco tempo depois. aerogeradores 22 [ ] 23 [ ]\n. Esta seção pode conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES\nVisão frontal da fábrica \"WEG II, Asa Leste\" lo"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "WEG"
+            ],
+            [
+              "Razão social",
+              "WEG S.A."
+            ],
+            [
+              "Tipo",
+              "Empresa de capital aberto"
+            ],
+            [
+              "Cotação",
+              "B3 : WEGE3 NASDAQ : WEGZY"
+            ],
+            [
+              "Atividade",
+              "Engenharia industrial"
+            ],
+            [
+              "Fundação",
+              "16 de setembro de 1961 (65 anos)"
+            ],
+            [
+              "Fundador(es)",
+              "Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus"
+            ],
+            [
+              "Sede",
+              "Jaraguá do Sul , Santa Catarina , Brasil"
+            ],
+            [
+              "Área(s) servida(s)",
+              "Mundo"
+            ],
+            [
+              "Proprietário(s)",
+              "Famílias Silva, Werninghaus e Voigt"
+            ],
+            [
+              "Presidente",
+              "Alberto Yoshikazu Kuba [ 1 ]"
+            ],
+            [
+              "Empregados",
+              "40,793 (2023) [ 2 ] 26 694 ( América do Sul ) 5 083 ( América do Norte ) 2 664 ( Ásia-Pacífico ) 1 926 ( Europa ) 620 ( África )"
+            ],
+            [
+              "Produtos",
+              "Motores elétricos , geradores , transformadores , disjuntores , acionamento de motores , controle e automação industrial , componentes mecânicos , equipamentos "
+            ],
+            [
+              "Acionistas",
+              ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-pa"
+            ],
+            [
+              "Valor de mercado",
+              "R$ 138 bilhões (dez/2021) [ 2 ] [ 3 ] [ 4 ]"
+            ],
+            [
+              "Ativos",
+              "R$ 23.93 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Lucro",
+              "R$ 3.65 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "LAJIR",
+              "R$ 4.15 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Faturamento",
+              "R$ 23.56 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Website",
+              "www.weg.net/br"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Finanças, seguros e exploração de imóveis",
+              "ALLOS B3 Banco do Brasil BB Seguridade Bradesco Bradespar BTG Pactual Caixa Seguridade Iguatemi IRB(Re) Itaúsa Itaú Unibanco Santander Brasil Multiplan Porto"
+            ],
+            [
+              "Petróleo e gás",
+              "Brava Energia Cosan Petrobras PRIO PetroRecôncavo Raízen Ultra Vibra Energia"
+            ],
+            [
+              "Utilidade pública, energia e saneamento",
+              "Auren Axia Energia Cemig Copel Copasa CPFL Energia Energisa Engie Brasil Eneva Equatorial ISA Energia Sabesp Taesa"
+            ],
+            [
+              "Bens industriais e transporte",
+              "Embraer Localiza Marcopolo Motiva Rumo Logística Vamos WEG"
+            ],
+            [
+              "Consumo não cíclico, alimentos, comércio/distribuição e agropecuária",
+              "Ambev Assaí Grupo Pão de Açúcar MBRF Minerva Foods Natura SLC Agrícola"
+            ],
+            [
+              "Consumo cíclico e construção civil",
+              "Azzas 2154 C&A Cogna Educação Cury Cyrela Lojas Renner Magazine Luiza MRV Smart Fit Vivara Yduqs"
+            ],
+            [
+              "Materiais básicos",
+              "Braskem CSN CSN Mineração Gerdau Metalúrgica Gerdau Klabin Suzano Papel e Celulose Usiminas Vale"
+            ],
+            [
+              "Telefonia",
+              "Telefônica Brasil TIM Brasil"
+            ],
+            [
+              "Saúde",
+              "Fleury Hapvida Hypera Pharma RD Saúde Rede D'Or São Luiz"
+            ],
+            [
+              "Tecnologia da informação",
+              "Totvs"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/8/81/Weg_logo_blue_vector.svg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/250px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Newworldmap.svg/40px-Newworldmap.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-260d63dbf7e6",
+            "type": "image",
+            "title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-772265f31891",
+            "type": "image",
+            "title": "Aumento",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aumento",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5587b179f607",
+            "type": "image",
+            "title": "Baixa",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Baixa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-77470f7120a7",
+            "type": "image",
+            "title": "Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+      "result": {
+        "titulo": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+        "texto": "FOR IMMEDIATE RELEASE WEG selects TURBOdesign Suite for leveraging the Hydraulic Turbine Design process, substantially improving its speed and efficiency. Advanced Design Technology (ADT), a global leader in turbomachinery design software, and WEG, global electro-electronic equipment company, have joined forces to streamline and optimize the design process for hydraulic turbines. Aiming to bolster their capabilities in energy efficiency, WEG’s hydraulic design team sought a sophisticated tool to design and optimize hydraulic turbines for both new and refurbishment projects. After extensive research, WEG identified ADT’s TURBOdesign Suite as the optimal solution due to its unique 3D Inverse Design approach and the ability to quickly generate new blade profiles with specific characteristics for each project. \"The integration within the existing CAE environment was seamless, TURBOdesign export geometries in point, surface or solid formats for all major CAD, CFD and FEA software, it also links directly to CFD and Optimization codes allowing full stage optimization even for multiple operating conditions\", said Andre Eger. \"We are excited to partner with ADT as we anticipate a significant return on investment within the first year of software usage, thanks to the considerable reduction in manual work, accelerated design process and associated cost savings.\" “Hydropower plays a crucial role in the current energy generation landscape by providing a reliable, renewable, and low-emission source of electricity that supports grid stability and reduces dependence on fossil fuels”, said Prof. Mehrdad Zangeneh, Managing Director of ADT and Professor of Thermofluids at University College London (UCL). “TURBOdesign has a critical role in supporting development of high efficiency and cavitation free designs across all types of hydraulic turbines.” This collaboration between WEG and ADT marks a significant step towards revolutionizing hydraulic turbine design and optimizing energy efficiency, ultimately contributing to a more sustainable and innovative future. For more information on the case study and the partnership between ADT and WEG, please visit our website or contact the press contact below. About Advanced Design Technology Ltd. Advanced Design Technology (ADT) is a global leader in the development of advanced turbomachinery design methods, which help shorten development time and improve performance of turbomachinery components. Our aim is to put designers in direct control of the aerodynamic design and to considerably shorten the design time and time to market for a range of turbomachinery products. ADT’s clients, who represent some of the leading global players in the aerospace, automotive, power generation and marine fields, have achieved significant returns on investment in terms of reduction in design times, higher performance and ease of know-how transfer among different design teams and projects. For more information, call +44 (0) 20 7299 1170 or go to: www.adtechnology.com About WEG WEG was founded in 1961 and is a global electro-electronic equipment company, operating in the capital goods sector with focus on electric motors, gearboxes and drives and controls, energy generation and transformers, electrification products and systems, automation and digitalization and Liquid and Powder Coatings. WEG stands out in innovation by constantly developing solutions to meet the major trends in energy efficiency, renewable energy and electric mobility. www.weg.net Media Contacts Ali Panchoo Advanced Design Technology +44 (0) 20 7299 1170 a.panchoo@adtechnology.com",
+        "final": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+        "trecho_usado": "efficiency, ultimately contributing to a more sustainable and innovative future. For more information on the case study and the partnership between ADT and WEG, please visit our website or contact the press contact below. About Advanced Design Technology Ltd. Advanced Design Technology (ADT) is a global leader in the development of advanced turbomachinery design methods, which help shorten",
+        "metadados": {
+          "titulo": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "WEG selects TURBOdesign Suite for leveraging the Hydraulic Turbine Design process, substantially improving its speed and efficiency.\nAdvanced Design Technology (ADT), a global leader in turbomachinery design software, and WEG, global electro-electronic equipment company, have joined forces to streamline and optimize the design process for hydraulic turbines. Aiming to bolster their capabilities in energy efficiency, WEG’s hydraulic design team sought a sophisticated tool to design and optimize hydraulic turbines for both new and refurbishment projects.\nAfter extensive research, WEG identified ADT’s TURBOdesign Suite as the optimal solution due to its unique 3D Inverse Design approach and the ability to quickly generate new blade profiles with specific characteristics for each project.\n\"The integration within the existing CAE environment was seamless, TURBOdesign export geometries in point, surface or solid formats for all major CAD, CFD and FEA software, it also links directly to CFD and Optimization codes allowing full stage optimization even for multiple operating conditions\", said Andre Eger.\n\"We are excited to partner with ADT as we anticipate a significant return on investment within the first year of software usage, thanks to the considerable reduction in manual work, accelerated design process and associated cost savings.\"\n“Hydropower plays a crucial role in the current energy generation landscape by providing a reliable, renewable, and low-emission source of electricity that supports grid stability and reduces dependence on fossil fuels”, said Prof. Mehrdad Zangeneh, Managing Director of ADT and Professor of Thermofluids at University College London (UCL). “TURBOdesign has a critical role in supporting development of high efficiency and cavitation free designs across all types of hydraulic turbines.”\nThis collaboration between WEG and ADT marks a significant step towards revolutionizing hydraulic turbine design and optimizing energy efficiency, ultimately contributing to a more sustainable and innovative future. For more information on the case study and the partnership between ADT and WEG, please visit our website or contact the press contact below.\nAbout Advanced Design Technology Ltd.\nAdvanced Design Technology (ADT) is a global leader in the development of advanced turbomachinery design methods, which help shorten development time and improve performance of turbomachinery components.\nOur aim is to put designers in direct control of the aerodynamic design and to considerably shorten the design time and time to market for a range of turbomachinery products. ADT’s clients, who represent some of the leading global players in the aerospace, automotive, power generation and marine fields, have achieved significant returns on investment in terms of reduction in design times, higher performance and ease of know-how transfer among different design teams and projects.\nFor more information, call +44 (0) 20 7299 1170 or go to: www.adtechnology.com\nWEG was founded in 1961 and is a global electro-electronic equipment company, operating in the capital goods sector with focus on electric motors, gearboxes and drives and controls, energy generation and transformers, electrification products and systems, automation and digitalization and Liquid and Powder Coatings.\nWEG stands out in innovation by constantly developing solutions to meet the major trends in energy efficiency, renewable energy and electric mobility.\nAli Panchoo Advanced Design Technology +44 (0) 20 7299 1170 a.panchoo@adtechnology.com"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Posted By:",
+              "Ali Panchoo"
+            ],
+            [
+              "Date:",
+              "Wed, 24 Jul 2024, 11:44 a.m."
+            ]
+          ],
+          [
+            [
+              "Your Name:",
+              ""
+            ],
+            [
+              "Your Email Address:",
+              ""
+            ],
+            [
+              "Subject:",
+              ""
+            ],
+            [
+              "Message:"
+            ],
+            [
+              "If you'd like to include a link to another page with your message, please provide both the URL address and the title of the page:"
+            ],
+            [
+              "Optional Link URL:",
+              ""
+            ],
+            [
+              "Optional Link Title:",
+              ""
+            ],
+            [
+              "If you'd like to include an image (picture) with your message, please provide the URL address of the image file:"
+            ],
+            [
+              "Optional Image URL:",
+              ""
+            ],
+            [
+              "If you'd like email notification of responses, please check this box:"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://www.cfd-online.com/Images/new_cfdonline_logo_main_star.gif",
+          "https://www.cfd-online.com/Images/new_cfdonline_logo_main_name.gif",
+          "https://www.cfd-online.com/Images/new_cfdonline_logo_home.gif",
+          "https://www.cfd-online.com/WebAdverts/ads.pl?page=navigation",
+          "https://www.cfd-online.com/Banners/CFD-Wiki_GIF_button_01_88x31.gif",
+          "https://2115715.fs1.hubspotusercontent-na1.net/hubfs/2115715/Collateral%20Planning/Case%20Studies/WEG/Francis-Horizontal.jpg",
+          "https://www.cfd-online.com/Icons/top_arrow.gif"
+        ],
+        "midia": [
+          {
+            "id": "med-7aff6584d44e",
+            "type": "image",
+            "title": "CFD Online Logo",
+            "url": "https://www.cfd-online.com/Images/new_cfdonline_logo_main_star.gif",
+            "final_url": "https://www.cfd-online.com/Images/new_cfdonline_logo_main_star.gif",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "CFD Online Logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f582bd8c65c0",
+            "type": "image",
+            "title": "CFD Online URL",
+            "url": "https://www.cfd-online.com/Images/new_cfdonline_logo_main_name.gif",
+            "final_url": "https://www.cfd-online.com/Images/new_cfdonline_logo_main_name.gif",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "CFD Online URL",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-27799121a7f2",
+            "type": "image",
+            "title": "www.cfd-online.com",
+            "url": "https://www.cfd-online.com/Images/new_cfdonline_logo_home.gif",
+            "final_url": "https://www.cfd-online.com/Images/new_cfdonline_logo_home.gif",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "www.cfd-online.com",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-81126c3c0550",
+            "type": "image",
+            "title": "CFD-Wiki",
+            "url": "https://www.cfd-online.com/Banners/CFD-Wiki_GIF_button_01_88x31.gif",
+            "final_url": "https://www.cfd-online.com/Banners/CFD-Wiki_GIF_button_01_88x31.gif",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "CFD-Wiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-33e0d706d344",
+            "type": "image",
+            "title": "Go to top",
+            "url": "https://www.cfd-online.com/Icons/top_arrow.gif",
+            "final_url": "https://www.cfd-online.com/Icons/top_arrow.gif",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Go to top",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6be41f6fcffd",
+            "type": "document",
+            "title": "whatsnew.html",
+            "url": "https://www.cfd-online.com/Links/whatsnew.html",
+            "final_url": "https://www.cfd-online.com/Links/whatsnew.html",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-ef7b14ef9d97",
+            "type": "document",
+            "title": "intro.html",
+            "url": "https://www.cfd-online.com/Links/intro.html",
+            "final_url": "https://www.cfd-online.com/Links/intro.html",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8f282ff7f1e8",
+            "type": "document",
+            "title": "modeling_and_numerics.html",
+            "url": "https://www.cfd-online.com/Links/modeling_and_numerics.html",
+            "final_url": "https://www.cfd-online.com/Links/modeling_and_numerics.html",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-6f8e04f432e5",
+            "type": "document",
+            "title": "meshing.html",
+            "url": "https://www.cfd-online.com/Links/meshing.html",
+            "final_url": "https://www.cfd-online.com/Links/meshing.html",
+            "source_title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "source_url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "publisher": "www.cfd-online.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "result": {
+        "titulo": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+        "texto": "Canonical URL https://creativecommons.org/licenses/by-sa/4.0/ See the legal code You are free to: — copy and redistribute the material in any medium or format for any purpose, even commercially. Share — remix, transform, and build upon the material for any purpose, even commercially. Adapt The licensor cannot revoke these freedoms as long as you follow the license terms. Under the following terms: — You must give , provide a link to the license, and . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. Attribution appropriate credit indicate if changes were made — If you remix, transform, or build upon the material, you must distribute your contributions under the as the original. ShareAlike same license — You may not apply legal terms or that legally restrict others from doing anything the license permits. No additional restrictions technological measures Notices: You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable . exception or limitation No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material. Creative Commons is not a law firm and does not provide legal services. Distributing, displaying, or linking to this deed or the license that it summarizes does not create a lawyer-client or any other relationship. Creative Commons is the nonprofit behind the open licenses and other legal tools that allow creators to share their work. Our legal tools are free to use. Learn more about our work Learn more about CC Licensing Support our work Use the license for your own material. Licenses List Public Domain List",
+        "final": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "trecho_usado": "your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material. Creative Commons is",
+        "metadados": {
+          "titulo": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+          "descricao": "",
+          "canonica": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "— copy and redistribute the material in any medium or format for any purpose, even commercially. Share\n— remix, transform, and build upon the material for any purpose, even commercially. Adapt\nThe licensor cannot revoke these freedoms as long as you follow the license terms."
+          },
+          {
+            "titulo": "Under the following terms:",
+            "texto": "— You must give , provide a link to the license, and . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. Attribution appropriate credit indicate if changes were made\n— If you remix, transform, or build upon the material, you must distribute your contributions under the as the original. ShareAlike same license\n— You may not apply legal terms or that legally restrict others from doing anything the license permits. No additional restrictions technological measures\nYou do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable . exception or limitation\nNo warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights\nThis deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material.\nCreative Commons is not a law firm and does not provide legal services. Distributing, displaying, or linking to this deed or the license that it summarizes does not create a lawyer-client or any other relationship.\nCreative Commons is the nonprofit behind the open licenses and other legal tools that allow creators to share their work. Our legal tools are free to use.\nLearn more about our work\nLearn more about CC Licensing\nUse the license for your own material."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.allmystery.de/themen/pr28907-2871",
+      "result": {
+        "titulo": "vampirox",
+        "texto": "Herzallerliebster, deine Äußerung fiel im Zusammenhang mit NGOs:Zu Andrew Seal:Erinnere dich an die Ausagen Dr. Thierens- englischer Audiotrack und Untertitel sind verfügbar:Diese jüdische Quelle gibt seine Aussagen korrekt wieder:Wen meinst du den sonst mit deiner Aussage, dass der Genozidvorwurf schon vor dem 7. Oktober erhoben wurde, wenn nicht NGOs? Marsmenschen?Warum? Per Logik dürften dann auch muslimische Quellen und alle Quellen aus dem Nahen Osten nicht neutral sein. Was ist mit Juden wie Norman Finkelstein, die Israel des Genozids bezichtigen?Teils- also wird nicht alles mit Lügen diskreditiert. Der Teil, der nicht mit Lügen diskreditiert, sondern mit Fakten, Belegen, Argumenten, Kritik.Z.B. konntest du nicht widerlegen, dass in früheren Konflikten in Äthiopien und Sudan Terroristen in den von ihnen kontrollierten Gebieten Hilfsgüter stahlen und die UNO als Gegenmaßnahme zu Recht die Hilfslieferungen einstellte. In Gaza 2009 ebenso, als Hamas Hilfsgüter stahl. Unabhängig davon, wie groß der Anteil der gestohlenen Güter war. Solche Maßnahmen sind legitim. Aber wenn Israel das tut, wenn Hamas stiehlt, ist natürlich Hunger als Waffe...Übrigens, manche NGO-Mitarbeiter bzw. -Abteilungen berichten doch ab und zu wahrheitsgemäß: Zitiere doch einfach einen Beitrag von mir, wo ich voreingenommene Quellen für meinen Standpunkt nutze statt auszuweichen mein Bester. Ataraxie89 schrieb am 25.08.2026: Du hast doch selbst geschrieben: bredulino schrieb am 25.08.2026: 7 octobre : le témoignage poignant du représentant de l’OMS en Israël - Dr Michel Thieren Durch das Abspielen werden Daten an Youtube übermittelt und ggf. Cookies gesetzt. Externer Inhalt Just two months after October 7, international organizations were already discussing how to apply the term “famine” to the situation in Gaza.This was revealed by World Health Organization representative to Israel, Dr. Michel Thieren, on the Mosaïque podcast last week.The podcast was created by Akadem and the French Institute of Israel, and former journalist Antoine Mercier hosted the episode.Thieren attended a multilateral governance meeting about Gaza in Geneva in December 2023. During the meeting, Thieren said organizations discussed how important it would be to scientifically demonstrate the occurrence of a famine in Gaza, and how to use the term for communication and political pressure on Israel. According to him, this was explicitly discussed at the highest levels in these meetings.“At the very end of the meeting – I won’t say exactly where, and it wasn’t necessarily at the WHO, rest assured – there was a gathering of experts who asked the question quite forcefully. I was there, and I was absolutely stunned. What they were saying, essentially, was that one should try to find a term that could be used to exert pressure. So yes, I was very shocked by that.”Thieren added that what shocked him the most was that, in these circles, the perpetrators and the victims were designated from the very beginning, “from October 8.”“So when these people were saying it would be necessary to demonstrate famine, the guilt had already been assigned [to Israel]. When we talk about genocide, the WHO never went there, others did – but very early, these people pronounced these two terms [genocide and famine], they were thrown out right from the start. So the crimes were already predetermined, and then the organizations tried to demonstrate them. And for me, that is not normal at all.” https://www.jpost.com/international/article-871851#google_vignette bredulino schrieb am 23.07.2026: Amnesty Israel, the local branch of the Amnesty International organization, rejected a report released Thursday by its parent group that accused Israel of committing genocide in the Gaza Strip, with some members accusing the report’s authors of reaching a “predetermined conclusion.”Amnesty Israel said that although the death and destruction in Gaza had reached “catastrophic proportions,” its own analysis did not find that Israel’s actions met the definition of genocide.The Israeli branch of the international rights group asserted, however, that Israel’s actions in the war against Hamas following the terror group’s massacres of October 7, 2023, “may amount to crimes against humanity and ethnic cleansing.” https://www.timesofisrael.com/predetermined-conclusions-amnesty-israel-workers-slam-parent-groups-genocide-charge/ Nein, aber per Logik nicht neutral. Ataraxie89 schrieb am 25.08.2026: dass Israel sogar eigene Agenturen damit beauftragt hat die Arbeit von NGOs und anderen Institutionen bewusst und . Ataraxie89 schrieb am 25.08.2026: mit Lügen zu diskreditieren teils https://www.stern.de/news/hochrangiger-un-vertreter-erhebt-schwere-vorwuerfe-gegen-die-hamas-im-gazastreifen-37958800.html",
+        "final": "https://www.allmystery.de/themen/pr28907-2871",
+        "trecho_usado": "diskreditiert. Der Teil, der nicht mit Lügen diskreditiert, sondern mit Fakten, Belegen, Argumenten, Kritik.Z.B. konntest du nicht widerlegen, dass in früheren Konflikten in Äthiopien und Sudan Terroristen in den von ihnen kontrollierten Gebieten Hilfsgüter stahlen und die UNO als Gegenmaßnahme zu Recht die Hilfslieferungen einstellte. In Gaza 2009 ebenso, als Hamas Hilfsgüter stahl. Unabhängig",
+        "metadados": {
+          "titulo": "vampirox",
+          "descricao": "Was zur Zeit im Nahen Osten passiert ist für mich nicht mehr zu verstehen. Israelismorden, morden und nach heutigen Zeitungsberichten schrecken sie nicht einma... (Seite 2872)",
+          "canonica": "https://www.allmystery.de/themen/pr28907-2871",
+          "og": {},
+          "twitter": {},
+          "idioma": "de",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "Person",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Zitiere doch einfach einen Beitrag von mir, wo ich voreingenommene Quellen für meinen Standpunkt nutze statt auszuweichen mein Bester. Ataraxie89 schrieb am 25.08.2026:\nDu hast doch selbst geschrieben: bredulino schrieb am 25.08.2026:\nJust two months after October 7, international organizations were already discussing how to apply the term “famine” to the situation in Gaza.This was revealed by World Health Organization representative to Israel, Dr. Michel Thieren, on the Mosaïque podcast last week.The podcast was created by Akadem and the French Institute of Israel, and former journalist Antoine Mercier hosted the episode.Thieren attended a multilateral governance meeting about Gaza in Geneva in December 2023. During the meeting, Thieren said organizations discussed how important it would be to scientifically demonstrate the occurrence of a famine in Gaza, and how to use the term for communication and political pressure on Israel. According to him, this was explicitly discussed at the highest levels in these meetings.“At the very end of the meeting – I won’t say exactly where, and it wasn’t necessarily at the WHO, rest assured – there was a gathering of experts who asked the question quite forcefully. I was there, and I was absolutely stunned. What they were saying, essentially, was that one should try to find a term that could be used to exert pressure. So yes, I was very shocked by that.”Thieren added that wha\nbredulino schrieb am 23.07.2026: https://www.timesofisrael.com/predetermined-conclusions-amnesty-israel-workers-slam-parent-groups-genocide-charge/\nAmnesty Israel, the local branch of the Amnesty International organization, rejected a report released Thursday by its parent group that accused Israel of committing genocide in the Gaza Strip, with some members accusing the report’s authors of reaching a “predetermined conclusion.”Amnesty Israel said that although the death and destruction in Gaza had reached “catastrophic proportions,” its own analysis did not find that Israel’s actions met the definition of genocide.The Israeli branch of the international rights group asserted, however, that Israel’s actions in the war against Hamas following the terror group’s massacres of October 7, 2023, “may amount to crimes against humanity and ethnic cleansing.”\nNein, aber per Logik nicht neutral. Ataraxie89 schrieb am 25.08.2026:\ndass Israel sogar eigene Agenturen damit beauftragt hat die Arbeit von NGOs und anderen Institutionen bewusst und . Ataraxie89 schrieb am 25.08.2026: mit Lügen zu diskreditieren teils"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.allmystery.de/static/images/heartbeat.gif",
+          "https://www.allmystery.de/static/th/users/user_220023_u11uo3uha9uz.jpg",
+          "https://www.allmystery.de/static/th/users/allmystery.png",
+          "https://www.allmystery.de/i/ykkro4ikrt5s_genozidvorwurf.png",
+          "https://www.allmystery.de/i/ye8j6fcgiqry_ANDREWSEAL.png",
+          "https://www.allmystery.de/static/th/yt/xeO8Fr6Vlpc/hqdefault.jpg",
+          "https://www.allmystery.de/static/th/users/user_170275_z9wjgnudjdun.jpg",
+          "https://www.allmystery.de/static/th/users/user_223997_aru9jnpadheu.jpg",
+          "https://www.allmystery.de/i/tkiw72ovc2ip_gewichtet.png",
+          "https://www.allmystery.de/i/u2ovrf4ju7b5_gewichtet2.png"
+        ],
+        "midia": [
+          {
+            "id": "med-ec2e4aa471e4",
+            "type": "image",
+            "title": "Allmystery",
+            "url": "https://www.allmystery.de/static/images/heartbeat.gif",
+            "final_url": "https://www.allmystery.de/static/images/heartbeat.gif",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Allmystery",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-23f9b772a5f0",
+            "type": "image",
+            "title": "Zitat von Ataraxie89",
+            "url": "https://www.allmystery.de/static/th/users/user_220023_u11uo3uha9uz.jpg",
+            "final_url": "https://www.allmystery.de/static/th/users/user_220023_u11uo3uha9uz.jpg",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Zitat von Ataraxie89",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-68d74fa15d8f",
+            "type": "image",
+            "title": "Zitat von bredulino",
+            "url": "https://www.allmystery.de/static/th/users/allmystery.png",
+            "final_url": "https://www.allmystery.de/static/th/users/allmystery.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Zitat von bredulino",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8200763584bd",
+            "type": "image",
+            "title": "genozidvorwurf",
+            "url": "https://www.allmystery.de/i/ykkro4ikrt5s_genozidvorwurf.png",
+            "final_url": "https://www.allmystery.de/i/ykkro4ikrt5s_genozidvorwurf.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "genozidvorwurf",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-577b6474d503",
+            "type": "image",
+            "title": "ANDREWSEAL",
+            "url": "https://www.allmystery.de/i/ye8j6fcgiqry_ANDREWSEAL.png",
+            "final_url": "https://www.allmystery.de/i/ye8j6fcgiqry_ANDREWSEAL.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ANDREWSEAL",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8285971d3856",
+            "type": "image",
+            "title": "Youtube: 7 octobre : le témoignage poignant du représentant de l’OMS en Israël - Dr Michel Thieren",
+            "url": "https://www.allmystery.de/static/th/yt/xeO8Fr6Vlpc/hqdefault.jpg",
+            "final_url": "https://www.allmystery.de/static/th/yt/xeO8Fr6Vlpc/hqdefault.jpg",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Youtube: 7 octobre : le témoignage poignant du représentant de l’OMS en Israël - Dr Michel Thieren",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-41f3f91d809d",
+            "type": "image",
+            "title": "Profil von xsaibotx",
+            "url": "https://www.allmystery.de/static/th/users/user_170275_z9wjgnudjdun.jpg",
+            "final_url": "https://www.allmystery.de/static/th/users/user_170275_z9wjgnudjdun.jpg",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Profil von xsaibotx",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1a3fab40f332",
+            "type": "image",
+            "title": "Profil von paxito",
+            "url": "https://www.allmystery.de/static/th/users/user_223997_aru9jnpadheu.jpg",
+            "final_url": "https://www.allmystery.de/static/th/users/user_223997_aru9jnpadheu.jpg",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Profil von paxito",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-70e81dd9525e",
+            "type": "image",
+            "title": "gewichtet",
+            "url": "https://www.allmystery.de/i/tkiw72ovc2ip_gewichtet.png",
+            "final_url": "https://www.allmystery.de/i/tkiw72ovc2ip_gewichtet.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "gewichtet",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dc39e183ac10",
+            "type": "image",
+            "title": "gewichtet2",
+            "url": "https://www.allmystery.de/i/u2ovrf4ju7b5_gewichtet2.png",
+            "final_url": "https://www.allmystery.de/i/u2ovrf4ju7b5_gewichtet2.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "gewichtet2",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5fcc8e4e84c",
+            "type": "image",
+            "title": "790268990 4540392352916431 4088828115736",
+            "url": "https://www.allmystery.de/i/gzhkzrli6p0x_790268990_4540392352916431_4088828115736.png",
+            "final_url": "https://www.allmystery.de/i/gzhkzrli6p0x_790268990_4540392352916431_4088828115736.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "790268990 4540392352916431 4088828115736",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-43e1eeefb199",
+            "type": "image",
+            "title": "790551740 1604995534368822 8038310534034",
+            "url": "https://www.allmystery.de/i/ofomdnsdk3id_790551740_1604995534368822_8038310534034.png",
+            "final_url": "https://www.allmystery.de/i/ofomdnsdk3id_790551740_1604995534368822_8038310534034.png",
+            "source_title": "vampirox",
+            "source_url": "https://www.allmystery.de/themen/pr28907-2871",
+            "publisher": "www.allmystery.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "790551740 1604995534368822 8038310534034",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "26af039bc76859fc07c5",
+            "url": "https://www.weg.net/institutional/BR/pt/",
+            "title": "Homepage | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas."
+          },
+          {
+            "id": "017eed77b13210ac709a",
+            "url": "https://www.weg.net/",
+            "title": "Homepage | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators."
+          },
+          {
+            "id": "31cfb26ec87d6f754f80",
+            "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação."
+          },
+          {
+            "id": "666382f4f4aca057d9d1",
+            "url": "https://www.weg.net/institutional/BR/pt/career",
+            "title": "Trabalhe Conosco | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Se você é uma dessas pessoas e quer fortalecer sua carreira numa empresa sólida, de presença global, escolha aqui o seu lugar. Valorizamos a geração de oportuni"
+          },
+          {
+            "id": "246a89983c0f192c9f65",
+            "url": "https://www.weg.net/institutional/BR/pt/contact/where-to-buy",
+            "title": "Onde Comprar - WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Veja abaixo onde você pode encontrar e comprar nossos produtos:"
+          },
+          {
+            "id": "92c3379e19c6747795d7",
+            "url": "https://www.weg.net/institutional/BR/pt/contact/service-network",
+            "title": "Assistência Técnica | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Veja onde você pode encontrar nossa rede de Assistência Técnica Autorizada:"
+          },
+          {
+            "id": "4dde8ca5fbad97a231ac",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "CC-BY-SA 4.0",
+            "origin": "marginalia",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "e4df9bc18c4df991e54d",
+            "url": "https://en.wikipedia.org/wiki/WEG_Industries",
+            "title": "WEG Industries",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "490a03c7bea2a1008da7",
+            "url": "https://en.wikipedia.org/wiki/Weg%21",
+            "title": "Weg!",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "eeb51e32323e26af66c7",
+            "url": "https://en.wikipedia.org/wiki/Ruth_B._Weg",
+            "title": "Ruth B. Weg",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "20d586b673bdada28251",
+            "url": "https://en.wikipedia.org/wiki/Neuer_Weg",
+            "title": "Neuer Weg",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "e8f811fda8c969666433",
+            "url": "https://www.cfd-online.com/Forum/news.cgi/read/117381",
+            "title": "WEG Selects TURBOdesign Suite for its Hydraulic Turbine Design Process",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "ac3016461e1579e4c7a8",
+            "url": "https://www.allmystery.de/themen/pr28907-2871",
+            "title": "Israel - wohin führt der Weg? (Seite 2872) - Allmystery",
+            "origin": "marginalia",
+            "query": "WEG",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 13,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (WEG História fontes primárias)",
+        "bing (consulta reformulada 'WEG'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (WEG História fontes primárias)",
+        "ddg: rede (WEG História fontes primárias)",
+        "marginalia: 1 resultados (WEG História fontes primárias)",
+        "marginalia (consulta reformulada 'WEG'): 6 resultados",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (WEG História fontes primárias)"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "WEG História fontes primárias",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História da empresa WEG fontes primárias",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "WEG",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T02:19:08.076236+00:00",
+  "source_revision": "ad16f213b074680c46aa0504dea6662892885640",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

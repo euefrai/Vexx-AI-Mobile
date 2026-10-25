@@ -1,0 +1,6 @@
+### Result
+{"next":1}
+### Ran Playwright code
+```js
+await (async page => { await page.evaluate(() => sessionStorage.setItem('v5992-next','1')); return {next:1}; })(page);
+```

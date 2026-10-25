@@ -1,0 +1,3096 @@
+{
+  "id": "new-10",
+  "category": "events",
+  "query": "Eventos em Ouro Preto nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.06,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 1
+    },
+    {
+      "provider": "bing",
+      "query": "ouro preto eventos culturais",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "ouro preto eventos culturais",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "ouro preto eventos culturais",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Ouro+Preto%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Ouro+Preto%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4883
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Ouro%20Preto%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Ouro%20Preto%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14349
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Ouro+Preto%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Ouro+Preto%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 16720
+    },
+    {
+      "url": "https://www.bing.com/search?q=ouro+preto+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=ouro+preto+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4751
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=ouro+preto+eventos+culturais",
+      "final": "https://old-search.marginalia.nu/search?query=ouro+preto+eventos+culturais",
+      "chars": 1031
+    },
+    {
+      "url": "https://cotacaododia.com/ouro/",
+      "final": "https://cotacaododia.com/ouro/",
+      "chars": 49501
+    },
+    {
+      "url": "https://investidor10.com.br/commodities/ouro/",
+      "final": "https://investidor10.com.br/commodities/ouro/",
+      "chars": 1473514
+    },
+    {
+      "url": "https://dolarhoje.com/ouro-hoje/",
+      "final": "https://dolarhoje.com/ouro-hoje/",
+      "chars": 62322
+    },
+    {
+      "url": "https://valordolar.com.br/cotacoes/ouro/",
+      "final": "https://valordolar.com.br/cotacoes/ouro/",
+      "chars": 177125
+    },
+    {
+      "url": "https://br.investing.com/commodities/gold",
+      "final": "https://br.investing.com/commodities/gold",
+      "chars": 1020030
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Ouro",
+      "final": "https://pt.wikipedia.org/wiki/Ouro",
+      "chars": 403741
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Ouro Preto nos próximos sete dias",
+    "resolved_request": "Eventos em Ouro Preto entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Ouro Preto"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T02:26:00.874504+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Ouro Preto"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "9ea5d9e3f4100157dc88",
+        "url": "https://cotacaododia.com/ouro/",
+        "title": "Preço do Ouro Hoje | Cotação por grama",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 21:16:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "preço do ouro O preço do ouro que aparece aqui nasce lá fora. O ouro é cotado em dólar por onça troy, a medida internacional de 31,1 gramas, e a nossa equipe co",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3321,
+        "final_url": "https://cotacaododia.com/ouro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "6c5830c66fbcf572c88d",
+        "url": "https://investidor10.com.br/commodities/ouro/",
+        "title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2025-06-03 16:21:46",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "em todo o mundo e é influenciado por diversos fatores macroeconômicos globais, como inflação, taxa de juros, política monetária, flutuações cambiais, eventos ge",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3068,
+        "final_url": "https://investidor10.com.br/commodities/ouro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "a830d9811eee947530e1",
+        "url": "https://dolarhoje.com/ouro-hoje/",
+        "title": "Ouro Hoje: Cotação, Valor e Preço do Grama!",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 21:52:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "acessórios. ouro Se estiver interessado em investir no ouro, habitue-se a acessar todo dia o para estar sempre bem informado sobre a do ouro do dia. DolarHoje.c",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2952,
+        "final_url": "https://dolarhoje.com/ouro-hoje/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "c4249edb20178ed11e48",
+        "url": "https://valordolar.com.br/cotacoes/ouro/",
+        "title": "Valor do Ouro hoje: R$ 640,0700 (-0,11%) — Atualizado às 18:14",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 21:16:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Cotação do , 24/10/2026: R$ 640,21 por grama em reais. Preço atualizado em tempo real, gráfico de 90 dias, conversor de gramas/onças e histórico completo. ouro ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 3527,
+        "final_url": "https://valordolar.com.br/cotacoes/ouro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "e63fd7929ae52c7fed94",
+        "url": "https://br.investing.com/commodities/gold",
+        "title": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "qua., 04 fev. 2026 23:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Notícias e Análises Ouro Futuros A prata pode se recuperar após a recente queda? O UBS analisa Investing.com 5 horas atrás E.U.A. - Ações fecharam o pregão em q",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2221,
+        "final_url": "https://br.investing.com/commodities/gold",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "cc5ca1b28f93193c0ee1",
+        "url": "https://pt.wikipedia.org/wiki/Ouro",
+        "title": "Ouro – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2004-03-01T03:10:18Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "contrária. SI CNTP v d e O é um elemento químico com o símbolo (do latim aurum 'ouro') e 79. É um brilhante, levemente amarelo-alaranjado, denso, macio, maleáve",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Ouro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 7,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-ccb5fa030231",
+      "type": "image",
+      "title": "Preço e cotação do ouro no Brasil: indicador do dia, variação, conversão de unidades, histórico e preço por cidade. Atualizado nos dias úteis.",
+      "url": "https://cotacaododia.com/og.php?p=ouro",
+      "final_url": "https://cotacaododia.com/og.php?p=ouro",
+      "source_title": "Preço do ouro no Brasil",
+      "source_url": "https://cotacaododia.com/ouro/",
+      "publisher": "cotacaododia.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Preço e cotação do ouro no Brasil: indicador do dia, variação, conversão de unidades, histórico e preço por cidade. Atualizado nos dias úteis.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d54b448821a6",
+      "type": "image",
+      "title": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+      "url": "https://investidor10.com.br/images/logo_share.jpg",
+      "final_url": "https://investidor10.com.br/images/logo_share.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-93cdeaa6e0f5",
+      "type": "image",
+      "title": "logo investidor10",
+      "url": "https://investidor10.com.br/assets/front/images/logo.webp",
+      "final_url": "https://investidor10.com.br/assets/front/images/logo.webp",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo investidor10",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-213cca1c6768",
+      "type": "image",
+      "title": "logo investidor10",
+      "url": "https://investidor10.com.br/assets/front/images/logo.svg",
+      "final_url": "https://investidor10.com.br/assets/front/images/logo.svg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo investidor10",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-56b1775336ea",
+      "type": "image",
+      "title": "PETR4",
+      "url": "https://investidor10.com.br/storage/companies/63d2c9ead34db.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/63d2c9ead34db.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "PETR4",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a079cb2f85bb",
+      "type": "image",
+      "title": "ITUB4",
+      "url": "https://investidor10.com.br/storage/companies/66ace9528ffb2.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66ace9528ffb2.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ITUB4",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5028ed67ac66",
+      "type": "image",
+      "title": "BPAC11",
+      "url": "https://investidor10.com.br/storage/companies/66cc8e7c56df1.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66cc8e7c56df1.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BPAC11",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-32e383b8ba4a",
+      "type": "image",
+      "title": "VALE3",
+      "url": "https://investidor10.com.br/storage/companies/66d8a81d2f056.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66d8a81d2f056.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "VALE3",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2ee50e6a6132",
+      "type": "image",
+      "title": "ABEV3",
+      "url": "https://investidor10.com.br/storage/companies/66ad41a6082c3.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66ad41a6082c3.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ABEV3",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-66c2e50569d8",
+      "type": "image",
+      "title": "BBDC3",
+      "url": "https://investidor10.com.br/storage/companies/66ad14dc6e8ce.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66ad14dc6e8ce.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BBDC3",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c67973a66ce4",
+      "type": "image",
+      "title": "WEGE3",
+      "url": "https://investidor10.com.br/storage/companies/66ad4109e41c8.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66ad4109e41c8.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "WEGE3",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e6d29a50fd72",
+      "type": "image",
+      "title": "ITSA4",
+      "url": "https://investidor10.com.br/storage/companies/66ad451089033.jpg",
+      "final_url": "https://investidor10.com.br/storage/companies/66ad451089033.jpg",
+      "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "source_url": "https://investidor10.com.br/commodities/ouro/",
+      "publisher": "investidor10.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ITSA4",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://cotacaododia.com/ouro/",
+      "titulo": "Preço do ouro no Brasil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 21:16:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://cotacaododia.com/ouro/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://investidor10.com.br/commodities/ouro/",
+      "titulo": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-06-03 16:21:46",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://investidor10.com.br/commodities/ouro/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://dolarhoje.com/ouro-hoje/",
+      "titulo": "Ouro Hoje",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://dolarhoje.com/ouro-hoje/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+      "items": [
+        {
+          "titulo": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+          "url": "https://br.investing.com/commodities/gold",
+          "trecho": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 04 fev. 2026 23:57:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://br.investing.com/commodities/gold",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://br.investing.com/commodities/gold",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Preço do Ouro Hoje | Cotação por grama",
+          "url": "https://cotacaododia.com/ouro/",
+          "trecho": "Preço do ouro hoje: R$ 637,57 por grama, queda de 2,27%. Cotação e valor atualizados, conversão de unidades, histórico e preço por cidade no Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:16:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cotacaododia.com/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://cotacaododia.com/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+          "url": "https://investidor10.com.br/commodities/ouro/",
+          "trecho": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:41:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://investidor10.com.br/commodities/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://investidor10.com.br/commodities/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Ouro – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Ouro",
+          "trecho": "O ouro é um elemento químico com o símbolo Au (do latim aurum 'ouro') e número atômico 79. É um metal brilhante, levemente amarelo-alaranjado, denso, macio, maleável e dúctil na sua forma pura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 03:51:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 8.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://pt.wikipedia.org/wiki/Ouro",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Ouro Hoje: Cotação, Valor e Preço do Grama!",
+          "url": "https://dolarhoje.com/ouro-hoje/",
+          "trecho": "O valor do grama do ouro hoje está sempre atualizado para te deixar sempre bem informado. O valor do ouro é de caráter informativo e tem como fonte o Banco Central do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dolarhoje.com/ouro-hoje",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://dolarhoje.com/ouro-hoje/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Valor do Ouro hoje: R$ 640,0700 (-0,11%) — Atualizado às 18:14",
+          "url": "https://valordolar.com.br/cotacoes/ouro/",
+          "trecho": "O preço do ouro hoje está em R$ 640,25 por grama. O ouro é negociado mundialmente em dólares por onça troy (31,1 gramas) nas bolsas de commodities, e o valor em reais reflete tanto a cotação internacional quanto o câmbio USD/BRL do momento.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:16:00 GMT"
+          },
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "bing",
+          "url_canonica": "https://valordolar.com.br/cotacoes/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://valordolar.com.br/cotacoes/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "events",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "ouro preto eventos culturais",
+      "items": [
+        {
+          "titulo": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+          "url": "https://br.investing.com/commodities/gold",
+          "trecho": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 04 fev. 2026 23:57:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://br.investing.com/commodities/gold",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://br.investing.com/commodities/gold",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Preço do Ouro Hoje | Cotação por grama",
+          "url": "https://cotacaododia.com/ouro/",
+          "trecho": "Preço do ouro hoje: R$ 637,57 por grama, queda de 2,27%. Cotação e valor atualizados, conversão de unidades, histórico e preço por cidade no Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:16:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cotacaododia.com/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://cotacaododia.com/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+          "url": "https://investidor10.com.br/commodities/ouro/",
+          "trecho": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:41:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://investidor10.com.br/commodities/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://investidor10.com.br/commodities/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Ouro – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Ouro",
+          "trecho": "O ouro é um elemento químico com o símbolo Au (do latim aurum 'ouro') e número atômico 79. É um metal brilhante, levemente amarelo-alaranjado, denso, macio, maleável e dúctil na sua forma pura.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 03:51:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 8.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://pt.wikipedia.org/wiki/Ouro",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Ouro Hoje: Cotação, Valor e Preço do Grama!",
+          "url": "https://dolarhoje.com/ouro-hoje/",
+          "trecho": "O valor do grama do ouro hoje está sempre atualizado para te deixar sempre bem informado. O valor do ouro é de caráter informativo e tem como fonte o Banco Central do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dolarhoje.com/ouro-hoje",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://dolarhoje.com/ouro-hoje/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "titulo": "Valor do Ouro hoje: R$ 640,0700 (-0,11%) — Atualizado às 18:14",
+          "url": "https://valordolar.com.br/cotacoes/ouro/",
+          "trecho": "O preço do ouro hoje está em R$ 640,25 por grama. O ouro é negociado mundialmente em dólares por onça troy (31,1 gramas) nas bolsas de commodities, e o valor em reais reflete tanto a cotação internacional quanto o câmbio USD/BRL do momento.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:16:00 GMT"
+          },
+          "discovery_query": "ouro preto eventos culturais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://valordolar.com.br/cotacoes/ouro",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "events",
+            "url": "https://valordolar.com.br/cotacoes/ouro/",
+            "eligible": false,
+            "verification": "CONTEXT_ONLY",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "name",
+              "location",
+              "event_date",
+              "organizer",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {}
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://dolarhoje.com/ouro-hoje/",
+      "result": {
+        "titulo": "Ouro Hoje",
+        "texto": "Gráfico do histórico do ouro Histórico da cotação do ouro Data Valor 24/10/2026 R$ 648,10 23/10/2026 R$ 648,18 22/10/2026 R$ 656,02 21/10/2026 R$ 667,86 20/10/2026 R$ 665,78 19/10/2026 R$ 673,19 16/10/2026 R$ 681,03 Preço do Ouro Hoje A cotação do grama do ouro hoje é de R$ 648,10 ( em relação a ontem). +0,01% O no Brasil é vinculado às cotações de Nova York e Londres sofrendo influência direta das perspectivas do mercado interno e da . preço do ouro cotação do dólar O valor do grama do está sempre atualizado para te deixar sempre bem informado. O é de caráter informativo e tem como fonte o Banco Central do Brasil. ouro hoje valor do ouro O é uma das opções de investimento disponíveis no mercado. É usado em diversos segmentos, mas principalmente na confecção de moedas, jóias e outros acessórios. ouro Se estiver interessado em investir no ouro, habitue-se a acessar todo dia o para estar sempre bem informado sobre a do ouro do dia. DolarHoje.com/ouro cotação Você também pode converter com o valores do para real e de real para a quantidade de grama de ouro que quiser. Simplesmente clique nos números e digite os que deseja no conversor. Ouro Hoje grama do ouro Por Que Devo Comprar Ouro? O ouro é um tipo de aplicação que varia em preço diariamente e em âmbito mundial, logo é importante estudar seu mercado antes de aplicar. O ouro é normalmente usado como um investimento de proteção de carteira (também chamado de ) e é recomendado principalmente em momentos de turbulência econômica e pensando no longo prazo. hedge Como Posso Comprar Ouro Físico? Para comprar ouro físico, é necessário entrar em contato com um banco, corretora de valores ou distribuidora. É possível adquirir a partir de um grama para levar consigo ou deixar sob custódia da instituição financeira. No último caso, haverá cobrança de taxas. Verifique também a pureza do ouro antes da compra. Como Posso Comprar Ouro Através de Contrato na B3? Para comprar ouro através de contrato na B3, abra conta em uma corretora de valores. O processo de compra é similar a de compra e venda de ações, mas é necessário escolher o tipo de contrato ideal. Como Posso Comprar Ouro Através de Fundos de Investimento? Também é necessário ter conta em uma corretora de valores para negociar, porém nesse caso a gestão fica a cargo do fundo de investimento escolhido e é cobrada uma taxa de administração. Quais as Taxas Relacionadas ao Investimento em Ouro? Dependendo do caso, haverá cobrança de taxa de custódia, corretagem e imposto de renda. Tabela de Valores em Gramas de Ouro Convertidos em Real Ouro Real 1g R$ 648,10 2g R$ 1296,20 5g R$ 3240,50 10g R$ 6481,00 25g R$ 16202,50 50g R$ 32405,00 100g R$ 64810,00 500g R$ 324050,00 Qual é o valor de 1 kg de ouro? 1 kg de ouro vale R$ 648100,00 hoje. Valor em moeda estrangeira Valor em real Curta no Facebook Receber no Telegram Coloque as cotações em seu site contato políticas de privacidade e responsabilidade por Pedro Menezes",
+        "final": "https://dolarhoje.com/ouro-hoje/",
+        "trecho_usado": "acessórios. ouro Se estiver interessado em investir no ouro, habitue-se a acessar todo dia o para estar sempre bem informado sobre a do ouro do dia. DolarHoje.com/ouro cotação Você também pode converter com o valores do para real e de real para a quantidade de grama de ouro que quiser. Simplesmente clique nos números e digite os que deseja no conversor. Ouro Hoje grama do ouro Por Que Devo Comprar",
+        "metadados": {
+          "titulo": "Ouro Hoje",
+          "descricao": "Ouro: Acompanhe no Dólar Hoje a cotação de hoje, com gráficos, tabelas e histórico das cotações. Use também o conversor de moedas",
+          "canonica": "https://dolarhoje.com/ouro-hoje/",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Dólar Hoje",
+            "og:title": "Ouro Hoje",
+            "og:url": "https://dolarhoje.com/ouro-hoje/",
+            "og:image": "https://dolarhoje.com/img/fb-icon.gif",
+            "og:description": "Saiba a cotação do ouro hoje."
+          },
+          "twitter": {
+            "twitter:site": "@dolarhoje"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "PedroMenezes.com",
+          "site": "Dólar Hoje",
+          "tipo": "FAQPage",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Gráfico do histórico do ouro",
+            "texto": ""
+          },
+          {
+            "titulo": "Histórico da cotação do ouro",
+            "texto": "A cotação do grama do ouro hoje é de R$ 648,10 ( em relação a ontem). +0,01%\nO no Brasil é vinculado às cotações de Nova York e Londres sofrendo influência direta das perspectivas do mercado interno e da . preço do ouro cotação do dólar\nO valor do grama do está sempre atualizado para te deixar sempre bem informado. O é de caráter informativo e tem como fonte o Banco Central do Brasil. ouro hoje valor do ouro\nO é uma das opções de investimento disponíveis no mercado. É usado em diversos segmentos, mas principalmente na confecção de moedas, jóias e outros acessórios. ouro\nSe estiver interessado em investir no ouro, habitue-se a acessar todo dia o para estar sempre bem informado sobre a do ouro do dia. DolarHoje.com/ouro cotação\nVocê também pode converter com o valores do para real e de real para a quantidade de grama de ouro que quiser. Simplesmente clique nos números e digite os que deseja no conversor. Ouro Hoje grama do ouro"
+          },
+          {
+            "titulo": "Por Que Devo Comprar Ouro?",
+            "texto": "O ouro é um tipo de aplicação que varia em preço diariamente e em âmbito mundial, logo é importante estudar seu mercado antes de aplicar. O ouro é normalmente usado como um investimento de proteção de carteira (também chamado de ) e é recomendado principalmente em momentos de turbulência econômica e pensando no longo prazo. hedge"
+          },
+          {
+            "titulo": "Como Posso Comprar Ouro Físico?",
+            "texto": "Para comprar ouro físico, é necessário entrar em contato com um banco, corretora de valores ou distribuidora. É possível adquirir a partir de um grama para levar consigo ou deixar sob custódia da instituição financeira. No último caso, haverá cobrança de taxas. Verifique também a pureza do ouro antes da compra."
+          },
+          {
+            "titulo": "Como Posso Comprar Ouro Através de Contrato na B3?",
+            "texto": "Para comprar ouro através de contrato na B3, abra conta em uma corretora de valores. O processo de compra é similar a de compra e venda de ações, mas é necessário escolher o tipo de contrato ideal."
+          },
+          {
+            "titulo": "Como Posso Comprar Ouro Através de Fundos de Investimento?",
+            "texto": "Também é necessário ter conta em uma corretora de valores para negociar, porém nesse caso a gestão fica a cargo do fundo de investimento escolhido e é cobrada uma taxa de administração."
+          },
+          {
+            "titulo": "Quais as Taxas Relacionadas ao Investimento em Ouro?",
+            "texto": "Dependendo do caso, haverá cobrança de taxa de custódia, corretagem e imposto de renda."
+          },
+          {
+            "titulo": "Tabela de Valores em Gramas de Ouro Convertidos em Real",
+            "texto": ""
+          },
+          {
+            "titulo": "Qual é o valor de 1 kg de ouro?",
+            "texto": "1 kg de ouro vale R$ 648100,00 hoje.\nColoque as cotações em seu site\npolíticas de privacidade e responsabilidade"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Data",
+              "Valor"
+            ],
+            [
+              "24/10/2026",
+              "R$ 648,10"
+            ],
+            [
+              "23/10/2026",
+              "R$ 648,18"
+            ],
+            [
+              "22/10/2026",
+              "R$ 656,02"
+            ],
+            [
+              "21/10/2026",
+              "R$ 667,86"
+            ],
+            [
+              "20/10/2026",
+              "R$ 665,78"
+            ],
+            [
+              "19/10/2026",
+              "R$ 673,19"
+            ],
+            [
+              "16/10/2026",
+              "R$ 681,03"
+            ]
+          ],
+          [
+            [
+              "Ouro",
+              "Real"
+            ],
+            [
+              "1g",
+              "R$ 648,10"
+            ],
+            [
+              "2g",
+              "R$ 1296,20"
+            ],
+            [
+              "5g",
+              "R$ 3240,50"
+            ],
+            [
+              "10g",
+              "R$ 6481,00"
+            ],
+            [
+              "25g",
+              "R$ 16202,50"
+            ],
+            [
+              "50g",
+              "R$ 32405,00"
+            ],
+            [
+              "100g",
+              "R$ 64810,00"
+            ],
+            [
+              "500g",
+              "R$ 324050,00"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://dolarhoje.com/img/fb-icon.gif"
+        ],
+        "midia": [
+          {
+            "id": "med-20d3816b0484",
+            "type": "image",
+            "title": "Saiba a cotação do ouro hoje.",
+            "url": "https://dolarhoje.com/img/fb-icon.gif",
+            "final_url": "https://dolarhoje.com/img/fb-icon.gif",
+            "source_title": "Ouro Hoje",
+            "source_url": "https://dolarhoje.com/ouro-hoje/",
+            "publisher": "dolarhoje.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Saiba a cotação do ouro hoje.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://cotacaododia.com/ouro/",
+      "result": {
+        "titulo": "Preço do ouro no Brasil",
+        "texto": "R$ 637 ,57 por grama -2,27% pregão de 23/10/2026 Converter unidade Preço por unidade: Grama Onça Calcular o valor do ouro = — 1 grama = R$ 637,57 · 1 onça troy (31,1 g) = R$ 19.830,64 Onça troy (31,1 g) R$ 19.830,71 Preço do ouro por quilate Liga Pureza Por grama Ouro 24k 99,9% puro R$ 637,57 Ouro 22k 91,7% R$ 584,44 Ouro 18k 75,0% R$ 478,18 Ouro 14k 58,3% R$ 371,92 Ouro 10k 41,7% R$ 265,65 Quilate mede a fração de ouro na liga: 18k tem 18 partes de ouro em 24. Os valores são o metal contido em cada grama; joalherias e casas de compra de ouro aplicam margem sobre eles. Histórico do ouro Carregando gráfico… Data do pregão Preço (grama) Variação 23/10/2026 R$ 637,57 -2,27% 22/10/2026 R$ 652,36 -1,83% 21/10/2026 R$ 664,50 -0,12% 20/10/2026 R$ 665,27 -0,51% 19/10/2026 R$ 668,69 -1,50% 16/10/2026 R$ 678,86 -0,36% 15/10/2026 R$ 681,30 +1,48% 14/10/2026 R$ 671,38 -0,03% Últimos 8 pregões · valores em reais, na unidade principal do produto. Ver o histórico completo do ouro O que influencia o preço do ouro O preço do ouro que aparece aqui nasce lá fora. O ouro é cotado em dólar por onça troy, a medida internacional de 31,1 gramas, e a nossa equipe converte esse valor para o grama em real. São duas forças no mesmo número: a cotação internacional do metal e o dólar. Quando a moeda americana sobe, o grama em real tende a subir junto, mesmo que o metal nem tenha se mexido no exterior. Metais como o ouro funcionam como reserva de valor e como matéria-prima da indústria e da joalheria: em tempos de incerteza, a procura aumenta e o preço reage. Hoje o grama sai a R$ 637,57, o equivalente a R$ 19.830,64 na onça troy. Como acompanhar e comparar o preço do ouro Se você compara com joia ou pensa em investir, lembre que o valor daqui é o do metal puro: feitio, pedra e a margem da loja entram por cima. De olho também em e , que se movem por perto. prata dólar Produtos relacionados Prata R$ 8,60 Dólar R$ 4,9656 Bronze R$ 45,00 Perguntas frequentes Qual o preço do ouro hoje? No último pregão (23/10/2026), o ouro está cotado a por grama, queda de 2,27% ante o pregão anterior. R$ 637,57 Quanto vale o grama do ouro 18k hoje? Hoje o grama do ouro 18k vale cerca de em metal contido (75% do ouro puro, que está em R$ 637,57). Joalherias e casas de compra aplicam margem sobre esse valor. R$ 478,18 Qual a cotação do ouro por onça? Partindo de R$ 637,57 por grama, a cotação do ouro dá R$ 19.830,64 por onça troy (31,1 g). De onde vem esse preço do ouro? Parte da referência internacional do metal, convertida em reais pela nossa equipe. Qual a diferença entre preço, cotação e valor do ouro? No dia a dia, é a mesma coisa. Quando alguém pergunta o preço do ouro, a cotação do ouro ou quanto vale o ouro, está perguntando por quanto o produto está sendo negociado hoje. É esse número que mostramos e atualizamos aqui. O que faz o preço do ouro subir ou cair? A cotação internacional do metal e o dólar, já que o preço nasce da onça troy negociada no exterior e convertida em real. Com que frequência o preço do ouro é atualizado? A cada dia útil, conforme o mercado internacional do metal e o câmbio se movem. Também procurado como ou hoje. cotação do ouro valor do ouro Levantamento da nossa equipe junto às cidades de comercialização. Os preços são informativos e não constituem recomendação de compra ou venda.",
+        "final": "https://cotacaododia.com/ouro/",
+        "trecho_usado": "preço do ouro O preço do ouro que aparece aqui nasce lá fora. O ouro é cotado em dólar por onça troy, a medida internacional de 31,1 gramas, e a nossa equipe converte esse valor para o grama em real. São duas forças no mesmo número: a cotação internacional do metal e o dólar. Quando a moeda americana sobe, o grama em real tende a subir junto, mesmo que o metal nem tenha se mexido no exterior.",
+        "metadados": {
+          "titulo": "Preço do ouro no Brasil",
+          "descricao": "Cotação atualizada do ouro, em reais, com variação diária.",
+          "canonica": "https://cotacaododia.com/ouro/",
+          "og": {
+            "og:title": "Preço do Ouro Hoje | Cotação por grama",
+            "og:description": "Preço e cotação do ouro no Brasil: indicador do dia, variação, conversão de unidades, histórico e preço por cidade. Atualizado nos dias úteis.",
+            "og:type": "website",
+            "og:url": "https://cotacaododia.com/ouro/",
+            "og:site_name": "Cotação do Dia",
+            "og:locale": "pt_BR",
+            "og:image": "https://cotacaododia.com/og.php?p=ouro",
+            "og:image:width": "1200",
+            "og:image:height": "630"
+          },
+          "twitter": {
+            "twitter:image": "https://cotacaododia.com/og.php?p=ouro",
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "2026-10-24T23:12:29-03:00",
+          "autor": "",
+          "site": "Cotação do Dia",
+          "tipo": "Dataset",
+          "ld": {
+            "dateModified": "2026-10-24T23:12:29-03:00",
+            "description": "Cotação atualizada do ouro, em reais, com variação diária."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Preço do ouro por quilate",
+            "texto": ""
+          },
+          {
+            "titulo": "O que influencia o preço do ouro",
+            "texto": "O preço do ouro que aparece aqui nasce lá fora. O ouro é cotado em dólar por onça troy, a medida internacional de 31,1 gramas, e a nossa equipe converte esse valor para o grama em real. São duas forças no mesmo número: a cotação internacional do metal e o dólar. Quando a moeda americana sobe, o grama em real tende a subir junto, mesmo que o metal nem tenha se mexido no exterior.\nMetais como o ouro funcionam como reserva de valor e como matéria-prima da indústria e da joalheria: em tempos de incerteza, a procura aumenta e o preço reage. Hoje o grama sai a R$ 637,57, o equivalente a R$ 19.830,64 na onça troy."
+          },
+          {
+            "titulo": "Como acompanhar e comparar o preço do ouro",
+            "texto": "Se você compara com joia ou pensa em investir, lembre que o valor daqui é o do metal puro: feitio, pedra e a margem da loja entram por cima. De olho também em e , que se movem por perto. prata dólar\nTambém procurado como ou hoje. cotação do ouro valor do ouro\nLevantamento da nossa equipe junto às cidades de comercialização. Os preços são informativos e não constituem recomendação de compra ou venda."
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Liga",
+              "Pureza",
+              "Por grama"
+            ],
+            [
+              "Ouro 24k",
+              "99,9% puro",
+              "R$ 637,57"
+            ],
+            [
+              "Ouro 22k",
+              "91,7%",
+              "R$ 584,44"
+            ],
+            [
+              "Ouro 18k",
+              "75,0%",
+              "R$ 478,18"
+            ],
+            [
+              "Ouro 14k",
+              "58,3%",
+              "R$ 371,92"
+            ],
+            [
+              "Ouro 10k",
+              "41,7%",
+              "R$ 265,65"
+            ]
+          ],
+          [
+            [
+              "Data do pregão",
+              "Preço (grama)",
+              "Variação"
+            ],
+            [
+              "23/10/2026",
+              "R$ 637,57",
+              "-2,27%"
+            ],
+            [
+              "22/10/2026",
+              "R$ 652,36",
+              "-1,83%"
+            ],
+            [
+              "21/10/2026",
+              "R$ 664,50",
+              "-0,12%"
+            ],
+            [
+              "20/10/2026",
+              "R$ 665,27",
+              "-0,51%"
+            ],
+            [
+              "19/10/2026",
+              "R$ 668,69",
+              "-1,50%"
+            ],
+            [
+              "16/10/2026",
+              "R$ 678,86",
+              "-0,36%"
+            ],
+            [
+              "15/10/2026",
+              "R$ 681,30",
+              "+1,48%"
+            ],
+            [
+              "14/10/2026",
+              "R$ 671,38",
+              "-0,03%"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://cotacaododia.com/og.php?p=ouro",
+          "https://cotacaododia.com/favicon.svg?v=4"
+        ],
+        "midia": [
+          {
+            "id": "med-ccb5fa030231",
+            "type": "image",
+            "title": "Preço e cotação do ouro no Brasil: indicador do dia, variação, conversão de unidades, histórico e preço por cidade. Atualizado nos dias úteis.",
+            "url": "https://cotacaododia.com/og.php?p=ouro",
+            "final_url": "https://cotacaododia.com/og.php?p=ouro",
+            "source_title": "Preço do ouro no Brasil",
+            "source_url": "https://cotacaododia.com/ouro/",
+            "publisher": "cotacaododia.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Preço e cotação do ouro no Brasil: indicador do dia, variação, conversão de unidades, histórico e preço por cidade. Atualizado nos dias úteis.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://valordolar.com.br/cotacoes/ouro/",
+      "result": {
+        "titulo": "Valor do Ouro hoje: R$ 640,2100 (+0,00%) — Atualizado às 23:26",
+        "texto": "Cotação do , 24/10/2026: R$ 640,21 por grama em reais. Preço atualizado em tempo real, gráfico de 90 dias, conversor de gramas/onças e histórico completo. ouro hoje 1 grama de ouro vale Ao vivo R$ 640,21 BRL WhatsApp Telegram Facebook X / Twitter UTC-3 · 24/10/2026 ▲ +0,00% · 1 oz: R$ 19.912,77 · 23:26 1 g de ouro = · 1 oz = R$ 640,21 R$ 19.912,77 Compra R$ 640,21 Venda R$ 653,01 Máx. dia R$ 646,61 Mín. dia R$ 633,81 1 oz troy R$ 19.912,77 1 kg R$ 640.210,00 Média 30d R$ 678,47 Mín. ano: R$ 639,68 Máx. ano: R$ 923,27 Abaixo da média — favorável Tabela de preço do ouro — 24/10/2026 Quantidade Valor em reais (BRL) de ouro 1g R$ 640,21 de ouro 5g R$ 3.201,05 de ouro 10g R$ 6.402,10 de ouro 25g R$ 16.005,25 de ouro 50g R$ 32.010,50 de ouro 100g R$ 64.021,00 de ouro 1 oz (31,1g) R$ 19.912,77 de ouro 500g R$ 320.105,00 de ouro 1 kg R$ 640.210,00 Histórico do ouro — últimos 91 dias Tabela histórica do ouro Data Fechamento Variação 24/10/2026 R$ 639,68 ▼ -0,77% 23/10/2026 R$ 644,94 ▼ -1,67% 22/10/2026 R$ 656,04 ▼ -2,09% 21/10/2026 R$ 669,92 ▲ +0,73% 20/10/2026 R$ 665,13 ▼ -1,21% 19/10/2026 R$ 673,24 ▼ -0,30% 18/10/2026 R$ 675,23 ▼ -0,15% 17/10/2026 R$ 676,23 ▼ -0,25% 16/10/2026 R$ 677,71 ▼ -0,10% 15/10/2026 R$ 677,83 ▲ +2,11% 14/10/2026 R$ 663,78 ▼ -1,08% 13/10/2026 R$ 671,05 ▲ +0,37% 12/10/2026 R$ 668,48 ▼ -0,59% 11/10/2026 R$ 672,43 ▲ +0,25% 10/10/2026 R$ 672,53 ▲ +0,57% 09/10/2026 R$ 672,88 ▲ +0,62% 08/10/2026 R$ 665,26 ▲ +0,39% 07/10/2026 R$ 662,63 ▼ -0,83% 06/10/2026 R$ 668,22 ▲ +0,34% 05/10/2026 R$ 665,55 ▼ -4,15% 04/10/2026 R$ 694,39 ▼ -0,05% 03/10/2026 R$ 694,74 ▼ -0,23% 02/10/2026 R$ 696,13 ▼ -0,82% 01/10/2026 R$ 701,85 ▲ +1,44% 30/09/2026 R$ 691,72 ▼ -1,26% 29/09/2026 R$ 700,84 ▲ +0,63% 28/09/2026 R$ 694,94 ▼ -2,52% 27/09/2026 R$ 712,81 ▲ +0,07% 26/09/2026 R$ 712,36 ▼ -0,30% 25/09/2026 R$ 715,69 ▲ +0,24% Cotação do Ouro hoje — 24/10/2026 O está em . O ouro é negociado mundialmente em dólares por onça troy (31,1 gramas) nas bolsas de commodities, e o valor em reais reflete tanto a cotação internacional quanto o câmbio USD/BRL do momento. O metal precioso é historicamente considerado um ativo de proteção em períodos de instabilidade econômica e inflação elevada. preço do ouro hoje R$ 640,21 por grama Por que o preço do ouro sobe? O ouro tende a se valorizar em cenários de incerteza econômica, inflação elevada, enfraquecimento do dólar americano e crises geopolíticas. Quando os investidores buscam segurança, migram capital para o ouro, elevando sua demanda e preço. No Brasil, uma desvalorização do real frente ao dólar também encarece o ouro cotado em reais, mesmo que o preço internacional não mude. O preço do ouro hoje por grama é R$ 640,21, atualizado em 24/10/2026. É possível comprar ouro físico em distribuidoras autorizadas pelo Banco Central, ou investir via ETFs de ouro listados na B3 (como GOLD11) e fundos de investimento em ouro. O ouro funciona como reserva de valor e proteção contra inflação a longo prazo, mas não gera renda passiva como ações ou FIIs. É recomendado como parte de uma carteira diversificada. Ouro em outras purezas Ouro 18K XAU/BRL R$ 480,16 Ouro 14K XAU/BRL R$ 374,52 Ouro 10K XAU/BRL R$ 266,78 Ouro por Onça XAU/BRL R$ 19.912,77 Outras cotações Dólar Americano USD/BRL R$ 4,98 Euro EUR/BRL R$ 5,58 Libra Esterlina GBP/BRL R$ 6,66 Iene Japonês JPY/BRL R$ 0,0317 Peso Argentino ARS/BRL R$ 0,0033 Dólar Canadense CAD/BRL R$ 3,55 Franco Suíço CHF/BRL R$ 6,03 Yuan Chinês CNY/BRL R$ 0,75 Dólar Australiano AUD/BRL R$ 3,50 Peso Mexicano MXN/BRL R$ 0,27",
+        "final": "https://valordolar.com.br/cotacoes/ouro/",
+        "trecho_usado": "Cotação do , 24/10/2026: R$ 640,21 por grama em reais. Preço atualizado em tempo real, gráfico de 90 dias, conversor de gramas/onças e histórico completo. ouro hoje 1 grama de ouro vale Ao vivo R$ 640,21 BRL WhatsApp Telegram Facebook X / Twitter UTC-3 · 24/10/2026 ▲ +0,00% · 1 oz: R$ 19.912,77 · 23:26 1 g de ouro = · 1 oz = R$ 640,21 R$ 19.912,77 Compra R$ 640,21 Venda R$ 653,01 Máx. dia R$",
+        "metadados": {
+          "titulo": "Valor do Ouro hoje: R$ 640,2100 (+0,00%) — Atualizado às 23:26",
+          "descricao": "Cotação do Ouro (XAU) em tempo real. Compra: R$ 640,2100. Variação: +0,00% hoje. Histórico, conversor e tabela de valores.",
+          "canonica": "https://valordolar.com.br/cotacoes/ouro/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "Valor do Ouro hoje: R$ 640,2100 (+0,00%) — Atualizado às 23:26",
+            "og:description": "Cotação do Ouro (XAU) em tempo real. Compra: R$ 640,2100. Variação: +0,00% hoje. Histórico, conversor e tabela de valores.",
+            "og:url": "https://valordolar.com.br/cotacoes/ouro/",
+            "og:site_name": "Valor Dolar",
+            "og:updated_time": "2026-10-24T23:26:00-03:00",
+            "og:image": "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png",
+            "og:image:secure_url": "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png",
+            "og:image:alt": "cotação do ouro hoje"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Valor do Ouro hoje: R$ 640,2100 (+0,00%) — Atualizado às 23:26",
+            "twitter:description": "Cotação do Ouro (XAU) em tempo real. Compra: R$ 640,2100. Variação: +0,00% hoje. Histórico, conversor e tabela de valores.",
+            "twitter:image": "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png",
+            "twitter:label1": "Tempo para leitura",
+            "twitter:data1": "2 minutos"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Valor Dolar",
+          "tipo": "FAQPage",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Cotação do , 24/10/2026: R$ 640,21 por grama em reais. Preço atualizado em tempo real, gráfico de 90 dias, conversor de gramas/onças e histórico completo. ouro hoje\n1 g de ouro = · 1 oz = R$ 640,21 R$ 19.912,77"
+          },
+          {
+            "titulo": "Tabela de preço do ouro — 24/10/2026",
+            "texto": ""
+          },
+          {
+            "titulo": "Histórico do ouro — últimos 91 dias",
+            "texto": ""
+          },
+          {
+            "titulo": "Cotação do Ouro hoje — 24/10/2026",
+            "texto": "O está em . O ouro é negociado mundialmente em dólares por onça troy (31,1 gramas) nas bolsas de commodities, e o valor em reais reflete tanto a cotação internacional quanto o câmbio USD/BRL do momento. O metal precioso é historicamente considerado um ativo de proteção em períodos de instabilidade econômica e inflação elevada. preço do ouro hoje R$ 640,21 por grama"
+          },
+          {
+            "titulo": "Por que o preço do ouro sobe?",
+            "texto": "O ouro tende a se valorizar em cenários de incerteza econômica, inflação elevada, enfraquecimento do dólar americano e crises geopolíticas. Quando os investidores buscam segurança, migram capital para o ouro, elevando sua demanda e preço. No Brasil, uma desvalorização do real frente ao dólar também encarece o ouro cotado em reais, mesmo que o preço internacional não mude."
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Quantidade",
+              "Valor em reais (BRL)"
+            ],
+            [
+              "1g de ouro",
+              "R$ 640,21"
+            ],
+            [
+              "5g de ouro",
+              "R$ 3.201,05"
+            ],
+            [
+              "10g de ouro",
+              "R$ 6.402,10"
+            ],
+            [
+              "25g de ouro",
+              "R$ 16.005,25"
+            ],
+            [
+              "50g de ouro",
+              "R$ 32.010,50"
+            ],
+            [
+              "100g de ouro",
+              "R$ 64.021,00"
+            ],
+            [
+              "1 oz (31,1g) de ouro",
+              "R$ 19.912,77"
+            ],
+            [
+              "500g de ouro",
+              "R$ 320.105,00"
+            ],
+            [
+              "1 kg de ouro",
+              "R$ 640.210,00"
+            ]
+          ],
+          [
+            [
+              "Data",
+              "Fechamento",
+              "Variação"
+            ],
+            [
+              "24/10/2026",
+              "R$ 639,68",
+              "▼ -0,77%"
+            ],
+            [
+              "23/10/2026",
+              "R$ 644,94",
+              "▼ -1,67%"
+            ],
+            [
+              "22/10/2026",
+              "R$ 656,04",
+              "▼ -2,09%"
+            ],
+            [
+              "21/10/2026",
+              "R$ 669,92",
+              "▲ +0,73%"
+            ],
+            [
+              "20/10/2026",
+              "R$ 665,13",
+              "▼ -1,21%"
+            ],
+            [
+              "19/10/2026",
+              "R$ 673,24",
+              "▼ -0,30%"
+            ],
+            [
+              "18/10/2026",
+              "R$ 675,23",
+              "▼ -0,15%"
+            ],
+            [
+              "17/10/2026",
+              "R$ 676,23",
+              "▼ -0,25%"
+            ],
+            [
+              "16/10/2026",
+              "R$ 677,71",
+              "▼ -0,10%"
+            ],
+            [
+              "15/10/2026",
+              "R$ 677,83",
+              "▲ +2,11%"
+            ],
+            [
+              "14/10/2026",
+              "R$ 663,78",
+              "▼ -1,08%"
+            ],
+            [
+              "13/10/2026",
+              "R$ 671,05",
+              "▲ +0,37%"
+            ],
+            [
+              "12/10/2026",
+              "R$ 668,48",
+              "▼ -0,59%"
+            ],
+            [
+              "11/10/2026",
+              "R$ 672,43",
+              "▲ +0,25%"
+            ],
+            [
+              "10/10/2026",
+              "R$ 672,53",
+              "▲ +0,57%"
+            ],
+            [
+              "09/10/2026",
+              "R$ 672,88",
+              "▲ +0,62%"
+            ],
+            [
+              "08/10/2026",
+              "R$ 665,26",
+              "▲ +0,39%"
+            ],
+            [
+              "07/10/2026",
+              "R$ 662,63",
+              "▼ -0,83%"
+            ],
+            [
+              "06/10/2026",
+              "R$ 668,22",
+              "▲ +0,34%"
+            ],
+            [
+              "05/10/2026",
+              "R$ 665,55",
+              "▼ -4,15%"
+            ],
+            [
+              "04/10/2026",
+              "R$ 694,39",
+              "▼ -0,05%"
+            ],
+            [
+              "03/10/2026",
+              "R$ 694,74",
+              "▼ -0,23%"
+            ],
+            [
+              "02/10/2026",
+              "R$ 696,13",
+              "▼ -0,82%"
+            ],
+            [
+              "01/10/2026",
+              "R$ 701,85",
+              "▲ +1,44%"
+            ],
+            [
+              "30/09/2026",
+              "R$ 691,72",
+              "▼ -1,26%"
+            ],
+            [
+              "29/09/2026",
+              "R$ 700,84",
+              "▲ +0,63%"
+            ],
+            [
+              "28/09/2026",
+              "R$ 694,94",
+              "▼ -2,52%"
+            ],
+            [
+              "27/09/2026",
+              "R$ 712,81",
+              "▲ +0,07%"
+            ],
+            [
+              "26/09/2026",
+              "R$ 712,36",
+              "▼ -0,30%"
+            ],
+            [
+              "25/09/2026",
+              "R$ 715,69",
+              "▲ +0,24%"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png"
+        ],
+        "midia": [
+          {
+            "id": "med-77761d101cab",
+            "type": "image",
+            "title": "cotação do ouro hoje",
+            "url": "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png",
+            "final_url": "https://valordolar.com.br/wp-content/uploads/vd-flags/flag-us.png",
+            "source_title": "Valor do Ouro hoje: R$ 640,2100 (+0,00%) — Atualizado às 23:26",
+            "source_url": "https://valordolar.com.br/cotacoes/ouro/",
+            "publisher": "valordolar.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "cotação do ouro hoje",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://investidor10.com.br/commodities/ouro/",
+      "result": {
+        "titulo": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+        "texto": "O ouro é reconhecido globalmente como o principal metal precioso. Sua produção no mundo gira em torno de 3.000 toneladas por ano, concentrada principalmente em países como China, Rússia, Austrália, Canadá e Estados Unidos. papel crucial Além de seu uso tradicional em joalheria e aplicações industriais, desempenha um como reserva cambial para bancos centrais e é utilizado por de instabilidade econômica. investidores como proteção em períodos . Nos mercados internacionais, a unidade padrão de negociação do ouro é a onça troy, equivalente a 31,1 gramas , normalmente cotada em dólares americanos O metal é negociado em diversas formas, como barras, contratos derivativos, ETFs e outros instrumentos financeiros. A formação do preço do ouro O preço do ouro é monitorado pelos mercados financeiros em todo o mundo e é influenciado por diversos fatores macroeconômicos globais, como inflação, taxa de juros, política monetária, flutuações cambiais, eventos geopolíticos e a liquidez nos mercados. No Brasil, o ouro é cotado em reais por grama de ouro puro. Seu preço acompanha, historicamente, as cotações internacionais de Londres e Nova York, refletindo as expectativas do mercado global. Ainda assim, sofre influência direta do cenário interno, especialmente das variações do dólar comercial. Como investir em ouro No mercado internacional, a principal referência para a negociação de ouro é a COMEX, divisão da CME Group , especializada em contratos futuros de metais preciosos. No Brasil, a negociaçã o ocorre n a B3 , p o r meio de contratos futuros, certificados de ouro e ETFs lastreados no metal. Na B3 , investidores têm acesso a: ETFs , como o GOLD11 , que replica o preço do ouro físico; Contratos futuros , como o OZ1D , que representa um lote de 250 gramas de ouro com grau de pureza de 99,99% . Para os investidores, outras opções são certificados de depósito de metais, fundos multimercado com exposição a commodities e derivativos negociados em bolsa. Este conteúdo tem caráter informativo e não constitui recomendação de compra, venda ou manutenção de qualquer ativo financeiro. Antes de investir, é fundamental que o investidor avalie seu perfil, seus objetivos e, se necessário, busque orientação de um profissional habilitado. Negociação do ouro físico No mercado de investimentos do ouro físico, é comum a negociação de barras e moedas de ouro, embora envolvam custos logísticos e tributários mais elevados. O ouro mais puro comercialmente disponível é o ouro 24 quilates , com 99,9% de pureza. Não possui ligas metálicas em sua composição, é amplamente usado em reservas financeiras, moedas e barras de investimento. Antes de investir no ouro, é importante considerar fatores como custos operacionais, volatilidade e correlação com outros ativos, sempre conforme o perfil de cada investidor. Do ponto de vista tributário, o ouro segue a mesma regra dos ativos de renda variável. Em caso de venda com lucro superior a R$ 20 mil por mês, aplica-se alíquota de 15% sobre o ganho de capital. A tributação incide no ajuste anual do Imposto de Renda .",
+        "final": "https://investidor10.com.br/commodities/ouro/",
+        "trecho_usado": "em todo o mundo e é influenciado por diversos fatores macroeconômicos globais, como inflação, taxa de juros, política monetária, flutuações cambiais, eventos geopolíticos e a liquidez nos mercados. No Brasil, o ouro é cotado em reais por grama de ouro puro. Seu preço acompanha, historicamente, as cotações internacionais de Londres e Nova York, refletindo as expectativas do mercado global. Ainda",
+        "metadados": {
+          "titulo": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+          "descricao": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+          "canonica": "https://investidor10.com.br/commodities/ouro/",
+          "og": {
+            "og:image": "https://investidor10.com.br/images/logo_share.jpg"
+          },
+          "twitter": {
+            "twitter:title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "twitter:image": "https://investidor10.com.br/images/logo_share.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2025-06-03 16:21:46",
+          "atualizado_em": "2026-02-10 16:34:33",
+          "autor": "",
+          "site": "",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2025-06-03 16:21:46",
+            "dateModified": "2026-02-10 16:34:33",
+            "author": {
+              "@id": "https://investidor10.com.br/#organization"
+            },
+            "publisher": {
+              "@id": "https://investidor10.com.br/#organization"
+            },
+            "headline": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "description": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O ouro é reconhecido globalmente como o principal metal precioso. Sua produção no mundo gira em torno de 3.000 toneladas por ano, concentrada principalmente em países como China, Rússia, Austrália, Canadá e Estados Unidos.\npapel crucial Além de seu uso tradicional em joalheria e aplicações industriais, desempenha um como reserva cambial para bancos centrais e é utilizado por de instabilidade econômica. investidores como proteção em períodos\n. Nos mercados internacionais, a unidade padrão de negociação do ouro é a onça troy, equivalente a 31,1 gramas , normalmente cotada em dólares americanos O metal é negociado em diversas formas, como barras, contratos derivativos, ETFs e outros instrumentos financeiros."
+          },
+          {
+            "titulo": "A formação do preço do ouro",
+            "texto": "O preço do ouro é monitorado pelos mercados financeiros em todo o mundo e é influenciado por diversos fatores macroeconômicos globais, como inflação, taxa de juros, política monetária, flutuações cambiais, eventos geopolíticos e a liquidez nos mercados.\nNo Brasil, o ouro é cotado em reais por grama de ouro puro. Seu preço acompanha, historicamente, as cotações internacionais de Londres e Nova York, refletindo as expectativas do mercado global. Ainda assim, sofre influência direta do cenário interno, especialmente das variações do dólar comercial.\nNo mercado internacional, a principal referência para a negociação de ouro é a COMEX, divisão da CME Group , especializada em contratos futuros de metais preciosos. No Brasil, a negociaçã o ocorre n a B3 , p o r meio de contratos futuros, certificados de ouro e ETFs lastreados no metal.\nNa B3 , investidores têm acesso a:\nETFs , como o GOLD11 , que replica o preço do ouro físico;\nContratos futuros , como o OZ1D , que representa um lote de 250 gramas de ouro com grau de pureza de 99,99% .\nPara os investidores, outras opções são certificados de depósito de metais, fundos multimercado com exposição a commodities e derivativos negociados em bolsa.\nEste conteúdo tem caráter informativo e não constitui recomendação de compra, venda ou manutenção de qualquer ativo financeiro. Antes de investir, é fundamental que o investidor avalie seu perfil, seus objetivos e, se necessário, busque orientação de um profissional habilitado."
+          },
+          {
+            "titulo": "Negociação do ouro físico",
+            "texto": "No mercado de investimentos do ouro físico, é comum a negociação de barras e moedas de ouro, embora envolvam custos logísticos e tributários mais elevados.\nO ouro mais puro comercialmente disponível é o ouro 24 quilates , com 99,9% de pureza. Não possui ligas metálicas em sua composição, é amplamente usado em reservas financeiras, moedas e barras de investimento.\nAntes de investir no ouro, é importante considerar fatores como custos operacionais, volatilidade e correlação com outros ativos, sempre conforme o perfil de cada investidor.\nDo ponto de vista tributário, o ouro segue a mesma regra dos ativos de renda variável. Em caso de venda com lucro superior a R$ 20 mil por mês, aplica-se alíquota de 15% sobre o ganho de capital. A tributação incide no ajuste anual do Imposto de Renda ."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://investidor10.com.br/storage/commodities/thumbnails/684065ed5646b.svg",
+          "https://investidor10.com.br/images/logo_share.jpg",
+          "https://investidor10.com.br/assets/front/home_icons/menu_mobile_icons/hamburguer.svg?v=2",
+          "https://investidor10.com.br/assets/front/images/logo.webp",
+          "https://investidor10.com.br/assets/front/images/logo.svg",
+          "https://investidor10.com.br/storage/companies/63d2c9ead34db.jpg",
+          "https://investidor10.com.br/storage/companies/66ace9528ffb2.jpg",
+          "https://investidor10.com.br/storage/companies/66cc8e7c56df1.jpg",
+          "https://investidor10.com.br/storage/companies/66d8a81d2f056.jpg",
+          "https://investidor10.com.br/storage/companies/66ad41a6082c3.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-d54b448821a6",
+            "type": "image",
+            "title": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+            "url": "https://investidor10.com.br/images/logo_share.jpg",
+            "final_url": "https://investidor10.com.br/images/logo_share.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-93cdeaa6e0f5",
+            "type": "image",
+            "title": "logo investidor10",
+            "url": "https://investidor10.com.br/assets/front/images/logo.webp",
+            "final_url": "https://investidor10.com.br/assets/front/images/logo.webp",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logo investidor10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-213cca1c6768",
+            "type": "image",
+            "title": "logo investidor10",
+            "url": "https://investidor10.com.br/assets/front/images/logo.svg",
+            "final_url": "https://investidor10.com.br/assets/front/images/logo.svg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logo investidor10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-56b1775336ea",
+            "type": "image",
+            "title": "PETR4",
+            "url": "https://investidor10.com.br/storage/companies/63d2c9ead34db.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/63d2c9ead34db.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "PETR4",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a079cb2f85bb",
+            "type": "image",
+            "title": "ITUB4",
+            "url": "https://investidor10.com.br/storage/companies/66ace9528ffb2.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66ace9528ffb2.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ITUB4",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5028ed67ac66",
+            "type": "image",
+            "title": "BPAC11",
+            "url": "https://investidor10.com.br/storage/companies/66cc8e7c56df1.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66cc8e7c56df1.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BPAC11",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-32e383b8ba4a",
+            "type": "image",
+            "title": "VALE3",
+            "url": "https://investidor10.com.br/storage/companies/66d8a81d2f056.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66d8a81d2f056.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "VALE3",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2ee50e6a6132",
+            "type": "image",
+            "title": "ABEV3",
+            "url": "https://investidor10.com.br/storage/companies/66ad41a6082c3.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66ad41a6082c3.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ABEV3",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-66c2e50569d8",
+            "type": "image",
+            "title": "BBDC3",
+            "url": "https://investidor10.com.br/storage/companies/66ad14dc6e8ce.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66ad14dc6e8ce.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BBDC3",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c67973a66ce4",
+            "type": "image",
+            "title": "WEGE3",
+            "url": "https://investidor10.com.br/storage/companies/66ad4109e41c8.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66ad4109e41c8.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WEGE3",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e6d29a50fd72",
+            "type": "image",
+            "title": "ITSA4",
+            "url": "https://investidor10.com.br/storage/companies/66ad451089033.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/66ad451089033.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ITSA4",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d95d8d55050e",
+            "type": "image",
+            "title": "AXIA3",
+            "url": "https://investidor10.com.br/storage/companies/68ff8084bd038.jpg",
+            "final_url": "https://investidor10.com.br/storage/companies/68ff8084bd038.jpg",
+            "source_title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "source_url": "https://investidor10.com.br/commodities/ouro/",
+            "publisher": "investidor10.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "AXIA3",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://br.investing.com/commodities/gold",
+      "result": {
+        "titulo": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+        "texto": "Notícias e Análises Ouro Futuros A prata pode se recuperar após a recente queda? O UBS analisa Investing.com 5 horas atrás E.U.A. - Ações fecharam o pregão em queda e o Índice Dow Jones Industrial Average recuou 1,24% Investing.com 23 de out. de 2026 Ibovespa e dólar hoje: reta final do 2º turno, petróleo e defasagem do diesel Investing.com 23 de out. de 2026 74 Canadá - Ações fecharam o pregão em queda e o Índice S&P/TSX recuou 0,52% Investing.com 23 de out. de 2026 México - Ações fecharam o pregão em queda e o Índice S&P/BMV IPC recuou 0,01% Investing.com 23 de out. de 2026 Brasil - Ações fecharam o pregão em alta e o Índice Bovespa avançou 0,47% Investing.com 23 de out. de 2026 Colômbia - Ações fecharam o pregão em alta e o Índice COLCAP avançou 0,46% Investing.com 23 de out. de 2026 Os Futuros de Ouro caíram durante a sessão dos Estados Unidos Investing.com 23 de out. de 2026 Rússia - Ações fecharam o pregão em alta e o Índice MOEX Russia Index avançou 1,51% Investing.com 23 de out. de 2026 Ouro sobrevendido perto de suporte em 3.989: níveis ao vivo Investing.com 23 de out. de 2026 2 Notícias e Análises Ouro Futuros A prata pode se recuperar após a recente queda? O UBS analisa Investing.com 5 horas atrás Ibovespa e dólar hoje: reta final do 2º turno, petróleo e defasagem do diesel Investing.com 23 de out. de 2026 74 México - Ações fecharam o pregão em queda e o Índice S&P/BMV IPC recuou 0,01% Investing.com 23 de out. de 2026 Colômbia - Ações fecharam o pregão em alta e o Índice COLCAP avançou 0,46% Investing.com 23 de out. de 2026 Rússia - Ações fecharam o pregão em alta e o Índice MOEX Russia Index avançou 1,51% Investing.com 23 de out. de 2026 E.U.A. - Ações fecharam o pregão em queda e o Índice Dow Jones Industrial Average recuou 1,24% Investing.com 23 de out. de 2026 Canadá - Ações fecharam o pregão em queda e o Índice S&P/TSX recuou 0,52% Investing.com 23 de out. de 2026 Brasil - Ações fecharam o pregão em alta e o Índice Bovespa avançou 0,47% Investing.com 23 de out. de 2026 Os Futuros de Ouro caíram durante a sessão dos Estados Unidos Investing.com 23 de out. de 2026 Ouro sobrevendido perto de suporte em 3.989: níveis ao vivo Investing.com 23 de out. de 2026 2 Exibir mais",
+        "final": "https://br.investing.com/commodities/gold",
+        "trecho_usado": "Notícias e Análises Ouro Futuros A prata pode se recuperar após a recente queda? O UBS analisa Investing.com 5 horas atrás E.U.A. - Ações fecharam o pregão em queda e o Índice Dow Jones Industrial Average recuou 1,24% Investing.com 23 de out. de 2026 Ibovespa e dólar hoje: reta final do 2º turno, petróleo e defasagem do diesel Investing.com 23 de out. de 2026 74 Canadá - Ações fecharam o pregão em",
+        "metadados": {
+          "titulo": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+          "descricao": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal.",
+          "canonica": "https://br.investing.com/commodities/gold",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://br.investing.com/commodities/gold",
+            "og:image": "https://i-invdn-com.investing.com/redesign/images/seo/investing_300X300.png",
+            "og:site_name": "Investing.com Brasil",
+            "og:locale": "pt_BR",
+            "og:title": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+            "og:description": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal."
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:site": "@InvestingBrasil",
+            "twitter:image": "https://i-invdn-com.investing.com/redesign/images/seo/investing_300X300.png",
+            "twitter:title": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+            "twitter:description": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal."
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Investing.com Brasil",
+          "tipo": "FAQPage",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Notícias e Análises Ouro Futuros",
+            "texto": "A prata pode se recuperar após a recente queda? O UBS analisa\nE.U.A. - Ações fecharam o pregão em queda e o Índice Dow Jones Industrial Average recuou 1,24%\nIbovespa e dólar hoje: reta final do 2º turno, petróleo e defasagem do diesel\nCanadá - Ações fecharam o pregão em queda e o Índice S&P/TSX recuou 0,52%\nMéxico - Ações fecharam o pregão em queda e o Índice S&P/BMV IPC recuou 0,01%\nBrasil - Ações fecharam o pregão em alta e o Índice Bovespa avançou 0,47%\nColômbia - Ações fecharam o pregão em alta e o Índice COLCAP avançou 0,46%\nOs Futuros de Ouro caíram durante a sessão dos Estados Unidos\nRússia - Ações fecharam o pregão em alta e o Índice MOEX Russia Index avançou 1,51%\nOuro sobrevendido perto de suporte em 3.989: níveis ao vivo"
+          },
+          {
+            "titulo": "Notícias e Análises Ouro Futuros",
+            "texto": "A prata pode se recuperar após a recente queda? O UBS analisa\nIbovespa e dólar hoje: reta final do 2º turno, petróleo e defasagem do diesel\nMéxico - Ações fecharam o pregão em queda e o Índice S&P/BMV IPC recuou 0,01%\nColômbia - Ações fecharam o pregão em alta e o Índice COLCAP avançou 0,46%\nRússia - Ações fecharam o pregão em alta e o Índice MOEX Russia Index avançou 1,51%\nE.U.A. - Ações fecharam o pregão em queda e o Índice Dow Jones Industrial Average recuou 1,24%\nCanadá - Ações fecharam o pregão em queda e o Índice S&P/TSX recuou 0,52%\nBrasil - Ações fecharam o pregão em alta e o Índice Bovespa avançou 0,47%\nOs Futuros de Ouro caíram durante a sessão dos Estados Unidos\nOuro sobrevendido perto de suporte em 3.989: níveis ao vivo"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "",
+              "Código",
+              "",
+              "Bolsa",
+              "",
+              "Moeda"
+            ],
+            [
+              "",
+              "GC",
+              "·",
+              "CFD",
+              "·",
+              "USD",
+              "Tempo Real"
+            ],
+            [
+              "",
+              "GDRTSc1",
+              "·",
+              "Moscou",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "XAUUSDc1",
+              "·",
+              "Istambul",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GC1!",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc1",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc2",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc3",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc4",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc5",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc6",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "GCc7",
+              "·",
+              "CME",
+              "·",
+              "USD",
+              "Atrasada"
+            ],
+            [
+              "",
+              "JAMc1",
+              "·",
+              "TOCOM",
+              "·",
+              "JPY",
+              "Atrasada"
+            ],
+            [
+              "",
+              "JAUc1",
+              "·",
+              "TOCOM",
+              "·",
+              "JPY",
+              "Atrasada"
+            ]
+          ],
+          [
+            [
+              "Nome",
+              "Último",
+              "Var. %",
+              "Vol.",
+              "Hora",
+              "Preço",
+              ""
+            ],
+            [
+              "GLD SPDR Gold Shares",
+              "366,61",
+              "-0,65%",
+              "10,12M",
+              "366,61 -0,65%",
+              "23/10"
+            ],
+            [
+              "IAU iShares Gold",
+              "75,15",
+              "-0,67%",
+              "4,18M",
+              "75,15 -0,67%",
+              "23/10"
+            ],
+            [
+              "SGOL abrdn Physical Gold Shares",
+              "38,07",
+              "-0,68%",
+              "3,62M",
+              "38,07 -0,68%",
+              "23/10"
+            ],
+            [
+              "UGL ProShares Ultra Gold",
+              "41,98",
+              "-1,52%",
+              "2,87M",
+              "41,98 -1,52%",
+              "23/10"
+            ],
+            [
+              "GLL ProShares UltraShort Gold",
+              "27,05",
+              "+1,46%",
+              "2,5M",
+              "27,05 +1,46%",
+              "23/10"
+            ]
+          ],
+          [
+            [
+              "Nome",
+              "Último",
+              "Var. %",
+              "Vol.",
+              ""
+            ],
+            [
+              "Petrobras PN",
+              "58,68",
+              "+1,47%",
+              "58,27M",
+              ""
+            ],
+            [
+              "Bradesco PN",
+              "20,37",
+              "+0,74%",
+              "96,32M",
+              ""
+            ],
+            [
+              "Vale ON",
+              "61,90",
+              "+0,67%",
+              "26,88M",
+              ""
+            ],
+            [
+              "BTG Pactual Unit",
+              "79,82",
+              "+0,45%",
+              "17,62M",
+              ""
+            ],
+            [
+              "B3 ON",
+              "23,65",
+              "+1,72%",
+              "58,18M",
+              ""
+            ],
+            [
+              "Itaú Unibanco PN",
+              "48,30",
+              "+0,63%",
+              "28,03M",
+              ""
+            ],
+            [
+              "Banco do Brasil ON",
+              "24,72",
+              "+3,34%",
+              "45,55M",
+              ""
+            ]
+          ],
+          [
+            [
+              "Nome",
+              "Último",
+              "Var. %",
+              "Vol.",
+              ""
+            ],
+            [
+              "PPLA Participations Unit",
+              "74,80",
+              "+29,41%",
+              "722,00",
+              ""
+            ],
+            [
+              "Infosys BDR",
+              "31,29",
+              "+20,35%",
+              "10,00",
+              ""
+            ],
+            [
+              "Afluente ON",
+              "7,79",
+              "+17,85%",
+              "9,20mil",
+              ""
+            ],
+            [
+              "Dotz ON",
+              "13,00",
+              "+16,28%",
+              "80,40mil",
+              ""
+            ],
+            [
+              "Enjoei ON",
+              "8,80",
+              "+13,55%",
+              "212,60mil",
+              ""
+            ],
+            [
+              "CSN ON",
+              "6,07",
+              "+12,41%",
+              "22,80M",
+              ""
+            ],
+            [
+              "Viver ON",
+              "3,24",
+              "+11,72%",
+              "182,90mil",
+              ""
+            ]
+          ],
+          [
+            [
+              "Nome",
+              "Último",
+              "Var. %",
+              "Vol.",
+              ""
+            ],
+            [
+              "LKQ BDR",
+              "87,89",
+              "-19,37%",
+              "77,00",
+              ""
+            ],
+            [
+              "Azul Unt",
+              "4,50",
+              "-16,67%",
+              "31,00",
+              ""
+            ],
+            [
+              "Azevedo & Travassos ON",
+              "12,01",
+              "-11,50%",
+              "1,16M",
+              ""
+            ],
+            [
+              "Porto Sudeste ON",
+              "12,60",
+              "-10,00%",
+              "400,00",
+              ""
+            ],
+            [
+              "Keysight Technologies BDR",
+              "780,52",
+              "-9,61%",
+              "21,00",
+              ""
+            ],
+            [
+              "FII Kinea II Real Estate Equity",
+              "0,19",
+              "-9,52%",
+              "8,94mil",
+              ""
+            ],
+            [
+              "FII Vida Nova",
+              "2,72",
+              "-9,03%",
+              "38,00",
+              ""
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://i-invdn-com.investing.com/redesign/images/seo/investing_300X300.png",
+          "https://content-media.investing.com/news/Silver_800x533_L_1612386329.jpg",
+          "https://content-media.investing.com/news/LYNXMPEM5M0L4_1200_L.jpg",
+          "https://content-media.investing.com/news/moved_LYNXMPEM9I0WI_1200_L.jpg",
+          "https://content-media.investing.com/news/LYNXMPEM1O173_1200_L.jpg",
+          "https://content-media.investing.com/news/LYNXNPED8P25V_L.jpg",
+          "https://content-media.investing.com/news/LYNXNPEC37167_L.jpg",
+          "https://content-media.investing.com/news/Colombian Securities Exchange_800x533_L_1429450777.jpg",
+          "https://content-media.investing.com/news/LYNXNPEC5N1W0_L.jpg",
+          "https://content-media.investing.com/news/MoscowExchange_800x533_L_1730304294.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-5a71647bfa9c",
+            "type": "image",
+            "title": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal.",
+            "url": "https://i-invdn-com.investing.com/redesign/images/seo/investing_300X300.png",
+            "final_url": "https://i-invdn-com.investing.com/redesign/images/seo/investing_300X300.png",
+            "source_title": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+            "source_url": "https://br.investing.com/commodities/gold",
+            "publisher": "i-invdn-com.investing.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Ouro",
+      "result": {
+        "titulo": "elemento químico com número atómico 79",
+        "texto": "Para outros significados, veja . Nota: Ouro (desambiguação) Ouro,Au 79 Cristais de ouro feitos por em , de pureza >99,99%. reação química de transporte gás cloro Aparência amarelo metálico Ouro na tabela periódica ← → Platina Ouro Mercúrio Ag 79 Au ↑ Au ↓ Rg Número atómico (Z) 79 Série metal de transição Grupo 11(IB) Período 6 Bloco d Propriedades atómicas Eletronegatividade () Pauling 2,54 Massa atómica 196,966569(4) u Raio atómico (calculado) 174 pm Raio covalente 144 pm Raio de Van der Waals 166 pm Configuração electrónica [] 4f 5d 6s Xe 14 9 2 Elétrons (por ) nível de energia 2, 8, 18, 32, 18, 1 () ver imagem Estado(s) de oxidação , 1 () 3 anfótero Propriedades físicas Estado em CPTP sólido Ponto de fusão 1337,33 K Ponto de ebulição 3129 K , Densidade dureza 19300 , 2,5 kg/m 3 Entalpia de fusão 12,55 kJ/mol Entalpia de vaporização 334,4 kJ/mol Pressão de vapor 0,000237 a 1337 Pa K Classe magnética diamagnético Susceptibilidade magnética -3,4 x 10 -5 Outras propriedades Estrutura cristalina cúbico de faces centradas Calor específico 128 J/(kg·K) Condutividade elétrica 45,2×10 /m 6 S Condutividade térmica 317 W/(m·K) Velocidade do som 1740 a 20 m/s °C Número CAS 7440-57-5 1.º Potencial de ionização 890,1 kJ/mol 2.º Potencial de ionização 1980 kJ/mol Isótopos mais estáveis iso AN Meia-vida MD Ed PD MeV Au 197 100% estável com 118 neutrões Unidades do & , salvo indicação contrária. SI CNTP v d e O é um elemento químico com o símbolo (do latim aurum 'ouro') e 79. É um brilhante, levemente amarelo-alaranjado, denso, macio, maleável e na sua forma pura. Quimicamente, o ouro é um metal de transição e um elemento do grupo 11 (anteriormente chamado IB) da , e de 197 . É um dos elementos químicos menos e é em condições padrão. Na natureza, o ouro é produzido a partir da colisão de duas . O ouro é utilizado de forma generalizada em , e , bem como . ouro Au número atômico metal dúctil tabela periódica massa atómica u reativos sólido estrelas de nêutrons 1 [ ] 2 [ ] 3 [ ] joalharia indústria eletrônica reserva de valor O ouro geralmente encontra-se em (), como ou grãos, em , e . Surge numa série de soluções sólidas com o elemento natural prata (como no ), naturalmente ligado a outros metais como e , e inclusões minerais como a . Também é comum mas não tanto em minerais como compostos de ouro, geralmente com (). O ouro é resistente à maioria dos ácidos, embora se dissolva em (uma mistura de e ), formando um . O ouro é apenas em , que dissolve prata e metais básicos, propriedade há muito utilizada para refinar ouro e confirmar a presença de ouro em substâncias metálicas, dando origem ao termo ''. O ouro dissolve-se em de , que são usadas em e . O ouro também se dissolve em , formando ligas de , e como o ouro age simplesmente como um , não se dá uma . estado livre estado nativo pepitas rochas veios depósitos aluviais electrum cobre paládio pirita telúrio teluretos de ouro água régia ácido nítrico ácido clorídrico anião tetracloroáurico solúvel insolúvel ácido nítrico teste ácido soluções alcalinas cianeto mineração galvanoplastia mercúrio amálgama soluto reação química Por ser um elemento relativamente raro, o ouro é considerado um metal precioso, o qual tem sido usado para cunhagem, e outras artes ao longo da . Os arqueólogos sugerem que o primeiro uso do ouro começou com as primeiras civilizações no Oriente Médio. É possível que tenha sido o primeiro metal utilizado pela humanidade. O mais antigo artefato em ouro foi encontrado na da . Antigamente, o era normalmente implementado na . As moedas de ouro deixaram de ser cunhadas como moeda circulante na década de 1930, e o padrão-ouro mundial foi abandonado por um sistema de após as medidas de em 1971. 4 [ ] 5 [ ] joias história documentada tumba Rainha Egípcia Zer 6 [ ] 7 [ ] padrão-ouro política monetária moeda fiduciária choque Nixon Em 2020, o maior produtor mundial de ouro foi a , seguida pela e . Acima do solo, existe um total de cerca de 201.296 toneladas de ouro, desde de 2020. Isso equivale a um cubo com cada lado medindo aproximadamente 21,7 metros. O consumo mundial de ouro novo produzido é de cerca de 50% em joias, 40% em investimentos e 10% na indústria . A alta maleabilidade, ductilidade, resistência à corrosão e à maioria das outras reações químicas do ouro e a condutividade elétrica levaram ao seu uso contínuo em resistentes à em todos os tipos de dispositivos computadorizados (que é o seu principal propósito industrial). O ouro também é usado na blindagem , na produção de colorido, na e na . Certos sais de ouro ainda são usados ​​como na . China Rússia Austrália 8 [ ] 9 [ ] 10 [ ] conectores elétricos corrosão infravermelha vidro folheação de ouro restauração dentária anti-inflamatórios medicina Características [ editar | editar código ] O ouro é o mais de todos os metais. Ele pode ser esticado num fio com apenas um átomo de largura e depois esticado consideravelmente antes que se rompa. Esses deformam-se mediante a formação, reorientação e migração de deslocamentos e redes cristalinas sem que se produza um endurecimento consideravel. Uma única grama de ouro pode ser moldada numa folha de 1 m e uma (28,349523125 g) em 28 m A pode ser suficientemente fina ao ponto de ficar semitransparente. A luz que transmite parece azul esverdeada, porque o ouro reflete fortemente o amarelo e o vermelho. Essas folhas semitransparentes também refletem fortemente a luz infravermelha, tornando-as úteis como escudos infravermelhos (calor radiante) em viseiras de trajes resistentes ao calor e viseiras de trajes espaciais. O ouro é um bom condutor de calor e eletricidade. É um metal muito denso, com alto ponto de fusão e alta afinidade eletrônica. Os seus estados de oxidação mais importantes são 1 e 3. Também é encontrado no estado de oxidação 2, bem como em estados de oxidação superiores, mas é menos comum. maleável 11 [ ] nanofios 2 onça avoirdupois 2 folha de ouro 12 [ ] 13 [ ] Além disso, o ouro é um bom condutor de calor e eletricidade, e não é afetado pelo ar ou pela maioria dos agentes químicos. Possui alta resistência à alteração química pelo calor, umidade e a maioria dos agentes corrosivos, sendo, portanto, adequado para uso em cunhagem de moedas e ourivesaria. 14 [ ] 15 [ ] 16 [ ] 17 [ ] O ouro tem uma densidade de 19,3g/cm, quase idêntica à do que é de 19,25g/cm; daí, o volframio ter sido utilizado na falsificação de de ouro, por exemplo, chapando um lingote de volframio com ouro,. ou pegando uma barra de ouro existente, fazendo furos e substituindo o ouro removido por hastes de . Em comparação, a densidade do é 11,34g/cm, e a do elemento mais denso, o , é 22,588±0,015 g/cm 3 volframio 3 lingotes 14 [ ] 15 [ ] 16 [ ] 18 [ ] tungsténio 19 [ ] chumbo 3 ósmio 3 20 [ ] Cor [ editar | editar código ] Apesar de a maioria dos metais ser cinza prateado ou branco, o ouro é amarelo, ligeiramente avermelhado. Esta cor é determinada pela frequência de entre os eletrões de do metal, na faixa para a maioria dos metais, mas na faixa visível para o ouro, devido aos efeitos relativísticos que afetam as ao redor dos átomos do metal. Efeitos semelhantes conferem uma tonalidade dourada ao metal . 21 [ ] oscilação do plasma valência atômica ultravioleta orbitais 22 [ ] 23 [ ] césio Entre as ligas de ouro colorido mais comuns está o característico de dezoito quilates, criado pela adição de cobre ao ouro. As ligas contendo ou também são importantes na joalheria comercial, pois produzem ligas de ouro branco. A liga de ouro-cobre de quatorze quilates tem cor quase idêntica a certas ligas de bronze e ambas podem ser usadas para produzir policiais ou outras insígnias. Ligas de ouro de quatorze e dezoito quilates com prata aparecem apenas na cor amarelo esverdeado e são chamadas de ouro verde. O ouro azul pode ser feito ligando-se com ferro, e o ouro roxo pode ser feito ligando-se com , - Menos comumente, a adição de , e outros elementos pode produzir cores douradas mais incomuns para diversas aplicações. ouro rosa paládio níquel di",
+        "final": "https://pt.wikipedia.org/wiki/Ouro",
+        "trecho_usado": "contrária. SI CNTP v d e O é um elemento químico com o símbolo (do latim aurum 'ouro') e 79. É um brilhante, levemente amarelo-alaranjado, denso, macio, maleável e na sua forma pura. Quimicamente, o ouro é um metal de transição e um elemento do grupo 11 (anteriormente chamado IB) da , e de 197 . É um dos elementos químicos menos e é em condições padrão. Na natureza, o ouro é produzido a partir da",
+        "metadados": {
+          "titulo": "elemento químico com número atómico 79",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Ouro",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold-crystals.jpg/1280px-Gold-crystals.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "777",
+            "og:title": "Ouro – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2004-03-01T03:10:18Z",
+          "atualizado_em": "2026-09-28T20:20:07Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2004-03-01T03:10:18Z",
+            "dateModified": "2026-09-28T20:20:07Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "elemento químico com número atómico 79"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Cristais de ouro feitos por em , de pureza >99,99%. reação química de transporte gás cloro\n← → Platina Ouro Mercúrio\nEletronegatividade () Pauling\nElétrons (por ) nível de energia\n2, 8, 18, 32, 18, 1 () ver imagem\nSusceptibilidade magnética\ncúbico de faces centradas\n1.º Potencial de ionização\n2.º Potencial de ionização\nUnidades do & , salvo indicação contrária. SI CNTP\nO é um elemento químico com o símbolo (do latim aurum 'ouro') e 79. É um brilhante, levemente amarelo-alaranjado, denso, macio, maleável e na sua forma pura. Quimicamente, o ouro é um metal de transição e um elemento do grupo 11 (anteriormente chamado IB) da , e de 197 . É um dos elementos químicos menos e é em condições padrão. Na natureza, o ouro é produzido a partir da colisão de duas . O ouro é utilizado de forma generalizada em , e , bem como . ouro Au número atômico metal dúctil tabela periódica massa atómica u reativos sólido estrelas de nêutrons 1 [ ] 2 [ ] 3 [ ] joalharia indústria eletrônica reserva de valor\nO ouro geralmente encontra-se em (), como ou grãos, em , e . Surge numa série de soluções sólidas com o elemento natural prata (como no ), naturalmente ligado a outros metais como e , e inclusões minerais como a . Também é comum mas não tanto em minerais como compostos de ouro, geralmente com (). O ouro é resistente à maioria dos ácidos, embora se dissolva em (uma mistura de e ), formando um . O ouro é apenas em , que dissolve prata e metais básicos, propriedade há muito utilizada para refinar ouro e confirmar a presença de ouro em substâncias metálicas, dando origem ao termo ''. O ouro dissolve-se em de , que são usadas em e . O ouro também se dissolve em , formando ligas de , e como o ouro age simplesmente como um , não se dá uma . estado livre estado nativo pepitas rochas veios depósitos aluviais electrum cobre paládio pirita telúrio teluretos de ouro água régia ácido nítrico ácido clorídrico anião tetracloroáurico solúvel insolúvel ácido nítrico teste ácido soluções alcalinas cianeto mineração galvanoplastia mercúrio amálgama soluto reação química\nPor ser um elemento relativamente raro, o ouro é considerado um metal precioso, o qual tem sido usado para cunhagem, e outras artes ao longo da . Os arqueólogos sugerem que o primeiro uso do ouro começou com as primeiras civilizações no Oriente Médio. É possível que tenha sido o primeiro metal utilizado pela humanidade. O mais antigo artefato em ouro foi encontrado na da . Antigamente, o era normalmente implementado na . As moedas de ouro deixaram de ser cunhadas como moeda circulante na década de 1930, e o padrão-ouro mundial foi abandonado por um sistema de após as medidas de em 1971. 4 [ ] 5 [ ] joias história documentada tumba Rainha Egípcia Zer 6 [ ] 7 [ ] padrão-ouro política monetária moeda fiduciária choque Nixon\nEm 2020, o maior produtor mundial de ouro foi a , seguida pela e . Acima do solo, existe um total de cerca de 201.296 toneladas de ouro, desde de 2020. Isso equivale a um cubo com cada lado medindo aproximadamente 21,7 metros. O consumo mundial de ouro novo produzido é de cerca de 50% em joias, 40% em investimentos e 10% na indústria . A alta maleabilidade, ductilidade, resistência à corrosão e à maioria das outras reações químicas do ouro e a condutividade elétrica levaram ao seu uso contínuo em resistentes à em todos os tipos de dispositivos computadorizados (que é o seu principal propósito industrial). O ouro também é usado na blindagem , na produção de colorido, na e na . Certos sais de ouro ainda são usados ​​como na . China Rússia Austrália 8 [ ] 9 [ ] 10 [ ] conectores elétricos corrosão infravermelha vidro folheação de ouro restauração dentária anti-inflamatórios medicina\nO ouro é o mais de todos os metais. Ele pode ser esticado num fio com apenas um átomo de largura e depois esticado consideravelmente antes que se rompa. Esses deformam-se mediante a formação, reorientação e migração de deslocamentos e redes cristalinas sem que se produza um endurecimento consideravel. Uma úni"
+          },
+          {
+            "titulo": "Pureza, avaliação e normas de mercado",
+            "texto": "A pureza do ouro comercial costuma ser expressa em milésimos: por exemplo, o ouro de 18 quilates corresponde a 750 partes de ouro por mil. No sistema britânico, a marcação obrigatória inclui a marca do fabricante ou patrocinador, a graduação (teor) e o carimbo do escritório de ensaios. A Marca de Controlo Comum (Common Control Mark), com os sinais acompanhantes exigidos, permite que, nos países signatários da Convenção, as peças sejam aceitas sem novo ensaio na importação. Na Austrália, a forma de investimento de um metal precioso deve ser negociável no mercado internacional de barras e possuir uma marca que garanta a graduação e a qualidade. 32 [ ] 33 [ ] 34 [ ] 35 [ ]\nPara as barras Good Delivery, a LBMA estabelece uma pureza mínima do ouro de 995,0 partes por mil. No resgate de ouro físico, o preço pode ser calculado a partir da cotação spot corrente com um ajustamento pela pureza e pela massa da peça. O preço de referência LBMA Gold Price é determinado duas vezes por dia útil em leilões que começam às 10:30 e 15:00, hora de Londres. A massa do ouro de investimento costuma ser expressa em onças troy; uma onça troy equivale aproximadamente a 31,1035 g. 36 [ ] 37 [ ]\nOs produtos de investimento podem combinar diferentes sistemas de indicação de pureza: a US Mint descreve o ouro 24 quilates como 99,99% e o ouro 22 quilates como 91,67%. Nas especificações de algumas barras indica‑se separadamente a massa do metal puro, pelo que a massa total da peça pode ser um pouco maior do que o peso declarado de ouro. Para identificação das barras são aplicadas marcações com o peso, a graduação e um número de série único, e a embalagem pode conter os dados do certificado de ensaio. Uma rastreabilidade adicional pode ser assegurada por um código QR que liga a barra específica à origem do metal, desde a extracção até ao mercado. 38 [ ] 39 [ ] 40 [ ] 41 [ ]\n↑ Garcia-Sanchez, J.; et al. (24 de agosto de 1998), «Asteroid and Comet Dynamics», Tatrauska Lomnica, Slovak Republic, , Perturbation of the Oort Cloud by Close Stellar Approaches : hdl 2014/19368\n↑ por David A. Aguilar. Publicado no No.:2013-19 do jornal \"Harvard-Smithsonian Center for Astrophysics\" (2013) Earth's Gold Came from Colliding Dead Stars\n↑ por Emily Conover (2017) Astronomers finally find the cosmic source of gold and silver Gravitational waves point to answers for some longstanding mysteries of the universe\n↑ Duckenfield, Mark (2016). . [S.l.]: Routledge. p.4. . . The Monetary History of Gold: A Documentary History, 1660–1999 ISBN 9781315476124 Cópia arquivada em 6 de janeiro de 2026 Its scarcity makes it a useful store of value; however, its relative rarity reduced its utility as a currency, especially for transactions in small denominations.\n↑ Pearce, Susan M. (1993). . [S.l.]: Smithsonian Books. p.53. . . Museums, Objects, and Collections: A Cultural Study ISBN 9781588345172 Cópia arquivada em 4 de março de 2025 Its scarcity makes it a useful store of value; however, its relative rarity reduced its utility as a currency, especially for transactions in small denominations. ... Rarity is, nevertheless, in itself a source of value, and so is the degree of difficulty which surrounds the winning of the raw material, especially if it is exotic and has to be brought some distance. Gold is, geologically, a relatively rare material on earth and occurs only in specific places which are remote from most other places.\n↑ . Bullion.nwtmint.com. «Gold History» . Consultado em 12 de setembro de 2008 Cópia arquivada em 11 de abril de 2016\n↑ . Indianvillage.com «The Turquoise Story» . Consultado em 12 de setembro de 2008\n↑ . 7 de junho de 2023. «Gold Production & Mining Data by Country» Cópia arquivada em 18 de setembro de 2026\n↑ . gold.org. «Above-ground stocks» . Consultado em 18 de outubro de 2021 Cópia arquivada em 13 de março de 2022\n↑ Soos, Andy (6 de janeiro de 2011). . . Oilprice.com. «Gold Mining Boom Increasing Mercury Pollution Risk» Advanced Media Solutions, Inc . Consultado em "
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Cristais de ouro feitos por reação química de transporte em gás cloro , de pureza >99,99%."
+            ],
+            [
+              "Aparência"
+            ],
+            [
+              "amarelo metálico"
+            ],
+            [
+              "Ouro na tabela periódica"
+            ],
+            [
+              "Platina ← Ouro → Mercúrio"
+            ],
+            [
+              "Ag",
+              "",
+              "",
+              "",
+              "79",
+              "Au"
+            ]
+          ],
+          [
+            [
+              "iso",
+              "AN",
+              "Meia-vida",
+              "MD",
+              "Ed",
+              "PD"
+            ],
+            [
+              "MeV"
+            ],
+            [
+              "197 Au",
+              "100%",
+              "estável com 118 neutrões"
+            ]
+          ],
+          [
+            [
+              "v d e Tabela periódica"
+            ],
+            [
+              "Lista de elementos químicos"
+            ],
+            [
+              "",
+              "1",
+              "2",
+              "",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18"
+            ],
+            [
+              "1",
+              "H",
+              "",
+              "He"
+            ],
+            [
+              "2",
+              "Li",
+              "Be",
+              "",
+              "B",
+              "C",
+              "N",
+              "O",
+              "F",
+              "Ne"
+            ],
+            [
+              "3",
+              "Na",
+              "Mg",
+              "",
+              "Al",
+              "Si",
+              "P",
+              "S",
+              "Cl",
+              "Ar"
+            ],
+            [
+              "4",
+              "K",
+              "Ca",
+              "",
+              "Sc",
+              "Ti",
+              "V",
+              "Cr",
+              "Mn",
+              "Fe",
+              "Co",
+              "Ni",
+              "Cu",
+              "Zn",
+              "Ga",
+              "Ge",
+              "As",
+              "Se",
+              "Br",
+              "Kr"
+            ],
+            [
+              "5",
+              "Rb",
+              "Sr",
+              "",
+              "Y",
+              "Zr",
+              "Nb",
+              "Mo",
+              "Tc",
+              "Ru",
+              "Rh",
+              "Pd",
+              "Ag",
+              "Cd",
+              "In",
+              "Sn",
+              "Sb",
+              "Te",
+              "I",
+              "Xe"
+            ],
+            [
+              "6",
+              "Cs",
+              "Ba",
+              "La",
+              "Ce",
+              "Pr",
+              "Nd",
+              "Pm",
+              "Sm",
+              "Eu",
+              "Gd",
+              "Tb",
+              "Dy",
+              "Ho",
+              "Er",
+              "Tm",
+              "Yb",
+              "Lu",
+              "Hf",
+              "Ta",
+              "W",
+              "Re",
+              "Os",
+              "Ir",
+              "Pt",
+              "Au",
+              "Hg",
+              "Tl",
+              "Pb",
+              "Bi",
+              "Po",
+              "At",
+              "Rn"
+            ],
+            [
+              "7",
+              "Fr",
+              "Ra",
+              "Ac",
+              "Th",
+              "Pa",
+              "U",
+              "Np",
+              "Pu",
+              "Am",
+              "Cm",
+              "Bk",
+              "Cf",
+              "Es",
+              "Fm",
+              "Md",
+              "No",
+              "Lr",
+              "Rf",
+              "Db",
+              "Sg",
+              "Bh",
+              "Hs",
+              "Mt",
+              "Ds",
+              "Rg",
+              "Cn",
+              "Nh",
+              "Fl",
+              "Mc",
+              "Lv",
+              "Ts",
+              "Og"
+            ]
+          ],
+          [
+            [
+              "v d e Commodities"
+            ],
+            [
+              "Commodities leves",
+              "Geral",
+              "Açúcar Algodão Arroz Aveia Azeite Azeite de dendê Batata Borracha Café Centeio Cevada Chá Colza Grão de cacau Linhaça Milho Óleo de algodão Óleo de amendoim Óle"
+            ],
+            [
+              "Animal & derivados",
+              "Almíscar Âmbar cinza Banha Cabras Casimira Cavalos Gado Lã Leite Manteiga Marfim Osso Ovelha Penas Pele Poriferas Sebo Seda"
+            ]
+          ],
+          [
+            [
+              "Energia",
+              "Carvão Petróleo Etanol Gás natural Propano Tório Urânio"
+            ],
+            [
+              "Metais industriais",
+              "Aço Alumínio Liga de alumínio Cobalto Cobre Chumbo Estanho Molibdênio Níquel Zinco"
+            ],
+            [
+              "Metais preciosos",
+              "Ouro Paládio Platina Prata"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/d/d7/Gold-crystals.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold-crystals.jpg/1280px-Gold-crystals.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Disambig_grey.svg/20px-Disambig_grey.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold-crystals.jpg/250px-Gold-crystals.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Cubic-face-centered.svg/60px-Cubic-face-centered.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikiquote-logo.svg/40px-Wikiquote-logo.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-220b3b24ef25",
+            "type": "image",
+            "title": "elemento químico com número atómico 79",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold-crystals.jpg/1280px-Gold-crystals.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold-crystals.jpg/1280px-Gold-crystals.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "elemento químico com número atómico 79",
+            "source_url": "https://pt.wikipedia.org/wiki/Ouro",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "elemento químico com número atómico 79",
+            "source_url": "https://pt.wikipedia.org/wiki/Ouro",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "elemento químico com número atómico 79",
+            "source_url": "https://pt.wikipedia.org/wiki/Ouro",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "elemento químico com número atómico 79",
+            "source_url": "https://pt.wikipedia.org/wiki/Ouro",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "e63fd7929ae52c7fed94",
+            "url": "https://br.investing.com/commodities/gold",
+            "title": "Cotação do Ouro Hoje | Preço do Ouro - Investing.com",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja a cotação do ouro em tempo real e saiba o preço hoje. Dados históricos, gráficos do preço do ouro na bolsa de valores e notícias sobre o valor do metal."
+          },
+          {
+            "id": "9ea5d9e3f4100157dc88",
+            "url": "https://cotacaododia.com/ouro/",
+            "title": "Preço do Ouro Hoje | Cotação por grama",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Preço do ouro hoje: R$ 637,57 por grama, queda de 2,27%. Cotação e valor atualizados, conversão de unidades, histórico e preço por cidade no Brasil."
+          },
+          {
+            "id": "6c5830c66fbcf572c88d",
+            "url": "https://investidor10.com.br/commodities/ouro/",
+            "title": "Preço do Ouro Hoje: cotação atual e histórico - Investidor10",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Descubra o preço do ouro atualizado em tempo real, acompanhe o gráfico e o histórico de preços. Entenda o mercado do ouro na bolsa e sua importância."
+          },
+          {
+            "id": "cc5ca1b28f93193c0ee1",
+            "url": "https://pt.wikipedia.org/wiki/Ouro",
+            "title": "Ouro – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O ouro é um elemento químico com o símbolo Au (do latim aurum 'ouro') e número atômico 79. É um metal brilhante, levemente amarelo-alaranjado, denso, macio, mal"
+          },
+          {
+            "id": "a830d9811eee947530e1",
+            "url": "https://dolarhoje.com/ouro-hoje/",
+            "title": "Ouro Hoje: Cotação, Valor e Preço do Grama!",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O valor do grama do ouro hoje está sempre atualizado para te deixar sempre bem informado. O valor do ouro é de caráter informativo e tem como fonte o Banco Cent"
+          },
+          {
+            "id": "c4249edb20178ed11e48",
+            "url": "https://valordolar.com.br/cotacoes/ouro/",
+            "title": "Valor do Ouro hoje: R$ 640,0700 (-0,11%) — Atualizado às 18:14",
+            "origin": "bing",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O preço do ouro hoje está em R$ 640,25 por grama. O ouro é negociado mundialmente em dólares por onça troy (31,1 gramas) nas bolsas de commodities, e o valor em"
+          },
+          {
+            "id": "4dde8ca5fbad97a231ac",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "CC-BY-SA 4.0",
+            "origin": "marginalia",
+            "query": "\"Ouro Preto\" eventos programação 2026-10-24 2026-10-31",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 7,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (\"Ouro Preto\" eventos programação 2026-10)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (\"Ouro Preto\" eventos programação 2026-10)",
+        "ddg: bloqueado (\"Ouro Preto\" eventos programação 2026-10)",
+        "marginalia: 1 resultados (\"Ouro Preto\" eventos programação 2026-10)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (\"Ouro Preto\" eventos programação 2026-10)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (ouro preto eventos culturais)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (ouro preto eventos culturais)",
+        "marginalia: sem resultados (ouro preto eventos culturais)",
+        "wikipedia: sem resultados (ouro preto eventos culturais)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": null,
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": []
+    }
+  ],
+  "source_revision": "2c6a3248003a59f96325fb91a282be8262fd908b",
+  "dataset_sha256": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df"
+}

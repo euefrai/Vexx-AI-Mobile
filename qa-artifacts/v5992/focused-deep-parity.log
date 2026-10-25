@@ -1,0 +1,347 @@
+............F....................................................F..     [100%]
+================================== FAILURES ===================================
+_ test_history_evidence_preserves_founding_information_instead_of_source_notice _
+
+research_job = (<sqlite3.Connection object at 0x000002B208C275B0>, {'id': 'rj-257527397b38', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_history_evidence_preserves_founding_information_instead_of_source_notice(research_job):
+        import research_agents as ra
+        db, job = research_job
+        job['objetivo'] = 'História da empresa Aurora fontes primárias'
+        notice = ('Aurora história empresa fontes primárias. Edite a página e inclua fontes. ' * 30)
+        fact = 'A empresa Aurora foi fundada em 1978. Sua fundação iniciou a produção industrial.'
+        text = notice + fact
+        def read(url):
+            return {'titulo': 'História da Aurora', 'texto': text, 'trecho_usado': notice[:300], 'texto_lido': True}
+>       evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+            [{'url': 'https://publisher.example/history', 'titulo': 'História da Aurora'}], read, teto_paginas=1)
+
+tests\test_discovery_v5992.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlite3.Connection object at 0x000002B208C275B0>
+job = {'id': 'rj-257527397b38', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...}
+etapa = {'alvo': 'História da empresa Aurora fontes primárias'}
+achados = [{'url': 'https://publisher.example/history', 'titulo': 'História da Aurora'}]
+recuperar_fn = <function test_history_evidence_preserves_founding_information_instead_of_source_notice.<locals>.read at 0x000002B208BD4EB0>
+teto_paginas = 1, deve_parar = None, prazo = 0
+
+    def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
+                        teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
+        """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
+        import evidence_graph as _eg
+        from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    
+        parar = deve_parar or (lambda: False)
+    
+        def _ler(a):
+            if parar() or (prazo and time.monotonic() >= prazo):
+                raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+            if a.get("metadata_source") == "academic_provider":
+                if recuperar_fn is None:
+                    rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                    if rec.get('full_text_fetched'):
+                        return {**rec,'texto_lido':True,'midia':[]}
+                return {"titulo": a.get("titulo") or a.get("title") or "",
+                        "texto": (a.get("abstract") or "")[:academic_research.MAX_ABSTRACT_CHARS],
+                        "final": a.get("landing_url") or a.get("url", ""),
+                        "full_text_fetched": False, "midia": [],
+                        'content_scope':a.get('content_scope','abstract_only'),
+                        "texto_lido": False, "access_state": "metadata_only"}
+            if a.get('content_scope')=='feed_metadata':
+                return {'titulo':a.get('titulo',''),'texto':'','final':a['url'],'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+            if recuperar_fn is not None:
+                rec = recuperar_fn(a["url"])
+                return {"titulo": rec.get("titulo") or a["titulo"],
+                        "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
+                        "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
+                        "secoes": (rec.get('secoes') or [])[:12],
+                        "content_scope": rec.get('content_scope') or 'page_text',
+                        "midia": rec.get("midia") or [],
+                        "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
+                        "trecho_usado": str(rec.get("trecho_usado") or "")[:1500],
+                        "access_state": str(rec.get("access_state") or
+                                            ("read" if (rec.get("texto") or "").strip()
+                                             else "snippet_only"))[:40]}
+            limite_tempo = 8.0
+            if prazo:
+                restante = prazo - time.monotonic()
+                if restante <= 0:
+                    raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
+                limite_tempo = max(0.5, min(limite_tempo, restante))
+            if urllib.parse.urlsplit(a["url"]).path.lower().endswith(".pdf"):
+                rec = research._recuperar_um(a, None, limite_tempo, etapa["alvo"])
+                return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
+                        "access_state": "read" if rec.get("lida") else "snippet_only"}
+            try:
+                final, pagina = research.baixar(
+                    a["url"], timeout=limite_tempo,
+                    max_bytes=max(65_536, int(job["orcamento"].get(
+                        "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
+            except TypeError:
+                final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            if research.pagina_bloqueada(pagina):
+                raise research.ResearchErro("Página bloqueada; conteúdo não usado como evidência.", "bloqueado")
+            artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+                                             teto=research.MAX_TEXTO_PAGINA)
+            texto = (artigo.get("texto") or "").strip()
+            return {"titulo": artigo.get("titulo") or a["titulo"],
+                    "texto": texto, "final": final,
+                    "content_scope": artigo.get("content_scope", "page_text"),
+                    "metadados":artigo.get('metadados') or {},
+                    "secoes": (artigo.get('secoes') or [])[:12],
+                    "imagens":artigo.get('imagens') or [],
+                    "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
+                    "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
+                    "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
+                    "access_state": "read" if texto else "snippet_only"}
+    
+        import search_orchestrator as orch
+        subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
+        import query_intelligence
+        import search_verticals
+        saved_request = (job.get('ajustes') or {}).get('request') or {}
+        request = saved_request if saved_request.get('original_request') == job['objetivo'] else query_intelligence.analyze(job['objetivo'])
+        if request['domain'] == 'science':
+            import research_gaps
+            subject = research_gaps.science_subject(subject)
+        termos_pedido = orch._termos_correspondencia(subject)
+    
+        def _candidato(a, rec):
+            return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
+                    'trecho': rec.get('texto') or '',
+                    'content_scope': rec.get('content_scope') or a.get('content_scope', 'page_text'),
+                    'texto_lido': bool(rec.get('texto_lido')),
+                    'structured': (rec.get('metadados') or {}).get('structured', []),
+                    'publicado_em': (rec.get('metadados') or {}).get('publicado_em')
+                    or a.get('publicado_em') or (a.get('meta') or {}).get('publicado_em')}
+    
+        def _corresponde(a, rec):
+            candidate = _candidato(a, rec)
+            if orch._context_mismatch(candidate,job['objetivo']):
+                return False
+            if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'documents'):
+                if not search_verticals.assess(request, candidate)['eligible']:
+                    return False
+            return not termos_pedido or orch._util_para_pedido(candidate, termos_pedido, subject)
+    
+        def _util(a, rec):
+            texto = (rec.get('texto') or '').strip()
+            return bool(texto) and _evidencia_lida({**rec, 'trecho': texto}) and _corresponde(a, rec)
+    
+        # Preserve ranking, but never spend a page slot on the same canonical URL twice.
+        unicos, vistas = [], set()
+        for a in achados:
+            try:
+                chave = orch.canonizar_url(a.get('url', ''))
+            except ValueError:
+                continue
+            if chave and chave not in vistas:
+                vistas.add(chave)
+                unicos.append(a)
+        # RSS is discovery, not a network page read. It must not consume all three
+        # quick-mode slots before an original candidate can even reach the reader.
+        discovery_only = [a for a in unicos if a.get('content_scope')=='feed_metadata']
+        achados = [a for a in unicos if a.get('content_scope')!='feed_metadata']
+        if request['domain']=='news':
+            achados.sort(key=lambda a: not bool(a.get('source_recovery')))
+        historico_falhas = job['usados'].get('failed_source_reads', [])
+        if not isinstance(historico_falhas, list):
+            historico_falhas = []
+        falhas_leitura = {key for key in historico_falhas[:80]
+                         if isinstance(key, str) and re.fullmatch(r'[0-9a-f]{64}', key)}
+    
+        def _chave_fonte(a):
+            return hashlib.sha256(orch.canonizar_url(a['url']).encode('utf-8')).hexdigest()
+    
+        def _registrar_falha(a):
+            # No URL/query string or raw exception is stored in the job counters.
+            if not parar() and (not prazo or time.monotonic() < prazo) and len(falhas_leitura) < 80:
+                falhas_leitura.add(_chave_fonte(a))
+                job['usados']['failed_source_reads'] = sorted(falhas_leitura)
+    
+        anteriores = {orch.canonizar_url(e.get("url", "")): e for e in _evidencias_job(db, job) if _evidencia_lida(e)}
+        reutilizadas = [anteriores[orch.canonizar_url(a.get("url", ""))] for a in achados
+                        if orch.canonizar_url(a.get("url", "")) in anteriores][:teto_paginas]
+        novas_paginas = [a for a in achados if orch.canonizar_url(a.get("url", "")) not in anteriores]
+        ignoradas = sum(_chave_fonte(a) in falhas_leitura for a in novas_paginas)
+        novas_paginas = [a for a in novas_paginas if _chave_fonte(a) not in falhas_leitura]
+        if ignoradas:
+            emitir(db, job['id'], job['owner'], 'analyst', 'source_failed_read_skipped', 'alerta',
+                   f'{ignoradas} fonte(s) com falha de download anterior ignorada(s) nesta pesquisa.',
+                   {'skipped': ignoradas})
+        restantes = max(0, job["orcamento"].get("paginas", 0) - job["usados"].get("paginas", 0))
+        alvos = novas_paginas[:min(teto_paginas, restantes)]
+        limite_tentativas = min(restantes, max(0, teto_paginas) * 2)
+        if reutilizadas:
+            emitir(db, job["id"], job["owner"], "analyst", "source_reused", "ok",
+                   f"{len(reutilizadas)} fonte(s) já lida(s) reutilizada(s), sem novo download.", {})
+        if parar() or (prazo and time.monotonic() >= prazo):
+            return reutilizadas
+        job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
+        baixados: dict = {}
+        def read_trace(source, state, rec=None, code=''):
+            rec=rec or {}
+            def public_url(value):
+                try:
+                    parts=urllib.parse.urlsplit(value or '')
+                    return urllib.parse.urlunsplit((parts.scheme,parts.netloc.rsplit('@',1)[-1],parts.path,'',''))[:500]
+                except ValueError: return ''
+            transitions = {'extracted':'READABLE', 'no_readable_content':'FETCHED',
+                           'relevance_rejected':'REJECTED', 'evidence_stored':'EVIDENCE_ELIGIBLE',
+                           'discovery_stored':'DISCOVERED', 'reader_failed':'REJECTED',
+                           'fetch_failed':'BLOCKED' if code in ('bloqueado','rate_limit','rate_limited') else 'REJECTED'}
+            emit_meta={'url':public_url(source.get('url')), 'final_url':public_url(rec.get('final')),
+                'source_state': transitions.get(state, 'DISCOVERED'),
+                'stage':state,'code':str(code)[:60], 'scope':rec.get('content_scope',''),
+                'extracted_chars':len(rec.get('texto') or ''), 'read':bool(rec.get('texto_lido')),
+                'published_at':(rec.get('metadados') or {}).get('publicado_em') or source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em',''),
+                'excerpt':str(rec.get('trecho_usado') or rec.get('texto') or '')[:400]}
+            emitir(db,job['id'],job['owner'],'analyst','source_read_trace','alerta' if code else 'ok',
+                   'Leitura de fonte: '+state+'.',emit_meta)
+    
+        def _ler_cronometrado(a):
+            rec = _ler(a)
+            return rec, time.monotonic()
+    
+        pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
+        futs = {pool.submit(_ler_cronometrado, a): a for a in alvos}
+        pendentes = set(futs)
+        cancelado = False
+        expirado = False
+        try:
+            while pendentes:
+                if parar():
+                    cancelado = True
+                    break
+                restante = prazo - time.monotonic() if prazo else 0.1
+                expirado = bool(prazo and restante <= 0)
+                prontas, pendentes = wait(pendentes, timeout=max(0, min(0.1, restante)),
+                                          return_when=FIRST_COMPLETED)
+                for fut in prontas:
+                    a = futs[fut]
+                    substituir = True
+                    concluida = False
+                    try:
+                        rec, concluido_em = fut.result()
+                        concluida = True
+                        if not prazo or concluido_em <= prazo:
+                            baixados[a["url"]] = rec
+                            read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
+                            substituir = not _util(a, rec)
+                    except research.ResearchErro as exc:
+                        if parar():
+                            cancelado = True
+                            break
+                        if exc.codigo != "cancelada":
+                            if not concluida:
+                                _registrar_falha(a)
+                            emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                                   f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
+                            read_trace(a,'fetch_failed',code=exc.codigo)
+                        else:
+                            substituir = False
+                    except Exception as exc:
+                        if not concluida and isinstance(exc, OSError):
+                            _registrar_falha(a)
+                        emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
+                               f"Ignorada ({type(exc).__name__}): {a['url'][:60]}.", {})
+                        read_trace(a,'reader_failed',code=type(exc).__name__)
+                    if (substituir and not parar() and (not prazo or time.monotonic() < prazo)
+                            and len(alvos) < min(limite_tentativas, len(novas_paginas))):
+                        proxima = novas_paginas[len(alvos)]
+                        alvos.append(proxima)
+                        job['usados']['paginas'] += 1
+                        novo_fut = pool.submit(_ler_cronometrado, proxima)
+                        futs[novo_fut] = proxima
+                        pendentes.add(novo_fut)
+                        emitir(db, job['id'], job['owner'], 'analyst', 'source_replacement_started', 'ok',
+                               'Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.',
+                               {'previous_source_id': str(a.get('id') or '')[:120],
+                                'source_id': str(proxima.get('id') or '')[:120]})
+                if cancelado:
+                    break
+                if expirado:
+                    break
+        finally:
+            for fut in futs:
+                fut.cancel()
+            pool.shutdown(wait=False, cancel_futures=True)
+        if expirado:
+            emitir(db, job["id"], job["owner"], "analyst", "source_reading_timeout", "alerta",
+                   "Prazo de leitura esgotado; apenas resultados concluídos no prazo serão usados.",
+                   {"completed": len(baixados), "attempted": len(alvos)})
+        if not cancelado and not parar():
+            for lead in discovery_only[:3]:
+                baixados[lead['url']]={'titulo':lead.get('titulo',''),'texto':'','final':lead['url'],
+                    'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
+                alvos.append(lead)
+        evidencias = list(reutilizadas)
+        for a in alvos:
+            if cancelado or parar():
+                break
+            rec = baixados.get(a["url"])
+            if rec is None:
+                continue
+            midia = rec.get("midia") or []
+            if midia:
+                _agregar_midia(db, job, midia)
+            texto = rec["texto"]
+            if not texto and not a.get("trecho"):
+                emitir(db, job["id"], job["owner"], "analyst", "source_opened",
+                       "vazia", f"Sem texto: {a['url'][:60]}.", {})
+                continue
+            academic = a.get("metadata_source") == "academic_provider"
+            candidate = _candidato(a, rec)
+            if texto and not _corresponde(a, rec):
+                read_trace(a,'relevance_rejected',rec,code=','.join(search_verticals.assess(request,candidate).get('reasons')
+                    or orch._context_mismatch(candidate,job['objetivo']) or ['TOPIC_MISMATCH']))
+                emitir(db, job["id"], job["owner"], "analyst", "source_irrelevant", "alerta",
+                       "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
+                continue
+            trecho_fonte = str(rec.get("trecho_usado") or "").strip()
+            if not academic and re.search(r'\bhist[oó]ria\b', job['objetivo'], re.I) and re.search(
+                    r'\b(funda[cç][aã]o|fundad[ao]|fundadores?|inaugura[cç][aã]o|inaugurad[ao]|founded)\b', texto, re.I):
+                # Generic source-request words can otherwise pick a maintenance
+                # notice instead of the requested founding/history information.
+                topic = query_intelligence.topic_profile(job['objetivo'])['primary_topic']
+>               trecho_fonte = melhor_trecho(texto, topic + ' fundação fundada fundador inauguração founded', 1500)
+                               ^^^^^^^^^^^^^
+E               NameError: name 'melhor_trecho' is not defined
+
+research_agents.py:1177: NameError
+___ test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating ___
+
+context = (<sqlite3.Connection object at 0x000002B208BC1A80>, {'id': 'rj-da35e9788a94', 'owner': 'owner-a', 'conv': 'chat-a', 'modo': 'pro', ...})
+
+    def test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating(context):
+        db, job = context
+        calls = []
+        class Provider:
+            nome = 'controlled-fixture'
+            def buscar(self, query, limite=6):
+                return [{'titulo': 'Autonomia dos modelos A e B', 'url': 'https://example.org/test',
+                         'trecho': EXCERPT}]
+        def recover(url):
+            return {'titulo': 'Autonomia dos modelos A e B', 'texto': EXCERPT, 'final': url}
+        def writer(messages, timeout):
+            payload = json.loads(messages[-1]['content'])
+            calls.append(payload.get('task', 'write'))
+            if payload.get('task') == 'verify_support':
+                return approved_review(messages, timeout)
+            # Writing starts after all adaptive search rounds, not during one.
+            label = payload['sources'][0]['id']
+            assert timeout <= 25
+            return answer(label=label)
+        result = ra.executar(db, job['id'], job['owner'], [Provider()], recover, sintetizar_fn=writer)
+>       assert result['status'] == 'concluida' and result['sintese']['llm'], result
+E       AssertionError: {'id': 'rj-da35e9788a94', 'status': 'concluida', 'modo': 'pro', 'objetivo': 'Compare autonomia dos modelos A e B', ...}
+E       assert ('concluida' == 'concluida'
+E         
+E           concluida and False)
+
+tests\test_research_synthesis.py:239: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_discovery_v5992.py::test_history_evidence_preserves_founding_information_instead_of_source_notice
+FAILED tests/test_research_synthesis.py::test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating
+2 failed, 66 passed in 45.29s

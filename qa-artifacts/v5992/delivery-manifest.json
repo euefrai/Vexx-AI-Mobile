@@ -1,0 +1,36 @@
+{
+  "initial_head": "4d13807",
+  "retrieval_frozen_head": "ad16f21",
+  "final_code_head": "1ce380a459066ea4376efc21ee2e593dc6f49115",
+  "verdict": "NOT_READY_FOR_PUBLICATION",
+  "push": false,
+  "deploy": false,
+  "production_mutation": false,
+  "datasets": {
+    "universal_search_v599.json": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1",
+    "source_recovery_v5991_holdout.json": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458",
+    "discovery_v5992_holdout.json": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df"
+  },
+  "authoritative_runs": [
+    "baseline-diagnostic",
+    "baseline-historical",
+    "baseline-sealed",
+    "accepted-diagnostic",
+    "accepted-historical",
+    "accepted-holdout"
+  ],
+  "local_only_intermediate_runs": [
+    "after-diagnostic",
+    "after-historical",
+    "final-diagnostic",
+    "final-historical",
+    "final-holdout"
+  ],
+  "final_tests": {
+    "passed": 1556,
+    "skipped": 4,
+    "warnings": 2,
+    "seconds": 438.98
+  },
+  "final_real_inference": "BLOCKED_TIMEOUT_NO_FINAL_CHAT_ANSWER"
+}

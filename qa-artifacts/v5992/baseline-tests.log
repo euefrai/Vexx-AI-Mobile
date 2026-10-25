@@ -1,0 +1,57 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+...............s........................................................ [ 23%]
+........................................................................ [ 28%]
+........................................................................ [ 32%]
+........................................................................ [ 37%]
+........................................................................ [ 42%]
+........................................................................ [ 46%]
+........................................................................ [ 51%]
+.............s.......................................................... [ 56%]
+........................................................................ [ 60%]
+........................................................................ [ 65%]
+........................................................................ [ 70%]
+.........s..........s................................................... [ 74%]
+........................................................................ [ 79%]
+........................................................................ [ 84%]
+........................................................................ [ 88%]
+........................................F............................... [ 93%]
+........................................................................ [ 98%]
+............................                                             [100%]
+================================== FAILURES ===================================
+______ test_feed_leads_do_not_hide_original_articles_from_reader_budget _______
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-432/test_feed_leads_do_not_hide_or0')
+
+    def test_feed_leads_do_not_hide_original_articles_from_reader_budget(tmp_path):
+        db=sqlite3.connect(tmp_path/'qa.sqlite');research.criar_tabelas(db)
+        today=datetime.now(timezone.utc).date().isoformat()
+        feeds=[{'titulo':'Recife anuncia obras','url':f'https://news.google.com/{i}',
+                'trecho':'Recife anuncia obras','content_scope':'feed_metadata', 'meta':{'publicado_em':today}}
+                for i in range(6)]
+        original={'titulo':'Recife anuncia obras','url':'https://example.org/obras','publicado_em':today}
+        opened=[]
+        def read(url):opened.append(url);return {'texto':'Recife anuncia obras. '*20,'lida':True}
+        result=research.pesquisa_rapida(db,'qa','Notícias em Recife hoje',lambda q:feeds+[original],read)
+        assert opened==[original['url']]
+>       assert result['fontes'][0]['url']==original['url'] and result['fontes_uteis']==1
+E       AssertionError: assert ('https://example.org/obras' == 'https://example.org/obras'
+E         
+E           https://example.org/obras and 0 == 1)
+
+tests\test_universal_search_v599.py:163: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_universal_search_v599.py::test_feed_leads_do_not_hide_original_articles_from_reader_budget
+1 failed, 1535 passed, 4 skipped, 2 warnings in 479.92s (0:07:59)

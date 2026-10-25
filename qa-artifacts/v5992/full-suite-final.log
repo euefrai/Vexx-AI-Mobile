@@ -1,0 +1,78 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+F....................................................................... [ 13%]
+........................................................................ [ 18%]
+...............................s........................................ [ 23%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+.............................s.......................................... [ 55%]
+............................................F........................... [ 60%]
+........................................................................ [ 64%]
+........................................................................ [ 69%]
+.........................s..........s................................... [ 74%]
+........................................................................ [ 78%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+............................................                             [100%]
+================================== FAILURES ===================================
+_ test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections __
+
+    def test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections():
+        from pathlib import Path
+        from tools.bench_autonomous_v598 import run
+        result=run(Path(__file__).resolve().parents[1])
+>       assert result['replans']==1 and result['duplicate_reads']==0
+E       assert (1 == 1 and 4 == 0)
+
+tests\test_autonomous_research_v598.py:150: AssertionError
+___ test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating ___
+
+context = (<sqlite3.Connection object at 0x000001A3088809A0>, {'id': 'rj-c60f83c71aa7', 'owner': 'owner-a', 'conv': 'chat-a', 'modo': 'pro', ...})
+
+    def test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating(context):
+        db, job = context
+        calls = []
+        class Provider:
+            nome = 'controlled-fixture'
+            def buscar(self, query, limite=6):
+                return [{'titulo': 'Autonomia dos modelos A e B', 'url': 'https://example.org/test',
+                         'trecho': EXCERPT}]
+        def recover(url):
+            return {'titulo': 'Autonomia dos modelos A e B', 'texto': EXCERPT, 'final': url}
+        def writer(messages, timeout):
+            payload = json.loads(messages[-1]['content'])
+            calls.append(payload.get('task', 'write'))
+            if payload.get('task') == 'verify_support':
+                return approved_review(messages, timeout)
+            # Writing starts after all adaptive search rounds, not during one.
+            label = payload['sources'][0]['id']
+            assert timeout <= 25
+            return answer(label=label)
+        result = ra.executar(db, job['id'], job['owner'], [Provider()], recover, sintetizar_fn=writer)
+>       assert result['status'] == 'concluida' and result['sintese']['llm'], result
+E       AssertionError: {'id': 'rj-c60f83c71aa7', 'status': 'concluida', 'modo': 'pro', 'objetivo': 'Compare autonomia dos modelos A e B', ...}
+E       assert ('concluida' == 'concluida'
+E         
+E           concluida and False)
+
+tests\test_research_synthesis.py:239: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_autonomous_research_v598.py::test_actual_pipeline_replans_for_methods_and_preserves_scientific_sections
+FAILED tests/test_research_synthesis.py::test_orchestrator_writes_and_reviews_once_and_resumes_without_repeating
+2 failed, 1550 passed, 4 skipped, 2 warnings in 717.20s (0:11:57)

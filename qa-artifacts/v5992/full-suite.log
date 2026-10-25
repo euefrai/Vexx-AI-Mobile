@@ -1,0 +1,104 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+.............................s.......................................... [ 23%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+............................................................F........... [ 50%]
+...........................s............................................ [ 55%]
+........................................................................ [ 60%]
+.........................F...............F.............................. [ 64%]
+........................................................................ [ 69%]
+.......................s..........s..................................... [ 74%]
+........................................................................ [ 78%]
+........................................................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+..........................................                               [100%]
+================================== FAILURES ===================================
+__________ test_feed_discovery_does_not_consume_original_page_budget __________
+
+research_job = (<sqlite3.Connection object at 0x00000210665A0220>, {'id': 'rj-6cff6b7440b9', 'owner': 'qa-reading', 'conv': '', 'modo': 'pro', ...})
+
+    def test_feed_discovery_does_not_consume_original_page_budget(research_job):
+        db,job=research_job
+        job['objetivo']='Notícias de Ubatã Bahia'
+        job['orcamento']['paginas']=1
+        leads=[{'titulo':'Notícias Ubatã Bahia','url':f'https://news.google.com/rss/articles/{i}',
+                'content_scope':'feed_metadata','trecho':'Ubatã Bahia'} for i in range(5)]
+        original={'titulo':'Ubatã Bahia inaugura biblioteca','url':'https://local.example/biblioteca',
+                  'source_recovery':{'method':'publisher_feed_autodiscovery','state':'original_candidate'}}
+        calls=[]
+        def fetch(url):
+            calls.append(url)
+            return {'titulo':original['titulo'],'texto':'Ubatã na Bahia inaugurou uma biblioteca pública municipal para seus moradores.',
+                    'final':url,'texto_lido':True}
+        evidence=ra.agente_analista(db,job,{'alvo':job['objetivo']},leads+[original],fetch,teto_paginas=1)
+        assert calls==[original['url']]
+        assert job['usados']['paginas']==1
+>       assert any(e['url']==original['url'] and e['texto_lido'] for e in evidence)
+E       assert False
+E        +  where False = any(<generator object test_feed_discovery_does_not_consume_original_page_budget.<locals>.<genexpr> at 0x000002106651B3E0>)
+
+tests\test_research_completion_v597.py:27: AssertionError
+_________________ test_recuperacao_roda_uma_rodada_por_lacuna _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002106619FA10>
+
+    def test_recuperacao_roda_uma_rodada_por_lacuna(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append(consulta)
+            if "valor preço número" in consulta:
+                return [dict(R1), dict(R2), dict(R3)]
+            return [dict(R1)]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        res = orch.pesquisar_com_recuperacao("quanto custa a placa a?", max_resultados=4,
+                                             orcamento=_orcamento_1())
+        assert res["recuperou"] is True
+        assert "— recuperação por lacuna —" in res["etapas"]
+        assert len(res["achados"]) == 3
+        assert res["estado"] == "ok"
+        assert any("valor preço número" in c for c in chamadas)
+>       assert all("quanto custa a placa a?" in c for c in chamadas)
+E       assert False
+E        +  where False = all(<generator object test_recuperacao_roda_uma_rodada_por_lacuna.<locals>.<genexpr> at 0x00000210660C4E10>)
+
+tests\test_search_core_v55.py:403: AssertionError
+_______________ test_comparison_intent_survives_query_cleaning ________________
+
+    def test_comparison_intent_survives_query_cleaning():
+        sources = [hit('FastAPI', 'https://fastapi.example/docs'), hit('Django', 'https://django.example/docs')]
+        result = research.pesquisa_rapida(db(), 'owner', 'Compare FastAPI e Django usando documentação.',
+            buscar_fn=lambda q: sources,
+            recuperar_fn=lambda url: {'titulo': 'FastAPI' if 'fastapi' in url else 'Django',
+                'texto': ('FastAPI' if 'fastapi' in url else 'Django') + ' official documentation. '*20})
+>       assert result['estado'] == 'ok'
+E       AssertionError: assert 'sem_correspondencia' == 'ok'
+E         
+E         - ok
+E         + sem_correspondencia
+
+tests\test_search_coverage_v59.py:136: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_research_completion_v597.py::test_feed_discovery_does_not_consume_original_page_budget
+FAILED tests/test_search_core_v55.py::test_recuperacao_roda_uma_rodada_por_lacuna
+FAILED tests/test_search_coverage_v59.py::test_comparison_intent_survives_query_cleaning
+3 failed, 1547 passed, 4 skipped, 2 warnings in 570.72s (0:09:30)

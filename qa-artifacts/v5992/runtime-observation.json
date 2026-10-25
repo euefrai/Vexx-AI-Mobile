@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-10-25T02:24:00.601324+00:00",
+  "scope": "READ_ONLY_PROCESS_METADATA_NO_REAL_DB_READ",
+  "processes": [
+    {
+      "pid": 10744,
+      "ppid": 6708,
+      "created": 1792894249.3857212,
+      "script": [
+        "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\pc_agent.py"
+      ],
+      "parent_script": [
+        "studio\\controle.py"
+      ],
+      "cwd": "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2",
+      "relay": "https://vexx-ai.onrender.com",
+      "sqlite": "%USERPROFILE%\\.julia-mobile\\memory.sqlite3",
+      "tcp": [
+        {
+          "state": "ESTABLISHED",
+          "remote": "216.24.57.18:443"
+        }
+      ],
+      "loaded_revision": "not_attested",
+      "jobs": "unknown_without_authorized_status"
+    }
+  ]
+}
