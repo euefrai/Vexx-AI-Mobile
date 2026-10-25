@@ -111,3 +111,33 @@ def test_replan_and_stale_request_do_not_change_subject(tmp_path):
         assert all('valor retornado' in s['alvo'] for s in searches)
     finally:
         db.close()
+
+
+def test_transport_records_observed_status_and_bytes_without_assuming_read(monkeypatch):
+    from email.message import Message
+    import io
+    import retrieval_trace as trace
+    monkeypatch.setattr(research, 'url_segura', lambda url: url)
+
+    class Response(io.BytesIO):
+        status = 200
+        headers = Message()
+    Response.headers['Content-Type'] = 'text/html; charset=utf-8'
+    url = 'https://example.org/page?token=secret'
+    with trace.observe() as rows:
+        with trace.source_scope('job', 'step', {'url': url}):
+            final, text = research.baixar(url, abrir=lambda *args: Response(b'<html>content</html>'))
+    body = next(row for row in rows if row['state'] == 'BODY_RECEIVED')
+    assert final == url and text == '<html>content</html>'
+    assert body['http_status'] == 200 and body['response_bytes'] == 20
+    assert body['content_type'] == 'text/html' and body['read'] is False
+    assert 'secret' not in json.dumps(rows)
+
+
+def test_late_worker_cannot_append_to_closed_trace():
+    from contextvars import copy_context
+    import retrieval_trace as trace
+    with trace.observe() as rows:
+        worker_context = copy_context()
+    worker_context.run(trace.record, 'job', 'step', {'url': 'https://example.org'}, 'SELECTED')
+    assert rows == []

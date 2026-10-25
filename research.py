@@ -201,6 +201,7 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
     "texto" (qualquer text/*). O tipo pedido é sempre validado; nada além
     do declarado passa — e nunca se contorna bloqueio/CAPTCHA.
     """
+    import retrieval_trace
     abrir = abrir or _abrir
     atual = url_segura(url)
     for _ in range(MAX_REDIRECTS + 1):
@@ -210,11 +211,17 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
             except TypeError:
                 resp = abrir(atual, timeout)  # assinatura antiga (testes/fixtures)
         except urllib.error.HTTPError as exc:
+            retrieval_trace.transport(atual, 'HTTP_RESPONSE', status=exc.code)
             if exc.code in (301, 302, 303, 307, 308):
                 loc = exc.headers.get("Location", "")
                 if not loc:
                     raise ResearchErro("Redirect sem destino.", "redirect")
-                atual = url_segura(urllib.parse.urljoin(atual, loc))
+                try:
+                    atual = url_segura(urllib.parse.urljoin(atual, loc))
+                except ResearchErro:
+                    retrieval_trace.transport(atual, 'REDIRECT_INVALID', status=exc.code)
+                    raise
+                retrieval_trace.transport(atual, 'REDIRECT_VALIDATED', status=exc.code)
                 continue
             if exc.code in (401, 403, 429):
                 err = ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
@@ -222,8 +229,10 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
                 raise err from None
             raise ResearchErro(f"Página HTTP {exc.code}.", "http")
         except (OSError, TimeoutError, ValueError) as exc:
+            retrieval_trace.transport(atual, 'FETCH_TIMEOUT' if isinstance(exc, TimeoutError) else 'FETCH_FAILED')
             raise ResearchErro(f"Falha de rede ({type(exc).__name__}).", "rede") from None
         with resp:
+            retrieval_trace.transport(atual, 'HTTP_RESPONSE', status=getattr(resp,'status',None))
             if getattr(resp, "status", 200) >= 400:
                 if resp.status in (401, 403, 429):
                     err = ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
@@ -241,6 +250,8 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
             if total > max_bytes:
                 raise ResearchErro("Documento grande demais.", "tamanho")
             raw = resp.read(max_bytes + 1)
+            retrieval_trace.transport(atual, 'BODY_RECEIVED', status=getattr(resp,'status',None),
+                                      byte_count=len(raw), content_type=ctype)
             if len(raw) > max_bytes:
                 raise ResearchErro("Documento grande demais.", "tamanho")
             # Some official RSS feeds return gzip even for Accept-Encoding: identity.

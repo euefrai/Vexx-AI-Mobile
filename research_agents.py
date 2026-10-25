@@ -21,6 +21,7 @@ import time
 import unicodedata
 import urllib.parse
 from datetime import datetime, timezone
+from contextvars import copy_context
 
 import academic_research
 import continuous_research
@@ -1071,13 +1072,19 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return reutilizadas
     job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
     baixados: dict = {}
-    def read_trace(source, state, rec=None, code=''):
+    def read_trace(source, state, rec=None, code='', coverage=None):
         rec=rec or {}
         reason = {'extracted': 'CONTENT_EXTRACTED', 'no_readable_content': 'CONTENT_EMPTY',
                   'relevance_rejected': 'RELEVANCE_REJECTED', 'topic_only': 'PASSAGE_NOT_FOUND',
                   'evidence_stored': 'EVIDENCE_STORED', 'discovery_stored': 'DISCOVERY_ONLY',
                   'reader_failed': 'EXTRACTION_FAILED', 'fetch_failed': 'FETCH_FAILED'}.get(state, state)
-        retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec)
+        if state == 'fetch_failed' and code in ('bloqueado','rate_limit','rate_limited'):
+            reason = 'FETCH_BLOCKED'
+        elif state == 'fetch_failed' and code == 'redirect':
+            reason = 'REDIRECT_INVALID'
+        elif state == 'reader_failed' and code == 'TimeoutError':
+            reason = 'FETCH_TIMEOUT'
+        retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec, coverage=coverage, reason_code=str(code).upper())
         def public_url(value):
             try:
                 parts=urllib.parse.urlsplit(value or '')
@@ -1097,13 +1104,14 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                'Leitura de fonte: '+state+'.',emit_meta)
 
     def _ler_cronometrado(a):
-        rec = _ler(a)
+        with retrieval_trace.source_scope(job['id'], etapa.get('id',''), a):
+            rec = _ler(a)
         return rec, time.monotonic()
 
     pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
     for source in alvos:
         retrieval_trace.record(job['id'], etapa.get('id', ''), source, 'SELECTED', charged=True)
-    futs = {pool.submit(_ler_cronometrado, a): a for a in alvos}
+    futs = {pool.submit(copy_context().run, _ler_cronometrado, a): a for a in alvos}
     pendentes = set(futs)
     cancelado = False
     expirado = False
@@ -1166,7 +1174,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     alvos.append(proxima)
                     job['usados']['paginas'] += 1
                     retrieval_trace.record(job['id'], etapa.get('id', ''), proxima, 'SELECTED', charged=True)
-                    novo_fut = pool.submit(_ler_cronometrado, proxima)
+                    novo_fut = pool.submit(copy_context().run, _ler_cronometrado, proxima)
                     futs[novo_fut] = proxima
                     pendentes.add(novo_fut)
                     emitir(db, job['id'], job['owner'], 'analyst', 'source_replacement_started', 'ok',
@@ -1181,6 +1189,12 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         for fut in futs:
             fut.cancel()
         pool.shutdown(wait=False, cancel_futures=True)
+    attempted_urls = {a['url'] for a in alvos}
+    for candidate in novas_paginas:
+        if candidate['url'] not in attempted_urls:
+            reason = ('BUDGET_EXHAUSTED' if job['usados']['paginas'] >= job['orcamento']['paginas']
+                      else 'SKIPPED_LOW_PRIORITY')
+            retrieval_trace.record(job['id'], etapa.get('id',''), candidate, reason)
     if expirado:
         emitir(db, job["id"], job["owner"], "analyst", "source_reading_timeout", "alerta",
                "Prazo de leitura esgotado; apenas resultados concluídos no prazo serão usados.",
@@ -1297,7 +1311,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             ev['doi'] = fonte['doi']
         if fonte.get('scientific_sections'):
             ev['scientific_sections'] = fonte['scientific_sections']
-        read_trace(a,'evidence_stored' if fonte['texto_lido'] else 'discovery_stored',rec)
+        read_trace(a,'evidence_stored' if fonte['texto_lido'] else 'discovery_stored',rec, coverage=answer_coverage)
         for key in ('vertical','structured','publicador'):
             ev[key]=fonte[key]
         if academic:
