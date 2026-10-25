@@ -219,8 +219,15 @@ def chat_complete(base: str, model: str, messages: list,
             raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
                              "nada foi executado nem exibido.", "protocolo_ferramenta")
         raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
+    choices = dados.get('choices') if isinstance(dados, dict) else None
+    finish = choices[0].get('finish_reason') if isinstance(choices, list) and choices and isinstance(choices[0], dict) else None
+    finish = finish if finish in ('stop','length','tool_calls','function_call','content_filter') else None
+    usage = dados.get('usage') if isinstance(dados, dict) else None
+    usage = {k:v for k,v in (usage.items() if isinstance(usage, dict) else [])
+             if k in ('prompt_tokens','completion_tokens','total_tokens') and type(v) is int and 0<=v<=10**9}
     return {"texto": texto[:MAX_TEXTO],
-            "truncada": len(texto) > MAX_TEXTO,
+            "truncada": len(texto) > MAX_TEXTO or finish == 'length',
+            "finish_reason": finish, "usage": usage,
             "latencia_s": round(time.monotonic() - inicio, 2)}
 
 

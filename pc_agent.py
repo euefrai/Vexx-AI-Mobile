@@ -4547,6 +4547,7 @@ def _job_tailer(db_path: str, job_id: str, owner: str, websocket, parar, pronto)
 
 def _research_writer(cfg: dict, parar):
     """One configured model/request per phase; no tools or chat/memory prompt."""
+    import research_synthesis
     def write(messages, timeout):
         if parar.is_set():
             return ''
@@ -4554,7 +4555,13 @@ def _research_writer(cfg: dict, parar):
         messages = [dict(m) for m in messages]
         messages[0]['content'] = system_with_identity(messages[0]['content'])
         result = gerar_texto(bounded, messages, max_tokens=1800, timeout=min(25, timeout))
+        write.last_metadata = {k:result[k] for k in ('finish_reason','usage','truncada','latencia_s') if k in result}
+        if result.get('truncada') or result.get('finish_reason') == 'length':
+            raise research_synthesis.ModelOutputError('model_truncated')
+        if result.get('finish_reason') == 'content_filter':
+            raise research_synthesis.ModelOutputError('model_filtered')
         return '' if parar.is_set() else result.get('texto', '')
+    write.last_metadata = {}
     return write
 
 

@@ -18,8 +18,11 @@ def main():
     import argparse
     parser=argparse.ArgumentParser()
     parser.add_argument('--output',type=Path,default=ROOT/'qa-artifacts/v5994/isolated-real-model.json')
+    parser.add_argument('--capture-public-output',action='store_true',help='Isolated public-source QA only; save bounded model output and completion metadata')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite prior inference evidence')
+    diagnostic=args.output.with_name(args.output.stem+'-model-output.json')
+    if args.capture_public_output and diagnostic.exists():raise SystemExit('Refusing to overwrite model diagnostics')
     if not os.environ.get('JULIA_ENV_FILE'):
         raise SystemExit('Explicit isolated environment required')
     import pc_agent,research,web_extract,evidence_graph,research_synthesis
@@ -27,6 +30,14 @@ def main():
     if not cfg['model'].endswith(':free'):
         raise SystemExit('Explicit free model required')
     cfg['fallbacks']=[]
+    original=pc_agent.gerar_texto;outputs=[]
+    def observe_completion(*pos,**kw):
+        result=original(*pos,**kw)
+        outputs.append({k:result[k] for k in ('finish_reason','usage','truncada','latencia_s','model_usado') if k in result})
+        outputs[-1].update(text=str(result.get('texto') or '')[:8000],
+                           output_capture_truncated=len(str(result.get('texto') or ''))>8000)
+        return result
+    if args.capture_public_output:pc_agent.gerar_texto=observe_completion
     url='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted'
     question='Como funciona Array.prototype.toSorted, qual sua sintaxe e quais as limitações?'
     record={'scope':'REAL_MODEL_ISOLATED_SYNTHESIS_NOT_AUTHENTICATED_SEARCH_E2E',
@@ -74,6 +85,10 @@ def main():
         record['status']=('MODEL_RATE_LIMITED' if code in ('rate_limit','rate_limited') else
                           'MODEL_TIMEOUT' if code=='timeout' else 'SYNTHESIS_REJECTED' if record['calls'] else 'SOURCE_INSUFFICIENT')
     finally:
+        pc_agent.gerar_texto=original
+        if args.capture_public_output:
+            diagnostic.write_text(json.dumps({'scope':'PUBLIC_SOURCE_ISOLATED_MODEL_DIAGNOSTIC_NOT_SEARCH_E2E',
+                 'calls':outputs},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         record['limits']=['No discovery/plan/chat delivery/reload in this diagnostic.',
                           'No SUCCESS_VERIFIED declaration; parsed facet coverage is not complete factual verification.',
                           'First token timing unavailable in the nonstreaming research writer.',

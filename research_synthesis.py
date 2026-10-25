@@ -86,7 +86,8 @@ class ReviewUnavailableError(ValueError):
 
 def _unsafe_direction(value):
     if isinstance(value, str):
-        return any('\u202a' <= c <= '\u202e' or '\u2066' <= c <= '\u2069' for c in value)
+        return any('\u202a' <= c <= '\u202e' or '\u2066' <= c <= '\u2069'
+                   or '\ud800' <= c <= '\udfff' or (ord(c)<32 and c not in '\n\r\t') for c in value)
     if isinstance(value, list):
         return any(_unsafe_direction(item) for item in value)
     if isinstance(value, dict):
@@ -94,11 +95,26 @@ def _unsafe_direction(value):
     return False
 
 
+class ModelOutputError(ValueError):
+    """Format/transport metadata failure, without retaining provider text."""
+    def __init__(self, reason):
+        self.reason = reason if reason in ('model_truncated','model_filtered') else 'invalid_output'
+        super().__init__(self.reason)
+
+
 def _parse_json(raw, limit):
     if not isinstance(raw, str) or len(raw) > limit:
         raise ValueError('invalid synthesis size')
-    fenced = re.fullmatch(r"\s*```(?:json)?\s*\n([\s\S]*?)\n```\s*", raw)
-    value = json.loads(fenced.group(1) if fenced else raw)
+    fenced = re.fullmatch(r"\s*```(?:json)?\s*([\s\S]*?)\s*```\s*", raw, re.I)
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:raise ValueError('duplicate JSON key')
+            result[key] = value
+        return result
+    def invalid_constant(_):raise ValueError('nonfinite JSON value')
+    value = json.loads(fenced.group(1) if fenced else raw,
+                       object_pairs_hook=unique_object, parse_constant=invalid_constant)
     # Check decoded values too: a JSON Unicode escape must not bypass this gate.
     # Normal Arabic/Hebrew letters remain valid; hidden overrides are not prose.
     if _unsafe_direction(value):
@@ -245,6 +261,8 @@ def failure_detail(exc):
         return 'semantic_review_unavailable'
     if isinstance(exc, SupportReviewError):
         return 'semantic_support_rejected'
+    if isinstance(exc, ModelOutputError):
+        return exc.reason
     if isinstance(exc, json.JSONDecodeError):
         return 'invalid_json'
     if type(exc) is ValueError:
@@ -256,6 +274,8 @@ def failure_detail(exc):
                 'unknown or duplicate reference': 'reference_mismatch',
                 'invalid paragraph': 'invalid_paragraph',
                 'invalid synthesis paragraphs': 'empty_or_invalid_paragraphs',
+                'duplicate JSON key': 'invalid_json',
+                'nonfinite JSON value': 'invalid_json',
                 'synthesis exceeds presentation budget': 'presentation_budget'}.get(str(exc), 'invalid_output')
     return 'provider_failure'
 
