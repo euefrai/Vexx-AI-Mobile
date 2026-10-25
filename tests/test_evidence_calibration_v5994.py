@@ -162,3 +162,18 @@ def test_provider_audit_keeps_rate_limit_category(monkeypatch):
     events=[]
     with sp.observe_searches(events.append,'Orbe'),pytest.raises(sp.ErroProvedor):sp.buscar('audit-fixture','Orbe')
     assert events[0]['classification']=='PROVIDER_RATE_LIMITED'
+
+
+def test_causal_direction_never_turns_antecedent_into_consequence():
+    q='Quais foram as causas e consequências da Revolta do Porto?'
+    # Synthetic regression from the relation-direction failure observed in live QA.
+    text='Líderes da Revolta do Porto buscavam reformas. A campanha obrigatória levou à Revolta do Porto.'
+    result=states(q,text)
+    assert result['causes']=='SUPPORTED'
+    assert result['consequences']=='DISCOVERED'
+    direct=states(q,'A Revolta do Porto resultou na reforma da legislação.')
+    assert direct=={'causes':'DISCOVERED','consequences':'SUPPORTED'}
+    for clause in ['A campanha não levou à Revolta do Porto.',
+                   'A campanha poderia ter causado a Revolta do Porto.',
+                   'Os líderes da Revolta do Porto provocaram uma discussão.']:
+        assert states(q,clause)['consequences']!='SUPPORTED'

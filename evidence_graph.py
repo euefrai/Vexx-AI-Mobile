@@ -56,7 +56,7 @@ def _passage_support(req, passage, source):
     """
     import query_intelligence as qi
     entity=_canonical_operation(req['entity']).strip(' .?!')
-    anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?![\w.])')
+    anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?!\w|\.\w)')
     text=qi.normalized(passage['text'])
     attribute=req['attribute']
     relation_rx=_ANSWER_RELATIONS.get(attribute)
@@ -73,6 +73,13 @@ def _passage_support(req, passage, source):
     previous=''; partial_found=False
     for clause in clauses:
         if not clause.strip():continue
+        if attribute=='causes':
+            # Causal direction matters: an antecedent which "led to X" is a
+            # cause of X, never a consequence of X. Keep the original span.
+            inverse=re.search(r'\b(?:levou a|levaram a|causou|causaram|provocou|provocaram|desencadeou|resultou em)\s+(?:a |o )?'+re.escape(entity)+r'(?!\w|\.\w)',clause)
+            if inverse and len(clause[:inverse.start()].strip())>=8 and not re.search(
+                r'\b(?:nao|nunca|not|never|poderia|pode|talvez|hipotese)\b',clause[:inverse.start()]):
+                return 'DIRECT_SUPPORT'
         named=anchor.search(clause)
         predicate=re.search(relation_rx,clause,re.S)
         if named and attribute in ('syntax','examples') and re.match(r'\s*\([^)]*\)',clause[named.end():]):
@@ -96,11 +103,13 @@ def _passage_support(req, passage, source):
             else:offset=0
             pos=predicate.start()+offset
             gap=clause[named.end():pos] if named else re.sub(r'^(?:ela|ele|it|a empresa|a companhia)\s+','',clause[:pos])
-            if attribute in ('founders','foundation_date','products'):
+            if attribute in ('founders','foundation_date','products','causes','consequences'):
                 # Bounded copular/auxiliary modifiers only. Reported facts about
                 # another subject are not transferred to this entity.
                 allowed=r'\s*(?:(?:foi|was|is|e|a|o|uma|um|an?|the|empresa|companhia|company|public|service|vertically|integrated|que|no|na|brasil|brazil|in)\s+){0,12}'
                 if not re.fullmatch(allowed,gap):previous=clause;continue
+                if attribute in ('causes','consequences') and named and clause[:named.start()].strip() not in ('','a','o','as','os','the'):
+                    previous=clause;continue
             if attribute in ('weight','battery','price'):
                 allowed=r'[\s:—-]*(?:(?:pesa|peso|weight|is|of|de|tem|has|bateria|battery|custa|preco|price|approximately|aproximadamente|com|with)\b[\s:—-]*){0,6}'
                 if not re.fullmatch(allowed,gap):previous=clause;continue
