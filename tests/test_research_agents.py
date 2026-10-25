@@ -636,7 +636,7 @@ def test_intervencao_estruturada():
         raise AssertionError("estado final deveria falhar")
     except ra.AgentErro as exc:
         assert exc.codigo == "estado"
-    viva = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
+    viva = ra.criar_job(db, "u-x", "café faz bem?", conv="c1", manual="rapida")
     ra.montar_plano(db, viva)
     out = ra.intervir(db, "u-x", viva["id"], "escopo_add", {"texto": "chá verde"})
     assert out["plano_versao"] == 3 and len(out["adicionadas"]) == 3
