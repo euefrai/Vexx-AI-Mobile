@@ -1,0 +1,6 @@
+### Result
+{"index":10}
+### Ran Playwright code
+```js
+await (async page => { await page.evaluate(n => sessionStorage.setItem("v5992-next",String(n)), 10); return {index:10}; })(page);
+```

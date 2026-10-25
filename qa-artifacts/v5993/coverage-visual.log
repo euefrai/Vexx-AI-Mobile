@@ -1,0 +1,44 @@
+### Result
+{"scope":"AUTHENTICATED_REAL_RETRIEVAL_SYNTHESIS_DISABLED_AFTER_PROVIDER_RATE_LIMIT","geometry":[{"viewport":1280,"root":1280},{"viewport":390,"root":390},{"viewport":320,"root":320}],"zoom":{"viewport":320,"root":320},"read_only":true,"rows":["Comportamento da operação\tTrecho pertinente recuperado","Fonte oficial ou primária\tAutoridade ainda não verificada","Limitações\tTrecho pertinente recuperado","Sintaxe ou assinatura\tTrecho pertinente recuperado"],"keyboard_sort":true,"csv_download_failure":null,"reload_preserved":true,"page_errors":[]}
+### Ran Playwright code
+```js
+await (async page => {
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.setViewportSize({width:1280,height:900});
+ if(!(await page.locator('#newChatCta').isVisible()))await page.locator('#drawerOpen').click();
+ await page.getByRole('button',{name:/^Pesquisa profunda sobre como funciona/}).click();
+ const card=page.locator('.message.ai .jdui-readonly').first();await card.waitFor({state:'visible'});
+ if(await card.getByRole('button',{name:'Editar tabela',exact:true}).count())throw Error('Read-only evidence has edit control');
+ const rows=(await card.locator('tbody tr').allInnerTexts()).sort();if(!rows.length)throw Error('Missing real requirement rows');
+ const geometry=[];
+ for(const width of [1280,390,320]){
+  await page.setViewportSize({width,height:900});
+  if(width<900 && await page.locator('#drawer').getAttribute('aria-hidden')==='false')await page.locator('#drawerClose').click();
+  if(width<900)await page.waitForFunction(()=>document.querySelector('#drawer').getBoundingClientRect().right<=1);
+  await card.scrollIntoViewIfNeeded();
+  const dim=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
+  if(dim.root>width)throw Error('Coverage overflow '+JSON.stringify(dim));geometry.push(dim);
+  await page.screenshot({path:'qa-artifacts/v5993/coverage-'+width+'.png'});
+ }
+ await card.getByRole('button',{name:'Ordenar por Aspecto'}).focus();await page.keyboard.press('Enter');
+ const pending=page.waitForEvent('download');await card.getByRole('button',{name:'Baixar CSV',exact:true}).click();
+ const download=await pending;await download.saveAs('qa-artifacts/v5993/requirement-coverage.csv');
+ await page.evaluate(()=>document.body.style.zoom='2');await card.scrollIntoViewIfNeeded();
+ const zoom=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
+ await page.screenshot({path:'qa-artifacts/v5993/coverage-zoom-200.png'});
+ if(zoom.root>zoom.viewport)throw Error('Coverage CSS200 overflow');
+ await page.evaluate(()=>document.body.style.zoom='');await page.reload();
+ await page.locator('#loginOverlay').waitFor({state:'hidden'});await card.waitFor({state:'visible'});
+ const restored=(await card.locator('tbody tr').allInnerTexts()).sort();
+ if(JSON.stringify(rows)!==JSON.stringify(restored))throw Error('Requirement rows changed after reload');
+ return {scope:'AUTHENTICATED_REAL_RETRIEVAL_SYNTHESIS_DISABLED_AFTER_PROVIDER_RATE_LIMIT',geometry,zoom,
+  read_only:true,rows,keyboard_sort:true,csv_download_failure:await download.failure(),reload_preserved:true,page_errors:errors};
+})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:55338/
+- Page Title: Vexx AI
+### Events
+- New console entries: .playwright-cli\console-2026-10-25T14-25-09-943Z.log#L21-L22
+- Downloading file Aspectos da pergunta.csv ...
+- Downloaded file Aspectos da pergunta.csv to ".playwright-cli\Aspectos-da-pergunta.csv"

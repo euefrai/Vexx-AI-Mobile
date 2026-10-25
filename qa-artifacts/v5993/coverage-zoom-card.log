@@ -1,0 +1,15 @@
+### Result
+{"scope":"REAL_READ_ONLY_TABLE_AT_CSS_ZOOM_200","screenshots":true}
+### Ran Playwright code
+```js
+await (async page => {
+ await page.setViewportSize({width:320,height:900});
+ const card=page.locator('.message.ai .jdui-readonly').first();await card.waitFor({state:'visible'});
+ await page.evaluate(()=>document.body.style.zoom='2');
+ const scroll=card.locator('.jdui-scrollx');await scroll.evaluate(el=>el.scrollLeft=0);
+ await card.screenshot({path:'qa-artifacts/v5993/coverage-zoom-card-left.png'});
+ await scroll.evaluate(el=>el.scrollLeft=el.scrollWidth);
+ await card.screenshot({path:'qa-artifacts/v5993/coverage-zoom-card-right.png'});
+ await page.evaluate(()=>document.body.style.zoom='');return {scope:'REAL_READ_ONLY_TABLE_AT_CSS_ZOOM_200',screenshots:true};
+})(page);
+```

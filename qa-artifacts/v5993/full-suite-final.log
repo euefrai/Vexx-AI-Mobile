@@ -1,0 +1,65 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+....................................................s................... [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................................ [ 41%]
+........................................................................ [ 45%]
+........................................................................ [ 50%]
+..................................................s..................... [ 54%]
+........................................................................ [ 59%]
+........................................................................ [ 63%]
+........................................................................ [ 68%]
+..............................................s..........s.............. [ 73%]
+........................................................................ [ 77%]
+........................................................................ [ 82%]
+........................................................................ [ 86%]
+........................................................................ [ 91%]
+..........................................FF............................ [ 95%]
+.................................................................        [100%]
+================================== FAILURES ===================================
+__________ test_research_view_validates_real_data_and_links_exports ___________
+
+    def test_research_view_validates_real_data_and_links_exports():
+        message = research_view.build_view(_resumo())
+        ok, norm, errs = jdui.validar_mensagem(message)
+        assert ok, errs
+        components = [block.get("component") for block in norm["blocks"] if block["type"] == "ui"]
+>       assert components == ["researchplan", "evidence", "accordion", "media", "filecard"]
+E       AssertionError: assert ['researchpla...', 'filecard'] == ['researchpla...', 'filecard']
+E         
+E         At index 3 diff: 'filecard' != 'media'
+E         Right contains one more item: 'filecard'
+E         Use -v to get more diff
+
+tests\test_v58_deep_research.py:179: AssertionError
+_________ test_research_view_omits_invalid_component_without_raw_json _________
+
+    def test_research_view_omits_invalid_component_without_raw_json():
+        resumo = _resumo()
+        resumo["midia"][0]["url"] = "javascript:alert(1)"
+        message = research_view.build_view(resumo)
+        ok, norm, errs = jdui.validar_mensagem(message)
+        assert ok, errs
+        assert all(block.get("component") != "media" for block in norm["blocks"])
+>       assert "Componentes omitidos" in norm["blocks"][0]["content"]
+E       AssertionError: assert 'Componentes omitidos' in '**Objetivo:** Testar a segurança do café\n**Status:** concluída · **Modo:** profunda · **Evidências:** 2\n**Cobertura...têmico:** a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.'
+
+tests\test_v58_deep_research.py:193: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v58_deep_research.py::test_research_view_validates_real_data_and_links_exports
+FAILED tests/test_v58_deep_research.py::test_research_view_omits_invalid_component_without_raw_json
+2 failed, 1571 passed, 4 skipped, 2 warnings in 220.37s (0:03:40)

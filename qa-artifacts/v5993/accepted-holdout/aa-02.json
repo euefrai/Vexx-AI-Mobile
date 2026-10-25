@@ -1,0 +1,1950 @@
+{
+  "id": "aa-02",
+  "category": "multiple_attributes",
+  "query": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.967,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Tramontina",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Tramontina",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Tramontina",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou tramontina ano seus produtos",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou tramontina ano seus produtos",
+      "candidates": 1
+    },
+    {
+      "provider": "wikipedia",
+      "query": "quem fundou tramontina ano seus produtos",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Tramontina&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Tramontina&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5155
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Tramontina",
+      "final": "https://html.duckduckgo.com/html/?q=Tramontina",
+      "chars": 14236
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Tramontina",
+      "final": "https://old-search.marginalia.nu/search?query=Tramontina",
+      "chars": 995
+    },
+    {
+      "url": "https://www.bing.com/search?q=quem+fundou+tramontina+ano+seus+produtos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=quem+fundou+tramontina+ano+seus+produtos&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4946
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=quem+fundou+tramontina+ano+seus+produtos",
+      "final": "https://old-search.marginalia.nu/search?query=quem+fundou+tramontina+ano+seus+produtos",
+      "chars": 16252
+    },
+    {
+      "url": "https://global.tramontina.com/catalogos",
+      "final": "https://global.tramontina.com/catalogos",
+      "chars": 349493
+    },
+    {
+      "url": "https://www.tramontina.com.br/",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://empresas.tramontina.com.br/",
+      "final": "https://empresas.tramontina.com.br/",
+      "chars": 121152
+    },
+    {
+      "url": "https://www.tramontina.com/",
+      "final": "https://www.tramontina.com/",
+      "chars": 516887
+    },
+    {
+      "url": "https://www.facebook.com/Tramontina",
+      "final": "https://web.facebook.com/Tramontina?_rdc=1&_rdr",
+      "chars": 508024
+    },
+    {
+      "url": "https://www.youtube.com/user/tramontina",
+      "final": "https://www.youtube.com/user/tramontina",
+      "chars": 1073604
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+    "domain": "general",
+    "original_request": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+    "resolved_request": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T13:37:57.751155+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "a43faca7ef96a39d94fa",
+        "url": "https://global.tramontina.com/catalogos",
+        "title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "sáb., 24 out. 2026 22:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 680,
+        "final_url": "https://global.tramontina.com/catalogos",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "ecf00200605af4a08269",
+        "url": "https://www.tramontina.com.br/",
+        "title": "Black Friday Tramontina | Até 70% OFF na Loja Oficial",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "sáb., 24 out. 2026 19:22:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Aproveite a Black Friday Tramontina para comprar panelas, utensílios, ferramentas, eletros, móveis e outros produtos com preços exclusivos na Loja Oficial.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f0d846daae724ae94d18",
+        "url": "https://empresas.tramontina.com.br/",
+        "title": "Tramontina para Empresas | A Loja Oficial para a Sua Empresa",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "dom., 25 out. 2026 01:06:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Na Tramontina, você encontra muitas possibilidades para projetos de empreendimentos como bares, restaurantes e hotéis. São diversos produtos: panelas, talheres,",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://empresas.tramontina.com.br/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "1bc533fa7467cd7075b0",
+        "url": "https://www.tramontina.com/",
+        "title": "Tramontina - Quality Cookware, Bakeware, Cutlery, and More",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "dom., 25 out. 2026 00:51:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "for braising and baking, for high-heat searing, and aluminum with a for quick, low-effort cooking. stainless steel enameled cast iron carbon steel nonstick coat",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2993,
+        "final_url": "https://www.tramontina.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "57f1b0c4ed1bf569a696",
+        "url": "https://pt.wikipedia.org/wiki/Tramontina",
+        "title": "Tramontina – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "sáb., 24 out. 2026 06:29:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Grupo Tramontina conta com unidades fabris, Centros de Distribuição, Escritórios Regionais de Vendas e Lojas Oficiais, além da Central de Administração e outr",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "de00210045c09cd41dd6",
+        "url": "https://support.google.com/youtube/answer/72857?hl=en",
+        "title": "How to earn money on YouTube - YouTube Help - Google Help",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "sáb., 24 out. 2026 21:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "You can earn money on YouTube by applying for and being accepted to the YouTube Partner Program. Only channels that follow our YouTube channel monetization poli",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "dfb244ebc8146b57c9e0",
+        "url": "https://global.tramontina.com/",
+        "title": "Tramontina | Qualidade, tradição e inovação para sua casa desde 1911",
+        "origin": "bing",
+        "query": "Tramontina",
+        "date": "sáb., 24 out. 2026 04:27:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Conheça a Tramontina, uma marca global com mais de 22.000 produtos que atendem casa, cozinha, jardim, ferramentas, móveis e muito mais. Sempre com qualidade, du",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "6e68af088f6e2ff67b8d",
+        "url": "https://support.google.com/youtube/answer/7280745?hl=en",
+        "title": "Check your recent subscribers - YouTube Help - Google Help",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "ter., 20 out. 2026 16:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "You can view a list of your most recent subscribers on the channel dashboard in YouTube Studio.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e18a15a56bf7bc6a3269",
+        "url": "https://www.zhihu.com/question/1903231775980913051",
+        "title": "如何在中国大陆用「合法」的方式观看到youtube上面的「有价值」的视频？ - 知乎",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "sáb., 24 out. 2026 05:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "YouTube 将自动为 添加翻译后的中文字幕，这一功能有效解决了语言障碍问题。 当你向下浏览时，部分 会标注相关信息。 例如，博主 Jeff Su 的这条 支持 4K 分辨率并配有字幕，我们可以点击查看详情。 这位博主可能是华裔，他贴心地提供了英文字幕和中文字幕。",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "cf2fa4cec8064b22e863",
+        "url": "https://www.zhihu.com/topic/19550532",
+        "title": "YouTube公司 - 知乎",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "sáb., 24 out. 2026 01:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "YouTube，全球最大的视频分享网站，早期公司总部位于加利福尼亚州的圣布里诺。公司由华裔美籍华人陈士骏等人创立并于2005年2月15日注册，网站的口号为“Broadcast Yourself”（表现你自己），网站的名称和标志皆是自早期电视所使用的阴极射线管发想而成。2006年11月，Google公司以16.5亿美元收",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "7dcebd9b1f024e45f39f",
+        "url": "https://support.google.com/youtube/community?hl=pt-BR",
+        "title": "Comunidade YouTube",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "qua., 21 out. 2026 20:59:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "4 respostas Sobre o programa Colaboradores do YouTube Atualizações de @TeamYouTube Experimentos Sobre a comunidade Visão geral da comunidade Política de conteúd",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f2a0ef39325f9181272c",
+        "url": "https://support.google.com/youtube/answer/76187?hl=en",
+        "title": "Recover a hacked YouTube channel - Google Help",
+        "origin": "bing",
+        "query": "quem fundou tramontina ano seus produtos",
+        "date": "ter., 20 out. 2026 17:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Recover a hacked YouTube channel As a YouTube user, you invest a lot of time into your content and channels. We know it can be a stressful and difficult situati",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "1e891c9f24af131566e9",
+        "url": "https://www.facebook.com/Tramontina",
+        "title": "",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+        "date": "",
+        "type": "page",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.facebook.com/Tramontina",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY"
+        ]
+      },
+      {
+        "id": "830598d3170db6d51be7",
+        "url": "https://www.youtube.com/user/tramontina",
+        "title": "",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouT",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 206,
+        "final_url": "https://www.youtube.com/user/tramontina",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 14,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-86837dd715ef",
+      "type": "image",
+      "title": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+      "url": "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+      "final_url": "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+      "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "source_url": "https://global.tramontina.com/catalogos",
+      "publisher": "prd-assets-portal.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2a79b370d049",
+      "type": "image",
+      "title": "dots",
+      "url": "https://global.tramontina.com/images/dots.svg",
+      "final_url": "https://global.tramontina.com/images/dots.svg",
+      "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "source_url": "https://global.tramontina.com/catalogos",
+      "publisher": "global.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "dots",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fdf3005e7145",
+      "type": "image",
+      "title": "Tramontina",
+      "url": "https://prd-assets-portal.tramontina.com/Tramontina_logo_91451b3262.svg",
+      "final_url": "https://prd-assets-portal.tramontina.com/Tramontina_logo_91451b3262.svg",
+      "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "source_url": "https://global.tramontina.com/catalogos",
+      "publisher": "prd-assets-portal.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tramontina",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0d784aaca8e1",
+      "type": "image",
+      "title": "Tramontina Logo",
+      "url": "https://prd-assets-portal.tramontina.com/thumbnail_logo_d1e9ac943d.png",
+      "final_url": "https://prd-assets-portal.tramontina.com/thumbnail_logo_d1e9ac943d.png",
+      "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "source_url": "https://global.tramontina.com/catalogos",
+      "publisher": "prd-assets-portal.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tramontina Logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e975e5a676be",
+      "type": "document",
+      "title": "manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+      "url": "https://prd-assets-portal.tramontina.com/manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+      "final_url": "https://prd-assets-portal.tramontina.com/manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+      "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "source_url": "https://global.tramontina.com/catalogos",
+      "publisher": "prd-assets-portal.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-df0bc4339908",
+      "type": "image",
+      "title": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para ",
+      "url": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+      "final_url": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+      "source_title": "Tramontina",
+      "source_url": "https://www.youtube.com/user/tramontina",
+      "publisher": "yt3.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em ",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-79e05a305fcd",
+      "type": "image",
+      "title": "Tramontina USA",
+      "url": "https://www.tramontina.com/cdn/shop/files/Tramontina_Horizontal_RGB.png?v=1754406165&width=380",
+      "final_url": "https://www.tramontina.com/cdn/shop/files/Tramontina_Horizontal_RGB.png?v=1754406165&width=380",
+      "source_title": "Tramontina USA",
+      "source_url": "https://www.tramontina.com/",
+      "publisher": "www.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tramontina USA",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e029efa80a33",
+      "type": "video",
+      "title": "Tramontina USA",
+      "url": "https://www.tramontina.com/cdn/shop/videos/c/vp/f3f9c004a76546708383dd581e45f863/f3f9c004a76546708383dd581e45f863.HD-720p-3.0Mbps-54683752.mp4?v=0",
+      "final_url": "https://www.tramontina.com/cdn/shop/videos/c/vp/f3f9c004a76546708383dd581e45f863/f3f9c004a76546708383dd581e45f863.HD-720p-3.0Mbps-54683752.mp4?v=0",
+      "source_title": "Tramontina USA",
+      "source_url": "https://www.tramontina.com/",
+      "publisher": "www.tramontina.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Since 1911, Tramontina has delivered quality cookware globally from Brazil - offering tri-ply clad, cast iron, and non-stick products at affordable prices.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://global.tramontina.com/catalogos",
+      "titulo": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 22:14:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://global.tramontina.com/catalogos",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.tramontina.com/",
+      "titulo": "Tramontina USA",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 00:51:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.tramontina.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.youtube.com/user/tramontina",
+      "titulo": "Tramontina",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.youtube.com/user/tramontina",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Tramontina",
+      "items": [
+        {
+          "titulo": "Black Friday Tramontina | Até 70% OFF na Loja Oficial",
+          "url": "https://www.tramontina.com.br/",
+          "trecho": "Aproveite a Black Friday Tramontina para comprar panelas, utensílios, ferramentas, eletros, móveis e outros produtos com preços exclusivos na Loja Oficial.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:22:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tramontina.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 11.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Tramontina | Qualidade, tradição e inovação para sua casa desde 1911",
+          "url": "https://global.tramontina.com/",
+          "trecho": "Conheça a Tramontina, uma marca global com mais de 22.000 produtos que atendem casa, cozinha, jardim, ferramentas, móveis e muito mais. Sempre com qualidade, durabilidade e compromisso com inovação e responsabilidade ambiental.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:27:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://global.tramontina.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 11.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+          "url": "https://global.tramontina.com/catalogos",
+          "trecho": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:14:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://global.tramontina.com/catalogos",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Tramontina – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Tramontina",
+          "trecho": "O Grupo Tramontina conta com unidades fabris, Centros de Distribuição, Escritórios Regionais de Vendas e Lojas Oficiais, além da Central de Administração e outras unidades operacionais e de serviço.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:29:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Tramontina",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Tramontina para Empresas | A Loja Oficial para a Sua Empresa",
+          "url": "https://empresas.tramontina.com.br/",
+          "trecho": "Na Tramontina, você encontra muitas possibilidades para projetos de empreendimentos como bares, restaurantes e hotéis. São diversos produtos: panelas, talheres, frigideiras, cubas gastronômicas, equipamentos, móveis, cozinhas profissionais e muito mais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:06:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://empresas.tramontina.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 11.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Tramontina - Quality Cookware, Bakeware, Cutlery, and More",
+          "url": "https://www.tramontina.com/",
+          "trecho": "Tramontina makes cookware, bakeware, and cutlery, plus tableware and kitchen tools. As a vertically integrated manufacturer founded in 1911, it produces these lines in its own factories, from stainless steel pans to forged knives.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:51:00 GMT"
+          },
+          "discovery_query": "Tramontina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tramontina.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou tramontina ano seus produtos",
+      "items": [
+        {
+          "titulo": "How to earn money on YouTube - YouTube Help - Google Help",
+          "url": "https://support.google.com/youtube/answer/72857?hl=en",
+          "trecho": "You can earn money on YouTube by applying for and being accepted to the YouTube Partner Program. Only channels that follow our YouTube channel monetization policies may be able to monetize.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:24:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://support.google.com/youtube/answer/72857?hl=en",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Check your recent subscribers - YouTube Help - Google Help",
+          "url": "https://support.google.com/youtube/answer/7280745?hl=en",
+          "trecho": "You can view a list of your most recent subscribers on the channel dashboard in YouTube Studio.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 16:13:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://support.google.com/youtube/answer/7280745?hl=en",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "如何在中国大陆用「合法」的方式观看到youtube上面的「有价值」的视频？ - 知乎",
+          "url": "https://www.zhihu.com/question/1903231775980913051",
+          "trecho": "YouTube 将自动为 添加翻译后的中文字幕，这一功能有效解决了语言障碍问题。 当你向下浏览时，部分 会标注相关信息。 例如，博主 Jeff Su 的这条 支持 4K 分辨率并配有字幕，我们可以点击查看详情。 这位博主可能是华裔，他贴心地提供了英文字幕和中文字幕。",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://zhihu.com/question/1903231775980913051",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "YouTube公司 - 知乎",
+          "url": "https://www.zhihu.com/topic/19550532",
+          "trecho": "YouTube，全球最大的视频分享网站，早期公司总部位于加利福尼亚州的圣布里诺。公司由华裔美籍华人陈士骏等人创立并于2005年2月15日注册，网站的口号为“Broadcast Yourself”（表现你自己），网站的名称和标志皆是自早期电视所使用的阴极射线管发想而成。2006年11月，Google公司以16.5亿美元收购了 ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 01:57:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://zhihu.com/topic/19550532",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Comunidade YouTube",
+          "url": "https://support.google.com/youtube/community?hl=pt-BR",
+          "trecho": "4 respostas Sobre o programa Colaboradores do YouTube Atualizações de @TeamYouTube Experimentos Sobre a comunidade Visão geral da comunidade Política de conteúdo",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 20:59:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://support.google.com/youtube/community?hl=pt-BR",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Recover a hacked YouTube channel - Google Help",
+          "url": "https://support.google.com/youtube/answer/76187?hl=en",
+          "trecho": "Recover a hacked YouTube channel As a YouTube user, you invest a lot of time into your content and channels. We know it can be a stressful and difficult situation when your channel is hacked. Fortunately, there are steps that you can take to recover your channel. Chat with our hacked channel assista",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 17:11:00 GMT"
+          },
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "bing",
+          "url_canonica": "https://support.google.com/youtube/answer/76187?hl=en",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou tramontina ano seus produtos",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "quem fundou tramontina ano seus produtos",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://global.tramontina.com/catalogos",
+      "result": {
+        "titulo": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+        "texto": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em busca de ferramentas, equipamentos ou acabamentos de alta performance, aqui encontrará os catálogos atualizados que reúnem linhas completas da marca. Com fácil navegação, basta escolher entre os perfis “Para Você” ou “Para Profissionais” para acessar publicações específicas para suas necessidades. Nossos catálogos digitais trazem inspiração, produtos e soluções para diferentes ambientes: utensílios domésticos, móveis, ferramentas, materiais elétricos, iluminação, limpeza, construção civil e muito mai ... Leia mais",
+        "final": "https://global.tramontina.com/catalogos",
+        "trecho_usado": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em busca de ferramentas, equipamentos ou acabamentos de alta performance, aqui encontrará os catálogos atualizados que reúnem linhas completas da marca. Com fácil navegação, basta escolher entre os perfis “Para Você” ou “Para Profissionais”",
+        "metadados": {
+          "titulo": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+          "descricao": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+          "canonica": "https://global.tramontina.com/catalogos",
+          "og": {
+            "og:site_name": "Tramontina Global",
+            "og:type": "website",
+            "og:title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "og:description": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+            "og:url": "https://global.tramontina.com/catalogos",
+            "og:image": "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+            "og:image:width": "1132",
+            "og:image:height": "484"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Tramontina Global",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais",
+            "texto": "Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em busca de ferramentas, equipamentos ou acabamentos de alta performance, aqui encontrará os catálogos atualizados que reúnem linhas completas da marca. Com fácil navegação, basta escolher entre os perfis “Para Você” ou “Para Profissionais” para acessar publicações específicas para suas necessidades. Nossos catálogos digitais trazem inspiração, produtos e soluções para diferentes ambientes: utensílios domésticos, móveis, ferramentas, materiais elétricos, iluminação, limpeza, construção civil e muito mai ..."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.facebook.com/Tramontina",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/user/tramontina",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://br.pinterest.com/tramontina/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://br.linkedin.com/company/tramontina",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.tramontina.com.br/?utm_source=global&amp;utm_medium=footer&amp;utm_campaign=botao_b2c&amp;utm_term=link_direto&amp;utm_content=2025",
+            "texto": "Tramontina Store",
+            "interno": false
+          },
+          {
+            "url": "https://trabalhe.tramontina.cloud",
+            "texto": "Trabalhe na Tramontina",
+            "interno": false
+          },
+          {
+            "url": "https://www.contatoseguro.com.br/tramontina",
+            "texto": "Canal de Ética",
+            "interno": false
+          },
+          {
+            "url": "https://global.tramontina.com/",
+            "texto": "Para Você",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/para-profissionais",
+            "texto": "Para Profissionais",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com.br/?utm_source=global&amp;utm_medium=header&amp;utm_campaign=botao_b2c&amp;utm_term=link_direto&amp;utm_content=2025",
+            "texto": "Loja Oficial",
+            "interno": false
+          },
+          {
+            "url": "https://empresas.tramontina.com.br/?utm_source=global&amp;utm_medium=header&amp;utm_campaign=botao_portal&amp;utm_term=link_direto&amp;utm_content=2024",
+            "texto": "Para Empresas",
+            "interno": false
+          },
+          {
+            "url": "https://global.tramontina.com/busca?termo=&amp;categoria=produtos",
+            "texto": "em Produtos",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/busca?termo=&amp;categoria=posts",
+            "texto": "em Posts relacionados",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/busca?termo=&amp;categoria=conteudo",
+            "texto": "em Conteúdo",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/busca?termo=&amp;categoria=perguntas",
+            "texto": "em FAQ",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/busca?termo=&amp;categoria=certificados",
+            "texto": "em Certificados",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/blog",
+            "texto": "Blog de Dicas",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/sobre",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://globaltramontina.zendesk.com/hc/pt-br",
+            "texto": "Atendimento",
+            "interno": false
+          },
+          {
+            "url": "https://global.tramontina.com/escolha-seu-pais",
+            "texto": "Nossos sites",
+            "interno": true
+          },
+          {
+            "url": "https://globaltramontina.zendesk.com/hc/pt-br/requests/new?ticket_form_id=9141076617229",
+            "texto": "Fale conosco",
+            "interno": false
+          },
+          {
+            "url": "https://global.tramontina.com/assistencia-tecnica",
+            "texto": "Assistência técnica",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/tramontinaoficial/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.tiktok.com/@tramontinaoficial",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://global.tramontina.com/nossa-historia",
+            "texto": "Nossa história",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/sustentabilidade",
+            "texto": "Sustentabilidade",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/certificados/familia-produto",
+            "texto": "Certificações e apoiadores",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/tour",
+            "texto": "Nossas fábricas",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/lojas-oficiais",
+            "texto": "Lojas Oficiais",
+            "interno": true
+          },
+          {
+            "url": "https://global.tramontina.com/sobre/presenca-global",
+            "texto": "Presença Global",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+          "https://global.tramontina.com/images/dots.svg",
+          "https://prd-assets-portal.tramontina.com/Tramontina_logo_91451b3262.svg",
+          "https://prd-assets-portal.tramontina.com/large_capa_catalogos_geral_2026_0d277f25fc.png",
+          "https://prd-assets-portal.tramontina.com/thumbnail_logo_d1e9ac943d.png"
+        ],
+        "midia": [
+          {
+            "id": "med-86837dd715ef",
+            "type": "image",
+            "title": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+            "url": "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+            "final_url": "https://prd-assets-portal.tramontina.com/capa_catalogos_geral_2026_0d277f25fc.png",
+            "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "source_url": "https://global.tramontina.com/catalogos",
+            "publisher": "prd-assets-portal.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2a79b370d049",
+            "type": "image",
+            "title": "dots",
+            "url": "https://global.tramontina.com/images/dots.svg",
+            "final_url": "https://global.tramontina.com/images/dots.svg",
+            "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "source_url": "https://global.tramontina.com/catalogos",
+            "publisher": "global.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "dots",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fdf3005e7145",
+            "type": "image",
+            "title": "Tramontina",
+            "url": "https://prd-assets-portal.tramontina.com/Tramontina_logo_91451b3262.svg",
+            "final_url": "https://prd-assets-portal.tramontina.com/Tramontina_logo_91451b3262.svg",
+            "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "source_url": "https://global.tramontina.com/catalogos",
+            "publisher": "prd-assets-portal.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tramontina",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0d784aaca8e1",
+            "type": "image",
+            "title": "Tramontina Logo",
+            "url": "https://prd-assets-portal.tramontina.com/thumbnail_logo_d1e9ac943d.png",
+            "final_url": "https://prd-assets-portal.tramontina.com/thumbnail_logo_d1e9ac943d.png",
+            "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "source_url": "https://global.tramontina.com/catalogos",
+            "publisher": "prd-assets-portal.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tramontina Logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e975e5a676be",
+            "type": "document",
+            "title": "manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+            "url": "https://prd-assets-portal.tramontina.com/manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+            "final_url": "https://prd-assets-portal.tramontina.com/manual_de_conduta_tramontina_publicacao_digital_32afbdc240.pdf",
+            "source_title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "source_url": "https://global.tramontina.com/catalogos",
+            "publisher": "prd-assets-portal.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://empresas.tramontina.com.br/",
+      "result": {
+        "titulo": "Tramontina para Empresas | A Loja Oficial para a Sua Empresa",
+        "texto": "",
+        "final": "https://empresas.tramontina.com.br/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.youtube.com/user/tramontina",
+      "result": {
+        "titulo": "Tramontina",
+        "texto": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "final": "https://www.youtube.com/user/tramontina",
+        "trecho_usado": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC",
+        "metadados": {
+          "titulo": "Tramontina",
+          "descricao": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em madeira e plástico que levam a marca brasileira. A marca centenária que conquistou os brasileiros está presente em mais de 120 países. Compromissos com a qualid",
+          "canonica": "https://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg",
+          "og": {
+            "og:title": "Tramontina",
+            "og:site_name": "YouTube",
+            "og:url": "https://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg",
+            "og:image": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+            "og:image:width": "900",
+            "og:image:height": "900",
+            "og:description": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em madeira e plástico que levam a marca brasileira. A marca centenária que conquistou os brasileiros está presente em mais de 120 países. Compromissos com a qualidade e a responsabilidade social caminham juntos na Tramontina. O prazer de fazer bonito.",
+            "og:type": "profile",
+            "og:video:tag": "tramontina"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:site": "@youtube",
+            "twitter:url": "https://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg",
+            "twitter:title": "Tramontina",
+            "twitter:description": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em madeira e plástico que levam a marca brasileira. A marca centenária que conquistou os brasileiros está presente em mais de 120 países. Compromissos com a qualidade e a responsabilidade social caminham juntos na Tramontina. O prazer de fazer bonito.",
+            "twitter:image": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+            "twitter:app:name:iphone": "YouTube",
+            "twitter:app:id:iphone": "544007664",
+            "twitter:app:name:ipad": "YouTube",
+            "twitter:app:id:ipad": "544007664",
+            "twitter:app:url:iphone": "vnd.youtube://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg",
+            "twitter:app:url:ipad": "vnd.youtube://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg",
+            "twitter:app:name:googleplay": "YouTube",
+            "twitter:app:id:googleplay": "com.google.android.youtube",
+            "twitter:app:url:googleplay": "https://www.youtube.com/channel/UCaf-Q7ECvQfonO0CnuQ2yGg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "YouTube",
+          "tipo": "Person",
+          "ld": {
+            "description": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em madeira e plástico que levam a marca brasileira. A marca centenária que conquistou os brasileiros está  presente em mais de 120 países. Compromissos com a qualidade e a responsabilidade social caminham juntos na Tramontina.\n\nO prazer de fazer bonito."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://www.youtube.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/about/",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/about/press/",
+            "texto": "Imprensa",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/about/copyright/",
+            "texto": "Direitos autorais",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/t/contact_us/",
+            "texto": "Entre em contato",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/creators/",
+            "texto": "Criadores de conteúdo",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/ads/",
+            "texto": "Publicidade",
+            "interno": true
+          },
+          {
+            "url": "https://developers.google.com/youtube",
+            "texto": "Desenvolvedores",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/t/terms",
+            "texto": "Termos",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/t/privacy",
+            "texto": "Privacidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/about/policies/",
+            "texto": "Política e segurança",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/howyoutubeworks?utm_campaign=ytgen&amp;utm_source=ythp&amp;utm_medium=LeftNav&amp;utm_content=txt&amp;u=https%3A%2F%2Fwww.youtube.com%2Fhowyoutubeworks%3Futm_source%3Dythp%26utm_medium%3DLeftNav%26utm_campaign%3Dytgen",
+            "texto": "Como funciona o YouTube",
+            "interno": true
+          },
+          {
+            "url": "https://www.youtube.com/new",
+            "texto": "Testar os novos recursos",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s88-c-k-c0x00ffffff-no-rj",
+          "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj"
+        ],
+        "midia": [
+          {
+            "id": "med-df0bc4339908",
+            "type": "image",
+            "title": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para ",
+            "url": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+            "final_url": "https://yt3.googleusercontent.com/AY3GUW5p8Itc4KFFDn5-FEg7ftsUoLierPZzDnR2ItOm-oPfG68ZuQyP2tL7wm-VxujuWBW5jHg=s900-c-k-c0x00ffffff-no-rj",
+            "source_title": "Tramontina",
+            "source_url": "https://www.youtube.com/user/tramontina",
+            "publisher": "yt3.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A Tramontina entra diariamente na casa de milhões de pessoas em todo o mundo. Seja por meio de utensílios para cozinha, por suas ferramentas para jardim e para a construção civil, materiais elétricos ou até mesmo por meio de seus móveis em ",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.tramontina.com/",
+      "result": {
+        "titulo": "Tramontina USA",
+        "texto": "Common Questions About Tramontina Cookware, Bakeware, Cutlery, and More What kitchen products does Tramontina make? Tramontina makes , , and , plus and kitchen tools. As a vertically integrated manufacturer founded in 1911, it produces these lines in its own factories, from stainless steel pans to forged knives. cookware bakeware cutlery tableware What pots and pans does Tramontina offer? The Tramontina cookware range covers every core pot and pan: , , , , and . You can buy pieces individually or as . fry pans and skillets sauce pans and sauciers saute pans stock pots and multi-cookers enameled cast iron Dutch ovens cookware sets What is Tramontina cookware made of? Tramontina cookware comes in several materials, each suited to a different job: and tri-ply clad for even heat and control, for braising and baking, for high-heat searing, and aluminum with a for quick, low-effort cooking. stainless steel enameled cast iron carbon steel nonstick coating Where is Tramontina cookware made? Tramontina is a vertically integrated company founded in Brazil in 1911, where it manufactures many of its products. Its U.S. operation, Tramontina USA, has been based in Sugar Land, Texas since 1986. Making pieces in its own facilities lets the company hold consistent quality standards across every category. Does Tramontina cookware come with a warranty? Many Tramontina cookware and cutlery lines carry a limited lifetime warranty against defects in material and workmanship, and select lines list their own terms. Coverage varies by collection, so check the specific product page for the details that apply. Is Tramontina cookware induction compatible? Much of Tramontina's and is induction compatible, including the Signature and Tempo tri-ply lines. Aluminum nonstick lines such as the PRO Series are not induction ready, so look for the induction symbol on the product page. stainless steel cast iron cookware Is Tramontina cookware oven safe? Yes, many Tramontina pieces are oven safe. Limits generally range from about 350°F / 176°C to 500°F / 260°C depending on the collection and its lid and handle, so check the specific product page for the exact temperature. Is Tramontina cookware dishwasher safe? Most Tramontina cookware is dishwasher safe, including the lines. should be hand washed, and hand washing any piece with a non-abrasive sponge helps it last longer. stainless steel cookware Cast iron and enameled cast iron Is Tramontina ceramic cookware non-toxic? Tramontina is made without intentionally added PTFE, PFOA, PFAS, lead, and cadmium. The ceramic coating releases food easily for everyday cooking, and using silicone, wood, or nylon utensils keeps the surface in good condition. ceramic cookware Where can I buy Tramontina cookware? You can shop the full range on this site, and Tramontina is also carried by many . The widest selection, including online-exclusive collections, is available here on the official store. Tramontina cookware national and local retailers",
+        "final": "https://www.tramontina.com/",
+        "trecho_usado": "for braising and baking, for high-heat searing, and aluminum with a for quick, low-effort cooking. stainless steel enameled cast iron carbon steel nonstick coating Where is Tramontina cookware made? Tramontina is a vertically integrated company founded in Brazil in 1911, where it manufactures many of its products. Its U.S. operation, Tramontina USA, has been based in Sugar Land, Texas since 1986.",
+        "metadados": {
+          "titulo": "Tramontina USA",
+          "descricao": "Since 1911, Tramontina has delivered quality cookware globally from Brazil - offering tri-ply clad, cast iron, and non-stick products at affordable prices.",
+          "canonica": "https://www.tramontina.com/",
+          "og": {
+            "og:site_name": "Tramontina USA",
+            "og:url": "https://www.tramontina.com/",
+            "og:title": "Quality Cookware, Bakeware, Cutlery, and More | Tramontina USA",
+            "og:type": "website",
+            "og:description": "Since 1911, Tramontina has delivered quality cookware globally from Brazil - offering tri-ply clad, cast iron, and non-stick products at affordable prices."
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Quality Cookware, Bakeware, Cutlery, and More | Tramontina USA",
+            "twitter:description": "Since 1911, Tramontina has delivered quality cookware globally from Brazil - offering tri-ply clad, cast iron, and non-stick products at affordable prices."
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Tramontina USA",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Common Questions About Tramontina Cookware, Bakeware, Cutlery, and More",
+            "texto": "Tramontina makes , , and , plus and kitchen tools. As a vertically integrated manufacturer founded in 1911, it produces these lines in its own factories, from stainless steel pans to forged knives. cookware bakeware cutlery tableware\nThe Tramontina cookware range covers every core pot and pan: , , , , and . You can buy pieces individually or as . fry pans and skillets sauce pans and sauciers saute pans stock pots and multi-cookers enameled cast iron Dutch ovens cookware sets\nTramontina cookware comes in several materials, each suited to a different job: and tri-ply clad for even heat and control, for braising and baking, for high-heat searing, and aluminum with a for quick, low-effort cooking. stainless steel enameled cast iron carbon steel nonstick coating\nTramontina is a vertically integrated company founded in Brazil in 1911, where it manufactures many of its products. Its U.S. operation, Tramontina USA, has been based in Sugar Land, Texas since 1986. Making pieces in its own facilities lets the company hold consistent quality standards across every category.\nMany Tramontina cookware and cutlery lines carry a limited lifetime warranty against defects in material and workmanship, and select lines list their own terms. Coverage varies by collection, so check the specific product page for the details that apply.\nMuch of Tramontina's and is induction compatible, including the Signature and Tempo tri-ply lines. Aluminum nonstick lines such as the PRO Series are not induction ready, so look for the induction symbol on the product page. stainless steel cast iron cookware\nYes, many Tramontina pieces are oven safe. Limits generally range from about 350°F / 176°C to 500°F / 260°C depending on the collection and its lid and handle, so check the specific product page for the exact temperature.\nMost Tramontina cookware is dishwasher safe, including the lines. should be hand washed, and hand washing any piece with a non-abrasive sponge helps it last longer. stainless steel cookware Cast iron and enameled cast iron\nTramontina is made without intentionally added PTFE, PFOA, PFAS, lead, and cadmium. The ceramic coating releases food easily for everyday cooking, and using silicone, wood, or nylon utensils keeps the surface in good condition. ceramic cookware\nYou can shop the full range on this site, and Tramontina is also carried by many . The widest selection, including online-exclusive collections, is available here on the official store. Tramontina cookware national and local retailers"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/tramontina-usa",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://www.contatoseguro.com.br/en/tramontina",
+            "texto": "Whistleblower Channel",
+            "interno": false
+          },
+          {
+            "url": "https://www.tramontina.com/",
+            "texto": "Welcome to our Official store.",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/pages/about-us",
+            "texto": "About Us",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/blogs/all-blogs",
+            "texto": "Blog",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/pages/contact",
+            "texto": "Contact Us",
+            "interno": true
+          },
+          {
+            "url": "https://b2b.tramontina.com",
+            "texto": "Wholesale",
+            "interno": false
+          },
+          {
+            "url": "https://www.tramontina.com/pages/hospitality",
+            "texto": "Hospitality",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/pages/wheretobuy",
+            "texto": "Where to buy",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/customer_authentication/redirect?locale=en&region_country=US",
+            "texto": "Log in",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/cart",
+            "texto": "Basket",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/new-arrivals",
+            "texto": "New & Trending",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/cultura-6-5-quart-enameled-cast-iron-multi-cooker-with-reversible-lid",
+            "texto": "Cultura Multi-Cooker",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/ceramic-nesting-sets",
+            "texto": "Ceramic Nesting Cookware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/tempo-tri-ply-base-stainless-steel-cookware",
+            "texto": "Tempo Tri-Ply Base Stainless Steel",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/fiora-4-25-quart-multipurpose-ceramic-nonstick-pan",
+            "texto": "Fiora Multipurpose Pans",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/utsava-cookware",
+            "texto": "Utsava Cookware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/rise-ceramic-nonstick-bakeware-set",
+            "texto": "Rise Bakeware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/mae-3-piece-porcelain-enamel-bakeware-set",
+            "texto": "Mae Bakeware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/all-in-one-plus-pan-5-quart-ceramic-non-stick",
+            "texto": "All-in-One Plus Pan",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/all-cookware",
+            "texto": "Cookware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/signature-2",
+            "texto": "Signature Tri-Ply Clad Stainless Steel",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/prored",
+            "texto": "Professional Fry Pans",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/tempo",
+            "texto": "Tempo Tri-Ply Base Stainless Steel",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/bestow-enameled-cast-iron",
+            "texto": "Bestow Enameled Cast Iron",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/nesting-cookware",
+            "texto": "Nesting Cookware",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/onyxpro-hard-anodized",
+            "texto": "OnyxPro Hard Anodized",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/products/pro-fusion-aluminum-nonstick-fry-pan",
+            "texto": "Fusion Fry Pans",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/ember",
+            "texto": "Ember Carbon Steel",
+            "interno": true
+          },
+          {
+            "url": "https://www.tramontina.com/collections/sicilia",
+            "texto": "Sicilia Aluminum Nonstick",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.tramontina.com/cdn/shop/files/Tramontina_Horizontal_RGB.png?v=1754406165&width=380",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_UTSAVA2_MOBILE.jpg?v=1760734535&width=980",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_UTSAVA2_2f9380f0-b47e-4283-8394-5f21e1f8eaf3.jpg?v=1763150566&width=1400",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_TPC1_MOBILE.jpg?v=1754920555&width=980",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_TPC1.jpg?v=1754920556&width=1400",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_RISE2_MOBILE.jpg?v=1768335527&width=980",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_RISE2.jpg?v=1768335524&width=1400",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_CASTIRON1_MOBILE_eb356df0-481f-4541-ac3f-7f6eb4fb96ce.jpg?v=1760371997&width=980",
+          "https://www.tramontina.com/cdn/shop/files/SHOPIFY_HOMEPAGE_MAIN_BANNER__NB_CASTIRON1_c98e0adb-affc-42d1-badd-f58d983438ff.jpg?v=1760372000&width=1400",
+          "https://www.tramontina.com/cdn/shop/files/HOMEPAGE_CATEGORIES_CIRCLE_TPC_f19845bf-ec74-471d-b618-fc62b3306227.png?v=1755037234&width=360"
+        ],
+        "midia": [
+          {
+            "id": "med-79e05a305fcd",
+            "type": "image",
+            "title": "Tramontina USA",
+            "url": "https://www.tramontina.com/cdn/shop/files/Tramontina_Horizontal_RGB.png?v=1754406165&width=380",
+            "final_url": "https://www.tramontina.com/cdn/shop/files/Tramontina_Horizontal_RGB.png?v=1754406165&width=380",
+            "source_title": "Tramontina USA",
+            "source_url": "https://www.tramontina.com/",
+            "publisher": "www.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tramontina USA",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e029efa80a33",
+            "type": "video",
+            "title": "Tramontina USA",
+            "url": "https://www.tramontina.com/cdn/shop/videos/c/vp/f3f9c004a76546708383dd581e45f863/f3f9c004a76546708383dd581e45f863.HD-720p-3.0Mbps-54683752.mp4?v=0",
+            "final_url": "https://www.tramontina.com/cdn/shop/videos/c/vp/f3f9c004a76546708383dd581e45f863/f3f9c004a76546708383dd581e45f863.HD-720p-3.0Mbps-54683752.mp4?v=0",
+            "source_title": "Tramontina USA",
+            "source_url": "https://www.tramontina.com/",
+            "publisher": "www.tramontina.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Since 1911, Tramontina has delivered quality cookware globally from Brazil - offering tri-ply clad, cast iron, and non-stick products at affordable prices.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.facebook.com/Tramontina",
+      "result": null
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "ecf00200605af4a08269",
+            "url": "https://www.tramontina.com.br/",
+            "title": "Black Friday Tramontina | Até 70% OFF na Loja Oficial",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Aproveite a Black Friday Tramontina para comprar panelas, utensílios, ferramentas, eletros, móveis e outros produtos com preços exclusivos na Loja Oficial."
+          },
+          {
+            "id": "dfb244ebc8146b57c9e0",
+            "url": "https://global.tramontina.com/",
+            "title": "Tramontina | Qualidade, tradição e inovação para sua casa desde 1911",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Conheça a Tramontina, uma marca global com mais de 22.000 produtos que atendem casa, cozinha, jardim, ferramentas, móveis e muito mais. Sempre com qualidade, du"
+          },
+          {
+            "id": "a43faca7ef96a39d94fa",
+            "url": "https://global.tramontina.com/catalogos",
+            "title": "Catálogos Tramontina | Baixe Catálogos de Produtos",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Acesse e baixe catálogos e materiais de apoio da Tramontina para conhecer linhas de produtos destinadas ao uso doméstico e profissional."
+          },
+          {
+            "id": "57f1b0c4ed1bf569a696",
+            "url": "https://pt.wikipedia.org/wiki/Tramontina",
+            "title": "Tramontina – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Grupo Tramontina conta com unidades fabris, Centros de Distribuição, Escritórios Regionais de Vendas e Lojas Oficiais, além da Central de Administração e outr"
+          },
+          {
+            "id": "f0d846daae724ae94d18",
+            "url": "https://empresas.tramontina.com.br/",
+            "title": "Tramontina para Empresas | A Loja Oficial para a Sua Empresa",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Na Tramontina, você encontra muitas possibilidades para projetos de empreendimentos como bares, restaurantes e hotéis. São diversos produtos: panelas, talheres,"
+          },
+          {
+            "id": "1bc533fa7467cd7075b0",
+            "url": "https://www.tramontina.com/",
+            "title": "Tramontina - Quality Cookware, Bakeware, Cutlery, and More",
+            "origin": "bing",
+            "query": "Tramontina",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Tramontina makes cookware, bakeware, and cutlery, plus tableware and kitchen tools. As a vertically integrated manufacturer founded in 1911, it produces these l"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Tramontina)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Tramontina)",
+        "ddg: bloqueado (Tramontina)",
+        "marginalia: sem resultados (Tramontina)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (quem fundou tramontina ano seus produtos)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (quem fundou tramontina ano seus produtos)",
+        "marginalia: 1 resultados (quem fundou tramontina ano seus produtos)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (quem fundou tramontina ano seus produtos)",
+        "wikipedia: sem resultados (quem fundou tramontina ano seus produtos)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Tramontina",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quem fundou a Tramontina, em que ano e quais são seus principais produtos?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-f415eb0a56da",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Tramontina",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-d767b583663b",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Tramontina",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-db2822270288",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Tramontina",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://global.tramontina.com/catalogos",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.tramontina.com/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.youtube.com/user/tramontina",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T13:37:57.751155+00:00",
+  "source_revision": "af400f11487da3cf5490f1ef54eb03ca72f2d889",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

@@ -1,0 +1,2806 @@
+{
+  "id": "aa-11",
+  "category": "technical_comparison",
+  "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 3.183,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "worldbank",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+      "candidates": 6
+    },
+    {
+      "provider": "worldbank",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+      "candidates": 6
+    },
+    {
+      "provider": "bcb",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+      "error": "vazio"
+    },
+    {
+      "provider": "bcb",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Compare+Redis+e+Memcached+quanto+%C3%A0+persist%C3%AAncia+em+disco+e+%C3%A0s+estruturas+de+dados%2C+com+documenta%C3%A7%C3%A3o+de+cada+um.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Compare+Redis+e+Memcached+quanto+%C3%A0+persist%C3%AAncia+em+disco+e+%C3%A0s+estruturas+de+dados%2C+com+documenta%C3%A7%C3%A3o+de+cada+um.&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4879
+    },
+    {
+      "url": "https://www.bing.com/search?q=Compare+Redis+e+Memcached+quanto+%C3%A0+persist%C3%AAncia+em+disco+e+%C3%A0s+estruturas+de+dados%2C+com+documenta%C3%A7%C3%A3o+de+cada&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Compare+Redis+e+Memcached+quanto+%C3%A0+persist%C3%AAncia+em+disco+e+%C3%A0s+estruturas+de+dados%2C+com+documenta%C3%A7%C3%A3o+de+cada&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4863
+    },
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "final": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "chars": 219888
+    },
+    {
+      "url": "https://versus.com/br",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.tudocelular.com/compare/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.diffchecker.com/pt/",
+      "final": "https://www.diffchecker.com/pt/",
+      "chars": 157260
+    },
+    {
+      "url": "https://www.buscape.com.br/",
+      "final": "https://www.buscape.com.br/",
+      "chars": 877444
+    },
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "final": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "chars": 219873
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+    "domain": "documents",
+    "original_request": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+    "resolved_request": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T13:38:59.322628+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "f7ef5cf90fbe243f7930",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "title": "Poverty Headcount ($1.90 a day)",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies w",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 231,
+        "final_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "96bb3ec7d9dcc6a475d9",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+        "title": "Poverty Headcount ($2.50 a day)",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies w",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 231,
+        "final_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d0a797af962f89cea20c",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+        "title": "Middle Class ($10-50 a day) Headcount",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "7ec944b0ff90dc270e19",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+        "title": "Official Moderate Poverty Rate-National",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "177e49e413fca7dcaa2c",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+        "title": "Poverty Headcount ($4 a day)",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "097c804e9fb3b663f6d0",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+        "title": "Vulnerable ($4-10 a day) Headcount",
+        "origin": "worldbank",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b65f0135870745c64232",
+        "url": "https://versus.com/br",
+        "title": "Versus | Compare tudo",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "sáb., 24 out. 2026 02:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de pr",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "55cb4e0221f680f302a7",
+        "url": "https://www.tudocelular.com/compare/",
+        "title": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "ter., 20 out. 2026 16:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O site Brasileiro de Telefonia - TudoCelular.com",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "80bc7f77b7e8fa771300",
+        "url": "https://www.tudocelular.com/comparacao/",
+        "title": "Comparação - TudoCelular.com",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "ter., 02 jun. 2026 16:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9f6162d38282a19d2a7d",
+        "url": "https://www.diffchecker.com/pt/",
+        "title": "Compare texto e encontre diferenças online - Diffchecker",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "sáb., 24 out. 2026 07:40:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Monte uma versão combinada aceitando alterações individuais de qualquer um dos lados. Clique na seta de uma alteração para trazê-la para o outro lado, e o resul",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1980,
+        "final_url": "https://www.diffchecker.com/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "2e2c82dc479748ba1f14",
+        "url": "https://www.diffchecker.com/",
+        "title": "Compare text and find differences online or offline - Diffchecker",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "2d16aed20a7359cf40aa",
+        "url": "https://www.buscape.com.br/",
+        "title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+        "origin": "bing",
+        "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+        "date": "qui., 22 out. 2026 14:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "processo de compra. Simplesmente o melhor amigo do consumidor! São muitos anos na internet com a missão de oferecer uma experiência intuitiva para que cada vez ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4108,
+        "final_url": "https://www.buscape.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-b9cdb0bb4d11",
+      "type": "image",
+      "title": "Free and open access to global development data",
+      "url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+      "final_url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Free and open access to global development data",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7c11b6f282cb",
+      "type": "image",
+      "title": "The World Bank Working for a World Free of Poverty",
+      "url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+      "final_url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The World Bank Working for a World Free of Poverty",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6509580941e9",
+      "type": "image",
+      "title": "World Bank Facebook",
+      "url": "https://data.worldbank.org/media/social/facebook.svg",
+      "final_url": "https://data.worldbank.org/media/social/facebook.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "World Bank Facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b14ca0323f09",
+      "type": "image",
+      "title": "World Bank Twitter",
+      "url": "https://data.worldbank.org/media/social/twitter.svg",
+      "final_url": "https://data.worldbank.org/media/social/twitter.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "World Bank Twitter",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f84873f6c27c",
+      "type": "image",
+      "title": "World Bank Github",
+      "url": "https://data.worldbank.org/media/social/github.svg",
+      "final_url": "https://data.worldbank.org/media/social/github.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "World Bank Github",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-faa49500570b",
+      "type": "image",
+      "title": "World Bank Linkedin",
+      "url": "https://data.worldbank.org/media/social/linkedin.svg",
+      "final_url": "https://data.worldbank.org/media/social/linkedin.svg",
+      "source_title": "World Bank Open Data",
+      "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "publisher": "data.worldbank.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "World Bank Linkedin",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-761ecce69977",
+      "type": "image",
+      "title": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e o",
+      "url": "https://www.diffchecker.com/static/images/fb-image.png",
+      "final_url": "https://www.diffchecker.com/static/images/fb-image.png",
+      "source_title": "Diffchecker",
+      "source_url": "https://www.diffchecker.com/pt/",
+      "publisher": "www.diffchecker.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e offline.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cd707986de3a",
+      "type": "image",
+      "title": "Diffchecker logo",
+      "url": "https://www.diffchecker.com/static/images/diffchecker.svg",
+      "final_url": "https://www.diffchecker.com/static/images/diffchecker.svg",
+      "source_title": "Diffchecker",
+      "source_url": "https://www.diffchecker.com/pt/",
+      "publisher": "www.diffchecker.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Diffchecker logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-208b34d223bd",
+      "type": "image",
+      "title": "Side-by-side text comparison in Diffchecker",
+      "url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/text-light.webp",
+      "final_url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/text-light.webp",
+      "source_title": "Diffchecker",
+      "source_url": "https://www.diffchecker.com/pt/",
+      "publisher": "www.diffchecker.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Side-by-side text comparison in Diffchecker",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0a39d20efb98",
+      "type": "image",
+      "title": "Syntax-highlighted code comparison",
+      "url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/syntax-light.webp",
+      "final_url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/syntax-light.webp",
+      "source_title": "Diffchecker",
+      "source_url": "https://www.diffchecker.com/pt/",
+      "publisher": "www.diffchecker.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Syntax-highlighted code comparison",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cf0b99e1f424",
+      "type": "image",
+      "title": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+      "url": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+      "final_url": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+      "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+      "source_url": "https://www.buscape.com.br/",
+      "publisher": "www.buscape.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-769438092dbd",
+      "type": "image",
+      "title": "Buscape",
+      "url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/min-logo.svg",
+      "final_url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/min-logo.svg",
+      "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+      "source_url": "https://www.buscape.com.br/",
+      "publisher": "i1.zst.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Buscape",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "titulo": "World Bank Open Data",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "documents",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "titulo": "World Bank Open Data",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "documents",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.diffchecker.com/pt/",
+      "titulo": "Diffchecker",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 07:40:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "documents",
+        "url": "https://www.diffchecker.com/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "worldbank",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+      "items": [
+        {
+          "titulo": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.1.90usd"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.2.5usd"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Mid10to50"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Ofcl"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Poor4uds"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Vul4to10"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "worldbank",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+      "items": [
+        {
+          "titulo": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.1.90usd"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.2.5usd"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Mid10to50"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Ofcl"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Poor4uds"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Vul4to10"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "worldbank"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+      "items": [
+        {
+          "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+          "url": "https://www.tudocelular.com/compare/",
+          "trecho": "O site Brasileiro de Telefonia - TudoCelular.com",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 16:13:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tudocelular.com/compare",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Versus | Compare tudo",
+          "url": "https://versus.com/br",
+          "trecho": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de preços, Versus é o melhor localizador de produtos para uma ampla gama de artigos eletrônicos, de smartphones a hardware de PC.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:25:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://versus.com/br",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Comparação - TudoCelular.com",
+          "url": "https://www.tudocelular.com/comparacao/",
+          "trecho": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones da linha 16!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 02 jun. 2026 16:36:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tudocelular.com/comparacao",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Compare texto e encontre diferenças online - Diffchecker",
+          "url": "https://www.diffchecker.com/pt/",
+          "trecho": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e offline.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 07:40:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diffchecker.com/pt",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Compare text and find differences online or offline - Diffchecker",
+          "url": "https://www.diffchecker.com/",
+          "trecho": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://diffchecker.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+          "url": "https://www.buscape.com.br/",
+          "trecho": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 14:38:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "discovery_provider": "bing",
+          "url_canonica": "https://buscape.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+      "items": [
+        {
+          "titulo": "O site Brasileiro de Telefonia - TudoCelular.com",
+          "url": "https://www.tudocelular.com/compare/",
+          "trecho": "O site Brasileiro de Telefonia - TudoCelular.com",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 16:13:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Versus | Compare tudo",
+          "url": "https://versus.com/br",
+          "trecho": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de preços, Versus é o melhor localizador de produtos para uma ampla gama de artigos eletrônicos, de smartphones a hardware de PC.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:25:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Comparação - TudoCelular.com",
+          "url": "https://www.tudocelular.com/comparacao/",
+          "trecho": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones da linha 16!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 02 jun. 2026 16:36:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Compare texto e encontre diferenças online - Diffchecker",
+          "url": "https://www.diffchecker.com/pt/",
+          "trecho": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e offline.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 07:40:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Compare text and find differences online or offline - Diffchecker",
+          "url": "https://www.diffchecker.com/",
+          "trecho": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+          "url": "https://www.buscape.com.br/",
+          "trecho": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 14:38:00 GMT"
+          },
+          "discovery_query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "result": {
+        "titulo": "World Bank Open Data",
+        "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "final": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "trecho_usado": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "metadados": {
+          "titulo": "World Bank Open Data",
+          "descricao": "Free and open access to global development data",
+          "canonica": "https://data.worldbank.org/indicator/&quot;1.0.HCOUNT.1.90USD&quot;",
+          "og": {
+            "og:title": "World Bank Open Data",
+            "og:description": "Free and open access to global development data",
+            "og:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "og:url": "https://data.worldbank.org",
+            "og:site_name": "World Bank Open Data"
+          },
+          "twitter": {
+            "twitter:title": "World Bank Open Data",
+            "twitter:description": "Free and open access to global development data",
+            "twitter:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "twitter:card": "@worldbankdata",
+            "twitter:creator": "@worldbankdata"
+          },
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "World Bank Open Data",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here."
+          }
+        ],
+        "links": [
+          {
+            "url": "http://www.worldbank.org",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/",
+            "texto": "Data",
+            "interno": true
+          },
+          {
+            "url": "https://data360.worldbank.org/en/economies",
+            "texto": "ECONOMIES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/search",
+            "texto": "DATA & RESOURCES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/about",
+            "texto": "ABOUT",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/country",
+            "texto": "Country",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/indicator",
+            "texto": "Indicator",
+            "interno": true
+          },
+          {
+            "url": "http://databank.worldbank.org/data/home.aspx",
+            "texto": "DataBank",
+            "interno": false
+          },
+          {
+            "url": "http://microdata.worldbank.org/index.php/home",
+            "texto": "Microdata",
+            "interno": false
+          },
+          {
+            "url": "https://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "http://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about",
+            "texto": "About Us",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/get-started",
+            "texto": "Get Started",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/faq",
+            "texto": "FAQ",
+            "interno": true
+          },
+          {
+            "url": "http://datahelpdesk.worldbank.org",
+            "texto": "Help Desk",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/contact",
+            "texto": "Contact",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs",
+            "texto": "Data Programs",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#statcap",
+            "texto": "Improving Statistical Capacity",
+            "interno": true
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/global-data-facility",
+            "texto": "Global Data Facility",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#icp",
+            "texto": "International Comparison Program & Purchasing Power Parity",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ihsn",
+            "texto": "International Household Survey Network (IHSN)",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#jedh",
+            "texto": "Joint External Debt Hub",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ogd-toolkit",
+            "texto": "Open Data Toolkit",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#qeds",
+            "texto": "Quarterly External Debt Statistics",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/products",
+            "texto": "Products",
+            "interno": true
+          },
+          {
+            "url": "http://datatopics.worldbank.org/world-development-indicators",
+            "texto": "World Development Indicators",
+            "interno": false
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/debt-statistics/ids/products",
+            "texto": "International Debt Statistics",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/data-books",
+            "texto": "Other Books and Reports",
+            "interno": true
+          },
+          {
+            "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519",
+            "texto": "Country & Lending Groups",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/tools",
+            "texto": "Data Portals and Tools",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+          "https://data.worldbank.org/assets/images/icon-map-shaded.jpg",
+          "https://data.worldbank.org/assets/images/icon-map-points.jpg",
+          "https://data.worldbank.org/assets/images/placeholder.png",
+          "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+          "https://data.worldbank.org/media/social/facebook.svg",
+          "https://data.worldbank.org/media/social/twitter.svg",
+          "https://data.worldbank.org/media/social/github.svg",
+          "https://data.worldbank.org/media/social/linkedin.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-b9cdb0bb4d11",
+            "type": "image",
+            "title": "Free and open access to global development data",
+            "url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Free and open access to global development data",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7c11b6f282cb",
+            "type": "image",
+            "title": "The World Bank Working for a World Free of Poverty",
+            "url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The World Bank Working for a World Free of Poverty",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6509580941e9",
+            "type": "image",
+            "title": "World Bank Facebook",
+            "url": "https://data.worldbank.org/media/social/facebook.svg",
+            "final_url": "https://data.worldbank.org/media/social/facebook.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Facebook",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b14ca0323f09",
+            "type": "image",
+            "title": "World Bank Twitter",
+            "url": "https://data.worldbank.org/media/social/twitter.svg",
+            "final_url": "https://data.worldbank.org/media/social/twitter.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Twitter",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f84873f6c27c",
+            "type": "image",
+            "title": "World Bank Github",
+            "url": "https://data.worldbank.org/media/social/github.svg",
+            "final_url": "https://data.worldbank.org/media/social/github.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Github",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-faa49500570b",
+            "type": "image",
+            "title": "World Bank Linkedin",
+            "url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "final_url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Linkedin",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+      "result": {
+        "titulo": "World Bank Open Data",
+        "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "final": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+        "trecho_usado": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "metadados": {
+          "titulo": "World Bank Open Data",
+          "descricao": "Free and open access to global development data",
+          "canonica": "https://data.worldbank.org/indicator/&quot;1.0.HCOUNT.2.5USD&quot;",
+          "og": {
+            "og:title": "World Bank Open Data",
+            "og:description": "Free and open access to global development data",
+            "og:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "og:url": "https://data.worldbank.org",
+            "og:site_name": "World Bank Open Data"
+          },
+          "twitter": {
+            "twitter:title": "World Bank Open Data",
+            "twitter:description": "Free and open access to global development data",
+            "twitter:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "twitter:card": "@worldbankdata",
+            "twitter:creator": "@worldbankdata"
+          },
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "World Bank Open Data",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here."
+          }
+        ],
+        "links": [
+          {
+            "url": "http://www.worldbank.org",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/",
+            "texto": "Data",
+            "interno": true
+          },
+          {
+            "url": "https://data360.worldbank.org/en/economies",
+            "texto": "ECONOMIES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/search",
+            "texto": "DATA & RESOURCES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/about",
+            "texto": "ABOUT",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/country",
+            "texto": "Country",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/indicator",
+            "texto": "Indicator",
+            "interno": true
+          },
+          {
+            "url": "http://databank.worldbank.org/data/home.aspx",
+            "texto": "DataBank",
+            "interno": false
+          },
+          {
+            "url": "http://microdata.worldbank.org/index.php/home",
+            "texto": "Microdata",
+            "interno": false
+          },
+          {
+            "url": "https://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "http://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about",
+            "texto": "About Us",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/get-started",
+            "texto": "Get Started",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/faq",
+            "texto": "FAQ",
+            "interno": true
+          },
+          {
+            "url": "http://datahelpdesk.worldbank.org",
+            "texto": "Help Desk",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/contact",
+            "texto": "Contact",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs",
+            "texto": "Data Programs",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#statcap",
+            "texto": "Improving Statistical Capacity",
+            "interno": true
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/global-data-facility",
+            "texto": "Global Data Facility",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#icp",
+            "texto": "International Comparison Program & Purchasing Power Parity",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ihsn",
+            "texto": "International Household Survey Network (IHSN)",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#jedh",
+            "texto": "Joint External Debt Hub",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ogd-toolkit",
+            "texto": "Open Data Toolkit",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#qeds",
+            "texto": "Quarterly External Debt Statistics",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/products",
+            "texto": "Products",
+            "interno": true
+          },
+          {
+            "url": "http://datatopics.worldbank.org/world-development-indicators",
+            "texto": "World Development Indicators",
+            "interno": false
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/debt-statistics/ids/products",
+            "texto": "International Debt Statistics",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/data-books",
+            "texto": "Other Books and Reports",
+            "interno": true
+          },
+          {
+            "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519",
+            "texto": "Country & Lending Groups",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/tools",
+            "texto": "Data Portals and Tools",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+          "https://data.worldbank.org/assets/images/icon-map-shaded.jpg",
+          "https://data.worldbank.org/assets/images/icon-map-points.jpg",
+          "https://data.worldbank.org/assets/images/placeholder.png",
+          "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+          "https://data.worldbank.org/media/social/facebook.svg",
+          "https://data.worldbank.org/media/social/twitter.svg",
+          "https://data.worldbank.org/media/social/github.svg",
+          "https://data.worldbank.org/media/social/linkedin.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-b9cdb0bb4d11",
+            "type": "image",
+            "title": "Free and open access to global development data",
+            "url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Free and open access to global development data",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7c11b6f282cb",
+            "type": "image",
+            "title": "The World Bank Working for a World Free of Poverty",
+            "url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The World Bank Working for a World Free of Poverty",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6509580941e9",
+            "type": "image",
+            "title": "World Bank Facebook",
+            "url": "https://data.worldbank.org/media/social/facebook.svg",
+            "final_url": "https://data.worldbank.org/media/social/facebook.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Facebook",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b14ca0323f09",
+            "type": "image",
+            "title": "World Bank Twitter",
+            "url": "https://data.worldbank.org/media/social/twitter.svg",
+            "final_url": "https://data.worldbank.org/media/social/twitter.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Twitter",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f84873f6c27c",
+            "type": "image",
+            "title": "World Bank Github",
+            "url": "https://data.worldbank.org/media/social/github.svg",
+            "final_url": "https://data.worldbank.org/media/social/github.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Github",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-faa49500570b",
+            "type": "image",
+            "title": "World Bank Linkedin",
+            "url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "final_url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Linkedin",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.buscape.com.br/",
+      "result": {
+        "titulo": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+        "texto": "Buscapé: com você há mais de 25 anos Mesmo se for sua primeira vez por aqui, você deve conhecer alguém que já comprou no Buscapé ou, como a gente costuma dizer, “deu um Busca”! A nossa história começa lá em 1999 e se mistura com a do e-commerce brasileiro. Nesse ano, o Buscapé nascia para ajudar todo mundo a e encontrar as melhores ofertas. Com o crescimento da internet, a gente virou o principal comparador de preços no Brasil e atraiu investimentos de grandes bancos estrangeiros. Em 2006, o Bondfaro, nosso maior concorrente, entrou pro time. E assim nasceu a Buscapé Company. comparar preços Em 2021, o incorporou o grupo Mosaico, que incluía , Buscapé e Bondfaro. Nesse mesmo ano, nos reinventamos como um , oferecendo uma experiência completa. Banco PAN Zoom assistente de compras inteligentes Além de ser um site de comparação de preços de referência no mercado, o Buscapé reúne informações específicas sobre produtos, artigos informativos e avaliações de usuários, facilitando todo seu processo de compra. Simplesmente o melhor amigo do consumidor! São muitos anos na internet com a missão de oferecer uma experiência intuitiva para que cada vez mais pessoas encontrem as melhores ofertas e comparem produtos de várias categorias. Tudo com muito carinho e dedicação. Principais ferramentas O nosso te ajuda a encontrar o para milhares de produtos em um só lugar. Então, aqui você tem certeza de que fez a melhor escolha! comparador de preços melhor preço Além disso, o Buscapé oferece outras ferramentas que tornam sua busca pela oferta ideal ainda mais inteligente: Com o, você fica sabendo quando o valor do produto desejado baixar e ainda confere a variação de preços ao longo do tempo para saber o momento certo de fazer a sua compra. Alerta e o Histórico de Preços Já com o , você recebe uma parte do valor da compra de volta. E tem ainda mais vantagens se tiver uma , como o resgate automático que faz o cashback cair diretamente na conta. Aproveite a parceria Buscapé + PAN para expandir suas possibilidades financeiras. Encontre o e economize de verdade com todas as nossas ferramentas! Cashback Buscapé Conta Digital do Banco PAN menor preço A busca por melhores preços na Black Friday fica ainda mais fácil com o Buscapé!Nós varremos a internet em busca do menor preço, montamos um gráfico com o Histórico de Preço dos últimos meses para você economizar de verdade, te enviamos as melhores ofertas e ainda oferecemos cashback. Categorias mais populares Aqui você compara e economiza! As melhores ofertas nas principais categorias de tecnologia e produtos para sua casa estão no Buscapé. Se o que você tá procurando é um ar-condicionado, a gente traz opções de todos os tamanhos, como o12.000 BTUs, ideal para refrescar ambientes com eficiência e economia. ar-condicionado Se o assunto é celulares e smartphones, estamos aqui para te ajudar a comparar preços e características de produtos das principais marcas, como Apple, Samsung e Xiaomi, e descobrir quais são os . melhores celulares do momento Também sabemos que todo mundo precisa de umae, para garantir sua economia, buscamos entre uma ampla variedade de tamanhos e recursos modernos do produto para preservar alimentos de forma prática e segura. E ainda ficar bonita na sua cozinha, é claro. geladeira Calma, não acabou! Vem #DarUmBusca nas melhores lavadoras de roupas - aqueles modelos de máquinas de levar que aliam economia de tempo e energia, facilitando a rotina doméstica. Para assistir à novela ou curtir um jogo de futebol, trazemos os prós e contras das muitas do mercado e te ajudamos a navegar nas várias tecnologias e resoluções. Assim, dá para relaxar no seu sofá com imagem e experiência de qualidade. TVs e Smart TV Depois de conhecer a gente um pouco melhor, pode ter certeza de que estamos aqui para você. Conte sempre com a gente para transformar suas escolhas de compra em decisões inteligentes. Aqui, você encontra as melhores ofertas e produtos que facilitam sua rotina, com a confiança, economia e segurança de quem está sempre ao seu lado na hora de buscar o melhor preço! Tá fácil! Tá na mão! Tá no Busca!",
+        "final": "https://www.buscape.com.br/",
+        "trecho_usado": "processo de compra. Simplesmente o melhor amigo do consumidor! São muitos anos na internet com a missão de oferecer uma experiência intuitiva para que cada vez mais pessoas encontrem as melhores ofertas e comparem produtos de várias categorias. Tudo com muito carinho e dedicação. Principais ferramentas O nosso te ajuda a encontrar o para milhares de produtos em um só lugar. Então, aqui você tem",
+        "metadados": {
+          "titulo": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+          "descricao": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+          "canonica": "https://www.buscape.com.br/",
+          "og": {
+            "og:image": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+            "og:url": "https://www.buscape.com.br",
+            "og:title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "og:description": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+            "og:type": "website",
+            "og:site_name": "Buscape"
+          },
+          "twitter": {
+            "twitter:image": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+            "twitter:title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "twitter:description": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras."
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Buscape",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Buscapé: com você há mais de 25 anos",
+            "texto": "Mesmo se for sua primeira vez por aqui, você deve conhecer alguém que já comprou no Buscapé ou, como a gente costuma dizer, “deu um Busca”! A nossa história começa lá em 1999 e se mistura com a do e-commerce brasileiro.\nNesse ano, o Buscapé nascia para ajudar todo mundo a e encontrar as melhores ofertas. Com o crescimento da internet, a gente virou o principal comparador de preços no Brasil e atraiu investimentos de grandes bancos estrangeiros. Em 2006, o Bondfaro, nosso maior concorrente, entrou pro time. E assim nasceu a Buscapé Company. comparar preços\nEm 2021, o incorporou o grupo Mosaico, que incluía , Buscapé e Bondfaro. Nesse mesmo ano, nos reinventamos como um , oferecendo uma experiência completa. Banco PAN Zoom assistente de compras inteligentes\nAlém de ser um site de comparação de preços de referência no mercado, o Buscapé reúne informações específicas sobre produtos, artigos informativos e avaliações de usuários, facilitando todo seu processo de compra. Simplesmente o melhor amigo do consumidor!\nSão muitos anos na internet com a missão de oferecer uma experiência intuitiva para que cada vez mais pessoas encontrem as melhores ofertas e comparem produtos de várias categorias. Tudo com muito carinho e dedicação.\nO nosso te ajuda a encontrar o para milhares de produtos em um só lugar. Então, aqui você tem certeza de que fez a melhor escolha! comparador de preços melhor preço\nAlém disso, o Buscapé oferece outras ferramentas que tornam sua busca pela oferta ideal ainda mais inteligente:\nCom o, você fica sabendo quando o valor do produto desejado baixar e ainda confere a variação de preços ao longo do tempo para saber o momento certo de fazer a sua compra. Alerta e o Histórico de Preços\nJá com o , você recebe uma parte do valor da compra de volta. E tem ainda mais vantagens se tiver uma , como o resgate automático que faz o cashback cair diretamente na conta. Aproveite a parceria Buscapé + PAN para expandir suas possibilidades financeiras. Encontre o e economize de verdade com todas as nossas ferramentas! Cashback Buscapé Conta Digital do Banco PAN menor preço\nA busca por melhores preços na Black Friday fica ainda mais fácil com o Buscapé!Nós varremos a internet em busca do menor preço, montamos um gráfico com o Histórico de Preço dos últimos meses para você economizar de verdade, te enviamos as melhores ofertas e ainda oferecemos cashback."
+          },
+          {
+            "titulo": "Categorias mais populares",
+            "texto": "Aqui você compara e economiza! As melhores ofertas nas principais categorias de tecnologia e produtos para sua casa estão no Buscapé.\nSe o que você tá procurando é um ar-condicionado, a gente traz opções de todos os tamanhos, como o12.000 BTUs, ideal para refrescar ambientes com eficiência e economia. ar-condicionado\nSe o assunto é celulares e smartphones, estamos aqui para te ajudar a comparar preços e características de produtos das principais marcas, como Apple, Samsung e Xiaomi, e descobrir quais são os . melhores celulares do momento\nTambém sabemos que todo mundo precisa de umae, para garantir sua economia, buscamos entre uma ampla variedade de tamanhos e recursos modernos do produto para preservar alimentos de forma prática e segura. E ainda ficar bonita na sua cozinha, é claro. geladeira\nCalma, não acabou! Vem #DarUmBusca nas melhores lavadoras de roupas - aqueles modelos de máquinas de levar que aliam economia de tempo e energia, facilitando a rotina doméstica.\nPara assistir à novela ou curtir um jogo de futebol, trazemos os prós e contras das muitas do mercado e te ajudamos a navegar nas várias tecnologias e resoluções. Assim, dá para relaxar no seu sofá com imagem e experiência de qualidade. TVs e Smart TV\nDepois de conhecer a gente um pouco melhor, pode ter certeza de que estamos aqui para você. Conte sempre com a gente para transformar suas escolhas de compra em decisões inteligentes.\nAqui, você encontra as melhores ofertas e produtos que facilitam sua rotina, com a confiança, economia e segurança de quem está sempre ao seu lado na hora de buscar o melhor preço!\nTá fácil! Tá na mão! Tá no Busca!"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.buscape.com.br/celular/iphone",
+            "texto": "iPhone",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/iphone+17",
+            "texto": "iPhone 17",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/iphone+17+pro+max",
+            "texto": "iPhone 17 Pro Max",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/iphone+16",
+            "texto": "iPhone 16",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/iphone+15",
+            "texto": "iPhone 15",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/iphone+14",
+            "texto": "iPhone 14",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/samsung",
+            "texto": "Celulares Samsung",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/s25",
+            "texto": "Galaxy S25",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/s24",
+            "texto": "Galaxy S24",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/a56",
+            "texto": "Galaxy A56",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/a54",
+            "texto": "Galaxy A54",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/motorola",
+            "texto": "Celulares Motorola",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/motorola/linha-moto-g",
+            "texto": "Moto G",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/motorola/linha-moto-e",
+            "texto": "Moto E",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/xiaomi",
+            "texto": "Celulares Xiaomi",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular/xiaomi/pocophone",
+            "texto": "Xiaomi Pocophone",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/xiaomi+17+pro+max",
+            "texto": "Xiaomi 17 Pro Max",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/celular",
+            "texto": "Ver mais Celulares",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/smart-tv",
+            "texto": "Smart TVs",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/led",
+            "texto": "TV LED",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-32-polegadas",
+            "texto": "TV 32 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-43-polegadas",
+            "texto": "TV 43 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-50-polegadas",
+            "texto": "TV 50 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-55-polegadas",
+            "texto": "TV 55 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-65-polegadas",
+            "texto": "TV 65 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/tamanho-70-polegadas-ou-mais",
+            "texto": "TV +70 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/busca/tv+98+polegadas",
+            "texto": "TV 98 polegadas",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/ultra-definicao-4k-",
+            "texto": "TV 4K",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/samsung",
+            "texto": "TV Samsung",
+            "interno": true
+          },
+          {
+            "url": "https://www.buscape.com.br/tv/lg",
+            "texto": "TV LG",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+          "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/min-logo.svg",
+          "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/logo.svg",
+          "https://s.zst.com.br/prod/brickz/hero_bp_amazon_default_mob_afc673f7d0.webp",
+          "https://s.zst.com.br/prod/brickz/hero_bp_mktp_mob_42b22e1a0b.webp",
+          "https://s.zst.com.br/prod/brickz/hero_bp_natura_13cb_mob_4e37844ec5.webp",
+          "https://s.zst.com.br/prod/brickz/Conteudo_Banner_Faixa_Incentivo_Credito_Consignado_Mob_e89826e8b0.webp",
+          "https://s.zst.com.br/prod/brickz/Hero_BP_Climatizacao_Mob_1110x200_67ca68b9e6.webp",
+          "https://s.zst.com.br/prod/brickz/hero_bp_lp_mob_1110x200_bdae12f1c8.webp",
+          "https://s.zst.com.br/prod/cupons/50-Logo-200x200.png"
+        ],
+        "midia": [
+          {
+            "id": "med-cf0b99e1f424",
+            "type": "image",
+            "title": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+            "url": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+            "final_url": "https://www.buscape.com.br/ais/_next/public/asteroid/buscape/logo-share.png",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "www.buscape.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-769438092dbd",
+            "type": "image",
+            "title": "Buscape",
+            "url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/min-logo.svg",
+            "final_url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/min-logo.svg",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "i1.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Buscape",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dd683e3de111",
+            "type": "image",
+            "title": "Buscape",
+            "url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/logo.svg",
+            "final_url": "https://i1.zst.com.br/ais/_next/public/asteroid/muse/logos/buscape/logo.svg",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "i1.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Buscape",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9d8853d6d904",
+            "type": "image",
+            "title": "AMAZON - OFERTAS COM ATÉ 50%OFF!",
+            "url": "https://s.zst.com.br/prod/brickz/hero_bp_amazon_default_mob_afc673f7d0.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/hero_bp_amazon_default_mob_afc673f7d0.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "AMAZON - OFERTAS COM ATÉ 50%OFF!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b761fa03d0a5",
+            "type": "image",
+            "title": "BUSCAPÉ MKP - SELEÇÃO DE OFERTAS COM ATÉ 20%OFF NO PIX!! - 13 a 31/10",
+            "url": "https://s.zst.com.br/prod/brickz/hero_bp_mktp_mob_42b22e1a0b.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/hero_bp_mktp_mob_42b22e1a0b.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BUSCAPÉ MKP - SELEÇÃO DE OFERTAS COM ATÉ 20%OFF NO PIX!! - 13 a 31/10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5678041769b8",
+            "type": "image",
+            "title": "NATURA - 13% DE CASHBACK - 23 a 25/10",
+            "url": "https://s.zst.com.br/prod/brickz/hero_bp_natura_13cb_mob_4e37844ec5.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/hero_bp_natura_13cb_mob_4e37844ec5.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "NATURA - 13% DE CASHBACK - 23 a 25/10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dc03392566e2",
+            "type": "image",
+            "title": "Banco Pan - Crédito Consignado Privado",
+            "url": "https://s.zst.com.br/prod/brickz/Conteudo_Banner_Faixa_Incentivo_Credito_Consignado_Mob_e89826e8b0.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/Conteudo_Banner_Faixa_Incentivo_Credito_Consignado_Mob_e89826e8b0.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Banco Pan - Crédito Consignado Privado",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-07f7409982e5",
+            "type": "image",
+            "title": "BUSCAPÉ - ESPECIAL CLIMATIZAÇÃO - 13 a 31/10",
+            "url": "https://s.zst.com.br/prod/brickz/Hero_BP_Climatizacao_Mob_1110x200_67ca68b9e6.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/Hero_BP_Climatizacao_Mob_1110x200_67ca68b9e6.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BUSCAPÉ - ESPECIAL CLIMATIZAÇÃO - 13 a 31/10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-446557c44f40",
+            "type": "image",
+            "title": "BUSCAPÉ - ESQUENTA BLACKFRIDAY - 13 a 31/10",
+            "url": "https://s.zst.com.br/prod/brickz/hero_bp_lp_mob_1110x200_bdae12f1c8.webp",
+            "final_url": "https://s.zst.com.br/prod/brickz/hero_bp_lp_mob_1110x200_bdae12f1c8.webp",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BUSCAPÉ - ESQUENTA BLACKFRIDAY - 13 a 31/10",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e5b6f1db1c56",
+            "type": "image",
+            "title": "Logo de Consul",
+            "url": "https://s.zst.com.br/prod/cupons/50-Logo-200x200.png",
+            "final_url": "https://s.zst.com.br/prod/cupons/50-Logo-200x200.png",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo de Consul",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9bd8eb0df68b",
+            "type": "image",
+            "title": "Logo de Magazine Luiza",
+            "url": "https://s.zst.com.br/prod/cupons/22906-Logo-200x200.png",
+            "final_url": "https://s.zst.com.br/prod/cupons/22906-Logo-200x200.png",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo de Magazine Luiza",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-46721bb04ddb",
+            "type": "image",
+            "title": "Logo de Amazon",
+            "url": "https://s.zst.com.br/prod/cupons/1582-Logo-200x200.png",
+            "final_url": "https://s.zst.com.br/prod/cupons/1582-Logo-200x200.png",
+            "source_title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "source_url": "https://www.buscape.com.br/",
+            "publisher": "s.zst.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo de Amazon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.diffchecker.com/pt/",
+      "result": {
+        "titulo": "Diffchecker",
+        "texto": "Visualização dividida A visualização padrão. O original à esquerda, a versão alterada à direita, remoções em vermelho e adições em verde. Os dois lados rolam juntos, então você nunca perde seu lugar em nenhuma das versões. Visualização unificada Uma única coluna, o mesmo formato que o Git e as ferramentas de revisão de código usam. Grátis para testar e ilimitado no Pro. Regras de ignorar personalizadas Diga à comparação o que pular: datas e horários, números de build, IDs de sessão ou qualquer texto que você escolher. Nível de detalhe ajustável O modo Inteligente, que é o padrão, escolhe o destaque mais claro para cada alteração: caracteres isolados onde o nível de caractere se encaixa, palavras inteiras onde o nível de palavra se encaixa. Ou fixe toda a comparação em um dos dois. Comparação com realce de sintaxe Colore seu código por linguagem enquanto o diff o marca por alteração. JavaScript, Python, Java, Go, SQL, JSON, YAML e mais. Editor em tempo real Digite em qualquer um dos lados depois de comparar e as diferenças são recalculadas na hora, então corrigir o que você acabou de encontrar não significa começar de novo. Grátis para testar e ilimitado no Pro. Mesclar alterações Monte uma versão combinada aceitando alterações individuais de qualquer um dos lados. Clique na seta de uma alteração para trazê-la para o outro lado, e o resultado é atualizado ao vivo no editor. Grátis para testar e ilimitado no Pro. Sem cadastro para comparar Cole e compare na hora. Uma conta só é necessária para salvar, compartilhar ou fazer upgrade. Sem limite de tamanho de arquivo Compare arquivos de log longos e exportações grandes por inteiro. Compartilhe uma comparação como link Salve uma comparação e envie uma URL em vez de dois anexos e uma explicação. Comente nas linhas Deixe comentários em linhas específicas para que os revisores discutam uma alteração onde ela aconteceu. Exportar como PDF Transforme uma comparação em um documento que você pode compartilhar.",
+        "final": "https://www.diffchecker.com/pt/",
+        "trecho_usado": "Monte uma versão combinada aceitando alterações individuais de qualquer um dos lados. Clique na seta de uma alteração para trazê-la para o outro lado, e o resultado é atualizado ao vivo no editor. Grátis para testar e ilimitado no Pro. Sem cadastro para comparar Cole e compare na hora. Uma conta só é necessária para salvar, compartilhar ou fazer upgrade. Sem limite de tamanho de arquivo Compare",
+        "metadados": {
+          "titulo": "Diffchecker",
+          "descricao": "Diffchecker is a fast, secure online tool to compare text, documents, and code online or offline. Just paste your files and click find differences! Detect changes by word or character, redline documents, summarize changes with AI, save and share diffs in a clean, user-friendly interface.",
+          "canonica": "https://www.diffchecker.com/pt/",
+          "og": {
+            "og:type": "website",
+            "og:image:width": "1200",
+            "og:image:height": "600",
+            "og:image": "https://www.diffchecker.com/static/images/fb-image.png",
+            "og:title": "Compare texto e encontre diferenças online - Diffchecker",
+            "og:description": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e offline."
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "['WebSite', 'WebApplication']",
+          "ld": {
+            "publisher": {
+              "@type": "Organization",
+              "@id": "https://www.diffchecker.com/#organization"
+            },
+            "description": "Diffchecker is a fast, secure online tool to compare text, documents, and code online or offline. Just paste your files and click find differences! Detect changes by word or character, redline documents, summarize changes with AI, save and share diffs in a clean, user-friendly interface."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A visualização padrão. O original à esquerda, a versão alterada à direita, remoções em vermelho e adições em verde. Os dois lados rolam juntos, então você nunca perde seu lugar em nenhuma das versões.\nUma única coluna, o mesmo formato que o Git e as ferramentas de revisão de código usam. Grátis para testar e ilimitado no Pro."
+          },
+          {
+            "titulo": "Regras de ignorar personalizadas",
+            "texto": "Diga à comparação o que pular: datas e horários, números de build, IDs de sessão ou qualquer texto que você escolher."
+          },
+          {
+            "titulo": "Nível de detalhe ajustável",
+            "texto": "O modo Inteligente, que é o padrão, escolhe o destaque mais claro para cada alteração: caracteres isolados onde o nível de caractere se encaixa, palavras inteiras onde o nível de palavra se encaixa. Ou fixe toda a comparação em um dos dois."
+          },
+          {
+            "titulo": "Comparação com realce de sintaxe",
+            "texto": "Colore seu código por linguagem enquanto o diff o marca por alteração. JavaScript, Python, Java, Go, SQL, JSON, YAML e mais.\nDigite em qualquer um dos lados depois de comparar e as diferenças são recalculadas na hora, então corrigir o que você acabou de encontrar não significa começar de novo. Grátis para testar e ilimitado no Pro.\nMonte uma versão combinada aceitando alterações individuais de qualquer um dos lados. Clique na seta de uma alteração para trazê-la para o outro lado, e o resultado é atualizado ao vivo no editor. Grátis para testar e ilimitado no Pro."
+          },
+          {
+            "titulo": "Sem cadastro para comparar",
+            "texto": "Cole e compare na hora. Uma conta só é necessária para salvar, compartilhar ou fazer upgrade."
+          },
+          {
+            "titulo": "Sem limite de tamanho de arquivo",
+            "texto": "Compare arquivos de log longos e exportações grandes por inteiro."
+          },
+          {
+            "titulo": "Compartilhe uma comparação como link",
+            "texto": "Salve uma comparação e envie uma URL em vez de dois anexos e uma explicação.\nDeixe comentários em linhas específicas para que os revisores discutam uma alteração onde ela aconteceu.\nTransforme uma comparação em um documento que você pode compartilhar."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.diffchecker.com/pt/",
+            "texto": "Diff checker",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/image-compare/",
+            "texto": "Imagens",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/word-pdf-compare/",
+            "texto": "Documentos",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/excel-compare/",
+            "texto": "Excel",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/diffchecker-legal/",
+            "texto": "Legal",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/enterprise/",
+            "texto": "Enterprise",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/desktop/",
+            "texto": "Aplicativo para desktop",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/pricing/",
+            "texto": "Preços",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/login/",
+            "texto": "Fazer login",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/download-trial/",
+            "texto": "Baixar o Diffchecker Desktop",
+            "interno": true
+          },
+          {
+            "url": "https://www.comparetext.net",
+            "texto": "Compare Text",
+            "interno": false
+          },
+          {
+            "url": "https://www.diffchecker.com/desktop",
+            "texto": "Diffchecker Desktop A maneira mais segura de usar o Diffchecker. Obtenha o aplicativo Diffchecker Desktop: seus diffs nunca saem do seu computador! Obter Deskto",
+            "interno": true
+          },
+          {
+            "url": "https://trust.diffchecker.com/",
+            "texto": "Visite nosso Trust Center",
+            "interno": false
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/contact/",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/cli/",
+            "texto": "CLI",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/terms/",
+            "texto": "Termos",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/privacy-policy/",
+            "texto": "Política de Privacidade",
+            "interno": true
+          },
+          {
+            "url": "https://trust.diffchecker.com",
+            "texto": "Central de confiança",
+            "interno": false
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/docs/getting-started/",
+            "texto": "API",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/pt/integrations/",
+            "texto": "iManage",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/",
+            "texto": "English",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/de/",
+            "texto": "Deutsch",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/es/",
+            "texto": "Español",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/fr/",
+            "texto": "Français",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/hi/",
+            "texto": "हिन्दी",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/it/",
+            "texto": "Italiano",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/jp/",
+            "texto": "日本語",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/zh-Hans/",
+            "texto": "简体中文",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/zh-Hant/",
+            "texto": "繁體中文",
+            "interno": true
+          },
+          {
+            "url": "https://www.diffchecker.com/ko/",
+            "texto": "한국어",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.diffchecker.com/static/images/fb-image.png",
+          "https://www.diffchecker.com/static/images/diffchecker.svg",
+          "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/text-light.webp",
+          "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/syntax-light.webp",
+          "https://www.diffchecker.com/static/images/testimonial-zhi-pan.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-761ecce69977",
+            "type": "image",
+            "title": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e o",
+            "url": "https://www.diffchecker.com/static/images/fb-image.png",
+            "final_url": "https://www.diffchecker.com/static/images/fb-image.png",
+            "source_title": "Diffchecker",
+            "source_url": "https://www.diffchecker.com/pt/",
+            "publisher": "www.diffchecker.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e offline.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cd707986de3a",
+            "type": "image",
+            "title": "Diffchecker logo",
+            "url": "https://www.diffchecker.com/static/images/diffchecker.svg",
+            "final_url": "https://www.diffchecker.com/static/images/diffchecker.svg",
+            "source_title": "Diffchecker",
+            "source_url": "https://www.diffchecker.com/pt/",
+            "publisher": "www.diffchecker.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Diffchecker logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-208b34d223bd",
+            "type": "image",
+            "title": "Side-by-side text comparison in Diffchecker",
+            "url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/text-light.webp",
+            "final_url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/text-light.webp",
+            "source_title": "Diffchecker",
+            "source_url": "https://www.diffchecker.com/pt/",
+            "publisher": "www.diffchecker.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Side-by-side text comparison in Diffchecker",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0a39d20efb98",
+            "type": "image",
+            "title": "Syntax-highlighted code comparison",
+            "url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/syntax-light.webp",
+            "final_url": "https://www.diffchecker.com/static/images/mockups/os-agnostic/text/syntax-light.webp",
+            "source_title": "Diffchecker",
+            "source_url": "https://www.diffchecker.com/pt/",
+            "publisher": "www.diffchecker.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Syntax-highlighted code comparison",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "f7ef5cf90fbe243f7930",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "title": "Poverty Headcount ($1.90 a day)",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "96bb3ec7d9dcc6a475d9",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "title": "Poverty Headcount ($2.50 a day)",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "d0a797af962f89cea20c",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+            "title": "Middle Class ($10-50 a day) Headcount",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "7ec944b0ff90dc270e19",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+            "title": "Official Moderate Poverty Rate-National",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "177e49e413fca7dcaa2c",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+            "title": "Poverty Headcount ($4 a day)",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "097c804e9fb3b663f6d0",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+            "title": "Vulnerable ($4-10 a day) Headcount",
+            "origin": "worldbank",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "55cb4e0221f680f302a7",
+            "url": "https://www.tudocelular.com/compare/",
+            "title": "O site Brasileiro de Telefonia - TudoCelular.com",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O site Brasileiro de Telefonia - TudoCelular.com"
+          },
+          {
+            "id": "b65f0135870745c64232",
+            "url": "https://versus.com/br",
+            "title": "Versus | Compare tudo",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Compare smartphones, câmeras, fones de ouvido, placas de vídeo, e muito mais. Com especificações técnicas detalhadas, visualizações de dados e comparações de pr"
+          },
+          {
+            "id": "80bc7f77b7e8fa771300",
+            "url": "https://www.tudocelular.com/comparacao/",
+            "title": "Comparação - TudoCelular.com",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Comparativo em tamanho real: linha Galaxy S25 vs linha iPhone 16 8 Economia e mercado23 Jan Compare os novos celulares topos de linha da Samsung com os iPhones "
+          },
+          {
+            "id": "9f6162d38282a19d2a7d",
+            "url": "https://www.diffchecker.com/pt/",
+            "title": "Compare texto e encontre diferenças online - Diffchecker",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Compare texto, arquivos e código (ex. json, xml) para encontrar diferenças com o Diffchecker online gratuitamente! Use nosso app desktop para diffs privados e o"
+          },
+          {
+            "id": "2e2c82dc479748ba1f14",
+            "url": "https://www.diffchecker.com/",
+            "title": "Compare text and find differences online or offline - Diffchecker",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Compare text, files, and code (e.g. json, xml) to find differences with Diffchecker online for free! Use our desktop app for private, offline diffs."
+          },
+          {
+            "id": "2d16aed20a7359cf40aa",
+            "url": "https://www.buscape.com.br/",
+            "title": "Compare preços, ganhe cashback e compre com segurança | Buscapé",
+            "origin": "bing",
+            "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Descubra ofertas, cupons e cashback no Buscapé. Compare preços e compre com segurança em lojas parceiras."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "worldbank: 6 resultados (Compare Redis e Memcached quanto à persi)",
+        "worldbank (consulta reformulada 'Compare Redis e Memcached quanto à persi'): 6 resultados",
+        "worldbank: sem correspondência com o pedido; tentando outro provedor (Compare Redis e Memcached quanto à persi)",
+        "bcb: sem resultados (Compare Redis e Memcached quanto à persi)",
+        "bing: 6 resultados (Compare Redis e Memcached quanto à persi)",
+        "bing (consulta reformulada 'Compare Redis e Memcached quanto à persi'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Compare Redis e Memcached quanto à persi)",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Compare Redis e Memcached quanto à persistência em disco e às estruturas de dados, com documentação de cada um.",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://www.diffchecker.com/pt/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T13:38:59.322628+00:00",
+  "source_revision": "af400f11487da3cf5490f1ef54eb03ca72f2d889",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

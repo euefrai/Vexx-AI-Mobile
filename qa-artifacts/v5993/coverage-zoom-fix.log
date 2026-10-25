@@ -1,0 +1,19 @@
+### Result
+{"scope":"CSS_200_PERCENT_NOT_NATIVE_ZOOM","geometry":{"client":110,"scroll":224,"root":320,"viewport":320},"local_table_scroll":true}
+### Ran Playwright code
+```js
+await (async page => {
+ await page.setViewportSize({width:320,height:900});await page.reload();
+ await page.locator('#loginOverlay').waitFor({state:'hidden'});
+ const card=page.locator('.message.ai .jdui-readonly').first();await card.waitFor({state:'visible'});
+ await card.locator('tbody tr').last().waitFor({state:'visible'});await page.evaluate(()=>document.body.style.zoom='2');await card.evaluate(el=>el.scrollIntoView({block:'center'}));
+ const scroll=card.locator('.jdui-scrollx');const dim=await scroll.evaluate(el=>({client:el.clientWidth,scroll:el.scrollWidth,root:document.documentElement.scrollWidth,viewport:innerWidth}));
+ if(dim.root>dim.viewport || dim.scroll<=dim.client)throw Error('Expected local table scroll without page overflow');
+ await page.screenshot({path:'qa-artifacts/v5993/coverage-zoom-200.png'});
+ await scroll.evaluate(el=>el.scrollLeft=el.scrollWidth);await page.screenshot({path:'qa-artifacts/v5993/coverage-zoom-200-right.png'});
+ await page.evaluate(()=>document.body.style.zoom='');
+ return {scope:'CSS_200_PERCENT_NOT_NATIVE_ZOOM',geometry:dim,local_table_scroll:true};
+})(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-25T14-25-09-943Z.log#L23-L26

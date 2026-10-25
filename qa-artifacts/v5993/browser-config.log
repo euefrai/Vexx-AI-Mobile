@@ -1,0 +1,8 @@
+### Result
+{"configured":true}
+### Ran Playwright code
+```js
+await (async page => { await page.evaluate(config => sessionStorage.setItem("research-qa-config",JSON.stringify(config)), {"cases":[["company","Pesquisa profunda sobre quem fundou a WEG, em que ano e quais são seus principais produtos?"],["history","Pesquisa profunda sobre as causas e consequências da Revolta da Chibata."],["technical","Pesquisa profunda sobre como funciona WebAssembly.Memory.grow na documentação de referência, sintaxe e limitações."],["local-news","Pesquisa profunda sobre notícias de Ubatã, Bahia, publicadas nos últimos sete dias."],["technology","Pesquisa profunda sobre novidades recentes da inteligência artificial, explique os acontecimentos com fontes."],["products","Pesquisa profunda sobre notebooks Lenovo com 16 GB de RAM por até R$ 3.000."],["multi-source","Pesquisa profunda sobre diferenças entre JSON.parse e JSON.stringify no JavaScript: entrada, saída e erros, usando as duas referências."],["scarcity","Pesquisa profunda sobre o número de visitantes por hora da Biblioteca Municipal de Ubatã ontem; use somente dados públicos e indique lacunas."],["images","Pesquise imagens da Ponte Estaiada de São Paulo."],["complex","Pesquisa profunda sobre quem fundou a WEG, quando foi fundada e quais produtos fabrica; compare informações de história e portfólio sem inventar lacunas."],["cancel","Pesquisa profunda sobre tecnologias de armazenamento de energia e limitações."]],"version":"v5993"}); return {configured:true}; })(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-25T14-03-37-503Z.log#L3

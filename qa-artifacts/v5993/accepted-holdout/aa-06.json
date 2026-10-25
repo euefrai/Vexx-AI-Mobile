@@ -1,0 +1,912 @@
+{
+  "id": "aa-06",
+  "category": "local_news",
+  "query": "Notícias de Camaçari, Bahia, sobre saúde publicadas nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 3.314,
+  "state": "paginas_ilegiveis",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari\" site:www.ba.gov.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 90316
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5618
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 1073
+    },
+    {
+      "url": "http://www.ba.gov.br",
+      "error": "http"
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Parceria+entre+Estado+e+Governo+Federal+amplia+oferta+de+cirurgias+em+Cama%C3%A7ari%22+site%3Awww.ba.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Parceria+entre+Estado+e+Governo+Federal+amplia+oferta+de+cirurgias+em+Cama%C3%A7ari%22+site%3Awww.ba.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 6086
+    },
+    {
+      "url": "https://www.relatabahia.com.br",
+      "final": "https://www.relatabahia.com.br",
+      "chars": 282214
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+    "domain": "news",
+    "original_request": "Notícias de Camaçari, Bahia, sobre saúde publicadas nos últimos sete dias",
+    "resolved_request": "Notícias de Camaçari, Bahia, sobre saúde publicadas entre 2026-10-18 e 2026-10-25",
+    "parameters": {
+      "start_date": "2026-10-18",
+      "end_date": "2026-10-25",
+      "location": "Camaçari",
+      "region": "bahia",
+      "topic": "saúde publicadas"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T13:38:23.378895+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-18",
+        "end_date": "2026-10-25",
+        "location": "Camaçari",
+        "region": "bahia",
+        "topic": "saúde publicadas"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "fc5090a1040f08be793e",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+        "title": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Mon, 19 Oct 2026 21:12:34 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br",
+        "selected": false,
+        "returned": true,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0a8815e9cf4ca17a5dbe",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+        "title": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Thu, 22 Oct 2026 19:39:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia",
+        "selected": false,
+        "returned": true,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "e222d1c98ffbc952f948",
+        "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+        "title": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Tue, 10 Feb 2026 08:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB",
+        "selected": false,
+        "returned": true,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "95814a1f52998edda65b",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+        "title": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Sat, 14 Mar 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "33554d19f9a5f4925d24",
+        "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+        "title": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0224cc05404505d43aaf",
+        "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+        "title": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Wed, 12 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+      "titulo": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Mon, 19 Oct 2026 21:12:34 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "data": {
+          "published_at": "Mon, 19 Oct 2026 21:12:34 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+      "titulo": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Thu, 22 Oct 2026 19:39:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "data": {
+          "published_at": "Thu, 22 Oct 2026 19:39:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+      "titulo": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "Tue, 10 Feb 2026 08:00:00 GMT",
+      "content_scope": "feed_metadata",
+      "vertical": {
+        "kind": "news",
+        "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "data": {
+          "published_at": "Tue, 10 Feb 2026 08:00:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 0,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "items": [
+        {
+          "titulo": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "trecho": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "ba.gov.br",
+          "publisher_url": "http://www.ba.gov.br",
+          "meta": {
+            "publicado_em": "Mon, 19 Oct 2026 21:12:34 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 19 Oct 2026 21:12:34 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "trecho": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Relata Bahia",
+          "publisher_url": "https://www.relatabahia.com.br",
+          "meta": {
+            "publicado_em": "Thu, 22 Oct 2026 19:39:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 22 Oct 2026 19:39:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+          "trecho": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Bahia Notícias",
+          "publisher_url": "https://www.bahianoticias.com.br",
+          "meta": {
+            "publicado_em": "Sat, 14 Mar 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 14 Mar 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+          "trecho": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Jornal Grande Bahia",
+          "publisher_url": "https://jornalgrandebahia.com.br",
+          "meta": {
+            "publicado_em": "Mon, 05 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 05 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+          "trecho": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "CREMEB",
+          "publisher_url": "https://www.cremeb.org.br",
+          "meta": {
+            "publicado_em": "Tue, 10 Feb 2026 08:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 10 Feb 2026 08:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+          "trecho": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Bahia Notícias",
+          "publisher_url": "https://www.bahianoticias.com.br",
+          "meta": {
+            "publicado_em": "Wed, 12 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Wed, 12 Aug 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari\" site:www.ba.gov.br",
+      "items": [
+        {
+          "titulo": "About bulk data export of Search Console data to BigQuery",
+          "url": "https://support.google.com/webmasters/answer/12918484?hl=en",
+          "trecho": "Overview Schedule a daily export of your Search Console performance data to BigQuery, where you can run complex queries over your data or export it to an external storage service. Using the bulk data",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 19 out. 2026 18:02:00 GMT"
+          }
+        },
+        {
+          "titulo": "QUERY - Cправка - Редакторы Google Документов",
+          "url": "https://support.google.com/docs/answer/3093343?hl=ru",
+          "trecho": "QUERY Выполняет запросы на базе языка запросов API визуализации Google. Пример использования QUERY (A2:E6; \"select avg (A) pivot B\") QUERY (A2:E6; F2; ЛОЖЬ) Синтаксис QUERY (данные; запрос; [заголовки])",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 06:25:00 GMT"
+          }
+        },
+        {
+          "titulo": "Avestan: \"naxtar\" ~ \"night\" | WordReference Forums",
+          "url": "https://forum.wordreference.com/threads/avestan-naxtar-night.2477058/",
+          "trecho": "Greetings, I recently noticed Avestan \"upa-naxtar\" ~ \"adjoining the night\". It appears to me that something such as \"naxta*\" (with a probable Old Iranian...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 16:10:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "fc5090a1040f08be793e",
+            "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+            "title": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br"
+          },
+          {
+            "id": "0a8815e9cf4ca17a5dbe",
+            "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+            "title": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia"
+          },
+          {
+            "id": "95814a1f52998edda65b",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+            "title": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias"
+          },
+          {
+            "id": "33554d19f9a5f4925d24",
+            "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+            "title": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia"
+          },
+          {
+            "id": "e222d1c98ffbc952f948",
+            "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+            "title": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB"
+          },
+          {
+            "id": "0224cc05404505d43aaf",
+            "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+            "title": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "bing: sem resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "Recuperação no publicador limitada: http",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento",
+        "1ª rodada só com páginas de índice geral (6 sinalizada(s)); fontes primárias não alcançadas"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": [
+        "primeira rodada só com páginas de índice geral",
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": "2026-10-25T13:38:23.378895+00:00",
+  "source_revision": "af400f11487da3cf5490f1ef54eb03ca72f2d889",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

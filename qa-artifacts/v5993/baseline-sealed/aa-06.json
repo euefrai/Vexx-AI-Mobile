@@ -1,0 +1,3493 @@
+{
+  "id": "aa-06",
+  "category": "local_news",
+  "query": "Notícias de Camaçari, Bahia, sobre saúde publicadas nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.805,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari\" site:www.ba.gov.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 90316
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5848
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Cama%C3%A7ari%22+%22bahia%22+not%C3%ADcias+sa%C3%BAde+publicadas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5077
+    },
+    {
+      "url": "http://www.ba.gov.br",
+      "error": "http"
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Parceria+entre+Estado+e+Governo+Federal+amplia+oferta+de+cirurgias+em+Cama%C3%A7ari%22+site%3Awww.ba.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Parceria+entre+Estado+e+Governo+Federal+amplia+oferta+de+cirurgias+em+Cama%C3%A7ari%22+site%3Awww.ba.gov.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5617
+    },
+    {
+      "url": "https://www.relatabahia.com.br",
+      "final": "https://www.relatabahia.com.br",
+      "chars": 282071
+    },
+    {
+      "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "final": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "chars": 75717
+    },
+    {
+      "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+      "final": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+      "chars": 418253
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "final": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "chars": 396747
+    },
+    {
+      "url": "https://sefaz.camacari.ba.gov.br/",
+      "final": "https://sefaz.camacari.ba.gov.br/",
+      "chars": 616414
+    },
+    {
+      "url": "https://www.cn1.com.br/",
+      "final": "https://www.cn1.com.br/",
+      "chars": 220995
+    },
+    {
+      "url": "https://www.camacari.ba.gov.br/",
+      "error": "rede"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+    "domain": "news",
+    "original_request": "Notícias de Camaçari, Bahia, sobre saúde publicadas nos últimos sete dias",
+    "resolved_request": "Notícias de Camaçari, Bahia, sobre saúde publicadas entre 2026-10-18 e 2026-10-25",
+    "parameters": {
+      "start_date": "2026-10-18",
+      "end_date": "2026-10-25",
+      "location": "Camaçari",
+      "region": "bahia",
+      "topic": "saúde publicadas"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T13:38:23.378895+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-18",
+        "end_date": "2026-10-25",
+        "location": "Camaçari",
+        "region": "bahia",
+        "topic": "saúde publicadas"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "87dbd5b6a27c6fc49143",
+        "url": "https://www.camacari.ba.gov.br/",
+        "title": "Prefeitura de Camaçari",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "sex., 23 out. 2026 14:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Nexteer inaugura planta em Camaçari e integra cadeia produtiva do complexo BYD Saúde",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "rede",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "3a8e0e479defae692c0f",
+        "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+        "title": "Prefeitura de Camaçari",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "sáb., 24 out. 2026 21:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "vila e, junto com os índios, organizaram tropas de resistência que ajudaram a expulsar os holandeses da Bahia. Em 28 de setembro de 1758 vem a emancipação com a",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1715,
+        "final_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "9da9c58195a7c5de5cac",
+        "url": "https://sefaz.camacari.ba.gov.br/",
+        "title": "SEFAZ – Camaçari",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "sáb., 24 out. 2026 08:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "municipais. Cinf (Coordenadoria de Informações Fiscais) O atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 704,
+        "final_url": "https://sefaz.camacari.ba.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "7117eda4ab02bcab67df",
+        "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+        "title": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "2026-03-15T23:18:48+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "experiências fazem parte dos melhores passeios em {{CAMAÇARI}} para quem busca contato com a natureza. ROTEIRO DE VIAGEM PARA {{CAMAÇARI}} Um roteiro de viagem ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "24fd47acbd8ec7194c22",
+        "url": "https://www.cn1.com.br/",
+        "title": "Camaçari Noticias",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "dom., 25 out. 2026 00:44:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Festa infantil da Tronox em Camaçari gera renda para mulheres da comunidade de Areias Camaçari mantém viva a chama da Independência com passagem do Fogo Simbóli",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 546,
+        "final_url": "https://www.cn1.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "fc5090a1040f08be793e",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+        "title": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Mon, 19 Oct 2026 21:12:34 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0a8815e9cf4ca17a5dbe",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+        "title": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Thu, 22 Oct 2026 19:39:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "e222d1c98ffbc952f948",
+        "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+        "title": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Tue, 10 Feb 2026 08:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "fe7582b0390e154f05e3",
+        "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+        "title": "Camaçari – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "2004-09-14T17:50:54Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Marcos Teixeira, a Aldeia do Divino Espírito Santo desempenhou um papel importante na resistência contra a invasão holandesa na Bahia. Tropas organizadas junto ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "95814a1f52998edda65b",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+        "title": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Sat, 14 Mar 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "33554d19f9a5f4925d24",
+        "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+        "title": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0224cc05404505d43aaf",
+        "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+        "title": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+        "date": "Wed, 12 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-89449d0c3276",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.camacari.ba.gov.br/vagasseduc/index.html",
+      "final_url": "https://www.camacari.ba.gov.br/vagasseduc/index.html",
+      "source_title": "Prefeitura de Camaçari",
+      "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "publisher": "www.camacari.ba.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-399274038c1a",
+      "type": "document",
+      "title": "PLANO_DE_MANEJO_2024.pdf",
+      "url": "https://www.camacari.ba.gov.br/wp-content/Sedur/PLANO_DE_MANEJO_2024.pdf",
+      "final_url": "https://www.camacari.ba.gov.br/wp-content/Sedur/PLANO_DE_MANEJO_2024.pdf",
+      "source_title": "Prefeitura de Camaçari",
+      "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "publisher": "www.camacari.ba.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-5ec4a393a1ad",
+      "type": "document",
+      "title": "REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+      "url": "https://www.camacari.ba.gov.br/wp-content/Sedur/REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+      "final_url": "https://www.camacari.ba.gov.br/wp-content/Sedur/REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+      "source_title": "Prefeitura de Camaçari",
+      "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "publisher": "www.camacari.ba.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-88222f1396da",
+      "type": "document",
+      "title": "controle-patrimonial-cartilha.pdf",
+      "url": "https://www.camacari.ba.gov.br/wp-content/uploads/2025/07/controle-patrimonial-cartilha.pdf",
+      "final_url": "https://www.camacari.ba.gov.br/wp-content/uploads/2025/07/controle-patrimonial-cartilha.pdf",
+      "source_title": "Prefeitura de Camaçari",
+      "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "publisher": "www.camacari.ba.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-b5cc1db297fe",
+      "type": "image",
+      "title": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+      "url": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+      "final_url": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+      "source_title": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+      "source_url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+      "publisher": "roteirosbr.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fc080b5904cb",
+      "type": "image",
+      "title": "município do Estado da Bahia, Brasil",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-514ce3ced492",
+      "type": "image",
+      "title": "Bandeira de Camaçari",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bandeira_de_Cama%C3%A7ari.svg/120px-Bandeira_de_Cama%C3%A7ari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bandeira_de_Cama%C3%A7ari.svg/120px-Bandeira_de_Cama%C3%A7ari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bandeira de Camaçari",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-54f9093ec26f",
+      "type": "image",
+      "title": "Brasão de armas de Camaçari",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Bras%C3%A3o_Cama%C3%A7ari-BA.svg/120px-Bras%C3%A3o_Cama%C3%A7ari-BA.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Bras%C3%A3o_Cama%C3%A7ari-BA.svg/120px-Bras%C3%A3o_Cama%C3%A7ari-BA.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasão de armas de Camaçari",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7337c2450138",
+      "type": "image",
+      "title": "Localização de Camaçari na Bahia",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Bahia_Municip_Camacari.svg/330px-Bahia_Municip_Camacari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Bahia_Municip_Camacari.svg/330px-Bahia_Municip_Camacari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Localização de Camaçari na Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-707443562f4f",
+      "type": "image",
+      "title": "Camaçari está localizado em: Brasil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Camaçari está localizado em: Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-49032ad2cbc3",
+      "type": "image",
+      "title": "Mapa",
+      "url": "https://maps.wikimedia.org/img/osm-intl,12,-12.697777777778,-38.323888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Cama%C3%A7ari&revid=73160272&groups=_01e465be14e23498c9c21e304d6b9391a95734db&parser=parsoid",
+      "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-12.697777777778,-38.323888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Cama%C3%A7ari&revid=73160272&groups=_01e465be14e23498c9c21e304d6b9391a95734db&parser=parsoid",
+      "source_title": "município do Estado da Bahia, Brasil",
+      "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "publisher": "maps.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Mapa",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "titulo": "Prefeitura de Camaçari",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 21:38:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 21:38:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://sefaz.camacari.ba.gov.br/",
+      "titulo": "SEFAZ – Camaçari",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 08:38:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://sefaz.camacari.ba.gov.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 08:38:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+      "titulo": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-03-15T23:18:48+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2026-03-15T23:18:48+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "items": [
+        {
+          "titulo": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "trecho": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "ba.gov.br",
+          "publisher_url": "http://www.ba.gov.br",
+          "meta": {
+            "publicado_em": "Mon, 19 Oct 2026 21:12:34 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 19 Oct 2026 21:12:34 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "trecho": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Relata Bahia",
+          "publisher_url": "https://www.relatabahia.com.br",
+          "meta": {
+            "publicado_em": "Thu, 22 Oct 2026 19:39:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 22 Oct 2026 19:39:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+          "trecho": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Bahia Notícias",
+          "publisher_url": "https://www.bahianoticias.com.br",
+          "meta": {
+            "publicado_em": "Sat, 14 Mar 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 14 Mar 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+          "trecho": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Jornal Grande Bahia",
+          "publisher_url": "https://jornalgrandebahia.com.br",
+          "meta": {
+            "publicado_em": "Mon, 05 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Mon, 05 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+          "trecho": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "CREMEB",
+          "publisher_url": "https://www.cremeb.org.br",
+          "meta": {
+            "publicado_em": "Tue, 10 Feb 2026 08:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 10 Feb 2026 08:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+          "trecho": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Bahia Notícias",
+          "publisher_url": "https://www.bahianoticias.com.br",
+          "meta": {
+            "publicado_em": "Wed, 12 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH",
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Wed, 12 Aug 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+      "items": [
+        {
+          "titulo": "Prefeitura de Camaçari",
+          "url": "https://www.camacari.ba.gov.br/",
+          "trecho": "Nexteer inaugura planta em Camaçari e integra cadeia produtiva do complexo BYD Saúde",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 14:37:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://camacari.ba.gov.br/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.camacari.ba.gov.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sex., 23 out. 2026 14:37:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Camaçari – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+          "trecho": "Camaçari é um município brasileiro do estado da Bahia. É conhecido como \"Cidade Industrial\", por abrigar o Polo Industrial de Camaçari. [12] É o quarto município mais populoso do estado e o segundo mais populoso da Região Metropolitana de Salvador.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:07:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 06:07:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Prefeitura de Camaçari",
+          "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+          "trecho": "Finalmente, em 30 de março 1938, através de um decreto, o município passou a ser chamado de Camaçari, que ficou sendo formado pela sede e os distritos de Vila de Abrantes, Monte Gordo e Dias D’Ávila, este último emancipado em 1985.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:38:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://camacari.ba.gov.br/municipio-de-camacari",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 21:38:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Camaçari Noticias",
+          "url": "https://www.cn1.com.br/",
+          "trecho": "Desde 2006, informando Camaçari. O CN1 acompanha o cotidiano da cidade, conecta pessoas e dá visibilidade às histórias e demandas das comunidades, com notícias, entrevistas e prestação de serviços.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:44:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cn1.com.br/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.cn1.com.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 00:44:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "SEFAZ – Camaçari",
+          "url": "https://sefaz.camacari.ba.gov.br/",
+          "trecho": "O atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo de Camaçari. Na região litorânea, os serviços são oferecidos em Vila de Abrantes, no Shopping Linha Verde em Arembepe, e no Shopping Guarajuba.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 08:38:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://sefaz.camacari.ba.gov.br/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "SOURCE_MISMATCH",
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://sefaz.camacari.ba.gov.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 08:38:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+          "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+          "trecho": "Este roteiro de viagem para Camaçari apresenta desde a altitude média de 36 metros, o bioma Mata Atlântica costeira, padrões de umidade em Camaçari, até a análise da previsão do tempo em Camaçari ao longo do ano, permitindo planejamento preciso da sua experiência de turismo em Camaçari.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 01:59:00 GMT"
+          },
+          "discovery_query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "discovery_provider": "bing",
+          "url_canonica": "https://roteirosbr.com.br/roteiros/camacari-ba",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "qui., 22 out. 2026 01:59:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari\" site:www.ba.gov.br",
+      "items": [
+        {
+          "titulo": "Parceria - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/parceria/",
+          "trecho": "Significado de Parceria substantivo feminino Sociedade; acordo, união ou contrato firmado entre indivíduos ou empresas que têm um mesmo propósito: governo confirma parceria entre prefeituras e ONGs.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 25 ago. 2026 03:58:00 GMT"
+          }
+        },
+        {
+          "titulo": "Parceria - O que é, características, conceito e definição",
+          "url": "https://conceito.de/parceria",
+          "trecho": "Parceria é quando duas ou mais pessoas compartilham alguma coisa ou responsabilidade. O termo tem origem no latim “ partialis ”, que significa “pedaço de” ou mesmo “divisível”.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT"
+          }
+        },
+        {
+          "titulo": "Parceria – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Parceria",
+          "trecho": "Uma parceria é um arranjo em que duas ou mais partes estabelecem um acordo de cooperação para atingir interesses comuns. Parcerias podem ser estabelecidas entre sujeitos públicos ou privados, individuais ou coletivos, para a realização de intervenções finalizadas sobretudo ao desenvolvimento econômi",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 08 out. 2026 03:20:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+      "result": {
+        "titulo": "município do Estado da Bahia, Brasil",
+        "texto": "Para outros significados, veja . Nota: Camaçari (desambiguação) Camaçari Município do Brasil Bandeira Brasão de armas Hino Lema Pax et labor \"Paz e trabalho\" Gentílico camaçariense Localização de Camaçari na Bahia Localização de Camaçari na Bahia Camaçari Localização de Camaçari no Brasil Mapa de Camaçari Coordenadas: 12° 41′ 52″ S, 38° 19′ 26″ O País Brasil Unidade federativa Bahia Região metropolitana Região Metropolitana de Salvador Municípios limítrofes , , , Lauro de Freitas Simões Filho Dias d'Ávila Mata de São João Distância até a capital 41 km 1 [ ] Fundação de (268anos) 28 de setembro 1758 Governo • Prefeito(a) (Caetano)( [PT],2025–2028) Luiz Carlos Caetano 2 [ ] 3 [ ] Partido dos Trabalhadores • Vereadores 23 4 [ ] Área • Total IBGE/2022 5 [ ] 785,421km² •Urbana (/) 2022 IBGE 6 [ ] 100,43 km² Altitude 36 m População •Total () Censo de 2022 7 [ ] 300 372 hab. •Posição BA: 4° · NE: 19° · BR: 92º 8 [ ] •Estimativa (2026) 7 [ ] 323 676 hab. Densidade 382,4hab./km² Clima () tropical Af Fuso horário Hora de Brasília () UTC−3 IDH (/) PNUD 2010 9 [ ] 0,694 — médio Gini (/) PNUD 2010 10 [ ] 0,53 PIB (/) IBGE 2021 11 [ ] 33 971 705,19mil R$ •Posição , , BR: 38º BA: 2° NE: 8° •Per capita (/) IBGE 2021 11 [ ] 109 866,84 R$ Sítio () () www.camacari.ba.gov.br Prefeitura www.cmcamacari.ba.gov.br Câmara é um do da . É conhecido como \"Cidade Industrial\", por abrigar o . É o quarto município mais populoso do estado e o segundo mais populoso da . Camaçari município brasileiro estado Bahia Polo Industrial de Camaçari 12 [ ] Região Metropolitana de Salvador Possui o segundo maior municipal do estado (depois de , sendo também o 8º maior da e o 38º maior do ), estimado em 25,6 de (dados do ), em 2020. Faz parte dos 71 municípios brasileiros integrados no . produto interno bruto Salvador Região Nordeste país bilhões reais IBGE 13 [ ] Mercosul Foi sede da (inaugurada em de , fechando as portas em 12 de maio de 2021 (20 anos após a inauguração), sendo a primeira fábrica de automóveis a se instalar na do Brasil) e do , o maior do estado, abrigando diversas indústrias e , mas, com o passar dos anos, começou a abrigar outros ramos da indústria, como: , de , , do , , fertilizantes, , e . É o primeiro complexo petroquímico planejado do e o maior complexo integrado do , com mais de 90 empresas instaladas. Ford Motor Company Brasil 12 de outubro 2001 Região Nordeste 14 [ ] Polo Petroquímico polo industrial químicas petroquímicas automotivo celulose borracha metalurgia cobre têxtil energia eólica bebidas serviços país industrial Hemisfério Sul 15 [ ] Etimologia [ editar | editar código ] Ver também: Topônimos de origem tupi no Brasil \"Camaçari\" deriva do , que designava a árvore atualmente conhecida como \"\". tupi antigo kamasary cachaporra-do-gentio 16 [ ] História [ editar | editar código ] Ocupação [ editar | editar código ] Ver artigo principal: Vila Nova do Espírito Santo de Abrantes Em meados do século X, a região do foi invadida por povos procedentes da . Eles expulsaram os habitantes anteriores da região, falantes de línguas , para o interior do continente. Quando os primeiros exploradores europeus chegaram à região, no , a mesma era habitada pela tribo tupi dos . Recôncavo Baiano tupis Amazônia macro-jês século XVI tupinambás 17 [ ] Formação de Camaçari [ editar | editar código ] A formação de Camaçari começa às margens do rio Joanes, em 1558, quando os jesuítas João Gonçalves e Antônio Rodrigues fundaram a Aldeia do Divino Espírito Santo, destinada à catequização dos índios tupinambás que habitavam a região. Essa área fazia parte do Recôncavo Baiano, que no século X foi ocupada por povos tupis vindos da Amazônia, expulsando os habitantes originais falantes das línguas macro-jês para o interior do continente. Em 1624, sob a liderança do bispo D. Marcos Teixeira, a Aldeia do Divino Espírito Santo desempenhou um papel importante na resistência contra a invasão holandesa na Bahia. Tropas organizadas junto com os índios tupinambás ajudaram a expulsar os holandeses em 1625. 18 [ ] 19 [ ] Fundação e Desenvolvimento Histórico de Camaçari [ editar | editar código ] No dia 28 de setembro de 1758, ocorreu a emancipação do povoado, decretada pelo Marquês de Pombal, que também expulsou os jesuítas da região e mudou o nome da aldeia para Vila de Nova Abrantes do Espírito Santo, posteriormente abreviado para Vila de Abrantes. Os registros desse período indicam um pequeno povoado com 544 casas e cerca de 1.200 habitantes. A vila chegou a ter a sede transferida para o arraial do Parafuso, mas voltou para Abrantes por falta de liderança jesuítica. No século XIX, as terras do município pertenciam ao desembargador Tomaz Garcez Paranhos Montenegro, que, com sua influência política, trouxe a estrada de ferro para a região em 1860, impulsionando o crescimento local. Em 1920, o governador Francisco Marques de Góes Calmon transferiu a sede do município de Abrantes para Camaçari, criando o distrito de mesmo nome. Em 1925, o nome foi alterado para Monte Negro em homenagem ao desembargador Montenegro. Finalmente, em 30 de março de 1938, o município passou a se chamar Camaçari, englobando a sede e os distritos de Vila de Abrantes, Monte Gordo e Dias D’Ávila — este último emancipado em 1985. O nome Camaçari é de origem tupi-guarani, inicialmente grafado como Camassary, e significa \"árvore que chora\", uma referência ao orvalho que cobre as copas das árvores com pequenas gotas de água. 18 [ ] 19 [ ] Geografia [ editar | editar código ] Camaçari e os outros municípios da região metropolitana Mapa de localização dos distritos de Camaçari à direita, em destaque Monte Gordo em azul Localiza-se a 12 graus, 41 minutos e 51 segundos de e a 38 graus, 19 minutos e 27 segundos de latitude , estando a uma de 36 metros. Com área territorial de 785,421 quilômetros quadrados, distância cerca de 41 quilômetros da capital , sendo parte da (RMS) limitando-se ao norte com , ao sul com , ao sudoeste com , a oeste com e leste com o . latitude sul oeste altitude 20 [ ] 21 [ ] Salvador Região Metropolitana de Salvador Mata de São João Lauro de Freitas Simões Filho Dias d'Ávila Oceano Atlântico A costa de Camaçari é formada por um conjunto de no : , , , , , e . praias Oceano Atlântico Busca-Vida Abrantes Jauá Arembepe Guarajuba Barra do Jacuípe Itacimirim 22 [ ] As encontradas no município são , , , e . Existem três (APA): , e Lagoas de Guarajuba. Além das : Cinturão Verde de Proteção do Complexo Petroquímico de Camaçari, Parque das Dunas de Abrantes e Parque Garcia D'Ávila. vegetações dunas manguezais restingas mata ciliar atlântica áreas de proteção ambiental Joanes/Ipitanga Rio Capivara 20 [ ] unidades de conservação 1 [ ] Clima [ editar | editar código ] O de Camaçari é , com uma temperatura média compensada de 25°C. Segundo dados do (INMET), referentes ao período entre 1978 e 2006, a menor registrada em Camaçari foi de em 20 de agosto de 1996, e a maior atingiu em 22 de janeiro de 1995. O maior acumulado de em 24 horas atingiu milímetros (mm) em 1 de dezembro de 1988. Outros grandes acumulados superiores a 150 mm foram em 12 de janeiro de 1988 e em 10 de junho de 1997. clima tropical úmido 20 [ ] Instituto Nacional de Meteorologia temperatura 14,4 °C 23 [ ] 37,1 °C 24 [ ] precipitação 186,9 172,4 mm 152,3 mm 25 [ ] Dados climatológicos para Camaçari Mês Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez Ano Temperatura máxima recorde (°C) 37,1 36,6 36,5 35,1 33,8 32,3 31 31,6 32,9 34,5 34,8 35,6 37,1 Temperatura máxima média () °C 31,7 31,6 31,4 30,2 29 27,5 27,1 27,1 28,3 29,7 30,5 31,4 29,6 Temperatura média compensada (°C) 26,4 26,5 26,4 25,6 24,5 23,3 22,6 22,6 23,6 24,8 25,6 26,2 24,8 Temperatura mínima média (°C) 22,1 22,2 22,4 21,9 21,2 20 19,1 18,9 19,6 20,6 21,6 22,1 21 Temperatura mínima recorde (°C) 16,4 17,3 18,7 17,7 16,2 16 14,6 14,4 15,2 15,5 16,7 19 14,4 () Precipitação mm 87 101,7 143,7 226,9 244,4 232,8 184,9 139,7 103 85,8 111,8 74,9 1 736,6 Dias com precipitação (≥ 1 mm) 9 9 12 16 17 19 19 18 11",
+        "final": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+        "trecho_usado": "Marcos Teixeira, a Aldeia do Divino Espírito Santo desempenhou um papel importante na resistência contra a invasão holandesa na Bahia. Tropas organizadas junto com os índios tupinambás ajudaram a expulsar os holandeses em 1625. 18 [ ] 19 [ ] Fundação e Desenvolvimento Histórico de Camaçari [ editar | editar código ] No dia 28 de setembro de 1758, ocorreu a emancipação do povoado, decretada pelo",
+        "metadados": {
+          "titulo": "município do Estado da Bahia, Brasil",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+          "og": {
+            "og:image": "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "og:image:width": "1200",
+            "og:image:height": "900",
+            "og:title": "Camaçari – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2004-09-14T17:50:54Z",
+          "atualizado_em": "2026-10-09T02:39:43Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2004-09-14T17:50:54Z",
+            "dateModified": "2026-10-09T02:39:43Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "município do Estado da Bahia, Brasil"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Pax et labor \"Paz e trabalho\"\nLocalização de Camaçari na Bahia Camaçari Localização de Camaçari no Brasil\nLocalização de Camaçari na Bahia\nCoordenadas: 12° 41′ 52″ S, 38° 19′ 26″ O\nRegião Metropolitana de Salvador\n, , , Lauro de Freitas Simões Filho Dias d'Ávila Mata de São João\nde (268anos) 28 de setembro 1758\n(Caetano)( [PT],2025–2028) Luiz Carlos Caetano 2 [ ] 3 [ ] Partido dos Trabalhadores\n•Urbana (/) 2022 IBGE 6 [ ]\n•Total () Censo de 2022 7 [ ]\nBA: 4° · NE: 19° · BR: 92º 8 [ ]\nHora de Brasília () UTC−3\nGini (/) PNUD 2010 10 [ ]\n, , BR: 38º BA: 2° NE: 8°\n•Per capita (/) IBGE 2021 11 [ ]\n() () www.camacari.ba.gov.br Prefeitura www.cmcamacari.ba.gov.br Câmara\né um do da . É conhecido como \"Cidade Industrial\", por abrigar o . É o quarto município mais populoso do estado e o segundo mais populoso da . Camaçari município brasileiro estado Bahia Polo Industrial de Camaçari 12 [ ] Região Metropolitana de Salvador\nPossui o segundo maior municipal do estado (depois de , sendo também o 8º maior da e o 38º maior do ), estimado em 25,6 de (dados do ), em 2020. Faz parte dos 71 municípios brasileiros integrados no . produto interno bruto Salvador Região Nordeste país bilhões reais IBGE 13 [ ] Mercosul\nFoi sede da (inaugurada em de , fechando as portas em 12 de maio de 2021 (20 anos após a inauguração), sendo a primeira fábrica de automóveis a se instalar na do Brasil) e do , o maior do estado, abrigando diversas indústrias e , mas, com o passar dos anos, começou a abrigar outros ramos da indústria, como: , de , , do , , fertilizantes, , e . É o primeiro complexo petroquímico planejado do e o maior complexo integrado do , com mais de 90 empresas instaladas. Ford Motor Company Brasil 12 de outubro 2001 Região Nordeste 14 [ ] Polo Petroquímico polo industrial químicas petroquímicas automotivo celulose borracha metalurgia cobre têxtil energia eólica bebidas serviços país industrial Hemisfério Sul 15 [ ]\n\"Camaçari\" deriva do , que designava a árvore atualmente conhecida como \"\". tupi antigo kamasary cachaporra-do-gentio 16 [ ]\nEm meados do século X, a região do foi invadida por povos procedentes da . Eles expulsaram os habitantes anteriores da região, falantes de línguas , para o interior do continente. Quando os primeiros exploradores europeus chegaram à região, no , a mesma era habitada pela tribo tupi dos . Recôncavo Baiano tupis Amazônia macro-jês século XVI tupinambás 17 [ ]\nA formação de Camaçari começa às margens do rio Joanes, em 1558, quando os jesuítas João Gonçalves e Antônio Rodrigues fundaram a Aldeia do Divino Espírito Santo, destinada à catequização dos índios tupinambás que habitavam a região. Essa área fazia parte do Recôncavo Baiano, que no século X foi ocupada por povos tupis vindos da Amazônia, expulsando os habitantes originais falantes das línguas macro-jês para o interior do continente.\nEm 1624, sob a liderança do bispo D. Marcos Teixeira, a Aldeia do Divino Espírito Santo desempenhou um papel importante na resistência contra a invasão holandesa na Bahia. Tropas organizadas junto com os índios tupinambás ajudaram a expulsar os holandeses em 1625. 18 [ ] 19 [ ]"
+          },
+          {
+            "titulo": "Fundação e Desenvolvimento Histórico de Camaçari",
+            "texto": "No dia 28 de setembro de 1758, ocorreu a emancipação do povoado, decretada pelo Marquês de Pombal, que também expulsou os jesuítas da região e mudou o nome da aldeia para Vila de Nova Abrantes do Espírito Santo, posteriormente abreviado para Vila de Abrantes. Os registros desse período indicam um pequeno povoado com 544 casas e cerca de 1.200 habitantes. A vila chegou a ter a sede transferida para o arraial do Parafuso, mas voltou para Abrantes por falta de liderança jesuítica.\nNo século XIX, as terras do município pertenciam ao desembargador Tomaz Garcez Paranhos Montenegro, que, com sua influência política, trouxe a estrada de ferro para a região em 1860, impulsionando o crescimento local.\nEm 1920, o governador Francisco Marques de Góes Calmon transferiu a sede do município de Abrantes para Camaçari, criando o distrito de mesmo nome. Em 1925, o nome foi alterado para Monte Negro em homenagem ao desembargador Montenegro. Finalmente, em 30 de março de 1938, o município passou a se chamar Camaçari, englobando a sede e os distritos de Vila de Abrantes, Monte Gordo e Dias D’Ávila — este último emancipado em 1985.\nO nome Camaçari é de origem tupi-guarani, inicialmente grafado como Camassary, e significa \"árvore que chora\", uma referência ao orvalho que cobre as copas das árvores com pequenas gotas de água. 18 [ ] 19 [ ]\nCamaçari e os outros municípios da região metropolitana\nMapa de localização dos distritos de Camaçari à direita, em destaque Monte Gordo em azul\nLocaliza-se a 12 graus, 41 minutos e 51 segundos de e a 38 graus, 19 minutos e 27 segundos de latitude , estando a uma de 36 metros. Com área territorial de 785,421 quilômetros quadrados, distância cerca de 41 quilômetros da capital , sendo parte da (RMS) limitando-se ao norte com , ao sul com , ao sudoeste com , a oeste com e leste com o . latitude sul oeste altitude 20 [ ] 21 [ ] Salvador Região Metropolitana de Salvador Mata de São João Lauro de Freitas Simões Filho Dias d'Ávila Oceano Atlântico\nA costa de Camaçari é formada por um conjunto de no : , , , , , e . praias Oceano Atlântico Busca-Vida Abrantes Jauá Arembepe Guarajuba Barra do Jacuípe Itacimirim 22 [ ]\nAs encontradas no município são , , , e . Existem três (APA): , e Lagoas de Guarajuba. Além das : Cinturão Verde de Proteção do Complexo Petroquímico de Camaçari, Parque das Dunas de Abrantes e Parque Garcia D'Ávila. vegetações dunas manguezais restingas mata ciliar atlântica áreas de proteção ambiental Joanes/Ipitanga Rio Capivara 20 [ ] unidades de conservação 1 [ ]\nO de Camaçari é , com uma temperatura média compensada de 25°C. Segundo dados do (INMET), referentes ao período entre 1978 e 2006, a menor registrada em Camaçari foi de em 20 de agosto de 1996, e a maior atingiu em 22 de janeiro de 1995. O maior acumulado de em 24 horas atingiu milímetros (mm) em 1 de dezembro de 1988. Outros grandes acumulados superiores a 150 mm foram em 12 de janeiro de 1988 e em 10 de junho de 1997. clima tropical úmido 20 [ ] Instituto Nacional de Meteorologia temperatura 14,4 °C 23 [ ] 37,1 °C 24 [ ] precipitação 186,9 172,4 mm 152,3 mm 25 [ ]\nDados climatológicos para Camaçari\nTemperatura máxima recorde (°C)\nTemperatura máxima média () °C\nTemperatura média compensada (°C)\nTemperatura mínima média (°C)\nTemperatura mínima recorde (°C)\nDias com precipitação (≥ 1 mm)\ncompensada (%) Umidade relativa\n: (INMET) (normal climatológica de 1981-2010; recordes de temperatura: 01/01/1978 a 31/01/2006) Fonte Instituto Nacional de Meteorologia 26 [ ] 23 [ ] 24 [ ]\nCom população estimada para de habitantes, segundo o , a é a quarta mais populosa do estado (depois de , e ). Essa população cresce de forma significativa ao longo das últimas décadas, com um aumento de aproximadamente 164% desde 1991, um crescimento médio anual de cerca de 6.224 moradores que demandam infraestrutura e serviços, como saúde, educação e saneamento. 2025 321 636 27 [ ] IBGE cidade Salvador Feira de Santana Vitória da Conquista 28 [ ] 29 [ ]\nO município é dividido e"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Camaçari"
+            ],
+            [
+              "Município do Brasil"
+            ],
+            [
+              ".mw-parser-output .tmulti .multiimageinner{display:flex;flex-direction:column}.mw-parser-output .tmulti .trow{display:flex;flex-direction:row;clear:left;flex-wr"
+            ],
+            [
+              "Bandeira Brasão de armas"
+            ],
+            [
+              "Hino"
+            ],
+            [
+              "Lema",
+              "Pax et labor \"Paz e trabalho\""
+            ],
+            [
+              "Gentílico",
+              "camaçariense"
+            ],
+            [
+              "Localização de Camaçari na Bahia Localização de Camaçari na Bahia Camaçari Localização de Camaçari no Brasil"
+            ],
+            [
+              "Mapa de Camaçari"
+            ],
+            [
+              "Coordenadas: 12° 41′ 52″ S, 38° 19′ 26″ O {{#parsoid\\u0000fragment:28}} \"}}'/>"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Unidade federativa",
+              "Bahia"
+            ],
+            [
+              "Região metropolitana",
+              "Região Metropolitana de Salvador"
+            ],
+            [
+              "Municípios limítrofes",
+              "Lauro de Freitas , Simões Filho , Dias d'Ávila , Mata de São João"
+            ],
+            [
+              "Distância até a capital",
+              "41 km [ 1 ]"
+            ],
+            [
+              "Fundação",
+              "28 de setembro de 1758 (268 anos)"
+            ],
+            [
+              "Governo"
+            ],
+            [
+              "• Prefeito(a)",
+              "Luiz Carlos Caetano (Caetano) [ 2 ] [ 3 ] ( Partido dos Trabalhadores [PT], 2025–2028)"
+            ],
+            [
+              "• Vereadores",
+              "23 [ 4 ]"
+            ],
+            [
+              "Área"
+            ],
+            [
+              "• Total .mw-parser-output .nobold{font-weight:normal} IBGE/2022 [ 5 ]",
+              "785,421 km²"
+            ],
+            [
+              "• Urbana ( 2022 / IBGE ) [ 6 ]",
+              "100,43 km²"
+            ],
+            [
+              "Altitude",
+              "36 m"
+            ],
+            [
+              "População"
+            ],
+            [
+              "• Total ( Censo de 2022 ) [ 7 ]",
+              "300 372 hab."
+            ],
+            [
+              "• Posição",
+              "BA: 4° · NE: 19° · BR: 92º [ 8 ]"
+            ],
+            [
+              "• Estimativa (2026 [ 7 ] )",
+              "323 676 hab."
+            ],
+            [
+              "Densidade",
+              "382,4 hab./km²"
+            ],
+            [
+              "Clima",
+              "tropical ( Af )"
+            ],
+            [
+              "Fuso horário",
+              "Hora de Brasília ( UTC−3 )"
+            ],
+            [
+              "IDH ( PNUD / 2010 [ 9 ] )",
+              "0,694 — médio"
+            ],
+            [
+              "Gini ( PNUD / 2010 [ 10 ] )",
+              "0,53"
+            ],
+            [
+              "PIB ( IBGE / 2021 [ 11 ] )",
+              "R$ 33 971 705,19 mil"
+            ],
+            [
+              "• Posição",
+              "BR: 38º , BA: 2° , NE: 8°"
+            ],
+            [
+              "• Per capita ( IBGE / 2021 [ 11 ] )",
+              "R$ 109 866,84"
+            ],
+            [
+              "Sítio",
+              "www.camacari.ba.gov.br ( Prefeitura ) www.cmcamacari.ba.gov.br ( Câmara )"
+            ]
+          ],
+          [
+            [
+              "Dados climatológicos para Camaçari"
+            ],
+            [
+              "Mês",
+              "Jan",
+              "Fev",
+              "Mar",
+              "Abr",
+              "Mai",
+              "Jun",
+              "Jul",
+              "Ago",
+              "Set",
+              "Out",
+              "Nov",
+              "Dez",
+              "Ano"
+            ],
+            [
+              "Temperatura máxima recorde (°C)",
+              "37,1",
+              "36,6",
+              "36,5",
+              "35,1",
+              "33,8",
+              "32,3",
+              "31",
+              "31,6",
+              "32,9",
+              "34,5",
+              "34,8",
+              "35,6",
+              "37,1"
+            ],
+            [
+              "Temperatura máxima média ( °C )",
+              "31,7",
+              "31,6",
+              "31,4",
+              "30,2",
+              "29",
+              "27,5",
+              "27,1",
+              "27,1",
+              "28,3",
+              "29,7",
+              "30,5",
+              "31,4",
+              "29,6"
+            ],
+            [
+              "Temperatura média compensada (°C)",
+              "26,4",
+              "26,5",
+              "26,4",
+              "25,6",
+              "24,5",
+              "23,3",
+              "22,6",
+              "22,6",
+              "23,6",
+              "24,8",
+              "25,6",
+              "26,2",
+              "24,8"
+            ],
+            [
+              "Temperatura mínima média (°C)",
+              "22,1",
+              "22,2",
+              "22,4",
+              "21,9",
+              "21,2",
+              "20",
+              "19,1",
+              "18,9",
+              "19,6",
+              "20,6",
+              "21,6",
+              "22,1",
+              "21"
+            ],
+            [
+              "Temperatura mínima recorde (°C)",
+              "16,4",
+              "17,3",
+              "18,7",
+              "17,7",
+              "16,2",
+              "16",
+              "14,6",
+              "14,4",
+              "15,2",
+              "15,5",
+              "16,7",
+              "19",
+              "14,4"
+            ],
+            [
+              "Precipitação ( mm )",
+              "87",
+              "101,7",
+              "143,7",
+              "226,9",
+              "244,4",
+              "232,8",
+              "184,9",
+              "139,7",
+              "103",
+              "85,8",
+              "111,8",
+              "74,9",
+              "1 736,6"
+            ],
+            [
+              "Dias com precipitação (≥ 1 mm)",
+              "9",
+              "9",
+              "12",
+              "16",
+              "17",
+              "19",
+              "19",
+              "18",
+              "11",
+              "7",
+              "9",
+              "6",
+              "152"
+            ],
+            [
+              "Umidade relativa compensada (%)",
+              "# 0000D8;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>76,7",
+              "# 0000D5;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>77,4",
+              "# 0000CC;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>79,8",
+              "# 0000C0;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>82,9",
+              "# 0000B7;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>85,3",
+              "# 0000B3;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>86,3",
+              "# 0000B9;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>84,9",
+              "# 0000BE;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>83,6",
+              "# 0000C5;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>81,7",
+              "# 0000D1;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>78,5",
+              "# 0000D0;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>78,7",
+              "# 0000D5;color: # FFFFFF; font-size:85%;text-align:center;\"}]]}'>77,5",
+              "# 0000C7;color: # FFFFFF; font-size:85%;text-align:center; border-left-width:medium\"}]]}'>81,1"
+            ],
+            [
+              "Insolação (h)",
+              "# f7e135;color: # 000000;font-size:85%;text-align:center;\"}]]}'>216,5",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>188,1",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>204,7",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>176,9",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>173,3",
+              "# c9bb6d;color: # 000000;font-size:85%;text-align:center;\"}]]}'>139,2",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>173,2",
+              "# dccb61;color: # 000000;font-size:85%;text-align:center;\"}]]}'>174,2",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>184,4",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>209,2",
+              "# e5d357;color: # 000000;font-size:85%;text-align:center;\"}]]}'>185,6",
+              "# eeda4a;color: # 000000;font-size:85%;text-align:center;\"}]]}'>197,8",
+              "# ffe700;color: # 000000;font-size:85%;text-align:center; border-left-width:medium\"}]]}'>2 223,1"
+            ],
+            [
+              "Fonte : Instituto Nacional de Meteorologia (INMET) (normal climatológica de 1981-2010; [ 26 ] recordes de temperatura: 01/01/1978 a 31/01/2006) [ 23 ] [ 24 ]"
+            ]
+          ],
+          [
+            [
+              "Crescimento populacional"
+            ],
+            [
+              "Censo",
+              "População \"}]]}'>Pop.",
+              "",
+              "% Crescimento \"}]]}'>%±"
+            ],
+            [
+              "1991",
+              "113,639",
+              "",
+              "—"
+            ],
+            [
+              "2000",
+              "161,727",
+              "",
+              "42,3%"
+            ],
+            [
+              "2010",
+              "242,970",
+              "",
+              "50,2%"
+            ],
+            [
+              "2022",
+              "300,372",
+              "",
+              "23,6%"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Total de Municípios: 417 - Capital: Salvador"
+            ],
+            [
+              "Abaíra Abaré Acajutiba Adustina Água Fria Aiquara Alagoinhas Alcobaça Almadina Amargosa Amélia Rodrigues América Dourada Anagé Andaraí Andorinha Angical Anguera"
+            ]
+          ],
+          [
+            [
+              "v d e Região Metropolitana de Salvador"
+            ],
+            [
+              "Camaçari • Candeias • Dias d'Ávila • Itaparica • Lauro de Freitas • Madre de Deus • Mata de São João • Pojuca • Salvador • São Francisco do Conde • São Sebastiã",
+              ""
+            ],
+            [
+              "Bahia , Brasil"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Disambig_grey.svg/20px-Disambig_grey.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Camacari.jpg/330px-Camacari.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Costa_Coqueiros_-_Arembepe_-_praia.jpg/250px-Costa_Coqueiros_-_Arembepe_-_praia.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/F%C3%A1brica_de_aerogeradores_em_Cama%C3%A7ari%2C_Bahia.jpg/250px-F%C3%A1brica_de_aerogeradores_em_Cama%C3%A7ari%2C_Bahia.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Hospital_Geral_de_Cama%C3%A7ari1.jpg/250px-Hospital_Geral_de_Cama%C3%A7ari1.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-fc080b5904cb",
+            "type": "image",
+            "title": "município do Estado da Bahia, Brasil",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Camacari.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-514ce3ced492",
+            "type": "image",
+            "title": "Bandeira de Camaçari",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bandeira_de_Cama%C3%A7ari.svg/120px-Bandeira_de_Cama%C3%A7ari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Bandeira_de_Cama%C3%A7ari.svg/120px-Bandeira_de_Cama%C3%A7ari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira de Camaçari",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-54f9093ec26f",
+            "type": "image",
+            "title": "Brasão de armas de Camaçari",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Bras%C3%A3o_Cama%C3%A7ari-BA.svg/120px-Bras%C3%A3o_Cama%C3%A7ari-BA.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Bras%C3%A3o_Cama%C3%A7ari-BA.svg/120px-Bras%C3%A3o_Cama%C3%A7ari-BA.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasão de armas de Camaçari",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7337c2450138",
+            "type": "image",
+            "title": "Localização de Camaçari na Bahia",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Bahia_Municip_Camacari.svg/330px-Bahia_Municip_Camacari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Bahia_Municip_Camacari.svg/330px-Bahia_Municip_Camacari.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Localização de Camaçari na Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-707443562f4f",
+            "type": "image",
+            "title": "Camaçari está localizado em: Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Brazil_location_map.svg/330px-Brazil_location_map.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari está localizado em: Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-49032ad2cbc3",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,12,-12.697777777778,-38.323888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Cama%C3%A7ari&revid=73160272&groups=_01e465be14e23498c9c21e304d6b9391a95734db&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,12,-12.697777777778,-38.323888888889,300x150.png?lang=pt&domain=pt.wikipedia.org&title=Cama%C3%A7ari&revid=73160272&groups=_01e465be14e23498c9c21e304d6b9391a95734db&parser=parsoid",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-94b6e0c548ea",
+            "type": "image",
+            "title": "Boulevard Shopping Camaçari",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Boulevard_Shopping_Cama%C3%A7ari.jpg/250px-Boulevard_Shopping_Cama%C3%A7ari.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Boulevard_Shopping_Cama%C3%A7ari.jpg/250px-Boulevard_Shopping_Cama%C3%A7ari.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Boulevard Shopping Camaçari",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2fcc9f187dc6",
+            "type": "image",
+            "title": "Bahia",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Bandeira_da_Bahia.svg/40px-Bandeira_da_Bahia.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Bandeira_da_Bahia.svg/40px-Bandeira_da_Bahia.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "município do Estado da Bahia, Brasil",
+            "source_url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+      "result": {
+        "titulo": "Prefeitura de Camaçari",
+        "texto": "A história da nossa cidade Tudo começou em 1558, às margens do Rio Joanes, quando os jesuítas João Gonçalves e Antônio Rodrigues formaram a Aldeia do Divino Espírito Santo. Logo depois surge a Companhia de Jesus, um espaço para catequizar os índios Tupinambás que viviam aqui. Em 1624, a primeira grande vitória. Sob a liderança do Bispo D. Marcos Teixeira, várias autoridades foram acolhidas na vila e, junto com os índios, organizaram tropas de resistência que ajudaram a expulsar os holandeses da Bahia. Em 28 de setembro de 1758 vem a emancipação com a expulsão dos jesuítas e o decreto assinado por Marquês de Pombal, mudando o nome do povoado para Vila de Nova Abrantes do Espírito Santo. Pouco depois, passou a se chamar Vila de Abrantes. Slideshow | 9 fotos Município de Camaçari O município era bem pequeno e contava apenas com 544 casas e 1200 habitantes. As terras pertenciam ao desembargador Tomaz Garcez Paranhos Montenegro que, graças à sua influência política, conseguiu trazer, em 1860, a estrada de ferro para suas terras, impulsionando o crescimento da região. Em 1920, após o governador Francisco Marques de Góes Calmon mudar a sede do município de Abrantes para Camaçari, o distrito de Camaçari é criado. Cinco anos depois, passa a se chamar Monte Negro, em homenagem ao desembargador. Finalmente, em 30 de março 1938, através de um decreto, o município passou a ser chamado de Camaçari, que ficou sendo formado pela sede e os distritos de Vila de Abrantes, Monte Gordo e Dias D’Ávila, este último emancipado em 1985. O nome, que inicialmente se escrevia Camassary, tem origem tupi-guarani. O significado é árvore que chora, devido ao orvalho que cobria a copa das árvores com gotículas de água.",
+        "final": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+        "trecho_usado": "vila e, junto com os índios, organizaram tropas de resistência que ajudaram a expulsar os holandeses da Bahia. Em 28 de setembro de 1758 vem a emancipação com a expulsão dos jesuítas e o decreto assinado por Marquês de Pombal, mudando o nome do povoado para Vila de Nova Abrantes do Espírito Santo. Pouco depois, passou a se chamar Vila de Abrantes. Slideshow | 9 fotos Município de Camaçari O",
+        "metadados": {
+          "titulo": "Prefeitura de Camaçari",
+          "descricao": "",
+          "canonica": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "A história da nossa cidade",
+            "texto": "Tudo começou em 1558, às margens do Rio Joanes, quando os jesuítas João Gonçalves e Antônio Rodrigues formaram a Aldeia do Divino Espírito Santo. Logo depois surge a Companhia de Jesus, um espaço para catequizar os índios Tupinambás que viviam aqui.\nEm 1624, a primeira grande vitória. Sob a liderança do Bispo D. Marcos Teixeira, várias autoridades foram acolhidas na vila e, junto com os índios, organizaram tropas de resistência que ajudaram a expulsar os holandeses da Bahia.\nEm 28 de setembro de 1758 vem a emancipação com a expulsão dos jesuítas e o decreto assinado por Marquês de Pombal, mudando o nome do povoado para Vila de Nova Abrantes do Espírito Santo. Pouco depois, passou a se chamar Vila de Abrantes.\nO município era bem pequeno e contava apenas com 544 casas e 1200 habitantes.\nAs terras pertenciam ao desembargador Tomaz Garcez Paranhos Montenegro que, graças à sua influência política, conseguiu trazer, em 1860, a estrada de ferro para suas terras, impulsionando o crescimento da região.\nEm 1920, após o governador Francisco Marques de Góes Calmon mudar a sede do município de Abrantes para Camaçari, o distrito de Camaçari é criado. Cinco anos depois, passa a se chamar Monte Negro, em homenagem ao desembargador.\nFinalmente, em 30 de março 1938, através de um decreto, o município passou a ser chamado de Camaçari, que ficou sendo formado pela sede e os distritos de Vila de Abrantes, Monte Gordo e Dias D’Ávila, este último emancipado em 1985.\nO nome, que inicialmente se escrevia Camassary, tem origem tupi-guarani. O significado é árvore que chora, devido ao orvalho que cobria a copa das árvores com gotículas de água."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.camacari.ba.gov.br/wp-content/themes/camacari/assets/images/logo-mini-2025.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2020/08/brasao2.png",
+          "https://www.camacari.ba.gov.br/wp-content/themes/camacari/assets/images/ico-busca-w.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/07/icon-editais-1.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/07/icon-transferencia-1.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/10/icon-send.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/07/icon-diario-oficial.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/07/icon-editais-2.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/07/icon-nota-fiscal.png",
+          "https://www.camacari.ba.gov.br/wp-content/uploads/2018/10/cam_graduate-diploma.png"
+        ],
+        "midia": [
+          {
+            "id": "med-89449d0c3276",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.camacari.ba.gov.br/vagasseduc/index.html",
+            "final_url": "https://www.camacari.ba.gov.br/vagasseduc/index.html",
+            "source_title": "Prefeitura de Camaçari",
+            "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "publisher": "www.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-399274038c1a",
+            "type": "document",
+            "title": "PLANO_DE_MANEJO_2024.pdf",
+            "url": "https://www.camacari.ba.gov.br/wp-content/Sedur/PLANO_DE_MANEJO_2024.pdf",
+            "final_url": "https://www.camacari.ba.gov.br/wp-content/Sedur/PLANO_DE_MANEJO_2024.pdf",
+            "source_title": "Prefeitura de Camaçari",
+            "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "publisher": "www.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5ec4a393a1ad",
+            "type": "document",
+            "title": "REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+            "url": "https://www.camacari.ba.gov.br/wp-content/Sedur/REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+            "final_url": "https://www.camacari.ba.gov.br/wp-content/Sedur/REVISTA_CAMACARI_INTELIGENTE_2023.pdf",
+            "source_title": "Prefeitura de Camaçari",
+            "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "publisher": "www.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-88222f1396da",
+            "type": "document",
+            "title": "controle-patrimonial-cartilha.pdf",
+            "url": "https://www.camacari.ba.gov.br/wp-content/uploads/2025/07/controle-patrimonial-cartilha.pdf",
+            "final_url": "https://www.camacari.ba.gov.br/wp-content/uploads/2025/07/controle-patrimonial-cartilha.pdf",
+            "source_title": "Prefeitura de Camaçari",
+            "source_url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "publisher": "www.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://sefaz.camacari.ba.gov.br/",
+      "result": {
+        "titulo": "SEFAZ – Camaçari",
+        "texto": "A tem como missão oferecer um atendimento de qualidade para pessoas físicas e jurídicas, contando com uma equipe especializada para esclarecer dúvidas e realizar serviços online no Portal da Sefaz. Entre os serviços disponíveis estão solicitações de inscrições municipais, recuperação de acesso, abertura de processos, além da emissão de segunda via de boletos, notas fiscais e certidões de tributos municipais. Cinf (Coordenadoria de Informações Fiscais) O atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo de Camaçari. Na região litorânea, os serviços são oferecidos em Vila de Abrantes, no Shopping Linha Verde em Arembepe, e no Shopping Guarajuba.",
+        "final": "https://sefaz.camacari.ba.gov.br/",
+        "trecho_usado": "municipais. Cinf (Coordenadoria de Informações Fiscais) O atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo de Camaçari. Na região litorânea, os serviços são oferecidos em Vila de Abrantes, no Shopping Linha Verde em Arembepe, e no Shopping Guarajuba.",
+        "metadados": {
+          "titulo": "SEFAZ – Camaçari",
+          "descricao": "",
+          "canonica": "https://sefaz.camacari.ba.gov.br/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A tem como missão oferecer um atendimento de qualidade para pessoas físicas e jurídicas, contando com uma equipe especializada para esclarecer dúvidas e realizar serviços online no Portal da Sefaz. Entre os serviços disponíveis estão solicitações de inscrições municipais, recuperação de acesso, abertura de processos, além da emissão de segunda via de boletos, notas fiscais e certidões de tributos municipais. Cinf (Coordenadoria de Informações Fiscais)\nO atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo de Camaçari. Na região litorânea, os serviços são oferecidos em Vila de Abrantes, no Shopping Linha Verde em Arembepe, e no Shopping Guarajuba."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69sfkjec0e50yq9bt6rahoix63jywancda676g.png",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69scro86n3nvdufrotc37yccy4w8wa163mzzeo.png",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/06/post-lancamento-tff26-1024x481.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/09/reuniao-iss-construcao-civil-post.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-tff-2026-prazo-declaracao.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/08/nfse-post-integracao.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-simples-nacional.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/imgi_33_camacari-centro-administrativo-vista-aerea-foto-rafael-kuster-scaled-1040x392-1.jpg",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/reuniao-sehab-imob-1.webp",
+          "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/callcenter_home.png"
+        ],
+        "midia": [
+          {
+            "id": "med-ed12b3b4d03a",
+            "type": "image",
+            "title": "logopmc2025_atual",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69sfkjec0e50yq9bt6rahoix63jywancda676g.png",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69sfkjec0e50yq9bt6rahoix63jywancda676g.png",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logopmc2025_atual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3310cbbc8c92",
+            "type": "image",
+            "title": "logopmc2025_atual",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69scro86n3nvdufrotc37yccy4w8wa163mzzeo.png",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/elementor/thumbs/logopmc2025_atual-rc4t69scro86n3nvdufrotc37yccy4w8wa163mzzeo.png",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logopmc2025_atual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-46e90eeaa67d",
+            "type": "image",
+            "title": "Nova automatização do ISS da construção civil em Camaçari",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/09/reuniao-iss-construcao-civil-post.webp",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/09/reuniao-iss-construcao-civil-post.webp",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Nova automatização do ISS da construção civil em Camaçari",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c56a02661d4e",
+            "type": "image",
+            "title": "Simples Nacional: Empresas notificadas sobre risco de exclusão",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-tff-2026-prazo-declaracao.webp",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-tff-2026-prazo-declaracao.webp",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Simples Nacional: Empresas notificadas sobre risco de exclusão",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-27382412b751",
+            "type": "image",
+            "title": "Emissão da NFS-e continua sendo realizada pelo Sistema Tributário",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/08/nfse-post-integracao.webp",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/08/nfse-post-integracao.webp",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Emissão da NFS-e continua sendo realizada pelo Sistema Tributário",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-410722a2c115",
+            "type": "image",
+            "title": "Simples Nacional: novo período de opção para o exercício 2027",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-simples-nacional.webp",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/05/post-simples-nacional.webp",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Simples Nacional: novo período de opção para o exercício 2027",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6b2dceab762f",
+            "type": "image",
+            "title": "Simples Nacional: procedimento de autorregularização",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/imgi_33_camacari-centro-administrativo-vista-aerea-foto-rafael-kuster-scaled-1040x392-1.jpg",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/imgi_33_camacari-centro-administrativo-vista-aerea-foto-rafael-kuster-scaled-1040x392-1.jpg",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Simples Nacional: procedimento de autorregularização",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-60610e096988",
+            "type": "image",
+            "title": "SEFAZ discute melhorias nos processos do ITIV com setor imobiliário",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/reuniao-sehab-imob-1.webp",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2026/07/reuniao-sehab-imob-1.webp",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "SEFAZ discute melhorias nos processos do ITIV com setor imobiliário",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-12828df676aa",
+            "type": "image",
+            "title": "callcenter_home",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/callcenter_home.png",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/callcenter_home.png",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "callcenter_home",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-30c0616df656",
+            "type": "image",
+            "title": "servicos_home",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/servicos_home.png",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/servicos_home.png",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "servicos_home",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-92725d4ce5ed",
+            "type": "image",
+            "title": "simples1_home",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/simples1_home.png",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/03/simples1_home.png",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "simples1_home",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-49531185cf42",
+            "type": "image",
+            "title": "cinf_sede",
+            "url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/04/cinf_sede.jpg",
+            "final_url": "https://sefaz.camacari.ba.gov.br/wp-content/uploads/2025/04/cinf_sede.jpg",
+            "source_title": "SEFAZ – Camaçari",
+            "source_url": "https://sefaz.camacari.ba.gov.br/",
+            "publisher": "sefaz.camacari.ba.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "cinf_sede",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.cn1.com.br/",
+      "result": {
+        "titulo": "Camaçari Noticias",
+        "texto": "Festa infantil da Tronox em Camaçari gera renda para mulheres da comunidade de Areias Camaçari mantém viva a chama da Independência com passagem do Fogo Simbólico Camaforró encerra em grande estilo com multidão, maratona de shows e celebração da cultura nordestina Terceiro dia do Camaforró 2026 atrai cerca de 120 mil pessoas ao Espaço Camaçari 2° dia do Camaforró 2026 leva multidão ao Espaço Camaçari com Alceu Valença, Matheus & Kauan e atrações locais Primeira noite do Camaforró atrai multidão e transforma Camaçari em cenário de celebração",
+        "final": "https://www.cn1.com.br/",
+        "trecho_usado": "Festa infantil da Tronox em Camaçari gera renda para mulheres da comunidade de Areias Camaçari mantém viva a chama da Independência com passagem do Fogo Simbólico Camaforró encerra em grande estilo com multidão, maratona de shows e celebração da cultura nordestina Terceiro dia do Camaforró 2026 atrai cerca de 120 mil pessoas ao Espaço Camaçari 2° dia do Camaforró 2026 leva multidão ao Espaço",
+        "metadados": {
+          "titulo": "Camaçari Noticias",
+          "descricao": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+          "canonica": "",
+          "og": {
+            "og:title": "Camaçari Noticias",
+            "og:description": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "og:type": "website",
+            "og:image": "https://www.cn1.com.br/assets/images/share-image.png",
+            "og:image:type": "image/png",
+            "og:image:width": "1200",
+            "og:image:height": "600",
+            "og:locale": "pt-BR"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Camaçari Notícias",
+          "site": "",
+          "tipo": "WebSite",
+          "ld": {
+            "author": {
+              "@type": "NewsMediaOrganization",
+              "name": "Camaçari Notícias"
+            },
+            "description": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Festa infantil da Tronox em Camaçari gera renda para mulheres da comunidade de Areias",
+            "texto": ""
+          },
+          {
+            "titulo": "Camaçari mantém viva a chama da Independência com passagem do Fogo Simbólico",
+            "texto": ""
+          },
+          {
+            "titulo": "Camaforró encerra em grande estilo com multidão, maratona de shows e celebração da cultura nordestina",
+            "texto": ""
+          },
+          {
+            "titulo": "Terceiro dia do Camaforró 2026 atrai cerca de 120 mil pessoas ao Espaço Camaçari",
+            "texto": ""
+          },
+          {
+            "titulo": "2° dia do Camaforró 2026 leva multidão ao Espaço Camaçari com Alceu Valença, Matheus & Kauan e atrações locais",
+            "texto": ""
+          },
+          {
+            "titulo": "Primeira noite do Camaforró atrai multidão e transforma Camaçari em cenário de celebração",
+            "texto": ""
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.cn1.com.br/assets/images/share-image.png",
+          "https://www.cn1.com.br/assets/images/cn1-logo-20-light.png",
+          "https://api.cn1.com.br/fotos/destaque/19464/IMAGEM_DESTAQUE_1.jpg?v=bb4d2941a4c48c3fa6bd13f3c14c4da2",
+          "https://api.cn1.com.br/fotos/destaque/19461/IMAGEM_DESTAQUE_1.jpg?v=3de7772717fbba5641d92e72fb4ac7fa",
+          "https://api.cn1.com.br/fotos/destaque/19459/IMAGEM_DESTAQUE_1.jpg?v=1a07ad0034139eb76d896768925076e9",
+          "https://api.cn1.com.br/fotos/destaque/19457/IMAGEM_DESTAQUE_1.jpg?v=c00db3408177cef46615f263205f0c6a",
+          "https://api.cn1.com.br/fotos/destaque/19455/IMAGEM_DESTAQUE_1.jpg?v=599f4761353ebbcc80432a9516cef412",
+          "https://api.cn1.com.br/fotos/destaque/19462/IMAGEM_DESTAQUE_1.jpg?v=6daaa1f8e065d39f64b344673b84494b",
+          "https://api.cn1.com.br/fotos/destaque/19460/IMAGEM_DESTAQUE_1.jpg?v=949c27932fefebe87829bb3c899d2a8a",
+          "https://api.cn1.com.br/fotos/destaque/19458/IMAGEM_DESTAQUE_1.jpg?v=8e2a334fb0f697ac2693af8ebd33740c"
+        ],
+        "midia": [
+          {
+            "id": "med-cd304b43b335",
+            "type": "image",
+            "title": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emp",
+            "url": "https://www.cn1.com.br/assets/images/share-image.png",
+            "final_url": "https://www.cn1.com.br/assets/images/share-image.png",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "www.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-736be99d08a3",
+            "type": "image",
+            "title": "Forças de segurança escoltam urnas eletrônicas para os 417 municípios da Bahia",
+            "url": "https://api.cn1.com.br/fotos/destaque/19464/IMAGEM_DESTAQUE_1.jpg?v=bb4d2941a4c48c3fa6bd13f3c14c4da2",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19464/IMAGEM_DESTAQUE_1.jpg?v=bb4d2941a4c48c3fa6bd13f3c14c4da2",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Forças de segurança escoltam urnas eletrônicas para os 417 municípios da Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0b5ccec8293a",
+            "type": "image",
+            "title": "Mega-Sena sorteia prêmio de R$ 230 milhões neste sábado (24)",
+            "url": "https://api.cn1.com.br/fotos/destaque/19461/IMAGEM_DESTAQUE_1.jpg?v=3de7772717fbba5641d92e72fb4ac7fa",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19461/IMAGEM_DESTAQUE_1.jpg?v=3de7772717fbba5641d92e72fb4ac7fa",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mega-Sena sorteia prêmio de R$ 230 milhões neste sábado (24)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1ea58a7d1c2f",
+            "type": "image",
+            "title": "Bahia enfrenta o Santos na Vila Belmiro em confronto direto por vaga na Libertadores",
+            "url": "https://api.cn1.com.br/fotos/destaque/19459/IMAGEM_DESTAQUE_1.jpg?v=1a07ad0034139eb76d896768925076e9",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19459/IMAGEM_DESTAQUE_1.jpg?v=1a07ad0034139eb76d896768925076e9",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bahia enfrenta o Santos na Vila Belmiro em confronto direto por vaga na Libertadores",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c5bc98b5c233",
+            "type": "image",
+            "title": "Vitória recebe o Athletico-PR no Barradão em busca de recuperação no Brasileirão",
+            "url": "https://api.cn1.com.br/fotos/destaque/19457/IMAGEM_DESTAQUE_1.jpg?v=c00db3408177cef46615f263205f0c6a",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19457/IMAGEM_DESTAQUE_1.jpg?v=c00db3408177cef46615f263205f0c6a",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vitória recebe o Athletico-PR no Barradão em busca de recuperação no Brasileirão",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ac916c09c5f",
+            "type": "image",
+            "title": "Flávio Bolsonaro e Lula trocam ataques e apresentam propostas no último debate antes do segundo turno",
+            "url": "https://api.cn1.com.br/fotos/destaque/19455/IMAGEM_DESTAQUE_1.jpg?v=599f4761353ebbcc80432a9516cef412",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19455/IMAGEM_DESTAQUE_1.jpg?v=599f4761353ebbcc80432a9516cef412",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flávio Bolsonaro e Lula trocam ataques e apresentam propostas no último debate antes do segundo turno",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ce4b1ab546bd",
+            "type": "image",
+            "title": "Segurança Pública ativa centro de comando para monitorar o segundo turno das eleições na Bahia",
+            "url": "https://api.cn1.com.br/fotos/destaque/19462/IMAGEM_DESTAQUE_1.jpg?v=6daaa1f8e065d39f64b344673b84494b",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19462/IMAGEM_DESTAQUE_1.jpg?v=6daaa1f8e065d39f64b344673b84494b",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Segurança Pública ativa centro de comando para monitorar o segundo turno das eleições na Bahia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bd0502ec8d1d",
+            "type": "image",
+            "title": "Eleitores podem usar e-Título para votar no segundo turno",
+            "url": "https://api.cn1.com.br/fotos/destaque/19460/IMAGEM_DESTAQUE_1.jpg?v=949c27932fefebe87829bb3c899d2a8a",
+            "final_url": "https://api.cn1.com.br/fotos/destaque/19460/IMAGEM_DESTAQUE_1.jpg?v=949c27932fefebe87829bb3c899d2a8a",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Eleitores podem usar e-Título para votar no segundo turno",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2fdb4cf83e23",
+            "type": "document",
+            "title": "ARQUIVO_JORNAL.pdf",
+            "url": "https://api.cn1.com.br/arquivos/jornal/138/ARQUIVO_JORNAL.pdf?v=170592a2e8b2a310af5a8acd9f85e1b9",
+            "final_url": "https://api.cn1.com.br/arquivos/jornal/138/ARQUIVO_JORNAL.pdf?v=170592a2e8b2a310af5a8acd9f85e1b9",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "api.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-43bfd61816ca",
+            "type": "document",
+            "title": "308,outubro-rosa:-ginecologista-destaca-importancia-do-diagnostico-precoce-do-cancer-de-mama.html",
+            "url": "https://www.cn1.com.br/entrevistas/308,outubro-rosa:-ginecologista-destaca-importancia-do-diagnostico-precoce-do-cancer-de-mama.html",
+            "final_url": "https://www.cn1.com.br/entrevistas/308,outubro-rosa:-ginecologista-destaca-importancia-do-diagnostico-precoce-do-cancer-de-mama.html",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "www.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-c61f32d30bd2",
+            "type": "document",
+            "title": "307,fim-da-taxa-das-blusinhas-deve-ampliar-poder-de-compra-mas-preocupa-comercio-nacional-explica-economista.html",
+            "url": "https://www.cn1.com.br/entrevistas/307,fim-da-taxa-das-blusinhas-deve-ampliar-poder-de-compra-mas-preocupa-comercio-nacional-explica-economista.html",
+            "final_url": "https://www.cn1.com.br/entrevistas/307,fim-da-taxa-das-blusinhas-deve-ampliar-poder-de-compra-mas-preocupa-comercio-nacional-explica-economista.html",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "www.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-14544b29d13d",
+            "type": "document",
+            "title": "306,julho-amarelo-reforca-importancia-da-prevencao-e-do-diagnostico-precoce-das-hepatites-virais.html",
+            "url": "https://www.cn1.com.br/entrevistas/306,julho-amarelo-reforca-importancia-da-prevencao-e-do-diagnostico-precoce-das-hepatites-virais.html",
+            "final_url": "https://www.cn1.com.br/entrevistas/306,julho-amarelo-reforca-importancia-da-prevencao-e-do-diagnostico-precoce-das-hepatites-virais.html",
+            "source_title": "Camaçari Noticias",
+            "source_url": "https://www.cn1.com.br/",
+            "publisher": "www.cn1.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Camaçari Noticias - Notícias da Bahia e dos baianos | www.cn1.com.br No Camaçari Noticias você se atualiza com as principais notícias da política, economia, emprego, educação, saúde e muito mais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+      "result": {
+        "titulo": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+        "texto": "O Segredo que Moradores de Camaçari-BA Guardam: Roteiro de Viagem ao Refúgio das Tartarugas Raras Entre recifes claros e aldeia hippie, marés guiam encontros inesquecíveis Entre o litoral norte da {{BAHIA}} e a Região Metropolitana de Salvador, {{CAMAÇARI}} revela um território onde natureza preservada, história e diversidade cultural convivem em poucos quilômetros de distância. Quem planeja uma viagem para {{CAMAÇARI}} costuma chegar atraído pelas praias e descobre um município com lagoas, vilas históricas, comunidades tradicionais e um dos polos industriais mais importantes do Brasil. Neste guia completo de turismo em {{CAMAÇARI}}, nós reunimos informações essenciais para quem deseja descobrir {{CAMAÇARI}}, explorar {{CAMAÇARI}} com profundidade e entender por que o destino se tornou um dos pontos estratégicos do roteiro {{BAHIA}}.Antes de mergulharmos em tudo que {{CAMAÇARI}} tem de melhor, uma dica importante: use o menu superior da Roteiros BR para acessar planejamento completo de viagem, passagens com tarifas exclusivas e roteiros detalhados. Somos a única plataforma brasileira que mapeou todas as CAMAÇARIs do país com atualizações constantes. FICHA TÉCNICA DE {{CAMAÇARI}} Informação Dado Oficial Município {{CAMAÇARI}} Estado {{BAHIA}} Região Nordeste Área territorial 784,66 km² População aproximadamente 304 mil habitantes Gentílico camaçariense Distância da capital cerca de 41 km de Salvador Clima tropical úmido Bioma predominante Mata Atlântica LOCALIZAÇÃO E COMO CHEGAR EM {{CAMAÇARI}} {{CAMAÇARI}} está localizada na Região Metropolitana de Salvador, no litoral norte da {{BAHIA}}. O acesso é simples tanto para quem chega de avião quanto para quem percorre o estado por rodovias.O principal aeroporto da região é o Aeroporto Internacional de Salvador, situado a aproximadamente 27 km do centro de {{CAMAÇARI}}. A partir dele, o deslocamento pode ser feito por carro alugado, transporte por aplicativo ou ônibus intermunicipais.A rodovia BA-099, conhecida como Estrada do Coco e Linha Verde, conecta a região às principais praias do litoral norte e facilita o deslocamento para quem deseja explorar {{CAMAÇARI}} durante um roteiro {{BAHIA}} mais amplo. HISTÓRIA DE {{CAMAÇARI}} {{BAHIA}} A história de {{CAMAÇARI}} começa ainda no período colonial, quando a região era ocupada por aldeamentos indígenas e posteriormente por missões jesuíticas. Ao longo dos séculos, a economia local esteve ligada à agricultura e à criação de gado.Durante o século XX, o município passou por uma transformação significativa com a implantação do Polo Industrial de Camaçari, um dos maiores complexos petroquímicos da América Latina. Esse desenvolvimento consolidou {{CAMAÇARI}} como um dos centros econômicos mais importantes da {{BAHIA}}.Mesmo com o crescimento industrial, o município preserva áreas naturais relevantes e mantém forte ligação cultural com tradições baianas. NATUREZA E PAISAGENS DE {{CAMAÇARI}} A natureza em {{CAMAÇARI}} é marcada pela presença de praias extensas, lagoas costeiras, manguezais e áreas de restinga típicas do litoral nordestino. Essa diversidade de ambientes favorece o desenvolvimento do ecoturismo em {{CAMAÇARI}} e atrai visitantes interessados em paisagens preservadas.Entre os cenários naturais mais conhecidos estão as praias de Guarajuba, Itacimirim e Arembepe, além de lagoas que se formam entre dunas e áreas de vegetação nativa. Esses ambientes compõem algumas das atrações naturais de {{CAMAÇARI}} mais procuradas por turistas. CULTURA E TRADIÇÕES DE {{CAMAÇARI}} A cultura de {{CAMAÇARI}} reflete a diversidade histórica da {{BAHIA}}, combinando influências indígenas, africanas e portuguesas. Essa mistura se manifesta em festas populares, culinária, música e no modo de vida das comunidades locais.Eventos religiosos e culturais fazem parte do calendário do município e reforçam a identidade local. A tradicional Lavagem de Arembepe, por exemplo, reúne moradores e visitantes em uma celebração que mistura fé, música e manifestações culturais típicas da região. O QUE FAZER EM {{CAMAÇARI}} Entre os pontos turísticos de {{CAMAÇARI}}, destacam-se praias, vilas costeiras e áreas naturais ideais para quem busca descanso ou atividades ao ar livre. As praias de Guarajuba e Itacimirim são conhecidas pelas águas claras e infraestrutura turística. Já Arembepe ficou famosa por sua antiga aldeia hippie e por atrair visitantes interessados em história cultural.Quem deseja explorar {{CAMAÇARI}} também pode incluir no roteiro caminhadas em áreas de restinga, passeios de bicicleta ao longo da costa e visitas a lagoas naturais. Essas experiências fazem parte dos melhores passeios em {{CAMAÇARI}} para quem busca contato com a natureza. ROTEIRO DE VIAGEM PARA {{CAMAÇARI}} Um roteiro de viagem para {{CAMAÇARI}} pode ser planejado em poucos dias ou combinado com outros destinos da {{BAHIA}}.Em um roteiro de 2 dias em {{CAMAÇARI}}, a sugestão é explorar praias próximas como Guarajuba e Itacimirim, além de conhecer a vila de Arembepe e experimentar a gastronomia local.Para quem dispõe de mais tempo, um roteiro de 5 dias em {{CAMAÇARI}} permite incluir passeios por diferentes praias, visitas a lagoas e experiências culturais nas comunidades da região. GASTRONOMIA DE {{CAMAÇARI}} A gastronomia de {{CAMAÇARI}} segue a tradição culinária baiana, marcada pelo uso de frutos do mar, azeite de dendê, leite de coco e temperos intensos. Entre os pratos mais populares estão a moqueca de peixe, o acarajé e diversas preparações com camarão.Restaurantes localizados nas praias e nas vilas costeiras costumam oferecer cardápios baseados em pescados frescos, refletindo a forte ligação entre a culinária local e a atividade pesqueira. ONDE FICAR EM {{CAMAÇARI}} Quem procura onde ficar em {{CAMAÇARI}} encontra desde pousadas simples até resorts de alto padrão próximos ao litoral. A região de Guarajuba concentra parte significativa da infraestrutura turística, com hotéis e condomínios voltados para visitantes que buscam conforto próximo à praia.Já Arembepe oferece hospedagens mais tranquilas e com atmosfera cultural, ideais para viajantes interessados em experiências autênticas.Quer encontrar hotéis e pousadas com valores imbatíveis? Acesse http://www.turismobr.com.br MELHOR ÉPOCA PARA VISITAR {{CAMAÇARI}} A melhor época para visitar {{CAMAÇARI}} costuma ser durante os meses de verão e início do outono, quando o clima permanece quente e as chuvas são menos frequentes. Nesse período, as praias apresentam condições ideais para banho e atividades ao ar livre.Mesmo nos meses de inverno, as temperaturas continuam elevadas na região, característica típica do clima tropical do litoral da {{BAHIA}}. ECONOMIA E TURISMO EM {{CAMAÇARI}} Além de ser reconhecida como polo industrial, {{CAMAÇARI}} vem fortalecendo sua presença no setor turístico. O litoral do município integra rotas importantes do turismo na {{BAHIA}}, especialmente para viajantes que percorrem a Linha Verde.O crescimento do turismo gera oportunidades para restaurantes, pousadas, guias locais e produtores culturais, contribuindo para a diversificação econômica da cidade. CONCLUSÃO Explorar {{CAMAÇARI}} significa descobrir um município que vai muito além da fama industrial. Entre praias preservadas, lagoas naturais, tradições culturais e gastronomia marcante, o destino oferece experiências variadas para quem deseja conhecer melhor o litoral norte da {{BAHIA}}.Não deixe sua próxima aventura ao acaso. Assine a Newsletter da Roteiros BR e receba roteiros exclusivos, dicas de moradores e promoções de viagem toda semana. Explore também nossos guias completos para planejar sua experiência em {{CAMAÇARI}} do início ao fim.Ressaltamos que estes roteiros estão entre os mais completos do Brasil e que você encontra esse nível de detalhamento na Roteiros BR. Com uma nova visão para que o turista tenha o máximo de informações, utilize o menu superior para acessar conteúdos detalhados que tornarão sua viagem inesquecível. Conheça Hotéis & Pousadas com Valores Ba",
+        "final": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+        "trecho_usado": "experiências fazem parte dos melhores passeios em {{CAMAÇARI}} para quem busca contato com a natureza. ROTEIRO DE VIAGEM PARA {{CAMAÇARI}} Um roteiro de viagem para {{CAMAÇARI}} pode ser planejado em poucos dias ou combinado com outros destinos da {{BAHIA}}.Em um roteiro de 2 dias em {{CAMAÇARI}}, a sugestão é explorar praias próximas como Guarajuba e Itacimirim, além de conhecer a vila de",
+        "metadados": {
+          "titulo": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+          "descricao": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+          "canonica": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "CAMAÇARI - BA",
+            "og:description": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+            "og:url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+            "og:site_name": "Roteiros| BR",
+            "og:image": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+            "og:image:width": "800",
+            "og:image:height": "450",
+            "og:image:type": "image/jpeg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:label1": "Est. tempo de leitura",
+            "twitter:data1": "14 minutos",
+            "twitter:image": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2026-03-15T23:18:48+00:00",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Roteiros| BR",
+          "tipo": "WebPage",
+          "ld": {
+            "datePublished": "2026-03-15T23:18:48+00:00",
+            "description": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "O Segredo que Moradores de Camaçari-BA Guardam: Roteiro de Viagem ao Refúgio das Tartarugas Raras",
+            "texto": ""
+          },
+          {
+            "titulo": "Entre recifes claros e aldeia hippie, marés guiam encontros inesquecíveis",
+            "texto": "Entre o litoral norte da {{BAHIA}} e a Região Metropolitana de Salvador, {{CAMAÇARI}} revela um território onde natureza preservada, história e diversidade cultural convivem em poucos quilômetros de distância. Quem planeja uma viagem para {{CAMAÇARI}} costuma chegar atraído pelas praias e descobre um município com lagoas, vilas históricas, comunidades tradicionais e um dos polos industriais mais importantes do Brasil. Neste guia completo de turismo em {{CAMAÇARI}}, nós reunimos informações essenciais para quem deseja descobrir {{CAMAÇARI}}, explorar {{CAMAÇARI}} com profundidade e entender por que o destino se tornou um dos pontos estratégicos do roteiro {{BAHIA}}.Antes de mergulharmos em tudo que {{CAMAÇARI}} tem de melhor, uma dica importante: use o menu superior da Roteiros BR para acessar planejamento completo de viagem, passagens com tarifas exclusivas e roteiros detalhados. Somos a única plataforma brasileira que mapeou todas as CAMAÇARIs do país com atualizações constantes."
+          },
+          {
+            "titulo": "FICHA TÉCNICA DE {{CAMAÇARI}}",
+            "texto": "aproximadamente 304 mil habitantes\ncerca de 41 km de Salvador"
+          },
+          {
+            "titulo": "LOCALIZAÇÃO E COMO CHEGAR EM {{CAMAÇARI}}",
+            "texto": "{{CAMAÇARI}} está localizada na Região Metropolitana de Salvador, no litoral norte da {{BAHIA}}. O acesso é simples tanto para quem chega de avião quanto para quem percorre o estado por rodovias.O principal aeroporto da região é o Aeroporto Internacional de Salvador, situado a aproximadamente 27 km do centro de {{CAMAÇARI}}. A partir dele, o deslocamento pode ser feito por carro alugado, transporte por aplicativo ou ônibus intermunicipais.A rodovia BA-099, conhecida como Estrada do Coco e Linha Verde, conecta a região às principais praias do litoral norte e facilita o deslocamento para quem deseja explorar {{CAMAÇARI}} durante um roteiro {{BAHIA}} mais amplo."
+          },
+          {
+            "titulo": "HISTÓRIA DE {{CAMAÇARI}} {{BAHIA}}",
+            "texto": "A história de {{CAMAÇARI}} começa ainda no período colonial, quando a região era ocupada por aldeamentos indígenas e posteriormente por missões jesuíticas. Ao longo dos séculos, a economia local esteve ligada à agricultura e à criação de gado.Durante o século XX, o município passou por uma transformação significativa com a implantação do Polo Industrial de Camaçari, um dos maiores complexos petroquímicos da América Latina. Esse desenvolvimento consolidou {{CAMAÇARI}} como um dos centros econômicos mais importantes da {{BAHIA}}.Mesmo com o crescimento industrial, o município preserva áreas naturais relevantes e mantém forte ligação cultural com tradições baianas."
+          },
+          {
+            "titulo": "NATUREZA E PAISAGENS DE {{CAMAÇARI}}",
+            "texto": "A natureza em {{CAMAÇARI}} é marcada pela presença de praias extensas, lagoas costeiras, manguezais e áreas de restinga típicas do litoral nordestino. Essa diversidade de ambientes favorece o desenvolvimento do ecoturismo em {{CAMAÇARI}} e atrai visitantes interessados em paisagens preservadas.Entre os cenários naturais mais conhecidos estão as praias de Guarajuba, Itacimirim e Arembepe, além de lagoas que se formam entre dunas e áreas de vegetação nativa. Esses ambientes compõem algumas das atrações naturais de {{CAMAÇARI}} mais procuradas por turistas."
+          },
+          {
+            "titulo": "CULTURA E TRADIÇÕES DE {{CAMAÇARI}}",
+            "texto": "A cultura de {{CAMAÇARI}} reflete a diversidade histórica da {{BAHIA}}, combinando influências indígenas, africanas e portuguesas. Essa mistura se manifesta em festas populares, culinária, música e no modo de vida das comunidades locais.Eventos religiosos e culturais fazem parte do calendário do município e reforçam a identidade local. A tradicional Lavagem de Arembepe, por exemplo, reúne moradores e visitantes em uma celebração que mistura fé, música e manifestações culturais típicas da região."
+          },
+          {
+            "titulo": "O QUE FAZER EM {{CAMAÇARI}}",
+            "texto": "Entre os pontos turísticos de {{CAMAÇARI}}, destacam-se praias, vilas costeiras e áreas naturais ideais para quem busca descanso ou atividades ao ar livre. As praias de Guarajuba e Itacimirim são conhecidas pelas águas claras e infraestrutura turística. Já Arembepe ficou famosa por sua antiga aldeia hippie e por atrair visitantes interessados em história cultural.Quem deseja explorar {{CAMAÇARI}} também pode incluir no roteiro caminhadas em áreas de restinga, passeios de bicicleta ao longo da costa e visitas a lagoas naturais. Essas experiências fazem parte dos melhores passeios em {{CAMAÇARI}} para quem busca contato com a natureza."
+          },
+          {
+            "titulo": "ROTEIRO DE VIAGEM PARA {{CAMAÇARI}}",
+            "texto": "Um roteiro de viagem para {{CAMAÇARI}} pode ser planejado em poucos dias ou combinado com outros destinos da {{BAHIA}}.Em um roteiro de 2 dias em {{CAMAÇARI}}, a sugestão é explorar praias próximas como Guarajuba e Itacimirim, além de conhecer a vila de Arembepe e experimentar a gastronomia local.Para quem dispõe de mais tempo, um roteiro de 5 dias em {{CAMAÇARI}} permite incluir passeios por diferentes praias, visitas a lagoas e experiências culturais nas comunidades da região."
+          },
+          {
+            "titulo": "GASTRONOMIA DE {{CAMAÇARI}}",
+            "texto": "A gastronomia de {{CAMAÇARI}} segue a tradição culinária baiana, marcada pelo uso de frutos do mar, azeite de dendê, leite de coco e temperos intensos. Entre os pratos mais populares estão a moqueca de peixe, o acarajé e diversas preparações com camarão.Restaurantes localizados nas praias e nas vilas costeiras costumam oferecer cardápios baseados em pescados frescos, refletindo a forte ligação entre a culinária local e a atividade pesqueira."
+          },
+          {
+            "titulo": "ONDE FICAR EM {{CAMAÇARI}}",
+            "texto": "Quem procura onde ficar em {{CAMAÇARI}} encontra desde pousadas simples até resorts de alto padrão próximos ao litoral. A região de Guarajuba concentra parte significativa da infraestrutura turística, com hotéis e condomínios voltados para visitantes que buscam conforto próximo à praia.Já Arembepe oferece hospedagens mais tranquilas e com atmosfera cultural, ideais para viajantes interessados em experiências autênticas.Quer encontrar hotéis e pousadas com valores imbatíveis? Acesse http://www.turismobr.com.br"
+          },
+          {
+            "titulo": "MELHOR ÉPOCA PARA VISITAR {{CAMAÇARI}}",
+            "texto": "A melhor época para visitar {{CAMAÇARI}} costuma ser durante os meses de verão e início do outono, quando o clima permanece quente e as chuvas são menos frequentes. Nesse período, as praias apresentam condições ideais para banho e atividades ao ar livre.Mesmo nos meses de inverno, as temperaturas continuam elevadas na região, característica típica do clima tropical do litoral da {{BAHIA}}."
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Informação",
+              "Dado Oficial"
+            ],
+            [
+              "Município",
+              "{{CAMAÇARI}}"
+            ],
+            [
+              "Estado",
+              "{{BAHIA}}"
+            ],
+            [
+              "Região",
+              "Nordeste"
+            ],
+            [
+              "Área territorial",
+              "784,66 km²"
+            ],
+            [
+              "População",
+              "aproximadamente 304 mil habitantes"
+            ],
+            [
+              "Gentílico",
+              "camaçariense"
+            ],
+            [
+              "Distância da capital",
+              "cerca de 41 km de Salvador"
+            ],
+            [
+              "Clima",
+              "tropical úmido"
+            ],
+            [
+              "Bioma predominante",
+              "Mata Atlântica"
+            ]
+          ],
+          [
+            [
+              "Parâmetro",
+              "Valor Oficial",
+              "Fonte/Ano",
+              "Observação Técnica"
+            ],
+            [
+              "Latitude",
+              "-12.6975°",
+              "IBGE",
+              "Hemisfério Sul"
+            ],
+            [
+              "Longitude",
+              "-38.3269°",
+              "IBGE",
+              "Oeste de Greenwich"
+            ],
+            [
+              "Altitude média",
+              "36 m",
+              "INMET/Topografia",
+              "Baixa altitude costeira"
+            ],
+            [
+              "Bioma predominante",
+              "Mata Atlântica",
+              "IBGE",
+              "Restingas e manguezais"
+            ],
+            [
+              "Clima Köppen",
+              "Am – Tropical Monçônico",
+              "INMET",
+              "Chuvas concentradas"
+            ],
+            [
+              "Temperatura média anual",
+              "26°C",
+              "INMET 1991-2020",
+              "Pequena amplitude térmica"
+            ],
+            [
+              "Precipitação média anual",
+              "1.700 mm",
+              "INMET 1991-2020",
+              "Pico no outono/inverno"
+            ],
+            [
+              "Umidade relativa média",
+              "80%",
+              "INMET",
+              "Sensação térmica elevada"
+            ],
+            [
+              "Índice UV médio anual",
+              "10",
+              "INMET/OMS",
+              "Proteção solar necessária"
+            ],
+            [
+              "Pressão atmosférica média",
+              "1013 hPa",
+              "INMET",
+              "Influência oceânica"
+            ],
+            [
+              "Dias de sol por ano",
+              "240",
+              "INMET",
+              "Alta insolação"
+            ],
+            [
+              "Dias de chuva por ano",
+              "150",
+              "INMET",
+              "Distribuição irregular"
+            ],
+            [
+              "Velocidade média do vento",
+              "3,2 m/s",
+              "INMET",
+              "Brisa marítima dominante"
+            ]
+          ],
+          [
+            [
+              "Mês",
+              "Temp Máx Média",
+              "Temp Mín Média",
+              "Temp Média",
+              "Precipitação",
+              "Dias Chuva",
+              "Umidade Média",
+              "Índice UV",
+              "Classificação"
+            ],
+            [
+              "Jan",
+              "31°C",
+              "24°C",
+              "27°C",
+              "80 mm",
+              "7",
+              "77%",
+              "Muito alto",
+              "Ótimo"
+            ],
+            [
+              "Fev",
+              "31°C",
+              "24°C",
+              "27°C",
+              "90 mm",
+              "7",
+              "76%",
+              "Muito alto",
+              "Ótimo"
+            ],
+            [
+              "Mar",
+              "30°C",
+              "24°C",
+              "27°C",
+              "150 mm",
+              "10",
+              "80%",
+              "Muito alto",
+              "Bom"
+            ],
+            [
+              "Abr",
+              "29°C",
+              "24°C",
+              "26°C",
+              "220 mm",
+              "15",
+              "84%",
+              "Alto",
+              "Regular"
+            ],
+            [
+              "Mai",
+              "28°C",
+              "23°C",
+              "26°C",
+              "270 mm",
+              "18",
+              "86%",
+              "Alto",
+              "Regular"
+            ],
+            [
+              "Jun",
+              "27°C",
+              "22°C",
+              "25°C",
+              "260 mm",
+              "19",
+              "87%",
+              "Médio",
+              "Regular"
+            ],
+            [
+              "Jul",
+              "27°C",
+              "22°C",
+              "24°C",
+              "210 mm",
+              "18",
+              "88%",
+              "Médio",
+              "Regular"
+            ],
+            [
+              "Ago",
+              "27°C",
+              "22°C",
+              "24°C",
+              "120 mm",
+              "14",
+              "86%",
+              "Médio",
+              "Bom"
+            ],
+            [
+              "Set",
+              "28°C",
+              "23°C",
+              "25°C",
+              "110 mm",
+              "11",
+              "83%",
+              "Alto",
+              "Bom"
+            ],
+            [
+              "Out",
+              "29°C",
+              "23°C",
+              "26°C",
+              "120 mm",
+              "10",
+              "80%",
+              "Muito alto",
+              "Ótimo"
+            ],
+            [
+              "Nov",
+              "30°C",
+              "24°C",
+              "27°C",
+              "120 mm",
+              "9",
+              "78%",
+              "Muito alto",
+              "Ótimo"
+            ],
+            [
+              "Dez",
+              "31°C",
+              "24°C",
+              "27°C",
+              "100 mm",
+              "8",
+              "77%",
+              "Muito alto",
+              "Ótimo"
+            ]
+          ],
+          [
+            [
+              "Parâmetro",
+              "Valor",
+              "Impacto na Viagem",
+              "Recomendação Técnica"
+            ],
+            [
+              "Temperatura máxima média",
+              "31°C",
+              "Exaustão térmica",
+              "Hidratação constante"
+            ],
+            [
+              "Temperatura mínima média",
+              "24°C",
+              "Noites quentes",
+              "Hospedagem climatizada"
+            ],
+            [
+              "Precipitação total",
+              "320 mm",
+              "Pancadas rápidas",
+              "Programar atividades pela manhã"
+            ],
+            [
+              "Umidade máxima",
+              "80%",
+              "Sensação térmica alta",
+              "Roupas leves"
+            ],
+            [
+              "Índice UV máximo",
+              "11",
+              "Queimaduras rápidas",
+              "Protetor solar FPS 50"
+            ],
+            [
+              "Nebulosidade",
+              "Moderada",
+              "Luz difusa",
+              "Ideal para fotografia costeira"
+            ],
+            [
+              "Fenômenos específicos",
+              "Chuvas convectivas",
+              "Mudança rápida do tempo",
+              "Monitorar previsão"
+            ]
+          ],
+          [
+            [
+              "Parâmetro",
+              "Valor",
+              "Impacto na Viagem",
+              "Recomendação Técnica"
+            ],
+            [
+              "Temperatura média",
+              "26°C",
+              "Clima confortável",
+              "Boa época para turismo"
+            ],
+            [
+              "Precipitação",
+              "700 mm",
+              "Período mais chuvoso",
+              "Flexibilidade no roteiro"
+            ],
+            [
+              "Umidade",
+              "85%",
+              "Sensação abafada",
+              "Roupas respiráveis"
+            ],
+            [
+              "Índice UV",
+              "Alto",
+              "Exposição solar",
+              "Chapéu e óculos"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+          "https://roteirosbr.com.br/roteiros/camacari-ba/\\/\\/secure.gravatar.com\\/avatar\\/2a539d6520266b56c3b0c525b9e6128858baeccb5ee9b694a2906e123c8d6dd3?s=64&#038;d=mm&#038;r=g",
+          "https://roteirosbr.com.br/roteiros/camacari-ba/media.media_url",
+          "https://roteirosbr.com.br/roteiros/camacari-ba/img"
+        ],
+        "midia": [
+          {
+            "id": "med-b5cc1db297fe",
+            "type": "image",
+            "title": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+            "url": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+            "final_url": "https://roteirosbr.com.br/wp-content/uploads/2026/03/9-9.jpg",
+            "source_title": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+            "source_url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+            "publisher": "roteirosbr.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Descubra o que fazer em CAMAÇARI BAHIA com dicas de praias, atrações naturais, roteiro de viagem e informações essenciais para planejar sua visita.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "fc5090a1040f08be793e",
+            "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+            "title": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari - ba.gov.br",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parceria entre Estado e Governo Federal amplia oferta de cirurgias em Camaçari ba.gov.br"
+          },
+          {
+            "id": "0a8815e9cf4ca17a5dbe",
+            "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+            "title": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório - Relata Bahia",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Camaçari sanciona lei de segurança pública e prevê criação de fundo, conselho e observatório Relata Bahia"
+          },
+          {
+            "id": "95814a1f52998edda65b",
+            "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQOGJ0VWM0US1Lbmowb2dxQTYzcGNLZFhldjRRbE5qYlRmdjNCd0gyR0RVTlA1MDlvTDVINFBKeEw0RjU0LVk3bTN0VnpmVEt6NFlIUl9oT2w1ZmxVZU5wZ3B2T2dxSjZlV2FBRk5MOVpaVDVaZkZNM2RxUDhwcGpoS05LcmxNa3M4VlVMZmFFbE5FVVFNOU1kRzBUN3VpdlBYYUhuZlNBV0N6VWJUODFTNGpfZXBwSzlhMWhQTURIcmVNY1JjNGVWMzlXYWE4bHREcGQwY0NUem5wdnBuVlE?oc=5",
+            "title": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Governo do Estado publica licitações para três Centros Especializados em Reabilitação do Novo PAC Bahia Notícias"
+          },
+          {
+            "id": "33554d19f9a5f4925d24",
+            "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPb0o3M0c2bl9DTWVJTEdUek45UlVnUDRGQjBnV1N0OERDaTVoWS1kSS0zdGZYYldGV21ETjlqQU9MUllVeUQ3RF90aVNocm5qaHhSaTdPUzRBVTJFWUxhSlNLcTh2Qkp6Vl9LLWN0WkJ5VVBpMXdzSmlzSlN4am85QURUTHBHbkRnYURkMDBpV2k4dWx1azJuRVdEWkZQd2VldndaTHRMQl85SEdKWDlHVDMyb1VEMVhHQnRTRjBVdWdDMkdQME41VWVDNGxqbzRVNy1FOHZsYm5jNDg?oc=5",
+            "title": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia - Jornal Grande Bahia",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Ministério da Saúde vistoria 37 vans, unidades móveis e obras para ampliar atendimento do SUS na Bahia Jornal Grande Bahia"
+          },
+          {
+            "id": "e222d1c98ffbc952f948",
+            "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5",
+            "title": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari - CREMEB",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Sem pagar outubro e novembro aos médicos, Sesab e FESF-SUS promovem desassistência na saúde de Camaçari CREMEB"
+          },
+          {
+            "id": "0224cc05404505d43aaf",
+            "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUllUdFlkZ1FNU3doNFN5LUFRcDJmc2I4YXhsYVRDbkdaRFA1cWU3bkV2dDlKcVBEWjJIaVhobmVRWVdaZnExQ2xReEp6MjJ5VWhfTkZnQ2toVWJNYUNQRU8waEdYNVlfaEFzLUxJZjNTbUtralN6R3JsandTTU5fQ2hkblA0OFFLRkhBLTNDVHRncHF5ZEpaZVN5c1Y1TGZNQ3M4ODVMa2NlN3M2N193SlVXdnBFQ0NpaTQydEFZSWFwUHRJeWxEa2xiSXYwazVaa1RSSHk3dlFMbDN5aE5QMy1YVER2VGZl?oc=5",
+            "title": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade - Bahia Notícias",
+            "origin": "google-news",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH",
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pacientes denunciam atrasos da SulAmérica e temem interrupção de tratamento no Hospital da Obesidade Bahia Notícias"
+          },
+          {
+            "id": "87dbd5b6a27c6fc49143",
+            "url": "https://www.camacari.ba.gov.br/",
+            "title": "Prefeitura de Camaçari",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Nexteer inaugura planta em Camaçari e integra cadeia produtiva do complexo BYD Saúde"
+          },
+          {
+            "id": "fe7582b0390e154f05e3",
+            "url": "https://pt.wikipedia.org/wiki/Cama%C3%A7ari",
+            "title": "Camaçari – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Camaçari é um município brasileiro do estado da Bahia. É conhecido como \"Cidade Industrial\", por abrigar o Polo Industrial de Camaçari. [12] É o quarto municípi"
+          },
+          {
+            "id": "3a8e0e479defae692c0f",
+            "url": "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+            "title": "Prefeitura de Camaçari",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Finalmente, em 30 de março 1938, através de um decreto, o município passou a ser chamado de Camaçari, que ficou sendo formado pela sede e os distritos de Vila d"
+          },
+          {
+            "id": "24fd47acbd8ec7194c22",
+            "url": "https://www.cn1.com.br/",
+            "title": "Camaçari Noticias",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Desde 2006, informando Camaçari. O CN1 acompanha o cotidiano da cidade, conecta pessoas e dá visibilidade às histórias e demandas das comunidades, com notícias,"
+          },
+          {
+            "id": "9da9c58195a7c5de5cac",
+            "url": "https://sefaz.camacari.ba.gov.br/",
+            "title": "SEFAZ – Camaçari",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "SOURCE_MISMATCH",
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O atendimento presencial acontece na sede, localizada no térreo do prédio azul, no Centro Administrativo de Camaçari. Na região litorânea, os serviços são ofere"
+          },
+          {
+            "id": "7117eda4ab02bcab67df",
+            "url": "https://roteirosbr.com.br/roteiros/camacari-ba/",
+            "title": "CAMAÇARI BAHIA: o que fazer,melhores atrações e guia completo",
+            "origin": "bing",
+            "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Este roteiro de viagem para Camaçari apresenta desde a altitude média de 36 metros, o bioma Mata Atlântica costeira, padrões de umidade em Camaçari, até a análi"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "bing: 6 resultados (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (\"Camaçari\" \"bahia\" notícias saúde public)",
+        "Recuperação no publicador limitada: http",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "\"Camaçari\" \"bahia\" notícias saúde publicadas",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "1f5ff18d0c61e68392967efc44114d9c27a45d08",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

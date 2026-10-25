@@ -1,0 +1,2312 @@
+{
+  "id": "aa-04",
+  "category": "negative_constraint",
+  "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.728,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+      "candidates": 1
+    },
+    {
+      "provider": "marginalia",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5606
+    },
+    {
+      "url": "https://www.bing.com/search?q=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5598
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Quais%20filmes%20dirigidos%20por%20Denis%20Villeneuve%20foram%20lan%C3%A7ados%20depois%20de%202015%2C%20sem%20document%C3%A1rios%3F",
+      "final": "https://html.duckduckgo.com/html/?q=Quais%20filmes%20dirigidos%20por%20Denis%20Villeneuve%20foram%20lan%C3%A7ados%20depois%20de%202015%2C%20sem%20document%C3%A1rios%3F",
+      "chars": 14413
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios%3F",
+      "final": "https://old-search.marginalia.nu/search?query=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios%3F",
+      "chars": 17363
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios",
+      "final": "https://old-search.marginalia.nu/search?query=Quais+filmes+dirigidos+por+Denis+Villeneuve+foram+lan%C3%A7ados+depois+de+2015%2C+sem+document%C3%A1rios",
+      "chars": 1183
+    },
+    {
+      "url": "https://www.bing.com/search?q=filmes+dirigidos+denis+villeneuve+lan%C3%A7ados+depois+2015+sem+document%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=filmes+dirigidos+denis+villeneuve+lan%C3%A7ados+depois+2015+sem+document%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4759
+    },
+    {
+      "url": "https://br.justwatch.com/br/filmes",
+      "final": "https://br.justwatch.com/br/filmes",
+      "chars": 965455
+    },
+    {
+      "url": "https://www.youtube.com/playlist?list=PL2gsu7VGzgdZktz1_3Ce43qgvm36lXWT7",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://pluto.tv/br/movies/",
+      "final": "https://pluto.tv/br/movies/",
+      "chars": 638622
+    },
+    {
+      "url": "https://watch.plex.tv/pt-BR",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.dicio.com.br/quais/",
+      "final": "https://www.dicio.com.br/quais/",
+      "chars": 216337
+    },
+    {
+      "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+      "final": "https://todasasrespostas.com/qual-o-significado-de-quais",
+      "chars": 18145
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+    "domain": "general",
+    "original_request": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+    "resolved_request": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T13:38:11.113141+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "0c7e29fa2299aa5e72e9",
+        "url": "https://br.justwatch.com/br/filmes",
+        "title": "Assistir Filmes Online - JustWatch",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "dom., 25 out. 2026 07:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "vai demorar para você encontrar o melhor filme para assistir, assim como todas as opções de onde assistir em streaming. Descubra todos os confirmados para chega",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4425,
+        "final_url": "https://br.justwatch.com/br/filmes",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "ae7da921e3db9a738fe2",
+        "url": "https://www.youtube.com/playlist?list=PL2gsu7VGzgdZktz1_3Ce43qgvm36lXWT7",
+        "title": "Filmes completo dublado em português - YouTube",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "sáb., 24 out. 2026 05:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bem-vindo à nossa playlist de filmes dublados em português! 🇵🇹🇧🇷🇦🇴🇲🇿🇲🇶🇨🇻🇬🇱🇲🇦 Aqui você encontrará uma ampla seleção de cinema clássico e cult ...",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "8cd07650a87e751556f0",
+        "url": "https://pluto.tv/br/movies/",
+        "title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "dom., 25 out. 2026 02:46:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Ação e Aventura A-Z All Ação e Aventura A-Z, listed alphabetically 20 Passos Abaixo 2035 Dimensões Proibidas 2067 3 A.M. Parte 2 3 Irmãs 3:00 AM 407 O Voo das T",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 444,
+        "final_url": "https://pluto.tv/br/movies/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "638640fb460a7182c0be",
+        "url": "https://watch.plex.tv/pt-BR",
+        "title": "Assistir Filmes e Séries Gratuitamente Online - Plex",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "dom., 25 out. 2026 05:02:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bem-vindo ao Plex! Explore nossos filmes e séries gratuitas e descubra as tendências em seus serviços de streaming favoritos.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "3fbe50589d0496bf18e1",
+        "url": "https://www.dicio.com.br/quais/",
+        "title": "Quais - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "qui., 22 out. 2026 05:48:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "juntamente com o artigo que o precede: pouca importância têm o livro e o autor aos quais você se refere. [Gramática] Usado com valor de comparação ou para estab",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2289,
+        "final_url": "https://www.dicio.com.br/quais/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "5fcd51d80694dd202e35",
+        "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+        "title": "Qual o significado de Quais? - todasasrespostas.com",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "sáb., 10 out. 2026 12:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "25 curiosidades que você vai gostar Quantas e quais são as classe gramaticais? Significado de E conjunção Conjunção que liga palavras e orações com mesma função",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 5522,
+        "final_url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9028b86593f91103e0da",
+        "url": "https://pluto.tv/br/",
+        "title": "Pluto TV: filmes, programas de TV & TV ao vivo online grátis",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "dom., 25 out. 2026 11:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Filmes de sucesso e séries imperdíveis grátis e TV ao vivo online. Assista agora. Não pague nunca.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "929f3c43b8807d964ceb",
+        "url": "https://www.youtube.com/filmplusbr",
+        "title": "Film Plus - YouTube",
+        "origin": "bing",
+        "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+        "date": "sáb., 24 out. 2026 23:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Seja bem-vindo ao Film Plus, um canal de filmes 100% gratuito no YouTube, feito para quem busca diversão e entretenimento para ver em casa, no celular, no compu",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0628eab884eab5394c53",
+        "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+        "title": "Os Quais ou As Quais: uso correto e exemplos",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "sáb., 24 out. 2026 21:52:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "f1d1a6edda59e9ccd85c",
+        "url": "https://todasasrespostas.com/quais-ou-qual",
+        "title": "Quais ou qual? - todasasrespostas.com",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "sáb., 10 out. 2026 12:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "“Do qual” é o resultado da junção da preposição “de” com o artigo masculino “o” e o pronome “qual”. Ele é utilizado quando o verbo da oração é transitivo indire",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "27014bd4b1df3e614ea8",
+        "url": "https://cidesp.com.br/v2/a-qual-ou-as-quais",
+        "title": "A Qual ou As Quais: Uso Correto e Exemplos",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "dom., 18 out. 2026 17:20:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Os pronomes relativos a qual e as quais pertencem ao conjunto formado por o qual, a qual, os quais, as quais, que atua como referência textual para retomar um t",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "40a79955a353ebc8c23f",
+        "url": "https://www.soportugues.com.br/secoes/sint/sint38_3.php",
+        "title": "Pronome Relativo O QUAL, OS QUAIS, A QUAL, AS QUAIS",
+        "origin": "bing",
+        "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+        "date": "sáb., 24 out. 2026 20:48:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "\"O qual\",\" a qual\",\" os quais\" e \"as quais\" são usados com referência a pessoa ou coisa. Desempenham as mesmas funções que o pronome \"que\"; seu uso, entretanto,",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-5326ce4ad3b7",
+      "type": "image",
+      "title": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+      "url": "https://br.justwatch.com/appassets/img/JustWatch_logo_with_claim.png",
+      "final_url": "https://br.justwatch.com/appassets/img/JustWatch_logo_with_claim.png",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "br.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-249b2ff7d2e1",
+      "type": "image",
+      "title": "JustWatch",
+      "url": "https://br.justwatch.com/appassets/img/logo/JustWatch-logo-small.png",
+      "final_url": "https://br.justwatch.com/appassets/img/logo/JustWatch-logo-small.png",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "br.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "JustWatch",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8e045bd55893",
+      "type": "image",
+      "title": "Netflix",
+      "url": "https://images.justwatch.com/icon/207360008/s100/netflix.jpeg",
+      "final_url": "https://images.justwatch.com/icon/207360008/s100/netflix.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Netflix",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-91acb75d4427",
+      "type": "image",
+      "title": "Amazon Prime Video",
+      "url": "https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.jpeg",
+      "final_url": "https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Amazon Prime Video",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-45cd81cfce9c",
+      "type": "image",
+      "title": "Apple TV",
+      "url": "https://images.justwatch.com/icon/338367329/s100/appletvplus.jpeg",
+      "final_url": "https://images.justwatch.com/icon/338367329/s100/appletvplus.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Apple TV",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b47070456e90",
+      "type": "image",
+      "title": "Disney Plus",
+      "url": "https://images.justwatch.com/icon/313118777/s100/disneyplus.jpeg",
+      "final_url": "https://images.justwatch.com/icon/313118777/s100/disneyplus.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Disney Plus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-12fccd50350f",
+      "type": "image",
+      "title": "Looke",
+      "url": "https://images.justwatch.com/icon/755940/s100/looke.jpeg",
+      "final_url": "https://images.justwatch.com/icon/755940/s100/looke.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Looke",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b83b798d03fa",
+      "type": "image",
+      "title": "Paramount Plus",
+      "url": "https://images.justwatch.com/icon/242706661/s100/paramountplus.jpeg",
+      "final_url": "https://images.justwatch.com/icon/242706661/s100/paramountplus.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Paramount Plus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0be6147757d1",
+      "type": "image",
+      "title": "HBO Max",
+      "url": "https://images.justwatch.com/icon/332884837/s100/max.jpeg",
+      "final_url": "https://images.justwatch.com/icon/332884837/s100/max.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "HBO Max",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8a42e75c4c0e",
+      "type": "image",
+      "title": "Apple TV Store",
+      "url": "https://images.justwatch.com/icon/338253243/s100/itunes.jpeg",
+      "final_url": "https://images.justwatch.com/icon/338253243/s100/itunes.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Apple TV Store",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4570d5a129bb",
+      "type": "image",
+      "title": "Globoplay",
+      "url": "https://images.justwatch.com/icon/270278212/s100/globoplay.jpeg",
+      "final_url": "https://images.justwatch.com/icon/270278212/s100/globoplay.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Globoplay",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a7b595e15bd9",
+      "type": "image",
+      "title": "Crunchyroll",
+      "url": "https://images.justwatch.com/icon/324213205/s100/crunchyroll.jpeg",
+      "final_url": "https://images.justwatch.com/icon/324213205/s100/crunchyroll.jpeg",
+      "source_title": "Assistir Filmes Online",
+      "source_url": "https://br.justwatch.com/br/filmes",
+      "publisher": "images.justwatch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Crunchyroll",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://br.justwatch.com/br/filmes",
+      "titulo": "Assistir Filmes Online",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 07:32:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://br.justwatch.com/br/filmes",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://pluto.tv/br/movies/",
+      "titulo": "Assista a Filmes Completos Grátis Online | Pluto TV",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 02:46:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pluto.tv/br/movies/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.dicio.com.br/quais/",
+      "titulo": "quais",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 22 out. 2026 05:48:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.dicio.com.br/quais/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+      "items": [
+        {
+          "titulo": "Quais - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/quais/",
+          "trecho": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos?...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 05:48:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dicio.com.br/quais",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Qual o significado de Quais? - todasasrespostas.com",
+          "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+          "trecho": "Com verbos transitivos diretos, que não pedem preposição, deverá ser usado o pronome relativo o qual. Já com verbos transitivos indiretos, que pedem preposição, são usadas as formas preposicionadas do pronome. Com a preposição a: ao qual, aos quais, à qual, às quais. O quê ou o qual?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 12:43:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://todasasrespostas.com/qual-o-significado-de-quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Os Quais ou As Quais: uso correto e exemplos",
+          "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+          "trecho": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, esses pronomes relativos têm papel importante na construção de frases claras, elegantes e compatíveis com a norma culta.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Quais ou qual? - todasasrespostas.com",
+          "url": "https://todasasrespostas.com/quais-ou-qual",
+          "trecho": "“Do qual” é o resultado da junção da preposição “de” com o artigo masculino “o” e o pronome “qual”. Ele é utilizado quando o verbo da oração é transitivo indireto e pede por essa preposição. Exemplo: Este é o filme do qual eu falei. Neste caso, o verbo “falar” pede a preposição “de”: falei de que/qu",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 12:50:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://todasasrespostas.com/quais-ou-qual",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "A Qual ou As Quais: Uso Correto e Exemplos",
+          "url": "https://cidesp.com.br/v2/a-qual-ou-as-quais",
+          "trecho": "Os pronomes relativos a qual e as quais pertencem ao conjunto formado por o qual, a qual, os quais, as quais, que atua como referência textual para retomar um termo já citado. Em termos práticos, eles substituem um substantivo anteriormente mencionado e evitam a repetição desnecessária de palavras.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 17:20:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cidesp.com.br/v2/a-qual-ou-as-quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Pronome Relativo O QUAL, OS QUAIS, A QUAL, AS QUAIS",
+          "url": "https://www.soportugues.com.br/secoes/sint/sint38_3.php",
+          "trecho": "\"O qual\",\" a qual\",\" os quais\" e \"as quais\" são usados com referência a pessoa ou coisa. Desempenham as mesmas funções que o pronome \"que\"; seu uso, entretanto, é bem menos frequente e tem se limitado aos casos em que é necessário para evitar ambiguidade. Por Exemplo: Existem dias e noites, às quais",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:48:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://soportugues.com.br/secoes/sint/sint38_3.php",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+      "items": [
+        {
+          "titulo": "Quais - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/quais/",
+          "trecho": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos?...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 05:48:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Qual o significado de Quais? - todasasrespostas.com",
+          "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+          "trecho": "Com verbos transitivos diretos, que não pedem preposição, deverá ser usado o pronome relativo o qual. Já com verbos transitivos indiretos, que pedem preposição, são usadas as formas preposicionadas do pronome. Com a preposição a: ao qual, aos quais, à qual, às quais. O quê ou o qual?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 12:43:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Os Quais ou As Quais: uso correto e exemplos",
+          "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+          "trecho": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, esses pronomes relativos têm papel importante na construção de frases claras, elegantes e compatíveis com a norma culta.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Quais ou qual? - todasasrespostas.com",
+          "url": "https://todasasrespostas.com/quais-ou-qual",
+          "trecho": "“Do qual” é o resultado da junção da preposição “de” com o artigo masculino “o” e o pronome “qual”. Ele é utilizado quando o verbo da oração é transitivo indireto e pede por essa preposição. Exemplo: Este é o filme do qual eu falei. Neste caso, o verbo “falar” pede a preposição “de”: falei de que/qu",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 12:50:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "A Qual ou As Quais: Uso Correto e Exemplos",
+          "url": "https://cidesp.com.br/v2/a-qual-ou-as-quais",
+          "trecho": "Os pronomes relativos a qual e as quais pertencem ao conjunto formado por o qual, a qual, os quais, as quais, que atua como referência textual para retomar um termo já citado. Em termos práticos, eles substituem um substantivo anteriormente mencionado e evitam a repetição desnecessária de palavras.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 18 out. 2026 17:20:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Pronome Relativo O QUAL, OS QUAIS, A QUAL, AS QUAIS",
+          "url": "https://www.soportugues.com.br/secoes/sint/sint38_3.php",
+          "trecho": "\"O qual\",\" a qual\",\" os quais\" e \"as quais\" são usados com referência a pessoa ou coisa. Desempenham as mesmas funções que o pronome \"que\"; seu uso, entretanto, é bem menos frequente e tem se limitado aos casos em que é necessário para evitar ambiguidade. Por Exemplo: Existem dias e noites, às quais",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:48:00 GMT"
+          },
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários",
+          "discovery_provider": "bing"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+      "items": [
+        {
+          "titulo": "Assistir Filmes Online - JustWatch",
+          "url": "https://br.justwatch.com/br/filmes",
+          "trecho": "Com uma lista repleta dos filmes mais populares do momento, não vai demorar para você encontrar o melhor filme para assistir, assim como todas as opções de onde assistir em streaming. Descubra todos os próximos lançamentos de filmes confirmados para chegar em streaming.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:32:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://br.justwatch.com/br/filmes",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Filmes completo dublado em português - YouTube",
+          "url": "https://www.youtube.com/playlist?list=PL2gsu7VGzgdZktz1_3Ce43qgvm36lXWT7",
+          "trecho": "Bem-vindo à nossa playlist de filmes dublados em português! 🇵🇹🇧🇷🇦🇴🇲🇿🇲🇶🇨🇻🇬🇱🇲🇦 Aqui você encontrará uma ampla seleção de cinema clássico e cult ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/playlist?list=PL2gsu7VGzgdZktz1_3Ce43qgvm36lXWT7",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Assista a Filmes Completos Grátis Online | Pluto TV",
+          "url": "https://pluto.tv/br/movies/",
+          "trecho": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pague.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:46:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pluto.tv/br/movies",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Assistir Filmes e Séries Gratuitamente Online - Plex",
+          "url": "https://watch.plex.tv/pt-BR",
+          "trecho": "Bem-vindo ao Plex! Explore nossos filmes e séries gratuitas e descubra as tendências em seus serviços de streaming favoritos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:02:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://watch.plex.tv/pt-BR",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Pluto TV: filmes, programas de TV & TV ao vivo online grátis",
+          "url": "https://pluto.tv/br/",
+          "trecho": "Filmes de sucesso e séries imperdíveis grátis e TV ao vivo online. Assista agora. Não pague nunca.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:50:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pluto.tv/br",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Film Plus - YouTube",
+          "url": "https://www.youtube.com/filmplusbr",
+          "trecho": "Seja bem-vindo ao Film Plus, um canal de filmes 100% gratuito no YouTube, feito para quem busca diversão e entretenimento para ver em casa, no celular, no computador e aonde mais puder! 💛",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:11:00 GMT"
+          },
+          "discovery_query": "filmes dirigidos denis villeneuve lançados depois 2015 sem documentários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/filmplusbr",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.111,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://br.justwatch.com/br/filmes",
+      "result": {
+        "titulo": "Assistir Filmes Online",
+        "texto": "Com a JustWatch você pode explorar a lista de filmes disponíveis em diversas plataformas de streaming baseado em suas preferências. Se você está procurando por novos filmes para assistir, a nossa lista dá acesso para você navegar pelo conteúdo de todas as maiores bibliotecas de streaming. Além de filmes, você pode procurar por todos os em streaming, como também apenas as . Não só isso, a JustWatch oferece uma linha do tempo contendo todos os , para que você possa ficar atualizado nas maiores novidades. filmes e séries séries de televisão disponíveis online lançamentos em streaming A nossa plataforma também permite que você ordene a lista conforme o que você procura, seja por ordem de popularidade, alfabética ou como você preferir. Além disso, com a JustWatch você pode filtrar a lista baseado no que você está a fim de assistir, seja um gênero específico, ano de lançamento, preço, classificação indicativa ou avaliação. Se você não quer ter restrições em sua busca, você também pode explorar todos os filmes disponíveis em streaming. A nossa lista de filmes inclui filmes de todas as plataformas de streaming assim como em serviços específicos, seja no , , ou em qualquer outro streaming. Explore novos filmes com JustWatch e descubra onde comprar, alugar ou assistir em streaming. Disney + Amazon Prime Video Netflix Onde assistir filmes online Você não só pode encontrar novos filmes online para assistir com a JustWatch, como também pode descobrir onde assistir a filmes online. Com tantas plataformas de streaming e opções com diferentes preços, a lista de filmes JustWatch mostra em quais plataformas o seu filme favorito está disponível online—seja gratuito para assinantes, grátis para todos ou um preço fixo para aluguel e compra em lojas online. Sabendo onde o filme está disponível permite que você compare os diferentes preços nas plataformas para que você encontre a melhor opção para você. Com a JustWatch você descobre mais sobre todos os filmes, além de todas as opções de onde assistir online. Basta clicar no filme que você quer assistir e você consegue ver onde está disponível para streaming, aluguel ou compra, incluindo o preço em cada plataforma. Além disso, você pode ver as plataformas mais populares no Brasil e o que cada uma tem disponível, como os blockbusters no ou produções nacionais no . Explore as páginas do , e outras para descobrir onde assistir filmes online no Brasil. Paramount+ globoplay Looke Max Assistir filmes online grátis Algumas plataformas de streaming oferecem conteúdo pago como também gratuito. Além de conseguir filtrar para apenas explorar filmes grátis com JustWatch, você também tem a opção de olhar filmes que já estão inclusos na sua assinatura sem preço adicional. Por exemplo, se você clicar no logo da , você é capaz de explorar todos os filmes que estão disponíveis gratuitamente na plataforma para assinantes. Você pode selecionar diversas plataformas para ver todos os filmes disponíveis gratuitamente para você nas plataformas as quais você possui, sem ter que pagar nada extra. A JustWatch está sempre atualizando o guia, mostrando também as opções que permitem assinaturas gratuitas ou assistir o filme sem alguma assinatura. Apple TV+ Encontre todos os filmes em streaming com JustWatch Se você está querendo encontrar uma boa comédia como ou um clássico de terror como , você pode filtrar o conteúdo de todos os serviços de streaming baseado no gênero. O mesmo se você está procurando filmes adorados pela crítica como , e filmes populares com a audiência como . Não só isso, você consegue encontrar uma ação bem sangrenta como os filmes de ou um filme para toda a família como . Barbie O Exorcista Tudo em Todo Lugar ao Mesmo Tempo Vingadores: Ultimato John Wick Gato de Botas: O Último Desejo Filtrando por streaming ou por tipo de filme, com a JustWatch você pode navegar em todas as bibliotecas online para achar o filme perfeito para você assistir. Com uma lista repleta dos filmes mais populares do momento, não vai demorar para você encontrar o melhor filme para assistir, assim como todas as opções de onde assistir em streaming. Descubra todos os confirmados para chegar em streaming. Com uma lista com todos os filmes a serem lançados, você não vai perder mais nenhum lançamento. próximos lançamentos de filmes Sejam filmes clássicos ou lançamentos populares, descubra onde assistir a filmes incríveis em streaming com o guia JustWatch.",
+        "final": "https://br.justwatch.com/br/filmes",
+        "trecho_usado": "vai demorar para você encontrar o melhor filme para assistir, assim como todas as opções de onde assistir em streaming. Descubra todos os confirmados para chegar em streaming. Com uma lista com todos os filmes a serem lançados, você não vai perder mais nenhum lançamento. próximos lançamentos de filmes Sejam filmes clássicos ou lançamentos populares, descubra onde assistir a filmes incríveis em",
+        "metadados": {
+          "titulo": "Assistir Filmes Online",
+          "descricao": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+          "canonica": "https://br.justwatch.com/br/filmes",
+          "og": {
+            "og:site_name": "JustWatch",
+            "og:image": "/appassets/img/JustWatch_logo_with_claim.png",
+            "og:image:width": "606",
+            "og:image:height": "302",
+            "og:title": "Assistir Filmes Online",
+            "og:description": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+            "og:url": "https://br.justwatch.com/br/filmes"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "JustWatch",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Com a JustWatch você pode explorar a lista de filmes disponíveis em diversas plataformas de streaming baseado em suas preferências. Se você está procurando por novos filmes para assistir, a nossa lista dá acesso para você navegar pelo conteúdo de todas as maiores bibliotecas de streaming.\nAlém de filmes, você pode procurar por todos os em streaming, como também apenas as . Não só isso, a JustWatch oferece uma linha do tempo contendo todos os , para que você possa ficar atualizado nas maiores novidades. filmes e séries séries de televisão disponíveis online lançamentos em streaming\nA nossa plataforma também permite que você ordene a lista conforme o que você procura, seja por ordem de popularidade, alfabética ou como você preferir. Além disso, com a JustWatch você pode filtrar a lista baseado no que você está a fim de assistir, seja um gênero específico, ano de lançamento, preço, classificação indicativa ou avaliação.\nSe você não quer ter restrições em sua busca, você também pode explorar todos os filmes disponíveis em streaming. A nossa lista de filmes inclui filmes de todas as plataformas de streaming assim como em serviços específicos, seja no , , ou em qualquer outro streaming. Explore novos filmes com JustWatch e descubra onde comprar, alugar ou assistir em streaming. Disney + Amazon Prime Video Netflix"
+          },
+          {
+            "titulo": "Onde assistir filmes online",
+            "texto": "Você não só pode encontrar novos filmes online para assistir com a JustWatch, como também pode descobrir onde assistir a filmes online. Com tantas plataformas de streaming e opções com diferentes preços, a lista de filmes JustWatch mostra em quais plataformas o seu filme favorito está disponível online—seja gratuito para assinantes, grátis para todos ou um preço fixo para aluguel e compra em lojas online. Sabendo onde o filme está disponível permite que você compare os diferentes preços nas plataformas para que você encontre a melhor opção para você.\nCom a JustWatch você descobre mais sobre todos os filmes, além de todas as opções de onde assistir online. Basta clicar no filme que você quer assistir e você consegue ver onde está disponível para streaming, aluguel ou compra, incluindo o preço em cada plataforma.\nAlém disso, você pode ver as plataformas mais populares no Brasil e o que cada uma tem disponível, como os blockbusters no ou produções nacionais no . Explore as páginas do , e outras para descobrir onde assistir filmes online no Brasil. Paramount+ globoplay Looke Max"
+          },
+          {
+            "titulo": "Assistir filmes online grátis",
+            "texto": "Algumas plataformas de streaming oferecem conteúdo pago como também gratuito. Além de conseguir filtrar para apenas explorar filmes grátis com JustWatch, você também tem a opção de olhar filmes que já estão inclusos na sua assinatura sem preço adicional. Por exemplo, se você clicar no logo da , você é capaz de explorar todos os filmes que estão disponíveis gratuitamente na plataforma para assinantes. Você pode selecionar diversas plataformas para ver todos os filmes disponíveis gratuitamente para você nas plataformas as quais você possui, sem ter que pagar nada extra. A JustWatch está sempre atualizando o guia, mostrando também as opções que permitem assinaturas gratuitas ou assistir o filme sem alguma assinatura. Apple TV+"
+          },
+          {
+            "titulo": "Encontre todos os filmes em streaming com JustWatch",
+            "texto": "Se você está querendo encontrar uma boa comédia como ou um clássico de terror como , você pode filtrar o conteúdo de todos os serviços de streaming baseado no gênero. O mesmo se você está procurando filmes adorados pela crítica como , e filmes populares com a audiência como . Não só isso, você consegue encontrar uma ação bem sangrenta como os filmes de ou um filme para toda a família como . Barbie O Exorcista Tudo em Todo Lugar ao Mesmo Tempo Vingadores: Ultimato John Wick Gato de Botas: O Último Desejo\nFiltrando por streaming ou por tipo de filme, com a JustWatch você pode navegar em todas as bibliotecas online para achar o filme perfeito para você assistir. Com uma lista repleta dos filmes mais populares do momento, não vai demorar para você encontrar o melhor filme para assistir, assim como todas as opções de onde assistir em streaming.\nDescubra todos os confirmados para chegar em streaming. Com uma lista com todos os filmes a serem lançados, você não vai perder mais nenhum lançamento. próximos lançamentos de filmes\nSejam filmes clássicos ou lançamentos populares, descubra onde assistir a filmes incríveis em streaming com o guia JustWatch."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://br.justwatch.com/appassets/img/JustWatch_logo_with_claim.png",
+          "https://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDnqzjtABABGAEyCK1i2aHnQwMB",
+          "https://br.justwatch.com/appassets/img/logo/JustWatch-logo-small.png",
+          "https://images.justwatch.com/icon/207360008/s100/netflix.jpeg",
+          "https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.jpeg",
+          "https://images.justwatch.com/icon/338367329/s100/appletvplus.jpeg",
+          "https://images.justwatch.com/icon/313118777/s100/disneyplus.jpeg",
+          "https://images.justwatch.com/icon/755940/s100/looke.jpeg",
+          "https://images.justwatch.com/icon/242706661/s100/paramountplus.jpeg",
+          "https://images.justwatch.com/icon/332884837/s100/max.jpeg"
+        ],
+        "midia": [
+          {
+            "id": "med-5326ce4ad3b7",
+            "type": "image",
+            "title": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+            "url": "https://br.justwatch.com/appassets/img/JustWatch_logo_with_claim.png",
+            "final_url": "https://br.justwatch.com/appassets/img/JustWatch_logo_with_claim.png",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "br.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Guia completo de filmes do Netflix, NetMovies , Crackle. Online Streaming, para alugar ou comprar.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-249b2ff7d2e1",
+            "type": "image",
+            "title": "JustWatch",
+            "url": "https://br.justwatch.com/appassets/img/logo/JustWatch-logo-small.png",
+            "final_url": "https://br.justwatch.com/appassets/img/logo/JustWatch-logo-small.png",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "br.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "JustWatch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8e045bd55893",
+            "type": "image",
+            "title": "Netflix",
+            "url": "https://images.justwatch.com/icon/207360008/s100/netflix.jpeg",
+            "final_url": "https://images.justwatch.com/icon/207360008/s100/netflix.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Netflix",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-91acb75d4427",
+            "type": "image",
+            "title": "Amazon Prime Video",
+            "url": "https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.jpeg",
+            "final_url": "https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Amazon Prime Video",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-45cd81cfce9c",
+            "type": "image",
+            "title": "Apple TV",
+            "url": "https://images.justwatch.com/icon/338367329/s100/appletvplus.jpeg",
+            "final_url": "https://images.justwatch.com/icon/338367329/s100/appletvplus.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apple TV",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b47070456e90",
+            "type": "image",
+            "title": "Disney Plus",
+            "url": "https://images.justwatch.com/icon/313118777/s100/disneyplus.jpeg",
+            "final_url": "https://images.justwatch.com/icon/313118777/s100/disneyplus.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Disney Plus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-12fccd50350f",
+            "type": "image",
+            "title": "Looke",
+            "url": "https://images.justwatch.com/icon/755940/s100/looke.jpeg",
+            "final_url": "https://images.justwatch.com/icon/755940/s100/looke.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Looke",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b83b798d03fa",
+            "type": "image",
+            "title": "Paramount Plus",
+            "url": "https://images.justwatch.com/icon/242706661/s100/paramountplus.jpeg",
+            "final_url": "https://images.justwatch.com/icon/242706661/s100/paramountplus.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Paramount Plus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0be6147757d1",
+            "type": "image",
+            "title": "HBO Max",
+            "url": "https://images.justwatch.com/icon/332884837/s100/max.jpeg",
+            "final_url": "https://images.justwatch.com/icon/332884837/s100/max.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "HBO Max",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8a42e75c4c0e",
+            "type": "image",
+            "title": "Apple TV Store",
+            "url": "https://images.justwatch.com/icon/338253243/s100/itunes.jpeg",
+            "final_url": "https://images.justwatch.com/icon/338253243/s100/itunes.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apple TV Store",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4570d5a129bb",
+            "type": "image",
+            "title": "Globoplay",
+            "url": "https://images.justwatch.com/icon/270278212/s100/globoplay.jpeg",
+            "final_url": "https://images.justwatch.com/icon/270278212/s100/globoplay.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Globoplay",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a7b595e15bd9",
+            "type": "image",
+            "title": "Crunchyroll",
+            "url": "https://images.justwatch.com/icon/324213205/s100/crunchyroll.jpeg",
+            "final_url": "https://images.justwatch.com/icon/324213205/s100/crunchyroll.jpeg",
+            "source_title": "Assistir Filmes Online",
+            "source_url": "https://br.justwatch.com/br/filmes",
+            "publisher": "images.justwatch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Crunchyroll",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.dicio.com.br/quais/",
+      "result": {
+        "titulo": "quais",
+        "texto": "quais Lexicógrafa responsável: Débora Ribeiro Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? Relacionado à qualidade ou propriedade de algo que se menciona ou sobre alguém de quem se fala: quais são seus pontos de vista? De que natureza, âmbito, qualidade: quais características te definem? Relacionado com o que vem antes, juntamente com o artigo que o precede: pouca importância têm o livro e o autor aos quais você se refere. [Gramática] Usado com valor de comparação ou para estabelecer uma relação; tais: escreveu asneiras tais quais nunca se viram. [Gramática] Etimologia (origem da palavra ). Plural de qual, do latim qualis.e. quais Usando \"\" num texto? O ajuda a variar a escrita sem mudar o sentido. quais Reescrever Texto Sinônimos de Quais Quais é sinônimo de: , , , qual tal qual como tais Definição de Quais Classe gramatical: Separação silábica: Singular: pronome quais qual Frases com a palavra quais Fonte: Pensador Há pensamentos que são orações. Há momentos nos quais, seja qual for a posição do corpo, a alma está de joelhos. - Victor Hugo Culpamos as pessoas das quais não gostamos pelas gentilezas que nos demonstram. - Friedrich Nietzsche Exemplos com a palavra quais Saiba hospitais procurar no Brasil Saiba mais sobre a gripe suína. quais Folha de S.Paulo, 26/06/2009 Leia a cobertura completa da gripe suína Saiba são os sintomas Veja o mapa da gripe no Brasil. quais Folha de S.Paulo, 08/09/2009 Nesta segunda-feira (22), o próprio Conselho de Guardiães admitiu que houve fraude em ao menos 50 cidades do país, nas o número de votos superou o de eleitores registrados. quais Folha de S.Paulo, 26/06/2009 Outras informações sobre a palavra Possui as vogais: Possui as consoantes: A palavra escrita ao contrário: siauq Possui 5 letras a i u q s Rimas com quais das quais dos quais águas-iguais persiguais siquais consiguais patos-baguais siguais prossiguais distinguais extinguais arguais Anagramas de quais Aquis saqui Revisão por Débora Ribeiro Lexicógrafa, professora de português e examinadora internacional de português como segunda língua. Licenciada em Língua Portuguesa, pela Universidade Federal de Ouro Preto, e mestre em Português Segunda Língua, pela Universidade do Porto, Portugal.",
+        "final": "https://www.dicio.com.br/quais/",
+        "trecho_usado": "juntamente com o artigo que o precede: pouca importância têm o livro e o autor aos quais você se refere. [Gramática] Usado com valor de comparação ou para estabelecer uma relação; tais: escreveu asneiras tais quais nunca se viram. [Gramática] Etimologia (origem da palavra ). Plural de qual, do latim qualis.e. quais Usando \"\" num texto? O ajuda a variar a escrita sem mudar o sentido. quais",
+        "metadados": {
+          "titulo": "quais",
+          "descricao": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos?...",
+          "canonica": "https://www.dicio.com.br/quais/",
+          "og": {
+            "og:title": "Quais",
+            "og:description": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? Relacionado à qualidade ou propriedade de algo que se menciona ou sobre alguém de quem se fala: quais são seus pontos de...",
+            "og:url": "https://www.dicio.com.br/quais/",
+            "og:image": "https://s.dicio.com.br/quais.png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:type": "article",
+            "og:site_name": "Dicio, Dicionário Online de Português"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:creator": "@diciocombr",
+            "twitter:site": "@diciocombr"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Dicio, Dicionário Online de Português",
+          "tipo": "WebPage",
+          "ld": {
+            "publisher": {
+              "@type": "Organization",
+              "name": "Dicio, Dicionário Online de Português",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://static.dicio.com.br/img/logo-amp.png",
+                "width": 600,
+                "height": 60
+              }
+            },
+            "description": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos?..."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? Relacionado à qualidade ou propriedade de algo que se menciona ou sobre alguém de quem se fala: quais são seus pontos de vista? De que natureza, âmbito, qualidade: quais características te definem? Relacionado com o que vem antes, juntamente com o artigo que o precede: pouca importância têm o livro e o autor aos quais você se refere. [Gramática] Usado com valor de comparação ou para estabelecer uma relação; tais: escreveu asneiras tais quais nunca se viram. [Gramática] Etimologia (origem da palavra ). Plural de qual, do latim qualis.e. quais\nQuais é sinônimo de: , , , qual tal qual como tais\nClasse gramatical: Separação silábica: Singular: pronome quais qual"
+          },
+          {
+            "titulo": "Frases com a palavra quais",
+            "texto": ""
+          },
+          {
+            "titulo": "Exemplos com a palavra quais",
+            "texto": ""
+          },
+          {
+            "titulo": "Outras informações sobre a palavra",
+            "texto": "Possui as vogais: Possui as consoantes: A palavra escrita ao contrário: siauq Possui 5 letras a i u q s"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s.dicio.com.br/quais.png",
+          "https://s.dicio.com.br/quais.jpg",
+          "https://s.dicio.com.br/quais-sm.jpg",
+          "https://www.dicio.com.br/img/logo-dicio.svg",
+          "https://www.dicio.com.br/img/btn-audio.svg",
+          "https://static.dicio.com.br/img/autor/de/bo/debora-ribeiro_36.jpg",
+          "https://static.dicio.com.br/upload/qu/al/qualidades-e-defeitos-de-uma-pessoa-lista-de-adjetivos-de-a-z-m.jpg",
+          "https://static.dicio.com.br/upload/or/ig/origem-da-expressao-pensar-na-morte-da-bezerra-ac1.jpg",
+          "https://static.dicio.com.br/upload/15/77/1577716933ic5e0a0cc5c46ae-ac1.jpg",
+          "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png"
+        ],
+        "midia": [
+          {
+            "id": "med-ac439736dd5a",
+            "type": "image",
+            "title": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favo",
+            "url": "https://s.dicio.com.br/quais.png",
+            "final_url": "https://s.dicio.com.br/quais.png",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "s.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? Relacionado à qualidade ou propriedade de algo que se menciona ou sobre a",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-966978ee31b5",
+            "type": "image",
+            "title": "Dicio, Dicionário Online de Português",
+            "url": "https://www.dicio.com.br/img/logo-dicio.svg",
+            "final_url": "https://www.dicio.com.br/img/logo-dicio.svg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dicio, Dicionário Online de Português",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ed853e8cf08e",
+            "type": "image",
+            "title": "Ouvir",
+            "url": "https://www.dicio.com.br/img/btn-audio.svg",
+            "final_url": "https://www.dicio.com.br/img/btn-audio.svg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ouvir",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6bc1370e3580",
+            "type": "image",
+            "title": "quais",
+            "url": "https://s.dicio.com.br/quais.jpg",
+            "final_url": "https://s.dicio.com.br/quais.jpg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "s.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "quais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-515d8364c347",
+            "type": "image",
+            "title": "Débora Ribeiro",
+            "url": "https://static.dicio.com.br/img/autor/de/bo/debora-ribeiro_36.jpg",
+            "final_url": "https://static.dicio.com.br/img/autor/de/bo/debora-ribeiro_36.jpg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Débora Ribeiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6413e02fb0cc",
+            "type": "image",
+            "title": "Qualidades e defeitos de uma pessoa: lista de adjetivos de A-Z",
+            "url": "https://static.dicio.com.br/upload/qu/al/qualidades-e-defeitos-de-uma-pessoa-lista-de-adjetivos-de-a-z-m.jpg",
+            "final_url": "https://static.dicio.com.br/upload/qu/al/qualidades-e-defeitos-de-uma-pessoa-lista-de-adjetivos-de-a-z-m.jpg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Qualidades e defeitos de uma pessoa: lista de adjetivos de A-Z",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2895e6c064dc",
+            "type": "image",
+            "title": "Morte da bezerra: o que significa e qual é a origem da expressão?",
+            "url": "https://static.dicio.com.br/upload/or/ig/origem-da-expressao-pensar-na-morte-da-bezerra-ac1.jpg",
+            "final_url": "https://static.dicio.com.br/upload/or/ig/origem-da-expressao-pensar-na-morte-da-bezerra-ac1.jpg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Morte da bezerra: o que significa e qual é a origem da expressão?",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ee8eaa6cdb09",
+            "type": "image",
+            "title": "Elogios com a letra Q",
+            "url": "https://static.dicio.com.br/upload/15/77/1577716933ic5e0a0cc5c46ae-ac1.jpg",
+            "final_url": "https://static.dicio.com.br/upload/15/77/1577716933ic5e0a0cc5c46ae-ac1.jpg",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Elogios com a letra Q",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0a3f191d07bc",
+            "type": "image",
+            "title": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e306e01816e9",
+            "type": "image",
+            "title": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-923d29ce75f2",
+            "type": "image",
+            "title": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-786145739f58",
+            "type": "image",
+            "title": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+            "source_title": "quais",
+            "source_url": "https://www.dicio.com.br/quais/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pluto.tv/br/movies/",
+      "result": {
+        "titulo": "Assista a Filmes Completos Grátis Online | Pluto TV",
+        "texto": "Ação e Aventura A-Z All Ação e Aventura A-Z, listed alphabetically 20 Passos Abaixo 2035 Dimensões Proibidas 2067 3 A.M. Parte 2 3 Irmãs 3:00 AM 407 O Voo das Trevas 41ª DP - Inferno no Bronx 90 Minutos A Amaldiçoada A Arma Divina A Base 2: Acusado Condenado A Base – Desafiando o Perigo A Batalha de Haarlem A Batalha de OVNIs de Los Angeles A Bela Fera A Casa A Chegada A Cilada A Colônia A Conspiração A Cura A Cura de Todo Mal A Dama Oculta",
+        "final": "https://pluto.tv/br/movies/",
+        "trecho_usado": "Ação e Aventura A-Z All Ação e Aventura A-Z, listed alphabetically 20 Passos Abaixo 2035 Dimensões Proibidas 2067 3 A.M. Parte 2 3 Irmãs 3:00 AM 407 O Voo das Trevas 41ª DP - Inferno no Bronx 90 Minutos A Amaldiçoada A Arma Divina A Base 2: Acusado Condenado A Base – Desafiando o Perigo A Batalha de Haarlem A Batalha de OVNIs de Los Angeles A Bela Fera A Casa A Chegada A Cilada A Colônia A",
+        "metadados": {
+          "titulo": "Assista a Filmes Completos Grátis Online | Pluto TV",
+          "descricao": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pague.",
+          "canonica": "https://pluto.tv/br/movies/",
+          "og": {
+            "og:title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "og:description": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pague.",
+            "og:image": "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+            "og:image:secure_url": "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+            "og:url": "https://pluto.tv/br/movies/",
+            "og:site_name": "Pluto TV",
+            "og:type": "website"
+          },
+          "twitter": {
+            "twitter:title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "twitter:description": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pague.",
+            "twitter:card": "summary_large_image",
+            "twitter:image": "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+            "twitter:site": "@PlutoTVBr",
+            "twitter:creator": "@PlutoTVBr"
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Pluto TV",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "All Ação e Aventura A-Z, listed alphabetically",
+            "texto": ""
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a0c711c7c10648245bc93fb/poster_1779200324021.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/600ae8062816a5001aa1473c/standard2_3_1778103002317.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/604b9216b2b870001a05f494/poster_1777632121936.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c47b97918fece01993d68/poster_1781286842390.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c4d5caac2f7c6ecf8fd0f/poster_1781562242333.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/5fc7a64d99839e0013e0cd99/poster_1769816882330.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/68f637310966c2fd46eecad5/poster_1760966455060.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6aac077bda71d9a75f233979/poster_1789659005958.jpg?format=webp",
+          "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/66e2efae4d30430013cc24a1/standard2_3_1782134281321.jpg?format=webp"
+        ],
+        "midia": [
+          {
+            "id": "med-7cad6deb112f",
+            "type": "image",
+            "title": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pag",
+            "url": "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+            "final_url": "https://wwwimage-us.plutostatic.tv/base/files/asset/new-ptv-social-image/au/us-en/pluto-tv-social-jpg_1920x1080.jpg",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Assista a filmes gratuitos online, a qualquer hora e em qualquer dispositivo. A Pluto TV é um serviço de streaming totalmente gratuito. Assista agora. Nunca pague.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-71a29eec9348",
+            "type": "image",
+            "title": "Vingança Fatal",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a0c711c7c10648245bc93fb/poster_1779200324021.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a0c711c7c10648245bc93fb/poster_1779200324021.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vingança Fatal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5b1a3d7e298",
+            "type": "image",
+            "title": "Sexta-Feira 13",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/600ae8062816a5001aa1473c/standard2_3_1778103002317.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/600ae8062816a5001aa1473c/standard2_3_1778103002317.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Sexta-Feira 13",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2b1262ef0f0d",
+            "type": "image",
+            "title": "Motoqueiro Fantasma: Espírito de Vingança",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/604b9216b2b870001a05f494/poster_1777632121936.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/604b9216b2b870001a05f494/poster_1777632121936.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Motoqueiro Fantasma: Espírito de Vingança",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-22e996c57516",
+            "type": "image",
+            "title": "Elektra",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c47b97918fece01993d68/poster_1781286842390.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c47b97918fece01993d68/poster_1781286842390.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Elektra",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5c7786a0845a",
+            "type": "image",
+            "title": "Encontro Explosivo",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c4d5caac2f7c6ecf8fd0f/poster_1781562242333.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a2c4d5caac2f7c6ecf8fd0f/poster_1781562242333.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Encontro Explosivo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-35e0175902f0",
+            "type": "image",
+            "title": "Fogo contra Fogo",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/5fc7a64d99839e0013e0cd99/poster_1769816882330.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/5fc7a64d99839e0013e0cd99/poster_1769816882330.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fogo contra Fogo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d3f908fa5e41",
+            "type": "image",
+            "title": "Demolidor - O Homem sem Medo",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/68f637310966c2fd46eecad5/poster_1760966455060.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/68f637310966c2fd46eecad5/poster_1760966455060.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Demolidor - O Homem sem Medo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c188316bd3f1",
+            "type": "image",
+            "title": "Contra Ataque",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6aac077bda71d9a75f233979/poster_1789659005958.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6aac077bda71d9a75f233979/poster_1789659005958.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Contra Ataque",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0437984a6bc0",
+            "type": "image",
+            "title": "Super-Herói: O Filme",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/66e2efae4d30430013cc24a1/standard2_3_1782134281321.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/series/66e2efae4d30430013cc24a1/standard2_3_1782134281321.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Super-Herói: O Filme",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cbc6ad3b3c78",
+            "type": "image",
+            "title": "2067",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a0c711f7c10648245bd0846/poster_1779200288157.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/6a0c711f7c10648245bd0846/poster_1779200288157.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "2067",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a9873a861326",
+            "type": "image",
+            "title": "Ragnarok",
+            "url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/62f566db42b796001bbf76f8/poster_1769806083864.jpg?format=webp",
+            "final_url": "https://wwwimage-us.plutostatic.tv/thumbnails/photos/w300-q80/pplcrn/ptvm/episodes/62f566db42b796001bbf76f8/poster_1769806083864.jpg?format=webp",
+            "source_title": "Assista a Filmes Completos Grátis Online | Pluto TV",
+            "source_url": "https://pluto.tv/br/movies/",
+            "publisher": "wwwimage-us.plutostatic.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ragnarok",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+      "result": {
+        "titulo": "Qual o significado de Quais? - todasasrespostas.com",
+        "texto": "25 curiosidades que você vai gostar Quantas e quais são as classe gramaticais? Significado de E conjunção Conjunção que liga palavras e orações com mesma função. Indica adição: pai e mãe extremosos. Indica oposição: falou muito, e não disse nada. Para que serve os 4 tipos de porquês? Por que: utilizado em perguntas. Exemplo: Por que não voltamos para a casa? Porque: utilizado em respostas. ... Por quê: utilizado em perguntas no fim das frases. Por que exemplos? “O por que separado sempre pode embutir a palavra razão ou a palavra motivo ”, explica o professor. Isso vale para perguntas diretas - “Por que você não foi?\" vira \"Por que razão você não foi?\" e \"Por que você não pagou a conta?\" vira \"Por que motivo você não pagou a conta?\". Qual a regra dos porquês? Por exemplo, de forma resumida, em caso de perguntas e respostas deve-se usar, respectivamente, por que e porque. Em contrapartida, quando a pergunta estiver no final da frase, utiliza-se por quê e, no caso do substantivo, porquê. Todavia, caso não tenha ficado didático o suficiente, não desista. Qual porque é usado no meio da frase? - Por que: usado no início ou meio das orações. Aparece em frase interrogativas e pode ser substituído pelas expressões “pelo qual”, “ por qual”. ... As orações que possuem esse termo podem ser explicativas ou causais. Exemplo: vou ao parque porque (pois) quero brincar de balanço. Quais são as dez classe gramaticais e exemplos? Classe gramatical é um conjunto que classifica determinada palavra. Elas são dez: substantivo, verbo, adjetivo, pronome, artigo, numeral, preposição, conjunção, interjeição e advérbio. As classes gramaticais são divididas em variáveis (aquelas que variam em gênero, número ou grau) e invariáveis (as que não variam). O que significa uma letra e? Significado de letra e: A letra E é uma conjunção, ou seja, um conectivo lógico, um aditivo. Quais são os artigos? Na gramática, o artigo é a classe de palavras que antecede o substantivo para determiná-lo de modo particular ou geral. Há dois tipos de artigos: Artigos definidos: o, os, a, as; Artigos indefinidos: um, uns, uma, umas. Como identificar um artigo? O artigo antepõe o substantivo, determinando-o ou indeterminando-o. O artigo integra as dez classes gramaticais que conhecemos, definindo-se como o termo que antepõe o substantivo para determiná-lo ou indeterminá-lo, indicando, também, o gênero (masculino/feminino) e o número (singular/plural). Como identificar um artigo definido? Os artigos definidos (o, a, os, as) definem ou individualizam, de forma precisa, os substantivos, seja uma pessoa, objeto ou lugar. Exemplos: O garoto foi jantar na casa dos pais. O que é um artigo de um texto? Em Jornalismo, um artigo é um texto eminentemente opinativo — mais que informativo — publicado (ou veiculado) em seção destacada do conteúdo noticioso. Os autores recorrentes de artigos são chamados de articulistas. ... A introdução de um artigo define qual vai ser o assunto do texto, sendo necessário um tema polêmico. Qual o som do é? Numa frase, a letra e, sozinha, nunca se pronuncia ê, mas sim i: O Pedro e o Paulo foram passear. Comprei um livro e um caderno. Como denominação de letra, pronuncia-se é, e não ê, como vemos no alfabeto: a, b, c, d, e (= é e não ê), f, g, h, etc. Qual é o significado das letras? Uma letra é um grafema num sistema alfabético de escrita, como o Alfabeto grego e seus descendentes. Letras compõem fonemas e cada fonema representa um fone (som) na Língua falada. Qual é o sinal de maior? O sinal \"maior que\" é >. Assim, 9>7 é lido como 9 é maior que 7 . O sinal \"menor que\" é <. Outros dois sinais de comparação são ≥ (maior ou igual a) e ≤ (menor ou igual a). O que é gramática exemplo? Gramática é o conjunto de regras que indicam o uso mais correto de uma língua. No início, a gramática tinha como função apenas estabelecer regras quanto à escrita e à leitura. É por isso que a palavra gramática, de origem grega (grámma), significa “letra”. Quais são os adjetivos exemplos? Adjetivo é a palavra que acompanha o substantivo, atribuindo-lhe características, modos de ser e estado....Exemplos de adjetivosdourado.prateada.triste.invisível.verde.esperta.belo.bovino. Porque no meio da frase é junto ou separado? Porque é uma conjunção subordinativa causal ou explicativa, unindo duas orações que dependem uma da outra para ter sentido completo. Quando usar por que? Por que (separado e sem acento) pode ser usado para introduzir uma pergunta ou para estabelecer uma relação com um termo anterior da oração. Por que no meio da frase é junto ou separado? Se a frase for uma pergunta e o “por que” vier no início, você vai usar o “por que” separado e sem acento. Por exemplo: ... Se a frase for uma resposta e o “porque” vier no início, você vai usar o “porque” junto e sem acento. Porque início de frase afirmativa? Porque (junto) – usado para frases afirmativas (explicativas ou causais); Por que (separado) – em frases interrogativas ou quando pode ser substituído por “pelo qual” e suas variações; Por quê (separado e com acento) – no final de frase interrogativa. Porquê (junto e com acento) – quando for uma palavra substantivada. Quais os tipos de porquê? A palavra “porque” é resultado da junção da preposição “por” e do pronome relativo, interrogativo ou indefinido “que”. Ele apresenta quatro grafias diferentes: porque, porquê, por que e por quê. diferentes: porque, porquê, por que e por quê. Anterior O que acontece logo após a penhora online? Próxima Quem é mais forte Goku ou Omni-Man?",
+        "final": "https://todasasrespostas.com/qual-o-significado-de-quais",
+        "trecho_usado": "25 curiosidades que você vai gostar Quantas e quais são as classe gramaticais? Significado de E conjunção Conjunção que liga palavras e orações com mesma função. Indica adição: pai e mãe extremosos. Indica oposição: falou muito, e não disse nada. Para que serve os 4 tipos de porquês? Por que: utilizado em perguntas. Exemplo: Por que não voltamos para a casa? Porque: utilizado em respostas. ... Por",
+        "metadados": {
+          "titulo": "Qual o significado de Quais? - todasasrespostas.com",
+          "descricao": "Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? ... Plural de qual, do latim qualis.",
+          "canonica": "",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "Qual o significado de Quais? - todasasrespostas.com",
+            "og:description": "Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? ... Plural de qual, do latim qualis.",
+            "og:url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "og:site_name": "Todas as Respostas",
+            "og:image": "https://todasasrespostas.com/images/sharei.jpg",
+            "og:image:width": "1200",
+            "og:image:height": "640",
+            "og:image:type": "image/jpeg"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Todas as Respostas",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "25 curiosidades que você vai gostar"
+          },
+          {
+            "titulo": "Quantas e quais são as classe gramaticais?",
+            "texto": "Significado de E conjunção Conjunção que liga palavras e orações com mesma função. Indica adição: pai e mãe extremosos. Indica oposição: falou muito, e não disse nada."
+          },
+          {
+            "titulo": "Para que serve os 4 tipos de porquês?",
+            "texto": "Por que: utilizado em perguntas. Exemplo: Por que não voltamos para a casa? Porque: utilizado em respostas. ... Por quê: utilizado em perguntas no fim das frases.\n“O por que separado sempre pode embutir a palavra razão ou a palavra motivo ”, explica o professor. Isso vale para perguntas diretas - “Por que você não foi?\" vira \"Por que razão você não foi?\" e \"Por que você não pagou a conta?\" vira \"Por que motivo você não pagou a conta?\"."
+          },
+          {
+            "titulo": "Qual a regra dos porquês?",
+            "texto": "Por exemplo, de forma resumida, em caso de perguntas e respostas deve-se usar, respectivamente, por que e porque. Em contrapartida, quando a pergunta estiver no final da frase, utiliza-se por quê e, no caso do substantivo, porquê. Todavia, caso não tenha ficado didático o suficiente, não desista."
+          },
+          {
+            "titulo": "Qual porque é usado no meio da frase?",
+            "texto": "- Por que: usado no início ou meio das orações. Aparece em frase interrogativas e pode ser substituído pelas expressões “pelo qual”, “ por qual”. ... As orações que possuem esse termo podem ser explicativas ou causais. Exemplo: vou ao parque porque (pois) quero brincar de balanço."
+          },
+          {
+            "titulo": "Quais são as dez classe gramaticais e exemplos?",
+            "texto": "Classe gramatical é um conjunto que classifica determinada palavra. Elas são dez: substantivo, verbo, adjetivo, pronome, artigo, numeral, preposição, conjunção, interjeição e advérbio. As classes gramaticais são divididas em variáveis (aquelas que variam em gênero, número ou grau) e invariáveis (as que não variam)."
+          },
+          {
+            "titulo": "O que significa uma letra e?",
+            "texto": "Significado de letra e: A letra E é uma conjunção, ou seja, um conectivo lógico, um aditivo.\nNa gramática, o artigo é a classe de palavras que antecede o substantivo para determiná-lo de modo particular ou geral. Há dois tipos de artigos: Artigos definidos: o, os, a, as; Artigos indefinidos: um, uns, uma, umas."
+          },
+          {
+            "titulo": "Como identificar um artigo?",
+            "texto": "O artigo antepõe o substantivo, determinando-o ou indeterminando-o. O artigo integra as dez classes gramaticais que conhecemos, definindo-se como o termo que antepõe o substantivo para determiná-lo ou indeterminá-lo, indicando, também, o gênero (masculino/feminino) e o número (singular/plural)."
+          },
+          {
+            "titulo": "Como identificar um artigo definido?",
+            "texto": "Os artigos definidos (o, a, os, as) definem ou individualizam, de forma precisa, os substantivos, seja uma pessoa, objeto ou lugar. Exemplos: O garoto foi jantar na casa dos pais."
+          },
+          {
+            "titulo": "O que é um artigo de um texto?",
+            "texto": "Em Jornalismo, um artigo é um texto eminentemente opinativo — mais que informativo — publicado (ou veiculado) em seção destacada do conteúdo noticioso. Os autores recorrentes de artigos são chamados de articulistas. ... A introdução de um artigo define qual vai ser o assunto do texto, sendo necessário um tema polêmico.\nNuma frase, a letra e, sozinha, nunca se pronuncia ê, mas sim i: O Pedro e o Paulo foram passear. Comprei um livro e um caderno. Como denominação de letra, pronuncia-se é, e não ê, como vemos no alfabeto: a, b, c, d, e (= é e não ê), f, g, h, etc."
+          },
+          {
+            "titulo": "Qual é o significado das letras?",
+            "texto": "Uma letra é um grafema num sistema alfabético de escrita, como o Alfabeto grego e seus descendentes. Letras compõem fonemas e cada fonema representa um fone (som) na Língua falada.\nO sinal \"maior que\" é >. Assim, 9>7 é lido como 9 é maior que 7 . O sinal \"menor que\" é <. Outros dois sinais de comparação são ≥ (maior ou igual a) e ≤ (menor ou igual a)."
+          },
+          {
+            "titulo": "O que é gramática exemplo?",
+            "texto": "Gramática é o conjunto de regras que indicam o uso mais correto de uma língua. No início, a gramática tinha como função apenas estabelecer regras quanto à escrita e à leitura. É por isso que a palavra gramática, de origem grega (grámma), significa “letra”."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://todasasrespostas.com/images/sharei.jpg",
+          "https://todasasrespostas.com/images/logo2.png?34"
+        ],
+        "midia": [
+          {
+            "id": "med-94b146665332",
+            "type": "image",
+            "title": "Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? ... Plural de qual, do latim qualis.",
+            "url": "https://todasasrespostas.com/images/sharei.jpg",
+            "final_url": "https://todasasrespostas.com/images/sharei.jpg",
+            "source_title": "Qual o significado de Quais? - todasasrespostas.com",
+            "source_url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "publisher": "todasasrespostas.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? ... Plural de qual, do latim qualis.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7023bb107701",
+            "type": "image",
+            "title": "Todas as Respostas",
+            "url": "https://todasasrespostas.com/images/logo2.png?34",
+            "final_url": "https://todasasrespostas.com/images/logo2.png?34",
+            "source_title": "Qual o significado de Quais? - todasasrespostas.com",
+            "source_url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "publisher": "todasasrespostas.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Todas as Respostas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7b1d0a3bc8b7",
+            "type": "video",
+            "title": "Sentido e Significado [Prof Noslen]",
+            "url": "https://www.youtube.com/embed/QLEqDJ91wi8?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/QLEqDJ91wi8?feature=oembed",
+            "source_title": "Qual o significado de Quais? - todasasrespostas.com",
+            "source_url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Significado de Quais pronome, plural Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos? ... Plural de qual, do latim qualis.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "3fbe50589d0496bf18e1",
+            "url": "https://www.dicio.com.br/quais/",
+            "title": "Quais - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favo"
+          },
+          {
+            "id": "5fcd51d80694dd202e35",
+            "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "title": "Qual o significado de Quais? - todasasrespostas.com",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Com verbos transitivos diretos, que não pedem preposição, deverá ser usado o pronome relativo o qual. Já com verbos transitivos indiretos, que pedem preposição,"
+          },
+          {
+            "id": "0628eab884eab5394c53",
+            "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+            "title": "Os Quais ou As Quais: uso correto e exemplos",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, "
+          },
+          {
+            "id": "f1d1a6edda59e9ccd85c",
+            "url": "https://todasasrespostas.com/quais-ou-qual",
+            "title": "Quais ou qual? - todasasrespostas.com",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "“Do qual” é o resultado da junção da preposição “de” com o artigo masculino “o” e o pronome “qual”. Ele é utilizado quando o verbo da oração é transitivo indire"
+          },
+          {
+            "id": "27014bd4b1df3e614ea8",
+            "url": "https://cidesp.com.br/v2/a-qual-ou-as-quais",
+            "title": "A Qual ou As Quais: Uso Correto e Exemplos",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Os pronomes relativos a qual e as quais pertencem ao conjunto formado por o qual, a qual, os quais, as quais, que atua como referência textual para retomar um t"
+          },
+          {
+            "id": "40a79955a353ebc8c23f",
+            "url": "https://www.soportugues.com.br/secoes/sint/sint38_3.php",
+            "title": "Pronome Relativo O QUAL, OS QUAIS, A QUAL, AS QUAIS",
+            "origin": "bing",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "\"O qual\",\" a qual\",\" os quais\" e \"as quais\" são usados com referência a pessoa ou coisa. Desempenham as mesmas funções que o pronome \"que\"; seu uso, entretanto,"
+          },
+          {
+            "id": "4dde8ca5fbad97a231ac",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "CC-BY-SA 4.0",
+            "origin": "marginalia",
+            "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 7,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Quais filmes dirigidos por Denis Villene)",
+        "bing (consulta reformulada 'Quais filmes dirigidos por Denis Villene'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Quais filmes dirigidos por Denis Villene)",
+        "ddg: bloqueado (Quais filmes dirigidos por Denis Villene)",
+        "marginalia: 1 resultados (Quais filmes dirigidos por Denis Villene)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (Quais filmes dirigidos por Denis Villene)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (filmes dirigidos denis villeneuve lançad)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (filmes dirigidos denis villeneuve lançad)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quais filmes dirigidos por Denis Villeneuve foram lançados depois de 2015, sem documentários?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "1f5ff18d0c61e68392967efc44114d9c27a45d08",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

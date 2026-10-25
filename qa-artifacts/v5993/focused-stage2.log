@@ -1,0 +1,30 @@
+........................................................................ [ 40%]
+....................F................................................... [ 80%]
+...................................                                      [100%]
+================================== FAILURES ===================================
+_ test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-454/test_deep_aspect_accepts_relat0')
+
+    def test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it(tmp_path):
+        import pc_agent,research_agents
+        db=pc_agent.open_db(tmp_path/'qa.sqlite')
+        job=research_agents.criar_job(db,'local','asyncio.TaskGroup documentação oficial exemplos e limitações',conv='qa-chat',modo='profunda')
+        found=[{'titulo':'Task groups','url':'https://docs.example/taskgroup'}]
+        def read(url):
+            return {'titulo':'Task groups','texto':'class asyncio . TaskGroup(): Examples and limitations of structured concurrency. '*20,
+                    'final':url,'texto_lido':True}
+        result=research_agents.agente_analista(db,job,{'alvo':'limitações'},found,read,teto_paginas=1)
+>       assert result and db.execute('select count(*) from evidence').fetchone()[0]>0
+E       assert ([])
+
+tests\test_source_recovery_v5991.py:265: AssertionError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_source_recovery_v5991.py::test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it
+1 failed, 178 passed, 1 warning in 13.68s

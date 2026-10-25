@@ -1,0 +1,81 @@
+### Result
+{"scope":"AUTHENTICATED_E2E_LOCAL_REAL_AGENT","name":"local-news","query":"Pesquisa profunda sobre notícias de Ubatã, Bahia, publicadas nos últimos sete dias.","seconds":21.499,"http_status":200,"content_type":"text/event-stream; charset=utf-8","job":"rj-83959a81db5c","job_state":"concluida","job_mode":"profunda","outcome":{"state":"partial","unresolved_fronts":["\"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\" notícias de Ubatã, Bahia, publicadas nos últimos sete dias primary source original text","bahia fontes primárias texto completo","notícias ubatã fontes primárias texto completo","publicadas nos últimos sete dias fontes primárias texto completo","publicadas nos últimos sete dias ubatã bahia"],"provider_code":"","read_sources":0,"reason":"evidências insuficientes ou limitações remanescentes"},"synthesis_llm":false,"chat_result_id":"rj-83959a81db5c-result","answer_coverage":{"applicable":false,"requirements":[],"passages":[],"complete":false,"scope":"no explicit supported facet parsed; not proof of completeness"},"stage_timings":[{"step_id":"p1","type":"busca","seconds":3.6496},{"step_id":"p4","type":"busca","seconds":0.4338},{"step_id":"p7","type":"busca","seconds":3.412},{"step_id":"p2","type":"ler","seconds":2.942},{"step_id":"p5","type":"ler","seconds":0.6936},{"step_id":"p8","type":"ler","seconds":7.7383},{"step_id":"p3","type":"analisar","seconds":0.0013},{"step_id":"p6","type":"analisar","seconds":0.0009},{"step_id":"p9","type":"analisar","seconds":0.0009},{"step_id":"p10","type":"verificar","seconds":0.005},{"step_id":"p11","type":"sintetizar","seconds":0.0006},{"step_id":"p12","type":"auditar","seconds":0.0016}],"synthesis_budget":null,"assistant_messages":2,"reload_preserved":true,"source_cards":["Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\nENCONTRADA\nBahia Notícias · Notícia · Publicado em Mon, 19 Oct 2026 13:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nDefensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias\nAbrir fonte ↗","Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1\nENCONTRADA\nG1 · Notícia · Publicado em Mon, 31 Aug 2026 07:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nHomem morre e mulher fica ferida após ataque a tiros em cidade da Bahia G1\nAbrir fonte ↗","Twitch\nENCONTRADA\nTwitch · Notícia · Publicado em sáb., 24 out. 2026 05:03:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nGostaríamos de exibir a descriçãoaqui, mas o site que você está não nos permite.\nAbrir fonte ↗","Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural\nENCONTRADA\nCanal Rural · Notícia · Publicado em Mon, 08 Jun 2026 07:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nConab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural\nAbrir fonte ↗"],"links":[{"text":"Defensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias","url":"https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5"},{"text":"Abrir fonte ↗","url":"https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUmQ4eV9odUFSZXc1S2p3SkRwSG9fQWg1bW5PeThhcUt3RzAtQWoxNWt0QTh4YzdNUWpTcDNlSGhHOG5UTWVNakI2dEg0S19qV0hoTi1QdlNRaXlxN2tFZmtDSUowNldNc0cwb1VOdjVET0dMb1lUT1VkdjFMcXYyM1dZVDdZVFpLOXRxOHU5dVVma1hYQUViZXJYWVJjb0xGak5YMDBMUnBlMHo1ZWY2dDNmYWNrVnJmckpuTHJmRDZxM0hZN0E2b0RBU3JicHhWNDcwaXM5YnpuYWRDYUE?oc=5"},{"text":"Homem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1","url":"https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5"},{"text":"Abrir fonte ↗","url":"https://news.google.com/rss/articles/CBMinAFBVV95cUxNelV3TWZ1YV9hcnREVkhkQXhnZVd2YzA2Y2JlTXZnSkh2MWlmdE11RFhPdjQ2WU9OVkVMM3cxOGNpOHpRVWY3VGwyNnN5bk1MeTA4TC1ydmxWMElCWjR5WFo1SWpFLVNkQVlDNFN1TXRlajdHMFhuMUlQa0N2c3BmaUNYczFMOHBmRC1WMThLTmpoZUctTFVZNk9nUUrSAasBQVVfeXFMTloyc1oyMzV0Y2tjaUJKT0RVX2JSWDZ4cVR1SFV6OXFnZ3hncnFHNVVDOEpfRG1FSkMxMEw4LW1kb2xnVk5vY2hIY0RwLUp5bzJydURPT0pqbnU1VGF6UXlUcGlOc20wNWE3eFVOaWtWUDFUR01CVFgxOWNCNHgtbFAwX09Ma3ZkR2tNeWVjVkJOSXdtdDFiZWN3VTF3dDBjdzFGQVo2ZWJYQ1Jz?oc=5"},{"text":"Twitch","url":"https://www.twitch.com/login"},{"text":"Abrir fonte ↗","url":"https://www.twitch.com/login"},{"text":"Conab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural","url":"https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5"},{"text":"Abrir fonte ↗","url":"https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZDd6UHVTakttczB5bVRpVjlvcTRtaUNUbEg0ZTh6Q2ZOanBodTRFNE5TWms0WG1QNkMtLTFXUnZNYXhybXUtNlhzeTgyc3hsUGNxR01qUnZMYm95U0RTdFByNlRLbFBxUmdPc1RMRHdxcWFWWnVIS3kyR3l0VzdWamdtM1doNVpTa2Y5N1lDN3ZCOUdmNmxxZ3JrT1Z6ZkwwblVoeExiNml4Q2c?oc=5"}],"media_cards":0,"public_answer":"v.\nVexx\n\nResultado da pesquisa\n\nInvestigação: notícias de Ubatã, Bahia, publicadas nos últimos sete dias\n\nEvidências: 4; afirmações sustentadas: 0/1 (critério léxico).\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.\n\nObjetivo: notícias de Ubatã, Bahia, publicadas nos últimos sete dias\n\nStatus: concluída · Modo: profunda · Evidências: 4\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nFontes e estado da leitura\nDefensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro - Bahia Notícias\nENCONTRADA\nBahia Notícias · Notícia · Publicado em Mon, 19 Oct 2026 13:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nDefensoria leva atendimento jurídico gratuito a Nova Ibiá e Ubatã entre 20 e 22 de outubro Bahia Notícias\nAbrir fonte ↗\nHomem morre e mulher fica ferida após ataque a tiros em cidade da Bahia - G1\nENCONTRADA\nG1 · Notícia · Publicado em Mon, 31 Aug 2026 07:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nHomem morre e mulher fica ferida após ataque a tiros em cidade da Bahia G1\nAbrir fonte ↗\nTwitch\nENCONTRADA\nTwitch · Notícia · Publicado em sáb., 24 out. 2026 05:03:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nGostaríamos de exibir a descriçãoaqui, mas o site que você está não nos permite.\nAbrir fonte ↗\nConab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia - Canal Rural\nENCONTRADA\nCanal Rural · Notícia · Publicado em Mon, 08 Jun 2026 07:00:00 GMT\nPágina não lida; sem suporte factual · Fonte de contexto\nConab apresenta propostas do PAA 2026 durante a Expo Ubatã, na Bahia Canal Rural\nAbrir fonte ↗\n11:05\n···","page_errors":[]}
+### Ran Playwright code
+```js
+await (async page => {
+  if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
+  if (await page.locator('#loginOverlay').isVisible()) {
+    await page.getByRole('textbox', {name: 'Usuário', exact: true}).fill('alice');
+    await page.getByRole('textbox', {name: 'Senha', exact: true}).fill('qa-password-long-5981');
+    await page.getByRole('button', {name: 'Entrar ↗', exact: true}).click();
+    await page.locator('#loginOverlay').waitFor({state: 'hidden'});
+  }
+  const configuration = await page.evaluate(() => JSON.parse(sessionStorage.getItem('research-qa-config') || 'null'));
+  const directory = configuration?.version === 'v5993' ? 'qa-artifacts/v5993' : 'qa-artifacts/v5992';
+  const cases = configuration?.version === 'v5993' ? configuration.cases : [
+    ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
+    ['company', 'Pesquisa profunda sobre a história da empresa WEG fontes primárias.'],
+    ['technical', 'Pesquisa profunda sobre asyncio.TaskGroup documentação oficial exemplos e limitações.'],
+    ['images', 'Pesquise imagens da Ponte Estaiada de São Paulo.'],
+    ['cancel', 'Pesquisa profunda sobre tecnologias de armazenamento de energia e limitações.'],
+    ['focused-technical', 'Pesquisa profunda sobre como usar asyncio.TaskGroup na documentação oficial.']
+  ];
+  const index = await page.evaluate(() => Number(sessionStorage.getItem('v5992-next') || 0));
+  if (index >= cases.length) return {complete: true};
+  const [name, query] = cases[index], errors = [];
+  const onError = e => errors.push(e.message);
+  page.on('pageerror', onError);
+  try {
+    if (await page.locator('.message').count()) {
+      if (!(await page.locator('#newChatCta').isVisible())) await page.locator('#drawerOpen').click();
+      await page.locator('#newChatCta').click();
+    }
+    const start = Date.now();
+    await page.getByRole('textbox', {name: 'Mensagem', exact: true}).fill(query);
+    const pending = page.waitForResponse(r => r.url().includes('/api/ai/stream') && r.request().method() === 'POST');
+    await page.getByRole('button', {name: 'Enviar', exact: true}).click();
+    const response = await pending;
+    await page.locator('.message.ai').last().waitFor({state: 'visible', timeout: 15000});
+    await page.locator('#stopGen').waitFor({state: 'hidden', timeout: 110000});
+    const initial = await page.locator('.message.ai').last().innerText();
+    const job = (initial.match(/id (rj-[a-z0-9]+)/) || [])[1];
+    let status = null;
+    if (job) {
+      if (name === 'cancel') await page.locator('#researchCancel').click();
+      if (name === 'technical') await page.reload();
+      const deadline = Date.now() + 140000;
+      do {
+        status = await page.evaluate(async id => (await (await fetch('/api/research/status?job_id=' + encodeURIComponent(id))).json()).resumo, job);
+        if (['concluida', 'cancelada', 'falhou', 'interrompida'].includes(status?.status)) break;
+        await new Promise(resolve => setTimeout(resolve, 2500));
+      } while (Date.now() < deadline);
+      if (status?.chat_result_id) await page.locator('.message.ai').getByText('Resultado da pesquisa', {exact: true}).last().waitFor({state: 'visible', timeout: 20000});
+    }
+    const messages = await page.locator('.message.ai').allInnerTexts();
+    const stored = await page.locator('.message.ai').evaluateAll(nodes => nodes.map(n => ({id: n.dataset.mid, text: JSON.parse(n._renderSignature)[0]})));
+    const sources = await page.locator('.message.ai .jdui-srccard').allInnerTexts();
+    const links = await page.locator('.message.ai .jdui-srccard a').evaluateAll(nodes => nodes.map(a => ({text: a.innerText, url: a.href})));
+    const media = await page.locator('.message.ai .jdui-media-grid .jdui-pcard').count();
+    await page.screenshot({path: directory + '/chat-' + name + '.png', fullPage: true});
+    await page.reload();
+    await page.locator('#loginOverlay').waitFor({state: 'hidden'});
+    await page.locator('[data-mid="' + stored.at(-1).id + '"]').waitFor({state: 'visible', timeout: 20000});
+    const after = await page.locator('.message.ai').allInnerTexts();
+    const restored = await page.locator('.message.ai').evaluateAll(nodes => nodes.map(n => ({id: n.dataset.mid, text: JSON.parse(n._renderSignature)[0]})));
+    if (JSON.stringify(stored) !== JSON.stringify(restored)) throw Error('Persisted message IDs/text changed after reload');
+    await page.evaluate(n => sessionStorage.setItem('v5992-next', String(n)), index + 1);
+    return {scope: 'AUTHENTICATED_E2E_LOCAL_REAL_AGENT', name, query, seconds: (Date.now() - start) / 1000,
+      http_status: response.status(), content_type: response.headers()['content-type'], job: job || null,
+      job_state: status?.status || null, job_mode: status?.modo || null, outcome: status?.usados?.research_outcome || null,
+      synthesis_llm: status?.sintese?.llm || false, chat_result_id: status?.chat_result_id || null,
+      answer_coverage: status?.usados?.answer_coverage || null,
+      stage_timings: status?.usados?.stage_timings || null,
+      synthesis_budget: status?.usados?.synthesis_budget || null,
+      assistant_messages: after.length, reload_preserved: true, source_cards: sources, links, media_cards: media,
+      public_answer: after.at(-1), page_errors: errors};
+  } finally { page.removeListener('pageerror', onError); }
+}
+)(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-25T14-03-37-503Z.log#L15-L17

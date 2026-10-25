@@ -1,0 +1,45 @@
+......................F......................F................           [100%]
+================================== FAILURES ===================================
+________________ test_bench_pesquisa_v57_offline_tudo_aprovado ________________
+
+    def test_bench_pesquisa_v57_offline_tudo_aprovado():
+        rel = _carregar().rodar(salvar=False)
+>       assert rel["falhas"] == []
+E       AssertionError: assert ['fluxo_junk:... o freio ABS'] == []
+E         
+E         Left contains one more item: 'fluxo_junk: como funciona o freio ABS'
+E         Use -v to get more diff
+
+tests\test_bench_pesquisa_v57.py:24: AssertionError
+__________ test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022393CC0F30>
+
+    def test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte(monkeypatch):
+        chamadas = []
+    
+        def _buscar(nome, consulta, limite=6, timeout=10.0):
+            chamadas.append((nome, consulta))
+            if "funciona" in consulta.lower():
+                return [{"titulo": "Funciona - Dicionário", "url": "https://dicio.example/funciona",
+                         "trecho": "conjugação do verbo funciona", "origem": nome, "tipo": "pagina"}]
+            return [
+                {"titulo": "Freio ABS: o que é e como funciona", "url": "https://auto.example/abs",
+                 "trecho": "sistema de freio ABS com sensor", "origem": nome, "tipo": "pagina"},
+                {"titulo": "Freio ABS — Wikipédia", "url": "https://pt.wikipedia.org/wiki/Freio_ABS",
+                 "trecho": "freio antibloqueio", "origem": nome, "tipo": "enciclopedia"},
+            ]
+    
+        monkeypatch.setattr(sp, "buscar", _buscar)
+        res = orch.pesquisar("como funciona o freio ABS", provedores=["bing"],
+                             orcamento=ORC)
+        assert ("bing", "freio ABS") in chamadas
+>       assert any("consulta reformulada" in e for e in res["etapas"])
+E       assert False
+E        +  where False = any(<generator object test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte.<locals>.<genexpr> at 0x0000022393CBEF60>)
+
+tests\test_search_orchestrator_v57.py:63: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_bench_pesquisa_v57.py::test_bench_pesquisa_v57_offline_tudo_aprovado
+FAILED tests/test_search_orchestrator_v57.py::test_junk_com_verbo_de_pergunta_reformula_na_mesma_fonte
+2 failed, 60 passed in 4.45s

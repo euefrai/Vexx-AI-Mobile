@@ -1,0 +1,10 @@
+### Result
+{"case_count":1,"query_length":108}
+### Ran Playwright code
+```js
+await (async page => {
+ const configuration={version:'v5993',inference_policy:'research-synthesis-disabled-after-rate-limit',cases:[['technical','Pesquisa profunda sobre como funciona WebAssembly.Memory.grow na documentação oficial, sintaxe e limitações.']]};
+ await page.evaluate(config=>{sessionStorage.setItem('research-qa-config',JSON.stringify(config));sessionStorage.setItem('v5992-next','0');},configuration);
+ return {case_count:configuration.cases.length,query_length:configuration.cases[0][1].length};
+})(page);
+```

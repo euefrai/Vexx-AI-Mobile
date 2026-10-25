@@ -1,0 +1,54 @@
+{
+  "scope": "REPRODUCTION_CURRENT_CODE_WITH_PREVIOUSLY_CAPTURED_PUBLIC_EXTRACTION",
+  "question": "Quem fundou a WEG, em que ano e quais são seus principais produtos?",
+  "topic_profile": {
+    "original_request": "Quem fundou a WEG, em que ano e quais são seus principais produtos?",
+    "primary_topic": "Quem fundou a WEG, em que ano e quais são seus principais produtos",
+    "secondary_topics": [],
+    "entities": [
+      {
+        "name": "Quem",
+        "kind": "unresolved_named_entity",
+        "resolution": "explicit_text_not_verified"
+      },
+      {
+        "name": "WEG",
+        "kind": "unresolved_named_entity",
+        "resolution": "explicit_text_not_verified"
+      }
+    ],
+    "required_information": [],
+    "intent": "research",
+    "hard_constraints": {
+      "unparsed_original_guard": ""
+    },
+    "soft_preferences": [],
+    "presentation_preferences": [],
+    "focused_query": "Quem fundou a WEG, em que ano e quais são seus principais produtos",
+    "scope": "explicit syntax only; not universal entity disambiguation"
+  },
+  "known_documentation_query": "Documentação oficial WebAssembly memory grow limitações",
+  "returned_sources": [
+    {
+      "url": "https://en.wikipedia.org/wiki/WebAssembly",
+      "relevante": true,
+      "status": "aberta",
+      "texto_lido": null,
+      "trecho": null
+    },
+    {
+      "url": "https://webassembly.org/",
+      "relevante": false,
+      "status": "aberta",
+      "texto_lido": null,
+      "trecho": null
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+      "relevante": false,
+      "status": "aberta",
+      "texto_lido": null,
+      "trecho": null
+    }
+  ]
+}

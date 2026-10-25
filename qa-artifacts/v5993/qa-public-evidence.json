@@ -1,0 +1,70 @@
+[
+  {
+    "case": "e2e-qualified-interface",
+    "id": "ev-9f5259af19cd",
+    "url": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+    "title": "WebAssembly.Memory.prototype.grow() - WebAssembly | MDN",
+    "excerpt": "Syntax js grow(delta) Parameters delta The number of WebAssembly pages you want to grow the memory by (each one is 64KiB in size). For memories with an address type of , this must be a value. \"i64\" BigInt Return value The previous size of the memory, in units of WebAssembly pages. For memories with an address type of , this is a value. \"i64\" BigInt Exceptions : If the current size added with exceeds the Memory instance's maximum size capacity.",
+    "content_scope": "page_text",
+    "read": true,
+    "passages": [
+      {
+        "id": "P-f2c1dcb63cf71214",
+        "source_url": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "text": "Syntax js grow(delta) Parameters delta The number of WebAssembly pages you want to grow the memory by (each one is 64KiB in size). For memories with an address type of , this must be a value. \"i64\" BigInt Return value The previous size of the memory, in units of WebAssembly pages. For memories with an address type of , this is a value. \"i64\" BigInt Exceptions : If the current size added with exceeds the Memory instance's maximum size capacity.",
+        "text_span": {
+          "start": 0,
+          "end": 447,
+          "scope": "returned_extracted_text"
+        },
+        "section": "",
+        "requirement_id": "R-c715ea78dfd0",
+        "source_id": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "evidence_id": "",
+        "answerability": "DIRECT_ANSWER",
+        "reason": "explicit_entity_and_attribute_relation_in_read_span"
+      },
+      {
+        "id": "P-eb2514e335f8308f",
+        "source_url": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "text": "RangeError delta Examples Using grow The following example creates a new WebAssembly Memory instance with an initial size of 1 page (64KiB), and a maximum size of 10 pages (640KiB). js const memory = new WebAssembly.Memory({ initial: 1, maximum: 10, }); We can then grow the instance by one page like so: js const bytesPerPage = 64 * 1024; console.log(memory.buffer.byteLength / bytesPerPage); // \"1\" console.log(memory.grow(1)); // \"1\" console.log(memory.buffer.byteLength / bytesPerPage); // \"2\" Note the return value of here is the previous number of WebAssembly pages. grow() Growing a 64-bit memory For memories with an address type of , pass a value to : \"i64\" BigInt grow() js const memory = new WebAssembly.Memory({ address: \"i64\", initial: 1n, maximum: 10n, }); console.log(memory.grow(1n)); // 1n Detachment upon growing Every call to will detach any references to the old , even for ! Detachment means that the 's becomes zero, and it no longer has bytes accessible to JavaScript.",
+        "text_span": {
+          "start": 448,
+          "end": 1439,
+          "scope": "returned_extracted_text"
+        },
+        "section": "",
+        "requirement_id": "R-56f10dde42ab",
+        "source_id": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "evidence_id": "",
+        "answerability": "DIRECT_ANSWER",
+        "reason": "explicit_entity_and_attribute_relation_in_read_span"
+      },
+      {
+        "id": "P-5d5510161d7c9427",
+        "source_url": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "text": "Accessing the property after calling , will yield an with the correct length. grow buffer grow(0) ArrayBuffer byteLength buffer grow ArrayBuffer js const memory = new WebAssembly.Memory({ initial: 1, }); const oldMemoryView = new Uint8Array(memory.buffer); memory.grow(1); // the array is empty! console.log(oldMemoryView); // Uint8Array [] js const memory = new WebAssembly.Memory({ initial: 1, }); memory.grow(1); const currentMemoryView = new Uint8Array(memory.buffer); // the array is full of zeros console.log(currentMemoryView); // Uint8Array(131072) [ 0, 0, 0, ... ] // 131072 = 64KiB * 2 For a shared instance, the initial (which would be a in such case) will not become detached, but rather its length will not be updated. Accesses to the property after growing will yield a larger which may access a larger span of memory than the buffer from before growing the . Every from the property will all refer to the start of the same memory address range, and thus manipulate the same data.",
+        "text_span": {
+          "start": 1440,
+          "end": 2434,
+          "scope": "returned_extracted_text"
+        },
+        "section": "",
+        "requirement_id": "R-c715ea78dfd0",
+        "source_id": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow",
+        "evidence_id": "",
+        "answerability": "DIRECT_ANSWER",
+        "reason": "explicit_entity_and_attribute_relation_in_read_span"
+      }
+    ],
+    "answerability": {
+      "state": "DIRECT_ANSWER",
+      "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+      "aspects": [
+        "Sintaxe ou assinatura",
+        "Comportamento da operação",
+        "Limitações"
+      ]
+    }
+  }
+]

@@ -1,0 +1,2625 @@
+{
+  "id": "aa-09",
+  "category": "company_history",
+  "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.37,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "wikipedia",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "origem empresa boticário quem seu fundador",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Qual+%C3%A9+a+origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Qual+%C3%A9+a+origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5074
+    },
+    {
+      "url": "https://www.bing.com/search?q=origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5325
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Qual%20%C3%A9%20a%20origem%20da%20empresa%20O%20Botic%C3%A1rio%20e%20quem%20foi%20seu%20fundador%3F",
+      "final": "https://html.duckduckgo.com/html/?q=Qual%20%C3%A9%20a%20origem%20da%20empresa%20O%20Botic%C3%A1rio%20e%20quem%20foi%20seu%20fundador%3F",
+      "chars": 14354
+    },
+    {
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "final": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "chars": 91152
+    },
+    {
+      "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "final": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "chars": 532898
+    },
+    {
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "final": "https://www.adorocinema.com/series/serie-28959/",
+      "chars": 328113
+    },
+    {
+      "url": "https://www.imdb.com/pt/title/tt9813792/",
+      "final": "https://www.imdb.com/pt/title/tt9813792/",
+      "chars": 0
+    },
+    {
+      "url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+      "final": "https://watch.plex.tv/pt-BR/show/from/season/1",
+      "chars": 725688
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+      "final": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+      "chars": 1243230
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "domain": "general",
+    "original_request": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "resolved_request": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T13:38:47.609534+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "1502d638c6fe17ce940c",
+        "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "title": "Origem: assista agora! - Globoplay",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "qua., 21 out. 2026 00:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2304,
+        "final_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "835f2166342b4573f980",
+        "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+        "title": "Origem: entenda como surgem os monstros da série From - UOL",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "2025-02-26T08:30:00.000Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "são jogados novamente no vilarejo. Assista à nova série Crystal Lake no UOL Play. Experimente 7 Dias Grátis. Origem dos monstros A terceira temporada de \"Origem",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1369,
+        "final_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "adbeb420ed9a5325ff22",
+        "url": "https://www.adorocinema.com/series/serie-28959/",
+        "title": "Origem - Série 2022 - AdoroCinema",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "dom., 25 out. 2026 04:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Eth",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1010,
+        "final_url": "https://www.adorocinema.com/series/serie-28959/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0c133cec08fe9663b0d4",
+        "url": "https://www.imdb.com/pt/title/tt9813792/",
+        "title": "Origem (Série de TV 2022– ) - IMDb",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "sáb., 24 out. 2026 22:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Ce",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.imdb.com/pt/title/tt9813792/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "4b3aedb251c1f349e0e8",
+        "url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+        "title": "Where to Watch Origem • Temporada 1 Full Episodes Online - Plex",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "dom., 25 out. 2026 02:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Livro 74 E6 Livro ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2272,
+        "final_url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "34a6874e6f61ad6df50e",
+        "url": "https://globoplay.globo.com/v/12198055/",
+        "title": "Assistir Origem - online | Globoplay",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "seg., 08 jun. 2026 16:22:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja Origem Temporada 2 Episódio null online no Globoplay",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6339b16e521a29a931d6",
+        "url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+        "title": "Parks and Recreation - Wikipedia",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "2008-12-22T07:21:17Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "created by and . The series aired on from April 9, 2009, to February 24, 2015, for 125 episodes, over seven seasons. A aired on April 30, 2020. The series stars",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "3636e5b29eff61cea8db",
+        "url": "https://www.primevideo.com/-/pt/detail/0K8D7DPVRQZCE0CUSM6V7MAH0T",
+        "title": "Prime Video: Parks and Recreation - Temporada 1",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "qui., 30 jul. 2026 00:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Amy Poehler é Leslie Knope, uma burocrata de nível médio no Departamento de Parques de Pawnee, Indiana.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6dbc5b8280f91a8371b8",
+        "url": "https://www.netflix.com/title/70143842",
+        "title": "Parks and Recreation - Netflix",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "sáb., 24 out. 2026 20:55:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "In this Emmy-nominated comedy, an employee with a rural Parks and Recreation department is full of energy and ideas but bogged down by bureaucracy.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c4fbb19c705f6d4e5872",
+        "url": "https://www.imdb.com/pt/title/tt1266020/",
+        "title": "Parks and Recreation (Série de TV 2009–2015) - IMDb",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "qua., 06 mai. 2026 05:41:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "With its memorable catchphrases, iconic characters, and enduring positivity, \"Parks and Recreation\" has left a lasting impact on popular culture. Its optimistic",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9921eac30eb73d9db46d",
+        "url": "https://www.imdb.com/title/tt1266020/",
+        "title": "Parks and Recreation (TV Series 2009–2015) - IMDb",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "sáb., 24 out. 2026 05:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Parks and Recreation: Created by Greg Daniels, Michael Schur. With Amy Poehler, Jim O'Heir, Nick Offerman, Aubrey Plaza. The absurd antics of an Indiana town's ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6c6b508244b2c2b809c1",
+        "url": "https://pt.wikipedia.org/wiki/Parks_and_Recreation",
+        "title": "Parks and Recreation – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "origem da empresa O Boticário e quem foi seu fundador",
+        "date": "qui., 22 out. 2026 08:54:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Parks and Recreation (br: Confusões de Leslie) é uma série de televisão norte-americana de comédia de situação criada pelo argumentista e diretor Greg Daniels e",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-5cfbe4220de1",
+      "type": "image",
+      "title": "Veja Origem online no Globoplay",
+      "url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+      "final_url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s2-globo-play.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Veja Origem online no Globoplay",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-319e407b40ae",
+      "type": "image",
+      "title": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e persegu",
+      "url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+      "final_url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s04.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4166598579e5",
+      "type": "image",
+      "title": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas ",
+      "url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+      "final_url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s03.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4c42814455b7",
+      "type": "image",
+      "title": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará",
+      "url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+      "final_url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s04.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7afa45d6b893",
+      "type": "image",
+      "title": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cida",
+      "url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+      "final_url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s03.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-065b27726ce4",
+      "type": "image",
+      "title": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tent",
+      "url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+      "final_url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s01.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ac45d95f9105",
+      "type": "image",
+      "title": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com ",
+      "url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+      "final_url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+      "source_title": "Origem: assista agora!",
+      "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "publisher": "s02.video.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e97de0da53f8",
+      "type": "image",
+      "title": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura t",
+      "url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+      "final_url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+      "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "publisher": "conteudo.imguol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajud",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1e21bbd8d49a",
+      "type": "image",
+      "title": "Monstro da série Origem (Globoplay)",
+      "url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_900x506.jpg",
+      "final_url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_900x506.jpg",
+      "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "publisher": "conteudo.imguol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Monstro da série Origem (Globoplay)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4d3f02027caa",
+      "type": "image",
+      "title": "Alerta de Spoiler Splash",
+      "url": "https://conteudo.imguol.com.br/c/splash/45/2020/12/26/alerta-de-spoiler-splash-1608991656601_v2_750x1.jpg",
+      "final_url": "https://conteudo.imguol.com.br/c/splash/45/2020/12/26/alerta-de-spoiler-splash-1608991656601_v2_750x1.jpg",
+      "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "publisher": "conteudo.imguol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Alerta de Spoiler Splash",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c5027a8da4b0",
+      "type": "image",
+      "title": "Aliados de Flávio projetam vantagem maior nas urnas",
+      "url": "https://conteudo.imguol.com.br/c/home/6c/2024/01/26/leticia-casado---autor-1706269688458_v2_100x100.jpg",
+      "final_url": "https://conteudo.imguol.com.br/c/home/6c/2024/01/26/leticia-casado---autor-1706269688458_v2_100x100.jpg",
+      "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "publisher": "conteudo.imguol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aliados de Flávio projetam vantagem maior nas urnas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-de2bd28613b4",
+      "type": "image",
+      "title": "Campanha do PT vive apreensão após pesquisas",
+      "url": "https://conteudo.imguol.com.br/c/home/62/2026/05/15/tatiana-farah-1778882868920_100x100.png?1778882875545",
+      "final_url": "https://conteudo.imguol.com.br/c/home/62/2026/05/15/tatiana-farah-1778882868920_100x100.png?1778882875545",
+      "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "publisher": "conteudo.imguol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Campanha do PT vive apreensão após pesquisas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "titulo": "Origem: assista agora!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qua., 21 out. 2026 00:34:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "titulo": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-02-26T08:30:00.000Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "titulo": "Origem",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 04:12:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.adorocinema.com/series/serie-28959/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "items": [
+        {
+          "titulo": "Origem: assista agora! - Globoplay",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "trecho": "Veja Origem online no Globoplay 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 00:34:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://globoplay.globo.com/origem/t/t89f1QshQP",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem - Série 2022 - AdoroCinema",
+          "url": "https://www.adorocinema.com/series/serie-28959/",
+          "trecho": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:12:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://adorocinema.com/series/serie-28959",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem (Série de TV 2022– ) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "trecho": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Central que aprisiona todos os que entram.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:57:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://imdb.com/pt/title/tt9813792",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Where to Watch Origem • Temporada 1 Full Episodes Online - Plex",
+          "url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+          "trecho": "Where to watch Origem • Temporada 1 starring Harold Perrineau, Catalina Sandino Moreno, Eion Bailey. Stream Origem • Temporada 1 online today!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:24:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://watch.plex.tv/pt-BR/show/from/season/1",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Assistir Origem - online | Globoplay",
+          "url": "https://globoplay.globo.com/v/12198055/",
+          "trecho": "Veja Origem Temporada 2 Episódio null online no Globoplay",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 08 jun. 2026 16:22:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://globoplay.globo.com/v/12198055",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem: entenda como surgem os monstros da série From - UOL",
+          "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "trecho": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajudar a desvendar mais sobre as criaturas do vilarejo Fromville.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 26 fev. 2025 05:26:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "items": [
+        {
+          "titulo": "Parks and Recreation - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+          "trecho": "Parks and Recreation (also known as Parks and Rec) is an American political satire mockumentary television sitcom created by Greg Daniels and Michael Schur. The series aired on NBC from April 9, 2009, to February 24, 2015, for 125 episodes, over seven seasons.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 08:16:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parks and Recreation – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Parks_and_Recreation",
+          "trecho": "Parks and Recreation (br: Confusões de Leslie) é uma série de televisão norte-americana de comédia de situação criada pelo argumentista e diretor Greg Daniels e pelo produtor Michael Schur, e exibida na rede de televisão National Broadcasting Company (NBC).",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 08:54:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Parks_and_Recreation",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 3.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Prime Video: Parks and Recreation - Temporada 1",
+          "url": "https://www.primevideo.com/-/pt/detail/0K8D7DPVRQZCE0CUSM6V7MAH0T",
+          "trecho": "Amy Poehler é Leslie Knope, uma burocrata de nível médio no Departamento de Parques de Pawnee, Indiana.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 30 jul. 2026 00:47:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://primevideo.com/-/pt/detail/0K8D7DPVRQZCE0CUSM6V7MAH0T",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parks and Recreation - Netflix",
+          "url": "https://www.netflix.com/title/70143842",
+          "trecho": "In this Emmy-nominated comedy, an employee with a rural Parks and Recreation department is full of energy and ideas but bogged down by bureaucracy.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:55:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://netflix.com/title/70143842",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parks and Recreation (Série de TV 2009–2015) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt1266020/",
+          "trecho": "With its memorable catchphrases, iconic characters, and enduring positivity, \"Parks and Recreation\" has left a lasting impact on popular culture. Its optimistic outlook, coupled with its ability to blend humor with meaningful storytelling, ensures its place among the most beloved sitcoms of all time",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 06 mai. 2026 05:41:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://imdb.com/pt/title/tt1266020",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parks and Recreation (TV Series 2009–2015) - IMDb",
+          "url": "https://www.imdb.com/title/tt1266020/",
+          "trecho": "Parks and Recreation: Created by Greg Daniels, Michael Schur. With Amy Poehler, Jim O'Heir, Nick Offerman, Aubrey Plaza. The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing",
+          "url_canonica": "https://imdb.com/title/tt1266020",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "result": {
+        "titulo": "Origem: assista agora!",
+        "texto": "1 h 1. A Longa Jornada Noite Adentro A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer. A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer. 1 h 2. Como as Coisas Estão Agora Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade. Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade. 1 h 3. O Dia da Escolha A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade. A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade. 1 h 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1 h 5. Silhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. 1 h 6. Livro 74 Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores. Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.",
+        "final": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "trecho_usado": "confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1 h 5. Silhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Jim, Tabitha e Ethan fazem perguntas na",
+        "metadados": {
+          "titulo": "Origem: assista agora!",
+          "descricao": "Veja Origem online no Globoplay",
+          "canonica": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "og": {
+            "og:title": "Origem: assista agora!",
+            "og:url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "og:description": "Veja Origem online no Globoplay",
+            "og:image": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:type": "image/jpeg",
+            "og:image:secure_url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:width": "830",
+            "og:image:height": "558",
+            "og:image:alt": "Veja Origem online no Globoplay",
+            "og:site_name": "Globoplay",
+            "og:type": "video.tv_show"
+          },
+          "twitter": {
+            "twitter:title": "Origem: assista agora!",
+            "twitter:description": "Veja Origem online no Globoplay",
+            "twitter:image": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "twitter:site": "@globoplay",
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Globoplay",
+          "tipo": "video.tv_show",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "1. A Longa Jornada Noite Adentro",
+            "texto": "A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.\nA viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer."
+          },
+          {
+            "titulo": "2. Como as Coisas Estão Agora",
+            "texto": "Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.\nJim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.\nA família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.\nA família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade."
+          },
+          {
+            "titulo": "4. Uma Pedra e uma Árvore Distante",
+            "texto": "Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.\nOs amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.\nJim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.\nJim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.\nApós a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.\nApós a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+          "https://s04.video.glbimg.com/x216/11304251.jpg",
+          "https://s03.video.glbimg.com/x216/11304546.jpg",
+          "https://s04.video.glbimg.com/x216/11304519.jpg",
+          "https://s03.video.glbimg.com/x216/11304378.jpg",
+          "https://s01.video.glbimg.com/x216/11304520.jpg",
+          "https://s02.video.glbimg.com/x216/11304525.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-5cfbe4220de1",
+            "type": "image",
+            "title": "Veja Origem online no Globoplay",
+            "url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "final_url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s2-globo-play.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja Origem online no Globoplay",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-319e407b40ae",
+            "type": "image",
+            "title": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e persegu",
+            "url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+            "final_url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s04.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4166598579e5",
+            "type": "image",
+            "title": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas ",
+            "url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+            "final_url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s03.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4c42814455b7",
+            "type": "image",
+            "title": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará",
+            "url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+            "final_url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s04.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7afa45d6b893",
+            "type": "image",
+            "title": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cida",
+            "url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+            "final_url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s03.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-065b27726ce4",
+            "type": "image",
+            "title": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tent",
+            "url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+            "final_url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s01.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ac45d95f9105",
+            "type": "image",
+            "title": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com ",
+            "url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+            "final_url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s02.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.imdb.com/pt/title/tt9813792/",
+      "result": {
+        "titulo": "Origem (Série de TV 2022– ) - IMDb",
+        "texto": "",
+        "final": "https://www.imdb.com/pt/title/tt9813792/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "result": {
+        "titulo": "Origem",
+        "texto": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um caminho improvisado para passar. A princípio, tudo parece normal, mas, então, eles notam que não conseguem sair do vilarejo. Toda rua que entram leva sempre de volta ao mesmo lugar. Conversando com os outros moradores, eles decobrem que todos também chegaram a cidade da mesma forma e ficaram presos. Para piorar, a noite o lugar é cercado por misteriosas criaturas. Enquanto tentam descobrir o que tem de errado com a cidade, eles percebem que não chegaram até lá por acaso. Cada um dos moradores desavisados foi levado por uma força sobrenatural inexplicável que os prende para sempre nesse assustador lugar.",
+        "final": "https://www.adorocinema.com/series/serie-28959/",
+        "trecho_usado": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um",
+        "metadados": {
+          "titulo": "Origem",
+          "descricao": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+          "canonica": "",
+          "og": {
+            "og:site_name": "AdoroCinema",
+            "og:locale": "pt_BR",
+            "og:title": "Origem",
+            "og:description": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+            "og:image": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "og:type": "video.tv_show"
+          },
+          "twitter": {
+            "twitter:app:name:iphone": "adorocinema",
+            "twitter:app:name:ipad": "adorocinema",
+            "twitter:app:name:googleplay": "adorocinema",
+            "twitter:app:url:iphone": "adorocinema://open/",
+            "twitter:app:url:ipad": "adorocinema://open/",
+            "twitter:app:url:googleplay": "adorocinema://open/",
+            "twitter:app:id:iphone": "926254990",
+            "twitter:app:id:ipad": "926254990",
+            "twitter:app:id:googleplay": "com.adorocinema.android",
+            "twitter:card": "photo",
+            "twitter:title": "Origem",
+            "twitter:description": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+            "twitter:site": "@adorocinema",
+            "twitter:image": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "AdoroCinema",
+          "site": "AdoroCinema",
+          "tipo": "video.tv_show",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um caminho improvisado para passar. A princípio, tudo parece normal, mas, então, eles notam que não conseguem sair do vilarejo. Toda rua que entram leva sempre de volta ao mesmo lugar. Conversando com os outros moradores, eles decobrem que todos também chegaram a cidade da mesma forma e ficaram presos. Para piorar, a noite o lugar é cercado por misteriosas criaturas. Enquanto tentam descobrir o que tem de errado com a cidade, eles percebem que não chegaram até lá por acaso. Cada um dos moradores desavisados foi levado por uma força sobrenatural inexplicável que os prende para sempre nesse assustador lugar."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+          "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+          "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-d305f1eda8ec",
+            "type": "image",
+            "title": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o",
+            "url": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "final_url": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "br.web.img3.acsta.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filh",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c1922aec8fad",
+            "type": "image",
+            "title": "AdoroCinema",
+            "url": "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+            "final_url": "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "assets.adorocinema.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "AdoroCinema",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e0b78fb6b5c9",
+            "type": "image",
+            "title": "Pôster de Origem",
+            "url": "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg",
+            "final_url": "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "br.web.img3.acsta.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pôster de Origem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "result": {
+        "titulo": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+        "texto": "Como se não bastasse, ao anoitecer, eles começam a ver monstros surgindo e caçandos humanos. A família tenta ir embora, mas descobre que estão numa espécie de looping —tentam sair por onde chegaram e são jogados novamente no vilarejo. Assista à nova série Crystal Lake no UOL Play. Experimente 7 Dias Grátis. Origem dos monstros A terceira temporada de \"Origem\" revela que os monstros que atacam os humanos nas noites do vilarejo de Fromville são, na verdade, antigos moradores que desejavam vida eterna. Quem são as criaturas noturnas? os antigos moradores \"ofertaram\" as crianças da comunidade para forças malignas em troca da imortalidade. Eles tiveram o desejo atendido, mas acabaram sendo condenados a viverem como criaturas horripilantes. A revelação explica por que os monstros são todos adultos e não existe nenhuma criança durante os ataques noturnos. Sacrifício macabro em troca da vida eterna: O último episódio da terceira temporada mostra que os Anghkooey —as crianças sobrenaturais vistas por Tabitha Matthews (Catalina Sandino Moreno) e Jade Herrera (David Alpay)— têm intenções boas. Qual o papel das crianças? A série ainda não explica como os humanos presos em Fromville podem eliminar as criaturas. A narrativa sugerida nas últimas duas temporadas é que as crianças são a chave para a revelação de como acabar com os monstros. Como matar os monstros?",
+        "final": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+        "trecho_usado": "são jogados novamente no vilarejo. Assista à nova série Crystal Lake no UOL Play. Experimente 7 Dias Grátis. Origem dos monstros A terceira temporada de \"Origem\" revela que os monstros que atacam os humanos nas noites do vilarejo de Fromville são, na verdade, antigos moradores que desejavam vida eterna. Quem são as criaturas noturnas? os antigos moradores \"ofertaram\" as crianças da comunidade para",
+        "metadados": {
+          "titulo": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+          "descricao": "Origem tem ganhado fãs pelo mundo por trazer um enredo que misturar terror, suspense e mistério em um cenário recheado de enigmas.",
+          "canonica": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "og": {
+            "og:description": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajud",
+            "og:image:height": "300",
+            "og:image:width": "615",
+            "og:image": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+            "og:site_name": "UOL",
+            "og:title": "Sacrifícios e vidas passadas: o que explica os monstros da série",
+            "og:type": "article",
+            "og:url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "og:locale": "pt_BR"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:description": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajud",
+            "twitter:image": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+            "twitter:site": "@splash_uol",
+            "twitter:title": "Sacrifícios e vidas passadas: o que explica os monstros da série"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "2025-02-26T08:30:00.000Z",
+          "atualizado_em": "2025-02-26T08:31:04.000Z",
+          "autor": "Péterson Neves",
+          "site": "UOL",
+          "tipo": "NewsArticle",
+          "ld": {
+            "datePublished": "2025-02-26T08:30:00.000Z",
+            "dateModified": "2025-02-26T08:31:04.000Z",
+            "author": [
+              {
+                "@type": "Person",
+                "name": "Péterson Neves",
+                "url": "https://www.uol.com.br/splash/autor/peterson-neves/"
+              }
+            ],
+            "publisher": {
+              "@type": "Organization",
+              "@context": "https://schema.org",
+              "@id": "https://www.uol.com.br",
+              "name": "UOL",
+              "url": "https://www.uol.com.br",
+              "logo": {
+                "@type": "ImageObject",
+                "contentUrl": "https://conteudo.imguol.com.br/uolamp/UOL_logo_156x60.png",
+                "width": 156,
+                "height": 60
+              },
+              "sameAs": [
+                "https://www.facebook.com/UOL",
+                "https://twitter.com/UOL",
+                "https://www.instagram.com/uoloficial/"
+              ]
+            },
+            "headline": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Como se não bastasse, ao anoitecer, eles começam a ver monstros surgindo e caçandos humanos. A família tenta ir embora, mas descobre que estão numa espécie de looping —tentam sair por onde chegaram e são jogados novamente no vilarejo.\nAssista à nova série Crystal Lake no UOL Play. Experimente 7 Dias Grátis.\nA terceira temporada de \"Origem\" revela que os monstros que atacam os humanos nas noites do vilarejo de Fromville são, na verdade, antigos moradores que desejavam vida eterna. Quem são as criaturas noturnas?\nos antigos moradores \"ofertaram\" as crianças da comunidade para forças malignas em troca da imortalidade. Eles tiveram o desejo atendido, mas acabaram sendo condenados a viverem como criaturas horripilantes. A revelação explica por que os monstros são todos adultos e não existe nenhuma criança durante os ataques noturnos. Sacrifício macabro em troca da vida eterna:\nO último episódio da terceira temporada mostra que os Anghkooey —as crianças sobrenaturais vistas por Tabitha Matthews (Catalina Sandino Moreno) e Jade Herrera (David Alpay)— têm intenções boas. Qual o papel das crianças?\nA série ainda não explica como os humanos presos em Fromville podem eliminar as criaturas. A narrativa sugerida nas últimas duas temporadas é que as crianças são a chave para a revelação de como acabar com os monstros. Como matar os monstros?"
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_4x3.jpg",
+          "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_3x4.jpg",
+          "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_1x1.jpg",
+          "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+          "https://sb.scorecardresearch.com/p?c1=2&c2=6036356&cv=4.4.0&cj=1&sd",
+          "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_900x506.jpg",
+          "https://conteudo.imguol.com.br/c/splash/45/2020/12/26/alerta-de-spoiler-splash-1608991656601_v2_750x1.jpg",
+          "https://conteudo.imguol.com.br/c/home/6c/2024/01/26/leticia-casado---autor-1706269688458_v2_100x100.jpg",
+          "https://conteudo.imguol.com.br/c/home/62/2026/05/15/tatiana-farah-1778882868920_100x100.png?1778882875545",
+          "https://conteudo.imguol.com.br/c/home/c0/2019/04/01/josias-de-souza-1554165233531_100x100.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-e97de0da53f8",
+            "type": "image",
+            "title": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura t",
+            "url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_615x300.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajud",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1e21bbd8d49a",
+            "type": "image",
+            "title": "Monstro da série Origem (Globoplay)",
+            "url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_900x506.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/entretenimento/4f/2025/02/23/monstro-da-serie-origem-globoplay-1740362387767_v2_900x506.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Monstro da série Origem (Globoplay)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4d3f02027caa",
+            "type": "image",
+            "title": "Alerta de Spoiler Splash",
+            "url": "https://conteudo.imguol.com.br/c/splash/45/2020/12/26/alerta-de-spoiler-splash-1608991656601_v2_750x1.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/splash/45/2020/12/26/alerta-de-spoiler-splash-1608991656601_v2_750x1.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Alerta de Spoiler Splash",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c5027a8da4b0",
+            "type": "image",
+            "title": "Aliados de Flávio projetam vantagem maior nas urnas",
+            "url": "https://conteudo.imguol.com.br/c/home/6c/2024/01/26/leticia-casado---autor-1706269688458_v2_100x100.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/home/6c/2024/01/26/leticia-casado---autor-1706269688458_v2_100x100.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aliados de Flávio projetam vantagem maior nas urnas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-de2bd28613b4",
+            "type": "image",
+            "title": "Campanha do PT vive apreensão após pesquisas",
+            "url": "https://conteudo.imguol.com.br/c/home/62/2026/05/15/tatiana-farah-1778882868920_100x100.png?1778882875545",
+            "final_url": "https://conteudo.imguol.com.br/c/home/62/2026/05/15/tatiana-farah-1778882868920_100x100.png?1778882875545",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Campanha do PT vive apreensão após pesquisas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3dd39c128cb3",
+            "type": "image",
+            "title": "Asfalto cheio mostra pujança de futura oposição",
+            "url": "https://conteudo.imguol.com.br/c/home/c0/2019/04/01/josias-de-souza-1554165233531_100x100.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/home/c0/2019/04/01/josias-de-souza-1554165233531_100x100.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Asfalto cheio mostra pujança de futura oposição",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2edb355b46ca",
+            "type": "image",
+            "title": "O que explica a rejeição a Lula nesta eleição",
+            "url": "https://conteudo.imguol.com.br/c/home/e3/2024/05/29/jose-roberto-de-toledo-1717019665210_100x100.png?1717019848310",
+            "final_url": "https://conteudo.imguol.com.br/c/home/e3/2024/05/29/jose-roberto-de-toledo-1717019665210_100x100.png?1717019848310",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O que explica a rejeição a Lula nesta eleição",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d97f20dd2b0a",
+            "type": "image",
+            "title": "Crianças da série Origem (Globoplay)",
+            "url": "https://conteudo.imguol.com.br/c/entretenimento/c7/2025/02/23/criancas-da-serie-origem-globoplay-1740362619872_v2_750x421.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/entretenimento/c7/2025/02/23/criancas-da-serie-origem-globoplay-1740362619872_v2_750x421.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Crianças da série Origem (Globoplay)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7e4b743b4222",
+            "type": "image",
+            "title": "Sorriso renasce em Origem (Globoplay)",
+            "url": "https://conteudo.imguol.com.br/c/entretenimento/07/2025/02/23/sorriso-renasce-em-origem-globoplay-1740362511179_v2_750x421.jpg",
+            "final_url": "https://conteudo.imguol.com.br/c/entretenimento/07/2025/02/23/sorriso-renasce-em-origem-globoplay-1740362511179_v2_750x421.jpg",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Sorriso renasce em Origem (Globoplay)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5107929799ca",
+            "type": "image",
+            "title": "Defenda a verdade",
+            "url": "https://conteudo.imguol.com.br/c/_layout/solar/defenda-a-verdade-desktop-nao-assinante.png",
+            "final_url": "https://conteudo.imguol.com.br/c/_layout/solar/defenda-a-verdade-desktop-nao-assinante.png",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Defenda a verdade",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6c34fb7393c5",
+            "type": "image",
+            "title": "Questões afetivas e financeiras em revisão; a previsão para seu signo",
+            "url": "https://conteudo.imguol.com.br/c/entretenimento/d6/2019/11/13/mulher-pensando-em-tomar-pilula-do-dia-seguinte-1573675999754_v2_360x270.jpg.webp",
+            "final_url": "https://conteudo.imguol.com.br/c/entretenimento/d6/2019/11/13/mulher-pensando-em-tomar-pilula-do-dia-seguinte-1573675999754_v2_360x270.jpg.webp",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Questões afetivas e financeiras em revisão; a previsão para seu signo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9319a22a1251",
+            "type": "image",
+            "title": "Com 1,9 mil avaliações, o que tem no Quasar Vision para tanto sucesso?",
+            "url": "https://conteudo.imguol.com.br/c/guia-de-compras/f6/2026/10/20/colonia-masculina-vision-promete-notas-citricas-e-aromaticas-1792488954564_v2_360x270.png.webp",
+            "final_url": "https://conteudo.imguol.com.br/c/guia-de-compras/f6/2026/10/20/colonia-masculina-vision-promete-notas-citricas-e-aromaticas-1792488954564_v2_360x270.png.webp",
+            "source_title": "Sacrifícios e vidas passadas: o que explica os monstros da série 'Origem'?",
+            "source_url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "publisher": "conteudo.imguol.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Com 1,9 mil avaliações, o que tem no Quasar Vision para tanto sucesso?",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+      "result": {
+        "titulo": "Harold Perrineau",
+        "texto": "A Longa Jornada Noite Adentro E1 A Longa Jornada Noite Adentro A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer. Como as Coisas Estão Agora E2 Como as Coisas Estão Agora Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade. O Dia da Escolha E3 O Dia da Escolha A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade. Uma Pedra e uma Árvore Distante E4 Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. Silhuetas E5 Silhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Livro 74 E6 Livro 74 Após a tragédia, o padre Khatri diz que pode haver um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento de resultados perturbadores. Tudo que É Bom... E7 Tudo que É Bom... O padre revela a Boyd seu passado obscuro, que o levou à cidade. Jim e Tabitha se confortam. A festa de um ano da chegada de Fatima termina mal. Victor alerta para o que há por vir. Janelas Quebradas, Portas Abertas E8 Janelas Quebradas, Portas Abertas Após mais uma morte, Boyd questiona sua decisão. Kenny assume novo papel. Jim faz um comício na cidade para construir uma torre de rádio. Fatima pede que Ellis se resolva com o pai. Mata Adentro E9 Mata Adentro Boyd e Sara encontram novos mistérios na floresta. A confiança de Jim na torre de rádio diminui após Jade ter problemas com a fonte de energia. Uma tragédia traz clareza à Donna. Ah, os Lugares que Visitaremos E10 Ah, os Lugares que Visitaremos A situação piora e Boyd questiona sua decisão de deixar a cidade. A família Matthews celebra a construção da torre, mas as consequências mexem com Jim. Tudo está prestes a mudar.",
+        "final": "https://watch.plex.tv/pt-BR/show/from/season/1",
+        "trecho_usado": "esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Livro 74 E6 Livro 74 Após a tragédia, o padre Khatri diz que pode haver um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento de resultados perturbadores. Tudo que É Bom... E7 Tudo que É Bom... O padre revela",
+        "metadados": {
+          "titulo": "Harold Perrineau",
+          "descricao": "Where to watch Origem • Temporada 1 starring Harold Perrineau, Catalina Sandino Moreno, Eion Bailey. Stream Origem • Temporada 1 online today!",
+          "canonica": "https://watch.plex.tv/pt-BR/show/from/season/1",
+          "og": {
+            "og:title": "Origem • Temporada 1",
+            "og:description": "Viajantes desorientados se veem presos em uma cidade misteriosa sem saída, onde forças malévolas brincam com suas mentes e os caçam à noite.",
+            "og:url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+            "og:site_name": "Plex.tv",
+            "og:image": "https://images.plex.tv/photo?size=large-1280&url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2960acd36ac5f1278ecf03c3751ec95f.jpg",
+            "og:image:alt": "Poster of Origem • Temporada 1",
+            "og:type": "video.tv_show"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@plex",
+            "twitter:creator": "@plex",
+            "twitter:title": "Origem • Temporada 1",
+            "twitter:description": "Viajantes desorientados se veem presos em uma cidade misteriosa sem saída, onde forças malévolas brincam com suas mentes e os caçam à noite.",
+            "twitter:image": "https://images.plex.tv/photo?size=large-1280&url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2960acd36ac5f1278ecf03c3751ec95f.jpg",
+            "twitter:image:alt": "Poster of Origem • Temporada 1"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Plex.tv",
+          "tipo": "Person",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A Longa Jornada Noite Adentro E1\nA Longa Jornada Noite Adentro A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.\nComo as Coisas Estão Agora E2\nComo as Coisas Estão Agora Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.\nO Dia da Escolha A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.\nUma Pedra e uma Árvore Distante E4\nUma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.\nSilhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.\nLivro 74 Após a tragédia, o padre Khatri diz que pode haver um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento de resultados perturbadores.\nTudo que É Bom... O padre revela a Boyd seu passado obscuro, que o levou à cidade. Jim e Tabitha se confortam. A festa de um ano da chegada de Fatima termina mal. Victor alerta para o que há por vir.\nJanelas Quebradas, Portas Abertas E8\nJanelas Quebradas, Portas Abertas Após mais uma morte, Boyd questiona sua decisão. Kenny assume novo papel. Jim faz um comício na cidade para construir uma torre de rádio. Fatima pede que Ellis se resolva com o pai.\nMata Adentro Boyd e Sara encontram novos mistérios na floresta. A confiança de Jim na torre de rádio diminui após Jade ter problemas com a fonte de energia. Uma tragédia traz clareza à Donna.\nAh, os Lugares que Visitaremos E10\nAh, os Lugares que Visitaremos A situação piora e Boyd questiona sua decisão de deixar a cidade. A família Matthews celebra a construção da torre, mas as consequências mexem com Jim. Tudo está prestes a mudar."
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://images.plex.tv/photo?size=large-1280&amp;url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2960acd36ac5f1278ecf03c3751ec95f.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F5eb421ae759da9c420a870faa8e574e3.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fm7eiSGHFzr584zFmetGqkqaU6BN.jpg",
+          "https://images.plex.tv/photo?size=large-1280&amp;scale=1&amp;url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2F683a142553%2F1f1a5bbd5f9f48c1c80afea7b847f95c.png",
+          "https://provider-static.plex.tv/discover/logos/p/globo-play.svg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F6VKsznJrIq1q87Hot5EEPuvub1g.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmMGMvT9ldQW6Zd85sRafpJL8IMM.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fq2aa8qDdCEaQw7fYYAy4ifLpozB.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FQGgeFn5Gb6Lw1brzgQGIABdWkx.jpg",
+          "https://images.plex.tv/photo?size=large-1920&amp;scale=1&amp;url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3QixuZBe7K7XQ54nXWR75ANjobh.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-3efeab48de7d",
+            "type": "image",
+            "title": "Poster of Origem • Temporada 1",
+            "url": "https://images.plex.tv/photo?size=large-1280&url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2960acd36ac5f1278ecf03c3751ec95f.jpg",
+            "final_url": "https://images.plex.tv/photo?size=large-1280&url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2960acd36ac5f1278ecf03c3751ec95f.jpg",
+            "source_title": "Harold Perrineau",
+            "source_url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+            "publisher": "images.plex.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Poster of Origem • Temporada 1",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3ff099f18a29",
+            "type": "document",
+            "title": "llms.txt",
+            "url": "https://watch.plex.tv/pt-BR/llms.txt",
+            "final_url": "https://watch.plex.tv/pt-BR/llms.txt",
+            "source_title": "Harold Perrineau",
+            "source_url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+            "publisher": "watch.plex.tv",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Viajantes desorientados se veem presos em uma cidade misteriosa sem saída, onde forças malévolas brincam com suas mentes e os caçam à noite.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+      "result": {
+        "titulo": "American comedy television series",
+        "texto": "American television sitcom (2009–2015) This article is about the television series. For a list of parks and recreation departments, see . Department of Parks and Recreation Parks and Recreation Also known as Parks and Rec Genre Sitcom Mockumentary Political satire Workplace comedy Cringe comedy 1 [ ] Created by Greg Daniels Michael Schur Showrunner Michael Schur Starring Amy Poehler Rashida Jones Paul Schneider Aziz Ansari Nick Offerman Aubrey Plaza Chris Pratt Adam Scott Rob Lowe Jim O'Heir Retta Billy Eichner Theme music composer Gaby Moreno Vincent Jones Country of origin United States Original language English of seasons No. 7 of episodes No. 126 () list of episodes Production Executive producers Greg Daniels Michael Schur Howard Klein David Miner Morgan Sackett Dean Holland Dan Goor Producer Amy Poehler Camera setup Single camera Running time 22–42 minutes Production companies Open 4 Business Productions Deedle-Dee Productions Fremulon 3 Arts Entertainment Universal Television Original release Network NBC Release April 9, 2009–February 24, 2015 () 2009-04-09 () 2015-02-24 Release April30,2020 (special) () 2020-04-30 (also known as ) is an American political satire television created by and . The series aired on from April 9, 2009, to February 24, 2015, for 125 episodes, over seven seasons. A aired on April 30, 2020. The series stars as , a perky mid-level bureaucrat in the Parks and Recreation Department of the fictional town of , . The ensemble and supporting cast features as , as , as , as , as , as , as , as , as , as , and as . Parks and Recreation Parks and Rec mockumentary sitcom Greg Daniels Michael Schur NBC special reunion episode Amy Poehler Leslie Knope Pawnee Indiana Rashida Jones Ann Perkins Aziz Ansari Tom Haverford Nick Offerman Ron Swanson Aubrey Plaza April Ludgate Chris Pratt Andy Dwyer Paul Schneider Mark Brendanawicz Adam Scott Ben Wyatt Rob Lowe Chris Traeger Jim O'Heir Garry \"Jerry\" Gergich Retta Donna Meagle Billy Eichner Craig Middlebrooks The writers researched local politics for the series and consulted with urban planners and elected officials. Leslie Knope underwent major changes after the , in response to audience feedback that the character seemed unintelligent and \"ditzy\". The writing staff incorporated current events into the episodes, such as a government shutdown in Pawnee inspired by the . Real-life political figures, including , , , and , have cameos in later episodes. California first season 2008 financial crisis John McCain Michelle Obama Newt Gingrich Joe Biden was part of NBC's \"\" programming during its . The series received mixed reviews during its first season (including comparisons to , a sitcom also produced by Daniels and Schur), but, after a re-approach to its tone and format, the second and subsequent seasons were widely acclaimed. received several awards and nominations, including 14 nominations (two for ), a win for Poehler's performance and a nomination for the , and a . In s 2012 year-end lists issue, was named the number one television series of that year. In 2013, after receiving four consecutive nominations in the category, won the for . Parks and Recreation Comedy Night Done Right Thursday night prime-time block The Office Parks and Recreation Primetime Emmy Award Outstanding Comedy Series Golden Globe Award Golden Globe Award for Best Television Series – Musical or Comedy Peabody Award Time ' Parks and Recreation 2 [ ] Parks and Recreation Television Critics Association Award Outstanding Achievement in Comedy Plot [ edit ] The focuses on , the deputy director of the Parks and Recreation Department in the fictional town of , . Local nurse demands the construction pit beside her house created by an abandoned condo development be filled in after her boyfriend, , fell in and broke both legs. Leslie promises to turn the pit into a park, despite resistance from the parks director , an anti-government . City planner – for whom Leslie harbors romantic feelings – pragmatically insists the project is unrealistic due to government , but nevertheless secretly convinces Ron to approve the project. Leslie and her staff, including her assistant and intern , try encouraging community interest in the pit project, but meet resistance. first season Leslie Knope Pawnee Indiana Ann Perkins Andy Dwyer Ron Swanson libertarian 3 [ ] Mark Brendanawicz red tape 4 [ ] 3 [ ] Tom Haverford April Ludgate In the , the pit is eventually filled in because Leslie takes it upon herself to fill in the pit without permission, not realizing Andy was in the pit. Andy became injured and works with Leslie to threaten to sue the city of Pawnee unless the pit was filled. Mark leaves his city hall career for a private sector job. Meanwhile, a crippling budget deficit leads state auditors and to shut down the Pawnee government temporarily. second season 5 [ ] Chris Traeger Ben Wyatt The opens with the Pawnee government reopened, but with budget cuts frustrating Leslie's attempts to provide services. Leslie makes a deal with Chris and Ben to bring back the Pawnee Harvest Festival, but if the festival fails the Parks Department will be eliminated. After weeks of planning, the festival becomes a tremendous success through Leslie's efforts. Later, Chris returns from to become Pawnee's acting city manager, while Ben also takes a job in Pawnee. April and Andy start dating and, only a few weeks later, marry in a surprise ceremony. Tom quits his city hall job to form an entertainment company called Entertainment 720 with his friend, . The business cannot maintain its lavish spending and quickly runs out of money, leaving Tom to return to the Parks Department. Leslie and Ben show romantic interest in each other; however, Chris has implemented a rule that would prevent a superior (Ben) from dating his employee (Leslie). In spite of this rule, Leslie and Ben begin secretly dating. third season 6 [ ] 7 [ ] Indianapolis 8 [ ] 9 [ ] 9 [ ] 10 [ ] Jean-Ralphio The deals with Leslie's campaign to run for city council. As Leslie begins preparing a campaign, she realizes she must break up with Ben to avoid scandal. Ben and Leslie restart their relationship and Ben sacrifices his job to save Leslie from losing hers, due to Chris' policy against romantic relationships in the workplace. The Parks Department volunteers to become her campaign staff, with Ben as Leslie's campaign manager. Leslie's campaign faces myriad setbacks against her main opponent, Bobby Newport, and his famous campaign manager Jennifer Barkley. fourth season In the , Leslie begins working as a City Councilor but finds opposition from angry locals and her fellow councilmen. Ben is at his new job on a congressional campaign in Washington DC, alongside April whom he brought along as an intern. Ron begins a romantic relationship with a woman named Diane. Ben returns to Pawnee and proposes to Leslie. They get married midway through the season. Tom starts a successful business named Rent-A-Swag that rents high-end clothing to teenagers. Leslie and Ben plan a fundraising event for the park, now called the Pawnee Commons, and decide to have an impromptu wedding that night in City Hall. Later, Leslie's changes to Pawnee lead to several locals petitioning for her to be recalled from office. fifth season The begins with the absorption of Eagleton by Pawnee after the former town declares bankruptcy. As the governments merge, Leslie loses the recall vote and returns to the Parks Department full-time, while Ben is voted in as the next city manager. Tom sells Rent-A-Swag to Jean-Ralphio's father, Dr. Saperstein, in a cash settlement and opens a restaurant called \"Tom's Bistro\". Ann and Chris, now in a relationship and expecting a baby, leave Pawnee for Michigan. As a way to garner public support for the unpopular merger, the Parks Department hold a Unity Concert. Later, Leslie reveals she is pregnant with triplets. Leslie takes the job as regional director for the National Park Service in Chicago, ",
+        "final": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+        "trecho_usado": "created by and . The series aired on from April 9, 2009, to February 24, 2015, for 125 episodes, over seven seasons. A aired on April 30, 2020. The series stars as , a perky mid-level bureaucrat in the Parks and Recreation Department of the fictional town of , . The ensemble and supporting cast features as , as , as , as , as , as , as , as , as , as , and as . Parks and Recreation Parks and Rec",
+        "metadados": {
+          "titulo": "American comedy television series",
+          "descricao": "",
+          "canonica": "https://en.wikipedia.org/wiki/Parks_and_Recreation",
+          "og": {
+            "og:title": "Parks and Recreation - Wikipedia",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "2008-12-22T07:21:17Z",
+          "atualizado_em": "2026-10-16T11:22:00Z",
+          "autor": "Contributors to Wikimedia projects",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2008-12-22T07:21:17Z",
+            "dateModified": "2026-10-16T11:22:00Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contributors to Wikimedia projects"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "American comedy television series"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Open 4 Business Productions\nApril 9, 2009–February 24, 2015 () 2009-04-09 () 2015-02-24\nApril30,2020 (special) () 2020-04-30\n(also known as ) is an American political satire television created by and . The series aired on from April 9, 2009, to February 24, 2015, for 125 episodes, over seven seasons. A aired on April 30, 2020. The series stars as , a perky mid-level bureaucrat in the Parks and Recreation Department of the fictional town of , . The ensemble and supporting cast features as , as , as , as , as , as , as , as , as , as , and as . Parks and Recreation Parks and Rec mockumentary sitcom Greg Daniels Michael Schur NBC special reunion episode Amy Poehler Leslie Knope Pawnee Indiana Rashida Jones Ann Perkins Aziz Ansari Tom Haverford Nick Offerman Ron Swanson Aubrey Plaza April Ludgate Chris Pratt Andy Dwyer Paul Schneider Mark Brendanawicz Adam Scott Ben Wyatt Rob Lowe Chris Traeger Jim O'Heir Garry \"Jerry\" Gergich Retta Donna Meagle Billy Eichner Craig Middlebrooks\nThe writers researched local politics for the series and consulted with urban planners and elected officials. Leslie Knope underwent major changes after the , in response to audience feedback that the character seemed unintelligent and \"ditzy\". The writing staff incorporated current events into the episodes, such as a government shutdown in Pawnee inspired by the . Real-life political figures, including , , , and , have cameos in later episodes. California first season 2008 financial crisis John McCain Michelle Obama Newt Gingrich Joe Biden\nwas part of NBC's \"\" programming during its . The series received mixed reviews during its first season (including comparisons to , a sitcom also produced by Daniels and Schur), but, after a re-approach to its tone and format, the second and subsequent seasons were widely acclaimed. received several awards and nominations, including 14 nominations (two for ), a win for Poehler's performance and a nomination for the , and a . In s 2012 year-end lists issue, was named the number one television series of that year. In 2013, after receiving four consecutive nominations in the category, won the for . Parks and Recreation Comedy Night Done Right Thursday night prime-time block The Office Parks and Recreation Primetime Emmy Award Outstanding Comedy Series Golden Globe Award Golden Globe Award for Best Television Series – Musical or Comedy Peabody Award Time ' Parks and Recreation 2 [ ] Parks and Recreation Television Critics Association Award Outstanding Achievement in Comedy\nThe focuses on , the deputy director of the Parks and Recreation Department in the fictional town of , . Local nurse demands the construction pit beside her house created by an abandoned condo development be filled in after her boyfriend, , fell in and broke both legs. Leslie promises to turn the pit into a park, despite resistance from the parks director , an anti-government . City planner – for whom Leslie harbors romantic feelings – pragmatically insists the project is unrealistic due to government , but nevertheless secretly convinces Ron to approve the project. Leslie and her staff, including her assistant and intern , try encouraging community interest in the pit project, but meet resistance. first season Leslie Knope Pawnee Indiana Ann Perkins Andy Dwyer Ron Swanson libertarian 3 [ ] Mark Brendanawicz red tape 4 [ ] 3 [ ] Tom Haverford April Ludgate\nIn the , the pit is eventually filled in because Leslie takes it upon herself to fill in the pit without permission, not realizing Andy was in the pit. Andy became injured and works with Leslie to threaten to sue the city of Pawnee unless the pit was filled. Mark leaves his city hall career for a private sector job. Meanwhile, a crippling budget deficit leads state auditors and to shut down the Pawnee government temporarily. second season 5 [ ] Chris Traeger Ben Wyatt\nThe opens with the Pawnee government reopened, but with budget cuts frustrating Leslie's attempts to provide services. Leslie makes a deal"
+          },
+          {
+            "titulo": "Cultural and political impact",
+            "texto": "In 2019, was ranked 54th on s list of the 100 best TV shows of the 21st century. and the both named as the television show that \"defined\" the of the . Parks and Recreation The Guardian ' 226 [ ] Vox Rolling Stone Parks and Recreation cultural zeitgeist Obama Presidency 227 [ ]\nwrote in : Alan Sepinwall Rolling Stone\nFew series in recent memory have been as clearly tied to a moment—and, specifically, a presidential administration—as . The show's belief in the power of government to make people's lives better—and, more broadly, in the obligation members of a community (be they friends, family, or, as Ron Swanson once put it, \"workplace proximity associates\") have to help one another in times of need—made it the standard-bearer for the hopefulness of the Obama era. Parks and Rec 228 [ ]\nThe conservative political magazine argued: National Review\nEven television shows that are legitimately funny, such as NBC's , are designed to flatter the sensibilities of those in charge. In , self-proclaimed nerds and wonks have adopted liberal bureaucratic functionary and occasional elected official Leslie Knope (Amy Poehler) as one of their own. Her overeager chirpiness and her constant ability to one-up her hyper-libertarian boss mark her as a role model for those who believe that government is a force for good rather than a necessary evil. Parks and Recreation Parks and Rec 229 [ ]\ncommented on the series finale: U.S. News & World Report\nnever lost the Obama-like belief in government powered by goodwill and consensus. But the obstructionism of the Obama years made this vision seem fantastical, stoking a desire for hardheaded partisans who would get things done. Parks and Recreation 230 [ ]\nmagazine's television critic argued: Time James Poniewozik\nbecame network TV's best and brightest sitcom by embodying the slogan that all politics is local....But there's a big idea in small-scale vision. In the frame of today's politics, it might be a liberal notion, but it's one that for much of the 20th century was centrist, and even championed by Republicans like park lover Teddy Roosevelt: that we need government to do things the private sector can't or won't, like preserving public spaces.... argues not only that we need our neighbors' help but that helping makes us better ourselves; it's in the small-town, populist tradition of and Parks Parks ' Parks Friday Night Lights . It's a Wonderful Life 231 [ ]\nViewership and ratings per season of Parks and Recreation\nApril9,2009 () 2009-04-09\nSeptember17,2009 () 2009-09-17\nJanuary20,2011 () 2011-01-20\nThursday 8:30 pm Thursday 9:30 pm (1–10) (11–22)\nSeptember22,2011 () 2011-09-22\nThursday 9:30 pm Thursday 8:30 pm (1–9) (10–22)\nSeptember20,2012 () 2012-09-20\nThursday 8:00 pm Thursday 8:30 pm (1–9) (10–22)\nSeptember26,2013 () 2013-09-26\nApril24,2014 () 2014-04-24\nTuesday 8:00 pm & 8:30 pm a [ ]\nJanuary13,2015 () 2015-01-13\nFebruary24,2015 () 2015-02-24\n↑ All of season 7 (with the exception of one week) was aired in a double episode format - with two episodes airing back-to-back.\nI would love it if our ratings went up and up, and we've done a pretty good job of making our show inviting and friendly, welcoming to new viewers. Other than that, I'm not sure what else we can do. It's very disconcerting.\nstruggled in the throughout its entire run on NBC. The series premiere was seen by 6.88million viewers, which media outlets described as a strong opening, comparable to the average for , another Thursday-night show on NBC. Viewership declined every week over the rest of the season, culminating in a season low of 4.29million viewers for the final episode. ended the first season with an overall average rating of 5.97million viewers, ranking 94th in a list of 193 network shows for the . Low viewership presented a greater challenge for because NBC now trailed , , and in the ratings, and the move of comedian from to in NBC's 10:00pm weeknight slot left less room on the network's primetime schedule. At the end of the sea"
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Parks and Recreation"
+            ],
+            [
+              "Also known as",
+              "Parks and Rec"
+            ],
+            [
+              "Genre",
+              ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-pa"
+            ],
+            [
+              "Created by",
+              "Greg Daniels Michael Schur"
+            ],
+            [
+              "Showrunner",
+              "Michael Schur"
+            ],
+            [
+              "Starring",
+              "Amy Poehler Rashida Jones Paul Schneider Aziz Ansari Nick Offerman Aubrey Plaza Chris Pratt Adam Scott Rob Lowe Jim O'Heir Retta Billy Eichner"
+            ],
+            [
+              "Theme music composer",
+              "Gaby Moreno Vincent Jones"
+            ],
+            [
+              "Country of origin",
+              "United States"
+            ],
+            [
+              "Original language",
+              "English"
+            ],
+            [
+              "Number \"}]]}'>No. of seasons",
+              "7"
+            ],
+            [
+              "Number \"}]]}'>No. of episodes",
+              "126 ( list of episodes )"
+            ],
+            [
+              "Production"
+            ],
+            [
+              "Executive producers",
+              "Greg Daniels Michael Schur Howard Klein David Miner Morgan Sackett Dean Holland Dan Goor"
+            ],
+            [
+              "Producer",
+              "Amy Poehler"
+            ],
+            [
+              "Camera setup",
+              "Single camera"
+            ],
+            [
+              "Running time",
+              "22–42 minutes"
+            ],
+            [
+              "Production companies",
+              "Open 4 Business Productions Deedle-Dee Productions Fremulon 3 Arts Entertainment Universal Television"
+            ],
+            [
+              "Original release"
+            ],
+            [
+              "Network",
+              "NBC"
+            ],
+            [
+              "Release",
+              "April 9, 2009 ( 2009-04-09 ) – February 24, 2015 ( 2015-02-24 )"
+            ],
+            [
+              "Release",
+              "April 30, 2020 ( 2020-04-30 ) (special)"
+            ]
+          ],
+          [
+            [
+              "Season",
+              "Episodes",
+              "Originally released",
+              "Viewers (millions)"
+            ],
+            [
+              "First released",
+              "Last released"
+            ],
+            [
+              "1",
+              "6",
+              "April 9, 2009 ( 2009-04-09 )",
+              "May 14, 2009 ( 2009-05-14 )",
+              "5.97 [ 58 ]"
+            ],
+            [
+              "2",
+              "24",
+              "September 17, 2009 ( 2009-09-17 )",
+              "May 20, 2010 ( 2010-05-20 )",
+              "4.60 [ 59 ]"
+            ],
+            [
+              "3",
+              "16",
+              "January 20, 2011 ( 2011-01-20 )",
+              "May 19, 2011 ( 2011-05-19 )",
+              "5.10 [ 60 ]"
+            ],
+            [
+              "4",
+              "22",
+              "September 22, 2011 ( 2011-09-22 )",
+              "May 10, 2012 ( 2012-05-10 )",
+              "4.40 [ 61 ]"
+            ],
+            [
+              "5",
+              "22",
+              "September 20, 2012 ( 2012-09-20 )",
+              "May 2, 2013 ( 2013-05-02 )",
+              "4.06 [ 62 ]"
+            ],
+            [
+              "6",
+              "22",
+              "September 26, 2013 ( 2013-09-26 )",
+              "April 24, 2014 ( 2014-04-24 )",
+              "3.76 [ 63 ]"
+            ],
+            [
+              "7",
+              "13",
+              "January 13, 2015 ( 2015-01-13 )",
+              "February 24, 2015 ( 2015-02-24 )",
+              "4.60 [ 64 ]"
+            ],
+            [
+              "Special",
+              "April 30, 2020 ( 2020-04-30 )",
+              "3.64 [ 65 ]"
+            ]
+          ],
+          [
+            [
+              "No.",
+              "Title",
+              "Artist",
+              "Length"
+            ],
+            [
+              "1.",
+              "\"5,000 Candles in the Wind (Bye, Bye Lil Sebastian)\"",
+              "",
+              ""
+            ],
+            [
+              "2.",
+              "\"The Pit\"",
+              "",
+              ""
+            ],
+            [
+              "3.",
+              "\"Sex Hair\"",
+              "",
+              ""
+            ],
+            [
+              "4.",
+              "\"Catch Your Dream\" (feat. Duke Silver )",
+              "",
+              ""
+            ],
+            [
+              "5.",
+              "\"Two Birds Holding Hands\"",
+              "",
+              ""
+            ],
+            [
+              "6.",
+              "\"Ann Song\"",
+              "",
+              ""
+            ],
+            [
+              "7.",
+              "\" The Way You Look Tonight \"",
+              "",
+              ""
+            ],
+            [
+              "8.",
+              "\"Menace Ball\"",
+              "",
+              ""
+            ],
+            [
+              "9.",
+              "\"Remember\"",
+              "",
+              ""
+            ],
+            [
+              "10.",
+              "\" I Get A Kick Out Of You \"",
+              "",
+              ""
+            ],
+            [
+              "11.",
+              "\"Lovely Tonight\"",
+              "",
+              ""
+            ],
+            [
+              "12.",
+              "\"I've Got You Under My Skin\"",
+              "",
+              ""
+            ],
+            [
+              "13.",
+              "\"I Only Have Eyes For You\"",
+              "",
+              ""
+            ],
+            [
+              "14.",
+              "\"Pickled Ginger\"",
+              "Land Ho!",
+              ""
+            ],
+            [
+              "15.",
+              "\"Cold Water\"",
+              "Scott Tanner feat. Duke Silver",
+              ""
+            ]
+          ],
+          [
+            [
+              "Season",
+              "Rotten Tomatoes",
+              "Metacritic"
+            ],
+            [
+              "1",
+              "68% (37 reviews) [ 178 ]",
+              "58 (25 reviews) [ 179 ]"
+            ],
+            [
+              "2",
+              "96% (23 reviews) [ 180 ]",
+              "71 (7 reviews) [ 181 ]"
+            ],
+            [
+              "3",
+              "100% (23 reviews) [ 182 ]",
+              "83 (7 reviews) [ 183 ]"
+            ],
+            [
+              "4",
+              "100% (20 reviews) [ 184 ]",
+              "— N/a"
+            ],
+            [
+              "5",
+              "96% (24 reviews) [ 185 ]",
+              "— N/a"
+            ],
+            [
+              "6",
+              "96% (23 reviews) [ 186 ]",
+              "— N/a"
+            ],
+            [
+              "7",
+              "89% (27 reviews) [ 187 ]",
+              "— N/a"
+            ],
+            [
+              "Special",
+              "100% (26 reviews) [ 188 ]",
+              "89 (14 reviews) [ 189 ]"
+            ]
+          ],
+          [
+            [
+              "Season",
+              "Timeslot ( ET )",
+              "Episodes",
+              "First aired",
+              "Last aired",
+              "TV season",
+              "Viewership rank",
+              "Average \"}]]}'>Avg. viewers (millions)"
+            ],
+            [
+              "Date",
+              "Viewers (millions)",
+              "Date",
+              "Viewers (millions)"
+            ],
+            [
+              "1",
+              "Thursday 8:30 pm",
+              "6",
+              "April 9, 2009 ( 2009-04-09 )",
+              "6.88 [ 232 ]",
+              "May 14, 2009 ( 2009-05-14 )",
+              "4.29 [ 233 ]",
+              "2008–09",
+              "96 [ 234 ]",
+              "6.0 [ 234 ]"
+            ],
+            [
+              "2",
+              "24",
+              "September 17, 2009 ( 2009-09-17 )",
+              "4.89 [ 235 ]",
+              "May 20, 2010 ( 2010-05-20 )",
+              "4.58 [ 236 ]",
+              "2009–10",
+              "108 [ 237 ]",
+              "4.6 [ 237 ]"
+            ],
+            [
+              "3",
+              "Thursday 9:30 pm",
+              "16",
+              "January 20, 2011 ( 2011-01-20 )",
+              "6.14 [ 238 ]",
+              "May 19, 2011 ( 2011-05-19 )",
+              "3.72 [ 239 ]",
+              "2010–11",
+              "116 [ 240 ]",
+              "5.1 [ 240 ]"
+            ],
+            [
+              "4",
+              "Thursday 8:30 pm (1–10) Thursday 9:30 pm (11–22)",
+              "22",
+              "September 22, 2011 ( 2011-09-22 )",
+              "4.11 [ 241 ]",
+              "May 10, 2012 ( 2012-05-10 )",
+              "3.42 [ 242 ]",
+              "2011–12",
+              "134 [ 243 ]",
+              "4.4 [ 243 ]"
+            ],
+            [
+              "5",
+              "Thursday 9:30 pm (1–9) Thursday 8:30 pm (10–22)",
+              "22",
+              "September 20, 2012 ( 2012-09-20 )",
+              "3.50 [ 244 ]",
+              "May 2, 2013 ( 2013-05-02 )",
+              "2.99 [ 245 ]",
+              "2012–13",
+              "111 [ 246 ]",
+              "4.06 [ 246 ]"
+            ],
+            [
+              "6",
+              "Thursday 8:00 pm (1–9) Thursday 8:30 pm (10–22)",
+              "22",
+              "September 26, 2013 ( 2013-09-26 )",
+              "3.27 [ 247 ]",
+              "April 24, 2014 ( 2014-04-24 )",
+              "2.71 [ 248 ]",
+              "2013–14",
+              "115 [ 249 ]",
+              "3.76 [ 249 ]"
+            ],
+            [
+              "7",
+              "Tuesday 8:00 pm & 8:30 pm [ a ]",
+              "13",
+              "January 13, 2015 ( 2015-01-13 )",
+              "3.75 [ 250 ]",
+              "February 24, 2015 ( 2015-02-24 )",
+              "4.15 [ 251 ]",
+              "2014–15",
+              "119 [ 252 ]",
+              "4.57 [ 252 ]"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Parks_and_Recreation_%28Universal_Television%29.svg/250px-Parks_and_Recreation_%28Universal_Television%29.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://upload.wikimedia.org/wikipedia/en/2/24/Parks_and_recreation_season_1_cast.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail_unscaled",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Rob_Lowe_2012_Shankbone_2.JPG/250px-Rob_Lowe_2012_Shankbone_2.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Adam_Scott_by_Gage_Skidmore.jpg/120px-Adam_Scott_by_Gage_Skidmore.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Amy_Poehler_%288894155873%29_%28cropped%29.jpg/250px-Amy_Poehler_%288894155873%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Pasadena_City_Hall_2.jpg/250px-Pasadena_City_Hall_2.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Mike_Schur_and-the_cast_of_Parks_and_Recreation_at_the_71st_Annual_Peabody_Awards.jpg/250px-Mike_Schur_and-the_cast_of_Parks_and_Recreation_at_the_71st_Annual_Peabody_Awards.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-1af776a0003e",
+            "type": "image",
+            "title": "Wikipedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0997b8b9c241",
+            "type": "image",
+            "title": "The Free Encyclopedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The Free Encyclopedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-401f34fe587e",
+            "type": "image",
+            "title": "A group of people stand in an office-style room in front of a table with documents and booklets. From left to right stand a man with arms crossed wearing a blac",
+            "url": "https://upload.wikimedia.org/wikipedia/en/2/24/Parks_and_recreation_season_1_cast.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/en/2/24/Parks_and_recreation_season_1_cast.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A group of people stand in an office-style room in front of a table with documents and booklets. From left to right stand a man with arms crossed wearing a black shirt, a man wearing a gray suit and green tie with his arms behind his back, ",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c88fb02f1a79",
+            "type": "image",
+            "title": "A shot of a blond woman wearing a red dress, smiling into the camera.",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Amy_Poehler_%288894155873%29_%28cropped%29.jpg/250px-Amy_Poehler_%288894155873%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Amy_Poehler_%288894155873%29_%28cropped%29.jpg/250px-Amy_Poehler_%288894155873%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A shot of a blond woman wearing a red dress, smiling into the camera.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7fd077212db3",
+            "type": "image",
+            "title": "Wikimedia Commons logo",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Commons logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ec0a02062e25",
+            "type": "image",
+            "title": "Edit this at Wikidata",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Edit this at Wikidata",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-de5e034dce69",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f861890d8556",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "American comedy television series",
+            "source_url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "1502d638c6fe17ce940c",
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "title": "Origem: assista agora! - Globoplay",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja Origem online no Globoplay 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventu"
+          },
+          {
+            "id": "adbeb420ed9a5325ff22",
+            "url": "https://www.adorocinema.com/series/serie-28959/",
+            "title": "Origem - Série 2022 - AdoroCinema",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos."
+          },
+          {
+            "id": "0c133cec08fe9663b0d4",
+            "url": "https://www.imdb.com/pt/title/tt9813792/",
+            "title": "Origem (Série de TV 2022– ) - IMDb",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Ce"
+          },
+          {
+            "id": "4b3aedb251c1f349e0e8",
+            "url": "https://watch.plex.tv/pt-BR/show/from/season/1",
+            "title": "Where to Watch Origem • Temporada 1 Full Episodes Online - Plex",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Where to watch Origem • Temporada 1 starring Harold Perrineau, Catalina Sandino Moreno, Eion Bailey. Stream Origem • Temporada 1 online today!"
+          },
+          {
+            "id": "34a6874e6f61ad6df50e",
+            "url": "https://globoplay.globo.com/v/12198055/",
+            "title": "Assistir Origem - online | Globoplay",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja Origem Temporada 2 Episódio null online no Globoplay"
+          },
+          {
+            "id": "835f2166342b4573f980",
+            "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "title": "Origem: entenda como surgem os monstros da série From - UOL",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura t"
+          },
+          {
+            "id": "6339b16e521a29a931d6",
+            "url": "https://en.wikipedia.org/wiki/Parks_and_recreation",
+            "title": "Parks and Recreation - Wikipedia",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parks and Recreation (also known as Parks and Rec) is an American political satire mockumentary television sitcom created by Greg Daniels and Michael Schur. The"
+          },
+          {
+            "id": "6c6b508244b2c2b809c1",
+            "url": "https://pt.wikipedia.org/wiki/Parks_and_Recreation",
+            "title": "Parks and Recreation – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parks and Recreation (br: Confusões de Leslie) é uma série de televisão norte-americana de comédia de situação criada pelo argumentista e diretor Greg Daniels e"
+          },
+          {
+            "id": "3636e5b29eff61cea8db",
+            "url": "https://www.primevideo.com/-/pt/detail/0K8D7DPVRQZCE0CUSM6V7MAH0T",
+            "title": "Prime Video: Parks and Recreation - Temporada 1",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Amy Poehler é Leslie Knope, uma burocrata de nível médio no Departamento de Parques de Pawnee, Indiana."
+          },
+          {
+            "id": "6dbc5b8280f91a8371b8",
+            "url": "https://www.netflix.com/title/70143842",
+            "title": "Parks and Recreation - Netflix",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "In this Emmy-nominated comedy, an employee with a rural Parks and Recreation department is full of energy and ideas but bogged down by bureaucracy."
+          },
+          {
+            "id": "c4fbb19c705f6d4e5872",
+            "url": "https://www.imdb.com/pt/title/tt1266020/",
+            "title": "Parks and Recreation (Série de TV 2009–2015) - IMDb",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "With its memorable catchphrases, iconic characters, and enduring positivity, \"Parks and Recreation\" has left a lasting impact on popular culture. Its optimistic"
+          },
+          {
+            "id": "9921eac30eb73d9db46d",
+            "url": "https://www.imdb.com/title/tt1266020/",
+            "title": "Parks and Recreation (TV Series 2009–2015) - IMDb",
+            "origin": "bing",
+            "query": "origem da empresa O Boticário e quem foi seu fundador",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parks and Recreation: Created by Greg Daniels, Michael Schur. With Amy Poehler, Jim O'Heir, Nick Offerman, Aubrey Plaza. The absurd antics of an Indiana town's "
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "wikipedia: sem resultados (Qual é a origem da empresa O Boticário e)",
+        "bing: 6 resultados (Qual é a origem da empresa O Boticário e)",
+        "bing (consulta reformulada 'origem da empresa O Boticário e quem foi'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Qual é a origem da empresa O Boticário e)",
+        "ddg: bloqueado (Qual é a origem da empresa O Boticário e)",
+        "— recuperação por lacuna —",
+        "wikipedia: sem resultados (origem empresa boticário quem seu fundad)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "1f5ff18d0c61e68392967efc44114d9c27a45d08",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

@@ -1,0 +1,36 @@
+..................................................F..................... [ 40%]
+........................................................................ [ 80%]
+...................................                                      [100%]
+================================== FAILURES ===================================
+______________ test_never_sends_unread_evidence_or_other_context ______________
+
+context = (<sqlite3.Connection object at 0x00000243542E6A70>, {'id': 'rj-4dc294c4b2ce', 'owner': 'owner-a', 'conv': 'chat-a', 'modo': 'pro', ...})
+
+    def test_never_sends_unread_evidence_or_other_context(context):
+        db, job = context
+        captured = []
+        unread = evidence('secret', 'Conteúdo de índice que não deve ser sintetizado.')
+        unread.update(access_state='snippet_only', texto_lido=False, score=100)
+        def writer(messages, timeout):
+            captured.append(json.loads(messages[-1]['content']))
+            return answer()
+        result = ra.agente_sintetizador(db, job, [evidence(), unread], [], writer, verificar_fn=approved_review)
+        assert result['llm']
+        assert [s['evidence_id'] for s in captured[0]['sources']] == ['ev-a']
+>       assert set(captured[0]) == {'objective', 'sources', 'verification'}
+E       AssertionError: assert {'objective',...verification'} == {'objective',...verification'}
+E         
+E         Extra items in the left set:
+E         'requirements'
+E         Use -v to get more diff
+
+tests\test_research_synthesis.py:89: AssertionError
+============================== warnings summary ===============================
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_research_synthesis.py::test_never_sends_unread_evidence_or_other_context
+1 failed, 178 passed, 1 warning in 12.50s

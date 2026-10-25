@@ -1,0 +1,500 @@
+{
+  "scope": "TRACEABLE_AGENT_REVIEW_NOT_HUMAN_GOLD",
+  "retrieval_code_frozen": "af400f1",
+  "limits": [
+    "Review of captured public excerpts, not every relevant URL on the web.",
+    "Lexical anchor counts in review material are navigation aids, not the judgment.",
+    "No independent human panel, no full-answer synthesis in probes.",
+    "New results were not used to change algorithms after opening."
+  ],
+  "summary": {
+    "cases": 20,
+    "baseline_returned_cases_with_confirmed_useful_partial_text": 0,
+    "final_returned_cases_with_useful_partial_text": 1,
+    "final_additional_cases_with_useful_text_read_but_not_returned": 1,
+    "complete_answers_confirmed": 0,
+    "delivered_grounded_answers_in_holdout": "NOT_MEASURED_NO_LLM_OR_AUTHENTICATED_CHAT"
+  },
+  "cases": [
+    {
+      "id": "aa-01",
+      "judgment": "Calendário de dias do ano não informa criação da Embrapa; falso positivo do motor persiste nas duas versões.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-01.json",
+        "accepted-holdout": "accepted-holdout/aa-01.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.calendarr.com/brasil/quantos-dias-tem-um-ano/",
+          "https://pt.m.wikipedia.org/wiki/Ano",
+          "https://www.dicio.com.br/ano/"
+        ],
+        "accepted-holdout": [
+          "https://www.calendarr.com/brasil/quantos-dias-tem-um-ano/",
+          "https://pt.m.wikipedia.org/wiki/Ano",
+          "https://www.dicio.com.br/ano/"
+        ]
+      }
+    },
+    {
+      "id": "aa-02",
+      "judgment": "Depois: páginas Tramontina trazem ano declarado de fundação e categorias de produtos; fundadores não recuperados. Conteúdo parcial útil foi rejeitado pelo classificador e não comprovou entrega final.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "PARTIAL_YEAR_AND_PRODUCTS_REJECTED_BY_ENGINE",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-02.json",
+        "accepted-holdout": "accepted-holdout/aa-02.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://sprunkin.com/",
+          "https://poki.com/br/g/sprunki",
+          "https://sprunki.com/sprunkin"
+        ],
+        "accepted-holdout": [
+          "https://global.tramontina.com/catalogos",
+          "https://www.tramontina.com/",
+          "https://www.youtube.com/user/tramontina"
+        ]
+      }
+    },
+    {
+      "id": "aa-03",
+      "judgment": "Capital financeira, Cuiabá e rádio não respondem capital do estado americano pedido.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-03.json",
+        "accepted-holdout": "accepted-holdout/aa-03.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.dicionariofinanceiro.com/capital/",
+          "https://www.estadosecapitaisdobrasil.com/capital/cuiaba/",
+          "https://www.radios.com.br/aovivo/radio-capital-fm-1019/33251"
+        ],
+        "accepted-holdout": [
+          "https://www.dicionariofinanceiro.com/capital/",
+          "https://www.estadosecapitaisdobrasil.com/capital/cuiaba/",
+          "https://www.radios.com.br/aovivo/radio-capital-fm-1019/33251"
+        ]
+      }
+    },
+    {
+      "id": "aa-04",
+      "judgment": "Catálogos genéricos/SQL não sustentam diretor, datas e exclusão de documentários.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-04.json",
+        "accepted-holdout": "accepted-holdout/aa-04.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://br.justwatch.com/br/filmes",
+          "https://pluto.tv/br/movies/",
+          "https://www.dicio.com.br/quais/"
+        ],
+        "accepted-holdout": [
+          "https://blog.cubos.academy/programacao-o-que-e-uma-query/",
+          "https://www.hashtagtreinamentos.com/query-em-sql",
+          "https://www.linguee.com.br/ingles-portugues/traducao/query.html"
+        ]
+      }
+    },
+    {
+      "id": "aa-05",
+      "judgment": "Dia como conceito/marca e páginas sobre query não informam inauguração do museu.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-05.json",
+        "accepted-holdout": "accepted-holdout/aa-05.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://pt.m.wikipedia.org/wiki/Dia",
+          "https://www.dia.com.br/",
+          "https://sourceforge.net/projects/dia-installer/"
+        ],
+        "accepted-holdout": [
+          "https://blog.cubos.academy/programacao-o-que-e-uma-query/",
+          "https://www.hashtagtreinamentos.com/query-em-sql",
+          "https://www.linguee.com.br/ingles-portugues/traducao/query.html"
+        ]
+      }
+    },
+    {
+      "id": "aa-06",
+      "judgment": "Antes: páginas da cidade. Depois: manchetes em feed, sem leitura de artigo que valide saúde/localidade/publicação.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-06.json",
+        "accepted-holdout": "accepted-holdout/aa-06.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.camacari.ba.gov.br/municipio-de-camacari/",
+          "https://sefaz.camacari.ba.gov.br/",
+          "https://roteirosbr.com.br/roteiros/camacari-ba/"
+        ],
+        "accepted-holdout": [
+          "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTlFLdkxCNGEta1picG1IZ0RWNHYtRlR3V1o0dkZjMXVfNEtRRTFaN3owUDRkNThSZUpac3NWLUhaYkV3X1p0VHFSZnRyUUExM3BYNzVMUWxwM3daQmlzT3c4VFkxeUF5SUd5R1ltMGVlYjJoblV2Yld0TkdjYUlQclBBc0Z1UFFzQzlwTmFFT0k1amluSmRjSXFrUktUMUlGX2xFeEQxMXhrUU5lZ2QtY3hvUFRrT3gyN01nNFZ2UU9HMDQx?oc=5",
+          "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbGpHUEJ2dGNLY1pGaWdjYWtCNGZ6RFZpQ043QzVhazRfRFh0MlhYblhXaGsyeUNjNmRaMzhaUUxhNDZuRkZHXy1LQVJyUkNHWjVlcm1ZU2UxR2pxVWhSX2FGTjIyeDVrd1pqMGhIOVdBMGxRNVlicm14U2ZCNUVCOVEwcTJveFBQZUdJOFo5eEVEaXlTVWhyOU9RWUltS3dZSnhCVG9vcG5QV25ld1d2U0txRkh6QQ?oc=5",
+          "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa19pSEVUbnhxUWJBWTBmWHNpaThPb0xrNjFkUFlEY2JRODNOX3hYU3g0NmJPVEdxbjJERkd0MDlESDRCZ29rSldzYUxQdlpBTVBTM2t4VzMzOEdyQjV3b3h0NE9jVmR1cGJGY252TVdDV3BBVkd0Qi1EM0pYaTJMZEpnZ1dsaHdwVkNVaGpUX0tiOEFaU3Y1TlpnREpFbnpHazRTc0hIdkkycTEtWFVxbTFtV1l2U3hGWUhrM3lDTDl3Z0FMSzIybzdpWUM5WVV0dkJ4RHEwZ0VPNklybnJSbFBR?oc=5"
+        ]
+      }
+    },
+    {
+      "id": "aa-07",
+      "judgment": "Portais Brasil/G1 não substituem artigo pertinente com data e assunto no período.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-07.json",
+        "accepted-holdout": "accepted-holdout/aa-07.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://pt.m.wikipedia.org/wiki/Brasil",
+          "https://g1.globo.com/",
+          "https://es.m.wikipedia.org/wiki/Brasil"
+        ],
+        "accepted-holdout": [
+          "https://pt.m.wikipedia.org/wiki/Brasil",
+          "https://g1.globo.com/",
+          "https://www.gov.br/pt-br/"
+        ]
+      }
+    },
+    {
+      "id": "aa-08",
+      "judgment": "Antes: Array genérico sem toSorted no trecho. Depois: Array em inglês lido contém descrição de toSorted e imutabilidade, mas essa leitura não chega às três fontes devolvidas; não comprova assinatura/parâmetros completos.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": "PARTIAL_BEHAVIOR_AND_IMMUTABILITY_REJECTED_BY_ENGINE",
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-08.json",
+        "accepted-holdout": "accepted-holdout/aa-08.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "https://www.alura.com.br/artigos/javascript-para-que-serve-array",
+          "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/"
+        ],
+        "accepted-holdout": [
+          "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "https://www.alura.com.br/artigos/javascript-para-que-serve-array",
+          "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/"
+        ]
+      }
+    },
+    {
+      "id": "aa-09",
+      "judgment": "Origem é confundida com série de televisão; não há relação recuperada com fundador da empresa.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-09.json",
+        "accepted-holdout": "accepted-holdout/aa-09.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "https://www.adorocinema.com/series/serie-28959/"
+        ],
+        "accepted-holdout": [
+          "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "https://www.adorocinema.com/series/serie-28959/",
+          "https://watch.plex.tv/pt-BR/show/from/season/1"
+        ]
+      }
+    },
+    {
+      "id": "aa-10",
+      "judgment": "Peso corporal/física/restaurante não respondem ao modelo e condição de bateria/cartão.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-10.json",
+        "accepted-holdout": "accepted-holdout/aa-10.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.tuasaude.com/peso-ideal/",
+          "https://restaurantguru.com.br/Peso-and-Pizza-Ribeirao-Preto",
+          "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-peso.htm"
+        ],
+        "accepted-holdout": [
+          "https://www.tuasaude.com/peso-ideal/",
+          "https://restaurantguru.com.br/Peso-and-Pizza-Ribeirao-Preto",
+          "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-peso.htm"
+        ]
+      }
+    },
+    {
+      "id": "aa-11",
+      "judgment": "Comparadores e indicadores não contêm a documentação dos dois sistemas.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-11.json",
+        "accepted-holdout": "accepted-holdout/aa-11.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.diffchecker.com/pt/",
+          "https://www.buscape.com.br/",
+          "https://versus.com/br"
+        ],
+        "accepted-holdout": [
+          "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "https://www.diffchecker.com/pt/"
+        ]
+      }
+    },
+    {
+      "id": "aa-12",
+      "judgment": "Definições de causas não respondem ao acontecimento histórico; extração da entidade também errou.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-12.json",
+        "accepted-holdout": "accepted-holdout/aa-12.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.dicio.com.br/causas/",
+          "https://escreva.ai/palavra/causas/",
+          "https://dicionario.priberam.org/causas"
+        ],
+        "accepted-holdout": [
+          "https://www.dicio.com.br/causas/",
+          "https://escreva.ai/palavra/causas/",
+          "https://dicionario.priberam.org/causas"
+        ]
+      }
+    },
+    {
+      "id": "aa-13",
+      "judgment": "Marketing/manual genérico/licença não são PDF pertinente do INMET lido.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-13.json",
+        "accepted-holdout": "accepted-holdout/aa-13.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.manualpdf.com.br/",
+          "https://www.reclameaqui.com.br/empresa/manual/",
+          "https://hello.manual.com.br/"
+        ],
+        "accepted-holdout": [
+          "https://www.manualpdf.com.br/",
+          "https://hello.manual.com.br/",
+          "https://creativecommons.org/licenses/by-sa/4.0/"
+        ]
+      }
+    },
+    {
+      "id": "aa-14",
+      "judgment": "Vídeos genéricos e indicadores não fornecem vídeo individual oficial do IBGE com metadados pedidos.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-14.json",
+        "accepted-holdout": "accepted-holdout/aa-14.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "https://g1.globo.com/videos/playlist/videos-mais-vistos-g1.ghtml",
+          "https://globoplay.globo.com/"
+        ],
+        "accepted-holdout": [
+          "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "https://g1.globo.com/videos/playlist/videos-mais-vistos-g1.ghtml"
+        ]
+      }
+    },
+    {
+      "id": "aa-15",
+      "judgment": "Definições de mostre não são fotos do local com origem/direitos.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-15.json",
+        "accepted-holdout": "accepted-holdout/aa-15.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://escreva.ai/palavra/mostre/",
+          "https://www.dicio.com.br/mostre/",
+          "https://www.conjugacao.com.br/verbo-mostrar/"
+        ],
+        "accepted-holdout": [
+          "https://escreva.ai/palavra/mostre/",
+          "https://www.dicio.com.br/mostre/",
+          "https://www.conjugacao.com.br/verbo-mostrar/"
+        ]
+      }
+    },
+    {
+      "id": "aa-16",
+      "judgment": "Comparadores/lojas/vídeos não são as duas referências das operações Python.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-16.json",
+        "accepted-holdout": "accepted-holdout/aa-16.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.diffchecker.com/pt/",
+          "https://www.buscape.com.br/",
+          "https://store.steampowered.com/app/1888930/The_Last_of_Us_Part_I/"
+        ],
+        "accepted-holdout": [
+          "https://www.diffchecker.com/pt/",
+          "https://www.buscape.com.br/",
+          "https://www.youtube.com/"
+        ]
+      }
+    },
+    {
+      "id": "aa-17",
+      "judgment": "Prazo genérico não confirma retenção de logs do plano Render pedido.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-17.json",
+        "accepted-holdout": "accepted-holdout/aa-17.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.dicio.com.br/prazo/",
+          "https://www.contadordeprazo.com.br/",
+          "https://www.prazofacil.com.br/"
+        ],
+        "accepted-holdout": [
+          "https://www.dicio.com.br/prazo/",
+          "https://www.contadordeprazo.com.br/",
+          "https://www.prazofacil.com.br/"
+        ]
+      }
+    },
+    {
+      "id": "aa-18",
+      "judgment": "Gramática de há/a não verifica datas do clube ou conflito real.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-18.json",
+        "accepted-holdout": "accepted-holdout/aa-18.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.todamateria.com.br/ha-ou-a/",
+          "https://brasilescola.uol.com.br/gramatica/a-ou-ha.htm",
+          "https://www.mestrekira.com.br/ha-ou-a-quando-usar-diferencas.html"
+        ],
+        "accepted-holdout": [
+          "https://www.todamateria.com.br/ha-ou-a/",
+          "https://brasilescola.uol.com.br/gramatica/a-ou-ha.htm",
+          "https://www.mestrekira.com.br/ha-ou-a-quando-usar-diferencas.html"
+        ]
+      }
+    },
+    {
+      "id": "aa-19",
+      "judgment": "Dicionários de quantos não fornecem contagem pública por hora no dia solicitado.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-19.json",
+        "accepted-holdout": "accepted-holdout/aa-19.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.dicio.com.br/quantos/",
+          "https://dicionariodebase.com.br/gramatica/quantos",
+          "https://dicionario.priberam.org/quantos"
+        ],
+        "accepted-holdout": [
+          "https://www.dicio.com.br/quantos/",
+          "https://dicionariodebase.com.br/gramatica/quantos",
+          "https://dicionario.priberam.org/quantos"
+        ]
+      }
+    },
+    {
+      "id": "aa-20",
+      "judgment": "Status de aplicativos/fórum/notícia de outra área não satisfazem data, municípios e regras do parque.",
+      "before_returned_request_useful": "NONE_CONFIRMED",
+      "after_returned_request_useful": "NONE_CONFIRMED",
+      "after_read_not_returned": null,
+      "complete_answer_verified": false,
+      "artifacts": {
+        "baseline-sealed": "baseline-sealed/aa-20.json",
+        "accepted-holdout": "accepted-holdout/aa-20.json"
+      },
+      "urls": {
+        "baseline-sealed": [
+          "https://www.habblet.city/",
+          "https://jornaldebrasilia.com.br/noticias/politica-e-poder/defesa-de-primo-de-vorcaro-pede-a-fachin-que-devolva-processo-a-mendonca/",
+          "https://jc.uol.com.br/politica/2026/09/21/defesa-do-primo-de-vorcaro-pede-que-fachin-devolva-investigacao-a-mendonca.html"
+        ],
+        "accepted-holdout": [
+          "https://status.play.google.com/",
+          "https://forum.vivaldi.net/topic/112404/whatsapp-web-logging-out-constantly",
+          "https://m.chatgpt.com/?locale=pt-BR"
+        ]
+      }
+    }
+  ]
+}
