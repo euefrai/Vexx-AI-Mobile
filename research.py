@@ -34,6 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
+RETRIEVAL_VERSION = '5.9.9.2'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -916,7 +917,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
     import query_intelligence
     fonte['structured']=metas.get('structured',[])[:2]
     fonte['vertical']=search_verticals.assess(query_intelligence.analyze(consulta),fonte)
-    if fonte['vertical']['kind'] in ('news','events','air_travel','bus_travel'):
+    if fonte['vertical']['kind'] in ('news','events','air_travel','bus_travel','documents'):
         fonte['relevante']=fonte['relevante'] and fonte['vertical']['eligible']
     if a.get("metadata_source") == "academic_provider":
         for key in ("doi", "authors", "year", "journal", "repository", "abstract",
@@ -1014,6 +1015,8 @@ def _buscar_orquestrado(consulta: str, max_resultados: int = 6,
             "segundos": res.get("segundos", 0.0),
             "recuperou": bool(res.get("recuperou")),
             "tentativas_busca": res.get("tentativas_busca", []),
+            "query_plan": res.get("query_plan", []),
+            "discovery_reservoir": res.get("candidate_reservoir"),
             "etapas": list(res.get("etapas", []))}
     return achados, info
 
@@ -1135,13 +1138,14 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         buscar_fn.etapas = []
         buscar_fn.info = {}
     salvos = cache_get(db, owner, "web", cache_pedido)
-    if salvos is not None and salvos.get("retrieval_version") == "5.9.9.1":
+    if salvos is not None and salvos.get("retrieval_version") == RETRIEVAL_VERSION:
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
     etapas, fontes = [], []
     try:
-        achados = buscar_fn(consulta)[:12]
+        import search_orchestrator
+        achados = search_orchestrator.preservar_candidatos(buscar_fn(consulta), pedido, 12)
         etapas.append(f"busca: {len(achados)} resultados")
     except Exception as exc:
         codigo = getattr(exc, "codigo", "")
@@ -1211,7 +1215,9 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              'candidate_reservoir':candidate_report(achados, normalized+_numerar(fontes), pedido,
                  read_outcomes=read_outcomes,selected_urls={a['url'] for a in candidates},
                  returned_urls={f['url'] for f in fontes}),
-             "retrieval_version": "5.9.9.1", "request": request_info,
+             "retrieval_version": RETRIEVAL_VERSION, "request": request_info,
+             "query_plan": info_busca.get('query_plan', []),
+             "discovery_reservoir": info_busca.get('discovery_reservoir'),
              "midia": list({item['id']:item for item in media_evidence.relevant_media(midia,pedido)}.values())[:12],
              'fontes_encontradas_relevantes':sum(f.get('status')!='aberta' and bool(f.get('relevante')) for f in fontes),
              "fontes_lidas": lidas_n, "fontes_uteis": uteis_n,
@@ -1476,7 +1482,7 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
                          timeout_pagina: float = 6.0, orcamento: dict = None) -> dict:
     """N subconsultas determinísticas + merge/dedupe + run persistido. Interrompível."""
     salvos = cache_get(db, owner, "web-deep", consulta)
-    if salvos is not None and salvos.get('retrieval_version') == '5.9.9.1':
+    if salvos is not None and salvos.get('retrieval_version') == RETRIEVAL_VERSION:
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -1529,7 +1535,7 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
     lacunas_unicas = list(dict.fromkeys(lacunas))[:8]
     consultas_unicas = list(dict.fromkeys(consultas))[:12]
     saida = {"fontes": _numerar(todas)[:12],
-             'midia': list(midia.values()), 'retrieval_version':'5.9.9.1',
+             'midia': list(midia.values()), 'retrieval_version':RETRIEVAL_VERSION,
              "etapas": etapas + [f"{len(todas)} fontes únicas, {lidas_n} lidas"],
              "divergencias": detectar_divergencias(todas),
              "subs": subs, "de_cache": False,

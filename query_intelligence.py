@@ -17,6 +17,61 @@ _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
                'EUR': r'euros?|eur', 'JPY': r'ienes?|jpy'}
 
 
+def topic_profile(text):
+    """Separate explicit operations from topics without claiming semantic NER.
+
+    The original is authoritative. Unknown names remain unresolved candidates;
+    dates, models, exclusions and comparisons are never inferred away.
+    """
+    original = str(text or '')
+    value = re.sub(r'\s+', ' ', original).strip().rstrip('.!?')
+    presentation = []
+    tail = re.search(r'\s+e\s+(?:apresente|mostre|exiba|organize)\s+(?:(?:as?|os?)\s+)?'
+                     r'(?:principais\s+)?(?:informa[cç][oõ]es|resultados|respostas?)\s+'
+                     r'em\s+(?:cards|cart[oõ]es|tabelas?)(?:\s+com\s+imagens)?$', value, re.I)
+    if tail:
+        presentation.append(tail[0].strip())
+        value = value[:tail.start()]
+    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+    value = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?', '', value, flags=re.I)
+    value = re.sub(r'^(?:as?\s+)?(?:[uú]ltimas?\s+)?(?:novidades|informa[cç][oõ]es recentes)\s+sobre\s+', '', value, flags=re.I)
+    operation = ''
+    prefix = re.match(r'^(hist[oó]ria\s+(?:de|do|da|dos|das)\s+(?:empresa\s+)?|'
+                      r'documenta[cç][aã]o\s+(?:oficia(?:l|is)\s+)?|'
+                      r'especifica[cç][oõ]es\s+(?:oficia(?:l|is)\s+)?|'
+                      r'relat[oó]rio\s+(?:p[uú]blico\s+)?(?:PDF\s+)?)', value, re.I)
+    if prefix:
+        operation = prefix[0].strip()
+        value = value[prefix.end():].strip()
+    source_preference = re.search(r'\s+(fontes?\s+(?:oficiais|prim[aá]rias|originais))$', value, re.I)
+    preference = source_preference[1] if source_preference else ''
+    if source_preference:
+        value = value[:source_preference.start()].strip()
+    required = ([re.sub(r'\s+(?:de|do|da|dos|das)\s*(?:empresa)?$', '', operation, flags=re.I)] if operation else [])
+    required += [m[0] for m in re.finditer(r'\b(?:autonomia|limita[cç][oõ]es|processos|vantagens|custos|data de inaugura[cç][aã]o)\b', value, re.I)]
+    entities = []
+    for m in re.finditer(r'\b(?:[A-ZÀ-Ý][\w-]*)(?:(?:\s+(?:de|do|da|dos|das))?\s+[A-ZÀ-Ý][\w-]*)*', value):
+        name = m[0]
+        if name.upper() in ('PDF', 'API', 'GB', 'BRL', 'USD') or len(name) < 3:
+            continue
+        kind = ('product_model' if re.search(r'[A-Za-z]+-?\d', name) else
+                'organization' if re.search(r'\bempresa\b', normalized(original)) else 'unresolved_named_entity')
+        entities.append({'name': name, 'kind': kind, 'resolution': 'explicit_text_not_verified'})
+    focused = ' '.join(x for x in (value, ' '.join(required[:1]), preference) if x).strip()
+    # Discovery can reorder a noun phrase, but must not silently drop a
+    # negative/budget/comparison suffix that this deterministic parser cannot model.
+    guarded = bool(re.search(r'\b(?:nao|exceto|exclua|sem|ate|abaixo|acima|compare|versus)\b|r\$|\bvs\b', normalized(original)))
+    if guarded:
+        focused = original.strip()
+    return {'original_request': original, 'primary_topic': value or original.strip(),
+            'secondary_topics': [], 'entities': entities[:12], 'required_information': required,
+            'intent': 'deep_research' if re.search(r'profund|a fundo', normalized(original)) else 'research',
+            'hard_constraints': {'unparsed_original_guard': original if guarded else ''},
+            'soft_preferences': [preference] if preference else [],
+            'presentation_preferences': presentation, 'focused_query': focused,
+            'scope': 'explicit syntax only; not universal entity disambiguation'}
+
+
 def analyze(text, now=None, timezone_name='America/Bahia'):
     now = now or datetime.now(timezone.utc)
     if now.tzinfo is None:

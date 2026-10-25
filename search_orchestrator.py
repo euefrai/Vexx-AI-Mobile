@@ -242,10 +242,19 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     matched_ids=[_tem_termo(identifier,body) for identifier in identifiers]
     if matched_ids and not (any(matched_ids) if RX_COMPARACAO.search(consulta) else all(matched_ids)):
         reasons.append('ENTITY_MISMATCH')
+    import query_intelligence as qi
+    named = []
+    for entity in qi.topic_profile(consulta)['entities']:
+        name = entity['name']
+        tokens = _termos(name)
+        if len(tokens) >= 2 or entity['kind'] == 'organization' or re.fullmatch(r'[A-Z]{3,}', name):
+            named.append(all(_tem_termo(t, body) for t in tokens))
+    if named and not (any(named) if RX_COMPARACAO.search(consulta) else all(named)):
+        reasons.append('ENTITY_MISMATCH')
     accessory=r'\b(capa|carregador|pelicula|bateria de reposicao|compativel com|acessorio|acessorios)\b'
     if re.search(accessory,body) and not re.search(accessory,q) and re.search(r'\b(notebook|celular|smartphone|roteador|geladeira|lavadora)\b',q):
         reasons.append('INTENT_MISMATCH')
-    return reasons
+    return list(dict.fromkeys(reasons))
 
 
 def _correspondencia(achados: list, termos: list) -> float:
@@ -270,8 +279,10 @@ def _temas_cobertos(achados: list, consulta: str) -> set:
 
 def _retrato(achados: list, consulta: str) -> dict:
     """Retrato do que já foi coberto: domínios distintos e temas do pedido."""
-    dominios = {_dominio(a.get("url", "")) for a in achados or []} - {""}
-    return {"dominios": dominios, "temas": _temas_cobertos(achados, consulta)}
+    terms = _termos_correspondencia(consulta)
+    useful = [a for a in achados or [] if _util_para_pedido(a, terms, consulta)]
+    dominios = {_dominio(a.get("url", "")) for a in useful} - {""}
+    return {"dominios": dominios, "temas": _temas_cobertos(useful, consulta)}
 
 
 def _ganho_informacao(antes: dict, achados: list, consulta: str) -> dict:
@@ -317,6 +328,21 @@ def classificar(consulta: str) -> dict:
 
 
 # ── Consultas alternativas e complementares ────────────────────────
+def query_plan(consulta: str) -> list:
+    """Small purpose-labelled plan; execution still shares the existing budgets."""
+    import query_intelligence as qi
+    profile = qi.topic_profile(consulta)
+    original = str(consulta or '').strip()
+    focused = profile['focused_query']
+    out = []
+    if focused and focused.casefold() != original.casefold():
+        out.append({'type': 'TOPIC_FOCUSED', 'query': focused,
+                    'purpose': 'antepor assunto explícito e preservar informação requerida'})
+    if original:
+        out.append({'type': 'ORIGINAL_QUERY', 'query': original, 'purpose': 'pedido original sem condensação'})
+    return out
+
+
 def variantes(consulta: str, classes=None, teto: int = 3, produto: bool = False) -> list:
     """Consultas derivadas da original, determinísticas e conservadoras.
 
@@ -713,6 +739,19 @@ def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
         -a.get("relevancia", 0.0), not a.get("fonte_primaria", False)))
 
 
+def preservar_candidatos(achados: list, consulta: str, limite: int = 12) -> list:
+    """Preserve the V5991 reader's opportunities before the discovery cut.
+
+    No second ranker/store or extra reads; feeds/media use remaining slots.
+    """
+    if len(achados) <= limite:
+        return list(achados)
+    import research
+    prioritized = research.selecionar_candidatos_leitura(achados, consulta, min(6, limite))
+    urls = {a.get('url') for a in prioritized}
+    return (prioritized + [a for a in achados if a.get('url') not in urls])[:limite]
+
+
 # ── Lacunas do pedido ──────────────────────────────────────────────
 RX_PEDE_NUMERO = re.compile(
     r"\b(quanto|quantos|quantas|preço|preco|valor|custo|taxa|total|número|"
@@ -825,7 +864,10 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
         ordem.append("crossref")
     if info.get("produto"):
         ordem.extend(["bing", "marginalia"])
-    if sp.CLASSE_NOTICIA in classes and not info.get("academica"):
+    request = info.get('request') or {}
+    news_intent = not request or request.get('domain') == 'news' or bool(re.search(
+        r'\b(noticias?|manchetes|hoje|ontem|recentes?|ultimas?)\b', _sem_acentos(request.get('original_request', ''))))
+    if sp.CLASSE_NOTICIA in classes and not info.get("academica") and news_intent:
         if (info.get('request') or {}).get('domain')=='news':
             ordem.append('google-news')
         ordem.extend(["bing-news", "bing", "hn"])
@@ -905,6 +947,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     orc.update(orcamento or {})
     consultas = list(extra_queries or [])
     query = request_info["search_query"] if request_info["requires_live_data"] else consulta
+    plan = query_plan(query)
+    if not consultas and request_info['domain'] not in ('air_travel', 'bus_travel', 'events', 'currency', 'news'):
+        consultas = [row['query'] for row in plan]
     params=request_info['parameters']
     if not consultas and request_info['domain'] in ('air_travel','bus_travel') and params.get('origin') and params.get('destination'):
         # Second query discovers route-specific public pages; exact dates/passengers
@@ -942,7 +987,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         for item in items:
             item.setdefault('discovery_query', query[:240])
             item.setdefault('discovery_provider', name)
+        before = {canonizar_url(a.get('url', '')) for a in achados}
         achados.extend(items)
+        attempt = next((a for a in reversed(tentativas) if a['provedor'] == name and a['consulta'] == query), None)
+        if attempt is not None:
+            attempt.update(discovered=len(items), new_urls=sum(canonizar_url(a.get('url', '')) not in before for a in items),
+                           useful_candidates=sum(_util_para_pedido(a, _termos_correspondencia(consulta), consulta) for a in items),
+                           evidence_obtained=0, evidence_scope='discovery_only_requires_reading')
     consultas_feitas = 0
     provedor_indice = 0
     termos_c = _termos_correspondencia(consulta)
@@ -1082,6 +1133,21 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             if len(title) < 20 or not re.fullmatch(r'[a-zA-Z0-9.-]+', publisher):
                 continue
             q_original = f'"{title[:180]}" site:{publisher}'
+            # Spend the same attempt slots on declared publisher links/feeds
+            # before another search response that may only repeat the aggregator.
+            def fetch_publisher(url, kind):
+                remaining = float(orc['timeout_total']) - (time.monotonic()-t0)
+                if remaining<=0 or not _tentar('publisher-feed',url):
+                    raise sp.ErroProvedor('Publisher recovery budget exhausted','orcamento')
+                return sp._baixar(url,min(timeout,remaining),aceitar=kind)
+            try:
+                originals=sp.recuperar_feed_publicador(feed,fetch_publisher)
+                remember(originals, 'publisher-feed', q_original)
+                etapas.append(f'RSS do publicador: {len(originals)} artigo(s) candidato(s), leitura pendente')
+            except (sp.ErroProvedor, ValueError) as exc:
+                etapas.append('Recuperação no publicador limitada: '+str(getattr(exc,'codigo',type(exc).__name__)))
+            if any(a.get('source_recovery',{}).get('publisher_url')==feed.get('publisher_url') for a in achados):
+                continue
             for name in [n for n in nomes if n in ('bing', 'ddg', 'marginalia')][:2]:
                 remaining = float(orc['timeout_total']) - (time.monotonic() - t0)
                 if remaining <= 0 or not _tentar(name, q_original):
@@ -1105,18 +1171,6 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 remember(recovered, name, q_original)
                 etapas.append(f'{name}: recuperação de manchete no publicador; {len(recovered)} candidato(s), leitura pendente')
                 break
-            if not any(a.get('source_recovery',{}).get('publisher_url')==feed.get('publisher_url') for a in achados):
-                def fetch_publisher(url, kind):
-                    remaining = float(orc['timeout_total']) - (time.monotonic()-t0)
-                    if remaining<=0 or not _tentar('publisher-feed',url):
-                        raise sp.ErroProvedor('Publisher recovery budget exhausted','orcamento')
-                    return sp._baixar(url,min(timeout,remaining),aceitar=kind)
-                try:
-                    originals=sp.recuperar_feed_publicador(feed,fetch_publisher)
-                    remember(originals, 'publisher-feed', q_original)
-                    etapas.append(f'RSS do publicador: {len(originals)} artigo(s) candidato(s), leitura pendente')
-                except (sp.ErroProvedor, ValueError) as exc:
-                    etapas.append('Recuperação no publicador limitada: '+str(getattr(exc,'codigo',type(exc).__name__)))
 
     unicos, descartes = deduplicar(achados)
     ranqueados = ranquear(unicos, consulta, info["classes"], info)
@@ -1150,8 +1204,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             recuperacao.insert(0, enxuta)
     from research import candidate_report
     return {
+        'query_plan': plan,
         "tentativas_busca": tentativas,
-        "achados": ranqueados[:max(6, max_resultados * 2)],
+        "achados": preservar_candidatos(ranqueados, consulta, max(6, max_resultados * 2)),
         "candidate_reservoir": candidate_report(achados, ranqueados, consulta),
         "etapas": etapas,
         "estado": estado,

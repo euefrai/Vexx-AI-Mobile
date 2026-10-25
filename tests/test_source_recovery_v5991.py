@@ -76,7 +76,7 @@ def test_old_retrieval_cache_is_not_reused_after_selection_change():
     research.cache_put(db,'qa','web','solar',{'retrieval_version':'5.9.9','fontes':[]},600)
     calls=[]
     result=research.pesquisa_rapida(db,'qa','solar',lambda q:calls.append(q) or [],lambda _:None)
-    assert calls and not result['de_cache'] and result['retrieval_version']=='5.9.9.1'
+    assert calls and not result['de_cache'] and result['retrieval_version']==research.RETRIEVAL_VERSION
     db.close()
 
 

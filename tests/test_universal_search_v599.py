@@ -151,7 +151,8 @@ def test_visual_request_returns_actual_gallery_without_a_background_job(tmp_path
 
 def test_feed_leads_do_not_hide_original_articles_from_reader_budget(tmp_path):
     db=sqlite3.connect(tmp_path/'qa.sqlite');research.criar_tabelas(db)
-    today=datetime.now(timezone.utc).date().isoformat()
+    from zoneinfo import ZoneInfo
+    today=datetime.now(ZoneInfo('America/Bahia')).date().isoformat()
     feeds=[{'titulo':'Recife anuncia obras','url':f'https://news.google.com/{i}',
             'trecho':'Recife anuncia obras','content_scope':'feed_metadata', 'meta':{'publicado_em':today}}
             for i in range(6)]

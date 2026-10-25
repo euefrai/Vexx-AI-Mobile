@@ -60,6 +60,9 @@ def assess(request, source) -> SourceContract:
     domain=request['domain'];p=request.get('parameters') or {}
     body=text(source.get('titulo'),1000)+' '+str(source.get('trecho') or '')
     data={};reasons=[];state='UNVERIFIED';eligible=True
+    if domain == 'documents' and re.search(r'\bpdf\b', qi.normalized(request.get('original_request', ''))):
+        if source.get('content_scope') != 'document_text':
+            reasons.append('CONTENT_TYPE_MISMATCH')
     if domain in ('news','events') and p.get('location'):
         if not contains(p['location'],body): reasons.append('ENTITY_MISMATCH')
         region = {'BA': 'Bahia', 'PE': 'Pernambuco', 'SP': 'São Paulo'}.get(str(p.get('region','')).upper(), p.get('region'))
