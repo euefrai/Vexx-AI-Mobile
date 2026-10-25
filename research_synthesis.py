@@ -12,7 +12,9 @@ Compare alternativas e responda ao objetivo, preservando condições, datas,
 unidades, incertezas e divergências. Resumo acadêmico não é texto completo.
 Não transforme associação em causa nem hipótese em fato. Não invente números.
 Retorne apenas JSON: {"points":[{"text":"parágrafo em texto simples",
-"evidence":[{"id":"E1","quote":"trecho literal que sustenta o parágrafo"}]}]}.
+"evidence":[{"id":"ID_DA_FONTE","quote":"trecho literal que sustenta o parágrafo"}]}]}.
+Substitua ID_DA_FONTE exclusivamente pelo campo id de uma fonte recebida.
+Nunca numere os quotes como novas fontes nem crie IDs para trechos separados.
 Use 1 a 5 parágrafos, até 500 caracteres cada; 1 a 3 referências por parágrafo.
 Cada quote deve ter 24 a 450 caracteres e existir literalmente na fonte indicada.
 Para trechos separados da mesma fonte, repita o id com quotes distintos;
@@ -47,13 +49,14 @@ Inclua exatamente uma revisão para cada índice recebido. reason deve ser um de
 none, negation, entity, date, quantity, causality, scope, insufficient.
 Use none apenas para SUPPORTED. Os demais estados precisam de outro reason.
 Para CONTRADICTED, inclua também counterevidence:
-{"source_id":"E1","quote":"trecho literal da fonte que afirma o contrário",
+{"source_id":"ID_DA_FONTE","quote":"trecho literal da fonte que afirma o contrário",
 "claim":"trecho literal do parágrafo que está sendo refutado"}.
 O quote precisa ter 12 a 450 caracteres e o claim de 12 a 250 caracteres.
 Escolha a oração que apresenta a oposição, não o parágrafo inteiro da fonte.
 Não informado, não avaliado, indisponível e desconhecido NÃO são provas de
 contradição. Se não puder apontar uma afirmação oposta, não use CONTRADICTED.
-Para os outros estados, omita counterevidence. Não invente trechos ou IDs.
+Para os outros estados, omita counterevidence. Use apenas IDs de fontes recebidas.
+Não invente trechos ou IDs.
 """
 
 
@@ -303,7 +306,8 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
         return None
     import query_intelligence
     requirements = query_intelligence.answer_requirements(objective)
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": json.dumps({
+    allowed_ids = json.dumps([s['id'] for s in sources],ensure_ascii=False)
+    messages = [{"role": "system", "content": SYSTEM+'\nIDs de fonte permitidos: '+allowed_ids}, {"role": "user", "content": json.dumps({
         "objective": objective[:500], "sources": sources,
         **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity']} for r in requirements]} if requirements else {}),
         "verification": [{"claim": str(v.get("afirmacao", ""))[:400],

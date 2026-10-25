@@ -52,7 +52,7 @@ def test_worldbank_does_not_substitute_unrelated_indicator(monkeypatch,query):
 
 
 def test_incomplete_academic_metadata_can_reach_reading_without_becoming_evidence():
-    row={'url':'https://example.org/paper','titulo':'Effect of thermal treatments',
+    row={'url':'https://example.org/paper','titulo':'Tratamentos térmicos',
          'trecho':'','metadata_source':'academic_provider'}
     selected=research.selecionar_candidatos_leitura([row],'Qual o efeito e a duração dos tratamentos térmicos?')
     assert selected==[row]

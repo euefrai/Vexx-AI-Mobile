@@ -51,3 +51,15 @@ def test_research_writer_rejects_transport_truncation_without_retry(monkeypatch)
     assert rs.failure_detail(exc.value)=='model_truncated'
     assert len(calls)==1 and calls[0]['fallbacks']==[]
     assert writer.last_metadata=={'finish_reason':'length','usage':{'completion_tokens':1800}}
+
+
+def test_writer_prompt_does_not_conflict_with_actual_source_ids():
+    captured=[]
+    def write(messages,timeout):
+        captured.append(messages)
+        return '{"points":[]}'
+    with pytest.raises(ValueError):
+        rs.generate('Explique a operação.',[{'id':'S7','excerpt':'A operação retorna uma nova lista com os dados fornecidos.'}],[],write)
+    system=captured[0][0]['content']
+    assert 'IDs de fonte permitidos: ["S7"]' in system
+    assert '"id":"E1"' not in system

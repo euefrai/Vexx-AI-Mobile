@@ -1114,6 +1114,10 @@ def selecionar_candidatos_leitura(achados, pedido, limite=6):
         useful=orch._util_para_pedido(a,terms,pedido)
         # Sparse academic metadata is a reading candidate too. Its title may
         # omit an answer facet which only exists in the original document.
+        if a.get('metadata_source')=='academic_provider' and not useful:
+            metadata=' '.join(str(a.get(k) or '') for k in ('titulo','trecho','abstract'))
+            if terms and metadata.strip() and not any(orch._tem_termo(t,metadata) for t in terms):
+                continue
         try: path=urllib.parse.urlsplit(a.get('url') or '').path
         except ValueError: continue
         index=orch._pagina_de_indice(a) or (request['domain']=='news' and path in ('','/'))
