@@ -41,7 +41,7 @@ _BOM = re.compile(
 
 
 class _No:
-    __slots__ = ("tag", "attrs", "filhos", "pai", "texto")
+    __slots__ = ("tag", "attrs", "filhos", "pai", "texto", "conteudo")
 
     def __init__(self, tag="", attrs=None, pai=None):
         self.tag = tag
@@ -49,6 +49,7 @@ class _No:
         self.filhos = []
         self.pai = pai
         self.texto = ""
+        self.conteudo = []  # text and child references in actual document order
 
 
 class _MiniDom(HTMLParser):
@@ -74,16 +75,21 @@ class _MiniDom(HTMLParser):
             self._no_titulo = True
             return
         if tag in _VAZIAS:
-            self.atual.filhos.append(_No(tag, attrs, self.atual))
+            no = _No(tag, attrs, self.atual)
+            self.atual.filhos.append(no)
+            self.atual.conteudo.append(no)
             return
         no = _No(tag, attrs, self.atual)
         self.atual.filhos.append(no)
+        self.atual.conteudo.append(no)
         self.atual = no
 
     def handle_startendtag(self, tag, attrs):
         tag = (tag or "").lower()
         if tag in _VAZIAS and not self._pular:
-            self.atual.filhos.append(_No(tag, attrs, self.atual))
+            no = _No(tag, attrs, self.atual)
+            self.atual.filhos.append(no)
+            self.atual.conteudo.append(no)
 
     def handle_endtag(self, tag):
         tag = (tag or "").lower()
@@ -109,6 +115,7 @@ class _MiniDom(HTMLParser):
             self.titulo += data
             return
         self.atual.texto += data
+        self.atual.conteudo.append(data)
 
 
 def _normalizar(texto: str) -> str:
@@ -123,18 +130,24 @@ def _limpar(texto: str, teto: int = 400) -> str:
 # ── Pontuação de blocos (artigo principal) ──────────────────────────
 def _texto_bloco(no: "_No") -> str:
     """Texto visível do bloco, sem boilerplate (nav/cabeçalho/rodapé/aside)."""
+    return _texto_ordenado(no)
+
+
+def _texto_ordenado(no: "_No", inline=False) -> str:
+    """Preserve inline ordering without artificial spaces inside identifiers."""
     partes = []
 
-    def _anda(n):
-        if n.tag in _PULAR or n.tag in _IGNORAR:
+    def _anda(n, depth=0):
+        if n.tag in _PULAR or n.tag in _IGNORAR or (inline and depth>8):
             return
-        if n.texto and n.texto.strip():
-            partes.append(n.texto)
-        for f in n.filhos:
-            _anda(f)
+        for item in n.conteudo:
+            if isinstance(item,str):partes.append(item)
+            elif not inline or item.tag not in _BLOCO:_anda(item,depth+1)
+        if n.tag in (*_BLOCO,'br','div','section','article','main'):
+            partes.append('\n')
 
     _anda(no)
-    return _normalizar(" ".join(partes))
+    return _normalizar("".join(partes))
 
 
 def _texto_documento(raiz: "_No") -> str:
@@ -144,18 +157,7 @@ def _texto_documento(raiz: "_No") -> str:
     pontuação (páginas curtas/simples) — nunca inventa, só reaproveita o
     texto real da página.
     """
-    partes = []
-
-    def _anda(n):
-        if n.tag in _PULAR or n.tag in _IGNORAR:
-            return
-        if n.texto and n.texto.strip():
-            partes.append(n.texto)
-        for f in n.filhos:
-            _anda(f)
-
-    _anda(raiz)
-    return _normalizar(" ".join(partes))
+    return _texto_ordenado(raiz)
 
 
 def _link_densidade(no: "_No", cache: dict | None = None) -> float:
@@ -165,8 +167,7 @@ def _link_densidade(no: "_No", cache: dict | None = None) -> float:
     def _anda(n):
         nonlocal texto_link
         if n.tag == "a":
-            texto_link += len(_normalizar(n.texto)) + sum(
-                len(_normalizar(f.texto)) + len(_texto_bloco(f)) for f in n.filhos)
+            texto_link += len(_texto_bloco(n))
             return
         for f in n.filhos:
             _anda(f)
@@ -266,8 +267,7 @@ def _paragrafos(no: "_No") -> list:
     def _anda(n, dentro_ignorada=False):
         ignorar = dentro_ignorada or n.tag in _IGNORAR
         if not ignorar and n.tag in _BLOCO:
-            txt = _normalizar(n.texto) + " " + _texto_bloco_inline(n)
-            txt = _normalizar(txt)
+            txt = _texto_bloco_inline(n)
             if len(txt) >= 25:
                 saida.append((n.tag, txt[:1200]))
         for f in n.filhos:
@@ -279,23 +279,7 @@ def _paragrafos(no: "_No") -> list:
 
 def _texto_bloco_inline(no: "_No") -> str:
     """Texto inline do bloco (negrito/itálico/links), sem sub-blocos."""
-    partes = []
-
-    def _anda(n, profundidade=0):
-        if n.tag in _PULAR or n.tag in _IGNORAR or profundidade > 8:
-            return
-        if n.texto and n.texto.strip():
-            partes.append(n.texto)
-        for f in n.filhos:
-            if f.tag in _BLOCO:
-                continue
-            _anda(f, profundidade + 1)
-
-    for f in no.filhos:
-        if f.tag in _BLOCO:
-            continue
-        _anda(f)
-    return _normalizar(" ".join(partes))
+    return _texto_ordenado(no,inline=True)
 
 
 def secoes(no: "_No", teto: int = 12) -> list:
