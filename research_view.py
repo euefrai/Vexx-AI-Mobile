@@ -265,6 +265,8 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
                   'NOT_SEARCHED':'Ainda não confirmado', 'UNAVAILABLE':'Indisponível'}
         rows = [[_text(r.get('description'),100),labels.get(r.get('state'),'Ainda não confirmado')]
                 for r in coverage.get('requirements',[])[:8]]
+        if (resumo.get('usados',{}).get('research_outcome') or {}).get('source_authority_unverified'):
+            rows.append(['Fonte oficial ou primária','Autoridade ainda não verificada'])
         if rows:
             candidatos.append(('table',{'title':'Aspectos da pergunta','columns':['Aspecto','Evidência recuperada'],
                                         'rows':rows,'read_only':True}))

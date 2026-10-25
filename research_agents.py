@@ -994,6 +994,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'documents'):
             if not search_verticals.assess(request, candidate)['eligible']:
                 return False
+        coverage = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
+        if (coverage['passages'] and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])):
+            return True  # Explicit entity/relation, not a loose keyword match.
         return not termos_pedido or orch._util_para_pedido(candidate, termos_pedido, subject)
 
     def _util(a, rec):
@@ -1688,8 +1691,11 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
     provider_code = sintese.get('fallback_provider_code', '')
     blocked = bool(provider_code)
     read = [e for e in evidencias if _evidencia_lida(e)]
+    provenance_unverified = bool(re.search(r'fontes? (?:oficiais|prim[aá]rias)|documenta[cç][aã]o oficial',
+                                          job.get('objetivo',''),re.I))
     incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
                   or (coverage['applicable'] and not coverage['complete'])
+                  or provenance_unverified
                   or (sintese.get('llm') and sintese.get('answer_coverage',{}).get('applicable')
                       and not sintese['answer_coverage'].get('complete'))
                   or any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', []))
@@ -1697,7 +1703,7 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
                   or job.get('auditoria', {}).get('ok') is False
                   or any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', [])))
     state = 'blocked' if blocked else ('partial' if incomplete else 'complete')
-    return {'state': state, 'unresolved_fronts': lacunas[:8],
+    return {'state': state, 'unresolved_fronts': lacunas[:8], 'source_authority_unverified':provenance_unverified,
             'provider_code': provider_code, 'read_sources': len(read),
             'reason': ('redação ou revisão bloqueada pelo provedor; evidências preservadas'
                        if blocked else 'evidências insuficientes ou limitações remanescentes'
@@ -1897,7 +1903,10 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             job, todas_evid or _evidencias_job(db, job), lacunas, bool(sintetizar_fn))
         if job['usados']['research_outcome']['state'] == 'blocked':
             job['status'] = 'interrompida'
-            job['usados']['partial_delivery_ready'] = bool(todas_evid or _evidencias_job(db,job))
+        if job['status']=='interrompida':
+            # Natural completion without enough data must also leave an honest
+            # terminal result. Early user cancellation/interruption returns above.
+            job['usados']['partial_delivery_ready'] = True
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         # V5.7.3: o estado terminal é persistido ANTES do evento: quem consultar
         # no instante do research_completed já enxerga o status final (sem

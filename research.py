@@ -943,7 +943,11 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
                                  'requirement_ids': list(dict.fromkeys(p['requirement_id'] for p in coverage['passages'])),
                                  'aspects':[r['description'] for r in coverage['requirements'] if r['state']=='SUPPORTED'],
                                  'scope': coverage['scope']}
-        fonte['relevante'] = fonte['relevante'] and bool(passages)
+        safe_relation = (bool(passages) and not orch._context_mismatch(evidence,consulta)
+                         and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])
+                         and (fonte['vertical']['eligible'] if fonte['vertical']['kind'] in
+                              ('news','events','air_travel','bus_travel','documents') else True))
+        fonte['relevante'] = (fonte['relevante'] or safe_relation) and bool(passages)
         if passages:
             fonte['trecho'] = melhor_trecho(passages[0]['text'], '', 600)
             fonte['texto_lido'] = passages[0]['text']

@@ -43,6 +43,8 @@ def answer_requirements(text):
     if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
         return []
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    if 'battery' in facets and re.match(r'^(?:pesquisa profunda sobre\s+)?bateria\s+\w',norm):
+        facets.remove('battery')  # Named subject "Bateria ZX" is not a request for a battery model.
     if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa', norm):
         facets.remove('foundation_date')
     if not facets:
@@ -54,11 +56,12 @@ def answer_requirements(text):
     if match:
         subject = re.split(r'\s+(?:em que|quando|e quais)\b', match[1], flags=re.I)[0]
     else:
-        subject = re.sub(r'^(?:quais (?:foram|sao) as?\s+)?(?:causas? e consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:quais (?:foram|sao) as?\s+|as?\s+)?(?:causas? e consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual [eé] (?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
         subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
-    subject = subject.strip(' .?!')[:180]
+    subject = re.sub(r'^(?:o|a|os|as)\s+', '', subject.strip(' .?!'), flags=re.I)[:180]
+    subject = re.sub(r'\s+(?:na|no|nas|nos|de|da|do|em|com)$','',subject,flags=re.I)
     constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
         r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
     return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet).encode()).hexdigest()[:12],
@@ -113,7 +116,8 @@ def topic_profile(text):
     entities = []
     for m in re.finditer(r'\b(?:[A-ZÀ-Ý][\w-]*)(?:(?:\s+(?:de|do|da|dos|das))?\s+[A-ZÀ-Ý][\w-]*)*', value):
         name = re.sub(r'^(?:Not[ií]cias|Compare|Pesquisa|Pesquise|Fontes|Documenta[cç][aã]o)\s+(?:(?:de|do|da|sobre|em)\s+)?', '', m[0])
-        if normalized(name) in ('compare', 'noticias', 'pesquisa', 'pesquise', 'fontes', 'documentacao'):
+        if normalized(name) in ('compare', 'noticias', 'pesquisa', 'pesquise', 'fontes', 'documentacao',
+                                'quem','quais','qual','como','quando','onde'):
             continue
         if name.upper() in ('PDF', 'API', 'GB', 'BRL', 'USD') or len(name) < 3:
             continue
@@ -121,7 +125,9 @@ def topic_profile(text):
                 'organization' if re.search(r'\bempresa\b', normalized(original)) else 'unresolved_named_entity')
         entities.append({'name': name, 'kind': kind, 'resolution': 'explicit_text_not_verified'})
     requirements = answer_requirements(original)
-    if requirements and requirements[0]['entity'] and re.search(r'quem fundou|quais foram as causas|como (?:usar|utilizar|funciona)', normalized(original)):
+    reorder = bool(re.search(r'quem fundou|quais foram as causas',normalized(original)) or (
+        re.search(r'como (?:usar|utilizar|funciona)',normalized(original)) and re.search(r'\w+\.\w+',original)))
+    if requirements and requirements[0]['entity'] and reorder:
         value = requirements[0]['entity']
     focused = ' '.join(x for x in (value, ' '.join(required[:1]), preference) if x).strip()
     # Discovery can reorder a noun phrase, but must not silently drop a

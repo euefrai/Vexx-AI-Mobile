@@ -22,6 +22,8 @@ def test_requirements_separate_entity_attributes_and_keep_stable_ids():
     assert {r['entity'] for r in req}=={'WEG'}
     assert [r['id'] for r in req]==[r['id'] for r in qi.answer_requirements(QUESTION)]
     assert qi.topic_profile(QUESTION)['primary_topic']=='WEG'
+    assert not qi.answer_requirements('Bateria ZX capacidade nominal')
+    assert qi.answer_requirements('como funciona o freio ABS')[0]['entity']=='freio ABS'
 
 
 def test_topic_page_is_read_but_not_an_answer():
@@ -46,6 +48,7 @@ def test_causes_do_not_support_consequences():
         [source('A Revolta da Chibata foi motivada pelos castigos físicos impostos aos marinheiros.')])
     assert not result['complete']
     assert [r['state'] for r in result['requirements']]==['SUPPORTED','DISCOVERED']
+    assert qi.answer_requirements('Pesquisa profunda sobre as causas e consequências da Revolta da Chibata.')[0]['entity']=='Revolta da Chibata'
 
 
 def test_snippets_wrong_entity_and_rejected_filters_never_support():
@@ -163,4 +166,19 @@ def test_synthesis_omitting_an_explicit_requirement_is_not_complete(tmp_path):
     assert result['llm'] and not result['answer_coverage']['complete']
     job['sintese']=result
     assert ra._completion_outcome(job,evidence,[],True)['state']=='partial'
+    db.close()
+
+
+def test_new_research_and_another_chat_cannot_intervene_in_previous_job(tmp_path,monkeypatch):
+    import pc_agent
+    db=pc_agent.open_db(tmp_path/'qa.sqlite');old=ra.criar_job(db,'local','Empresa anterior',conv='old-chat')
+    old['status']='interrompida';ra.salvar_job(db,old)
+    monkeypatch.setattr(ra,'intervir',lambda *a: (_ for _ in ()).throw(AssertionError('wrong previous job')))
+    assert pc_agent._cmd_intervencao(db,'local','somente fontes públicas','new-chat')==''
+    captured=[]
+    monkeypatch.setattr(pc_agent,'rjob_start',lambda db,req,owner:captured.append(req) or {'type':'research_job','job_id':'rj-fixture'})
+    text='Pesquisa profunda sobre '+('contexto público detalhado '*9)+'somente fontes públicas e sem preços históricos'
+    response=pc_agent.cmd_pesquisa(db,text,'local','new-chat')
+    assert 'rj-fixture' in response and captured[0]['objetivo'].endswith('sem preços históricos')
+    assert len(captured[0]['objetivo'])>200
     db.close()

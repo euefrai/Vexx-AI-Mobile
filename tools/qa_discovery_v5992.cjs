@@ -6,7 +6,9 @@ async page => {
     await page.getByRole('button', {name: 'Entrar ↗', exact: true}).click();
     await page.locator('#loginOverlay').waitFor({state: 'hidden'});
   }
-  const cases = [
+  const configuration = await page.evaluate(() => JSON.parse(sessionStorage.getItem('research-qa-config') || 'null'));
+  const directory = configuration?.version === 'v5993' ? 'qa-artifacts/v5993' : 'qa-artifacts/v5992';
+  const cases = configuration?.version === 'v5993' ? configuration.cases : [
     ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
     ['company', 'Pesquisa profunda sobre a história da empresa WEG fontes primárias.'],
     ['technical', 'Pesquisa profunda sobre asyncio.TaskGroup documentação oficial exemplos e limitações.'],
@@ -50,7 +52,7 @@ async page => {
     const sources = await page.locator('.message.ai .jdui-srccard').allInnerTexts();
     const links = await page.locator('.message.ai .jdui-srccard a').evaluateAll(nodes => nodes.map(a => ({text: a.innerText, url: a.href})));
     const media = await page.locator('.message.ai .jdui-media-grid .jdui-pcard').count();
-    await page.screenshot({path: 'qa-artifacts/v5992/chat-' + name + '.png', fullPage: true});
+    await page.screenshot({path: directory + '/chat-' + name + '.png', fullPage: true});
     await page.reload();
     await page.locator('#loginOverlay').waitFor({state: 'hidden'});
     await page.locator('[data-mid="' + stored.at(-1).id + '"]').waitFor({state: 'visible', timeout: 20000});
@@ -59,9 +61,14 @@ async page => {
     if (JSON.stringify(stored) !== JSON.stringify(restored)) throw Error('Persisted message IDs/text changed after reload');
     await page.evaluate(n => sessionStorage.setItem('v5992-next', String(n)), index + 1);
     return {scope: 'AUTHENTICATED_E2E_LOCAL_REAL_AGENT', name, query, seconds: (Date.now() - start) / 1000,
+      inference_policy: configuration?.inference_policy || 'configured-free-model',
+      completed_flow: name === 'images' ? media > 0 : Boolean(job && status),
       http_status: response.status(), content_type: response.headers()['content-type'], job: job || null,
       job_state: status?.status || null, job_mode: status?.modo || null, outcome: status?.usados?.research_outcome || null,
       synthesis_llm: status?.sintese?.llm || false, chat_result_id: status?.chat_result_id || null,
+      answer_coverage: status?.usados?.answer_coverage || null,
+      stage_timings: status?.usados?.stage_timings || null,
+      synthesis_budget: status?.usados?.synthesis_budget || null,
       assistant_messages: after.length, reload_preserved: true, source_cards: sources, links, media_cards: media,
       public_answer: after.at(-1), page_errors: errors};
   } finally { page.removeListener('pageerror', onError); }

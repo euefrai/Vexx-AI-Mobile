@@ -2731,11 +2731,13 @@ def sintetizar_grafico_evolucao(db, owner: str) -> str:
 
 
 _JOB_START_RE = re.compile(
-    r"(?i)pesquis[ae] (?:a fundo|profunda) (?:sobre )?(.{3,200}?)[.?!]*$")
+    r"(?i)pesquis[ae] (?:a fundo|profunda) (?:sobre )?(.{3,500}?)[.?!]*$")
 
 
-def _ultimo_job(db, owner: str, estados: tuple = ()) -> dict | None:
+def _ultimo_job(db, owner: str, estados: tuple = (), conv=None) -> dict | None:
     for j in research_agents.listar_jobs(db, owner, 10):
+        if conv is not None and j.get('conv') != conv:
+            continue
         if not estados or j["status"] in estados:
             try:
                 return research_agents.carregar_job(db, owner, j["id"])
@@ -2744,9 +2746,11 @@ def _ultimo_job(db, owner: str, estados: tuple = ()) -> dict | None:
     return None
 
 
-def _cmd_intervencao(db, owner: str, t: str):
+def _cmd_intervencao(db, owner: str, t: str, conv=None):
     """Mudança de instrução sem reiniciar (conjunto estruturado, sem LLM)."""
-    job = _ultimo_job(db, owner, ("em_andamento", "pausada", "interrompida"))
+    if _JOB_START_RE.search(t):
+        return ''  # A new explicit investigation is not a change to an old one.
+    job = _ultimo_job(db, owner, ("em_andamento", "pausada", "interrompida"),conv=conv)
     if job is None:
         return ""
     jid = job["id"]
@@ -3229,7 +3233,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
     tabular = _cmd_analisar_tabular(db, texto or "", owner, conv)
     if tabular:
         return tabular
-    _cmd = _cmd_intervencao(db, owner, t)
+    _cmd = _cmd_intervencao(db, owner, t, conv)
     if _cmd:
         return _cmd
     if any(k in t for k in ("mostra o resultado da pesquisa", "mostrar resultado",
@@ -3355,7 +3359,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
             return imagens_primeiro(fence,f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
         return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
-        objetivo = (m.group(1).strip() if m else texto)[:200]
+        objetivo = (m.group(1).strip() if m else texto)[:500]
         req = {"objetivo": objetivo, "conv": conv or "",
                "modo": "profunda" if m else "rapida" if visual else ""}
         resp = rjob_start(db, req, owner)
@@ -4622,7 +4626,7 @@ def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
 def _persistir_resultado_pesquisa(db, job, owner):
     """Deliver a terminal research view once; never turn a cancelled job into chat."""
     partial = (job.get('status')=='interrompida' and job.get('usados',{}).get('partial_delivery_ready')
-               and job.get('usados',{}).get('research_outcome',{}).get('state')=='blocked')
+               and job.get('usados',{}).get('research_outcome',{}).get('state') in ('blocked','partial'))
     if job.get('owner')!=owner or (job.get('status')!='concluida' and not partial) or not job.get('conv'):
         return ''
     reply_id=job['id']+'-result'
