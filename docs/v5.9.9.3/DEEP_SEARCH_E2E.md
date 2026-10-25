@@ -1,0 +1,18 @@
+# Pesquisa profunda real
+
+Chrome autenticado, relay FastAPI e PC Agent reais em localhost, contas de fixture e SQLite temporário. Nenhum login/dado de produção. `benchmarks/answer_aware_v5993_e2e.json` reúne os casos de desenvolvimento solicitados, separados dos vinte casos independentes. Driver reaproveitado: `tools/qa_discovery_v5992.cjs`, com configuração limitada à pasta QA da versão.
+
+## Rodadas distintas
+
+1. `e2e-stage1-*.log`, código inicial `4561f84`: onze tentativas com modelo explicitamente gratuito/fallbacks desativados. O caso de tecnologia obteve uma leitura e a revisão/redação foi bloqueada por **rate_limit**; o parcial chegou ao chat. Casos sem job não são passes. Nova pergunta com “somente” revelou intervenção no job anterior; corrigido escopo/comando, não a fixture para esconder o bug.
+2. `e2e-retrieval-*.log`, produto `68b9094`: onze fluxos reais de busca/persistência com **síntese desativada após o rate limit**. Todos iniciaram o fluxo esperado, incluindo galeria e cancelamento. WEG/história/notícias/produtos/multifonte/escassez/investigação complexa ficaram parciais; documentação e tecnologia tiveram leitura. Não é REAL_MODEL nem pesquisa universal completa. A rodada revelou cards sem texto extrativo e galerias não solicitadas; corrigidos na entrega.
+3. `e2e-accepted-{company,technical,images,cancel}.log`, `af400f1`: repetição focada após essas correções. WEG: uma leitura secundária, fundadores/data marcados, produtos ainda pendentes apesar de mencionados na fonte. Documentação: duas leituras MDN e matriz de três aspectos, com autoridade oficial pendente. Cinco imagens Commons reais; cancelamento sem final. IDs/textos preservados após reload.
+4. `e2e-qualified-interface.log`, após `86462e9`: verificação específica, sem síntese por LLM, terminou em 11,412 s, uma referência MDN da API JavaScript, citação/card e texto/ID preservados após reload. A instrução Wasm com semântica de erro diferente deixou de ser usada. Resultado parcial, com autoridade oficial pendente. Não é sucesso de inferência.
+
+A redação/revisão de pesquisa permaneceu desativada após o rate limit, com `VEXX_RESEARCH_SYNTHESIS=0` somente no QA. Houve uma chamada de chat não planejada: PowerShell achatou a configuração de um único caso e o harness enviou o caractere “e”, acionando chat comum. Está preservada em `e2e-qualified-malformed-case.log`, não é pesquisa aprovada. O driver agora valida formato, nome e prefixo antes de enviar; a verificação específica foi refeita com configuração válida. Nenhuma inferência pública completa de pesquisa foi aprovada. Testes com modelo simulado são FIXTURE, distintos desse bloqueio real.
+
+## Entrega e persistência
+
+Chat: HTTP200, SSE real, confirmação inicial e resultado terminal de ID estável. O leitor mantém passagens e o checkpoint guarda referências compactas. Quando orçamento/dependências pulam etapas finais, uma síntese extrativa é persistida sem chamar LLM; teste cobre restauração do SQLite. Bloqueios e encerramentos naturais insuficientes deixam resultado parcial; cancelamento/pausa/interrupção pelo usuário não publicam final tardio. Retomada explícita pode melhorar o mesmo resultado sem duplicar ID.
+
+A cobertura mostra somente relações detectadas, não verdade certificada. Títulos/metadados e a ordenação de código do HTML ainda podem ser ruins, e os textos extrativos podem não mostrar todo o detalhe que existe na passagem armazenada. As tentativas de empresa/história/multifonte não demonstraram resposta completa. Revisão por parágrafo, fonte lida, requisito sustentado e resposta completa permanecem medidas distintas.

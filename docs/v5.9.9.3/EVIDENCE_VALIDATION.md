@@ -1,0 +1,12 @@
+# Validação e limites
+
+- A página pode estar aberta e ser TOPIC_ONLY. Uma relação explícita com a entidade sustenta somente os requisitos que ela aborda; não completa os demais.
+- Snippet, metadados de feed, imagem e vídeo não viram leitura textual. Filtros existentes de tempo, localização, transporte, PDF e identidade continuam aplicados. A relação explícita pode substituir o match lexical genérico somente quando não elimina restrições obrigatórias do original.
+- Requisitos reconhecidos incompletos ou conflitantes impedem outcome completo. A redação assistida também é avaliada quanto à omissão desses aspectos, além das verificações existentes de citações, quantidades, unidades e revisão separada de suporte.
+- Pedidos de autoridade oficial/primária ficam explicitamente pendentes de verificação da autoridade; reputação, domínio ou canonical declarado não comprovam automaticamente essa condição. Um link oficial sem trecho pertinente também não resolve o pedido.
+- A revisão do modelo não é árbitro infalível. Nenhum script de página/modelo é executado. Não há confiança estatística inventada; SUPPORTED aqui identifica relação extraída sob regras explícitas, não certificação factual humana.
+- No QA houve confusão entre a API JavaScript `WebAssembly.Memory.grow` e a instrução Wasm `memory.grow`. O guard final exige identificador qualificado no contexto do título/seção/passagem, aceitando a variante de notação `prototype`; a fonte da outra interface não pode emprestar sua semântica de erro. A correção foi validada em fixture e em nova busca autenticada, não aprovada por holdout independente novo.
+- Bloqueio da redação preserva evidências e entrega parcial terminal ao chat, com ID estável. Retomada explícita pode atualizar esse resultado sem duplicá-lo. Cancelamento/pausa/interrupção pelo usuário não publicam final tardio. Resultado insuficiente sem evidências também termina honestamente, em vez de deixar apenas a confirmação de início.
+- Nova pergunta explícita de pesquisa tem precedência sobre comandos de intervenção. Intervenções se limitam ao chat da pesquisa. O limite de entrada foi alinhado aos 500 caracteres já aceitos pelo job, evitando perder restrições após o caractere 200.
+
+Questões não reconhecidas pelo parser, extração incompleta de código/tabelas e autoridade da fonte continuam limitações que devem aparecer na avaliação, não ser escondidas por contagem de testes.
