@@ -7,8 +7,9 @@ async page => {
     await page.locator('#loginOverlay').waitFor({state: 'hidden'});
   }
   const configuration = await page.evaluate(() => JSON.parse(sessionStorage.getItem('research-qa-config') || 'null'));
-  const directory = configuration?.version === 'v5993' ? 'qa-artifacts/v5993' : 'qa-artifacts/v5992';
-  const cases = configuration?.version === 'v5993' ? configuration.cases : [
+  const custom = ['v5993', 'v5994'].includes(configuration?.version);
+  const directory = custom ? 'qa-artifacts/' + configuration.version : 'qa-artifacts/v5992';
+  const cases = custom ? configuration.cases : [
     ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
     ['company', 'Pesquisa profunda sobre a história da empresa WEG fontes primárias.'],
     ['technical', 'Pesquisa profunda sobre asyncio.TaskGroup documentação oficial exemplos e limitações.'],
@@ -20,7 +21,7 @@ async page => {
   if (!Array.isArray(cases) || cases.some(c => !Array.isArray(c) || c.length !== 2
       || typeof c[0] !== 'string' || !/^[a-z-]{1,32}$/.test(c[0])
       || typeof c[1] !== 'string' || c[1].length < 5 || c[1].length > 500
-      || (configuration?.version === 'v5993' && !/^(Pesquisa profunda sobre|Pesquise imagens) /.test(c[1])))) {
+      || (custom && !/^(Pesquisa profunda sobre|Pesquise imagens) /.test(c[1])))) {
     throw Error('Malformed QA cases; refusing to send an unrelated chat message');
   }
   if (index >= cases.length) return {complete: true};

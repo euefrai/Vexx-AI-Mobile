@@ -6,6 +6,8 @@ from collections import Counter
 from pathlib import Path
 import sys
 import time
+import subprocess
+import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
@@ -63,9 +65,24 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
     p.add_argument('--split',choices=['TRAIN_OR_DEV','VALIDATION','BLIND_HOLDOUT','all'],default='all')
     p.add_argument('--corpus',type=Path,default=ROOT/'benchmarks/evidence_corpus_v5994.json')
+    p.add_argument('--baseline-revision',help='Import immutable baseline modules into a temporary directory')
     a=p.parse_args();data=json.loads(a.corpus.read_text(encoding='utf-8'))
+    if 'sealed' in a.corpus.name and not (ROOT/'qa-artifacts/v5994/code-freeze.json').exists():
+        raise SystemExit('Freeze candidate before opening sealed evaluation')
     rows=[r for r in data['examples'] if a.split=='all' or r['split']==a.split]
-    result=evaluate(rows);result.update(corpus_sha256=hashlib.sha256(a.corpus.read_bytes()).hexdigest(),split=a.split)
+    if a.baseline_revision:
+        with tempfile.TemporaryDirectory(prefix='v5994-baseline-') as tmp:
+            for name in ('evidence_graph.py','query_intelligence.py','web_extract.py'):
+                raw=subprocess.check_output(['git','show',a.baseline_revision+':'+name],cwd=ROOT)
+                (Path(tmp)/name).write_bytes(raw)
+            sys.path.insert(0,tmp)
+            for name in ('evidence_graph','query_intelligence','web_extract'):sys.modules.pop(name,None)
+            global eg
+            import evidence_graph as eg
+            result=evaluate(rows)
+    else:result=evaluate(rows)
+    result.update(corpus_sha256=hashlib.sha256(a.corpus.read_bytes()).hexdigest(),split=a.split,
+                  revision=a.baseline_revision or subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({k:result[k] for k in ('split','aggregate','milliseconds')},ensure_ascii=False))
