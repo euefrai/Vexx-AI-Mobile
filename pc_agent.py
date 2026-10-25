@@ -4636,8 +4636,10 @@ def _persistir_resultado_pesquisa(db, job, owner):
     summary=research_agents._resumo(db,job)
     evidence=research_agents.listar_evidencias(db,owner,job['id'])
     view=research_view.build_view(summary,evidence)
+    media_intent = bool(re.search(r'\b(imagens?|fotos?|v[ií]deos?)\b',job.get('objetivo',''),re.I))
     blocks=[block for block in view.get('blocks',[]) if block.get('type')=='text'
-            or block.get('component') in ('sources','media')
+            or block.get('component')=='sources'
+            or (block.get('component')=='media' and media_intent)
             or (block.get('component')=='table' and block.get('props',{}).get('title')=='Aspectos da pergunta')]
     while blocks:
         message={'version':jdui.VERSION,'blocks':blocks}

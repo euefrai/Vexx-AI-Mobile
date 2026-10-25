@@ -184,11 +184,16 @@ def test_new_research_and_another_chat_cannot_intervene_in_previous_job(tmp_path
     db.close()
 
 
-def test_text_research_without_read_sources_does_not_present_metadata_as_gallery():
-    import research_view
-    view=research_view.build_view({'objetivo':QUESTION,'midia':[{'type':'image','url':'https://example.org/logo.jpg',
-        'title':'WEG logo','source_url':'https://example.org/','analysis_state':'not_analyzed'}]})
+def test_text_chat_does_not_present_discovered_metadata_as_answer_gallery(tmp_path):
+    import pc_agent,jdui,json
+    db=pc_agent.open_db(tmp_path/'qa.sqlite');job=ra.criar_job(db,'local',QUESTION,conv='qa-chat')
+    job.update(status='concluida',midia=[{'type':'image','url':'https://example.org/logo.jpg',
+        'title':'WEG logo','source_url':'https://example.org/','analysis_state':'not_analyzed'}])
+    result=pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    text=db.execute('select text from messages where id=?',(result,)).fetchone()[0]
+    view=json.loads(jdui.extrair_fences(text)[0])
     assert not any(b.get('component')=='media' for b in view['blocks'])
+    db.close()
 
 
 def test_extractive_result_survives_skipped_final_steps_and_reload(tmp_path):
