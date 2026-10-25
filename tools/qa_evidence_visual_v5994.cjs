@@ -1,5 +1,7 @@
 async page => {
   if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
+  const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'null')?.version);
+  const directory='qa-artifacts/'+(['v5994','v5995'].includes(version)?version:'v5994');
   const errors=[];
   const onError=e=>errors.push(e.message);page.on('pageerror',onError);
   const out={scope:'REAL_CHROME_LOCAL_PARTIAL_RESULT_VISUAL_NOT_COMPLETE_RESEARCH',viewports:[]};
@@ -12,7 +14,7 @@ async page => {
       await card.scrollIntoViewIfNeeded();
       const geometry=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
       const box=await message.boundingBox();
-      await card.screenshot({path:`qa-artifacts/v5994/coverage-card-${width}.png`});
+      await card.screenshot({path:`${directory}/coverage-card-${width}.png`});
       out.viewports.push({...geometry,message_width:box.width});
       if (geometry.root>width)throw Error('Root overflow at '+width);
     }
@@ -23,7 +25,7 @@ async page => {
     out.keyboard_sort=(await header.innerText()).includes('▲');
     const download=page.waitForEvent('download');
     await message.getByRole('button',{name:'Baixar CSV',exact:true}).click();
-    const file=await download;await file.saveAs('qa-artifacts/v5994/coverage-export.csv');
+    const file=await download;await file.saveAs(directory+'/coverage-export.csv');
     out.csv=await file.failure()===null;
     out.edit_buttons=await message.getByRole('button',{name:/editar|adicionar linha|restaurar/i}).count();
     await page.emulateMedia({reducedMotion:'reduce'});
@@ -32,10 +34,10 @@ async page => {
     await card.scrollIntoViewIfNeeded();
     const wrapper=table.locator('..');
     out.zoom=await wrapper.evaluate(el=>({width:el.clientWidth,scroll:el.scrollWidth,root:document.documentElement.scrollWidth,viewport:innerWidth}));
-    await card.screenshot({path:'qa-artifacts/v5994/coverage-zoom-card-left.png'});
+    await card.screenshot({path:directory+'/coverage-zoom-card-left.png'});
     await wrapper.evaluate(el=>el.scrollLeft=el.scrollWidth);
     out.zoom.scroll_left=await wrapper.evaluate(el=>el.scrollLeft);
-    await card.screenshot({path:'qa-artifacts/v5994/coverage-zoom-card-right.png'});
+    await card.screenshot({path:directory+'/coverage-zoom-card-right.png'});
     await page.evaluate(()=>document.body.style.zoom='');
     await page.setViewportSize({width:1280,height:900});
     const id=await message.getAttribute('data-mid');

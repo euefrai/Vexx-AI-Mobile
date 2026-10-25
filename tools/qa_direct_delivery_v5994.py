@@ -17,10 +17,11 @@ def main():
     import argparse
     parser=argparse.ArgumentParser()
     parser.add_argument('--output',type=Path,default=ROOT/'qa-artifacts/v5994/direct-delivery.json')
+    parser.add_argument('--evidence-dir',type=Path,default=ROOT/'qa-artifacts/v5994')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite previous delivery evidence')
     import pc_agent,research_agents as ra
-    qa=ROOT/'qa-artifacts/v5994'
+    qa=args.evidence_dir.resolve()
     private=json.loads((qa/'qa-runtime-private.json').read_text(encoding='utf-8'))
     database=Path(private['database']).resolve()
     if (database.name!='qa.sqlite' or not database.parent.name.startswith('v5981-admin-qa-')

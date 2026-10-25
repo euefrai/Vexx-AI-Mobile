@@ -61,3 +61,7 @@ qa-artifacts/v5994/qa-runtime-private.json
 qa-artifacts/v5994/qa-stop
 qa-artifacts/v5995/qa-runtime-private.json
 qa-artifacts/v5995/qa-stop
+# Raw external captures stay local; committed reports contain short samples,
+# hashes and counters rather than republishing protected pages.
+qa-artifacts/v5995/baseline-sealed/
+qa-artifacts/v5995/candidate-sealed/
